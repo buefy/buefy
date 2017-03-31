@@ -1,0 +1,66 @@
+.notifies {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+
+    &.top-right {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    &.top {
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    &.top-left {
+        right: auto;
+        left: 0;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    &.bottom-left {
+        top: auto;
+        bottom: 0px;
+        right: auto;
+        left: 0;
+    }
+    &.bottom {
+        top: auto;
+        bottom: 0px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+    }
+    &.bottom-right {
+        top: auto;
+        bottom: 0px;
+    }
+
+    @include tablet() {
+        max-width: 320px;
+    }
+
+    .notification {
+        animation-duration: $speed-slower;
+        margin: 8px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+        .title:not(:last-child) {
+            margin-bottom: 8px;
+        }
+        .icon {
+            margin-right: 8px;
+            margin-left: -16px;
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    color: $color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.notification {
+    display: flex;
+    align-items: center;
+    .title:not(:last-child) {
+        margin-bottom: 8px;
+    }
+    .icon {
+        margin-right: 8px;
+        margin-left: -16px;
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            &.is-#{$name} {
+                color: $color;
+            }
+        }
+    }
+}

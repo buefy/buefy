@@ -1,0 +1,44 @@
+.toasts {
+    position: fixed;
+    z-index: 1000;
+    opacity: 0.9;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    &.top {
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+    &.bottom {
+        top: auto;
+        bottom: 0px;
+        right: 0;
+        left: 0;
+    }
+
+    @include tablet() {
+        max-width: 260px;
+    }
+
+    .toast {
+        white-space: nowrap;
+        display: inline-block;
+        animation-duration: $speed-slower;
+        margin: 8px;
+        text-align: center;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+        border-radius: 28px;
+        padding: 12px 24px;
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            $color-invert: nth($pair, 2);
+            &.is-#{$name} {
+                color: $color-invert;
+                background: $color;
+            }
+        }
+    }
+}

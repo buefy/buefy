@@ -1,0 +1,154 @@
+<template>
+    <div>
+        <h1 class="title">Componentes</h1>
+
+        <hr>
+        <h2 class="subtitle">Notify</h2>
+        <button class="button" @click="notify">Notify</button>
+        <button class="button is-success" @click="successNotify">Notify Success</button>
+        <button class="button is-info" @click="infoNotify">Notify Info</button>
+        <button class="button is-warning" @click="warningNotify">Notify Warning</button>
+        <button class="button is-danger" @click="dangerNotify">Notify Danger</button>
+
+        <hr>
+        <h2 class="subtitle">Notification</h2>
+        <b-notification
+            type="is-success"
+            title="Sucesso"
+            message="Notificação com ícone."
+            closable
+            show-icon>
+        </b-notification>
+
+        <b-notification
+            type="is-primary"
+            title="Notificação"
+            message="Notificação sem ícone e não fechável.">
+        </b-notification>
+
+        <hr>
+        <h2 class="subtitle">Toast</h2>
+        <button class="button" @click="toast">Toast</button>
+        <button class="button is-success" @click="successToast">Toast Success</button>
+        <button class="button is-danger" @click="dangerToast">Toast Danger</button>
+        <button class="button is-primary" @click="primaryToast">Toast Primary</button>
+
+        <hr>
+        <h2 class="subtitle">Switch</h2>
+        <div class="mb-8">
+            <b-switch>Default</b-switch>
+            <b-switch disabled>Disabled</b-switch>
+            <b-switch disabled checked>Disabled Checked</b-switch>
+        </div>
+        <div>
+            <b-switch is-on-off>On / Off</b-switch>
+            <b-switch is-on-off disabled>On / Off Disabled</b-switch>
+            <b-switch is-on-off disabled checked>On / Off Disabled Checked</b-switch>
+        </div>
+
+        <hr>
+        <h2 class="subtitle">Checkbox</h2>
+        <b-checkbox v-model="checkbox">{{ checkbox }}</b-checkbox>
+        <b-checkbox disabled>Disabled</b-checkbox>
+        <b-checkbox disabled checked>Disabled Checked</b-checkbox>
+
+        <hr>
+        <h2 class="subtitle">Checkbox Group</h2>
+        <b-checkbox-group v-model="checkboxGroup">
+            <b-checkbox label="Kobe">Kobe</b-checkbox>
+            <b-checkbox label="James">James</b-checkbox>
+            <b-checkbox label="Wade">Wade</b-checkbox>
+            <b-checkbox label="Kyle" disabled>Kyle</b-checkbox>
+        </b-checkbox-group>
+        {{ checkboxGroup }}
+
+        <hr>
+        <h2 class="subtitle">Radio Group</h2>
+        <b-radio-group v-model="radioGroup">
+            <b-radio label="Kobe">Kobe</b-radio>
+            <b-radio label="James">James</b-radio>
+            <b-radio label="Wade">Wade</b-radio>
+            <b-radio label="Kyle" disabled>Kyle</b-radio>
+        </b-radio-group>
+        {{ radioGroup }}
+
+        <hr>
+        <h2 class="subtitle">Radio Group — Button</h2>
+        <b-radio-group v-model="radioGroupButton">
+            <b-radio-button type="is-danger" label="Nop"><b-icon icon="clear"></b-icon>Nop</b-radio-button>
+            <b-radio-button type="is-success" label="Yep"><b-icon icon="done"></b-icon>Yep</b-radio-button>
+            <b-radio-button label="Default">Default</b-radio-button>
+            <b-radio-button label="Disabled" disabled>Disabled</b-radio-button>
+        </b-radio-group>
+        {{ radioGroupButton }}
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                checkbox: true,
+                checkboxGroup: ['Kobe'],
+                radioGroup: 'Wade',
+                radioGroupButton: 'James'
+            }
+        },
+        methods: {
+            notify() {
+                this.$notify.open({
+                    message: 'This is a basic notify'
+                })
+            },
+            successNotify() {
+                this.$notify.success({
+                    message: 'This is a success notify',
+                    isSnackbar: true
+                })
+            },
+            infoNotify() {
+                this.$notify.info({
+                    message: 'This is an info notify',
+                    position: 'top'
+                })
+            },
+            warningNotify() {
+                this.$notify.warning({
+                    title: 'Título',
+                    message: 'This is a warning notify with title',
+                    position: 'bottom'
+                })
+            },
+            dangerNotify() {
+                this.$notify.danger({
+                    message: 'This is a danger notify',
+                    position: 'top-left'
+                })
+            },
+
+            toast() {
+                this.$toast.open({
+                    message: 'Alguma coisa aconteceu.'
+                })
+            },
+            successToast() {
+                this.$toast.open({
+                    message: 'Alguma coisa aconteceu corretamente!',
+                    type: 'is-success'
+                })
+            },
+            dangerToast() {
+                this.$toast.open({
+                    message: 'Alguma coisa deu errado.',
+                    type: 'is-danger'
+                })
+            },
+            primaryToast() {
+                this.$toast.open({
+                    message: 'Alguma coisa aconteceu...',
+                    type: 'is-primary'
+                })
+            }
+        }
+    }
+</script>

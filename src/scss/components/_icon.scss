@@ -1,0 +1,49 @@
+.icon {
+    // Sizes
+    &.is-small {
+        height: 1rem;
+        width: 1rem;
+        .mdi {
+            font-size: 16px;
+        }
+    }
+    &.is-medium {
+        height: 2rem;
+        width: 2rem;
+        .mdi {
+            font-size: 28px;
+        }
+    }
+    &.is-large {
+        height: 3rem;
+        width: 3rem;
+        .mdi {
+            font-size: 42px;
+        }
+    }
+}
+
+.mdi {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+    cursor: inherit;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}

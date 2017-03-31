@@ -1,0 +1,99 @@
+.radio {
+    &.is-disabled {
+        opacity: 0.5;
+    }
+    input[type=radio] {
+        display: none;
+        + span {
+            position: relative;
+            display: inline-block;
+            padding-left: 24px;
+            text-align: left;
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+            }
+            &:before {
+                left: 0;
+                top: 50%;
+                transform: translate(0, -50%);
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                border: 2px solid $grey;
+                background: none;
+                transition: all $speed $easing;
+            }
+            &:after {
+                left: 5px;
+                top: 7px;
+                width: 10px;
+                height: 10px;
+                background: $primary;
+                transform: scale(0);
+                transition: transform $speed $easing;
+            }
+            &:hover:before {
+                border-color: $primary;
+            }
+        }
+        &:checked + span:before {
+            border-color: $primary;
+        }
+        &:checked + span:after {
+            transform: scale(1);
+        }
+    }
+
+    &.radio-button {
+        &.is-disabled {
+            opacity: 0.5;
+        }
+        input[type=radio] {
+            display: none;
+            + span {
+                position: relative;
+                display: inline-block;
+                padding-left: 24px;
+                text-align: left;
+                &:before,
+                &:after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 50%;
+                }
+                &:before {
+                    left: 0;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    cursor: pointer;
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid $grey;
+                    background: none;
+                    transition: all $speed $easing;
+                }
+                &:after {
+                    left: 5px;
+                    top: 7px;
+                    width: 10px;
+                    height: 10px;
+                    background: $primary;
+                    transform: scale(0);
+                    transition: transform $speed $easing;
+                }
+                &:hover:before {
+                    border-color: $primary;
+                }
+            }
+            &:checked + span:before {
+                border-color: $primary;
+            }
+            &:checked + span:after {
+                transform: scale(1);
+            }
+        }
+    }
+}
