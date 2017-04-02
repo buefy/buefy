@@ -1,5 +1,5 @@
 <template>
-    <span class="icon" :class="size">
+    <span class="icon is-unselectable" :class="size">
         <i :class="[type, type === 'fa' ? `fa-${newIcon}` : null ]">{{ type === 'mdi' ? newIcon : null }}</i>
     </span>
 </template>

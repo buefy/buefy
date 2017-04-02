@@ -3,12 +3,17 @@
         <h1 class="title">Componentes</h1>
 
         <hr>
-        <h2 class="subtitle">Notify</h2>
-        <button class="button" @click="notify">Notify</button>
-        <button class="button is-success" @click="successNotify">Notify Success</button>
-        <button class="button is-info" @click="infoNotify">Notify Info</button>
-        <button class="button is-warning" @click="warningNotify">Notify Warning</button>
-        <button class="button is-danger" @click="dangerNotify">Notify Danger</button>
+        <h2 class="subtitle">Snackbar</h2>
+        <button class="button" @click="snackbar">Default Snackbar</button>
+        <button class="button is-info" @click="infoSnackbar">Snackbar Blue Action</button>
+        <button class="button is-warning" @click="warningSnackbar">Snackbar Yellow Action</button>
+        <button class="button is-danger" @click="dangerSnackbar">Snackbar Red Action</button>
+
+        <hr>
+        <h2 class="subtitle">Toast</h2>
+        <button class="button" @click="toast">Toast</button>
+        <button class="button is-success" @click="successToast">Toast Success</button>
+        <button class="button is-danger" @click="dangerToast">Toast Danger</button>
 
         <hr>
         <h2 class="subtitle">Notification</h2>
@@ -21,17 +26,11 @@
         </b-notification>
 
         <b-notification
-            type="is-primary"
+            type="is-info"
             title="Notificação"
-            message="Notificação sem ícone e não fechável.">
+            message="Notificação sem ícone e não fechável."
+            closable>
         </b-notification>
-
-        <hr>
-        <h2 class="subtitle">Toast</h2>
-        <button class="button" @click="toast">Toast</button>
-        <button class="button is-success" @click="successToast">Toast Success</button>
-        <button class="button is-danger" @click="dangerToast">Toast Danger</button>
-        <button class="button is-primary" @click="primaryToast">Toast Primary</button>
 
         <hr>
         <h2 class="subtitle">Switch</h2>
@@ -81,6 +80,10 @@
             <b-radio-button label="Disabled" disabled>Disabled</b-radio-button>
         </b-radio-group>
         {{ radioGroupButton }}
+
+        <hr>
+        <h2 class="subtitle">Pagination</h2>
+        <b-pagination :total="200" :current="pagination" @change="pageChanged"></b-pagination>
     </div>
 </template>
 
@@ -91,62 +94,60 @@
                 checkbox: true,
                 checkboxGroup: ['Kobe'],
                 radioGroup: 'Wade',
-                radioGroupButton: 'James'
+                radioGroupButton: 'James',
+                pagination: 1
             }
         },
         methods: {
-            notify() {
-                this.$notify.open({
-                    message: 'This is a basic notify'
+            pageChanged(value) {
+                this.pagination = value
+            },
+            snackbar() {
+                this.$snackbar.open({
+                    message: 'Default Snackbar, the button is a green \'OK\' and it closes'
                 })
             },
-            successNotify() {
-                this.$notify.success({
-                    message: 'This is a success notify',
-                    isSnackbar: true
+            infoSnackbar() {
+                this.$snackbar.open({
+                    message: 'Snackbar with blue action and positioned on top',
+                    type: 'is-info',
+                    actionText: 'Retry',
+                    position: 'top',
+                    onAction: () => window.alert('Action clicked!')
                 })
             },
-            infoNotify() {
-                this.$notify.info({
-                    message: 'This is an info notify',
-                    position: 'top'
-                })
-            },
-            warningNotify() {
-                this.$notify.warning({
-                    title: 'Título',
-                    message: 'This is a warning notify with title',
+            warningSnackbar() {
+                this.$snackbar.open({
+                    message: 'Snackbar with yellow action and positioned on bottom',
+                    type: 'is-warning',
                     position: 'bottom'
                 })
             },
-            dangerNotify() {
-                this.$notify.danger({
-                    message: 'This is a danger notify',
+            dangerSnackbar() {
+                this.$snackbar.open({
+                    message: 'Snackbar with red action and positioned on top-left',
+                    type: 'is-danger',
+                    actionText: 'Undo',
                     position: 'top-left'
                 })
             },
 
             toast() {
                 this.$toast.open({
-                    message: 'Alguma coisa aconteceu.'
+                    message: 'Something happened.'
                 })
             },
             successToast() {
                 this.$toast.open({
-                    message: 'Alguma coisa aconteceu corretamente!',
+                    message: 'Something happened correctly!',
                     type: 'is-success'
                 })
             },
             dangerToast() {
                 this.$toast.open({
-                    message: 'Alguma coisa deu errado.',
+                    message: 'Something\'s not good, also I\'m on bottom.',
+                    position: 'bottom',
                     type: 'is-danger'
-                })
-            },
-            primaryToast() {
-                this.$toast.open({
-                    message: 'Alguma coisa aconteceu...',
-                    type: 'is-primary'
                 })
             }
         }

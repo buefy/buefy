@@ -27,6 +27,7 @@
             default-sort="marca"
             paginated
             per-page="10"
+            simple-pagination
             @check="tableCheck">
             <b-table-column
                 field="marca"
@@ -75,7 +76,6 @@
             selectable
             default-sort="marca"
             paginated
-            full-pagination
             per-page="10"
             @check="tableCheck">
             <b-table-column

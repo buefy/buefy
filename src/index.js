@@ -5,13 +5,14 @@ import Notification from './components/notification'
 import { Checkbox, CheckboxGroup } from './components/checkbox'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
+import Pagination from './components/pagination'
 
-import Notify from './components/notify'
+import Snackbar from './components/snackbar'
 import Toast from './components/toast'
 
 import config from './utils/config'
 
-const components = [
+const components = {
     Icon,
     Switch,
     // Tooltip,
@@ -22,24 +23,24 @@ const components = [
     RadioGroup,
     RadioButton,
     Table,
-    TableColumn
-]
+    TableColumn,
+    Pagination
+}
 
-const install = function (Vue, options = {}) {
-    if (install.installed) return
-
+components.install = (Vue, options = {}) => {
     config.setDefaultContentElement(options.defaultContentElement)
     config.setDefaultIconType(options.defaultIconType)
 
-    components.map(component => {
-        Vue.component(component.name, component)
-    })
+    for (const componentName in components) {
+        const component = components[componentName]
 
-    Vue.prototype.$notify = Notify
+        if (component && componentName !== 'install') {
+            Vue.component(component.name, component)
+        }
+    }
+
+    Vue.prototype.$snackbar = Snackbar
     Vue.prototype.$toast = Toast
 }
 
-export default {
-    version: '0.0.1',
-    install
-}
+export default components

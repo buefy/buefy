@@ -6,8 +6,11 @@
         :enter-active-class="transition.enter"
         :leave-active-class="transition.leave">
 
-        <div class="toast animated" v-show="isShow" :class="type">
-            <div v-html="message"></div>
+        <div class="snackbar animated" v-show="isShow">
+            <div class="text">{{ message }}</div>
+            <div class="action" @click="action" v-if="actionText" :class="type">
+                <button class="button is-dark">{{ actionText }}</button>
+            </div>
         </div>
 
     </transition>
@@ -19,13 +22,15 @@
     export default {
         mixins: [NoticeMixin],
         props: {
-            position: {
+            actionText: {
                 type: String,
-                default: 'top'
+                default: 'OK'
             },
-            duration: {
-                type: Number,
-                default: 4000
+            onAction: {
+                type: Function,
+                default: function () {
+                    this.close()
+                }
             }
         },
         data() {
@@ -39,13 +44,16 @@
             },
             insertEl() {
                 this.parent.className = ''
-                this.parent.classList.add('toasts', this.position)
+                this.parent.classList.add('snackbars', this.position)
                 this.parent.appendChild(this.$el)
+            },
+            action() {
+                this.onAction()
             }
         },
         beforeMount() {
             let parent
-            parent = document.querySelector('.toasts')
+            parent = document.querySelector('.snackbars')
 
             const container = document.querySelector(this.container) !== null ? document.querySelector(this.container) : document.body
             if (!parent) {

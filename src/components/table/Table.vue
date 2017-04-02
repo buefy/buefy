@@ -46,19 +46,19 @@
         <div class="level">
             <div class="level-left">
                 <div class="level-item">
-                    <small v-if="checkable && this.checkedItems.length > 0">({{ this.checkedItems.length }})</small>
+                    <p v-if="checkable && this.checkedItems.length > 0">({{ this.checkedItems.length }})</p>
                 </div>
             </div>
 
-            <div class="level-right">
+            <div class="level-right" v-if="paginated">
                 <div class="level-item">
-                    <b-table-pagination
+                    <b-pagination
                         :total="newData.length"
                         :per-page="perPage"
-                        :full-pagination="fullPagination"
-                        :currentPage="currentPage"
+                        :simple="simplePagination"
+                        :current="currentPage"
                         @change="pageChanged">
-                    </b-table-pagination>
+                    </b-pagination>
                 </div>
             </div>
         </div>
@@ -67,14 +67,14 @@
 
 <script>
     import sortBy from 'lodash/sortBy'
-    import TablePagination from './TablePagination'
+    import Pagination from '../pagination'
     import Icon from '../icon'
     import { Checkbox } from '../checkbox'
 
     export default {
         name: 'bTable',
         components: {
-            [TablePagination.name]: TablePagination,
+            [Pagination.name]: Pagination,
             [Icon.name]: Icon,
             [Checkbox.name]: Checkbox
         },
@@ -89,7 +89,7 @@
             defaultSort: String,
             paginated: Boolean,
             perPage: [Number, String],
-            fullPagination: Boolean
+            simplePagination: Boolean
         },
         data() {
             return {

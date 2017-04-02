@@ -1,0 +1,71 @@
+.snackbars {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    z-index: 1000;
+
+    &.top {
+        justify-content: center;
+    }
+    &.top-right {
+        justify-content: flex-end;
+    }
+    &.bottom {
+        top: auto;
+        bottom: 0;
+        justify-content: center;
+    }
+    &.bottom-left {
+        top: auto;
+        bottom: 0;
+    }
+
+    &.bottom-right {
+        top: auto;
+        bottom: 0;
+        justify-content: flex-end;
+    }
+
+    .snackbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        animation-duration: $speed-slow;
+        margin: 8px;
+        text-align: center;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+        border-radius: $radius-small;
+        padding: 6px 8px 6px 24px;
+        background: $dark;
+        color: $dark-invert;
+
+        @include mobile() {
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+        }
+        @include tablet() {
+            min-width: 350px;
+            max-width: 600px;
+            overflow: hidden;
+        }
+
+        .action {
+            text-transform: uppercase;
+            font-weight: $weight-semibold;
+            margin-left: auto;
+            padding-left: 8px;
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    .button {
+                        color: $color;
+                    }
+                }
+            }
+        }
+    }
+}
