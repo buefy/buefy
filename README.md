@@ -35,7 +35,7 @@ Import and use Buefy. You can also enable individual components:
 ```
 import Vue from 'vue'
 import Buefy from 'buefy'
-import 'buefy/lib/css/buefy.min.css'
+import 'buefy/lib/css/buefy.css'
 
 Vue.use(Buefy)
 

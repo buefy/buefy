@@ -26,6 +26,6 @@
 </script>
 
 <style lang="scss">
+    @import "../src/scss/buefy";
     @import "~bulma";
-    @import "../src/scss/main";
 </style>
