@@ -1,30 +1,33 @@
-import Icon from './components/icon'
-import Switch from './components/switch'
-// import Tooltip from './components/tooltip'
-import Notification from './components/notification'
 import { Checkbox, CheckboxGroup } from './components/checkbox'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
+import Icon from './components/icon'
+import Message from './components/message'
+import Notification from './components/notification'
 import Pagination from './components/pagination'
+import Switch from './components/switch'
+import Tooltip from './components/tooltip'
 
+import Dialog from './components/dialog'
 import Snackbar from './components/snackbar'
 import Toast from './components/toast'
 
 import config from './utils/config'
 
 const components = {
-    Icon,
-    Switch,
-    // Tooltip,
-    Notification,
     Checkbox,
     CheckboxGroup,
+    Icon,
+    Message,
+    Notification,
+    Pagination,
     Radio,
-    RadioGroup,
     RadioButton,
+    RadioGroup,
+    Switch,
     Table,
     TableColumn,
-    Pagination
+    Tooltip
 }
 
 components.install = (Vue, options = {}) => {
@@ -41,6 +44,7 @@ components.install = (Vue, options = {}) => {
 
     Vue.prototype.$snackbar = Snackbar
     Vue.prototype.$toast = Toast
+    Vue.prototype.$dialog = Dialog
 }
 
 export default components

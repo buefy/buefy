@@ -15,7 +15,7 @@ export default {
     },
     data() {
         return {
-            isShow: false,
+            isActive: false,
             positions: {
                 'top-right': {
                     enter: 'Down',
@@ -67,11 +67,13 @@ export default {
     methods: {
         close() {
             clearTimeout(this.timer)
-            this.isShow = false
+            this.isActive = false
+
+            // Timeout for the animation complete before destroying
             setTimeout(() => {
                 this.$destroy()
                 this.$el.remove()
-            }, 350)
+            }, 150)
         },
         show() {
             if (this.hasChild(this.parent)) {
@@ -80,7 +82,7 @@ export default {
                 return
             }
             this.insertEl()
-            this.isShow = true
+            this.isActive = true
             this.timer = setTimeout(() => this.close(), this.duration)
         }
     },

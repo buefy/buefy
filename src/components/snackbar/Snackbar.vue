@@ -6,7 +6,7 @@
         :enter-active-class="transition.enter"
         :leave-active-class="transition.leave">
 
-        <div class="snackbar animated" v-show="isShow">
+        <div class="snackbar" v-show="isActive">
             <div class="text">{{ message }}</div>
             <div class="action" @click="action" v-if="actionText" :class="type">
                 <button class="button is-dark">{{ actionText }}</button>

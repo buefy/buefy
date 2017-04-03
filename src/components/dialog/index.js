@@ -1,19 +1,18 @@
 import Vue from 'vue'
-import Snackbar from './Snackbar'
+import Dialog from './Dialog'
 
 function open(propsData) {
-    const SnackbarComponent = Vue.extend(Snackbar)
-    return new SnackbarComponent({
+    const DialogComponent = Vue.extend(Dialog)
+    return new DialogComponent({
         el: document.createElement('div'),
         propsData
     })
 }
 
 export default {
-    open(params) {
+    alert(params) {
         const defaultParam = {
-            type: 'is-success',
-            duration: 4000
+            canCancel: false
         }
         const propsData = Object.assign(defaultParam, params)
         return open(propsData)

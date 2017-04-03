@@ -1,0 +1,23 @@
+.dialog {
+    animation-duration: $speed-slow;
+
+    .modal-card {
+        min-width: 320px;
+        max-width: 460px;
+        width: auto;
+        animation-duration: $speed-slow;
+        will-change: transform;
+    }
+    .modal-card-title {
+        font-size: $size-5;
+        font-weight: $weight-semibold;
+    }
+    .modal-card-foot {
+        display: flex;
+        justify-content: flex-end;
+        .button {
+            min-width: 80px;
+            font-weight: $weight-semibold;
+        }
+    }
+}

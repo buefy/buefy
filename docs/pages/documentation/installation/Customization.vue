@@ -4,29 +4,26 @@
 
         <p class="mb-16">If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps:</p>
 
-        <h2 class="subtitle"><span class="mr-8">1</span> Install Buefy via npm</h2>
+        <h2 class="subtitle"><span class="mr-8">1</span> Install Buefy and Bulma via npm</h2>
         <pre v-highlight><code class="bash">Not public yet.</code></pre>
         <p class="mt-16">or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
 
-        <hr>
-
-        <h2 class="subtitle"><span class="mr-8">2</span> Install Bulma via npm</h2>
-        <pre v-highlight><code class="bash">npm install bulma</code></pre>
+        <pre v-highlight class="mt-16"><code class="bash">npm install bulma</code></pre>
         <p class="mt-16">or clone the repository: <a href="https://github.com/jgthms/bulma" target="_blank">https://github.com/jgthms/bulma</a></p>
 
         <hr>
 
-        <h2 class="subtitle"><span class="mr-8">3</span> Set your variables with Sass</h2>
+        <h2 class="subtitle"><span class="mr-8">2</span> Set your variables with Sass</h2>
         <pre v-highlight><code class="sass">{{ sass }}</code></pre>
 
         <hr>
 
-        <h2 class="subtitle"><span class="mr-8">4</span> Import Bulma and Buefy styles <em>after</em> having set your variables</h2>
+        <h2 class="subtitle"><span class="mr-8">3</span> Import Bulma and Buefy styles <em>after</em> having set your variables</h2>
         <pre v-highlight><code class="sass">{{ sassFinal }}</code></pre>
 
         <hr>
 
-        <h2 class="subtitle"><span class="mr-8">5</span> Import and use Buefy. You can also enable individual components</h2>
+        <h2 class="subtitle"><span class="mr-8">4</span> Import and use Buefy. You can also enable individual components</h2>
         <pre v-highlight><code class="javascript">{{ importing }}</code></pre>
 
         <!--///////-->
@@ -42,7 +39,7 @@
 
         <hr>
 
-        <h2 class="subtitle"><span class="mr-8">2</span> Change this line</h2>
+        <h2 class="subtitle"><span class="mr-8">2</span> Add this option on Vue.use()</h2>
         <pre v-highlight><code class="javascript">{{ customizeIcon }}</code></pre>
         <p class="mt-16">Default is <code>mdi</code>.</p>
 
@@ -50,11 +47,12 @@
 
         <hr>
 
-        <h3 class="title is-spaced">Customizing the container of floating Notices</h3>
+        <h3 class="title is-spaced">Customizing the default container of floating Notices</h3>
 
-        <p class="mb-16">If you're creating an admin, dashboard panel or desktop app, you probably don't want to have those Notices (Toasts & Snackbars) overlapping the menu. Change the container following this step:</p>
+        <p class="mb-16">If you're creating an admin, dashboard panel or desktop app, you probably don't want to have those floating Notices (Toasts & Snackbars) <strong>overlapping</strong> the menu or anything else.
+            Change the default container with the following step:</p>
 
-        <h2 class="subtitle">Change this line</h2>
+        <h2 class="subtitle">Add this option on Vue.use()</h2>
         <pre v-highlight><code class="javascript">{{ customizeContainer }}</code></pre>
         <p class="mt-16">Stay aware that this also changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.</p>
 

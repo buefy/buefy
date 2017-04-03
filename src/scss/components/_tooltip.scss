@@ -1,0 +1,145 @@
+$arrow-size: 6px;
+$arrow-margin: 4px;
+
+$multiline-sizes: (
+    small: 120px,
+    medium: 180px,
+    large: 240px
+);
+
+@mixin tooltip-arrow($direction, $color) {
+    @if ($direction == 'is-top') {
+        border-top: $arrow-size solid $color;
+        border-right: $arrow-size solid transparent;
+        border-left: $arrow-size solid transparent;
+        bottom: calc(100% + #{$arrow-margin});
+    } @else if ($direction == 'is-bottom') {
+        border-right: $arrow-size solid transparent;
+        border-bottom: $arrow-size solid $color;
+        border-left: $arrow-size solid transparent;
+        top: calc(100% + #{$arrow-margin});
+    } @else if ($direction == 'is-right') {
+        border-top: $arrow-size solid transparent;
+        border-right: $arrow-size solid $color;
+        border-bottom: $arrow-size solid transparent;
+        left: calc(100% + #{$arrow-margin});
+    } @else if ($direction == 'is-left') {
+        border-top: $arrow-size solid transparent;
+        border-bottom: $arrow-size solid transparent;
+        border-left: $arrow-size solid $color;
+        right: calc(100% + #{$arrow-margin});
+    }
+}
+
+@mixin tooltip($direction) {
+    &.#{$direction} {
+        &:before,
+        &:after {
+            @if ($direction == 'is-top') {
+                top: auto;
+                right: auto;
+                bottom: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                left: 50%;
+                transform: translateX(-50%);
+            } @else if ($direction == 'is-bottom') {
+                top: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                right: auto;
+                bottom: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            } @else if ($direction == 'is-right') {
+                top: 50%;
+                right: auto;
+                bottom: auto;
+                left: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                transform: translateY(-50%);
+            } @else if ($direction == 'is-left') {
+                top: 50%;
+                right: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                bottom: auto;
+                left: auto;
+                transform: translateY(-50%);
+            }
+        }
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            &.is-#{$name}:before {
+                @include tooltip-arrow($direction, $color)
+            }
+        }
+        &.is-multiline {
+            @each $name, $size in $multiline-sizes {
+                &.is-#{$name}:after {
+                    width: $size;
+                    margin-left: - calc($size / 2px);
+                }
+            }
+        }
+    }
+}
+
+// Base
+.tooltip {
+    position: relative;
+    display: inline-flex;
+
+    &.is-animated {
+        &:before,
+        &:after {
+            transition: opacity $speed $easing, visibility $speed $easing;
+        }
+    }
+    &:before,
+    &:after {
+        position: absolute;
+        content: '';
+        opacity: 0;
+        visibility: hidden;
+    }
+    &:before {
+        z-index: 889;
+    }
+    &:after {
+        content: attr(data-label);
+        width: auto;
+        padding: 4px 8px;
+        background: $primary;
+        border-radius: $radius-small;
+        font-size: 12px;
+        font-weight: $weight-normal;
+        color: $primary-invert;
+        box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, .2);
+        z-index: 888;
+        white-space: nowrap;
+    }
+    &:hover:before,
+    &:hover:after {
+        opacity: 1;
+        visibility: visible;
+    }
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+        &.is-#{$name}:after {
+            background: $color;
+            color: $color-invert;
+        }
+    }
+
+    &.is-multiline {
+        &:after {
+            display: flex-block;
+            text-align: center;
+            white-space: normal;
+        }
+    }
+    &.is-dashed {
+        border-bottom: 1px dashed $grey-light;
+        cursor: default;
+    }
+
+    @include tooltip('is-top');
+    @include tooltip('is-right');
+    @include tooltip('is-bottom');
+    @include tooltip('is-left');
+}

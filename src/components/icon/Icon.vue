@@ -1,5 +1,5 @@
 <template>
-    <span class="icon is-unselectable" :class="size">
+    <span class="icon is-unselectable" :class="[size, color]">
         <i :class="[type, type === 'fa' ? `fa-${newIcon}` : null ]">{{ type === 'mdi' ? newIcon : null }}</i>
     </span>
 </template>
@@ -12,6 +12,7 @@
                 type: String,
                 default: 'mdi'
             },
+            color: String,
             icon: String,
             both: Boolean, // This is used internally show both mdi and fa icon
             size: String

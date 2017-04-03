@@ -1,10 +1,10 @@
 <template>
     <div class="documentation">
-        <section class="hero is-medium is-primary">
+        <section class="hero is-primary">
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">Documentation</h1>
-                    <h2 class="subtitle">Learn everything you need to use Buefy :)</h2>
+                    <h2 class="subtitle">Learn everything you need to start using Buefy ;)</h2>
                 </div>
             </div>
 

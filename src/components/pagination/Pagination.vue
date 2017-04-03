@@ -1,5 +1,5 @@
 <template>
-    <div class="pagination" :class="position">
+    <div class="pagination" :class="[position, size]">
         <a class="pagination-previous" @click="prev" :class="{ 'is-disabled': !hasPrev }"><b-icon icon="chevron_left" both></b-icon></a>
         <a class="pagination-next" @click="next" :class="{ 'is-disabled': !hasNext }"><b-icon icon="chevron_right" both></b-icon></a>
         <ul class="pagination-list" v-if="!simple">
@@ -39,6 +39,7 @@
                 type: [Number, String],
                 default: 1
             },
+            size: String,
             simple: Boolean,
             position: {
                 type: String,

@@ -1,27 +1,32 @@
 <template>
-    <div class="notification" v-show="isActive" :class="type">
-        <button class="delete" v-if="closable" @click="close"></button>
-        <b-icon
-            :icon="icon"
-            both
-            size="is-large"
-            v-if="icon && showIcon">
-        </b-icon>
-        <div class="content">
-            <slot></slot>
+    <article class="message" v-show="isActive" :class="type">
+        <div class="message-header" v-if="title">
+            <p>{{ title }}</p>
+            <button class="delete" v-if="closable" @click="close"></button>
         </div>
-    </div>
+        <div class="message-body">
+            <b-icon
+                :icon="icon"
+                both
+                :class="type"
+                size="is-large"
+                v-if="icon && showIcon">
+            </b-icon>
+            <p><slot></slot></p>
+        </div>
+    </article>
 </template>
 
 <script>
     import Icon from '../icon'
 
     export default {
-        name: 'bNotification',
+        name: 'bMessage',
         components: {
             [Icon.name]: Icon
         },
         props: {
+            title: String,
             closable: {
                 type: Boolean,
                 default: true

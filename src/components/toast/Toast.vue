@@ -6,7 +6,7 @@
         :enter-active-class="transition.enter"
         :leave-active-class="transition.leave">
 
-        <div class="toast animated" v-show="isShow" :class="type">
+        <div class="toast" v-show="isActive" :class="type">
             <div v-html="message"></div>
         </div>
 

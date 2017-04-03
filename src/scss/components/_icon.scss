@@ -21,6 +21,15 @@
             font-size: 42px;
         }
     }
+
+    // Colors overrides
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+        &.is-#{$name} {
+            color: $color;
+        }
+    }
 }
 
 .mdi {
