@@ -12,24 +12,19 @@ Buefy is a lightweight library of responsive UI components for [Vue.js](https://
 
 * Follows Bulma design and some of the Material Design UX
 
-## Demo and Documentation
+## Documentation and Demo
 
-Soon™
+The documentation resides in the docs directory, and is built using only Buefy — so it's serves as the demo as well.
 
-## Dependencies
-
-Basically the essential:
-
-* [Vue.js](https://vuejs.org/) 2+
-* [Bulma](http://bulma.io/) 0.4+
-* [Material Design Icons](https://material.io/icons/) or [FontAwesome](http://fontawesome.io/) — Your call
-
+Browse the [online documentation here](https://buefy.github.io).
 
 ## Install
 
 Not public yet.
 
 ## Quick Start
+
+**Note:** Already includes Bulma — the Buefy purple theme — if you want to use your own theme / variables or wanna set the icon pack go to the [customization section on the online documentation](soon).
 
 Import and use Buefy. You can also enable individual components:
 ```
@@ -46,17 +41,16 @@ Vue.component(Buefy.Table.name, Table.Checkbox)
 ...
 ```
 
-### Customization
+## Dependencies
 
-Soon™
+Basically the essential:
+
+* [Vue.js](https://vuejs.org/) 2+
+* [Material Design Icons](https://material.io/icons/) or [FontAwesome](http://fontawesome.io/) — Your call
 
 ## Browser Support
 
 Modern Browsers basically, JavaScript depends on your building. CSS is from [Bulma Browser Support](https://github.com/jgthms/bulma#browser-support).
-
-## Changelog
-
-[Changelog](https://github.com/rafaelpimpa/buefy/blob/master/CHANGELOG.md)
 
 ## License
 

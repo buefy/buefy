@@ -26,7 +26,6 @@ export default {
             field: this.field,
             isSortable: this.sortable,
             isNumeric: this.numeric
-            // scopedSlots: this.$scopedSlots
         }
     },
 

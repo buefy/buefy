@@ -55,7 +55,6 @@
 
         .action {
             text-transform: uppercase;
-            font-weight: $weight-semibold;
             margin-left: auto;
             padding-left: 8px;
             @each $name, $pair in $colors {
@@ -63,6 +62,7 @@
                 &.is-#{$name} {
                     .button {
                         color: $color;
+                        font-weight: $weight-semibold;
                     }
                 }
             }

@@ -33,8 +33,9 @@
                     case 'warning': return 'exclamation-triangle'
                     case 'error': return 'exclamation-circle'
                     case 'arrow_upward': return 'arrow-up'
-                    case 'chevron_right': return 'chevron-right'
-                    case 'chevron_left': return 'chevron-left'
+                    case 'chevron_right': return 'angle-right'
+                    case 'chevron_left': return 'angle-left'
+                    case 'keyboard_arrow_down': return 'angle-down'
                     default: return null
                 }
             }

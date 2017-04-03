@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build:lib:clean": "rimraf lib",
-    "build:lib:sass": "node-sass --output-style expanded --source-map true --include-path node_modules src/scss/buefy-full.scss lib/css/buefy.css",
+    "build:lib:sass": "node-sass --output-style expanded --source-map true --include-path node_modules src/scss/buefy-build.scss lib/css/buefy.css",
     "build:lib:autoprefix": "postcss --use autoprefixer --output lib/css/buefy.css lib/css/buefy.css",
     "build:lib": "npm run build:lib:clean && npm run build:lib:sass && npm run build:lib:autoprefix",
     "build:docs": "node build/build.js",
@@ -30,8 +30,7 @@
     "components"
   ],
   "dependencies": {
-    "vue": "^2.2.2",
-    "bulma": "^0.4.0"
+    "vue": "^2.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -41,6 +40,7 @@
     "babel-preset-env": "^1.2.1",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
+    "bulma": "^0.4.0",
     "chalk": "^1.1.3",
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
@@ -54,6 +54,7 @@
     "file-loader": "^0.10.0",
     "friendly-errors-webpack-plugin": "^1.1.3",
     "function-bind": "^1.1.0",
+    "highlight.js": "^9.10.0",
     "html-webpack-plugin": "^2.28.0",
     "http-proxy-middleware": "^0.17.3",
     "lodash": "^4.17.4",

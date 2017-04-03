@@ -100,7 +100,7 @@
 </template>
 
 <script>
-    import tableData from '../assets/data_test.json'
+    import tableData from '../../assets/data_test.json'
     import debounce from 'lodash/debounce'
 
     export default {

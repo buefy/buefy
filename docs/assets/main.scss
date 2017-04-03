@@ -1,0 +1,14 @@
+$spaceamounts: (0, 4, 8, 16, 24, 32, 40, 48);
+$sides: ('top', 'left', 'bottom', 'right');
+
+@each $space in $spaceamounts {
+    @each $side in $sides {
+        .m#{str-slice($side, 0, 1)}-#{$space} {
+            margin-#{$side}: #{$space}px !important;
+        }
+
+        .p#{str-slice($side, 0, 1)}-#{$space} {
+            padding-#{$side}: #{$space}px !important;
+        }
+    }
+}
