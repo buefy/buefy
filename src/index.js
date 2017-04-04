@@ -1,6 +1,7 @@
 import { Checkbox, CheckboxGroup } from './components/checkbox'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
+import Field from './components/field'
 import Icon from './components/icon'
 import Input from './components/input'
 import Message from './components/message'
@@ -13,11 +14,12 @@ import Dialog from './components/dialog'
 import Snackbar from './components/snackbar'
 import Toast from './components/toast'
 
-import config from './utils/config'
+import NoticeMixin from './utils/NoticeMixin'
 
 const components = {
     Checkbox,
     CheckboxGroup,
+    Field,
     Icon,
     Input,
     Message,
@@ -33,8 +35,9 @@ const components = {
 }
 
 components.install = (Vue, options = {}) => {
-    config.setDefaultContentElement(options.defaultContentElement)
-    config.setDefaultIconType(options.defaultIconType)
+    // Options
+    NoticeMixin.props.container.default = options.defaultContentElement
+    Icon.props.pack.default = options.defaultIconPack || 'mdi'
 
     for (const componentName in components) {
         const component = components[componentName]

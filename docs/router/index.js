@@ -3,35 +3,50 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+// const Documentation = (r) => require.ensure([], () => r(require('../pages/documentation/Documentation')))
+
+const Home = (r) => require(['../pages/Home'], r)
+
+const Documentation = (r) => require(['../pages/documentation/Documentation'], r)
+const Installation = (r) => require(['../pages/documentation/installation/Installation'], r)
+const QuickStart = (r) => require(['../pages/documentation/installation/QuickStart'], r)
+const Customization = (r) => require(['../pages/documentation/installation/Customization'], r)
+const ConstructorOptions = (r) => require(['../pages/documentation/installation/ConstructorOptions'], r)
+
+const Notices = (r) => require(['../pages/documentation/notices/Notices'], r)
+const Snackbar = (r) => require(['../pages/documentation/notices/Snackbar'], r)
+const Toast = (r) => require(['../pages/documentation/notices/Toast'], r)
+const Notification = (r) => require(['../pages/documentation/notices/Notification'], r)
+const Message = (r) => require(['../pages/documentation/notices/Message'], r)
+
 export default new Router({
     mode: 'hash',
     linkActiveClass: 'is-active',
-    // scrollBehavior(to, from, savedPosition) {
-    //     console.log(to, from)
-    //     return { y: 50 }
-    //     // return desired position
-    //     //{ y: 0 }
-    // },
+    base: __dirname,
     routes: [
         {
             path: '/',
-            component: require('../pages/Home')
+            component: Home
         },
         {
             path: '/documentation',
-            component: require('../pages/documentation/Documentation'),
+            component: Documentation,
             children: [
                 {
                     path: 'installation',
-                    component: require('../pages/documentation/installation/Installation'),
+                    component: Installation,
                     children: [
                         {
                             path: 'quick-start',
-                            component: require('../pages/documentation/installation/QuickStart')
+                            component: QuickStart
                         },
                         {
                             path: 'customization',
-                            component: require('../pages/documentation/installation/Customization')
+                            component: Customization
+                        },
+                        {
+                            path: 'constructor-options',
+                            component: ConstructorOptions
                         },
                         {
                             path: '',
@@ -41,27 +56,27 @@ export default new Router({
                 },
                 {
                     path: 'notices',
-                    component: require('../pages/documentation/notices/Notices'),
+                    component: Notices,
                     children: [
                         {
                             path: 'snackbar',
-                            component: require('../pages/documentation/notices/Snackbar')
+                            component: Snackbar
                         },
                         {
                             path: 'toast',
-                            component: require('../pages/documentation/notices/Toast')
+                            component: Toast
                         },
                         {
                             path: 'notification',
-                            component: require('../pages/documentation/notices/Notification')
+                            component: Notification
                         },
                         {
                             path: 'message',
-                            component: require('../pages/documentation/notices/Message')
+                            component: Message
                         },
                         {
                             path: '',
-                            redirect: 'snackbar'
+                            redirect: 'toast'
                         }
                     ]
                 },

@@ -1,5 +1,5 @@
 <template>
-    <div class="documentation">
+    <div>
         <section class="hero is-primary">
             <div class="hero-body">
                 <div class="container">
@@ -21,6 +21,8 @@
                 </nav>
             </div>
         </section>
+
         <router-view></router-view>
+
     </div>
 </template>

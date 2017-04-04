@@ -35,7 +35,8 @@
                     </td>
                     <td v-for="column in columns" :class="{ 'has-text-right': column.isNumeric }" :style="{ width: column.width + 'px' }">
                         <template v-for="(cell, key) in item" v-if="key === column.field">
-                            {{ cell }}
+                            <span v-if="html" v-html="html ? cell : null"></span>
+                            {{ !html ? cell : null }}
                         </template>
                     </td>
 
@@ -89,7 +90,8 @@
             defaultSort: String,
             paginated: Boolean,
             perPage: [Number, String],
-            simplePagination: Boolean
+            simplePagination: Boolean,
+            html: Boolean
         },
         data() {
             return {

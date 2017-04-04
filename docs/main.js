@@ -2,12 +2,24 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import Buefy from '../src'
+import VueProgressBar from 'vue-progressbar'
+import hljs from 'highlight.js'
+
 Vue.config.productionTip = false
 
-import Buefy from '../src'
+
 Vue.use(Buefy)
 
-import hljs from 'highlight.js'
+Vue.use(VueProgressBar, {
+    color: '#7957d5',
+    failedColor: '#ff3860',
+    transition: {
+        speed: '0.2s',
+        opacity: '0.1s'
+    }
+})
+
 Vue.directive('highlight', {
     deep: true,
     bind: function (el, binding) {

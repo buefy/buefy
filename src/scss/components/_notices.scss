@@ -5,6 +5,7 @@
     left: 0;
     right: 0;
     z-index: 1000;
+    pointer-events: none;
 
     &.top {
         justify-content: center;
@@ -28,7 +29,7 @@
         justify-content: flex-end;
     }
     &.is-toast {
-        opacity: 0.90;
+        opacity: 0.92;
     }
 
     .toast {
@@ -39,6 +40,7 @@
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
         border-radius: 28px;
         padding: 12px 24px;
+        pointer-events: auto;
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
             $color-invert: nth($pair, 2);
@@ -59,6 +61,7 @@
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
         border-radius: $radius-small;
         padding: 6px 8px 6px 24px;
+        pointer-events: auto;
         background: $dark;
         color: $dark-invert;
 
@@ -74,7 +77,6 @@
         }
 
         .action {
-            text-transform: uppercase;
             margin-left: auto;
             padding-left: 8px;
             @each $name, $pair in $colors {
@@ -83,6 +85,7 @@
                     .button {
                         color: $color;
                         font-weight: $weight-semibold;
+                        text-transform: uppercase;
                     }
                 }
             }

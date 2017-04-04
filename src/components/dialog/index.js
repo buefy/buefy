@@ -21,5 +21,13 @@ export default {
         const defaultParam = {}
         const propsData = Object.assign(defaultParam, params)
         return open(propsData)
+    },
+    prompt(params) {
+        const defaultParam = {
+            hasInput: true,
+            confirmText: 'Done'
+        }
+        const propsData = Object.assign(defaultParam, params)
+        return open(propsData)
     }
 }

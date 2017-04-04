@@ -4,14 +4,33 @@
             <h1 class="title mb-48">Componentes</h1>
 
             <hr>
-            <!--<div class="field has-addons">-->
-            <b-input v-model="input" type="textarea"></b-input>
-            <p class="control"><button class="button is-primary">ADASD</button></p>
-            <b-input v-model="input" has-icon-right>
-                <b-icon icon="clear"></b-icon>
-            </b-input>
-            <!--</div>-->
-            {{ input }}
+            <b-field label="Username" type="is-success" message="Your username is available">
+                <b-input type="email" value="johnsilver" maxlength="30">
+                    <b-icon icon="person"></b-icon>
+                </b-input>
+            </b-field>
+
+            <b-field label="Username" type="is-danger" message="Your username is unavailable">
+                <b-input type="email" value="flint" maxlength="30"></b-input>
+            </b-field>
+
+            <b-field addons>
+                <b-input v-model="input" placeholder="Search...">
+                    <b-icon icon="search"></b-icon>
+                </b-input>
+                <p class="control"><button class="button is-primary">Search</button></p>
+            </b-field>
+
+            <b-field>
+                <b-input v-model="input" placeholder="Search..." expanded></b-input>
+                <p class="control"><button class="button is-primary">Search</button></p>
+            </b-field>
+
+            <b-field><b-input maxlength="200" type="textarea"></b-input></b-field>
+
+            <b-field><b-input value="loading" loading><b-icon icon="person"></b-icon></b-input></b-field>
+
+            <b-field><b-input type="password" value="teste" password-reveal></b-input></b-field>
 
             <hr>
             <h2 class="subtitle">Dialog</h2>
@@ -24,18 +43,16 @@
             <button class="button" @click="confirmDialogCustom">Confirm customized</button>
             <button class="button" @click="confirmDialogCustomWCallback">Confirm customized with callback</button>
 
+            <br><br>
+
+            <button class="button" @click="promptDialog">Prompt</button>
+
             <hr>
             <h2 class="subtitle">Snackbar</h2>
             <button class="button" @click="snackbar">Default Snackbar</button>
             <button class="button is-info" @click="infoSnackbar">Snackbar Blue Action</button>
             <button class="button is-warning" @click="warningSnackbar">Snackbar Yellow Action</button>
             <button class="button is-danger" @click="dangerSnackbar">Snackbar Red Action</button>
-
-            <hr>
-            <h2 class="subtitle">Toast</h2>
-            <button class="button" @click="toast">Toast</button>
-            <button class="button is-success" @click="successToast">Toast Success</button>
-            <button class="button is-danger" @click="dangerToast">Toast Danger</button>
 
             <hr>
             <h2 class="subtitle">Notification</h2>
@@ -255,25 +272,6 @@
                 })
             },
 
-            toast() {
-                this.$toast.open({
-                    message: 'Something happened.'
-                })
-            },
-            successToast() {
-                this.$toast.open({
-                    message: 'Something happened correctly!',
-                    type: 'is-success'
-                })
-            },
-            dangerToast() {
-                this.$toast.open({
-                    message: 'Something\'s not good, also I\'m on bottom.',
-                    position: 'bottom',
-                    type: 'is-danger'
-                })
-            },
-
             alertDialog() {
                 this.$dialog.alert({
                     message: 'Everything looks <strong>fine</strong>!'
@@ -310,6 +308,18 @@
                     onConfirm: () => {
                         this.$toast.open({
                             message: 'Account deleted!'
+                        })
+                    }
+                })
+            },
+            promptDialog() {
+                this.$dialog.prompt({
+                    message: `What's your name?`,
+                    maxlength: 20,
+                    placeholder: 'e.g. John Doe',
+                    onConfirm: (value) => {
+                        this.$toast.open({
+                            message: 'Your name is: ' + value
                         })
                     }
                 })

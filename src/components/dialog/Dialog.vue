@@ -17,19 +17,27 @@
                     <header class="modal-card-head" v-if="title">
                         <p class="modal-card-title">{{ title }}</p>
                     </header>
-                    <section class="modal-card-body" :class="{ 'is-titleless': !title }">
+                    <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                         <b-icon
                             :icon="icon"
-                            :color="type"
+                            :class="type"
                             both
                             size="is-large"
                             v-if="icon && hasIcon">
                         </b-icon>
-                        <span v-html="message"></span>
+                        <p v-html="message"></p>
+                        <b-input
+                            v-if="hasInput"
+                            ref="input"
+                            :placeholder="placeholder"
+                            :maxlength="maxlength"
+                            :name="name"
+                            @keyup.enter.native="confirm">
+                        </b-input>
                     </section>
                     <footer class="modal-card-foot">
-                        <a class="button is-light" @click="cancel" v-if="canCancel">{{ cancelText }}</a>
-                        <a class="button" :class="type" @click="confirm">{{ confirmText }}</a>
+                        <button class="button is-light" ref="cancelButton" @click="cancel" v-if="canCancel">{{ cancelText }}</button>
+                        <button class="button" ref="confirmButton" :class="type" @click="confirm">{{ confirmText }}</button>
                     </footer>
                 </div>
 
@@ -42,10 +50,12 @@
 
 <script>
     import Icon from '../icon'
+    import Input from '../input'
 
     export default {
         components: {
-            [Icon.name]: Icon
+            [Icon.name]: Icon,
+            [Input.name]: Input
         },
         props: {
             title: String,
@@ -67,6 +77,10 @@
                 type: Boolean,
                 default: true
             },
+            hasInput: Boolean,
+            placeholder: String,
+            name: String,
+            maxlength: [Number, String],
             onConfirm: Function,
             onCancel: Function
         },
@@ -94,7 +108,8 @@
         methods: {
             confirm() {
                 if (this.onConfirm) {
-                    this.onConfirm()
+                    const value = this.$refs.input ? this.$refs.input.newValue : null
+                    this.onConfirm(value)
                 }
                 this.close()
             },
@@ -114,10 +129,26 @@
                     this.$destroy()
                     this.$el.remove()
                 }, 150)
+            },
+            keyPress(event) {
+                if (event.keyCode === 27) this.cancel()
             }
+        },
+        created() {
+            const vm = this
+            window.addEventListener('keyup', event => vm.keyPress(event))
         },
         beforeMount() {
             document.body.appendChild(this.$el)
+        },
+        mounted() {
+            if (this.hasInput) {
+                this.$refs.input.$refs.input.focus()
+            } else if (this.canCancel) {
+                this.$refs.cancelButton.focus()
+            } else {
+                this.$refs.confirmButton.focus()
+            }
         }
     }
 </script>

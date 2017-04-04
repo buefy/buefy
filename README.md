@@ -26,7 +26,7 @@ Not public yet.
 
 ## Quick Start
 
-**Note:** Already includes Bulma — the Buefy purple theme — if you want to use your own theme / variables go to the [customization section on the online documentation](soon).
+**Note:** Already includes Bulma — the Buefy purple theme — if you want to use your own theme / variables go to the [customization section on the online documentation](https://buefy.github.io/#/documentation/installation/customization).
 
 Import and use Buefy. You can also enable individual components:
 ```
@@ -54,16 +54,19 @@ Basically the essential:
 
 JavaScript depends on your building. CSS is from [Bulma Browser Support](https://github.com/jgthms/bulma#browser-support).
 
-## License
-
-MIT
-
 ## Credits and Thanks
 
 * [Vue.js](https://vuejs.org/) for the great reactive js framework
 * [Bulma](http://bulma.io/) for the best flexbox css framework out there
 * The original idea from [vue-admin](https://github.com/vue-bulma/vue-admin)
-* Some code structure and ideas from [vue-blu](https://github.com/chenz24/vue-blu) and [vue-material](https://vuematerial.github.io/)
+* Some code structure and ideas from:
+    * [vue-blu](https://github.com/chenz24/vue-blu)
+    * [vue-material](https://vuematerial.github.io/)
+    * [element-ui](http://element.eleme.io/)
+
+## Copyright and License
+
+Copyright (c) 2017 Rafael Beraldo. Code released under the [MIT]((https://github.com/rafaelpimpa/buefy/blob/master/LICENSE)) license.
 
 ---
 

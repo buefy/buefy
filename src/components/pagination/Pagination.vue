@@ -41,10 +41,7 @@
             },
             size: String,
             simple: Boolean,
-            position: {
-                type: String,
-                default: ''
-            }
+            position: String
         },
         computed: {
             pageCount() {

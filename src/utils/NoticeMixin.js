@@ -78,7 +78,7 @@ export default {
         show() {
             if (this.hasChild(this.parent)) {
                 // Add to "queue" (recursive) if already has a notice
-                setTimeout(() => this.show(), 500)
+                setTimeout(() => this.show(), 250)
                 return
             }
             this.insertEl()

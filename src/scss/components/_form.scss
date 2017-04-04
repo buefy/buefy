@@ -1,0 +1,35 @@
+.control {
+    &.has-icon {
+        &.has-both-icon .input {
+            padding-right: 2.25em;
+        }
+        .icon {
+            &.is-right {
+                right: 0;
+                left: auto;
+            }
+            &.is-clickable {
+                pointer-events: auto;
+                cursor: pointer;
+            }
+        }
+        .icon:not(.is-clickable),
+        .input:focus + .icon {
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                $color-invert: nth($pair, 2);
+                &.is-#{$name} {
+                    color: $color;
+                }
+            }
+        }
+    }
+    .help.counter {
+        float: right;
+        &.has-message {
+            float: none;
+            position: absolute;
+            right: 0;
+        }
+    }
+}
