@@ -4,7 +4,6 @@
 
         <h2 class="subtitle"><span class="mr-8">1</span> Install via npm</h2>
         <pre v-highlight><code class="bash">Not public yet.</code></pre>
-        <p class="mt-16">or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
 
         <hr>
 

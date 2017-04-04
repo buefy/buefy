@@ -25,7 +25,7 @@
             },
             duration: {
                 type: Number,
-                default: 4000
+                default: 2500
             }
         },
         data() {
@@ -39,13 +39,13 @@
             },
             insertEl() {
                 this.parent.className = ''
-                this.parent.classList.add('toasts', this.position)
+                this.parent.classList.add('notices', 'is-toast', this.position)
                 this.parent.appendChild(this.$el)
             }
         },
         beforeMount() {
             let parent
-            parent = document.querySelector('.toasts')
+            parent = document.querySelector('.notices')
 
             const container = document.querySelector(this.container) !== null ? document.querySelector(this.container) : document.body
             if (!parent) {

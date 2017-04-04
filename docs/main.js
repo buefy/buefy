@@ -5,7 +5,7 @@ import router from './router'
 Vue.config.productionTip = false
 
 import Buefy from '../src'
-Vue.use(Buefy, { defaultIconType: 'mdi' })
+Vue.use(Buefy)
 
 import hljs from 'highlight.js'
 Vue.directive('highlight', {

@@ -13,7 +13,7 @@ export default {
     open(params) {
         const defaultParam = {
             type: 'is-dark',
-            duration: 4000
+            duration: 2500
         }
         const propsData = Object.assign(defaultParam, params)
         return open(propsData)

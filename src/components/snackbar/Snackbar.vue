@@ -44,7 +44,7 @@
             },
             insertEl() {
                 this.parent.className = ''
-                this.parent.classList.add('snackbars', this.position)
+                this.parent.classList.add('notices', this.position)
                 this.parent.appendChild(this.$el)
             },
             action() {
@@ -53,7 +53,7 @@
         },
         beforeMount() {
             let parent
-            parent = document.querySelector('.snackbars')
+            parent = document.querySelector('.notices')
 
             const container = document.querySelector(this.container) !== null ? document.querySelector(this.container) : document.body
             if (!parent) {

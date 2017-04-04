@@ -16,5 +16,10 @@ export default {
         }
         const propsData = Object.assign(defaultParam, params)
         return open(propsData)
+    },
+    confirm(params) {
+        const defaultParam = {}
+        const propsData = Object.assign(defaultParam, params)
+        return open(propsData)
     }
 }

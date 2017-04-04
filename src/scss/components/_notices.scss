@@ -1,10 +1,9 @@
-.snackbars {
+.notices {
     position: fixed;
     display: flex;
     top: 0;
     left: 0;
     right: 0;
-    bottom: auto;
     z-index: 1000;
 
     &.top {
@@ -27,6 +26,27 @@
         top: auto;
         bottom: 0;
         justify-content: flex-end;
+    }
+    &.is-toast {
+        opacity: 0.90;
+    }
+
+    .toast {
+        display: inline-flex;
+        animation-duration: $speed-slow;
+        margin: 24px 8px;
+        text-align: center;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+        border-radius: 28px;
+        padding: 12px 24px;
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            $color-invert: nth($pair, 2);
+            &.is-#{$name} {
+                color: $color-invert;
+                background: $color;
+            }
+        }
     }
 
     .snackbar {

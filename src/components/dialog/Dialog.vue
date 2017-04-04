@@ -6,7 +6,7 @@
         leave-active-class="fadeOut">
 
         <div class="dialog modal is-active" v-if="isActive">
-            <div class="modal-background"></div>
+            <div class="modal-background" @click="cancel"></div>
 
             <transition
                 appear
@@ -14,13 +14,22 @@
                 enter-active-class="zoomIn">
 
                 <div class="modal-card" v-if="isActive">
-                    <header class="modal-card-head">
+                    <header class="modal-card-head" v-if="title">
                         <p class="modal-card-title">{{ title }}</p>
                     </header>
-                    <section class="modal-card-body" v-html="message"></section>
+                    <section class="modal-card-body" :class="{ 'is-titleless': !title }">
+                        <b-icon
+                            :icon="icon"
+                            :color="type"
+                            both
+                            size="is-large"
+                            v-if="icon && showIcon">
+                        </b-icon>
+                        <span v-html="message"></span>
+                    </section>
                     <footer class="modal-card-foot">
-                        <a class="button is-light" @click="cancel" v-if="canCancel">Cancel</a>
-                        <a class="button" :class="dialogType !== 'is-alert' ? type : null" @click="confirm">{{ confirmText }}</a>
+                        <a class="button is-light" @click="cancel" v-if="canCancel">{{ cancelText }}</a>
+                        <a class="button" :class="type" @click="confirm">{{ confirmText }}</a>
                     </footer>
                 </div>
 
@@ -32,10 +41,16 @@
 </template>
 
 <script>
+    import Icon from '../icon'
+
     export default {
+        components: {
+            [Icon.name]: Icon
+        },
         props: {
             title: String,
             message: String,
+            showIcon: Boolean,
             type: {
                 type: String,
                 default: 'is-primary'
@@ -60,6 +75,22 @@
                 isActive: true
             }
         },
+        computed: {
+            icon() {
+                switch (this.type) {
+                    case 'is-info':
+                        return 'info'
+                    case 'is-success':
+                        return 'check_circle'
+                    case 'is-warning':
+                        return 'warning'
+                    case 'is-danger':
+                        return 'error'
+                    default:
+                        return null
+                }
+            }
+        },
         methods: {
             confirm() {
                 if (this.onConfirm) {
@@ -68,6 +99,8 @@
                 this.close()
             },
             cancel() {
+                if (!this.canCancel) return
+
                 if (this.onCancel) {
                     this.onCancel()
                 }

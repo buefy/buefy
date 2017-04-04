@@ -1,6 +1,5 @@
 // Colors
-
-$primary: #8c67ef;
+$primary: #7957d5;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
@@ -25,13 +24,11 @@ $colors: (
 );
 
 // Links
-
 $link: $primary;
 $link-invert: $primary-invert;
 $link-visited: $grey;
 $link-focus-border: $primary;
 
 // Font
-
 $weight-semibold: 600;
 $weight-bold: 700;

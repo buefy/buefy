@@ -77,7 +77,7 @@ export default {
         },
         show() {
             if (this.hasChild(this.parent)) {
-                // Add to "queue" (recursive) if already has a toast
+                // Add to "queue" (recursive) if already has a notice
                 setTimeout(() => this.show(), 500)
                 return
             }

@@ -14,6 +14,7 @@
         <hr>
 
         <h2 class="subtitle"><span class="mr-8">2</span> Set your variables with Sass</h2>
+        <p class="mb-16"><strong>Tip:</strong> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
         <pre v-highlight><code class="sass">{{ sass }}</code></pre>
 
         <hr>
@@ -30,31 +31,27 @@
 
         <hr>
 
-        <h3 class="title is-spaced">Customizing the global icon type</h3>
+        <h3 class="title is-spaced">Global options</h3>
+        <h2 class="subtitle">Global options should be set inside an object on Buefy initialization, like so:</h2>
 
-        <p class="mb-16">By default Buefy uses <a href="https://material.io/icons/" target="_blank">Material Icons</a>, if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, follow these steps:</p>
+        <pre v-highlight><code class="javascript">{{ globalOptions }}</code></pre>
 
-        <h2 class="subtitle"><span class="mr-8">1</span> Include FontAwesome</a></h2>
+        <hr>
+
+        <h2 class="subtitle">Using FontAwesome</a></h2>
+        <p class="mb-16">By default Buefy uses <a href="https://material.io/icons/" target="_blank">Material Icons</a>, if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, use this option:</p>
+        <code>defaultIconType: 'fa'</code>
+
+        <h2 class="subtitle is-6 mt-16">Don't forget to include FontAwesome</a></h2>
         <pre v-highlight><code class="html">{{ fontAwesome || html }}</code></pre>
 
         <hr>
 
-        <h2 class="subtitle"><span class="mr-8">2</span> Add this option on Vue.use()</h2>
-        <pre v-highlight><code class="javascript">{{ customizeIcon }}</code></pre>
-        <p class="mt-16">Default is <code>mdi</code>.</p>
-
-        <!--///////-->
-
-        <hr>
-
-        <h3 class="title is-spaced">Customizing the default container of floating Notices</h3>
-
+        <h2 class="subtitle">Customizing the default container of floating Notices</h2>
         <p class="mb-16">If you're creating an admin, dashboard panel or desktop app, you probably don't want to have those floating Notices (Toasts & Snackbars) <strong>overlapping</strong> the menu or anything else.
-            Change the default container with the following step:</p>
-
-        <h2 class="subtitle">Add this option on Vue.use()</h2>
-        <pre v-highlight><code class="javascript">{{ customizeContainer }}</code></pre>
-        <p class="mt-16">Stay aware that this also changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.</p>
+            Change the default container with the following option:</p>
+        <code>defaultContentElement: '#app-main'</code>
+        <p class="mt-16">Stay aware that this also changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>. It means that the container <em>should</em> be <code>fixed</code>.</p>
 
     </div>
 </template>
@@ -115,8 +112,12 @@ $link-focus-border: $primary;
 
 @import "~bulma";
 @import "~buefy";`,
-                customizeIcon: `Vue.use(Buefy, { defaultIconType: 'fa' })`,
-                customizeContainer: `Vue.use(Buefy, { defaultContentElement: '#app-main' }) // Change to whatever your container is`
+                globalOptions:
+`Vue.use(Buefy, {
+    option1: value,
+    option2: value,
+    ...
+})`
             }
         },
         filters: {
