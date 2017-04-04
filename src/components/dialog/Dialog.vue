@@ -23,7 +23,7 @@
                             :color="type"
                             both
                             size="is-large"
-                            v-if="icon && showIcon">
+                            v-if="icon && hasIcon">
                         </b-icon>
                         <span v-html="message"></span>
                     </section>
@@ -50,7 +50,7 @@
         props: {
             title: String,
             message: String,
-            showIcon: Boolean,
+            hasIcon: Boolean,
             type: {
                 type: String,
                 default: 'is-primary'

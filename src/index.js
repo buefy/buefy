@@ -2,6 +2,7 @@ import { Checkbox, CheckboxGroup } from './components/checkbox'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import Icon from './components/icon'
+import Input from './components/input'
 import Message from './components/message'
 import Notification from './components/notification'
 import Pagination from './components/pagination'
@@ -18,6 +19,7 @@ const components = {
     Checkbox,
     CheckboxGroup,
     Icon,
+    Input,
     Message,
     Notification,
     Pagination,

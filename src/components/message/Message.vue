@@ -10,7 +10,7 @@
                 both
                 :class="type"
                 size="is-large"
-                v-if="icon && showIcon">
+                v-if="icon && hasIcon">
             </b-icon>
             <p><slot></slot></p>
         </div>
@@ -32,7 +32,7 @@
                 default: true
             },
             type: String,
-            showIcon: Boolean
+            hasIcon: Boolean
         },
         data() {
             return {

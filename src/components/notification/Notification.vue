@@ -5,7 +5,7 @@
             :icon="icon"
             both
             size="is-large"
-            v-if="icon && showIcon">
+            v-if="icon && hasIcon">
         </b-icon>
         <div class="content">
             <slot></slot>
@@ -27,7 +27,7 @@
                 default: true
             },
             type: String,
-            showIcon: Boolean
+            hasIcon: Boolean
         },
         data() {
             return {

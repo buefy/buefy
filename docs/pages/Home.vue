@@ -4,6 +4,16 @@
             <h1 class="title mb-48">Componentes</h1>
 
             <hr>
+            <!--<div class="field has-addons">-->
+            <b-input v-model="input" type="textarea"></b-input>
+            <p class="control"><button class="button is-primary">ADASD</button></p>
+            <b-input v-model="input" has-icon-right>
+                <b-icon icon="clear"></b-icon>
+            </b-input>
+            <!--</div>-->
+            {{ input }}
+
+            <hr>
             <h2 class="subtitle">Dialog</h2>
             <button class="button" @click="alertDialog">Alert</button>
             <button class="button" @click="alertDialogWTitle">Alert with title</button>
@@ -37,7 +47,7 @@
                 Success notification
             </b-notification>
 
-            <b-notification type="is-success" show-icon>
+            <b-notification type="is-success" has-icon>
                 Success notification with icon
             </b-notification>
 
@@ -51,7 +61,7 @@
                 Danger message
             </b-message>
 
-            <b-message title="Hello World" type="is-danger" show-icon>
+            <b-message title="Hello World" type="is-danger" has-icon>
                 Danger message with icon
             </b-message>
 
@@ -203,6 +213,7 @@
     export default {
         data() {
             return {
+                input: '',
                 checkbox: true,
                 checkboxGroup: ['Kobe'],
                 radioGroup: 'Wade',
@@ -295,7 +306,7 @@
                     message: 'Are you sure you want to <strong>delete</strong> your account? This action cannot be undone.',
                     confirmText: 'Delete Account',
                     type: 'is-danger',
-                    showIcon: true,
+                    hasIcon: true,
                     onConfirm: () => {
                         this.$toast.open({
                             message: 'Account deleted!'
