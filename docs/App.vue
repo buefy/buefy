@@ -105,6 +105,9 @@
         color: $primary !important;
     }
 
+    pre {
+        white-space: pre-wrap;
+    }
     .hljs {
         background: inherit;
         color: inherit;

@@ -48,45 +48,6 @@
             <button class="button" @click="promptDialog">Prompt</button>
 
             <hr>
-            <h2 class="subtitle">Snackbar</h2>
-            <button class="button" @click="snackbar">Default Snackbar</button>
-            <button class="button is-info" @click="infoSnackbar">Snackbar Blue Action</button>
-            <button class="button is-warning" @click="warningSnackbar">Snackbar Yellow Action</button>
-            <button class="button is-danger" @click="dangerSnackbar">Snackbar Red Action</button>
-
-            <hr>
-            <h2 class="subtitle">Notification</h2>
-            <b-notification>
-                Default notification
-            </b-notification>
-
-            <b-notification type="is-success">
-                Success notification
-            </b-notification>
-
-            <b-notification type="is-success" has-icon>
-                Success notification with icon
-            </b-notification>
-
-            <hr>
-            <h2 class="subtitle">Message</h2>
-            <b-message title="Hello World">
-                Default message
-            </b-message>
-
-            <b-message title="Hello World" type="is-danger">
-                Danger message
-            </b-message>
-
-            <b-message title="Hello World" type="is-danger" has-icon>
-                Danger message with icon
-            </b-message>
-
-            <b-message type="is-danger">
-                Danger message body only — automatically non-closable
-            </b-message>
-
-            <hr>
             <h2 class="subtitle">Switch</h2>
             <div class="mb-8">
                 <b-switch>Default</b-switch>
@@ -242,35 +203,6 @@
             pageChanged(value) {
                 this.pagination = value
             },
-            snackbar() {
-                this.$snackbar.open({
-                    message: 'Default Snackbar, the button is a green \'OK\' and it closes'
-                })
-            },
-            infoSnackbar() {
-                this.$snackbar.open({
-                    message: 'Snackbar with blue action and positioned on top',
-                    type: 'is-info',
-                    actionText: 'Retry',
-                    position: 'top',
-                    onAction: () => window.alert('Action clicked!')
-                })
-            },
-            warningSnackbar() {
-                this.$snackbar.open({
-                    message: 'Snackbar with yellow action and positioned on bottom',
-                    type: 'is-warning',
-                    position: 'bottom'
-                })
-            },
-            dangerSnackbar() {
-                this.$snackbar.open({
-                    message: 'Snackbar with red action and positioned on top-left',
-                    type: 'is-danger',
-                    actionText: 'Undo',
-                    position: 'top-left'
-                })
-            },
 
             alertDialog() {
                 this.$dialog.alert({
@@ -292,7 +224,7 @@
             confirmDialogCustom() {
                 this.$dialog.confirm({
                     title: 'Privacy Politics',
-                    message: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit, ac scelerisque diam velit in nisl. Nunc maximus ex non laoreet semper. Nunc scelerisque, libero sit amet pretium dignissim, augue purus placerat justo, sit amet porttitor dui metus in nisl. Nulla non leo placerat, porta metus eu, laoreet risus. Etiam lacinia, purus eu luctus maximus, elit ex viverra tellus, sit amet sodales quam dui nec odio. Nullam porta mollis est. Quisque aliquet malesuada fringilla. Pellentesque volutpat lacus at ante posuere, non pulvinar ante porta. Proin viverra eu massa nec porta. Aliquam rhoncus velit quis sem hendrerit, ut dictum nisl accumsan. Maecenas erat enim, scelerisque non ligula ac, eleifend venenatis ligula. Praesent molestie mauris sed elit posuere, non malesuada libero gravida. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. ',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit, ac scelerisque diam velit in nisl. Nunc maximus ex non laoreet semper. Nunc scelerisque, libero sit amet pretium dignissim, augue purus placerat justo, sit amet porttitor dui metus in nisl. Nulla non leo placerat, porta metus eu, laoreet risus. Etiam lacinia, purus eu luctus maximus, elit ex viverra tellus, sit amet sodales quam dui nec odio. Nullam porta mollis est. Quisque aliquet malesuada fringilla. Pellentesque volutpat lacus at ante posuere, non pulvinar ante porta. Proin viverra eu massa nec porta. Aliquam rhoncus velit quis sem hendrerit, ut dictum nisl accumsan. Maecenas erat enim, scelerisque non ligula ac, eleifend venenatis ligula. Praesent molestie mauris sed elit posuere, non malesuada libero gravida. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. ',
                     cancelText: 'Disagree',
                     confirmText: 'Agree',
                     type: 'is-success'

@@ -58,6 +58,7 @@
         methods: {
             close() {
                 this.isActive = false
+                this.$emit('close')
             }
         }
     }

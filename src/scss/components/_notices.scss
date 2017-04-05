@@ -64,6 +64,9 @@
         pointer-events: auto;
         background: $dark;
         color: $dark-invert;
+        .text {
+            text-align: left;
+        }
 
         @include mobile() {
             width: 100%;

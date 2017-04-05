@@ -28,9 +28,7 @@
             },
             onAction: {
                 type: Function,
-                default: function () {
-                    this.close()
-                }
+                default: () => {}
             }
         },
         data() {
@@ -49,6 +47,7 @@
             },
             action() {
                 this.onAction()
+                this.close()
             }
         },
         beforeMount() {

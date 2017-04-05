@@ -3,8 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-// const Documentation = (r) => require.ensure([], () => r(require('../pages/documentation/Documentation')))
-
 const Home = (r) => require(['../pages/Home'], r)
 
 const Documentation = (r) => require(['../pages/documentation/Documentation'], r)

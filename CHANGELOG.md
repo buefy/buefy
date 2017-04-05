@@ -1,6 +1,6 @@
 # Buefy Changelog
 
-## 0.0.4
+## 0.1.0
 
 * **New component: Input**
 * **New component: Field**
