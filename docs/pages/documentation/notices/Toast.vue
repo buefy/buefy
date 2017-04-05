@@ -8,13 +8,21 @@
             <div class="column">
                 <p>They have a slightly transparency and are queued to not confuse the user.</p>
                 <p class="content"><small><strong>Note:</strong> They queue with <router-link to="/documentation/notices/snackbar">Snackbars</router-link> as well.</small></p>
-                <button class="button content" @click="toast">Toast (default)</button>
-                <button class="button content is-success" @click="success">Toast (custom)</button>
-                <button class="button content is-danger" @click="danger">Toast (custom)</button>
+                <button class="button content" @click="toast">
+                    Toast (default)
+                </button>
+
+                <button class="button content is-success" @click="success">
+                    Toast (custom)
+                </button>
+
+                <button class="button content is-danger" @click="danger">
+                    Toast (custom)
+                </button>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
             </div>
         </div>
 
@@ -58,10 +66,13 @@
                 props: [
                     {
                         name: '<code>type</code>',
-                        description: 'Color scheme',
+                        description: 'Type (color) of the toast',
                         type: 'String',
-                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>, <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>, <code>is-warning</code>, <code>is-danger</code>, and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '<code>is-dark</code>'
+                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                            <code>is-warning</code>, <code>is-danger</code>,
+                            and any other colors you've set in the <code>$colors</code> list on Sass`,
+                        default: '<code>is-primary</code>'
                     },
                     {
                         name: '<code>message</code>',
@@ -92,33 +103,41 @@
                         default: '—'
                     }
                 ],
-                template:
-`<button class="button" @click="toast">Toast (default)</button>
-<button class="button is-success" @click="success">Toast (custom)</button>
-<button class="button is-danger" @click="danger">Toast (custom)</button>`,
-                code:
-`export default {
-    methods: {
-        toast() {
-            this.$toast.open({
-                message: 'Something happened'
-            })
-        },
-        success() {
-            this.$toast.open({
-                message: 'Something happened correctly!',
-                type: 'is-success'
-            })
-        },
-        danger() {
-            this.$toast.open({
-                message: \`Something's not good, also I'm on bottom\`,
-                position: 'bottom',
-                type: 'is-danger'
-            })
-        }
-    }
-}`
+                template: `
+                    <button class="button content" @click="toast">
+                        Toast (default)
+                    </button>
+
+                    <button class="button content is-success" @click="success">
+                        Toast (custom)
+                    </button>
+
+                    <button class="button content is-danger" @click="danger">
+                        Toast (custom)
+                    </button>`,
+                code: `
+                    export default {
+                        methods: {
+                            toast() {
+                                this.$toast.open({
+                                    message: 'Something happened'
+                                })
+                            },
+                            success() {
+                                this.$toast.open({
+                                    message: 'Something happened correctly!',
+                                    type: 'is-success'
+                                })
+                            },
+                            danger() {
+                                this.$toast.open({
+                                    message: \`Something's not good, also I'm on bottom\`,
+                                    position: 'bottom',
+                                    type: 'is-danger'
+                                })
+                            }
+                        }
+                    }`
             }
         },
         methods: {

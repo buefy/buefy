@@ -2,8 +2,8 @@
     <span
         class="tooltip"
         :data-label="label"
-        :class="[type, position, multilineSize, {
-            'is-rounded': rounded,
+        :class="[type, position, size, {
+            'is-square': square,
             'is-animated': animated,
             'is-always': always,
             'is-multiline': multilined,
@@ -28,13 +28,10 @@
             },
             always: Boolean,
             animated: Boolean,
-            rounded: {
-                type: Boolean,
-                default: true
-            },
+            square: Boolean,
             dashed: Boolean,
             multilined: Boolean,
-            multilineSize: {
+            size: {
                 type: String,
                 default: 'is-medium'
             }

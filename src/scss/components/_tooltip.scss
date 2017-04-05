@@ -1,10 +1,10 @@
 $arrow-size: 6px;
-$arrow-margin: 4px;
+$arrow-margin: 2px;
 
 $multiline-sizes: (
-    small: 120px,
-    medium: 180px,
-    large: 240px
+    small: 180px,
+    medium: 240px,
+    large: 300px
 );
 
 @mixin tooltip-arrow($direction, $color) {
@@ -83,18 +83,13 @@ $multiline-sizes: (
     position: relative;
     display: inline-flex;
 
-    &.is-animated {
-        &:before,
-        &:after {
-            transition: opacity $speed $easing, visibility $speed $easing;
-        }
-    }
     &:before,
     &:after {
         position: absolute;
         content: '';
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
     }
     &:before {
         z-index: 889;
@@ -112,8 +107,8 @@ $multiline-sizes: (
         z-index: 888;
         white-space: nowrap;
     }
-    &:hover:before,
-    &:hover:after {
+    &:not([data-label=""]):hover:before,
+    &:not([data-label=""]):hover:after {
         opacity: 1;
         visibility: visible;
     }
@@ -136,6 +131,24 @@ $multiline-sizes: (
     &.is-dashed {
         border-bottom: 1px dashed $grey-light;
         cursor: default;
+    }
+    &:not([data-label=""]).is-always {
+        &:before,
+        &:after {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    &.is-square {
+        &:after {
+            border-radius: 0;
+        }
+    }
+    &.is-animated {
+        &:before,
+        &:after {
+            transition: opacity $speed $easing, visibility $speed $easing;
+        }
     }
 
     @include tooltip('is-top');

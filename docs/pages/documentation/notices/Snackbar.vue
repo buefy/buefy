@@ -1,20 +1,28 @@
 <template>
     <div>
         <h1 class="title is-spaced">Snackbar</h1>
-        <h2 class="subtitle">When Dialog seems a bit overkill for the task, Snackbars are good candidates</h2>
+        <h2 class="subtitle">When a Dialog seems a bit overkill for the task, Snackbars are good candidates</h2>
         <hr>
 
         <div class="columns">
             <div class="column">
                 <p>They can only have one button, and are queued to not confuse the user.</p>
                 <p class="content"><small><strong>Note:</strong> They queue with <router-link to="/documentation/notices/toast">Toasts</router-link> as well.</small></p>
-                <button class="button content" @click="snackbar">Snackbar (default)</button>
-                <button class="button content is-warning" @click="warning">Snackbar (custom)</button>
-                <button class="button content is-danger" @click="danger">Snackbar (custom)</button>
+                <button class="button content" @click="snackbar">
+                    Snackbar (default)
+                </button>
+
+                <button class="button content is-warning" @click="warning">
+                    Snackbar (custom)
+                </button>
+
+                <button class="button content is-danger" @click="danger">
+                    Snackbar (custom)
+                </button>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
             </div>
         </div>
 
@@ -58,10 +66,13 @@
                 props: [
                     {
                         name: '<code>type</code>',
-                        description: 'Color scheme',
+                        description: 'Type (color) of the action button',
                         type: 'String',
-                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>, <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>, <code>is-warning</code>, <code>is-danger</code>, and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '<code>is-success</code>'
+                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                            <code>is-warning</code>, <code>is-danger</code>,
+                            and any other colors you've set in the <code>$colors</code> list on Sass`,
+                        default: '<code>is-primary</code>'
                     },
                     {
                         name: '<code>message</code>',
@@ -106,41 +117,49 @@
                         default: '—'
                     }
                 ],
-                template:
-`<button class="button content" @click="snackbar">Snackbar (default)</button>
-<button class="button content is-warning" @click="warning">Snackbar (custom)</button>
-<button class="button content is-danger" @click="danger">Snackbar (custom)</button>`,
-                code:
-`export default {
-    methods: {
-        snackbar() {
-            this.$snackbar.open({
-                message: \`Default, positioned bottom-right with a green 'OK' button\`
-            })
-        },
-        warning() {
-            this.$snackbar.open({
-                message: 'Yellow button and positioned top-left',
-                type: 'is-warning',
-                actionText: 'Retry',
-                position: 'top-left'
-            })
-        },
-        danger() {
-            this.$snackbar.open({
-                message: 'Snackbar with red action, positioned on bottom-left and a callback',
-                type: 'is-danger',
-                actionText: 'Undo',
-                position: 'bottom-left',
-                onAction: () => {
-                    this.$toast.open({
-                        message: 'Action pressed'
-                    })
-                }
-            })
-        }
-    }
-}`
+                template: `
+                    <button class="button content" @click="snackbar">
+                        Snackbar (default)
+                    </button>
+
+                    <button class="button content is-warning" @click="warning">
+                        Snackbar (custom)
+                    </button>
+
+                    <button class="button content is-danger" @click="danger">
+                        Snackbar (custom)
+                    </button>`,
+                code: `
+                    export default {
+                        methods: {
+                            snackbar() {
+                                this.$snackbar.open({
+                                    message: \`Default, positioned bottom-right with a green 'OK' button\`
+                                })
+                            },
+                            warning() {
+                                this.$snackbar.open({
+                                    message: 'Yellow button and positioned top-left',
+                                    type: 'is-warning',
+                                    actionText: 'Retry',
+                                    position: 'top-left'
+                                })
+                            },
+                            danger() {
+                                this.$snackbar.open({
+                                    message: 'Snackbar with red action, positioned on bottom-left and a callback',
+                                    type: 'is-danger',
+                                    actionText: 'Undo',
+                                    position: 'bottom-left',
+                                    onAction: () => {
+                                        this.$toast.open({
+                                            message: 'Action pressed'
+                                        })
+                                    }
+                                })
+                            }
+                        }
+                    }`
             }
         },
         methods: {

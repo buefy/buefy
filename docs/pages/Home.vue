@@ -33,21 +33,6 @@
             <b-field><b-input type="password" value="teste" password-reveal></b-input></b-field>
 
             <hr>
-            <h2 class="subtitle">Dialog</h2>
-            <button class="button" @click="alertDialog">Alert</button>
-            <button class="button" @click="alertDialogWTitle">Alert with title</button>
-
-            <br><br>
-
-            <button class="button" @click="confirmDialog">Confirm</button>
-            <button class="button" @click="confirmDialogCustom">Confirm customized</button>
-            <button class="button" @click="confirmDialogCustomWCallback">Confirm customized with callback</button>
-
-            <br><br>
-
-            <button class="button" @click="promptDialog">Prompt</button>
-
-            <hr>
             <h2 class="subtitle">Switch</h2>
             <div class="mb-8">
                 <b-switch>Default</b-switch>
@@ -123,66 +108,6 @@
             <br>
 
             <b-pagination :total="200" :current="pagination" @change="pageChanged" simple></b-pagination>
-
-            <hr>
-            <h2 class="subtitle">Tooltip</h2>
-
-            <b-tooltip label="Tooltip left" dashed>Dashed tooltip</b-tooltip>
-
-            <br><br>
-
-            <b-tooltip label="Tooltip left" position="is-left">
-                <button class="button is-dark">Left</button>
-            </b-tooltip>
-
-            <b-tooltip label="Tooltip top">
-                <button class="button is-dark">Top (default)</button>
-            </b-tooltip>
-            <b-tooltip label="Tooltip bottom" position="is-bottom">
-                <button class="button is-dark">Bottom</button>
-            </b-tooltip>
-
-            <b-tooltip label="Tooltip right" position="is-right">
-                <button class="button is-dark">Right</button>
-            </b-tooltip>
-
-            <br><br>
-
-            <b-tooltip label="Tooltip small multilined" multilined multiline-size="is-small">
-                <button class="button is-dark">Small Multiline</button>
-            </b-tooltip>
-
-            <b-tooltip label="Tooltip multilined, probably because it's too long" multilined>
-                <button class="button is-dark">Medium Multiline (default)</button>
-            </b-tooltip>
-
-            <b-tooltip
-                label="Tooltip large multilined, because it's really long to be on a medium size. Did I tell you it's really long? Not sure."
-                position="is-bottom"
-                multilined
-                multiline-size="is-large">
-                <button class="button is-dark">Large Bottom Multiline</button>
-            </b-tooltip>
-
-            <br><br>
-
-            <b-tooltip label="Maybe you like a little animation" position="is-right" animated>
-                <button class="button">Animated</button>
-            </b-tooltip>
-
-            <br><br>
-
-            <b-tooltip label="Primary is the default color">
-                <button class="button">Default</button>
-            </b-tooltip>
-
-            <b-tooltip label="You prefer dark?" type="is-dark">
-                <button class="button">Dark</button>
-            </b-tooltip>
-
-            <b-tooltip label="Or light?" type="is-light">
-                <button class="button">Light</button>
-            </b-tooltip>
         </div>
     </section>
 </template>
@@ -202,59 +127,6 @@
         methods: {
             pageChanged(value) {
                 this.pagination = value
-            },
-
-            alertDialog() {
-                this.$dialog.alert({
-                    message: 'Everything looks <strong>fine</strong>!'
-                })
-            },
-            alertDialogWTitle() {
-                this.$dialog.alert({
-                    title: 'Title Alert',
-                    message: 'I have a title! And a custom button!',
-                    confirmText: 'Cool!'
-                })
-            },
-            confirmDialog() {
-                this.$dialog.confirm({
-                    message: 'Continue on this task?'
-                })
-            },
-            confirmDialogCustom() {
-                this.$dialog.confirm({
-                    title: 'Privacy Politics',
-                    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit, ac scelerisque diam velit in nisl. Nunc maximus ex non laoreet semper. Nunc scelerisque, libero sit amet pretium dignissim, augue purus placerat justo, sit amet porttitor dui metus in nisl. Nulla non leo placerat, porta metus eu, laoreet risus. Etiam lacinia, purus eu luctus maximus, elit ex viverra tellus, sit amet sodales quam dui nec odio. Nullam porta mollis est. Quisque aliquet malesuada fringilla. Pellentesque volutpat lacus at ante posuere, non pulvinar ante porta. Proin viverra eu massa nec porta. Aliquam rhoncus velit quis sem hendrerit, ut dictum nisl accumsan. Maecenas erat enim, scelerisque non ligula ac, eleifend venenatis ligula. Praesent molestie mauris sed elit posuere, non malesuada libero gravida. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. ',
-                    cancelText: 'Disagree',
-                    confirmText: 'Agree',
-                    type: 'is-success'
-                })
-            },
-            confirmDialogCustomWCallback() {
-                this.$dialog.confirm({
-                    title: 'Deleting account',
-                    message: 'Are you sure you want to <strong>delete</strong> your account? This action cannot be undone.',
-                    confirmText: 'Delete Account',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    onConfirm: () => {
-                        this.$toast.open({
-                            message: 'Account deleted!'
-                        })
-                    }
-                })
-            },
-            promptDialog() {
-                this.$dialog.prompt({
-                    message: `What's your name?`,
-                    maxlength: 20,
-                    placeholder: 'e.g. John Doe',
-                    onConfirm: (value) => {
-                        this.$toast.open({
-                            message: 'Your name is: ' + value
-                        })
-                    }
-                })
             }
         }
     }

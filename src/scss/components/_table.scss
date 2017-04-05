@@ -12,10 +12,12 @@
 
         th {
             font-weight: $weight-semibold;
-            &.is-current-sort,
-            &.is-sortable:hover {
+            &.is-current-sort {
                 border-color: $grey;
                 font-weight: $weight-bold;
+            }
+            &.is-sortable:hover {
+                border-color: $grey;
             }
             &.is-sortable,
             &.is-sortable .th-wrap {
@@ -51,7 +53,7 @@
         tr {
             &.is-selected,
             &.is-selected:hover {
-                background: $primary;
+                background: $primary !important;
                 color: $primary-invert;
                 .checkbox input:not(:checked) + span:before {
                     border-color: $primary-invert;

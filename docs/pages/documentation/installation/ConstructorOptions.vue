@@ -5,8 +5,9 @@
 
         <hr>
 
-        <h3 class="subtitle">Example</h3>
-        <pre v-highlight><code class="javascript">{{ usage }}</code></pre>
+        <div class="example">
+            <pre v-highlight><code class="javascript">{{ usage | pre }}</code></pre>
+        </div>
 
         <hr>
 
@@ -44,23 +45,27 @@
     export default {
         data() {
             return {
-                usage:
-`Vue.use(Buefy, {
-    defaultIconPack: 'fa',
-    defaultContentElement: '#content',
-    ...
-})`,
+                usage: `
+                    Vue.use(Buefy, {
+                        defaultIconPack: 'fa',
+                        defaultContentElement: '#content',
+                        ...
+                    })`,
                 options: [
                     {
                         name: '<code>defaultIconPack</code>',
-                        description: 'Icon pack used internally and on the Icon component — <a href="https://material.io/icons/" target="_blank">Material Design Icons</a> or <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>',
+                        description: `Icon pack used internally and on the Icon component —
+                            <a href="https://material.io/icons/" target="_blank">Material Design Icons</a> or
+                            <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>`,
                         type: 'String',
                         values: '<code>mdi</code>, <code>fa</code>',
                         default: '<code>mdi</code>'
                     },
                     {
                         name: '<code>defaultContentElement</code>',
-                        description: 'Default container for floating Notices (Toasts & Snackbars). Note that this also changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>. Meaning that the container <em>should</em> be <code>fixed</code>.',
+                        description: `Default container for floating Notices (Toasts & Snackbars). Note that this also
+                            changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
+                            Meaning that the container <em>should</em> be <code>fixed</code>.`,
                         type: 'String',
                         values: '—',
                         default: '—'

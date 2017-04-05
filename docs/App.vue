@@ -74,7 +74,7 @@
                 const height = 400
                 const left = (window.screen.width - width) / 2
                 const top = (window.screen.height - height) / 2
-                const url = `https://twitter.com/share?url=${window.location.href}&text=Buefy: lightweight Bulma UI components for Vue.js&hashtags=buefy&via=rafaelpimpa`
+                const url = `https://twitter.com/share?url=${encodeURI(window.location.href)}&text=Buefy: lightweight Bulma UI components for Vue.js&hashtags=buefy&via=rafaelpimpa`
                 const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
 
                 window.open(url, '', opts)
@@ -107,6 +107,10 @@
 
     pre {
         white-space: pre-wrap;
+
+        code {
+            max-height: 600px;
+        }
     }
     .hljs {
         background: inherit;

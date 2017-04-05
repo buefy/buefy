@@ -35,7 +35,7 @@
                 </b-notification>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
             </div>
         </div>
 
@@ -101,10 +101,13 @@
                 props: [
                     {
                         name: '<code>type</code>',
-                        description: 'Color scheme',
+                        description: 'Type (color) of the notification',
                         type: 'String',
-                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>, <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>, <code>is-warning</code>, <code>is-danger</code>, and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '—'
+                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                            <code>is-warning</code>, <code>is-danger</code>,
+                            and any other colors you've set in the <code>$colors</code> list on Sass`,
+                        default: '<code>is-primary</code>'
                     },
                     {
                         name: '<code>closable</code>',
@@ -124,38 +127,38 @@
                 events: [
                     {
                         name: '<code>close</code>',
-                        description: 'When user closes the notification',
+                        description: 'Triggers when user closes the notification',
                         parameters: '—'
                     }
                 ],
-                template:
-`<b-notification>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>
+                template: `
+                    <b-notification>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>
 
-<b-notification type="is-success">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>
+                    <b-notification type="is-success">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>
 
-<b-notification type="is-danger">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>
+                    <b-notification type="is-danger">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>
 
-<b-notification type="is-info" has-icon>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>
+                    <b-notification type="is-info" has-icon>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>
 
-<b-notification type="is-success" has-icon>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>
+                    <b-notification type="is-success" has-icon>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>
 
-<b-notification type="is-warning" has-icon>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>
+                    <b-notification type="is-warning" has-icon>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>
 
-<b-notification type="is-danger" has-icon>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-</b-notification>`
+                    <b-notification type="is-danger" has-icon>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                    </b-notification>`
             }
         }
     }

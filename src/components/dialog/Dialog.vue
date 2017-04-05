@@ -29,9 +29,9 @@
                         <b-input
                             v-if="hasInput"
                             ref="input"
-                            :placeholder="placeholder"
-                            :maxlength="maxlength"
-                            :name="name"
+                            :placeholder="inputPlaceholder"
+                            :maxlength="inputMaxlength"
+                            :name="inputName"
                             @keyup.enter.native="confirm">
                         </b-input>
                     </section>
@@ -77,12 +77,18 @@
                 type: Boolean,
                 default: true
             },
-            hasInput: Boolean,
-            placeholder: String,
-            name: String,
-            maxlength: [Number, String],
-            onConfirm: Function,
-            onCancel: Function
+            hasInput: Boolean, // Used internally to know if it's prompt
+            inputPlaceholder: String,
+            inputName: String,
+            inputMaxlength: [Number, String],
+            onConfirm: {
+                type: Function,
+                default: () => {}
+            },
+            onCancel: {
+                type: Function,
+                default: () => {}
+            }
         },
         data() {
             return {
@@ -107,18 +113,14 @@
         },
         methods: {
             confirm() {
-                if (this.onConfirm) {
-                    const value = this.$refs.input ? this.$refs.input.newValue : null
-                    this.onConfirm(value)
-                }
+                const value = this.$refs.input ? this.$refs.input.newValue : null
+                this.onConfirm(value)
                 this.close()
             },
             cancel() {
                 if (!this.canCancel) return
 
-                if (this.onCancel) {
-                    this.onCancel()
-                }
+                this.onCancel()
                 this.close()
             },
             close() {

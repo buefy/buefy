@@ -13,9 +13,10 @@
                     <div class="container">
                         <ul>
                             <router-link to="/documentation/installation" tag="li"><a>Installation</a></router-link>
+                            <router-link to="/documentation/general" tag="li"><a>General</a></router-link>
                             <router-link to="/documentation/notices" tag="li"><a>Notices</a></router-link>
-                            <router-link to="/documentation/form-elements" tag="li"><a>Form Elements</a></router-link>
-                            <router-link to="/documentation/navigation" tag="li"><a>Navigation</a></router-link>
+                            <router-link to="/documentation/form" tag="li"><a>Form</a></router-link>
+                            <router-link to="/documentation/data" tag="li"><a>Data</a></router-link>
                         </ul>
                     </div>
                 </nav>

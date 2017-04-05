@@ -1,6 +1,6 @@
 <template>
     <div class="b-table">
-        <table class="table" :class="{ 'is-bordered': bordered, 'is-striped': striped, 'is-narrow': narrow }">
+        <table class="table" :class="{ 'is-bordered': bordered, 'is-striped': striped, 'is-narrow': narrowed }">
             <slot></slot>
             <thead>
                 <tr>
@@ -23,7 +23,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody :style="{ height: height + 'px' }">
+            <tbody>
                 <tr
                     v-for="(item, index) in visibleData"
                     @click="selectItem(item)"
@@ -56,7 +56,7 @@
                     <b-pagination
                         :total="newData.length"
                         :per-page="perPage"
-                        :simple="simplePagination"
+                        :simple="paginationSimple"
                         :current="currentPage"
                         @change="pageChanged">
                     </b-pagination>
@@ -80,17 +80,22 @@
             [Checkbox.name]: Checkbox
         },
         props: {
-            data: Array,
-            height: [Number, String],
+            data: {
+                type: Array,
+                default: []
+            },
             bordered: Boolean,
             striped: Boolean,
-            narrow: Boolean,
+            narrowed: Boolean,
             selectable: Boolean,
             checkable: Boolean,
             defaultSort: String,
             paginated: Boolean,
-            perPage: [Number, String],
-            simplePagination: Boolean,
+            perPage: {
+                type: [Number, String],
+                default: 20
+            },
+            paginationSimple: Boolean,
             html: Boolean
         },
         data() {
@@ -106,6 +111,11 @@
             data(value) {
                 this.newData = value
                 this.resetCurrentSortColumn()
+            },
+            selectable(val) {
+                if (!val) {
+                    this.selectedItem = {}
+                }
             }
         },
         computed: {
@@ -113,7 +123,7 @@
                 if (!this.paginated) return this.newData
 
                 const currentPage = this.currentPage || 1
-                const perPage = this.perPage || 20
+                const perPage = this.perPage
 
                 if (this.newData.length <= perPage) {
                     return this.newData
@@ -161,7 +171,7 @@
                 })
 
                 this.$emit('check', this.checkedItems)
-                this.$emit('check-all')
+                this.$emit('check-all', this.checkedItems)
             },
             checkItem(item, isChecked) {
                 if (isChecked) {
@@ -183,6 +193,7 @@
             },
 
             selectItem(item, index) {
+                this.$emit('click', item)
                 if (!this.selectable || this.selectedItem.item === item) return
 
                 // Emit new and old item
