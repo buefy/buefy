@@ -7,7 +7,7 @@
         <div class="columns">
             <div class="column">
                 <p>They have a slightly transparency and are queued to not confuse the user.</p>
-                <p class="content"><small><strong>Note:</strong> They queue with <router-link to="/documentation/notices/snackbar">Snackbars</router-link> as well.</small></p>
+                <p class="content"><small><strong>Note:</strong> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>
                 <button class="button content" @click="toast">
                     Toast (default)
                 </button>

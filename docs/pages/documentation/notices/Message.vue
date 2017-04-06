@@ -167,13 +167,13 @@
                     },
                     {
                         name: '<code>closable</code>',
-                        description: 'If the message can be closed — only works if has a title',
+                        description: 'If the message can be closed — works if has a <code>title</code>',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>true</code>'
                     },
                     {
-                        name: '<code>hasIcon</code>',
+                        name: '<code>has-icon</code>',
                         description: 'Adds an icon on the left side depending on the <code>type</code>',
                         type: 'Boolean',
                         values: '—',

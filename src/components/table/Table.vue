@@ -35,8 +35,8 @@
                     </td>
                     <td v-for="column in columns" :class="{ 'has-text-right': column.isNumeric }" :style="{ width: column.width + 'px' }">
                         <template v-for="(cell, key) in item" v-if="key === column.field">
-                            <span v-if="html" v-html="html ? cell : null"></span>
-                            {{ !html ? cell : null }}
+                            <span v-if="html" v-html="html ? column.format(cell, item) : null"></span>
+                            {{ !html ? column.format(cell, item) : null }}
                         </template>
                     </td>
 
@@ -67,7 +67,6 @@
 </template>
 
 <script>
-    import sortBy from 'lodash/sortBy'
     import Pagination from '../pagination'
     import Icon from '../icon'
     import { Checkbox } from '../checkbox'
@@ -89,7 +88,7 @@
             narrowed: Boolean,
             selectable: Boolean,
             checkable: Boolean,
-            defaultSort: String,
+            defaultSort: [String, Array],
             paginated: Boolean,
             perPage: {
                 type: [Number, String],
@@ -104,18 +103,18 @@
                 newData: this.data,
                 selectedItem: {},
                 checkedItems: [],
-                currentPage: 1
+                currentPage: 1,
+                isTableComponent: true // Used by TableColumn
             }
         },
         watch: {
             data(value) {
                 this.newData = value
+                console.log(this.newData === value)
                 this.resetCurrentSortColumn()
             },
             selectable(val) {
-                if (!val) {
-                    this.selectedItem = {}
-                }
+                if (!val) this.selectedItem = {}
             }
         },
         computed: {
@@ -142,13 +141,30 @@
             }
         },
         methods: {
+            sortBy(array, key, fn) {
+                // Sorting without mutating original data
+                if (!fn) {
+                    return [...array].sort((a, b) => {
+                        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) return 0
+
+                        const newA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key]
+                        const newB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key]
+
+                        return newA > newB ? 1 : -1
+                    })
+                } else {
+                    if (typeof fn !== 'function') return
+
+                    return [...array].sort(fn)
+                }
+            },
             sort(column) {
                 if (!column.isSortable) return
 
                 if (!column.isCurrentSort) {
                     this.resetCurrentSortColumn()
                     column.isReverse = false
-                    this.newData = sortBy(this.newData, column.field)
+                    this.newData = this.sortBy(this.newData, column.field, column.customSort)
                 } else {
                     column.isReverse = !column.isReverse
                     this.newData.reverse()
@@ -206,9 +222,17 @@
                 this.currentPage = page > 0 ? page : 1
             },
             initSort() {
+                if (!this.defaultSort) return
+
+                const sortField = Array.isArray(this.defaultSort) ? this.defaultSort[0] : this.defaultSort
+                const direction = this.defaultSort[1] || ''
+
                 this.columns.forEach(column => {
-                    if (column.field === this.defaultSort) {
+                    if (column.field === sortField) {
                         this.sort(column)
+                        if (direction.toLowerCase() === 'desc') {
+                            this.sort(column)
+                        }
                     }
                 })
             }

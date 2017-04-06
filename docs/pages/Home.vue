@@ -80,34 +80,6 @@
                 <b-radio-button label="Disabled" disabled>Disabled</b-radio-button>
             </b-radio-group>
             {{ radioGroupButton }}
-
-            <hr>
-            <h2 class="subtitle">Pagination</h2>
-            <b-pagination :total="200" :current="pagination" @change="pageChanged"></b-pagination>
-
-            <br>
-
-            <b-pagination :total="200" :current="pagination" @change="pageChanged" position="is-centered"></b-pagination>
-
-            <br>
-
-            <b-pagination :total="200" :current="pagination" @change="pageChanged" position="is-right"></b-pagination>
-
-            <br>
-
-            <b-pagination :total="200" :current="pagination" @change="pageChanged" size="is-small"></b-pagination>
-
-            <br>
-
-            <b-pagination :total="200" :current="pagination" @change="pageChanged" size="is-medium"></b-pagination>
-
-            <br>
-
-            <b-pagination :total="200" :current="pagination" @change="pageChanged" size="is-large"></b-pagination>
-
-            <br>
-
-            <b-pagination :total="200" :current="pagination" @change="pageChanged" simple></b-pagination>
         </div>
     </section>
 </template>
@@ -120,13 +92,7 @@
                 checkbox: true,
                 checkboxGroup: ['Kobe'],
                 radioGroup: 'Wade',
-                radioGroupButton: 'James',
-                pagination: 1
-            }
-        },
-        methods: {
-            pageChanged(value) {
-                this.pagination = value
+                radioGroupButton: 'James'
             }
         }
     }

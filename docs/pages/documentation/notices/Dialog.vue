@@ -169,7 +169,7 @@
                     {
                         name: '<code>onConfirm</code>',
                         description: 'Callback function when the confirm button is clicked',
-                        type: 'Function',
+                        type: 'Function (value: String)',
                         values: '—',
                         default: '—'
                     },

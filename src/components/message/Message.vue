@@ -1,5 +1,5 @@
 <template>
-    <article class="message" v-show="isActive" :class="type">
+    <article class="message" :class="type">
         <div class="message-header" v-if="title">
             <p>{{ title }}</p>
             <button class="delete" v-if="closable" @click="close"></button>
@@ -34,11 +34,6 @@
             type: String,
             hasIcon: Boolean
         },
-        data() {
-            return {
-                isActive: true
-            }
-        },
         computed: {
             icon() {
                 switch (this.type) {
@@ -57,8 +52,10 @@
         },
         methods: {
             close() {
-                this.isActive = false
                 this.$emit('close')
+
+                this.$destroy()
+                this.$el.remove()
             }
         }
     }

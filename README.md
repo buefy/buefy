@@ -26,7 +26,7 @@ Not public yet.
 
 ## Quick Start
 
-**Note:** Already includes Bulma — the Buefy purple theme — if you want to use your own theme / variables go to the [customization section on the online documentation](https://buefy.github.io/#/documentation/installation/customization).
+**Note:** Already includes Bulma — the Buefy purple theme — if you want to use your own theme / variables go to the [customization section on the online documentation](https://buefy.github.io/#/documentation/customization).
 
 Import and use Buefy. You can also enable individual components:
 ```

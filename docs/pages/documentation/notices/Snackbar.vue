@@ -7,7 +7,7 @@
         <div class="columns">
             <div class="column">
                 <p>They can only have one button, and are queued to not confuse the user.</p>
-                <p class="content"><small><strong>Note:</strong> They queue with <router-link to="/documentation/notices/toast">Toasts</router-link> as well.</small></p>
+                <p class="content"><small><strong>Note:</strong> They queue with <router-link to="/documentation/toast">Toasts</router-link> as well.</small></p>
                 <button class="button content" @click="snackbar">
                     Snackbar (default)
                 </button>
@@ -142,7 +142,12 @@
                                     message: 'Yellow button and positioned top-left',
                                     type: 'is-warning',
                                     actionText: 'Retry',
-                                    position: 'top-left'
+                                    position: 'top-left',
+                                    onAction: () => {
+                                        this.$toast.open({
+                                            message: 'Action pressed'
+                                        })
+                                    }
                                 })
                             },
                             danger() {
@@ -173,7 +178,12 @@
                     message: 'Yellow button and positioned top-left',
                     type: 'is-warning',
                     actionText: 'Retry',
-                    position: 'top-left'
+                    position: 'top-left',
+                    onAction: () => {
+                        this.$toast.open({
+                            message: 'Action pressed'
+                        })
+                    }
                 })
             },
             danger() {

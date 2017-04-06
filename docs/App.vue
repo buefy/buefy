@@ -61,6 +61,8 @@
 </template>
 
 <script>
+    import { EventBus } from './main'
+
     export default {
         name: 'app',
         data() {
@@ -91,6 +93,9 @@
             })
             this.$router.afterEach((to, from) => {
                 this.$Progress.finish()
+            })
+            EventBus.$on('routeChange', () => {
+                this.isMenuActive = false
             })
         }
     }

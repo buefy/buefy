@@ -5,8 +5,13 @@ export default {
         label: String,
         width: [Number, String],
         field: String,
+        numeric: Boolean,
         sortable: Boolean,
-        numeric: Boolean
+        customSort: Function,
+        format: {
+            type: Function,
+            default: value => value
+        }
     },
 
     data() {
@@ -16,6 +21,10 @@ export default {
     },
 
     mounted() {
+        if (!this.$parent.isTableComponent) {
+            this.$destroy()
+            throw new Error('You should wrap the b-table-column in a b-table')
+        }
         this.$parent.columns.push(this.column)
     },
 
@@ -24,8 +33,10 @@ export default {
             label: this.label,
             width: this.width,
             field: this.field,
+            isNumeric: this.numeric,
             isSortable: this.sortable,
-            isNumeric: this.numeric
+            customSort: this.customSort,
+            format: this.format
         }
     },
 

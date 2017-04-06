@@ -8,7 +8,6 @@ import hljs from 'highlight.js'
 
 Vue.config.productionTip = false
 
-
 Vue.use(Buefy)
 
 Vue.use(VueProgressBar, {
@@ -63,6 +62,13 @@ Vue.filter('pre', (text) => {
     newText = newText.join('\r\n')
 
     return newText
+})
+
+export const EventBus = new Vue()
+
+router.beforeEach((to, from, next) => {
+    EventBus.$emit('routeChange')
+    next()
 })
 
 new Vue({

@@ -1,5 +1,5 @@
 <template>
-    <div class="notification" v-show="isActive" :class="type">
+    <div class="notification" :class="type">
         <button class="delete" v-if="closable" @click="close"></button>
         <b-icon
             :icon="icon"
@@ -29,11 +29,6 @@
             type: String,
             hasIcon: Boolean
         },
-        data() {
-            return {
-                isActive: true
-            }
-        },
         computed: {
             icon() {
                 switch (this.type) {
@@ -52,8 +47,10 @@
         },
         methods: {
             close() {
-                this.isActive = false
                 this.$emit('close')
+
+                this.$destroy()
+                this.$el.remove()
             }
         }
     }

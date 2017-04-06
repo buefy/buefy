@@ -5,7 +5,8 @@
         <hr>
 
         <div class="columns is-marginless">
-            <div class="column example is-8">
+            <div class="column is-8">
+
                 <div class="content">
                     <b-switch v-model="isBordered">Bordered</b-switch>
                     <b-switch v-model="isStriped">Striped</b-switch>
@@ -14,39 +15,45 @@
                     <b-switch v-model="isCheckable">Checkable</b-switch>
                     <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
                 </div>
-                <div class="field">
-                    <p class="control">
-                        <label class="label">Items per page</label>
-                        <span class="select">
-                            <select v-model="perPage">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                            </select>
-                        </span>
-                    </p>
+                <div class="content">
+                    <div class="field">
+                        <p class="control">
+                            <label class="label">Items per page</label>
+                            <span class="select">
+                                <select v-model="perPage">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </span>
+                        </p>
+                    </div>
                 </div>
 
-                <b-table
-                    :data="tableData"
-                    :bordered="isBordered"
-                    :striped="isStriped"
-                    :narrowed="isNarrowed"
-                    :selectable="isSelectable"
-                    :checkable="isCheckable"
-                    paginated
-                    :per-page="perPage"
-                    :pagination-simple="isPaginationSimple"
-                    @check="checked"
-                    @select="selected">
+                <div class="example">
+                    <b-table
+                        :data="tableData"
+                        :bordered="isBordered"
+                        :striped="isStriped"
+                        :narrowed="isNarrowed"
+                        :selectable="isSelectable"
+                        :checkable="isCheckable"
+                        paginated
+                        :per-page="perPage"
+                        :pagination-simple="isPaginationSimple"
+                        default-sort="first_name"
+                        @check="checked"
+                        @select="selected">
 
-                    <b-table-column field="id" label="ID" width="40" sortable numeric></b-table-column>
-                    <b-table-column field="first_name" label="First Name" sortable></b-table-column>
-                    <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
-                    <b-table-column field="gender" label="Gender" sortable></b-table-column>
+                        <b-table-column field="id" label="ID" width="40" sortable numeric></b-table-column>
+                        <b-table-column field="first_name" label="First Name" sortable></b-table-column>
+                        <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
+                        <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
+                        <b-table-column field="gender" label="Gender" sortable></b-table-column>
 
-                </b-table>
+                    </b-table>
+                </div>
             </div>
             <div class="column">
                 <h3 class="subtitle">Selected item</h3>
@@ -114,6 +121,34 @@
             </b-table-column>
         </b-table>
 
+        <h2 class="subtitle">Column properties</h2>
+        <b-table
+            :data="columnProps"
+            default-sort="name"
+            html>
+            <b-table-column
+                field="name"
+                label="Name">
+            </b-table-column>
+            <b-table-column
+                field="description"
+                label="Description"
+                width="620">
+            </b-table-column>
+            <b-table-column
+                field="type"
+                label="Type">
+            </b-table-column>
+            <b-table-column
+                field="values"
+                label="Values">
+            </b-table-column>
+            <b-table-column
+                field="default"
+                label="Default">
+            </b-table-column>
+        </b-table>
+
     </div>
 </template>
 
@@ -138,6 +173,13 @@
                         name: '<code>data</code>',
                         description: 'Table data',
                         type: 'Array',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>default-sort</code>',
+                        description: 'Sets the default sort column and order',
+                        type: 'String, Array',
                         values: '—',
                         default: '—'
                     },
@@ -170,18 +212,18 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>paginated</code>',
-                        description: 'Adds pagination to the table',
+                        name: '<code>html</code>',
+                        description: 'Table cells renders HTML',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>per-page</code>',
-                        description: 'How many items per page (if <code>paginated</code>)',
+                        name: '<code>paginated</code>',
+                        description: 'Adds pagination to the table',
                         type: 'Boolean',
                         values: '—',
-                        default: '<code>20</code>'
+                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>pagination-simple</code>',
@@ -191,38 +233,38 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>html</code>',
-                        description: 'Table cells prints HTML',
-                        type: 'Boolean',
+                        name: '<code>per-page</code>',
+                        description: 'How many items per page (if <code>paginated</code>)',
+                        type: 'Number',
                         values: '—',
-                        default: '<code>false</code>'
+                        default: '<code>20</code>'
                     }
                 ],
                 tableEvents: [
                     {
                         name: '<code>click</code>',
                         description: 'Triggers when a row is clicked',
-                        parameters: '<code>row</code>'
+                        parameters: '<code>row: Object</code>'
                     },
                     {
                         name: '<code>dblclick</code>',
                         description: 'Triggers when a row is double clicked',
-                        parameters: '<code>row</code>'
+                        parameters: '<code>row: Object</code>'
                     },
                     {
                         name: '<code>select</code>',
                         description: 'Triggers when a row is selected',
-                        parameters: '<code>row</code>, <code>oldRow</code>'
+                        parameters: '<code>row: Object</code>, <code>oldRow: Object</code>'
                     },
                     {
                         name: '<code>check</code>',
-                        description: 'Triggers when the checkbox in a row is clicked <strong>OR</strong> when the header checkbox is clicked',
-                        parameters: '<code>checkedRows</code>, <code>row</code>'
+                        description: 'Triggers when the checkbox in a row is clicked and/or when the header checkbox is clicked',
+                        parameters: '<code>checkedList: Array</code>, <code>row: Object</code>'
                     },
                     {
                         name: '<code>check-all</code>',
                         description: 'Triggers when the header checkbox is clicked',
-                        parameters: '<code>checkedRows</code>'
+                        parameters: '<code>checkedList: Array</code>'
                     }
                 ],
                 columnProps: [
@@ -248,16 +290,30 @@
                         default: '—'
                     },
                     {
-                        name: '<code>sortable</code>',
-                        description: 'Whether column can be sorted',
+                        name: '<code>numeric</code>',
+                        description: 'Align the cell content to the right',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>numeric</code>',
-                        description: `Makes column's cell's text right aligned`,
+                        name: '<code>sortable</code>',
+                        description: 'Whether the column can be sorted',
                         type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>custom-sort</code>',
+                        description: 'Custom sort method, works when is <code>sortable</code>',
+                        type: 'Function (a: Object, b: Object)',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>format</code>',
+                        description: 'Format cell content',
+                        type: 'Function (value: Any, row: Object)',
                         values: '—',
                         default: '—'
                     }
@@ -273,13 +329,15 @@
                         paginated
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
+                        default-sort="first_name"
                         @check="checked"
                         @select="selected">
 
-                        <b-table-column field="id" label="ID" sortable width="40" numeric></b-table-column>
+                        <b-table-column field="id" label="ID" width="40" sortable numeric></b-table-column>
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
-                        <b-table-column field="last_name" label="Last Name"></b-table-column>
-                        <b-table-column field="gender" label="Gender"></b-table-column>
+                        <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
+                        <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
+                        <b-table-column field="gender" label="Gender" sortable></b-table-column>
 
                     </b-table>`,
                 code: `
@@ -293,7 +351,7 @@
                                     {"id":4,"first_name":"Beverly","last_name":"Gutierrez","gender":"Female"},
                                     {"id":5,"first_name":"Gloria","last_name":"Boyd","gender":"Female"},
                                     [...]
-                                ]
+                                ],
                                 checkItems: [],
                                 selItem: {},
                                 isBordered: false,
@@ -302,7 +360,7 @@
                                 isSelectable: false,
                                 isCheckable: false,
                                 isPaginationSimple: false,
-                                perPage: 10,
+                                perPage: 10
                             }
                         },
                         methods: {
@@ -311,6 +369,9 @@
                             },
                             selected(item) {
                                 this.selItem = item
+                            },
+                            formatDate(value, row) {
+                                return new Date(value).toLocaleDateString()
                             }
                         }
                     }`
@@ -322,6 +383,9 @@
             },
             selected(item) {
                 this.selItem = item
+            },
+            formatDate(value, row) {
+                return new Date(value).toLocaleDateString()
             }
         }
     }

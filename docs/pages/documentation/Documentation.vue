@@ -12,18 +12,58 @@
                 <nav class="tabs is-boxed">
                     <div class="container">
                         <ul>
-                            <router-link to="/documentation/installation" tag="li"><a>Installation</a></router-link>
-                            <router-link to="/documentation/general" tag="li"><a>General</a></router-link>
-                            <router-link to="/documentation/notices" tag="li"><a>Notices</a></router-link>
-                            <router-link to="/documentation/form" tag="li"><a>Form</a></router-link>
-                            <router-link to="/documentation/data" tag="li"><a>Data</a></router-link>
+                            <li v-for="tab in tabs" :class="{ 'is-active': currentTab === tab.component }">
+                                <a @click="currentTab = tab.component">
+                                    {{ tab.title }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
             </div>
         </section>
 
-        <router-view></router-view>
+        <nav class="nav has-shadow">
+            <div class="container">
+                <component :is="currentTab"></component>
+            </div>
+        </nav>
+
+        <section class="section">
+            <div class="container">
+                <router-view></router-view>
+            </div>
+        </section>
 
     </div>
 </template>
+
+<script>
+    import Installation from './installation/_Installation'
+    import General from './general/_General'
+    import Notices from './notices/_Notices'
+    // import Form from './form/_Form'
+    import bData from './data/_Data'
+
+    export default {
+        components: {
+            Installation,
+            General,
+            Notices,
+            // Form,
+            bData
+        },
+        data() {
+            return {
+                currentTab: 'Installation',
+                tabs: [
+                    { title: 'Installation', component: 'Installation' },
+                    { title: 'General', component: 'General' },
+                    { title: 'Notices', component: 'Notices' },
+                    // { title: 'Form', component: 'Form' },
+                    { title: 'Data', component: 'bData' }
+                ]
+            }
+        }
+    }
+</script>

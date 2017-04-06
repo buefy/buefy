@@ -117,7 +117,7 @@
                         default: '<code>true</code>'
                     },
                     {
-                        name: '<code>hasIcon</code>',
+                        name: '<code>has-icon</code>',
                         description: 'Adds an icon on the left side depending on the <code>type</code>',
                         type: 'Boolean',
                         values: '—',
