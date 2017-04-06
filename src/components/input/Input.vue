@@ -3,8 +3,8 @@
         <input
             v-if="type !== 'textarea'"
             class="input"
+            :class="[statusType, size]"
             ref="input"
-            :class="statusType"
             :type="newType"
             :name="name"
             :placeholder="placeholder"
@@ -12,14 +12,15 @@
             :readonly="readonly"
             :maxlength="maxlength"
             :minlength="minlength"
-            :autocomplete="autoComplete"
+            :autocomplete="autocomplete"
             :required="required"
             :min="min"
             :max="max"
             :step="step"
             :pattern="pattern"
             :value="newValue"
-            @input="input">
+            @input="input"
+            @blur="checkValid">
 
         <textarea
             v-else
@@ -32,15 +33,22 @@
             :maxlength="maxlength"
             :minlength="minlength"
             :value="newValue"
-            @input="input">
+            @input="input"
+            @blur="checkValid">
         </textarea>
 
-        <slot></slot>
+        <b-icon
+            v-if="icon"
+            :icon="icon"
+            :pack="iconPack"
+            :size="size">
+        </b-icon>
 
         <b-icon
             v-if="passwordReveal"
             class="is-primary is-clickable is-right"
             :icon="passwordVisibleIcon"
+            :size="size"
             both
             @click.native="togglePasswordVisibility">
         </b-icon>
@@ -49,6 +57,7 @@
             v-if="hasIconRight"
             :class="[statusType, 'is-right']"
             :icon="statusTypeIcon"
+            :size="size"
             both
             @click.native="togglePasswordVisibility">
         </b-icon>
@@ -76,11 +85,13 @@
             expanded: Boolean,
             passwordReveal: Boolean,
             loading: Boolean,
+            icon: String,
+            iconPack: String,
 
             // Native options
-            autoComplete: {
+            autocomplete: {
                 type: String,
-                default: 'off'
+                default: 'on'
             },
             required: Boolean,
             disabled: Boolean,
@@ -103,24 +114,21 @@
         },
         computed: {
             hasIcon() {
-                return this.hasIconLeft || this.hasIconRight
-            },
-            hasIconLeft() {
-                return this.$slots.default !== undefined && this.$slots.default.length > 0
+                return this.icon || this.hasIconRight
             },
             hasIconRight() {
                 return this.passwordReveal || this.loading || this.statusType
             },
             iconPosition() {
-                if (this.hasIconLeft && this.hasIconRight) {
+                if (this.icon && this.hasIconRight) {
                     return 'has-both-icon'
-                } else if (!this.hasIconLeft && this.hasIconRight) {
+                } else if (!this.icon && this.hasIconRight) {
                     return 'has-icon-right'
                 }
             },
             statusType() {
-                if (this.$parent.isField) {
-                    return this.$parent.type
+                if (this.$parent.isFieldComponent) {
+                    return this.$parent.newType
                 }
             },
             statusTypeIcon() {
@@ -132,7 +140,7 @@
                 }
             },
             hasMessage() {
-                return this.$parent.isField && this.$parent.message
+                return this.$parent.isFieldComponent && this.$parent.newMessage
             },
             characteresCount() {
                 return this.newValue ? this.newValue.length : 0
@@ -162,6 +170,14 @@
                 Vue.nextTick(() => {
                     this.$refs.input.focus()
                 })
+            },
+            checkValid() {
+                if (!this.$refs.input.checkValidity()) {
+                    if (this.$parent.isFieldComponent) {
+                        this.$parent.newType = 'is-danger'
+                        this.$parent.newMessage = this.$refs.input.validationMessage
+                    }
+                }
             }
         }
     }

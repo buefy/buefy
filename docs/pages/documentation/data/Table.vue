@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="title is-spaced">Table</h1>
-        <h2 class="subtitle">Tabulated data are sometimes needed</h2>
+        <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
         <hr>
 
         <div class="columns is-marginless">
@@ -13,7 +13,9 @@
                     <b-switch v-model="isNarrowed">Narrowed</b-switch>
                     <b-switch v-model="isSelectable">Selectable</b-switch>
                     <b-switch v-model="isCheckable">Checkable</b-switch>
-                    <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
+                    <b-switch v-model="isPaginated">Paginated</b-switch>
+                    <b-switch v-model="isPaginationSimple">Simpler pagination</b-switch>
+                    <b-switch v-model="hasMobileCards">Row as cards on mobile</b-switch>
                 </div>
                 <div class="content">
                     <div class="field">
@@ -39,7 +41,8 @@
                         :narrowed="isNarrowed"
                         :selectable="isSelectable"
                         :checkable="isCheckable"
-                        paginated
+                        :mobile-cards="hasMobileCards"
+                        :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
                         default-sort="first_name"
@@ -50,7 +53,7 @@
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
-                        <b-table-column field="gender" label="Gender" sortable></b-table-column>
+                        <b-table-column field="gender" label="Gender"></b-table-column>
 
                     </b-table>
                 </div>
@@ -166,6 +169,8 @@
                 isNarrowed: false,
                 isSelectable: false,
                 isCheckable: false,
+                hasMobileCards: true,
+                isPaginated: true,
                 isPaginationSimple: false,
                 perPage: 10,
                 tableProps: [
@@ -178,10 +183,10 @@
                     },
                     {
                         name: '<code>default-sort</code>',
-                        description: 'Sets the default sort column and order',
+                        description: `Sets the default sort column and order — e.g. <code>['first_name', 'desc']</code>`,
                         type: 'String, Array',
                         values: '—',
-                        default: '—'
+                        default: 'order: <code>asc</code>'
                     },
                     {
                         name: '<code>bordered</code>',
@@ -199,21 +204,28 @@
                     },
                     {
                         name: '<code>selectable</code>',
-                        description: 'Table rows will be selectable (single)',
+                        description: 'Clicks on rows will select (single)',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
                         name: '<code>checkable</code>',
-                        description: 'Table rows can be checked (multiple)',
+                        description: 'Rows can be checked (multiple)',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>mobile-cards</code>',
+                        description: 'Rows now appears as cards on mobile',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>true</code>'
+                    },
+                    {
                         name: '<code>html</code>',
-                        description: 'Table cells renders HTML',
+                        description: 'Cells now renders HTML',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -326,7 +338,8 @@
                         :narrowed="isNarrowed"
                         :selectable="isSelectable"
                         :checkable="isCheckable"
-                        paginated
+                        :mobile-cards="hasMobileCards"
+                        :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
                         default-sort="first_name"
@@ -337,7 +350,7 @@
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
-                        <b-table-column field="gender" label="Gender" sortable></b-table-column>
+                        <b-table-column field="gender" label="Gender"></b-table-column>
 
                     </b-table>`,
                 code: `
@@ -359,6 +372,8 @@
                                 isNarrowed: false,
                                 isSelectable: false,
                                 isCheckable: false,
+                                hasMobileCards: true,
+                                isPaginated: true,
                                 isPaginationSimple: false,
                                 perPage: 10
                             }

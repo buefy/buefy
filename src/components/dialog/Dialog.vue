@@ -50,7 +50,7 @@
 
 <script>
     import Icon from '../icon'
-    import Input from '../input'
+    import { Input } from '../input'
 
     export default {
         components: {

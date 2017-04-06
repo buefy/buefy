@@ -72,7 +72,7 @@
                             <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                             <code>is-warning</code>, <code>is-danger</code>,
                             and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '<code>is-primary</code>'
+                        default: '<code>is-success</code>'
                     },
                     {
                         name: '<code>message</code>',

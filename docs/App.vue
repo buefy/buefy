@@ -94,7 +94,7 @@
             this.$router.afterEach((to, from) => {
                 this.$Progress.finish()
             })
-            EventBus.$on('routeChange', () => {
+            EventBus.$on('routeChange', (to, from) => {
                 this.isMenuActive = false
             })
         }

@@ -1,15 +1,38 @@
 <template>
     <div class="b-table">
-        <table class="table" :class="{ 'is-bordered': bordered, 'is-striped': striped, 'is-narrow': narrowed }">
-            <slot></slot>
+        <slot></slot>
+
+        <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
+            <p class="control">
+                <span class="select is-fullwidth">
+                    <select>
+                        <option
+                            v-for="column in columns"
+                            @click="sort(column)"
+                            v-if="column.isSortable"
+                            :selected="this.currentSortColumn === column">
+                            {{ column.label }}
+                        </option>
+                    </select>
+                </span>
+            </p>
+        </div>
+
+        <table
+            class="table"
+            :class="{
+                'is-bordered': bordered,
+                'is-striped': striped,
+                'is-narrow': narrowed,
+                'has-mobile-cards': mobileCards
+            }">
             <thead>
                 <tr>
                     <th class="checkbox-cell" v-if="checkable">
                         <b-checkbox :value="isAllChecked" @change="checkAll($event)"></b-checkbox>
                     </th>
-                    <th
-                        v-for="column in columns" @click="sort(column)"
-                        :class="{ 'is-current-sort': column.isCurrentSort, 'is-sortable': column.isSortable }"
+                    <th v-for="column in columns" @click="sort(column)"
+                        :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
                         :style="{ width: column.width + 'px' }">
                         <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
                             {{ column.label }}
@@ -17,15 +40,14 @@
                                 icon="arrow_upward"
                                 both
                                 size="is-small"
-                                :class="{ 'is-reverse': column.isReverse, 'is-visible': column.isCurrentSort }">
+                                :class="{ 'is-desc': !column.isAsc, 'is-visible': currentSortColumn === column }">
                             </b-icon>
                         </div>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    v-for="(item, index) in visibleData"
+                <tr v-for="(item, index) in visibleData"
                     @click="selectItem(item)"
                     @dblclick="$emit('dblclick', item)"
                     :class="{ 'is-selected': item === selectedItem }">
@@ -33,11 +55,16 @@
                     <td class="checkbox-cell" v-if="checkable">
                         <b-checkbox :value="isItemChecked(item)" @change="checkItem(item, $event)"></b-checkbox>
                     </td>
-                    <td v-for="column in columns" :class="{ 'has-text-right': column.isNumeric }" :style="{ width: column.width + 'px' }">
+
+                    <td v-for="column in columns"
+                        :class="{ 'has-text-right': column.isNumeric }"
+                        :data-label="column.label">
+
                         <template v-for="(cell, key) in item" v-if="key === column.field">
                             <span v-if="html" v-html="html ? column.format(cell, item) : null"></span>
                             {{ !html ? column.format(cell, item) : null }}
                         </template>
+
                     </td>
 
                 </tr>
@@ -88,6 +115,10 @@
             narrowed: Boolean,
             selectable: Boolean,
             checkable: Boolean,
+            mobileCards: {
+                type: Boolean,
+                default: true
+            },
             defaultSort: [String, Array],
             paginated: Boolean,
             perPage: {
@@ -103,6 +134,7 @@
                 newData: this.data,
                 selectedItem: {},
                 checkedItems: [],
+                currentSortColumn: {},
                 currentPage: 1,
                 isTableComponent: true // Used by TableColumn
             }
@@ -110,8 +142,7 @@
         watch: {
             data(value) {
                 this.newData = value
-                console.log(this.newData === value)
-                this.resetCurrentSortColumn()
+                this.currentSortColumn = {}
             },
             selectable(val) {
                 if (!val) this.selectedItem = {}
@@ -138,6 +169,11 @@
                     return this.checkedItems.indexOf(currentVisibleItem) < 0
                 })
                 return !isAllChecked
+            },
+            hasSortableColumns() {
+                return this.columns.some(column => {
+                    return column.isSortable
+                })
             }
         },
         methods: {
@@ -161,21 +197,14 @@
             sort(column) {
                 if (!column.isSortable) return
 
-                if (!column.isCurrentSort) {
-                    this.resetCurrentSortColumn()
-                    column.isReverse = false
-                    this.newData = this.sortBy(this.newData, column.field, column.customSort)
-                } else {
-                    column.isReverse = !column.isReverse
+                if (column === this.currentSortColumn) {
+                    column.isAsc = !column.isAsc
                     this.newData.reverse()
+                } else {
+                    column.isAsc = true
+                    this.newData = this.sortBy(this.newData, column.field, column.customSort)
                 }
-                column.isCurrentSort = true
-            },
-            resetCurrentSortColumn() {
-                this.columns.forEach(column => {
-                    column.isCurrentSort = false
-                    column.isReverse = false
-                })
+                this.currentSortColumn = column
             },
 
             checkAll(isChecked) {

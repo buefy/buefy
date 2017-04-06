@@ -1,3 +1,7 @@
 import Input from './Input'
+import Field from './Field'
 
-export default Input
+export {
+    Input,
+    Field
+}

@@ -42,7 +42,7 @@
     import Installation from './installation/_Installation'
     import General from './general/_General'
     import Notices from './notices/_Notices'
-    // import Form from './form/_Form'
+    import bForm from './form/_Form'
     import bData from './data/_Data'
 
     export default {
@@ -50,7 +50,7 @@
             Installation,
             General,
             Notices,
-            // Form,
+            bForm,
             bData
         },
         data() {
@@ -60,10 +60,15 @@
                     { title: 'Installation', component: 'Installation' },
                     { title: 'General', component: 'General' },
                     { title: 'Notices', component: 'Notices' },
-                    // { title: 'Form', component: 'Form' },
+                    { title: 'Form', component: 'bForm' },
                     { title: 'Data', component: 'bData' }
                 ]
             }
+        },
+        beforeRouteEnter(to, from, next) {
+            next(vm => {
+                vm.currentTab = to.meta.category
+            })
         }
     }
 </script>

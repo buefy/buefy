@@ -13,7 +13,7 @@
 * Added size option to Pagination
 * Notification slightly modified to keep original Bulma style
 * Toasts and Snackbars now queue between each other
-* Toast duration reduced to 2.5s
+* Toast duration reduced to 2s
 
 ## 0.0.2
 

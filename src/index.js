@@ -1,9 +1,8 @@
 import { Checkbox, CheckboxGroup } from './components/checkbox'
+import { Input, Field } from './components/input'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
-import Field from './components/field'
 import Icon from './components/icon'
-import Input from './components/input'
 import Message from './components/message'
 import Notification from './components/notification'
 import Pagination from './components/pagination'
@@ -36,8 +35,10 @@ const components = {
 
 components.install = (Vue, options = {}) => {
     // Options
-    NoticeMixin.props.container.default = options.defaultContentElement
-    Icon.props.pack.default = options.defaultIconPack || 'mdi'
+    NoticeMixin.props.container.default = options.defaultContentElement || NoticeMixin.props.container.default
+    Icon.props.pack.default = options.defaultIconPack || Icon.props.pack.default
+    Tooltip.props.type.default = options.defaultTooltipType || Tooltip.props.type.default
+    Tooltip.props.animated.default = options.defaultTooltipIsAnimated || Tooltip.props.animated.default
 
     for (const componentName in components) {
         const component = components[componentName]

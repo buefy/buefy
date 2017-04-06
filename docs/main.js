@@ -67,7 +67,7 @@ Vue.filter('pre', (text) => {
 export const EventBus = new Vue()
 
 router.beforeEach((to, from, next) => {
-    EventBus.$emit('routeChange')
+    EventBus.$emit('routeChange', to, from)
     next()
 })
 

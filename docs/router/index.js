@@ -23,6 +23,11 @@ const Message = (r) => require(['../pages/documentation/notices/Message'], r)
 const Table = (r) => require(['../pages/documentation/data/Table'], r)
 const Pagination = (r) => require(['../pages/documentation/data/Pagination'], r)
 
+const Input = (r) => require(['../pages/documentation/form/Input'], r)
+const Checkbox = (r) => require(['../pages/documentation/form/Checkbox'], r)
+const Radio = (r) => require(['../pages/documentation/form/Radio'], r)
+const Switch = (r) => require(['../pages/documentation/form/Switch'], r)
+
 export default new Router({
     mode: 'hash',
     linkActiveClass: 'is-active',
@@ -38,51 +43,115 @@ export default new Router({
             children: [
                 {
                     path: 'quick-start',
-                    component: QuickStart
+                    component: QuickStart,
+                    meta: {
+                        category: 'Installation'
+                    }
                 },
                 {
                     path: 'customization',
-                    component: Customization
+                    component: Customization,
+                    meta: {
+                        category: 'Installation'
+                    }
                 },
                 {
                     path: 'constructor-options',
-                    component: ConstructorOptions
+                    component: ConstructorOptions,
+                    meta: {
+                        category: 'Installation'
+                    }
                 },
                 {
                     path: 'icon',
-                    component: Icon
+                    component: Icon,
+                    meta: {
+                        category: 'General'
+                    }
                 },
                 {
                     path: 'tooltip',
-                    component: Tooltip
+                    component: Tooltip,
+                    meta: {
+                        category: 'General'
+                    }
                 },
                 {
                     path: 'dialog',
-                    component: Dialog
+                    component: Dialog,
+                    meta: {
+                        category: 'Notices'
+                    }
                 },
                 {
                     path: 'toast',
-                    component: Toast
+                    component: Toast,
+                    meta: {
+                        category: 'Notices'
+                    }
                 },
                 {
                     path: 'snackbar',
-                    component: Snackbar
+                    component: Snackbar,
+                    meta: {
+                        category: 'Notices'
+                    }
                 },
                 {
                     path: 'notification',
-                    component: Notification
+                    component: Notification,
+                    meta: {
+                        category: 'Notices'
+                    }
                 },
                 {
                     path: 'message',
-                    component: Message
+                    component: Message,
+                    meta: {
+                        category: 'Notices'
+                    }
                 },
                 {
                     path: 'table',
-                    component: Table
+                    component: Table,
+                    meta: {
+                        category: 'bData'
+                    }
                 },
                 {
                     path: 'pagination',
-                    component: Pagination
+                    component: Pagination,
+                    meta: {
+                        category: 'bData'
+                    }
+                },
+                {
+                    path: 'input',
+                    component: Input,
+                    meta: {
+                        category: 'bForm'
+                    }
+                },
+                {
+                    path: 'checkbox',
+                    component: Checkbox,
+                    meta: {
+                        category: 'bForm'
+                    }
+                },
+                {
+                    path: 'radio',
+                    component: Radio,
+                    meta: {
+                        category: 'bForm'
+                    }
+                },
+                {
+                    path: 'switch',
+                    component: Switch,
+                    meta: {
+                        category: 'bForm'
+                    }
                 },
                 {
                     path: '',

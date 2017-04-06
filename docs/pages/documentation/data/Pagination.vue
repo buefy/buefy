@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Constructor Options</h1>
-        <h2 class="subtitle">These are global default options, they are set on Buefy initialization</h2>
+        <h1 class="title is-spaced">Pagination</h1>
+        <h2 class="subtitle">A responsive and flexible pagination</h2>
         <hr>
 
         <div class="columns">
@@ -17,9 +17,9 @@
             </div>
             <div class="column">
                 <p class="control">
-                    <label class="label">Position</label>
+                    <label class="label">Order</label>
                     <span class="select is-fullwidth">
-                        <select v-model="position">
+                        <select v-model="order">
                             <option value="">default</option>
                             <option value="is-centered">is-centered</option>
                             <option value="is-right">is-right</option>
@@ -49,13 +49,15 @@
             <b-pagination
                 :total="total"
                 :current="current"
-                :position="position"
+                :order="order"
                 :size="size"
                 :simple="isSimple"
                 :per-page="perPage"
                 @change="pageChanged">
             </b-pagination>
         </div>
+        <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+        <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <hr>
 
@@ -86,6 +88,26 @@
                 label="Default">
             </b-table-column>
         </b-table>
+
+        <h3 class="subtitle">Events</h3>
+        <b-table
+            :data="events"
+            default-sort="name"
+            html>
+            <b-table-column
+                field="name"
+                label="Name">
+            </b-table-column>
+            <b-table-column
+                field="description"
+                label="Description"
+                width="620">
+            </b-table-column>
+            <b-table-column
+                field="parameters"
+                label="Parameters">
+            </b-table-column>
+        </b-table>
     </div>
 </template>
 
@@ -96,29 +118,88 @@
                 total: 200,
                 current: 1,
                 perPage: 20,
-                position: '',
+                order: '',
                 size: '',
                 isSimple: false,
                 props: [
                     {
-                        name: '<code>defaultIconPack</code>',
-                        description: `Icon pack used internally and on the Icon component —
-                            <a href="https://material.io/icons/" target="_blank">Material Design Icons</a> or
-                            <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>`,
-                        type: 'String',
-                        values: '<code>mdi</code>, <code>fa</code>',
-                        default: '<code>mdi</code>'
-                    },
-                    {
-                        name: '<code>defaultContentElement</code>',
-                        description: `Default container for floating Notices (Toasts & Snackbars). Note that this also
-                            changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
-                            Meaning that the container <em>should</em> be <code>fixed</code>.`,
-                        type: 'String',
+                        name: '<code>total</code>',
+                        description: `Total count of items`,
+                        type: 'Number',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>per-page</code>',
+                        description: 'Items count for each page',
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>20</code>'
+                    },
+                    {
+                        name: '<code>current</code>',
+                        description: 'Current page number',
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>1</code>'
+                    },
+                    {
+                        name: '<code>order</code>',
+                        description: 'Buttons order, optional',
+                        type: 'String',
+                        values: '<code>is-centered</code>, <code>is-right</code>',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>size</code>',
+                        description: 'Pagination size, optional',
+                        type: 'String',
+                        values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>simple</code>',
+                        description: 'Simpler style',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
-                ]
+                ],
+                events: [
+                    {
+                        name: '<code>change</code>',
+                        description: 'Triggers when the current page is changed',
+                        parameters: '<code>page: Number</code>'
+                    }
+                ],
+                template: `
+                <b-pagination
+                    :total="total"
+                    :current="current"
+                    :order="order"
+                    :size="size"
+                    :simple="isSimple"
+                    :per-page="perPage"
+                    @change="pageChanged">
+                </b-pagination>`,
+                code: `
+                export default {
+                    data() {
+                        return {
+                            total: 200,
+                            current: 1,
+                            perPage: 20,
+                            order: '',
+                            size: '',
+                            isSimple: false
+                        }
+                    },
+                    methods: {
+                        pageChanged(value) {
+                            this.current = value
+                        }
+                    }
+                }`
             }
         },
         methods: {

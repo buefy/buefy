@@ -4,35 +4,6 @@
             <h1 class="title mb-48">Componentes</h1>
 
             <hr>
-            <b-field label="Username" type="is-success" message="Your username is available">
-                <b-input type="email" value="johnsilver" maxlength="30">
-                    <b-icon icon="person"></b-icon>
-                </b-input>
-            </b-field>
-
-            <b-field label="Username" type="is-danger" message="Your username is unavailable">
-                <b-input type="email" value="flint" maxlength="30"></b-input>
-            </b-field>
-
-            <b-field addons>
-                <b-input v-model="input" placeholder="Search...">
-                    <b-icon icon="search"></b-icon>
-                </b-input>
-                <p class="control"><button class="button is-primary">Search</button></p>
-            </b-field>
-
-            <b-field>
-                <b-input v-model="input" placeholder="Search..." expanded></b-input>
-                <p class="control"><button class="button is-primary">Search</button></p>
-            </b-field>
-
-            <b-field><b-input maxlength="200" type="textarea"></b-input></b-field>
-
-            <b-field><b-input value="loading" loading><b-icon icon="person"></b-icon></b-input></b-field>
-
-            <b-field><b-input type="password" value="teste" password-reveal></b-input></b-field>
-
-            <hr>
             <h2 class="subtitle">Switch</h2>
             <div class="mb-8">
                 <b-switch>Default</b-switch>

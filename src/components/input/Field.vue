@@ -2,7 +2,7 @@
     <div class="field" :class="[fieldType, addonsPosition]">
         <label class="label" v-if="label">{{ label }}</label>
         <slot></slot>
-        <p class="help" :class="type" v-if="message">{{ message }}</p>
+        <p class="help" :class="newType" v-if="newMessage">{{ newMessage }}</p>
     </div>
 </template>
 
@@ -13,12 +13,22 @@
             label: String,
             type: String,
             message: String,
-            addons: Boolean,
+            grouped: Boolean,
             position: String
         },
         data() {
             return {
-                isField: true
+                newType: this.type,
+                newMessage: this.message,
+                isFieldComponent: true // Used internally by Input
+            }
+        },
+        watch: {
+            type(value) {
+                this.newType = value
+            },
+            message(value) {
+                this.newMessage = value
             }
         },
         computed: {
@@ -26,10 +36,10 @@
                 if (this.position) return 'has-addons-' + this.position
             },
             fieldType() {
-                if (this.addons) {
-                    return 'has-addons'
-                } else if (this.$slots.default !== undefined && this.$slots.default.length > 1) {
+                if (this.grouped) {
                     return 'is-grouped'
+                } else if (this.$slots.default !== undefined && this.$slots.default.length > 1) {
+                    return 'has-addons'
                 }
             }
         }
