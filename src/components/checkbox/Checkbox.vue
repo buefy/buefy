@@ -1,15 +1,13 @@
 <template>
-    <p class="control">
-        <label class="checkbox" :class="{ 'is-disabled': disabled }">
-            <input
-                type="checkbox"
-                :disabled="disabled"
-                :name="name"
-                v-model="newValue"
-                @change="$emit('change', newValue, $event)">
-            <span><slot></slot></span>
-        </label>
-    </p>
+    <label class="checkbox" :class="{ 'is-disabled': disabled }">
+        <input
+            type="checkbox"
+            :disabled="disabled"
+            :name="name"
+            v-model="newValue"
+            @change="$emit('change', newValue, $event)">
+        <span><slot></slot></span>
+    </label>
 </template>
 
 <script>
@@ -20,7 +18,7 @@
             disabled: Boolean,
             name: String,
             checked: Boolean,
-            label: [String, Number, Boolean]
+            customValue: [String, Number, Boolean]
         },
         data() {
             return {

@@ -407,9 +407,9 @@
             return {
                 inputProps: [
                     {
-                        name: '<code>value</code>',
+                        name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'String',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
@@ -566,7 +566,7 @@
                     {
                         name: '<code>change</code>',
                         description: 'Triggers when input value is changed',
-                        parameters: '<code>value: String</code>'
+                        parameters: '<code>value: String/Number</code>'
                     }
                 ],
                 fieldProps: [

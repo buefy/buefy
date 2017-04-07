@@ -1,4 +1,7 @@
 .switch {
+    + .switch {
+        margin-left: 0.5em;
+    }
     &.is-disabled {
         opacity: 0.5;
     }

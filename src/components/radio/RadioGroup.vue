@@ -1,5 +1,5 @@
 <template>
-    <div class="radio-group field" :class="isRadioButtonGroup ? 'has-addons' : 'is-grouped'">
+    <div class="radio-group" :class="{ 'field has-addons': isRadioButtonGroup }">
         <slot></slot>
     </div>
 </template>
@@ -8,11 +8,13 @@
     export default {
         name: 'bRadioGroup',
         props: {
-            value: [String, Number, Boolean]
+            value: [String, Number, Boolean],
+            buttonSize: String
         },
         data() {
             return {
-                isRadioButtonGroup: false
+                isRadioGroupComponent: true, // Used internally by Radio and Radio Button
+                isRadioButtonGroup: false // Used internally by Radio Button
             }
         },
         watch: {
@@ -21,20 +23,15 @@
             }
         },
         methods: {
-            updateValue(value) {
+            updateValue(value, event) {
+                this.$emit('change', value, event)
                 this.$emit('input', value)
             },
             findChecked() {
                 this.$children.forEach((child) => {
-                    if (child.isRadioButton) {
-                        this.isRadioButtonGroup = true
-                    }
-
-                    if (this.value === child.label) {
-                        child.isChecked = true
-                    } else {
-                        child.isChecked = false
-                    }
+                    child.size = this.buttonSize
+                    this.isRadioButtonGroup = child.isRadioButton
+                    child.isChecked = this.value === child.value
                 })
             }
         },

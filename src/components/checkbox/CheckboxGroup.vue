@@ -1,5 +1,5 @@
 <template>
-    <div class="checkbox-group field is-grouped">
+    <div class="checkbox-group">
         <slot></slot>
     </div>
 </template>
@@ -13,21 +13,29 @@
         data() {
             return {
                 checkedList: [],
-                isCheckboxGroup: true
+                isCheckboxGroup: true // Used internally by Checkbox
+            }
+        },
+        watch: {
+            value() {
+                this.initChecked()
             }
         },
         methods: {
             updateValue() {
                 this.checkedList = []
                 this.$children.forEach((child) => {
-                    child.newValue && this.checkedList.push(child.label)
+                    child.newValue && this.checkedList.push(child.customValue)
                 })
                 this.$emit('input', this.checkedList)
+                this.$emit('change', this.checkedList)
             },
             initChecked() {
                 this.$children.forEach((child) => {
-                    if (this.value && this.value.indexOf(child.label) >= 0) {
+                    if (this.value && this.value.indexOf(child.customValue) >= 0) {
                         child.newValue = true
+                    } else {
+                        child.newValue = false
                     }
                 })
             }

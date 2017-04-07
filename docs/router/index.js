@@ -115,14 +115,14 @@ export default new Router({
                     path: 'table',
                     component: Table,
                     meta: {
-                        category: 'bData'
+                        category: 'DataManipulation'
                     }
                 },
                 {
                     path: 'pagination',
                     component: Pagination,
                     meta: {
-                        category: 'bData'
+                        category: 'DataManipulation'
                     }
                 },
                 {

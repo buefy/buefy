@@ -1,8 +1,8 @@
 <template>
     <p class="control">
         <button
-            class="radio radio-button button"
-            :class="[isChecked ? type : '', { 'is-disabled': disabled }]"
+            class="radio button"
+            :class="[isChecked ? type : '', size, { 'is-disabled': disabled }]"
             @click="changed">
             <slot></slot>
             <input
@@ -10,7 +10,7 @@
                 :disabled="disabled"
                 :checked="isChecked"
                 :name="name"
-                :value="this.label">
+                :value="this.value">
         </button>
     </p>
 </template>
@@ -19,23 +19,31 @@
     export default {
         name: 'bRadioButton',
         props: {
+            value: [String, Number, Boolean],
             type: {
                 type: String,
                 default: 'is-primary'
             },
             disabled: Boolean,
-            name: String,
-            label: [String, Number, Boolean]
+            name: String
         },
         data() {
             return {
+                // Used internally by Radio Group
+                size: '',
                 isChecked: false,
                 isRadioButton: true
             }
         },
         methods: {
-            changed() {
-                this.$parent.updateValue(this.label)
+            changed(event) {
+                this.$parent.updateValue(this.value, event)
+            }
+        },
+        created() {
+            if (!this.$parent.isRadioGroupComponent) {
+                this.$destroy()
+                throw new Error('You should wrap Radio Button on a Radio Group')
             }
         }
     }

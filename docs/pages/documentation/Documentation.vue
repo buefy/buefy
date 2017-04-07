@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <section class="hero is-primary">
+    <section>
+        <app-header twitter-button-class="is-twitter"></app-header>
+
+        <div class="hero is-primary">
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">Documentation</h1>
@@ -21,7 +23,7 @@
                     </div>
                 </nav>
             </div>
-        </section>
+        </div>
 
         <nav class="nav has-shadow">
             <div class="container">
@@ -35,23 +37,30 @@
             </div>
         </section>
 
-    </div>
+        <app-footer></app-footer>
+    </section>
 </template>
 
 <script>
+    import AppHeader from '../../template/Header'
+    import AppFooter from '../../template/Footer'
+
     import Installation from './installation/_Installation'
     import General from './general/_General'
     import Notices from './notices/_Notices'
     import FormElements from './form/_Form'
-    import bData from './data/_Data'
+    import DataManipulation from './data/_Data'
 
     export default {
         components: {
+            AppHeader,
+            AppFooter,
+
             Installation,
             General,
             Notices,
             FormElements,
-            bData
+            DataManipulation
         },
         data() {
             return {
@@ -61,7 +70,7 @@
                     { title: 'General', component: 'General' },
                     { title: 'Notices', component: 'Notices' },
                     { title: 'Form', component: 'FormElements' },
-                    { title: 'Data', component: 'bData' }
+                    { title: 'Data', component: 'DataManipulation' }
                 ]
             }
         },

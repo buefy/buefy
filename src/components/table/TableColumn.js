@@ -23,7 +23,7 @@ export default {
     mounted() {
         if (!this.$parent.isTableComponent) {
             this.$destroy()
-            throw new Error('You should wrap the b-table-column in a b-table')
+            throw new Error('You should wrap Table Column on a Table')
         }
         this.$parent.columns.push(this.column)
     },

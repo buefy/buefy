@@ -1,69 +1,52 @@
 <template>
-    <section class="section">
-        <div class="container">
-            <h1 class="title mb-48">Componentes</h1>
-
-            <hr>
-            <h2 class="subtitle">Switch</h2>
-            <div class="mb-8">
-                <b-switch>Default</b-switch>
-                <b-switch disabled>Disabled</b-switch>
-                <b-switch disabled checked>Disabled Checked</b-switch>
-            </div>
-            <div>
-                <b-switch is-on-off>On / Off</b-switch>
-                <b-switch is-on-off disabled>On / Off Disabled</b-switch>
-                <b-switch is-on-off disabled checked>On / Off Disabled Checked</b-switch>
+    <section>
+        <div class="hero is-primary is-fullheight">
+            <div class="hero-head">
+                <app-header twitter-button-class="is-light"></app-header>
             </div>
 
-            <hr>
-            <h2 class="subtitle">Checkbox</h2>
-            <b-checkbox v-model="checkbox">{{ checkbox }}</b-checkbox>
-            <b-checkbox disabled>Disabled</b-checkbox>
-            <b-checkbox disabled checked>Disabled Checked</b-checkbox>
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <transition-group
+                        appear
+                        mode="out-in"
+                        appear-active-class="zoomIn"
+                        enter-active-class="zoomIn"
+                        leave-active-class="zoomOut">
 
-            <hr>
-            <h2 class="subtitle">Checkbox Group</h2>
-            <b-checkbox-group v-model="checkboxGroup">
-                <b-checkbox label="Kobe">Kobe</b-checkbox>
-                <b-checkbox label="James">James</b-checkbox>
-                <b-checkbox label="Wade">Wade</b-checkbox>
-                <b-checkbox label="Kyle" disabled>Kyle</b-checkbox>
-            </b-checkbox-group>
-            {{ checkboxGroup }}
+                        <h1 key="title" class="title is-1 home-animation">Buefy</h1>
+                        <h1 key="install" class="title is-1 home-animation">Buefy</h1>
+                        <h1 key="logo" class="title is-1 home-animation">Buefy</h1>
 
-            <hr>
-            <h2 class="subtitle">Radio Group</h2>
-            <b-radio-group v-model="radioGroup">
-                <b-radio label="Kobe">Kobe</b-radio>
-                <b-radio label="James">James</b-radio>
-                <b-radio label="Wade">Wade</b-radio>
-                <b-radio label="Kyle" disabled>Kyle</b-radio>
-            </b-radio-group>
-            {{ radioGroup }}
-
-            <hr>
-            <h2 class="subtitle">Radio Group — Button</h2>
-            <b-radio-group v-model="radioGroupButton">
-                <b-radio-button type="is-danger" label="Nop"><b-icon icon="clear"></b-icon>Nop</b-radio-button>
-                <b-radio-button type="is-success" label="Yep"><b-icon icon="done"></b-icon>Yep</b-radio-button>
-                <b-radio-button label="Default">Default</b-radio-button>
-                <b-radio-button label="Disabled" disabled>Disabled</b-radio-button>
-            </b-radio-group>
-            {{ radioGroupButton }}
+                    </transition-group>
+                </div>
+            </div>
         </div>
+
+        <app-footer></app-footer>
     </section>
 </template>
 
 <script>
+    import AppHeader from '../template/Header'
+    import AppFooter from '../template/Footer'
+
     export default {
+        name: 'app',
+        components: {
+            AppHeader,
+            AppFooter
+        },
         data() {
             return {
-                checkbox: true,
-                checkboxGroup: ['Kobe'],
-                radioGroup: 'Wade',
-                radioGroupButton: 'James'
+                toggle: false
             }
         }
     }
 </script>
+
+<style>
+    .home-animation {
+        animation-duration: 750ms;
+    }
+</style>

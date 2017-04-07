@@ -1,11 +1,12 @@
 <template>
     <label class="switch" :class="{ 'is-disabled': disabled }">
         <input
-            :class="{ 'is-on-off': isOnOff }"
+            :class="{ 'is-on-off': onOff }"
             type="checkbox"
             :name="name"
             :disabled="disabled"
-            v-model="newValue">
+            v-model="newValue"
+            @change="$emit('change', newValue, $event)">
         <span><slot></slot></span>
     </label>
 </template>
@@ -16,7 +17,7 @@
         props: {
             value: Boolean,
             disabled: Boolean,
-            isOnOff: Boolean,
+            onOff: Boolean,
             name: String,
             checked: Boolean
         },
