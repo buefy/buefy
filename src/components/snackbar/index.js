@@ -11,9 +11,14 @@ function open(propsData) {
 
 export default {
     open(params) {
+        let message
+        if (typeof params === 'string') message = params
+
         const defaultParam = {
             type: 'is-success',
-            duration: 4000
+            position: 'bottom-right',
+            duration: 3500,
+            message
         }
         const propsData = Object.assign(defaultParam, params)
         return open(propsData)

@@ -10,8 +10,8 @@
     export default {
         name: 'bField',
         props: {
-            label: String,
             type: String,
+            label: String,
             message: String,
             grouped: Boolean,
             position: String

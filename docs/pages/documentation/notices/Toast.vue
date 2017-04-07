@@ -119,9 +119,7 @@
                     export default {
                         methods: {
                             toast() {
-                                this.$toast.open({
-                                    message: 'Something happened'
-                                })
+                                this.$toast.open('Something happened')
                             },
                             success() {
                                 this.$toast.open({
@@ -142,9 +140,7 @@
         },
         methods: {
             toast() {
-                this.$toast.open({
-                    message: 'Something happened'
-                })
+                this.$toast.open('Something happened')
             },
             success() {
                 this.$toast.open({

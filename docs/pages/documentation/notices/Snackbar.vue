@@ -93,7 +93,7 @@
                         description: 'Visibility duration in miliseconds',
                         type: 'Number',
                         values: '—',
-                        default: '<code>4000</code>'
+                        default: '<code>3500</code>'
                     },
                     {
                         name: '<code>container</code>',
@@ -133,9 +133,7 @@
                     export default {
                         methods: {
                             snackbar() {
-                                this.$snackbar.open({
-                                    message: \`Default, positioned bottom-right with a green 'OK' button\`
-                                })
+                                this.$snackbar.open(\`Default, positioned bottom-right with a green 'OK' button\`)
                             },
                             warning() {
                                 this.$snackbar.open({
@@ -144,9 +142,7 @@
                                     actionText: 'Retry',
                                     position: 'top-left',
                                     onAction: () => {
-                                        this.$toast.open({
-                                            message: 'Action pressed'
-                                        })
+                                        this.$toast.open('Action pressed')
                                     }
                                 })
                             },
@@ -157,9 +153,7 @@
                                     actionText: 'Undo',
                                     position: 'bottom-left',
                                     onAction: () => {
-                                        this.$toast.open({
-                                            message: 'Action pressed'
-                                        })
+                                        this.$toast.open('Action pressed')
                                     }
                                 })
                             }
@@ -169,9 +163,7 @@
         },
         methods: {
             snackbar() {
-                this.$snackbar.open({
-                    message: `Default, positioned bottom-right with a green 'OK' button`
-                })
+                this.$snackbar.open(`Default, positioned bottom-right with a green 'OK' button`)
             },
             warning() {
                 this.$snackbar.open({
@@ -180,9 +172,7 @@
                     actionText: 'Retry',
                     position: 'top-left',
                     onAction: () => {
-                        this.$toast.open({
-                            message: 'Action pressed'
-                        })
+                        this.$toast.open('Action pressed')
                     }
                 })
             },
@@ -193,9 +183,7 @@
                     actionText: 'Undo',
                     position: 'bottom-left',
                     onAction: () => {
-                        this.$toast.open({
-                            message: 'Action pressed'
-                        })
+                        this.$toast.open('Action pressed')
                     }
                 })
             }

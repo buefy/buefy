@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="title is-spaced">Input</h1>
-        <h2 class="subtitle">Inputs are wrapped on a Field, it's not <em>necessary</em> however some functionalities won't work otherwise</h2>
+        <h2 class="subtitle">Inputs are wrapped on a Field, it's not <em>necessary</em> however some functionalities might not work otherwise</h2>
         <hr>
 
         <div class="columns">
@@ -133,7 +133,11 @@
                 </b-field>
 
                 <b-field>
-                    <b-input placeholder="Number" type="number"></b-input>
+                    <b-input placeholder="Number"
+                        type="number"
+                        min="10"
+                        max="20">
+                    </b-input>
                 </b-field>
 
                 <b-field>
@@ -175,7 +179,7 @@
 
         <hr>
         <h2 class="title is-spaced">Addons</h2>
-        <h3 class="subtitle">Inputs and <code>.control</code> elements are automatically unified on a Field</h3>
+        <h3 class="subtitle">Inputs and <code>.control</code> elements are automatically unified when inside a Field</h3>
         <div class="columns">
             <div class="column">
                 <h3 class="subtitle">Which side you want</h3>
@@ -186,14 +190,14 @@
                     </p>
                 </b-field>
 
-                <b-field addons position="centered">
+                <b-field position="centered">
                     <b-input placeholder="Search..." icon="search"></b-input>
                     <p class="control">
                         <button class="button is-dark">Search</button>
                     </p>
                 </b-field>
 
-                <b-field addons position="right">
+                <b-field position="right">
                     <b-input placeholder="Search..." icon="search"></b-input>
                     <p class="control">
                         <button class="button is-info">Search</button>
@@ -201,7 +205,7 @@
                 </b-field>
 
                 <h3 class="subtitle">How many you need</h3>
-                <b-field addons>
+                <b-field>
                     <p class="control">
                         <span class="select">
                             <select>
@@ -217,6 +221,39 @@
                     </p>
                     <p class="control">
                         <button class="button is-success">Transfer</button>
+                    </p>
+                </b-field>
+
+                <b-field>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_bold"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_italic"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_underlined"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_align_left"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_align_center"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_align_right"></b-icon>
+                        </button>
                     </p>
                 </b-field>
             </div>
@@ -312,11 +349,54 @@
         </b-table>
 
         <hr>
-        <h2 class="subtitle">Events</h2>
-        <p class="content">To listen to events, use like this:</p>
-        <div class="column">
-            <pre class="content" v-highlight><code class="html">{{ eventTemplate }}</code></pre>
-        </div>
+        <h2 class="subtitle">Input events</h2>
+        <b-table
+            :data="inputEvents"
+            default-sort="name"
+            html>
+            <b-table-column
+                field="name"
+                label="Name">
+            </b-table-column>
+            <b-table-column
+                field="description"
+                label="Description"
+                width="620">
+            </b-table-column>
+            <b-table-column
+                field="parameters"
+                label="Parameters">
+            </b-table-column>
+        </b-table>
+
+        <hr>
+        <h2 class="subtitle">Field properties</h2>
+        <b-table
+            :data="fieldProps"
+            default-sort="name"
+            html>
+            <b-table-column
+                field="name"
+                label="Name">
+            </b-table-column>
+            <b-table-column
+                field="description"
+                label="Description"
+                width="620">
+            </b-table-column>
+            <b-table-column
+                field="type"
+                label="Type">
+            </b-table-column>
+            <b-table-column
+                field="values"
+                label="Values">
+            </b-table-column>
+            <b-table-column
+                field="default"
+                label="Default">
+            </b-table-column>
+        </b-table>
 
     </div>
 </template>
@@ -467,45 +547,66 @@
                         default: '—'
                     }
                 ],
-                eventTemplate: '<b-input @blur.native="myMethod"></b-input>',
+                inputEvents: [
+                    {
+                        name: '<code>click.native</code>',
+                        description: 'Triggers when input is clicked',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>blur</code>',
+                        description: 'Triggers when input has lost focus',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Triggers when input is focused',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>change</code>',
+                        description: 'Triggers when input value is changed',
+                        parameters: '<code>value: String</code>'
+                    }
+                ],
                 fieldProps: [
                     {
                         name: '<code>type</code>',
-                        description: 'Type (color) of the toast',
+                        description: 'Type (color) of the field and help message, also adds a matching icon, optional',
                         type: 'String',
                         values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                             <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                             <code>is-warning</code>, <code>is-danger</code>,
                             and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '<code>is-dark</code>'
+                        default: '—'
+                    },
+                    {
+                        name: '<code>label</code>',
+                        description: 'Field label',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
                     },
                     {
                         name: '<code>message</code>',
-                        description: 'Message text',
+                        description: 'Help message text',
                         type: 'String',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>grouped</code>',
+                        description: 'Inputs and <code>.control</code> elements wrapped by Field will be grouped horizontally',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>position</code>',
-                        description: 'Which position the toast will appear',
-                        type: 'String',
-                        values: '<code>top-right</code>, <code>top</code>, <code>top-left</code>, <code>bottom-right</code>, <code>bottom</code>, <code>bottom-left</code>',
-                        default: '<code>top</code>'
-                    },
-                    {
-                        name: '<code>duration</code>',
-                        description: 'Visibility duration in milliseconds',
-                        type: 'Number',
-                        values: '—',
-                        default: '<code>2000</code>'
-                    },
-                    {
-                        name: '<code>container</code>',
-                        description: 'DOM element the toast will be created on. Note that this also changes the <code>position</code> of the toast from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>.',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
+                        description: 'Which position should the addons appear, optional',
+                        type: 'Boolean',
+                        values: '<code>left</code>, <code>centered</code>, <code>right</code>',
+                        default: '<code>left</code>'
                     }
                 ],
                 template1: `
@@ -608,7 +709,11 @@
                     </b-field>
 
                     <b-field>
-                        <b-input placeholder="Number" type="number"></b-input>
+                        <b-input placeholder="Number"
+                            type="number"
+                            min="10"
+                            max="20">
+                        </b-input>
                     </b-field>
 
                     <b-field>
@@ -642,14 +747,14 @@
                         </p>
                     </b-field>
 
-                    <b-field addons position="centered">
+                    <b-field position="centered">
                         <b-input placeholder="Search..." icon="search"></b-input>
                         <p class="control">
                             <button class="button is-dark">Search</button>
                         </p>
                     </b-field>
 
-                    <b-field addons position="right">
+                    <b-field position="right">
                         <b-input placeholder="Search..." icon="search"></b-input>
                         <p class="control">
                             <button class="button is-info">Search</button>
@@ -657,7 +762,7 @@
                     </b-field>
 
                     <h3 class="subtitle">How many you need</h3>
-                    <b-field addons>
+                    <b-field>
                         <p class="control">
                             <span class="select">
                                 <select>
@@ -673,6 +778,39 @@
                         </p>
                         <p class="control">
                             <button class="button is-success">Transfer</button>
+                        </p>
+                    </b-field>
+
+                    <b-field>
+                        <p class="control">
+                            <button class="button">
+                                <b-icon icon="format_bold"></b-icon>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button">
+                                <b-icon icon="format_italic"></b-icon>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button">
+                                <b-icon icon="format_underlined"></b-icon>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button">
+                                <b-icon icon="format_align_left"></b-icon>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button">
+                                <b-icon icon="format_align_center"></b-icon>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button">
+                                <b-icon icon="format_align_right"></b-icon>
+                            </button>
                         </p>
                     </b-field>`,
                 template7: `

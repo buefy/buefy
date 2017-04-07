@@ -7,10 +7,7 @@ export default {
         type: String,
         message: String,
         duration: Number,
-        position: {
-            type: String,
-            default: 'bottom-right'
-        },
+        position: String,
         container: String
     },
     data() {

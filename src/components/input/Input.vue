@@ -20,7 +20,9 @@
             :pattern="pattern"
             :value="newValue"
             @input="input"
-            @blur="checkValid">
+            @blur="onBlur"
+            @focus="$emit('focus', $event)"
+            @change="$emit('change', newValue)">
 
         <textarea
             v-else
@@ -34,7 +36,9 @@
             :minlength="minlength"
             :value="newValue"
             @input="input"
-            @blur="checkValid">
+            @blur="onBlur"
+            @focus="$emit('focus', $event)"
+            @change="$emit('change', newValue)">
         </textarea>
 
         <b-icon
@@ -171,11 +175,17 @@
                     this.$refs.input.focus()
                 })
             },
-            checkValid() {
+            onBlur(event) {
+                this.$emit('blur', event)
                 if (!this.$refs.input.checkValidity()) {
                     if (this.$parent.isFieldComponent) {
                         this.$parent.newType = 'is-danger'
                         this.$parent.newMessage = this.$refs.input.validationMessage
+                    }
+                } else {
+                    if (this.$parent.isFieldComponent) {
+                        this.$parent.newType = null
+                        this.$parent.newMessage = null
                     }
                 }
             }

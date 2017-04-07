@@ -129,28 +129,28 @@ export default new Router({
                     path: 'input',
                     component: Input,
                     meta: {
-                        category: 'bForm'
+                        category: 'FormElements'
                     }
                 },
                 {
                     path: 'checkbox',
                     component: Checkbox,
                     meta: {
-                        category: 'bForm'
+                        category: 'FormElements'
                     }
                 },
                 {
                     path: 'radio',
                     component: Radio,
                     meta: {
-                        category: 'bForm'
+                        category: 'FormElements'
                     }
                 },
                 {
                     path: 'switch',
                     component: Switch,
                     meta: {
-                        category: 'bForm'
+                        category: 'FormElements'
                     }
                 },
                 {

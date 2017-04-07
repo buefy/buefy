@@ -1,6 +1,10 @@
-// .field.is-grouped > .control {
-//     flex-basis: inherit;
-// }
+// Temporary fix for v0.4.0 inputs
+.input,
+.textarea,
+.select select {
+    padding-bottom: 0.25em;
+    padding-top: 0.25em;
+}
 
 .control {
     &.has-icon {

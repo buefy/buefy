@@ -82,9 +82,17 @@
                     },
                     {
                         name: '<code>defaultTooltipIsAnimated</code>',
-                        description: `Default tooltip animated attribute.`,
+                        description: `Default tooltip <code>animated</code> attribute.`,
                         type: 'Boolean',
-                        values: '<code>false</code>'
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>defaultInputAutocomplete</code>',
+                        description: `Default input <code>autocomplete</code> attribute.`,
+                        type: 'String',
+                        values: '<code>on</code>, <code>off</code>',
+                        default: '<code>on</code>'
                     }
                 ]
             }

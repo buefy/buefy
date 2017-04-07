@@ -59,7 +59,6 @@
     export default {
         data() {
             return {
-                input: '',
                 checkbox: true,
                 checkboxGroup: ['Kobe'],
                 radioGroup: 'Wade',

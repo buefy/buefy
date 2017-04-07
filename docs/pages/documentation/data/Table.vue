@@ -15,7 +15,7 @@
                     <b-switch v-model="isCheckable">Checkable</b-switch>
                     <b-switch v-model="isPaginated">Paginated</b-switch>
                     <b-switch v-model="isPaginationSimple">Simpler pagination</b-switch>
-                    <b-switch v-model="hasMobileCards">Row as cards on mobile</b-switch>
+                    <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
                 </div>
                 <div class="content">
                     <div class="field">

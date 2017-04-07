@@ -39,6 +39,7 @@ components.install = (Vue, options = {}) => {
     Icon.props.pack.default = options.defaultIconPack || Icon.props.pack.default
     Tooltip.props.type.default = options.defaultTooltipType || Tooltip.props.type.default
     Tooltip.props.animated.default = options.defaultTooltipIsAnimated || Tooltip.props.animated.default
+    Input.props.autocomplete.default = options.defaultInputAutocomplete || Input.props.autocomplete.default
 
     for (const componentName in components) {
         const component = components[componentName]

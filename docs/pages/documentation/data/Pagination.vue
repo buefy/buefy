@@ -169,7 +169,7 @@
                     {
                         name: '<code>change</code>',
                         description: 'Triggers when the current page is changed',
-                        parameters: '<code>page: Number</code>'
+                        parameters: '<code>value: Number</code>'
                     }
                 ],
                 template: `

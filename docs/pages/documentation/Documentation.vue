@@ -42,7 +42,7 @@
     import Installation from './installation/_Installation'
     import General from './general/_General'
     import Notices from './notices/_Notices'
-    import bForm from './form/_Form'
+    import FormElements from './form/_Form'
     import bData from './data/_Data'
 
     export default {
@@ -50,7 +50,7 @@
             Installation,
             General,
             Notices,
-            bForm,
+            FormElements,
             bData
         },
         data() {
@@ -60,7 +60,7 @@
                     { title: 'Installation', component: 'Installation' },
                     { title: 'General', component: 'General' },
                     { title: 'Notices', component: 'Notices' },
-                    { title: 'Form', component: 'bForm' },
+                    { title: 'Form', component: 'FormElements' },
                     { title: 'Data', component: 'bData' }
                 ]
             }
