@@ -8,7 +8,7 @@
             <div class="column">
                 <div class="block">
                     <b-switch>Default</b-switch>
-                    <b-switch v-model="bSwitch">{{ bSwitch }}</b-switch>
+                    <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
                     <b-switch disabled>Disabled</b-switch>
                     <b-switch disabled checked>Disabled Checked</b-switch>
                 </div>
@@ -19,7 +19,7 @@
                         <b-switch>Default</b-switch>
                     </div>
                     <div class="field">
-                        <b-switch v-model="bSwitch">{{ bSwitch }}</b-switch>
+                        <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
                     </div>
                     <div class="field">
                         <b-switch disabled>Disabled</b-switch>
@@ -103,7 +103,7 @@
     export default {
         data() {
             return {
-                bSwitch: true,
+                isSwitched: true,
                 props: [
                     {
                         name: '<code>v-model</code>',
@@ -152,7 +152,7 @@
                 template: `
                     <div class="block">
                         <b-switch>Default</b-switch>
-                        <b-switch v-model="bSwitch">{{ bSwitch }}</b-switch>
+                        <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
                         <b-switch disabled>Disabled</b-switch>
                         <b-switch disabled checked>Disabled Checked</b-switch>
                     </div>
@@ -163,7 +163,7 @@
                             <b-switch>Default</b-switch>
                         </div>
                         <div class="field">
-                            <b-switch v-model="bSwitch">{{ bSwitch }}</b-switch>
+                            <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
                         </div>
                         <div class="field">
                             <b-switch disabled>Disabled</b-switch>
@@ -187,7 +187,7 @@
                 export default {
                     data() {
                         return {
-                            bSwitch: true
+                            isSwitched: true
                         }
                     }
                 }`

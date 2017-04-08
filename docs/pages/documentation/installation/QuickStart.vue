@@ -3,7 +3,7 @@
         <h1 class="title is-spaced">Quick Start</h1>
 
         <h2 class="subtitle"><span class="mr-8">1</span> Install via npm</h2>
-        <pre v-highlight><code class="bash">Not public yet.</code></pre>
+        <pre v-highlight><code class="bash">npm install buefy</code></pre>
 
         <hr>
 

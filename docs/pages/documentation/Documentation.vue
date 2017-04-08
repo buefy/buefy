@@ -1,6 +1,6 @@
 <template>
     <section>
-        <app-header twitter-button-class="is-twitter"></app-header>
+        <app-header></app-header>
 
         <div class="hero is-primary">
             <div class="hero-body">

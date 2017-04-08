@@ -26,9 +26,7 @@
 </script>
 
 <style lang="scss">
-    @import "~highlight.js/styles/atelier-cave-light.css";
     @import "./assets/main.scss";
-    @import "../src/scss/buefy-theme";
 
     pre {
         white-space: pre-wrap;
@@ -62,6 +60,44 @@
             position: absolute;
             text-transform: uppercase;
             vertical-align: top;
+        }
+    }
+
+    ::selection {
+        background: lighten($primary, 5%);
+        color: $primary-invert;
+    }
+
+    .home {
+        .logo-rounded,
+        .subtitle,
+        .npm {
+            margin-bottom: 32px;
+        }
+        .logo-rounded {
+            background: $light;
+            display: inline-flex;
+            padding: 40px;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(10, 10, 10, 0.05), 0 5px 10px rgba(10, 10, 10, 0.1), 0 1px 1px rgba(10, 10, 10, 0.2);
+            img {
+                width: 320px;
+            }
+            @include mobile {
+                padding: 32px;
+                img {
+                    width: 220px;
+                }
+            }
+        }
+        .button + .button {
+            margin-left: 0.5rem;
+        }
+        .npm {
+            display: inline-flex;
+            font-size: 1.1em;
+            color: lighten($primary, 20%);
+            background: darken($primary, 20%);
         }
     }
 </style>

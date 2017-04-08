@@ -2,7 +2,10 @@
     <header class="nav">
         <div class="container">
             <div class="nav-left">
-                <router-link to="/" exact class="nav-item title is-4 is-brand"><strong>Buefy</strong></router-link>
+                <router-link to="/" exact class="nav-item is-brand">
+                    <img v-if="home" src="../assets/buefy-light.png" alt="Buefy">
+                    <img v-else src="../assets/buefy.png" alt="Buefy">
+                </router-link>
             </div>
             <div class="nav-center">
                 <a class="nav-item" href="https://github.com/rafaelpimpa/buefy" target="_blank">
@@ -24,7 +27,7 @@
                 <router-link to="/documentation" class="nav-item">Documentation</router-link>
 
                 <div class="nav-item">
-                    <a class="button is-outlined" :class="twitterButtonClass" @click="tweet">
+                    <a class="button is-outlined" :class="home ? 'is-light' : 'is-twitter'" @click="tweet">
                         <b-icon pack="fa" icon="twitter" class="mr-4"></b-icon> Tweet
                     </a>
                 </div>
@@ -37,7 +40,9 @@
     import { EventBus } from '../main'
 
     export default {
-        props: ['twitterButtonClass'],
+        props: {
+            home: Boolean
+        },
         data() {
             return {
                 isMenuActive: false
@@ -49,7 +54,7 @@
                 const height = 400
                 const left = (window.screen.width - width) / 2
                 const top = (window.screen.height - height) / 2
-                const url = `https://twitter.com/share?url=${encodeURI(window.location.href)}&text=Buefy: lightweight Bulma UI components for Vue.js&hashtags=buefy&via=rafaelpimpa`
+                const url = `https://twitter.com/share?url=${encodeURI(window.location.href)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa`
                 const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
 
                 window.open(url, '', opts)

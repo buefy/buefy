@@ -12,3 +12,10 @@ $sides: ('top', 'left', 'bottom', 'right');
         }
     }
 }
+
+@import "~highlight.js/styles/atelier-cave-light.css";
+
+@import "~bulma/sass/utilities/_all";
+@import "../../src/scss/utils/_theme-variables";
+@import "~bulma";
+@import "../../src/scss/buefy";

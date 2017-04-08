@@ -6,7 +6,7 @@
         <hr>
 
         <h3 class="subtitle"><span class="mr-8">1</span> Install Buefy and Bulma via npm</h3>
-        <pre class="content" v-highlight><code class="bash">Not public yet.</code></pre>
+        <pre class="content" v-highlight><code class="bash">npm install buefy</code></pre>
         <p class="content">or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
         <pre class="content" v-highlight><code class="bash">npm install bulma</code></pre>
         <p>or clone the repository: <a href="https://github.com/jgthms/bulma" target="_blank">https://github.com/jgthms/bulma</a></p>

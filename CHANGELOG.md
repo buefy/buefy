@@ -4,6 +4,7 @@
 
 * **New component: Input**
 * **New component: Field**
+* Documentation done
 
 ## 0.0.3
 

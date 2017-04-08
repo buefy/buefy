@@ -9,12 +9,12 @@
                 <b-field>
                     <p class="control">
                         <a class="button" href="https://github.com/rafaelpimpa/buefy" target="_blank">
-                            <b-icon class="mr-4" pack="fa" icon="github"></b-icon> GitHub
+                            <b-icon pack="fa" icon="github"></b-icon> <span>GitHub</span>
                         </a>
                     </p>
                     <p class="control">
                         <a class="button is-twitter" href="https://twitter.com/rafaelpimpa" target="_blank">
-                            <b-icon class="mr-4" pack="fa" icon="twitter"></b-icon> Twitter
+                            <b-icon pack="fa" icon="twitter"></b-icon> <span>Twitter</span>
                         </a>
                     </p>
                 </b-field>
