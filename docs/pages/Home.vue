@@ -7,28 +7,37 @@
 
             <div class="hero-body">
                 <div class="container has-text-centered">
-                    <!--<transition-group
-                        appear
-                        appear-active-class="zoomIn home-animation"
-                        enter-active-class="zoomIn home-animation"
-                        leave-active-class="zoomOut home-animation"
-                        move-class="move">-->
+                    <div class="logo-rounded home-hero">
+                        <img src="../assets/buefy.png" alt="Buefy">
+                    </div>
+                    <h2 class="subtitle home-hero">
+                        <strong>Lightweight</strong> UI components for <strong><a href="https://vuejs.org/" target="_blank">Vue.js</a></strong>
+                        based on <strong><a href="http://bulma.io/" target="_blank">Bulma</a></strong>
+                    </h2>
+                    <pre class="npm home-hero"><code>npm install buefy</code></pre>
 
-                        <div key="img" class="logo-rounded home-hero">
-                            <img src="../assets/buefy.png" alt="Buefy">
-                        </div>
-                        <h2 key="subtitle" class="subtitle home-hero"><strong>Lightweight</strong> UI components for <strong>Vue.js</strong> based on <strong>Bulma</strong></h2>
-                        <pre key="npm" class="npm home-hero"><code>npm install buefy</code></pre>
-                        <div key="buttons" class="buttons">
-                            <router-link class="button is-medium is-primary is-inverted home-hero" to="/documentation/quick-start">
-                                <span>Quick Start</span>
-                            </router-link>
-                            <a class="button is-medium is-primary is-outlined is-inverted home-hero" href="https://github.com/rafaelpimpa/buefy" target="_blank">
-                                <b-icon pack="fa" icon="github"></b-icon> <span>GitHub</span>
-                            </a>
-                        </div>
+                    <div class="github-button home-hero">
+                        <iframe
+                            src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=star&count=true&size=large"
+                            frameborder="0"
+                            scrolling="0"
+                            width="140px" height="30px">
+                        </iframe>
 
-                    <!--</transition-group>-->
+                        <iframe
+                            src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=fork&count=false&size=large"
+                            frameborder="0"
+                            scrolling="0"
+                            width="80px"
+                            height="30px">
+                        </iframe>
+                    </div>
+
+                    <div class="buttons">
+                        <router-link class="button is-medium is-primary is-inverted is-outlined home-hero" to="/documentation/quick-start">
+                            Get Started
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,7 +54,7 @@
                         <div class="column has-text-centered features">
                             <b-icon icon="devices" size="is-large"></b-icon>
                             <p class="title is-4"><strong>Responsive</strong></p>
-                            <p class="subtitle"><strong>Every</strong> component is responsive</p>
+                            <p class="subtitle"><b>Every</b> component is responsive</p>
                         </div>
                         <div class="column has-text-centered features">
                             <b-icon icon="new_releases" size="is-large"></b-icon>
@@ -90,12 +99,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-    .home-animation {
-        animation-duration: 750ms;
-    }
-    .move {
-        transition: transform 1s;
-    }
-</style>

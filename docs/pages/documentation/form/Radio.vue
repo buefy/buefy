@@ -14,7 +14,7 @@
                         <b-radio value="Vane" disabled>Vane</b-radio>
                     </b-radio-group>
                 </div>
-                <p class="content"><strong>Selection:</strong> {{ radio }}</p>
+                <p class="content"><b>Selection:</b> {{ radio }}</p>
 
                 <h3 class="subtitle">Vertical example</h3>
                 <b-radio-group v-model="radio">
@@ -58,7 +58,7 @@
                     </b-radio-button>
                 </b-radio-group>
 
-                <p class="content"><strong>Selection:</strong> {{ radioButton }}</p>
+                <p class="content"><b>Selection:</b> {{ radioButton }}</p>
             </div>
             <div class="column">
                 <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
@@ -269,7 +269,7 @@
                             <b-radio value="Vane" disabled>Vane</b-radio>
                         </b-radio-group>
                     </div>
-                    <p class="content"><strong>Selection:</strong> {{ radio }}</p>
+                    <p class="content"><b>Selection:</b> {{ radio }}</p>
 
                     <h3 class="subtitle">Vertical example</h3>
                     <b-radio-group v-model="radio">
@@ -314,7 +314,7 @@
                         </b-radio-button>
                     </b-radio-group>
 
-                    <p class="content"><strong>Selection:</strong> {{ radioButton }}</p>`,
+                    <p class="content"><b>Selection:</b> {{ radioButton }}</p>`,
                 code2: `
                     export default {
                         data() {

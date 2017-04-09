@@ -217,7 +217,7 @@
                             alertCustom() {
                                 this.$dialog.alert({
                                     title: 'Title Alert',
-                                    message: 'I have a title, a custom button and <strong>HTML</strong>!',
+                                    message: 'I have a title, a custom button and <b>HTML</b>!',
                                     confirmText: 'Cool!'
                                 })
                             }
@@ -294,7 +294,7 @@
             alertCustom() {
                 this.$dialog.alert({
                     title: 'Title Alert',
-                    message: 'I have a title, a custom button and <strong>HTML</strong>!',
+                    message: 'I have a title, a custom button and <b>HTML</b>!',
                     confirmText: 'Cool!'
                 })
             },
@@ -334,7 +334,7 @@
             confirmCustomDelete() {
                 this.$dialog.confirm({
                     title: 'Deleting account',
-                    message: 'Are you sure you want to <strong>delete</strong> your account? This action cannot be undone.',
+                    message: 'Are you sure you want to <b>delete</b> your account? This action cannot be undone.',
                     confirmText: 'Delete Account',
                     type: 'is-danger',
                     hasIcon: true,

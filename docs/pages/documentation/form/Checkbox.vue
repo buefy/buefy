@@ -48,7 +48,7 @@
                         <b-checkbox custom-value="Billy" disabled>Billy</b-checkbox>
                     </b-checkbox-group>
                 </div>
-                <p class="content"><strong>Selection:</strong> {{ checkboxGroup }}</p>
+                <p class="content"><b>Selection:</b> {{ checkboxGroup }}</p>
 
                 <h3 class="subtitle">Vertical example</h3>
                 <b-checkbox-group v-model="checkboxGroup">
@@ -283,7 +283,7 @@
                             <b-checkbox custom-value="Billy" disabled>Billy</b-checkbox>
                         </b-checkbox-group>
                     </div>
-                    <p class="content"><strong>Selection:</strong> {{ checkboxGroup }}</p>
+                    <p class="content"><b>Selection:</b> {{ checkboxGroup }}</p>
 
                     <h3 class="subtitle">Vertical example</h3>
                     <b-checkbox-group v-model="checkboxGroup">

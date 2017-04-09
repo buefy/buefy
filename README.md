@@ -4,6 +4,8 @@ Buefy is a lightweight library of responsive UI components for [Vue.js](https://
 
 It focus on usability and performance with no *over-animations*.
 
+![Buefy](https://github.com/rafaelpimpa/buefy/blob/master/static/buefy-banner.png)
+
 ## Features
 
 * Keep your current Bulma theme / variables easily
@@ -14,26 +16,25 @@ It focus on usability and performance with no *over-animations*.
 
 * Semantic code output
 
-* Follows Bulma design and some of the Material Design UX
+* Follows Bulma design and some of the [Material Design UX](https://material.io/)
 
 ## Documentation and Demo
 
-The documentation is in the docs directory, and it's built using only Buefy — so it's serves as the demo as well.
+The documentation is in the docs directory, it serves as the demo as well.
 
 Browse the [online documentation here](https://buefy.github.io).
 
-## Install
+## Quick Start
 
-```
+### Install via npm
+
+```bash
 npm install buefy
 ```
 
-## Quick Start
+### Import and use Buefy. You can also enable individual components:
 
-**Note:** Already includes Bulma — the Buefy purple theme — if you want to use your own theme / variables go to the [customization section on the online documentation](https://buefy.github.io/#/documentation/customization).
-
-Import and use Buefy. You can also enable individual components:
-```
+```javascript
 import Vue from 'vue'
 import Buefy from 'buefy'
 import 'buefy/lib/css/buefy.css'
@@ -47,12 +48,13 @@ Vue.component(Buefy.Table.name, Table.Checkbox)
 ...
 ```
 
-## Dependencies
+### Include Material Design Icons
 
-Basically the essential:
+```html
+<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+```
 
-* [Vue.js](https://vuejs.org/) 2+
-* [Material Design Icons](https://material.io/icons/) or [FontAwesome](http://fontawesome.io/) — Your call
+**Note:** If you want to customize the icons or the theme, access the [customization section on the online documentation](https://buefy.github.io/#/documentation/customization).
 
 ## Browser Support
 

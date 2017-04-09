@@ -5,26 +5,24 @@
 
         <hr>
 
-        <h3 class="subtitle"><span class="mr-8">1</span> Install Buefy and Bulma via npm</h3>
+        <h3 class="subtitle"><span class="list-number">1</span> Install Buefy via npm</h3>
         <pre class="content" v-highlight><code class="bash">npm install buefy</code></pre>
         <p class="content">or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
-        <pre class="content" v-highlight><code class="bash">npm install bulma</code></pre>
-        <p>or clone the repository: <a href="https://github.com/jgthms/bulma" target="_blank">https://github.com/jgthms/bulma</a></p>
 
         <hr>
 
-        <h3 class="subtitle"><span class="mr-8">2</span> Set your variables with Sass</h3>
-        <p class="content"><strong>Tip:</strong> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>. There's also another variable created by Buefy: <code>$speed-slow: 150ms !default</code>.</p>
+        <h3 class="subtitle"><span class="list-number">2</span> Set your variables with Sass</h3>
+        <p class="content"><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>. There's also another variable created by Buefy: <code>$speed-slow: 150ms !default</code>.</p>
         <div class="example"><pre v-highlight><code class="sass">{{ sass | pre }}</code></pre></div>
 
         <hr>
 
-        <h3 class="subtitle"><span class="mr-8">3</span> Import Bulma and Buefy styles <em>after</em> having set your variables</h3>
+        <h3 class="subtitle"><span class="list-number">3</span> Import Bulma and Buefy styles <em>after</em> having set your variables</h3>
         <pre v-highlight><code class="sass">{{ sassFinal | pre }}</code></pre>
 
         <hr>
 
-        <h3 class="subtitle"><span class="mr-8">4</span> Import and use Buefy. You can also enable individual components</h3>
+        <h3 class="subtitle"><span class="list-number">4</span> Import and use Buefy. You can also enable individual components</h3>
         <pre v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
     </div>
 </template>
@@ -33,17 +31,6 @@
     export default {
         data() {
             return {
-                importing: `
-                    import Vue from 'vue'
-                    import Buefy from 'buefy'
-
-                    Vue.use(Buefy)
-
-                    // OR
-
-                    Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                    Vue.component(Buefy.Table.name, Table.Checkbox)
-                    ...`,
                 sass: `
                     // Import Bulma's core
                     @import "~bulma/sass/utilities/_all";
@@ -83,7 +70,18 @@
                     ... // Your variables
 
                     @import "~bulma";
-                    @import "~buefy";`
+                    @import "~buefy/src/scss/buefy";`,
+                importing: `
+                    import Vue from 'vue'
+                    import Buefy from 'buefy'
+
+                    Vue.use(Buefy)
+
+                    // OR
+
+                    Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
+                    Vue.component(Buefy.Table.name, Table.Checkbox)
+                    ...`
             }
         }
     }

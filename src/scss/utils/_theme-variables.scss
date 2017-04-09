@@ -1,27 +1,6 @@
 // Colors
 $primary: #7957d5;
 $primary-invert: findColorInvert($primary);
-$twitter: #4099FF;
-$twitter-invert: findColorInvert($twitter);
-$facebook: #4267B2;
-$facebook-invert: findColorInvert($facebook);
-$google-plus: #DB4437;
-$google-plus-invert: findColorInvert($google-plus);
-
-$colors: (
-    white: ($white, $black),
-    black: ($black, $white),
-    light: ($light, $light-invert),
-    dark: ($dark, $dark-invert),
-    primary: ($primary, $primary-invert),
-    info: ($info, $info-invert),
-    success: ($success, $success-invert),
-    warning: ($warning, $warning-invert),
-    danger: ($danger, $danger-invert),
-    twitter: ($twitter, $twitter-invert),
-    facebook: ($facebook, $facebook-invert),
-    google-plus: ($google-plus, $google-plus-invert)
-);
 
 // Links
 $link: $primary;

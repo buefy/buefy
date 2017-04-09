@@ -40,6 +40,10 @@
         }
     }
 
+    .list-number {
+        margin-right: 8px;
+    }
+
     .example {
         border: 1px solid #ffdd57;
         border-top-right-radius: 3px;
@@ -71,12 +75,13 @@
     .home {
         .logo-rounded,
         .subtitle,
-        .npm {
+        .npm,
+        .github-button {
             margin-bottom: 32px;
         }
         .logo-rounded {
             background: $light;
-            display: inline-flex;
+            display: inline-block;
             padding: 40px;
             border-radius: 32px;
             box-shadow: 0 20px 60px rgba(10, 10, 10, 0.05), 0 5px 10px rgba(10, 10, 10, 0.1), 0 1px 1px rgba(10, 10, 10, 0.2);

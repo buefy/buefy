@@ -20,7 +20,7 @@
     "build:lib:autoprefix": "postcss --use autoprefixer --output lib/css/buefy.css lib/css/buefy.css",
     "build:lib": "npm run build:lib:clean && npm run build:lib:sass && npm run build:lib:autoprefix",
     "build:docs": "node build/build.js",
-    "build": "node build:lib && node build:docs"
+    "build": "npm run build:lib && npm run build:docs"
   },
   "keywords": [
     "bulma",

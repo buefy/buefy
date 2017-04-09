@@ -28,7 +28,7 @@
 
                 <div class="nav-item">
                     <a class="button is-outlined" :class="home ? 'is-light' : 'is-twitter'" @click="tweet">
-                        <b-icon pack="fa" icon="twitter" class="mr-4"></b-icon> Tweet
+                        <b-icon pack="fa" icon="twitter"></b-icon> <span>Tweet</span>
                     </a>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 const height = 400
                 const left = (window.screen.width - width) / 2
                 const top = (window.screen.height - height) / 2
-                const url = `https://twitter.com/share?url=${encodeURI(window.location.href)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa`
+                const url = `https://twitter.com/share?url=${encodeURIComponent(window.location.href)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa`
                 const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
 
                 window.open(url, '', opts)

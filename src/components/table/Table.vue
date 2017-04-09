@@ -5,12 +5,11 @@
         <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
             <p class="control">
                 <span class="select is-fullwidth">
-                    <select>
+                    <select v-model="currentSortColumn">
                         <option
                             v-for="column in columns"
-                            @click="sort(column)"
                             v-if="column.isSortable"
-                            :selected="this.currentSortColumn === column">
+                            :value="column">
                             {{ column.label }}
                         </option>
                     </select>
@@ -62,7 +61,7 @@
 
                         <template v-for="(cell, key) in item" v-if="key === column.field">
                             <span v-if="html" v-html="html ? column.format(cell, item) : null"></span>
-                            {{ !html ? column.format(cell, item) : null }}
+                            <span v-if="!html">{{ !html ? column.format(cell, item) : null }}</span>
                         </template>
 
                     </td>
@@ -146,13 +145,16 @@
             },
             selectable(val) {
                 if (!val) this.selectedItem = {}
+            },
+            currentSortColumn(column) {
+                this.sort(column)
             }
         },
         computed: {
             visibleData() {
                 if (!this.paginated) return this.newData
 
-                const currentPage = this.currentPage || 1
+                const currentPage = this.currentPage
                 const perPage = this.perPage
 
                 if (this.newData.length <= perPage) {
