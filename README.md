@@ -1,10 +1,12 @@
 # Buefy
 
+[![npm](https://img.shields.io/npm/v/buefy.svg)]()
+[![npm](https://img.shields.io/npm/dt/buefy.svg)]()
+[![npm](https://img.shields.io/npm/l/buefy.svg)]()
+
 Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
-It focus on usability and performance with no *over-animations*.
-
-![Buefy](https://github.com/rafaelpimpa/buefy/blob/master/static/buefy-banner.png)
+[![Buefy](https://github.com/rafaelpimpa/buefy/blob/master/static/buefy-banner.png)](https://buefy.github.io)
 
 ## Features
 
@@ -17,6 +19,8 @@ It focus on usability and performance with no *over-animations*.
 * Semantic code output
 
 * Follows Bulma design and some of the [Material Design UX](https://material.io/)
+
+* Focus on usability and performance without *over-animations*
 
 ## Documentation and Demo
 

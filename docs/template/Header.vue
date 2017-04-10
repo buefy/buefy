@@ -54,7 +54,7 @@
                 const height = 400
                 const left = (window.screen.width - width) / 2
                 const top = (window.screen.height - height) / 2
-                const url = `https://twitter.com/share?url=${encodeURIComponent(window.location.href)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa`
+                const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa`
                 const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
 
                 window.open(url, '', opts)
