@@ -21,7 +21,8 @@
                             src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=star&count=true&size=large"
                             frameborder="0"
                             scrolling="0"
-                            width="140px" height="30px">
+                            width="140px"
+                            height="30px">
                         </iframe>
 
                         <iframe
