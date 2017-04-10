@@ -29,7 +29,9 @@
     @import "./assets/main.scss";
 
     pre {
-        white-space: pre-wrap;
+        @include tablet {
+            white-space: pre-wrap;
+        }
         code {
             max-height: 600px;
             &.hljs {
@@ -50,6 +52,7 @@
         color: rgba(0, 0, 0, 0.7);
         padding: 1.5rem;
         position: relative;
+        overflow: auto;
         &:before {
             background: #ffdd57;
             border-radius: 3px 3px 0 0;

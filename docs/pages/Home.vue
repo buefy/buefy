@@ -80,9 +80,9 @@
 </template>
 
 <script>
+    import ScrollReveal from 'scrollreveal'
     import AppHeader from '../template/Header'
     import AppFooter from '../template/Footer'
-    import ScrollReveal from 'scrollreveal'
 
     export default {
         name: 'app',

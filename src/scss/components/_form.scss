@@ -5,6 +5,9 @@
     padding-bottom: 0.25em;
     padding-top: 0.25em;
 }
+.select select {
+    padding-right: 2.5em;
+}
 
 .control {
     &.has-icon {
@@ -34,11 +37,7 @@
     }
     .help.counter {
         float: right;
-        &.has-message {
-            float: none;
-            position: absolute;
-            right: 0;
-        }
+        margin-left: 0.5em;
     }
 }
 

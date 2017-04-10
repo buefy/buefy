@@ -5,7 +5,7 @@
         <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
             <p class="control">
                 <span class="select is-fullwidth">
-                    <select v-model="currentSortColumn">
+                    <select v-model="mobileSort">
                         <option
                             v-for="column in columns"
                             v-if="column.isSortable"
@@ -30,7 +30,7 @@
                     <th class="checkbox-cell" v-if="checkable">
                         <b-checkbox :value="isAllChecked" @change="checkAll($event)"></b-checkbox>
                     </th>
-                    <th v-for="column in columns" @click="sort(column)"
+                    <th v-for="column in columns" @click.stop="sort(column)"
                         :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
                         :style="{ width: column.width + 'px' }">
                         <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
@@ -134,6 +134,7 @@
                 selectedItem: {},
                 checkedItems: [],
                 currentSortColumn: {},
+                mobileSort: {},
                 currentPage: 1,
                 isTableComponent: true // Used by TableColumn
             }
@@ -143,11 +144,16 @@
                 this.newData = value
                 this.currentSortColumn = {}
             },
-            selectable(val) {
-                if (!val) this.selectedItem = {}
+            selectable(value) {
+                if (!value) this.selectedItem = {}
+            },
+            mobileSort(column) {
+                if (this.currentSortColumn === column) return
+
+                this.sort(column)
             },
             currentSortColumn(column) {
-                this.sort(column)
+                this.mobileSort = column
             }
         },
         computed: {
@@ -198,6 +204,7 @@
             },
             sort(column) {
                 if (!column.isSortable) return
+                console.log('SORTING')
 
                 if (column === this.currentSortColumn) {
                     column.isAsc = !column.isAsc
@@ -262,7 +269,7 @@
                     if (column.field === sortField) {
                         this.sort(column)
                         if (direction.toLowerCase() === 'desc') {
-                            this.sort(column)
+                            this.newData.reverse()
                         }
                     }
                 })

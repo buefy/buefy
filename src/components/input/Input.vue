@@ -1,5 +1,12 @@
 <template>
-    <p class="control is-clearfix" :class="[iconPosition, { 'has-icon': hasIcon, 'is-expanded': expanded, 'is-loading': loading }]">
+    <p
+        class="control"
+        :class="[iconPosition, {
+            'has-icon': hasIcon,
+            'is-expanded': expanded,
+            'is-loading': loading,
+            'is-clearfix': !hasMessage
+        }]">
         <input
             v-if="type !== 'textarea'"
             class="input"
@@ -66,7 +73,7 @@
             @click.native="togglePasswordVisibility">
         </b-icon>
 
-        <small class="help counter" :class="{ 'has-message': hasMessage }" v-if="maxlength">{{ characteresCount }} / {{ maxlength }}</small>
+        <small class="help counter" v-if="maxlength">{{ characteresCount }} / {{ maxlength }}</small>
     </p>
 </template>
 
@@ -154,11 +161,11 @@
             }
         },
         watch: {
-            value(val) {
-                this.newValue = val
+            value(value) {
+                this.newValue = value
             },
-            newValue(val) {
-                this.$emit('change', val)
+            newValue(value) {
+                this.$emit('change', value)
             }
         },
         methods: {

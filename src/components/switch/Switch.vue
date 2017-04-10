@@ -27,6 +27,9 @@
             }
         },
         watch: {
+            value(value) {
+                this.newValue = value
+            },
             newValue(value) {
                 this.$emit('input', value)
             }

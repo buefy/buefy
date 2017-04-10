@@ -32,7 +32,6 @@
                 width: 10px;
                 height: 10px;
                 background: $primary;
-                visibility: hidden;
                 transform: scale(0);
                 transition: transform $speed $easing;
             }
@@ -44,7 +43,6 @@
             border-color: $primary;
         }
         &:checked + span:after {
-            visibility: visible;
             transform: scale(1);
         }
     }

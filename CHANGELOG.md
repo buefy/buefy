@@ -1,5 +1,18 @@
 # Buefy Changelog
 
+# 0.1.2
+
+* Fixed Switch two-way data binding not working correctly
+* Fixed Radio animation not working properly
+* Fixed #2 — select arrow misplaced
+* Fixed Input's help message overlapping maxlength's counter
+* Fixed Table column sorting — should start with ASC
+* Fixed Table mobile sorting not working
+
+# 0.1.1
+
+* Fixed #1 — ``lib`` folder not published
+
 ## 0.1.0
 
 * **New component: Input**

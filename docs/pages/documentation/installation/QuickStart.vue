@@ -18,7 +18,7 @@
 
         <h2 class="subtitle"><span class="list-number">3</span> Include Material Design Icons</h2>
         <p class="content">
-            <b>Note:</b> By default Buefy uses <a href="https://material.io/icons/" target="_blank">Material Icons</a>,
+            <b>Note:</b> By default Buefy uses <a href="https://material.io/icons/" target="_blank">Material Design Icons</a>,
             if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, go to
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
         </p>
