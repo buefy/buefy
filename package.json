@@ -5,7 +5,7 @@
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "lib/src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rafaelpimpa/buefy.git"
@@ -16,9 +16,10 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build:lib:clean": "rimraf lib",
-    "build:lib:sass": "node-sass --output-style expanded --source-map true --include-path node_modules src/scss/buefy-build.scss lib/css/buefy.css",
-    "build:lib:autoprefix": "postcss --use autoprefixer --output lib/css/buefy.css lib/css/buefy.css",
-    "build:lib": "npm run build:lib:clean && npm run build:lib:sass && npm run build:lib:autoprefix",
+    "build:lib:js": "vue build src/index.js --prod --lib Buefy --dist lib",
+    "build:lib:sass": "node-sass --output-style expanded --source-map true --include-path node_modules src/scss/buefy-build.scss lib/buefy.css",
+    "build:lib:autoprefix": "postcss --use autoprefixer --output lib/buefy.css lib/buefy.css",
+    "build:lib": "npm run build:lib:clean && npm run build:lib:js && npm run build:lib:sass && npm run build:lib:autoprefix",
     "build:docs": "node build/build.js",
     "build": "npm run build:lib && npm run build:docs"
   },

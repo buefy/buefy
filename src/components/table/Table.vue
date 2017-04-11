@@ -204,7 +204,6 @@
             },
             sort(column) {
                 if (!column.isSortable) return
-                console.log('SORTING')
 
                 if (column === this.currentSortColumn) {
                     column.isAsc = !column.isAsc

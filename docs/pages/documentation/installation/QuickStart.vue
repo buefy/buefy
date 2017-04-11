@@ -33,14 +33,14 @@
                 importing: `
                     import Vue from 'vue'
                     import Buefy from 'buefy'
-                    import 'buefy/lib/css/buefy.css'
+                    import 'buefy/lib/buefy.css'
 
                     Vue.use(Buefy)
 
                     // OR
 
                     Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                    Vue.component(Buefy.Table.name, Table.Checkbox)
+                    Vue.component(Buefy.Table.name, Buefy.Table)
                     ...`,
                 materialIcons: '<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">'
             }

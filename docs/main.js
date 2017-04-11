@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import Buefy from '../src'
+import Buefy from '../lib/src'
 import VueProgressBar from 'vue-progressbar'
 import hljs from 'highlight.js'
 

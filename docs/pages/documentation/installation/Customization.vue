@@ -80,7 +80,7 @@
                     // OR
 
                     Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                    Vue.component(Buefy.Table.name, Table.Checkbox)
+                    Vue.component(Buefy.Table.name, Buefy.Table)
                     ...`
             }
         }
