@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import Buefy from '../lib/src'
+import Buefy from '../src'
 import VueProgressBar from 'vue-progressbar'
 import hljs from 'highlight.js'
 
@@ -21,27 +21,27 @@ Vue.use(VueProgressBar, {
 
 Vue.directive('highlight', {
     deep: true,
-    bind: function (el, binding) {
+    bind(el, binding) {
         // on first bind, highlight all targets
         const targets = el.querySelectorAll('code')
-        targets.forEach((target) => {
+        for (const target of Array.from(targets)) {
             // if a value is directly assigned to the directive, use this
             // instead of the element content.
             if (binding.value) {
                 target.innerHTML = binding.value
             }
             hljs.highlightBlock(target)
-        })
+        }
     },
-    componentUpdated: function (el, binding) {
+    componentUpdated(el, binding) {
         // after an update, re-fill the content and then highlight
         const targets = el.querySelectorAll('code')
-        targets.forEach((target) => {
+        for (const target of Array.from(targets)) {
             if (binding.value) {
                 target.innerHTML = binding.value
                 hljs.highlightBlock(target)
             }
-        })
+        }
     }
 })
 

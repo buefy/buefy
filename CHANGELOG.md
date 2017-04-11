@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+# 0.1.3
+
+* Fix #5 — now serving compiled files
+* Fix #6 — docs now working on Edge
+
 # 0.1.2
 
 * Fixed Switch two-way data binding not working correctly
