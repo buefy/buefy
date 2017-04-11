@@ -62,12 +62,12 @@ Vue.component(Buefy.Table.name, Buefy.Table)
 
 ## Browser Support
 
-[x] Firefox 52+
-[x] Chrome 57+
-[x] Edge 38+
-[x] Opera 44+
-[ ] Safari (needs testing)
-[ ] Internet Explorer (not working)
+- [x] Firefox 52+
+- [x] Chrome 57+
+- [x] Edge 38+
+- [x] Opera 44+
+- [ ] Safari (needs testing)
+- [ ] Internet Explorer (not working)
 
 ## Credits and Thanks
 
