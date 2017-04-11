@@ -203,7 +203,7 @@
                 }
             },
             sort(column) {
-                if (!column.isSortable) return
+                if (!column || !column.isSortable) return
 
                 if (column === this.currentSortColumn) {
                     column.isAsc = !column.isAsc
