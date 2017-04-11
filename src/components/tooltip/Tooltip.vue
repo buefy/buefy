@@ -2,9 +2,9 @@
     <span
         class="tooltip"
         :data-label="label"
-        :class="[type, position, size, {
+        :class="[newType, position, size, {
             'is-square': square,
-            'is-animated': animated,
+            'is-animated': newAnimated,
             'is-always': always,
             'is-multiline': multilined,
             'is-dashed': dashed
@@ -14,13 +14,12 @@
 </template>
 
 <script>
+    import config from '../../utils/config'
+
     export default {
         name: 'bTooltip',
         props: {
-            type: {
-                type: String,
-                default: 'is-primary'
-            },
+            type: String,
             label: String,
             position: {
                 type: String,
@@ -34,6 +33,12 @@
             size: {
                 type: String,
                 default: 'is-medium'
+            }
+        },
+        data() {
+            return {
+                newType: this.type || config.defaultTooltipType,
+                newAnimated: this.animated || config.defaultTooltipAnimated
             }
         }
     }

@@ -1,11 +1,13 @@
 # Buefy Changelog
 
-# 0.1.3
+## 0.1.4
 
 * Fix #5 — now serving compiled files
-* Fix #6 — docs now working on Edge
+* Fix #6 (partially) — docs now working on Edge
+* Added "UI Elements" on docs to specify that the user can use anything from Bulma
+* Redone the construtor options structure to work with the compiled build
 
-# 0.1.2
+## 0.1.2
 
 * Fixed Switch two-way data binding not working correctly
 * Fixed Radio animation not working properly
@@ -14,7 +16,7 @@
 * Fixed Table column sorting — should start with ASC
 * Fixed Table mobile sorting not working
 
-# 0.1.1
+## 0.1.1
 
 * Fixed #1 — ``lib`` folder not published
 

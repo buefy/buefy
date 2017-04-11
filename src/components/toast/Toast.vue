@@ -28,11 +28,6 @@
                 default: 2500
             }
         },
-        data() {
-            return {
-                parent: null
-            }
-        },
         methods: {
             hasChild(parent) {
                 return parent !== null && parent.childElementCount > 0
@@ -42,20 +37,6 @@
                 this.parent.classList.add('notices', 'is-toast', this.position)
                 this.parent.appendChild(this.$el)
             }
-        },
-        beforeMount() {
-            let parent
-            parent = document.querySelector('.notices')
-
-            const container = document.querySelector(this.container) !== null ? document.querySelector(this.container) : document.body
-            if (!parent) {
-                parent = document.createElement('div')
-            }
-            this.parent = parent
-            if (this.container) {
-                parent.style.position = 'absolute'
-            }
-            container.appendChild(parent)
         }
     }
 </script>

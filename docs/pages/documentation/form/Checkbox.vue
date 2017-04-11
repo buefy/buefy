@@ -125,6 +125,7 @@
             </b-table-column>
         </b-table>
 
+        <hr>
         <h2 class="subtitle">Checkbox Group properties</h2>
         <b-table
             :data="checkboxGroupProps"

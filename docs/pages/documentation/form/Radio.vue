@@ -96,6 +96,7 @@
             </b-table-column>
         </b-table>
 
+        <hr>
         <h2 class="subtitle">Radio Button properties</h2>
         <b-table
             :data="radioButtonProps"
@@ -124,6 +125,7 @@
             </b-table-column>
         </b-table>
 
+        <hr>
         <h2 class="subtitle">Radio Group properties</h2>
         <b-table
             :data="radioGroupProps"

@@ -1,26 +1,30 @@
 <template>
     <span class="icon is-unselectable" :class="[type, size]">
-        <i :class="[pack, pack === 'fa' ? `fa-${newIcon}` : null ]">{{ pack === 'mdi' ? newIcon : null }}</i>
+        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
     </span>
 </template>
 
 <script>
+    import config from '../../utils/config'
+
     export default {
         name: 'bIcon',
         props: {
             type: String,
-            pack: {
-                type: String,
-                default: 'mdi'
-            },
+            pack: String,
             icon: String,
             both: Boolean, // This is used internally show both mdi and fa icon
             size: String
         },
+        data() {
+            return {
+                newPack: this.pack || config.defaultIconPack
+            }
+        },
         computed: {
             newIcon() {
                 if (this.both) {
-                    return this.pack === 'mdi' ? this.icon : this.equivalentIconOf(this.icon)
+                    return this.newPack === 'mdi' ? this.icon : this.equivalentIconOf(this.icon)
                 } else {
                     return this.icon
                 }

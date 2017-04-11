@@ -348,7 +348,6 @@
             </b-table-column>
         </b-table>
 
-        <hr>
         <h2 class="subtitle">Input events</h2>
         <b-table
             :data="inputEvents"

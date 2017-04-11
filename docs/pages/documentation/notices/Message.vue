@@ -125,8 +125,6 @@
             </b-table-column>
         </b-table>
 
-        <hr>
-
         <h2 class="subtitle">Events</h2>
         <b-table
             :data="events"

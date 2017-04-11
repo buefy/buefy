@@ -2,6 +2,8 @@
  * Used on both Toast and Snackbar
  */
 
+import config from './config'
+
 export default {
     props: {
         type: String,
@@ -13,6 +15,8 @@ export default {
     data() {
         return {
             isActive: false,
+            parent: null,
+            newContainer: this.container || config.defaultContentElement,
             positions: {
                 'top-right': {
                     enter: 'Down',
@@ -82,6 +86,20 @@ export default {
             this.isActive = true
             this.timer = setTimeout(() => this.close(), this.duration)
         }
+    },
+    beforeMount() {
+        let parent
+        parent = document.querySelector('.notices')
+
+        const container = document.querySelector(this.newContainer) !== null ? document.querySelector(this.newContainer) : document.body
+        if (!parent) {
+            parent = document.createElement('div')
+        }
+        this.parent = parent
+        if (this.newContainer) {
+            parent.style.position = 'absolute'
+        }
+        container.appendChild(parent)
     },
     mounted() {
         this.show()

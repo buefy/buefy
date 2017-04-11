@@ -62,7 +62,12 @@ Vue.component(Buefy.Table.name, Buefy.Table)
 
 ## Browser Support
 
-JavaScript depends on your building. CSS is from [Bulma Browser Support](https://github.com/jgthms/bulma#browser-support).
+[x] Firefox 52+
+[x] Chrome 57+
+[x] Edge 38+
+[x] Opera 44+
+[ ] Safari (needs testing)
+[ ] Internet Explorer (not working)
 
 ## Credits and Thanks
 

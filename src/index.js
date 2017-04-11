@@ -13,7 +13,7 @@ import Dialog from './components/dialog'
 import Snackbar from './components/snackbar'
 import Toast from './components/toast'
 
-import NoticeMixin from './utils/NoticeMixin'
+import config, { setOptions } from './utils/config'
 
 const components = {
     Checkbox,
@@ -35,11 +35,7 @@ const components = {
 
 components.install = (Vue, options = {}) => {
     // Options
-    NoticeMixin.props.container.default = options.defaultContentElement || NoticeMixin.props.container.default
-    Icon.props.pack.default = options.defaultIconPack || Icon.props.pack.default
-    Tooltip.props.type.default = options.defaultTooltipType || Tooltip.props.type.default
-    Tooltip.props.animated.default = options.defaultTooltipIsAnimated || Tooltip.props.animated.default
-    Input.props.autocomplete.default = options.defaultInputAutocomplete || Input.props.autocomplete.default
+    setOptions(Object.assign(config, options))
 
     for (const componentName in components) {
         const component = components[componentName]

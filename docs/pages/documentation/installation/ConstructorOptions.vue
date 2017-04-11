@@ -81,7 +81,7 @@
                         default: '<code>is-primary</code>'
                     },
                     {
-                        name: '<code>defaultTooltipIsAnimated</code>',
+                        name: '<code>defaultTooltipAnimated</code>',
                         description: `Default tooltip <code>animated</code> attribute.`,
                         type: 'Boolean',
                         values: '—',

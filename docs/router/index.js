@@ -11,6 +11,7 @@ const QuickStart = (r) => require(['../pages/documentation/installation/QuickSta
 const Customization = (r) => require(['../pages/documentation/installation/Customization'], r)
 const ConstructorOptions = (r) => require(['../pages/documentation/installation/ConstructorOptions'], r)
 
+const UIElements = (r) => require(['../pages/documentation/general/UIElements'], r)
 const Icon = (r) => require(['../pages/documentation/general/Icon'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
 
@@ -60,6 +61,13 @@ export default new Router({
                     component: ConstructorOptions,
                     meta: {
                         category: 'Installation'
+                    }
+                },
+                {
+                    path: 'ui-elements',
+                    component: UIElements,
+                    meta: {
+                        category: 'General'
                     }
                 },
                 {

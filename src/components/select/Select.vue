@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown">
+    <div class="select">
         <slot></slot>
         <slot name="list"></slot>
     </div>
@@ -9,7 +9,7 @@
     import Icon from '../icon'
 
     export default {
-        name: 'bDropdown',
+        name: 'bSelect',
         components: {
             [Icon.name]: Icon
         },

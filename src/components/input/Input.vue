@@ -19,7 +19,7 @@
             :readonly="readonly"
             :maxlength="maxlength"
             :minlength="minlength"
-            :autocomplete="autocomplete"
+            :autocomplete="newAutocomplete"
             :required="required"
             :min="min"
             :max="max"
@@ -80,6 +80,7 @@
 <script>
     import Vue from 'vue'
     import Icon from '../icon'
+    import config from '../../utils/config'
 
     export default {
         name: 'bInput',
@@ -100,10 +101,7 @@
             iconPack: String,
 
             // Native options
-            autocomplete: {
-                type: String,
-                default: 'on'
-            },
+            autocomplete: String,
             required: Boolean,
             disabled: Boolean,
             max: [Number, String],
@@ -120,6 +118,7 @@
             return {
                 newValue: this.value,
                 newType: this.type,
+                newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
                 isPasswordVisible: false
             }
         },

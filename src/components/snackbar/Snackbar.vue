@@ -31,11 +31,6 @@
                 default: () => {}
             }
         },
-        data() {
-            return {
-                parent: null
-            }
-        },
         methods: {
             hasChild(parent) {
                 return parent !== null && parent.childElementCount > 0
@@ -49,20 +44,6 @@
                 this.onAction()
                 this.close()
             }
-        },
-        beforeMount() {
-            let parent
-            parent = document.querySelector('.notices')
-
-            const container = document.querySelector(this.container) !== null ? document.querySelector(this.container) : document.body
-            if (!parent) {
-                parent = document.createElement('div')
-            }
-            this.parent = parent
-            if (this.container) {
-                parent.style.position = 'absolute'
-            }
-            container.appendChild(parent)
         }
     }
 </script>

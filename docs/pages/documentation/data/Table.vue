@@ -124,7 +124,8 @@
             </b-table-column>
         </b-table>
 
-        <h2 class="subtitle">Column properties</h2>
+        <hr>
+        <h2 class="subtitle">Table Column properties</h2>
         <b-table
             :data="columnProps"
             default-sort="name"
