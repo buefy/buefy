@@ -3,7 +3,7 @@
         <slot></slot>
         <span class="select">
             <input
-                v-model="search"
+                v-model="inputValue"
                 class="input"
                 :class="[statusType, size]"
                 ref="input"
@@ -12,28 +12,37 @@
                 :disabled="disabled"
                 :readonly="!searchable"
                 @click="isActive = !isActive"
-                @input="input"
-                @focus="$emit('focus', $event)"
-                @change="$emit('change', selected)">
+                @focus="$emit('focus', $event)">
 
-            <span
-                class="box"
-                v-show="isActive"
-                ref="list">
-                <ul>
-                    <li class="option"
-                        v-for="option in options"
-                        @click="select(option)">
-                        {{ option.label }}
-                    </li>
-                </ul>
-            </span>
+            <transition
+                appear
+                appear-active-class="fadeIn"
+                enter-active-class="fadeIn"
+                leave-active-class="fadeOut">
+
+                <span
+                    class="box"
+                    :class="{ 'is-opened-top': !isListInViewport }"
+                    v-show="isActive"
+                    ref="list">
+                    <ul>
+                        <li class="option"
+                            :class="{ 'is-selected': option === selected }"
+                            v-for="option in options"
+                            @click="select(option)">
+                            {{ option.label }}
+                        </li>
+                    </ul>
+                </span>
+
+            </transition>
 
         </span>
     </p>
 </template>
 
 <script>
+    import Vue from 'vue'
     import Icon from '../icon'
 
     export default {
@@ -53,7 +62,8 @@
                 options: [],
                 selected: null,
                 isActive: false,
-                search: '',
+                inputValue: null,
+                isListInViewport: true,
                 isSelectComponent: true // Used internally by Option
             }
         },
@@ -64,18 +74,58 @@
                 }
             }
         },
+        watch: {
+            isActive(value) {
+                this.isInViewport()
+            },
+            value(value) {
+                this.options.forEach((option) => {
+                    if (option.value === value) {
+                        this.selected = option
+                        return
+                    }
+                })
+            },
+            selected(option) {
+                if (!option) return
+
+                this.$emit('input', option.value)
+                this.$emit('change', option.value)
+                this.inputValue = option.label
+            }
+        },
         methods: {
             select(option) {
                 this.selected = option
             },
-            input() {
+            search() {
                 // ...
             },
             clickedOutside(event) {
                 // Close if clicked outside
-                if (event.target !== this.$refs.input && event.target !== this.$refs.list) {
+                if (event.target !== this.$refs.input &&
+                    event.target !== this.$refs.list) {
                     this.isActive = false
                 }
+            },
+            isInViewport() {
+                Vue.nextTick(() => {
+                    const rect = this.$refs.list.getBoundingClientRect()
+
+                    console.log(
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    )
+
+                    this.isListInViewport = (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    )
+                })
             }
         },
         created() {

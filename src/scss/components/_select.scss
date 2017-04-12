@@ -3,13 +3,28 @@
         cursor: pointer;
     }
     .box {
-        padding: 0.5rem 0;
+        position: absolute;
+        min-width: 100%;
+        width: auto;
+        top: 2.5em;
+        padding: 0;
+        z-index: 10;
+        max-height: 200px;
+        overflow: auto;
+        animation-duration: $speed;
+        &.is-opened-top {
+            top: auto;
+            bottom: 2.5em;
+        }
         .option {
-            padding: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
             &:hover {
+                background: $background;
+            }
+            &.is-selected {
                 background: $primary;
                 color: $primary-invert;
-                cursor: pointer;
             }
         }
     }
