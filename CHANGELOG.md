@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.1.5
+
+* Fixed #12
+* Refactored Notification and Message
+* Added animation when closing Notification and Message
+
+
 ## 0.1.4
 
 * Fix #5 — now serving compiled files

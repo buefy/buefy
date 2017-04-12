@@ -1,62 +1,29 @@
 <template>
-    <article class="message" :class="type">
-        <div class="message-header" v-if="title">
-            <p>{{ title }}</p>
-            <button class="delete" v-if="closable" @click="close"></button>
+    <transition leave-active-class="fadeOutUp">
+        <div class="message" :class="type" v-if="isActive">
+            <div class="message-header" v-if="title">
+                <p>{{ title }}</p>
+                <button class="delete" v-if="closable" @click="close"></button>
+            </div>
+            <div class="message-body">
+                <b-icon
+                    :icon="icon"
+                    both
+                    :class="type"
+                    size="is-large"
+                    v-if="icon && hasIcon">
+                </b-icon>
+                <p><slot></slot></p>
+            </div>
         </div>
-        <div class="message-body">
-            <b-icon
-                :icon="icon"
-                both
-                :class="type"
-                size="is-large"
-                v-if="icon && hasIcon">
-            </b-icon>
-            <p><slot></slot></p>
-        </div>
-    </article>
+    </transition>
 </template>
 
 <script>
-    import Icon from '../icon'
+    import MessageMixin from '../../utils/MessageMixin.js'
 
     export default {
         name: 'bMessage',
-        components: {
-            [Icon.name]: Icon
-        },
-        props: {
-            title: String,
-            closable: {
-                type: Boolean,
-                default: true
-            },
-            type: String,
-            hasIcon: Boolean
-        },
-        computed: {
-            icon() {
-                switch (this.type) {
-                    case 'is-info':
-                        return 'info'
-                    case 'is-success':
-                        return 'check_circle'
-                    case 'is-warning':
-                        return 'warning'
-                    case 'is-danger':
-                        return 'error'
-                    default:
-                        return null
-                }
-            }
-        },
-        methods: {
-            close() {
-                this.$emit('close')
-
-                this.$destroy()
-                this.$el.remove()
-            }
-        }
+        mixins: [MessageMixin]
     }
 </script>

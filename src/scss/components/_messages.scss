@@ -1,5 +1,10 @@
-.notification,
-.message .message-body {
+.message,
+.notification {
+    animation-duration: $speed-slow;
+}
+
+.message .message-body,
+.notification {
     display: flex;
     align-items: center;
     .icon {

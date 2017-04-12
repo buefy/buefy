@@ -1,0 +1,16 @@
+.select {
+    .input {
+        cursor: pointer;
+    }
+    .box {
+        padding: 0.5rem 0;
+        .option {
+            padding: 0.25rem;
+            &:hover {
+                background: $primary;
+                color: $primary-invert;
+                cursor: pointer;
+            }
+        }
+    }
+}

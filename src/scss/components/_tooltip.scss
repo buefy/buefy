@@ -71,7 +71,6 @@ $multiline-sizes: (
             @each $name, $size in $multiline-sizes {
                 &.is-#{$name}:after {
                     width: $size;
-                    margin-left: - calc($size / 2px);
                 }
             }
         }
