@@ -1,6 +1,7 @@
 .select {
     .input {
         cursor: pointer;
+        box-shadow: none;
     }
     .box {
         position: absolute;
@@ -16,15 +17,24 @@
             top: auto;
             bottom: 2.5em;
         }
+        .subheader {
+            font-weight: $weight-semibold;
+            font-size: 0.85rem;
+            color: $text-light;
+            padding: 0.25rem 0.5rem;
+        }
         .option {
             padding: 0.25rem 0.5rem;
             cursor: pointer;
-            &:hover {
+            &.is-hovered {
                 background: $background;
             }
             &.is-selected {
                 background: $primary;
                 color: $primary-invert;
+            }
+            &.has-subheader {
+                padding: 0.25rem 1rem;
             }
         }
     }

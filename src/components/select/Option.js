@@ -4,7 +4,7 @@ export default {
     props: {
         value: [String, Number],
         disabled: Boolean,
-        subheader: Boolean
+        group: String
     },
 
     data() {
@@ -28,7 +28,7 @@ export default {
             value: this.value,
             label: hasLabel ? this.$slots.default[0].text : this.value,
             disabled: this.disabled,
-            subheader: this.subheader
+            group: this.group
         }
     },
 
