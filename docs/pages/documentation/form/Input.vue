@@ -324,7 +324,7 @@
         <b-table
             :data="inputProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -352,7 +352,7 @@
         <b-table
             :data="inputEvents"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -373,7 +373,7 @@
         <b-table
             :data="fieldProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">

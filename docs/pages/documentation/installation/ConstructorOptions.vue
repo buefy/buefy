@@ -15,7 +15,7 @@
         <b-table
             :data="options"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">

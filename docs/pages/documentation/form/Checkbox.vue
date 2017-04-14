@@ -81,7 +81,7 @@
         <b-table
             :data="checkboxProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -109,7 +109,7 @@
         <b-table
             :data="checkboxEvents"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -130,7 +130,7 @@
         <b-table
             :data="checkboxGroupProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -158,7 +158,7 @@
         <b-table
             :data="checkboxGroupEvents"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">

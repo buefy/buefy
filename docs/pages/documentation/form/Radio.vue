@@ -72,7 +72,7 @@
         <b-table
             :data="radioProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -101,7 +101,7 @@
         <b-table
             :data="radioButtonProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -130,7 +130,7 @@
         <b-table
             :data="radioGroupProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -158,7 +158,7 @@
         <b-table
             :data="radioGroupEvents"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">

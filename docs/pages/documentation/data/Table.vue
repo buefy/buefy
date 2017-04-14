@@ -80,7 +80,7 @@
         <b-table
             :data="tableProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -108,7 +108,7 @@
         <b-table
             :data="tableEvents"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">
@@ -129,7 +129,7 @@
         <b-table
             :data="columnProps"
             default-sort="name"
-            html>
+            render-html>
             <b-table-column
                 field="name"
                 label="Name">

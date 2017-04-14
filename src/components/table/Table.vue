@@ -60,8 +60,8 @@
                         :data-label="column.label">
 
                         <template v-for="(cell, key) in item" v-if="key === column.field">
-                            <span v-if="html" v-html="html ? column.format(cell, item) : null"></span>
-                            <span v-if="!html">{{ !html ? column.format(cell, item) : null }}</span>
+                            <span v-if="renderHtml" v-html="renderHtml ? column.format(cell, item) : null"></span>
+                            <span v-if="!renderHtml">{{ !renderHtml ? column.format(cell, item) : null }}</span>
                         </template>
 
                     </td>
@@ -125,7 +125,7 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            html: Boolean
+            renderHtml: Boolean
         },
         data() {
             return {
