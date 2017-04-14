@@ -55,16 +55,16 @@
                 return this.current > 1
             },
             hasFirst() {
-                return this.current > 3
+                return this.current >= 3
             },
             hasFirstEllipsis() {
-                return this.current >= 5
+                return this.current >= 4
             },
             hasLast() {
-                return this.current < this.pageCount - 2
+                return this.current <= this.pageCount - 2
             },
             hasLastEllipsis() {
-                return this.current < this.pageCount - 2 && this.current <= this.pageCount - 4
+                return this.current < this.pageCount - 2 && this.current <= this.pageCount - 3
             },
             hasNext() {
                 return this.current < this.pageCount
