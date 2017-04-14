@@ -36,7 +36,7 @@ Browse the [online documentation here](https://buefy.github.io).
 npm install buefy
 ```
 
-### Import and use Buefy. You can also enable individual components:
+### Import and use Buefy. You can also enable individual components
 
 ```javascript
 import Vue from 'vue'
@@ -67,7 +67,7 @@ Vue.component(Buefy.Table.name, Buefy.Table)
 - [x] Edge 13+
 - [x] Opera 44+
 - [x] Safari 7+
-- [ ] Internet Explorer (not working)
+- [ ] Internet Explorer 10+ is only partially supported
 
 Might work in others versions, but it's not tested.
 

@@ -4,9 +4,12 @@ import router from './router'
 
 import Buefy from '../src'
 import VueProgressBar from 'vue-progressbar'
+import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
 
 Vue.config.productionTip = false
+
+global.Promise = Bluebird
 
 Vue.use(Buefy)
 
