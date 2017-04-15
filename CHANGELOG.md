@@ -6,6 +6,7 @@
 * Fix Pagination buttons
 * BREAKING: Rename Table property ``html`` to ``render-html``
 * Fix #10 — Add Table ``backend-sorting`` property and ``sort`` event
+* Fix #9 — Table ``bordered`` sorted column
 
 ## 0.1.5
 

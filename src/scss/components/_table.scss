@@ -9,6 +9,13 @@
                 overflow: auto;
             }
         }
+        &.is-bordered {
+            th.is-current-sort,
+            th.is-sortable:hover {
+                border-color: $grey-lighter;
+                background: $background;
+            }
+        }
 
         th {
             font-weight: $weight-semibold;
