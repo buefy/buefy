@@ -134,11 +134,11 @@
             },
             keyPress(event) {
                 if (event.keyCode === 27) this.cancel()
+                console.log('teste')
             }
         },
         created() {
-            const vm = this
-            window.addEventListener('keyup', event => vm.keyPress(event))
+            document.addEventListener('keyup', this.keyPress)
         },
         beforeMount() {
             document.body.appendChild(this.$el)
@@ -151,6 +151,9 @@
             } else {
                 this.$refs.confirmButton.focus()
             }
+        },
+        beforeDestroy() {
+            document.removeEventListener('keyup', this.keyPress)
         }
     }
 </script>
