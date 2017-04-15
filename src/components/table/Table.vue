@@ -60,8 +60,8 @@
                         :data-label="column.label">
 
                         <template v-for="(cell, key) in item" v-if="key === column.field">
-                            <span v-if="renderHtml" v-html="renderHtml ? column.format(cell, item) : null"></span>
-                            <span v-if="!renderHtml">{{ !renderHtml ? column.format(cell, item) : null }}</span>
+                            <span v-if="renderHtml" v-html="column.format(cell, item)"></span>
+                            <span v-else>{{ column.format(cell, item) }}</span>
                         </template>
 
                     </td>
@@ -125,6 +125,7 @@
                 default: 20
             },
             paginationSimple: Boolean,
+            backendSorting: Boolean,
             renderHtml: Boolean
         },
         data() {
@@ -191,8 +192,12 @@
                     return [...array].sort((a, b) => {
                         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) return 0
 
-                        const newA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key]
-                        const newB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key]
+                        const newA = (typeof a[key] === 'string')
+                            ? a[key].toUpperCase()
+                            : a[key]
+                        const newB = (typeof b[key] === 'string')
+                            ? b[key].toUpperCase()
+                            : b[key]
 
                         return newA > newB ? 1 : -1
                     })
@@ -207,12 +212,21 @@
 
                 if (column === this.currentSortColumn) {
                     column.isAsc = !column.isAsc
-                    this.newData.reverse()
+                    if (!this.backendSorting) {
+                        this.newData.reverse()
+                    }
                 } else {
                     column.isAsc = true
-                    this.newData = this.sortBy(this.newData, column.field, column.customSort)
+                    if (!this.backendSorting) {
+                        this.newData = this.sortBy(this.newData, column.field, column.customSort)
+                    }
                 }
                 this.currentSortColumn = column
+                this.$emit('sort', column.field, column.isAsc ? 'asc' : 'desc')
+                if (this.backendSorting) {
+                    // Verify if it's really needed
+                    this.$forceUpdate()
+                }
             },
 
             checkAll(isChecked) {

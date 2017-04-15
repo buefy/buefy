@@ -46,6 +46,7 @@
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
                         default-sort="first_name"
+                        render-html
                         @check="checked"
                         @select="selected">
 
@@ -225,8 +226,15 @@
                         default: '<code>true</code>'
                     },
                     {
-                        name: '<code>html</code>',
+                        name: '<code>render-html</code>',
                         description: 'Cells now renders HTML',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>backend-sorting</code>',
+                        description: `Columns won't be sorted with Javascript, use with <code>sort</code> event to sort in your backend`,
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -263,6 +271,11 @@
                         name: '<code>dblclick</code>',
                         description: 'Triggers when a row is double clicked',
                         parameters: '<code>row: Object</code>'
+                    },
+                    {
+                        name: '<code>sort</code>',
+                        description: 'Triggers when a sortable column is clicked',
+                        parameters: '<code>field: String</code>, <code>order: String</code>'
                     },
                     {
                         name: '<code>select</code>',
@@ -344,6 +357,7 @@
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
                         default-sort="first_name"
+                        render-html
                         @check="checked"
                         @select="selected">
 
@@ -387,7 +401,9 @@
                                 this.selItem = item
                             },
                             formatDate(value, row) {
-                                return new Date(value).toLocaleDateString()
+                                return \`<span class="tag is-primary">
+                                    \${new Date(value).toLocaleDateString()}
+                                </span>\`
                             }
                         }
                     }`
@@ -401,7 +417,9 @@
                 this.selItem = item
             },
             formatDate(value, row) {
-                return new Date(value).toLocaleDateString()
+                return `<span class="tag is-primary">
+                    ${new Date(value).toLocaleDateString()}
+                </span>`
             }
         }
     }
