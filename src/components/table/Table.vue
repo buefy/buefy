@@ -144,6 +144,7 @@
             data(value) {
                 this.newData = value
                 if (this.resetSortOnDataChange) this.currentSortColumn = {}
+                this.sort(this.currentSortColumn)
             },
             selectable(value) {
                 if (!value) this.selectedItem = {}
