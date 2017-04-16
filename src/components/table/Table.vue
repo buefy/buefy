@@ -125,7 +125,8 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            html: Boolean
+            html: Boolean,
+            resetSortOnDataChange: true
         },
         data() {
             return {
@@ -142,7 +143,7 @@
         watch: {
             data(value) {
                 this.newData = value
-                this.currentSortColumn = {}
+                if (this.resetSortOnDataChange) this.currentSortColumn = {}
             },
             selectable(value) {
                 if (!value) this.selectedItem = {}
