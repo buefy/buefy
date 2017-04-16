@@ -55,6 +55,7 @@
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
                         <b-table-column field="gender" label="Gender"></b-table-column>
+                        <b-table-column field="componentTest" label="Component Test" component="component-test"></b-table-column>
 
                     </b-table>
                 </div>
@@ -160,7 +161,15 @@
 <script>
     import tableData from '../../../assets/data_test.json'
 
+    import ComponentTest from './componentTest.vue'
+
+    import Vue from 'vue';
+    Vue.component('component-test', ComponentTest);
+
     export default {
+        components: {
+            ComponentTest
+        },
         data() {
             return {
                 tableData,
@@ -417,9 +426,7 @@
                 this.selItem = item
             },
             formatDate(value, row) {
-                return `<span class="tag is-primary">
-                    ${new Date(value).toLocaleDateString()}
-                </span>`
+                return new Date(value).toLocaleDateString();
             }
         }
     }
