@@ -125,14 +125,18 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            html: Boolean
+            html: Boolean,
+            checkedRows: {
+                type: Array,
+                default: () => []
+            }
         },
         data() {
             return {
                 columns: [],
                 newData: this.data,
                 selectedItem: {},
-                checkedItems: [],
+                checkedItems: this.checkedRows,
                 currentSortColumn: {},
                 mobileSort: {},
                 currentPage: 1,
@@ -144,7 +148,6 @@
                 console.log('ciao')
                 this.newData = value
                 this.sort(this.currentSortColumn, true)
-                // this.currentSortColumn = {}
             },
             selectable(value) {
                 if (!value) this.selectedItem = {}
@@ -156,6 +159,10 @@
             },
             currentSortColumn(column) {
                 this.mobileSort = column
+            },
+            checkedRows(values) {
+                this.checkedItems = values
+                this.$emit('check', this.checkedItems)
             }
         },
         computed: {

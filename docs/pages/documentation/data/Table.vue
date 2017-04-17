@@ -31,6 +31,7 @@
                             </span>
                         </p>
                         <a class="button" @click="changeData">Change data</a>
+                        <a class="button" @click="uncheckAll">Uncheck all</a>
                     </div>
                 </div>
 
@@ -46,6 +47,7 @@
                         :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
+                        :checked-rows="checkedRows"
                         default-sort="first_name"
                         @check="checked"
                         @select="selected">
@@ -166,6 +168,7 @@
             return {
                 tableData,
                 checkItems: [],
+                checkedRows: [],
                 selItem: {},
                 isBordered: false,
                 isStriped: false,
@@ -407,6 +410,9 @@
             },
             changeData() {
                 this.tableData = tableData2
+            },
+            uncheckAll() {
+                this.checkedRows = []
             }
         }
     }
