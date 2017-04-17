@@ -5,7 +5,9 @@ export default {
         value: [String, Number],
         size: String,
         placeholder: String,
+        name: String,
         disabled: Boolean,
+        required: Boolean,
         searchable: Boolean,
         expanded: Boolean
     },
@@ -16,7 +18,8 @@ export default {
             hovered: null,
             isActive: false,
             inputValue: null,
-            isListInViewport: true,
+            isListInViewportHorizontally: true,
+            isListInViewportVertically: true,
             isSelectComponent: true // Used internally by Option
         }
     },
@@ -51,7 +54,8 @@ export default {
             if (!this.isActive) {
                 // Wait for the animation to finish before recalculating
                 setTimeout(() => {
-                    this.calcListInViewport()
+                    this.calcListInViewportHorizontal()
+                    this.calcListInViewportVertical()
                     if (this.selected !== null) {
                         this.inputValue = this.selected.label
                         // Set scroll position to selected item
@@ -63,7 +67,8 @@ export default {
                     }
                 }, 100)
             } else {
-                this.calcListInViewport()
+                this.calcListInViewportHorizontal()
+                this.calcListInViewportVertical()
                 if (this.searchable) {
                     this.$refs.input.select()
                 }
@@ -144,18 +149,31 @@ export default {
         },
 
         /**
-         * Calculates if the dropdown list is visible when activated,
-         * it'll be opened upwards if not.
+         * Calculates if the dropdown list is vertically visible when activated,
+         * otherwise it is openened upwards.
          */
-        calcListInViewport() {
+        calcListInViewportVertical() {
             Vue.nextTick(() => {
                 const rect = this.$refs.list.getBoundingClientRect()
 
-                this.isListInViewport = (
+                this.isListInViewportVertically = (
                     rect.top >= 0 &&
-                    rect.left >= 0 &&
                     rect.bottom <= (window.innerHeight ||
-                        document.documentElement.clientHeight) &&
+                        document.documentElement.clientHeight)
+                )
+            })
+        },
+
+        /**
+         * Calculates if the dropdown list is horizontally visible when activated,
+         * otherwise it is opened left sided.
+         */
+        calcListInViewportHorizontal() {
+            Vue.nextTick(() => {
+                const rect = this.$refs.list.getBoundingClientRect()
+
+                this.isListInViewportHorizontally = (
+                    rect.left >= 0 &&
                     rect.right <= (window.innerWidth ||
                         document.documentElement.clientWidth)
                 )
@@ -201,8 +219,14 @@ export default {
     },
     created() {
         document.addEventListener('click', this.clickedOutside)
+        // document.addEventListener('scroll', this.clickedOutside)
+        window.addEventListener('resize', this.calcListInViewportHorizontal)
+        window.addEventListener('resize', this.calcListInViewportVertical)
     },
     beforeDestroy() {
         document.removeEventListener('click', this.clickedOutside)
+        // document.removeEventListener('scroll', this.clickedOutside)
+        window.removeEventListener('resize', this.calcListInViewportHorizontal)
+        window.removeEventListener('resize', this.calcListInViewportVertical)
     }
 }

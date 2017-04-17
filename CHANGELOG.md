@@ -1,13 +1,16 @@
 # Buefy Changelog
 
-## 0.1.6
+## 0.2.0
 
-* BREAKING: Rename Table property ``html`` to ``render-html``
+* **New component: Select**
+* **New component: Dropdown**
+* **BREAKING:** Rename Table property ``html`` to ``render-html``
 * Fix #6 — Docs working on IE
 * Fix #10 — Add Table ``backend-sorting`` property and ``sort`` event
 * Fix #9 — Table ``bordered`` sorted column
 * Fix Pagination buttons messing up at pages 3 and 4
 * Fix Dialog keeping keyup event
+* Fix #14 — Add ``component`` property on Table. Thanks to [korpa](https://github.com/korpa)
 
 ## 0.1.5
 

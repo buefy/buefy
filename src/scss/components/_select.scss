@@ -3,10 +3,16 @@
         cursor: pointer;
         box-shadow: none;
     }
+    .background {
+        @include overlay;
+        position: fixed;
+        background-color: rgba($black, 0.86);
+        z-index: 8;
+        animation-duration: $speed-slow;
+    }
     .box {
         position: absolute;
-        min-width: 100%;
-        width: auto;
+        width: 100%;
         max-height: 200px;
         top: 2.5em;
         border-radius: $radius-small;
@@ -19,11 +25,11 @@
             bottom: 2.5em;
         }
         .subheader {
-            color: $text-light;
-            padding: 0.25rem 0.5rem;
+            color: $grey-light;
+            padding: 0.5rem;
         }
         .option {
-            padding: 0.25rem 0.5rem;
+            padding: 0.5rem;
             cursor: pointer;
             &.is-hovered {
                 background: $background;
@@ -33,7 +39,27 @@
                 color: $primary-invert;
             }
             &.has-subheader {
-                padding: 0.25rem 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    }
+    @include touch {
+        .box {
+            position: fixed;
+            width: calc(100vw - 60px);
+            max-width: 600px;
+            max-height: calc(100vh - 120px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            .subheader {
+                padding: 0.5rem 1rem;
+            }
+            .option {
+                padding: 1rem 1.5rem;
+                &.has-subheader {
+                    padding: 1rem 2rem;
+                }
             }
         }
     }

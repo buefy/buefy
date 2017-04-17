@@ -5,7 +5,7 @@
         <slot></slot>
         <span
             class="select"
-            :class="{ 'is-fullwidth': expanded }">
+            :class="[size, { 'is-fullwidth': expanded }]">
             <input
                 v-model="inputValue"
                 class="input"
@@ -15,6 +15,8 @@
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :readonly="!searchable"
+                :name="name"
+                :required="required"
                 autocomplete="off"
                 @click="isActive = !isActive"
                 @focus="$emit('focus', $event)"
@@ -24,15 +26,22 @@
                 @keydown.down.prevent="inputArrows('down')"
                 @keydown.up.prevent="inputArrows('up')">
 
-            <transition
+            <transition-group
                 appear
                 appear-active-class="fadeIn"
                 enter-active-class="fadeIn"
                 leave-active-class="fadeOut">
 
+                <div
+                    key="bg"
+                    class="background is-hidden-desktop"
+                    v-show="isActive">
+                </div>
+
                 <span
+                    key="list"
                     class="box"
-                    :class="{ 'is-opened-top': !isListInViewport }"
+                    :class="{ 'is-opened-top': !isListInViewportVertically }"
                     v-show="isActive"
                     ref="list">
                     <ul>
@@ -55,7 +64,7 @@
                     </ul>
                 </span>
 
-            </transition>
+            </transition-group>
         </span>
     </p>
 </template>

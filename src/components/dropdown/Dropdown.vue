@@ -19,7 +19,8 @@
                 <span
                     class="box"
                     :class="['is-dropdown', {
-                        'is-opened-top': !isListInViewport,
+                        'is-opened-top': !isListInViewportVertically,
+                        'is-opened-left': !isListInViewportHorizontally,
                         'is-narrow': narrowed
                     }]"
                     v-show="isActive"

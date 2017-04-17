@@ -1,4 +1,6 @@
 .dropdown {
+    position: relative;
+    display: inline-block;
     .trigger {
         display: inline-block;
         * {
@@ -7,17 +9,23 @@
     }
     .box {
         position: absolute;
-        // width: auto;
         top: 2.5em;
         padding: 0;
         z-index: 10;
-        max-height: none;
-        // max-width: 280px;
+        white-space: nowrap;
         overflow: auto;
         animation-duration: $speed;
+        @include mobile {
+            max-width: 300px;
+            white-space: normal;
+        }
         &.is-opened-top {
             top: auto;
             bottom: 2.5em;
+        }
+        &.is-opened-left {
+            left: auto;
+            right: 0;
         }
         &.is-narrow {
             .option {

@@ -4,7 +4,6 @@ export default {
     props: {
         value: [String, Number],
         label: String,
-        disabled: Boolean,
         group: String,
         separator: Boolean,
         icon: String,
@@ -31,7 +30,7 @@ export default {
 
         this.option = {
             value: this.value,
-            label: hasLabel ? this.label || this.$slots.default[0].text : this.value,
+            label: hasLabel ? this.label || this.$slots.default[0].text.trim() : this.value,
             disabled: this.disabled,
             group: this.group,
             separator: this.separator,
