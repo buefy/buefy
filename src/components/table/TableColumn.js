@@ -11,7 +11,8 @@ export default {
         format: {
             type: Function,
             default: value => value
-        }
+        },
+        component: String
     },
 
     data() {
@@ -36,7 +37,8 @@ export default {
             isNumeric: this.numeric,
             isSortable: this.sortable,
             customSort: this.customSort,
-            format: this.format
+            format: this.format,
+            component: this.component
         }
     },
 

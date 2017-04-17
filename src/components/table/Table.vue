@@ -60,8 +60,11 @@
                         :data-label="column.label">
 
                         <template v-for="(cell, key) in item" v-if="key === column.field">
-                            <span v-if="renderHtml" v-html="column.format(cell, item)"></span>
-                            <span v-else>{{ column.format(cell, item) }}</span>
+
+                          <component v-if="column.component" :is="column.component" :data="column.format(cell, item)"></component>
+                          <span v-else-if="renderHtml" v-html="column.format(cell, item)"></span>
+                          <span v-else>{{ column.format(cell, item) }}</span>
+
                         </template>
 
                     </td>
