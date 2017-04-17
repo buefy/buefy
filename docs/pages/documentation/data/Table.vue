@@ -54,9 +54,7 @@
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
-                        <b-table-column field="gender" label="Gender"></b-table-column>
-                        <b-table-column field="componentTest" label="Component Test" component="component-test"></b-table-column>
-
+                        <b-table-column field="gender" label="Gender" component="component-gender-icon"></b-table-column>
                     </b-table>
                 </div>
             </div>
@@ -161,14 +159,14 @@
 <script>
     import tableData from '../../../assets/data_test.json'
 
-    import ComponentTest from './componentTest.vue'
+    import ComponentGenderIcon from './componentGenderIcon.vue'
 
     import Vue from 'vue';
-    Vue.component('component-test', ComponentTest);
+    Vue.component('component-gender-icon', ComponentGenderIcon);
 
     export default {
         components: {
-            ComponentTest
+            ComponentGenderIcon
         },
         data() {
             return {
