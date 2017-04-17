@@ -14,7 +14,7 @@
             icon() {
                 switch (this.data) {
                     case 'Male': return 'mars'
-                    case 'female': return 'venus'
+                    case 'Female': return 'venus'
                     default: return 'question'
                 }
             }
