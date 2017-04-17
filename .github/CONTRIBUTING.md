@@ -12,6 +12,7 @@
 * Limit the first line to 72 characters or fewer
 * Reference issues and pull requests liberally
 * **Update the docs**, add examples if needed and so on (you can do this after the PR was approved)
+* **DO NOT** commit the ``lib`` folder, use it only for testing on your end
 
 ## Buefy Javascript styleguide
 
