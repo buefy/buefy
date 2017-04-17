@@ -3,6 +3,7 @@ import { Input, Field } from './components/input'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Select, Option } from './components/select'
 import { Table, TableColumn } from './components/table'
+import Dropdown from './components/dropdown'
 import Icon from './components/icon'
 import Message from './components/message'
 import Notification from './components/notification'
@@ -19,6 +20,7 @@ import config, { setOptions } from './utils/config'
 const components = {
     Checkbox,
     CheckboxGroup,
+    Dropdown,
     Field,
     Icon,
     Input,
