@@ -21,7 +21,7 @@
     * **4 spaces indentation**
     * Only ``const`` or ``let``
     * **No trailing space**
-    * End files with a **newline**
+    * End files with a **new line**
 * Keep lines with 100 characters or less
 * Add a comment block before every **method** and **watcher** explaining what it does, with this template:
 ```javascript
@@ -36,8 +36,8 @@
     * mixins
     * components
     * props
-    * datas
-    * computeds
+    * data properties
+    * computed properties
     * watchers
     * methods
     * directives
@@ -52,8 +52,8 @@
 
 ## Buefy Sass styleguide
 
-* **Always on a separated file** in ``/src/scss``
+* **Always on a separated file** in ``/src/scss/components``
 * **Use kebab-case**
 * Use only **classes**
 * **No trailing space**
-* End files with a **newline**
+* End files with a **new line**
