@@ -73,6 +73,33 @@
         <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
         <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
+        <hr>
+        <div class="content">
+          <p>
+            There are two ways to style cell in the table with HTML:
+          </p>
+          <h2 class="title">1. renderHtml</h2>
+          <p>
+            This could be used if you just have to do small stylings and if you don't use user generated content in the table.<br>
+            <strong>Example:</strong> date column
+            <div class="notification is-warning">
+              Do not used this if you have user generated content, as this uses <i>v-html</i>. Please read about <i>v-html</i> <a href="https://vuejs.org/v2/guide/syntax.html#Raw-HTML" target="_blank">here</a>
+            </div>
+          </p>
+          <h2 class="title">2. Component injection</h2>
+          <p>
+            This should be used if you have more complex stylings. The component version has two big advantages compared with the renderHtml version:
+          </p>
+          <ol>
+            <li>Can be used with user generated content</li>
+            <li>You can use sub-components like <i>router-link</i> as well</li>
+          </ol>
+          <p>
+            <strong>Example:</strong> gender column
+          </p>
+          <h2 class="subtitle">componentGenderIcon.vue</h2>
+        </div>
+        <pre v-highlight><code class="vue">{{ componentCode | pre }}</code></pre>
 
         <hr>
 
@@ -160,7 +187,6 @@
     import tableData from '../../../assets/data_test.json'
 
     import ComponentGenderIcon from './componentGenderIcon.vue'
-
     import Vue from 'vue';
     Vue.component('component-gender-icon', ComponentGenderIcon);
 
@@ -372,10 +398,13 @@
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
-                        <b-table-column field="gender" label="Gender"></b-table-column>
+                        <b-table-column field="gender" label="Gender" component="component-gender-icon"></b-table-column>
 
                     </b-table>`,
                 code: `
+                    import ComponentGenderIcon from './componentGenderIcon.vue'
+                    import Vue from 'vue';
+                    Vue.component('component-gender-icon', ComponentGenderIcon);
                     export default {
                         data() {
                             return {
@@ -413,7 +442,36 @@
                                 </span>\`
                             }
                         }
-                    }`
+                    }`,
+                componentCode: `
+                    <template>
+                      <span>
+                        <i :class="getIcon" aria-hidden="true"></i> {{data}}
+                      </span>
+                    </template>
+
+                    <script>
+                      export default {
+                        props: {
+                          data: String
+                        },
+                        computed: {
+                          getIcon() {
+                            var classes = "fa ";
+                            if (this.data == "Male") {
+                              classes += "fa-mars"
+                            } else if (this.data == "Female") {
+                              classes += "fa-venus"
+                            } else {
+                              classes += "fa-question"
+                            }
+
+                            return classes;
+                          }
+                        }
+                      }
+                    < /script>
+                `
             }
         },
         methods: {
