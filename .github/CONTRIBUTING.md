@@ -27,8 +27,8 @@
 * Add a comment block before every **method** and **watcher** explaining what it does, with this template:
 ```javascript
 /**
-* Calculates if the dropdown list is visible when activated,
-* it'll be opened upwards if not.
+* Calculates if the dropdown list is horizontally visible when activated,
+* otherwise it is openened upwards.
 */
 ```
 * Add one-line comment inside any block whenever you judge necessary
@@ -58,3 +58,29 @@
 * Use only **classes**
 * **No trailing space**
 * End files with a **new line**
+
+# Development Setup
+
+You need [Node.js](http://nodejs.org/) **version 6+**.
+
+After cloning the repo, run:
+
+```bash
+$ npm install
+```
+
+Common used NPM scripts:
+
+```bash
+# serve docs with hot reload at localhost:8080
+$ npm run dev
+
+# build lib in /lib folder
+$ npm run build:lib
+
+# build docs in /dist folder
+$ npm run build:docs
+
+# build docs and lib
+$ npm run build
+```
