@@ -125,8 +125,7 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            html: Boolean,
-            resetSortOnDataChange: true
+            html: Boolean
         },
         data() {
             return {
@@ -142,9 +141,10 @@
         },
         watch: {
             data(value) {
+                console.log('ciao')
                 this.newData = value
-                if (this.resetSortOnDataChange) this.currentSortColumn = {}
-                this.sort(this.currentSortColumn)
+                this.sort(this.currentSortColumn, true)
+                // this.currentSortColumn = {}
             },
             selectable(value) {
                 if (!value) this.selectedItem = {}
@@ -204,12 +204,12 @@
                     return [...array].sort(fn)
                 }
             },
-            sort(column) {
+            sort(column, updatingData) {
                 if (!column || !column.isSortable) return
 
-                if (column === this.currentSortColumn) {
+                if (column === this.currentSortColumn && !updatingData) {
                     column.isAsc = !column.isAsc
-                    this.newData.reverse()
+                    this.newData = this.newData.slice(0).reverse()
                 } else {
                     column.isAsc = true
                     this.newData = this.sortBy(this.newData, column.field, column.customSort)

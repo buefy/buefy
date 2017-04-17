@@ -30,6 +30,7 @@
                                 </select>
                             </span>
                         </p>
+                        <a class="button" @click="changeData">Change data</a>
                     </div>
                 </div>
 
@@ -158,6 +159,7 @@
 
 <script>
     import tableData from '../../../assets/data_test.json'
+    import tableData2 from '../../../assets/data_test_2.json'
 
     export default {
         data() {
@@ -402,6 +404,9 @@
             },
             formatDate(value, row) {
                 return new Date(value).toLocaleDateString()
+            },
+            changeData() {
+                this.tableData = tableData2
             }
         }
     }
