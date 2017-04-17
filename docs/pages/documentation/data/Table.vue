@@ -426,7 +426,9 @@
                 this.selItem = item
             },
             formatDate(value, row) {
-                return new Date(value).toLocaleDateString();
+                return `<span class="tag is-primary">
+                    ${new Date(value).toLocaleDateString()}
+                </span>`
             }
         }
     }
