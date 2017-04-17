@@ -3,8 +3,12 @@ export default {
 
     props: {
         value: [String, Number],
+        label: String,
         disabled: Boolean,
-        group: String
+        group: String,
+        separator: Boolean,
+        icon: String,
+        iconPack: String
     },
 
     data() {
@@ -22,13 +26,17 @@ export default {
     },
 
     created() {
-        const hasLabel = this.$slots.default !== undefined && this.$slots.default.length > 0
+        const hasLabel = (this.$slots.default !== undefined && this.$slots.default.length > 0) ||
+            this.label
 
         this.option = {
             value: this.value,
-            label: hasLabel ? this.$slots.default[0].text : this.value,
+            label: hasLabel ? this.label || this.$slots.default[0].text : this.value,
             disabled: this.disabled,
-            group: this.group
+            group: this.group,
+            separator: this.separator,
+            icon: this.icon,
+            iconPack: this.iconPack
         }
     },
 

@@ -44,6 +44,7 @@
                     case 'keyboard_arrow_down': return 'angle-down'
                     case 'visibility': return 'eye'
                     case 'visibility_off': return 'eye-slash'
+                    case 'arrow_drop_down': return 'caret-down'
                     default: return null
                 }
             }

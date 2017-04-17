@@ -1,39 +1,43 @@
-.select {
-    .input {
-        cursor: pointer;
-        box-shadow: none;
+.dropdown {
+    .trigger {
+        display: inline-block;
+        * {
+            pointer-events: none;
+        }
     }
     .box {
         position: absolute;
-        min-width: 100%;
-        width: auto;
-        max-height: 200px;
+        // width: auto;
         top: 2.5em;
-        border-radius: $radius-small;
         padding: 0;
         z-index: 10;
+        max-height: none;
+        // max-width: 280px;
         overflow: auto;
         animation-duration: $speed;
         &.is-opened-top {
             top: auto;
             bottom: 2.5em;
         }
-        .subheader {
-            color: $text-lighter;
-            padding: 0.25rem 0.5rem;
+        &.is-narrow {
+            .option {
+                padding: 0.25rem 0.75rem;
+            }
         }
         .option {
-            padding: 0.25rem 0.5rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
-            &.is-hovered {
+            &:hover {
                 background: $background;
             }
             &.is-selected {
                 background: $primary;
                 color: $primary-invert;
             }
-            &.has-subheader {
-                padding: 0.25rem 1rem;
+            &.is-separator {
+                border-bottom: 1px solid $background;
+                margin: .5rem 0;
+                padding: 0;
             }
         }
     }
