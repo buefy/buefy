@@ -54,7 +54,7 @@
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
-                        <b-table-column field="gender" label="Gender" component="component-gender-icon"></b-table-column>
+                        <b-table-column field="gender" label="Gender" component="gender-icon"></b-table-column>
                     </b-table>
                 </div>
             </div>
@@ -71,34 +71,8 @@
             </div>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
-        <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
-
-        <hr>
-        <div class="content">
-          <p>
-            There are two ways to style cell in the table with HTML:
-          </p>
-          <h2 class="title">1. renderHtml</h2>
-          <p>
-            This could be used if you just have to do small stylings and if you don't use user generated content in the table.<br>
-            <strong>Example:</strong> date column
-            <div class="notification is-warning">
-              Do not used this if you have user generated content, as this uses <i>v-html</i>. Please read about <i>v-html</i> <a href="https://vuejs.org/v2/guide/syntax.html#Raw-HTML" target="_blank">here</a>
-            </div>
-          </p>
-          <h2 class="title">2. Component injection</h2>
-          <p>
-            This should be used if you have more complex stylings. The component version has two big advantages compared with the renderHtml version:
-          </p>
-          <ol>
-            <li>Can be used with user generated content</li>
-            <li>You can use sub-components like <i>router-link</i> as well</li>
-          </ol>
-          <p>
-            <strong>Example:</strong> gender column
-          </p>
-          <h2 class="subtitle">componentGenderIcon.vue</h2>
-        </div>
+        <pre class="content" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
+        <h2 class="subtitle">GenderIcon.vue</h2>
         <pre v-highlight><code class="vue">{{ componentCode | pre }}</code></pre>
 
         <hr>
@@ -186,14 +160,11 @@
 <script>
     import tableData from '../../../assets/data_test.json'
 
-    import ComponentGenderIcon from './componentGenderIcon.vue'
-    import Vue from 'vue';
-    Vue.component('component-gender-icon', ComponentGenderIcon);
+    import Vue from 'vue'
+    import GenderIcon from '../../../components/GenderIcon.vue'
+    Vue.component('GenderIcon', GenderIcon)
 
     export default {
-        components: {
-            ComponentGenderIcon
-        },
         data() {
             return {
                 tableData,
@@ -260,7 +231,7 @@
                     },
                     {
                         name: '<code>render-html</code>',
-                        description: 'Cells now renders HTML',
+                        description: 'Cells now renders HTML, <b>do not use it with user-generated content</b>, read more about <a href="https://vuejs.org/v2/guide/syntax.html#Raw-HTML" target="_blank">here</a>',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -375,6 +346,14 @@
                         type: 'Function (value: Any, row: Object)',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>component</code>',
+                        description: `Injects a Vue component in the cell, useful to format cells with <b>user-generated content</b>.
+                            The component will receive a <code>data</code> prop with the cell value and a <code>row</code> prop with the row object`,
+                        type: 'String',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 template: `
@@ -398,13 +377,14 @@
                         <b-table-column field="first_name" label="First Name" sortable></b-table-column>
                         <b-table-column field="last_name" label="Last Name" sortable></b-table-column>
                         <b-table-column field="date" label="Date" sortable :format="formatDate"></b-table-column>
-                        <b-table-column field="gender" label="Gender" component="component-gender-icon"></b-table-column>
+                        <b-table-column field="gender" label="Gender" component="gender-icon"></b-table-column>
 
                     </b-table>`,
                 code: `
-                    import ComponentGenderIcon from './componentGenderIcon.vue'
-                    import Vue from 'vue';
-                    Vue.component('component-gender-icon', ComponentGenderIcon);
+                    import Vue from 'vue'
+                    import GenderIcon from 'components/GenderIcon.vue' // This is a custom component
+                    Vue.component('GenderIcon', GenderIcon)
+
                     export default {
                         data() {
                             return {
@@ -445,32 +425,28 @@
                     }`,
                 componentCode: `
                     <template>
-                      <span>
-                        <i :class="getIcon" aria-hidden="true"></i> {{data}}
-                      </span>
+                        <span>
+                            <b-icon :icon="icon" pack="fa"></b-icon>
+                            {{ data }}
+                        </span>
                     </template>
 
                     <script>
-                      export default {
-                        props: {
-                          data: String
-                        },
-                        computed: {
-                          getIcon() {
-                            var classes = "fa ";
-                            if (this.data == "Male") {
-                              classes += "fa-mars"
-                            } else if (this.data == "Female") {
-                              classes += "fa-venus"
-                            } else {
-                              classes += "fa-question"
+                        export default {
+                            props: {
+                                data: String
+                            },
+                            computed: {
+                                icon() {
+                                    switch (this.data) {
+                                        case 'Male': return 'mars'
+                                        case 'female': return 'venus'
+                                        default: return 'question'
+                                    }
+                                }
                             }
-
-                            return classes;
-                          }
                         }
-                      }
-                    < /script>
+                    <\/script>
                 `
             }
         },

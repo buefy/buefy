@@ -61,7 +61,7 @@
 
                         <template v-for="(cell, key) in item" v-if="key === column.field">
 
-                          <component v-if="column.component" :is="column.component" :data="column.format(cell, item)"></component>
+                          <component v-if="column.component" :is="column.component" :data="cell" :row="item"></component>
                           <span v-else-if="renderHtml" v-html="column.format(cell, item)"></span>
                           <span v-else>{{ column.format(cell, item) }}</span>
 
