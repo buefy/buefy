@@ -145,7 +145,6 @@
         },
         watch: {
             data(value) {
-                console.log('ciao')
                 this.newData = value
                 this.sort(this.currentSortColumn, true)
             },
