@@ -19,11 +19,11 @@
     * **Use camelCase**
     * **No semi-colons** `;`
     * **4 spaces indentation**
-    * Only ``const`` or ``let``
+    * Use only ``const`` or ``let``
     * **No trailing space**
     * End files with a **new line**
 * Keep lines with 120 characters or less
-* Add a comment block before every **method** and **watcher** explaining what it does, with this template:
+* Add a comment block before every **method**, **watcher** and **computed property** explaining what it does, with this template:
 ```javascript
 /**
 * Calculates if the dropdown list is horizontally visible when activated,
@@ -53,10 +53,54 @@
 ## Buefy Sass styleguide
 
 * **Always on a separated file** in ``/src/scss/components``
+* **Use .scss extension**
 * **Use kebab-case**
 * Use only **classes**
+* Use only **double quotes** ``"``
+* Use only **rem** or **em** for ``padding``, ``margin`` and ``font-size``
 * **No trailing space**
 * End files with a **new line**
+* Order the CSS rule by:
+    * direct styles
+    * nested tags
+    * pseudo-classes
+    * modifiers
+    * responsive styles
+
+Sass example:
+```scss
+.element {
+    // Direct styles
+    @extend .something;
+    @include mixin;
+    property: value;
+    // Nested tags
+    span {
+        // ...
+    }
+    .child {
+        // ...
+    }
+    // Pseudo-classes
+    &:before {
+        // ...
+    }
+    // Modifiers
+    &.is-active {
+        // ...
+    }
+    &.has-icon {
+        // ...
+    }
+    // Responsive styles
+    @include mobile {
+        // ...
+    }
+    @include tablet {
+        // ...
+    }
+}
+```
 
 # Development Setup
 
