@@ -1,7 +1,10 @@
 <template>
     <div>
         <h1 class="title is-spaced">Select</h1>
-        <h2 class="subtitle">Select an item in a dropdown list. They're also wrapped on a Field, it's not necessary however some functionalities might not work otherwise</h2>
+        <h2 class="subtitle">
+            Select an item in a dropdown list. Wrap it on a Field to use all the functionalities.
+            They also look like a modal when you're on tablet or smartphone
+        </h2>
         <hr>
 
         <div class="columns">
@@ -68,7 +71,7 @@
 
                 <b-field
                     label="Searchable">
-                    <b-select placeholder="Select a character" searchable>
+                    <b-select placeholder="Type here" searchable>
                         <b-option value="flint">Flint</b-option>
                         <b-option value="silver">Silver</b-option>
                         <b-option value="vane">Vane</b-option>
@@ -84,7 +87,7 @@
                 <b-field
                     label="Error"
                     type="is-danger"
-                    message="Something went wront with this field">
+                    message="Something went wrong with this field">
                     <b-select placeholder="Select a character">
                         <b-option value="flint">Flint</b-option>
                         <b-option value="silver">Silver</b-option>
@@ -118,7 +121,7 @@
                 <b-field>
                     <b-select
                         v-model="select"
-                        placeholder="Selecione"
+                        placeholder="Select..."
                         searchable
                         expanded>
                         <b-option value="flint">Flint</b-option>
@@ -270,8 +273,16 @@
                 width="620">
             </b-table-column>
             <b-table-column
-                field="parameters"
-                label="Parameters">
+                field="type"
+                label="Type">
+            </b-table-column>
+            <b-table-column
+                field="values"
+                label="Values">
+            </b-table-column>
+            <b-table-column
+                field="default"
+                label="Default">
             </b-table-column>
         </b-table>
 
@@ -361,21 +372,14 @@
                 optionProps: [
                     {
                         name: '<code>value</code>',
-                        description: 'Same as option <code>value</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>label</code>',
-                        description: 'Option label, use this or the text inside the option',
+                        description: 'Same as native option <code>value</code>',
                         type: 'String',
                         values: '—',
                         default: '—'
                     },
                     {
                         name: '<code>group</code>',
-                        description: 'Group a group a chunk of options together, with the same group name',
+                        description: 'Group a chunk of options with same group name together',
                         type: 'String',
                         values: '—',
                         default: '—'
@@ -460,7 +464,7 @@
                     <b-field
                         label="Error"
                         type="is-danger"
-                        message="Something went wront with this field">
+                        message="Something went wrong with this field">
                         <b-select placeholder="Select a character">
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>

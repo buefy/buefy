@@ -1,16 +1,23 @@
 .dropdown {
+    + .dropdown {
+        margin-left: 0.5em;
+    }
     position: relative;
     display: inline-block;
     .trigger {
         display: inline-block;
-        * {
-            pointer-events: none;
-        }
+    }
+    .background {
+        @include overlay;
+        position: fixed;
+        background-color: rgba($black, 0.86);
+        z-index: 8;
+        animation-duration: $speed-slow;
     }
     .box {
         position: absolute;
         top: 2.5em;
-        padding: 0;
+        padding: 0.5em 0;
         z-index: 10;
         white-space: nowrap;
         overflow: auto;
@@ -45,7 +52,35 @@
             &.is-separator {
                 border-bottom: 1px solid $background;
                 margin: .5rem 0;
-                padding: 0;
+                padding: 0 !important;
+            }
+            &.is-disabled {
+                opacity: .5;
+            }
+            &.is-unselectable {
+                pointer-events: none;
+            }
+        }
+    }
+    @include touch {
+        .box {
+            position: fixed;
+            width: calc(100vw - 60px);
+            max-width: 600px;
+            max-height: calc(100vh - 120px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            &.is-narrow {
+                .option {
+                    padding: 0.75rem 1rem;
+                }
+            }
+            .option {
+                padding: 1rem 1.5rem;
+                &.has-subheader {
+                    padding: 1rem 2rem;
+                }
             }
         }
     }

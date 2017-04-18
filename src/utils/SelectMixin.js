@@ -42,6 +42,27 @@ export default {
                     .toLowerCase()
                     .indexOf(this.inputValue.toLowerCase()) >= 0
             })
+        },
+        whiteList() {
+            // Items white-listed to not close when clicked
+            const whiteList = []
+            whiteList.push(this.$refs.input)
+            whiteList.push(this.$refs.list)
+            whiteList.push(this.$refs.trigger)
+            if (this.$refs.list !== undefined) {
+                const children = this.$refs.list.getElementsByTagName('*')
+                for (const child of children) {
+                    whiteList.push(child)
+                }
+            }
+            if (this.$refs.trigger !== undefined) {
+                const children = this.$refs.trigger.getElementsByTagName('*')
+                for (const child of children) {
+                    whiteList.push(child)
+                }
+            }
+
+            return whiteList
         }
     },
     watch: {
@@ -102,6 +123,7 @@ export default {
             this.$emit('input', option.value)
             this.$emit('change', option.value)
             this.inputValue = option.label
+            this.isActive = false
         }
     },
     methods: {
@@ -141,9 +163,7 @@ export default {
          * Closes dropdown if clicked outside.
          */
         clickedOutside(event) {
-            if (event.target !== this.$refs.input &&
-                event.target !== this.$refs.list &&
-                event.target !== this.$refs.button) {
+            if (this.whiteList.indexOf(event.target) < 0) {
                 this.isActive = false
             }
         },

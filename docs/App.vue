@@ -47,19 +47,18 @@
     }
 
     .example {
-        border: 1px solid #ffdd57;
+        border: 1px solid $warning;
         border-top-right-radius: 3px;
         color: rgba(0, 0, 0, 0.7);
         padding: 1.5rem;
         position: relative;
-        overflow: auto;
         &:before {
-            background: #ffdd57;
+            background: $warning;
             border-radius: 3px 3px 0 0;
             bottom: 100%;
             content: "Example";
             display: inline-block;
-            font-size: 7px;
+            font-size: 8px;
             font-weight: bold;
             left: -1px;
             letter-spacing: 1px;
@@ -67,6 +66,9 @@
             position: absolute;
             text-transform: uppercase;
             vertical-align: top;
+        }
+        &.is-flex {
+            align-items: center;
         }
     }
 
@@ -80,19 +82,22 @@
         .subtitle,
         .npm,
         .github-button {
-            margin-bottom: 32px;
+            margin-bottom: 1.5rem;
+        }
+        .buttons {
+            margin-bottom: 0.5rem;
         }
         .logo-rounded {
             background: $light;
             display: inline-block;
-            padding: 40px;
+            padding: 2.5rem;
             border-radius: 32px;
             box-shadow: 0 20px 60px rgba(10, 10, 10, 0.05), 0 5px 10px rgba(10, 10, 10, 0.1), 0 1px 1px rgba(10, 10, 10, 0.2);
             img {
                 width: 320px;
             }
             @include mobile {
-                padding: 32px;
+                padding: 2rem;
                 img {
                     width: 220px;
                 }

@@ -39,6 +39,7 @@
                             Get Started
                         </router-link>
                     </div>
+                    <small class="home-hero">v{{ version }}</small>
                 </div>
             </div>
         </div>
@@ -83,12 +84,18 @@
     import ScrollReveal from 'scrollreveal'
     import AppHeader from '../template/Header'
     import AppFooter from '../template/Footer'
+    import Package from '../../package.json'
 
     export default {
         name: 'app',
         components: {
             AppHeader,
             AppFooter
+        },
+        data() {
+            return {
+                version: Package.version
+            }
         },
         mounted() {
             const sr = ScrollReveal({

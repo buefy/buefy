@@ -1,52 +1,59 @@
 <template>
-    <p class="control">
+    <span class="dropdown control">
         <slot></slot>
-        <span class="dropdown">
-            <a
-                role="button"
-                ref="button"
-                class="trigger"
-                @click="isActive = true">
-                <slot name="button"></slot>
-            </a>
+        <a
+            role="button"
+            ref="trigger"
+            class="trigger"
+            @click="isActive = !isActive">
+            <slot name="trigger"></slot>
+        </a>
 
-            <transition
-                appear
-                appear-active-class="fadeIn"
-                enter-active-class="fadeIn"
-                leave-active-class="fadeOut">
+        <transition-group
+            appear
+            appear-active-class="fadeIn"
+            enter-active-class="fadeIn"
+            leave-active-class="fadeOut">
 
-                <span
-                    class="box"
-                    :class="['is-dropdown', {
-                        'is-opened-top': !isListInViewportVertically,
-                        'is-opened-left': !isListInViewportHorizontally,
-                        'is-narrow': narrowed
-                    }]"
-                    v-show="isActive"
-                    ref="list">
-                    <ul>
-                        <template v-for="option in searchOptions">
-                            <li class="option"
-                                :class="{
-                                    'is-selected': option === selected,
-                                    'is-separator': option.separator
-                                }"
-                                @click="selectOption(option)">
-                                <b-icon
-                                    v-if="option.icon"
-                                    :icon="option.icon"
-                                    :icon-pack="option.iconPack">
-                                </b-icon>
-                                <span v-html="option.label"></span>
-                            </li>
-                        </template>
-                    </ul>
-                </span>
+            <div
+                key="bg"
+                class="background is-hidden-desktop"
+                v-show="isActive">
+            </div>
 
-            </transition>
-        </span>
-    </p>
+            <span
+                key="list"
+                class="box"
+                :class="['is-dropdown', {
+                    'is-opened-top': !isListInViewportVertically,
+                    'is-opened-left': !isListInViewportHorizontally,
+                    'is-narrow': narrowed
+                }]"
+                v-show="isActive"
+                ref="list">
+                <ul>
+                    <template v-for="option in searchOptions">
+                        <li class="option"
+                            :class="{
+                                'is-selected': option === selected,
+                                'is-separator': option.separator,
+                                'is-disabled': option.disabled,
+                                'is-unselectable': option.unselectable
+                            }"
+                            @click="selectOption(option)">
+                            <b-icon
+                                v-if="option.icon"
+                                :icon="option.icon"
+                                :icon-pack="option.iconPack">
+                            </b-icon>
+                            <span v-html="option.label"></span>
+                        </li>
+                    </template>
+                </ul>
+            </span>
+
+        </transition-group>
+    </span>
 </template>
 
 <script>
@@ -60,10 +67,7 @@
             [Icon.name]: Icon
         },
         props: {
-            buttonClass: String,
-            buttonText: String,
-            narrowed: Boolean,
-            triggerRight: Boolean
+            narrowed: Boolean
         }
     }
 </script>

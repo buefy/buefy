@@ -13,6 +13,7 @@ const ConstructorOptions = (r) => require(['../pages/documentation/installation/
 
 const UIElements = (r) => require(['../pages/documentation/general/UIElements'], r)
 const Icon = (r) => require(['../pages/documentation/general/Icon'], r)
+const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
 
 const Dialog = (r) => require(['../pages/documentation/notices/Dialog'], r)
@@ -74,6 +75,13 @@ export default new Router({
                 {
                     path: 'icon',
                     component: Icon,
+                    meta: {
+                        category: 'General'
+                    }
+                },
+                {
+                    path: 'dropdown',
+                    component: Dropdown,
                     meta: {
                         category: 'General'
                     }
