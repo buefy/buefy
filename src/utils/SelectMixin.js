@@ -24,11 +24,19 @@ export default {
         }
     },
     computed: {
+        /**
+         * Get the type prop from parent if it's a Field.
+         */
         statusType() {
             if (this.$parent.isFieldComponent) {
                 return this.$parent.newType
             }
         },
+
+        /**
+         * It's the list that will be rendered, filters the original
+         * options if nothing is selected and something is typed.
+         */
         searchOptions() {
             if (!this.inputValue || this.selected !== null &&
                 this.selected.label === this.inputValue) {
@@ -43,20 +51,26 @@ export default {
                     .indexOf(this.inputValue.toLowerCase()) >= 0
             })
         },
+
+        /**
+         * White-listed items to not close when clicked,
+         * adds all the refs from input, list, trigger and all children.
+         */
         whiteList() {
-            // Items white-listed to not close when clicked
             const whiteList = []
             whiteList.push(this.$refs.input)
             whiteList.push(this.$refs.list)
             whiteList.push(this.$refs.trigger)
+            // Adds all chidren from list
             if (this.$refs.list !== undefined) {
-                const children = this.$refs.list.getElementsByTagName('*')
+                const children = this.$refs.list.querySelectorAll('*')
                 for (const child of children) {
                     whiteList.push(child)
                 }
             }
+            // Adds all children from trigger
             if (this.$refs.trigger !== undefined) {
-                const children = this.$refs.trigger.getElementsByTagName('*')
+                const children = this.$refs.trigger.querySelectorAll('*')
                 for (const child of children) {
                     whiteList.push(child)
                 }
@@ -80,9 +94,9 @@ export default {
                     if (this.selected !== null) {
                         this.inputValue = this.selected.label
                         // Set scroll position to selected item
-                        if (this.$refs[this._uid + this.selected.value] !== undefined) {
+                        if (this.$refs[this.selected.uid] !== undefined) {
                             this.$refs.list.scrollTop = this
-                                .$refs[this._uid + this.selected.value][0]
+                                .$refs[this.selected.uid][0]
                                 .offsetTop
                         }
                     }
@@ -146,7 +160,7 @@ export default {
 
             if (index !== undefined) {
                 const list = this.$refs.list
-                const element = this.$refs[this._uid + option.value][0]
+                const element = this.$refs[option.uid][0]
                 const visMin = list.scrollTop
                 const visMax = list.scrollTop + list.clientHeight - element.clientHeight
 

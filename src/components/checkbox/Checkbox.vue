@@ -26,9 +26,16 @@
             }
         },
         watch: {
+            /**
+            * Sets internal value if v-model changes.
+            */
             value(value) {
                 this.newValue = value
             },
+
+            /**
+            * Calls updateValue from parent if it's a Checkbox Group.
+            */
             newValue(value) {
                 this.$emit('input', value)
                 this.$parent.isCheckboxGroup && this.$parent.updateValue()

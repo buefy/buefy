@@ -29,6 +29,7 @@ export default {
     },
     created() {
         this.option = {
+            uid: this._uid,
             value: this.value,
             label: this.hasLabel ? this.label || this.$slots.default[0].text.trim() : this.value,
             group: this.group,

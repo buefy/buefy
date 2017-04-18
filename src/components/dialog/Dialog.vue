@@ -96,6 +96,9 @@
             }
         },
         computed: {
+            /**
+            * Icon based on the type.
+            */
             icon() {
                 switch (this.type) {
                     case 'is-info':

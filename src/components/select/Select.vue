@@ -55,7 +55,7 @@
                                     'is-hovered': option === hovered,
                                     'has-subheader': option.group
                                 }"
-                                :ref="_uid + option.value"
+                                :ref="option.uid"
                                 @click="selectOption(option)"
                                 @mouseenter="hoverOption(option)">
                                 {{ option.label }}
