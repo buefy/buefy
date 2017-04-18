@@ -10,16 +10,13 @@
         <div class="columns">
             <div class="column">
                 <b-field label="Simple">
-                    <b-select placeholder="Select a character">
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
-                        <b-option value="vane">Vane</b-option>
-                        <b-option value="billy">Billy</b-option>
-                        <b-option value="jack">Jack</b-option>
-                        <b-option value="heisenberg">Heisenberg</b-option>
-                        <b-option value="jesse">Jesse</b-option>
-                        <b-option value="saul">Saul</b-option>
-                        <b-option value="mike">Mike</b-option>
+                    <b-select placeholder="Select a name">
+                        <b-option
+                            v-for="option in options"
+                            :value="option.id"
+                            :key="option.id"
+                            :label="option.first_name">
+                        </b-option>
                     </b-select>
                 </b-field>
 
@@ -111,6 +108,7 @@
             </div>
             <div class="column">
                 <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
             </div>
         </div>
 
@@ -290,9 +288,12 @@
 </template>
 
 <script>
+    import options from '../../../assets/data_test.json'
+
     export default {
         data() {
             return {
+                options: options,
                 select: null,
                 selectProps: [
                     {
@@ -387,16 +388,13 @@
                 ],
                 template1: `
                     <b-field label="Simple">
-                        <b-select placeholder="Select a character">
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
-                            <b-option value="vane">Vane</b-option>
-                            <b-option value="billy">Billy</b-option>
-                            <b-option value="jack">Jack</b-option>
-                            <b-option value="heisenberg">Heisenberg</b-option>
-                            <b-option value="jesse">Jesse</b-option>
-                            <b-option value="saul">Saul</b-option>
-                            <b-option value="mike">Mike</b-option>
+                        <b-select placeholder="Select a name">
+                            <b-option
+                                v-for="option in options"
+                                :value="option.id"
+                                :key="option.id"
+                                :label="option.first_name">
+                            </b-option>
                         </b-select>
                     </b-field>
 
@@ -485,7 +483,21 @@
                             <b-option value="silver">Silver</b-option>
                         </b-select>
                     </b-field>`,
-
+                code1: `
+                    export default {
+                        data() {
+                            return {
+                                options: [
+                                    {"id":1,"first_name":"Jesse"},
+                                    {"id":2,"first_name":"John"},
+                                    {"id":3,"first_name":"Tina"},
+                                    {"id":4,"first_name":"Clarence"},
+                                    {"id":5,"first_name":"Anne"},
+                                    ...
+                                ]
+                            }
+                        }
+                    }`,
                 template2: `
                     <b-field>
                         <b-select

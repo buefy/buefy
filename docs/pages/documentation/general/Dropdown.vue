@@ -55,7 +55,7 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
-        <h2 class="subtitle">Let's mix with Field</h2>
+        <h2 class="title">Addons</h2>
         <div class="example">
             <b-field>
                 <p class="control">
@@ -108,7 +108,7 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
 
-        <h2 class="subtitle">There's some variations you might like</h2>
+        <h2 class="title">Icons and HTML</h2>
         <div class="example">
             <div class="block">
                 <b-dropdown>
