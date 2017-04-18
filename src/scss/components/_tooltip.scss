@@ -8,22 +8,22 @@ $multiline-sizes: (
 );
 
 @mixin tooltip-arrow($direction, $color) {
-    @if ($direction == 'is-top') {
+    @if ($direction == "is-top") {
         border-top: $arrow-size solid $color;
         border-right: $arrow-size solid transparent;
         border-left: $arrow-size solid transparent;
         bottom: calc(100% + #{$arrow-margin});
-    } @else if ($direction == 'is-bottom') {
+    } @else if ($direction == "is-bottom") {
         border-right: $arrow-size solid transparent;
         border-bottom: $arrow-size solid $color;
         border-left: $arrow-size solid transparent;
         top: calc(100% + #{$arrow-margin});
-    } @else if ($direction == 'is-right') {
+    } @else if ($direction == "is-right") {
         border-top: $arrow-size solid transparent;
         border-right: $arrow-size solid $color;
         border-bottom: $arrow-size solid transparent;
         left: calc(100% + #{$arrow-margin});
-    } @else if ($direction == 'is-left') {
+    } @else if ($direction == "is-left") {
         border-top: $arrow-size solid transparent;
         border-bottom: $arrow-size solid transparent;
         border-left: $arrow-size solid $color;
@@ -35,25 +35,25 @@ $multiline-sizes: (
     &.#{$direction} {
         &:before,
         &:after {
-            @if ($direction == 'is-top') {
+            @if ($direction == "is-top") {
                 top: auto;
                 right: auto;
                 bottom: calc(100% + #{$arrow-size} + #{$arrow-margin});
                 left: 50%;
                 transform: translateX(-50%);
-            } @else if ($direction == 'is-bottom') {
+            } @else if ($direction == "is-bottom") {
                 top: calc(100% + #{$arrow-size} + #{$arrow-margin});
                 right: auto;
                 bottom: auto;
                 left: 50%;
                 transform: translateX(-50%);
-            } @else if ($direction == 'is-right') {
+            } @else if ($direction == "is-right") {
                 top: 50%;
                 right: auto;
                 bottom: auto;
                 left: calc(100% + #{$arrow-size} + #{$arrow-margin});
                 transform: translateY(-50%);
-            } @else if ($direction == 'is-left') {
+            } @else if ($direction == "is-left") {
                 top: 50%;
                 right: calc(100% + #{$arrow-size} + #{$arrow-margin});
                 bottom: auto;
@@ -79,13 +79,16 @@ $multiline-sizes: (
 
 // Base
 .tooltip {
+    @include tooltip("is-top");
+    @include tooltip("is-right");
+    @include tooltip("is-bottom");
+    @include tooltip("is-left");
     position: relative;
     display: inline-flex;
-
     &:before,
     &:after {
         position: absolute;
-        content: '';
+        content: "";
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -102,7 +105,7 @@ $multiline-sizes: (
         font-size: 12px;
         font-weight: $weight-normal;
         color: $primary-invert;
-        box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, .2);
+        box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
         z-index: 888;
         white-space: nowrap;
     }
@@ -111,6 +114,7 @@ $multiline-sizes: (
         opacity: 1;
         visibility: visible;
     }
+    // Modifiers
     @each $name, $pair in $colors {
         $color: nth($pair, 1);
         $color-invert: nth($pair, 2);
@@ -119,7 +123,13 @@ $multiline-sizes: (
             color: $color-invert;
         }
     }
-
+    &:not([data-label=""]).is-always {
+        &:before,
+        &:after {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
     &.is-multiline {
         &:after {
             display: flex-block;
@@ -130,13 +140,6 @@ $multiline-sizes: (
     &.is-dashed {
         border-bottom: 1px dashed $grey-light;
         cursor: default;
-    }
-    &:not([data-label=""]).is-always {
-        &:before,
-        &:after {
-            opacity: 1;
-            visibility: visible;
-        }
     }
     &.is-square {
         &:after {
@@ -149,9 +152,4 @@ $multiline-sizes: (
             transition: opacity $speed $easing, visibility $speed $easing;
         }
     }
-
-    @include tooltip('is-top');
-    @include tooltip('is-right');
-    @include tooltip('is-bottom');
-    @include tooltip('is-left');
 }

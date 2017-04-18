@@ -6,32 +6,6 @@
     right: 0;
     z-index: 1000;
     pointer-events: none;
-
-    &.top {
-        justify-content: center;
-    }
-    &.top-right {
-        justify-content: flex-end;
-    }
-    &.bottom {
-        top: auto;
-        bottom: 0;
-        justify-content: center;
-    }
-    &.bottom-left {
-        top: auto;
-        bottom: 0;
-    }
-
-    &.bottom-right {
-        top: auto;
-        bottom: 0;
-        justify-content: flex-end;
-    }
-    &.is-toast {
-        opacity: 0.92;
-    }
-
     .toast {
         display: inline-flex;
         animation-duration: $speed-slow;
@@ -50,7 +24,6 @@
             }
         }
     }
-
     .snackbar {
         display: flex;
         align-items: center;
@@ -67,18 +40,6 @@
         .text {
             text-align: left;
         }
-
-        @include mobile() {
-            width: 100%;
-            margin: 0;
-            border-radius: 0;
-        }
-        @include tablet() {
-            min-width: 350px;
-            max-width: 600px;
-            overflow: hidden;
-        }
-
         .action {
             margin-left: auto;
             padding-left: 8px;
@@ -93,5 +54,39 @@
                 }
             }
         }
+        @include mobile {
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+        }
+        @include tablet {
+            min-width: 350px;
+            max-width: 600px;
+            overflow: hidden;
+        }
+    }
+    // Modifers
+    &.top {
+        justify-content: center;
+    }
+    &.top-right {
+        justify-content: flex-end;
+    }
+    &.bottom {
+        top: auto;
+        bottom: 0;
+        justify-content: center;
+    }
+    &.bottom-left {
+        top: auto;
+        bottom: 0;
+    }
+    &.bottom-right {
+        top: auto;
+        bottom: 0;
+        justify-content: flex-end;
+    }
+    &.is-toast {
+        opacity: 0.92;
     }
 }

@@ -20,10 +20,6 @@
         z-index: 10;
         overflow: auto;
         animation-duration: $speed;
-        &.is-opened-top {
-            top: auto;
-            bottom: 2.5em;
-        }
         .subheader {
             color: $grey-light;
             padding: 0.5rem;
@@ -41,6 +37,10 @@
             &.has-subheader {
                 padding: 0.5rem 1rem;
             }
+        }
+        &.is-opened-top {
+            top: auto;
+            bottom: 2.5em;
         }
     }
     @include touch {

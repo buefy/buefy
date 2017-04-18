@@ -1,0 +1,41 @@
+// Helper function to replace characters in a string
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+    @return if($index,
+        str-slice($string, 1, $index - 1) + $replace +
+        str-replace(str-slice($string, $index +
+        str-length($search)), $search, $replace),
+        $string);
+}
+
+// Encode svg function by http://codepen.io/jakob-e/pen/doMoML
+@function svg-encode($svg){
+    // Chunk up string in order to avoid "stack level too deep" error
+    $encoded:'';
+    $slice: 2000;
+    $index: 0;
+    $loops: ceil(str-length($svg)/$slice);
+    @for $i from 1 through $loops {
+        $chunk: str-slice($svg, $index, $index + $slice - 1);
+        // Encode
+        $chunk: str-replace($chunk, '"', '\'');
+        $chunk: str-replace($chunk, '%', '%25');
+        $chunk: str-replace($chunk, '#', '%23');
+        $chunk: str-replace($chunk, '{', '%7B');
+        $chunk: str-replace($chunk, '}', '%7D');
+        $chunk: str-replace($chunk, '<', '%3C');
+        $chunk: str-replace($chunk, '>', '%3E');
+
+        $encoded: #{$encoded}#{$chunk};
+        $index: $index + $slice;
+    }
+    @return "data:image/svg+xml,#{$encoded}";
+}
+
+@function checkmark($color) {
+    $start: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1">';
+    $content: '<path style="fill:#{$color}" d="M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z" />';
+    $end: '</svg>';
+
+    @return svg-encode("#{$start}#{$content}#{$end}");
+}

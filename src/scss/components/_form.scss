@@ -8,12 +8,18 @@
 .select select {
     padding-right: 2.5em;
 }
+// End of temporary fix
+
+.label {
+    font-weight: $weight-semibold
+}
 
 .control {
+    .help.counter {
+        float: right;
+        margin-left: 0.5em;
+    }
     &.has-icon {
-        &.has-both-icon .input {
-            padding-right: 2.25em;
-        }
         .icon {
             &.is-right {
                 right: 0;
@@ -34,13 +40,8 @@
                 }
             }
         }
+        &.has-both-icon .input {
+            padding-right: 2.25em;
+        }
     }
-    .help.counter {
-        float: right;
-        margin-left: 0.5em;
-    }
-}
-
-.label {
-    font-weight: $weight-semibold
 }

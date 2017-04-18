@@ -1,7 +1,4 @@
 .radio {
-    &.is-disabled {
-        opacity: 0.5;
-    }
     input[type=radio] {
         display: none;
         + span {
@@ -11,7 +8,7 @@
             text-align: left;
             &:before,
             &:after {
-                content: '';
+                content: "";
                 position: absolute;
                 border-radius: 50%;
             }
@@ -45,5 +42,8 @@
         &:checked + span:after {
             transform: scale(1);
         }
+    }
+    &.is-disabled {
+        opacity: 0.5;
     }
 }

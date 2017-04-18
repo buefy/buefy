@@ -1,9 +1,9 @@
 .dropdown {
-    + .dropdown {
-        margin-left: 0.5em;
-    }
     position: relative;
     display: inline-block;
+    & + .dropdown {
+        margin-left: 0.5em;
+    }
     .trigger {
         display: inline-block;
     }
@@ -22,10 +22,6 @@
         white-space: nowrap;
         overflow: auto;
         animation-duration: $speed;
-        @include mobile {
-            max-width: 300px;
-            white-space: normal;
-        }
         &.is-opened-top {
             top: auto;
             bottom: 2.5em;
@@ -71,6 +67,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            white-space: normal;
             &.is-narrow {
                 .option {
                     padding: 0.75rem 1rem;

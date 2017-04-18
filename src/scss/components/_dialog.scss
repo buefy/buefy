@@ -1,17 +1,16 @@
 .dialog {
     animation-duration: $speed-slow;
-
     .modal-card-body {
         .icon {
             margin-left: -8px;
             margin-right: 16px;
         }
+        .control {
+            margin-top: 16px;
+        }
         &.is-titleless {
             border-top-left-radius: $radius-large;
             border-top-right-radius: $radius-large;
-        }
-        .control {
-            margin-top: 16px;
         }
     }
     .modal-card {
