@@ -98,6 +98,13 @@
                     </b-select>
                 </b-field>
 
+                <b-field label="Loading">
+                    <b-select placeholder="Select a character" loading>
+                        <b-option value="flint">Flint</b-option>
+                        <b-option value="silver">Silver</b-option>
+                    </b-select>
+                </b-field>
+
                 <b-field label="Disabled">
                     <b-select placeholder="Select a character" disabled>
                         <b-option value="flint">Flint</b-option>
@@ -120,46 +127,144 @@
         </div>
 
         <hr>
-        <h2 class="title">Addons</h2>
-        <div class="columns">
-            <div class="column">
-                <b-field>
-                    <b-select
-                        v-model="select"
-                        placeholder="Select..."
-                        searchable
-                        expanded>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
-                        <b-option value="vane">Vane</b-option>
-                        <b-option value="billy">Billy</b-option>
-                        <b-option value="jack">Jack</b-option>
-                        <b-option value="heisenberg">Heisenberg</b-option>
-                        <b-option value="jesse">Jesse</b-option>
-                        <b-option value="saul">Saul</b-option>
-                        <b-option value="mike">Mike</b-option>
-                    </b-select>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = null">
-                            Clear
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = 'heisenberg'">
-                            Set Heisenberg
-                        </button>
-                    </p>
-                </b-field>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
-            </div>
+        <h2 class="title is-spaced">Addons</h2>
+        <h3 class="subtitle">Selects, Inputs, Dropdowns and <code>.control</code> elements are automatically unified when inside a Field</h3>
+        <div class="example">
+            <b-field>
+                <b-select
+                    v-model="select"
+                    placeholder="Select..."
+                    searchable>
+                    <b-option value="flint">Flint</b-option>
+                    <b-option value="silver">Silver</b-option>
+                    <b-option value="vane">Vane</b-option>
+                    <b-option value="billy">Billy</b-option>
+                    <b-option value="jack">Jack</b-option>
+                    <b-option value="heisenberg">Heisenberg</b-option>
+                    <b-option value="jesse">Jesse</b-option>
+                    <b-option value="saul">Saul</b-option>
+                    <b-option value="mike">Mike</b-option>
+                </b-select>
+                <p class="control">
+                    <button
+                        class="button is-danger"
+                        @click="select = null">
+                        Clear
+                    </button>
+                </p>
+                <p class="control">
+                    <button
+                        class="button"
+                        @click="select = 'heisenberg'">
+                        Set Heisenberg
+                    </button>
+                </p>
+            </b-field>
+
+            <b-field position="centered">
+                <b-select
+                    v-model="select"
+                    placeholder="Select..."
+                    searchable>
+                    <b-option value="flint">Flint</b-option>
+                    <b-option value="silver">Silver</b-option>
+                    <b-option value="vane">Vane</b-option>
+                    <b-option value="billy">Billy</b-option>
+                    <b-option value="jack">Jack</b-option>
+                    <b-option value="heisenberg">Heisenberg</b-option>
+                    <b-option value="jesse">Jesse</b-option>
+                    <b-option value="saul">Saul</b-option>
+                    <b-option value="mike">Mike</b-option>
+                </b-select>
+                <p class="control">
+                    <button
+                        class="button is-dark"
+                        @click="select = null">
+                        Clear
+                    </button>
+                </p>
+                <p class="control">
+                    <button
+                        class="button"
+                        @click="select = 'heisenberg'">
+                        Set Heisenberg
+                    </button>
+                </p>
+            </b-field>
+
+            <b-field position="right">
+                <b-select
+                    v-model="select"
+                    placeholder="Select..."
+                    searchable>
+                    <b-option value="flint">Flint</b-option>
+                    <b-option value="silver">Silver</b-option>
+                    <b-option value="vane">Vane</b-option>
+                    <b-option value="billy">Billy</b-option>
+                    <b-option value="jack">Jack</b-option>
+                    <b-option value="heisenberg">Heisenberg</b-option>
+                    <b-option value="jesse">Jesse</b-option>
+                    <b-option value="saul">Saul</b-option>
+                    <b-option value="mike">Mike</b-option>
+                </b-select>
+                <p class="control">
+                    <button
+                        class="button is-primary"
+                        @click="select = null">
+                        Clear
+                    </button>
+                </p>
+                <p class="control">
+                    <button
+                        class="button"
+                        @click="select = 'heisenberg'">
+                        Set Heisenberg
+                    </button>
+                </p>
+            </b-field>
         </div>
+        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+
+        <hr>
+        <h2 class="title is-spaced">Grouped</h2>
+        <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
+        <p class="content">Note that you have to specify which one will be <code>expanded</code>.</p>
+        <div class="example">
+            <b-field grouped>
+                <b-select
+                    v-model="select"
+                    placeholder="Select..."
+                    searchable
+                    expanded>
+                    <b-option value="flint">Flint</b-option>
+                    <b-option value="silver">Silver</b-option>
+                    <b-option value="vane">Vane</b-option>
+                    <b-option value="billy">Billy</b-option>
+                    <b-option value="jack">Jack</b-option>
+                    <b-option value="heisenberg">Heisenberg</b-option>
+                    <b-option value="jesse">Jesse</b-option>
+                    <b-option value="saul">Saul</b-option>
+                    <b-option value="mike">Mike</b-option>
+                </b-select>
+                <p class="control">
+                    <button
+                        class="button"
+                        @click="select = null">
+                        Clear
+                    </button>
+                </p>
+                <p class="control">
+                    <button
+                        class="button"
+                        @click="select = 'heisenberg'">
+                        Set Heisenberg
+                    </button>
+                </p>
+            </b-field>
+        </div>
+        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <hr>
         <h2 class="title">Sizes</h2>
@@ -209,7 +314,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
             </div>
         </div>
 
@@ -339,6 +444,13 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>lading</code>',
+                        description: 'Add the loading state to the Select',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
                         name: '<code>required</code>',
                         description: 'Same as native <code>required</code>',
                         type: 'Boolean',
@@ -453,7 +565,7 @@
 
                     <b-field
                         label="Searchable">
-                        <b-select placeholder="Select a character" searchable>
+                        <b-select placeholder="Type here" searchable>
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>
                             <b-option value="vane">Vane</b-option>
@@ -471,6 +583,20 @@
                         type="is-danger"
                         message="Something went wrong with this field">
                         <b-select placeholder="Select a character">
+                            <b-option value="flint">Flint</b-option>
+                            <b-option value="silver">Silver</b-option>
+                        </b-select>
+                    </b-field>
+
+                    <b-field label="Required">
+                        <b-select placeholder="Select a character" required>
+                            <b-option value="flint">Flint</b-option>
+                            <b-option value="silver">Silver</b-option>
+                        </b-select>
+                    </b-field>
+
+                    <b-field label="Loading">
+                        <b-select placeholder="Select a character" loading>
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>
                         </b-select>
@@ -509,7 +635,108 @@
                     <b-field>
                         <b-select
                             v-model="select"
-                            placeholder="Selecione"
+                            placeholder="Select..."
+                            searchable>
+                            <b-option value="flint">Flint</b-option>
+                            <b-option value="silver">Silver</b-option>
+                            <b-option value="vane">Vane</b-option>
+                            <b-option value="billy">Billy</b-option>
+                            <b-option value="jack">Jack</b-option>
+                            <b-option value="heisenberg">Heisenberg</b-option>
+                            <b-option value="jesse">Jesse</b-option>
+                            <b-option value="saul">Saul</b-option>
+                            <b-option value="mike">Mike</b-option>
+                        </b-select>
+                        <p class="control">
+                            <button
+                                class="button is-danger"
+                                @click="select = null">
+                                Clear
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button
+                                class="button"
+                                @click="select = 'heisenberg'">
+                                Set Heisenberg
+                            </button>
+                        </p>
+                    </b-field>
+
+                    <b-field position="centered">
+                        <b-select
+                            v-model="select"
+                            placeholder="Select..."
+                            searchable>
+                            <b-option value="flint">Flint</b-option>
+                            <b-option value="silver">Silver</b-option>
+                            <b-option value="vane">Vane</b-option>
+                            <b-option value="billy">Billy</b-option>
+                            <b-option value="jack">Jack</b-option>
+                            <b-option value="heisenberg">Heisenberg</b-option>
+                            <b-option value="jesse">Jesse</b-option>
+                            <b-option value="saul">Saul</b-option>
+                            <b-option value="mike">Mike</b-option>
+                        </b-select>
+                        <p class="control">
+                            <button
+                                class="button is-dark"
+                                @click="select = null">
+                                Clear
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button
+                                class="button"
+                                @click="select = 'heisenberg'">
+                                Set Heisenberg
+                            </button>
+                        </p>
+                    </b-field>
+
+                    <b-field position="right">
+                        <b-select
+                            v-model="select"
+                            placeholder="Select..."
+                            searchable>
+                            <b-option value="flint">Flint</b-option>
+                            <b-option value="silver">Silver</b-option>
+                            <b-option value="vane">Vane</b-option>
+                            <b-option value="billy">Billy</b-option>
+                            <b-option value="jack">Jack</b-option>
+                            <b-option value="heisenberg">Heisenberg</b-option>
+                            <b-option value="jesse">Jesse</b-option>
+                            <b-option value="saul">Saul</b-option>
+                            <b-option value="mike">Mike</b-option>
+                        </b-select>
+                        <p class="control">
+                            <button
+                                class="button is-primary"
+                                @click="select = null">
+                                Clear
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button
+                                class="button"
+                                @click="select = 'heisenberg'">
+                                Set Heisenberg
+                            </button>
+                        </p>
+                    </b-field>`,
+                code2: `
+                    export default {
+                        data() {
+                            return {
+                                select: null
+                            }
+                        }
+                    }`,
+                template3: `
+                    <b-field grouped>
+                        <b-select
+                            v-model="select"
+                            placeholder="Select..."
                             searchable
                             expanded>
                             <b-option value="flint">Flint</b-option>
@@ -537,15 +764,7 @@
                             </button>
                         </p>
                     </b-field>`,
-                code2: `
-                    export default {
-                        data() {
-                            return {
-                                select: null
-                            }
-                        }
-                    }`,
-                template3: `
+                template4: `
                     <b-field>
                         <b-select
                             placeholder="Small"
