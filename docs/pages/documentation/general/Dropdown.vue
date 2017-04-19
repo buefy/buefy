@@ -294,7 +294,7 @@
                     },
                     {
                         name: '<code>separator</code>',
-                        description: 'Sets the option to be a separator',
+                        description: 'Set the option to be a separator',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'

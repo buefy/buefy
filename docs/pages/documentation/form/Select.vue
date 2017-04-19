@@ -14,8 +14,8 @@
                         <b-option
                             v-for="option in options"
                             :value="option.id"
-                            :key="option.id"
-                            :label="option.first_name">
+                            :key="option.id">
+                            {{ option.first_name }}
                         </b-option>
                     </b-select>
                 </b-field>
@@ -86,6 +86,13 @@
                     type="is-danger"
                     message="Something went wrong with this field">
                     <b-select placeholder="Select a character">
+                        <b-option value="flint">Flint</b-option>
+                        <b-option value="silver">Silver</b-option>
+                    </b-select>
+                </b-field>
+
+                <b-field label="Required">
+                    <b-select placeholder="Select a character" required>
                         <b-option value="flint">Flint</b-option>
                         <b-option value="silver">Silver</b-option>
                     </b-select>
@@ -392,8 +399,8 @@
                             <b-option
                                 v-for="option in options"
                                 :value="option.id"
-                                :key="option.id"
-                                :label="option.first_name">
+                                :key="option.id">
+                                {{ option.first_name }}
                             </b-option>
                         </b-select>
                     </b-field>

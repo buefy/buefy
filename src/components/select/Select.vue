@@ -14,7 +14,7 @@
                 type="text"
                 :placeholder="placeholder"
                 :disabled="disabled"
-                :readonly="!searchable"
+                :readonly="isReadonly"
                 :name="name"
                 :required="required"
                 autocomplete="off"

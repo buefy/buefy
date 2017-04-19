@@ -22,18 +22,22 @@
                             :icon="icon"
                             :class="type"
                             both
-                            size="is-large"
+                            size="is-large custom-icon"
                             v-if="icon && hasIcon">
                         </b-icon>
                         <p v-html="message"></p>
-                        <b-input
-                            v-if="hasInput"
-                            ref="input"
-                            :placeholder="inputPlaceholder"
-                            :maxlength="inputMaxlength"
-                            :name="inputName"
-                            @keyup.enter.native="confirm">
-                        </b-input>
+
+                        <b-field v-if="hasInput">
+                            <b-input
+                                v-model="prompt"
+                                ref="input"
+                                :placeholder="inputPlaceholder"
+                                required
+                                :maxlength="inputMaxlength"
+                                :name="inputName"
+                                @keyup.enter.native="confirm">
+                            </b-input>
+                        </b-field>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button is-light" ref="cancelButton" @click="cancel" v-if="canCancel">{{ cancelText }}</button>
@@ -92,7 +96,8 @@
         },
         data() {
             return {
-                isActive: true
+                isActive: true,
+                prompt: ''
             }
         },
         computed: {
@@ -116,11 +121,16 @@
         },
         methods: {
             /**
+             * If it's a prompt Dialog, validate the input.
              * Call the onConfirm prop (function) and close the Dialog.
              */
             confirm() {
-                const value = this.$refs.input ? this.$refs.input.newValue : null
-                this.onConfirm(value)
+                if (this.$refs.input !== undefined) {
+                    this.$refs.input.html5Validation()
+                    if (!this.$refs.input.isValid) return
+                }
+
+                this.onConfirm(this.prompt)
                 this.close()
             },
 

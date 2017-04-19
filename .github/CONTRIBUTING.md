@@ -9,7 +9,8 @@
 
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 * Use the **present** tense ("Add feature" not "Added feature")
-* Limit the first line to 72 characters or fewer
+* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+* Limit the to 72 characters or fewer
 * Reference issues and pull requests liberally
 * **DO NOT** commit the ``lib`` folder, use it only for testing on your end
 
@@ -17,17 +18,17 @@
 
 * Follow the rules in ``.eslintrc.json``, general:
     * **Use camelCase**
-    * **No semi-colons** `;`
+    * **No semi-colons** ``;``
     * **4 spaces indentation**
     * Use only ``const`` or ``let``
     * **No trailing space**
     * End files with a **new line**
 * Keep lines with 120 characters or less
-* Add a comment block before every **method**, **watcher** and **computed property** explaining what it does, with this template:
+* Add a comment block before every **method**, **watcher** and **computed property** explaining what it does — use the imperative mood ("Calculate this..." not "Calculates this...") with this template:
 ```javascript
 /**
- * Calculates if the dropdown list is horizontally visible when activated,
- * otherwise it is openened upwards.
+ * Calculate if the dropdown is horizontally visible when activated,
+ * otherwise it is opened left sided.
  */
 ```
 * Add one-line comment inside any block whenever you judge necessary

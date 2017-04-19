@@ -123,6 +123,7 @@
                 newValue: this.value || '',
                 newType: this.type,
                 newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
+                isValid: true,
                 isPasswordVisible: false
             }
         },
@@ -221,21 +222,32 @@
             },
 
             /**
-             * Fire the HTML5 validation and send the 'is-danger' type
-             * and the error message to the parent if it's a Field
+             * Blur listener.
+             * Fire the HTML5 validation.
              */
             blur(event) {
                 this.$emit('blur', event)
+                this.html5Validation()
+            },
+
+            /**
+             * HTML5 validation, set isValid property.
+             * If validation fail, send 'is-danger' type,
+             * and error message to parent if it's a Field.
+             */
+            html5Validation() {
                 const element = this.newType === 'textarea' ? 'textarea' : 'input'
                 if (!this.$refs[element].checkValidity()) {
                     if (this.$parent.isFieldComponent) {
                         this.$parent.newType = 'is-danger'
                         this.$parent.newMessage = this.$refs[element].validationMessage
+                        this.isValid = false
                     }
                 } else {
                     if (this.$parent.isFieldComponent) {
                         this.$parent.newType = null
                         this.$parent.newMessage = null
+                        this.isValid = true
                     }
                 }
             }

@@ -11,6 +11,7 @@
 * Fix Pagination buttons messing up at pages 3 and 4
 * Fix Dialog keeping keyup event
 * Fix #14 — Add ``component`` property on Table. Thanks to [korpa](https://github.com/korpa)
+* Fix prompt Dialog's input not validating before confirming
 
 ## 0.1.5
 

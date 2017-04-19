@@ -19,6 +19,9 @@ export default {
         }
     },
     computed: {
+        /**
+         * Icon name (MDI) based on type.
+         */
         icon() {
             switch (this.type) {
                 case 'is-info':
@@ -35,6 +38,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * Close the Message and remove from DOM.
+         */
         close() {
             this.$emit('close')
             this.isActive = false

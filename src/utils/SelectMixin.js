@@ -17,6 +17,8 @@ export default {
             selected: null,
             hovered: null,
             isActive: false,
+            isValid: true,
+            isReadonly: !this.searchable, // Separated property to validate with HTML5
             inputValue: null,
             isListInViewportHorizontally: true,
             isListInViewportVertically: true,
@@ -35,7 +37,7 @@ export default {
         },
 
         /**
-         * Options that will be rendered.
+         * Options that is rendered.
          *
          * Activate the dropdown when filtered, this is to prevent
          * dropdown to not appear when user focused the input
@@ -61,8 +63,8 @@ export default {
         },
 
         /**
-         * White-listed items to not close when clicked,
-         * adds all the refs from input, dropdown, trigger and all children.
+         * White-listed items to not close when clicked.
+         * Add input, dropdown, trigger and all children.
          */
         whiteList() {
             const whiteList = []
@@ -89,13 +91,15 @@ export default {
     },
     watch: {
         /**
-         * When dropdown is activated or deactivated checks the visibility
-         * to know when to open upwards.
-         * Also sets the previously selected option if deactivating.
+         * When dropdown is toggled, check the visibility to know when
+         * to open upwards or left sided.
+         *
+         * - Activating: set dropdown scroll to the selected option and select all (focus) of input.
+         * - Deactivating: set the previously selected option.
          */
         isActive(active) {
-            this.calcListInViewportHorizontal()
-            this.calcListInViewportVertical()
+            this.calcDropdownInViewportHorizontal()
+            this.calcDropdownInViewportVertical()
             if (active) {
                 if (this.selected !== null) {
                     Vue.nextTick(() => {
@@ -116,7 +120,7 @@ export default {
         },
 
         /**
-         * When v-model is changed, sets the new selected option.
+         * When v-model is changed, find and set the new selected option.
          */
         value(value) {
             if (value === null || value === '') {
@@ -137,7 +141,7 @@ export default {
          * When selected:
          *   1. Change the input value.
          *   2. Emit input event to update the user v-model.
-         *   3. Close the dropdown.
+         *   3. Force-close the dropdown.
          */
         selected(option) {
             if (!option) return
@@ -145,13 +149,14 @@ export default {
             this.$emit('input', option.value)
             this.$emit('change', option.value)
             this.inputValue = option.label
-            this.isMouseOverDropdown = false
-            this.isActive = false
+            this.close(true)
         }
     },
     methods: {
         /**
-         * Sets which option is currently selected.
+         * Set which option is currently selected.
+         * Add the option to the currently hovered as well to not lose
+         * the scroll posiiton when using arrow keys.
          */
         selectOption(option, index) {
             if (option === undefined) return
@@ -161,8 +166,16 @@ export default {
         },
 
         /**
-         * Sets which option is currently hovered.
-         * Also emulates native <select> arrow selecting
+         * Set which option is currently hovered.
+         * Emulate native <select> arrow selecting; if hovered option is:
+         *  1. Between visible area of dropdown:
+         *    - Do nothing.
+         *
+         *  2. Lesser than minimum part:
+         *    - Set dropdown scroll to hovered option and keeping it in the top.
+         *
+         *  3. Greater than or equal maximum part:
+         *    - Set dropdown scroll to hovered option but keeping it in the bottom.
          */
         hoverOption(option, index) {
             if (option === undefined || option === this.hovered) return
@@ -183,19 +196,28 @@ export default {
         },
 
         /**
-         * Closes dropdown if clicked outside.
+         * Close the dropdown.
+         * If force, also change isMouseOverDropdown.
+         */
+        close(force) {
+            this.isActive = false
+            if (force) this.isMouseOverDropdown = false
+        },
+
+        /**
+         * Close dropdown if clicked outside.
          */
         clickedOutside(event) {
             if (this.whiteList.indexOf(event.target) < 0) {
-                this.isActive = false
+                this.close()
             }
         },
 
         /**
-         * Calculates if the dropdown dropdown is vertically visible when activated,
+         * Calculate if the dropdown is vertically visible when activated,
          * otherwise it is openened upwards.
          */
-        calcListInViewportVertical() {
+        calcDropdownInViewportVertical() {
             Vue.nextTick(() => {
                 const rect = this.$refs.dropdown.getBoundingClientRect()
 
@@ -208,10 +230,10 @@ export default {
         },
 
         /**
-         * Calculates if the dropdown dropdown is horizontally visible when activated,
+         * Calculate if the dropdown is horizontally visible when activated,
          * otherwise it is opened left sided.
          */
-        calcListInViewportHorizontal() {
+        calcDropdownInViewportHorizontal() {
             Vue.nextTick(() => {
                 const rect = this.$refs.dropdown.getBoundingClientRect()
 
@@ -236,8 +258,12 @@ export default {
         },
 
         /**
-         * Arrows keys listener, set which option is currently hovered if the dropdown is active,
-         * or sets selected option if dropdown is not active (just like native <select>).
+         * Arrows keys listener.
+         *
+         * If dropdown is active:
+         *   - Set hovered option.
+         * If dropdown is not active:
+         *   - Set selected option (just like native <select>).
          */
         keyArrows(direction) {
             const sum = direction === 'down' ? 1 : -1
@@ -251,36 +277,70 @@ export default {
         },
 
         /**
-         * Enter key listener, select the hovered option and close the dropdown.
+         * Enter key listener.
+         * Select the hovered option and close the dropdown.
          */
         keyEnter() {
             this.selectOption(this.hovered)
-            this.isActive = false
-        },
-
-        keyEsc() {
-            this.isActive = false
-            this.isMouseOverDropdown = false
+            this.close()
         },
 
         /**
-         * Blur listener (lost focus), close the dropdown.
+         * Esc key listener.
+         * Force-close the dropdown.
+         */
+        keyEsc() {
+            this.close(true)
+        },
+
+        /**
+         * Blur listener.
+         * 1. Close the dropdown.
+         * 2. Fire the HTML5 validation.
          */
         blur(event) {
-            this.isActive = false
             this.$emit('blur', event)
+            this.close()
+            this.html5Validation()
+        },
+
+        /**
+         * HTML5 validation, set isValid property.
+         * If validation fail, send 'is-danger' type,
+         * and error message to parent if it's a Field.
+         */
+        html5Validation() {
+            if (this.$refs.input === undefined) return
+
+            // Disabling readonly temporarily otherwise the HTML5 validation won't work
+            this.isReadonly = false
+            Vue.nextTick(() => {
+                if (!this.$refs.input.checkValidity()) {
+                    if (this.$parent.isFieldComponent) {
+                        this.$parent.newType = 'is-danger'
+                        this.$parent.newMessage = this.$refs.input.validationMessage
+                        this.isValid = false
+                    }
+                } else {
+                    if (this.$parent.isFieldComponent) {
+                        this.$parent.newType = null
+                        this.$parent.newMessage = null
+                        this.isValid = true
+                    }
+                }
+                // Back to what it was
+                this.isReadonly = !this.searchable
+            })
         }
     },
     created() {
         document.addEventListener('click', this.clickedOutside)
-        // document.addEventListener('scroll', this.clickedOutside)
-        window.addEventListener('resize', this.calcListInViewportHorizontal)
-        window.addEventListener('resize', this.calcListInViewportVertical)
+        window.addEventListener('resize', this.calcDropdownInViewportHorizontal)
+        window.addEventListener('resize', this.calcDropdownInViewportVertical)
     },
     beforeDestroy() {
         document.removeEventListener('click', this.clickedOutside)
-        // document.removeEventListener('scroll', this.clickedOutside)
-        window.removeEventListener('resize', this.calcListInViewportHorizontal)
-        window.removeEventListener('resize', this.calcListInViewportVertical)
+        window.removeEventListener('resize', this.calcDropdownInViewportHorizontal)
+        window.removeEventListener('resize', this.calcDropdownInViewportVertical)
     }
 }
