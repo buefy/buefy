@@ -26,9 +26,9 @@
 * Add a comment block before every **method**, **watcher** and **computed property** explaining what it does, with this template:
 ```javascript
 /**
-* Calculates if the dropdown list is horizontally visible when activated,
-* otherwise it is openened upwards.
-*/
+ * Calculates if the dropdown list is horizontally visible when activated,
+ * otherwise it is openened upwards.
+ */
 ```
 * Add one-line comment inside any block whenever you judge necessary
 * Order Vue instance by:
