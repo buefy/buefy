@@ -181,109 +181,97 @@
 
         <hr>
         <h2 class="title is-spaced">Addons</h2>
-        <h3 class="subtitle">Inputs and <code>.control</code> elements are automatically unified when inside a Field</h3>
-        <div class="columns">
-            <div class="column">
-                <h3 class="subtitle">Which side you want</h3>
-                <b-field>
-                    <b-input placeholder="Search..." icon="search"></b-input>
-                    <p class="control">
-                        <button class="button is-primary">Search</button>
-                    </p>
-                </b-field>
+        <h3 class="subtitle">Inputs, Selects, Dropdowns and <code>.control</code> elements are automatically unified when inside a Field</h3>
+        <div class="example">
+            <h3 class="subtitle">Which side you want</h3>
+            <b-field>
+                <b-input placeholder="Search..." icon="search"></b-input>
+                <p class="control">
+                    <button class="button is-primary">Search</button>
+                </p>
+            </b-field>
 
-                <b-field position="centered">
-                    <b-input placeholder="Search..." icon="search"></b-input>
-                    <p class="control">
-                        <button class="button is-dark">Search</button>
-                    </p>
-                </b-field>
+            <b-field position="centered">
+                <b-input placeholder="Search..." icon="search"></b-input>
+                <p class="control">
+                    <button class="button is-dark">Search</button>
+                </p>
+            </b-field>
 
-                <b-field position="right">
-                    <b-input placeholder="Search..." icon="search"></b-input>
-                    <p class="control">
-                        <button class="button is-info">Search</button>
-                    </p>
-                </b-field>
+            <b-field position="right">
+                <b-input placeholder="Search..." icon="search"></b-input>
+                <p class="control">
+                    <button class="button is-info">Search</button>
+                </p>
+            </b-field>
 
-                <h3 class="subtitle">How many you need</h3>
-                <b-field>
-                    <p class="control">
-                        <span class="select">
-                            <select>
-                                <option>$</option>
-                                <option>£</option>
-                                <option>€</option>
-                            </select>
-                        </span>
-                    </p>
-                    <b-input placeholder="How much will you donate?"></b-input>
-                    <p class="control">
-                        <button class="button">Cancel</button>
-                    </p>
-                    <p class="control">
-                        <button class="button is-success">Transfer</button>
-                    </p>
-                </b-field>
+            <h3 class="subtitle">How many you need</h3>
+            <b-field>
+                <b-select placeholder="Currency">
+                    <b-option>$</b-option>
+                    <b-option>£</b-option>
+                    <b-option>€</b-option>
+                </b-select>
+                <b-input placeholder="0,00"></b-input>
+                <p class="control">
+                    <button class="button">Cancel</button>
+                </p>
+                <p class="control">
+                    <button class="button is-success">Transfer</button>
+                </p>
+            </b-field>
 
-                <b-field>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_bold"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_italic"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_underlined"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_align_left"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_align_center"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_align_right"></b-icon>
-                        </button>
-                    </p>
-                </b-field>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
-            </div>
+            <b-field>
+                <p class="control">
+                    <button class="button">
+                        <b-icon icon="format_bold"></b-icon>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button">
+                        <b-icon icon="format_italic"></b-icon>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button">
+                        <b-icon icon="format_underlined"></b-icon>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button">
+                        <b-icon icon="format_align_left"></b-icon>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button">
+                        <b-icon icon="format_align_center"></b-icon>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button">
+                        <b-icon icon="format_align_right"></b-icon>
+                    </button>
+                </p>
+            </b-field>
         </div>
+        <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <hr>
         <h2 class="title is-spaced">Group</h2>
         <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
         <p class="content">Note that you have to specify which one will be <code>expanded</code>.</p>
-        <div class="columns">
-            <div class="column">
-                <b-field grouped>
-                    <b-input placeholder="Search..." expanded></b-input>
-                    <p class="control">
-                        <button class="button is-primary">Search</button>
-                    </p>
-                    <p class="control">
-                        <button class="button">Clear</button>
-                    </p>
-                </b-field>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
-            </div>
+        <div class="example">
+            <b-field grouped>
+                <b-input placeholder="Search..." expanded></b-input>
+                <p class="control">
+                    <button class="button is-primary">Search</button>
+                </p>
+                <p class="control">
+                    <button class="button">Clear</button>
+                </p>
+            </b-field>
         </div>
+        <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
 
         <hr>
         <h2 class="title">Sizes</h2>
@@ -766,15 +754,11 @@
 
                     <h3 class="subtitle">How many you need</h3>
                     <b-field>
-                        <p class="control">
-                            <span class="select">
-                                <select>
-                                    <option>$</option>
-                                    <option>£</option>
-                                    <option>€</option>
-                                </select>
-                            </span>
-                        </p>
+                        <b-select placeholder="Currency">
+                            <b-option>$</b-option>
+                            <b-option>£</b-option>
+                            <b-option>€</b-option>
+                        </b-select>
                         <b-input placeholder="How much will you donate?"></b-input>
                         <p class="control">
                             <button class="button">Cancel</button>
