@@ -99,7 +99,7 @@
         },
         mounted() {
             const sr = ScrollReveal({
-                duration: 600,
+                duration: 400,
                 delay: 200
             })
             sr.reveal('.home-hero', { delay: 0, origin: 'top' }, 200)

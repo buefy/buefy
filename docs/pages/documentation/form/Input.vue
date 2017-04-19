@@ -145,7 +145,9 @@
                 </b-field>
 
                 <b-field>
-                    <b-input maxlength="20"
+                    <b-input type="textarea"
+                        minlength="10"
+                        maxlength="100"
                         placeholder="Maxlength automatically counts characters">
                     </b-input>
                 </b-field>
@@ -720,7 +722,9 @@
                     </b-field>
 
                     <b-field>
-                        <b-input maxlength="20"
+                        <b-input type="textarea"
+                            minlength="10"
+                            maxlength="100"
                             placeholder="Maxlength automatically counts characters">
                         </b-input>
                     </b-field>`,

@@ -1,7 +1,10 @@
 <template>
     <div>
         <h1 class="title is-spaced">Customizing theme with Sass</h1>
-        <h2 class="subtitle">If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps</h2>
+        <h2 class="subtitle">
+            If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <strong>customize</strong>
+            Buefy with your own theme,follow these steps
+        </h2>
 
         <hr>
 
@@ -12,7 +15,10 @@
         <hr>
 
         <h3 class="subtitle"><span class="list-number">2</span> Set your variables with Sass</h3>
-        <p class="content"><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>. There's also another variable created by Buefy: <code>$speed-slow: 150ms !default</code>.</p>
+        <p class="content">
+            <b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.
+            There's also another variable created by Buefy: <code>$speed-slow: 150ms !default</code>.
+        </p>
         <div class="example"><pre v-highlight><code class="sass">{{ sass | pre }}</code></pre></div>
 
         <hr>
@@ -24,6 +30,13 @@
 
         <h3 class="subtitle"><span class="list-number">4</span> Import and use Buefy. You can also enable individual components</h3>
         <pre v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
+
+        <hr>
+
+        <p class="content">
+            If you're still not sure how to proceed, take a look at this <a href="https://github.com/rafaelpimpa/buefy-simple" target="_blank">
+            repository with a basic setup to customize Buefy</a>.
+        </p>
     </div>
 </template>
 

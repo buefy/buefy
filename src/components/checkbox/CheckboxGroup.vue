@@ -18,17 +18,18 @@
         },
         watch: {
             /**
-            * Sets checked state on all children Checkboxes when v-model changes.
-            */
+             * Set checked state on all children Checkboxes when v-model change.
+             */
             value() {
                 this.initChecked()
             }
         },
         methods: {
             /**
-            * Update the checkedList property with all the Checkboxes that are active.
-            * Called from Checkbox child.
-            */
+             * Update the checkedList property with all the Checkboxes that are active.
+             * This is called from Checkbox child.
+             * Emit input event to update the user v-model.
+             */
             updateValue() {
                 this.checkedList = []
                 this.$children.forEach((child) => {
@@ -39,8 +40,8 @@
             },
 
             /**
-            * Sets checked state on all children Checkboxes based on v-model.
-            */
+             * Set checked state on all children Checkboxes based on v-model.
+             */
             initChecked() {
                 this.$children.forEach((child) => {
                     if (this.value && this.value.indexOf(child.customValue) >= 0) {

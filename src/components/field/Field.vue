@@ -20,21 +20,41 @@
             return {
                 newType: this.type,
                 newMessage: this.message,
-                isFieldComponent: true // Used internally by Input
+                isFieldComponent: true // Used internally by Input and Select
             }
         },
         watch: {
+            /**
+             * Set internal type when prop change.
+             */
             type(value) {
                 this.newType = value
             },
+
+            /**
+             * Set internal message when prop change.
+             */
             message(value) {
                 this.newMessage = value
             }
         },
         computed: {
+            /**
+             * Correct Bulma class for the side of the addon.
+             *
+             * This is not kept like the others (is-small, etc.),
+             * because since 'has-addons' is set automatically it
+             * doesn't make sense to teach users what addons are exactly.
+             */
             addonsPosition() {
                 if (this.position) return 'has-addons-' + this.position
             },
+
+            /**
+             * Field has addons if there are more than one slot
+             * (element / component) in the Field.
+             * Or is grouped when prop is set.
+             */
             fieldType() {
                 if (this.grouped) {
                     return 'is-grouped'

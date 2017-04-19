@@ -13,7 +13,7 @@
             type: String,
             pack: String,
             icon: String,
-            both: Boolean, // This is used internally show both mdi and fa icon
+            both: Boolean, // This is used internally to show both MDI and FA icon
             size: String
         },
         data() {
@@ -22,6 +22,11 @@
             }
         },
         computed: {
+            /**
+             * Internal icon name based on the pack.
+             * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+             * internal icons are always MDI.
+             */
             newIcon() {
                 if (this.both) {
                     return this.newPack === 'mdi' ? this.icon : this.equivalentIconOf(this.icon)
@@ -31,6 +36,9 @@
             }
         },
         methods: {
+            /**
+             * Equivalent FA icon name of the MDI.
+             */
             equivalentIconOf(value) {
                 switch (value) {
                     case 'done': return 'check'

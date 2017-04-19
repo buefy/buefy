@@ -27,13 +27,15 @@
             :pattern="pattern"
             :value="newValue"
             @input="input"
-            @blur="onBlur"
+            @blur="blur"
             @focus="$emit('focus', $event)"
             @change="$emit('change', newValue)">
 
         <textarea
             v-else
             class="textarea"
+            :class="[statusType, size]"
+            ref="textarea"
             :name="name"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -43,7 +45,7 @@
             :minlength="minlength"
             :value="newValue"
             @input="input"
-            @blur="onBlur"
+            @blur="blur"
             @focus="$emit('focus', $event)"
             @change="$emit('change', newValue)">
         </textarea>
@@ -73,7 +75,7 @@
             @click.native="togglePasswordVisibility">
         </b-icon>
 
-        <small class="help counter" v-if="maxlength">{{ characteresCount }} / {{ maxlength }}</small>
+        <small class="help counter" v-if="maxlength">{{ this.newValue.length }} / {{ maxlength }}</small>
     </p>
 </template>
 
@@ -100,7 +102,7 @@
             icon: String,
             iconPack: String,
 
-            // Native options
+            // Native options to use in HTML5 validation
             autocomplete: String,
             required: Boolean,
             disabled: Boolean,
@@ -116,47 +118,12 @@
         },
         data() {
             return {
-                newValue: this.value,
+                // This is necessary because, for some reason, textarea
+                // returns undefined if there's no v-model or value.
+                newValue: this.value || '',
                 newType: this.type,
                 newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
                 isPasswordVisible: false
-            }
-        },
-        computed: {
-            hasIcon() {
-                return this.icon || this.hasIconRight
-            },
-            hasIconRight() {
-                return this.passwordReveal || this.loading || this.statusType
-            },
-            iconPosition() {
-                if (this.icon && this.hasIconRight) {
-                    return 'has-both-icon'
-                } else if (!this.icon && this.hasIconRight) {
-                    return 'has-icon-right'
-                }
-            },
-            statusType() {
-                if (this.$parent.isFieldComponent) {
-                    return this.$parent.newType
-                }
-            },
-            statusTypeIcon() {
-                switch (this.statusType) {
-                    case 'is-success': return 'done'
-                    case 'is-danger': return 'error'
-                    case 'is-info': return 'info'
-                    case 'is-warning': return 'warning'
-                }
-            },
-            hasMessage() {
-                return this.$parent.isFieldComponent && this.$parent.newMessage
-            },
-            characteresCount() {
-                return this.newValue ? this.newValue.length : 0
-            },
-            passwordVisibleIcon() {
-                return !this.isPasswordVisible ? 'visibility' : 'visibility_off'
             }
         },
         watch: {
@@ -167,12 +134,83 @@
                 this.$emit('change', value)
             }
         },
+        computed: {
+            /**
+             * Check if have any icon (defined or internal).
+             */
+            hasIcon() {
+                return this.icon || this.hasIconRight
+            },
+
+            /**
+             * Check if have any icon in the right side.
+             */
+            hasIconRight() {
+                return this.passwordReveal || this.loading || this.statusType
+            },
+
+            /**
+             * Position of the icon or if it's both sides.
+             */
+            iconPosition() {
+                if (this.icon && this.hasIconRight) {
+                    return 'has-both-icon'
+                } else if (!this.icon && this.hasIconRight) {
+                    return 'has-icon-right'
+                }
+            },
+
+            /**
+             * Get the type prop from parent if it's a Field.
+             */
+            statusType() {
+                if (this.$parent.isFieldComponent) {
+                    return this.$parent.newType
+                }
+            },
+
+            /**
+             * Icon name (MDI) based on the type.
+             */
+            statusTypeIcon() {
+                switch (this.statusType) {
+                    case 'is-success': return 'done'
+                    case 'is-danger': return 'error'
+                    case 'is-info': return 'info'
+                    case 'is-warning': return 'warning'
+                }
+            },
+
+            /**
+             * Check if have any message prop from parent if it's a Field.
+             */
+            hasMessage() {
+                return this.$parent.isFieldComponent && this.$parent.newMessage
+            },
+
+            /**
+             * Current password-reveal icon name.
+             */
+            passwordVisibleIcon() {
+                return !this.isPasswordVisible ? 'visibility' : 'visibility_off'
+            }
+        },
         methods: {
+            /**
+             * Emit input event to update the user v-model.
+             * We're sing value instead of v-model because
+             * v-model cannot be binded with a dynamic type input
+             */
             input(event) {
                 const val = event.target.value
                 this.newValue = val
                 this.$emit('input', val)
             },
+
+            /**
+             * Toggle the visibility of a password-reveal input
+             * by changing the type and focus the input right away.
+             */
             togglePasswordVisibility() {
                 this.isPasswordVisible = !this.isPasswordVisible
                 this.newType = this.isPasswordVisible ? 'text' : 'password'
@@ -181,12 +219,18 @@
                     this.$refs.input.focus()
                 })
             },
-            onBlur(event) {
+
+            /**
+             * Fire the HTML5 validation and send the 'is-danger' type
+             * and the error message to the parent if it's a Field
+             */
+            blur(event) {
                 this.$emit('blur', event)
-                if (!this.$refs.input.checkValidity()) {
+                const element = this.newType === 'textarea' ? 'textarea' : 'input'
+                if (!this.$refs[element].checkValidity()) {
                     if (this.$parent.isFieldComponent) {
                         this.$parent.newType = 'is-danger'
-                        this.$parent.newMessage = this.$refs.input.validationMessage
+                        this.$parent.newMessage = this.$refs[element].validationMessage
                     }
                 } else {
                     if (this.$parent.isFieldComponent) {

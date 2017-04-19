@@ -50,7 +50,7 @@
 
 <script>
     import Icon from '../icon'
-    import { Input } from '../input'
+    import Input from '../input'
 
     export default {
         components: {
@@ -97,8 +97,8 @@
         },
         computed: {
             /**
-            * Icon based on the type.
-            */
+             * Icon name (MDI) based on the type.
+             */
             icon() {
                 switch (this.type) {
                     case 'is-info':
@@ -115,17 +115,28 @@
             }
         },
         methods: {
+            /**
+             * Call the onConfirm prop (function) and close the Dialog.
+             */
             confirm() {
                 const value = this.$refs.input ? this.$refs.input.newValue : null
                 this.onConfirm(value)
                 this.close()
             },
+
+            /**
+             * Call the onCancel prop (function) and close the Dialog.
+             */
             cancel() {
                 if (!this.canCancel) return
 
                 this.onCancel()
                 this.close()
             },
+
+            /**
+             * Close the Dialog.
+             */
             close() {
                 this.isActive = false
 
@@ -135,18 +146,24 @@
                     this.$el.remove()
                 }, 150)
             },
+
+            /**
+             * Keypress event that is bound to the document.
+             */
             keyPress(event) {
+                // Esc key
                 if (event.keyCode === 27) this.cancel()
-                console.log('teste')
             }
         },
         created() {
             document.addEventListener('keyup', this.keyPress)
         },
         beforeMount() {
+            // Insert the Dialog component in body tag
             document.body.appendChild(this.$el)
         },
         mounted() {
+            // Handle which element receives focus
             if (this.hasInput) {
                 this.$refs.input.$refs.input.focus()
             } else if (this.canCancel) {
