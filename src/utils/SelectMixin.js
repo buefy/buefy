@@ -20,12 +20,13 @@ export default {
             inputValue: null,
             isListInViewportHorizontally: true,
             isListInViewportVertically: true,
+            isMouseOverDropdown: false,
             isSelectComponent: true // Used internally by Option
         }
     },
     computed: {
         /**
-         * Get the type prop from parent if it's a Field.
+         * Type prop from parent if it's a Field.
          */
         statusType() {
             if (this.$parent.isFieldComponent) {
@@ -34,12 +35,19 @@ export default {
         },
 
         /**
-         * It's the list that will be rendered, filters the original
-         * options if nothing is selected and something is typed.
+         * Options that will be rendered.
+         *
+         * Activate the dropdown when filtered, this is to prevent
+         * dropdown to not appear when user focused the input
+         * by using tab key and not cliking on it.
+         *
+         * Filter the original options if:
+         *   - Something is typed on input; or
+         *   - Something is selected; and
+         *   - Selected option is not the same of input value
          */
-        searchOptions() {
-            if (!this.inputValue || this.selected !== null &&
-                this.selected.label === this.inputValue) {
+        filteredOptions() {
+            if (!this.inputValue || this.selected !== null && this.selected.label === this.inputValue) {
                 return this.options
             }
 
@@ -54,16 +62,16 @@ export default {
 
         /**
          * White-listed items to not close when clicked,
-         * adds all the refs from input, list, trigger and all children.
+         * adds all the refs from input, dropdown, trigger and all children.
          */
         whiteList() {
             const whiteList = []
             whiteList.push(this.$refs.input)
-            whiteList.push(this.$refs.list)
+            whiteList.push(this.$refs.dropdown)
             whiteList.push(this.$refs.trigger)
-            // Adds all chidren from list
-            if (this.$refs.list !== undefined) {
-                const children = this.$refs.list.querySelectorAll('*')
+            // Adds all chidren from dropdown
+            if (this.$refs.dropdown !== undefined) {
+                const children = this.$refs.dropdown.querySelectorAll('*')
                 for (const child of children) {
                     whiteList.push(child)
                 }
@@ -85,27 +93,24 @@ export default {
          * to know when to open upwards.
          * Also sets the previously selected option if deactivating.
          */
-        isActive() {
-            if (!this.isActive) {
-                // Wait for the animation to finish before recalculating
-                setTimeout(() => {
-                    this.calcListInViewportHorizontal()
-                    this.calcListInViewportVertical()
-                    if (this.selected !== null) {
-                        this.inputValue = this.selected.label
+        isActive(active) {
+            this.calcListInViewportHorizontal()
+            this.calcListInViewportVertical()
+            if (active) {
+                if (this.selected !== null) {
+                    Vue.nextTick(() => {
                         // Set scroll position to selected item
                         if (this.$refs[this.selected.uid] !== undefined) {
-                            this.$refs.list.scrollTop = this
-                                .$refs[this.selected.uid][0]
-                                .offsetTop
+                            this.$refs.dropdown.scrollTop = this.$refs[this.selected.uid][0].offsetTop
                         }
-                    }
-                }, 100)
-            } else {
-                this.calcListInViewportHorizontal()
-                this.calcListInViewportVertical()
+                    })
+                }
                 if (this.searchable) {
                     this.$refs.input.select()
+                }
+            } else {
+                if (this.selected !== null && !this.isMouseOverDropdown) {
+                    this.inputValue = this.selected.label
                 }
             }
         },
@@ -129,7 +134,10 @@ export default {
         },
 
         /**
-         * When selected, changes the input value.
+         * When selected:
+         *   1. Change the input value.
+         *   2. Emit input event to update the user v-model.
+         *   3. Close the dropdown.
          */
         selected(option) {
             if (!option) return
@@ -137,6 +145,7 @@ export default {
             this.$emit('input', option.value)
             this.$emit('change', option.value)
             this.inputValue = option.label
+            this.isMouseOverDropdown = false
             this.isActive = false
         }
     },
@@ -159,15 +168,15 @@ export default {
             if (option === undefined || option === this.hovered) return
 
             if (index !== undefined) {
-                const list = this.$refs.list
+                const dropdown = this.$refs.dropdown
                 const element = this.$refs[option.uid][0]
-                const visMin = list.scrollTop
-                const visMax = list.scrollTop + list.clientHeight - element.clientHeight
+                const visMin = dropdown.scrollTop
+                const visMax = dropdown.scrollTop + dropdown.clientHeight - element.clientHeight
 
                 if (element.offsetTop < visMin) {
-                    list.scrollTop = element.offsetTop
+                    dropdown.scrollTop = element.offsetTop
                 } else if (element.offsetTop >= visMax) {
-                    list.scrollTop = element.offsetTop - list.clientHeight + element.clientHeight
+                    dropdown.scrollTop = element.offsetTop - dropdown.clientHeight + element.clientHeight
                 }
             }
             this.hovered = option
@@ -183,12 +192,12 @@ export default {
         },
 
         /**
-         * Calculates if the dropdown list is vertically visible when activated,
+         * Calculates if the dropdown dropdown is vertically visible when activated,
          * otherwise it is openened upwards.
          */
         calcListInViewportVertical() {
             Vue.nextTick(() => {
-                const rect = this.$refs.list.getBoundingClientRect()
+                const rect = this.$refs.dropdown.getBoundingClientRect()
 
                 this.isListInViewportVertically = (
                     rect.top >= 0 &&
@@ -199,12 +208,12 @@ export default {
         },
 
         /**
-         * Calculates if the dropdown list is horizontally visible when activated,
+         * Calculates if the dropdown dropdown is horizontally visible when activated,
          * otherwise it is opened left sided.
          */
         calcListInViewportHorizontal() {
             Vue.nextTick(() => {
-                const rect = this.$refs.list.getBoundingClientRect()
+                const rect = this.$refs.dropdown.getBoundingClientRect()
 
                 this.isListInViewportHorizontally = (
                     rect.left >= 0 &&
@@ -227,28 +236,39 @@ export default {
         },
 
         /**
-         * When the keyboard arrows are pressed while input is focused
-         * sets which option is currently hovered if the dropdown is active,
+         * Arrows keys listener, set which option is currently hovered if the dropdown is active,
          * or sets selected option if dropdown is not active (just like native <select>).
          */
-        inputArrows(direction) {
+        keyArrows(direction) {
             const sum = direction === 'down' ? 1 : -1
             if (!this.isActive) {
                 const index = this.options.indexOf(this.hovered) + sum
                 this.selectOption(this.options[index], index)
             } else {
-                const index = this.searchOptions.indexOf(this.hovered) + sum
-                this.hoverOption(this.searchOptions[index], index)
+                const index = this.filteredOptions.indexOf(this.hovered) + sum
+                this.hoverOption(this.filteredOptions[index], index)
             }
         },
 
         /**
-         * When enter is pressed while input is focused
-         * selects the hovered option and closes the dropdown.
+         * Enter key listener, select the hovered option and close the dropdown.
          */
-        inputEnter() {
+        keyEnter() {
             this.selectOption(this.hovered)
             this.isActive = false
+        },
+
+        keyEsc() {
+            this.isActive = false
+            this.isMouseOverDropdown = false
+        },
+
+        /**
+         * Blur listener (lost focus), close the dropdown.
+         */
+        blur(event) {
+            this.isActive = false
+            this.$emit('blur', event)
         }
     },
     created() {

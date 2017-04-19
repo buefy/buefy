@@ -53,8 +53,9 @@
             &.is-disabled {
                 opacity: .5;
             }
-            &.is-unselectable {
+            &.is-subheader {
                 pointer-events: none;
+                cursor: inherit;
             }
         }
     }

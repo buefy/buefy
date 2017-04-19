@@ -20,11 +20,11 @@
                 autocomplete="off"
                 @click="isActive = !isActive"
                 @focus="$emit('focus', $event)"
-                @blur="$emit('blur', $event)"
-                @keyup.enter.prevent="inputEnter"
-                @keyup.esc.prevent="isActive = false"
-                @keydown.down.prevent="inputArrows('down')"
-                @keydown.up.prevent="inputArrows('up')">
+                @blur="blur"
+                @keyup.enter.prevent="keyEnter"
+                @keyup.esc.prevent="keyEsc"
+                @keydown.down.prevent="keyArrows('down')"
+                @keydown.up.prevent="keyArrows('up')">
 
             <transition-group
                 appear
@@ -35,21 +35,22 @@
                 <div
                     key="bg"
                     class="background is-hidden-desktop"
-                    v-show="isActive">
+                    v-show="isActive || isMouseOverDropdown">
                 </div>
-
                 <span
-                    key="list"
+                    key="dropbox"
                     class="box"
                     :class="{ 'is-opened-top': !isListInViewportVertically }"
-                    v-show="isActive"
-                    ref="list">
+                    v-show="isActive || isMouseOverDropdown"
+                    ref="dropdown"
+                    @mouseenter="isMouseOverDropdown = true"
+                    @mouseleave="isMouseOverDropdown = false">
                     <ul>
-                        <template v-for="(option, i) in searchOptions">
-                            <li class="subheader" v-if="isSubheader(option, searchOptions[i - 1], i)">
+                        <template v-for="(option, i) in filteredOptions">
+                            <li class="subheader" v-if="isSubheader(option, filteredOptions[i - 1], i)">
                                 {{ option.group }}
                             </li>
-                            <li class="option"
+                            <li class="option is-unselectable"
                                 :class="{
                                     'is-selected': option === selected,
                                     'is-hovered': option === hovered,
@@ -63,7 +64,6 @@
                         </template>
                     </ul>
                 </span>
-
             </transition-group>
         </span>
     </p>

@@ -19,7 +19,7 @@
         padding: 0;
         z-index: 10;
         overflow: auto;
-        animation-duration: $speed;
+        animation-duration: none;
         .subheader {
             color: $grey-light;
             padding: 0.5rem;
@@ -52,6 +52,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation-duration: $speed;
             .subheader {
                 padding: 0.5rem 1rem;
             }

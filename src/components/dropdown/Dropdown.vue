@@ -22,7 +22,7 @@
             </div>
 
             <span
-                key="list"
+                key="dropdown"
                 class="box"
                 :class="['is-dropdown', {
                     'is-opened-top': !isListInViewportVertically,
@@ -30,15 +30,16 @@
                     'is-narrow': narrowed
                 }]"
                 v-show="isActive"
-                ref="list">
+                ref="dropdown">
                 <ul>
-                    <template v-for="option in searchOptions">
+                    <template v-for="option in filteredOptions">
                         <li class="option"
                             :class="{
                                 'is-selected': option === selected,
                                 'is-separator': option.separator,
                                 'is-disabled': option.disabled,
-                                'is-unselectable': option.unselectable
+                                'is-subheader': option.subheader,
+                                'is-unselectable': !option.subheader
                             }"
                             @click="selectOption(option)">
                             <b-icon

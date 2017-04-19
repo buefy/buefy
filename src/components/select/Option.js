@@ -6,7 +6,7 @@ export default {
         group: String,
         separator: Boolean,
         disabled: Boolean,
-        unselectable: Boolean,
+        subheader: Boolean,
         icon: String,
         iconPack: String
     },
@@ -35,7 +35,7 @@ export default {
             group: this.group,
             separator: this.separator,
             disabled: this.disabled,
-            unselectable: this.unselectable,
+            subheader: this.subheader,
             icon: this.icon,
             iconPack: this.iconPack
         }

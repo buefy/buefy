@@ -117,7 +117,7 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option value="profile" unselectable>Logged as Rafael Beraldo</b-option>
+                    <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
                     <b-option separator></b-option>
                     <b-option value="home">Home</b-option>
                     <b-option value="products">Products</b-option>
@@ -133,7 +133,7 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option value="profile" unselectable>Logged as Rafael Beraldo</b-option>
+                    <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
                     <b-option separator></b-option>
                     <b-option value="home">Home</b-option>
                     <b-option value="products">Products</b-option>
@@ -154,7 +154,7 @@
                     <b-option
                         value="profile"
                         label="Logged as <b>Rafael Beraldo</b>"
-                        unselectable>
+                        subheader>
                     </b-option>
                     <b-option separator></b-option>
                     <b-option value="home" icon="home">Home</b-option>
@@ -307,7 +307,7 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>unselectable</code>',
+                        name: '<code>subheader</code>',
                         description: 'Option is not a clickable item',
                         type: 'Boolean',
                         values: '—',
@@ -428,7 +428,7 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option value="profile" unselectable>Logged as Rafael Beraldo</b-option>
+                            <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
                             <b-option separator></b-option>
                             <b-option value="home">Home</b-option>
                             <b-option value="products">Products</b-option>
@@ -444,7 +444,7 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option value="profile" unselectable>Logged as Rafael Beraldo</b-option>
+                            <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
                             <b-option separator></b-option>
                             <b-option value="home">Home</b-option>
                             <b-option value="products">Products</b-option>
@@ -465,7 +465,7 @@
                             <b-option
                                 value="profile"
                                 label="Logged as <b>Rafael Beraldo</b>"
-                                unselectable>
+                                subheader>
                             </b-option>
                             <b-option separator></b-option>
                             <b-option value="home" icon="home">Home</b-option>
