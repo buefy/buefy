@@ -9,13 +9,15 @@ export default {
         disabled: Boolean,
         required: Boolean,
         searchable: Boolean,
-        expanded: Boolean
+        expanded: Boolean,
+        loading: Boolean
     },
     data() {
         return {
             options: [],
             selected: null,
             hovered: null,
+            maxWidth: 'auto',
             isActive: false,
             isValid: true,
             isReadonly: !this.searchable, // Separated property to validate with HTML5
@@ -246,6 +248,31 @@ export default {
         },
 
         /**
+         * Calculate the max-width of the input based on the option
+         * with most length.
+         */
+        calcMaxWidth() {
+            if (this.expanded) return
+            Vue.nextTick(() => {
+                let options = this.options
+                options = [...options].sort((a, b) => {
+                    return b.label.length - a.label.length
+                })
+
+                if (options.length > 0) {
+                    // Check if placeholder have more length than the option
+                    const maxLenght = options[0].label.length > this.placeholder.length
+                        ? this.maxWidth = options[0].label.length
+                        : this.placeholder.length
+
+                    // Length - 35% (because not all letters are as big as an M)
+                    // + 2.5em of padding right + 0.625em of padding left
+                    this.maxWidth = maxLenght * 0.65 + 2.5 + 0.625 + 'em'
+                }
+            })
+        },
+
+        /**
          * Verify if next item is a subheader (another group chunk).
          */
         isSubheader(option, previousOption, i) {
@@ -337,6 +364,9 @@ export default {
         document.addEventListener('click', this.clickedOutside)
         window.addEventListener('resize', this.calcDropdownInViewportHorizontal)
         window.addEventListener('resize', this.calcDropdownInViewportVertical)
+    },
+    mounted() {
+        this.calcMaxWidth()
     },
     beforeDestroy() {
         document.removeEventListener('click', this.clickedOutside)

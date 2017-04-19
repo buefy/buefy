@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.2.1
+
+* #23 Fix Select with Addons overflowing
+* Add ``loading`` property to Select
+
 ## 0.2.0
 
 * **New component: Select**

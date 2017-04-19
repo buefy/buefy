@@ -1,11 +1,12 @@
 <template>
     <p
-        class="control has-icon has-icon-right"
-        :class="{ 'is-expanded': expanded }">
+        class="control"
+        :class="{ 'is-expanded': expanded }"
+        :style="{ maxWidth: maxWidth }">
         <slot></slot>
         <span
             class="select"
-            :class="[size, { 'is-fullwidth': expanded }]">
+            :class="[size, { 'is-fullwidth': expanded, 'is-loading': loading }]">
             <input
                 v-model="inputValue"
                 class="input"
