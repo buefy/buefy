@@ -91,6 +91,7 @@
                 <h3 class="subtitle">With Material Design Icons</h3>
                 <b-field>
                     <b-input placeholder="Search..."
+                        type="search"
                         icon="search">
                     </b-input>
                 </b-field>
@@ -102,9 +103,16 @@
                     </b-input>
                 </b-field>
 
+                <b-field>
+                    <b-input placeholder="Credit card"
+                        icon="payment">
+                    </b-input>
+                </b-field>
+
                 <h3 class="subtitle">With FontAwesome</h3>
                 <b-field>
                     <b-input placeholder="Search..."
+                        type="search"
                         icon-pack="fa"
                         icon="search">
                     </b-input>
@@ -115,6 +123,13 @@
                         type="email"
                         icon-pack="fa"
                         icon="envelope">
+                    </b-input>
+                </b-field>
+
+                <b-field>
+                    <b-input placeholder="Credit card"
+                        icon-pack="fa"
+                        icon="credit-card">
                     </b-input>
                 </b-field>
             </div>
@@ -185,21 +200,30 @@
         <div class="example">
             <h3 class="subtitle">Which side you want</h3>
             <b-field>
-                <b-input placeholder="Search..." icon="search"></b-input>
+                <b-input placeholder="Search..."
+                    type="search"
+                    icon="search">
+                </b-input>
                 <p class="control">
                     <button class="button is-primary">Search</button>
                 </p>
             </b-field>
 
             <b-field position="centered">
-                <b-input placeholder="Search..." icon="search"></b-input>
+                <b-input placeholder="Search..."
+                    type="search"
+                    icon="search">
+                </b-input>
                 <p class="control">
                     <button class="button is-dark">Search</button>
                 </p>
             </b-field>
 
             <b-field position="right">
-                <b-input placeholder="Search..." icon="search"></b-input>
+                <b-input placeholder="Search..."
+                    type="search"
+                    icon="search">
+                </b-input>
                 <p class="control">
                     <button class="button is-info">Search</button>
                 </p>
@@ -252,6 +276,7 @@
                         <b-icon icon="format_align_right"></b-icon>
                     </button>
                 </p>
+                <b-input placeholder="Search..." type="search" icon="search"></b-input>
             </b-field>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
@@ -666,6 +691,7 @@
                     <h3 class="subtitle">With Material Design Icons</h3>
                     <b-field>
                         <b-input placeholder="Search..."
+                            type="search"
                             icon="search">
                         </b-input>
                     </b-field>
@@ -677,9 +703,16 @@
                         </b-input>
                     </b-field>
 
+                    <b-field>
+                        <b-input placeholder="Credit card"
+                            icon="payment">
+                        </b-input>
+                    </b-field>
+
                     <h3 class="subtitle">With FontAwesome</h3>
                     <b-field>
                         <b-input placeholder="Search..."
+                            type="search"
                             icon-pack="fa"
                             icon="search">
                         </b-input>
@@ -690,6 +723,13 @@
                             type="email"
                             icon-pack="fa"
                             icon="envelope">
+                        </b-input>
+                    </b-field>
+
+                    <b-field>
+                        <b-input placeholder="Credit card"
+                            icon-pack="fa"
+                            icon="credit-card">
                         </b-input>
                     </b-field>`,
                 template4: `
@@ -732,21 +772,30 @@
                 template6: `
                     <h3 class="subtitle">Which side you want</h3>
                     <b-field>
-                        <b-input placeholder="Search..." icon="search"></b-input>
+                        <b-input placeholder="Search..."
+                            type="search"
+                            icon="search">
+                        </b-input>
                         <p class="control">
                             <button class="button is-primary">Search</button>
                         </p>
                     </b-field>
 
                     <b-field position="centered">
-                        <b-input placeholder="Search..." icon="search"></b-input>
+                        <b-input placeholder="Search..."
+                            type="search"
+                            icon="search">
+                        </b-input>
                         <p class="control">
                             <button class="button is-dark">Search</button>
                         </p>
                     </b-field>
 
                     <b-field position="right">
-                        <b-input placeholder="Search..." icon="search"></b-input>
+                        <b-input placeholder="Search..."
+                            type="search"
+                            icon="search">
+                        </b-input>
                         <p class="control">
                             <button class="button is-info">Search</button>
                         </p>
