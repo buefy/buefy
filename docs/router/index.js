@@ -21,6 +21,7 @@ const Toast = (r) => require(['../pages/documentation/notices/Toast'], r)
 const Snackbar = (r) => require(['../pages/documentation/notices/Snackbar'], r)
 const Notification = (r) => require(['../pages/documentation/notices/Notification'], r)
 const Message = (r) => require(['../pages/documentation/notices/Message'], r)
+const Modal = (r) => require(['../pages/documentation/notices/Modal'], r)
 
 const Table = (r) => require(['../pages/documentation/data/Table'], r)
 const Pagination = (r) => require(['../pages/documentation/data/Pagination'], r)
@@ -124,6 +125,13 @@ export default new Router({
                 {
                     path: 'message',
                     component: Message,
+                    meta: {
+                        category: 'Notices'
+                    }
+                },
+                {
+                    path: 'modal',
+                    component: Modal,
                     meta: {
                         category: 'Notices'
                     }
