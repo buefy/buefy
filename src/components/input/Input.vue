@@ -58,7 +58,7 @@
         </b-icon>
 
         <b-icon
-            v-if="passwordReveal"
+            v-if="passwordReveal && !loading"
             class="is-primary is-clickable is-right"
             :icon="passwordVisibleIcon"
             :size="size"
@@ -67,7 +67,7 @@
         </b-icon>
 
         <b-icon
-            v-if="hasIconRight"
+            v-if="hasIconRight && !loading"
             :class="[statusType, 'is-right']"
             :icon="statusTypeIcon"
             :size="size"
@@ -130,9 +130,11 @@
         watch: {
             value(value) {
                 this.newValue = value
+                !this.isValid && this.html5Validation()
             },
             newValue(value) {
                 this.$emit('change', value)
+                !this.isValid && this.html5Validation()
             }
         },
         computed: {
