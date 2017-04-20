@@ -146,7 +146,9 @@
         watch: {
             data(value) {
                 this.newData = value
-                this.currentSortColumn = {}
+                if (!this.backendSorting) {
+                    this.sort(this.currentSortColumn, true)
+                }
             },
             selectable(value) {
                 if (!value) this.selectedItem = {}
@@ -189,10 +191,11 @@
             }
         },
         methods: {
-            sortBy(array, key, fn) {
+            sortBy(array, key, fn, isAsc) {
+                let sorted = []
                 // Sorting without mutating original data
-                if (!fn) {
-                    return [...array].sort((a, b) => {
+                if (!fn || typeof fn !== 'function') {
+                    sorted = [...array].sort((a, b) => {
                         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) return 0
 
                         const newA = (typeof a[key] === 'string')
@@ -205,31 +208,26 @@
                         return newA > newB ? 1 : -1
                     })
                 } else {
-                    if (typeof fn !== 'function') return
-
-                    return [...array].sort(fn)
+                    sorted = [...array].sort(fn)
                 }
+
+                if (!isAsc) sorted.reverse()
+
+                return sorted
             },
-            sort(column) {
+            sort(column, updatingData) {
                 if (!column || !column.isSortable) return
 
-                if (column === this.currentSortColumn) {
-                    column.isAsc = !column.isAsc
-                    if (!this.backendSorting) {
-                        this.newData.reverse()
-                    }
-                } else {
-                    column.isAsc = true
-                    if (!this.backendSorting) {
-                        this.newData = this.sortBy(this.newData, column.field, column.customSort)
-                    }
+                if (!updatingData) {
+                    column.isAsc = column === this.currentSortColumn
+                        ? !column.isAsc
+                        : column.isAsc = true
+                }
+                if (!this.backendSorting) {
+                    this.newData = this.sortBy(this.newData, column.field, column.customSort, column.isAsc)
                 }
                 this.currentSortColumn = column
                 this.$emit('sort', column.field, column.isAsc ? 'asc' : 'desc')
-                if (this.backendSorting) {
-                    // Verify if it's really needed
-                    this.$forceUpdate()
-                }
             },
 
             checkAll(isChecked) {
