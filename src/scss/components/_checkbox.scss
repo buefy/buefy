@@ -29,8 +29,8 @@
             background: $primary url(checkmark($white)) no-repeat center center;
             border-color: $primary;
         }
-        &.is-disabled {
-            opacity: 0.5;
-        }
+    }
+    &.is-disabled {
+        opacity: 0.5;
     }
 }

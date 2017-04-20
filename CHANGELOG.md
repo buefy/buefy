@@ -4,7 +4,8 @@
 
 * #23 Fix Select with Addons overflowing
 * Add ``loading`` property to Select
-* #30 Fix Table backend-sorting resetting sorted column
+* #30 Fix Table ``backend-sorting`` resetting sorted column
+* Fix Checkbox disabled style
 
 ## 0.2.0
 
