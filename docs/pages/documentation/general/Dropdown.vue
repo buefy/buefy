@@ -103,7 +103,7 @@
                     <b-option value="pull_requests">Your Pull Requests</b-option>
                     <b-option value="everything">Everything</b-option>
                 </b-dropdown>
-                <b-input icon="search" placeholder="Search..."></b-input>
+                <b-input icon="search" type="search" placeholder="Search..."></b-input>
             </b-field>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
@@ -418,7 +418,7 @@
                             <b-option value="pull_requests">Your Pull Requests</b-option>
                             <b-option value="everything">Everything</b-option>
                         </b-dropdown>
-                        <b-input icon="search" placeholder="Search..."></b-input>
+                        <b-input icon="search" type="search" placeholder="Search..."></b-input>
                     </b-field>`,
                 template4: `
                     <div class="block">
