@@ -2,12 +2,14 @@
 
 ## 0.2.1
 
-* #23 Fix Select with addons overflowing
 * Add ``loading`` property to Select
-* #30 Fix Table ``backend-sorting`` resetting sorted column
 * Fix Checkbox disabled style
+* Fix Input not being validated when v-model is updated
 * Fix Input ``loading`` overlapping other icons
-* Fix Input not firing HTML5 validation when v-model is updated
+* Fix Input ``password-reveal`` icon being overlapped by Field ``type`` icon
+* #23 Fix Select with addons overflowing
+* #30 Fix Table ``backend-sorting`` resetting sorted column
+* #33 Fix Input and Select on-blur listener removing user-defined Field ``type`` and ``message``
 
 ## 0.2.0
 

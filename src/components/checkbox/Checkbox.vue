@@ -27,7 +27,7 @@
         },
         watch: {
             /**
-             * Sets internal value when v-model change.
+             * When v-model change, set internal value.
              */
             value(value) {
                 this.newValue = value

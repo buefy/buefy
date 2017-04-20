@@ -58,18 +58,10 @@
         </b-icon>
 
         <b-icon
-            v-if="passwordReveal && !loading"
-            class="is-primary is-clickable is-right"
-            :icon="passwordVisibleIcon"
-            :size="size"
-            both
-            @click.native="togglePasswordVisibility">
-        </b-icon>
-
-        <b-icon
-            v-if="hasIconRight && !loading"
-            :class="[statusType, 'is-right']"
-            :icon="statusTypeIcon"
+            v-if="!loading && (passwordReveal || statusType)"
+            class="is-right"
+            :class="[!passwordReveal ? statusType : null, { 'is-primary is-clickable': passwordReveal }]"
+            :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
             :size="size"
             both
             @click.native="togglePasswordVisibility">
@@ -123,17 +115,18 @@
                 newValue: this.value || '',
                 newType: this.type,
                 newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
-                isValid: true,
+                isValid: true, // Used in Dialog and may be used in third party components
                 isPasswordVisible: false
             }
         },
         watch: {
+            /**
+             * When v-model is changed:
+             *   1. Set internal value.
+             *   2. If it's invalid, validate again.
+             */
             value(value) {
                 this.newValue = value
-                !this.isValid && this.html5Validation()
-            },
-            newValue(value) {
-                this.$emit('change', value)
                 !this.isValid && this.html5Validation()
             }
         },
@@ -200,14 +193,20 @@
         },
         methods: {
             /**
-             * Emit input event to update the user v-model.
-             * We're sing value instead of v-model because
-             * v-model cannot be binded with a dynamic type input
+             * Input's input listener.
+             *
+             *   1. Emit input event to update the user v-model.
+             *   2. If it's invalid, validate again.
+             *
+             * We're using value instead of v-model because
+             * v-model cannot be binded with a dynamic type input.
              */
             input(event) {
-                const val = event.target.value
-                this.newValue = val
-                this.$emit('input', val)
+                const value = event.target.value
+                this.newValue = value
+                this.$emit('input', value)
+                this.$emit('change', value)
+                !this.isValid && this.html5Validation()
             },
 
             /**
@@ -239,17 +238,23 @@
              */
             html5Validation() {
                 const element = this.newType === 'textarea' ? 'textarea' : 'input'
+                let type = null
+                let message = null
+                let isValid = true
                 if (!this.$refs[element].checkValidity()) {
-                    if (this.$parent.isFieldComponent) {
-                        this.$parent.newType = 'is-danger'
-                        this.$parent.newMessage = this.$refs[element].validationMessage
-                        this.isValid = false
+                    type = 'is-danger'
+                    message = this.$refs[element].validationMessage
+                    isValid = false
+                }
+                this.isValid = isValid
+                if (this.$parent.isFieldComponent) {
+                    // Set type only if user haven't defined
+                    if (!this.$parent.type) {
+                        this.$parent.newType = type
                     }
-                } else {
-                    if (this.$parent.isFieldComponent) {
-                        this.$parent.newType = null
-                        this.$parent.newMessage = null
-                        this.isValid = true
+                    // Set message only if user haven't defined
+                    if (!this.$parent.message) {
+                        this.$parent.newMessage = message
                     }
                 }
             }

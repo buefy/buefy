@@ -122,7 +122,9 @@ export default {
         },
 
         /**
-         * When v-model is changed, find and set the new selected option.
+         * When v-model is changed:
+         *   1. find and set the new selected option.
+         *   2. If it's invalid, validate again.
          */
         value(value) {
             if (value === null || value === '') {
@@ -137,6 +139,7 @@ export default {
                     return
                 }
             })
+            !this.isValid && this.html5Validation()
         },
 
         /**
@@ -144,6 +147,7 @@ export default {
          *   1. Change the input value.
          *   2. Emit input event to update the user v-model.
          *   3. Force-close the dropdown.
+         *   4. If it's invalid, validate again.
          */
         selected(option) {
             if (!option) return
@@ -152,6 +156,7 @@ export default {
             this.$emit('change', option.value)
             this.inputValue = option.label
             this.close(true)
+            !this.isValid && this.html5Validation()
         }
     },
     methods: {
@@ -342,20 +347,27 @@ export default {
             // Disabling readonly temporarily otherwise the HTML5 validation won't work
             this.isReadonly = false
             Vue.nextTick(() => {
+                let type = null
+                let message = null
+                let isValid = true
                 if (!this.$refs.input.checkValidity()) {
-                    if (this.$parent.isFieldComponent) {
-                        this.$parent.newType = 'is-danger'
-                        this.$parent.newMessage = this.$refs.input.validationMessage
-                        this.isValid = false
+                    type = 'is-danger'
+                    message = this.$refs.input.validationMessage
+                    isValid = false
+                }
+                this.isValid = isValid
+                if (this.$parent.isFieldComponent) {
+                    // Set type only if user haven't defined
+                    if (!this.$parent.type) {
+                        this.$parent.newType = type
                     }
-                } else {
-                    if (this.$parent.isFieldComponent) {
-                        this.$parent.newType = null
-                        this.$parent.newMessage = null
-                        this.isValid = true
+                    // Set message only if user haven't defined
+                    if (!this.$parent.message) {
+                        this.$parent.newMessage = message
                     }
                 }
-                // Back to what it was
+
+                // Back to what readonly was
                 this.isReadonly = !this.searchable
             })
         }
