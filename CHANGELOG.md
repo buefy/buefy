@@ -2,6 +2,9 @@
 
 ## 0.2.2
 
+* #35 Fix Dropdown TypeError
+* #29, #39 Fix SSR
+
 ## 0.2.1
 
 * Add ``loading`` property to Select

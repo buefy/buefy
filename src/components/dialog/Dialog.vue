@@ -166,7 +166,9 @@
             }
         },
         created() {
-            document.addEventListener('keyup', this.keyPress)
+            if (typeof window !== 'undefined') {
+                document.addEventListener('keyup', this.keyPress)
+            }
         },
         beforeMount() {
             // Insert the Dialog component in body tag
@@ -183,7 +185,9 @@
             }
         },
         beforeDestroy() {
-            document.removeEventListener('keyup', this.keyPress)
+            if (typeof window !== 'undefined') {
+                document.removeEventListener('keyup', this.keyPress)
+            }
         }
     }
 </script>
