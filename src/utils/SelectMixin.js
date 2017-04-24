@@ -373,16 +373,20 @@ export default {
         }
     },
     created() {
-        document.addEventListener('click', this.clickedOutside)
-        window.addEventListener('resize', this.calcDropdownInViewportHorizontal)
-        window.addEventListener('resize', this.calcDropdownInViewportVertical)
+        if (typeof window !== 'undefined') {
+            document.addEventListener('click', this.clickedOutside)
+            window.addEventListener('resize', this.calcDropdownInViewportHorizontal)
+            window.addEventListener('resize', this.calcDropdownInViewportVertical)
+        }
     },
     mounted() {
         this.calcMaxWidth()
     },
     beforeDestroy() {
-        document.removeEventListener('click', this.clickedOutside)
-        window.removeEventListener('resize', this.calcDropdownInViewportHorizontal)
-        window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('click', this.clickedOutside)
+            window.removeEventListener('resize', this.calcDropdownInViewportHorizontal)
+            window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+        }
     }
 }
