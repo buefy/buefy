@@ -7,12 +7,12 @@
 
 # Submitting a Pull Request
 
+* The ``master`` branch is a snapshot of the latest stable release. **Submit your PR in the ``dev`` branch**.
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
-* Use the **present** tense ("Add feature" not "Added feature")
-* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
-* Limit the to 72 characters or fewer
-* Reference issues and pull requests liberally
-* **DO NOT** commit the ``lib`` folder, use it only for testing on your end
+* It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
+* **DO NOT** commit the ``lib`` and ``dist`` folder, use it only for testing on your end
+* If adding new feature:
+    * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
 
 ## Buefy Javascript styleguide
 
@@ -24,7 +24,7 @@
     * **No trailing space**
     * End files with a **new line**
 * Keep lines with 120 characters or less
-* Add a comment block before every **method**, **watcher** and **computed property** explaining what it does — use the imperative mood ("Calculate this..." not "Calculates this...") with this template:
+* Add a comment block before every **method**, **watcher** and **computed property** explaining what it does — use the **imperative mood** ("Calculate this..." not "Calculates this...") with this template:
 ```javascript
 /**
  * Calculate if the dropdown is horizontally visible when activated,
