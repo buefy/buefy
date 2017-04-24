@@ -175,14 +175,14 @@ export default {
         /**
          * Set which option is currently hovered.
          * Emulate native <select> arrow selecting; if hovered option is:
-         *  1. Between visible area of dropdown:
-         *    - Do nothing.
+         *   1. Between visible area of dropdown:
+         *     - Do nothing.
          *
-         *  2. Lesser than minimum part:
-         *    - Set dropdown scroll to hovered option and keeping it in the top.
+         *   2. Lesser than minimum part:
+         *     - Set dropdown scroll to hovered option and keeping it in the top.
          *
-         *  3. Greater than or equal maximum part:
-         *    - Set dropdown scroll to hovered option but keeping it in the bottom.
+         *   3. Greater than or equal maximum part:
+         *     - Set dropdown scroll to hovered option but keeping it in the bottom.
          */
         hoverOption(option, index) {
             if (option === undefined || option === this.hovered) return
@@ -241,6 +241,9 @@ export default {
          * otherwise it is opened left sided.
          */
         calcDropdownInViewportHorizontal() {
+            // If it's a Select, don't calculate horizontal visibility
+            if (!this.isDropdown) return
+
             Vue.nextTick(() => {
                 const rect = this.$refs.dropdown.getBoundingClientRect()
 
@@ -257,7 +260,9 @@ export default {
          * with most length.
          */
         calcMaxWidth() {
-            if (this.expanded) return
+            // If Select is expanded or it's a Dropdown, don't calculate
+            if (this.expanded || this.isDropdown) return
+
             Vue.nextTick(() => {
                 let options = this.options
                 options = [...options].sort((a, b) => {
@@ -265,10 +270,14 @@ export default {
                 })
 
                 if (options.length > 0) {
+                    const maxLabelLength = options.length > 0
+                        ? options[0].label.length
+                        : 0
+                    const placeholderLength = this.placeholder
+                        ? this.placeholder.length
+                        : 0
                     // Check if placeholder have more length than the option
-                    const maxLenght = options[0].label.length > this.placeholder.length
-                        ? this.maxWidth = options[0].label.length
-                        : this.placeholder.length
+                    const maxLenght = Math.max(maxLabelLength, placeholderLength)
 
                     // Length - 35% (because not all letters are as big as an M)
                     // + 2.5em of padding right + 0.625em of padding left
@@ -281,6 +290,9 @@ export default {
          * Verify if next item is a subheader (another group chunk).
          */
         isSubheader(option, previousOption, i) {
+            // If it's a Dropdown, don't verify
+            if (this.isDropdown) return
+
             if (!option.group) return
             // If it's first and has group property already show as subheader
             if (i === 0) return true
@@ -327,8 +339,8 @@ export default {
 
         /**
          * Blur listener.
-         * 1. Close the dropdown.
-         * 2. Fire the HTML5 validation.
+         *   1. Close the dropdown.
+         *   2. Fire the HTML5 validation.
          */
         blur(event) {
             this.$emit('blur', event)

@@ -1,5 +1,7 @@
 # Buefy Changelog
 
+## 0.2.2
+
 ## 0.2.1
 
 * Add ``loading`` property to Select
@@ -29,7 +31,6 @@
 * Fix #12
 * Refactored Notification and Message
 * Add animation when closing Notification and Message
-
 
 ## 0.1.4
 

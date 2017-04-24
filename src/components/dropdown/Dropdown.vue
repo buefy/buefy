@@ -69,6 +69,11 @@
         },
         props: {
             narrowed: Boolean
+        },
+        data() {
+            return {
+                isDropdown: true // Used internally by SelectMixin
+            }
         }
     }
 </script>
