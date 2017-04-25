@@ -39,7 +39,7 @@
             @include unselectable;
             padding: 0.5rem 1rem;
             cursor: pointer;
-            &:not(.is-subheader):hover {
+            &:not(.is-subheader, .is-disabled):hover {
                 background: $background;
             }
             &.is-selected {
@@ -48,12 +48,11 @@
             }
             &.is-separator {
                 border-bottom: 1px solid $background;
-                margin: .5rem 0;
+                margin: 0.5rem 0;
                 padding: 0 !important;
             }
             &.is-disabled {
                 opacity: .5;
-                pointer-events: none;
                 cursor: not-allowed;
             }
             &.is-subheader {
