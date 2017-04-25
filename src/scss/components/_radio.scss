@@ -1,4 +1,7 @@
 .radio {
+    &.button {
+        display: inline-flex;
+    }
     input[type=radio] {
         display: none;
         + span {
