@@ -447,7 +447,7 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>lading</code>',
+                        name: '<code>loading</code>',
                         description: 'Add the loading state to the Select',
                         type: 'Boolean',
                         values: '—',
