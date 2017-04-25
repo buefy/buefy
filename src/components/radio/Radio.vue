@@ -1,5 +1,5 @@
 <template>
-    <label class="radio" :class="{ 'is-disabled': disabled }">
+    <label class="radio" :disabled="disabled" :class="{ 'is-disabled': disabled }">
         <input
             type="radio"
             :disabled="disabled"

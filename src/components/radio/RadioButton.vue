@@ -2,7 +2,8 @@
     <p class="control">
         <button
             class="radio button"
-            :class="[isChecked ? type : '', size, { 'is-disabled': disabled }]"
+            :disabled="disabled"
+            :class="[isChecked ? type : '', size]"
             @click="changed">
             <slot></slot>
             <input

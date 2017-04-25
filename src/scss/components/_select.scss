@@ -1,81 +1,24 @@
 .select {
-    input {
-        @include input;
-        cursor: pointer;
-        display: block;
-        font-size: 1em;
-        outline: none;
+    select {
         padding-right: 2.5em;
-    }
-    .background {
-        @include overlay;
-        position: fixed;
-        background-color: rgba($black, 0.86);
-        z-index: 8;
-        animation-duration: $speed-slow;
-    }
-    .box {
-        position: absolute;
-        width: 100%;
-        max-height: 200px;
-        top: 2.5em;
-        border-radius: $radius-small;
-        padding: 0;
-        z-index: 10;
-        overflow: auto;
-        animation-duration: none;
-        .subheader {
+        option {
+            color: $grey-dark;
+            padding: 0.25em 0.5em;
+        }
+        option:disabled {
+            cursor: not-allowed;
+            color: lighten($grey, 12%);
+        }
+        optgroup {
             color: $grey-light;
-            padding: 0.5rem;
-        }
-        .option {
-            padding: 0.5rem;
-            cursor: pointer;
-            &.is-hovered {
-                background: $background;
-            }
-            &.is-selected {
-                background: $primary;
-                color: $primary-invert;
-            }
-            &.has-subheader {
-                padding: 0.5rem 1rem;
-            }
-        }
-        &.is-opened-top {
-            top: auto;
-            bottom: 2.5em;
+            font-weight: $weight-normal;
+            font-style: normal;
+            cursor: default;
+            padding: 0.5em 0.25em;
         }
     }
-    &.is-loading {
-        &:after {
-            @include loader;
-            margin-top: 0;
-            position: absolute;
-            right: 0.625em;
-            top: 0.625em;
-            transform: none;
-        }
+    &.is-empty select {
+        color: lighten($grey, 12%);
     }
-    @include touch {
-        .box {
-            position: fixed;
-            width: calc(100vw - 60px);
-            max-width: 600px;
-            max-height: calc(100vh - 120px);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-duration: $speed;
-            .subheader {
-                padding: 0.5rem 1rem;
-            }
-            .option {
-                padding: 1rem 1.5rem;
-                &.has-subheader {
-                    padding: 1rem 2rem;
-                }
-            }
-        }
-    }
+
 }

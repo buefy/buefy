@@ -18,6 +18,7 @@
                 <b-option>Another action</b-option>
                 <b-option>Something else</b-option>
             </b-dropdown>
+
         </div>
         <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
@@ -253,7 +254,7 @@
     export default {
         data() {
             return {
-                select: null,
+                select: '',
                 dropdownProps: [
                     {
                         name: '<code>v-model</code>',
@@ -287,7 +288,7 @@
                     },
                     {
                         name: '<code>label</code>',
-                        description: 'Option label, use this instead of the slot if you want to render HTML.',
+                        description: 'Option label, use this instead of the slot if you want to render HTML',
                         type: 'String',
                         values: '—',
                         default: '—'
@@ -481,7 +482,7 @@
                     export default {
                         data() {
                             return {
-                                select: null
+                                select: ''
                             }
                         }
                     }`

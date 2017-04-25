@@ -1,80 +1,155 @@
 <template>
     <p
         class="control"
-        :class="{ 'is-expanded': expanded }"
-        :style="{ maxWidth: maxWidth }">
+        :class="{ 'is-expanded': expanded }">
         <slot></slot>
         <span
             class="select"
-            :class="[size, { 'is-fullwidth': expanded, 'is-loading': loading }]">
-            <input
-                v-model="inputValue"
-                class="input"
-                :class="[statusType, size]"
-                ref="input"
-                type="text"
-                :placeholder="placeholder"
+            :class="[size, statusType, {
+                'is-fullwidth': expanded,
+                'is-loading': loading,
+                'is-empty': selected === ''
+            }]">
+
+            <select
+                v-model="selected"
+                ref="select"
                 :disabled="disabled"
-                :readonly="isReadonly"
+                :readonly="readonly"
                 :name="name"
                 :required="required"
-                autocomplete="off"
-                @click="isActive = !isActive"
                 @focus="$emit('focus', $event)"
-                @blur="blur"
-                @keyup.enter.prevent="keyEnter"
-                @keyup.esc.prevent="keyEsc"
-                @keydown.down.prevent="keyArrows('down')"
-                @keydown.up.prevent="keyArrows('up')">
+                @blur="blur">
 
-            <transition-group
-                appear
-                appear-active-class="fadeIn"
-                enter-active-class="fadeIn"
-                leave-active-class="fadeOut">
+                <option
+                    v-if="placeholder"
+                    value=""
+                    selected
+                    disabled
+                    hidden>
+                    {{ placeholder }}
+                </option>
+                <template v-for="(option, i) in options">
+                    <optgroup
+                        v-if="isOptgroup(option, options[i - 1], i)"
+                        :label="option.group">
+                    </optgroup>
+                    <option
+                        :value="option.value"
+                        :disabled="option.disabled">
+                        {{ option.label }}
+                    </option>
+                </template>
 
-                <div
-                    key="bg"
-                    class="background is-hidden-desktop"
-                    v-show="isActive || isMouseOverDropdown">
-                </div>
-                <span
-                    key="dropbox"
-                    class="box"
-                    :class="{ 'is-opened-top': !isListInViewportVertically }"
-                    v-show="isActive || isMouseOverDropdown"
-                    ref="dropdown"
-                    @mouseenter="isMouseOverDropdown = true"
-                    @mouseleave="isMouseOverDropdown = false">
-                    <ul>
-                        <template v-for="(option, i) in filteredOptions">
-                            <li class="subheader" v-if="isSubheader(option, filteredOptions[i - 1], i)">
-                                {{ option.group }}
-                            </li>
-                            <li class="option is-unselectable"
-                                :class="{
-                                    'is-selected': option === selected,
-                                    'is-hovered': option === hovered,
-                                    'has-subheader': option.group
-                                }"
-                                :ref="option.uid"
-                                @click="selectOption(option)"
-                                @mouseenter="hoverOption(option)">
-                                {{ option.label }}
-                            </li>
-                        </template>
-                    </ul>
-                </span>
-            </transition-group>
+            </select>
         </span>
     </p>
 </template>
 
 <script>
-    import SelectMixin from '../../utils/SelectMixin.js'
-
     export default {
         name: 'bSelect',
-        mixins: [SelectMixin]
+        props: {
+            value: [String, Number, Object],
+            size: String,
+            placeholder: String,
+            expanded: Boolean,
+            loading: Boolean,
+
+            // Native options to use in HTML5 validation
+            name: String,
+            disabled: Boolean,
+            readonly: Boolean,
+            required: Boolean
+        },
+        data() {
+            return {
+                options: [],
+                selected: this.value || '',
+                isValid: true,
+                isSelectComponent: true // Used internally by Option
+            }
+        },
+        computed: {
+            /**
+             * Type prop from parent if it's a Field.
+             */
+            statusType() {
+                if (this.$parent.isFieldComponent) {
+                    return this.$parent.newType
+                }
+            }
+        },
+        watch: {
+            /**
+             * When v-model is changed:
+             *   1. Set the selected option.
+             *   2. If it's invalid, validate again.
+             */
+            value(value) {
+                this.selected = value || ''
+                !this.isValid && this.html5Validation()
+            },
+
+            /**
+             * When selected:
+             *   1. Emit input event to update the user v-model.
+             *   3. If it's invalid, validate again.
+             */
+            selected(value) {
+                this.$emit('input', value)
+                this.$emit('change', value)
+                !this.isValid && this.html5Validation()
+            }
+        },
+        methods: {
+            /**
+             * Verify if next item is a optgroup (another group chunk).
+             */
+            isOptgroup(option, previousOption, i) {
+                if (!option.group) return
+                // If it's first and has group property already show as subheader
+                if (i === 0) return true
+
+                if (previousOption === undefined) return
+                return option.group !== previousOption.group
+            },
+
+            /**
+             * Blur listener.
+             * Fire the HTML5 validation.
+             */
+            blur(event) {
+                this.$emit('blur', event)
+                this.html5Validation()
+            },
+
+            /**
+             * HTML5 validation, set isValid property.
+             * If validation fail, send 'is-danger' type,
+             * and error message to parent if it's a Field.
+             */
+            html5Validation() {
+                let type = null
+                let message = null
+                let isValid = true
+                if (!this.$refs.select.checkValidity()) {
+                    type = 'is-danger'
+                    message = this.$refs.select.validationMessage
+                    isValid = false
+                }
+                this.isValid = isValid
+                if (this.$parent.isFieldComponent) {
+                    // Set type only if user haven't defined
+                    if (!this.$parent.type) {
+                        this.$parent.newType = type
+                    }
+                    // Set message only if user haven't defined
+                    if (!this.$parent.message) {
+                        this.$parent.newMessage = message
+                    }
+                }
+            }
+        }
     }
 </script>

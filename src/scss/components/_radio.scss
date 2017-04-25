@@ -1,4 +1,7 @@
 .radio {
+    &.button {
+        display: inline-flex;
+    }
     input[type=radio] {
         display: none;
         + span {
@@ -16,7 +19,6 @@
                 left: 0;
                 top: 50%;
                 transform: translate(0, -50%);
-                cursor: pointer;
                 width: 20px;
                 height: 20px;
                 border: 2px solid $grey;
@@ -25,7 +27,7 @@
             }
             &:after {
                 left: 5px;
-                top: 7px;
+                top: 5px;
                 width: 10px;
                 height: 10px;
                 background: $primary;
@@ -43,7 +45,7 @@
             transform: scale(1);
         }
     }
-    &.is-disabled {
+    &[disabled] {
         opacity: 0.5;
     }
 }

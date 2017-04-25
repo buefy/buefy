@@ -9,7 +9,7 @@
         <hr>
 
         <h3 class="subtitle"><span class="list-number">1</span> Install Buefy via npm</h3>
-        <pre class="content" v-highlight><code class="bash">npm install buefy</code></pre>
+        <pre class="content" v-highlight><code class="bash"><span class="is-unselectable">$ </span>npm install buefy</code></pre>
         <p class="content">or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
 
         <hr>
@@ -23,12 +23,7 @@
 
         <hr>
 
-        <h3 class="subtitle"><span class="list-number">3</span> Import Bulma and Buefy styles <em>after</em> having set your variables</h3>
-        <pre v-highlight><code class="sass">{{ sassFinal | pre }}</code></pre>
-
-        <hr>
-
-        <h3 class="subtitle"><span class="list-number">4</span> Import and use Buefy. You can also enable individual components</h3>
+        <h3 class="subtitle"><span class="list-number">3</span> Import and use Buefy. You can also enable individual components</h3>
         <pre v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
 
         <hr>
@@ -53,37 +48,30 @@
                     $primary-invert: findColorInvert($primary);
                     $twitter: #4099FF;
                     $twitter-invert: findColorInvert($twitter);
-                    $facebook: #4267B2;
-                    $facebook-invert: findColorInvert($facebook);
-                    $google-plus: #DB4437;
-                    $google-plus-invert: findColorInvert($google-plus);
 
                     // Setup $colors to use as bulma classes (e.g. 'is-twitter')
                     $colors: (
-                        white: ($white, $black),
-                        black: ($black, $white),
-                        light: ($light, $light-invert),
-                        dark: ($dark, $dark-invert),
-                        primary: ($primary, $primary-invert),
-                        info: ($info, $info-invert),
-                        success: ($success, $success-invert),
-                        warning: ($warning, $warning-invert),
-                        danger: ($danger, $danger-invert),
-                        twitter: ($twitter, $twitter-invert),
-                        facebook: ($facebook, $facebook-invert),
-                        google-plus: ($google-plus, $google-plus-invert)
+                        "white": ($white, $black),
+                        "black": ($black, $white),
+                        "light": ($light, $light-invert),
+                        "dark": ($dark, $dark-invert),
+                        "primary": ($primary, $primary-invert),
+                        "info": ($info, $info-invert),
+                        "success": ($success, $success-invert),
+                        "warning": ($warning, $warning-invert),
+                        "danger": ($danger, $danger-invert),
+                        "twitter": ($twitter, $twitter-invert)
                     );
 
                     // Links
                     $link: $primary;
                     $link-invert: $primary-invert;
                     $link-focus-border: $primary;
-                    `,
-                sassFinal: `
-                    ... // Your variables
 
+                    // Import Bulma and Buefy styles
                     @import "~bulma";
-                    @import "~buefy/src/scss/buefy";`,
+                    @import "~buefy/src/scss/buefy";
+                    `,
                 importing: `
                     import Vue from 'vue'
                     import Buefy from 'buefy'

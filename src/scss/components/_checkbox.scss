@@ -13,7 +13,6 @@
                 left: 0;
                 top: 50%;
                 transform: translate(0, -50%);
-                cursor: pointer;
                 width: 18px;
                 height: 18px;
                 border-radius: $radius-small;
@@ -30,7 +29,7 @@
             border-color: $primary;
         }
     }
-    &.is-disabled {
+    &[disabled] {
         opacity: 0.5;
     }
 }

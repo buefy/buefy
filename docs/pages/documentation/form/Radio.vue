@@ -40,31 +40,27 @@
 
         <hr>
         <h2 class="title">Radio Button</h2>
-        <div class="columns">
-            <div class="column">
-                <b-radio-group v-model="radioButton">
-                    <b-radio-button type="is-danger" value="Nop">
-                        <b-icon icon="clear"></b-icon> Nop
-                    </b-radio-button>
+        <div class="example">
+            <b-radio-group v-model="radioButton">
+                <b-radio-button type="is-danger" value="Nop">
+                    <b-icon icon="clear"></b-icon> Nop
+                </b-radio-button>
 
-                    <b-radio-button type="is-success" value="Yep">
-                        <b-icon icon="done"></b-icon> Yep
-                    </b-radio-button>
+                <b-radio-button type="is-success" value="Yep">
+                    <b-icon icon="done"></b-icon> Yep
+                </b-radio-button>
 
-                    <b-radio-button value="Default">Default</b-radio-button>
+                <b-radio-button value="Default">Default</b-radio-button>
 
-                    <b-radio-button value="Disabled" disabled>
-                        Disabled
-                    </b-radio-button>
-                </b-radio-group>
+                <b-radio-button value="Disabled" disabled>
+                    Disabled
+                </b-radio-button>
+            </b-radio-group>
 
-                <p class="content"><b>Selection:</b> {{ radioButton }}</p>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
-            </div>
+            <p class="content"><b>Selection:</b> {{ radioButton }}</p>
         </div>
+        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <hr>
 

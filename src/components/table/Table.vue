@@ -276,14 +276,17 @@
             initSort() {
                 if (!this.defaultSort) return
 
-                const sortField = Array.isArray(this.defaultSort) ? this.defaultSort[0] : this.defaultSort
+                const sortField = Array.isArray(this.defaultSort)
+                    ? this.defaultSort[0]
+                    : this.defaultSort
                 const direction = this.defaultSort[1] || ''
 
                 this.columns.forEach(column => {
                     if (column.field === sortField) {
                         this.sort(column)
                         if (direction.toLowerCase() === 'desc') {
-                            this.newData.reverse()
+                            // Call sort again to reverse the array
+                            this.sort(column)
                         }
                     }
                 })
