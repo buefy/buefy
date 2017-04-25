@@ -16,7 +16,6 @@
                 left: 0;
                 top: 50%;
                 transform: translate(0, -50%);
-                cursor: pointer;
                 width: 20px;
                 height: 20px;
                 border: 2px solid $grey;
@@ -43,7 +42,7 @@
             transform: scale(1);
         }
     }
-    &.is-disabled {
+    &[disabled] {
         opacity: 0.5;
     }
 }

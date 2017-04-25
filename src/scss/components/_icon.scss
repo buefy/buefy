@@ -9,6 +9,8 @@
         font-style: normal;
         font-size: 24px;
         display: inline-block;
+        // Suport for IE/Edge
+        font-feature-settings: 'liga';
     }
     // Sizes
     &.is-small {

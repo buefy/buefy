@@ -1,4 +1,5 @@
 .switch {
+    cursor: pointer;
     & + .switch {
         margin-left: 0.5em;
     }
@@ -7,13 +8,11 @@
         + span {
             position: relative;
             display: inline-block;
-            cursor: pointer;
             text-align: left;
             padding-left: 44px;
             &:before,
             &:after {
                 content: "";
-                cursor: pointer;
                 position: absolute;
                 top: 50%;
                 transform: translate(0, -50%);
@@ -63,7 +62,8 @@
             }
         }
     }
-    &.is-disabled {
+    &[disabled] {
         opacity: 0.5;
+        cursor: not-allowed;
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <label class="checkbox" :class="{ 'is-disabled': disabled }">
+    <label class="checkbox" :disabled="disabled" :class="{ 'is-disabled': disabled }">
         <input
             type="checkbox"
             :disabled="disabled"
