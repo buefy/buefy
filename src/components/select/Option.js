@@ -20,13 +20,6 @@ export default {
             return (this.$slots.default !== undefined && this.$slots.default.length > 0) || this.label
         }
     },
-    mounted() {
-        if (!this.$parent.isSelectComponent) {
-            this.$destroy()
-            throw new Error('You should wrap Option on a Select or Dropdown')
-        }
-        this.$parent.options.push(this.option)
-    },
     created() {
         this.option = {
             uid: this._uid,
@@ -39,6 +32,12 @@ export default {
             icon: this.icon,
             iconPack: this.iconPack
         }
+
+        if (!this.$parent.isSelectComponent) {
+            this.$destroy()
+            throw new Error('You should wrap Option on a Select or Dropdown')
+        }
+        this.$parent.options.push(this.option)
     },
     render(h) {
         return

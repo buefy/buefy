@@ -32,7 +32,7 @@
                 v-show="isActive"
                 ref="dropdown">
                 <ul>
-                    <template v-for="option in filteredOptions">
+                    <template v-for="option in options">
                         <li v-if="option.subheader"
                             class="option"
                             :class="{ 'is-subheader': option.subheader }">
@@ -51,7 +51,7 @@
                                 'is-disabled': option.disabled,
                                 'is-subheader': option.subheader
                             }"
-                            @click="selectOption(option)">
+                            @click="selected = option.value">
                             <b-icon
                                 v-if="option.icon"
                                 :icon="option.icon"

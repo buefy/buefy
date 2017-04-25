@@ -54,6 +54,7 @@
             &.is-disabled {
                 opacity: .5;
                 pointer-events: none;
+                cursor: not-allowed;
             }
             &.is-subheader {
                 cursor: inherit;

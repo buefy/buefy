@@ -1,71 +1,46 @@
 <template>
     <p
         class="control"
-        :class="{ 'is-expanded': expanded }"
-        :style="{ maxWidth: maxWidth }">
+        :class="{ 'is-expanded': expanded }">
         <slot></slot>
         <span
             class="select"
-            :class="[size, { 'is-fullwidth': expanded, 'is-loading': loading }]">
-            <input
-                v-model="inputValue"
-                class="input"
-                :class="[statusType, size]"
-                ref="input"
-                type="text"
-                :placeholder="placeholder"
+            :class="[size, statusType, {
+                'is-fullwidth': expanded,
+                'is-loading': loading,
+                'is-empty': selected === ''
+            }]">
+
+            <select
+                v-model="selected"
+                ref="select"
                 :disabled="disabled"
-                :readonly="isReadonly"
+                :readonly="readonly"
                 :name="name"
                 :required="required"
-                autocomplete="off"
-                @click="isActive = !isActive"
                 @focus="$emit('focus', $event)"
-                @blur="blur"
-                @keyup.enter.prevent="keyEnter"
-                @keyup.esc.prevent="keyEsc"
-                @keydown.down.prevent="keyArrows('down')"
-                @keydown.up.prevent="keyArrows('up')">
+                @blur="blur">
 
-            <transition-group
-                appear
-                appear-active-class="fadeIn"
-                enter-active-class="fadeIn"
-                leave-active-class="fadeOut">
-
-                <div
-                    key="bg"
-                    class="background is-hidden-desktop"
-                    v-show="isActive || isMouseOverDropdown">
-                </div>
-                <span
-                    key="dropbox"
-                    class="box"
-                    :class="{ 'is-opened-top': !isListInViewportVertically }"
-                    v-show="isActive || isMouseOverDropdown"
-                    ref="dropdown"
-                    @mouseenter="isMouseOverDropdown = true"
-                    @mouseleave="isMouseOverDropdown = false">
-                    <ul>
-                        <template v-for="(option, i) in filteredOptions">
-                            <li class="subheader" v-if="isSubheader(option, filteredOptions[i - 1], i)">
-                                {{ option.group }}
-                            </li>
-                            <li class="option"
-                                :class="{
-                                    'is-selected': option === selected,
-                                    'is-hovered': option === hovered,
-                                    'has-subheader': option.group
-                                }"
-                                :ref="option.uid"
-                                @click="selectOption(option)"
-                                @mouseenter="hoverOption(option)">
-                                {{ option.label }}
-                            </li>
-                        </template>
-                    </ul>
-                </span>
-            </transition-group>
+                <option
+                    v-if="placeholder"
+                    value=""
+                    selected
+                    disabled
+                    hidden>
+                    {{ placeholder }}
+                </option>
+                <template v-for="(option, i) in options">
+                    <optgroup
+                        v-if="isSubheader(option, options[i - 1], i)"
+                        :label="option.group">
+                    </optgroup>
+                    <option
+                        :value="option.value"
+                        :disabled="option.disabled">
+                        {{ option.label }}
+                    </option>
+                </template>
+            </select>
         </span>
     </p>
 </template>

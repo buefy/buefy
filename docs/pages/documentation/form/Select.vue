@@ -2,8 +2,7 @@
     <div>
         <h1 class="title is-spaced">Select</h1>
         <h2 class="subtitle">
-            Select an item in a dropdown list. Wrap it on a Field to use all the functionalities.
-            They also look like a modal when you're on tablet or smartphone
+            Select an item in a dropdown list. Wrap it on a Field to use all the functionalities
         </h2>
         <hr>
 
@@ -80,21 +79,6 @@
                 </b-field>
 
                 <b-field
-                    label="Searchable">
-                    <b-select placeholder="Type here" searchable>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
-                        <b-option value="vane">Vane</b-option>
-                        <b-option value="billy">Billy</b-option>
-                        <b-option value="jack">Jack</b-option>
-                        <b-option value="heisenberg">Heisenberg</b-option>
-                        <b-option value="jesse">Jesse</b-option>
-                        <b-option value="saul">Saul</b-option>
-                        <b-option value="mike">Mike</b-option>
-                    </b-select>
-                </b-field>
-
-                <b-field
                     label="Error"
                     type="is-danger"
                     message="Something went wrong with this field">
@@ -125,6 +109,13 @@
                     </b-select>
                 </b-field>
 
+                <b-field label="Disabled option">
+                    <b-select placeholder="Select a character">
+                        <b-option value="flint">Flint</b-option>
+                        <b-option value="silver" disabled>Silver</b-option>
+                    </b-select>
+                </b-field>
+
                 <b-field
                     label="Expanded">
                     <b-select placeholder="Select a character" expanded>
@@ -146,8 +137,7 @@
             <b-field>
                 <b-select
                     v-model="select"
-                    placeholder="Select..."
-                    searchable>
+                    placeholder="Select...">
                     <b-option value="flint">Flint</b-option>
                     <b-option value="silver">Silver</b-option>
                     <b-option value="vane">Vane</b-option>
@@ -161,7 +151,7 @@
                 <p class="control">
                     <button
                         class="button is-danger"
-                        @click="select = null">
+                        @click="select = ''">
                         <b-icon icon="clear"></b-icon>
                     </button>
                 </p>
@@ -173,12 +163,12 @@
                     </button>
                 </p>
             </b-field>
+            {{ select }}
 
             <b-field position="centered">
                 <b-select
                     v-model="select"
-                    placeholder="Select..."
-                    searchable>
+                    placeholder="Select...">
                     <b-option value="flint">Flint</b-option>
                     <b-option value="silver">Silver</b-option>
                     <b-option value="vane">Vane</b-option>
@@ -192,7 +182,7 @@
                 <p class="control">
                     <button
                         class="button is-dark"
-                        @click="select = null">
+                        @click="select = ''">
                         <b-icon icon="clear"></b-icon>
                     </button>
                 </p>
@@ -208,8 +198,7 @@
             <b-field position="right">
                 <b-select
                     v-model="select"
-                    placeholder="Select..."
-                    searchable>
+                    placeholder="Select...">
                     <b-option value="flint">Flint</b-option>
                     <b-option value="silver">Silver</b-option>
                     <b-option value="vane">Vane</b-option>
@@ -223,7 +212,7 @@
                 <p class="control">
                     <button
                         class="button is-primary"
-                        @click="select = null">
+                        @click="select = ''">
                         <b-icon icon="clear"></b-icon>
                     </button>
                 </p>
@@ -248,7 +237,6 @@
                 <b-select
                     v-model="select"
                     placeholder="Select..."
-                    searchable
                     expanded>
                     <b-option value="flint">Flint</b-option>
                     <b-option value="silver">Silver</b-option>
@@ -263,7 +251,7 @@
                 <p class="control">
                     <button
                         class="button"
-                        @click="select = null">
+                        @click="select = ''">
                         <b-icon icon="clear"></b-icon>
                     </button>
                 </p>
@@ -415,7 +403,7 @@
         data() {
             return {
                 options: options,
-                select: null,
+                select: 'vane',
                 selectProps: [
                     {
                         name: '<code>v-model</code>',
@@ -462,13 +450,6 @@
                     {
                         name: '<code>required</code>',
                         description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>searchable</code>',
-                        description: 'Options can be searchable',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -586,21 +567,6 @@
                     </b-field>
 
                     <b-field
-                        label="Searchable">
-                        <b-select placeholder="Type here" searchable>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
-                            <b-option value="vane">Vane</b-option>
-                            <b-option value="billy">Billy</b-option>
-                            <b-option value="jack">Jack</b-option>
-                            <b-option value="heisenberg">Heisenberg</b-option>
-                            <b-option value="jesse">Jesse</b-option>
-                            <b-option value="saul">Saul</b-option>
-                            <b-option value="mike">Mike</b-option>
-                        </b-select>
-                    </b-field>
-
-                    <b-field
                         label="Error"
                         type="is-danger"
                         message="Something went wrong with this field">
@@ -657,8 +623,7 @@
                     <b-field>
                         <b-select
                             v-model="select"
-                            placeholder="Select..."
-                            searchable>
+                            placeholder="Select...">
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>
                             <b-option value="vane">Vane</b-option>
@@ -672,7 +637,7 @@
                         <p class="control">
                             <button
                                 class="button is-danger"
-                                @click="select = null">
+                                @click="select = ''">
                                 <b-icon icon="clear"></b-icon>
                             </button>
                         </p>
@@ -688,8 +653,7 @@
                     <b-field position="centered">
                         <b-select
                             v-model="select"
-                            placeholder="Select..."
-                            searchable>
+                            placeholder="Select...">
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>
                             <b-option value="vane">Vane</b-option>
@@ -703,7 +667,7 @@
                         <p class="control">
                             <button
                                 class="button is-dark"
-                                @click="select = null">
+                                @click="select = ''">
                                 <b-icon icon="clear"></b-icon>
                             </button>
                         </p>
@@ -719,8 +683,7 @@
                     <b-field position="right">
                         <b-select
                             v-model="select"
-                            placeholder="Select..."
-                            searchable>
+                            placeholder="Select...">
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>
                             <b-option value="vane">Vane</b-option>
@@ -734,7 +697,7 @@
                         <p class="control">
                             <button
                                 class="button is-primary"
-                                @click="select = null">
+                                @click="select = ''">
                                 <b-icon icon="clear"></b-icon>
                             </button>
                         </p>
@@ -759,7 +722,6 @@
                         <b-select
                             v-model="select"
                             placeholder="Select..."
-                            searchable
                             expanded>
                             <b-option value="flint">Flint</b-option>
                             <b-option value="silver">Silver</b-option>
@@ -774,7 +736,7 @@
                         <p class="control">
                             <button
                                 class="button"
-                                @click="select = null">
+                                @click="select = ''">
                                 <b-icon icon="clear"></b-icon>
                             </button>
                         </p>
