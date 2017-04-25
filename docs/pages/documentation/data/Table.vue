@@ -7,7 +7,7 @@
         <div class="columns is-marginless">
             <div class="column is-8">
 
-                <div class="content">
+                <div class="block">
                     <b-switch v-model="isBordered">Bordered</b-switch>
                     <b-switch v-model="isStriped">Striped</b-switch>
                     <b-switch v-model="isNarrowed">Narrowed</b-switch>
@@ -17,20 +17,15 @@
                     <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
                     <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
                 </div>
-                <div class="content">
-                    <div class="field">
-                        <p class="control">
-                            <label class="label">Items per page</label>
-                            <span class="select">
-                                <select v-model="perPage">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                </select>
-                            </span>
-                        </p>
-                    </div>
+                <div class="block">
+                    <b-field label="Items per page">
+                        <b-select v-model="perPage">
+                            <b-option value="5">5</b-option>
+                            <b-option value="10">10</b-option>
+                            <b-option value="15">15</b-option>
+                            <b-option value="20">20</b-option>
+                        </b-select>
+                    </b-field>
                 </div>
 
                 <div class="example">
