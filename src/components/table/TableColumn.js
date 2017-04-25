@@ -1,6 +1,5 @@
 export default {
     name: 'bTableColumn',
-
     props: {
         label: String,
         width: [Number, String],
@@ -14,21 +13,11 @@ export default {
         },
         component: String
     },
-
     data() {
         return {
             column: {}
         }
     },
-
-    mounted() {
-        if (!this.$parent.isTableComponent) {
-            this.$destroy()
-            throw new Error('You should wrap Table Column on a Table')
-        }
-        this.$parent.columns.push(this.column)
-    },
-
     created() {
         this.column = {
             label: this.label,
@@ -40,8 +29,13 @@ export default {
             format: this.format,
             component: this.component
         }
-    },
 
+        if (!this.$parent.isTableComponent) {
+            this.$destroy()
+            throw new Error('You should wrap Table Column on a Table')
+        }
+        this.$parent.columns.push(this.column)
+    },
     render(h) {
         return
     }

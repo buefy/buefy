@@ -14,7 +14,7 @@
                     <b-switch v-model="isSelectable">Selectable</b-switch>
                     <b-switch v-model="isCheckable">Checkable</b-switch>
                     <b-switch v-model="isPaginated">Paginated</b-switch>
-                    <b-switch v-model="isPaginationSimple">Simpler pagination</b-switch>
+                    <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
                     <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
                 </div>
                 <div class="content">
@@ -45,7 +45,7 @@
                         :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
-                        default-sort="first_name"
+                        :default-sort="['first_name', 'desc']"
                         render-html
                         @check="checked"
                         @select="selected">
@@ -252,7 +252,7 @@
                     },
                     {
                         name: '<code>pagination-simple</code>',
-                        description: 'Simpler pagination (if <code>paginated</code>)',
+                        description: 'Simple pagination (if <code>paginated</code>)',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
