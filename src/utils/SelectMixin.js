@@ -115,8 +115,10 @@ export default {
                     this.$refs.input.select()
                 }
             } else {
-                if (this.selected !== null && !this.isMouseOverDropdown) {
-                    this.inputValue = this.selected.label
+                if (!this.isMouseOverDropdown) {
+                    this.inputValue = this.selected
+                        ? this.selected.label
+                        : null
                 }
             }
         },
@@ -270,18 +272,15 @@ export default {
                 })
 
                 if (options.length > 0) {
-                    const maxLabelLength = options.length > 0
-                        ? options[0].label.length
-                        : 0
                     const placeholderLength = this.placeholder
                         ? this.placeholder.length
                         : 0
                     // Check if placeholder have more length than the option
-                    const maxLenght = Math.max(maxLabelLength, placeholderLength)
+                    const maxLenght = Math.max(options[0].label.length, placeholderLength)
 
                     // Length - 35% (because not all letters are as big as an M)
-                    // + 2.5em of padding right + 0.625em of padding left
-                    this.maxWidth = maxLenght * 0.65 + 2.5 + 0.625 + 'em'
+                    // + 2.5em of padding right
+                    this.maxWidth = maxLenght * 0.65 + 2.5 + 'em'
                 }
             })
         },

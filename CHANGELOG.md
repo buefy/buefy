@@ -2,6 +2,8 @@
 
 ## 0.2.2
 
+* Update Vue to 2.2.6
+* Update Bulma to 0.4.1
 * #35 Fix Dropdown TypeError
 * #29, #39 Fix SSR
 

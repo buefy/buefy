@@ -51,7 +51,7 @@
                             <li class="subheader" v-if="isSubheader(option, filteredOptions[i - 1], i)">
                                 {{ option.group }}
                             </li>
-                            <li class="option is-unselectable"
+                            <li class="option"
                                 :class="{
                                     'is-selected': option === selected,
                                     'is-hovered': option === hovered,

@@ -36,13 +36,14 @@
             }
         }
         .option {
+            @include unselectable;
             padding: 0.5rem 1rem;
             cursor: pointer;
-            &:hover {
+            &:not(.is-subheader):hover {
                 background: $background;
             }
             &.is-selected {
-                background: $primary;
+                background: $primary !important;
                 color: $primary-invert;
             }
             &.is-separator {
@@ -52,10 +53,16 @@
             }
             &.is-disabled {
                 opacity: .5;
+                pointer-events: none;
             }
             &.is-subheader {
-                pointer-events: none;
                 cursor: inherit;
+                // Remove unselectable
+                -webkit-touch-callout: auto;
+                -webkit-user-select: auto;
+                -moz-user-select: auto;
+                -ms-user-select: auto;
+                user-select: auto;
             }
         }
     }

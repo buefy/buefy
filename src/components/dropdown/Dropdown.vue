@@ -33,19 +33,29 @@
                 ref="dropdown">
                 <ul>
                     <template v-for="option in filteredOptions">
-                        <li class="option"
+                        <li v-if="option.subheader"
+                            class="option"
+                            :class="{ 'is-subheader': option.subheader }">
+                            <b-icon
+                                v-if="option.icon"
+                                :icon="option.icon"
+                                :pack="option.iconPack">
+                            </b-icon>
+                            <span v-html="option.label"></span>
+                        </li>
+                        <li v-else
+                            class="option"
                             :class="{
                                 'is-selected': option === selected,
                                 'is-separator': option.separator,
                                 'is-disabled': option.disabled,
-                                'is-subheader': option.subheader,
-                                'is-unselectable': !option.subheader
+                                'is-subheader': option.subheader
                             }"
                             @click="selectOption(option)">
                             <b-icon
                                 v-if="option.icon"
                                 :icon="option.icon"
-                                :icon-pack="option.iconPack">
+                                :pack="option.iconPack">
                             </b-icon>
                             <span v-html="option.label"></span>
                         </li>

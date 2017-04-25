@@ -1,16 +1,3 @@
-// Temporary fix for v0.4.0 inputs
-.input,
-.textarea,
-.select select,
-.select .input {
-    padding-bottom: 0.25em;
-    padding-top: 0.25em;
-}
-.select select {
-    padding-right: 2.5em;
-}
-// End of temporary fix
-
 .label {
     font-weight: $weight-semibold
 }

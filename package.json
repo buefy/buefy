@@ -31,8 +31,8 @@
     "components"
   ],
   "dependencies": {
-    "vue": "^2.2.2",
-    "bulma": "^0.4.0"
+    "bulma": "^0.4.1",
+    "vue": "^2.2.6"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

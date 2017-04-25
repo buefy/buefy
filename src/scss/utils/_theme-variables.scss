@@ -1,24 +1,5 @@
-// Colors
+// Color
 $primary: #7957d5;
-$primary-invert: findColorInvert($primary);
-
-$colors: (
-    white: ($white, $black),
-    black: ($black, $white),
-    light: ($light, $light-invert),
-    dark: ($dark, $dark-invert),
-    primary: ($primary, $primary-invert),
-    info: ($info, $info-invert),
-    success: ($success, $success-invert),
-    warning: ($warning, $warning-invert),
-    danger: ($danger, $danger-invert)
-);
-
-// Links
-$link: $primary;
-$link-invert: $primary-invert;
-$link-visited: $grey;
-$link-focus-border: $primary;
 
 // Font
 $weight-semibold: 600;

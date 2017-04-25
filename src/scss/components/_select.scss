@@ -29,6 +29,7 @@
             padding: 0.5rem;
         }
         .option {
+            @include unselectable;
             padding: 0.5rem;
             cursor: pointer;
             &.is-hovered {

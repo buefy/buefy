@@ -41,7 +41,7 @@
         tr {
             &.is-selected,
             &.is-selected:hover {
-                background: $primary !important;
+                background: $primary !important; // Temporary fix for Bulma v0.4.1
                 color: $primary-invert;
                 .checkbox input {
                     &:checked + span:before {
@@ -59,7 +59,6 @@
                 vertical-align: middle;
             }
         }
-
         // Modifiers
         &.is-bordered {
             th.is-current-sort,
