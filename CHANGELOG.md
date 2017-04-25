@@ -6,6 +6,8 @@
 * Update Bulma to 0.4.1
 * #35 Fix Dropdown TypeError
 * #29, #39 Fix SSR
+* #42 Fix Table default sort
+* #40 Select now use native select, removed ``searchable`` property
 
 ## 0.2.1
 

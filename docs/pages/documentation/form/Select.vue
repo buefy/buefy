@@ -163,7 +163,6 @@
                     </button>
                 </p>
             </b-field>
-            {{ select }}
 
             <b-field position="centered">
                 <b-select
@@ -441,15 +440,15 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>lading</code>',
-                        description: 'Add the loading state to the Select',
+                        name: '<code>required</code>',
+                        description: 'Same as native <code>required</code>',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
+                        name: '<code>lading</code>',
+                        description: 'Add the loading state to the Select',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -493,6 +492,13 @@
                         type: 'String',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>disabled</code>',
+                        description: 'Option is disabled',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
                 ],
                 template1: `
@@ -713,7 +719,7 @@
                     export default {
                         data() {
                             return {
-                                select: null
+                                select: ''
                             }
                         }
                     }`,

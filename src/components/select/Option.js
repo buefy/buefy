@@ -33,7 +33,7 @@ export default {
             iconPack: this.iconPack
         }
 
-        if (!this.$parent.isSelectComponent) {
+        if (!this.$parent.isSelectComponent && !this.$parent.isDropdownComponent) {
             this.$destroy()
             throw new Error('You should wrap Option on a Select or Dropdown')
         }
