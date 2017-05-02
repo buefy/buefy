@@ -2,6 +2,7 @@
 
 ## 0.2.3
 
+* Fix Dropdown background overlay index
 * #50 Add ``page-change`` event on Table
 
 ## 0.2.2
