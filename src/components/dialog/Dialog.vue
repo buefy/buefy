@@ -40,7 +40,7 @@
                         </b-field>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button is-light" ref="cancelButton" @click="cancel" v-if="canCancel">{{ cancelText }}</button>
+                        <button class="button" ref="cancelButton" @click="cancel" v-if="canCancel">{{ cancelText }}</button>
                         <button class="button" ref="confirmButton" :class="type" @click="confirm">{{ confirmText }}</button>
                     </footer>
                 </div>

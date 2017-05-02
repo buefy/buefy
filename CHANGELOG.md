@@ -3,6 +3,7 @@
 ## 0.2.3
 
 * Fix Dropdown background overlay index
+* #43 Fix Dialog cancel button focus state
 * #50 Add ``page-change`` event on Table
 
 ## 0.2.2
