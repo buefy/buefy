@@ -272,6 +272,7 @@
             },
             pageChanged(page) {
                 this.currentPage = page > 0 ? page : 1
+                this.$emit('page-change', this.currentPage)
             },
             initSort() {
                 if (!this.defaultSort) return

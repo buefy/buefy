@@ -40,7 +40,7 @@
                         :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
-                        :default-sort="['first_name', 'desc']"
+                        default-sort="first_name"
                         render-html
                         @check="checked"
                         @select="selected">
@@ -290,6 +290,11 @@
                         name: '<code>check-all</code>',
                         description: 'Triggers when the header checkbox is clicked',
                         parameters: '<code>checkedList: Array</code>'
+                    },
+                    {
+                        name: '<code>page-change</code>',
+                        description: 'Triggers when pagination page is changed',
+                        parameters: '<code>page: Number</code>'
                     }
                 ],
                 columnProps: [

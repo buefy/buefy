@@ -1,12 +1,16 @@
 # Buefy Changelog
 
+## 0.2.3
+
+* #50 Add ``page-change`` event on Table
+
 ## 0.2.2
 
 * Update Vue to 2.2.6
 * Update Bulma to 0.4.1
 * #35 Fix Dropdown TypeError
 * #29, #39 Fix SSR
-* #42 Fix Table default sort
+* #42 Fix Table ``default-sort`` prop
 * #40 Select now use native select, removed ``searchable`` property
 
 ## 0.2.1
