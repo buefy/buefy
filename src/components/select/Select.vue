@@ -2,7 +2,6 @@
     <p
         class="control"
         :class="{ 'is-expanded': expanded }">
-        <slot></slot>
         <span
             class="select"
             :class="[size, statusType, {
@@ -29,17 +28,7 @@
                     hidden>
                     {{ placeholder }}
                 </option>
-                <template v-for="(option, i) in options">
-                    <optgroup
-                        v-if="isOptgroup(option, options[i - 1], i)"
-                        :label="option.group">
-                    </optgroup>
-                    <option
-                        :value="option.value"
-                        :disabled="option.disabled">
-                        {{ option.label }}
-                    </option>
-                </template>
+                <slot></slot>
 
             </select>
         </span>
@@ -64,7 +53,6 @@
         },
         data() {
             return {
-                options: [],
                 selected: this.value || '',
                 isValid: true,
                 isSelectComponent: true // Used internally by Option

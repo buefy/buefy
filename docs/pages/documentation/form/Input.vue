@@ -232,9 +232,9 @@
             <h3 class="subtitle">How many you need</h3>
             <b-field>
                 <b-select placeholder="Currency">
-                    <b-option>$</b-option>
-                    <b-option>£</b-option>
-                    <b-option>€</b-option>
+                    <option>$</option>
+                    <option>£</option>
+                    <option>€</option>
                 </b-select>
                 <b-input placeholder="0,00"></b-input>
                 <p class="control">
@@ -804,9 +804,9 @@
                     <h3 class="subtitle">How many you need</h3>
                     <b-field>
                         <b-select placeholder="Currency">
-                            <b-option>$</b-option>
-                            <b-option>£</b-option>
-                            <b-option>€</b-option>
+                            <option>$</option>
+                            <option>£</option>
+                            <option>€</option>
                         </b-select>
                         <b-input placeholder="How much will you donate?"></b-input>
                         <p class="control">

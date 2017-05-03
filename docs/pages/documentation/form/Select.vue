@@ -10,71 +10,38 @@
             <div class="column">
                 <b-field label="Simple">
                     <b-select placeholder="Select a name">
-                        <b-option
+                        <option
                             v-for="option in options"
                             :value="option.id"
                             :key="option.id">
                             {{ option.first_name }}
-                        </b-option>
+                        </option>
                     </b-select>
                 </b-field>
 
                 <b-field label="Grouped">
                     <b-select placeholder="Select a character">
-                        <b-option group="Black Sails"
-                            value="flint">
-                            Flint
-                        </b-option>
-                        <b-option group="Black Sails"
-                            value="silver">
-                            Silver
-                        </b-option>
-                        <b-option group="Black Sails"
-                            value="vane">
-                            Vane
-                        </b-option>
-                        <b-option group="Black Sails"
-                            value="billy">
-                            Billy
-                        </b-option>
-                        <b-option group="Black Sails"
-                            value="jack">
-                            Jack
-                        </b-option>
+                        <optgroup label="Black Sails">
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
+                            <option value="vane">Vane</option>
+                            <option value="billy">Billy</option>
+                            <option value="jack">Jack</option>
+                        </optgroup>
 
-                        <b-option group="Breaking Bad"
-                            value="heisenberg">
-                            Heisenberg
-                        </b-option>
-                        <b-option group="Breaking Bad"
-                            value="jesse">
-                            Jesse
-                        </b-option>
-                        <b-option group="Breaking Bad"
-                            value="saul">
-                            Saul
-                        </b-option>
-                        <b-option group="Breaking Bad"
-                            value="mike">
-                            Mike
-                        </b-option>
+                        <optgroup label="Breaking Bad">
+                            <option value="heisenberg">Heisenberg</option>
+                            <option value="jesse">Jesse</option>
+                            <option value="saul">Saul</option>
+                            <option value="mike">Mike</option>
+                        </optgroup>
 
-                        <b-option group="Game of Thrones"
-                            value="tyrion-lannister">
-                            Tyrion Lannister
-                        </b-option>
-                        <b-option group="Game of Thrones"
-                            value="jamie-lannister">
-                            Jamie Lannister
-                        </b-option>
-                        <b-option group="Game of Thrones"
-                            value="daenerys-targaryen">
-                            Daenerys Targaryen
-                        </b-option>
-                        <b-option group="Game of Thrones"
-                            value="john-snow">
-                            John Snow
-                        </b-option>
+                        <optgroup label="Game of Thrones">
+                            <option value="tyrion-lannister">Tyrion Lannister</option>
+                            <option value="jamie-lannister">Jamie Lannister</option>
+                            <option value="daenerys-targaryen">Daenerys Targaryen</option>
+                            <option value="john-snow">John Snow</option>
+                        </optgroup>
                     </b-select>
                 </b-field>
 
@@ -83,44 +50,44 @@
                     type="is-danger"
                     message="Something went wrong with this field">
                     <b-select placeholder="Select a character">
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
                 <b-field label="Required">
                     <b-select placeholder="Select a character" required>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
                 <b-field label="Loading">
                     <b-select placeholder="Select a character" loading>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
                 <b-field label="Disabled">
                     <b-select placeholder="Select a character" disabled>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
                 <b-field label="Disabled option">
                     <b-select placeholder="Select a character">
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver" disabled>Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver" disabled>Silver</option>
                     </b-select>
                 </b-field>
 
                 <b-field
                     label="Expanded">
                     <b-select placeholder="Select a character" expanded>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
             </div>
@@ -138,15 +105,15 @@
                 <b-select
                     v-model="select"
                     placeholder="Select...">
-                    <b-option value="flint">Flint</b-option>
-                    <b-option value="silver">Silver</b-option>
-                    <b-option value="vane">Vane</b-option>
-                    <b-option value="billy">Billy</b-option>
-                    <b-option value="jack">Jack</b-option>
-                    <b-option value="heisenberg">Heisenberg</b-option>
-                    <b-option value="jesse">Jesse</b-option>
-                    <b-option value="saul">Saul</b-option>
-                    <b-option value="mike">Mike</b-option>
+                    <option value="flint">Flint</option>
+                    <option value="silver">Silver</option>
+                    <option value="vane">Vane</option>
+                    <option value="billy">Billy</option>
+                    <option value="jack">Jack</option>
+                    <option value="heisenberg">Heisenberg</option>
+                    <option value="jesse">Jesse</option>
+                    <option value="saul">Saul</option>
+                    <option value="mike">Mike</option>
                 </b-select>
                 <p class="control">
                     <button
@@ -168,15 +135,15 @@
                 <b-select
                     v-model="select"
                     placeholder="Select...">
-                    <b-option value="flint">Flint</b-option>
-                    <b-option value="silver">Silver</b-option>
-                    <b-option value="vane">Vane</b-option>
-                    <b-option value="billy">Billy</b-option>
-                    <b-option value="jack">Jack</b-option>
-                    <b-option value="heisenberg">Heisenberg</b-option>
-                    <b-option value="jesse">Jesse</b-option>
-                    <b-option value="saul">Saul</b-option>
-                    <b-option value="mike">Mike</b-option>
+                    <option value="flint">Flint</option>
+                    <option value="silver">Silver</option>
+                    <option value="vane">Vane</option>
+                    <option value="billy">Billy</option>
+                    <option value="jack">Jack</option>
+                    <option value="heisenberg">Heisenberg</option>
+                    <option value="jesse">Jesse</option>
+                    <option value="saul">Saul</option>
+                    <option value="mike">Mike</option>
                 </b-select>
                 <p class="control">
                     <button
@@ -198,15 +165,15 @@
                 <b-select
                     v-model="select"
                     placeholder="Select...">
-                    <b-option value="flint">Flint</b-option>
-                    <b-option value="silver">Silver</b-option>
-                    <b-option value="vane">Vane</b-option>
-                    <b-option value="billy">Billy</b-option>
-                    <b-option value="jack">Jack</b-option>
-                    <b-option value="heisenberg">Heisenberg</b-option>
-                    <b-option value="jesse">Jesse</b-option>
-                    <b-option value="saul">Saul</b-option>
-                    <b-option value="mike">Mike</b-option>
+                    <option value="flint">Flint</option>
+                    <option value="silver">Silver</option>
+                    <option value="vane">Vane</option>
+                    <option value="billy">Billy</option>
+                    <option value="jack">Jack</option>
+                    <option value="heisenberg">Heisenberg</option>
+                    <option value="jesse">Jesse</option>
+                    <option value="saul">Saul</option>
+                    <option value="mike">Mike</option>
                 </b-select>
                 <p class="control">
                     <button
@@ -237,15 +204,15 @@
                     v-model="select"
                     placeholder="Select..."
                     expanded>
-                    <b-option value="flint">Flint</b-option>
-                    <b-option value="silver">Silver</b-option>
-                    <b-option value="vane">Vane</b-option>
-                    <b-option value="billy">Billy</b-option>
-                    <b-option value="jack">Jack</b-option>
-                    <b-option value="heisenberg">Heisenberg</b-option>
-                    <b-option value="jesse">Jesse</b-option>
-                    <b-option value="saul">Saul</b-option>
-                    <b-option value="mike">Mike</b-option>
+                    <option value="flint">Flint</option>
+                    <option value="silver">Silver</option>
+                    <option value="vane">Vane</option>
+                    <option value="billy">Billy</option>
+                    <option value="jack">Jack</option>
+                    <option value="heisenberg">Heisenberg</option>
+                    <option value="jesse">Jesse</option>
+                    <option value="saul">Saul</option>
+                    <option value="mike">Mike</option>
                 </b-select>
                 <p class="control">
                     <button
@@ -275,8 +242,8 @@
                         placeholder="Small"
                         size="is-small"
                         expanded>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
@@ -284,8 +251,8 @@
                     <b-select
                         placeholder="Default"
                         expanded>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
@@ -294,8 +261,8 @@
                         placeholder="Medium"
                         size="is-medium"
                         expanded>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
 
@@ -304,8 +271,8 @@
                         placeholder="Large"
                         size="is-large"
                         expanded>
-                        <b-option value="flint">Flint</b-option>
-                        <b-option value="silver">Silver</b-option>
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
                     </b-select>
                 </b-field>
             </div>
@@ -504,71 +471,71 @@
                 template1: `
                     <b-field label="Simple">
                         <b-select placeholder="Select a name">
-                            <b-option
+                            <option
                                 v-for="option in options"
                                 :value="option.id"
                                 :key="option.id">
                                 {{ option.first_name }}
-                            </b-option>
+                            </option>
                         </b-select>
                     </b-field>
 
                     <b-field label="Grouped">
                         <b-select placeholder="Select a character">
-                            <b-option group="Black Sails"
+                            <option group="Black Sails"
                                 value="flint">
                                 Flint
-                            </b-option>
-                            <b-option group="Black Sails"
+                            </option>
+                            <option group="Black Sails"
                                 value="silver">
                                 Silver
-                            </b-option>
-                            <b-option group="Black Sails"
+                            </option>
+                            <option group="Black Sails"
                                 value="vane">
                                 Vane
-                            </b-option>
-                            <b-option group="Black Sails"
+                            </option>
+                            <option group="Black Sails"
                                 value="billy">
                                 Billy
-                            </b-option>
-                            <b-option group="Black Sails"
+                            </option>
+                            <option group="Black Sails"
                                 value="jack">
                                 Jack
-                            </b-option>
+                            </option>
 
-                            <b-option group="Breaking Bad"
+                            <option group="Breaking Bad"
                                 value="heisenberg">
                                 Heisenberg
-                            </b-option>
-                            <b-option group="Breaking Bad"
+                            </option>
+                            <option group="Breaking Bad"
                                 value="jesse">
                                 Jesse
-                            </b-option>
-                            <b-option group="Breaking Bad"
+                            </option>
+                            <option group="Breaking Bad"
                                 value="saul">
                                 Saul
-                            </b-option>
-                            <b-option group="Breaking Bad"
+                            </option>
+                            <option group="Breaking Bad"
                                 value="mike">
                                 Mike
-                            </b-option>
+                            </option>
 
-                            <b-option group="Game of Thrones"
+                            <option group="Game of Thrones"
                                 value="tyrion-lannister">
                                 Tyrion Lannister
-                            </b-option>
-                            <b-option group="Game of Thrones"
+                            </option>
+                            <option group="Game of Thrones"
                                 value="jamie-lannister">
                                 Jamie Lannister
-                            </b-option>
-                            <b-option group="Game of Thrones"
+                            </option>
+                            <option group="Game of Thrones"
                                 value="daenerys-targaryen">
                                 Daenerys Targaryen
-                            </b-option>
-                            <b-option group="Game of Thrones"
+                            </option>
+                            <option group="Game of Thrones"
                                 value="john-snow">
                                 John Snow
-                            </b-option>
+                            </option>
                         </b-select>
                     </b-field>
 
@@ -577,37 +544,37 @@
                         type="is-danger"
                         message="Something went wrong with this field">
                         <b-select placeholder="Select a character">
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
                     <b-field label="Required">
                         <b-select placeholder="Select a character" required>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
                     <b-field label="Loading">
                         <b-select placeholder="Select a character" loading>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
                     <b-field label="Disabled">
                         <b-select placeholder="Select a character" disabled>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
                     <b-field
                         label="Expanded">
                         <b-select placeholder="Select a character" expanded>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>`,
                 code1: `
@@ -630,15 +597,15 @@
                         <b-select
                             v-model="select"
                             placeholder="Select...">
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
-                            <b-option value="vane">Vane</b-option>
-                            <b-option value="billy">Billy</b-option>
-                            <b-option value="jack">Jack</b-option>
-                            <b-option value="heisenberg">Heisenberg</b-option>
-                            <b-option value="jesse">Jesse</b-option>
-                            <b-option value="saul">Saul</b-option>
-                            <b-option value="mike">Mike</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
+                            <option value="vane">Vane</option>
+                            <option value="billy">Billy</option>
+                            <option value="jack">Jack</option>
+                            <option value="heisenberg">Heisenberg</option>
+                            <option value="jesse">Jesse</option>
+                            <option value="saul">Saul</option>
+                            <option value="mike">Mike</option>
                         </b-select>
                         <p class="control">
                             <button
@@ -660,15 +627,15 @@
                         <b-select
                             v-model="select"
                             placeholder="Select...">
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
-                            <b-option value="vane">Vane</b-option>
-                            <b-option value="billy">Billy</b-option>
-                            <b-option value="jack">Jack</b-option>
-                            <b-option value="heisenberg">Heisenberg</b-option>
-                            <b-option value="jesse">Jesse</b-option>
-                            <b-option value="saul">Saul</b-option>
-                            <b-option value="mike">Mike</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
+                            <option value="vane">Vane</option>
+                            <option value="billy">Billy</option>
+                            <option value="jack">Jack</option>
+                            <option value="heisenberg">Heisenberg</option>
+                            <option value="jesse">Jesse</option>
+                            <option value="saul">Saul</option>
+                            <option value="mike">Mike</option>
                         </b-select>
                         <p class="control">
                             <button
@@ -690,15 +657,15 @@
                         <b-select
                             v-model="select"
                             placeholder="Select...">
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
-                            <b-option value="vane">Vane</b-option>
-                            <b-option value="billy">Billy</b-option>
-                            <b-option value="jack">Jack</b-option>
-                            <b-option value="heisenberg">Heisenberg</b-option>
-                            <b-option value="jesse">Jesse</b-option>
-                            <b-option value="saul">Saul</b-option>
-                            <b-option value="mike">Mike</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
+                            <option value="vane">Vane</option>
+                            <option value="billy">Billy</option>
+                            <option value="jack">Jack</option>
+                            <option value="heisenberg">Heisenberg</option>
+                            <option value="jesse">Jesse</option>
+                            <option value="saul">Saul</option>
+                            <option value="mike">Mike</option>
                         </b-select>
                         <p class="control">
                             <button
@@ -729,15 +696,15 @@
                             v-model="select"
                             placeholder="Select..."
                             expanded>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
-                            <b-option value="vane">Vane</b-option>
-                            <b-option value="billy">Billy</b-option>
-                            <b-option value="jack">Jack</b-option>
-                            <b-option value="heisenberg">Heisenberg</b-option>
-                            <b-option value="jesse">Jesse</b-option>
-                            <b-option value="saul">Saul</b-option>
-                            <b-option value="mike">Mike</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
+                            <option value="vane">Vane</option>
+                            <option value="billy">Billy</option>
+                            <option value="jack">Jack</option>
+                            <option value="heisenberg">Heisenberg</option>
+                            <option value="jesse">Jesse</option>
+                            <option value="saul">Saul</option>
+                            <option value="mike">Mike</option>
                         </b-select>
                         <p class="control">
                             <button
@@ -760,8 +727,8 @@
                             placeholder="Small"
                             size="is-small"
                             expanded>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
@@ -769,8 +736,8 @@
                         <b-select
                             placeholder="Default"
                             expanded>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
@@ -779,8 +746,8 @@
                             placeholder="Medium"
                             size="is-medium"
                             expanded>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>
 
@@ -789,8 +756,8 @@
                             placeholder="Large"
                             size="is-large"
                             expanded>
-                            <b-option value="flint">Flint</b-option>
-                            <b-option value="silver">Silver</b-option>
+                            <option value="flint">Flint</option>
+                            <option value="silver">Silver</option>
                         </b-select>
                     </b-field>`
             }
