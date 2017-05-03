@@ -92,18 +92,6 @@
         },
         methods: {
             /**
-             * Verify if next item is a optgroup (another group chunk).
-             */
-            isOptgroup(option, previousOption, i) {
-                if (!option.group) return
-                // If it's first and has group property already show as subheader
-                if (i === 0) return true
-
-                if (previousOption === undefined) return
-                return option.group !== previousOption.group
-            },
-
-            /**
              * Blur listener.
              * Fire the HTML5 validation.
              */
