@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "bulma": "^0.4.1",
-    "vue": "^2.2.6"
+    "vue": "^2.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -73,7 +73,7 @@
     "vue-progressbar": "^0.7.1",
     "vue-router": "^2.2.0",
     "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.2.4",
+    "vue-template-compiler": "^2.3.2",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
