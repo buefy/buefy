@@ -1,14 +1,14 @@
 import { Checkbox, CheckboxGroup } from './components/checkbox'
+import { Dropdown, DropdownOption } from './components/dropdown'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
-import { Select, Option } from './components/select'
 import { Table, TableColumn } from './components/table'
-import Dropdown from './components/dropdown'
 import Field from './components/field'
 import Icon from './components/icon'
 import Input from './components/input'
 import Message from './components/message'
 import Notification from './components/notification'
 import Pagination from './components/pagination'
+import Select from './components/select'
 import Switch from './components/switch'
 import Tooltip from './components/tooltip'
 
@@ -22,12 +22,12 @@ const components = {
     Checkbox,
     CheckboxGroup,
     Dropdown,
+    DropdownOption,
     Field,
     Icon,
     Input,
     Message,
     Notification,
-    Option,
     Pagination,
     Radio,
     RadioButton,

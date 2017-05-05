@@ -14,9 +14,9 @@
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
 
-                <b-option>Action</b-option>
-                <b-option>Another action</b-option>
-                <b-option>Something else</b-option>
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
 
         </div>
@@ -29,9 +29,9 @@
                     <img src="../../../assets/buefy.png" width="94">
                 </figure>
 
-                <b-option>Action</b-option>
-                <b-option>Another action</b-option>
-                <b-option>Something else</b-option>
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
 
             <b-dropdown>
@@ -39,9 +39,9 @@
                     <b-icon icon="more_vert"></b-icon>
                 </button>
 
-                <b-option>Action</b-option>
-                <b-option>Another action</b-option>
-                <b-option>Something else</b-option>
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
 
             <b-dropdown>
@@ -49,9 +49,9 @@
                     Click me!
                 </h1>
 
-                <b-option>Action</b-option>
-                <b-option>Another action</b-option>
-                <b-option>Something else</b-option>
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
@@ -69,9 +69,9 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option>Action</b-option>
-                    <b-option>Another action</b-option>
-                    <b-option>Something else</b-option>
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
                 </b-dropdown>
             </b-field>
 
@@ -86,9 +86,9 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option>Action</b-option>
-                    <b-option>Another action</b-option>
-                    <b-option>Something else</b-option>
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
                 </b-dropdown>
             </b-field>
 
@@ -99,10 +99,10 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option value="open_issues">Open Issues and Pull Requests</b-option>
-                    <b-option value="your_issues">Your Issues</b-option>
-                    <b-option value="pull_requests">Your Pull Requests</b-option>
-                    <b-option value="everything">Everything</b-option>
+                    <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
+                    <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
+                    <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
+                    <b-dropdown-option value="everything">Everything</b-dropdown-option>
                 </b-dropdown>
                 <b-input icon="search" type="search" placeholder="Search..."></b-input>
             </b-field>
@@ -118,14 +118,14 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
-                    <b-option separator></b-option>
-                    <b-option value="home">Home</b-option>
-                    <b-option value="products">Products</b-option>
-                    <b-option value="blog" disabled>Blog</b-option>
-                    <b-option separator></b-option>
-                    <b-option value="settings">Settings</b-option>
-                    <b-option value="logout">Logout</b-option>
+                    <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
+                    <b-dropdown-option separator></b-dropdown-option>
+                    <b-dropdown-option value="home">Home</b-dropdown-option>
+                    <b-dropdown-option value="products">Products</b-dropdown-option>
+                    <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
+                    <b-dropdown-option separator></b-dropdown-option>
+                    <b-dropdown-option value="settings">Settings</b-dropdown-option>
+                    <b-dropdown-option value="logout">Logout</b-dropdown-option>
                 </b-dropdown>
 
                 <b-dropdown narrowed>
@@ -134,14 +134,14 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
-                    <b-option separator></b-option>
-                    <b-option value="home">Home</b-option>
-                    <b-option value="products">Products</b-option>
-                    <b-option value="blog" disabled>Blog</b-option>
-                    <b-option separator></b-option>
-                    <b-option value="settings">Settings</b-option>
-                    <b-option value="logout">Logout</b-option>
+                    <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
+                    <b-dropdown-option separator></b-dropdown-option>
+                    <b-dropdown-option value="home">Home</b-dropdown-option>
+                    <b-dropdown-option value="products">Products</b-dropdown-option>
+                    <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
+                    <b-dropdown-option separator></b-dropdown-option>
+                    <b-dropdown-option value="settings">Settings</b-dropdown-option>
+                    <b-dropdown-option value="logout">Logout</b-dropdown-option>
                 </b-dropdown>
             </div>
 
@@ -152,18 +152,17 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-option
-                        value="profile"
+                    <b-dropdown-option
                         label="Logged as <b>Rafael Beraldo</b>"
                         subheader>
-                    </b-option>
-                    <b-option separator></b-option>
-                    <b-option value="home" icon="home">Home</b-option>
-                    <b-option value="products" icon="shopping_cart">Products</b-option>
-                    <b-option value="blog" icon="art_track" disabled>Blog</b-option>
-                    <b-option separator></b-option>
-                    <b-option value="settings" icon="settings">Settings</b-option>
-                    <b-option value="logout" icon="exit_to_app">Logout</b-option>
+                    </b-dropdown-option>
+                    <b-dropdown-option separator></b-dropdown-option>
+                    <b-dropdown-option value="home" icon="home">Home</b-dropdown-option>
+                    <b-dropdown-option value="products" icon="shopping_cart">Products</b-dropdown-option>
+                    <b-dropdown-option value="blog" icon="art_track" disabled>Blog</b-dropdown-option>
+                    <b-dropdown-option separator></b-dropdown-option>
+                    <b-dropdown-option value="settings" icon="settings">Settings</b-dropdown-option>
+                    <b-dropdown-option value="logout" icon="exit_to_app">Logout</b-dropdown-option>
                 </b-dropdown>
             </div>
             <p><b>Selection:</b> {{ select }}</p>
@@ -336,9 +335,9 @@
                             <b-icon icon="arrow_drop_down"></b-icon>
                         </button>
 
-                        <b-option>Action</b-option>
-                        <b-option>Another action</b-option>
-                        <b-option>Something else</b-option>
+                        <b-dropdown-option>Action</b-dropdown-option>
+                        <b-dropdown-option>Another action</b-dropdown-option>
+                        <b-dropdown-option>Something else</b-dropdown-option>
                     </b-dropdown>`,
 
                 template2: `
@@ -347,9 +346,9 @@
                             <img src="assets/buefy.png" width="94">
                         </figure>
 
-                        <b-option>Action</b-option>
-                        <b-option>Another action</b-option>
-                        <b-option>Something else</b-option>
+                        <b-dropdown-option>Action</b-dropdown-option>
+                        <b-dropdown-option>Another action</b-dropdown-option>
+                        <b-dropdown-option>Something else</b-dropdown-option>
                     </b-dropdown>
 
                     <b-dropdown>
@@ -357,9 +356,9 @@
                             <b-icon icon="more_vert"></b-icon>
                         </button>
 
-                        <b-option>Action</b-option>
-                        <b-option>Another action</b-option>
-                        <b-option>Something else</b-option>
+                        <b-dropdown-option>Action</b-dropdown-option>
+                        <b-dropdown-option>Another action</b-dropdown-option>
+                        <b-dropdown-option>Something else</b-dropdown-option>
                     </b-dropdown>
 
                     <b-dropdown>
@@ -367,9 +366,9 @@
                             Click me!
                         </h1>
 
-                        <b-option>Action</b-option>
-                        <b-option>Another action</b-option>
-                        <b-option>Something else</b-option>
+                        <b-dropdown-option>Action</b-dropdown-option>
+                        <b-dropdown-option>Another action</b-dropdown-option>
+                        <b-dropdown-option>Something else</b-dropdown-option>
                     </b-dropdown>`,
 
                 template3: `
@@ -384,9 +383,9 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option>Action</b-option>
-                            <b-option>Another action</b-option>
-                            <b-option>Something else</b-option>
+                            <b-dropdown-option>Action</b-dropdown-option>
+                            <b-dropdown-option>Another action</b-dropdown-option>
+                            <b-dropdown-option>Something else</b-dropdown-option>
                         </b-dropdown>
                     </b-field>
 
@@ -401,9 +400,9 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option>Action</b-option>
-                            <b-option>Another action</b-option>
-                            <b-option>Something else</b-option>
+                            <b-dropdown-option>Action</b-dropdown-option>
+                            <b-dropdown-option>Another action</b-dropdown-option>
+                            <b-dropdown-option>Something else</b-dropdown-option>
                         </b-dropdown>
                     </b-field>
 
@@ -414,10 +413,10 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option value="open_issues">Open Issues and Pull Requests</b-option>
-                            <b-option value="your_issues">Your Issues</b-option>
-                            <b-option value="pull_requests">Your Pull Requests</b-option>
-                            <b-option value="everything">Everything</b-option>
+                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
+                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
+                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
+                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
                         </b-dropdown>
                         <b-input icon="search" type="search" placeholder="Search..."></b-input>
                     </b-field>`,
@@ -429,14 +428,14 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
-                            <b-option separator></b-option>
-                            <b-option value="home">Home</b-option>
-                            <b-option value="products">Products</b-option>
-                            <b-option value="blog" disabled>Blog</b-option>
-                            <b-option separator></b-option>
-                            <b-option value="settings">Settings</b-option>
-                            <b-option value="logout">Logout</b-option>
+                            <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
+                            <b-dropdown-option separator></b-dropdown-option>
+                            <b-dropdown-option value="home">Home</b-dropdown-option>
+                            <b-dropdown-option value="products">Products</b-dropdown-option>
+                            <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
+                            <b-dropdown-option separator></b-dropdown-option>
+                            <b-dropdown-option value="settings">Settings</b-dropdown-option>
+                            <b-dropdown-option value="logout">Logout</b-dropdown-option>
                         </b-dropdown>
 
                         <b-dropdown narrowed>
@@ -445,14 +444,14 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option value="profile" subheader>Logged as Rafael Beraldo</b-option>
-                            <b-option separator></b-option>
-                            <b-option value="home">Home</b-option>
-                            <b-option value="products">Products</b-option>
-                            <b-option value="blog" disabled>Blog</b-option>
-                            <b-option separator></b-option>
-                            <b-option value="settings">Settings</b-option>
-                            <b-option value="logout">Logout</b-option>
+                            <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
+                            <b-dropdown-option separator></b-dropdown-option>
+                            <b-dropdown-option value="home">Home</b-dropdown-option>
+                            <b-dropdown-option value="products">Products</b-dropdown-option>
+                            <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
+                            <b-dropdown-option separator></b-dropdown-option>
+                            <b-dropdown-option value="settings">Settings</b-dropdown-option>
+                            <b-dropdown-option value="logout">Logout</b-dropdown-option>
                         </b-dropdown>
                     </div>
 
@@ -463,18 +462,17 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-option
-                                value="profile"
+                            <b-dropdown-option
                                 label="Logged as <b>Rafael Beraldo</b>"
                                 subheader>
-                            </b-option>
-                            <b-option separator></b-option>
-                            <b-option value="home" icon="home">Home</b-option>
-                            <b-option value="products" icon="shopping_cart">Products</b-option>
-                            <b-option value="blog" icon="art_track" disabled>Blog</b-option>
-                            <b-option separator></b-option>
-                            <b-option value="settings" icon="settings">Settings</b-option>
-                            <b-option value="logout" icon="exit_to_app">Logout</b-option>
+                            </b-dropdown-option>
+                            <b-dropdown-option separator></b-dropdown-option>
+                            <b-dropdown-option value="home" icon="home">Home</b-dropdown-option>
+                            <b-dropdown-option value="products" icon="shopping_cart">Products</b-dropdown-option>
+                            <b-dropdown-option value="blog" icon="art_track" disabled>Blog</b-dropdown-option>
+                            <b-dropdown-option separator></b-dropdown-option>
+                            <b-dropdown-option value="settings" icon="settings">Settings</b-dropdown-option>
+                            <b-dropdown-option value="logout" icon="exit_to_app">Logout</b-dropdown-option>
                         </b-dropdown>
                     </div>
                     <p><b>Selection:</b> {{ select }}</p>`,

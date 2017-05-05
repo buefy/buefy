@@ -2,6 +2,8 @@
 
 ## 0.2.3
 
+* **BREAKABLE:** Select ``b-option`` is now only ``option``
+* **BREAKABLE:** Dropdown ``b-option`` is now ``b-dropdown-option``
 * Fix Dropdown background overlay index
 * #43 Fix Dialog cancel button focus state
 * #50 Add ``page-change`` event on Table

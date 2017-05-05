@@ -1,6 +1,5 @@
 <template>
     <span class="dropdown control">
-        <slot></slot>
         <a
             role="button"
             ref="trigger"
@@ -20,7 +19,6 @@
                 class="background is-hidden-desktop"
                 v-show="isActive">
             </div>
-
             <span
                 key="dropdown"
                 class="box"
@@ -32,46 +30,7 @@
                 v-show="isActive"
                 ref="dropdown">
                 <ul>
-                    <template v-for="option in options">
-                        <li v-if="option.subheader"
-                            class="option is-subheader">
-                            <b-icon
-                                v-if="option.icon"
-                                :icon="option.icon"
-                                :pack="option.iconPack">
-                            </b-icon>
-                            <span v-html="option.label"></span>
-                        </li>
-                        <li v-else-if="option.disabled"
-                            class="option is-disabled">
-                            <b-icon
-                                v-if="option.icon"
-                                :icon="option.icon"
-                                :pack="option.iconPack">
-                            </b-icon>
-                            <span v-html="option.label"></span>
-                        </li>
-                        <li v-else-if="option.separator"
-                            class="option is-separator">
-                            <b-icon
-                                v-if="option.icon"
-                                :icon="option.icon"
-                                :pack="option.iconPack">
-                            </b-icon>
-                            <span v-html="option.label"></span>
-                        </li>
-                        <li v-else
-                            class="option"
-                            :class="{ 'is-selected': option.value === selected }"
-                            @click="selectOption(option.value)">
-                            <b-icon
-                                v-if="option.icon"
-                                :icon="option.icon"
-                                :pack="option.iconPack">
-                            </b-icon>
-                            <span v-html="option.label"></span>
-                        </li>
-                    </template>
+                    <slot></slot>
                 </ul>
             </span>
 
@@ -81,13 +40,9 @@
 
 <script>
     import Vue from 'vue'
-    import Icon from '../icon'
 
     export default {
         name: 'bDropdown',
-        components: {
-            [Icon.name]: Icon
-        },
         props: {
             value: [String, Number, Object],
             narrowed: Boolean,
@@ -95,13 +50,12 @@
         },
         data() {
             return {
-                options: [],
                 selected: this.value || '',
                 isActive: false,
                 isListInViewportHorizontally: true,
                 isListInViewportVertically: true,
                 isMouseOverDropdown: false,
-                isDropdownComponent: true // Used internally by Option
+                isDropdownComponent: true // Used internally by DropdownOption
             }
         },
         computed: {
