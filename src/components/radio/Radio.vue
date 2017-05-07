@@ -32,7 +32,7 @@
         created() {
             if (!this.$parent.isRadioGroupComponent) {
                 this.$destroy()
-                throw new Error('You should wrap Radio on a Radio Group')
+                throw new Error('You should wrap bRadio on a bRadioGroup')
             }
         }
     }

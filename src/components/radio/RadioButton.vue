@@ -44,7 +44,7 @@
         created() {
             if (!this.$parent.isRadioGroupComponent) {
                 this.$destroy()
-                throw new Error('You should wrap Radio Button on a Radio Group')
+                throw new Error('You should wrap bRadioButton on a bRadioGroup')
             }
         }
     }
