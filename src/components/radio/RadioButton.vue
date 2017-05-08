@@ -1,6 +1,7 @@
 <template>
     <p class="control">
         <button
+            type="button"
             class="radio button"
             :disabled="disabled"
             :class="[isChecked ? type : '', size]"
