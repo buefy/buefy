@@ -1,13 +1,62 @@
 # Buefy Changelog
 
-## 0.2.3
+## 0.3.0
 
-* **BREAKABLE:** Select ``b-option`` is now only ``option``
-* **BREAKABLE:** Dropdown ``b-option`` is now ``b-dropdown-option``
+### Table
+
+**Breakable** changes on Table, it now requires a scoped slot to wrap the columns, and a slot inside the column. You have now full control over the content of cells:
+
+```html
+<b-table :data="data">
+    <template scope="props">
+        <b-table-column field="id" label="ID" sortable numeric>
+            {{ props.row.id }}
+        </b-table-column>
+
+        <b-table-column field="user.first_name" label="First Name" sortable>
+            {{ props.row.user.first_name }}
+        </b-table-column>
+
+        <b-table-column field="date" label="Date" sortable
+            v-html="formatDate(props.row.date)">
+        </b-table-column>
+
+        <b-table-column field="gender" label="Gender">
+            <b-icon
+                pack="fa"
+                :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+            </b-icon>
+            {{ props.row.gender }}
+        </b-table-column>
+    </template>
+</b-table>
+```
+* Prop ``selectable`` renamed to ``selected`` and expects an Object, use the ``.sync`` modifier to make it two-way binding:
+
+```html
+<b-table :data="data" :selected.sync="selectedRow">
+```
+
+is the same as:
+
+```html
+<b-table :data="data" :selected="selectedRow" @select="row => selectedRow = row">
+```
+
+* Table new prop ``checked-rows`` that expects an Array, use the ``.sync`` modifier to make it two-way binding
+* Table ``render-html`` prop removed thanks to the new syntax
+* Column ``component`` prop removed thanks to the new syntax
+* Column ``field`` prop now accepts nested object keys
+
+### Other
+
+* **Breaking:** Select ``b-option`` is now only ``option``
+* **Breaking:** Dropdown ``b-option`` is now ``b-dropdown-option``
 * Fix Dropdown background overlay index
 * #43 Fix Dialog cancel button focus state
 * #50 Add ``page-change`` event on Table
 * #52 Fix Select option
+* #53 Add ``type=button`` to notifications
 
 ## 0.2.2
 
@@ -33,7 +82,7 @@
 
 * **New component: Select**
 * **New component: Dropdown**
-* **BREAKING:** Rename Table property ``html`` to ``render-html``
+* **Breaking:** Rename Table property ``html`` to ``render-html``
 * Fix Pagination buttons messing up at pages 3 and 4
 * Fix Dialog keeping keyup event
 * Fix prompt Dialog not validating before confirming

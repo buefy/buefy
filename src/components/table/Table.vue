@@ -1,7 +1,5 @@
 <template>
     <div class="b-table">
-        <slot></slot>
-
         <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
             <p class="control">
                 <span class="select is-fullwidth">
@@ -28,7 +26,7 @@
             <thead>
                 <tr>
                     <th class="checkbox-cell" v-if="checkable">
-                        <b-checkbox :value="isAllChecked" @change="checkAll($event)"></b-checkbox>
+                        <b-checkbox :value="isAllChecked" @change="checkAll($event)" nosync></b-checkbox>
                     </th>
                     <th v-for="column in columns" @click.stop="sort(column)"
                         :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
@@ -46,29 +44,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in visibleData"
-                    @click="selectItem(item)"
-                    @dblclick="$emit('dblclick', item)"
-                    :class="{ 'is-selected': item === selectedItem }">
+                <tr v-for="row in visibleData"
+                    @click="selectRow(row)"
+                    @dblclick="$emit('dblclick', row)"
+                    :class="{ 'is-selected': row === selected }">
 
                     <td class="checkbox-cell" v-if="checkable">
-                        <b-checkbox :value="isItemChecked(item)" @change="checkItem(item, $event)"></b-checkbox>
+                        <b-checkbox :value="isRowChecked(row)" @change="checkRow(row, $event)" nosync></b-checkbox>
                     </td>
 
-                    <td v-for="column in columns"
-                        :class="{ 'has-text-right': column.isNumeric }"
-                        :data-label="column.label">
-
-                        <template v-for="(cell, key) in item" v-if="key === column.field">
-
-                          <component v-if="column.component" :is="column.component" :data="cell" :row="item"></component>
-                          <span v-else-if="renderHtml" v-html="column.format(cell, item)"></span>
-                          <span v-else>{{ column.format(cell, item) }}</span>
-
-                        </template>
-
-                    </td>
-
+                    <slot :row="row"></slot>
                 </tr>
             </tbody>
         </table>
@@ -76,7 +61,7 @@
         <div class="level">
             <div class="level-left">
                 <div class="level-item">
-                    <p v-if="checkable && this.checkedItems.length > 0">({{ this.checkedItems.length }})</p>
+                    <p v-if="checkable && this.checkedRows.length > 0">({{ this.checkedRows.length }})</p>
                 </div>
             </div>
 
@@ -115,8 +100,12 @@
             bordered: Boolean,
             striped: Boolean,
             narrowed: Boolean,
-            selectable: Boolean,
             checkable: Boolean,
+            selected: Object,
+            checkedRows: {
+                type: Array,
+                default: () => []
+            },
             mobileCards: {
                 type: Boolean,
                 default: true
@@ -128,15 +117,13 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            backendSorting: Boolean,
-            renderHtml: Boolean
+            backendSorting: Boolean
         },
         data() {
             return {
                 columns: [],
                 newData: this.data,
-                selectedItem: {},
-                checkedItems: [],
+                newCheckedRows: [...this.checkedRows],
                 currentSortColumn: {},
                 mobileSort: {},
                 currentPage: 1,
@@ -144,25 +131,45 @@
             }
         },
         watch: {
+            /**
+             * When data prop change, update internal value and sort again,
+             * do not sort however it it's backend-sort.
+             */
             data(value) {
                 this.newData = value
                 if (!this.backendSorting) {
                     this.sort(this.currentSortColumn, true)
                 }
             },
-            selectable(value) {
-                if (!value) this.selectedItem = {}
-            },
+
+            /**
+             * When mobileSort change (mobile dropdown) call sort method.
+             */
             mobileSort(column) {
                 if (this.currentSortColumn === column) return
 
                 this.sort(column)
             },
+
+            /**
+             * When currentSortColumn change, update mobileSort.
+             */
             currentSortColumn(column) {
                 this.mobileSort = column
+            },
+
+            /**
+             * When checkedRows prop change, update internal value without
+             * mutating original data.
+             */
+            checkedRows(rows) {
+                this.newCheckedRows = [...rows]
             }
         },
         computed: {
+            /**
+             * Splitted data based on the pagination.
+             */
             visibleData() {
                 if (!this.paginated) return this.newData
 
@@ -177,13 +184,20 @@
                     return this.newData.slice(start, end)
                 }
             },
+
+            /**
+             * Check if all rows in the page are checked.
+             */
             isAllChecked() {
-                // check if all items on page are checked
-                const isAllChecked = this.visibleData.some(currentVisibleItem => {
-                    return this.checkedItems.indexOf(currentVisibleItem) < 0
+                const isAllChecked = this.visibleData.some(currentVisibleRow => {
+                    return this.checkedRows.indexOf(currentVisibleRow) < 0
                 })
                 return !isAllChecked
             },
+
+            /**
+             * Check if has any sortable column.
+             */
             hasSortableColumns() {
                 return this.columns.some(column => {
                     return column.isSortable
@@ -191,19 +205,27 @@
             }
         },
         methods: {
+            /**
+             * Sort an array by key without mutating original data.
+             * Call the user sort function if it was passed.
+             */
             sortBy(array, key, fn, isAsc) {
                 let sorted = []
                 // Sorting without mutating original data
                 if (!fn || typeof fn !== 'function') {
                     sorted = [...array].sort((a, b) => {
-                        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) return 0
+                        // Get values even if it's a dot notation string (e.g. 'user.name')
+                        let newA = key.split('.').reduce((obj, i) => obj[i], a)
+                        let newB = key.split('.').reduce((obj, i) => obj[i], b)
 
-                        const newA = (typeof a[key] === 'string')
-                            ? a[key].toUpperCase()
-                            : a[key]
-                        const newB = (typeof b[key] === 'string')
-                            ? b[key].toUpperCase()
-                            : b[key]
+                        if (!newA || !newB) return 0
+
+                        newA = (typeof newA === 'string')
+                            ? newA.toUpperCase()
+                            : newA
+                        newB = (typeof newB === 'string')
+                            ? newB.toUpperCase()
+                            : newB
 
                         return newA > newB ? 1 : -1
                     })
@@ -215,7 +237,13 @@
 
                 return sorted
             },
-            sort(column, updatingData) {
+
+            /**
+             * Sort the column.
+             * Toggle current direction on column if it's really a column click
+             * and not just updating the prop.
+             */
+            sort(column, updatingData = false) {
                 if (!column || !column.isSortable) return
 
                 if (!updatingData) {
@@ -230,50 +258,82 @@
                 this.$emit('sort', column.field, column.isAsc ? 'asc' : 'desc')
             },
 
+            /**
+             * Check if the row must be checked (is added to the array).
+             */
+            isRowChecked(row) {
+                return this.checkedRows.indexOf(row) >= 0
+            },
+
+            /**
+             * Remove a checked row from the array.
+             */
+            removeCheckedRow(row) {
+                const index = this.newCheckedRows.indexOf(row)
+                if (index >= 0) {
+                    this.newCheckedRows.splice(index, 1)
+                }
+            },
+
+            /**
+             * Header checkbox click listener.
+             * Add or remove all rows in current page.
+             */
             checkAll(isChecked) {
-                this.visibleData.forEach(currentItem => {
-                    this.removeCheckedItem(currentItem)
+                this.visibleData.forEach(currentRow => {
+                    this.removeCheckedRow(currentRow)
                     if (isChecked) {
-                        this.checkedItems.push(currentItem)
+                        this.newCheckedRows.push(currentRow)
                     }
                 })
 
-                this.$emit('check', this.checkedItems)
-                this.$emit('check-all', this.checkedItems)
+                this.$emit('update:checkedRows', this.newCheckedRows)
+                this.$emit('check', this.newCheckedRows)
+                this.$emit('check-all', this.newCheckedRows)
             },
-            checkItem(item, isChecked) {
+
+            /**
+             * Row checkbox click listener.
+             * Add or remove a single row.
+             */
+            checkRow(row, isChecked) {
                 if (isChecked) {
-                    this.checkedItems.push(item)
+                    this.newCheckedRows.push(row)
                 } else {
-                    this.removeCheckedItem(item)
+                    this.removeCheckedRow(row)
                 }
 
-                this.$emit('check', this.checkedItems, item)
-            },
-            removeCheckedItem(item) {
-                const index = this.checkedItems.indexOf(item)
-                if (index >= 0) {
-                    this.checkedItems.splice(index, 1)
-                }
-            },
-            isItemChecked(item) {
-                return this.checkedItems.indexOf(item) >= 0
+                this.$emit('update:checkedRows', this.newCheckedRows)
+                this.$emit('check', this.newCheckedRows, row)
             },
 
-            selectItem(item, index) {
-                this.$emit('click', item)
-                if (!this.selectable || this.selectedItem.item === item) return
+            /**
+             * Row click listener.
+             * Emit all necessary events.
+             */
+            selectRow(row, index) {
+                this.$emit('click', row)
 
-                // Emit new and old item
-                this.$emit('select', item, this.selectedItem.item)
+                if (this.selected.row === row) return
 
-                // Save new item
-                this.selectedItem = item
+                // Emit new row to update user variable
+                this.$emit('update:selected', row)
+
+                // Emit new and old row
+                this.$emit('select', row, this.selected.row)
             },
+
+            /**
+             * Paginator change listener.
+             */
             pageChanged(page) {
                 this.currentPage = page > 0 ? page : 1
                 this.$emit('page-change', this.currentPage)
             },
+
+            /**
+             * Initial sorted column based on the default-sort prop.
+             */
             initSort() {
                 if (!this.defaultSort) return
 

@@ -1,5 +1,5 @@
 import Table from './Table'
-import TableColumn from './TableColumn.js'
+import TableColumn from './TableColumn'
 
 export {
     Table,
