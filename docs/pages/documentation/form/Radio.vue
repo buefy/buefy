@@ -65,109 +65,85 @@
         <hr>
 
         <h2 class="subtitle">Radio properties</h2>
-        <b-table
-            :data="radioProps"
-            default-sort="name"
-            render-html>
-            <b-table-column
-                field="name"
-                label="Name">
-            </b-table-column>
-            <b-table-column
-                field="description"
-                label="Description"
-                width="620">
-            </b-table-column>
-            <b-table-column
-                field="type"
-                label="Type">
-            </b-table-column>
-            <b-table-column
-                field="values"
-                label="Values">
-            </b-table-column>
-            <b-table-column
-                field="default"
-                label="Default">
-            </b-table-column>
+        <b-table :data="radioProps" default-sort="name">
+            <template scope="props">
+                <b-table-column field="name" label="Name"
+                    v-html="props.row.name">
+                </b-table-column>
+                <b-table-column field="description" label="Description" width="620"
+                    v-html="props.row.description">
+                </b-table-column>
+                <b-table-column field="type" label="Type"
+                    v-html="props.row.type">
+                </b-table-column>
+                <b-table-column field="values" label="Values"
+                    v-html="props.row.values">
+                </b-table-column>
+                <b-table-column field="default" label="Default"
+                    v-html="props.row.default">
+                </b-table-column>
+            </template>
         </b-table>
 
         <hr>
+
         <h2 class="subtitle">Radio Button properties</h2>
-        <b-table
-            :data="radioButtonProps"
-            default-sort="name"
-            render-html>
-            <b-table-column
-                field="name"
-                label="Name">
-            </b-table-column>
-            <b-table-column
-                field="description"
-                label="Description"
-                width="620">
-            </b-table-column>
-            <b-table-column
-                field="type"
-                label="Type">
-            </b-table-column>
-            <b-table-column
-                field="values"
-                label="Values">
-            </b-table-column>
-            <b-table-column
-                field="default"
-                label="Default">
-            </b-table-column>
+        <b-table :data="radioButtonProps" default-sort="name">
+            <template scope="props">
+                <b-table-column field="name" label="Name"
+                    v-html="props.row.name">
+                </b-table-column>
+                <b-table-column field="description" label="Description" width="620"
+                    v-html="props.row.description">
+                </b-table-column>
+                <b-table-column field="type" label="Type"
+                    v-html="props.row.type">
+                </b-table-column>
+                <b-table-column field="values" label="Values"
+                    v-html="props.row.values">
+                </b-table-column>
+                <b-table-column field="default" label="Default"
+                    v-html="props.row.default">
+                </b-table-column>
+            </template>
         </b-table>
 
         <hr>
-        <h2 class="subtitle">Radio Group properties</h2>
-        <b-table
-            :data="radioGroupProps"
-            default-sort="name"
-            render-html>
-            <b-table-column
-                field="name"
-                label="Name">
-            </b-table-column>
-            <b-table-column
-                field="description"
-                label="Description"
-                width="620">
-            </b-table-column>
-            <b-table-column
-                field="type"
-                label="Type">
-            </b-table-column>
-            <b-table-column
-                field="values"
-                label="Values">
-            </b-table-column>
-            <b-table-column
-                field="default"
-                label="Default">
-            </b-table-column>
+
+        <h2 class="subtitle">Group properties</h2>
+        <b-table :data="radioGroupProps" default-sort="name">
+            <template scope="props">
+                <b-table-column field="name" label="Name"
+                    v-html="props.row.name">
+                </b-table-column>
+                <b-table-column field="description" label="Description" width="620"
+                    v-html="props.row.description">
+                </b-table-column>
+                <b-table-column field="type" label="Type"
+                    v-html="props.row.type">
+                </b-table-column>
+                <b-table-column field="values" label="Values"
+                    v-html="props.row.values">
+                </b-table-column>
+                <b-table-column field="default" label="Default"
+                    v-html="props.row.default">
+                </b-table-column>
+            </template>
         </b-table>
 
-        <h2 class="subtitle">Radio Group events</h2>
-        <b-table
-            :data="radioGroupEvents"
-            default-sort="name"
-            render-html>
-            <b-table-column
-                field="name"
-                label="Name">
-            </b-table-column>
-            <b-table-column
-                field="description"
-                label="Description"
-                width="620">
-            </b-table-column>
-            <b-table-column
-                field="parameters"
-                label="Parameters">
-            </b-table-column>
+        <h2 class="subtitle">Group events</h2>
+        <b-table :data="radioGroupEvents" default-sort="name">
+            <template scope="props">
+                <b-table-column field="name" label="Name"
+                    v-html="props.row.name">
+                </b-table-column>
+                <b-table-column field="description" label="Description" width="620"
+                    v-html="props.row.description">
+                </b-table-column>
+                <b-table-column field="parameters" label="Parameters"
+                    v-html="props.row.parameters">
+                </b-table-column>
+            </template>
         </b-table>
 
     </div>

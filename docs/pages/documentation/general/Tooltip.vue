@@ -91,31 +91,24 @@
         <hr>
 
         <h2 class="subtitle">Properties</h2>
-        <b-table
-            :data="props"
-            default-sort="name"
-            render-html>
-            <b-table-column
-                field="name"
-                label="Name">
-            </b-table-column>
-            <b-table-column
-                field="description"
-                label="Description"
-                width="620">
-            </b-table-column>
-            <b-table-column
-                field="type"
-                label="Type">
-            </b-table-column>
-            <b-table-column
-                field="values"
-                label="Values">
-            </b-table-column>
-            <b-table-column
-                field="default"
-                label="Default">
-            </b-table-column>
+        <b-table :data="props" default-sort="name">
+            <template scope="props">
+                <b-table-column field="name" label="Name"
+                    v-html="props.row.name">
+                </b-table-column>
+                <b-table-column field="description" label="Description" width="620"
+                    v-html="props.row.description">
+                </b-table-column>
+                <b-table-column field="type" label="Type"
+                    v-html="props.row.type">
+                </b-table-column>
+                <b-table-column field="values" label="Values"
+                    v-html="props.row.values">
+                </b-table-column>
+                <b-table-column field="default" label="Default"
+                    v-html="props.row.default">
+                </b-table-column>
+            </template>
         </b-table>
 
     </div>
