@@ -3,7 +3,7 @@
         <div class="message" :class="type" v-if="isActive">
             <div class="message-header" v-if="title">
                 <p>{{ title }}</p>
-                <button class="delete" v-if="closable" @click="close"></button>
+                <button type="button" class="delete" v-if="closable" @click="close"></button>
             </div>
             <div class="message-body">
                 <b-icon
