@@ -58,6 +58,31 @@
                 isDropdownComponent: true // Used internally by DropdownOption
             }
         },
+        watch: {
+            /**
+             * When v-model is changed set the new selected option.
+             */
+            value(value = '') {
+                this.selectOption(value)
+            },
+
+            /**
+             * When dropdown is toggled. check the visibility to know when
+             * to open upwards or left sided.
+             */
+            isActive(active) {
+                if (active) {
+                    this.calcDropdownInViewportHorizontal()
+                    this.calcDropdownInViewportVertical()
+                } else {
+                    // Timeout to wait for the animation to finish before recalculating
+                    setTimeout(() => {
+                        this.calcDropdownInViewportHorizontal()
+                        this.calcDropdownInViewportVertical()
+                    }, 100)
+                }
+            }
+        },
         computed: {
             /**
              * White-listed items to not close when clicked.
@@ -83,31 +108,6 @@
                 }
 
                 return whiteList
-            }
-        },
-        watch: {
-            /**
-             * When v-model is changed set the new selected option.
-             */
-            value(value = '') {
-                this.selectOption(value)
-            },
-
-            /**
-             * When dropdown is toggled. check the visibility to know when
-             * to open upwards or left sided.
-             */
-            isActive(active) {
-                if (active) {
-                    this.calcDropdownInViewportHorizontal()
-                    this.calcDropdownInViewportVertical()
-                } else {
-                    // Timeout to wait for the animation to finish before recalculating
-                    setTimeout(() => {
-                        this.calcDropdownInViewportHorizontal()
-                        this.calcDropdownInViewportVertical()
-                    }, 100)
-                }
             }
         },
         methods: {

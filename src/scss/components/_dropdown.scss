@@ -50,6 +50,7 @@
                 border-bottom: 1px solid $background;
                 margin: 0.5rem 0;
                 padding: 0 !important;
+                cursor: inherit;
             }
             &.is-disabled {
                 opacity: .5;
@@ -58,11 +59,11 @@
             &.is-subheader {
                 cursor: inherit;
                 // Remove unselectable
-                -webkit-touch-callout: auto;
-                -webkit-user-select: auto;
-                -moz-user-select: auto;
-                -ms-user-select: auto;
-                user-select: auto;
+                -webkit-touch-callout: inherit;
+                -webkit-user-select: inherit;
+                -moz-user-select: inherit;
+                -ms-user-select: inherit;
+                user-select: inherit;
             }
         }
     }
