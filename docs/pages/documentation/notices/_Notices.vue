@@ -5,5 +5,6 @@
         <router-link to="snackbar" class="nav-item is-tab">Snackbar</router-link>
         <router-link to="notification" class="nav-item is-tab">Notification</router-link>
         <router-link to="message" class="nav-item is-tab">Message</router-link>
+        <router-link to="modal" class="nav-item is-tab">Modal</router-link>
     </div>
 </template>

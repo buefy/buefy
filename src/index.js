@@ -6,6 +6,7 @@ import Field from './components/field'
 import Icon from './components/icon'
 import Input from './components/input'
 import Message from './components/message'
+import Modal from './components/modal'
 import Notification from './components/notification'
 import Pagination from './components/pagination'
 import Select from './components/select'
@@ -27,6 +28,7 @@ const components = {
     Icon,
     Input,
     Message,
+    Modal,
     Notification,
     Pagination,
     Radio,
