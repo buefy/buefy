@@ -18,6 +18,7 @@
             disabled: Boolean,
             name: String,
             checked: Boolean,
+            nosync: Boolean,
             customValue: [String, Number, Boolean]
         },
         data() {
@@ -38,14 +39,17 @@
              * Call updateValue from parent if it's a Checkbox Group.
              */
             newValue(value) {
+                if (this.nosync) {
+                    // Used internally by Table, will update only by prop
+                    this.newValue = this.value
+                    return
+                }
                 this.$emit('input', value)
                 this.$parent.isCheckboxGroup && this.$parent.updateValue()
             }
         },
         mounted() {
-            if (this.checked) {
-                this.newValue = this.checked
-            }
+            this.newValue = this.checked
         }
     }
 </script>
