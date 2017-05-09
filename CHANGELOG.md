@@ -2,9 +2,29 @@
 
 ## 0.3.0
 
+### Modal
+
+Show any content you want in a modal programatically, like an image:
+
+```javascript
+this.$modal.open(
+    `<p class="image is-4by3">
+        <img src="./static/placeholder-1280x960.png">
+    </p>`
+)
+```
+
+or a component:
+
+```javascript
+this.$modal.open({
+    component: 'CustomComponent'
+})
+```
+
 ### Table
 
-**Breakable** changes on Table, it now requires a scoped slot to wrap the columns, and a slot inside the column. You have now full control over the content of cells:
+**Breakable changes on it**, now requires a scoped slot to wrap the columns, and a slot inside the column. You have now full control over the content of cells:
 
 ```html
 <b-table :data="data">

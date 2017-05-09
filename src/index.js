@@ -13,6 +13,7 @@ import Switch from './components/switch'
 import Tooltip from './components/tooltip'
 
 import Dialog from './components/dialog'
+import Modal from './components/modal'
 import Snackbar from './components/snackbar'
 import Toast from './components/toast'
 
@@ -52,6 +53,7 @@ components.install = (Vue, options = {}) => {
     }
 
     Vue.prototype.$snackbar = Snackbar
+    Vue.prototype.$modal = Modal
     Vue.prototype.$toast = Toast
     Vue.prototype.$dialog = Dialog
 }

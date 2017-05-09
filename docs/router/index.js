@@ -15,6 +15,7 @@ const UIElements = (r) => require(['../pages/documentation/general/UIElements'],
 const Icon = (r) => require(['../pages/documentation/general/Icon'], r)
 const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
+const Modal = (r) => require(['../pages/documentation/general/Modal'], r)
 
 const Dialog = (r) => require(['../pages/documentation/notices/Dialog'], r)
 const Toast = (r) => require(['../pages/documentation/notices/Toast'], r)
@@ -89,6 +90,13 @@ export default new Router({
                 {
                     path: 'tooltip',
                     component: Tooltip,
+                    meta: {
+                        category: 'General'
+                    }
+                },
+                {
+                    path: 'modal',
+                    component: Modal,
                     meta: {
                         category: 'General'
                     }
