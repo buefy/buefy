@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "homepage": "https://buefy.github.io",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "bulma": "^0.4.1",
-    "vue": "^2.3.2"
+    "vue": "^2.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -73,7 +73,7 @@
     "vue-progressbar": "^0.7.1",
     "vue-router": "^2.2.0",
     "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.3.2",
+    "vue-template-compiler": "^2.3.3",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
