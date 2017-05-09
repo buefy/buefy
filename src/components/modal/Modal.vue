@@ -29,7 +29,7 @@
 <script>
     export default {
         props: {
-            component: String,
+            component: Object,
             content: String,
             width: [String, Number],
             canCancel: {

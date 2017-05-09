@@ -14,7 +14,7 @@
                             v-for="option in options"
                             :value="option.id"
                             :key="option.id">
-                            {{ option.first_name }}
+                            {{ option.user.first_name }}
                         </option>
                     </b-select>
                 </b-field>

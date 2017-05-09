@@ -14,8 +14,7 @@
 
         <h2 class="title is-spaced">Component Modal</h2>
         <div class="content">
-            <p>A modal with an injected component. The component must be defined globally to work.</p>
-            <p>When you want to close the Modal, emit a 'close' event <code>this.$emit('close')</code> from the component.</p>
+            <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
             <button class="button is-primary is-medium" @click="componentModal"> Launch component modal</button>
         </div>
         <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
@@ -49,18 +48,16 @@
 </template>
 
 <script>
-    import Vue from 'vue'
     import ModalForm from '../../../components/ModalForm'
-    Vue.component('ModalForm', ModalForm)
 
     export default {
         data() {
             return {
+                prompt: '',
                 props: [
                     {
                         name: '<code>component</code>',
-                        description: `Component to be injected, <b>must be defined globally</b>.
-                        Close Modal programatically by emitting a 'close' event: <code>this.$emit('close')</code> from the component`,
+                        description: `Component to be shown. Close Modal programatically by emitting a 'close' event — <code>this.$emit('close')</code> — from the component`,
                         type: 'String',
                         values: '—',
                         default: '—'
@@ -140,15 +137,13 @@
                     }
                 }`,
                 code2: `
-                import Vue from 'vue'
                 import ModalForm from './components/ModalForm'
-                Vue.component('ModalForm', ModalForm)
 
                 export default {
                     methods: {
                         componentModal() {
                             this.$modal.open({
-                                component: 'modal-form',
+                                component: ModalForm,
                                 width: 380
                             })
                         }
@@ -201,7 +196,7 @@
         methods: {
             componentModal() {
                 this.$modal.open({
-                    component: 'modal-form',
+                    component: ModalForm,
                     width: 380
                 })
             },

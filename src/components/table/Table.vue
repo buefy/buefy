@@ -314,7 +314,7 @@
             selectRow(row, index) {
                 this.$emit('click', row)
 
-                if (this.selected.row === row) return
+                if (this.selected === row) return
 
                 // Emit new row to update user variable
                 this.$emit('update:selected', row)

@@ -411,8 +411,14 @@
                                 return \`<span class="tag is-success">
                                     \${new Date(value).toLocaleDateString()}
                                 </span>\`
+                            },
+                            clearSelected() {
+                                this.selected = {}
+                            },
+                            clearCheckedRows() {
+                                this.checkedRows = []
                             }
-                        }
+                        },
                     }`
             }
         },

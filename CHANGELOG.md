@@ -17,8 +17,10 @@ this.$modal.open(
 or a component:
 
 ```javascript
+import CustomComponent from './components/CustomComponent'
+
 this.$modal.open({
-    component: 'CustomComponent'
+    component: CustomComponent
 })
 ```
 
@@ -51,7 +53,7 @@ this.$modal.open({
     </template>
 </b-table>
 ```
-* Prop ``selectable`` renamed to ``selected`` and expects an Object, use the ``.sync`` modifier to make it two-way binding:
+* Prop ``selectable`` renamed to ``selected`` and expects an Object, if you have Vuejs v2.3+ you can use the ``.sync`` modifier to make it two-way binding:
 
 ```html
 <b-table :data="data" :selected.sync="selectedRow">
@@ -63,7 +65,7 @@ is the same as:
 <b-table :data="data" :selected="selectedRow" @select="row => selectedRow = row">
 ```
 
-* Table new prop ``checked-rows`` that expects an Array, use the ``.sync`` modifier to make it two-way binding
+* Table new prop ``checked-rows`` that expects an Array, if you have Vuejs v2.3+ you can use the ``.sync`` modifier to make it two-way binding
 * Table ``render-html`` prop removed thanks to the new syntax
 * Column ``component`` prop removed thanks to the new syntax
 * Column ``field`` prop now accepts nested object keys
