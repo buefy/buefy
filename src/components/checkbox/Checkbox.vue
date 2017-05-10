@@ -23,7 +23,7 @@
         },
         data() {
             return {
-                newValue: this.value
+                newValue: this.value || this.checked
             }
         },
         watch: {
@@ -47,9 +47,6 @@
                 this.$emit('input', value)
                 this.$parent.isCheckboxGroup && this.$parent.updateValue()
             }
-        },
-        mounted() {
-            this.newValue = this.checked
         }
     }
 </script>

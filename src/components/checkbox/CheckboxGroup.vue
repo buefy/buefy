@@ -27,7 +27,7 @@
         methods: {
             /**
              * Update the checkedList property with all the Checkboxes that are active.
-             * This is called from Checkbox child.
+             * This is called from a child Checkbox.
              * Emit input event to update the user v-model.
              */
             updateValue() {

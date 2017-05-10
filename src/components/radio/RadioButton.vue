@@ -4,7 +4,7 @@
             type="button"
             class="radio button"
             :disabled="disabled"
-            :class="[isChecked ? type : '', size]"
+            :class="[isChecked ? type : null, size]"
             @click="changed">
             <slot></slot>
             <input
@@ -12,7 +12,7 @@
                 :disabled="disabled"
                 :checked="isChecked"
                 :name="name"
-                :value="this.value">
+                :value="value">
         </button>
     </p>
 </template>
@@ -31,13 +31,16 @@
         },
         data() {
             return {
-                // Used internally by Radio Group
-                size: '',
+                size: null,
                 isChecked: false,
-                isRadioButton: true
+                isRadioButtonComponent: true // Used internally by Radio Group
             }
         },
         methods: {
+            /**
+             * Input change listener.
+             * Call updateValue from parent.
+             */
             changed(event) {
                 this.$parent.updateValue(this.value, event)
             }

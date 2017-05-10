@@ -5,7 +5,7 @@
             :disabled="disabled"
             :checked="isChecked"
             :name="name"
-            :value="this.value"
+            :value="value"
             @change="changed">
         <span><slot></slot></span>
     </label>
@@ -25,6 +25,10 @@
             }
         },
         methods: {
+            /**
+             * Input change listener.
+             * Call updateValue from parent.
+             */
             changed(event) {
                 this.$parent.updateValue(this.value, event)
             }
