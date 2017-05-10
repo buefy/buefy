@@ -287,9 +287,11 @@
                     }
                 })
 
-                this.$emit('update:checkedRows', this.newCheckedRows)
                 this.$emit('check', this.newCheckedRows)
                 this.$emit('check-all', this.newCheckedRows)
+
+                // Emit checked rows to update user variable
+                this.$emit('update:checkedRows', this.newCheckedRows)
             },
 
             /**
@@ -303,8 +305,10 @@
                     this.removeCheckedRow(row)
                 }
 
-                this.$emit('update:checkedRows', this.newCheckedRows)
                 this.$emit('check', this.newCheckedRows, row)
+
+                // Emit checked rows to update user variable
+                this.$emit('update:checkedRows', this.newCheckedRows)
             },
 
             /**
@@ -316,11 +320,11 @@
 
                 if (this.selected === row) return
 
-                // Emit new row to update user variable
-                this.$emit('update:selected', row)
-
                 // Emit new and old row
                 this.$emit('select', row, this.selected)
+
+                // Emit new row to update user variable
+                this.$emit('update:selected', row)
             },
 
             /**
