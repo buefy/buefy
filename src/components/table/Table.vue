@@ -320,7 +320,7 @@
                 this.$emit('update:selected', row)
 
                 // Emit new and old row
-                this.$emit('select', row, this.selected.row)
+                this.$emit('select', row, this.selected)
             },
 
             /**
