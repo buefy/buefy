@@ -2,9 +2,7 @@
 
 ## 0.3.1
 
-### Field Group
-
-* Add option to group Fields
+* Field ``grouped`` now also works on nested Fields
 * Add Modal props
 * Fix all animations
 * Fix row click error
