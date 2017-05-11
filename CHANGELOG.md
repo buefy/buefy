@@ -2,9 +2,30 @@
 
 ## 0.3.1
 
+### Field Group
+
+It's now possible to group Fields:
+
+```html
+<b-field grouped>
+    <b-field label="First name">
+        <b-input></b-input>
+    </b-field>
+    <b-field label="Last name">
+        <b-input></b-input>
+    </b-field>
+    <b-field label="Email" expanded>
+        <b-input></b-input>
+    </b-field>
+</b-field>
+```
+
+### Other
+
 * Add Modal props
+* Change Modal and Dialog animations
 * Fix row click error
-* Fix sync modifier
+* Fix ``.sync`` modifier
 * #56 Fix selection controls initial state always false
 * #58 Fix Table ``checked-rows`` prop not updating on Chrome
 

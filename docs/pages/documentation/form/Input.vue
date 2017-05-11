@@ -282,9 +282,9 @@
         <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <hr>
-        <h2 class="title is-spaced">Group</h2>
+        <h2 class="title is-spaced">Control Groups</h2>
         <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
-        <p class="content">Note that you have to specify which one will be <code>expanded</code>.</p>
+        <p class="content">You can also specify which ones will be <code>expanded</code> to fill the remaining space.</p>
         <div class="example">
             <b-field grouped>
                 <b-input placeholder="Search..." expanded></b-input>
@@ -297,6 +297,25 @@
             </b-field>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
+
+        <hr>
+        <h2 class="title is-spaced"><span class="tag is-success">New</span> Field Groups</h2>
+        <h3 class="subtitle">You can also group Fields</h3>
+        <p class="content">You can also specify which ones will be <code>expanded</code> to fill the remaining space.</p>
+        <div class="example">
+            <b-field grouped>
+                <b-field label="First name">
+                    <b-input></b-input>
+                </b-field>
+                <b-field label="Last name">
+                    <b-input></b-input>
+                </b-field>
+                <b-field label="Email" expanded>
+                    <b-input></b-input>
+                </b-field>
+            </b-field>
+        </div>
+        <pre class="content" v-highlight><code class="html">{{ template8 | pre }}</code></pre>
 
         <hr>
         <h2 class="title">Sizes</h2>
@@ -330,7 +349,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template8 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template9 | pre }}</code></pre>
             </div>
         </div>
 
@@ -841,6 +860,18 @@
                         </p>
                     </b-field>`,
                 template8: `
+                    <b-field grouped>
+                        <b-field label="First name">
+                            <b-input></b-input>
+                        </b-field>
+                        <b-field label="Last name">
+                            <b-input></b-input>
+                        </b-field>
+                        <b-field label="Email" expanded>
+                            <b-input></b-input>
+                        </b-field>
+                    </b-field>`,
+                template9: `
                     <b-field>
                         <b-input placeholder="Small"
                             size="is-small"

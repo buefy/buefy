@@ -1,5 +1,5 @@
 <template>
-    <div class="field" :class="[fieldType, addonsPosition]">
+    <div class="field" :class="[fieldType, addonsPosition, { 'is-expanded': expanded }]">
         <label class="label" v-if="label">{{ label }}</label>
         <slot></slot>
         <p class="help" :class="newType" v-if="newMessage">{{ newMessage }}</p>
@@ -14,7 +14,8 @@
             label: String,
             message: String,
             grouped: Boolean,
-            position: String
+            position: String,
+            expanded: Boolean
         },
         data() {
             return {

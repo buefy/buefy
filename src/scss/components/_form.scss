@@ -2,6 +2,21 @@
     font-weight: $weight-semibold
 }
 
+.field {
+    &.is-grouped {
+        .field {
+            flex-shrink: 0;
+            & + .field {
+                margin-left: 0.75rem;
+            }
+            &.is-expanded {
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
+        }
+    }
+}
+
 .control {
     .help.counter {
         float: right;
