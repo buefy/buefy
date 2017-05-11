@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th class="checkbox-cell" v-if="checkable">
-                        <b-checkbox :value="isAllChecked" @change="checkAll($event)" nosync></b-checkbox>
+                        <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                     </th>
                     <th v-for="column in columns" @click.stop="sort(column)"
                         :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
@@ -50,7 +50,7 @@
                     :class="{ 'is-selected': row === selected }">
 
                     <td class="checkbox-cell" v-if="checkable">
-                        <b-checkbox :value="isRowChecked(row)" @change="checkRow(row, $event)" nosync></b-checkbox>
+                        <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
                     </td>
 
                     <slot :row="row"></slot>
@@ -259,7 +259,7 @@
             },
 
             /**
-             * Check if the row must be checked (is added to the array).
+             * Check if the row is checked (is added to the array).
              */
             isRowChecked(row) {
                 return this.checkedRows.indexOf(row) >= 0
@@ -279,10 +279,11 @@
              * Header checkbox click listener.
              * Add or remove all rows in current page.
              */
-            checkAll(isChecked) {
+            checkAll() {
+                const isAllChecked = this.isAllChecked
                 this.visibleData.forEach(currentRow => {
                     this.removeCheckedRow(currentRow)
-                    if (isChecked) {
+                    if (!isAllChecked) {
                         this.newCheckedRows.push(currentRow)
                     }
                 })
@@ -298,8 +299,8 @@
              * Row checkbox click listener.
              * Add or remove a single row.
              */
-            checkRow(row, isChecked) {
-                if (isChecked) {
+            checkRow(row) {
+                if (!this.isRowChecked(row)) {
                     this.newCheckedRows.push(row)
                 } else {
                     this.removeCheckedRow(row)
