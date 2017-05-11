@@ -12,7 +12,7 @@
         position: fixed;
         background-color: rgba($black, 0.86);
         z-index: 10;
-        animation-duration: $speed-slow;
+        transition: opacity $speed-slow $easing;
     }
     .box {
         position: absolute;
@@ -21,7 +21,7 @@
         z-index: 10;
         white-space: nowrap;
         overflow: auto;
-        animation-duration: $speed;
+        transition: opacity $speed-slow $easing;
         &.is-opened-top {
             top: auto;
             bottom: 2.5em;
@@ -75,7 +75,7 @@
             max-height: calc(100vh - 120px);
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate3d(-50%, -50%, 0);
             white-space: normal;
             &.is-narrow {
                 .option {

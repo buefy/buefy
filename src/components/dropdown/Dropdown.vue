@@ -8,11 +8,7 @@
             <slot name="trigger"></slot>
         </a>
 
-        <transition-group
-            appear
-            appear-active-class="fadeIn"
-            enter-active-class="fadeIn"
-            leave-active-class="fadeOut">
+        <transition-group name="fade">
 
             <div
                 key="bg"

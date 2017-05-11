@@ -1,8 +1,8 @@
 <template>
-    <transition name="dialog">
+    <transition name="zoom-out">
         <div class="dialog modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
-            <div class="modal-card">
+            <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
                 </header>

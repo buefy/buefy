@@ -1,8 +1,5 @@
 <template>
     <transition
-        mode="out-in"
-        appear
-        :appear-active-class="transition.enter"
         :enter-active-class="transition.enter"
         :leave-active-class="transition.leave">
 

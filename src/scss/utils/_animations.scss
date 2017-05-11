@@ -1,8 +1,4 @@
 // Some of the animations are from animate.css (https://daneden.github.io/animate.css)
-// Global animation duration
-.animated {
-    animation-duration: $speed-slow;
-}
 
 // Fade out
 @keyframes fadeOut {
@@ -13,7 +9,6 @@
         opacity: 0;
     }
 }
-
 .fadeOut {
     animation-name: fadeOut;
 }
@@ -27,37 +22,8 @@
         transform: translate3d(0, 100%, 0);
     }
 }
-
 .fadeOutDown {
     animation-name: fadeOutDown;
-}
-
-@keyframes fadeOutLeft {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        transform: translate3d(-100%, 0, 0);
-    }
-}
-
-.fadeOutLeft {
-    animation-name: fadeOutLeft;
-}
-
-@keyframes fadeOutRight {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        transform: translate3d(100%, 0, 0);
-    }
-}
-
-.fadeOutRight {
-    animation-name: fadeOutRight;
 }
 
 @keyframes fadeOutUp {
@@ -69,7 +35,6 @@
         transform: translate3d(0, -100%, 0);
     }
 }
-
 .fadeOutUp {
     animation-name: fadeOutUp;
 }
@@ -83,7 +48,6 @@
         opacity: 1;
     }
 }
-
 .fadeIn {
     animation-name: fadeIn;
 }
@@ -98,39 +62,8 @@
         transform: none;
     }
 }
-
 .fadeInDown {
     animation-name: fadeInDown;
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translate3d(-100%, 0, 0);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-.fadeInLeft {
-    animation-name: fadeInLeft;
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translate3d(100%, 0, 0);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-.fadeInRight {
-    animation-name: fadeInRight;
 }
 
 @keyframes fadeInUp {
@@ -143,40 +76,40 @@
         transform: none;
     }
 }
-
 .fadeInUp {
     animation-name: fadeInUp;
 }
 
-// Zoom In
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale3d(.3, .3, .3);
-    }
-    90% {
-        opacity: 1;
-    }
+/**
+ * Vue Transitions
+ */
+
+// Fade
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
 }
 
-.zoomIn {
-    animation-name: zoomIn;
+// Zoom In
+.zoom-in-enter,
+.zoom-in-leave-active {
+    opacity: 0;
+}
+.zoom-in-enter .animation-content {
+    transform: scale(0.95);
+}
+.zoom-in-leave-active .animation-content {
+    transform: scale(0.95);
 }
 
 // Zoom Out
-@keyframes zoomOut {
-    from {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        transform: scale3d(.3, .3, .3);
-        opacity: 0;
-    }
+.zoom-out-enter,
+.zoom-out-leave-active {
+    opacity: 0;
 }
-
-.zoomOut {
-    animation-name: zoomOut;
+.zoom-out-enter .animation-content {
+    transform: scale(1.05);
+}
+.zoom-out-leave-active .animation-content {
+    transform: scale(1.05);
 }

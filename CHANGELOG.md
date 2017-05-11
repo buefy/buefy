@@ -4,26 +4,9 @@
 
 ### Field Group
 
-It's now possible to group Fields:
-
-```html
-<b-field grouped>
-    <b-field label="First name">
-        <b-input></b-input>
-    </b-field>
-    <b-field label="Last name">
-        <b-input></b-input>
-    </b-field>
-    <b-field label="Email" expanded>
-        <b-input></b-input>
-    </b-field>
-</b-field>
-```
-
-### Other
-
+* Add option to group Fields
 * Add Modal props
-* Change Modal and Dialog animations
+* Fix all animations
 * Fix row click error
 * Fix ``.sync`` modifier
 * #56 Fix selection controls initial state always false

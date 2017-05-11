@@ -1,8 +1,8 @@
 <template>
-    <transition name="modal">
+    <transition name="zoom-out">
         <div class="modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
-            <div class="modal-content" :style="{ maxWidth: newWidth }">
+            <div class="modal-content animation-content" :style="{ maxWidth: newWidth }">
                 <component
                     v-if="component"
                     v-bind="props"
