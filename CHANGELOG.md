@@ -1,5 +1,13 @@
 # Buefy Changelog
 
+## 0.3.1
+
+* Add Modal props
+* Fix row click error
+* Fix sync modifier
+* #56 Fix selection controls initial state always false
+* #58 Fix Table ``checked-rows`` prop not updating on Chrome
+
 ## 0.3.0
 
 ### Modal
