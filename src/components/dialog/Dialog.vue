@@ -1,62 +1,48 @@
 <template>
-    <transition
-        appear
-        appear-active-class="fadeIn"
-        enter-active-class="fadeIn"
-        leave-active-class="fadeOut">
-
+    <transition name="dialog">
         <div class="dialog modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
+            <div class="modal-card">
+                <header class="modal-card-head" v-if="title">
+                    <p class="modal-card-title">{{ title }}</p>
+                </header>
+                <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
+                    <b-icon
+                        :icon="icon"
+                        :class="type"
+                        both
+                        size="is-large custom-icon"
+                        v-if="icon && hasIcon">
+                    </b-icon>
+                    <p v-html="message"></p>
 
-            <transition
-                appear
-                appear-active-class="zoomIn"
-                enter-active-class="zoomIn">
-
-                <div class="modal-card" v-if="isActive">
-                    <header class="modal-card-head" v-if="title">
-                        <p class="modal-card-title">{{ title }}</p>
-                    </header>
-                    <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
-                        <b-icon
-                            :icon="icon"
-                            :class="type"
-                            both
-                            size="is-large custom-icon"
-                            v-if="icon && hasIcon">
-                        </b-icon>
-                        <p v-html="message"></p>
-
-                        <b-field v-if="hasInput">
-                            <b-input
-                                v-model="prompt"
-                                ref="input"
-                                :placeholder="inputPlaceholder"
-                                required
-                                :maxlength="inputMaxlength"
-                                :name="inputName"
-                                @keyup.enter.native="confirm">
-                            </b-input>
-                        </b-field>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button v-if="canCancel" class="button" ref="cancelButton" @click="cancel">
-                            {{ cancelText }}
-                        </button>
-                        <button class="button" :class="type" ref="confirmButton"  @click="confirm">
-                            {{ confirmText }}
-                        </button>
-                    </footer>
-                </div>
-
-            </transition>
-
+                    <b-field v-if="hasInput">
+                        <b-input
+                            v-model="prompt"
+                            ref="input"
+                            :placeholder="inputPlaceholder"
+                            required
+                            :maxlength="inputMaxlength"
+                            :name="inputName"
+                            @keyup.enter.native="confirm">
+                        </b-input>
+                    </b-field>
+                </section>
+                <footer class="modal-card-foot">
+                    <button v-if="canCancel" class="button" ref="cancelButton" @click="cancel">
+                        {{ cancelText }}
+                    </button>
+                    <button class="button" :class="type" ref="confirmButton"  @click="confirm">
+                        {{ confirmText }}
+                    </button>
+                </footer>
+            </div>
         </div>
-
-        </transition>
+    </transition>
 </template>
 
 <script>
+    import Vue from 'vue'
     import Icon from '../icon'
     import Input from '../input'
 
@@ -100,7 +86,7 @@
         },
         data() {
             return {
-                isActive: true,
+                isActive: false,
                 prompt: ''
             }
         },
@@ -179,14 +165,18 @@
             document.body.appendChild(this.$el)
         },
         mounted() {
-            // Handle which element receives focus
-            if (this.hasInput) {
-                this.$refs.input.$refs.input.focus()
-            } else if (this.canCancel) {
-                this.$refs.cancelButton.focus()
-            } else {
-                this.$refs.confirmButton.focus()
-            }
+            this.isActive = true
+
+            Vue.nextTick(() => {
+                // Handle which element receives focus
+                if (this.hasInput) {
+                    this.$refs.input.$refs.input.focus()
+                } else if (this.canCancel) {
+                    this.$refs.cancelButton.focus()
+                } else {
+                    this.$refs.confirmButton.focus()
+                }
+            })
         },
         beforeDestroy() {
             if (typeof window !== 'undefined') {

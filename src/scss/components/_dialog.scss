@@ -1,5 +1,5 @@
 .dialog {
-    animation-duration: $speed-slow;
+    transition: all $speed-slow $easing;
     .modal-card-body {
         .custom-icon {
             margin-left: -8px;
@@ -17,8 +17,7 @@
         min-width: 320px;
         max-width: 460px;
         width: auto;
-        animation-duration: $speed-slow;
-        will-change: transform;
+        transition: all $speed-slow $easing;
     }
     .modal-card-title {
         font-size: $size-5;
@@ -32,4 +31,15 @@
             font-weight: $weight-semibold;
         }
     }
+}
+
+.dialog-enter,
+.dialog-leave-active {
+    opacity: 0;
+}
+.dialog-enter .modal-card{
+    transform: scale(0.9);
+}
+.dialog-leave-active .modal-card {
+    transform: scale(1.05);
 }

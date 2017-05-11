@@ -1,34 +1,19 @@
 <template>
-    <transition
-        appear
-        appear-active-class="fadeIn"
-        enter-active-class="fadeIn"
-        leave-active-class="fadeOut">
-
+    <transition name="modal">
         <div class="modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
-
-            <transition
-                appear
-                appear-active-class="zoomIn"
-                enter-active-class="zoomIn">
-
-                <div class="modal-content" v-if="isActive" :style="{ maxWidth: newWidth }">
-                    <component
-                        v-if="component"
-                        v-bind="props"
-                        :is="component"
-                        @close="close">
-                    </component>
-                    <div v-else v-html="content"></div>
-                </div>
-
-            </transition>
-
+            <div class="modal-content" :style="{ maxWidth: newWidth }">
+                <component
+                    v-if="component"
+                    v-bind="props"
+                    :is="component"
+                    @close="close">
+                </component>
+                <div v-else v-html="content"></div>
+            </div>
             <button v-if="canCancel" class="modal-close" @click="cancel"></button>
         </div>
-
-        </transition>
+    </transition>
 </template>
 
 <script>
@@ -49,7 +34,7 @@
         },
         data() {
             return {
-                isActive: true,
+                isActive: false,
                 newWidth: typeof this.width === 'number'
                     ? this.width + 'px'
                     : this.width
@@ -95,6 +80,9 @@
         beforeMount() {
             // Insert the Modal component in body tag
             document.body.appendChild(this.$el)
+        },
+        mounted() {
+            this.isActive = true
         },
         beforeDestroy() {
             if (typeof window !== 'undefined') {
