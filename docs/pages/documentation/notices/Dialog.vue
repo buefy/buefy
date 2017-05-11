@@ -4,56 +4,44 @@
         <h2 class="subtitle">Dialogs inform users about a specific task and may contain critical information or require decisions</h2>
         <hr>
 
-        <div class="columns">
-            <div class="column">
-                <h3 class="subtitle">Alert</h3>
-                <button class="button is-primary" @click="alert">
-                    Alert (default)
-                </button>
-
-                <button class="button is-primary" @click="alertCustom">
-                    Alert (custom)
-                </button>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
-            </div>
+        <h3 class="title">Alert</h3>
+        <div class="block">
+            <button class="button is-medium is-primary" @click="alert">
+                Alert (default)
+            </button>
+            <button class="button is-medium is-primary" @click="alertCustom">
+                Alert (custom)
+            </button>
         </div>
+        <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
 
-        <div class="columns">
-            <div class="column">
-                <h3 class="subtitle">Confirm</h3>
-                <button class="button is-info" @click="confirm">
-                    Confirm (default)
-                </button>
+        <hr>
 
-                <button class="button is-info" @click="confirmCustom">
-                    Confirm (custom)
-                </button>
+        <h3 class="title">Confirm</h3>
+        <div class="block">
+            <button class="button is-medium is-info" @click="confirm">
+                Confirm (default)
+            </button>
 
-                <button class="button is-danger" @click="confirmCustomDelete">
-                    Confirm (custom)
-                </button>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
-            </div>
+            <button class="button is-medium is-info" @click="confirmCustom">
+                Confirm (custom)
+            </button>
+
+            <button class="button is-medium is-danger" @click="confirmCustomDelete">
+                Confirm (custom)
+            </button>
         </div>
+        <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
-        <div class="columns">
-            <div class="column">
-                <h3 class="subtitle">Prompt</h3>
-                <button class="button is-dark" @click="prompt">
-                    Prompt
-                </button>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
-            </div>
+        <hr>
+
+        <h3 class="title">Prompt</h3>
+        <div class="block">
+            <button class="button is-medium is-dark" @click="prompt">
+                Prompt
+            </button>
         </div>
+        <pre v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <hr>
 
@@ -174,108 +162,83 @@
                         default: '—'
                     }
                 ],
-                template1:
-                    `
-                    <button class="button is-primary" @click="alert">
-                        Alert (default)
-                    </button>
-
-                    <button class="button is-primary" @click="alertCustom">
-                        Alert (custom)
-                    </button>`,
-                template2: `
-                    <button class="button is-info" @click="confirm">
-                        Confirm (default)
-                    </button>
-
-                    <button class="button is-info" @click="confirmCustom">
-                        Confirm (custom)
-                    </button>
-
-                    <button class="button is-danger" @click="confirmCustomDelete">
-                        Confirm (custom)
-                    </button>`,
-                template3: `
-                    <button class="button is-dark" @click="prompt">
-                        Prompt
-                    </button>`,
                 code1: `
-                    export default {
-                        methods: {
-                            alert() {
-                                this.$dialog.alert({
-                                    message: 'Everything looks fine!'
-                                })
-                            },
-                            alertCustom() {
-                                this.$dialog.alert({
-                                    title: 'Title Alert',
-                                    message: 'I have a title, a custom button and <b>HTML</b>!',
-                                    confirmText: 'Cool!'
-                                })
-                            }
+                export default {
+                    methods: {
+                        alert() {
+                            this.$dialog.alert({
+                                message: 'Everything looks fine!'
+                            })
+                        },
+                        alertCustom() {
+                            this.$dialog.alert({
+                                title: 'Title Alert',
+                                message: 'I have a title, a custom button and <b>HTML</b>!',
+                                confirmText: 'Cool!'
+                            })
                         }
-                    }`,
+                    }
+                }`,
                 code2: `
-                    export default {
-                        methods: {
-                            confirm() {
-                                this.$dialog.confirm({
-                                    message: 'Continue on this task?',
-                                    onConfirm: () => {
-                                        this.$toast.open({
-                                            message: 'User confirmed'
-                                        })
-                                    }
-                                })
-                            },
-                            confirmCustom() {
-                                this.$dialog.confirm({
-                                    title: 'Privacy Politics',
-                                    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. [...]',
-                                    cancelText: 'Disagree',
-                                    confirmText: 'Agree',
-                                    type: 'is-success',
-                                    onConfirm: () => {
-                                        this.$toast.open({
-                                            message: 'User agreed'
-                                        })
-                                    }
-                                })
-                            },
-                            confirmCustomDelete() {
-                                this.$dialog.confirm({
-                                    title: 'Deleting account',
-                                    message: 'Are you sure you want to <strong>delete</strong> your account? This action cannot be undone.',
-                                    confirmText: 'Delete Account',
-                                    type: 'is-danger',
-                                    hasIcon: true,
-                                    onConfirm: () => {
-                                        this.$toast.open({
-                                            message: 'Account deleted!'
-                                        })
-                                    }
-                                })
-                            }
+                export default {
+                    methods: {
+                        confirm() {
+                            this.$dialog.confirm({
+                                message: 'Continue on this task?',
+                                onConfirm: () => {
+                                    this.$toast.open({
+                                        message: 'User confirmed'
+                                    })
+                                }
+                            })
+                        },
+                        confirmCustom() {
+                            this.$dialog.confirm({
+                                title: 'Privacy Politics',
+                                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. [...]',
+                                cancelText: 'Disagree',
+                                confirmText: 'Agree',
+                                type: 'is-success',
+                                onConfirm: () => {
+                                    this.$toast.open({
+                                        message: 'User agreed'
+                                    })
+                                }
+                            })
+                        },
+                        confirmCustomDelete() {
+                            this.$dialog.confirm({
+                                title: 'Deleting account',
+                                message: 'Are you sure you want to <strong>delete</strong> your account? This action cannot be undone.',
+                                confirmText: 'Delete Account',
+                                type: 'is-danger',
+                                hasIcon: true,
+                                onConfirm: () => {
+                                    this.$toast.open({
+                                        message: 'Account deleted!'
+                                    })
+                                }
+                            })
                         }
-                    }`,
+                    }
+                }`,
                 code3: `
-                    export default {
-                        methods: {
-                            prompt() {
-                                this.$dialog.prompt({
-                                    message: \`What's your name?\`,
-                                    maxlength: 20,
-                                    placeholder: 'e.g. John Doe',
-                                    onConfirm: (value) => {
-                                        this.$toast.open({
-                                            message: 'Your name is: ' + value
-                                        })
-                                    }
-                                })
-                            }
+                export default {
+                    methods: {
+                        prompt() {
+                            this.$dialog.prompt({
+                                message: \`What's your name?\`,
+                                maxlength: 20,
+                                placeholder: 'e.g. John Doe',
+                                onConfirm: (value) => {
+                                    this.$toast.open({
+                                        message: 'Your name is: ' + value
+                                    })
+                                }
+                            })
                         }
-                    }`
+                    }
+                }`
             }
         },
         methods: {

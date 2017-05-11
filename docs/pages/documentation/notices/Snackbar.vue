@@ -4,27 +4,22 @@
         <h2 class="subtitle">When a Dialog seems a bit overkill for the task, Snackbars are good candidates</h2>
         <hr>
 
-        <div class="columns">
-            <div class="column">
-                <p>They can only have one button, and are queued to not confuse the user.</p>
-                <p class="content"><small><b>Note:</b> They queue with <router-link to="/documentation/toast">Toasts</router-link> as well.</small></p>
-                <button class="button content" @click="snackbar">
-                    Snackbar (default)
-                </button>
+        <div class="block">
+            <p>They can only have one button, and are queued to not confuse the user.</p>
+            <p class="content"><small><b>Note:</b> They queue with <router-link to="/documentation/toast">Toasts</router-link> as well.</small></p>
+            <button class="button is-medium" @click="snackbar">
+                Snackbar (default)
+            </button>
 
-                <button class="button content is-warning" @click="warning">
-                    Snackbar (custom)
-                </button>
+            <button class="button is-medium is-warning" @click="warning">
+                Snackbar (custom)
+            </button>
 
-                <button class="button content is-danger" @click="danger">
-                    Snackbar (custom)
-                </button>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
-            </div>
+            <button class="button is-medium is-danger" @click="danger">
+                Snackbar (custom)
+            </button>
         </div>
+        <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <hr>
 
@@ -110,48 +105,36 @@
                         default: '—'
                     }
                 ],
-                template: `
-                    <button class="button content" @click="snackbar">
-                        Snackbar (default)
-                    </button>
-
-                    <button class="button content is-warning" @click="warning">
-                        Snackbar (custom)
-                    </button>
-
-                    <button class="button content is-danger" @click="danger">
-                        Snackbar (custom)
-                    </button>`,
                 code: `
-                    export default {
-                        methods: {
-                            snackbar() {
-                                this.$snackbar.open(\`Default, positioned bottom-right with a green 'OK' button\`)
-                            },
-                            warning() {
-                                this.$snackbar.open({
-                                    message: 'Yellow button and positioned top-left',
-                                    type: 'is-warning',
-                                    actionText: 'Retry',
-                                    position: 'top-left',
-                                    onAction: () => {
-                                        this.$toast.open('Action pressed')
-                                    }
-                                })
-                            },
-                            danger() {
-                                this.$snackbar.open({
-                                    message: 'Snackbar with red action, positioned on bottom-left and a callback',
-                                    type: 'is-danger',
-                                    actionText: 'Undo',
-                                    position: 'bottom-left',
-                                    onAction: () => {
-                                        this.$toast.open('Action pressed')
-                                    }
-                                })
-                            }
+                export default {
+                    methods: {
+                        snackbar() {
+                            this.$snackbar.open(\`Default, positioned bottom-right with a green 'OK' button\`)
+                        },
+                        warning() {
+                            this.$snackbar.open({
+                                message: 'Yellow button and positioned top-left',
+                                type: 'is-warning',
+                                actionText: 'Retry',
+                                position: 'top-left',
+                                onAction: () => {
+                                    this.$toast.open('Action pressed')
+                                }
+                            })
+                        },
+                        danger() {
+                            this.$snackbar.open({
+                                message: 'Snackbar with red action, positioned on bottom-left and a callback',
+                                type: 'is-danger',
+                                actionText: 'Undo',
+                                position: 'bottom-left',
+                                onAction: () => {
+                                    this.$toast.open('Action pressed')
+                                }
+                            })
                         }
-                    }`
+                    }
+                }`
             }
         },
         methods: {

@@ -6,9 +6,15 @@ import config from './config'
 
 export default {
     props: {
-        type: String,
+        type: {
+            type: String,
+            default: 'is-dark'
+        },
         message: String,
-        duration: Number,
+        duration: {
+            type: Number,
+            default: 2000
+        },
         position: String,
         container: String
     },

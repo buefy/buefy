@@ -4,27 +4,22 @@
         <h2 class="subtitle">Toasts are simple text messages to inform the user</h2>
         <hr>
 
-        <div class="columns">
-            <div class="column">
-                <p>They have a slightly transparency and are queued to not confuse the user.</p>
-                <p class="content"><small><b>Note:</b> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>
-                <button class="button content" @click="toast">
-                    Toast (default)
-                </button>
+        <div class="block">
+            <p>They have a slightly transparency and are queued to not confuse the user.</p>
+            <p class="content"><small><b>Note:</b> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>
+            <button class="button is-medium" @click="toast">
+                Toast (default)
+            </button>
 
-                <button class="button content is-success" @click="success">
-                    Toast (custom)
-                </button>
+            <button class="button is-medium is-success" @click="success">
+                Toast (custom)
+            </button>
 
-                <button class="button content is-danger" @click="danger">
-                    Toast (custom)
-                </button>
-            </div>
-            <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
-            </div>
+            <button class="button is-medium is-danger" @click="danger">
+                Toast (custom)
+            </button>
         </div>
+        <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <hr>
 
@@ -96,39 +91,27 @@
                         default: '—'
                     }
                 ],
-                template: `
-                    <button class="button content" @click="toast">
-                        Toast (default)
-                    </button>
-
-                    <button class="button content is-success" @click="success">
-                        Toast (custom)
-                    </button>
-
-                    <button class="button content is-danger" @click="danger">
-                        Toast (custom)
-                    </button>`,
                 code: `
-                    export default {
-                        methods: {
-                            toast() {
-                                this.$toast.open('Something happened')
-                            },
-                            success() {
-                                this.$toast.open({
-                                    message: 'Something happened correctly!',
-                                    type: 'is-success'
-                                })
-                            },
-                            danger() {
-                                this.$toast.open({
-                                    message: \`Something's not good, also I'm on bottom\`,
-                                    position: 'bottom',
-                                    type: 'is-danger'
-                                })
-                            }
+                export default {
+                    methods: {
+                        toast() {
+                            this.$toast.open('Something happened')
+                        },
+                        success() {
+                            this.$toast.open({
+                                message: 'Something happened correctly!',
+                                type: 'is-success'
+                            })
+                        },
+                        danger() {
+                            this.$toast.open({
+                                message: \`Something's not good, also I'm on bottom\`,
+                                position: 'bottom',
+                                type: 'is-danger'
+                            })
                         }
-                    }`
+                    }
+                }`
             }
         },
         methods: {
