@@ -238,6 +238,8 @@
              */
             html5Validation() {
                 const element = this.newType === 'textarea' ? 'textarea' : 'input'
+                if (this.$refs[element] === undefined) return
+
                 let type = null
                 let message = null
                 let isValid = true

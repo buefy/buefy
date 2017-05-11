@@ -106,6 +106,8 @@
              * and error message to parent if it's a Field.
              */
             html5Validation() {
+                if (this.$refs.select === undefined) return
+
                 let type = null
                 let message = null
                 let isValid = true
