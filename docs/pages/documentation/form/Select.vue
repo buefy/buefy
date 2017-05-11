@@ -319,29 +319,6 @@
             </template>
         </b-table>
 
-        <hr>
-
-        <h2 class="subtitle">Option properties</h2>
-        <b-table :data="selectProps" default-sort="name">
-            <template scope="props">
-                <b-table-column field="name" label="Name"
-                    v-html="props.row.name">
-                </b-table-column>
-                <b-table-column field="description" label="Description" width="620"
-                    v-html="props.row.description">
-                </b-table-column>
-                <b-table-column field="type" label="Type"
-                    v-html="props.row.type">
-                </b-table-column>
-                <b-table-column field="values" label="Values"
-                    v-html="props.row.values">
-                </b-table-column>
-                <b-table-column field="default" label="Default"
-                    v-html="props.row.default">
-                </b-table-column>
-            </template>
-        </b-table>
-
     </div>
 </template>
 
@@ -428,29 +405,6 @@
                         parameters: '<code>event: $event</code>'
                     }
                 ],
-                optionProps: [
-                    {
-                        name: '<code>value</code>',
-                        description: 'Same as native option <code>value</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>group</code>',
-                        description: 'Group a chunk of options with same group name together',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Option is disabled',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    }
-                ],
                 template1: `
                     <b-field label="Simple">
                         <b-select placeholder="Select a name">
@@ -465,60 +419,27 @@
 
                     <b-field label="Grouped">
                         <b-select placeholder="Select a character">
-                            <option group="Black Sails"
-                                value="flint">
-                                Flint
-                            </option>
-                            <option group="Black Sails"
-                                value="silver">
-                                Silver
-                            </option>
-                            <option group="Black Sails"
-                                value="vane">
-                                Vane
-                            </option>
-                            <option group="Black Sails"
-                                value="billy">
-                                Billy
-                            </option>
-                            <option group="Black Sails"
-                                value="jack">
-                                Jack
-                            </option>
+                            <optgroup label="Black Sails">
+                                <option value="flint">Flint</option>
+                                <option value="silver">Silver</option>
+                                <option value="vane">Vane</option>
+                                <option value="billy">Billy</option>
+                                <option value="jack">Jack</option>
+                            </optgroup>
 
-                            <option group="Breaking Bad"
-                                value="heisenberg">
-                                Heisenberg
-                            </option>
-                            <option group="Breaking Bad"
-                                value="jesse">
-                                Jesse
-                            </option>
-                            <option group="Breaking Bad"
-                                value="saul">
-                                Saul
-                            </option>
-                            <option group="Breaking Bad"
-                                value="mike">
-                                Mike
-                            </option>
+                            <optgroup label="Breaking Bad">
+                                <option value="heisenberg">Heisenberg</option>
+                                <option value="jesse">Jesse</option>
+                                <option value="saul">Saul</option>
+                                <option value="mike">Mike</option>
+                            </optgroup>
 
-                            <option group="Game of Thrones"
-                                value="tyrion-lannister">
-                                Tyrion Lannister
-                            </option>
-                            <option group="Game of Thrones"
-                                value="jamie-lannister">
-                                Jamie Lannister
-                            </option>
-                            <option group="Game of Thrones"
-                                value="daenerys-targaryen">
-                                Daenerys Targaryen
-                            </option>
-                            <option group="Game of Thrones"
-                                value="john-snow">
-                                John Snow
-                            </option>
+                            <optgroup label="Game of Thrones">
+                                <option value="tyrion-lannister">Tyrion Lannister</option>
+                                <option value="jamie-lannister">Jamie Lannister</option>
+                                <option value="daenerys-targaryen">Daenerys Targaryen</option>
+                                <option value="john-snow">John Snow</option>
+                            </optgroup>
                         </b-select>
                     </b-field>
 
