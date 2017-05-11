@@ -14,7 +14,12 @@
                 enter-active-class="zoomIn">
 
                 <div class="modal-content" v-if="isActive" :style="{ maxWidth: newWidth }">
-                    <component v-if="component" @close="close" :is="component"></component>
+                    <component
+                        v-if="component"
+                        v-bind="props"
+                        :is="component"
+                        @close="close">
+                    </component>
                     <div v-else v-html="content"></div>
                 </div>
 
@@ -31,6 +36,7 @@
         props: {
             component: Object,
             content: String,
+            props: Object,
             width: [String, Number],
             canCancel: {
                 type: Boolean,
@@ -87,7 +93,7 @@
             }
         },
         beforeMount() {
-            // Insert the Dialog component in body tag
+            // Insert the Modal component in body tag
             document.body.appendChild(this.$el)
         },
         beforeDestroy() {

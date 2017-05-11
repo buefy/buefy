@@ -15,10 +15,12 @@
         <h2 class="title is-spaced">Component Modal</h2>
         <div class="content">
             <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
+            <p>The component will receive all props from the <code>props</code> object.</p>
             <button class="button is-primary is-medium" @click="componentModal"> Launch component modal</button>
         </div>
         <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
         <h3 class="subtitle">ModalForm component</h3>
+        <p class="content"><b>Note:</b> You should't mutate a prop directly, this is just an example.</p>
         <pre class="content" v-highlight><code class="html">{{ component | pre }}</code></pre>
 
 
@@ -53,12 +55,20 @@
     export default {
         data() {
             return {
-                prompt: '',
+                email: 'evan@you.com',
+                password: 'testing',
                 props: [
                     {
                         name: '<code>component</code>',
                         description: `Component to be shown. Close Modal programatically by emitting a 'close' event — <code>this.$emit('close')</code> — from the component`,
                         type: 'String',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>props</code>',
+                        description: 'Props to be binded to the component',
+                        type: 'Object',
                         values: '—',
                         default: '—'
                     },
@@ -140,11 +150,21 @@
                 import ModalForm from './components/ModalForm'
 
                 export default {
+                    data() {
+                        return {
+                            email: 'evan@you.com',
+                            password: 'testing'
+                        }
+                    },
                     methods: {
                         componentModal() {
                             this.$modal.open({
                                 component: ModalForm,
-                                width: 380
+                                width: 380,
+                                props: {
+                                    email: this.email,
+                                    password: this.password
+                                }
                             })
                         }
                     }
@@ -160,6 +180,7 @@
                                 <b-field label="Email">
                                     <b-input
                                         type="email"
+                                        v-model="email"
                                         placeholder="Your email"
                                         required>
                                     </b-input>
@@ -168,6 +189,7 @@
                                 <b-field label="Password">
                                     <b-input
                                         type="password"
+                                        v-model="password"
                                         password-reveal
                                         placeholder="Your password"
                                         required>
@@ -184,20 +206,30 @@
                     </div>
                 </template>
 
-                \<style scoped>
+                <script>
+                    export default {
+                        props: ['email', 'password']
+                    }
+                <\/script>
+
+
+                <style scoped>
                     .modal-card {
                         margin: 0 auto;
                         width: auto;
                     }
-                \</style>
-                `
+                </style>`
             }
         },
         methods: {
             componentModal() {
                 this.$modal.open({
                     component: ModalForm,
-                    width: 380
+                    width: 380,
+                    props: {
+                        email: this.email,
+                        password: this.password
+                    }
                 })
             },
             imageModal() {
