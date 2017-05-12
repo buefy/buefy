@@ -1,3 +1,12 @@
+// Outside of .b-table so it can be used in normal html tables
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    .table {
+        margin-bottom: 0;
+    }
+}
+
 .b-table {
     .table {
         th {
@@ -73,13 +82,14 @@
                     display: none;
                 }
                 tr {
-                    // Card styles — Cannot extend
+                    // Card style — Cannot extend inside media query
                     background-color: $white;
                     box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
                     max-width: 100%;
                     position: relative;
-                    //
+                    // ---------------------------
                     display: block;
+                    margin: 0.25em;
                     td {
                         display: flex;
                         border: 0; // Disables is-bordered

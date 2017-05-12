@@ -3,6 +3,7 @@
 ## 0.3.2
 
 * Modal can be used in template as well (non programmatic)
+* Table automatically scrolls if overflowed
 
 ## 0.3.1
 

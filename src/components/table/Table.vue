@@ -15,48 +15,50 @@
             </p>
         </div>
 
-        <table
-            class="table"
-            :class="{
-                'is-bordered': bordered,
-                'is-striped': striped,
-                'is-narrow': narrowed,
-                'has-mobile-cards': mobileCards
-            }">
-            <thead>
-                <tr>
-                    <th class="checkbox-cell" v-if="checkable">
-                        <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
-                    </th>
-                    <th v-for="column in columns" @click.stop="sort(column)"
-                        :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
-                        :style="{ width: column.width + 'px' }">
-                        <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
-                            {{ column.label }}
-                            <b-icon
-                                icon="arrow_upward"
-                                both
-                                size="is-small"
-                                :class="{ 'is-desc': !column.isAsc, 'is-visible': currentSortColumn === column }">
-                            </b-icon>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="row in visibleData"
-                    @click="selectRow(row)"
-                    @dblclick="$emit('dblclick', row)"
-                    :class="{ 'is-selected': row === selected }">
+        <div class="table-wrapper">
+            <table
+                class="table"
+                :class="{
+                    'is-bordered': bordered,
+                    'is-striped': striped,
+                    'is-narrow': narrowed,
+                    'has-mobile-cards': mobileCards
+                }">
+                <thead>
+                    <tr>
+                        <th class="checkbox-cell" v-if="checkable">
+                            <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
+                        </th>
+                        <th v-for="column in columns" @click.stop="sort(column)"
+                            :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
+                            :style="{ width: column.width + 'px' }">
+                            <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
+                                {{ column.label }}
+                                <b-icon
+                                    icon="arrow_upward"
+                                    both
+                                    size="is-small"
+                                    :class="{ 'is-desc': !column.isAsc, 'is-visible': currentSortColumn === column }">
+                                </b-icon>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="row in visibleData"
+                        @click="selectRow(row)"
+                        @dblclick="$emit('dblclick', row)"
+                        :class="{ 'is-selected': row === selected }">
 
-                    <td class="checkbox-cell" v-if="checkable">
-                        <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
-                    </td>
+                        <td class="checkbox-cell" v-if="checkable">
+                            <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
+                        </td>
 
-                    <slot :row="row"></slot>
-                </tr>
-            </tbody>
-        </table>
+                        <slot :row="row"></slot>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div class="level">
             <div class="level-left">

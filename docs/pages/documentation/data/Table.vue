@@ -226,7 +226,7 @@
                     },
                     {
                         name: '<code>mobile-cards</code>',
-                        description: 'Rows now appears as cards on mobile',
+                        description: 'Rows appears as cards on mobile (collapse rows)',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>true</code>'
