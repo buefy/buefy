@@ -32,9 +32,7 @@
         </nav>
 
         <section class="section">
-            <div class="container">
-                <router-view></router-view>
-            </div>
+            <router-view></router-view>
         </section>
 
         <app-footer></app-footer>

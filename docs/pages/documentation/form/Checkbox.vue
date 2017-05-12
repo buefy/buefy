@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Checkbox</h1>
         <h2 class="subtitle">Select a single or grouped options</h2>
         <hr>
@@ -221,74 +221,68 @@
                     }
                 ],
                 template1: `
-                    <div class="block">
-                        <b-checkbox>Basic</b-checkbox>
-                        <b-checkbox v-model="checkbox">{{ checkbox }}</b-checkbox>
-                        <b-checkbox disabled>Disabled</b-checkbox>
-                        <b-checkbox disabled checked>Disabled Checked</b-checkbox>
-                    </div>
+                <div class="block">
+                    <b-checkbox>Basic</b-checkbox>
+                    <b-checkbox v-model="checkbox">{{ checkbox }}</b-checkbox>
+                    <b-checkbox disabled>Disabled</b-checkbox>
+                    <b-checkbox disabled checked>Disabled Checked</b-checkbox>
+                </div>
 
-                    <h3 class="subtitle">Vertical</h3>
-                    <div class="field">
-                        <b-checkbox>Basic</b-checkbox>
-                    </div>
-
-                    <div class="field">
-                        <b-checkbox v-model="checkbox">{{ checkbox }}</b-checkbox>
-                    </div>
-
-                    <div class="field">
-                        <b-checkbox disabled>Disabled</b-checkbox>
-                    </div>
-
-                    <div class="field">
-                        <b-checkbox disabled checked>Disabled Checked</b-checkbox>
-                    </div>`,
+                <h3 class="subtitle">Vertical</h3>
+                <div class="field">
+                    <b-checkbox>Basic</b-checkbox>
+                </div>
+                <div class="field">
+                    <b-checkbox v-model="checkbox">{{ checkbox }}</b-checkbox>
+                </div>
+                <div class="field">
+                    <b-checkbox disabled>Disabled</b-checkbox>
+                </div>
+                <div class="field">
+                    <b-checkbox disabled checked>Disabled Checked</b-checkbox>
+                </div>`,
                 code1: `
-                    export default {
-                        data() {
-                            return {
-                                checkbox: true
-                            }
+                export default {
+                    data() {
+                        return {
+                            checkbox: true
                         }
-                    }`,
+                    }
+                }`,
                 template2: `
-                    <div class="block">
-                        <b-checkbox-group v-model="checkboxGroup">
-                            <b-checkbox custom-value="Silver">Silver</b-checkbox>
-                            <b-checkbox custom-value="Flint">Flint</b-checkbox>
-                            <b-checkbox custom-value="Vane">Vane</b-checkbox>
-                            <b-checkbox custom-value="Billy" disabled>Billy</b-checkbox>
-                        </b-checkbox-group>
-                    </div>
-                    <p class="content"><b>Selection:</b> {{ checkboxGroup }}</p>
-
-                    <h3 class="subtitle">Vertical example</h3>
+                <div class="block">
                     <b-checkbox-group v-model="checkboxGroup">
-                        <div class="field">
-                            <b-checkbox custom-value="Silver">Silver</b-checkbox>
-                        </div>
+                        <b-checkbox custom-value="Silver">Silver</b-checkbox>
+                        <b-checkbox custom-value="Flint">Flint</b-checkbox>
+                        <b-checkbox custom-value="Vane">Vane</b-checkbox>
+                        <b-checkbox custom-value="Billy" disabled>Billy</b-checkbox>
+                    </b-checkbox-group>
+                </div>
+                <p class="content"><b>Selection:</b> {{ checkboxGroup }}</p>
 
-                        <div class="field">
-                            <b-checkbox custom-value="Flint">Flint</b-checkbox>
-                        </div>
-
-                        <div class="field">
-                            <b-checkbox custom-value="Vane">Vane</b-checkbox>
-                        </div>
-
-                        <div class="field">
-                            <b-checkbox custom-value="Billy" disabled>Billy</b-checkbox>
-                        </div>
-                    </b-checkbox-group>`,
+                <h3 class="subtitle">Vertical example</h3>
+                <b-checkbox-group v-model="checkboxGroup">
+                    <div class="field">
+                        <b-checkbox custom-value="Silver">Silver</b-checkbox>
+                    </div>
+                    <div class="field">
+                        <b-checkbox custom-value="Flint">Flint</b-checkbox>
+                    </div>
+                    <div class="field">
+                        <b-checkbox custom-value="Vane">Vane</b-checkbox>
+                    </div>
+                    <div class="field">
+                        <b-checkbox custom-value="Billy" disabled>Billy</b-checkbox>
+                    </div>
+                </b-checkbox-group>`,
                 code2: `
-                    export default {
-                        data() {
-                            return {
-                                checkboxGroup: ['Flint']
-                            }
+                export default {
+                    data() {
+                        return {
+                            checkboxGroup: ['Flint']
                         }
-                    }`
+                    }
+                }`
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Modal</h1>
         <h2 class="subtitle">Programatically modal overlay to include any content you may need</h2>
         <hr>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Constructor Options</h1>
         <h2 class="subtitle">These are global default options, which are set on Buefy initialization</h2>
 
@@ -39,11 +39,11 @@
         data() {
             return {
                 usage: `
-                    Vue.use(Buefy, {
-                        defaultIconPack: 'fa',
-                        defaultContentElement: '#content',
-                        ...
-                    })`,
+                Vue.use(Buefy, {
+                    defaultIconPack: 'fa',
+                    defaultContentElement: '#content',
+                    ...
+                })`,
                 options: [
                     {
                         name: '<code>defaultIconPack</code>',

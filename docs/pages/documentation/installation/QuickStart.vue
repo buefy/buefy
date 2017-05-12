@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Quick Start</h1>
 
         <h2 class="subtitle"><span class="list-number">1</span> Install via npm</h2>
@@ -31,17 +31,17 @@
         data() {
             return {
                 importing: `
-                    import Vue from 'vue'
-                    import Buefy from 'buefy'
-                    import 'buefy/lib/buefy.css'
+                import Vue from 'vue'
+                import Buefy from 'buefy'
+                import 'buefy/lib/buefy.css'
 
-                    Vue.use(Buefy)
+                Vue.use(Buefy)
 
-                    // OR
+                // OR
 
-                    Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                    Vue.component(Buefy.Table.name, Buefy.Table)
-                    ...`,
+                Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
+                Vue.component(Buefy.Table.name, Buefy.Table)
+                ...`,
                 materialIcons: '<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">'
             }
         }

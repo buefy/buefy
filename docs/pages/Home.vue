@@ -69,7 +69,7 @@
                         <div class="column has-text-centered features">
                             <b-icon pack="fa" icon="paper-plane-o" size="is-large"></b-icon>
                             <p class="title is-4"><strong>Lightweight</strong></p>
-                            <p class="subtitle">No other internal dependencies</p>
+                            <p class="subtitle">No other internal dependency</p>
                         </div>
                     </nav>
                 </div>

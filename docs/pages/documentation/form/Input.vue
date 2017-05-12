@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Input</h1>
         <h2 class="subtitle">Inputs are wrapped on a Field, it's not <em>necessary</em> however some functionalities might not work otherwise</h2>
         <hr>
@@ -282,7 +282,7 @@
         <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <hr>
-        <h2 class="title is-spaced">Control Groups</h2>
+        <h2 class="title is-spaced">Groups</h2>
         <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
         <p class="content">You can also specify which ones will be <code>expanded</code> to fill the remaining space.</p>
         <div class="example">
@@ -298,10 +298,8 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
 
-        <hr>
-        <h2 class="title is-spaced"><span class="tag is-success">New</span> Field Groups</h2>
-        <h3 class="subtitle">You can also group Fields</h3>
-        <p class="content">You can also specify which ones will be <code>expanded</code> to fill the remaining space.</p>
+        <span class="tag is-success">New!</span> <span class="tag is-info">v0.3.1</span>
+        <h3 class="subtitle is-inline-flex">Nested Fields can be grouped as well</h3>
         <div class="example">
             <b-field grouped>
                 <b-field label="First name">
@@ -624,280 +622,276 @@
                     }
                 ],
                 template1: `
-                    <b-field label="Name">
-                        <b-input value="John Silver"></b-input>
-                    </b-field>
+                <b-field label="Name">
+                    <b-input value="John Silver"></b-input>
+                </b-field>
 
-                    <b-field label="Email"
-                        type="is-danger"
-                        message="This email is invalid">
-                        <b-input type="email"
-                            value="john@"
-                            maxlength="30">
-                        </b-input>
-                    </b-field>
+                <b-field label="Email"
+                    type="is-danger"
+                    message="This email is invalid">
+                    <b-input type="email"
+                        value="john@"
+                        maxlength="30">
+                    </b-input>
+                </b-field>
 
-                    <b-field label="Username"
-                        type="is-success"
-                        message="This username is available">
-                        <b-input value="johnsilver" maxlength="30"></b-input>
-                    </b-field>
+                <b-field label="Username"
+                    type="is-success"
+                    message="This username is available">
+                    <b-input value="johnsilver" maxlength="30"></b-input>
+                </b-field>
 
-                    <b-field label="Password">
-                        <b-input type="password"
-                            value="iwantmytreasure"
-                            password-reveal>
-                        </b-input>
-                    </b-field>
+                <b-field label="Password">
+                    <b-input type="password"
+                        value="iwantmytreasure"
+                        password-reveal>
+                    </b-input>
+                </b-field>
 
-                    <b-field label="Message">
-                        <b-input maxlength="200" type="textarea"></b-input>
-                    </b-field>`,
+                <b-field label="Message">
+                    <b-input maxlength="200" type="textarea"></b-input>
+                </b-field>`,
                 template2: `
-                    <b-field>
-                        <b-input placeholder="No label"></b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="No label"></b-input>
+                </b-field>
 
-                    <b-field label="Label">
-                        <b-input placeholder="Text input"></b-input>
-                    </b-field>
+                <b-field label="Label">
+                    <b-input placeholder="Text input"></b-input>
+                </b-field>
 
-                    <b-field label="Success" type="is-success">
-                        <b-input placeholder="Success"></b-input>
-                    </b-field>
+                <b-field label="Success" type="is-success">
+                    <b-input placeholder="Success"></b-input>
+                </b-field>
 
-                    <b-field label="Error"
-                        type="is-danger"
-                        message="You can have a message too">
-                        <b-input placeholder="Error"></b-input>
-                    </b-field>
+                <b-field label="Error"
+                    type="is-danger"
+                    message="You can have a message too">
+                    <b-input placeholder="Error"></b-input>
+                </b-field>
 
-                    <b-field label="Info" type="is-info">
-                        <b-input placeholder="Info"></b-input>
-                    </b-field>
+                <b-field label="Info" type="is-info">
+                    <b-input placeholder="Info"></b-input>
+                </b-field>
 
-                    <b-field label="Warning" type="is-warning">
-                        <b-input placeholder="Warning"></b-input>
-                    </b-field>
+                <b-field label="Warning" type="is-warning">
+                    <b-input placeholder="Warning"></b-input>
+                </b-field>
 
-                    <b-field label="Disabled">
-                        <b-input placeholder="Disabled" disabled></b-input>
-                    </b-field>
+                <b-field label="Disabled">
+                    <b-input placeholder="Disabled" disabled></b-input>
+                </b-field>
 
-                    <b-field label="Loading">
-                        <b-input placeholder="Loading" loading></b-input>
-                    </b-field>`,
+                <b-field label="Loading">
+                    <b-input placeholder="Loading" loading></b-input>
+                </b-field>`,
                 template3: `
-                    <h3 class="subtitle">With Material Design Icons</h3>
-                    <b-field>
-                        <b-input placeholder="Search..."
-                            type="search"
-                            icon="search">
-                        </b-input>
-                    </b-field>
+                <h3 class="subtitle">With Material Design Icons</h3>
+                <b-field>
+                    <b-input placeholder="Search..."
+                        type="search"
+                        icon="search">
+                    </b-input>
+                </b-field>
+                <b-field>
+                    <b-input placeholder="Email"
+                        type="email"
+                        icon="email">
+                    </b-input>
+                </b-field>
+                <b-field>
+                    <b-input placeholder="Credit card"
+                        icon="payment">
+                    </b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input placeholder="Email"
-                            type="email"
-                            icon="email">
-                        </b-input>
-                    </b-field>
-
-                    <b-field>
-                        <b-input placeholder="Credit card"
-                            icon="payment">
-                        </b-input>
-                    </b-field>
-
-                    <h3 class="subtitle">With FontAwesome</h3>
-                    <b-field>
-                        <b-input placeholder="Search..."
-                            type="search"
-                            icon-pack="fa"
-                            icon="search">
-                        </b-input>
-                    </b-field>
-
-                    <b-field>
-                        <b-input placeholder="Email"
-                            type="email"
-                            icon-pack="fa"
-                            icon="envelope">
-                        </b-input>
-                    </b-field>
-
-                    <b-field>
-                        <b-input placeholder="Credit card"
-                            icon-pack="fa"
-                            icon="credit-card">
-                        </b-input>
-                    </b-field>`,
+                <h3 class="subtitle">With FontAwesome</h3>
+                <b-field>
+                    <b-input placeholder="Search..."
+                        type="search"
+                        icon-pack="fa"
+                        icon="search">
+                    </b-input>
+                </b-field>
+                <b-field>
+                    <b-input placeholder="Email"
+                        type="email"
+                        icon-pack="fa"
+                        icon="envelope">
+                    </b-input>
+                </b-field>
+                <b-field>
+                    <b-input placeholder="Credit card"
+                        icon-pack="fa"
+                        icon="credit-card">
+                    </b-input>
+                </b-field>`,
                 template4: `
-                    <b-field>
-                        <b-input placeholder="Email" type="email"></b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="Email" type="email"></b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input placeholder="Number"
-                            type="number"
-                            min="10"
-                            max="20">
-                        </b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="Number"
+                        type="number"
+                        min="10"
+                        max="20">
+                    </b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input placeholder="URL" type="url"></b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="URL" type="url"></b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input type="textarea"
-                            minlength="10"
-                            maxlength="100"
-                            placeholder="Maxlength automatically counts characters">
-                        </b-input>
-                    </b-field>`,
+                <b-field>
+                    <b-input type="textarea"
+                        minlength="10"
+                        maxlength="100"
+                        placeholder="Maxlength automatically counts characters">
+                    </b-input>
+                </b-field>`,
                 template5: `
-                    <b-field>
-                        <b-input type="password"
-                            placeholder="Regular password input">
-                        </b-input>
-                    </b-field>
+                <b-field>
+                    <b-input type="password"
+                        placeholder="Regular password input">
+                    </b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input type="password"
-                            placeholder="Password reveal input"
-                            password-reveal>
-                        </b-input>
-                    </b-field>`,
+                <b-field>
+                    <b-input type="password"
+                        placeholder="Password reveal input"
+                        password-reveal>
+                    </b-input>
+                </b-field>`,
                 template6: `
-                    <h3 class="subtitle">Which side you want</h3>
-                    <b-field>
-                        <b-input placeholder="Search..."
-                            type="search"
-                            icon="search">
-                        </b-input>
-                        <p class="control">
-                            <button class="button is-primary">Search</button>
-                        </p>
-                    </b-field>
+                <h3 class="subtitle">Which side you want</h3>
+                <b-field>
+                    <b-input placeholder="Search..."
+                        type="search"
+                        icon="search">
+                    </b-input>
+                    <p class="control">
+                        <button class="button is-primary">Search</button>
+                    </p>
+                </b-field>
 
-                    <b-field position="centered">
-                        <b-input placeholder="Search..."
-                            type="search"
-                            icon="search">
-                        </b-input>
-                        <p class="control">
-                            <button class="button is-dark">Search</button>
-                        </p>
-                    </b-field>
+                <b-field position="centered">
+                    <b-input placeholder="Search..."
+                        type="search"
+                        icon="search">
+                    </b-input>
+                    <p class="control">
+                        <button class="button is-dark">Search</button>
+                    </p>
+                </b-field>
 
-                    <b-field position="right">
-                        <b-input placeholder="Search..."
-                            type="search"
-                            icon="search">
-                        </b-input>
-                        <p class="control">
-                            <button class="button is-info">Search</button>
-                        </p>
-                    </b-field>
+                <b-field position="right">
+                    <b-input placeholder="Search..."
+                        type="search"
+                        icon="search">
+                    </b-input>
+                    <p class="control">
+                        <button class="button is-info">Search</button>
+                    </p>
+                </b-field>
 
-                    <h3 class="subtitle">How many you need</h3>
-                    <b-field>
-                        <b-select placeholder="Currency">
-                            <option>$</option>
-                            <option>£</option>
-                            <option>€</option>
-                        </b-select>
-                        <b-input placeholder="How much will you donate?"></b-input>
-                        <p class="control">
-                            <button class="button">Cancel</button>
-                        </p>
-                        <p class="control">
-                            <button class="button is-success">Transfer</button>
-                        </p>
-                    </b-field>
+                <h3 class="subtitle">How many you need</h3>
+                <b-field>
+                    <b-select placeholder="Currency">
+                        <option>$</option>
+                        <option>£</option>
+                        <option>€</option>
+                    </b-select>
+                    <b-input placeholder="How much will you donate?"></b-input>
+                    <p class="control">
+                        <button class="button">Cancel</button>
+                    </p>
+                    <p class="control">
+                        <button class="button is-success">Transfer</button>
+                    </p>
+                </b-field>
 
-                    <b-field>
-                        <p class="control">
-                            <button class="button">
-                                <b-icon icon="format_bold"></b-icon>
-                            </button>
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                <b-icon icon="format_italic"></b-icon>
-                            </button>
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                <b-icon icon="format_underlined"></b-icon>
-                            </button>
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                <b-icon icon="format_align_left"></b-icon>
-                            </button>
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                <b-icon icon="format_align_center"></b-icon>
-                            </button>
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                <b-icon icon="format_align_right"></b-icon>
-                            </button>
-                        </p>
-                    </b-field>`,
+                <b-field>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_bold"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_italic"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_underlined"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_align_left"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_align_center"></b-icon>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button">
+                            <b-icon icon="format_align_right"></b-icon>
+                        </button>
+                    </p>
+                </b-field>`,
                 template7: `
-                    <b-field grouped>
-                        <b-input placeholder="Search..." expanded></b-input>
-                        <p class="control">
-                            <button class="button is-primary">Search</button>
-                        </p>
-                        <p class="control">
-                            <button class="button">Clear</button>
-                        </p>
-                    </b-field>`,
+                <b-field grouped>
+                    <b-input placeholder="Search..." expanded></b-input>
+                    <p class="control">
+                        <button class="button is-primary">Search</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Clear</button>
+                    </p>
+                </b-field>`,
                 template8: `
-                    <b-field grouped>
-                        <b-field label="First name">
-                            <b-input></b-input>
-                        </b-field>
-                        <b-field label="Last name">
-                            <b-input></b-input>
-                        </b-field>
-                        <b-field label="Email" expanded>
-                            <b-input></b-input>
-                        </b-field>
-                    </b-field>`,
+                <b-field grouped>
+                    <b-field label="First name">
+                        <b-input></b-input>
+                    </b-field>
+                    <b-field label="Last name">
+                        <b-input></b-input>
+                    </b-field>
+                    <b-field label="Email" expanded>
+                        <b-input></b-input>
+                    </b-field>
+                </b-field>`,
                 template9: `
-                    <b-field>
-                        <b-input placeholder="Small"
-                            size="is-small"
-                            icon="person">
-                        </b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="Small"
+                        size="is-small"
+                        icon="person">
+                    </b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input placeholder="Default"
-                            icon="person">
-                        </b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="Default"
+                        icon="person">
+                    </b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input placeholder="Medium"
-                            size="is-medium"
-                            icon="person">
-                        </b-input>
-                    </b-field>
+                <b-field>
+                    <b-input placeholder="Medium"
+                        size="is-medium"
+                        icon="person">
+                    </b-input>
+                </b-field>
 
-                    <b-field>
-                        <b-input placeholder="Large"
-                            size="is-large"
-                            icon="person">
-                        </b-input>
-                    </b-field>`
+                <b-field>
+                    <b-input placeholder="Large"
+                        size="is-large"
+                        icon="person">
+                    </b-input>
+                </b-field>`
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Dialog</h1>
         <h2 class="subtitle">Dialogs inform users about a specific task and may contain critical information or require decisions</h2>
         <hr>

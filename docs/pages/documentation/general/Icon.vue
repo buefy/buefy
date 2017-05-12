@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Icon</h1>
         <h2 class="subtitle">Icons take an important role of any application</h2>
         <hr>
@@ -61,7 +61,7 @@
                         <span>Finish</span>
                     </button>
                 </div>
-                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
             </div>
 
             <div class="column">
@@ -198,119 +198,119 @@
                         default: '—'
                     }
                 ],
-                template: `
-                    <div class="block">
-                        <b-icon icon="person"></b-icon>
-                        <b-icon icon="home"></b-icon>
-                        <b-icon icon="dashboard"></b-icon>
-                    </div>
+                template1: `
+                <div class="block">
+                    <b-icon icon="person"></b-icon>
+                    <b-icon icon="home"></b-icon>
+                    <b-icon icon="dashboard"></b-icon>
+                </div>
 
-                    <div class="block">
-                        <b-icon
-                            icon="person"
-                            size="is-medium">
-                        </b-icon>
-                        <b-icon
-                            icon="home"
-                            size="is-medium">
-                        </b-icon>
-                        <b-icon
-                            icon="dashboard"
-                            size="is-medium">
-                        </b-icon>
-                    </div>
+                <div class="block">
+                    <b-icon
+                        icon="person"
+                        size="is-medium">
+                    </b-icon>
+                    <b-icon
+                        icon="home"
+                        size="is-medium">
+                    </b-icon>
+                    <b-icon
+                        icon="dashboard"
+                        size="is-medium">
+                    </b-icon>
+                </div>
 
-                    <div class="block">
-                        <b-icon
-                            icon="person"
-                            size="is-large"
-                            type="is-success">
-                        </b-icon>
-                        <b-icon
-                            icon="home"
-                            size="is-large"
-                            type="is-info">
-                        </b-icon>
-                        <b-icon
-                            icon="dashboard"
-                            size="is-large"
-                            type="is-primary">
-                        </b-icon>
-                    </div>
+                <div class="block">
+                    <b-icon
+                        icon="person"
+                        size="is-large"
+                        type="is-success">
+                    </b-icon>
+                    <b-icon
+                        icon="home"
+                        size="is-large"
+                        type="is-info">
+                    </b-icon>
+                    <b-icon
+                        icon="dashboard"
+                        size="is-large"
+                        type="is-primary">
+                    </b-icon>
+                </div>
 
-                    <button class="button is-dark">
-                        <b-icon icon="done"></b-icon>
-                        <span>Finish</span>
-                    </button>
+                <button class="button is-dark">
+                    <b-icon icon="done"></b-icon>
+                    <span>Finish</span>
+                </button>
 
-                    <button class="button is-warning">
-                        <b-icon icon="done"></b-icon>
-                        <span>Finish</span>
-                    </button>`,
+                <button class="button is-warning">
+                    <b-icon icon="done"></b-icon>
+                    <span>Finish</span>
+                </button>`,
                 template2: `
-                    <div class="block">
-                        <b-icon
-                            pack="fa"
-                            icon="user">
-                        </b-icon>
-                        <b-icon
-                            pack="fa"
-                            icon="home">
-                        </b-icon>
-                        <b-icon
-                            pack="fa"
-                            icon="dashboard">
-                        </b-icon>
-                    </div>
+                <div class="block">
+                    <b-icon
+                        pack="fa"
+                        icon="user">
+                    </b-icon>
+                    <b-icon
+                        pack="fa"
+                        icon="home">
+                    </b-icon>
+                    <b-icon
+                        pack="fa"
+                        icon="dashboard">
+                    </b-icon>
+                </div>
 
-                    <div class="block">
-                        <b-icon
-                            pack="fa"
-                            icon="user"
-                            size="is-medium">
-                        </b-icon>
-                        <b-icon
-                            pack="fa"
-                            icon="home"
-                            size="is-medium">
-                        </b-icon>
-                        <b-icon
-                            pack="fa"
-                            icon="dashboard"
-                            size="is-medium">
-                        </b-icon>
-                    </div>
+                <div class="block">
+                    <b-icon
+                        pack="fa"
+                        icon="user"
+                        size="is-medium">
+                    </b-icon>
+                    <b-icon
+                        pack="fa"
+                        icon="home"
+                        size="is-medium">
+                    </b-icon>
+                    <b-icon
+                        pack="fa"
+                        icon="dashboard"
+                        size="is-medium">
+                    </b-icon>
+                </div>
 
-                    <div class="block">
-                        <b-icon
-                            pack="fa"
-                            icon="user"
-                            size="is-large"
-                            type="is-success">
-                        </b-icon>
-                        <b-icon
-                            pack="fa"
-                            icon="home"
-                            size="is-large"
-                            type="is-info">
-                        </b-icon>
-                        <b-icon
-                            pack="fa"
-                            icon="dashboard"
-                            size="is-large"
-                            type="is-primary">
-                        </b-icon>
-                    </div>
+                <div class="block">
+                    <b-icon
+                        pack="fa"
+                        icon="user"
+                        size="is-large"
+                        type="is-success">
+                    </b-icon>
+                    <b-icon
+                        pack="fa"
+                        icon="home"
+                        size="is-large"
+                        type="is-info">
+                    </b-icon>
+                    <b-icon
+                        pack="fa"
+                        icon="dashboard"
+                        size="is-large"
+                        type="is-primary">
+                    </b-icon>
+                </div>
 
-                    <button class="button is-dark">
-                        <b-icon pack="fa" icon="check"></b-icon>
-                        <span>Finish</span>
-                    </button>
+                <button class="button is-dark">
+                    <b-icon pack="fa" icon="check"></b-icon>
+                    <span>Finish</span>
+                </button>
 
-                    <button class="button is-warning">
-                        <b-icon pack="fa" icon="check"></b-icon>
-                        <span>Finish</span>
-                    </button>`
+                <button class="button is-warning">
+                    <b-icon pack="fa" icon="check"></b-icon>
+                    <span>Finish</span>
+                </button>`
             }
         }
     }

@@ -29,7 +29,7 @@
                     </b-field>
                 </section>
                 <footer class="modal-card-foot">
-                    <button v-if="canCancel" class="button" ref="cancelButton" @click="cancel">
+                    <button v-if="canCancel" class="button is-light" ref="cancelButton" @click="cancel">
                         {{ cancelText }}
                     </button>
                     <button class="button" :class="type" ref="confirmButton"  @click="confirm">
@@ -171,8 +171,6 @@
                 // Handle which element receives focus
                 if (this.hasInput) {
                     this.$refs.input.$refs.input.focus()
-                } else if (this.canCancel) {
-                    this.$refs.cancelButton.focus()
                 } else {
                     this.$refs.confirmButton.focus()
                 }

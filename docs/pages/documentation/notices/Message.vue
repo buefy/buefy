@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Message</h1>
         <h2 class="subtitle">Colored message blocks, to draw attention of your user</h2>
         <hr>
@@ -43,7 +43,7 @@
                 </b-message>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
             </div>
         </div>
 
@@ -180,78 +180,78 @@
                         parameters: '—'
                     }
                 ],
-                template: `
-                    <b-message title="Default">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                template1: `
+                <b-message title="Default">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Danger" type="is-danger">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Danger" type="is-danger">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Danger with icon" type="is-danger" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Danger with icon" type="is-danger" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Success" type="is-success">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Success" type="is-success">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Success with icon" type="is-success" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Success with icon" type="is-success" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Info" type="is-info">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Info" type="is-info">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Info with icon" type="is-info" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Info with icon" type="is-info" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Warning" type="is-warning">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message title="Warning" type="is-warning">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message title="Warning with icon" type="is-warning" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>`,
+                <b-message title="Warning with icon" type="is-warning" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>`,
                 template2: `
-                    <b-message>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-danger">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-danger">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-danger" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-danger" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-success">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-success">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-success" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-success" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-info">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-info">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-info" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-info" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-warning">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>
+                <b-message type="is-warning">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
-                    <b-message type="is-warning" has-icon>
-                        Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                    </b-message>`
+                <b-message type="is-warning" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>`
             }
         }
     }

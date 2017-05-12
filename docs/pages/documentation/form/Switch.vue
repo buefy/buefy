@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Switch</h1>
         <h2 class="subtitle">Switch between two opposing states</h2>
         <hr>
@@ -138,39 +138,39 @@
                     }
                 ],
                 template: `
-                    <div class="block">
+                <div class="block">
+                    <b-switch>Default</b-switch>
+                    <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
+                    <b-switch disabled>Disabled</b-switch>
+                    <b-switch disabled checked>Disabled Checked</b-switch>
+                </div>
+
+                <h3 class="subtitle">Vertical example</h3>
+                <div class="block">
+                    <div class="field">
                         <b-switch>Default</b-switch>
+                    </div>
+                    <div class="field">
                         <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
+                    </div>
+                    <div class="field">
                         <b-switch disabled>Disabled</b-switch>
+                    </div>
+                    <div class="field">
                         <b-switch disabled checked>Disabled Checked</b-switch>
                     </div>
+                </div>
 
-                    <h3 class="subtitle">Vertical example</h3>
-                    <div class="block">
-                        <div class="field">
-                            <b-switch>Default</b-switch>
-                        </div>
-                        <div class="field">
-                            <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
-                        </div>
-                        <div class="field">
-                            <b-switch disabled>Disabled</b-switch>
-                        </div>
-                        <div class="field">
-                            <b-switch disabled checked>Disabled Checked</b-switch>
-                        </div>
-                    </div>
-
-                    <h3 class="subtitle">On / Off style</h3>
-                    <div class="field">
-                        <b-switch on-off>On / Off</b-switch>
-                    </div>
-                    <div class="field">
-                        <b-switch on-off disabled>On / Off Disabled</b-switch>
-                    </div>
-                    <div class="field">
-                        <b-switch on-off disabled checked>On / Off Disabled Checked</b-switch>
-                    </div>`,
+                <h3 class="subtitle">On / Off style</h3>
+                <div class="field">
+                    <b-switch on-off>On / Off</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch on-off disabled>On / Off Disabled</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch on-off disabled checked>On / Off Disabled Checked</b-switch>
+                </div>`,
                 code: `
                 export default {
                     data() {

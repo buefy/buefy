@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Dropdown</h1>
         <h2 class="subtitle">
             Dropdowns are very versatile, you can use as a quick menu or even like a select.
@@ -314,161 +314,159 @@
                     }
                 ],
                 template1: `
+                <b-dropdown>
+                    <button class="button" slot="trigger">
+                        <span>Dropdown</span>
+                        <b-icon icon="arrow_drop_down"></b-icon>
+                    </button>
+
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
+                </b-dropdown>`,
+                template2: `
+                <b-dropdown>
+                    <figure slot="trigger">
+                        <img src="assets/buefy.png" width="94">
+                    </figure>
+
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
+                </b-dropdown>
+
+                <b-dropdown>
+                    <button class="button" slot="trigger">
+                        <b-icon icon="more_vert"></b-icon>
+                    </button>
+
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
+                </b-dropdown>
+
+                <b-dropdown>
+                    <h1 class="title" slot="trigger">
+                        Click me!
+                    </h1>
+
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
+                </b-dropdown>`,
+                template3: `
+                <b-field>
+                    <p class="control">
+                        <button class="button">
+                            Button
+                        </button>
+                    </p>
                     <b-dropdown>
                         <button class="button" slot="trigger">
-                            <span>Dropdown</span>
                             <b-icon icon="arrow_drop_down"></b-icon>
                         </button>
 
                         <b-dropdown-option>Action</b-dropdown-option>
                         <b-dropdown-option>Another action</b-dropdown-option>
                         <b-dropdown-option>Something else</b-dropdown-option>
-                    </b-dropdown>`,
-
-                template2: `
-                    <b-dropdown>
-                        <figure slot="trigger">
-                            <img src="assets/buefy.png" width="94">
-                        </figure>
-
-                        <b-dropdown-option>Action</b-dropdown-option>
-                        <b-dropdown-option>Another action</b-dropdown-option>
-                        <b-dropdown-option>Something else</b-dropdown-option>
                     </b-dropdown>
+                </b-field>
 
+                <b-field>
+                    <p class="control">
+                        <button class="button is-primary">
+                            Button
+                        </button>
+                    </p>
                     <b-dropdown>
-                        <button class="button" slot="trigger">
-                            <b-icon icon="more_vert"></b-icon>
+                        <button class="button is-primary" slot="trigger">
+                            <b-icon icon="arrow_drop_down"></b-icon>
                         </button>
 
                         <b-dropdown-option>Action</b-dropdown-option>
                         <b-dropdown-option>Another action</b-dropdown-option>
                         <b-dropdown-option>Something else</b-dropdown-option>
                     </b-dropdown>
+                </b-field>
 
+                <b-field>
                     <b-dropdown>
-                        <h1 class="title" slot="trigger">
-                            Click me!
-                        </h1>
+                        <button class="button" slot="trigger">
+                            <span>Filters</span>
+                            <b-icon icon="arrow_drop_down"></b-icon>
+                        </button>
 
-                        <b-dropdown-option>Action</b-dropdown-option>
-                        <b-dropdown-option>Another action</b-dropdown-option>
-                        <b-dropdown-option>Something else</b-dropdown-option>
-                    </b-dropdown>`,
-
-                template3: `
-                    <b-field>
-                        <p class="control">
-                            <button class="button">
-                                Button
-                            </button>
-                        </p>
-                        <b-dropdown>
-                            <button class="button" slot="trigger">
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
-
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
-                        </b-dropdown>
-                    </b-field>
-
-                    <b-field>
-                        <p class="control">
-                            <button class="button is-primary">
-                                Button
-                            </button>
-                        </p>
-                        <b-dropdown>
-                            <button class="button is-primary" slot="trigger">
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
-
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
-                        </b-dropdown>
-                    </b-field>
-
-                    <b-field>
-                        <b-dropdown>
-                            <button class="button" slot="trigger">
-                                <span>Filters</span>
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
-
-                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
-                        </b-dropdown>
-                        <b-input icon="search" type="search" placeholder="Search..."></b-input>
-                    </b-field>`,
+                        <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
+                        <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
+                        <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
+                        <b-dropdown-option value="everything">Everything</b-dropdown-option>
+                    </b-dropdown>
+                    <b-input icon="search" type="search" placeholder="Search..."></b-input>
+                </b-field>`,
                 template4: `
-                    <div class="block">
-                        <b-dropdown>
-                            <button class="button" slot="trigger">
-                                <span>Navigation</span>
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
+                <div class="block">
+                    <b-dropdown>
+                        <button class="button" slot="trigger">
+                            <span>Navigation</span>
+                            <b-icon icon="arrow_drop_down"></b-icon>
+                        </button>
 
-                            <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="home">Home</b-dropdown-option>
-                            <b-dropdown-option value="products">Products</b-dropdown-option>
-                            <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="settings">Settings</b-dropdown-option>
-                            <b-dropdown-option value="logout">Logout</b-dropdown-option>
-                        </b-dropdown>
+                        <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
+                        <b-dropdown-option separator></b-dropdown-option>
+                        <b-dropdown-option value="home">Home</b-dropdown-option>
+                        <b-dropdown-option value="products">Products</b-dropdown-option>
+                        <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
+                        <b-dropdown-option separator></b-dropdown-option>
+                        <b-dropdown-option value="settings">Settings</b-dropdown-option>
+                        <b-dropdown-option value="logout">Logout</b-dropdown-option>
+                    </b-dropdown>
 
-                        <b-dropdown narrowed>
-                            <button class="button" slot="trigger">
-                                <span>Narrowed</span>
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
+                    <b-dropdown narrowed>
+                        <button class="button" slot="trigger">
+                            <span>Narrowed</span>
+                            <b-icon icon="arrow_drop_down"></b-icon>
+                        </button>
 
-                            <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="home">Home</b-dropdown-option>
-                            <b-dropdown-option value="products">Products</b-dropdown-option>
-                            <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="settings">Settings</b-dropdown-option>
-                            <b-dropdown-option value="logout">Logout</b-dropdown-option>
-                        </b-dropdown>
-                    </div>
+                        <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
+                        <b-dropdown-option separator></b-dropdown-option>
+                        <b-dropdown-option value="home">Home</b-dropdown-option>
+                        <b-dropdown-option value="products">Products</b-dropdown-option>
+                        <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
+                        <b-dropdown-option separator></b-dropdown-option>
+                        <b-dropdown-option value="settings">Settings</b-dropdown-option>
+                        <b-dropdown-option value="logout">Logout</b-dropdown-option>
+                    </b-dropdown>
+                </div>
 
-                    <div class="field">
-                        <b-dropdown v-model="select">
-                            <button class="button" slot="trigger">
-                                <span>Icons, HTML and v-model</span>
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
+                <div class="field">
+                    <b-dropdown v-model="select">
+                        <button class="button" slot="trigger">
+                            <span>Icons, HTML and v-model</span>
+                            <b-icon icon="arrow_drop_down"></b-icon>
+                        </button>
 
-                            <b-dropdown-option
-                                label="Logged as <b>Rafael Beraldo</b>"
-                                subheader>
-                            </b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="home" icon="home">Home</b-dropdown-option>
-                            <b-dropdown-option value="products" icon="shopping_cart">Products</b-dropdown-option>
-                            <b-dropdown-option value="blog" icon="art_track" disabled>Blog</b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="settings" icon="settings">Settings</b-dropdown-option>
-                            <b-dropdown-option value="logout" icon="exit_to_app">Logout</b-dropdown-option>
-                        </b-dropdown>
-                    </div>
-                    <p><b>Selection:</b> {{ select }}</p>`,
+                        <b-dropdown-option
+                            label="Logged as <b>Rafael Beraldo</b>"
+                            subheader>
+                        </b-dropdown-option>
+                        <b-dropdown-option separator></b-dropdown-option>
+                        <b-dropdown-option value="home" icon="home">Home</b-dropdown-option>
+                        <b-dropdown-option value="products" icon="shopping_cart">Products</b-dropdown-option>
+                        <b-dropdown-option value="blog" icon="art_track" disabled>Blog</b-dropdown-option>
+                        <b-dropdown-option separator></b-dropdown-option>
+                        <b-dropdown-option value="settings" icon="settings">Settings</b-dropdown-option>
+                        <b-dropdown-option value="logout" icon="exit_to_app">Logout</b-dropdown-option>
+                    </b-dropdown>
+                </div>
+                <p><b>Selection:</b> {{ select }}</p>`,
                 code4: `
-                    export default {
-                        data() {
-                            return {
-                                select: ''
-                            }
+                export default {
+                    data() {
+                        return {
+                            select: ''
                         }
-                    }`
+                    }
+                }`
             }
         }
     }

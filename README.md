@@ -75,9 +75,9 @@ Might work in others versions, but it's not tested.
 
 * [Vue.js](https://vuejs.org/) for the great reactive js framework
 * [Bulma](http://bulma.io/) for the best flexbox css framework out there
-* The original idea from [vue-admin](https://github.com/vue-bulma/vue-admin)
+* The original idea from [vue-admin](https://admin.vuebulma.com/)
 * Some code structure and ideas from:
-    * [vue-blu](https://github.com/chenz24/vue-blu)
+    * [vue-blu](https://chenz24.github.io/vue-blu/)
     * [vue-material](https://vuematerial.github.io/)
     * [element-ui](http://element.eleme.io/)
 

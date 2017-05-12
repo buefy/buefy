@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Radio</h1>
         <h2 class="subtitle">Radios are wrapped on a Radio Group</h2>
         <hr>
@@ -225,7 +225,7 @@
                         type: 'String',
                         values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                         default: '—'
-                    },
+                    }
                 ],
                 radioGroupEvents: [
                     {
@@ -235,68 +235,65 @@
                     }
                 ],
                 template1: `
-                    <div class="block">
-                        <b-radio-group v-model="radio">
-                            <b-radio value="Flint">Flint</b-radio>
-                            <b-radio value="Silver">Silver</b-radio>
-                            <b-radio value="Jack">Jack</b-radio>
-                            <b-radio value="Vane" disabled>Vane</b-radio>
-                        </b-radio-group>
-                    </div>
-                    <p class="content"><b>Selection:</b> {{ radio }}</p>
-
-                    <h3 class="subtitle">Vertical example</h3>
+                <div class="block">
                     <b-radio-group v-model="radio">
-                        <div class="field">
-                            <b-radio value="Flint">Flint</b-radio>
-                        </div>
-
-                        <div class="field">
-                            <b-radio value="Silver">Silver</b-radio>
-                        </div>
-
-                        <div class="field">
-                            <b-radio value="Jack">Jack</b-radio>
-                        </div>
-
-                        <div class="field">
-                            <b-radio value="Vane" disabled>Vane</b-radio>
-                        </div>
-                    </b-radio-group>`,
-                code1: `
-                    export default {
-                        data() {
-                            return {
-                                radio: 'Vane'
-                            }
-                        }
-                    }`,
-                template2: `
-                    <b-radio-group v-model="radioButton">
-                        <b-radio-button type="is-danger" value="Nop">
-                            <b-icon icon="clear"></b-icon> Nop
-                        </b-radio-button>
-
-                        <b-radio-button type="is-success" value="Yep">
-                            <b-icon icon="done"></b-icon> Yep
-                        </b-radio-button>
-
-                        <b-radio-button value="Default">Default</b-radio-button>
-
-                        <b-radio-button value="Disabled" disabled>
-                            Disabled
-                        </b-radio-button>
+                        <b-radio value="Flint">Flint</b-radio>
+                        <b-radio value="Silver">Silver</b-radio>
+                        <b-radio value="Jack">Jack</b-radio>
+                        <b-radio value="Vane" disabled>Vane</b-radio>
                     </b-radio-group>
+                </div>
+                <p class="content"><b>Selection:</b> {{ radio }}</p>
 
-                    <p class="content"><b>Selection:</b> {{ radioButton }}</p>`,
-                code2: `
-                    export default {
-                        data() {
-                            return {
-                                radioButton: ''
-                            }
+                <h3 class="subtitle">Vertical example</h3>
+                <b-radio-group v-model="radio">
+                    <div class="field">
+                        <b-radio value="Flint">Flint</b-radio>
+                    </div>
+                    <div class="field">
+                        <b-radio value="Silver">Silver</b-radio>
+                    </div>
+                    <div class="field">
+                        <b-radio value="Jack">Jack</b-radio>
+                    </div>
+                    <div class="field">
+                        <b-radio value="Vane" disabled>Vane</b-radio>
+                    </div>
+                </b-radio-group>`,
+                code1: `
+                export default {
+                    data() {
+                        return {
+                            radio: 'Vane'
                         }
-                    }`
+                    }
+                }`,
+                template2: `
+                <b-radio-group v-model="radioButton">
+                    <b-radio-button type="is-danger" value="Nop">
+                        <b-icon icon="clear"></b-icon> Nop
+                    </b-radio-button>
+
+                    <b-radio-button type="is-success" value="Yep">
+                        <b-icon icon="done"></b-icon> Yep
+                    </b-radio-button>
+
+                    <b-radio-button value="Default">Default</b-radio-button>
+
+                    <b-radio-button value="Disabled" disabled>
+                        Disabled
+                    </b-radio-button>
+                </b-radio-group>
+
+                <p class="content"><b>Selection:</b> {{ radioButton }}</p>`,
+                code2: `
+                export default {
+                    data() {
+                        return {
+                            radioButton: ''
+                        }
+                    }
+                }`
             }
         }
     }
