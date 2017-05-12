@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.3.2
+
+* Modal can be used in template as well (non programmatic)
+
 ## 0.3.1
 
 * Field ``grouped`` now also works on nested Fields

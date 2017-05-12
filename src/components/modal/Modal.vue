@@ -9,7 +9,8 @@
                     :is="component"
                     @close="close">
                 </component>
-                <div v-else v-html="content"></div>
+                <div v-else-if="content" v-html="content"></div>
+                <slot v-else></slot>
             </div>
             <button v-if="canCancel" class="modal-close" @click="cancel"></button>
         </div>
@@ -18,9 +19,12 @@
 
 <script>
     export default {
+        name: 'bModal',
         props: {
+            active: Boolean,
             component: Object,
             content: String,
+            programmatic: Boolean,
             props: Object,
             width: [String, Number],
             canCancel: {
@@ -34,10 +38,15 @@
         },
         data() {
             return {
-                isActive: false,
+                isActive: this.active || false,
                 newWidth: typeof this.width === 'number'
                     ? this.width + 'px'
                     : this.width
+            }
+        },
+        watch: {
+            active(value) {
+                this.isActive = value
             }
         },
         methods: {
@@ -51,17 +60,22 @@
             },
 
             /**
-             * Call the onCancel prop (function) and close the Modal.
+             * Call the onCancel prop (function).
+             * Emit events, and destroy modal if it's programmatic.
              */
             close() {
                 this.onCancel()
-                this.isActive = false
+                this.$emit('close')
+                this.$emit('update:active', false)
 
                 // Timeout for the animation complete before destroying
-                setTimeout(() => {
-                    this.$destroy()
-                    this.$el.remove()
-                }, 150)
+                if (this.programmatic) {
+                    this.isActive = false
+                    setTimeout(() => {
+                        this.$destroy()
+                        this.$el.remove()
+                    }, 150)
+                }
             },
 
             /**
@@ -79,10 +93,11 @@
         },
         beforeMount() {
             // Insert the Modal component in body tag
-            document.body.appendChild(this.$el)
+            // only if it's programmatic
+            this.programmatic && document.body.appendChild(this.$el)
         },
         mounted() {
-            this.isActive = true
+            if (this.programmatic) this.isActive = true
         },
         beforeDestroy() {
             if (typeof window !== 'undefined') {
