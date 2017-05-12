@@ -166,9 +166,7 @@
                 export default {
                     methods: {
                         alert() {
-                            this.$dialog.alert({
-                                message: 'Everything looks fine!'
-                            })
+                            this.$dialog.alert('Everything looks fine!')
                         },
                         alertCustom() {
                             this.$dialog.alert({
@@ -186,9 +184,7 @@
                             this.$dialog.confirm({
                                 message: 'Continue on this task?',
                                 onConfirm: () => {
-                                    this.$toast.open({
-                                        message: 'User confirmed'
-                                    })
+                                    this.$toast.open('User confirmed')
                                 }
                             })
                         },
@@ -200,9 +196,7 @@
                                 confirmText: 'Agree',
                                 type: 'is-success',
                                 onConfirm: () => {
-                                    this.$toast.open({
-                                        message: 'User agreed'
-                                    })
+                                    this.$toast.open('User agreed')
                                 }
                             })
                         },
@@ -214,9 +208,7 @@
                                 type: 'is-danger',
                                 hasIcon: true,
                                 onConfirm: () => {
-                                    this.$toast.open({
-                                        message: 'Account deleted!'
-                                    })
+                                    this.$toast.open('Account deleted!')
                                 }
                             })
                         }
@@ -231,9 +223,7 @@
                                 maxlength: 20,
                                 placeholder: 'e.g. John Doe',
                                 onConfirm: (value) => {
-                                    this.$toast.open({
-                                        message: 'Your name is: ' + value
-                                    })
+                                    this.$toast.open('Your name is: ' + value)
                                 }
                             })
                         }
@@ -243,9 +233,7 @@
         },
         methods: {
             alert() {
-                this.$dialog.alert({
-                    message: 'Everything looks fine!'
-                })
+                this.$dialog.alert('Everything looks fine!')
             },
             alertCustom() {
                 this.$dialog.alert({
@@ -258,9 +246,7 @@
                 this.$dialog.confirm({
                     message: 'Continue on this task?',
                     onConfirm: () => {
-                        this.$toast.open({
-                            message: 'User confirmed'
-                        })
+                        this.$toast.open('User confirmed')
                     }
                 })
             },
@@ -281,9 +267,7 @@
                     confirmText: 'Agree',
                     type: 'is-success',
                     onConfirm: () => {
-                        this.$toast.open({
-                            message: 'User agreed'
-                        })
+                        this.$toast.open('User agreed')
                     }
                 })
             },
@@ -295,9 +279,7 @@
                     type: 'is-danger',
                     hasIcon: true,
                     onConfirm: () => {
-                        this.$toast.open({
-                            message: 'Account deleted!'
-                        })
+                        this.$toast.open('Account deleted!')
                     }
                 })
             },
@@ -307,9 +289,7 @@
                     inputMaxlength: 20,
                     inputPlaceholder: 'e.g. John Doe',
                     onConfirm: (value) => {
-                        this.$toast.open({
-                            message: 'Your name is: ' + value
-                        })
+                        this.$toast.open('Your name is: ' + value)
                     }
                 })
             }

@@ -11,8 +11,11 @@ function open(propsData) {
 
 export default {
     alert(params) {
+        let message
+        if (typeof params === 'string') message = params
         const defaultParam = {
-            canCancel: false
+            canCancel: false,
+            message
         }
         const propsData = Object.assign(defaultParam, params)
         return open(propsData)
