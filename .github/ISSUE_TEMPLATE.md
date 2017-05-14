@@ -1,9 +1,9 @@
 <!-- PLEASE READ THE FOLLOWING INSTRUCTIONS -->
 
-<!--Search through existing issues before making new issues-->
+<!--Make sure you have the latest Buefy release-->
+<!--Make sure the issue hasn't been raised yet-->
 <!--Use English for communication-->
-<!--Include screenshots or animate GIFs if necessary-->
-<!--Include a reproducible case with code that can be copy-pasted if necessary-->
+<!--Include screenshots or animated GIFs (if visual issue)-->
 
 ### Overview of the problem
 
