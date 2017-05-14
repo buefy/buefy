@@ -8,6 +8,12 @@
 }
 
 .b-table {
+    .icon {
+        transition: transform $speed-slow $easing;
+        &.is-desc {
+            transform: rotate(180deg);
+        }
+    }
     .table {
         th {
             font-weight: $weight-semibold;

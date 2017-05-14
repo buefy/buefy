@@ -1,18 +1,29 @@
 <template>
     <div class="b-table">
         <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
-            <p class="control">
-                <span class="select is-fullwidth">
-                    <select v-model="mobileSort">
-                        <option
-                            v-for="column in columns"
-                            v-if="column.isSortable"
-                            :value="column">
-                            {{ column.label }}
-                        </option>
-                    </select>
-                </span>
-            </p>
+            <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
+                <b-select v-model="mobileSort" expanded>
+                    <option
+                        v-for="column in columns"
+                        v-if="column.isSortable"
+                        :value="column">
+                        {{ column.label }}
+                    </option>
+                </b-select>
+                <p class="control">
+                    <button class="button is-primary" @click="sort(mobileSort)">
+                        <b-icon
+                            icon="arrow_upward"
+                            both
+                            size="is-small"
+                            :class="{
+                                'is-desc': !mobileSort.isAsc,
+                                'is-visible': currentSortColumn === mobileSort
+                            }">
+                        </b-icon>
+                    </button>
+                </p>
+            </div>
         </div>
 
         <div class="table-wrapper">
