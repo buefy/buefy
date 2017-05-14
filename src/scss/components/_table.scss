@@ -26,9 +26,6 @@
                     font-size: 16px;
                     transition: transform $speed-slow $easing, opacity $speed $easing;
                     opacity: 0;
-                    &.is-desc {
-                        transform: rotate(180deg);
-                    }
                     &.is-visible {
                         opacity: 1;
                     }
