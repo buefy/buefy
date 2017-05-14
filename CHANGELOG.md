@@ -2,8 +2,11 @@
 
 ## 0.3.2
 
+* Alert Dialog accepts string as well
+* Dialog open with focus on confirm button (easier to just hit enter)
 * Modal can be used in template as well (non programmatic)
 * Table automatically scrolls if overflowed
+* #62 Add sort direction with Table ``mobile-cards``
 
 ## 0.3.1
 
