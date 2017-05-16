@@ -7,6 +7,7 @@
 * Modal can be used in template as well (non programmatic)
 * Table automatically scrolls if overflowed
 * #62 Add sort direction with Table ``mobile-cards``
+* #67 Fix Table sort null values
 
 ## 0.3.1
 

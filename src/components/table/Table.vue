@@ -231,7 +231,8 @@
                         let newA = key.split('.').reduce((obj, i) => obj[i], a)
                         let newB = key.split('.').reduce((obj, i) => obj[i], b)
 
-                        if (!newA || !newB) return 0
+                        if (!newA) return 1
+                        if (!newB) return 0
 
                         newA = (typeof newA === 'string')
                             ? newA.toUpperCase()
