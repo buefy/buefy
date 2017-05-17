@@ -6,6 +6,10 @@
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "license": "MIT",
   "main": "lib/src/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rafaelpimpa/buefy.git"
