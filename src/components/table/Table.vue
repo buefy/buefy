@@ -146,7 +146,7 @@
         watch: {
             /**
              * When data prop change, update internal value and sort again,
-             * do not sort however it it's backend-sort.
+             * do not sort however if it's backend-sort.
              */
             data(value) {
                 this.newData = value

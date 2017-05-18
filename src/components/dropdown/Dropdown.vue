@@ -35,8 +35,6 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-
     export default {
         name: 'bDropdown',
         props: {
@@ -143,7 +141,7 @@
              * otherwise it is openened upwards.
              */
             calcDropdownInViewportVertical() {
-                Vue.nextTick(() => {
+                this.$nextTick(() => {
                     const rect = this.$refs.dropdown.getBoundingClientRect()
 
                     this.isListInViewportVertically = (
@@ -159,7 +157,7 @@
              * otherwise it is opened left sided.
              */
             calcDropdownInViewportHorizontal() {
-                Vue.nextTick(() => {
+                this.$nextTick(() => {
                     const rect = this.$refs.dropdown.getBoundingClientRect()
 
                     this.isListInViewportHorizontally = (

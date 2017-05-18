@@ -4,7 +4,7 @@
         <h2 class="subtitle">Buefy has the entire Bulma's core built in. You can use any feature from Bulma, plus all the components Buefy offers</h2>
         <hr>
 
-        <p class="content">
+        <div class="content">
             <ul>
                 <li><a href="http://bulma.io/documentation/grid/columns/" target="_blank">Grid system</a></li>
                 <li><a href="http://bulma.io/documentation/grid/tiles/" target="_blank">Tile system</a></li>
@@ -16,7 +16,6 @@
                 <li><a href="http://bulma.io/documentation/layout/section/" target="_blank">Section</a></li>
                 <li><a href="http://bulma.io/documentation/layout/footer/" target="_blank">Footer</a></li>
             </ul>
-        </p>
-
+        </div>
     </div>
 </template>

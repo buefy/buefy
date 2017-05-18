@@ -72,7 +72,6 @@
 </template>
 
 <script>
-    import Vue from 'vue'
     import Icon from '../icon'
     import config from '../../utils/config'
 
@@ -217,7 +216,7 @@
                 this.isPasswordVisible = !this.isPasswordVisible
                 this.newType = this.isPasswordVisible ? 'text' : 'password'
 
-                Vue.nextTick(() => {
+                this.$nextTick(() => {
                     this.$refs.input.focus()
                 })
             },

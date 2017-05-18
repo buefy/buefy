@@ -42,7 +42,6 @@
 </template>
 
 <script>
-    import Vue from 'vue'
     import Icon from '../icon'
     import Input from '../input'
 
@@ -167,7 +166,7 @@
         mounted() {
             this.isActive = true
 
-            Vue.nextTick(() => {
+            this.$nextTick(() => {
                 // Handle which element receives focus
                 if (this.hasInput) {
                     this.$refs.input.$refs.input.focus()
