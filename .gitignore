@@ -2,6 +2,7 @@
 Thumbs.db
 node_modules/
 dist/
+lib/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
