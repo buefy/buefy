@@ -2,6 +2,7 @@ import { Checkbox, CheckboxGroup } from './components/checkbox'
 import { Dropdown, DropdownOption } from './components/dropdown'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
+import { Tabs, TabItem } from './components/tabs'
 import Field from './components/field'
 import Icon from './components/icon'
 import Input from './components/input'
@@ -38,6 +39,8 @@ const components = {
     Switch,
     Table,
     TableColumn,
+    Tabs,
+    TabItem,
     Tooltip
 }
 

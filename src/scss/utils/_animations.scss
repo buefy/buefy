@@ -113,3 +113,12 @@
 .zoom-out-leave-active .animation-content {
     transform: scale(1.05);
 }
+
+// Slide
+
+.slide-prev-leave-to, .slide-next-enter {
+    transform: translate3d(-100%, 0, 0);
+}
+.slide-prev-enter, .slide-next-leave-to {
+    transform: translate3d(100%, 0, 0);
+}

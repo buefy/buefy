@@ -1,0 +1,11 @@
+.b-tabs {
+    .tab-content {
+        position: relative;
+        overflow: hidden;
+        .tab-item {
+            position: absolute;
+            width: 100%;
+            transition: transform 500ms $easing;
+        }
+    }
+}

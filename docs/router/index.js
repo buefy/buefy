@@ -16,6 +16,7 @@ const Icon = (r) => require(['../pages/documentation/general/Icon'], r)
 const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
 const Modal = (r) => require(['../pages/documentation/general/Modal'], r)
+const Tabs = (r) => require(['../pages/documentation/general/Tabs'], r)
 
 const Dialog = (r) => require(['../pages/documentation/notices/Dialog'], r)
 const Toast = (r) => require(['../pages/documentation/notices/Toast'], r)
@@ -99,6 +100,13 @@ export default new Router({
                     component: Modal,
                     meta: {
                         category: 'General'
+                    }
+                },
+                {
+                    path: 'tabs',
+                    component: Tabs,
+                    meta: {
+                        category: 'Tabs'
                     }
                 },
                 {
