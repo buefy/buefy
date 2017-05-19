@@ -1,6 +1,6 @@
 <template>
     <div class="b-tabs">
-        <div class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
+        <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
             <ul>
                 <li v-for="(tabItem, i) in tabItems" :class="{ 'is-active': newValue === i }">
                     <a @click="tabClick(i)">
@@ -14,7 +14,7 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </nav>
         <section class="tab-content" :style="{ height: contentHeight + 'px' }">
             <slot></slot>
         </section>
