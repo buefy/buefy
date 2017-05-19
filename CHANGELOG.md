@@ -2,6 +2,8 @@
 
 ## 0.3.2
 
+* **New component: Tabs**, [see docs](http://buefy.github.io/#/documentation/tabs)
+* Add ``content`` prop to Table Column, use this instead of ``v-html`` or it might break on tables with ``mobile-cards`` (collapsed rows)
 * Alert Dialog accepts string as well
 * Dialog open with focus on confirm button (easier to just hit enter)
 * Modal can be used in template as well (non programmatic)
