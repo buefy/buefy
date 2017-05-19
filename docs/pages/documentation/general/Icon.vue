@@ -137,27 +137,30 @@
 
         <hr>
 
-        <h2 class="subtitle">Properties</h2>
-        <b-table :data="props" default-sort="name">
-            <template scope="props">
-                <b-table-column field="name" label="Name"
-                    v-html="props.row.name">
-                </b-table-column>
-                <b-table-column field="description" label="Description" width="620"
-                    v-html="props.row.description">
-                </b-table-column>
-                <b-table-column field="type" label="Type"
-                    v-html="props.row.type">
-                </b-table-column>
-                <b-table-column field="values" label="Values"
-                    v-html="props.row.values">
-                </b-table-column>
-                <b-table-column field="default" label="Default"
-                    v-html="props.row.default">
-                </b-table-column>
-            </template>
-        </b-table>
-
+        <h2 class="title">API</h2>
+        <b-tabs>
+            <b-tab-item label="Properties">
+                <b-table :data="props" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name"
+                            :content="props.row.name">
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620"
+                            :content="props.row.description">
+                        </b-table-column>
+                        <b-table-column field="type" label="Type"
+                            :content="props.row.type">
+                        </b-table-column>
+                        <b-table-column field="values" label="Values"
+                            :content="props.row.values">
+                        </b-table-column>
+                        <b-table-column field="default" label="Default"
+                            :content="props.row.default">
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
+        </b-tabs>
     </div>
 </template>
 

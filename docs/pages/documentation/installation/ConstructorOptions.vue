@@ -15,19 +15,19 @@
         <b-table :data="options" default-sort="name">
             <template scope="props">
                 <b-table-column field="name" label="Name"
-                    v-html="props.row.name">
+                    :content="props.row.name">
                 </b-table-column>
                 <b-table-column field="description" label="Description" width="620"
-                    v-html="props.row.description">
+                    :content="props.row.description">
                 </b-table-column>
                 <b-table-column field="type" label="Type"
-                    v-html="props.row.type">
+                    :content="props.row.type">
                 </b-table-column>
                 <b-table-column field="values" label="Values"
-                    v-html="props.row.values">
+                    :content="props.row.values">
                 </b-table-column>
                 <b-table-column field="default" label="Default"
-                    v-html="props.row.default">
+                    :content="props.row.default">
                 </b-table-column>
             </template>
         </b-table>
