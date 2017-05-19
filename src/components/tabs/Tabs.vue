@@ -3,10 +3,11 @@
         <div class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
             <ul>
                 <li v-for="(tabItem, i) in tabItems" :class="{ 'is-active': newValue === i }">
-                    <a @click="changeTab(i)">
+                    <a @click="tabClick(i)">
                         <b-icon
                             v-if="tabItem.icon"
                             :icon="tabItem.icon"
+                            :pack="tabItem.iconPack"
                             :size="size">
                         </b-icon>
                         <span>{{ tabItem.label }}</span>
@@ -33,7 +34,11 @@
             expanded: Boolean,
             type: String,
             size: String,
-            position: String
+            position: String,
+            animated: {
+                type: Boolean,
+                default: true
+            }
         },
         data() {
             return {
@@ -44,30 +49,60 @@
             }
         },
         watch: {
+            /**
+             * When v-model is changed set the new active tab.
+             */
             value(value) {
-                this.tabItems[this.newValue].deactivate(this.newValue, value)
-                this.tabItems[value].activate(this.newValue, value)
-
-                this.$nextTick(() => {
-                    const height = this.tabItems[value].$el.clientHeight
-                    this.contentHeight = height
-                })
-
+                this.changeTab(this.newValue, value)
                 this.newValue = value
+                this.calcHeight()
             }
         },
         methods: {
-            changeTab(value) {
+            /**
+             * Change the active tab.
+             */
+            changeTab(oldIndex, newIndex) {
+                if (oldIndex === newIndex) return
+
+                this.tabItems[oldIndex].deactivate(oldIndex, newIndex)
+                this.tabItems[newIndex].activate(oldIndex, newIndex)
+            },
+
+            /**
+             * Tab click listener, emit events and set new active tab.
+             */
+            tabClick(value) {
                 this.$emit('input', value)
+                this.$emit('change', value)
+                this.changeTab(this.newValue, value)
+                this.newValue = value
+                this.calcHeight()
+            },
+
+            /**
+             * Calculate the height of container based on the tab height.
+             */
+            calcHeight() {
+                this.$nextTick(() => {
+                    const height = this.tabItems[this.newValue].$el.clientHeight
+                    this.contentHeight = height
+                })
+            }
+        },
+        created() {
+            if (typeof window !== 'undefined') {
+                window.addEventListener('resize', this.calcHeight)
             }
         },
         mounted() {
             this.tabItems[this.newValue].isActive = true
-
-            this.$nextTick(() => {
-                const height = this.tabItems[this.newValue].$el.clientHeight
-                this.contentHeight = height
-            })
+            this.calcHeight()
+        },
+        beforeDestroy() {
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('resize', this.calcHeight)
+            }
         }
     }
 </script>

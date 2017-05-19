@@ -106,7 +106,7 @@ export default new Router({
                     path: 'tabs',
                     component: Tabs,
                     meta: {
-                        category: 'Tabs'
+                        category: 'General'
                     }
                 },
                 {

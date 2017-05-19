@@ -1,6 +1,6 @@
 <template>
     <transition :name="transitionName">
-        <div v-show="isActive" class="tab-item">
+        <div v-show="isActive" class="tab-item" :class="{ 'is-animated': transitionName !== null }">
             <slot></slot>
         </div>
     </transition>
@@ -11,25 +11,41 @@
         name: 'bTabItem',
         props: {
             label: String,
-            icon: String
+            icon: String,
+            iconPack: String
         },
         data() {
             return {
                 isActive: false,
-                transitionName: ''
+                transitionName: null
             }
         },
         methods: {
+            /**
+             * Activate tab, alter animation name based on the index.
+             */
             activate(oldIndex, index) {
-                this.transitionName = index < oldIndex
-                    ? 'slide-next'
-                    : 'slide-prev'
+                if (!this.$parent.animated) {
+                    this.transitionName = null
+                } else {
+                    this.transitionName = index < oldIndex
+                        ? 'slide-next'
+                        : 'slide-prev'
+                }
                 this.isActive = true
             },
+
+            /**
+             * Deactivate tab, alter animation name based on the index.
+             */
             deactivate(oldIndex, index) {
-                this.transitionName = index < oldIndex
-                    ? 'slide-next'
-                    : 'slide-prev'
+                if (!this.$parent.animated) {
+                    this.transitionName = null
+                } else {
+                    this.transitionName = index < oldIndex
+                        ? 'slide-next'
+                        : 'slide-prev'
+                }
                 this.isActive = false
             }
         },
