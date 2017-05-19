@@ -1,6 +1,7 @@
 <template>
     <td :class="{ 'has-text-right': numeric }" :data-label="label">
-        <slot></slot>
+        <span v-if="content" v-html="content"></span>
+        <span v-else><slot></slot></span>
     </td>
 </template>
 
@@ -13,6 +14,7 @@
             width: [Number, String],
             numeric: Boolean,
             sortable: Boolean,
+            content: String,
             customSort: Function
         },
         created() {
