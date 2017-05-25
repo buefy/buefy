@@ -1,12 +1,4 @@
 .autocomplete {
-    position: relative;
-    .background {
-        @include overlay;
-        position: fixed;
-        background-color: rgba($black, 0.86);
-        z-index: 10;
-        transition: opacity $speed-slow $easing;
-    }
     .box {
         position: absolute;
         top: 2.5em;
@@ -15,7 +7,6 @@
         white-space: nowrap;
         overflow: auto;
         width: 100%;
-        max-height: 200px;
         transition: opacity $speed-slow $easing;
         &.is-opened-top {
             top: auto;
@@ -29,35 +20,16 @@
             @include unselectable;
             padding: 0.25rem 0.75rem;
             cursor: pointer;
-            &:hover {
+            &:not(.is-disabled):hover {
                 background: $background;
             }
             &.is-selected {
                 background: $primary !important;
                 color: $primary-invert;
             }
-        }
-    }
-    @include touch {
-        .box {
-            position: fixed;
-            width: calc(100vw - 60px);
-            max-width: 600px;
-            max-height: calc(100vh - 120px);
-            top: 50%;
-            left: 50%;
-            transform: translate3d(-50%, -50%, 0);
-            white-space: normal;
-            &.is-narrow {
-                .option {
-                    padding: 0.75rem 1rem;
-                }
-            }
-            .option {
-                padding: 1rem 1.5rem;
-                &.has-subheader {
-                    padding: 1rem 2rem;
-                }
+            &.is-disabled {
+                opacity: .5;
+                cursor: not-allowed;
             }
         }
     }

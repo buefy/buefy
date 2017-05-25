@@ -24,14 +24,15 @@ const Snackbar = (r) => require(['../pages/documentation/notices/Snackbar'], r)
 const Notification = (r) => require(['../pages/documentation/notices/Notification'], r)
 const Message = (r) => require(['../pages/documentation/notices/Message'], r)
 
-const Table = (r) => require(['../pages/documentation/data/Table'], r)
-const Pagination = (r) => require(['../pages/documentation/data/Pagination'], r)
-
 const Input = (r) => require(['../pages/documentation/form/Input'], r)
 const Select = (r) => require(['../pages/documentation/form/Select'], r)
 const Checkbox = (r) => require(['../pages/documentation/form/Checkbox'], r)
 const Radio = (r) => require(['../pages/documentation/form/Radio'], r)
 const Switch = (r) => require(['../pages/documentation/form/Switch'], r)
+
+const Table = (r) => require(['../pages/documentation/data/Table'], r)
+const Pagination = (r) => require(['../pages/documentation/data/Pagination'], r)
+const Autocomplete = (r) => require(['../pages/documentation/data/Autocomplete'], r)
 
 export default new Router({
     mode: 'hash',
@@ -145,20 +146,6 @@ export default new Router({
                     }
                 },
                 {
-                    path: 'table',
-                    component: Table,
-                    meta: {
-                        category: 'DataManipulation'
-                    }
-                },
-                {
-                    path: 'pagination',
-                    component: Pagination,
-                    meta: {
-                        category: 'DataManipulation'
-                    }
-                },
-                {
                     path: 'input',
                     component: Input,
                     meta: {
@@ -191,6 +178,27 @@ export default new Router({
                     component: Switch,
                     meta: {
                         category: 'FormElements'
+                    }
+                },
+                {
+                    path: 'table',
+                    component: Table,
+                    meta: {
+                        category: 'DataManipulation'
+                    }
+                },
+                {
+                    path: 'pagination',
+                    component: Pagination,
+                    meta: {
+                        category: 'DataManipulation'
+                    }
+                },
+                {
+                    path: 'autocomplete',
+                    component: Autocomplete,
+                    meta: {
+                        category: 'DataManipulation'
                     }
                 },
                 {

@@ -2,9 +2,9 @@
     <p
         class="control autocomplete"
         :class="{ 'is-expanded': expanded, 'is-loading': loading  }">
-        <slot></slot>
+
         <input
-            v-model="inputValue"
+            v-model="newValue"
             class="input"
             :class="[statusType, size]"
             ref="input"
@@ -16,36 +16,31 @@
             autocomplete="off"
             @focus="$emit('focus', $event)"
             @blur="blur"
-            @keyup.enter.prevent="keyEnter"
-            @keyup.esc.prevent="keyEsc"
+            @keyup.esc.prevent="isActive = false"
+            @keyup.enter.prevent="selectOptionAndEmit(this.selected)"
             @keydown.down.prevent="keyArrows('down')"
             @keydown.up.prevent="keyArrows('up')">
 
-        <transition-group name="fade">
-            <div
-                key="bg"
-                class="background is-hidden-desktop"
-                v-show="isActive || isMouseOverDropdown">
-            </div>
+        <transition name="fade">
             <span
-                key="dropbox"
                 class="box"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
-                v-show="isActive || isMouseOverDropdown"
-                ref="dropdown"
-                @mouseenter="isMouseOverDropdown = true"
-                @mouseleave="isMouseOverDropdown = false">
+                v-show="isActive && visibleData.length > 0"
+                ref="dropdown">
                 <ul>
-                    <template v-for="(option, i) in filteredData">
+                    <template v-for="option in visibleData">
                         <li class="option"
                             :class="{ 'is-selected': option === selected }"
-                            @click="selectOption(option)">
-                            {{ getByPath(option, field) }}
+                            @click="selectOptionAndEmit(option)">
+
+                            <slot :option="option"></slot>
+
                         </li>
                     </template>
+                    <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
                 </ul>
             </span>
-        </transition-group>
+        </transition>
     </p>
 </template>
 
@@ -55,9 +50,16 @@
     export default {
         name: 'bAutocomplete',
         props: {
-            value: [String, Number],
+            value: String,
             data: Array,
-            field: String,
+            field: {
+                type: String,
+                default: 'text'
+            },
+            maxResults: {
+                type: [Number, String],
+                default: 6
+            },
             size: String,
             placeholder: String,
             name: String,
@@ -72,10 +74,9 @@
                 selected: null,
                 isActive: false,
                 isValid: true,
-                inputValue: null,
+                newValue: this.value,
                 isListInViewportHorizontally: true,
-                isListInViewportVertically: true,
-                isMouseOverDropdown: false
+                isListInViewportVertically: true
             }
         },
         computed: {
@@ -86,32 +87,6 @@
                 if (this.$parent.isFieldComponent) {
                     return this.$parent.newType
                 }
-            },
-
-            /**
-             * Data that is rendered.
-             *
-             * Activate the dropdown when filtered, this is to prevent
-             * dropdown to not appear when user focused the input
-             * by using tab key and not cliking on it.
-             *
-             * Filter the original data if:
-             *   - Something is typed on input; or
-             *   - Something is selected; and
-             *   - Selected option is not the same of input value
-             */
-            filteredData() {
-                if (!this.inputValue || this.selected !== null && getByPath(this.selected, this.field) === this.inputValue) {
-                    return this.data
-                }
-
-                this.isActive = true
-                return this.data.filter((option) => {
-                    return getByPath(option, this.field)
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(this.inputValue.toLowerCase()) >= 0
-                })
             },
 
             /**
@@ -130,43 +105,47 @@
                         whiteList.push(child)
                     }
                 }
-                // Adds all children from trigger
-                if (this.$refs.trigger !== undefined) {
-                    const children = this.$refs.trigger.querySelectorAll('*')
-                    for (const child of children) {
-                        whiteList.push(child)
-                    }
-                }
 
                 return whiteList
+            },
+
+            /**
+             * Splitted data depending on maxResults.
+             */
+            visibleData() {
+                if (this.data.length <= this.maxResults) {
+                    return this.data
+                } else {
+                    return this.data.slice(0, this.maxResults)
+                }
             }
         },
         watch: {
             /**
              * When dropdown is toggled, check the visibility to know when
-             * to open upwards or left sided.
-             *
-             * - Activating: set dropdown scroll to the selected option and select all (focus) of input.
-             * - Deactivating: set the previously selected option.
+             * to open upwards.
              */
             isActive(active) {
-                this.calcDropdownInViewportHorizontal()
-                this.calcDropdownInViewportVertical()
                 if (active) {
-                    if (this.selected !== null) {
-                        this.$nextTick(() => {
-                            // Set scroll position to selected item
-                            if (this.$refs[this.selected.uid] !== undefined) {
-                                this.$refs.dropdown.scrollTop = this.$refs[this.selected.uid][0].offsetTop
-                            }
-                        })
-                    }
-                    this.$refs.input.select()
+                    this.calcDropdownInViewportVertical()
                 } else {
-                    if (this.selected !== null && !this.isMouseOverDropdown) {
-                        this.inputValue = getByPath(this.selected, this.field)
-                    }
+                    // Timeout to wait for the animation to finish before recalculating
+                    setTimeout(() => {
+                        this.calcDropdownInViewportVertical()
+                    }, 120)
                 }
+            },
+
+            newValue(value) {
+                this.$emit('input', value)
+                this.$emit('change', value)
+
+                if (value === '') {
+                    this.isActive = false
+                    return
+                }
+
+                this.isActive = true
             },
 
             /**
@@ -175,18 +154,7 @@
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                if (value === null || value === '') {
-                    this.selectOption(null)
-                    this.inputValue = null
-                    return
-                }
-
-                this.data.forEach((option) => {
-                    if (option.value === value) {
-                        this.selectOption(option)
-                        return
-                    }
-                })
+                this.newValue = value
                 !this.isValid && this.html5Validation()
             },
 
@@ -199,64 +167,27 @@
              */
             selected(option) {
                 if (!option) return
-
-                this.$emit('input', option.value)
-                this.$emit('change', option.value)
-                this.inputValue = getByPath(option, this.field)
-                this.close(true)
-                !this.isValid && this.html5Validation()
             }
         },
         methods: {
             /**
              * Set which option is currently selected.
-             * Add the option to the currently hovered as well to not lose
-             * the scroll posiiton when using arrow keys.
              */
-            selectOption(option, index) {
+            selectOption(option) {
                 if (option === undefined) return
 
                 this.selected = option
-                this.hoverOption(option)
             },
 
             /**
-             * Set which option is currently hovered.
-             * Emulate native <select> arrow selecting; if hovered option is:
-             *  1. Between visible area of dropdown:
-             *    - Do nothing.
-             *
-             *  2. Lesser than minimum part:
-             *    - Set dropdown scroll to hovered option and keeping it in the top.
-             *
-             *  3. Greater than or equal maximum part:
-             *    - Set dropdown scroll to hovered option but keeping it in the bottom.
+             * Set which option is currently selected, update v-model and close dropdown.
              */
-            hoverOption(option, index) {
-                if (option === undefined || option === this.hovered) return
-
-                if (index !== undefined) {
-                    const dropdown = this.$refs.dropdown
-                    const element = this.$refs[option.uid][0]
-                    const visMin = dropdown.scrollTop
-                    const visMax = dropdown.scrollTop + dropdown.clientHeight - element.clientHeight
-
-                    if (element.offsetTop < visMin) {
-                        dropdown.scrollTop = element.offsetTop
-                    } else if (element.offsetTop >= visMax) {
-                        dropdown.scrollTop = element.offsetTop - dropdown.clientHeight + element.clientHeight
-                    }
-                }
-                this.hovered = option
-            },
-
-            /**
-             * Close the dropdown.
-             * If force, also change isMouseOverDropdown.
-             */
-            close(force) {
-                this.isActive = false
-                if (force) this.isMouseOverDropdown = false
+            selectOptionAndEmit(option) {
+                this.selectOption(option)
+                this.$emit('select', this.selected)
+                this.newValue = getByPath(this.selected, this.field)
+                this.$emit('input', getByPath(this.selected, this.field))
+                this.$nextTick(() => { this.isActive = false })
             },
 
             /**
@@ -264,7 +195,7 @@
              */
             clickedOutside(event) {
                 if (this.whiteList.indexOf(event.target) < 0) {
-                    this.close()
+                    this.isActive = false
                 }
             },
 
@@ -285,35 +216,6 @@
             },
 
             /**
-             * Calculate if the dropdown is horizontally visible when activated,
-             * otherwise it is opened left sided.
-             */
-            calcDropdownInViewportHorizontal() {
-                this.$nextTick(() => {
-                    const rect = this.$refs.dropdown.getBoundingClientRect()
-
-                    this.isListInViewportHorizontally = (
-                        rect.left >= 0 &&
-                        rect.right <= (window.innerWidth ||
-                            document.documentElement.clientWidth)
-                    )
-                })
-            },
-
-
-            /**
-             * Verify if next item is a subheader (another group chunk).
-             */
-            isSubheader(option, previousOption, i) {
-                if (!option.group) return
-                // If it's first and has group property already show as subheader
-                if (i === 0) return true
-
-                if (previousOption === undefined) return
-                return option.group !== previousOption.group
-            },
-
-            /**
              * Arrows keys listener.
              *
              * If dropdown is active:
@@ -323,30 +225,15 @@
              */
             keyArrows(direction) {
                 const sum = direction === 'down' ? 1 : -1
-                if (!this.isActive) {
-                    const index = this.data.indexOf(this.hovered) + sum
-                    this.selectOption(this.data[index], index)
+                if (this.isActive) {
+                    let index = this.visibleData.indexOf(this.selected) + sum
+                    index = index > this.visibleData.length - 1 ? 0 : index
+                    index = index < 0 ? this.visibleData.length - 1 : index
+
+                    this.selectOption(this.visibleData[index])
                 } else {
-                    const index = this.filteredData.indexOf(this.hovered) + sum
-                    this.hoverOption(this.filteredData[index], index)
+                    this.isActive = true
                 }
-            },
-
-            /**
-             * Enter key listener.
-             * Select the hovered option and close the dropdown.
-             */
-            keyEnter() {
-                this.selectOption(this.hovered)
-                this.close()
-            },
-
-            /**
-             * Esc key listener.
-             * Force-close the dropdown.
-             */
-            keyEsc() {
-                this.close(true)
             },
 
             /**
@@ -356,7 +243,7 @@
              */
             blur(event) {
                 this.$emit('blur', event)
-                this.close()
+                this.isActive = false
                 this.html5Validation()
             },
 
@@ -390,14 +277,16 @@
             }
         },
         created() {
-            document.addEventListener('click', this.clickedOutside)
-            window.addEventListener('resize', this.calcDropdownInViewportHorizontal)
-            window.addEventListener('resize', this.calcDropdownInViewportVertical)
+            if (window !== undefined) {
+                document.addEventListener('click', this.clickedOutside)
+                window.addEventListener('resize', this.calcDropdownInViewportVertical)
+            }
         },
         beforeDestroy() {
-            document.removeEventListener('click', this.clickedOutside)
-            window.removeEventListener('resize', this.calcDropdownInViewportHorizontal)
-            window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+            if (window !== undefined) {
+                document.removeEventListener('click', this.clickedOutside)
+                window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+            }
         }
     }
 </script>
