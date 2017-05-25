@@ -61,7 +61,7 @@
             },
 
             /**
-             * When dropdown is toggled. check the visibility to know when
+             * When dropdown is toggled, check the visibility to know when
              * to open upwards or left sided.
              */
             isActive(active) {
@@ -73,7 +73,7 @@
                     setTimeout(() => {
                         this.calcDropdownInViewportHorizontal()
                         this.calcDropdownInViewportVertical()
-                    }, 100)
+                    }, 120)
                 }
             }
         },
