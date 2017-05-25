@@ -59,7 +59,7 @@
                     <tr v-for="row in visibleData"
                         @click="selectRow(row)"
                         @dblclick="$emit('dblclick', row)"
-                        :class="{ 'is-selected': row === selected }">
+                        :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
 
                         <td class="checkbox-cell" v-if="checkable">
                             <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
