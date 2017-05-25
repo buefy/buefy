@@ -3,6 +3,7 @@ import { Dropdown, DropdownOption } from './components/dropdown'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
+import Autocomplete from './components/autocomplete'
 import Field from './components/field'
 import Icon from './components/icon'
 import Input from './components/input'
@@ -21,6 +22,7 @@ import Toast from './components/toast'
 import config, { setOptions } from './utils/config'
 
 const components = {
+    Autocomplete,
     Checkbox,
     CheckboxGroup,
     Dropdown,
