@@ -4,6 +4,7 @@
 
 * Add nav Dropdown example
 * #71 Add background for checked rows on Table
+* #72 Fix table overflow
 
 ## 0.3.2
 

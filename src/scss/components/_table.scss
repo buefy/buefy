@@ -1,9 +1,11 @@
 // Outside of .b-table so it can be used in normal html tables
 .table-wrapper {
-    overflow-x: auto;
     margin-bottom: 1.5rem;
     .table {
         margin-bottom: 0;
+    }
+    @include touch {
+        overflow-x: auto;
     }
 }
 
