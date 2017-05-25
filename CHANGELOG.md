@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.3.3
+
+* Add nav Dropdown example
+* #71 Add background for checked rows on Table
+
 ## 0.3.2
 
 * **New component: Tabs**, [see docs](http://buefy.github.io/#/documentation/tabs)

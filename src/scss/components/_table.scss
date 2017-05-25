@@ -64,6 +64,9 @@
                     }
                 }
             }
+            &.is-checked {
+                background: lighten($grey-lighter, 8%);
+            }
         }
         .checkbox-cell {
             width: 40px;

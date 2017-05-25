@@ -56,6 +56,35 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
+        <h2 class="title">Nav</h2>
+        <div class="example is-paddingless">
+            <nav class="nav is-primary">
+                <div class="nav-left">
+                    <a class="nav-item">
+                        <img src="../../../assets/buefy.png" alt="Buefy">
+                    </a>
+                </div>
+
+                <div class="nav-center">
+                    <a class="nav-item"><b-icon pack="fa" icon="github"></b-icon></a>
+                    <a class="nav-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
+                </div>
+
+                <div class="nav-right" style="overflow: visible">
+                    <a class="nav-item">
+                        <b-dropdown>
+                            <template slot="trigger">Dropdown</template>
+
+                            <b-dropdown-option>Action</b-dropdown-option>
+                            <b-dropdown-option>Another action</b-dropdown-option>
+                            <b-dropdown-option>Something else</b-dropdown-option>
+                        </b-dropdown>
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+
         <h2 class="title">Addons</h2>
         <div class="example">
             <b-field>
@@ -107,7 +136,7 @@
                 <b-input icon="search" type="search" placeholder="Search..."></b-input>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
         <h2 class="title">Icons and HTML</h2>
         <div class="example">
@@ -167,8 +196,8 @@
             </div>
             <p><b>Selection:</b> {{ select }}</p>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
-        <pre v-highlight><code class="javascript">{{ code4 | pre }}</code></pre>
+        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+        <pre v-highlight><code class="javascript">{{ code5 | pre }}</code></pre>
 
         <hr>
 
@@ -362,6 +391,31 @@
                     <b-dropdown-option>Something else</b-dropdown-option>
                 </b-dropdown>`,
                 template3: `
+                <nav class="nav is-primary">
+                    <div class="nav-left">
+                        <a class="nav-item">
+                            <img src="../../../assets/buefy.png" alt="Buefy">
+                        </a>
+                    </div>
+
+                    <div class="nav-center">
+                        <a class="nav-item"><b-icon pack="fa" icon="github"></b-icon></a>
+                        <a class="nav-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
+                    </div>
+
+                    <div class="nav-right" style="overflow: visible">
+                        <a class="nav-item">
+                            <b-dropdown>
+                                <template slot="trigger">Dropdown</template>
+
+                                <b-dropdown-option>Action</b-dropdown-option>
+                                <b-dropdown-option>Another action</b-dropdown-option>
+                                <b-dropdown-option>Something else</b-dropdown-option>
+                            </b-dropdown>
+                        </a>
+                    </div>
+                </nav>`,
+                template4: `
                 <b-field>
                     <p class="control">
                         <button class="button">
@@ -410,7 +464,7 @@
                     </b-dropdown>
                     <b-input icon="search" type="search" placeholder="Search..."></b-input>
                 </b-field>`,
-                template4: `
+                template5: `
                 <div class="block">
                     <b-dropdown>
                         <button class="button" slot="trigger">
@@ -466,7 +520,7 @@
                     </b-dropdown>
                 </div>
                 <p><b>Selection:</b> {{ select }}</p>`,
-                code4: `
+                code5: `
                 export default {
                     data() {
                         return {
