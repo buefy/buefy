@@ -4,29 +4,60 @@
         <h2 class="subtitle"></h2>
         <hr>
 
+        <b-autocomplete
+            :data="testData">
+        </b-autocomplete>
+        <br>
+        <br>
+        <br>
+
         <div class="example">
-            <b-autocomplete v-model="search" :data="filteredData" field="user.first_name" @select="option => selected = option">
-                <template scope="props">
-                    {{ props.option.user.first_name }}
-                </template>
+            <p class="content"><b>Selected:</b> {{ sync.selected }}</p>
+
+            <b-autocomplete
+                v-model="sync.name"
+                :data="filteredData"
+                field="user.first_name"
+                @select="option => sync.selected = option">
             </b-autocomplete>
-            <br>
-            <b>Último selecionado:</b> {{ selected }}
+
         </div>
         <pre class="content" v-highlight><code class="html">{{  }}</code></pre>
         <pre class="content" v-highlight><code class="javascript">{{  }}</code></pre>
 
         <h2 class="title">Async</h2>
+        <p class="block"><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small></p>
         <div class="example">
+            <p class="content"><b>Selected:</b> {{ async.selected }}</p>
+
             <b-field label="Find a movie">
-                <b-autocomplete v-model="search2" :data="asyncData" field="title" @change="getAsyncData" :loading="isFetching" @select="option => selected2 = option">
+                <b-autocomplete
+                    v-model="async.name"
+                    :data="async.data"
+                    field="title"
+                    custom-template
+                    :loading="async.isFetching"
+                    @change="getAsyncData"
+                    @select="option => async.selected = option">
+
                     <template scope="props">
-                        {{ props.option.title }}
+                        <div class="is-flex">
+                            <div style="height: 0; width: 32px; margin-right: 0.5em;">
+                                <img :src="'https://image.tmdb.org/t/p/w300_and_h450_bestv2/' + props.option.poster_path">
+                            </div>
+                            <div>
+                                {{ props.option.title }}
+                                <br>
+                                <small>
+                                    Released at {{ props.option.release_date }},
+                                    rated <b>{{ props.option.vote_average }}</b>
+                                </small>
+                            </div>
+                        </div>
                     </template>
+
                 </b-autocomplete>
             </b-field>
-            <br>
-            <b>Último selecionado:</b> {{ selected2 }}
         </div>
         <pre class="content" v-highlight><code class="html">{{  }}</code></pre>
         <pre v-highlight><code class="javascript">{{  }}</code></pre>
@@ -77,18 +108,24 @@
 </template>
 
 <script>
-    import testData from '../../../assets/data_test.json'
+    import data from '../../../assets/data_test.json'
+    import debounce from 'lodash/debounce'
 
     export default {
         data() {
             return {
-                testData,
-                search: '',
-                search2: '',
-                selected: null,
-                selected2: null,
-                asyncData: [],
-                isFetching: false,
+                testData: ['Angular', 'React', 'Vue'],
+                sync: {
+                    data,
+                    name: '',
+                    selected: null
+                },
+                async: {
+                    data: [],
+                    name: '',
+                    selected: null,
+                    isFetching: false
+                },
                 props: [
                     {
                         name: '<code>total</code>',
@@ -140,58 +177,32 @@
                         parameters: '<code>value: Number</code>'
                     }
                 ],
-                template: `
-                <b-pagination
-                    :total="total"
-                    :current="current"
-                    :order="order"
-                    :size="size"
-                    :simple="isSimple"
-                    :per-page="perPage"
-                    @change="pageChanged">
-                </b-pagination>`,
-                code: `
-                export default {
-                    data() {
-                        return {
-                            total: 200,
-                            current: 1,
-                            perPage: 20,
-                            order: '',
-                            size: '',
-                            isSimple: false
-                        }
-                    },
-                    methods: {
-                        pageChanged(value) {
-                            this.current = value
-                        }
-                    }
-                }`
+                template: ``,
+                code: ``
             }
         },
         computed: {
             filteredData() {
-                return this.testData.filter((option) => {
+                return this.sync.data.filter((option) => {
                     return option.user.first_name
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.search.toLowerCase()) >= 0
+                        .indexOf(this.sync.name.toLowerCase()) >= 0
                 })
             }
         },
         methods: {
-            getAsyncData() {
-                this.asyncData = []
-                this.isFetching = true
-                this.$http.get('https://api.themoviedb.org/3/search/movie?api_key=342d3061b70d2747a1e159ae9a7e9a36&query=' + this.search2)
+            getAsyncData: debounce(function () {
+                this.async.data = []
+                this.async.isFetching = true
+                this.$http.get('https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=' + this.async.name)
                     .then(({ data }) => {
-                        data.results.forEach((item) => this.asyncData.push(item))
-                        this.isFetching = false
+                        data.results.forEach((item) => this.async.data.push(item))
+                        this.async.isFetching = false
                     }, response => {
-                        this.isFetching = false
+                        this.async.isFetching = false
                     })
-            }
+            }, 500)
         }
     }
 </script>

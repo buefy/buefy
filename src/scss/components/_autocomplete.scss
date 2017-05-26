@@ -5,7 +5,7 @@
         padding: 0.5em 0;
         z-index: 10;
         white-space: nowrap;
-        overflow: auto;
+        overflow-y: auto;
         width: 100%;
         transition: opacity $speed-slow $easing;
         &.is-opened-top {

@@ -17,7 +17,7 @@
             @focus="$emit('focus', $event)"
             @blur="blur"
             @keyup.esc.prevent="isActive = false"
-            @keyup.enter.prevent="selectOptionAndEmit(this.selected)"
+            @keyup.enter.prevent="enterPressed"
             @keydown.down.prevent="keyArrows('down')"
             @keydown.up.prevent="keyArrows('up')">
 
@@ -33,7 +33,8 @@
                             :class="{ 'is-selected': option === selected }"
                             @click="selectOptionAndEmit(option)">
 
-                            <slot :option="option"></slot>
+                            <slot v-if="customTemplate" :option="option"></slot>
+                            <template v-else>{{ getValue(option) }}</template>
 
                         </li>
                     </template>
@@ -60,6 +61,7 @@
                 type: [Number, String],
                 default: 6
             },
+            customTemplate: Boolean,
             size: String,
             placeholder: String,
             name: String,
@@ -70,7 +72,6 @@
         },
         data() {
             return {
-                getByPath,
                 selected: null,
                 isActive: false,
                 isValid: true,
@@ -129,18 +130,20 @@
                 if (active) {
                     this.calcDropdownInViewportVertical()
                 } else {
+                    this.selectOption(null)
                     // Timeout to wait for the animation to finish before recalculating
                     setTimeout(() => {
                         this.calcDropdownInViewportVertical()
-                    }, 120)
+                    }, 100)
                 }
             },
 
             newValue(value) {
                 this.$emit('input', value)
                 this.$emit('change', value)
+                this.selectOptionAndEmit(null, false)
 
-                if (value === '') {
+                if (!value) {
                     this.isActive = false
                     return
                 }
@@ -182,12 +185,21 @@
             /**
              * Set which option is currently selected, update v-model and close dropdown.
              */
-            selectOptionAndEmit(option) {
+            selectOptionAndEmit(option, closeDropdown = true) {
                 this.selectOption(option)
                 this.$emit('select', this.selected)
-                this.newValue = getByPath(this.selected, this.field)
-                this.$emit('input', getByPath(this.selected, this.field))
-                this.$nextTick(() => { this.isActive = false })
+                if (this.selected !== null) {
+                    this.newValue = this.getValue(this.selected)
+                    this.$emit('input', this.getValue(this.selected))
+                }
+                if (closeDropdown) {
+                    this.$nextTick(() => { this.isActive = false })
+                }
+            },
+
+            enterPressed() {
+                if (this.selected === null) return
+                this.selectOptionAndEmit(this.selected)
             },
 
             /**
@@ -197,6 +209,12 @@
                 if (this.whiteList.indexOf(event.target) < 0) {
                     this.isActive = false
                 }
+            },
+
+            getValue(option) {
+                return typeof option === 'object'
+                    ? getByPath(option, this.field)
+                    : option
             },
 
             /**
