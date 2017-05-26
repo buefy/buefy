@@ -135,6 +135,19 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Scoped Slots">
+                <b-table :data="tableScopedSlots" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Slot name"
+                            :content="props.row.name">
+                        </b-table-column>
+                        <b-table-column field="props" label="Props"
+                            :content="props.row.props">
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
 
         <h3 class="subtitle">Table Column</h3>
@@ -265,6 +278,12 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>20</code>'
+                    }
+                ],
+                tableScopedSlots: [
+                    {
+                        name: 'default',
+                        props: '<code>row: Object</code>, <code>index: Number</code>'
                     }
                 ],
                 tableEvents: [

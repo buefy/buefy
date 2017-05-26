@@ -3,8 +3,9 @@
 ## 0.3.3
 
 * Add nav Dropdown example
-* #71 Add background for checked rows on Table
+* #71 Add background for checked rows on Table (thanks @mikejavier)
 * #72 Fix table overflow
+* #77 Add index to Table scoped slot (thanks @UrVerySpecial)
 
 ## 0.3.2
 
