@@ -1,5 +1,6 @@
 <template>
-    <span class="dropdown control">
+    <span class="dropdown control"
+        :class="{ 'is-disabled': disabled }">
         <a
             role="button"
             ref="trigger"
@@ -9,7 +10,6 @@
         </a>
 
         <transition-group name="fade">
-
             <div
                 key="bg"
                 class="background is-hidden-desktop"
@@ -20,7 +20,7 @@
                 class="box"
                 :class="['is-dropdown', {
                     'is-opened-top': !isListInViewportVertically,
-                    'is-opened-left': !isListInViewportHorizontally,
+                    'is-opened-left': !isListInViewportHorizontally || preferLeft && isListInViewportHorizontally,
                     'is-narrow': narrowed
                 }]"
                 v-show="isActive"
@@ -29,7 +29,6 @@
                     <slot></slot>
                 </ul>
             </span>
-
         </transition-group>
     </span>
 </template>
@@ -38,9 +37,10 @@
     export default {
         name: 'bDropdown',
         props: {
-            value: [String, Number, Object],
+            value: [String, Number, Object, Boolean],
             narrowed: Boolean,
-            disabled: Boolean
+            disabled: Boolean,
+            preferLeft: Boolean
         },
         data() {
             return {
@@ -73,7 +73,7 @@
                     setTimeout(() => {
                         this.calcDropdownInViewportHorizontal()
                         this.calcDropdownInViewportVertical()
-                    }, 120)
+                    }, 100)
                 }
             }
         },
@@ -111,20 +111,13 @@
              *   1. Emit input event to update the user v-model.
              *   2. Force-close the dropdown.
              */
-            selectOption(value = '') {
+            selectOption(value = '', isClickable) {
+                if (!isClickable) return
+
                 this.selected = value
                 this.$emit('input', value)
                 this.$emit('change', value)
-                this.close(true)
-            },
-
-            /**
-             * Close the dropdown.
-             * If force, also change isMouseOverDropdown.
-             */
-            close(force) {
                 this.isActive = false
-                if (force) this.isMouseOverDropdown = false
             },
 
             /**
@@ -132,7 +125,7 @@
              */
             clickedOutside(event) {
                 if (this.whiteList.indexOf(event.target) < 0) {
-                    this.close()
+                    this.isActive = false
                 }
             },
 

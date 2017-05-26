@@ -19,6 +19,16 @@
                 <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
 
+            <b-dropdown disabled>
+                <button class="button" slot="trigger">
+                    <span>Dropdown</span>
+                    <b-icon icon="arrow_drop_down"></b-icon>
+                </button>
+
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
+            </b-dropdown>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
@@ -72,19 +82,43 @@
                 </div>
 
                 <div class="nav-right" style="overflow: visible">
-                    <a class="nav-item">
-                        <b-dropdown>
-                            <template slot="trigger">Dropdown</template>
+                    <b-dropdown v-model="navigation">
+                        <a class="nav-item" slot="trigger">
+                            <span>Menu</span>
+                            <b-icon icon="arrow_drop_down"></b-icon>
+                        </a>
 
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
-                        </b-dropdown>
-                    </a>
+                        <b-dropdown-option subheader>
+                            Logged as <b>Rafael Beraldo</b>
+                        </b-dropdown-option>
+                        <b-dropdown-option separator />
+                        <b-dropdown-option value="home">
+                            <b-icon icon="home"></b-icon>
+                            Home
+                        </b-dropdown-option>
+                        <b-dropdown-option value="products">
+                            <b-icon icon="shopping_cart"></b-icon>
+                            Products
+                        </b-dropdown-option>
+                        <b-dropdown-option value="blog" disabled>
+                            <b-icon icon="art_track"></b-icon>
+                            Blog
+                        </b-dropdown-option>
+                        <b-dropdown-option separator />
+                        <b-dropdown-option value="settings">
+                            <b-icon icon="settings"></b-icon>
+                            Settings
+                        </b-dropdown-option>
+                        <b-dropdown-option value="logout">
+                            <b-icon icon="exit_to_app"></b-icon>
+                            Logout
+                        </b-dropdown-option>
+                    </b-dropdown>
                 </div>
             </nav>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <h2 class="title">Addons</h2>
         <div class="example">
@@ -139,63 +173,41 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
-        <h2 class="title">Icons and HTML</h2>
+        <h2 class="title">Customizing with v-model</h2>
         <div class="example">
-            <div class="block">
-                <b-dropdown>
-                    <button class="button" slot="trigger">
-                        <span>Navigation</span>
-                        <b-icon icon="arrow_drop_down"></b-icon>
-                    </button>
+            <b-dropdown v-model="isPublic">
+                <button class="button is-primary" type="button" slot="trigger">
+                    <template v-if="isPublic">
+                        <b-icon icon="public"></b-icon>
+                        <span>Public</span>
+                    </template>
+                    <template v-else>
+                        <b-icon icon="people"></b-icon>
+                        <span>Friends</span>
+                    </template>
+                    <b-icon icon="arrow_drop_down"></b-icon>
+                </button>
 
-                    <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
-                    <b-dropdown-option separator></b-dropdown-option>
-                    <b-dropdown-option value="home">Home</b-dropdown-option>
-                    <b-dropdown-option value="products">Products</b-dropdown-option>
-                    <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
-                    <b-dropdown-option separator></b-dropdown-option>
-                    <b-dropdown-option value="settings">Settings</b-dropdown-option>
-                    <b-dropdown-option value="logout">Logout</b-dropdown-option>
-                </b-dropdown>
+                <b-dropdown-option :value="true">
+                    <div class="media">
+                        <b-icon class="media-left" icon="public"></b-icon>
+                        <div class="media-content">
+                            <h3>Public</h3>
+                            <small>Everyone can see</small>
+                        </div>
+                    </div>
+                </b-dropdown-option>
 
-                <b-dropdown narrowed>
-                    <button class="button" slot="trigger">
-                        <span>Narrowed</span>
-                        <b-icon icon="arrow_drop_down"></b-icon>
-                    </button>
-
-                    <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
-                    <b-dropdown-option separator></b-dropdown-option>
-                    <b-dropdown-option value="home">Home</b-dropdown-option>
-                    <b-dropdown-option value="products">Products</b-dropdown-option>
-                    <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
-                    <b-dropdown-option separator></b-dropdown-option>
-                    <b-dropdown-option value="settings">Settings</b-dropdown-option>
-                    <b-dropdown-option value="logout">Logout</b-dropdown-option>
-                </b-dropdown>
-            </div>
-
-            <div class="field">
-                <b-dropdown v-model="select">
-                    <button class="button" slot="trigger">
-                        <span>Icons, HTML and v-model</span>
-                        <b-icon icon="arrow_drop_down"></b-icon>
-                    </button>
-
-                    <b-dropdown-option
-                        label="Logged as <b>Rafael Beraldo</b>"
-                        subheader>
-                    </b-dropdown-option>
-                    <b-dropdown-option separator></b-dropdown-option>
-                    <b-dropdown-option value="home" icon="home">Home</b-dropdown-option>
-                    <b-dropdown-option value="products" icon="shopping_cart">Products</b-dropdown-option>
-                    <b-dropdown-option value="blog" icon="art_track" disabled>Blog</b-dropdown-option>
-                    <b-dropdown-option separator></b-dropdown-option>
-                    <b-dropdown-option value="settings" icon="settings">Settings</b-dropdown-option>
-                    <b-dropdown-option value="logout" icon="exit_to_app">Logout</b-dropdown-option>
-                </b-dropdown>
-            </div>
-            <p><b>Selection:</b> {{ select }}</p>
+                <b-dropdown-option :value="false">
+                    <div class="media">
+                        <b-icon class="media-left" icon="people"></b-icon>
+                        <div class="media-content">
+                            <h3>Friends</h3>
+                            <small>Only friends can see</small>
+                        </div>
+                    </div>
+                </b-dropdown-option>
+            </b-dropdown>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
         <pre v-highlight><code class="javascript">{{ code5 | pre }}</code></pre>
@@ -275,14 +287,22 @@
     export default {
         data() {
             return {
-                select: '',
+                navigation: 'home',
+                isPublic: true,
                 dropdownProps: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'String',
+                        type: 'Any',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>disabled</code>',
+                        description: 'Disables dropdown',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>narrowed</code>',
@@ -303,14 +323,7 @@
                     {
                         name: '<code>value</code>',
                         description: 'The value that will be returned on events and v-model',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>label</code>',
-                        description: 'Option label, use this instead of the slot if you want to render HTML',
-                        type: 'String',
+                        type: 'Any',
                         values: '—',
                         default: '—'
                     },
@@ -334,24 +347,21 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>icon</code>',
-                        description: 'Icon name',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>icon-pack</code>',
-                        description: 'Icon pack to use',
-                        type: 'String',
-                        values: '<code>mdi</code>, <code>fa</code>',
-                        default: '<code>mdi</code>'
                     }
                 ],
                 template1: `
                 <b-dropdown>
+                    <button class="button" slot="trigger">
+                        <span>Dropdown</span>
+                        <b-icon icon="arrow_drop_down"></b-icon>
+                    </button>
+
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
+                </b-dropdown>
+
+                <b-dropdown disabled>
                     <button class="button" slot="trigger">
                         <span>Dropdown</span>
                         <b-icon icon="arrow_drop_down"></b-icon>
@@ -405,17 +415,48 @@
                     </div>
 
                     <div class="nav-right" style="overflow: visible">
-                        <a class="nav-item">
-                            <b-dropdown>
-                                <template slot="trigger">Dropdown</template>
+                        <b-dropdown v-model="navigation">
+                            <a class="nav-item" slot="trigger">
+                                <span>Menu</span>
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </a>
 
-                                <b-dropdown-option>Action</b-dropdown-option>
-                                <b-dropdown-option>Another action</b-dropdown-option>
-                                <b-dropdown-option>Something else</b-dropdown-option>
-                            </b-dropdown>
-                        </a>
+                            <b-dropdown-option subheader>
+                                Logged as <b>Rafael Beraldo</b>
+                            </b-dropdown-option>
+                            <b-dropdown-option separator />
+                            <b-dropdown-option value="home">
+                                <b-icon icon="home"></b-icon>
+                                Home
+                            </b-dropdown-option>
+                            <b-dropdown-option value="products">
+                                <b-icon icon="shopping_cart"></b-icon>
+                                Products
+                            </b-dropdown-option>
+                            <b-dropdown-option value="blog" disabled>
+                                <b-icon icon="art_track"></b-icon>
+                                Blog
+                            </b-dropdown-option>
+                            <b-dropdown-option separator />
+                            <b-dropdown-option value="settings">
+                                <b-icon icon="settings"></b-icon>
+                                Settings
+                            </b-dropdown-option>
+                            <b-dropdown-option value="logout">
+                                <b-icon icon="exit_to_app"></b-icon>
+                                Logout
+                            </b-dropdown-option>
+                        </b-dropdown>
                     </div>
                 </nav>`,
+                code3: `
+                export default {
+                    data() {
+                        return {
+                            navigation: 'home'
+                        }
+                    }
+                }`,
                 template4: `
                 <b-field>
                     <p class="control">
@@ -466,66 +507,44 @@
                     <b-input icon="search" type="search" placeholder="Search..."></b-input>
                 </b-field>`,
                 template5: `
-                <div class="block">
-                    <b-dropdown>
-                        <button class="button" slot="trigger">
-                            <span>Navigation</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
+                <b-dropdown v-model="isPublic">
+                    <button class="button is-primary" type="button" slot="trigger">
+                        <template v-if="isPublic">
+                            <b-icon icon="public"></b-icon>
+                            <span>Public</span>
+                        </template>
+                        <template v-else>
+                            <b-icon icon="people"></b-icon>
+                            <span>Friends</span>
+                        </template>
+                        <b-icon icon="arrow_drop_down"></b-icon>
+                    </button>
 
-                        <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="home">Home</b-dropdown-option>
-                        <b-dropdown-option value="products">Products</b-dropdown-option>
-                        <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="settings">Settings</b-dropdown-option>
-                        <b-dropdown-option value="logout">Logout</b-dropdown-option>
-                    </b-dropdown>
+                    <b-dropdown-option :value="true">
+                        <div class="media">
+                            <b-icon class="media-left" icon="public"></b-icon>
+                            <div class="media-content">
+                                <h3>Public</h3>
+                                <small>Everyone can see</small>
+                            </div>
+                        </div>
+                    </b-dropdown-option>
 
-                    <b-dropdown narrowed>
-                        <button class="button" slot="trigger">
-                            <span>Narrowed</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
-
-                        <b-dropdown-option subheader>Logged as Rafael Beraldo</b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="home">Home</b-dropdown-option>
-                        <b-dropdown-option value="products">Products</b-dropdown-option>
-                        <b-dropdown-option value="blog" disabled>Blog</b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="settings">Settings</b-dropdown-option>
-                        <b-dropdown-option value="logout">Logout</b-dropdown-option>
-                    </b-dropdown>
-                </div>
-
-                <div class="field">
-                    <b-dropdown v-model="select">
-                        <button class="button" slot="trigger">
-                            <span>Icons, HTML and v-model</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
-
-                        <b-dropdown-option
-                            label="Logged as <b>Rafael Beraldo</b>"
-                            subheader>
-                        </b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="home" icon="home">Home</b-dropdown-option>
-                        <b-dropdown-option value="products" icon="shopping_cart">Products</b-dropdown-option>
-                        <b-dropdown-option value="blog" icon="art_track" disabled>Blog</b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="settings" icon="settings">Settings</b-dropdown-option>
-                        <b-dropdown-option value="logout" icon="exit_to_app">Logout</b-dropdown-option>
-                    </b-dropdown>
-                </div>
-                <p><b>Selection:</b> {{ select }}</p>`,
+                    <b-dropdown-option :value="false">
+                        <div class="media">
+                            <b-icon class="media-left" icon="people"></b-icon>
+                            <div class="media-content">
+                                <h3>Friends</h3>
+                                <small>Only friends can see</small>
+                            </div>
+                        </div>
+                    </b-dropdown-option>
+                </b-dropdown>`,
                 code5: `
                 export default {
                     data() {
                         return {
-                            select: ''
+                            isPublic: true
                         }
                     }
                 }`

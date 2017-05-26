@@ -1,5 +1,6 @@
 .dropdown {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     & + .dropdown {
         margin-left: 0.5em;
     }
@@ -11,16 +12,16 @@
         position: fixed;
         background-color: rgba($black, 0.86);
         z-index: 10;
-        transition: opacity $speed-slow $easing;
+        transition: opacity $speed $easing;
     }
     .box {
         position: absolute;
         top: 2.5em;
+        left: 0;
         padding: 0.5em 0;
         z-index: 10;
         white-space: nowrap;
-        overflow: auto;
-        transition: opacity $speed-slow $easing;
+        transition: opacity $speed $easing;
         &.is-opened-top {
             top: auto;
             bottom: 2.5em;
@@ -65,6 +66,11 @@
                 user-select: inherit;
             }
         }
+    }
+    &.is-disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        pointer-events: none;
     }
     @include touch {
         .box {

@@ -2,10 +2,12 @@
 
 ## 0.3.3
 
-* Add nav Dropdown example
+* Add Dropdown within nav example
 * #71 Add background for checked rows on Table (thanks @mikejavier)
-* #72 Fix table overflow
+* #72 Fix Table overflow
+* #74 Fix DropdownOption slots, removed ``label``, ``icon`` and ``icon-pack`` properties, you can now customize however you want. **Breakable only if you used any of these properties**, [see docs](https://buefy.github.io/#/documentation/dropdown)
 * #77 Add index to Table scoped slot (thanks @UrVerySpecial)
+* #78 Fix table sorting zero values (thanks @gwvt)
 
 ## 0.3.2
 

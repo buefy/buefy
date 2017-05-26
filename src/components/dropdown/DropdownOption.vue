@@ -1,41 +1,15 @@
 <template>
-    <li v-if="subheader"
-        class="option is-subheader">
-        <b-icon
-            v-if="icon"
-            :icon="icon"
-            :pack="iconPack">
-        </b-icon>
-        <span v-html="newLabel"></span>
-    </li>
-    <li v-else-if="disabled"
-        class="option is-disabled">
-        <b-icon
-            v-if="icon"
-            :icon="icon"
-            :pack="iconPack">
-        </b-icon>
-        <span v-html="newLabel"></span>
-    </li>
-    <li v-else-if="separator"
-        class="option is-separator">
-        <b-icon
-            v-if="icon"
-            :icon="icon"
-            :pack="iconPack">
-        </b-icon>
-        <span v-html="newLabel"></span>
-    </li>
-    <li v-else
-        class="option"
-        :class="{ 'is-selected': value === $parent.$parent.selected }"
-        @click="$parent.$parent.selectOption(value)">
-        <b-icon
-            v-if="icon"
-            :icon="icon"
-            :pack="iconPack">
-        </b-icon>
-        <span v-html="newLabel"></span>
+    <li class="option"
+        :class="{
+            'is-subheader': subheader,
+            'is-disabled': disabled,
+            'is-separator': separator,
+            'is-selected': value === $parent.$parent.selected
+        }"
+        @click="$parent.$parent.selectOption(value, isClickable)">
+
+        <slot></slot>
+
     </li>
 </template>
 
@@ -48,22 +22,19 @@
             [Icon.name]: Icon
         },
         props: {
-            value: [String, Number],
-            label: String,
+            value: [String, Number, Object, Boolean],
             separator: Boolean,
             disabled: Boolean,
-            subheader: Boolean,
-            icon: String,
-            iconPack: String
+            subheader: Boolean
         },
         computed: {
-            hasLabel() {
-                return (this.$slots.default !== undefined && this.$slots.default.length > 0) || this.label
-            },
-            newLabel() {
-                return this.hasLabel
+            label() {
+                return this.$slots.default !== undefined && this.$slots.default.length > 0
                     ? this.label || this.$slots.default[0].text.trim()
-                    : this.value
+                    : ''
+            },
+            isClickable() {
+                return !this.separator && !this.disabled && !this.subheader
             }
         },
         created() {
