@@ -56,7 +56,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="row in visibleData"
+                    <tr v-for="(row, index) in visibleData"
                         @click="selectRow(row)"
                         @dblclick="$emit('dblclick', row)"
                         :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
@@ -65,7 +65,7 @@
                             <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
                         </td>
 
-                        <slot :row="row"></slot>
+                        <slot :row="row" :index="index"></slot>
                     </tr>
                 </tbody>
             </table>
