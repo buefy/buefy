@@ -56,7 +56,8 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
-        <h2 class="title">Nav</h2>
+        <h2 class="title is-spaced">Nav</h2>
+        <h3 class="subtitle">Note that you need a <code>style="overflow: visible"</code> at the wrapper</h3>
         <div class="example is-paddingless">
             <nav class="nav is-primary">
                 <div class="nav-left">
