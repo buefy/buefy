@@ -23,7 +23,15 @@
             label: String,
             position: {
                 type: String,
-                default: 'is-top'
+                default: 'is-top',
+                validator(value) {
+                    return [
+                        'is-top',
+                        'is-bottom',
+                        'is-left',
+                        'is-right'
+                    ].indexOf(value) > -1
+                }
             },
             always: Boolean,
             animated: Boolean,
