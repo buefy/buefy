@@ -66,8 +66,10 @@
         </div>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
-        <h2 class="title is-spaced">Nav</h2>
-        <h3 class="subtitle">Note that you need a <code>style="overflow: visible"</code> at the wrapper</h3>
+        <hr>
+
+        <h2 class="title is-spaced">Within a nav</h2>
+        <h3 class="subtitle">Note that you need a <code>overflow: visible</code> at the wrapper</h3>
         <div class="example is-paddingless">
             <nav class="nav is-primary">
                 <div class="nav-left">
@@ -82,7 +84,7 @@
                 </div>
 
                 <div class="nav-right" style="overflow: visible">
-                    <b-dropdown v-model="navigation">
+                    <b-dropdown v-model="navigation" position="is-bottom-left">
                         <a class="nav-item" slot="trigger">
                             <span>Menu</span>
                             <b-icon icon="arrow_drop_down"></b-icon>
@@ -120,7 +122,9 @@
         <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
         <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
-        <h2 class="title">Addons</h2>
+        <hr>
+
+        <h2 class="title">With addons</h2>
         <div class="example">
             <b-field>
                 <p class="control">
@@ -172,6 +176,8 @@
             </b-field>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+
+        <hr>
 
         <h2 class="title">Customizing with v-model</h2>
         <div class="example">
@@ -296,6 +302,13 @@
                         type: 'Any',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>position</code>',
+                        description: 'Position of the dropdown relative to the trigger',
+                        type: 'String',
+                        values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom-left</code>',
+                        default: '<code>is-bottom-right</code>'
                     },
                     {
                         name: '<code>disabled</code>',

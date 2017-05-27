@@ -16,25 +16,10 @@
     }
     .box {
         position: absolute;
-        top: 2.5em;
-        left: 0;
         padding: 0.5em 0;
         z-index: 10;
         white-space: nowrap;
         transition: opacity $speed $easing;
-        &.is-opened-top {
-            top: auto;
-            bottom: 2.5em;
-        }
-        &.is-opened-left {
-            left: auto;
-            right: 0;
-        }
-        &.is-narrow {
-            .option {
-                padding: 0.25rem 0.75rem;
-            }
-        }
         .option {
             @include unselectable;
             padding: 0.5rem 1rem;
@@ -66,6 +51,29 @@
                 user-select: inherit;
             }
         }
+        &.is-top-right{
+            top: auto;
+            bottom: 2.5em;
+            left: 0;
+        }
+        &.is-top-left{
+            top: auto;
+            bottom: 2.5em;
+            right: 0;
+        }
+        &.is-bottom-right{
+            top: 2.5em;
+            left: 0;
+        }
+        &.is-bottom-left{
+            top: 2.5em;
+            right: 0;
+        }
+        &.is-narrow {
+            .option {
+                padding: 0.25rem 0.75rem;
+            }
+        }
     }
     &.is-disabled {
         opacity: .5;
@@ -78,8 +86,8 @@
             width: calc(100vw - 60px);
             max-width: 600px;
             max-height: calc(100vh - 120px);
-            top: 50%;
-            left: 50%;
+            top: 50% !important;
+            left: 50% !important;
             transform: translate3d(-50%, -50%, 0);
             white-space: normal;
             &.is-narrow {

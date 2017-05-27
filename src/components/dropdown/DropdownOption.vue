@@ -4,35 +4,27 @@
             'is-subheader': subheader,
             'is-disabled': disabled,
             'is-separator': separator,
-            'is-selected': value === $parent.$parent.selected
+            'is-selected': value !== null && value === $parent.$parent.selected
         }"
         @click="$parent.$parent.selectOption(value, isClickable)">
 
         <slot></slot>
-
     </li>
 </template>
 
 <script>
-    import Icon from '../icon'
-
     export default {
         name: 'bDropdownOption',
-        components: {
-            [Icon.name]: Icon
-        },
         props: {
-            value: [String, Number, Object, Boolean],
+            value: {
+                type: [String, Number, Object, Boolean],
+                default: null
+            },
             separator: Boolean,
             disabled: Boolean,
             subheader: Boolean
         },
         computed: {
-            label() {
-                return this.$slots.default !== undefined && this.$slots.default.length > 0
-                    ? this.label || this.$slots.default[0].text.trim()
-                    : ''
-            },
             isClickable() {
                 return !this.separator && !this.disabled && !this.subheader
             }
