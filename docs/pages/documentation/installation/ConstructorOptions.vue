@@ -61,7 +61,7 @@
                             Meaning that the container <em>should</em> be <code>fixed</code>.`,
                         type: 'String',
                         values: '—',
-                        default: '—'
+                        default: '<code>body</code>'
                     },
                     {
                         name: '<code>defaultTooltipType</code>',
