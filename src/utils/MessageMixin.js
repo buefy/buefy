@@ -5,6 +5,10 @@ export default {
         [Icon.name]: Icon
     },
     props: {
+        active: {
+            type: Boolean,
+            default: true
+        },
         title: String,
         closable: {
             type: Boolean,
@@ -15,7 +19,12 @@ export default {
     },
     data() {
         return {
-            isActive: true
+            isActive: this.active
+        }
+    },
+    watch: {
+        active(value) {
+            this.isActive = value
         }
     },
     computed: {
@@ -39,17 +48,12 @@ export default {
     },
     methods: {
         /**
-         * Close the Message and remove from DOM.
+         * Close the Message and emit events.
          */
         close() {
-            this.$emit('close')
             this.isActive = false
-
-            // Timeout for the animation complete before destroying
-            setTimeout(() => {
-                this.$destroy()
-                this.$el.remove()
-            }, 150)
+            this.$emit('close')
+            this.$emit('update:active', false)
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <transition leave-active-class="fadeOutUp">
+    <transition name="fade">
         <div class="notification" :class="type" v-if="isActive">
             <button class="delete" v-if="closable" @click="close" type="button"></button>
             <b-icon

@@ -1,6 +1,6 @@
 .message,
 .notification {
-    animation-duration: $speed-slow;
+    transition: opacity $speed-slow $easing;
 }
 
 .message .message-body,

@@ -6,7 +6,8 @@
 
         <div class="columns">
             <div class="column">
-                <b-notification>
+                <button class="button block" @click="isActive = true">Show first</button>
+                <b-notification :active.sync="isActive">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
@@ -88,6 +89,7 @@
     export default {
         data() {
             return {
+                isActive: true,
                 props: [
                     {
                         name: '<code>type</code>',
@@ -100,8 +102,15 @@
                         default: '—'
                     },
                     {
+                        name: '<code>active</code>',
+                        description: 'Whether notification is active or not, use the <code>.sync</code> modifier to make it two-way binding',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>true</code>'
+                    },
+                    {
                         name: '<code>closable</code>',
-                        description: 'If the notification can be closed',
+                        description: `Adds an 'X' button that closes the notification`,
                         type: 'Boolean',
                         values: '—',
                         default: '<code>true</code>'
@@ -122,6 +131,7 @@
                     }
                 ],
                 template: `
+                <button class="button block" @click="isActive = true">Show first</button>
                 <b-notification>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>

@@ -6,7 +6,8 @@
 
         <div class="columns">
             <div class="column">
-                <b-message title="Default">
+                <button class="button block" @click="isActive = true">Show first</button>
+                <b-message title="Default" :active.sync="isActive">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
@@ -144,6 +145,7 @@
     export default {
         data() {
             return {
+                isActive: true,
                 props: [
                     {
                         name: '<code>type</code>',
@@ -156,8 +158,15 @@
                         default: '—'
                     },
                     {
+                        name: '<code>active</code>',
+                        description: 'Whether notification is active or not, use the <code>.sync</code> modifier to make it two-way binding',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>true</code>'
+                    },
+                    {
                         name: '<code>closable</code>',
-                        description: 'If the message can be closed — works if has a <code>title</code>',
+                        description: `Adds an 'X' button that closes the notification — works if has a <code>title</code>`,
                         type: 'Boolean',
                         values: '—',
                         default: '<code>true</code>'
@@ -185,6 +194,7 @@
                     }
                 ],
                 template1: `
+                <button class="button block" @click="isActive = true">Show first</button>
                 <b-message title="Default">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
