@@ -46,20 +46,20 @@
             <b-tab-item label="Properties">
                 <b-table :data="props" default-sort="name">
                     <template scope="props">
-                        <b-table-column field="name" label="Name"
-                            :content="props.row.name">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
                         </b-table-column>
-                        <b-table-column field="description" label="Description" width="620"
-                            :content="props.row.description">
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
                         </b-table-column>
-                        <b-table-column field="type" label="Type"
-                            :content="props.row.type">
+                        <b-table-column field="type" label="Type">
+                            <span v-html="props.row.type"></span>
                         </b-table-column>
-                        <b-table-column field="values" label="Values"
-                            :content="props.row.values">
+                        <b-table-column field="values" label="Values">
+                            <span v-html="props.row.values"></span>
                         </b-table-column>
-                        <b-table-column field="default" label="Default"
-                            :content="props.row.default">
+                        <b-table-column field="default" label="Default">
+                            <span v-html="props.row.default"></span>
                         </b-table-column>
                     </template>
                 </b-table>
@@ -68,14 +68,14 @@
             <b-tab-item label="Events">
                 <b-table :data="events" default-sort="name">
                     <template scope="props">
-                        <b-table-column field="name" label="Name"
-                            :content="props.row.name">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
                         </b-table-column>
-                        <b-table-column field="description" label="Description" width="620"
-                            :content="props.row.description">
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
                         </b-table-column>
-                        <b-table-column field="parameters" label="Parameters"
-                            :content="props.row.parameters">
+                        <b-table-column field="parameters" label="Parameters">
+                            <span v-html="props.row.parameters"></span>
                         </b-table-column>
                     </template>
                 </b-table>
