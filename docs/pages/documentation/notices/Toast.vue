@@ -76,8 +76,8 @@
                         name: '<code>position</code>',
                         description: 'Which position the toast will appear',
                         type: 'String',
-                        values: '<code>top-right</code>, <code>top</code>, <code>top-left</code>, <code>bottom-right</code>, <code>bottom</code>, <code>bottom-left</code>',
-                        default: '<code>top</code>'
+                        values: '<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>',
+                        default: '<code>is-top</code>'
                     },
                     {
                         name: '<code>duration</code>',
@@ -91,7 +91,7 @@
                         description: 'DOM element the toast will be created on. Note that this also changes the <code>position</code> of the toast from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>.',
                         type: 'String',
                         values: '—',
-                        default: '—'
+                        default: '<code>body</code>'
                     }
                 ],
                 code: `
@@ -109,7 +109,7 @@
                         danger() {
                             this.$toast.open({
                                 message: \`Something's not good, also I'm on bottom\`,
-                                position: 'bottom',
+                                position: 'is-bottom',
                                 type: 'is-danger'
                             })
                         }
@@ -130,7 +130,7 @@
             danger() {
                 this.$toast.open({
                     message: `Something's not good, also I'm on bottom`,
-                    position: 'bottom',
+                    position: 'is-bottom',
                     type: 'is-danger'
                 })
             }

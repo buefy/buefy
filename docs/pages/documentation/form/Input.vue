@@ -209,7 +209,7 @@
                 </p>
             </b-field>
 
-            <b-field position="centered">
+            <b-field position="is-centered">
                 <b-input placeholder="Search..."
                     type="search"
                     icon="search">
@@ -219,7 +219,7 @@
                 </p>
             </b-field>
 
-            <b-field position="right">
+            <b-field position="is-right">
                 <b-input placeholder="Search..."
                     type="search"
                     icon="search">
@@ -626,8 +626,8 @@
                         name: '<code>position</code>',
                         description: 'Which position should the addons appear, optional',
                         type: 'Boolean',
-                        values: '<code>left</code>, <code>centered</code>, <code>right</code>',
-                        default: '<code>left</code>'
+                        values: '<code>is-left</code>, <code>is-centered</code>, <code>is-right</code>',
+                        default: '<code>is-left</code>'
                     }
                 ],
                 template1: `
@@ -784,7 +784,7 @@
                     </p>
                 </b-field>
 
-                <b-field position="centered">
+                <b-field position="is-centered">
                     <b-input placeholder="Search..."
                         type="search"
                         icon="search">
@@ -794,7 +794,7 @@
                     </p>
                 </b-field>
 
-                <b-field position="right">
+                <b-field position="is-right">
                     <b-input placeholder="Search..."
                         type="search"
                         icon="search">

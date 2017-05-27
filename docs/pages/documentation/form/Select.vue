@@ -131,7 +131,7 @@
                 </p>
             </b-field>
 
-            <b-field position="centered">
+            <b-field position="is-centered">
                 <b-select
                     v-model="select"
                     placeholder="Select...">
@@ -161,7 +161,7 @@
                 </p>
             </b-field>
 
-            <b-field position="right">
+            <b-field position="is-right">
                 <b-select
                     v-model="select"
                     placeholder="Select...">
@@ -554,7 +554,7 @@
                     </p>
                 </b-field>
 
-                <b-field position="centered">
+                <b-field position="is-centered">
                     <b-select
                         v-model="select"
                         placeholder="Select...">
@@ -584,7 +584,7 @@
                     </p>
                 </b-field>
 
-                <b-field position="right">
+                <b-field position="is-right">
                     <b-select
                         v-model="select"
                         placeholder="Select...">
