@@ -66,22 +66,22 @@
         }
     }
     // Modifers
-    &.top {
+    &.is-top {
         justify-content: center;
     }
-    &.top-right {
+    &.is-top-right {
         justify-content: flex-end;
     }
-    &.bottom {
+    &.is-bottom {
         top: auto;
         bottom: 0;
         justify-content: center;
     }
-    &.bottom-left {
+    &.is-bottom-left {
         top: auto;
         bottom: 0;
     }
-    &.bottom-right {
+    &.is-bottom-right {
         top: auto;
         bottom: 0;
         justify-content: flex-end;

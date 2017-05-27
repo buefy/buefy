@@ -48,7 +48,12 @@
              * doesn't make sense to teach users what addons are exactly.
              */
             addonsPosition() {
-                if (this.position) return 'has-addons-' + this.position
+                if (this.position === undefined) return
+
+                const position = this.position.split('-')
+                if (position.length < 1) return
+
+                if (this.position) return 'has-addons-' + position[1]
             },
 
             /**

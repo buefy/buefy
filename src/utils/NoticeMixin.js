@@ -15,55 +15,42 @@ export default {
             type: Number,
             default: 2000
         },
-        position: String,
+        position: {
+            type: String,
+            default: 'is-top',
+            validator(value) {
+                return [
+                    'is-top-right',
+                    'is-top',
+                    'is-top-left',
+                    'is-bottom-right',
+                    'is-bottom',
+                    'is-bottom-left'
+                ].indexOf(value) > -1
+            }
+        },
         container: String
     },
     data() {
         return {
             isActive: false,
             parent: null,
-            newContainer: this.container || config.defaultContentElement,
-            positions: {
-                'top-right': {
-                    enter: 'Down',
-                    leave: 'Up'
-                },
-                'top': {
-                    enter: 'Down',
-                    leave: 'Up'
-                },
-                'top-left': {
-                    enter: 'Down',
-                    leave: 'Up'
-                },
-                'bottom-right': {
-                    enter: 'Up',
-                    leave: 'Down'
-                },
-                'bottom': {
-                    enter: 'Up',
-                    leave: 'Down'
-                },
-                'bottom-left': {
-                    enter: 'Up',
-                    leave: 'Down'
-                }
-            }
+            newContainer: this.container || config.defaultContentElement
         }
     },
     computed: {
         transition() {
             switch (this.position) {
-                case 'top-right':
-                case 'top':
-                case 'top-left':
+                case 'is-top-right':
+                case 'is-top':
+                case 'is-top-left':
                     return {
                         enter: 'fadeInDown',
                         leave: 'fadeOutUp'
                     }
-                case 'bottom-right':
-                case 'bottom':
-                case 'bottom-left':
+                case 'is-bottom-right':
+                case 'is-bottom':
+                case 'is-bottom-left':
                     return {
                         enter: 'fadeInUp',
                         leave: 'fadeOutDown'

@@ -15,16 +15,6 @@
 
     export default {
         mixins: [NoticeMixin],
-        props: {
-            position: {
-                type: String,
-                default: 'top'
-            },
-            duration: {
-                type: Number,
-                default: 2500
-            }
-        },
         methods: {
             hasChild(parent) {
                 return parent !== null && parent.childElementCount > 0

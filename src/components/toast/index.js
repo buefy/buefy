@@ -3,14 +3,11 @@ import Toast from './Toast'
 
 export default {
     open(params) {
-        let propsData
-        if (typeof params === 'string') {
-            propsData = {
-                message: params
-            }
-        } else {
-            propsData = params
-        }
+        let message
+        if (typeof params === 'string') message = params
+
+        const defaultParam = { message }
+        const propsData = Object.assign(defaultParam, params)
 
         const ToastComponent = Vue.extend(Toast)
         return new ToastComponent({

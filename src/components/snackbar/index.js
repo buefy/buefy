@@ -8,7 +8,7 @@ export default {
 
         const defaultParam = {
             type: 'is-success',
-            position: 'bottom-right',
+            position: 'is-bottom-right',
             duration: 3500,
             message
         }
