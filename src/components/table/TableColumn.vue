@@ -1,7 +1,6 @@
 <template>
     <td :class="{ 'has-text-right': numeric }" :data-label="label">
-        <span v-if="content" v-html="content"></span>
-        <span v-else><slot></slot></span>
+        <slot></slot>
     </td>
 </template>
 
@@ -9,12 +8,14 @@
     export default {
         name: 'bTableColumn',
         props: {
+            label: {
+                type: String,
+                required: true
+            },
             field: String,
-            label: String,
             width: [Number, String],
             numeric: Boolean,
             sortable: Boolean,
-            content: String,
             customSort: Function
         },
         created() {
