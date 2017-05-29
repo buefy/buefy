@@ -4,12 +4,16 @@
         <h2 class="subtitle"></h2>
         <hr>
 
-        <b-autocomplete
-            :data="testData">
-        </b-autocomplete>
-        <br>
-        <br>
-        <br>
+        <div class="example">
+            <p class="content"><b>Selected:</b> {{ sync.selected }}</p>
+
+            <b-autocomplete
+                :data="testData">
+            </b-autocomplete>
+
+        </div>
+        <pre class="content" v-highlight><code class="html">{{  }}</code></pre>
+        <pre class="content" v-highlight><code class="javascript">{{  }}</code></pre>
 
         <div class="example">
             <p class="content"><b>Selected:</b> {{ sync.selected }}</p>

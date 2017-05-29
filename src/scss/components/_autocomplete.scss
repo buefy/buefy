@@ -7,30 +7,25 @@
         white-space: nowrap;
         overflow-y: auto;
         width: 100%;
-        transition: opacity $speed-slow $easing;
-        &.is-opened-top {
-            top: auto;
-            bottom: 2.5em;
-        }
-        &.is-opened-left {
-            left: auto;
-            right: 0;
-        }
+        transition: opacity $speed $easing;
         .option {
             @include unselectable;
             padding: 0.25rem 0.75rem;
             cursor: pointer;
-            &:not(.is-disabled):hover {
+            &:not(.is-disabled):hover,
+            &.is-hovered {
                 background: $background;
-            }
-            &.is-selected {
-                background: $primary !important;
-                color: $primary-invert;
+                // background: $primary !important;
+                // color: $primary-invert;
             }
             &.is-disabled {
-                opacity: .5;
+                opacity: 0.5;
                 cursor: not-allowed;
             }
+        }
+        &.is-opened-top {
+            top: auto;
+            bottom: 2.5em;
         }
     }
 }

@@ -9,12 +9,13 @@
 * Removed ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
 * **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — I'm sorry for breaking these minor things, but consistency is important to keep, and I have to fix these while it's still in beta
 
-## We've also fixed some too :)
+## We've also fixed stuff :)
 
 * Add ``active`` property and changed animations of Notification and Message
 * Add Dropdown within nav example
 * #71 Add background for checked rows on Table (thanks @mikejavier)
 * #72 Fix Table overflow
+* #76 Modal close event accepts parameters (thanks @gongzza)
 * #77 Add index to Table scoped slot (thanks @UrVerySpecial)
 * #78 Fix Table sorting zero values (thanks @gwvt)
 * #82 Fix Select with numeric zero value

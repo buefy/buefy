@@ -14,12 +14,12 @@
             :name="name"
             :required="required"
             autocomplete="off"
-            @focus="$emit('focus', $event)"
+            @focus="focused"
             @blur="blur"
-            @keyup.esc.prevent="isActive = false"
             @keyup.enter.prevent="enterPressed"
-            @keydown.down.prevent="keyArrows('down')"
-            @keydown.up.prevent="keyArrows('up')">
+            @keyup.esc.prevent="isActive = false"
+            @keydown.up.prevent="keyArrows('up')"
+            @keydown.down.prevent="keyArrows('down')">
 
         <transition name="fade">
             <span
@@ -30,8 +30,8 @@
                 <ul>
                     <template v-for="option in visibleData">
                         <li class="option"
-                            :class="{ 'is-selected': option === selected }"
-                            @click="selectOptionAndEmit(option)">
+                            :class="{ 'is-hovered': option === hovered }"
+                            @click="setSelectedOption(option)">
 
                             <slot v-if="customTemplate" :option="option"></slot>
                             <template v-else>{{ getValue(option) }}</template>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import { getByPath } from '../../utils/helpers'
+    import { getValueByPath } from '../../utils/helpers'
 
     export default {
         name: 'bAutocomplete',
@@ -73,10 +73,10 @@
         data() {
             return {
                 selected: null,
+                hovered: null,
                 isActive: false,
                 isValid: true,
                 newValue: this.value,
-                isListInViewportHorizontally: true,
                 isListInViewportVertically: true
             }
         },
@@ -98,7 +98,6 @@
                 const whiteList = []
                 whiteList.push(this.$refs.input)
                 whiteList.push(this.$refs.dropdown)
-                whiteList.push(this.$refs.trigger)
                 // Adds all chidren from dropdown
                 if (this.$refs.dropdown !== undefined) {
                     const children = this.$refs.dropdown.querySelectorAll('*')
@@ -130,7 +129,7 @@
                 if (active) {
                     this.calcDropdownInViewportVertical()
                 } else {
-                    this.selectOption(null)
+                    this.setHoveredOption(null)
                     // Timeout to wait for the animation to finish before recalculating
                     setTimeout(() => {
                         this.calcDropdownInViewportVertical()
@@ -141,7 +140,10 @@
             newValue(value) {
                 this.$emit('input', value)
                 this.$emit('change', value)
-                this.selectOptionAndEmit(null, false)
+
+                if (this.selected !== null && getValueByPath(this.selected, this.field) !== value) {
+                    this.setSelectedOption(null, false)
+                }
 
                 if (!value) {
                     this.isActive = false
@@ -153,40 +155,31 @@
 
             /**
              * When v-model is changed:
-             *   1. find and set the new selected option.
+             *   1. Update internal value.
              *   2. If it's invalid, validate again.
              */
             value(value) {
                 this.newValue = value
                 !this.isValid && this.html5Validation()
-            },
-
-            /**
-             * When selected:
-             *   1. Change the input value.
-             *   2. Emit input event to update the user v-model.
-             *   3. Force-close the dropdown.
-             *   4. If it's invalid, validate again.
-             */
-            selected(option) {
-                if (!option) return
             }
         },
         methods: {
             /**
-             * Set which option is currently selected.
+             * Set which option is currently hovered.
              */
-            selectOption(option) {
+            setHoveredOption(option) {
                 if (option === undefined) return
 
-                this.selected = option
+                this.hovered = option
             },
 
             /**
              * Set which option is currently selected, update v-model and close dropdown.
              */
-            selectOptionAndEmit(option, closeDropdown = true) {
-                this.selectOption(option)
+            setSelectedOption(option, closeDropdown = true) {
+                if (option === undefined) return
+
+                this.selected = option
                 this.$emit('select', this.selected)
                 if (this.selected !== null) {
                     this.newValue = this.getValue(this.selected)
@@ -198,8 +191,8 @@
             },
 
             enterPressed() {
-                if (this.selected === null) return
-                this.selectOptionAndEmit(this.selected)
+                if (this.hovered === null) return
+                this.setSelectedOption(this.hovered)
             },
 
             /**
@@ -213,7 +206,7 @@
 
             getValue(option) {
                 return typeof option === 'object'
-                    ? getByPath(option, this.field)
+                    ? getValueByPath(option, this.field)
                     : option
             },
 
@@ -239,18 +232,29 @@
              * If dropdown is active:
              *   - Set hovered option.
              * If dropdown is not active:
-             *   - Set selected option (just like native <select>).
+             *   - Set hovered option (just like native <select>).
              */
             keyArrows(direction) {
                 const sum = direction === 'down' ? 1 : -1
                 if (this.isActive) {
-                    let index = this.visibleData.indexOf(this.selected) + sum
+                    let index = this.visibleData.indexOf(this.hovered) + sum
                     index = index > this.visibleData.length - 1 ? 0 : index
                     index = index < 0 ? this.visibleData.length - 1 : index
 
-                    this.selectOption(this.visibleData[index])
+                    this.setHoveredOption(this.visibleData[index])
                 } else {
                     this.isActive = true
+                }
+            },
+
+            /**
+             * Focus listener.
+             * Close the dropdown.
+             */
+            focused(event) {
+                this.$emit('focus', event)
+                if (this.selected !== null && getValueByPath(this.selected, this.field) === this.newValue) {
+                    this.$refs.input.select()
                 }
             },
 
@@ -261,7 +265,6 @@
              */
             blur(event) {
                 this.$emit('blur', event)
-                this.isActive = false
                 this.html5Validation()
             },
 
