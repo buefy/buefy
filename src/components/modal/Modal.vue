@@ -64,7 +64,7 @@
              * Emit events, and destroy modal if it's programmatic.
              */
             close() {
-                this.onCancel()
+                this.onCancel.apply(null, arguments)
                 this.$emit('close')
                 this.$emit('update:active', false)
 
