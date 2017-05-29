@@ -301,7 +301,7 @@
                         description: 'Binding value',
                         type: 'Any',
                         values: '—',
-                        default: '—'
+                        default: '<code>null</code>'
                     },
                     {
                         name: '<code>position</code>',
@@ -338,7 +338,7 @@
                         description: 'The value that will be returned on events and v-model',
                         type: 'Any',
                         values: '—',
-                        default: '—'
+                        default: '<code>null</code>'
                     },
                     {
                         name: '<code>separator</code>',

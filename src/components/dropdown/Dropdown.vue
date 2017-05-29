@@ -30,7 +30,10 @@
     export default {
         name: 'bDropdown',
         props: {
-            value: [String, Number, Object, Boolean],
+            value: {
+                type: [String, Number, Object, Boolean, Array],
+                default: null
+            },
             narrowed: Boolean,
             disabled: Boolean,
             position: {
@@ -48,7 +51,7 @@
         },
         data() {
             return {
-                selected: this.value || null,
+                selected: this.value,
                 isActive: false,
                 isDropdownComponent: true // Used internally by DropdownOption
             }
