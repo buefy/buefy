@@ -1,18 +1,27 @@
 # Buefy Changelog
 
-## 0.3.3
+## 0.4.0
 
+### I've break some things...
+
+* #74 Fix DropdownOption slots, you can now customize however you want (use HTML inside DropdownOption), [see docs](https://buefy.github.io/#/documentation/dropdown)
+    * Removed ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax
+* Removed ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
+* **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — I'm sorry for breaking these minor things, but consistency is important to keep, and I have to fix these while it's still in beta
+
+## We've also fixed some too :)
+
+* Add ``active`` property and changed animations of Notification and Message
 * Add Dropdown within nav example
 * #71 Add background for checked rows on Table (thanks @mikejavier)
 * #72 Fix Table overflow
-* #74 Fix DropdownOption slots, removed ``label``, ``icon`` and ``icon-pack`` properties, you can now customize however you want. **Breakable only if you used any of these properties**, [see docs](https://buefy.github.io/#/documentation/dropdown)
 * #77 Add index to Table scoped slot (thanks @UrVerySpecial)
 * #78 Fix table sorting zero values (thanks @gwvt)
 
 ## 0.3.2
 
 * **New component: Tabs**, [see docs](http://buefy.github.io/#/documentation/tabs)
-* Add ``content`` prop to Table Column, use this instead of ``v-html`` or it might break on tables with ``mobile-cards`` (collapsed rows)
+* Add ``content`` prop to TableColumn, use this instead of ``v-html`` or it might break on tables with ``mobile-cards`` (collapsed rows)
 * Alert Dialog accepts string as well
 * Dialog open with focus on confirm button (easier to just hit enter)
 * Modal can be used in template as well (non programmatic)
