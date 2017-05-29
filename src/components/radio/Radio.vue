@@ -1,5 +1,10 @@
 <template>
-    <label class="radio" :disabled="disabled" :class="{ 'is-disabled': disabled }">
+    <label class="radio"
+        :class="{ 'is-disabled': disabled }"
+        ref="label"
+        :disabled="disabled"
+        :tabindex="disabled ? false : 0"
+        @keydown.prevent.enter.space="$parent.updateValue(value)">
         <input
             type="radio"
             :disabled="disabled"
@@ -7,7 +12,8 @@
             :name="name"
             :value="value"
             @change="changed">
-        <span><slot></slot></span>
+        <span class="check"></span>
+        <span class="label"><slot></slot></span>
     </label>
 </template>
 

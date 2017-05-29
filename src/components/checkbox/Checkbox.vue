@@ -1,12 +1,18 @@
 <template>
-    <label class="checkbox" :disabled="disabled" :class="{ 'is-disabled': disabled }">
+    <label class="checkbox"
+        :class="{ 'is-disabled': disabled }"
+        ref="label"
+        :disabled="disabled"
+        :tabindex="disabled ? false : 0"
+        @keydown.prevent.enter.space="newValue = !newValue">
         <input
             type="checkbox"
             :disabled="disabled"
             :name="name"
             v-model="newValue"
             @change="$emit('change', newValue, $event)">
-        <span><slot></slot></span>
+        <span class="check"></span>
+        <span class="label"><slot></slot></span>
     </label>
 </template>
 

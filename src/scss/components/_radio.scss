@@ -1,51 +1,69 @@
 .radio {
-    &.button {
-        display: inline-flex;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    & + .radio {
+        margin-left: 0.5em;
     }
     input[type=radio] {
         display: none;
-        + span {
+        + .check {
             position: relative;
-            display: inline-block;
-            padding-left: 24px;
-            text-align: left;
+            width: 1.25em;
+            height: 1.25em;
+            border: 2px solid $grey;
+            background: none;
+            transition: border-color $speed $easing;
+            border-radius: 50%;
             &:before,
             &:after {
                 content: "";
                 position: absolute;
                 border-radius: 50%;
+                left: -2px; // Border gap
+                top: -2px; // Border gap
+                width: 1.25em;
+                height: 1.25em;
             }
             &:before {
-                left: 0;
-                top: 50%;
-                transform: translate(0, -50%);
-                width: 20px;
-                height: 20px;
-                border: 2px solid $grey;
-                background: none;
-                transition: border-color $speed $easing;
-            }
-            &:after {
-                left: 5px;
-                top: 5px;
-                width: 10px;
-                height: 10px;
                 background: $primary;
                 transform: scale(0);
                 transition: transform $speed $easing;
             }
-            &:hover:before {
-                border-color: $primary;
+            &:after {
+                background: rgba($grey, 0.25);
+                opacity: 0;
+                transform: scale(0);
+                transition: opacity $speed-slow $easing, transform $speed-slower $easing, background $speed-slow $easing;
             }
         }
-        &:checked + span:before {
+        &:checked + .check {
             border-color: $primary;
+            &:before {
+                transform: scale(0.5);
+            }
+            &:after {
+                background: rgba($primary, 0.25);
+            }
         }
-        &:checked + span:after {
-            transform: scale(1);
-        }
+    }
+    .label {
+        font-weight: $weight-normal;
+        position: relative;
+        padding-left: 0.5em;
     }
     &[disabled] {
         opacity: 0.5;
+    }
+    &:hover {
+        input[type=radio] + .check {
+            border-color: $primary;
+        }
+    }
+    &:focus {
+        input[type=radio] + .check:after {
+            transform: scale(1.6);
+            opacity: 1;
+        }
     }
 }

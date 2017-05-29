@@ -1,69 +1,77 @@
 .switch {
     cursor: pointer;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
     & + .switch {
         margin-left: 0.5em;
     }
-    input[type="checkbox"] {
+    input[type=checkbox] {
         display: none;
-        + span {
+        + .check {
             position: relative;
-            display: inline-block;
-            text-align: left;
-            padding-left: 44px;
+            width: 2.75em;
+            height: 1.5em;
+            background: $grey-light;
+            border-radius: 1em;
+            transition: background $speed $easing;
             &:before,
             &:after {
                 content: "";
                 position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-                transition: all $speed $easing;
+                width: 1.5em;
+                height: 1.5em;
+                border-radius: 50%;
+                transition: transform $speed $easing;
+                // animation-name: switch;
+                // animation-duration: $speed-slower;
+                // animation-iteration-count: ;
+                // animation-direction: alternate;
+                // animation-fill-mode: backwards;
+                // animation-timing-function: ;
+                // animation-delay: ;
+                // animation-play-state: ;
             }
             &:before {
-                left: 0;
-                width: 36px;
-                height: 14px;
-                background-color: $grey-light;
-                border-radius: 8px;
+                background: $background;
+                transform: scale(0.75);
+                box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
             }
             &:after {
-                left: 0;
-                width: 20px;
-                height: 20px;
-                background-color: $background;
-                border-radius: 50%;
-                box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .14), 0 2px 2px 0 rgba(0, 0, 0, .1), 0 1px 5px 0 rgba(0, 0, 0, .08);
+                background: rgba($grey, 0.25);
+                opacity: 0;
+                transform: scale(0);
+                transition: opacity $speed-slow $easing, transform $speed-slower $easing, background $speed-slow $easing;
             }
         }
-        &:checked + span {
-                &:before {
-                    background-color: lighten($primary, 24%);
-                }
-                &:after {
-                    background-color: $primary;
-                    transform: translate(80%, -50%);
-                }
+        &:checked + .check {
+            background: $primary;
+            &:before {
+                transform: translate3d(80%, 0, 0) scale(0.75);
             }
-        &.is-on-off {
-            + span {
-                &:before {
-                    background-color: lighten($danger, 24%);
-                }
-                &:after {
-                    background-color: $danger;
-                }
-            }
-            &:checked + span {
-                &:before {
-                    background-color: lighten($success, 24%);
-                }
-                &:after {
-                    background-color: $success;
-                }
+            &:after {
+                background: rgba($primary, 0.25);
             }
         }
     }
+    .label {
+        font-weight: $weight-normal;
+        position: relative;
+        padding-left: 0.5em;
+    }
     &[disabled] {
         opacity: 0.5;
-        cursor: not-allowed;
+    }
+    &:hover {
+        input[type=checkbox] + .check {
+            border-color: $primary;
+            opacity: 0.9;
+        }
+    }
+    &:focus {
+        input[type=checkbox] + .check:after {
+            transform: scale(1.8);
+            opacity: 1;
+        }
     }
 }
