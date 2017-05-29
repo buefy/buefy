@@ -16,7 +16,8 @@
 * #71 Add background for checked rows on Table (thanks @mikejavier)
 * #72 Fix Table overflow
 * #77 Add index to Table scoped slot (thanks @UrVerySpecial)
-* #78 Fix table sorting zero values (thanks @gwvt)
+* #78 Fix Table sorting zero values (thanks @gwvt)
+* #82 Fix Select with numeric zero value
 
 ## 0.3.2
 

@@ -7,7 +7,7 @@
             :class="[size, statusType, {
                 'is-fullwidth': expanded,
                 'is-loading': loading,
-                'is-empty': selected === ''
+                'is-empty': selected === null
             }]">
 
             <select
@@ -22,7 +22,7 @@
 
                 <option
                     v-if="placeholder"
-                    value=""
+                    :value="null"
                     selected
                     disabled
                     hidden>
@@ -39,7 +39,10 @@
     export default {
         name: 'bSelect',
         props: {
-            value: [String, Number, Object],
+            value: {
+                type: [String, Number, Object, Boolean, Array],
+                default: null
+            },
             size: String,
             placeholder: String,
             expanded: Boolean,
@@ -53,7 +56,7 @@
         },
         data() {
             return {
-                selected: this.value || '',
+                selected: this.value,
                 isValid: true,
                 isSelectComponent: true // Used internally by Option
             }
@@ -75,7 +78,7 @@
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                this.selected = value || ''
+                this.selected = value
                 !this.isValid && this.html5Validation()
             },
 

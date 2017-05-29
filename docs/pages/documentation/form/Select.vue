@@ -361,9 +361,9 @@
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'String',
+                        type: 'Any',
                         values: '—',
-                        default: '—'
+                        default: '<code>null</code>'
                     },
                     {
                         name: '<code>size</code>',
