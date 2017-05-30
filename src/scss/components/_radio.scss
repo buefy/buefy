@@ -35,9 +35,7 @@
             }
         }
     }
-    .label {
-        font-weight: $weight-normal;
-        position: relative;
+    .control-label {
         padding-left: 0.5em;
     }
     &[disabled] {

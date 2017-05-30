@@ -13,7 +13,7 @@
             :value="value"
             @change="changed">
         <span class="check"></span>
-        <span class="label"><slot></slot></span>
+        <span class="control-label"><slot></slot></span>
     </label>
 </template>
 
