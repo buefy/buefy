@@ -40,20 +40,19 @@
                     </span>
                 </p>
             </div>
-            <div class="column switch-container">
-                <b-switch v-model="isSimple">Simple</b-switch>
-            </div>
+        </div>
+        <div class="block">
+            <b-switch v-model="isSimple">Simple</b-switch>
         </div>
 
         <div class="example">
             <b-pagination
                 :total="total"
-                :current="current"
+                :current.sync="current"
                 :order="order"
                 :size="size"
                 :simple="isSimple"
-                :per-page="perPage"
-                @change="pageChanged">
+                :per-page="perPage">
             </b-pagination>
         </div>
         <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
@@ -131,7 +130,7 @@
                     },
                     {
                         name: '<code>current</code>',
-                        description: 'Current page number',
+                        description: 'Current page number, use the <code>.sync</code> modifier to make it two-way binding',
                         type: 'Number',
                         values: '—',
                         default: '<code>1</code>'
@@ -168,12 +167,11 @@
                 template: `
                 <b-pagination
                     :total="total"
-                    :current="current"
+                    :current.sync="current"
                     :order="order"
                     :size="size"
                     :simple="isSimple"
-                    :per-page="perPage"
-                    @change="pageChanged">
+                    :per-page="perPage">
                 </b-pagination>`,
                 code: `
                 export default {
@@ -186,26 +184,9 @@
                             size: '',
                             isSimple: false
                         }
-                    },
-                    methods: {
-                        pageChanged(value) {
-                            this.current = value
-                        }
                     }
                 }`
-            }
-        },
-        methods: {
-            pageChanged(value) {
-                this.current = value
             }
         }
     }
 </script>
-
-<style scoped>
-    .switch-container {
-        flex-direction: column-reverse;
-        display: flex;
-    }
-</style>

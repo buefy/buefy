@@ -8,11 +8,13 @@
     * Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax
 * Remove ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
 * **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — I'm sorry for breaking these minor things, but consistency is important to keep, and I have to fix these while it's still in beta
-* Overhaul switch style
-    * Remove ``on-off`` prop
+* Switch style overhaul
+    * Remove ``on-off`` prop (let me know if it was used by someone)
 
 ## Fixes and additions
 
+* Pagination ``current`` prop now accepts ``.sync`` modifier
+* All selections control (Checkbox, Radio, RadioButton and Switch) can now be focused and changed by keyboard
 * Add ``active`` property and changed animations of Notification and Message
 * Add Dropdown within nav example
 * #71 Add background for checked rows on Table (thanks @mikejavier)
