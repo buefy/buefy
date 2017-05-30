@@ -33,7 +33,7 @@
             white-space: pre-wrap;
         }
         code {
-            max-height: 600px;
+            max-height: 400px;
             &.hljs {
                 background: inherit;
                 color: inherit;
