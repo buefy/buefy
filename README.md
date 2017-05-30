@@ -60,6 +60,15 @@ Vue.component(Buefy.Table.name, Buefy.Table)
 
 **Note:** If you want to customize the icons or the theme, access the [customization section on the online documentation](https://buefy.github.io/#/documentation/customization).
 
+## Versioning
+
+While it's still in beta, version will follow **v0.Y.Z**, where:
+
+* **Y**: Major (breaking changes)
+* **Z**: Minor or patch
+
+As soon as it's stable and v1 is ready, I'll switch to vX.Y.Z (SemVer).
+
 ## Browser Support
 
 - [x] Firefox 38+
