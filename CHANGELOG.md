@@ -5,11 +5,13 @@
 ### I've break some things...
 
 * #74 Fix DropdownOption slots, you can now customize however you want (use HTML inside DropdownOption), [see docs](https://buefy.github.io/#/documentation/dropdown)
-    * Removed ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax
-* Removed ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
+    * Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax
+* Remove ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
 * **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — I'm sorry for breaking these minor things, but consistency is important to keep, and I have to fix these while it's still in beta
+* Overhaul switch style
+    * Remove ``on-off`` prop
 
-## We've also fixed stuff :)
+## Fixes and additions
 
 * Add ``active`` property and changed animations of Notification and Message
 * Add Dropdown within nav example

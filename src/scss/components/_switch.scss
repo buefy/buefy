@@ -14,43 +14,28 @@
             height: 1.5em;
             background: $grey-light;
             border-radius: 1em;
-            transition: background $speed $easing;
-            &:before,
-            &:after {
+            transition: all $speed $easing;
+            &:before {
                 content: "";
                 position: absolute;
-                width: 1.5em;
-                height: 1.5em;
                 border-radius: 50%;
-                transition: transform $speed $easing;
-                // animation-name: switch;
-                // animation-duration: $speed-slower;
-                // animation-iteration-count: ;
-                // animation-direction: alternate;
-                // animation-fill-mode: backwards;
-                // animation-timing-function: ;
-                // animation-delay: ;
-                // animation-play-state: ;
-            }
-            &:before {
+                width: 1.5em;
+                height: inherit;
                 background: $background;
                 transform: scale(0.75);
                 box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+                animation-name: switchOff;
+                animation-timing-function: linear;
             }
-            &:after {
-                background: rgba($grey, 0.25);
-                opacity: 0;
-                transform: scale(0);
-                transition: opacity $speed-slow $easing, transform $speed-slower $easing, background $speed-slow $easing;
+            &.animated:before {
+                animation-duration: $speed-slower;
             }
         }
         &:checked + .check {
             background: $primary;
             &:before {
-                transform: translate3d(80%, 0, 0) scale(0.75);
-            }
-            &:after {
-                background: rgba($primary, 0.25);
+                animation-name: switchOn;
+                animation-fill-mode: forwards;
             }
         }
     }
@@ -62,16 +47,12 @@
     &[disabled] {
         opacity: 0.5;
     }
-    &:hover {
-        input[type=checkbox] + .check {
-            border-color: $primary;
-            opacity: 0.9;
-        }
-    }
     &:focus {
-        input[type=checkbox] + .check:after {
-            transform: scale(1.8);
-            opacity: 1;
+        input[type=checkbox] + .check {
+            box-shadow: 0 0 0.5em rgba($grey, 0.6);
+        }
+        input[type=checkbox]:checked + .check {
+            box-shadow: 0 0 0.5em rgba($primary, 0.8);
         }
     }
 }

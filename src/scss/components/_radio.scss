@@ -13,37 +13,25 @@
             height: 1.25em;
             border: 2px solid $grey;
             background: none;
-            transition: border-color $speed $easing;
+            transition: all $speed $easing;
             border-radius: 50%;
-            &:before,
-            &:after {
+            &:before {
                 content: "";
                 position: absolute;
                 border-radius: 50%;
                 left: -2px; // Border gap
                 top: -2px; // Border gap
-                width: 1.25em;
-                height: 1.25em;
-            }
-            &:before {
+                width: inherit;
+                height: inherit;
                 background: $primary;
                 transform: scale(0);
                 transition: transform $speed $easing;
-            }
-            &:after {
-                background: rgba($grey, 0.25);
-                opacity: 0;
-                transform: scale(0);
-                transition: opacity $speed-slow $easing, transform $speed-slower $easing, background $speed-slow $easing;
             }
         }
         &:checked + .check {
             border-color: $primary;
             &:before {
                 transform: scale(0.5);
-            }
-            &:after {
-                background: rgba($primary, 0.25);
             }
         }
     }
@@ -61,9 +49,11 @@
         }
     }
     &:focus {
-        input[type=radio] + .check:after {
-            transform: scale(1.6);
-            opacity: 1;
+        input[type=radio] + .check {
+            box-shadow: 0 0 0.5em rgba($grey, 0.8);
+        }
+        input[type=radio]:checked + .check {
+            box-shadow: 0 0 0.5em rgba($primary, 0.8);
         }
     }
 }

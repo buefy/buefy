@@ -28,17 +28,6 @@
                         <b-switch disabled checked>Disabled Checked</b-switch>
                     </div>
                 </div>
-
-                <h3 class="subtitle">On / Off style</h3>
-                <div class="field">
-                    <b-switch on-off>On / Off</b-switch>
-                </div>
-                <div class="field">
-                    <b-switch on-off disabled>On / Off Disabled</b-switch>
-                </div>
-                <div class="field">
-                    <b-switch on-off disabled checked>On / Off Disabled Checked</b-switch>
-                </div>
             </div>
             <div class="column">
                 <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
@@ -124,15 +113,7 @@
                         type: 'String',
                         values: '—',
                         default: '—'
-                    },
-                    {
-                        name: '<code>onOff</code>',
-                        description: 'Styles the switch as on/off',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
                     }
-
                 ],
                 events: [
                     {
@@ -163,17 +144,6 @@
                     <div class="field">
                         <b-switch disabled checked>Disabled Checked</b-switch>
                     </div>
-                </div>
-
-                <h3 class="subtitle">On / Off style</h3>
-                <div class="field">
-                    <b-switch on-off>On / Off</b-switch>
-                </div>
-                <div class="field">
-                    <b-switch on-off disabled>On / Off Disabled</b-switch>
-                </div>
-                <div class="field">
-                    <b-switch on-off disabled checked>On / Off Disabled Checked</b-switch>
                 </div>`,
                 code: `
                 export default {

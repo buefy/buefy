@@ -6,13 +6,12 @@
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="newValue = !newValue">
         <input
-            :class="{ 'is-on-off': onOff }"
             type="checkbox"
             :name="name"
             :disabled="disabled"
             v-model="newValue"
             @change="$emit('change', newValue, $event)">
-        <span class="check"></span>
+        <span class="check" ref="check"></span>
         <span class="label"><slot></slot></span>
     </label>
 </template>
@@ -23,7 +22,6 @@
         props: {
             value: Boolean,
             disabled: Boolean,
-            onOff: Boolean,
             name: String,
             checked: Boolean
         },
@@ -46,6 +44,11 @@
             newValue(value) {
                 this.$emit('input', value)
             }
+        },
+        mounted() {
+            // Wait the animation time before setting the duration
+            // or else it'll fire at page load
+            setTimeout(() => this.$refs.check.classList.add('animated'), 500)
         }
     }
 </script>
