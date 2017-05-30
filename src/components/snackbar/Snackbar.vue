@@ -29,14 +29,20 @@
             }
         },
         methods: {
-            hasChild(parent) {
-                return parent !== null && parent.childElementCount > 0
-            },
+            /**
+             * Add component to the DOM with it's classes,
+             * called from the Mixin.
+             */
             insertEl() {
                 this.parent.className = ''
                 this.parent.classList.add('notices', this.position)
                 this.parent.appendChild(this.$el)
             },
+
+            /**
+             * Click listener.
+             * Call action prop before closing (from Mixin).
+             */
             action() {
                 this.onAction()
                 this.close()
