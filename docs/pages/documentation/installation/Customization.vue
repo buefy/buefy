@@ -17,7 +17,7 @@
         <h3 class="subtitle"><span class="list-number">2</span> Set your variables with Sass</h3>
         <div class="content">
             <p><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
-            <p>There's also two others variables created by Buefy: <code>$speed-slow: 150ms !default</code> and <code>$speed-slower: 250ms !default</code>.</p>
+            <p>There's also two other variables created by Buefy: <code>$speed-slow: 150ms !default</code> and <code>$speed-slower: 250ms !default</code>.</p>
         </div>
         <div class="example"><pre v-highlight><code class="sass">{{ sass | pre }}</code></pre></div>
 

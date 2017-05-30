@@ -69,7 +69,7 @@ Vue.component(Buefy.Table.name, Buefy.Table)
 - [x] Safari 7+
 - [ ] Internet Explorer 10+ is only partially supported
 
-Might work in others versions, but it's not tested.
+Might work in other versions, but it's not tested.
 
 ## Credits and Thanks
 
