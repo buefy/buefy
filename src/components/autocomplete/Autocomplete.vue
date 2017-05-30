@@ -1,7 +1,9 @@
 <template>
-    <p
-        class="control autocomplete"
-        :class="{ 'is-expanded': expanded, 'is-loading': loading  }">
+    <p class="control autocomplete"
+        :class="[size, {
+            'is-expanded': expanded,
+            'is-loading': loading
+        }]">
 
         <input
             v-model="newValue"
@@ -22,8 +24,7 @@
             @keydown.down.prevent="keyArrows('down')">
 
         <transition name="fade">
-            <span
-                class="box"
+            <span class="box"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && visibleData.length > 0"
                 ref="dropdown">
@@ -31,11 +32,10 @@
                     <template v-for="option in visibleData">
                         <li class="option"
                             :class="{ 'is-hovered': option === hovered }"
-                            @click="setSelectedOption(option)">
+                            @click="setSelected(option)">
 
                             <slot v-if="customTemplate" :option="option"></slot>
                             <template v-else>{{ getValue(option) }}</template>
-
                         </li>
                     </template>
                     <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
@@ -55,12 +55,13 @@
             data: Array,
             field: {
                 type: String,
-                default: 'text'
+                default: 'value'
             },
             maxResults: {
                 type: [Number, String],
                 default: 6
             },
+            keepFirst: Boolean,
             customTemplate: Boolean,
             size: String,
             placeholder: String,
@@ -98,7 +99,7 @@
                 const whiteList = []
                 whiteList.push(this.$refs.input)
                 whiteList.push(this.$refs.dropdown)
-                // Adds all chidren from dropdown
+                // Add all chidren from dropdown
                 if (this.$refs.dropdown !== undefined) {
                     const children = this.$refs.dropdown.querySelectorAll('*')
                     for (const child of children) {
@@ -113,11 +114,9 @@
              * Splitted data depending on maxResults.
              */
             visibleData() {
-                if (this.data.length <= this.maxResults) {
-                    return this.data
-                } else {
-                    return this.data.slice(0, this.maxResults)
-                }
+                return this.data.length <= this.maxResults
+                    ? this.data
+                    : this.data.slice(0, this.maxResults)
             }
         },
         watch: {
@@ -129,7 +128,7 @@
                 if (active) {
                     this.calcDropdownInViewportVertical()
                 } else {
-                    this.setHoveredOption(null)
+                    this.$nextTick(() => this.setHovered(null))
                     // Timeout to wait for the animation to finish before recalculating
                     setTimeout(() => {
                         this.calcDropdownInViewportVertical()
@@ -141,16 +140,22 @@
                 this.$emit('input', value)
                 this.$emit('change', value)
 
-                if (this.selected !== null && getValueByPath(this.selected, this.field) !== value) {
-                    this.setSelectedOption(null, false)
+                // Check if selected is valid
+                if (this.selected !== null && this.getValue(this.selected, this.field) !== value) {
+                    this.setSelected(null, false)
                 }
 
-                if (!value) {
-                    this.isActive = false
-                    return
+                // Keep first option always pre-selected
+                if (this.keepFirst && this.visibleData.length) {
+                    this.$nextTick(() => {
+                        if (this.hovered !== this.visibleData[0]) {
+                            this.setHovered(this.visibleData[0])
+                        }
+                    })
                 }
 
-                this.isActive = true
+                // Close dropdown if input is clear
+                this.isActive = !!value
             },
 
             /**
@@ -167,7 +172,7 @@
             /**
              * Set which option is currently hovered.
              */
-            setHoveredOption(option) {
+            setHovered(option) {
                 if (option === undefined) return
 
                 this.hovered = option
@@ -176,7 +181,7 @@
             /**
              * Set which option is currently selected, update v-model and close dropdown.
              */
-            setSelectedOption(option, closeDropdown = true) {
+            setSelected(option, closeDropdown = true) {
                 if (option === undefined) return
 
                 this.selected = option
@@ -192,7 +197,7 @@
 
             enterPressed() {
                 if (this.hovered === null) return
-                this.setSelectedOption(this.hovered)
+                this.setSelected(this.hovered)
             },
 
             /**
@@ -241,7 +246,7 @@
                     index = index > this.visibleData.length - 1 ? 0 : index
                     index = index < 0 ? this.visibleData.length - 1 : index
 
-                    this.setHoveredOption(this.visibleData[index])
+                    this.setHovered(this.visibleData[index])
                 } else {
                     this.isActive = true
                 }
@@ -253,7 +258,7 @@
              */
             focused(event) {
                 this.$emit('focus', event)
-                if (this.selected !== null && getValueByPath(this.selected, this.field) === this.newValue) {
+                if (this.selected !== null && this.getValue(this.selected, this.field) === this.newValue) {
                     this.$refs.input.select()
                 }
             },
