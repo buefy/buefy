@@ -44,6 +44,15 @@
         position: relative;
         padding-left: 0.5em;
     }
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium{
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
+    }
     &[disabled] {
         opacity: 0.5;
     }

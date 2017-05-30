@@ -37,6 +37,29 @@
 
         <hr>
 
+        <h2 class="title">Sizes</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <b-switch size="is-small">Small</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch>Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch size="is-medium">Medium</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch size="is-large">Large</b-switch>
+                </div>
+            </div>
+            <div class="column">
+                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
         <h2 class="title is-spaced">API</h2>
         <b-tabs>
             <b-tab-item label="Properties">
@@ -113,6 +136,13 @@
                         type: 'String',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>size</code>',
+                        description: 'Optional, size  of the control',
+                        type: 'String',
+                        values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                        default: '—'
                     }
                 ],
                 events: [
@@ -152,7 +182,20 @@
                             isSwitched: true
                         }
                     }
-                }`
+                }`,
+                template2: `
+                <div class="field">
+                    <b-switch size="is-small">Small</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch>Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch size="is-medium">Medium</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch size="is-large">Large</b-switch>
+                </div>`
             }
         }
     }

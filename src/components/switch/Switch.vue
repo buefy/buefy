@@ -1,6 +1,6 @@
 <template>
     <label class="switch"
-        :class="{ 'is-disabled': disabled }"
+        :class="[size, { 'is-disabled': disabled }]"
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
@@ -23,7 +23,8 @@
             value: Boolean,
             disabled: Boolean,
             name: String,
-            checked: Boolean
+            checked: Boolean,
+            size: String
         },
         data() {
             return {

@@ -13,6 +13,7 @@
 
 ## Fixes and additions
 
+* Add ``size`` prop to Switch
 * Pagination ``current`` prop now accepts ``.sync`` modifier
 * All selections control (Checkbox, Radio, RadioButton and Switch) can now be focused and changed by keyboard
 * Add ``active`` property and changed animations of Notification and Message
