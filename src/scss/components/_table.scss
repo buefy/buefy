@@ -58,16 +58,16 @@
                 background: $primary !important; // Temporary fix for Bulma v0.4.1
                 color: $primary-invert;
                 .checkbox input {
-                    &:checked + span:before {
+                    &:checked + .check {
                         background: $primary-invert url(checkmark($primary)) no-repeat center center;
                     }
-                    + span:before {
+                    + .check {
                         border-color: $primary-invert;
                     }
                 }
             }
             &.is-checked {
-                background: lighten($grey-lighter, 8%);
+                background: rgba($primary, 0.1);
             }
         }
         .checkbox-cell {
