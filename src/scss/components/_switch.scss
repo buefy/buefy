@@ -1,6 +1,5 @@
 .switch {
     cursor: pointer;
-    outline: none;
     display: inline-flex;
     align-items: center;
     & + .switch {
@@ -42,6 +41,23 @@
     .control-label {
         padding-left: 0.5em;
     }
+    &:hover {
+        input[type=checkbox] + .check {
+            background: rgba($grey-light, 0.9);
+        }
+        input[type=checkbox]:checked + .check {
+            background: rgba($primary, 0.9);
+        }
+    }
+    &:focus {
+        outline: none;
+        input[type=checkbox] + .check {
+            box-shadow: 0 0 0.5em rgba($grey, 0.6);
+        }
+        input[type=checkbox]:checked + .check {
+            box-shadow: 0 0 0.5em rgba($primary, 0.8);
+        }
+    }
     &.is-small {
         @include control-small;
     }
@@ -53,13 +69,5 @@
     }
     &[disabled] {
         opacity: 0.5;
-    }
-    &:focus {
-        input[type=checkbox] + .check {
-            box-shadow: 0 0 0.5em rgba($grey, 0.6);
-        }
-        input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($primary, 0.8);
-        }
     }
 }
