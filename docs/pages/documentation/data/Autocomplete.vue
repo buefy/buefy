@@ -7,7 +7,7 @@
         <div class="example">
             <p class="content"><b>Selected:</b> {{ arrayExample.selected }}</p>
             <b-field label="Find a JS framework">
-                <b-autocomplete size="is-large"
+                <b-autocomplete
                     v-model="arrayExample.name"
                     :data="filteredDataArray"
                     placeholder="e.g. jQuery"
@@ -50,7 +50,7 @@
                     :data="asyncExample.data"
                     placeholder="e.g. Fight Club"
                     field="title"
-                    custom-template
+                    has-custom-template
                     :loading="asyncExample.isFetching"
                     @change="getAsyncData"
                     @select="option => asyncExample.selected = option">
@@ -58,7 +58,7 @@
                     <template scope="props">
                         <div class="media">
                             <div class="media-left">
-                                <img width="48" :src="`https://image.tmdb.org/t/p/w500/${props.option.poster_path}`">
+                                <img width="32" :src="`https://image.tmdb.org/t/p/w500/${props.option.poster_path}`">
                             </div>
                             <div class="media-content">
                                 {{ props.option.title }}
@@ -79,24 +79,37 @@
         <hr>
 
         <h2 class="title is-spaced">API</h2>
-        <!--<b-tabs>
+        <b-tabs>
             <b-tab-item label="Properties">
                 <b-table :data="props" default-sort="name">
                     <template scope="props">
-                        <b-table-column field="name" label="Name"
-                            :content="props.row.name">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
                         </b-table-column>
-                        <b-table-column field="description" label="Description" width="620"
-                            :content="props.row.description">
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
                         </b-table-column>
-                        <b-table-column field="type" label="Type"
-                            :content="props.row.type">
+                        <b-table-column field="type" label="Type">
+                            <span>{{ props.row.type }}</span>
                         </b-table-column>
-                        <b-table-column field="values" label="Values"
-                            :content="props.row.values">
+                        <b-table-column field="values" label="Values">
+                            <span v-html="props.row.values"></span>
                         </b-table-column>
-                        <b-table-column field="default" label="Default"
-                            :content="props.row.default">
+                        <b-table-column field="default" label="Default">
+                            <span v-html="props.row.default"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
+
+            <b-tab-item label="Scoped slots">
+                <b-table :data="scopedSlots" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Slot name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="props" label="Props">
+                            <span v-html="props.row.props"></span>
                         </b-table-column>
                     </template>
                 </b-table>
@@ -105,19 +118,19 @@
             <b-tab-item label="Events">
                 <b-table :data="events" default-sort="name">
                     <template scope="props">
-                        <b-table-column field="name" label="Name"
-                            :content="props.row.name">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
                         </b-table-column>
-                        <b-table-column field="description" label="Description" width="620"
-                            :content="props.row.description">
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
                         </b-table-column>
-                        <b-table-column field="parameters" label="Parameters"
-                            :content="props.row.parameters">
+                        <b-table-column field="parameters" label="Parameters">
+                            <span v-html="props.row.parameters"></span>
                         </b-table-column>
                     </template>
                 </b-table>
             </b-tab-item>
-        </b-tabs>-->
+        </b-tabs>
     </div>
 </template>
 
@@ -160,53 +173,123 @@
                 },
                 props: [
                     {
-                        name: '<code>total</code>',
-                        description: `Total count of items`,
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>per-page</code>',
-                        description: 'Items count for each page',
-                        type: 'Number',
-                        values: '—',
-                        default: '<code>20</code>'
-                    },
-                    {
-                        name: '<code>current</code>',
-                        description: 'Current page number',
-                        type: 'Number',
-                        values: '—',
-                        default: '<code>1</code>'
-                    },
-                    {
-                        name: '<code>order</code>',
-                        description: 'Buttons order, optional',
+                        name: '<code>v-model</code>',
+                        description: 'Bindig value',
                         type: 'String',
-                        values: '<code>is-centered</code>, <code>is-right</code>',
+                        values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>data</code>',
+                        description: 'Options / suggestions',
+                        type: 'Array<String>, Array<Object>',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>field</code>',
+                        description: 'Property of the object (if <code>data</code> is array of objects) to use as display text, and to keep track of selected option',
+                        type: 'String',
+                        values: '—',
+                        default: '<code>value</code>'
+                    },
+                    {
+                        name: '<code>max-results</code>',
+                        description: 'Total of results/options to show',
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>6</code>'
+                    },
+                    {
+                        name: '<code>keep-first</code>',
+                        description: 'The first option will always be pre-selected (easier to just hit enter)',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>has-custom-template</code>',
+                        description: 'Enable creating a custom template for the option with scoped slot',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>size</code>',
-                        description: 'Pagination size, optional',
+                        description: 'Optional, size of control',
                         type: 'String',
                         values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                         default: '—'
                     },
                     {
-                        name: '<code>simple</code>',
-                        description: 'Simpler style',
+                        name: '<code>loading</code>',
+                        description: 'Has loading state',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>expanded</code>',
+                        description: 'Full width when inside a grouped or addon field',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>placeholder</code>',
+                        description: 'Same as native <code>placeholder</code>',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>name</code>',
+                        description: 'Same as native <code>name</code>',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>required</code>',
+                        description: 'Same as native <code>required</code>',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>disabled</code>',
+                        description: 'Same as native <code>disabled</code>',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     }
                 ],
+                scopedSlots: [
+                    {
+                        name: 'default',
+                        props: '<code>option: String|Object</code>'
+                    }
+                ],
                 events: [
                     {
                         name: '<code>change</code>',
-                        description: 'Triggers when the current page is changed',
-                        parameters: '<code>value: Number</code>'
+                        description: 'Triggers when input text is changed',
+                        parameters: '<code>value: String</code>'
+                    },
+                    {
+                        name: '<code>select</code>',
+                        description: 'Triggers when an option is selected or unset',
+                        parameters: '<code>option: String|Object</code>'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Triggers when input is focused',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>blur</code>',
+                        description: 'Triggers when input loses focus',
+                        parameters: '<code>event: $event</code>'
                     }
                 ],
                 template1: `
@@ -308,7 +391,7 @@
                         v-model="asyncExample.name"
                         :data="asyncExample.data"
                         field="title"
-                        custom-template
+                        has-custom-template
                         :loading="asyncExample.isFetching"
                         @change="getAsyncData"
                         @select="option => asyncExample.selected = option">
@@ -316,7 +399,7 @@
                         <template scope="props">
                             <div class="media">
                                 <div class="media-left">
-                                    <img width="48" :src="\`https://image.tmdb.org/t/p/w500/\${props.option.poster_path}\`">
+                                    <img width="32" :src="\`https://image.tmdb.org/t/p/w500/\${props.option.poster_path}\`">
                                 </div>
                                 <div class="media-content">
                                     {{ props.option.title }}

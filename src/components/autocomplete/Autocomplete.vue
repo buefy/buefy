@@ -34,8 +34,8 @@
                             :class="{ 'is-hovered': option === hovered }"
                             @click="setSelected(option)">
 
-                            <slot v-if="customTemplate" :option="option"></slot>
-                            <template v-else>{{ getValue(option) }}</template>
+                            <slot v-if="hasCustomTemplate" :option="option"></slot>
+                            <span v-else v-html="getValue(option, true)"></span>
                         </li>
                     </template>
                     <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
@@ -62,14 +62,16 @@
                 default: 6
             },
             keepFirst: Boolean,
-            customTemplate: Boolean,
+            hasCustomTemplate: Boolean,
             size: String,
+            expanded: Boolean,
+            loading: Boolean,
+
+            // Native
             placeholder: String,
             name: String,
             disabled: Boolean,
-            required: Boolean,
-            expanded: Boolean,
-            loading: Boolean
+            required: Boolean
         },
         data() {
             return {
@@ -141,7 +143,7 @@
                 this.$emit('change', value)
 
                 // Check if selected is valid
-                if (this.selected !== null && this.getValue(this.selected, this.field) !== value) {
+                if (this.selected !== null && this.getValue(this.selected) !== value) {
                     this.setSelected(null, false)
                 }
 
@@ -209,10 +211,16 @@
                 }
             },
 
-            getValue(option) {
-                return typeof option === 'object'
+            getValue(option, isHighlight = false) {
+                const value = typeof option === 'object'
                     ? getValueByPath(option, this.field)
                     : option
+
+                const regex = new RegExp(`(${this.newValue})`, 'gi')
+
+                return isHighlight
+                    ? value.replace(regex, '<b>$1</b>')
+                    : value
             },
 
             /**
@@ -258,7 +266,7 @@
              */
             focused(event) {
                 this.$emit('focus', event)
-                if (this.selected !== null && this.getValue(this.selected, this.field) === this.newValue) {
+                if (this.selected !== null && this.getValue(this.selected) === this.newValue) {
                     this.$refs.input.select()
                 }
             },
