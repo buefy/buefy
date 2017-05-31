@@ -90,7 +90,7 @@
                             <span v-html="props.row.description"></span>
                         </b-table-column>
                         <b-table-column field="type" label="Type">
-                            <span v-html="props.row.type"></span>
+                            <span>{{ props.row.type }}</span>
                         </b-table-column>
                         <b-table-column field="values" label="Values">
                             <span v-html="props.row.values"></span>
@@ -131,7 +131,7 @@
                             <span v-html="props.row.description"></span>
                         </b-table-column>
                         <b-table-column field="type" label="Type">
-                            <span v-html="props.row.type"></span>
+                            <span>{{ props.row.type }}</span>
                         </b-table-column>
                         <b-table-column field="values" label="Values">
                             <span v-html="props.row.values"></span>
@@ -179,7 +179,7 @@
                     {
                         name: '<code>custom-value</code>',
                         description: 'Native value when used inside a Checkbox Group',
-                        type: 'String, Number, Boolean',
+                        type: 'String, Number, Boolean, Object',
                         values: '—',
                         default: '—'
                     },

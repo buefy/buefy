@@ -108,13 +108,26 @@
                             <span v-html="props.row.description"></span>
                         </b-table-column>
                         <b-table-column field="type" label="Type">
-                            <span v-html="props.row.type"></span>
+                            <span>{{ props.row.type }}</span>
                         </b-table-column>
                         <b-table-column field="values" label="Values">
                             <span v-html="props.row.values"></span>
                         </b-table-column>
                         <b-table-column field="default" label="Default">
                             <span v-html="props.row.default"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
+
+            <b-tab-item label="Scoped slots">
+                <b-table :data="tableScopedSlots" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Slot name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="props" label="Props">
+                            <span v-html="props.row.props"></span>
                         </b-table-column>
                     </template>
                 </b-table>
@@ -135,19 +148,6 @@
                     </template>
                 </b-table>
             </b-tab-item>
-
-            <b-tab-item label="Scoped Slots">
-                <b-table :data="tableScopedSlots" default-sort="name">
-                    <template scope="props">
-                        <b-table-column field="name" label="Slot name">
-                            <span v-html="props.row.name"></span>
-                        </b-table-column>
-                        <b-table-column field="props" label="Props">
-                            <span v-html="props.row.props"></span>
-                        </b-table-column>
-                    </template>
-                </b-table>
-            </b-tab-item>
         </b-tabs>
 
         <h3 class="subtitle">Table Column</h3>
@@ -162,7 +162,7 @@
                             <span v-html="props.row.description"></span>
                         </b-table-column>
                         <b-table-column field="type" label="Type">
-                            <span v-html="props.row.type"></span>
+                            <span>{{ props.row.type }}</span>
                         </b-table-column>
                         <b-table-column field="values" label="Values">
                             <span v-html="props.row.values"></span>
@@ -198,7 +198,7 @@
                     {
                         name: '<code>data</code>',
                         description: 'Table data',
-                        type: 'Array',
+                        type: 'Array<Object>',
                         values: '—',
                         default: '—'
                     },
@@ -240,7 +240,7 @@
                     {
                         name: '<code>checked-rows</code>',
                         description: 'Set which rows are checked, use the <code>.sync</code> modifier to make it two-way binding',
-                        type: 'Array',
+                        type: 'Array<Object>',
                         values: '—',
                         default: '—'
                     },
@@ -333,7 +333,7 @@
                     },
                     {
                         name: '<code>field</code>',
-                        description: 'Key of the object the column is attributed, used for sorting',
+                        description: 'Property of the object the column is attributed, used for sorting',
                         type: 'String',
                         values: '—',
                         default: '—'

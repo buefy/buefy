@@ -25,7 +25,7 @@
             name: String,
             checked: Boolean,
             nosync: Boolean,
-            customValue: [String, Number, Boolean]
+            customValue: [String, Number, Boolean, Object]
         },
         data() {
             return {
