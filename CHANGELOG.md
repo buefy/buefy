@@ -9,16 +9,18 @@
 * Remove ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
 * **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — Gotta fix these while it's still in beta
 * Switch style overhaul
-    * Remove ``on-off`` prop (let me know if it was used by someone)
+    * Remove ``on-off`` prop (let me know if it was used by anyone)
 
 ## Fixes and additions
 
+* Fix Tabs dynamic height
 * Add one more Sass variable: ``$speed-slower: 250ms !default``
 * Add ``size`` prop to Switch
-* Pagination ``current`` prop now accepts ``.sync`` modifier
-* All selections control (Checkbox, Radio, RadioButton and Switch) can now be focused and changed by keyboard
+* Add ``.sync`` modifier to Pagination ``current`` prop
 * Add ``active`` property and changed animations of Notification and Message
 * Add Dropdown within nav example
+* All selections control (Checkbox, Radio, RadioButton and Switch) can now be focused and changed by keyboard
+* #69 Add loading state to Table
 * #71 Add background for checked rows on Table (thanks @mikejavier)
 * #72 Fix Table overflow
 * #76 Modal close event accepts parameters (thanks @gongzza)

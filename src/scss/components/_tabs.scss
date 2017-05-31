@@ -2,11 +2,12 @@
     .tab-content {
         position: relative;
         overflow: hidden;
+        display: flex;
         .tab-item {
-            position: absolute;
-            width: 100%;
+            flex-shrink: 0;
+            flex-basis: 100%;
             &.is-animated {
-                transition: transform 250ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
+                transition: transform $speed-slower cubic-bezier(0.785, 0.135, 0.150, 0.860);
             }
         }
     }

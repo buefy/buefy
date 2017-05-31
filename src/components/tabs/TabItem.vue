@@ -50,7 +50,7 @@
             }
         },
         created() {
-            if (!this.$parent.isTabsComponent) {
+            if (!this.$parent.$data._isTabs) {
                 this.$destroy()
                 throw new Error('You should wrap bTabItem on a bTabs')
             }

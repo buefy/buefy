@@ -15,7 +15,7 @@
                 </li>
             </ul>
         </nav>
-        <section class="tab-content" :style="{ height: contentHeight + 'px' }">
+        <section class="tab-content">
             <slot></slot>
         </section>
     </div>
@@ -45,7 +45,7 @@
                 newValue: this.value || 0,
                 tabItems: [],
                 contentHeight: 0,
-                isTabsComponent: true // Used internally by TabItem
+                _isTabs: true // Used internally by TabItem
             }
         },
         watch: {
@@ -55,7 +55,6 @@
             value(value) {
                 this.changeTab(this.newValue, value)
                 this.newValue = value
-                this.calcHeight()
             }
         },
         methods: {
@@ -77,32 +76,10 @@
                 this.$emit('change', value)
                 this.changeTab(this.newValue, value)
                 this.newValue = value
-                this.calcHeight()
-            },
-
-            /**
-             * Calculate the height of container based on the tab height.
-             */
-            calcHeight() {
-                this.$nextTick(() => {
-                    const height = this.tabItems[this.newValue].$el.clientHeight
-                    this.contentHeight = height
-                })
-            }
-        },
-        created() {
-            if (typeof window !== 'undefined') {
-                window.addEventListener('resize', this.calcHeight)
             }
         },
         mounted() {
             this.tabItems[this.newValue].isActive = true
-            this.calcHeight()
-        },
-        beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                window.removeEventListener('resize', this.calcHeight)
-            }
         }
     }
 </script>

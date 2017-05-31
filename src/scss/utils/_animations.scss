@@ -139,7 +139,11 @@
 // Slide
 .slide-prev-leave-to, .slide-next-enter {
     transform: translate3d(-100%, 0, 0);
+    position: absolute;
+    width: 100%;
 }
 .slide-prev-enter, .slide-next-leave-to {
     transform: translate3d(100%, 0, 0);
+    position: absolute;
+    width: 100%;
 }
