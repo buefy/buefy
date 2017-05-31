@@ -7,7 +7,7 @@
 * #74 Fix DropdownOption slots, you can now customize however you want (use HTML inside DropdownOption), [see docs](https://buefy.github.io/#/documentation/dropdown)
     * Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax
 * Remove ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
-* **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — I'm sorry for breaking these minor things, but consistency is important to keep, and I have to fix these while it's still in beta
+* **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — Gotta fix these while it's still in beta
 * Switch style overhaul
     * Remove ``on-off`` prop (let me know if it was used by someone)
 

@@ -88,13 +88,13 @@
         border-radius: 8em;
     }
     100% {
-        transform: translate3d(80%, 0, 0) scale(0.75);
+        transform: translate3d(80%, 0, 0) scale(0.72);
     }
 }
 
 @keyframes switchOff {
     0% {
-        transform: translate3d(80%, 0, 0) scale(0.75);
+        transform: translate3d(80%, 0, 0) scale(0.72);
     }
     50%, 90% {
         width: 2em;

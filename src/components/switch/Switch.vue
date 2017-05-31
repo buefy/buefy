@@ -49,7 +49,12 @@
         mounted() {
             // Wait the animation time before setting the duration
             // or else it'll fire at page load
-            setTimeout(() => this.$refs.check.classList.add('animated'), 500)
+            setTimeout(() => {
+                // With <keep-alive> the check is undefined
+                if (this.$refs.check !== undefined) {
+                    this.$refs.check.classList.add('animated')
+                }
+            }, 500)
         }
     }
 </script>
