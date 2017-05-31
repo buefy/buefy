@@ -4,44 +4,45 @@
         <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
         <hr>
 
-        <div class="columns is-marginless">
-            <div class="column is-8">
+        <div class="block">
+            <b-switch v-model="isBordered">Bordered</b-switch>
+            <b-switch v-model="isStriped">Striped</b-switch>
+            <b-switch v-model="isNarrowed">Narrowed</b-switch>
+            <b-switch v-model="isCheckable">Checkable</b-switch>
+            <b-switch v-model="isLoading">Loading state</b-switch>
+            <b-switch v-model="isPaginated">Paginated</b-switch>
+            <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
+            <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
+        </div>
+        <div class="block">
+            <b-select v-model="perPage" style="display: inline-block">
+                <option value="5">5 per page</option>
+                <option value="10">10 per page</option>
+                <option value="15">15 per page</option>
+                <option value="20">20 per page</option>
+            </b-select>
+            <button class="button" @click="selected = {}"
+                :disabled="Object.keys(selected).length === 0">
+                <b-icon icon="clear"></b-icon>
+                <span>Clear Selected</span>
+            </button>
+            <button class="button" @click="checkedRows = []"
+                :disabled="checkedRows.length === 0">
+                <b-icon icon="clear"></b-icon>
+                <span>Clear Checked</span>
+            </button>
+        </div>
 
-                <div class="block">
-                    <b-switch v-model="isBordered">Bordered</b-switch>
-                    <b-switch v-model="isStriped">Striped</b-switch>
-                    <b-switch v-model="isNarrowed">Narrowed</b-switch>
-                    <b-switch v-model="isCheckable">Checkable</b-switch>
-                    <b-switch v-model="isPaginated">Paginated</b-switch>
-                    <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
-                    <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
-                </div>
-                <div class="block">
-                    <b-select v-model="perPage" style="display: inline-block">
-                        <option value="5">5 per page</option>
-                        <option value="10">10 per page</option>
-                        <option value="15">15 per page</option>
-                        <option value="20">20 per page</option>
-                    </b-select>
-                    <button class="button" @click="selected = {}"
-                        :disabled="Object.keys(selected).length === 0">
-                        <b-icon icon="clear"></b-icon>
-                        <span>Clear Selected</span>
-                    </button>
-                    <button class="button" @click="checkedRows = []"
-                        :disabled="checkedRows.length === 0">
-                        <b-icon icon="clear"></b-icon>
-                        <span>Clear Checked</span>
-                    </button>
-                </div>
-
-                <div class="example">
+        <div class="example">
+            <b-tabs>
+                <b-tab-item label="Table">
                     <b-table
                         :data="tableData"
                         :bordered="isBordered"
                         :striped="isStriped"
                         :narrowed="isNarrowed"
                         :checkable="isCheckable"
+                        :loading="isLoading"
                         :mobile-cards="hasMobileCards"
                         :paginated="isPaginated"
                         :per-page="perPage"
@@ -76,20 +77,18 @@
                             </b-table-column>
                         </template>
                     </b-table>
-                </div>
-            </div>
-            <div class="column">
-                <h3 class="subtitle">Selected</h3>
-                <pre class="content">
-{{ selected }}
-                </pre>
+                </b-tab-item>
 
-                <h3 class="subtitle">Checked rows</h3>
-                <pre>
-{{ checkedRows }}
-                </pre>
-            </div>
+                <b-tab-item label="Selected">
+                    <pre class="content">{{ selected }}</pre>
+                </b-tab-item>
+
+                <b-tab-item label="Checked rows">
+                    <pre>{{ checkedRows }}</pre>
+                </b-tab-item>
+            </b-tabs>
         </div>
+
         <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
         <pre class="content" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
@@ -189,6 +188,7 @@
                 isBordered: false,
                 isStriped: false,
                 isNarrowed: false,
+                isLoading: false,
                 isCheckable: false,
                 hasMobileCards: true,
                 isPaginated: true,

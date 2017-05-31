@@ -1,92 +1,94 @@
 <template>
-    <div class="b-table">
-        <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
-            <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
-                <b-select v-model="mobileSort" expanded>
-                    <option
-                        v-for="column in columns"
-                        v-if="column.isSortable"
-                        :value="column">
-                        {{ column.label }}
-                    </option>
-                </b-select>
-                <p class="control">
-                    <button class="button is-primary" @click="sort(mobileSort)">
-                        <b-icon
-                            icon="arrow_upward"
-                            both
-                            size="is-small"
-                            :class="{
-                                'is-desc': !mobileSort.isAsc,
-                                'is-visible': currentSortColumn === mobileSort
-                            }">
-                        </b-icon>
-                    </button>
-                </p>
-            </div>
-        </div>
-
-        <div class="table-wrapper">
-            <table
-                class="table"
-                :class="{
-                    'is-bordered': bordered,
-                    'is-striped': striped,
-                    'is-narrow': narrowed,
-                    'has-mobile-cards': mobileCards
-                }">
-                <thead>
-                    <tr>
-                        <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
-                        </th>
-                        <th v-for="column in columns" @click.stop="sort(column)"
-                            :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
-                            :style="{ width: column.width + 'px' }">
-                            <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
-                                {{ column.label }}
-                                <b-icon
-                                    icon="arrow_upward"
-                                    both
-                                    size="is-small"
-                                    :class="{ 'is-desc': !column.isAsc, 'is-visible': currentSortColumn === column }">
-                                </b-icon>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(row, index) in visibleData"
-                        @click="selectRow(row)"
-                        @dblclick="$emit('dblclick', row)"
-                        :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
-
-                        <td class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
-                        </td>
-
-                        <slot :row="row" :index="index"></slot>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="level">
-            <div class="level-left">
-                <div class="level-item">
-                    <p v-if="checkable && this.checkedRows.length > 0">({{ this.checkedRows.length }})</p>
+    <div class="b-table" :class="{ 'is-loading': loading }">
+        <div class="b-table-content">
+            <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
+                <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
+                    <b-select v-model="mobileSort" expanded>
+                        <option
+                            v-for="column in columns"
+                            v-if="column.isSortable"
+                            :value="column">
+                            {{ column.label }}
+                        </option>
+                    </b-select>
+                    <p class="control">
+                        <button class="button is-primary" @click="sort(mobileSort)">
+                            <b-icon
+                                icon="arrow_upward"
+                                both
+                                size="is-small"
+                                :class="{
+                                    'is-desc': !mobileSort.isAsc,
+                                    'is-visible': currentSortColumn === mobileSort
+                                }">
+                            </b-icon>
+                        </button>
+                    </p>
                 </div>
             </div>
 
-            <div class="level-right" v-if="paginated">
-                <div class="level-item">
-                    <b-pagination
-                        :total="newData.length"
-                        :per-page="perPage"
-                        :simple="paginationSimple"
-                        :current="currentPage"
-                        @change="pageChanged">
-                    </b-pagination>
+            <div class="table-wrapper">
+                <table
+                    class="table"
+                    :class="{
+                        'is-bordered': bordered,
+                        'is-striped': striped,
+                        'is-narrow': narrowed,
+                        'has-mobile-cards': mobileCards
+                    }">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-cell" v-if="checkable">
+                                <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
+                            </th>
+                            <th v-for="column in columns" @click.stop="sort(column)"
+                                :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
+                                :style="{ width: column.width + 'px' }">
+                                <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
+                                    {{ column.label }}
+                                    <b-icon
+                                        icon="arrow_upward"
+                                        both
+                                        size="is-small"
+                                        :class="{ 'is-desc': !column.isAsc, 'is-visible': currentSortColumn === column }">
+                                    </b-icon>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, index) in visibleData"
+                            @click="selectRow(row)"
+                            @dblclick="$emit('dblclick', row)"
+                            :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
+
+                            <td class="checkbox-cell" v-if="checkable">
+                                <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
+                            </td>
+
+                            <slot :row="row" :index="index"></slot>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <p v-if="checkable && this.checkedRows.length > 0">({{ this.checkedRows.length }})</p>
+                    </div>
+                </div>
+
+                <div class="level-right" v-if="paginated">
+                    <div class="level-item">
+                        <b-pagination
+                            :total="newData.length"
+                            :per-page="perPage"
+                            :simple="paginationSimple"
+                            :current="currentPage"
+                            @change="pageChanged">
+                        </b-pagination>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,6 +115,7 @@
             bordered: Boolean,
             striped: Boolean,
             narrowed: Boolean,
+            loading: Boolean,
             checkable: Boolean,
             selected: Object,
             checkedRows: {

@@ -10,146 +10,167 @@
 }
 
 .b-table {
-    .icon {
-        transition: transform $speed-slow $easing;
-        &.is-desc {
-            transform: rotate(180deg);
+    .b-table-content {
+        transition: all $speed $easing;
+        .icon {
+            transition: transform $speed-slow $easing;
+            &.is-desc {
+                transform: rotate(180deg);
+            }
         }
-    }
-    .table {
-        th {
-            font-weight: $weight-semibold;
-            .th-wrap {
-                display: flex;
-                align-items: center;
-                .icon {
-                    margin-left: 8px;
-                    margin-right: 0;
-                    font-size: 16px;
-                    transition: transform $speed-slow $easing, opacity $speed $easing;
-                    opacity: 0;
-                    &.is-visible {
-                        opacity: 1;
-                    }
-                }
-                &.is-numeric {
-                    flex-direction: row-reverse;
+        .table {
+            th {
+                font-weight: $weight-semibold;
+                .th-wrap {
+                    display: flex;
+                    align-items: center;
                     .icon {
-                        margin-left: 0;
-                        margin-right: 8px;
+                        margin-left: 8px;
+                        margin-right: 0;
+                        font-size: 16px;
+                        transition: transform $speed-slow $easing, opacity $speed $easing;
+                        opacity: 0;
+                        &.is-visible {
+                            opacity: 1;
+                        }
+                    }
+                    &.is-numeric {
+                        flex-direction: row-reverse;
+                        .icon {
+                            margin-left: 0;
+                            margin-right: 8px;
+                        }
+                    }
+                }
+                &.is-current-sort {
+                    border-color: $grey;
+                    font-weight: $weight-bold;
+                }
+                &.is-sortable:hover {
+                    border-color: $grey;
+                }
+                &.is-sortable,
+                &.is-sortable .th-wrap {
+                    cursor: pointer;
+                }
+            }
+            tr {
+                &.is-selected,
+                &.is-selected:hover {
+                    background: $primary !important; // Temporary fix for Bulma v0.4.1
+                    color: $primary-invert;
+                    .checkbox input {
+                        &:checked + .check {
+                            background: $primary-invert url(checkmark($primary)) no-repeat center center;
+                        }
+                        + .check {
+                            border-color: $primary-invert;
+                        }
+                    }
+                }
+                &.is-checked {
+                    background: rgba($primary, 0.16);
+                }
+            }
+            .checkbox-cell {
+                width: 40px;
+                .checkbox {
+                    vertical-align: middle;
+                }
+            }
+            // Modifiers
+            &.is-bordered {
+                th.is-current-sort,
+                th.is-sortable:hover {
+                    border-color: $grey-lighter;
+                    background: $background;
+                }
+            }
+            &.has-mobile-cards {
+                @include mobile {
+                    thead {
+                        display: none;
+                    }
+                    tr {
+                        // Card style — Cannot extend inside media query
+                        background-color: $white;
+                        box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
+                        max-width: 100%;
+                        position: relative;
+                        // ---------------------------
+                        display: block;
+                        margin: 0.25em;
+                        td {
+                            display: flex;
+                            border: 0; // Disables is-bordered
+                            width: auto;
+                            justify-content: flex-end;
+                            text-align: right;
+                            border-bottom: 1px solid $background;
+                            span {
+                                margin-left: 8px;
+                            }
+                            &:before {
+                                content: attr(data-label);
+                                font-weight: $weight-semibold;
+                                margin-right: auto;
+                                text-align: left;
+                            }
+                            &:last-child {
+                                border-bottom: 0;
+                            }
+                            &.checkbox-cell {
+                                display: inherit;
+                            }
+                        }
+                        &:not(:last-child) {
+                            margin-bottom: 16px;
+                        }
+                        // Disables is-striped
+                        &:nth-child(even) {
+                            background: inherit;
+                            &:hover {
+                                background-color: inherit;
+                            }
+                        }
                     }
                 }
             }
-            &.is-current-sort {
-                border-color: $grey;
-                font-weight: $weight-bold;
-            }
-            &.is-sortable:hover {
-                border-color: $grey;
-            }
-            &.is-sortable,
-            &.is-sortable .th-wrap {
-                cursor: pointer;
-            }
         }
-        tr {
-            &.is-selected,
-            &.is-selected:hover {
-                background: $primary !important; // Temporary fix for Bulma v0.4.1
-                color: $primary-invert;
-                .checkbox input {
-                    &:checked + .check {
-                        background: $primary-invert url(checkmark($primary)) no-repeat center center;
-                    }
-                    + .check {
-                        border-color: $primary-invert;
-                    }
+
+        .level {
+            padding-bottom: 16px;
+            .pagination {
+                .info {
+                    padding-right: 8px;
                 }
             }
-            &.is-checked {
-                background: rgba($primary, 0.16);
-            }
-        }
-        .checkbox-cell {
-            width: 40px;
-            .checkbox {
-                vertical-align: middle;
-            }
-        }
-        // Modifiers
-        &.is-bordered {
-            th.is-current-sort,
-            th.is-sortable:hover {
-                border-color: $grey-lighter;
-                background: $background;
-            }
-        }
-        &.has-mobile-cards {
-            @include mobile {
-                thead {
-                    display: none;
+            @include tablet {
+                .level-left {
+                    padding-left: 16px;
                 }
-                tr {
-                    // Card style — Cannot extend inside media query
-                    background-color: $white;
-                    box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
-                    max-width: 100%;
-                    position: relative;
-                    // ---------------------------
-                    display: block;
-                    margin: 0.25em;
-                    td {
-                        display: flex;
-                        border: 0; // Disables is-bordered
-                        width: auto;
-                        justify-content: flex-end;
-                        text-align: right;
-                        border-bottom: 1px solid $background;
-                        span {
-                            margin-left: 8px;
-                        }
-                        &:before {
-                            content: attr(data-label);
-                            font-weight: $weight-semibold;
-                            margin-right: auto;
-                            text-align: left;
-                        }
-                        &:last-child {
-                            border-bottom: 0;
-                        }
-                        &.checkbox-cell {
-                            display: inherit;
-                        }
-                    }
-                    &:not(:last-child) {
-                        margin-bottom: 16px;
-                    }
-                    // Disables is-striped
-                    &:nth-child(even) {
-                        background: inherit;
-                        &:hover {
-                            background-color: inherit;
-                        }
-                    }
+                .level-right {
+                    padding-right: 16px;
                 }
             }
         }
     }
 
-    .level {
-        padding-bottom: 16px;
-        .pagination {
-            .info {
-                padding-right: 8px;
-            }
+    &.is-loading {
+        position: relative;
+        .b-table-content {
+            pointer-events: none;
+            opacity: 0.6;
+            filter: blur(0.05em)
         }
-        @include tablet {
-            .level-left {
-                padding-left: 16px;
-            }
-            .level-right {
-                padding-right: 16px;
-            }
+        &:after {
+            @include loader;
+            position: absolute;
+            top: calc(50% - 2.5em);
+            left: calc(50% - 2.5em);
+            width: 5em;
+            height: 5em;
+            border-width: 4px;
         }
     }
 }
