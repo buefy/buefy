@@ -52,7 +52,7 @@
             setTimeout(() => {
                 // With <keep-alive> the check is undefined
                 if (this.$refs.check !== undefined) {
-                    this.$refs.check.classList.add('animated')
+                    this.$refs.check.classList.add('is-animated')
                 }
             }, 500)
         }
