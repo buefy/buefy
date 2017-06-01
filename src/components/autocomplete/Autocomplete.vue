@@ -88,14 +88,14 @@
              * Type prop from parent if it's a Field.
              */
             statusType() {
-                if (this.$parent.isFieldComponent) {
+                if (this.$parent.$data._isField) {
                     return this.$parent.newType
                 }
             },
 
             /**
              * White-listed items to not close when clicked.
-             * Add input, dropdown, trigger and all children.
+             * Add input, dropdown and all children.
              */
             whiteList() {
                 const whiteList = []
@@ -138,14 +138,19 @@
                 }
             },
 
+            /**
+             * When updating input's value
+             *   1. Emit changes
+             *   2. If value isn't the same as selected, set null
+             *   3. Select first option if "keep-first"
+             *   4. Close dropdown if value is clear or else open it
+             */
             newValue(value) {
                 this.$emit('input', value)
                 this.$emit('change', value)
 
-                // Check if selected is valid
-                if (this.selected !== null && this.getValue(this.selected) !== value) {
-                    this.setSelected(null, false)
-                }
+                // Check if selected is invalid
+                if (this.getValue(this.selected) !== value) this.setSelected(null, false)
 
                 // Keep first option always pre-selected
                 if (this.keepFirst && this.visibleData.length) {
@@ -156,7 +161,7 @@
                     })
                 }
 
-                // Close dropdown if input is clear
+                // Close dropdown if input is clear or else open it
                 this.isActive = !!value
             },
 
@@ -181,7 +186,8 @@
             },
 
             /**
-             * Set which option is currently selected, update v-model and close dropdown.
+             * Set which option is currently selected, update v-model,
+             * update input value and close dropdown.
              */
             setSelected(option, closeDropdown = true) {
                 if (option === undefined) return
@@ -192,11 +198,13 @@
                     this.newValue = this.getValue(this.selected)
                     this.$emit('input', this.getValue(this.selected))
                 }
-                if (closeDropdown) {
-                    this.$nextTick(() => { this.isActive = false })
-                }
+                closeDropdown && this.$nextTick(() => { this.isActive = false })
             },
 
+            /**
+             * Enter key listener.
+             * Select the hovered option.
+             */
             enterPressed() {
                 if (this.hovered === null) return
                 this.setSelected(this.hovered)
@@ -206,12 +214,17 @@
              * Close dropdown if clicked outside.
              */
             clickedOutside(event) {
-                if (this.whiteList.indexOf(event.target) < 0) {
-                    this.isActive = false
-                }
+                if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
             },
 
+            /**
+             * Return display text for the input.
+             * If object, get value from path, or else just the value.
+             * If hightlight, find the text with regex and make bold.
+             */
             getValue(option, isHighlight = false) {
+                if (!option) return
+
                 const value = typeof option === 'object'
                     ? getValueByPath(option, this.field)
                     : option
@@ -241,11 +254,7 @@
 
             /**
              * Arrows keys listener.
-             *
-             * If dropdown is active:
-             *   - Set hovered option.
-             * If dropdown is not active:
-             *   - Set hovered option (just like native <select>).
+             * If dropdown is active, set hovered option, or else just open.
              */
             keyArrows(direction) {
                 const sum = direction === 'down' ? 1 : -1
@@ -262,19 +271,16 @@
 
             /**
              * Focus listener.
-             * Close the dropdown.
+             * If value is the same as selected, select all from input.
              */
             focused(event) {
                 this.$emit('focus', event)
-                if (this.selected !== null && this.getValue(this.selected) === this.newValue) {
-                    this.$refs.input.select()
-                }
+                if (this.getValue(this.selected) === this.newValue) this.$refs.input.select()
             },
 
             /**
              * Blur listener.
-             * 1. Close the dropdown.
-             * 2. Fire the HTML5 validation.
+             * Emit events and fire the HTML5 validation.
              */
             blur(event) {
                 this.$emit('blur', event)
@@ -298,7 +304,7 @@
                     isValid = false
                 }
                 this.isValid = isValid
-                if (this.$parent.isFieldComponent) {
+                if (this.$parent.$data._isField) {
                     // Set type only if user haven't defined
                     if (!this.$parent.type) {
                         this.$parent.newType = type

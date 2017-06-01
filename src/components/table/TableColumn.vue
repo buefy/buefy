@@ -19,7 +19,7 @@
             customSort: Function
         },
         created() {
-            if (!this.$parent.isTableComponent) {
+            if (!this.$parent.$data._isTable) {
                 this.$destroy()
                 throw new Error('You should wrap bTableColumn on a bTable')
             }

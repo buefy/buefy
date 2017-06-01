@@ -53,7 +53,7 @@
             return {
                 selected: this.value,
                 isActive: false,
-                isDropdownComponent: true // Used internally by DropdownOption
+                _isDropdown: true // Used internally by DropdownOption
             }
         },
         watch: {
@@ -111,9 +111,7 @@
              * Close dropdown if clicked outside.
              */
             clickedOutside(event) {
-                if (this.whiteList.indexOf(event.target) < 0) {
-                    this.isActive = false
-                }
+                if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
             }
         },
         created() {

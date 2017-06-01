@@ -51,9 +51,9 @@
             // or else it'll fire at page load
             setTimeout(() => {
                 // With <keep-alive> the check is undefined
-                if (this.$refs.check !== undefined) {
-                    this.$refs.check.classList.add('is-animated')
-                }
+                if (this.$refs.check === undefined) return
+
+                this.$refs.check.classList.add('is-animated')
             }, 500)
         }
     }

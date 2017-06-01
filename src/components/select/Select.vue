@@ -57,8 +57,7 @@
         data() {
             return {
                 selected: this.value,
-                isValid: true,
-                isSelectComponent: true // Used internally by Option
+                isValid: true
             }
         },
         computed: {
@@ -66,7 +65,7 @@
              * Type prop from parent if it's a Field.
              */
             statusType() {
-                if (this.$parent.isFieldComponent) {
+                if (this.$parent.$data._isField) {
                     return this.$parent.newType
                 }
             }
@@ -120,7 +119,7 @@
                     isValid = false
                 }
                 this.isValid = isValid
-                if (this.$parent.isFieldComponent) {
+                if (this.$parent.$data._isField) {
                     // Set type only if user haven't defined
                     if (!this.$parent.type) {
                         this.$parent.newType = type

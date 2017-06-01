@@ -31,7 +31,7 @@
         },
         created() {
             // $parent is actually the transition-group
-            if (!this.$parent.$parent.isDropdownComponent) {
+            if (!this.$parent.$parent.$data._isDropdown) {
                 this.$destroy()
                 throw new Error('You should wrap bDropdownOption on a bDropdown')
             }

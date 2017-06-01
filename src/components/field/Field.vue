@@ -21,7 +21,7 @@
             return {
                 newType: this.type,
                 newMessage: this.message,
-                isFieldComponent: true // Used internally by Input and Select
+                _isField: true // Used internally by Input and Select
             }
         },
         watch: {

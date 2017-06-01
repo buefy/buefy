@@ -143,7 +143,7 @@
                 currentSortColumn: {},
                 mobileSort: {},
                 currentPage: 1,
-                isTableComponent: true // Used by TableColumn
+                _isTable: true // Used by TableColumn
             }
         },
         watch: {

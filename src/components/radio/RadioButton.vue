@@ -33,7 +33,7 @@
             return {
                 size: null,
                 isChecked: false,
-                isRadioButtonComponent: true // Used internally by Radio Group
+                _isRadioButton: true // Used internally by Radio Group
             }
         },
         methods: {
@@ -46,7 +46,7 @@
             }
         },
         created() {
-            if (!this.$parent.isRadioGroupComponent) {
+            if (!this.$parent.$data._isRadioGroup) {
                 this.$destroy()
                 throw new Error('You should wrap bRadioButton on a bRadioGroup')
             }

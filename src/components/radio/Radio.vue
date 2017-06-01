@@ -40,7 +40,7 @@
             }
         },
         created() {
-            if (!this.$parent.isRadioGroupComponent) {
+            if (!this.$parent.$data._isRadioGroup) {
                 this.$destroy()
                 throw new Error('You should wrap bRadio on a bRadioGroup')
             }

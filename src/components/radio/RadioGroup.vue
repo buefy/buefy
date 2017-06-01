@@ -1,5 +1,5 @@
 <template>
-    <div class="radio-group" :class="{ 'field has-addons': isRadioButtonGroup }">
+    <div class="radio-group" :class="{ 'field has-addons': $data._isRadioButtonGroup }">
         <slot></slot>
     </div>
 </template>
@@ -13,8 +13,8 @@
         },
         data() {
             return {
-                isRadioGroupComponent: true, // Used internally by Radio and RadioButton
-                isRadioButtonGroup: false // Used internally by RadioButton
+                _isRadioGroup: true, // Used internally by Radio and RadioButton
+                _isRadioButtonGroup: false // Used internally by RadioButton
             }
         },
         watch: {
@@ -42,7 +42,7 @@
             initChecked() {
                 this.$children.forEach((child) => {
                     child.size = this.buttonSize
-                    this.isRadioButtonGroup = child.isRadioButtonComponent
+                    this.$data._isRadioButtonGroup = child.$data._isRadioButton
                     child.isChecked = this.value === child.value
                 })
             }

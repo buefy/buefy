@@ -159,7 +159,7 @@
              * Get the type prop from parent if it's a Field.
              */
             statusType() {
-                if (this.$parent.isFieldComponent) {
+                if (this.$parent.$data._isField) {
                     return this.$parent.newType
                 }
             },
@@ -180,7 +180,7 @@
              * Check if have any message prop from parent if it's a Field.
              */
             hasMessage() {
-                return this.$parent.isFieldComponent && this.$parent.newMessage
+                return this.$parent.$data._isField && this.$parent.newMessage
             },
 
             /**
@@ -248,7 +248,7 @@
                     isValid = false
                 }
                 this.isValid = isValid
-                if (this.$parent.isFieldComponent) {
+                if (this.$parent.$data._isField) {
                     // Set type only if user haven't defined
                     if (!this.$parent.type) {
                         this.$parent.newType = type
