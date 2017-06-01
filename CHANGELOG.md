@@ -12,7 +12,7 @@
 ## Additions and fixes
 
 * **New component: Autocomplete**, [see docs](http://buefy.github.io/#/documentation/autocomplete)
-* **Switch design overhaul**
+* **Switch design overhaul**, [see new style](http://buefy.github.io/#/documentation/switch)
 * Fix Tabs dynamic height
 * Add one more Sass variable: ``$speed-slower: 250ms !default``
 * Add ``size`` prop to Switch
