@@ -2,18 +2,17 @@
 
 ## 0.4.0
 
-### I've break some things...
+### I've broke some stuff...
 
-* #74 Fix DropdownOption slots, you can now customize however you want (use HTML inside DropdownOption), [see docs](https://buefy.github.io/#/documentation/dropdown)
-    * Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax
+* Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax, [see docs](https://buefy.github.io/#/documentation/dropdown)
 * Remove ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
-* **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — Gotta fix these inconsistencies while it's still in beta
-* Switch style overhaul
-    * Remove ``on-off`` prop (let me know if it was used by anyone)
+* **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — *Gotta fix these inconsistencies while it's still in beta*
+* Remove ``on-off`` prop from Switch
 
 ## Additions and fixes
 
 * **New component: Autocomplete**, [see docs](http://buefy.github.io/#/documentation/autocomplete)
+* **Switch design overhaul**
 * Fix Tabs dynamic height
 * Add one more Sass variable: ``$speed-slower: 250ms !default``
 * Add ``size`` prop to Switch
@@ -24,6 +23,7 @@
 * #69 Add loading state to Table
 * #71 Add background for checked rows on Table (thanks @mikejavier)
 * #72 Fix Table overflow
+* #74 Fix DropdownOption slots, can customize with HTML now
 * #76 Modal close event accepts parameters (thanks @gongzza)
 * #77 Add index to Table scoped slot (thanks @UrVerySpecial)
 * #78 Fix Table sorting zero values (thanks @gwvt)
