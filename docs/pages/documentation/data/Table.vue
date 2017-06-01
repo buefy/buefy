@@ -339,13 +339,6 @@
                         default: '—'
                     },
                     {
-                        name: '<code>content</code>',
-                        description: 'Use this to render html into cells instead of <code>v-html</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
                         name: '<code>width</code>',
                         description: 'Column fixed width in pixels',
                         type: 'Number',

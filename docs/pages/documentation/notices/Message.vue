@@ -195,7 +195,7 @@
                 ],
                 template1: `
                 <button class="button block" @click="isActive = true">Show first</button>
-                <b-message title="Default">
+                <b-message title="Default" :active.sync="isActive">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
