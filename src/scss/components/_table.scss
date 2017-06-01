@@ -11,7 +11,7 @@
 
 .b-table {
     .b-table-content {
-        transition: all $speed $easing;
+        transition: opacity $speed $easing;
         .icon {
             transition: transform $speed-slow $easing;
             &.is-desc {
@@ -160,8 +160,7 @@
         position: relative;
         .b-table-content {
             pointer-events: none;
-            opacity: 0.6;
-            filter: blur(0.05em)
+            opacity: 0.5;
         }
         &:after {
             @include loader;
