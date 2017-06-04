@@ -3,6 +3,7 @@
         position: relative;
         overflow: hidden;
         display: flex;
+        flex-direction: column;
         .tab-item {
             flex-shrink: 0;
             flex-basis: 100%;
