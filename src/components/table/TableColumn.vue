@@ -24,21 +24,12 @@
                 throw new Error('You should wrap bTableColumn on a bTable')
             }
 
-            this.column = {
-                field: this.field,
-                label: this.label,
-                width: this.width,
-                isNumeric: this.numeric,
-                isSortable: this.sortable,
-                customSort: this.customSort
-            }
-
             // Since we're using scoped prop the columns gonna be multiplied,
             // this finds when to stop based on the label prop.
             const repeated = this.$parent.columns.some((column) => {
                 return column.label === this.label
             })
-            !repeated && this.$parent.columns.push(this.column)
+            !repeated && this.$parent.columns.push(this)
         }
     }
 </script>
