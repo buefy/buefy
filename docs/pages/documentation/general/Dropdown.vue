@@ -428,7 +428,7 @@
                     </div>
 
                     <div class="nav-right" style="overflow: visible">
-                        <b-dropdown v-model="navigation">
+                        <b-dropdown v-model="navigation" position="is-bottom-left">
                             <a class="nav-item" slot="trigger">
                                 <span>Menu</span>
                                 <b-icon icon="arrow_drop_down"></b-icon>
