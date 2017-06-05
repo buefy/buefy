@@ -6,7 +6,7 @@
                     <b-select v-model="mobileSort" expanded>
                         <option
                             v-for="column in columns"
-                            v-if="column.isSortable"
+                            v-if="column.sortable"
                             :value="column">
                             {{ column.label }}
                         </option>
@@ -18,7 +18,7 @@
                                 both
                                 size="is-small"
                                 :class="{
-                                    'is-desc': !mobileSort.isAsc,
+                                    'is-desc': !isAsc,
                                     'is-visible': currentSortColumn === mobileSort
                                 }">
                             </b-icon>
@@ -42,15 +42,15 @@
                                 <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                             </th>
                             <th v-for="column in columns" @click.stop="sort(column)"
-                                :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
+                                :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
                                 :style="{ width: column.width + 'px' }">
-                                <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
+                                <div class="th-wrap" :class="{ 'is-numeric': column.numeric }">
                                     {{ column.label }}
                                     <b-icon
                                         icon="arrow_upward"
                                         both
                                         size="is-small"
-                                        :class="{ 'is-desc': !column.isAsc, 'is-visible': currentSortColumn === column }">
+                                        :class="{ 'is-desc': !isAsc, 'is-visible': currentSortColumn === column }">
                                     </b-icon>
                                 </div>
                             </th>
@@ -141,6 +141,7 @@
                 newData: this.data,
                 newCheckedRows: [...this.checkedRows],
                 currentSortColumn: {},
+                isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
                 _isTable: true // Used by TableColumn
@@ -216,7 +217,7 @@
              */
             hasSortableColumns() {
                 return this.columns.some(column => {
-                    return column.isSortable
+                    return column.sortable
                 })
             }
         },
@@ -261,18 +262,18 @@
              * and not just updating the prop.
              */
             sort(column, updatingData = false) {
-                if (!column || !column.isSortable) return
+                if (!column || !column.sortable) return
 
                 if (!updatingData) {
-                    column.isAsc = column === this.currentSortColumn
-                        ? !column.isAsc
-                        : column.isAsc = true
+                    this.isAsc = column === this.currentSortColumn
+                        ? !this.isAsc
+                        : this.isAsc = true
                 }
                 if (!this.backendSorting) {
-                    this.newData = this.sortBy(this.newData, column.field, column.customSort, column.isAsc)
+                    this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc)
                 }
                 this.currentSortColumn = column
-                this.$emit('sort', column.field, column.isAsc ? 'asc' : 'desc')
+                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
             },
 
             /**
