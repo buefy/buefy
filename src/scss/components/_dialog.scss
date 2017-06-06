@@ -1,6 +1,7 @@
 .dialog {
     transition: all $speed-slow $easing;
     .modal-card-body {
+        align-items: center;
         .custom-icon {
             margin-left: -8px;
             margin-right: 16px;
