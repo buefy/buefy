@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Snackbar from './Snackbar'
+import Snackbar from './Snackbar.vue'
 
 export default {
     open(params) {

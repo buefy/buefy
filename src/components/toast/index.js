@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Toast from './Toast'
+import Toast from './Toast.vue'
 
 export default {
     open(params) {

@@ -1,3 +1,3 @@
-import Select from './Select'
+import Select from './Select.vue'
 
 export default Select

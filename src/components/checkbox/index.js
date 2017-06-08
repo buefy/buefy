@@ -1,5 +1,5 @@
-import Checkbox from './Checkbox'
-import CheckboxGroup from './CheckboxGroup'
+import Checkbox from './Checkbox.vue'
+import CheckboxGroup from './CheckboxGroup.vue'
 
 export {
     Checkbox,

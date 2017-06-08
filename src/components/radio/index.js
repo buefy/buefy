@@ -1,6 +1,6 @@
-import Radio from './Radio'
-import RadioGroup from './RadioGroup'
-import RadioButton from './RadioButton'
+import Radio from './Radio.vue'
+import RadioGroup from './RadioGroup.vue'
+import RadioButton from './RadioButton.vue'
 
 export {
     Radio,

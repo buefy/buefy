@@ -1,5 +1,5 @@
-import Tabs from './Tabs'
-import TabItem from './TabItem'
+import Tabs from './Tabs.vue'
+import TabItem from './TabItem.vue'
 
 export {
     Tabs,

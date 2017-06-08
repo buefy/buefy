@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.4.1
+
+* Allow imports of the src/components from rollup
+* Update everything and add yarn.lock
+
 ## 0.4.0
 
 ### I've broke some stuff...

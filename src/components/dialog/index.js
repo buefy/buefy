@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Dialog from './Dialog'
+import Dialog from './Dialog.vue'
 
 function open(propsData) {
     const DialogComponent = Vue.extend(Dialog)

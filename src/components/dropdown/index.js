@@ -1,5 +1,5 @@
-import Dropdown from './Dropdown'
-import DropdownOption from './DropdownOption'
+import Dropdown from './Dropdown.vue'
+import DropdownOption from './DropdownOption.vue'
 
 export {
     Dropdown,
