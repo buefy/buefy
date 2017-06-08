@@ -1,6 +1,6 @@
 <template>
     <td :class="{ 'has-text-right': numeric }" :data-label="label">
-        <slot></slot>
+        <span><slot></slot></span>
     </td>
 </template>
 

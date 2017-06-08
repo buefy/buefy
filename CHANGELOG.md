@@ -5,6 +5,7 @@
 * Fix table sorting null values
 * Table null values always come last when sorting
 * Add icon support to select
+* #91 Update Bulma to v0.4.2
 
 ## 0.4.0
 

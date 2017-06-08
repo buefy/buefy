@@ -55,10 +55,7 @@
                 }
             }
             tr {
-                &.is-selected,
-                &.is-selected:hover {
-                    background: $primary !important; // Temporary fix for Bulma v0.4.1
-                    color: $primary-invert;
+                &.is-selected {
                     .checkbox input {
                         &:checked + .check {
                             background: $primary-invert url(checkmark($primary)) no-repeat center center;
@@ -68,8 +65,12 @@
                         }
                     }
                 }
-                &.is-checked {
-                    background: rgba($primary, 0.16);
+                &.is-checked:not(.is-selected) {
+                    background: rgba($primary, 0.14) !important;
+                    td,
+                    th {
+                        border-color: $primary-invert;
+                    }
                 }
             }
             .checkbox-cell {
@@ -93,7 +94,6 @@
                     }
                     tr {
                         // Card style — Cannot extend inside media query
-                        background-color: $white;
                         box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
                         max-width: 100%;
                         position: relative;
@@ -107,13 +107,11 @@
                             justify-content: flex-end;
                             text-align: right;
                             border-bottom: 1px solid $background;
-                            span {
-                                margin-left: 8px;
-                            }
                             &:before {
                                 content: attr(data-label);
                                 font-weight: $weight-semibold;
                                 margin-right: auto;
+                                padding-right: 0.5em;
                                 text-align: left;
                             }
                             &:last-child {
@@ -127,7 +125,7 @@
                             margin-bottom: 16px;
                         }
                         // Disables is-striped
-                        &:nth-child(even) {
+                        &:nth-child(even):not(.is-selected) {
                             background: inherit;
                             &:hover {
                                 background-color: inherit;
