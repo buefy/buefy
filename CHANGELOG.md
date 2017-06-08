@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.4.1
+
+* Fix table sorting null values
+* Table null values always come last when sorting
+
 ## 0.4.0
 
 ### I've broke some stuff...

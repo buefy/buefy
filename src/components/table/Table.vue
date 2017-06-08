@@ -96,6 +96,7 @@
 </template>
 
 <script>
+    import { getValueByPath } from '../../utils/helpers'
     import Pagination from '../pagination'
     import Icon from '../icon'
     import { Checkbox } from '../checkbox'
@@ -231,12 +232,13 @@
                 // Sorting without mutating original data
                 if (!fn || typeof fn !== 'function') {
                     sorted = [...array].sort((a, b) => {
-                        // Get values even if it's a dot notation string (e.g. 'user.name')
-                        let newA = key.split('.').reduce((obj, i) => obj[i], a)
-                        let newB = key.split('.').reduce((obj, i) => obj[i], b)
+                        // Get nested values from objects
+                        let newA = getValueByPath(a, key)
+                        let newB = getValueByPath(b, key)
 
                         if (!newA && newA !== 0) return 1
-                        if (!newB && newB !== 0) return 0
+                        if (!newB && newB !== 0) return -1
+                        if (newA === newB) return 0
 
                         newA = (typeof newA === 'string')
                             ? newA.toUpperCase()
@@ -245,13 +247,13 @@
                             ? newB.toUpperCase()
                             : newB
 
-                        return newA > newB ? 1 : -1
+                        return isAsc
+                            ? newA > newB ? 1 : -1
+                            : newA > newB ? -1 : 1
                     })
                 } else {
                     sorted = [...array].sort(fn)
                 }
-
-                if (!isAsc) sorted.reverse()
 
                 return sorted
             },
@@ -367,11 +369,8 @@
 
                 this.columns.forEach(column => {
                     if (column.field === sortField) {
-                        this.sort(column)
-                        if (direction.toLowerCase() === 'desc') {
-                            // Call sort again to reverse the array
-                            this.sort(column)
-                        }
+                        this.isAsc = direction.toLowerCase() !== 'desc'
+                        this.sort(column, true)
                     }
                 })
             }
