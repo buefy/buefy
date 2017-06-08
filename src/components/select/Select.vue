@@ -1,7 +1,7 @@
 <template>
     <p
         class="control"
-        :class="{ 'is-expanded': expanded }">
+        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }">
         <span
             class="select"
             :class="[size, statusType, {
@@ -32,6 +32,14 @@
 
             </select>
         </span>
+
+        <b-icon
+            v-if="icon"
+            class="is-left"
+            :icon="icon"
+            :pack="iconPack"
+            :size="size">
+        </b-icon>
     </p>
 </template>
 
@@ -47,6 +55,8 @@
             placeholder: String,
             expanded: Boolean,
             loading: Boolean,
+            icon: String,
+            iconPack: String,
 
             // Native options to use in HTML5 validation
             name: String,

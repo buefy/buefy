@@ -4,6 +4,7 @@
 
 * Fix table sorting null values
 * Table null values always come last when sorting
+* Add icon support to select
 
 ## 0.4.0
 

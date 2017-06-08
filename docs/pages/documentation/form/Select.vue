@@ -20,7 +20,7 @@
                 </b-field>
 
                 <b-field label="Grouped">
-                    <b-select placeholder="Select a character">
+                    <b-select placeholder="Select a character" icon="person">
                         <optgroup label="Black Sails">
                             <option value="flint">Flint</option>
                             <option value="silver">Silver</option>
@@ -94,6 +94,52 @@
             <div class="column">
                 <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+        <span class="tag is-success field">New!</span> <span class="tag is-info">v0.4.1</span>
+        <h2 class="title">Icons</h2>
+        <div class="columns">
+            <div class="column">
+                <h3 class="subtitle">With Material Design Icons</h3>
+                <b-field>
+                    <b-select placeholder="Country" icon="public">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+
+                <b-field>
+                    <b-select placeholder="Client" icon="person">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+
+                <h3 class="subtitle">With FontAwesome</h3>
+                <b-field>
+                    <b-select
+                        placeholder="Country"
+                        icon="globe"
+                        icon-pack="fa">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+
+                <b-field>
+                    <b-select
+                        placeholder="Client"
+                        icon="user"
+                        icon-pack="fa">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+            </div>
+            <div class="column">
+                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -191,8 +237,7 @@
                 </p>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-        <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
 
         <hr>
         <h2 class="title is-spaced">Grouped</h2>
@@ -230,10 +275,8 @@
                 </p>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
-        <span class="tag is-success">New!</span> <span class="tag is-info">v0.3.1</span>
         <h3 class="subtitle is-inline-flex">Nested Fields can be grouped as well</h3>
         <div class="example">
             <b-field grouped>
@@ -254,7 +297,7 @@
                 </b-field>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
 
         <hr>
         <h2 class="title">Sizes</h2>
@@ -300,7 +343,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
             </div>
         </div>
 
@@ -413,6 +456,20 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>icon</code>',
+                        description: 'Icon name to be added',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>icon-pack</code>',
+                        description: 'Icon pack to use',
+                        type: 'String',
+                        values: '<code>mdi</code>, <code>fa</code>',
+                        default: '<code>mdi</code>'
                     }
                 ],
                 selectEvents: [
@@ -524,6 +581,42 @@
                     }
                 }`,
                 template2: `
+                <h3 class="subtitle">With Material Design Icons</h3>
+                <b-field>
+                    <b-select placeholder="Country" icon="public">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+
+                <b-field>
+                    <b-select placeholder="Client" icon="person">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+
+                <h3 class="subtitle">With FontAwesome</h3>
+                <b-field>
+                    <b-select
+                        placeholder="Country"
+                        icon="globe"
+                        icon-pack="fa">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>
+
+                <b-field>
+                    <b-select
+                        placeholder="Client"
+                        icon="user"
+                        icon-pack="fa">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </b-select>
+                </b-field>`,
+                template3: `
                 <b-field>
                     <b-select
                         v-model="select"
@@ -613,15 +706,7 @@
                         </button>
                     </p>
                 </b-field>`,
-                code2: `
-                export default {
-                    data() {
-                        return {
-                            select: ''
-                        }
-                    }
-                }`,
-                template3: `
+                template4: `
                 <b-field grouped>
                     <b-select
                         v-model="select"
@@ -652,7 +737,7 @@
                         </button>
                     </p>
                 </b-field>`,
-                template4: `
+                template5: `
                 <b-field grouped>
                     <b-field label="Character" expanded>
                         <b-select placeholder="Select..." expanded>
@@ -670,7 +755,7 @@
                         <b-input></b-input>
                     </b-field>
                 </b-field>`,
-                template5: `
+                template6: `
                 <b-field>
                     <b-select
                         placeholder="Small"
