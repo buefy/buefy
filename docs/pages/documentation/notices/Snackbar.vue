@@ -95,7 +95,7 @@
                     },
                     {
                         name: '<code>actionText</code>',
-                        description: `Snackbar's button text`,
+                        description: `Snackbar's button text, set <code>null</code> for buttonless`,
                         type: 'String',
                         values: '—',
                         default: '<code>OK</code>'

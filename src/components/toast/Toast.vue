@@ -6,7 +6,6 @@
         <div class="toast" v-show="isActive" :class="type">
             <div v-html="message"></div>
         </div>
-
     </transition>
 </template>
 

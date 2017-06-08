@@ -9,11 +9,11 @@
     .toast {
         display: inline-flex;
         animation-duration: $speed-slow;
-        margin: 24px 8px;
+        margin: 1.5em 0.5em;
         text-align: center;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-        border-radius: 28px;
-        padding: 12px 24px;
+        border-radius: 2em;
+        padding: 0.75em 1.5em;
         pointer-events: auto;
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
@@ -29,27 +29,29 @@
         align-items: center;
         justify-content: space-around;
         animation-duration: $speed-slow;
-        margin: 8px;
-        text-align: center;
+        margin: 0.5em;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
         border-radius: $radius-small;
-        padding: 6px 8px 6px 24px;
         pointer-events: auto;
         background: $dark;
         color: $dark-invert;
+        min-height: 3em;
         .text {
-            text-align: left;
+            padding: 0.5em 1em;
         }
         .action {
             margin-left: auto;
-            padding-left: 8px;
+            padding: 0.5em;
+            padding-left: 0;
+            .button {
+                font-weight: $weight-semibold;
+                text-transform: uppercase;
+            }
             @each $name, $pair in $colors {
                 $color: nth($pair, 1);
                 &.is-#{$name} {
                     .button {
                         color: $color;
-                        font-weight: $weight-semibold;
-                        text-transform: uppercase;
                     }
                 }
             }

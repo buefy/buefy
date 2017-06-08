@@ -4,12 +4,11 @@
         :leave-active-class="transition.leave">
 
         <div class="snackbar" v-show="isActive">
-            <div class="text">{{ message }}</div>
-            <div class="action" @click="action" v-if="actionText" :class="type">
+            <p class="text">{{ message }}</p>
+            <div v-if="actionText" class="action" @click="action" :class="type">
                 <button class="button is-dark">{{ actionText }}</button>
             </div>
         </div>
-
     </transition>
 </template>
 
