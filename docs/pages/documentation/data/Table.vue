@@ -396,7 +396,7 @@
                         </b-table-column>
 
                         <b-table-column field="date" label="Date" sortable
-                            <span v-html="formatDate(props.row.date)">
+                            <span v-html="formatDate(props.row.date)"></span>
                         </b-table-column>
 
                         <b-table-column field="gender" label="Gender">
