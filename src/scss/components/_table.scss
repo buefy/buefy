@@ -163,7 +163,7 @@
         &:after {
             @include loader;
             position: absolute;
-            top: calc(50% - 2.5em);
+            top: 4em;
             left: calc(50% - 2.5em);
             width: 5em;
             height: 5em;
