@@ -29,7 +29,7 @@
             const repeated = this.$parent.columns.some((column) => {
                 return column.label === this.label
             })
-            !repeated && this.$parent.columns.push(this)
+            !repeated && this.$parent.columns.push(this.$props)
         }
     }
 </script>
