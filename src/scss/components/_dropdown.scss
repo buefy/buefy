@@ -54,20 +54,20 @@
         }
         &.is-top-right{
             top: auto;
-            bottom: 2.5em;
+            bottom: 100%;
             left: 0;
         }
         &.is-top-left{
             top: auto;
-            bottom: 2.5em;
+            bottom: 100%;
             right: 0;
         }
         &.is-bottom-right{
-            top: 2.5em;
+            top: 100%;
             left: 0;
         }
         &.is-bottom-left{
-            top: 2.5em;
+            top: 100%;
             right: 0;
         }
         &.is-narrow {
