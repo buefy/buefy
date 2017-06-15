@@ -39,16 +39,16 @@ npm install buefy
 ### Import and use Buefy. You can also enable individual components
 
 ```javascript
-import Vue from 'vue'
-import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
+import Vue from 'vue';
+import Buefy from 'buefy';
+import 'buefy/lib/buefy.css';
 
-Vue.use(Buefy)
+Vue.use(Buefy);
 
 // OR
 
-Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-Vue.component(Buefy.Table.name, Buefy.Table)
+Vue.component(Buefy.Checkbox.name, Buefy.Checkbox);
+Vue.component(Buefy.Table.name, Buefy.Table);
 ...
 ```
 
