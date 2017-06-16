@@ -1,7 +1,7 @@
 .icon {
     @include unselectable;
     cursor: inherit;
-    vertical-align: top; // Temporary fix for Bulma v0.4.1
+    vertical-align: middle;
     .mdi {
         @extend .fa;
         font-family: "Material Icons";
@@ -11,6 +11,15 @@
         display: inline-block;
         // Suport for IE/Edge
         font-feature-settings: 'liga';
+    }
+    svg {
+        background-color: transparent;
+        fill: currentColor;
+        stroke-width: 0;
+        stroke: currentColor;
+        pointer-events: none;
+        width: 1.5rem;
+        height: 1.5rem;
     }
     // Sizes
     &.is-small {
