@@ -42,6 +42,7 @@
                                 <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                             </th>
                             <th v-for="column in columns" @click.stop="sort(column)"
+                                v-if="column.visible"
                                 :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
                                 :style="{ width: column.width + 'px' }">
                                 <div class="th-wrap" :class="{ 'is-numeric': column.numeric }">

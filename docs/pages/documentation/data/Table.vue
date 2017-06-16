@@ -360,6 +360,13 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>visible</code>',
+                        description: 'Whether the column is visible',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>true</code>'
+                    },
+                    {
                         name: '<code>custom-sort</code>',
                         description: 'Custom sort method, works when is <code>sortable</code>',
                         type: 'Function (a: Object, b: Object)',

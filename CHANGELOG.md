@@ -5,7 +5,10 @@
 * Fix table sorting null values
 * Table null values always come last when sorting
 * Add icon support to select
+* Fix dropdown to not stay on top of trigger
+* Fix switch disable state
 * #91 Update Bulma to v0.4.2
+* #96 Add ``visible`` prop to table column
 
 ## 0.4.0
 
