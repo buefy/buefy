@@ -7,8 +7,14 @@
 * Add icon support to select
 * Fix dropdown to not stay on top of trigger
 * Fix switch disable state
+* Add click events for dropdown option
+* Fix dropdown disable state
+* Fix table columns not being reactive
+* #90 Fix tabs with long elements (thanks @mirshko)
 * #91 Update Bulma to v0.4.2
 * #96 Add ``visible`` prop to table column
+* #102 Fix anchor tag / router-link on dropdown
+* #104 Fix numeric zero values on input's maxlength (thanks @iwan-wijaya)
 
 ## 0.4.0
 
@@ -19,7 +25,7 @@
 * **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — *Gotta fix these inconsistencies while it's still in beta*
 * Remove ``on-off`` prop from Switch
 
-## Additions and fixes
+### Additions and fixes
 
 * **New component: Autocomplete**, [see docs](http://buefy.github.io/#/documentation/autocomplete)
 * **Switch design overhaul**, [see new style](http://buefy.github.io/#/documentation/switch)
