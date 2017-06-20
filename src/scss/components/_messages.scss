@@ -3,12 +3,11 @@
     transition: opacity $speed-slow $easing;
 }
 
-.message .message-body,
-.notification {
+.message.b-message .message-body,
+.notification.b-notification {
     display: flex;
     align-items: center;
     .icon {
-        margin-right: 8px;
-        margin-left: -8px;
+        margin-right: 0.5em;
     }
 }

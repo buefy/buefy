@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div class="notification" :class="type" v-if="isActive">
+        <div class="notification b-notification" :class="type" v-if="isActive">
             <button class="delete" v-if="closable" @click="close" type="button"></button>
             <b-icon
                 :icon="icon"
