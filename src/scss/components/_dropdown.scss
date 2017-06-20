@@ -39,7 +39,7 @@
                 cursor: inherit;
             }
             &.is-disabled {
-                opacity: .5;
+                opacity: 0.5;
                 cursor: not-allowed;
             }
             &.is-subheader {
@@ -50,6 +50,14 @@
                 -moz-user-select: inherit;
                 -ms-user-select: inherit;
                 user-select: inherit;
+            }
+            &.has-link {
+                padding: 0;
+                a {
+                    padding: 0.5rem 1rem;
+                    display: block;
+                    color: inherit;
+                }
             }
         }
         &.is-top-right{
@@ -79,7 +87,9 @@
     &.is-disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        pointer-events: none;
+        .trigger {
+            pointer-events: none;
+        }
     }
     @include touch {
         .box {

@@ -4,9 +4,10 @@
             'is-subheader': subheader,
             'is-disabled': disabled,
             'is-separator': separator,
-            'is-selected': value !== null && value === $parent.$parent.selected
+            'is-selected': value !== null && value === $parent.$parent.selected,
+            'has-link': hasLink
         }"
-        @click="$parent.$parent.selectOption(value, isClickable)">
+        @click="selectOption">
 
         <slot></slot>
     </li>
@@ -22,15 +23,30 @@
             },
             separator: Boolean,
             disabled: Boolean,
-            subheader: Boolean
+            subheader: Boolean,
+            hasLink: Boolean
         },
         computed: {
+            /**
+             * Check if option can be clickable.
+             */
             isClickable() {
                 return !this.separator && !this.disabled && !this.subheader
             }
         },
+        methods: {
+            /**
+             * Click listener, select the option.
+             */
+            selectOption() {
+                if (!this.isClickable) return
+
+                this.$parent.$parent.selectOption(this.value)
+                this.$emit('click')
+            }
+        },
         created() {
-            // $parent is actually the transition-group
+            // Parent is actually the transition-group
             if (!this.$parent.$parent.$data._isDropdown) {
                 this.$destroy()
                 throw new Error('You should wrap bDropdownOption on a bDropdown')

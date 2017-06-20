@@ -285,6 +285,22 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Events">
+                <b-table :data="optionEvents" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                        <b-table-column field="parameters" label="Parameters">
+                            <span v-html="props.row.parameters"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
     </div>
 </template>
@@ -360,6 +376,20 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>has-link</code>',
+                        description: 'Use it if your option is an anchor tag or <code>router-link</code>',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    }
+                ],
+                optionEvents: [
+                    {
+                        name: '<code>click</code>',
+                        description: 'Triggers when the option is clicked',
+                        parameters: '—'
                     }
                 ],
                 template1: `

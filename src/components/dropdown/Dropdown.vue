@@ -4,7 +4,7 @@
         <a role="button"
             ref="trigger"
             class="trigger"
-            @click="isActive = !isActive">
+            @click="activate">
             <slot name="trigger"></slot>
         </a>
 
@@ -98,9 +98,7 @@
              *   2. Emit input event to update the user v-model.
              *   3. Close the dropdown.
              */
-            selectOption(value, isClickable) {
-                if (!isClickable) return
-
+            selectOption(value) {
                 this.selected = value
                 this.$emit('input', value)
                 this.$emit('change', value)
@@ -112,6 +110,15 @@
              */
             clickedOutside(event) {
                 if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
+            },
+
+            /**
+             * Activate dropdown if it's not disabled.
+             */
+            activate() {
+                if (this.disabled) return
+
+                this.isActive = !this.isActive
             }
         },
         created() {
