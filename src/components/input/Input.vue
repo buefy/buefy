@@ -67,7 +67,7 @@
             @click.native="togglePasswordVisibility">
         </b-icon>
 
-        <small class="help counter" v-if="maxlength">{{ this.newValue.length }} / {{ maxlength }}</small>
+        <small class="help counter" v-if="maxlength">{{ valueLength }} / {{ maxlength }}</small>
     </p>
 </template>
 
@@ -109,9 +109,7 @@
         },
         data() {
             return {
-                // This is necessary because, for some reason, textarea
-                // returns undefined if there's no v-model or value.
-                newValue: this.value || '',
+                newValue: this.value,
                 newType: this.type,
                 newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
                 isValid: true, // Used in Dialog and may be used in third party components
@@ -188,6 +186,12 @@
              */
             passwordVisibleIcon() {
                 return !this.isPasswordVisible ? 'visibility' : 'visibility_off'
+            },
+            /**
+             * Get value length
+             */
+            valueLength() {
+                return this.newValue ? this.newValue.length : 0
             }
         },
         methods: {
