@@ -388,6 +388,7 @@
                     :striped="isStriped"
                     :narrowed="isNarrowed"
                     :checkable="isCheckable"
+                    :loading="isLoading"
                     :mobile-cards="hasMobileCards"
                     :paginated="isPaginated"
                     :per-page="perPage"
@@ -440,6 +441,7 @@
                             isStriped: false,
                             isNarrowed: false,
                             isCheckable: false,
+                            isLoading: false,
                             hasMobileCards: true,
                             isPaginated: true,
                             isPaginationSimple: false,
