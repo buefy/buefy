@@ -24,6 +24,7 @@ const Snackbar = (r) => require(['../pages/documentation/notices/Snackbar'], r)
 const Notification = (r) => require(['../pages/documentation/notices/Notification'], r)
 const Message = (r) => require(['../pages/documentation/notices/Message'], r)
 
+const Field = (r) => require(['../pages/documentation/form/Field'], r)
 const Input = (r) => require(['../pages/documentation/form/Input'], r)
 const Select = (r) => require(['../pages/documentation/form/Select'], r)
 const Checkbox = (r) => require(['../pages/documentation/form/Checkbox'], r)
@@ -143,6 +144,13 @@ export default new Router({
                     component: Message,
                     meta: {
                         category: 'Notices'
+                    }
+                },
+                {
+                    path: 'field',
+                    component: Field,
+                    meta: {
+                        category: 'FormElements'
                     }
                 },
                 {
