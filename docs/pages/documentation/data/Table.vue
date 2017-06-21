@@ -278,6 +278,13 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>20</code>'
+                    },
+                    {
+                        name: '<code>loading</code>',
+                        description: 'Shows a progress bar',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
                 ],
                 tableScopedSlots: [
@@ -381,6 +388,7 @@
                     :striped="isStriped"
                     :narrowed="isNarrowed"
                     :checkable="isCheckable"
+                    :loading="isLoading"
                     :mobile-cards="hasMobileCards"
                     :paginated="isPaginated"
                     :per-page="perPage"
@@ -433,6 +441,7 @@
                             isStriped: false,
                             isNarrowed: false,
                             isCheckable: false,
+                            isLoading: false,
                             hasMobileCards: true,
                             isPaginated: true,
                             isPaginationSimple: false,
