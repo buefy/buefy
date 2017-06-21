@@ -278,6 +278,13 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>20</code>'
+                    },
+                    {
+                        name: '<code>loading</code>',
+                        description: 'Shows a progress bar',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
                 ],
                 tableScopedSlots: [
