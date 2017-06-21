@@ -259,6 +259,13 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>loading</code>',
+                        description: 'Loading state',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
                         name: '<code>paginated</code>',
                         description: 'Adds pagination to the table',
                         type: 'Boolean',
@@ -278,13 +285,6 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>20</code>'
-                    },
-                    {
-                        name: '<code>loading</code>',
-                        description: 'Shows a progress bar',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
                     }
                 ],
                 tableScopedSlots: [
