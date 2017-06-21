@@ -17,6 +17,7 @@ const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
 const Modal = (r) => require(['../pages/documentation/general/Modal'], r)
 const Tabs = (r) => require(['../pages/documentation/general/Tabs'], r)
+const Popover = (r) => require(['../pages/documentation/general/Popover'], r)
 
 const Dialog = (r) => require(['../pages/documentation/notices/Dialog'], r)
 const Toast = (r) => require(['../pages/documentation/notices/Toast'], r)
@@ -106,6 +107,13 @@ export default new Router({
                 {
                     path: 'tabs',
                     component: Tabs,
+                    meta: {
+                        category: 'General'
+                    }
+                },
+                {
+                    path: 'popover',
+                    component: Popover,
                     meta: {
                         category: 'General'
                     }

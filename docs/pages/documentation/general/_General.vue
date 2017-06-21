@@ -6,5 +6,6 @@
         <router-link to="tooltip" class="nav-item is-tab">Tooltip</router-link>
         <router-link to="modal" class="nav-item is-tab">Modal</router-link>
         <router-link to="tabs" class="nav-item is-tab">Tabs</router-link>
+        <router-link to="popover" class="nav-item is-tab">Popover</router-link>
     </div>
 </template>
