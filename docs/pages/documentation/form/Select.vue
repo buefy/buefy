@@ -2,7 +2,8 @@
     <div class="container">
         <h1 class="title is-spaced">Select</h1>
         <h2 class="subtitle">
-            Select an item in a dropdown list. Wrap it on a Field to use all the functionalities
+            Select an item in a dropdown list.
+            Use with <strong><router-link to="/documentation/field">Field</router-link></strong> to access all functionalities
         </h2>
         <hr>
 
@@ -144,160 +145,37 @@
         </div>
 
         <hr>
-        <h2 class="title is-spaced">Addons</h2>
-        <h3 class="subtitle">Selects, Inputs, Dropdowns and <code>.control</code> elements are automatically unified when inside a Field</h3>
-        <div class="example">
-            <b-field>
-                <b-select
-                    v-model="select"
-                    placeholder="Select...">
-                    <option value="flint">Flint</option>
-                    <option value="silver">Silver</option>
-                    <option value="vane">Vane</option>
-                    <option value="billy">Billy</option>
-                    <option value="jack">Jack</option>
-                    <option value="heisenberg">Heisenberg</option>
-                    <option value="jesse">Jesse</option>
-                    <option value="saul">Saul</option>
-                    <option value="mike">Mike</option>
-                </b-select>
-                <p class="control">
-                    <button
-                        class="button is-danger"
-                        @click="select = ''">
-                        <b-icon icon="clear"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button
-                        class="button"
-                        @click="select = 'flint'">
-                        Set Flint
-                    </button>
-                </p>
-            </b-field>
-
-            <b-field position="is-centered">
-                <b-select
-                    v-model="select"
-                    placeholder="Select...">
-                    <option value="flint">Flint</option>
-                    <option value="silver">Silver</option>
-                    <option value="vane">Vane</option>
-                    <option value="billy">Billy</option>
-                    <option value="jack">Jack</option>
-                    <option value="heisenberg">Heisenberg</option>
-                    <option value="jesse">Jesse</option>
-                    <option value="saul">Saul</option>
-                    <option value="mike">Mike</option>
-                </b-select>
-                <p class="control">
-                    <button
-                        class="button is-dark"
-                        @click="select = ''">
-                        <b-icon icon="clear"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button
-                        class="button"
-                        @click="select = 'flint'">
-                        Set Flint
-                    </button>
-                </p>
-            </b-field>
-
-            <b-field position="is-right">
-                <b-select
-                    v-model="select"
-                    placeholder="Select...">
-                    <option value="flint">Flint</option>
-                    <option value="silver">Silver</option>
-                    <option value="vane">Vane</option>
-                    <option value="billy">Billy</option>
-                    <option value="jack">Jack</option>
-                    <option value="heisenberg">Heisenberg</option>
-                    <option value="jesse">Jesse</option>
-                    <option value="saul">Saul</option>
-                    <option value="mike">Mike</option>
-                </b-select>
-                <p class="control">
-                    <button
-                        class="button is-primary"
-                        @click="select = ''">
-                        <b-icon icon="clear"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button
-                        class="button"
-                        @click="select = 'flint'">
-                        Set Flint
-                    </button>
-                </p>
-            </b-field>
-        </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-
-        <hr>
-        <h2 class="title is-spaced">Grouped</h2>
-        <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
-        <p class="content">Note that you have to specify which one will be <code>expanded</code>.</p>
-        <div class="example">
-            <b-field grouped>
-                <b-select
-                    v-model="select"
-                    placeholder="Select..."
-                    expanded>
-                    <option value="flint">Flint</option>
-                    <option value="silver">Silver</option>
-                    <option value="vane">Vane</option>
-                    <option value="billy">Billy</option>
-                    <option value="jack">Jack</option>
-                    <option value="heisenberg">Heisenberg</option>
-                    <option value="jesse">Jesse</option>
-                    <option value="saul">Saul</option>
-                    <option value="mike">Mike</option>
-                </b-select>
-                <p class="control">
-                    <button
-                        class="button"
-                        @click="select = ''">
-                        <b-icon icon="clear"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button
-                        class="button"
-                        @click="select = 'flint'">
-                        Set Flint
-                    </button>
-                </p>
-            </b-field>
-        </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
-
-        <h3 class="subtitle is-inline-flex">Nested Fields can be grouped as well</h3>
-        <div class="example">
-            <b-field grouped>
-                <b-field label="Character" expanded>
-                    <b-select placeholder="Select..." expanded>
+        <h2 class="title is-spaced">Selection</h2>
+        <div class="columns">
+            <div class="column">
+                <b-field>
+                    <b-select
+                        v-model="select"
+                        placeholder="Select...">
                         <option value="flint">Flint</option>
                         <option value="silver">Silver</option>
+                        <option value="vane">Vane</option>
+                        <option value="billy">Billy</option>
+                        <option value="jack">Jack</option>
+                        <option value="heisenberg">Heisenberg</option>
+                        <option value="jesse">Jesse</option>
+                        <option value="saul">Saul</option>
+                        <option value="mike">Mike</option>
                     </b-select>
                 </b-field>
-                <b-field label="Name" expanded>
-                    <b-select placeholder="Select..." expanded>
-                        <option value="john">John</option>
-                        <option value="brok">Brok</option>
-                    </b-select>
-                </b-field>
-                <b-field label="Email">
-                    <b-input></b-input>
-                </b-field>
-            </b-field>
+
+                <button class="button" @click="select = ''">
+                    Clear
+                </button>
+
+                <button class="button" @click="select = 'flint'">
+                    Set Flint
+                </button>
+            </div>
+            <div class="column">
+                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+            </div>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
 
         <hr>
         <h2 class="title">Sizes</h2>
@@ -343,7 +221,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
             </div>
         </div>
 
@@ -406,7 +284,7 @@
                         description: 'Binding value',
                         type: 'Any',
                         values: '—',
-                        default: '<code>null</code>'
+                        default: '—'
                     },
                     {
                         name: '<code>size</code>',
@@ -631,131 +509,16 @@
                         <option value="saul">Saul</option>
                         <option value="mike">Mike</option>
                     </b-select>
-                    <p class="control">
-                        <button
-                            class="button is-danger"
-                            @click="select = ''">
-                            <b-icon icon="clear"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = 'flint'">
-                            Set Flint
-                        </button>
-                    </p>
                 </b-field>
 
-                <b-field position="is-centered">
-                    <b-select
-                        v-model="select"
-                        placeholder="Select...">
-                        <option value="flint">Flint</option>
-                        <option value="silver">Silver</option>
-                        <option value="vane">Vane</option>
-                        <option value="billy">Billy</option>
-                        <option value="jack">Jack</option>
-                        <option value="heisenberg">Heisenberg</option>
-                        <option value="jesse">Jesse</option>
-                        <option value="saul">Saul</option>
-                        <option value="mike">Mike</option>
-                    </b-select>
-                    <p class="control">
-                        <button
-                            class="button is-dark"
-                            @click="select = ''">
-                            <b-icon icon="clear"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = 'flint'">
-                            Set Flint
-                        </button>
-                    </p>
-                </b-field>
+                <button class="button" @click="select = ''">
+                    Clear
+                </button>
 
-                <b-field position="is-right">
-                    <b-select
-                        v-model="select"
-                        placeholder="Select...">
-                        <option value="flint">Flint</option>
-                        <option value="silver">Silver</option>
-                        <option value="vane">Vane</option>
-                        <option value="billy">Billy</option>
-                        <option value="jack">Jack</option>
-                        <option value="heisenberg">Heisenberg</option>
-                        <option value="jesse">Jesse</option>
-                        <option value="saul">Saul</option>
-                        <option value="mike">Mike</option>
-                    </b-select>
-                    <p class="control">
-                        <button
-                            class="button is-primary"
-                            @click="select = ''">
-                            <b-icon icon="clear"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = 'flint'">
-                            Set Flint
-                        </button>
-                    </p>
-                </b-field>`,
+                <button class="button" @click="select = 'flint'">
+                    Set Flint
+                </button>`,
                 template4: `
-                <b-field grouped>
-                    <b-select
-                        v-model="select"
-                        placeholder="Select..."
-                        expanded>
-                        <option value="flint">Flint</option>
-                        <option value="silver">Silver</option>
-                        <option value="vane">Vane</option>
-                        <option value="billy">Billy</option>
-                        <option value="jack">Jack</option>
-                        <option value="heisenberg">Heisenberg</option>
-                        <option value="jesse">Jesse</option>
-                        <option value="saul">Saul</option>
-                        <option value="mike">Mike</option>
-                    </b-select>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = ''">
-                            <b-icon icon="clear"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button
-                            class="button"
-                            @click="select = 'flint'">
-                            Set Flint
-                        </button>
-                    </p>
-                </b-field>`,
-                template5: `
-                <b-field grouped>
-                    <b-field label="Character" expanded>
-                        <b-select placeholder="Select..." expanded>
-                            <option value="flint">Flint</option>
-                            <option value="silver">Silver</option>
-                        </b-select>
-                    </b-field>
-                    <b-field label="Name" expanded>
-                        <b-select placeholder="Select..." expanded>
-                            <option value="john">John</option>
-                            <option value="brok">Brok</option>
-                        </b-select>
-                    </b-field>
-                    <b-field label="Email">
-                        <b-input></b-input>
-                    </b-field>
-                </b-field>`,
-                template6: `
                 <b-field>
                     <b-select
                         placeholder="Small"

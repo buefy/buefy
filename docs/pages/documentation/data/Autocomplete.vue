@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Autocomplete</h1>
-        <h2 class="subtitle">Extended input that provide suggestions while the user types</h2>
+        <h2 class="subtitle">
+            Extended input that provide suggestions while the user types.
+            Use with <strong><router-link to="/documentation/field">Field</router-link></strong> to access all functionalities
+        </h2>
         <hr>
 
         <div class="example">

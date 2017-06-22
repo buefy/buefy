@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Input</h1>
-        <h2 class="subtitle">Inputs are wrapped on a Field, it's not <em>necessary</em> however some functionalities might not work otherwise</h2>
+        <h2 class="subtitle">
+            Get user Input.
+            Use with <strong><router-link to="/documentation/field">Field</router-link></strong> to access all functionalities
+        </h2>
         <hr>
 
         <div class="columns">
@@ -195,127 +198,6 @@
         </div>
 
         <hr>
-        <h2 class="title is-spaced">Addons</h2>
-        <h3 class="subtitle">Inputs, Selects, Dropdowns and <code>.control</code> elements are automatically unified when inside a Field</h3>
-        <div class="example">
-            <h3 class="subtitle">Which side you want</h3>
-            <b-field>
-                <b-input placeholder="Search..."
-                    type="search"
-                    icon="search">
-                </b-input>
-                <p class="control">
-                    <button class="button is-primary">Search</button>
-                </p>
-            </b-field>
-
-            <b-field position="is-centered">
-                <b-input placeholder="Search..."
-                    type="search"
-                    icon="search">
-                </b-input>
-                <p class="control">
-                    <button class="button is-dark">Search</button>
-                </p>
-            </b-field>
-
-            <b-field position="is-right">
-                <b-input placeholder="Search..."
-                    type="search"
-                    icon="search">
-                </b-input>
-                <p class="control">
-                    <button class="button is-info">Search</button>
-                </p>
-            </b-field>
-
-            <h3 class="subtitle">How many you need</h3>
-            <b-field>
-                <b-select placeholder="Currency">
-                    <option>$</option>
-                    <option>£</option>
-                    <option>€</option>
-                </b-select>
-                <b-input placeholder="0,00"></b-input>
-                <p class="control">
-                    <button class="button">Cancel</button>
-                </p>
-                <p class="control">
-                    <button class="button is-success">Transfer</button>
-                </p>
-            </b-field>
-
-            <b-field>
-                <p class="control">
-                    <button class="button">
-                        <b-icon icon="format_bold"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button class="button">
-                        <b-icon icon="format_italic"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button class="button">
-                        <b-icon icon="format_underlined"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button class="button">
-                        <b-icon icon="format_align_left"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button class="button">
-                        <b-icon icon="format_align_center"></b-icon>
-                    </button>
-                </p>
-                <p class="control">
-                    <button class="button">
-                        <b-icon icon="format_align_right"></b-icon>
-                    </button>
-                </p>
-                <b-input placeholder="Search..." type="search" icon="search"></b-input>
-            </b-field>
-        </div>
-        <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
-
-        <hr>
-        <h2 class="title is-spaced">Groups</h2>
-        <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
-        <p class="content">You can also specify which ones will be <code>expanded</code> to fill the remaining space.</p>
-        <div class="example">
-            <b-field grouped>
-                <b-input placeholder="Search..." expanded></b-input>
-                <p class="control">
-                    <button class="button is-primary">Search</button>
-                </p>
-                <p class="control">
-                    <button class="button">Clear</button>
-                </p>
-            </b-field>
-        </div>
-        <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
-
-        <span class="tag is-success">New!</span> <span class="tag is-info">v0.3.1</span>
-        <h3 class="subtitle is-inline-flex">Nested Fields can be grouped as well</h3>
-        <div class="example">
-            <b-field grouped>
-                <b-field label="First name">
-                    <b-input></b-input>
-                </b-field>
-                <b-field label="Last name">
-                    <b-input></b-input>
-                </b-field>
-                <b-field label="Email" expanded>
-                    <b-input></b-input>
-                </b-field>
-            </b-field>
-        </div>
-        <pre class="content" v-highlight><code class="html">{{ template8 | pre }}</code></pre>
-
-        <hr>
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
@@ -347,17 +229,16 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template9 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
             </div>
         </div>
 
         <hr>
 
         <h2 class="title is-spaced">API</h2>
-        <h3 class="subtitle">Input</h3>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="inputProps" default-sort="name">
+                <b-table :data="props" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -379,7 +260,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="inputEvents" default-sort="name">
+                <b-table :data="events" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -394,31 +275,6 @@
                 </b-table>
             </b-tab-item>
         </b-tabs>
-
-        <h3 class="subtitle">Field</h3>
-        <b-tabs>
-            <b-tab-item label="Properties">
-                <b-table :data="fieldProps" default-sort="name">
-                    <template scope="props">
-                        <b-table-column field="name" label="Name">
-                            <span v-html="props.row.name"></span>
-                        </b-table-column>
-                        <b-table-column field="description" label="Description" width="620">
-                            <span v-html="props.row.description"></span>
-                        </b-table-column>
-                        <b-table-column field="type" label="Type">
-                            <span>{{ props.row.type }}</span>
-                        </b-table-column>
-                        <b-table-column field="values" label="Values">
-                            <span v-html="props.row.values"></span>
-                        </b-table-column>
-                        <b-table-column field="default" label="Default">
-                            <span v-html="props.row.default"></span>
-                        </b-table-column>
-                    </template>
-                </b-table>
-            </b-tab-item>
-        </b-tabs>
     </div>
 </template>
 
@@ -426,7 +282,7 @@
     export default {
         data() {
             return {
-                inputProps: [
+                props: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
@@ -568,10 +424,10 @@
                         default: '—'
                     }
                 ],
-                inputEvents: [
+                events: [
                     {
-                        name: '<code>click.native</code>',
-                        description: 'Triggers when input is clicked',
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to native event, can be used with any (click, keydown, keyup, mouseenter, etc.). E.g: <code>click.native</code>',
                         parameters: '<code>event: $event</code>'
                     },
                     {
@@ -588,46 +444,6 @@
                         name: '<code>change</code>',
                         description: 'Triggers when input value is changed',
                         parameters: '<code>value: String/Number</code>'
-                    }
-                ],
-                fieldProps: [
-                    {
-                        name: '<code>type</code>',
-                        description: 'Type (color) of the field and help message, also adds a matching icon, optional',
-                        type: 'String',
-                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
-                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
-                            <code>is-warning</code>, <code>is-danger</code>,
-                            and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '—'
-                    },
-                    {
-                        name: '<code>label</code>',
-                        description: 'Field label',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>message</code>',
-                        description: 'Help message text',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>grouped</code>',
-                        description: 'Inputs and <code>.control</code> elements wrapped by Field will be grouped horizontally',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>position</code>',
-                        description: 'Which position should the addons appear, optional',
-                        type: 'Boolean',
-                        values: '<code>is-left</code>, <code>is-centered</code>, <code>is-right</code>',
-                        default: '<code>is-left</code>'
                     }
                 ],
                 template1: `
@@ -773,108 +589,6 @@
                     </b-input>
                 </b-field>`,
                 template6: `
-                <h3 class="subtitle">Which side you want</h3>
-                <b-field>
-                    <b-input placeholder="Search..."
-                        type="search"
-                        icon="search">
-                    </b-input>
-                    <p class="control">
-                        <button class="button is-primary">Search</button>
-                    </p>
-                </b-field>
-
-                <b-field position="is-centered">
-                    <b-input placeholder="Search..."
-                        type="search"
-                        icon="search">
-                    </b-input>
-                    <p class="control">
-                        <button class="button is-dark">Search</button>
-                    </p>
-                </b-field>
-
-                <b-field position="is-right">
-                    <b-input placeholder="Search..."
-                        type="search"
-                        icon="search">
-                    </b-input>
-                    <p class="control">
-                        <button class="button is-info">Search</button>
-                    </p>
-                </b-field>
-
-                <h3 class="subtitle">How many you need</h3>
-                <b-field>
-                    <b-select placeholder="Currency">
-                        <option>$</option>
-                        <option>£</option>
-                        <option>€</option>
-                    </b-select>
-                    <b-input placeholder="How much will you donate?"></b-input>
-                    <p class="control">
-                        <button class="button">Cancel</button>
-                    </p>
-                    <p class="control">
-                        <button class="button is-success">Transfer</button>
-                    </p>
-                </b-field>
-
-                <b-field>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_bold"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_italic"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_underlined"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_align_left"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_align_center"></b-icon>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button">
-                            <b-icon icon="format_align_right"></b-icon>
-                        </button>
-                    </p>
-                </b-field>`,
-                template7: `
-                <b-field grouped>
-                    <b-input placeholder="Search..." expanded></b-input>
-                    <p class="control">
-                        <button class="button is-primary">Search</button>
-                    </p>
-                    <p class="control">
-                        <button class="button">Clear</button>
-                    </p>
-                </b-field>`,
-                template8: `
-                <b-field grouped>
-                    <b-field label="First name">
-                        <b-input></b-input>
-                    </b-field>
-                    <b-field label="Last name">
-                        <b-input></b-input>
-                    </b-field>
-                    <b-field label="Email" expanded>
-                        <b-input></b-input>
-                    </b-field>
-                </b-field>`,
-                template9: `
                 <b-field>
                     <b-input placeholder="Small"
                         size="is-small"

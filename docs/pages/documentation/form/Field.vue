@@ -9,10 +9,10 @@
             <ul>
                 <li>Input</li>
                 <li>Select</li>
-                <li>Dropdown</li>
                 <li>Autocomplete</li>
+                <li>Dropdown</li>
             </ul>
-            <p>And <code>.button</code> element should be wrapped on a <code>.control</code> element.</p>
+            <p>And <code>.control</code> elements (for buttons).</p>
         </div>
         <hr>
 
