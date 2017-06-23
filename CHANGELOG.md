@@ -1,5 +1,13 @@
 # Buefy Changelog
 
+## 0.4.3
+
+* #117 Fix table row loop missing ``key`` prop
+
+## 0.4.2
+
+* Fix Buefy installation
+
 ## 0.4.1
 
 * Fix table sorting null values
