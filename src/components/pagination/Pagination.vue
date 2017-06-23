@@ -1,7 +1,11 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
-        <a class="pagination-previous" @click="prev" :class="{ 'is-disabled': !hasPrev }"><b-icon icon="chevron_left" both></b-icon></a>
-        <a class="pagination-next" @click="next" :class="{ 'is-disabled': !hasNext }"><b-icon icon="chevron_right" both></b-icon></a>
+        <a class="pagination-previous" @click="prev" :class="{ 'is-disabled': !hasPrev }">
+            <b-icon icon="chevron_left" both></b-icon>
+        </a>
+        <a class="pagination-next" @click="next" :class="{ 'is-disabled': !hasNext }">
+            <b-icon icon="chevron_right" both></b-icon>
+        </a>
         <ul class="pagination-list" v-if="!simple">
 
             <!--First-->
@@ -9,7 +13,11 @@
             <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
 
             <!--Pages-->
-            <li v-for="page in pagesInRange"><a class="pagination-link" @click="page.click" :class="{ 'is-current': page.isCurrent }">{{ page.number }}</a></li>
+            <li v-for="page in pagesInRange" :key="page.number">
+                <a class="pagination-link" @click="page.click" :class="{ 'is-current': page.isCurrent }">
+                    {{ page.number }}
+                </a>
+            </li>
 
             <!--Last-->
             <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
