@@ -14,7 +14,9 @@
                 <nav class="tabs is-boxed">
                     <div class="container">
                         <ul>
-                            <li v-for="tab in tabs" :class="{ 'is-active': currentTab === tab.component }">
+                            <li v-for="tab in tabs"
+                                :key="tab.title"
+                                :class="{ 'is-active': currentTab === tab.component }">
                                 <a @click="currentTab = tab.component">
                                     {{ tab.title }}
                                 </a>
@@ -52,23 +54,32 @@
     export default {
         components: {
             AppHeader,
-            AppFooter,
-
-            Installation,
-            General,
-            Notices,
-            FormElements,
-            DataManipulation
+            AppFooter
         },
         data() {
             return {
-                currentTab: 'Installation',
+                currentTab: Installation,
                 tabs: [
-                    { title: 'Installation', component: 'Installation' },
-                    { title: 'General', component: 'General' },
-                    { title: 'Notices', component: 'Notices' },
-                    { title: 'Form', component: 'FormElements' },
-                    { title: 'Data', component: 'DataManipulation' }
+                    {
+                        title: 'Installation',
+                        component: Installation
+                    },
+                    {
+                        title: 'General',
+                        component: General
+                    },
+                    {
+                        title: 'Notices',
+                        component: Notices
+                    },
+                    {
+                        title: 'Form',
+                        component: FormElements
+                    },
+                    {
+                        title: 'Data',
+                        component: DataManipulation
+                    }
                 ]
             }
         },

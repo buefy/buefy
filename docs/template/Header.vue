@@ -37,8 +37,6 @@
 </template>
 
 <script>
-    import { EventBus } from '../main'
-
     export default {
         props: {
             home: Boolean
@@ -59,11 +57,6 @@
 
                 window.open(url, '', opts)
             }
-        },
-        created() {
-            EventBus.$on('routeBeforeEach', (to, from) => {
-                this.isMenuActive = false
-            })
         }
     }
 </script>

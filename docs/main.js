@@ -23,7 +23,6 @@ Vue.use(VueProgressBar, {
     }
 })
 
-
 Vue.directive('highlight', {
     deep: true,
     bind(el, binding) {
@@ -67,13 +66,6 @@ Vue.filter('pre', (text) => {
     newText = newText.join('\r\n')
 
     return newText
-})
-
-export const EventBus = new Vue()
-
-router.beforeEach((to, from, next) => {
-    EventBus.$emit('routeBeforeEach', to, from)
-    next()
 })
 
 new Vue({
