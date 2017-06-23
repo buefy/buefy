@@ -6,6 +6,7 @@
                     <b-select v-model="mobileSort" expanded>
                         <option
                             v-for="column in columns"
+                            :key="column._uid"
                             v-if="column.sortable"
                             :value="column">
                             {{ column.label }}
@@ -42,6 +43,7 @@
                                 <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                             </th>
                             <th v-for="column in columns" @click.stop="sort(column)"
+                                :key="column._uid"
                                 v-if="column.visible"
                                 :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
                                 :style="{ width: column.width + 'px' }">
@@ -59,6 +61,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="(row, index) in visibleData"
+                            :key="index"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
                             :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
