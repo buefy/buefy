@@ -3,6 +3,7 @@
 ## 0.4.3
 
 * #117 Fix table row loop missing ``key`` prop
+* #122 Fix async tab-items
 
 ## 0.4.2
 

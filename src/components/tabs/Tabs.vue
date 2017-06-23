@@ -57,6 +57,15 @@
             value(value) {
                 this.changeTab(this.newValue, value)
                 this.newValue = value
+            },
+
+            /**
+             * When tab-items are updated, set active one.
+             */
+            tabItems() {
+                if (this.tabItems.length) {
+                    this.tabItems[this.newValue].isActive = true
+                }
             }
         },
         methods: {
@@ -81,7 +90,9 @@
             }
         },
         mounted() {
-            this.tabItems[this.newValue].isActive = true
+            if (this.tabItems.length) {
+                this.tabItems[this.newValue].isActive = true
+            }
         }
     }
 </script>
