@@ -5,8 +5,8 @@
                 <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
                     <b-select v-model="mobileSort" expanded>
                         <option
-                            v-for="column in columns"
-                            :key="column._uid"
+                            v-for="(column, index) in columns"
+                            :key="index"
                             v-if="column.sortable"
                             :value="column">
                             {{ column.label }}
@@ -42,8 +42,8 @@
                             <th class="checkbox-cell" v-if="checkable">
                                 <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                             </th>
-                            <th v-for="column in columns" @click.stop="sort(column)"
-                                :key="column._uid"
+                            <th v-for="(column, index) in columns" @click.stop="sort(column)"
+                                :key="index"
                                 v-if="column.visible"
                                 :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
                                 :style="{ width: column.width + 'px' }">

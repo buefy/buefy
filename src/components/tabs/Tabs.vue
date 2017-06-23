@@ -2,10 +2,10 @@
     <div class="b-tabs">
         <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
             <ul>
-                <li v-for="(tabItem, i) in tabItems"
-                    :key="tabItem._uid"
-                    :class="{ 'is-active': newValue === i }">
-                    <a @click="tabClick(i)">
+                <li v-for="(tabItem, index) in tabItems"
+                    :key="index"
+                    :class="{ 'is-active': newValue === index }">
+                    <a @click="tabClick(index)">
                         <b-icon
                             v-if="tabItem.icon"
                             :icon="tabItem.icon"
