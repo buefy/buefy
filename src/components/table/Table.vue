@@ -6,7 +6,7 @@
                     <option
                         v-for="column in columns"
                         v-if="column.isSortable"
-                        :value="column">
+                        :value="column" >
                         {{ column.label }}
                     </option>
                 </b-select>
@@ -40,7 +40,8 @@
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                         </th>
-                        <th v-for="column in columns" @click.stop="sort(column)"
+                        <th v-for="column in columns"
+                             @click.stop="sort(column)"
                             :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.isSortable }"
                             :style="{ width: column.width + 'px' }">
                             <div class="th-wrap" :class="{ 'is-numeric': column.isNumeric }">
@@ -57,6 +58,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="row in visibleData"
+                        :key="dataKey ? row[dataKey]: ''"
                         @click="selectRow(row)"
                         @dblclick="$emit('dblclick', row)"
                         :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
@@ -106,6 +108,9 @@
             [Checkbox.name]: Checkbox
         },
         props: {
+            dataKey: {
+                type: String
+            },
             data: {
                 type: Array,
                 default: []
