@@ -1,7 +1,8 @@
 .autocomplete {
+    position: relative;
     .box {
         position: absolute;
-        top: 2.5em;
+        top: 100%;
         padding: 0.5em 0;
         z-index: 10;
         white-space: nowrap;
@@ -22,7 +23,7 @@
         }
         &.is-opened-top {
             top: auto;
-            bottom: 2.5em;
+            bottom: 100%;
         }
     }
     &.is-small {

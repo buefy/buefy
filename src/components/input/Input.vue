@@ -1,14 +1,11 @@
 <template>
-    <p
-        class="control"
+    <div class="control"
         :class="[iconPosition, {
-            'has-icon': hasIcon,
             'is-expanded': expanded,
             'is-loading': loading,
             'is-clearfix': !hasMessage
         }]">
-        <input
-            v-if="type !== 'textarea'"
+        <input v-if="type !== 'textarea'"
             class="input"
             :class="[statusType, size]"
             ref="input"
@@ -31,8 +28,7 @@
             @focus="$emit('focus', $event)"
             @change="$emit('change', newValue)">
 
-        <textarea
-            v-else
+        <textarea v-else
             class="textarea"
             :class="[statusType, size]"
             ref="textarea"
@@ -50,15 +46,14 @@
             @change="$emit('change', newValue)">
         </textarea>
 
-        <b-icon
-            v-if="icon"
+        <b-icon v-if="icon"
+            class="is-left"
             :icon="icon"
             :pack="iconPack"
             :size="size">
         </b-icon>
 
-        <b-icon
-            v-if="!loading && (passwordReveal || statusType)"
+        <b-icon v-if="!loading && (passwordReveal || statusType)"
             class="is-right"
             :class="[!passwordReveal ? statusType : null, { 'is-primary is-clickable': passwordReveal }]"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
@@ -68,15 +63,17 @@
         </b-icon>
 
         <small class="help counter" v-if="maxlength">{{ valueLength }} / {{ maxlength }}</small>
-    </p>
+    </div>
 </template>
 
 <script>
     import Icon from '../icon'
     import config from '../../utils/config'
+    import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
         name: 'bInput',
+        mixins: [FormElementMixin],
         components: {
             [Icon.name]: Icon
         },
@@ -86,34 +83,17 @@
                 type: String,
                 default: 'text'
             },
-            size: String,
-            expanded: Boolean,
-            passwordReveal: Boolean,
-            loading: Boolean,
-            icon: String,
-            iconPack: String,
-
-            // Native options to use in HTML5 validation
-            autocomplete: String,
-            required: Boolean,
-            disabled: Boolean,
-            max: [Number, String],
-            maxlength: [Number, String],
-            min: [Number, String],
-            minlength: [Number, String],
-            name: String,
-            pattern: String,
-            placeholder: String,
-            readonly: Boolean,
-            step: [Number, String]
+            passwordReveal: Boolean
         },
         data() {
             return {
                 newValue: this.value,
                 newType: this.type,
                 newAutocomplete: this.autocomplete || config.defaultInputAutocomplete,
-                isValid: true, // Used in Dialog and may be used in third party components
-                isPasswordVisible: false
+                isPasswordVisible: false,
+                _elementRef: this.type === 'textarea'
+                    ? 'textarea'
+                    : 'input'
             }
         },
         watch: {
@@ -129,13 +109,6 @@
         },
         computed: {
             /**
-             * Check if have any icon (defined or internal).
-             */
-            hasIcon() {
-                return this.icon || this.hasIconRight
-            },
-
-            /**
              * Check if have any icon in the right side.
              */
             hasIconRight() {
@@ -147,18 +120,11 @@
              */
             iconPosition() {
                 if (this.icon && this.hasIconRight) {
-                    return 'has-both-icon'
+                    return 'has-icons-left has-icons-right'
                 } else if (!this.icon && this.hasIconRight) {
-                    return 'has-icon-right'
-                }
-            },
-
-            /**
-             * Get the type prop from parent if it's a Field.
-             */
-            statusType() {
-                if (this.$parent.$data._isField) {
-                    return this.$parent.newType
+                    return 'has-icons-right'
+                } else if (this.icon) {
+                    return 'has-icons-left'
                 }
             },
 
@@ -232,36 +198,6 @@
             blur(event) {
                 this.$emit('blur', event)
                 this.html5Validation()
-            },
-
-            /**
-             * HTML5 validation, set isValid property.
-             * If validation fail, send 'is-danger' type,
-             * and error message to parent if it's a Field.
-             */
-            html5Validation() {
-                const element = this.newType === 'textarea' ? 'textarea' : 'input'
-                if (this.$refs[element] === undefined) return
-
-                let type = null
-                let message = null
-                let isValid = true
-                if (!this.$refs[element].checkValidity()) {
-                    type = 'is-danger'
-                    message = this.$refs[element].validationMessage
-                    isValid = false
-                }
-                this.isValid = isValid
-                if (this.$parent.$data._isField) {
-                    // Set type only if user haven't defined
-                    if (!this.$parent.type) {
-                        this.$parent.newType = type
-                    }
-                    // Set message only if user haven't defined
-                    if (!this.$parent.message) {
-                        this.$parent.newMessage = message
-                    }
-                }
             }
         }
     }
