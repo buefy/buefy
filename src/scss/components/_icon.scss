@@ -48,7 +48,7 @@
         $color: nth($pair, 1);
         $color-invert: nth($pair, 2);
         &.is-#{$name} {
-            color: $color;
+            color: $color !important;
         }
     }
 }
