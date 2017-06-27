@@ -1,27 +1,22 @@
 <template>
-    <p class="control autocomplete"
-        :class="[size, {
-            'is-expanded': expanded,
-            'is-loading': loading
-        }]">
-
-        <input
-            v-model="newValue"
-            class="input"
-            :class="[statusType, size]"
+    <div class="autocomplete" :class="size">
+        <b-input v-model="newValue"
             ref="input"
-            type="text"
             :placeholder="placeholder"
             :disabled="disabled"
             :name="name"
             :required="required"
+            :loading="loading"
+            :expanded="expanded"
+            :size="size"
             autocomplete="off"
             @focus="focused"
             @blur="blur"
-            @keyup.enter.prevent="enterPressed"
-            @keyup.esc.prevent="isActive = false"
-            @keydown.up.prevent="keyArrows('up')"
-            @keydown.down.prevent="keyArrows('down')">
+            @keyup.native.enter.prevent="enterPressed"
+            @keyup.native.esc.prevent="isActive = false"
+            @keydown.native.up.prevent="keyArrows('up')"
+            @keydown.native.down.prevent="keyArrows('down')">
+        </b-input>
 
         <transition name="fade">
             <span class="box"
@@ -29,27 +24,33 @@
                 v-show="isActive && visibleData.length > 0"
                 ref="dropdown">
                 <ul>
-                    <template v-for="option in visibleData">
-                        <li class="option"
-                            :class="{ 'is-hovered': option === hovered }"
-                            @click="setSelected(option)">
+                    <li v-for="(option, index) in visibleData"
+                        :key="index"
+                        class="option"
+                        :class="{ 'is-hovered': option === hovered }"
+                        @click="setSelected(option)">
 
-                            <slot v-if="hasCustomTemplate" :option="option"></slot>
-                            <span v-else v-html="getValue(option, true)"></span>
-                        </li>
-                    </template>
+                        <slot v-if="hasCustomTemplate" :option="option"></slot>
+                        <span v-else v-html="getValue(option, true)"></span>
+                    </li>
                     <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
                 </ul>
             </span>
         </transition>
-    </p>
+    </div>
 </template>
 
 <script>
     import { getValueByPath } from '../../utils/helpers'
+    import FormElementMixin from '../../utils/FormElementMixin'
+    import Input from '../input'
 
     export default {
         name: 'bAutocomplete',
+        mixins: [FormElementMixin],
+        components: {
+            [Input.name]: Input
+        },
         props: {
             value: String,
             data: Array,
@@ -62,37 +63,19 @@
                 default: 6
             },
             keepFirst: Boolean,
-            hasCustomTemplate: Boolean,
-            size: String,
-            expanded: Boolean,
-            loading: Boolean,
-
-            // Native
-            placeholder: String,
-            name: String,
-            disabled: Boolean,
-            required: Boolean
+            hasCustomTemplate: Boolean
         },
         data() {
             return {
                 selected: null,
                 hovered: null,
                 isActive: false,
-                isValid: true,
                 newValue: this.value,
-                isListInViewportVertically: true
+                isListInViewportVertically: true,
+                _isAutocomplete: true
             }
         },
         computed: {
-            /**
-             * Type prop from parent if it's a Field.
-             */
-            statusType() {
-                if (this.$parent.$data._isField) {
-                    return this.$parent.newType
-                }
-            },
-
             /**
              * White-listed items to not close when clicked.
              * Add input, dropdown and all children.
@@ -172,7 +155,7 @@
              */
             value(value) {
                 this.newValue = value
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.$refs.input.html5Validation()
             }
         },
         methods: {
@@ -275,7 +258,7 @@
              */
             focused(event) {
                 this.$emit('focus', event)
-                if (this.getValue(this.selected) === this.newValue) this.$refs.input.select()
+                if (this.getValue(this.selected) === this.newValue) this.$refs.input.focus()
             },
 
             /**
@@ -284,36 +267,7 @@
              */
             blur(event) {
                 this.$emit('blur', event)
-                this.html5Validation()
-            },
-
-            /**
-             * HTML5 validation, set isValid property.
-             * If validation fail, send 'is-danger' type,
-             * and error message to parent if it's a Field.
-             */
-            html5Validation() {
-                if (this.$refs.input === undefined) return
-
-                let type = null
-                let message = null
-                let isValid = true
-                if (!this.$refs.input.checkValidity()) {
-                    type = 'is-danger'
-                    message = this.$refs.input.validationMessage
-                    isValid = false
-                }
-                this.isValid = isValid
-                if (this.$parent.$data._isField) {
-                    // Set type only if user haven't defined
-                    if (!this.$parent.type) {
-                        this.$parent.newType = type
-                    }
-                    // Set message only if user haven't defined
-                    if (!this.$parent.message) {
-                        this.$parent.newMessage = message
-                    }
-                }
+                this.$refs.input.html5Validation()
             }
         },
         created() {
