@@ -7,10 +7,6 @@ export default {
             default: 'is-dark'
         },
         message: String,
-        duration: {
-            type: Number,
-            default: 2000
-        },
         position: {
             type: String,
             default: 'is-top',
@@ -31,8 +27,7 @@ export default {
         return {
             isActive: false,
             parent: null,
-            newContainer: this.container || config.defaultContentElement,
-            newDuration: this.duration || config.defaultNoticeDuration
+            newContainer: this.container || config.defaultContentElement
         }
     },
     computed: {

@@ -64,8 +64,15 @@
                         default: '<code>body</code>'
                     },
                     {
-                        name: '<code>defaultNoticeDuration</code>',
-                        description: `Default notice <code>duration</code> attribute.`,
+                        name: '<code>defaultSnackbarDuration</code>',
+                        description: `Default snackbar <code>duration</code> attribute.`,
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>3500</code>'
+                    },
+                    {
+                        name: '<code>defaultToastDuration</code>',
+                        description: `Default toast <code>duration</code> attribute.`,
                         type: 'Number',
                         values: '—',
                         default: '<code>2000</code>'
