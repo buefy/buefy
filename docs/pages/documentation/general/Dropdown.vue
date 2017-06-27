@@ -93,7 +93,7 @@
                         <b-dropdown-option subheader>
                             Logged as <b>Rafael Beraldo</b>
                         </b-dropdown-option>
-                        <b-dropdown-option separator />
+                        <b-dropdown-option separator></b-dropdown-option>
                         <b-dropdown-option value="home">
                             <b-icon icon="home"></b-icon>
                             Home
@@ -106,7 +106,7 @@
                             <b-icon icon="art_track"></b-icon>
                             Blog
                         </b-dropdown-option>
-                        <b-dropdown-option separator />
+                        <b-dropdown-option separator></b-dropdown-option>
                         <b-dropdown-option value="settings">
                             <b-icon icon="settings"></b-icon>
                             Settings
@@ -467,7 +467,7 @@
                             <b-dropdown-option subheader>
                                 Logged as <b>Rafael Beraldo</b>
                             </b-dropdown-option>
-                            <b-dropdown-option separator />
+                            <b-dropdown-option separator></b-dropdown-option>
                             <b-dropdown-option value="home">
                                 <b-icon icon="home"></b-icon>
                                 Home
@@ -480,7 +480,7 @@
                                 <b-icon icon="art_track"></b-icon>
                                 Blog
                             </b-dropdown-option>
-                            <b-dropdown-option separator />
+                            <b-dropdown-option separator></b-dropdown-option>
                             <b-dropdown-option value="settings">
                                 <b-icon icon="settings"></b-icon>
                                 Settings
