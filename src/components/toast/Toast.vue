@@ -10,9 +10,15 @@
 </template>
 
 <script>
+    import config from '../../utils/config'
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
+        data() {
+            return {
+                newDuration: this.duration || config.defaultToastDuration
+            }
+        },
         mixins: [NoticeMixin],
         methods: {
             /**
@@ -23,6 +29,11 @@
                 this.parent.className = ''
                 this.parent.classList.add('notices', 'is-toast', this.position)
                 this.parent.appendChild(this.$el)
+            }
+        },
+        props: {
+            duration: {
+                type: Number
             }
         }
     }

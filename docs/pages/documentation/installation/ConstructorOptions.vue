@@ -64,6 +64,20 @@
                         default: '<code>body</code>'
                     },
                     {
+                        name: '<code>defaultSnackbarDuration</code>',
+                        description: `Default snackbar <code>duration</code> attribute.`,
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>3500</code>'
+                    },
+                    {
+                        name: '<code>defaultToastDuration</code>',
+                        description: `Default toast <code>duration</code> attribute.`,
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>2000</code>'
+                    },
+                    {
                         name: '<code>defaultTooltipType</code>',
                         description: `Default tooltip type (color) attribute.`,
                         type: 'String',
