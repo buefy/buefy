@@ -64,6 +64,13 @@
                         default: '<code>body</code>'
                     },
                     {
+                        name: '<code>defaultNoticeDuration</code>',
+                        description: `Default notice <code>duration</code> attribute.`,
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>2000</code>'
+                    },
+                    {
                         name: '<code>defaultTooltipType</code>',
                         description: `Default tooltip type (color) attribute.`,
                         type: 'String',
