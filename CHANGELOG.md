@@ -2,6 +2,7 @@
 
 ## 0.4.3
 
+* Fix autocomplete list width
 * #117 Fix table row loop missing ``key`` prop
 * #122 Fix async tab-items
 * #124 Toast, Dialog, Snackbar and Programmatic Modal exposed
