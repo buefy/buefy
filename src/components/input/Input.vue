@@ -96,17 +96,6 @@
                     : 'input'
             }
         },
-        watch: {
-            /**
-             * When v-model is changed:
-             *   1. Set internal value.
-             *   2. If it's invalid, validate again.
-             */
-            value(value) {
-                this.newValue = value
-                !this.isValid && this.html5Validation()
-            }
-        },
         computed: {
             /**
              * Check if have any icon in the right side.
@@ -158,6 +147,17 @@
              */
             valueLength() {
                 return this.newValue ? this.newValue.length : 0
+            }
+        },
+        watch: {
+            /**
+             * When v-model is changed:
+             *   1. Set internal value.
+             *   2. If it's invalid, validate again.
+             */
+            value(value) {
+                this.newValue = value
+                !this.isValid && this.html5Validation()
             }
         },
         methods: {

@@ -6,6 +6,7 @@
 * #117 Fix table row loop missing ``key`` prop
 * #122 Fix async tab-items
 * #124 Toast, Dialog, Snackbar and Programmatic Modal exposed
+* #128 Add default notices duration constructor option (thanks @quimarche)
 
 ## 0.4.2
 

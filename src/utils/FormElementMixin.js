@@ -5,7 +5,6 @@ export default {
         loading: Boolean,
         icon: String,
         iconPack: String,
-        autofocus: Boolean,
 
         // Native options to use in HTML5 validation
         autocomplete: String,
