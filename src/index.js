@@ -65,3 +65,10 @@ components.install = (Vue, options = {}) => {
 }
 
 export default components
+
+export {
+    Dialog,
+    ModalProgrammatic,
+    Snackbar,
+    Toast
+}
