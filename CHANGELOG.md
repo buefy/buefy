@@ -7,7 +7,9 @@
 * #117 Fix table row loop missing ``key`` prop
 * #122 Fix async tab-items
 * #124 Toast, Dialog, Snackbar and Programmatic Modal exposed
-* #128 Add default notices duration constructor option (thanks @quimarche)
+* #128 Add default notices duration constructor options (thanks @quimarche)
+* #130 Fix checkbox/switch not emitting change event when using keyboard (thanks @gongzza)
+* #132 Add dropdown ``active-change`` event to know when it's dropdown list is active/visible (thanks @bartboy011)
 
 ## 0.4.2
 
