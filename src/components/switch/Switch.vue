@@ -4,14 +4,19 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="updateValue(!newValue, $event)">
+        @keydown.prevent.enter.space="updateValue(!newValue, $event)"
+        @mousedown="isMouseDown = true"
+        @mouseup="isMouseDown = false"
+        @mouseout="isMouseDown = false"
+        @blur="isMouseDown = false"
+        >
         <input
             type="checkbox"
             :name="name"
             :disabled="disabled"
             v-model="newValue"
             @change="updateValue(newValue, $event)">
-        <span class="check" ref="check"></span>
+        <span class="check" :class="{ 'is-elastic': isMouseDown }"></span>
         <span class="control-label"><slot></slot></span>
     </label>
 </template>
@@ -28,7 +33,8 @@
         },
         data() {
             return {
-                newValue: this.value || this.checked
+                newValue: this.value || this.checked,
+                isMouseDown: false
             }
         },
         watch: {
@@ -55,16 +61,6 @@
                 this.newValue = newValue
                 this.$emit('change', newValue, $event)
             }
-        },
-        mounted() {
-            // Wait the animation time before setting the duration
-            // or else it'll fire at page load
-            setTimeout(() => {
-                // With <keep-alive> the check is undefined
-                if (this.$refs.check === undefined) return
-
-                this.$refs.check.classList.add('is-animated')
-            }, 500)
         }
     }
 </script>

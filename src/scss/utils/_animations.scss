@@ -80,28 +80,6 @@
     animation-name: fadeInUp;
 }
 
-// Switch animation
-
-@keyframes switchOn {
-    10%, 50% {
-        width: 2em;
-        border-radius: 8em;
-    }
-    100% {
-        transform: translate3d(80%, 0, 0) scale(0.74);
-    }
-}
-
-@keyframes switchOff {
-    0% {
-        transform: translate3d(80%, 0, 0) scale(0.74);
-    }
-    50%, 90% {
-        width: 2em;
-        border-radius: 8em;
-    }
-}
-
 /**
  * Vue Transitions
  */
