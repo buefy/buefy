@@ -62,7 +62,13 @@
              */
             value(value) {
                 this.selectOption(value)
-            }
+            },
+            /**
+             * Emit event when isActive value is changed
+             */
+             isActive(value) {
+               this.$emit('active-change', value)
+             }
         },
         computed: {
             /**
