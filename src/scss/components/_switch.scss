@@ -1,3 +1,7 @@
+$switch-width-number: 2.75;
+$switch-width: $switch-width-number * 1em;
+$switch-padding: 0.2em;
+
 .switch {
     cursor: pointer;
     display: inline-flex;
@@ -10,24 +14,24 @@
         + .check {
             display: flex;
             align-items: center;
-            width: 2.75em;
-            height: 1.625em; // 1.125 + 0.5
-            padding: 0.25em;
+            width: $switch-width;
+            height: #{$switch-width / 2 + $switch-padding};
+            padding: $switch-padding;
             background: $grey-light;
             border-radius: 1em;
             transition: background $speed-slow $easing;
             &:before {
                 content: "";
                 border-radius: 1em;
-                width: 1.125em; // (2.75 - 0.5) / 2
-                height: 1.125em; // (2.75 - 0.5) / 2
+                width: #{($switch-width - $switch-padding * 2) / 2};
+                height: #{($switch-width - $switch-padding * 2) / 2};
                 background: $background;
                 box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
                 transition: transform $speed-slow $easing, width $speed-slow $easing;
                 will-change: transform;
             }
             &.is-elastic:before {
-                width: 1.7em;
+                width: 1.75em;
             }
         }
         &:checked + .check {
@@ -36,7 +40,8 @@
                 transform: translate3d(100%, 0, 0);
             }
             &.is-elastic:before {
-                transform: translate3d(32%, 0, 0);
+                // Might be a little offset if base font is not 16px
+                transform: translate3d(percentage(16 / ($switch-width-number * 16)), 0, 0);
             }
         }
     }
