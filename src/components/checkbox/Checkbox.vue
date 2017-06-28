@@ -4,13 +4,13 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="newValue = !newValue">
+        @keydown.prevent.enter.space="updateValue(!newValue, $event)">
         <input
             type="checkbox"
             :disabled="disabled"
             :name="name"
             v-model="newValue"
-            @change="$emit('change', newValue, $event)">
+            @change="updateValue(newValue, $event)">
         <span class="check"></span>
         <span class="control-label"><slot></slot></span>
     </label>
@@ -52,6 +52,16 @@
                 }
                 this.$emit('input', value)
                 this.$parent.isCheckboxGroup && this.$parent.updateValue()
+            }
+        },
+        methods: {
+            /**
+             * Set the newValue.
+             * Emit change event.
+             */
+            updateValue(newValue, $event) {
+                this.newValue = newValue
+                this.$emit('change', newValue, $event)
             }
         }
     }
