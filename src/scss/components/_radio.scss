@@ -8,30 +8,28 @@
     input[type=radio] {
         display: none;
         + .check {
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 1.25em;
             height: 1.25em;
             border: 2px solid $grey;
-            background: none;
-            transition: all $speed $easing;
             border-radius: 50%;
+            transition: background $speed-slow $easing;
             &:before {
                 content: "";
-                position: absolute;
                 border-radius: 50%;
-                left: -2px; // Border gap
-                top: -2px; // Border gap
-                width: inherit;
-                height: inherit;
+                width: 0.625em;
+                height: 0.625em;
                 background: $primary;
                 transform: scale(0);
-                transition: transform $speed $easing;
+                transition: transform $speed-slow $easing;
             }
         }
         &:checked + .check {
             border-color: $primary;
             &:before {
-                transform: scale(0.5);
+                transform: scale(1);
             }
         }
     }

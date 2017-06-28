@@ -8,13 +8,11 @@
     input[type=checkbox] {
         display: none;
         + .check {
-            position: relative;
             width: 1.25em;
             height: 1.25em;
             border-radius: $radius;
             border: 2px solid $grey;
-            background: none;
-            transition: all $speed-slower $easing;
+            transition: background $speed-slow $easing;
         }
         &:checked + .check {
             background: $primary url(checkmark($white)) no-repeat center center;
