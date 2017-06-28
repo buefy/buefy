@@ -67,7 +67,7 @@
              * Emit event when isActive value is changed
              */
              isActive(value) {
-               this.$emit('isActiveChanged', value)
+               this.$emit('active-change', value)
              }
         },
         computed: {
