@@ -14,6 +14,7 @@
                     v-model="arrayExample.name"
                     :data="filteredDataArray"
                     placeholder="e.g. jQuery"
+                    icon="search"
                     @select="option => arrayExample.selected = option">
                 </b-autocomplete>
             </b-field>
@@ -133,6 +134,19 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="methods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
     </div>
 </template>
@@ -219,38 +233,38 @@
                     },
                     {
                         name: '<code>size</code>',
-                        description: 'Optional, size of control',
+                        description: 'Vertical size of input, optional',
                         type: 'String',
                         values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                         default: '—'
                     },
                     {
-                        name: '<code>loading</code>',
-                        description: 'Has loading state',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
                         name: '<code>expanded</code>',
-                        description: 'Full width when inside a grouped or addon field',
+                        description: 'Makes input full width when inside a grouped or addon field',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>placeholder</code>',
-                        description: 'Same as native <code>placeholder</code>',
+                        name: '<code>loading</code>',
+                        description: 'Add the loading state to the input',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>icon</code>',
+                        description: 'Icon name to be added',
                         type: 'String',
                         values: '—',
                         default: '—'
                     },
                     {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
+                        name: '<code>icon-pack</code>',
+                        description: 'Icon pack to use',
                         type: 'String',
-                        values: '—',
-                        default: '—'
+                        values: '<code>mdi</code>, <code>fa</code>',
+                        default: '<code>mdi</code>'
                     },
                     {
                         name: '<code>required</code>',
@@ -265,12 +279,75 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>readonly</code>',
+                        description: 'Same as native <code>readonly</code>',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>min</code>',
+                        description: 'Same as native <code>min</code>',
+                        type: 'Number',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>max</code>',
+                        description: 'Same as native <code>max</code>',
+                        type: 'Number',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>step</code>',
+                        description: 'Same as native <code>step</code>',
+                        type: 'Number',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>minlength</code>',
+                        description: 'Same as native <code>minlength</code>',
+                        type: 'Number',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>maxlength</code>',
+                        description: 'Same as native <code>maxlength</code>, also adds character counter',
+                        type: 'Number',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>name</code>',
+                        description: 'Same as native <code>name</code>',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>pattern</code>',
+                        description: 'Same as native <code>pattern</code>',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>placeholder</code>',
+                        description: 'Same as native <code>placeholder</code>',
+                        type: 'String',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 scopedSlots: [
                     {
                         name: 'default',
-                        props: '<code>option: String|Object</code>'
+                        props: '<code>option: String|Object</code>, <code>index: Number</code>'
                     }
                 ],
                 events: [
@@ -295,6 +372,16 @@
                         parameters: '<code>event: $event</code>'
                     }
                 ],
+                methods: [
+                    {
+                        name: '<code>checkHtml5Validity</code>',
+                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Set focus (internally uses the native <code>.select()</code> method)'
+                    }
+                ],
                 template1: `
                 <p class="content"><b>Selected:</b> {{ arrayExample.selected }}</p>
                 <b-field label="Find a JS framework">
@@ -302,6 +389,7 @@
                         v-model="arrayExample.name"
                         :data="filteredDataArray"
                         placeholder="e.g. jQuery"
+                        icon="search"
                         @select="option => arrayExample.selected = option">
                     </b-autocomplete>
                 </b-field>`,
