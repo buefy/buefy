@@ -1,6 +1,6 @@
 .modal,
 .modal-content {
-    transition: all $speed-slow $easing;
+    transition: opacity $speed-slow $easing, transform $speed-slow $easing;
 }
 
 .modal-content {

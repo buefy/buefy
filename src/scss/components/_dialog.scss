@@ -1,5 +1,5 @@
 .dialog {
-    transition: all $speed-slow $easing;
+    transition: opacity $speed-slow $easing, transform $speed-slow $easing;
     .modal-card-body {
         align-items: center;
         .custom-icon {
@@ -18,7 +18,7 @@
         min-width: 320px;
         max-width: 460px;
         width: auto;
-        transition: all $speed-slow $easing;
+        transition: opacity $speed-slow $easing, transform $speed-slow $easing;
     }
     .modal-card-title {
         font-size: $size-5;
