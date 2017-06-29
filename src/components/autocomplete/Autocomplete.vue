@@ -2,13 +2,22 @@
     <div class="autocomplete" :class="size">
         <b-input v-model="newValue"
             ref="input"
+            :size="size"
+            :expanded="expanded"
+            :loading="loading"
+            :icon="icon"
+            :icon-pack="iconPack"
+            :name="name"
             :placeholder="placeholder"
             :disabled="disabled"
-            :name="name"
+            :readonly="readonly"
+            :maxlength="maxlength"
+            :minlength="minlength"
             :required="required"
-            :loading="loading"
-            :expanded="expanded"
-            :size="size"
+            :min="min"
+            :max="max"
+            :step="step"
+            :pattern="pattern"
             autocomplete="off"
             @focus="focused"
             @blur="blur"
@@ -30,7 +39,7 @@
                         :class="{ 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
-                        <slot v-if="hasCustomTemplate" :option="option"></slot>
+                        <slot v-if="hasCustomTemplate" :option="option" :index="index"></slot>
                         <span v-else v-html="getValue(option, true)"></span>
                     </li>
                     <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
@@ -155,7 +164,7 @@
              */
             value(value) {
                 this.newValue = value
-                !this.isValid && this.$refs.input.html5Validation()
+                !this.isValid && this.$refs.input.checkHtml5Validity()
             }
         },
         methods: {
@@ -267,7 +276,7 @@
              */
             blur(event) {
                 this.$emit('blur', event)
-                this.$refs.input.html5Validation()
+                this.$refs.input.checkHtml5Validity()
             }
         },
         created() {
