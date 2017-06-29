@@ -7,6 +7,13 @@
 * **Dropdown button as addon now needs a ``.control`` element wrapping**
 * Add some useful methods on docs for Input, Select, Autocomplete and Table
 * Fix autocomplete list width
+* #38 Add ``animation`` prop for dialog and modal, for custom animation (transition name)
+* #115 Add ``row-class`` property to table to style row status, e.g.:
+
+```html
+    <b-table :data="tableData" :row-class="row => row.amount < 10 && 'is-warning'">[...]</b-table>
+```
+
 * #117 Fix table row loop missing ``key`` prop
 * #122 Fix async tab-items
 * #124 Toast, Dialog, Snackbar and Programmatic Modal exposed

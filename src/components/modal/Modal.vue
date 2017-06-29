@@ -1,5 +1,5 @@
 <template>
-    <transition name="zoom-out">
+    <transition :name="animation">
         <div class="modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
             <div class="modal-content animation-content" :style="{ maxWidth: newWidth }">
@@ -27,6 +27,10 @@
             programmatic: Boolean,
             props: Object,
             width: [String, Number],
+            animation: {
+                type: String,
+                default: 'zoom-out'
+            },
             canCancel: {
                 type: Boolean,
                 default: true

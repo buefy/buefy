@@ -185,6 +185,13 @@
                         default: '<code>960</code>'
                     },
                     {
+                        name: '<code>animation</code>',
+                        description: 'Custom animation (transition name)',
+                        type: 'String',
+                        values: '—',
+                        default: '<code>zoom-out</code>'
+                    },
+                    {
                         name: '<code>canCancel</code>',
                         description: `Can close Modal by clicking 'X', pressing escape or clicking outside`,
                         type: 'Boolean',

@@ -109,6 +109,13 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>animation</code>',
+                        description: 'Custom animation (transition name)',
+                        type: 'String',
+                        values: '—',
+                        default: '<code>zoom-out</code>'
+                    },
+                    {
                         name: '<code>confirmText</code>',
                         description: 'Text of the confirm button',
                         type: 'String',

@@ -1,5 +1,5 @@
 <template>
-    <transition name="zoom-out">
+    <transition :name="animation">
         <div class="dialog modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
             <div class="modal-card animation-content">
@@ -65,6 +65,10 @@
             cancelText: {
                 type: String,
                 default: 'Cancel'
+            },
+            animation: {
+                type: String,
+                default: 'zoom-out'
             },
             canCancel: {
                 type: Boolean,
