@@ -230,7 +230,7 @@
         <h2 class="title is-spaced">API</h2>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="selectProps" default-sort="name">
+                <b-table :data="props" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -252,7 +252,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="selectEvents" default-sort="name">
+                <b-table :data="events" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -262,6 +262,19 @@
                         </b-table-column>
                         <b-table-column field="parameters" label="Parameters">
                             <span v-html="props.row.parameters"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="methods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
                         </b-table-column>
                     </template>
                 </b-table>
@@ -278,7 +291,7 @@
             return {
                 options: options,
                 select: 'vane',
-                selectProps: [
+                props: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
@@ -350,7 +363,7 @@
                         default: '<code>mdi</code>'
                     }
                 ],
-                selectEvents: [
+                events: [
                     {
                         name: '<code>change</code>',
                         description: 'Triggers when the selection is changed',
@@ -365,6 +378,16 @@
                         name: '<code>blur</code>',
                         description: 'Triggers when the select has lost focus',
                         parameters: '<code>event: $event</code>'
+                    }
+                ],
+                methods: [
+                    {
+                        name: '<code>checkHtml5Validity</code>',
+                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Set focus'
                     }
                 ],
                 template1: `

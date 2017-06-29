@@ -147,6 +147,19 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="tableMethods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
 
         <h3 class="subtitle">Table Column</h3>
@@ -328,6 +341,12 @@
                         name: '<code>page-change</code>',
                         description: 'Triggers when pagination page is changed',
                         parameters: '<code>page: Number</code>'
+                    }
+                ],
+                tableMethods: [
+                    {
+                        name: '<code>initSort</code>',
+                        description: 'Sort using <code>default-sort</code> prop'
                     }
                 ],
                 columnProps: [
