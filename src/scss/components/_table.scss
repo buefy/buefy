@@ -58,18 +58,11 @@
                 &.is-selected {
                     .checkbox input {
                         &:checked + .check {
-                            background: $primary-invert url(checkmark($primary)) no-repeat center center;
+                            background: $table-row-active url(checkmark($table-row-active-background)) no-repeat center center;
                         }
                         + .check {
-                            border-color: $primary-invert;
+                            border-color: $table-row-active;
                         }
-                    }
-                }
-                &.is-checked:not(.is-selected) {
-                    background: rgba($primary, 0.14) !important;
-                    td,
-                    th {
-                        border-color: $primary-invert;
                     }
                 }
             }
@@ -125,7 +118,7 @@
                             margin-bottom: 16px;
                         }
                         // Disables is-striped
-                        &:nth-child(even):not(.is-selected) {
+                        &:not(.is-selected) {
                             background: inherit;
                             &:hover {
                                 background-color: inherit;
@@ -167,7 +160,7 @@
             left: calc(50% - 2.5em);
             width: 5em;
             height: 5em;
-            border-width: 4px;
+            border-width: 0.25em;
         }
     }
 }

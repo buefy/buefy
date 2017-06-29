@@ -245,7 +245,7 @@
                     },
                     {
                         name: '<code>checkable</code>',
-                        description: 'Rows can be checked (multiple)',
+                        description: 'Rows can be checked (multiple), checked rows will have a <code>.is-checked</code> class if you want to style',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
