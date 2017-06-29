@@ -8,7 +8,7 @@
     export default {
         name: 'bRadioGroup',
         props: {
-            value: [String, Number, Boolean],
+            value: [String, Number, Boolean, Object, Array, Symbol, Function],
             buttonSize: String
         },
         data() {

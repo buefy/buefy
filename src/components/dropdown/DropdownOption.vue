@@ -18,7 +18,7 @@
         name: 'bDropdownOption',
         props: {
             value: {
-                type: [String, Number, Object, Boolean, Array],
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: null
             },
             separator: Boolean,

@@ -22,20 +22,20 @@
     export default {
         name: 'bCheckbox',
         props: {
-            value: [String, Number, Boolean, Object],
+            value: [String, Number, Boolean, Object, Array, Symbol, Function],
             disabled: Boolean,
             name: String,
             checked: Boolean,
             nosync: Boolean,
             trueValue: {
-                type: [String, Number, Boolean, Object],
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: true
             },
             falseValue: {
-                type: [String, Number, Boolean, Object],
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: false
             },
-            customValue: [String, Number, Boolean, Object]
+            customValue: [String, Number, Boolean, Object, Array, Symbol, Function]
         },
         data() {
             return {

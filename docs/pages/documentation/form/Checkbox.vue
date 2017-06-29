@@ -172,16 +172,30 @@
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'Boolean',
+                        type: 'Any',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
                         name: '<code>custom-value</code>',
                         description: 'Native value when used inside a Checkbox Group',
-                        type: 'String, Number, Boolean, Object',
+                        type: 'Any',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>true-value</code>',
+                        description: `Overrides the returned value when it's checked`,
+                        type: 'Any',
+                        values: '—',
+                        default: '<code>true</code>'
+                    },
+                    {
+                        name: '<code>false-value</code>',
+                        description: `Overrides the returned value when it's not checked`,
+                        type: 'Any',
+                        values: '—',
+                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>disabled</code>',
@@ -199,7 +213,7 @@
                     },
                     {
                         name: '<code>checked</code>',
-                        description: 'Same as native <code>checked</code>',
+                        description: 'Same as native <code>checked</code>, only works for initial state (not reactive)',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'

@@ -21,7 +21,7 @@
     export default {
         name: 'bRadioButton',
         props: {
-            value: [String, Number, Boolean],
+            value: [String, Number, Boolean, Object, Array, Symbol, Function],
             type: {
                 type: String,
                 default: 'is-primary'

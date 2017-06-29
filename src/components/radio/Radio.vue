@@ -21,7 +21,7 @@
     export default {
         name: 'bRadio',
         props: {
-            value: [String, Number, Boolean],
+            value: [String, Number, Boolean, Object, Array, Symbol, Function],
             disabled: Boolean,
             name: String
         },

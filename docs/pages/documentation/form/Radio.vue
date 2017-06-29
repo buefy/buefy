@@ -165,7 +165,7 @@
                     {
                         name: '<code>value</code>',
                         description: 'Same as native <code>value</code>',
-                        type: 'String, Number, Boolean',
+                        type: 'Any',
                         values: '—',
                         default: '—'
                     },
@@ -188,7 +188,7 @@
                     {
                         name: '<code>value</code>',
                         description: 'Same as native <code>value</code>',
-                        type: 'String, Number, Boolean',
+                        type: 'Any',
                         values: '—',
                         default: '—'
                     },
@@ -221,7 +221,7 @@
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'String, Number, Boolean',
+                        type: 'Any',
                         values: '—',
                         default: '—'
                     },
