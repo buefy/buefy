@@ -1,4 +1,4 @@
-$radio-active: $primary !default;
+$radio-active-background: $primary !default;
 
 .radio {
     outline: none;
@@ -23,13 +23,13 @@ $radio-active: $primary !default;
                 border-radius: 50%;
                 width: 0.625em;
                 height: 0.625em;
-                background: $radio-active;
+                background: $radio-active-background;
                 transform: scale(0);
                 transition: transform $speed-slow $easing;
             }
         }
         &:checked + .check {
-            border-color: $radio-active;
+            border-color: $radio-active-background;
             &:before {
                 transform: scale(1);
             }
@@ -43,7 +43,7 @@ $radio-active: $primary !default;
     }
     &:hover {
         input[type=radio] + .check {
-            border-color: $radio-active;
+            border-color: $radio-active-background;
         }
     }
     &:focus {
@@ -51,7 +51,7 @@ $radio-active: $primary !default;
             box-shadow: 0 0 0.5em rgba($grey, 0.8);
         }
         input[type=radio]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($radio-active, 0.8);
+            box-shadow: 0 0 0.5em rgba($radio-active-background, 0.8);
         }
     }
 }

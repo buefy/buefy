@@ -1,5 +1,5 @@
-$checkbox-active: $primary !default;
-$checkbox-active-invert: findColorInvert($checkbox-active) !default;
+$checkbox-active-background: $primary !default;
+$checkbox-active: $primary-invert !default;
 
 .checkbox {
     outline: none;
@@ -18,8 +18,8 @@ $checkbox-active-invert: findColorInvert($checkbox-active) !default;
             transition: background $speed-slow $easing;
         }
         &:checked + .check {
-            background: $checkbox-active url(checkmark($checkbox-active-invert)) no-repeat center center;
-            border-color: $checkbox-active;
+            background: $checkbox-active-background url(checkmark($checkbox-active)) no-repeat center center;
+            border-color: $checkbox-active-background;
         }
     }
     .control-label {
@@ -30,7 +30,7 @@ $checkbox-active-invert: findColorInvert($checkbox-active) !default;
     }
     &:hover {
         input[type=checkbox] + .check {
-            border-color: $checkbox-active;
+            border-color: $checkbox-active-background;
         }
     }
     &:focus {
@@ -38,7 +38,7 @@ $checkbox-active-invert: findColorInvert($checkbox-active) !default;
             box-shadow: 0 0 0.5em rgba($grey, 0.8);
         }
         input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($checkbox-active, 0.8);
+            box-shadow: 0 0 0.5em rgba($checkbox-active-background, 0.8);
         }
     }
 }
