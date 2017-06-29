@@ -64,7 +64,10 @@
                             :key="index"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
+                            :class="[rowClass(row, index), {
+                                'is-selected': row === selected,
+                                'is-checked': isRowChecked(row)
+                            }]">
 
                             <td class="checkbox-cell" v-if="checkable">
                                 <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
@@ -138,7 +141,11 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            backendSorting: Boolean
+            backendSorting: Boolean,
+            rowClass: {
+                type: Function,
+                default: () => ''
+            }
         },
         data() {
             return {

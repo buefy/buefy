@@ -298,6 +298,13 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>20</code>'
+                    },
+                    {
+                        name: '<code>row-class</code>',
+                        description: 'Add a class to row (<code>&lt;tr&gt;</code> element) based on the return',
+                        type: 'Function (row: Object, index: Number)',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 tableScopedSlots: [
