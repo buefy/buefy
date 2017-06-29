@@ -65,7 +65,7 @@
              */
             value(value) {
                 this.selected = value
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             },
 
             /**
@@ -76,7 +76,7 @@
             selected(value) {
                 this.$emit('input', value)
                 this.$emit('change', value)
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             }
         },
         methods: {
@@ -86,7 +86,7 @@
              */
             blur(event) {
                 this.$emit('blur', event)
-                this.html5Validation()
+                this.checkHtml5Validity()
             }
         }
     }

@@ -115,7 +115,7 @@
              */
             confirm() {
                 if (this.$refs.input !== undefined) {
-                    this.$refs.input.html5Validation()
+                    this.$refs.input.checkHtml5Validity()
                     if (!this.$refs.input.isValid) return
                 }
 

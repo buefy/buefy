@@ -157,7 +157,7 @@
              */
             value(value) {
                 this.newValue = value
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             }
         },
         methods: {
@@ -175,7 +175,7 @@
                 this.newValue = value
                 this.$emit('input', value)
                 this.$emit('change', value)
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             },
 
             /**
@@ -197,7 +197,7 @@
              */
             blur(event) {
                 this.$emit('blur', event)
-                this.html5Validation()
+                this.checkHtml5Validity()
             }
         }
     }
