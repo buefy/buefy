@@ -1,3 +1,5 @@
+$radio-active: $primary !default;
+
 .radio {
     outline: none;
     display: inline-flex;
@@ -21,13 +23,13 @@
                 border-radius: 50%;
                 width: 0.625em;
                 height: 0.625em;
-                background: $primary;
+                background: $radio-active;
                 transform: scale(0);
                 transition: transform $speed-slow $easing;
             }
         }
         &:checked + .check {
-            border-color: $primary;
+            border-color: $radio-active;
             &:before {
                 transform: scale(1);
             }
@@ -41,7 +43,7 @@
     }
     &:hover {
         input[type=radio] + .check {
-            border-color: $primary;
+            border-color: $radio-active;
         }
     }
     &:focus {
@@ -49,7 +51,7 @@
             box-shadow: 0 0 0.5em rgba($grey, 0.8);
         }
         input[type=radio]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($primary, 0.8);
+            box-shadow: 0 0 0.5em rgba($radio-active, 0.8);
         }
     }
 }

@@ -2,6 +2,8 @@ $switch-width-number: 2.75;
 $switch-width: $switch-width-number * 1em;
 $switch-padding: 0.2em;
 
+$switch-active: $primary !default;
+
 .switch {
     cursor: pointer;
     display: inline-flex;
@@ -35,7 +37,7 @@ $switch-padding: 0.2em;
             }
         }
         &:checked + .check {
-            background: $primary;
+            background: $switch-active;
             &:before {
                 transform: translate3d(100%, 0, 0);
             }
@@ -53,7 +55,7 @@ $switch-padding: 0.2em;
             background: rgba($grey-light, 0.9);
         }
         input[type=checkbox]:checked + .check {
-            background: rgba($primary, 0.9);
+            background: rgba($switch-active, 0.9);
         }
     }
     &:focus {
@@ -62,7 +64,7 @@ $switch-padding: 0.2em;
             box-shadow: 0 0 0.5em rgba($grey, 0.6);
         }
         input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($primary, 0.8);
+            box-shadow: 0 0 0.5em rgba($switch-active, 0.8);
         }
     }
     &.is-small {
