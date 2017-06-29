@@ -43,18 +43,18 @@
     }
 
     .list-number {
-        margin-right: 8px;
+        margin-right: 0.5em;
     }
 
     .example {
         border: 1px solid $warning;
-        border-top-right-radius: 3px;
+        border-top-right-radius: $radius;
         color: rgba(0, 0, 0, 0.7);
         padding: 1.5rem;
         position: relative;
         &:before {
             background: $warning;
-            border-radius: 3px 3px 0 0;
+            border-radius: $radius $radius 0 0;
             bottom: 100%;
             content: "Example";
             display: inline-block;
