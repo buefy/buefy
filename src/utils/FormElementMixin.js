@@ -53,15 +53,19 @@ export default {
         focus() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            this.$nextTick(() => this.$refs[this.$data._elementRef].select())
+            if (this.$data._elementRef !== 'select') {
+                this.$nextTick(() => this.$refs[this.$data._elementRef].select())
+            } else {
+                this.$nextTick(() => this.$refs[this.$data._elementRef].focus())
+            }
         },
 
         /**
-         * HTML5 validation, set isValid property.
+         * Check HTML5 validation, set isValid property.
          * If validation fail, send 'is-danger' type,
          * and error message to parent if it's a Field.
          */
-        html5Validation() {
+        checkHtml5Validity() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
             let type = null
