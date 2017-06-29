@@ -31,6 +31,7 @@ import Form from '../pages/documentation/form/_Form'
 const Field = (r) => require(['../pages/documentation/form/Field'], r)
 const Input = (r) => require(['../pages/documentation/form/Input'], r)
 const Select = (r) => require(['../pages/documentation/form/Select'], r)
+const Autocomplete = (r) => require(['../pages/documentation/form/Autocomplete'], r)
 const Checkbox = (r) => require(['../pages/documentation/form/Checkbox'], r)
 const Radio = (r) => require(['../pages/documentation/form/Radio'], r)
 const Switch = (r) => require(['../pages/documentation/form/Switch'], r)
@@ -38,7 +39,6 @@ const Switch = (r) => require(['../pages/documentation/form/Switch'], r)
 import Data from '../pages/documentation/data/_Data'
 const Table = (r) => require(['../pages/documentation/data/Table'], r)
 const Pagination = (r) => require(['../pages/documentation/data/Pagination'], r)
-const Autocomplete = (r) => require(['../pages/documentation/data/Autocomplete'], r)
 
 export default new Router({
     mode: 'hash',
@@ -173,6 +173,13 @@ export default new Router({
                     }
                 },
                 {
+                    path: 'autocomplete',
+                    component: Autocomplete,
+                    meta: {
+                        category: Form
+                    }
+                },
+                {
                     path: 'checkbox',
                     component: Checkbox,
                     meta: {
@@ -203,13 +210,6 @@ export default new Router({
                 {
                     path: 'pagination',
                     component: Pagination,
-                    meta: {
-                        category: Data
-                    }
-                },
-                {
-                    path: 'autocomplete',
-                    component: Autocomplete,
                     meta: {
                         category: Data
                     }
