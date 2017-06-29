@@ -10,7 +10,6 @@
                 <li>Input</li>
                 <li>Select</li>
                 <li>Autocomplete</li>
-                <li>Dropdown</li>
             </ul>
             <p>And <code>.control</code> elements (for buttons).</p>
         </div>
@@ -119,29 +118,33 @@
                             Button
                         </button>
                     </p>
-                    <b-dropdown>
-                        <button class="button is-primary" slot="trigger">
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
+                    <p class="control">
+                        <b-dropdown>
+                            <button class="button is-primary" slot="trigger">
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </button>
 
-                        <b-dropdown-option>Action</b-dropdown-option>
-                        <b-dropdown-option>Another action</b-dropdown-option>
-                        <b-dropdown-option>Something else</b-dropdown-option>
-                    </b-dropdown>
+                            <b-dropdown-option>Action</b-dropdown-option>
+                            <b-dropdown-option>Another action</b-dropdown-option>
+                            <b-dropdown-option>Something else</b-dropdown-option>
+                        </b-dropdown>
+                    </p>
                 </b-field>
 
                 <b-field>
-                    <b-dropdown>
-                        <button class="button" slot="trigger">
-                            <span>Filters</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
+                    <p class="control">
+                        <b-dropdown>
+                            <button class="button" slot="trigger">
+                                <span>Filters</span>
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </button>
 
-                        <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                        <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                        <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                        <b-dropdown-option value="everything">Everything</b-dropdown-option>
-                    </b-dropdown>
+                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
+                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
+                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
+                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
+                        </b-dropdown>
+                    </p>
                     <b-input icon="search" type="search" placeholder="Search..."></b-input>
                 </b-field>
             </div>
@@ -434,29 +437,33 @@
                             Button
                         </button>
                     </p>
-                    <b-dropdown>
-                        <button class="button is-primary" slot="trigger">
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
+                    <p class="control">
+                        <b-dropdown>
+                            <button class="button is-primary" slot="trigger">
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </button>
 
-                        <b-dropdown-option>Action</b-dropdown-option>
-                        <b-dropdown-option>Another action</b-dropdown-option>
-                        <b-dropdown-option>Something else</b-dropdown-option>
-                    </b-dropdown>
+                            <b-dropdown-option>Action</b-dropdown-option>
+                            <b-dropdown-option>Another action</b-dropdown-option>
+                            <b-dropdown-option>Something else</b-dropdown-option>
+                        </b-dropdown>
+                    </p>
                 </b-field>
 
                 <b-field>
-                    <b-dropdown>
-                        <button class="button" slot="trigger">
-                            <span>Filters</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
+                    <p class="control">
+                        <b-dropdown>
+                            <button class="button" slot="trigger">
+                                <span>Filters</span>
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </button>
 
-                        <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                        <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                        <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                        <b-dropdown-option value="everything">Everything</b-dropdown-option>
-                    </b-dropdown>
+                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
+                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
+                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
+                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
+                        </b-dropdown>
+                    </p>
                     <b-input icon="search" type="search" placeholder="Search..."></b-input>
                 </b-field>`,
                 template3: `

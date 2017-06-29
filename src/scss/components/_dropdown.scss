@@ -1,6 +1,8 @@
 .dropdown {
     display: inline-flex;
     align-items: center;
+    text-align: left;
+    position: relative;
     & + .dropdown {
         margin-left: 0.5em;
     }

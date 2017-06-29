@@ -2,8 +2,9 @@
 
 ## 0.4.3
 
-* Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](http://buefy.github.io/#/documentation/switch)
-* Add tons of props to Autocomplete, [see here](http://buefy.github.io/#/documentation/autocomplete)
+* Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](https://buefy.github.io/#/documentation/switch)
+* Add tons of props to Autocomplete, [see here](https://buefy.github.io/#/documentation/autocomplete)
+* **Dropdown button as addon now needs a ``.control`` element wrapping**
 * Add some useful methods on docs for Input, Select, Autocomplete and Table
 * Fix autocomplete list width
 * #117 Fix table row loop missing ``key`` prop
@@ -44,8 +45,8 @@
 
 ### Additions and fixes
 
-* **New component: Autocomplete**, [see docs](http://buefy.github.io/#/documentation/autocomplete)
-* **Switch design overhaul**, [see new style](http://buefy.github.io/#/documentation/switch)
+* **New component: Autocomplete**, [see docs](https://buefy.github.io/#/documentation/autocomplete)
+* **Switch design overhaul**, [see new style](https://buefy.github.io/#/documentation/switch)
 * Fix Tabs dynamic height
 * Add one more Sass variable: ``$speed-slower: 250ms !default``
 * Add ``size`` prop to Switch
@@ -64,7 +65,7 @@
 
 ## 0.3.2
 
-* **New component: Tabs**, [see docs](http://buefy.github.io/#/documentation/tabs)
+* **New component: Tabs**, [see docs](https://buefy.github.io/#/documentation/tabs)
 * Add ``content`` prop to TableColumn, use this instead of ``v-html`` or it might break on tables with ``mobile-cards`` (collapsed rows)
 * Alert Dialog accepts string as well
 * Dialog open with focus on confirm button (easier to just hit enter)

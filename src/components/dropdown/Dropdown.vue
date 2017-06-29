@@ -1,5 +1,5 @@
 <template>
-    <span class="dropdown control"
+    <span class="dropdown"
         :class="{ 'is-disabled': disabled }">
         <a role="button"
             ref="trigger"
