@@ -3,6 +3,8 @@
 ## 0.4.3
 
 * Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](http://buefy.github.io/#/documentation/switch)
+* Add tons of props to Autocomplete, [see here](http://buefy.github.io/#/documentation/autocomplete)
+* Add some useful methods on docs for Input, Select, Autocomplete and Table
 * Fix autocomplete list width
 * #117 Fix table row loop missing ``key`` prop
 * #122 Fix async tab-items
