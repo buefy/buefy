@@ -6,10 +6,12 @@
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="updateValue(!newValue, $event)">
         <input
+            v-model="newValue"
             type="checkbox"
             :disabled="disabled"
             :name="name"
-            v-model="newValue"
+            :true-value="trueValue"
+            :false-value="falseValue"
             @change="updateValue(newValue, $event)">
         <span class="check"></span>
         <span class="control-label"><slot></slot></span>
@@ -20,11 +22,19 @@
     export default {
         name: 'bCheckbox',
         props: {
-            value: Boolean,
+            value: [String, Number, Boolean, Object],
             disabled: Boolean,
             name: String,
             checked: Boolean,
             nosync: Boolean,
+            trueValue: {
+                type: [String, Number, Boolean, Object],
+                default: true
+            },
+            falseValue: {
+                type: [String, Number, Boolean, Object],
+                default: false
+            },
             customValue: [String, Number, Boolean, Object]
         },
         data() {

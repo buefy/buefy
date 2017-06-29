@@ -13,6 +13,7 @@
 * #128 Add default notices duration constructor options (thanks @quimarche)
 * #130 Fix checkbox/switch not emitting change event when using keyboard (thanks @gongzza)
 * #132 Add dropdown ``active-change`` event to know when it's dropdown list is active/visible (thanks @bartboy011)
+* #134 Add ``true-value`` and ``false-value`` props to checkbox
 
 ## 0.4.2
 
