@@ -429,7 +429,7 @@
                             {{ props.row.user.last_name }}
                         </b-table-column>
 
-                        <b-table-column field="date" label="Date" sortable
+                        <b-table-column field="date" label="Date" sortable>
                             <span v-html="formatDate(props.row.date)"></span>
                         </b-table-column>
 
