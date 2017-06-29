@@ -346,6 +346,11 @@
                         name: '<code>change</code>',
                         description: 'Triggers when an option is selected',
                         parameters: '<code>value: String</code>'
+                    },
+                    {
+                        name: '<code>active-change</code>',
+                        description: 'Triggers when dropdown is activated or deactivated (visibility of list)',
+                        parameters: '<code>active: Boolean</code>'
                     }
                 ],
                 optionProps: [
