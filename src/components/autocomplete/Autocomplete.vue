@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete" :class="size">
+    <div class="autocomplete control" :class="size">
         <b-input v-model="newValue"
             ref="input"
             :size="size"

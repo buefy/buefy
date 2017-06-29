@@ -6,12 +6,38 @@
     &.is-grouped {
         .field {
             flex-shrink: 0;
-            & + .field {
+            &+.field {
                 margin-left: 0.75rem;
             }
             &.is-expanded {
                 flex-grow: 1;
                 flex-shrink: 1;
+            }
+        }
+    }
+    // Nested control addons (for Autocomplete)
+    &.has-addons .control {
+        &:first-child > .control {
+            .button,
+            .input,
+            .select select {
+                border-bottom-left-radius: $input-radius;
+                border-top-left-radius: $input-radius;
+            }
+        }
+        &:last-child > .control {
+            .button,
+            .input,
+            .select select {
+                border-bottom-right-radius: $input-radius;
+                border-top-right-radius: $input-radius;
+            }
+        }
+        > .control {
+            .button,
+            .input,
+            .select select {
+                border-radius: 0
             }
         }
     }
