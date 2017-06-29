@@ -79,6 +79,9 @@
         <hr>
 
         <h2 class="title">Programmatically opening Component Modal</h2>
+        <b-message type="is-warning">
+            <b>Note</b>: You won't have access to Vue main instance (<code>$store</code>, <code>$router</code>, etc) from the component when opening programmatically.
+        </b-message>
         <div class="content">
             <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
             <p>The component will receive all props from the <code>props</code> object.</p>
