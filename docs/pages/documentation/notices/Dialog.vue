@@ -230,8 +230,8 @@
                         prompt() {
                             this.$dialog.prompt({
                                 message: \`What's your name?\`,
-                                maxlength: 20,
-                                placeholder: 'e.g. John Doe',
+                                inputMaxlength: 20,
+                                inputPlaceholder: 'e.g. John Doe',
                                 onConfirm: (value) => {
                                     this.$toast.open('Your name is: ' + value)
                                 }
