@@ -53,7 +53,7 @@ export default {
         focus() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            if (this.$data._elementRef !== 'select') {
+            if (this.$data._elementRef !== 'select' && !this.$data._isAutocomplete) {
                 this.$nextTick(() => this.$refs[this.$data._elementRef].select())
             } else {
                 this.$nextTick(() => this.$refs[this.$data._elementRef].focus())

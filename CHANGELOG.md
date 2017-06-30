@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.4.5
+
+* Fix autocomplete ``focus()`` method
+
 ## 0.4.4
 
 * #139 Fix notices durations and constructor options

@@ -81,7 +81,8 @@
                 isActive: false,
                 newValue: this.value,
                 isListInViewportVertically: true,
-                _isAutocomplete: true
+                _isAutocomplete: true,
+                _elementRef: 'input'
             }
         },
         computed: {
