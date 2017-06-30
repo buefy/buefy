@@ -14,11 +14,6 @@
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
-        data() {
-            return {
-                newDuration: this.duration || config.defaultToastDuration
-            }
-        },
         mixins: [NoticeMixin],
         methods: {
             /**
@@ -33,7 +28,8 @@
         },
         props: {
             duration: {
-                type: Number
+                type: Number,
+                default: config.defaultToastDuration
             }
         }
     }
