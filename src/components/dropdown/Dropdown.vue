@@ -4,7 +4,7 @@
         <a role="button"
             ref="trigger"
             class="trigger"
-            @click="activate">
+            @click="toggle">
             <slot name="trigger"></slot>
         </a>
 
@@ -120,9 +120,9 @@
             },
 
             /**
-             * Activate dropdown if it's not disabled.
+             * Toggle dropdown if it's not disabled.
              */
-            activate() {
+            toggle() {
                 if (this.disabled) return
 
                 this.isActive = !this.isActive
