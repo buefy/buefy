@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.4.4
+
+* #139 Fix notices durations and constructor options
+
 ## 0.4.3
 
 * Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](https://buefy.github.io/#/documentation/switch)
