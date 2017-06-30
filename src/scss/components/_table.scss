@@ -10,149 +10,146 @@
 }
 
 .b-table {
-    .b-table-content {
-        transition: opacity $speed $easing;
-        .icon {
-            transition: transform $speed-slow $easing;
-            &.is-desc {
-                transform: rotate(180deg);
-            }
+    transition: opacity $speed $easing;
+    // Out of .table to work with the <select> as well.
+    .icon {
+        transition: transform $speed-slow $easing;
+        &.is-desc {
+            transform: rotate(180deg);
         }
-        .table {
-            th {
-                font-weight: $weight-semibold;
-                .th-wrap {
-                    display: flex;
-                    align-items: center;
+    }
+    .table {
+        th {
+            font-weight: $weight-semibold;
+            .th-wrap {
+                display: flex;
+                align-items: center;
+                .icon {
+                    margin-left: 8px;
+                    margin-right: 0;
+                    font-size: 16px;
+                    transition: transform $speed-slow $easing, opacity $speed $easing;
+                    opacity: 0;
+                    &.is-visible {
+                        opacity: 1;
+                    }
+                }
+                &.is-numeric {
+                    flex-direction: row-reverse;
                     .icon {
-                        margin-left: 8px;
-                        margin-right: 0;
-                        font-size: 16px;
-                        transition: transform $speed-slow $easing, opacity $speed $easing;
-                        opacity: 0;
-                        &.is-visible {
-                            opacity: 1;
-                        }
-                    }
-                    &.is-numeric {
-                        flex-direction: row-reverse;
-                        .icon {
-                            margin-left: 0;
-                            margin-right: 8px;
-                        }
-                    }
-                }
-                &.is-current-sort {
-                    border-color: $grey;
-                    font-weight: $weight-bold;
-                }
-                &.is-sortable:hover {
-                    border-color: $grey;
-                }
-                &.is-sortable,
-                &.is-sortable .th-wrap {
-                    cursor: pointer;
-                }
-            }
-            tr {
-                &.is-selected {
-                    .checkbox input {
-                        &:checked + .check {
-                            background: $table-row-active url(checkmark($table-row-active-background)) no-repeat center center;
-                        }
-                        + .check {
-                            border-color: $table-row-active;
-                        }
+                        margin-left: 0;
+                        margin-right: 8px;
                     }
                 }
             }
-            .checkbox-cell {
-                width: 40px;
-                .checkbox {
-                    vertical-align: middle;
-                }
+            &.is-current-sort {
+                border-color: $grey;
+                font-weight: $weight-bold;
             }
-            // Modifiers
-            &.is-bordered {
-                th.is-current-sort,
-                th.is-sortable:hover {
-                    border-color: $grey-lighter;
-                    background: $background;
-                }
+            &.is-sortable:hover {
+                border-color: $grey;
             }
-            &.has-mobile-cards {
-                @include mobile {
-                    thead {
-                        display: none;
+            &.is-sortable,
+            &.is-sortable .th-wrap {
+                cursor: pointer;
+            }
+        }
+        tr {
+            &.is-selected {
+                .checkbox input {
+                    &:checked + .check {
+                        background: $table-row-active url(checkmark($table-row-active-background)) no-repeat center center;
                     }
-                    tr {
-                        // Card style — Cannot extend inside media query
-                        box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
-                        max-width: 100%;
-                        position: relative;
-                        // ---------------------------
-                        display: block;
-                        margin: 0.25em;
-                        td {
-                            display: flex;
-                            border: 0; // Disables is-bordered
-                            width: auto;
-                            justify-content: flex-end;
-                            text-align: right;
-                            border-bottom: 1px solid $background;
-                            &:before {
-                                content: attr(data-label);
-                                font-weight: $weight-semibold;
-                                margin-right: auto;
-                                padding-right: 0.5em;
-                                text-align: left;
-                            }
-                            &:last-child {
-                                border-bottom: 0;
-                            }
-                            &.checkbox-cell {
-                                display: inherit;
-                            }
+                    + .check {
+                        border-color: $table-row-active;
+                    }
+                }
+            }
+        }
+        .checkbox-cell {
+            width: 40px;
+            .checkbox {
+                vertical-align: middle;
+            }
+        }
+        // Modifiers
+        &.is-bordered {
+            th.is-current-sort,
+            th.is-sortable:hover {
+                border-color: $grey-lighter;
+                background: $background;
+            }
+        }
+        &.has-mobile-cards {
+            @include mobile {
+                thead {
+                    display: none;
+                }
+                tr {
+                    // Card style — Cannot extend inside media query
+                    box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
+                    max-width: 100%;
+                    position: relative;
+                    // ---------------------------
+                    display: block;
+                    margin: 0.25em;
+                    td {
+                        display: flex;
+                        border: 0; // Disables is-bordered
+                        width: auto;
+                        justify-content: flex-end;
+                        text-align: right;
+                        border-bottom: 1px solid $background;
+                        &:before {
+                            content: attr(data-label);
+                            font-weight: $weight-semibold;
+                            margin-right: auto;
+                            padding-right: 0.5em;
+                            text-align: left;
                         }
-                        &:not(:last-child) {
-                            margin-bottom: 16px;
+                        &:last-child {
+                            border-bottom: 0;
                         }
-                        // Disables is-striped
-                        &:not(.is-selected) {
-                            background: inherit;
-                            &:hover {
-                                background-color: inherit;
-                            }
+                        &.checkbox-cell {
+                            display: inherit;
+                        }
+                    }
+                    &:not(:last-child) {
+                        margin-bottom: 16px;
+                    }
+                    // Disables is-striped
+                    &:not(.is-selected) {
+                        background: inherit;
+                        &:hover {
+                            background-color: inherit;
                         }
                     }
                 }
             }
         }
+    }
 
-        .level {
-            padding-bottom: 16px;
-            .pagination {
-                .info {
-                    padding-right: 8px;
-                }
+    .level {
+        padding-bottom: 16px;
+        .pagination {
+            .info {
+                padding-right: 8px;
             }
-            @include tablet {
-                .level-left {
-                    padding-left: 16px;
-                }
-                .level-right {
-                    padding-right: 16px;
-                }
+        }
+        @include tablet {
+            .level-left {
+                padding-left: 16px;
+            }
+            .level-right {
+                padding-right: 16px;
             }
         }
     }
 
     &.is-loading {
         position: relative;
-        .b-table-content {
-            pointer-events: none;
-            opacity: 0.5;
-        }
+        pointer-events: none;
+        opacity: 0.5;
         &:after {
             @include loader;
             position: absolute;
