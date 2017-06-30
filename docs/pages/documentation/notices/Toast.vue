@@ -108,6 +108,7 @@
                         },
                         danger() {
                             this.$toast.open({
+                                duration: 5000,
                                 message: \`Something's not good, also I'm on bottom\`,
                                 position: 'is-bottom',
                                 type: 'is-danger'
@@ -129,6 +130,7 @@
             },
             danger() {
                 this.$toast.open({
+                    duration: 5000,
                     message: `Something's not good, also I'm on bottom`,
                     position: 'is-bottom',
                     type: 'is-danger'

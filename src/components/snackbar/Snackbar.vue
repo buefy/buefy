@@ -17,11 +17,6 @@
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
-        data() {
-            return {
-                newDuration: this.duration || config.defaultSnackbarDuration
-            }
-        },
         mixins: [NoticeMixin],
         props: {
             actionText: {
@@ -29,7 +24,8 @@
                 default: 'OK'
             },
             duration: {
-                type: Number
+                type: Number,
+                default: config.defaultSnackbarDuration
             },
             onAction: {
                 type: Function,
