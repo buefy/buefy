@@ -266,6 +266,19 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="dropdownMethods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
 
         <h2 class="subtitle">Dropdown Option</h2>
@@ -357,6 +370,12 @@
                         name: '<code>active-change</code>',
                         description: 'Triggers when dropdown is activated or deactivated (visibility of list)',
                         parameters: '<code>active: Boolean</code>'
+                    }
+                ],
+                dropdownMethods: [
+                    {
+                        name: '<code>toggle</code>',
+                        description: 'Toggle activation (dropdown list visibility)'
                     }
                 ],
                 optionProps: [
