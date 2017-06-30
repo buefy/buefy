@@ -7,6 +7,7 @@ export default {
             default: 'is-dark'
         },
         message: String,
+        duration: Number,
         position: {
             type: String,
             default: 'is-top',
@@ -91,7 +92,7 @@ export default {
             // This is from Toast or Snackbar
             this.insertEl()
             this.isActive = true
-            this.timer = setTimeout(() => this.close(), this.duration)
+            this.timer = setTimeout(() => this.close(), this.newDuration)
         },
 
         /**

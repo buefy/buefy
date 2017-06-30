@@ -23,13 +23,14 @@
                 type: String,
                 default: 'OK'
             },
-            duration: {
-                type: Number,
-                default: config.defaultSnackbarDuration
-            },
             onAction: {
                 type: Function,
                 default: () => {}
+            }
+        },
+        data() {
+            return {
+                newDuration: this.duration || config.defaultSnackbarDuration
             }
         },
         methods: {
