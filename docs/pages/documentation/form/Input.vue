@@ -284,6 +284,9 @@
                         <b-table-column field="description" label="Description" width="620">
                             <span v-html="props.row.description"></span>
                         </b-table-column>
+                        <b-table-column field="return" label="Return">
+                            <span v-html="props.row.return"></span>
+                        </b-table-column>
                     </template>
                 </b-table>
             </b-tab-item>
@@ -462,11 +465,13 @@
                 methods: [
                     {
                         name: '<code>checkHtml5Validity</code>',
-                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property'
+                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',
+                        return: '<code>isValid: Boolean</code>'
                     },
                     {
                         name: '<code>focus</code>',
-                        description: 'Set focus (internally uses the native <code>.select()</code> method)'
+                        description: 'Set focus (internally uses the native <code>.select()</code> method)',
+                        return: '—'
                     }
                 ],
                 template1: `

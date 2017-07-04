@@ -3,6 +3,8 @@
 ## 0.4.5
 
 * Fix autocomplete ``focus()`` method
+* #145 Fix autocomplete not preventing form from submitting (thanks @jtommy)
+* #153 Add return for ``checkHtml5Validity()`` method
 
 ## 0.4.4
 

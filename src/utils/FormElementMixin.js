@@ -77,16 +77,19 @@ export default {
                 isValid = false
             }
             this.isValid = isValid
-            if (!this.parentField) return
 
-            // Set type only if user haven't defined
-            if (!this.parentField.type) {
-                this.parentField.newType = type
+            if (this.parentField) {
+                // Set type only if not defined
+                if (!this.parentField.type) {
+                    this.parentField.newType = type
+                }
+                // Set message only if not defined
+                if (!this.parentField.message) {
+                    this.parentField.newMessage = message
+                }
             }
-            // Set message only if user haven't defined
-            if (!this.parentField.message) {
-                this.parentField.newMessage = message
-            }
+
+            return this.isValid
         }
     }
 }
