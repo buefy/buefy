@@ -19,6 +19,7 @@
             :step="step"
             :pattern="pattern"
             autocomplete="off"
+            @change="$emit('change', newValue)"
             @focus="focused"
             @blur="blur"
             @keyup.native.esc.prevent="isActive = false"
@@ -140,7 +141,6 @@
              */
             newValue(value) {
                 this.$emit('input', value)
-                this.$emit('change', value)
 
                 // Check if selected is invalid
                 if (this.getValue(this.selected) !== value) this.setSelected(null, false)
