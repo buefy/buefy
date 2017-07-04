@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App'
-import Resource from 'vue-resource'
 import router from './router'
 
 import Buefy from '../src'
+import VueResource from 'vue-resource'
 import VueProgressBar from 'vue-progressbar'
+import VueAnalytics from 'vue-analytics'
 import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
 
@@ -12,8 +13,8 @@ Vue.config.productionTip = false
 
 global.Promise = Bluebird
 
-Vue.use(Resource)
 Vue.use(Buefy)
+Vue.use(VueResource)
 Vue.use(VueProgressBar, {
     color: '#7957d5',
     failedColor: '#ff3860',
@@ -21,6 +22,10 @@ Vue.use(VueProgressBar, {
         speed: '0.2s',
         opacity: '0.1s'
     }
+})
+Vue.use(VueAnalytics, {
+    id: 'UA-75199408-3',
+    router
 })
 
 Vue.directive('highlight', {
