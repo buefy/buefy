@@ -6,6 +6,7 @@
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
                 </header>
+
                 <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <b-icon
                         :icon="icon"
@@ -16,18 +17,22 @@
                     </b-icon>
                     <p v-html="message"></p>
 
-                    <b-field v-if="hasInput">
-                        <b-input
-                            v-model="prompt"
-                            ref="input"
-                            :placeholder="inputPlaceholder"
-                            required
-                            :maxlength="inputMaxlength"
-                            :name="inputName"
-                            @keyup.enter.native="confirm">
-                        </b-input>
-                    </b-field>
+                    <div v-if="hasInput" class="field">
+                        <div class="control">
+                            <input v-model="prompt"
+                                class="input"
+                                :class="{ 'is-danger': validationMessage }"
+                                ref="input"
+                                required
+                                :placeholder="inputPlaceholder"
+                                :maxlength="inputMaxlength"
+                                :name="inputName"
+                                @keyup.enter="confirm">
+                        </div>
+                        <p class="help is-danger">{{ validationMessage }}</p>
+                    </div>
                 </section>
+
                 <footer class="modal-card-foot">
                     <button v-if="canCancel" class="button is-light" ref="cancelButton" @click="cancel">
                         {{ cancelText }}
@@ -43,12 +48,10 @@
 
 <script>
     import Icon from '../icon'
-    import Input from '../input'
 
     export default {
         components: {
-            [Icon.name]: Icon,
-            [Input.name]: Input
+            [Icon.name]: Icon
         },
         props: {
             title: String,
@@ -90,7 +93,8 @@
         data() {
             return {
                 isActive: false,
-                prompt: ''
+                prompt: '',
+                validationMessage: ''
             }
         },
         computed: {
@@ -119,8 +123,11 @@
              */
             confirm() {
                 if (this.$refs.input !== undefined) {
-                    this.$refs.input.checkHtml5Validity()
-                    if (!this.$refs.input.isValid) return
+                    if (!this.$refs.input.checkValidity()) {
+                        this.validationMessage = this.$refs.input.validationMessage
+                        this.$nextTick(() => this.$refs.input.select())
+                        return
+                    }
                 }
 
                 this.onConfirm(this.prompt)
@@ -173,7 +180,7 @@
             this.$nextTick(() => {
                 // Handle which element receives focus
                 if (this.hasInput) {
-                    this.$refs.input.$refs.input.focus()
+                    this.$refs.input.focus()
                 } else {
                     this.$refs.confirmButton.focus()
                 }
