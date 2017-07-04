@@ -174,7 +174,6 @@
                 const value = event.target.value
                 this.newValue = value
                 this.$emit('input', value)
-                this.$emit('change', value)
                 !this.isValid && this.checkHtml5Validity()
             },
 
