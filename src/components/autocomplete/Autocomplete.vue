@@ -21,8 +21,8 @@
             autocomplete="off"
             @focus="focused"
             @blur="blur"
-            @keyup.native.enter.prevent="enterPressed"
             @keyup.native.esc.prevent="isActive = false"
+            @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')">
         </b-input>
