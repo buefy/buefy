@@ -22,7 +22,7 @@ export default {
     },
     data() {
         return {
-            isValid: true // Used in Dialog and may be used in third party components
+            isValid: true
         }
     },
     computed: {
