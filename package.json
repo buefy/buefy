@@ -6,6 +6,7 @@
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "license": "MIT",
   "main": "lib/index.js",
+  "module": "src/index.js",
   "files": [
     "lib",
     "src"
