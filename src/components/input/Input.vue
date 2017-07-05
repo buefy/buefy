@@ -39,6 +39,7 @@
             :required="required"
             :maxlength="maxlength"
             :minlength="minlength"
+            :rows="rows"
             :value="newValue"
             @input="input"
             @blur="blur"

@@ -438,6 +438,13 @@
                         type: 'String',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>rows</code>',
+                        description: 'Same as native <code>rows</code>',
+                        type: 'Number',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 events: [

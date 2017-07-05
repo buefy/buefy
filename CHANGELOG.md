@@ -3,8 +3,12 @@
 ## 0.4.5
 
 * Fix autocomplete ``focus()`` method
+* #106 Fix prompt dialog vue-warning
+* #144 Add ``rows`` prop to input (textarea)
 * #145 Fix autocomplete not preventing form from submitting (thanks @jtommy)
 * #153 Add return for ``checkHtml5Validity()`` method
+* #155 Fix input/autocomplete ``change`` event (thanks @jtommy)
+
 
 ## 0.4.4
 

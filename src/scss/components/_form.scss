@@ -55,3 +55,10 @@
         }
     }
 }
+
+// Fix issue with textarea rows attr
+// https://github.com/jgthms/bulma/issues/26
+.textarea {
+    min-height: inherit;
+    height: auto;
+}

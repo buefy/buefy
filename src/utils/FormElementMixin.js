@@ -18,7 +18,8 @@ export default {
         pattern: String,
         placeholder: String,
         readonly: Boolean,
-        step: [Number, String]
+        step: [Number, String],
+        rows: [Number, String]
     },
     data() {
         return {
