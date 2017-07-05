@@ -78,15 +78,15 @@
             </table>
         </div>
 
-        <div class="level">
+        <div v-if="checkable || paginated" class="level">
             <div class="level-left">
-                <div class="level-item">
-                    <p v-if="checkable && this.checkedRows.length > 0">({{ this.checkedRows.length }})</p>
+                <div v-if="checkable && this.checkedRows.length > 0" class="level-item">
+                    <p>({{ this.checkedRows.length }})</p>
                 </div>
             </div>
 
-            <div class="level-right" v-if="paginated">
-                <div class="level-item">
+            <div class="level-right">
+                <div v-if="paginated" class="level-item">
                     <b-pagination
                         :total="newData.length"
                         :per-page="perPage"

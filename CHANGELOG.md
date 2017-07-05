@@ -8,6 +8,7 @@
 * #145 Fix autocomplete not preventing form from submitting (thanks @jtommy)
 * #153 Add return for ``checkHtml5Validity()`` method
 * #155 Fix input/autocomplete ``change`` event (thanks @jtommy)
+* #157 Fix table redundant level element generating extra padding
 
 
 ## 0.4.4
