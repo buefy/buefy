@@ -2,9 +2,10 @@
     <transition :name="animation">
         <div class="modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
-            <div class="modal-content animation-content" :style="{ maxWidth: newWidth }">
-                <component
-                    v-if="component"
+            <div class="animation-content"
+                :class="{ 'modal-content': !hasModalCard }"
+                :style="{ maxWidth: newWidth }">
+                <component v-if="component"
                     v-bind="props"
                     :is="component"
                     @close="close">
@@ -26,7 +27,11 @@
             content: String,
             programmatic: Boolean,
             props: Object,
-            width: [String, Number],
+            width: {
+                type: [String, Number],
+                default: 960
+            },
+            hasModalCard: Boolean,
             animation: {
                 type: String,
                 default: 'zoom-out'

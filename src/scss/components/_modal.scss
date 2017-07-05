@@ -1,19 +1,11 @@
 .modal,
-.modal-content {
+.animation-content {
     transition: opacity $speed-slow $easing, transform $speed-slow $easing;
 }
 
-.modal-content {
-    width: 960px;
-}
-
-.modal-enter,
-.modal-leave-active {
-    opacity: 0;
-}
-.modal-enter .modal-content{
-    transform: scale(1.05);
-}
-.modal-leave-active .modal-content {
-    transform: scale(1.05);
+.modal .animation-content {
+    margin: 0 1em;
+    .modal-card {
+        margin: 0;
+    }
 }

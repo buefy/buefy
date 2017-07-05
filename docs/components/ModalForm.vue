@@ -1,6 +1,6 @@
 <template>
-    <div class="modal-card">
-        <form action="">
+    <form action="">
+        <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Login</p>
             </header>
@@ -30,8 +30,8 @@
                 <button class="button" type="button" @click="$emit('close')">Close</button>
                 <button class="button is-primary">Login</button>
             </footer>
-        </form>
-    </div>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -40,10 +40,8 @@
     }
 </script>
 
-
 <style scoped>
     .modal-card {
-        margin: 0 auto;
         width: auto;
     }
 </style>

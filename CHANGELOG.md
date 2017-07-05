@@ -2,6 +2,7 @@
 
 ## 0.4.5
 
+* Remove programmatic component modal from docs since isn't a good practice and was causing too many issues.
 * Fix autocomplete ``focus()`` method
 * #106 Fix prompt dialog vue-warning
 * #144 Add ``rows`` prop to input (textarea)
@@ -9,7 +10,7 @@
 * #153 Add return for ``checkHtml5Validity()`` method
 * #155 Fix input/autocomplete ``change`` event (thanks @jtommy)
 * #157 Fix table redundant level element generating extra padding
-
+* #159 Fix modal with ``.modal-card`` responsiveness, added a ``has-modal-card`` prop.
 
 ## 0.4.4
 

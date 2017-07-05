@@ -57,7 +57,8 @@
             :active.sync="isComponentModalActive"
             :component="ModalForm"
             :props="formProps"
-            :width="380">
+            has-modal-card>
+            <!--You can also just add your component with props and events as slot-->
         </b-modal>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
         <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
@@ -68,27 +69,13 @@
 
         <hr>
 
-        <h2 class="title is-spaced">Programmatically opening</h2>
+        <h2 class="title is-spaced">Programmatically opening HTML Modal</h2>
 
         <div class="block">
             <button class="button is-primary is-medium" @click="imageModal">Launch image modal</button>
             <button class="button is-primary is-medium" @click="cardModal">Launch card modal</button>
         </div>
         <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
-
-        <hr>
-
-        <h2 class="title">Programmatically opening Component Modal</h2>
-        <b-message type="is-warning">
-            <b>Note</b>: You won't have access to Vue main instance (<code>$store</code>, <code>$router</code>, Buefy components, etc)
-            from the component when opening programmatically. Use the non-programmatic Modal for that.
-        </b-message>
-        <div class="content">
-            <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
-            <p>The component will receive all props from the <code>props</code> object.</p>
-            <button class="button is-primary is-medium" @click="componentModal">Launch component modal</button>
-        </div>
-        <pre class="content" v-highlight><code class="javascript">{{ code4 | pre }}</code></pre>
 
         <hr>
 
@@ -186,6 +173,13 @@
                         default: '<code>960</code>'
                     },
                     {
+                        name: '<code>has-modal-card</code>',
+                        description: `If your modal content has a <code>.modal-card</code> as root, add this prop or the card might break on mobile`,
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
                         name: '<code>animation</code>',
                         description: 'Custom animation (transition name)',
                         type: 'String',
@@ -262,7 +256,8 @@
                     :active.sync="isComponentModalActive"
                     :component="ModalForm"
                     :props="formProps"
-                    :width="380">
+                    has-modal-card>
+                    <!--You can also just add your component with props and events as slot-->
                 </b-modal>`,
                 code2: `
                 import ModalForm from './components/ModalForm'
@@ -324,27 +319,10 @@
                         }
                     }
                 }`,
-                code4: `
-                import ModalForm from './components/ModalForm'
-
-                export default {
-                    methods: {
-                        componentModal() {
-                            this.$modal.open({
-                                component: ModalForm,
-                                width: 380,
-                                props: {
-                                    email: 'evan@you.com',
-                                    password: 'testing'
-                                }
-                            })
-                        }
-                    }
-                }`,
                 component: `
                 <template>
-                    <div class="modal-card">
-                        <form action="">
+                    <form action="">
+                        <div class="modal-card">
                             <header class="modal-card-head">
                                 <p class="modal-card-title">Login</p>
                             </header>
@@ -374,8 +352,8 @@
                                 <button class="button" type="button" @click="$emit('close')">Close</button>
                                 <button class="button is-primary">Login</button>
                             </footer>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </template>
 
                 <script>
@@ -384,10 +362,8 @@
                     }
                 <\/script>
 
-
                 <style scoped>
                     .modal-card {
-                        margin: 0 auto;
                         width: auto;
                     }
                 </style>`
