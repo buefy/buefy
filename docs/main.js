@@ -31,9 +31,9 @@ Vue.use(VueAnalytics, {
 Vue.directive('highlight', {
     deep: true,
     bind(el, binding) {
-        // on first bind, highlight all targets
+        // On first bind, highlight all targets
         const targets = el.querySelectorAll('code')
-        for (const target of Array.from(targets)) {
+        for (const target of targets) {
             // if a value is directly assigned to the directive, use this
             // instead of the element content.
             if (binding.value) {
@@ -43,9 +43,9 @@ Vue.directive('highlight', {
         }
     },
     componentUpdated(el, binding) {
-        // after an update, re-fill the content and then highlight
+        // After an update, re-fill the content and then highlight
         const targets = el.querySelectorAll('code')
-        for (const target of Array.from(targets)) {
+        for (const target of targets) {
             if (binding.value) {
                 target.innerHTML = binding.value
                 hljs.highlightBlock(target)
