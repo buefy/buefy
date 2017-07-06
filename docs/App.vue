@@ -28,17 +28,13 @@
 <style lang="scss">
     @import "./assets/main.scss";
 
-    pre {
-        @include tablet {
-            white-space: pre-wrap;
-        }
-        code {
-            max-height: 400px;
-            &.hljs {
-                background: inherit;
-                color: inherit;
-                padding: 1.25rem 1.5rem;
-            }
+    // Helpers
+
+    // Colored text
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        .has-text-#{$name} {
+            color: $color;
         }
     }
 
@@ -72,10 +68,28 @@
         }
     }
 
+    // Generic
+
+    pre {
+        @include tablet {
+            white-space: pre-wrap;
+        }
+        code {
+            max-height: 400px;
+            &.hljs {
+                background: inherit;
+                color: inherit;
+                padding: 1.25rem 1.5rem;
+            }
+        }
+    }
+
     ::selection {
         background: lighten($primary, 5%);
         color: $primary-invert;
     }
+
+    // Home
 
     .home {
         .logo-rounded,

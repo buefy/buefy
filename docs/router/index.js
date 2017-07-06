@@ -13,7 +13,7 @@ const Customization = (r) => require(['../pages/documentation/installation/Custo
 const ConstructorOptions = (r) => require(['../pages/documentation/installation/ConstructorOptions'], r)
 
 import General from '../pages/documentation/general/_General'
-const UIElements = (r) => require(['../pages/documentation/general/UIElements'], r)
+const Layout = (r) => require(['../pages/documentation/general/Layout'], r)
 const Icon = (r) => require(['../pages/documentation/general/Icon'], r)
 const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
@@ -75,8 +75,8 @@ export default new Router({
                     }
                 },
                 {
-                    path: 'ui-elements',
-                    component: UIElements,
+                    path: 'layout',
+                    component: Layout,
                     meta: {
                         category: General
                     }
