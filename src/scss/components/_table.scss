@@ -65,6 +65,9 @@
                     }
                 }
             }
+            &.is-empty:hover {
+                background-color: transparent;
+            }
         }
         .checkbox-cell {
             width: 40px;
