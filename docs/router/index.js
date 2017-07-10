@@ -19,6 +19,7 @@ const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
 const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
 const Modal = (r) => require(['../pages/documentation/general/Modal'], r)
 const Tabs = (r) => require(['../pages/documentation/general/Tabs'], r)
+const Popover = (r) => require(['../pages/documentation/general/Popover'], r)
 
 import Notices from '../pages/documentation/notices/_Notices'
 const Dialog = (r) => require(['../pages/documentation/notices/Dialog'], r)
@@ -114,6 +115,13 @@ export default new Router({
                     component: Tabs,
                     meta: {
                         category: General
+                    }
+                },
+                {
+                    path: 'popover',
+                    component: Popover,
+                    meta: {
+                        category: 'General'
                     }
                 },
                 {

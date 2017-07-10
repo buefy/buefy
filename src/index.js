@@ -10,6 +10,7 @@ import Input from './components/input'
 import Message from './components/message'
 import Notification from './components/notification'
 import Pagination from './components/pagination'
+import Popover from './components/popover'
 import Select from './components/select'
 import Switch from './components/switch'
 import Tooltip from './components/tooltip'
@@ -34,6 +35,7 @@ const components = {
     Modal,
     Notification,
     Pagination,
+    Popover,
     Radio,
     RadioButton,
     RadioGroup,
