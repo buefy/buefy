@@ -3,42 +3,42 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const Home = (r) => require(['../pages/Home'], r)
+const Home = () => import('../pages/Home')
 
-const Documentation = (r) => require(['../pages/documentation/Documentation'], r)
+const Documentation = () => import('../pages/documentation/Documentation')
 
-import Installation from '../pages/documentation/installation/_Installation'
-const QuickStart = (r) => require(['../pages/documentation/installation/QuickStart'], r)
-const Customization = (r) => require(['../pages/documentation/installation/Customization'], r)
-const ConstructorOptions = (r) => require(['../pages/documentation/installation/ConstructorOptions'], r)
+const Installation = () => import('../pages/documentation/installation/_Installation')
+const QuickStart = () => import('../pages/documentation/installation/QuickStart')
+const Customization = () => import('../pages/documentation/installation/Customization')
+const ConstructorOptions = () => import('../pages/documentation/installation/ConstructorOptions')
 
-import General from '../pages/documentation/general/_General'
-const Layout = (r) => require(['../pages/documentation/general/Layout'], r)
-const Icon = (r) => require(['../pages/documentation/general/Icon'], r)
-const Dropdown = (r) => require(['../pages/documentation/general/Dropdown'], r)
-const Tooltip = (r) => require(['../pages/documentation/general/Tooltip'], r)
-const Modal = (r) => require(['../pages/documentation/general/Modal'], r)
-const Tabs = (r) => require(['../pages/documentation/general/Tabs'], r)
+const General = () => import('../pages/documentation/general/_General')
+const Layout = () => import('../pages/documentation/general/Layout')
+const Icon = () => import('../pages/documentation/general/Icon')
+const Dropdown = () => import('../pages/documentation/general/Dropdown')
+const Modal = () => import('../pages/documentation/general/Modal')
+const Tabs = () => import('../pages/documentation/general/Tabs')
+const Tooltip = () => import('../pages/documentation/general/Tooltip')
 
-import Notices from '../pages/documentation/notices/_Notices'
-const Dialog = (r) => require(['../pages/documentation/notices/Dialog'], r)
-const Toast = (r) => require(['../pages/documentation/notices/Toast'], r)
-const Snackbar = (r) => require(['../pages/documentation/notices/Snackbar'], r)
-const Notification = (r) => require(['../pages/documentation/notices/Notification'], r)
-const Message = (r) => require(['../pages/documentation/notices/Message'], r)
+const Notices = () => import('../pages/documentation/notices/_Notices')
+const Dialog = () => import('../pages/documentation/notices/Dialog')
+const Toast = () => import('../pages/documentation/notices/Toast')
+const Snackbar = () => import('../pages/documentation/notices/Snackbar')
+const Notification = () => import('../pages/documentation/notices/Notification')
+const Message = () => import('../pages/documentation/notices/Message')
 
-import Form from '../pages/documentation/form/_Form'
-const Field = (r) => require(['../pages/documentation/form/Field'], r)
-const Input = (r) => require(['../pages/documentation/form/Input'], r)
-const Select = (r) => require(['../pages/documentation/form/Select'], r)
-const Autocomplete = (r) => require(['../pages/documentation/form/Autocomplete'], r)
-const Checkbox = (r) => require(['../pages/documentation/form/Checkbox'], r)
-const Radio = (r) => require(['../pages/documentation/form/Radio'], r)
-const Switch = (r) => require(['../pages/documentation/form/Switch'], r)
+const Form = () => import('../pages/documentation/form/_Form')
+const Field = () => import('../pages/documentation/form/Field')
+const Input = () => import('../pages/documentation/form/Input')
+const Select = () => import('../pages/documentation/form/Select')
+const Autocomplete = () => import('../pages/documentation/form/Autocomplete')
+const Checkbox = () => import('../pages/documentation/form/Checkbox')
+const Radio = () => import('../pages/documentation/form/Radio')
+const Switch = () => import('../pages/documentation/form/Switch')
 
-import Data from '../pages/documentation/data/_Data'
-const Table = (r) => require(['../pages/documentation/data/Table'], r)
-const Pagination = (r) => require(['../pages/documentation/data/Pagination'], r)
+const Data = () => import('../pages/documentation/data/_Data')
+const Table = () => import('../pages/documentation/data/Table')
+const Pagination = () => import('../pages/documentation/data/Pagination')
 
 export default new Router({
     mode: 'hash',
