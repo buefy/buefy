@@ -58,7 +58,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="visibleData.length">
                     <tr v-for="(row, index) in visibleData"
                         :key="index"
                         @click="selectRow(row)"
@@ -73,6 +73,13 @@
                         </td>
 
                         <slot :row="row" :index="index"></slot>
+                    </tr>
+                </tbody>
+                <tbody v-else>
+                    <tr class="is-empty">
+                        <td :colspan="checkable ? columns.length + 1 : columns.length">
+                            <slot name="empty"></slot>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -389,3 +396,4 @@
         }
     }
 </script>
+

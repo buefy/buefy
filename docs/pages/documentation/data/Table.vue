@@ -311,6 +311,10 @@
                     {
                         name: 'default',
                         props: '<code>row: Object</code>, <code>index: Number</code>'
+                    },
+                    {
+                        name: 'empty',
+                        props: ''
                     }
                 ],
                 tableEvents: [
