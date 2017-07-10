@@ -49,22 +49,19 @@
 
         <h2 class="title">Component Modal</h2>
         <div class="content">
-            <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
-            <p>The component will receive all props from the <code>props</code> object.</p>
+            <p>A modal with a component. When you want to close the Modal, call the 'close' method — <code>this.$parent.close()</code> — from the component's parent.</p>
             <button class="button is-primary is-medium" @click="isComponentModalActive = true">Launch component modal</button>
         </div>
-        <b-modal
-            :active.sync="isComponentModalActive"
-            :component="ModalForm"
-            :props="formProps"
-            has-modal-card>
-            <!--You can also just add your component with props and events as slot-->
+        <b-modal :active.sync="isComponentModalActive" has-modal-card>
+            <modal-form v-bind="formProps"></modal-form>
         </b-modal>
         <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
         <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <h3 class="subtitle">ModalForm component</h3>
-        <p class="content"><b>Note:</b> You should't mutate a prop directly, this is just an example.</p>
+        <b-message type="is-warning">
+            <b>Note:</b> You should't mutate a prop directly, this is just an example.
+        </b-message>
         <pre class="content" v-highlight><code class="html">{{ component | pre }}</code></pre>
 
         <hr>
@@ -126,9 +123,11 @@
     import ModalForm from '../../../components/ModalForm'
 
     export default {
+        components: {
+            ModalForm
+        },
         data() {
             return {
-                ModalForm,
                 isImageModalActive: false,
                 isCardModalActive: false,
                 isComponentModalActive: false,
@@ -146,7 +145,9 @@
                     },
                     {
                         name: '<code>component</code>',
-                        description: `Component to be shown. Close Modal programatically by emitting a 'close' event — <code>this.$emit('close')</code> — from the component`,
+                        description: `Component to be injected, used to open a component modal programmatically.
+                            Close modal within the component by emitting a 'close' event — <code>this.$emit('close')</code>.
+                            Be aware that the component won't have access to the main Vue instance (vuex, router, custom components, etc.)`,
                         type: 'String',
                         values: '—',
                         default: '—'
@@ -252,20 +253,18 @@
                 template2: `
                 <button class="button is-primary is-medium" @click="isComponentModalActive = true">Launch component modal</button>
 
-                <b-modal
-                    :active.sync="isComponentModalActive"
-                    :component="ModalForm"
-                    :props="formProps"
-                    has-modal-card>
-                    <!--You can also just add your component with props and events as slot-->
+                <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                    <modal-form v-bind="formProps"></modal-form>
                 </b-modal>`,
                 code2: `
                 import ModalForm from './components/ModalForm'
 
                 export default {
+                    components: {
+                        ModalForm
+                    },
                     data() {
                         return {
-                            ModalForm,
                             isComponentModalActive: false,
                             formProps: {
                                 email: 'evan@you.com',
@@ -349,7 +348,7 @@
                                 <b-checkbox>Remember me</b-checkbox>
                             </section>
                             <footer class="modal-card-foot">
-                                <button class="button" type="button" @click="$emit('close')">Close</button>
+                                <button class="button" type="button" @click="$parent.close()">Close</button>
                                 <button class="button is-primary">Login</button>
                             </footer>
                         </div>

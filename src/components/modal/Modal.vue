@@ -11,7 +11,7 @@
                     @close="close">
                 </component>
                 <div v-else-if="content" v-html="content"></div>
-                <slot v-else></slot>
+                <slot v-else @close="close"></slot>
             </div>
             <button v-if="canCancel" class="modal-close" @click="cancel"></button>
         </div>
