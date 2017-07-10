@@ -29,6 +29,7 @@
         justify-content: flex-end;
         .button {
             min-width: 80px;
+            display: table-cell;
             font-weight: $weight-semibold;
         }
     }
