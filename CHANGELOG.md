@@ -3,6 +3,7 @@
 ## 0.4.5
 
 * Update Bulma to v0.4.3
+* Page is now clipped when a modal/dialog is active (to avoid weird scroll behavior)
 * Update modal docs example to not use the ``component`` prop, works better for events and is more common — Old way is not deprecated
 * Remove programmatic component modal from docs since isn't a good practice and was causing too many issues
 * Fix autocomplete ``focus()`` method

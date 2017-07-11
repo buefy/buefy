@@ -121,6 +121,14 @@
                 }
             }
         },
+        watch: {
+            isActive() {
+                if (typeof window !== 'undefined') {
+                    const action = this.isActive ? 'add' : 'remove'
+                    document.documentElement.classList[action]('is-clipped')
+                }
+            }
+        },
         methods: {
             /**
              * If it's a prompt Dialog, validate the input.

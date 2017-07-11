@@ -13,7 +13,7 @@
                 <div v-else-if="content" v-html="content"></div>
                 <slot v-else @close="close"></slot>
             </div>
-            <button v-if="canCancel" class="modal-close" @click="cancel"></button>
+            <button v-if="canCancel" class="modal-close is-large" @click="cancel"></button>
         </div>
     </transition>
 </template>
@@ -56,6 +56,12 @@
         watch: {
             active(value) {
                 this.isActive = value
+            },
+            isActive() {
+                if (typeof window !== 'undefined') {
+                    const action = this.isActive ? 'add' : 'remove'
+                    document.documentElement.classList[action]('is-clipped')
+                }
             }
         },
         methods: {
