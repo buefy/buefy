@@ -8,28 +8,33 @@
                 </header>
 
                 <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
-                    <b-icon
-                        :icon="icon"
-                        :class="type"
-                        both
-                        size="is-large custom-icon"
-                        v-if="icon && hasIcon">
-                    </b-icon>
-                    <p v-html="message"></p>
-
-                    <div v-if="hasInput" class="field">
-                        <div class="control">
-                            <input v-model="prompt"
-                                class="input"
-                                :class="{ 'is-danger': validationMessage }"
-                                ref="input"
-                                required
-                                :placeholder="inputPlaceholder"
-                                :maxlength="inputMaxlength"
-                                :name="inputName"
-                                @keyup.enter="confirm">
+                    <div class="media">
+                        <div class="media-left" v-if="icon && hasIcon">
+                            <b-icon
+                                :icon="icon"
+                                :class="type"
+                                both
+                                size="is-large custom-icon">
+                            </b-icon>
                         </div>
-                        <p class="help is-danger">{{ validationMessage }}</p>
+                        <div class="media-content">
+                            <p v-html="message"></p>
+
+                            <div v-if="hasInput" class="field">
+                                <div class="control">
+                                    <input v-model="prompt"
+                                        class="input"
+                                        :class="{ 'is-danger': validationMessage }"
+                                        ref="input"
+                                        required
+                                        :placeholder="inputPlaceholder"
+                                        :maxlength="inputMaxlength"
+                                        :name="inputName"
+                                        @keyup.enter="confirm">
+                                </div>
+                                <p class="help is-danger">{{ validationMessage }}</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
