@@ -1,10 +1,5 @@
-.modal,
-.animation-content {
-    transition: opacity $speed-slow $easing, transform $speed-slow $easing;
-}
-
 .modal .animation-content {
-    margin: 0 1em;
+    margin: 0 20px;
     .modal-card {
         margin: 0;
     }

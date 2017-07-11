@@ -8,22 +8,15 @@
             <button class="button" @click="activeTab = 1">Set Music</button>
             <b-tabs v-model="activeTab">
                 <b-tab-item label="Pictures">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nulla gravida nisl turpis, ultrices mattis nulla malesuada id.
-                    Sed blandit lorem eu fermentum malesuada.
-                    Aenean neque nisl, malesuada quis quam eu, hendrerit venenatis diam.
+                    Lorem ipsum dolor sit amet.
                 </b-tab-item>
 
                 <b-tab-item label="Music">
-                    Sed in mi sed ex finibus ornare.
-                    Phasellus venenatis enim eu pharetra tempor.
-                    Donec congue diam ipsum, eget vulputate elit tristique ac.
-                    Suspendisse est est, elementum nec ornare nec, dignissim et ex.
-                    Nulla felis nibh, vulputate eu rhoncus et, accumsan vitae mi.
-                    Suspendisse et venenatis nisi.
-                    Curabitur vitae ullamcorper magna.
-                    Donec in blandit dolor.
-                    Nullam pellentesque et ipsum non porttitor.
+                    Lorem <br>
+                    ipsum <br>
+                    dolor <br>
+                    sit <br>
+                    amet.
                 </b-tab-item>
 
                 <b-tab-item label="Videos">
@@ -163,7 +156,7 @@
         <h2 class="subtitle">Tab Item</h2>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="tabsProps" default-sort="name">
+                <b-table :data="tabItemProps" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>

@@ -7,7 +7,6 @@
         z-index: 10;
         white-space: nowrap;
         min-width: 100%;
-        transition: opacity $speed $easing;
         .option {
             @include unselectable;
             padding: 0.25rem 0.75rem;

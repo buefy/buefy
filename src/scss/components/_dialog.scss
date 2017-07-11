@@ -1,9 +1,7 @@
 .dialog {
-    transition: opacity $speed-slow $easing, transform $speed-slow $easing;
     .modal-card {
         max-width: 460px;
         width: auto;
-        transition: opacity $speed-slow $easing, transform $speed-slow $easing;
         .modal-card-head {
             font-size: $size-5;
             font-weight: $weight-semibold;

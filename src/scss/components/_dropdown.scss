@@ -14,7 +14,6 @@
         position: fixed;
         background-color: rgba($black, 0.86);
         z-index: 10;
-        transition: opacity $speed $easing;
         cursor: pointer;
     }
     .box {
@@ -22,7 +21,6 @@
         padding: 0.5em 0;
         z-index: 10;
         white-space: nowrap;
-        transition: opacity $speed $easing;
         .option {
             @include unselectable;
             padding: 0.5rem 1rem;
@@ -96,13 +94,14 @@
     @include touch {
         .box {
             position: fixed;
-            width: calc(100vw - 60px);
-            max-width: 600px;
+            width: calc(100vw - 40px);
+            max-width: 460px;
             max-height: calc(100vh - 120px);
-            top: 50% !important;
+            top: 25% !important;
             left: 50% !important;
-            transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -25%, 0);
             white-space: normal;
+            overflow-y: auto;
             &.is-narrow {
                 .option {
                     padding: 0.75rem 1rem;
