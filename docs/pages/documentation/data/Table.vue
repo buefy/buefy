@@ -357,7 +357,7 @@
                 tableMethods: [
                     {
                         name: '<code>initSort</code>',
-                        description: 'Sort using <code>default-sort</code> prop'
+                        description: 'Sort using <code>default-sort</code> prop parameters'
                     }
                 ],
                 columnProps: [
