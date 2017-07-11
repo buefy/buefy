@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+# 0.4.6
+
+* #171 Fix modal not taking full width on mobile
+
 ## 0.4.5
 
 * Update Bulma to v0.4.3

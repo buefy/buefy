@@ -1,6 +1,11 @@
-.modal .animation-content {
-    margin: 0 20px;
-    .modal-card {
-        margin: 0;
+.modal {
+    .animation-content {
+        margin: 0 20px;
+        .modal-card {
+            margin: 0;
+        }
+        @include mobile {
+            width: 100%;
+        }
     }
 }
