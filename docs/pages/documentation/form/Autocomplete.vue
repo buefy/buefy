@@ -56,7 +56,7 @@
                     field="title"
                     has-custom-template
                     :loading="asyncExample.isFetching"
-                    @change="getAsyncData"
+                    @input="getAsyncData"
                     @select="option => asyncExample.selected = option">
 
                     <template scope="props">
@@ -489,7 +489,7 @@
                         field="title"
                         has-custom-template
                         :loading="asyncExample.isFetching"
-                        @change="getAsyncData"
+                        @input="getAsyncData"
                         @select="option => asyncExample.selected = option">
 
                         <template scope="props">
