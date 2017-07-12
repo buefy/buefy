@@ -1,7 +1,8 @@
 # Buefy Changelog
 
-# 0.4.6
+## 0.4.6
 
+* Add CDN install method and JSFiddle examples
 * Fix message and notification inside ``.media`` element
 * #171 Fix modal not taking full width on mobile
 
