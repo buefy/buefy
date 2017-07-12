@@ -2,36 +2,65 @@
     <div class="container">
         <h1 class="title is-spaced">Customizing theme with Sass</h1>
         <h2 class="subtitle">
-            If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <strong>customize</strong>
+            If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <b>customize</b>
             Buefy with your own theme,follow these steps
         </h2>
 
         <hr>
 
-        <h3 class="subtitle"><span class="list-number">1</span> Install Buefy via npm</h3>
-        <pre class="content" v-highlight><code class="bash"><span class="is-unselectable">$ </span>npm install buefy</code></pre>
-        <p class="content">or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
-
-        <hr>
-
-        <h3 class="subtitle"><span class="list-number">2</span> Set your variables with Sass</h3>
-        <div class="content">
-            <p><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
-            <p>There's also two other variables created by Buefy: <code>$speed-slow: 150ms !default</code> and <code>$speed-slower: 250ms !default</code>.</p>
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">1</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Install Buefy via npm</h3>
+                <pre class="block" v-highlight><code class="bash"><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                <p class="content">Or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
+            </div>
         </div>
-        <div class="example"><pre v-highlight><code class="sass">{{ sass | pre }}</code></pre></div>
+
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">2</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Set your variables with Sass</h3>
+                <b-message type="is-info">
+                    <div class="content">
+                        <p><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
+                        <p>There's also two other variables created by Buefy:</p>
+                        <ol>
+                            <li><code>$speed-slow: 150ms !default</code></li>
+                            <li><code>$speed-slower: 250ms !default</code></li>
+                        </ol>
+                    </div>
+                </b-message>
+                <b-message type="is-warning">
+                    You might also need to install <code>node-sass</code> and <code>sass-loader</code> depending on your enviroment.
+                </b-message>
+                <p class="block">
+                    It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag.
+                </p>
+                <div class="example"><pre v-highlight><code class="sass">{{ sass | pre }}</code></pre></div>
+            </div>
+        </div>
+
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">3</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Import and use Buefy</h3>
+                <pre v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
+            </div>
+        </div>
 
         <hr>
 
-        <h3 class="subtitle"><span class="list-number">3</span> Import and use Buefy. You can also enable individual components</h3>
-        <pre v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
-
-        <hr>
-
-        <p class="content">
+        <b-message type="is-info">
             If you're still not sure how to proceed, take a look at this <a href="https://github.com/rafaelpimpa/buefy-simple" target="_blank">
             repository with a basic setup to customize Buefy</a>.
-        </p>
+        </b-message>
     </div>
 </template>
 
@@ -82,7 +111,7 @@
 
                 Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
                 Vue.component(Buefy.Table.name, Buefy.Table)
-                ...`
+                Vue.component(Buefy.Switch.name, Buefy.Switch)`,
             }
         }
     }
