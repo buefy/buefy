@@ -2,6 +2,7 @@
 
 # 0.4.6
 
+* Fix message and notification inside ``.media`` element
 * #171 Fix modal not taking full width on mobile
 
 ## 0.4.5
