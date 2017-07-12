@@ -12,6 +12,7 @@
             <b-switch v-model="isLoading">Loading state</b-switch>
             <b-switch v-model="isPaginated">Paginated</b-switch>
             <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
+            <b-switch v-model="isEmpty">Empty</b-switch>
             <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
         </div>
         <div class="block">
@@ -47,9 +48,9 @@
                         :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
-                        default-sort="user.first_name"
                         :selected.sync="selected"
-                        :checked-rows.sync="checkedRows">
+                        :checked-rows.sync="checkedRows"
+                        default-sort="user.first_name">
 
                         <template scope="props">
                             <b-table-column field="id" label="ID" width="40" sortable numeric>
@@ -65,7 +66,9 @@
                             </b-table-column>
 
                             <b-table-column field="date" label="Date" sortable>
-                                <span v-html="formatDate(props.row.date)"></span>
+                                <span class="tag is-success">
+                                    {{ new Date(props.row.date).toLocaleDateString() }}
+                                </span>
                             </b-table-column>
 
                             <b-table-column field="gender" label="Gender">
@@ -76,11 +79,15 @@
                                 {{ props.row.gender }}
                             </b-table-column>
                         </template>
+
+                        <div slot="empty" class="has-text-centered">
+                            This table is empty!
+                        </div>
                     </b-table>
                 </b-tab-item>
 
                 <b-tab-item label="Selected">
-                    <pre class="content">{{ selected }}</pre>
+                    <pre class="block">{{ selected }}</pre>
                 </b-tab-item>
 
                 <b-tab-item label="Checked rows">
@@ -89,8 +96,8 @@
             </b-tabs>
         </div>
 
-        <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <hr>
 
@@ -190,12 +197,11 @@
 </template>
 
 <script>
-    import tableData from '../../../assets/data_test.json'
+    import data from '../../../assets/data_test.json'
 
     export default {
         data() {
             return {
-                tableData,
                 checkedRows: [],
                 selected: {},
                 isBordered: false,
@@ -203,6 +209,7 @@
                 isNarrowed: false,
                 isLoading: false,
                 isCheckable: false,
+                isEmpty: false,
                 hasMobileCards: true,
                 isPaginated: true,
                 isPaginationSimple: false,
@@ -452,6 +459,10 @@
                             {{ props.row.gender }}
                         </b-table-column>
                     </template>
+
+                    <div slot="empty" class="has-text-centered">
+                        This table is empty!
+                    </div>
                 </b-table>`,
                 code: `
                 export default {
@@ -479,26 +490,21 @@
                         }
                     },
                     methods: {
-                        formatDate(value, row) {
-                            return \`<span class="tag is-success">
-                                \${new Date(value).toLocaleDateString()}
-                            </span>\`
-                        },
                         clearSelected() {
                             this.selected = {}
                         },
                         clearCheckedRows() {
                             this.checkedRows = []
                         }
-                    },
+                    }
                 }`
             }
         },
-        methods: {
-            formatDate(value, row) {
-                return `<span class="tag is-success">
-                    ${new Date(value).toLocaleDateString()}
-                </span>`
+        computed: {
+            tableData() {
+                return this.isEmpty
+                    ? []
+                    : data
             }
         }
     }
