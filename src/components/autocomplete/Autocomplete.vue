@@ -189,7 +189,6 @@
                 this.$emit('select', this.selected)
                 if (this.selected !== null) {
                     this.newValue = this.getValue(this.selected)
-                    this.$emit('input', this.getValue(this.selected))
                 }
                 closeDropdown && this.$nextTick(() => { this.isActive = false })
             },
