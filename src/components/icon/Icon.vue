@@ -43,7 +43,7 @@
         done: 'ok',
         info: 'info-circle',
         check_circle: 'ok-circle',
-        warning: 'exclamation-triangle',
+        warning: 'attention',
         error: 'attention-circled',
         arrow_upward: 'up-big',
         chevron_right: 'angle-right',
