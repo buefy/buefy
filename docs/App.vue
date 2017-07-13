@@ -30,14 +30,6 @@
 
     // Helpers
 
-    // Colored text
-    @each $name, $pair in $colors {
-        $color: nth($pair, 1);
-        .has-text-#{$name} {
-            color: $color;
-        }
-    }
-
     .example {
         border: 1px solid $warning;
         border-top-right-radius: $radius;
