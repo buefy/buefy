@@ -43,7 +43,7 @@
                 </div>
             </div>
         </b-modal>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
         <hr>
 
@@ -55,14 +55,14 @@
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
             <modal-form v-bind="formProps"></modal-form>
         </b-modal>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <h3 class="subtitle">ModalForm component</h3>
         <b-message type="is-warning">
             <b>Note:</b> You should't mutate a prop directly, this is just an example.
         </b-message>
-        <pre class="content" v-highlight><code class="html">{{ component | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ component | pre }}</code></pre>
 
         <hr>
 
@@ -72,7 +72,7 @@
             <button class="button is-primary is-medium" @click="imageModal">Launch image modal</button>
             <button class="button is-primary is-medium" @click="cardModal">Launch card modal</button>
         </div>
-        <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <hr>
 

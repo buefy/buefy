@@ -36,7 +36,7 @@
                     </div>
                 </b-message>
                 <b-message type="is-warning">
-                    You might also need to install <code>node-sass</code> and <code>sass-loader</code> depending on your enviroment.
+                    You might also have to install <code>node-sass</code> and <code>sass-loader</code> depending on your environment.
                 </b-message>
                 <p class="block">
                     It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag.

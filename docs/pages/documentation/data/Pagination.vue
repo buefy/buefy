@@ -55,7 +55,7 @@
                 :per-page="perPage">
             </b-pagination>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
         <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <hr>

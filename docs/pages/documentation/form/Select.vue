@@ -93,7 +93,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
             </div>
         </div>
@@ -140,7 +140,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -173,7 +173,7 @@
                 </button>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -221,7 +221,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
             </div>
         </div>
 
@@ -481,7 +481,7 @@
                                 {"id":3,"first_name":"Tina"},
                                 {"id":4,"first_name":"Clarence"},
                                 {"id":5,"first_name":"Anne"},
-                                ...
+                                // ...
                             ]
                         }
                     }

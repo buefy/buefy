@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 </b-checkbox-group>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
             </div>
         </div>

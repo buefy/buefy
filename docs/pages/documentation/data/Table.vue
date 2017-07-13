@@ -448,7 +448,9 @@
                         </b-table-column>
 
                         <b-table-column field="date" label="Date" sortable>
-                            <span v-html="formatDate(props.row.date)"></span>
+                            <span class="tag is-success">
+                                {{ new Date(props.row.date).toLocaleDateString() }}
+                            </span>
                         </b-table-column>
 
                         <b-table-column field="gender" label="Gender">
@@ -474,7 +476,7 @@
                                 {"id":3,"user":{"first_name":"Tina","last_name":"Gilbert"},"date":"2016-04-26 06:26:28","gender":"Female"},
                                 {"id":4,"user":{"first_name":"Clarence","last_name":"Flores"},"date":"2016-04-10 10:28:46","gender":"Male"},
                                 {"id":5,"user":{"first_name":"Anne","last_name":"Lee"},"date":"2016-12-06 14:38:38","gender":"Female"},
-                                ...
+                                // ...
                             ],
                             checkedRows: [],
                             selected: {},

@@ -27,8 +27,8 @@
                 </b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <h2 class="title">Position</h2>
         <div class="example">
@@ -44,7 +44,7 @@
                 <b-tab-item label="Videos"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
         <h2 class="title">Icons</h2>
         <div class="example">
@@ -54,7 +54,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
 
         <h2 class="title">Sizes</h2>
         <div class="example">
@@ -76,7 +76,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
         <h2 class="title is-spaced">Types</h2>
         <h3 class="subtitle">If you want a more classic style with borders</h3>
@@ -87,7 +87,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
 
         <h3 class="subtitle">Or like Radio Buttons</h3>
         <div class="example">
@@ -97,7 +97,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <h2 class="title is-spaced">Expanded</h2>
         <div class="example">
@@ -107,7 +107,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
 
         <hr>
 

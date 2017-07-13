@@ -44,7 +44,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
             </div>
         </div>
 
@@ -149,7 +149,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -203,7 +203,7 @@
                 </p>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
 
         <hr>
         <h2 class="title is-spaced">Groups</h2>
@@ -233,7 +233,7 @@
                 </p>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
         <hr>
         <h3 class="subtitle is-4">Nested Fields can be grouped as well</h3>
@@ -253,7 +253,7 @@
                 </b-field>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
 
         <hr>
         <h3 class="title">Combining addons and groups</h3>
@@ -273,7 +273,7 @@
                 </b-field>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <hr>
 

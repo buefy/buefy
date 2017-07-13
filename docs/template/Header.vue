@@ -32,7 +32,7 @@
                     <router-link to="/documentation" class="navbar-link">Documentation</router-link>
 
                     <div class="navbar-dropdown">
-                        <router-link to="/documentation/quick-start" class="navbar-item">Installation</router-link>
+                        <router-link to="/documentation/start" class="navbar-item">Installation</router-link>
                         <router-link to="/documentation/layout" class="navbar-item">General</router-link>
                         <router-link to="/documentation/dialog" class="navbar-item">Notices</router-link>
                         <router-link to="/documentation/field" class="navbar-item">Form</router-link>

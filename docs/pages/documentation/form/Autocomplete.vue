@@ -19,8 +19,8 @@
                 </b-autocomplete>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
 
         <h2 class="title">Object array</h2>
         <div class="example">
@@ -41,8 +41,8 @@
                 </b-autocomplete>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <h2 class="title">Async with custom template</h2>
         <p class="block"><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small></p>
@@ -77,8 +77,8 @@
                 </b-autocomplete>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <hr>
 
@@ -461,7 +461,7 @@
                                     {"id":3,"user":{"first_name":"Tina","last_name":"Gilbert"},"date":"2016-04-26 06:26:28","gender":"Female"},
                                     {"id":4,"user":{"first_name":"Clarence","last_name":"Flores"},"date":"2016-04-10 10:28:46","gender":"Male"},
                                     {"id":5,"user":{"first_name":"Anne","last_name":"Lee"},"date":"2016-12-06 14:38:38","gender":"Female"},
-                                    ...
+                                    // ...
                                 ],
                                 keepFirst: false,
                                 name: '',

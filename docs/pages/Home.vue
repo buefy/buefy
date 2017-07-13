@@ -35,9 +35,15 @@
                     </div>
 
                     <div class="buttons">
-                        <router-link class="button is-medium is-primary is-inverted is-outlined home-hero" to="/documentation/quick-start">
-                            Get Started
+                        <router-link class="button is-medium home-hero"
+                            to="/documentation/start">
+                            Get started
                         </router-link>
+                        <a class="button is-medium is-primary home-hero"
+                            href="https://github.com/rafaelpimpa/buefy/releases"
+                            target="_blank">
+                            Changelogs
+                        </a>
                     </div>
                     <small class="home-hero">v{{ version }}</small>
                 </div>

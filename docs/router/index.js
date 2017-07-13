@@ -8,7 +8,7 @@ const Home = () => import('../pages/Home')
 const Documentation = () => import('../pages/documentation/Documentation')
 
 const Installation = () => import('../pages/documentation/installation/_Installation')
-const QuickStart = () => import('../pages/documentation/installation/QuickStart')
+const Start = () => import('../pages/documentation/installation/Start')
 const Customization = () => import('../pages/documentation/installation/Customization')
 const ConstructorOptions = () => import('../pages/documentation/installation/ConstructorOptions')
 
@@ -54,8 +54,8 @@ export default new Router({
             component: Documentation,
             children: [
                 {
-                    path: 'quick-start',
-                    component: QuickStart,
+                    path: 'start',
+                    component: Start,
                     meta: {
                         category: Installation
                     }
@@ -216,7 +216,7 @@ export default new Router({
                 },
                 {
                     path: '',
-                    redirect: 'quick-start'
+                    redirect: 'start'
                 }
             ]
         }

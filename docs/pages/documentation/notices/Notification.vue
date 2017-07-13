@@ -36,7 +36,7 @@
                 </b-notification>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
             </div>
         </div>
 

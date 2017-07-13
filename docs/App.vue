@@ -38,10 +38,6 @@
         }
     }
 
-    .list-number {
-        margin-right: 0.5em;
-    }
-
     .example {
         border: 1px solid $warning;
         border-top-right-radius: $radius;

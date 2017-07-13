@@ -28,7 +28,7 @@
                 <li><a href="http://bulma.io/documentation/components/media-object/" target="_blank">Media</a></li>
             </ul>
 
-            <p class="subtitle">And many more.</p>
+            <p class="subtitle">And many more, refer to the documentation.</p>
         </div>
     </div>
 </template>

@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 

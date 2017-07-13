@@ -23,7 +23,7 @@
                 </b-tooltip>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
                 </b-tooltip>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -84,7 +84,7 @@
                 </b-tooltip>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 

@@ -40,7 +40,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -137,7 +137,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -171,7 +171,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
             </div>
         </div>
 
@@ -193,7 +193,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
             </div>
         </div>
 
@@ -229,7 +229,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
             </div>
         </div>
 

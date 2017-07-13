@@ -30,7 +30,7 @@
                 <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
         <h2 class="subtitle">Use anything you want to trigger</h2>
         <div class="example is-flex">
@@ -64,7 +64,7 @@
                 <b-dropdown-option>Something else</b-dropdown-option>
             </b-dropdown>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
         <hr>
 
@@ -119,8 +119,8 @@
                 </div>
             </nav>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <hr>
 
@@ -181,7 +181,7 @@
                 <b-input icon="search" type="search" placeholder="Search..."></b-input>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
         <hr>
 
@@ -221,7 +221,7 @@
                 </b-dropdown-option>
             </b-dropdown>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
         <pre v-highlight><code class="javascript">{{ code5 | pre }}</code></pre>
 
         <hr>
