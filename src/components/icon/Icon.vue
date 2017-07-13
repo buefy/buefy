@@ -1,11 +1,61 @@
 <template>
     <span class="icon" :class="[type, size]">
-        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
+        <i :class="[newPack.name, newPack.style === 'fa' ? `${newPack.prefix}${newIcon}` : '']">{{ newPack.style === 'mdi' ? newIcon : null }}</i>
     </span>
 </template>
 
 <script>
     import config from '../../utils/config'
+    const faPack = {
+      name: 'fa', prefix: 'fa-', style: 'fa', buefyicons: {
+        done: 'check',
+        info: 'info-circle',
+        check_circle: 'check-circle',
+        warning: 'exclamation-triangle',
+        error: 'exclamation-circle',
+        arrow_upward: 'arrow-up',
+        chevron_right: 'angle-right',
+        chevron_left: 'angle-left',
+        keyboard_arrow_down: 'angle-down',
+        visibility: 'eye',
+        visibility_off: 'eye-slash',
+        arrow_drop_down: 'caret-down',
+      }
+    };
+    const mdiPack = {
+      name: 'mdi', prefix: '', style: 'mdi', buefyicons: {
+        done: 'done',
+        info: 'info',
+        check_circle: 'check_circle',
+        warning: 'warning',
+        error: 'error',
+        arrow_upward: 'arrow_upward',
+        chevron_right: 'chevron_right',
+        chevron_left: 'chevron_left',
+        keyboard_arrow_down: 'keyboard_arrow_down',
+        visibility: 'visibility',
+        visibility_off: 'visibility_off',
+        arrow_drop_down: 'arrow_drop_down',
+      }
+    };
+    const fontelloPack = {
+      name: 'fontello', prefix: 'icon-', style: 'fa', buefyicons: {
+        done: 'ok',
+        info: 'info-circle',
+        check_circle: 'ok-circle',
+        warning: 'attention',
+        error: 'attention-circled',
+        arrow_upward: 'up-big',
+        chevron_right: 'angle-right',
+        chevron_left: 'angle-left',
+        keyboard_arrow_down: 'angle-down',
+        visibility: 'eye',
+        visibility_off: 'eye-off',
+        arrow_drop_down: 'sort-down',
+      }
+    };
+    const packs = {fa: faPack, fontello: fontelloPack, mdi: mdiPack}
+
 
     export default {
         name: 'bIcon',
@@ -18,7 +68,7 @@
         },
         data() {
             return {
-                newPack: this.pack || config.defaultIconPack
+                newPack: packs[this.pack || config.defaultIconPack],
             }
         },
         computed: {
@@ -29,33 +79,13 @@
              */
             newIcon() {
                 if (this.both) {
-                    return this.newPack === 'mdi' ? this.icon : this.equivalentIconOf(this.icon)
+                    return this.newPack.buefyicons[this.icon]
                 } else {
                     return this.icon
                 }
             }
         },
         methods: {
-            /**
-             * Equivalent FA icon name of the MDI.
-             */
-            equivalentIconOf(value) {
-                switch (value) {
-                    case 'done': return 'check'
-                    case 'info': return 'info-circle'
-                    case 'check_circle': return 'check-circle'
-                    case 'warning': return 'exclamation-triangle'
-                    case 'error': return 'exclamation-circle'
-                    case 'arrow_upward': return 'arrow-up'
-                    case 'chevron_right': return 'angle-right'
-                    case 'chevron_left': return 'angle-left'
-                    case 'keyboard_arrow_down': return 'angle-down'
-                    case 'visibility': return 'eye'
-                    case 'visibility_off': return 'eye-slash'
-                    case 'arrow_drop_down': return 'caret-down'
-                    default: return null
-                }
-            }
         }
     }
 </script>
