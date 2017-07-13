@@ -32,13 +32,13 @@ Browse the [online documentation here](https://buefy.github.io).
 
 ## Quick Start
 
-### Install via npm
+### 1 Install via npm
 
 ```bash
 npm install buefy
 ```
 
-### Import and use Buefy. You can also enable individual components
+### 2 Import and use Buefy
 
 ```javascript
 import Vue from 'vue';
@@ -51,16 +51,31 @@ Vue.use(Buefy);
 
 Vue.component(Buefy.Checkbox.name, Buefy.Checkbox);
 Vue.component(Buefy.Table.name, Buefy.Table);
-...
+Vue.component(Buefy.Switch.name, Buefy.Switch);
 ```
 
-### Include Material Design Icons
+### 3 Include Material Design Icons
 
 ```html
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 ```
 
-**Note:** If you want to customize the icons or the theme, access the [customization section on the online documentation](https://buefy.github.io/#/documentation/customization).
+If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.github.io/#/documentation/customization).
+
+### Alternatively, you can use a CDN or even download
+
+```html
+<!-- Buefy CSS -->
+<link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.css">
+
+<!-- Buefy JavaScript -->
+<script src="https://unpkg.com/buefy"></script>
+```
+
+```javascript
+// Global variable
+Vue.use(Buefy.default)
+```
 
 ## Versioning
 
