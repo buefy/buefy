@@ -41,11 +41,12 @@
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                         </th>
-                        <th v-for="(column, index) in columns" @click.stop="sort(column)"
-                            :key="index"
+                        <th v-for="(column, index) in columns"
                             v-if="column.visible"
+                            :key="index"
                             :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
-                            :style="{ width: column.width + 'px' }">
+                            :style="{ width: column.width + 'px' }"
+                            @click.stop="sort(column)">
                             <div class="th-wrap" :class="{ 'is-numeric': column.numeric }">
                                 {{ column.label }}
                                 <b-icon
