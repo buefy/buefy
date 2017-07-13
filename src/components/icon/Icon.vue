@@ -1,6 +1,6 @@
 <template>
     <span class="icon" :class="[type, size]">
-        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
+        <i :class="[newPack, iconClass]">{{ newPack === 'mdi' ? newIcon : null }}</i>
     </span>
 </template>
 
@@ -33,6 +33,17 @@
                 } else {
                     return this.icon
                 }
+            },
+            iconClass() {
+              if (this.newPack === 'fa') {
+                  return `fa-${this.newIcon}`
+              } else if(this.newPack === 'mdi') {
+                  return null;
+              } else if(this.newPack === 'fontello') {
+                  return `icon-${this.newIcon}`
+              } else {
+                  return this.newIcon // leave the icon names for customs libs
+              }
             }
         },
         methods: {
