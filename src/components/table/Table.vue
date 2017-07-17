@@ -162,6 +162,7 @@
                 isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
+                firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
         },
@@ -199,6 +200,16 @@
              */
             checkedRows(rows) {
                 this.newCheckedRows = [...rows]
+            },
+
+            /**
+             * When columns change, call initSort only first time (For example async data).
+             */
+            columns(columns) {
+                if (this.firstTimeSort) {
+                    this.initSort()
+                    this.firstTimeSort = false
+                }
             }
         },
         computed: {
@@ -391,9 +402,6 @@
                     }
                 })
             }
-        },
-        mounted() {
-            this.initSort()
         }
     }
 </script>
