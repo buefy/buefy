@@ -162,7 +162,8 @@
                 isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
-                _isTable: true // Used by TableColumn
+                _isTable: true, // Used by TableColumn
+                _firstTimeSort: true // Used by first time initSort
             }
         },
         watch: {
@@ -199,6 +200,16 @@
              */
             checkedRows(rows) {
                 this.newCheckedRows = [...rows]
+            },
+
+            /**
+             * When columns change, call initSort only first time (For example async data).
+             */
+            columns(columns) {
+                if (this.$data._firstTimeSort) {
+                    this.initSort()
+                    this.$data._firstTimeSort = false
+                }
             }
         },
         computed: {
@@ -391,9 +402,6 @@
                     }
                 })
             }
-        },
-        mounted() {
-            this.initSort()
         }
     }
 </script>
