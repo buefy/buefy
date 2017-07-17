@@ -162,8 +162,8 @@
                 isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
-                _isTable: true, // Used by TableColumn
-                _firstTimeSort: true // Used by first time initSort
+                firstTimeSort: true, // Used by first time initSort
+                _isTable: true // Used by TableColumn
             }
         },
         watch: {
@@ -206,9 +206,9 @@
              * When columns change, call initSort only first time (For example async data).
              */
             columns(columns) {
-                if (this.$data._firstTimeSort) {
+                if (this.firstTimeSort) {
                     this.initSort()
-                    this.$data._firstTimeSort = false
+                    this.firstTimeSort = false
                 }
             }
         },
