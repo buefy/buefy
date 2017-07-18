@@ -11,10 +11,6 @@ export default {
         event: 'change'
     },
     props: {
-        animated: {
-            type: Boolean,
-            default: true
-        },
         autoClose: {
             type: Boolean,
             default: true

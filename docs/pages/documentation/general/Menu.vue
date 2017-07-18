@@ -272,13 +272,6 @@
                         default: '<code>true</code>'
                     },
                     {
-                        name: '<code>animated</code>',
-                        description: 'Animate dropdown toggle',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>true</code>'
-                    },
-                    {
                         name: '<code>router</code>',
                         description: `Set it true when using a custom anchor tag or <code>router-link</code>.
                             It will handle correct menu active state if toggle <code>is-active</code> class on the custom element.`,

@@ -35,9 +35,4 @@
             margin-top: -0.125em;
         }
     }
-
-    &.is-animated > ul {
-        transition: height $speed-slow $easing,
-            margin $speed-slow $easing;
-    }
 }
