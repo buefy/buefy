@@ -1,5 +1,6 @@
 import { Checkbox, CheckboxGroup } from './components/checkbox'
 import { Dropdown, DropdownOption } from './components/dropdown'
+import { Menu, MenuDropdown, MenuItem, MenuList } from './components/menu'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
@@ -30,6 +31,10 @@ const components = {
     Field,
     Icon,
     Input,
+    Menu,
+    MenuDropdown,
+    MenuItem,
+    MenuList,
     Message,
     Modal,
     Notification,
