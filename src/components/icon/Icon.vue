@@ -53,6 +53,7 @@
                     case 'visibility': return 'eye'
                     case 'visibility_off': return 'eye-slash'
                     case 'arrow_drop_down': return 'caret-down'
+                    case 'arrow_drop_up': return 'caret-up'
                     default: return null
                 }
             }
