@@ -16,7 +16,7 @@
 
 ## Buefy Javascript styleguide
 
-* Follow the rules in ``.eslintrc.json``, general:
+* Follow the rules in ``.eslintrc.js``, general:
     * **Use camelCase**
     * **No semi-colons** ``;``
     * **4 spaces indentation**

@@ -2,9 +2,11 @@
 
 ## 0.4.6
 
+* **New component: Menu**, [see docs](https://buefy.github.io/#/documentation/menu) (thanks @tsctao)
 * Add CDN install method and JSFiddle examples
 * Fix message and notification inside ``.media`` element
 * #171 Fix modal not taking full width on mobile
+* #182 Fix table not default sorting async data (thanks @jtommy)
 
 ## 0.4.5
 

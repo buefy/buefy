@@ -306,7 +306,7 @@
                 menuDropdownSlots: [
                     {
                         name: '<code>trigger</code>',
-                        description: 'Toggling dropdown element',
+                        description: 'Toggling dropdown element'
                     }
                 ],
                 menuDropdownEvents: [

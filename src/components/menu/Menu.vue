@@ -37,7 +37,7 @@ export default {
          * Collapse all dropdowns except given dropdown.
          */
         collapse(except) {
-            let dropdowns = []
+            const dropdowns = []
             // Find all root dropdowns excluding the except one.
             this.$children.forEach((menuList) => {
                 menuList.$children.forEach((item) => {

@@ -1,47 +1,62 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
+<html lang="en">
 
-        <link rel="apple-touch-icon-precomposed" sizes="57x57"  href="/static/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114"  href="/static/apple-touch-icon-114x114.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72"  href="/static/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144"  href="/static/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon-precomposed" sizes="60x60"  href="/static/apple-touch-icon-60x60.png">
-        <link rel="apple-touch-icon-precomposed" sizes="120x120"  href="/static/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon-precomposed" sizes="76x76"  href="/static/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152"  href="/static/apple-touch-icon-152x152.png">
-        <link rel="icon" type="image/png"  href="/static/favicon-196x196.png" sizes="196x196">
-        <link rel="icon" type="image/png"  href="/static/favicon-96x96.png" sizes="96x96">
-        <link rel="icon" type="image/png"  href="/static/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png"  href="/static/favicon-16x16.png" sizes="16x16">
-        <link rel="icon" type="image/png"  href="/static/favicon-128.png" sizes="128x128">
-        <link rel="shortcut icon" href="/static/favicon.ico">
-        <meta name="application-name" content="Buefy: lightweight UI components for Vue.js based on Bulma">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
 
-        <meta property="og:locale" content="en_US">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://buefy.github.io">
-        <meta property="og:title" content="Buefy: lightweight UI components for Vue.js based on Bulma">
-        <meta property="og:site_name" content="Buefy">
-        <meta property="og:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
-        <meta property="og:image" content="https://buefy.github.io/static/buefy-banner.png">
-        <meta property="og:image:type" content="image/jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
+    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
+    <!-- Add to home screen for Android and modern mobile browsers -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#7957D5">
 
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@rafaelpimpa">
-        <meta name="twitter:title" content="Buefy: lightweight UI components for Vue.js based on Bulma">
-        <meta name="twitter:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
-        <meta name="twitter:image" content="https://buefy.github.io/static/buefy-banner.png">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="buefy">
+    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="/static/img/icons/apple-touch-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <% for (var chunk of webpack.chunks) {
+    for (var file of chunk.files) {
+        if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
+    <% }}} %>
 
-        <title>Buefy: lightweight UI components for Vue.js based on Bulma</title>
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://buefy.github.io">
+    <meta property="og:title" content="Buefy: lightweight UI components for Vue.js based on Bulma">
+    <meta property="og:site_name" content="Buefy">
+    <meta property="og:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
+    <meta property="og:image" content="https://buefy.github.io/static/img/buefy-banner.png">
+    <meta property="og:image:type" content="image/jpeg">
 
-        <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-        <div id="app"></div>
-    </body>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@rafaelpimpa">
+    <meta name="twitter:title" content="Buefy: lightweight UI components for Vue.js based on Bulma">
+    <meta name="twitter:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
+    <meta name="twitter:image" content="https://buefy.github.io/static/img/buefy-banner.png">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Buefy: lightweight UI components for Vue.js based on Bulma</title>
+</head>
+
+<body>
+    <noscript>
+        This is your fallback content in case JavaScript fails to load.
+    </noscript>
+    <div id="app"></div>
+    <!-- Todo: only include in production -->
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+    <!-- built files will be auto injected -->
+</body>
+
 </html>

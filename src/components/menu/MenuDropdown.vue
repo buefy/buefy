@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import MenuMixin from './MenuMixin';
+import MenuMixin from './MenuMixin'
 
 export default {
     name: 'bMenuDropdown',
@@ -76,9 +76,8 @@ export default {
          * set height and margin to zero.
          */
         beforeEnter(el) {
-            if (!this.menu.animated) {
-                return;
-            }
+            if (!this.menu.animated) return
+
             el.style.transition = 'none'
             el.style.overflow = 'hidden'
             el.style.height = 0
@@ -90,10 +89,9 @@ export default {
          * When active expand animation,
          * change height and margin to its actual value.
          */
-        enter (el) {
-            if (!this.menu.animated) {
-                return;
-            }
+        enter(el) {
+            if (!this.menu.animated) return
+
             el.style.transition = null
             el.style.height = `${el.scrollHeight}px`
             el.style.marginTop = null
@@ -105,9 +103,8 @@ export default {
          * set current height.
          */
         beforeLeave(el) {
-            if (!this.menu.animated) {
-                return;
-            }
+            if (!this.menu.animated) return
+
             el.style.transition = 'none'
             el.style.overflow = 'hidden'
             el.style.height = `${el.scrollHeight}px`
@@ -118,9 +115,8 @@ export default {
          * change height and margin to zero.
          */
         leave(el) {
-            if (!this.menu.animated) {
-                return;
-            }
+            if (!this.menu.animated) return
+
             el.style.transition = null
             el.style.marginTop = 0
             el.style.marginBottom = 0
@@ -135,9 +131,8 @@ export default {
          * remove the binding styles.
          */
         afterTransition(el) {
-            if (!this.menu.animated) {
-                return;
-            }
+            if (!this.menu.animated) return
+
             el.style.overflow = null
             el.style.height = null
             el.style.marginTop = null
@@ -149,15 +144,14 @@ export default {
          * reset the animation.
          */
         cancelTransition(el) {
-            if (!this.menu.animated) {
-                return;
-            }
+            if (!this.menu.animated) return
+
             el.style.transition = 'none'
             setTimeout(() => {
                 el.style.transition = null
             }, 0)
         }
     }
-};
+}
 </script>
 

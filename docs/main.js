@@ -3,7 +3,7 @@ import App from './App'
 import router from './router'
 
 import Buefy from '../src'
-import VueResource from 'vue-resource'
+import Axios from 'axios'
 import VueProgressBar from 'vue-progressbar'
 import VueAnalytics from 'vue-analytics'
 import Bluebird from 'bluebird'
@@ -13,8 +13,9 @@ Vue.config.productionTip = false
 
 global.Promise = Bluebird
 
+Vue.prototype.$http = Axios
+
 Vue.use(Buefy)
-Vue.use(VueResource)
 Vue.use(VueProgressBar, {
     color: '#7957d5',
     failedColor: '#ff3860',
@@ -73,6 +74,7 @@ Vue.filter('pre', (text) => {
     return newText
 })
 
+/* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,

@@ -6,7 +6,7 @@
 
 Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
-[![Buefy](https://github.com/rafaelpimpa/buefy/blob/master/static/buefy-banner.png)](https://buefy.github.io)
+[![Buefy](https://github.com/rafaelpimpa/buefy/blob/dev/static/img/buefy-banner.png)](https://buefy.github.io)
 
 ## Features
 

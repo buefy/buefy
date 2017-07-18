@@ -10,21 +10,21 @@
         </div>
         <b-modal :active.sync="isImageModalActive">
             <p class="image is-4by3">
-                <img src="static/placeholder-1280x960.png">
+                <img src="static/img/placeholder-1280x960.png">
             </p>
         </b-modal>
         <b-modal :active.sync="isCardModalActive" :width="640">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img src="static/placeholder-1280x960.png" alt="Image">
+                        <img src="static/img/placeholder-1280x960.png" alt="Image">
                     </figure>
                 </div>
                 <div class="card-content">
                     <div class="media">
                         <div class="media-left">
                             <figure class="image is-48x48">
-                                <img src="static/placeholder-1280x960.png" alt="Image">
+                                <img src="static/img/placeholder-1280x960.png" alt="Image">
                             </figure>
                         </div>
                         <div class="media-content">
@@ -215,7 +215,7 @@
 
                 <b-modal :active.sync="isImageModalActive">
                     <p class="image is-4by3">
-                        <img src="static/placeholder-1280x960.png">
+                        <img src="static/img/placeholder-1280x960.png">
                     </p>
                 </b-modal>
 
@@ -223,14 +223,14 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="static/placeholder-1280x960.png" alt="Image">
+                                <img src="static/img/placeholder-1280x960.png" alt="Image">
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image is-48x48">
-                                        <img src="static/placeholder-1280x960.png" alt="Image">
+                                        <img src="static/img/placeholder-1280x960.png" alt="Image">
                                     </figure>
                                 </div>
                                 <div class="media-content">
@@ -279,7 +279,7 @@
                         imageModal() {
                             this.$modal.open(
                                 \`<p class="image is-4by3">
-                                    <img src="./static/placeholder-1280x960.png">
+                                    <img src="./static/img/placeholder-1280x960.png">
                                 </p>\`
                             )
                         },
@@ -289,14 +289,14 @@
                                 content: \`<div class="card">
                                     <div class="card-image">
                                         <figure class="image is-4by3">
-                                            <img src="./static/placeholder-1280x960.png" alt="Image">
+                                            <img src="./static/img/placeholder-1280x960.png" alt="Image">
                                         </figure>
                                     </div>
                                     <div class="card-content">
                                         <div class="media">
                                             <div class="media-left">
                                                 <figure class="image is-48x48">
-                                                    <img src="./static/placeholder-1280x960.png" alt="Image">
+                                                    <img src="./static/img/placeholder-1280x960.png" alt="Image">
                                                 </figure>
                                             </div>
                                             <div class="media-content">
@@ -318,6 +318,7 @@
                         }
                     }
                 }`,
+                /*eslint-disable */
                 component: `
                 <template>
                     <form action="">
@@ -366,6 +367,7 @@
                         width: auto;
                     }
                 </style>`
+                /*eslint-enable */
             }
         },
         methods: {
@@ -382,7 +384,7 @@
             imageModal() {
                 this.$modal.open(
                     `<p class="image is-4by3">
-                        <img src="./static/placeholder-1280x960.png">
+                        <img src="./static/img/placeholder-1280x960.png">
                     </p>`
                 )
             },
@@ -392,14 +394,14 @@
                     content: `<div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                            <img src="./static/placeholder-1280x960.png" alt="Image">
+                            <img src="./static/img/placeholder-1280x960.png" alt="Image">
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                <img src="./static/placeholder-1280x960.png" alt="Image">
+                                <img src="./static/img/placeholder-1280x960.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
