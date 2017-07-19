@@ -346,6 +346,13 @@
                         type: 'Boolean',
                         values: '<code>is-left</code>, <code>is-centered</code>, <code>is-right</code>',
                         default: '<code>is-left</code>'
+                    },
+                    {
+                        name: '<code>addons</code>',
+                        description: 'Field automatically unify controls',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>true</code>'
                     }
                 ],
                 template1: `

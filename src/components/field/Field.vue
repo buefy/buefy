@@ -15,7 +15,11 @@
             message: String,
             grouped: Boolean,
             position: String,
-            expanded: Boolean
+            expanded: Boolean,
+            addons: {
+                type: Boolean,
+                default: true
+            }
         },
         data() {
             return {
@@ -64,7 +68,7 @@
             fieldType() {
                 if (this.grouped) {
                     return 'is-grouped'
-                } else if (this.$slots.default !== undefined && this.$slots.default.length > 1) {
+                } else if (this.$slots.default !== undefined && this.$slots.default.length > 1 && this.addons) {
                     return 'has-addons'
                 }
             }
