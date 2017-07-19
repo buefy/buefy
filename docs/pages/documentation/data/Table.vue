@@ -10,10 +10,13 @@
             <b-switch v-model="isNarrowed">Narrowed</b-switch>
             <b-switch v-model="isCheckable">Checkable</b-switch>
             <b-switch v-model="isLoading">Loading state</b-switch>
+        </div>
+        <div class="block">
             <b-switch v-model="isPaginated">Paginated</b-switch>
             <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
             <b-switch v-model="isEmpty">Empty</b-switch>
             <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
+            <b-switch v-model="hasDetails">Has a detail row</b-switch>
         </div>
         <div class="block">
             <b-select v-model="perPage" style="display: inline-block">
@@ -42,6 +45,7 @@
                         :bordered="isBordered"
                         :striped="isStriped"
                         :narrowed="isNarrowed"
+                        :hasDetails="hasDetails"
                         :checkable="isCheckable"
                         :loading="isLoading"
                         :mobile-cards="hasMobileCards"
@@ -49,6 +53,7 @@
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
                         :selected.sync="selected"
+                        @details-open="onOpenedDetail"
                         :checked-rows.sync="checkedRows"
                         default-sort="user.first_name">
 
@@ -83,6 +88,40 @@
                         <div slot="empty" class="has-text-centered">
                             This table is empty!
                         </div>
+                        <template slot="detail" scope="props">
+                            <div class="card">
+                                <header class="card-header">
+                                    <p class="card-header-title">
+                                        Component
+                                    </p>
+                                    <a class="card-header-icon">
+                                        <span class="icon">
+                                          <i class="fa fa-angle-down"></i>
+                                        </span>
+                                    </a>
+                                </header>
+                                <div class="card-content">
+                                <div class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="http://bulma.io/images/placeholders/64x64.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        {{ props.row.user.first_name }} {{ props.row.user.last_name }}
+                                        <a>@bulmaio</a>. <a>#css</a> <a>#responsive</a>
+                                        <br>
+                                        <small>11:09 PM - 1 Ago 2017</small>
+                                    </div>
+                                </div>
+                            </div>
+                                <footer class="card-footer">
+                                    <a class="card-footer-item">Save</a>
+                                    <a class="card-footer-item">Edit</a>
+                                    <a class="card-footer-item">Delete</a>
+                                </footer>
+                            </div>
+                        </template>
                     </b-table>
                 </b-tab-item>
 
@@ -214,6 +253,8 @@
                 isPaginated: true,
                 isPaginationSimple: false,
                 perPage: 10,
+                hasDetails: true,
+                myDefaultDetail: [],
                 tableProps: [
                     {
                         name: '<code>data</code>',
@@ -312,7 +353,15 @@
                         type: 'Function (row: Object, index: Number)',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>hasDetails</code>',
+                        description: 'Allows/disallows row details. (Check scoped slots documentation)',
+                        type: 'Boolean',
+                        values: '—',
+                        default: 'false'
                     }
+
                 ],
                 tableScopedSlots: [
                     {
@@ -322,6 +371,10 @@
                     {
                         name: 'empty',
                         props: ''
+                    },
+                    {
+                        name: 'detail',
+                        props: '<code>row: Object</code>'
                     }
                 ],
                 tableEvents: [
@@ -359,6 +412,16 @@
                         name: '<code>page-change</code>',
                         description: 'Triggers when pagination page is changed',
                         parameters: '<code>page: Number</code>'
+                    },
+                    {
+                        name: '<code>details-open</code>',
+                        description: 'Triggers when details is opened',
+                        parameters: '<code>row: Object</code>'
+                    },
+                    {
+                        name: '<code>details-close</code>',
+                        description: 'Triggers when details is closed',
+                        parameters: '<code>row: Object</code>'
                     }
                 ],
                 tableMethods: [
@@ -404,6 +467,13 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>hasDetails</code>',
+                        description: 'Set if each row has detail slot',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
                         name: '<code>visible</code>',
                         description: 'Whether the column is visible',
                         type: 'Boolean',
@@ -432,6 +502,7 @@
                     :pagination-simple="isPaginationSimple"
                     default-sort="user.first_name"
                     :selected.sync="selected"
+                    :hasDetails="hasDetails"
                     :checked-rows.sync="checkedRows">
 
                     <template scope="props">
@@ -465,6 +536,40 @@
                     <div slot="empty" class="has-text-centered">
                         This table is empty!
                     </div>
+                    <template slot="detail" scope="props">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    Component
+                                </p>
+                                <a class="card-header-icon">
+                                        <span class="icon">
+                                          <i class="fa fa-angle-down"></i>
+                                        </span>
+                                </a>
+                            </header>
+                            <div class="card-content">
+                                <div class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="http://bulma.io/images/placeholders/64x64.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        {{ props.row.user.first_name }} {{ props.row.user.last_name }}
+                                        <a>@bulmaio</a>. <a>#css</a> <a>#responsive</a>
+                                        <br>
+                                        <small>11:09 PM - 1 Ago 2017</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item">Save</a>
+                                <a class="card-footer-item">Edit</a>
+                                <a class="card-footer-item">Delete</a>
+                            </footer>
+                        </div>
+                    </template>
                 </b-table>`,
                 code: `
                 export default {
@@ -484,7 +589,9 @@
                             isStriped: false,
                             isNarrowed: false,
                             isCheckable: false,
+                            isEmpty: false,
                             isLoading: false,
+                            hasDetails: true,
                             hasMobileCards: true,
                             isPaginated: true,
                             isPaginationSimple: false,
@@ -507,6 +614,11 @@
                 return this.isEmpty
                     ? []
                     : data
+            }
+        },
+        methods: {
+            onOpenedDetail(row) {
+                this.$toast.open(`You can manage events for ${row.user.first_name}`)
             }
         }
     }

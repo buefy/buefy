@@ -38,6 +38,7 @@
                 }">
                 <thead>
                     <tr>
+                        <th v-if="hasDetails" width="40px"></th>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                         </th>
@@ -60,8 +61,8 @@
                     </tr>
                 </thead>
                 <tbody v-if="visibleData.length">
-                    <tr v-for="(row, index) in visibleData"
-                        :key="index"
+                    <template v-for="(row, index) in visibleData">
+                    <tr :key="index"
                         @click="selectRow(row)"
                         @dblclick="$emit('dblclick', row)"
                         :class="[rowClass(row, index), {
@@ -69,19 +70,39 @@
                             'is-checked': isRowChecked(row)
                         }]">
 
+                        <td v-if="hasDetails">
+                            <button class="is-transparent" @click.stop="toggleDetails(row)">
+                                <b-icon :class="{'expanded': isVisibleDetailRow(row)}"
+                                        both
+                                        icon="chevron_right"
+                                >
+                                </b-icon>
+                            </button>
+                        </td>
+
                         <td class="checkbox-cell" v-if="checkable">
                             <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
                         </td>
 
                         <slot :row="row" :index="index"></slot>
                     </tr>
+                    <template v-if="hasDetails">
+                        <tr v-show="isVisibleDetailRow(row)" class="details">
+                            <td colspan="100%">
+                                <div class="detail-container">
+                                    <slot name="detail" :row="row"></slot>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </template>
                 </tbody>
                 <tbody v-else>
-                    <tr class="is-empty">
-                        <td :colspan="checkable ? columns.length + 1 : columns.length">
-                            <slot name="empty"></slot>
-                        </td>
-                    </tr>
+                <tr class="is-empty">
+                    <td :colspan="checkable ? columns.length + 1 : columns.length">
+                        <slot name="empty"></slot>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -148,6 +169,10 @@
             },
             paginationSimple: Boolean,
             backendSorting: Boolean,
+            hasDetails: {
+                type: Boolean,
+                default: false
+            },
             rowClass: {
                 type: Function,
                 default: () => ''
@@ -156,6 +181,7 @@
         data() {
             return {
                 columns: [],
+                visibleDetailRows: [],
                 newData: this.data,
                 newCheckedRows: [...this.checkedRows],
                 currentSortColumn: {},
@@ -384,17 +410,33 @@
                 this.$emit('page-change', this.currentPage)
             },
 
+             /**
+             * Toggle to show/hide details slot
+             */
+            toggleDetails(index) {
+                const found = this.isVisibleDetailRow(index)
+                if (found) {
+                    const i = this.visibleDetailRows.indexOf(index)
+                    this.visibleDetailRows.splice(i, 1)
+                    this.$emit('details-close', index)
+                    return
+                }
+                this.visibleDetailRows.push(index)
+                this.$emit('details-open', index)
+            },
+            isVisibleDetailRow(index) {
+                return this.visibleDetailRows.indexOf(index) >= 0
+            },
+
             /**
              * Initial sorted column based on the default-sort prop.
              */
             initSort() {
                 if (!this.defaultSort) return
-
                 const sortField = Array.isArray(this.defaultSort)
                     ? this.defaultSort[0]
                     : this.defaultSort
                 const direction = this.defaultSort[1] || ''
-
                 this.columns.forEach(column => {
                     if (column.field === sortField) {
                         this.isAsc = direction.toLowerCase() !== 'desc'
