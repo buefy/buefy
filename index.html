@@ -16,17 +16,20 @@
 
     <!-- Add to home screen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="buefy">
     <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
     <!-- Add to home screen for Windows -->
     <meta name="msapplication-TileImage" content="/static/img/icons/apple-touch-icon-144x144.png">
     <meta name="msapplication-TileColor" content="#FFFFFF">
     <% for (var chunk of webpack.chunks) {
-    for (var file of chunk.files) {
-        if (file.match(/\.(js|css)$/)) { %>
+        for (var file of chunk.files) {
+            if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
     <% }}} %>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
@@ -43,15 +46,12 @@
     <meta name="twitter:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
     <meta name="twitter:image" content="https://buefy.github.io/static/img/buefy-banner.png">
 
-    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <title>Buefy: lightweight UI components for Vue.js based on Bulma</title>
 </head>
 
 <body>
     <noscript>
-        This is your fallback content in case JavaScript fails to load.
+        This website needs JavaScript enabled to work correctly.
     </noscript>
     <div id="app"></div>
     <!-- Todo: only include in production -->
