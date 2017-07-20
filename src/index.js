@@ -19,6 +19,7 @@ import Dialog from './components/dialog'
 import ModalProgrammatic, { Modal } from './components/modal'
 import Snackbar from './components/snackbar'
 import Toast from './components/toast'
+import LoadingProgrammatic, { Loading } from './components/loading'
 
 import config, { setOptions } from './utils/config'
 
@@ -31,6 +32,7 @@ const components = {
     Field,
     Icon,
     Input,
+    Loading,
     Menu,
     MenuDropdown,
     MenuItem,
@@ -67,6 +69,7 @@ components.install = (Vue, options = {}) => {
     Vue.prototype.$modal = ModalProgrammatic
     Vue.prototype.$toast = Toast
     Vue.prototype.$dialog = Dialog
+    Vue.prototype.$loading = LoadingProgrammatic
 }
 
 export default components
