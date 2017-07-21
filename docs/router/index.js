@@ -34,6 +34,7 @@ const Select = (r) => require(['../pages/documentation/form/Select'], r)
 const Checkbox = (r) => require(['../pages/documentation/form/Checkbox'], r)
 const Radio = (r) => require(['../pages/documentation/form/Radio'], r)
 const Switch = (r) => require(['../pages/documentation/form/Switch'], r)
+const Datepicker = (r) => require(['../pages/documentation/form/Datepicker'], r)
 
 import Data from '../pages/documentation/data/_Data'
 const Table = (r) => require(['../pages/documentation/data/Table'], r)
@@ -189,6 +190,13 @@ export default new Router({
                 {
                     path: 'switch',
                     component: Switch,
+                    meta: {
+                        category: Form
+                    }
+                },
+                {
+                    path: 'datepicker',
+                    component: Datepicker,
                     meta: {
                         category: Form
                     }

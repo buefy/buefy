@@ -1,4 +1,5 @@
 import { Checkbox, CheckboxGroup } from './components/checkbox'
+import { Datepicker, DatepickerTable, DatepickerTableRow } from './components/datepicker'
 import { Dropdown, DropdownOption } from './components/dropdown'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
@@ -25,6 +26,9 @@ const components = {
     Autocomplete,
     Checkbox,
     CheckboxGroup,
+    Datepicker,
+    DatepickerTable,
+    DatepickerTableRow,
     Dropdown,
     DropdownOption,
     Field,
