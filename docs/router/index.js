@@ -18,6 +18,7 @@ const Icon = () => import('../pages/documentation/general/Icon')
 const Dropdown = () => import('../pages/documentation/general/Dropdown')
 const Menu = () => import('../pages/documentation/general/Menu')
 const Modal = () => import('../pages/documentation/general/Modal')
+const Panel = () => import('../pages/documentation/general/Panel')
 const Tabs = () => import('../pages/documentation/general/Tabs')
 const Tooltip = () => import('../pages/documentation/general/Tooltip')
 
@@ -120,6 +121,13 @@ export default new Router({
                 {
                     path: 'tabs',
                     component: Tabs,
+                    meta: {
+                        category: General
+                    }
+                },
+                {
+                    path: 'panel',
+                    component: Panel,
                     meta: {
                         category: General
                     }
