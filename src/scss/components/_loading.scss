@@ -1,18 +1,30 @@
 
+.loading-overlay {
+    @include overlay;
+    align-items: center;
+    display: none;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    z-index: 20;
+    &.is-active {
+        display: flex
+    }
+    .loading-icon {
+        position: relative;
+        &:after {
+            @include loader;
+            position: absolute;
+            top: 0;
+            left: calc(50% - 2.5em);
+            width: 5em;
+            height: 5em;
+            border-width: 0.25em;
+        }
+    }
+}
+
 .is-loading {
     pointer-events: none;
     opacity: 0.5;
-}
-
-.loader-icon {
-    position: relative;
-    &:after {
-        @include loader;
-        position: absolute;
-        top: 4em;
-        left: calc(50% - 2.5em);
-        width: 5em;
-        height: 5em;
-        border-width: 0.25em;
-    }
 }

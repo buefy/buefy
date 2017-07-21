@@ -1,7 +1,7 @@
 <template>
     <transition :name="animation">
-        <div class="modal is-active" v-if="isActive">
-            <div class="loader-icon"></div>
+        <div class="loading-overlay is-active" v-if="isActive">
+            <div class="loading-icon"></div>
         </div>
     </transition>
 </template>
