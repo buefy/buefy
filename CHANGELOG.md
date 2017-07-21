@@ -3,6 +3,7 @@
 ## 0.4.6
 
 * **New component: Menu**, [see docs](https://buefy.github.io/#/documentation/menu) (thanks @tsctao)
+* **New component: Panel**, [see docs](https://buefy.github.io/#/documentation/panel) (thanks @jtommy)
 * Add CDN install method and JSFiddle examples
 * Add boolean ``addons`` prop to field
 * Fix message and notification inside ``.media`` element
