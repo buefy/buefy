@@ -4,9 +4,9 @@
         <h2 class="subtitle">A simple loading overlay</h2>
         <hr>
 
-        <div class="block">
+        <div class="content">
+            <p>The Loading will be closed after about 10 seconds or by pressing escape or clicking outside</p>
             <button class="button is-primary is-medium" @click="openLoading">Show Loading</button>
-            (about 10 seconds or by clicking outside)
         </div>
         <b-loading :active.sync="isLoading" :canCancel="true"></b-loading>
         <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
@@ -15,9 +15,9 @@
 
         <h2 class="title is-spaced">Programmatically opening Loading Overlay</h2>
 
-        <div class="block">
+        <div class="content">
+            <p>When you want to close the Loading, call the 'close' method from the component</p>
             <button class="button is-primary is-medium" @click="openProgrammaticallyLoading">Show Loading</button>
-            (about 3 seconds)
         </div>
         <pre class="block" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
@@ -109,9 +109,9 @@
                     }
                 ],
                 template1: `
-                <div class="block">
+                <div class="content">
+                    <p>The Loading will be closed after about 10 seconds or by pressing enter or clicking outside</p>
                     <button class="button is-primary is-medium" @click="openLoading">Show Loading</button>
-                    (about 10 seconds or by clicking outside)
                 </div>
                 <b-loading :active.sync="isLoading" :canCancel="true"></b-loading>
                 `,
