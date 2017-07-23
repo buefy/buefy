@@ -6,9 +6,9 @@
 
         <div class="block">
             <button class="button is-primary is-medium" @click="openLoading">Show Loading</button>
-            (about 3 seconds)
+            (about 10 seconds or by clicking outside)
         </div>
-        <b-loading :active.sync="isLoading"></b-loading>
+        <b-loading :active.sync="isLoading" :canCancel="true"></b-loading>
         <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
         <hr>
@@ -85,21 +85,35 @@
                         type: 'String',
                         values: '—',
                         default: '<code>fade</code>'
+                    },
+                    {
+                        name: '<code>canCancel</code>',
+                        description: `Can close Loading by pressing escape or clicking outside`,
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>onCancel</code>',
+                        description: `Callback function to call after user canceled (pressed escape / clicked outside)`,
+                        type: 'Function',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 events: [
                     {
                         name: '<code>close</code>',
-                        description: 'Triggers when called programmatically from the injected component',
+                        description: 'Triggers when user closed/canceled or called programmatically from the injected component',
                         parameters: '—'
                     }
                 ],
                 template1: `
                 <div class="block">
                     <button class="button is-primary is-medium" @click="openLoading">Show Loading</button>
-                    (about 3 seconds)
+                    (about 10 seconds or by clicking outside)
                 </div>
-                <b-loading :active.sync="isLoading"></b-loading>
+                <b-loading :active.sync="isLoading" :canCancel="true"></b-loading>
                 `,
                 code2: `
                 export default {
@@ -120,7 +134,7 @@
                 vm.isLoading = true
                 setTimeout(() => {
                     vm.isLoading = false
-                }, 3 * 1000)
+                }, 10 * 1000)
             },
             openProgrammaticallyLoading() {
                 const loadingComponent = this.$loading.open()

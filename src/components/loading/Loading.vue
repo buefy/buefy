@@ -1,6 +1,7 @@
 <template>
     <transition :name="animation">
         <div class="loading-overlay is-active" v-if="isActive">
+            <div class="loading-background" @click="cancel"></div>
             <div class="loading-icon"></div>
         </div>
     </transition>
@@ -15,6 +16,14 @@
             animation: {
                 type: String,
                 default: 'fade'
+            },
+            canCancel: {
+                type: Boolean,
+                default: false
+            },
+            onCancel: {
+                type: Function,
+                default: () => {}
             }
         },
         data() {
@@ -25,20 +34,26 @@
         watch: {
             active(value) {
                 this.isActive = value
-            },
-            isActive() {
-                const action = this.isActive ? 'add' : 'remove'
-                document.body.classList[action]('is-loading')
             }
         },
         methods: {
             /**
+             * Close the Modal if canCancel.
+             */
+            cancel() {
+                if (!this.canCancel) return
+
+                this.close()
+            },
+            /**
              * Emit events, and destroy modal if it's programmatic.
              */
             close() {
+                this.onCancel.apply(null, arguments)
                 this.$emit('close')
                 this.$emit('update:active', false)
 
+                // Timeout for the animation complete before destroying
                 if (this.programmatic) {
                     this.isActive = false
                     setTimeout(() => {
@@ -46,6 +61,18 @@
                         this.$el.remove()
                     }, 150)
                 }
+            },
+            /**
+             * Keypress event that is bound to the document.
+             */
+            keyPress(event) {
+                // Esc key
+                if (event.keyCode === 27) this.cancel()
+            }
+        },
+        created() {
+            if (typeof window !== 'undefined') {
+                document.addEventListener('keyup', this.keyPress)
             }
         },
         beforeMount() {
@@ -55,12 +82,11 @@
         },
         mounted() {
             if (this.programmatic) this.isActive = true
-            else if (this.isActive) {
-                document.body.classList['add']('is-loading')
-            }
         },
         beforeDestroy() {
-            document.body.classList['remove']('is-loading')
+            if (typeof window !== 'undefined') {
+                document.removeEventListener('keyup', this.keyPress)
+            }
         }
     }
 </script>
