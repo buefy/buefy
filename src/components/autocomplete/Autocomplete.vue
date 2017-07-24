@@ -1,9 +1,8 @@
 <template>
-    <div class="autocomplete control" :class="size">
+    <div class="autocomplete control" :class="{size, 'is-expanded': expanded}">
         <b-input v-model="newValue"
             ref="input"
             :size="size"
-            :expanded="expanded"
             :loading="loading"
             :icon="icon"
             :icon-pack="iconPack"
