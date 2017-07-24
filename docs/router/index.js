@@ -28,6 +28,7 @@ const Toast = () => import('../pages/documentation/notices/Toast')
 const Snackbar = () => import('../pages/documentation/notices/Snackbar')
 const Notification = () => import('../pages/documentation/notices/Notification')
 const Message = () => import('../pages/documentation/notices/Message')
+const Loading = () => import('../pages/documentation/notices/Loading')
 
 const Form = () => import('../pages/documentation/form/_Form')
 const Field = () => import('../pages/documentation/form/Field')
@@ -163,6 +164,13 @@ export default new Router({
                 {
                     path: 'message',
                     component: Message,
+                    meta: {
+                        category: Notices
+                    }
+                },
+                {
+                    path: 'loading',
+                    component: Loading,
                     meta: {
                         category: Notices
                     }
