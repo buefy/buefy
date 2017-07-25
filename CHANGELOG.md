@@ -6,6 +6,8 @@
 * **New component: Panel**, [see docs](https://buefy.github.io/#/documentation/panel) (thanks @jtommy)
 * **New component: Loading**, [see docs](https://buefy.github.io/#/documentation/loading) (thanks @jtommy)
 * **Dropdown improved**: can add any content on it, can be triggered by hover, [see docs](https://buefy.github.io/#/documentation/dropdown)
+* Remove ``narrowed`` prop from dropdown
+* Update Bulma to v0.4.4
 * Add CDN install method and JSFiddle examples
 * Add boolean ``addons`` prop to field
 * Fix message and notification inside ``.media`` element

@@ -164,7 +164,7 @@
                             </b-dropdown-option>
                             <b-dropdown-option value="logout">
                                 <b-icon icon="exit_to_app"></b-icon>
-                                Logout (link)
+                                Logout
                             </b-dropdown-option>
                         </b-dropdown>
                     </div>
@@ -561,7 +561,7 @@
                                 </b-dropdown-option>
                                 <b-dropdown-option value="logout">
                                     <b-icon icon="exit_to_app"></b-icon>
-                                    Logout (link)
+                                    Logout
                                 </b-dropdown-option>
                             </b-dropdown>
                         </div>
