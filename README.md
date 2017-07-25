@@ -11,17 +11,11 @@ Buefy is a lightweight library of responsive UI components for [Vue.js](https://
 ## Features
 
 * Keep your current Bulma theme / variables easily
-
 * Supports both [Material Design Icons](https://material.io/icons/) and [FontAwesome](http://fontawesome.io/)
-
 * Very lightweight with none internal dependencies aside from Vue & Bulma
-
 * About 60KB min+gzip (with Bulma included)
-
 * Semantic code output
-
 * Follows Bulma design and some of the [Material Design UX](https://material.io/)
-
 * Focus on usability and performance without *over-animations*
 
 ## Documentation and Demo
@@ -31,6 +25,8 @@ The documentation is in the docs directory, it serves as the demo as well.
 Browse the [online documentation here](https://buefy.github.io).
 
 ## Quick Start
+
+You need [Vue.js](https://vuejs.org/) **version 2.3+**.
 
 ### 1 Install via npm
 

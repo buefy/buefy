@@ -6,6 +6,9 @@
         <hr>
 
         <h3 class="title">Install</h3>
+        <b-message type="is-warning">
+            You need <a href="https://vuejs.org" target="_blank">Vue.js</a> <b>version 2.3+</b>.
+        </b-message>
         <div class="media">
             <div class="media-left">
                 <h3 class="subtitle">1</h3>
@@ -45,7 +48,7 @@
                 <pre class="block" v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
 
                 <b-message type="is-info">
-                    If you're using Nuxt.js for Server Side Rendering (SSR), then follow this:
+                    If you're using Nuxt.js for Server Side Rendering (SSR), then follow these steps:
                 </b-message>
                 <div class="content">
                     <ol>
