@@ -254,7 +254,6 @@
                 isPaginationSimple: false,
                 perPage: 10,
                 hasDetails: true,
-                myDefaultDetail: [],
                 tableProps: [
                     {
                         name: '<code>data</code>',
