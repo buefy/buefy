@@ -15,6 +15,8 @@
 * #118 Add Nuxt.js installation on docs
 * #171 Fix modal not taking full width on mobile
 * #182 Fix table not default sorting async data (thanks @jtommy)
+* #184 Add ``input`` event on docs (input/autocomplete)
+* #190 Add Vue.js required version on docs
 * #197 Fix autocomplete ``expanded`` prop not working correctly
 
 ## 0.4.5

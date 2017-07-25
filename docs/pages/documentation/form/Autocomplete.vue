@@ -355,7 +355,7 @@
                 ],
                 events: [
                     {
-                        name: '<code>change</code>',
+                        name: '<code>input</code>',
                         description: 'Triggers when input text is changed',
                         parameters: '<code>value: String</code>'
                     },

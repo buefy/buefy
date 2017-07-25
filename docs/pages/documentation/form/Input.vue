@@ -464,8 +464,8 @@
                         parameters: '<code>event: $event</code>'
                     },
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when input value is changed',
+                        name: '<code>input</code>',
+                        description: 'Triggers when input text is changed',
                         parameters: '<code>value: String/Number</code>'
                     }
                 ],
