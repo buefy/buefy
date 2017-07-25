@@ -4,11 +4,16 @@
 
 * **New component: Menu**, [see docs](https://buefy.github.io/#/documentation/menu) (thanks @tsctao)
 * **New component: Panel**, [see docs](https://buefy.github.io/#/documentation/panel) (thanks @jtommy)
+* **New component: Loading**, [see docs](https://buefy.github.io/#/documentation/loading) (thanks @jtommy)
+* **Dropdown improved**: can add any content on it, can be triggered by hover, [see docs](https://buefy.github.io/#/documentation/dropdown)
 * Add CDN install method and JSFiddle examples
 * Add boolean ``addons`` prop to field
 * Fix message and notification inside ``.media`` element
+* Fix pagination current page to not be clickable (thanks @jtommy)
+* #118 Add Nuxt.js installation on docs
 * #171 Fix modal not taking full width on mobile
 * #182 Fix table not default sorting async data (thanks @jtommy)
+* #197 Fix autocomplete ``expanded`` prop not working correctly
 
 ## 0.4.5
 

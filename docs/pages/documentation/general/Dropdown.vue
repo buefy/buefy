@@ -2,15 +2,29 @@
     <div class="container">
         <h1 class="title is-spaced">Dropdown</h1>
         <h2 class="subtitle">
-            Dropdowns are very versatile, you can use as a quick menu or even like a select.
-            It's toggled by clicking, and looks like a modal when you're on tablet or smartphone
+            Dropdowns are very versatile, can used as a quick menu or even like a select for discoverable content
         </h2>
         <hr>
 
+        <p class="content">
+            While it appear as a modal for tablet and smartphones,
+            Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
+        </p>
         <div class="example">
             <b-dropdown>
-                <button class="button" slot="trigger">
-                    <span>Dropdown</span>
+                <button class="button is-primary" slot="trigger">
+                    <span>Click me!</span>
+                    <b-icon icon="arrow_drop_down"></b-icon>
+                </button>
+
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
+            </b-dropdown>
+
+            <b-dropdown hoverable>
+                <button class="button is-info" slot="trigger">
+                    <span>Hover me!</span>
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
 
@@ -21,9 +35,19 @@
 
             <b-dropdown disabled>
                 <button class="button" slot="trigger">
-                    <span>Dropdown</span>
+                    <span>Disabled</span>
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
+
+                <b-dropdown-option>Action</b-dropdown-option>
+                <b-dropdown-option>Another action</b-dropdown-option>
+                <b-dropdown-option>Something else</b-dropdown-option>
+            </b-dropdown>
+
+            <b-dropdown>
+                <p class="tag is-success" slot="trigger">
+                    Custom trigger
+                </p>
 
                 <b-dropdown-option>Action</b-dropdown-option>
                 <b-dropdown-option>Another action</b-dropdown-option>
@@ -32,156 +56,123 @@
         </div>
         <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
-        <h2 class="subtitle">Use anything you want to trigger</h2>
-        <div class="example is-flex">
-            <b-dropdown>
-                <figure slot="trigger">
-                    <img src="../../../assets/buefy.png" width="94">
-                </figure>
+        <hr>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
-            </b-dropdown>
+        <h2 class="title is-spaced">Dropdown content and position</h2>
+        <p class="content">Add the <code>subheader</code> prop to the option to add <strong>any type of content</strong>.</p>
+        <div class="example is-paddingless">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a class="navbar-item">
+                        <img src="../../../assets/buefy.png" alt="Buefy">
+                    </a>
+                    <a class="navbar-item"><b-icon pack="fa" icon="github"></b-icon></a>
+                    <a class="navbar-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
+                </div>
 
-            <b-dropdown>
-                <button class="button" slot="trigger">
-                    <b-icon icon="more_vert"></b-icon>
-                </button>
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        <b-dropdown v-model="navigation" position="is-bottom-left">
+                            <a class="navbar-item" slot="trigger">
+                                <span>Login</span>
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </a>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
-            </b-dropdown>
+                            <b-dropdown-option subheader paddingless>
+                                <form action="">
+                                    <div class="modal-card" style="width:300px;">
+                                        <section class="modal-card-body">
+                                            <b-field label="Email">
+                                                <b-input
+                                                    type="email"
+                                                    placeholder="Your email"
+                                                    required>
+                                                </b-input>
+                                            </b-field>
 
-            <b-dropdown>
-                <h1 class="title" slot="trigger">
-                    Click me!
-                </h1>
+                                            <b-field label="Password">
+                                                <b-input
+                                                    type="password"
+                                                    password-reveal
+                                                    placeholder="Your password"
+                                                    required>
+                                                </b-input>
+                                            </b-field>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
-            </b-dropdown>
+                                            <b-checkbox>Remember me</b-checkbox>
+                                        </section>
+                                        <footer class="modal-card-foot">
+                                            <button class="button is-primary">Login</button>
+                                        </footer>
+                                    </div>
+                                </form>
+                            </b-dropdown-option>
+                        </b-dropdown>
+                    </div>
+                </div>
+            </nav>
         </div>
         <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
         <hr>
 
-        <h2 class="title is-spaced">Within a nav</h2>
-        <h3 class="subtitle">Note that you need a <code>overflow: visible</code> at the wrapper</h3>
+        <p class="content">Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an option.</p>
         <div class="example is-paddingless">
-            <nav class="nav is-primary">
-                <div class="nav-left">
-                    <a class="nav-item">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a class="navbar-item">
                         <img src="../../../assets/buefy.png" alt="Buefy">
                     </a>
+                    <a class="navbar-item"><b-icon pack="fa" icon="github"></b-icon></a>
+                    <a class="navbar-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
                 </div>
 
-                <div class="nav-center">
-                    <a class="nav-item"><b-icon pack="fa" icon="github"></b-icon></a>
-                    <a class="nav-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
-                </div>
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        <b-dropdown v-model="navigation" position="is-bottom-left">
+                            <a class="navbar-item" slot="trigger">
+                                <span>Menu</span>
+                                <b-icon icon="arrow_drop_down"></b-icon>
+                            </a>
 
-                <div class="nav-right" style="overflow: visible">
-                    <b-dropdown v-model="navigation" position="is-bottom-left">
-                        <a class="nav-item" slot="trigger">
-                            <span>Menu</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </a>
-
-                        <b-dropdown-option subheader>
-                            Logged as <b>Rafael Beraldo</b>
-                        </b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="home">
-                            <b-icon icon="home"></b-icon>
-                            Home
-                        </b-dropdown-option>
-                        <b-dropdown-option value="products">
-                            <b-icon icon="shopping_cart"></b-icon>
-                            Products
-                        </b-dropdown-option>
-                        <b-dropdown-option value="blog" disabled>
-                            <b-icon icon="art_track"></b-icon>
-                            Blog
-                        </b-dropdown-option>
-                        <b-dropdown-option separator></b-dropdown-option>
-                        <b-dropdown-option value="settings">
-                            <b-icon icon="settings"></b-icon>
-                            Settings
-                        </b-dropdown-option>
-                        <b-dropdown-option value="logout">
-                            <b-icon icon="exit_to_app"></b-icon>
-                            Logout
-                        </b-dropdown-option>
-                    </b-dropdown>
+                            <b-dropdown-option subheader>
+                                Logged as <b>Rafael Beraldo</b>
+                            </b-dropdown-option>
+                            <hr class="dropdown-divider">
+                            <b-dropdown-option has-link>
+                                <a href="https://google.com" target="_blank">
+                                    <b-icon icon="link"></b-icon>
+                                    Google (link)
+                                </a>
+                            </b-dropdown-option>
+                            <b-dropdown-option value="home">
+                                <b-icon icon="home"></b-icon>
+                                Home
+                            </b-dropdown-option>
+                            <b-dropdown-option value="products">
+                                <b-icon icon="shopping_cart"></b-icon>
+                                Products
+                            </b-dropdown-option>
+                            <b-dropdown-option value="blog" disabled>
+                                <b-icon icon="art_track"></b-icon>
+                                Blog
+                            </b-dropdown-option>
+                            <hr class="dropdown-divider">
+                            <b-dropdown-option value="settings">
+                                <b-icon icon="settings"></b-icon>
+                                Settings
+                            </b-dropdown-option>
+                            <b-dropdown-option value="logout">
+                                <b-icon icon="exit_to_app"></b-icon>
+                                Logout (link)
+                            </b-dropdown-option>
+                        </b-dropdown>
+                    </div>
                 </div>
             </nav>
         </div>
         <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
         <pre class="block" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
-
-        <hr>
-
-        <h2 class="title">With addons</h2>
-        <div class="example">
-            <b-field>
-                <p class="control">
-                    <button class="button">
-                        Button
-                    </button>
-                </p>
-                <p class="control">
-                    <b-dropdown>
-                        <button class="button" slot="trigger">
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
-
-                        <b-dropdown-option>Action</b-dropdown-option>
-                        <b-dropdown-option>Another action</b-dropdown-option>
-                        <b-dropdown-option>Something else</b-dropdown-option>
-                    </b-dropdown>
-                </p>
-            </b-field>
-
-            <b-field>
-                <p class="control">
-                    <button class="button is-primary">
-                        Button
-                    </button>
-                </p>
-                <p class="control">
-                    <b-dropdown>
-                        <button class="button is-primary" slot="trigger">
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
-
-                        <b-dropdown-option>Action</b-dropdown-option>
-                        <b-dropdown-option>Another action</b-dropdown-option>
-                        <b-dropdown-option>Something else</b-dropdown-option>
-                    </b-dropdown>
-                </p>
-            </b-field>
-
-            <b-field>
-                <p class="control">
-                    <b-dropdown>
-                        <button class="button" slot="trigger">
-                            <span>Filters</span>
-                            <b-icon icon="arrow_drop_down"></b-icon>
-                        </button>
-
-                        <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                        <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                        <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                        <b-dropdown-option value="everything">Everything</b-dropdown-option>
-                    </b-dropdown>
-                </p>
-                <b-input icon="search" type="search" placeholder="Search..."></b-input>
-            </b-field>
-        </div>
-        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
         <hr>
 
@@ -221,8 +212,8 @@
                 </b-dropdown-option>
             </b-dropdown>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
-        <pre v-highlight><code class="javascript">{{ code5 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre v-highlight><code class="javascript">{{ code4 | pre }}</code></pre>
 
         <hr>
 
@@ -339,22 +330,22 @@
                         default: '<code>null</code>'
                     },
                     {
-                        name: '<code>position</code>',
-                        description: 'Position of the dropdown relative to the trigger',
-                        type: 'String',
-                        values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom-left</code>',
-                        default: '<code>is-bottom-right</code>'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Disables dropdown',
+                        name: '<code>hoverable</code>',
+                        description: 'Dropdown will be triggered by hover instead of click',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>narrowed</code>',
-                        description: 'Makes items narrower',
+                        name: '<code>position</code>',
+                        description: 'Optional, position of the dropdown relative to the trigger',
+                        type: 'String',
+                        values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-left</code>',
+                        default: 'Bottom right'
+                    },
+                    {
+                        name: '<code>disabled</code>',
+                        description: 'Disables dropdown',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -413,6 +404,13 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>paddingless</code>',
+                        description: 'Remove padding',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
                 ],
                 optionEvents: [
@@ -424,8 +422,19 @@
                 ],
                 template1: `
                 <b-dropdown>
-                    <button class="button" slot="trigger">
-                        <span>Dropdown</span>
+                    <button class="button is-primary" slot="trigger">
+                        <span>Click me!</span>
+                        <b-icon icon="arrow_drop_down"></b-icon>
+                    </button>
+
+                    <b-dropdown-option>Action</b-dropdown-option>
+                    <b-dropdown-option>Another action</b-dropdown-option>
+                    <b-dropdown-option>Something else</b-dropdown-option>
+                </b-dropdown>
+
+                <b-dropdown hoverable>
+                    <button class="button is-info" slot="trigger">
+                        <span>Hover me!</span>
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
@@ -436,90 +445,126 @@
 
                 <b-dropdown disabled>
                     <button class="button" slot="trigger">
-                        <span>Dropdown</span>
+                        <span>Disabled</span>
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
                     <b-dropdown-option>Action</b-dropdown-option>
                     <b-dropdown-option>Another action</b-dropdown-option>
                     <b-dropdown-option>Something else</b-dropdown-option>
-                </b-dropdown>`,
-                template2: `
-                <b-dropdown>
-                    <figure slot="trigger">
-                        <img src="assets/buefy.png" width="94">
-                    </figure>
-
-                    <b-dropdown-option>Action</b-dropdown-option>
-                    <b-dropdown-option>Another action</b-dropdown-option>
-                    <b-dropdown-option>Something else</b-dropdown-option>
                 </b-dropdown>
 
                 <b-dropdown>
-                    <button class="button" slot="trigger">
-                        <b-icon icon="more_vert"></b-icon>
-                    </button>
-
-                    <b-dropdown-option>Action</b-dropdown-option>
-                    <b-dropdown-option>Another action</b-dropdown-option>
-                    <b-dropdown-option>Something else</b-dropdown-option>
-                </b-dropdown>
-
-                <b-dropdown>
-                    <h1 class="title" slot="trigger">
-                        Click me!
-                    </h1>
+                    <p class="tag is-success" slot="trigger">
+                        Custom trigger
+                    </p>
 
                     <b-dropdown-option>Action</b-dropdown-option>
                     <b-dropdown-option>Another action</b-dropdown-option>
                     <b-dropdown-option>Something else</b-dropdown-option>
                 </b-dropdown>`,
-                template3: `
-                <nav class="nav is-primary">
-                    <div class="nav-left">
-                        <a class="nav-item">
+                template2: `
+                <nav class="navbar">
+                    <div class="navbar-brand">
+                        <a class="navbar-item">
                             <img src="../../../assets/buefy.png" alt="Buefy">
                         </a>
+                        <a class="navbar-item"><b-icon pack="fa" icon="github"></b-icon></a>
+                        <a class="navbar-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
                     </div>
 
-                    <div class="nav-center">
-                        <a class="nav-item"><b-icon pack="fa" icon="github"></b-icon></a>
-                        <a class="nav-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
+                    <div class="navbar-menu">
+                        <div class="navbar-end">
+                            <b-dropdown v-model="navigation" position="is-bottom-left">
+                                <a class="navbar-item" slot="trigger">
+                                    <span>Login</span>
+                                    <b-icon icon="arrow_drop_down"></b-icon>
+                                </a>
+
+                                <b-dropdown-option subheader paddingless>
+                                    <form action="">
+                                        <div class="modal-card" style="width:300px;">
+                                            <section class="modal-card-body">
+                                                <b-field label="Email">
+                                                    <b-input
+                                                        type="email"
+                                                        placeholder="Your email"
+                                                        required>
+                                                    </b-input>
+                                                </b-field>
+
+                                                <b-field label="Password">
+                                                    <b-input
+                                                        type="password"
+                                                        password-reveal
+                                                        placeholder="Your password"
+                                                        required>
+                                                    </b-input>
+                                                </b-field>
+
+                                                <b-checkbox>Remember me</b-checkbox>
+                                            </section>
+                                            <footer class="modal-card-foot">
+                                                <button class="button is-primary">Login</button>
+                                            </footer>
+                                        </div>
+                                    </form>
+                                </b-dropdown-option>
+                            </b-dropdown>
+                        </div>
+                    </div>
+                </nav>`,
+                template3: `
+                <nav class="navbar">
+                    <div class="navbar-brand">
+                        <a class="navbar-item">
+                            <img src="../../../assets/buefy.png" alt="Buefy">
+                        </a>
+                        <a class="navbar-item"><b-icon pack="fa" icon="github"></b-icon></a>
+                        <a class="navbar-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
                     </div>
 
-                    <div class="nav-right" style="overflow: visible">
-                        <b-dropdown v-model="navigation" position="is-bottom-left">
-                            <a class="nav-item" slot="trigger">
-                                <span>Menu</span>
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </a>
+                    <div class="navbar-menu">
+                        <div class="navbar-end">
+                            <b-dropdown v-model="navigation" position="is-bottom-left">
+                                <a class="navbar-item" slot="trigger">
+                                    <span>Menu</span>
+                                    <b-icon icon="arrow_drop_down"></b-icon>
+                                </a>
 
-                            <b-dropdown-option subheader>
-                                Logged as <b>Rafael Beraldo</b>
-                            </b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="home">
-                                <b-icon icon="home"></b-icon>
-                                Home
-                            </b-dropdown-option>
-                            <b-dropdown-option value="products">
-                                <b-icon icon="shopping_cart"></b-icon>
-                                Products
-                            </b-dropdown-option>
-                            <b-dropdown-option value="blog" disabled>
-                                <b-icon icon="art_track"></b-icon>
-                                Blog
-                            </b-dropdown-option>
-                            <b-dropdown-option separator></b-dropdown-option>
-                            <b-dropdown-option value="settings">
-                                <b-icon icon="settings"></b-icon>
-                                Settings
-                            </b-dropdown-option>
-                            <b-dropdown-option value="logout">
-                                <b-icon icon="exit_to_app"></b-icon>
-                                Logout
-                            </b-dropdown-option>
-                        </b-dropdown>
+                                <b-dropdown-option subheader>
+                                    Logged as <b>Rafael Beraldo</b>
+                                </b-dropdown-option>
+                                <hr class="dropdown-divider">
+                                <b-dropdown-option has-link>
+                                    <a href="https://google.com" target="_blank">
+                                        <b-icon icon="link"></b-icon>
+                                        Google (link)
+                                    </a>
+                                </b-dropdown-option>
+                                <b-dropdown-option value="home">
+                                    <b-icon icon="home"></b-icon>
+                                    Home
+                                </b-dropdown-option>
+                                <b-dropdown-option value="products">
+                                    <b-icon icon="shopping_cart"></b-icon>
+                                    Products
+                                </b-dropdown-option>
+                                <b-dropdown-option value="blog" disabled>
+                                    <b-icon icon="art_track"></b-icon>
+                                    Blog
+                                </b-dropdown-option>
+                                <hr class="dropdown-divider">
+                                <b-dropdown-option value="settings">
+                                    <b-icon icon="settings"></b-icon>
+                                    Settings
+                                </b-dropdown-option>
+                                <b-dropdown-option value="logout">
+                                    <b-icon icon="exit_to_app"></b-icon>
+                                    Logout (link)
+                                </b-dropdown-option>
+                            </b-dropdown>
+                        </div>
                     </div>
                 </nav>`,
                 code3: `
@@ -531,61 +576,6 @@
                     }
                 }`,
                 template4: `
-                <b-field>
-                    <p class="control">
-                        <button class="button">
-                            Button
-                        </button>
-                    </p>
-                    <p class="control">
-                        <b-dropdown>
-                            <button class="button" slot="trigger">
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
-
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
-                        </b-dropdown>
-                    </p>
-                </b-field>
-
-                <b-field>
-                    <p class="control">
-                        <button class="button is-primary">
-                            Button
-                        </button>
-                    </p>
-                    <p class="control">
-                        <b-dropdown>
-                            <button class="button is-primary" slot="trigger">
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
-
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
-                        </b-dropdown>
-                    </p>
-                </b-field>
-
-                <b-field>
-                    <p class="control">
-                        <b-dropdown>
-                            <button class="button" slot="trigger">
-                                <span>Filters</span>
-                                <b-icon icon="arrow_drop_down"></b-icon>
-                            </button>
-
-                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
-                        </b-dropdown>
-                    </p>
-                    <b-input icon="search" type="search" placeholder="Search..."></b-input>
-                </b-field>`,
-                template5: `
                 <b-dropdown v-model="isPublic">
                     <button class="button is-primary" type="button" slot="trigger">
                         <template v-if="isPublic">
@@ -619,7 +609,7 @@
                         </div>
                     </b-dropdown-option>
                 </b-dropdown>`,
-                code5: `
+                code4: `
                 export default {
                     data() {
                         return {

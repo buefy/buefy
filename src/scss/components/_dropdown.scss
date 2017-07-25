@@ -1,13 +1,6 @@
 .dropdown {
-    display: inline-flex;
-    align-items: center;
-    text-align: left;
-    position: relative;
     & + .dropdown {
         margin-left: 0.5em;
-    }
-    .trigger {
-        display: inline-block;
     }
     .background {
         @include overlay;
@@ -16,103 +9,80 @@
         z-index: 10;
         cursor: pointer;
     }
-    .box {
-        position: absolute;
-        padding: 0.5em 0;
-        z-index: 10;
-        white-space: nowrap;
-        .option {
-            @include unselectable;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            &:not(.is-subheader, .is-disabled):hover {
-                background: $background;
-            }
+    .dropdown-menu {
+        max-width: none; // Fix Bulma v0.4.4
+        width: auto;
+        .dropdown-item {
             &.is-selected {
-                background: $primary !important;
+                background: $primary;
                 color: $primary-invert;
             }
-            &.is-separator {
-                border-bottom: 1px solid $background;
-                margin: 0.5rem 0;
-                padding: 0 !important;
-                cursor: inherit;
-            }
             &.is-disabled {
-                opacity: 0.5;
                 cursor: not-allowed;
-            }
-            &.is-subheader {
-                cursor: inherit;
-                // Remove unselectable
-                -webkit-touch-callout: inherit;
-                -webkit-user-select: inherit;
-                -moz-user-select: inherit;
-                -ms-user-select: inherit;
-                user-select: inherit;
-            }
-            &.has-link {
-                padding: 0;
-                a {
-                    padding: 0.5rem 1rem;
-                    display: block;
+                opacity: 0.5;
+                &:hover {
+                    background: inherit;
                     color: inherit;
                 }
             }
         }
-        &.is-top-right{
-            top: auto;
-            bottom: 100%;
-            left: 0;
+        .has-link a {
+            @extend .dropdown-item;
+            padding-right: 3rem;
+            white-space: nowrap;
         }
-        &.is-top-left{
-            top: auto;
-            bottom: 100%;
-            right: 0;
-        }
-        &.is-bottom-right{
-            top: 100%;
-            left: 0;
-        }
-        &.is-bottom-left{
-            top: 100%;
-            right: 0;
-        }
-        &.is-narrow {
-            .option {
-                padding: 0.25rem 0.75rem;
-            }
-        }
+    }
+    .navbar-item {
+        height: 100%;
     }
     &.is-disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        .trigger {
+        .dropdown-trigger {
             pointer-events: none;
         }
     }
+    &.is-top-right {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+        }
+    }
+    &.is-top-left {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+            right: 0;
+            left: auto;
+        }
+    }
+    &.is-bottom-left {
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    }
     @include touch {
-        .box {
-            position: fixed;
-            width: calc(100vw - 40px);
-            max-width: 460px;
-            max-height: calc(100vh - 120px);
-            top: 25% !important;
-            left: 50% !important;
-            transform: translate3d(-50%, -25%, 0);
-            white-space: normal;
-            overflow-y: auto;
-            &.is-narrow {
-                .option {
-                    padding: 0.75rem 1rem;
+        &:not(.is-hoverable) {
+            .dropdown-menu {
+                position: fixed;
+                width: calc(100vw - 40px);
+                max-width: 460px;
+                max-height: calc(100vh - 120px);
+                top: 25% !important;
+                left: 50% !important;
+                transform: translate3d(-50%, -25%, 0);
+                white-space: normal;
+                overflow-y: auto;
+                .dropdown-item {
+                    padding: 1rem 1.5rem;
                 }
             }
-            .option {
-                padding: 1rem 1.5rem;
-                &.has-subheader {
-                    padding: 1rem 2rem;
-                }
-            }
+        }
+    }
+    @include desktop {
+        .background {
+            display: none;
         }
     }
 }

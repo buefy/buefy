@@ -1,16 +1,26 @@
 <template>
-    <li class="option"
+    <hr v-if="separator" class="dropdown-divider">
+    <a v-else-if="!subheader && !hasLink"
+        class="dropdown-item"
         :class="{
-            'is-subheader': subheader,
             'is-disabled': disabled,
-            'is-separator': separator,
-            'is-selected': value !== null && value === $parent.$parent.selected,
+            'is-paddingless': paddingless,
+            'is-selected': value !== null && value === $parent.selected
+        }"
+        @click="selectOption">
+        <slot></slot>
+    </a>
+    <div v-else
+        :class="{
+            'dropdown-item': !hasLink,
+            'is-disabled': disabled,
+            'is-paddingless': paddingless,
+            'is-selected': value !== null && value === $parent.selected,
             'has-link': hasLink
         }"
         @click="selectOption">
-
         <slot></slot>
-    </li>
+    </div>
 </template>
 
 <script>
@@ -24,6 +34,7 @@
             separator: Boolean,
             disabled: Boolean,
             subheader: Boolean,
+            paddingless: Boolean,
             hasLink: Boolean
         },
         computed: {
@@ -41,13 +52,12 @@
             selectOption() {
                 if (!this.isClickable) return
 
-                this.$parent.$parent.selectOption(this.value)
+                this.$parent.selectOption(this.value)
                 this.$emit('click')
             }
         },
         created() {
-            // Parent is actually the transition-group
-            if (!this.$parent.$parent.$data._isDropdown) {
+            if (!this.$parent.$data._isDropdown) {
                 this.$destroy()
                 throw new Error('You should wrap bDropdownOption on a bDropdown')
             }

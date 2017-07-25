@@ -45,14 +45,18 @@
                 <pre class="block" v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
 
                 <b-message type="is-info">
-                    If you're using Nuxt for Server Side Rendering (SSR), then installation is a little different:
+                    If you're using Nuxt.js for Server Side Rendering (SSR), then follow this:
                 </b-message>
-                <ol>
-                    <li>Make a file in Nuxt's <pre class="inline">plugins</pre> folder called <pre class="inline">buefy.js</pre></li>
-                    <li>Paste in this text and save it: </li>
-                    <li><pre class="block" v-highlight><code class="javascript">{{ importingSSR | pre }}</code></pre></li>
-                    <li>In the <pre class="inline">nuxt.config.js</pre> file, add <pre class="inline">plugins: ['~plugins/buefy']</pre> to the <pre class="inline">module.exports object.</pre></li>
-                </ol>
+                <div class="content">
+                    <ol>
+                        <li>Make a file in Nuxt's <code>plugins</code> folder called <code>buefy.js</code></li>
+                        <li>
+                            Paste and save it:
+                            <pre class="block is-paddingless" v-highlight><code class="javascript">{{ importingSSR | pre }}</code></pre>
+                        </li>
+                        <li>In the <code>nuxt.config.js</code> file, add <code>plugins: ['~plugins/buefy']</code> to the <code>module.exports</code> object.</li>
+                    </ol>
+                </div>
             </div>
         </div>
 
@@ -112,9 +116,7 @@
                 import Buefy from 'buefy'
                 import 'buefy/lib/buefy.css'
 
-                Vue.use(Buefy)
-
-                `,
+                Vue.use(Buefy) `,
                 importingCDNHtml: `
                 <!-- Buefy CSS -->
                 <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.css">
@@ -129,9 +131,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .inline {
-        display: inline-block;
-    }
-</style>

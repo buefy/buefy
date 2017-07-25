@@ -99,7 +99,6 @@
         </div>
 
         <hr>
-        <span class="tag is-success field">New!</span> <span class="tag is-info">v0.4.1</span>
         <h2 class="title">Icons</h2>
         <div class="columns">
             <div class="column">

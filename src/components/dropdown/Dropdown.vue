@@ -1,29 +1,30 @@
 <template>
-    <span class="dropdown"
-        :class="{ 'is-disabled': disabled }">
+    <div class="dropdown"
+        :class="[position, {
+            'is-disabled': disabled,
+            'is-hoverable': hoverable,
+            'is-active': isActive
+        }]">
         <a role="button"
             ref="trigger"
-            class="trigger"
+            class="dropdown-trigger"
             @click="toggle">
             <slot name="trigger"></slot>
         </a>
 
-        <transition-group name="fade">
-            <div v-if="isActive"
-                key="bg"
-                class="background is-hidden-desktop">
-            </div>
-            <span v-show="isActive"
-                key="dropdown"
-                ref="dropdown"
-                class="box"
-                :class="['is-dropdown', position, { 'is-narrow': narrowed }]">
-                <ul>
+        <transition name="fade">
+            <div v-show="isActive" class="background"></div>
+        </transition>
+        <transition name="fade">
+            <div v-show="isActive || hoverable"
+                ref="dropdownMenu"
+                class="dropdown-menu">
+                <div class="dropdown-content">
                     <slot></slot>
-                </ul>
-            </span>
-        </transition-group>
-    </span>
+                </div>
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script>
@@ -34,16 +35,14 @@
                 type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: null
             },
-            narrowed: Boolean,
             disabled: Boolean,
+            hoverable: Boolean,
             position: {
                 type: String,
-                default: 'is-bottom-right',
                 validator(value) {
                     return [
                         'is-top-right',
                         'is-top-left',
-                        'is-bottom-right',
                         'is-bottom-left'
                     ].indexOf(value) > -1
                 }
@@ -78,11 +77,11 @@
              */
             whiteList() {
                 const whiteList = []
-                whiteList.push(this.$refs.dropdown)
+                whiteList.push(this.$refs.dropdownMenu)
                 whiteList.push(this.$refs.trigger)
                 // Adds all chidren from dropdown
-                if (this.$refs.dropdown !== undefined) {
-                    const children = this.$refs.dropdown.querySelectorAll('*')
+                if (this.$refs.dropdownMenu !== undefined) {
+                    const children = this.$refs.dropdownMenu.querySelectorAll('*')
                     for (const child of children) {
                         whiteList.push(child)
                     }
@@ -123,7 +122,7 @@
              * Toggle dropdown if it's not disabled.
              */
             toggle() {
-                if (this.disabled) return
+                if (this.disabled || this.hoverable) return
 
                 this.isActive = !this.isActive
             }
