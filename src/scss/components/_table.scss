@@ -164,3 +164,19 @@
         }
     }
 }
+
+button.is-transparent {
+    background: transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+button.is-transparent > span:hover {
+    color:#23d160;
+}
+
+button.is-transparent > span.expanded {
+    transform: rotate(90deg);
+}
