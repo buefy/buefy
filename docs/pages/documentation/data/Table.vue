@@ -16,7 +16,7 @@
             <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
             <b-switch v-model="isEmpty">Empty</b-switch>
             <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
-            <b-switch v-model="hasDetails">Has a detail row</b-switch>
+            <b-switch v-model="isDetailed">Row is detailed (collapsible)</b-switch>
         </div>
         <div class="block">
             <b-select v-model="perPage" style="display: inline-block">
@@ -45,7 +45,7 @@
                         :bordered="isBordered"
                         :striped="isStriped"
                         :narrowed="isNarrowed"
-                        :hasDetails="hasDetails"
+                        :detailed="isDetailed"
                         :checkable="isCheckable"
                         :loading="isLoading"
                         :mobile-cards="hasMobileCards"
@@ -53,8 +53,8 @@
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
                         :selected.sync="selected"
-                        @details-open="onOpenedDetail"
                         :checked-rows.sync="checkedRows"
+                        @details-open="onOpenedDetail"
                         default-sort="user.first_name">
 
                         <template scope="props">
@@ -85,43 +85,32 @@
                             </b-table-column>
                         </template>
 
+                        <template slot="detail" scope="props">
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                        <img src="static/img/placeholder-128x128.png">
+                                    </p>
+                                </figure>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <strong>{{ props.row.user.first_name }} {{ props.row.user.last_name }}</strong>
+                                            <small>@{{ props.row.user.first_name }}</small>
+                                            <small>31m</small>
+                                            <br>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            Proin ornare magna eros, eu pellentesque tortor vestibulum ut.
+                                            Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </template>
+
                         <div slot="empty" class="has-text-centered">
                             This table is empty!
                         </div>
-                        <template slot="detail" scope="props">
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        Component
-                                    </p>
-                                    <a class="card-header-icon">
-                                        <span class="icon">
-                                          <i class="fa fa-angle-down"></i>
-                                        </span>
-                                    </a>
-                                </header>
-                                <div class="card-content">
-                                <div class="media">
-                                    <figure class="media-left">
-                                        <p class="image is-64x64">
-                                            <img src="http://bulma.io/images/placeholders/64x64.png">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        {{ props.row.user.first_name }} {{ props.row.user.last_name }}
-                                        <a>@bulmaio</a>. <a>#css</a> <a>#responsive</a>
-                                        <br>
-                                        <small>11:09 PM - 1 Ago 2017</small>
-                                    </div>
-                                </div>
-                            </div>
-                                <footer class="card-footer">
-                                    <a class="card-footer-item">Save</a>
-                                    <a class="card-footer-item">Edit</a>
-                                    <a class="card-footer-item">Delete</a>
-                                </footer>
-                            </div>
-                        </template>
                     </b-table>
                 </b-tab-item>
 
@@ -253,7 +242,7 @@
                 isPaginated: true,
                 isPaginationSimple: false,
                 perPage: 10,
-                hasDetails: true,
+                isDetailed: true,
                 tableProps: [
                     {
                         name: '<code>data</code>',
@@ -354,11 +343,11 @@
                         default: '—'
                     },
                     {
-                        name: '<code>hasDetails</code>',
-                        description: 'Allows/disallows row details. (Check scoped slots documentation)',
+                        name: '<code>detailed</code>',
+                        description: 'Allow row details (check scoped slots documentation)',
                         type: 'Boolean',
                         values: '—',
-                        default: 'false'
+                        default: '<code>false</code>'
                     }
 
                 ],
@@ -373,7 +362,7 @@
                     },
                     {
                         name: 'detail',
-                        props: '<code>row: Object</code>'
+                        props: '<code>row: Object</code>, <code>index: Number</code>'
                     }
                 ],
                 tableEvents: [
@@ -466,13 +455,6 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>hasDetails</code>',
-                        description: 'Set if each row has detail slot',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
                         name: '<code>visible</code>',
                         description: 'Whether the column is visible',
                         type: 'Boolean',
@@ -532,43 +514,32 @@
                         </b-table-column>
                     </template>
 
+                    <template slot="detail" scope="props">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                    <img src="static/img/placeholder-128x128.png">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>{{ props.row.user.first_name }} {{ props.row.user.last_name }}</strong>
+                                        <small>@{{ props.row.user.first_name }}</small>
+                                        <small>31m</small>
+                                        <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        Proin ornare magna eros, eu pellentesque tortor vestibulum ut.
+                                        Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+
                     <div slot="empty" class="has-text-centered">
                         This table is empty!
                     </div>
-                    <template slot="detail" scope="props">
-                        <div class="card">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    Component
-                                </p>
-                                <a class="card-header-icon">
-                                        <span class="icon">
-                                          <i class="fa fa-angle-down"></i>
-                                        </span>
-                                </a>
-                            </header>
-                            <div class="card-content">
-                                <div class="media">
-                                    <figure class="media-left">
-                                        <p class="image is-64x64">
-                                            <img src="http://bulma.io/images/placeholders/64x64.png">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        {{ props.row.user.first_name }} {{ props.row.user.last_name }}
-                                        <a>@bulmaio</a>. <a>#css</a> <a>#responsive</a>
-                                        <br>
-                                        <small>11:09 PM - 1 Ago 2017</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <footer class="card-footer">
-                                <a class="card-footer-item">Save</a>
-                                <a class="card-footer-item">Edit</a>
-                                <a class="card-footer-item">Delete</a>
-                            </footer>
-                        </div>
-                    </template>
                 </b-table>`,
                 code: `
                 export default {
@@ -590,7 +561,7 @@
                             isCheckable: false,
                             isEmpty: false,
                             isLoading: false,
-                            hasDetails: true,
+                            isDetailed: true,
                             hasMobileCards: true,
                             isPaginated: true,
                             isPaginationSimple: false,

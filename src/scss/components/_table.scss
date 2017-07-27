@@ -17,6 +17,9 @@
         &.is-desc {
             transform: rotate(180deg);
         }
+        &.is-expanded {
+            transform: rotate(90deg);
+        }
     }
     .table {
         th {
@@ -73,6 +76,13 @@
             width: 40px;
             .checkbox {
                 vertical-align: middle;
+            }
+        }
+        .detail {
+            box-shadow: inset 0 1px 3px $grey-lighter;
+            background: $white-bis;
+            .detail-container {
+                padding: 1rem;
             }
         }
         // Modifiers
@@ -163,20 +173,4 @@
             border-width: 0.25em;
         }
     }
-}
-
-button.is-transparent {
-    background: transparent;
-    border: none;
-    outline: none;
-    user-select: none;
-    cursor: pointer;
-}
-
-button.is-transparent > span:hover {
-    color:#23d160;
-}
-
-button.is-transparent > span.expanded {
-    transform: rotate(90deg);
 }

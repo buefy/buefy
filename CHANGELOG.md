@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.4.7
+
+* #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
+
 ## 0.4.6
 
 * **New component: Menu**, [see docs](https://buefy.github.io/#/documentation/menu) (thanks @tsctao)

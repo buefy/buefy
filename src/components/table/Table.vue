@@ -1,12 +1,11 @@
 <template>
     <div class="b-table" :class="{ 'is-loading': loading }">
-        <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
+        <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet">
             <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
                 <b-select v-model="mobileSort" expanded>
-                    <option
-                        v-for="(column, index) in columns"
-                        :key="index"
+                    <option v-for="(column, index) in columns"
                         v-if="column.sortable"
+                        :key="index"
                         :value="column">
                         {{ column.label }}
                     </option>
@@ -38,7 +37,7 @@
                 }">
                 <thead>
                     <tr>
-                        <th v-if="hasDetails" width="40px"></th>
+                        <th v-if="detailed" width="40px"></th>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
                         </th>
@@ -62,47 +61,47 @@
                 </thead>
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
-                    <tr :key="index"
-                        @click="selectRow(row)"
-                        @dblclick="$emit('dblclick', row)"
-                        :class="[rowClass(row, index), {
-                            'is-selected': row === selected,
-                            'is-checked': isRowChecked(row)
-                        }]">
+                        <tr :key="index"
+                            @click="selectRow(row)"
+                            @dblclick="$emit('dblclick', row)"
+                            :class="[rowClass(row, index), {
+                                'is-selected': row === selected,
+                                'is-checked': isRowChecked(row)
+                            }]">
 
-                        <td v-if="hasDetails">
-                            <button class="is-transparent" @click.stop="toggleDetails(row)">
-                                <b-icon :class="{'expanded': isVisibleDetailRow(row)}"
+                            <td v-if="detailed">
+                                <a role="button" @click.stop="toggleDetails(row)">
+                                    <b-icon icon="chevron_right"
                                         both
-                                        icon="chevron_right"
-                                >
-                                </b-icon>
-                            </button>
-                        </td>
+                                        :class="{'is-expanded': isVisibleDetailRow(row)}">
+                                    </b-icon>
+                                </a>
+                            </td>
 
-                        <td class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
-                        </td>
+                            <td class="checkbox-cell" v-if="checkable">
+                                <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
+                            </td>
 
-                        <slot :row="row" :index="index"></slot>
-                    </tr>
-                    <template v-if="hasDetails">
-                        <tr v-show="isVisibleDetailRow(row)" class="details">
-                            <td colspan="100%">
+                            <slot :row="row" :index="index"></slot>
+                        </tr>
+
+                        <tr v-if="detailed && isVisibleDetailRow(row)"
+                            :key="index"
+                            class="detail">
+                            <td :colspan="columnCount">
                                 <div class="detail-container">
-                                    <slot name="detail" :row="row"></slot>
+                                    <slot name="detail" :row="row" :index="index"></slot>
                                 </div>
                             </td>
                         </tr>
                     </template>
-                </template>
                 </tbody>
                 <tbody v-else>
-                <tr class="is-empty">
-                    <td :colspan="checkable ? columns.length + 1 : columns.length">
-                        <slot name="empty"></slot>
-                    </td>
-                </tr>
+                    <tr class="is-empty">
+                        <td :colspan="columnCount">
+                            <slot name="empty"></slot>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -151,6 +150,7 @@
             striped: Boolean,
             narrowed: Boolean,
             loading: Boolean,
+            detailed: Boolean,
             checkable: Boolean,
             selected: Object,
             checkedRows: {
@@ -169,10 +169,6 @@
             },
             paginationSimple: Boolean,
             backendSorting: Boolean,
-            hasDetails: {
-                type: Boolean,
-                default: false
-            },
             rowClass: {
                 type: Function,
                 default: () => ''
@@ -274,6 +270,17 @@
                 return this.columns.some(column => {
                     return column.sortable
                 })
+            },
+
+            /**
+             * Return total column count based if it's checkable or expanded
+             */
+            columnCount() {
+                let count = this.columns.length
+                count += this.checkable ? 1 : 0
+                count += this.detailed ? 1 : 0
+
+                return count
             }
         },
         methods: {
