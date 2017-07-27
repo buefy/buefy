@@ -2,7 +2,7 @@
     <div class="field" :class="[fieldType, addonsPosition, { 'is-expanded': expanded }]">
         <label class="label" v-if="label">{{ label }}</label>
         <slot></slot>
-        <p class="help" :class="newType" v-if="newMessage">{{ newMessage }}</p>
+        <p class="help" :class="newType" v-if="newMessage" v-html="formattedMessage"></p>
     </div>
 </template>
 
@@ -12,7 +12,7 @@
         props: {
             type: String,
             label: String,
-            message: String,
+            message: [String, Array],
             grouped: Boolean,
             position: String,
             expanded: Boolean,
@@ -59,7 +59,6 @@
 
                 if (this.position) return 'has-addons-' + position[1]
             },
-
             /**
              * Field has addons if there are more than one slot
              * (element / component) in the Field.
@@ -70,6 +69,25 @@
                     return 'is-grouped'
                 } else if (this.$slots.default !== undefined && this.$slots.default.length > 1 && this.addons) {
                     return 'has-addons'
+                }
+            },
+            /**
+             * Formatted message in case it's an array
+             * (each element is separated by <br> tag)
+             */
+            formattedMessage() {
+                if (this.newMessage) {
+                    if (Array.isArray(this.newMessage)) {
+                        return this.newMessage.filter((value) => {
+                            if (value) {
+                                return value
+                            }
+                        }).join(' <br> ')
+                    } else {
+                        return this.newMessage
+                    }
+                } else {
+                    return this.newMessage
                 }
             }
         }

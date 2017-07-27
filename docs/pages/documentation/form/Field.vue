@@ -36,6 +36,12 @@
                     <b-input value="johnsilver" maxlength="30"></b-input>
                 </b-field>
 
+                <b-field label="Password"
+                    type="is-warning"
+                    :message="['Password is too short', 'Password must have at least 8 characters']">
+                    <b-input value="123" type="password" maxlength="30"></b-input>
+                </b-field>
+
                 <b-field label="Subject">
                     <b-select placeholder="Select a subject">
                         <option value="1">Option 1</option>
@@ -329,7 +335,7 @@
                     {
                         name: '<code>message</code>',
                         description: 'Help message text',
-                        type: 'String',
+                        type: 'String, Array<String>',
                         values: '—',
                         default: '—'
                     },
@@ -373,6 +379,12 @@
                     type="is-success"
                     message="This username is available">
                     <b-input value="johnsilver" maxlength="30"></b-input>
+                </b-field>
+
+                <b-field label="Password"
+                    type="is-warning"
+                    :message="['Password is too short', 'Password must have at least 8 characters']">
+                    <b-input value="123" type="password" maxlength="30"></b-input>
                 </b-field>
 
                 <b-field label="Subject">
