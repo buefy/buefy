@@ -5,7 +5,7 @@
         :class="{
             'is-disabled': disabled,
             'is-paddingless': paddingless,
-            'is-selected': value !== null && value === $parent.selected
+            'is-active': value !== null && value === $parent.selected
         }"
         @click="selectOption">
         <slot></slot>
@@ -15,7 +15,7 @@
             'dropdown-item': !hasLink,
             'is-disabled': disabled,
             'is-paddingless': paddingless,
-            'is-selected': value !== null && value === $parent.selected,
+            'is-active': value !== null && value === $parent.selected,
             'has-link': hasLink
         }"
         @click="selectOption">

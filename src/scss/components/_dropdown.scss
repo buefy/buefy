@@ -8,15 +8,14 @@
         background-color: rgba($black, 0.86);
         z-index: 10;
         cursor: pointer;
+        @include desktop {
+            display: none;
+        }
     }
     .dropdown-menu {
         max-width: none; // Fix Bulma v0.4.4
         width: auto;
         .dropdown-item {
-            &.is-selected {
-                background: $primary;
-                color: $primary-invert;
-            }
             &.is-disabled {
                 cursor: not-allowed;
                 opacity: 0.5;
@@ -78,11 +77,6 @@
                     padding: 1rem 1.5rem;
                 }
             }
-        }
-    }
-    @include desktop {
-        .background {
-            display: none;
         }
     }
 }
