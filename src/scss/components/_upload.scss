@@ -1,0 +1,38 @@
+
+.b-upload {
+    .upload-draggable {
+        display: inline-block;
+        cursor: pointer;
+        padding: 5px;
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            &.is-#{$name} {
+                border: 2px dashed $color;
+            }
+        }
+        &.is-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        &.is-loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.5;
+            &:after {
+                @include loader;
+                top: 0;
+                left: calc(50% - 2.5em);
+                width: 3em;
+                height: 3em;
+                border-width: 0.25em;
+            }
+        }
+    }
+    .upload-draggable-hover {
+        @each $name, $pair in $colors {
+            &.is-#{$name} {
+                border-style: solid;
+            }
+        }
+    }
+}

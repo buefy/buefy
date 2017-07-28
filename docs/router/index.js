@@ -38,6 +38,7 @@ const Autocomplete = () => import('../pages/documentation/form/Autocomplete')
 const Checkbox = () => import('../pages/documentation/form/Checkbox')
 const Radio = () => import('../pages/documentation/form/Radio')
 const Switch = () => import('../pages/documentation/form/Switch')
+const Upload = () => import('../pages/documentation/form/Upload')
 
 const Data = () => import('../pages/documentation/data/_Data')
 const Table = () => import('../pages/documentation/data/Table')
@@ -220,6 +221,13 @@ export default new Router({
                 {
                     path: 'switch',
                     component: Switch,
+                    meta: {
+                        category: Form
+                    }
+                },
+                {
+                    path: 'upload',
+                    component: Upload,
                     meta: {
                         category: Form
                     }

@@ -15,6 +15,7 @@ import Panel from './components/panel'
 import Select from './components/select'
 import Switch from './components/switch'
 import Tooltip from './components/tooltip'
+import Upload from './components/upload'
 
 import Dialog from './components/dialog'
 import ModalProgrammatic, { Modal } from './components/modal'
@@ -52,7 +53,8 @@ const components = {
     TableColumn,
     Tabs,
     TabItem,
-    Tooltip
+    Tooltip,
+    Upload
 }
 
 components.install = (Vue, options = {}) => {

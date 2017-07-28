@@ -7,5 +7,6 @@
         <router-link to="checkbox" class="nav-item is-tab">Checkbox</router-link>
         <router-link to="radio" class="nav-item is-tab">Radio</router-link>
         <router-link to="switch" class="nav-item is-tab">Switch</router-link>
+        <router-link to="upload" class="nav-item is-tab">Upload</router-link>
     </div>
 </template>
