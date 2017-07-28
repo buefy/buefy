@@ -19,7 +19,7 @@
                 </b-field>
 
                 <ul>
-                    <li v-for="(file, index) in files" :key="index">
+                    <li v-for="(file, index) in currentFiles" :key="index">
                         <div class="block">
                             <span class="tag is-primary">
                                 {{file.name}}
@@ -60,7 +60,7 @@
                 </b-field>
 
                 <ul>
-                    <li v-for="(file, index) in dropFiles" :key="index">
+                    <li v-for="(file, index) in currentDropFiles" :key="index">
                         <div class="block">
                             <span class="tag is-primary">
                                 {{file.name}}
@@ -147,6 +147,8 @@
             return {
                 files: null,
                 dropFiles: null,
+                currentFiles: [],
+                currentDropFiles: [],
                 props: [
                     {
                         name: '<code>v-model</code>',
@@ -256,7 +258,7 @@
                 </b-field>
 
                 <ul>
-                    <li v-for="(file, index) in files" :key="index">
+                    <li v-for="(file, index) in currentFiles" :key="index">
                         <div class="block">
                             <span class="tag is-primary">
                                 {{file.name}}
@@ -272,12 +274,22 @@
                 export default {
                     data() {
                         return {
-                            files: null
+                            files: null,
+                            currentFiles: []
+                        }
+                    },
+                    watch: {
+                        files(value) {
+                            if (value) {
+                                for (let i = 0; i < value.length; i++) {
+                                    this.currentFiles.push(value[i])
+                                }
+                            }
                         }
                     },
                     methods: {
                         deleteFile(index) {
-                            this.files.splice(index, 1)
+                            this.currentFiles.splice(index, 1)
                         }
                     }
                 }`,
@@ -296,7 +308,7 @@
                 </b-field>
 
                 <ul>
-                    <li v-for="(file, index) in dropFiles" :key="index">
+                    <li v-for="(file, index) in currentDropFiles" :key="index">
                         <div class="block">
                             <span class="tag is-primary">
                                 {{file.name}}
@@ -312,23 +324,49 @@
                 export default {
                     data() {
                         return {
-                            dropFiles: null
+                            dropFiles: null,
+                            currentDropFiles: []
+                        }
+                    },
+                    watch: {
+                        dropFiles(value) {
+                            if (value) {
+                                for (let i = 0; i < value.length; i++) {
+                                    this.currentDropFiles.push(value[i])
+                                }
+                            }
                         }
                     },
                     methods: {
                         deleteDropFile(index) {
-                            this.dropFiles.splice(index, 1)
+                            this.currentDropFiles.splice(index, 1)
                         }
                     }
                 }`
             }
         },
+        watch: {
+            files(value) {
+                if (value) {
+                    for (let i = 0; i < value.length; i++) {
+                        this.currentFiles.push(value[i])
+                    }
+                }
+            },
+            dropFiles(value) {
+                if (value) {
+                    for (let i = 0; i < value.length; i++) {
+                        this.currentDropFiles.push(value[i])
+                    }
+                }
+            }
+        },
         methods: {
             deleteFile(index) {
-                this.files.splice(index, 1)
+                this.currentFiles.splice(index, 1)
             },
             deleteDropFile(index) {
-                this.dropFiles.splice(index, 1)
+                this.currentDropFiles.splice(index, 1)
             }
         }
     }
