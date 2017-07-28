@@ -103,7 +103,7 @@
 <script>
 export default {
     data() {
-        const today = new Date();
+        const today = new Date()
         return {
             firstDatepickerActive: false,
             firstDate: null,
