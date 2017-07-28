@@ -1,6 +1,16 @@
 <template>
 <b-modal :active.sync="isActive" :width="640">
-    <b-datepicker-table v-model="dateSelected" :pack="packName"></b-datepicker-table>
+    <b-datepicker-table
+      v-model="dateSelected"
+      :pack="packName"
+      :day-names="dayNames"
+      :month-names="monthNames"
+      :footer-today="footerToday"
+      :footer-close="footerClose"
+      :earliest-date="earliestDate"
+      :latest-date="latestDate"
+      @close="isActive = false">
+    </b-datepicker-table>
 </b-modal>
 </template>
 
@@ -12,10 +22,53 @@ export default {
     props: {
         value: Date,
         active: {
-          type: Boolean,
-          default: false
+            type: Boolean,
+            default: false
         },
-        iconPack: String
+        iconPack: String,
+        dayNames: {
+            type: Array,
+            default () {
+                return [
+                    'Su',
+                    'M',
+                    'Tu',
+                    'W',
+                    'Th',
+                    'F',
+                    'S',
+                ]
+            }
+        },
+        monthNames: {
+            type: Array,
+            default () {
+                return [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December',
+                ]
+            }
+        },
+        footerToday: {
+            type: Boolean,
+            default: false
+        },
+        footerClose: {
+            type: Boolean,
+            default: true
+        },
+        earliestDate: Date,
+        latestDate: Date
     },
     data() {
         const packName = this.iconPack || config.defaultIconPack

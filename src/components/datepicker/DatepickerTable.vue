@@ -22,27 +22,36 @@
     <div class="table-container">
         <div class="datepicker-table">
             <div class="datepicker-header">
-                <div class="datepicker-cell">Su</div>
-                <div class="datepicker-cell">M</div>
-                <div class="datepicker-cell">Tu</div>
-                <div class="datepicker-cell">W</div>
-                <div class="datepicker-cell">Th</div>
-                <div class="datepicker-cell">F</div>
-                <div class="datepicker-cell">S</div>
+                <div v-for="day in dayNames" class="datepicker-cell">{{day}}</div>
             </div>
             <div class="datepicker-body">
-                <b-datepicker-table-row v-for="week in weeksInThisMonth(focused.month, focused.year)"
+                <b-datepicker-table-row
+                  v-for="week in weeksInThisMonth(focused.month, focused.year)"
                   :key="week[0].getDate()"
                   :selectedDate="value"
                   :week="week"
                   :month="focused.month"
+                  :earliest-date="earliestDate"
+                  :latest-date="latestDate"
                   @select="updateSelectedDate">
                 </b-datepicker-table-row>
             </div>
         </div>
     </div>
+    <div class="level">
+        <div class="level-left"></div>
+        <div class="level-right">
+            <b-field grouped class="level-item">
+                <p class="control" v-if="footerToday">
+                    <button class="button is-primary" @click="focusToday">Today</button>
+                </p>
+                <p class="control" v-if="footerClose">
+                    <button class="button is-primary" @click="$emit('close')">Close</button>
+                </p>
+            </b-field>
+        </div>
+    </div>
 </div>
-
 </template>
 
 <script>
@@ -57,28 +66,34 @@ export default {
             type: Date,
             required: true,
         },
-        pack: String
+        pack: String,
+        dayNames: Array,
+        monthNames: Array,
+        footerToday: Boolean,
+        footerClose: Boolean,
+        earliestDate: Date,
+        latestDate: Date
     },
     data() {
         let iconNames
 
         if (this.pack === 'mdi') {
-          iconNames = {
-            left: 'chevron_left',
-            right: 'chevron_right'
-          }
+            iconNames = {
+                left: 'chevron_left',
+                right: 'chevron_right'
+            }
         } else {
-          iconNames = {
-            left: 'chevron-left',
-            right: 'chevron-right'
-          }
+            iconNames = {
+                left: 'chevron-left',
+                right: 'chevron-right'
+            }
         }
 
         return {
             iconNames,
             focused: {
-              month: this.value.getMonth(),
-              year: this.value.getFullYear(),
+                month: this.value.getMonth(),
+                year: this.value.getFullYear(),
             }
         }
     },
@@ -104,6 +119,18 @@ export default {
         },
 
         /*
+         * Focus date picker on today's date
+         */
+        focusToday() {
+            this.focused = {
+                month: new Date()
+                    .getMonth(),
+                year: new Date()
+                    .getFullYear(),
+            }
+        },
+
+        /*
          * Either increment month by 1 if not December or increment year by 1
          * and set month to 0 (January)
          */
@@ -120,19 +147,9 @@ export default {
          * Return name of month full-length
          */
         nameOfMonth(month) {
-            const months = {
-                0: 'January',
-                1: 'February',
-                2: 'March',
-                3: 'April',
-                4: 'May',
-                5: 'June',
-                6: 'July',
-                7: 'August',
-                8: 'September',
-                9: 'October',
-                10: 'November',
-                11: 'December',
+            const months = {};
+            for (let i = 0; i < this.monthNames.length; i++) {
+                months[i] = this.monthNames[i];
             }
 
             return months[month]
@@ -197,5 +214,4 @@ export default {
         }
     },
 }
-
 </script>
