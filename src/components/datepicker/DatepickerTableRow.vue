@@ -36,7 +36,11 @@ export default {
          * is within this month
          */
         selectableDate(day) {
+<<<<<<< HEAD
             const validity = []
+=======
+            const validity = [];
+>>>>>>> 5ace55b4d388f366807062b199b97f9de490e8e1
 
             if (this.earliestDate) {
                 validity.push(day >= this.earliestDate)
@@ -48,7 +52,11 @@ export default {
 
             validity.push(day.getMonth() === this.month);
 
+<<<<<<< HEAD
             return !validity.includes(false)
+=======
+            return !validity.includes(false);
+>>>>>>> 5ace55b4d388f366807062b199b97f9de490e8e1
         },
 
         /*
