@@ -28,7 +28,7 @@ export default {
         return {
             isActive: false,
             parent: null,
-            newContainer: this.container || config.defaultContentElement
+            newContainer: this.container || config.defaultContainerElement
         }
     },
     computed: {

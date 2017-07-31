@@ -41,7 +41,7 @@
                 usage: `
                 Vue.use(Buefy, {
                     defaultIconPack: 'fa',
-                    defaultContentElement: '#content',
+                    defaultContainerElement: '#content',
                     // ...
                 })`,
                 options: [
@@ -55,7 +55,7 @@
                         default: '<code>mdi</code>'
                     },
                     {
-                        name: '<code>defaultContentElement</code>',
+                        name: '<code>defaultContainerElement</code>',
                         description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                             changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
                             Meaning that the container <em>should</em> be <code>fixed</code>.`,

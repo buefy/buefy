@@ -1,5 +1,5 @@
 const config = {
-    defaultContentElement: null,
+    defaultContainerElement: null,
     defaultIconPack: 'mdi',
     defaultSnackbarDuration: 3500,
     defaultToastDuration: 2000,
