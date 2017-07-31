@@ -13,8 +13,6 @@
         }
     }
     .dropdown-menu {
-        max-width: none; // Fix Bulma v0.4.4
-        width: auto;
         .dropdown-item {
             &.is-disabled {
                 cursor: not-allowed;
