@@ -1,8 +1,22 @@
 # Buefy Changelog
 
-## 0.4.7
+## 0.5.0
 
+### Breaking changes
+
+* **Update Bulma to v0.5.0**, breaking changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+* Constructor option ``defaultContentElement`` renamed to ``defaultContainerElement``
+* ``b-dropdown-option`` renamed to ``b-dropdown-item``
+    * ``subheader`` prop renamed to ``custom``
+
+### New stuff
+
+* **New component: Upload**, [see docs](https://buefy.github.io/#/documentation/upload) (thanks @jtommy)
 * #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
+* #201 Add support to array on Field ``message`` prop (thanks @jtommy)
+
+### Bug fixes
+
 
 ## 0.4.6
 

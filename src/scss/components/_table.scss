@@ -61,10 +61,10 @@
             &.is-selected {
                 .checkbox input {
                     &:checked + .check {
-                        background: $table-row-active url(checkmark($table-row-active-background)) no-repeat center center;
+                        background: $table-row-active-color url(checkmark($table-row-active-background-color)) no-repeat center center;
                     }
                     + .check {
-                        border-color: $table-row-active;
+                        border-color: $table-row-active-color;
                     }
                 }
             }

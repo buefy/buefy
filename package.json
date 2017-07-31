@@ -41,7 +41,7 @@
     "components"
   ],
   "dependencies": {
-    "bulma": "^0.4.4",
+    "bulma": "^0.5.0",
     "vue": "^2.4.1"
   },
   "devDependencies": {
