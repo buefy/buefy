@@ -470,7 +470,7 @@
                         }
                     },
                     computed: {
-                        filteredDataArray() {
+                        filteredDataObj() {
                             return this.arrayExample.data.filter((option) => {
                                 return option
                                     .toString()
