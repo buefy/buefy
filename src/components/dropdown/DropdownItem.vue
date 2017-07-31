@@ -1,13 +1,13 @@
 <template>
     <hr v-if="separator" class="dropdown-divider">
-    <a v-else-if="!subheader && !hasLink"
+    <a v-else-if="!custom && !hasLink"
         class="dropdown-item"
         :class="{
             'is-disabled': disabled,
             'is-paddingless': paddingless,
             'is-active': value !== null && value === $parent.selected
         }"
-        @click="selectOption">
+        @click="selectItem">
         <slot></slot>
     </a>
     <div v-else
@@ -18,14 +18,14 @@
             'is-active': value !== null && value === $parent.selected,
             'has-link': hasLink
         }"
-        @click="selectOption">
+        @click="selectItem">
         <slot></slot>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'bDropdownOption',
+        name: 'bDropdownItem',
         props: {
             value: {
                 type: [String, Number, Boolean, Object, Array, Symbol, Function],
@@ -33,33 +33,33 @@
             },
             separator: Boolean,
             disabled: Boolean,
-            subheader: Boolean,
+            custom: Boolean,
             paddingless: Boolean,
             hasLink: Boolean
         },
         computed: {
             /**
-             * Check if option can be clickable.
+             * Check if item can be clickable.
              */
             isClickable() {
-                return !this.separator && !this.disabled && !this.subheader
+                return !this.separator && !this.disabled && !this.custom
             }
         },
         methods: {
             /**
-             * Click listener, select the option.
+             * Click listener, select the item.
              */
-            selectOption() {
+            selectItem() {
                 if (!this.isClickable) return
 
-                this.$parent.selectOption(this.value)
+                this.$parent.selectItem(this.value)
                 this.$emit('click')
             }
         },
         created() {
             if (!this.$parent.$data._isDropdown) {
                 this.$destroy()
-                throw new Error('You should wrap bDropdownOption on a bDropdown')
+                throw new Error('You should wrap bDropdownItem on a bDropdown')
             }
         }
     }

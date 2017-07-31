@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxGroup } from './components/checkbox'
-import { Dropdown, DropdownOption } from './components/dropdown'
+import { Dropdown, DropdownItem } from './components/dropdown'
 import { Menu, MenuDropdown, MenuItem, MenuList } from './components/menu'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
@@ -30,7 +30,7 @@ const components = {
     Checkbox,
     CheckboxGroup,
     Dropdown,
-    DropdownOption,
+    DropdownItem,
     Field,
     Icon,
     Input,

@@ -52,15 +52,15 @@
             return {
                 selected: this.value,
                 isActive: false,
-                _isDropdown: true // Used internally by DropdownOption
+                _isDropdown: true // Used internally by DropdownItem
             }
         },
         watch: {
             /**
-             * When v-model is changed set the new selected option.
+             * When v-model is changed set the new selected item.
              */
             value(value) {
-                this.selectOption(value)
+                this.selectItem(value)
             },
 
             /**
@@ -99,12 +99,12 @@
         },
         methods: {
             /**
-             * Click listener from DropdownOption.
-             *   1. Set new selected option.
+             * Click listener from DropdownItem.
+             *   1. Set new selected item.
              *   2. Emit input event to update the user v-model.
              *   3. Close the dropdown.
              */
-            selectOption(value) {
+            selectItem(value) {
                 this.selected = value
                 this.$emit('input', value)
                 this.$emit('change', value)

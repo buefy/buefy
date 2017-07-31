@@ -17,9 +17,9 @@
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
+                <b-dropdown-item>Action</b-dropdown-item>
+                <b-dropdown-item>Another action</b-dropdown-item>
+                <b-dropdown-item>Something else</b-dropdown-item>
             </b-dropdown>
 
             <b-dropdown hoverable>
@@ -28,9 +28,9 @@
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
+                <b-dropdown-item>Action</b-dropdown-item>
+                <b-dropdown-item>Another action</b-dropdown-item>
+                <b-dropdown-item>Something else</b-dropdown-item>
             </b-dropdown>
 
             <b-dropdown disabled>
@@ -39,9 +39,9 @@
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
+                <b-dropdown-item>Action</b-dropdown-item>
+                <b-dropdown-item>Another action</b-dropdown-item>
+                <b-dropdown-item>Something else</b-dropdown-item>
             </b-dropdown>
 
             <b-dropdown>
@@ -49,9 +49,9 @@
                     Custom trigger
                 </p>
 
-                <b-dropdown-option>Action</b-dropdown-option>
-                <b-dropdown-option>Another action</b-dropdown-option>
-                <b-dropdown-option>Something else</b-dropdown-option>
+                <b-dropdown-item>Action</b-dropdown-item>
+                <b-dropdown-item>Another action</b-dropdown-item>
+                <b-dropdown-item>Something else</b-dropdown-item>
             </b-dropdown>
         </div>
         <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
@@ -59,7 +59,7 @@
         <hr>
 
         <h2 class="title is-spaced">Dropdown content and position</h2>
-        <p class="content">Add the <code>subheader</code> prop to the option to add <strong>any type of content</strong>.</p>
+        <p class="content">Add the <code>custom</code> prop to the item to add <strong>any type of content</strong>.</p>
         <div class="example is-paddingless">
             <nav class="navbar">
                 <div class="navbar-brand">
@@ -78,7 +78,7 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </a>
 
-                            <b-dropdown-option subheader paddingless>
+                            <b-dropdown-item custom paddingless>
                                 <form action="">
                                     <div class="modal-card" style="width:300px;">
                                         <section class="modal-card-body">
@@ -106,7 +106,7 @@
                                         </footer>
                                     </div>
                                 </form>
-                            </b-dropdown-option>
+                            </b-dropdown-item>
                         </b-dropdown>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
 
         <hr>
 
-        <p class="content">Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an option.</p>
+        <p class="content">Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an item.</p>
         <div class="example is-paddingless">
             <nav class="navbar">
                 <div class="navbar-brand">
@@ -135,37 +135,37 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </a>
 
-                            <b-dropdown-option subheader>
+                            <b-dropdown-item custom>
                                 Logged as <b>Rafael Beraldo</b>
-                            </b-dropdown-option>
+                            </b-dropdown-item>
                             <hr class="dropdown-divider">
-                            <b-dropdown-option has-link>
+                            <b-dropdown-item has-link>
                                 <a href="https://google.com" target="_blank">
                                     <b-icon icon="link"></b-icon>
                                     Google (link)
                                 </a>
-                            </b-dropdown-option>
-                            <b-dropdown-option value="home">
+                            </b-dropdown-item>
+                            <b-dropdown-item value="home">
                                 <b-icon icon="home"></b-icon>
                                 Home
-                            </b-dropdown-option>
-                            <b-dropdown-option value="products">
+                            </b-dropdown-item>
+                            <b-dropdown-item value="products">
                                 <b-icon icon="shopping_cart"></b-icon>
                                 Products
-                            </b-dropdown-option>
-                            <b-dropdown-option value="blog" disabled>
+                            </b-dropdown-item>
+                            <b-dropdown-item value="blog" disabled>
                                 <b-icon icon="art_track"></b-icon>
                                 Blog
-                            </b-dropdown-option>
+                            </b-dropdown-item>
                             <hr class="dropdown-divider">
-                            <b-dropdown-option value="settings">
+                            <b-dropdown-item value="settings">
                                 <b-icon icon="settings"></b-icon>
                                 Settings
-                            </b-dropdown-option>
-                            <b-dropdown-option value="logout">
+                            </b-dropdown-item>
+                            <b-dropdown-item value="logout">
                                 <b-icon icon="exit_to_app"></b-icon>
                                 Logout
-                            </b-dropdown-option>
+                            </b-dropdown-item>
                         </b-dropdown>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                     <b-icon icon="arrow_drop_down"></b-icon>
                 </button>
 
-                <b-dropdown-option :value="true">
+                <b-dropdown-item :value="true">
                     <div class="media">
                         <b-icon class="media-left" icon="public"></b-icon>
                         <div class="media-content">
@@ -199,9 +199,9 @@
                             <small>Everyone can see</small>
                         </div>
                     </div>
-                </b-dropdown-option>
+                </b-dropdown-item>
 
-                <b-dropdown-option :value="false">
+                <b-dropdown-item :value="false">
                     <div class="media">
                         <b-icon class="media-left" icon="people"></b-icon>
                         <div class="media-content">
@@ -209,7 +209,7 @@
                             <small>Only friends can see</small>
                         </div>
                     </div>
-                </b-dropdown-option>
+                </b-dropdown-item>
             </b-dropdown>
         </div>
         <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
@@ -272,10 +272,10 @@
             </b-tab-item>
         </b-tabs>
 
-        <h2 class="subtitle">Dropdown Option</h2>
+        <h2 class="subtitle">Dropdown Item</h2>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="optionProps" default-sort="name">
+                <b-table :data="itemProps" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -297,7 +297,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="optionEvents" default-sort="name">
+                <b-table :data="itemEvents" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -354,7 +354,7 @@
                 dropdownEvents: [
                     {
                         name: '<code>change</code>',
-                        description: 'Triggers when an option is selected',
+                        description: 'Triggers when an item is selected',
                         parameters: '<code>value: String</code>'
                     },
                     {
@@ -369,7 +369,7 @@
                         description: 'Toggle activation (dropdown list visibility)'
                     }
                 ],
-                optionProps: [
+                itemProps: [
                     {
                         name: '<code>value</code>',
                         description: 'The value that will be returned on events and v-model',
@@ -379,28 +379,28 @@
                     },
                     {
                         name: '<code>separator</code>',
-                        description: 'Set the option to be a separator',
+                        description: 'Set the item to be a separator',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
                         name: '<code>disabled</code>',
-                        description: 'Option is disabled',
+                        description: 'Item is disabled',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>subheader</code>',
-                        description: 'Option is not a clickable item',
+                        name: '<code>custom</code>',
+                        description: 'Item is not a clickable item',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
                         name: '<code>has-link</code>',
-                        description: 'Use it if your option is an anchor tag or <code>router-link</code>',
+                        description: 'Use it if your item is an anchor tag or <code>router-link</code>',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -413,10 +413,10 @@
                         default: '<code>false</code>'
                     }
                 ],
-                optionEvents: [
+                itemEvents: [
                     {
                         name: '<code>click</code>',
-                        description: 'Triggers when the option is clicked',
+                        description: 'Triggers when the item is clicked',
                         parameters: '—'
                     }
                 ],
@@ -427,9 +427,9 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-dropdown-option>Action</b-dropdown-option>
-                    <b-dropdown-option>Another action</b-dropdown-option>
-                    <b-dropdown-option>Something else</b-dropdown-option>
+                    <b-dropdown-item>Action</b-dropdown-item>
+                    <b-dropdown-item>Another action</b-dropdown-item>
+                    <b-dropdown-item>Something else</b-dropdown-item>
                 </b-dropdown>
 
                 <b-dropdown hoverable>
@@ -438,9 +438,9 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-dropdown-option>Action</b-dropdown-option>
-                    <b-dropdown-option>Another action</b-dropdown-option>
-                    <b-dropdown-option>Something else</b-dropdown-option>
+                    <b-dropdown-item>Action</b-dropdown-item>
+                    <b-dropdown-item>Another action</b-dropdown-item>
+                    <b-dropdown-item>Something else</b-dropdown-item>
                 </b-dropdown>
 
                 <b-dropdown disabled>
@@ -449,9 +449,9 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-dropdown-option>Action</b-dropdown-option>
-                    <b-dropdown-option>Another action</b-dropdown-option>
-                    <b-dropdown-option>Something else</b-dropdown-option>
+                    <b-dropdown-item>Action</b-dropdown-item>
+                    <b-dropdown-item>Another action</b-dropdown-item>
+                    <b-dropdown-item>Something else</b-dropdown-item>
                 </b-dropdown>
 
                 <b-dropdown>
@@ -459,9 +459,9 @@
                         Custom trigger
                     </p>
 
-                    <b-dropdown-option>Action</b-dropdown-option>
-                    <b-dropdown-option>Another action</b-dropdown-option>
-                    <b-dropdown-option>Something else</b-dropdown-option>
+                    <b-dropdown-item>Action</b-dropdown-item>
+                    <b-dropdown-item>Another action</b-dropdown-item>
+                    <b-dropdown-item>Something else</b-dropdown-item>
                 </b-dropdown>`,
                 template2: `
                 <nav class="navbar">
@@ -481,7 +481,7 @@
                                     <b-icon icon="arrow_drop_down"></b-icon>
                                 </a>
 
-                                <b-dropdown-option subheader paddingless>
+                                <b-dropdown-item custom paddingless>
                                     <form action="">
                                         <div class="modal-card" style="width:300px;">
                                             <section class="modal-card-body">
@@ -509,7 +509,7 @@
                                             </footer>
                                         </div>
                                     </form>
-                                </b-dropdown-option>
+                                </b-dropdown-item>
                             </b-dropdown>
                         </div>
                     </div>
@@ -532,37 +532,37 @@
                                     <b-icon icon="arrow_drop_down"></b-icon>
                                 </a>
 
-                                <b-dropdown-option subheader>
+                                <b-dropdown-item custom>
                                     Logged as <b>Rafael Beraldo</b>
-                                </b-dropdown-option>
+                                </b-dropdown-item>
                                 <hr class="dropdown-divider">
-                                <b-dropdown-option has-link>
+                                <b-dropdown-item has-link>
                                     <a href="https://google.com" target="_blank">
                                         <b-icon icon="link"></b-icon>
                                         Google (link)
                                     </a>
-                                </b-dropdown-option>
-                                <b-dropdown-option value="home">
+                                </b-dropdown-item>
+                                <b-dropdown-item value="home">
                                     <b-icon icon="home"></b-icon>
                                     Home
-                                </b-dropdown-option>
-                                <b-dropdown-option value="products">
+                                </b-dropdown-item>
+                                <b-dropdown-item value="products">
                                     <b-icon icon="shopping_cart"></b-icon>
                                     Products
-                                </b-dropdown-option>
-                                <b-dropdown-option value="blog" disabled>
+                                </b-dropdown-item>
+                                <b-dropdown-item value="blog" disabled>
                                     <b-icon icon="art_track"></b-icon>
                                     Blog
-                                </b-dropdown-option>
+                                </b-dropdown-item>
                                 <hr class="dropdown-divider">
-                                <b-dropdown-option value="settings">
+                                <b-dropdown-item value="settings">
                                     <b-icon icon="settings"></b-icon>
                                     Settings
-                                </b-dropdown-option>
-                                <b-dropdown-option value="logout">
+                                </b-dropdown-item>
+                                <b-dropdown-item value="logout">
                                     <b-icon icon="exit_to_app"></b-icon>
                                     Logout
-                                </b-dropdown-option>
+                                </b-dropdown-item>
                             </b-dropdown>
                         </div>
                     </div>
@@ -589,7 +589,7 @@
                         <b-icon icon="arrow_drop_down"></b-icon>
                     </button>
 
-                    <b-dropdown-option :value="true">
+                    <b-dropdown-item :value="true">
                         <div class="media">
                             <b-icon class="media-left" icon="public"></b-icon>
                             <div class="media-content">
@@ -597,9 +597,9 @@
                                 <small>Everyone can see</small>
                             </div>
                         </div>
-                    </b-dropdown-option>
+                    </b-dropdown-item>
 
-                    <b-dropdown-option :value="false">
+                    <b-dropdown-item :value="false">
                         <div class="media">
                             <b-icon class="media-left" icon="people"></b-icon>
                             <div class="media-content">
@@ -607,7 +607,7 @@
                                 <small>Only friends can see</small>
                             </div>
                         </div>
-                    </b-dropdown-option>
+                    </b-dropdown-item>
                 </b-dropdown>`,
                 code4: `
                 export default {
