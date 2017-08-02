@@ -471,11 +471,11 @@
                     },
                     computed: {
                         filteredDataObj() {
-                            return this.arrayExample.data.filter((option) => {
+                            return this.syncExample.data.filter((option) => {
                                 return option
                                     .toString()
                                     .toLowerCase()
-                                    .indexOf(this.arrayExample.name.toLowerCase()) >= 0
+                                    .indexOf(this.syncExample.name.toLowerCase()) >= 0
                             })
                         }
                     }
