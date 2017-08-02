@@ -144,7 +144,7 @@
         props: {
             data: {
                 type: Array,
-                default: []
+                default: () => []
             },
             bordered: Boolean,
             striped: Boolean,
