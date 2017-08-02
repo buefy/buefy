@@ -1,5 +1,8 @@
 <template>
-    <div class="field" :class="[fieldType, addonsPosition, { 'is-expanded': expanded }]">
+    <div class="field" :class="[fieldType, newPosition, {
+        'is-expanded': expanded,
+        'is-grouped-multiline': groupMultiline
+    }]">
         <label class="label" v-if="label">{{ label }}</label>
         <slot></slot>
         <p class="help" :class="newType" v-if="newMessage" v-html="formattedMessage"></p>
@@ -14,6 +17,7 @@
             label: String,
             message: [String, Array],
             grouped: Boolean,
+            groupMultiline: Boolean,
             position: String,
             expanded: Boolean,
             addons: {
@@ -45,25 +49,31 @@
         },
         computed: {
             /**
-             * Correct Bulma class for the side of the addon.
+             * Correct Bulma class for the side of the addon or group.
              *
              * This is not kept like the others (is-small, etc.),
              * because since 'has-addons' is set automatically it
              * doesn't make sense to teach users what addons are exactly.
              */
-            addonsPosition() {
+            newPosition() {
                 if (this.position === undefined) return
 
                 const position = this.position.split('-')
                 if (position.length < 1) return
 
-                if (this.position) return 'has-addons-' + position[1]
+                const prefix = this.grouped
+                    ? 'is-grouped-'
+                    : 'has-addons-'
+
+                if (this.position) return prefix + position[1]
             },
+
             /**
              * Field has addons if there are more than one slot
              * (element / component) in the Field.
              * Or is grouped when prop is set.
              */
+
             fieldType() {
                 if (this.grouped) {
                     return 'is-grouped'
@@ -71,6 +81,7 @@
                     return 'has-addons'
                 }
             },
+
             /**
              * Formatted message in case it's an array
              * (each element is separated by <br> tag)

@@ -1,17 +1,17 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Field</h1>
-        <h2 class="subtitle">Fields are used to add functionality to controls and/or to unify/group components and elements</h2>
+        <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
         <hr>
 
         <div class="content">
-            <p>These components can be used as a <strong>direct child</strong> of Field:</p>
+            <p>These components should be used as a <strong>direct child</strong> of Field:</p>
             <ul>
                 <li>Input</li>
                 <li>Select</li>
                 <li>Autocomplete</li>
+                <li><code>.control</code> elements (html class)</li>
             </ul>
-            <p>And <code>.control</code> elements (for buttons).</p>
         </div>
         <hr>
 
@@ -56,9 +56,10 @@
 
         <hr>
         <h2 class="title is-spaced">Addons</h2>
-        <h3 class="subtitle">Those components are automatically unified when inside a Field</h3>
+        <h3 class="subtitle">Those components are automatically attached together when inside a Field</h3>
+        <p class="content">Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
         <b-message type="is-warning">
-            <b>Note:</b> Be aware of it's responsiveness, avoid large groups/addons since they don't break lines, this is just an example.
+            <b>Note:</b> Beware of its responsiveness, avoid large groups of addons since they don't break lines.
         </b-message>
         <div class="columns">
             <div class="column">
@@ -71,6 +72,15 @@
                         <button class="button is-primary">Search</button>
                     </p>
                 </b-field>
+
+                <b-field>
+                    <b-input placeholder="This is expanded" expanded></b-input>
+                    <p class="control">
+                        <span class="button is-static">@gmail.com</span>
+                    </p>
+                </b-field>
+
+                <hr>
 
                 <b-field>
                     <b-select placeholder="Currency">
@@ -130,9 +140,9 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
+                            <b-dropdown-item>Action</b-dropdown-item>
+                            <b-dropdown-item>Another action</b-dropdown-item>
+                            <b-dropdown-item>Something else</b-dropdown-item>
                         </b-dropdown>
                     </p>
                 </b-field>
@@ -145,10 +155,10 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
+                            <b-dropdown-item value="open_issues">Open Issues and Pull Requests</b-dropdown-item>
+                            <b-dropdown-item value="your_issues">Your Issues</b-dropdown-item>
+                            <b-dropdown-item value="pull_requests">Your Pull Requests</b-dropdown-item>
+                            <b-dropdown-item value="everything">Everything</b-dropdown-item>
                         </b-dropdown>
                     </p>
                     <b-input icon="search" type="search" placeholder="Search..."></b-input>
@@ -160,72 +170,16 @@
         </div>
 
         <hr>
-        <h3 class="subtitle is-4">Positions and static buttons</h3>
-        <p class="content">Use the <code>expanded</code> prop to <b>fill up the remaining space</b>.</p>
-        <div class="example">
-            <b-field>
-                <b-input placeholder="Search..."
-                    type="search"
-                    icon="search">
-                </b-input>
-                <p class="control">
-                    <button class="button is-info">Search</button>
-                </p>
-            </b-field>
-
-            <hr>
-            <b-field position="is-centered">
-                <b-input placeholder="Search..."
-                    type="search"
-                    icon="search">
-                </b-input>
-                <p class="control">
-                    <button class="button is-info">Search</button>
-                </p>
-            </b-field>
-
-            <hr>
-            <b-field position="is-right">
-                <b-input placeholder="Search..."
-                    type="search"
-                    icon="search">
-                </b-input>
-                <p class="control">
-                    <button class="button is-info">Search</button>
-                </p>
-            </b-field>
-
-            <hr>
-            <b-field>
-                <b-input placeholder="Your email"></b-input>
-                <p class="control">
-                    <span class="button is-static">@gmail.com</span>
-                </p>
-            </b-field>
-            <b-field>
-                <b-input placeholder="Your email" expanded></b-input>
-                <p class="control">
-                    <span class="button is-static">@gmail.com</span>
-                </p>
-            </b-field>
-        </div>
-        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-
-        <hr>
         <h2 class="title is-spaced">Groups</h2>
-        <h3 class="subtitle">Or grouped horizontally with the <code>grouped</code> property</h3>
-        <p class="content">Use the <code>expanded</code> prop to <b>fill up the remaining space</b>.</p>
-        <b-message type="is-warning">
-            <b>Note:</b> Be aware of it's responsiveness, avoid large groups/addons since they don't break lines, this is just an example.
-        </b-message>
+        <div class="content">
+            <p>You can group those components together with the <code>grouped</code> property.</p>
+            <p>Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
+        </div>
         <div class="example">
             <b-field grouped>
                 <b-input placeholder="Search..."></b-input>
                 <p class="control">
                     <button class="button is-primary">Search</button>
-                </p>
-                <p class="control">
-                    <button class="button">Clear</button>
                 </p>
             </b-field>
 
@@ -234,15 +188,14 @@
                 <p class="control">
                     <button class="button is-primary">Search</button>
                 </p>
-                <p class="control">
-                    <button class="button">Clear</button>
-                </p>
             </b-field>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
 
-        <hr>
-        <h3 class="subtitle is-4">Nested Fields can be grouped as well</h3>
+        <p class="content">
+            Nested Fields can be grouped as well,
+            you have to use the <code>expanded</code> prop <u>on the Field</u> to <b>fill up the remaining space</b>.
+        </p>
         <div class="example">
             <b-field grouped>
                 <b-field label="Personal title">
@@ -259,7 +212,74 @@
                 </b-field>
             </b-field>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+
+        <div class="tags has-addons">
+            <span class="tag is-success">New!</span>
+            <span class="tag is-info">0.5.0</span>
+        </div>
+        <p class="content">
+            Add the <code>group-multiline</code> prop to allow controls to fill up <b>multiple lines</b>.
+            This is ideal for a long list of controls.
+        </p>
+        <div class="columns">
+            <div class="column">
+                <b-field grouped group-multiline>
+                    <b-input></b-input>
+                    <p class="control">
+                        <button class="button">First</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Second</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Third</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Fourth</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Fifth</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Sixth</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Seventh</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Eighth</button>
+                    </p>
+                </b-field>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+        <h3 class="title">Positions</h3>
+        <p class="content">Add the <code>position</code> prop to modify its alignment.</p>
+        <div class="example">
+            <b-field position="is-centered">
+                <b-input placeholder="Search..." type="search" icon="search">
+                </b-input>
+                <p class="control">
+                    <button class="button is-info">Search</button>
+                </p>
+            </b-field>
+
+            <hr>
+
+            <b-field grouped position="is-right">
+                <b-input placeholder="Search..." type="search" icon="search">
+                </b-input>
+                <p class="control">
+                    <button class="button is-info">Search</button>
+                </p>
+            </b-field>
+        </div>
+        <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <hr>
         <h3 class="title">Combining addons and groups</h3>
@@ -279,7 +299,7 @@
                 </b-field>
             </b-field>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
 
         <hr>
 
@@ -347,15 +367,22 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>group-multiline</code>',
+                        description: 'Allow controls to fill up multiple lines, making it responsive',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
                         name: '<code>position</code>',
                         description: 'Which position should the addons appear, optional',
-                        type: 'Boolean',
-                        values: '<code>is-left</code>, <code>is-centered</code>, <code>is-right</code>',
-                        default: '<code>is-left</code>'
+                        type: 'String',
+                        values: '<code>is-centered</code>, <code>is-right</code>',
+                        default: '—'
                     },
                     {
                         name: '<code>addons</code>',
-                        description: 'Field automatically unify controls',
+                        description: 'Field automatically attach controls together',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>true</code>'
@@ -403,6 +430,15 @@
                         <button class="button is-primary">Search</button>
                     </p>
                 </b-field>
+
+                <b-field>
+                    <b-input placeholder="This is expanded" expanded></b-input>
+                    <p class="control">
+                        <span class="button is-static">@gmail.com</span>
+                    </p>
+                </b-field>
+
+                <hr>
 
                 <b-field>
                     <b-select placeholder="Currency">
@@ -462,9 +498,9 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-dropdown-option>Action</b-dropdown-option>
-                            <b-dropdown-option>Another action</b-dropdown-option>
-                            <b-dropdown-option>Something else</b-dropdown-option>
+                            <b-dropdown-item>Action</b-dropdown-item>
+                            <b-dropdown-item>Another action</b-dropdown-item>
+                            <b-dropdown-item>Something else</b-dropdown-item>
                         </b-dropdown>
                     </p>
                 </b-field>
@@ -477,68 +513,19 @@
                                 <b-icon icon="arrow_drop_down"></b-icon>
                             </button>
 
-                            <b-dropdown-option value="open_issues">Open Issues and Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="your_issues">Your Issues</b-dropdown-option>
-                            <b-dropdown-option value="pull_requests">Your Pull Requests</b-dropdown-option>
-                            <b-dropdown-option value="everything">Everything</b-dropdown-option>
+                            <b-dropdown-item value="open_issues">Open Issues and Pull Requests</b-dropdown-item>
+                            <b-dropdown-item value="your_issues">Your Issues</b-dropdown-item>
+                            <b-dropdown-item value="pull_requests">Your Pull Requests</b-dropdown-item>
+                            <b-dropdown-item value="everything">Everything</b-dropdown-item>
                         </b-dropdown>
                     </p>
                     <b-input icon="search" type="search" placeholder="Search..."></b-input>
                 </b-field>`,
                 template3: `
-                <b-field>
-                    <b-input placeholder="Search..."
-                        type="search"
-                        icon="search">
-                    </b-input>
-                    <p class="control">
-                        <button class="button is-info">Search</button>
-                    </p>
-                </b-field>
-
-                <hr>
-                <b-field position="is-centered">
-                    <b-input placeholder="Search..."
-                        type="search"
-                        icon="search">
-                    </b-input>
-                    <p class="control">
-                        <button class="button is-info">Search</button>
-                    </p>
-                </b-field>
-
-                <hr>
-                <b-field position="is-right">
-                    <b-input placeholder="Search..."
-                        type="search"
-                        icon="search">
-                    </b-input>
-                    <p class="control">
-                        <button class="button is-info">Search</button>
-                    </p>
-                </b-field>
-
-                <hr>
-                <b-field>
-                    <b-input placeholder="Your email"></b-input>
-                    <p class="control">
-                        <span class="button is-static">@gmail.com</span>
-                    </p>
-                </b-field>
-                <b-field>
-                    <b-input placeholder="Your email" expanded></b-input>
-                    <p class="control">
-                        <span class="button is-static">@gmail.com</span>
-                    </p>
-                </b-field>`,
-                template4: `
                 <b-field grouped>
                     <b-input placeholder="Search..."></b-input>
                     <p class="control">
                         <button class="button is-primary">Search</button>
-                    </p>
-                    <p class="control">
-                        <button class="button">Clear</button>
                     </p>
                 </b-field>
 
@@ -547,11 +534,8 @@
                     <p class="control">
                         <button class="button is-primary">Search</button>
                     </p>
-                    <p class="control">
-                        <button class="button">Clear</button>
-                    </p>
                 </b-field>`,
-                template5: `
+                template4: `
                 <b-field grouped>
                     <b-field label="Personal title">
                         <b-select>
@@ -566,7 +550,53 @@
                         <b-input></b-input>
                     </b-field>
                 </b-field>`,
+                template5: `
+                <b-field grouped group-multiline>
+                    <b-input></b-input>
+                    <p class="control">
+                        <button class="button">First</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Second</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Third</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Fourth</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Fifth</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Sixth</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Seventh</button>
+                    </p>
+                    <p class="control">
+                        <button class="button">Eighth</button>
+                    </p>
+                </b-field>`,
                 template6: `
+                <b-field position="is-centered">
+                    <b-input placeholder="Search..." type="search" icon="search">
+                    </b-input>
+                    <p class="control">
+                        <button class="button is-info">Search</button>
+                    </p>
+                </b-field>
+
+                <hr>
+
+                <b-field grouped position="is-right">
+                    <b-input placeholder="Search..." type="search" icon="search">
+                    </b-input>
+                    <p class="control">
+                        <button class="button is-info">Search</button>
+                    </p>
+                </b-field>`,
+                template7: `
                 <b-field grouped>
                     <b-field label="Name" expanded>
                         <b-field>
