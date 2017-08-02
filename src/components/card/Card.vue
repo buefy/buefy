@@ -12,7 +12,7 @@
                 </span>
             </a>
         </header>
-        <transition>
+        <transition :name="animation">
             <div v-if="isOpen">
                 <div class="card-content" v-if="content" v-html="content"></div>
                 <slot v-else></slot>
