@@ -47,7 +47,7 @@
                             :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
                             :style="{ width: column.width + 'px' }"
                             @click.stop="sort(column)">
-                            <div class="th-wrap" :class="{ 'is-numeric': column.numeric }">
+                            <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
                                 {{ column.label }}
                                 <b-icon
                                     icon="arrow_upward"
@@ -291,7 +291,9 @@
             sortBy(array, key, fn, isAsc) {
                 let sorted = []
                 // Sorting without mutating original data
-                if (!fn || typeof fn !== 'function') {
+                if (fn && typeof fn === 'function') {
+                    sorted = [...array].sort(fn)
+                } else {
                     sorted = [...array].sort((a, b) => {
                         // Get nested values from objects
                         let newA = getValueByPath(a, key)
@@ -312,8 +314,6 @@
                             ? newA > newB ? 1 : -1
                             : newA > newB ? -1 : 1
                     })
-                } else {
-                    sorted = [...array].sort(fn)
                 }
 
                 return sorted
@@ -440,10 +440,13 @@
              */
             initSort() {
                 if (!this.defaultSort) return
+
                 const sortField = Array.isArray(this.defaultSort)
                     ? this.defaultSort[0]
                     : this.defaultSort
+
                 const direction = this.defaultSort[1] || ''
+
                 this.columns.forEach(column => {
                     if (column.field === sortField) {
                         this.isAsc = direction.toLowerCase() !== 'desc'

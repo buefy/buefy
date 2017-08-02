@@ -4,37 +4,59 @@
         <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
         <hr>
 
-        <div class="block">
-            <b-switch v-model="isBordered">Bordered</b-switch>
-            <b-switch v-model="isStriped">Striped</b-switch>
-            <b-switch v-model="isNarrowed">Narrowed</b-switch>
-            <b-switch v-model="isCheckable">Checkable</b-switch>
-            <b-switch v-model="isLoading">Loading state</b-switch>
+        <div class="field is-grouped is-grouped-multiline">
+            <div class="control">
+                <b-switch v-model="isBordered">Bordered</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isStriped">Striped</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isNarrowed">Narrowed</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isCheckable">Checkable</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isLoading">Loading state</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isPaginated">Paginated</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isEmpty">Empty</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isDetailed">Row is detailed (collapsible)</b-switch>
+            </div>
         </div>
-        <div class="block">
-            <b-switch v-model="isPaginated">Paginated</b-switch>
-            <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
-            <b-switch v-model="isEmpty">Empty</b-switch>
-            <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
-            <b-switch v-model="isDetailed">Row is detailed (collapsible)</b-switch>
-        </div>
-        <div class="block">
-            <b-select v-model="perPage" style="display: inline-block">
+        <div class="field is-grouped is-grouped-multiline">
+            <b-select v-model="perPage">
                 <option value="5">5 per page</option>
                 <option value="10">10 per page</option>
                 <option value="15">15 per page</option>
                 <option value="20">20 per page</option>
             </b-select>
-            <button class="button" @click="selected = {}"
-                :disabled="Object.keys(selected).length === 0">
-                <b-icon icon="clear"></b-icon>
-                <span>Clear Selected</span>
-            </button>
-            <button class="button" @click="checkedRows = []"
-                :disabled="checkedRows.length === 0">
-                <b-icon icon="clear"></b-icon>
-                <span>Clear Checked</span>
-            </button>
+            <div class="control">
+                <button class="button" @click="selected = {}"
+                    :disabled="Object.keys(selected).length === 0">
+                    <b-icon icon="clear"></b-icon>
+                    <span>Clear Selected</span>
+                </button>
+            </div>
+            <div class="control">
+                <button class="button" @click="checkedRows = []"
+                    :disabled="checkedRows.length === 0">
+                    <b-icon icon="clear"></b-icon>
+                    <span>Clear Checked</span>
+                </button>
+            </div>
         </div>
 
         <div class="example">
@@ -70,7 +92,7 @@
                                 {{ props.row.user.last_name }}
                             </b-table-column>
 
-                            <b-table-column field="date" label="Date" sortable>
+                            <b-table-column field="date" label="Date" sortable centered>
                                 <span class="tag is-success">
                                     {{ new Date(props.row.date).toLocaleDateString() }}
                                 </span>
@@ -442,7 +464,14 @@
                     },
                     {
                         name: '<code>numeric</code>',
-                        description: 'Align the cell content to the right',
+                        description: 'Align the cell content to the right, sort icon on left',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>centered</code>',
+                        description: 'Align the cell content to the center',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -499,7 +528,7 @@
                             {{ props.row.user.last_name }}
                         </b-table-column>
 
-                        <b-table-column field="date" label="Date" sortable>
+                        <b-table-column field="date" label="Date" sortable centered>
                             <span class="tag is-success">
                                 {{ new Date(props.row.date).toLocaleDateString() }}
                             </span>
