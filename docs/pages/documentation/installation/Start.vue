@@ -47,17 +47,17 @@
                 </b-message>
                 <pre class="block" v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
 
-                <b-message type="is-info">
-                    If you're using Nuxt.js for Server Side Rendering (SSR), then follow these steps:
+                <b-message type="is-warning">
+                    If you're using <strong>Nuxt.js</strong> for Server Side Rendering (SSR), then follow these steps:
                 </b-message>
                 <div class="content">
                     <ol>
-                        <li>Make a file in Nuxt's <code>plugins</code> folder called <code>buefy.js</code></li>
+                        <li>Create a new file in Nuxt's <strong>plugins</strong> folder called <code>buefy.js</code></li>
                         <li>
                             Paste and save it:
                             <pre class="block is-paddingless" v-highlight><code class="javascript">{{ importingSSR | pre }}</code></pre>
                         </li>
-                        <li>In the <code>nuxt.config.js</code> file, add <code>plugins: ['~plugins/buefy']</code> to the <code>module.exports</code> object.</li>
+                        <li>In the <strong>nuxt.config.js</strong> file, add <code>plugins: ['~plugins/buefy']</code> to the <code>module.exports</code> object</li>
                     </ol>
                 </div>
             </div>
