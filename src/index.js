@@ -5,6 +5,7 @@ import { Radio, RadioGroup, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
 import Autocomplete from './components/autocomplete'
+import Card from './components/card'
 import Field from './components/field'
 import Icon from './components/icon'
 import Input from './components/input'
@@ -27,6 +28,7 @@ import config, { setOptions } from './utils/config'
 
 const components = {
     Autocomplete,
+    Card,
     Checkbox,
     CheckboxGroup,
     Dropdown,
