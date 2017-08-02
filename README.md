@@ -62,7 +62,7 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 ```html
 <!-- Buefy CSS -->
-<link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.css">
+<link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
 
 <!-- Buefy JavaScript -->
 <script src="https://unpkg.com/buefy"></script>

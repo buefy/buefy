@@ -27,7 +27,7 @@
                 <h3 class="subtitle">Use unpkg <b>CDN</b> (or download):</h3>
                 <div class="content">
                     <p>JavaScript: <a href="https://unpkg.com/buefy" target="_blank">https://unpkg.com/buefy</a></p>
-                    <p>CSS: <a href="https://unpkg.com/buefy/lib/buefy.css" target="_blank">https://unpkg.com/buefy/lib/buefy.css</a></p>
+                    <p>CSS: <a href="https://unpkg.com/buefy/lib/buefy.min.css" target="_blank">https://unpkg.com/buefy/lib/buefy.min.css</a></p>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
                 Vue.use(Buefy) `,
                 importingCDNHtml: `
                 <!-- Buefy CSS -->
-                <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.css">
+                <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
 
                 <!-- Buefy JavaScript -->
                 <script src="https://unpkg.com/buefy"><\/script>`,
