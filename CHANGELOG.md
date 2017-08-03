@@ -4,10 +4,15 @@
 
 ### Breaking changes
 
-* **Update Bulma to v0.5.0**, breaking changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+* **Update Bulma to v0.5.0**, changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+    * Buefy Sass variables are also following the new convention
 * Constructor option ``defaultContentElement`` renamed to ``defaultContainerElement``
 * ``b-dropdown-option`` renamed to ``b-dropdown-item``
     * ``subheader`` prop renamed to ``custom``
+* Input, Select and Autocomplete can now listen to any native event without the ``.native`` modifier
+    * Any attribute will be added directly to ``<input>`` or ``<select>`` itself instead of the root element
+    * Autocomplete ``select`` event renamed to ``selected`` (in virtue of the new way events are bound, native names aren't accepted)
+    * Most of ``change`` events used before that returned pure value will now return ``$event``, use ``input`` instead
 
 ### New stuff
 

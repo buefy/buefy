@@ -316,27 +316,6 @@
                         default: '—'
                     },
                     {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
                         name: '<code>loading</code>',
                         description: 'Add the loading state to the Select',
                         type: 'Boolean',
@@ -363,22 +342,24 @@
                         type: 'String',
                         values: '<code>mdi</code>, <code>fa</code>',
                         default: '<code>mdi</code>'
+                    },
+                    {
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 events: [
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when the selection is changed',
-                        parameters: '<code>value: String</code>'
+                        name: '<code>input</code>',
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: Any</code>'
                     },
                     {
-                        name: '<code>focus</code>',
-                        description: 'Triggers when the select is focused',
-                        parameters: '<code>event: $event</code>'
-                    },
-                    {
-                        name: '<code>blur</code>',
-                        description: 'Triggers when the select has lost focus',
+                        name: 'Any native event',
+                        description: 'Listen to any native event',
                         parameters: '<code>event: $event</code>'
                     }
                 ],

@@ -308,7 +308,7 @@
                     },
                     {
                         name: '<code>type</code>',
-                        description: 'Same as native input type',
+                        description: 'Input type, like native',
                         type: 'String',
                         values: 'Any native input type, and <code>textarea</code>',
                         default: '<code>text</code>'
@@ -356,117 +356,30 @@
                         default: '<code>mdi</code>'
                     },
                     {
-                        name: '<code>autocomplete</code>',
-                        description: 'Same as native <code>autocomplete</code>',
-                        type: 'String',
-                        values: '<code>on</code>, <code>off</code>',
-                        default: '<code>on</code>'
-                    },
-                    {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>readonly</code>',
-                        description: 'Same as native <code>readonly</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>min</code>',
-                        description: 'Same as native <code>min</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>max</code>',
-                        description: 'Same as native <code>max</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>step</code>',
-                        description: 'Same as native <code>step</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>minlength</code>',
-                        description: 'Same as native <code>minlength</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
                         name: '<code>maxlength</code>',
-                        description: 'Same as native <code>maxlength</code>, also adds character counter',
-                        type: 'Number',
+                        description: 'Same as native <code>maxlength</code>, plus character counter',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
                     {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>pattern</code>',
-                        description: 'Same as native <code>pattern</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>placeholder</code>',
-                        description: 'Same as native <code>placeholder</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>rows</code>',
-                        description: 'Same as native <code>rows</code>',
-                        type: 'Number',
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
                         values: '—',
                         default: '—'
                     }
                 ],
                 events: [
                     {
-                        name: '<code>[any].native</code>',
-                        description: 'Listen to native event, can be used with any (click, keydown, keyup, mouseenter, etc.). E.g: <code>click.native</code>',
-                        parameters: '<code>event: $event</code>'
-                    },
-                    {
-                        name: '<code>blur</code>',
-                        description: 'Triggers when input has lost focus',
-                        parameters: '<code>event: $event</code>'
-                    },
-                    {
-                        name: '<code>focus</code>',
-                        description: 'Triggers when input is focused',
-                        parameters: '<code>event: $event</code>'
-                    },
-                    {
                         name: '<code>input</code>',
-                        description: 'Triggers when input text is changed',
-                        parameters: '<code>value: String/Number</code>'
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: String|Number</code>'
+                    },
+                    {
+                        name: 'Any native event',
+                        description: 'Listen to any native event',
+                        parameters: '<code>event: $event</code>'
                     }
                 ],
                 methods: [

@@ -6,25 +6,16 @@
             :loading="loading"
             :icon="icon"
             :icon-pack="iconPack"
-            :name="name"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :readonly="readonly"
             :maxlength="maxlength"
-            :minlength="minlength"
-            :required="required"
-            :min="min"
-            :max="max"
-            :step="step"
-            :pattern="pattern"
             autocomplete="off"
-            @change="$emit('change', newValue)"
+            v-bind="$attrs"
+            v-on="$listeners"
             @focus="focused"
-            @blur="blur"
-            @keyup.native.esc.prevent="isActive = false"
-            @keydown.native.enter.prevent="enterPressed"
-            @keydown.native.up.prevent="keyArrows('up')"
-            @keydown.native.down.prevent="keyArrows('down')">
+            @blur="checkHtml5Validity"
+            @keyup.esc.prevent="isActive = false"
+            @keydown.enter.prevent="enterPressed"
+            @keydown.up.prevent="keyArrows('up')"
+            @keydown.down.prevent="keyArrows('down')">
         </b-input>
 
         <transition name="fade">
@@ -56,12 +47,13 @@
 
     export default {
         name: 'bAutocomplete',
+        inheritAttrs: false,
         mixins: [FormElementMixin],
         components: {
             [Input.name]: Input
         },
         props: {
-            value: String,
+            value: [Number, String],
             data: Array,
             field: {
                 type: String,
@@ -185,7 +177,7 @@
                 if (option === undefined) return
 
                 this.selected = option
-                this.$emit('select', this.selected)
+                this.$emit('selected', this.selected)
                 if (this.selected !== null) {
                     this.newValue = this.getValue(this.selected)
                 }
@@ -262,20 +254,10 @@
 
             /**
              * Focus listener.
-             * If value is the same as selected, select all from input.
+             * If value is the same as selected, select all text.
              */
-            focused(event) {
-                this.$emit('focus', event)
-                if (this.getValue(this.selected) === this.newValue) this.$refs.input.focus()
-            },
-
-            /**
-             * Blur listener.
-             * Emit events and fire the HTML5 validation.
-             */
-            blur(event) {
-                this.$emit('blur', event)
-                this.$refs.input.checkHtml5Validity()
+            focused() {
+                if (this.getValue(this.selected) === this.newValue) this.focus()
             }
         },
         created() {

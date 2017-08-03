@@ -8,18 +8,7 @@ export default {
 
         // Native options to use in HTML5 validation
         autocomplete: String,
-        required: Boolean,
-        disabled: Boolean,
-        max: [Number, String],
-        maxlength: [Number, String],
-        min: [Number, String],
-        minlength: [Number, String],
-        name: String,
-        pattern: String,
-        placeholder: String,
-        readonly: Boolean,
-        step: [Number, String],
-        rows: [Number, String]
+        maxlength: [Number, String]
     },
     data() {
         return {
@@ -69,12 +58,16 @@ export default {
         checkHtml5Validity() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
+            const el = this.$data._isAutocomplete
+                ? this.$refs.input.$refs.input
+                : this.$refs[this.$data._elementRef]
+
             let type = null
             let message = null
             let isValid = true
-            if (!this.$refs[this.$data._elementRef].checkValidity()) {
+            if (!el.checkValidity()) {
                 type = 'is-danger'
-                message = this.$refs[this.$data._elementRef].validationMessage
+                message = el.validationMessage
                 isValid = false
             }
             this.isValid = isValid
