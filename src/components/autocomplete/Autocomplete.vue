@@ -19,23 +19,26 @@
         </b-input>
 
         <transition name="fade">
-            <span class="box"
+            <div class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && visibleData.length > 0"
                 ref="dropdown">
-                <ul>
-                    <li v-for="(option, index) in visibleData"
+                <div class="dropdown-content">
+                    <a v-for="(option, index) in visibleData"
                         :key="index"
-                        class="option"
+                        class="dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
                         <slot v-if="hasCustomTemplate" :option="option" :index="index"></slot>
                         <span v-else v-html="getValue(option, true)"></span>
-                    </li>
-                    <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
-                </ul>
-            </span>
+                    </a>
+                    <div v-if="data.length > maxResults"
+                        class="dropdown-item is-disabled">
+                        &hellip;
+                    </div>
+                </div>
+            </div>
         </transition>
     </div>
 </template>
