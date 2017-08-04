@@ -23,6 +23,8 @@
         props: {
             value: {},
             nativeValue: {},
+            disabled: Boolean,
+            name: String,
             trueValue: {
                 type: [String, Number, Boolean, Function, Object, Array, Symbol],
                 default: true
@@ -30,9 +32,7 @@
             falseValue: {
                 type: [String, Number, Boolean, Function, Object, Array, Symbol],
                 default: false
-            },
-            disabled: Boolean,
-            name: String
+            }
         },
         data() {
             return {
@@ -49,11 +49,9 @@
 
             /**
              * Emit input event to update the user v-model.
-             * Call update event from parent if it's a bCheckboxGroup.
              */
             newValue(value) {
                 this.$emit('input', value)
-                this.$parent.$data._isCheckboxGroup && this.$parent.update()
             }
         }
     }

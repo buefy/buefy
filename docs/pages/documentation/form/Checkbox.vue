@@ -67,7 +67,7 @@
         <h2 class="title is-spaced">API</h2>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="checkboxProps" default-sort="name">
+                <b-table :data="props" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -89,7 +89,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="checkboxEvents" default-sort="name">
+                <b-table :data="events" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -114,7 +114,7 @@
                 checkbox: false,
                 checkboxCustom: 'Yes',
                 checkboxGroup: ['Flint'],
-                checkboxProps: [
+                props: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
@@ -124,7 +124,7 @@
                     },
                     {
                         name: '<code>native-value</code>',
-                        description: 'Native value of input',
+                        description: 'Same as native <code>value</code>',
                         type: 'Any',
                         values: '—',
                         default: '—'
@@ -158,7 +158,7 @@
                         default: '—'
                     }
                 ],
-                checkboxEvents: [
+                events: [
                     {
                         name: '<code>input</code>',
                         description: 'Triggers when the value of checkbox is changed',
