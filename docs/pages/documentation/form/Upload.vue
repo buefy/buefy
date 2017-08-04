@@ -1,72 +1,58 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Upload</h1>
-        <h2 class="subtitle">
-            Upload one or more files
-        </h2>
+        <h2 class="subtitle">Upload one or more files</h2>
 
         <hr>
 
         <div class="columns">
             <div class="column">
-                
-                <b-field>
-                    <b-upload v-model="files">
-                        <b-icon icon="file_upload"></b-icon>
-                        <span>Click to upload</span>
-                    </b-upload>
-                </b-field>
-
-                <div class="block" v-if="files && files.length">
-                    <span class="tag is-primary">
-                        {{files[0].name}}
-                        <button type="button" 
-                                class="delete is-small" 
-                                @click="deleteFile()">
-                        </button>
-                    </span>
-                </div>
-
+                <b-upload v-model="files">
+                    <b-icon icon="file_upload"></b-icon>
+                    <span>Click to upload</span>
+                </b-upload>
             </div>
             <div class="column">
                 <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
             </div>
         </div>
 
         <hr>
 
-        <h2 class="title is-spaced">Drag and Drop Upload</h2>
+        <h2 class="title is-spaced">Drag and drop</h2>
 
         <div class="columns">
             <div class="column">
-
                 <b-field>
-                    <b-upload v-model="dropFiles" 
-                              multiple
-                              drag-drop>
+                    <b-upload v-model="dropFiles"
+                        multiple
+                        drag-drop>
 
-                        <div style="min-width:300px;">
-                            <b-icon icon="file_upload"></b-icon>
-                            <span>Drop your files here or click to upload</span>
-                        </div>
-
+                        <section class="section">
+                            <div class="content has-text-centered">
+                                <p>
+                                    <b-icon
+                                        icon="file_upload"
+                                        size="is-large">
+                                    </b-icon>
+                                </p>
+                                <p>Drop your files here or click to upload</p>
+                            </div>
+                        </section>
                     </b-upload>
                 </b-field>
 
-                <ul>
-                    <li v-for="(file, index) in currentDropFiles" :key="index">
-                        <div class="block">
-                            <span class="tag is-primary">
-                                {{file.name}}
-                                <button type="button" 
-                                        class="delete is-small" 
-                                        @click="deleteDropFile(index)">
-                                </button>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
+                <div class="tags">
+                    <span v-for="(file, index) in currentDropFiles"
+                        :key="index"
+                        class="tag is-primary" >
+                        {{file.name}}
+                        <button class="delete is-small"
+                            type="button"
+                            @click="deleteDropFile(index)">
+                        </button>
+                    </span>
+                </div>
 
             </div>
             <div class="column">
@@ -243,62 +229,41 @@
                     }
                 ],
                 template1: `
+                <b-upload v-model="files">
+                    <b-icon icon="file_upload"></b-icon>
+                    <span>Click to upload</span>
+                </b-upload>`,
+                template2: `
                 <b-field>
-                    <b-upload v-model="files">
-                        <b-icon icon="file_upload"></b-icon>
-                        <span>Click to upload</span>
+                    <b-upload v-model="dropFiles"
+                        multiple
+                        drag-drop>
+
+                        <section class="section">
+                            <div class="content has-text-centered">
+                                <p>
+                                    <b-icon
+                                        icon="file_upload"
+                                        size="is-large">
+                                    </b-icon>
+                                </p>
+                                <p>Drop your files here or click to upload</p>
+                            </div>
+                        </section>
                     </b-upload>
                 </b-field>
 
-                <div class="block" v-if="files && files.length">
-                    <span class="tag is-primary">
-                        {{file[0].name}}
-                        <button type="button" 
-                                class="delete is-small" 
-                                @click="deleteFile()">
+                <div class="tags">
+                    <span v-for="(file, index) in currentDropFiles"
+                        :key="index"
+                        class="tag is-primary" >
+                        {{file.name}}
+                        <button class="delete is-small"
+                            type="button"
+                            @click="deleteDropFile(index)">
                         </button>
                     </span>
                 </div>`,
-                code1: `
-                export default {
-                    data() {
-                        return {
-                            files: null
-                        }
-                    },
-                    methods: {
-                        deleteFile() {
-                            this.files = null
-                        }
-                    }
-                }`,
-                template2: `
-                <b-field>
-                    <b-upload v-model="dropFiles" 
-                              multiple
-                              drag-drop>
-
-                        <div style="min-width:300px;">
-                            <b-icon icon="file_upload"></b-icon>
-                            <span>Drop your file here or click to upload</span>
-                        </div>
-
-                    </b-upload>
-                </b-field>
-
-                <ul>
-                    <li v-for="(file, index) in currentDropFiles" :key="index">
-                        <div class="block">
-                            <span class="tag is-primary">
-                                {{file.name}}
-                                <button type="button" 
-                                        class="delete is-small" 
-                                        @click="deleteDropFile(index)">
-                                </button>
-                            </span>
-                        </div>
-                    </li>
-                </ul>`,
                 code2: `
                 export default {
                     data() {
@@ -334,9 +299,6 @@
             }
         },
         methods: {
-            deleteFile() {
-                this.files = null
-            },
             deleteDropFile(index) {
                 this.currentDropFiles.splice(index, 1)
             }

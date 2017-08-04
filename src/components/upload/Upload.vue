@@ -1,19 +1,22 @@
 <template>
-    <div class="b-upload control"
-        :class="{ 'is-clearfix': !hasMessage }">
-
-        <a v-if="!dragDrop"
-            class="button"
-            :class="[buttonSize, buttonType, { 'is-loading': loading }]"
-            :disabled="disabled"
-            @click="upload">
-            <slot></slot>
-        </a>
+    <div class="upload">
+        <div v-if="!dragDrop" class="field has-addons">
+            <div class="control">
+                <a class="button"
+                    :class="[buttonSize, buttonType, { 'is-loading': loading }]"
+                    :disabled="disabled"
+                    @click="upload">
+                    <slot></slot>
+                </a>
+            </div>
+            <div v-if="value && value.length" class="control">
+                <span class="button is-static">{{ value[0].name }}</span>
+            </div>
+        </div>
 
         <div v-else
             class="upload-draggable"
             :class="[dragDropType, {
-                'upload-draggable-hover': dragDropFocus,
                 'is-loading': loading,
                 'is-disabled': disabled
             }]"
@@ -74,17 +77,8 @@
         data() {
             return {
                 newValue: this.value,
-                file: this.value,
                 dragDropFocus: false,
                 _elementRef: 'input'
-            }
-        },
-        computed: {
-            /**
-             * Check if have any message prop from parent if it's a Field.
-             */
-            hasMessage() {
-                return this.$parent.$data._isField && this.$parent.newMessage
             }
         },
         watch: {
