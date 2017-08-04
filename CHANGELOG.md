@@ -13,11 +13,12 @@
 * ``change`` events for all form controls (Input, Select Autocomplete, Checkbox, RadioGroup, Switch) that returned pure value will now return ``$event`` (and require ``.native`` modifier), use ``input`` instead
 * Checkbox ``custom-value`` prop renamed to ``native-value``
     * ``checked`` prop removed
-* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
+* **Remove CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
 * Radio and Radio Button ``value`` prop renamed to ``native-value``
     * Add ``v-model`` support
     * Radio Buttons have to be wrapped on a field
 * **Removed RadioGroup**, just add the same ``v-model`` to multiple Radios/RadioButtons and set a ``native-value`` [see docs](https://buefy.github.io/#/documentation/radio)
+* Remove switch ``checked`` prop
 
 ### New stuff
 
@@ -27,6 +28,7 @@
 * #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
 * #201 Add support to array on Field ``message`` prop (thanks @jtommy)
 * #207 Add ``centered`` prop to table column
+* Add ``native-value``, ``true-value`` and ``false-value`` props to switch
 
 ### Bug fixes
 
