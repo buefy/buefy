@@ -11,7 +11,7 @@
             <select v-model="selected"
                 ref="select"
                 v-bind="$attrs"
-                @blur="checkHtml5Validity && $emit('blur', $event)"
+                @blur="checkHtml5Validity() && $emit('blur', $event)"
                 @focus="$emit('focus', $event)">
 
                 <option

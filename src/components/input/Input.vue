@@ -14,9 +14,9 @@
             :value="newValue"
             :maxlength="maxlength"
             v-bind="$attrs"
-            v-on="$listeners"
             @input="input"
-            @blur="checkHtml5Validity">
+            @blur="checkHtml5Validity() && $emit('blur', $event)"
+            @focus="$emit('focus', $event)">
 
         <textarea v-else
             ref="textarea"
@@ -25,9 +25,9 @@
             :value="newValue"
             :maxlength="maxlength"
             v-bind="$attrs"
-            v-on="$listeners"
             @input="input"
-            @blur="checkHtml5Validity">
+            @blur="checkHtml5Validity() && $emit('blur', $event)"
+            @focus="$emit('focus', $event)">
         </textarea>
 
         <b-icon v-if="icon"
