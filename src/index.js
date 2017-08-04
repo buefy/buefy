@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup } from './components/checkbox'
+import { Checkbox } from './components/checkbox'
 import { Dropdown, DropdownItem } from './components/dropdown'
 import { Menu, MenuDropdown, MenuItem, MenuList } from './components/menu'
 import { Radio, RadioGroup, RadioButton } from './components/radio'
@@ -28,7 +28,6 @@ import config, { setOptions } from './utils/config'
 const components = {
     Autocomplete,
     Checkbox,
-    CheckboxGroup,
     Dropdown,
     DropdownItem,
     Field,

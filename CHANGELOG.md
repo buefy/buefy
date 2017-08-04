@@ -11,6 +11,9 @@
     * ``subheader`` prop renamed to ``custom``
 * Any attributes on Input, Select and Autocomplete will be added directly to ``<input>`` or ``<select>`` itself instead of the root element
 * ``change`` events for all form controls (Input, Select Autocomplete, Checkbox, RadioGroup, Switch) that returned pure value will now return ``$event`` (and require ``.native`` modifier), use ``input`` instead
+* Checkbox ``custom-value`` prop renamed to ``native-value``
+    * ``checked`` prop removed
+* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``
 
 ### New stuff
 

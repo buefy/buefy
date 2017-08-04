@@ -4,15 +4,14 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="updateValue(!newValue, $event)">
-        <input
-            v-model="newValue"
+        @keydown.prevent.enter.space="$refs.label.click()">
+        <input v-model="newValue"
             type="checkbox"
             :disabled="disabled"
             :name="name"
+            :value="nativeValue"
             :true-value="trueValue"
-            :false-value="falseValue"
-            @change="updateValue(newValue, $event)">
+            :false-value="falseValue">
         <span class="check"></span>
         <span class="control-label"><slot></slot></span>
     </label>
@@ -22,24 +21,22 @@
     export default {
         name: 'bCheckbox',
         props: {
-            value: [String, Number, Boolean, Object, Array, Symbol, Function],
-            disabled: Boolean,
-            name: String,
-            checked: Boolean,
-            nosync: Boolean,
+            value: {},
+            nativeValue: {},
             trueValue: {
-                type: [String, Number, Boolean, Object, Array, Symbol, Function],
+                type: [String, Number, Boolean, Function, Object, Array, Symbol],
                 default: true
             },
             falseValue: {
-                type: [String, Number, Boolean, Object, Array, Symbol, Function],
+                type: [String, Number, Boolean, Function, Object, Array, Symbol],
                 default: false
             },
-            customValue: [String, Number, Boolean, Object, Array, Symbol, Function]
+            disabled: Boolean,
+            name: String
         },
         data() {
             return {
-                newValue: this.value || this.checked
+                newValue: this.value
             }
         },
         watch: {
@@ -52,26 +49,11 @@
 
             /**
              * Emit input event to update the user v-model.
-             * Call updateValue from parent if it's a Checkbox Group.
+             * Call update event from parent if it's a bCheckboxGroup.
              */
             newValue(value) {
-                if (this.nosync) {
-                    // Used internally by Table, will update only by prop
-                    this.newValue = this.value
-                    return
-                }
                 this.$emit('input', value)
-                this.$parent.isCheckboxGroup && this.$parent.updateValue()
-            }
-        },
-        methods: {
-            /**
-             * Set the newValue.
-             * Emit change event.
-             */
-            updateValue(newValue, $event) {
-                this.newValue = newValue
-                this.$emit('change', newValue, $event)
+                this.$parent.$data._isCheckboxGroup && this.$parent.update()
             }
         }
     }
