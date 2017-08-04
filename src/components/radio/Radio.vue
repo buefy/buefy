@@ -1,17 +1,15 @@
 <template>
     <label class="radio"
-        :class="{ 'is-disabled': disabled }"
         ref="label"
+        :class="{ 'is-disabled': disabled }"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="$parent.updateValue(value)">
-        <input
+        @keydown.prevent.enter.space="$refs.label.click()">
+        <input v-model="newValue"
             type="radio"
             :disabled="disabled"
-            :checked="isChecked"
             :name="name"
-            :value="value"
-            @change="changed">
+            :value="nativeValue">
         <span class="check"></span>
         <span class="control-label"><slot></slot></span>
     </label>
@@ -21,28 +19,29 @@
     export default {
         name: 'bRadio',
         props: {
-            value: [String, Number, Boolean, Object, Array, Symbol, Function],
+            value: {},
+            nativeValue: {},
             disabled: Boolean,
             name: String
         },
         data() {
             return {
-                isChecked: false
+                newValue: this.value
             }
         },
-        methods: {
+        watch: {
             /**
-             * Input change listener.
-             * Call updateValue from parent.
+             * When v-model change, set internal value.
              */
-            changed(event) {
-                this.$parent.updateValue(this.value, event)
-            }
-        },
-        created() {
-            if (!this.$parent.$data._isRadioGroup) {
-                this.$destroy()
-                throw new Error('You should wrap bRadio on a bRadioGroup')
+            value(value) {
+                this.newValue = value
+            },
+
+            /**
+             * Emit input event to update the user v-model.
+             */
+            newValue(value) {
+                this.$emit('input', value)
             }
         }
     }

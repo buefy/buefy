@@ -1,7 +1,7 @@
 import { Checkbox } from './components/checkbox'
 import { Dropdown, DropdownItem } from './components/dropdown'
 import { Menu, MenuDropdown, MenuItem, MenuList } from './components/menu'
-import { Radio, RadioGroup, RadioButton } from './components/radio'
+import { Radio, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
 import Autocomplete from './components/autocomplete'
@@ -45,7 +45,6 @@ const components = {
     Panel,
     Radio,
     RadioButton,
-    RadioGroup,
     Select,
     Switch,
     Table,
