@@ -244,7 +244,7 @@
                 </b-tooltip>
 
                 <b-tooltip
-                    label="Tooltip large multilined, because it's really long to be on a medium size. Did I tell you it's really long? Yes, it is — I asure you!"
+                    label="Tooltip large multilined, because it's really long to be on a medium size. Did I tell you it's really long? Yes, it is — I assure you!"
                     position="is-bottom"
                     multilined
                     size="is-large">
