@@ -11,7 +11,6 @@
             v-bind="$attrs"
             @focus="focused"
             @blur="$emit('blur', $event)"
-            @change.native="test"
             @keyup.native.esc.prevent="isActive = false"
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
