@@ -1,40 +1,39 @@
 <template>
     <div class="b-upload control"
-         :class="{'is-clearfix': !hasMessage}">
+        :class="{ 'is-clearfix': !hasMessage }">
 
-        <a  v-if="!dragDrop"
-            class="button" 
-            :class="[buttonSize, buttonType, {'is-loading': loading}]"
+        <a v-if="!dragDrop"
+            class="button"
+            :class="[buttonSize, buttonType, { 'is-loading': loading }]"
             :disabled="disabled"
             @click="upload">
             <slot></slot>
         </a>
 
-        <div v-else 
+        <div v-else
             class="upload-draggable"
             :class="[dragDropType, {
-                    'upload-draggable-hover': dragDropFocus, 
-                    'is-loading': loading, 
-                    'is-disabled': disabled
+                'upload-draggable-hover': dragDropFocus,
+                'is-loading': loading,
+                'is-disabled': disabled
             }]"
-            @click="upload" 
+            @click="upload"
             @mouseover.prevent="updateDragDropFocus(true)"
             @mouseout.prevent="updateDragDropFocus(false)"
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
-            @dragenter.prevent="updateDragDropFocus(true)" 
+            @dragenter.prevent="updateDragDropFocus(true)"
             @drop.prevent="onFileChange">
             <slot></slot>
         </div>
 
-        <input ref="inputFile" 
-               type="file"
-               class="is-hidden"
-               :name="name"
-               :required="required"
-               :accept="accept" 
-               :multiple="multiple"
-               @change="onFileChange" />
+        <input ref="input"
+            type="file"
+            class="is-hidden"
+            v-bind="$attrs"
+            :accept="accept"
+            :multiple="multiple"
+            @change="onFileChange">
     </div>
 </template>
 
@@ -69,14 +68,15 @@
             dragDropType: {
                 type: String,
                 default: 'is-primary'
-            }
+            },
+            disabled: Boolean
         },
         data() {
             return {
                 newValue: this.value,
                 file: this.value,
                 dragDropFocus: false,
-                _elementRef: 'inputFile'
+                _elementRef: 'input'
             }
         },
         computed: {
@@ -104,8 +104,8 @@
              */
             upload() {
                 if (!this.disabled && !this.loading) {
-                    this.$refs.inputFile.value = null
-                    this.$refs.inputFile.click()
+                    this.$refs.input.value = null
+                    this.$refs.input.click()
                 }
             },
 
