@@ -116,7 +116,7 @@
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
-                        :total="newData.length"
+                        :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
                         :current="currentPage"
@@ -172,6 +172,11 @@
             rowClass: {
                 type: Function,
                 default: () => ''
+            },
+            backendPagination: Boolean,
+            total: {
+                type: [Number, String],
+                default: 0
             }
         },
         data() {
@@ -179,6 +184,7 @@
                 columns: [],
                 visibleDetailRows: [],
                 newData: this.data,
+                newDataTotal: this.backendPagination ? this.total : this.data.length,
                 newCheckedRows: [...this.checkedRows],
                 currentSortColumn: {},
                 isAsc: true,
@@ -192,11 +198,25 @@
             /**
              * When data prop change, update internal value and sort again,
              * do not sort however if it's backend-sort.
+             * If it isn't backend-paginated set new total
              */
             data(value) {
                 this.newData = value
                 if (!this.backendSorting) {
                     this.sort(this.currentSortColumn, true)
+                }
+                if (!this.backendPagination) {
+                    this.newDataTotal = value.length
+                }
+            },
+
+            /**
+             * When Pagination total change, update internal total
+             * only if it's backend-paginated.
+             */
+            total(newTotal) {
+                if (this.backendPagination) {
+                    this.newDataTotal = newTotal
                 }
             },
 
