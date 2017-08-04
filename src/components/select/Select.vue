@@ -11,8 +11,8 @@
             <select v-model="selected"
                 ref="select"
                 v-bind="$attrs"
-                v-on="$listeners"
-                @blur="checkHtml5Validity">
+                @blur="checkHtml5Validity && $emit('blur', $event)"
+                @focus="$emit('focus', $event)">
 
                 <option
                     v-if="placeholder"

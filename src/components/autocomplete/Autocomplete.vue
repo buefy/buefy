@@ -9,13 +9,13 @@
             :maxlength="maxlength"
             autocomplete="off"
             v-bind="$attrs"
-            v-on="$listeners"
             @focus="focused"
-            @blur="checkHtml5Validity"
-            @keyup.esc.prevent="isActive = false"
-            @keydown.enter.prevent="enterPressed"
-            @keydown.up.prevent="keyArrows('up')"
-            @keydown.down.prevent="keyArrows('down')">
+            @blur="$emit('blur', $event)"
+            @change.native="test"
+            @keyup.native.esc.prevent="isActive = false"
+            @keydown.native.enter.prevent="enterPressed"
+            @keydown.native.up.prevent="keyArrows('up')"
+            @keydown.native.down.prevent="keyArrows('down')">
         </b-input>
 
         <transition name="fade">
@@ -180,7 +180,7 @@
                 if (option === undefined) return
 
                 this.selected = option
-                this.$emit('selected', this.selected)
+                this.$emit('select', this.selected)
                 if (this.selected !== null) {
                     this.newValue = this.getValue(this.selected)
                 }
@@ -259,8 +259,9 @@
              * Focus listener.
              * If value is the same as selected, select all text.
              */
-            focused() {
+            focused(event) {
                 if (this.getValue(this.selected) === this.newValue) this.focus()
+                this.$emit('focus', event)
             }
         },
         created() {

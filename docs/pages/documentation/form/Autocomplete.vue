@@ -15,7 +15,7 @@
                     :data="filteredDataArray"
                     placeholder="e.g. jQuery"
                     icon="search"
-                    @selected="option => arrayExample.selected = option">
+                    @select="option => arrayExample.selected = option">
                 </b-autocomplete>
             </b-field>
         </div>
@@ -37,7 +37,7 @@
                     :keep-first="syncExample.keepFirst"
                     :data="filteredDataObj"
                     field="user.first_name"
-                    @selected="option => syncExample.selected = option">
+                    @select="option => syncExample.selected = option">
                 </b-autocomplete>
             </b-field>
         </div>
@@ -57,7 +57,7 @@
                     has-custom-template
                     :loading="asyncExample.isFetching"
                     @input="getAsyncData"
-                    @selected="option => asyncExample.selected = option">
+                    @select="option => asyncExample.selected = option">
 
                     <template scope="props">
                         <div class="media">
@@ -302,8 +302,18 @@
                         parameters: '<code>option: String|Number|Object</code>'
                     },
                     {
-                        name: 'Any native event',
-                        description: 'Listen to any native event',
+                        name: '<code>focus</code>',
+                        description: 'Triggers when input has received focus',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>blur</code>',
+                        description: 'Triggers when input has lost focus',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any native event, e.g. <code>click.native</code>',
                         parameters: '<code>event: $event</code>'
                     }
                 ],
@@ -327,7 +337,7 @@
                         :data="filteredDataArray"
                         placeholder="e.g. jQuery"
                         icon="search"
-                        @selected="option => arrayExample.selected = option">
+                        @select="option => arrayExample.selected = option">
                     </b-autocomplete>
                 </b-field>`,
                 code1: `
@@ -379,7 +389,7 @@
                         :keep-first="syncExample.keepFirst"
                         :data="filteredDataObj"
                         field="user.first_name"
-                        @selected="option => syncExample.selected = option">
+                        @select="option => syncExample.selected = option">
                     </b-autocomplete>
                 </b-field>`,
                 code2: `
@@ -422,7 +432,7 @@
                         has-custom-template
                         :loading="asyncExample.isFetching"
                         @input="getAsyncData"
-                        @selected="option => asyncExample.selected = option">
+                        @select="option => asyncExample.selected = option">
 
                         <template scope="props">
                             <div class="media">
