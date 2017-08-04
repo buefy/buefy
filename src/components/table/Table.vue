@@ -39,7 +39,7 @@
                     <tr>
                         <th v-if="detailed" width="40px"></th>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
+                            <b-checkbox :value="isAllChecked" @input.native="checkAll"></b-checkbox>
                         </th>
                         <th v-for="(column, index) in columns"
                             v-if="column.visible"
@@ -79,7 +79,7 @@
                             </td>
 
                             <td class="checkbox-cell" v-if="checkable">
-                                <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
+                                <b-checkbox :value="isRowChecked(row)" @input.native="checkRow(row)"></b-checkbox>
                             </td>
 
                             <slot :row="row" :index="index"></slot>
