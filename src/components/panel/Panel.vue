@@ -1,6 +1,6 @@
 <template>
     <nav class="panel">
-        <p class="panel-heading"
+        <div class="panel-heading"
             :class="{'is-collapsible' : collapsible}"
             @click="toggle">
             <span v-if="header" v-html="header"></span>
@@ -10,11 +10,11 @@
                     both 
                     :icon="isOpen ? 'arrow_drop_up' : 'arrow_drop_down'">
             </b-icon>
-        </p>
+        </div>
         <transition :name="animation">
             <div class="panel-content" 
                  :class="{'panel-block' : !hasCustomTemplate}" 
-                 v-if="isOpen">
+                 v-show="isOpen">
                 <div v-if="content" v-html="content"></div>
                 <slot v-else></slot>
             </div>
