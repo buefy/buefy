@@ -7,10 +7,23 @@
 
         <div class="columns">
             <div class="column">
-                <b-upload v-model="files">
-                    <b-icon icon="file_upload"></b-icon>
-                    <span>Click to upload</span>
-                </b-upload>
+                <b-field>
+                    <b-upload v-model="files">
+                        <b-icon icon="file_upload"></b-icon>
+                        <span>Click to upload</span>
+                    </b-upload>
+                    <div v-if="files && files.length" class="control">
+                        <a class="button is-static">
+                            <span style="display: block;
+                                        width: 16em;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;">
+                                {{ files[0].name }}
+                            </span>
+                        </a>
+                    </div>
+                </b-field>
             </div>
             <div class="column">
                 <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
@@ -43,7 +56,7 @@
                 </b-field>
 
                 <div class="tags">
-                    <span v-for="(file, index) in currentDropFiles"
+                    <span v-for="(file, index) in dropFiles"
                         :key="index"
                         class="tag is-primary" >
                         {{file.name}}
@@ -126,16 +139,15 @@
     export default {
         data() {
             return {
-                files: null,
-                dropFiles: null,
-                currentDropFiles: [],
+                files: [],
+                dropFiles: [],
                 props: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
                         type: 'Array<File>',
                         values: '—',
-                        default: '—'
+                        default: '[]'
                     },
                     {
                         name: '<code>button-size</code>',
@@ -229,10 +241,23 @@
                     }
                 ],
                 template1: `
-                <b-upload v-model="files">
-                    <b-icon icon="file_upload"></b-icon>
-                    <span>Click to upload</span>
-                </b-upload>`,
+                <b-field>
+                    <b-upload v-model="files">
+                        <b-icon icon="file_upload"></b-icon>
+                        <span>Click to upload</span>
+                    </b-upload>
+                    <div v-if="files && files.length" class="control">
+                        <a class="button is-static">
+                            <span style="display: block;
+                                        width: 16em;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;">
+                                {{ files[0].name }}
+                            </span>
+                        </a>
+                    </div>
+                </b-field>`,
                 template2: `
                 <b-field>
                     <b-upload v-model="dropFiles"
@@ -254,7 +279,7 @@
                 </b-field>
 
                 <div class="tags">
-                    <span v-for="(file, index) in currentDropFiles"
+                    <span v-for="(file, index) in dropFiles"
                         :key="index"
                         class="tag is-primary" >
                         {{file.name}}
@@ -268,17 +293,7 @@
                 export default {
                     data() {
                         return {
-                            dropFiles: null,
-                            currentDropFiles: []
-                        }
-                    },
-                    watch: {
-                        dropFiles(value) {
-                            if (value) {
-                                for (let i = 0; i < value.length; i++) {
-                                    this.currentDropFiles.push(value[i])
-                                }
-                            }
+                            dropFiles: []
                         }
                     },
                     methods: {
@@ -289,18 +304,9 @@
                 }`
             }
         },
-        watch: {
-            dropFiles(value) {
-                if (value) {
-                    for (let i = 0; i < value.length; i++) {
-                        this.currentDropFiles.push(value[i])
-                    }
-                }
-            }
-        },
         methods: {
             deleteDropFile(index) {
-                this.currentDropFiles.splice(index, 1)
+                this.dropFiles.splice(index, 1)
             }
         }
     }

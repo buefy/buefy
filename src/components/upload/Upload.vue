@@ -1,17 +1,14 @@
 <template>
     <div class="upload">
-        <div v-if="!dragDrop" class="field has-addons">
-            <div class="control">
-                <a class="button"
-                    :class="[buttonSize, buttonType, { 'is-loading': loading }]"
-                    :disabled="disabled"
-                    @click="upload">
-                    <slot></slot>
-                </a>
-            </div>
-            <div v-if="value && value.length" class="control">
-                <span class="button is-static">{{ value[0].name }}</span>
-            </div>
+
+        <div v-if="!dragDrop" 
+            class="control">
+            <a class="button"
+                :class="[buttonSize, buttonType, { 'is-loading': loading }]"
+                :disabled="disabled"
+                @click="upload">
+                <slot></slot>
+            </a>
         </div>
 
         <div v-else
@@ -76,7 +73,7 @@
         },
         data() {
             return {
-                newValue: this.value,
+                newValue: this.value || [],
                 dragDropFocus: false,
                 _elementRef: 'input'
             }
@@ -113,17 +110,23 @@
                         this.updateDragDropFocus(false)
                     }
                     const value = event.target.files || event.dataTransfer.files
-                    const files = []
-                    if (value) {
-                        for (let i = 0; i < value.length; i++) {
-                            files.push(value[i])
-                            // first element in case drag drop mode and single
-                            if (this.dragDrop && !this.multiple) {
-                                break
+                    if (value && value.length) {
+                        if (!this.multiple) {
+                            // only one element in case drag drop mode and isn't multiple
+                            if (this.dragDrop) {
+                                if (value.length === 1) {
+                                    this.newValue = []
+                                } else {
+                                    return false
+                                }
+                            } else {
+                                this.newValue = []
                             }
                         }
+                        for (let i = 0; i < value.length; i++) {
+                            this.newValue.push(value[i])
+                        }
                     }
-                    this.newValue = files
                     this.$emit('input', this.newValue)
                     this.$emit('change', this.newValue)
                     !this.dragDrop && this.checkHtml5Validity()
