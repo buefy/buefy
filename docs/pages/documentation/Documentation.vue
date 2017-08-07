@@ -1,6 +1,6 @@
 <template>
-    <section>
-        <app-header></app-header>
+    <section class="documentation">
+        <app-header ref="header"></app-header>
 
         <div class="hero is-primary">
             <div class="hero-body">
@@ -82,6 +82,11 @@
                     }
                 ]
             }
+        },
+        beforeRouteUpdate(to, from, next) {
+            this.$refs.header.isMenuActive = false
+            this.currentTab = to.meta.category
+            next()
         },
         beforeRouteEnter(to, from, next) {
             next(vm => {
