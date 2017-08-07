@@ -1,9 +1,10 @@
 <template>
-    <div class="nav-left">
-        <router-link to="dialog" class="nav-item is-tab">Dialog</router-link>
-        <router-link to="toast" class="nav-item is-tab">Toast</router-link>
-        <router-link to="snackbar" class="nav-item is-tab">Snackbar</router-link>
-        <router-link to="notification" class="nav-item is-tab">Notification</router-link>
-        <router-link to="message" class="nav-item is-tab">Message</router-link>
+    <div class="navbar-brand">
+        <router-link to="dialog" class="navbar-item is-tab">Dialog</router-link>
+        <router-link to="toast" class="navbar-item is-tab">Toast</router-link>
+        <router-link to="snackbar" class="navbar-item is-tab">Snackbar</router-link>
+        <router-link to="notification" class="navbar-item is-tab">Notification</router-link>
+        <router-link to="message" class="navbar-item is-tab">Message</router-link>
+        <router-link to="loading" class="navbar-item is-tab">Loading</router-link>
     </div>
 </template>

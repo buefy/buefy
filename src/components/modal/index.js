@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Modal from './Modal'
 
-
 export { Modal }
 export default {
     open(params) {

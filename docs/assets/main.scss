@@ -1,6 +1,4 @@
 @import "~bulma/sass/utilities/_all";
-// @import "~bulma/sass/utilities/initial-variables";
-// @import "~bulma/sass/utilities/derived-variables";
 @import "../../src/scss/utils/_theme-variables";
 
 // Colors
@@ -16,6 +14,7 @@ $colors: (
     "white": ($white, $black),
     "black": ($black, $white),
     "light": ($light, $light-invert),
+    "grey": ($grey, $light-invert),
     "dark": ($dark, $dark-invert),
     "primary": ($primary, $primary-invert),
     "info": ($info, $info-invert),
@@ -31,7 +30,6 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-visited: $grey;
 $link-focus-border: $primary;
-
 
 @import "~bulma";
 @import "../../src/scss/buefy";

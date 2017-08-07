@@ -1,29 +1,30 @@
 <template>
-    <span class="dropdown control"
-        :class="{ 'is-disabled': disabled }">
+    <div class="dropdown"
+        :class="[position, {
+            'is-disabled': disabled,
+            'is-hoverable': hoverable,
+            'is-active': isActive
+        }]">
         <a role="button"
             ref="trigger"
-            class="trigger"
-            @click="activate">
+            class="dropdown-trigger"
+            @click="toggle">
             <slot name="trigger"></slot>
         </a>
 
-        <transition-group name="fade">
-            <div v-if="isActive"
-                key="bg"
-                class="background is-hidden-desktop">
-            </div>
-            <span v-show="isActive"
-                key="dropdown"
-                ref="dropdown"
-                class="box"
-                :class="['is-dropdown', position, { 'is-narrow': narrowed }]">
-                <ul>
+        <transition name="fade">
+            <div v-show="isActive" class="background"></div>
+        </transition>
+        <transition name="fade">
+            <div v-show="isActive || hoverable"
+                ref="dropdownMenu"
+                class="dropdown-menu">
+                <div class="dropdown-content">
                     <slot></slot>
-                </ul>
-            </span>
-        </transition-group>
-    </span>
+                </div>
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script>
@@ -31,19 +32,17 @@
         name: 'bDropdown',
         props: {
             value: {
-                type: [String, Number, Object, Boolean, Array],
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: null
             },
-            narrowed: Boolean,
             disabled: Boolean,
+            hoverable: Boolean,
             position: {
                 type: String,
-                default: 'is-bottom-right',
                 validator(value) {
                     return [
                         'is-top-right',
                         'is-top-left',
-                        'is-bottom-right',
                         'is-bottom-left'
                     ].indexOf(value) > -1
                 }
@@ -53,15 +52,22 @@
             return {
                 selected: this.value,
                 isActive: false,
-                _isDropdown: true // Used internally by DropdownOption
+                _isDropdown: true // Used internally by DropdownItem
             }
         },
         watch: {
             /**
-             * When v-model is changed set the new selected option.
+             * When v-model is changed set the new selected item.
              */
             value(value) {
-                this.selectOption(value)
+                this.selectItem(value)
+            },
+
+            /**
+             * Emit event when isActive value is changed
+             */
+            isActive(value) {
+                this.$emit('active-change', value)
             }
         },
         computed: {
@@ -71,11 +77,11 @@
              */
             whiteList() {
                 const whiteList = []
-                whiteList.push(this.$refs.dropdown)
+                whiteList.push(this.$refs.dropdownMenu)
                 whiteList.push(this.$refs.trigger)
                 // Adds all chidren from dropdown
-                if (this.$refs.dropdown !== undefined) {
-                    const children = this.$refs.dropdown.querySelectorAll('*')
+                if (this.$refs.dropdownMenu !== undefined) {
+                    const children = this.$refs.dropdownMenu.querySelectorAll('*')
                     for (const child of children) {
                         whiteList.push(child)
                     }
@@ -93,12 +99,12 @@
         },
         methods: {
             /**
-             * Click listener from DropdownOption.
-             *   1. Set new selected option.
+             * Click listener from DropdownItem.
+             *   1. Set new selected item.
              *   2. Emit input event to update the user v-model.
              *   3. Close the dropdown.
              */
-            selectOption(value) {
+            selectItem(value) {
                 this.selected = value
                 this.$emit('input', value)
                 this.$emit('change', value)
@@ -113,10 +119,10 @@
             },
 
             /**
-             * Activate dropdown if it's not disabled.
+             * Toggle dropdown if it's not disabled.
              */
-            activate() {
-                if (this.disabled) return
+            toggle() {
+                if (this.disabled || this.hoverable) return
 
                 this.isActive = !this.isActive
             }

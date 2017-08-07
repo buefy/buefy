@@ -6,44 +6,28 @@
             'is-clearfix': !hasMessage
         }]">
         <input v-if="type !== 'textarea'"
+            ref="input"
             class="input"
             :class="[statusType, size]"
-            ref="input"
             :type="newType"
-            :name="name"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :readonly="readonly"
-            :maxlength="maxlength"
-            :minlength="minlength"
             :autocomplete="newAutocomplete"
-            :required="required"
-            :min="min"
-            :max="max"
-            :step="step"
-            :pattern="pattern"
             :value="newValue"
+            :maxlength="maxlength"
+            v-bind="$attrs"
             @input="input"
-            @blur="blur"
-            @focus="$emit('focus', $event)"
-            @change="$emit('change', newValue)">
+            @blur="checkHtml5Validity() && $emit('blur', $event)"
+            @focus="$emit('focus', $event)">
 
         <textarea v-else
+            ref="textarea"
             class="textarea"
             :class="[statusType, size]"
-            ref="textarea"
-            :name="name"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :readonly="readonly"
-            :required="required"
-            :maxlength="maxlength"
-            :minlength="minlength"
             :value="newValue"
+            :maxlength="maxlength"
+            v-bind="$attrs"
             @input="input"
-            @blur="blur"
-            @focus="$emit('focus', $event)"
-            @change="$emit('change', newValue)">
+            @blur="checkHtml5Validity() && $emit('blur', $event)"
+            @focus="$emit('focus', $event)">
         </textarea>
 
         <b-icon v-if="icon"
@@ -73,6 +57,7 @@
 
     export default {
         name: 'bInput',
+        inheritAttrs: false,
         mixins: [FormElementMixin],
         components: {
             [Icon.name]: Icon
@@ -157,7 +142,7 @@
              */
             value(value) {
                 this.newValue = value
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             }
         },
         methods: {
@@ -174,8 +159,7 @@
                 const value = event.target.value
                 this.newValue = value
                 this.$emit('input', value)
-                this.$emit('change', value)
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             },
 
             /**
@@ -189,15 +173,6 @@
                 this.$nextTick(() => {
                     this.$refs.input.focus()
                 })
-            },
-
-            /**
-             * Blur listener.
-             * Fire the HTML5 validation.
-             */
-            blur(event) {
-                this.$emit('blur', event)
-                this.html5Validation()
             }
         }
     }

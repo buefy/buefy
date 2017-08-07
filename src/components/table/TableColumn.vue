@@ -1,6 +1,6 @@
 <template>
     <td v-if="visible"
-        :class="{ 'has-text-right': numeric }"
+        :class="{ 'has-text-right': numeric && !centered, 'has-text-centered': centered }"
         :data-label="label">
         <span><slot></slot></span>
     </td>
@@ -17,6 +17,7 @@
             field: String,
             width: [Number, String],
             numeric: Boolean,
+            centered: Boolean,
             sortable: Boolean,
             visible: {
                 type: Boolean,

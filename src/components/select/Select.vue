@@ -10,12 +10,9 @@
 
             <select v-model="selected"
                 ref="select"
-                :disabled="disabled"
-                :readonly="readonly"
-                :name="name"
-                :required="required"
-                @focus="$emit('focus', $event)"
-                @blur="blur">
+                v-bind="$attrs"
+                @blur="checkHtml5Validity() && $emit('blur', $event)"
+                @focus="$emit('focus', $event)">
 
                 <option
                     v-if="placeholder"
@@ -44,12 +41,14 @@
 
     export default {
         name: 'bSelect',
+        inheritAttrs: false,
         mixins: [FormElementMixin],
         props: {
             value: {
-                type: [String, Number, Object, Boolean, Array],
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: null
-            }
+            },
+            placeholder: String
         },
         data() {
             return {
@@ -65,7 +64,7 @@
              */
             value(value) {
                 this.selected = value
-                !this.isValid && this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             },
 
             /**
@@ -75,18 +74,7 @@
              */
             selected(value) {
                 this.$emit('input', value)
-                this.$emit('change', value)
-                !this.isValid && this.html5Validation()
-            }
-        },
-        methods: {
-            /**
-             * Blur listener.
-             * Fire the HTML5 validation.
-             */
-            blur(event) {
-                this.$emit('blur', event)
-                this.html5Validation()
+                !this.isValid && this.checkHtml5Validity()
             }
         }
     }

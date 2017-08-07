@@ -1,33 +1,43 @@
 <template>
-    <transition name="zoom-out">
+    <transition :name="animation">
         <div class="dialog modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
                 </header>
-                <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
-                    <b-icon
-                        :icon="icon"
-                        :class="type"
-                        both
-                        size="is-large custom-icon"
-                        v-if="icon && hasIcon">
-                    </b-icon>
-                    <p v-html="message"></p>
 
-                    <b-field v-if="hasInput">
-                        <b-input
-                            v-model="prompt"
-                            ref="input"
-                            :placeholder="inputPlaceholder"
-                            required
-                            :maxlength="inputMaxlength"
-                            :name="inputName"
-                            @keyup.enter.native="confirm">
-                        </b-input>
-                    </b-field>
+                <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
+                    <div class="media">
+                        <div class="media-left" v-if="icon && hasIcon">
+                            <b-icon
+                                :icon="icon"
+                                :class="type"
+                                both
+                                size="is-large custom-icon">
+                            </b-icon>
+                        </div>
+                        <div class="media-content">
+                            <p v-html="message"></p>
+
+                            <div v-if="hasInput" class="field">
+                                <div class="control">
+                                    <input v-model="prompt"
+                                        class="input"
+                                        :class="{ 'is-danger': validationMessage }"
+                                        ref="input"
+                                        required
+                                        :placeholder="inputPlaceholder"
+                                        :maxlength="inputMaxlength"
+                                        :name="inputName"
+                                        @keyup.enter="confirm">
+                                </div>
+                                <p class="help is-danger">{{ validationMessage }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
+
                 <footer class="modal-card-foot">
                     <button v-if="canCancel" class="button is-light" ref="cancelButton" @click="cancel">
                         {{ cancelText }}
@@ -43,12 +53,10 @@
 
 <script>
     import Icon from '../icon'
-    import Input from '../input'
 
     export default {
         components: {
-            [Icon.name]: Icon,
-            [Input.name]: Input
+            [Icon.name]: Icon
         },
         props: {
             title: String,
@@ -65,6 +73,10 @@
             cancelText: {
                 type: String,
                 default: 'Cancel'
+            },
+            animation: {
+                type: String,
+                default: 'zoom-out'
             },
             canCancel: {
                 type: Boolean,
@@ -86,7 +98,8 @@
         data() {
             return {
                 isActive: false,
-                prompt: ''
+                prompt: '',
+                validationMessage: ''
             }
         },
         computed: {
@@ -108,6 +121,14 @@
                 }
             }
         },
+        watch: {
+            isActive() {
+                if (typeof window !== 'undefined') {
+                    const action = this.isActive ? 'add' : 'remove'
+                    document.documentElement.classList[action]('is-clipped')
+                }
+            }
+        },
         methods: {
             /**
              * If it's a prompt Dialog, validate the input.
@@ -115,8 +136,11 @@
              */
             confirm() {
                 if (this.$refs.input !== undefined) {
-                    this.$refs.input.html5Validation()
-                    if (!this.$refs.input.isValid) return
+                    if (!this.$refs.input.checkValidity()) {
+                        this.validationMessage = this.$refs.input.validationMessage
+                        this.$nextTick(() => this.$refs.input.select())
+                        return
+                    }
                 }
 
                 this.onConfirm(this.prompt)
@@ -169,7 +193,7 @@
             this.$nextTick(() => {
                 // Handle which element receives focus
                 if (this.hasInput) {
-                    this.$refs.input.$refs.input.focus()
+                    this.$refs.input.focus()
                 } else {
                     this.$refs.confirmButton.focus()
                 }

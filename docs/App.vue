@@ -8,10 +8,7 @@
 
 <script>
     export default {
-        name: 'app',
-        mounted() {
-            this.$Progress.finish()
-        },
+        name: 'Buefy',
         created() {
             this.$Progress.start()
             this.$router.beforeEach((to, from, next) => {
@@ -21,6 +18,9 @@
             this.$router.afterEach((to, from) => {
                 this.$Progress.finish()
             })
+        },
+        mounted() {
+            this.$Progress.finish()
         }
     }
 </script>
@@ -28,33 +28,17 @@
 <style lang="scss">
     @import "./assets/main.scss";
 
-    pre {
-        @include tablet {
-            white-space: pre-wrap;
-        }
-        code {
-            max-height: 400px;
-            &.hljs {
-                background: inherit;
-                color: inherit;
-                padding: 1.25rem 1.5rem;
-            }
-        }
-    }
-
-    .list-number {
-        margin-right: 8px;
-    }
+    // Helpers
 
     .example {
         border: 1px solid $warning;
-        border-top-right-radius: 3px;
+        border-top-right-radius: $radius;
         color: rgba(0, 0, 0, 0.7);
         padding: 1.5rem;
         position: relative;
         &:before {
             background: $warning;
-            border-radius: 3px 3px 0 0;
+            border-radius: $radius $radius 0 0;
             bottom: 100%;
             content: "Example";
             display: inline-block;
@@ -72,10 +56,28 @@
         }
     }
 
+    // Generic
+
+    pre {
+        @include tablet {
+            white-space: pre-wrap;
+        }
+        code {
+            max-height: 400px;
+            &.hljs {
+                background: inherit;
+                color: inherit;
+                padding: 1.25rem 1.5rem;
+            }
+        }
+    }
+
     ::selection {
         background: lighten($primary, 5%);
         color: $primary-invert;
     }
+
+    // Home
 
     .home {
         .logo-rounded,

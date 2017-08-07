@@ -21,7 +21,7 @@
                             src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=star&count=true&size=large"
                             frameborder="0"
                             scrolling="0"
-                            width="140px"
+                            width="160px"
                             height="30px">
                         </iframe>
 
@@ -35,9 +35,15 @@
                     </div>
 
                     <div class="buttons">
-                        <router-link class="button is-medium is-primary is-inverted is-outlined home-hero" to="/documentation/quick-start">
-                            Get Started
+                        <router-link class="button is-medium home-hero"
+                            to="/documentation/start">
+                            Get started
                         </router-link>
+                        <a class="button is-medium is-primary home-hero"
+                            href="https://github.com/rafaelpimpa/buefy/releases"
+                            target="_blank">
+                            Changelogs
+                        </a>
                     </div>
                     <small class="home-hero">v{{ version }}</small>
                 </div>

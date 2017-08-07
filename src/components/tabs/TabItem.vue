@@ -1,6 +1,6 @@
 <template>
     <transition :name="transitionName">
-        <div v-show="isActive" class="tab-item" :class="{ 'is-animated': transitionName !== null }">
+        <div v-show="isActive" class="tab-item">
             <slot></slot>
         </div>
     </transition>

@@ -12,4 +12,8 @@
     &.is-simple {
         justify-content: normal;
     }
+    .is-current {
+        pointer-events: none;
+        cursor: not-allowed;
+    }
 }

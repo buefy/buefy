@@ -8,22 +8,15 @@
             <button class="button" @click="activeTab = 1">Set Music</button>
             <b-tabs v-model="activeTab">
                 <b-tab-item label="Pictures">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nulla gravida nisl turpis, ultrices mattis nulla malesuada id.
-                    Sed blandit lorem eu fermentum malesuada.
-                    Aenean neque nisl, malesuada quis quam eu, hendrerit venenatis diam.
+                    Lorem ipsum dolor sit amet.
                 </b-tab-item>
 
                 <b-tab-item label="Music">
-                    Sed in mi sed ex finibus ornare.
-                    Phasellus venenatis enim eu pharetra tempor.
-                    Donec congue diam ipsum, eget vulputate elit tristique ac.
-                    Suspendisse est est, elementum nec ornare nec, dignissim et ex.
-                    Nulla felis nibh, vulputate eu rhoncus et, accumsan vitae mi.
-                    Suspendisse et venenatis nisi.
-                    Curabitur vitae ullamcorper magna.
-                    Donec in blandit dolor.
-                    Nullam pellentesque et ipsum non porttitor.
+                    Lorem <br>
+                    ipsum <br>
+                    dolor <br>
+                    sit <br>
+                    amet.
                 </b-tab-item>
 
                 <b-tab-item label="Videos">
@@ -34,8 +27,8 @@
                 </b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <h2 class="title">Position</h2>
         <div class="example">
@@ -51,7 +44,7 @@
                 <b-tab-item label="Videos"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
 
         <h2 class="title">Icons</h2>
         <div class="example">
@@ -61,7 +54,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
 
         <h2 class="title">Sizes</h2>
         <div class="example">
@@ -83,7 +76,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
 
         <h2 class="title is-spaced">Types</h2>
         <h3 class="subtitle">If you want a more classic style with borders</h3>
@@ -94,7 +87,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
 
         <h3 class="subtitle">Or like Radio Buttons</h3>
         <div class="example">
@@ -104,7 +97,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
 
         <h2 class="title is-spaced">Expanded</h2>
         <div class="example">
@@ -114,7 +107,7 @@
                 <b-tab-item label="Videos" icon="video_library"></b-tab-item>
             </b-tabs>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template7 | pre }}</code></pre>
 
         <hr>
 
@@ -163,7 +156,7 @@
         <h2 class="subtitle">Tab Item</h2>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="tabsProps" default-sort="name">
+                <b-table :data="tabItemProps" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>

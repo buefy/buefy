@@ -1,40 +1,50 @@
+$switch-width-number: 2.75;
+$switch-width: $switch-width-number * 1em;
+$switch-padding: 0.2em;
+
+$switch-active-background-color: $primary !default;
+
 .switch {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    @include unselectable;
     & + .switch {
         margin-left: 0.5em;
     }
     input[type=checkbox] {
         display: none;
         + .check {
-            position: relative;
-            width: 2.75em;
-            height: 1.5em;
+            display: flex;
+            align-items: center;
+            width: $switch-width;
+            height: #{$switch-width / 2 + $switch-padding};
+            padding: $switch-padding;
             background: $grey-light;
             border-radius: 1em;
-            transition: all $speed $easing;
+            transition: background $speed-slow $easing;
             &:before {
                 content: "";
-                position: absolute;
-                border-radius: 50%;
-                width: 1.5em;
-                height: inherit;
+                border-radius: 1em;
+                width: #{($switch-width - $switch-padding * 2) / 2};
+                height: #{($switch-width - $switch-padding * 2) / 2};
                 background: $background;
-                transform: scale(0.74);
                 box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
-                animation-name: switchOff;
-                animation-timing-function: linear;
+                transition: transform $speed-slow $easing, width $speed-slow $easing;
+                will-change: transform;
             }
-            &.is-animated:before {
-                animation-duration: $speed-slower;
+            &.is-elastic:before {
+                width: 1.75em;
             }
         }
         &:checked + .check {
-            background: $primary;
+            background: $switch-active-background-color;
             &:before {
-                animation-name: switchOn;
-                animation-fill-mode: forwards;
+                transform: translate3d(100%, 0, 0);
+            }
+            &.is-elastic:before {
+                // Might be a little offset if base font is not 16px
+                transform: translate3d(percentage(16 / ($switch-width-number * 16)), 0, 0);
             }
         }
     }
@@ -46,7 +56,7 @@
             background: rgba($grey-light, 0.9);
         }
         input[type=checkbox]:checked + .check {
-            background: rgba($primary, 0.9);
+            background: rgba($switch-active-background-color, 0.9);
         }
     }
     &:focus {
@@ -55,7 +65,7 @@
             box-shadow: 0 0 0.5em rgba($grey, 0.6);
         }
         input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($primary, 0.8);
+            box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
         }
     }
     &.is-small {

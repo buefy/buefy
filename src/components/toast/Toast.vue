@@ -14,12 +14,12 @@
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
+        mixins: [NoticeMixin],
         data() {
             return {
                 newDuration: this.duration || config.defaultToastDuration
             }
         },
-        mixins: [NoticeMixin],
         methods: {
             /**
              * Add component to the DOM with it's classes,
@@ -29,11 +29,6 @@
                 this.parent.className = ''
                 this.parent.classList.add('notices', 'is-toast', this.position)
                 this.parent.appendChild(this.$el)
-            }
-        },
-        props: {
-            duration: {
-                type: Number
             }
         }
     }

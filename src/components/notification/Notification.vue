@@ -1,17 +1,19 @@
 <template>
     <transition name="fade">
-        <div class="notification b-notification" :class="type" v-if="isActive">
-            <button class="delete" v-if="closable" @click="close" type="button"></button>
-            <b-icon
-                :icon="icon"
-                both
-                size="is-large"
-                v-if="icon && hasIcon">
-            </b-icon>
-            <div class="content">
-                <slot></slot>
+        <article v-if="isActive" class="notification" :class="type">
+            <button v-if="closable" class="delete" @click="close" type="button"></button>
+            <div class="media">
+                <div v-if="icon && hasIcon" class="media-left">
+                    <b-icon :icon="icon"
+                        both
+                        size="is-large">
+                    </b-icon>
+                </div>
+                <div class="media-content">
+                    <slot></slot>
+                </div>
             </div>
-        </div>
+        </article>
     </transition>
 </template>
 

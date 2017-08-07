@@ -1,65 +1,71 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Radio</h1>
-        <h2 class="subtitle">Radios are wrapped on a Radio Group</h2>
+        <h2 class="subtitle">Select an option from a set</h2>
         <hr>
 
         <div class="columns">
             <div class="column">
                 <div class="block">
-                    <b-radio-group v-model="radio">
-                        <b-radio value="Flint">Flint</b-radio>
-                        <b-radio value="Silver">Silver</b-radio>
-                        <b-radio value="Jack">Jack</b-radio>
-                        <b-radio value="Vane" disabled>Vane</b-radio>
-                    </b-radio-group>
+                    <b-radio v-model="radio"
+                        native-value="Flint">
+                        Flint
+                    </b-radio>
+                    <b-radio v-model="radio"
+                        native-value="Silver">
+                        Silver
+                    </b-radio>
+                    <b-radio v-model="radio"
+                        native-value="Jack">
+                        Jack
+                    </b-radio>
+                    <b-radio v-model="radio"
+                        native-value="Vane"
+                        disabled>
+                        Vane
+                    </b-radio>
                 </div>
                 <p class="content"><b>Selection:</b> {{ radio }}</p>
-
-                <h3 class="subtitle">Vertical example</h3>
-                <b-radio-group v-model="radio">
-                    <div class="field">
-                        <b-radio value="Flint">Flint</b-radio>
-                    </div>
-                    <div class="field">
-                        <b-radio value="Silver">Silver</b-radio>
-                    </div>
-                    <div class="field">
-                        <b-radio value="Jack">Jack</b-radio>
-                    </div>
-                    <div class="field">
-                        <b-radio value="Vane" disabled>Vane</b-radio>
-                    </div>
-                </b-radio-group>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
             </div>
         </div>
 
         <hr>
         <h2 class="title">Radio Button</h2>
+        <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
         <div class="example">
-            <b-radio-group v-model="radioButton">
-                <b-radio-button type="is-danger" value="Nop">
-                    <b-icon icon="clear"></b-icon> Nop
+            <b-field>
+                <b-radio-button v-model="radioButton"
+                    native-value="Nop"
+                    type="is-danger">
+                    <b-icon icon="clear"></b-icon>
+                    <span>Nop</span>
                 </b-radio-button>
 
-                <b-radio-button type="is-success" value="Yep">
-                    <b-icon icon="done"></b-icon> Yep
+                <b-radio-button v-model="radioButton"
+                    native-value="Yep"
+                    type="is-success">
+                    <b-icon icon="done"></b-icon>
+                    <span>Yep</span>
                 </b-radio-button>
 
-                <b-radio-button value="Default">Default</b-radio-button>
+                <b-radio-button v-model="radioButton"
+                    native-value="Default">
+                    Default
+                </b-radio-button>
 
-                <b-radio-button value="Disabled" disabled>
+                <b-radio-button v-model="radioButton"
+                    native-value="Disabled"
+                    disabled>
                     Disabled
                 </b-radio-button>
-            </b-radio-group>
-
+            </b-field>
             <p class="content"><b>Selection:</b> {{ radioButton }}</p>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
         <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <hr>
@@ -90,7 +96,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="radioButtonProps" default-sort="name">
+                <b-table :data="radioEvents" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -98,24 +104,18 @@
                         <b-table-column field="description" label="Description" width="620">
                             <span v-html="props.row.description"></span>
                         </b-table-column>
-                        <b-table-column field="type" label="Type">
-                            <span>{{ props.row.type }}</span>
-                        </b-table-column>
-                        <b-table-column field="values" label="Values">
-                            <span v-html="props.row.values"></span>
-                        </b-table-column>
-                        <b-table-column field="default" label="Default">
-                            <span v-html="props.row.default"></span>
+                        <b-table-column field="parameters" label="Parameters">
+                            <span v-html="props.row.parameters"></span>
                         </b-table-column>
                     </template>
                 </b-table>
             </b-tab-item>
         </b-tabs>
 
-        <h3 class="subtitle">Radio Group</h3>
+        <h3 class="subtitle">Radio Button</h3>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="radioGroupProps" default-sort="name">
+                <b-table :data="radioButtonProps" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -137,7 +137,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="radioGroupEvents" default-sort="name">
+                <b-table :data="radioEvents" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -163,9 +163,16 @@
                 radioButton: '',
                 radioProps: [
                     {
-                        name: '<code>value</code>',
+                        name: '<code>v-model</code>',
+                        description: 'Binding value',
+                        type: 'Any',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>native-value</code>',
                         description: 'Same as native <code>value</code>',
-                        type: 'String, Number, Boolean',
+                        type: 'Any',
                         values: '—',
                         default: '—'
                     },
@@ -184,11 +191,30 @@
                         default: '—'
                     }
                 ],
+                radioEvents: [
+                    {
+                        name: '<code>input</code>',
+                        description: 'Triggers when the value of checkbox is changed',
+                        parameters: '<code>value: Boolean</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
+                        parameters: '<code>event: $event</code>'
+                    }
+                ],
                 radioButtonProps: [
                     {
-                        name: '<code>value</code>',
+                        name: '<code>v-model</code>',
+                        description: 'Binding value',
+                        type: 'Any',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>native-value</code>',
                         description: 'Same as native <code>value</code>',
-                        type: 'String, Number, Boolean',
+                        type: 'Any',
                         values: '—',
                         default: '—'
                     },
@@ -217,55 +243,27 @@
                         default: '—'
                     }
                 ],
-                radioGroupProps: [
-                    {
-                        name: '<code>v-model</code>',
-                        description: 'Binding value',
-                        type: 'String, Number, Boolean',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>button-size</code>',
-                        description: 'Radio Buttons size, optional',
-                        type: 'String',
-                        values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
-                        default: '—'
-                    }
-                ],
-                radioGroupEvents: [
-                    {
-                        name: '<code>change</code>',
-                        description: 'Triggers when the value of any radio changes',
-                        parameters: '<code>value:</code> value prop, <code>event: $event</code>'
-                    }
-                ],
                 template1: `
                 <div class="block">
-                    <b-radio-group v-model="radio">
-                        <b-radio value="Flint">Flint</b-radio>
-                        <b-radio value="Silver">Silver</b-radio>
-                        <b-radio value="Jack">Jack</b-radio>
-                        <b-radio value="Vane" disabled>Vane</b-radio>
-                    </b-radio-group>
+                    <b-radio v-model="radio"
+                        native-value="Flint">
+                        Flint
+                    </b-radio>
+                    <b-radio v-model="radio"
+                        native-value="Silver">
+                        Silver
+                    </b-radio>
+                    <b-radio v-model="radio"
+                        native-value="Jack">
+                        Jack
+                    </b-radio>
+                    <b-radio v-model="radio"
+                        native-value="Vane"
+                        disabled>
+                        Vane
+                    </b-radio>
                 </div>
-                <p class="content"><b>Selection:</b> {{ radio }}</p>
-
-                <h3 class="subtitle">Vertical example</h3>
-                <b-radio-group v-model="radio">
-                    <div class="field">
-                        <b-radio value="Flint">Flint</b-radio>
-                    </div>
-                    <div class="field">
-                        <b-radio value="Silver">Silver</b-radio>
-                    </div>
-                    <div class="field">
-                        <b-radio value="Jack">Jack</b-radio>
-                    </div>
-                    <div class="field">
-                        <b-radio value="Vane" disabled>Vane</b-radio>
-                    </div>
-                </b-radio-group>`,
+                <p class="content"><b>Selection:</b> {{ radio }}</p>`,
                 code1: `
                 export default {
                     data() {
@@ -275,22 +273,32 @@
                     }
                 }`,
                 template2: `
-                <b-radio-group v-model="radioButton">
-                    <b-radio-button type="is-danger" value="Nop">
-                        <b-icon icon="clear"></b-icon> Nop
+                <b-field>
+                    <b-radio-button v-model="radioButton"
+                        native-value="Nop"
+                        type="is-danger">
+                        <b-icon icon="clear"></b-icon>
+                        <span>Nop</span>
                     </b-radio-button>
 
-                    <b-radio-button type="is-success" value="Yep">
-                        <b-icon icon="done"></b-icon> Yep
+                    <b-radio-button v-model="radioButton"
+                        native-value="Yep"
+                        type="is-success">
+                        <b-icon icon="done"></b-icon>
+                        <span>Yep</span>
                     </b-radio-button>
 
-                    <b-radio-button value="Default">Default</b-radio-button>
+                    <b-radio-button v-model="radioButton"
+                        native-value="Default">
+                        Default
+                    </b-radio-button>
 
-                    <b-radio-button value="Disabled" disabled>
+                    <b-radio-button v-model="radioButton"
+                        native-value="Disabled"
+                        disabled>
                         Disabled
                     </b-radio-button>
-                </b-radio-group>
-
+                </b-field>
                 <p class="content"><b>Selection:</b> {{ radioButton }}</p>`,
                 code2: `
                 export default {

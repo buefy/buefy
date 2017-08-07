@@ -1,0 +1,30 @@
+
+.loading-overlay {
+    @include overlay;
+    align-items: center;
+    display: none;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    z-index: 999;
+    &.is-active {
+        display: flex
+    }
+    .loading-background {
+        @include overlay;
+        background:#7f7f7f;
+        background:rgba(255,255,255,0.5);
+    }
+    .loading-icon {
+        position: relative;
+        &:after {
+            @include loader;
+            position: absolute;
+            top: 0;
+            left: calc(50% - 2.5em);
+            width: 5em;
+            height: 5em;
+            border-width: 0.25em;
+        }
+    }
+}

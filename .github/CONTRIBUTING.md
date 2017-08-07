@@ -7,16 +7,16 @@
 
 # Submitting a Pull Request
 
-* The ``master`` branch is a snapshot of the latest stable release. **Submit your PR in the ``dev`` branch**.
+* The ``master`` branch is a snapshot of the latest stable release. **Submit your PR in the ``dev`` branch**
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 * It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
 * **DO NOT** commit the ``lib`` and ``dist`` folder, use it only for testing on your end
 * If adding new feature:
-    * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
+    * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it
 
 ## Buefy Javascript styleguide
 
-* Follow the rules in ``.eslintrc.json``, general:
+* Follow the rules in ``.eslintrc.js``, general:
     * **Use camelCase**
     * **No semi-colons** ``;``
     * **4 spaces indentation**

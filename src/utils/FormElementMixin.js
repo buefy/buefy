@@ -8,21 +8,11 @@ export default {
 
         // Native options to use in HTML5 validation
         autocomplete: String,
-        required: Boolean,
-        disabled: Boolean,
-        max: [Number, String],
-        maxlength: [Number, String],
-        min: [Number, String],
-        minlength: [Number, String],
-        name: String,
-        pattern: String,
-        placeholder: String,
-        readonly: Boolean,
-        step: [Number, String]
+        maxlength: [Number, String]
     },
     data() {
         return {
-            isValid: true // Used in Dialog and may be used in third party components
+            isValid: true
         }
     },
     computed: {
@@ -53,36 +43,47 @@ export default {
         focus() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            this.$nextTick(() => this.$refs[this.$data._elementRef].select())
+            if (this.$data._elementRef !== 'select' && !this.$data._isAutocomplete) {
+                this.$nextTick(() => this.$refs[this.$data._elementRef].select())
+            } else {
+                this.$nextTick(() => this.$refs[this.$data._elementRef].focus())
+            }
         },
 
         /**
-         * HTML5 validation, set isValid property.
+         * Check HTML5 validation, set isValid property.
          * If validation fail, send 'is-danger' type,
          * and error message to parent if it's a Field.
          */
-        html5Validation() {
+        checkHtml5Validity() {
             if (this.$refs[this.$data._elementRef] === undefined) return
+
+            const el = this.$data._isAutocomplete
+                ? this.$refs.input.$refs.input
+                : this.$refs[this.$data._elementRef]
 
             let type = null
             let message = null
             let isValid = true
-            if (!this.$refs[this.$data._elementRef].checkValidity()) {
+            if (!el.checkValidity()) {
                 type = 'is-danger'
-                message = this.$refs[this.$data._elementRef].validationMessage
+                message = el.validationMessage
                 isValid = false
             }
             this.isValid = isValid
-            if (!this.parentField) return
 
-            // Set type only if user haven't defined
-            if (!this.parentField.type) {
-                this.parentField.newType = type
+            if (this.parentField) {
+                // Set type only if not defined
+                if (!this.parentField.type) {
+                    this.parentField.newType = type
+                }
+                // Set message only if not defined
+                if (!this.parentField.message) {
+                    this.parentField.newMessage = message
+                }
             }
-            // Set message only if user haven't defined
-            if (!this.parentField.message) {
-                this.parentField.newMessage = message
-            }
+
+            return this.isValid
         }
     }
 }

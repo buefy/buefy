@@ -14,12 +14,13 @@
                     v-model="arrayExample.name"
                     :data="filteredDataArray"
                     placeholder="e.g. jQuery"
+                    icon="search"
                     @select="option => arrayExample.selected = option">
                 </b-autocomplete>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
 
         <h2 class="title">Object array</h2>
         <div class="example">
@@ -40,8 +41,8 @@
                 </b-autocomplete>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <h2 class="title">Async with custom template</h2>
         <p class="block"><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small></p>
@@ -55,7 +56,7 @@
                     field="title"
                     has-custom-template
                     :loading="asyncExample.isFetching"
-                    @change="getAsyncData"
+                    @input="getAsyncData"
                     @select="option => asyncExample.selected = option">
 
                     <template scope="props">
@@ -76,8 +77,8 @@
                 </b-autocomplete>
             </b-field>
         </div>
-        <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <hr>
 
@@ -133,6 +134,22 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="methods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                        <b-table-column field="return" label="Return">
+                            <span v-html="props.row.return"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
     </div>
 </template>
@@ -178,14 +195,14 @@
                     {
                         name: '<code>v-model</code>',
                         description: 'Bindig value',
-                        type: 'String',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
                     {
                         name: '<code>data</code>',
                         description: 'Options / suggestions',
-                        type: 'Array<String>, Array<Object>',
+                        type: 'Array<String>, Array<Number>, Array<Object>',
                         values: '—',
                         default: '—'
                     },
@@ -219,80 +236,97 @@
                     },
                     {
                         name: '<code>size</code>',
-                        description: 'Optional, size of control',
+                        description: 'Vertical size of input, optional',
                         type: 'String',
                         values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                         default: '—'
                     },
                     {
-                        name: '<code>loading</code>',
-                        description: 'Has loading state',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
                         name: '<code>expanded</code>',
-                        description: 'Full width when inside a grouped or addon field',
+                        description: 'Makes input full width when inside a grouped or addon field',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>placeholder</code>',
-                        description: 'Same as native <code>placeholder</code>',
+                        name: '<code>loading</code>',
+                        description: 'Add the loading state to the input',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>icon</code>',
+                        description: 'Icon name to be added',
                         type: 'String',
                         values: '—',
                         default: '—'
                     },
                     {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
+                        name: '<code>icon-pack</code>',
+                        description: 'Icon pack to use',
                         type: 'String',
+                        values: '<code>mdi</code>, <code>fa</code>',
+                        default: '<code>mdi</code>'
+                    },
+                    {
+                        name: '<code>maxlength</code>',
+                        description: 'Same as native <code>maxlength</code>, plus character counter',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
                     {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
                         values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
+                        default: '—'
                     }
                 ],
                 scopedSlots: [
                     {
                         name: 'default',
-                        props: '<code>option: String|Object</code>'
+                        props: '<code>option: String|Object</code>, <code>index: Number</code>'
                     }
                 ],
                 events: [
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when input text is changed',
-                        parameters: '<code>value: String</code>'
+                        name: '<code>input</code>',
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: String|Number</code>'
                     },
                     {
-                        name: '<code>select</code>',
+                        name: '<code>selected</code>',
                         description: 'Triggers when an option is selected or unset',
-                        parameters: '<code>option: String|Object</code>'
+                        parameters: '<code>option: String|Number|Object</code>'
                     },
                     {
                         name: '<code>focus</code>',
-                        description: 'Triggers when input is focused',
+                        description: 'Triggers when input has received focus',
                         parameters: '<code>event: $event</code>'
                     },
                     {
                         name: '<code>blur</code>',
-                        description: 'Triggers when input loses focus',
+                        description: 'Triggers when input has lost focus',
                         parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any native event, e.g. <code>click.native</code>',
+                        parameters: '<code>event: $event</code>'
+                    }
+                ],
+                methods: [
+                    {
+                        name: '<code>checkHtml5Validity</code>',
+                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',
+                        return: '<code>isValid: Boolean</code>'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Set focus (internally uses the native <code>.select()</code> method)',
+                        return: '—'
                     }
                 ],
                 template1: `
@@ -302,6 +336,7 @@
                         v-model="arrayExample.name"
                         :data="filteredDataArray"
                         placeholder="e.g. jQuery"
+                        icon="search"
                         @select="option => arrayExample.selected = option">
                     </b-autocomplete>
                 </b-field>`,
@@ -368,7 +403,7 @@
                                     {"id":3,"user":{"first_name":"Tina","last_name":"Gilbert"},"date":"2016-04-26 06:26:28","gender":"Female"},
                                     {"id":4,"user":{"first_name":"Clarence","last_name":"Flores"},"date":"2016-04-10 10:28:46","gender":"Male"},
                                     {"id":5,"user":{"first_name":"Anne","last_name":"Lee"},"date":"2016-12-06 14:38:38","gender":"Female"},
-                                    ...
+                                    // ...
                                 ],
                                 keepFirst: false,
                                 name: '',
@@ -377,12 +412,12 @@
                         }
                     },
                     computed: {
-                        filteredDataArray() {
-                            return this.arrayExample.data.filter((option) => {
+                        filteredDataObj() {
+                            return this.syncExample.data.filter((option) => {
                                 return option
                                     .toString()
                                     .toLowerCase()
-                                    .indexOf(this.arrayExample.name.toLowerCase()) >= 0
+                                    .indexOf(this.syncExample.name.toLowerCase()) >= 0
                             })
                         }
                     }
@@ -396,7 +431,7 @@
                         field="title"
                         has-custom-template
                         :loading="asyncExample.isFetching"
-                        @change="getAsyncData"
+                        @input="getAsyncData"
                         @select="option => asyncExample.selected = option">
 
                         <template scope="props">

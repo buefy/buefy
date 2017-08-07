@@ -1,7 +1,7 @@
 import Dropdown from './Dropdown'
-import DropdownOption from './DropdownOption'
+import DropdownItem from './DropdownItem'
 
 export {
     Dropdown,
-    DropdownOption
+    DropdownItem
 }

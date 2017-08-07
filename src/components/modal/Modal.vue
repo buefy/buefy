@@ -1,10 +1,11 @@
 <template>
-    <transition name="zoom-out">
+    <transition :name="animation">
         <div class="modal is-active" v-if="isActive">
             <div class="modal-background" @click="cancel"></div>
-            <div class="modal-content animation-content" :style="{ maxWidth: newWidth }">
-                <component
-                    v-if="component"
+            <div class="animation-content"
+                :class="{ 'modal-content': !hasModalCard }"
+                :style="{ maxWidth: newWidth }">
+                <component v-if="component"
                     v-bind="props"
                     :is="component"
                     @close="close">
@@ -12,7 +13,7 @@
                 <div v-else-if="content" v-html="content"></div>
                 <slot v-else></slot>
             </div>
-            <button v-if="canCancel" class="modal-close" @click="cancel"></button>
+            <button v-if="canCancel" class="modal-close is-large" @click="cancel"></button>
         </div>
     </transition>
 </template>
@@ -26,7 +27,15 @@
             content: String,
             programmatic: Boolean,
             props: Object,
-            width: [String, Number],
+            width: {
+                type: [String, Number],
+                default: 960
+            },
+            hasModalCard: Boolean,
+            animation: {
+                type: String,
+                default: 'zoom-out'
+            },
             canCancel: {
                 type: Boolean,
                 default: true
@@ -47,6 +56,12 @@
         watch: {
             active(value) {
                 this.isActive = value
+            },
+            isActive() {
+                if (typeof window !== 'undefined') {
+                    const action = this.isActive ? 'add' : 'remove'
+                    document.documentElement.classList[action]('is-clipped')
+                }
             }
         },
         methods: {

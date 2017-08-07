@@ -6,20 +6,16 @@
 
 Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
-[![Buefy](https://github.com/rafaelpimpa/buefy/blob/master/static/buefy-banner.png)](https://buefy.github.io)
+[![Buefy](https://github.com/rafaelpimpa/buefy/blob/dev/static/img/buefy-banner.png)](https://buefy.github.io)
 
 ## Features
 
 * Keep your current Bulma theme / variables easily
-
 * Supports both [Material Design Icons](https://material.io/icons/) and [FontAwesome](http://fontawesome.io/)
-
 * Very lightweight with none internal dependencies aside from Vue & Bulma
-
+* About 60KB min+gzip (with Bulma included)
 * Semantic code output
-
 * Follows Bulma design and some of the [Material Design UX](https://material.io/)
-
 * Focus on usability and performance without *over-animations*
 
 ## Documentation and Demo
@@ -30,13 +26,15 @@ Browse the [online documentation here](https://buefy.github.io).
 
 ## Quick Start
 
-### Install via npm
+You need [Vue.js](https://vuejs.org/) **version 2.3+**.
+
+### 1 Install via npm
 
 ```bash
 npm install buefy
 ```
 
-### Import and use Buefy. You can also enable individual components
+### 2 Import and use Buefy
 
 ```javascript
 import Vue from 'vue';
@@ -49,16 +47,31 @@ Vue.use(Buefy);
 
 Vue.component(Buefy.Checkbox.name, Buefy.Checkbox);
 Vue.component(Buefy.Table.name, Buefy.Table);
-...
+Vue.component(Buefy.Switch.name, Buefy.Switch);
 ```
 
-### Include Material Design Icons
+### 3 Include Material Design Icons
 
 ```html
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 ```
 
-**Note:** If you want to customize the icons or the theme, access the [customization section on the online documentation](https://buefy.github.io/#/documentation/customization).
+If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.github.io/#/documentation/customization).
+
+### Alternatively, you can use a CDN or even download
+
+```html
+<!-- Buefy CSS -->
+<link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+
+<!-- Buefy JavaScript -->
+<script src="https://unpkg.com/buefy"></script>
+```
+
+```javascript
+// Global variable
+Vue.use(Buefy.default)
+```
 
 ## Versioning
 

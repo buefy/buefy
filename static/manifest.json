@@ -1,0 +1,20 @@
+{
+  "name": "Buefy",
+  "short_name": "Buefy",
+  "icons": [
+    {
+      "src": "/static/img/icons/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/icons/favicon-196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#7957D5"
+}

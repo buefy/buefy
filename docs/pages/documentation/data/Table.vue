@@ -4,33 +4,59 @@
         <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
         <hr>
 
-        <div class="block">
-            <b-switch v-model="isBordered">Bordered</b-switch>
-            <b-switch v-model="isStriped">Striped</b-switch>
-            <b-switch v-model="isNarrowed">Narrowed</b-switch>
-            <b-switch v-model="isCheckable">Checkable</b-switch>
-            <b-switch v-model="isLoading">Loading state</b-switch>
-            <b-switch v-model="isPaginated">Paginated</b-switch>
-            <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
-            <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
+        <div class="field is-grouped is-grouped-multiline">
+            <div class="control">
+                <b-switch v-model="isBordered">Bordered</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isStriped">Striped</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isNarrowed">Narrowed</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isCheckable">Checkable</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isLoading">Loading state</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isPaginated">Paginated</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isPaginationSimple">Simple pagination</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isEmpty">Empty</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="hasMobileCards">Rows as cards on mobile</b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isDetailed">Row is detailed (collapsible)</b-switch>
+            </div>
         </div>
-        <div class="block">
-            <b-select v-model="perPage" style="display: inline-block">
+        <div class="field is-grouped is-grouped-multiline">
+            <b-select v-model="perPage">
                 <option value="5">5 per page</option>
                 <option value="10">10 per page</option>
                 <option value="15">15 per page</option>
                 <option value="20">20 per page</option>
             </b-select>
-            <button class="button" @click="selected = {}"
-                :disabled="Object.keys(selected).length === 0">
-                <b-icon icon="clear"></b-icon>
-                <span>Clear Selected</span>
-            </button>
-            <button class="button" @click="checkedRows = []"
-                :disabled="checkedRows.length === 0">
-                <b-icon icon="clear"></b-icon>
-                <span>Clear Checked</span>
-            </button>
+            <div class="control">
+                <button class="button" @click="selected = {}"
+                    :disabled="Object.keys(selected).length === 0">
+                    <b-icon icon="clear"></b-icon>
+                    <span>Clear Selected</span>
+                </button>
+            </div>
+            <div class="control">
+                <button class="button" @click="checkedRows = []"
+                    :disabled="checkedRows.length === 0">
+                    <b-icon icon="clear"></b-icon>
+                    <span>Clear Checked</span>
+                </button>
+            </div>
         </div>
 
         <div class="example">
@@ -41,15 +67,17 @@
                         :bordered="isBordered"
                         :striped="isStriped"
                         :narrowed="isNarrowed"
+                        :detailed="isDetailed"
                         :checkable="isCheckable"
                         :loading="isLoading"
                         :mobile-cards="hasMobileCards"
                         :paginated="isPaginated"
                         :per-page="perPage"
                         :pagination-simple="isPaginationSimple"
-                        default-sort="user.first_name"
                         :selected.sync="selected"
-                        :checked-rows.sync="checkedRows">
+                        :checked-rows.sync="checkedRows"
+                        @details-open="onOpenedDetail"
+                        default-sort="user.first_name">
 
                         <template scope="props">
                             <b-table-column field="id" label="ID" width="40" sortable numeric>
@@ -64,8 +92,10 @@
                                 {{ props.row.user.last_name }}
                             </b-table-column>
 
-                            <b-table-column field="date" label="Date" sortable>
-                                <span v-html="formatDate(props.row.date)"></span>
+                            <b-table-column field="date" label="Date" sortable centered>
+                                <span class="tag is-success">
+                                    {{ new Date(props.row.date).toLocaleDateString() }}
+                                </span>
                             </b-table-column>
 
                             <b-table-column field="gender" label="Gender">
@@ -76,11 +106,38 @@
                                 {{ props.row.gender }}
                             </b-table-column>
                         </template>
+
+                        <template slot="detail" scope="props">
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                        <img src="static/img/placeholder-128x128.png">
+                                    </p>
+                                </figure>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <strong>{{ props.row.user.first_name }} {{ props.row.user.last_name }}</strong>
+                                            <small>@{{ props.row.user.first_name }}</small>
+                                            <small>31m</small>
+                                            <br>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            Proin ornare magna eros, eu pellentesque tortor vestibulum ut.
+                                            Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </template>
+
+                        <div slot="empty" class="has-text-centered">
+                            This table is empty!
+                        </div>
                     </b-table>
                 </b-tab-item>
 
                 <b-tab-item label="Selected">
-                    <pre class="content">{{ selected }}</pre>
+                    <pre class="block">{{ selected }}</pre>
                 </b-tab-item>
 
                 <b-tab-item label="Checked rows">
@@ -89,8 +146,8 @@
             </b-tabs>
         </div>
 
-        <pre class="content" v-highlight><code class="html">{{ template | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code | pre }}</code></pre>
 
         <hr>
 
@@ -147,6 +204,19 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="tableMethods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
 
         <h3 class="subtitle">Table Column</h3>
@@ -177,12 +247,11 @@
 </template>
 
 <script>
-    import tableData from '../../../assets/data_test.json'
+    import data from '../../../assets/data_test.json'
 
     export default {
         data() {
             return {
-                tableData,
                 checkedRows: [],
                 selected: {},
                 isBordered: false,
@@ -190,10 +259,12 @@
                 isNarrowed: false,
                 isLoading: false,
                 isCheckable: false,
+                isEmpty: false,
                 hasMobileCards: true,
                 isPaginated: true,
                 isPaginationSimple: false,
                 perPage: 10,
+                isDetailed: false,
                 tableProps: [
                     {
                         name: '<code>data</code>',
@@ -232,7 +303,7 @@
                     },
                     {
                         name: '<code>checkable</code>',
-                        description: 'Rows can be checked (multiple)',
+                        description: 'Rows can be checked (multiple), checked rows will have a <code>.is-checked</code> class if you want to style',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -285,11 +356,34 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>20</code>'
+                    },
+                    {
+                        name: '<code>row-class</code>',
+                        description: 'Add a class to row (<code>&lt;tr&gt;</code> element) based on the return',
+                        type: 'Function (row: Object, index: Number)',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>detailed</code>',
+                        description: 'Allow row details (check scoped slots documentation)',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
+
                 ],
                 tableScopedSlots: [
                     {
                         name: 'default',
+                        props: '<code>row: Object</code>, <code>index: Number</code>'
+                    },
+                    {
+                        name: 'empty',
+                        props: ''
+                    },
+                    {
+                        name: 'detail',
                         props: '<code>row: Object</code>, <code>index: Number</code>'
                     }
                 ],
@@ -328,6 +422,22 @@
                         name: '<code>page-change</code>',
                         description: 'Triggers when pagination page is changed',
                         parameters: '<code>page: Number</code>'
+                    },
+                    {
+                        name: '<code>details-open</code>',
+                        description: 'Triggers when details is opened',
+                        parameters: '<code>row: Object</code>'
+                    },
+                    {
+                        name: '<code>details-close</code>',
+                        description: 'Triggers when details is closed',
+                        parameters: '<code>row: Object</code>'
+                    }
+                ],
+                tableMethods: [
+                    {
+                        name: '<code>initSort</code>',
+                        description: 'Sort using <code>default-sort</code> prop parameters'
                     }
                 ],
                 columnProps: [
@@ -354,7 +464,14 @@
                     },
                     {
                         name: '<code>numeric</code>',
-                        description: 'Align the cell content to the right',
+                        description: 'Align the cell content to the right, sort icon on left',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>centered</code>',
+                        description: 'Align the cell content to the center',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -395,6 +512,7 @@
                     :pagination-simple="isPaginationSimple"
                     default-sort="user.first_name"
                     :selected.sync="selected"
+                    :hasDetails="hasDetails"
                     :checked-rows.sync="checkedRows">
 
                     <template scope="props">
@@ -410,8 +528,10 @@
                             {{ props.row.user.last_name }}
                         </b-table-column>
 
-                        <b-table-column field="date" label="Date" sortable
-                            <span v-html="formatDate(props.row.date)"></span>
+                        <b-table-column field="date" label="Date" sortable centered>
+                            <span class="tag is-success">
+                                {{ new Date(props.row.date).toLocaleDateString() }}
+                            </span>
                         </b-table-column>
 
                         <b-table-column field="gender" label="Gender">
@@ -422,6 +542,33 @@
                             {{ props.row.gender }}
                         </b-table-column>
                     </template>
+
+                    <template slot="detail" scope="props">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                    <img src="static/img/placeholder-128x128.png">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>{{ props.row.user.first_name }} {{ props.row.user.last_name }}</strong>
+                                        <small>@{{ props.row.user.first_name }}</small>
+                                        <small>31m</small>
+                                        <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        Proin ornare magna eros, eu pellentesque tortor vestibulum ut.
+                                        Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+
+                    <div slot="empty" class="has-text-centered">
+                        This table is empty!
+                    </div>
                 </b-table>`,
                 code: `
                 export default {
@@ -433,7 +580,7 @@
                                 {"id":3,"user":{"first_name":"Tina","last_name":"Gilbert"},"date":"2016-04-26 06:26:28","gender":"Female"},
                                 {"id":4,"user":{"first_name":"Clarence","last_name":"Flores"},"date":"2016-04-10 10:28:46","gender":"Male"},
                                 {"id":5,"user":{"first_name":"Anne","last_name":"Lee"},"date":"2016-12-06 14:38:38","gender":"Female"},
-                                ...
+                                // ...
                             ],
                             checkedRows: [],
                             selected: {},
@@ -441,7 +588,9 @@
                             isStriped: false,
                             isNarrowed: false,
                             isCheckable: false,
+                            isEmpty: false,
                             isLoading: false,
+                            isDetailed: true,
                             hasMobileCards: true,
                             isPaginated: true,
                             isPaginationSimple: false,
@@ -449,26 +598,26 @@
                         }
                     },
                     methods: {
-                        formatDate(value, row) {
-                            return \`<span class="tag is-success">
-                                \${new Date(value).toLocaleDateString()}
-                            </span>\`
-                        },
                         clearSelected() {
                             this.selected = {}
                         },
                         clearCheckedRows() {
                             this.checkedRows = []
                         }
-                    },
+                    }
                 }`
             }
         },
+        computed: {
+            tableData() {
+                return this.isEmpty
+                    ? []
+                    : data
+            }
+        },
         methods: {
-            formatDate(value, row) {
-                return `<span class="tag is-success">
-                    ${new Date(value).toLocaleDateString()}
-                </span>`
+            onOpenedDetail(row) {
+                this.$toast.open(`You can manage events for ${row.user.first_name}`)
             }
         }
     }

@@ -1,12 +1,103 @@
 # Buefy Changelog
 
+## 0.5.0
+
+### Breaking changes
+
+* **Update Bulma to v0.5.0**, changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+    * Buefy Sass variables are also following the new convention
+* **Removed Menu component**, it was experimental and wasn't good enough, needed too much to work and can easily be replaced with pure HTML
+* Constructor option ``defaultContentElement`` renamed to ``defaultContainerElement``
+* ``b-dropdown-option`` renamed to ``b-dropdown-item``
+    * ``subheader`` prop renamed to ``custom``
+* Any attributes on Input, Select and Autocomplete will be added directly to ``<input>`` or ``<select>`` itself instead of the root element
+* ``change`` events for all form controls (Input, Select Autocomplete, Checkbox, RadioGroup, Switch) that returned pure value will now return ``$event`` (and require ``.native`` modifier), use ``input`` instead
+* Checkbox ``custom-value`` prop renamed to ``native-value``
+    * ``checked`` prop removed
+* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
+* Radio and Radio Button ``value`` prop renamed to ``native-value``
+    * Add ``v-model`` support
+    * Radio Buttons have to be wrapped on a field
+* **Removed RadioGroup**, just add the same ``v-model`` to multiple Radios/RadioButtons and set a ``native-value`` [see docs](https://buefy.github.io/#/documentation/radio)
+* Remove switch ``checked`` prop
+
+### New stuff
+
+* **New component: Upload**, [see docs](https://buefy.github.io/#/documentation/upload) (thanks @jtommy)
+* Field ``position`` prop works for ``grouped`` fields
+* Add ``group-multiline`` prop to field
+* Add ``size`` prop to message
+* #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
+* #201 Add support to array on Field ``message`` prop (thanks @jtommy)
+* #207 Add ``centered`` prop to table column
+* Add ``native-value``, ``true-value`` and ``false-value`` props to switch
+
+### Bug fixes
+
+* #206 Fix radio and checkbox within ``v-for``
+
+## 0.4.6
+
+* **New component: Menu**, [see docs](https://buefy.github.io/#/documentation/menu) (thanks @tsctao)
+* **New component: Panel**, [see docs](https://buefy.github.io/#/documentation/panel) (thanks @jtommy)
+* **New component: Loading**, [see docs](https://buefy.github.io/#/documentation/loading) (thanks @jtommy)
+* **Dropdown improved**: can add any content on it, can be triggered by hover, [see docs](https://buefy.github.io/#/documentation/dropdown)
+* Remove ``narrowed`` prop from dropdown
+* Update Bulma to v0.4.4
+* Add CDN install method and JSFiddle examples
+* Add boolean ``addons`` prop to field
+* Fix message and notification inside ``.media`` element
+* Fix pagination current page to not be clickable (thanks @jtommy)
+* #118 Add Nuxt.js installation on docs
+* #171 Fix modal not taking full width on mobile
+* #182 Fix table not default sorting async data (thanks @jtommy)
+* #184 Add ``input`` event on docs (input/autocomplete)
+* #190 Add Vue.js required version on docs
+* #197 Fix autocomplete ``expanded`` prop not working correctly
+
+## 0.4.5
+
+* Update Bulma to v0.4.3
+* Page is now clipped when a modal/dialog is active (to avoid weird scroll behavior)
+* Update modal docs example to not use the ``component`` prop, works better for events and is more common — Old way is not deprecated
+* Remove programmatic component modal from docs since isn't a good practice and was causing too many issues
+* Fix autocomplete ``focus()`` method
+* #106 Fix prompt dialog vue-warning
+* #144 Add ``rows`` prop to input (textarea)
+* #145 Fix autocomplete not preventing form from submitting (thanks @jtommy)
+* #153 Add return for ``checkHtml5Validity()`` method
+* #155 Fix input/autocomplete ``change`` event (thanks @jtommy)
+* #157 Fix table redundant level element generating extra padding
+* #159 Fix modal with ``.modal-card`` responsiveness, added a ``has-modal-card`` prop
+* #165 Fix safari button alignment on dialog (thanks @jtommy)
+* #154 Add prop for when table data is empty (thanks @jtommy)
+* #170 Fix dialogs min-width mobile
+
+## 0.4.4
+
+* #139 Fix notices durations and constructor options
+
 ## 0.4.3
 
+* Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](https://buefy.github.io/#/documentation/switch)
+* Add tons of props to Autocomplete, [see here](https://buefy.github.io/#/documentation/autocomplete)
+* **Dropdown button as addon now needs a ``.control`` element wrapping**
+* Add some useful methods on docs for Input, Select, Autocomplete and Table
 * Fix autocomplete list width
+* #38 Add ``animation`` prop for dialog and modal, for custom animation (transition name)
+* #115 Add ``row-class`` property to table to style row status, e.g.:
+
+```html
+    <b-table :data="tableData" :row-class="row => row.amount < 10 && 'is-warning'">[...]</b-table>
+```
+
 * #117 Fix table row loop missing ``key`` prop
 * #122 Fix async tab-items
 * #124 Toast, Dialog, Snackbar and Programmatic Modal exposed
-* #128 Add default notices duration constructor option (thanks @quimarche)
+* #128 Add default notices duration constructor options (thanks @quimarche)
+* #130 Fix checkbox/switch not emitting change event when using keyboard (thanks @gongzza)
+* #132 Add dropdown ``active-change`` event to know when it's dropdown list is active/visible (thanks @bartboy011)
+* #134 Add ``true-value`` and ``false-value`` props to checkbox
 
 ## 0.4.2
 
@@ -39,8 +130,8 @@
 
 ### Additions and fixes
 
-* **New component: Autocomplete**, [see docs](http://buefy.github.io/#/documentation/autocomplete)
-* **Switch design overhaul**, [see new style](http://buefy.github.io/#/documentation/switch)
+* **New component: Autocomplete**, [see docs](https://buefy.github.io/#/documentation/autocomplete)
+* **Switch design overhaul**, [see new style](https://buefy.github.io/#/documentation/switch)
 * Fix Tabs dynamic height
 * Add one more Sass variable: ``$speed-slower: 250ms !default``
 * Add ``size`` prop to Switch
@@ -59,7 +150,7 @@
 
 ## 0.3.2
 
-* **New component: Tabs**, [see docs](http://buefy.github.io/#/documentation/tabs)
+* **New component: Tabs**, [see docs](https://buefy.github.io/#/documentation/tabs)
 * Add ``content`` prop to TableColumn, use this instead of ``v-html`` or it might break on tables with ``mobile-cards`` (collapsed rows)
 * Alert Dialog accepts string as well
 * Dialog open with focus on confirm button (easier to just hit enter)

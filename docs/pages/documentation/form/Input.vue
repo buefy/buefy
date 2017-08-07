@@ -40,7 +40,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -137,7 +137,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -171,7 +171,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
             </div>
         </div>
 
@@ -193,7 +193,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
             </div>
         </div>
 
@@ -229,7 +229,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template6 | pre }}</code></pre>
             </div>
         </div>
 
@@ -274,6 +274,22 @@
                     </template>
                 </b-table>
             </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="methods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                        <b-table-column field="return" label="Return">
+                            <span v-html="props.row.return"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
         </b-tabs>
     </div>
 </template>
@@ -292,7 +308,7 @@
                     },
                     {
                         name: '<code>type</code>',
-                        description: 'Same as native input type',
+                        description: 'Input type, like native',
                         type: 'String',
                         values: 'Any native input type, and <code>textarea</code>',
                         default: '<code>text</code>'
@@ -340,94 +356,29 @@
                         default: '<code>mdi</code>'
                     },
                     {
-                        name: '<code>autocomplete</code>',
-                        description: 'Same as native <code>autocomplete</code>',
-                        type: 'String',
-                        values: '<code>on</code>, <code>off</code>',
-                        default: '<code>on</code>'
-                    },
-                    {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>readonly</code>',
-                        description: 'Same as native <code>readonly</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>min</code>',
-                        description: 'Same as native <code>min</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>max</code>',
-                        description: 'Same as native <code>max</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>step</code>',
-                        description: 'Same as native <code>step</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>minlength</code>',
-                        description: 'Same as native <code>minlength</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
                         name: '<code>maxlength</code>',
-                        description: 'Same as native <code>maxlength</code>, also adds character counter',
-                        type: 'Number',
+                        description: 'Same as native <code>maxlength</code>, plus character counter',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
                     {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>pattern</code>',
-                        description: 'Same as native <code>pattern</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>placeholder</code>',
-                        description: 'Same as native <code>placeholder</code>',
-                        type: 'String',
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
                         values: '—',
                         default: '—'
                     }
                 ],
                 events: [
                     {
-                        name: '<code>[any].native</code>',
-                        description: 'Listen to native event, can be used with any (click, keydown, keyup, mouseenter, etc.). E.g: <code>click.native</code>',
+                        name: '<code>input</code>',
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: String|Number</code>'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Triggers when input has received focus',
                         parameters: '<code>event: $event</code>'
                     },
                     {
@@ -436,14 +387,21 @@
                         parameters: '<code>event: $event</code>'
                     },
                     {
-                        name: '<code>focus</code>',
-                        description: 'Triggers when input is focused',
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any native event, e.g. <code>click.native</code>',
                         parameters: '<code>event: $event</code>'
+                    }
+                ],
+                methods: [
+                    {
+                        name: '<code>checkHtml5Validity</code>',
+                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',
+                        return: '<code>isValid: Boolean</code>'
                     },
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when input value is changed',
-                        parameters: '<code>value: String/Number</code>'
+                        name: '<code>focus</code>',
+                        description: 'Set focus (internally uses the native <code>.select()</code> method)',
+                        return: '—'
                     }
                 ],
                 template1: `

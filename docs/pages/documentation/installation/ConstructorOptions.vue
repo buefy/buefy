@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title is-spaced">Constructor Options</h1>
+        <h1 class="title is-spaced">Constructor options</h1>
         <h2 class="subtitle">These are global default options, which are set on Buefy initialization</h2>
 
         <hr>
@@ -17,7 +17,7 @@
                 <b-table-column field="name" label="Name">
                     <span v-html="props.row.name"></span>
                 </b-table-column>
-                <b-table-column field="description" label="Description" width="620">
+                <b-table-column field="description" label="Description" width="480">
                     <span v-html="props.row.description"></span>
                 </b-table-column>
                 <b-table-column field="type" label="Type">
@@ -41,8 +41,8 @@
                 usage: `
                 Vue.use(Buefy, {
                     defaultIconPack: 'fa',
-                    defaultContentElement: '#content',
-                    ...
+                    defaultContainerElement: '#content',
+                    // ...
                 })`,
                 options: [
                     {
@@ -55,7 +55,7 @@
                         default: '<code>mdi</code>'
                     },
                     {
-                        name: '<code>defaultContentElement</code>',
+                        name: '<code>defaultContainerElement</code>',
                         description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                             changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
                             Meaning that the container <em>should</em> be <code>fixed</code>.`,

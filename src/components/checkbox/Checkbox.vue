@@ -4,13 +4,14 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="updateValue(!newValue, $event)">
-        <input
+        @keydown.prevent.enter.space="$refs.label.click()">
+        <input v-model="newValue"
             type="checkbox"
             :disabled="disabled"
             :name="name"
-            v-model="newValue"
-            @change="updateValue(newValue, $event)">
+            :value="nativeValue"
+            :true-value="trueValue"
+            :false-value="falseValue">
         <span class="check"></span>
         <span class="control-label"><slot></slot></span>
     </label>
@@ -20,16 +21,22 @@
     export default {
         name: 'bCheckbox',
         props: {
-            value: Boolean,
+            value: {},
+            nativeValue: {},
             disabled: Boolean,
             name: String,
-            checked: Boolean,
-            nosync: Boolean,
-            customValue: [String, Number, Boolean, Object]
+            trueValue: {
+                type: [String, Number, Boolean, Function, Object, Array, Symbol],
+                default: true
+            },
+            falseValue: {
+                type: [String, Number, Boolean, Function, Object, Array, Symbol],
+                default: false
+            }
         },
         data() {
             return {
-                newValue: this.value || this.checked
+                newValue: this.value
             }
         },
         watch: {
@@ -42,26 +49,9 @@
 
             /**
              * Emit input event to update the user v-model.
-             * Call updateValue from parent if it's a Checkbox Group.
              */
             newValue(value) {
-                if (this.nosync) {
-                    // Used internally by Table, will update only by prop
-                    this.newValue = this.value
-                    return
-                }
                 this.$emit('input', value)
-                this.$parent.isCheckboxGroup && this.$parent.updateValue()
-            }
-        },
-        methods: {
-            /**
-             * Set the newValue.
-             * Emit change event.
-             */
-            updateValue(newValue, $event) {
-                this.newValue = newValue
-                this.$emit('change', newValue, $event)
             }
         }
     }

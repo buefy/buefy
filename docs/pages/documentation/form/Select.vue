@@ -93,13 +93,12 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
             </div>
         </div>
 
         <hr>
-        <span class="tag is-success field">New!</span> <span class="tag is-info">v0.4.1</span>
         <h2 class="title">Icons</h2>
         <div class="columns">
             <div class="column">
@@ -140,7 +139,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
             </div>
         </div>
 
@@ -173,7 +172,7 @@
                 </button>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -221,7 +220,7 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
             </div>
         </div>
 
@@ -230,7 +229,7 @@
         <h2 class="title is-spaced">API</h2>
         <b-tabs>
             <b-tab-item label="Properties">
-                <b-table :data="selectProps" default-sort="name">
+                <b-table :data="props" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -252,7 +251,7 @@
             </b-tab-item>
 
             <b-tab-item label="Events">
-                <b-table :data="selectEvents" default-sort="name">
+                <b-table :data="events" default-sort="name">
                     <template scope="props">
                         <b-table-column field="name" label="Name">
                             <span v-html="props.row.name"></span>
@@ -262,6 +261,22 @@
                         </b-table-column>
                         <b-table-column field="parameters" label="Parameters">
                             <span v-html="props.row.parameters"></span>
+                        </b-table-column>
+                    </template>
+                </b-table>
+            </b-tab-item>
+
+            <b-tab-item label="Methods">
+                <b-table :data="methods" default-sort="name">
+                    <template scope="props">
+                        <b-table-column field="name" label="Name">
+                            <span v-html="props.row.name"></span>
+                        </b-table-column>
+                        <b-table-column field="description" label="Description" width="620">
+                            <span v-html="props.row.description"></span>
+                        </b-table-column>
+                        <b-table-column field="return" label="Return">
+                            <span v-html="props.row.return"></span>
                         </b-table-column>
                     </template>
                 </b-table>
@@ -278,7 +293,7 @@
             return {
                 options: options,
                 select: 'vane',
-                selectProps: [
+                props: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
@@ -299,27 +314,6 @@
                         type: 'String',
                         values: '—',
                         default: '—'
-                    },
-                    {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>loading</code>',
@@ -348,23 +342,47 @@
                         type: 'String',
                         values: '<code>mdi</code>, <code>fa</code>',
                         default: '<code>mdi</code>'
+                    },
+                    {
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
+                        values: '—',
+                        default: '—'
                     }
                 ],
-                selectEvents: [
+                events: [
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when the selection is changed',
-                        parameters: '<code>value: String</code>'
+                        name: '<code>input</code>',
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: Any</code>'
                     },
                     {
                         name: '<code>focus</code>',
-                        description: 'Triggers when the select is focused',
+                        description: 'Triggers when input has received focus',
                         parameters: '<code>event: $event</code>'
                     },
                     {
                         name: '<code>blur</code>',
-                        description: 'Triggers when the select has lost focus',
+                        description: 'Triggers when input has lost focus',
                         parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any native event, e.g. <code>click.native</code>',
+                        parameters: '<code>event: $event</code>'
+                    }
+                ],
+                methods: [
+                    {
+                        name: '<code>checkHtml5Validity</code>',
+                        description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',
+                        return: '<code>isValid: Boolean</code>'
+                    },
+                    {
+                        name: '<code>focus</code>',
+                        description: 'Set focus',
+                        return: '—'
                     }
                 ],
                 template1: `
@@ -453,7 +471,7 @@
                                 {"id":3,"first_name":"Tina"},
                                 {"id":4,"first_name":"Clarence"},
                                 {"id":5,"first_name":"Anne"},
-                                ...
+                                // ...
                             ]
                         }
                     }

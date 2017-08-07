@@ -10,21 +10,21 @@
         </div>
         <b-modal :active.sync="isImageModalActive">
             <p class="image is-4by3">
-                <img src="static/placeholder-1280x960.png">
+                <img src="static/img/placeholder-1280x960.png">
             </p>
         </b-modal>
         <b-modal :active.sync="isCardModalActive" :width="640">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img src="static/placeholder-1280x960.png" alt="Image">
+                        <img src="static/img/placeholder-1280x960.png" alt="Image">
                     </figure>
                 </div>
                 <div class="card-content">
                     <div class="media">
                         <div class="media-left">
                             <figure class="image is-48x48">
-                                <img src="static/placeholder-1280x960.png" alt="Image">
+                                <img src="static/img/placeholder-1280x960.png" alt="Image">
                             </figure>
                         </div>
                         <div class="media-content">
@@ -43,48 +43,36 @@
                 </div>
             </div>
         </b-modal>
-        <pre class="content" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
 
         <hr>
 
         <h2 class="title">Component Modal</h2>
         <div class="content">
-            <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
-            <p>The component will receive all props from the <code>props</code> object.</p>
+            <p>A modal with a component. When you want to close the Modal, call the 'close' method — <code>this.$parent.close()</code> — from the component's parent.</p>
             <button class="button is-primary is-medium" @click="isComponentModalActive = true">Launch component modal</button>
         </div>
-        <b-modal
-            :active.sync="isComponentModalActive"
-            :component="ModalForm"
-            :props="formProps"
-            :width="380">
+        <b-modal :active.sync="isComponentModalActive" has-modal-card>
+            <modal-form v-bind="formProps"></modal-form>
         </b-modal>
-        <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-        <pre class="content" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
 
         <h3 class="subtitle">ModalForm component</h3>
-        <p class="content"><b>Note:</b> You should't mutate a prop directly, this is just an example.</p>
-        <pre class="content" v-highlight><code class="html">{{ component | pre }}</code></pre>
+        <b-message type="is-warning">
+            <b>Note:</b> You should't mutate a prop directly, this is just an example.
+        </b-message>
+        <pre class="block" v-highlight><code class="html">{{ component | pre }}</code></pre>
 
         <hr>
 
-        <h2 class="title is-spaced">Programmatically opening</h2>
+        <h2 class="title is-spaced">Programmatically opening HTML Modal</h2>
 
         <div class="block">
             <button class="button is-primary is-medium" @click="imageModal">Launch image modal</button>
             <button class="button is-primary is-medium" @click="cardModal">Launch card modal</button>
         </div>
-        <pre class="content" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
-
-        <hr>
-
-        <h2 class="title">Programmatically opening Component Modal</h2>
-        <div class="content">
-            <p>A modal with an injected component. When you want to close the Modal, emit a 'close' event — <code>this.$emit('close')</code> — from the component.</p>
-            <p>The component will receive all props from the <code>props</code> object.</p>
-            <button class="button is-primary is-medium" @click="componentModal">Launch component modal</button>
-        </div>
-        <pre class="content" v-highlight><code class="javascript">{{ code4 | pre }}</code></pre>
+        <pre class="block" v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
 
         <hr>
 
@@ -135,9 +123,11 @@
     import ModalForm from '../../../components/ModalForm'
 
     export default {
+        components: {
+            ModalForm
+        },
         data() {
             return {
-                ModalForm,
                 isImageModalActive: false,
                 isCardModalActive: false,
                 isComponentModalActive: false,
@@ -155,7 +145,9 @@
                     },
                     {
                         name: '<code>component</code>',
-                        description: `Component to be shown. Close Modal programatically by emitting a 'close' event — <code>this.$emit('close')</code> — from the component`,
+                        description: `Component to be injected, used to open a component modal programmatically.
+                            Close modal within the component by emitting a 'close' event — <code>this.$emit('close')</code>.
+                            Be aware that the component won't have access to the main Vue instance (vuex, router, custom components, etc.)`,
                         type: 'String',
                         values: '—',
                         default: '—'
@@ -180,6 +172,20 @@
                         type: 'Number, String',
                         values: '—',
                         default: '<code>960</code>'
+                    },
+                    {
+                        name: '<code>has-modal-card</code>',
+                        description: `If your modal content has a <code>.modal-card</code> as root, add this prop or the card might break on mobile`,
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>animation</code>',
+                        description: 'Custom animation (transition name)',
+                        type: 'String',
+                        values: '—',
+                        default: '<code>zoom-out</code>'
                     },
                     {
                         name: '<code>canCancel</code>',
@@ -209,7 +215,7 @@
 
                 <b-modal :active.sync="isImageModalActive">
                     <p class="image is-4by3">
-                        <img src="static/placeholder-1280x960.png">
+                        <img src="static/img/placeholder-1280x960.png">
                     </p>
                 </b-modal>
 
@@ -217,14 +223,14 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="static/placeholder-1280x960.png" alt="Image">
+                                <img src="static/img/placeholder-1280x960.png" alt="Image">
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image is-48x48">
-                                        <img src="static/placeholder-1280x960.png" alt="Image">
+                                        <img src="static/img/placeholder-1280x960.png" alt="Image">
                                     </figure>
                                 </div>
                                 <div class="media-content">
@@ -247,19 +253,18 @@
                 template2: `
                 <button class="button is-primary is-medium" @click="isComponentModalActive = true">Launch component modal</button>
 
-                <b-modal
-                    :active.sync="isComponentModalActive"
-                    :component="ModalForm"
-                    :props="formProps"
-                    :width="380">
+                <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                    <modal-form v-bind="formProps"></modal-form>
                 </b-modal>`,
                 code2: `
                 import ModalForm from './components/ModalForm'
 
                 export default {
+                    components: {
+                        ModalForm
+                    },
                     data() {
                         return {
-                            ModalForm,
                             isComponentModalActive: false,
                             formProps: {
                                 email: 'evan@you.com',
@@ -274,7 +279,7 @@
                         imageModal() {
                             this.$modal.open(
                                 \`<p class="image is-4by3">
-                                    <img src="./static/placeholder-1280x960.png">
+                                    <img src="./static/img/placeholder-1280x960.png">
                                 </p>\`
                             )
                         },
@@ -284,14 +289,14 @@
                                 content: \`<div class="card">
                                     <div class="card-image">
                                         <figure class="image is-4by3">
-                                            <img src="./static/placeholder-1280x960.png" alt="Image">
+                                            <img src="./static/img/placeholder-1280x960.png" alt="Image">
                                         </figure>
                                     </div>
                                     <div class="card-content">
                                         <div class="media">
                                             <div class="media-left">
                                                 <figure class="image is-48x48">
-                                                    <img src="./static/placeholder-1280x960.png" alt="Image">
+                                                    <img src="./static/img/placeholder-1280x960.png" alt="Image">
                                                 </figure>
                                             </div>
                                             <div class="media-content">
@@ -313,27 +318,11 @@
                         }
                     }
                 }`,
-                code4: `
-                import ModalForm from './components/ModalForm'
-
-                export default {
-                    methods: {
-                        componentModal() {
-                            this.$modal.open({
-                                component: ModalForm,
-                                width: 380,
-                                props: {
-                                    email: 'evan@you.com',
-                                    password: 'testing'
-                                }
-                            })
-                        }
-                    }
-                }`,
+                /*eslint-disable */
                 component: `
                 <template>
-                    <div class="modal-card">
-                        <form action="">
+                    <form action="">
+                        <div class="modal-card">
                             <header class="modal-card-head">
                                 <p class="modal-card-title">Login</p>
                             </header>
@@ -360,11 +349,11 @@
                                 <b-checkbox>Remember me</b-checkbox>
                             </section>
                             <footer class="modal-card-foot">
-                                <button class="button" type="button" @click="$emit('close')">Close</button>
+                                <button class="button" type="button" @click="$parent.close()">Close</button>
                                 <button class="button is-primary">Login</button>
                             </footer>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </template>
 
                 <script>
@@ -373,13 +362,12 @@
                     }
                 <\/script>
 
-
                 <style scoped>
                     .modal-card {
-                        margin: 0 auto;
                         width: auto;
                     }
                 </style>`
+                /*eslint-enable */
             }
         },
         methods: {
@@ -396,7 +384,7 @@
             imageModal() {
                 this.$modal.open(
                     `<p class="image is-4by3">
-                        <img src="./static/placeholder-1280x960.png">
+                        <img src="./static/img/placeholder-1280x960.png">
                     </p>`
                 )
             },
@@ -406,14 +394,14 @@
                     content: `<div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                            <img src="./static/placeholder-1280x960.png" alt="Image">
+                            <img src="./static/img/placeholder-1280x960.png" alt="Image">
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                <img src="./static/placeholder-1280x960.png" alt="Image">
+                                <img src="./static/img/placeholder-1280x960.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">

@@ -1,98 +1,127 @@
 <template>
     <div class="b-table" :class="{ 'is-loading': loading }">
-        <div class="b-table-content">
-            <div class="field  is-hidden-tablet" v-if="mobileCards && hasSortableColumns">
-                <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
-                    <b-select v-model="mobileSort" expanded>
-                        <option
-                            v-for="(column, index) in columns"
-                            :key="index"
-                            v-if="column.sortable"
-                            :value="column">
-                            {{ column.label }}
-                        </option>
-                    </b-select>
-                    <p class="control">
-                        <button class="button is-primary" @click="sort(mobileSort)">
-                            <b-icon
-                                icon="arrow_upward"
-                                both
-                                size="is-small"
-                                :class="{
-                                    'is-desc': !isAsc,
-                                    'is-visible': currentSortColumn === mobileSort
-                                }">
-                            </b-icon>
-                        </button>
-                    </p>
-                </div>
+        <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet">
+            <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
+                <b-select v-model="mobileSort" expanded>
+                    <option v-for="(column, index) in columns"
+                        v-if="column.sortable"
+                        :key="index"
+                        :value="column">
+                        {{ column.label }}
+                    </option>
+                </b-select>
+                <p class="control">
+                    <button class="button is-primary" @click="sort(mobileSort)">
+                        <b-icon
+                            icon="arrow_upward"
+                            both
+                            size="is-small"
+                            :class="{
+                                'is-desc': !isAsc,
+                                'is-visible': currentSortColumn === mobileSort
+                            }">
+                        </b-icon>
+                    </button>
+                </p>
             </div>
+        </div>
 
-            <div class="table-wrapper">
-                <table
-                    class="table"
-                    :class="{
-                        'is-bordered': bordered,
-                        'is-striped': striped,
-                        'is-narrow': narrowed,
-                        'has-mobile-cards': mobileCards
-                    }">
-                    <thead>
-                        <tr>
-                            <th class="checkbox-cell" v-if="checkable">
-                                <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
-                            </th>
-                            <th v-for="(column, index) in columns" @click.stop="sort(column)"
-                                :key="index"
-                                v-if="column.visible"
-                                :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
-                                :style="{ width: column.width + 'px' }">
-                                <div class="th-wrap" :class="{ 'is-numeric': column.numeric }">
-                                    {{ column.label }}
-                                    <b-icon
-                                        icon="arrow_upward"
-                                        both
-                                        size="is-small"
-                                        :class="{ 'is-desc': !isAsc, 'is-visible': currentSortColumn === column }">
-                                    </b-icon>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(row, index) in visibleData"
+        <div class="table-wrapper">
+            <table
+                class="table"
+                :class="{
+                    'is-bordered': bordered,
+                    'is-striped': striped,
+                    'is-narrow': narrowed,
+                    'has-mobile-cards': mobileCards
+                }">
+                <thead>
+                    <tr>
+                        <th v-if="detailed" width="40px"></th>
+                        <th class="checkbox-cell" v-if="checkable">
+                            <b-checkbox :value="isAllChecked" @input.native="checkAll"></b-checkbox>
+                        </th>
+                        <th v-for="(column, index) in columns"
+                            v-if="column.visible"
                             :key="index"
+                            :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
+                            :style="{ width: column.width + 'px' }"
+                            @click.stop="sort(column)">
+                            <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
+                                {{ column.label }}
+                                <b-icon
+                                    icon="arrow_upward"
+                                    both
+                                    size="is-small"
+                                    :class="{ 'is-desc': !isAsc, 'is-visible': currentSortColumn === column }">
+                                </b-icon>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody v-if="visibleData.length">
+                    <template v-for="(row, index) in visibleData">
+                        <tr :key="index"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            :class="{ 'is-selected': row === selected, 'is-checked': isRowChecked(row) }">
+                            :class="[rowClass(row, index), {
+                                'is-selected': row === selected,
+                                'is-checked': isRowChecked(row)
+                            }]">
+
+                            <td v-if="detailed">
+                                <a role="button" @click.stop="toggleDetails(row)">
+                                    <b-icon icon="chevron_right"
+                                        both
+                                        :class="{'is-expanded': isVisibleDetailRow(row)}">
+                                    </b-icon>
+                                </a>
+                            </td>
 
                             <td class="checkbox-cell" v-if="checkable">
-                                <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
+                                <b-checkbox :value="isRowChecked(row)" @input.native="checkRow(row)"></b-checkbox>
                             </td>
 
                             <slot :row="row" :index="index"></slot>
                         </tr>
-                    </tbody>
-                </table>
+
+                        <tr v-if="detailed && isVisibleDetailRow(row)"
+                            :key="index"
+                            class="detail">
+                            <td :colspan="columnCount">
+                                <div class="detail-container">
+                                    <slot name="detail" :row="row" :index="index"></slot>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+                <tbody v-else>
+                    <tr class="is-empty">
+                        <td :colspan="columnCount">
+                            <slot name="empty"></slot>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div v-if="checkable || paginated" class="level">
+            <div class="level-left">
+                <div v-if="checkable && this.checkedRows.length > 0" class="level-item">
+                    <p>({{ this.checkedRows.length }})</p>
+                </div>
             </div>
 
-            <div class="level">
-                <div class="level-left">
-                    <div class="level-item">
-                        <p v-if="checkable && this.checkedRows.length > 0">({{ this.checkedRows.length }})</p>
-                    </div>
-                </div>
-
-                <div class="level-right" v-if="paginated">
-                    <div class="level-item">
-                        <b-pagination
-                            :total="newData.length"
-                            :per-page="perPage"
-                            :simple="paginationSimple"
-                            :current="currentPage"
-                            @change="pageChanged">
-                        </b-pagination>
-                    </div>
+            <div class="level-right">
+                <div v-if="paginated" class="level-item">
+                    <b-pagination
+                        :total="newData.length"
+                        :per-page="perPage"
+                        :simple="paginationSimple"
+                        :current="currentPage"
+                        @change="pageChanged">
+                    </b-pagination>
                 </div>
             </div>
         </div>
@@ -115,12 +144,13 @@
         props: {
             data: {
                 type: Array,
-                default: []
+                default: () => []
             },
             bordered: Boolean,
             striped: Boolean,
             narrowed: Boolean,
             loading: Boolean,
+            detailed: Boolean,
             checkable: Boolean,
             selected: Object,
             checkedRows: {
@@ -138,17 +168,23 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            backendSorting: Boolean
+            backendSorting: Boolean,
+            rowClass: {
+                type: Function,
+                default: () => ''
+            }
         },
         data() {
             return {
                 columns: [],
+                visibleDetailRows: [],
                 newData: this.data,
                 newCheckedRows: [...this.checkedRows],
                 currentSortColumn: {},
                 isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
+                firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
         },
@@ -186,6 +222,16 @@
              */
             checkedRows(rows) {
                 this.newCheckedRows = [...rows]
+            },
+
+            /**
+             * When columns change, call initSort only first time (For example async data).
+             */
+            columns(columns) {
+                if (this.firstTimeSort) {
+                    this.initSort()
+                    this.firstTimeSort = false
+                }
             }
         },
         computed: {
@@ -224,6 +270,17 @@
                 return this.columns.some(column => {
                     return column.sortable
                 })
+            },
+
+            /**
+             * Return total column count based if it's checkable or expanded
+             */
+            columnCount() {
+                let count = this.columns.length
+                count += this.checkable ? 1 : 0
+                count += this.detailed ? 1 : 0
+
+                return count
             }
         },
         methods: {
@@ -234,7 +291,9 @@
             sortBy(array, key, fn, isAsc) {
                 let sorted = []
                 // Sorting without mutating original data
-                if (!fn || typeof fn !== 'function') {
+                if (fn && typeof fn === 'function') {
+                    sorted = [...array].sort(fn)
+                } else {
                     sorted = [...array].sort((a, b) => {
                         // Get nested values from objects
                         let newA = getValueByPath(a, key)
@@ -255,8 +314,6 @@
                             ? newA > newB ? 1 : -1
                             : newA > newB ? -1 : 1
                     })
-                } else {
-                    sorted = [...array].sort(fn)
                 }
 
                 return sorted
@@ -360,6 +417,24 @@
                 this.$emit('page-change', this.currentPage)
             },
 
+             /**
+             * Toggle to show/hide details slot
+             */
+            toggleDetails(index) {
+                const found = this.isVisibleDetailRow(index)
+                if (found) {
+                    const i = this.visibleDetailRows.indexOf(index)
+                    this.visibleDetailRows.splice(i, 1)
+                    this.$emit('details-close', index)
+                    return
+                }
+                this.visibleDetailRows.push(index)
+                this.$emit('details-open', index)
+            },
+            isVisibleDetailRow(index) {
+                return this.visibleDetailRows.indexOf(index) >= 0
+            },
+
             /**
              * Initial sorted column based on the default-sort prop.
              */
@@ -369,6 +444,7 @@
                 const sortField = Array.isArray(this.defaultSort)
                     ? this.defaultSort[0]
                     : this.defaultSort
+
                 const direction = this.defaultSort[1] || ''
 
                 this.columns.forEach(column => {
@@ -378,9 +454,7 @@
                     }
                 })
             }
-        },
-        mounted() {
-            this.initSort()
         }
     }
 </script>
+

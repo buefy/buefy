@@ -1,24 +1,26 @@
+$checkbox-active-background-color: $primary !default;
+$checkbox-checkmark-color: $primary-invert !default;
+
 .checkbox {
     outline: none;
     display: inline-flex;
     align-items: center;
+    @include unselectable;
     & + .checkbox {
         margin-left: 0.5em;
     }
     input[type=checkbox] {
         display: none;
         + .check {
-            position: relative;
             width: 1.25em;
             height: 1.25em;
             border-radius: $radius;
             border: 2px solid $grey;
-            background: none;
-            transition: all $speed-slower $easing;
+            transition: background $speed-slow $easing;
         }
         &:checked + .check {
-            background: $primary url(checkmark($white)) no-repeat center center;
-            border-color: $primary;
+            background: $checkbox-active-background-color url(checkmark($checkbox-checkmark-color)) no-repeat center center;
+            border-color: $checkbox-active-background-color;
         }
     }
     .control-label {
@@ -29,7 +31,7 @@
     }
     &:hover {
         input[type=checkbox] + .check {
-            border-color: $primary;
+            border-color: $checkbox-active-background-color;
         }
     }
     &:focus {
@@ -37,7 +39,7 @@
             box-shadow: 0 0 0.5em rgba($grey, 0.8);
         }
         input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($primary, 0.8);
+            box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
         }
     }
 }
