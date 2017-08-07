@@ -11,8 +11,8 @@
             </div>
 
             <div class="hero-foot">
-                <nav class="tabs is-boxed">
-                    <div class="container">
+                <div class="container">
+                    <nav class="tabs is-boxed">
                         <ul>
                             <li v-for="tab in tabs"
                                 :key="tab.title"
@@ -22,12 +22,12 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
         </div>
 
-        <nav class="nav has-shadow">
+        <nav class="navbar has-shadow">
             <div class="container">
                 <component :is="currentTab"></component>
             </div>
