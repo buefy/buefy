@@ -7,7 +7,7 @@
     <div class="columns">
         <div class="column">
             <p>
-                When opened, whatever date is passed in through <code>v-model</code> will be outlined as the starting date.
+                The datepicker is a simple modal that allows a user to select a date from a calendar. When a date is selected, the component emits the event <code>input</code> with a date object as the payload. This can be paired with <code>v-model</code> or used standalone. Today's date is outlined in the picker.
                 <br />
                 <br />
                 <button class="button is-primary" @click="firstDatepickerActive = true">Pick Date</button>
@@ -27,7 +27,7 @@
     <div class="columns">
         <div class="column">
             <p>
-                The datepicker can be configured to have three different footer buttons for better control.
+                The datepicker can be configured to have three different footer buttons for better control. <code>:footer-today</code> will display a button that when clicked selects today's date and closes the modal. <code>:footer-clear</code> will set the value of the date picker to <code>null</code> and close the modal. <code>:footer-close</code>, which defaults to <code>true</code>, will display a button that when clicked closes the modal without selecting a date.
                 <br />
                 <br />
                 <button class="button is-primary" @click="secondDatepickerActive = true">Pick Date</button>
@@ -53,7 +53,7 @@
     <div class="columns">
         <div class="column">
             <p>
-                The datepicker can also have earliest and latest dates selectable set.
+                The datepicker can also have earliest and latest dates selectable set. Additionally, through the <code>:focused-date</code> prop, you can set the date picker to display a month and year other than today's month and year.
                 <br />
                 <br />
                 <button class="button is-primary" @click="thirdDatepickerActive = true">Pick Date</button>

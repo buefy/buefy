@@ -104,10 +104,7 @@ export default {
          */
         dateSelected() {
             this.$emit('input', this.dateSelected)
-            // only emit if date is not null (for clear button)
-            if (this.dateSelected) {
-                this.isActive = false
-            }
+            this.isActive = false
         },
 
         /*
