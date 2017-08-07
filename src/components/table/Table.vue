@@ -215,9 +215,9 @@
              * only if it's backend-paginated.
              */
             total(newTotal) {
-                if (this.backendPagination) {
-                    this.newDataTotal = newTotal
-                }
+                if (!this.backendPagination) return
+
+                this.newDataTotal = newTotal
             },
 
             /**
