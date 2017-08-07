@@ -24,7 +24,7 @@ It has to work, **and** have great UX on both platforms.
 
 * Keep it simple.
 * Performance is UX, keep it lightweight.
-* Avoid HTML-only components, if it doesn't need JavaScript, then it doesn't need Vue.
+* Avoid HTML-only components, if it doesn't need JavaScript, then it doesn't need Vue (with a few exceptions).
 * Keep. It. Simple.
 
 ### 3. Keep Bulma design
