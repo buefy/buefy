@@ -264,7 +264,7 @@
                 isPaginated: true,
                 isPaginationSimple: false,
                 perPage: 10,
-                isDetailed: true,
+                isDetailed: false,
                 tableProps: [
                     {
                         name: '<code>data</code>',
