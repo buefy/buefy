@@ -25,6 +25,7 @@
 * **New component: Upload**, [see docs](https://buefy.github.io/#/documentation/upload) (thanks @jtommy)
 * Field ``position`` prop works for ``grouped`` fields
 * Add ``group-multiline`` prop to field
+* Add ``size`` prop to message
 * #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
 * #201 Add support to array on Field ``message`` prop (thanks @jtommy)
 * #207 Add ``centered`` prop to table column
@@ -32,6 +33,7 @@
 
 ### Bug fixes
 
+* #206 Fix radio and checkbox within ``v-for``
 
 ## 0.4.6
 

@@ -6,41 +6,9 @@
 
         <div class="columns">
             <div class="column">
-                <button class="button block" @click="isActive = true">Show first</button>
+                <button class="button block" @click="isActive = !isActive">Toggle</button>
                 <b-message title="Default" :active.sync="isActive">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Danger" type="is-danger">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Danger with icon" type="is-danger" has-icon>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Success" type="is-success">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Success with icon" type="is-success" has-icon>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Info" type="is-info">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Info with icon" type="is-info" has-icon>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Warning" type="is-warning">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Warning with icon" type="is-warning" has-icon>
-                    Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
             </div>
             <div class="column">
@@ -50,9 +18,64 @@
 
         <hr>
 
-        <h2 class="subtitle">Message without title becomes headerless</h2>
-        <p class="content">They are automatically non-closable.</p>
+        <h2 class="title">Colors</h2>
+        <div class="columns">
+            <div class="column">
+                <b-message title="Default">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
 
+                <b-message title="Danger" type="is-danger">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Success" type="is-success">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Info" type="is-info">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Warning" type="is-warning">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Icons</h2>
+        <div class="columns">
+            <div class="column">
+                <b-message title="Danger with icon" type="is-danger" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Success with icon" type="is-success" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Info with icon" type="is-info" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Warning with icon" type="is-warning" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Headerless</h2>
+        <p class="content">Message without title becomes headerless, they are always non-closable.</p>
         <div class="columns">
             <div class="column">
                 <b-message>
@@ -92,7 +115,33 @@
                 </b-message>
             </div>
             <div class="column">
-                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Sizes</h2>
+        <div class="columns">
+            <div class="column">
+                <b-message title="Small" size="is-small">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Default">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Medium" size="is-medium">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Large" size="is-large">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template5 | pre }}</code></pre>
             </div>
         </div>
 
@@ -179,6 +228,13 @@
                         default: '<code>false</code>'
                     },
                     {
+                        name: '<code>size</code>',
+                        description: 'Size  of the control, optional',
+                        type: 'String',
+                        values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                        default: '—'
+                    },
+                    {
                         name: '<code>title</code>',
                         description: 'Message title',
                         type: 'String',
@@ -194,8 +250,13 @@
                     }
                 ],
                 template1: `
-                <button class="button block" @click="isActive = true">Show first</button>
+                <button class="button block" @click="isActive = !isActive">Toggle</button>
                 <b-message title="Default" :active.sync="isActive">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+                `,
+                template2: `
+                <b-message title="Default">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
@@ -203,15 +264,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
-                <b-message title="Danger with icon" type="is-danger" has-icon>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
                 <b-message title="Success" type="is-success">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>
-
-                <b-message title="Success with icon" type="is-success" has-icon>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
@@ -219,18 +272,28 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
-                <b-message title="Info with icon" type="is-info" has-icon>
+                <b-message title="Warning" type="is-warning">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+                `,
+                template3: `
+                <b-message title="Danger with icon" type="is-danger" has-icon>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
-                <b-message title="Warning" type="is-warning">
+                <b-message title="Success with icon" type="is-success" has-icon>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Info with icon" type="is-info" has-icon>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
 
                 <b-message title="Warning with icon" type="is-warning" has-icon>
                     Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>`,
-                template2: `
+                </b-message>
+                `,
+                template4: `
                 <b-message>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-message>
@@ -265,7 +328,25 @@
 
                 <b-message type="is-warning" has-icon>
                     Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-message>`
+                </b-message>
+                `,
+                template5: `
+                <b-message title="Small" size="is-small">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Default">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Medium" size="is-medium">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+
+                <b-message title="Large" size="is-large">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-message>
+                `
             }
         }
     }
