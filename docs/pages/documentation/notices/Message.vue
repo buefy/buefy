@@ -18,7 +18,7 @@
 
         <hr>
 
-        <h2 class="title">Colors</h2>
+        <h2 class="title">Types</h2>
         <div class="columns">
             <div class="column">
                 <b-message title="Default">
