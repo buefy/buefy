@@ -154,13 +154,6 @@ export default {
                     type: 'Boolean',
                     values: '<code>true</code>, <code>false</code>',
                     default: '<code>true</code>'
-                },
-                {
-                    name: '<code>icon-pack</code>',
-                    description: 'Icon pack to use',
-                    type: 'String',
-                    values: '<code>mdi</code>, <code>fa</code>',
-                    default: '<code>mdi</code>'
                 }
             ],
             firstTemplate: `

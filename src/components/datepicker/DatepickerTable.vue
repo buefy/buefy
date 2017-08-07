@@ -4,14 +4,16 @@
         <div class="level-item">
             <h4 class="has-text-centered datepicker-month level-item">
                 <span @click="decrementMonth" class="datepicker-decrement">
-                    <b-icon :icon="iconNames.left"
+                    <b-icon icon="chevron_left"
+                      both
                       type="is-primary is-clickable"
                       :pack="pack">
                     </b-icon>
                 </span>
                 <strong class="has-text-primary">{{nameOfMonth(focused.month)}} {{focused.year}}</strong>
                 <span @click="incrementMonth" class="datepicker-increment">
-                  <b-icon :icon="iconNames.right"
+                  <b-icon icon="chevron_right"
+                    both
                     type="is-primary is-clickable"
                     :pack="pack">
                   </b-icon>
@@ -75,22 +77,7 @@ export default {
         latestDate: Date
     },
     data() {
-        let iconNames
-
-        if (this.pack === 'mdi') {
-            iconNames = {
-                left: 'chevron_left',
-                right: 'chevron_right'
-            }
-        } else {
-            iconNames = {
-                left: 'chevron-left',
-                right: 'chevron-right'
-            }
-        }
-
         return {
-            iconNames,
             focused: {
                 month: this.value.getMonth(),
                 year: this.value.getFullYear(),

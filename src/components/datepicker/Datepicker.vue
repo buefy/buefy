@@ -2,7 +2,6 @@
 <b-modal :active.sync="isActive" :width="640">
     <b-datepicker-table
       v-model="dateSelected"
-      :pack="packName"
       :day-names="dayNames"
       :month-names="monthNames"
       :footer-today="footerToday"
@@ -25,7 +24,6 @@ export default {
             type: Boolean,
             default: false
         },
-        iconPack: String,
         dayNames: {
             type: Array,
             default () {
@@ -71,9 +69,7 @@ export default {
         latestDate: Date
     },
     data() {
-        const packName = this.iconPack || config.defaultIconPack
         return {
-            packName,
             isActive: this.active,
             dateSelected: this.value || new Date(),
         }
