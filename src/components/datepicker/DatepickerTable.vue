@@ -40,20 +40,30 @@
             </div>
         </div>
     </div>
-    <div class="level">
-        <div class="level-left"></div>
-        <div class="level-right">
-            <b-field grouped class="level-item">
-                <p class="control" v-if="footerToday">
-                    <button class="button is-primary" @click="updateSelectedDate(new Date())">{{footerTodayLabel}}</button>
-                </p>
-                <p class="control" v-if="footerClear">
-                    <button class="button is-primary" @click="updateSelectedDate(null)">{{footerClearLabel}}</button>
-                </p>
-                <p class="control" v-if="footerClose">
-                    <button class="button is-primary" @click="$emit('close')">{{footerCloseLabel}}</button>
-                </p>
-            </b-field>
+    <div class="columns">
+        <div class="column has-text-centered">
+            <button
+              v-if="footerToday"
+              class="button is-primary"
+              @click="updateSelectedDate(new Date())">
+                {{footerTodayLabel}}
+            </button>
+        </div>
+        <div class="column has-text-centered">
+            <button
+              v-if="footerClear"
+              class="button is-primary"
+              @click="updateSelectedDate(null)">
+                {{footerClearLabel}}
+            </button>
+        </div>
+        <div class="column has-text-centered">
+            <button
+              v-if="footerClose"
+              class="button is-primary"
+              @click="$emit('close')">
+                {{footerCloseLabel}}
+            </button>
         </div>
     </div>
 </div>

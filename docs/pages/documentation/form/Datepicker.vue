@@ -63,8 +63,7 @@
               :active.sync="thirdDatepickerActive"
               v-model="thirdDate"
               :earliest-date="thirdEarliestDate"
-              :latest-date="thirdLatestDate"
-              :footer-close="false">
+              :latest-date="thirdLatestDate">
             </b-datepicker>
         </div>
         <div class="column">
