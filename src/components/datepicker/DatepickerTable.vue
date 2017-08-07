@@ -6,16 +6,14 @@
                 <span @click="decrementMonth" class="datepicker-decrement">
                     <b-icon icon="chevron_left"
                       both
-                      type="is-primary is-clickable"
-                      :pack="pack">
+                      type="is-primary is-clickable">
                     </b-icon>
                 </span>
                 <strong class="has-text-primary">{{nameOfMonth(focused.month)}} {{focused.year}}</strong>
                 <span @click="incrementMonth" class="datepicker-increment">
                   <b-icon icon="chevron_right"
                     both
-                    type="is-primary is-clickable"
-                    :pack="pack">
+                    type="is-primary is-clickable">
                   </b-icon>
                 </span>
             </h4>
