@@ -27,7 +27,7 @@
     <div class="columns">
         <div class="column">
             <p>
-                The datepicker can be configured to have two footer buttons for better control.
+                The datepicker can be configured to have three different footer buttons for better control.
                 <br />
                 <br />
                 <button class="button is-primary" @click="secondDatepickerActive = true">Pick Date</button>
@@ -37,6 +37,7 @@
               :active.sync="secondDatepickerActive"
               v-model="secondDate"
               :footer-today="true"
+              :footer-clear="true"
               :footer-close="true">
             </b-datepicker>
         </div>
@@ -149,6 +150,27 @@ export default {
                     default: '<code>false</code>'
                 },
                 {
+                    name: '<code>:footer-today</code>',
+                    description: 'Whether to display a button that focuses on today\'s date',
+                    type: 'Boolean',
+                    values: '<code>true</code>, <code>false</code>',
+                    default: '<code>false</code>'
+                },
+                {
+                    name: '<code>:footer-clear</code>',
+                    description: 'Whether to display a button that clears the selected date',
+                    type: 'Boolean',
+                    values: '<code>true</code>, <code>false</code>',
+                    default: '<code>false</code>'
+                },
+                {
+                    name: '<code>:footer-close</code>',
+                    description: 'Whether to display a button that closes the datepicker',
+                    type: 'Boolean',
+                    values: '<code>true</code>, <code>false</code>',
+                    default: '<code>true</code>'
+                },
+                {
                     name: '<code>:day-names</code>',
                     description: 'Names of months to display in table header',
                     type: 'Array',
@@ -163,19 +185,26 @@ export default {
                     default: '<code>["Su", "M", "Tu", "W", "Th", "F", "S"]</code>'
                 },
                 {
-                    name: '<code>:footer-today</code>',
-                    description: 'Whether to display a button that focuses on today\'s date',
-                    type: 'Boolean',
-                    values: '<code>true</code>, <code>false</code>',
-                    default: '<code>false</code>'
+                    name: '<code>footer-today-label</code>',
+                    description: 'Text to display in footer-today button',
+                    type: 'String',
+                    values: 'Any string',
+                    default: 'Select Today'
                 },
                 {
-                    name: '<code>:footer-close</code>',
-                    description: 'Whether to display a button that closes the datepicker',
-                    type: 'Boolean',
-                    values: '<code>true</code>, <code>false</code>',
-                    default: '<code>true</code>'
-                }
+                    name: '<code>footer-clear-label</code>',
+                    description: 'Text to display in footer-clear button',
+                    type: 'String',
+                    values: 'Any string',
+                    default: 'Clear Selection'
+                },
+                {
+                    name: '<code>footer-close-label</code>',
+                    description: 'Text to display in footer-close button',
+                    type: 'String',
+                    values: 'Any string',
+                    default: 'Close'
+                },
             ],
             firstTemplate: `
                 <button class="button is-primary" @click="datepickerActive = true">Pick Date</button>
@@ -195,6 +224,7 @@ export default {
                   :active.sync="datepickerActive"
                   v-model="date"
                   :footer-today="true"
+                  :footer-clear="true"
                   :footer-close="true">
                 </b-datepicker>`,
             secondCode: `

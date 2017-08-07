@@ -45,10 +45,13 @@
         <div class="level-right">
             <b-field grouped class="level-item">
                 <p class="control" v-if="footerToday">
-                    <button class="button is-primary" @click="focusToday">Today</button>
+                    <button class="button is-primary" @click="updateSelectedDate(new Date())">{{footerTodayLabel}}</button>
+                </p>
+                <p class="control" v-if="footerClear">
+                    <button class="button is-primary" @click="updateSelectedDate(null)">{{footerClearLabel}}</button>
                 </p>
                 <p class="control" v-if="footerClose">
-                    <button class="button is-primary" @click="$emit('close')">Close</button>
+                    <button class="button is-primary" @click="$emit('close')">{{footerCloseLabel}}</button>
                 </p>
             </b-field>
         </div>
@@ -70,6 +73,10 @@ export default {
         monthNames: Array,
         footerToday: Boolean,
         footerClose: Boolean,
+        footerClear: Boolean,
+        footerTodayLabel: String,
+        footerClearLabel: String,
+        footerCloseLabel: String,
         earliestDate: Date,
         latestDate: Date,
         focusedDate: Date,
@@ -101,18 +108,6 @@ export default {
             } else {
                 this.focused.month = 11
                 this.focused.year -= 1
-            }
-        },
-
-        /*
-         * Focus date picker on today's date
-         */
-        focusToday() {
-            this.focused = {
-                month: new Date()
-                    .getMonth(),
-                year: new Date()
-                    .getFullYear(),
             }
         },
 

@@ -5,7 +5,11 @@
       :day-names="dayNames"
       :month-names="monthNames"
       :footer-today="footerToday"
+      :footer-today-label="footerTodayLabel"
       :footer-close="footerClose"
+      :footer-close-label="footerCloseLabel"
+      :footer-clear="footerClear"
+      :footer-clear-label="footerClearLabel"
       :earliest-date="earliestDate"
       :latest-date="latestDate"
       :focused-date="focusedDate"
@@ -58,9 +62,25 @@ export default {
                 ]
             }
         },
+        footerTodayLabel: {
+            type: String,
+            default: 'Select Today'
+        },
         footerToday: {
             type: Boolean,
             default: false
+        },
+        footerClearLabel: {
+            type: String,
+            default: 'Clear Selection'
+        },
+        footerClear: {
+            type: Boolean,
+            default: false
+        },
+        footerCloseLabel: {
+            type: String,
+            default: 'Close'
         },
         footerClose: {
             type: Boolean,
@@ -85,7 +105,10 @@ export default {
          */
         dateSelected() {
             this.$emit('input', this.dateSelected)
-            this.isActive = false
+            // only emit if date is not null (for clear button)
+            if (this.dateSelected) {
+              this.isActive = false
+            }
         },
 
         /*
