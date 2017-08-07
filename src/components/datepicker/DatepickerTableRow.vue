@@ -43,7 +43,7 @@ export default {
                 validity.push(day <= this.latestDate)
             }
 
-            validity.push(day.getMonth() === this.month);
+            validity.push(day.getMonth() === this.month)
 
             return !validity.includes(false)
         },
@@ -64,7 +64,7 @@ export default {
             function dateMatch(dateOne, dateTwo) {
                 // if either date is null or undefined, return false
                 if (!dateOne || !dateTwo) {
-                  return false
+                    return false
                 }
 
                 return (dateOne.getDate() === dateTwo.getDate() &&

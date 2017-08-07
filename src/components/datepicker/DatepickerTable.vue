@@ -87,14 +87,14 @@ export default {
         footerCloseLabel: String,
         earliestDate: Date,
         latestDate: Date,
-        focusedDate: Date,
+        focusedDate: Date
     },
     data() {
-        let date = this.focusedDate || new Date()
+        const date = this.focusedDate || new Date()
         return {
             focused: {
                 month: date.getMonth(),
-                year: date.getFullYear(),
+                year: date.getFullYear()
             }
         }
     },
@@ -136,9 +136,9 @@ export default {
          * Return name of month full-length
          */
         nameOfMonth(month) {
-            const months = {};
+            const months = {}
             for (let i = 0; i < this.monthNames.length; i++) {
-                months[i] = this.monthNames[i];
+                months[i] = this.monthNames[i]
             }
 
             return months[month]
@@ -150,7 +150,7 @@ export default {
         weekBuilder(startingDate, month, year) {
             const thisMonth = new Date(year, month)
 
-            let thisWeek = []
+            const thisWeek = []
 
             const dayOfWeek = new Date(year, month, startingDate)
                 .getDay()
@@ -183,8 +183,8 @@ export default {
             let startingDay = 1
 
             while (startingDay <= daysInThisMonth + 6) {
-                let newWeek = this.weekBuilder(startingDay, month, year),
-                    weekValid = false
+                const newWeek = this.weekBuilder(startingDay, month, year)
+                let weekValid = false
 
                 newWeek.forEach((day) => {
                     if (day.getMonth() === month) {
@@ -201,6 +201,6 @@ export default {
 
             return weeksInThisMonth
         }
-    },
+    }
 }
 </script>

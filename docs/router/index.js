@@ -38,7 +38,7 @@ const Checkbox = () => import('../pages/documentation/form/Checkbox')
 const Radio = () => import('../pages/documentation/form/Radio')
 const Switch = () => import('../pages/documentation/form/Switch')
 const Upload = () => import('../pages/documentation/form/Upload')
-const Datepicker = () => require(['../pages/documentation/form/Datepicker'])
+const Datepicker = () => import('../pages/documentation/form/Datepicker')
 
 const Data = () => import('../pages/documentation/data/_Data')
 const Table = () => import('../pages/documentation/data/Table')

@@ -113,7 +113,8 @@ export default {
             thirdDate: null,
             thirdEarliestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
             thirdLatestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
-            selectProps: [{
+            selectProps: [
+                {
                     name: '<code>v-model</code>',
                     description: 'Binding value',
                     type: 'Date',
@@ -203,7 +204,7 @@ export default {
                     type: 'String',
                     values: 'Any string',
                     default: 'Close'
-                },
+                }
             ],
             firstTemplate: `
                 <button class="button is-primary" @click="datepickerActive = true">Pick Date</button>
@@ -254,7 +255,7 @@ export default {
                             latestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
                         }
                     }
-                }`,
+                }`
         }
     }
 }

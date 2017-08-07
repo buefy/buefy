@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import config from '../../utils/config'
 import bDatepickerTable from './DatepickerTable'
 export default {
     name: 'bDatepicker',
@@ -31,7 +30,7 @@ export default {
         },
         dayNames: {
             type: Array,
-            default () {
+            default() {
                 return [
                     'Su',
                     'M',
@@ -39,13 +38,13 @@ export default {
                     'W',
                     'Th',
                     'F',
-                    'S',
+                    'S'
                 ]
             }
         },
         monthNames: {
             type: Array,
-            default () {
+            default() {
                 return [
                     'January',
                     'February',
@@ -58,7 +57,7 @@ export default {
                     'September',
                     'October',
                     'November',
-                    'December',
+                    'December'
                 ]
             }
         },
@@ -88,12 +87,12 @@ export default {
         },
         earliestDate: Date,
         latestDate: Date,
-        focusedDate: Date,
+        focusedDate: Date
     },
     data() {
         return {
             isActive: this.active,
-            dateSelected: this.value,
+            dateSelected: this.value
         }
     },
     components: {
@@ -107,7 +106,7 @@ export default {
             this.$emit('input', this.dateSelected)
             // only emit if date is not null (for clear button)
             if (this.dateSelected) {
-              this.isActive = false
+                this.isActive = false
             }
         },
 

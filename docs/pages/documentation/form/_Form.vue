@@ -8,6 +8,6 @@
         <router-link to="radio" class="navbar-item is-tab">Radio</router-link>
         <router-link to="switch" class="navbar-item is-tab">Switch</router-link>
         <router-link to="upload" class="navbar-item is-tab">Upload</router-link>
-        <router-link to="datepicker" class="nav-item is-tab">Datepicker</router-link>
+        <router-link to="datepicker" class="navbar-item is-tab">Datepicker</router-link>
     </div>
 </template>
