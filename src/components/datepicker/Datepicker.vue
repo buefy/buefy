@@ -8,6 +8,7 @@
       :footer-close="footerClose"
       :earliest-date="earliestDate"
       :latest-date="latestDate"
+      :focused-date="focusedDate"
       @close="isActive = false">
     </b-datepicker-table>
 </b-modal>
@@ -66,12 +67,13 @@ export default {
             default: true
         },
         earliestDate: Date,
-        latestDate: Date
+        latestDate: Date,
+        focusedDate: Date,
     },
     data() {
         return {
             isActive: this.active,
-            dateSelected: this.value || new Date(),
+            dateSelected: this.value,
         }
     },
     components: {
@@ -92,7 +94,6 @@ export default {
          * emit update:active event with value of isActive to sync with trigger
          */
         isActive() {
-            this.$emit('input', this.dateSelected)
             this.$emit('update:active', this.isActive)
         },
 

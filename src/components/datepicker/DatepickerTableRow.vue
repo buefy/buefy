@@ -15,10 +15,7 @@
 export default {
     name: 'bDatepickerTableRow',
     props: {
-        selectedDate: {
-            type: Date,
-            required: true
-        },
+        selectedDate: Date,
         week: {
             type: Array,
             required: true
@@ -65,6 +62,11 @@ export default {
          */
         classObject(day) {
             function dateMatch(dateOne, dateTwo) {
+                // if either date is null or undefined, return false
+                if (!dateOne || !dateTwo) {
+                  return false
+                }
+
                 return (dateOne.getDate() === dateTwo.getDate() &&
                     dateOne.getFullYear() === dateTwo.getFullYear() &&
                     dateOne.getMonth() === dateTwo.getMonth())

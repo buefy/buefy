@@ -64,23 +64,22 @@ export default {
         bDatepickerTableRow
     },
     props: {
-        value: {
-            type: Date,
-            required: true,
-        },
+        value: Date,
         pack: String,
         dayNames: Array,
         monthNames: Array,
         footerToday: Boolean,
         footerClose: Boolean,
         earliestDate: Date,
-        latestDate: Date
+        latestDate: Date,
+        focusedDate: Date,
     },
     data() {
+        let date = this.focusedDate || new Date()
         return {
             focused: {
-                month: this.value.getMonth(),
-                year: this.value.getFullYear(),
+                month: date.getMonth(),
+                year: date.getFullYear(),
             }
         }
     },

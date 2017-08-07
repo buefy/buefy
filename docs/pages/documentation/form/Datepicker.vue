@@ -118,7 +118,28 @@ export default {
                     description: 'Binding value',
                     type: 'Date',
                     values: '—',
-                    default: 'new Date()'
+                    default: 'null'
+                },
+                {
+                    name: '<code>:earliest-date</code>',
+                    description: 'Earliest date available for selection',
+                    type: 'Date',
+                    values: '—',
+                    default: 'null'
+                },
+                {
+                    name: '<code>:latest-date</code>',
+                    description: 'Latest date available for selection',
+                    type: 'Date',
+                    values: '—',
+                    default: 'null'
+                },
+                {
+                    name: '<code>:focused-date</code>',
+                    description: 'Date that should be initially focused upon',
+                    type: 'Date',
+                    values: '—',
+                    default: '<code>new Date()</code> (today)'
                 },
                 {
                     name: '<code>:active.sync</code>',
