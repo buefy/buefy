@@ -1,6 +1,5 @@
 import { Checkbox } from './components/checkbox'
 import { Dropdown, DropdownItem } from './components/dropdown'
-import { Menu, MenuDropdown, MenuItem, MenuList } from './components/menu'
 import { Radio, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
@@ -18,10 +17,10 @@ import Tooltip from './components/tooltip'
 import Upload from './components/upload'
 
 import Dialog from './components/dialog'
+import LoadingProgrammatic, { Loading } from './components/loading'
 import ModalProgrammatic, { Modal } from './components/modal'
 import Snackbar from './components/snackbar'
 import Toast from './components/toast'
-import LoadingProgrammatic, { Loading } from './components/loading'
 
 import config, { setOptions } from './utils/config'
 
@@ -34,10 +33,6 @@ const components = {
     Icon,
     Input,
     Loading,
-    Menu,
-    MenuDropdown,
-    MenuItem,
-    MenuList,
     Message,
     Modal,
     Notification,
@@ -47,10 +42,10 @@ const components = {
     RadioButton,
     Select,
     Switch,
+    TabItem,
     Table,
     TableColumn,
     Tabs,
-    TabItem,
     Tooltip,
     Upload
 }
@@ -67,17 +62,18 @@ components.install = (Vue, options = {}) => {
         }
     }
 
-    Vue.prototype.$snackbar = Snackbar
-    Vue.prototype.$modal = ModalProgrammatic
-    Vue.prototype.$toast = Toast
     Vue.prototype.$dialog = Dialog
     Vue.prototype.$loading = LoadingProgrammatic
+    Vue.prototype.$modal = ModalProgrammatic
+    Vue.prototype.$snackbar = Snackbar
+    Vue.prototype.$toast = Toast
 }
 
 export default components
 
 export {
     Dialog,
+    LoadingProgrammatic,
     ModalProgrammatic,
     Snackbar,
     Toast

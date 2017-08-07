@@ -6,6 +6,7 @@
 
 * **Update Bulma to v0.5.0**, changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
     * Buefy Sass variables are also following the new convention
+* **Removed Menu component**, it was experimental and wasn't good enough, needed too much to work and can easily be replaced with pure HTML
 * Constructor option ``defaultContentElement`` renamed to ``defaultContainerElement``
 * ``b-dropdown-option`` renamed to ``b-dropdown-item``
     * ``subheader`` prop renamed to ``custom``
@@ -13,7 +14,7 @@
 * ``change`` events for all form controls (Input, Select Autocomplete, Checkbox, RadioGroup, Switch) that returned pure value will now return ``$event`` (and require ``.native`` modifier), use ``input`` instead
 * Checkbox ``custom-value`` prop renamed to ``native-value``
     * ``checked`` prop removed
-* **Remove CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
+* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
 * Radio and Radio Button ``value`` prop renamed to ``native-value``
     * Add ``v-model`` support
     * Radio Buttons have to be wrapped on a field
