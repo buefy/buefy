@@ -22,7 +22,7 @@
     <div class="table-container">
         <div class="datepicker-table">
             <div class="datepicker-header">
-                <div v-for="day in dayNames" class="datepicker-cell">{{day}}</div>
+                <div v-for="day in dayNames" class="datepicker-cell" :key="day">{{day}}</div>
             </div>
             <div class="datepicker-body">
                 <b-datepicker-table-row
