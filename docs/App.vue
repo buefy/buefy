@@ -8,10 +8,7 @@
 
 <script>
     export default {
-        name: 'app',
-        mounted() {
-            this.$Progress.finish()
-        },
+        name: 'Buefy',
         created() {
             this.$Progress.start()
             this.$router.beforeEach((to, from, next) => {
@@ -21,6 +18,9 @@
             this.$router.afterEach((to, from) => {
                 this.$Progress.finish()
             })
+        },
+        mounted() {
+            this.$Progress.finish()
         }
     }
 </script>
