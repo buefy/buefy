@@ -9,10 +9,10 @@
             <div class="column">
                 <b-field>
                     <b-upload v-model="files">
-                        <span class="button is-primary">
+                        <a class="button is-primary">
                             <b-icon icon="file_upload"></b-icon>
                             <span>Click to upload</span>
-                        </span>
+                        </a>
                     </b-upload>
                     <div v-if="files && files.length">
                         <span class="file-name">
@@ -221,10 +221,10 @@
                 template1: `
                 <b-field>
                     <b-upload v-model="files">
-                        <span class="button is-primary">
+                        <a class="button is-primary">
                             <b-icon icon="file_upload"></b-icon>
                             <span>Click to upload</span>
-                        </span>
+                        </a>
                     </b-upload>
                     <div v-if="files && files.length">
                         <span class="file-name">
