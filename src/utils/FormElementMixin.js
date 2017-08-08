@@ -22,7 +22,7 @@ export default {
         parentField() {
             return this.$parent.$data._isField
                 ? this.$parent
-                : this.$parent.$data._isAutocomplete && this.$parent.$parent.$data._isField
+                : (this.$parent.$data._isAutocomplete || this.$parent.$data._isDatepicker) && this.$parent.$parent.$data._isField
                     ? this.$parent.$parent
                     : null
         },
