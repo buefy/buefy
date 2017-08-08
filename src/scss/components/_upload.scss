@@ -25,7 +25,8 @@
                 border-width: 0.25em;
             }
         }
-        &:hover {
+        &:hover,
+        &.is-hovered {
             @each $name, $pair in $colors {
                 $color: nth($pair, 1);
                 &.is-#{$name} {

@@ -8,7 +8,8 @@
             class="upload-draggable"
             :class="[type, {
                 'is-loading': loading,
-                'is-disabled': disabled
+                'is-disabled': disabled,
+                'is-hovered': dragDropFocus
             }]"
             @mouseover.prevent="updateDragDropFocus(true)"
             @mouseout.prevent="updateDragDropFocus(false)"
