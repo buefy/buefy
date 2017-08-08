@@ -3,14 +3,25 @@
     <div class="level is-marginless">
         <div class="level-item">
             <h4 class="has-text-centered datepicker-month level-item">
-                <span @click="decrementMonth" class="datepicker-decrement">
+                <span @click="decrementMonth" class="datepicker-decrement" role="button">
                     <b-icon icon="chevron_left"
                       both
                       type="is-primary is-clickable">
                     </b-icon>
                 </span>
-                <strong class="has-text-primary">{{nameOfMonth(focused.month)}} {{focused.year}}</strong>
-                <span @click="incrementMonth" class="datepicker-increment">
+                <b-field grouped>
+                  <b-select v-model="focused.month">
+                    <option v-for="(month, index) in Object.values(monthNames)" :value="index" :key="month">
+                      {{month}}
+                    </option>
+                  </b-select>
+                  <b-select v-model="focused.year">
+                    <option v-for="year in listOfYears" :value="year" :key="year">
+                      {{year}}
+                    </option>
+                  </b-select>
+                </b-field>
+                <span @click="incrementMonth" class="datepicker-increment" role="button">
                   <b-icon icon="chevron_right"
                     both
                     type="is-primary is-clickable">
@@ -90,12 +101,41 @@ export default {
         focusedDate: Date
     },
     data() {
-        const date = this.focusedDate || new Date()
+        const date = this.value || this.focusedDate || new Date()
         return {
             focused: {
                 month: date.getMonth(),
                 year: date.getFullYear()
             }
+        }
+    },
+    computed: {
+        /*
+         * Returns an array of years for the year dropdown. If earliest/latest
+         * dates are set by props, range of years will fall within those dates.
+         */
+        listOfYears() {
+            let latestYear
+            let earliestYear
+
+            if (this.latestDate) {
+                latestYear = this.latestDate.getFullYear()
+            } else {
+                latestYear = new Date().getFullYear() + 3
+            }
+
+            if (this.earliestDate) {
+                earliestYear = this.earliestDate.getFullYear()
+            } else {
+                earliestYear = 1900
+            }
+
+            const arrayOfYears = []
+            for (let i = earliestYear; i <= latestYear; i++) {
+                arrayOfYears.push(i)
+            }
+
+            return arrayOfYears.reverse()
         }
     },
     methods: {

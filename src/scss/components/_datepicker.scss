@@ -10,11 +10,23 @@ $datepicker-width: 360;
 
       .datepicker-decrement {
         position: absolute;
+        @media (max-width: 400px) {
+            display: none;
+        }
+        @include mobile {
+            left: -10px;
+        }
         left: .75em;
       }
 
       .datepicker-increment {
         position: absolute;
+        @media (max-width: 400px) {
+            display: none;
+        }
+        @include mobile {
+              right: -10px;
+        }
         right: .75em;
       }
     }
@@ -85,7 +97,7 @@ $datepicker-width: 360;
     }
 
     @include mobile {
-      $datepicker-width: 260;
+      $datepicker-width: 300;
 
       .datepicker-month {
         width: #{$datepicker-width}px;
@@ -103,5 +115,26 @@ $datepicker-width: 360;
             height: #{$datepicker-width/7 * .8}px;
           }
       }
+    }
+
+    @media (max-width: 400px) {
+        $datepicker-width: 260;
+
+        .datepicker-month {
+          width: #{$datepicker-width}px;
+        }
+
+        .table-container {
+            height: #{$datepicker-width * .8}px;
+        }
+
+        .datepicker-table {
+            width       : #{$datepicker-width}px;
+
+            .datepicker-cell {
+              width: #{$datepicker-width/7}px;
+              height: #{$datepicker-width/7 * .8}px;
+            }
+        }
     }
 }

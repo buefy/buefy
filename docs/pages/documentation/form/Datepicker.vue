@@ -53,7 +53,7 @@
     <div class="columns">
         <div class="column">
             <p>
-                The datepicker can also have earliest and latest dates selectable set. Additionally, through the <code>:focused-date</code> prop, you can set the date picker to display a month and year other than today's month and year.
+                The datepicker can also have earliest and latest dates selectable set. Additionally, through the <code>:focused-date</code> prop, you can set the date picker to display a month and year other than today's month and year. However, once a date is selected, the picker will focus on that date when reopened, rather than the <code>:focused-date</code>.
                 <br />
                 <br />
                 <button class="button is-primary" @click="thirdDatepickerActive = true">Pick Date</button>
