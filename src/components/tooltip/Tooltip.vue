@@ -1,8 +1,8 @@
 <template>
-    <span
-        class="tooltip"
+    <span 
         :data-label="label"
         :class="[newType, position, size, {
+            'tooltip': active,
             'is-square': square,
             'is-animated': newAnimated,
             'is-always': always,
@@ -19,6 +19,10 @@
     export default {
         name: 'bTooltip',
         props: {
+            active: {
+                type: Boolean,
+                default: true
+            },
             type: String,
             label: String,
             position: {
