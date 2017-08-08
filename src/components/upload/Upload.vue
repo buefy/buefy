@@ -23,6 +23,7 @@
             type="file"
             v-bind="$attrs"
             :multiple="multiple"
+            :disabled="disabled"
             @change="onFileChange">
     </label>
 </template>
