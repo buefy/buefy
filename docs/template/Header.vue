@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <header class="navbar is-transparent">
+    <header class="navbar is-transparent">
+        <div class="container">
             <div class="navbar-brand">
                 <router-link to="/" exact class="navbar-item" title="Buefy: lightweight UI components for Vue.js based on Bulma">
                     <img v-if="light" src="../assets/buefy-light.png" alt="Buefy">
@@ -31,7 +31,7 @@
                     <div class="navbar-item has-dropdown is-hoverable">
                         <router-link to="/documentation" class="navbar-link">Documentation</router-link>
 
-                        <div class="navbar-dropdown">
+                        <div class="navbar-dropdown is-boxed">
                             <router-link to="/documentation/start" class="navbar-item">Installation</router-link>
                             <router-link to="/documentation/layout" class="navbar-item">General</router-link>
                             <router-link to="/documentation/dialog" class="navbar-item">Notices</router-link>
@@ -56,8 +56,8 @@
                     </div>
                 </div>
             </div>
-        </header>
-    </div>
+        </div>
+    </header>
 </template>
 
 <script>

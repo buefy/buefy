@@ -35,3 +35,43 @@ $link-focus-border: $primary;
 @import "../../src/scss/buefy";
 
 @import "~highlight.js/styles/atelier-cave-light.css";
+
+// Temporary fix for https://github.com/jgthms/bulma/issues/837
+.hero.is-primary .hero-head .navbar {
+    background: $primary;
+    color: $primary-invert;
+    box-shadow: 0 1px 0 rgba($primary-invert, 0.2);
+    .has-dropdown .navbar-link:after {
+        border-color: $primary-invert;
+    }
+    a.navbar-item {
+        background: transparent;
+    }
+    a.navbar-link {
+        background: transparent;
+        color: rgba($primary-invert, 0.7);
+        &.is-active,
+        &:hover {
+            color: $primary-invert;
+        }
+    }
+    .navbar-burger {
+        background: transparent;
+        span {
+            background: $primary-invert;
+        }
+        &:hover {
+            background: darken($primary, 2.5%);
+        }
+    }
+    @include touch {
+        .has-dropdown .navbar-item {
+            &:not(.is-active) {
+                color: rgba($primary-invert, 0.7) !important;
+            }
+            &:hover {
+                color: $primary-invert !important;
+            }
+        }
+    }
+}
