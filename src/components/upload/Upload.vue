@@ -11,8 +11,6 @@
                 'is-disabled': disabled,
                 'is-hovered': dragDropFocus
             }]"
-            @mouseover.prevent="updateDragDropFocus(true)"
-            @mouseout.prevent="updateDragDropFocus(false)"
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
             @dragenter.prevent="updateDragDropFocus(true)"
@@ -100,8 +98,7 @@
             },
 
             /**
-             * Listen drag-drop and mouse events
-             * to update interval variable aim to animate
+             * Listen drag-drop to update internal variable
              */
             updateDragDropFocus(focus) {
                 if (!this.disabled && !this.loading) {

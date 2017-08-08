@@ -19,7 +19,7 @@
             &:after {
                 @include loader;
                 top: 0;
-                left: calc(50% - 2.5em);
+                left: calc(50% - 1.5em);
                 width: 3em;
                 height: 3em;
                 border-width: 0.25em;
