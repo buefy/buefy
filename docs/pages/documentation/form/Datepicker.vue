@@ -1,19 +1,22 @@
 <template>
 <div class="container">
     <h1 class="title is-spaced">Datepicker</h1>
-    <h2 class="subtitle">Select a date from a simple modal</h2>
+    <h2 class="subtitle">An input with a simple dropdown/modal for selecting a date</h2>
     <hr>
 
     <div class="columns">
         <div class="column">
             <p>
-                The datepicker is a simple modal that allows a user to select a date from a calendar. When a date is selected, the component emits the event <code>input</code> with a date object as the payload. This can be paired with <code>v-model</code> or used standalone. Today's date is outlined in the picker.
-                <br />
-                <br />
-                <button class="button is-primary" @click="firstDatepickerActive = true">Pick Date</button>
+                The datepicker is an input that opens a dropdown on focus that allows a user to select a date from a calendar. When a date is selected, the component emits the event <code>input</code> with either a date object or formatted string as the payload. If the component is passed a date object through <code>v-model</code> it will emit a date object, and vice-versa with a string. Today's date is outlined in the picker. See the documentation for Input for more details.
             </p>
 
-            <b-datepicker :active.sync="firstDatepickerActive" v-model="firstDate"></b-datepicker>
+            <hr>
+
+            <b-field label="Select a date">
+                <b-datepicker v-model="firstDate" placeholder="Click to select...">
+                    <button class="button is-primary" slot="close">Close</button>
+                </b-datepicker>
+            </b-field>
         </div>
         <div class="column">
             <pre class="content" v-highlight><code class="html">{{ firstTemplate | pre }}</code></pre>
@@ -27,19 +30,18 @@
     <div class="columns">
         <div class="column">
             <p>
-                The datepicker can be configured to have three different footer buttons for better control. <code>:footer-today</code> will display a button that when clicked selects today's date and closes the modal. <code>:footer-clear</code> will set the value of the date picker to <code>null</code> and close the modal. <code>:footer-close</code>, which defaults to <code>true</code>, will display a button that when clicked closes the modal without selecting a date.
-                <br />
-                <br />
-                <button class="button is-primary" @click="secondDatepickerActive = true">Pick Date</button>
+                The datepicker has three accessory functions that can be activated by using slots.
             </p>
 
-            <b-datepicker
-              :active.sync="secondDatepickerActive"
-              v-model="secondDate"
-              :footer-today="true"
-              :footer-clear="true"
-              :footer-close="true">
-            </b-datepicker>
+            <hr>
+
+            <b-field label="Select a date">
+                <b-datepicker v-model="secondDate" placeholder="Click to select...">
+                    <button class="button is-primary" slot="selectToday">Select Today</button>
+                    <button class="button is-primary" slot="clearSelection">Clear Selection</button>
+                    <button class="button is-primary" slot="close">Close</button>
+                </b-datepicker>
+            </b-field>
         </div>
         <div class="column">
             <pre class="content" v-highlight><code class="html">{{ secondTemplate | pre }}</code></pre>
@@ -59,12 +61,17 @@
                 <button class="button is-primary" @click="thirdDatepickerActive = true">Pick Date</button>
             </p>
 
-            <b-datepicker
-              :active.sync="thirdDatepickerActive"
-              v-model="thirdDate"
-              :earliest-date="thirdEarliestDate"
-              :latest-date="thirdLatestDate">
-            </b-datepicker>
+            <hr>
+
+            <b-field label="Select a date">
+                <b-datepicker
+                    v-model="thirdDate"
+                    placeholder="Click to select..."
+                    :earliest-date="thirdEarliestDate"
+                    :latest-date="thirdLatestDate">
+                        <button class="button is-primary" slot="close">Close</button>
+                </b-datepicker>
+            </b-field>
         </div>
         <div class="column">
             <pre class="content" v-highlight><code class="html">{{ thirdTemplate | pre }}</code></pre>
@@ -105,19 +112,16 @@ export default {
     data() {
         const today = new Date()
         return {
-            firstDatepickerActive: false,
-            firstDate: null,
-            secondDatepickerActive: false,
-            secondDate: null,
-            thirdDatepickerActive: false,
-            thirdDate: null,
+            firstDate: today,
+            secondDate: today,
+            thirdDate: today,
             thirdEarliestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
             thirdLatestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
             selectProps: [
                 {
                     name: '<code>v-model</code>',
                     description: 'Binding value',
-                    type: 'Date',
+                    type: 'Date || String',
                     values: '—',
                     default: 'null'
                 },
@@ -143,32 +147,46 @@ export default {
                     default: '<code>new Date()</code> (today)'
                 },
                 {
-                    name: '<code>:active.sync</code>',
-                    description: 'Visibility of Datepicker',
-                    type: 'Boolean',
-                    values: '<code>true</code>, <code>false</code>',
-                    default: '<code>false</code>'
-                },
-                {
-                    name: '<code>:footer-today</code>',
-                    description: 'Whether to display a button that focuses on today\'s date',
-                    type: 'Boolean',
-                    values: '<code>true</code>, <code>false</code>',
-                    default: '<code>false</code>'
-                },
-                {
-                    name: '<code>:footer-clear</code>',
-                    description: 'Whether to display a button that clears the selected date',
-                    type: 'Boolean',
-                    values: '<code>true</code>, <code>false</code>',
-                    default: '<code>false</code>'
-                },
-                {
-                    name: '<code>:footer-close</code>',
-                    description: 'Whether to display a button that closes the datepicker',
+                    name: '<code>:close-on-blur</code>',
+                    description: 'Whether or not to close datepicker on blur',
                     type: 'Boolean',
                     values: '<code>true</code>, <code>false</code>',
                     default: '<code>true</code>'
+                },
+                {
+                    name: '<code>type</code>',
+                    description: 'Input type, like native',
+                    type: 'String',
+                    values: 'Any native input type, and <code>textarea</code>',
+                    default: '<code>text</code>'
+                },
+                {
+                    name: '<code>size</code>',
+                    description: 'Vertical size of input, optional',
+                    type: 'String',
+                    values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                    default: '—'
+                },
+                {
+                    name: '<code>loading</code>',
+                    description: 'Add the loading state to the input',
+                    type: 'Boolean',
+                    values: '—',
+                    default: '<code>false</code>'
+                },
+                {
+                    name: '<code>icon</code>',
+                    description: 'Icon name to be added',
+                    type: 'String',
+                    values: '—',
+                    default: '—'
+                },
+                {
+                    name: '<code>icon-pack</code>',
+                    description: 'Icon pack to use',
+                    type: 'String',
+                    values: '<code>mdi</code>, <code>fa</code>',
+                    default: '<code>mdi</code>'
                 },
                 {
                     name: '<code>:day-names</code>',
@@ -185,71 +203,58 @@ export default {
                     default: '<code>["Su", "M", "Tu", "W", "Th", "F", "S"]</code>'
                 },
                 {
-                    name: '<code>footer-today-label</code>',
-                    description: 'Text to display in footer-today button',
-                    type: 'String',
-                    values: 'Any string',
-                    default: 'Select Today'
-                },
-                {
-                    name: '<code>footer-clear-label</code>',
-                    description: 'Text to display in footer-clear button',
-                    type: 'String',
-                    values: 'Any string',
-                    default: 'Clear Selection'
-                },
-                {
-                    name: '<code>footer-close-label</code>',
-                    description: 'Text to display in footer-close button',
-                    type: 'String',
-                    values: 'Any string',
-                    default: 'Close'
+                    name: 'Any native attribute',
+                    description: '—',
+                    type: '—',
+                    values: '—',
+                    default: '—'
                 }
             ],
             firstTemplate: `
-                <button class="button is-primary" @click="datepickerActive = true">Pick Date</button>
-                <b-datepicker :active.sync="datepickerActive" v-model="date"></b-datepicker>`,
+                <b-field label="Select a date">
+                    <b-datepicker v-model="date" placeholder="Click to select...">
+                      <button class="button is-primary" slot="close">Close</button>
+                    </b-datepicker>
+                </b-field>`,
             firstCode: `
                 export default {
                     data() {
                         return {
-                            datepickerActive: false,
                             date: new Date(),
                         }
                     }
                 }`,
             secondTemplate: `
-                <button class="button is-primary" @click="datepickerActive = true">Pick Date</button>
-                <b-datepicker
-                  :active.sync="datepickerActive"
-                  v-model="date"
-                  :footer-today="true"
-                  :footer-clear="true"
-                  :footer-close="true">
-                </b-datepicker>`,
+                <b-field label="Select a date">
+                    <b-datepicker v-model="date" placeholder="Click to select...">
+                      <button class="button is-primary" slot="selectToday">Select Today</button>
+                      <button class="button is-primary" slot="clearSelection">Clear Selection</button>
+                      <button class="button is-primary" slot="close">Close</button>
+                    </b-datepicker>
+                </b-field>`,
             secondCode: `
                 export default {
                     data() {
                         return {
-                            datepickerActive: false,
                             date: new Date(),
                         }
                     }
                 }`,
             thirdTemplate: `
-                <button class="button is-primary" @click="datepickerActive = true">Pick Date</button>
-                <b-datepicker
-                  :active.sync="datepickerActive"
-                  v-model="date"
-                  :earliest-date="earliestDate"
-                  :latest-date="latestDate">
-                </b-datepicker>`,
+                <b-field label="Select a date">
+                    <b-datepicker
+                        v-model="date"
+                        placeholder="Click to select..."
+                        :earliest-date="earliestDate"
+                        :latest-date="latestDate">
+                            <button class="button is-primary" slot="close">Close</button>
+                    </b-datepicker>
+                </b-field>`,
             thirdCode: `
                 export default {
                     const today = new Date();
                     data() {
                         return {
-                            datepickerActive: false,
                             date: new Date(),
                             earliestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
                             latestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),

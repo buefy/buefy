@@ -2,7 +2,20 @@
 $datepicker-width: 360;
 
 .datepicker {
-    padding: .75em;
+    position: relative;
+    
+    .datepicker-container {
+          padding: .75em;
+    }
+
+    .dropdown-menu {
+        display: block;
+        min-width: 100%;
+        &.is-opened-top {
+            top: auto;
+            bottom: 100%;
+        }
+    }
 
     .datepicker-month {
       position: relative;
@@ -94,6 +107,16 @@ $datepicker-width: 360;
             }
           }
         }
+    }
+
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium{
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
     }
 
     @include mobile {
