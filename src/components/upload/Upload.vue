@@ -1,23 +1,15 @@
 <template>
-    <div class="upload">
-
-        <div v-if="!dragDrop" 
-            class="control">
-            <a class="button"
-                :class="[buttonSize, buttonType, { 'is-loading': loading }]"
-                :disabled="disabled"
-                @click="upload">
-                <slot></slot>
-            </a>
-        </div>
+    <label class="upload control">
+        <template v-if="!dragDrop">
+            <slot></slot>
+        </template>
 
         <div v-else
             class="upload-draggable"
-            :class="[dragDropType, {
+            :class="[type, {
                 'is-loading': loading,
                 'is-disabled': disabled
             }]"
-            @click="upload"
             @mouseover.prevent="updateDragDropFocus(true)"
             @mouseout.prevent="updateDragDropFocus(false)"
             @dragover.prevent="updateDragDropFocus(true)"
@@ -29,12 +21,10 @@
 
         <input ref="input"
             type="file"
-            class="is-hidden"
             v-bind="$attrs"
-            :accept="accept"
             :multiple="multiple"
             @change="onFileChange">
-    </div>
+    </label>
 </template>
 
 <script>
@@ -46,30 +36,15 @@
         props: {
             value: {
                 type: Array,
-                default: null
-            },
-            buttonSize: {
-                type: String,
-                default: ''
-            },
-            buttonType: {
-                type: String,
-                default: 'is-primary'
-            },
-            accept: {
-                type: String,
-                default: ''
+                default: () => []
             },
             multiple: Boolean,
-            dragDrop: {
-                type: Boolean,
-                default: false
-            },
-            dragDropType: {
+            disabled: Boolean,
+            dragDrop: Boolean,
+            type: {
                 type: String,
                 default: 'is-primary'
-            },
-            disabled: Boolean
+            }
         },
         data() {
             return {
@@ -91,18 +66,8 @@
         },
         methods: {
             /**
-             * Show upload file chooser
-             */
-            upload() {
-                if (!this.disabled && !this.loading) {
-                    this.$refs.input.value = null
-                    this.$refs.input.click()
-                }
-            },
-
-            /**
              * Listen change event on input type 'file',
-             * emit 'input', 'change' event and validate
+             * emit 'input' event and validate
              */
             onFileChange(event) {
                 if (!this.disabled && !this.loading) {
@@ -128,7 +93,6 @@
                         }
                     }
                     this.$emit('input', this.newValue)
-                    this.$emit('change', this.newValue)
                     !this.dragDrop && this.checkHtml5Validity()
                 }
             },

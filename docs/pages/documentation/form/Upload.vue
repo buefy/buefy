@@ -9,19 +9,15 @@
             <div class="column">
                 <b-field>
                     <b-upload v-model="files">
-                        <b-icon icon="file_upload"></b-icon>
-                        <span>Click to upload</span>
+                        <span class="button is-primary">
+                            <b-icon icon="file_upload"></b-icon>
+                            <span>Click to upload</span>
+                        </span>
                     </b-upload>
-                    <div v-if="files && files.length" class="control">
-                        <a class="button is-static">
-                            <span style="display: block;
-                                        width: 16em;
-                                        overflow: hidden;
-                                        white-space: nowrap;
-                                        text-overflow: ellipsis;">
-                                {{ files[0].name }}
-                            </span>
-                        </a>
+                    <div v-if="files && files.length">
+                        <span class="file-name">
+                            {{ files[0].name }}
+                        </span>
                     </div>
                 </b-field>
             </div>
@@ -40,7 +36,6 @@
                     <b-upload v-model="dropFiles"
                         multiple
                         drag-drop>
-
                         <section class="section">
                             <div class="content has-text-centered">
                                 <p>
@@ -150,32 +145,15 @@
                         default: '[]'
                     },
                     {
-                        name: '<code>button-size</code>',
-                        description: 'Size of the button',
-                        type: 'String',
-                        values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>button-type</code>',
-                        description: 'Type (color) of the button',
-                        type: 'String',
-                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
-                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
-                            <code>is-warning</code>, <code>is-danger</code>,
-                            and any other colors you've set in the <code>$colors</code> list on Sass`,
-                        default: '<code>is-primary</code>'
-                    },
-                    {
                         name: '<code>drag-drop</code>',
-                        description: '',
+                        description: 'Accepts drag & drop and change its style',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>drag-drop-type</code>',
-                        description: 'Type (color) of the drag area (border)',
+                        name: '<code>type</code>',
+                        description: 'Type (color) of the drag area when hovered',
                         type: 'String',
                         values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                             <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
@@ -205,13 +183,6 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>multiple</code>',
-                        description: 'Same as native <code>multiple</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
                         name: '<code>accept</code>',
                         description: 'Same as native <code>accept</code>',
                         type: 'String',
@@ -224,11 +195,18 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>multiple</code>',
+                        description: 'Same as native, also push new item to <code>v-model</code> instead of replacing',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
                 ],
                 events: [
                     {
-                        name: '<code>change</code>',
+                        name: '<code>input</code>',
                         description: 'Triggers when the file list is changed',
                         parameters: '<code>value: String</code>'
                     }
@@ -243,19 +221,15 @@
                 template1: `
                 <b-field>
                     <b-upload v-model="files">
-                        <b-icon icon="file_upload"></b-icon>
-                        <span>Click to upload</span>
+                        <span class="button is-primary">
+                            <b-icon icon="file_upload"></b-icon>
+                            <span>Click to upload</span>
+                        </span>
                     </b-upload>
-                    <div v-if="files && files.length" class="control">
-                        <a class="button is-static">
-                            <span style="display: block;
-                                        width: 16em;
-                                        overflow: hidden;
-                                        white-space: nowrap;
-                                        text-overflow: ellipsis;">
-                                {{ files[0].name }}
-                            </span>
-                        </a>
+                    <div v-if="files && files.length">
+                        <span class="file-name">
+                            {{ files[0].name }}
+                        </span>
                     </div>
                 </b-field>`,
                 template2: `
@@ -263,7 +237,6 @@
                     <b-upload v-model="dropFiles"
                         multiple
                         drag-drop>
-
                         <section class="section">
                             <div class="content has-text-centered">
                                 <p>

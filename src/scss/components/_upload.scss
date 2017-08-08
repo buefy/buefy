@@ -1,5 +1,8 @@
 
 .upload {
+    input[type=file] {
+        display: none;
+    }
     .upload-draggable {
         display: inline-block;
         cursor: pointer;
@@ -28,6 +31,7 @@
                 $color: nth($pair, 1);
                 &.is-#{$name} {
                     border-color: $color;
+                    background: rgba($color, 0.05);
                 }
             }
         }
