@@ -4,7 +4,7 @@
 
 ### Breaking changes
 
-* **Update Bulma to v0.5.0**, changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+* **Update Bulma to v0.5.1**, changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
     * Buefy Sass variables are also following the new convention
 * **Removed Menu component**, it was experimental and wasn't good enough, needed too much to work and can easily be replaced with pure HTML
 * Constructor option ``defaultContentElement`` renamed to ``defaultContainerElement``
