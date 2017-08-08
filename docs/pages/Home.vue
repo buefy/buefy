@@ -1,7 +1,7 @@
 <template>
     <section class="home">
         <app-header></app-header>
-        <div class="hero is-medium is-primary">
+        <div class="hero is-fullheight is-primary">
             <div class="hero-body">
                 <div class="container has-text-centered">
                     <div class="logo-rounded home-hero">
