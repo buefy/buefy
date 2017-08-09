@@ -90,7 +90,7 @@
                                   </a>
                               </div>
                               <div class="column has-text-centered">
-                                  <a role="button" @click="updateSelectedDate(new Date())">
+                                  <a role="button" @click="updateSelectedDate(null)">
                                       <slot name="clearSelection"></slot>
                                   </a>
                               </div>
@@ -169,10 +169,14 @@ export default {
         closeOnBlur: {
             type: Boolean,
             default: false
+        },
+        dateFormatter: {
+            type: Function,
+            default: (date) => date.toLocaleDateString()
         }
     },
     data() {
-        const focusedDate = this.value || this.focusedDate || new Date()
+        const focusedDate = new Date(this.value) || this.focusedDate || new Date()
         const dateSelected = this.value
           ? new Date(this.value) : null
 
@@ -254,13 +258,8 @@ export default {
              * Null check is required because new Date(null) = 1/1/1970
              */
             if (value && !isNaN(new Date(value))) {
-                const date = new Date(value).toISOString()
-                const regex = /(\d{4})-(\d{2})-(\d{2}).*/
-                const match = date.match(regex)
-                const year = match[1]
-                const month = match[2]
-                const day = match[3]
-                return `${month}/${day}/${year}`
+                const date = new Date(value)
+                return this.dateFormatter(date)
             } else {
                 return null
             }

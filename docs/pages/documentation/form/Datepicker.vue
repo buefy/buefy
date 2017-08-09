@@ -56,9 +56,6 @@
         <div class="column">
             <p>
                 The datepicker can also have earliest and latest dates selectable set. Additionally, through the <code>:focused-date</code> prop, you can set the date picker to display a month and year other than today's month and year. However, once a date is selected, the picker will focus on that date when reopened, rather than the <code>:focused-date</code>.
-                <br />
-                <br />
-                <button class="button is-primary" @click="thirdDatepickerActive = true">Pick Date</button>
             </p>
 
             <hr>
@@ -124,6 +121,13 @@ export default {
                     type: 'Date || String',
                     values: '—',
                     default: 'null'
+                },
+                {
+                    name: '<code>:date-formatter</code>',
+                    description: 'Function to parse date to a string for display in the input/to be emitted if a string is passed in as component value. Will be passed a Date object as argument. If no function is passed in, the default function returns date.toLocaleDateString()',
+                    type: 'Function',
+                    values: 'Any valid function',
+                    default: '(date) => date.toLocaleDateString()'
                 },
                 {
                     name: '<code>:earliest-date</code>',
