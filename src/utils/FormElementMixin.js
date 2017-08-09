@@ -22,7 +22,8 @@ export default {
         parentField() {
             return this.$parent.$data._isField
                 ? this.$parent
-                : (this.$parent.$data._isAutocomplete || this.$parent.$data._isDatepicker) && this.$parent.$parent.$data._isField
+                : (this.$parent.$data._isAutocomplete || this.$parent.$data._isDatepicker) &&
+                this.$parent.$parent.$data._isField
                     ? this.$parent.$parent
                     : null
         },
@@ -43,7 +44,7 @@ export default {
         focus() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            if (this.$data._elementRef !== 'select' && !this.$data._isAutocomplete) {
+            if (this.$data._elementRef !== 'select' && (!this.$data._isAutocomplete || !this.$data._isDatepicker)) {
                 this.$nextTick(() => this.$refs[this.$data._elementRef].select())
             } else {
                 this.$nextTick(() => this.$refs[this.$data._elementRef].focus())
@@ -58,7 +59,7 @@ export default {
         checkHtml5Validity() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            const el = this.$data._isAutocomplete
+            const el = this.$data._isAutocomplete || this.$data._isDatepicker
                 ? this.$refs.input.$refs.input
                 : this.$refs[this.$data._elementRef]
 

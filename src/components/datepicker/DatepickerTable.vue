@@ -88,8 +88,7 @@ export default {
          */
         weeksInThisMonth(month, year) {
             const weeksInThisMonth = []
-            const daysInThisMonth = new Date(year, month + 1, 0)
-                .getDate()
+            const daysInThisMonth = new Date(year, month + 1, 0).getDate()
 
             let startingDay = 1
 

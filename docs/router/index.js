@@ -222,7 +222,7 @@ export default new Router({
                     path: 'datepicker',
                     component: Datepicker,
                     meta: {
-                        category: Form
+                        category: FormElements
                     }
                 },
                 {

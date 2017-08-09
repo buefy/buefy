@@ -15,9 +15,9 @@
             }
         }
     }
-    // Nested control addons (for Autocomplete)
+    // Nested control addons (for Autocomplete and Datepicker)
     &.has-addons .control {
-        &:first-child > .control {
+        &:first-child .control {
             .button,
             .input,
             .select select {
@@ -25,7 +25,7 @@
                 border-top-left-radius: $input-radius;
             }
         }
-        &:last-child > .control {
+        &:last-child .control {
             .button,
             .input,
             .select select {
@@ -33,7 +33,7 @@
                 border-top-right-radius: $input-radius;
             }
         }
-        > .control {
+        .control {
             .button,
             .input,
             .select select {
