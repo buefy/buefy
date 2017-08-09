@@ -1,0 +1,168 @@
+// Datepicker
+$datepicker-width: 360;
+
+.datepicker {
+    position: relative;
+
+    .dropdown,
+    .dropdown-trigger {
+      width: 100%;
+    }
+
+    .datepicker-container {
+          padding: .75em;
+    }
+
+    .dropdown-menu {
+        display: block;
+        min-width: 100%;
+        &.is-opened-top {
+            top: auto;
+            bottom: 100%;
+        }
+    }
+
+    .datepicker-month {
+      position: relative;
+      width: #{$datepicker-width}px;
+
+      .datepicker-decrement {
+        position: absolute;
+        @media (max-width: 400px) {
+            display: none;
+        }
+        @include mobile {
+            left: -10px;
+        }
+        left: .75em;
+      }
+
+      .datepicker-increment {
+        position: absolute;
+        @media (max-width: 400px) {
+            display: none;
+        }
+        @include mobile {
+              right: -10px;
+        }
+        right: .75em;
+      }
+    }
+
+    .table-container {
+        display: flex;
+        width  : 100%;
+        height: #{$datepicker-width * .8}px;
+    }
+    .is-clickable:hover {
+        cursor: pointer;
+    }
+
+    .datepicker-table {
+        margin      : auto;
+        width       : #{$datepicker-width}px;
+        display: table;
+
+        .datepicker-cell {
+          text-align: center;
+          vertical-align: middle;
+          display: table-cell;
+          width: #{$datepicker-width/7}px;
+          height: #{$datepicker-width/7 * .8}px;
+          border-radius: $radius;
+        }
+
+        .datepicker-header {
+          display: table-header-group;
+
+            .datepicker-cell {
+              color: $grey;
+              font-weight: 600;
+            }
+        }
+
+        .datepicker-body {
+          display: table-row-group;
+
+          .datepicker-row {
+            display: table-row;
+
+            .datepicker-cell {
+              &.unselectable {
+                  color: $grey;
+              }
+
+              &.today {
+                border: solid 1px rgba($primary, 0.5);
+              }
+
+              &.selectable {
+                  &:hover, &:focus {
+                      background-color: rgba($primary, 0.3);
+                      cursor: pointer;
+                  }
+              }
+
+              &.selected {
+                  background-color: rgba($primary, 0.5);
+                  &:hover {
+                      background-color: rgba($primary, 0.3);
+                  }
+              }
+            }
+          }
+        }
+    }
+
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium{
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
+    }
+
+    @include mobile {
+      $datepicker-width: 300;
+
+      .datepicker-month {
+        width: #{$datepicker-width}px;
+      }
+
+      .table-container {
+          height: #{$datepicker-width * .8}px;
+      }
+
+      .datepicker-table {
+          width       : #{$datepicker-width}px;
+
+          .datepicker-cell {
+            width: #{$datepicker-width/7}px;
+            height: #{$datepicker-width/7 * .8}px;
+          }
+      }
+    }
+
+    @media (max-width: 400px) {
+        $datepicker-width: 260;
+
+        .datepicker-month {
+          width: #{$datepicker-width}px;
+        }
+
+        .table-container {
+            height: #{$datepicker-width * .8}px;
+        }
+
+        .datepicker-table {
+            width       : #{$datepicker-width}px;
+
+            .datepicker-cell {
+              width: #{$datepicker-width/7}px;
+              height: #{$datepicker-width/7 * .8}px;
+            }
+        }
+    }
+}

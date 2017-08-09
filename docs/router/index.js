@@ -38,6 +38,7 @@ const Checkbox = () => import('../pages/documentation/form/Checkbox')
 const Radio = () => import('../pages/documentation/form/Radio')
 const Switch = () => import('../pages/documentation/form/Switch')
 const Upload = () => import('../pages/documentation/form/Upload')
+const Datepicker = () => import('../pages/documentation/form/Datepicker')
 
 import DataManipulation from '../pages/documentation/data/_Data'
 const Table = () => import('../pages/documentation/data/Table')
@@ -215,6 +216,13 @@ export default new Router({
                     component: Switch,
                     meta: {
                         category: FormElements
+                    }
+                },
+                {
+                    path: 'datepicker',
+                    component: Datepicker,
+                    meta: {
+                        category: Form
                     }
                 },
                 {
