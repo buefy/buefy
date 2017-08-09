@@ -4,6 +4,11 @@ $datepicker-width: 360;
 .datepicker {
     position: relative;
 
+    .dropdown,
+    .dropdown-trigger {
+      width: 100%;
+    }
+
     .datepicker-container {
           padding: .75em;
     }
