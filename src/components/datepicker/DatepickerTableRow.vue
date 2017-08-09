@@ -1,13 +1,25 @@
 <template>
 <div class="datepicker-row">
-    <div
-      v-for="day in week"
-      :key="day.getDate()"
-      class="datepicker-cell"
-      :class="classObject(day)"
-      @click="emitChosenDate(day)">
-        {{day.getDate()}}
-    </div>
+    <template v-for="day in week">
+        <div v-if="selectableDate(day)"
+            class="datepicker-cell"
+            :class="classObject(day)"
+            @click="emitChosenDate(day)"
+            @keydown.enter="emitChosenDate(day)"
+            @keydown.space.prevent="emitChosenDate(day)"
+            role="button"
+            tabindex="0"
+            aria-label="Select Date"
+            :key="day.getDate()">
+                {{day.getDate()}}
+        </div>
+        <div v-else
+            class="datepicker-cell"
+            :class="classObject(day)"
+            :key="day.getDate()">
+                {{day.getDate()}}
+        </div>
+    </template>
 </div>
 </template>
 

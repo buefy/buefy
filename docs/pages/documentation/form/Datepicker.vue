@@ -148,10 +148,10 @@ export default {
                 },
                 {
                     name: '<code>:close-on-blur</code>',
-                    description: 'Whether or not to close datepicker on blur',
+                    description: 'Whether or not to close datepicker on blur. Note, for accessibility reasons, it is better to leave this as false.',
                     type: 'Boolean',
                     values: '<code>true</code>, <code>false</code>',
-                    default: '<code>true</code>'
+                    default: '<code>false</code>'
                 },
                 {
                     name: '<code>type</code>',

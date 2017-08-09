@@ -31,31 +31,45 @@
                           <div class="level is-marginless">
                               <div class="level-item">
                                   <h4 class="has-text-centered datepicker-month level-item">
-                                      <span @click="decrementMonth" class="datepicker-decrement" role="button">
-                                          <b-icon icon="chevron_left"
-                                              both
-                                              type="is-primary is-clickable"
-                                              v-show="!isFirstMonth">
-                                          </b-icon>
+                                      <span
+                                          @click="decrementMonth"
+                                          @keydown.enter="decrementMonth"
+                                          @keydown.space.prevent="decrementMonth"
+                                          class="datepicker-decrement"
+                                          role="button"
+                                          tabindex="0"
+                                          aria-label="Decrement Month">
+                                              <b-icon icon="chevron_left"
+                                                  both
+                                                  type="is-primary is-clickable"
+                                                  v-show="!isFirstMonth">
+                                              </b-icon>
                                       </span>
                                       <b-field grouped>
-                                          <b-select v-model="focusedDateData.month">
+                                          <b-select v-model="focusedDateData.month" aria-label="Select Month">
                                               <option v-for="(month, index) in Object.values(monthNames)" :value="index" :key="month">
                                                 {{month}}
                                               </option>
                                           </b-select>
-                                          <b-select v-model="focusedDateData.year">
+                                          <b-select v-model="focusedDateData.year" aria-label="Select Year">
                                               <option v-for="year in listOfYears" :value="year" :key="year">
                                                 {{year}}
                                               </option>
                                           </b-select>
                                       </b-field>
-                                      <span @click="incrementMonth" class="datepicker-increment" role="button">
-                                          <b-icon icon="chevron_right"
-                                              both
-                                              type="is-primary is-clickable"
-                                              v-show="!isLastMonth">
-                                          </b-icon>
+                                      <span
+                                          @click="incrementMonth"
+                                          @keydown.enter="incrementMonth"
+                                          @keydown.space.prevent="incrementMonth"
+                                          class="datepicker-increment"
+                                          role="button"
+                                          tabindex="0"
+                                          aria-label="Increment Month">
+                                              <b-icon icon="chevron_right"
+                                                  both
+                                                  type="is-primary is-clickable"
+                                                  v-show="!isLastMonth">
+                                              </b-icon>
                                       </span>
                                   </h4>
                               </div>
@@ -70,14 +84,20 @@
                             @close="isActive = false">
                           </b-datepicker-table>
                           <div class="columns">
-                              <div class="column has-text-centered" @click="updateSelectedDate(new Date())">
-                                  <slot name="selectToday"></slot>
+                              <div class="column has-text-centered">
+                                  <a role="button" @click="updateSelectedDate(new Date())">
+                                      <slot name="selectToday"></slot>
+                                  </a>
                               </div>
-                              <div class="column has-text-centered" @click="updateSelectedDate(null)">
-                                  <slot name="clearSelection"></slot>
+                              <div class="column has-text-centered">
+                                  <a role="button" @click="updateSelectedDate(new Date())">
+                                      <slot name="clearSelection"></slot>
+                                  </a>
                               </div>
-                              <div class="column has-text-centered" @click="isActive=false">
-                                  <slot name="close"></slot>
+                              <div class="column has-text-centered">
+                                  <a role="button" @click="isActive=false">
+                                      <slot name="close"></slot>
+                                  </a>
                               </div>
                           </div>
                     </div>
@@ -91,6 +111,9 @@
 <script>
 import FormElementMixin from '../../utils/FormElementMixin'
 import Input from '../input'
+import Field from '../field'
+import Select from '../select'
+import Icon from '../icon'
 import DatepickerTable from './DatepickerTable'
 export default {
     name: 'bDatepicker',
@@ -98,7 +121,10 @@ export default {
     mixins: [FormElementMixin],
     components: {
         [DatepickerTable.name]: DatepickerTable,
-        [Input.name]: Input
+        [Input.name]: Input,
+        [Field.name]: Field,
+        [Select.name]: Select,
+        [Icon.name]: Icon
     },
     props: {
         value: [Date, String],
@@ -140,17 +166,15 @@ export default {
         focusedDate: Date,
         placeholder: String,
         type: String,
-        closeOnBlur: true
+        closeOnBlur: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         const focusedDate = this.value || this.focusedDate || new Date()
-        let dateSelected
-
-        if (this.value) {
-            dateSelected = new Date(this.value)
-        } else {
-            dateSelected = null
-        }
+        const dateSelected = this.value
+          ? new Date(this.value) : null
 
         return {
             dateSelected,
@@ -171,20 +195,11 @@ export default {
          * dates are set by props, range of years will fall within those dates.
          */
         listOfYears() {
-            let latestYear
-            let earliestYear
+            const latestYear = this.latestDate
+              ? this.latestDate.getFullYear() : new Date().getFullYear() + 3
 
-            if (this.latestDate) {
-                latestYear = this.latestDate.getFullYear()
-            } else {
-                latestYear = new Date().getFullYear() + 3
-            }
-
-            if (this.earliestDate) {
-                earliestYear = this.earliestDate.getFullYear()
-            } else {
-                earliestYear = 1900
-            }
+            const earliestYear = this.earliestDate
+              ? this.earliestDate.getFullYear() : 1900
 
             const arrayOfYears = []
             for (let i = earliestYear; i <= latestYear; i++) {
@@ -214,11 +229,10 @@ export default {
          * If value passed in is a date object, emit value as date object,
          * else emit formatted string
          */
-        dateSelected() {
-            let date = this.dateSelected
-            if (this.value && typeof this.value.getMonth !== 'function') {
-                date = this.formatValue(this.dateSelected)
-            }
+        dateSelected(val) {
+            const date = (this.value && typeof this.value.getMonth !== 'function')
+              ? this.formatValue(val) : val
+
             this.$emit('input', date)
             this.isActive = false
         }
@@ -254,7 +268,7 @@ export default {
 
         /**
          * Calculate if the dropdown is vertically visible when activated,
-         * otherwise it is openened upwards.
+         * otherwise it is opened upwards.
          */
         calcDropdownInViewportVertical() {
             this.$nextTick(() => {
@@ -328,7 +342,7 @@ export default {
          * Prevent user from typing in date box except to delete value
          */
         preventTyping(e) {
-            if (e.key !== 'Backspace') {
+            if (e.key !== 'Backspace' && e.key !== 'Tab') {
                 e.preventDefault()
             }
         }

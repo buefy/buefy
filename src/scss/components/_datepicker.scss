@@ -3,7 +3,7 @@ $datepicker-width: 360;
 
 .datepicker {
     position: relative;
-    
+
     .datepicker-container {
           padding: .75em;
     }
@@ -92,7 +92,7 @@ $datepicker-width: 360;
               }
 
               &.selectable {
-                  &:hover {
+                  &:hover, &:focus {
                       background-color: rgba($primary, 0.3);
                       cursor: pointer;
                   }
