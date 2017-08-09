@@ -5,11 +5,14 @@
             :class="[size, statusType, {
                 'is-fullwidth': expanded,
                 'is-loading': loading,
+                'is-multiple': multiple,
                 'is-empty': selected === null
             }]">
 
             <select v-model="selected"
                 ref="select"
+                :multiple="multiple"
+                :size="nativeSize"
                 v-bind="$attrs"
                 @blur="checkHtml5Validity() && $emit('blur', $event)"
                 @focus="$emit('focus', $event)">
@@ -48,7 +51,9 @@
                 type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: null
             },
-            placeholder: String
+            placeholder: String,
+            multiple: Boolean,
+            nativeSize: [String, Number]
         },
         data() {
             return {
