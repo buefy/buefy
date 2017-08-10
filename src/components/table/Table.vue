@@ -352,11 +352,11 @@
                         ? !this.isAsc
                         : this.isAsc = true
                 }
+                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
                 if (!this.backendSorting) {
                     this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc)
                 }
                 this.currentSortColumn = column
-                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
             },
 
             /**
