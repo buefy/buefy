@@ -1,6 +1,6 @@
 <template>
     <div class="datepicker control" :class="{size, 'is-expanded': expanded}">
-        <b-dropdown ref="dropdown">
+        <b-dropdown ref="dropdown" v-if="!isMobile">
             <b-input :value="formatValue(dateSelected)"
                 @keydown.native="preventTyping"
                 :placeholder="placeholder"
@@ -85,11 +85,30 @@
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
+        <b-input v-else
+                :value="formatYYYYMMDD(value)"
+                :placeholder="placeholder"
+                ref="input"
+                :size="size"
+                :icon="icon"
+                :icon-pack="iconPack"
+                :loading="loading"
+                :class="[type]"
+                autocomplete="off"
+                v-bind="$attrs"
+                type="date"
+                :max="formatYYYYMMDD(latestDate)"
+                :min="formatYYYYMMDD(earliestDate)"
+                @change.native="onChangeNativePicker"
+                @focus="$emit('focus', $event)"
+                @blur="checkHtml5Validity() && $emit('blur', $event)">
+        </b-input>
     </div>
 </template>
 
 <script>
     import FormElementMixin from '../../utils/FormElementMixin'
+    import { isMobile } from '../../utils/helpers'
 
     import { Dropdown, DropdownItem } from '../dropdown'
     import Input from '../input'
@@ -204,6 +223,10 @@
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
                 const date = new Date(this.latestDate.getFullYear(), this.latestDate.getMonth())
                 return (dateToCheck >= date)
+            },
+
+            isMobile() {
+                return isMobile.any()
             }
         },
         watch: {
@@ -217,7 +240,9 @@
                 ? this.formatValue(value) : value
 
                 this.$emit('input', date)
-                this.$refs.dropdown.isActive = false
+                if (this.$refs.dropdown) {
+                    this.$refs.dropdown.isActive = false
+                }
             },
 
             /**
@@ -300,6 +325,29 @@
                     event.preventDefault()
                     this.$refs.dropdown.isActive = true
                 }
+            },
+
+            /*
+            * Format date into string 'YYYY-MM-DD'
+            */
+            formatYYYYMMDD(value) {
+                if (value && !isNaN(new Date(value))) {
+                    const date = new Date(value)
+                    const year = date.getFullYear()
+                    const month = date.getMonth() + 1
+                    const day = date.getDate()
+                    return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day)
+                }
+                return ''
+            },
+
+            /*
+            * Format date into string 'YYYY-MM-DD'
+            */
+            onChangeNativePicker(event) {
+                // YYYY-MM-DD
+                const date = event.target.value
+                this.dateSelected = date ? new Date(date) : null
             }
         }
     }
