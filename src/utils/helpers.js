@@ -7,6 +7,24 @@ export function getValueByPath(obj, path) {
 }
 
 /**
+ * Extension of indexOf method by equality function if specified
+ */
+export function indexOf(array, obj, fn) {
+    if (array) {
+        if (fn && typeof fn === 'function') {
+            for (let i = 0; i < array.length; i++) {
+                if (fn(array[i], obj)) {
+                    return i
+                }
+            }
+        } else {
+            return array.indexOf(obj)
+        }
+    }
+    return -1
+}
+
+/**
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  */

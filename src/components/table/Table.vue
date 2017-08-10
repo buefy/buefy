@@ -129,7 +129,7 @@
 </template>
 
 <script>
-    import { getValueByPath } from '../../utils/helpers'
+    import { getValueByPath, indexOf } from '../../utils/helpers'
     import Pagination from '../pagination'
     import Icon from '../icon'
     import { Checkbox } from '../checkbox'
@@ -153,6 +153,7 @@
             detailed: Boolean,
             checkable: Boolean,
             selected: Object,
+            customIsEqual: Function,
             checkedRows: {
                 type: Array,
                 default: () => []
@@ -278,7 +279,7 @@
              */
             isAllChecked() {
                 const isAllChecked = this.visibleData.some(currentVisibleRow => {
-                    return this.checkedRows.indexOf(currentVisibleRow) < 0
+                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsEqual) < 0
                 })
                 return !isAllChecked
             },
@@ -363,14 +364,14 @@
              * Check if the row is checked (is added to the array).
              */
             isRowChecked(row) {
-                return this.checkedRows.indexOf(row) >= 0
+                return indexOf(this.checkedRows, row, this.customIsEqual) >= 0
             },
 
             /**
              * Remove a checked row from the array.
              */
             removeCheckedRow(row) {
-                const index = this.newCheckedRows.indexOf(row)
+                const index = indexOf(this.newCheckedRows, row, this.customIsEqual)
                 if (index >= 0) {
                     this.newCheckedRows.splice(index, 1)
                 }
@@ -437,7 +438,7 @@
                 this.$emit('page-change', this.currentPage)
             },
 
-             /**
+            /**
              * Toggle to show/hide details slot
              */
             toggleDetails(index) {
@@ -451,6 +452,7 @@
                 this.visibleDetailRows.push(index)
                 this.$emit('details-open', index)
             },
+
             isVisibleDetailRow(index) {
                 return this.visibleDetailRows.indexOf(index) >= 0
             },
