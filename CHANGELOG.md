@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.5.1
+
+* Add ``inline`` prop to dropdown, items are shown inline and trigger removed
+
 ## 0.5.0
 
 ### Breaking changes

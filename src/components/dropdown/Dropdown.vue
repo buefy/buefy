@@ -3,9 +3,11 @@
         :class="[position, {
             'is-disabled': disabled,
             'is-hoverable': hoverable,
-            'is-active': isActive
+            'is-inline': inline,
+            'is-active': isActive || inline
         }]">
-        <a role="button"
+        <a v-if="!inline"
+            role="button"
             ref="trigger"
             class="dropdown-trigger"
             @click="toggle">
@@ -13,10 +15,13 @@
         </a>
 
         <transition name="fade">
-            <div v-show="isActive" class="background"></div>
+            <div v-if="!inline"
+                v-show="isActive"
+                class="background">
+            </div>
         </transition>
         <transition name="fade">
-            <div v-show="isActive || hoverable"
+            <div v-show="isActive || hoverable || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu">
                 <div class="dropdown-content">
@@ -37,6 +42,7 @@
             },
             disabled: Boolean,
             hoverable: Boolean,
+            inline: Boolean,
             position: {
                 type: String,
                 validator(value) {
@@ -64,7 +70,7 @@
             },
 
             /**
-             * Emit event when isActive value is changed
+             * Emit event when isActive value is changed.
              */
             isActive(value) {
                 this.$emit('active-change', value)
@@ -115,6 +121,8 @@
              * Close dropdown if clicked outside.
              */
             clickedOutside(event) {
+                if (this.inline) return
+
                 if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
             },
 

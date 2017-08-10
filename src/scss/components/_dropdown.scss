@@ -39,6 +39,13 @@
             pointer-events: none;
         }
     }
+    &.is-inline {
+        .dropdown-menu {
+            position: static;
+            display: inline-block;
+            padding: 0;
+        }
+    }
     &.is-top-right {
         .dropdown-menu {
             top: auto;
@@ -60,7 +67,7 @@
         }
     }
     @include touch {
-        &:not(.is-hoverable) {
+        &:not(.is-hoverable, .is-inline) {
             .dropdown-menu {
                 position: fixed;
                 width: calc(100vw - 40px);
