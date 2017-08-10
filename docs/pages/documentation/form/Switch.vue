@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -246,6 +246,22 @@
                 </div>
                 <div class="field">
                     <b-switch size="is-large">Large</b-switch>
+                </div>`,
+                template3: `
+                <div class="field">
+                    <b-switch>Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-info">Info</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-success">Success</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-danger">Danger</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-warning">Warning</b-switch>
                 </div>`
             }
         }
