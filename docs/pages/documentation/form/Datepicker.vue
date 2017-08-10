@@ -1,23 +1,15 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Datepicker</h1>
-        <h2 class="subtitle">An input with a simple dropdown/modal for selecting a date</h2>
+        <h2 class="subtitle">An input with a simple dropdown/modal for selecting a date, uses native datepicker for mobile</h2>
         <hr>
 
         <div class="columns">
             <div class="column">
-                <p>
-                    The datepicker is an input that opens a dropdown on focus that allows a user to select a date from a calendar.
-                    When a date is selected, the component emits the event <code>input</code> with either a date object or formatted string as the payload.
-                    If the component is passed a date object through <code>v-model</code> it will emit a date object, and vice-versa with a string.
-                    Today's date is outlined in the picker. See the documentation for Input for more details.
-                </p>
-
-                <hr>
-
                 <b-field label="Select a date">
                     <b-datepicker
-                        placeholder="Click to select...">
+                        placeholder="Click to select..."
+                        icon="today">
                     </b-datepicker>
                 </b-field>
             </div>
@@ -27,28 +19,43 @@
         </div>
 
         <hr>
-        <h1 class="title">Footer Buttons</h1>
+        <h2 class="title">Range</h2>
+        <p class="content">You can limit the date range with <code>min-date</code> and <code>max-date</code> props.</p>
 
         <div class="columns">
             <div class="column">
-                <p>
-                    The datepicker has three accessory functions that can be activated by using slots.
-                </p>
-
-                <hr>
-
                 <b-field label="Select a date">
-                    <b-datepicker v-model="secondDate"
+                    <b-datepicker
+                        placeholder="Click to select..."
+                        :min-date="minDate"
+                        :max-date="maxDate">
+                    </b-datepicker>
+                </b-field>
+            </div>
+            <div class="column">
+                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+                <pre v-highlight><code class="javascript">{{ code2 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+        <h2 class="title">Footer</h2>
+        <p class="content">Any slots are added to the footer of the datepicker.</p>
+
+        <div class="columns">
+            <div class="column">
+                <b-field label="Select a date">
+                    <b-datepicker v-model="date"
                         placeholder="Click to select...">
 
                         <button class="button is-primary"
-                            @click="secondDate = new Date()">
+                            @click="date = new Date()">
                             <b-icon icon="today"></b-icon>
                             <span>Today</span>
                         </button>
 
                         <button class="button is-danger"
-                            @click="secondDate = null">
+                            @click="date = null">
                             <b-icon icon="clear"></b-icon>
                             <span>Clear</span>
                         </button>
@@ -56,33 +63,20 @@
                 </b-field>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
             </div>
         </div>
 
         <hr>
-        <h1 class="title">Selectable Range</h1>
-
+        <h2 class="title">Inline</h2>
+        <p class="content">Datepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         <div class="columns">
             <div class="column">
-                <p>
-                    The datepicker can also have earliest and latest dates selectable set. Additionally, through the <code>:focused-date</code> prop, you can set the date picker to display a month and year other than today's month and year. However, once a date is selected, the picker will focus on that date when reopened, rather than the <code>:focused-date</code>.
-                </p>
-
-                <hr>
-
-                <b-field label="Select a date">
-                    <b-datepicker
-                        v-model="thirdDate"
-                        placeholder="Click to select..."
-                        :earliest-date="thirdEarliestDate"
-                        :latest-date="thirdLatestDate">
-                    </b-datepicker>
-                </b-field>
+                <b-datepicker v-model="date" inline></b-datepicker>
             </div>
             <div class="column">
-                <pre class="content" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+                <pre class="content" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
                 <pre v-highlight><code class="javascript">{{ code3 | pre }}</code></pre>
             </div>
         </div>
@@ -121,67 +115,58 @@
             const today = new Date()
 
             return {
-                firstDate: today,
-                secondDate: today,
-                thirdDate: today,
-                thirdEarliestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
-                thirdLatestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
+                date: today,
+                minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
+                maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
                 selectProps: [
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'Date || String',
+                        type: 'Date, String',
                         values: '—',
-                        default: 'null'
+                        default: '—'
                     },
                     {
-                        name: '<code>:date-formatter</code>',
-                        description: 'Function to parse date to a string for display in the input/to be emitted if a string is passed in as component value. Will be passed a Date object as argument. If no function is passed in, the default function returns date.toLocaleDateString()',
+                        name: '<code>date-formatter</code>',
+                        description: 'Function to parse date to a string for display in the input/to be emitted if a string is passed in as component value. Will be passed a Date object as argument.',
                         type: 'Function',
-                        values: 'Any valid function',
-                        default: '(date) => date.toLocaleDateString()'
+                        values: '—',
+                        default: '<code>(date) => date.toLocaleDateString()</code>'
                     },
                     {
-                        name: '<code>:earliest-date</code>',
+                        name: '<code>min-date</code>',
                         description: 'Earliest date available for selection',
                         type: 'Date',
                         values: '—',
-                        default: 'null'
+                        default: '—'
                     },
                     {
-                        name: '<code>:latest-date</code>',
+                        name: '<code>max-date</code>',
                         description: 'Latest date available for selection',
                         type: 'Date',
                         values: '—',
-                        default: 'null'
+                        default: '—'
                     },
                     {
-                        name: '<code>:focused-date</code>',
+                        name: '<code>focused-date</code>',
                         description: 'Date that should be initially focused upon',
                         type: 'Date',
                         values: '—',
-                        default: '<code>new Date()</code> (today)'
-                    },
-                    {
-                        name: '<code>:close-on-blur</code>',
-                        description: 'Whether or not to close datepicker on blur. Note, for accessibility reasons, it is better to leave this as false.',
-                        type: 'Boolean',
-                        values: '<code>true</code>, <code>false</code>',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>type</code>',
-                        description: 'Input type, like native',
-                        type: 'String',
-                        values: 'Any native input type, and <code>textarea</code>',
-                        default: '<code>text</code>'
+                        default: '<code>new Date()</code>'
                     },
                     {
                         name: '<code>size</code>',
-                        description: 'Vertical size of input, optional',
+                        description: 'Vertical size of input and picker, optional',
                         type: 'String',
                         values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                         default: '—'
+                    },
+                    {
+                        name: '<code>inline</code>',
+                        description: 'Datepicker is shown inline, input is removed',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>loading</code>',
@@ -205,17 +190,17 @@
                         default: '<code>mdi</code>'
                     },
                     {
-                        name: '<code>:day-names</code>',
+                        name: '<code>day-names</code>',
                         description: 'Names of months to display in table header',
                         type: 'Array',
-                        values: 'Array of names for months',
+                        values: '—',
                         default: '<code>["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]</code>'
                     },
                     {
-                        name: '<code>:month-names</code>',
+                        name: '<code>month-names</code>',
                         description: 'Names of days to display in table header',
                         type: 'Array',
-                        values: 'Array of names for days',
+                        values: '—',
                         default: '<code>["Su", "M", "Tu", "W", "Th", "F", "S"]</code>'
                     },
                     {
@@ -229,10 +214,49 @@
                 template1: `
                 <b-field label="Select a date">
                     <b-datepicker
-                        placeholder="Click to select...">
+                        placeholder="Click to select..."
+                        icon="today">
                     </b-datepicker>
                 </b-field>`,
-                code1: `
+                template2: `
+                <b-field label="Select a date">
+                    <b-datepicker
+                        placeholder="Click to select..."
+                        :min-date="minDate"
+                        :max-date="maxDate">
+                    </b-datepicker>
+                </b-field>`,
+                code2: `
+                export default {
+                    const today = new Date()
+
+                    data() {
+                        return {
+                            date: new Date(),
+                            minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
+                            maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)
+                        }
+                    }
+                }`,
+                template3: `
+                <b-field label="Select a date">
+                    <b-datepicker v-model="date"
+                        placeholder="Click to select...">
+
+                        <button class="button is-primary"
+                            @click="date = new Date()">
+                            <b-icon icon="today"></b-icon>
+                            <span>Today</span>
+                        </button>
+
+                        <button class="button is-danger"
+                            @click="date = null">
+                            <b-icon icon="clear"></b-icon>
+                            <span>Clear</span>
+                        </button>
+                    </b-datepicker>
+                </b-field>`,
+                code3: `
                 export default {
                     data() {
                         return {
@@ -240,40 +264,7 @@
                         }
                     }
                 }`,
-                template2: `
-                <b-field label="Select a date">
-                    <b-datepicker v-model="secondDate"
-                        placeholder="Click to select...">
-                        <button class="button is-primary" slot="today">
-                            <b-icon icon="today"></b-icon>
-                            <span>Today</span>
-                        </button>
-                        <button class="button is-danger" slot="clear">
-                            <b-icon icon="clear"></b-icon>
-                            <span>Clear</span>
-                        </button>
-                    </b-datepicker>
-                </b-field>`,
-                template3: `
-                <b-field label="Select a date">
-                    <b-datepicker
-                        v-model="thirdDate"
-                        placeholder="Click to select..."
-                        :earliest-date="thirdEarliestDate"
-                        :latest-date="thirdLatestDate">
-                    </b-datepicker>
-                </b-field>`,
-                code3: `
-                export default {
-                    const today = new Date();
-                    data() {
-                        return {
-                            date: new Date(),
-                            earliestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5),
-                            latestDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)
-                        }
-                    }
-                }`
+                template4: `<b-datepicker v-model="date" inline></b-datepicker>`
             }
         }
     }

@@ -1,23 +1,23 @@
 <template>
     <div class="datepicker-row">
-        <template v-for="day in week">
-            <div v-if="selectableDate(day)"
-                class="datepicker-cell"
+        <template v-for="(day, index) in week">
+            <a v-if="selectableDate(day)"
+                :key="index"
                 :class="classObject(day)"
-                @click="emitChosenDate(day)"
-                @keydown.enter="emitChosenDate(day)"
-                @keydown.space.prevent="emitChosenDate(day)"
+                class="datepicker-cell"
                 role="button"
                 tabindex="0"
                 aria-label="Select Date"
-                :key="day.getDate()">
-                    {{day.getDate()}}
-            </div>
+                @click="emitChosenDate(day)"
+                @keydown.enter="emitChosenDate(day)"
+                @keydown.space.prevent="emitChosenDate(day)">
+                {{ day.getDate() }}
+            </a>
             <div v-else
-                class="datepicker-cell"
+                :key="index"
                 :class="classObject(day)"
-                :key="day.getDate()">
-                    {{day.getDate()}}
+                class="datepicker-cell">
+                {{ day.getDate() }}
             </div>
         </template>
     </div>
@@ -36,8 +36,8 @@
                 type: Number,
                 required: true
             },
-            earliestDate: Date,
-            latestDate: Date
+            minDate: Date,
+            maxDate: Date
         },
         methods: {
             /*
@@ -47,12 +47,12 @@
             selectableDate(day) {
                 const validity = []
 
-                if (this.earliestDate) {
-                    validity.push(day >= this.earliestDate)
+                if (this.minDate) {
+                    validity.push(day >= this.minDate)
                 }
 
-                if (this.latestDate) {
-                    validity.push(day <= this.latestDate)
+                if (this.maxDate) {
+                    validity.push(day <= this.maxDate)
                 }
 
                 validity.push(day.getMonth() === this.month)

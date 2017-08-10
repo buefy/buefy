@@ -17,15 +17,24 @@ export default {
     },
     computed: {
         /**
-         * Get parent Field.
+         * Find parent Field, max 3 levels deep.
          */
         parentField() {
-            return this.$parent.$data._isField
-                ? this.$parent
-                : (this.$parent.$data._isAutocomplete || this.$parent.$data._isDatepicker) &&
-                this.$parent.$parent.$data._isField
-                    ? this.$parent.$parent
-                    : null
+            // return this.$parent.$data._isField
+            //     ? this.$parent
+            //     : this.$parent.$data._isAutocomplete && this.$parent.$parent.$data._isField
+            //         ? this.$parent.$parent
+            //         : this.$parent.$data._isDatepicker && this.$parent.$parent.$parent.$data._isField
+            //             ? this.$parent.$parent.$parent
+            //             : null
+
+            let parent = this.$parent
+            for (let i = 0; i < 3; i++) {
+                if (parent && !parent.$data._isField) {
+                    parent = parent.$parent
+                }
+            }
+            return parent
         },
 
         /**
@@ -39,12 +48,12 @@ export default {
     },
     methods: {
         /**
-         * Focus method that work dynamically depending on input type.
+         * Focus method that work dynamically depending on the component.
          */
         focus() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            if (this.$data._elementRef !== 'select' && (!this.$data._isAutocomplete || !this.$data._isDatepicker)) {
+            if (!this.$data._isSelect && !this.$data._isAutocomplete && !this.$data._isDatepicker) {
                 this.$nextTick(() => this.$refs[this.$data._elementRef].select())
             } else {
                 this.$nextTick(() => this.$refs[this.$data._elementRef].focus())

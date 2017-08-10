@@ -1,18 +1,20 @@
 <template>
-    <div class="datepicker control" :class="{size, 'is-expanded': expanded}">
-        <b-dropdown ref="dropdown" v-if="!isMobile">
-            <b-input :value="formatValue(dateSelected)"
-                @keydown.native="preventTyping"
-                :placeholder="placeholder"
+    <div class="datepicker control" :class="[size, {'is-expanded': expanded}]">
+        <b-dropdown v-if="!isMobile || inline"
+            ref="dropdown"
+            :inline="inline">
+            <b-input v-if="!inline"
                 ref="input"
+                slot="trigger"
+                autocomplete="off"
+                :value="formatValue(dateSelected)"
+                :placeholder="placeholder"
                 :size="size"
                 :icon="icon"
                 :icon-pack="iconPack"
                 :loading="loading"
-                :class="[type]"
-                autocomplete="off"
-                slot="trigger"
                 v-bind="$attrs"
+                @keydown.native="preventTyping"
                 @focus="$emit('focus', $event)"
                 @blur="checkHtml5Validity() && $emit('blur', $event)">
             </b-input>
@@ -22,12 +24,12 @@
                     <div class="pagination field is-centered">
                         <a v-if="!isFirstMonth"
                             class="pagination-previous"
-                            @click="decrementMonth"
-                            @keydown.enter="decrementMonth"
-                            @keydown.space.prevent="decrementMonth"
                             role="button"
                             tabindex="0"
-                            aria-label="Decrement Month">
+                            aria-label="Decrement Month"
+                            @click="decrementMonth"
+                            @keydown.enter="decrementMonth"
+                            @keydown.space.prevent="decrementMonth">
 
                             <b-icon icon="chevron_left"
                                 both
@@ -36,12 +38,12 @@
                         </a>
                         <a v-show="!isLastMonth"
                             class="pagination-next"
-                            @click="incrementMonth"
-                            @keydown.enter="incrementMonth"
-                            @keydown.space.prevent="incrementMonth"
                             role="button"
                             tabindex="0"
-                            aria-label="Increment Month">
+                            aria-label="Increment Month"
+                            @click="incrementMonth"
+                            @keydown.enter="incrementMonth"
+                            @keydown.space.prevent="incrementMonth">
 
                             <b-icon icon="chevron_right"
                                 both
@@ -73,8 +75,8 @@
                 <b-datepicker-table v-model="dateSelected"
                     :day-names="dayNames"
                     :month-names="monthNames"
-                    :earliest-date="earliestDate"
-                    :latest-date="latestDate"
+                    :min-date="minDate"
+                    :max-date="maxDate"
                     :focused="focusedDateData"
                     @close="$refs.dropdown.isActive = false">
                 </b-datepicker-table>
@@ -85,23 +87,23 @@
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
+
         <b-input v-else
-                :value="formatYYYYMMDD(value)"
-                :placeholder="placeholder"
-                ref="input"
-                :size="size"
-                :icon="icon"
-                :icon-pack="iconPack"
-                :loading="loading"
-                :class="[type]"
-                autocomplete="off"
-                v-bind="$attrs"
-                type="date"
-                :max="formatYYYYMMDD(latestDate)"
-                :min="formatYYYYMMDD(earliestDate)"
-                @change.native="onChangeNativePicker"
-                @focus="$emit('focus', $event)"
-                @blur="checkHtml5Validity() && $emit('blur', $event)">
+            ref="input"
+            type="date"
+            autocomplete="off"
+            :value="formatYYYYMMDD(value)"
+            :placeholder="placeholder"
+            :size="size"
+            :icon="icon"
+            :icon-pack="iconPack"
+            :loading="loading"
+            :max="formatYYYYMMDD(maxDate)"
+            :min="formatYYYYMMDD(minDate)"
+            v-bind="$attrs"
+            @change.native="onChangeNativePicker"
+            @focus="$emit('focus', $event)"
+            @blur="checkHtml5Validity() && $emit('blur', $event)">
         </b-input>
     </div>
 </template>
@@ -165,11 +167,11 @@
                     ]
                 }
             },
-            earliestDate: Date,
-            latestDate: Date,
+            inline: Boolean,
+            minDate: Date,
+            maxDate: Date,
             focusedDate: Date,
             placeholder: String,
-            type: String,
             dateFormatter: {
                 type: Function,
                 default: (date) => date.toLocaleDateString()
@@ -197,11 +199,11 @@
             * dates are set by props, range of years will fall within those dates.
             */
             listOfYears() {
-                const latestYear = this.latestDate
-                ? this.latestDate.getFullYear() : new Date().getFullYear() + 3
+                const latestYear = this.maxDate
+                ? this.maxDate.getFullYear() : new Date().getFullYear() + 3
 
-                const earliestYear = this.earliestDate
-                ? this.earliestDate.getFullYear() : 1900
+                const earliestYear = this.minDate
+                ? this.minDate.getFullYear() : 1900
 
                 const arrayOfYears = []
                 for (let i = earliestYear; i <= latestYear; i++) {
@@ -212,16 +214,16 @@
             },
 
             isFirstMonth() {
-                if (!this.earliestDate) return false
+                if (!this.minDate) return false
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
-                const date = new Date(this.earliestDate.getFullYear(), this.earliestDate.getMonth())
+                const date = new Date(this.minDate.getFullYear(), this.minDate.getMonth())
                 return (dateToCheck <= date)
             },
 
             isLastMonth() {
-                if (!this.latestDate) return false
+                if (!this.maxDate) return false
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
-                const date = new Date(this.latestDate.getFullYear(), this.latestDate.getMonth())
+                const date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth())
                 return (dateToCheck >= date)
             },
 
