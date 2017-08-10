@@ -35,6 +35,32 @@
 
         <hr>
 
+        <h2 class="title">Types</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <b-switch :value="true">Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-info">Info</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-success">Success</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-danger">Danger</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-warning">Warning</b-switch>
+                </div>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
@@ -108,6 +134,16 @@
                 isSwitched: false,
                 isSwitchedCustom: 'Yes',
                 props: [
+                    {
+                        name: '<code>type</code>',
+                        description: 'Type (color) of the switch, optional',
+                        type: 'String',
+                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                            <code>is-warning</code>, <code>is-danger</code>,
+                            and any other colors you've set in the <code>$colors</code> list on Sass`,
+                        default: '—'
+                    },
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
@@ -210,6 +246,22 @@
                 </div>
                 <div class="field">
                     <b-switch size="is-large">Large</b-switch>
+                </div>`,
+                template3: `
+                <div class="field">
+                    <b-switch>Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-info">Info</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-success">Success</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-danger">Danger</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-warning">Warning</b-switch>
                 </div>`
             }
         }

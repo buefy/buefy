@@ -15,7 +15,7 @@
             :disabled="disabled"
             :true-value="trueValue"
             :false-value="falseValue">
-        <span class="check" :class="{ 'is-elastic': isMouseDown }"></span>
+        <span class="check" :class="[{ 'is-elastic': isMouseDown }, type]"></span>
         <span class="control-label"><slot></slot></span>
     </label>
 </template>
@@ -27,6 +27,7 @@
             value: {},
             nativeValue: {},
             disabled: Boolean,
+            type: String,
             name: String,
             size: String,
             trueValue: {

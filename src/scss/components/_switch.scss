@@ -39,6 +39,12 @@ $switch-active-background-color: $primary !default;
         }
         &:checked + .check {
             background: $switch-active-background-color;
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    background: $color;
+                }
+            }
             &:before {
                 transform: translate3d(100%, 0, 0);
             }
@@ -57,6 +63,12 @@ $switch-active-background-color: $primary !default;
         }
         input[type=checkbox]:checked + .check {
             background: rgba($switch-active-background-color, 0.9);
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    background: rgba($color, 0.9);
+                }
+            }
         }
     }
     &:focus {
@@ -66,6 +78,12 @@ $switch-active-background-color: $primary !default;
         }
         input[type=checkbox]:checked + .check {
             box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    box-shadow: 0 0 0.5em rgba($color, 0.8);
+                }
+            }
         }
     }
     &.is-small {
