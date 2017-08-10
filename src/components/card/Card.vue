@@ -22,8 +22,13 @@
 </template>
 
 <script>
+    import Icon from '../icon'
+
     export default {
         name: 'bCard',
+        components: {
+            [Icon.name]: Icon
+        },
         props: {
             collapsible: {
                 type: Boolean,
