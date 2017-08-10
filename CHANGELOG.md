@@ -2,6 +2,11 @@
 
 ## 0.5.1
 
+* **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
+* #221 Add backend pagination support to table (thanks @cappuc)
+* #214 Add ``active`` prop to tooltip
+* #228 Fix table checked rows not working on mobile
+* Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
 
 ## 0.5.0
