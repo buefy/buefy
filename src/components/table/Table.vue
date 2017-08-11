@@ -197,12 +197,25 @@
         },
         watch: {
             /**
-             * When data prop change, update internal value and sort again,
-             * do not sort however if it's backend-sort.
-             * If it isn't backend-paginated set new total
+             * When data prop change:
+             *   1. Update internal value.
+             *   2. Reset columns (thead), in case it's on a v-for loop.
+             *   3. Sort again if it's not backend-sort.
+             *   4. Set new total if it's not backend-paginated.
              */
             data(value) {
+                // Save columns before resetting
+                const columns = this.columns
+
+                this.columns = []
                 this.newData = value
+
+                // Prevent table from being headless, data could change and created hook
+                // on column might not trigger
+                this.$nextTick(() => {
+                    if (!this.columns.length) this.columns = columns
+                })
+
                 if (!this.backendSorting) {
                     this.sort(this.currentSortColumn, true)
                 }

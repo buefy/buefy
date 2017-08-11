@@ -8,6 +8,7 @@
 * #221 Add backend pagination support to table (thanks @cappuc)
 * #214 Add ``active`` prop to tooltip
 * #228 Fix table checked rows not working on mobile
+* #239 Fix table columns on v-for loop
 * Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
 
