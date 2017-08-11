@@ -10,10 +10,8 @@
     export default {
         name: 'bTableColumn',
         props: {
-            label: {
-                type: String,
-                required: true
-            },
+            label: String,
+            customKey: [String, Number],
             field: String,
             width: [Number, String],
             numeric: Boolean,
@@ -25,6 +23,11 @@
             },
             customSort: Function
         },
+        data() {
+            return {
+                newKey: this.customKey || this.label
+            }
+        },
         created() {
             if (!this.$parent.$data._isTable) {
                 this.$destroy()
@@ -32,11 +35,9 @@
             }
 
             // Since we're using scoped prop the columns gonna be multiplied,
-            // this finds when to stop based on the label prop.
-            const repeated = this.$parent.columns.some((column) => {
-                return column.label === this.label
-            })
-            !repeated && this.$parent.columns.push(this.$props)
+            // this finds when to stop based on the newKey property.
+            const repeated = this.$parent.columns.some((column) => column.newKey === this.newKey)
+            !repeated && this.$parent.columns.push(this)
         }
     }
 </script>

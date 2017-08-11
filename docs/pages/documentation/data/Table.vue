@@ -100,8 +100,7 @@
                             </b-table-column>
 
                             <b-table-column field="gender" label="Gender">
-                                <b-icon
-                                    pack="fa"
+                                <b-icon pack="fa"
                                     :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
                                 </b-icon>
                                 {{ props.row.gender }}
@@ -136,7 +135,7 @@
                                 This table is empty!
                             </div>
                         </template>
-                        
+
                     </b-table>
                 </b-tab-item>
 
@@ -454,10 +453,17 @@
                 columnProps: [
                     {
                         name: '<code>label</code>',
-                        description: '<b>Required</b>, column header text',
+                        description: 'Column header text, also used to identify column if <code>custom-key</code> prop is missing',
                         type: 'String',
                         values: '—',
                         default: '—'
+                    },
+                    {
+                        name: '<code>custom-key</code>',
+                        description: 'Unique identifier, use when <code>label</code> is missing or there are duplicate <code>label</code> names',
+                        type: 'String, Number',
+                        values: '—',
+                        default: '<code>this.label</code>'
                     },
                     {
                         name: '<code>field</code>',
