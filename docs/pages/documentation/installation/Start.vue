@@ -7,7 +7,7 @@
 
         <h3 class="title">Install</h3>
         <b-message type="is-warning">
-            You need <a href="https://vuejs.org" target="_blank">Vue.js</a> <b>version 2.3+</b>.
+            You need <a href="https://vuejs.org" target="_blank">Vue.js</a> <b>version 2.4+</b>.
         </b-message>
         <div class="media">
             <div class="media-left">
