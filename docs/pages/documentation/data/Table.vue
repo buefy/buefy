@@ -515,6 +515,7 @@
                     :bordered="isBordered"
                     :striped="isStriped"
                     :narrowed="isNarrowed"
+                    :detailed="isDetailed"
                     :checkable="isCheckable"
                     :loading="isLoading"
                     :mobile-cards="hasMobileCards"
@@ -522,10 +523,10 @@
                     :per-page="perPage"
                     :pagination-simple="isPaginationSimple"
                     :selected.sync="selected"
-                    :hasDetails="hasDetails"
                     :checked-rows.sync="checkedRows"
-                    :custom-is-equal="((a, b) => a.id === b.id)"
-                    default-sort="user.first_name">
+                    @details-open="onOpenedDetail"
+                    default-sort="user.first_name"
+                    :custom-is-equal="((a, b) => a.id === b.id)">
 
                     <template scope="props">
                         <b-table-column field="id" label="ID" width="40" sortable numeric>
