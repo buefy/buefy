@@ -1,15 +1,13 @@
-
-.b-upload {
+.upload {
+    input[type=file] {
+        display: none;
+    }
     .upload-draggable {
         display: inline-block;
         cursor: pointer;
-        padding: 5px;
-        @each $name, $pair in $colors {
-            $color: nth($pair, 1);
-            &.is-#{$name} {
-                border: 2px dashed $color;
-            }
-        }
+        padding: 0.25em;
+        border: 1px dashed $grey-light;
+        border-radius: $radius-large;
         &.is-disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -21,17 +19,20 @@
             &:after {
                 @include loader;
                 top: 0;
-                left: calc(50% - 2.5em);
+                left: calc(50% - 1.5em);
                 width: 3em;
                 height: 3em;
                 border-width: 0.25em;
             }
         }
-    }
-    .upload-draggable-hover {
-        @each $name, $pair in $colors {
-            &.is-#{$name} {
-                border-style: solid;
+        &:hover,
+        &.is-hovered {
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    border-color: $color;
+                    background: rgba($color, 0.05);
+                }
             }
         }
     }

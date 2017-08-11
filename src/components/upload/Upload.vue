@@ -1,41 +1,30 @@
 <template>
-    <div class="b-upload control"
-         :class="{'is-clearfix': !hasMessage}">
-
-        <a  v-if="!dragDrop"
-            class="button" 
-            :class="[buttonSize, buttonType, {'is-loading': loading}]"
-            :disabled="disabled"
-            @click="upload">
+    <label class="upload control">
+        <template v-if="!dragDrop">
             <slot></slot>
-        </a>
+        </template>
 
-        <div v-else 
+        <div v-else
             class="upload-draggable"
-            :class="[dragDropType, {
-                    'upload-draggable-hover': dragDropFocus, 
-                    'is-loading': loading, 
-                    'is-disabled': disabled
+            :class="[type, {
+                'is-loading': loading,
+                'is-disabled': disabled,
+                'is-hovered': dragDropFocus
             }]"
-            @click="upload" 
-            @mouseover.prevent="updateDragDropFocus(true)"
-            @mouseout.prevent="updateDragDropFocus(false)"
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
-            @dragenter.prevent="updateDragDropFocus(true)" 
+            @dragenter.prevent="updateDragDropFocus(true)"
             @drop.prevent="onFileChange">
             <slot></slot>
         </div>
 
-        <input ref="inputFile" 
-               type="file"
-               class="is-hidden"
-               :name="name"
-               :required="required"
-               :accept="accept" 
-               :multiple="multiple"
-               @change="onFileChange" />
-    </div>
+        <input ref="input"
+            type="file"
+            v-bind="$attrs"
+            :multiple="multiple"
+            :disabled="disabled"
+            @change="onFileChange">
+    </label>
 </template>
 
 <script>
@@ -47,44 +36,21 @@
         props: {
             value: {
                 type: Array,
-                default: null
-            },
-            buttonSize: {
-                type: String,
-                default: ''
-            },
-            buttonType: {
-                type: String,
-                default: 'is-primary'
-            },
-            accept: {
-                type: String,
-                default: ''
+                default: () => []
             },
             multiple: Boolean,
-            dragDrop: {
-                type: Boolean,
-                default: false
-            },
-            dragDropType: {
+            disabled: Boolean,
+            dragDrop: Boolean,
+            type: {
                 type: String,
                 default: 'is-primary'
             }
         },
         data() {
             return {
-                newValue: this.value,
-                file: this.value,
+                newValue: this.value || [],
                 dragDropFocus: false,
-                _elementRef: 'inputFile'
-            }
-        },
-        computed: {
-            /**
-             * Check if have any message prop from parent if it's a Field.
-             */
-            hasMessage() {
-                return this.$parent.$data._isField && this.$parent.newMessage
+                _elementRef: 'input'
             }
         },
         watch: {
@@ -100,18 +66,8 @@
         },
         methods: {
             /**
-             * Show upload file chooser
-             */
-            upload() {
-                if (!this.disabled && !this.loading) {
-                    this.$refs.inputFile.value = null
-                    this.$refs.inputFile.click()
-                }
-            },
-
-            /**
              * Listen change event on input type 'file',
-             * emit 'input', 'change' event and validate
+             * emit 'input' event and validate
              */
             onFileChange(event) {
                 if (!this.disabled && !this.loading) {
@@ -119,26 +75,30 @@
                         this.updateDragDropFocus(false)
                     }
                     const value = event.target.files || event.dataTransfer.files
-                    const files = []
-                    if (value) {
-                        for (let i = 0; i < value.length; i++) {
-                            files.push(value[i])
-                            // first element in case drag drop mode and single
-                            if (this.dragDrop && !this.multiple) {
-                                break
+                    if (value && value.length) {
+                        if (!this.multiple) {
+                            // only one element in case drag drop mode and isn't multiple
+                            if (this.dragDrop) {
+                                if (value.length === 1) {
+                                    this.newValue = []
+                                } else {
+                                    return false
+                                }
+                            } else {
+                                this.newValue = []
                             }
                         }
+                        for (let i = 0; i < value.length; i++) {
+                            this.newValue.push(value[i])
+                        }
                     }
-                    this.newValue = files
                     this.$emit('input', this.newValue)
-                    this.$emit('change', this.newValue)
                     !this.dragDrop && this.checkHtml5Validity()
                 }
             },
 
             /**
-             * Listen drag-drop and mouse events
-             * to update interval variable aim to animate
+             * Listen drag-drop to update internal variable
              */
             updateDragDropFocus(focus) {
                 if (!this.disabled && !this.loading) {

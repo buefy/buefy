@@ -1,25 +1,49 @@
 # Buefy Changelog
 
+## 0.5.1
+
+* **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
+* #221 Add backend pagination support to table (thanks @cappuc)
+* #214 Add ``active`` prop to tooltip
+* #228 Fix table checked rows not working on mobile
+* Add ``multiple`` support to select
+* Add ``inline`` prop to dropdown, items are shown inline and trigger removed
+
 ## 0.5.0
 
 ### Breaking changes
 
-* **Update Bulma to v0.5.0**, breaking changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+* **Update Bulma to v0.5.1**, changes on Sass variables naming, [see docs](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#050)
+    * Buefy Sass variables are also following the new convention
+* **Removed Menu component**, it was experimental and wasn't good enough, needed too much to work and can easily be replaced with pure HTML
 * Constructor option ``defaultContentElement`` renamed to ``defaultContainerElement``
 * ``b-dropdown-option`` renamed to ``b-dropdown-item``
     * ``subheader`` prop renamed to ``custom``
+* Any attributes on Input, Select and Autocomplete will be added directly to ``<input>`` or ``<select>`` itself instead of the root element
+* ``change`` events for all form controls (Input, Select Autocomplete, Checkbox, RadioGroup, Switch) that returned pure value will now return ``$event`` (and require ``.native`` modifier), use ``input`` instead
+* Checkbox ``custom-value`` prop renamed to ``native-value``
+    * ``checked`` prop removed
+* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
+* Radio and Radio Button ``value`` prop renamed to ``native-value``
+    * Add ``v-model`` support
+    * Radio Buttons have to be wrapped on a field
+* **Removed RadioGroup**, just add the same ``v-model`` to multiple Radios/RadioButtons and set a ``native-value`` [see docs](https://buefy.github.io/#/documentation/radio)
+* Remove switch ``checked`` prop
 
 ### New stuff
 
 * **New component: Upload**, [see docs](https://buefy.github.io/#/documentation/upload) (thanks @jtommy)
 * Field ``position`` prop works for ``grouped`` fields
 * Add ``group-multiline`` prop to field
+* Add ``size`` prop to message
 * #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
 * #201 Add support to array on Field ``message`` prop (thanks @jtommy)
 * #207 Add ``centered`` prop to table column
+* Add ``native-value``, ``true-value`` and ``false-value`` props to switch
 
 ### Bug fixes
 
+* #206 Fix radio and checkbox within ``v-for``
 
 ## 0.4.6
 

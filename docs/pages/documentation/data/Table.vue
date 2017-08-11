@@ -77,7 +77,8 @@
                         :selected.sync="selected"
                         :checked-rows.sync="checkedRows"
                         @details-open="onOpenedDetail"
-                        default-sort="user.first_name">
+                        default-sort="user.first_name"
+                        :custom-is-equal="((a, b) => a.id === b.id)">
 
                         <template scope="props">
                             <b-table-column field="id" label="ID" width="40" sortable numeric>
@@ -130,9 +131,12 @@
                             </article>
                         </template>
 
-                        <div slot="empty" class="has-text-centered">
-                            This table is empty!
-                        </div>
+                        <template slot="empty">
+                            <div class="has-text-centered">
+                                This table is empty!
+                            </div>
+                        </template>
+                        
                     </b-table>
                 </b-tab-item>
 
@@ -264,12 +268,19 @@
                 isPaginated: true,
                 isPaginationSimple: false,
                 perPage: 10,
-                isDetailed: true,
+                isDetailed: false,
                 tableProps: [
                     {
                         name: '<code>data</code>',
                         description: 'Table data',
                         type: 'Array<Object>',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>custom-is-equal</code>',
+                        description: 'Custom is-equal method, works when is checkable',
+                        type: 'Function',
                         values: '—',
                         default: '—'
                     },
@@ -510,10 +521,11 @@
                     :paginated="isPaginated"
                     :per-page="perPage"
                     :pagination-simple="isPaginationSimple"
-                    default-sort="user.first_name"
                     :selected.sync="selected"
                     :hasDetails="hasDetails"
-                    :checked-rows.sync="checkedRows">
+                    :checked-rows.sync="checkedRows"
+                    :custom-is-equal="((a, b) => a.id === b.id)"
+                    default-sort="user.first_name">
 
                     <template scope="props">
                         <b-table-column field="id" label="ID" width="40" sortable numeric>

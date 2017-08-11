@@ -349,6 +349,13 @@
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>inline</code>',
+                        description: 'Dropdown content (items) are shown inline, trigger is removed',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>false</code>'
                     }
                 ],
                 dropdownEvents: [

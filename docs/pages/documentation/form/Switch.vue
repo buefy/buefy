@@ -7,31 +7,55 @@
         <div class="columns">
             <div class="column">
                 <div class="block">
-                    <b-switch>Default</b-switch>
-                    <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
-                    <b-switch disabled>Disabled</b-switch>
-                    <b-switch disabled checked>Disabled Checked</b-switch>
-                </div>
-
-                <h3 class="subtitle">Vertical example</h3>
-                <div class="block">
                     <div class="field">
                         <b-switch>Default</b-switch>
                     </div>
                     <div class="field">
-                        <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
+                        <b-switch v-model="isSwitched">
+                            {{ isSwitched }}
+                        </b-switch>
+                    </div>
+                    <div class="field">
+                        <b-switch v-model="isSwitchedCustom"
+                            true-value="Yes"
+                            false-value="No">
+                            {{ isSwitchedCustom }}
+                        </b-switch>
                     </div>
                     <div class="field">
                         <b-switch disabled>Disabled</b-switch>
                     </div>
-                    <div class="field">
-                        <b-switch disabled checked>Disabled Checked</b-switch>
-                    </div>
                 </div>
             </div>
             <div class="column">
-                <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
-                <pre v-highlight><code class="javascript">{{ code | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+                <pre v-highlight><code class="javascript">{{ code1 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Types</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <b-switch :value="true">Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-info">Info</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-success">Success</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-danger">Danger</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch :value="true" type="is-warning">Warning</b-switch>
+                </div>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -107,12 +131,44 @@
     export default {
         data() {
             return {
-                isSwitched: true,
+                isSwitched: false,
+                isSwitchedCustom: 'Yes',
                 props: [
+                    {
+                        name: '<code>type</code>',
+                        description: 'Type (color) of the switch, optional',
+                        type: 'String',
+                        values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                            <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                            <code>is-warning</code>, <code>is-danger</code>,
+                            and any other colors you've set in the <code>$colors</code> list on Sass`,
+                        default: '—'
+                    },
                     {
                         name: '<code>v-model</code>',
                         description: 'Binding value',
-                        type: 'Boolean',
+                        type: 'Any',
+                        values: '—',
+                        default: '<code>false</code>'
+                    },
+                    {
+                        name: '<code>native-value</code>',
+                        description: 'Same as native <code>value</code>',
+                        type: 'Any',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>true-value</code>',
+                        description: `Overrides the returned value when it's checked`,
+                        type: 'Any',
+                        values: '—',
+                        default: '<code>true</code>'
+                    },
+                    {
+                        name: '<code>false-value</code>',
+                        description: `Overrides the returned value when it's not checked`,
+                        type: 'Any',
                         values: '—',
                         default: '<code>false</code>'
                     },
@@ -124,13 +180,6 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>checked</code>',
-                        description: 'Same as native <code>checked</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
                         name: '<code>name</code>',
                         description: 'Same as native <code>name</code>',
                         type: 'String',
@@ -139,7 +188,7 @@
                     },
                     {
                         name: '<code>size</code>',
-                        description: 'Optional, size  of the control',
+                        description: 'Size  of the control, optional',
                         type: 'String',
                         values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                         default: '—'
@@ -147,39 +196,41 @@
                 ],
                 events: [
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when the value of switch changes',
-                        parameters: '<code>value: Boolean</code>, <code>event: $event</code>'
+                        name: '<code>input</code>',
+                        description: 'Triggers when the value of the switch is changed',
+                        parameters: '<code>value: Boolean</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
+                        parameters: '<code>event: $event</code>'
                     }
                 ],
-                template: `
-                <div class="block">
+                template1: `
+                <div class="field">
                     <b-switch>Default</b-switch>
-                    <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
-                    <b-switch disabled>Disabled</b-switch>
-                    <b-switch disabled checked>Disabled Checked</b-switch>
                 </div>
-
-                <h3 class="subtitle">Vertical example</h3>
-                <div class="block">
-                    <div class="field">
-                        <b-switch>Default</b-switch>
-                    </div>
-                    <div class="field">
-                        <b-switch v-model="isSwitched">{{ isSwitched }}</b-switch>
-                    </div>
-                    <div class="field">
-                        <b-switch disabled>Disabled</b-switch>
-                    </div>
-                    <div class="field">
-                        <b-switch disabled checked>Disabled Checked</b-switch>
-                    </div>
+                <div class="field">
+                    <b-switch v-model="isSwitched">
+                        {{ isSwitched }}
+                    </b-switch>
+                </div>
+                <div class="field">
+                    <b-switch v-model="isSwitchedCustom"
+                        true-value="Yes"
+                        false-value="No">
+                        {{ isSwitchedCustom }}
+                    </b-switch>
+                </div>
+                <div class="field">
+                    <b-switch disabled>Disabled</b-switch>
                 </div>`,
-                code: `
+                code1: `
                 export default {
                     data() {
                         return {
-                            isSwitched: true
+                            isSwitched: false,
+                            isSwitchedCustom: 'Yes'
                         }
                     }
                 }`,
@@ -195,6 +246,22 @@
                 </div>
                 <div class="field">
                     <b-switch size="is-large">Large</b-switch>
+                </div>`,
+                template3: `
+                <div class="field">
+                    <b-switch>Default</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-info">Info</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-success">Success</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-danger">Danger</b-switch>
+                </div>
+                <div class="field">
+                    <b-switch type="is-warning">Warning</b-switch>
                 </div>`
             }
         }

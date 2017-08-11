@@ -195,14 +195,14 @@
                     {
                         name: '<code>v-model</code>',
                         description: 'Bindig value',
-                        type: 'String',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
                     {
                         name: '<code>data</code>',
                         description: 'Options / suggestions',
-                        type: 'Array<String>, Array<Object>',
+                        type: 'Array<String>, Array<Number>, Array<Object>',
                         values: '—',
                         default: '—'
                     },
@@ -270,79 +270,16 @@
                         default: '<code>mdi</code>'
                     },
                     {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>readonly</code>',
-                        description: 'Same as native <code>readonly</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>min</code>',
-                        description: 'Same as native <code>min</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>max</code>',
-                        description: 'Same as native <code>max</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>step</code>',
-                        description: 'Same as native <code>step</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>minlength</code>',
-                        description: 'Same as native <code>minlength</code>',
-                        type: 'Number',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
                         name: '<code>maxlength</code>',
-                        description: 'Same as native <code>maxlength</code>, also adds character counter',
-                        type: 'Number',
+                        description: 'Same as native <code>maxlength</code>, plus character counter',
+                        type: 'String, Number',
                         values: '—',
                         default: '—'
                     },
                     {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>pattern</code>',
-                        description: 'Same as native <code>pattern</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>placeholder</code>',
-                        description: 'Same as native <code>placeholder</code>',
-                        type: 'String',
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
                         values: '—',
                         default: '—'
                     }
@@ -356,22 +293,27 @@
                 events: [
                     {
                         name: '<code>input</code>',
-                        description: 'Triggers when input text is changed',
-                        parameters: '<code>value: String</code>'
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: String|Number</code>'
                     },
                     {
-                        name: '<code>select</code>',
+                        name: '<code>selected</code>',
                         description: 'Triggers when an option is selected or unset',
-                        parameters: '<code>option: String|Object</code>'
+                        parameters: '<code>option: String|Number|Object</code>'
                     },
                     {
                         name: '<code>focus</code>',
-                        description: 'Triggers when input is focused',
+                        description: 'Triggers when input has received focus',
                         parameters: '<code>event: $event</code>'
                     },
                     {
                         name: '<code>blur</code>',
-                        description: 'Triggers when input loses focus',
+                        description: 'Triggers when input has lost focus',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any native event, e.g. <code>click.native</code>',
                         parameters: '<code>event: $event</code>'
                     }
                 ],

@@ -1,13 +1,31 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Notification</h1>
-        <h2 class="subtitle">Bold notification blocks, to alert your users of something</h2>
+        <h2 class="subtitle">Bold notification blocks to alert your users of something</h2>
         <hr>
 
         <div class="columns">
             <div class="column">
-                <button class="button block" @click="isActive = true">Show first</button>
+                <button class="button block" @click="isActive = !isActive">Toggle</button>
                 <b-notification :active.sync="isActive">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-notification>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template1 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Types</h2>
+        <div class="columns">
+            <div class="column">
+                <b-notification>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-notification>
+
+                <b-notification type="is-info">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
@@ -15,10 +33,24 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
-                <b-notification type="is-danger">
+                <b-notification type="is-warning">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
+                <b-notification type="is-danger">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-notification>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Icons</h2>
+        <div class="columns">
+            <div class="column">
                 <b-notification type="is-info" has-icon>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
@@ -36,7 +68,7 @@
                 </b-notification>
             </div>
             <div class="column">
-                <pre class="block" v-highlight><code class="html">{{ template | pre }}</code></pre>
+                <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
             </div>
         </div>
 
@@ -130,9 +162,18 @@
                         parameters: '—'
                     }
                 ],
-                template: `
-                <button class="button block" @click="isActive = true">Show first</button>
+                template1: `
+                <button class="button block" @click="isActive = !isActive">Toggle</button>
                 <b-notification :active.sync="isActive">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-notification>
+                `,
+                template2: `
+                <b-notification>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-notification>
+
+                <b-notification type="is-info">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
@@ -140,10 +181,15 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
-                <b-notification type="is-danger">
+                <b-notification type="is-warning">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
 
+                <b-notification type="is-danger">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+                </b-notification>
+                `,
+                template3: `
                 <b-notification type="is-info" has-icon>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
                 </b-notification>
@@ -158,7 +204,8 @@
 
                 <b-notification type="is-danger" has-icon>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-                </b-notification>`
+                </b-notification>
+                `
             }
         }
     }

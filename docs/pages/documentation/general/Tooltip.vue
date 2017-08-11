@@ -89,6 +89,34 @@
         </div>
 
         <hr>
+        
+        <h3 class="title is-spaced">Programmatically Show/Hide</h3>
+        <div class="columns">
+            <div class="column">
+
+                <div class="block">
+                    <button class="button is-primary" @click="active = !active"> 
+                        {{ active ? 'Hide' : 'Show'}} 
+                    </button>
+                </div>
+
+                <br>
+
+                <b-tooltip label="I'm never closing" always :active="active">
+                    <button class="button"> Always </button>
+                </b-tooltip>
+
+                <b-tooltip label="Tooltip right" position="is-right" :active="active">
+                    <button class="button is-dark"> Right </button>
+                </b-tooltip>
+
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template4 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
 
         <h2 class="title is-spaced">API</h2>
         <b-tabs>
@@ -121,6 +149,7 @@
     export default {
         data() {
             return {
+                active: true,
                 props: [
                     {
                         name: '<code>type</code>',
@@ -131,6 +160,13 @@
                             <code>is-warning</code>, <code>is-danger</code>,
                             and any other colors you've set in the <code>$colors</code> list on Sass`,
                         default: '<code>is-primary</code>'
+                    },
+                    {
+                        name: '<code>active</code>',
+                        description: 'Whether tooltip is active or not',
+                        type: 'Boolean',
+                        values: '—',
+                        default: '<code>true</code>'
                     },
                     {
                         name: '<code>label</code>',
@@ -244,11 +280,27 @@
                 </b-tooltip>
 
                 <b-tooltip
-                    label="Tooltip large multilined, because it's really long to be on a medium size. Did I tell you it's really long? Yes, it is — I asure you!"
+                    label="Tooltip large multilined, because it's really long to be on a medium size. Did I tell you it's really long? Yes, it is — I assure you!"
                     position="is-bottom"
                     multilined
                     size="is-large">
                     <button class="button is-dark">Multiline (large)</button>
+                </b-tooltip>`,
+                template4: `
+                <div class="block">
+                    <button class="button is-primary" @click="active = !active"> 
+                        {{ active ? 'Hide' : 'Show'}} 
+                    </button>
+                </div>
+
+                <br>
+
+                <b-tooltip label="I'm never closing" always :active="active">
+                    <button class="button"> Always </button>
+                </b-tooltip>
+
+                <b-tooltip label="Tooltip right" position="is-right" :active="active">
+                    <button class="button is-dark"> Right </button>
                 </b-tooltip>`
             }
         }

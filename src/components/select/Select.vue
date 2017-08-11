@@ -5,17 +5,17 @@
             :class="[size, statusType, {
                 'is-fullwidth': expanded,
                 'is-loading': loading,
+                'is-multiple': multiple,
                 'is-empty': selected === null
             }]">
 
             <select v-model="selected"
                 ref="select"
-                :disabled="disabled"
-                :readonly="readonly"
-                :name="name"
-                :required="required"
-                @focus="$emit('focus', $event)"
-                @blur="blur">
+                :multiple="multiple"
+                :size="nativeSize"
+                v-bind="$attrs"
+                @blur="checkHtml5Validity() && $emit('blur', $event)"
+                @focus="$emit('focus', $event)">
 
                 <option
                     v-if="placeholder"
@@ -44,12 +44,16 @@
 
     export default {
         name: 'bSelect',
+        inheritAttrs: false,
         mixins: [FormElementMixin],
         props: {
             value: {
                 type: [String, Number, Boolean, Object, Array, Symbol, Function],
                 default: null
-            }
+            },
+            placeholder: String,
+            multiple: Boolean,
+            nativeSize: [String, Number]
         },
         data() {
             return {
@@ -75,18 +79,7 @@
              */
             selected(value) {
                 this.$emit('input', value)
-                this.$emit('change', value)
                 !this.isValid && this.checkHtml5Validity()
-            }
-        },
-        methods: {
-            /**
-             * Blur listener.
-             * Fire the HTML5 validation.
-             */
-            blur(event) {
-                this.$emit('blur', event)
-                this.checkHtml5Validity()
             }
         }
     }

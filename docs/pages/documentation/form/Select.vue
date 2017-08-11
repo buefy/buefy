@@ -99,6 +99,33 @@
         </div>
 
         <hr>
+        <h2 class="title is-spaced">Multiple</h2>
+        <div class="tags has-addons">
+            <span class="tag is-success">New!</span>
+            <span class="tag is-info">0.5.1</span>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <b-field>
+                    <b-select multiple native-size="8">
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
+                        <option value="vane">Vane</option>
+                        <option value="billy">Billy</option>
+                        <option value="jack">Jack</option>
+                        <option value="heisenberg">Heisenberg</option>
+                        <option value="jesse">Jesse</option>
+                        <option value="saul">Saul</option>
+                        <option value="mike">Mike</option>
+                    </b-select>
+                </b-field>
+            </div>
+            <div class="column">
+                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
         <h2 class="title">Icons</h2>
         <div class="columns">
             <div class="column">
@@ -137,39 +164,6 @@
                         <option value="2">Option 2</option>
                     </b-select>
                 </b-field>
-            </div>
-            <div class="column">
-                <pre class="block" v-highlight><code class="html">{{ template2 | pre }}</code></pre>
-            </div>
-        </div>
-
-        <hr>
-        <h2 class="title is-spaced">Selection</h2>
-        <div class="columns">
-            <div class="column">
-                <b-field>
-                    <b-select
-                        v-model="select"
-                        placeholder="Select...">
-                        <option value="flint">Flint</option>
-                        <option value="silver">Silver</option>
-                        <option value="vane">Vane</option>
-                        <option value="billy">Billy</option>
-                        <option value="jack">Jack</option>
-                        <option value="heisenberg">Heisenberg</option>
-                        <option value="jesse">Jesse</option>
-                        <option value="saul">Saul</option>
-                        <option value="mike">Mike</option>
-                    </b-select>
-                </b-field>
-
-                <button class="button" @click="select = ''">
-                    Clear
-                </button>
-
-                <button class="button" @click="select = 'flint'">
-                    Set Flint
-                </button>
             </div>
             <div class="column">
                 <pre class="block" v-highlight><code class="html">{{ template3 | pre }}</code></pre>
@@ -292,7 +286,6 @@
         data() {
             return {
                 options: options,
-                select: 'vane',
                 props: [
                     {
                         name: '<code>v-model</code>',
@@ -314,27 +307,6 @@
                         type: 'String',
                         values: '—',
                         default: '—'
-                    },
-                    {
-                        name: '<code>name</code>',
-                        description: 'Same as native <code>name</code>',
-                        type: 'String',
-                        values: '—',
-                        default: '—'
-                    },
-                    {
-                        name: '<code>disabled</code>',
-                        description: 'Same as native <code>disabled</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>required</code>',
-                        description: 'Same as native <code>required</code>',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
                     },
                     {
                         name: '<code>loading</code>',
@@ -363,22 +335,41 @@
                         type: 'String',
                         values: '<code>mdi</code>, <code>fa</code>',
                         default: '<code>mdi</code>'
+                    },
+                    {
+                        name: '<code>native-size</code>',
+                        description: 'Same as native <code>size</code>',
+                        type: 'Number',
+                        values: '—',
+                        default: '<code>4</code>'
+                    },
+                    {
+                        name: 'Any native attribute',
+                        description: '—',
+                        type: '—',
+                        values: '—',
+                        default: '—'
                     }
                 ],
                 events: [
                     {
-                        name: '<code>change</code>',
-                        description: 'Triggers when the selection is changed',
-                        parameters: '<code>value: String</code>'
+                        name: '<code>input</code>',
+                        description: 'Triggers when value is changed',
+                        parameters: '<code>value: Any</code>'
                     },
                     {
                         name: '<code>focus</code>',
-                        description: 'Triggers when the select is focused',
+                        description: 'Triggers when input has received focus',
                         parameters: '<code>event: $event</code>'
                     },
                     {
                         name: '<code>blur</code>',
-                        description: 'Triggers when the select has lost focus',
+                        description: 'Triggers when input has lost focus',
+                        parameters: '<code>event: $event</code>'
+                    },
+                    {
+                        name: '<code>[any].native</code>',
+                        description: 'Listen to any native event, e.g. <code>click.native</code>',
                         parameters: '<code>event: $event</code>'
                     }
                 ],
@@ -486,6 +477,20 @@
                     }
                 }`,
                 template2: `
+                <b-field>
+                    <b-select multiple native-size="8">
+                        <option value="flint">Flint</option>
+                        <option value="silver">Silver</option>
+                        <option value="vane">Vane</option>
+                        <option value="billy">Billy</option>
+                        <option value="jack">Jack</option>
+                        <option value="heisenberg">Heisenberg</option>
+                        <option value="jesse">Jesse</option>
+                        <option value="saul">Saul</option>
+                        <option value="mike">Mike</option>
+                    </b-select>
+                </b-field>`,
+                template3: `
                 <h3 class="subtitle">With Material Design Icons</h3>
                 <b-field>
                     <b-select placeholder="Country" icon="public">
@@ -521,30 +526,6 @@
                         <option value="2">Option 2</option>
                     </b-select>
                 </b-field>`,
-                template3: `
-                <b-field>
-                    <b-select
-                        v-model="select"
-                        placeholder="Select...">
-                        <option value="flint">Flint</option>
-                        <option value="silver">Silver</option>
-                        <option value="vane">Vane</option>
-                        <option value="billy">Billy</option>
-                        <option value="jack">Jack</option>
-                        <option value="heisenberg">Heisenberg</option>
-                        <option value="jesse">Jesse</option>
-                        <option value="saul">Saul</option>
-                        <option value="mike">Mike</option>
-                    </b-select>
-                </b-field>
-
-                <button class="button" @click="select = ''">
-                    Clear
-                </button>
-
-                <button class="button" @click="select = 'flint'">
-                    Set Flint
-                </button>`,
                 template4: `
                 <b-field>
                     <b-select

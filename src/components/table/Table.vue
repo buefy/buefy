@@ -39,7 +39,7 @@
                     <tr>
                         <th v-if="detailed" width="40px"></th>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isAllChecked" @change="checkAll" nosync></b-checkbox>
+                            <b-checkbox :value="isAllChecked" @change.native="checkAll"></b-checkbox>
                         </th>
                         <th v-for="(column, index) in columns"
                             v-if="column.visible"
@@ -79,7 +79,7 @@
                             </td>
 
                             <td class="checkbox-cell" v-if="checkable">
-                                <b-checkbox :value="isRowChecked(row)" @change="checkRow(row)" nosync></b-checkbox>
+                                <b-checkbox :value="isRowChecked(row)" @change.native="checkRow(row)"></b-checkbox>
                             </td>
 
                             <slot :row="row" :index="index"></slot>
@@ -116,7 +116,7 @@
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
-                        :total="newData.length"
+                        :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
                         :current="currentPage"
@@ -129,7 +129,7 @@
 </template>
 
 <script>
-    import { getValueByPath } from '../../utils/helpers'
+    import { getValueByPath, indexOf } from '../../utils/helpers'
     import Pagination from '../pagination'
     import Icon from '../icon'
     import { Checkbox } from '../checkbox'
@@ -153,6 +153,7 @@
             detailed: Boolean,
             checkable: Boolean,
             selected: Object,
+            customIsEqual: Function,
             checkedRows: {
                 type: Array,
                 default: () => []
@@ -172,6 +173,11 @@
             rowClass: {
                 type: Function,
                 default: () => ''
+            },
+            backendPagination: Boolean,
+            total: {
+                type: [Number, String],
+                default: 0
             }
         },
         data() {
@@ -179,6 +185,7 @@
                 columns: [],
                 visibleDetailRows: [],
                 newData: this.data,
+                newDataTotal: this.backendPagination ? this.total : this.data.length,
                 newCheckedRows: [...this.checkedRows],
                 currentSortColumn: {},
                 isAsc: true,
@@ -192,12 +199,26 @@
             /**
              * When data prop change, update internal value and sort again,
              * do not sort however if it's backend-sort.
+             * If it isn't backend-paginated set new total
              */
             data(value) {
                 this.newData = value
                 if (!this.backendSorting) {
                     this.sort(this.currentSortColumn, true)
                 }
+                if (!this.backendPagination) {
+                    this.newDataTotal = value.length
+                }
+            },
+
+            /**
+             * When Pagination total change, update internal total
+             * only if it's backend-paginated.
+             */
+            total(newTotal) {
+                if (!this.backendPagination) return
+
+                this.newDataTotal = newTotal
             },
 
             /**
@@ -258,7 +279,7 @@
              */
             isAllChecked() {
                 const isAllChecked = this.visibleData.some(currentVisibleRow => {
-                    return this.checkedRows.indexOf(currentVisibleRow) < 0
+                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsEqual) < 0
                 })
                 return !isAllChecked
             },
@@ -343,14 +364,14 @@
              * Check if the row is checked (is added to the array).
              */
             isRowChecked(row) {
-                return this.checkedRows.indexOf(row) >= 0
+                return indexOf(this.checkedRows, row, this.customIsEqual) >= 0
             },
 
             /**
              * Remove a checked row from the array.
              */
             removeCheckedRow(row) {
-                const index = this.newCheckedRows.indexOf(row)
+                const index = indexOf(this.newCheckedRows, row, this.customIsEqual)
                 if (index >= 0) {
                     this.newCheckedRows.splice(index, 1)
                 }
@@ -417,7 +438,7 @@
                 this.$emit('page-change', this.currentPage)
             },
 
-             /**
+            /**
              * Toggle to show/hide details slot
              */
             toggleDetails(index) {
@@ -431,6 +452,7 @@
                 this.visibleDetailRows.push(index)
                 this.$emit('details-open', index)
             },
+
             isVisibleDetailRow(index) {
                 return this.visibleDetailRows.indexOf(index) >= 0
             },

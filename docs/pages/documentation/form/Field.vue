@@ -10,6 +10,8 @@
                 <li>Input</li>
                 <li>Select</li>
                 <li>Autocomplete</li>
+                <li>Upload</li>
+                <li>Radio Button</li>
                 <li><code>.control</code> elements (html class)</li>
             </ul>
         </div>

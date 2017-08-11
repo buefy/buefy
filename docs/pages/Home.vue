@@ -2,9 +2,8 @@
     <section class="home">
         <div class="hero is-fullheight is-primary">
             <div class="hero-head">
-                <app-header home></app-header>
+                <app-header light></app-header>
             </div>
-
             <div class="hero-body">
                 <div class="container has-text-centered">
                     <div class="logo-rounded home-hero">
@@ -21,7 +20,7 @@
                             src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=star&count=true&size=large"
                             frameborder="0"
                             scrolling="0"
-                            width="140px"
+                            width="160px"
                             height="30px">
                         </iframe>
 

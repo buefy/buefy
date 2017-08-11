@@ -6,21 +6,11 @@
             :loading="loading"
             :icon="icon"
             :icon-pack="iconPack"
-            :name="name"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :readonly="readonly"
             :maxlength="maxlength"
-            :minlength="minlength"
-            :required="required"
-            :min="min"
-            :max="max"
-            :step="step"
-            :pattern="pattern"
             autocomplete="off"
-            @change="$emit('change', newValue)"
+            v-bind="$attrs"
             @focus="focused"
-            @blur="blur"
+            @blur="$emit('blur', $event)"
             @keyup.native.esc.prevent="isActive = false"
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
@@ -28,23 +18,26 @@
         </b-input>
 
         <transition name="fade">
-            <span class="box"
+            <div class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && visibleData.length > 0"
                 ref="dropdown">
-                <ul>
-                    <li v-for="(option, index) in visibleData"
+                <div class="dropdown-content">
+                    <a v-for="(option, index) in visibleData"
                         :key="index"
-                        class="option"
+                        class="dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
                         <slot v-if="hasCustomTemplate" :option="option" :index="index"></slot>
                         <span v-else v-html="getValue(option, true)"></span>
-                    </li>
-                    <li v-if="data.length > maxResults" class="option is-disabled">&hellip;</li>
-                </ul>
-            </span>
+                    </a>
+                    <div v-if="data.length > maxResults"
+                        class="dropdown-item is-disabled">
+                        &hellip;
+                    </div>
+                </div>
+            </div>
         </transition>
     </div>
 </template>
@@ -56,12 +49,13 @@
 
     export default {
         name: 'bAutocomplete',
+        inheritAttrs: false,
         mixins: [FormElementMixin],
         components: {
             [Input.name]: Input
         },
         props: {
-            value: String,
+            value: [Number, String],
             data: Array,
             field: {
                 type: String,
@@ -262,20 +256,11 @@
 
             /**
              * Focus listener.
-             * If value is the same as selected, select all from input.
+             * If value is the same as selected, select all text.
              */
             focused(event) {
+                if (this.getValue(this.selected) === this.newValue) this.focus()
                 this.$emit('focus', event)
-                if (this.getValue(this.selected) === this.newValue) this.$refs.input.focus()
-            },
-
-            /**
-             * Blur listener.
-             * Emit events and fire the HTML5 validation.
-             */
-            blur(event) {
-                this.$emit('blur', event)
-                this.$refs.input.checkHtml5Validity()
             }
         },
         created() {

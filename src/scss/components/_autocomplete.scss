@@ -1,28 +1,21 @@
 .autocomplete {
     position: relative;
-    .box {
-        position: absolute;
-        top: 100%;
-        padding: 0.5em 0;
-        z-index: 10;
-        white-space: nowrap;
+    .dropdown-menu {
+        display: block;
         min-width: 100%;
-        .option {
-            @include unselectable;
-            padding: 0.25rem 0.75rem;
-            cursor: pointer;
-            &:not(.is-disabled):hover,
-            &.is-hovered {
-                background: $background;
-            }
-            &.is-disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-        }
         &.is-opened-top {
             top: auto;
             bottom: 100%;
+        }
+    }
+    .dropdown-item {
+        &.is-hovered {
+            background: $dropdown-item-hover-background-color;
+            color: $dropdown-item-hover-color;
+        }
+        &.is-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     }
     &.is-small {
