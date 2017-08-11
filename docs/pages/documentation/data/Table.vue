@@ -280,7 +280,7 @@
                     {
                         name: '<code>custom-is-equal</code>',
                         description: 'Custom is-equal method, works when is checkable',
-                        type: 'Function',
+                        type: 'Function (a: Object, b: Object)',
                         values: '—',
                         default: '—'
                     },
