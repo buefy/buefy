@@ -153,7 +153,7 @@
             detailed: Boolean,
             checkable: Boolean,
             selected: Object,
-            customIsEqual: Function,
+            customIsChecked: Function,
             checkedRows: {
                 type: Array,
                 default: () => []
@@ -279,7 +279,7 @@
              */
             isAllChecked() {
                 const isAllChecked = this.visibleData.some(currentVisibleRow => {
-                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsEqual) < 0
+                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
             },
@@ -364,14 +364,14 @@
              * Check if the row is checked (is added to the array).
              */
             isRowChecked(row) {
-                return indexOf(this.checkedRows, row, this.customIsEqual) >= 0
+                return indexOf(this.checkedRows, row, this.customIsChecked) >= 0
             },
 
             /**
              * Remove a checked row from the array.
              */
             removeCheckedRow(row) {
-                const index = indexOf(this.newCheckedRows, row, this.customIsEqual)
+                const index = indexOf(this.newCheckedRows, row, this.customIsChecked)
                 if (index >= 0) {
                     this.newCheckedRows.splice(index, 1)
                 }

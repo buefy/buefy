@@ -78,7 +78,7 @@
                         :checked-rows.sync="checkedRows"
                         @details-open="onOpenedDetail"
                         default-sort="user.first_name"
-                        :custom-is-equal="((a, b) => a.id === b.id)">
+                        :custom-is-checked="((a, b) => a.id === b.id)">
 
                         <template scope="props">
                             <b-table-column field="id" label="ID" width="40" sortable numeric>
@@ -278,8 +278,8 @@
                         default: '—'
                     },
                     {
-                        name: '<code>custom-is-equal</code>',
-                        description: 'Custom is-equal method, works when is checkable',
+                        name: '<code>custom-is-checked</code>',
+                        description: 'Custom isChecked method, works when is <code>checkable</code>',
                         type: 'Function (a: Object, b: Object)',
                         values: '—',
                         default: '—'
@@ -526,7 +526,7 @@
                     :checked-rows.sync="checkedRows"
                     @details-open="onOpenedDetail"
                     default-sort="user.first_name"
-                    :custom-is-equal="((a, b) => a.id === b.id)">
+                    :custom-is-checked="((a, b) => a.id === b.id)">
 
                     <template scope="props">
                         <b-table-column field="id" label="ID" width="40" sortable numeric>
