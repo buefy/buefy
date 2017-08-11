@@ -9,5 +9,6 @@
         <router-link to="switch" class="navbar-item is-tab">Switch</router-link>
         <router-link to="upload" class="navbar-item is-tab">Upload</router-link>
         <router-link to="datepicker" class="navbar-item is-tab">Datepicker</router-link>
+        <router-link to="tag-input" class="navbar-item is-tab">Tag input</router-link>
     </div>
 </template>

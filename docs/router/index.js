@@ -39,6 +39,7 @@ const Radio = () => import('../pages/documentation/form/Radio')
 const Switch = () => import('../pages/documentation/form/Switch')
 const Upload = () => import('../pages/documentation/form/Upload')
 const Datepicker = () => import('../pages/documentation/form/Datepicker')
+const TagInput = () => import('../pages/documentation/form/TagInput')
 
 import DataManipulation from '../pages/documentation/data/_Data'
 const Table = () => import('../pages/documentation/data/Table')
@@ -221,6 +222,13 @@ export default new Router({
                 {
                     path: 'datepicker',
                     component: Datepicker,
+                    meta: {
+                        category: FormElements
+                    }
+                },
+                {
+                    path: 'tag-input',
+                    component: TagInput,
                     meta: {
                         category: FormElements
                     }
