@@ -16,7 +16,7 @@
                 v-bind="$attrs"
                 @keydown.native="preventTyping"
                 @focus="$emit('focus', $event)"
-                @blur="checkHtml5Validity() && $emit('blur', $event)">
+                @blur="$emit('blur', $event) && checkHtml5Validity()">
             </b-input>
 
             <b-dropdown-item custom>
@@ -103,7 +103,7 @@
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
             @focus="$emit('focus', $event)"
-            @blur="checkHtml5Validity() && $emit('blur', $event)">
+            @blur="$emit('blur', $event) && checkHtml5Validity()">
         </b-input>
     </div>
 </template>

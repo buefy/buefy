@@ -14,7 +14,7 @@
                 :multiple="multiple"
                 :size="nativeSize"
                 v-bind="$attrs"
-                @blur="checkHtml5Validity() && $emit('blur', $event)"
+                @blur="$emit('blur', $event) && checkHtml5Validity()"
                 @focus="$emit('focus', $event)">
 
                 <option
