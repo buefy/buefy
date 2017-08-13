@@ -86,7 +86,6 @@
                         </tr>
 
                         <tr v-if="detailed && isVisibleDetailRow(row)"
-                            :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
