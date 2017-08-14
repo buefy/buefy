@@ -136,6 +136,12 @@
                             </div>
                         </template>
 
+                        <template slot="level-left">
+                            <div class="level-item" scope="props">
+                                <button class="button" v-if="checkedRows.length > 0">Export {{ checkedRows.length }} items</button>
+                            </div>
+                        </template>
+
                     </b-table>
                 </b-tab-item>
 
@@ -395,6 +401,10 @@
                     {
                         name: 'detail',
                         props: '<code>row: Object</code>, <code>index: Number</code>'
+                    },
+                    {
+                        name: 'level-left',
+                        props: '<code>checkedRows: Array</code>'
                     }
                 ],
                 tableEvents: [
