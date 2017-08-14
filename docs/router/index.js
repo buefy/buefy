@@ -20,6 +20,7 @@ const Modal = () => import('../pages/documentation/general/Modal')
 const Panel = () => import('../pages/documentation/general/Panel')
 const Tabs = () => import('../pages/documentation/general/Tabs')
 const Tooltip = () => import('../pages/documentation/general/Tooltip')
+const Tag = () => import('../pages/documentation/general/Tag')
 
 import Notices from '../pages/documentation/notices/_Notices'
 const Dialog = () => import('../pages/documentation/notices/Dialog')
@@ -123,6 +124,13 @@ export default new Router({
                 {
                     path: 'panel',
                     component: Panel,
+                    meta: {
+                        category: General
+                    }
+                },
+                {
+                    path: 'tag',
+                    component: Tag,
                     meta: {
                         category: General
                     }

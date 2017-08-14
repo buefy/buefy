@@ -3,6 +3,7 @@
 ## 0.5.1
 
 * **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
+* **New component: Tag**, [see docs](https://buefy.github.io/#/documentation/tag)
 * #195 Add ``custom-key`` prop to table column, add it when you want a column without label
 * #221 Add backend pagination support to table (thanks @cappuc)
 * #214 Add ``active`` prop to tooltip
