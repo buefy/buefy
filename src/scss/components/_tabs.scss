@@ -9,4 +9,7 @@
             flex-basis: 100%;
         }
     }
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
 }
