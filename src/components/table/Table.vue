@@ -48,7 +48,10 @@
                             :style="{ width: column.width + 'px' }"
                             @click.stop="sort(column)">
                             <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
-                                {{ column.label }}
+
+                                <slot v-if="$scopedSlots.header" name="header" :column="column" :index="index"></slot>
+                                <template v-else>{{ column.label }}</template>
+
                                 <b-icon
                                     icon="arrow_upward"
                                     both
@@ -355,7 +358,7 @@
 
             /**
              * Sort the column.
-             * Toggle current direction on column if it's really a column click
+             * Toggle current direction on column if it's sortable
              * and not just updating the prop.
              */
             sort(column, updatingData = false) {
