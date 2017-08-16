@@ -26,7 +26,7 @@
 </script>
 
 <style lang="scss">
-    @import "./assets/main.scss";
+    @import "./assets/scss/main.scss";
 
     // Helpers
 
@@ -36,13 +36,19 @@
         color: rgba(0, 0, 0, 0.7);
         padding: 1.5rem;
         position: relative;
+        &:not(:first-child) {
+            margin-top: 2rem;
+        }
+        &:not(:last-child) {
+            margin-bottom: 1.5rem
+        }
         &:before {
             background: $warning;
             border-radius: $radius $radius 0 0;
             bottom: 100%;
             content: "Example";
             display: inline-block;
-            font-size: 8px;
+            font-size: 7px;
             font-weight: bold;
             left: -1px;
             letter-spacing: 1px;
@@ -50,6 +56,22 @@
             position: absolute;
             text-transform: uppercase;
             vertical-align: top;
+        }
+        + .example-code {
+            border: 1px solid $warning;
+            border-top: none;
+            margin-top: -1.5rem;
+            &:not(:last-child) {
+                margin-bottom: 1.5rem
+            }
+            + .example-code {
+                border: 1px solid $warning;
+                border-top: none;
+                margin-top: -1.5rem;
+                &:not(:last-child) {
+                    margin-bottom: 1.5rem
+                }
+            }
         }
         &.is-flex {
             align-items: center;
@@ -113,6 +135,46 @@
             font-size: 1.1em;
             color: lighten($primary, 20%);
             background: darken($primary, 20%);
+        }
+    }
+
+    // Temporary fix for https://github.com/jgthms/bulma/issues/837
+    .hero.is-primary .hero-head .navbar {
+        background: $primary;
+        color: $primary-invert;
+        box-shadow: 0 1px 0 rgba($primary-invert, 0.2);
+        .has-dropdown .navbar-link:after {
+            border-color: $primary-invert;
+        }
+        a.navbar-item {
+            background: transparent;
+        }
+        a.navbar-link {
+            background: transparent;
+            color: rgba($primary-invert, 0.7);
+            &.is-active,
+            &:hover {
+                color: $primary-invert;
+            }
+        }
+        .navbar-burger {
+            background: transparent;
+            span {
+                background: $primary-invert;
+            }
+            &:hover {
+                background: darken($primary, 2.5%);
+            }
+        }
+        @include touch {
+            .has-dropdown .navbar-item {
+                &:not(.is-active) {
+                    color: rgba($primary-invert, 0.7) !important;
+                }
+                &:hover {
+                    color: $primary-invert !important;
+                }
+            }
         }
     }
 </style>
