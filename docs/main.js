@@ -9,6 +9,8 @@ import VueAnalytics from 'vue-analytics'
 import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
 
+import ApiView from './components/ApiView'
+
 Vue.config.productionTip = false
 
 global.Promise = Bluebird
@@ -28,6 +30,7 @@ Vue.use(VueAnalytics, {
     id: 'UA-75199408-3',
     router
 })
+Vue.component('ApiView', ApiView)
 
 Vue.directive('highlight', {
     deep: true,

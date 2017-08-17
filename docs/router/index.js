@@ -7,12 +7,12 @@ const Home = () => import('../pages/Home')
 
 const Documentation = () => import('../pages/documentation/Documentation')
 
-import Installation from '../pages/documentation/installation/_Installation'
+import Installation from '../pages/documentation/installation/InstallationNav'
 const Start = () => import('../pages/documentation/installation/Start')
 const Customization = () => import('../pages/documentation/installation/Customization')
 const ConstructorOptions = () => import('../pages/documentation/installation/ConstructorOptions')
 
-import General from '../pages/documentation/general/_General'
+import General from '../pages/documentation/general/GeneralNav'
 const Layout = () => import('../pages/documentation/general/Layout')
 const Icon = () => import('../pages/documentation/general/Icon')
 const Dropdown = () => import('../pages/documentation/general/Dropdown')
@@ -22,7 +22,7 @@ const Tabs = () => import('../pages/documentation/general/Tabs')
 const Tooltip = () => import('../pages/documentation/general/Tooltip')
 const Tag = () => import('../pages/documentation/general/Tag')
 
-import Notices from '../pages/documentation/notices/_Notices'
+import Notices from '../pages/documentation/notices/NoticesNav'
 const Dialog = () => import('../pages/documentation/notices/Dialog')
 const Toast = () => import('../pages/documentation/notices/Toast')
 const Snackbar = () => import('../pages/documentation/notices/Snackbar')
@@ -30,7 +30,7 @@ const Notification = () => import('../pages/documentation/notices/Notification')
 const Message = () => import('../pages/documentation/notices/Message')
 const Loading = () => import('../pages/documentation/notices/Loading')
 
-import FormElements from '../pages/documentation/form/_Form'
+import FormElements from '../pages/documentation/form/FormNav'
 const Field = () => import('../pages/documentation/form/Field')
 const Input = () => import('../pages/documentation/form/Input')
 const Select = () => import('../pages/documentation/form/Select')
@@ -41,8 +41,8 @@ const Switch = () => import('../pages/documentation/form/Switch')
 const Upload = () => import('../pages/documentation/form/Upload')
 const Datepicker = () => import('../pages/documentation/form/Datepicker')
 
-import DataManipulation from '../pages/documentation/data/_Data'
-const Table = () => import('../pages/documentation/data/Table')
+import DataManipulation from '../pages/documentation/data/DataNav'
+const Table = () => import('../pages/documentation/data/table')
 const Pagination = () => import('../pages/documentation/data/Pagination')
 
 export default new Router({
