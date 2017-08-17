@@ -166,6 +166,10 @@
                 default: true
             },
             defaultSort: [String, Array],
+            defaultSortDirection: {
+                type: String,
+                default: 'asc'
+            },
             paginated: Boolean,
             perPage: {
                 type: [Number, String],
@@ -367,7 +371,7 @@
                 if (!updatingData) {
                     this.isAsc = column === this.currentSortColumn
                         ? !this.isAsc
-                        : this.isAsc = true
+                        : (this.isAsc = this.defaultSortDirection.toLowerCase() !== 'desc')
                 }
                 this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
                 if (!this.backendSorting) {
@@ -479,15 +483,21 @@
             initSort() {
                 if (!this.defaultSort) return
 
-                const sortField = Array.isArray(this.defaultSort)
-                    ? this.defaultSort[0]
-                    : this.defaultSort
+                let sortField = ''
+                let sortDirection = this.defaultSortDirection
 
-                const direction = this.defaultSort[1] || ''
+                if (Array.isArray(this.defaultSort)) {
+                    sortField = this.defaultSort[0]
+                    if (this.defaultSort[1]) {
+                        sortDirection = this.defaultSort[1]
+                    }
+                } else {
+                    sortField = this.defaultSort
+                }
 
                 this.columns.forEach(column => {
                     if (column.field === sortField) {
-                        this.isAsc = direction.toLowerCase() !== 'desc'
+                        this.isAsc = sortDirection.toLowerCase() !== 'desc'
                         this.sort(column, true)
                     }
                 })

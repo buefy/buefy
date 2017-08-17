@@ -185,6 +185,7 @@
         <div class="content">
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
             <p>Moreover, use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
+            <p>Eventually, use the <code>default-sort-direction</code> prop to determine the default sort column direction on the first click.</p>
         </div>
         <div class="example">
             <b-field grouped group-multiline>
@@ -200,6 +201,9 @@
                 <div class="control is-flex">
                     <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
                 </div>
+                <div class="control is-flex">
+                    <b-switch v-model="isDefaultSortDirectionDesc">Default sort direction 'Desc'</b-switch>
+                </div>
             </b-field>
 
             <b-table
@@ -207,6 +211,7 @@
                 :paginated="isPaginated"
                 :per-page="perPage"
                 :pagination-simple="isPaginationSimple"
+                :default-sort-direction="isDefaultSortDirectionDesc ? 'desc' : 'asc'"
                 default-sort="user.first_name">
 
                 <template scope="props">
@@ -524,6 +529,7 @@
                 hasMobileCards: true,
                 isPaginated: true,
                 isPaginationSimple: false,
+                isDefaultSortDirectionDesc: false,
                 perPage: 5,
                 columnsTemplate: [
                     { title: 'ID', field: 'id', visible: true },
@@ -545,7 +551,14 @@
                         description: `Sets the default sort column and order — e.g. <code>['first_name', 'desc']</code>`,
                         type: 'String, Array',
                         values: '—',
-                        default: 'order: <code>asc</code>'
+                        default: 'order: <code>default-sort-direction</code> prop'
+                    },
+                    {
+                        name: '<code>default-sort-direction</code>',
+                        description: `Sets the default sort column direction on the first click`,
+                        type: 'String',
+                        values: '<code>asc</code>, <code>desc</code>',
+                        default: '<code>asc</code>'
                     },
                     {
                         name: '<code>bordered</code>',
@@ -997,6 +1010,9 @@
                     <div class="control is-flex">
                         <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
                     </div>
+                    <div class="control is-flex">
+                        <b-switch v-model="isDefaultlSortDirectionDesc">Default sort direction 'Desc'</b-switch>
+                    </div>
                 </b-field>
 
                 <b-table
@@ -1004,6 +1020,7 @@
                     :paginated="isPaginated"
                     :per-page="perPage"
                     :pagination-simple="isPaginationSimple"
+                    :defaultSortDirection="isDefaultSortDirectionDesc ? 'desc' : 'asc'"
                     default-sort="user.first_name">
 
                     <template scope="props">
