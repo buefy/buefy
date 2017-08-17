@@ -15,6 +15,7 @@
 * #243 Add ``default-sort-direction`` prop to table, add it when you want change default sort direction on the first click
 * Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
+* Remove ``has-custom-template`` prop from autocomplete, just use scoped slot to have the same feature
 
 ## 0.5.0
 
