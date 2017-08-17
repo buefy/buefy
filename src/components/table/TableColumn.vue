@@ -13,6 +13,7 @@
             label: String,
             customKey: [String, Number],
             field: String,
+            meta: {},
             width: [Number, String],
             numeric: Boolean,
             centered: Boolean,

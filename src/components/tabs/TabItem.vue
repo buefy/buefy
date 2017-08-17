@@ -56,6 +56,12 @@
             }
 
             this.$parent.tabItems.push(this)
+        },
+        beforeDestroy() {
+            const index = this.$parent.tabItems.indexOf(this)
+            if (index >= 0) {
+                this.$parent.tabItems.splice(index, 1)
+            }
         }
     }
 </script>

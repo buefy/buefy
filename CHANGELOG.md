@@ -3,14 +3,19 @@
 ## 0.5.1
 
 * **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
+* **New component: Tag**, [see docs](https://buefy.github.io/#/documentation/tag)
 * #195 Add ``custom-key`` prop to table column, add it when you want a column without label
-* #235 Add ``custom-is-checked`` prop to table column, add it when you want a custom compare function when is checkable
 * #221 Add backend pagination support to table (thanks @cappuc)
 * #214 Add ``active`` prop to tooltip
 * #228 Fix table checked rows not working on mobile
+* #235 Add ``custom-is-checked`` prop to table column, add it when you want a custom compare function when is checkable
+* #237 Fix emit blur event for input
 * #239 Fix table columns on v-for loop
+* #241 Fix remove tabItem when it's bounded to array
+* #243 Add ``default-sort-direction`` prop to table, add it when you want change default sort direction on the first click
 * Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
+* Remove ``has-custom-template`` prop from autocomplete, just use scoped slot to have the same feature
 
 ## 0.5.0
 

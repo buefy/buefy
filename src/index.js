@@ -3,6 +3,7 @@ import { Dropdown, DropdownItem } from './components/dropdown'
 import { Radio, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
+import { Tag, Taglist } from './components/tag'
 import Autocomplete from './components/autocomplete'
 import Datepicker from './components/datepicker'
 import Field from './components/field'
@@ -49,6 +50,8 @@ const components = {
     Table,
     TableColumn,
     Tabs,
+    Tag,
+    Taglist,
     TagInput,
     Tooltip,
     Upload

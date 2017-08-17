@@ -41,7 +41,11 @@
              * Emit input event to update the user v-model.
              */
             newValue(value) {
-                this.$emit('input', value)
+                // only trigger input event
+                // when current bRadioButton is clicked.
+                if (value === this.nativeValue) {
+                    this.$emit('input', value)
+                }
             }
         }
     }
