@@ -1,0 +1,7 @@
+.card {
+    .card-header {
+        &.is-collapsible {
+            cursor: pointer;
+        }
+    }
+}

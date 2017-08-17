@@ -15,6 +15,7 @@ const ConstructorOptions = () => import('../pages/documentation/installation/Con
 import General from '../pages/documentation/general/_General'
 const Layout = () => import('../pages/documentation/general/Layout')
 const Icon = () => import('../pages/documentation/general/Icon')
+const Card = () => import('../pages/documentation/general/Card')
 const Dropdown = () => import('../pages/documentation/general/Dropdown')
 const Modal = () => import('../pages/documentation/general/Modal')
 const Panel = () => import('../pages/documentation/general/Panel')
@@ -89,6 +90,13 @@ export default new Router({
                 {
                     path: 'icon',
                     component: Icon,
+                    meta: {
+                        category: General
+                    }
+                },
+                {
+                    path: 'card',
+                    component: Card,
                     meta: {
                         category: General
                     }
