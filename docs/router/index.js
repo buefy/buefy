@@ -43,7 +43,7 @@ const Datepicker = () => import('../pages/documentation/form/Datepicker')
 
 import DataManipulation from '../pages/documentation/data/DataNav'
 const Table = () => import('../pages/documentation/data/table')
-const Pagination = () => import('../pages/documentation/data/Pagination')
+const Pagination = () => import('../pages/documentation/data/pagination')
 
 export default new Router({
     mode: 'hash',

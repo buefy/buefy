@@ -1,7 +1,7 @@
 <template>
     <section>
         <template v-for="component in data">
-            <h3 class="subtitle">{{ component.title }}</h3>
+            <h3 v-if="component.title" class="subtitle">{{ component.title }}</h3>
             <b-tabs :key="component.title">
                 <b-tab-item v-if="component.props" label="Properties">
                     <b-table :data="component.props" default-sort="name">
