@@ -1,17 +1,17 @@
 <template>
-    <div class="block">
+    <section>
         <button class="button is-medium" @click="toast">
-            Toast (default)
+            Launch toast (default)
         </button>
 
         <button class="button is-medium is-success" @click="success">
-            Toast (custom)
+            Launch toast (custom)
         </button>
 
         <button class="button is-medium is-danger" @click="danger">
-            Toast (custom)
+            Launch toast (custom)
         </button>
-    </div>
+    </section>
 </template>
 
 <script>

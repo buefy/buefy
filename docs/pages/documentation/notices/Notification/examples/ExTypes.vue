@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
         <b-notification>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
@@ -19,5 +19,5 @@
         <b-notification type="is-danger">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
-    </div>
+    </section>
 </template>

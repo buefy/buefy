@@ -1,6 +1,5 @@
 export default [
     {
-        title: 'Dialog',
         props: [
             {
                 name: '<code>type</code>',

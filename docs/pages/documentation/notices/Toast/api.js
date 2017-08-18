@@ -1,6 +1,5 @@
 export default [
     {
-        title: 'Toast',
         props: [
             {
                 name: '<code>type</code>',

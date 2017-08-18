@@ -1,6 +1,5 @@
 export default [
     {
-        title: 'Loading',
         props: [
             {
                 name: '<code>active</code>',

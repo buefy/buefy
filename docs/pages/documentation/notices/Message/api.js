@@ -1,6 +1,5 @@
 export default [
     {
-        title: 'Message',
         props: [
             {
                 name: '<code>type</code>',

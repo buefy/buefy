@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
         <b-message title="Default">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-message>
@@ -19,5 +19,5 @@
         <b-message title="Warning" type="is-warning">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-message>
-    </div>
+    </section>
 </template>

@@ -1,12 +1,12 @@
 <template>
-    <div class="block">
+    <section>
         <button class="button is-medium is-primary" @click="alert">
-            Alert (default)
+            Launch alert (default)
         </button>
         <button class="button is-medium is-primary" @click="alertCustom">
-            Alert (custom)
+            Launch alert (custom)
         </button>
-    </div>
+    </section>
 </template>
 
 <script>

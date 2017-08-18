@@ -4,14 +4,14 @@
         <h2 class="subtitle">Bold notification blocks to alert your users of something</h2>
         <hr>
 
-        <div class="example">
-            <div class="columns">
-                <div class="column">
+        <div class="columns">
+            <div class="column">
+                <div class="example">
                     <ex-simple></ex-simple>
                 </div>
-                <div class="column">
-                    <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
-                </div>
+            </div>
+            <div class="column">
+                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
             </div>
         </div>
 
@@ -19,14 +19,14 @@
 
         <h2 class="title">Types</h2>
 
-        <div class="example">
-            <div class="columns">
-                <div class="column">
+        <div class="columns">
+            <div class="column">
+                <div class="example">
                     <ex-types></ex-types>
                 </div>
-                <div class="column">
-                    <pre class="example-code" v-highlight><code class="html">{{ ExTypesCode }}</code></pre>
-                </div>
+            </div>
+            <div class="column">
+                <pre v-highlight><code class="html">{{ ExTypesCode }}</code></pre>
             </div>
         </div>
 
@@ -34,14 +34,14 @@
 
         <h2 class="title">Icons</h2>
 
-        <div class="example">
-            <div class="columns">
-                <div class="column">
+        <div class="columns">
+            <div class="column">
+                <div class="example">
                     <ex-icons></ex-icons>
                 </div>
-                <div class="column">
-                    <pre class="example-code" v-highlight><code class="html">{{ ExIconsCode }}</code></pre>
-                </div>
+            </div>
+            <div class="column">
+                <pre v-highlight><code class="html">{{ ExIconsCode }}</code></pre>
             </div>
         </div>
 

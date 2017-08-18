@@ -1,11 +1,12 @@
 <template>
-    <div>
-        <div class="content">
-            <p>The Loading will be closed after about 10 seconds or by pressing escape or clicking outside</p>
-            <button class="button is-primary is-medium" @click="openLoading">Show Loading</button>
-            <b-loading :active.sync="isLoading" :canCancel="true"></b-loading>
-        </div>
-    </div>
+    <section>
+        <button class="button is-primary is-medium"
+            @click="openLoading">
+            Launch loading
+        </button>
+
+        <b-loading :active.sync="isLoading" :canCancel="true"></b-loading>
+    </section>
 </template>
 
 <script>

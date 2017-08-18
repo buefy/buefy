@@ -1,17 +1,17 @@
 <template>
-    <div class="block">
+    <section>
         <button class="button is-medium" @click="snackbar">
-            Snackbar (default)
+            Launch snackbar (default)
         </button>
 
         <button class="button is-medium is-warning" @click="warning">
-            Snackbar (custom)
+            Launch snackbar (custom)
         </button>
 
         <button class="button is-medium is-danger" @click="danger">
-            Snackbar (custom)
+            Launch snackbar (custom)
         </button>
-    </div>
+    </section>
 </template>
 
 <script>

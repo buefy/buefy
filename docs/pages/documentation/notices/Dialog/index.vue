@@ -5,26 +5,26 @@
         <hr>
 
         <h3 class="title">Alert</h3>
-        <div class="example">
+        <div class="block">
             <ex-alert-dialog></ex-alert-dialog>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExAlertDialogCode }}</code></pre>
+        <pre v-highlight><code class="html">{{ ExAlertDialogCode }}</code></pre>
 
         <hr>
 
         <h3 class="title">Confirm</h3>
-        <div class="example">
+        <div class="block">
             <ex-alert-confirm></ex-alert-confirm>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExAlertConfirmCode }}</code></pre>
+        <pre v-highlight><code class="html">{{ ExAlertConfirmCode }}</code></pre>
 
         <hr>
 
         <h3 class="title">Prompt</h3>
-        <div class="example">
+        <div class="block">
             <ex-alert-prompt></ex-alert-prompt>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExAlertPromptCode }}</code></pre>
+        <pre v-highlight><code class="html">{{ ExAlertPromptCode }}</code></pre>
 
         <hr>
         <h2 class="title is-spaced">API</h2>

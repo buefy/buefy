@@ -1,18 +1,16 @@
 <template>
-    <div class="content">
-        <p>When you want to close the Loading, call the 'close' method from the component</p>
-        <button class="button is-primary is-medium" @click="openProgrammaticallyLoading">Show Loading</button>
-    </div>
+    <button class="button is-primary is-medium"
+        @click="open">
+        Launch loading
+    </button>
 </template>
 
 <script>
     export default {
         methods: {
-            openProgrammaticallyLoading() {
+            open() {
                 const loadingComponent = this.$loading.open()
-                setTimeout(() => {
-                    loadingComponent.close()
-                }, 3 * 1000)
+                setTimeout(() => loadingComponent.close(), 3 * 1000)
             }
         }
     }

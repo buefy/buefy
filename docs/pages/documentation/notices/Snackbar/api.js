@@ -1,6 +1,5 @@
 export default [
     {
-        title: 'Snackbar',
         props: [
             {
                 name: '<code>type</code>',

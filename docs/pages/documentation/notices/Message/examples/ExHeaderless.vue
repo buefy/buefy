@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
         <b-message>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-message>
@@ -35,5 +35,5 @@
         <b-message type="is-warning" has-icon>
             Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-message>
-    </div>
+    </section>
 </template>

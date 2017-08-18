@@ -1,6 +1,5 @@
 export default [
     {
-        title: 'Notification',
         props: [
             {
                 name: '<code>type</code>',

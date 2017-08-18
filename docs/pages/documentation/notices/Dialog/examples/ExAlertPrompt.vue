@@ -1,9 +1,9 @@
 <template>
-    <div class="block">
+    <section>
         <button class="button is-medium is-dark" @click="prompt">
-            Prompt
+            Launch prompt
         </button>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -14,9 +14,7 @@
                     message: `What's your name?`,
                     inputMaxlength: 20,
                     inputPlaceholder: 'e.g. John Doe',
-                    onConfirm: (value) => {
-                        this.$toast.open('Your name is: ' + value)
-                    }
+                    onConfirm: (value) => this.$toast.open('Your name is: ' + value)
                 })
             }
         }

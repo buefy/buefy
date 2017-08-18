@@ -4,19 +4,20 @@
         <h2 class="subtitle">A simple loading overlay</h2>
         <hr>
 
-        <div class="example">
+        <div class="block">
+            <p class="content">The Loading will be closed after about 10 seconds, by pressing escape or by clicking outside.</p>
             <ex-simple></ex-simple>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
 
         <hr>
 
-        <h2 class="title is-spaced">Programmatically opening Loading Overlay</h2>
-
-        <div class="example">
+        <h2 class="title is-spaced">Programmatically opening</h2>
+        <p class="content">When you want to close the Loading, call the <code>close()</code> method from the component.</p>
+        <div class="block">
             <ex-programmatically></ex-programmatically>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExProgrammaticallyCode }}</code></pre>
+        <pre v-highlight><code class="html">{{ ExProgrammaticallyCode }}</code></pre>
 
         <hr>
         <h2 class="title is-spaced">API</h2>

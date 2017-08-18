@@ -9,10 +9,10 @@
             <p class="content"><small><b>Note:</b> They queue with <router-link to="/documentation/toast">Toasts</router-link> as well.</small></p>
         </div>
 
-        <div class="example">
+        <div class="block">
             <ex-simple></ex-simple>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
 
         <hr>
         <h2 class="title is-spaced">API</h2>
