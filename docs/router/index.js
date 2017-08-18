@@ -13,14 +13,14 @@ const Customization = () => import('../pages/documentation/installation/Customiz
 const ConstructorOptions = () => import('../pages/documentation/installation/ConstructorOptions')
 
 import General from '../pages/documentation/general/GeneralNav'
-const Layout = () => import('../pages/documentation/general/Layout')
-const Icon = () => import('../pages/documentation/general/Icon')
-const Dropdown = () => import('../pages/documentation/general/Dropdown')
-const Modal = () => import('../pages/documentation/general/Modal')
-const Panel = () => import('../pages/documentation/general/Panel')
-const Tabs = () => import('../pages/documentation/general/Tabs')
-const Tooltip = () => import('../pages/documentation/general/Tooltip')
-const Tag = () => import('../pages/documentation/general/Tag')
+const Layout = () => import('../pages/documentation/general/layout')
+const Icon = () => import('../pages/documentation/general/icon')
+const Dropdown = () => import('../pages/documentation/general/dropdown')
+const Modal = () => import('../pages/documentation/general/modal')
+const Panel = () => import('../pages/documentation/general/panel')
+const Tabs = () => import('../pages/documentation/general/tabs')
+const Tag = () => import('../pages/documentation/general/tag')
+const Tooltip = () => import('../pages/documentation/general/tooltip')
 
 import Notices from '../pages/documentation/notices/NoticesNav'
 const Dialog = () => import('../pages/documentation/notices/dialog')
