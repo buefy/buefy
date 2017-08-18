@@ -23,12 +23,12 @@ const Tooltip = () => import('../pages/documentation/general/Tooltip')
 const Tag = () => import('../pages/documentation/general/Tag')
 
 import Notices from '../pages/documentation/notices/NoticesNav'
-const Dialog = () => import('../pages/documentation/notices/Dialog')
-const Toast = () => import('../pages/documentation/notices/Toast')
-const Snackbar = () => import('../pages/documentation/notices/Snackbar')
-const Notification = () => import('../pages/documentation/notices/Notification')
-const Message = () => import('../pages/documentation/notices/Message')
-const Loading = () => import('../pages/documentation/notices/Loading')
+const Dialog = () => import('../pages/documentation/notices/dialog')
+const Toast = () => import('../pages/documentation/notices/toast')
+const Snackbar = () => import('../pages/documentation/notices/snackbar')
+const Notification = () => import('../pages/documentation/notices/notification')
+const Message = () => import('../pages/documentation/notices/message')
+const Loading = () => import('../pages/documentation/notices/loading')
 
 import FormElements from '../pages/documentation/form/FormNav'
 const Field = () => import('../pages/documentation/form/Field')
