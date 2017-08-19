@@ -18,14 +18,27 @@
         </div>
 
         <hr>
-        <h2 class="title">Limit</h2>
-        <p class="content">You can limit the number of tags with the <code>maxlength</code> prop.</p>
+        <h2 class="title">Limits</h2>
+        <p class="content">You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.</p>
 
         <div class="columns">
             <div class="column">
-                <b-field label="Enter up to 5 tags">
-                    <b-tag-input maxlength="5"
+                <b-field label="Limited to 10 characters">
+                    <b-tag-input maxlength="10"
+                        :value="['Bulma', 'Vue', 'Buefy']">
+                    </b-tag-input>
+                </b-field>
+
+                <b-field label="Limited to 5 tags">
+                    <b-tag-input maxtags="5"
                         :value="['One', 'Two', 'Three', 'Four']">
+                    </b-tag-input>
+                </b-field>
+
+                <b-field label="Limited to 5 characters and 5 tags">
+                    <b-tag-input maxlength="5"
+                        maxtags="5"
+                        :value="['Red', 'Green', 'Blue', 'White']">
                     </b-tag-input>
                 </b-field>
             </div>
@@ -156,7 +169,7 @@
 
         <hr>
         <h2 class="title">Modifiers</h2>
-        <p class="content">You can change the style of the tags by setting the <code>rounded</code> and <code>grouped</code> props.</p>
+        <p class="content">You can change the style of the tags by setting the <code>rounded</code> and <code>attached</code> props.</p>
 
         <div class="columns">
             <div class="column">
@@ -166,9 +179,9 @@
                     </b-tag-input>
                 </b-field>
 
-                <b-field label="Grouped">
+                <b-field label="Attached">
                     <b-tag-input v-model="tags"
-                        grouped>
+                        attached>
                     </b-tag-input>
                 </b-field>
             </div>
@@ -240,7 +253,14 @@
                     },
                     {
                         name: '<code>maxlength</code>',
-                        description: 'Limits the number of tags, plus character counter',
+                        description: 'Limits the length of each tag, plus character counter',
+                        type: 'String, Number',
+                        values: '—',
+                        default: '—'
+                    },
+                    {
+                        name: '<code>maxtags</code>',
+                        description: 'Limits the number of tags, plus tag counter',
                         type: 'String, Number',
                         values: '—',
                         default: '—'
@@ -270,8 +290,8 @@
                         default: '<code>false</code>'
                     },
                     {
-                        name: '<code>grouped</code>',
-                        description: 'Makes the tags grouped instead of having an appended delete button, optional',
+                        name: '<code>attached</code>',
+                        description: 'Makes the tags attached instead of having an appended delete button, optional',
                         type: 'Boolean',
                         values: '<code>true</code>, <code>false</code>',
                         default: '<code>false</code>'
@@ -300,8 +320,20 @@
                     </b-tag-input>
                 </b-field>`,
                 template2: `
-                <b-field label="Enter up to 5 tags">
-                    <b-tag-input maxlength="5">
+                <b-field label="Limited to 10 characters">
+                    <b-tag-input maxlength="10">
+                    </b-tag-input>
+                </b-field>
+
+                <b-field label="Limited to 5 tags">
+                    <b-tag-input maxtags="5">
+                    </b-tag-input>
+                </b-field>
+
+                <b-field label="Limited to 5 characters and 5 tags">
+                    <b-tag-input
+                        maxlength="5"
+                        maxtags="5">
                     </b-tag-input>
                 </b-field>`,
                 template3: `
@@ -391,9 +423,9 @@
                     </b-tag-input>
                 </b-field>
 
-                <b-field label="Grouped">
+                <b-field label="attached">
                     <b-tag-input v-model="tags"
-                        grouped>
+                        attached>
                     </b-tag-input>
                 </b-field>
                 `

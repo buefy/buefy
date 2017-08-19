@@ -21,7 +21,8 @@
 
         <button v-if="closable"
             type="button"
-            class="delete is-small"
+            class="delete"
+            :class="{ 'is-small' : size == null || size == 'is-small' }"
             @click="close()"
             @keyup.delete.prevent="close()">
         </button>

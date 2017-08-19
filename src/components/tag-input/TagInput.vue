@@ -5,35 +5,20 @@
             'is-loading': loading,
             'is-clearfix': !hasMessage
         }]">
+
         <div class="input tag-input"
             :class="[statusType, size, { 'is-focused' : inputFocus }]"
             @click="focus">
-
-            <span v-if="!grouped"
-                v-for="(tag, index) in tags"
+            <b-tag v-for="(tag, index) in tags"
                 :key="index"
-                class="tag"
-                :class="[color, size, rounded ? 'is-rounded': '']">
+                :type="color"
+                :size="size"
+                :rounded="rounded"
+                :attached="attached"
+                closable
+                @close="removeTag(index)">
                 {{ tag }}
-                <button class="delete"
-                    :class="{ 'is-small': size == 'is-small' }"
-                    @click="removeTag(index)">
-                </button>
-            </span>
-
-            <div v-else
-                class="control">
-                <div class="tags has-addons">
-                    <span class="tag"
-                        :class="[color, size, rounded ? 'is-rounded': '']">
-                        {{ tag }}
-                    </span>
-                    <a class="tag is-delete"
-                        :class="size"
-                        @click="removeTag(index)">
-                    </a>
-                </div>
-            </div>
+            </b-tag>
 
             <input ref="input"
                 :class="size"
@@ -41,6 +26,7 @@
                 v-if="showInput"
                 v-model="newTag"
                 :placeholder="placeholder"
+                :maxlength="maxlength"
                 @focus="focus"
                 @blur="blur"
                 @keydown="keydown">
@@ -61,7 +47,15 @@
             both>
         </b-icon>
 
-        <small class="help counter" v-if="maxlength">{{ tagsLength }} / {{ maxlength }}</small>
+        <small class="help counter" v-if="maxtags || maxlength">
+            <template v-if="maxlength && !maxtags || maxlength && valueLength > 0">
+                {{ valueLength }} / {{ maxlength }} characters<template v-if="maxlength && maxtags">, </template>
+            </template>
+            <template v-if="maxtags">
+                {{ tagsLength }} / {{ maxtags }} tags
+            </template>
+        </small>
+
     </div>
 </template>
 
@@ -92,9 +86,17 @@
                 type: Boolean,
                 default: false
             },
-            grouped: {
+            attached: {
                 type: Boolean,
                 default: false
+            },
+            maxtags: {
+                type: [Number, String],
+                required: false
+            },
+            maxlength: {
+                type: [Number, String],
+                required: false
             }
         },
         data() {
@@ -102,7 +104,7 @@
                 tags: this.value || [],
                 inputFocus: false,
                 newTag: '',
-                _elementRef: 'tagInput',
+                _elementRef: 'input',
                 _isDatepicker: true
             }
         },
@@ -114,11 +116,15 @@
                 return this.newTag.trim()
             },
 
+            valueLength() {
+                return this.trimmedNewTag.length
+            },
+
             /**
-             * Show the input field if a maxlength hasn't been set or reached.
+             * Show the input field if a maxtags hasn't been set or reached.
              */
             showInput() {
-                return this.maxlength == null || this.tagsLength < this.maxlength
+                return this.maxtags == null || this.tagsLength < this.maxtags
             },
 
             /**
