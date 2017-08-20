@@ -1,4 +1,7 @@
 .b-tabs {
+    .tabs {
+        margin-bottom: 0;
+    }
     .tab-content {
         position: relative;
         overflow: hidden;
@@ -8,5 +11,8 @@
             flex-shrink: 0;
             flex-basis: 100%;
         }
+    }
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
     }
 }

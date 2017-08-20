@@ -54,7 +54,6 @@
                     :data="asyncExample.data"
                     placeholder="e.g. Fight Club"
                     field="title"
-                    has-custom-template
                     :loading="asyncExample.isFetching"
                     @input="getAsyncData"
                     @select="option => asyncExample.selected = option">
@@ -223,13 +222,6 @@
                     {
                         name: '<code>keep-first</code>',
                         description: 'The first option will always be pre-selected (easier to just hit enter)',
-                        type: 'Boolean',
-                        values: '—',
-                        default: '<code>false</code>'
-                    },
-                    {
-                        name: '<code>has-custom-template</code>',
-                        description: 'Enable creating a custom template for the option with scoped slot',
                         type: 'Boolean',
                         values: '—',
                         default: '<code>false</code>'
@@ -429,7 +421,6 @@
                         v-model="asyncExample.name"
                         :data="asyncExample.data"
                         field="title"
-                        has-custom-template
                         :loading="asyncExample.isFetching"
                         @input="getAsyncData"
                         @select="option => asyncExample.selected = option">

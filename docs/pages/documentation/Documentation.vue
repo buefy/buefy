@@ -45,11 +45,11 @@
     import AppHeader from '../../template/Header'
     import AppFooter from '../../template/Footer'
 
-    import Installation from './installation/_Installation'
-    import General from './general/_General'
-    import Notices from './notices/_Notices'
-    import FormElements from './form/_Form'
-    import DataManipulation from './data/_Data'
+    import Installation from './installation/InstallationNav'
+    import General from './general/GeneralNav'
+    import Notices from './notices/NoticesNav'
+    import FormElements from './form/FormNav'
+    import DataManipulation from './data/DataNav'
 
     export default {
         components: {

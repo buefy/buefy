@@ -29,7 +29,7 @@
                         :class="{ 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
-                        <slot v-if="hasCustomTemplate" :option="option" :index="index"></slot>
+                        <slot v-if="hasDefaultSlot" :option="option" :index="index"></slot>
                         <span v-else v-html="getValue(option, true)"></span>
                     </a>
                     <div v-if="data.length > maxResults"
@@ -65,8 +65,7 @@
                 type: [Number, String],
                 default: 6
             },
-            keepFirst: Boolean,
-            hasCustomTemplate: Boolean
+            keepFirst: Boolean
         },
         data() {
             return {
@@ -106,6 +105,13 @@
                 return this.data.length <= this.maxResults
                     ? this.data
                     : this.data.slice(0, this.maxResults)
+            },
+
+            /**
+             * Check if exists default slot
+             */
+            hasDefaultSlot() {
+                return !!this.$scopedSlots.default
             }
         },
         watch: {

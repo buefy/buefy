@@ -48,7 +48,10 @@
                             :style="{ width: column.width + 'px' }"
                             @click.stop="sort(column)">
                             <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
-                                {{ column.label }}
+
+                                <slot v-if="$scopedSlots.header" name="header" :column="column" :index="index"></slot>
+                                <template v-else>{{ column.label }}</template>
+
                                 <b-icon
                                     icon="arrow_upward"
                                     both
@@ -165,6 +168,10 @@
                 default: true
             },
             defaultSort: [String, Array],
+            defaultSortDirection: {
+                type: String,
+                default: 'asc'
+            },
             paginated: Boolean,
             perPage: {
                 type: [Number, String],
@@ -357,7 +364,7 @@
 
             /**
              * Sort the column.
-             * Toggle current direction on column if it's really a column click
+             * Toggle current direction on column if it's sortable
              * and not just updating the prop.
              */
             sort(column, updatingData = false) {
@@ -366,7 +373,7 @@
                 if (!updatingData) {
                     this.isAsc = column === this.currentSortColumn
                         ? !this.isAsc
-                        : this.isAsc = true
+                        : (this.isAsc = this.defaultSortDirection.toLowerCase() !== 'desc')
                 }
                 this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
                 if (!this.backendSorting) {
@@ -478,15 +485,21 @@
             initSort() {
                 if (!this.defaultSort) return
 
-                const sortField = Array.isArray(this.defaultSort)
-                    ? this.defaultSort[0]
-                    : this.defaultSort
+                let sortField = ''
+                let sortDirection = this.defaultSortDirection
 
-                const direction = this.defaultSort[1] || ''
+                if (Array.isArray(this.defaultSort)) {
+                    sortField = this.defaultSort[0]
+                    if (this.defaultSort[1]) {
+                        sortDirection = this.defaultSort[1]
+                    }
+                } else {
+                    sortField = this.defaultSort
+                }
 
                 this.columns.forEach(column => {
                     if (column.field === sortField) {
-                        this.isAsc = direction.toLowerCase() !== 'desc'
+                        this.isAsc = sortDirection.toLowerCase() !== 'desc'
                         this.sort(column, true)
                     }
                 })

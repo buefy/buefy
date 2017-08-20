@@ -97,6 +97,7 @@
     "ora": "^1.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "postcss-cli": "^4.0.0",
+    "raw-loader": "^0.5.1",
     "rimraf": "^2.6.0",
     "sass-loader": "^6.0.6",
     "scrollreveal": "^3.3.6",
