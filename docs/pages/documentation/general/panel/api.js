@@ -16,7 +16,7 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>hasCustomTemplate</code>',
+                name: '<code>has-custom-template</code>',
                 description: 'If your panel content has custom template (see Bulma docs), add this prop',
                 type: 'String',
                 values: '-',

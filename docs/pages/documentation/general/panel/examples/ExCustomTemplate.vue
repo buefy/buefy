@@ -8,7 +8,7 @@
         </div>
 
         <b-panel header="Title"
-            hasCustomTemplate
+            has-custom-template
             collapsible
             :open.sync="isOpen">
             <p class="panel-tabs">
