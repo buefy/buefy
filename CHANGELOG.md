@@ -7,12 +7,17 @@
 * #195 Add ``custom-key`` prop to table column, add it when you want a column without label
 * #221 Add backend pagination support to table (thanks @cappuc)
 * #214 Add ``active`` prop to tooltip
+* #215 Add ``header`` slot to table (custom headers)
 * #228 Fix table checked rows not working on mobile
 * #235 Add ``custom-is-checked`` prop to table column, add it when you want a custom compare function when is checkable
 * #237 Fix emit blur event for input
 * #239 Fix table columns on v-for loop
 * #241 Fix remove tabItem when it's bounded to array
+* #242 Update required Vue.js version (2.4+) (thanks @iwan-wijaya)
 * #243 Add ``default-sort-direction`` prop to table, add it when you want change default sort direction on the first click
+* #260 Fix radio/radio button emitting ``input`` multiple times
+* Add ``meta`` prop to table column, useful for custom headers
+* Add ``type`` prop to switch (thanks @Tirke)
 * Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
 * Remove ``has-custom-template`` prop from autocomplete, just use scoped slot to have the same feature
