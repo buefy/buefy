@@ -3,6 +3,7 @@
 ## 0.5.2
 
 * #262 Add ``empty`` slot to autocomplete (empty message)
+* #264 Add ``has-counter`` prop to input, add it when you want show or hide character counter when maxlength prop is passed
 
 ## 0.5.1
 

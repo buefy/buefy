@@ -18,7 +18,8 @@
                     message="This email is invalid">
                     <b-input type="email"
                         value="john@"
-                        maxlength="30">
+                        maxlength="30"
+                        :has-counter="false">
                     </b-input>
                 </b-field>
 
@@ -363,6 +364,13 @@
                         default: '—'
                     },
                     {
+                        name: '<code>has-counter</code>',
+                        description: 'Show character counter when <code>maxlength</code> prop is passed',
+                        type: 'Boolean',
+                        values: '—',
+                        default: 'true'
+                    },
+                    {
                         name: 'Any native attribute',
                         description: '—',
                         type: '—',
@@ -414,7 +422,8 @@
                     message="This email is invalid">
                     <b-input type="email"
                         value="john@"
-                        maxlength="30">
+                        maxlength="30"
+                        :has-counter="false">
                     </b-input>
                 </b-field>
 
