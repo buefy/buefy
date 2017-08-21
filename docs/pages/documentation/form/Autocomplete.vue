@@ -16,6 +16,7 @@
                     placeholder="e.g. jQuery"
                     icon="search"
                     @select="option => arrayExample.selected = option">
+                    <template slot="empty">No results found</template>
                 </b-autocomplete>
             </b-field>
         </div>
@@ -280,6 +281,10 @@
                     {
                         name: 'default',
                         props: '<code>option: String|Object</code>, <code>index: Number</code>'
+                    },
+                    {
+                        name: 'empty',
+                        props: ''
                     }
                 ],
                 events: [
@@ -330,6 +335,7 @@
                         placeholder="e.g. jQuery"
                         icon="search"
                         @select="option => arrayExample.selected = option">
+                        <template slot="empty">No results found</template>
                     </b-autocomplete>
                 </b-field>`,
                 code1: `

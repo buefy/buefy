@@ -20,7 +20,7 @@
         <transition name="fade">
             <div class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
-                v-show="isActive && visibleData.length > 0"
+                v-show="isActive && (visibleData.length > 0 || hasEmptySlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
                     <a v-for="(option, index) in visibleData"
@@ -35,6 +35,10 @@
                     <div v-if="data.length > maxResults"
                         class="dropdown-item is-disabled">
                         &hellip;
+                    </div>
+                    <div v-else-if="visibleData.length === 0"
+                        class="dropdown-item is-disabled">
+                        <slot name="empty"></slot>
                     </div>
                 </div>
             </div>
@@ -112,6 +116,13 @@
              */
             hasDefaultSlot() {
                 return !!this.$scopedSlots.default
+            },
+
+            /**
+             * Check if exists "empty" slot
+             */
+            hasEmptySlot() {
+                return !!this.$slots.empty
             }
         },
         watch: {

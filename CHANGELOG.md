@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.5.2
+
+* #262 Add ``empty`` slot to autocomplete (empty message)
+
 ## 0.5.1
 
 * **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
