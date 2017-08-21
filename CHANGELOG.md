@@ -15,7 +15,7 @@
 * #241 Fix remove tabItem when it's bounded to array
 * #242 Update required Vue.js version (2.4+) (thanks @iwan-wijaya)
 * #243 Add ``default-sort-direction`` prop to table, add it when you want change default sort direction on the first click
-* #260 Fix radio/radio button emitting ``input`` multiple times
+* #260 Fix radio/radio button emitting ``input`` multiple times (thanks @frantic1048)
 * Add ``meta`` prop to table column, useful for custom headers
 * Add ``type`` prop to switch (thanks @Tirke)
 * Add ``multiple`` support to select
