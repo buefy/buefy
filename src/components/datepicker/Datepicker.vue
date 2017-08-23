@@ -75,6 +75,7 @@
                 <b-datepicker-table v-model="dateSelected"
                     :day-names="dayNames"
                     :month-names="monthNames"
+                    :first-day-of-week="firstDayOfWeek"
                     :min-date="minDate"
                     :max-date="maxDate"
                     :focused="focusedDateData"
@@ -166,6 +167,10 @@
                         'December'
                     ]
                 }
+            },
+            firstDayOfWeek: {
+                type: Number,
+                default: 0
             },
             inline: Boolean,
             minDate: Date,

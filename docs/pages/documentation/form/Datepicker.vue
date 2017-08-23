@@ -46,6 +46,7 @@
             <div class="column">
                 <b-field label="Select a date">
                     <b-datepicker v-model="date"
+                        :first-day-of-week="1"
                         placeholder="Click to select...">
 
                         <button class="button is-primary"
@@ -204,6 +205,13 @@
                         default: '<code>["Su", "M", "Tu", "W", "Th", "F", "S"]</code>'
                     },
                     {
+                        name: '<code>first-day-of-week</code>',
+                        description: 'First day of week to display in table header',
+                        type: 'Number',
+                        values: '<code>0 - 6 (Sunday is 0, Monday is 1, and so on)</code>',
+                        default: '<code>0</code>'
+                    },
+                    {
                         name: 'Any native attribute',
                         description: '—',
                         type: '—',
@@ -241,6 +249,7 @@
                 template3: `
                 <b-field label="Select a date">
                     <b-datepicker v-model="date"
+                        :first-day-of-week="1"
                         placeholder="Click to select...">
 
                         <button class="button is-primary"

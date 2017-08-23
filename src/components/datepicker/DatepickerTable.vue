@@ -1,9 +1,9 @@
 <template>
     <section class="datepicker-table">
         <header class="datepicker-header">
-            <div v-for="day in dayNames"
+            <div v-for="day in visibleDayNames"
                 :key="day"
-                class="datepicker-cell" >
+                class="datepicker-cell">
                 {{ day }}
             </div>
         </header>
@@ -34,9 +34,22 @@
             value: Date,
             dayNames: Array,
             monthNames: Array,
+            firstDayOfWeek: Number,
             minDate: Date,
             maxDate: Date,
             focused: Object
+        },
+        computed: {
+            visibleDayNames() {
+                const visibleDayNames = []
+                let index = this.firstDayOfWeek
+                while (visibleDayNames.length < this.dayNames.length) {
+                    const currentDayName = this.dayNames[(index % this.dayNames.length)]
+                    visibleDayNames.push(currentDayName)
+                    index++
+                }
+                return visibleDayNames
+            }
         },
         methods: {
             /*
@@ -69,8 +82,11 @@
                 const dayOfWeek = new Date(year, month, startingDate)
                     .getDay()
 
+                const end = dayOfWeek >= this.firstDayOfWeek
+                    ? (dayOfWeek - this.firstDayOfWeek) : ((7 - this.firstDayOfWeek) + dayOfWeek)
+
                 let daysAgo = 1
-                for (let i = dayOfWeek - 1; i >= 0; i--) {
+                for (let i = 0; i < end; i++) {
                     thisWeek.unshift(new Date(thisMonth.getFullYear(), thisMonth.getMonth(), startingDate - daysAgo))
                     daysAgo++
                 }
