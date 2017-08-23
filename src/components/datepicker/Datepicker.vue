@@ -184,7 +184,7 @@
         },
         data() {
             let focusedDate = this.value || this.focusedDate || new Date()
-            if (focusedDate instanceof Date === false) {
+            if (focusedDate instanceof Date) {
                 focusedDate = new Date(focusedDate)
             }
 
@@ -255,10 +255,18 @@
             /**
              * When v-model is changed:
              *   1. Update internal value.
-             *   2. If it's invalid, validate again.
+             *   2. Update internal focusedDateData
+             *   3. If it's invalid, validate again.
              */
             value(value) {
                 this.dateSelected = value
+
+                const currentDate = value instanceof Date ? value : new Date()
+                this.focusedDateData = {
+                    month: currentDate.getMonth(),
+                    year: currentDate.getFullYear()
+                }
+
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             }
         },
