@@ -38,7 +38,7 @@
              * Naive Font Awesome configuration check
              */
             isFontAwesome() {
-                return this.newPack.slice(0, 2) === 'fa';
+                return this.newPack.slice(0, 2) === 'fa'
             }
         },
         methods: {
