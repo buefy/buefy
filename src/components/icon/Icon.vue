@@ -1,6 +1,6 @@
 <template>
     <span class="icon" :class="[type, size]">
-        <i :class="[newPack, isFontAwesome ? `${newPack}-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
+        <i :class="[newPack, isFontAwesome ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
     </span>
 </template>
 
