@@ -107,8 +107,8 @@
         <div class="columns">
             <div class="column">
                 <b-field>
-                    <b-select 
-                        multiple 
+                    <b-select
+                        multiple
                         native-size="8"
                         v-model="selectedOptions">
                         <option value="flint">Flint</option>
@@ -283,7 +283,7 @@
 </template>
 
 <script>
-    import options from '../../../assets/data_test.json'
+    import options from '@/assets/data_test.json'
 
     export default {
         data() {
@@ -482,9 +482,9 @@
                 }`,
                 template2: `
                 <b-field>
-                    <b-select 
-                        multiple 
-                        native-size="8" 
+                    <b-select
+                        multiple
+                        native-size="8"
                         v-model="selectedOptions">
                         <option value="flint">Flint</option>
                         <option value="silver">Silver</option>
