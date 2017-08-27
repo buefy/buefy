@@ -1,10 +1,10 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
         <a class="pagination-previous" @click="prev" :class="{ 'is-disabled': !hasPrev }">
-            <b-icon icon="chevron_left" both></b-icon>
+            <b-icon :icon="iconPrev" both></b-icon>
         </a>
         <a class="pagination-next" @click="next" :class="{ 'is-disabled': !hasNext }">
-            <b-icon icon="chevron_right" both></b-icon>
+            <b-icon :icon="iconNext" both></b-icon>
         </a>
         <ul class="pagination-list" v-if="!simple">
 
@@ -49,7 +49,18 @@
             },
             size: String,
             simple: Boolean,
-            order: String
+            order: String,
+            /**
+             * To change icons.
+             */
+            iconPrev: {
+                type: String,
+                default: 'chevron_left'
+            },
+            iconNext: {
+                type: String,
+                default: 'chevron_right'
+            }
         },
         computed: {
             /**
