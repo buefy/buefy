@@ -73,6 +73,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>backend-pagination</code>',
+                description: `Rows won't be paginated with Javascript, use with <code>page-change</code> event to paginate in your backend`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>total</code>',
+                description: `Total number of table data if <code>backend-pagination</code> is enabled`,
+                type: 'Number',
+                values: '—',
+                default: '<code>0</code>'
+            },
+            {
                 name: '<code>loading</code>',
                 description: 'Loading state',
                 type: 'Boolean',
