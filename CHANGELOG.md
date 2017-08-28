@@ -4,7 +4,8 @@
 
 * #262 Add ``empty`` slot to autocomplete (empty message)
 * #264 Add ``has-counter`` prop to input, add it when you want show or hide character counter when maxlength prop is passed
-* #264 Add ``first-day-of-week`` prop to datepicker
+* #265 Fix disabled pagination (thanks @YassinOuider)
+* #276 Add ``first-day-of-week`` prop to datepicker
 
 ## 0.5.1
 
