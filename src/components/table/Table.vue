@@ -18,7 +18,7 @@
                             size="is-small"
                             :class="{
                                 'is-desc': !isAsc,
-                                'is-visible': (currentSortColumn && currentSortColumn.newKey === mobileSort.newKey)
+                                'is-visible': currentSortColumn === mobileSort
                             }">
                         </b-icon>
                     </button>
@@ -44,7 +44,7 @@
                         <th v-for="(column, index) in columns"
                             v-if="column.visible"
                             :key="index"
-                            :class="{ 'is-current-sort': (column.sortable && currentSortColumn.newKey === column.newKey), 'is-sortable': column.sortable }"
+                            :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
                             :style="{ width: column.width + 'px' }"
                             @click.stop="sort(column)">
                             <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
@@ -56,7 +56,7 @@
                                     icon="arrow_upward"
                                     both
                                     size="is-small"
-                                    :class="{ 'is-desc': !isAsc, 'is-visible': (column.sortable && currentSortColumn.newKey === column.newKey) }">
+                                    :class="{ 'is-desc': !isAsc, 'is-visible': currentSortColumn === column }">
                                 </b-icon>
                             </div>
                         </th>
@@ -245,7 +245,7 @@
              * When mobileSort change (mobile dropdown) call sort method.
              */
             mobileSort(column) {
-                if (this.currentSortColumn && this.currentSortColumn.newKey === column.newKey) return
+                if (this.currentSortColumn === column) return
 
                 this.sort(column)
             },
@@ -369,7 +369,7 @@
                 if (!column || !column.sortable) return
 
                 if (!updatingData) {
-                    this.isAsc = (this.currentSortColumn && column.newKey === this.currentSortColumn.newKey)
+                    this.isAsc = column === this.currentSortColumn
                         ? !this.isAsc
                         : (this.isAsc = this.defaultSortDirection.toLowerCase() !== 'desc')
                 }

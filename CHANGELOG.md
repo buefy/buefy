@@ -6,6 +6,7 @@
 * #264 Add ``has-counter`` prop to input, add it when you want show or hide character counter when maxlength prop is passed
 * #265 Fix disabled pagination (thanks @YassinOuider)
 * #276 Add ``first-day-of-week`` prop to datepicker
+* #279 Fix table not default sorting async data
 
 ## 0.5.1
 
