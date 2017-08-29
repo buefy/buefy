@@ -3,37 +3,30 @@
         <b-table
             :data="data"
             :loading="loading"
-            :total="total"
-            :paginated="true"
-            :per-page="perPage"
-            :backend-pagination="true"
-            @page-change="onPageChange"
-            :backend-sorting="true"
-            @sort="onSort"
-            default-sort-direction="desc"
-            :default-sort="[sortField, sortOrder]">
 
-            <template slot="empty">
-                <section class="section" v-show="!loading">
-                    <div class="content has-text-grey has-text-centered">
-                        <p>No movies.</p>
-                    </div>
-                </section>
-            </template>
+            paginated
+            backend-pagination
+            :total="total"
+            :per-page="perPage"
+            @page-change="onPageChange"
+
+            backend-sorting
+            :default-sort-direction="sortOrder"
+            :default-sort="[sortField, sortOrder]"
+            @sort="onSort">
 
             <template scope="props">
-
                 <b-table-column field="original_title" label="Title" sortable>
                     {{ props.row.original_title }}
                 </b-table-column>
 
-                <b-table-column field="vote_average" label="Vote Average" sortable>
+                <b-table-column field="vote_average" label="Vote Average" numeric sortable>
                     <span class="tag" :class="type(props.row.vote_average)">
                         {{ props.row.vote_average }}
                     </span>
                 </b-table-column>
 
-                <b-table-column field="vote_count" label="Vote Count" sortable>
+                <b-table-column field="vote_count" label="Vote Count" numeric sortable>
                      {{ props.row.vote_count }}
                 </b-table-column>
 
@@ -42,7 +35,7 @@
                 </b-table-column>
 
                 <b-table-column label="Overview" width="500">
-                    {{ props.row.overview }}
+                    {{ props.row.overview | truncate(80) }}
                 </b-table-column>
             </template>
         </b-table>
@@ -112,6 +105,16 @@
                 } else if (number >= 8) {
                     return 'is-success'
                 }
+            }
+        },
+        filters: {
+            /**
+             * Filter to truncate string, accepts a length parameter
+             */
+            truncate(value, length) {
+                return value.length > length
+                    ? value.substr(0, length) + '...'
+                    : value
             }
         },
         mounted() {
