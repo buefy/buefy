@@ -44,3 +44,9 @@
         }
     }
 </script>
+
+<style>
+    tr.is-warning {
+        background: hsl(48, 100%, 67%) !important;
+    }
+</style>
