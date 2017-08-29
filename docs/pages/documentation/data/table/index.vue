@@ -83,6 +83,13 @@
         <pre class="example-code" v-highlight><code class="html">{{ ExToggleColumnsCode }}</code></pre>
 
         <hr>
+        <h2 class="title is-spaced">Async data</h2>
+        <div class="example">
+            <ex-async-data></ex-async-data>
+        </div>
+        <pre class="example-code" v-highlight><code class="html">{{ ExAsyncDataCode }}</code></pre>
+
+        <hr>
         <h2 class="title is-spaced">API</h2>
         <api-view :data="api"></api-view>
     </div>
@@ -115,6 +122,9 @@
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
+    import ExAsyncData from './examples/ExAsyncData'
+    import ExAsyncDataCode from '!!raw-loader!./examples/ExAsyncData'
+
     export default {
         components: {
             ExSimple,
@@ -124,7 +134,8 @@
             ExDetailedRow,
             ExRowStatus,
             ExCustomHeaders,
-            ExToggleColumns
+            ExToggleColumns,
+            ExAsyncData
         },
         data() {
             return {
@@ -136,7 +147,8 @@
                 ExDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
-                ExToggleColumnsCode
+                ExToggleColumnsCode,
+                ExAsyncDataCode
             }
         }
     }

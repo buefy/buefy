@@ -18,7 +18,7 @@
                             size="is-small"
                             :class="{
                                 'is-desc': !isAsc,
-                                'is-visible': currentSortColumn === mobileSort
+                                'is-visible': (currentSortColumn && currentSortColumn.newKey === mobileSort.newKey)
                             }">
                         </b-icon>
                     </button>
@@ -44,7 +44,7 @@
                         <th v-for="(column, index) in columns"
                             v-if="column.visible"
                             :key="index"
-                            :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
+                            :class="{ 'is-current-sort': (column.sortable && currentSortColumn.newKey === column.newKey), 'is-sortable': column.sortable }"
                             :style="{ width: column.width + 'px' }"
                             @click.stop="sort(column)">
                             <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
@@ -56,7 +56,7 @@
                                     icon="arrow_upward"
                                     both
                                     size="is-small"
-                                    :class="{ 'is-desc': !isAsc, 'is-visible': currentSortColumn === column }">
+                                    :class="{ 'is-desc': !isAsc, 'is-visible': (column.sortable && currentSortColumn.newKey === column.newKey) }">
                                 </b-icon>
                             </div>
                         </th>
@@ -255,7 +255,7 @@
              * When mobileSort change (mobile dropdown) call sort method.
              */
             mobileSort(column) {
-                if (this.currentSortColumn === column) return
+                if (this.currentSortColumn && this.currentSortColumn.newKey === column.newKey) return
 
                 this.sort(column)
             },
@@ -279,7 +279,7 @@
              * When columns change, call initSort only first time (For example async data).
              */
             columns(columns) {
-                if (this.firstTimeSort) {
+                if (columns.length && this.firstTimeSort) {
                     this.initSort()
                     this.firstTimeSort = false
                 }
@@ -379,11 +379,13 @@
                 if (!column || !column.sortable) return
 
                 if (!updatingData) {
-                    this.isAsc = column === this.currentSortColumn
+                    this.isAsc = (this.currentSortColumn && column.newKey === this.currentSortColumn.newKey)
                         ? !this.isAsc
                         : (this.isAsc = this.defaultSortDirection.toLowerCase() !== 'desc')
                 }
-                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                if (!this.firstTimeSort) {
+                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                }
                 if (!this.backendSorting) {
                     this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc)
                 }

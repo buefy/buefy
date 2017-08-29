@@ -1,11 +1,13 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
-        <a class="pagination-previous" @click="prev" :class="{ 'is-disabled': !hasPrev }">
-            <b-icon :icon="iconPrev" both></b-icon>
-        </a>
-        <a class="pagination-next" @click="next" :class="{ 'is-disabled': !hasNext }">
-            <b-icon :icon="iconNext" both></b-icon>
-        </a>
+        <div class="pagination-list pagination-arrows">
+            <a class="pagination-previous" @click="prev"  :disabled="!hasPrev">
+                <b-icon :icon="iconPrev" both></b-icon>
+            </a>
+            <a class="pagination-next" @click="next" :disabled="!hasNext">
+                <b-icon :icon="iconNext" both></b-icon>
+            </a>
+        </div>
         <ul class="pagination-list" v-if="!simple">
 
             <!--First-->
@@ -157,6 +159,7 @@
              * Previous button click listener.
              */
             prev() {
+                if (!this.hasPrev) return
                 this.$emit('change', this.current - 1)
                 this.$emit('update:current', this.current - 1)
             },
@@ -181,6 +184,7 @@
              * Next button click listener.
              */
             next() {
+                if (!this.hasNext) return
                 this.$emit('change', this.current + 1)
                 this.$emit('update:current', this.current + 1)
             }

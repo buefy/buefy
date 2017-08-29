@@ -1,0 +1,106 @@
+<template>
+    <section>
+        <b-table
+            :data="data"
+            :loading="loading"
+            :total="total"
+            :paginated="true"
+            :per-page="perPage"
+            :backend-pagination="true"
+            @page-change="onPageChange"
+            :backend-sorting="true"
+            @sort="onSort"
+            default-sort-direction="desc"
+            :default-sort="[sortField, sortOrder]">
+
+            <template slot="empty">
+                <section class="section" v-show="!loading">
+                    <div class="content has-text-grey has-text-centered">
+                        <p>No movies.</p>
+                    </div>
+                </section>
+            </template>
+
+            <template scope="props">
+
+                <b-table-column field="original_title" label="Title" sortable>
+                    {{ props.row.original_title }}
+                </b-table-column>
+
+                <b-table-column field="vote_average" label="Vote Average" sortable>
+                    {{ props.row.vote_average }}
+                </b-table-column>
+
+                <b-table-column field="vote_count" label="Vote Count" sortable>
+                     {{ props.row.vote_count }}
+                </b-table-column>
+
+                <b-table-column field="release_date" label="Release Date" sortable centered>
+                    {{ props.row.release_date ? new Date(props.row.release_date).toLocaleDateString() : '' }}
+                </b-table-column>
+
+                <b-table-column label="Overview" width="500">
+                    {{ props.row.overview }}
+                </b-table-column>
+            </template>
+        </b-table>
+    </section>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                data: [],
+                total: 0,
+                loading: false,
+                sortField: 'vote_count',
+                sortOrder: 'desc',
+                page: 1,
+                perPage: 20
+            }
+        },
+        methods: {
+            /*
+             * Load async data
+             */
+            loadAsyncData() {
+                this.loading = true
+                this.$http.get(`https://api.themoviedb.org/3/discover/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&language=en-US&include_adult=false&include_video=false&sort_by=${this.sortField}.${this.sortOrder}&page=${this.page}`)
+                    .then(({ data }) => {
+                        // max 1000 pages
+                        this.data = []
+                        let currentTotal = data.total_results
+                        if (data.total_results / this.perPage > 1000) {
+                            currentTotal = this.perPage * 1000
+                        }
+                        this.total = currentTotal
+                        data.results.forEach((item) => this.data.push(item))
+                        this.loading = false
+                    }, response => {
+                        this.data = []
+                        this.total = 0
+                        this.loading = false
+                    })
+            },
+            /*
+             * Handle page-change event
+             */
+            onPageChange(page) {
+                this.page = page
+                this.loadAsyncData()
+            },
+            /*
+             * Handle sort event
+             */
+            onSort(field, order) {
+                this.sortField = field
+                this.sortOrder = order
+                this.loadAsyncData()
+            }
+        },
+        mounted() {
+            this.loadAsyncData()
+        }
+    }
+</script>
