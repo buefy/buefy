@@ -86,13 +86,15 @@ export default [
                 default: '—'
             }
         ],
-        scopedSlots: [
+        slots: [
             {
                 name: 'default',
+                description: '',
                 props: '<code>option: String|Object</code>, <code>index: Number</code>'
             },
             {
-                name: 'empty',
+                name: '<code>empty</code>',
+                description: 'Show like an option if <code>data</code> array prop is empty',
                 props: ''
             }
         ],

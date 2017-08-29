@@ -21,7 +21,10 @@
 
         <hr>
         <h2 class="title">Async with custom template</h2>
-        <p class="block"><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small></p>
+        <div class="content">
+            <p>You can have a custom template by adding a scoped slot to it.</p>
+            <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
+        </div>
         <div class="example">
             <ex-custom-async></ex-custom-async>
         </div>
