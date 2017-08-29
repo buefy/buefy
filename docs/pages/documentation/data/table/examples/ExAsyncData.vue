@@ -28,7 +28,9 @@
                 </b-table-column>
 
                 <b-table-column field="vote_average" label="Vote Average" sortable>
-                    {{ props.row.vote_average }}
+                    <span class="tag" :class="type(props.row.vote_average)">
+                        {{ props.row.vote_average }}
+                    </span>
                 </b-table-column>
 
                 <b-table-column field="vote_count" label="Vote Count" sortable>
@@ -68,7 +70,7 @@
                 this.loading = true
                 this.$http.get(`https://api.themoviedb.org/3/discover/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&language=en-US&include_adult=false&include_video=false&sort_by=${this.sortField}.${this.sortOrder}&page=${this.page}`)
                     .then(({ data }) => {
-                        // max 1000 pages
+                        // api.themoviedb.org manage max 1000 pages
                         this.data = []
                         let currentTotal = data.total_results
                         if (data.total_results / this.perPage > 1000) {
@@ -97,6 +99,19 @@
                 this.sortField = field
                 this.sortOrder = order
                 this.loadAsyncData()
+            },
+            /*
+             * Type style in relation to the value
+             */
+            type(value) {
+                const number = parseFloat(value)
+                if (number < 6) {
+                    return 'is-danger'
+                } else if (number >= 6 && number < 8) {
+                    return 'is-warning'
+                } else if (number >= 8) {
+                    return 'is-success'
+                }
             }
         },
         mounted() {
