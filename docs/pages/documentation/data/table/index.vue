@@ -84,6 +84,13 @@
 
         <hr>
         <h2 class="title is-spaced">Async data</h2>
+        <div class="content">
+            <p>
+                Use <code>backend-sorting</code> and <code>backend-pagination</code> props to let those tasks to the backend,
+                then manage it with <code>page-change</code> and <code>sort</code> events.
+            </p>
+            <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
+        </div>
         <div class="example">
             <ex-async-data></ex-async-data>
         </div>
@@ -153,9 +160,3 @@
         }
     }
 </script>
-
-<style>
-    tr.is-warning {
-        background: hsl(48, 100%, 67%) !important;
-    }
-</style>
