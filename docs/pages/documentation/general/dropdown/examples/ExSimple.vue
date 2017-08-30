@@ -44,3 +44,9 @@
         </b-dropdown>
     </section>
 </template>
+
+<style scoped>
+    .tag {
+        cursor: pointer;
+    }
+</style>
