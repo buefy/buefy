@@ -2,10 +2,10 @@
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
         <div class="pagination-list pagination-arrows">
             <a class="pagination-previous" @click="prev"  :disabled="!hasPrev">
-                <b-icon :icon="iconPrev" both></b-icon>
+                <b-icon :icon="iconPrev"></b-icon>
             </a>
             <a class="pagination-next" @click="next" :disabled="!hasNext">
-                <b-icon :icon="iconNext" both></b-icon>
+                <b-icon :icon="iconNext"></b-icon>
             </a>
         </div>
         <ul class="pagination-list" v-if="!simple">
@@ -33,6 +33,7 @@
 
 <script>
     import Icon from '../icon'
+    import config from '../../utils/config'
 
     export default {
         name: 'bPagination',
@@ -57,11 +58,11 @@
              */
             iconPrev: {
                 type: String,
-                default: 'chevron_left'
+                default: config.defaultIconPack === 'mdi' ? 'chevron_left' : 'angle-left'
             },
             iconNext: {
                 type: String,
-                default: 'chevron_right'
+                default: config.defaultIconPack === 'mdi' ? 'chevron_right' : 'angle-right'
             }
         },
         computed: {
