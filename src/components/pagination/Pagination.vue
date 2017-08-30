@@ -1,11 +1,13 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
-        <a class="pagination-previous" @click="prev"  :disabled="!hasPrev">
-            <b-icon icon="chevron_left" both></b-icon>
-        </a>
-        <a class="pagination-next" @click="next" :disabled="!hasNext">
-            <b-icon icon="chevron_right" both></b-icon>
-        </a>
+        <div class="pagination-list pagination-arrows">
+            <a class="pagination-previous" @click="prev"  :disabled="!hasPrev">
+                <b-icon :icon="iconPrev"></b-icon>
+            </a>
+            <a class="pagination-next" @click="next" :disabled="!hasNext">
+                <b-icon :icon="iconNext"></b-icon>
+            </a>
+        </div>
         <ul class="pagination-list" v-if="!simple">
 
             <!--First-->
@@ -31,6 +33,7 @@
 
 <script>
     import Icon from '../icon'
+    import config from '../../utils/config'
 
     export default {
         name: 'bPagination',
@@ -49,7 +52,18 @@
             },
             size: String,
             simple: Boolean,
-            order: String
+            order: String,
+            /**
+             * To change icons.
+             */
+            iconPrev: {
+                type: String,
+                default: config.defaultIconPack === 'mdi' ? 'chevron_left' : 'angle-left'
+            },
+            iconNext: {
+                type: String,
+                default: config.defaultIconPack === 'mdi' ? 'chevron_right' : 'angle-right'
+            }
         },
         computed: {
             /**

@@ -123,6 +123,8 @@
                         :per-page="perPage"
                         :simple="paginationSimple"
                         :current="currentPage"
+                        :iconPrev="iconPrevPagination"
+                        :iconNext="iconNextPagination"
                         @change="pageChanged">
                     </b-pagination>
                 </div>
@@ -185,6 +187,14 @@
             total: {
                 type: [Number, String],
                 default: 0
+            },
+            iconPrevPagination: {
+                type: String,
+                default: 'chevron_left'
+            },
+            iconNextPagination: {
+                type: String,
+                default: 'chevron_right'
             }
         },
         data() {
