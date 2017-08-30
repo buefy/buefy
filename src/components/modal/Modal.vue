@@ -1,7 +1,7 @@
 <template>
     <transition :name="animation">
         <div class="modal is-active" v-if="isActive">
-            <div class="modal-background" @click="cancel"></div>
+            <div class="modal-background" @click="cancel('outside')"></div>
             <div class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
                 :style="{ maxWidth: newWidth }">
@@ -13,7 +13,7 @@
                 <div v-else-if="content" v-html="content"></div>
                 <slot v-else></slot>
             </div>
-            <button v-if="canCancel" class="modal-close is-large" @click="cancel"></button>
+            <button v-if="showX" class="modal-close is-large" @click="cancel('x')"></button>
         </div>
     </transition>
 </template>
@@ -37,8 +37,8 @@
                 default: 'zoom-out'
             },
             canCancel: {
-                type: Boolean,
-                default: true
+                type: [Array, Boolean],
+                default: ['escape', 'x', 'outside']
             },
             onCancel: {
                 type: Function,
@@ -51,6 +51,16 @@
                 newWidth: typeof this.width === 'number'
                     ? this.width + 'px'
                     : this.width
+            }
+        },
+        computed: {
+            cancelOptions() {
+                return typeof(this.canCancel) === 'boolean' ?
+                    this.canCancel ? ['escape', 'x', 'outside'] : [] :
+                    this.canCancel
+            },
+            showX() {
+                return this.cancelOptions.includes('x')
             }
         },
         watch: {
@@ -68,8 +78,8 @@
             /**
              * Close the Modal if canCancel.
              */
-            cancel() {
-                if (!this.canCancel) return
+            cancel(method) {
+                if (!this.cancelOptions.includes(method)) return
 
                 this.close()
             },
@@ -98,7 +108,7 @@
              */
             keyPress(event) {
                 // Esc key
-                if (event.keyCode === 27) this.cancel()
+                if (event.keyCode === 27) this.cancel('escape')
             }
         },
         created() {
