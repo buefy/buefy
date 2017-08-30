@@ -281,13 +281,13 @@
             }
         },
         created() {
-            if (window !== undefined) {
+            if (typeof window !== 'undefined') {
                 document.addEventListener('click', this.clickedOutside)
                 window.addEventListener('resize', this.calcDropdownInViewportVertical)
             }
         },
         beforeDestroy() {
-            if (window !== undefined) {
+            if (typeof window !== 'undefined') {
                 document.removeEventListener('click', this.clickedOutside)
                 window.removeEventListener('resize', this.calcDropdownInViewportVertical)
             }
