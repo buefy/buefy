@@ -8,6 +8,7 @@
 * #273 Fix autocomplete for SSR (thanks @LANSELOT)
 * #276 Add ``first-day-of-week`` prop to datepicker
 * #279 Fix table not default sorting async data
+* #289 Fix dropdown-trigger container html tag
 
 ## 0.5.1
 

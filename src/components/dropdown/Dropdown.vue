@@ -6,13 +6,13 @@
             'is-inline': inline,
             'is-active': isActive || inline
         }]">
-        <a v-if="!inline"
+        <div v-if="!inline"
             role="button"
             ref="trigger"
             class="dropdown-trigger"
             @click="toggle">
             <slot name="trigger"></slot>
-        </a>
+        </div>
 
         <transition name="fade">
             <div v-if="!inline"
