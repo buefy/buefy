@@ -14,7 +14,7 @@
                 :icon-pack="iconPack"
                 :loading="loading"
                 v-bind="$attrs"
-                @keydown.native="preventTyping"
+                @change.native="(event) => onChange(event.target.value)"
                 @focus="$emit('focus', $event)"
                 @blur="$emit('blur', $event) && checkHtml5Validity()">
             </b-input>
@@ -112,6 +112,7 @@
 <script>
     import FormElementMixin from '../../utils/FormElementMixin'
     import { isMobile } from '../../utils/helpers'
+    import config from '../../utils/config'
 
     import { Dropdown, DropdownItem } from '../dropdown'
     import Input from '../input'
@@ -134,7 +135,7 @@
             [DropdownItem.name]: DropdownItem
         },
         props: {
-            value: [Date, String],
+            value: Date,
             dayNames: {
                 type: Array,
                 default() {
@@ -179,7 +180,23 @@
             placeholder: String,
             dateFormatter: {
                 type: Function,
-                default: (date) => date.toLocaleDateString()
+                default: (date) => {
+                    if (typeof config.defaultDateFormatter === 'function') {
+                        return config.defaultDateFormatter(date)
+                    } else {
+                        return date.toLocaleDateString()
+                    }
+                }
+            },
+            dateParser: {
+                type: Function,
+                default: (date) => {
+                    if (typeof config.defaultDateParser === 'function') {
+                        return config.defaultDateParser(date)
+                    } else {
+                        return new Date(Date.parse(date))
+                    }
+                }
             }
         },
         data() {
@@ -239,14 +256,15 @@
         watch: {
             /*
             * Emit input event with selected date as payload, set isActive to false.
-            * If value passed in is a date object, emit value as date object,
-            * else emit formatted string
+            * Update internal focusedDateData
             */
             dateSelected(value) {
-                const date = (this.value && typeof this.value.getMonth !== 'function')
-                ? this.formatValue(value) : value
-
-                this.$emit('input', date)
+                const currentDate = !value ? new Date() : value
+                this.focusedDateData = {
+                    month: currentDate.getMonth(),
+                    year: currentDate.getFullYear()
+                }
+                this.$emit('input', value)
                 if (this.$refs.dropdown) {
                     this.$refs.dropdown.isActive = false
                 }
@@ -255,17 +273,10 @@
             /**
              * When v-model is changed:
              *   1. Update internal value.
-             *   2. Update internal focusedDateData
-             *   3. If it's invalid, validate again.
+             *   2. If it's invalid, validate again.
              */
             value(value) {
                 this.dateSelected = value
-
-                const currentDate = value instanceof Date ? value : new Date()
-                this.focusedDateData = {
-                    month: currentDate.getMonth(),
-                    year: currentDate.getFullYear()
-                }
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             }
@@ -279,6 +290,18 @@
             },
 
             /*
+            * Parse string into date
+            */
+            onChange(value) {
+                const date = this.dateParser(value)
+                if (date && !isNaN(date)) {
+                    this.dateSelected = date
+                } else {
+                    this.dateSelected = null
+                }
+            },
+
+            /*
             * Format date into string
             */
             formatValue(value) {
@@ -286,9 +309,8 @@
                 * Only format if string is not null and is a valid date
                 * Null check is required because new Date(null) = 1/1/1970
                 */
-                if (value && !isNaN(new Date(value))) {
-                    const date = new Date(value)
-                    return this.dateFormatter(date)
+                if (value && !isNaN(value)) {
+                    return this.dateFormatter(value)
                 } else {
                     return null
                 }
@@ -330,16 +352,6 @@
                 }
 
                 return months[month]
-            },
-
-            /*
-            * Prevent user from typing in date box except to delete value
-            */
-            preventTyping(event) {
-                if (event.key !== 'Backspace' && event.key !== 'Tab') {
-                    event.preventDefault()
-                    this.$refs.dropdown.isActive = true
-                }
             },
 
             /*
