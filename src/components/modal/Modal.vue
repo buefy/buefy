@@ -55,9 +55,11 @@
         },
         computed: {
             cancelOptions() {
-                return typeof(this.canCancel) === 'boolean' ?
-                    this.canCancel ? ['escape', 'x', 'outside'] : [] :
-                    this.canCancel
+                return typeof this.canCancel === 'boolean'
+                    ? this.canCancel
+                        ? ['escape', 'x', 'outside']
+                        : []
+                    : this.canCancel
             },
             showX() {
                 return this.cancelOptions.includes('x')

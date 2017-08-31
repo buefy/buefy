@@ -55,9 +55,9 @@ export default [
             {
                 name: '<code>canCancel</code>',
                 description: `Can close Modal by clicking 'X', pressing escape or clicking outside`,
-                type: 'Boolean',
-                values: '—',
-                default: '<code>true</code>'
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
+                default: `<code>['escape', 'x', 'outside']</code>`
             },
             {
                 name: '<code>onCancel</code>',

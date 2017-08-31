@@ -9,6 +9,7 @@
 * #276 Add ``first-day-of-week`` prop to datepicker
 * #279 Fix table not default sorting async data
 * #289 Fix dropdown-trigger container html tag
+* #291 Add configurable closing options for Modal (thanks @jwahdatehagh)
 
 ## 0.5.1
 
