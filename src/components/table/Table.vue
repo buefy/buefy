@@ -89,7 +89,7 @@
                         </tr>
 
                         <tr v-if="detailed && isVisibleDetailRow(row)"
-                            :key="index"
+                            :key="index + new Date().getUTCMilliseconds()"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
