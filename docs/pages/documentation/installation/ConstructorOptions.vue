@@ -100,6 +100,20 @@
                         type: 'String',
                         values: '<code>on</code>, <code>off</code>',
                         default: '<code>on</code>'
+                    },
+                    {
+                        name: '<code>defaultDateFormatter</code>',
+                        description: `Default datepicker <code>date-formatter</code> attribute`,
+                        type: 'Function',
+                        values: '—',
+                        default: '<code></code>'
+                    },
+                    {
+                        name: '<code>defaultDateParser</code>',
+                        description: `Default datepicker <code>date-parser</code> attribute`,
+                        type: 'Function',
+                        values: '—',
+                        default: '<code></code>'
                     }
                 ]
             }

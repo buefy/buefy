@@ -2,6 +2,7 @@
     <b-field label="Select a date">
         <b-datepicker
             placeholder="Click to select..."
+            :readonly="true"
             :min-date="minDate"
             :max-date="maxDate">
         </b-datepicker>

@@ -4,16 +4,23 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
-                type: 'Date, String',
+                type: 'Date',
                 values: '—',
                 default: '—'
             },
             {
                 name: '<code>date-formatter</code>',
-                description: 'Function to parse date to a string for display in the input/to be emitted if a string is passed in as component value. Will be passed a Date object as argument.',
+                description: 'Function to format date to a string for display in the input',
                 type: 'Function',
                 values: '—',
                 default: '<code>(date) => date.toLocaleDateString()</code>'
+            },
+            {
+                name: '<code>date-parser</code>',
+                description: 'Function to parse string to a date for set a date from the input to the component',
+                type: 'Function',
+                values: '—',
+                default: '<code>(date) => new Date(Date.parse(date))</code>'
             },
             {
                 name: '<code>min-date</code>',
@@ -46,6 +53,13 @@ export default [
             {
                 name: '<code>inline</code>',
                 description: 'Datepicker is shown inline, input is removed',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>readonly</code>',
+                description: 'Datepicker doesn\'t allow to enter date manually',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

@@ -7,7 +7,7 @@
                 ref="input"
                 slot="trigger"
                 autocomplete="off"
-                :value="formatValue(dateSelected)"
+                :value="formattedDateSelected"
                 :placeholder="placeholder"
                 :size="size"
                 :icon="icon"
@@ -200,13 +200,11 @@
             }
         },
         data() {
-            let focusedDate = this.value || this.focusedDate || new Date()
-            if (focusedDate instanceof Date) {
-                focusedDate = new Date(focusedDate)
-            }
+            const focusedDate = this.value || this.focusedDate || new Date()
 
             return {
-                dateSelected: this.value ? new Date(this.value) : null,
+                dateSelected: this.value,
+                formattedDateSelected: this.formatValue(this.value),
                 focusedDateData: {
                     month: focusedDate.getMonth(),
                     year: focusedDate.getFullYear()
@@ -264,6 +262,7 @@
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()
                 }
+                this.formattedDateSelected = this.formatValue(value)
                 this.$emit('input', value)
                 if (this.$refs.dropdown) {
                     this.$refs.dropdown.isActive = false
@@ -305,10 +304,6 @@
             * Format date into string
             */
             formatValue(value) {
-                /*
-                * Only format if string is not null and is a valid date
-                * Null check is required because new Date(null) = 1/1/1970
-                */
                 if (value && !isNaN(value)) {
                     return this.dateFormatter(value)
                 } else {
@@ -376,6 +371,9 @@
                 const date = event.target.value
                 this.dateSelected = date ? new Date(date) : null
             }
+        },
+        mounted() {
+            // this.formattedDateSelected = this.formatValue(this.dateSelected)
         }
     }
 </script>
