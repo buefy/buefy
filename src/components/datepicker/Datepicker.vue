@@ -204,7 +204,6 @@
 
             return {
                 dateSelected: this.value,
-                formattedDateSelected: this.formatValue(this.value),
                 focusedDateData: {
                     month: focusedDate.getMonth(),
                     year: focusedDate.getFullYear()
@@ -231,6 +230,10 @@
                 }
 
                 return arrayOfYears.reverse()
+            },
+
+            formattedDateSelected() {
+                return this.formatValue(this.dateSelected)
             },
 
             isFirstMonth() {
@@ -262,7 +265,6 @@
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()
                 }
-                this.formattedDateSelected = this.formatValue(value)
                 this.$emit('input', value)
                 if (this.$refs.dropdown) {
                     this.$refs.dropdown.isActive = false
@@ -297,6 +299,11 @@
                     this.dateSelected = date
                 } else {
                     this.dateSelected = null
+                    // force refresh when not valid date
+                    this.$nextTick(() => {
+                        // see computed 'formattedDateSelected'
+                        this.$refs.input.$refs.input.value = this.formatValue(this.dateSelected)
+                    })
                 }
             },
 
@@ -371,9 +378,6 @@
                 const date = event.target.value
                 this.dateSelected = date ? new Date(date) : null
             }
-        },
-        mounted() {
-            // this.formattedDateSelected = this.formatValue(this.dateSelected)
         }
     }
 </script>
