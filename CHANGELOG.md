@@ -11,6 +11,7 @@
 * #279 Fix table not default sorting async data
 * #289 Fix dropdown-trigger container html tag
 * #291 Add configurable closing options for Modal (thanks @jwahdatehagh)
+* #298 Fix mobile detection datepicker for SSR
 
 ## 0.5.1
 

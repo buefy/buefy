@@ -101,6 +101,7 @@
             :loading="loading"
             :max="formatYYYYMMDD(maxDate)"
             :min="formatYYYYMMDD(minDate)"
+            :readonly="false"
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
             @focus="$emit('focus', $event)"
