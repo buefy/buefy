@@ -7,12 +7,13 @@
                 ref="input"
                 slot="trigger"
                 autocomplete="off"
-                :value="formattedDateSelected"
+                :value="formatValue(dateSelected)"
                 :placeholder="placeholder"
                 :size="size"
                 :icon="icon"
                 :icon-pack="iconPack"
                 :loading="loading"
+                :readonly="readonly"
                 v-bind="$attrs"
                 @change.native="(event) => onChange(event.target.value)"
                 @focus="$emit('focus', $event)"
@@ -179,6 +180,10 @@
             maxDate: Date,
             focusedDate: Date,
             placeholder: String,
+            readonly: {
+                type: Boolean,
+                default: true
+            },
             dateFormatter: {
                 type: Function,
                 default: (date) => {
@@ -231,10 +236,6 @@
                 }
 
                 return arrayOfYears.reverse()
-            },
-
-            formattedDateSelected() {
-                return this.formatValue(this.dateSelected)
             },
 
             isFirstMonth() {
@@ -299,12 +300,9 @@
                 if (date && !isNaN(date)) {
                     this.dateSelected = date
                 } else {
+                    // Force refresh input value when not valid date
                     this.dateSelected = null
-                    // force refresh when not valid date
-                    this.$nextTick(() => {
-                        // see computed 'formattedDateSelected'
-                        this.$refs.input.$refs.input.value = this.formatValue(this.dateSelected)
-                    })
+                    this.$refs.input.newValue = this.dateSelected
                 }
             },
 

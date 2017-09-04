@@ -5,7 +5,7 @@
 * #262 Add ``empty`` slot to autocomplete (empty message)
 * #264 Add ``has-counter`` prop to input, add it when you want show or hide character counter when maxlength prop is passed
 * #265 Fix disabled pagination (thanks @YassinOuider)
-* #272 Datepicker allow to enter date manually
+* #272 Add ``readonly`` prop to allow typing a date on datepicker
 * #273 Fix autocomplete for SSR (thanks @LANSELOT)
 * #276 Add ``first-day-of-week`` prop to datepicker
 * #279 Fix table not default sorting async data

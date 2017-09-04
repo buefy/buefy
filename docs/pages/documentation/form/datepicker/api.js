@@ -59,10 +59,10 @@ export default [
             },
             {
                 name: '<code>readonly</code>',
-                description: 'Datepicker doesn\'t allow to enter date manually',
+                description: 'Does not allow to type a date, set to <code>false</code> to enable input. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>loading</code>',

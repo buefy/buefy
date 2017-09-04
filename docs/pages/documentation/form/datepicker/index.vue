@@ -14,6 +14,24 @@
         </div>
 
         <hr>
+        <h2 class="title">Non read-only</h2>
+        <p class="content">Use <code>:readonly="false"</code> to let the user type a date.</p>
+        <b-message type="is-warning" has-icon>
+            Note that the default date parser is
+            <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse" target="_blank">Date.parse()</a>
+            and it only works for <b>mm-dd-yyyy</b> format. If your locale is different, you have to pass a custom one with
+            <code>date-parser</code> prop, or by setting a <router-link to="/documentation/constructor-options">constructor option</router-link>.
+        </b-message>
+        <div class="columns">
+            <div class="column">
+                <ex-non-readonly></ex-non-readonly>
+            </div>
+            <div class="column">
+                <pre v-highlight><code class="html">{{ ExNonReadonlyCode }}</code></pre>
+            </div>
+        </div>
+
+        <hr>
         <h2 class="title">Range</h2>
         <p class="content">You can limit the date range with <code>min-date</code> and <code>max-date</code> props.</p>
         <div class="columns">
@@ -62,6 +80,9 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
+    import ExNonReadonly from './examples/ExNonReadonly'
+    import ExNonReadonlyCode from '!!raw-loader!./examples/ExNonReadonly'
+
     import ExRange from './examples/ExRange'
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
 
@@ -74,6 +95,7 @@
     export default {
         components: {
             ExSimple,
+            ExNonReadonly,
             ExRange,
             ExFooter,
             ExInline
@@ -82,6 +104,7 @@
             return {
                 api,
                 ExSimpleCode,
+                ExNonReadonlyCode,
                 ExRangeCode,
                 ExFooterCode,
                 ExInlineCode
