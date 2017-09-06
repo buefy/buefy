@@ -38,7 +38,7 @@
             },
             canCancel: {
                 type: [Array, Boolean],
-                default: ['escape', 'x', 'outside']
+                default: () => ['escape', 'x', 'outside']
             },
             onCancel: {
                 type: Function,
