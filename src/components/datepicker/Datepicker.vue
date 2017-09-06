@@ -2,6 +2,7 @@
     <div class="datepicker control" :class="[size, {'is-expanded': expanded}]">
         <b-dropdown v-if="!isMobile || inline"
             ref="dropdown"
+            :disabled="disabled"
             :inline="inline">
             <b-input v-if="!inline"
                 ref="input"
@@ -13,6 +14,7 @@
                 :icon="icon"
                 :icon-pack="iconPack"
                 :loading="loading"
+                :disabled="disabled"
                 :readonly="readonly"
                 v-bind="$attrs"
                 @change.native="(event) => onChange(event.target.value)"
@@ -102,6 +104,7 @@
             :loading="loading"
             :max="formatYYYYMMDD(maxDate)"
             :min="formatYYYYMMDD(minDate)"
+            :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
@@ -183,6 +186,10 @@
             readonly: {
                 type: Boolean,
                 default: true
+            },
+            disabled: {
+                type: Boolean,
+                default: false
             },
             dateFormatter: {
                 type: Function,
