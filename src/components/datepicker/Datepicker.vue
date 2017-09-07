@@ -17,19 +17,20 @@
                 :disabled="disabled"
                 :readonly="readonly"
                 v-bind="$attrs"
-                @change.native="(event) => onChange(event.target.value)"
+                @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"
                 @blur="$emit('blur', $event) && checkHtml5Validity()">
             </b-input>
 
-            <b-dropdown-item custom>
+            <b-dropdown-item :disabled="disabled" custom>
                 <header class="datepicker-header">
                     <div class="pagination field is-centered">
-                        <a v-if="!isFirstMonth"
+                        <a v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
                             role="button"
                             tabindex="0"
                             aria-label="Decrement Month"
+                            :disabled="disabled"
                             @click="decrementMonth"
                             @keydown.enter="decrementMonth"
                             @keydown.space.prevent="decrementMonth">
@@ -39,11 +40,12 @@
                                 type="is-primary is-clickable">
                             </b-icon>
                         </a>
-                        <a v-show="!isLastMonth"
+                        <a v-show="!isLastMonth && !disabled"
                             class="pagination-next"
                             role="button"
                             tabindex="0"
                             aria-label="Increment Month"
+                            :disabled="disabled"
                             @click="incrementMonth"
                             @keydown.enter="incrementMonth"
                             @keydown.space.prevent="incrementMonth">
@@ -55,7 +57,9 @@
                         </a>
                         <div class="pagination-list">
                             <b-field>
-                                <b-select v-model="focusedDateData.month" aria-label="Select Month">
+                                <b-select v-model="focusedDateData.month" 
+                                    :disabled="disabled"
+                                    aria-label="Select Month">
                                     <option v-for="(month, index) in Object.values(monthNames)"
                                         :value="index"
                                         :key="month">
@@ -63,6 +67,7 @@
                                     </option>
                                 </b-select>
                                 <b-select v-model="focusedDateData.year"
+                                    :disabled="disabled"
                                     aria-label="Select Year">
                                     <option v-for="year in listOfYears"
                                         :value="year"
@@ -82,6 +87,7 @@
                     :min-date="minDate"
                     :max-date="maxDate"
                     :focused="focusedDateData"
+                    :disabled="disabled"
                     @close="$refs.dropdown.isActive = false">
                 </b-datepicker-table>
 
@@ -329,6 +335,8 @@
             * and set month to 11 (December)
             */
             decrementMonth() {
+                if (this.disabled) return
+
                 if (this.focusedDateData.month > 0) {
                     this.focusedDateData.month -= 1
                 } else {
@@ -342,6 +350,8 @@
             * and set month to 0 (January)
             */
             incrementMonth() {
+                if (this.disabled) return
+
                 if (this.focusedDateData.month < 11) {
                     this.focusedDateData.month += 1
                 } else {

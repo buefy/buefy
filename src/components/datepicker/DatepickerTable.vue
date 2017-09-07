@@ -16,6 +16,7 @@
                 :month="focused.month"
                 :min-date="minDate"
                 :max-date="maxDate"
+                :disabled="disabled"
                 @select="updateSelectedDate">
             </b-datepicker-table-row>
         </div>
@@ -37,7 +38,8 @@
             firstDayOfWeek: Number,
             minDate: Date,
             maxDate: Date,
-            focused: Object
+            focused: Object,
+            disabled: Boolean
         },
         computed: {
             visibleDayNames() {

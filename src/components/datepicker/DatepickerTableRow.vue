@@ -1,13 +1,14 @@
 <template>
     <div class="datepicker-row">
         <template v-for="(day, index) in week">
-            <a v-if="selectableDate(day)"
+            <a v-if="selectableDate(day) && !disabled"
                 :key="index"
                 :class="classObject(day)"
                 class="datepicker-cell"
                 role="button"
                 tabindex="0"
                 aria-label="Select Date"
+                :disabled="disabled"
                 @click="emitChosenDate(day)"
                 @keydown.enter="emitChosenDate(day)"
                 @keydown.space.prevent="emitChosenDate(day)">
@@ -37,7 +38,8 @@
                 required: true
             },
             minDate: Date,
-            maxDate: Date
+            maxDate: Date,
+            disabled: Boolean
         },
         methods: {
             /*
@@ -64,6 +66,8 @@
             * Emit select event with chosen date as payload
             */
             emitChosenDate(day) {
+                if (this.disabled) return
+
                 if (this.selectableDate(day)) {
                     this.$emit('select', day)
                 }
@@ -87,8 +91,8 @@
                 return {
                     'is-selected': dateMatch(day, this.selectedDate),
                     'is-today': dateMatch(day, new Date()),
-                    'is-selectable': this.selectableDate(day),
-                    'is-unselectable': !this.selectableDate(day)
+                    'is-selectable': this.selectableDate(day) && !this.disabled,
+                    'is-unselectable': !this.selectableDate(day) || this.disabled
                 }
             }
         }
