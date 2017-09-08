@@ -39,7 +39,7 @@
                     You might also have to install <code>node-sass</code> and <code>sass-loader</code> depending on your environment.
                 </b-message>
                 <p class="block">
-                    It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag.
+                    It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag, or in a separate <b>.scss</b> file.
                 </p>
                 <div class="example is-paddingless">
                     <CodeView :code="sass | pre" lang="sass" />
@@ -54,6 +54,9 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
+                <b-message type="is-warning">
+                    Please note that <code class="javascript">import 'buefy/lib/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
+                </b-message>
                 <CodeView :code="importing | pre" lang="javascript" />
             </div>
         </div>
