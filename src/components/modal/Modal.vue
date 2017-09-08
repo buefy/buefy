@@ -19,6 +19,8 @@
 </template>
 
 <script>
+    import { removeElement } from '../../utils/helpers'
+
     export default {
         name: 'bModal',
         props: {
@@ -62,7 +64,7 @@
                     : this.canCancel
             },
             showX() {
-                return this.cancelOptions.includes('x')
+                return this.cancelOptions.indexOf('x') >= 0
             }
         },
         watch: {
@@ -81,7 +83,7 @@
              * Close the Modal if canCancel.
              */
             cancel(method) {
-                if (!this.cancelOptions.includes(method)) return
+                if (this.cancelOptions.indexOf(method) < 0) return
 
                 this.close()
             },
@@ -100,7 +102,7 @@
                     this.isActive = false
                     setTimeout(() => {
                         this.$destroy()
-                        this.$el.remove()
+                        removeElement(this.$el)
                     }, 150)
                 }
             },

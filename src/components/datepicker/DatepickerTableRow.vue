@@ -59,7 +59,7 @@
 
                 validity.push(day.getMonth() === this.month)
 
-                return !validity.includes(false)
+                return validity.indexOf(false) < 0
             },
 
             /*

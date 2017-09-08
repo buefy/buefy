@@ -53,6 +53,7 @@
 
 <script>
     import Icon from '../icon'
+    import { removeElement } from '../../utils/helpers'
 
     export default {
         components: {
@@ -166,7 +167,7 @@
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()
-                    this.$el.remove()
+                    removeElement(this.$el)
                 }, 150)
             },
 
