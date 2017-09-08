@@ -10,7 +10,7 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown v-model="navigation" position="is-bottom-left">
+                <b-dropdown position="is-bottom-left">
                     <a class="navbar-item" slot="trigger">
                         <span>Login</span>
                         <b-icon icon="arrow_drop_down"></b-icon>

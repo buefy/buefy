@@ -76,33 +76,6 @@
                 this.$emit('active-change', value)
             }
         },
-        computed: {
-            /**
-             * White-listed items to not close when clicked.
-             * Add input, dropdown, trigger and all children.
-             */
-            whiteList() {
-                const whiteList = []
-                whiteList.push(this.$refs.dropdownMenu)
-                whiteList.push(this.$refs.trigger)
-                // Adds all chidren from dropdown
-                if (this.$refs.dropdownMenu !== undefined) {
-                    const children = this.$refs.dropdownMenu.querySelectorAll('*')
-                    for (const child of children) {
-                        whiteList.push(child)
-                    }
-                }
-                // Adds all children from trigger
-                if (this.$refs.trigger !== undefined) {
-                    const children = this.$refs.trigger.querySelectorAll('*')
-                    for (const child of children) {
-                        whiteList.push(child)
-                    }
-                }
-
-                return whiteList
-            }
-        },
         methods: {
             /**
              * Click listener from DropdownItem.
@@ -118,12 +91,42 @@
             },
 
             /**
+             * White-listed items to not close when clicked.
+             */
+            isInWhiteList(el) {
+                if (el === this.$refs.dropdownMenu) return true
+                if (el === this.$refs.trigger) return true
+                // All chidren from dropdown
+                if (this.$refs.dropdownMenu !== undefined) {
+                    const children = this.$refs.dropdownMenu.querySelectorAll('*')
+                    for (const child of children) {
+                        if (el === child) {
+                            console.log('a')
+                            return true
+                        }
+                    }
+                }
+                // All children from trigger
+                if (this.$refs.trigger !== undefined) {
+                    const children = this.$refs.trigger.querySelectorAll('*')
+                    for (const child of children) {
+                        if (el === child) {
+                            console.log('b')
+                            return true
+                        }
+                    }
+                }
+
+                return false
+            },
+
+            /**
              * Close dropdown if clicked outside.
              */
             clickedOutside(event) {
                 if (this.inline) return
 
-                if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
+                if (!this.isInWhiteList(event.target)) this.isActive = false
             },
 
             /**
