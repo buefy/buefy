@@ -101,7 +101,6 @@
                     const children = this.$refs.dropdownMenu.querySelectorAll('*')
                     for (const child of children) {
                         if (el === child) {
-                            console.log('a')
                             return true
                         }
                     }
@@ -111,7 +110,6 @@
                     const children = this.$refs.trigger.querySelectorAll('*')
                     for (const child of children) {
                         if (el === child) {
-                            console.log('b')
                             return true
                         }
                     }
