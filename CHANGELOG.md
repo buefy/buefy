@@ -2,6 +2,7 @@
 
 ## 0.5.3
 
+* #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
 * #305 Fix datepicker calendar display when disabled and inline
 
 ## 0.5.2
