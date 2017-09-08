@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.5.3
+
+* #305 Fix datepicker calendar display when disabled and inline
+
 ## 0.5.2
 
 * #262 Add ``empty`` slot to autocomplete (empty message)
@@ -13,7 +17,6 @@
 * #291 Add configurable closing options for Modal (thanks @jwahdatehagh)
 * #298 Fix mobile detection datepicker for SSR
 * #302 Fix datepicker calendar display when disabled
-* #305 Fix datepicker calendar display when disabled and inline
 
 ## 0.5.1
 
