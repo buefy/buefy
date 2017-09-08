@@ -19,6 +19,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>label-for</code>',
+                description: 'Same as native <code>for</code> set on the label',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>message</code>',
                 description: 'Help message text',
                 type: 'String, Array<String>',

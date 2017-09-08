@@ -3,7 +3,7 @@
         'is-expanded': expanded,
         'is-grouped-multiline': groupMultiline
     }]">
-        <label class="label" v-if="label">{{ label }}</label>
+        <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
         <slot></slot>
         <p class="help" :class="newType" v-if="newMessage" v-html="formattedMessage"></p>
     </div>
@@ -15,6 +15,7 @@
         props: {
             type: String,
             label: String,
+            labelFor: String,
             message: [String, Array],
             grouped: Boolean,
             groupMultiline: Boolean,
