@@ -17,6 +17,7 @@ const Layout = () => import('../pages/documentation/general/layout')
 const Icon = () => import('../pages/documentation/general/icon')
 const Dropdown = () => import('../pages/documentation/general/dropdown')
 const Modal = () => import('../pages/documentation/general/modal')
+const Collapse = () => import('../pages/documentation/general/collapse')
 const Panel = () => import('../pages/documentation/general/panel')
 const Tabs = () => import('../pages/documentation/general/tabs')
 const Tag = () => import('../pages/documentation/general/tag')
@@ -117,6 +118,13 @@ export default new Router({
                 {
                     path: 'tabs',
                     component: Tabs,
+                    meta: {
+                        category: General
+                    }
+                },
+                {
+                    path: 'collapse',
+                    component: Collapse,
                     meta: {
                         category: General
                     }

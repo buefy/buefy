@@ -2,6 +2,7 @@
 
 ## 0.5.3
 
+* **New component: Collapse**, [see docs](https://buefy.github.io/#/documentation/collapse)
 * #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
 * #301 Fix Bulma style override for radio and checkbox
 * #303 Fix dropdown close on custom item when is replaced or changed
