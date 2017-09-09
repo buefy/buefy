@@ -3,6 +3,7 @@
 ## 0.5.3
 
 * #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
+* #301 Fix Bulma style override for radio and checkbox
 * #303 Fix dropdown close on custom item when is replaced or changed
 * #305 Fix datepicker calendar display when disabled and inline
 

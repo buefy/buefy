@@ -1,6 +1,6 @@
 <template>
     <div class="control">
-        <label class="radio button"
+        <label class="b-radio radio button"
             ref="label"
             :class="[newValue === nativeValue ? type : null, size]"
             :disabled="disabled"
