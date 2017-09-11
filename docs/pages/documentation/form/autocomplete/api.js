@@ -135,6 +135,11 @@ export default [
                 name: '<code>focus</code>',
                 description: 'Set focus (internally uses the native <code>.select()</code> method)',
                 return: '—'
+            },
+            {
+                name: '<code>setSelected</code>',
+                description: 'Select on option by String or Number or Object (same type of <code>data</code> element)',
+                return: '—'
             }
         ]
     }
