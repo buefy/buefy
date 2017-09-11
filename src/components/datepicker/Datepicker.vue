@@ -36,6 +36,7 @@
                             @keydown.space.prevent="decrementMonth">
 
                             <b-icon icon="chevron_left"
+                                :pack="iconPack"
                                 both
                                 type="is-primary is-clickable">
                             </b-icon>
@@ -51,6 +52,7 @@
                             @keydown.space.prevent="incrementMonth">
 
                             <b-icon icon="chevron_right"
+                                :pack="iconPack"
                                 both
                                 type="is-primary is-clickable">
                             </b-icon>
