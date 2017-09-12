@@ -61,3 +61,11 @@ export function removeElement(el) {
         el.parentNode.removeChild(el)
     }
 }
+
+/**
+ * Escape regex characters
+ * http://stackoverflow.com/a/6969486
+ */
+export function escapeRegExpChars(value) {
+    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+}
