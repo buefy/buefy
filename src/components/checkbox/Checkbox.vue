@@ -2,14 +2,11 @@
     <label class="checkbox"
         :class="{ 'is-disabled': disabled }"
         ref="label"
-        :for="nativeId"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="$refs.label.click()">
         <input v-model="newValue"
             type="checkbox"
-            v-bind="$attrs"
-            :id="nativeId"
             :disabled="disabled"
             :name="name"
             :value="nativeValue"
@@ -23,7 +20,6 @@
 <script>
     export default {
         name: 'bCheckbox',
-        inheritAttrs: false,
         props: {
             value: {},
             nativeValue: {},

@@ -16,13 +16,6 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>native-id</code>',
-                description: 'Same as native <code>id</code> also set as <code>for</code> on the label',
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
                 name: '<code>true-value</code>',
                 description: `Overrides the returned value when it's checked`,
                 type: 'Any',
