@@ -25,7 +25,7 @@
         <div class="content">
             <p>You can add checkboxes to rows by using the <code>checkable</code> prop.</p>
             <p>
-                To show which rows are <strong>checked</strong>, you have to pass the corresponding object array to the <code>checked</code> prop.
+                To show which rows are <strong>checked</strong>, you have to pass the corresponding object array to the <code>checked-rows</code> prop.
                 Adding the <code>.sync</code> modifier will make it two-way binding — checked object array will mutate if user clicks on checkboxes.
             </p>
         </div>
