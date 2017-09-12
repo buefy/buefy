@@ -24,7 +24,6 @@
             value: {},
             nativeValue: {},
             disabled: Boolean,
-            nativeId: String,
             name: String,
             trueValue: {
                 type: [String, Number, Boolean, Function, Object, Array, Symbol],
