@@ -114,6 +114,27 @@
                         type: 'Function',
                         values: '—',
                         default: '<code></code>'
+                    },
+                    {
+                        name: '<code>defaultDayNames</code>',
+                        description: `Default datepicker <code>day-names</code> attribute`,
+                        type: 'Array',
+                        values: '—',
+                        default: '<code></code>'
+                    },
+                    {
+                        name: '<code>defaultMonthNames</code>',
+                        description: `Default datepicker <code>month-names</code> attribute`,
+                        type: 'Array',
+                        values: '—',
+                        default: '<code></code>'
+                    },
+                    {
+                        name: '<code>defaultFirstDayOfWeek</code>',
+                        description: `Default datepicker <code>first-day-of-week</code> attribute`,
+                        type: 'Number',
+                        values: '—',
+                        default: '<code></code>'
                     }
                 ]
             }

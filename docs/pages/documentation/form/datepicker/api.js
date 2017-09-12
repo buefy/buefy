@@ -86,14 +86,14 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
-                name: '<code>day-names</code>',
+                name: '<code>month-names</code>',
                 description: 'Names of months to display in table header',
                 type: 'Array',
                 values: '—',
                 default: '<code>["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]</code>'
             },
             {
-                name: '<code>month-names</code>',
+                name: '<code>day-names</code>',
                 description: 'Names of days to display in table header',
                 type: 'Array',
                 values: '—',

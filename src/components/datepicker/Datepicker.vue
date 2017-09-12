@@ -151,40 +151,54 @@
             value: Date,
             dayNames: {
                 type: Array,
-                default() {
-                    return [
-                        'Su',
-                        'M',
-                        'Tu',
-                        'W',
-                        'Th',
-                        'F',
-                        'S'
-                    ]
+                default: () => {
+                    if (Array.isArray(config.defaultDayNames)) {
+                        return config.defaultDayNames
+                    } else {
+                        return [
+                            'Su',
+                            'M',
+                            'Tu',
+                            'W',
+                            'Th',
+                            'F',
+                            'S'
+                        ]
+                    }
                 }
             },
             monthNames: {
                 type: Array,
-                default() {
-                    return [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
-                        'June',
-                        'July',
-                        'August',
-                        'September',
-                        'October',
-                        'November',
-                        'December'
-                    ]
+                default: () => {
+                    if (Array.isArray(config.defaultMonthNames)) {
+                        return config.defaultMonthNames
+                    } else {
+                        return [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'
+                        ]
+                    }
                 }
             },
             firstDayOfWeek: {
                 type: Number,
-                default: 0
+                default: () => {
+                    if (typeof config.defaultFirstDayOfWeek === 'number') {
+                        return config.defaultFirstDayOfWeek
+                    } else {
+                        return 0
+                    }
+                }
             },
             inline: Boolean,
             minDate: Date,
