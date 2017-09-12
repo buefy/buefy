@@ -15,6 +15,7 @@ $checkbox-checkmark-color: $primary-invert !default;
             + .check {
                 width: 1.25em;
                 height: 1.25em;
+                flex-shrink: 0;
                 border-radius: $radius;
                 border: 2px solid $grey;
                 transition: background $speed-slow $easing;
