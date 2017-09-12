@@ -10,6 +10,7 @@
 * #309 Add ``labelFor`` prop to field component, to set native ``for`` attribute to the label tag (thanks @tmepple)
 * #314 Set pack prop to next/prev icon buttons for datepicker 
 * #316 Fix checkbox shrinking when text is very long (thanks @Tirke)
+* #317 Add default datepicker constructor options
 
 ## 0.5.2
 
