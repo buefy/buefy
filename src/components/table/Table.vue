@@ -89,7 +89,6 @@
                         </tr>
 
                         <tr v-if="detailed && isVisibleDetailRow(row)"
-                            :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -269,7 +268,7 @@
              * When columns change, call initSort only first time (For example async data).
              */
             columns(columns) {
-                if (this.firstTimeSort) {
+                if (columns.length && this.firstTimeSort) {
                     this.initSort()
                     this.firstTimeSort = false
                 }
@@ -373,7 +372,9 @@
                         ? !this.isAsc
                         : (this.isAsc = this.defaultSortDirection.toLowerCase() !== 'desc')
                 }
-                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                if (!this.firstTimeSort) {
+                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                }
                 if (!this.backendSorting) {
                     this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc)
                 }

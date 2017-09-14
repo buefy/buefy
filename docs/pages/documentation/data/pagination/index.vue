@@ -7,7 +7,7 @@
         <div class="example">
             <ex-simple></ex-simple>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
 
         <hr>
 

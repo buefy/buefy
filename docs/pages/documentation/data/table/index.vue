@@ -25,7 +25,7 @@
         <div class="content">
             <p>You can add checkboxes to rows by using the <code>checkable</code> prop.</p>
             <p>
-                To show which rows are <strong>checked</strong>, you have to pass the corresponding object array to the <code>checked</code> prop.
+                To show which rows are <strong>checked</strong>, you have to pass the corresponding object array to the <code>checked-rows</code> prop.
                 Adding the <code>.sync</code> modifier will make it two-way binding — checked object array will mutate if user clicks on checkboxes.
             </p>
         </div>
@@ -83,6 +83,20 @@
         <pre class="example-code" v-highlight><code class="html">{{ ExToggleColumnsCode }}</code></pre>
 
         <hr>
+        <h2 class="title is-spaced">Async data</h2>
+        <div class="content">
+            <p>
+                Use <code>backend-sorting</code> and <code>backend-pagination</code> props to let those tasks to the backend,
+                then manage it with <code>page-change</code> and <code>sort</code> events.
+            </p>
+            <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
+        </div>
+        <div class="example">
+            <ex-async-data></ex-async-data>
+        </div>
+        <pre class="example-code" v-highlight><code class="html">{{ ExAsyncDataCode }}</code></pre>
+
+        <hr>
         <h2 class="title is-spaced">API</h2>
         <api-view :data="api"></api-view>
     </div>
@@ -115,6 +129,9 @@
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
+    import ExAsyncData from './examples/ExAsyncData'
+    import ExAsyncDataCode from '!!raw-loader!./examples/ExAsyncData'
+
     export default {
         components: {
             ExSimple,
@@ -124,7 +141,8 @@
             ExDetailedRow,
             ExRowStatus,
             ExCustomHeaders,
-            ExToggleColumns
+            ExToggleColumns,
+            ExAsyncData
         },
         data() {
             return {
@@ -136,14 +154,9 @@
                 ExDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
-                ExToggleColumnsCode
+                ExToggleColumnsCode,
+                ExAsyncDataCode
             }
         }
     }
 </script>
-
-<style>
-    tr.is-warning {
-        background: hsl(48, 100%, 67%) !important;
-    }
-</style>

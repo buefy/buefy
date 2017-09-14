@@ -27,6 +27,7 @@
             <b-switch v-model="isSimple">Simple</b-switch>
         </div>
 
+        <hr>
         <b-pagination
             :total="total"
             :current.sync="current"

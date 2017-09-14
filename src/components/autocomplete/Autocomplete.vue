@@ -20,7 +20,7 @@
         <transition name="fade">
             <div class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
-                v-show="isActive && visibleData.length > 0"
+                v-show="isActive && (visibleData.length > 0 || hasEmptySlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
                     <a v-for="(option, index) in visibleData"
@@ -36,6 +36,10 @@
                         class="dropdown-item is-disabled">
                         &hellip;
                     </div>
+                    <div v-else-if="visibleData.length === 0"
+                        class="dropdown-item is-disabled">
+                        <slot name="empty"></slot>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -43,7 +47,7 @@
 </template>
 
 <script>
-    import { getValueByPath } from '../../utils/helpers'
+    import { getValueByPath, escapeRegExpChars } from '../../utils/helpers'
     import FormElementMixin from '../../utils/FormElementMixin'
     import Input from '../input'
 
@@ -112,6 +116,13 @@
              */
             hasDefaultSlot() {
                 return !!this.$scopedSlots.default
+            },
+
+            /**
+             * Check if exists "empty" slot
+             */
+            hasEmptySlot() {
+                return !!this.$slots.empty
             }
         },
         watch: {
@@ -220,7 +231,8 @@
                     ? getValueByPath(option, this.field)
                     : option
 
-                const regex = new RegExp(`(${this.newValue})`, 'gi')
+                const escapedValue = escapeRegExpChars(this.newValue)
+                const regex = new RegExp(`(${escapedValue})`, 'gi')
 
                 return isHighlight
                     ? value.replace(regex, '<b>$1</b>')
@@ -270,13 +282,13 @@
             }
         },
         created() {
-            if (window !== undefined) {
+            if (typeof window !== 'undefined') {
                 document.addEventListener('click', this.clickedOutside)
                 window.addEventListener('resize', this.calcDropdownInViewportVertical)
             }
         },
         beforeDestroy() {
-            if (window !== undefined) {
+            if (typeof window !== 'undefined') {
                 document.removeEventListener('click', this.clickedOutside)
                 window.removeEventListener('resize', this.calcDropdownInViewportVertical)
             }

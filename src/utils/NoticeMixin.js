@@ -1,4 +1,5 @@
 import config from './config'
+import { removeElement } from './helpers'
 
 export default {
     props: {
@@ -72,7 +73,7 @@ export default {
             // Timeout for the animation complete before destroying
             setTimeout(() => {
                 this.$destroy()
-                this.$el.remove()
+                removeElement(this.$el)
             }, 150)
         },
 

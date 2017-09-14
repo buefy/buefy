@@ -13,24 +13,26 @@ const Customization = () => import('../pages/documentation/installation/Customiz
 const ConstructorOptions = () => import('../pages/documentation/installation/ConstructorOptions')
 
 import General from '../pages/documentation/general/GeneralNav'
-const Layout = () => import('../pages/documentation/general/Layout')
-const Icon = () => import('../pages/documentation/general/Icon')
-const Dropdown = () => import('../pages/documentation/general/Dropdown')
-const Modal = () => import('../pages/documentation/general/Modal')
-const Panel = () => import('../pages/documentation/general/Panel')
-const Tabs = () => import('../pages/documentation/general/Tabs')
-const Tooltip = () => import('../pages/documentation/general/Tooltip')
-const Tag = () => import('../pages/documentation/general/Tag')
+const Layout = () => import('../pages/documentation/general/layout')
+const Icon = () => import('../pages/documentation/general/icon')
+const Dropdown = () => import('../pages/documentation/general/dropdown')
+const Modal = () => import('../pages/documentation/general/modal')
+const Collapse = () => import('../pages/documentation/general/collapse')
+const Panel = () => import('../pages/documentation/general/panel')
+const Tabs = () => import('../pages/documentation/general/tabs')
+const Tag = () => import('../pages/documentation/general/tag')
+const Tooltip = () => import('../pages/documentation/general/tooltip')
 
 import Notices from '../pages/documentation/notices/NoticesNav'
-const Dialog = () => import('../pages/documentation/notices/Dialog')
-const Toast = () => import('../pages/documentation/notices/Toast')
-const Snackbar = () => import('../pages/documentation/notices/Snackbar')
-const Notification = () => import('../pages/documentation/notices/Notification')
-const Message = () => import('../pages/documentation/notices/Message')
-const Loading = () => import('../pages/documentation/notices/Loading')
+const Dialog = () => import('../pages/documentation/notices/dialog')
+const Toast = () => import('../pages/documentation/notices/toast')
+const Snackbar = () => import('../pages/documentation/notices/snackbar')
+const Notification = () => import('../pages/documentation/notices/notification')
+const Message = () => import('../pages/documentation/notices/message')
+const Loading = () => import('../pages/documentation/notices/loading')
 
 import FormElements from '../pages/documentation/form/FormNav'
+<<<<<<< HEAD
 const Field = () => import('../pages/documentation/form/Field')
 const Input = () => import('../pages/documentation/form/Input')
 const Select = () => import('../pages/documentation/form/Select')
@@ -41,6 +43,17 @@ const Switch = () => import('../pages/documentation/form/Switch')
 const Upload = () => import('../pages/documentation/form/Upload')
 const Datepicker = () => import('../pages/documentation/form/Datepicker')
 const TagInput = () => import('../pages/documentation/form/TagInput')
+=======
+const Field = () => import('../pages/documentation/form/field')
+const Input = () => import('../pages/documentation/form/input')
+const Select = () => import('../pages/documentation/form/select')
+const Autocomplete = () => import('../pages/documentation/form/autocomplete')
+const Checkbox = () => import('../pages/documentation/form/checkbox')
+const Radio = () => import('../pages/documentation/form/radio')
+const Switch = () => import('../pages/documentation/form/switch')
+const Upload = () => import('../pages/documentation/form/upload')
+const Datepicker = () => import('../pages/documentation/form/datepicker')
+>>>>>>> rafaelpimpa/dev
 
 import DataManipulation from '../pages/documentation/data/DataNav'
 const Table = () => import('../pages/documentation/data/table')
@@ -118,6 +131,13 @@ export default new Router({
                 {
                     path: 'tabs',
                     component: Tabs,
+                    meta: {
+                        category: General
+                    }
+                },
+                {
+                    path: 'collapse',
+                    component: Collapse,
                     meta: {
                         category: General
                     }

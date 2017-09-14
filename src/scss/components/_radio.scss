@@ -1,58 +1,60 @@
 $radio-active-background-color: $primary !default;
 
-.radio {
-    outline: none;
-    display: inline-flex;
-    align-items: center;
-    @include unselectable;
-    & + .radio {
-        margin-left: 0.5em;
-    }
-    input[type=radio] {
-        display: none;
-        + .check {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.25em;
-            height: 1.25em;
-            border: 2px solid $grey;
-            border-radius: 50%;
-            transition: background $speed-slow $easing;
-            &:before {
-                content: "";
+.b-radio {
+    &.radio {
+        outline: none;
+        display: inline-flex;
+        align-items: center;
+        @include unselectable;
+        & + .radio {
+            margin-left: 0.5em;
+        }
+        input[type=radio] {
+            display: none;
+            + .check {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 1.25em;
+                height: 1.25em;
+                border: 2px solid $grey;
                 border-radius: 50%;
-                width: 0.625em;
-                height: 0.625em;
-                background: $radio-active-background-color;
-                transform: scale(0);
-                transition: transform $speed-slow $easing;
+                transition: background $speed-slow $easing;
+                &:before {
+                    content: "";
+                    border-radius: 50%;
+                    width: 0.625em;
+                    height: 0.625em;
+                    background: $radio-active-background-color;
+                    transform: scale(0);
+                    transition: transform $speed-slow $easing;
+                }
+            }
+            &:checked + .check {
+                border-color: $radio-active-background-color;
+                &:before {
+                    transform: scale(1);
+                }
             }
         }
-        &:checked + .check {
-            border-color: $radio-active-background-color;
-            &:before {
-                transform: scale(1);
+        .control-label {
+            padding-left: 0.5em;
+        }
+        &[disabled] {
+            opacity: 0.5;
+        }
+        &:hover {
+            input[type=radio] + .check {
+                border-color: $radio-active-background-color;
             }
         }
-    }
-    .control-label {
-        padding-left: 0.5em;
-    }
-    &[disabled] {
-        opacity: 0.5;
-    }
-    &:hover {
-        input[type=radio] + .check {
-            border-color: $radio-active-background-color;
+        &:focus {
+            input[type=radio] + .check {
+                box-shadow: 0 0 0.5em rgba($grey, 0.8);
+            }
+            input[type=radio]:checked + .check {
+                box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
+            }
         }
-    }
-    &:focus {
-        input[type=radio] + .check {
-            box-shadow: 0 0 0.5em rgba($grey, 0.8);
-        }
-        input[type=radio]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
-        }
-    }
+    }    
 }

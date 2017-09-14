@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import { removeElement } from '../../utils/helpers'
+
     export default {
         name: 'bLoading',
         props: {
@@ -58,7 +60,7 @@
                     this.isActive = false
                     setTimeout(() => {
                         this.$destroy()
-                        this.$el.remove()
+                        removeElement(this.$el)
                     }, 150)
                 }
             },

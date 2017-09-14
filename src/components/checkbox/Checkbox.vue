@@ -1,5 +1,5 @@
 <template>
-    <label class="checkbox"
+    <label class="b-checkbox checkbox"
         :class="{ 'is-disabled': disabled }"
         ref="label"
         :disabled="disabled"

@@ -1,5 +1,31 @@
 # Buefy Changelog
 
+## 0.5.3
+
+* **New component: Collapse**, [see docs](https://buefy.github.io/#/documentation/collapse)
+* #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
+* #301 Fix Bulma style override for radio and checkbox
+* #303 Fix dropdown close on custom item when is replaced or changed
+* #305 Fix datepicker calendar display when disabled and inline
+* #309 Add ``labelFor`` prop to field component, to set native ``for`` attribute to the label tag (thanks @tmepple)
+* #314 Set pack prop to next/prev icon buttons for datepicker 
+* #316 Fix checkbox shrinking when text is very long (thanks @Tirke)
+* #317 Add default datepicker constructor options
+
+## 0.5.2
+
+* #262 Add ``empty`` slot to autocomplete (empty message)
+* #264 Add ``has-counter`` prop to input, add it when you want show or hide character counter when maxlength prop is passed
+* #265 Fix disabled pagination (thanks @YassinOuider)
+* #272 Add ``readonly`` prop to allow typing a date on datepicker
+* #273 Fix autocomplete for SSR (thanks @LANSELOT)
+* #276 Add ``first-day-of-week`` prop to datepicker
+* #279 Fix table not default sorting async data
+* #289 Fix dropdown-trigger container html tag
+* #291 Add configurable closing options for Modal (thanks @jwahdatehagh)
+* #298 Fix mobile detection datepicker for SSR
+* #302 Fix datepicker calendar display when disabled
+
 ## 0.5.1
 
 * **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
@@ -7,12 +33,17 @@
 * #195 Add ``custom-key`` prop to table column, add it when you want a column without label
 * #221 Add backend pagination support to table (thanks @cappuc)
 * #214 Add ``active`` prop to tooltip
+* #215 Add ``header`` slot to table (custom headers)
 * #228 Fix table checked rows not working on mobile
 * #235 Add ``custom-is-checked`` prop to table column, add it when you want a custom compare function when is checkable
 * #237 Fix emit blur event for input
 * #239 Fix table columns on v-for loop
 * #241 Fix remove tabItem when it's bounded to array
+* #242 Update required Vue.js version (2.4+) (thanks @iwan-wijaya)
 * #243 Add ``default-sort-direction`` prop to table, add it when you want change default sort direction on the first click
+* #260 Fix radio/radio button emitting ``input`` multiple times (thanks @frantic1048)
+* Add ``meta`` prop to table column, useful for custom headers
+* Add ``type`` prop to switch (thanks @Tirke)
 * Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
 * Remove ``has-custom-template`` prop from autocomplete, just use scoped slot to have the same feature

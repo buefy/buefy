@@ -1,45 +1,48 @@
 $checkbox-active-background-color: $primary !default;
 $checkbox-checkmark-color: $primary-invert !default;
 
-.checkbox {
-    outline: none;
-    display: inline-flex;
-    align-items: center;
-    @include unselectable;
-    & + .checkbox {
-        margin-left: 0.5em;
-    }
-    input[type=checkbox] {
-        display: none;
-        + .check {
-            width: 1.25em;
-            height: 1.25em;
-            border-radius: $radius;
-            border: 2px solid $grey;
-            transition: background $speed-slow $easing;
+.b-checkbox {
+    &.checkbox {
+        outline: none;
+        display: inline-flex;
+        align-items: center;
+        @include unselectable;
+        & + .checkbox {
+            margin-left: 0.5em;
         }
-        &:checked + .check {
-            background: $checkbox-active-background-color url(checkmark($checkbox-checkmark-color)) no-repeat center center;
-            border-color: $checkbox-active-background-color;
+        input[type=checkbox] {
+            display: none;
+            + .check {
+                width: 1.25em;
+                height: 1.25em;
+                flex-shrink: 0;
+                border-radius: $radius;
+                border: 2px solid $grey;
+                transition: background $speed-slow $easing;
+            }
+            &:checked + .check {
+                background: $checkbox-active-background-color url(checkmark($checkbox-checkmark-color)) no-repeat center center;
+                border-color: $checkbox-active-background-color;
+            }
         }
-    }
-    .control-label {
-        padding-left: 0.5em;
-    }
-    &[disabled] {
-        opacity: 0.5;
-    }
-    &:hover {
-        input[type=checkbox] + .check {
-            border-color: $checkbox-active-background-color;
+        .control-label {
+            padding-left: 0.5em;
         }
-    }
-    &:focus {
-        input[type=checkbox] + .check {
-            box-shadow: 0 0 0.5em rgba($grey, 0.8);
+        &[disabled] {
+            opacity: 0.5;
         }
-        input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
+        &:hover {
+            input[type=checkbox] + .check {
+                border-color: $checkbox-active-background-color;
+            }
+        }
+        &:focus {
+            input[type=checkbox] + .check {
+                box-shadow: 0 0 0.5em rgba($grey, 0.8);
+            }
+            input[type=checkbox]:checked + .check {
+                box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
+            }
         }
     }
 }

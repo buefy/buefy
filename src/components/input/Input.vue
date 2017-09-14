@@ -46,7 +46,7 @@
             @click.native="togglePasswordVisibility">
         </b-icon>
 
-        <small class="help counter" v-if="maxlength">{{ valueLength }} / {{ maxlength }}</small>
+        <small class="help counter" v-if="maxlength && hasCounter">{{ valueLength }} / {{ maxlength }}</small>
     </div>
 </template>
 
@@ -68,7 +68,11 @@
                 type: String,
                 default: 'text'
             },
-            passwordReveal: Boolean
+            passwordReveal: Boolean,
+            hasCounter: {
+                type: Boolean,
+                default: true
+            }
         },
         data() {
             return {
