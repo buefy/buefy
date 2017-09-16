@@ -32,18 +32,6 @@ const Message = () => import('../pages/documentation/notices/message')
 const Loading = () => import('../pages/documentation/notices/loading')
 
 import FormElements from '../pages/documentation/form/FormNav'
-<<<<<<< HEAD
-const Field = () => import('../pages/documentation/form/Field')
-const Input = () => import('../pages/documentation/form/Input')
-const Select = () => import('../pages/documentation/form/Select')
-const Autocomplete = () => import('../pages/documentation/form/Autocomplete')
-const Checkbox = () => import('../pages/documentation/form/Checkbox')
-const Radio = () => import('../pages/documentation/form/Radio')
-const Switch = () => import('../pages/documentation/form/Switch')
-const Upload = () => import('../pages/documentation/form/Upload')
-const Datepicker = () => import('../pages/documentation/form/Datepicker')
-const TagInput = () => import('../pages/documentation/form/TagInput')
-=======
 const Field = () => import('../pages/documentation/form/field')
 const Input = () => import('../pages/documentation/form/input')
 const Select = () => import('../pages/documentation/form/select')
@@ -53,7 +41,7 @@ const Radio = () => import('../pages/documentation/form/radio')
 const Switch = () => import('../pages/documentation/form/switch')
 const Upload = () => import('../pages/documentation/form/upload')
 const Datepicker = () => import('../pages/documentation/form/datepicker')
->>>>>>> rafaelpimpa/dev
+const TagInput = () => import('../pages/documentation/form/taginput')
 
 import DataManipulation from '../pages/documentation/data/DataNav'
 const Table = () => import('../pages/documentation/data/table')
@@ -255,15 +243,15 @@ export default new Router({
                     }
                 },
                 {
-                    path: 'tag-input',
-                    component: TagInput,
+                    path: 'upload',
+                    component: Upload,
                     meta: {
                         category: FormElements
                     }
                 },
                 {
-                    path: 'upload',
-                    component: Upload,
+                    path: 'tag-input',
+                    component: TagInput,
                     meta: {
                         category: FormElements
                     }
