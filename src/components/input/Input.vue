@@ -122,7 +122,7 @@
              * Check if have any message prop from parent if it's a Field.
              */
             hasMessage() {
-                return Boolean(this.statusMessage)
+                return !!this.statusMessage
             },
 
             /**
