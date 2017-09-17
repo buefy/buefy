@@ -271,6 +271,13 @@
                 if (columns.length && this.firstTimeSort) {
                     this.initSort()
                     this.firstTimeSort = false
+                } else if (columns.length) {
+                    for (let i = 0; i < columns.length; i++) {
+                        if (columns[i].newKey === this.currentSortColumn.newKey) {
+                            this.currentSortColumn = columns[i]
+                            break
+                        }
+                    }
                 }
             }
         },
@@ -370,7 +377,7 @@
                 if (!updatingData) {
                     this.isAsc = column === this.currentSortColumn
                         ? !this.isAsc
-                        : (this.isAsc = this.defaultSortDirection.toLowerCase() !== 'desc')
+                        : (this.defaultSortDirection.toLowerCase() !== 'desc')
                 }
                 if (!this.firstTimeSort) {
                     this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
