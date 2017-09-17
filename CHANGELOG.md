@@ -11,6 +11,7 @@
 * #314 Set pack prop to next/prev icon buttons for datepicker 
 * #316 Fix checkbox shrinking when text is very long (thanks @Tirke)
 * #317 Add default datepicker constructor options
+* #324 Fix table broken sort state
 
 ## 0.5.2
 
