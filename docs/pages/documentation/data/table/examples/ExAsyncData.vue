@@ -11,7 +11,7 @@
             @page-change="onPageChange"
 
             backend-sorting
-            :default-sort-direction="sortOrder"
+            :default-sort-direction="defaultSortOrder"
             :default-sort="[sortField, sortOrder]"
             @sort="onSort">
 
@@ -51,6 +51,7 @@
                 loading: false,
                 sortField: 'vote_count',
                 sortOrder: 'desc',
+                defaultSortOrder: 'desc',
                 page: 1,
                 perPage: 20
             }
