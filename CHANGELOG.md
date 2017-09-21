@@ -12,6 +12,7 @@
 * #316 Fix checkbox shrinking when text is very long (thanks @Tirke)
 * #317 Add default datepicker constructor options
 * #324 Fix table broken sort state
+* #330 Fix table empty and detail disposition
 
 ## 0.5.2
 

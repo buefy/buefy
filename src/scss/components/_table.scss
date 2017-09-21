@@ -117,11 +117,9 @@
                     margin: 0.25em;
                     td {
                         border: 0; // Disable is-bordered
+                        display: inherit;
                         &:last-child {
                             border-bottom: 0;
-                        }
-                        &.checkbox-cell {
-                            display: inherit;
                         }
                     }
                     &:not(:last-child) {
@@ -138,7 +136,7 @@
                         margin-top: -1rem;
                     }
                 }
-                tr:not(.detail) {
+                tr:not(.detail):not(.is-empty) {
                     td {
                         display: flex;
                         width: auto;
