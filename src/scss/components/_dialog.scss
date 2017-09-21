@@ -18,7 +18,7 @@
         .modal-card-foot {
             justify-content: flex-end;
             .button {
-                display: table-cell; // Fix Safari centering
+                display: inline; // Fix Safari centering
                 min-width: 5em;
                 font-weight: $weight-semibold;
             }

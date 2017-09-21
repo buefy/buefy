@@ -67,7 +67,7 @@
         }
     }
     @include touch {
-        &:not(.is-hoverable, .is-inline) {
+        &:not(.is-hoverable):not(.is-inline) {
             .dropdown-menu {
                 position: fixed;
                 width: calc(100vw - 40px);
