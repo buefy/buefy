@@ -64,7 +64,7 @@
                 </thead>
                 <tbody v-if="visibleData.length" v-sortable="{ handle: '.draggy', onUpdate: dragDropRow }">
                     <template v-for="(row, index) in visibleData">
-                        :key="row[datakey] || index"
+                        <tr :key="row[datakey] || index"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
                             :class="[rowClass(row, index), {
