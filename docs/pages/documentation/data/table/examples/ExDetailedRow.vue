@@ -1,6 +1,8 @@
 <template>
     <b-table
         :data="tableDataSimple"
+        :detailedRows.sync="defaultOpenedDetails"
+        detailKey="id"
         detailed
         @details-open="(row, index) => $toast.open(`Expanded ${row.first_name}`)">
 
@@ -27,7 +29,7 @@
         </template>
 
         <template slot="detail" scope="props">
-            <article class="media">
+            <!-- <article class="media">
                 <figure class="media-left">
                     <p class="image is-64x64">
                         <img src="static/img/placeholder-128x128.png">
@@ -46,7 +48,21 @@
                         </p>
                     </div>
                 </div>
-            </article>
+            </article> -->
+            <table class="table is-striped is-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ props.row.id }}</td>
+                        <td>{{ props.row.first_name }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </template>
     </b-table>
 </template>
@@ -63,7 +79,8 @@
             ]
 
             return {
-                tableDataSimple
+                tableDataSimple,
+                defaultOpenedDetails: [1]
             }
         }
     }

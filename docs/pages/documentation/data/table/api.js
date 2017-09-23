@@ -129,6 +129,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>detailedRows</code>',
+                description: 'Allow predefined opened details. Ideal to open details via vue-router. (An unique key is required; check detailKey prop)',
+                type: 'Array',
+                values: '—',
+                default: '<code>-</code>'
+            },
+            {
+                name: '<code>detailKey</code>',
+                description: 'Use an unique key of your data Object, for example the id',
+                type: 'Array',
+                values: '—',
+                default: '<code>-</code>'
+            },
+            {
                 name: '<code>custom-is-checked</code>',
                 description: 'Custom method to verify if row is checked, works when is <code>checkable</code>. Useful for backend pagination',
                 type: 'Function (a: Object, b: Object)',
