@@ -105,6 +105,14 @@
                         </td>
                     </tr>
                 </tbody>
+                <tfoot v-if="$slots.footer !== undefined">
+                    <tr class="table-footer">
+                        <slot name="footer" v-if="hasCustomFooterSlot()"></slot>
+                        <th :colspan="columnCount" v-else>
+                            <slot name="footer"></slot>
+                        </th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 
@@ -483,6 +491,18 @@
 
             isVisibleDetailRow(index) {
                 return this.visibleDetailRows.indexOf(index) >= 0
+            },
+
+            /**
+             * Check if footer slot has custom content.
+             */
+            hasCustomFooterSlot() {
+                if (this.$slots.footer.length > 1) return true
+
+                const tag = this.$slots.footer[0].tag
+                if (tag !== 'th' && tag !== 'td') return false
+    
+                return true
             },
 
             /**

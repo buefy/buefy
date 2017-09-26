@@ -83,6 +83,13 @@
         <code-view :code="ExToggleColumnsCode" bordered></code-view>
 
         <hr>
+        <h2 class="title is-spaced">Footer</h2>
+        <div class="example">
+            <ex-footer></ex-footer>
+        </div>
+        <code-view :code="ExFooterCode" bordered></code-view>
+
+        <hr>
         <h2 class="title is-spaced">Async data</h2>
         <div class="content">
             <p>
@@ -129,6 +136,9 @@
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
+    import ExFooter from './examples/ExFooter'
+    import ExFooterCode from '!!raw-loader!./examples/ExFooter'
+
     import ExAsyncData from './examples/ExAsyncData'
     import ExAsyncDataCode from '!!raw-loader!./examples/ExAsyncData'
 
@@ -142,6 +152,7 @@
             ExRowStatus,
             ExCustomHeaders,
             ExToggleColumns,
+            ExFooter,
             ExAsyncData
         },
         data() {
@@ -155,6 +166,7 @@
                 ExRowStatusCode,
                 ExCustomHeadersCode,
                 ExToggleColumnsCode,
+                ExFooterCode,
                 ExAsyncDataCode
             }
         }

@@ -107,6 +107,12 @@
                 thead {
                     display: none;
                 }
+                tfoot {
+                     th {
+                        border: 0; // Disable is-bordered
+                        display: inherit;
+                     }
+                }
                 tr {
                     // Card style — Cannot extend inside media query
                     box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
@@ -136,7 +142,7 @@
                         margin-top: -1rem;
                     }
                 }
-                tr:not(.detail):not(.is-empty) {
+                tr:not(.detail):not(.is-empty):not(.table-footer) {
                     td {
                         display: flex;
                         width: auto;
