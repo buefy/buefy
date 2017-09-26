@@ -5,7 +5,6 @@
         <router-link to="dropdown" class="navbar-item is-tab">Dropdown</router-link>
         <router-link to="modal" class="navbar-item is-tab">Modal</router-link>
         <router-link to="collapse" class="navbar-item is-tab">Collapse</router-link>
-        <router-link to="panel" class="navbar-item is-tab">Panel</router-link>
         <router-link to="tabs" class="navbar-item is-tab">Tabs</router-link>
         <router-link to="tag" class="navbar-item is-tab">Tag</router-link>
         <router-link to="tooltip" class="navbar-item is-tab">Tooltip</router-link>

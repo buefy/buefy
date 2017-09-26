@@ -13,7 +13,7 @@
         <div class="example">
             <ex-simple></ex-simple>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode" bordered></code-view>
 
         <hr>
 
@@ -22,13 +22,13 @@
         <div class="example is-paddingless">
             <ex-content-position></ex-content-position>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExContentPositionCode }}</code></pre>
+        <code-view :code="ExContentPositionCode" bordered></code-view>
 
         <p class="content">Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an item.</p>
         <div class="example is-paddingless">
             <ex-has-link-disabled></ex-has-link-disabled>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExHasLinkDisabledCode }}</code></pre>
+        <code-view :code="ExHasLinkDisabledCode" bordered></code-view>
 
         <hr>
 
@@ -36,7 +36,7 @@
         <div class="example">
             <ex-customize></ex-customize>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExCustomizeCode }}</code></pre>
+        <code-view :code="ExCustomizeCode" bordered></code-view>
 
         <hr>
 

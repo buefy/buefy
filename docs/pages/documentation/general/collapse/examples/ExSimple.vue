@@ -1,8 +1,8 @@
 <template>
     <section>
-        
+
         <b-collapse :open="false">
-            <button class="button is-primary" slot="trigger"> Click </button>
+            <button class="button is-primary" slot="trigger">Click me!</button>
             <div class="notification">
                 <div class="content">
                     <h3>

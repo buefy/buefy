@@ -7,7 +7,7 @@
         <div class="example">
             <ex-simple></ex-simple>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Selection</h2>
@@ -18,7 +18,7 @@
         <div class="example">
             <ex-selection></ex-selection>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSelectionCode }}</code></pre>
+        <code-view :code="ExSelectionCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Checkable</h2>
@@ -32,7 +32,7 @@
         <div class="example">
             <ex-checkable></ex-checkable>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExCheckableCode }}</code></pre>
+        <code-view :code="ExCheckableCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Pagination and sorting</h2>
@@ -44,14 +44,14 @@
         <div class="example">
             <ex-pagination-sort></ex-pagination-sort>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExPaginationSortCode }}</code></pre>
+        <code-view :code="ExPaginationSortCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Detailed rows</h2>
         <div class="example">
             <ex-detailed-row></ex-detailed-row>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExDetailedRowCode }}</code></pre>
+        <code-view :code="ExDetailedRowCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Row status</h2>
@@ -59,7 +59,7 @@
         <div class="example">
             <ex-row-status></ex-row-status>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExRowStatusCode }}</code></pre>
+        <code-view :code="ExRowStatusCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Custom headers</h2>
@@ -70,7 +70,7 @@
         <div class="example">
             <ex-custom-headers></ex-custom-headers>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExCustomHeadersCode }}</code></pre>
+        <code-view :code="ExCustomHeadersCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Toggle columns</h2>
@@ -80,7 +80,7 @@
         <div class="example">
             <ex-toggle-columns></ex-toggle-columns>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExToggleColumnsCode }}</code></pre>
+        <code-view :code="ExToggleColumnsCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">Async data</h2>
@@ -94,7 +94,7 @@
         <div class="example">
             <ex-async-data></ex-async-data>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExAsyncDataCode }}</code></pre>
+        <code-view :code="ExAsyncDataCode" bordered></code-view>
 
         <hr>
         <h2 class="title is-spaced">API</h2>

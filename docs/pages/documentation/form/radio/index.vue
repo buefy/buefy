@@ -9,7 +9,7 @@
                 <ex-simple></ex-simple>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -19,7 +19,7 @@
         <div class="example">
             <ex-radio-button></ex-radio-button>
         </div>
-        <pre v-highlight><code class="html">{{ ExRadioButtonCode }}</code></pre>
+        <code-view :code="ExRadioButtonCode" bordered></code-view>
 
         <hr>
 

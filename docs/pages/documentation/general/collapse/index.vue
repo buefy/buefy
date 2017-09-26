@@ -3,7 +3,7 @@
         <h1 class="title is-spaced">Collapse</h1>
         <h2 class="subtitle">Collapse is a easy way to toggle what you want</h2>
         <hr>
-        
+
         <div class="columns">
             <div class="column">
                 <div class="example">
@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="example-code" v-highlight><code class="html">{{ ExPanelTemplateCode }}</code></pre>
+                <code-view :code="ExPanelTemplateCode"></code-view>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre class="example-code" v-highlight><code class="html">{{ ExCardTemplateCode }}</code></pre>
+                <code-view :code="ExCardTemplateCode"></code-view>
             </div>
         </div>
 

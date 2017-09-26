@@ -8,7 +8,7 @@
         <div class="block">
             <ex-alert-dialog></ex-alert-dialog>
         </div>
-        <pre v-highlight><code class="html">{{ ExAlertDialogCode }}</code></pre>
+        <code-view :code="ExAlertDialogCode"></code-view>
 
         <hr>
 
@@ -16,7 +16,7 @@
         <div class="block">
             <ex-alert-confirm></ex-alert-confirm>
         </div>
-        <pre v-highlight><code class="html">{{ ExAlertConfirmCode }}</code></pre>
+        <code-view :code="ExAlertConfirmCode"></code-view>
 
         <hr>
 
@@ -24,7 +24,7 @@
         <div class="block">
             <ex-alert-prompt></ex-alert-prompt>
         </div>
-        <pre v-highlight><code class="html">{{ ExAlertPromptCode }}</code></pre>
+        <code-view :code="ExAlertPromptCode"></code-view>
 
         <hr>
         <h2 class="title is-spaced">API</h2>

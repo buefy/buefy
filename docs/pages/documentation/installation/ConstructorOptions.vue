@@ -5,8 +5,8 @@
 
         <hr>
 
-        <div class="example">
-            <pre v-highlight><code class="javascript">{{ usage | pre }}</code></pre>
+        <div class="example is-paddingless">
+            <code-view :code="usage | pre" lang="javascript"></code-view>
         </div>
 
         <hr>

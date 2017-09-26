@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExStylesCode }}</code></pre>
+                <code-view :code="ExStylesCode"></code-view>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExMultilinedCode }}</code></pre>
+                <code-view :code="ExMultilinedCode"></code-view>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExToggleCode }}</code></pre>
+                <code-view :code="ExToggleCode"></code-view>
             </div>
         </div>
 

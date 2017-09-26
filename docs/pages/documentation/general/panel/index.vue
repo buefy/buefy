@@ -1,5 +1,10 @@
 <template>
     <div class="container">
+        <b-message type="is-danger">
+            This component has been <strong>deprecated</strong> and will be deleted soon.
+            You should use the <router-link to="/documentation/collapse">new collapse component</router-link> instead.
+        </b-message>
+
         <h1 class="title is-spaced">Panel</h1>
         <h2 class="subtitle">A simple and collapsible panel</h2>
         <hr>
@@ -7,14 +12,14 @@
         <div class="example">
             <ex-simple></ex-simple>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode" bordered></code-view>
 
         <hr>
 
         <div class="example">
             <ex-custom-template></ex-custom-template>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExCustomTemplateCode }}</code></pre>
+        <code-view :code="ExCustomTemplateCode" bordered></code-view>
 
         <hr>
 

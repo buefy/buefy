@@ -42,6 +42,8 @@
 </template>
 
 <script>
+    import Clipboard from 'clipboard'
+
     import AppHeader from '../../template/Header'
     import AppFooter from '../../template/Footer'
 
@@ -58,6 +60,7 @@
         },
         data() {
             return {
+                clipboard: null,
                 currentTab: Installation,
                 tabs: [
                     {
@@ -83,13 +86,36 @@
                 ]
             }
         },
+        methods: {
+            addClipboardControls() {
+                this.clipboard && this.clipboard.destroy()
+
+                this.clipboard = new Clipboard('.button', {
+                    target: (trigger) => trigger.nextElementSibling.children[0]
+                })
+
+                this.clipboard.on('success', (e) => {
+                    this.$toast.open('Copied to clipboard!')
+                })
+
+                this.clipboard.on('error', (e) => {
+                    this.$toast.open({
+                        message: 'Error while copying to clipboard :(',
+                        type: 'is-danger'
+                    })
+                })
+            }
+        },
         beforeRouteUpdate(to, from, next) {
             this.$refs.header.isMenuActive = false
             this.currentTab = to.meta.category
+            this.addClipboardControls()
+
             next()
         },
         beforeRouteEnter(to, from, next) {
             next(vm => {
+                vm.addClipboardControls()
                 vm.currentTab = to.meta.category
             })
         }

@@ -12,7 +12,7 @@
         <div class="block">
             <ex-simple></ex-simple>
         </div>
-        <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode"></code-view>
 
         <hr>
         <h2 class="title is-spaced">API</h2>

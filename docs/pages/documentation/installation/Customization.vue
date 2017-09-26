@@ -14,7 +14,7 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Install Buefy via npm</h3>
-                <pre class="block" v-highlight><code class="bash"><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                <code-view code="npm install buefy" lang="bash"></code-view>
                 <p class="content">Or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
             </div>
         </div>
@@ -41,7 +41,10 @@
                 <p class="block">
                     It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag.
                 </p>
-                <div class="example"><pre v-highlight><code class="sass">{{ sass | pre }}</code></pre></div>
+                <div class="example is-paddingless">
+                    <code-view :code="sass | pre" lang="sass"></code-view>
+                </div>
+
             </div>
         </div>
 
@@ -51,7 +54,7 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
-                <pre v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
+                <code-view :code="importing | pre" lang="javascript"></code-view>
             </div>
         </div>
 

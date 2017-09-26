@@ -7,7 +7,7 @@
         <div class="block">
             <ex-simple></ex-simple>
         </div>
-        <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode"></code-view>
 
         <hr>
 
@@ -18,13 +18,13 @@
         <div class="block">
             <ex-component></ex-component>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ ExComponentCode }}</code></pre>
+        <code-view :code="ExComponentCode"></code-view>
 
         <h3 class="subtitle">ModalForm component</h3>
         <b-message type="is-warning">
             <b>Note:</b> You should't mutate a prop directly, this is just an example.
         </b-message>
-        <pre class="block" v-highlight><code class="html">{{ ModalFormCode }}</code></pre>
+        <code-view :code="ModalFormCode"></code-view>
 
         <hr>
 
@@ -32,7 +32,7 @@
         <div class="block">
             <ex-programmatic></ex-programmatic>
         </div>
-        <pre class="block" v-highlight><code class="html">{{ ExProgrammaticCode}}</code></pre>
+        <code-view :code="ExProgrammaticCode"></code-view>
 
         <hr>
 

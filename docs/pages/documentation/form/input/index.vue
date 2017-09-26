@@ -12,7 +12,7 @@
                 <ex-simple></ex-simple>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                 <ex-types-states></ex-types-states>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExTypesStatesCode }}</code></pre>
+                <code-view :code="ExTypesStatesCode"></code-view>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
                 <ex-icons></ex-icons>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExIconsCode }}</code></pre>
+                <code-view :code="ExIconsCode"></code-view>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                 <ex-validation></ex-validation>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExValidationCode }}</code></pre>
+                <code-view :code="ExValidationCode"></code-view>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
                 <ex-password></ex-password>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExPasswordCode }}</code></pre>
+                <code-view :code="ExPasswordCode"></code-view>
             </div>
         </div>
 
@@ -68,7 +68,7 @@
                 <ex-sizes></ex-sizes>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSizesCode }}</code></pre>
+                <code-view :code="ExSizesCode"></code-view>
             </div>
         </div>
 

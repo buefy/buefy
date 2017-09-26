@@ -9,7 +9,7 @@
                 <ex-simple></ex-simple>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
                 <ex-non-readonly></ex-non-readonly>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExNonReadonlyCode }}</code></pre>
+                <code-view :code="ExNonReadonlyCode"></code-view>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <ex-range></ex-range>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExRangeCode }}</code></pre>
+                <code-view :code="ExRangeCode"></code-view>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                 <ex-footer></ex-footer>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExFooterCode }}</code></pre>
+                <code-view :code="ExFooterCode"></code-view>
             </div>
         </div>
 
@@ -64,7 +64,7 @@
                 <ex-inline></ex-inline>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExInlineCode }}</code></pre>
+                <code-view :code="ExInlineCode"></code-view>
             </div>
         </div>
 

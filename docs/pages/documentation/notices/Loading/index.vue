@@ -8,7 +8,7 @@
             <p class="content">The Loading will be closed after about 10 seconds, by pressing escape or by clicking outside.</p>
             <ex-simple></ex-simple>
         </div>
-        <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode"></code-view>
 
         <hr>
 
@@ -17,7 +17,7 @@
         <div class="block">
             <ex-programmatically></ex-programmatically>
         </div>
-        <pre v-highlight><code class="html">{{ ExProgrammaticallyCode }}</code></pre>
+        <code-view :code="ExProgrammaticallyCode"></code-view>
 
         <hr>
         <h2 class="title is-spaced">API</h2>

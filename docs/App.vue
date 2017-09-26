@@ -78,21 +78,36 @@
         }
     }
 
-    // Generic
+    // Highlight (CodeView)
 
-    pre {
-        @include tablet {
-            white-space: pre-wrap;
+    .highlight {
+        position: relative;
+        text-align: left !important;
+        .button {
+            position: absolute;
+            right: 1.5rem;
+            top: 0.5rem;
+            &:hover + pre {
+                background: darken($white-ter, 2.5%);
+            }
         }
-        code {
-            max-height: 400px;
-            &.hljs {
-                background: inherit;
-                color: inherit;
-                padding: 1.25rem 1.5rem;
+        pre {
+            padding: 0;
+            code {
+                max-height: 400px;
+                &.hljs {
+                    background: inherit;
+                    color: inherit;
+                    padding: 1.25rem 1.5rem;
+                }
+            }
+            @include tablet {
+                white-space: pre-wrap;
             }
         }
     }
+
+    // Generic
 
     ::selection {
         background: lighten($primary, 5%);

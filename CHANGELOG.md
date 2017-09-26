@@ -3,6 +3,7 @@
 ## 0.5.3
 
 * **New component: Collapse**, [see docs](https://buefy.github.io/#/documentation/collapse)
+* **Panel deprecated**, use new Collapse component, [old docs here](https://buefy.github.io/#/documentation/panel)
 * Update Bulma to v0.5.3
 * #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
 * #301 Fix Bulma style override for radio and checkbox

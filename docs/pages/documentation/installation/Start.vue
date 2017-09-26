@@ -15,7 +15,7 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Use <b>NPM</b> <em>(recommended)</em>:</h3>
-                <pre class="block" v-highlight><code class="bash"><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                <code-view code="npm install buefy" lang="bash"></code-view>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                     If you want to use your own theme / variables go to
                     <router-link to="/documentation/customization">customization section</router-link>.
                 </b-message>
-                <pre class="block" v-highlight><code class="javascript">{{ importing | pre }}</code></pre>
+                <code-view :code="importing | pre" lang="javascript"></code-view>
 
                 <b-message type="is-warning">
                     If you're using <strong>Nuxt.js</strong> for Server Side Rendering (SSR), then follow these steps:
@@ -55,7 +55,7 @@
                         <li>Create a new file in Nuxt's <strong>plugins</strong> folder called <code>buefy.js</code></li>
                         <li>
                             Paste and save it:
-                            <pre class="block is-paddingless" v-highlight><code class="javascript">{{ importingSSR | pre }}</code></pre>
+                            <code-view :code="importingSSR | pre" lang="javascript"></code-view>
                         </li>
                         <li>In the <strong>nuxt.config.js</strong> file, add <code>plugins: ['~plugins/buefy']</code> to the <code>module.exports</code> object</li>
                     </ol>
@@ -71,8 +71,8 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">CDN / Standalone:</h3>
-                <pre class="block" v-highlight><code class="html">{{ importingCDNHtml | pre }}</code></pre>
-                <pre class="block" v-highlight><code class="javascript">{{ importingCDNJs | pre }}</code></pre>
+                <code-view :code="importingCDNHtml | pre"></code-view>
+                <code-view :code="importingCDNJs | pre" lang="javascript"></code-view>
             </div>
         </div>
 
@@ -84,7 +84,7 @@
             if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, go to
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
         </b-message>
-        <pre class="block" v-highlight><code class="html">{{ materialIcons }}</code></pre>
+        <code-view :code="materialIcons"></code-view>
 
         <hr>
 

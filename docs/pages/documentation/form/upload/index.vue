@@ -10,7 +10,7 @@
                 <ex-simple></ex-simple>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
                 <ex-drag-drop></ex-drag-drop>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExDragDropCode }}</code></pre>
+                <code-view :code="ExDragDropCode"></code-view>
             </div>
         </div>
 

@@ -9,7 +9,7 @@
                 <ex-simple></ex-simple>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 <ex-types></ex-types>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExTypesCode }}</code></pre>
+                <code-view :code="ExTypesCode"></code-view>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
                 <ex-sizes></ex-sizes>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSizesCode }}</code></pre>
+                <code-view :code="ExSizesCode"></code-view>
             </div>
         </div>
 

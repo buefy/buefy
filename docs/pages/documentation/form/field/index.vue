@@ -22,7 +22,7 @@
                 <ex-simple></ex-simple>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+                <code-view :code="ExSimpleCode"></code-view>
             </div>
         </div>
 
@@ -38,7 +38,7 @@
                 <ex-addons></ex-addons>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExAddonsCode }}</code></pre>
+                <code-view :code="ExAddonsCode"></code-view>
             </div>
         </div>
 
@@ -51,7 +51,7 @@
         <div class="example">
             <ex-groups></ex-groups>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExGroupsCode }}</code></pre>
+        <code-view :code="ExGroupsCode" bordered></code-view>
 
         <p class="content">
             Nested Fields can be grouped as well,
@@ -60,7 +60,7 @@
         <div class="example">
             <ex-group-expanded></ex-group-expanded>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExGroupExpandedCode }}</code></pre>
+        <code-view :code="ExGroupExpandedCode" bordered></code-view>
 
         <div class="tags has-addons">
             <span class="tag is-success">New!</span>
@@ -75,7 +75,7 @@
                 <ex-group-multiline></ex-group-multiline>
             </div>
             <div class="column">
-                <pre v-highlight><code class="html">{{ ExGroupMultilineCode }}</code></pre>
+                <code-view :code="ExGroupMultilineCode"></code-view>
             </div>
         </div>
 
@@ -85,14 +85,14 @@
         <div class="example">
             <ex-positions></ex-positions>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExPositionsCode }}</code></pre>
+        <code-view :code="ExPositionsCode" bordered></code-view>
 
         <hr>
         <h3 class="title">Combining addons and groups</h3>
         <div class="example">
             <ex-combine-addons-groups></ex-combine-addons-groups>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExCombineAddonsGroupsCode }}</code></pre>
+        <code-view :code="ExCombineAddonsGroupsCode" bordered></code-view>
 
         <hr>
 

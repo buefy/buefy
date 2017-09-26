@@ -10,14 +10,14 @@
         <div class="example">
             <ex-simple></ex-simple>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExSimpleCode }}</code></pre>
+        <code-view :code="ExSimpleCode" bordered></code-view>
 
         <hr>
         <h2 class="title">Object array</h2>
         <div class="example">
             <ex-obj-array></ex-obj-array>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExObjArrayCode }}</code></pre>
+        <code-view :code="ExObjArrayCode" bordered></code-view>
 
         <hr>
         <h2 class="title">Async with custom template</h2>
@@ -28,7 +28,7 @@
         <div class="example">
             <ex-custom-async></ex-custom-async>
         </div>
-        <pre class="example-code" v-highlight><code class="html">{{ ExCustomAsyncCode }}</code></pre>
+        <code-view :code="ExCustomAsyncCode" bordered></code-view>
 
         <hr>
 

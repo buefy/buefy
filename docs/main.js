@@ -10,6 +10,7 @@ import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
 
 import ApiView from './components/ApiView'
+import CodeView from './components/CodeView'
 
 Vue.config.productionTip = false
 
@@ -31,6 +32,7 @@ Vue.use(VueAnalytics, {
     router
 })
 Vue.component('ApiView', ApiView)
+Vue.component('CodeView', CodeView)
 
 Vue.directive('highlight', {
     deep: true,

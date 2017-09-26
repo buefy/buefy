@@ -14,7 +14,7 @@
                 <div class="example">
                     <ex-mdi></ex-mdi>
                 </div>
-                <pre class="example-code" v-highlight><code class="html">{{ ExMdiCode }}</code></pre>
+                <code-view :code="ExMdiCode" bordered></code-view>
             </div>
 
             <div class="column">
@@ -22,7 +22,7 @@
                 <div class="example">
                     <ex-fa></ex-fa>
                 </div>
-                <pre class="example-code" v-highlight><code class="html">{{ ExFaCode }}</code></pre>
+                <code-view :code="ExFaCode" bordered></code-view>
             </div>
         </div>
 
