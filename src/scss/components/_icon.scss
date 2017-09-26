@@ -12,6 +12,9 @@
         // Suport for IE/Edge
         font-feature-settings: 'liga';
     }
+    .fa {
+        font-size: 21px;
+    }
     svg {
         background-color: transparent;
         fill: currentColor;
@@ -28,6 +31,9 @@
         .mdi {
             font-size: 16px;
         }
+        .fa {
+            font-size: 14px;
+        }
     }
     &.is-medium {
         height: 2rem;
@@ -35,12 +41,18 @@
         .mdi {
             font-size: 32px;
         }
+        .fa {
+            font-size: 28px;
+        }
     }
     &.is-large {
         height: 3rem;
         width: 3rem;
         .mdi {
             font-size: 48px;
+        }
+        .fa {
+            font-size: 42px;
         }
     }
     // Colors overrides

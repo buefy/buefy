@@ -3,12 +3,13 @@
 ## 0.5.3
 
 * **New component: Collapse**, [see docs](https://buefy.github.io/#/documentation/collapse)
+* Update Bulma to v0.5.3
 * #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
 * #301 Fix Bulma style override for radio and checkbox
 * #303 Fix dropdown close on custom item when is replaced or changed
 * #305 Fix datepicker calendar display when disabled and inline
 * #309 Add ``labelFor`` prop to field component, to set native ``for`` attribute to the label tag (thanks @tmepple)
-* #314 Set pack prop to next/prev icon buttons for datepicker 
+* #314 Set pack prop to next/prev icon buttons for datepicker
 * #316 Fix checkbox shrinking when text is very long (thanks @Tirke)
 * #317 Add default datepicker constructor options
 * #324 Fix table broken sort state
