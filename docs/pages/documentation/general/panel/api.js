@@ -48,12 +48,12 @@ export default [
             {
                 name: 'default',
                 description: '',
-                props: ''
+                props: '—'
             },
             {
                 name: 'header',
                 description: '',
-                props: ''
+                props: '—'
             }
         ],
         events: [

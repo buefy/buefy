@@ -156,12 +156,12 @@ export default [
             {
                 name: '<code>empty</code>',
                 description: 'Replaces table body when <code>data</code> array prop is empty',
-                props: ''
+                props: '—'
             },
             {
                 name: '<code>footer</code>',
                 description: 'Table custom footer',
-                props: ''
+                props: '—'
             }
         ],
         events: [

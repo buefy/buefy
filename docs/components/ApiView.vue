@@ -66,6 +66,9 @@
                             <b-table-column label="Description">
                                 <span v-html="props.row.description"></span>
                             </b-table-column>
+                            <b-table-column label="Return">
+                                <span v-html="props.row.return"></span>
+                            </b-table-column>
                         </template>
                     </b-table>
                 </b-tab-item>

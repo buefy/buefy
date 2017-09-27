@@ -20,12 +20,12 @@ export default [
             {
                 name: 'default',
                 description: 'Content to show/hide',
-                props: ''
+                props: '—'
             },
             {
                 name: 'trigger',
                 description: 'Trigger content',
-                props: ''
+                props: '—'
             }
         ],
         events: [

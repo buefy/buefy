@@ -95,7 +95,7 @@ export default [
             {
                 name: '<code>empty</code>',
                 description: 'Show like an option if <code>data</code> array prop is empty',
-                props: ''
+                props: '—'
             }
         ],
         events: [
@@ -137,8 +137,8 @@ export default [
                 return: '—'
             },
             {
-                name: '<code>setSelected</code>',
-                description: 'Select on option by String or Number or Object (same type of <code>data</code> element)',
+                name: '<code>setSelected(selected: Any)</code>',
+                description: 'Select an option by array position (same type of <code>data</code> property)',
                 return: '—'
             }
         ]
