@@ -84,6 +84,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>size</code>',
+                description: 'Size of the button, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
             }
         ]
     }
