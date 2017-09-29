@@ -87,7 +87,8 @@
             }
         },
         methods: {
-            addClipboardControls() {
+            setupClipboardControls() {
+                // Destroy clipboard instance if there's any
                 this.clipboard && this.clipboard.destroy()
 
                 this.clipboard = new Clipboard('.button', {
@@ -96,6 +97,7 @@
 
                 this.clipboard.on('success', (e) => {
                     this.$toast.open('Copied to clipboard!')
+                    console.log('Q')
                 })
 
                 this.clipboard.on('error', (e) => {
@@ -109,15 +111,21 @@
         beforeRouteUpdate(to, from, next) {
             this.$refs.header.isMenuActive = false
             this.currentTab = to.meta.category
-            this.addClipboardControls()
+            this.setupClipboardControls()
 
             next()
         },
         beforeRouteEnter(to, from, next) {
             next(vm => {
-                vm.addClipboardControls()
                 vm.currentTab = to.meta.category
             })
+        },
+        created() {
+            this.setupClipboardControls()
+        },
+        beforeDestroy() {
+            // Destroy clipboard instance if there's any
+            this.clipboard && this.clipboard.destroy()
         }
     }
 </script>
