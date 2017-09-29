@@ -32,6 +32,7 @@
 
     export default {
         name: 'bUpload',
+        inheritAttrs: false,
         mixins: [FormElementMixin],
         props: {
             value: {

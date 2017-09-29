@@ -17,6 +17,7 @@
 * #317 Add default datepicker constructor options
 * #324 Fix table broken sort state
 * #330 Fix table empty and detail disposition
+* #339 Fix upload warning when is required
 * #340 Add ``size`` prop to radio button
 
 ## 0.5.2

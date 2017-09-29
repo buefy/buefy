@@ -1,6 +1,8 @@
 .upload {
     input[type=file] {
-        display: none;
+        display: inline-block;
+        position: absolute;
+        opacity: 0;
     }
     .upload-draggable {
         display: inline-block;
