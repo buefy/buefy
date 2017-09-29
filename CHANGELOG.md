@@ -12,10 +12,12 @@
 * #305 Fix datepicker calendar display when disabled and inline
 * #309 Add ``labelFor`` prop to field component, to set native ``for`` attribute to the label tag (thanks @tmepple)
 * #314 Set pack prop to next/prev icon buttons for datepicker
+* #315 Fix escape regexp characters to autocomplete
 * #316 Fix checkbox shrinking when text is very long (thanks @Tirke)
 * #317 Add default datepicker constructor options
 * #324 Fix table broken sort state
 * #330 Fix table empty and detail disposition
+* #340 Add ``size`` prop to radio button
 
 ## 0.5.2
 

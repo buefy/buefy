@@ -27,12 +27,12 @@
                 default: 'is-primary'
             },
             disabled: Boolean,
-            name: String
+            name: String,
+            size: String
         },
         data() {
             return {
-                newValue: this.value,
-                size: null
+                newValue: this.value
             }
         },
         watch: {
