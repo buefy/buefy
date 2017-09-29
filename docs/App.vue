@@ -153,6 +153,13 @@
         }
     }
 
+    // Header
+
+    .version {
+        flex-direction: column;
+        align-items: left;
+    }
+
     // Temporary fix for https://github.com/jgthms/bulma/issues/837
     .hero.is-primary .hero-head .navbar {
         background: $primary;
@@ -182,12 +189,21 @@
             }
         }
         @include touch {
-            .has-dropdown .navbar-item {
-                &:not(.is-active) {
-                    color: rgba($primary-invert, 0.7) !important;
+            .navbar-end {
+                .navbar-item,
+                .navbar-link {
+                    color: $text;
+                    &:hover {
+                        color: $black;
+                    }
                 }
-                &:hover {
-                    color: $primary-invert !important;
+                .button.is-light {
+                    border-color: $twitter;
+                    color: $twitter;
+                    &:hover {
+                        color: $white;
+                        background: $twitter;
+                    }
                 }
             }
         }

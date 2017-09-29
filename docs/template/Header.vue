@@ -38,7 +38,15 @@
                             <router-link to="/documentation/field" class="navbar-item">Form</router-link>
                             <router-link to="/documentation/table" class="navbar-item">Data</router-link>
                             <hr class="navbar-divider">
-                            <strong class="navbar-item has-text-grey">{{ version }}</strong>
+                            <strong class="navbar-item version">
+                                <span class="has-text-primary">Buefy version</span>
+                                <span class="has-text-grey">{{ version }}</span>
+                            </strong>
+                            <strong class="navbar-item version">
+                                <span class="has-text-bulma">Bulma version</span>
+                                <span class="has-text-grey">{{ bulmaVersion }}</span>
+                            </strong>
+                            <hr class="navbar-divider">
                             <a class="navbar-item"
                                 href="https://github.com/rafaelpimpa/buefy/releases"
                                 target="_blank">
@@ -70,7 +78,8 @@
         data() {
             return {
                 isMenuActive: false,
-                version: Package.version
+                version: Package.version,
+                bulmaVersion: Package.dependencies.bulma.substr(1)
             }
         },
         methods: {
