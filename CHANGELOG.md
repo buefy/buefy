@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.5.4
+
+* #334 Add ``defaultDialogConfirmText`` and ``defaultDialogCancelText`` constructor options 
+
 ## 0.5.3
 
 * **New component: Collapse**, [see docs](https://buefy.github.io/#/documentation/collapse)

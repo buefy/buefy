@@ -1,6 +1,8 @@
 const config = {
     defaultContainerElement: null,
     defaultIconPack: 'mdi',
+    defaultDialogConfirmText: null,
+    defaultDialogCancelText: null,
     defaultSnackbarDuration: 3500,
     defaultToastDuration: 2000,
     defaultTooltipType: 'is-primary',

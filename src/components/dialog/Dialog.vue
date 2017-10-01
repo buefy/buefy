@@ -53,6 +53,7 @@
 
 <script>
     import Icon from '../icon'
+    import config from '../../utils/config'
     import { removeElement } from '../../utils/helpers'
 
     export default {
@@ -69,11 +70,17 @@
             },
             confirmText: {
                 type: String,
-                default: 'OK'
+                default: () => {
+                    return config.defaultDialogConfirmText
+                        ? config.defaultDialogConfirmText : 'OK'
+                }
             },
             cancelText: {
                 type: String,
-                default: 'Cancel'
+                default: () => {
+                    return config.defaultDialogCancelText
+                        ? config.defaultDialogCancelText : 'Cancel'
+                }
             },
             animation: {
                 type: String,

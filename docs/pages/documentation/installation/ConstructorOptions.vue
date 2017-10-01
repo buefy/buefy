@@ -64,6 +64,20 @@
                         default: '<code>body</code>'
                     },
                     {
+                        name: '<code>defaultDialogConfirmText</code>',
+                        description: `Default dialog <code>confirmText</code> attribute`,
+                        type: 'String',
+                        values: '—',
+                        default: '<code></code>'
+                    },
+                    {
+                        name: '<code>defaultDialogCancelText</code>',
+                        description: `Default dialog <code>cancelText</code> attribute`,
+                        type: 'String',
+                        values: '—',
+                        default: '<code></code>'
+                    },
+                    {
                         name: '<code>defaultSnackbarDuration</code>',
                         description: `Default snackbar <code>duration</code> attribute.`,
                         type: 'Number',
