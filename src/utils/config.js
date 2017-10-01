@@ -9,7 +9,10 @@ const config = {
     defaultTooltipAnimated: false,
     defaultInputAutocomplete: 'on',
     defaultDateFormatter: null,
-    defaultDateParser: null
+    defaultDateParser: null,
+    defaultDayNames: null,
+    defaultMonthNames: null,
+    defaultFirstDayOfWeek: null
 }
 
 export default config
