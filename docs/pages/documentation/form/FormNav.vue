@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar-brand">
+    <div class="navbar-tabs">
         <router-link to="field" class="navbar-item is-tab">Field</router-link>
         <router-link to="input" class="navbar-item is-tab">Input</router-link>
         <router-link to="select" class="navbar-item is-tab">Select</router-link>

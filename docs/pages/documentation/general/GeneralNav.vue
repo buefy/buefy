@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar-brand">
+    <div class="navbar-tabs">
         <router-link to="layout" class="navbar-item is-tab">Layout</router-link>
         <router-link to="icon" class="navbar-item is-tab">Icon</router-link>
         <router-link to="dropdown" class="navbar-item is-tab">Dropdown</router-link>

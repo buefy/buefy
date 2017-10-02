@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar-brand">
+    <div class="navbar-tabs">
         <router-link to="dialog" class="navbar-item is-tab">Dialog</router-link>
         <router-link to="toast" class="navbar-item is-tab">Toast</router-link>
         <router-link to="snackbar" class="navbar-item is-tab">Snackbar</router-link>
