@@ -61,6 +61,7 @@
 * Add ``multiple`` support to select
 * Add ``inline`` prop to dropdown, items are shown inline and trigger removed
 * Remove ``has-custom-template`` prop from autocomplete, just use scoped slot to have the same feature
+* Add `level-left` slot to data table. If table is checkable you can place some extra buttons below instead of showing number of checked rows.
 
 ## 0.5.0
 

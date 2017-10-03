@@ -118,9 +118,11 @@
 
         <div v-if="checkable || paginated" class="level">
             <div class="level-left">
-                <div v-if="checkable && this.checkedRows.length > 0" class="level-item">
-                    <p>({{ this.checkedRows.length }})</p>
-                </div>
+                <slot name="level-left" :checkedRows="checkedRows">
+                    <div v-if="checkable && this.checkedRows.length > 0" class="level-item">
+                        <p>({{ this.checkedRows.length }})</p>
+                    </div>
+                </slot>
             </div>
 
             <div class="level-right">
