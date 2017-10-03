@@ -2,7 +2,8 @@
 
 ## 0.5.4
 
-* #334 Add ``defaultDialogConfirmText`` and ``defaultDialogCancelText`` constructor options 
+* Fix ``focus`` method on select
+* #334 Add ``defaultDialogConfirmText`` and ``defaultDialogCancelText`` constructor options
 
 ## 0.5.3
 

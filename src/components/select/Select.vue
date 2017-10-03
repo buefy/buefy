@@ -58,6 +58,7 @@
         data() {
             return {
                 selected: this.value,
+                _isSelect: true,
                 _elementRef: 'select'
             }
         },
