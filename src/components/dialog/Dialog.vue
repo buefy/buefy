@@ -9,11 +9,12 @@
 
                 <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <div class="media">
-                        <div class="media-left" v-if="icon && hasIcon">
+                        <div class="media-left" v-if="hasIcon">
                             <b-icon
-                                :icon="icon"
+                                :icon="icon ? icon : iconByTpe"
+                                :pack="iconPack"
                                 :class="type"
-                                both
+                                :both="!icon"
                                 size="is-large custom-icon">
                             </b-icon>
                         </div>
@@ -63,6 +64,8 @@
         props: {
             title: String,
             message: String,
+            icon: String,
+            iconPack: String,
             hasIcon: Boolean,
             type: {
                 type: String,
@@ -114,7 +117,7 @@
             /**
              * Icon name (MDI) based on the type.
              */
-            icon() {
+            iconByTpe() {
                 switch (this.type) {
                     case 'is-info':
                         return 'info'
