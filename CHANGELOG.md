@@ -4,6 +4,7 @@
 
 * Fix ``focus`` method on select
 * #334 Add ``defaultDialogConfirmText`` and ``defaultDialogCancelText`` constructor options
+* #335 Add ``icon`` and ``iconPack`` prop to dialog
 
 ## 0.5.3
 
