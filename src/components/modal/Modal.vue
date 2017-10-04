@@ -25,7 +25,7 @@
         name: 'bModal',
         props: {
             active: Boolean,
-            component: Object,
+            component: [Object, Function],
             content: String,
             programmatic: Boolean,
             props: Object,
