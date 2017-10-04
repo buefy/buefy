@@ -77,6 +77,9 @@
             &.is-empty:hover {
                 background-color: transparent;
             }
+            &:not(.is-selected):focus {
+                background: $table-striped-row-even-hover-background-color;
+            }
         }
         .checkbox-cell {
             width: 40px;

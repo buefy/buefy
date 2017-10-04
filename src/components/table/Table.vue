@@ -65,12 +65,14 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr :key="index"
-                            @click="selectRow(row)"
-                            @dblclick="$emit('dblclick', row)"
+                            :tabindex="!selected ? false : 0"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row)
-                            }]">
+                            }]"
+                            @keyup.enter="selectRow(row)"
+                            @click="selectRow(row)"
+                            @dblclick="$emit('dblclick', row)">
 
                             <td v-if="detailed">
                                 <a role="button" @click.stop="toggleDetails(row)">
