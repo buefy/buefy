@@ -13,7 +13,7 @@ export default [
                 description: `Component to be injected, used to open a component modal programmatically.
                     Close modal within the component by emitting a 'close' event — <code>this.$emit('close')</code>.
                     Be aware that the component won't have access to the main Vue instance (vuex, router, custom components, etc.)`,
-                type: 'String',
+                type: 'Object, Function',
                 values: '—',
                 default: '—'
             },
