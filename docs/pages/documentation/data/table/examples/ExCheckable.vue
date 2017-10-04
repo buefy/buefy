@@ -34,6 +34,10 @@
                             {{ props.row.gender }}
                         </b-table-column>
                     </template>
+
+                    <template slot="bottom-left">
+                        <b>Total checked</b>: {{ checkedRows.length }}
+                    </template>
                 </b-table>
             </b-tab-item>
 

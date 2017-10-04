@@ -118,9 +118,7 @@
 
         <div v-if="checkable || paginated" class="level">
             <div class="level-left">
-                <div v-if="checkable && this.checkedRows.length > 0" class="level-item">
-                    <p>({{ this.checkedRows.length }})</p>
-                </div>
+                <slot name="bottom-left"></slot>
             </div>
 
             <div class="level-right">
@@ -501,7 +499,7 @@
 
                 const tag = this.$slots.footer[0].tag
                 if (tag !== 'th' && tag !== 'td') return false
-    
+
                 return true
             },
 

@@ -97,7 +97,6 @@
 
                 this.clipboard.on('success', (e) => {
                     this.$toast.open('Copied to clipboard!')
-                    console.log('Q')
                 })
 
                 this.clipboard.on('error', (e) => {

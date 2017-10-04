@@ -28,6 +28,7 @@
                 To show which rows are <strong>checked</strong>, you have to pass the corresponding object array to the <code>checked-rows</code> prop.
                 Adding the <code>.sync</code> modifier will make it two-way binding — checked object array will mutate if user clicks on checkboxes.
             </p>
+            <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </div>
         <div class="example">
             <ex-checkable></ex-checkable>
@@ -40,6 +41,7 @@
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
             <p>Moreover, use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
             <p>Eventually, use the <code>default-sort-direction</code> prop to determine the default sort column direction on the first click.</p>
+            <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </div>
         <div class="example">
             <ex-pagination-sort></ex-pagination-sort>
