@@ -7,7 +7,8 @@
 * #251, #345 Add ``bottom-left`` slot to table
 * #334 Add ``defaultDialogConfirmText`` and ``defaultDialogCancelText`` constructor options
 * #335 Add ``icon`` and ``iconPack`` prop to dialog
-* #350 Add Function type to ``component`` prop of Modal (thanks @ivalkenburg)
+* #350 Add Function type to ``component`` prop of modal (thanks @ivalkenburg)
+* #354 Add tab key press to autocomplete (thanks @tmepple)
 
 ## 0.5.3
 
