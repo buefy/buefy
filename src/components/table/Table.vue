@@ -29,12 +29,18 @@
         <div class="table-wrapper">
             <table
                 class="table"
+                :tabindex="!selected ? false : 0"
                 :class="{
                     'is-bordered': bordered,
                     'is-striped': striped,
                     'is-narrow': narrowed,
                     'has-mobile-cards': mobileCards
-                }">
+                }"
+                @keyup.prevent.enter="pressedEnter"
+                @keydown.prevent.up="pressedArrow(-1)"
+                @keydown.prevent.down="pressedArrow(1)"
+                @focus="focused"
+                @blur="hovered = null">
                 <thead>
                     <tr>
                         <th v-if="detailed" width="40px"></th>
@@ -65,12 +71,11 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr :key="index"
-                            :tabindex="!selected ? false : 0"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
-                                'is-checked': isRowChecked(row)
+                                'is-checked': isRowChecked(row),
+                                'is-hovered': hovered === row
                             }]"
-                            @keyup.enter="selectRow(row)"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
 
@@ -205,6 +210,7 @@
                 isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
+                hovered: this.selected || null,
                 firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
@@ -464,6 +470,8 @@
 
                 // Emit new row to update user variable
                 this.$emit('update:selected', row)
+
+                this.hovered = row
             },
 
             /**
@@ -503,6 +511,44 @@
                 if (tag !== 'th' && tag !== 'td') return false
 
                 return true
+            },
+
+            /**
+             * Table enter key listener, set selected.
+             */
+            pressedEnter() {
+                if (!this.visibleData.length || !this.hovered) return
+
+                this.selectRow(this.hovered)
+            },
+
+            /**
+             * Table arrow keys listener, change hovered.
+             */
+            pressedArrow(pos) {
+                if (!this.visibleData.length) return
+
+                let index = this.visibleData.indexOf(this.hovered) + pos
+
+                // Prevent from going up from first and down from last
+                index = index < 0
+                    ? 0
+                    : index > this.visibleData.length - 1
+                        ? this.visibleData.length - 1
+                        : index
+
+                this.hovered = this.visibleData[index]
+            },
+
+            /**
+             * Table focus listener, set initial hovered.
+             */
+            focused() {
+                if (!this.visibleData.length) return
+
+                this.hovered = !this.selected || !Object.keys(this.selected).length
+                    ? this.visibleData[0]
+                    : this.selected
             },
 
             /**
