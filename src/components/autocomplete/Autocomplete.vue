@@ -12,6 +12,7 @@
             @focus="focused"
             @blur="$emit('blur', $event)"
             @keyup.native.esc.prevent="isActive = false"
+            @keydown.native.tab="tabPressed"
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')">
@@ -209,6 +210,19 @@
              */
             enterPressed() {
                 if (this.hovered === null) return
+                this.setSelected(this.hovered)
+            },
+
+            /**
+             * Tab key listener.
+             * Select hovered option if it exists, close dropdown, then allow
+             * native handling to move to next tabbable element.
+             */
+            tabPressed() {
+                if (this.hovered === null) {
+                    this.isActive = false
+                    return
+                }
                 this.setSelected(this.hovered)
             },
 
