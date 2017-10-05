@@ -11,10 +11,15 @@
 
         <hr>
         <h2 class="title is-spaced">Selection</h2>
-        <p class="content">
-            You can show a <strong>single selected</strong> row by passing the corresponding object to the <code>selected</code> prop.
-            Additionally, adding the <code>.sync</code> modifier will make it two-way binding — selected object will mutate if user clicks on row.
-        </p>
+        <div class="content">
+            <p>
+                You can show a <strong>single selected</strong> row by passing the corresponding object to the <code>selected</code> prop.
+                Additionally, adding the <code>.sync</code> modifier will make it two-way binding — selected object will mutate if user clicks on row.
+            </p>
+            <p>
+                Selection tables can be focused and used with a keyboard, using <strong>arrow keys</strong> to navigate and <strong>enter</strong> to select.
+            </p>
+        </div>
         <div class="example">
             <ex-selection></ex-selection>
         </div>
