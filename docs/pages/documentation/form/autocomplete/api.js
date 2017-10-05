@@ -3,7 +3,7 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Bindig value',
+                description: 'Binding value',
                 type: 'String, Number',
                 values: '—',
                 default: '—'
@@ -31,7 +31,7 @@ export default [
             },
             {
                 name: '<code>keep-first</code>',
-                description: 'The first option will always be pre-selected (easier to just hit enter)',
+                description: 'The first option will always be pre-selected (easier to just hit enter or tab)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
