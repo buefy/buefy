@@ -91,7 +91,7 @@
                 // Destroy clipboard instance if there's any
                 this.clipboard && this.clipboard.destroy()
 
-                this.clipboard = new Clipboard('.button', {
+                this.clipboard = new Clipboard('.copy-code', {
                     target: (trigger) => trigger.nextElementSibling.children[0]
                 })
 

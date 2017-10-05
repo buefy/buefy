@@ -1,6 +1,6 @@
 <template>
     <figure class="highlight" :class=" { 'example-code': bordered }">
-        <button class="button is-small">Copy</button>
+        <button class="button is-small copy-code">Copy</button>
         <pre v-highlight><code :class="lang">{{ code }}</code></pre>
     </figure>
 </template>
