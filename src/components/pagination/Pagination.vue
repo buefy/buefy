@@ -1,28 +1,27 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
-        <a href="#" class="pagination-previous" @click.prevent="prev"  :disabled="!hasPrev">
+        <a role="button" href="#" class="pagination-previous" @click.prevent="prev"  :disabled="!hasPrev">
             <b-icon icon="chevron_left" both></b-icon>
         </a>
+        <a role="button" href="#" class="pagination-next" @click.prevent="next" :disabled="!hasNext">
+            <b-icon icon="chevron_right" both></b-icon>
+        </a>
         <ul class="pagination-list" v-if="!simple">
-
             <!--First-->
-            <li v-if="hasFirst"><a href="#" class="pagination-link" @click.prevent="first">1</a></li>
+            <li v-if="hasFirst"><a role="button" href="#" class="pagination-link" @click.prevent="first">1</a></li>
             <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
 
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
-                <a href="#" class="pagination-link" @click.prevent="page.click" :class="{ 'is-current': page.isCurrent }">
+                <a role="button" href="#" class="pagination-link" @click.prevent="page.click" :class="{ 'is-current': page.isCurrent }">
                     {{ page.number }}
                 </a>
             </li>
 
             <!--Last-->
             <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
-            <li v-if="hasLast"><a href="#" class="pagination-link" @click.prevent="last">{{ pageCount }}</a></li>
+            <li v-if="hasLast"><a role="button" href="#" class="pagination-link" @click.prevent="last">{{ pageCount }}</a></li>
         </ul>
-        <a href="#" class="pagination-next" @click.prevent="next" :disabled="!hasNext">
-            <b-icon icon="chevron_right" both></b-icon>
-        </a>
         <small class="info" v-if="simple">
             {{ firstItem }}-{{ current * perPage }} / {{ total }}
         </small>
@@ -124,9 +123,12 @@
                     pages.push({
                         number: i,
                         isCurrent: this.current === i,
-                        click: () => {
+                        click: (event) => {
                             this.$emit('change', i)
                             this.$emit('update:current', i)
+
+                            // Set focus on element to keep tab order
+                            this.$nextTick(() => event.target.focus())
                         }
                     })
                 }
