@@ -96,6 +96,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>inputDefaultValue</code>',
+                description: `Prompt only: input's default value`,
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>onConfirm</code>',
                 description: 'Callback function when the confirm button is clicked',
                 type: 'Function (value: String)',

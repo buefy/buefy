@@ -97,6 +97,7 @@
             inputPlaceholder: String,
             inputName: String,
             inputMaxlength: [Number, String],
+            inputDefaultValue: [Number, String],
             onConfirm: {
                 type: Function,
                 default: () => {}
@@ -109,7 +110,7 @@
         data() {
             return {
                 isActive: false,
-                prompt: '',
+                prompt: this.inputDefaultValue,
                 validationMessage: ''
             }
         },
@@ -204,7 +205,7 @@
             this.$nextTick(() => {
                 // Handle which element receives focus
                 if (this.hasInput) {
-                    this.$refs.input.focus()
+                    this.$refs.input.select()
                 } else {
                     this.$refs.confirmButton.focus()
                 }

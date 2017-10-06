@@ -14,6 +14,7 @@
                     message: `What's your name?`,
                     inputMaxlength: 20,
                     inputPlaceholder: 'e.g. John Doe',
+                    inputDefaultValue: 'Walter',
                     onConfirm: (value) => this.$toast.open('Your name is: ' + value)
                 })
             }
