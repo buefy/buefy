@@ -2,9 +2,9 @@
 
 ## 0.5.4
 
+* **Deprecated** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props, use new ``inputAttrs`` prop, [see docs](https://buefy.github.io/#/documentation/dialog)
 * Fix ``focus`` method on select
 * Table with ``selected`` prop can now be natigated with keyboard
-* Add ``inputDefaultValue`` prop to Dialog's prompt method
 * #251, #345 Add ``bottom-left`` slot to table
 * #334 Add ``defaultDialogConfirmText`` and ``defaultDialogCancelText`` constructor options
 * #335 Add ``icon`` and ``iconPack`` prop to dialog

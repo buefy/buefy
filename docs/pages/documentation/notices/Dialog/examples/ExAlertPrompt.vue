@@ -11,11 +11,15 @@
         methods: {
             prompt() {
                 this.$dialog.prompt({
-                    message: `What's your name?`,
-                    inputMaxlength: 20,
-                    inputPlaceholder: 'e.g. John Doe',
-                    inputDefaultValue: 'Walter',
-                    onConfirm: (value) => this.$toast.open('Your name is: ' + value)
+                    message: `What's your age?`,
+                    inputAttrs: {
+                        type: 'number',
+                        placeholder: 'Type your age',
+                        value: '18',
+                        maxlength: 2,
+                        min: 18
+                    },
+                    onConfirm: (value) => this.$toast.open(`Your age is: ${value}`)
                 })
             }
         }

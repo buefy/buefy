@@ -23,14 +23,13 @@
 
                             <div v-if="hasInput" class="field">
                                 <div class="control">
-                                    <input v-model="prompt"
-                                        class="input"
-                                        :class="{ 'is-danger': validationMessage }"
+                                    <input class="input"
                                         ref="input"
                                         required
-                                        :placeholder="inputPlaceholder"
-                                        :maxlength="inputMaxlength"
-                                        :name="inputName"
+                                        :value="prompt"
+                                        :class="{ 'is-danger': validationMessage }"
+                                        v-bind="tempInputAttrs"
+                                        @input="(event) => prompt = event.target.value"
                                         @keyup.enter="confirm">
                                 </div>
                                 <p class="help is-danger">{{ validationMessage }}</p>
@@ -58,6 +57,7 @@
     import { removeElement } from '../../utils/helpers'
 
     export default {
+        inheritAttrs: false,
         components: {
             [Icon.name]: Icon
         },
@@ -75,14 +75,16 @@
                 type: String,
                 default: () => {
                     return config.defaultDialogConfirmText
-                        ? config.defaultDialogConfirmText : 'OK'
+                        ? config.defaultDialogConfirmText
+                        : 'OK'
                 }
             },
             cancelText: {
                 type: String,
                 default: () => {
                     return config.defaultDialogCancelText
-                        ? config.defaultDialogCancelText : 'Cancel'
+                        ? config.defaultDialogCancelText
+                        : 'Cancel'
                 }
             },
             animation: {
@@ -94,10 +96,10 @@
                 default: true
             },
             hasInput: Boolean, // Used internally to know if it's prompt
-            inputPlaceholder: String,
-            inputName: String,
-            inputMaxlength: [Number, String],
-            inputDefaultValue: [Number, String],
+            inputPlaceholder: String, // Deprecated
+            inputName: String, // Deprecated
+            inputMaxlength: [Number, String], // Deprecated
+            inputAttrs: Object,
             onConfirm: {
                 type: Function,
                 default: () => {}
@@ -108,10 +110,17 @@
             }
         },
         data() {
+            // @TODO Remove temporary: inputPlaceholder, inputName and inputMaxlength are deprecated
+            const tempInputAttrs = this.inputAttrs || {}
+            tempInputAttrs.placeholder = tempInputAttrs.placeholder || this.inputPlaceholder
+            tempInputAttrs.name = tempInputAttrs.name || this.inputName
+            tempInputAttrs.maxlength = tempInputAttrs.maxlength || this.inputMaxlength
+
             return {
                 isActive: false,
-                prompt: this.inputDefaultValue,
-                validationMessage: ''
+                prompt: tempInputAttrs.value || '',
+                validationMessage: '',
+                tempInputAttrs
             }
         },
         computed: {
@@ -204,11 +213,9 @@
 
             this.$nextTick(() => {
                 // Handle which element receives focus
-                if (this.hasInput) {
-                    this.$refs.input.select()
-                } else {
-                    this.$refs.confirmButton.focus()
-                }
+                this.hasInput
+                    ? this.$refs.input.focus()
+                    : this.$refs.confirmButton.focus()
             })
         },
         beforeDestroy() {

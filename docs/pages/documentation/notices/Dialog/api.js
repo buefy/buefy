@@ -75,31 +75,10 @@ export default [
                 default: '<code>true</code> for Confirm/Prompt, <code>false</code> for Alert'
             },
             {
-                name: '<code>inputPlaceholder</code>',
-                description: `Prompt only: input's placeholder`,
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>inputName</code>',
-                description: `Prompt only: input's native name`,
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>inputMaxlength</code>',
-                description: `Prompt only: input's maxlength`,
-                type: 'Number',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>inputDefaultValue</code>',
-                description: `Prompt only: input's default value`,
-                type: 'Number, String',
-                values: '—',
+                name: '<code>inputAttrs</code>',
+                description: `Prompt only: input's attributes`,
+                type: 'Object',
+                values: 'Any HTML5 input attribute',
                 default: '—'
             },
             {
