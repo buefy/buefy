@@ -28,11 +28,10 @@
                         <a v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
                             role="button"
-                            tabindex="0"
-                            aria-label="Decrement Month"
+                            href="#"
                             :disabled="disabled"
-                            @click="decrementMonth"
-                            @keydown.enter="decrementMonth"
+                            @click.prevent="decrementMonth"
+                            @keydown.enter.prevent="decrementMonth"
                             @keydown.space.prevent="decrementMonth">
 
                             <b-icon icon="chevron_left"
@@ -44,11 +43,10 @@
                         <a v-show="!isLastMonth && !disabled"
                             class="pagination-next"
                             role="button"
-                            tabindex="0"
-                            aria-label="Increment Month"
+                            href="#"
                             :disabled="disabled"
-                            @click="incrementMonth"
-                            @keydown.enter="incrementMonth"
+                            @click.prevent="incrementMonth"
+                            @keydown.enter.prevent="incrementMonth"
                             @keydown.space.prevent="incrementMonth">
 
                             <b-icon icon="chevron_right"
@@ -60,8 +58,7 @@
                         <div class="pagination-list">
                             <b-field>
                                 <b-select v-model="focusedDateData.month" 
-                                    :disabled="disabled"
-                                    aria-label="Select Month">
+                                    :disabled="disabled">
                                     <option v-for="(month, index) in Object.values(monthNames)"
                                         :value="index"
                                         :key="month">
@@ -69,8 +66,7 @@
                                     </option>
                                 </b-select>
                                 <b-select v-model="focusedDateData.year"
-                                    :disabled="disabled"
-                                    aria-label="Select Year">
+                                    :disabled="disabled">
                                     <option v-for="year in listOfYears"
                                         :value="year"
                                         :key="year">
@@ -392,12 +388,14 @@
             * Format date into string 'YYYY-MM-DD'
             */
             formatYYYYMMDD(value) {
-                if (value && !isNaN(new Date(value))) {
-                    const date = new Date(value)
+                const date = new Date(value)
+                if (value && !isNaN(date)) {
                     const year = date.getFullYear()
                     const month = date.getMonth() + 1
                     const day = date.getDate()
-                    return year + '-' + ((month < 10 ? '0' : '') + month) + '-' + ((day < 10 ? '0' : '') + day)
+                    return year + '-' +
+                        ((month < 10 ? '0' : '') + month) + '-' +
+                        ((day < 10 ? '0' : '') + day)
                 }
                 return ''
             },
@@ -406,7 +404,6 @@
             * Format date into string 'YYYY-MM-DD'
             */
             onChangeNativePicker(event) {
-                // YYYY-MM-DD
                 const date = event.target.value
                 this.dateSelected = date ? new Date(date) : null
             }

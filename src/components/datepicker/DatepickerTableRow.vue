@@ -6,11 +6,10 @@
                 :class="classObject(day)"
                 class="datepicker-cell"
                 role="button"
-                tabindex="0"
-                aria-label="Select Date"
+                href="#"
                 :disabled="disabled"
-                @click="emitChosenDate(day)"
-                @keydown.enter="emitChosenDate(day)"
+                @click.prevent="emitChosenDate(day)"
+                @keydown.enter.prevent="emitChosenDate(day)"
                 @keydown.space.prevent="emitChosenDate(day)">
                 {{ day.getDate() }}
             </a>
