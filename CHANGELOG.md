@@ -10,6 +10,7 @@
 * #335 Add ``icon`` and ``iconPack`` prop to dialog
 * #350 Add Function type to ``component`` prop of modal (thanks @ivalkenburg)
 * #354 Add tab key press to autocomplete (thanks @tmepple)
+* #356 Fix table header alignment
 
 ## 0.5.3
 

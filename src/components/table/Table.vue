@@ -13,13 +13,11 @@
                 <p class="control">
                     <button class="button is-primary" @click="sort(mobileSort)">
                         <b-icon
+                            v-show="currentSortColumn === mobileSort"
                             icon="arrow_upward"
                             both
                             size="is-small"
-                            :class="{
-                                'is-desc': !isAsc,
-                                'is-visible': currentSortColumn === mobileSort
-                            }">
+                            :class="{ 'is-desc': !isAsc }">
                         </b-icon>
                     </button>
                 </p>
@@ -59,10 +57,11 @@
                                 <template v-else>{{ column.label }}</template>
 
                                 <b-icon
+                                    v-show="currentSortColumn === column"
                                     icon="arrow_upward"
                                     both
                                     size="is-small"
-                                    :class="{ 'is-desc': !isAsc, 'is-visible': currentSortColumn === column }">
+                                    :class="{ 'is-desc': !isAsc }">
                                 </b-icon>
                             </div>
                         </th>
