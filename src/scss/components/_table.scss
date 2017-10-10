@@ -27,6 +27,8 @@
         // Transparent border to not break when focused
         // since box-shadow inset won't work correctly
         border: 0.125em solid transparent;
+        border-radius: $radius;
+        border-collapse: separate;
         th {
             font-weight: $weight-semibold;
             .th-wrap {
@@ -77,7 +79,7 @@
                 background-color: transparent;
             }
             &:not(.is-selected).is-hovered {
-                background: rgba($grey-light, 0.35);
+                background: rgba($grey-light, 0.35) !important;
             }
         }
         .checkbox-cell {
@@ -97,7 +99,7 @@
             }
         }
         &:focus {
-            border: 0.125em solid rgba($table-row-active-background-color, 0.25);
+            border: 0.125em solid rgba($table-row-active-background-color, 0.5);
         }
         // Modifiers
         &.is-bordered {
@@ -168,20 +170,7 @@
     }
 
     .level {
-        padding-bottom: 1rem;
-        .pagination {
-            .info {
-                padding-right: 0.5rem;
-            }
-        }
-        @include tablet {
-            .level-left {
-                padding-left: 1rem;
-            }
-            .level-right {
-                padding-right: 1rem;
-            }
-        }
+        padding-bottom: 1.5rem;
     }
 
     &.is-loading {

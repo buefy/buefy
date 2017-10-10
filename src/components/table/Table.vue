@@ -470,7 +470,8 @@
                 // Emit new row to update user variable
                 this.$emit('update:selected', row)
 
-                this.hovered = row
+                // Set hovered if is selectable
+                if (this.selected) this.hovered = row
             },
 
             /**
@@ -545,9 +546,9 @@
             focused() {
                 if (!this.visibleData.length) return
 
-                this.hovered = !this.selected || !Object.keys(this.selected).length
-                    ? this.visibleData[0]
-                    : this.selected
+                this.hovered = this.selected && Object.keys(this.selected).length
+                    ? this.selected
+                    : null
             },
 
             /**
