@@ -13,7 +13,7 @@
 
         <h3 class="subtitle">Options</h3>
         <b-table :data="options" default-sort="name">
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column field="name" label="Name">
                     <span v-html="props.row.name"></span>
                 </b-table-column>

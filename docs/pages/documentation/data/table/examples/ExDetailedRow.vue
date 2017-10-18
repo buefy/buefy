@@ -4,7 +4,7 @@
         detailed
         @details-open="(row, index) => $toast.open(`Expanded ${row.first_name}`)">
 
-        <template scope="props">
+        <template slot-scope="props">
             <b-table-column label="ID" width="40"  numeric>
                 {{ props.row.id }}
             </b-table-column>
@@ -26,7 +26,7 @@
             </b-table-column>
         </template>
 
-        <template slot="detail" scope="props">
+        <template slot="detail" slot-scope="props">
             <article class="media">
                 <figure class="media-left">
                     <p class="image is-64x64">

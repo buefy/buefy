@@ -12,7 +12,7 @@
                     :data="tableDataSimple"
                     :selected.sync="selected">
 
-                    <template scope="props">
+                    <template slot-scope="props">
                         <b-table-column label="ID" width="40" numeric>
                             {{ props.row.id }}
                         </b-table-column>

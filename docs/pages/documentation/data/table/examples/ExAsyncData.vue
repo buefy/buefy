@@ -15,7 +15,7 @@
             :default-sort="[sortField, sortOrder]"
             @sort="onSort">
 
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column field="original_title" label="Title" sortable>
                     {{ props.row.original_title }}
                 </b-table-column>

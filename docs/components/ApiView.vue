@@ -5,7 +5,7 @@
             <b-tabs :key="component.title">
                 <b-tab-item v-if="component.props" label="Properties">
                     <b-table :data="component.props" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Name">
                                 <span v-html="props.row.name"></span>
                             </b-table-column>
@@ -27,7 +27,7 @@
 
                 <b-tab-item v-if="component.slots" label="Slots">
                     <b-table :data="component.slots" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Slot name">
                                 <span v-html="props.row.name"></span>
                             </b-table-column>
@@ -43,7 +43,7 @@
 
                 <b-tab-item v-if="component.events" label="Events">
                     <b-table :data="component.events" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Name">
                                 <span v-html="props.row.name"></span>
                             </b-table-column>
@@ -59,7 +59,7 @@
 
                 <b-tab-item v-if="component.methods" label="Methods">
                     <b-table :data="component.methods" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Name">
                                 <span v-html="props.row.name"></span>
                             </b-table-column>
