@@ -9,7 +9,7 @@
         </b-field>
 
         <b-table :data="tableDataSimple">
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column v-for="(column, index) in columnsTemplate"
                     :key="index"
                     :label="column.title"

@@ -7,7 +7,7 @@
         </b-field>
         <b-table :data="tableDataSimple">
 
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column label="ID" width="40" numeric>
                     {{ props.row.id }}
                 </b-table-column>
@@ -35,23 +35,23 @@
                 </div>
             </template>
             <template slot="footer" v-else>
-                <th class="is-hidden-mobile" style="width:40px"> 
-                    <div class="th-wrap is-numeric"> ID </div> 
+                <th class="is-hidden-mobile" style="width:40px">
+                    <div class="th-wrap is-numeric"> ID </div>
                 </th>
-                <th class="is-hidden-mobile"> 
-                    <div class="th-wrap"> First Name </div> 
+                <th class="is-hidden-mobile">
+                    <div class="th-wrap"> First Name </div>
                 </th>
-                <th class="is-hidden-mobile"> 
-                    <div class="th-wrap"> Last Name </div> 
+                <th class="is-hidden-mobile">
+                    <div class="th-wrap"> Last Name </div>
                 </th>
                 <th class="is-hidden-mobile">
                     <div class="th-wrap is-centered"> Date </div>
                 </th>
-                <th class="is-hidden-mobile"> 
-                    <div class="th-wrap"> Gender </div> 
+                <th class="is-hidden-mobile">
+                    <div class="th-wrap"> Gender </div>
                 </th>
             </template>
-            
+
         </b-table>
     </section>
 </template>

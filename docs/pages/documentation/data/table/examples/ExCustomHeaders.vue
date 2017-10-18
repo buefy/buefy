@@ -1,12 +1,12 @@
 <template>
     <b-table :data="tableDataSimple">
-        <template scope="props" slot="header">
+        <template slot-scope="props" slot="header">
             <b-tooltip :active="!!props.column.meta" :label="props.column.meta" dashed>
                 {{ props.column.label }}
             </b-tooltip>
         </template>
 
-        <template scope="props">
+        <template slot-scope="props">
             <b-table-column field="id" label="ID" meta="Internal ID" width="40" numeric sortable>
                 {{ props.row.id }}
             </b-table-column>
