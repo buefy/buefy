@@ -6,26 +6,24 @@
             'is-clearfix': !hasMessage
         }]">
         <input v-if="type !== 'textarea'"
+            v-model="newValue"
             ref="input"
             class="input"
             :class="[statusType, size]"
             :type="newType"
             :autocomplete="newAutocomplete"
-            :value="newValue"
             :maxlength="maxlength"
             v-bind="$attrs"
-            @input="input"
             @blur="$emit('blur', $event) && checkHtml5Validity()"
             @focus="$emit('focus', $event)">
 
         <textarea v-else
+            v-model="newValue"
             ref="textarea"
             class="textarea"
             :class="[statusType, size]"
-            :value="newValue"
             :maxlength="maxlength"
             v-bind="$attrs"
-            @input="input"
             @blur="$emit('blur', $event) && checkHtml5Validity()"
             @focus="$emit('focus', $event)">
         </textarea>
@@ -39,7 +37,7 @@
 
         <b-icon v-if="!loading && (passwordReveal || statusType)"
             class="is-right"
-            :class="[!passwordReveal ? statusType : null, { 'is-primary is-clickable': passwordReveal }]"
+            :class="{ 'is-primary is-clickable': passwordReveal, statusType: !passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
             :size="size"
             both
@@ -146,26 +144,18 @@
              */
             value(value) {
                 this.newValue = value
+            },
+
+            /**
+             * Update user's v-model and validate again whenever
+             * internal value is changed.
+             */
+            newValue(value) {
+                this.$emit('input', value)
                 !this.isValid && this.checkHtml5Validity()
             }
         },
         methods: {
-            /**
-             * Input's input listener.
-             *
-             *   1. Emit input event to update the user v-model.
-             *   2. If it's invalid, validate again.
-             *
-             * We're using value instead of v-model because
-             * v-model cannot be binded with a dynamic type input.
-             */
-            input(event) {
-                const value = event.target.value
-                this.newValue = value
-                this.$emit('input', value)
-                !this.isValid && this.checkHtml5Validity()
-            },
-
             /**
              * Toggle the visibility of a password-reveal input
              * by changing the type and focus the input right away.

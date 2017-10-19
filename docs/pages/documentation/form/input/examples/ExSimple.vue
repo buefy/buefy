@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field label="Name">
-            <b-input value="John Silver"></b-input>
+            <b-input v-model="name"></b-input>
         </b-field>
 
         <b-field label="Email"
@@ -32,3 +32,13 @@
         </b-field>
     </section>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                name: 'John Silver'
+            }
+        }
+    }
+</script>
