@@ -1,7 +1,11 @@
 <template>
     <section>
         <button class="button is-medium is-dark" @click="prompt">
-            Launch prompt
+            Launch prompt (default)
+        </button>
+
+        <button class="button is-medium is-dark" @click="promptNumber">
+            Launch prompt (number)
         </button>
     </section>
 </template>
@@ -10,6 +14,16 @@
     export default {
         methods: {
             prompt() {
+                this.$dialog.prompt({
+                    message: `What's your name?`,
+                    inputAttrs: {
+                        placeholder: 'e.g. Walter',
+                        maxlength: 10
+                    },
+                    onConfirm: (value) => this.$toast.open(`Your name is: ${value}`)
+                })
+            },
+            promptNumber() {
                 this.$dialog.prompt({
                     message: `What's your age?`,
                     inputAttrs: {

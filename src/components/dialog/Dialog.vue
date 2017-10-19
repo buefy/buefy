@@ -23,13 +23,12 @@
 
                             <div v-if="hasInput" class="field">
                                 <div class="control">
-                                    <input class="input"
+                                    <input v-model="prompt"
+                                        class="input"
                                         ref="input"
                                         required
-                                        :value="prompt"
                                         :class="{ 'is-danger': validationMessage }"
-                                        v-bind="tempInputAttrs"
-                                        @input="(event) => prompt = event.target.value"
+                                        v-bind="inputAttrs"
                                         @keyup.enter="confirm">
                                 </div>
                                 <p class="help is-danger">{{ validationMessage }}</p>
@@ -96,10 +95,10 @@
                 default: true
             },
             hasInput: Boolean, // Used internally to know if it's prompt
-            inputPlaceholder: String, // Deprecated
-            inputName: String, // Deprecated
-            inputMaxlength: [Number, String], // Deprecated
-            inputAttrs: Object,
+            inputAttrs: {
+                type: Object,
+                default: () => {}
+            },
             onConfirm: {
                 type: Function,
                 default: () => {}
@@ -110,17 +109,14 @@
             }
         },
         data() {
-            // @TODO Remove temporary: inputPlaceholder, inputName and inputMaxlength are deprecated
-            const tempInputAttrs = this.inputAttrs || {}
-            tempInputAttrs.placeholder = tempInputAttrs.placeholder || this.inputPlaceholder
-            tempInputAttrs.name = tempInputAttrs.name || this.inputName
-            tempInputAttrs.maxlength = tempInputAttrs.maxlength || this.inputMaxlength
+            const prompt = this.hasInput
+                ? this.inputAttrs.value || ''
+                : ''
 
             return {
                 isActive: false,
-                prompt: tempInputAttrs.value || '',
-                validationMessage: '',
-                tempInputAttrs
+                prompt,
+                validationMessage: ''
             }
         },
         computed: {
@@ -143,6 +139,10 @@
             }
         },
         watch: {
+            /**
+             * Remove scrollbar from background to avoid weird scroll behavior.
+             * while modal is active.
+             */
             isActive() {
                 if (typeof window !== 'undefined') {
                     const action = this.isActive ? 'add' : 'remove'

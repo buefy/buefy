@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.6.0
+
+### Breaking changes
+
+* Vue 2.5+ is now the minimum required version
+* **Removed** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
+
 ## 0.5.4
 
 * **Deprecated** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props, use new ``inputAttrs`` prop, [see docs](https://buefy.github.io/#/documentation/dialog)
