@@ -36,6 +36,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>mobile-modal</code>',
+                description: 'Dropdown content (items) are shown into a modal on mobile',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             }
         ],
         events: [
