@@ -4,8 +4,9 @@
             'is-disabled': disabled,
             'is-hoverable': hoverable,
             'is-inline': inline,
-            'is-active': isActive || inline
-        }]">
+            'is-active': isActive || inline,
+            'is-mobile-modal': isMobileModal
+        }]"> 
         <div v-if="!inline"
             role="button"
             ref="trigger"
@@ -15,7 +16,7 @@
         </div>
 
         <transition name="fade">
-            <div v-if="!inline"
+            <div v-if="isMobileModal"
                 v-show="isActive"
                 class="background">
             </div>
@@ -52,6 +53,10 @@
                         'is-bottom-left'
                     ].indexOf(value) > -1
                 }
+            },
+            mobileModal: {
+                type: Boolean,
+                default: true
             }
         },
         data() {
@@ -59,6 +64,11 @@
                 selected: this.value,
                 isActive: false,
                 _isDropdown: true // Used internally by DropdownItem
+            }
+        },
+        computed: {
+            isMobileModal() {
+                return this.mobileModal && !this.inline && !this.hoverable
             }
         },
         watch: {
