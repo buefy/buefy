@@ -76,6 +76,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>disabled</code>',
+                description: 'Item is disabled',
+                type: 'Boolean',
+                values: '-',
+                default: 'false'
             }
         ]
     }

@@ -12,7 +12,8 @@
         props: {
             label: String,
             icon: String,
-            iconPack: String
+            iconPack: String,
+            disabled: Boolean
         },
         data() {
             return {
