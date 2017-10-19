@@ -4,7 +4,10 @@
             <ul>
                 <li v-for="(tabItem, index) in tabItems"
                     :key="index"
-                    :class="{ 'is-active': newValue === index }">
+                    :class="{
+                        'is-active': newValue === index,
+                        'is-disabled': tabItem.disabled
+                    }">
                     <a @click="tabClick(index)">
                         <b-icon
                             v-if="tabItem.icon"

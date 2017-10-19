@@ -14,7 +14,7 @@
                 amet.
             </b-tab-item>
 
-            <b-tab-item label="Videos">
+            <b-tab-item label="Videos" disabled>
                 Nunc nec velit nec libero vestibulum eleifend.
                 Curabitur pulvinar congue luctus.
                 Nullam hendrerit iaculis augue vitae ornare.
