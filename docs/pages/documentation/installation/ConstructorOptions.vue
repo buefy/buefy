@@ -68,14 +68,14 @@
                         description: `Default dialog <code>confirmText</code> attribute`,
                         type: 'String',
                         values: '—',
-                        default: '<code></code>'
+                        default: '<code>OK</code>'
                     },
                     {
                         name: '<code>defaultDialogCancelText</code>',
                         description: `Default dialog <code>cancelText</code> attribute`,
                         type: 'String',
                         values: '—',
-                        default: '<code></code>'
+                        default: '<code>Cancel</code>'
                     },
                     {
                         name: '<code>defaultSnackbarDuration</code>',
@@ -120,35 +120,35 @@
                         description: `Default datepicker <code>date-formatter</code> attribute`,
                         type: 'Function',
                         values: '—',
-                        default: '<code></code>'
+                        default: '<code>date.toLocaleDateString()</code>'
                     },
                     {
                         name: '<code>defaultDateParser</code>',
                         description: `Default datepicker <code>date-parser</code> attribute`,
                         type: 'Function',
                         values: '—',
-                        default: '<code></code>'
+                        default: '<code>Date.parse(date)</code>'
                     },
                     {
                         name: '<code>defaultDayNames</code>',
                         description: `Default datepicker <code>day-names</code> attribute`,
                         type: 'Array',
                         values: '—',
-                        default: '<code></code>'
+                        default: `<code>['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S']</code>`
                     },
                     {
                         name: '<code>defaultMonthNames</code>',
                         description: `Default datepicker <code>month-names</code> attribute`,
                         type: 'Array',
                         values: '—',
-                        default: '<code></code>'
+                        default: `<code>['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']</code>`
                     },
                     {
                         name: '<code>defaultFirstDayOfWeek</code>',
                         description: `Default datepicker <code>first-day-of-week</code> attribute`,
                         type: 'Number',
                         values: '—',
-                        default: '<code></code>'
+                        default: '<code>0</code>'
                     }
                 ]
             }
