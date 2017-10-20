@@ -6,24 +6,26 @@
             'is-clearfix': !hasMessage
         }]">
         <input v-if="type !== 'textarea'"
-            v-model="newValue"
             ref="input"
             class="input"
             :class="[statusType, size]"
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
+            :value="newValue"
             v-bind="$attrs"
+            @input="onInput"
             @blur="$emit('blur', $event) && checkHtml5Validity()"
             @focus="$emit('focus', $event)">
 
         <textarea v-else
-            v-model="newValue"
             ref="textarea"
             class="textarea"
             :class="[statusType, size]"
             :maxlength="maxlength"
+            :value="newValue"
             v-bind="$attrs"
+            @input="onInput"
             @blur="$emit('blur', $event) && checkHtml5Validity()"
             @focus="$emit('focus', $event)">
         </textarea>
@@ -167,6 +169,14 @@
                 this.$nextTick(() => {
                     this.$refs.input.focus()
                 })
+            },
+
+            /**
+             * Input's 'input' event listener, 'nextTick' is used to prevent event firing
+             * before ui update, helps when using masks (Cleavejs and potentially others).
+             */
+            onInput(event) {
+                this.$nextTick(() => { this.newValue = event.target.value })
             }
         }
     }
