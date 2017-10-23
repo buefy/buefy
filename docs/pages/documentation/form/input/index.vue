@@ -51,30 +51,8 @@
         </div>
 
         <hr>
-        <h2 class="title is-spaced">Masks</h2>
-        <h3 class="subtitle">
-            Here we used <a href="https://nosir.github.io/cleave.js/" target="_blank">Cleave.js</a>
-            to create a custom directive
-        </h3>
-        <div class="columns">
-            <div class="column">
-                <b-message type="is-info">
-                    <strong>Cleave.js is not included in Buefy</strong>, you have to install it:
-                    <code>npm install cleave.js</code>
-                    <small class="content">
-                        Refer to its <a href="https://github.com/nosir/cleave.js/blob/master/doc/options.md" target="_blank">documentation</a>
-                        for more options details and examples.
-                    </small>
-                </b-message>
-                <ex-mask></ex-mask>
-            </div>
-            <div class="column">
-                <code-view :code="ExMaskCode"></code-view>
-            </div>
-        </div>
-
-        <hr>
         <h2 class="title">Password</h2>
+        <p class="content">You can use the <code>password-reveal</code> prop to add a button that reveals password</p>
         <div class="columns">
             <div class="column">
                 <ex-password></ex-password>
@@ -116,9 +94,6 @@
     import ExValidation from './examples/ExValidation'
     import ExValidationCode from '!!raw-loader!./examples/ExValidation'
 
-    import ExMask from './examples/ExMask'
-    import ExMaskCode from '!!raw-loader!./examples/ExMask'
-
     import ExPassword from './examples/ExPassword'
     import ExPasswordCode from '!!raw-loader!./examples/ExPassword'
 
@@ -131,7 +106,6 @@
             ExTypesStates,
             ExIcons,
             ExValidation,
-            ExMask,
             ExPassword,
             ExSizes
         },
@@ -142,7 +116,6 @@
                 ExTypesStatesCode,
                 ExIconsCode,
                 ExValidationCode,
-                ExMaskCode,
                 ExPasswordCode,
                 ExSizesCode
             }
