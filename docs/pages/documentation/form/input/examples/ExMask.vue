@@ -11,12 +11,12 @@
         </b-field>
 
         <b-field :addons="false">
-            <b-input ref="customInput"
-                placeholder="Custom"
-                v-model="custom"
-                v-cleave="masks.custom" />
-            <p><b>v-model</b>: {{ custom }}</p>
-            <p><b>Raw value</b>: {{ rawCustom }}</p>
+            <b-input placeholder="Custom"
+                v-model="value"
+                v-cleave="masks.custom"
+                @input.native="(event) => rawValue = event.target._vCleave.getRawValue()" />
+            <p><b>Formatted value (v-model)</b>: {{ value }}</p>
+            <p><b>Raw value</b>: {{ rawValue }}</p>
         </b-field>
     </section>
 </template>
@@ -34,15 +34,16 @@
         name: 'cleave',
         bind(el, binding) {
             const input = el.querySelector('input')
-            el._vCleave = new Cleave(input, binding.value)
+            input._vCleave = new Cleave(input, binding.value)
         },
         update(el, binding) {
             const input = el.querySelector('input')
-            el._vCleave.destroy()
-            el._vCleave = new Cleave(input, binding.value)
+            input._vCleave.destroy()
+            input._vCleave = new Cleave(input, binding.value)
         },
         unbind(el) {
-            el._vCleave.destroy()
+            const input = el.querySelector('input')
+            input._vCleave.destroy()
         }
     }
 
@@ -50,8 +51,8 @@
         directives: { cleave },
         data() {
             return {
-                custom: '',
-                rawCustom: '',
+                value: '',
+                rawValue: '',
                 masks: {
                     creditCard: { creditCard: true },
                     numeral: {
@@ -65,15 +66,6 @@
                         numericOnly: true
                     }
                 }
-            }
-        },
-        watch: {
-            custom() {
-                this.rawCustom = this.$refs
-                    .customInput
-                    .$el
-                    ._vCleave
-                    .getRawValue()
             }
         }
     }
