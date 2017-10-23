@@ -51,6 +51,22 @@
         </div>
 
         <hr>
+        <h2 class="title is-spaced">Masks</h2>
+        <h3 class="subtitle">Here we used Cleave.js to create a custom directive</h3>
+        <div class="columns">
+            <div class="column">
+                <b-message type="is-info">
+                    <strong>Cleave.js is not included in Buefy</strong>, you have to install it:
+                    <code>npm install cleave.js</code>
+                </b-message>
+                <ex-mask></ex-mask>
+            </div>
+            <div class="column">
+                <code-view :code="ExMaskCode"></code-view>
+            </div>
+        </div>
+
+        <hr>
         <h2 class="title">Password</h2>
         <div class="columns">
             <div class="column">
@@ -93,6 +109,9 @@
     import ExValidation from './examples/ExValidation'
     import ExValidationCode from '!!raw-loader!./examples/ExValidation'
 
+    import ExMask from './examples/ExMask'
+    import ExMaskCode from '!!raw-loader!./examples/ExMask'
+
     import ExPassword from './examples/ExPassword'
     import ExPasswordCode from '!!raw-loader!./examples/ExPassword'
 
@@ -105,6 +124,7 @@
             ExTypesStates,
             ExIcons,
             ExValidation,
+            ExMask,
             ExPassword,
             ExSizes
         },
@@ -115,6 +135,7 @@
                 ExTypesStatesCode,
                 ExIconsCode,
                 ExValidationCode,
+                ExMaskCode,
                 ExPasswordCode,
                 ExSizesCode
             }
