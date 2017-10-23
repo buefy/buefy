@@ -14,7 +14,7 @@
             <b-input placeholder="Custom"
                 v-model="value"
                 v-cleave="masks.custom"
-                @input.native="(event) => rawValue = event.target._vCleave.getRawValue()" />
+                @input.native="getRawValue" />
             <p><b>Formatted value (v-model)</b>: {{ value }}</p>
             <p><b>Raw value</b>: {{ rawValue }}</p>
         </b-field>
@@ -66,6 +66,11 @@
                         numericOnly: true
                     }
                 }
+            }
+        },
+        methods: {
+            getRawValue(event) {
+                this.rawValue = event.target._vCleave.getRawValue()
             }
         }
     }
