@@ -1,9 +1,9 @@
 <template>
     <div class="control"
-        :class="[iconPosition, {
+        :class="[iconPosition, size, {
             'is-expanded': expanded,
             'is-loading': loading,
-            'is-clearfix': !hasMessage
+            'is-clearfix': !hasMessage,
         }]">
         <input v-if="type !== 'textarea'"
             ref="input"
