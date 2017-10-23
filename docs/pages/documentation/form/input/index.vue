@@ -52,12 +52,19 @@
 
         <hr>
         <h2 class="title is-spaced">Masks</h2>
-        <h3 class="subtitle">Here we used Cleave.js to create a custom directive</h3>
+        <h3 class="subtitle">
+            Here we used <a href="https://nosir.github.io/cleave.js/" target="_blank">Cleave.js</a>
+            to create a custom directive
+        </h3>
         <div class="columns">
             <div class="column">
                 <b-message type="is-info">
                     <strong>Cleave.js is not included in Buefy</strong>, you have to install it:
                     <code>npm install cleave.js</code>
+                    <small class="content">
+                        Refer to its <a href="https://github.com/nosir/cleave.js/blob/master/doc/options.md" target="_blank">documentation</a>
+                        for more options details and examples.
+                    </small>
                 </b-message>
                 <ex-mask></ex-mask>
             </div>
