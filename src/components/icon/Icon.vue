@@ -1,6 +1,6 @@
 <template>
     <span class="icon" :class="[type, size]">
-        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
+        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : `mdi-${newIcon}` ]"></i>
     </span>
 </template>
 
