@@ -46,6 +46,10 @@ import DataManipulation from '../pages/documentation/data/DataNav'
 const Table = () => import('../pages/documentation/data/table')
 const Pagination = () => import('../pages/documentation/data/pagination')
 
+const Extensions = () => import('../pages/extensions/Extensions')
+
+const CleaveJs = () => import('../pages/extensions/cleavejs')
+
 export default new Router({
     mode: 'hash',
     linkActiveClass: 'is-active',
@@ -265,6 +269,20 @@ export default new Router({
                 {
                     path: '',
                     redirect: 'start'
+                }
+            ]
+        },
+        {
+            path: '/extensions',
+            component: Extensions,
+            children: [
+                {
+                    path: 'cleavejs',
+                    component: CleaveJs
+                },
+                {
+                    path: '',
+                    redirect: 'cleavejs'
                 }
             ]
         }

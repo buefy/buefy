@@ -55,6 +55,8 @@
                         </div>
                     </div>
 
+                    <router-link to="/extensions" class="navbar-item">Extensions</router-link>
+
                     <div class="navbar-item">
                         <a class="button is-outlined"
                             :class="light ? 'is-light' : 'is-twitter'"

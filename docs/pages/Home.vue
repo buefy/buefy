@@ -2,7 +2,7 @@
     <section class="home">
         <div class="hero is-fullheight is-primary">
             <div class="hero-head">
-                <app-header light></app-header>
+                <the-header light />
             </div>
             <div class="hero-body">
                 <div class="container has-text-centered">
@@ -81,21 +81,21 @@
             </div>
         </section>
 
-        <app-footer></app-footer>
+        <the-footer />
     </section>
 </template>
 
 <script>
     import ScrollReveal from 'scrollreveal'
-    import AppHeader from '../template/Header'
-    import AppFooter from '../template/Footer'
+    import TheHeader from '../components/TheHeader'
+    import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
 
     export default {
         name: 'app',
         components: {
-            AppHeader,
-            AppFooter
+            TheHeader,
+            TheFooter
         },
         data() {
             return {
