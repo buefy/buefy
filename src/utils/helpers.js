@@ -67,5 +67,8 @@ export function removeElement(el) {
  * http://stackoverflow.com/a/6969486
  */
 export function escapeRegExpChars(value) {
-    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+    if (value) {
+        return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+    }
+    return value
 }

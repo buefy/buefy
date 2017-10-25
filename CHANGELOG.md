@@ -8,6 +8,7 @@
 * **Removed** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
 * Add ``disabled`` prop to tabItem
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
+* #380 Fix clearing autocomplete input
 
 ## 0.5.4
 
