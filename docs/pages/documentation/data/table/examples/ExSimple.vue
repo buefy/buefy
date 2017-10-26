@@ -11,6 +11,9 @@
                 <b-switch v-model="isNarrowed">Narrowed</b-switch>
             </div>
             <div class="control">
+                <b-switch v-model="isHoverable">Hoverable</b-switch>
+            </div>
+            <div class="control">
                 <b-switch v-model="isLoading">Loading state</b-switch>
             </div>
             <div class="control">
@@ -26,6 +29,7 @@
             :bordered="isBordered"
             :striped="isStriped"
             :narrowed="isNarrowed"
+            :hoverable="isHoverable"
             :loading="isLoading"
             :mobile-cards="hasMobileCards">
 
@@ -85,6 +89,7 @@
                 isBordered: false,
                 isStriped: false,
                 isNarrowed: false,
+                isHoverable: false,
                 isLoading: false,
                 hasMobileCards: true
             }

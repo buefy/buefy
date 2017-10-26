@@ -220,6 +220,10 @@ export default [
             {
                 name: '<code>initSort</code>',
                 description: 'Sort using <code>default-sort</code> prop parameters'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Focus table element if has <code>selected</code> prop'
             }
         ]
     },
