@@ -32,13 +32,11 @@
                     'is-bordered': bordered,
                     'is-striped': striped,
                     'is-narrow': narrowed,
+                    'is-hoverable': hoverable || selected,
                     'has-mobile-cards': mobileCards
                 }"
-                @keyup.prevent.enter="pressedEnter"
                 @keydown.prevent.up="pressedArrow(-1)"
-                @keydown.prevent.down="pressedArrow(1)"
-                @focus="focused"
-                @blur="hovered = null">
+                @keydown.prevent.down="pressedArrow(1)">
                 <thead>
                     <tr>
                         <th v-if="detailed" width="40px"></th>
@@ -72,8 +70,7 @@
                         <tr :key="index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
-                                'is-checked': isRowChecked(row),
-                                'is-hovered': hovered === row
+                                'is-checked': isRowChecked(row)
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
@@ -95,6 +92,7 @@
                         </tr>
 
                         <tr v-if="detailed && isVisibleDetailRow(row)"
+                            :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -163,6 +161,7 @@
             bordered: Boolean,
             striped: Boolean,
             narrowed: Boolean,
+            hoverable: Boolean,
             loading: Boolean,
             detailed: Boolean,
             checkable: Boolean,
@@ -209,7 +208,6 @@
                 isAsc: true,
                 mobileSort: {},
                 currentPage: 1,
-                hovered: this.selected || null,
                 firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
@@ -469,9 +467,6 @@
 
                 // Emit new row to update user variable
                 this.$emit('update:selected', row)
-
-                // Set hovered if is selectable
-                if (this.selected) this.hovered = row
             },
 
             /**
@@ -514,21 +509,12 @@
             },
 
             /**
-             * Table enter key listener, set selected.
-             */
-            pressedEnter() {
-                if (!this.visibleData.length || !this.hovered) return
-
-                this.selectRow(this.hovered)
-            },
-
-            /**
-             * Table arrow keys listener, change hovered.
+             * Table arrow keys listener, change selection.
              */
             pressedArrow(pos) {
                 if (!this.visibleData.length) return
 
-                let index = this.visibleData.indexOf(this.hovered) + pos
+                let index = this.visibleData.indexOf(this.selected) + pos
 
                 // Prevent from going up from first and down from last
                 index = index < 0
@@ -537,18 +523,16 @@
                         ? this.visibleData.length - 1
                         : index
 
-                this.hovered = this.visibleData[index]
+                this.selectRow(this.visibleData[index])
             },
 
             /**
-             * Table focus listener, set initial hovered.
+             * Focus table element if has selected prop.
              */
-            focused() {
-                if (!this.visibleData.length) return
+            focus() {
+                if (!this.selected) return
 
-                this.hovered = this.selected && Object.keys(this.selected).length
-                    ? this.selected
-                    : null
+                this.$el.querySelector('table').focus()
             },
 
             /**
