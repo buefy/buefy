@@ -1,4 +1,4 @@
-$tooltip-arrow-size: 6px;
+$tooltip-arrow-size: 5px;
 $tooltip-arrow-margin: 2px;
 
 $tooltip-multiline-sizes: (
@@ -99,12 +99,10 @@ $tooltip-multiline-sizes: (
     &:after {
         content: attr(data-label);
         width: auto;
-        padding: 4px 8px;
-        background: $primary;
-        border-radius: $radius-small;
-        font-size: 12px;
+        padding: 0.35em 0.75em;
+        border-radius: $radius-large;
+        font-size: 0.85em;
         font-weight: $weight-normal;
-        color: $primary-invert;
         box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
         z-index: 888;
         white-space: nowrap;
