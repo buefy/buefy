@@ -14,7 +14,7 @@
                     <button class="button is-primary" @click="sort(mobileSort)">
                         <b-icon
                             v-show="currentSortColumn === mobileSort"
-                            icon="arrow_upward"
+                            icon="arrow-up"
                             both
                             size="is-small"
                             :class="{ 'is-desc': !isAsc }">
@@ -58,7 +58,7 @@
 
                                 <b-icon
                                     v-show="currentSortColumn === column"
-                                    icon="arrow_upward"
+                                    icon="arrow-up"
                                     both
                                     size="is-small"
                                     :class="{ 'is-desc': !isAsc }">
@@ -579,4 +579,3 @@
         }
     }
 </script>
-
