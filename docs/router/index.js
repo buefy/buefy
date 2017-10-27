@@ -41,6 +41,7 @@ const Radio = () => import('../pages/documentation/form/radio')
 const Switch = () => import('../pages/documentation/form/switch')
 const Upload = () => import('../pages/documentation/form/upload')
 const Datepicker = () => import('../pages/documentation/form/datepicker')
+const TagInput = () => import('../pages/documentation/form/taginput')
 
 import DataManipulation from '../pages/documentation/data/DataNav'
 const Table = () => import('../pages/documentation/data/table')
@@ -248,6 +249,13 @@ export default new Router({
                 {
                     path: 'upload',
                     component: Upload,
+                    meta: {
+                        category: FormElements
+                    }
+                },
+                {
+                    path: 'tag-input',
+                    component: TagInput,
                     meta: {
                         category: FormElements
                     }
