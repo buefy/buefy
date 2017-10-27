@@ -80,7 +80,7 @@
 
                             <td v-if="detailed">
                                 <a role="button" @click.stop="toggleDetails(row)">
-                                    <b-icon icon="chevron_right"
+                                    <b-icon icon="chevron-right"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}">
                                     </b-icon>

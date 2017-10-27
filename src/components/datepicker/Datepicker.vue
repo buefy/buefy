@@ -34,7 +34,7 @@
                             @keydown.enter.prevent="decrementMonth"
                             @keydown.space.prevent="decrementMonth">
 
-                            <b-icon icon="chevron_left"
+                            <b-icon icon="chevron-left"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable">
@@ -49,7 +49,7 @@
                             @keydown.enter.prevent="incrementMonth"
                             @keydown.space.prevent="incrementMonth">
 
-                            <b-icon icon="chevron_right"
+                            <b-icon icon="chevron-right"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable">
@@ -57,7 +57,7 @@
                         </a>
                         <div class="pagination-list">
                             <b-field>
-                                <b-select v-model="focusedDateData.month" 
+                                <b-select v-model="focusedDateData.month"
                                     :disabled="disabled">
                                     <option v-for="(month, index) in Object.values(monthNames)"
                                         :value="index"
