@@ -1,3 +1,4 @@
+
 <template>
     <span class="icon" :class="[type, size]">
         <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
@@ -47,8 +48,8 @@
                     case 'warning': return 'exclamation-triangle'
                     case 'error': return 'exclamation-circle'
                     case 'arrow_upward': return 'arrow-up'
-                    case 'chevron_right': return 'angle-right'
-                    case 'chevron_left': return 'angle-left'
+                    case 'chevron_right': return 'chevron-right'
+                    case 'chevron_left': return 'chevron-left'
                     case 'keyboard_arrow_down': return 'angle-down'
                     case 'visibility': return 'eye'
                     case 'visibility_off': return 'eye-slash'

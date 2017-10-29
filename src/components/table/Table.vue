@@ -486,6 +486,9 @@
                 return this.visibleDetailRows.indexOf(index) >= 0
             },
 
+            dragDropRow(ev) {
+                this.$emit('row-drag-droped', ev)
+            },
             /**
              * Initial sorted column based on the default-sort prop.
              */

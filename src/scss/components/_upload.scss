@@ -37,3 +37,41 @@
         }
     }
 }
+
+.file-name {
+    border-color: #dbdbdb;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+    display: block;
+    max-width: 16em;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+.file-cta, .file-name {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid transparent;
+    box-shadow: none;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.25em;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding-left: calc(.625em - 1px);
+    padding-right: calc(.625em - 1px);
+    position: relative;
+    vertical-align: top;
+    border-color: #dbdbdb;
+    border-radius: 3px;
+    font-size: 1em;
+    padding: calc(.375em - 1px) 1em;
+    white-space: nowrap;
+}
