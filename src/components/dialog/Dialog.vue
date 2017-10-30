@@ -23,13 +23,14 @@
 
                             <div v-if="hasInput" class="field">
                                 <div class="control">
-                                    <input v-model="prompt"
+                                    <b-input v-model="prompt"
                                         class="input"
                                         ref="input"
                                         required
                                         :class="{ 'is-danger': validationMessage }"
                                         v-bind="inputAttrs"
                                         @keyup.enter="confirm">
+                                    </b-input>
                                 </div>
                                 <p class="help is-danger">{{ validationMessage }}</p>
                             </div>
@@ -157,7 +158,7 @@
              */
             confirm() {
                 if (this.$refs.input !== undefined) {
-                    if (!this.$refs.input.checkValidity()) {
+                    if (!this.$refs.input.checkHtml5Validity()) {
                         this.validationMessage = this.$refs.input.validationMessage
                         this.$nextTick(() => this.$refs.input.select())
                         return

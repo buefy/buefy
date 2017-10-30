@@ -1,6 +1,6 @@
 <template>
     <span class="icon" :class="[type, size]">
-        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
+        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : `mdi-${newIcon}` ]"></i>
     </span>
 </template>
 
@@ -46,9 +46,9 @@
                     case 'check_circle': return 'check-circle'
                     case 'warning': return 'exclamation-triangle'
                     case 'error': return 'exclamation-circle'
-                    case 'arrow_upward': return 'arrow-up'
-                    case 'chevron_right': return 'angle-right'
-                    case 'chevron_left': return 'angle-left'
+                    case 'arrow-up': return 'arrow-up'
+                    case 'chevron-right': return 'angle-right'
+                    case 'chevron-left': return 'angle-left'
                     case 'keyboard_arrow_down': return 'angle-down'
                     case 'visibility': return 'eye'
                     case 'visibility_off': return 'eye-slash'
