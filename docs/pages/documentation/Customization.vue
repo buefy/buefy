@@ -1,0 +1,121 @@
+<template>
+    <div class="container">
+        <h1 class="title is-spaced">Customizing theme with Sass</h1>
+        <h2 class="subtitle">
+            If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <b>customize</b>
+            Buefy with your own theme, follow these steps
+        </h2>
+
+        <hr>
+
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">1</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Install Buefy via npm</h3>
+                <CodeView code="npm install buefy" lang="bash" />
+                <p class="content">Or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
+            </div>
+        </div>
+
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">2</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Set your variables with Sass</h3>
+                <b-message type="is-info">
+                    <div class="content">
+                        <p><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
+                        <p>There's also two other variables created by Buefy:</p>
+                        <ol>
+                            <li><code>$speed-slow: 150ms !default</code></li>
+                            <li><code>$speed-slower: 250ms !default</code></li>
+                        </ol>
+                    </div>
+                </b-message>
+                <b-message type="is-warning">
+                    You might also have to install <code>node-sass</code> and <code>sass-loader</code> depending on your environment.
+                </b-message>
+                <p class="block">
+                    It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag.
+                </p>
+                <div class="example is-paddingless">
+                    <CodeView :code="sass | pre" lang="sass" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">3</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Import and use Buefy</h3>
+                <CodeView :code="importing | pre" lang="javascript" />
+            </div>
+        </div>
+
+        <hr>
+
+        <b-message type="is-info">
+            If you're still not sure how to proceed, take a look at this <a href="https://github.com/rafaelpimpa/buefy-simple" target="_blank">
+            repository with a basic setup to customize Buefy</a>.
+        </b-message>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                sass: `
+                // Import Bulma's core
+                @import "~bulma/sass/utilities/_all";
+
+                // Set your colors
+                $primary: #8c67ef;
+                $primary-invert: findColorInvert($primary);
+                $twitter: #4099FF;
+                $twitter-invert: findColorInvert($twitter);
+
+                // Setup $colors to use as bulma classes (e.g. 'is-twitter')
+                $colors: (
+                    "white": ($white, $black),
+                    "black": ($black, $white),
+                    "light": ($light, $light-invert),
+                    "dark": ($dark, $dark-invert),
+                    "primary": ($primary, $primary-invert),
+                    "info": ($info, $info-invert),
+                    "success": ($success, $success-invert),
+                    "warning": ($warning, $warning-invert),
+                    "danger": ($danger, $danger-invert),
+                    "twitter": ($twitter, $twitter-invert)
+                );
+
+                // Links
+                $link: $primary;
+                $link-invert: $primary-invert;
+                $link-focus-border: $primary;
+
+                // Import Bulma and Buefy styles
+                @import "~bulma";
+                @import "~buefy/src/scss/buefy";
+                `,
+                importing: `
+                import Vue from 'vue'
+                import Buefy from 'buefy'
+
+                Vue.use(Buefy)
+
+                // OR
+
+                Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
+                Vue.component(Buefy.Table.name, Buefy.Table)
+                Vue.component(Buefy.Switch.name, Buefy.Switch)`
+            }
+        }
+    }
+</script>

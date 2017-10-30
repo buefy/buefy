@@ -81,7 +81,7 @@
             </div>
         </section>
 
-        <the-footer />
+        <TheFooter />
     </section>
 </template>
 
