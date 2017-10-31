@@ -44,5 +44,14 @@ $checkbox-checkmark-color: $primary-invert !default;
                 box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
             }
         }
+        &.is-small {
+            @include control-small;
+        }
+        &.is-medium{
+            @include control-medium;
+        }
+        &.is-large {
+            @include control-large;
+        }
     }
 }

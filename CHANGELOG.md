@@ -9,6 +9,7 @@
 * Add ``disabled`` prop to tabItem
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
 * #380 Fix clearing autocomplete input
+* #388 Add ``size`` prop to radio and checkbox
 
 ## 0.5.4
 

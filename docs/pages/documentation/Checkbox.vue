@@ -26,6 +26,17 @@
         </div>
 
         <hr>
+        <h2 class="title">Sizes</h2>
+        <div class="columns">
+            <div class="column">
+                <ex-sizes></ex-sizes>
+            </div>
+            <div class="column">
+                <CodeView :code="ExSizesCode" />
+            </div>
+        </div>
+
+        <hr>
 
         <h2 class="title is-spaced">API</h2>
         <ApiView :data="api" />
@@ -41,16 +52,21 @@
     import ExArray from '@/examples/checkbox/ExArray'
     import ExArrayCode from '!!raw-loader!@/examples/checkbox/ExArray'
 
+    import ExSizes from '@/examples/checkbox/ExSizes'
+    import ExSizesCode from '!!raw-loader!@/examples/checkbox/ExSizes'
+
     export default {
         components: {
             ExSimple,
-            ExArray
+            ExArray,
+            ExSizes
         },
         data() {
             return {
                 api,
                 ExSimpleCode,
-                ExArrayCode
+                ExArrayCode,
+                ExSizesCode
             }
         }
     }
