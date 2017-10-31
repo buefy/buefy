@@ -1,6 +1,6 @@
 <template>
     <label class="b-checkbox checkbox"
-        :class="{ 'is-disabled': disabled }"
+        :class="[size, { 'is-disabled': disabled }]"
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
@@ -25,6 +25,7 @@
             nativeValue: {},
             disabled: Boolean,
             name: String,
+            size: String,
             trueValue: {
                 type: [String, Number, Boolean, Function, Object, Array, Symbol],
                 default: true

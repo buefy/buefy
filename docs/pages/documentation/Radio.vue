@@ -14,6 +14,17 @@
         </div>
 
         <hr>
+        <h2 class="title">Sizes</h2>
+        <div class="columns">
+            <div class="column">
+                <ex-sizes></ex-sizes>
+            </div>
+            <div class="column">
+                <CodeView :code="ExSizesCode" />
+            </div>
+        </div>
+
+        <hr>
         <h2 class="title">Radio Button</h2>
         <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
         <div class="example">
@@ -34,18 +45,23 @@
     import ExSimple from '@/examples/radio/ExSimple'
     import ExSimpleCode from '!!raw-loader!@/examples/radio/ExSimple'
 
+    import ExSizes from '@/examples/radio/ExSizes'
+    import ExSizesCode from '!!raw-loader!@/examples/radio/ExSizes'
+
     import ExRadioButton from '@/examples/radio/ExRadioButton'
     import ExRadioButtonCode from '!!raw-loader!@/examples/radio/ExRadioButton'
 
     export default {
         components: {
             ExSimple,
+            ExSizes,
             ExRadioButton
         },
         data() {
             return {
                 api,
                 ExSimpleCode,
+                ExSizesCode,
                 ExRadioButtonCode
             }
         }

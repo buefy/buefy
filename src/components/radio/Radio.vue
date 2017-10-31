@@ -1,7 +1,7 @@
 <template>
     <label class="b-radio radio"
         ref="label"
-        :class="{ 'is-disabled': disabled }"
+        :class="[size, { 'is-disabled': disabled }]"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="$refs.label.click()">
@@ -22,7 +22,8 @@
             value: {},
             nativeValue: {},
             disabled: Boolean,
-            name: String
+            name: String,
+            size: String
         },
         data() {
             return {
