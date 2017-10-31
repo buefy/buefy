@@ -131,7 +131,7 @@
                         :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
-                        :current="currentPage"
+                        :current="newCurrentPage"
                         @change="pageChanged">
                     </b-pagination>
                 </div>
@@ -181,6 +181,10 @@
                 default: 'asc'
             },
             paginated: Boolean,
+            currentPage: {
+                type: Number,
+                default: 1
+            },
             perPage: {
                 type: [Number, String],
                 default: 20
@@ -204,10 +208,10 @@
                 newData: this.data,
                 newDataTotal: this.backendPagination ? this.total : this.data.length,
                 newCheckedRows: [...this.checkedRows],
+                newCurrentPage: this.currentPage,
                 currentSortColumn: {},
                 isAsc: true,
                 mobileSort: {},
-                currentPage: 1,
                 firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
@@ -299,7 +303,7 @@
             visibleData() {
                 if (!this.paginated) return this.newData
 
-                const currentPage = this.currentPage
+                const currentPage = this.newCurrentPage
                 const perPage = this.perPage
 
                 if (this.newData.length <= perPage) {
@@ -473,8 +477,8 @@
              * Paginator change listener.
              */
             pageChanged(page) {
-                this.currentPage = page > 0 ? page : 1
-                this.$emit('page-change', this.currentPage)
+                this.newCurrentPage = page > 0 ? page : 1
+                this.$emit('page-change', this.newCurrentPage)
             },
 
             /**
@@ -563,4 +567,3 @@
         }
     }
 </script>
-
