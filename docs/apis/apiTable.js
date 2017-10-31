@@ -87,6 +87,13 @@ export default [
                 default: '<code>0</code>'
             },
             {
+                name: '<code>current-page</code>',
+                description: `Current page of table data (if <code>paginated</code>)`,
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
                 name: '<code>loading</code>',
                 description: 'Loading state',
                 type: 'Boolean',
