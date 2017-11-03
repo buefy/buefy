@@ -32,7 +32,7 @@
                     'is-bordered': bordered,
                     'is-striped': striped,
                     'is-narrow': narrowed,
-                    'is-hoverable': hoverable || hasSelected,
+                    'is-hoverable': hoverable || focusable,
                     'has-mobile-cards': mobileCards
                 }"
                 @keydown.prevent.up="pressedArrow(-1)"
