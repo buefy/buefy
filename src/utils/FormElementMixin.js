@@ -44,6 +44,15 @@ export default {
             if (!this.parentField) return
 
             return this.parentField.newType
+        },
+
+        /**
+         * Get the message prop from parent if it's a Field.
+         */
+        statusMessage() {
+            if (!this.parentField) return
+
+            return this.parentField.newMessage
         }
     },
     methods: {

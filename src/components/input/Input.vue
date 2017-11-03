@@ -122,7 +122,7 @@
              * Check if have any message prop from parent if it's a Field.
              */
             hasMessage() {
-                return this.$parent.$data._isField && this.$parent.newMessage
+                return !!this.statusMessage
             },
 
             /**
