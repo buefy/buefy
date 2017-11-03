@@ -7,6 +7,7 @@
 * Vue 2.5+ is now the minimum required version
 * **Removed** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
 * Add ``disabled`` prop to tabItem
+* #288 Fix input message from parent field (thanks @yarbshk)
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
 * #380 Fix clearing autocomplete input
 * #387 Add ``currentPage`` prop to table (thanks @frantic1048)
