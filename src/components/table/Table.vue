@@ -27,12 +27,12 @@
         <div class="table-wrapper">
             <table
                 class="table"
-                :tabindex="!selected ? false : 0"
+                :tabindex="!focusable ? false : 0"
                 :class="{
                     'is-bordered': bordered,
                     'is-striped': striped,
                     'is-narrow': narrowed,
-                    'is-hoverable': hoverable || selected,
+                    'is-hoverable': hoverable || hasSelected,
                     'has-mobile-cards': mobileCards
                 }"
                 @keydown.prevent.up="pressedArrow(-1)"
@@ -166,6 +166,7 @@
             detailed: Boolean,
             checkable: Boolean,
             selected: Object,
+            focusable: Boolean,
             customIsChecked: Function,
             checkedRows: {
                 type: Array,
@@ -534,7 +535,7 @@
              * Focus table element if has selected prop.
              */
             focus() {
-                if (!this.selected) return
+                if (!this.focusable) return
 
                 this.$el.querySelector('table').focus()
             },

@@ -1,7 +1,7 @@
 <template>
     <section>
-        <button class="button field is-danger" @click="selected = {}"
-            :disabled="!Object.keys(selected).length">
+        <button class="button field is-danger" @click="selected = null"
+            :disabled="!selected">
             <b-icon icon="clear"></b-icon>
             <span>Clear selected</span>
         </button>
@@ -10,7 +10,8 @@
             <b-tab-item label="Table">
                 <b-table
                     :data="tableDataSimple"
-                    :selected.sync="selected">
+                    :selected.sync="selected"
+                    focusable>
 
                     <template slot-scope="props">
                         <b-table-column label="ID" width="40" numeric>

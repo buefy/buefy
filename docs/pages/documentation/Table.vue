@@ -17,7 +17,7 @@
                 Additionally, adding the <code>.sync</code> modifier will make it two-way binding — selected object will mutate if user clicks on row.
             </p>
             <p>
-                Selection tables can be focused and used with a keyboard, using <strong>arrow keys</strong> to navigate.
+                Use <code>focusable</code> prop make table to be focused and navigable with a keyboard using <strong>arrow keys</strong>.
             </p>
         </div>
         <div class="example">
