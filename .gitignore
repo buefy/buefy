@@ -11,3 +11,4 @@ test/e2e/reports
 selenium-debug.log
 debug.log*
 .idea/
+yarn.lock
