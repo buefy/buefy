@@ -192,7 +192,7 @@
                 type: Function,
                 default: () => ''
             },
-            detailedRows: {
+            openedDetailed: {
                 type: Array,
                 default: () => []
             },
@@ -209,7 +209,7 @@
         data() {
             return {
                 columns: [],
-                visibleDetailRows: this.detailedRows,
+                visibleDetailRows: this.openedDetailed,
                 newData: this.data,
                 newDataTotal: this.backendPagination ? this.total : this.data.length,
                 newCheckedRows: [...this.checkedRows],
@@ -306,7 +306,7 @@
             * When the user wants to control the detailed rows via props.
             * Or wants to open the details of certain row with the router for example.
             */
-            detailedRows(expandedRows) {
+            openedDetailed(expandedRows) {
                 this.visibleDetailRows = expandedRows
             }
         },
@@ -513,7 +513,7 @@
                 }
 
                 // Syncs the detailed rows with the parent component
-                this.$emit('update:detailedRows', this.visibleDetailRows)
+                this.$emit('update:openedDetailed', this.visibleDetailRows)
             },
 
             openDetailRow(obj) {
@@ -530,7 +530,6 @@
             isVisibleDetailRow(obj) {
                 const index = this.handleDetailKey(obj)
                 const result = this.visibleDetailRows.indexOf(index) >= 0
-                // console.log(obj, index, result, this.visibleDetailRows)
                 return result
             },
 
@@ -546,9 +545,9 @@
             },
 
             checkPredefinedDetailedRows() {
-                const defaultExpandedRowsDefined = this.detailedRows.length > 0
+                const defaultExpandedRowsDefined = this.openedDetailed.length > 0
                 if (defaultExpandedRowsDefined && !this.detailKey.length) {
-                    console.warn('If you set a predefined detailedRows, you must provide a unique key with the prop "detailKey"')
+                    throw new Error('If you set a predefined opened-detailed, you must provide an unique key using the prop "detail-key"')
                 }
             },
 

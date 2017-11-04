@@ -129,18 +129,18 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>detailedRows</code>',
-                description: 'Allow predefined opened details. Ideal to open details via vue-router. (An unique key is required; check detailKey prop)',
+                name: '<code>opened-detailed</code>',
+                description: 'Allow predefined opened details. Ideal to open details via vue-router. <strong>(An unique key is required; check detail-key prop)</strong>',
                 type: 'Array',
                 values: '—',
                 default: '<code>-</code>'
             },
             {
-                name: '<code>detailKey</code>',
-                description: 'Use an unique key of your data Object, for example the id',
+                name: '<code>detail-key</code>',
+                description: 'Use an unique key of your data Object, for example the id. <strong>(Required when use the opened-detailed prop)</strong>',
                 type: 'Array',
                 values: '—',
-                default: '<code>-</code>'
+                default: 'Required<code>-</code>'
             },
             {
                 name: '<code>custom-is-checked</code>',
