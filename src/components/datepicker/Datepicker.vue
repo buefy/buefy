@@ -401,7 +401,7 @@
             },
 
             /*
-            * Format date into string 'YYYY-MM-DD'
+            * Parse date from string
             */
             onChangeNativePicker(event) {
                 const date = event.target.value
