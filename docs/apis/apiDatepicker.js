@@ -113,6 +113,13 @@ export default [
                 values: '—',
                 default: '—'
             }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Footer',
+                props: '—'
+            }
         ]
     }
 ]
