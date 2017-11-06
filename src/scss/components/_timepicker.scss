@@ -1,0 +1,27 @@
+.timepicker {
+    font-size: 0.875rem;
+    .dropdown,
+    .dropdown-trigger {
+        width: 100%;
+    }
+    .dropdown-item {
+        font-size: inherit;
+    }
+    .timepicker-footer {
+        padding-top: 0.875rem;
+    }
+    select {
+        option:disabled {
+            color: rgba($grey, 0.7);
+        }
+    }
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium {
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
+    }
+}

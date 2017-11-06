@@ -12,7 +12,9 @@ const config = {
     defaultDateParser: null,
     defaultDayNames: null,
     defaultMonthNames: null,
-    defaultFirstDayOfWeek: null
+    defaultFirstDayOfWeek: null,
+    defaultTimeFormatter: null,
+    defaultTimeParser: null
 }
 
 export default config
