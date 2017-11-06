@@ -259,6 +259,12 @@
              */
             calcDropdownInViewportVertical() {
                 this.$nextTick(() => {
+                    /**
+                     * this.$refs.dropdown may be undefined
+                     * when Autocomplete is conditional rendered
+                     */
+                    if (this.$refs.dropdown === undefined) return
+
                     const rect = this.$refs.dropdown.getBoundingClientRect()
 
                     this.isListInViewportVertically = (
