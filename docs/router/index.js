@@ -45,6 +45,7 @@ const Radio = () => import('@/pages/documentation/Radio')
 const Switch = () => import('@/pages/documentation/Switch')
 const Upload = () => import('@/pages/documentation/Upload')
 const Datepicker = () => import('@/pages/documentation/Datepicker')
+const Timepicker = () => import('@/pages/documentation/Timepicker')
 
 import DataManipulation from '@/components/DocumentationNavData'
 const Table = () => import('@/pages/documentation/Table')
@@ -244,6 +245,13 @@ export default new Router({
                 {
                     path: 'datepicker',
                     component: Datepicker,
+                    meta: {
+                        category: FormElements
+                    }
+                },
+                {
+                    path: 'timepicker',
+                    component: Timepicker,
                     meta: {
                         category: FormElements
                     }

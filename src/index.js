@@ -16,6 +16,7 @@ import Pagination from './components/pagination'
 import Panel from './components/panel'
 import Select from './components/select'
 import Switch from './components/switch'
+import Timepicker from './components/timepicker'
 import Tooltip from './components/tooltip'
 import Upload from './components/upload'
 
@@ -53,6 +54,7 @@ const components = {
     Tabs,
     Tag,
     Taglist,
+    Timepicker,
     Tooltip,
     Upload
 }

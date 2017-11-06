@@ -149,6 +149,20 @@
                         type: 'Number',
                         values: '—',
                         default: '<code>0</code>'
+                    },
+                    {
+                        name: '<code>defaultTimeFormatter</code>',
+                        description: `Default timepicker <code>time-formatter</code> attribute`,
+                        type: 'Function',
+                        values: '—',
+                        default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
+                    },
+                    {
+                        name: '<code>defaultTimeParser</code>',
+                        description: `Default timepicker <code>time-parser</code> attribute`,
+                        type: 'Function',
+                        values: '—',
+                        default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
                     }
                 ]
             }
