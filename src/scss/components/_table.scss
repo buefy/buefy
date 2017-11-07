@@ -66,7 +66,6 @@
         }
         tr {
             &.is-selected {
-                background: $table-row-active-background-color !important; // Temporary fix for Bulma 0.6.0
                 .checkbox input {
                     &:checked + .check {
                         background: $table-row-active-color url(checkmark($table-row-active-background-color)) no-repeat center center;
