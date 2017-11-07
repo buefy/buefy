@@ -4,7 +4,7 @@
         <b-field>
             <b-input placeholder="Search..."
                 type="search"
-                icon="search">
+                icon="magnify">
             </b-input>
         </b-field>
 
@@ -17,7 +17,7 @@
 
         <b-field>
             <b-input placeholder="Credit card"
-                icon="payment">
+                icon="credit-card">
             </b-input>
         </b-field>
 

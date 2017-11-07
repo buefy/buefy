@@ -6,13 +6,13 @@
 
             <button class="button is-primary"
                 @click="date = new Date()">
-                <b-icon icon="today"></b-icon>
+                <b-icon icon="calendar-today"></b-icon>
                 <span>Today</span>
             </button>
 
             <button class="button is-danger"
                 @click="date = null">
-                <b-icon icon="clear"></b-icon>
+                <b-icon icon="close"></b-icon>
                 <span>Clear</span>
             </button>
         </b-datepicker>

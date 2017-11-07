@@ -4,14 +4,14 @@
             <b-radio-button v-model="radioButton"
                 native-value="Nop"
                 type="is-danger">
-                <b-icon icon="clear"></b-icon>
+                <b-icon icon="close"></b-icon>
                 <span>Nop</span>
             </b-radio-button>
 
             <b-radio-button v-model="radioButton"
                 native-value="Yep"
                 type="is-success">
-                <b-icon icon="done"></b-icon>
+                <b-icon icon="check"></b-icon>
                 <span>Yep</span>
             </b-radio-button>
 

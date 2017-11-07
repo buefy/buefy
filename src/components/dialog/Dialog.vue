@@ -11,11 +11,11 @@
                     <div class="media">
                         <div class="media-left" v-if="hasIcon">
                             <b-icon
-                                :icon="icon ? icon : iconByTpe"
+                                :icon="icon ? icon : iconByType"
                                 :pack="iconPack"
-                                :class="type"
+                                :type="type"
                                 :both="!icon"
-                                size="is-large custom-icon">
+                                size="is-large">
                             </b-icon>
                         </div>
                         <div class="media-content">
@@ -124,16 +124,16 @@
             /**
              * Icon name (MDI) based on the type.
              */
-            iconByTpe() {
+            iconByType() {
                 switch (this.type) {
                     case 'is-info':
-                        return 'info'
+                        return 'information'
                     case 'is-success':
-                        return 'check_circle'
+                        return 'check-circle'
                     case 'is-warning':
-                        return 'warning'
+                        return 'alert'
                     case 'is-danger':
-                        return 'error'
+                        return 'alert-circle'
                     default:
                         return null
                 }

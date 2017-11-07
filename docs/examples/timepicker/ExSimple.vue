@@ -6,7 +6,7 @@
         <b-field label="Select time">
             <b-timepicker
                 placeholder="Click to select..."
-                icon="access_time"
+                icon="clock"
                 :hour-format="format">
             </b-timepicker>
         </b-field>

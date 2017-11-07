@@ -13,7 +13,7 @@
                 <b-dropdown position="is-bottom-left">
                     <a class="navbar-item" slot="trigger">
                         <span>Login</span>
-                        <b-icon icon="arrow_drop_down"></b-icon>
+                        <b-icon icon="menu-down"></b-icon>
                     </a>
 
                     <b-dropdown-item custom paddingless>

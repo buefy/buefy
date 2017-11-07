@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="container">
             <div class="content">
-                <p>Made with <b-icon icon="favorite" type="is-danger"></b-icon> by <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>.</p>
+                <p>Made with <b-icon icon="heart" type="is-danger"></b-icon> by <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>.</p>
                 <p>
                     <small>
                         The source code is licensed under <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.

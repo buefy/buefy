@@ -3,27 +3,27 @@
         <b-field>
             <b-input placeholder="Small"
                 size="is-small"
-                icon="person">
+                icon="account">
             </b-input>
         </b-field>
 
         <b-field>
             <b-input placeholder="Default"
-                icon="person">
+                icon="account">
             </b-input>
         </b-field>
 
         <b-field>
             <b-input placeholder="Medium"
                 size="is-medium"
-                icon="person">
+                icon="account">
             </b-input>
         </b-field>
 
         <b-field>
             <b-input placeholder="Large"
                 size="is-large"
-                icon="person">
+                icon="account">
             </b-input>
         </b-field>
     </section>

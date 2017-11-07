@@ -1,14 +1,14 @@
 <template>
     <section>
-        
+
         <b-collapse class="card" :open.sync="isOpen">
             <div slot="trigger" class="card-header">
                 <p class="card-header-title">
                     Component
                 </p>
                 <a class="card-header-icon">
-                    <b-icon :icon="isOpen ? 
-                        'arrow_drop_down' : 'arrow_drop_up'">
+                    <b-icon :icon="isOpen ?
+                        'menu-down' : 'menu-up'">
                     </b-icon>
                 </a>
             </div>
@@ -24,7 +24,7 @@
                 <a class="card-footer-item">Delete</a>
             </footer>
         </b-collapse>
-      
+
     </section>
 </template>
 

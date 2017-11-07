@@ -14,7 +14,7 @@
                     <button class="button is-primary" @click="sort(mobileSort)">
                         <b-icon
                             v-show="currentSortColumn === mobileSort"
-                            icon="arrow_upward"
+                            icon="arrow-up"
                             both
                             size="is-small"
                             :class="{ 'is-desc': !isAsc }">
@@ -56,7 +56,7 @@
 
                                 <b-icon
                                     v-show="currentSortColumn === column"
-                                    icon="arrow_upward"
+                                    icon="arrow-up"
                                     both
                                     size="is-small"
                                     :class="{ 'is-desc': !isAsc }">
@@ -77,7 +77,7 @@
 
                             <td v-if="detailed">
                                 <a role="button" @click.stop="toggleDetails(row)">
-                                    <b-icon icon="chevron_right"
+                                    <b-icon icon="chevron-right"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}">
                                     </b-icon>

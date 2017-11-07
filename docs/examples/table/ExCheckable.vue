@@ -2,7 +2,7 @@
     <section>
         <button class="button field is-danger" @click="checkedRows = []"
             :disabled="!checkedRows.length">
-            <b-icon icon="clear"></b-icon>
+            <b-icon icon="close"></b-icon>
             <span>Clear checked</span>
         </button>
 

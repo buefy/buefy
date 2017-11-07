@@ -13,7 +13,7 @@
                 <b-dropdown v-model="navigation" position="is-bottom-left">
                     <a class="navbar-item" slot="trigger">
                         <span>Menu</span>
-                        <b-icon icon="arrow_drop_down"></b-icon>
+                        <b-icon icon="menu-down"></b-icon>
                     </a>
 
                     <b-dropdown-item custom>
@@ -31,11 +31,11 @@
                         Home
                     </b-dropdown-item>
                     <b-dropdown-item value="products">
-                        <b-icon icon="shopping_cart"></b-icon>
+                        <b-icon icon="cart"></b-icon>
                         Products
                     </b-dropdown-item>
                     <b-dropdown-item value="blog" disabled>
-                        <b-icon icon="art_track"></b-icon>
+                        <b-icon icon="book-open"></b-icon>
                         Blog
                     </b-dropdown-item>
                     <hr class="dropdown-divider">
@@ -44,7 +44,7 @@
                         Settings
                     </b-dropdown-item>
                     <b-dropdown-item value="logout">
-                        <b-icon icon="exit_to_app"></b-icon>
+                        <b-icon icon="logout"></b-icon>
                         Logout
                     </b-dropdown-item>
                 </b-dropdown>
