@@ -22,6 +22,8 @@
 * Add ``focusable`` prop to table
 * Add ``focus()`` method to table
 * Add ``hoverable`` prop to table
+* Add ``custom-size`` prop to icon
+* Add ``custom-class`` prop to icon
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
 * #365 Add ``src/scss/utils/_all.scss`` for easier modular importing
 * #387 Add ``currentPage`` prop to table (thanks @frantic1048)
