@@ -9,6 +9,20 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>hour-format</code>',
+                description: 'Hour format for input and display',
+                type: 'String',
+                values: '<code>12</code> or <code>24</code>',
+                default: '<code>24</code>'
+            },
+            {
+                name: '<code>increment-minutes</code>',
+                description: 'Step minutes for select component',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
                 name: '<code>time-formatter</code>',
                 description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
@@ -91,6 +105,12 @@ export default [
                 name: 'default',
                 description: 'Footer',
                 props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>close</code>',
+                description: 'Close dropdown'
             }
         ]
     }
