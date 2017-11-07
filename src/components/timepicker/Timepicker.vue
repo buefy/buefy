@@ -27,7 +27,8 @@
                     <b-field>
                         <b-select v-model="hoursSelected"
                             @change.native="onHoursChange($event.target.value)"
-                            :disabled="disabled">
+                            :disabled="disabled"
+                            placeholder="00">
                             <option v-for="hour in hours"
                                 :value="hour.value"
                                 :key="hour.value"
@@ -37,7 +38,8 @@
                         </b-select>
                         <b-select v-model="minutesSelected"
                             @change.native="onMinutesChange($event.target.value)"
-                            :disabled="disabled">
+                            :disabled="disabled"
+                            placeholder="00">
                             <option v-for="minute in minutes"
                                 :value="minute.value"
                                 :key="minute.value"
@@ -348,7 +350,7 @@
                     this.meridienSelected = AM
                 }
             },
-    
+
             isHourDisabled(hour) {
                 let disabled = false
                 if (this.minTime) {
