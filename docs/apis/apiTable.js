@@ -46,7 +46,14 @@ export default [
             },
             {
                 name: '<code>focusable</code>',
-                description: 'Table can be focused and user can navigate with keyboard arrows (require <code>selected.sync</code>)',
+                description: 'Table can be focused and user can navigate with keyboard arrows (require <code>selected.sync</code>) and rows are highlighted when hovering',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>hoverable</code>',
+                description: 'Rows are highlighted when hovering',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -237,7 +244,7 @@ export default [
             },
             {
                 name: '<code>focus</code>',
-                description: 'Focus table element if has <code>selected</code> prop'
+                description: 'Focus table element if is <code>focusable</code>'
             }
         ]
     },
