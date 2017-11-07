@@ -280,6 +280,13 @@
             }
         },
         watch: {
+
+            hourFormat(value) {
+                if (this.hoursSelected !== null) {
+                    this.meridienSelected = this.hoursSelected >= 12 ? PM : AM
+                }
+            },
+
             /**
             * Emit input event with selected date as payload.
             */
