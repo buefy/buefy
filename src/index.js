@@ -1,4 +1,4 @@
-import { Checkbox } from './components/checkbox'
+import { Checkbox, CheckboxButton } from './components/checkbox'
 import { Dropdown, DropdownItem } from './components/dropdown'
 import { Radio, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
@@ -31,6 +31,7 @@ import config, { setOptions } from './utils/config'
 const components = {
     Autocomplete,
     Checkbox,
+    CheckboxButton,
     Collapse,
     Datepicker,
     Dropdown,
