@@ -1,20 +1,6 @@
 .icon {
     @include unselectable;
     cursor: inherit;
-    vertical-align: middle;
-    .mdi {
-        @extend .fa;
-        font-family: "Material Icons";
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        display: inline-block;
-        // Suport for IE/Edge
-        font-feature-settings: 'liga';
-    }
-    .fa {
-        font-size: 21px;
-    }
     svg {
         background-color: transparent;
         fill: currentColor;
@@ -23,44 +9,5 @@
         pointer-events: none;
         width: 1.5rem;
         height: 1.5rem;
-    }
-    // Sizes
-    &.is-small {
-        height: 1rem;
-        width: 1rem;
-        .mdi {
-            font-size: 16px;
-        }
-        .fa {
-            font-size: 14px;
-        }
-    }
-    &.is-medium {
-        height: 2rem;
-        width: 2rem;
-        .mdi {
-            font-size: 32px;
-        }
-        .fa {
-            font-size: 28px;
-        }
-    }
-    &.is-large {
-        height: 3rem;
-        width: 3rem;
-        .mdi {
-            font-size: 48px;
-        }
-        .fa {
-            font-size: 42px;
-        }
-    }
-    // Colors overrides
-    @each $name, $pair in $colors {
-        $color: nth($pair, 1);
-        $color-invert: nth($pair, 2);
-        &.is-#{$name} {
-            color: $color !important;
-        }
     }
 }

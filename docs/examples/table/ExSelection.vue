@@ -2,7 +2,7 @@
     <section>
         <button class="button field is-danger" @click="selected = null"
             :disabled="!selected">
-            <b-icon icon="clear"></b-icon>
+            <b-icon icon="close"></b-icon>
             <span>Clear selected</span>
         </button>
 

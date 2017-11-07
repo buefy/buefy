@@ -3,7 +3,7 @@
         <b-field>
             <b-input placeholder="Search..."
                 type="search"
-                icon="search">
+                icon="magnify">
             </b-input>
             <p class="control">
                 <button class="button is-primary">Search</button>
@@ -62,7 +62,7 @@
                     <b-icon icon="format_align_right"></b-icon>
                 </button>
             </p>
-            <b-input placeholder="Search..." type="search" icon="search"></b-input>
+            <b-input placeholder="Search..." type="search" icon="magnify"></b-input>
         </b-field>
 
         <b-field>
@@ -74,7 +74,7 @@
             <p class="control">
                 <b-dropdown>
                     <button class="button is-primary" slot="trigger">
-                        <b-icon icon="arrow_drop_down"></b-icon>
+                        <b-icon icon="menu-down"></b-icon>
                     </button>
 
                     <b-dropdown-item>Action</b-dropdown-item>
@@ -89,7 +89,7 @@
                 <b-dropdown>
                     <button class="button" slot="trigger">
                         <span>Filters</span>
-                        <b-icon icon="arrow_drop_down"></b-icon>
+                        <b-icon icon="menu-down"></b-icon>
                     </button>
 
                     <b-dropdown-item value="open_issues">Open Issues and Pull Requests</b-dropdown-item>
@@ -98,7 +98,7 @@
                     <b-dropdown-item value="everything">Everything</b-dropdown-item>
                 </b-dropdown>
             </p>
-            <b-input icon="search" type="search" placeholder="Search..."></b-input>
+            <b-input icon="magnify" type="search" placeholder="Search..."></b-input>
         </b-field>
     </section>
 </template>

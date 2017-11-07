@@ -4,7 +4,7 @@
         <h2 class="subtitle">Icons take an important role of any application</h2>
         <hr>
 
-        <p class="content">Buefy is compatible with both <a href="https://material.io/icons/" target="_blank">Material Design Icons</a>
+        <p class="content">Buefy is compatible with both <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>
         and <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>. They adapt to most elements background automatically
         — but you can also override their colors.</p>
 

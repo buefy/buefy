@@ -2,19 +2,19 @@
     <b-dropdown v-model="isPublic">
         <button class="button is-primary" type="button" slot="trigger">
             <template v-if="isPublic">
-                <b-icon icon="public"></b-icon>
+                <b-icon icon="earth"></b-icon>
                 <span>Public</span>
             </template>
             <template v-else>
-                <b-icon icon="people"></b-icon>
+                <b-icon icon="account-multiple"></b-icon>
                 <span>Friends</span>
             </template>
-            <b-icon icon="arrow_drop_down"></b-icon>
+            <b-icon icon="menu-down"></b-icon>
         </button>
 
         <b-dropdown-item :value="true">
             <div class="media">
-                <b-icon class="media-left" icon="public"></b-icon>
+                <b-icon class="media-left" icon="earth"></b-icon>
                 <div class="media-content">
                     <h3>Public</h3>
                     <small>Everyone can see</small>
@@ -24,7 +24,7 @@
 
         <b-dropdown-item :value="false">
             <div class="media">
-                <b-icon class="media-left" icon="people"></b-icon>
+                <b-icon class="media-left" icon="account-multiple"></b-icon>
                 <div class="media-content">
                     <h3>Friends</h3>
                     <small>Only friends can see</small>

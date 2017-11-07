@@ -12,7 +12,7 @@
         </b-field>
 
         <b-field label="Grouped">
-            <b-select placeholder="Select a character" icon="person">
+            <b-select placeholder="Select a character" icon="account">
                 <optgroup label="Black Sails">
                     <option value="flint">Flint</option>
                     <option value="silver">Silver</option>

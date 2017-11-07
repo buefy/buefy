@@ -48,7 +48,7 @@
                     {
                         name: '<code>defaultIconPack</code>',
                         description: `Icon pack used internally and on the Icon component attribute —
-                            <a href="https://material.io/icons/" target="_blank">Material Design Icons</a> or
+                            <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a> or
                             <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>`,
                         type: 'String',
                         values: '<code>mdi</code>, <code>fa</code>',

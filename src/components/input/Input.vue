@@ -39,9 +39,10 @@
 
         <b-icon v-if="!loading && (passwordReveal || statusType)"
             class="is-right"
-            :class="{ 'is-primary is-clickable': passwordReveal, statusType: !passwordReveal }"
+            :class="{ 'is-clickable': passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
             :size="size"
+            :type="!passwordReveal ? statusType : 'is-primary'"
             both
             @click.native="togglePasswordVisibility">
         </b-icon>
@@ -111,10 +112,10 @@
              */
             statusTypeIcon() {
                 switch (this.statusType) {
-                    case 'is-success': return 'done'
-                    case 'is-danger': return 'error'
-                    case 'is-info': return 'info'
-                    case 'is-warning': return 'warning'
+                    case 'is-success': return 'check'
+                    case 'is-danger': return 'alert-circle'
+                    case 'is-info': return 'information'
+                    case 'is-warning': return 'alert'
                 }
             },
 
@@ -129,7 +130,7 @@
              * Current password-reveal icon name.
              */
             passwordVisibleIcon() {
-                return !this.isPasswordVisible ? 'visibility' : 'visibility_off'
+                return !this.isPasswordVisible ? 'eye' : 'eye-off'
             },
             /**
              * Get value length

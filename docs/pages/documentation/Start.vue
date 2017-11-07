@@ -7,7 +7,7 @@
 
         <h3 class="title">Install</h3>
         <b-message type="is-warning">
-            You need <a href="https://vuejs.org" target="_blank">Vue.js</a> <b>version 2.4+</b>.
+            You need <a href="https://vuejs.org" target="_blank">Vue.js</a> <b>version 2.5+</b>.
         </b-message>
         <div class="media">
             <div class="media-left">
@@ -80,7 +80,7 @@
 
         <h3 class="title">Include Material Design Icons</h3>
         <b-message type="is-info">
-            By default Buefy uses <a href="https://material.io/icons/" target="_blank">Material Design Icons</a>,
+            By default Buefy uses <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>,
             if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, go to
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
         </b-message>
@@ -129,7 +129,7 @@
                 importingCDNJs: `
                 // Global variable
                 Vue.use(Buefy.default)`,
-                materialIcons: '<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">'
+                materialIcons: '<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">'
             }
         }
     }

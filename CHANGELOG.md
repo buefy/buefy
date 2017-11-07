@@ -7,6 +7,11 @@
 * Vue 2.5+ is now the minimum required version
 * Bulma breaking changes, [see changelog](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#breaking-changes)
 * **Removed** the deprecated prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
+* Buefy now uses [MDI Icons from community](https://materialdesignicons.com/) instead, you'll have to change icon names and if you use a CDN you should change:
+
+```html
+<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+```
 
 ### New features
 

@@ -5,13 +5,13 @@
 
             <button class="button is-primary"
                 @click="time = new Date()">
-                <b-icon icon="access_time"></b-icon>
+                <b-icon icon="clock"></b-icon>
                 <span>Now</span>
             </button>
 
             <button class="button is-danger"
                 @click="time = null">
-                <b-icon icon="clear"></b-icon>
+                <b-icon icon="close"></b-icon>
                 <span>Clear</span>
             </button>
         </b-timepicker>

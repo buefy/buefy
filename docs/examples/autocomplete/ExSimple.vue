@@ -6,7 +6,7 @@
                 v-model="name"
                 :data="filteredDataArray"
                 placeholder="e.g. jQuery"
-                icon="search"
+                icon="magnify"
                 @select="option => selected = option">
                 <template slot="empty">No results found</template>
             </b-autocomplete>

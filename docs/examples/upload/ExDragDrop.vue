@@ -8,7 +8,7 @@
                     <div class="content has-text-centered">
                         <p>
                             <b-icon
-                                icon="file_upload"
+                                icon="upload"
                                 size="is-large">
                             </b-icon>
                         </p>

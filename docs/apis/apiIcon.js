@@ -31,6 +31,21 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
+            },
+            {
+                name: '<code>custom-size</code>',
+                description: 'Overrides icon font size, optional',
+                type: 'String',
+                values: `Depends on library: <code>null</code> (smallest), <code>fa-lg</code>, <code>fa-2x</code>, <code>fa-3x</code>,
+                    <code>mdi-18px</code>, <code>mdi-24px</code>, <code>mdi-36px</code>, <code>mdi-48px</code>`,
+                default: 'Depends on <code>size</code> prop'
+            },
+            {
+                name: '<code>custom-class</code>',
+                description: 'Add class to icon font (<code>&lt;i&gt;</code> tag), optional',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ]
     }
