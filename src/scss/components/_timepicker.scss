@@ -1,5 +1,4 @@
 .timepicker {
-    font-size: 0.875rem;
     .dropdown,
     .dropdown-trigger {
         width: 100%;
@@ -10,11 +9,43 @@
     .timepicker-footer {
         padding-top: 0.875rem;
     }
-    select {
-        option:disabled {
-            color: rgba($grey, 0.7);
+    .control {
+        .select {
+            font-size: 2.5rem;
+            select {
+                font-weight: $weight-semibold;
+                // padding-right: $control-padding-horizontal;
+                padding-right: inherit;
+                option {
+                    &:disabled {
+                        color: rgba($grey, 0.7);
+                    }
+                }
+            }
+            &:after {
+                display: none;
+            }
+        }
+        &:nth-child(1) .select {
+            select {
+                border-right: none;
+            }
+            &:before {
+                content: ":";
+                color: $grey;
+                display: inline-block;
+                position: absolute;
+                z-index: 6;
+                font-size: 3.5rem;
+                right: -0.125rem;
+                top: -0.125rem;
+            }
+        }
+        &:nth-child(2) .select select {
+            border-left: none;
         }
     }
+    // Sizes
     &.is-small {
         @include control-small;
     }

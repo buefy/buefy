@@ -5,8 +5,8 @@
 
             <button class="button is-primary"
                 @click="time = new Date()">
-                <b-icon icon="today"></b-icon>
-                <span>Today</span>
+                <b-icon icon="access_time"></b-icon>
+                <span>Now</span>
             </button>
 
             <button class="button is-danger"
