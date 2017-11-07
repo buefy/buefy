@@ -16,6 +16,7 @@
 ### New features
 
 * **New component: Timepicker**, [see docs](https://buefy.github.io/#/documentation/timepicker)
+* **New component: Checkbox Button**, [see docs](https://buefy.github.io/#/documentation/checkbox)
 * **New docs section: Extensions**, [see here](https://buefy.github.io/#/extensions/cleavejs)
 * Support for Bulma 0.6.1
 * Add ``disabled`` prop to tabItem

@@ -37,6 +37,14 @@
         </div>
 
         <hr>
+        <h2 class="title">Checkbox Button</h2>
+        <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
+        <div class="example">
+            <ex-checkbox-button></ex-checkbox-button>
+        </div>
+        <CodeView :code="ExCheckboxButtonCode" bordered />
+
+        <hr>
 
         <h2 class="title is-spaced">API</h2>
         <ApiView :data="api" />
@@ -55,18 +63,23 @@
     import ExSizes from '@/examples/checkbox/ExSizes'
     import ExSizesCode from '!!raw-loader!@/examples/checkbox/ExSizes'
 
+    import ExCheckboxButton from '@/examples/checkbox/ExCheckboxButton'
+    import ExCheckboxButtonCode from '!!raw-loader!@/examples/checkbox/ExCheckboxButton'
+
     export default {
         components: {
             ExSimple,
             ExArray,
-            ExSizes
+            ExSizes,
+            ExCheckboxButton
         },
         data() {
             return {
                 api,
                 ExSimpleCode,
                 ExArrayCode,
-                ExSizesCode
+                ExSizesCode,
+                ExCheckboxButtonCode
             }
         }
     }
