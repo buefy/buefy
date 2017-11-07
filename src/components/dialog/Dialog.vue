@@ -115,6 +115,7 @@
 
             return {
                 isActive: false,
+                savedScrollTop: null,
                 prompt,
                 validationMessage: ''
             }
@@ -145,8 +146,19 @@
              */
             isActive() {
                 if (typeof window !== 'undefined') {
-                    const action = this.isActive ? 'add' : 'remove'
-                    document.documentElement.classList[action]('is-clipped')
+                    this.savedScrollTop = !this.savedScrollTop
+                        ? document.documentElement.scrollTop
+                        : this.savedScrollTop
+
+                    document.body.classList.toggle('is-noscroll', this.isActive)
+
+                    if (this.isActive) {
+                        document.body.style.top = `-${this.savedScrollTop}px`
+                    } else {
+                        document.documentElement.scrollTop = this.savedScrollTop
+                        document.body.style.top = null
+                        this.savedScrollTop = null
+                    }
                 }
             }
         },

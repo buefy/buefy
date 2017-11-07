@@ -1,3 +1,6 @@
-.is-clipped {
-    overflow: hidden;
+.is-noscroll {
+    position: fixed;
+    overflow-y: hidden;
+    width: 100%;
+    bottom: 0;
 }
