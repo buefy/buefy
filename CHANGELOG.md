@@ -4,15 +4,31 @@
 
 ### Breaking changes
 
-* **New component: Timepicker**, [see docs](https://buefy.github.io/#/documentation/timepicker)
 * Vue 2.5+ is now the minimum required version
-* **Removed** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
+* Bulma breaking changes, [see changelog](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#breaking-changes)
+* **Removed** the deprecated prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
+
+### New features
+
+* **New component: Timepicker**, [see docs](https://buefy.github.io/#/documentation/timepicker)
+* **New docs section: Extensions**, [see here](https://buefy.github.io/#/extensions/cleavejs)
+* Support for Bulma 0.6.1
 * Add ``disabled`` prop to tabItem
-* #288 Fix input message from parent field (thanks @yarbshk)
+* Add ``focusable`` prop to table
+* Add ``focus()`` method to table
+* Add ``hoverable`` prop to table
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
-* #380 Fix clearing autocomplete input
+* #365 Add ``src/scss/utils/_all.scss`` for easier modular importing
 * #387 Add ``currentPage`` prop to table (thanks @frantic1048)
 * #388 Add ``size`` prop to radio and checkbox
+
+### Fixes
+
+* Update tooltip font size and padding, it's a bit bigger now
+* Update table keyboard navigation, now doesn't require pressing enter and only works when ``focusable``
+* #288 Fix input message from parent field (thanks @yarbshk)
+* #380 Fix clearing autocomplete input
+* #395 Fix ref dropdown availability (thanks @frantic1048)
 
 ## 0.5.4
 
