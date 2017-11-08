@@ -62,18 +62,6 @@
             },
 
             /*
-            * Return name of month full-length
-            */
-            nameOfMonth(month) {
-                const months = {}
-                for (let i = 0; i < this.monthNames.length; i++) {
-                    months[i] = this.monthNames[i]
-                }
-
-                return months[month]
-            },
-
-            /*
             * Return array of all days in the week that the startingDate is within
             */
             weekBuilder(startingDate, month, year) {
