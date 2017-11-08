@@ -28,7 +28,7 @@
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
 * #365 Add ``src/scss/utils/_all.scss`` for easier modular importing
 * #377 Add support to MDI icons from community
-* #387 Add ``currentPage`` prop to table (thanks @frantic1048)
+* #387 Add ``current-page`` prop to table (thanks @frantic1048)
 * #388 Add ``size`` prop to radio and checkbox
 
 ### Fixes
