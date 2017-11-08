@@ -59,7 +59,7 @@
                             <b-field>
                                 <b-select v-model="focusedDateData.month"
                                     :disabled="disabled">
-                                    <option v-for="(month, index) in Object.values(monthNames)"
+                                    <option v-for="(month, index) in monthNames"
                                         :value="index"
                                         :key="month">
                                         {{month}}
@@ -370,18 +370,6 @@
                     this.focusedDateData.month = 0
                     this.focusedDateData.year += 1
                 }
-            },
-
-            /*
-            * Return name of month full-length
-            */
-            nameOfMonth(month) {
-                const months = {}
-                for (let i = 0; i < this.monthNames.length; i++) {
-                    months[i] = this.monthNames[i]
-                }
-
-                return months[month]
             },
 
             /*
