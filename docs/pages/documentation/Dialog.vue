@@ -14,17 +14,17 @@
 
         <h3 class="title">Confirm</h3>
         <div class="block">
-            <ex-alert-confirm></ex-alert-confirm>
+            <ex-confirm-dialog></ex-confirm-dialog>
         </div>
-        <CodeView :code="ExAlertConfirmCode" />
+        <CodeView :code="ExConfirmDialogCode" />
 
         <hr>
 
         <h3 class="title">Prompt</h3>
         <div class="block">
-            <ex-alert-prompt></ex-alert-prompt>
+            <ex-prompt-dialog></ex-prompt-dialog>
         </div>
-        <CodeView :code="ExAlertPromptCode" />
+        <CodeView :code="ExPromptDialogCode" />
 
         <hr>
         <h2 class="title is-spaced">API</h2>
@@ -38,24 +38,24 @@
     import ExAlertDialog from '@/examples/dialog/ExAlertDialog'
     import ExAlertDialogCode from '!!raw-loader!@/examples/dialog/ExAlertDialog'
 
-    import ExAlertConfirm from '@/examples/dialog/ExAlertConfirm'
-    import ExAlertConfirmCode from '!!raw-loader!@/examples/dialog/ExAlertConfirm'
+    import ExConfirmDialog from '@/examples/dialog/ExConfirmDialog'
+    import ExConfirmDialogCode from '!!raw-loader!@/examples/dialog/ExConfirmDialog'
 
-    import ExAlertPrompt from '@/examples/dialog/ExAlertPrompt'
-    import ExAlertPromptCode from '!!raw-loader!@/examples/dialog/ExAlertPrompt'
+    import ExPromptDialog from '@/examples/dialog/ExPromptDialog'
+    import ExPromptDialogCode from '!!raw-loader!@/examples/dialog/ExPromptDialog'
 
     export default {
         components: {
             ExAlertDialog,
-            ExAlertConfirm,
-            ExAlertPrompt
+            ExConfirmDialog,
+            ExPromptDialog
         },
         data() {
             return {
                 api,
                 ExAlertDialogCode,
-                ExAlertConfirmCode,
-                ExAlertPromptCode
+                ExConfirmDialogCode,
+                ExPromptDialogCode
             }
         }
     }
