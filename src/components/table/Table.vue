@@ -37,7 +37,7 @@
                 }"
                 @keydown.prevent.up="pressedArrow(-1)"
                 @keydown.prevent.down="pressedArrow(1)">
-                <thead>
+                <thead v-if="columns.length">
                     <tr>
                         <th v-if="detailed" width="40px"></th>
                         <th class="checkbox-cell" v-if="checkable">
