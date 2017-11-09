@@ -31,6 +31,7 @@
 * #387 Add ``current-page`` prop to table (thanks @frantic1048)
 * #388 Add ``size`` prop to radio and checkbox
 * #398 Add ``unselectable-dates`` prop to datepicker to disable an array of dates
+* #399 Add configurable closing options for dialog (like modal)
 
 ### Fixes
 

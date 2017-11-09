@@ -69,10 +69,10 @@ export default [
             },
             {
                 name: '<code>canCancel</code>',
-                description: 'If the dialog can be canceled',
-                type: 'String',
-                values: '—',
-                default: '<code>true</code> for Confirm/Prompt, <code>false</code> for Alert'
+                description: `Can close dialog by clicking cancel button, pressing escape or clicking outside`,
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>button</code>, <code>outside</code>',
+                default: `<code>true</code> for Confirm/Prompt, <code>false</code> for Alert`
             },
             {
                 name: '<code>inputAttrs</code>',
