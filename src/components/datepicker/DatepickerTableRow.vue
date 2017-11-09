@@ -38,7 +38,8 @@
             },
             minDate: Date,
             maxDate: Date,
-            disabled: Boolean
+            disabled: Boolean,
+            unselectableDates: Array
         },
         methods: {
             /*
@@ -57,6 +58,15 @@
                 }
 
                 validity.push(day.getMonth() === this.month)
+
+                if (this.unselectableDates) {
+                    for (let i = 0; i < this.unselectableDates.length; i++) {
+                        const disabledDate = this.unselectableDates[i]
+                        validity.push((day.getDate() !== disabledDate.getDate() ||
+                            day.getFullYear() !== disabledDate.getFullYear() ||
+                            day.getMonth() !== disabledDate.getMonth()))
+                    }
+                }
 
                 return validity.indexOf(false) < 0
             },

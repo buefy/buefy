@@ -86,6 +86,7 @@
                     :max-date="maxDate"
                     :focused="focusedDateData"
                     :disabled="disabled"
+                    :unselectable-dates="unselectableDates"
                     @close="$refs.dropdown.isActive = false">
                 </b-datepicker-table>
 
@@ -209,6 +210,7 @@
                 type: Boolean,
                 default: false
             },
+            unselectableDates: Array,
             dateFormatter: {
                 type: Function,
                 default: (date) => {
