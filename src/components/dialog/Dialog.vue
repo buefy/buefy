@@ -1,13 +1,15 @@
 <template>
     <transition :name="animation">
         <div class="dialog modal is-active" v-if="isActive">
-            <div class="modal-background" @click="cancel"></div>
+            <div class="modal-background" @click="cancel('outside')"></div>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
                 </header>
 
-                <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
+                <section
+                    class="modal-card-body"
+                    :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <div class="media">
                         <div class="media-left" v-if="hasIcon">
                             <b-icon
@@ -38,10 +40,18 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button v-if="canCancel" class="button is-light" ref="cancelButton" @click="cancel">
+                    <button
+                        v-if="showCancel"
+                        class="button is-light"
+                        ref="cancelButton"
+                        @click="cancel('button')">
                         {{ cancelText }}
                     </button>
-                    <button class="button" :class="type" ref="confirmButton"  @click="confirm">
+                    <button
+                        class="button"
+                        :class="type"
+                        ref="confirmButton"
+                        @click="confirm">
                         {{ confirmText }}
                     </button>
                 </footer>
@@ -51,12 +61,14 @@
 </template>
 
 <script>
+    import ModalMixin from '../../utils/ModalMixin'
     import Icon from '../icon'
     import config from '../../utils/config'
     import { removeElement } from '../../utils/helpers'
 
     export default {
-        inheritAttrs: false,
+        name: 'bDialog',
+        mixins: [ModalMixin],
         components: {
             [Icon.name]: Icon
         },
@@ -86,24 +98,12 @@
                         : 'Cancel'
                 }
             },
-            animation: {
-                type: String,
-                default: 'zoom-out'
-            },
-            canCancel: {
-                type: Boolean,
-                default: true
-            },
             hasInput: Boolean, // Used internally to know if it's prompt
             inputAttrs: {
                 type: Object,
                 default: () => {}
             },
             onConfirm: {
-                type: Function,
-                default: () => {}
-            },
-            onCancel: {
                 type: Function,
                 default: () => {}
             }
@@ -114,9 +114,8 @@
                 : ''
 
             return {
-                isActive: false,
-                savedScrollTop: null,
                 prompt,
+                isActive: false,
                 validationMessage: ''
             }
         },
@@ -137,29 +136,9 @@
                     default:
                         return null
                 }
-            }
-        },
-        watch: {
-            /**
-             * Remove scrollbar from background to avoid weird scroll behavior.
-             * while modal is active.
-             */
-            isActive() {
-                if (typeof window !== 'undefined') {
-                    this.savedScrollTop = !this.savedScrollTop
-                        ? document.documentElement.scrollTop
-                        : this.savedScrollTop
-
-                    document.body.classList.toggle('is-noscroll', this.isActive)
-
-                    if (this.isActive) {
-                        document.body.style.top = `-${this.savedScrollTop}px`
-                    } else {
-                        document.documentElement.scrollTop = this.savedScrollTop
-                        document.body.style.top = null
-                        this.savedScrollTop = null
-                    }
-                }
+            },
+            showCancel() {
+                return this.cancelOptions.indexOf('button') >= 0
             }
         },
         methods: {
@@ -181,39 +160,17 @@
             },
 
             /**
-             * Call the onCancel prop (function) and close the Dialog.
-             */
-            cancel() {
-                if (!this.canCancel) return
-
-                this.onCancel()
-                this.close()
-            },
-
-            /**
              * Close the Dialog.
              */
             close() {
                 this.isActive = false
+                this.onCancel.apply(null, arguments)
 
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()
                     removeElement(this.$el)
                 }, 150)
-            },
-
-            /**
-             * Keypress event that is bound to the document.
-             */
-            keyPress(event) {
-                // Esc key
-                if (event.keyCode === 27) this.cancel()
-            }
-        },
-        created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
             }
         },
         beforeMount() {
@@ -229,11 +186,6 @@
                     ? this.$refs.input.focus()
                     : this.$refs.confirmButton.focus()
             })
-        },
-        beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
-            }
         }
     }
 </script>
