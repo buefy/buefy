@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Field</h1>
         <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
         <hr>

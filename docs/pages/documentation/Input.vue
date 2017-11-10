@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Input</h1>
         <h2 class="subtitle">
             Get user Input.

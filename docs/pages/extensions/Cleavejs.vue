@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Cleave.js</h1>
         <h2 class="subtitle">Format input text while you type</h2>
         <div class="buttons">

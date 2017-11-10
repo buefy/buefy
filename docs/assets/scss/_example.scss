@@ -1,0 +1,47 @@
+.example {
+    border: 1px solid $warning;
+    border-top-right-radius: $radius;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    position: relative;
+    &:not(:first-child) {
+        margin-top: 2rem;
+    }
+    &:not(:last-child) {
+        margin-bottom: 1.5rem
+    }
+    &:before {
+        background: $warning;
+        border-radius: $radius $radius 0 0;
+        bottom: 100%;
+        content: "Example";
+        display: inline-block;
+        font-size: 7px;
+        font-weight: bold;
+        left: -1px;
+        letter-spacing: 1px;
+        padding: 3px 5px;
+        position: absolute;
+        text-transform: uppercase;
+        vertical-align: top;
+    }
+    + .example-code {
+        border: 1px solid $warning;
+        border-top: none;
+        margin-top: -1.5rem;
+        &:not(:last-child) {
+            margin-bottom: 1.5rem
+        }
+        + .example-code {
+            border: 1px solid $warning;
+            border-top: none;
+            margin-top: -1.5rem;
+            &:not(:last-child) {
+                margin-bottom: 1.5rem
+            }
+        }
+    }
+    &.is-flex {
+        align-items: center;
+    }
+}

@@ -1,0 +1,42 @@
+$navbar-height: 3.25rem;
+
+.home {
+    .hero.is-fullheight {
+        min-height: calc(100vh - #{$navbar-height});
+    }
+    .logo-rounded,
+    .subtitle,
+    .npm,
+    .github-button {
+        margin-bottom: 1.5rem;
+    }
+    .buttons {
+        margin-bottom: 0.5rem;
+        justify-content: center;
+    }
+    .logo-rounded {
+        background: $light;
+        display: inline-block;
+        padding: 2.5rem;
+        border-radius: 32px;
+        box-shadow: 0 20px 60px rgba(10, 10, 10, 0.05), 0 5px 10px rgba(10, 10, 10, 0.1), 0 1px 1px rgba(10, 10, 10, 0.2);
+        img {
+            width: 320px;
+        }
+        @include mobile {
+            padding: 2rem;
+            img {
+                width: 220px;
+            }
+        }
+    }
+    .button + .button {
+        margin-left: 0.5rem;
+    }
+    .npm {
+        display: inline-flex;
+        font-size: 1.1em;
+        color: lighten($primary, 20%);
+        background: darken($primary, 20%);
+    }
+}

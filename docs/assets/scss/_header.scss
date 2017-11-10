@@ -1,0 +1,10 @@
+.header.navbar {
+    &.is-transparent {
+        box-shadow: 0 1px 0 rgba($white, 0.2);
+    }
+
+    .version {
+        flex-direction: column;
+        align-items: left;
+    }
+}

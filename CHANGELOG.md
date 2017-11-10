@@ -26,7 +26,7 @@
 * Add ``custom-size`` prop to icon
 * Add ``custom-class`` prop to icon
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
-* #365 Add ``src/scss/utils/_all.scss`` for easier modular importing
+* #365 Add ``src/scss/utils/_all.scss`` for easier modular importing (thanks @gwvt)
 * #377 Add support to MDI icons from community
 * #387 Add ``current-page`` prop to table (thanks @frantic1048)
 * #388 Add ``size`` prop to radio and checkbox

@@ -1,6 +1,6 @@
 <template>
     <section class="extensions">
-        <the-header ref="header"></the-header>
+        <TheHeader ref="header" />
 
         <div class="hero is-primary">
             <div class="hero-body">
@@ -11,30 +11,26 @@
             </div>
         </div>
 
-        <nav class="navbar has-shadow">
-            <div class="container">
-                <nav class="navbar-tabs">
-                    <router-link to="cleavejs" class="navbar-item is-tab">Cleave.js</router-link>
-                </nav>
-            </div>
-        </nav>
-
         <section class="section">
-            <router-view></router-view>
+            <div class="container is-fullhd template-horizontal">
+                <TheSidebar :data="menu" />
+                <router-view></router-view>
+            </div>
         </section>
 
-        <the-footer></the-footer>
+        <TheFooter />
     </section>
 </template>
 
 <script>
-    import TheHeader from '@/components/TheHeader'
-    import TheFooter from '@/components/TheFooter'
+    import DefaultMixin from './DefaultMixin'
 
     export default {
-        components: {
-            TheHeader,
-            TheFooter
+        mixins: [DefaultMixin],
+        data() {
+            return {
+                menuName: 'menuExtensions'
+            }
         }
     }
 </script>

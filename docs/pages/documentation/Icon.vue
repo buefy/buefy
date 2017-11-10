@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Icon</h1>
         <h2 class="subtitle">Icons take an important role of any application</h2>
         <hr>

@@ -11,12 +11,13 @@ const Extensions = () => import('@/templates/Extensions')
 const Home = () => import('@/pages/Home')
 
 // Documentation
-import Installation from '@/components/DocumentationNavInstallation'
+
+// Installation
 const Start = () => import('@/pages/documentation/Start')
 const Customization = () => import('@/pages/documentation/Customization')
 const ConstructorOptions = () => import('@/pages/documentation/ConstructorOptions')
 
-import General from '@/components/DocumentationNavGeneral'
+// General
 const Layout = () => import('@/pages/documentation/Layout')
 const Icon = () => import('@/pages/documentation/Icon')
 const Dropdown = () => import('@/pages/documentation/Dropdown')
@@ -27,7 +28,7 @@ const Tabs = () => import('@/pages/documentation/Tabs')
 const Tag = () => import('@/pages/documentation/Tag')
 const Tooltip = () => import('@/pages/documentation/Tooltip')
 
-import Notices from '@/components/DocumentationNavNotices'
+// Notices
 const Dialog = () => import('@/pages/documentation/Dialog')
 const Toast = () => import('@/pages/documentation/Toast')
 const Snackbar = () => import('@/pages/documentation/Snackbar')
@@ -35,7 +36,7 @@ const Notification = () => import('@/pages/documentation/Notification')
 const Message = () => import('@/pages/documentation/Message')
 const Loading = () => import('@/pages/documentation/Loading')
 
-import FormElements from '@/components/DocumentationNavForm'
+// Form
 const Field = () => import('@/pages/documentation/Field')
 const Input = () => import('@/pages/documentation/Input')
 const Select = () => import('@/pages/documentation/Select')
@@ -47,7 +48,7 @@ const Upload = () => import('@/pages/documentation/Upload')
 const Datepicker = () => import('@/pages/documentation/Datepicker')
 const Timepicker = () => import('@/pages/documentation/Timepicker')
 
-import DataManipulation from '@/components/DocumentationNavData'
+// Data
 const Table = () => import('@/pages/documentation/Table')
 const Pagination = () => import('@/pages/documentation/Pagination')
 
@@ -69,213 +70,123 @@ export default new Router({
             children: [
                 {
                     path: 'start',
-                    component: Start,
-                    meta: {
-                        category: Installation
-                    }
+                    component: Start
                 },
                 {
                     path: 'customization',
-                    component: Customization,
-                    meta: {
-                        category: Installation
-                    }
+                    component: Customization
                 },
                 {
                     path: 'constructor-options',
-                    component: ConstructorOptions,
-                    meta: {
-                        category: Installation
-                    }
+                    component: ConstructorOptions
                 },
                 {
                     path: 'layout',
-                    component: Layout,
-                    meta: {
-                        category: General
-                    }
+                    component: Layout
                 },
                 {
                     path: 'icon',
-                    component: Icon,
-                    meta: {
-                        category: General
-                    }
+                    component: Icon
                 },
                 {
                     path: 'dropdown',
-                    component: Dropdown,
-                    meta: {
-                        category: General
-                    }
+                    component: Dropdown
                 },
                 {
                     path: 'tooltip',
-                    component: Tooltip,
-                    meta: {
-                        category: General
-                    }
+                    component: Tooltip
                 },
                 {
                     path: 'modal',
-                    component: Modal,
-                    meta: {
-                        category: General
-                    }
+                    component: Modal
                 },
                 {
                     path: 'tabs',
-                    component: Tabs,
-                    meta: {
-                        category: General
-                    }
+                    component: Tabs
                 },
                 {
                     path: 'collapse',
-                    component: Collapse,
-                    meta: {
-                        category: General
-                    }
+                    component: Collapse
                 },
                 {
                     path: 'panel',
-                    component: Panel,
-                    meta: {
-                        category: General
-                    }
+                    component: Panel
                 },
                 {
                     path: 'tag',
-                    component: Tag,
-                    meta: {
-                        category: General
-                    }
+                    component: Tag
                 },
                 {
                     path: 'dialog',
-                    component: Dialog,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Dialog
                 },
                 {
                     path: 'toast',
-                    component: Toast,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Toast
                 },
                 {
                     path: 'snackbar',
-                    component: Snackbar,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Snackbar
                 },
                 {
                     path: 'notification',
-                    component: Notification,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Notification
                 },
                 {
                     path: 'message',
-                    component: Message,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Message
                 },
                 {
                     path: 'loading',
-                    component: Loading,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Loading
                 },
                 {
                     path: 'field',
-                    component: Field,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Field
                 },
                 {
                     path: 'input',
-                    component: Input,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Input
                 },
                 {
                     path: 'select',
-                    component: Select,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Select
                 },
                 {
                     path: 'autocomplete',
-                    component: Autocomplete,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Autocomplete
                 },
                 {
                     path: 'checkbox',
-                    component: Checkbox,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Checkbox
                 },
                 {
                     path: 'radio',
-                    component: Radio,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Radio
                 },
                 {
                     path: 'switch',
-                    component: Switch,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Switch
                 },
                 {
                     path: 'datepicker',
-                    component: Datepicker,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Datepicker
                 },
                 {
                     path: 'timepicker',
-                    component: Timepicker,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Timepicker
                 },
                 {
                     path: 'upload',
-                    component: Upload,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Upload
                 },
                 {
                     path: 'table',
-                    component: Table,
-                    meta: {
-                        category: DataManipulation
-                    }
+                    component: Table
                 },
                 {
                     path: 'pagination',
-                    component: Pagination,
-                    meta: {
-                        category: DataManipulation
-                    }
+                    component: Pagination
                 },
                 {
                     path: '',

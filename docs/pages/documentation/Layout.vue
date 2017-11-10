@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Layout & Elements</h1>
         <h2 class="subtitle">Buefy has the entire Bulma's core <b>built in</b>. You can use any feature from Bulma, plus all the components Buefy offers</h2>
         <hr>
