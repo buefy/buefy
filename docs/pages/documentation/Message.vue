@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Message</h1>
         <h2 class="subtitle">Colored message blocks, to draw attention of your user</h2>
         <hr>

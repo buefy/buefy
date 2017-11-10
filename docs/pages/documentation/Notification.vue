@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Notification</h1>
         <h2 class="subtitle">Bold notification blocks to alert your users of something</h2>
         <hr>

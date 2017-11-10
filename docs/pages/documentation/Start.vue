@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Start</h1>
         <h2 class="subtitle"><b>Two ways</b> to install and use Buefy</h2>
 

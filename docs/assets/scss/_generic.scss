@@ -1,0 +1,10 @@
+::selection {
+    background: lighten($primary, 5%);
+    color: $primary-invert;
+}
+
+html.is-clipped-touch {
+    @include touch {
+        overflow: hidden !important;
+    }
+}

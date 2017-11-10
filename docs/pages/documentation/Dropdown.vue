@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Dropdown</h1>
         <h2 class="subtitle">
             Dropdowns are very versatile, can used as a quick menu or even like a select for discoverable content

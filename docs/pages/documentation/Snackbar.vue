@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Snackbar</h1>
         <h2 class="subtitle">When a Dialog seems a bit overkill for the task, Snackbars are good candidates</h2>
         <hr>

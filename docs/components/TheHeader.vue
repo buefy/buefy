@@ -32,16 +32,68 @@
                 <div class="navbar-end">
                     <router-link to="/" exact class="navbar-item">Home</router-link>
 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <router-link to="/documentation" class="navbar-link">Documentation</router-link>
+                    <router-link to="/documentation" class="navbar-item is-hidden-touch">Documentation</router-link>
+
+                    <!-- Mobile documentation menu -->
+                    <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
+                        <div class="navbar-item">Documentation</div>
 
                         <div class="navbar-dropdown is-boxed">
-                            <router-link to="/documentation/start" class="navbar-item">Installation</router-link>
-                            <router-link to="/documentation/layout" class="navbar-item">General</router-link>
-                            <router-link to="/documentation/dialog" class="navbar-item">Notices</router-link>
-                            <router-link to="/documentation/field" class="navbar-item">Form</router-link>
-                            <router-link to="/documentation/table" class="navbar-item">Data</router-link>
-                            <hr class="navbar-divider">
+                            <template v-for="items in menuDocumentation">
+                                <div
+                                    :key="items.category"
+                                    class="navbar-item has-text-weight-semibold is-uppercase has-text-grey">
+                                    {{ items.category }}
+                                </div>
+
+                                <router-link
+                                    v-for="page in items.pages"
+                                    :key="page.name"
+                                    :to="`/documentation/${$options.filters.slugify(page.name)}`"
+                                    class="navbar-item">
+                                    {{ page.name }}
+                                </router-link>
+
+                                <hr :key="items.category"
+                                    class="navbar-divider"
+                                    style="display: block;">
+                            </template>
+                        </div>
+                    </div>
+
+                    <router-link to="/extensions" class="navbar-item is-hidden-touch">Extensions</router-link>
+
+                    <!-- Mobile extensions menu -->
+                    <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
+                        <!-- <div class="navbar-item">Extensions</div> -->
+
+                        <div class="navbar-dropdown is-boxed">
+                            <template v-for="items in menuExtensions">
+                                <div
+                                    :key="items.category"
+                                    class="navbar-item has-text-weight-semibold is-uppercase has-text-grey">
+                                    {{ items.category }}
+                                </div>
+
+                                <router-link
+                                    v-for="page in items.pages"
+                                    :key="page.name"
+                                    :to="`/extensions/${$options.filters.slugify(page.name)}`"
+                                    class="navbar-item">
+                                    {{ page.name }}
+                                </router-link>
+
+                                <hr :key="items.category"
+                                    class="navbar-divider"
+                                    style="display: block;">
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <div class="navbar-link">Info</div>
+
+                        <div class="navbar-dropdown is-boxed">
                             <strong class="navbar-item version">
                                 <span class="has-text-primary">Buefy version</span>
                                 <span class="has-text-grey">{{ version }}</span>
@@ -50,6 +102,7 @@
                                 <span class="has-text-bulma">Bulma version</span>
                                 <span class="has-text-grey">{{ bulmaVersion }}</span>
                             </strong>
+
                             <hr class="navbar-divider">
                             <a class="navbar-item"
                                 href="https://github.com/rafaelpimpa/buefy/releases"
@@ -59,13 +112,12 @@
                         </div>
                     </div>
 
-                    <router-link to="/extensions" class="navbar-item">Extensions</router-link>
-
                     <div class="navbar-item">
                         <a class="button is-outlined"
                             :class="light ? 'is-light' : 'is-twitter'"
                             @click="tweet">
-                            <b-icon pack="fa" icon="twitter"></b-icon> <span>Tweet</span>
+                            <b-icon pack="fa" icon="twitter"></b-icon>
+                            <span>Tweet</span>
                         </a>
                     </div>
                 </div>
@@ -85,7 +137,137 @@
             return {
                 isMenuActive: false,
                 version: Package.version,
-                bulmaVersion: Package.dependencies.bulma.substr(1)
+                bulmaVersion: Package.dependencies.bulma.substr(1),
+                menuDocumentation: [
+                    {
+                        category: 'Installation',
+                        pages: [
+                            {
+                                name: 'Start'
+                            },
+                            {
+                                name: 'Customization'
+                            },
+                            {
+                                name: 'Constructor options'
+                            }
+                        ]
+                    },
+                    {
+                        category: 'General',
+                        pages: [
+                            {
+                                name: 'Layout'
+                            },
+                            {
+                                name: 'Icon'
+                            },
+                            {
+                                name: 'Dropdown'
+                            },
+                            {
+                                name: 'Modal'
+                            },
+                            {
+                                name: 'Collapse'
+                            },
+                            {
+                                name: 'Tabs'
+                            },
+                            {
+                                name: 'Tag'
+                            },
+                            {
+                                name: 'Tooltip'
+                            }
+                        ]
+                    },
+                    {
+                        category: 'Notices',
+                        pages: [
+                            {
+                                name: 'Dialog'
+                            },
+                            {
+                                name: 'Toast'
+                            },
+                            {
+                                name: 'Snackbar'
+                            },
+                            {
+                                name: 'Notification'
+                            },
+                            {
+                                name: 'Message'
+                            },
+                            {
+                                name: 'Loading'
+                            }
+                        ]
+                    },
+                    {
+                        category: 'Form',
+                        pages: [
+                            {
+                                name: 'Field'
+                            },
+                            {
+                                name: 'Input'
+                            },
+                            {
+                                name: 'Select'
+                            },
+                            {
+                                name: 'Autocomplete'
+                            },
+                            {
+                                name: 'Checkbox'
+                            },
+                            {
+                                name: 'Radio'
+                            },
+                            {
+                                name: 'Switch'
+                            },
+                            {
+                                name: 'Upload'
+                            },
+                            {
+                                name: 'Datepicker'
+                            },
+                            {
+                                name: 'Timepicker',
+                                isNew: true
+                            }
+                        ]
+                    },
+                    {
+                        category: 'Data',
+                        pages: [
+                            {
+                                name: 'Table'
+                            },
+                            {
+                                name: 'Pagination'
+                            }
+                        ]
+                    }
+                ],
+                menuExtensions: [
+                    {
+                        category: 'Extensions',
+                        pages: [
+                            {
+                                name: 'Cleavejs'
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        watch: {
+            isMenuActive() {
+                this.toggleHtmlClip()
             }
         },
         methods: {
@@ -98,6 +280,16 @@
                 const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
 
                 window.open(url, '', opts)
+            },
+            closeMenu() {
+                this.isMenuActive = false
+                this.toggleHtmlClip()
+            },
+            toggleHtmlClip() {
+                document
+                    .documentElement
+                    .classList
+                    .toggle('is-clipped-touch', this.isMenuActive)
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Tag</h1>
         <h2 class="subtitle">Tag labels to insert anywhere</h2>
         <hr>

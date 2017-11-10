@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title is-spaced">Toast</h1>
         <h2 class="subtitle">Toasts are simple text messages to inform the user</h2>
         <hr>
