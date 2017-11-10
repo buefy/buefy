@@ -38,6 +38,10 @@
 
         <hr>
         <h2 class="title">Checkbox Button</h2>
+        <div class="tags has-addons">
+            <span class="tag is-success">New!</span>
+            <span class="tag is-info">0.6.0</span>
+        </div>
         <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
         <div class="example">
             <ex-checkbox-button></ex-checkbox-button>
