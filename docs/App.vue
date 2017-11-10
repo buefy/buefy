@@ -156,6 +156,9 @@
     // Home
 
     .home {
+        .hero.is-fullheight {
+            min-height: calc(100vh - #{$navbar-height});
+        }
         .logo-rounded,
         .subtitle,
         .npm,
@@ -164,6 +167,7 @@
         }
         .buttons {
             margin-bottom: 0.5rem;
+            justify-content: center;
         }
         .logo-rounded {
             background: $light;
@@ -194,57 +198,12 @@
 
     // Header
 
+    .header.navbar.is-transparent {
+        box-shadow: 0 1px 0 rgba($white, 0.2);
+    }
+
     .version {
         flex-direction: column;
         align-items: left;
-    }
-
-    // Temporary fix for https://github.com/jgthms/bulma/issues/837
-    .hero.is-primary .hero-head .navbar {
-        background: $primary;
-        color: $primary-invert;
-        box-shadow: 0 1px 0 rgba($primary-invert, 0.2);
-        .has-dropdown .navbar-link:after {
-            border-color: $primary-invert;
-        }
-        a.navbar-item {
-            background: transparent;
-        }
-        a.navbar-link {
-            background: transparent;
-            color: rgba($primary-invert, 0.7);
-            &.is-active,
-            &:hover {
-                color: $primary-invert;
-            }
-        }
-        .navbar-burger {
-            background: transparent;
-            span {
-                background: $primary-invert;
-            }
-            &:hover {
-                background: darken($primary, 2.5%);
-            }
-        }
-        @include touch {
-            .navbar-end {
-                .navbar-item,
-                .navbar-link {
-                    color: $text;
-                    &:hover {
-                        color: $black;
-                    }
-                }
-                .button.is-light {
-                    border-color: $twitter;
-                    color: $twitter;
-                    &:hover {
-                        color: $white;
-                        background: $twitter;
-                    }
-                }
-            }
-        }
     }
 </style>
