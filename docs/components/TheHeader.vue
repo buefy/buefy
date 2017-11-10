@@ -1,8 +1,12 @@
 <template>
-    <header class="navbar is-transparent">
+    <header class="navbar header is-fixed-top has-shadow" :class="{ 'is-primary is-transparent': light }">
         <div class="container">
             <div class="navbar-brand">
-                <router-link to="/" exact class="navbar-item" title="Buefy: lightweight UI components for Vue.js based on Bulma">
+                <router-link
+                    to="/"
+                    exact
+                    class="navbar-item"
+                    title="Buefy: lightweight UI components for Vue.js based on Bulma">
                     <img v-if="light" src="../assets/buefy-light.png" alt="Buefy">
                     <img v-else src="../assets/buefy.png" alt="Buefy">
                 </router-link>
