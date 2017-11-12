@@ -67,7 +67,7 @@
         }
     }
     @include touch {
-        &:not(.is-hoverable):not(.is-inline) {
+        &.is-mobile-modal {
             .dropdown-menu {
                 position: fixed;
                 width: calc(100vw - 40px);

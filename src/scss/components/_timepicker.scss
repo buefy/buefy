@@ -1,0 +1,58 @@
+.timepicker {
+    .dropdown,
+    .dropdown-trigger {
+        width: 100%;
+    }
+    .dropdown-item {
+        font-size: inherit;
+    }
+    .timepicker-footer {
+        padding-top: 0.875rem;
+    }
+    .control {
+        .select {
+            font-size: 2.5rem;
+            select {
+                font-weight: $weight-semibold;
+                padding-right: $control-padding-horizontal;
+                option {
+                    font-size: 1.5rem;
+                    &:disabled {
+                        color: rgba($grey, 0.7);
+                    }
+                }
+            }
+            &:after {
+                display: none;
+            }
+        }
+        &:nth-child(1) .select {
+            select {
+                border-right: none;
+            }
+            &:before {
+                content: ":";
+                color: $grey-light;
+                display: inline-block;
+                position: absolute;
+                z-index: 6;
+                font-size: 3rem;
+                right: -0.325rem;
+                top: 0.25rem;
+            }
+        }
+        &:nth-child(2) .select select {
+            border-left: none;
+        }
+    }
+    // Sizes
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium {
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
+    }
+}

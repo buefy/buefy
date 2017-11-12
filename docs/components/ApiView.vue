@@ -1,13 +1,15 @@
 <template>
     <section>
         <template v-for="component in data">
-            <h3 v-if="component.title" class="subtitle">{{ component.title }}</h3>
+            <h3 v-if="component.title" class="subtitle" :key="component.title">
+                {{ component.title }}
+            </h3>
             <b-tabs :key="component.title">
                 <b-tab-item v-if="component.props" label="Properties">
                     <b-table :data="component.props" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Name">
-                                <span v-html="props.row.name"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"></span>
                             </b-table-column>
                             <b-table-column label="Description">
                                 <span v-html="props.row.description"></span>
@@ -27,9 +29,9 @@
 
                 <b-tab-item v-if="component.slots" label="Slots">
                     <b-table :data="component.slots" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Slot name">
-                                <span v-html="props.row.name"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"></span>
                             </b-table-column>
                             <b-table-column label="Description">
                                 <span v-html="props.row.description"></span>
@@ -43,9 +45,9 @@
 
                 <b-tab-item v-if="component.events" label="Events">
                     <b-table :data="component.events" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Name">
-                                <span v-html="props.row.name"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"></span>
                             </b-table-column>
                             <b-table-column label="Description">
                                 <span v-html="props.row.description"></span>
@@ -59,9 +61,9 @@
 
                 <b-tab-item v-if="component.methods" label="Methods">
                     <b-table :data="component.methods" default-sort="name">
-                        <template scope="props">
+                        <template slot-scope="props">
                             <b-table-column label="Name">
-                                <span v-html="props.row.name"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"></span>
                             </b-table-column>
                             <b-table-column label="Description">
                                 <span v-html="props.row.description"></span>

@@ -34,7 +34,7 @@
                             @keydown.enter.prevent="decrementMonth"
                             @keydown.space.prevent="decrementMonth">
 
-                            <b-icon icon="chevron_left"
+                            <b-icon icon="chevron-left"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable">
@@ -49,7 +49,7 @@
                             @keydown.enter.prevent="incrementMonth"
                             @keydown.space.prevent="incrementMonth">
 
-                            <b-icon icon="chevron_right"
+                            <b-icon icon="chevron-right"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable">
@@ -57,9 +57,9 @@
                         </a>
                         <div class="pagination-list">
                             <b-field>
-                                <b-select v-model="focusedDateData.month" 
+                                <b-select v-model="focusedDateData.month"
                                     :disabled="disabled">
-                                    <option v-for="(month, index) in Object.values(monthNames)"
+                                    <option v-for="(month, index) in monthNames"
                                         :value="index"
                                         :key="month">
                                         {{month}}
@@ -86,6 +86,7 @@
                     :max-date="maxDate"
                     :focused="focusedDateData"
                     :disabled="disabled"
+                    :unselectable-dates="unselectableDates"
                     @close="$refs.dropdown.isActive = false">
                 </b-datepicker-table>
 
@@ -209,6 +210,7 @@
                 type: Boolean,
                 default: false
             },
+            unselectableDates: Array,
             dateFormatter: {
                 type: Function,
                 default: (date) => {
@@ -373,18 +375,6 @@
             },
 
             /*
-            * Return name of month full-length
-            */
-            nameOfMonth(month) {
-                const months = {}
-                for (let i = 0; i < this.monthNames.length; i++) {
-                    months[i] = this.monthNames[i]
-                }
-
-                return months[month]
-            },
-
-            /*
             * Format date into string 'YYYY-MM-DD'
             */
             formatYYYYMMDD(value) {
@@ -401,7 +391,7 @@
             },
 
             /*
-            * Format date into string 'YYYY-MM-DD'
+            * Parse date from string
             */
             onChangeNativePicker(event) {
                 const date = event.target.value

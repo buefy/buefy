@@ -1,5 +1,47 @@
 # Buefy Changelog
 
+## 0.6.0
+
+### Breaking changes
+
+* Vue 2.5+ is now the minimum required version
+* Bulma breaking changes, [see changelog](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#breaking-changes)
+* **Removed** the deprecated prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props
+* Buefy now uses [MDI icons from community](https://materialdesignicons.com/) instead, you'll have to change icon names and if you use a CDN you should change:
+
+```html
+<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+```
+
+### New features
+
+* **New component: Timepicker**, [see docs](https://buefy.github.io/#/documentation/timepicker)
+* **New component: Checkbox Button**, [see docs](https://buefy.github.io/#/documentation/checkbox)
+* **New docs section: Extensions**, [see here](https://buefy.github.io/#/extensions/cleavejs)
+* Support for Bulma 0.6.1
+* Add ``disabled`` prop to tabItem
+* Add ``focusable`` prop to table
+* Add ``focus()`` method to table
+* Add ``hoverable`` prop to table
+* Add ``custom-size`` prop to icon
+* Add ``custom-class`` prop to icon
+* #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
+* #365 Add ``src/scss/utils/_all.scss`` for easier modular importing (thanks @gwvt)
+* #377 Add support to MDI icons from community
+* #387 Add ``current-page`` prop to table (thanks @frantic1048)
+* #388 Add ``size`` prop to radio and checkbox
+* #398 Add ``unselectable-dates`` prop to datepicker to disable an array of dates
+* #399 Add configurable closing options for dialog (like modal)
+
+### Fixes
+
+* Update tooltip font size and padding, it's a bit bigger now
+* Update table keyboard navigation, now doesn't require pressing enter and only works when ``focusable``
+* #288 Fix input message from parent field (thanks @yarbshk)
+* #358 Fix modal/dialog shifting content
+* #380 Fix clearing autocomplete input
+* #395 Fix ref dropdown availability (thanks @frantic1048)
+
 ## 0.5.4
 
 * **Deprecated** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props, use new ``inputAttrs`` prop, [see docs](https://buefy.github.io/#/documentation/dialog)

@@ -1,10 +1,10 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
         <a role="button" href="#" class="pagination-previous" @click.prevent="prev"  :disabled="!hasPrev">
-            <b-icon icon="chevron_left" both></b-icon>
+            <b-icon icon="chevron-left" both></b-icon>
         </a>
         <a role="button" href="#" class="pagination-next" @click.prevent="next" :disabled="!hasNext">
-            <b-icon icon="chevron_right" both></b-icon>
+            <b-icon icon="chevron-right" both></b-icon>
         </a>
         <ul class="pagination-list" v-if="!simple">
             <!--First-->

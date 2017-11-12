@@ -3,48 +3,57 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const Home = () => import('../pages/Home')
+// Templates
+const Documentation = () => import('@/templates/Documentation')
+const Extensions = () => import('@/templates/Extensions')
 
-const Documentation = () => import('../pages/documentation/Documentation')
+// Home
+const Home = () => import('@/pages/Home')
 
-import Installation from '../pages/documentation/installation/InstallationNav'
-const Start = () => import('../pages/documentation/installation/Start')
-const Customization = () => import('../pages/documentation/installation/Customization')
-const ConstructorOptions = () => import('../pages/documentation/installation/ConstructorOptions')
+// Documentation
 
-import General from '../pages/documentation/general/GeneralNav'
-const Layout = () => import('../pages/documentation/general/layout')
-const Icon = () => import('../pages/documentation/general/icon')
-const Dropdown = () => import('../pages/documentation/general/dropdown')
-const Modal = () => import('../pages/documentation/general/modal')
-const Collapse = () => import('../pages/documentation/general/collapse')
-const Panel = () => import('../pages/documentation/general/panel')
-const Tabs = () => import('../pages/documentation/general/tabs')
-const Tag = () => import('../pages/documentation/general/tag')
-const Tooltip = () => import('../pages/documentation/general/tooltip')
+// Installation
+const Start = () => import('@/pages/documentation/Start')
+const Customization = () => import('@/pages/documentation/Customization')
+const ConstructorOptions = () => import('@/pages/documentation/ConstructorOptions')
 
-import Notices from '../pages/documentation/notices/NoticesNav'
-const Dialog = () => import('../pages/documentation/notices/dialog')
-const Toast = () => import('../pages/documentation/notices/toast')
-const Snackbar = () => import('../pages/documentation/notices/snackbar')
-const Notification = () => import('../pages/documentation/notices/notification')
-const Message = () => import('../pages/documentation/notices/message')
-const Loading = () => import('../pages/documentation/notices/loading')
+// General
+const Layout = () => import('@/pages/documentation/Layout')
+const Icon = () => import('@/pages/documentation/Icon')
+const Dropdown = () => import('@/pages/documentation/Dropdown')
+const Modal = () => import('@/pages/documentation/Modal')
+const Collapse = () => import('@/pages/documentation/Collapse')
+const Panel = () => import('@/pages/documentation/Panel')
+const Tabs = () => import('@/pages/documentation/Tabs')
+const Tag = () => import('@/pages/documentation/Tag')
+const Tooltip = () => import('@/pages/documentation/Tooltip')
 
-import FormElements from '../pages/documentation/form/FormNav'
-const Field = () => import('../pages/documentation/form/field')
-const Input = () => import('../pages/documentation/form/input')
-const Select = () => import('../pages/documentation/form/select')
-const Autocomplete = () => import('../pages/documentation/form/autocomplete')
-const Checkbox = () => import('../pages/documentation/form/checkbox')
-const Radio = () => import('../pages/documentation/form/radio')
-const Switch = () => import('../pages/documentation/form/switch')
-const Upload = () => import('../pages/documentation/form/upload')
-const Datepicker = () => import('../pages/documentation/form/datepicker')
+// Notices
+const Dialog = () => import('@/pages/documentation/Dialog')
+const Toast = () => import('@/pages/documentation/Toast')
+const Snackbar = () => import('@/pages/documentation/Snackbar')
+const Notification = () => import('@/pages/documentation/Notification')
+const Message = () => import('@/pages/documentation/Message')
+const Loading = () => import('@/pages/documentation/Loading')
 
-import DataManipulation from '../pages/documentation/data/DataNav'
-const Table = () => import('../pages/documentation/data/table')
-const Pagination = () => import('../pages/documentation/data/pagination')
+// Form
+const Field = () => import('@/pages/documentation/Field')
+const Input = () => import('@/pages/documentation/Input')
+const Select = () => import('@/pages/documentation/Select')
+const Autocomplete = () => import('@/pages/documentation/Autocomplete')
+const Checkbox = () => import('@/pages/documentation/Checkbox')
+const Radio = () => import('@/pages/documentation/Radio')
+const Switch = () => import('@/pages/documentation/Switch')
+const Upload = () => import('@/pages/documentation/Upload')
+const Datepicker = () => import('@/pages/documentation/Datepicker')
+const Timepicker = () => import('@/pages/documentation/Timepicker')
+
+// Data
+const Table = () => import('@/pages/documentation/Table')
+const Pagination = () => import('@/pages/documentation/Pagination')
+
+// Extensions
+const CleaveJs = () => import('@/pages/extensions/Cleavejs')
 
 export default new Router({
     mode: 'hash',
@@ -61,210 +70,141 @@ export default new Router({
             children: [
                 {
                     path: 'start',
-                    component: Start,
-                    meta: {
-                        category: Installation
-                    }
+                    component: Start
                 },
                 {
                     path: 'customization',
-                    component: Customization,
-                    meta: {
-                        category: Installation
-                    }
+                    component: Customization
                 },
                 {
                     path: 'constructor-options',
-                    component: ConstructorOptions,
-                    meta: {
-                        category: Installation
-                    }
+                    component: ConstructorOptions
                 },
                 {
                     path: 'layout',
-                    component: Layout,
-                    meta: {
-                        category: General
-                    }
+                    component: Layout
                 },
                 {
                     path: 'icon',
-                    component: Icon,
-                    meta: {
-                        category: General
-                    }
+                    component: Icon
                 },
                 {
                     path: 'dropdown',
-                    component: Dropdown,
-                    meta: {
-                        category: General
-                    }
+                    component: Dropdown
                 },
                 {
                     path: 'tooltip',
-                    component: Tooltip,
-                    meta: {
-                        category: General
-                    }
+                    component: Tooltip
                 },
                 {
                     path: 'modal',
-                    component: Modal,
-                    meta: {
-                        category: General
-                    }
+                    component: Modal
                 },
                 {
                     path: 'tabs',
-                    component: Tabs,
-                    meta: {
-                        category: General
-                    }
+                    component: Tabs
                 },
                 {
                     path: 'collapse',
-                    component: Collapse,
-                    meta: {
-                        category: General
-                    }
+                    component: Collapse
                 },
                 {
                     path: 'panel',
-                    component: Panel,
-                    meta: {
-                        category: General
-                    }
+                    component: Panel
                 },
                 {
                     path: 'tag',
-                    component: Tag,
-                    meta: {
-                        category: General
-                    }
+                    component: Tag
                 },
                 {
                     path: 'dialog',
-                    component: Dialog,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Dialog
                 },
                 {
                     path: 'toast',
-                    component: Toast,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Toast
                 },
                 {
                     path: 'snackbar',
-                    component: Snackbar,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Snackbar
                 },
                 {
                     path: 'notification',
-                    component: Notification,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Notification
                 },
                 {
                     path: 'message',
-                    component: Message,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Message
                 },
                 {
                     path: 'loading',
-                    component: Loading,
-                    meta: {
-                        category: Notices
-                    }
+                    component: Loading
                 },
                 {
                     path: 'field',
-                    component: Field,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Field
                 },
                 {
                     path: 'input',
-                    component: Input,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Input
                 },
                 {
                     path: 'select',
-                    component: Select,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Select
                 },
                 {
                     path: 'autocomplete',
-                    component: Autocomplete,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Autocomplete
                 },
                 {
                     path: 'checkbox',
-                    component: Checkbox,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Checkbox
                 },
                 {
                     path: 'radio',
-                    component: Radio,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Radio
                 },
                 {
                     path: 'switch',
-                    component: Switch,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Switch
                 },
                 {
                     path: 'datepicker',
-                    component: Datepicker,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Datepicker
+                },
+                {
+                    path: 'timepicker',
+                    component: Timepicker
                 },
                 {
                     path: 'upload',
-                    component: Upload,
-                    meta: {
-                        category: FormElements
-                    }
+                    component: Upload
                 },
                 {
                     path: 'table',
-                    component: Table,
-                    meta: {
-                        category: DataManipulation
-                    }
+                    component: Table
                 },
                 {
                     path: 'pagination',
-                    component: Pagination,
-                    meta: {
-                        category: DataManipulation
-                    }
+                    component: Pagination
                 },
                 {
                     path: '',
                     redirect: 'start'
+                }
+            ]
+        },
+        {
+            path: '/extensions',
+            component: Extensions,
+            children: [
+                {
+                    path: 'cleavejs',
+                    component: CleaveJs
+                },
+                {
+                    path: '',
+                    redirect: 'cleavejs'
                 }
             ]
         }

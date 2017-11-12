@@ -1,5 +1,5 @@
 <template>
-    <span 
+    <span
         :data-label="label"
         :class="[newType, position, size, {
             'tooltip': active,
@@ -47,10 +47,12 @@
                 default: 'is-medium'
             }
         },
-        data() {
-            return {
-                newType: this.type || config.defaultTooltipType,
-                newAnimated: this.animated || config.defaultTooltipAnimated
+        computed: {
+            newType() {
+                return this.type || config.defaultTooltipType
+            },
+            newAnimated() {
+                return this.animated || config.defaultTooltipAnimated
             }
         }
     }

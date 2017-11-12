@@ -17,6 +17,7 @@
                 :min-date="minDate"
                 :max-date="maxDate"
                 :disabled="disabled"
+                :unselectable-dates="unselectableDates"
                 @select="updateSelectedDate">
             </b-datepicker-table-row>
         </div>
@@ -39,7 +40,8 @@
             minDate: Date,
             maxDate: Date,
             focused: Object,
-            disabled: Boolean
+            disabled: Boolean,
+            unselectableDates: Array
         },
         computed: {
             visibleDayNames() {
@@ -59,18 +61,6 @@
             */
             updateSelectedDate(date) {
                 this.$emit('input', date)
-            },
-
-            /*
-            * Return name of month full-length
-            */
-            nameOfMonth(month) {
-                const months = {}
-                for (let i = 0; i < this.monthNames.length; i++) {
-                    months[i] = this.monthNames[i]
-                }
-
-                return months[month]
             },
 
             /*

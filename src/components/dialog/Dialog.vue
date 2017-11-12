@@ -1,21 +1,23 @@
 <template>
     <transition :name="animation">
         <div class="dialog modal is-active" v-if="isActive">
-            <div class="modal-background" @click="cancel"></div>
+            <div class="modal-background" @click="cancel('outside')"></div>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
                 </header>
 
-                <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
+                <section
+                    class="modal-card-body"
+                    :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <div class="media">
                         <div class="media-left" v-if="hasIcon">
                             <b-icon
-                                :icon="icon ? icon : iconByTpe"
+                                :icon="icon ? icon : iconByType"
                                 :pack="iconPack"
-                                :class="type"
+                                :type="type"
                                 :both="!icon"
-                                size="is-large custom-icon">
+                                size="is-large">
                             </b-icon>
                         </div>
                         <div class="media-content">
@@ -23,13 +25,12 @@
 
                             <div v-if="hasInput" class="field">
                                 <div class="control">
-                                    <input class="input"
+                                    <input v-model="prompt"
+                                        class="input"
                                         ref="input"
                                         required
-                                        :value="prompt"
                                         :class="{ 'is-danger': validationMessage }"
-                                        v-bind="tempInputAttrs"
-                                        @input="(event) => prompt = event.target.value"
+                                        v-bind="inputAttrs"
                                         @keyup.enter="confirm">
                                 </div>
                                 <p class="help is-danger">{{ validationMessage }}</p>
@@ -39,10 +40,18 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button v-if="canCancel" class="button is-light" ref="cancelButton" @click="cancel">
+                    <button
+                        v-if="showCancel"
+                        class="button is-light"
+                        ref="cancelButton"
+                        @click="cancel('button')">
                         {{ cancelText }}
                     </button>
-                    <button class="button" :class="type" ref="confirmButton"  @click="confirm">
+                    <button
+                        class="button"
+                        :class="type"
+                        ref="confirmButton"
+                        @click="confirm">
                         {{ confirmText }}
                     </button>
                 </footer>
@@ -52,12 +61,14 @@
 </template>
 
 <script>
+    import ModalMixin from '../../utils/ModalMixin'
     import Icon from '../icon'
     import config from '../../utils/config'
     import { removeElement } from '../../utils/helpers'
 
     export default {
-        inheritAttrs: false,
+        name: 'bDialog',
+        mixins: [ModalMixin],
         components: {
             [Icon.name]: Icon
         },
@@ -87,67 +98,47 @@
                         : 'Cancel'
                 }
             },
-            animation: {
-                type: String,
-                default: 'zoom-out'
-            },
-            canCancel: {
-                type: Boolean,
-                default: true
-            },
             hasInput: Boolean, // Used internally to know if it's prompt
-            inputPlaceholder: String, // Deprecated
-            inputName: String, // Deprecated
-            inputMaxlength: [Number, String], // Deprecated
-            inputAttrs: Object,
-            onConfirm: {
-                type: Function,
+            inputAttrs: {
+                type: Object,
                 default: () => {}
             },
-            onCancel: {
+            onConfirm: {
                 type: Function,
                 default: () => {}
             }
         },
         data() {
-            // @TODO Remove temporary: inputPlaceholder, inputName and inputMaxlength are deprecated
-            const tempInputAttrs = this.inputAttrs || {}
-            tempInputAttrs.placeholder = tempInputAttrs.placeholder || this.inputPlaceholder
-            tempInputAttrs.name = tempInputAttrs.name || this.inputName
-            tempInputAttrs.maxlength = tempInputAttrs.maxlength || this.inputMaxlength
+            const prompt = this.hasInput
+                ? this.inputAttrs.value || ''
+                : ''
 
             return {
+                prompt,
                 isActive: false,
-                prompt: tempInputAttrs.value || '',
-                validationMessage: '',
-                tempInputAttrs
+                validationMessage: ''
             }
         },
         computed: {
             /**
              * Icon name (MDI) based on the type.
              */
-            iconByTpe() {
+            iconByType() {
                 switch (this.type) {
                     case 'is-info':
-                        return 'info'
+                        return 'information'
                     case 'is-success':
-                        return 'check_circle'
+                        return 'check-circle'
                     case 'is-warning':
-                        return 'warning'
+                        return 'alert'
                     case 'is-danger':
-                        return 'error'
+                        return 'alert-circle'
                     default:
                         return null
                 }
-            }
-        },
-        watch: {
-            isActive() {
-                if (typeof window !== 'undefined') {
-                    const action = this.isActive ? 'add' : 'remove'
-                    document.documentElement.classList[action]('is-clipped')
-                }
+            },
+            showCancel() {
+                return this.cancelOptions.indexOf('button') >= 0
             }
         },
         methods: {
@@ -169,39 +160,17 @@
             },
 
             /**
-             * Call the onCancel prop (function) and close the Dialog.
-             */
-            cancel() {
-                if (!this.canCancel) return
-
-                this.onCancel()
-                this.close()
-            },
-
-            /**
              * Close the Dialog.
              */
             close() {
                 this.isActive = false
+                this.onCancel.apply(null, arguments)
 
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()
                     removeElement(this.$el)
                 }, 150)
-            },
-
-            /**
-             * Keypress event that is bound to the document.
-             */
-            keyPress(event) {
-                // Esc key
-                if (event.keyCode === 27) this.cancel()
-            }
-        },
-        created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
             }
         },
         beforeMount() {
@@ -217,11 +186,6 @@
                     ? this.$refs.input.focus()
                     : this.$refs.confirmButton.focus()
             })
-        },
-        beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
-            }
         }
     }
 </script>

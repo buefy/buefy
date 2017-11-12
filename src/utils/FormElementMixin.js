@@ -44,6 +44,15 @@ export default {
             if (!this.parentField) return
 
             return this.parentField.newType
+        },
+
+        /**
+         * Get the message prop from parent if it's a Field.
+         */
+        statusMessage() {
+            if (!this.parentField) return
+
+            return this.parentField.newMessage
         }
     },
     methods: {
@@ -68,7 +77,7 @@ export default {
         checkHtml5Validity() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            const el = this.$data._isAutocomplete || this.$data._isDatepicker
+            const el = this.$data._isAutocomplete || this.$data._isDatepicker || this.$data._isTimepicker
                 ? this.$refs.input.$refs.input
                 : this.$refs[this.$data._elementRef]
 

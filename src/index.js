@@ -1,11 +1,11 @@
-import { Checkbox } from './components/checkbox'
+import { Checkbox, CheckboxButton } from './components/checkbox'
 import { Dropdown, DropdownItem } from './components/dropdown'
 import { Radio, RadioButton } from './components/radio'
 import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
 import { Tag, Taglist } from './components/tag'
 import Autocomplete from './components/autocomplete'
-import Collapse from './components/Collapse'
+import Collapse from './components/collapse'
 import Datepicker from './components/datepicker'
 import Field from './components/field'
 import Icon from './components/icon'
@@ -16,6 +16,7 @@ import Pagination from './components/pagination'
 import Panel from './components/panel'
 import Select from './components/select'
 import Switch from './components/switch'
+import Timepicker from './components/timepicker'
 import Tooltip from './components/tooltip'
 import Upload from './components/upload'
 
@@ -30,6 +31,7 @@ import config, { setOptions } from './utils/config'
 const components = {
     Autocomplete,
     Checkbox,
+    CheckboxButton,
     Collapse,
     Datepicker,
     Dropdown,
@@ -53,6 +55,7 @@ const components = {
     Tabs,
     Tag,
     Taglist,
+    Timepicker,
     Tooltip,
     Upload
 }
