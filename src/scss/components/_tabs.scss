@@ -20,4 +20,7 @@
     &:not(:last-child) {
         margin-bottom: 1.5rem;
     }
+    &.is-fullwidth {
+        width: 100%;
+    }
 }

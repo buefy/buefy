@@ -1,5 +1,5 @@
 <template>
-    <div class="b-tabs">
+    <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
         <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
             <ul>
                 <li v-for="(tabItem, index) in tabItems"
