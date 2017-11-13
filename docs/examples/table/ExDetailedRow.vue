@@ -1,8 +1,11 @@
 <template>
     <b-table
         :data="tableDataSimple"
+        :opened-detailed="defaultOpenedDetails"
         detailed
-        @details-open="(row, index) => $toast.open(`Expanded ${row.first_name}`)">
+        detail-key="id"
+        @details-open="(row, index) => $toast.open(`Expanded ${row.first_name}`)"
+    >
 
         <template slot-scope="props">
             <b-table-column label="ID" width="40"  numeric>
@@ -63,7 +66,8 @@
             ]
 
             return {
-                tableDataSimple
+                tableDataSimple,
+                defaultOpenedDetails: [1]
             }
         }
     }
