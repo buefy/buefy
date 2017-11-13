@@ -23,6 +23,7 @@
             v-bind="$attrs"
             :multiple="multiple"
             :disabled="disabled"
+            @click="upload"
             @change="onFileChange">
     </label>
 </template>
@@ -66,11 +67,22 @@
             }
         },
         methods: {
+
+            /**
+             * Reset input value
+             */
+            upload() {
+                if (!this.disabled && !this.loading) {
+                    this.$refs.input.value = null
+                }
+            },
+
             /**
              * Listen change event on input type 'file',
              * emit 'input' event and validate
              */
             onFileChange(event) {
+                alert('event')
                 if (!this.disabled && !this.loading) {
                     if (this.dragDrop) {
                         this.updateDragDropFocus(false)
