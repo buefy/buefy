@@ -25,6 +25,7 @@
 * Add ``hoverable`` prop to table
 * Add ``custom-size`` prop to icon
 * Add ``custom-class`` prop to icon
+* Add ``detail-key`` and ``opened-detailed`` props to table (thanks @wanxe)
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
 * #365 Add ``src/scss/utils/_all.scss`` for easier modular importing (thanks @gwvt)
 * #377 Add support to MDI icons from community
