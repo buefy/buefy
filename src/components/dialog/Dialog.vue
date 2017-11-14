@@ -61,14 +61,14 @@
 </template>
 
 <script>
-    import ModalMixin from '../../utils/ModalMixin'
     import Icon from '../icon'
+    import { Modal } from '../modal'
     import config from '../../utils/config'
     import { removeElement } from '../../utils/helpers'
 
     export default {
         name: 'bDialog',
-        mixins: [ModalMixin],
+        extends: Modal,
         components: {
             [Icon.name]: Icon
         },

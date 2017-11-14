@@ -6,7 +6,7 @@
         </button>
         <button class="button is-primary is-medium"
             @click="isCardModalActive = true">
-            Launch card modal
+            Launch card modal (keep scroll)
         </button>
 
         <b-modal :active.sync="isImageModalActive">
@@ -15,7 +15,7 @@
             </p>
         </b-modal>
 
-        <b-modal :active.sync="isCardModalActive" :width="640">
+        <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">

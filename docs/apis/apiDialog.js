@@ -94,6 +94,14 @@ export default [
                 type: 'Function',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>scroll</code>',
+                description: `<code>clip</code> to remove the <code>&lt;body&gt;</code> scrollbar, <code>keep</code> to have a non scrollable scrollbar
+                    to avoid shifting background, but will set <code>&lt;body&gt;</code> to position fixed, might break some layouts`,
+                type: 'String',
+                values: '<code>clip</code>, <code>keep</code>',
+                default: '<code>clip</code>'
             }
         ]
     }

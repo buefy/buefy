@@ -1,4 +1,4 @@
-const config = {
+let config = {
     defaultContainerElement: null,
     defaultIconPack: 'mdi',
     defaultDialogConfirmText: null,
@@ -14,9 +14,10 @@ const config = {
     defaultMonthNames: null,
     defaultFirstDayOfWeek: null,
     defaultTimeFormatter: null,
-    defaultTimeParser: null
+    defaultTimeParser: null,
+    defaultModalScroll: null
 }
 
 export default config
 
-export const setOptions = options => { this.config = options }
+export const setOptions = (options) => { config = options }

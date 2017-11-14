@@ -119,6 +119,13 @@ export default [
                 type: 'Function',
                 values: '—',
                 default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
+            },
+            {
+                name: '<code>defaultModalScroll</code>',
+                description: `Default modal/dialog <code>scroll</code> attribute`,
+                type: 'String',
+                values: '<code>clip</code>, <code>keep</code>',
+                default: '<code>clip</code>'
             }
         ]
     }
