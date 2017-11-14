@@ -26,6 +26,8 @@
 * Add ``custom-size`` prop to icon
 * Add ``custom-class`` prop to icon
 * Add ``detail-key`` and ``opened-detailed`` props to table (thanks @wanxe)
+* Add ``scroll`` prop to modal/dialog (changes what to do with ``<body>`` scrollbar)
+* Add ``parent`` prop to modal, pass a Vue object to it to open component modal programmatically
 * #359 Add ``mobile-modal`` prop to dropdown to enable/disable modal on mobile
 * #365 Add ``src/scss/utils/_all.scss`` for easier modular importing (thanks @gwvt)
 * #377 Add support to MDI icons from community
@@ -39,7 +41,7 @@
 * Update tooltip font size and padding, it's a bit bigger now
 * Update table keyboard navigation, now doesn't require pressing enter and only works when ``focusable``
 * #288 Fix input message from parent field (thanks @yarbshk)
-* #358 Fix modal/dialog shifting content
+* #358 Fix modal/dialog shifting content (``scroll`` prop)
 * #380 Fix clearing autocomplete input
 * #395 Fix ref dropdown availability (thanks @frantic1048)
 

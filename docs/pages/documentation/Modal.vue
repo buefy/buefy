@@ -28,8 +28,11 @@
 
         <hr>
 
-        <h2 class="title is-spaced">Programmatically opening HTML Modal</h2>
+        <h2 class="title is-spaced">Programmatically opening Modal</h2>
+        <p class="subtitle">Syntax</p>
         <div class="block">
+            <CodeView lang="javascript" :code="programmaticSyntax | pre" />
+            <hr>
             <ex-programmatic></ex-programmatic>
         </div>
         <CodeView :code="ExProgrammaticCode" />
@@ -66,7 +69,14 @@
                 ExSimpleCode,
                 ExComponentCode,
                 ModalFormCode,
-                ExProgrammaticCode
+                ExProgrammaticCode,
+                programmaticSyntax: `
+                // From inside Vue instance
+                this.$modal.open(props)
+
+                // From outside Vue instance
+                import { Modal } from 'buefy'
+                Modal.open(props)`
             }
         }
     }

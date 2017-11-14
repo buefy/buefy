@@ -11,9 +11,15 @@ export default [
             {
                 name: '<code>component</code>',
                 description: `Component to be injected, used to open a component modal programmatically.
-                    Close modal within the component by emitting a 'close' event — <code>this.$emit('close')</code>.
-                    Be aware that the component won't have access to the main Vue instance (vuex, router, custom components, etc.)`,
+                    Close modal within the component by emitting a 'close' event — <code>this.$emit('close')</code>`,
                 type: 'Object, Function',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>parent</code>',
+                description: `Parent component of the modal, <strong>required</strong> if using <code>component</code>`,
+                type: 'Vue',
                 values: '—',
                 default: '—'
             },
