@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.6.1
+
+* #409 Fix notification delete button
+* #410 Fix alert triggering on updload
+
 ## 0.6.0
 
 ### Breaking changes
