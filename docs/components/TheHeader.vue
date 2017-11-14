@@ -1,5 +1,5 @@
 <template>
-    <header class="navbar header is-fixed-top has-shadow" :class="{ 'is-primary is-transparent': light }">
+    <header class="navbar header has-shadow" :class="{ 'is-primary is-transparent': light }">
         <div class="container">
             <div class="navbar-brand">
                 <router-link
@@ -265,11 +265,6 @@
                 ]
             }
         },
-        watch: {
-            isMenuActive() {
-                this.toggleHtmlClip()
-            }
-        },
         methods: {
             tweet() {
                 const width = 575
@@ -283,7 +278,6 @@
             },
             closeMenu() {
                 this.isMenuActive = false
-                this.toggleHtmlClip()
             },
             toggleHtmlClip() {
                 document
