@@ -82,7 +82,6 @@
              * emit 'input' event and validate
              */
             onFileChange(event) {
-                alert('event')
                 if (!this.disabled && !this.loading) {
                     if (this.dragDrop) {
                         this.updateDragDropFocus(false)
