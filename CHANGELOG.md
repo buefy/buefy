@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.6.2
+
+### New features
+
+* Add ``mobile-native`` prop to datepicker and timepicker
+* Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
+
 ## 0.6.1
 
 * #409 Fix notification delete button

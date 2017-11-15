@@ -230,6 +230,12 @@
                         return new Date(Date.parse(date))
                     }
                 }
+            },
+            mobileNative: {
+                type: Boolean,
+                default: () => {
+                    return config.defaultDatepickerMobileNative
+                }
             }
         },
         data() {
@@ -280,7 +286,7 @@
             },
 
             isMobile() {
-                return isMobile.any()
+                return this.mobileNative && isMobile.any()
             }
         },
         watch: {

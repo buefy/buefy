@@ -93,6 +93,13 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>mobile-native</code>',
+                description: 'Enable native timepicker on mobile',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

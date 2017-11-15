@@ -107,6 +107,13 @@ export default [
                 default: '<code>0</code>'
             },
             {
+                name: '<code>mobile-native</code>',
+                description: 'Enable native datepicker on mobile',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

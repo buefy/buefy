@@ -15,7 +15,9 @@ let config = {
     defaultFirstDayOfWeek: null,
     defaultTimeFormatter: null,
     defaultTimeParser: null,
-    defaultModalScroll: null
+    defaultModalScroll: null,
+    defaultDatepickerMobileNative: true,
+    defaultTimepickerMobileNative: true
 }
 
 export default config

@@ -126,6 +126,20 @@ export default [
                 type: 'String',
                 values: '<code>clip</code>, <code>keep</code>',
                 default: '<code>clip</code>'
+            },
+            {
+                name: '<code>defaultDatepickerMobileNative</code>',
+                description: 'Default native datepicker on mobile',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultTimepickerMobileNative</code>',
+                description: 'Default native timepicker on mobile',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
             }
         ]
     }

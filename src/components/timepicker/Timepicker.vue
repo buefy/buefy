@@ -215,6 +215,12 @@
                         return timeParser(date, vm)
                     }
                 }
+            },
+            mobileNative: {
+                type: Boolean,
+                default: () => {
+                    return config.defaultTimepickerMobileNative
+                }
             }
         },
         data() {
@@ -272,7 +278,7 @@
             },
 
             isMobile() {
-                return isMobile.any()
+                return this.mobileNative && isMobile.any()
             },
 
             isHourFormat24() {
