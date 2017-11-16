@@ -31,6 +31,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>events</code>',
+                description: 'Events to be binded to the injected component',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>content</code>',
                 description: 'HTML content',
                 type: 'String',

@@ -5,12 +5,17 @@
             <div class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
                 :style="{ maxWidth: newWidth }">
-                <component v-if="component"
+                <component
+                    v-if="component"
                     v-bind="props"
+                    v-on="events"
                     :is="component"
                     @close="close">
                 </component>
-                <div v-else-if="content" v-html="content"></div>
+                <div
+                    v-else-if="content"
+                    v-html="content">
+                </div>
                 <slot v-else></slot>
             </div>
             <button
@@ -34,6 +39,7 @@
             content: String,
             programmatic: Boolean,
             props: Object,
+            events: Object,
             width: {
                 type: [String, Number],
                 default: 960
