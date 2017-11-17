@@ -99,9 +99,9 @@ $tooltip-multiline-sizes: (
     &:after {
         content: attr(data-label);
         width: auto;
-        padding: 0.35em 0.75em;
+        padding: 0.35rem 0.75rem;
         border-radius: $radius-large;
-        font-size: 0.85em;
+        font-size: 0.85rem;
         font-weight: $weight-normal;
         box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
         z-index: 888;
