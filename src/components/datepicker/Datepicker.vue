@@ -2,6 +2,7 @@
     <div class="datepicker control" :class="[size, {'is-expanded': expanded}]">
         <b-dropdown v-if="!isMobile || inline"
             ref="dropdown"
+            :position="position"
             :disabled="disabled"
             :inline="inline">
             <b-input v-if="!inline"
@@ -236,7 +237,8 @@
                 default: () => {
                     return config.defaultDatepickerMobileNative
                 }
-            }
+            },
+            position: String
         },
         data() {
             const focusedDate = this.value || this.focusedDate || new Date()

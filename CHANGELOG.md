@@ -7,6 +7,7 @@
 * Add ``mobile-native`` prop to datepicker and timepicker
 * Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
 * Add ``events`` prop to modal (to bind events programmatically)
+* Add ``position`` prop to datepicker and timepicker
 
 ## 0.6.1
 

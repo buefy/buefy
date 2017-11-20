@@ -114,6 +114,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>position</code>',
+                description: 'Optional, position of the datepicker relative to the input',
+                type: 'String',
+                values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-left</code>',
+                default: 'Bottom right'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

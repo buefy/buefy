@@ -20,8 +20,8 @@ export default [
                 name: '<code>position</code>',
                 description: 'Optional, position of the dropdown relative to the trigger',
                 type: 'String',
-                values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-left</code>, <code>is-bottom-right</code>',
-                default: '<code>is-bottom-right</code>'
+                values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-left</code>',
+                default: 'Bottom right'
             },
             {
                 name: '<code>disabled</code>',

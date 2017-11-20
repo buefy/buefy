@@ -2,6 +2,7 @@
     <div class="timepicker control" :class="[size, {'is-expanded': expanded}]">
         <b-dropdown v-if="!isMobile || inline"
             ref="dropdown"
+            :position="position"
             :disabled="disabled"
             :inline="inline">
             <b-input v-if="!inline"
@@ -221,7 +222,8 @@
                 default: () => {
                     return config.defaultTimepickerMobileNative
                 }
-            }
+            },
+            position: String
         },
         data() {
             return {
