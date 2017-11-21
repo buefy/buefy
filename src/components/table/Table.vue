@@ -311,6 +311,14 @@
             */
             openedDetailed(expandedRows) {
                 this.visibleDetailRows = expandedRows
+            },
+
+            /**
+             * When prop currentPage updated
+             * react to it
+             */
+            currentPage(newVal) {
+                this.newCurrentPage = newVal
             }
         },
         computed: {
