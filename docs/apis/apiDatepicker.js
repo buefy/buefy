@@ -86,6 +86,13 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>unselectable-dates</code>',
+                description: 'Array of unselectable dates',
+                type: 'Array',
+                values: '—',
+                default: '-'
+            },
+            {
                 name: '<code>month-names</code>',
                 description: 'Names of months to display in table header',
                 type: 'Array',
