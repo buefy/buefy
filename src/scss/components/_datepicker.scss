@@ -61,6 +61,51 @@
                     }
                 }
             }
+            &.has-events {
+                .datepicker-cell {
+                    padding: 0.3rem 0.75rem 0.75rem;
+                    &.has-event {
+                        position: relative;
+                        .events {
+                            bottom: .425rem;
+                            display: flex;
+                            justify-content: center;
+                            left: 0;
+                            padding: 0 .35rem;
+                            position: absolute;
+                            width: 100%;
+                            .event {
+                                @each $name, $pair in $colors {
+                                    $color: nth($pair, 1);
+                                    &.is-#{$name} {
+                                        background-color: $color;
+                                    }
+                                }
+                            }
+                        }
+                        &.dots .event {
+                            border-radius: 50%;
+                            height: .35em;
+                            margin: 0 .1em;
+                            width: .35em;
+                        }
+                        &.bars .event {
+                            height: .25em;
+                            width: 100%;
+                        }
+                    }
+                    &.is-selected {
+                        overflow: hidden;
+                        .events .event {
+                            // Currently datepicker only uses primary coloring
+                            // Ensure indicator is visible when selected
+                            &.is-primary {
+                                background-color: lighten($primary,15);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.is-small {

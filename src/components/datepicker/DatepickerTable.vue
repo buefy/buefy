@@ -7,7 +7,7 @@
                 {{ day }}
             </div>
         </header>
-        <div class="datepicker-body">
+        <div class="datepicker-body" :class="{'has-events':hasEvents}">
             <b-datepicker-table-row
                 v-for="(week, index) in weeksInThisMonth(focused.month, focused.year)"
                 :key="index"
@@ -18,6 +18,8 @@
                 :max-date="maxDate"
                 :disabled="disabled"
                 :unselectable-dates="unselectableDates"
+                :events="eventsInThisWeek(week, index)"
+                :indicators="indicators"
                 @select="updateSelectedDate">
             </b-datepicker-table-row>
         </div>
@@ -37,6 +39,8 @@
             dayNames: Array,
             monthNames: Array,
             firstDayOfWeek: Number,
+            events: Array,
+            indicators: String,
             minDate: Date,
             maxDate: Date,
             focused: Object,
@@ -53,6 +57,38 @@
                     index++
                 }
                 return visibleDayNames
+            },
+
+            hasEvents() {
+                return this.events && this.events.length
+            },
+
+            /*
+            * Return array of all events in the specified month
+            */
+            eventsInThisMonth() {
+                if (!this.events) return []
+
+                const monthEvents = []
+
+                for (let i = 0; i < this.events.length; i++) {
+                    let event = this.events[i]
+
+                    if (!event.hasOwnProperty('date')) {
+                        event = { date: event }
+                    }
+                    if (!event.hasOwnProperty('type')) {
+                        event.type = 'is-primary'
+                    }
+                    if (Object.prototype.toString.call(event.date) !== '[object Date]') {
+                        event.date = new Date(event.date)
+                    }
+                    if (event.date.getMonth() === this.focused.month && event.date.getUTCFullYear() === this.focused.year) {
+                        monthEvents.push(event)
+                    }
+                }
+
+                return monthEvents
             }
         },
         methods: {
@@ -121,6 +157,25 @@
                 }
 
                 return weeksInThisMonth
+            },
+
+            eventsInThisWeek(week, index) {
+                if (!this.eventsInThisMonth.length) return []
+
+                const weekEvents = []
+
+                let weeksInThisMonth = []
+                weeksInThisMonth = this.weeksInThisMonth(this.focused.month, this.focused.year)
+
+                for (let d = 0; d < weeksInThisMonth[index].length; d++) {
+                    for (let e = 0; e < this.eventsInThisMonth.length; e++) {
+                        if (this.eventsInThisMonth[e].date.getTime() === weeksInThisMonth[index][d].getTime()) {
+                            weekEvents.push(this.eventsInThisMonth[e])
+                        }
+                    }
+                }
+
+                return weekEvents
             }
         }
     }

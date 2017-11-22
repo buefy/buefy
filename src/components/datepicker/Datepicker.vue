@@ -88,6 +88,8 @@
                     :focused="focusedDateData"
                     :disabled="disabled"
                     :unselectable-dates="unselectableDates"
+                    :events="events"
+                    :indicators="indicators"
                     @close="$refs.dropdown.isActive = false">
                 </b-datepicker-table>
 
@@ -238,7 +240,12 @@
                     return config.defaultDatepickerMobileNative
                 }
             },
-            position: String
+            position: String,
+            events: Array,
+            indicators: {
+                type: String,
+                default: 'dots'
+            }
         },
         data() {
             const focusedDate = this.value || this.focusedDate || new Date()

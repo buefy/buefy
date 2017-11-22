@@ -37,6 +37,20 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>events</code>',
+                description: 'Dates to display indicators',
+                type: 'Array',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>indicators</code>',
+                description: 'Shape to use when showing event indicators',
+                type: 'String',
+                values: '<code>dots</code>, <code>bars</code>',
+                default: '<code>dots</code>'
+            },
+            {
                 name: '<code>focused-date</code>',
                 description: 'Date that should be initially focused upon',
                 type: 'Date',
