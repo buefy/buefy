@@ -18,13 +18,13 @@ Buefy is a lightweight library of responsive UI components for [Vue.js](https://
 * Follows Bulma design and some of the [Material Design UX](https://material.io/)
 * Focus on usability and performance without *over-animations*
 
-## Documentation and Demo
+## Documentation
 
 The documentation is in the docs directory, it serves as the demo as well.
 
-Browse the [online documentation here](https://buefy.github.io).
+Browse [online documentation here](https://buefy.github.io).
 
-## Quick Start
+## Quick start
 
 You need [Vue.js](https://vuejs.org/) **version 2.5+**.
 
@@ -73,6 +73,10 @@ If you want to customize the icons or the theme, refer to the [customization sec
 Vue.use(Buefy.default)
 ```
 
+## Browser support
+
+Recent versions of Firefox, Chrome, Edge, Opera and Safari. IE10+ is only partially supported.
+
 ## Versioning
 
 While it's still in beta, version will follow **v0.Y.Z**, where:
@@ -80,33 +84,16 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 * **Y**: Major (breaking changes)
 * **Z**: Minor or patch
 
-As soon as it's stable and v1 is ready, I'll switch to vX.Y.Z (SemVer).
+## Stay in touch
 
-## Browser Support
+* [Twitter](https://twitter.com/rafaelpimpa)
 
-- [x] Firefox 38+
-- [x] Chrome 38+
-- [x] Edge 13+
-- [x] Opera 44+
-- [x] Safari 7+
-- [ ] Internet Explorer 10+ is only partially supported
+## Collaborators
 
-Might work in other versions, but it's not tested.
+* Walter Tommasi — [@jtommy](https://github.com/jtommy)
 
-## Credits and Thanks
+## License
 
-* [Vue.js](https://vuejs.org/) for the great reactive js framework
-* [Bulma](http://bulma.io/) for the best flexbox css framework out there
-* The original idea from [vue-admin](https://admin.vuebulma.com/)
-* Some code structure and ideas from:
-    * [vue-blu](https://chenz24.github.io/vue-blu/)
-    * [vue-material](https://vuematerial.github.io/)
-    * [element-ui](http://element.eleme.io/)
+Code released under [MIT]((https://github.com/rafaelpimpa/buefy/blob/master/LICENSE)) license.
 
-## Copyright and License
-
-Copyright (c) 2017 Rafael Beraldo. Code released under the [MIT]((https://github.com/rafaelpimpa/buefy/blob/master/LICENSE)) license.
-
----
-
-> Twitter [@rafaelpimpa](https://twitter.com/rafaelpimpa)
+Copyright (c) 2017, Rafael Beraldo.
