@@ -27,4 +27,25 @@
             min-width: 320px;
         }
     }
+    &.is-small {
+        .modal-card,
+        .input,
+        .button {
+            @include control-small;
+        }
+    }
+    &.is-medium {
+        .modal-card,
+        .input,
+        .button {
+            @include control-medium;
+        }
+    }
+    &.is-large {
+        .modal-card,
+        .input,
+        .button {
+            @include control-large;
+        }
+    }
 }

@@ -47,6 +47,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>size</code>',
+                description: 'Dialog\'s size, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
                 name: '<code>animation</code>',
                 description: 'Custom animation (transition name)',
                 type: 'String',

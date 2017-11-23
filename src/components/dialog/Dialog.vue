@@ -1,6 +1,9 @@
 <template>
     <transition :name="animation">
-        <div class="dialog modal is-active" v-if="isActive">
+        <div
+            v-if="isActive"
+            class="dialog modal is-active"
+            :class="size">
             <div class="modal-background" @click="cancel('outside')"></div>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
@@ -82,6 +85,7 @@
                 type: String,
                 default: 'is-primary'
             },
+            size: String,
             confirmText: {
                 type: String,
                 default: () => {
