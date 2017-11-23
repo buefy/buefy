@@ -38,6 +38,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>transition</code>',
+                description: 'Transition for dropdown menu.',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
                 name: '<code>mobile-modal</code>',
                 description: 'Dropdown content (items) are shown into a modal on mobile',
                 type: 'Boolean',
