@@ -6,7 +6,7 @@
             'is-inline': inline,
             'is-active': isActive || inline,
             'is-mobile-modal': isMobileModal
-        }]"> 
+        }]">
         <div v-if="!inline"
             role="button"
             ref="trigger"
@@ -15,13 +15,13 @@
             <slot name="trigger"></slot>
         </div>
 
-        <transition name="fade">
+        <transition :name="transition">
             <div v-if="isMobileModal"
                 v-show="isActive"
                 class="background">
             </div>
         </transition>
-        <transition name="fade">
+        <transition :name="transition">
             <div v-show="isActive || hoverable || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu">
@@ -53,6 +53,10 @@
                         'is-bottom-left'
                     ].indexOf(value) > -1
                 }
+            },
+            transition: {
+                type: String,
+                default: 'fade'
             },
             mobileModal: {
                 type: Boolean,

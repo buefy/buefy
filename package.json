@@ -111,6 +111,7 @@
     "sw-precache-webpack-plugin": "^0.9.1",
     "url-loader": "^0.5.8",
     "vue-analytics": "^4.1.3",
+    "vue-cli": "2.8.0",
     "vue-loader": "^12.1.0",
     "vue-progressbar": "^0.7.2",
     "vue-router": "^2.3.1",
