@@ -157,10 +157,15 @@
                 if (this.getValue(this.selected) !== value) this.setSelected(null, false)
 
                 // Keep first option always pre-selected
-                if (this.keepFirst && this.visibleData.length) {
+                if (this.keepFirst) {
                     this.$nextTick(() => {
-                        if (this.hovered !== this.visibleData[0]) {
-                            this.setHovered(this.visibleData[0])
+                        if (this.visibleData.length) {
+                            // If has visible data, keep updating the hovered
+                            if (this.hovered !== this.visibleData[0]) {
+                                this.setHovered(this.visibleData[0])
+                            }
+                        } else {
+                            this.setHovered(null)
                         }
                     })
                 }

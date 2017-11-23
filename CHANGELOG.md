@@ -8,6 +8,8 @@
 * Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
 * Add ``events`` prop to modal (to bind events programmatically)
 * Add ``position`` prop to datepicker and timepicker
+* Add ``size`` prop to dialog
+* Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
 
 ## 0.6.1
 
