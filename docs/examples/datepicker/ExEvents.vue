@@ -24,9 +24,9 @@
             return {
                 date: new Date(2017, 10, 1),
                 events: [
-                    '11/02/2017',
+                    new Date(2017, 10, 2),
                     new Date(2017, 10, 4),
-                    '11/06/2017',
+                    new Date(2017, 10, 6),
                     {
                         date: new Date(2017, 10, 8),
                         type: 'is-danger'

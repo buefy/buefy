@@ -80,9 +80,6 @@
                     if (!event.hasOwnProperty('type')) {
                         event.type = 'is-primary'
                     }
-                    if (Object.prototype.toString.call(event.date) !== '[object Date]') {
-                        event.date = new Date(event.date)
-                    }
                     if (event.date.getMonth() === this.focused.month && event.date.getUTCFullYear() === this.focused.year) {
                         monthEvents.push(event)
                     }
