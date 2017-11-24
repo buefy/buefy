@@ -69,6 +69,20 @@
         </div>
 
         <hr>
+
+        <h2 class="title">Events</h2>
+        <p class="content">Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
+        <div class="columns">
+            <div class="column">
+                <ex-events></ex-events>
+            </div>
+            <div class="column">
+                <CodeView :code="ExEventsCode" />
+            </div>
+        </div>
+
+        <hr>
+
         <h2 class="title">API</h2>
         <ApiView :data="api" />
     </div>
@@ -92,13 +106,17 @@
     import ExInline from '@/examples/datepicker/ExInline'
     import ExInlineCode from '!!raw-loader!@/examples/datepicker/ExInline'
 
+    import ExEvents from '@/examples/datepicker/ExEvents'
+    import ExEventsCode from '!!raw-loader!@/examples/datepicker/ExEvents'
+
     export default {
         components: {
             ExSimple,
             ExNonReadonly,
             ExRange,
             ExFooter,
-            ExInline
+            ExInline,
+            ExEvents
         },
         data() {
             return {
@@ -107,7 +125,8 @@
                 ExNonReadonlyCode,
                 ExRangeCode,
                 ExFooterCode,
-                ExInlineCode
+                ExInlineCode,
+                ExEventsCode
             }
         }
     }
