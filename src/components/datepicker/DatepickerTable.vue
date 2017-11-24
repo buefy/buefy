@@ -80,7 +80,7 @@
                     if (!event.hasOwnProperty('type')) {
                         event.type = 'is-primary'
                     }
-                    if (event.date.getMonth() === this.focused.month && event.date.getUTCFullYear() === this.focused.year) {
+                    if (event.date.getMonth() === this.focused.month && event.date.getFullYear() === this.focused.year) {
                         monthEvents.push(event)
                     }
                 }
