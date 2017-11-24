@@ -14,6 +14,8 @@
 </template>
 
 <script>
+    const thisMonth = new Date().getMonth()
+
     export default {
         computed: {
             indicators() {
@@ -22,43 +24,46 @@
         },
         data() {
             return {
-                date: new Date(2017, 10, 1),
+                date: new Date(2017, thisMonth, 1),
                 events: [
-                    new Date(2017, 10, 2),
-                    new Date(2017, 10, 4),
-                    new Date(2017, 10, 6),
+                    new Date(2017, thisMonth, 2),
+                    new Date(2017, thisMonth, 6),
                     {
-                        date: new Date(2017, 10, 8),
+                        date: new Date(2017, thisMonth, 6),
+                        type: 'is-info'
+                    },
+                    {
+                        date: new Date(2017, thisMonth, 8),
                         type: 'is-danger'
                     },
                     {
-                        date: new Date(2017, 10, 10),
+                        date: new Date(2017, thisMonth, 10),
                         type: 'is-success'
                     },
                     {
-                        date: new Date(2017, 10, 10),
+                        date: new Date(2017, thisMonth, 10),
                         type: 'is-link'
                     },
-                    new Date(2017, 10, 12),
+                    new Date(2017, thisMonth, 12),
                     {
-                        date: new Date(2017, 10, 12),
+                        date: new Date(2017, thisMonth, 12),
                         type: 'is-warning'
                     },
                     {
-                        date: new Date(2017, 10, 16),
+                        date: new Date(2017, thisMonth, 16),
                         type: 'is-danger'
                     },
-                    new Date(2017, 10, 20),
+                    new Date(2017, thisMonth, 20),
                     {
-                        date: new Date(2017, 10, 29),
+                        date: new Date(2017, thisMonth, 29),
                         type: 'is-success'
                     },
                     {
-                        date: new Date(2017, 10, 29),
+                        date: new Date(2017, thisMonth, 29),
                         type: 'is-warning'
                     },
                     {
-                        date: new Date(2017, 10, 29),
+                        date: new Date(2017, thisMonth, 29),
                         type: 'is-info'
                     }
                 ],
