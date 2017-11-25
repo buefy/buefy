@@ -59,6 +59,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>horizontal</code>',
+                description: 'Group label and control on the same line for horizontal forms',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }
