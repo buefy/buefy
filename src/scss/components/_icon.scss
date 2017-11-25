@@ -1,45 +1,13 @@
 .icon {
     @include unselectable;
     cursor: inherit;
-    vertical-align: top; // Temporary fix for Bulma v0.4.1
-    .mdi {
-        @extend .fa;
-        font-family: "Material Icons";
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        display: inline-block;
-        // Suport for IE/Edge
-        font-feature-settings: 'liga';
-    }
-    // Sizes
-    &.is-small {
-        height: 1rem;
-        width: 1rem;
-        .mdi {
-            font-size: 16px;
-        }
-    }
-    &.is-medium {
-        height: 2rem;
-        width: 2rem;
-        .mdi {
-            font-size: 32px;
-        }
-    }
-    &.is-large {
-        height: 3rem;
-        width: 3rem;
-        .mdi {
-            font-size: 48px;
-        }
-    }
-    // Colors overrides
-    @each $name, $pair in $colors {
-        $color: nth($pair, 1);
-        $color-invert: nth($pair, 2);
-        &.is-#{$name} {
-            color: $color;
-        }
+    svg {
+        background-color: transparent;
+        fill: currentColor;
+        stroke-width: 0;
+        stroke: currentColor;
+        pointer-events: none;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }

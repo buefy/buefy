@@ -1,6 +1,6 @@
 <template>
     <transition :name="transitionName">
-        <div v-show="isActive" class="tab-item" :class="{ 'is-animated': transitionName !== null }">
+        <div v-show="isActive" class="tab-item">
             <slot></slot>
         </div>
     </transition>
@@ -12,7 +12,8 @@
         props: {
             label: String,
             icon: String,
-            iconPack: String
+            iconPack: String,
+            disabled: Boolean
         },
         data() {
             return {
@@ -50,12 +51,18 @@
             }
         },
         created() {
-            if (!this.$parent.isTabsComponent) {
+            if (!this.$parent.$data._isTabs) {
                 this.$destroy()
                 throw new Error('You should wrap bTabItem on a bTabs')
             }
 
             this.$parent.tabItems.push(this)
+        },
+        beforeDestroy() {
+            const index = this.$parent.tabItems.indexOf(this)
+            if (index >= 0) {
+                this.$parent.tabItems.splice(index, 1)
+            }
         }
     }
 </script>

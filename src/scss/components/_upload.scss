@@ -1,0 +1,41 @@
+.upload {
+    input[type=file] {
+        display: inline-block;
+        position: absolute;
+        opacity: 0;
+    }
+    .upload-draggable {
+        display: inline-block;
+        cursor: pointer;
+        padding: 0.25em;
+        border: 1px dashed $grey-light;
+        border-radius: $radius-large;
+        &.is-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        &.is-loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.5;
+            &:after {
+                @include loader;
+                top: 0;
+                left: calc(50% - 1.5em);
+                width: 3em;
+                height: 3em;
+                border-width: 0.25em;
+            }
+        }
+        &:hover,
+        &.is-hovered {
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    border-color: $color;
+                    background: rgba($color, 0.05);
+                }
+            }
+        }
+    }
+}

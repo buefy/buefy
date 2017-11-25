@@ -1,10 +1,7 @@
 <template>
     <section class="home">
+        <TheHeader light />
         <div class="hero is-fullheight is-primary">
-            <div class="hero-head">
-                <app-header home></app-header>
-            </div>
-
             <div class="hero-body">
                 <div class="container has-text-centered">
                     <div class="logo-rounded home-hero">
@@ -21,7 +18,7 @@
                             src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=star&count=true&size=large"
                             frameborder="0"
                             scrolling="0"
-                            width="140px"
+                            width="160px"
                             height="30px">
                         </iframe>
 
@@ -35,9 +32,15 @@
                     </div>
 
                     <div class="buttons">
-                        <router-link class="button is-medium is-primary is-inverted is-outlined home-hero" to="/documentation/quick-start">
-                            Get Started
+                        <router-link class="button is-medium home-hero"
+                            to="/documentation/start">
+                            Get started
                         </router-link>
+                        <a class="button is-medium is-primary home-hero"
+                            href="https://github.com/rafaelpimpa/buefy/releases"
+                            target="_blank">
+                            Changelog
+                        </a>
                     </div>
                     <small class="home-hero">v{{ version }}</small>
                 </div>
@@ -54,12 +57,12 @@
                             <p class="subtitle">Open source on <strong><a href="https://github.com/rafaelpimpa/buefy" target="_blank">GitHub</a></strong></p>
                         </div>
                         <div class="column has-text-centered features">
-                            <b-icon icon="devices" size="is-large"></b-icon>
+                            <b-icon icon="cellphone-link" size="is-large"></b-icon>
                             <p class="title is-4"><strong>Responsive</strong></p>
                             <p class="subtitle"><b>Every</b> component is responsive</p>
                         </div>
                         <div class="column has-text-centered features">
-                            <b-icon icon="new_releases" size="is-large"></b-icon>
+                            <b-icon icon="alert-decagram" size="is-large"></b-icon>
                             <p class="title is-4"><strong>Modern</strong></p>
                             <p class="subtitle">
                                 Built with <strong><a href="https://vuejs.org/" target="_blank">Vue.js</a></strong>
@@ -76,21 +79,21 @@
             </div>
         </section>
 
-        <app-footer></app-footer>
+        <TheFooter />
     </section>
 </template>
 
 <script>
     import ScrollReveal from 'scrollreveal'
-    import AppHeader from '../template/Header'
-    import AppFooter from '../template/Footer'
+    import TheHeader from '../components/TheHeader'
+    import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
 
     export default {
         name: 'app',
         components: {
-            AppHeader,
-            AppFooter
+            TheHeader,
+            TheFooter
         },
         data() {
             return {

@@ -1,36 +1,30 @@
 .autocomplete {
-    .box {
-        position: absolute;
-        top: 2.5em;
-        padding: 0.5em 0;
-        z-index: 10;
-        white-space: nowrap;
-        overflow-y: auto;
-        width: 100%;
-        transition: opacity $speed-slow $easing;
+    position: relative;
+    .dropdown-menu {
+        display: block;
+        min-width: 100%;
         &.is-opened-top {
             top: auto;
-            bottom: 2.5em;
+            bottom: 100%;
         }
-        &.is-opened-left {
-            left: auto;
-            right: 0;
+    }
+    .dropdown-item {
+        &.is-hovered {
+            background: $dropdown-item-hover-background-color;
+            color: $dropdown-item-hover-color;
         }
-        .option {
-            @include unselectable;
-            padding: 0.25rem 0.75rem;
-            cursor: pointer;
-            &:not(.is-disabled):hover {
-                background: $background;
-            }
-            &.is-selected {
-                background: $primary !important;
-                color: $primary-invert;
-            }
-            &.is-disabled {
-                opacity: .5;
-                cursor: not-allowed;
-            }
+        &.is-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
+    }
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium{
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <span class="icon" :class="[type, size]">
-        <i :class="[newPack, newPack === 'fa' ? `fa-${newIcon}` : null ]">{{ newPack === 'mdi' ? newIcon : null }}</i>
+    <span class="icon" :class="[newType, size]">
+        <i :class="[newPack, newIcon, newCustomSize, customClass]"></i>
     </span>
 </template>
 
@@ -13,8 +13,10 @@
             type: String,
             pack: String,
             icon: String,
-            both: Boolean, // This is used internally to show both MDI and FA icon
-            size: String
+            size: String,
+            customSize: String,
+            customClass: String,
+            both: Boolean // This is used internally to show both MDI and FA icon
         },
         data() {
             return {
@@ -28,10 +30,41 @@
              * internal icons are always MDI.
              */
             newIcon() {
-                if (this.both) {
-                    return this.newPack === 'mdi' ? this.icon : this.equivalentIconOf(this.icon)
-                } else {
-                    return this.icon
+                if (!this.both) return `${this.newPack}-${this.icon}`
+
+                return this.newPack === 'mdi'
+                    ? `${this.newPack}-${this.icon}`
+                    : `${this.newPack}-${this.getEquivalentIconOf(this.icon)}`
+            },
+            newType() {
+                if (!this.type) return
+
+                const splitType = this.type.split('-')
+                if (!splitType.length) return
+
+                return `has-text-${splitType[1]}`
+            },
+            newCustomSize() {
+                return this.customSize || this.customSizeByPack
+            },
+            customSizeByPack() {
+                const defaultSize = this.newPack === 'mdi'
+                    ? 'mdi-24px'
+                    : 'fa-lg'
+
+                const mediumSize = this.newPack === 'mdi'
+                    ? 'mdi-36px'
+                    : 'fa-2x'
+
+                const largeSize = this.newPack === 'mdi'
+                    ? 'mdi-48px'
+                    : 'fa-3x'
+
+                switch (this.size) {
+                    case 'is-small': return
+                    case 'is-medium': return mediumSize
+                    case 'is-large': return largeSize
+                    default: return defaultSize
                 }
             }
         },
@@ -39,20 +72,21 @@
             /**
              * Equivalent FA icon name of the MDI.
              */
-            equivalentIconOf(value) {
+            getEquivalentIconOf(value) {
                 switch (value) {
-                    case 'done': return 'check'
-                    case 'info': return 'info-circle'
-                    case 'check_circle': return 'check-circle'
-                    case 'warning': return 'exclamation-triangle'
-                    case 'error': return 'exclamation-circle'
-                    case 'arrow_upward': return 'arrow-up'
-                    case 'chevron_right': return 'angle-right'
-                    case 'chevron_left': return 'angle-left'
-                    case 'keyboard_arrow_down': return 'angle-down'
-                    case 'visibility': return 'eye'
-                    case 'visibility_off': return 'eye-slash'
-                    case 'arrow_drop_down': return 'caret-down'
+                    case 'check': return 'check'
+                    case 'information': return 'info-circle'
+                    case 'check-circle': return 'check-circle'
+                    case 'alert': return 'exclamation-triangle'
+                    case 'alert-circle': return 'exclamation-circle'
+                    case 'arrow-up': return 'arrow-up'
+                    case 'chevron-right': return 'angle-right'
+                    case 'chevron-left': return 'angle-left'
+                    case 'chevron-down': return 'angle-down'
+                    case 'eye': return 'eye'
+                    case 'eye-off': return 'eye-slash'
+                    case 'menu-down': return 'caret-down'
+                    case 'menu-up': return 'caret-up'
                     default: return null
                 }
             }

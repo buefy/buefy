@@ -1,0 +1,9 @@
+.template-horizontal {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    @include touch {
+        display: block;
+    }
+}

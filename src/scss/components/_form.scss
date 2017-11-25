@@ -6,12 +6,38 @@
     &.is-grouped {
         .field {
             flex-shrink: 0;
-            & + .field {
+            &+.field {
                 margin-left: 0.75rem;
             }
             &.is-expanded {
                 flex-grow: 1;
                 flex-shrink: 1;
+            }
+        }
+    }
+    // Nested control addons (for Autocomplete and Datepicker)
+    &.has-addons .control {
+        &:first-child .control {
+            .button,
+            .input,
+            .select select {
+                border-bottom-left-radius: $input-radius;
+                border-top-left-radius: $input-radius;
+            }
+        }
+        &:last-child .control {
+            .button,
+            .input,
+            .select select {
+                border-bottom-right-radius: $input-radius;
+                border-top-right-radius: $input-radius;
+            }
+        }
+        .control {
+            .button,
+            .input,
+            .select select {
+                border-radius: 0
             }
         }
     }
@@ -22,29 +48,10 @@
         float: right;
         margin-left: 0.5em;
     }
-    &.has-icon {
-        .icon {
-            &.is-right {
-                right: 0;
-                left: auto;
-            }
-            &.is-clickable {
-                pointer-events: auto;
-                cursor: pointer;
-            }
-        }
-        .icon:not(.is-clickable),
-        .input:focus + .icon {
-            @each $name, $pair in $colors {
-                $color: nth($pair, 1);
-                $color-invert: nth($pair, 2);
-                &.is-#{$name} {
-                    color: $color;
-                }
-            }
-        }
-        &.has-both-icon .input {
-            padding-right: 2.25em;
+    .icon {
+        &.is-clickable {
+            pointer-events: auto;
+            cursor: pointer;
         }
     }
 }

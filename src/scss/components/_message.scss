@@ -1,0 +1,13 @@
+.message,
+.notification {
+    .media {
+        padding-top: 0;
+        border: 0;
+    }
+}
+
+// Fix for Bulma 0.6.1
+.notification > .delete {
+    right: 0.5rem !important;
+    top: 0.5rem !important;
+}

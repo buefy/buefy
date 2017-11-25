@@ -1,11 +1,25 @@
-const config = {
-    defaultContentElement: null,
+let config = {
+    defaultContainerElement: null,
     defaultIconPack: 'mdi',
+    defaultDialogConfirmText: null,
+    defaultDialogCancelText: null,
+    defaultSnackbarDuration: 3500,
+    defaultToastDuration: 2000,
     defaultTooltipType: 'is-primary',
     defaultTooltipAnimated: false,
-    defaultInputAutocomplete: 'on'
+    defaultInputAutocomplete: 'on',
+    defaultDateFormatter: null,
+    defaultDateParser: null,
+    defaultDayNames: null,
+    defaultMonthNames: null,
+    defaultFirstDayOfWeek: null,
+    defaultTimeFormatter: null,
+    defaultTimeParser: null,
+    defaultModalScroll: null,
+    defaultDatepickerMobileNative: true,
+    defaultTimepickerMobileNative: true
 }
 
 export default config
 
-export const setOptions = options => { this.config = options }
+export const setOptions = (options) => { config = options }

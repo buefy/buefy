@@ -1,54 +1,57 @@
 <template>
-    <p class="control">
-        <button
-            type="button"
-            class="radio button"
+    <div class="control">
+        <label class="b-radio radio button"
+            ref="label"
+            :class="[newValue === nativeValue ? type : null, size]"
             :disabled="disabled"
-            :class="[isChecked ? type : null, size]"
-            @click="changed">
+            :tabindex="disabled ? false : 0"
+            @keydown.prevent.enter.space="$refs.label.click()">
             <slot></slot>
-            <input
+            <input v-model="newValue"
                 type="radio"
                 :disabled="disabled"
-                :checked="isChecked"
                 :name="name"
-                :value="value">
-        </button>
-    </p>
+                :value="nativeValue">
+        </label>
+    </div>
 </template>
 
 <script>
     export default {
         name: 'bRadioButton',
         props: {
-            value: [String, Number, Boolean],
+            value: {},
+            nativeValue: {},
             type: {
                 type: String,
                 default: 'is-primary'
             },
             disabled: Boolean,
-            name: String
+            name: String,
+            size: String
         },
         data() {
             return {
-                size: null,
-                isChecked: false,
-                isRadioButtonComponent: true // Used internally by Radio Group
+                newValue: this.value
             }
         },
-        methods: {
+        watch: {
             /**
-             * Input change listener.
-             * Call updateValue from parent.
+             * When v-model change, set internal value.
              */
-            changed(event) {
-                this.$parent.updateValue(this.value, event)
-            }
-        },
-        created() {
-            if (!this.$parent.isRadioGroupComponent) {
-                this.$destroy()
-                throw new Error('You should wrap bRadioButton on a bRadioGroup')
+            value(value) {
+                this.newValue = value
+            },
+
+            /**
+             * Emit input event to update the user v-model.
+             */
+            newValue(value) {
+                // only trigger input event
+                // when current bRadioButton is clicked.
+                if (value === this.nativeValue) {
+                    this.$emit('input', value)
+                }
             }
         }
     }

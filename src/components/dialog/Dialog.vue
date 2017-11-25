@@ -1,38 +1,60 @@
 <template>
-    <transition name="zoom-out">
-        <div class="dialog modal is-active" v-if="isActive">
-            <div class="modal-background" @click="cancel"></div>
+    <transition :name="animation">
+        <div
+            v-if="isActive"
+            class="dialog modal is-active"
+            :class="size">
+            <div class="modal-background" @click="cancel('outside')"></div>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
                 </header>
-                <section class="modal-card-body" :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
-                    <b-icon
-                        :icon="icon"
-                        :class="type"
-                        both
-                        size="is-large custom-icon"
-                        v-if="icon && hasIcon">
-                    </b-icon>
-                    <p v-html="message"></p>
 
-                    <b-field v-if="hasInput">
-                        <b-input
-                            v-model="prompt"
-                            ref="input"
-                            :placeholder="inputPlaceholder"
-                            required
-                            :maxlength="inputMaxlength"
-                            :name="inputName"
-                            @keyup.enter.native="confirm">
-                        </b-input>
-                    </b-field>
+                <section
+                    class="modal-card-body"
+                    :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
+                    <div class="media">
+                        <div class="media-left" v-if="hasIcon">
+                            <b-icon
+                                :icon="icon ? icon : iconByType"
+                                :pack="iconPack"
+                                :type="type"
+                                :both="!icon"
+                                size="is-large">
+                            </b-icon>
+                        </div>
+                        <div class="media-content">
+                            <p v-html="message"></p>
+
+                            <div v-if="hasInput" class="field">
+                                <div class="control">
+                                    <input v-model="prompt"
+                                        class="input"
+                                        ref="input"
+                                        required
+                                        :class="{ 'is-danger': validationMessage }"
+                                        v-bind="inputAttrs"
+                                        @keyup.enter="confirm">
+                                </div>
+                                <p class="help is-danger">{{ validationMessage }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
+
                 <footer class="modal-card-foot">
-                    <button v-if="canCancel" class="button is-light" ref="cancelButton" @click="cancel">
+                    <button
+                        v-if="showCancel"
+                        class="button is-light"
+                        ref="cancelButton"
+                        @click="cancel('button')">
                         {{ cancelText }}
                     </button>
-                    <button class="button" :class="type" ref="confirmButton"  @click="confirm">
+                    <button
+                        class="button"
+                        :class="type"
+                        ref="confirmButton"
+                        @click="confirm">
                         {{ confirmText }}
                     </button>
                 </footer>
@@ -43,69 +65,84 @@
 
 <script>
     import Icon from '../icon'
-    import Input from '../input'
+    import { Modal } from '../modal'
+    import config from '../../utils/config'
+    import { removeElement } from '../../utils/helpers'
 
     export default {
+        name: 'bDialog',
+        extends: Modal,
         components: {
-            [Icon.name]: Icon,
-            [Input.name]: Input
+            [Icon.name]: Icon
         },
         props: {
             title: String,
             message: String,
+            icon: String,
+            iconPack: String,
             hasIcon: Boolean,
             type: {
                 type: String,
                 default: 'is-primary'
             },
+            size: String,
             confirmText: {
                 type: String,
-                default: 'OK'
+                default: () => {
+                    return config.defaultDialogConfirmText
+                        ? config.defaultDialogConfirmText
+                        : 'OK'
+                }
             },
             cancelText: {
                 type: String,
-                default: 'Cancel'
-            },
-            canCancel: {
-                type: Boolean,
-                default: true
+                default: () => {
+                    return config.defaultDialogCancelText
+                        ? config.defaultDialogCancelText
+                        : 'Cancel'
+                }
             },
             hasInput: Boolean, // Used internally to know if it's prompt
-            inputPlaceholder: String,
-            inputName: String,
-            inputMaxlength: [Number, String],
-            onConfirm: {
-                type: Function,
+            inputAttrs: {
+                type: Object,
                 default: () => {}
             },
-            onCancel: {
+            onConfirm: {
                 type: Function,
                 default: () => {}
             }
         },
         data() {
+            const prompt = this.hasInput
+                ? this.inputAttrs.value || ''
+                : ''
+
             return {
+                prompt,
                 isActive: false,
-                prompt: ''
+                validationMessage: ''
             }
         },
         computed: {
             /**
              * Icon name (MDI) based on the type.
              */
-            icon() {
+            iconByType() {
                 switch (this.type) {
                     case 'is-info':
-                        return 'info'
+                        return 'information'
                     case 'is-success':
-                        return 'check_circle'
+                        return 'check-circle'
                     case 'is-warning':
-                        return 'warning'
+                        return 'alert'
                     case 'is-danger':
-                        return 'error'
+                        return 'alert-circle'
                     default:
                         return null
                 }
+            },
+            showCancel() {
+                return this.cancelOptions.indexOf('button') >= 0
             }
         },
         methods: {
@@ -115,21 +152,14 @@
              */
             confirm() {
                 if (this.$refs.input !== undefined) {
-                    this.$refs.input.html5Validation()
-                    if (!this.$refs.input.isValid) return
+                    if (!this.$refs.input.checkValidity()) {
+                        this.validationMessage = this.$refs.input.validationMessage
+                        this.$nextTick(() => this.$refs.input.select())
+                        return
+                    }
                 }
 
                 this.onConfirm(this.prompt)
-                this.close()
-            },
-
-            /**
-             * Call the onCancel prop (function) and close the Dialog.
-             */
-            cancel() {
-                if (!this.canCancel) return
-
-                this.onCancel()
                 this.close()
             },
 
@@ -138,25 +168,13 @@
              */
             close() {
                 this.isActive = false
+                this.onCancel.apply(null, arguments)
 
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()
-                    this.$el.remove()
+                    removeElement(this.$el)
                 }, 150)
-            },
-
-            /**
-             * Keypress event that is bound to the document.
-             */
-            keyPress(event) {
-                // Esc key
-                if (event.keyCode === 27) this.cancel()
-            }
-        },
-        created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
             }
         },
         beforeMount() {
@@ -168,17 +186,10 @@
 
             this.$nextTick(() => {
                 // Handle which element receives focus
-                if (this.hasInput) {
-                    this.$refs.input.$refs.input.focus()
-                } else {
-                    this.$refs.confirmButton.focus()
-                }
+                this.hasInput
+                    ? this.$refs.input.focus()
+                    : this.$refs.confirmButton.focus()
             })
-        },
-        beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
-            }
         }
     }
 </script>

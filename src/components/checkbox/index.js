@@ -1,7 +1,7 @@
 import Checkbox from './Checkbox'
-import CheckboxGroup from './CheckboxGroup'
+import CheckboxButton from './CheckboxButton'
 
 export {
     Checkbox,
-    CheckboxGroup
+    CheckboxButton
 }

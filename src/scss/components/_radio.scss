@@ -1,51 +1,69 @@
-.radio {
-    &.button {
+$radio-active-background-color: $primary !default;
+
+.b-radio {
+    &.radio {
+        outline: none;
         display: inline-flex;
-    }
-    input[type=radio] {
-        display: none;
-        + span {
-            position: relative;
-            display: inline-block;
-            padding-left: 24px;
-            text-align: left;
-            &:before,
-            &:after {
-                content: "";
-                position: absolute;
-                border-radius: 50%;
-            }
-            &:before {
-                left: 0;
-                top: 50%;
-                transform: translate(0, -50%);
-                width: 20px;
-                height: 20px;
+        align-items: center;
+        @include unselectable;
+        & + .radio {
+            margin-left: 0.5em;
+        }
+        input[type=radio] {
+            display: none;
+            + .check {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 1.25em;
+                height: 1.25em;
                 border: 2px solid $grey;
-                background: none;
-                transition: border-color $speed $easing;
+                border-radius: 50%;
+                transition: background $speed-slow $easing;
+                &:before {
+                    content: "";
+                    border-radius: 50%;
+                    width: 0.625em;
+                    height: 0.625em;
+                    background: $radio-active-background-color;
+                    transform: scale(0);
+                    transition: transform $speed-slow $easing;
+                }
             }
-            &:after {
-                left: 5px;
-                top: 5px;
-                width: 10px;
-                height: 10px;
-                background: $primary;
-                transform: scale(0);
-                transition: transform $speed $easing;
-            }
-            &:hover:before {
-                border-color: $primary;
+            &:checked + .check {
+                border-color: $radio-active-background-color;
+                &:before {
+                    transform: scale(1);
+                }
             }
         }
-        &:checked + span:before {
-            border-color: $primary;
+        .control-label {
+            padding-left: 0.5em;
         }
-        &:checked + span:after {
-            transform: scale(1);
+        &[disabled] {
+            opacity: 0.5;
         }
-    }
-    &[disabled] {
-        opacity: 0.5;
-    }
+        &:hover {
+            input[type=radio] + .check {
+                border-color: $radio-active-background-color;
+            }
+        }
+        &:focus {
+            input[type=radio] + .check {
+                box-shadow: 0 0 0.5em rgba($grey, 0.8);
+            }
+            input[type=radio]:checked + .check {
+                box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
+            }
+        }
+        &.is-small {
+            @include control-small;
+        }
+        &.is-medium{
+            @include control-medium;
+        }
+        &.is-large {
+            @include control-large;
+        }
+    }    
 }

@@ -1,34 +1,51 @@
 .dialog {
-    transition: all $speed-slow $easing;
-    .modal-card-body {
-        .custom-icon {
-            margin-left: -8px;
-            margin-right: 16px;
-        }
-        .control {
-            margin-top: 16px;
-        }
-        &.is-titleless {
-            border-top-left-radius: $radius-large;
-            border-top-right-radius: $radius-large;
-        }
-    }
     .modal-card {
-        min-width: 320px;
         max-width: 460px;
         width: auto;
-        transition: all $speed-slow $easing;
-    }
-    .modal-card-title {
-        font-size: $size-5;
-        font-weight: $weight-semibold;
-    }
-    .modal-card-foot {
-        display: flex;
-        justify-content: flex-end;
-        .button {
-            min-width: 80px;
+        .modal-card-head {
+            font-size: $size-5;
             font-weight: $weight-semibold;
+        }
+        .modal-card-body {
+            .field {
+                margin-top: 16px;
+            }
+            &.is-titleless {
+                border-top-left-radius: $radius-large;
+                border-top-right-radius: $radius-large;
+            }
+        }
+        .modal-card-foot {
+            justify-content: flex-end;
+            .button {
+                display: inline; // Fix Safari centering
+                min-width: 5em;
+                font-weight: $weight-semibold;
+            }
+        }
+        @include tablet {
+            min-width: 320px;
+        }
+    }
+    &.is-small {
+        .modal-card,
+        .input,
+        .button {
+            @include control-small;
+        }
+    }
+    &.is-medium {
+        .modal-card,
+        .input,
+        .button {
+            @include control-medium;
+        }
+    }
+    &.is-large {
+        .modal-card,
+        .input,
+        .button {
+            @include control-large;
         }
     }
 }

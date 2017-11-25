@@ -1,13 +1,22 @@
 <template>
-    <label class="switch" :disabled="disabled" :class="{ 'is-disabled': disabled }">
-        <input
-            :class="{ 'is-on-off': onOff }"
+    <label class="switch"
+        :class="[size, { 'is-disabled': disabled }]"
+        ref="label"
+        :disabled="disabled"
+        :tabindex="disabled ? false : 0"
+        @keydown.prevent.enter.space="$refs.label.click()"
+        @mousedown="isMouseDown = true"
+        @mouseup="isMouseDown = false"
+        @mouseout="isMouseDown = false"
+        @blur="isMouseDown = false">
+        <input v-model="newValue"
             type="checkbox"
             :name="name"
             :disabled="disabled"
-            v-model="newValue"
-            @change="$emit('change', newValue, $event)">
-        <span><slot></slot></span>
+            :true-value="trueValue"
+            :false-value="falseValue">
+        <span class="check" :class="[{ 'is-elastic': isMouseDown }, type]"></span>
+        <span class="control-label"><slot></slot></span>
     </label>
 </template>
 
@@ -15,15 +24,25 @@
     export default {
         name: 'bSwitch',
         props: {
-            value: Boolean,
+            value: {},
+            nativeValue: {},
             disabled: Boolean,
-            onOff: Boolean,
+            type: String,
             name: String,
-            checked: Boolean
+            size: String,
+            trueValue: {
+                type: [String, Number, Boolean, Function, Object, Array, Symbol],
+                default: true
+            },
+            falseValue: {
+                type: [String, Number, Boolean, Function, Object, Array, Symbol],
+                default: false
+            }
         },
         data() {
             return {
-                newValue: this.value || this.checked
+                newValue: this.value,
+                isMouseDown: false
             }
         },
         watch: {

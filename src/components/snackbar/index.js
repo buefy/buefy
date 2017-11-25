@@ -9,7 +9,6 @@ export default {
         const defaultParam = {
             type: 'is-success',
             position: 'is-bottom-right',
-            duration: 3500,
             message
         }
         const propsData = Object.assign(defaultParam, params)

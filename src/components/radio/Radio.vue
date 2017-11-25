@@ -1,13 +1,17 @@
 <template>
-    <label class="radio" :disabled="disabled" :class="{ 'is-disabled': disabled }">
-        <input
+    <label class="b-radio radio"
+        ref="label"
+        :class="[size, { 'is-disabled': disabled }]"
+        :disabled="disabled"
+        :tabindex="disabled ? false : 0"
+        @keydown.prevent.enter.space="$refs.label.click()">
+        <input v-model="newValue"
             type="radio"
             :disabled="disabled"
-            :checked="isChecked"
             :name="name"
-            :value="value"
-            @change="changed">
-        <span><slot></slot></span>
+            :value="nativeValue">
+        <span class="check"></span>
+        <span class="control-label"><slot></slot></span>
     </label>
 </template>
 
@@ -15,28 +19,34 @@
     export default {
         name: 'bRadio',
         props: {
-            value: [String, Number, Boolean],
+            value: {},
+            nativeValue: {},
             disabled: Boolean,
-            name: String
+            name: String,
+            size: String
         },
         data() {
             return {
-                isChecked: false
+                newValue: this.value
             }
         },
-        methods: {
+        watch: {
             /**
-             * Input change listener.
-             * Call updateValue from parent.
+             * When v-model change, set internal value.
              */
-            changed(event) {
-                this.$parent.updateValue(this.value, event)
-            }
-        },
-        created() {
-            if (!this.$parent.isRadioGroupComponent) {
-                this.$destroy()
-                throw new Error('You should wrap bRadio on a bRadioGroup')
+            value(value) {
+                this.newValue = value
+            },
+
+            /**
+             * Emit input event to update the user v-model.
+             */
+            newValue(value) {
+                // only trigger input event
+                // when current bRadioButton is clicked.
+                if (value === this.nativeValue) {
+                    this.$emit('input', value)
+                }
             }
         }
     }

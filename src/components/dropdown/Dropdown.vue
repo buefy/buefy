@@ -1,103 +1,99 @@
 <template>
-    <span class="dropdown control"
-        :class="{ 'is-disabled': disabled }">
-        <a role="button"
+    <div class="dropdown"
+        :class="[position, {
+            'is-disabled': disabled,
+            'is-hoverable': hoverable,
+            'is-inline': inline,
+            'is-active': isActive || inline,
+            'is-mobile-modal': isMobileModal
+        }]"> 
+        <div v-if="!inline"
+            role="button"
             ref="trigger"
-            class="trigger"
-            @click="isActive = !isActive">
+            class="dropdown-trigger"
+            @click="toggle">
             <slot name="trigger"></slot>
-        </a>
+        </div>
 
-        <transition-group name="fade">
-            <div v-if="isActive"
-                key="bg"
-                class="background is-hidden-desktop">
+        <transition name="fade">
+            <div v-if="isMobileModal"
+                v-show="isActive"
+                class="background">
             </div>
-            <span v-show="isActive"
-                key="dropdown"
-                ref="dropdown"
-                class="box"
-                :class="['is-dropdown', position, { 'is-narrow': narrowed }]">
-                <ul>
+        </transition>
+        <transition name="fade">
+            <div v-show="isActive || hoverable || inline"
+                ref="dropdownMenu"
+                class="dropdown-menu">
+                <div class="dropdown-content">
                     <slot></slot>
-                </ul>
-            </span>
-        </transition-group>
-    </span>
+                </div>
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script>
     export default {
         name: 'bDropdown',
         props: {
-            value: [String, Number, Object, Boolean],
-            narrowed: Boolean,
+            value: {
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
+                default: null
+            },
             disabled: Boolean,
+            hoverable: Boolean,
+            inline: Boolean,
             position: {
                 type: String,
-                default: 'is-bottom-right',
                 validator(value) {
                     return [
                         'is-top-right',
                         'is-top-left',
-                        'is-bottom-right',
                         'is-bottom-left'
                     ].indexOf(value) > -1
                 }
+            },
+            mobileModal: {
+                type: Boolean,
+                default: true
             }
         },
         data() {
             return {
-                selected: this.value || null,
+                selected: this.value,
                 isActive: false,
-                isDropdownComponent: true // Used internally by DropdownOption
+                _isDropdown: true // Used internally by DropdownItem
+            }
+        },
+        computed: {
+            isMobileModal() {
+                return this.mobileModal && !this.inline && !this.hoverable
             }
         },
         watch: {
             /**
-             * When v-model is changed set the new selected option.
+             * When v-model is changed set the new selected item.
              */
             value(value) {
-                this.selectOption(value)
-            }
-        },
-        computed: {
-            /**
-             * White-listed items to not close when clicked.
-             * Add input, dropdown, trigger and all children.
-             */
-            whiteList() {
-                const whiteList = []
-                whiteList.push(this.$refs.dropdown)
-                whiteList.push(this.$refs.trigger)
-                // Adds all chidren from dropdown
-                if (this.$refs.dropdown !== undefined) {
-                    const children = this.$refs.dropdown.querySelectorAll('*')
-                    for (const child of children) {
-                        whiteList.push(child)
-                    }
-                }
-                // Adds all children from trigger
-                if (this.$refs.trigger !== undefined) {
-                    const children = this.$refs.trigger.querySelectorAll('*')
-                    for (const child of children) {
-                        whiteList.push(child)
-                    }
-                }
+                this.selectItem(value)
+            },
 
-                return whiteList
+            /**
+             * Emit event when isActive value is changed.
+             */
+            isActive(value) {
+                this.$emit('active-change', value)
             }
         },
         methods: {
             /**
-             * Click listener from DropdownOption.
-             *   1. Set new selected option.
+             * Click listener from DropdownItem.
+             *   1. Set new selected item.
              *   2. Emit input event to update the user v-model.
              *   3. Close the dropdown.
              */
-            selectOption(value, isClickable) {
-                if (!isClickable) return
-
+            selectItem(value) {
                 this.selected = value
                 this.$emit('input', value)
                 this.$emit('change', value)
@@ -105,12 +101,49 @@
             },
 
             /**
+             * White-listed items to not close when clicked.
+             */
+            isInWhiteList(el) {
+                if (el === this.$refs.dropdownMenu) return true
+                if (el === this.$refs.trigger) return true
+                // All chidren from dropdown
+                if (this.$refs.dropdownMenu !== undefined) {
+                    const children = this.$refs.dropdownMenu.querySelectorAll('*')
+                    for (const child of children) {
+                        if (el === child) {
+                            return true
+                        }
+                    }
+                }
+                // All children from trigger
+                if (this.$refs.trigger !== undefined) {
+                    const children = this.$refs.trigger.querySelectorAll('*')
+                    for (const child of children) {
+                        if (el === child) {
+                            return true
+                        }
+                    }
+                }
+
+                return false
+            },
+
+            /**
              * Close dropdown if clicked outside.
              */
             clickedOutside(event) {
-                if (this.whiteList.indexOf(event.target) < 0) {
-                    this.isActive = false
-                }
+                if (this.inline) return
+
+                if (!this.isInWhiteList(event.target)) this.isActive = false
+            },
+
+            /**
+             * Toggle dropdown if it's not disabled.
+             */
+            toggle() {
+                if (this.disabled || this.hoverable) return
+
+                this.isActive = !this.isActive
             }
         },
         created() {

@@ -1,9 +1,14 @@
 <template>
-    <div class="b-tabs">
+    <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
         <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
             <ul>
-                <li v-for="(tabItem, i) in tabItems" :class="{ 'is-active': newValue === i }">
-                    <a @click="tabClick(i)">
+                <li v-for="(tabItem, index) in tabItems"
+                    :key="index"
+                    :class="{
+                        'is-active': newValue === index,
+                        'is-disabled': tabItem.disabled
+                    }">
+                    <a @click="tabClick(index)">
                         <b-icon
                             v-if="tabItem.icon"
                             :icon="tabItem.icon"
@@ -15,7 +20,7 @@
                 </li>
             </ul>
         </nav>
-        <section class="tab-content" :style="{ height: contentHeight + 'px' }">
+        <section class="tab-content">
             <slot></slot>
         </section>
     </div>
@@ -45,7 +50,7 @@
                 newValue: this.value || 0,
                 tabItems: [],
                 contentHeight: 0,
-                isTabsComponent: true // Used internally by TabItem
+                _isTabs: true // Used internally by TabItem
             }
         },
         watch: {
@@ -55,7 +60,15 @@
             value(value) {
                 this.changeTab(this.newValue, value)
                 this.newValue = value
-                this.calcHeight()
+            },
+
+            /**
+             * When tab-items are updated, set active one.
+             */
+            tabItems() {
+                if (this.tabItems.length) {
+                    this.tabItems[this.newValue].isActive = true
+                }
             }
         },
         methods: {
@@ -77,31 +90,11 @@
                 this.$emit('change', value)
                 this.changeTab(this.newValue, value)
                 this.newValue = value
-                this.calcHeight()
-            },
-
-            /**
-             * Calculate the height of container based on the tab height.
-             */
-            calcHeight() {
-                this.$nextTick(() => {
-                    const height = this.tabItems[this.newValue].$el.clientHeight
-                    this.contentHeight = height
-                })
-            }
-        },
-        created() {
-            if (typeof window !== 'undefined') {
-                window.addEventListener('resize', this.calcHeight)
             }
         },
         mounted() {
-            this.tabItems[this.newValue].isActive = true
-            this.calcHeight()
-        },
-        beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                window.removeEventListener('resize', this.calcHeight)
+            if (this.tabItems.length) {
+                this.tabItems[this.newValue].isActive = true
             }
         }
     }

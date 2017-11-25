@@ -7,7 +7,7 @@
         }
         option:disabled {
             cursor: not-allowed;
-            color: lighten($grey, 12%);
+            opacity: 0.5;
         }
         optgroup {
             color: $grey-light;
@@ -17,7 +17,7 @@
         }
     }
     &.is-empty select {
-        color: lighten($grey, 12%);
+        color: rgba($grey, 0.7);
     }
 
 }

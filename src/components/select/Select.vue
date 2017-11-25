@@ -1,28 +1,25 @@
 <template>
-    <p
-        class="control"
-        :class="{ 'is-expanded': expanded }">
-        <span
-            class="select"
+    <div class="control"
+        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }">
+        <span class="select"
             :class="[size, statusType, {
                 'is-fullwidth': expanded,
                 'is-loading': loading,
-                'is-empty': selected === ''
+                'is-multiple': multiple,
+                'is-empty': selected === null
             }]">
 
-            <select
-                v-model="selected"
+            <select v-model="selected"
                 ref="select"
-                :disabled="disabled"
-                :readonly="readonly"
-                :name="name"
-                :required="required"
-                @focus="$emit('focus', $event)"
-                @blur="blur">
+                :multiple="multiple"
+                :size="nativeSize"
+                v-bind="$attrs"
+                @blur="$emit('blur', $event) && checkHtml5Validity()"
+                @focus="$emit('focus', $event)">
 
                 <option
                     v-if="placeholder"
-                    value=""
+                    :value="null"
                     selected
                     disabled
                     hidden>
@@ -32,40 +29,37 @@
 
             </select>
         </span>
-    </p>
+
+        <b-icon v-if="icon"
+            class="is-left"
+            :icon="icon"
+            :pack="iconPack"
+            :size="size">
+        </b-icon>
+    </div>
 </template>
 
 <script>
+    import FormElementMixin from '../../utils/FormElementMixin'
+
     export default {
         name: 'bSelect',
+        inheritAttrs: false,
+        mixins: [FormElementMixin],
         props: {
-            value: [String, Number, Object],
-            size: String,
+            value: {
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
+                default: null
+            },
             placeholder: String,
-            expanded: Boolean,
-            loading: Boolean,
-
-            // Native options to use in HTML5 validation
-            name: String,
-            disabled: Boolean,
-            readonly: Boolean,
-            required: Boolean
+            multiple: Boolean,
+            nativeSize: [String, Number]
         },
         data() {
             return {
-                selected: this.value || '',
-                isValid: true,
-                isSelectComponent: true // Used internally by Option
-            }
-        },
-        computed: {
-            /**
-             * Type prop from parent if it's a Field.
-             */
-            statusType() {
-                if (this.$parent.isFieldComponent) {
-                    return this.$parent.newType
-                }
+                selected: this.value,
+                _isSelect: true,
+                _elementRef: 'select'
             }
         },
         watch: {
@@ -75,8 +69,8 @@
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                this.selected = value || ''
-                !this.isValid && this.html5Validation()
+                this.selected = value
+                !this.isValid && this.checkHtml5Validity()
             },
 
             /**
@@ -86,47 +80,7 @@
              */
             selected(value) {
                 this.$emit('input', value)
-                this.$emit('change', value)
-                !this.isValid && this.html5Validation()
-            }
-        },
-        methods: {
-            /**
-             * Blur listener.
-             * Fire the HTML5 validation.
-             */
-            blur(event) {
-                this.$emit('blur', event)
-                this.html5Validation()
-            },
-
-            /**
-             * HTML5 validation, set isValid property.
-             * If validation fail, send 'is-danger' type,
-             * and error message to parent if it's a Field.
-             */
-            html5Validation() {
-                if (this.$refs.select === undefined) return
-
-                let type = null
-                let message = null
-                let isValid = true
-                if (!this.$refs.select.checkValidity()) {
-                    type = 'is-danger'
-                    message = this.$refs.select.validationMessage
-                    isValid = false
-                }
-                this.isValid = isValid
-                if (this.$parent.isFieldComponent) {
-                    // Set type only if user haven't defined
-                    if (!this.$parent.type) {
-                        this.$parent.newType = type
-                    }
-                    // Set message only if user haven't defined
-                    if (!this.$parent.message) {
-                        this.$parent.newMessage = message
-                    }
-                }
+                !this.isValid && this.checkHtml5Validity()
             }
         }
     }

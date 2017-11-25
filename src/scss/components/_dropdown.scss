@@ -1,105 +1,87 @@
 .dropdown {
-    display: inline-flex;
-    align-items: center;
     & + .dropdown {
         margin-left: 0.5em;
-    }
-    .trigger {
-        display: inline-block;
     }
     .background {
         @include overlay;
         position: fixed;
         background-color: rgba($black, 0.86);
         z-index: 10;
-        transition: opacity $speed $easing;
         cursor: pointer;
+        @include desktop {
+            display: none;
+        }
     }
-    .box {
-        position: absolute;
-        padding: 0.5em 0;
-        z-index: 10;
-        white-space: nowrap;
-        transition: opacity $speed $easing;
-        .option {
-            @include unselectable;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            &:not(.is-subheader, .is-disabled):hover {
-                background: $background;
-            }
-            &.is-selected {
-                background: $primary !important;
-                color: $primary-invert;
-            }
-            &.is-separator {
-                border-bottom: 1px solid $background;
-                margin: 0.5rem 0;
-                padding: 0 !important;
-                cursor: inherit;
-            }
+    .dropdown-menu {
+        .dropdown-item {
             &.is-disabled {
-                opacity: .5;
                 cursor: not-allowed;
-            }
-            &.is-subheader {
-                cursor: inherit;
-                // Remove unselectable
-                -webkit-touch-callout: inherit;
-                -webkit-user-select: inherit;
-                -moz-user-select: inherit;
-                -ms-user-select: inherit;
-                user-select: inherit;
-            }
-        }
-        &.is-top-right{
-            top: auto;
-            bottom: 2.5em;
-            left: 0;
-        }
-        &.is-top-left{
-            top: auto;
-            bottom: 2.5em;
-            right: 0;
-        }
-        &.is-bottom-right{
-            top: 2.5em;
-            left: 0;
-        }
-        &.is-bottom-left{
-            top: 2.5em;
-            right: 0;
-        }
-        &.is-narrow {
-            .option {
-                padding: 0.25rem 0.75rem;
-            }
-        }
-    }
-    &.is-disabled {
-        opacity: .5;
-        cursor: not-allowed;
-        pointer-events: none;
-    }
-    @include touch {
-        .box {
-            position: fixed;
-            width: calc(100vw - 60px);
-            max-width: 600px;
-            max-height: calc(100vh - 120px);
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate3d(-50%, -50%, 0);
-            white-space: normal;
-            &.is-narrow {
-                .option {
-                    padding: 0.75rem 1rem;
+                opacity: 0.5;
+                &:hover {
+                    background: inherit;
+                    color: inherit;
                 }
             }
-            .option {
-                padding: 1rem 1.5rem;
-                &.has-subheader {
-                    padding: 1rem 2rem;
+        }
+        .has-link a {
+            @extend .dropdown-item;
+            padding-right: 3rem;
+            white-space: nowrap;
+        }
+    }
+    .navbar-item {
+        height: 100%;
+    }
+    &.is-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        .dropdown-trigger {
+            pointer-events: none;
+        }
+    }
+    &.is-inline {
+        .dropdown-menu {
+            position: static;
+            display: inline-block;
+            padding: 0;
+        }
+    }
+    &.is-top-right {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+        }
+    }
+    &.is-top-left {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+            right: 0;
+            left: auto;
+        }
+    }
+    &.is-bottom-left {
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    }
+    @include touch {
+        &.is-mobile-modal {
+            .dropdown-menu {
+                position: fixed;
+                width: calc(100vw - 40px);
+                max-width: 460px;
+                max-height: calc(100vh - 120px);
+                top: 25% !important;
+                left: 50% !important;
+                bottom: auto !important;
+                right: auto !important;
+                transform: translate3d(-50%, -25%, 0);
+                white-space: normal;
+                overflow-y: auto;
+                .dropdown-item {
+                    padding: 1rem 1.5rem;
                 }
             }
         }

@@ -7,16 +7,45 @@
 
 # Submitting a Pull Request
 
-* The ``master`` branch is a snapshot of the latest stable release. **Submit your PR in the ``dev`` branch**.
+* The ``master`` branch is a snapshot of the latest stable release. **Submit your PR in the ``dev`` branch**
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 * It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
 * **DO NOT** commit the ``lib`` and ``dist`` folder, use it only for testing on your end
 * If adding new feature:
-    * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
+    * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it
+
+## Principles
+
+### 1. Desktop and Mobile support
+
+It has to work, **and** have great UX on both platforms.
+
+### 2. Lightweight and simple
+
+* Keep it simple.
+* Performance is UX, keep it lightweight.
+* Avoid HTML-only components, if it doesn't need JavaScript, then it doesn't need Vue (with a few exceptions).
+* Keep. It. Simple.
+
+### 3. Keep Bulma design
+
+Buefy is based on Bulma, let's keep its design.
+
+### 4. Transitions / Animations GPU-based only
+
+The only properties that uses hardware acceleration are:
+
+* transform
+* opacity
+* filter
+
+These are two great articles about it: https://medium.com/outsystems-experts/how-to-achieve-60-fps-animations-with-css3-db7b98610108 and https://www.sitepoint.com/introduction-to-hardware-acceleration-css-animations/.
+
+And here is one about the FLIP technique (which ``<transition-group>`` uses internally): https://aerotwist.com/blog/flip-your-animations/.
 
 ## Buefy Javascript styleguide
 
-* Follow the rules in ``.eslintrc.json``, general:
+* Follow the rules in ``.eslintrc.js``, general:
     * **Use camelCase**
     * **No semi-colons** ``;``
     * **4 spaces indentation**

@@ -1,0 +1,10 @@
+.panel {
+    .panel-heading {
+        &.is-collapsible {
+            cursor: pointer;
+        }
+    }
+    .panel-content {
+        width: 100%;
+    }
+}

@@ -1,69 +1,103 @@
+$switch-width-number: 2.75;
+$switch-width: $switch-width-number * 1em;
+$switch-padding: 0.2em;
+
+$switch-active-background-color: $primary !default;
+
 .switch {
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    @include unselectable;
     & + .switch {
         margin-left: 0.5em;
     }
-    input[type="checkbox"] {
+    input[type=checkbox] {
         display: none;
-        + span {
-            position: relative;
-            display: inline-block;
-            text-align: left;
-            padding-left: 44px;
-            &:before,
-            &:after {
+        + .check {
+            display: flex;
+            align-items: center;
+            width: $switch-width;
+            height: #{$switch-width / 2 + $switch-padding};
+            padding: $switch-padding;
+            background: $grey-light;
+            border-radius: 1em;
+            transition: background $speed-slow $easing;
+            &:before {
                 content: "";
-                position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-                transition: all $speed $easing;
+                border-radius: 1em;
+                width: #{($switch-width - $switch-padding * 2) / 2};
+                height: #{($switch-width - $switch-padding * 2) / 2};
+                background: $background;
+                box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+                transition: transform $speed-slow $easing, width $speed-slow $easing;
+                will-change: transform;
+            }
+            &.is-elastic:before {
+                width: 1.75em;
+            }
+        }
+        &:checked + .check {
+            background: $switch-active-background-color;
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    background: $color;
+                }
             }
             &:before {
-                left: 0;
-                width: 36px;
-                height: 14px;
-                background-color: $grey-light;
-                border-radius: 8px;
+                transform: translate3d(100%, 0, 0);
             }
-            &:after {
-                left: 0;
-                width: 20px;
-                height: 20px;
-                background-color: $background;
-                border-radius: 50%;
-                box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .14), 0 2px 2px 0 rgba(0, 0, 0, .1), 0 1px 5px 0 rgba(0, 0, 0, .08);
+            &.is-elastic:before {
+                // Might be a little offset if base font is not 16px
+                transform: translate3d(percentage(16 / ($switch-width-number * 16)), 0, 0);
             }
         }
-        &:checked + span {
-                &:before {
-                    background-color: lighten($primary, 24%);
-                }
-                &:after {
-                    background-color: $primary;
-                    transform: translate(80%, -50%);
-                }
-            }
-        &.is-on-off {
-            + span {
-                &:before {
-                    background-color: lighten($danger, 24%);
-                }
-                &:after {
-                    background-color: $danger;
-                }
-            }
-            &:checked + span {
-                &:before {
-                    background-color: lighten($success, 24%);
-                }
-                &:after {
-                    background-color: $success;
+    }
+    .control-label {
+        padding-left: 0.5em;
+    }
+    &:hover {
+        input[type=checkbox] + .check {
+            background: rgba($grey-light, 0.9);
+        }
+        input[type=checkbox]:checked + .check {
+            background: rgba($switch-active-background-color, 0.9);
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    background: rgba($color, 0.9);
                 }
             }
         }
+    }
+    &:focus {
+        outline: none;
+        input[type=checkbox] + .check {
+            box-shadow: 0 0 0.5em rgba($grey, 0.6);
+        }
+        input[type=checkbox]:checked + .check {
+            box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name} {
+                    box-shadow: 0 0 0.5em rgba($color, 0.8);
+                }
+            }
+        }
+    }
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium{
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
     }
     &[disabled] {
         opacity: 0.5;
         cursor: not-allowed;
+        color: $grey;
     }
 }

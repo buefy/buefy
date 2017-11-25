@@ -1,7 +1,7 @@
-$arrow-size: 6px;
-$arrow-margin: 2px;
+$tooltip-arrow-size: 5px;
+$tooltip-arrow-margin: 2px;
 
-$multiline-sizes: (
+$tooltip-multiline-sizes: (
     small: 180px,
     medium: 240px,
     large: 300px
@@ -9,25 +9,25 @@ $multiline-sizes: (
 
 @mixin tooltip-arrow($direction, $color) {
     @if ($direction == "is-top") {
-        border-top: $arrow-size solid $color;
-        border-right: $arrow-size solid transparent;
-        border-left: $arrow-size solid transparent;
-        bottom: calc(100% + #{$arrow-margin});
+        border-top: $tooltip-arrow-size solid $color;
+        border-right: $tooltip-arrow-size solid transparent;
+        border-left: $tooltip-arrow-size solid transparent;
+        bottom: calc(100% + #{$tooltip-arrow-margin});
     } @else if ($direction == "is-bottom") {
-        border-right: $arrow-size solid transparent;
-        border-bottom: $arrow-size solid $color;
-        border-left: $arrow-size solid transparent;
-        top: calc(100% + #{$arrow-margin});
+        border-right: $tooltip-arrow-size solid transparent;
+        border-bottom: $tooltip-arrow-size solid $color;
+        border-left: $tooltip-arrow-size solid transparent;
+        top: calc(100% + #{$tooltip-arrow-margin});
     } @else if ($direction == "is-right") {
-        border-top: $arrow-size solid transparent;
-        border-right: $arrow-size solid $color;
-        border-bottom: $arrow-size solid transparent;
-        left: calc(100% + #{$arrow-margin});
+        border-top: $tooltip-arrow-size solid transparent;
+        border-right: $tooltip-arrow-size solid $color;
+        border-bottom: $tooltip-arrow-size solid transparent;
+        left: calc(100% + #{$tooltip-arrow-margin});
     } @else if ($direction == "is-left") {
-        border-top: $arrow-size solid transparent;
-        border-bottom: $arrow-size solid transparent;
-        border-left: $arrow-size solid $color;
-        right: calc(100% + #{$arrow-margin});
+        border-top: $tooltip-arrow-size solid transparent;
+        border-bottom: $tooltip-arrow-size solid transparent;
+        border-left: $tooltip-arrow-size solid $color;
+        right: calc(100% + #{$tooltip-arrow-margin});
     }
 }
 
@@ -38,11 +38,11 @@ $multiline-sizes: (
             @if ($direction == "is-top") {
                 top: auto;
                 right: auto;
-                bottom: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                bottom: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
                 left: 50%;
                 transform: translateX(-50%);
             } @else if ($direction == "is-bottom") {
-                top: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                top: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
                 right: auto;
                 bottom: auto;
                 left: 50%;
@@ -51,11 +51,11 @@ $multiline-sizes: (
                 top: 50%;
                 right: auto;
                 bottom: auto;
-                left: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                left: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
                 transform: translateY(-50%);
             } @else if ($direction == "is-left") {
                 top: 50%;
-                right: calc(100% + #{$arrow-size} + #{$arrow-margin});
+                right: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
                 bottom: auto;
                 left: auto;
                 transform: translateY(-50%);
@@ -68,7 +68,7 @@ $multiline-sizes: (
             }
         }
         &.is-multiline {
-            @each $name, $size in $multiline-sizes {
+            @each $name, $size in $tooltip-multiline-sizes {
                 &.is-#{$name}:after {
                     width: $size;
                 }
@@ -99,12 +99,10 @@ $multiline-sizes: (
     &:after {
         content: attr(data-label);
         width: auto;
-        padding: 4px 8px;
-        background: $primary;
-        border-radius: $radius-small;
-        font-size: 12px;
+        padding: 0.35rem 0.75rem;
+        border-radius: $radius-large;
+        font-size: 0.85rem;
         font-weight: $weight-normal;
-        color: $primary-invert;
         box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
         z-index: 888;
         white-space: nowrap;
