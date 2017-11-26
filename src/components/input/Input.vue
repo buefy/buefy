@@ -34,7 +34,7 @@
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="size">
+            :size="iconSize">
         </b-icon>
 
         <b-icon v-if="!loading && (passwordReveal || statusType)"
@@ -117,6 +117,14 @@
                     case 'is-info': return 'information'
                     case 'is-warning': return 'alert'
                 }
+            },
+
+            /**
+             * Check icon size (FA).
+             */
+            iconSize() {
+                if (this.iconPack === 'fa' && (this.size === 'is-large' || this.size === 'is-medium')) return ''
+                return this.size
             },
 
             /**
