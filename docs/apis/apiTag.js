@@ -46,6 +46,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>disabled</code>',
+                description: 'Disable delete button',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [

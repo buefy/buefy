@@ -6,8 +6,9 @@
             <slot></slot>
         </span>
         <a class="tag is-delete"
-            :tabindex="tabstop ? 0 : false"
             role="button"
+            :tabindex="tabstop ? 0 : false"
+            :disabled="disabled"
             :class="[size, { 'is-rounded': rounded }]"
             @click="close()"
             @keyup.delete.prevent="close()">
@@ -22,6 +23,7 @@
         <a v-if="closable"
             role="button"
             class="delete is-small"
+            :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
             @click="close()"
             @keyup.delete.prevent="close()">
@@ -38,6 +40,7 @@
             type: String,
             size: String,
             rounded: Boolean,
+            disabled: Boolean,
             tabstop: {
                 type: Boolean,
                 default: true
@@ -49,6 +52,8 @@
              * or delete key is pressed.
              */
             close() {
+                if (this.disabled) return
+
                 this.$emit('close')
             }
         }
