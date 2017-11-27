@@ -53,9 +53,9 @@ export default {
          * Focus method that work dynamically depending on the component.
          */
         focus() {
-            if (this.$refs[this.$data._elementRef] === undefined) return
+            if (this.$data._elementRef === undefined) return
 
-            this.$nextTick(() => this.$refs[this.$data._elementRef].focus())
+            this.$nextTick(() => this.$el.querySelector(this.$data._elementRef).focus())
         },
 
         onBlur($event) {
@@ -77,9 +77,7 @@ export default {
         checkHtml5Validity() {
             if (this.$refs[this.$data._elementRef] === undefined) return
 
-            const el = this.$data._isAutocomplete || this.$data._isDatepicker || this.$data._isTimepicker
-                ? this.$refs.input.$refs.input
-                : this.$refs[this.$data._elementRef]
+            const el = this.$el.querySelector(this.$data._elementRef)
 
             let type = null
             let message = null
