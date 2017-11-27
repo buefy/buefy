@@ -1,0 +1,10 @@
+.tag {
+    // Temporary fix for Bulma 0.6.1
+    .delete {
+        margin-left: 0.25rem !important;
+        margin-right: -0.25rem !important;
+        &[disabled] {
+            pointer-events: none;
+        }
+    }
+}
