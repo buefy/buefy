@@ -11,6 +11,7 @@
 * Add ``position`` prop to datepicker and timepicker
 * Add ``size`` prop to dialog
 * Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
+* #440 Fix upload input file width
 
 ## 0.6.1
 
