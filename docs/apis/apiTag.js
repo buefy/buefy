@@ -39,6 +39,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>tabstop</code>',
+                description: 'If should stop when using tab key',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             }
         ],
         events: [

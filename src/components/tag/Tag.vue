@@ -6,7 +6,7 @@
             <slot></slot>
         </span>
         <a class="tag is-delete"
-            tabindex="0"
+            :tabindex="tabstop ? 0 : false"
             role="button"
             :class="[size, { 'is-rounded': rounded }]"
             @click="close()"
@@ -19,12 +19,13 @@
 
         <slot></slot>
 
-        <button v-if="closable"
-            type="button"
+        <a v-if="closable"
+            role="button"
             class="delete is-small"
+            :tabindex="tabstop ? 0 : false"
             @click="close()"
             @keyup.delete.prevent="close()">
-        </button>
+        </a>
     </span>
 </template>
 
@@ -36,7 +37,11 @@
             closable: Boolean,
             type: String,
             size: String,
-            rounded: Boolean
+            rounded: Boolean,
+            tabstop: {
+                type: Boolean,
+                default: true
+            }
         },
         methods: {
             /**
