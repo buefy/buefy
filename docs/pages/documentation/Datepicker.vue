@@ -71,6 +71,10 @@
         <hr>
 
         <h2 class="title">Events</h2>
+        <div class="tags has-addons">
+            <span class="tag is-success">New!</span>
+            <span class="tag is-info">0.6.2</span>
+        </div>
         <p class="content">Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
         <div class="columns">
             <div class="column">

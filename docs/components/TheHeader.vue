@@ -51,7 +51,8 @@
                                     :key="page.name"
                                     :to="`/documentation/${$options.filters.slugify(page.name)}`"
                                     class="navbar-item">
-                                    {{ page.name }}
+                                    <span class="navbar-item-text">{{ page.name }}</span>
+                                    <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
                                 </router-link>
 
                                 <hr :key="items.category"
@@ -65,27 +66,24 @@
 
                     <!-- Mobile extensions menu -->
                     <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
-                        <!-- <div class="navbar-item">Extensions</div> -->
+                        <div class="navbar-item">Extensions</div>
 
                         <div class="navbar-dropdown is-boxed">
                             <template v-for="items in menuExtensions">
-                                <div
+                                <!-- <div
                                     :key="items.category"
                                     class="navbar-item has-text-weight-semibold is-uppercase has-text-grey">
                                     {{ items.category }}
-                                </div>
+                                </div> -->
 
                                 <router-link
                                     v-for="page in items.pages"
                                     :key="page.name"
                                     :to="`/extensions/${$options.filters.slugify(page.name)}`"
                                     class="navbar-item">
-                                    {{ page.name }}
+                                    <span class="navbar-item-text">{{ page.name }}</span>
+                                    <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
                                 </router-link>
-
-                                <hr :key="items.category"
-                                    class="navbar-divider"
-                                    style="display: block;">
                             </template>
                         </div>
                     </div>
@@ -238,6 +236,10 @@
                             {
                                 name: 'Timepicker',
                                 isNew: true
+                            },
+                            {
+                                name: 'Tag input',
+                                isNew: true
                             }
                         ]
                     },
@@ -258,7 +260,8 @@
                         category: 'Extensions',
                         pages: [
                             {
-                                name: 'Cleavejs'
+                                name: 'Cleavejs',
+                                isNew: true
                             }
                         ]
                     }

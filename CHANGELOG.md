@@ -4,12 +4,14 @@
 
 ### New features
 
+* **Datepicker improved**: can add event indicators on it (thanks @chasegiunta)
 * Add ``mobile-native`` prop to datepicker and timepicker
 * Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
 * Add ``events`` prop to modal (to bind events programmatically)
 * Add ``position`` prop to datepicker and timepicker
 * Add ``size`` prop to dialog
 * Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
+* #440 Fix upload input file width
 
 ## 0.6.1
 

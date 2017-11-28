@@ -46,6 +46,7 @@ const Radio = () => import('@/pages/documentation/Radio')
 const Switch = () => import('@/pages/documentation/Switch')
 const Upload = () => import('@/pages/documentation/Upload')
 const Datepicker = () => import('@/pages/documentation/Datepicker')
+const TagInput = () => import('@/pages/documentation/TagInput')
 const Timepicker = () => import('@/pages/documentation/Timepicker')
 
 // Data
@@ -175,6 +176,10 @@ export default new Router({
                 {
                     path: 'timepicker',
                     component: Timepicker
+                },
+                {
+                    path: 'tag-input',
+                    component: TagInput
                 },
                 {
                     path: 'upload',

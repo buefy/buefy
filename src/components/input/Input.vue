@@ -1,11 +1,7 @@
 <template>
-    <div class="control"
-        :class="[iconPosition, {
-            'is-expanded': expanded,
-            'is-loading': loading,
-            'is-clearfix': !hasMessage
-        }]">
-        <input v-if="type !== 'textarea'"
+    <div class="control" :class="rootClasses">
+        <input
+            v-if="type !== 'textarea'"
             ref="input"
             class="input"
             :class="[statusType, size]"
@@ -15,10 +11,11 @@
             :value="newValue"
             v-bind="$attrs"
             @input="onInput"
-            @blur="$emit('blur', $event) && checkHtml5Validity()"
-            @focus="$emit('focus', $event)">
+            @blur="onBlur"
+            @focus="onFocus">
 
-        <textarea v-else
+        <textarea
+            v-else
             ref="textarea"
             class="textarea"
             :class="[statusType, size]"
@@ -26,18 +23,20 @@
             :value="newValue"
             v-bind="$attrs"
             @input="onInput"
-            @blur="$emit('blur', $event) && checkHtml5Validity()"
-            @focus="$emit('focus', $event)">
+            @blur="onBlur"
+            @focus="onFocus">
         </textarea>
 
-        <b-icon v-if="icon"
+        <b-icon
+            v-if="icon"
             class="is-left"
             :icon="icon"
             :pack="iconPack"
             :size="size">
         </b-icon>
 
-        <b-icon v-if="!loading && (passwordReveal || statusType)"
+        <b-icon
+            v-if="!loading && (passwordReveal || statusType)"
             class="is-right"
             :class="{ 'is-clickable': passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
@@ -47,7 +46,12 @@
             @click.native="togglePasswordVisibility">
         </b-icon>
 
-        <small class="help counter" v-if="maxlength && hasCounter">{{ valueLength }} / {{ maxlength }}</small>
+        <small
+            v-if="maxlength && hasCounter"
+            class="help counter"
+            :class="{ 'is-invisible': !isFocused }">
+            {{ valueLength }} / {{ maxlength }}
+        </small>
     </div>
 </template>
 
@@ -87,6 +91,17 @@
             }
         },
         computed: {
+            rootClasses() {
+                return [
+                    this.iconPosition,
+                    {
+                        'is-expanded': this.expanded,
+                        'is-loading': this.loading,
+                        'is-clearfix': !this.hasMessage
+                    }
+                ]
+            },
+
             /**
              * Check if have any icon in the right side.
              */

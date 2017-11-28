@@ -1,0 +1,42 @@
+.tag-input {
+    .tag-input-container {
+        &.is-focusable {
+            @extend .input;
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            height: auto;
+            cursor: text;
+        }
+
+        .tag, .tags {
+            &:not(:last-child) {
+                margin-right: 0.5rem;
+            }
+        }
+
+        .autocomplete {
+            flex: 1;
+            input {
+                // margin-bottom: 0.5rem;
+                border: none;
+                box-shadow: none;
+                &:focus {
+                    box-shadow: none !important;
+                }
+
+                // Sizes
+                &.is-small {
+                    @include control-small;
+                }
+                &.is-medium{
+                    @include control-medium;
+                }
+                &.is-large {
+                    @include control-large;
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 <template>
     <div class="autocomplete control" :class="{size, 'is-expanded': expanded}">
-        <b-input v-model="newValue"
+        <b-input
+            v-model="newValue"
             ref="input"
             :size="size"
             :loading="loading"
@@ -61,7 +62,10 @@
         },
         props: {
             value: [Number, String],
-            data: Array,
+            data: {
+                type: Array,
+                default: () => []
+            },
             field: {
                 type: String,
                 default: 'value'
