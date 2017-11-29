@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title is-spaced">Tag input</h1>
+        <h1 class="title is-spaced">Taginput</h1>
         <h2 class="subtitle">A simple tag input field. Tags are added when enter or comma are pressed, or when the field loses focus.</h2>
         <hr>
 
@@ -15,7 +15,10 @@
 
         <hr>
         <h2 class="title">Autocomplete</h2>
-        <!-- <p class="content">You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.</p> -->
+        <p class="content">
+            You can add any prop from <router-link to="/documentation/autocomplete">Autocomplete</router-link>.
+            The <code>select-only</code> prop forces users to only select from the list.
+        </p>
 
         <div class="columns">
             <div class="column">
@@ -28,7 +31,10 @@
 
         <hr>
         <h2 class="title">Limits</h2>
-        <p class="content">You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.</p>
+        <p class="content">
+            You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.
+            Maxlength counter is only shown when typing.
+        </p>
 
         <div class="columns">
             <div class="column">
@@ -53,7 +59,7 @@
         </div>
 
         <hr>
-        <h2 class="title">Types</h2>
+        <h2 class="title">Tag types</h2>
 
         <div class="columns">
             <div class="column">
@@ -96,28 +102,28 @@
 </template>
 
 <script>
-    import api from '@/apis/apiTagInput'
+    import api from '@/apis/apiTaginput'
 
-    import ExSimple from '@/examples/tag-input/ExSimple'
-    import ExSimpleCode from '!!raw-loader!@/examples/tag-input/ExSimple'
+    import ExSimple from '@/examples/taginput/ExSimple'
+    import ExSimpleCode from '!!raw-loader!@/examples/taginput/ExSimple'
 
-    import ExAutocomplete from '@/examples/tag-input/ExAutocomplete'
-    import ExAutocompleteCode from '!!raw-loader!@/examples/tag-input/ExAutocomplete'
+    import ExAutocomplete from '@/examples/taginput/ExAutocomplete'
+    import ExAutocompleteCode from '!!raw-loader!@/examples/taginput/ExAutocomplete'
 
-    import ExLimit from '@/examples/tag-input/ExLimit'
-    import ExLimitCode from '!!raw-loader!@/examples/tag-input/ExLimit'
+    import ExLimit from '@/examples/taginput/ExLimit'
+    import ExLimitCode from '!!raw-loader!@/examples/taginput/ExLimit'
 
-    import ExState from '@/examples/tag-input/ExState'
-    import ExStateCode from '!!raw-loader!@/examples/tag-input/ExState'
+    import ExState from '@/examples/taginput/ExState'
+    import ExStateCode from '!!raw-loader!@/examples/taginput/ExState'
 
-    import ExType from '@/examples/tag-input/ExType'
-    import ExTypeCode from '!!raw-loader!@/examples/tag-input/ExType'
+    import ExType from '@/examples/taginput/ExType'
+    import ExTypeCode from '!!raw-loader!@/examples/taginput/ExType'
 
-    import ExSize from '@/examples/tag-input/ExSize'
-    import ExSizeCode from '!!raw-loader!@/examples/tag-input/ExSize'
+    import ExSize from '@/examples/taginput/ExSize'
+    import ExSizeCode from '!!raw-loader!@/examples/taginput/ExSize'
 
-    import ExModifier from '@/examples/tag-input/ExModifier'
-    import ExModifierCode from '!!raw-loader!@/examples/tag-input/ExModifier'
+    import ExModifier from '@/examples/taginput/ExModifier'
+    import ExModifierCode from '!!raw-loader!@/examples/taginput/ExModifier'
 
     export default {
         components: {

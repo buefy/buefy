@@ -4,12 +4,16 @@
 
 ### New features
 
-* **Datepicker improved**: can add event indicators on it (thanks @chasegiunta)
+* **New component: Tag Input**, [see docs](https://buefy.github.io/#/documentation/taginput) (thanks @jgerbes)
+* **Datepicker improved**: can add event indicators on it (thanks @chasegiunta) (see #432)
 * Add ``mobile-native`` prop to datepicker and timepicker
 * Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
 * Add ``events`` prop to modal (to bind events programmatically)
 * Add ``position`` prop to datepicker and timepicker
 * Add ``size`` prop to dialog
+
+### Fixes
+
 * Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
 * #440 Fix upload input file width
 

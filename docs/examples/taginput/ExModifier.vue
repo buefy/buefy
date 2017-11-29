@@ -1,13 +1,18 @@
 <template>
     <section>
-        <b-field label="Add some tags">
-            <b-tag-input
+        <b-field label="Rounded">
+            <b-taginput
                 v-model="tags"
-                icon="label"
-                placeholder="Add a tag">
-            </b-tag-input>
+                rounded>
+            </b-taginput>
         </b-field>
-        <p class="content"><b>Tags:</b> {{ tags }}</p>
+
+        <b-field label="Attached">
+            <b-taginput
+                v-model="tags"
+                attached>
+            </b-taginput>
+        </b-field>
     </section>
 </template>
 
@@ -24,4 +29,3 @@
         }
     }
 </script>
-

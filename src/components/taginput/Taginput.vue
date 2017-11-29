@@ -1,6 +1,6 @@
 <template>
-    <div class="tag-input control" :class="[size, rootClasses]">
-        <div class="tag-input-container"
+    <div class="taginput control" :class="[size, rootClasses]">
+        <div class="taginput-container"
             :class="[statusType, size, containerClasses]"
             :disabled="disabled"
             @click="hasInput && focus($event)">
@@ -31,6 +31,7 @@
                 :has-counter="false"
                 :size="size"
                 :disabled="disabled"
+                :loading="loading"
                 keep-first
                 @focus="onFocus"
                 @blur="customOnBlur"
@@ -56,7 +57,7 @@
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
-        name: 'bTagInput',
+        name: 'bTaginput',
         mixins: [FormElementMixin],
         inheritAttrs: false,
         components: {
@@ -96,14 +97,13 @@
                 tags: this.value || [],
                 newTag: '',
                 _elementRef: 'input',
-                _isTagInput: true
+                _isTaginput: true
             }
         },
         computed: {
             rootClasses() {
                 return {
-                    'is-expanded': this.expanded,
-                    'is-loading': this.loading
+                    'is-expanded': this.expanded
                 }
             },
 

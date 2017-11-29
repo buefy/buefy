@@ -20,7 +20,7 @@ import Panel from './components/panel'
 import Select from './components/select'
 import Snackbar from './components/snackbar'
 import Switch from './components/switch'
-import TagInput from './components/tag-input'
+import Taginput from './components/taginput'
 import Timepicker from './components/timepicker'
 import Toast from './components/toast'
 import Tooltip from './components/tooltip'
@@ -55,7 +55,7 @@ const components = {
     Tabs,
     Tag,
     Taglist,
-    TagInput,
+    Taginput,
     Timepicker,
     Tooltip,
     Upload

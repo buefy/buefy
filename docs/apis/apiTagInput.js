@@ -23,8 +23,8 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>color</code>',
-                description: 'Color of the tags, optional',
+                name: '<code>type</code>',
+                description: 'Type (color) of the tags, optional',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
@@ -66,6 +66,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '<code>value</code>'
+            },
+            {
+                name: '<code>select-only</code>',
+                description: 'Tags can only be selected from autocomplete',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: 'Any other native attribute or Autocomplete prop',

@@ -1,24 +1,30 @@
 <template>
     <section>
         <b-field label="Small">
-            <b-tag-input
+            <b-taginput
                 v-model="tags"
                 size="is-small">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
-        <b-field label="Medium (default)">
-            <b-tag-input
+        <b-field label="Default">
+            <b-taginput
+                v-model="tags">
+            </b-taginput>
+        </b-field>
+
+        <b-field label="Medium">
+            <b-taginput
                 v-model="tags"
                 size="is-medium">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
         <b-field label="Large">
-            <b-tag-input
+            <b-taginput
                 v-model="tags"
                 size="is-large">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
     </section>
 </template>
