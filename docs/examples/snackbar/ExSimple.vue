@@ -24,10 +24,14 @@
                 this.$snackbar.open({
                     message: 'Yellow button and positioned top-left',
                     type: 'is-warning',
-                    position: 'is-top-left',
+                    position: 'is-top',
                     actionText: 'Retry',
+                    queue: false,
                     onAction: () => {
-                        this.$toast.open('Action pressed')
+                        this.$toast.open({
+                            message: 'Action pressed',
+                            queue: false
+                        })
                     }
                 })
             },
@@ -39,7 +43,10 @@
                     position: 'is-bottom-left',
                     actionText: 'Undo',
                     onAction: () => {
-                        this.$toast.open('Action pressed')
+                        this.$toast.open({
+                            message: 'Action pressed',
+                            queue: false
+                        })
                     }
                 })
             }

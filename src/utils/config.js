@@ -17,7 +17,8 @@ let config = {
     defaultTimeParser: null,
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
-    defaultTimepickerMobileNative: true
+    defaultTimepickerMobileNative: true,
+    defaultNoticeQueue: true
 }
 
 export default config

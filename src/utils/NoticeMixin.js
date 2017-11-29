@@ -9,6 +9,10 @@ export default {
         },
         message: String,
         duration: Number,
+        queue: {
+            type: Boolean,
+            default: undefined
+        },
         position: {
             type: String,
             default: 'is-top',
@@ -28,11 +32,25 @@ export default {
     data() {
         return {
             isActive: false,
-            parent: null,
+            parentTop: null,
+            parentBottom: null,
             newContainer: this.container || config.defaultContainerElement
         }
     },
     computed: {
+        correctParent() {
+            switch (this.position) {
+                case 'is-top-right':
+                case 'is-top':
+                case 'is-top-left':
+                    return this.parentTop
+
+                case 'is-bottom-right':
+                case 'is-bottom':
+                case 'is-bottom-left':
+                    return this.parentBottom
+            }
+        },
         transition() {
             switch (this.position) {
                 case 'is-top-right':
@@ -40,32 +58,32 @@ export default {
                 case 'is-top-left':
                     return {
                         enter: 'fadeInDown',
-                        leave: 'fadeOutUp'
+                        leave: 'fadeOut'
                     }
                 case 'is-bottom-right':
                 case 'is-bottom':
                 case 'is-bottom-left':
                     return {
                         enter: 'fadeInUp',
-                        leave: 'fadeOutDown'
+                        leave: 'fadeOut'
                     }
             }
         }
     },
     methods: {
-        /**
-         * Check if has any element inside the container.
-         */
-        hasChild(parent) {
-            return parent !== null && parent.childElementCount > 0
+        shouldQueue() {
+            const queue = this.queue !== undefined
+                ? this.queue
+                : config.defaultNoticeQueue
+
+            if (!queue) return false
+
+            return (
+                this.parentTop.childElementCount > 0 ||
+                this.parentBottom.childElementCount > 0
+            )
         },
 
-        /**
-         * Close the notice.
-         *   1. Clear timer.
-         *   2. Close notice.
-         *   3. Remove element.
-         */
         close() {
             clearTimeout(this.timer)
             this.isActive = false
@@ -77,48 +95,49 @@ export default {
             }, 150)
         },
 
-        /**
-         * Show notice.
-         *   1. Check if already has a notice playing, if has, add a timeout to try again.
-         *   2. Insert element.
-         *   3. Show notice.
-         *   4. Add timer based on the duration prop.
-         */
-        show() {
-            if (this.hasChild(this.parent)) {
-                // Add to "queue" (recursive) if already has a notice
-                setTimeout(() => this.show(), 250)
+        showNotice() {
+            if (this.shouldQueue()) {
+                // Call recursively if should queue
+                setTimeout(() => this.showNotice(), 250)
                 return
             }
-            // This is from Toast or Snackbar
-            this.insertEl()
+            this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
+
             this.timer = setTimeout(() => this.close(), this.newDuration)
         },
 
-        /**
-         * Create container based on the prop or constructor option.
-         */
-        init() {
-            let parent
-            parent = document.querySelector('.notices')
+        setupContainer() {
+            this.parentTop = document.querySelector('.notices.is-top')
+            this.parentBottom = document.querySelector('.notices.is-bottom')
 
-            const container = document.querySelector(this.newContainer) !== null
-                ? document.querySelector(this.newContainer)
-                : document.body
+            if (this.parentTop && this.parentBottom) return
 
-            if (!parent) parent = document.createElement('div')
+            if (!this.parentTop) {
+                this.parentTop = document.createElement('div')
+                this.parentTop.className = 'notices is-top'
+            }
 
-            this.parent = parent
-            if (this.newContainer) parent.style.position = 'absolute'
+            if (!this.parentBottom) {
+                this.parentBottom = document.createElement('div')
+                this.parentBottom.className = 'notices is-bottom'
+            }
 
-            container.appendChild(parent)
+            const container = document.querySelector(this.newContainer) || document.body
+
+            container.appendChild(this.parentTop)
+            container.appendChild(this.parentBottom)
+
+            if (this.newContainer) {
+                this.parentTop.style.position = 'absolute'
+                this.parentBottom.style.position = 'absolute'
+            }
         }
     },
     beforeMount() {
-        this.init()
+        this.setupContainer()
     },
     mounted() {
-        this.show()
+        this.showNotice()
     }
 }

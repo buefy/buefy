@@ -18,7 +18,11 @@ global.Promise = Bluebird
 
 Vue.prototype.$http = Axios
 
-Vue.use(Buefy)
+Vue.use(Buefy, {
+    // defaultSnackbarDuration: 999999,
+    // defaultToastDuration: 999999
+})
+
 Vue.use(VueProgressBar, {
     color: '#7957d5',
     failedColor: '#ff3860',

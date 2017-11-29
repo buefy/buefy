@@ -131,14 +131,21 @@ export default [
                 name: '<code>defaultDatepickerMobileNative</code>',
                 description: 'Default native datepicker on mobile',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
+                values: '—',
                 default: '<code>true</code>'
             },
             {
                 name: '<code>defaultTimepickerMobileNative</code>',
                 description: 'Default native timepicker on mobile',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultNoticeQueue</code>',
+                description: 'Default snackbar/toast <code>queue</code> attribute',
+                type: 'Boolean',
+                values: '—',
                 default: '<code>true</code>'
             }
         ]

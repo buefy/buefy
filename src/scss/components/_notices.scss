@@ -2,19 +2,22 @@
     position: fixed;
     display: flex;
     top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
+    padding: 2em;
     z-index: 1000;
     pointer-events: none;
     .toast {
         display: inline-flex;
         animation-duration: $speed-slow;
-        margin: 1.5em 0.5em;
+        margin: 0.5em 0;
         text-align: center;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
         border-radius: 2em;
         padding: 0.75em 1.5em;
         pointer-events: auto;
+        opacity: 0.92;
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
             $color-invert: nth($pair, 2);
@@ -25,11 +28,11 @@
         }
     }
     .snackbar {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: space-around;
         animation-duration: $speed-slow;
-        margin: 0.5em;
+        margin: 0.5em 0;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
         border-radius: $radius-small;
         pointer-events: auto;
@@ -67,28 +70,32 @@
             overflow: hidden;
         }
     }
+
+    .toast,
+    .snackbar {
+        // Modifers
+        &.is-top {
+            align-self: center;
+        }
+        &.is-top-right {
+            align-self: flex-end;
+        }
+        &.is-bottom {
+            align-self: center;
+        }
+        &.is-bottom-right {
+            align-self: flex-end;
+        }
+        &.is-toast {
+            opacity: 0.92;
+        }
+    }
+
     // Modifers
     &.is-top {
-        justify-content: center;
-    }
-    &.is-top-right {
-        justify-content: flex-end;
+        flex-direction: column;
     }
     &.is-bottom {
-        top: auto;
-        bottom: 0;
-        justify-content: center;
-    }
-    &.is-bottom-left {
-        top: auto;
-        bottom: 0;
-    }
-    &.is-bottom-right {
-        top: auto;
-        bottom: 0;
-        justify-content: flex-end;
-    }
-    &.is-toast {
-        opacity: 0.92;
+        flex-direction: column-reverse;
     }
 }
