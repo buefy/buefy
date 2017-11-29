@@ -89,7 +89,7 @@
                 type: String,
                 default: 'value'
             },
-            selectOnly: Boolean,
+            autocomplete: Boolean,
             disabled: Boolean
         },
         data() {
@@ -171,7 +171,7 @@
                 this.onBlur($event)
 
                 // Add tag on-blur if not select only
-                if (!this.selectOnly) this.addTag()
+                if (!this.autocomplete) this.addTag()
             },
 
             onSelect(option) {
@@ -198,7 +198,7 @@
 
             keydown(event) {
                 // Stop if is to accept select only
-                if (this.selectOnly) return
+                if (this.autocomplete) return
 
                 if (event.keyCode === 13 || event.keyCode === 188) {
                     event.preventDefault()

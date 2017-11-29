@@ -4,7 +4,7 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
-                type: 'Array',
+                type: 'Array<String>, Array<Number>, Array<Object>',
                 values: '—',
                 default: '—'
             },
@@ -43,22 +43,15 @@ export default [
                 name: '<code>rounded</code>',
                 description: 'Makes the tags rounded, optional',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
+                values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>attached</code>',
                 description: 'Makes the tags attached instead of having an appended delete button, optional',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
-                default: '<code>false</code>'
-            },
-            {
-                name: '<code>data</code>',
-                description: 'Options / suggestions',
-                type: 'Array<String>, Array<Number>, Array<Object>',
                 values: '—',
-                default: '—'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>field</code>',
@@ -68,8 +61,8 @@ export default [
                 default: '<code>value</code>'
             },
             {
-                name: '<code>select-only</code>',
-                description: 'Tags can only be selected from autocomplete',
+                name: '<code>autocomplete</code>',
+                description: 'Add autocomplete feature',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -87,6 +80,11 @@ export default [
                 name: '<code>input</code>',
                 description: 'Triggers when tags are added/removed',
                 parameters: '<code>value: Array</code>'
+            },
+            {
+                name: '<code>typing</code>',
+                description: 'User started typing a tag',
+                parameters: '<code>value: String</code>'
             },
             {
                 name: '<code>add</code>',

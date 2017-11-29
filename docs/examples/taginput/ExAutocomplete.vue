@@ -1,15 +1,10 @@
 <template>
     <section>
-        <div class="field">
-            <b-switch v-model="isSelectOnly">
-                Select only
-            </b-switch>
-        </div>
         <b-field label="Enter some tags">
             <b-taginput
                 v-model="tags"
                 :data="filteredTags"
-                :select-only="isSelectOnly"
+                autocomplete
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"

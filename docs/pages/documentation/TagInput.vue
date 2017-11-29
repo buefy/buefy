@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h1 class="title is-spaced">Taginput</h1>
-        <h2 class="subtitle">A simple tag input field. Tags are added when enter or comma are pressed, or when the field loses focus.</h2>
+        <h2 class="subtitle">A simple tag input field that can have autocomplete functionality</h2>
         <hr>
 
         <div class="columns">
@@ -16,8 +16,8 @@
         <hr>
         <h2 class="title">Autocomplete</h2>
         <p class="content">
-            You can add any prop from <router-link to="/documentation/autocomplete">Autocomplete</router-link>.
-            The <code>select-only</code> prop forces users to only select from the list.
+            To have autocomplete functionality, add the <code>autocomplete</code> prop.
+            You can add any prop from <router-link to="/documentation/autocomplete">Autocomplete</router-link> API.
         </p>
 
         <div class="columns">

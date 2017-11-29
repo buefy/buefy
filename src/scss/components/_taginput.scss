@@ -31,7 +31,8 @@
             input {
                 height: 2em;
                 margin-bottom: calc(0.375em - 1px);
-                padding: 0;
+                padding-top: 0;
+                padding-bottom: 0;
                 border: none;
                 box-shadow: none;
                 &:focus {
