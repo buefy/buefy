@@ -11,10 +11,12 @@
 * Add ``events`` prop to modal (to bind events programmatically)
 * Add ``position`` prop to datepicker and timepicker
 * Add ``size`` prop to dialog
+* Add ``tabstop`` and ``disabled`` props to tag
 
 ### Fixes
 
 * Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
+* Maxlength counter for input only shows on focus
 * #440 Fix upload input file width
 
 ## 0.6.1
