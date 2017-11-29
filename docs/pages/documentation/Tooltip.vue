@@ -31,21 +31,6 @@
 
         <hr>
 
-        <h3 class="title is-spaced">Multilined</h3>
-        <p class="content">Well, it's not always <em>that</em> brief.</p>
-        <div class="columns">
-            <div class="column">
-                <div class="example">
-                    <ex-multilined></ex-multilined>
-                </div>
-            </div>
-            <div class="column">
-                <CodeView :code="ExMultilinedCode" />
-            </div>
-        </div>
-
-        <hr>
-
         <h3 class="title is-spaced">Toggle</h3>
         <div class="columns">
             <div class="column">
@@ -74,9 +59,6 @@
     import ExStyles from '@/examples/tooltip/ExStyles'
     import ExStylesCode from '!!raw-loader!@/examples/tooltip/ExStyles'
 
-    import ExMultilined from '@/examples/tooltip/ExMultilined'
-    import ExMultilinedCode from '!!raw-loader!@/examples/tooltip/ExMultilined'
-
     import ExToggle from '@/examples/tooltip/ExToggle'
     import ExToggleCode from '!!raw-loader!@/examples/tooltip/ExToggle'
 
@@ -84,7 +66,7 @@
         components: {
             ExSimple,
             ExStyles,
-            ExMultilined,
+            // ExMultilined,
             ExToggle
         },
         data() {
@@ -92,7 +74,6 @@
                 api,
                 ExSimpleCode,
                 ExStylesCode,
-                ExMultilinedCode,
                 ExToggleCode
             }
         }
