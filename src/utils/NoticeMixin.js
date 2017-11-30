@@ -129,8 +129,8 @@ export default {
             container.appendChild(this.parentBottom)
 
             if (this.newContainer) {
-                this.parentTop.style.position = 'absolute'
-                this.parentBottom.style.position = 'absolute'
+                this.parentTop.classList.add('has-custom-container')
+                this.parentBottom.classList.add('has-custom-container')
             }
         }
     },

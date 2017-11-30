@@ -1,3 +1,5 @@
+$snackbar-background-color: $dark !default;
+
 .notices {
     position: fixed;
     display: flex;
@@ -6,6 +8,7 @@
     left: 0;
     right: 0;
     padding: 2em;
+    overflow: hidden;
     z-index: 1000;
     pointer-events: none;
     .toast {
@@ -34,9 +37,9 @@
         animation-duration: $speed-slow;
         margin: 0.5em 0;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-        border-radius: $radius-small;
+        border-radius: $radius;
         pointer-events: auto;
-        background: $dark;
+        background: $snackbar-background-color;
         color: $dark-invert;
         min-height: 3em;
         .text {
@@ -97,5 +100,13 @@
     }
     &.is-bottom {
         flex-direction: column-reverse;
+    }
+    &.has-custom-container {
+        position: absolute;
+    }
+
+    @include mobile {
+        padding: 0;
+        position: fixed !important;
     }
 }
