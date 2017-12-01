@@ -174,6 +174,7 @@
         },
         mounted() {
             if (this.programmatic) this.isActive = true
+            else if (this.isActive) this.handleScroll()
         },
         beforeDestroy() {
             if (typeof window !== 'undefined') {
