@@ -11,7 +11,9 @@
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle">
+            @click="toggle"
+            @mouseleave="mouseLeave"
+            @mouseenter="mouseEnter">
             <slot name="trigger"></slot>
         </div>
 
@@ -22,7 +24,7 @@
             </div>
         </transition>
         <transition name="fade">
-            <div v-show="isActive || hoverable || inline"
+            <div v-show="isActive || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu">
                 <div class="dropdown-content">
@@ -135,6 +137,24 @@
                 if (this.inline) return
 
                 if (!this.isInWhiteList(event.target)) this.isActive = false
+            },
+
+            /**
+             * Show dropdown if hoverable
+             */
+            mouseEnter() {
+                if (this.disabled || !this.hoverable) return
+
+                this.isActive = true
+            },
+
+            /**
+             * Close dropdown if hoverable
+             */
+            mouseLeave() {
+                if (this.disabled || !this.hoverable) return
+
+                this.isActive = false
             },
 
             /**
