@@ -1,6 +1,6 @@
 <script>
     export default {
-        name: 'fieldBody',
+        name: 'bFieldBody',
         render(h) {
             return h('div', { attrs: { 'class': 'field-body' }}, this.$slots.default.map(v => {
                 // skip returns and comments

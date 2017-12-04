@@ -10,9 +10,9 @@
         <template v-else>
             <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
         </template>
-        <field-body v-if="horizontal">
+        <b-field-body v-if="horizontal">
             <slot></slot>
-        </field-body>
+        </b-field-body>
         <template v-else>
             <slot></slot>
         </template>
@@ -26,7 +26,7 @@
     export default {
         name: 'bField',
         components: {
-            FieldBody
+            'b-field-body': FieldBody
         },
         props: {
             type: String,
