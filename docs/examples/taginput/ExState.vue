@@ -3,47 +3,47 @@
         <b-field
             label="Success"
             type="is-success">
-            <b-tag-input
+            <b-taginput
                 :value="['Tag']">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
         <b-field
             label="Error"
             type="is-danger">
-            <b-tag-input
+            <b-taginput
                 :value="['Tag']">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
         <b-field
             label="Info"
             type="is-info">
-            <b-tag-input
+            <b-taginput
                 :value="['Tag']">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
         <b-field
             label="Warning"
             type="is-warning">
-            <b-tag-input
+            <b-taginput
                 :value="['Tag']">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
         <b-field label="Disabled">
-            <b-tag-input
+            <b-taginput
                 :value="['Tag']"
                 disabled>
-            </b-tag-input>
+            </b-taginput>
         </b-field>
 
         <b-field label="Loading">
-            <b-tag-input
+            <b-taginput
                 :value="['Tag']"
                 loading>
-            </b-tag-input>
+            </b-taginput>
         </b-field>
     </section>
 </template>

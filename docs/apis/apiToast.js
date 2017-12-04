@@ -33,6 +33,13 @@ export default [
                 default: '<code>2000</code>'
             },
             {
+                name: '<code>queue</code>',
+                description: 'If should queue with others notices (snackbar/toast)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>container</code>',
                 description: 'DOM element the toast will be created on. Note that this also changes the <code>position</code> of the toast from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>.',
                 type: 'String',

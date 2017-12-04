@@ -4,7 +4,7 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
-                type: 'Array',
+                type: 'Array<String>, Array<Number>, Array<Object>',
                 values: '—',
                 default: '—'
             },
@@ -23,8 +23,8 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>color</code>',
-                description: 'Color of the tags, optional',
+                name: '<code>type</code>',
+                description: 'Type (color) of the tags, optional',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
@@ -43,22 +43,15 @@ export default [
                 name: '<code>rounded</code>',
                 description: 'Makes the tags rounded, optional',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
+                values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>attached</code>',
                 description: 'Makes the tags attached instead of having an appended delete button, optional',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
-                default: '<code>false</code>'
-            },
-            {
-                name: '<code>data</code>',
-                description: 'Options / suggestions',
-                type: 'Array<String>, Array<Number>, Array<Object>',
                 values: '—',
-                default: '—'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>field</code>',
@@ -66,6 +59,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '<code>value</code>'
+            },
+            {
+                name: '<code>autocomplete</code>',
+                description: 'Add autocomplete feature',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: 'Any other native attribute or Autocomplete prop',
@@ -80,6 +80,11 @@ export default [
                 name: '<code>input</code>',
                 description: 'Triggers when tags are added/removed',
                 parameters: '<code>value: Array</code>'
+            },
+            {
+                name: '<code>typing</code>',
+                description: 'User started typing a tag',
+                parameters: '<code>value: String</code>'
             },
             {
                 name: '<code>add</code>',

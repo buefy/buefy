@@ -1,15 +1,15 @@
 <template>
     <section>
         <b-field label="Enter some tags">
-            <b-tag-input
+            <b-taginput
                 v-model="tags"
                 :data="filteredTags"
+                autocomplete
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"
-                select-only
                 @typing="getFilteredTags">
-            </b-tag-input>
+            </b-taginput>
         </b-field>
         <pre style="max-height: 400px"><b>Tags:</b>{{ tags }}</pre>
     </section>
@@ -28,6 +28,7 @@
         data() {
             return {
                 filteredTags: data,
+                isSelectOnly: false,
                 tags: []
             }
         },

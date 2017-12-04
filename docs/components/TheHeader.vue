@@ -238,7 +238,7 @@
                                 isNew: true
                             },
                             {
-                                name: 'Tag input',
+                                name: 'Taginput',
                                 isNew: true
                             }
                         ]
