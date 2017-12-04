@@ -46,7 +46,7 @@ const Radio = () => import('@/pages/documentation/Radio')
 const Switch = () => import('@/pages/documentation/Switch')
 const Upload = () => import('@/pages/documentation/Upload')
 const Datepicker = () => import('@/pages/documentation/Datepicker')
-const Taginput = () => import('@/pages/documentation/Taginput')
+const Taginput = () => import('@/pages/documentation/TagInput')
 const Timepicker = () => import('@/pages/documentation/Timepicker')
 
 // Data
