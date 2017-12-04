@@ -19,5 +19,13 @@
 // Buefy
 @import "../../../src/scss/buefy";
 
-// Others
+// Highlight
 @import "~highlight.js/styles/atelier-cave-light.css";
+
+// MDI
+$mdi-font-path: "~mdi/fonts";
+@import "~mdi/scss/materialdesignicons";
+
+// FontAwesome
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
