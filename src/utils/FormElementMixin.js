@@ -1,3 +1,5 @@
+import config from './config'
+
 export default {
     props: {
         size: String,
@@ -13,7 +15,8 @@ export default {
     data() {
         return {
             isValid: true,
-            isFocused: false
+            isFocused: false,
+            newIconPack: this.iconPack || config.defaultIconPack
         }
     },
     computed: {
@@ -46,6 +49,19 @@ export default {
             if (!this.parentField) return
 
             return this.parentField.newMessage
+        },
+
+        /**
+         * Fix icon size for inputs, large was too big
+         */
+        iconSize() {
+            switch (this.size) {
+                case 'is-small': return this.size
+                case 'is-medium': return
+                case 'is-large': return this.newIconPack === 'fa'
+                    ? ''
+                    : 'is-medium'
+            }
         }
     },
     methods: {

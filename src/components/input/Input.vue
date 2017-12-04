@@ -32,7 +32,7 @@
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="size">
+            :size="iconSize">
         </b-icon>
 
         <b-icon
@@ -40,7 +40,7 @@
             class="is-right"
             :class="{ 'is-clickable': passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
-            :size="size"
+            :size="iconSize"
             :type="!passwordReveal ? statusType : 'is-primary'"
             both
             @click.native="togglePasswordVisibility">

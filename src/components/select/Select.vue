@@ -34,7 +34,7 @@
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="size">
+            :size="iconSize">
         </b-icon>
     </div>
 </template>
