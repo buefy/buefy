@@ -102,7 +102,7 @@
 </template>
 
 <script>
-    import api from '@/apis/apiTaginput'
+    import api from '@/apis/apiTagInput'
 
     import ExSimple from '@/examples/taginput/ExSimple'
     import ExSimpleCode from '!!raw-loader!@/examples/taginput/ExSimple'
