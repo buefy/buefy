@@ -9,8 +9,7 @@
             message="This email is invalid">
             <b-input type="email"
                 value="john@"
-                maxlength="30"
-                :has-counter="false">
+                maxlength="30">
             </b-input>
         </b-field>
 

@@ -7,7 +7,7 @@
 * **New component: Tag Input**, [see docs](https://buefy.github.io/#/documentation/taginput) (thanks @jgerbes)
 * **Datepicker improved**: can add event indicators on it (thanks @chasegiunta) (see #432)
 * #125 Add ``queue`` prop to toast/snackbar and ``defaultNoticeQueue`` constructor option
-    * Note that the animations aren't perfect right now, contribution is welcome
+    * Note that the animations aren't perfect right now, gonna update soon
 * Add ``mobile-native`` prop to datepicker and timepicker
 * Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
 * Add ``events`` prop to modal (to bind events programmatically)
@@ -19,6 +19,8 @@
 
 * Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
 * Maxlength counter for input only shows on focus
+* #416 Fix pagination color
+* #419 Fix input icon size
 * #440 Fix upload input file width
 
 ## 0.6.1

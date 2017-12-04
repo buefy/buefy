@@ -69,7 +69,7 @@ export default [
                 description: 'Show character counter when <code>maxlength</code> prop is passed',
                 type: 'Boolean',
                 values: '—',
-                default: 'true'
+                default: '<code>true</code>'
             },
             {
                 name: 'Any native attribute',

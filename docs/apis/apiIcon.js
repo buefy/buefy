@@ -37,12 +37,15 @@ export default [
                 description: 'Overrides icon font size, optional',
                 type: 'String',
                 values: `Depends on library: <code>null</code> (smallest), <code>fa-lg</code>, <code>fa-2x</code>, <code>fa-3x</code>,
+                <code>fa-4x</code>, <code>fa-5x</code>,
                     <code>mdi-18px</code>, <code>mdi-24px</code>, <code>mdi-36px</code>, <code>mdi-48px</code>`,
                 default: 'Depends on <code>size</code> prop'
             },
             {
                 name: '<code>custom-class</code>',
-                description: 'Add class to icon font (<code>&lt;i&gt;</code> tag), optional',
+                description: `Add class to icon font (<code>&lt;i&gt;</code> tag), optional.
+                    See <a href="https://materialdesignicons.com/getting-started" target="_blank">here for MDI</a> and
+                    <a href="http://fontawesome.io/examples/" target="_blank">here for FontAwesome</a> custom classes`,
                 type: 'String',
                 values: '—',
                 default: '—'

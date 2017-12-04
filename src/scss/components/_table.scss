@@ -96,8 +96,8 @@
             }
         }
         &:focus {
-            border-color: $table-row-active-background-color;
-            box-shadow: 0 0 0 0.125em rgba($table-row-active-background-color, 0.25);
+            border-color: $link;
+            box-shadow: 0 0 0 0.125em rgba($link, 0.25);
         }
         // Modifiers
         &.is-bordered {
