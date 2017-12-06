@@ -8,3 +8,8 @@ html.is-clipped-touch {
         overflow: hidden !important;
     }
 }
+
+.media-content {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
