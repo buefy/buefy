@@ -1,6 +1,7 @@
 .b-tabs {
     .tabs {
         margin-bottom: 0;
+        flex-shrink: 0;
     }
     .is-disabled {
         pointer-events: none;

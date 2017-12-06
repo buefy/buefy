@@ -20,6 +20,7 @@
 
 * Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
 * Maxlength counter for input only shows on focus
+* Fix tabs buttons size sometimes flickering
 * #416 Fix pagination color
 * #419 Fix input icon size
 * #428 Fix ``current-page`` from table to be reactive
