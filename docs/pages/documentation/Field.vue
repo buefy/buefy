@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Field</h1>
         <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
         <hr>
@@ -7,11 +7,15 @@
         <div class="content">
             <p>These components should be used as a <strong>direct child</strong> of Field:</p>
             <ul>
-                <li>Input</li>
-                <li>Select</li>
                 <li>Autocomplete</li>
-                <li>Upload</li>
+                <li>Checkbox Button</li>
+                <li>Datepicker</li>
+                <li>Input</li>
                 <li>Radio Button</li>
+                <li>Select</li>
+                <li>Taginput</li>
+                <li>Timepicker</li>
+                <li>Upload</li>
                 <li><code>.control</code> elements (html class)</li>
             </ul>
         </div>

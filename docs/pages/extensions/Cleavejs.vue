@@ -1,35 +1,34 @@
 <template>
-    <div>
-        <h1 class="title is-spaced">Cleave.js</h1>
-        <h2 class="subtitle">Format input text while you type</h2>
+    <div class="container">
+        <h1 class="title is-spaced">Cleave.js </h1>
+        <h2 class="subtitle">Format input text while you type — as a Vue directive</h2>
         <div class="buttons">
             <a
-                class="button is-info is-small"
+                class="button"
                 href="https://nosir.github.io/cleave.js"
                 target="_blank">
                 Website
             </a>
             <a
-                class="button is-info is-small"
+                class="button"
                 href="https://github.com/nosir/cleave.js/blob/master/doc/options.md"
                 target="_blank">
                 Docs
             </a>
         </div>
-        <hr>
 
         <b-message type="is-info">
-            <div class="content">
-                <p><strong>Cleave.js is not included in Buefy</strong>, you have to install it:</p>
-                <p><CodeView code="npm install cleave.js" /></p>
-            </div>
+            <p class="content"><strong>Cleave.js is not included in Buefy</strong>, you have to install it:</p>
+            <CodeView code="npm install cleave.js" expanded/>
         </b-message>
 
+        <hr>
+
         <div class="columns">
-            <div class="column">
+            <div class="column is-6">
                 <ex-format></ex-format>
             </div>
-            <div class="column">
+            <div class="column is-6">
                 <CodeView :code="ExFormatCode" />
             </div>
         </div>

@@ -15,5 +15,12 @@
                 flex: 1;
             }
         }
+        .is-subitem {
+            text-transform: uppercase;
+            color: $grey;
+            &:not(:first-child) {
+                margin-top: 1rem;
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Select</h1>
         <h2 class="subtitle">
             Select an item in a dropdown list.

@@ -1,6 +1,7 @@
 .highlight {
     position: relative;
     text-align: left !important;
+    height: 3.25rem;
     .button {
         position: absolute;
         right: 1.5rem;
@@ -22,5 +23,34 @@
         @include tablet {
             white-space: pre-wrap;
         }
+    }
+    .codeview-showcode {
+        display: flex;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        align-items: center;
+        background-color: rgba($white, 0.7);
+        border: none;
+        color: $grey;
+        cursor: pointer;
+        font-size: 0.75rem;
+        justify-content: center;
+        width: 100%;
+        font-weight: $weight-semibold;
+        &:hover {
+            background-color: rgba($warning, 0.7);
+        }
+        .icon {
+            margin-right: 0.5rem;
+        }
+    }
+    &.is-expanded {
+        height: auto;
+    }
+    &.is-collapsed {
+        border: 1px solid $warning;
     }
 }

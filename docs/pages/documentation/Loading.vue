@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Loading</h1>
         <h2 class="subtitle">A simple loading overlay</h2>
         <hr>

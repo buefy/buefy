@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Radio</h1>
         <h2 class="subtitle">Select an option from a set</h2>
         <hr>

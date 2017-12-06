@@ -3,13 +3,30 @@
     margin-right: 3rem;
     padding-right: 0.5rem;
     position: sticky;
-    top: 1.5rem;
+    top: 1rem;
     overflow: auto;
-    max-height: calc(100vh - 3rem);
-    .menu-list a {
-        display: flex;
-        .menu-text {
-            flex: 1 1 auto;
+    max-height: calc(100vh - 2rem);
+    .menu-list {
+        a {
+            @include unselectable;
+            display: flex;
+            position: relative;
+            padding-left: 1rem;
+            .chevron-icon {
+                position: absolute;
+                top: 12px;
+                left: 0;
+            }
+            .menu-text {
+                flex: 1 1 auto;
+            }
+        }
+        ul {
+            display: none;
+            &.is-active {
+                display: block;
+            }
         }
     }
 }
+

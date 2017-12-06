@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Customizing theme with Sass</h1>
         <h2 class="subtitle">
             If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <b>customize</b>
@@ -14,7 +14,7 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Install Buefy via npm</h3>
-                <CodeView code="npm install buefy" lang="bash" />
+                <CodeView code="npm install buefy" lang="bash" expanded/>
                 <p class="content">Or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag, or in a separate <b>.scss</b> file.
                 </p>
                 <div class="example is-paddingless">
-                    <CodeView :code="sass | pre" lang="sass" />
+                    <CodeView :code="sass | pre" lang="sass" expanded/>
                 </div>
 
             </div>
@@ -57,7 +57,7 @@
                 <b-message type="is-warning">
                     Please note that <code class="javascript">import 'buefy/lib/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
                 </b-message>
-                <CodeView :code="importing | pre" lang="javascript" />
+                <CodeView :code="importing | pre" lang="javascript" expanded/>
             </div>
         </div>
 

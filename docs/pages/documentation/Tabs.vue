@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title is-spaced">Tabs</h1>
         <h2 class="subtitle">Responsive horizontal navigation tabs, switch between contents with ease</h2>
         <hr>

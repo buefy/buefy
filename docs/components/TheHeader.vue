@@ -32,6 +32,8 @@
                 <div class="navbar-end">
                     <router-link to="/" exact class="navbar-item">Home</router-link>
 
+                    <hr class="navbar-divider" style="display: block;">
+
                     <router-link to="/documentation" class="navbar-item is-hidden-touch">Documentation</router-link>
 
                     <!-- Mobile documentation menu -->
@@ -42,25 +44,39 @@
                             <template v-for="items in menuDocumentation">
                                 <div
                                     :key="items.category"
-                                    class="navbar-item has-text-weight-semibold is-uppercase has-text-grey">
+                                    class="navbar-item is-subitem">
                                     {{ items.category }}
                                 </div>
 
-                                <router-link
-                                    v-for="page in items.pages"
-                                    :key="page.name"
-                                    :to="`/documentation/${$options.filters.slugify(page.name)}`"
-                                    class="navbar-item">
-                                    <span class="navbar-item-text">{{ page.name }}</span>
-                                    <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                </router-link>
+                                <template v-for="page in items.pages">
+                                    <router-link
+                                        v-if="page.name"
+                                        :key="page.name"
+                                        :to="`/documentation/${$options.filters.slugify(page.name)}`"
+                                        class="navbar-item">
+                                        <span class="navbar-item-text">{{ page.name }}</span>
+                                        <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                                    </router-link>
 
-                                <hr :key="items.category"
-                                    class="navbar-divider"
-                                    style="display: block;">
+                                    <!-- submenu -->
+                                    <template v-else>
+                                        <div class="navbar-item">{{ page.category }}</div>
+                                        <router-link
+                                            v-for="page in page.pages"
+                                            :key="page.name"
+                                            :to="`/documentation/${$options.filters.slugify(page.name)}`"
+                                            class="navbar-item"
+                                            style="margin-left: 1rem;">
+                                            <span class="navbar-item-text">{{ page.name }}</span>
+                                            <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                                        </router-link>
+                                    </template>
+                                </template>
+
                             </template>
                         </div>
                     </div>
+                    <hr class="navbar-divider" style="display: block;">
 
                     <router-link to="/extensions" class="navbar-item is-hidden-touch">Extensions</router-link>
 
@@ -87,6 +103,8 @@
                             </template>
                         </div>
                     </div>
+
+                    <hr class="navbar-divider" style="display: block;">
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div class="navbar-link">Info</div>
@@ -125,7 +143,9 @@
 </template>
 
 <script>
-    import Package from '../../package.json'
+    import buefyPackage from '../../package'
+    import bulmaPackage from 'bulma/package'
+    import { menuDocumentation, menuExtensions } from '../menu'
 
     export default {
         props: {
@@ -134,138 +154,10 @@
         data() {
             return {
                 isMenuActive: false,
-                version: Package.version,
-                bulmaVersion: Package.dependencies.bulma.substr(1),
-                menuDocumentation: [
-                    {
-                        category: 'Installation',
-                        pages: [
-                            {
-                                name: 'Start'
-                            },
-                            {
-                                name: 'Customization'
-                            },
-                            {
-                                name: 'Constructor options'
-                            }
-                        ]
-                    },
-                    {
-                        category: 'General',
-                        pages: [
-                            {
-                                name: 'Layout'
-                            },
-                            {
-                                name: 'Icon'
-                            },
-                            {
-                                name: 'Dropdown'
-                            },
-                            {
-                                name: 'Modal'
-                            },
-                            {
-                                name: 'Collapse'
-                            },
-                            {
-                                name: 'Tabs'
-                            },
-                            {
-                                name: 'Tag'
-                            },
-                            {
-                                name: 'Tooltip'
-                            }
-                        ]
-                    },
-                    {
-                        category: 'Notices',
-                        pages: [
-                            {
-                                name: 'Dialog'
-                            },
-                            {
-                                name: 'Toast'
-                            },
-                            {
-                                name: 'Snackbar'
-                            },
-                            {
-                                name: 'Notification'
-                            },
-                            {
-                                name: 'Message'
-                            },
-                            {
-                                name: 'Loading'
-                            }
-                        ]
-                    },
-                    {
-                        category: 'Form',
-                        pages: [
-                            {
-                                name: 'Field'
-                            },
-                            {
-                                name: 'Input'
-                            },
-                            {
-                                name: 'Select'
-                            },
-                            {
-                                name: 'Autocomplete'
-                            },
-                            {
-                                name: 'Checkbox'
-                            },
-                            {
-                                name: 'Radio'
-                            },
-                            {
-                                name: 'Switch'
-                            },
-                            {
-                                name: 'Upload'
-                            },
-                            {
-                                name: 'Datepicker'
-                            },
-                            {
-                                name: 'Timepicker',
-                                isNew: true
-                            },
-                            {
-                                name: 'Taginput',
-                                isNew: true
-                            }
-                        ]
-                    },
-                    {
-                        category: 'Data',
-                        pages: [
-                            {
-                                name: 'Table'
-                            },
-                            {
-                                name: 'Pagination'
-                            }
-                        ]
-                    }
-                ],
-                menuExtensions: [
-                    {
-                        category: 'Extensions',
-                        pages: [
-                            {
-                                name: 'Cleavejs',
-                                isNew: true
-                            }
-                        ]
-                    }
-                ]
+                version: buefyPackage.version,
+                bulmaVersion: bulmaPackage.version,
+                menuDocumentation,
+                menuExtensions
             }
         },
         methods: {

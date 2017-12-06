@@ -13,7 +13,7 @@
 
         <section class="section">
             <div class="container is-fullhd template-horizontal">
-                <TheSidebar :data="menu" />
+                <TheSidebar :data="menuExtensions" />
                 <router-view></router-view>
             </div>
         </section>
@@ -24,12 +24,13 @@
 
 <script>
     import DefaultMixin from './DefaultMixin'
+    import { menuExtensions } from '../menu'
 
     export default {
         mixins: [DefaultMixin],
         data() {
             return {
-                menuName: 'menuExtensions'
+                menuExtensions
             }
         }
     }

@@ -8,11 +8,6 @@ export default {
         TheFooter,
         TheSidebar
     },
-    data() {
-        return {
-            menu: null
-        }
-    },
     beforeRouteUpdate(to, from, next) {
         document.documentElement.scrollTop = 0
         this.$refs.header.closeMenu()
@@ -28,8 +23,5 @@ export default {
         next((vm) => {
             vm.$refs.header.closeMenu()
         })
-    },
-    mounted() {
-        this.menu = this.$refs.header[this.menuName]
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1 class="title is-spaced">Layout & Elements</h1>
+    <div class="container">
+        <h1 class="title is-spaced">Layout & elements</h1>
         <h2 class="subtitle">Buefy has the entire Bulma's core <b>built in</b>. You can use any feature from Bulma, plus all the components Buefy offers</h2>
         <hr>
 
@@ -28,7 +28,10 @@
                 <li><a href="http://bulma.io/documentation/components/media-object/" target="_blank">Media</a></li>
             </ul>
 
-            <p class="subtitle">And many more, refer to the documentation.</p>
+            <p class="subtitle">
+                And many more, refer to its
+                <a href="https://bulma.io/documentation/columns/basics/" target="_blank">documentation</a>.
+            </p>
         </div>
     </div>
 </template>
