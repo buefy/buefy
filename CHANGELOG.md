@@ -16,10 +16,11 @@
 * Add ``tabstop`` and ``disabled`` props to tag
 * Add ``.sync`` option to table ``current-page``
 
-### Fixes
+### Fixes and changes
 
-* Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
 * Maxlength counter for input only shows on focus
+* Add padding to tab content
+* Fix autocomplete with ``keep-first`` selecting on blur when nothing is shown
 * Fix tabs buttons size sometimes flickering
 * #416 Fix pagination color
 * #419 Fix input icon size
