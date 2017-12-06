@@ -12,7 +12,13 @@
 
 .b-table {
     transition: opacity $speed $easing;
-    // Out of .table to work with the orderer <select> as well.
+
+    .table-mobile-sort {
+        @include tablet {
+            display: none;
+        }
+    }
+
     .icon {
         transition: transform $speed-slow $easing, opacity $speed $easing;
         &.is-desc {
@@ -22,10 +28,9 @@
             transform: rotate(90deg);
         }
     }
+
     .table {
         width: 100%;
-        // Transparent border to not break when focused
-        // since box-shadow inset won't work correctly
         border: 1px solid transparent;
         border-radius: $radius;
         border-collapse: separate;
@@ -99,6 +104,7 @@
             border-color: $link;
             box-shadow: 0 0 0 0.125em rgba($link, 0.25);
         }
+
         // Modifiers
         &.is-bordered {
             th.is-current-sort,
@@ -123,9 +129,7 @@
                     box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
                     max-width: 100%;
                     position: relative;
-                    // ---------------------------
                     display: block;
-                    margin: 0.25em;
                     td {
                         border: 0; // Disable is-bordered
                         display: inherit;

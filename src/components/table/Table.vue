@@ -1,40 +1,18 @@
 <template>
     <div class="b-table" :class="{ 'is-loading': loading }">
-        <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet">
-            <div v-if="mobileCards && hasSortableColumns" class="field is-hidden-tablet has-addons">
-                <b-select v-model="mobileSort" expanded>
-                    <option v-for="(column, index) in columns"
-                        v-if="column.sortable"
-                        :key="index"
-                        :value="column">
-                        {{ column.label }}
-                    </option>
-                </b-select>
-                <p class="control">
-                    <button class="button is-primary" @click="sort(mobileSort)">
-                        <b-icon
-                            v-show="currentSortColumn === mobileSort"
-                            icon="arrow-up"
-                            both
-                            size="is-small"
-                            :class="{ 'is-desc': !isAsc }">
-                        </b-icon>
-                    </button>
-                </p>
-            </div>
-        </div>
+        <b-table-mobile-sort
+            v-if="mobileCards && hasSortableColumns"
+            :current-sort-column="currentSortColumn"
+            :is-asc="isAsc"
+            :columns="columns"
+            @sort="(column) => sort(column)"
+        />
 
         <div class="table-wrapper">
             <table
                 class="table"
+                :class="tableClasses"
                 :tabindex="!focusable ? false : 0"
-                :class="{
-                    'is-bordered': bordered,
-                    'is-striped': striped,
-                    'is-narrow': narrowed,
-                    'is-hoverable': hoverable || focusable,
-                    'has-mobile-cards': mobileCards
-                }"
                 @keydown.prevent.up="pressedArrow(-1)"
                 @keydown.prevent.down="pressedArrow(1)">
                 <thead v-if="columns.length">
@@ -142,16 +120,19 @@
 
 <script>
     import { getValueByPath, indexOf } from '../../utils/helpers'
-    import Pagination from '../pagination'
-    import Icon from '../icon'
-    import { Checkbox } from '../checkbox'
+    import { Checkbox as BCheckbox } from '../checkbox'
+    import BPagination from '../pagination'
+    import BIcon from '../icon'
+
+    import BTableMobileSort from './TableMobileSort'
 
     export default {
         name: 'bTable',
         components: {
-            [Pagination.name]: Pagination,
-            [Icon.name]: Icon,
-            [Checkbox.name]: Checkbox
+            BPagination,
+            BIcon,
+            BCheckbox,
+            BTableMobileSort
         },
         props: {
             data: {
@@ -220,7 +201,6 @@
                 newCurrentPage: this.currentPage,
                 currentSortColumn: {},
                 isAsc: true,
-                mobileSort: {},
                 firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
@@ -265,22 +245,6 @@
             },
 
             /**
-             * When mobileSort change (mobile dropdown) call sort method.
-             */
-            mobileSort(column) {
-                if (this.currentSortColumn === column) return
-
-                this.sort(column)
-            },
-
-            /**
-             * When currentSortColumn change, update mobileSort.
-             */
-            currentSortColumn(column) {
-                this.mobileSort = column
-            },
-
-            /**
              * When checkedRows prop change, update internal value without
              * mutating original data.
              */
@@ -318,6 +282,19 @@
             }
         },
         computed: {
+            tableClasses() {
+                return {
+                    'is-bordered': this.bordered,
+                    'is-striped': this.striped,
+                    'is-narrow': this.narrowed,
+                    'has-mobile-cards': this.mobileCards,
+                    'is-hoverable': (
+                        (this.hoverable || this.focusable) &&
+                        this.visibleData.length
+                    )
+                }
+            },
+
             /**
              * Splitted data based on the pagination.
              */
