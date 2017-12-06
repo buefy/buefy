@@ -14,6 +14,7 @@
 * Add ``position`` prop to datepicker and timepicker
 * Add ``size`` prop to dialog
 * Add ``tabstop`` and ``disabled`` props to tag
+* Add ``.sync`` option to table ``current-page``
 
 ### Fixes
 
@@ -21,7 +22,8 @@
 * Maxlength counter for input only shows on focus
 * #416 Fix pagination color
 * #419 Fix input icon size
-* #440 Fix upload input file width
+* #428 Fix ``current-page`` from table to be reactive
+* #440 Fix upload input file width (thanks @frantic1048)
 
 ## 0.6.1
 

@@ -11,6 +11,9 @@
                 <option value="15">15 per page</option>
                 <option value="20">20 per page</option>
             </b-select>
+            <div class="control">
+                <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
+            </div>
             <div class="control is-flex">
                 <b-switch v-model="isPaginated">Paginated</b-switch>
             </div>
@@ -23,6 +26,7 @@
             :data="tableData"
             :paginated="isPaginated"
             :per-page="perPage"
+            :current-page.sync="currentPage"
             :pagination-simple="isPaginationSimple"
             :default-sort-direction="defaultSortDirection"
             default-sort="user.first_name">
@@ -73,6 +77,7 @@
                 isPaginated: true,
                 isPaginationSimple: false,
                 defaultSortDirection: 'asc',
+                currentPage: 1,
                 perPage: 5
             }
         }

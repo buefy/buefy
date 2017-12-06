@@ -92,6 +92,7 @@
                         </tr>
 
                         <tr v-if="detailed && isVisibleDetailRow(row)"
+                            :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -312,10 +313,6 @@
                 this.visibleDetailRows = expandedRows
             },
 
-            /**
-             * When prop currentPage updated
-             * react to it
-             */
             currentPage(newVal) {
                 this.newCurrentPage = newVal
             }
@@ -503,6 +500,7 @@
             pageChanged(page) {
                 this.newCurrentPage = page > 0 ? page : 1
                 this.$emit('page-change', this.newCurrentPage)
+                this.$emit('update:currentPage', this.newCurrentPage)
             },
 
             /**
