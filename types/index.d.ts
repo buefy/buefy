@@ -6,11 +6,11 @@ import { ColorModifiers } from "./helpers";
 // Adds Buefy method signatures to Vue instance (ie this.$dialog)
 declare module 'vue/types/vue' {
     interface Vue {
-        $dialog: Dialog,
-        $loading: LoadingProgrammatic,
-        $modal: ModalProgrammatic,
-        $snackbar: Snackbar,
-        $toast: Toast
+        $dialog: typeof Dialog,
+        $loading: typeof LoadingProgrammatic,
+        $modal: typeof ModalProgrammatic,
+        $snackbar: typeof Snackbar,
+        $toast: typeof Toast
     }
 }
 
