@@ -81,13 +81,13 @@ type PromptDialogConfig = DialogConfig & {
     inputAttrs?: any;
 };
 
-export declare type Dialog = {
+export declare const Dialog: {
     alert: (params: DialogConfig | string) => any;
     confirm: (params: DialogConfig) => any;
     prompt: (params: PromptDialogConfig) => any;
 }
 
-export declare type LoadingProgrammatic = {
+export declare const LoadingProgrammatic: {
     open: () => { close: () => any };
 }
 
@@ -107,7 +107,7 @@ declare type ModalConfig = {
     scroll?: 'clip' | 'keep';
 }
 
-export declare type ModalProgrammatic = {
+export declare const ModalProgrammatic: {
     open: (params: ModalConfig | string) => any;
 }
 
@@ -120,7 +120,7 @@ export declare type SnackbarConfig = {
     actionText?: string | null;
     onAction?: () => any;
 }
-export declare type Snackbar = {
+export declare const Snackbar: {
     open: (params: SnackbarConfig | string) => void;
 }
 
@@ -153,6 +153,6 @@ export declare type ToastConfig = {
     container?: string;
 }
 
-export declare type Toast = {
+export declare const Toast: {
     open: (params: ToastConfig | string) => any;
 }
