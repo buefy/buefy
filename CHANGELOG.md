@@ -5,9 +5,10 @@
 ### New features
 
 * **New component: Tag Input**, [see docs](https://buefy.github.io/#/documentation/taginput) (thanks @jgerbes)
-* **Datepicker improved**: can add event indicators on it (thanks @chasegiunta) (see #432)
 * #125 Add ``queue`` prop to toast/snackbar and ``defaultNoticeQueue`` constructor option
-    * Note that the animations aren't perfect right now, gonna update soon
+    * Note that the animations aren't perfect right now
+* #432 **Datepicker improved**: can add event indicators on it (thanks @chasegiunta)
+* #439 Add support to horizontal field, with the ``horizontal`` prop (thanks @electrolinux)
 * Add ``mobile-native`` prop to datepicker and timepicker
 * Add ``defaultDatepickerMobileNative`` and ``defaultTimepickerMobileNative`` constructor options
 * Add ``events`` prop to modal (to bind events programmatically)
