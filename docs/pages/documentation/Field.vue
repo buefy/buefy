@@ -99,6 +99,13 @@
         <CodeView :code="ExCombineAddonsGroupsCode" bordered />
 
         <hr>
+        <h3 class="title">Horizontal</h3>
+        <p class="content">Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
+        <div class="example">
+            <ex-horizontal></ex-horizontal>
+        </div>
+        <CodeView :code="ExHorizontalCode" bordered />
+        <hr>
 
         <h2 class="title is-spaced">API</h2>
         <ApiView :data="api" />
@@ -129,6 +136,9 @@
     import ExCombineAddonsGroups from '@/examples/field/ExCombineAddonsGroups'
     import ExCombineAddonsGroupsCode from '!!raw-loader!@/examples/field/ExCombineAddonsGroups'
 
+    import ExHorizontal from '@/examples/field/ExHorizontal'
+    import ExHorizontalCode from '!!raw-loader!@/examples/field/ExHorizontal'
+
     export default {
         components: {
             ExSimple,
@@ -137,7 +147,8 @@
             ExGroupExpanded,
             ExGroupMultiline,
             ExPositions,
-            ExCombineAddonsGroups
+            ExCombineAddonsGroups,
+            ExHorizontal
         },
         data() {
             return {
@@ -148,7 +159,8 @@
                 ExGroupExpandedCode,
                 ExGroupMultilineCode,
                 ExPositionsCode,
-                ExCombineAddonsGroupsCode
+                ExCombineAddonsGroupsCode,
+                ExHorizontalCode
             }
         }
     }

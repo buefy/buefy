@@ -1,17 +1,33 @@
 <template>
     <div class="field" :class="[fieldType, newPosition, {
         'is-expanded': expanded,
-        'is-grouped-multiline': groupMultiline
+        'is-grouped-multiline': groupMultiline,
+        'is-horizontal': horizontal
     }]">
-        <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
-        <slot></slot>
+        <div class="field-label is-normal" v-if="horizontal">
+            <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
+        </div>
+        <template v-else>
+            <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
+        </template>
+        <b-field-body v-if="horizontal">
+            <slot></slot>
+        </b-field-body>
+        <template v-else>
+            <slot></slot>
+        </template>
         <p class="help" :class="newType" v-if="newMessage" v-html="formattedMessage"></p>
     </div>
 </template>
 
 <script>
+    import FieldBody from './FieldBody.vue'
+
     export default {
         name: 'bField',
+        components: {
+            'b-field-body': FieldBody
+        },
         props: {
             type: String,
             label: String,
@@ -21,6 +37,7 @@
             groupMultiline: Boolean,
             position: String,
             expanded: Boolean,
+            horizontal: Boolean,
             addons: {
                 type: Boolean,
                 default: true
@@ -104,4 +121,5 @@
             }
         }
     }
+
 </script>
