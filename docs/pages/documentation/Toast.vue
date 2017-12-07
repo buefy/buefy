@@ -4,9 +4,17 @@
         <h2 class="subtitle">Toasts are simple text messages to inform the user</h2>
         <hr>
 
-        <div class="block">
+        <div class="content">
             <p>They have a slightly transparency and are queued to not confuse the user.</p>
-            <p class="content"><small><b>Note:</b> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>
+            <p><small><b>Note:</b> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.6.2</span>
+            </div>
+            <p>
+                You can disable queue by passing the <code>queue: false</code> object attribute or by using
+                <router-link to="/documentation/constructor-options">constructor options</router-link>.
+            </p>
         </div>
 
         <div class="block">

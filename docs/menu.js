@@ -8,9 +8,9 @@ export const menuDocumentation = [
         ]
     },
     {
-        category: 'Layout & elements',
+        category: 'Layout',
         pages: [
-            { name: 'Layout' }
+            { name: 'Layout & elements', path: 'layout' }
         ]
     },
     {
@@ -24,8 +24,8 @@ export const menuDocumentation = [
                 pages: [
                     { name: 'Autocomplete' },
                     { name: 'Checkbox' },
-                    { name: 'Datepicker' },
-                    { name: 'Field' },
+                    { name: 'Datepicker', isUpdated: true },
+                    { name: 'Field', isUpdated: true },
                     { name: 'Input' },
                     { name: 'Radio' },
                     { name: 'Select' },
@@ -41,11 +41,11 @@ export const menuDocumentation = [
             { name: 'Modal' },
             { name: 'Notification' },
             { name: 'Pagination' },
-            { name: 'Snackbar' },
+            { name: 'Snackbar', isUpdated: true },
             { name: 'Table' },
             { name: 'Tabs' },
             { name: 'Tag' },
-            { name: 'Toast' },
+            { name: 'Toast', isUpdated: true },
             { name: 'Tooltip' }
         ]
     }
@@ -55,7 +55,7 @@ export const menuExtensions = [
     {
         category: 'Extensions',
         pages: [
-            { name: 'Cleavejs', isNew: true }
+            { name: 'Cleavejs (Input Format)', path: 'cleavejs', isNew: true }
         ]
     }
 ]

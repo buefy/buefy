@@ -18,10 +18,6 @@
 
         <hr>
         <h2 class="title is-spaced">Multiple</h2>
-        <div class="tags has-addons">
-            <span class="tag is-success">New!</span>
-            <span class="tag is-info">0.5.1</span>
-        </div>
         <div class="columns">
             <div class="column">
                 <ex-multiple></ex-multiple>

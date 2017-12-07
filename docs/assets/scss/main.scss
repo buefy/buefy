@@ -1,4 +1,7 @@
+// Bulma vars
 @import "~bulma/sass/utilities/_all";
+
+// Buefy vars
 @import "../../../src/scss/utils/_all";
 
 // Docs variables
@@ -19,7 +22,7 @@
 // Buefy
 @import "../../../src/scss/buefy";
 
-// Highlight
+// Highlight.js
 @import "~highlight.js/styles/atelier-cave-light.css";
 
 // MDI

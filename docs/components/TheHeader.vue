@@ -4,9 +4,9 @@
             <div class="navbar-brand">
                 <router-link
                     to="/"
-                    exact
                     class="navbar-item"
-                    title="Buefy: lightweight UI components for Vue.js based on Bulma">
+                    title="Buefy: lightweight UI components for Vue.js based on Bulma"
+                    active-class="">
                     <img v-if="light" src="../assets/buefy-light.png" alt="Buefy">
                     <img v-else src="../assets/buefy.png" alt="Buefy">
                 </router-link>
@@ -52,10 +52,11 @@
                                     <router-link
                                         v-if="page.name"
                                         :key="page.name"
-                                        :to="`/documentation/${$options.filters.slugify(page.name)}`"
+                                        :to="`/documentation/${page.path || $options.filters.slugify(page.name)}`"
                                         class="navbar-item">
                                         <span class="navbar-item-text">{{ page.name }}</span>
                                         <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
                                     </router-link>
 
                                     <!-- submenu -->
@@ -64,11 +65,12 @@
                                         <router-link
                                             v-for="page in page.pages"
                                             :key="page.name"
-                                            :to="`/documentation/${$options.filters.slugify(page.name)}`"
+                                            :to="`/documentation/${page.path || $options.filters.slugify(page.name)}`"
                                             class="navbar-item"
                                             style="margin-left: 1rem;">
                                             <span class="navbar-item-text">{{ page.name }}</span>
                                             <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                                            <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
                                         </router-link>
                                     </template>
                                 </template>

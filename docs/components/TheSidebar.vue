@@ -8,9 +8,10 @@
             </p>
             <ul class="menu-list" :key="i" style="margin-bottom: 2.5rem;">
                 <li v-for="(page, j) in items.pages" :key="page.name">
-                    <router-link v-if="page.name" :to="page.name | slugify">
+                    <router-link v-if="page.name" :to="page.path || page.name | slugify">
                         <span class="menu-text">{{ page.name }}</span>
                         <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
                     </router-link>
 
                     <!-- submenu -->
@@ -28,9 +29,10 @@
                             <li
                                 v-for="(page, j) in page.pages"
                                 :key="page.name">
-                                <router-link :to="page.name | slugify">
+                                <router-link :to="page.path || page.name | slugify">
                                     <span class="menu-text">{{ page.name }}</span>
                                     <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                                    <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
                                 </router-link>
                             </li>
                         </ul>

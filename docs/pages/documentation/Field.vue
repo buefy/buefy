@@ -66,10 +66,6 @@
         </div>
         <CodeView :code="ExGroupExpandedCode" bordered />
 
-        <div class="tags has-addons">
-            <span class="tag is-success">New!</span>
-            <span class="tag is-info">0.5.0</span>
-        </div>
         <p class="content">
             Add the <code>group-multiline</code> prop to allow controls to fill up <b>multiple lines</b>.
             This is ideal for a long list of controls.
@@ -100,6 +96,10 @@
 
         <hr>
         <h3 class="title">Horizontal</h3>
+        <div class="tags has-addons">
+            <span class="tag is-success">New!</span>
+            <span class="tag is-info">0.6.2</span>
+        </div>
         <p class="content">Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
         <div class="example">
             <ex-horizontal></ex-horizontal>
