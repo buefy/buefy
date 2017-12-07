@@ -9,7 +9,8 @@
   "typings": "types/index",
   "files": [
     "lib",
-    "src"
+    "src",
+    "types/*.d.ts"
   ],
   "repository": {
     "type": "git",
