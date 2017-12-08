@@ -11,6 +11,7 @@ import hljs from 'highlight.js'
 
 import ApiView from './components/ApiView'
 import CodeView from './components/CodeView'
+import Example from './components/Example'
 
 Vue.config.productionTip = false
 
@@ -37,6 +38,7 @@ Vue.use(VueAnalytics, {
 })
 Vue.component('ApiView', ApiView)
 Vue.component('CodeView', CodeView)
+Vue.component('Example', Example)
 
 Vue.directive('highlight', {
     deep: true,

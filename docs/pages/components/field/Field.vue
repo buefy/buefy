@@ -1,0 +1,130 @@
+<template>
+    <div class="container">
+        <h1 class="title is-spaced">Field</h1>
+        <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
+        <hr>
+
+        <div class="content">
+            <p>These components should be used as a <strong>direct child</strong> of Field:</p>
+            <ul>
+                <li>Autocomplete</li>
+                <li>Checkbox Button</li>
+                <li>Datepicker</li>
+                <li>Input</li>
+                <li>Radio Button</li>
+                <li>Select</li>
+                <li>Taginput</li>
+                <li>Timepicker</li>
+                <li>Upload</li>
+                <li><code>.control</code> elements (html class)</li>
+            </ul>
+        </div>
+        <hr>
+
+        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+
+        <hr>
+        <h2 class="title is-spaced">Addons</h2>
+        <h3 class="subtitle">Those components are automatically attached together when inside a Field</h3>
+        <p class="content">Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
+        <b-message type="is-warning">
+            <b>Note:</b> Beware of its responsiveness, avoid large groups of addons since they don't break lines.
+        </b-message>
+        <Example :component="ExAddons" :code="ExAddonsCode" column/>
+
+        <hr>
+        <h2 class="title is-spaced">Groups</h2>
+        <div class="content">
+            <p>You can group those components together with the <code>grouped</code> property.</p>
+            <p>Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
+        </div>
+        <Example :component="ExGroups" :code="ExGroupsCode"/>
+
+        <p class="content">
+            Nested Fields can be grouped as well,
+            you have to use the <code>expanded</code> prop <u>on the Field</u> to <b>fill up the remaining space</b>.
+        </p>
+        <Example :component="ExGroupExpanded" :code="ExGroupExpandedCode"/>
+
+        <p class="content">
+            Add the <code>group-multiline</code> prop to allow controls to fill up <b>multiple lines</b>.
+            This is ideal for a long list of controls.
+        </p>
+        <Example :component="ExGroupMultiline" :code="ExGroupMultilineCode" column/>
+
+        <hr>
+        <h3 class="title">Positions</h3>
+        <p class="content">Add the <code>position</code> prop to modify its alignment.</p>
+        <Example :component="ExPositions" :code="ExPositionsCode"/>
+
+        <hr>
+        <h3 class="title">Combining addons and groups</h3>
+        <Example :component="ExCombineAddonsGroups" :code="ExCombineAddonsGroupsCode"/>
+
+        <hr>
+        <h3 class="title">Horizontal</h3>
+        <div class="tags has-addons">
+            <span class="tag is-success">New!</span>
+            <span class="tag is-info">0.6.2</span>
+        </div>
+        <p class="content">Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
+        <Example :component="ExHorizontal" :code="ExHorizontalCode"/>
+
+        <hr>
+
+        <h2 class="title is-spaced">API</h2>
+        <ApiView :data="api"/>
+    </div>
+</template>
+
+<script>
+    import api from './api/Field'
+
+    import ExSimple from './examples/ExSimple'
+    import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
+
+    import ExAddons from './examples/ExAddons'
+    import ExAddonsCode from '!!raw-loader!./examples/ExAddons'
+
+    import ExGroups from './examples/ExGroups'
+    import ExGroupsCode from '!!raw-loader!./examples/ExGroups'
+
+    import ExGroupExpanded from './examples/ExGroupExpanded'
+    import ExGroupExpandedCode from '!!raw-loader!./examples/ExGroupExpanded'
+
+    import ExGroupMultiline from './examples/ExGroupMultiline'
+    import ExGroupMultilineCode from '!!raw-loader!./examples/ExGroupMultiline'
+
+    import ExPositions from './examples/ExPositions'
+    import ExPositionsCode from '!!raw-loader!./examples/ExPositions'
+
+    import ExCombineAddonsGroups from './examples/ExCombineAddonsGroups'
+    import ExCombineAddonsGroupsCode from '!!raw-loader!./examples/ExCombineAddonsGroups'
+
+    import ExHorizontal from './examples/ExHorizontal'
+    import ExHorizontalCode from '!!raw-loader!./examples/ExHorizontal'
+
+    export default {
+        data() {
+            return {
+                api,
+                ExSimple,
+                ExAddons,
+                ExGroups,
+                ExGroupExpanded,
+                ExGroupMultiline,
+                ExPositions,
+                ExCombineAddonsGroups,
+                ExHorizontal,
+                ExSimpleCode,
+                ExAddonsCode,
+                ExGroupsCode,
+                ExGroupExpandedCode,
+                ExGroupMultilineCode,
+                ExPositionsCode,
+                ExCombineAddonsGroupsCode,
+                ExHorizontalCode
+            }
+        }
+    }
+</script>

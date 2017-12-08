@@ -25,7 +25,7 @@
                                 size="is-small"
                                 class="chevron-icon"
                                 :custom-class="isExpanded ? 'mdi-rotate-90' : ''"
-                            />
+                           />
                             <span class="menu-text">{{ page.category }}</span>
                         </a>
                         <ul :class="{ 'is-active': isExpanded }">

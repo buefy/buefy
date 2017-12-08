@@ -1,6 +1,6 @@
 <template>
     <section class="home">
-        <TheHeader light />
+        <TheHeader light/>
         <div class="hero is-fullheight is-primary">
             <div class="hero-body">
                 <div class="container has-text-centered">
@@ -77,7 +77,7 @@
             </div>
         </section>
 
-        <TheFooter />
+        <TheFooter/>
     </section>
 </template>
 

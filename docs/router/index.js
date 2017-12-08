@@ -7,54 +7,46 @@ Vue.use(Router)
 const Documentation = () => import('@/templates/Documentation')
 const Extensions = () => import('@/templates/Extensions')
 
-// Home
+// Pages
 const Home = () => import('@/pages/Home')
+const Layout = () => import('@/pages/Layout')
 
-// Documentation
+// Pages / Installation
+const ConstructorOptions = () => import('@/pages/installation/ConstructorOptions')
+const Customization = () => import('@/pages/installation/Customization')
+const Start = () => import('@/pages/installation/Start')
 
-// Installation
-const Start = () => import('@/pages/documentation/Start')
-const Customization = () => import('@/pages/documentation/Customization')
-const ConstructorOptions = () => import('@/pages/documentation/ConstructorOptions')
+// Pages / Components
+const Autocomplete = () => import('@/pages/components/autocomplete/Autocomplete')
+const Checkbox = () => import('@/pages/components/checkbox/Checkbox')
+const Collapse = () => import('@/pages/components/collapse/Collapse')
+const Datepicker = () => import('@/pages/components/datepicker/Datepicker')
+const Dialog = () => import('@/pages/components/dialog/Dialog')
+const Dropdown = () => import('@/pages/components/dropdown/Dropdown')
+const Field = () => import('@/pages/components/field/Field')
+const Icon = () => import('@/pages/components/icon/Icon')
+const Input = () => import('@/pages/components/input/Input')
+const Loading = () => import('@/pages/components/loading/Loading')
+const Message = () => import('@/pages/components/message/Message')
+const Modal = () => import('@/pages/components/modal/Modal')
+const Notification = () => import('@/pages/components/notification/Notification')
+const Pagination = () => import('@/pages/components/pagination/Pagination')
+const Panel = () => import('@/pages/components/panel/Panel')
+const Radio = () => import('@/pages/components/radio/Radio')
+const Select = () => import('@/pages/components/select/Select')
+const Snackbar = () => import('@/pages/components/snackbar/Snackbar')
+const Switch = () => import('@/pages/components/switch/Switch')
+const Table = () => import('@/pages/components/table/Table')
+const Tabs = () => import('@/pages/components/tabs/Tabs')
+const Tag = () => import('@/pages/components/tag/Tag')
+const Taginput = () => import('@/pages/components/taginput/Taginput')
+const Timepicker = () => import('@/pages/components/timepicker/Timepicker')
+const Toast = () => import('@/pages/components/toast/Toast')
+const Tooltip = () => import('@/pages/components/tooltip/Tooltip')
+const Upload = () => import('@/pages/components/upload/Upload')
 
-// General
-const Layout = () => import('@/pages/documentation/Layout')
-const Icon = () => import('@/pages/documentation/Icon')
-const Dropdown = () => import('@/pages/documentation/Dropdown')
-const Modal = () => import('@/pages/documentation/Modal')
-const Collapse = () => import('@/pages/documentation/Collapse')
-const Panel = () => import('@/pages/documentation/Panel')
-const Tabs = () => import('@/pages/documentation/Tabs')
-const Tag = () => import('@/pages/documentation/Tag')
-const Tooltip = () => import('@/pages/documentation/Tooltip')
-
-// Notices
-const Dialog = () => import('@/pages/documentation/Dialog')
-const Toast = () => import('@/pages/documentation/Toast')
-const Snackbar = () => import('@/pages/documentation/Snackbar')
-const Notification = () => import('@/pages/documentation/Notification')
-const Message = () => import('@/pages/documentation/Message')
-const Loading = () => import('@/pages/documentation/Loading')
-
-// Form
-const Field = () => import('@/pages/documentation/Field')
-const Input = () => import('@/pages/documentation/Input')
-const Select = () => import('@/pages/documentation/Select')
-const Autocomplete = () => import('@/pages/documentation/Autocomplete')
-const Checkbox = () => import('@/pages/documentation/Checkbox')
-const Radio = () => import('@/pages/documentation/Radio')
-const Switch = () => import('@/pages/documentation/Switch')
-const Upload = () => import('@/pages/documentation/Upload')
-const Datepicker = () => import('@/pages/documentation/Datepicker')
-const Taginput = () => import('@/pages/documentation/Taginput')
-const Timepicker = () => import('@/pages/documentation/Timepicker')
-
-// Data
-const Table = () => import('@/pages/documentation/Table')
-const Pagination = () => import('@/pages/documentation/Pagination')
-
-// Extensions
-const CleaveJs = () => import('@/pages/extensions/Cleavejs')
+// Pages / Extensions
+const Cleavejs = () => import('@/pages/extensions/cleavejs/Cleavejs')
 
 export default new Router({
     mode: 'hash',
@@ -205,7 +197,7 @@ export default new Router({
             children: [
                 {
                     path: 'cleavejs',
-                    component: CleaveJs
+                    component: Cleavejs
                 },
                 {
                     path: '',

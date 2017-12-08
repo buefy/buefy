@@ -1,6 +1,6 @@
 <template>
     <section class="extensions">
-        <TheHeader ref="header" />
+        <TheHeader ref="header"/>
 
         <div class="hero is-primary">
             <div class="hero-body">
@@ -13,21 +13,21 @@
 
         <section class="section">
             <div class="container is-fullhd template-horizontal">
-                <TheSidebar :data="menuExtensions" />
+                <TheSidebar :data="menuExtensions"/>
                 <router-view/>
             </div>
         </section>
 
-        <TheFooter />
+        <TheFooter/>
     </section>
 </template>
 
 <script>
-    import DefaultMixin from './DefaultMixin'
+    import ClipboardMixin from '@/mixins/ClipboardMixin'
     import { menuExtensions } from '../menu'
 
     export default {
-        mixins: [DefaultMixin],
+        mixins: [ClipboardMixin],
         data() {
             return {
                 menuExtensions
