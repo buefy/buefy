@@ -6,7 +6,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -17,7 +17,7 @@
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
-                <ex-sizes></ex-sizes>
+                <ex-sizes/>
             </div>
             <div class="column">
                 <CodeView :code="ExSizesCode" />
@@ -28,7 +28,7 @@
         <h2 class="title">Radio Button</h2>
         <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
         <div class="example">
-            <ex-radio-button></ex-radio-button>
+            <ex-radio-button/>
         </div>
         <CodeView :code="ExRadioButtonCode" bordered />
 

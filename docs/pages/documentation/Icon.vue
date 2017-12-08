@@ -5,14 +5,14 @@
         <hr>
 
         <p class="content">Buefy is compatible with both <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>
-        and <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>. They adapt to most elements background automatically
+            and <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>. They adapt to most elements background automatically
         — but you can also override their colors.</p>
 
         <div class="columns">
             <div class="column">
                 <h3 class="subtitle">Material Design Icons</h3>
                 <div class="example">
-                    <ex-mdi></ex-mdi>
+                    <ex-mdi/>
                 </div>
                 <CodeView :code="ExMdiCode" bordered />
             </div>
@@ -20,7 +20,7 @@
             <div class="column">
                 <h3 class="subtitle">FontAwesome</h3>
                 <div class="example">
-                    <ex-fa></ex-fa>
+                    <ex-fa/>
                 </div>
                 <CodeView :code="ExFaCode" bordered />
             </div>

@@ -12,19 +12,19 @@
                 </router-link>
 
                 <a class="navbar-item" href="https://github.com/rafaelpimpa/buefy" target="_blank" title="Github">
-                    <b-icon pack="fa" icon="github"></b-icon>
+                    <b-icon pack="fa" icon="github"/>
                 </a>
 
                 <a class="navbar-item" href="https://twitter.com/rafaelpimpa" target="_blank" title="Twitter">
-                    <b-icon pack="fa" icon="twitter"></b-icon>
+                    <b-icon pack="fa" icon="twitter"/>
                 </a>
 
                 <span class="navbar-burger burger"
-                    :class="{ 'is-active': isMenuActive }"
-                    @click="isMenuActive = !isMenuActive">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                      :class="{ 'is-active': isMenuActive }"
+                      @click="isMenuActive = !isMenuActive">
+                    <span/>
+                    <span/>
+                    <span/>
                 </span>
             </div>
 
@@ -123,8 +123,8 @@
 
                             <hr class="navbar-divider">
                             <a class="navbar-item"
-                                href="https://github.com/rafaelpimpa/buefy/releases"
-                                target="_blank">
+                               href="https://github.com/rafaelpimpa/buefy/releases"
+                               target="_blank">
                                 Changelogs
                             </a>
                         </div>
@@ -132,9 +132,9 @@
 
                     <div class="navbar-item">
                         <a class="button is-outlined"
-                            :class="light ? 'is-light' : 'is-twitter'"
-                            @click="tweet">
-                            <b-icon pack="fa" icon="twitter"></b-icon>
+                           :class="light ? 'is-light' : 'is-twitter'"
+                           @click="tweet">
+                            <b-icon pack="fa" icon="twitter"/>
                             <span>Tweet</span>
                         </a>
                     </div>

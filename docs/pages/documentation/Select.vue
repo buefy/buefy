@@ -9,7 +9,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -20,7 +20,7 @@
         <h2 class="title is-spaced">Multiple</h2>
         <div class="columns">
             <div class="column">
-                <ex-multiple></ex-multiple>
+                <ex-multiple/>
             </div>
             <div class="column">
                 <CodeView :code="ExMultipleCode" />
@@ -31,7 +31,7 @@
         <h2 class="title">Icons</h2>
         <div class="columns">
             <div class="column">
-                <ex-icons></ex-icons>
+                <ex-icons/>
             </div>
             <div class="column">
                 <CodeView :code="ExIconsCode" />
@@ -42,7 +42,7 @@
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
-                <ex-sizes></ex-sizes>
+                <ex-sizes/>
             </div>
             <div class="column">
                 <CodeView :code="ExSizesCode" />

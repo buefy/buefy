@@ -8,14 +8,14 @@
         <hr>
 
         <div class="example">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" bordered />
 
         <hr>
         <h2 class="title">Object array</h2>
         <div class="example">
-            <ex-obj-array></ex-obj-array>
+            <ex-obj-array/>
         </div>
         <CodeView :code="ExObjArrayCode" bordered />
 
@@ -26,7 +26,7 @@
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
         </div>
         <div class="example">
-            <ex-custom-async></ex-custom-async>
+            <ex-custom-async/>
         </div>
         <CodeView :code="ExCustomAsyncCode" bordered />
 

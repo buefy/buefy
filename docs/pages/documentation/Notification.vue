@@ -7,7 +7,7 @@
         <div class="columns">
             <div class="column">
                 <div class="example">
-                    <ex-simple></ex-simple>
+                    <ex-simple/>
                 </div>
             </div>
             <div class="column">
@@ -22,7 +22,7 @@
         <div class="columns">
             <div class="column">
                 <div class="example">
-                    <ex-types></ex-types>
+                    <ex-types/>
                 </div>
             </div>
             <div class="column">
@@ -37,7 +37,7 @@
         <div class="columns">
             <div class="column">
                 <div class="example">
-                    <ex-icons></ex-icons>
+                    <ex-icons/>
                 </div>
             </div>
             <div class="column">

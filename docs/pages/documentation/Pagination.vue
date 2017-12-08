@@ -5,7 +5,7 @@
         <hr>
 
         <div class="example">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" bordered />
 

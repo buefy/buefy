@@ -9,19 +9,19 @@
                     <b-table :data="component.props" default-sort="name">
                         <template slot-scope="props">
                             <b-table-column label="Name">
-                                <span v-html="props.row.name" style="white-space: nowrap"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"/>
                             </b-table-column>
                             <b-table-column label="Description">
-                                <span v-html="props.row.description"></span>
+                                <span v-html="props.row.description"/>
                             </b-table-column>
                             <b-table-column label="Type">
                                 <span>{{ props.row.type }}</span>
                             </b-table-column>
                             <b-table-column label="Values">
-                                <span v-html="props.row.values"></span>
+                                <span v-html="props.row.values"/>
                             </b-table-column>
                             <b-table-column label="Default">
-                                <span v-html="props.row.default"></span>
+                                <span v-html="props.row.default"/>
                             </b-table-column>
                         </template>
                     </b-table>
@@ -31,13 +31,13 @@
                     <b-table :data="component.slots" default-sort="name">
                         <template slot-scope="props">
                             <b-table-column label="Slot name">
-                                <span v-html="props.row.name" style="white-space: nowrap"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"/>
                             </b-table-column>
                             <b-table-column label="Description">
-                                <span v-html="props.row.description"></span>
+                                <span v-html="props.row.description"/>
                             </b-table-column>
                             <b-table-column label="Props (if scoped)">
-                                <span v-html="props.row.props"></span>
+                                <span v-html="props.row.props"/>
                             </b-table-column>
                         </template>
                     </b-table>
@@ -47,13 +47,13 @@
                     <b-table :data="component.events" default-sort="name">
                         <template slot-scope="props">
                             <b-table-column label="Name">
-                                <span v-html="props.row.name" style="white-space: nowrap"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"/>
                             </b-table-column>
                             <b-table-column label="Description">
-                                <span v-html="props.row.description"></span>
+                                <span v-html="props.row.description"/>
                             </b-table-column>
                             <b-table-column label="Parameters">
-                                <span v-html="props.row.parameters"></span>
+                                <span v-html="props.row.parameters"/>
                             </b-table-column>
                         </template>
                     </b-table>
@@ -63,13 +63,13 @@
                     <b-table :data="component.methods" default-sort="name">
                         <template slot-scope="props">
                             <b-table-column label="Name">
-                                <span v-html="props.row.name" style="white-space: nowrap"></span>
+                                <span v-html="props.row.name" style="white-space: nowrap"/>
                             </b-table-column>
                             <b-table-column label="Description">
-                                <span v-html="props.row.description"></span>
+                                <span v-html="props.row.description"/>
                             </b-table-column>
                             <b-table-column label="Return">
-                                <span v-html="props.row.return"></span>
+                                <span v-html="props.row.return"/>
                             </b-table-column>
                         </template>
                     </b-table>

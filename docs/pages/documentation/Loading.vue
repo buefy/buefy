@@ -6,7 +6,7 @@
 
         <div class="block">
             <p class="content">The Loading will be closed after about 10 seconds, by pressing escape or by clicking outside.</p>
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" />
 
@@ -15,7 +15,7 @@
         <h2 class="title is-spaced">Programmatically opening</h2>
         <p class="content">When you want to close the Loading, call the <code>close()</code> method from the component.</p>
         <div class="block">
-            <ex-programmatically></ex-programmatically>
+            <ex-programmatically/>
         </div>
         <CodeView :code="ExProgrammaticallyCode" />
 

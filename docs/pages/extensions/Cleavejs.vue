@@ -26,7 +26,7 @@
 
         <div class="columns">
             <div class="column is-6">
-                <ex-format></ex-format>
+                <ex-format/>
             </div>
             <div class="column is-6">
                 <CodeView :code="ExFormatCode" />

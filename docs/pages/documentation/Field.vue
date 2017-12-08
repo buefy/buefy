@@ -23,7 +23,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -39,7 +39,7 @@
         </b-message>
         <div class="columns">
             <div class="column">
-                <ex-addons></ex-addons>
+                <ex-addons/>
             </div>
             <div class="column">
                 <CodeView :code="ExAddonsCode" />
@@ -53,7 +53,7 @@
             <p>Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
         </div>
         <div class="example">
-            <ex-groups></ex-groups>
+            <ex-groups/>
         </div>
         <CodeView :code="ExGroupsCode" bordered />
 
@@ -62,7 +62,7 @@
             you have to use the <code>expanded</code> prop <u>on the Field</u> to <b>fill up the remaining space</b>.
         </p>
         <div class="example">
-            <ex-group-expanded></ex-group-expanded>
+            <ex-group-expanded/>
         </div>
         <CodeView :code="ExGroupExpandedCode" bordered />
 
@@ -72,7 +72,7 @@
         </p>
         <div class="columns">
             <div class="column">
-                <ex-group-multiline></ex-group-multiline>
+                <ex-group-multiline/>
             </div>
             <div class="column">
                 <CodeView :code="ExGroupMultilineCode" />
@@ -83,14 +83,14 @@
         <h3 class="title">Positions</h3>
         <p class="content">Add the <code>position</code> prop to modify its alignment.</p>
         <div class="example">
-            <ex-positions></ex-positions>
+            <ex-positions/>
         </div>
         <CodeView :code="ExPositionsCode" bordered />
 
         <hr>
         <h3 class="title">Combining addons and groups</h3>
         <div class="example">
-            <ex-combine-addons-groups></ex-combine-addons-groups>
+            <ex-combine-addons-groups/>
         </div>
         <CodeView :code="ExCombineAddonsGroupsCode" bordered />
 
@@ -102,7 +102,7 @@
         </div>
         <p class="content">Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
         <div class="example">
-            <ex-horizontal></ex-horizontal>
+            <ex-horizontal/>
         </div>
         <CodeView :code="ExHorizontalCode" bordered />
         <hr>

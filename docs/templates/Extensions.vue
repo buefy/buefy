@@ -14,7 +14,7 @@
         <section class="section">
             <div class="container is-fullhd template-horizontal">
                 <TheSidebar :data="menuExtensions" />
-                <router-view></router-view>
+                <router-view/>
             </div>
         </section>
 

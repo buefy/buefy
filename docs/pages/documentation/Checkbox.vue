@@ -6,7 +6,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -18,7 +18,7 @@
         <p class="content">Just add the same <code>v-model</code> to multiple Checkboxes, and set a <code>native-value</code>.</p>
         <div class="columns">
             <div class="column">
-                <ex-array></ex-array>
+                <ex-array/>
             </div>
             <div class="column">
                 <CodeView :code="ExArrayCode" />
@@ -29,7 +29,7 @@
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
-                <ex-sizes></ex-sizes>
+                <ex-sizes/>
             </div>
             <div class="column">
                 <CodeView :code="ExSizesCode" />
@@ -40,7 +40,7 @@
         <h2 class="title">Checkbox Button</h2>
         <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
         <div class="example">
-            <ex-checkbox-button></ex-checkbox-button>
+            <ex-checkbox-button/>
         </div>
         <CodeView :code="ExCheckboxButtonCode" bordered />
 

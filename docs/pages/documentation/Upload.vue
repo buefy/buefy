@@ -7,7 +7,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -19,7 +19,7 @@
         <h2 class="title is-spaced">Drag and drop</h2>
         <div class="columns">
             <div class="column">
-                <ex-drag-drop></ex-drag-drop>
+                <ex-drag-drop/>
             </div>
             <div class="column">
                 <CodeView :code="ExDragDropCode" />

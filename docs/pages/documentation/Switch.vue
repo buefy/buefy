@@ -6,7 +6,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -18,7 +18,7 @@
         <h2 class="title">Types</h2>
         <div class="columns">
             <div class="column">
-                <ex-types></ex-types>
+                <ex-types/>
             </div>
             <div class="column">
                 <CodeView :code="ExTypesCode" />
@@ -30,7 +30,7 @@
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
-                <ex-sizes></ex-sizes>
+                <ex-sizes/>
             </div>
             <div class="column">
                 <CodeView :code="ExSizesCode" />

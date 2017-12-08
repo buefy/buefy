@@ -6,7 +6,10 @@
                 :key="items.category">
                 {{ items.category }}
             </p>
-            <ul class="menu-list" :key="i" style="margin-bottom: 2.5rem;">
+            <ul
+                class="menu-list"
+                :key="i"
+                style="margin-bottom: 2.5rem;">
                 <li v-for="(page, j) in items.pages" :key="page.name">
                     <router-link v-if="page.name" :to="page.path || page.name | slugify">
                         <span class="menu-text">{{ page.name }}</span>
@@ -27,7 +30,7 @@
                         </a>
                         <ul :class="{ 'is-active': isExpanded }">
                             <li
-                                v-for="(page, j) in page.pages"
+                                v-for="page in page.pages"
                                 :key="page.name">
                                 <router-link :to="page.path || page.name | slugify">
                                     <span class="menu-text">{{ page.name }}</span>

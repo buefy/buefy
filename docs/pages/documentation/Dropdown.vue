@@ -11,7 +11,7 @@
             Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
         </p>
         <div class="example">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" bordered />
 
@@ -20,13 +20,13 @@
         <h2 class="title is-spaced">Dropdown content and position</h2>
         <p class="content">Add the <code>custom</code> prop to the item to add <strong>any type of content</strong>.</p>
         <div class="example is-paddingless">
-            <ex-content-position></ex-content-position>
+            <ex-content-position/>
         </div>
         <CodeView :code="ExContentPositionCode" bordered />
 
         <p class="content">Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an item.</p>
         <div class="example is-paddingless">
-            <ex-has-link-disabled></ex-has-link-disabled>
+            <ex-has-link-disabled/>
         </div>
         <CodeView :code="ExHasLinkDisabledCode" bordered />
 
@@ -34,7 +34,7 @@
 
         <h2 class="title">Customizing with v-model</h2>
         <div class="example">
-            <ex-customize></ex-customize>
+            <ex-customize/>
         </div>
         <CodeView :code="ExCustomizeCode" bordered />
 

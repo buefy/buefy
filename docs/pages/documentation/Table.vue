@@ -5,7 +5,7 @@
         <hr>
 
         <div class="example">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" bordered />
 
@@ -21,7 +21,7 @@
             </p>
         </div>
         <div class="example">
-            <ex-selection></ex-selection>
+            <ex-selection/>
         </div>
         <CodeView :code="ExSelectionCode" bordered />
 
@@ -36,7 +36,7 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </div>
         <div class="example">
-            <ex-checkable></ex-checkable>
+            <ex-checkable/>
         </div>
         <CodeView :code="ExCheckableCode" bordered />
 
@@ -49,14 +49,14 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </div>
         <div class="example">
-            <ex-pagination-sort></ex-pagination-sort>
+            <ex-pagination-sort/>
         </div>
         <CodeView :code="ExPaginationSortCode" bordered />
 
         <hr>
         <h2 class="title is-spaced">Detailed rows</h2>
         <div class="example">
-            <ex-detailed-row></ex-detailed-row>
+            <ex-detailed-row/>
         </div>
         <CodeView :code="ExDetailedRowCode" bordered />
 
@@ -64,7 +64,7 @@
         <h2 class="title is-spaced">Row status</h2>
         <p class="content">Use the <code>row-class</code> prop to return a class name. Note that <strong>you have to style the class yourself</strong>.</p>
         <div class="example">
-            <ex-row-status></ex-row-status>
+            <ex-row-status/>
         </div>
         <CodeView :code="ExRowStatusCode" bordered />
 
@@ -75,7 +75,7 @@
             Use the <code>meta</code> prop on column to pass anything you may need.
         </p>
         <div class="example">
-            <ex-custom-headers></ex-custom-headers>
+            <ex-custom-headers/>
         </div>
         <CodeView :code="ExCustomHeadersCode" bordered />
 
@@ -85,14 +85,14 @@
             Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
         </b-message>
         <div class="example">
-            <ex-toggle-columns></ex-toggle-columns>
+            <ex-toggle-columns/>
         </div>
         <CodeView :code="ExToggleColumnsCode" bordered />
 
         <hr>
         <h2 class="title is-spaced">Footer</h2>
         <div class="example">
-            <ex-footer></ex-footer>
+            <ex-footer/>
         </div>
         <CodeView :code="ExFooterCode" bordered />
 
@@ -106,7 +106,7 @@
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
         </div>
         <div class="example">
-            <ex-async-data></ex-async-data>
+            <ex-async-data/>
         </div>
         <CodeView :code="ExAsyncDataCode" bordered />
 

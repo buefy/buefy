@@ -6,7 +6,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -18,7 +18,7 @@
         <p class="content">Use <code>:readonly="false"</code> to let the user type a time.</p>
         <div class="columns">
             <div class="column">
-                <ex-non-readonly></ex-non-readonly>
+                <ex-non-readonly/>
             </div>
             <div class="column">
                 <CodeView :code="ExNonReadonlyCode" />
@@ -30,7 +30,7 @@
         <p class="content">You can limit the date range with <code>min-time</code> and <code>max-time</code> props.</p>
         <div class="columns">
             <div class="column">
-                <ex-range></ex-range>
+                <ex-range/>
             </div>
             <div class="column">
                 <CodeView :code="ExRangeCode" />
@@ -43,7 +43,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-footer></ex-footer>
+                <ex-footer/>
             </div>
             <div class="column">
                 <CodeView :code="ExFooterCode" />
@@ -55,7 +55,7 @@
         <p class="content">Timepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         <div class="columns">
             <div class="column">
-                <ex-inline></ex-inline>
+                <ex-inline/>
             </div>
             <div class="column">
                 <CodeView :code="ExInlineCode" />

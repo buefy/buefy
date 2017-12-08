@@ -6,7 +6,7 @@
 
         <h3 class="title">Alert</h3>
         <div class="block">
-            <ex-alert-dialog></ex-alert-dialog>
+            <ex-alert-dialog/>
         </div>
         <CodeView :code="ExAlertDialogCode" />
 
@@ -14,7 +14,7 @@
 
         <h3 class="title">Confirm</h3>
         <div class="block">
-            <ex-confirm-dialog></ex-confirm-dialog>
+            <ex-confirm-dialog/>
         </div>
         <CodeView :code="ExConfirmDialogCode" />
 
@@ -22,7 +22,7 @@
 
         <h3 class="title">Prompt</h3>
         <div class="block">
-            <ex-prompt-dialog></ex-prompt-dialog>
+            <ex-prompt-dialog/>
         </div>
         <CodeView :code="ExPromptDialogCode" />
 

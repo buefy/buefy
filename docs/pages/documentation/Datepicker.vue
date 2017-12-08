@@ -6,7 +6,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -24,7 +24,7 @@
         </b-message>
         <div class="columns">
             <div class="column">
-                <ex-non-readonly></ex-non-readonly>
+                <ex-non-readonly/>
             </div>
             <div class="column">
                 <CodeView :code="ExNonReadonlyCode" />
@@ -36,7 +36,7 @@
         <p class="content">You can limit the date range with <code>min-date</code> and <code>max-date</code> props.</p>
         <div class="columns">
             <div class="column">
-                <ex-range></ex-range>
+                <ex-range/>
             </div>
             <div class="column">
                 <CodeView :code="ExRangeCode" />
@@ -49,7 +49,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-footer></ex-footer>
+                <ex-footer/>
             </div>
             <div class="column">
                 <CodeView :code="ExFooterCode" />
@@ -61,7 +61,7 @@
         <p class="content">Datepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         <div class="columns">
             <div class="column">
-                <ex-inline></ex-inline>
+                <ex-inline/>
             </div>
             <div class="column">
                 <CodeView :code="ExInlineCode" />
@@ -78,7 +78,7 @@
         <p class="content">Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
         <div class="columns">
             <div class="column">
-                <ex-events></ex-events>
+                <ex-events/>
             </div>
             <div class="column">
                 <CodeView :code="ExEventsCode" />

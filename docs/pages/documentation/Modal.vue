@@ -5,7 +5,7 @@
         <hr>
 
         <div class="block">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" />
 
@@ -16,7 +16,7 @@
             <p>A modal with a component. When you want to close the Modal, call the 'close' method — <code>this.$parent.close()</code> — from the component's parent.</p>
         </div>
         <div class="block">
-            <ex-component></ex-component>
+            <ex-component/>
         </div>
         <CodeView :code="ExComponentCode" />
 
@@ -33,7 +33,7 @@
         <div class="block">
             <CodeView lang="javascript" :code="programmaticSyntax | pre" />
             <hr>
-            <ex-programmatic></ex-programmatic>
+            <ex-programmatic/>
         </div>
         <CodeView :code="ExProgrammaticCode" />
 

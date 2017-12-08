@@ -5,45 +5,45 @@
         <hr>
 
         <div class="example">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" bordered />
 
         <h2 class="title">Position</h2>
         <div class="example">
-            <ex-position></ex-position>
+            <ex-position/>
         </div>
         <CodeView :code="ExPositionCode" bordered />
 
         <h2 class="title">Icons</h2>
         <div class="example">
-            <ex-icons></ex-icons>
+            <ex-icons/>
         </div>
         <CodeView :code="ExIconsCode" bordered />
 
         <h2 class="title">Sizes</h2>
         <div class="example">
-            <ex-sizes></ex-sizes>
+            <ex-sizes/>
         </div>
         <CodeView :code="ExSizesCode" bordered />
 
         <h2 class="title is-spaced">Types</h2>
         <p class="content">If you want a more classic style with borders add the <code>is-boxed</code> type.</p>
         <div class="example">
-            <ex-boxed></ex-boxed>
+            <ex-boxed/>
         </div>
         <CodeView :code="ExBoxedCode" bordered />
 
         <p class="content">Or like Radio Buttons with the <code>is-toggle</code> type.</p>
         <div class="example">
-            <ex-toggle></ex-toggle>
+            <ex-toggle/>
         </div>
         <CodeView :code="ExToggleCode" bordered />
 
         <h2 class="title is-spaced">Expanded</h2>
         <p class="content">If you want the tabs to take full width, add the <code>expanded</code> prop.</p>
         <div class="example">
-            <ex-expanded></ex-expanded>
+            <ex-expanded/>
         </div>
         <CodeView :code="ExExpandedCode" bordered />
 

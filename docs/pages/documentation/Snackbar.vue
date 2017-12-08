@@ -18,7 +18,7 @@
         </div>
 
         <div class="block">
-            <ex-simple></ex-simple>
+            <ex-simple/>
         </div>
         <CodeView :code="ExSimpleCode" />
 

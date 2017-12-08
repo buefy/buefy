@@ -9,7 +9,7 @@
 
         <div class="columns">
             <div class="column">
-                <ex-simple></ex-simple>
+                <ex-simple/>
             </div>
             <div class="column">
                 <CodeView :code="ExSimpleCode" />
@@ -20,7 +20,7 @@
         <h2 class="title">Types and states</h2>
         <div class="columns">
             <div class="column">
-                <ex-types-states></ex-types-states>
+                <ex-types-states/>
             </div>
             <div class="column">
                 <CodeView :code="ExTypesStatesCode" />
@@ -31,7 +31,7 @@
         <h2 class="title">Icons</h2>
         <div class="columns">
             <div class="column">
-                <ex-icons></ex-icons>
+                <ex-icons/>
             </div>
             <div class="column">
                 <CodeView :code="ExIconsCode" />
@@ -43,7 +43,7 @@
         <h3 class="subtitle">Automatic HTML5 validation on-blur</h3>
         <div class="columns">
             <div class="column">
-                <ex-validation></ex-validation>
+                <ex-validation/>
             </div>
             <div class="column">
                 <CodeView :code="ExValidationCode" />
@@ -55,7 +55,7 @@
         <p class="content">You can use the <code>password-reveal</code> prop to add a button that reveals password</p>
         <div class="columns">
             <div class="column">
-                <ex-password></ex-password>
+                <ex-password/>
             </div>
             <div class="column">
                 <CodeView :code="ExPasswordCode" />
@@ -66,7 +66,7 @@
         <h2 class="title">Sizes</h2>
         <div class="columns">
             <div class="column">
-                <ex-sizes></ex-sizes>
+                <ex-sizes/>
             </div>
             <div class="column">
                 <CodeView :code="ExSizesCode" />
