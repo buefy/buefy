@@ -2,29 +2,67 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   env: {
     browser: true,
   },
-  extends: ['vue'],
-  plugins: ['vue'],
+  extends: [
+    'standard',
+    'plugin:vue/recommended',
+  ],
   rules: {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'indent': ['error', 4, { 'SwitchCase': 1 }],
     'space-before-function-paren': ['error', {
-        'anonymous': 'always',
-        'named': 'never'
+      'anonymous': 'always',
+      'named': 'never'
     }],
-    'no-const-assign': 'warn',
-    'no-this-before-super': 'warn',
-    'no-undef': 'warn',
-    'no-unreachable': 'warn',
-    'no-unused-vars': 'warn',
-    'constructor-super': 'warn',
-    'valid-typeof': 'warn'
+    'max-len': ['error', {
+      'code': 100,
+      'tabWidth': 4,
+      'ignoreUrls': true,
+      'ignoreStrings': true,
+      'ignoreTemplateLiterals': true,
+      'ignoreRegExpLiterals': true
+    }],
+    'no-console': ['warn'],
+    'arrow-parens': ['error', 'always'],
+    'max-depth': ['error', 4],
+    'vue/html-indent': ['error', 4],
+    'vue/max-attributes-per-line': [2, {
+      'singleline': 2,
+      'multiline': {
+        'max': 1,
+        'allowFirstLine': false
+      }
+    }],
+    'vue/order-in-components': ['error', {
+      order: [
+        'el',
+        'name',
+        'parent',
+        'functional',
+        ['delimiters', 'comments'],
+        ['components', 'directives', 'filters'],
+        'extends',
+        'mixins',
+        'inheritAttrs',
+        'model',
+        ['props', 'propsData'],
+        'data',
+        'computed',
+        'watch',
+        'methods',
+        'LIFECYCLE_HOOKS',
+        ['template', 'render'],
+        'renderError'
+      ]
+    }],
+    'vue/no-reserved-keys': 0,
+    'vue/require-default-prop': 0
   }
 }
