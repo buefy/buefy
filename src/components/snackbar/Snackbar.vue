@@ -7,7 +7,11 @@
             class="snackbar"
             :class="position">
             <p class="text">{{ message }}</p>
-            <div v-if="actionText" class="action" @click="action" :class="type">
+            <div
+                v-if="actionText"
+                class="action"
+                @click="action"
+                :class="type">
                 <button class="button is-dark">{{ actionText }}</button>
             </div>
         </div>

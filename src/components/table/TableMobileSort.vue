@@ -32,7 +32,7 @@
     import BIcon from '../icon'
 
     export default {
-        name: 'bTableMobileSort',
+        name: 'BTableMobileSort',
         components: {
             BSelect,
             BIcon

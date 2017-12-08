@@ -4,7 +4,7 @@
             v-if="isActive"
             class="dialog modal is-active"
             :class="size">
-            <div class="modal-background" @click="cancel('outside')"></div>
+            <div class="modal-background" @click="cancel('outside')"/>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">{{ title }}</p>
@@ -20,15 +20,15 @@
                                 :pack="iconPack"
                                 :type="type"
                                 :both="!icon"
-                                size="is-large">
-                            </b-icon>
+                                size="is-large"/>
                         </div>
                         <div class="media-content">
-                            <p v-html="message"></p>
+                            <p v-html="message"/>
 
                             <div v-if="hasInput" class="field">
                                 <div class="control">
-                                    <input v-model="prompt"
+                                    <input
+                                        v-model="prompt"
                                         class="input"
                                         ref="input"
                                         required
@@ -70,11 +70,11 @@
     import { removeElement } from '../../utils/helpers'
 
     export default {
-        name: 'bDialog',
-        extends: Modal,
+        name: 'BDialog',
         components: {
             [Icon.name]: Icon
         },
+        extends: Modal,
         props: {
             title: String,
             message: String,

@@ -1,16 +1,24 @@
 <template>
     <transition name="fade">
-        <article v-if="isActive" class="notification" :class="type">
-            <button v-if="closable" class="delete" @click="close" type="button"></button>
+        <article
+            v-if="isActive"
+            class="notification"
+            :class="type">
+            <button
+                v-if="closable"
+                class="delete"
+                type="button"
+                @click="close"
+            />
             <div class="media">
                 <div v-if="icon && hasIcon" class="media-left">
-                    <b-icon :icon="icon"
+                    <b-icon
+                        :icon="icon"
                         both
-                        size="is-large">
-                    </b-icon>
+                        size="is-large"/>
                 </div>
                 <div class="media-content">
-                    <slot></slot>
+                    <slot/>
                 </div>
             </div>
         </article>
@@ -21,7 +29,7 @@
     import MessageMixin from '../../utils/MessageMixin.js'
 
     export default {
-        name: 'bNotification',
+        name: 'BNotification',
         mixins: [MessageMixin]
     }
 </script>

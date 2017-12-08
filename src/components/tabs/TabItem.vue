@@ -1,14 +1,14 @@
 <template>
     <transition :name="transitionName">
         <div v-show="isActive" class="tab-item">
-            <slot></slot>
+            <slot/>
         </div>
     </transition>
 </template>
 
 <script>
     export default {
-        name: 'bTabItem',
+        name: 'BTabItem',
         props: {
             label: String,
             icon: String,

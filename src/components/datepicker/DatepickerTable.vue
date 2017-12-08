@@ -1,7 +1,8 @@
 <template>
     <section class="datepicker-table">
         <header class="datepicker-header">
-            <div v-for="day in visibleDayNames"
+            <div
+                v-for="day in visibleDayNames"
                 :key="day"
                 class="datepicker-cell">
                 {{ day }}
@@ -11,7 +12,7 @@
             <b-datepicker-table-row
                 v-for="(week, index) in weeksInThisMonth(focused.month, focused.year)"
                 :key="index"
-                :selectedDate="value"
+                :selected-date="value"
                 :week="week"
                 :month="focused.month"
                 :min-date="minDate"
@@ -20,8 +21,7 @@
                 :unselectable-dates="unselectableDates"
                 :events="eventsInThisWeek(week, index)"
                 :indicators="indicators"
-                @select="updateSelectedDate">
-            </b-datepicker-table-row>
+                @select="updateSelectedDate"/>
         </div>
     </section>
 </template>
@@ -30,7 +30,7 @@
     import bDatepickerTableRow from './DatepickerTableRow'
 
     export default {
-        name: 'bDatepickerTable',
+        name: 'BDatepickerTable',
         components: {
             bDatepickerTableRow
         },
@@ -80,7 +80,10 @@
                     if (!event.hasOwnProperty('type')) {
                         event.type = 'is-primary'
                     }
-                    if (event.date.getMonth() === this.focused.month && event.date.getFullYear() === this.focused.year) {
+                    if (
+                        event.date.getMonth() === this.focused.month &&
+                        event.date.getFullYear() === this.focused.year
+                    ) {
                         monthEvents.push(event)
                     }
                 }
@@ -104,15 +107,19 @@
 
                 const thisWeek = []
 
-                const dayOfWeek = new Date(year, month, startingDate)
-                    .getDay()
+                const dayOfWeek = new Date(year, month, startingDate).getDay()
 
                 const end = dayOfWeek >= this.firstDayOfWeek
-                    ? (dayOfWeek - this.firstDayOfWeek) : ((7 - this.firstDayOfWeek) + dayOfWeek)
+                    ? (dayOfWeek - this.firstDayOfWeek)
+                    : ((7 - this.firstDayOfWeek) + dayOfWeek)
 
                 let daysAgo = 1
                 for (let i = 0; i < end; i++) {
-                    thisWeek.unshift(new Date(thisMonth.getFullYear(), thisMonth.getMonth(), startingDate - daysAgo))
+                    thisWeek.unshift(new Date(
+                        thisMonth.getFullYear(),
+                        thisMonth.getMonth(),
+                        startingDate - daysAgo)
+                    )
                     daysAgo++
                 }
 
@@ -166,7 +173,9 @@
 
                 for (let d = 0; d < weeksInThisMonth[index].length; d++) {
                     for (let e = 0; e < this.eventsInThisMonth.length; e++) {
-                        if (this.eventsInThisMonth[e].date.getTime() === weeksInThisMonth[index][d].getTime()) {
+                        const eventsInThisMonth = this.eventsInThisMonth[e].date.getTime()
+                        const weeksInThisMonth = this.weeksInThisMonth[index][d].getTime()
+                        if (eventsInThisMonth === weeksInThisMonth) {
                             weekEvents.push(this.eventsInThisMonth[e])
                         }
                     }

@@ -1,10 +1,11 @@
 <template>
     <label class="upload control">
         <template v-if="!dragDrop">
-            <slot></slot>
+            <slot/>
         </template>
 
-        <div v-else
+        <div
+            v-else
             class="upload-draggable"
             :class="[type, {
                 'is-loading': loading,
@@ -15,10 +16,11 @@
             @dragleave.prevent="updateDragDropFocus(false)"
             @dragenter.prevent="updateDragDropFocus(true)"
             @drop.prevent="onFileChange">
-            <slot></slot>
+            <slot/>
         </div>
 
-        <input ref="input"
+        <input
+            ref="input"
             type="file"
             v-bind="$attrs"
             :multiple="multiple"
@@ -32,9 +34,9 @@
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
-        name: 'bUpload',
-        inheritAttrs: false,
+        name: 'BUpload',
         mixins: [FormElementMixin],
+        inheritAttrs: false,
         props: {
             value: {
                 type: Array,
@@ -82,31 +84,32 @@
              * emit 'input' event and validate
              */
             onFileChange(event) {
-                if (!this.disabled && !this.loading) {
-                    if (this.dragDrop) {
-                        this.updateDragDropFocus(false)
-                    }
-                    const value = event.target.files || event.dataTransfer.files
-                    if (value && value.length) {
-                        if (!this.multiple) {
-                            // only one element in case drag drop mode and isn't multiple
-                            if (this.dragDrop) {
-                                if (value.length === 1) {
-                                    this.newValue = []
-                                } else {
-                                    return false
-                                }
-                            } else {
-                                this.newValue = []
-                            }
-                        }
-                        for (let i = 0; i < value.length; i++) {
-                            this.newValue.push(value[i])
-                        }
-                    }
-                    this.$emit('input', this.newValue)
-                    !this.dragDrop && this.checkHtml5Validity()
+                if (this.disabled || this.loading) return
+
+                if (this.dragDrop) {
+                    this.updateDragDropFocus(false)
                 }
+                const value = event.target.files || event.dataTransfer.files
+                if (value && value.length) {
+                    if (!this.multiple) {
+                        // only one element in case drag drop mode and isn't multiple
+                        if (this.dragDrop) {
+                            if (value.length === 1) {
+                                this.newValue = []
+                            } else {
+                                return false
+                            }
+                        } else {
+                            this.newValue = []
+                        }
+                    }
+
+                    for (let i = 0; i < value.length; i++) {
+                        this.newValue.push(value[i])
+                    }
+                }
+                this.$emit('input', this.newValue)
+                !this.dragDrop && this.checkHtml5Validity()
             },
 
             /**

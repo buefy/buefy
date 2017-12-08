@@ -1,6 +1,7 @@
 <template>
     <div class="taginput control" :class="[size, rootClasses]">
-        <div class="taginput-container"
+        <div
+            class="taginput-container"
             :class="[statusType, size, containerClasses]"
             :disabled="disabled"
             @click="hasInput && focus($event)">
@@ -36,8 +37,7 @@
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
-                @select="onSelect">
-            </b-autocomplete>
+                @select="onSelect"/>
         </div>
 
         <p v-if="maxtags || maxlength" class="help counter">
@@ -57,12 +57,12 @@
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
-        name: 'bTaginput',
-        mixins: [FormElementMixin],
-        inheritAttrs: false,
+        name: 'BTaginput',
         components: {
             [Autocomplete.name]: Autocomplete
         },
+        mixins: [FormElementMixin],
+        inheritAttrs: false,
         props: {
             value: {
                 type: Array,

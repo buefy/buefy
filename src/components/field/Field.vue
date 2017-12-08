@@ -1,22 +1,33 @@
 <template>
-    <div class="field" :class="[fieldType, newPosition, {
-        'is-expanded': expanded,
-        'is-grouped-multiline': groupMultiline,
-        'is-horizontal': horizontal
-    }]">
-        <div class="field-label is-normal" v-if="horizontal">
-            <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
+    <div class="field" :class="rootClasses">
+        <div v-if="horizontal" class="field-label is-normal">
+            <label
+                v-if="label"
+                :for="labelFor"
+                class="label" >
+                {{ label }}
+            </label>
         </div>
         <template v-else>
-            <label class="label" :for="labelFor" v-if="label">{{ label }}</label>
+            <label
+                v-if="label"
+                :for="labelFor"
+                class="label" >
+                {{ label }}
+            </label>
         </template>
         <b-field-body v-if="horizontal">
-            <slot></slot>
+            <slot/>
         </b-field-body>
         <template v-else>
-            <slot></slot>
+            <slot/>
         </template>
-        <p class="help" :class="newType" v-if="newMessage" v-html="formattedMessage"></p>
+        <p
+            v-if="newMessage"
+            v-html="formattedMessage"
+            class="help"
+            :class="newType"
+        />
     </div>
 </template>
 
@@ -24,7 +35,7 @@
     import FieldBody from './FieldBody.vue'
 
     export default {
-        name: 'bField',
+        name: 'BField',
         components: {
             'b-field-body': FieldBody
         },
@@ -50,22 +61,14 @@
                 _isField: true // Used internally by Input and Select
             }
         },
-        watch: {
-            /**
-             * Set internal type when prop change.
-             */
-            type(value) {
-                this.newType = value
-            },
-
-            /**
-             * Set internal message when prop change.
-             */
-            message(value) {
-                this.newMessage = value
-            }
-        },
         computed: {
+            rootClasses() {
+                return [this.fieldType, this.newPosition, {
+                    'is-expanded': this.expanded,
+                    'is-grouped-multiline': this.groupMultiline,
+                    'is-horizontal': this.horizontal
+                }]
+            },
             /**
              * Correct Bulma class for the side of the addon or group.
              *
@@ -93,9 +96,13 @@
              */
 
             fieldType() {
-                if (this.grouped) {
-                    return 'is-grouped'
-                } else if (this.$slots.default !== undefined && this.$slots.default.length > 1 && this.addons) {
+                if (this.grouped) return 'is-grouped'
+
+                if (
+                    this.$slots.default !== undefined &&
+                    this.$slots.default.length > 1 &&
+                    this.addons
+                ) {
                     return 'has-addons'
                 }
             },
@@ -118,6 +125,21 @@
                 } else {
                     return this.newMessage
                 }
+            }
+        },
+        watch: {
+            /**
+             * Set internal type when prop change.
+             */
+            type(value) {
+                this.newType = value
+            },
+
+            /**
+             * Set internal message when prop change.
+             */
+            message(value) {
+                this.newMessage = value
             }
         }
     }

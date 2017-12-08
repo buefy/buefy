@@ -1,13 +1,15 @@
 <template>
     <div class="control">
-        <label class="b-radio radio button"
+        <label
+            class="b-radio radio button"
             ref="label"
             :class="[newValue === nativeValue ? type : null, size]"
             :disabled="disabled"
             :tabindex="disabled ? false : 0"
             @keydown.prevent.enter.space="$refs.label.click()">
-            <slot></slot>
-            <input v-model="newValue"
+            <slot/>
+            <input
+                v-model="newValue"
                 type="radio"
                 :disabled="disabled"
                 :name="name"
@@ -18,10 +20,10 @@
 
 <script>
     export default {
-        name: 'bRadioButton',
+        name: 'BRadioButton',
         props: {
-            value: {},
-            nativeValue: {},
+            value: [String, Number, Boolean, Function, Object, Array, Symbol],
+            nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
             type: {
                 type: String,
                 default: 'is-primary'

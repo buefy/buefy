@@ -2,26 +2,23 @@
     <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
         <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
             <ul>
-                <li v-for="(tabItem, index) in tabItems"
+                <li
+                    v-for="(tabItem, index) in tabItems"
                     :key="index"
-                    :class="{
-                        'is-active': newValue === index,
-                        'is-disabled': tabItem.disabled
-                    }">
+                    :class="{ 'is-active': newValue === index, 'is-disabled': tabItem.disabled }">
                     <a @click="tabClick(index)">
                         <b-icon
                             v-if="tabItem.icon"
                             :icon="tabItem.icon"
                             :pack="tabItem.iconPack"
-                            :size="size">
-                        </b-icon>
+                            :size="size"/>
                         <span>{{ tabItem.label }}</span>
                     </a>
                 </li>
             </ul>
         </nav>
         <section class="tab-content">
-            <slot></slot>
+            <slot/>
         </section>
     </div>
 </template>
@@ -30,7 +27,7 @@
     import Icon from '../icon'
 
     export default {
-        name: 'bTabs',
+        name: 'BTabs',
         components: {
             [Icon.name]: Icon
         },

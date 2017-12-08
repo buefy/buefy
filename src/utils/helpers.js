@@ -10,17 +10,16 @@ export function getValueByPath(obj, path) {
  * Extension of indexOf method by equality function if specified
  */
 export function indexOf(array, obj, fn) {
-    if (array) {
-        if (fn && typeof fn === 'function') {
-            for (let i = 0; i < array.length; i++) {
-                if (fn(array[i], obj)) {
-                    return i
-                }
-            }
-        } else {
-            return array.indexOf(obj)
+    if (!array) return -1
+
+    if (!fn || typeof fn !== 'function') return array.indexOf(obj)
+
+    for (let i = 0; i < array.length; i++) {
+        if (fn(array[i], obj)) {
+            return i
         }
     }
+
     return -1
 }
 
@@ -30,27 +29,43 @@ export function indexOf(array, obj, fn) {
  */
 export const isMobile = {
     Android: function () {
-        return typeof window !== 'undefined' &&
+        return (
+            typeof window !== 'undefined' &&
             window.navigator.userAgent.match(/Android/i)
+        )
     },
     BlackBerry: function () {
-        return typeof window !== 'undefined' &&
+        return (
+            typeof window !== 'undefined' &&
             window.navigator.userAgent.match(/BlackBerry/i)
+        )
     },
     iOS: function () {
-        return typeof window !== 'undefined' &&
+        return (
+            typeof window !== 'undefined' &&
             window.navigator.userAgent.match(/iPhone|iPad|iPod/i)
+        )
     },
     Opera: function () {
-        return typeof window !== 'undefined' &&
+        return (
+            typeof window !== 'undefined' &&
             window.navigator.userAgent.match(/Opera Mini/i)
+        )
     },
     Windows: function () {
-        return typeof window !== 'undefined' &&
+        return (
+            typeof window !== 'undefined' &&
             window.navigator.userAgent.match(/IEMobile/i)
+        )
     },
     any: function () {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows())
+        return (
+            isMobile.Android() ||
+            isMobile.BlackBerry() ||
+            isMobile.iOS() ||
+            isMobile.Opera() ||
+            isMobile.Windows()
+        )
     }
 }
 
@@ -67,8 +82,8 @@ export function removeElement(el) {
  * http://stackoverflow.com/a/6969486
  */
 export function escapeRegExpChars(value) {
-    if (value) {
-        return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
-    }
-    return value
+    if (!value) return value
+
+    // eslint-disable-next-line
+    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }

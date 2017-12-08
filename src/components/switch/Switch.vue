@@ -1,5 +1,6 @@
 <template>
-    <label class="switch"
+    <label
+        class="switch"
         :class="[size, { 'is-disabled': disabled }]"
         ref="label"
         :disabled="disabled"
@@ -9,23 +10,24 @@
         @mouseup="isMouseDown = false"
         @mouseout="isMouseDown = false"
         @blur="isMouseDown = false">
-        <input v-model="newValue"
+        <input
+            v-model="newValue"
             type="checkbox"
             :name="name"
             :disabled="disabled"
             :true-value="trueValue"
             :false-value="falseValue">
-        <span class="check" :class="[{ 'is-elastic': isMouseDown }, type]"></span>
-        <span class="control-label"><slot></slot></span>
+        <span class="check" :class="[{ 'is-elastic': isMouseDown }, type]"/>
+        <span class="control-label"><slot/></span>
     </label>
 </template>
 
 <script>
     export default {
-        name: 'bSwitch',
+        name: 'BSwitch',
         props: {
-            value: {},
-            nativeValue: {},
+            value: [String, Number, Boolean, Function, Object, Array, Symbol],
+            nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
             disabled: Boolean,
             type: String,
             name: String,

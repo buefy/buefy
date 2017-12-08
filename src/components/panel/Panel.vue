@@ -1,22 +1,24 @@
 <template>
     <nav class="panel">
-        <div class="panel-heading"
+        <div
+            class="panel-heading"
             :class="{'is-collapsible' : collapsible}"
             @click="toggle">
-            <span v-if="header" v-html="header"></span>
-            <slot v-else name="header"></slot>
-            <b-icon class="is-pulled-right"
-                    v-if="collapsible"
-                    both
-                    :icon="isOpen ? 'menu-up' : 'menu-down'">
-            </b-icon>
+            <span v-if="header" v-html="header"/>
+            <slot v-else name="header"/>
+            <b-icon
+                class="is-pulled-right"
+                v-if="collapsible"
+                both
+                :icon="isOpen ? 'menu-up' : 'menu-down'"/>
         </div>
         <transition :name="animation">
-            <div class="panel-content"
-                 :class="{'panel-block' : !hasCustomTemplate}"
-                 v-show="isOpen">
-                <div v-if="content" v-html="content"></div>
-                <slot v-else></slot>
+            <div
+                class="panel-content"
+                :class="{'panel-block' : !hasCustomTemplate}"
+                v-show="isOpen">
+                <div v-if="content" v-html="content"/>
+                <slot v-else/>
             </div>
         </transition>
     </nav>
@@ -24,7 +26,7 @@
 
 <script>
     export default {
-        name: 'bPanel',
+        name: 'BPanel',
         props: {
             collapsible: {
                 type: Boolean,

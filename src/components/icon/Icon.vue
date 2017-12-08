@@ -1,6 +1,6 @@
 <template>
     <span class="icon" :class="[newType, size]">
-        <i :class="[newPack, newIcon, newCustomSize, customClass]"></i>
+        <i :class="[newPack, newIcon, newCustomSize, customClass]"/>
     </span>
 </template>
 
@@ -8,7 +8,7 @@
     import config from '../../utils/config'
 
     export default {
-        name: 'bIcon',
+        name: 'BIcon',
         props: {
             type: String,
             pack: String,

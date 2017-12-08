@@ -24,16 +24,14 @@
             v-bind="$attrs"
             @input="onInput"
             @blur="onBlur"
-            @focus="onFocus">
-        </textarea>
+            @focus="onFocus"/>
 
         <b-icon
             v-if="icon"
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="iconSize">
-        </b-icon>
+            :size="iconSize"/>
 
         <b-icon
             v-if="!loading && (passwordReveal || statusType)"
@@ -43,8 +41,7 @@
             :size="iconSize"
             :type="!passwordReveal ? statusType : 'is-primary'"
             both
-            @click.native="togglePasswordVisibility">
-        </b-icon>
+            @click.native="togglePasswordVisibility"/>
 
         <small
             v-if="maxlength && hasCounter"
@@ -61,12 +58,12 @@
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
-        name: 'bInput',
-        inheritAttrs: false,
-        mixins: [FormElementMixin],
+        name: 'BInput',
         components: {
             [Icon.name]: Icon
         },
+        mixins: [FormElementMixin],
+        inheritAttrs: false,
         props: {
             value: [Number, String],
             type: {

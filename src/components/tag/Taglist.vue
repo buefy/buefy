@@ -1,12 +1,12 @@
 <template>
     <div class="tags" :class="{ 'has-addons': attached }">
-        <slot></slot>
+        <slot/>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'bTaglist',
+        name: 'BTaglist',
         props: {
             attached: Boolean
         }

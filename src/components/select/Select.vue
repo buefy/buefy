@@ -1,15 +1,11 @@
 <template>
-    <div class="control"
+    <div
+        class="control"
         :class="{ 'is-expanded': expanded, 'has-icons-left': icon }">
-        <span class="select"
-            :class="[size, statusType, {
-                'is-fullwidth': expanded,
-                'is-loading': loading,
-                'is-multiple': multiple,
-                'is-empty': selected === null
-            }]">
+        <span class="select" :class="spanClasses">
 
-            <select v-model="selected"
+            <select
+                v-model="selected"
                 ref="select"
                 :multiple="multiple"
                 :size="nativeSize"
@@ -25,17 +21,17 @@
                     hidden>
                     {{ placeholder }}
                 </option>
-                <slot></slot>
+                <slot/>
 
             </select>
         </span>
 
-        <b-icon v-if="icon"
+        <b-icon
+            v-if="icon"
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="iconSize">
-        </b-icon>
+            :size="iconSize"/>
     </div>
 </template>
 
@@ -43,9 +39,9 @@
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
-        name: 'bSelect',
-        inheritAttrs: false,
+        name: 'BSelect',
         mixins: [FormElementMixin],
+        inheritAttrs: false,
         props: {
             value: {
                 type: [String, Number, Boolean, Object, Array, Symbol, Function],
@@ -60,6 +56,16 @@
                 selected: this.value,
                 _isSelect: true,
                 _elementRef: 'select'
+            }
+        },
+        computed: {
+            spanClasses() {
+                return [this.size, this.statusType, {
+                    'is-fullwidth': this.expanded,
+                    'is-loading': this.loading,
+                    'is-multiple': this.multiple,
+                    'is-empty': this.selected === null
+                }]
             }
         },
         watch: {

@@ -1,11 +1,11 @@
 <template>
     <div class="collapse">
         <div class="collapse-trigger" @click="toggle">
-            <slot name="trigger"></slot>
+            <slot name="trigger"/>
         </div>
         <transition :name="animation">
             <div class="collapse-content" v-show="isOpen">
-                <slot></slot>
+                <slot/>
             </div>
         </transition>
     </div>
@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name: 'bCollapse',
+        name: 'BCollapse',
         props: {
             open: {
                 type: Boolean,

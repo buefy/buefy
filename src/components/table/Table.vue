@@ -17,19 +17,32 @@
                 @keydown.prevent.down="pressedArrow(1)">
                 <thead v-if="columns.length">
                     <tr>
-                        <th v-if="detailed" width="40px"></th>
+                        <th v-if="detailed" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isAllChecked" @change.native="checkAll"></b-checkbox>
+                            <b-checkbox :value="isAllChecked" @change.native="checkAll"/>
                         </th>
-                        <th v-for="(column, index) in columns"
+                        <th
+                            v-for="(column, index) in columns"
                             v-if="column.visible"
                             :key="index"
-                            :class="{ 'is-current-sort': currentSortColumn === column, 'is-sortable': column.sortable }"
+                            :class="{
+                                'is-current-sort': currentSortColumn === column,
+                                'is-sortable': column.sortable
+                            }"
                             :style="{ width: column.width + 'px' }"
                             @click.stop="sort(column)">
-                            <div class="th-wrap" :class="{ 'is-numeric': column.numeric, 'is-centered': column.centered }">
-
-                                <slot v-if="$scopedSlots.header" name="header" :column="column" :index="index"></slot>
+                            <div
+                                class="th-wrap"
+                                :class="{
+                                    'is-numeric': column.numeric,
+                                    'is-centered': column.centered
+                            }">
+                                <slot
+                                    v-if="$scopedSlots.header"
+                                    name="header"
+                                    :column="column"
+                                    :index="index"
+                                />
                                 <template v-else>{{ column.label }}</template>
 
                                 <b-icon
@@ -37,15 +50,15 @@
                                     icon="arrow-up"
                                     both
                                     size="is-small"
-                                    :class="{ 'is-desc': !isAsc }">
-                                </b-icon>
+                                    :class="{ 'is-desc': !isAsc }"/>
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
-                        <tr :key="index"
+                        <tr
+                            :key="index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row)
@@ -55,26 +68,33 @@
 
                             <td v-if="detailed">
                                 <a role="button" @click.stop="toggleDetails(row)">
-                                    <b-icon icon="chevron-right"
+                                    <b-icon
+                                        icon="chevron-right"
                                         both
-                                        :class="{'is-expanded': isVisibleDetailRow(row)}">
-                                    </b-icon>
+                                        :class="{'is-expanded': isVisibleDetailRow(row)}"/>
                                 </a>
                             </td>
 
                             <td class="checkbox-cell" v-if="checkable">
-                                <b-checkbox :value="isRowChecked(row)" @change.native="checkRow(row)"></b-checkbox>
+                                <b-checkbox
+                                    :value="isRowChecked(row)"
+                                    @change.native="checkRow(row)"
+                                />
                             </td>
 
-                            <slot :row="row" :index="index"></slot>
+                            <slot :row="row" :index="index"/>
                         </tr>
 
-                        <tr v-if="detailed && isVisibleDetailRow(row)"
+                        <tr
+                            v-if="detailed && isVisibleDetailRow(row)"
                             :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
-                                    <slot name="detail" :row="row" :index="index"></slot>
+                                    <slot
+                                        name="detail"
+                                        :row="row"
+                                        :index="index"/>
                                 </div>
                             </td>
                         </tr>
@@ -83,15 +103,15 @@
                 <tbody v-else>
                     <tr class="is-empty">
                         <td :colspan="columnCount">
-                            <slot name="empty"></slot>
+                            <slot name="empty"/>
                         </td>
                     </tr>
                 </tbody>
                 <tfoot v-if="$slots.footer !== undefined">
                     <tr class="table-footer">
-                        <slot name="footer" v-if="hasCustomFooterSlot()"></slot>
+                        <slot name="footer" v-if="hasCustomFooterSlot()"/>
                         <th :colspan="columnCount" v-else>
-                            <slot name="footer"></slot>
+                            <slot name="footer"/>
                         </th>
                     </tr>
                 </tfoot>
@@ -100,7 +120,7 @@
 
         <div v-if="checkable || paginated" class="level">
             <div class="level-left">
-                <slot name="bottom-left"></slot>
+                <slot name="bottom-left"/>
             </div>
 
             <div class="level-right">
@@ -110,8 +130,7 @@
                         :per-page="perPage"
                         :simple="paginationSimple"
                         :current="newCurrentPage"
-                        @change="pageChanged">
-                    </b-pagination>
+                        @change="pageChanged"/>
                 </div>
             </div>
         </div>
@@ -127,7 +146,7 @@
     import BTableMobileSort from './TableMobileSort'
 
     export default {
-        name: 'bTable',
+        name: 'BTable',
         components: {
             BPagination,
             BIcon,
@@ -203,6 +222,68 @@
                 isAsc: true,
                 firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
+            }
+        },
+        computed: {
+            tableClasses() {
+                return {
+                    'is-bordered': this.bordered,
+                    'is-striped': this.striped,
+                    'is-narrow': this.narrowed,
+                    'has-mobile-cards': this.mobileCards,
+                    'is-hoverable': (
+                        (this.hoverable || this.focusable) &&
+                        this.visibleData.length
+                    )
+                }
+            },
+
+            /**
+             * Splitted data based on the pagination.
+             */
+            visibleData() {
+                if (!this.paginated) return this.newData
+
+                const currentPage = this.newCurrentPage
+                const perPage = this.perPage
+
+                if (this.newData.length <= perPage) {
+                    return this.newData
+                } else {
+                    const start = (currentPage - 1) * perPage
+                    const end = parseInt(start, 10) + parseInt(perPage, 10)
+                    return this.newData.slice(start, end)
+                }
+            },
+
+            /**
+             * Check if all rows in the page are checked.
+             */
+            isAllChecked() {
+                const isAllChecked = this.visibleData.some((currentVisibleRow) => {
+                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
+                })
+                return !isAllChecked
+            },
+
+            /**
+             * Check if has any sortable column.
+             */
+            hasSortableColumns() {
+                return this.columns.some((column) => {
+                    return column.sortable
+                })
+            },
+
+            /**
+             * Return total column count based if it's checkable or expanded
+             */
+            columnCount() {
+                let count = this.columns.length
+                count += this.checkable ? 1 : 0
+                count += this.detailed ? 1 : 0
+
+                return count
             }
         },
         watch: {
@@ -281,68 +362,6 @@
                 this.newCurrentPage = newVal
             }
         },
-        computed: {
-            tableClasses() {
-                return {
-                    'is-bordered': this.bordered,
-                    'is-striped': this.striped,
-                    'is-narrow': this.narrowed,
-                    'has-mobile-cards': this.mobileCards,
-                    'is-hoverable': (
-                        (this.hoverable || this.focusable) &&
-                        this.visibleData.length
-                    )
-                }
-            },
-
-            /**
-             * Splitted data based on the pagination.
-             */
-            visibleData() {
-                if (!this.paginated) return this.newData
-
-                const currentPage = this.newCurrentPage
-                const perPage = this.perPage
-
-                if (this.newData.length <= perPage) {
-                    return this.newData
-                } else {
-                    const start = (currentPage - 1) * perPage
-                    const end = parseInt(start, 10) + parseInt(perPage, 10)
-                    return this.newData.slice(start, end)
-                }
-            },
-
-            /**
-             * Check if all rows in the page are checked.
-             */
-            isAllChecked() {
-                const isAllChecked = this.visibleData.some(currentVisibleRow => {
-                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
-                })
-                return !isAllChecked
-            },
-
-            /**
-             * Check if has any sortable column.
-             */
-            hasSortableColumns() {
-                return this.columns.some(column => {
-                    return column.sortable
-                })
-            },
-
-            /**
-             * Return total column count based if it's checkable or expanded
-             */
-            columnCount() {
-                let count = this.columns.length
-                count += this.checkable ? 1 : 0
-                count += this.detailed ? 1 : 0
-
-                return count
-            }
-        },
         methods: {
             /**
              * Sort an array by key without mutating original data.
@@ -396,7 +415,12 @@
                     this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
                 }
                 if (!this.backendSorting) {
-                    this.newData = this.sortBy(this.newData, column.field, column.customSort, this.isAsc)
+                    this.newData = this.sortBy(
+                        this.newData,
+                        column.field,
+                        column.customSort,
+                        this.isAsc
+                    )
                 }
                 this.currentSortColumn = column
             },
@@ -424,7 +448,7 @@
              */
             checkAll() {
                 const isAllChecked = this.isAllChecked
-                this.visibleData.forEach(currentRow => {
+                this.visibleData.forEach((currentRow) => {
                     this.removeCheckedRow(currentRow)
                     if (!isAllChecked) {
                         this.newCheckedRows.push(currentRow)
@@ -590,7 +614,7 @@
                     sortField = this.defaultSort
                 }
 
-                this.columns.forEach(column => {
+                this.columns.forEach((column) => {
                     if (column.field === sortField) {
                         this.isAsc = sortDirection.toLowerCase() !== 'desc'
                         this.sort(column, true)

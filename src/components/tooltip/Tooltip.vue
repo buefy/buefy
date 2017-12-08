@@ -8,8 +8,8 @@
             'is-always': always,
             'is-multiline': multilined,
             'is-dashed': dashed
-        }]">
-        <slot></slot>
+    }]">
+        <slot/>
     </span>
 </template>
 
@@ -17,7 +17,7 @@
     import config from '../../utils/config'
 
     export default {
-        name: 'bTooltip',
+        name: 'BTooltip',
         props: {
             active: {
                 type: Boolean,

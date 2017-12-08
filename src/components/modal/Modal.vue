@@ -1,8 +1,9 @@
 <template>
     <transition :name="animation">
-        <div class="modal is-active" v-if="isActive">
-            <div class="modal-background" @click="cancel('outside')"></div>
-            <div class="animation-content"
+        <div v-if="isActive" class="modal is-active">
+            <div class="modal-background" @click="cancel('outside')"/>
+            <div
+                class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
                 :style="{ maxWidth: newWidth }">
                 <component
@@ -10,19 +11,16 @@
                     v-bind="props"
                     v-on="events"
                     :is="component"
-                    @close="close">
-                </component>
+                    @close="close"/>
                 <div
                     v-else-if="content"
-                    v-html="content">
-                </div>
-                <slot v-else></slot>
+                    v-html="content"/>
+                <slot v-else/>
             </div>
             <button
                 v-if="showX"
                 class="modal-close is-large"
-                @click="cancel('x')">
-            </button>
+                @click="cancel('x')"/>
         </div>
     </transition>
 </template>
@@ -32,7 +30,7 @@
     import config from '../../utils/config'
 
     export default {
-        name: 'bModal',
+        name: 'BModal',
         props: {
             active: Boolean,
             component: [Object, Function],

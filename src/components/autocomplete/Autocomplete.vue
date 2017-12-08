@@ -16,31 +16,39 @@
             @keydown.native.tab="tabPressed"
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
-            @keydown.native.down.prevent="keyArrows('down')">
-        </b-input>
+            @keydown.native.down.prevent="keyArrows('down')"
+        />
 
         <transition name="fade">
-            <div class="dropdown-menu"
+            <div
+                class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && (visibleData.length > 0 || hasEmptySlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
-                    <a v-for="(option, index) in visibleData"
+                    <a
+                        v-for="(option, index) in visibleData"
                         :key="index"
                         class="dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
-                        <slot v-if="hasDefaultSlot" :option="option" :index="index"></slot>
-                        <span v-else v-html="getValue(option, true)"></span>
+                        <slot
+                            v-if="hasDefaultSlot"
+                            :option="option"
+                            :index="index"
+                        />
+                        <span v-else v-html="getValue(option, true)"/>
                     </a>
-                    <div v-if="data.length > maxResults"
+                    <div
+                        v-if="data.length > maxResults"
                         class="dropdown-item is-disabled">
                         &hellip;
                     </div>
-                    <div v-else-if="visibleData.length === 0"
+                    <div
+                        v-else-if="visibleData.length === 0"
                         class="dropdown-item is-disabled">
-                        <slot name="empty"></slot>
+                        <slot name="empty"/>
                     </div>
                 </div>
             </div>
@@ -54,12 +62,12 @@
     import Input from '../input'
 
     export default {
-        name: 'bAutocomplete',
-        inheritAttrs: false,
-        mixins: [FormElementMixin],
+        name: 'BAutocomplete',
         components: {
             [Input.name]: Input
         },
+        mixins: [FormElementMixin],
+        inheritAttrs: false,
         props: {
             value: [Number, String],
             data: {

@@ -1,31 +1,23 @@
 <template>
     <hr v-if="separator" class="dropdown-divider">
-    <a v-else-if="!custom && !hasLink"
+    <a
+        v-else-if="!custom && !hasLink"
         class="dropdown-item"
-        :class="{
-            'is-disabled': disabled,
-            'is-paddingless': paddingless,
-            'is-active': value !== null && value === $parent.selected
-        }"
+        :class="anchorClasses"
         @click="selectItem">
-        <slot></slot>
+        <slot/>
     </a>
-    <div v-else
-        :class="{
-            'dropdown-item': !hasLink,
-            'is-disabled': disabled,
-            'is-paddingless': paddingless,
-            'is-active': value !== null && value === $parent.selected,
-            'has-link': hasLink
-        }"
+    <div
+        v-else
+        :class="itemClasses"
         @click="selectItem">
-        <slot></slot>
+        <slot/>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'bDropdownItem',
+        name: 'BDropdownItem',
         props: {
             value: {
                 type: [String, Number, Boolean, Object, Array, Symbol, Function],
@@ -38,6 +30,22 @@
             hasLink: Boolean
         },
         computed: {
+            anchorClasses() {
+                return {
+                    'is-disabled': this.disabled,
+                    'is-paddingless': this.paddingless,
+                    'is-active': this.value !== null && this.value === this.$parent.selected
+                }
+            },
+            itemClasses() {
+                return {
+                    'dropdown-item': !this.hasLink,
+                    'is-disabled': this.disabled,
+                    'is-paddingless': this.paddingless,
+                    'is-active': this.value !== null && this.value === this.$parent.selected,
+                    'has-link': this.hasLink
+                }
+            },
             /**
              * Check if item can be clickable.
              */

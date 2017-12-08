@@ -1,13 +1,15 @@
 <template>
     <div class="control">
-        <label class="b-checkbox checkbox button"
+        <label
+            class="b-checkbox checkbox button"
             ref="label"
             :class="[checked ? type : null, size, { 'is-disabled': disabled }]"
             :disabled="disabled"
             :tabindex="disabled ? false : 0"
             @keydown.prevent.enter.space="$refs.label.click()">
-            <slot></slot>
-            <input v-model="newValue"
+            <slot/>
+            <input
+                v-model="newValue"
                 type="checkbox"
                 :disabled="disabled"
                 :name="name"
@@ -18,10 +20,10 @@
 
 <script>
     export default {
-        name: 'bCheckboxButton',
+        name: 'BCheckboxButton',
         props: {
-            value: {},
-            nativeValue: {},
+            value: [String, Number, Boolean, Function, Object, Array, Symbol],
+            nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
             disabled: Boolean,
             name: String,
             size: String,

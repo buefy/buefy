@@ -1,19 +1,20 @@
 <template>
-    <td v-if="visible"
-        :class="{ 'has-text-right': numeric && !centered, 'has-text-centered': centered }"
+    <td
+        v-if="visible"
+        :class="rootClasses"
         :data-label="label">
-        <span><slot></slot></span>
+        <span><slot/></span>
     </td>
 </template>
 
 <script>
     export default {
-        name: 'bTableColumn',
+        name: 'BTableColumn',
         props: {
             label: String,
             customKey: [String, Number],
             field: String,
-            meta: {},
+            meta: [String, Number, Boolean, Function, Object, Array, Symbol],
             width: [Number, String],
             numeric: Boolean,
             centered: Boolean,
@@ -27,6 +28,14 @@
         data() {
             return {
                 newKey: this.customKey || this.label
+            }
+        },
+        computed: {
+            rootClasses() {
+                return {
+                    'has-text-right': this.numeric && !this.centered,
+                    'has-text-centered': this.centered
+                }
             }
         },
         created() {

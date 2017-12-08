@@ -1,11 +1,13 @@
 <template>
     <div class="timepicker control" :class="[size, {'is-expanded': expanded}]">
-        <b-dropdown v-if="!isMobile || inline"
+        <b-dropdown
+            v-if="!isMobile || inline"
             ref="dropdown"
             :position="position"
             :disabled="disabled"
             :inline="inline">
-            <b-input v-if="!inline"
+            <b-input
+                v-if="!inline"
                 ref="input"
                 slot="trigger"
                 autocomplete="off"
@@ -20,55 +22,62 @@
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"
-                @blur="$emit('blur', $event) && checkHtml5Validity()">
-            </b-input>
+                @blur="$emit('blur', $event) && checkHtml5Validity()"/>
 
             <b-dropdown-item :disabled="disabled" custom>
                 <div class="pagination-list">
                     <b-field>
-                        <b-select v-model="hoursSelected"
+                        <b-select
+                            v-model="hoursSelected"
                             @change.native="onHoursChange($event.target.value)"
                             :disabled="disabled"
                             placeholder="00">
-                            <option v-for="hour in hours"
+                            <option
+                                v-for="hour in hours"
                                 :value="hour.value"
                                 :key="hour.value"
                                 :disabled="isHourDisabled(hour.value)">
-                                {{hour.label}}
+                                {{ hour.label }}
                             </option>
                         </b-select>
-                        <b-select v-model="minutesSelected"
+                        <b-select
+                            v-model="minutesSelected"
                             @change.native="onMinutesChange($event.target.value)"
                             :disabled="disabled"
                             placeholder="00">
-                            <option v-for="minute in minutes"
+                            <option
+                                v-for="minute in minutes"
                                 :value="minute.value"
                                 :key="minute.value"
                                 :disabled="isMinuteDisabled(minute.value)">
-                                {{minute.label}}
+                                {{ minute.label }}
                             </option>
                         </b-select>
-                        <b-select v-model="meridienSelected"
+                        <b-select
+                            v-model="meridienSelected"
                             @change.native="onMeridienChange($event.target.value)"
                             v-if="!isHourFormat24"
                             :disabled="disabled">
-                            <option v-for="meridien in meridiens"
+                            <option
+                                v-for="meridien in meridiens"
                                 :value="meridien"
                                 :key="meridien">
-                                {{meridien}}
+                                {{ meridien }}
                             </option>
                         </b-select>
                     </b-field>
                 </div>
 
-                <footer v-if="$slots.default !== undefined && $slots.default.length"
+                <footer
+                    v-if="$slots.default !== undefined && $slots.default.length"
                     class="timepicker-footer">
-                    <slot></slot>
+                    <slot/>
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
 
-        <b-input v-else
+        <b-input
+            v-else
             ref="input"
             type="time"
             autocomplete="off"
@@ -85,8 +94,7 @@
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
             @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event) && checkHtml5Validity()">
-        </b-input>
+            @blur="$emit('blur', $event) && checkHtml5Validity()"/>
     </div>
 </template>
 
@@ -161,9 +169,7 @@
     }
 
     export default {
-        name: 'bTimepicker',
-        inheritAttrs: false,
-        mixins: [FormElementMixin],
+        name: 'BTimepicker',
         components: {
             [Input.name]: Input,
             [Field.name]: Field,
@@ -172,6 +178,8 @@
             [Dropdown.name]: Dropdown,
             [DropdownItem.name]: DropdownItem
         },
+        mixins: [FormElementMixin],
+        inheritAttrs: false,
         props: {
             value: Date,
             inline: Boolean,
@@ -336,11 +344,19 @@
             },
 
             onHoursChange(value) {
-                this.updateDateSelected(parseInt(value, 10), this.minutesSelected, this.meridienSelected)
+                this.updateDateSelected(
+                    parseInt(value, 10),
+                    this.minutesSelected,
+                    this.meridienSelected
+                )
             },
 
             onMinutesChange(value) {
-                this.updateDateSelected(this.hoursSelected, parseInt(value, 10), this.meridienSelected)
+                this.updateDateSelected(
+                    this.hoursSelected,
+                    parseInt(value, 10),
+                    this.meridienSelected
+                )
             },
 
             updateDateSelected(hours, minutes, meridiens) {

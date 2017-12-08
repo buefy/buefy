@@ -1,8 +1,8 @@
 <template>
     <transition :name="animation">
         <div class="loading-overlay is-active" v-if="isActive">
-            <div class="loading-background" @click="cancel"></div>
-            <div class="loading-icon"></div>
+            <div class="loading-background" @click="cancel"/>
+            <div class="loading-icon"/>
         </div>
     </transition>
 </template>
@@ -11,7 +11,7 @@
     import { removeElement } from '../../utils/helpers'
 
     export default {
-        name: 'bLoading',
+        name: 'BLoading',
         props: {
             active: Boolean,
             programmatic: Boolean,

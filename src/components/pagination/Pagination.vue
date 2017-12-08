@@ -1,26 +1,57 @@
 <template>
     <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
-        <a role="button" href="#" class="pagination-previous" @click.prevent="prev"  :disabled="!hasPrev">
-            <b-icon icon="chevron-left" both></b-icon>
+        <a
+            role="button"
+            href="#"
+            class="pagination-previous"
+            :disabled="!hasPrev"
+            @click.prevent="prev" >
+            <b-icon icon="chevron-left" both/>
         </a>
-        <a role="button" href="#" class="pagination-next" @click.prevent="next" :disabled="!hasNext">
-            <b-icon icon="chevron-right" both></b-icon>
+        <a
+            role="button"
+            href="#"
+            class="pagination-next"
+            :disabled="!hasNext"
+            @click.prevent="next" >
+            <b-icon icon="chevron-right" both/>
         </a>
         <ul class="pagination-list" v-if="!simple">
             <!--First-->
-            <li v-if="hasFirst"><a role="button" href="#" class="pagination-link" @click.prevent="first">1</a></li>
+            <li v-if="hasFirst">
+                <a
+                    role="button"
+                    href="#"
+                    class="pagination-link"
+                    @click.prevent="first">
+                    1
+                </a>
+            </li>
             <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
 
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
-                <a role="button" href="#" class="pagination-link" @click.prevent="page.click" :class="{ 'is-current': page.isCurrent }">
+                <a
+                    role="button"
+                    href="#"
+                    class="pagination-link"
+                    :class="{ 'is-current': page.isCurrent }"
+                    @click.prevent="page.click">
                     {{ page.number }}
                 </a>
             </li>
 
             <!--Last-->
             <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
-            <li v-if="hasLast"><a role="button" href="#" class="pagination-link" @click.prevent="last">{{ pageCount }}</a></li>
+            <li v-if="hasLast">
+                <a
+                    role="button"
+                    href="#"
+                    class="pagination-link"
+                    @click.prevent="last">
+                    {{ pageCount }}
+                </a>
+            </li>
         </ul>
         <small class="info" v-if="simple">
             {{ firstItem }}-{{ current * perPage }} / {{ total }}
@@ -32,7 +63,7 @@
     import Icon from '../icon'
 
     export default {
-        name: 'bPagination',
+        name: 'BPagination',
         components: {
             [Icon.name]: Icon
         },
