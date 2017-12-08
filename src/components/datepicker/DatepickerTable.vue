@@ -174,8 +174,7 @@
                 for (let d = 0; d < weeksInThisMonth[index].length; d++) {
                     for (let e = 0; e < this.eventsInThisMonth.length; e++) {
                         const eventsInThisMonth = this.eventsInThisMonth[e].date.getTime()
-                        const weeksInThisMonth = this.weeksInThisMonth[index][d].getTime()
-                        if (eventsInThisMonth === weeksInThisMonth) {
+                        if (eventsInThisMonth === weeksInThisMonth[index][d].getTime()) {
                             weekEvents.push(this.eventsInThisMonth[e])
                         }
                     }
