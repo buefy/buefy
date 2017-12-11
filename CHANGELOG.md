@@ -5,6 +5,7 @@
 ### New features
 
 * Add ``open`` prop to collapse ``trigger`` slot
+* Add ``native`` prop to upload
 
 ## 0.6.2
 
