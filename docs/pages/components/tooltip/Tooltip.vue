@@ -1,26 +1,26 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Tooltip</h1>
         <h2 class="subtitle">Display a brief helper text to your user</h2>
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
 
         <h3 class="title is-spaced">Styles</h3>
-        <Example :component="ExStyles" :code="ExStylesCode" column/>
+        <Example :component="ExStyles" :code="ExStylesCode" vertical/>
 
         <hr>
 
         <h3 class="title is-spaced">Multilined</h3>
         <p class="content">Well, it's not always <em>that</em> brief.</p>
-        <Example :component="ExMultilined" :code="ExMultilinedCode" column/>
+        <Example :component="ExMultilined" :code="ExMultilinedCode" vertical/>
 
         <hr>
 
         <h3 class="title is-spaced">Toggle</h3>
-        <Example :component="ExToggle" :code="ExToggleCode" column/>
+        <Example :component="ExToggle" :code="ExToggleCode" vertical/>
 
         <hr>
 

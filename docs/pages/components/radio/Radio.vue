@@ -1,14 +1,14 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Radio</h1>
         <h2 class="subtitle">Select an option from a set</h2>
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
         <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" column/>
+        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
 
         <hr>
         <h2 class="title">Radio Button</h2>

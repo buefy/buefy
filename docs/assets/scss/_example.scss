@@ -1,8 +1,12 @@
 .example {
-    border: 1px solid $warning;
-    border-top-right-radius: $radius;
-    color: rgba(0, 0, 0, 0.7);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $warning;
+    border-top-right-radius: $radius-large;
+    border-bottom-right-radius: $radius-large;
+    border-bottom-left-radius: $radius-large;
+    color: rgba(0, 0, 0, 0.7);
     &:not(:first-child) {
         margin-top: 2rem;
     }
@@ -27,32 +31,31 @@
     .example-component {
         padding: 1.5rem;
     }
-    .example-code {
+    .codeview {
         border-top: 1px solid $warning;
+        .copy-code:hover {
+            background: $warning;
+        }
     }
-    &.is-flex {
-        align-items: center;
+    &.is-vertical {
+        @include desktop {
+            flex-direction: row;
+            .example-component,
+            .codeview {
+                width: 50%;
+            }
+            .codeview {
+                display: flex;
+                flex-direction: column;
+                border-top: 0;
+                border-left: 1px solid $warning;
+            }
+            .codeview,
+            .highlight,
+            pre,
+            code {
+                flex-grow: 1;
+            }
+        }
     }
 }
-
-// .columns.is-example {
-//     @include desktop {
-//         .column {
-//             display: flex;
-//             pre code {
-//                 flex: 1;
-//                 max-height: none;
-//             }
-//             &:first-child {
-//                 padding-right: 0;
-//                 .example {
-//                     border-top-right-radius: 0;
-//                     border-right: 0;
-//                 }
-//             }
-//             &:last-child {
-//                 padding-left: 0;
-//             }
-//         }
-//     }
-// }

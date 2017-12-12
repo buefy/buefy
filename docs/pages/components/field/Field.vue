@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Field</h1>
         <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
         <hr>
@@ -21,7 +21,7 @@
         </div>
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
         <h2 class="title is-spaced">Addons</h2>
@@ -30,7 +30,7 @@
         <b-message type="is-warning">
             <b>Note:</b> Beware of its responsiveness, avoid large groups of addons since they don't break lines.
         </b-message>
-        <Example :component="ExAddons" :code="ExAddonsCode" column/>
+        <Example :component="ExAddons" :code="ExAddonsCode" vertical/>
 
         <hr>
         <h2 class="title is-spaced">Groups</h2>
@@ -50,7 +50,7 @@
             Add the <code>group-multiline</code> prop to allow controls to fill up <b>multiple lines</b>.
             This is ideal for a long list of controls.
         </p>
-        <Example :component="ExGroupMultiline" :code="ExGroupMultilineCode" column/>
+        <Example :component="ExGroupMultiline" :code="ExGroupMultilineCode" vertical/>
 
         <hr>
         <h3 class="title">Positions</h3>

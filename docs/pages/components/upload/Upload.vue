@@ -1,16 +1,16 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Upload</h1>
         <h2 class="subtitle">Upload one or more files</h2>
 
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
 
         <h2 class="title is-spaced">Drag and drop</h2>
-        <Example :component="ExDragDrop" :code="ExDragDropCode" column/>
+        <Example :component="ExDragDrop" :code="ExDragDropCode" vertical/>
 
         <hr>
 

@@ -1,19 +1,19 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Checkbox</h1>
         <h2 class="subtitle">Select a single or grouped options</h2>
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" columns/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
         <h2 class="title">Grouped (Array)</h2>
         <p class="content">Just add the same <code>v-model</code> to multiple Checkboxes, and set a <code>native-value</code>.</p>
-        <Example :component="ExArray" :code="ExArrayCode" columns/>
+        <Example :component="ExArray" :code="ExArrayCode" vertical/>
 
         <hr>
         <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" columns/>
+        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
 
         <hr>
         <h2 class="title">Checkbox Button</h2>

@@ -1,30 +1,30 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Timepicker</h1>
         <h2 class="subtitle">An input with a simple dropdown/modal for selecting a time, uses native timepicker for mobile</h2>
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
         <h2 class="title">Non read-only</h2>
         <p class="content">Use <code>:readonly="false"</code> to let the user type a time.</p>
-        <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" column/>
+        <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" vertical/>
 
         <hr>
         <h2 class="title">Range</h2>
         <p class="content">You can limit the date range with <code>min-time</code> and <code>max-time</code> props.</p>
-        <Example :component="ExRange" :code="ExRangeCode" column/>
+        <Example :component="ExRange" :code="ExRangeCode" vertical/>
 
         <hr>
         <h2 class="title">Footer</h2>
         <p class="content">Any slots are added to the footer of the timepicker.</p>
-        <Example :component="ExFooter" :code="ExFooterCode" column/>
+        <Example :component="ExFooter" :code="ExFooterCode" vertical/>
 
         <hr>
         <h2 class="title">Inline</h2>
         <p class="content">Timepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
-        <Example :component="ExInline" :code="ExInlineCode" column/>
+        <Example :component="ExInline" :code="ExInlineCode" vertical/>
 
         <hr>
         <h2 class="title">API</h2>

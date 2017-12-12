@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Autocomplete</h1>
         <h2 class="subtitle">
             Extended input that provide suggestions while the user types.

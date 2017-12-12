@@ -1,21 +1,21 @@
 <template>
-    <div class="container">
+    <div class="is-clipped">
         <h1 class="title is-spaced">Collapse</h1>
         <h2 class="subtitle">Collapse is a easy way to toggle what you want</h2>
         <hr>
 
-        <Example :component="ExSimple" :code="ExSimpleCode" column/>
+        <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <hr>
 
         <h2 class="title">Panel</h2>
 
-        <Example :component="ExPanelTemplate" :code="ExPanelTemplateCode" column/>
+        <Example :component="ExPanelTemplate" :code="ExPanelTemplateCode" vertical/>
 
         <hr>
 
         <h2 class="title">Card</h2>
-        <Example :component="ExCardTemplate" :code="ExCardTemplateCode" column/>
+        <Example :component="ExCardTemplate" :code="ExCardTemplateCode" vertical/>
 
         <hr>
 
