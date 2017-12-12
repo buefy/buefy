@@ -4,13 +4,23 @@
         position: relative;
         text-align: left !important;
         height: 3.25rem;
-        .copy-code {
+        .button-container {
+            display: flex;
+            text-align: right !important;
             position: absolute;
             right: 1.25rem;
-            top: 0.5rem;
-            &:hover {
-                + pre {
-                    background: darken($white-ter, 2.5%);
+            top: 0.25rem;
+            .button {
+                display: flex;
+                align-items: flex-end;
+                font-size: 0.7rem;
+                padding: 0;
+                margin-left: 0.5rem;
+                .icon {
+                    margin: -2px;
+                }
+                &:hover {
+                    color: $link;
                 }
             }
         }

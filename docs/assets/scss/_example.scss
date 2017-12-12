@@ -33,9 +33,6 @@
     }
     .codeview {
         border-top: 1px solid $warning;
-        .copy-code:hover {
-            background: $warning;
-        }
     }
     &.is-vertical {
         @include desktop {

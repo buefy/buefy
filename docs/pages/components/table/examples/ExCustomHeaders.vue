@@ -1,7 +1,7 @@
 <template>
     <b-table :data="tableDataSimple">
         <template slot-scope="props" slot="header">
-            <b-tooltip :active="!!props.column.meta" :label="props.column.meta" dashed>
+            <b-tooltip :active="!!props.column.meta" :label="props.column.meta.toString()" dashed>
                 {{ props.column.label }}
             </b-tooltip>
         </template>
