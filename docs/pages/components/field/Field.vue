@@ -78,7 +78,7 @@
 </template>
 
 <script>
-    import api from './api/Field'
+    import api from './api/field'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

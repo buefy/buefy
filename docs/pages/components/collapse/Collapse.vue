@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import api from './api/Collapse'
+    import api from './api/collapse'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

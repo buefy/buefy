@@ -3,9 +3,9 @@
     display: flex;
     flex-direction: column;
     border: 1px solid $warning;
-    border-top-right-radius: $radius-large;
-    border-bottom-right-radius: $radius-large;
-    border-bottom-left-radius: $radius-large;
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
     color: rgba(0, 0, 0, 0.7);
     &:not(:first-child) {
         margin-top: 2rem;

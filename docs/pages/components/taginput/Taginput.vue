@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import api from './api/Taginput'
+    import api from './api/taginput'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

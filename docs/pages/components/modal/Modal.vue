@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import api from './api/Modal'
+    import api from './api/modal'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

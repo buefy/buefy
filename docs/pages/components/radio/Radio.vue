@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import api from './api/Radio'
+    import api from './api/radio'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

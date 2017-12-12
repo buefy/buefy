@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import api from './api/Tag'
+    import api from './api/tag'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

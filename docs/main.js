@@ -18,8 +18,10 @@ Vue.config.productionTip = false
 global.Promise = Bluebird
 
 Vue.prototype.$http = Axios
+Vue.prototype.$eventHub = new Vue()
 
 Vue.use(Buefy, {
+    // defaultIconPack: 'fa',
     // defaultSnackbarDuration: 999999,
     // defaultToastDuration: 999999
 })

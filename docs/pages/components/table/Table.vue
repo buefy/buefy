@@ -87,7 +87,7 @@
 </template>
 
 <script>
-    import api from './api/Table'
+    import api from './api/table'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

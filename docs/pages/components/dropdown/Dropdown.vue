@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import api from './api/Dropdown'
+    import api from './api/dropdown'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

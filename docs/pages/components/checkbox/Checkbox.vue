@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import api from './api/Checkbox'
+    import api from './api/checkbox'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

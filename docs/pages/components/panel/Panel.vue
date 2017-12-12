@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import api from './api/Panel'
+    import api from './api/panel'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

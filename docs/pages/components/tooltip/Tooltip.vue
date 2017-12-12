@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import api from './api/Tooltip'
+    import api from './api/tooltip'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

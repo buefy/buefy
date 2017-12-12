@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import api from './api/Timepicker'
+    import api from './api/timepicker'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

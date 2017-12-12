@@ -24,7 +24,7 @@
 
         <hr>
 
-        <Example :component="ExFormat" :code="ExFormatCode" column/>
+        <Example :component="ExFormat" :code="ExFormatCode" vertical/>
     </div>
 </template>
 

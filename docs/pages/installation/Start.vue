@@ -85,16 +85,6 @@
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
         </b-message>
         <CodeView :code="materialIcons" expanded/>
-
-        <hr>
-
-        <h3 class="title">JSFiddle examples</h3>
-        <iframe width="100%" height="400" src="//jsfiddle.net/rafaelpimpa/0afsyg9v/embedded/" allowfullscreen="allowfullscreen" frameborder="0"/>
-
-        <hr>
-
-        <iframe width="100%" height="400" src="//jsfiddle.net/rafaelpimpa/du2oxe1r/embedded/" allowfullscreen="allowfullscreen" frameborder="0"/>
-
     </div>
 </template>
 

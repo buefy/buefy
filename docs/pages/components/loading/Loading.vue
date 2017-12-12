@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import api from './api/Loading'
+    import api from './api/loading'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

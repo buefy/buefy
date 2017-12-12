@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import api from './api/Pagination'
+    import api from './api/pagination'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

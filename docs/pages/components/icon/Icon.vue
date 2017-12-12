@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import api from './api/Icon'
+    import api from './api/icon'
 
     import ExMdi from './examples/ExMdi'
     import ExMdiCode from '!!raw-loader!./examples/ExMdi'

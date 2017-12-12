@@ -1,36 +1,21 @@
 <template>
-    <section class="extensions">
-        <TheHeader ref="header"/>
-
-        <div class="hero is-primary">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">Extensions</h1>
-                    <h2 class="subtitle">See how can you improve Buefy with other packages!</h2>
-                </div>
-            </div>
-        </div>
-
-        <section class="section">
-            <div class="container is-fullhd template-horizontal">
-                <TheSidebar :data="menuExtensions"/>
-                <router-view/>
-            </div>
-        </section>
-
-        <TheFooter/>
-    </section>
+    <DefaultTemplate v-bind="props"/>
 </template>
 
 <script>
-    import ClipboardMixin from '@/mixins/ClipboardMixin'
-    import { menuExtensions } from '../menu'
+    import DefaultTemplate from '@/components/DefaultTemplate'
 
     export default {
-        mixins: [ClipboardMixin],
+        components: {
+            DefaultTemplate
+        },
         data() {
             return {
-                menuExtensions
+                props: {
+                    title: 'Extensions',
+                    subtitle: 'See how you can improve Buefy with other packages!',
+                    namespace: 'extensions'
+                }
             }
         }
     }

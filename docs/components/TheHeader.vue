@@ -41,7 +41,7 @@
                         <div class="navbar-item">Documentation</div>
 
                         <div class="navbar-dropdown is-boxed">
-                            <template v-for="items in menuDocumentation">
+                            <template v-for="items in menu['documentation']">
                                 <div
                                     :key="items.category"
                                     class="navbar-item is-subitem">
@@ -87,7 +87,7 @@
                         <div class="navbar-item">Extensions</div>
 
                         <div class="navbar-dropdown is-boxed">
-                            <template v-for="items in menuExtensions">
+                            <template v-for="items in menu['extensions']">
                                 <!-- <div
                                     :key="items.category"
                                     class="navbar-item has-text-weight-semibold is-uppercase has-text-grey">
@@ -97,7 +97,7 @@
                                 <router-link
                                     v-for="page in items.pages"
                                     :key="page.name"
-                                    :to="`/extensions/${$options.filters.slugify(page.name)}`"
+                                    :to="`/extensions/${page.path || $options.filters.slugify(page.name)}`"
                                     class="navbar-item">
                                     <span class="navbar-item-text">{{ page.name }}</span>
                                     <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
@@ -147,7 +147,7 @@
 <script>
     import buefyPackage from '../../package'
     import bulmaPackage from 'bulma/package'
-    import { menuDocumentation, menuExtensions } from '../menu'
+    import menu from '../menu'
 
     export default {
         props: {
@@ -155,11 +155,10 @@
         },
         data() {
             return {
+                menu,
                 isMenuActive: false,
                 version: buefyPackage.version,
-                bulmaVersion: bulmaPackage.version,
-                menuDocumentation,
-                menuExtensions
+                bulmaVersion: bulmaPackage.version
             }
         },
         methods: {
@@ -182,6 +181,12 @@
                     .classList
                     .toggle('is-clipped-touch', this.isMenuActive)
             }
+        },
+        created() {
+            this.$eventHub.$on('close-menu', this.closeMenu)
+        },
+        beforeDestroy() {
+            this.$eventHub.$off('close-menu')
         }
     }
 </script>

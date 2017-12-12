@@ -52,7 +52,7 @@
 </template>
 
 <script>
-    import api from './api/Datepicker'
+    import api from './api/datepicker'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

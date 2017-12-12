@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import api from './api/Notification'
+    import api from './api/notification'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

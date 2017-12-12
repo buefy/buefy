@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import api from './api/Tabs'
+    import api from './api/tabs'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

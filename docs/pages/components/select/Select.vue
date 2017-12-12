@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import api from './api/Select'
+    import api from './api/select'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'

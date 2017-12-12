@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import api from './api/Dialog'
+    import api from './api/dialog'
 
     import ExAlertDialog from './examples/ExAlertDialog'
     import ExAlertDialogCode from '!!raw-loader!./examples/ExAlertDialog'

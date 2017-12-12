@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import api from './api/Snackbar'
+    import api from './api/snackbar'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
