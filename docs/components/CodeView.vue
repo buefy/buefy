@@ -77,12 +77,13 @@
                     .replace(/'/g, "&apos;")
             },
             html() {
-                const initial = this.code.split('<template>')
-                if (!initial[1]) return
+                const start = this.code.indexOf('<template>')
+                const end = this.code.lastIndexOf('</template>')
+                if (start < 0 || end < 0) return
 
-                let html = initial[1].split('</template>')[0]
+                let html = this.code.substring(start + 10, end)
                 html = html.replace(/src="static/g, 'src="https://buefy.github.io/static')
-
+                
                 return this.$options.filters.pre(`
                     <div id="app" class="container">
                         ${html}
