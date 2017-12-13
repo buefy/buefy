@@ -2,12 +2,12 @@
     <section>
 
         <b-collapse class="card" :open.sync="isOpen">
-            <div slot="trigger" class="card-header">
+            <div slot="trigger" slot-scope="props" class="card-header">
                 <p class="card-header-title">
                     Component
                 </p>
                 <a class="card-header-icon">
-                    <b-icon :icon="isOpen ?
+                    <b-icon :icon="props.open ?
                         'menu-down' : 'menu-up'">
                     </b-icon>
                 </a>
@@ -27,13 +27,3 @@
 
     </section>
 </template>
-
-<script>
-    export default {
-        data() {
-            return {
-                isOpen: true
-            }
-        }
-    }
-</script>

@@ -23,9 +23,9 @@ export default [
                 props: '—'
             },
             {
-                name: 'trigger',
+                name: '<code>trigger</code>',
                 description: 'Trigger content',
-                props: '—'
+                props: '<code>open: Boolean</code>'
             }
         ],
         events: [
