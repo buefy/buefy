@@ -85,9 +85,15 @@
 
                     // Debounce
                     if (this.code.indexOf('debounce')) {
-                        js = js.replace(/import debounce from \'lodash\/debounce\'/g, '')
+                        js = js.replace('import debounce from \'lodash/debounce\'', '')
                         js = js.replace(/debounce/g, '_.debounce')
                         this.externalScripts.push('https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js')
+                    }
+
+                    // Cleave
+                    if (this.code.indexOf('cleave.js')) {
+                        js = js.replace('import Cleave from \'cleave\.js\'', '')
+                        this.externalScripts.push('https://unpkg.com/cleave.js/dist/cleave.min.js')
                     }
                 }
 
