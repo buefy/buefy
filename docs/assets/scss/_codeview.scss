@@ -5,23 +5,12 @@
         text-align: left !important;
         height: 3.25rem;
         .button-container {
-            display: flex;
-            text-align: right !important;
-            position: absolute;
-            right: 1.25rem;
             top: 0.25rem;
+            right: 1.35rem;
+            background: transparent;
             .button {
-                display: flex;
-                align-items: flex-end;
                 font-size: 0.7rem;
-                padding: 0;
-                margin-left: 0.5rem;
-                .icon {
-                    margin: -2px;
-                }
-                &:hover {
-                    color: $link;
-                }
+                text-decoration: underline;
             }
         }
         pre {
@@ -36,7 +25,8 @@
                 }
             }
         }
-        .codeview-showcode {
+        .codeview-showcode,
+        .codeview-hidecode {
             display: flex;
             bottom: 0;
             left: 0;
@@ -58,6 +48,10 @@
             .icon {
                 margin-right: 0.5rem;
             }
+        }
+        .codeview-hidecode {
+            position: static;
+            height: 2rem;
         }
         &.is-expanded {
             height: auto;

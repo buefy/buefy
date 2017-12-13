@@ -61,8 +61,17 @@
              * Load async data
              */
             loadAsyncData() {
+                const params = [
+                    'api_key=bb6f51bef07465653c3e553d6ab161a8',
+                    'language=en-US',
+                    'include_adult=false',
+                    'include_video=false',
+                    `sort_by=${this.sortField}.${this.sortOrder}`,
+                    `page=${this.page}`
+                ].join('&')
+
                 this.loading = true
-                this.$http.get(`https://api.themoviedb.org/3/discover/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&language=en-US&include_adult=false&include_video=false&sort_by=${this.sortField}.${this.sortOrder}&page=${this.page}`)
+                this.$http.get(`https://api.themoviedb.org/3/discover/movie?${params}`)
                     .then(({ data }) => {
                         // api.themoviedb.org manage max 1000 pages
                         this.data = []
@@ -73,10 +82,12 @@
                         this.total = currentTotal
                         data.results.forEach((item) => this.data.push(item))
                         this.loading = false
-                    }, response => {
+                    })
+                    .catch((error) => {
                         this.data = []
                         this.total = 0
                         this.loading = false
+                        throw error
                     })
             },
             /*

@@ -4,7 +4,16 @@
         <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
         <hr>
 
+        <p class="content">To show a data table is very simple, you just need a <code>data</code> and a <code>columns</code> prop.</p>
         <Example :component="ExSimple" :code="ExSimpleCode"/>
+
+        <hr>
+        <h2 class="title is-spaced">Sandbox with custom template</h2>
+        <div class="content">
+            <p>To show a custom row template, you <b>should not use the <code>columns</code> prop</b>, but add it within the scoped slot as a component.</p>
+            <p>Also you can add an <code>empty</code> named slot to show when there's no data.</p>
+        </div>
+        <Example :component="ExSandbox" :code="ExSandboxCode"/>
 
         <hr>
         <h2 class="title is-spaced">Selection</h2>
@@ -35,19 +44,25 @@
         <h2 class="title is-spaced">Pagination and sorting</h2>
         <div class="content">
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
-            <p>Moreover, use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
-            <p>Eventually, use the <code>default-sort-direction</code> prop to determine the default sort column direction on the first click.</p>
+            <p>You can also use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
+            <p>The <code>default-sort-direction</code> prop can be set to determine the default sort column direction on the first click.</p>
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </div>
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode"/>
 
         <hr>
         <h2 class="title is-spaced">Detailed rows</h2>
+        <div class="content">
+            <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
+        </div>
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode"/>
 
         <hr>
         <h2 class="title is-spaced">Row status</h2>
-        <p class="content">Use the <code>row-class</code> prop to return a class name. Note that <strong>you have to style the class yourself</strong>.</p>
+        <div class="content">
+            <p>Use the <code>row-class</code> prop to return a class name. It's a function that receives <code>row</code> and <code>index</code> parameters.</p>
+            <p>Note that <strong>you have to style the class yourself</strong>.</p>
+        </div>
         <Example :component="ExRowStatus" :code="ExRowStatusCode"/>
 
         <hr>
@@ -60,7 +75,7 @@
 
         <hr>
         <h2 class="title is-spaced">Toggle columns</h2>
-        <b-message type="is-warning">
+        <b-message type="is-danger">
             Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
         </b-message>
         <Example :component="ExToggleColumns" :code="ExToggleColumnsCode"/>
@@ -91,6 +106,9 @@
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
+
+    import ExSandbox from './examples/ExSandbox'
+    import ExSandboxCode from '!!raw-loader!./examples/ExSandbox'
 
     import ExSelection from './examples/ExSelection'
     import ExSelectionCode from '!!raw-loader!./examples/ExSelection'
@@ -124,6 +142,7 @@
             return {
                 api,
                 ExSimple,
+                ExSandbox,
                 ExSelection,
                 ExCheckable,
                 ExPaginationSort,
@@ -134,6 +153,7 @@
                 ExFooter,
                 ExAsyncData,
                 ExSimpleCode,
+                ExSandboxCode,
                 ExSelectionCode,
                 ExCheckableCode,
                 ExPaginationSortCode,

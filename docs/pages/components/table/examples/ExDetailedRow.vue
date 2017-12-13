@@ -4,8 +4,7 @@
         :opened-detailed="defaultOpenedDetails"
         detailed
         detail-key="id"
-        @details-open="(row, index) => $toast.open(`Expanded ${row.first_name}`)"
-    >
+        @details-open="(row, index) => $toast.open(`Expanded ${row.first_name}`)">
 
         <template slot-scope="props">
             <b-table-column label="ID" width="40"  numeric>

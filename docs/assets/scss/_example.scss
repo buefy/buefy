@@ -19,14 +19,40 @@
         bottom: 100%;
         content: "Example";
         display: inline-block;
-        font-size: 7px;
+        font-size: 10px;
         font-weight: bold;
         left: -1px;
-        letter-spacing: 1px;
-        padding: 3px 5px;
+        padding: 4px 8px;
         position: absolute;
         text-transform: uppercase;
         vertical-align: top;
+    }
+    .button-container {
+        position: absolute;
+        display: inline-flex;
+        background: $warning;
+        border-radius: $radius $radius 0 0;
+        bottom: 100%;
+        right: -1px;
+        padding: 0 0 0 8px;
+        vertical-align: top;
+        .button {
+            display: flex;
+            align-items: flex-end;
+            font-size: 11px;
+            padding: 0;
+            text-decoration: none;
+            &:not(:last-child) {
+                margin-right: 0.5rem;
+            }
+            .icon {
+                margin-left: -2px !important;
+            }
+            &:hover {
+                color: $link;
+                background: transparent;
+            }
+        }
     }
     .example-component {
         padding: 1.5rem;

@@ -1,0 +1,101 @@
+<template>
+    <form
+        v-if="html"
+        method="POST"
+        action="https://codepen.io/pen/define/"
+        target="_blank">
+        <button class="button is-text is-small">
+            <span>CodePen</span>
+            <b-icon icon="open-in-new" size="is-small"/>
+        </button>
+
+        <input type="hidden" name="data" :value="data">
+    </form>
+</template>
+
+<script>
+    export default {
+        props: {
+            code: String
+        },
+        data() {
+            return {
+                externalScripts: [
+                    'https://unpkg.com/vue/dist/vue.min.js',
+                    'https://unpkg.com/buefy'
+                ],
+                externalStyles: [
+                    'https://unpkg.com/buefy/lib/buefy.min.css',
+                    'https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
+                ]
+            }
+        },
+        computed: {
+            data() {
+                return JSON.stringify({
+                    title: `Buefy ${this.$route.meta.title} example`,
+                    tags: ['buefy', 'vue', 'bulma'],
+                    editors: this.style ? 111 : 101,
+                    layout: 'right',
+                    html: this.html,
+                    js: this.script,
+                    css: this.style,
+                    css_pre_processor: 'scss',
+                    html_classes: 'section',
+                    head: "<meta name='viewport' content='width=device-width, initial-scale=1'>",
+                    css_external: this.externalStyles.join(';'),
+                    js_external: this.externalScripts.join(';')
+                })
+                    .replace(/"/g, '&​quot;')
+                    .replace(/'/g, '&apos;')
+            },
+            html() {
+                const start = this.code.indexOf('<template>')
+                const end = this.code.lastIndexOf('</template>')
+                if (start < 0 || end < 0) return
+
+                let html = this.code.substring(start + 10, end)
+                html = html.replace(/src="static/g, 'src="https://buefy.github.io/static')
+
+                return this.$options.filters.pre(`
+                    <div id="app" class="container">
+                        ${html}
+                    </div>
+                `)
+            },
+            script() {
+                const start = this.code.indexOf('<script>')
+                const end = this.code.lastIndexOf('<\/script>')
+                let js
+
+                if (start >= 0 && end >= 0) {
+                    js = this.code.substring(start + 8, end)
+                    js = js.replace('export default ', 'const example = ')
+                    if (this.code.indexOf('this.$http')) {
+                        js = js.replace('this.$http', 'axios')
+                        this.externalScripts.push('https://unpkg.com/axios/dist/axios.min.js')
+                    }
+                }
+
+                return this.$options.filters.pre(`
+                    Vue.use(Buefy.default)
+
+                    ${js || ''}
+
+                    const app = new Vue(${js ? 'example' : ''})
+
+                    app.$mount('#app')
+                `)
+            },
+            style() {
+                const match = this.code.match(/<style.*>/)
+
+                const start = match ? this.code.indexOf(match[0]) : -1
+                const end = this.code.lastIndexOf('</style>')
+                if (start < 0 || end < 0) return
+
+                return this.code.substring(start + match[0].length, end)
+            }
+        }
+    }
+</script>

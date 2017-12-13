@@ -9,31 +9,10 @@
         <b-tabs>
             <b-tab-item label="Table">
                 <b-table
-                    :data="tableDataSimple"
+                    :data="data"
+                    :columns="columns"
                     :selected.sync="selected"
                     focusable>
-
-                    <template slot-scope="props">
-                        <b-table-column label="ID" width="40" numeric>
-                            {{ props.row.id }}
-                        </b-table-column>
-
-                        <b-table-column label="First Name">
-                            {{ props.row.first_name }}
-                        </b-table-column>
-
-                        <b-table-column label="Last Name">
-                            {{ props.row.last_name }}
-                        </b-table-column>
-
-                        <b-table-column label="Date" centered>
-                            {{ new Date(props.row.date).toLocaleDateString() }}
-                        </b-table-column>
-
-                        <b-table-column label="Gender">
-                            {{ props.row.gender }}
-                        </b-table-column>
-                    </template>
                 </b-table>
             </b-tab-item>
 
@@ -47,7 +26,7 @@
 <script>
     export default {
         data() {
-            const tableDataSimple = [
+            const data = [
                 { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' },
                 { 'id': 2, 'first_name': 'John', 'last_name': 'Jacobs', 'date': '2016-12-15 06:00:53', 'gender': 'Male' },
                 { 'id': 3, 'first_name': 'Tina', 'last_name': 'Gilbert', 'date': '2016-04-26 06:26:28', 'gender': 'Female' },
@@ -56,8 +35,33 @@
             ]
 
             return {
-                tableDataSimple,
-                selected: tableDataSimple[1]
+                data,
+                selected: data[1],
+                columns: [
+                    {
+                        field: 'id',
+                        label: 'ID',
+                        width: '40',
+                        numeric: true
+                    },
+                    {
+                        field: 'first_name',
+                        label: 'First Name',
+                    },
+                    {
+                        field: 'last_name',
+                        label: 'Last Name',
+                    },
+                    {
+                        field: 'date',
+                        label: 'Date',
+                        centered: true
+                    },
+                    {
+                        field: 'gender',
+                        label: 'Gender',
+                    }
+                ]
             }
         }
     }
