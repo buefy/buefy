@@ -3,7 +3,7 @@
         <b-field label="Simple">
             <b-select placeholder="Select a name">
                 <option
-                    v-for="option in options"
+                    v-for="option in data"
                     :value="option.id"
                     :key="option.id">
                     {{ option.user.first_name }}
@@ -86,11 +86,11 @@
 </template>
 
 <script>
-    import options from '@/assets/data_test.json'
+    const data = require('@/assets/data_test.json')
 
     export default {
         data() {
-            return { options }
+            return { data }
         }
     }
 </script>

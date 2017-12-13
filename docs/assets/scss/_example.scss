@@ -48,7 +48,8 @@
             .icon {
                 margin-left: -2px !important;
             }
-            &:hover {
+            &:hover,
+            &:focus {
                 color: $link;
                 background: transparent;
             }

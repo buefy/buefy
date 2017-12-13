@@ -3,7 +3,8 @@
         v-if="html"
         method="POST"
         action="https://codepen.io/pen/define/"
-        target="_blank">
+        target="_blank"
+        rel="noopener">
         <button class="button is-text is-small">
             <span>CodePen</span>
             <b-icon icon="open-in-new" size="is-small"/>
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+    import dataTest from '!!raw-loader!@/assets/data_test.json'
+
     export default {
         props: {
             code: String
@@ -71,9 +74,20 @@
                 if (start >= 0 && end >= 0) {
                     js = this.code.substring(start + 8, end)
                     js = js.replace('export default ', 'const example = ')
+
+                    js = js.replace('require(\'@/assets/data_test.json\')', dataTest)
+
+                    // Axios
                     if (this.code.indexOf('this.$http')) {
-                        js = js.replace('this.$http', 'axios')
+                        js = js.replace(/this\.\$http/g, 'axios')
                         this.externalScripts.push('https://unpkg.com/axios/dist/axios.min.js')
+                    }
+
+                    // Debounce
+                    if (this.code.indexOf('debounce')) {
+                        js = js.replace(/import debounce from \'lodash\/debounce\'/g, '')
+                        js = js.replace(/debounce/g, '_.debounce')
+                        this.externalScripts.push('https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js')
                     }
                 }
 

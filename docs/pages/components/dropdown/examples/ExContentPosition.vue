@@ -2,7 +2,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <a class="navbar-item">
-                <img :src="logo" alt="Buefy">
+                <img src="static/img/buefy-logo.png" alt="Buefy">
             </a>
             <a class="navbar-item"><b-icon pack="fa" icon="github"></b-icon></a>
             <a class="navbar-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
@@ -50,13 +50,3 @@
         </div>
     </nav>
 </template>
-
-<script>
-    import logo from '@/assets/buefy.png'
-
-    export default {
-        data() {
-            return { logo }
-        }
-    }
-</script>

@@ -53,8 +53,10 @@
                     .then(({ data }) => {
                         data.results.forEach((item) => this.data.push(item))
                         this.isFetching = false
-                    }, response => {
+                    })
+                    .catch((error) => {
                         this.isFetching = false
+                        throw error
                     })
             }, 500)
         }
