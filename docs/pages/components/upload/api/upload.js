@@ -66,6 +66,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>native</code>',
+                description: 'Replace last chosen files every time (like native file input element)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [
