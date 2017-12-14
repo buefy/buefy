@@ -1,34 +1,21 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Message</h1>
         <h2 class="subtitle">Colored message blocks, to draw attention of your user</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
+        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
-        <h2 class="title">Types</h2>
-        <Example :component="ExTypes" :code="ExTypesCode" vertical/>
+        <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
 
-        <hr>
+        <Example :component="ExHeaderless" :code="ExHeaderlessCode" title="Headerless" vertical>
+            <p>Message without title becomes headerless, they are always non-closable.</p>
+        </Example>
 
-        <h2 class="title">Icons</h2>
-        <Example :component="ExIcons" :code="ExIconsCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <hr>
-
-        <h2 class="title">Headerless</h2>
-        <p class="content">Message without title becomes headerless, they are always non-closable.</p>
-        <Example :component="ExHeaderless" :code="ExHeaderlessCode" vertical/>
-
-        <hr>
-
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
-
-        <hr>
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

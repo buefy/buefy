@@ -47,7 +47,7 @@
         bottom: 100%;
         content: "Example";
         display: inline-block;
-        font-size: 10px;
+        font-size: 8px;
         font-weight: bold;
         left: -1px;
         padding: 4px 8px;
@@ -82,4 +82,8 @@
             }
         }
     }
+}
+
+hr.is-medium {
+    margin: 3rem 0;
 }

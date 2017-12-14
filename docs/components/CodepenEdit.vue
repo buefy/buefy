@@ -1,6 +1,6 @@
 <template>
     <form
-        v-if="getHtml()"
+        v-if="hasHtml"
         method="POST"
         action="https://codepen.io/pen/define/"
         target="_blank"
@@ -22,10 +22,12 @@
 
     export default {
         props: {
-            code: String
+            code: String,
+            title: String
         },
         data() {
             return {
+                hasHtml: false,
                 externalScripts: [
                     'https://unpkg.com/vue/dist/vue.min.js',
                     'https://unpkg.com/buefy'
@@ -39,7 +41,7 @@
         computed: {
             data() {
                 return JSON.stringify({
-                    title: `Buefy ${this.$route.meta.title} example`,
+                    title: `${this.$route.meta.title} ${this.title ? this.title.toLowerCase() : ''} - Buefy example`,
                     tags: ['buefy', 'vue', 'bulma'],
                     editors: this.style ? 111 : 101,
                     layout: 'right',
@@ -65,6 +67,11 @@
 
                 let html = this.code.substring(start + 10, end)
                 html = html.replace(/src="static/g, 'src="https://buefy.github.io/static')
+
+                // FontAwesome
+                if (this.code.indexOf('pack="fa"')) {
+                    this.externalStyles.push('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+                }
 
                 return this.$options.filters.pre(`
                     <div id="app" class="container">
@@ -122,6 +129,9 @@
 
                 return this.code.substring(start + match[0].length, end)
             }
+        },
+        mounted() {
+            this.hasHtml = !!this.getHtml()
         }
     }
 </script>

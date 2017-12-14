@@ -1,28 +1,21 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Checkbox</h1>
         <h2 class="subtitle">Select a single or grouped options</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title">Grouped (Array)</h2>
-        <p class="content">Just add the same <code>v-model</code> to multiple Checkboxes, and set a <code>native-value</code>.</p>
-        <Example :component="ExArray" :code="ExArrayCode" vertical/>
+        <Example :component="ExArray" :code="ExArrayCode" title="Grouped (Array)" vertical>
+            <p>Just add the same <code>v-model</code> to multiple Checkboxes, and set a <code>native-value</code>.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <hr>
-        <h2 class="title">Checkbox Button</h2>
-        <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
-        <Example :component="ExCheckboxButton" :code="ExCheckboxButtonCode"/>
+        <Example :component="ExCheckboxButton" :code="ExCheckboxButtonCode" title="Checkbox Button">
+            <p>You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
+        </Example>
 
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

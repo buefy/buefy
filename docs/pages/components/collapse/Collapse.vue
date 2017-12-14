@@ -1,25 +1,15 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Collapse</h1>
         <h2 class="subtitle">Collapse is a easy way to toggle what you want</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
+        <Example :component="ExPanelTemplate" :code="ExPanelTemplateCode" title="Panel" vertical/>
 
-        <h2 class="title">Panel</h2>
+        <Example :component="ExCardTemplate" :code="ExCardTemplateCode" title="Card" vertical/>
 
-        <Example :component="ExPanelTemplate" :code="ExPanelTemplateCode" vertical/>
-
-        <hr>
-
-        <h2 class="title">Card</h2>
-        <Example :component="ExCardTemplate" :code="ExCardTemplateCode" vertical/>
-
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

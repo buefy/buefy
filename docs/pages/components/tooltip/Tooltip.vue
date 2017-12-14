@@ -1,30 +1,19 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Tooltip</h1>
         <h2 class="subtitle">Display a brief helper text to your user</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
+        <Example :component="ExStyles" :code="ExStylesCode" title="Styles" vertical/>
 
-        <h3 class="title is-spaced">Styles</h3>
-        <Example :component="ExStyles" :code="ExStylesCode" vertical/>
+        <Example :component="ExMultilined" :code="ExMultilinedCode" title="Multilined" vertical>
+            <p>Well, it's not always <em>that</em> brief.</p>
+        </Example>
 
-        <hr>
+        <Example :component="ExToggle" :code="ExToggleCode" title="Toggle" vertical/>
 
-        <h3 class="title is-spaced">Multilined</h3>
-        <p class="content">Well, it's not always <em>that</em> brief.</p>
-        <Example :component="ExMultilined" :code="ExMultilinedCode" vertical/>
-
-        <hr>
-
-        <h3 class="title is-spaced">Toggle</h3>
-        <Example :component="ExToggle" :code="ExToggleCode" vertical/>
-
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

@@ -1,5 +1,7 @@
 <template>
-    <section>
+    <section class="api-view">
+        <h2 class="title is-4">API</h2>
+
         <template v-for="component in data">
             <h3
                 v-if="component.title"

@@ -1,23 +1,17 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Radio</h1>
         <h2 class="subtitle">Select an option from a set</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <hr>
-        <h2 class="title">Radio Button</h2>
-        <p class="content">You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
-        <Example :component="ExRadioButton" :code="ExRadioButtonCode"/>
+        <Example :component="ExRadioButton" :code="ExRadioButtonCode" title="Radio Button">
+            <p>You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
+        </Example>
 
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

@@ -34,32 +34,32 @@
         <b-field>
             <p class="control">
                 <button class="button">
-                    <b-icon icon="format_bold"></b-icon>
+                    <b-icon icon="format-bold"></b-icon>
                 </button>
             </p>
             <p class="control">
                 <button class="button">
-                    <b-icon icon="format_italic"></b-icon>
+                    <b-icon icon="format-italic"></b-icon>
                 </button>
             </p>
             <p class="control">
                 <button class="button">
-                    <b-icon icon="format_underlined"></b-icon>
+                    <b-icon icon="format-underline"></b-icon>
                 </button>
             </p>
             <p class="control">
                 <button class="button">
-                    <b-icon icon="format_align_left"></b-icon>
+                    <b-icon icon="format-align-left"></b-icon>
                 </button>
             </p>
             <p class="control">
                 <button class="button">
-                    <b-icon icon="format_align_center"></b-icon>
+                    <b-icon icon="format-align-center"></b-icon>
                 </button>
             </p>
             <p class="control">
                 <button class="button">
-                    <b-icon icon="format_align_right"></b-icon>
+                    <b-icon icon="format-align-right"></b-icon>
                 </button>
             </p>
             <b-input placeholder="Search..." type="search" icon="magnify"></b-input>

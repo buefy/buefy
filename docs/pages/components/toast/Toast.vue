@@ -1,5 +1,5 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Toast</h1>
         <h2 class="subtitle">Toasts are simple text messages to inform the user</h2>
         <hr>
@@ -19,8 +19,6 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode"/>
 
-        <hr>
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

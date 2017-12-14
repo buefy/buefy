@@ -23,7 +23,7 @@
                             class="button"
                             href="https://github.com/rafaelpimpa/buefy"
                             target="_blank">
-                            <b-icon pack="fa" icon="github"/>
+                            <b-icon icon="github-circle"/>
                             <span>GitHub</span>
                         </a>
                     </p>
@@ -32,7 +32,7 @@
                             class="button is-twitter"
                             href="https://twitter.com/rafaelpimpa"
                             target="_blank">
-                            <b-icon pack="fa" icon="twitter"/>
+                            <b-icon icon="twitter"/>
                             <span>Twitter</span>
                         </a>
                     </p>

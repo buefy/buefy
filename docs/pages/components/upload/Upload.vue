@@ -1,20 +1,13 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Upload</h1>
         <h2 class="subtitle">Upload one or more files</h2>
-
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
+        <Example :component="ExDragDrop" :code="ExDragDropCode" title="Drag and drop" vertical/>
 
-        <h2 class="title is-spaced">Drag and drop</h2>
-        <Example :component="ExDragDrop" :code="ExDragDropCode" vertical/>
-
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

@@ -22,7 +22,7 @@
                     href="https://github.com/rafaelpimpa/buefy"
                     target="_blank"
                     title="Github">
-                    <b-icon pack="fa" icon="github"/>
+                    <b-icon icon="github-circle"/>
                 </a>
 
                 <a
@@ -30,7 +30,7 @@
                     href="https://twitter.com/rafaelpimpa"
                     target="_blank"
                     title="Twitter">
-                    <b-icon pack="fa" icon="twitter"/>
+                    <b-icon icon="twitter"/>
                 </a>
 
                 <span
@@ -162,7 +162,7 @@
                             class="button is-outlined"
                             :class="light ? 'is-light' : 'is-twitter'"
                             @click="tweet">
-                            <b-icon pack="fa" icon="twitter"/>
+                            <b-icon icon="twitter"/>
                             <span>Tweet</span>
                         </a>
                     </div>

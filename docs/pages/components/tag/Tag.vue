@@ -1,33 +1,28 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Tag</h1>
         <h2 class="subtitle">Tag labels to insert anywhere</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title">Closable</h2>
         <p class="content">Closable tags have a button that can be focused, it emits a <code>close</code> event when clicked or when <b>delete</b> key is pressed.</p>
-        <Example :component="ExClosable" :code="ExClosableCode" vertical/>
+        <Example :component="ExClosable" :code="ExClosableCode" title="Closable" vertical/>
 
-        <hr>
-        <h2 class="title">Tag list</h2>
-        <Example :component="ExTaglist" :code="ExTaglistCode" vertical/>
+        <Example :component="ExTaglist" :code="ExTaglistCode" title="Tag list" vertical/>
 
-        <p class="content">Use the <code>attached</code> prop to attach tags together.</p>
-        <Example :component="ExTaglistAttached" :code="ExTaglistAttachedCode" vertical/>
+        <Example :component="ExTaglistAttached" :code="ExTaglistAttachedCode" vertical>
+            <p>Use the <code>attached</code> prop to attach tags together.</p>
+        </Example>
 
-        <p class="content">Combine with field to group attached tags.</p>
-        <Example :component="ExFieldCombine" :code="ExFieldCombineCode" vertical/>
+        <Example :component="ExFieldCombine" :code="ExFieldCombineCode" vertical>
+            <p>Combine with field to group attached tags.</p>
+        </Example>
 
-        <h2 class="title">Sizes</h2>
-        <p class="content">Two additional sizes.</p>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical>
+            <p>Two additional sizes.</p>
+        </Example>
 
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

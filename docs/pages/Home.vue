@@ -50,7 +50,7 @@
                 <div class="container">
                     <nav class="columns">
                         <div class="column has-text-centered features">
-                            <b-icon pack="fa" icon="github" size="is-large"/>
+                            <b-icon icon="github-circle" size="is-large"/>
                             <p class="title is-4"><strong>Free</strong></p>
                             <p class="subtitle">Open source on <strong><a href="https://github.com/rafaelpimpa/buefy" target="_blank">GitHub</a></strong></p>
                         </div>

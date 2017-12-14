@@ -1,102 +1,74 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Table</h1>
         <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
         <hr>
 
-        <p class="content">To show a data table is very simple, you just need a <code>data</code> and a <code>columns</code> prop.</p>
-        <Example :component="ExSimple" :code="ExSimpleCode"/>
+        <Example :component="ExSimple" :code="ExSimpleCode">
+            <p>To show a data table is very simple, you just need a <code>data</code> and a <code>columns</code> prop.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Sandbox with custom template</h2>
-        <div class="content">
+        <Example :component="ExSandbox" :code="ExSandboxCode" title="Sandbox with custom template">
             <p>To show a custom row template, you <b>should not use the <code>columns</code> prop</b>, but add it within the scoped slot as a component.</p>
             <p>Also you can add an <code>empty</code> named slot to show when there's no data.</p>
-        </div>
-        <Example :component="ExSandbox" :code="ExSandboxCode"/>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Selection</h2>
-        <div class="content">
+        <Example :component="ExSelection" :code="ExSelectionCode" title="Selection">
             <p>
                 You can show a <strong>single selected</strong> row by passing the corresponding object to the <code>selected</code> prop.
                 Additionally, adding the <code>.sync</code> modifier will make it two-way binding — selected object will mutate if user clicks on row.
             </p>
-            <p>
-                Use <code>focusable</code> prop make table to be focused and navigable with a keyboard using <strong>arrow keys</strong>.
-            </p>
-        </div>
-        <Example :component="ExSelection" :code="ExSelectionCode"/>
+            <p>Use <code>focusable</code> prop make table to be focused and navigable with a keyboard using <strong>arrow keys</strong>.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Checkable</h2>
-        <div class="content">
+        <Example :component="ExCheckable" :code="ExCheckableCode" title="Checkable">
             <p>You can add checkboxes to rows by using the <code>checkable</code> prop.</p>
             <p>
                 To show which rows are <strong>checked</strong>, you have to pass the corresponding object array to the <code>checked-rows</code> prop.
                 Adding the <code>.sync</code> modifier will make it two-way binding — checked object array will mutate if user clicks on checkboxes.
             </p>
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
-        </div>
-        <Example :component="ExCheckable" :code="ExCheckableCode"/>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Pagination and sorting</h2>
-        <div class="content">
+        <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
             <p>You can also use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
             <p>The <code>default-sort-direction</code> prop can be set to determine the default sort column direction on the first click.</p>
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
-        </div>
-        <Example :component="ExPaginationSort" :code="ExPaginationSortCode"/>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Detailed rows</h2>
-        <div class="content">
+        <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
-        </div>
-        <Example :component="ExDetailedRow" :code="ExDetailedRowCode"/>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Row status</h2>
-        <div class="content">
+        <Example :component="ExRowStatus" :code="ExRowStatusCode" title="Row status">
             <p>Use the <code>row-class</code> prop to return a class name. It's a function that receives <code>row</code> and <code>index</code> parameters.</p>
             <p>Note that <strong>you have to style the class yourself</strong>.</p>
-        </div>
-        <Example :component="ExRowStatus" :code="ExRowStatusCode"/>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Custom headers</h2>
-        <p class="content">
-            By adding a scoped slot named <code>header</code> you can customize the headers.
-            Use the <code>meta</code> prop on column to pass anything you may need.
-        </p>
-        <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode"/>
+        <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode" title="Custom headers">
+            <p>
+                By adding a scoped slot named <code>header</code> you can customize the headers.
+                Use the <code>meta</code> prop on column to pass anything you may need.
+            </p>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Toggle columns</h2>
-        <b-message type="is-danger">
-            Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
-        </b-message>
-        <Example :component="ExToggleColumns" :code="ExToggleColumnsCode"/>
+        <Example :component="ExToggleColumns" :code="ExToggleColumnsCode" title="Toggle columns">
+            <b-message type="is-danger">
+                Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
+            </b-message>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Footer</h2>
-        <Example :component="ExFooter" :code="ExFooterCode"/>
+        <Example :component="ExFooter" :code="ExFooterCode" title="Footer"/>
 
-        <hr>
-        <h2 class="title is-spaced">Async data</h2>
-        <div class="content">
+        <Example :component="ExAsyncData" :code="ExAsyncDataCode" title="Async data">
             <p>
                 Use <code>backend-sorting</code> and <code>backend-pagination</code> props to let those tasks to the backend,
                 then manage it with <code>page-change</code> and <code>sort</code> events.
             </p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
-        </div>
-        <Example :component="ExAsyncData" :code="ExAsyncDataCode"/>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

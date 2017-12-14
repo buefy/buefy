@@ -1,24 +1,15 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Dialog</h1>
         <h2 class="subtitle">Dialogs inform users about a specific task and may contain critical information or require decisions</h2>
         <hr>
 
-        <h3 class="title">Alert</h3>
-        <Example :component="ExAlertDialog" :code="ExAlertDialogCode"/>
+        <Example :component="ExAlertDialog" :code="ExAlertDialogCode" title="Alert"/>
 
-        <hr>
+        <Example :component="ExConfirmDialog" :code="ExConfirmDialogCode" title="Confirm"/>
 
-        <h3 class="title">Confirm</h3>
-        <Example :component="ExConfirmDialog" :code="ExConfirmDialogCode"/>
+        <Example :component="ExPromptDialog" :code="ExPromptDialogCode" title="Prompt"/>
 
-        <hr>
-
-        <h3 class="title">Prompt</h3>
-        <Example :component="ExPromptDialog" :code="ExPromptDialogCode"/>
-
-        <hr>
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

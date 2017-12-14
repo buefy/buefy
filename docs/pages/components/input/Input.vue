@@ -1,5 +1,5 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Input</h1>
         <h2 class="subtitle">
             Get user Input.
@@ -9,30 +9,20 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title">Types and states</h2>
-        <Example :component="ExTypesStates" :code="ExTypesStatesCode" vertical/>
+        <Example :component="ExTypesStates" :code="ExTypesStatesCode" title="Types and states" vertical/>
 
-        <hr>
-        <h2 class="title">Icons</h2>
-        <Example :component="ExIcons" :code="ExIconsCode" vertical/>
+        <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
 
-        <hr>
-        <h2 class="title is-spaced">Validation</h2>
-        <h3 class="subtitle">Automatic HTML5 validation on-blur</h3>
-        <Example :component="ExValidation" :code="ExValidationCode" vertical/>
+        <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical>
+            <p>Automatic HTML5 validation on-blur.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title">Password</h2>
-        <p class="content">You can use the <code>password-reveal</code> prop to add a button that reveals password</p>
-        <Example :component="ExPassword" :code="ExPasswordCode" vertical/>
+        <Example :component="ExPassword" :code="ExPasswordCode" title="Password" vertical>
+            <p>You can use the <code>password-reveal</code> prop to add a button that reveals password.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <hr>
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

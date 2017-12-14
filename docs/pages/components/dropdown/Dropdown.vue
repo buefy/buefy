@@ -1,34 +1,28 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Dropdown</h1>
         <h2 class="subtitle">
             Dropdowns are very versatile, can used as a quick menu or even like a select for discoverable content
         </h2>
         <hr>
 
-        <p class="content">
-            While it appear as a modal for tablet and smartphones,
-            Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
-        </p>
-        <Example :component="ExSimple" :code="ExSimpleCode"/>
+        <Example :component="ExSimple" :code="ExSimpleCode">
+            <p>
+                While it appear as a modal for tablet and smartphones,
+                Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
+            </p>
+        </Example>
 
-        <hr>
+        <Example :component="ExContentPosition" :code="ExContentPositionCode" title="Content and position" paddingless>
+            <p>Add the <code>custom</code> prop to the item to add <strong>any type of content</strong>.</p>
+        </Example>
 
-        <h2 class="title is-spaced">Dropdown content and position</h2>
-        <p class="content">Add the <code>custom</code> prop to the item to add <strong>any type of content</strong>.</p>
-        <Example :component="ExContentPosition" :code="ExContentPositionCode" paddingless/>
+        <Example :component="ExHasLinkDisabled" :code="ExHasLinkDisabledCode" title="Links within" paddingless>
+            <p>Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an item.</p>
+        </Example>
 
-        <p class="content">Add the <code>has-link</code> prop to add a anchor tag / router-link, or <code>disabled</code> to disable an item.</p>
-        <Example :component="ExHasLinkDisabled" :code="ExHasLinkDisabledCode" paddingless/>
+        <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customizing with v-model"/>
 
-        <hr>
-
-        <h2 class="title">Customizing with v-model</h2>
-        <Example :component="ExCustomize" :code="ExCustomizeCode"/>
-
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

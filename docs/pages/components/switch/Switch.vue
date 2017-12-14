@@ -1,24 +1,15 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Switch</h1>
         <h2 class="subtitle">Switch between two opposing states</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
+        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
-        <h2 class="title">Types</h2>
-        <Example :component="ExTypes" :code="ExTypesCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <hr>
-
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
-
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

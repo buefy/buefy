@@ -1,5 +1,5 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <b-message type="is-danger">
             This component has been <strong>deprecated</strong> and will be deleted soon.
             You should use the <router-link to="/documentation/collapse">new collapse component</router-link> instead.

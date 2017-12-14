@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="default-container">
         <h1 class="title is-spaced">Cleave.js </h1>
         <h2 class="subtitle">Format input text while you type — as a Vue directive</h2>
         <div class="buttons">
@@ -17,14 +17,12 @@
             </a>
         </div>
 
-        <b-message type="is-info">
-            <p class="content"><strong>Cleave.js is not included in Buefy</strong>, you have to install it:</p>
-            <CodeView code="npm install cleave.js" expanded/>
-        </b-message>
-
-        <hr>
-
-        <Example :component="ExFormat" :code="ExFormatCode" vertical/>
+        <Example :component="ExFormat" :code="ExFormatCode" vertical>
+            <b-message type="is-info">
+                <p><strong>Cleave.js is not included in Buefy</strong>, you have to install it:</p>
+                <CodeView code="npm install cleave.js" expanded/>
+            </b-message>
+        </Example>
     </div>
 </template>
 

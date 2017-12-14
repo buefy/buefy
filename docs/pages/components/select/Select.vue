@@ -1,5 +1,5 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Select</h1>
         <h2 class="subtitle">
             Select an item in a dropdown list.
@@ -9,20 +9,12 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title is-spaced">Multiple</h2>
-        <Example :component="ExMultiple" :code="ExMultipleCode" vertical/>
+        <Example :component="ExMultiple" :code="ExMultipleCode" title="Multiple" vertical/>
 
-        <hr>
-        <h2 class="title">Icons</h2>
-        <Example :component="ExIcons" :code="ExIconsCode" vertical/>
+        <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
 
-        <hr>
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSizes" :code="ExSizesCode" vertical/>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <hr>
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

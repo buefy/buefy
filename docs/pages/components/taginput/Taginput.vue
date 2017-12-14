@@ -1,46 +1,37 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Taginput</h1>
         <h2 class="subtitle">A simple tag input field that can have autocomplete functionality</h2>
         <hr>
+
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title">Autocomplete</h2>
-        <p class="content">
-            To have autocomplete functionality, add the <code>autocomplete</code> prop.
-            You can add any prop from <router-link to="/documentation/autocomplete">Autocomplete</router-link> API.
-        </p>
-        <Example :component="ExAutocomplete" :code="ExAutocompleteCode" vertical/>
+        <Example :component="ExAutocomplete" :code="ExAutocompleteCode" title="Autocomplete" vertical>
+            <p>
+                To have autocomplete functionality, add the <code>autocomplete</code> prop.
+                You can add any prop from <router-link to="/documentation/autocomplete">Autocomplete</router-link> API.
+            </p>
+        </Example>
 
-        <hr>
-        <h2 class="title">Limits</h2>
-        <p class="content">
-            You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.
-            Maxlength counter is only shown when typing.
-        </p>
-        <Example :component="ExLimit" :code="ExLimitCode" vertical/>
+        <Example :component="ExLimit" :code="ExLimitCode" title="Limits" vertical>
+            <p>
+                You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.
+                Maxlength counter is only shown when typing.
+            </p>
+        </Example>
 
-        <hr>
-        <h2 class="title">States</h2>
-        <p class="content">You can change the input type setting a <code>type</code> on <b>Field</b>.</p>
-        <Example :component="ExState" :code="ExStateCode" vertical/>
+        <Example :component="ExState" :code="ExStateCode" title="States" vertical>
+            <p>You can change the input type setting a <code>type</code> on <b>Field</b>.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title">Tag types</h2>
-        <Example :component="ExType" :code="ExTypeCode" vertical/>
+        <Example :component="ExType" :code="ExTypeCode" title="Tag types" vertical/>
 
-        <hr>
-        <h2 class="title">Sizes</h2>
-        <Example :component="ExSize" :code="ExSizeCode" vertical/>
+        <Example :component="ExSize" :code="ExSizeCode" title="Sizes" vertical/>
 
-        <hr>
-        <h2 class="title">Modifiers</h2>
-        <p class="content">You can change the style of the tags by setting the <code>rounded</code> and <code>attached</code> props.</p>
-        <Example :component="ExModifier" :code="ExModifierCode" vertical/>
+        <Example :component="ExModifier" :code="ExModifierCode" title="Modifiers" vertical>
+            <p>You can change the style of the tags by setting the <code>rounded</code> and <code>attached</code> props.</p>
+        </Example>
 
-        <hr>
-        <h2 class="title">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>

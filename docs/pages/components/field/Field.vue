@@ -1,5 +1,5 @@
 <template>
-    <div class="is-clipped">
+    <div class="default-container">
         <h1 class="title is-spaced">Field</h1>
         <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
         <hr>
@@ -23,56 +23,47 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <hr>
-        <h2 class="title is-spaced">Addons</h2>
-        <h3 class="subtitle">Those components are automatically attached together when inside a Field</h3>
-        <p class="content">Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
-        <b-message type="is-warning">
-            <b>Note:</b> Beware of its responsiveness, avoid large groups of addons since they don't break lines.
-        </b-message>
-        <Example :component="ExAddons" :code="ExAddonsCode" vertical/>
+        <Example :component="ExAddons" :code="ExAddonsCode" title="Addons" vertical>
+            <p>The above cited components are automatically attached together when inside a Field.</p>
+            <p>Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
+            <b-message type="is-info">
+                <b>Note:</b> Beware of its responsiveness, avoid large groups of addons since they don't break lines.
+            </b-message>
+        </Example>
 
-        <hr>
-        <h2 class="title is-spaced">Groups</h2>
-        <div class="content">
+        <Example :component="ExGroups" :code="ExGroupsCode" title="Groups">
             <p>You can group those components together with the <code>grouped</code> property.</p>
             <p>Use the <code>expanded</code> prop <u>on the control</u> to <b>fill up the remaining space</b>.</p>
-        </div>
-        <Example :component="ExGroups" :code="ExGroupsCode"/>
+        </Example>
 
-        <p class="content">
-            Nested Fields can be grouped as well,
-            you have to use the <code>expanded</code> prop <u>on the Field</u> to <b>fill up the remaining space</b>.
-        </p>
-        <Example :component="ExGroupExpanded" :code="ExGroupExpandedCode"/>
+        <Example :component="ExGroupExpanded" :code="ExGroupExpandedCode" title="Nested groups">
+            <p>
+                Nested Fields can be grouped as well,
+                you have to use the <code>expanded</code> prop <u>on the Field</u> to <b>fill up the remaining space</b>.
+            </p>
+        </Example>
 
-        <p class="content">
-            Add the <code>group-multiline</code> prop to allow controls to fill up <b>multiple lines</b>.
-            This is ideal for a long list of controls.
-        </p>
-        <Example :component="ExGroupMultiline" :code="ExGroupMultilineCode" vertical/>
+        <Example :component="ExGroupMultiline" :code="ExGroupMultilineCode" title="Responsive groups" vertical>
+            <p>
+                Add the <code>group-multiline</code> prop to allow controls to fill up <b>multiple lines</b>.
+                This is ideal for a long list of controls.
+            </p>
+        </Example>
 
-        <hr>
-        <h3 class="title">Positions</h3>
-        <p class="content">Add the <code>position</code> prop to modify its alignment.</p>
-        <Example :component="ExPositions" :code="ExPositionsCode"/>
+        <Example :component="ExPositions" :code="ExPositionsCode" title="Positions">
+            <p>Add the <code>position</code> prop to modify its alignment.</p>
+        </Example>
 
-        <hr>
-        <h3 class="title">Combining addons and groups</h3>
-        <Example :component="ExCombineAddonsGroups" :code="ExCombineAddonsGroupsCode"/>
+        <Example :component="ExCombineAddonsGroups" :code="ExCombineAddonsGroupsCode" title="Combining addons and groups"/>
 
-        <hr>
-        <h3 class="title">Horizontal</h3>
-        <div class="tags has-addons">
-            <span class="tag is-success">New!</span>
-            <span class="tag is-info">0.6.2</span>
-        </div>
-        <p class="content">Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
-        <Example :component="ExHorizontal" :code="ExHorizontalCode"/>
+        <Example :component="ExHorizontal" :code="ExHorizontalCode" title="Horizontal">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.6.2</span>
+            </div>
+            <p>Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
+        </Example>
 
-        <hr>
-
-        <h2 class="title is-spaced">API</h2>
         <ApiView :data="api"/>
     </div>
 </template>
