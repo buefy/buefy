@@ -34,6 +34,7 @@
                 <a
                     role="button"
                     href="#"
+                    :disabled="page.isCurrent"
                     class="pagination-link"
                     :class="{ 'is-current': page.isCurrent }"
                     @click.prevent="page.click">
@@ -155,6 +156,7 @@
                         number: i,
                         isCurrent: this.current === i,
                         click: (event) => {
+                            if (this.current === i) return
                             this.$emit('change', i)
                             this.$emit('update:current', i)
 
