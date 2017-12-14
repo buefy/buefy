@@ -1,7 +1,7 @@
 <template>
     <section>
 
-        <b-collapse class="card" :open.sync="isOpen">
+        <b-collapse class="card">
             <div slot="trigger" slot-scope="props" class="card-header">
                 <p class="card-header-title">
                     Component
@@ -27,13 +27,3 @@
 
     </section>
 </template>
-
-<script>
-    export default {
-        data() {
-            return {
-                isOpen: false
-            }
-        }
-    }
-</script>
