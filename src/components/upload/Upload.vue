@@ -24,6 +24,7 @@
             type="file"
             v-bind="$attrs"
             :multiple="multiple"
+            :accept="accept"
             :disabled="disabled"
             @change="onFileChange">
     </label>
@@ -43,6 +44,7 @@
             },
             multiple: Boolean,
             disabled: Boolean,
+            accept: String,
             dragDrop: Boolean,
             type: {
                 type: String,
@@ -105,7 +107,10 @@
                         }
                     }
                     for (let i = 0; i < value.length; i++) {
-                        this.newValue.push(value[i])
+                        const file = value[i]
+                        if (this.checkType(file)) {
+                            this.newValue.push(file)
+                        }
                     }
                 }
                 this.$emit('input', this.newValue)
@@ -119,6 +124,13 @@
                 if (!this.disabled && !this.loading) {
                     this.dragDropFocus = focus
                 }
+            },
+
+            /**
+             * Check mime type of file
+             */
+            checkType(file) {
+                return !this.accept || (this.accept && file.type.match(this.accept))
             }
         }
     }
