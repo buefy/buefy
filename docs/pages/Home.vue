@@ -1,6 +1,6 @@
 <template>
     <section class="home">
-        <TheHeader light />
+        <TheHeader light/>
         <div class="hero is-fullheight is-primary">
             <div class="hero-body">
                 <div class="container has-text-centered">
@@ -50,7 +50,7 @@
                 <div class="container">
                     <nav class="columns">
                         <div class="column has-text-centered features">
-                            <b-icon pack="fa" icon="github" size="is-large"/>
+                            <b-icon icon="github-circle" size="is-large"/>
                             <p class="title is-4"><strong>Free</strong></p>
                             <p class="subtitle">Open source on <strong><a href="https://github.com/rafaelpimpa/buefy" target="_blank">GitHub</a></strong></p>
                         </div>
@@ -77,7 +77,7 @@
             </div>
         </section>
 
-        <TheFooter />
+        <TheFooter/>
     </section>
 </template>
 

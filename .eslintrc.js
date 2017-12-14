@@ -63,6 +63,7 @@ module.exports = {
       ]
     }],
     'vue/no-reserved-keys': 0,
-    'vue/require-default-prop': 0
+    'vue/require-default-prop': 0,
+    'import/no-webpack-loader-syntax': 0
   }
 }

@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: row;
     flex: 1;
+    .default-container {
+        overflow: hidden;
+        width: 100%;
+    }
     @include touch {
         display: block;
     }

@@ -1,56 +1,87 @@
-.highlight {
-    position: relative;
-    text-align: left !important;
-    height: 3.25rem;
-    .button {
-        position: absolute;
-        right: 1.5rem;
-        top: 0.5rem;
-        &:hover + pre {
-            background: darken($white-ter, 2.5%);
-        }
-    }
-    pre {
-        padding: 0;
-        code {
-            max-height: 400px;
-            &.hljs {
-                background: inherit;
-                color: inherit;
-                padding: 1.25rem 1.5rem;
+.codeview {
+    // background: $white-ter;
+    .highlight {
+        position: relative;
+        text-align: left !important;
+        height: 3.25rem;
+        .button-container {
+            position: absolute;
+            display: inline-flex;
+            background: transparent;
+            border-radius: $radius $radius 0 0;
+            top: 0.25rem;
+            right: 1.35rem;
+            padding: 0 0 0 8px;
+            vertical-align: top;
+            .button {
+                display: flex;
+                align-items: flex-end;
+                padding: 0;
+                text-decoration: underline;
+                &:not(:last-child) {
+                    margin-right: 0.5rem;
+                }
+                .icon {
+                    margin-left: -2px;
+                }
+                &:hover,
+                &:focus {
+                    color: $link;
+                    background: transparent;
+                }
             }
         }
-        @include tablet {
-            white-space: pre-wrap;
+        pre {
+            padding: 0;
+            code {
+                overflow: hidden;
+                max-height: 600px;
+                &.hljs {
+                    background: inherit;
+                    color: inherit;
+                    padding: 1.25rem 1.5rem;
+                }
+            }
+        }
+        .codeview-showcode,
+        .codeview-hidecode {
+            display: flex;
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            align-items: center;
+            background-color: rgba($white, 0.8);
+            border: none;
+            color: $grey;
+            cursor: pointer;
+            font-size: 0.75rem;
+            justify-content: center;
+            width: 100%;
+            font-weight: $weight-semibold;
+            &:hover {
+                background-color: rgba($warning, 0.8);
+            }
+            .icon {
+                margin-right: 0.5rem;
+            }
+        }
+        .codeview-hidecode {
+            position: static;
+            height: 2rem;
+        }
+        &.is-expanded {
+            height: auto;
+            pre code {
+                overflow: inherit;
+            }
+        }
+        &.is-collapsed {
+            border: 1px solid $warning;
         }
     }
-    .codeview-showcode {
-        display: flex;
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        align-items: center;
-        background-color: rgba($white, 0.7);
-        border: none;
-        color: $grey;
-        cursor: pointer;
-        font-size: 0.75rem;
-        justify-content: center;
-        width: 100%;
-        font-weight: $weight-semibold;
-        &:hover {
-            background-color: rgba($warning, 0.7);
-        }
-        .icon {
-            margin-right: 0.5rem;
-        }
-    }
-    &.is-expanded {
-        height: auto;
-    }
-    &.is-collapsed {
-        border: 1px solid $warning;
+    &:not(:last-child) {
+        margin-bottom: 1.5rem
     }
 }
