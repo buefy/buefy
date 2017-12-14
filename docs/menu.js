@@ -3,59 +3,59 @@ export default {
         {
             category: 'Installation',
             pages: [
-                { name: 'Start' },
-                { name: 'Customization' },
-                { name: 'Constructor options' }
+                { name: 'Start', path: '/documentation/start' },
+                { name: 'Customization', path: '/documentation/customization' },
+                { name: 'Constructor options', path: '/documentation/constructor-options' }
             ]
         },
         {
             category: 'Layout',
             pages: [
-                { name: 'Layout & elements', path: 'layout' }
+                { name: 'Layout & elements', path: '/documentation/layout' }
             ]
         },
         {
             category: 'UI components',
             pages: [
-                { name: 'Collapse' },
-                { name: 'Dialog' },
-                { name: 'Dropdown' },
+                { name: 'Collapse', path: '/documentation/collapse' },
+                { name: 'Dialog', path: '/documentation/dialog' },
+                { name: 'Dropdown', path: '/documentation/dropdown' },
                 {
                     category: 'Form controls',
                     pages: [
-                        { name: 'Autocomplete' },
-                        { name: 'Checkbox' },
-                        { name: 'Datepicker', isUpdated: true },
-                        { name: 'Field', isUpdated: true },
-                        { name: 'Input' },
-                        { name: 'Radio' },
-                        { name: 'Select' },
-                        { name: 'Switch' },
-                        { name: 'Taginput', isNew: true },
-                        { name: 'Timepicker', isNew: true },
-                        { name: 'Upload' }
+                        { name: 'Autocomplete', path: '/documentation/autocomplete' },
+                        { name: 'Checkbox', path: '/documentation/checkbox' },
+                        { name: 'Datepicker', path: '/documentation/datepicker', isUpdated: true },
+                        { name: 'Field', path: '/documentation/field', isUpdated: true },
+                        { name: 'Input', path: '/documentation/input' },
+                        { name: 'Radio', path: '/documentation/radio' },
+                        { name: 'Select', path: '/documentation/select' },
+                        { name: 'Switch', path: '/documentation/switch' },
+                        { name: 'Taginput', path: '/documentation/taginput', isNew: true },
+                        { name: 'Timepicker', path: '/documentation/timepicker', isNew: true },
+                        { name: 'Upload', path: '/documentation/upload' }
                     ]
                 },
-                { name: 'Icon' },
-                { name: 'Loading' },
-                { name: 'Message' },
-                { name: 'Modal' },
-                { name: 'Notification' },
-                { name: 'Pagination' },
-                { name: 'Snackbar', isUpdated: true },
-                { name: 'Table' },
-                { name: 'Tabs' },
-                { name: 'Tag' },
-                { name: 'Toast', isUpdated: true },
-                { name: 'Tooltip' }
+                { name: 'Icon', path: '/documentation/icon' },
+                { name: 'Loading', path: '/documentation/loading' },
+                { name: 'Message', path: '/documentation/message' },
+                { name: 'Modal', path: '/documentation/modal' },
+                { name: 'Notification', path: '/documentation/notification' },
+                { name: 'Pagination', path: '/documentation/pagination' },
+                { name: 'Snackbar', path: '/documentation/snackbar', isUpdated: true },
+                { name: 'Table', path: '/documentation/table' },
+                { name: 'Tabs', path: '/documentation/tabs' },
+                { name: 'Tag', path: '/documentation/tag' },
+                { name: 'Toast', path: '/documentation/toast', isUpdated: true },
+                { name: 'Tooltip', path: '/documentation/tooltip' }
             ]
         }
     ],
-    extensions:[
+    extensions: [
         {
             category: 'Extensions',
             pages: [
-                { name: 'Cleavejs (Input Format)', path: 'cleavejs', isNew: true }
+                { name: 'Cleavejs (input format)', path: '/extensions/cleavejs', isNew: true }
             ]
         }
     ]

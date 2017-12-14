@@ -10,8 +10,8 @@
                 class="menu-list"
                 :key="i"
                 style="margin-bottom: 2.5rem;">
-                <li v-for="(page, j) in items.pages" :key="page.name">
-                    <router-link v-if="page.name" :to="page.path || page.name | slugify">
+                <li v-for="page in items.pages" :key="page.name">
+                    <router-link v-if="page.name" :to="page.path">
                         <span class="menu-text">{{ page.name }}</span>
                         <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
                         <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
@@ -25,14 +25,14 @@
                                 size="is-small"
                                 class="chevron-icon"
                                 :custom-class="isExpanded ? 'mdi-rotate-90' : ''"
-                           />
+                            />
                             <span class="menu-text">{{ page.category }}</span>
                         </a>
                         <ul :class="{ 'is-active': isExpanded }">
                             <li
                                 v-for="page in page.pages"
                                 :key="page.name">
-                                <router-link :to="page.path || page.name | slugify">
+                                <router-link :to="page.path">
                                     <span class="menu-text">{{ page.name }}</span>
                                     <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
                                     <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>

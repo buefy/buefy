@@ -1,6 +1,6 @@
 <template>
     <form
-        v-if="html"
+        v-if="getHtml()"
         method="POST"
         action="https://codepen.io/pen/define/"
         target="_blank"
@@ -10,7 +10,10 @@
             <b-icon icon="open-in-new" size="is-small"/>
         </button>
 
-        <input type="hidden" name="data" :value="data">
+        <input
+            type="hidden"
+            name="data"
+            :value="data">
     </form>
 </template>
 
@@ -40,9 +43,10 @@
                     tags: ['buefy', 'vue', 'bulma'],
                     editors: this.style ? 111 : 101,
                     layout: 'right',
-                    html: this.html,
-                    js: this.script,
-                    css: this.style,
+                    html: this.getHtml(),
+                    js: this.getScript(),
+                    js_pre_processor: 'babel',
+                    css: this.getStyle(),
                     css_pre_processor: 'scss',
                     html_classes: 'section',
                     head: "<meta name='viewport' content='width=device-width, initial-scale=1'>",
@@ -51,8 +55,10 @@
                 })
                     .replace(/"/g, '&​quot;')
                     .replace(/'/g, '&apos;')
-            },
-            html() {
+            }
+        },
+        methods: {
+            getHtml() {
                 const start = this.code.indexOf('<template>')
                 const end = this.code.lastIndexOf('</template>')
                 if (start < 0 || end < 0) return
@@ -66,9 +72,9 @@
                     </div>
                 `)
             },
-            script() {
+            getScript() {
                 const start = this.code.indexOf('<script>')
-                const end = this.code.lastIndexOf('<\/script>')
+                const end = this.code.lastIndexOf('<\/script>') // eslint-disable-line
                 let js
 
                 if (start >= 0 && end >= 0) {
@@ -92,7 +98,7 @@
 
                     // Cleave
                     if (this.code.indexOf('cleave.js')) {
-                        js = js.replace('import Cleave from \'cleave\.js\'', '')
+                        js = js.replace('import Cleave from \'cleave.js\'', '')
                         this.externalScripts.push('https://unpkg.com/cleave.js/dist/cleave.min.js')
                     }
                 }
@@ -107,7 +113,7 @@
                     app.$mount('#app')
                 `)
             },
-            style() {
+            getStyle() {
                 const match = this.code.match(/<style.*>/)
 
                 const start = match ? this.code.indexOf(match[0]) : -1

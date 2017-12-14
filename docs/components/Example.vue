@@ -6,7 +6,11 @@
         <div class="example-component" :class="{ 'is-paddingless': paddingless }">
             <component :is="component"/>
         </div>
-        <CodeView :code="code" bordered codepen/>
+        <CodeView
+            :code="code"
+            bordered
+            codepen
+        />
     </div>
 </template>
 
@@ -25,4 +29,3 @@
         }
     }
 </script>
-

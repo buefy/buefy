@@ -6,7 +6,7 @@ import meta from './meta'
 
 Vue.use(Router)
 
-function route (path, component) {
+function route(path, component) {
     return {
         path,
         name: path,
@@ -71,7 +71,7 @@ const router = new Router({
             redirect: '/extensions/cleavejs',
             component: Extensions,
             children: [
-                route('cleavejs', 'extensions/cleavejs/Cleavejs'),
+                route('cleavejs', 'extensions/cleavejs/Cleavejs')
             ]
         },
         // Global redirect

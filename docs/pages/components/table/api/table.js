@@ -10,6 +10,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>columns</code>',
+                description: 'Table columns, you can also add <code>renderHtml: true</code> on each column object',
+                type: 'Array<Object> (same as TableColumns props)',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>default-sort</code>',
                 description: `Sets the default sort column and order — e.g. <code>['first_name', 'desc']</code>`,
                 type: 'String, Array',

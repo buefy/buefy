@@ -5,7 +5,7 @@
         <div class="hero is-primary">
             <div class="hero-body">
                 <div class="container">
-                    <p class="title">{{ title }}</h2>
+                    <p class="title">{{ title }}</p>
                     <p class="subtitle">{{ subtitle }}</p>
                 </div>
             </div>

@@ -93,7 +93,13 @@
                                     v-bind="column"
                                     :key="column.field"
                                     internal>
-                                    {{ getValueByPath(row, column.field) }}
+                                    <span
+                                        v-if="column.renderHtml"
+                                        v-html="getValueByPath(row, column.field)"
+                                    />
+                                    <template v-else>
+                                        {{ getValueByPath(row, column.field) }}
+                                    </template>
                                 </BTableColumn>
                             </template>
                         </tr>

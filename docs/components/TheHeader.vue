@@ -7,21 +7,36 @@
                     class="navbar-item"
                     title="Buefy: lightweight UI components for Vue.js based on Bulma"
                     active-class="">
-                    <img v-if="light" src="../assets/buefy-light.png" alt="Buefy">
-                    <img v-else src="../assets/buefy.png" alt="Buefy">
+                    <img
+                        v-if="light"
+                        src="../assets/buefy-light.png"
+                        alt="Buefy">
+                    <img
+                        v-else
+                        src="../assets/buefy.png"
+                        alt="Buefy">
                 </router-link>
 
-                <a class="navbar-item" href="https://github.com/rafaelpimpa/buefy" target="_blank" title="Github">
+                <a
+                    class="navbar-item"
+                    href="https://github.com/rafaelpimpa/buefy"
+                    target="_blank"
+                    title="Github">
                     <b-icon pack="fa" icon="github"/>
                 </a>
 
-                <a class="navbar-item" href="https://twitter.com/rafaelpimpa" target="_blank" title="Twitter">
+                <a
+                    class="navbar-item"
+                    href="https://twitter.com/rafaelpimpa"
+                    target="_blank"
+                    title="Twitter">
                     <b-icon pack="fa" icon="twitter"/>
                 </a>
 
-                <span class="navbar-burger burger"
-                      :class="{ 'is-active': isMenuActive }"
-                      @click="isMenuActive = !isMenuActive">
+                <span
+                    class="navbar-burger burger"
+                    :class="{ 'is-active': isMenuActive }"
+                    @click="isMenuActive = !isMenuActive">
                     <span/>
                     <span/>
                     <span/>
@@ -30,11 +45,20 @@
 
             <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
                 <div class="navbar-end">
-                    <router-link to="/" exact class="navbar-item">Home</router-link>
+                    <router-link
+                        to="/"
+                        exact
+                        class="navbar-item">
+                        Home
+                    </router-link>
 
                     <hr class="navbar-divider" style="display: block;">
 
-                    <router-link to="/documentation" class="navbar-item is-hidden-touch">Documentation</router-link>
+                    <router-link
+                        to="/documentation"
+                        class="navbar-item is-hidden-touch">
+                        Documentation
+                    </router-link>
 
                     <!-- Mobile documentation menu -->
                     <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
@@ -52,7 +76,7 @@
                                     <router-link
                                         v-if="page.name"
                                         :key="page.name"
-                                        :to="`/documentation/${page.path || $options.filters.slugify(page.name)}`"
+                                        :to="page.path"
                                         class="navbar-item">
                                         <span class="navbar-item-text">{{ page.name }}</span>
                                         <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
@@ -61,16 +85,22 @@
 
                                     <!-- submenu -->
                                     <template v-else>
-                                        <div class="navbar-item">{{ page.category }}</div>
+                                        <div class="navbar-item" :key="page.name">
+                                            {{ page.category }}
+                                        </div>
                                         <router-link
                                             v-for="page in page.pages"
                                             :key="page.name"
-                                            :to="`/documentation/${page.path || $options.filters.slugify(page.name)}`"
+                                            :to="page.path"
                                             class="navbar-item"
                                             style="margin-left: 1rem;">
                                             <span class="navbar-item-text">{{ page.name }}</span>
-                                            <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                            <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
+                                            <b-tag v-if="page.isNew" type="is-success">
+                                                New!
+                                            </b-tag>
+                                            <b-tag v-if="page.isUpdated" type="is-info">
+                                                Updated
+                                            </b-tag>
                                         </router-link>
                                     </template>
                                 </template>
@@ -80,7 +110,9 @@
                     </div>
                     <hr class="navbar-divider" style="display: block;">
 
-                    <router-link to="/extensions" class="navbar-item is-hidden-touch">Extensions</router-link>
+                    <router-link to="/extensions" class="navbar-item is-hidden-touch">
+                        Extensions
+                    </router-link>
 
                     <!-- Mobile extensions menu -->
                     <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
@@ -88,16 +120,10 @@
 
                         <div class="navbar-dropdown is-boxed">
                             <template v-for="items in menu['extensions']">
-                                <!-- <div
-                                    :key="items.category"
-                                    class="navbar-item has-text-weight-semibold is-uppercase has-text-grey">
-                                    {{ items.category }}
-                                </div> -->
-
                                 <router-link
                                     v-for="page in items.pages"
                                     :key="page.name"
-                                    :to="`/extensions/${page.path || $options.filters.slugify(page.name)}`"
+                                    :to="page.path"
                                     class="navbar-item">
                                     <span class="navbar-item-text">{{ page.name }}</span>
                                     <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
@@ -122,18 +148,20 @@
                             </strong>
 
                             <hr class="navbar-divider">
-                            <a class="navbar-item"
-                               href="https://github.com/rafaelpimpa/buefy/releases"
-                               target="_blank">
+                            <a
+                                class="navbar-item"
+                                href="https://github.com/rafaelpimpa/buefy/releases"
+                                target="_blank">
                                 Changelogs
                             </a>
                         </div>
                     </div>
 
                     <div class="navbar-item">
-                        <a class="button is-outlined"
-                           :class="light ? 'is-light' : 'is-twitter'"
-                           @click="tweet">
+                        <a
+                            class="button is-outlined"
+                            :class="light ? 'is-light' : 'is-twitter'"
+                            @click="tweet">
                             <b-icon pack="fa" icon="twitter"/>
                             <span>Tweet</span>
                         </a>

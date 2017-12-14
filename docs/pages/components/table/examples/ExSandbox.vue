@@ -38,19 +38,19 @@
             :mobile-cards="hasMobileCards">
 
             <template slot-scope="props">
-                <b-table-column field="id" label="ID" width="40" sortable numeric>
+                <b-table-column field="id" label="ID" width="40" numeric>
                     {{ props.row.id }}
                 </b-table-column>
 
-                <b-table-column field="first_name" label="First Name" sortable>
+                <b-table-column field="first_name" label="First Name">
                     {{ props.row.first_name }}
                 </b-table-column>
 
-                <b-table-column field="last_name" label="Last Name" sortable>
+                <b-table-column field="last_name" label="Last Name">
                     {{ props.row.last_name }}
                 </b-table-column>
 
-                <b-table-column field="date" label="Date" sortable centered>
+                <b-table-column field="date" label="Date" centered>
                     <span class="tag is-success">
                         {{ new Date(props.row.date).toLocaleDateString() }}
                     </span>
