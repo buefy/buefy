@@ -24,8 +24,8 @@
             type="file"
             v-bind="$attrs"
             :multiple="multiple"
+            :accept="accept"
             :disabled="disabled"
-            @click="upload"
             @change="onFileChange">
     </label>
 </template>
@@ -44,10 +44,15 @@
             },
             multiple: Boolean,
             disabled: Boolean,
+            accept: String,
             dragDrop: Boolean,
             type: {
                 type: String,
                 default: 'is-primary'
+            },
+            native: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -61,23 +66,18 @@
             /**
              * When v-model is changed:
              *   1. Set internal value.
-             *   2. If it's invalid, validate again.
+             *   2. Reset input value if array is empty
+             *   3. If it's invalid, validate again.
              */
             value(value) {
                 this.newValue = value
+                if (this.newValue.length === 0) {
+                    this.$refs.input.value = null
+                }
                 !this.isValid && !this.dragDrop && this.checkHtml5Validity()
             }
         },
         methods: {
-
-            /**
-             * Reset input value
-             */
-            upload() {
-                if (!this.disabled && !this.loading) {
-                    this.$refs.input.value = null
-                }
-            },
 
             /**
              * Listen change event on input type 'file',
@@ -85,7 +85,6 @@
              */
             onFileChange(event) {
                 if (this.disabled || this.loading) return
-
                 if (this.dragDrop) {
                     this.updateDragDropFocus(false)
                 }
@@ -102,10 +101,16 @@
                         } else {
                             this.newValue = []
                         }
+                    } else {
+                        if (this.native) {
+                            this.newValue = []
+                        }
                     }
-
                     for (let i = 0; i < value.length; i++) {
-                        this.newValue.push(value[i])
+                        const file = value[i]
+                        if (this.checkType(file)) {
+                            this.newValue.push(file)
+                        }
                     }
                 }
                 this.$emit('input', this.newValue)
@@ -119,6 +124,13 @@
                 if (!this.disabled && !this.loading) {
                     this.dragDropFocus = focus
                 }
+            },
+
+            /**
+             * Check mime type of file
+             */
+            checkType(file) {
+                return !this.accept || (this.accept && file.type.match(this.accept))
             }
         }
     }

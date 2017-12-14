@@ -1,7 +1,7 @@
 <template>
     <div class="collapse">
         <div class="collapse-trigger" @click="toggle">
-            <slot name="trigger"/>
+            <slot name="trigger" :open="isOpen" />
         </div>
         <transition :name="animation">
             <div class="collapse-content" v-show="isOpen">

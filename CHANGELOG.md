@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.6.3
+
+### New features
+
+* Add ``open`` prop to collapse ``trigger`` slot
+* Add ``native`` prop to upload
+
 ## 0.6.2
 
 ### New features
