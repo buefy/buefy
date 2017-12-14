@@ -5,12 +5,30 @@
         text-align: left !important;
         height: 3.25rem;
         .button-container {
+            position: absolute;
+            display: inline-flex;
+            background: transparent;
+            border-radius: $radius $radius 0 0;
             top: 0.25rem;
             right: 1.35rem;
-            background: transparent;
+            padding: 0 0 0 8px;
+            vertical-align: top;
             .button {
-                font-size: 0.7rem;
+                display: flex;
+                align-items: flex-end;
+                padding: 0;
                 text-decoration: underline;
+                &:not(:last-child) {
+                    margin-right: 0.5rem;
+                }
+                .icon {
+                    margin-left: -2px;
+                }
+                &:hover,
+                &:focus {
+                    color: $link;
+                    background: transparent;
+                }
             }
         }
         pre {

@@ -3,7 +3,12 @@
         <figure class="highlight" :class="figureClasses">
             <div class="button-container">
                 <button class="button is-text is-small copy-code">Copy</button>
-                <CodepenEdit v-if="codepen" :code="code"/>
+                <button
+                    v-if="!expanded"
+                    class="button is-text is-small"
+                    @click="isExpanded = false">
+                    Hide
+                </button>
             </div>
             <pre v-highlight><code :class="lang">{{ code }}</code></pre>
             <button
@@ -33,12 +38,7 @@
 </template>
 
 <script>
-    import CodepenEdit from './CodepenEdit'
-
     export default {
-        components: {
-            CodepenEdit
-        },
         props: {
             lang: {
                 type: String,
@@ -46,8 +46,7 @@
             },
             bordered: Boolean,
             code: String,
-            expanded: Boolean,
-            codepen: Boolean
+            expanded: Boolean
         },
         data() {
             return {

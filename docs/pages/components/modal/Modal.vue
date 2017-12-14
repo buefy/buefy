@@ -17,12 +17,6 @@
         </div>
         <Example :component="ExComponent" :code="ExComponentCode"/>
 
-        <h3 class="subtitle">ModalForm component</h3>
-        <b-message type="is-info">
-            <b>Note:</b> You should't mutate a prop directly, this is just an example.
-        </b-message>
-        <CodeView :code="ModalFormCode"/>
-
         <hr>
 
         <h2 class="title is-spaced">Programmatically opening Modal</h2>
@@ -45,7 +39,6 @@
 
     import ExComponent from './examples/ExComponent'
     import ExComponentCode from '!!raw-loader!./examples/ExComponent'
-    import ModalFormCode from '!!raw-loader!./examples/ModalForm'
 
     import ExProgrammatic from './examples/ExProgrammatic'
     import ExProgrammaticCode from '!!raw-loader!./examples/ExProgrammatic'
@@ -59,7 +52,6 @@
                 ExProgrammatic,
                 ExSimpleCode,
                 ExComponentCode,
-                ModalFormCode,
                 ExProgrammaticCode,
                 programmaticSyntax: `
                 // From inside Vue instance

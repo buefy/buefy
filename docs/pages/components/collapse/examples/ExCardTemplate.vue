@@ -7,8 +7,8 @@
                     Component
                 </p>
                 <a class="card-header-icon">
-                    <b-icon :icon="props.open ?
-                        'menu-down' : 'menu-up'">
+                    <b-icon
+                        :icon="props.open ? 'menu-down' : 'menu-up'">
                     </b-icon>
                 </a>
             </div>
@@ -27,3 +27,13 @@
 
     </section>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                isOpen: false
+            }
+        }
+    }
+</script>

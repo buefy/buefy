@@ -7,26 +7,6 @@
     border-bottom-right-radius: $radius;
     border-bottom-left-radius: $radius;
     color: rgba(0, 0, 0, 0.7);
-    &:not(:first-child) {
-        margin-top: 2rem;
-    }
-    &:not(:last-child) {
-        margin-bottom: 1.5rem
-    }
-    &:before {
-        background: $warning;
-        border-radius: $radius $radius 0 0;
-        bottom: 100%;
-        content: "Example";
-        display: inline-block;
-        font-size: 10px;
-        font-weight: bold;
-        left: -1px;
-        padding: 4px 8px;
-        position: absolute;
-        text-transform: uppercase;
-        vertical-align: top;
-    }
     .button-container {
         position: absolute;
         display: inline-flex;
@@ -46,7 +26,7 @@
                 margin-right: 0.5rem;
             }
             .icon {
-                margin-left: -2px !important;
+                margin-left: 0 !important;
             }
             &:hover,
             &:focus {
@@ -54,6 +34,26 @@
                 background: transparent;
             }
         }
+    }
+    &:not(:first-child) {
+        margin-top: 2rem;
+    }
+    &:not(:last-child) {
+        margin-bottom: 1.5rem
+    }
+    &:before {
+        background: $warning;
+        border-radius: $radius $radius 0 0;
+        bottom: 100%;
+        content: "Example";
+        display: inline-block;
+        font-size: 10px;
+        font-weight: bold;
+        left: -1px;
+        padding: 4px 8px;
+        position: absolute;
+        text-transform: uppercase;
+        vertical-align: top;
     }
     .example-component {
         padding: 1.5rem;
