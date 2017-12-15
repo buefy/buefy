@@ -104,9 +104,9 @@
                             </template>
                         </tr>
 
+                        <!-- Do not add `key` here (breaks details) -->
                         <tr
                             v-if="detailed && isVisibleDetailRow(row)"
-                            :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
