@@ -34,7 +34,6 @@
                 <a
                     role="button"
                     href="#"
-                    :disabled="page.isCurrent"
                     class="pagination-link"
                     :class="{ 'is-current': page.isCurrent }"
                     @click.prevent="page.click">
