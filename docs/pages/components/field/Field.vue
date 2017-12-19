@@ -64,6 +64,14 @@
             <p>Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
         </Example>
 
+        <Example :component="ExLabelClasses" :code="ExLabelClassesCode" title="Label classes">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.6.3</span>
+            </div>
+            <p>Add the <code>label-classes</code> prop to adjust the styling of the label.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -95,6 +103,9 @@
     import ExHorizontal from './examples/ExHorizontal'
     import ExHorizontalCode from '!!raw-loader!./examples/ExHorizontal'
 
+    import ExLabelClasses from './examples/ExLabelClasses'
+    import ExLabelClassesCode from '!!raw-loader!./examples/ExLabelClasses'
+
     export default {
         data() {
             return {
@@ -107,6 +118,7 @@
                 ExPositions,
                 ExCombineAddonsGroups,
                 ExHorizontal,
+                ExLabelClasses,
                 ExSimpleCode,
                 ExAddonsCode,
                 ExGroupsCode,
@@ -114,7 +126,8 @@
                 ExGroupMultilineCode,
                 ExPositionsCode,
                 ExCombineAddonsGroupsCode,
-                ExHorizontalCode
+                ExHorizontalCode,
+                ExLabelClassesCode
             }
         }
     }
