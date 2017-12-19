@@ -1,6 +1,9 @@
 <template>
     <div class="field" :class="rootClasses">
-        <div v-if="horizontal" class="field-label is-normal">
+        <div
+            v-if="horizontal"
+            class="field-label is-normal"
+            :class="labelClasses">
             <label
                 v-if="label"
                 :for="labelFor"
@@ -12,7 +15,8 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                class="label" >
+                class="label"
+                :class="labelClasses">
                 {{ label }}
             </label>
         </template>
@@ -52,7 +56,8 @@
             addons: {
                 type: Boolean,
                 default: true
-            }
+            },
+            labelClasses: String
         },
         data() {
             return {
