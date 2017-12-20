@@ -34,10 +34,17 @@ export default [
             },
             {
                 name: '<code>size</code>',
-                description: 'Size  of the control, optional',
+                description: 'Size of the control, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
+            },
+            {
+                name: '<code>icon-size</code>',
+                description: 'Size of the icon, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-large</code> or <code>size</code> prop'
             },
             {
                 name: '<code>title</code>',

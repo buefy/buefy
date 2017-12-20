@@ -16,7 +16,8 @@ export default {
         },
         type: String,
         hasIcon: Boolean,
-        size: String
+        size: String,
+        iconSize: String
     },
     data() {
         return {

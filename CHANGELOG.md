@@ -6,6 +6,7 @@
 
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
+* #487 Add ``icon-size`` prop to message
 
 ## 0.6.2
 

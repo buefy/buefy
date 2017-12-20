@@ -20,7 +20,7 @@
                             :icon="icon"
                             :class="type"
                             both
-                            size="is-large"/>
+                            :size="newIconSize"/>
                     </div>
                     <div class="media-content">
                         <slot/>
@@ -36,6 +36,11 @@
 
     export default {
         name: 'BMessage',
-        mixins: [MessageMixin]
+        mixins: [MessageMixin],
+        data() {
+            return {
+                newIconSize: this.iconSize || this.size || 'is-large'
+            }
+        }
     }
 </script>
