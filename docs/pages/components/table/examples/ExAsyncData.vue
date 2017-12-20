@@ -80,7 +80,11 @@
                             currentTotal = this.perPage * 1000
                         }
                         this.total = currentTotal
-                        data.results.forEach((item) => this.data.push(item))
+                        data.results.forEach((item) => {
+                            console.log(item.release_date)
+                            item.release_date = item.release_date.replace(/-/g, '/')
+                            this.data.push(item)
+                        })
                         this.loading = false
                     })
                     .catch((error) => {
