@@ -96,6 +96,7 @@
                     :focused="focusedDateData"
                     :disabled="disabled"
                     :unselectable-dates="unselectableDates"
+                    :unselectable-days-of-week="unselectableDaysOfWeek"
                     :events="events"
                     :indicators="indicators"
                     @close="$refs.dropdown.isActive = false"/>
@@ -222,6 +223,10 @@
                 default: false
             },
             unselectableDates: Array,
+            unselectableDaysOfWeek: {
+                type: Array,
+                default: () => { return config.defaultUnselectableDaysOfWeek }
+            },
             dateFormatter: {
                 type: Function,
                 default: (date) => {

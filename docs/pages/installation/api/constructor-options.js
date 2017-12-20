@@ -107,6 +107,13 @@ export default [
                 default: '<code>0</code>'
             },
             {
+                name: '<code>defaultUnselectableDaysOfWeek</code>',
+                description: `Default datepicker <code>unselectable-days-of-week</code> attribute`,
+                type: 'Array',
+                values: '—',
+                default: '-'
+            },
+            {
                 name: '<code>defaultTimeFormatter</code>',
                 description: `Default timepicker <code>time-formatter</code> attribute`,
                 type: 'Function',

@@ -107,6 +107,13 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>unselectable-days-of-week</code>',
+                description: 'Array of unselectable days of week',
+                type: 'Array',
+                values: '<code>0 - 6 (Sunday is 0, Monday is 1, and so on)</code>',
+                default: '-'
+            },
+            {
                 name: '<code>month-names</code>',
                 description: 'Names of months to display in table header',
                 type: 'Array',

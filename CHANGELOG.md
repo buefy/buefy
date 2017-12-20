@@ -6,6 +6,7 @@
 
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
+* #483 Add ``unselectable-days-of-week`` prop to datepicker
 * #487 Add ``icon-size`` prop to message
 
 ## 0.6.2

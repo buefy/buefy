@@ -13,6 +13,7 @@ let config = {
     defaultDayNames: null,
     defaultMonthNames: null,
     defaultFirstDayOfWeek: null,
+    defaultUnselectableDaysOfWeek: null,
     defaultTimeFormatter: null,
     defaultTimeParser: null,
     defaultModalScroll: null,

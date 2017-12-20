@@ -19,6 +19,7 @@
                 :max-date="maxDate"
                 :disabled="disabled"
                 :unselectable-dates="unselectableDates"
+                :unselectable-days-of-week="unselectableDaysOfWeek"
                 :events="eventsInThisWeek(week, index)"
                 :indicators="indicators"
                 @select="updateSelectedDate"/>
@@ -45,7 +46,8 @@
             maxDate: Date,
             focused: Object,
             disabled: Boolean,
-            unselectableDates: Array
+            unselectableDates: Array,
+            unselectableDaysOfWeek: Array
         },
         computed: {
             visibleDayNames() {

@@ -51,6 +51,7 @@
             maxDate: Date,
             disabled: Boolean,
             unselectableDates: Array,
+            unselectableDaysOfWeek: Array,
             events: Array,
             indicators: String
         },
@@ -80,6 +81,13 @@
                             day.getFullYear() !== disabledDate.getFullYear() ||
                             day.getMonth() !== disabledDate.getMonth()
                         )
+                    }
+                }
+
+                if (this.unselectableDaysOfWeek) {
+                    for (let i = 0; i < this.unselectableDaysOfWeek.length; i++) {
+                        const dayOfWeek = this.unselectableDaysOfWeek[i]
+                        validity.push(day.getDay() !== dayOfWeek)
                     }
                 }
 
