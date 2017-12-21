@@ -401,7 +401,7 @@
                 let sorted = []
                 // Sorting without mutating original data
                 if (fn && typeof fn === 'function') {
-                    sorted = [...array].sort(fn)
+                    sorted = [...array].sort((a, b) => fn(a, b, isAsc))
                 } else {
                     sorted = [...array].sort((a, b) => {
                         // Get nested values from objects
