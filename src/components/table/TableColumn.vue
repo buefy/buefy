@@ -12,6 +12,7 @@
         name: 'BTableColumn',
         props: {
             label: String,
+            icon: String,
             customKey: [String, Number],
             field: String,
             meta: [String, Number, Boolean, Function, Object, Array, Symbol],
