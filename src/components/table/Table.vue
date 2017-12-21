@@ -43,7 +43,9 @@
                                     :column="column"
                                     :index="index"
                                 />
-                                <template v-else>{{ column.label }}</template>
+                                <template v-else>
+                                  <b-icon v-if="column.icon" :icon="column.icon"/> {{ column.label }}
+                                </template>
 
                                 <b-icon
                                     v-show="currentSortColumn === column"
