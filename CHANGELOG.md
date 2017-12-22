@@ -9,6 +9,10 @@
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
 * #487 Add ``icon-size`` prop to message
 
+### Fixes and changes
+
+* #493 Fix ``keep-first`` autocomplete prop with async data
+
 ## 0.6.2
 
 ### New features

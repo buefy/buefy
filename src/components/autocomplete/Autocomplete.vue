@@ -159,29 +159,12 @@
              * When updating input's value
              *   1. Emit changes
              *   2. If value isn't the same as selected, set null
-             *   3. Select first option if "keep-first"
-             *   4. Close dropdown if value is clear or else open it
+             *   3. Close dropdown if value is clear or else open it
              */
             newValue(value) {
                 this.$emit('input', value)
-
                 // Check if selected is invalid
                 if (this.getValue(this.selected) !== value) this.setSelected(null, false)
-
-                // Keep first option always pre-selected
-                if (this.keepFirst) {
-                    this.$nextTick(() => {
-                        if (this.visibleData.length) {
-                            // If has visible data, keep updating the hovered
-                            if (this.newValue !== '' && this.hovered !== this.visibleData[0]) {
-                                this.setHovered(this.visibleData[0])
-                            }
-                        } else {
-                            this.setHovered(null)
-                        }
-                    })
-                }
-
                 // Close dropdown if input is clear or else open it
                 this.isActive = !!value
             },
@@ -194,6 +177,25 @@
             value(value) {
                 this.newValue = value
                 !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+
+            /**
+             * Select first option if "keep-first
+             */
+            visibleData(value) {
+                // Keep first option always pre-selected
+                if (this.keepFirst) {
+                    this.$nextTick(() => {
+                        if (value.length) {
+                            // If has visible data, keep updating the hovered
+                            if (this.newValue !== '' && this.hovered !== value[0]) {
+                                this.setHovered(value[0])
+                            }
+                        } else {
+                            this.setHovered(null)
+                        }
+                    })
+                }
             }
         },
         methods: {
