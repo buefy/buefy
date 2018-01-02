@@ -12,6 +12,7 @@
 ### Fixes and changes
 
 * #493 Fix ``keep-first`` autocomplete prop with async data
+* #498 Fix horizontal field on mobile
 
 ## 0.6.2
 

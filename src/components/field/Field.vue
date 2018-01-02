@@ -101,7 +101,8 @@
                 if (
                     this.$slots.default !== undefined &&
                     this.$slots.default.length > 1 &&
-                    this.addons
+                    this.addons &&
+                    !this.horizontal
                 ) {
                     return 'has-addons'
                 }
