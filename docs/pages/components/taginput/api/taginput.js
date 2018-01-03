@@ -75,6 +75,18 @@ export default [
                 default: '—'
             }
         ],
+        slots: [
+            {
+                name: 'default',
+                description: '',
+                props: '<code>option: String|Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>empty</code>',
+                description: 'Show like an option if <code>data</code> array prop is empty',
+                props: '—'
+            }
+        ],
         events: [
             {
                 name: '<code>input</code>',
