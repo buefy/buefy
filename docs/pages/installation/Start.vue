@@ -84,6 +84,9 @@
             if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, go to
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
         </b-message>
+        <b-message type="is-warning">
+           Please note that Buefy doesn't include icon packs. You have to import it as you prefer (NPM, CDN, ...)
+        </b-message>
         <CodeView :code="materialIcons" expanded/>
     </div>
 </template>
