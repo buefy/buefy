@@ -28,6 +28,7 @@
                 Adding the <code>.sync</code> modifier will make it two-way binding — checked object array will mutate if user clicks on checkboxes.
             </p>
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
+            <p>You can disable a checkbox by adding the property <code>disabled: true</code> to the object row.</p>
         </Example>
 
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
