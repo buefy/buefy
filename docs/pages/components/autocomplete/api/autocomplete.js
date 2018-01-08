@@ -105,7 +105,7 @@ export default [
                 parameters: '<code>value: String|Number</code>'
             },
             {
-                name: '<code>selected</code>',
+                name: '<code>select</code>',
                 description: 'Triggers when an option is selected or unset',
                 parameters: '<code>option: String|Number|Object</code>'
             },
