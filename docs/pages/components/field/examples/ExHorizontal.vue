@@ -1,6 +1,6 @@
 <template>
     <section>
-        <b-field horizontal label="Subject">
+        <b-field horizontal label="Subject" type="is-danger" message="Please enter a subject">
             <b-input name="subject" expanded></b-input>
         </b-field>
 
