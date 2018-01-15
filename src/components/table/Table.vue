@@ -148,6 +148,7 @@
                         :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
+                        :size="paginationSize"
                         :current="newCurrentPage"
                         @change="pageChanged"/>
                 </div>
@@ -216,6 +217,10 @@
                 default: 20
             },
             paginationSimple: Boolean,
+            paginationSize: {
+                type: String,
+                default: ''
+            }
             backendSorting: Boolean,
             rowClass: {
                 type: Function,
