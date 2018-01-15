@@ -217,7 +217,10 @@
                 default: 20
             },
             paginationSimple: Boolean,
-            paginationSize: '',
+            paginationSize: {
+                type: String,
+                default: ''
+            }
             backendSorting: Boolean,
             rowClass: {
                 type: Function,
