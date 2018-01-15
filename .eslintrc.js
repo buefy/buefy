@@ -40,6 +40,7 @@ module.exports = {
         'allowFirstLine': false
       }
     }],
+    'vue/require-v-for-key': ['warn'],
     'vue/order-in-components': ['error', {
       order: [
         'el',
