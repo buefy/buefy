@@ -62,6 +62,10 @@
                 <span class="tag is-info">0.6.2</span>
             </div>
             <p>Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
+            <b-message type="is-info">
+                <b>Note:</b> Each child element of a <code>&lt;b-field horizontal/&gt;</code> will be 
+                automatically wrapped inside a <code>Field</code> component.
+            </b-message>
         </Example>
 
         <ApiView :data="api"/>

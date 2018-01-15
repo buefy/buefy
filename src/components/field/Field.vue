@@ -12,18 +12,21 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                class="label" >
+                class="label">
                 {{ label }}
             </label>
         </template>
-        <b-field-body v-if="horizontal">
+        <b-field-body
+            v-if="horizontal"
+            :message="newMessage ? formattedMessage : ''"
+            :type="newMessage ? newType : ''">
             <slot/>
         </b-field-body>
         <template v-else>
             <slot/>
         </template>
         <p
-            v-if="newMessage"
+            v-if="newMessage && !horizontal"
             v-html="formattedMessage"
             class="help"
             :class="newType"
