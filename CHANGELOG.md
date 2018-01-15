@@ -15,6 +15,7 @@
 
 * #493 Fix ``keep-first`` autocomplete prop with async data
 * #498 Fix horizontal field on mobile
+* #500 Fix message position for horizontal field (thanks @electrolinux)
 
 ## 0.6.2
 
