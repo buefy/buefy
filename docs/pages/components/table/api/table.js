@@ -136,6 +136,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>pagination-size</code>',
+                description: 'Pagination size (if <code>paginated</code>)',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
                 name: '<code>per-page</code>',
                 description: 'How many rows per page (if <code>paginated</code>)',
                 type: 'Number',
@@ -338,7 +345,7 @@ export default [
             {
                 name: '<code>custom-sort</code>',
                 description: 'Custom sort method, works when is <code>sortable</code>',
-                type: 'Function (a: Object, b: Object)',
+                type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
             }
