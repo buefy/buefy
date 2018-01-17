@@ -9,6 +9,7 @@
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
 * #487 Add ``icon-size`` prop to message
 * #492 Add isAsc parameter to ``custom-sort`` function of table (thanks @frantic1048)
+* #494 Add ``unselectable-times`` prop to timepicker
 * #525 Add ``pagination-size`` prop to table (thanks @nateleavitt)
 
 ### Fixes and changes

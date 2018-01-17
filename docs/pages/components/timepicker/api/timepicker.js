@@ -66,7 +66,7 @@ export default [
             },
             {
                 name: '<code>readonly</code>',
-                description: 'Does not allow to type a date, set to <code>false</code> to enable input. <b>Note that you might have to set a custom time parser</b>',
+                description: 'Does not allow to type a time, set to <code>false</code> to enable input. <b>Note that you might have to set a custom time parser</b>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -91,6 +91,13 @@ export default [
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>unselectable-times</code>',
+                description: 'Array of unselectable times (Date object)',
+                type: 'Array',
+                values: '—',
+                default: '-'
             },
             {
                 name: '<code>mobile-native</code>',

@@ -231,7 +231,8 @@
                     return config.defaultTimepickerMobileNative
                 }
             },
-            position: String
+            position: String,
+            unselectableTimes: Array
         },
         data() {
             return {
@@ -394,6 +395,22 @@
                         disabled = hour > maxHours
                     }
                 }
+                if (this.unselectableTimes) {
+                    if (!disabled) {
+                        if (this.minutesSelected !== null) {
+                            const unselectable = this.unselectableTimes.filter((time) => {
+                                return time.getHours() === hour &&
+                                    time.getMinutes() === this.minutesSelected
+                            })
+                            disabled = unselectable.length > 0
+                        } else {
+                            const unselectable = this.unselectableTimes.filter((time) => {
+                                return time.getHours() === hour
+                            })
+                            disabled = unselectable.length === this.minutes.length
+                        }
+                    }
+                }
                 return disabled
             },
 
@@ -414,6 +431,15 @@
                                 const minMinutes = this.maxTime.getMinutes()
                                 disabled = this.hoursSelected === maxHours && minute > minMinutes
                             }
+                        }
+                    }
+                    if (this.unselectableTimes) {
+                        if (!disabled) {
+                            const unselectable = this.unselectableTimes.filter((time) => {
+                                return time.getHours() === this.hoursSelected &&
+                                    time.getMinutes() === minute
+                            })
+                            disabled = unselectable.length > 0
                         }
                     }
                 }
