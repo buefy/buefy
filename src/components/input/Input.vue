@@ -38,6 +38,7 @@
             class="is-right"
             :class="{ 'is-clickable': passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
+            :pack="iconPack"
             :size="iconSize"
             :type="!passwordReveal ? statusType : 'is-primary'"
             both
