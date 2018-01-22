@@ -71,7 +71,8 @@ const router = new Router({
             redirect: '/extensions/cleavejs',
             component: Extensions,
             children: [
-                route('cleavejs', 'extensions/cleavejs/Cleavejs')
+                route('cleavejs', 'extensions/cleavejs/Cleavejs'),
+                route('sortablejs', 'extensions/sortablejs/Sortablejs')
             ]
         },
         // Global redirect

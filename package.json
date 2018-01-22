@@ -117,6 +117,7 @@
     "shelljs": "^0.7.6",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
+    "sortablejs": "^1.7.0",
     "sw-precache-webpack-plugin": "^0.9.1",
     "url-loader": "^0.5.8",
     "vue-analytics": "^4.1.3",

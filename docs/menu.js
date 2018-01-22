@@ -55,7 +55,8 @@ export default {
         {
             category: 'Extensions',
             pages: [
-                { name: 'Cleavejs (input format)', path: '/extensions/cleavejs', isNew: true }
+                { name: 'Cleavejs (input format)', path: '/extensions/cleavejs' },
+                { name: 'Sortablejs (table sort)', path: '/extensions/sortablejs', isNew: true }
             ]
         }
     ]
