@@ -148,7 +148,13 @@
             toggle() {
                 if (this.disabled || this.hoverable) return
 
-                this.isActive = !this.isActive
+                if (!this.isActive) {
+                    // if not active, toggle after clickOutside event
+                    // this fixes toggling programmatic
+                    this.$nextTick(() => { this.isActive = !this.isActive })
+                } else {
+                    this.isActive = !this.isActive
+                }
             }
         },
         created() {
