@@ -280,7 +280,8 @@
             */
             listOfYears() {
                 const latestYear = this.maxDate
-                ? this.maxDate.getFullYear() : new Date().getFullYear() + 3
+                ? this.maxDate.getFullYear()
+                    : (Math.max(new Date().getFullYear(), this.focusedDateData.year) + 3)
 
                 const earliestYear = this.minDate
                 ? this.minDate.getFullYear() : 1900
