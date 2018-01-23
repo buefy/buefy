@@ -105,6 +105,7 @@
                         </tr>
 
                         <!-- Do not add `key` here (breaks details) -->
+                        <!-- eslint-disable-next-line -->
                         <tr
                             v-if="detailed && isVisibleDetailRow(row)"
                             class="detail">
