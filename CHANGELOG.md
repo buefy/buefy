@@ -4,6 +4,7 @@
 
 ### New features
 
+* **New extension: Sortable.js**, [see here](https://buefy.github.io/#/extensions/sortablejs)
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
