@@ -12,6 +12,7 @@
 * #492 Add isAsc parameter to ``custom-sort`` function of table (thanks @frantic1048)
 * #494 Add ``unselectable-times`` prop to timepicker
 * #525 Add ``pagination-size`` prop to table (thanks @nateleavitt)
+* #531 Add ``confirm-key-codes`` prop to taginput
 
 ### Fixes and changes
 

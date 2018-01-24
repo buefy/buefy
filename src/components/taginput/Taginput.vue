@@ -90,7 +90,11 @@
                 default: 'value'
             },
             autocomplete: Boolean,
-            disabled: Boolean
+            disabled: Boolean,
+            confirmKeyCodes: {
+                type: Array,
+                default: () => [13, 188]
+            }
         },
         data() {
             return {
@@ -200,7 +204,7 @@
                 // Stop if is to accept select only
                 if (this.autocomplete) return
 
-                if (event.keyCode === 13 || event.keyCode === 188) {
+                if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
                     event.preventDefault()
                     this.addTag()
                 }

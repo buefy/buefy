@@ -68,6 +68,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>confirm-key-codes</code>',
+                description: 'Array of key codes which will add a tag when typing (default comma and enter)',
+                type: 'Array',
+                values: '—',
+                default: '<code>[13, 188]</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',
