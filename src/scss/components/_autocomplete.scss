@@ -8,6 +8,10 @@
             bottom: 100%;
         }
     }
+    .dropdown-content {
+        overflow: auto;
+        max-height: 200px;
+    }
     .dropdown-item {
         &.is-hovered {
             background: $dropdown-item-hover-background-color;

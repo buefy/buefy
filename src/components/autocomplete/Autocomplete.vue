@@ -82,7 +82,8 @@
                 type: [Number, String],
                 default: 6
             },
-            keepFirst: Boolean
+            keepFirst: Boolean,
+            showOnFocus: Boolean
         },
         data() {
             return {
@@ -102,7 +103,7 @@
              */
             whiteList() {
                 const whiteList = []
-                whiteList.push(this.$refs.input)
+                whiteList.push(this.$refs.input.$el.querySelector('input'))
                 whiteList.push(this.$refs.dropdown)
                 // Add all chidren from dropdown
                 if (this.$refs.dropdown !== undefined) {
@@ -166,7 +167,9 @@
                 // Check if selected is invalid
                 if (this.getValue(this.selected) !== value) this.setSelected(null, false)
                 // Close dropdown if input is clear or else open it
-                this.isActive = !!value
+                if (!this.showOnFocus || value) {
+                    this.isActive = !!value
+                }
             },
 
             /**
@@ -317,6 +320,7 @@
              */
             focused(event) {
                 if (this.getValue(this.selected) === this.newValue) this.focus()
+                if (this.showOnFocus) this.isActive = true
                 this.$emit('focus', event)
             }
         },

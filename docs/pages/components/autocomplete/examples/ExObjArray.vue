@@ -11,6 +11,7 @@
                 v-model="name"
                 placeholder="e.g. Anne"
                 :keep-first="keepFirst"
+                show-on-focus
                 :data="filteredDataObj"
                 field="user.first_name"
                 @select="option => selected = option">
