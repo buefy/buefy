@@ -14,7 +14,7 @@
 
         <Example :component="ExTypes" :code="ExTypesCode" title="Types">
             <p>If you want a more classic style with borders add the <code>is-boxed</code> type.</p>
-            <p>Or like Radio Buttons with the <code>is-toggle</code> type.</p>
+            <p>Or like Radio Buttons with the <code>is-toggle</code> or <code>is-toggle-rounded</code> type.</p>
         </Example>
 
         <Example :component="ExExpanded" :code="ExExpandedCode" title="Expanded">

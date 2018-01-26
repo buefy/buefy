@@ -1,5 +1,5 @@
 <template>
-    <div class="pagination" :class="[order, size, { 'is-simple': simple }]">
+    <div class="pagination" :class="rootClasses">
         <a
             role="button"
             href="#"
@@ -79,9 +79,21 @@
             },
             size: String,
             simple: Boolean,
+            rounded: Boolean,
             order: String
         },
         computed: {
+            rootClasses() {
+                return [
+                    this.order,
+                    this.size,
+                    {
+                        'is-simple': this.simple,
+                        'is-rounded': this.rounded
+                    }
+                ]
+            },
+
             /**
              * Total page size (count).
              */

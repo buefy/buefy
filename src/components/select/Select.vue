@@ -64,6 +64,7 @@
                     'is-fullwidth': this.expanded,
                     'is-loading': this.loading,
                     'is-multiple': this.multiple,
+                    'is-rounded': this.rounded,
                     'is-empty': this.selected === null
                 }]
             }

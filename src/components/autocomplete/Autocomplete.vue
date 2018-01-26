@@ -5,6 +5,7 @@
             ref="input"
             :size="size"
             :loading="loading"
+            :rounded="rounded"
             :icon="icon"
             :icon-pack="iconPack"
             :maxlength="maxlength"

@@ -16,6 +16,7 @@
                 :size="size"
                 :icon="icon"
                 :icon-pack="iconPack"
+                :rounded="rounded"
                 :loading="loading"
                 :disabled="disabled"
                 :readonly="readonly"

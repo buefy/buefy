@@ -3,6 +3,7 @@
         <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find a JS framework">
             <b-autocomplete
+                rounded
                 v-model="name"
                 :data="filteredDataArray"
                 placeholder="e.g. jQuery"

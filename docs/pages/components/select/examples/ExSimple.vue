@@ -47,6 +47,13 @@
             </b-select>
         </b-field>
 
+        <b-field label="Rounded">
+            <b-select placeholder="Select a character" rounded>
+                <option value="flint">Flint</option>
+                <option value="silver">Silver</option>
+            </b-select>
+        </b-field>
+
         <b-field label="Required">
             <b-select placeholder="Select a character" required>
                 <option value="flint">Flint</option>

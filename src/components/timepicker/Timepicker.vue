@@ -19,6 +19,7 @@
                 :loading="loading"
                 :disabled="disabled"
                 :readonly="readonly"
+                :rounded="rounded"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"

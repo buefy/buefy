@@ -25,6 +25,7 @@
         </b-field>
         <div class="block">
             <b-switch v-model="isSimple">Simple</b-switch>
+            <b-switch v-model="isRounded">Rounded</b-switch>
         </div>
 
         <hr>
@@ -34,6 +35,7 @@
             :order="order"
             :size="size"
             :simple="isSimple"
+            :rounded="isRounded"
             :per-page="perPage">
         </b-pagination>
     </section>
@@ -48,7 +50,8 @@
                 perPage: 20,
                 order: '',
                 size: '',
-                isSimple: false
+                isSimple: false,
+                isRounded: false
             }
         }
     }

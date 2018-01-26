@@ -1,6 +1,6 @@
 <template>
     <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
-        <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
+        <nav class="tabs" :class="navClasses">
             <ul>
                 <li
                     v-for="(tabItem, index) in tabItems"
@@ -48,6 +48,19 @@
                 tabItems: [],
                 contentHeight: 0,
                 _isTabs: true // Used internally by TabItem
+            }
+        },
+        computed: {
+            navClasses() {
+                return [
+                    this.type,
+                    this.size,
+                    this.position,
+                    {
+                        'is-fullwidth': this.expanded,
+                        'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
+                    }
+                ]
             }
         },
         watch: {
