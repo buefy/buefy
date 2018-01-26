@@ -5,6 +5,9 @@
 ### New features
 
 * **New extension: Sortable.js**, [see here](https://buefy.github.io/#/extensions/sortablejs)
+* **Update Bulma to 0.6.2**
+* Add ``rounded`` prop to Input, Select, Autocomplete, Datepicker and Timepicker, Pagination
+* Add "is-toggle-rounded" type to Tabs
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
@@ -19,6 +22,7 @@
 * #493 Fix ``keep-first`` autocomplete prop with async data
 * #498 Fix horizontal field on mobile
 * #500 Fix message position for horizontal field (thanks @electrolinux)
+* #543 Fix dropdown toggle programmatic
 
 ## 0.6.2
 
