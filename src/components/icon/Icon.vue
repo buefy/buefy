@@ -30,11 +30,17 @@
              * internal icons are always MDI.
              */
             newIcon() {
-                if (!this.both) return `${this.newPack}-${this.icon}`
+                if (!this.both) {
+                    if (this.newPack === 'mdi') {
+                        return `${this.newPack}-${this.icon}`
+                    } else {
+                        return `fa-${this.icon}`
+                    }
+                }
 
                 return this.newPack === 'mdi'
                     ? `${this.newPack}-${this.icon}`
-                    : `${this.newPack}-${this.getEquivalentIconOf(this.icon)}`
+                    : `fa-${this.getEquivalentIconOf(this.icon)}`
             },
             newType() {
                 if (!this.type) return

@@ -6,8 +6,9 @@
 
         <p class="content">
             Buefy is compatible with both <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>
-            and <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>. They adapt to most elements background automatically —
-            but you can also override their colors.
+            , <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a>
+            and <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a>.
+            They adapt to most elements background automatically — but you can also override their colors.
         </p>
 
         <Example :component="ExMdi" :code="ExMdiCode" title="Material Design Icons" vertical/>

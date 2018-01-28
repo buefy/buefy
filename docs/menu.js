@@ -36,7 +36,7 @@ export default {
                         { name: 'Upload', path: '/documentation/upload' }
                     ]
                 },
-                { name: 'Icon', path: '/documentation/icon' },
+                { name: 'Icon', path: '/documentation/icon', isUpdated: true },
                 { name: 'Loading', path: '/documentation/loading' },
                 { name: 'Message', path: '/documentation/message' },
                 { name: 'Modal', path: '/documentation/modal' },

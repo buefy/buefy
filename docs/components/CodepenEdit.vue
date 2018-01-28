@@ -69,8 +69,8 @@
                 html = html.replace(/src="static/g, 'src="https://buefy.github.io/static')
 
                 // FontAwesome
-                if (this.code.indexOf('pack="fa"')) {
-                    this.externalStyles.push('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+                if (this.code.indexOf('pack="fas"') || this.code.indexOf('pack="far"') || this.code.indexOf('pack="fad"')) {
+                    this.externalStyles.push('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
                 }
 
                 return this.$options.filters.pre(`
