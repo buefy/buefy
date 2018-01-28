@@ -1,6 +1,6 @@
 <template>
     <div class="default-container">
-        <h1 class="title is-spaced">Sortable.js </h1>
+        <h1 class="title is-spaced">Sortable</h1>
         <h2 class="subtitle">Sort a table — as a Vue directive</h2>
         <div class="buttons">
             <a
@@ -19,8 +19,8 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical>
             <b-message type="is-info">
-                <p><strong>Sortale.js is not included in Buefy</strong>, you have to install it:</p>
-                <CodeView code="npm install sortable.js" expanded/>
+                <p><strong>Sortale is not included in Buefy</strong>, you have to install it:</p>
+                <CodeView code="npm install sortablejs" expanded/>
             </b-message>
         </Example>
     </div>
