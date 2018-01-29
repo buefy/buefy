@@ -22,7 +22,9 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('docs')
+      '@': resolve('docs'),
+      '@components': resolve('src/components'),
+      '@utils': resolve('src/utils')
     }
   },
   module: {
@@ -31,7 +33,7 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src'), resolve('docs'), resolve('test')],
+        include: [resolve('src'), resolve('docs')],
         options: {
           formatter: require('eslint-friendly-formatter')
         }
@@ -44,7 +46,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('docs'), resolve('test')]
+        include: [resolve('src'), resolve('docs')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
