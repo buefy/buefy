@@ -129,10 +129,15 @@
                 if (start < 0 || end < 0) return
 
                 return this.code.substring(start + match[0].length, end)
+            },
+            hasContent(startTag, endTag) {
+                const start = this.code.indexOf(startTag)
+                const end = this.code.lastIndexOf(endTag)
+                return !(start < 0 || end < 0)
             }
         },
         mounted() {
-            this.hasHtml = !!this.getHtml()
+            this.hasHtml = this.hasContent('<template>', '</template>')
         }
     }
 </script>
