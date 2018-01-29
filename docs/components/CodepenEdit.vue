@@ -109,6 +109,12 @@
                         js = js.replace('import Cleave from \'cleave.js\'', '')
                         this.externalScripts.push('https://unpkg.com/cleave.js/dist/cleave.min.js')
                     }
+
+                    // Sortable
+                    if (this.code.indexOf('sortablejs')) {
+                        js = js.replace('import Sortable from \'sortablejs\'', '')
+                        this.externalScripts.push('https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js')
+                    }
                 }
 
                 return this.$options.filters.pre(`
