@@ -94,7 +94,8 @@
             confirmKeyCodes: {
                 type: Array,
                 default: () => [13, 188]
-            }
+            },
+            allowNew: Boolean
         },
         data() {
             return {
@@ -202,7 +203,7 @@
 
             keydown(event) {
                 // Stop if is to accept select only
-                if (this.autocomplete) return
+                if (this.autocomplete && !this.allowNew) return
 
                 if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
                     event.preventDefault()

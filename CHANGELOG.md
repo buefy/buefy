@@ -12,6 +12,7 @@
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
 * #222 Add ``open-on-focus`` prop to autocomplete (good to simulate a <select> element)
+* #482 Add ``allow-new`` prop to taginput
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
 * #487 Add ``icon-size`` prop to message
 * #492 Add isAsc parameter to ``custom-sort`` function of table (thanks @frantic1048)
