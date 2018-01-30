@@ -171,16 +171,7 @@
             data(value) {
                 // Keep first option always pre-selected
                 if (this.keepFirst) {
-                    this.$nextTick(() => {
-                        if (value.length) {
-                            // If has visible data, keep updating the hovered
-                            if (this.newValue !== '' && this.hovered !== value[0]) {
-                                this.setHovered(value[0])
-                            }
-                        } else {
-                            this.setHovered(null)
-                        }
-                    })
+                    this.selectFirstOption(value)
                 }
             }
         },
@@ -207,6 +198,22 @@
                     this.newValue = this.getValue(this.selected)
                 }
                 closeDropdown && this.$nextTick(() => { this.isActive = false })
+            },
+
+            /**
+             * Select first option
+             */
+            selectFirstOption(options) {
+                this.$nextTick(() => {
+                    if (options.length) {
+                        // If has visible data or open on focus, keep updating the hovered
+                        if (this.openOnFocus || (this.newValue !== '' && this.hovered !== options[0])) {
+                            this.setHovered(options[0])
+                        }
+                    } else {
+                        this.setHovered(null)
+                    }
+                })
             },
 
             /**
@@ -323,7 +330,12 @@
                 if (this.getValue(this.selected) === this.newValue) {
                     this.$el.querySelector('input').select()
                 }
-                if (this.openOnFocus) this.isActive = true
+                if (this.openOnFocus) {
+                    this.isActive = true
+                    if (this.keepFirst) {
+                        this.selectFirstOption(this.data)
+                    }
+                }
                 this.$emit('focus', event)
             }
         },
