@@ -11,6 +11,7 @@
 * Add "is-toggle-rounded" type to Tabs
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
+* #222 Add ``open-on-focus`` prop to autocomplete (good to simulate a <select> element)
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
 * #487 Add ``icon-size`` prop to message
 * #492 Add isAsc parameter to ``custom-sort`` function of table (thanks @frantic1048)
@@ -20,6 +21,7 @@
 
 ### Fixes and changes
 
+* Remove ``max-results`` prop from autocomplete, it now has a scrollbar with all results
 * #493 Fix ``keep-first`` autocomplete prop with async data
 * #498 Fix horizontal field on mobile
 * #500 Fix message position for horizontal field (thanks @electrolinux)
