@@ -31,7 +31,7 @@ export default {
                         { name: 'Radio', path: '/documentation/radio' },
                         { name: 'Select', path: '/documentation/select', isUpdated: true },
                         { name: 'Switch', path: '/documentation/switch' },
-                        { name: 'Taginput', path: '/documentation/taginput' },
+                        { name: 'Taginput', path: '/documentation/taginput', isUpdated: true },
                         { name: 'Timepicker', path: '/documentation/timepicker', isUpdated: true },
                         { name: 'Upload', path: '/documentation/upload' }
                     ]
@@ -43,7 +43,7 @@ export default {
                 { name: 'Notification', path: '/documentation/notification' },
                 { name: 'Pagination', path: '/documentation/pagination', isUpdated: true },
                 { name: 'Snackbar', path: '/documentation/snackbar' },
-                { name: 'Table', path: '/documentation/table' },
+                { name: 'Table', path: '/documentation/table', isUpdated: true },
                 { name: 'Tabs', path: '/documentation/tabs', isUpdated: true },
                 { name: 'Tag', path: '/documentation/tag' },
                 { name: 'Toast', path: '/documentation/toast' },
