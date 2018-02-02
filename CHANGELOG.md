@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.6.4
+
+### Fixes and changes
+
+* #576 Fix upload check file type
+
 ## 0.6.3
 
 ### New features

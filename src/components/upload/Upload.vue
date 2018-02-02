@@ -130,7 +130,14 @@
              * Check mime type of file
              */
             checkType(file) {
-                return !this.accept || (this.accept && file.type.match(this.accept))
+                if (!this.accept) return false
+                const types = this.accept.split(',')
+                for (let i = 0; i < types.length; i++) {
+                    if (file.type.match(types[i].trim())) {
+                        return true
+                    }
+                }
+                return false
             }
         }
     }
