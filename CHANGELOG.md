@@ -6,6 +6,7 @@
 
 * **New extension: Sortable.js**, [see here](https://buefy.github.io/#/extensions/sortablejs)
 * **Update Bulma to 0.6.2**
+* **Add Font Awesome 5 support** (http://fontawesome.com/)
 * Add ``rounded`` prop to Input, Select, Autocomplete, Datepicker and Timepicker, Pagination
 * Add "is-toggle-rounded" type to Tabs
 * Add ``open`` prop to collapse ``trigger`` slot

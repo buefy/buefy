@@ -21,7 +21,7 @@
                 api,
                 usage: `
                 Vue.use(Buefy, {
-                    defaultIconPack: 'fa',
+                    defaultIconPack: 'fas',
                     defaultContainerElement: '#content',
                     // ...
                 })`

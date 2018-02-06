@@ -36,7 +36,7 @@ export default {
                         { name: 'Upload', path: '/documentation/upload' }
                     ]
                 },
-                { name: 'Icon', path: '/documentation/icon' },
+                { name: 'Icon', path: '/documentation/icon', isUpdated: true },
                 { name: 'Loading', path: '/documentation/loading' },
                 { name: 'Message', path: '/documentation/message' },
                 { name: 'Modal', path: '/documentation/modal' },
@@ -56,7 +56,7 @@ export default {
             category: 'Extensions',
             pages: [
                 { name: 'Cleavejs (input format)', path: '/extensions/cleavejs' },
-                { name: 'Sortablejs (table sort)', path: '/extensions/sortablejs', isNew: true }
+                { name: 'Sortable (table sort)', path: '/extensions/sortablejs', isNew: true }
             ]
         }
     ]

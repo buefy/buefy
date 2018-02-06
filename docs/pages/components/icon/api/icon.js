@@ -15,7 +15,7 @@ export default [
                 name: '<code>pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
-                values: '<code>mdi</code>, <code>fa</code>',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>',
                 default: '<code>mdi</code>'
             },
             {
@@ -44,8 +44,9 @@ export default [
             {
                 name: '<code>custom-class</code>',
                 description: `Add class to icon font (<code>&lt;i&gt;</code> tag), optional.
-                    See <a href="https://materialdesignicons.com/getting-started" target="_blank">here for MDI</a> and
-                    <a href="http://fontawesome.io/examples/" target="_blank">here for FontAwesome</a> custom classes`,
+                    See <a href="https://materialdesignicons.com/getting-started" target="_blank">here for MDI</a>,
+                    <a href="http://fontawesome.io/examples/" target="_blank">here for FontAwesome 4</a> and
+                    <a href="https://fontawesome.com/how-to-use/web-fonts-with-css#additional-styling" target="_blank">here for FontAwesome 5</a> custom classes`,
                 type: 'String',
                 values: '—',
                 default: '—'

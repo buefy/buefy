@@ -57,7 +57,7 @@
                 </b-table-column>
 
                 <b-table-column label="Gender">
-                    <b-icon pack="fa"
+                    <b-icon pack="fas"
                         :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
                     </b-icon>
                     {{ props.row.gender }}

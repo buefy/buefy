@@ -23,6 +23,7 @@
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
+        name: 'BSnackbar',
         mixins: [NoticeMixin],
         props: {
             actionText: {
