@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.6.4
+
+### Fixes and changes
+
+* #576 Fix upload check file type
+
 ## 0.6.3
 
 ### New features
@@ -7,10 +13,13 @@
 * **New extension: Sortable.js**, [see here](https://buefy.github.io/#/extensions/sortablejs)
 * **Update Bulma to 0.6.2**
 * **Add Font Awesome 5 support** (http://fontawesome.com/)
+* Add ``columns`` prop to table, you can now pass an array instead of adding scoped slots (for simple tables)
 * Add ``rounded`` prop to Input, Select, Autocomplete, Datepicker and Timepicker, Pagination
 * Add "is-toggle-rounded" type to Tabs
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
+* #222 Add ``open-on-focus`` prop to autocomplete (good to simulate a select element)
+* #482 Add ``allow-new`` prop to taginput
 * #483 Add ``unselectable-days-of-week`` prop to datepicker
 * #487 Add ``icon-size`` prop to message
 * #492 Add isAsc parameter to ``custom-sort`` function of table (thanks @frantic1048)
@@ -20,6 +29,7 @@
 
 ### Fixes and changes
 
+* Remove ``max-results`` prop from autocomplete, it now has a scrollbar with all results
 * #493 Fix ``keep-first`` autocomplete prop with async data
 * #498 Fix horizontal field on mobile
 * #500 Fix message position for horizontal field (thanks @electrolinux)

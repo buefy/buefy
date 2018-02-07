@@ -68,6 +68,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>allow-new</code>',
+                description: 'When <code>autocomplete</code>, it allow to add new tags',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>confirm-key-codes</code>',
                 description: 'Array of key codes which will add a tag when typing (default comma and enter)',
                 type: 'Array',

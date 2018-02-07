@@ -1,6 +1,9 @@
 <template>
     <section>
-        <div class="field">
+        <div class="block">
+            <b-switch v-model="openOnFocus">
+                Open dropdown on focus
+            </b-switch>
             <b-switch v-model="keepFirst">
                 Keep-first <small>(will always have first option pre-selected)</small>
             </b-switch>
@@ -11,7 +14,7 @@
                 v-model="name"
                 placeholder="e.g. Anne"
                 :keep-first="keepFirst"
-                show-on-focus
+                :open-on-focus="openOnFocus"
                 :data="filteredDataObj"
                 field="user.first_name"
                 @select="option => selected = option">
@@ -28,6 +31,7 @@
             return {
                 data,
                 keepFirst: false,
+                openOnFocus: false,
                 name: '',
                 selected: null
             }

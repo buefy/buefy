@@ -109,6 +109,12 @@
                         js = js.replace('import Cleave from \'cleave.js\'', '')
                         this.externalScripts.push('https://unpkg.com/cleave.js/dist/cleave.min.js')
                     }
+
+                    // Sortable
+                    if (this.code.indexOf('sortablejs')) {
+                        js = js.replace('import Sortable from \'sortablejs\'', '')
+                        this.externalScripts.push('https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js')
+                    }
                 }
 
                 return this.$options.filters.pre(`
@@ -129,10 +135,15 @@
                 if (start < 0 || end < 0) return
 
                 return this.code.substring(start + match[0].length, end)
+            },
+            hasContent(startTag, endTag) {
+                const start = this.code.indexOf(startTag)
+                const end = this.code.lastIndexOf(endTag)
+                return !(start < 0 || end < 0)
             }
         },
         mounted() {
-            this.hasHtml = !!this.getHtml()
+            this.hasHtml = this.hasContent('<template>', '</template>')
         }
     }
 </script>
