@@ -6,7 +6,7 @@
                     v-for="(tabItem, index) in tabItems"
                     :key="index"
                     v-show="tabItem.visible"
-                    :class="{ 'is-active': newValue === index, 'is-disabled': tabItem.disabled }">
+                    :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
                     <a @click="tabClick(index)">
                         <b-icon
                             v-if="tabItem.icon"
@@ -45,7 +45,7 @@
         },
         data() {
             return {
-                newValue: this.value || 0,
+                activeTab: this.value || 0,
                 tabItems: [],
                 contentHeight: 0,
                 _isTabs: true // Used internally by TabItem
@@ -69,8 +69,8 @@
              * When v-model is changed set the new active tab.
              */
             value(value) {
-                this.changeTab(this.newValue, value)
-                this.newValue = value
+                this.changeTab(this.activeTab, value)
+                this.activeTab = value
             },
 
             /**
@@ -78,7 +78,7 @@
              */
             tabItems() {
                 if (this.tabItems.length) {
-                    this.tabItems[this.newValue].isActive = true
+                    this.tabItems[this.activeTab].isActive = true
                 }
             }
         },
@@ -99,13 +99,13 @@
             tabClick(value) {
                 this.$emit('input', value)
                 this.$emit('change', value)
-                this.changeTab(this.newValue, value)
-                this.newValue = value
+                this.changeTab(this.activeTab, value)
+                this.activeTab = value
             }
         },
         mounted() {
             if (this.tabItems.length) {
-                this.tabItems[this.newValue].isActive = true
+                this.tabItems[this.activeTab].isActive = true
             }
         }
     }
