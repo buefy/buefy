@@ -82,7 +82,7 @@
         },
         methods: {
             /**
-             * Change the active tab.
+             * Change the active tab and emit change event.
              */
             changeTab(newIndex) {
                 if (this.activeTab === newIndex) return
@@ -90,14 +90,14 @@
                 this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
                 this.tabItems[newIndex].activate(this.activeTab, newIndex)
                 this.activeTab = newIndex
+                this.$emit('change', newIndex)
             },
 
             /**
-             * Tab click listener, emit events and set new active tab.
+             * Tab click listener, emit input event and change active tab.
              */
             tabClick(value) {
                 this.$emit('input', value)
-                this.$emit('change', value)
                 this.changeTab(value)
             }
         },
