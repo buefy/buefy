@@ -471,7 +471,7 @@
             isRowChecked(row) {
                 return indexOf(this.checkedRows, row, this.customIsChecked) >= 0
             },
-            
+
             /**
              * Remove a checked row from the array.
              */
