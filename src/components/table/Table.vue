@@ -295,7 +295,7 @@
              */
             isAllChecked() {
                 const validVisibleData = this.visibleData.filter(
-                        (row) => this.isRowCheckable(row) !== true)
+                        (row) => this.isRowCheckable(row))
                 const isAllChecked = validVisibleData.some((currentVisibleRow) => {
                     return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
