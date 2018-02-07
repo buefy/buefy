@@ -160,7 +160,6 @@
 </template>
 
 <script>
-/* eslint-disable */
     import { getValueByPath, indexOf } from '../../utils/helpers'
     import { Checkbox as BCheckbox } from '../checkbox'
     import BPagination from '../pagination'
