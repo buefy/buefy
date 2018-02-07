@@ -160,6 +160,7 @@
 </template>
 
 <script>
+/* eslint-disable */
     import { getValueByPath, indexOf } from '../../utils/helpers'
     import { Checkbox as BCheckbox } from '../checkbox'
     import BPagination from '../pagination'
@@ -295,7 +296,7 @@
              */
             isAllChecked() {
                 const validVisibleData = this.visibleData.filter(
-                        (row) => this.isRowCheckable(row) !== true)
+                        (row) => this.isRowCheckable(row) == true)
                 const isAllChecked = validVisibleData.some((currentVisibleRow) => {
                     return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
@@ -491,7 +492,7 @@
                 this.visibleData.forEach((currentRow) => {
                     this.removeCheckedRow(currentRow)
                     if (!isAllChecked) {
-                        if (!this.isRowCheckable(currentRow)) {
+                        if (this.isRowCheckable(currentRow)) {
                             this.newCheckedRows.push(currentRow)
                         }
                     }
