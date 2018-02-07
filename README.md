@@ -1,13 +1,16 @@
-# Buefy
+<p align="center">
+    <a href="https://buefy.github.io">
+        <img src="https://github.com/rafaelpimpa/buefy/blob/dev/static/img/buefy-banner.png" />
+    </a>
+    <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/v/buefy.svg" /></a>
+    <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
+    <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/l/buefy.svg" /></a>
+    <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" />
+    </a>
+    <a href="http://buefy.github.io"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
+</p>
 
-[![npm](https://img.shields.io/npm/v/buefy.svg)]()
-[![npm](https://img.shields.io/npm/dt/buefy.svg)]()
-[![npm](https://img.shields.io/npm/l/buefy.svg)]()
-[![chat](https://img.shields.io/badge/chat-on%20discord-7289DA.svg)](https://discordapp.com/invite/ZkdFJMr)
-
-Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
-
-[![Buefy](https://github.com/rafaelpimpa/buefy/blob/dev/static/img/buefy-banner.png)](https://buefy.github.io)
+> Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
 ## Features
 
