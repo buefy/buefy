@@ -2,6 +2,10 @@
 
 ## 0.6.4
 
+### New features
+
+* #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
+
 ### Fixes and changes
 
 * #576 Fix upload check file type

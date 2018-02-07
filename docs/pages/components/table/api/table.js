@@ -185,7 +185,7 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>isRowCheckable</code>',
+                name: '<code>is-row-checkable</code>',
                 description: 'Custom method to verify if a row is disabled, works when is <code>checkable</code>. ',
                 type: 'Function (row)',
                 values: '—',
