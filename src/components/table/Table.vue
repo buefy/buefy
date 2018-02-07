@@ -491,7 +491,7 @@
                 this.visibleData.forEach((currentRow) => {
                     this.removeCheckedRow(currentRow)
                     if (!isAllChecked) {
-                        if (!this.isRowCheckable(currentRow)) {
+                        if (this.isRowCheckable(currentRow)) {
                             this.newCheckedRows.push(currentRow)
                         }
                     }
