@@ -69,8 +69,7 @@
              * When v-model is changed set the new active tab.
              */
             value(value) {
-                this.changeTab(this.activeTab, value)
-                this.activeTab = value
+                this.changeTab(value)
             },
 
             /**
@@ -86,11 +85,12 @@
             /**
              * Change the active tab.
              */
-            changeTab(oldIndex, newIndex) {
-                if (oldIndex === newIndex) return
+            changeTab(newIndex) {
+                if (this.activeTab === newIndex) return
 
-                this.tabItems[oldIndex].deactivate(oldIndex, newIndex)
-                this.tabItems[newIndex].activate(oldIndex, newIndex)
+                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                this.tabItems[newIndex].activate(this.activeTab, newIndex)
+                this.activeTab = newIndex
             },
 
             /**
@@ -99,8 +99,7 @@
             tabClick(value) {
                 this.$emit('input', value)
                 this.$emit('change', value)
-                this.changeTab(this.activeTab, value)
-                this.activeTab = value
+                this.changeTab(value)
             }
         },
         mounted() {
