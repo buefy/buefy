@@ -9,6 +9,7 @@
 ### Fixes and changes
 
 * #576 Fix upload check file type
+* #586 Fix dropdown change event
 * #593 Fix timepicker update only time of Date object
 
 ## 0.6.3

@@ -81,7 +81,7 @@
              * When v-model is changed set the new selected item.
              */
             value(value) {
-                this.selectItem(value)
+                this.selected = value
             },
 
             /**
