@@ -4,6 +4,7 @@
 
 ### New features
 
+* **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
 * #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
 
 ### Fixes and changes
