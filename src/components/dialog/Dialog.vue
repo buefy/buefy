@@ -168,8 +168,6 @@
              */
             close() {
                 this.isActive = false
-                this.onCancel.apply(null, arguments)
-
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()

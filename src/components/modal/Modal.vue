@@ -125,11 +125,12 @@
             },
 
             /**
-             * Close the Modal if canCancel.
+             * Close the Modal if canCancel and call the onCancel prop (function).
              */
             cancel(method) {
                 if (this.cancelOptions.indexOf(method) < 0) return
 
+                this.onCancel.apply(null, arguments)
                 this.close()
             },
 
@@ -138,7 +139,6 @@
              * Emit events, and destroy modal if it's programmatic.
              */
             close() {
-                this.onCancel.apply(null, arguments)
                 this.$emit('close')
                 this.$emit('update:active', false)
 

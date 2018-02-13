@@ -12,6 +12,7 @@
 * #576 Fix upload check file type
 * #586 Fix dropdown change event
 * #593 Fix timepicker update only time of Date object
+* #599 Fix ``on-cancel`` prop to dialog, get called when clicking confirm
 
 ## 0.6.3
 
