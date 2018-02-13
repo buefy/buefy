@@ -18,6 +18,7 @@
                 <slot v-else/>
             </div>
             <button
+                type="button"
                 v-if="showX"
                 class="modal-close is-large"
                 @click="cancel('x')"/>
