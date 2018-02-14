@@ -6,9 +6,11 @@
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "license": "MIT",
   "main": "lib/index.js",
+  "typings": "types/index.d.ts",
   "files": [
     "lib",
-    "src"
+    "src",
+    "types/*.d.ts"
   ],
   "repository": {
     "type": "git",
