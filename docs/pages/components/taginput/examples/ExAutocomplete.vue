@@ -5,6 +5,11 @@
                 Allow new tags
             </b-switch>
         </div>
+        <div class="block">
+            <b-switch v-model="removeOnBackspace">
+                Allow remove on backspace
+            </b-switch>
+        </div>
         <b-field label="Enter some tags">
             <b-taginput
                 v-model="tags"
@@ -14,6 +19,7 @@
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"
+                :removeOnBackspace="removeOnBackspace"
                 @typing="getFilteredTags">
             </b-taginput>
         </b-field>
@@ -30,7 +36,8 @@
                 filteredTags: data,
                 isSelectOnly: false,
                 tags: [],
-                allowNew: false
+                allowNew: false,
+                removeOnBackspace: false,
             }
         },
         methods: {
