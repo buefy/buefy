@@ -148,7 +148,10 @@
             newValue(value) {
                 this.$emit('input', value)
                 // Check if selected is invalid
-                if (this.getValue(this.selected) !== value) this.setSelected(null, false)
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue !== value) {
+                    this.setSelected(null, false)
+                }
                 // Close dropdown if input is clear or else open it
                 if (!this.openOnFocus || value) {
                     this.isActive = !!value
