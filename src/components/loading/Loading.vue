@@ -18,6 +18,7 @@
         props: {
             active: Boolean,
             programmatic: Boolean,
+            container: HTMLElement,
             isFullPage: {
                 type: Boolean,
                 default: true
@@ -87,7 +88,14 @@
         beforeMount() {
             // Insert the Loading component in body tag
             // only if it's programmatic
-            this.programmatic && document.body.appendChild(this.$el)
+            if (this.programmatic) {
+                if (!this.container) {
+                    document.body.appendChild(this.$el)
+                } else {
+                    this.isFullPage = false
+                    this.container.appendChild(this.$el)
+                }
+            }
         },
         mounted() {
             if (this.programmatic) this.isActive = true
