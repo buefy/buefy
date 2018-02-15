@@ -1,6 +1,9 @@
 <template>
     <transition :name="animation">
-        <div class="loading-overlay is-active" v-if="isActive">
+        <div
+            class="loading-overlay is-active"
+            :class="{ 'is-full-page': isFullPage }"
+            v-if="isActive">
             <div class="loading-background" @click="cancel"/>
             <div class="loading-icon"/>
         </div>
@@ -15,6 +18,10 @@
         props: {
             active: Boolean,
             programmatic: Boolean,
+            isFullPage: {
+                type: Boolean,
+                default: true
+            },
             animation: {
                 type: String,
                 default: 'fade'
