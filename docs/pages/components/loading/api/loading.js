@@ -16,6 +16,13 @@ export default [
                 default: '<code>fade</code>'
             },
             {
+                name: '<code>is-full-page</code>',
+                description: 'Loader will overlay the full page',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>canCancel</code>',
                 description: `Can close Loading by pressing escape or clicking outside`,
                 type: 'Boolean',
