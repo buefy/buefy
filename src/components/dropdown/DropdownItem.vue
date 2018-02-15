@@ -4,13 +4,15 @@
         v-else-if="!custom && !hasLink"
         class="dropdown-item"
         :class="anchorClasses"
-        @click="selectItem">
+        @click="selectItem"
+        role="menuitem">
         <slot/>
     </a>
     <div
         v-else
         :class="itemClasses"
-        @click="selectItem">
+        @click="selectItem"
+        :aria-hidden="value != null ? 'false' : 'true'">
         <slot/>
     </div>
 </template>

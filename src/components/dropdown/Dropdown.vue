@@ -1,11 +1,15 @@
 <template>
-    <div class="dropdown" :class="rootClasses">
+    <div
+        class="dropdown"
+        :class="rootClasses">
         <div
             v-if="!inline"
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle">
+            @click="toggle"
+            aria-haspopup="true"
+            :aria-expanded="isActive ? 'true' : 'false'">
             <slot name="trigger"/>
         </div>
 
@@ -14,13 +18,16 @@
                 v-if="isMobileModal"
                 v-show="isActive"
                 class="background"
+                role="menu"
             />
         </transition>
         <transition name="fade">
             <div
                 v-show="isActive || hoverable || inline"
                 ref="dropdownMenu"
-                class="dropdown-menu">
+                class="dropdown-menu"
+                role="menu"
+                :aria-hidden="isActive ? 'false' : 'true'">
                 <div class="dropdown-content">
                     <slot/>
                 </div>
