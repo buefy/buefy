@@ -32,7 +32,17 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
-      # run tests!
+      # run tests
       - run:
           name: Tests
-          command: npm test
+          command: npm run unit
+
+      # run codecov
+      - run:
+          name: Coverage
+          command: ./node_modules/.bin/codecov
+
+      # run lint
+      - run:
+          name: Code Style
+          command: npm run lint
