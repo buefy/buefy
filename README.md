@@ -91,7 +91,7 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 
 ## Current roadmap
 
-https://github.com/rafaelpimpa/buefy/issues/458
+https://github.com/buefy/buefy/issues/458
 
 ## Stay in touch
 
