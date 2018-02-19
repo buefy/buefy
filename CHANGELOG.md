@@ -7,6 +7,7 @@
 * **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
 * #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
 * #609 Add ``is-full-page`` prop to loading, to limit it to its container (thanks @adrlen)
+* #610 Add ``visible`` prop to tabItem
 
 ### Fixes and changes
 
