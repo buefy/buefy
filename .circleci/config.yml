@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:8.9-browsers
 
     working_directory: ~/repo
 
@@ -34,15 +34,15 @@ jobs:
         
       # run tests
       - run:
-          name: Tests
+          name: Run tests
           command: npm run unit
 
       # run codecov
       - run:
-          name: Coverage
+          name: Run coverage
           command: ./node_modules/.bin/codecov
 
       # run lint
       - run:
-          name: Code Style
+          name: Run lint
           command: npm run lint
