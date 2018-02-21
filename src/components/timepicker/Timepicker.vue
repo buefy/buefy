@@ -152,9 +152,14 @@
                 isNaN(minutes) || minutes < 0 || minutes > 59) {
                 return null
             }
-            const d = new Date()
-            d.setMilliseconds(0)
-            d.setSeconds(0)
+            let d = null
+            if (vm.dateSelected && !isNaN(vm.dateSelected)) {
+                d = new Date(vm.dateSelected)
+            } else {
+                d = new Date()
+                d.setMilliseconds(0)
+                d.setSeconds(0)
+            }
             d.setMinutes(minutes)
             if (vm.hourFormat === HOUR_FORMAT_12) {
                 if (am && hours === 12) {
@@ -364,9 +369,13 @@
             updateDateSelected(hours, minutes, meridiens) {
                 if (hours != null && minutes != null &&
                     ((!this.isHourFormat24 && meridiens !== null) || this.isHourFormat24)) {
-                    this.dateSelected = new Date()
-                    this.dateSelected.setMilliseconds(0)
-                    this.dateSelected.setSeconds(0)
+                    if (this.dateSelected && !isNaN(this.dateSelected)) {
+                        this.dateSelected = new Date(this.dateSelected)
+                    } else {
+                        this.dateSelected = new Date()
+                        this.dateSelected.setMilliseconds(0)
+                        this.dateSelected.setSeconds(0)
+                    }
                     this.dateSelected.setHours(hours)
                     this.dateSelected.setMinutes(minutes)
                 }
@@ -502,8 +511,16 @@
             onChangeNativePicker(event) {
                 const date = event.target.value
                 if (date) {
-                    const dateString = new Date().toLocaleDateString() + ' ' + date
-                    this.dateSelected = new Date(Date.parse(dateString))
+                    if (this.dateSelected && !isNaN(this.dateSelected)) {
+                        this.dateSelected = new Date(this.dateSelected)
+                    } else {
+                        this.dateSelected = new Date()
+                        this.dateSelected.setMilliseconds(0)
+                        this.dateSelected.setSeconds(0)
+                    }
+                    const time = date.split(':')
+                    this.dateSelected.setHours(parseInt(time[0], 10))
+                    this.dateSelected.setMinutes(parseInt(time[1], 10))
                 } else {
                     this.dateSelected = null
                 }

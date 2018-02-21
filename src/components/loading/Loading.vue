@@ -1,6 +1,9 @@
 <template>
     <transition :name="animation">
-        <div class="loading-overlay is-active" v-if="isActive">
+        <div
+            class="loading-overlay is-active"
+            :class="{ 'is-full-page': isFullPage }"
+            v-if="isActive">
             <div class="loading-background" @click="cancel"/>
             <div class="loading-icon"/>
         </div>
@@ -15,6 +18,11 @@
         props: {
             active: Boolean,
             programmatic: Boolean,
+            container: HTMLElement,
+            isFullPage: {
+                type: Boolean,
+                default: true
+            },
             animation: {
                 type: String,
                 default: 'fade'
@@ -80,7 +88,14 @@
         beforeMount() {
             // Insert the Loading component in body tag
             // only if it's programmatic
-            this.programmatic && document.body.appendChild(this.$el)
+            if (this.programmatic) {
+                if (!this.container) {
+                    document.body.appendChild(this.$el)
+                } else {
+                    this.isFullPage = false
+                    this.container.appendChild(this.$el)
+                }
+            }
         },
         mounted() {
             if (this.programmatic) this.isActive = true

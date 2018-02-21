@@ -32,32 +32,20 @@
                 default: 'is-primary'
             }
         },
-        data() {
-            return {
-                newValue: this.value
-            }
-        },
         computed: {
+            newValue: {
+                get() {
+                    return this.value
+                },
+                set(value) {
+                    this.$emit('input', value)
+                }
+            },
             checked() {
                 if (Array.isArray(this.newValue)) {
                     return this.newValue.indexOf(this.nativeValue) >= 0
                 }
                 return this.newValue === this.nativeValue
-            }
-        },
-        watch: {
-            /**
-             * When v-model change, set internal value.
-             */
-            value(value) {
-                this.newValue = value
-            },
-
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                this.$emit('input', value)
             }
         }
     }

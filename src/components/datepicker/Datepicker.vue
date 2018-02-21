@@ -339,6 +339,16 @@
                 this.dateSelected = value
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+
+            /*
+            * Emit input event on month and/or year change
+            */
+            'focusedDateData.month'(value) {
+                this.$emit('changeMonth', value)
+            },
+            'focusedDateData.year'(value) {
+                this.$emit('changeYear', value)
             }
         },
         methods: {

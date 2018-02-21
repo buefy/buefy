@@ -77,6 +77,7 @@
 
                             <td class="checkbox-cell" v-if="checkable">
                                 <b-checkbox
+                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @change.native="checkRow(row)"
                                 />
@@ -195,6 +196,10 @@
             selected: Object,
             focusable: Boolean,
             customIsChecked: Function,
+            isRowCheckable: {
+                type: Function,
+                default: () => true
+            },
             checkedRows: {
                 type: Array,
                 default: () => []
@@ -289,7 +294,9 @@
              * Check if all rows in the page are checked.
              */
             isAllChecked() {
-                const isAllChecked = this.visibleData.some((currentVisibleRow) => {
+                const validVisibleData = this.visibleData.filter(
+                        (row) => this.isRowCheckable(row))
+                const isAllChecked = validVisibleData.some((currentVisibleRow) => {
                     return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
@@ -484,7 +491,9 @@
                 this.visibleData.forEach((currentRow) => {
                     this.removeCheckedRow(currentRow)
                     if (!isAllChecked) {
-                        this.newCheckedRows.push(currentRow)
+                        if (this.isRowCheckable(currentRow)) {
+                            this.newCheckedRows.push(currentRow)
+                        }
                     }
                 })
 

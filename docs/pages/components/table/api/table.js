@@ -183,6 +183,13 @@ export default [
                 type: 'Function (a: Object, b: Object)',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>is-row-checkable</code>',
+                description: 'Custom method to verify if a row is disabled, works when is <code>checkable</code>. ',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: 'true'
             }
 
         ],

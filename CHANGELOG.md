@@ -2,9 +2,20 @@
 
 ## 0.6.4
 
+### New features
+
+* **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
+* #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
+* #602 Add ``changeMonth`` and ``changeYear`` events to datepicker
+* #609 Add ``is-full-page`` prop to loading, to limit it to its container (thanks @adrlen)
+* #610 Add ``visible`` prop to tabItem
+
 ### Fixes and changes
 
 * #576 Fix upload check file type
+* #586 Fix dropdown change event
+* #593 Fix timepicker update only time of Date object
+* #599 Fix ``on-cancel`` prop to dialog, get called when clicking confirm
 
 ## 0.6.3
 

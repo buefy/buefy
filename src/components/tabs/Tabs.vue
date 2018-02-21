@@ -5,6 +5,7 @@
                 <li
                     v-for="(tabItem, index) in tabItems"
                     :key="index"
+                    v-show="tabItem.visible"
                     :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
                     <a @click="tabClick(index)">
                         <b-icon

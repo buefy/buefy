@@ -16,6 +16,7 @@
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
+        name: 'BToast',
         mixins: [NoticeMixin],
         data() {
             return {

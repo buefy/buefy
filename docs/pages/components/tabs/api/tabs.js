@@ -88,6 +88,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'false'
+            },
+            {
+                name: '<code>visible</code>',
+                description: 'Item is visible',
+                type: 'Boolean',
+                values: '-',
+                default: 'true'
             }
         ]
     }
