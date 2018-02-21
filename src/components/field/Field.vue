@@ -101,9 +101,13 @@
             fieldType() {
                 if (this.grouped) return 'is-grouped'
 
+                let renderedNode = 0
+                if (this.$slots.default) {
+                    renderedNode = this.$slots.default
+                                        .reduce((i, node) => node.tag ? i + 1 : i, 0)
+                }
                 if (
-                    this.$slots.default !== undefined &&
-                    this.$slots.default.length > 1 &&
+                    renderedNode > 1 &&
                     this.addons &&
                     !this.horizontal
                 ) {
