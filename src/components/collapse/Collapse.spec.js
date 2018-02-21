@@ -37,7 +37,7 @@ describe('BCollapse', () => {
         expect(wrapper.vm.isOpen).toBe(true)
         expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
     })
-    
+
     it('should emit a click event', () => {
         const wrapper = shallow(BCollapse, {
             propsData: {
