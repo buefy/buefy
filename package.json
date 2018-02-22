@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafaelpimpa/buefy.git"
+    "url": "https://github.com/buefy/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/rafaelpimpa/buefy/issues"
+    "url": "https://github.com/buefy/buefy/issues"
   },
   "scripts": {
     "dev": "node build/dev-server.js",
