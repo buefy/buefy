@@ -4,6 +4,7 @@
             <ul role="tablist">
                 <li
                     role="presentation"
+                    :tabindex="tabItem.visible && !tabItem.disabled ? 0 : -1"
                     v-for="(tabItem, index) in tabItems"
                     :key="index"
                     v-show="tabItem.visible"
