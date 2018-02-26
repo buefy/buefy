@@ -20,6 +20,7 @@
                 :disabled="disabled"
                 :unselectable-dates="unselectableDates"
                 :unselectable-days-of-week="unselectableDaysOfWeek"
+                :selectable-dates="selectableDates"
                 :events="eventsInThisWeek(week, index)"
                 :indicators="indicators"
                 @select="updateSelectedDate"/>
@@ -47,7 +48,8 @@
             focused: Object,
             disabled: Boolean,
             unselectableDates: Array,
-            unselectableDaysOfWeek: Array
+            unselectableDaysOfWeek: Array,
+            selectableDates: Array
         },
         computed: {
             visibleDayNames() {
