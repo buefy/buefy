@@ -1,13 +1,18 @@
 <template>
     <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
         <nav class="tabs" :class="navClasses">
-            <ul>
+            <ul role="tablist">
                 <li
+                    role="presentation"
                     v-for="(tabItem, index) in tabItems"
                     :key="index"
                     v-show="tabItem.visible"
                     :class="{ 'is-active': newValue === index, 'is-disabled': tabItem.disabled }">
-                    <a @click="tabClick(index)">
+                    <a
+                        @click="tabClick(index)"
+                        role="tab"
+                        :aria-controls="tabItem.id"
+                        :aria-selected="tabItem.visible">
                         <b-icon
                             v-if="tabItem.icon"
                             :icon="tabItem.icon"

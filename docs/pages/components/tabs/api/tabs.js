@@ -90,6 +90,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'true'
+            },
+            {
+                name: '<code>id</code>',
+                description: 'Optional id for <i>aria-control</i>',
+                type: 'String',
+                values: '-',
+                default: '-'
             }
         ]
     }

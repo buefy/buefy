@@ -1,6 +1,11 @@
 <template>
     <transition :name="transitionName">
-        <div v-show="isActive && visible" class="tab-item">
+        <div
+            v-show="isActive && visible"
+            class="tab-item"
+            role="tabpanel"
+            :id="id"
+            :aria-hidden="!isActive || !visible">
             <slot/>
         </div>
     </transition>
@@ -17,7 +22,8 @@
             visible: {
                 type: Boolean,
                 default: true
-            }
+            },
+            id: ''
         },
         data() {
             return {
