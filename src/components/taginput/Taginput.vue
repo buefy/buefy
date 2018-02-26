@@ -37,7 +37,18 @@
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
-                @select="onSelect"/>
+                @select="onSelect">
+                <template
+                    :slot="defaultSlotName"
+                    slot-scope="props">
+                    <slot
+                        :option="props.option"
+                        :index="props.index" />
+                </template>
+                <template :slot="emptySlotName">
+                    <slot name="empty" />
+                </template>
+            </b-autocomplete>
         </div>
 
         <p v-if="maxtags || maxlength" class="help counter">
@@ -121,6 +132,22 @@
 
             valueLength() {
                 return this.newTag.trim().length
+            },
+
+            defaultSlotName() {
+                return this.hasDefaultSlot ? 'default' : 'dontrender'
+            },
+
+            emptySlotName() {
+                return this.hasEmptySlot ? 'empty' : 'dontrender'
+            },
+
+            hasDefaultSlot() {
+                return !!this.$scopedSlots.default
+            },
+
+            hasEmptySlot() {
+                return !!this.$slots.empty
             },
 
             /**

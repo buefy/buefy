@@ -13,6 +13,12 @@
             </p>
         </Example>
 
+        <Example :component="ExTemplatedAutocomplete" :code="ExTemplatedAutocompleteCode" title="Templated Autocomplete" vertical>
+            <p>
+                Slots are available for autocomplete items and the empty message, like with the <router-link to="/documentation/autocomplete">Autocomplete</router-link> control.
+            </p>
+        </Example>
+
         <Example :component="ExLimit" :code="ExLimitCode" title="Limits" vertical>
             <p>
                 You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.
@@ -45,6 +51,9 @@
     import ExAutocomplete from './examples/ExAutocomplete'
     import ExAutocompleteCode from '!!raw-loader!./examples/ExAutocomplete'
 
+    import ExTemplatedAutocomplete from './examples/ExTemplatedAutocomplete'
+    import ExTemplatedAutocompleteCode from '!!raw-loader!./examples/ExTemplatedAutocomplete'
+
     import ExLimit from './examples/ExLimit'
     import ExLimitCode from '!!raw-loader!./examples/ExLimit'
 
@@ -66,6 +75,7 @@
                 api,
                 ExSimple,
                 ExAutocomplete,
+                ExTemplatedAutocomplete,
                 ExLimit,
                 ExState,
                 ExType,
@@ -73,6 +83,7 @@
                 ExModifier,
                 ExSimpleCode,
                 ExAutocompleteCode,
+                ExTemplatedAutocompleteCode,
                 ExLimitCode,
                 ExStateCode,
                 ExTypeCode,
