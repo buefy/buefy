@@ -182,7 +182,7 @@
             this.isActive = true
 
             if (typeof this.inputAttrs.required === 'undefined') {
-                this.$set(this.inputAttrs, 'required', true);
+                this.$set(this.inputAttrs, 'required', true)
             }
 
             this.$nextTick(() => {
