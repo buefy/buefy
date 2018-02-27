@@ -75,6 +75,7 @@
                 default: 'value'
             },
             keepFirst: Boolean,
+            clearOnSelect: Boolean,
             openOnFocus: Boolean
         },
         data() {
@@ -198,7 +199,7 @@
                 this.selected = option
                 this.$emit('select', this.selected)
                 if (this.selected !== null) {
-                    this.newValue = this.getValue(this.selected)
+                    this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
                 }
                 closeDropdown && this.$nextTick(() => { this.isActive = false })
             },

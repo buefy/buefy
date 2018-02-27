@@ -23,6 +23,13 @@ export default [
                 default: '<code>value</code>'
             },
             {
+                name: '<code>clear-on-select</code>',
+                description: 'Clear input text on select',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>open-on-focus</code>',
                 description: 'Open dropdown list on focus',
                 type: 'Boolean',
