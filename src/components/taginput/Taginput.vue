@@ -106,6 +106,10 @@
                 type: Array,
                 default: () => [13, 188]
             },
+            removeOnKeys: {
+                type: Array,
+                default: () => [8]
+            },
             allowNew: Boolean
         },
         data() {
@@ -229,6 +233,9 @@
             },
 
             keydown(event) {
+                if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
+                    this.removeLastTag()
+                }
                 // Stop if is to accept select only
                 if (this.autocomplete && !this.allowNew) return
 

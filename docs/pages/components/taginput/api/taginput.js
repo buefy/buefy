@@ -30,7 +30,7 @@ export default [
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                     <code>is-warning</code>, <code>is-danger</code>,
                     and any other colors you've set in the <code>$colors</code> list on Sass`,
-                default: '<code>is-primary</code>'
+                default: '<code>is-light</code>'
             },
             {
                 name: '<code>size</code>',
@@ -73,6 +73,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>remove-on-keys</code>',
+                description: 'Allow removing last tag when pressing given keys, if input is empty',
+                type: 'Array',
+                values: '—',
+                default: '<code>[8]</code>'
             },
             {
                 name: '<code>confirm-key-codes</code>',
