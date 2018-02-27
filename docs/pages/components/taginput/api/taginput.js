@@ -75,11 +75,11 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>remove-on-backspace</code>',
-                description: 'Allow removing last tag when pressing backspace key if input is empty',
-                type: 'Boolean',
+                name: '<code>remove-on-keys</code>',
+                description: 'Allow removing last tag when pressing given keys, if input is empty',
+                type: 'Array',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>[8]</code>'
             },
             {
                 name: '<code>confirm-key-codes</code>',
