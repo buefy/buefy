@@ -5,14 +5,15 @@
         class="dropdown-item"
         :class="anchorClasses"
         @click="selectItem"
-        role="menuitem">
+        role="menuitem"
+        :tabindex="tabIndex">
         <slot/>
     </a>
     <div
         v-else
         :class="itemClasses"
         @click="selectItem"
-        :aria-hidden="value != null ? 'false' : 'true'">
+        :tabindex="tabIndex">
         <slot/>
     </div>
 </template>
@@ -30,6 +31,11 @@
             custom: Boolean,
             paddingless: Boolean,
             hasLink: Boolean
+        },
+        data() {
+            return {
+                parentActive: false
+            }
         },
         computed: {
             anchorClasses() {
@@ -53,6 +59,9 @@
              */
             isClickable() {
                 return !this.separator && !this.disabled && !this.custom
+            },
+            tabIndex() {
+                return this.parentActive ? 0 : -1
             }
         },
         methods: {
@@ -71,6 +80,9 @@
                 this.$destroy()
                 throw new Error('You should wrap bDropdownItem on a bDropdown')
             }
+            this.$parent.$on('active-change', (isActive) => {
+                this.parentActive = isActive
+            })
         }
     }
 </script>
