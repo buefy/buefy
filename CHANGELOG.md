@@ -5,7 +5,12 @@
 ### New features
 
 * **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
+* #509 Add autocomplete slot support to taginput (thanks @gkinsman)
 * #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
+* #602 Add ``changeMonth`` and ``changeYear`` events to datepicker
+* #609 Add ``is-full-page`` prop to loading, to limit it to its container (thanks @adrlen)
+* #610 Add ``visible`` prop to tabItem
+* #645 Add ``selectable-dates`` prop to datepicker (thanks @pip63)
 
 ### Fixes and changes
 

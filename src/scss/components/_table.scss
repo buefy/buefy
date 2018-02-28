@@ -140,8 +140,8 @@
                     &:not(:last-child) {
                         margin-bottom: 1rem;
                     }
-                    // Disables is-striped
-                    &:not(.is-selected) {
+                    // Disables is-*
+                    &:not([class*="is-"]) {
                         background: inherit;
                         &:hover {
                             background-color: inherit;

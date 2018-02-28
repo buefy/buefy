@@ -98,6 +98,7 @@
                     :disabled="disabled"
                     :unselectable-dates="unselectableDates"
                     :unselectable-days-of-week="unselectableDaysOfWeek"
+                    :selectable-dates="selectableDates"
                     :events="events"
                     :indicators="indicators"
                     @close="$refs.dropdown.isActive = false"/>
@@ -228,6 +229,7 @@
                 type: Array,
                 default: () => { return config.defaultUnselectableDaysOfWeek }
             },
+            selectableDates: Array,
             dateFormatter: {
                 type: Function,
                 default: (date) => {
@@ -339,6 +341,16 @@
                 this.dateSelected = value
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+
+            /*
+            * Emit input event on month and/or year change
+            */
+            'focusedDateData.month'(value) {
+                this.$emit('changeMonth', value)
+            },
+            'focusedDateData.year'(value) {
+                this.$emit('changeYear', value)
             }
         },
         methods: {

@@ -162,6 +162,23 @@ export default [
                 description: 'Footer',
                 props: '—'
             }
+        ],
+        events: [
+            {
+                name: '<code>input</code>',
+                description: 'Triggers when value is changed',
+                parameters: '<code>value: Date</code>'
+            },
+            {
+                name: '<code>changeMonth</code>',
+                description: 'Triggers when calendar month is changed',
+                parameters: '<code>month: Number(0-11)</code>'
+            },
+            {
+                name: '<code>changeYear</code>',
+                description: 'Triggers when calendar year is changed',
+                parameters: '<code>year: Number</code>'
+            }
         ]
     }
 ]

@@ -15,14 +15,14 @@
 
                     <div class="github-button home-hero">
                         <iframe
-                            src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=star&count=true&size=large"
+                            src="https://ghbtns.com/github-btn.html?user=buefy&repo=buefy&type=star&count=true&size=large"
                             frameborder="0"
                             scrolling="0"
                             width="160px"
                             height="30px"/>
 
                         <iframe
-                            src="https://ghbtns.com/github-btn.html?user=rafaelpimpa&repo=buefy&type=fork&count=false&size=large"
+                            src="https://ghbtns.com/github-btn.html?user=buefy&repo=buefy&type=fork&count=false&size=large"
                             frameborder="0"
                             scrolling="0"
                             width="80px"
@@ -35,7 +35,7 @@
                             Get started
                         </router-link>
                         <a class="button is-medium is-primary home-hero"
-                           href="https://github.com/rafaelpimpa/buefy/releases"
+                           href="https://github.com/buefy/buefy/releases"
                            target="_blank">
                             Changelog
                         </a>
@@ -52,7 +52,7 @@
                         <div class="column has-text-centered features">
                             <b-icon icon="github-circle" size="is-large"/>
                             <p class="title is-4"><strong>Free</strong></p>
-                            <p class="subtitle">Open source on <strong><a href="https://github.com/rafaelpimpa/buefy" target="_blank">GitHub</a></strong></p>
+                            <p class="subtitle">Open source on <strong><a href="https://github.com/buefy/buefy" target="_blank">GitHub</a></strong></p>
                         </div>
                         <div class="column has-text-centered features">
                             <b-icon icon="cellphone-link" size="is-large"/>

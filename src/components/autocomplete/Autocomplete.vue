@@ -75,6 +75,7 @@
                 default: 'value'
             },
             keepFirst: Boolean,
+            clearOnSelect: Boolean,
             openOnFocus: Boolean
         },
         data() {
@@ -148,7 +149,10 @@
             newValue(value) {
                 this.$emit('input', value)
                 // Check if selected is invalid
-                if (this.getValue(this.selected) !== value) this.setSelected(null, false)
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue !== value) {
+                    this.setSelected(null, false)
+                }
                 // Close dropdown if input is clear or else open it
                 if (!this.openOnFocus || value) {
                     this.isActive = !!value
@@ -195,7 +199,7 @@
                 this.selected = option
                 this.$emit('select', this.selected)
                 if (this.selected !== null) {
-                    this.newValue = this.getValue(this.selected)
+                    this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
                 }
                 closeDropdown && this.$nextTick(() => { this.isActive = false })
             },
