@@ -83,6 +83,7 @@ export function removeElement(el) {
  */
 export function escapeRegExpChars(value) {
     if (!value) return value
+    if (typeof(value) === 'number') return value
 
     // eslint-disable-next-line
     return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
