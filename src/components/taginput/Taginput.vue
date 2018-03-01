@@ -1,5 +1,5 @@
 <template>
-    <div class="taginput control" :class="[size, rootClasses]">
+    <div class="taginput control" :class="rootClasses">
         <div
             class="taginput-container"
             :class="[statusType, size, containerClasses]"
