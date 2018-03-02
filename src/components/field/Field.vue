@@ -19,7 +19,7 @@
         <b-field-body
             v-if="horizontal"
             :message="newMessage ? formattedMessage : ''"
-            :type="newMessage ? newType : ''">
+            :type="newType">
             <slot/>
         </b-field-body>
         <template v-else>
