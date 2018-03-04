@@ -153,7 +153,7 @@
              * Get value length
              */
             valueLength() {
-                return this.newValue ? this.newValue.length : 0
+                return this.newValue ? ('' + this.newValue).length : 0
             }
         },
         watch: {
