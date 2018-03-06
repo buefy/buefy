@@ -33,6 +33,10 @@
             onAction: {
                 type: Function,
                 default: () => {}
+            },
+            indefinite: {
+                type: Boolean,
+                default: false
             }
         },
         data() {

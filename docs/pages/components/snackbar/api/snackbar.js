@@ -40,6 +40,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>indefinite</code>',
+                description: 'Show the Snackbar indefinitely until it is dismissed',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>container</code>',
                 description: 'DOM element the toast will be created on. Note that this also changes the <code>position</code> of the toast from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>.',
                 type: 'String',
