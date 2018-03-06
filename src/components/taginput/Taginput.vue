@@ -228,7 +228,7 @@
 
             removeLastTag() {
                 if (this.tagsLength > 0) {
-                    this.newTag = this.removeTag(this.tagsLength - 1)
+                    this.removeTag(this.tagsLength - 1)
                 }
             },
 
