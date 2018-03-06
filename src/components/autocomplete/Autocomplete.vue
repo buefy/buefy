@@ -261,7 +261,9 @@
                     ? getValueByPath(option, this.field)
                     : option
 
-                const escapedValue = escapeRegExpChars(this.newValue)
+                const escapedValue = typeof this.newValue === 'string'
+                    ? escapeRegExpChars(this.newValue)
+                    : this.newValue
                 const regex = new RegExp(`(${escapedValue})`, 'gi')
 
                 return isHighlight
