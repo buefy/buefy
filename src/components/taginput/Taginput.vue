@@ -204,10 +204,10 @@
             },
 
             customOnBlur($event) {
-                this.onBlur($event)
-
                 // Add tag on-blur if not select only
                 if (!this.autocomplete) this.addTag()
+
+                this.onBlur($event)
             },
 
             onSelect(option) {
