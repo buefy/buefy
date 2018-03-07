@@ -27,7 +27,10 @@
 
             <b-dropdown-item :disabled="disabled" custom>
                 <header class="datepicker-header">
-                    <div class="pagination field is-centered">
+                    <template v-if="$slots.header !== undefined && $slots.header.length">
+                        <slot name="header" />
+                    </template>
+                    <div v-else class="pagination field is-centered">
                         <a
                             v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
@@ -341,6 +344,15 @@
                 this.dateSelected = value
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+
+            focusedDate(value) {
+                if (value) {
+                    this.focusedDateData = {
+                        month: value.getMonth(),
+                        year: value.getFullYear()
+                    }
+                }
             },
 
             /*

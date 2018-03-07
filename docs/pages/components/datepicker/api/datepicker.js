@@ -161,6 +161,11 @@ export default [
                 name: 'default',
                 description: 'Footer',
                 props: '—'
+            },
+            {
+                name: 'header',
+                description: 'Header',
+                props: '—'
             }
         ],
         events: [

@@ -6,6 +6,7 @@
 
 * **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
 * Add ``indefinite`` prop to snackbar
+* Add ``header`` slot to datepicker
 * #509 Add autocomplete slot support to taginput (thanks @gkinsman)
 * #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
 * #602 Add ``changeMonth`` and ``changeYear`` events to datepicker
