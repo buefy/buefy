@@ -85,4 +85,28 @@ describe('BCollapse', () => {
         })
         expect(wrapper.find('.collapse-content :first-child').html()).toBe(slotDefault)
     })
+
+    it('should emit open event', () => {
+        const wrapper = shallow(BCollapse, {
+            propsData: {
+                open: false
+            }
+        })
+        const open = jest.fn()
+        wrapper.vm.$on('open', open)
+        wrapper.find('.collapse-trigger').trigger('click')
+        expect(open).toHaveBeenCalledTimes(1)
+    })
+
+    it('should emit close event', () => {
+        const wrapper = shallow(BCollapse, {
+            propsData: {
+                open: true
+            }
+        })
+        const close = jest.fn()
+        wrapper.vm.$on('close', close)
+        wrapper.find('.collapse-trigger').trigger('click')
+        expect(close).toHaveBeenCalledTimes(1)
+    })
 })
