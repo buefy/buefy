@@ -11,11 +11,11 @@ describe('BCollapse', () => {
     it('default props and vm', () => {
         const wrapper = shallow(BCollapse)
         expect(wrapper.props().open).toBe(true)
-        expect(wrapper.vm.animation).toBe('fade')
+        expect(wrapper.props().animation).toBe('fade')
         expect(wrapper.vm.isOpen).toBe(true)
     })
 
-    it('open prop to false', () => {
+    it('set default open prop', () => {
         const wrapper = shallow(BCollapse, {
             propsData: {
                 open: false
@@ -25,7 +25,7 @@ describe('BCollapse', () => {
         expect(wrapper.vm.isOpen).toBe(false)
     })
 
-    it('should call toggle method', async () => {
+    it('call toggle method', async () => {
         const wrapper = shallow(BCollapse, {
             propsData: {
                 open: false
@@ -38,7 +38,7 @@ describe('BCollapse', () => {
         expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
     })
 
-    it('should emit a click event', () => {
+    it('emit a click event', () => {
         const wrapper = shallow(BCollapse, {
             propsData: {
                 open: false
@@ -49,6 +49,19 @@ describe('BCollapse', () => {
         wrapper.vm.$on('update:open', updateOpen)
         wrapper.find('.collapse-trigger').trigger('click')
         expect(updateOpen).toHaveBeenCalledTimes(1)
+        expect(updateOpen).toHaveBeenCalledWith(true)
+        expect(wrapper.vm.isOpen).toBe(true)
+        expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
+    })
+
+    it('update open prop', () => {
+        const wrapper = shallow(BCollapse, {
+            propsData: {
+                open: false
+            }
+        })
+        expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
+        wrapper.setProps({ open: true })
         expect(wrapper.vm.isOpen).toBe(true)
         expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
     })
@@ -60,7 +73,7 @@ describe('BCollapse', () => {
                 trigger: triggerSlot
             }
         })
-        expect(wrapper.find('.collapse-trigger').element.innerHTML).toBe(triggerSlot)
+        expect(wrapper.find('.collapse-trigger :first-child').html()).toBe(triggerSlot)
     })
 
     it('should have default slot', () => {
@@ -70,6 +83,6 @@ describe('BCollapse', () => {
                 default: slotDefault
             }
         })
-        expect(wrapper.find('.collapse-content').element.innerHTML).toBe(slotDefault)
+        expect(wrapper.find('.collapse-content :first-child').html()).toBe(slotDefault)
     })
 })
