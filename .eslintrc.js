@@ -6,5 +6,9 @@ module.exports = {
   },
   extends: [
     'buefy',
-  ]
+  ],
+  rules: {
+    // disable now, but enable in the future
+    'vue/attributes-order': 'off'
+  }
 }
