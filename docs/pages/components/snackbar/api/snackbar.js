@@ -3,7 +3,7 @@ export default [
         props: [
             {
                 name: '<code>type</code>',
-                description: 'Type (color) of the action button',
+                description: 'Type (color) of the action button. Please notice that it is the name of the parent class also',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
