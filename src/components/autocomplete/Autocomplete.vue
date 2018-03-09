@@ -12,7 +12,7 @@
             autocomplete="off"
             v-bind="$attrs"
             @focus="focused"
-            @blur="$emit('blur', $event)"
+            @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
             @keydown.native.tab="tabPressed"
             @keydown.native.enter.prevent="enterPressed"
@@ -85,6 +85,7 @@
                 isActive: false,
                 newValue: this.value,
                 isListInViewportVertically: true,
+                hasFocus: false,
                 _isAutocomplete: true,
                 _elementRef: 'input'
             }
@@ -154,7 +155,7 @@
                     this.setSelected(null, false)
                 }
                 // Close dropdown if input is clear or else open it
-                if (!this.openOnFocus || value) {
+                if (this.hasFocus && (!this.openOnFocus || value)) {
                     this.isActive = !!value
                 }
             },
@@ -342,7 +343,16 @@
                         this.selectFirstOption(this.data)
                     }
                 }
+                this.hasFocus = true
                 this.$emit('focus', event)
+            },
+
+            /**
+             * Blur listener.
+            */
+            onBlur(event) {
+                this.hasFocus = false
+                this.$emit('blur', event)
             }
         },
         created() {
