@@ -19,7 +19,7 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical>
             <b-message type="is-info">
-                <p><strong>Sortale is not included in Buefy</strong>, you have to install it:</p>
+                <p><strong>Sortable is not included in Buefy</strong>, you have to install it:</p>
                 <CodeView code="npm install sortablejs" expanded/>
             </b-message>
         </Example>
