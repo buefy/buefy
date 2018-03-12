@@ -14,6 +14,7 @@
             v-model="newValue"
             type="checkbox"
             :name="name"
+            :value="nativeValue"
             :disabled="disabled"
             :true-value="trueValue"
             :false-value="falseValue">
