@@ -47,6 +47,11 @@ export default [
         ],
         events: [
             {
+                name: '<code>input</code>',
+                description: 'Triggers when tab is clicked',
+                parameters: '<code>index: Number</code>'
+            },
+            {
                 name: '<code>change</code>',
                 description: 'Triggers when active tab is changed',
                 parameters: '<code>index: Number</code>'
