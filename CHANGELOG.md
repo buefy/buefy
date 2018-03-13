@@ -23,6 +23,8 @@
 * #586 Fix dropdown change event
 * #593 Fix timepicker update only time of Date object
 * #599 Fix ``on-cancel`` prop to dialog, get called when clicking confirm
+* #648 Fix dropdown emit change event (thanks @adrlen)
+* #670 Fix tabs emit change event (thanks @adrlen)
 
 ## 0.6.3
 
