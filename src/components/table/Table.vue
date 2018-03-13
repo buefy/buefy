@@ -68,7 +68,7 @@
 
                             <td v-if="detailed">
                                 <a
-                                    v-if="!hasVisibleDetailed(row)"
+                                    v-if="!hasDetailedVisible(row)"
                                     role="button"
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
@@ -236,7 +236,7 @@
                 type: Array,
                 default: () => []
             },
-            hasVisibleDetailed: {
+            hasDetailedVisible: {
                 type: Function,
                 default: () => true
             },

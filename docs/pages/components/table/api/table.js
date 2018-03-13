@@ -171,7 +171,7 @@ export default [
                 default: '<code>[]</code>'
             },
             {
-              name: '<code>has-visible-detailed</code>',
+              name: '<code>has-detailed-visible</code>',
               description: 'Controls the visibility of the trigger that toggles the detailed rows.',
               type: 'Function',
               values: '—',
