@@ -67,7 +67,10 @@
                             @dblclick="$emit('dblclick', row)">
 
                             <td v-if="detailed">
-                                <a role="button" @click.stop="toggleDetails(row)">
+                                <a
+                                    v-if="!hasDetailedVisible(row)"
+                                    role="button"
+                                    @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
                                         both
@@ -232,6 +235,10 @@
             openedDetailed: {
                 type: Array,
                 default: () => []
+            },
+            hasDetailedVisible: {
+                type: Function,
+                default: () => true
             },
             detailKey: {
                 type: String,
