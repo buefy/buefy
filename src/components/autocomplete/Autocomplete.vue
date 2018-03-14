@@ -222,25 +222,32 @@
             },
 
             /**
-             * Enter key listener.
-             * Select the hovered option.
+             * Helper method
+             * Select the hovered option if it exists, close dropdown
              */
-            enterPressed() {
-                if (this.hovered === null) return
-                this.setSelected(this.hovered)
-            },
-
-            /**
-             * Tab key listener.
-             * Select hovered option if it exists, close dropdown, then allow
-             * native handling to move to next tabbable element.
-             */
-            tabPressed() {
+            _setSelectedAndClose() {
                 if (this.hovered === null) {
                     this.isActive = false
                     return
                 }
                 this.setSelected(this.hovered)
+            },
+
+            /**
+             * Enter key listener.
+             * Selects the hovered option if it exists, closes dropdown
+             */
+            enterPressed() {
+                this._setSelectedAndClose()
+            },
+
+            /**
+             * Tab key listener.
+             * Selects the hovered option if it exists, closes dropdown
+             * Allows native handling to move to next tabbable element.
+             */
+            tabPressed() {
+                this._setSelectedAndClose()
             },
 
             /**
