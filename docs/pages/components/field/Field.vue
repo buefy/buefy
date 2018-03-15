@@ -68,12 +68,12 @@
             </b-message>
         </Example>
 
-        <Example :component="ExLabelClasses" :code="ExLabelClassesCode" title="Label classes">
+        <Example :component="ExCustomClass" :code="ExCustomClass" title="Label classes">
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
                 <span class="tag is-info">0.6.3</span>
             </div>
-            <p>Add the <code>label-classes</code> prop to adjust the styling of the label.</p>
+            <p>Add the <code>custom-class</code> prop to adjust the styling of the label.</p>
         </Example>
 
         <ApiView :data="api"/>
@@ -107,8 +107,8 @@
     import ExHorizontal from './examples/ExHorizontal'
     import ExHorizontalCode from '!!raw-loader!./examples/ExHorizontal'
 
-    import ExLabelClasses from './examples/ExLabelClasses'
-    import ExLabelClassesCode from '!!raw-loader!./examples/ExLabelClasses'
+    import ExCustomClass from './examples/ExCustomClass'
+    import ExCustomClassCode from '!!raw-loader!./examples/ExCustomClass'
 
     export default {
         data() {
@@ -122,7 +122,7 @@
                 ExPositions,
                 ExCombineAddonsGroups,
                 ExHorizontal,
-                ExLabelClasses,
+                ExCustomClass,
                 ExSimpleCode,
                 ExAddonsCode,
                 ExGroupsCode,
@@ -131,7 +131,7 @@
                 ExPositionsCode,
                 ExCombineAddonsGroupsCode,
                 ExHorizontalCode,
-                ExLabelClassesCode
+                ExCustomClassCode
             }
         }
     }

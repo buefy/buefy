@@ -1,14 +1,14 @@
 <template>
     <section>
-        <b-field label="Small" label-classes="is-small">
+        <b-field label="Small" custom-class="is-small">
             <b-input value="Kevin Garvey" size="is-small"></b-input>
         </b-field>
-        <b-field label="Large" label-classes="is-large">
+        <b-field label="Large" custom-class="is-large">
             <b-input value="Kevin Garvey" size="is-large"></b-input>
         </b-field>
 
         <b-field label="Danger"
-            label-classes="has-text-danger"
+            custom-class="has-text-danger"
             type="is-danger"
             message="This email is invalid">
             <b-input type="email"
@@ -18,14 +18,14 @@
         </b-field>
 
         <b-field label="Multiple (small and success)"
-            label-classes="is-small has-text-success"
+            custom-class="is-small has-text-success"
             type="is-success"
             >
             <b-input value="johnsilver" maxlength="30" size="is-small"></b-input>
         </b-field>
 
         <b-field label="Computed (medium and primary)"
-            :label-classes="classes"
+            :custom-class="classes"
             type="is-primary"
             >
             <b-input value="johnsilver" maxlength="30" size="is-medium"></b-input>
