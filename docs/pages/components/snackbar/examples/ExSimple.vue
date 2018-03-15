@@ -22,7 +22,7 @@
             },
             warning() {
                 this.$snackbar.open({
-                    message: 'Yellow button and positioned top-left',
+                    message: 'Yellow button and positioned on top',
                     type: 'is-warning',
                     position: 'is-top',
                     actionText: 'Retry',
