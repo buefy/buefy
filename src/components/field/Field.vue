@@ -3,7 +3,7 @@
         <div
             v-if="horizontal"
             class="field-label is-normal"
-            :class="labelClasses">
+            :class="customClass">
             <label
                 v-if="label"
                 :for="labelFor"
@@ -15,7 +15,7 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                :class="labelClasses">
+                :class="customClass">
                 class="label">
                 {{ label }}
             </label>
@@ -60,7 +60,7 @@
                 type: Boolean,
                 default: true
             },
-            labelClasses: String
+            customClass: String
         },
         data() {
             return {
