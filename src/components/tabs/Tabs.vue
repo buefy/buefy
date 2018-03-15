@@ -1,11 +1,12 @@
 <template>
     <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
-        <nav class="tabs" :class="[type, size, position, { 'is-fullwidth': expanded }]">
+        <nav class="tabs" :class="navClasses">
             <ul>
                 <li
                     v-for="(tabItem, index) in tabItems"
                     :key="index"
-                    :class="{ 'is-active': newValue === index, 'is-disabled': tabItem.disabled }">
+                    v-show="tabItem.visible"
+                    :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
                     <a @click="tabClick(index)">
                         <b-icon
                             v-if="tabItem.icon"
@@ -44,10 +45,23 @@
         },
         data() {
             return {
-                newValue: this.value || 0,
+                activeTab: this.value || 0,
                 tabItems: [],
                 contentHeight: 0,
                 _isTabs: true // Used internally by TabItem
+            }
+        },
+        computed: {
+            navClasses() {
+                return [
+                    this.type,
+                    this.size,
+                    this.position,
+                    {
+                        'is-fullwidth': this.expanded,
+                        'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
+                    }
+                ]
             }
         },
         watch: {
@@ -55,8 +69,7 @@
              * When v-model is changed set the new active tab.
              */
             value(value) {
-                this.changeTab(this.newValue, value)
-                this.newValue = value
+                this.changeTab(value)
             },
 
             /**
@@ -64,34 +77,34 @@
              */
             tabItems() {
                 if (this.tabItems.length) {
-                    this.tabItems[this.newValue].isActive = true
+                    this.tabItems[this.activeTab].isActive = true
                 }
             }
         },
         methods: {
             /**
-             * Change the active tab.
+             * Change the active tab and emit change event.
              */
-            changeTab(oldIndex, newIndex) {
-                if (oldIndex === newIndex) return
+            changeTab(newIndex) {
+                if (this.activeTab === newIndex) return
 
-                this.tabItems[oldIndex].deactivate(oldIndex, newIndex)
-                this.tabItems[newIndex].activate(oldIndex, newIndex)
+                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                this.tabItems[newIndex].activate(this.activeTab, newIndex)
+                this.activeTab = newIndex
+                this.$emit('change', newIndex)
             },
 
             /**
-             * Tab click listener, emit events and set new active tab.
+             * Tab click listener, emit input event and change active tab.
              */
             tabClick(value) {
                 this.$emit('input', value)
-                this.$emit('change', value)
-                this.changeTab(this.newValue, value)
-                this.newValue = value
+                this.changeTab(value)
             }
         },
         mounted() {
             if (this.tabItems.length) {
-                this.tabItems[this.newValue].isActive = true
+                this.tabItems[this.activeTab].isActive = true
             }
         }
     }

@@ -67,7 +67,10 @@
                             @dblclick="$emit('dblclick', row)">
 
                             <td v-if="detailed">
-                                <a role="button" @click.stop="toggleDetails(row)">
+                                <a
+                                    v-if="!hasDetailedVisible(row)"
+                                    role="button"
+                                    @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
                                         both
@@ -77,6 +80,7 @@
 
                             <td class="checkbox-cell" v-if="checkable">
                                 <b-checkbox
+                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @change.native="checkRow(row)"
                                 />
@@ -105,6 +109,7 @@
                         </tr>
 
                         <!-- Do not add `key` here (breaks details) -->
+                        <!-- eslint-disable-next-line -->
                         <tr
                             v-if="detailed && isVisibleDetailRow(row)"
                             class="detail">
@@ -148,6 +153,7 @@
                         :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
+                        :size="paginationSize"
                         :current="newCurrentPage"
                         @change="pageChanged"/>
                 </div>
@@ -193,6 +199,10 @@
             selected: Object,
             focusable: Boolean,
             customIsChecked: Function,
+            isRowCheckable: {
+                type: Function,
+                default: () => true
+            },
             checkedRows: {
                 type: Array,
                 default: () => []
@@ -216,6 +226,7 @@
                 default: 20
             },
             paginationSimple: Boolean,
+            paginationSize: String,
             backendSorting: Boolean,
             rowClass: {
                 type: Function,
@@ -224,6 +235,10 @@
             openedDetailed: {
                 type: Array,
                 default: () => []
+            },
+            hasDetailedVisible: {
+                type: Function,
+                default: () => true
             },
             detailKey: {
                 type: String,
@@ -286,7 +301,9 @@
              * Check if all rows in the page are checked.
              */
             isAllChecked() {
-                const isAllChecked = this.visibleData.some((currentVisibleRow) => {
+                const validVisibleData = this.visibleData.filter(
+                        (row) => this.isRowCheckable(row))
+                const isAllChecked = validVisibleData.some((currentVisibleRow) => {
                     return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
@@ -401,7 +418,7 @@
                 let sorted = []
                 // Sorting without mutating original data
                 if (fn && typeof fn === 'function') {
-                    sorted = [...array].sort(fn)
+                    sorted = [...array].sort((a, b) => fn(a, b, isAsc))
                 } else {
                     sorted = [...array].sort((a, b) => {
                         // Get nested values from objects
@@ -481,7 +498,9 @@
                 this.visibleData.forEach((currentRow) => {
                     this.removeCheckedRow(currentRow)
                     if (!isAllChecked) {
-                        this.newCheckedRows.push(currentRow)
+                        if (this.isRowCheckable(currentRow)) {
+                            this.newCheckedRows.push(currentRow)
+                        }
                     }
                 })
 

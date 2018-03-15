@@ -20,7 +20,7 @@
             <b-select
                 placeholder="Country"
                 icon="globe"
-                icon-pack="fa">
+                icon-pack="fas">
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
             </b-select>
@@ -30,7 +30,7 @@
             <b-select
                 placeholder="Client"
                 icon="user"
-                icon-pack="fa">
+                icon-pack="fas">
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
             </b-select>

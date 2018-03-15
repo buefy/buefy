@@ -1,11 +1,59 @@
 # Buefy Changelog
 
+## 0.6.4
+
+### New features
+
+* **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
+* Add ``indefinite`` prop to snackbar
+* Add ``header`` slot to datepicker
+* #509 Add autocomplete slot support to taginput (thanks @gkinsman)
+* #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
+* #602 Add ``changeMonth`` and ``changeYear`` events to datepicker
+* #604 Add ``remove-on-keys`` prop to taginput, allowing to remove last tag (thanks @adrlen)
+* #609 Add ``is-full-page`` prop to loading, to limit it to its container (thanks @adrlen)
+* #610 Add ``visible`` prop to tabItem
+* #644 Add ``clear-on-select`` prop to autocomplete (thanks @raniesantos)
+* #645 Add ``selectable-dates`` prop to datepicker (thanks @pip63)
+* #682 Add ``has-detailed-visible`` prop to table (thanks @wanxe)
+
+### Fixes and changes
+
+* #576 Fix upload check file type
+* #586 Fix dropdown change event
+* #593 Fix timepicker update only time of Date object
+* #599 Fix ``on-cancel`` prop to dialog, get called when clicking confirm
+* #648 Fix dropdown emit change event (thanks @adrlen)
+* #670 Fix tabs emit change event (thanks @adrlen)
+
 ## 0.6.3
 
 ### New features
 
+* **New extension: Sortable.js**, [see here](https://buefy.github.io/#/extensions/sortablejs)
+* **Update Bulma to 0.6.2**
+* **Add Font Awesome 5 support** (http://fontawesome.com/)
+* Add ``columns`` prop to table, you can now pass an array instead of adding scoped slots (for simple tables)
+* Add ``rounded`` prop to Input, Select, Autocomplete, Datepicker and Timepicker, Pagination
+* Add "is-toggle-rounded" type to Tabs
 * Add ``open`` prop to collapse ``trigger`` slot
 * Add ``native`` prop to upload
+* #222 Add ``open-on-focus`` prop to autocomplete (good to simulate a select element)
+* #482 Add ``allow-new`` prop to taginput
+* #483 Add ``unselectable-days-of-week`` prop to datepicker
+* #487 Add ``icon-size`` prop to message
+* #492 Add isAsc parameter to ``custom-sort`` function of table (thanks @frantic1048)
+* #494 Add ``unselectable-times`` prop to timepicker
+* #525 Add ``pagination-size`` prop to table (thanks @nateleavitt)
+* #531 Add ``confirm-key-codes`` prop to taginput
+
+### Fixes and changes
+
+* Remove ``max-results`` prop from autocomplete, it now has a scrollbar with all results
+* #493 Fix ``keep-first`` autocomplete prop with async data
+* #498 Fix horizontal field on mobile
+* #500 Fix message position for horizontal field (thanks @electrolinux)
+* #543 Fix dropdown toggle programmatic
 
 ## 0.6.2
 

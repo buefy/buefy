@@ -15,19 +15,22 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                class="label"
                 :class="labelClasses">
+                class="label">
                 {{ label }}
             </label>
         </template>
-        <b-field-body v-if="horizontal">
+        <b-field-body
+            v-if="horizontal"
+            :message="newMessage ? formattedMessage : ''"
+            :type="newType">
             <slot/>
         </b-field-body>
         <template v-else>
             <slot/>
         </template>
         <p
-            v-if="newMessage"
+            v-if="newMessage && !horizontal"
             v-html="formattedMessage"
             class="help"
             :class="newType"
@@ -103,10 +106,15 @@
             fieldType() {
                 if (this.grouped) return 'is-grouped'
 
+                let renderedNode = 0
+                if (this.$slots.default) {
+                    renderedNode = this.$slots.default
+                                        .reduce((i, node) => node.tag ? i + 1 : i, 0)
+                }
                 if (
-                    this.$slots.default !== undefined &&
-                    this.$slots.default.length > 1 &&
-                    this.addons
+                    renderedNode > 1 &&
+                    this.addons &&
+                    !this.horizontal
                 ) {
                     return 'has-addons'
                 }

@@ -5,7 +5,7 @@
         <div
             v-show="isActive"
             class="snackbar"
-            :class="position">
+            :class="[type,position]">
             <p class="text">{{ message }}</p>
             <div
                 v-if="actionText"
@@ -23,6 +23,7 @@
     import NoticeMixin from '../../utils/NoticeMixin.js'
 
     export default {
+        name: 'BSnackbar',
         mixins: [NoticeMixin],
         props: {
             actionText: {
@@ -32,6 +33,10 @@
             onAction: {
                 type: Function,
                 default: () => {}
+            },
+            indefinite: {
+                type: Boolean,
+                default: false
             }
         },
         data() {

@@ -24,6 +24,10 @@
             <p>Any slots are added to the footer of the datepicker.</p>
         </Example>
 
+        <Example :component="ExHeader" :code="ExHeaderCode" title="Header" vertical>
+            <p>You can add your custom header to the datepicker.</p>
+        </Example>
+
         <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical>
             <p>Datepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         </Example>
@@ -55,6 +59,9 @@
     import ExFooter from './examples/ExFooter'
     import ExFooterCode from '!!raw-loader!./examples/ExFooter'
 
+    import ExHeader from './examples/ExHeader'
+    import ExHeaderCode from '!!raw-loader!./examples/ExHeader'
+
     import ExInline from './examples/ExInline'
     import ExInlineCode from '!!raw-loader!./examples/ExInline'
 
@@ -73,6 +80,8 @@
                 ExRangeCode,
                 ExFooter,
                 ExFooterCode,
+                ExHeader,
+                ExHeaderCode,
                 ExInline,
                 ExInlineCode,
                 ExEvents,

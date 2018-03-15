@@ -136,6 +136,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>pagination-size</code>',
+                description: 'Pagination size (if <code>paginated</code>)',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
                 name: '<code>per-page</code>',
                 description: 'How many rows per page (if <code>paginated</code>)',
                 type: 'Number',
@@ -164,6 +171,13 @@ export default [
                 default: '<code>[]</code>'
             },
             {
+              name: '<code>has-detailed-visible</code>',
+              description: 'Controls the visibility of the trigger that toggles the detailed rows.',
+              type: 'Function',
+              values: '—',
+              default: '<code>true</code>'
+            },
+            {
                 name: '<code>detail-key</code>',
                 description: 'Use an unique key of your data Object when use detailed or opened detailed. (id recommended)',
                 type: 'String',
@@ -176,6 +190,13 @@ export default [
                 type: 'Function (a: Object, b: Object)',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>is-row-checkable</code>',
+                description: 'Custom method to verify if a row is disabled, works when is <code>checkable</code>. ',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: 'true'
             }
 
         ],
@@ -338,7 +359,7 @@ export default [
             {
                 name: '<code>custom-sort</code>',
                 description: 'Custom sort method, works when is <code>sortable</code>',
-                type: 'Function (a: Object, b: Object)',
+                type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
             }

@@ -7,7 +7,7 @@
 
 # Submitting a Pull Request
 
-* The ``master`` branch is a snapshot of the latest stable release. **Submit your PR in the ``dev`` branch**
+* The ``master`` branch is a snapshot of the latest release. **Submit your PR in the ``dev`` branch**
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 * It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
 * **DO NOT** commit the ``lib`` and ``dist`` folder, use it only for testing on your end
@@ -25,7 +25,6 @@ It has to work, **and** have great UX on both platforms.
 * Keep it simple.
 * Performance is UX, keep it lightweight.
 * Avoid HTML-only components, if it doesn't need JavaScript, then it doesn't need Vue (with a few exceptions).
-* Keep. It. Simple.
 
 ### 3. Keep Bulma design
 
@@ -45,40 +44,7 @@ And here is one about the FLIP technique (which ``<transition-group>`` uses inte
 
 ## Buefy Javascript styleguide
 
-* Follow the rules in ``.eslintrc.js``, general:
-    * **Use camelCase**
-    * **No semi-colons** ``;``
-    * **4 spaces indentation**
-    * Use only ``const`` or ``let``
-    * **No trailing space**
-    * End files with a **new line**
-* Keep lines with 120 characters or less
-* Add a comment block before every **method**, **watcher** and **computed property** explaining what it does — use the **imperative mood** ("Calculate this..." not "Calculates this...") with this template:
-```javascript
-/**
- * Calculate if the dropdown is horizontally visible when activated,
- * otherwise it is opened left sided.
- */
-```
-* Add one-line comment inside any block whenever you judge necessary
-* Order Vue instance by:
-    * name
-    * mixins
-    * components
-    * props
-    * data properties
-    * computed properties
-    * watchers
-    * methods
-    * directives
-    * filters
-    * lifecycle hooks
-        * beforeCreate
-        * created
-        * beforeMount
-        * mounted
-        * beforeDestroy
-        * destroyed
+Add comments if method is too complex and/or whenever you judge necessary.
 
 ## Buefy Sass styleguide
 

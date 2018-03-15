@@ -4,8 +4,8 @@
             <a class="navbar-item">
                 <img src="static/img/buefy-logo.png" alt="Buefy">
             </a>
-            <a class="navbar-item"><b-icon pack="fa" icon="github"></b-icon></a>
-            <a class="navbar-item"><b-icon pack="fa" icon="twitter"></b-icon></a>
+            <a class="navbar-item"><b-icon pack="fab" icon="github"></b-icon></a>
+            <a class="navbar-item"><b-icon pack="fab" icon="twitter"></b-icon></a>
         </div>
 
         <div class="navbar-menu">

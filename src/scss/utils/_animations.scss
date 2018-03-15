@@ -87,10 +87,10 @@
 // Fade
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity $speed $easing;
+    transition: opacity $speed-slow $easing;
 }
 .fade-enter,
-.fade-leave-active {
+.fade-leave-to {
     opacity: 0;
 }
 

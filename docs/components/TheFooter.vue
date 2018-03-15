@@ -21,7 +21,7 @@
                     <p class="control">
                         <a
                             class="button"
-                            href="https://github.com/rafaelpimpa/buefy"
+                            href="https://github.com/buefy/buefy"
                             target="_blank">
                             <b-icon icon="github-circle"/>
                             <span>GitHub</span>

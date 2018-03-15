@@ -25,7 +25,7 @@
         <b-field>
             <b-input placeholder="Search..."
                 type="search"
-                icon-pack="fa"
+                icon-pack="fas"
                 icon="search">
             </b-input>
         </b-field>
@@ -33,14 +33,14 @@
         <b-field>
             <b-input placeholder="Email"
                 type="email"
-                icon-pack="fa"
+                icon-pack="fas"
                 icon="envelope">
             </b-input>
         </b-field>
 
         <b-field>
             <b-input placeholder="Credit card"
-                icon-pack="fa"
+                icon-pack="far"
                 icon="credit-card">
             </b-input>
         </b-field>

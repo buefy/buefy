@@ -51,6 +51,8 @@
             maxDate: Date,
             disabled: Boolean,
             unselectableDates: Array,
+            unselectableDaysOfWeek: Array,
+            selectableDates: Array,
             events: Array,
             indicators: String
         },
@@ -72,6 +74,19 @@
 
                 validity.push(day.getMonth() === this.month)
 
+                if (this.selectableDates) {
+                    for (let i = 0; i < this.selectableDates.length; i++) {
+                        const enabledDate = this.selectableDates[i]
+                        if (day.getDate() === enabledDate.getDate() &&
+                            day.getFullYear() === enabledDate.getFullYear() &&
+                            day.getMonth() === enabledDate.getMonth()) {
+                            return true
+                        } else {
+                            validity.push(false)
+                        }
+                    }
+                }
+
                 if (this.unselectableDates) {
                     for (let i = 0; i < this.unselectableDates.length; i++) {
                         const disabledDate = this.unselectableDates[i]
@@ -80,6 +95,13 @@
                             day.getFullYear() !== disabledDate.getFullYear() ||
                             day.getMonth() !== disabledDate.getMonth()
                         )
+                    }
+                }
+
+                if (this.unselectableDaysOfWeek) {
+                    for (let i = 0; i < this.unselectableDaysOfWeek.length; i++) {
+                        const dayOfWeek = this.unselectableDaysOfWeek[i]
+                        validity.push(day.getDay() !== dayOfWeek)
                     }
                 }
 

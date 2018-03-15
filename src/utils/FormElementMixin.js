@@ -5,6 +5,7 @@ export default {
         size: String,
         expanded: Boolean,
         loading: Boolean,
+        rounded: Boolean,
         icon: String,
         iconPack: String,
 

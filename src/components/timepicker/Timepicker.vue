@@ -19,6 +19,7 @@
                 :loading="loading"
                 :disabled="disabled"
                 :readonly="readonly"
+                :rounded="rounded"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"
@@ -151,9 +152,14 @@
                 isNaN(minutes) || minutes < 0 || minutes > 59) {
                 return null
             }
-            const d = new Date()
-            d.setMilliseconds(0)
-            d.setSeconds(0)
+            let d = null
+            if (vm.dateSelected && !isNaN(vm.dateSelected)) {
+                d = new Date(vm.dateSelected)
+            } else {
+                d = new Date()
+                d.setMilliseconds(0)
+                d.setSeconds(0)
+            }
             d.setMinutes(minutes)
             if (vm.hourFormat === HOUR_FORMAT_12) {
                 if (am && hours === 12) {
@@ -231,7 +237,8 @@
                     return config.defaultTimepickerMobileNative
                 }
             },
-            position: String
+            position: String,
+            unselectableTimes: Array
         },
         data() {
             return {
@@ -362,9 +369,13 @@
             updateDateSelected(hours, minutes, meridiens) {
                 if (hours != null && minutes != null &&
                     ((!this.isHourFormat24 && meridiens !== null) || this.isHourFormat24)) {
-                    this.dateSelected = new Date()
-                    this.dateSelected.setMilliseconds(0)
-                    this.dateSelected.setSeconds(0)
+                    if (this.dateSelected && !isNaN(this.dateSelected)) {
+                        this.dateSelected = new Date(this.dateSelected)
+                    } else {
+                        this.dateSelected = new Date()
+                        this.dateSelected.setMilliseconds(0)
+                        this.dateSelected.setSeconds(0)
+                    }
                     this.dateSelected.setHours(hours)
                     this.dateSelected.setMinutes(minutes)
                 }
@@ -394,6 +405,22 @@
                         disabled = hour > maxHours
                     }
                 }
+                if (this.unselectableTimes) {
+                    if (!disabled) {
+                        if (this.minutesSelected !== null) {
+                            const unselectable = this.unselectableTimes.filter((time) => {
+                                return time.getHours() === hour &&
+                                    time.getMinutes() === this.minutesSelected
+                            })
+                            disabled = unselectable.length > 0
+                        } else {
+                            const unselectable = this.unselectableTimes.filter((time) => {
+                                return time.getHours() === hour
+                            })
+                            disabled = unselectable.length === this.minutes.length
+                        }
+                    }
+                }
                 return disabled
             },
 
@@ -414,6 +441,15 @@
                                 const minMinutes = this.maxTime.getMinutes()
                                 disabled = this.hoursSelected === maxHours && minute > minMinutes
                             }
+                        }
+                    }
+                    if (this.unselectableTimes) {
+                        if (!disabled) {
+                            const unselectable = this.unselectableTimes.filter((time) => {
+                                return time.getHours() === this.hoursSelected &&
+                                    time.getMinutes() === minute
+                            })
+                            disabled = unselectable.length > 0
                         }
                     }
                 }
@@ -475,8 +511,16 @@
             onChangeNativePicker(event) {
                 const date = event.target.value
                 if (date) {
-                    const dateString = new Date().toLocaleDateString() + ' ' + date
-                    this.dateSelected = new Date(Date.parse(dateString))
+                    if (this.dateSelected && !isNaN(this.dateSelected)) {
+                        this.dateSelected = new Date(this.dateSelected)
+                    } else {
+                        this.dateSelected = new Date()
+                        this.dateSelected.setMilliseconds(0)
+                        this.dateSelected.setSeconds(0)
+                    }
+                    const time = date.split(':')
+                    this.dateSelected.setHours(parseInt(time[0], 10))
+                    this.dateSelected.setMinutes(parseInt(time[1], 10))
                 } else {
                     this.dateSelected = null
                 }

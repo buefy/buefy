@@ -1,10 +1,16 @@
 <template>
     <section>
+        <div class="block">
+            <b-switch v-model="allowNew">
+                Allow new tags
+            </b-switch>
+        </div>
         <b-field label="Enter some tags">
             <b-taginput
                 v-model="tags"
                 :data="filteredTags"
                 autocomplete
+                :allowNew="allowNew"
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"
@@ -23,7 +29,8 @@
             return {
                 filteredTags: data,
                 isSelectOnly: false,
-                tags: []
+                tags: [],
+                allowNew: false
             }
         },
         methods: {

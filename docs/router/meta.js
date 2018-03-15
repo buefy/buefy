@@ -31,5 +31,6 @@ export default {
     'upload': { title: 'Upload' },
     'table': { title: 'Table' },
     'pagination': { title: 'Pagination' },
-    'cleavejs': { title: 'Cleavejs' }
+    'cleavejs': { title: 'Cleavejs' },
+    'sortablejs': { title: 'Sortablejs' }
 }

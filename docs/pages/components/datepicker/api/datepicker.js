@@ -107,6 +107,13 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>unselectable-days-of-week</code>',
+                description: 'Array of unselectable days of week',
+                type: 'Array',
+                values: '<code>0 - 6 (Sunday is 0, Monday is 1, and so on)</code>',
+                default: '-'
+            },
+            {
                 name: '<code>month-names</code>',
                 description: 'Names of months to display in table header',
                 type: 'Array',
@@ -154,6 +161,28 @@ export default [
                 name: 'default',
                 description: 'Footer',
                 props: '—'
+            },
+            {
+                name: 'header',
+                description: 'Header',
+                props: '—'
+            }
+        ],
+        events: [
+            {
+                name: '<code>input</code>',
+                description: 'Triggers when value is changed',
+                parameters: '<code>value: Date</code>'
+            },
+            {
+                name: '<code>changeMonth</code>',
+                description: 'Triggers when calendar month is changed',
+                parameters: '<code>month: Number(0-11)</code>'
+            },
+            {
+                name: '<code>changeYear</code>',
+                description: 'Triggers when calendar year is changed',
+                parameters: '<code>year: Number</code>'
             }
         ]
     }

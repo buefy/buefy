@@ -5,9 +5,10 @@ export default [
                 name: '<code>defaultIconPack</code>',
                 description: `Icon pack used internally and on the Icon component attribute —
                     <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a> or
-                    <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>`,
+                    <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a> or
+                    <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a>`,
                 type: 'String',
-                values: '<code>mdi</code>, <code>fa</code>',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>',
                 default: '<code>mdi</code>'
             },
             {
@@ -105,6 +106,13 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>0</code>'
+            },
+            {
+                name: '<code>defaultUnselectableDaysOfWeek</code>',
+                description: `Default datepicker <code>unselectable-days-of-week</code> attribute`,
+                type: 'Array',
+                values: '—',
+                default: '-'
             },
             {
                 name: '<code>defaultTimeFormatter</code>',

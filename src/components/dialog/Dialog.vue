@@ -31,7 +31,6 @@
                                         v-model="prompt"
                                         class="input"
                                         ref="input"
-                                        required
                                         :class="{ 'is-danger': validationMessage }"
                                         v-bind="inputAttrs"
                                         @keyup.enter="confirm">
@@ -105,7 +104,7 @@
             hasInput: Boolean, // Used internally to know if it's prompt
             inputAttrs: {
                 type: Object,
-                default: () => {}
+                default: () => ({})
             },
             onConfirm: {
                 type: Function,
@@ -168,8 +167,6 @@
              */
             close() {
                 this.isActive = false
-                this.onCancel.apply(null, arguments)
-
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()
@@ -183,6 +180,10 @@
         },
         mounted() {
             this.isActive = true
+
+            if (typeof this.inputAttrs.required === 'undefined') {
+                this.$set(this.inputAttrs, 'required', true)
+            }
 
             this.$nextTick(() => {
                 // Handle which element receives focus

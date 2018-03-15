@@ -1,7 +1,9 @@
 <template>
     <section>
         <b-field grouped group-multiline>
-            <div v-for="column in columnsTemplate" class="control">
+            <div v-for="(column, index) in columnsTemplate" 
+                :key="index"
+                class="control">
                 <b-checkbox v-model="column.visible">
                     {{ column.title }}
                 </b-checkbox>

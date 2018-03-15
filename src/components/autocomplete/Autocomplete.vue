@@ -1,17 +1,18 @@
 <template>
-    <div class="autocomplete control" :class="{size, 'is-expanded': expanded}">
+    <div class="autocomplete control" :class="{'is-expanded': expanded}">
         <b-input
             v-model="newValue"
             ref="input"
             :size="size"
             :loading="loading"
+            :rounded="rounded"
             :icon="icon"
             :icon-pack="iconPack"
             :maxlength="maxlength"
             autocomplete="off"
             v-bind="$attrs"
             @focus="focused"
-            @blur="$emit('blur', $event)"
+            @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
             @keydown.native.tab="tabPressed"
             @keydown.native.enter.prevent="enterPressed"
@@ -23,11 +24,11 @@
             <div
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
-                v-show="isActive && (visibleData.length > 0 || hasEmptySlot)"
+                v-show="isActive && (data.length > 0 || hasEmptySlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
                     <a
-                        v-for="(option, index) in visibleData"
+                        v-for="(option, index) in data"
                         :key="index"
                         class="dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
@@ -41,12 +42,7 @@
                         <span v-else v-html="getValue(option, true)"/>
                     </a>
                     <div
-                        v-if="data.length > maxResults"
-                        class="dropdown-item is-disabled">
-                        &hellip;
-                    </div>
-                    <div
-                        v-else-if="visibleData.length === 0"
+                        v-if="data.length === 0"
                         class="dropdown-item is-disabled">
                         <slot name="empty"/>
                     </div>
@@ -78,11 +74,9 @@
                 type: String,
                 default: 'value'
             },
-            maxResults: {
-                type: [Number, String],
-                default: 6
-            },
-            keepFirst: Boolean
+            keepFirst: Boolean,
+            clearOnSelect: Boolean,
+            openOnFocus: Boolean
         },
         data() {
             return {
@@ -91,6 +85,7 @@
                 isActive: false,
                 newValue: this.value,
                 isListInViewportVertically: true,
+                hasFocus: false,
                 _isAutocomplete: true,
                 _elementRef: 'input'
             }
@@ -102,7 +97,7 @@
              */
             whiteList() {
                 const whiteList = []
-                whiteList.push(this.$refs.input)
+                whiteList.push(this.$refs.input.$el.querySelector('input'))
                 whiteList.push(this.$refs.dropdown)
                 // Add all chidren from dropdown
                 if (this.$refs.dropdown !== undefined) {
@@ -113,15 +108,6 @@
                 }
 
                 return whiteList
-            },
-
-            /**
-             * Splitted data depending on maxResults.
-             */
-            visibleData() {
-                return this.data.length <= this.maxResults
-                    ? this.data
-                    : this.data.slice(0, this.maxResults)
             },
 
             /**
@@ -159,31 +145,19 @@
              * When updating input's value
              *   1. Emit changes
              *   2. If value isn't the same as selected, set null
-             *   3. Select first option if "keep-first"
-             *   4. Close dropdown if value is clear or else open it
+             *   3. Close dropdown if value is clear or else open it
              */
             newValue(value) {
                 this.$emit('input', value)
-
                 // Check if selected is invalid
-                if (this.getValue(this.selected) !== value) this.setSelected(null, false)
-
-                // Keep first option always pre-selected
-                if (this.keepFirst) {
-                    this.$nextTick(() => {
-                        if (this.visibleData.length) {
-                            // If has visible data, keep updating the hovered
-                            if (this.newValue !== '' && this.hovered !== this.visibleData[0]) {
-                                this.setHovered(this.visibleData[0])
-                            }
-                        } else {
-                            this.setHovered(null)
-                        }
-                    })
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue !== value) {
+                    this.setSelected(null, false)
                 }
-
                 // Close dropdown if input is clear or else open it
-                this.isActive = !!value
+                if (this.hasFocus && (!this.openOnFocus || value)) {
+                    this.isActive = !!value
+                }
             },
 
             /**
@@ -194,6 +168,16 @@
             value(value) {
                 this.newValue = value
                 !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+
+            /**
+             * Select first option if "keep-first
+             */
+            data(value) {
+                // Keep first option always pre-selected
+                if (this.keepFirst) {
+                    this.selectFirstOption(value)
+                }
             }
         },
         methods: {
@@ -216,9 +200,25 @@
                 this.selected = option
                 this.$emit('select', this.selected)
                 if (this.selected !== null) {
-                    this.newValue = this.getValue(this.selected)
+                    this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
                 }
                 closeDropdown && this.$nextTick(() => { this.isActive = false })
+            },
+
+            /**
+             * Select first option
+             */
+            selectFirstOption(options) {
+                this.$nextTick(() => {
+                    if (options.length) {
+                        // If has visible data or open on focus, keep updating the hovered
+                        if (this.openOnFocus || (this.newValue !== '' && this.hovered !== options[0])) {
+                            this.setHovered(options[0])
+                        }
+                    } else {
+                        this.setHovered(null)
+                    }
+                })
             },
 
             /**
@@ -262,7 +262,9 @@
                     ? getValueByPath(option, this.field)
                     : option
 
-                const escapedValue = escapeRegExpChars(this.newValue)
+                const escapedValue = typeof this.newValue === 'string'
+                    ? escapeRegExpChars(this.newValue)
+                    : this.newValue
                 const regex = new RegExp(`(${escapedValue})`, 'gi')
 
                 return isHighlight
@@ -299,11 +301,29 @@
             keyArrows(direction) {
                 const sum = direction === 'down' ? 1 : -1
                 if (this.isActive) {
-                    let index = this.visibleData.indexOf(this.hovered) + sum
-                    index = index > this.visibleData.length - 1 ? 0 : index
-                    index = index < 0 ? this.visibleData.length - 1 : index
+                    let index = this.data.indexOf(this.hovered) + sum
+                    index = index > this.data.length - 1 ? this.data.length : index
+                    index = index < 0 ? 0 : index
 
-                    this.setHovered(this.visibleData[index])
+                    this.setHovered(this.data[index])
+
+                    const list = this.$refs.dropdown.querySelector('.dropdown-content')
+                    const element = list.querySelectorAll('.dropdown-item:not(.is-disabled)')[index]
+
+                    if (!element) return
+
+                    const visMin = list.scrollTop
+                    const visMax = list.scrollTop + list.clientHeight - element.clientHeight
+
+                    if (element.offsetTop < visMin) {
+                        list.scrollTop = element.offsetTop
+                    } else if (element.offsetTop >= visMax) {
+                        list.scrollTop = (
+                            element.offsetTop -
+                            list.clientHeight +
+                            element.clientHeight
+                        )
+                    }
                 } else {
                     this.isActive = true
                 }
@@ -314,8 +334,25 @@
              * If value is the same as selected, select all text.
              */
             focused(event) {
-                if (this.getValue(this.selected) === this.newValue) this.focus()
+                if (this.getValue(this.selected) === this.newValue) {
+                    this.$el.querySelector('input').select()
+                }
+                if (this.openOnFocus) {
+                    this.isActive = true
+                    if (this.keepFirst) {
+                        this.selectFirstOption(this.data)
+                    }
+                }
+                this.hasFocus = true
                 this.$emit('focus', event)
+            },
+
+            /**
+             * Blur listener.
+            */
+            onBlur(event) {
+                this.hasFocus = false
+                this.$emit('blur', event)
             }
         },
         created() {

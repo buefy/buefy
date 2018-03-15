@@ -4,8 +4,8 @@
             <b-input placeholder="No label"></b-input>
         </b-field>
 
-        <b-field label="Label">
-            <b-input placeholder="Text input"></b-input>
+        <b-field label="Rounded">
+            <b-input placeholder="No label" rounded></b-input>
         </b-field>
 
         <b-field label="Success" type="is-success">

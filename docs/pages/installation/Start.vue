@@ -46,20 +46,6 @@
                     <router-link to="/documentation/customization">customization section</router-link>.
                 </b-message>
                 <CodeView :code="importing | pre" lang="javascript" expanded/>
-
-                <b-message type="is-warning">
-                    If you're using <strong>Nuxt.js</strong> for Server Side Rendering (SSR), then follow these steps:
-                </b-message>
-                <div class="content">
-                    <ol>
-                        <li>Create a new file in Nuxt's <strong>plugins</strong> folder called <code>buefy.js</code></li>
-                        <li>
-                            Paste and save it:
-                            <CodeView :code="importingSSR | pre" lang="javascript" expanded/>
-                        </li>
-                        <li>In the <strong>nuxt.config.js</strong> file, add <code>plugins: ['~plugins/buefy']</code> to the <code>module.exports</code> object</li>
-                    </ol>
-                </div>
             </div>
         </div>
 
@@ -78,11 +64,40 @@
 
         <hr>
 
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">3</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Nuxt.js:</h3>
+                <p>It's really very simple to start with nuxt. But we can make it even simpler by adding <a href="https://github.com/buefy/nuxt-buefy">nuxt-buefy</a>.</p>
+
+                <div class="content">
+                    <ol>
+                        <li>
+                            Install using <code>npm</code> or <code>yarn.</code> <br/>
+                            <CodeView :code="installNuxtBuefy | pre" lang="javascript" expanded/>
+                        </li>
+                        <li>
+                            Add <a href="https://github.com/buefy/nuxt-buefy">nuxt-buefy</a> to modules section of nuxt.config.js: <br />
+                            <CodeView :code="importingNuxtBuefy | pre" lang="javascript" expanded/>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
         <h3 class="title">Include Material Design Icons</h3>
         <b-message type="is-info">
             By default Buefy uses <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>,
-            if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome</a>, go to
+            if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a> 
+            or <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a>, go to
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
+        </b-message>
+        <b-message type="is-warning">
+           Please note that Buefy doesn't include icon packs. You have to import it as you prefer (NPM, CDN, ...)
         </b-message>
         <CodeView :code="materialIcons" expanded/>
     </div>
@@ -110,6 +125,23 @@
                 import 'buefy/lib/buefy.css'
 
                 Vue.use(Buefy) `,
+                installNuxtBuefy: `
+                // with npm
+                npm install nuxt-buefy
+
+                // with yarn
+                yarn add nuxt-buefy
+                `,
+                importingNuxtBuefy: `
+                {
+                    modules: [
+                        // Simple usage
+                        'nuxt-buefy',
+
+                        // Or you can customize
+                        ['nuxt-buefy', { css: false, materialDesignIcons: false }],
+                    ]
+                }`,
                 importingCDNHtml: `
                 <!-- Buefy CSS -->
                 <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">

@@ -5,6 +5,7 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
+        @click.prevent="newValue = !newValue"
         @keydown.prevent.enter.space="$refs.label.click()"
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
@@ -14,6 +15,7 @@
             v-model="newValue"
             type="checkbox"
             :name="name"
+            :value="nativeValue"
             :disabled="disabled"
             :true-value="trueValue"
             :false-value="falseValue">
@@ -43,23 +45,17 @@
         },
         data() {
             return {
-                newValue: this.value,
                 isMouseDown: false
             }
         },
-        watch: {
-            /**
-             * When v-model change, set internal value.
-             */
-            value(value) {
-                this.newValue = value
-            },
-
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                this.$emit('input', value)
+        computed: {
+            newValue: {
+                get() {
+                    return this.value
+                },
+                set(value) {
+                    this.$emit('input', value)
+                }
             }
         }
     }

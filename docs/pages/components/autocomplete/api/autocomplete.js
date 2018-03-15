@@ -23,11 +23,18 @@ export default [
                 default: '<code>value</code>'
             },
             {
-                name: '<code>max-results</code>',
-                description: 'Total of results/options to show',
-                type: 'Number',
+                name: '<code>clear-on-select</code>',
+                description: 'Clear input text on select',
+                type: 'Boolean',
                 values: '—',
-                default: '<code>6</code>'
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>open-on-focus</code>',
+                description: 'Open dropdown list on focus',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>keep-first</code>',
@@ -105,7 +112,7 @@ export default [
                 parameters: '<code>value: String|Number</code>'
             },
             {
-                name: '<code>selected</code>',
+                name: '<code>select</code>',
                 description: 'Triggers when an option is selected or unset',
                 parameters: '<code>option: String|Number|Object</code>'
             },

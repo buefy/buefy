@@ -3,29 +3,30 @@
         <h2 class="title is-4">API</h2>
 
         <template v-for="component in data">
-            <h3
-                v-if="component.title"
-                class="subtitle"
-                :key="component.title">
-                {{ component.title }}
-            </h3>
-            <b-tabs :key="component.title">
-                <b-tab-item v-if="component.props" label="Properties">
-                    <b-table :data="component.props" :columns="propsColumns"/>
-                </b-tab-item>
+            <div :key="component.title">
+                <h3
+                    v-if="component.title"
+                    class="subtitle">
+                    {{ component.title }}
+                </h3>
+                <b-tabs>
+                    <b-tab-item v-if="component.props" label="Properties">
+                        <b-table :data="component.props" :columns="propsColumns"/>
+                    </b-tab-item>
 
-                <b-tab-item v-if="component.slots" label="Slots">
-                    <b-table :data="component.slots" :columns="slotsColumns"/>
-                </b-tab-item>
+                    <b-tab-item v-if="component.slots" label="Slots">
+                        <b-table :data="component.slots" :columns="slotsColumns"/>
+                    </b-tab-item>
 
-                <b-tab-item v-if="component.events" label="Events">
-                    <b-table :data="component.events" :columns="eventsColumns"/>
-                </b-tab-item>
+                    <b-tab-item v-if="component.events" label="Events">
+                        <b-table :data="component.events" :columns="eventsColumns"/>
+                    </b-tab-item>
 
-                <b-tab-item v-if="component.methods" label="Methods">
-                    <b-table :data="component.methods" :columns="methodsColumns"/>
-                </b-tab-item>
-            </b-tabs>
+                    <b-tab-item v-if="component.methods" label="Methods">
+                        <b-table :data="component.methods" :columns="methodsColumns"/>
+                    </b-tab-item>
+                </b-tabs>
+            </div>
         </template>
     </section>
 </template>

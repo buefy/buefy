@@ -4,7 +4,7 @@
             v-if="type !== 'textarea'"
             ref="input"
             class="input"
-            :class="[statusType, size]"
+            :class="inputClasses"
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
@@ -18,7 +18,7 @@
             v-else
             ref="textarea"
             class="textarea"
-            :class="[statusType, size]"
+            :class="inputClasses"
             :maxlength="maxlength"
             :value="newValue"
             v-bind="$attrs"
@@ -38,6 +38,7 @@
             class="is-right"
             :class="{ 'is-clickable': passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
+            :pack="iconPack"
             :size="iconSize"
             :type="!passwordReveal ? statusType : 'is-primary'"
             both
@@ -91,6 +92,7 @@
             rootClasses() {
                 return [
                     this.iconPosition,
+                    this.size,
                     {
                         'is-expanded': this.expanded,
                         'is-loading': this.loading,
@@ -98,10 +100,13 @@
                     }
                 ]
             },
-
-            /**
-             * Check if have any icon in the right side.
-             */
+            inputClasses() {
+                return [
+                    this.statusType,
+                    this.size,
+                    { 'is-rounded': this.rounded }
+                ]
+            },
             hasIconRight() {
                 return this.passwordReveal || this.loading || this.statusType
             },

@@ -76,25 +76,22 @@ $snackbar-background-color: $dark !default;
 
     .toast,
     .snackbar {
-        // Modifers
-        &.is-top {
+        // Modifiers
+        &.is-top, &.is-bottom {
             align-self: center;
         }
-        &.is-top-right {
+        &.is-top-right, &.is-bottom-right {
             align-self: flex-end;
         }
-        &.is-bottom {
-            align-self: center;
-        }
-        &.is-bottom-right {
-            align-self: flex-end;
+        &.is-top-left, &.is-bottom-left {
+            align-self: flex-start;
         }
         &.is-toast {
             opacity: 0.92;
         }
     }
 
-    // Modifers
+    // Modifiers
     &.is-top {
         flex-direction: column;
     }
