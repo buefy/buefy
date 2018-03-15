@@ -26,6 +26,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>custom-class</code>',
+                description: 'CSS classes to be applied on field label',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>message</code>',
                 description: 'Help message text',
                 type: 'String, Array<String>',
