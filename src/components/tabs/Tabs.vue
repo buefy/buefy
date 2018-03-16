@@ -13,7 +13,15 @@
                             :icon="tabItem.icon"
                             :pack="tabItem.iconPack"
                             :size="size"/>
-                        <span>{{ tabItem.label }}</span>
+                        <template v-if="tabItem.$slots.label">
+                            <b-slot-component
+                                :component="tabItem"
+                                name="label"
+                                event="updated" />
+                        </template>
+                        <template v-else>
+                            <span>{{ tabItem.label }}</span>
+                        </template>
                     </a>
                 </li>
             </ul>
@@ -26,11 +34,13 @@
 
 <script>
     import Icon from '../icon'
+    import SlotComponent from './SlotComponent'
 
     export default {
         name: 'BTabs',
         components: {
-            [Icon.name]: Icon
+            [Icon.name]: Icon,
+            [SlotComponent.name]: SlotComponent
         },
         props: {
             value: [String, Number],

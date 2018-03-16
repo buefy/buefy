@@ -8,6 +8,20 @@
         </div>
         <b-tabs v-model="activeTab">
             <b-tab-item label="Pictures">
+                <template slot="label">
+                    <span
+                        class="my-class" 
+                        :class="{'is-dark': true}" 
+                        style="color: red;"> 
+                        <strong> {{ text }} </strong> 
+                        <b-icon pack="fa" :icon="text"></b-icon>
+                    </span>
+                </template>
+                <div class="block">
+                    <button class="button is-primary" @click="switchText">
+                        Switch
+                    </button>
+                </div>
                 Lorem ipsum dolor sit amet.
             </b-tab-item>
 
@@ -43,7 +57,13 @@
         data() {
             return {
                 activeTab: 0,
-                showBooks: false
+                showBooks: false,
+                text: 'home'
+            }
+        },
+        methods: {
+            switchText() {
+                this.text = (this.text === 'home' ? 'user' : 'home')
             }
         }
     }
