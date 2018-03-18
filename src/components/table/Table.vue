@@ -68,7 +68,7 @@
 
                             <td v-if="detailed">
                                 <a
-                                    v-if="!hasDetailedVisible(row)"
+                                    v-if="hasDetailedVisible(row)"
                                     role="button"
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
