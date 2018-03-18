@@ -43,7 +43,13 @@
         data() {
             return {
                 activeTab: 0,
-                showBooks: false
+                showBooks: false,
+                text: 'home'
+            }
+        },
+        methods: {
+            switchText() {
+                this.text = (this.text === 'home' ? 'user' : 'home')
             }
         }
     }
