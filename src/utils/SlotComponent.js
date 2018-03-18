@@ -1,4 +1,4 @@
-<script>
+
 export default {
     name: 'BSlotComponent',
     props: {
@@ -29,4 +29,3 @@ export default {
         return h(tag, slot.data, slot.children)
     }
 }
-</script>

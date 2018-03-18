@@ -13,10 +13,10 @@
                             :icon="tabItem.icon"
                             :pack="tabItem.iconPack"
                             :size="size"/>
-                        <template v-if="tabItem.$slots.label">
+                        <template v-if="tabItem.$slots.header">
                             <b-slot-component
                                 :component="tabItem"
-                                name="label"
+                                name="header"
                                 event="updated" />
                         </template>
                         <template v-else>
@@ -34,7 +34,7 @@
 
 <script>
     import Icon from '../icon'
-    import SlotComponent from './SlotComponent'
+    import SlotComponent from '../../utils/SlotComponent'
 
     export default {
         name: 'BTabs',
