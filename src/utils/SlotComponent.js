@@ -1,31 +1,47 @@
+import Vue from 'vue'
 
 export default {
     name: 'BSlotComponent',
     props: {
-        component: Object,
+        component: {
+            type: Object,
+            required: true
+        },
         name: {
             type: String,
-            default: () => 'default'
+            default: 'default'
+        },
+        tag: {
+            type: String,
+            default: 'div'
         },
         event: {
             type: String,
-            default: () => 'updated'
+            default: 'updated'
         }
     },
     methods: {
         refresh() {
             this.$forceUpdate()
+        },
+        isVueComponent() {
+            return this.component instanceof Vue
         }
     },
     created() {
-        this.component.$on(this.event, this.refresh)
+        if (this.isVueComponent()) {
+            this.component.$on(this.event, this.refresh)
+        }
     },
     beforeDestroy() {
-        this.component.$off(this.event, this.refresh)
+        if (this.isVueComponent()) {
+            this.component.$off(this.event, this.refresh)
+        }
     },
     render(h) {
-        const slot = this.component.$slots[this.name][0]
-        const tag = slot.tag
-        return h(tag, slot.data, slot.children)
+        if (this.isVueComponent()) {
+            const slots = this.component.$slots[this.name]
+            return h(this.tag, {}, slots)
+        }
     }
 }
