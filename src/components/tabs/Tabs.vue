@@ -8,18 +8,19 @@
                     v-show="tabItem.visible"
                     :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
                     <a @click="tabClick(index)">
-                        <b-icon
-                            v-if="tabItem.icon"
-                            :icon="tabItem.icon"
-                            :pack="tabItem.iconPack"
-                            :size="size"/>
                         <template v-if="tabItem.$slots.header">
                             <b-slot-component
                                 :component="tabItem"
                                 name="header"
+                                tag="span"
                                 event="updated" />
                         </template>
                         <template v-else>
+                            <b-icon
+                                v-if="tabItem.icon"
+                                :icon="tabItem.icon"
+                                :pack="tabItem.iconPack"
+                                :size="size"/>
                             <span>{{ tabItem.label }}</span>
                         </template>
                     </a>

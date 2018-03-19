@@ -96,6 +96,18 @@ export default [
                 values: '-',
                 default: 'true'
             }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Tab item body',
+                props: '—'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Tab item custom header',
+                props: '—'
+            }
         ]
     }
 ]
