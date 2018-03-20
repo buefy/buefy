@@ -33,6 +33,14 @@
                     <b-icon icon="twitter"/>
                 </a>
 
+                <a
+                    class="navbar-item"
+                    href="https://discordapp.com/invite/ZkdFJMr"
+                    target="_blank"
+                    title="Discord">
+                    <b-icon icon="discord"/>
+                </a>
+
                 <span
                     class="navbar-burger burger"
                     :class="{ 'is-active': isMenuActive }"

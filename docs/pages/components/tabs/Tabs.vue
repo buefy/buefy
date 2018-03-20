@@ -22,6 +22,10 @@
         </Example>
 
          <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode" title="Custom Headers">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.6.4</span>
+            </div>
             <p>
                 By adding a slot named <code>header</code> you can customize the header of a tab item.
             </p>

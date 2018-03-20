@@ -25,6 +25,10 @@
         </Example>
 
         <Example :component="ExHeader" :code="ExHeaderCode" title="Header" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.6.4</span>
+            </div>
             <p>You can add your custom header to the datepicker.</p>
         </Example>
 
