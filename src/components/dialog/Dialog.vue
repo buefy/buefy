@@ -44,7 +44,7 @@
                 <footer class="modal-card-foot">
                     <button
                         v-if="showCancel"
-                        class="button is-light"
+                        class="button"
                         ref="cancelButton"
                         @click="cancel('button')">
                         {{ cancelText }}

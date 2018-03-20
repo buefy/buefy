@@ -28,6 +28,7 @@
 * #599 Fix ``on-cancel`` prop to dialog, get called when clicking confirm
 * #648 Fix dropdown emit change event (thanks @adrlen)
 * #670 Fix tabs emit change event (thanks @adrlen)
+* #686 Remove 'is-light' color to cancel button of dialog
 
 ## 0.6.3
 
