@@ -109,6 +109,10 @@
             onConfirm: {
                 type: Function,
                 default: () => {}
+            },
+            focusOn: {
+                type: String,
+                default: 'confirm'
             }
         },
         data() {
@@ -187,9 +191,13 @@
 
             this.$nextTick(() => {
                 // Handle which element receives focus
-                this.hasInput
-                    ? this.$refs.input.focus()
-                    : this.$refs.confirmButton.focus()
+                if (this.hasInput) {
+                    this.$refs.input.focus()
+                } else if (this.focusOn === 'cancel' && this.showCancel) {
+                    this.$refs.cancelButton.focus()
+                } else {
+                    this.$refs.confirmButton.focus()
+                }
             })
         }
     }

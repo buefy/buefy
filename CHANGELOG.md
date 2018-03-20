@@ -18,6 +18,7 @@
 * #644 Add ``clear-on-select`` prop to autocomplete (thanks @raniesantos)
 * #645 Add ``selectable-dates`` prop to datepicker (thanks @pip63)
 * #682 Add ``has-detailed-visible`` prop to table (thanks @wanxe)
+* #687 Add ``focus-on`` prop to dialog
 
 ### Fixes and changes
 
