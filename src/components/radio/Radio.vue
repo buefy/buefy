@@ -1,7 +1,7 @@
 <template>
     <label
         ref="label"
-        :class="[size, { 'is-disabled': disabled }, class]"
+        :class="[size, { 'is-disabled': disabled }, customClass]"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="$refs.label.click()">
@@ -25,7 +25,7 @@
             disabled: Boolean,
             name: String,
             size: String,
-            class: {
+            customClass: {
                 type: [String, Object],
                 default: 'b-radio radio'
             }
