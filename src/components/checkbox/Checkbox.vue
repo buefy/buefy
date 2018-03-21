@@ -37,7 +37,7 @@
             },
             customClass: {
                 type: [String, Object],
-                default: "b-checkbox checkbox"
+                default: 'b-checkbox checkbox'
             }
         },
         computed: {
