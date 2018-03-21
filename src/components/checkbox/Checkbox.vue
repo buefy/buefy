@@ -1,6 +1,6 @@
 <template>
     <label
-        :class="[size, { 'is-disabled': disabled }, class]"
+        :class="[size, { 'is-disabled': disabled }, customClass]"
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
@@ -35,7 +35,7 @@
                 type: [String, Number, Boolean, Function, Object, Array, Symbol],
                 default: false
             },
-            class: {
+            customClass: {
                 type: [String, Object],
                 default: "b-checkbox checkbox"
             }
