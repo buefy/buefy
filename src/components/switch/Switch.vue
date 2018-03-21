@@ -5,7 +5,6 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @click.prevent="newValue = !newValue"
         @keydown.prevent.enter.space="$refs.label.click()"
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
@@ -14,12 +13,12 @@
         <input
             v-model="newValue"
             type="checkbox"
+            :disabled="disabled"
             :name="name"
             :value="nativeValue"
-            :disabled="disabled"
             :true-value="trueValue"
             :false-value="falseValue">
-        <span class="check" :class="[{ 'is-elastic': isMouseDown }, type]"/>
+        <span class="check" :class="[{ 'is-elastic': isMouseDown && !disabled }, type]"/>
         <span class="control-label"><slot/></span>
     </label>
 </template>
