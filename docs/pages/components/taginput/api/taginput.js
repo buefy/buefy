@@ -122,12 +122,12 @@ export default [
             {
                 name: '<code>add</code>',
                 description: 'Triggers when a tag has been added',
-                parameters: '<code>value: String</code>'
+                parameters: '<code>value: String|Object</code>'
             },
             {
                 name: '<code>remove</code>',
                 description: 'Triggers when a tag has been removed',
-                parameters: '<code>value: String</code>'
+                parameters: '<code>value: String|Object</code>'
             }
         ]
     }
