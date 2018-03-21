@@ -5,7 +5,6 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @click.prevent="newValue = !newValue"
         @keydown.prevent.enter.space="$refs.label.click()"
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
@@ -14,6 +13,7 @@
         <input
             v-model="newValue"
             type="checkbox"
+            @click.stop
             :name="name"
             :value="nativeValue"
             :disabled="disabled"
