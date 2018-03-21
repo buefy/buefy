@@ -52,7 +52,7 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>class</code>',
+                name: '<code>custom-class</code>',
                 description: 'custom class for checkbox',
                 type: 'String, Object',
                 values: '—',
