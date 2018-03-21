@@ -27,7 +27,10 @@
 
             <b-dropdown-item :disabled="disabled" custom>
                 <header class="datepicker-header">
-                    <div class="pagination field is-centered">
+                    <template v-if="$slots.header !== undefined && $slots.header.length">
+                        <slot name="header" />
+                    </template>
+                    <div v-else class="pagination field is-centered">
                         <a
                             v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
@@ -98,6 +101,7 @@
                     :disabled="disabled"
                     :unselectable-dates="unselectableDates"
                     :unselectable-days-of-week="unselectableDaysOfWeek"
+                    :selectable-dates="selectableDates"
                     :events="events"
                     :indicators="indicators"
                     @close="$refs.dropdown.isActive = false"/>
@@ -228,6 +232,7 @@
                 type: Array,
                 default: () => { return config.defaultUnselectableDaysOfWeek }
             },
+            selectableDates: Array,
             dateFormatter: {
                 type: Function,
                 default: (date) => {
@@ -339,6 +344,25 @@
                 this.dateSelected = value
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+
+            focusedDate(value) {
+                if (value) {
+                    this.focusedDateData = {
+                        month: value.getMonth(),
+                        year: value.getFullYear()
+                    }
+                }
+            },
+
+            /*
+            * Emit input event on month and/or year change
+            */
+            'focusedDateData.month'(value) {
+                this.$emit('changeMonth', value)
+            },
+            'focusedDateData.year'(value) {
+                this.$emit('changeYear', value)
             }
         },
         methods: {

@@ -1,6 +1,9 @@
 <template>
     <div class="field" :class="rootClasses">
-        <div v-if="horizontal" class="field-label is-normal">
+        <div
+            v-if="horizontal"
+            class="field-label is-normal"
+            :class="customClass">
             <label
                 v-if="label"
                 :for="labelFor"
@@ -12,6 +15,7 @@
             <label
                 v-if="label"
                 :for="labelFor"
+                :class="customClass"
                 class="label">
                 {{ label }}
             </label>
@@ -19,7 +23,7 @@
         <b-field-body
             v-if="horizontal"
             :message="newMessage ? formattedMessage : ''"
-            :type="newMessage ? newType : ''">
+            :type="newType">
             <slot/>
         </b-field-body>
         <template v-else>
@@ -55,7 +59,8 @@
             addons: {
                 type: Boolean,
                 default: true
-            }
+            },
+            customClass: String
         },
         data() {
             return {
@@ -101,9 +106,13 @@
             fieldType() {
                 if (this.grouped) return 'is-grouped'
 
+                let renderedNode = 0
+                if (this.$slots.default) {
+                    renderedNode = this.$slots.default
+                                        .reduce((i, node) => node.tag ? i + 1 : i, 0)
+                }
                 if (
-                    this.$slots.default !== undefined &&
-                    this.$slots.default.length > 1 &&
+                    renderedNode > 1 &&
                     this.addons &&
                     !this.horizontal
                 ) {

@@ -92,6 +92,7 @@
             rootClasses() {
                 return [
                     this.iconPosition,
+                    this.size,
                     {
                         'is-expanded': this.expanded,
                         'is-loading': this.loading,

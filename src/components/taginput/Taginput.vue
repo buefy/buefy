@@ -1,5 +1,5 @@
 <template>
-    <div class="taginput control" :class="[size, rootClasses]">
+    <div class="taginput control" :class="rootClasses">
         <div
             class="taginput-container"
             :class="[statusType, size, containerClasses]"
@@ -37,7 +37,18 @@
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
-                @select="onSelect"/>
+                @select="onSelect">
+                <template
+                    :slot="defaultSlotName"
+                    slot-scope="props">
+                    <slot
+                        :option="props.option"
+                        :index="props.index" />
+                </template>
+                <template :slot="emptySlotName">
+                    <slot name="empty" />
+                </template>
+            </b-autocomplete>
         </div>
 
         <p v-if="maxtags || maxlength" class="help counter">
@@ -95,6 +106,10 @@
                 type: Array,
                 default: () => [13, 188]
             },
+            removeOnKeys: {
+                type: Array,
+                default: () => [8]
+            },
             allowNew: Boolean
         },
         data() {
@@ -121,6 +136,22 @@
 
             valueLength() {
                 return this.newTag.trim().length
+            },
+
+            defaultSlotName() {
+                return this.hasDefaultSlot ? 'default' : 'dontrender'
+            },
+
+            emptySlotName() {
+                return this.hasEmptySlot ? 'empty' : 'dontrender'
+            },
+
+            hasDefaultSlot() {
+                return !!this.$scopedSlots.default
+            },
+
+            hasEmptySlot() {
+                return !!this.$slots.empty
             },
 
             /**
@@ -173,10 +204,10 @@
             },
 
             customOnBlur($event) {
-                this.onBlur($event)
-
                 // Add tag on-blur if not select only
                 if (!this.autocomplete) this.addTag()
+
+                this.onBlur($event)
             },
 
             onSelect(option) {
@@ -197,11 +228,14 @@
 
             removeLastTag() {
                 if (this.tagsLength > 0) {
-                    this.newTag = this.removeTag(this.tagsLength - 1)
+                    this.removeTag(this.tagsLength - 1)
                 }
             },
 
             keydown(event) {
+                if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
+                    this.removeLastTag()
+                }
                 // Stop if is to accept select only
                 if (this.autocomplete && !this.allowNew) return
 

@@ -19,7 +19,7 @@
 
                 <a
                     class="navbar-item"
-                    href="https://github.com/rafaelpimpa/buefy"
+                    href="https://github.com/buefy/buefy"
                     target="_blank"
                     title="Github">
                     <b-icon icon="github-circle"/>
@@ -31,6 +31,14 @@
                     target="_blank"
                     title="Twitter">
                     <b-icon icon="twitter"/>
+                </a>
+
+                <a
+                    class="navbar-item"
+                    href="https://discordapp.com/invite/ZkdFJMr"
+                    target="_blank"
+                    title="Discord">
+                    <b-icon icon="discord"/>
                 </a>
 
                 <span
@@ -150,7 +158,7 @@
                             <hr class="navbar-divider">
                             <a
                                 class="navbar-item"
-                                href="https://github.com/rafaelpimpa/buefy/releases"
+                                href="https://github.com/buefy/buefy/releases"
                                 target="_blank">
                                 Changelogs
                             </a>

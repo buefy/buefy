@@ -15,7 +15,7 @@
             <div class="media-content">
                 <h3 class="subtitle">Install Buefy via npm</h3>
                 <CodeView code="npm install buefy" lang="bash" expanded/>
-                <p class="content">Or clone the repository: <a href="https://github.com/rafaelpimpa/buefy" target="_blank">https://github.com/rafaelpimpa/buefy</a></p>
+                <p class="content">Or clone the repository: <a href="https://github.com/buefy/buefy" target="_blank">https://github.com/buefy/buefy</a></p>
             </div>
         </div>
 

@@ -35,6 +35,7 @@
                 padding-bottom: 0;
                 border: none;
                 box-shadow: none;
+                min-width: 10em;
                 &:focus {
                     box-shadow: none !important;
                 }

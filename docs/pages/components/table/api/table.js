@@ -171,6 +171,13 @@ export default [
                 default: '<code>[]</code>'
             },
             {
+              name: '<code>has-detailed-visible</code>',
+              description: 'Controls the visibility of the trigger that toggles the detailed rows.',
+              type: 'Function',
+              values: '—',
+              default: '<code>true</code>'
+            },
+            {
                 name: '<code>detail-key</code>',
                 description: 'Use an unique key of your data Object when use detailed or opened detailed. (id recommended)',
                 type: 'String',

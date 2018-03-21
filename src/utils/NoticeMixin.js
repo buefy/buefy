@@ -104,7 +104,9 @@ export default {
             this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
 
-            this.timer = setTimeout(() => this.close(), this.newDuration)
+            if (!this.indefinite) {
+                this.timer = setTimeout(() => this.close(), this.newDuration)
+            }
         },
 
         setupContainer() {

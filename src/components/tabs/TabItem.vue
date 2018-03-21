@@ -1,6 +1,6 @@
 <template>
     <transition :name="transitionName">
-        <div v-show="isActive" class="tab-item">
+        <div v-show="isActive && visible" class="tab-item">
             <slot/>
         </div>
     </transition>
@@ -13,7 +13,11 @@
             label: String,
             icon: String,
             iconPack: String,
-            disabled: Boolean
+            disabled: Boolean,
+            visible: {
+                type: Boolean,
+                default: true
+            }
         },
         data() {
             return {
@@ -55,8 +59,10 @@
                 this.$destroy()
                 throw new Error('You should wrap bTabItem on a bTabs')
             }
-
             this.$parent.tabItems.push(this)
+        },
+        updated() {
+            this.$emit('updated')
         },
         beforeDestroy() {
             const index = this.$parent.tabItems.indexOf(this)

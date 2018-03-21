@@ -31,7 +31,6 @@
                                         v-model="prompt"
                                         class="input"
                                         ref="input"
-                                        required
                                         :class="{ 'is-danger': validationMessage }"
                                         v-bind="inputAttrs"
                                         @keyup.enter="confirm">
@@ -45,7 +44,7 @@
                 <footer class="modal-card-foot">
                     <button
                         v-if="showCancel"
-                        class="button is-light"
+                        class="button"
                         ref="cancelButton"
                         @click="cancel('button')">
                         {{ cancelText }}
@@ -105,11 +104,15 @@
             hasInput: Boolean, // Used internally to know if it's prompt
             inputAttrs: {
                 type: Object,
-                default: () => {}
+                default: () => ({})
             },
             onConfirm: {
                 type: Function,
                 default: () => {}
+            },
+            focusOn: {
+                type: String,
+                default: 'confirm'
             }
         },
         data() {
@@ -168,8 +171,6 @@
              */
             close() {
                 this.isActive = false
-                this.onCancel.apply(null, arguments)
-
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
                     this.$destroy()
@@ -184,11 +185,19 @@
         mounted() {
             this.isActive = true
 
+            if (typeof this.inputAttrs.required === 'undefined') {
+                this.$set(this.inputAttrs, 'required', true)
+            }
+
             this.$nextTick(() => {
                 // Handle which element receives focus
-                this.hasInput
-                    ? this.$refs.input.focus()
-                    : this.$refs.confirmButton.focus()
+                if (this.hasInput) {
+                    this.$refs.input.focus()
+                } else if (this.focusOn === 'cancel' && this.showCancel) {
+                    this.$refs.cancelButton.focus()
+                } else {
+                    this.$refs.confirmButton.focus()
+                }
             })
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete control" :class="{size, 'is-expanded': expanded}">
+    <div class="autocomplete control" :class="{'is-expanded': expanded}">
         <b-input
             v-model="newValue"
             ref="input"
@@ -12,7 +12,7 @@
             autocomplete="off"
             v-bind="$attrs"
             @focus="focused"
-            @blur="$emit('blur', $event)"
+            @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
             @keydown.native.tab="tabPressed"
             @keydown.native.enter.prevent="enterPressed"
@@ -75,6 +75,7 @@
                 default: 'value'
             },
             keepFirst: Boolean,
+            clearOnSelect: Boolean,
             openOnFocus: Boolean
         },
         data() {
@@ -84,6 +85,7 @@
                 isActive: false,
                 newValue: this.value,
                 isListInViewportVertically: true,
+                hasFocus: false,
                 _isAutocomplete: true,
                 _elementRef: 'input'
             }
@@ -148,9 +150,12 @@
             newValue(value) {
                 this.$emit('input', value)
                 // Check if selected is invalid
-                if (this.getValue(this.selected) !== value) this.setSelected(null, false)
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue !== value) {
+                    this.setSelected(null, false)
+                }
                 // Close dropdown if input is clear or else open it
-                if (!this.openOnFocus || value) {
+                if (this.hasFocus && (!this.openOnFocus || value)) {
                     this.isActive = !!value
                 }
             },
@@ -195,7 +200,7 @@
                 this.selected = option
                 this.$emit('select', this.selected)
                 if (this.selected !== null) {
-                    this.newValue = this.getValue(this.selected)
+                    this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
                 }
                 closeDropdown && this.$nextTick(() => { this.isActive = false })
             },
@@ -257,7 +262,9 @@
                     ? getValueByPath(option, this.field)
                     : option
 
-                const escapedValue = escapeRegExpChars(this.newValue)
+                const escapedValue = typeof this.newValue === 'string'
+                    ? escapeRegExpChars(this.newValue)
+                    : this.newValue
                 const regex = new RegExp(`(${escapedValue})`, 'gi')
 
                 return isHighlight
@@ -336,7 +343,16 @@
                         this.selectFirstOption(this.data)
                     }
                 }
+                this.hasFocus = true
                 this.$emit('focus', event)
+            },
+
+            /**
+             * Blur listener.
+            */
+            onBlur(event) {
+                this.hasFocus = false
+                this.$emit('blur', event)
             }
         },
         created() {

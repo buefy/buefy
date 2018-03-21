@@ -21,6 +21,16 @@
             <p class="content">If you want the tabs to take full width, add the <code>expanded</code> prop.</p>
         </Example>
 
+         <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode" title="Custom Headers">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.6.4</span>
+            </div>
+            <p>
+                By adding a slot named <code>header</code> you can customize the header of a tab item.
+            </p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -46,6 +56,9 @@
     import ExExpanded from './examples/ExExpanded'
     import ExExpandedCode from '!!raw-loader!./examples/ExExpanded'
 
+    import ExCustomHeaders from './examples/ExCustomHeaders'
+    import ExCustomHeadersCode from '!!raw-loader!./examples/ExCustomHeaders'
+
     export default {
         data() {
             return {
@@ -61,7 +74,9 @@
                 ExIconsCode,
                 ExSizesCode,
                 ExTypesCode,
-                ExExpandedCode
+                ExExpandedCode,
+                ExCustomHeaders,
+                ExCustomHeadersCode
             }
         }
     }

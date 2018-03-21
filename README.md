@@ -1,12 +1,13 @@
 <p align="center">
     <a href="https://buefy.github.io">
-        <img src="https://github.com/rafaelpimpa/buefy/blob/dev/static/img/buefy-banner.png" />
+        <img src="https://github.com/buefy/buefy/blob/dev/static/img/buefy-banner.png" />
     </a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/v/buefy.svg" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
+    <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
+    <a href="https://codecov.io/gh/buefy/buefy"><img src="https://img.shields.io/codecov/c/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/l/buefy.svg" /></a>
-    <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" />
-    </a>
+    <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" /></a>
     <a href="http://buefy.github.io"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
 </p>
 
@@ -90,7 +91,7 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 
 ## Current roadmap
 
-https://github.com/rafaelpimpa/buefy/issues/458
+https://github.com/buefy/buefy/issues/458
 
 ## Stay in touch
 
@@ -103,6 +104,6 @@ https://github.com/rafaelpimpa/buefy/issues/458
 
 ## License
 
-Code released under [MIT]((https://github.com/rafaelpimpa/buefy/blob/master/LICENSE)) license.
+Code released under [MIT]((https://github.com/buefy/buefy/blob/master/LICENSE)) license.
 
 Copyright (c) 2017, Rafael Beraldo.

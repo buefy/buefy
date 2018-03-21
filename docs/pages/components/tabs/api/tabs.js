@@ -47,6 +47,11 @@ export default [
         ],
         events: [
             {
+                name: '<code>input</code>',
+                description: 'Triggers when tab is clicked',
+                parameters: '<code>index: Number</code>'
+            },
+            {
                 name: '<code>change</code>',
                 description: 'Triggers when active tab is changed',
                 parameters: '<code>index: Number</code>'
@@ -83,6 +88,25 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'false'
+            },
+            {
+                name: '<code>visible</code>',
+                description: 'Item is visible',
+                type: 'Boolean',
+                values: '-',
+                default: 'true'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Tab item body',
+                props: '—'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Tab item custom header',
+                props: '—'
             }
         ]
     }

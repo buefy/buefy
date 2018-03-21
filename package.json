@@ -6,22 +6,25 @@
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "license": "MIT",
   "main": "lib/index.js",
+  "typings": "types/index.d.ts",
   "files": [
     "lib",
-    "src"
+    "src",
+    "types/*.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafaelpimpa/buefy.git"
+    "url": "https://github.com/buefy/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/rafaelpimpa/buefy/issues"
+    "url": "https://github.com/buefy/buefy/issues"
   },
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "lint": "eslint --ext .js,.vue src test/unit/specs docs test/e2e/specs",
-    "lint:fix": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs docs --fix",
+    "lint": "eslint --ext .js,.vue src docs",
+    "lint:fix": "eslint --ext .js,.vue src docs --fix",
+    "lint:staged": "lint-staged",
     "unit": "jest",
     "test": "npm run lint && npm run unit",
     "test:watch": "npm run unit -- --watchAll",
@@ -32,7 +35,8 @@
     "build:lib:cssnano": "postcss --use cssnano --no-map --output lib/buefy.min.css lib/buefy.css",
     "build:lib": "npm run build:lib:clean && npm run build:lib:js && npm run build:lib:sass && npm run build:lib:autoprefix && npm run build:lib:cssnano",
     "build:docs": "node build/build.js",
-    "build": "npm run build:lib && npm run build:docs"
+    "build": "npm run build:lib && npm run build:docs",
+    "cov": "./node_modules/codcov/bin/codcov"
   },
   "keywords": [
     "bulma",
@@ -49,22 +53,21 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.3",
-    "@vue/test-utils": "^1.0.0-beta.11",
+    "@vue/test-utils": "^1.0.0-beta.12",
     "autoprefixer": "^7.1.1",
     "axios": "^0.16.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^22.1.0",
     "babel-loader": "^6.2.10",
-    "babel-plugin-istanbul": "^4.1.1",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
     "chalk": "^1.1.3",
-    "chromedriver": "^2.27.2",
     "cleave.js": "^1.0.1",
     "clipboard": "^1.7.1",
+    "codecov": "^3.0.0",
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^4.0.0",
@@ -85,23 +88,20 @@
     "inject-loader": "^3.0.0",
     "jest": "^22.1.4",
     "jest-serializer-vue": "^0.3.0",
-    "lolex": "^1.5.2",
+    "lint-staged": "^6.1.1",
     "mdi": "^2.0.46",
-    "nightwatch": "^0.9.12",
     "node-sass": "^4.5.3",
     "opn": "^4.0.2",
     "optimize-css-assets-webpack-plugin": "^1.3.0",
     "ora": "^1.2.0",
-    "phantomjs-prebuilt": "^2.1.14",
     "postcss-cli": "^4.0.0",
+    "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.0",
     "sass-loader": "^6.0.6",
     "scrollreveal": "^3.3.6",
-    "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
-    "sinon": "^4.2.2",
     "sortablejs": "^1.7.0",
     "sw-precache-webpack-plugin": "^0.9.1",
     "url-loader": "^0.5.8",
@@ -119,6 +119,13 @@
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
   },
+  "lint-staged": {
+    "*.{vue,js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint:staged",
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
@@ -146,6 +153,8 @@
     },
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-vue"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }

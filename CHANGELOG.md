@@ -5,13 +5,30 @@
 ### New features
 
 * **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
+* Add ``indefinite`` prop to snackbar
+* Add ``header`` slot to datepicker
+* Add ``header`` slot to tabItem
+* #485 Add ``custom-class`` prop to field (thanks @docnoe)
+* #509 Add autocomplete slot support to taginput (thanks @gkinsman)
 * #581 Add ``is-row-checkable`` prop to table (thanks @jvmonjo)
+* #602 Add ``changeMonth`` and ``changeYear`` events to datepicker
+* #604 Add ``remove-on-keys`` prop to taginput, allowing to remove last tag (thanks @adrlen)
+* #609 Add ``is-full-page`` prop to loading, to limit it to its container (thanks @adrlen)
+* #610 Add ``visible`` prop to tabItem
+* #644 Add ``clear-on-select`` prop to autocomplete (thanks @raniesantos)
+* #645 Add ``selectable-dates`` prop to datepicker (thanks @pip63)
+* #682 Add ``has-detailed-visible`` prop to table (thanks @wanxe)
+* #687 Add ``focus-on`` prop to dialog
 
 ### Fixes and changes
 
 * #576 Fix upload check file type
 * #586 Fix dropdown change event
 * #593 Fix timepicker update only time of Date object
+* #599 Fix ``on-cancel`` prop to dialog, get called when clicking confirm
+* #648 Fix dropdown emit change event (thanks @adrlen)
+* #670 Fix tabs emit change event (thanks @adrlen)
+* #686 Remove 'is-light' color to cancel button of dialog
 
 ## 0.6.3
 

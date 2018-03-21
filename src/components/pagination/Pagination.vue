@@ -54,7 +54,7 @@
             </li>
         </ul>
         <small class="info" v-if="simple">
-            {{ firstItem }}-{{ current * perPage }} / {{ total }}
+            {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
         </small>
     </div>
 </template>

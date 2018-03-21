@@ -109,6 +109,13 @@ export default [
                 type: 'String',
                 values: '<code>clip</code>, <code>keep</code>',
                 default: '<code>clip</code>'
+            },
+            {
+                name: '<code>focusOn</code>',
+                description: 'Focus on confirm or cancel button (when dialog is not prompt)',
+                type: 'String',
+                values: '<code>confirm</code>, <code>cancel</code>',
+                default: '<code>confirm</code>'
             }
         ]
     }
