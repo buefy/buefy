@@ -50,6 +50,13 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
+            },
+            {
+                name: '<code>class</code>',
+                description: 'custom class for checkbox',
+                type: 'String, Object',
+                values: '—',
+                default: '<code>b-checkbox checkbox</code>'
             }
         ],
         events: [
