@@ -38,7 +38,7 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>class</code>',
+                name: '<code>custom-class</code>',
                 description: 'class to be applied to the radio buttons, optional',
                 type: 'String, Object',
                 values: '—',
