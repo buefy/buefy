@@ -13,6 +13,7 @@
         <input
             v-model="newValue"
             type="checkbox"
+            @click.stop
             :disabled="disabled"
             :name="name"
             :value="nativeValue"
