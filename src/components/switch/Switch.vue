@@ -14,12 +14,12 @@
             v-model="newValue"
             type="checkbox"
             @click.stop
+            :disabled="disabled"
             :name="name"
             :value="nativeValue"
-            :disabled="disabled"
             :true-value="trueValue"
             :false-value="falseValue">
-        <span class="check" :class="[{ 'is-elastic': isMouseDown }, type]"/>
+        <span class="check" :class="[{ 'is-elastic': isMouseDown && !disabled }, type]"/>
         <span class="control-label"><slot/></span>
     </label>
 </template>

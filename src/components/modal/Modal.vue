@@ -158,7 +158,7 @@
              */
             keyPress(event) {
                 // Esc key
-                if (event.keyCode === 27) this.cancel('escape')
+                if (this.isActive && event.keyCode === 27) this.cancel('escape')
             }
         },
         created() {
