@@ -12,13 +12,14 @@
 
 <script>
     import { removeElement } from '../../utils/helpers'
+    import { HTMLElement } from '../../utils/ssr'
 
     export default {
         name: 'BLoading',
         props: {
             active: Boolean,
             programmatic: Boolean,
-            container: HTMLElement,
+            container: [Object, Function, HTMLElement],
             isFullPage: {
                 type: Boolean,
                 default: true
