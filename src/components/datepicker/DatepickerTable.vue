@@ -2,8 +2,8 @@
     <section class="datepicker-table">
         <header class="datepicker-header">
             <div
-                v-for="day in visibleDayNames"
-                :key="day"
+                v-for="(day, index) in visibleDayNames"
+                :key="index"
                 class="datepicker-cell">
                 {{ day }}
             </div>
