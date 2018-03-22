@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.6.5
+
+* #711 Fix click event to switch (thanks @adrlen)
+* #712 Fix SSR support (thanks @anteriovieira)
+
 ## 0.6.4
 
 ### New features
@@ -90,7 +95,7 @@
 ## 0.6.1
 
 * #409 Fix notification delete button
-* #410 Fix alert triggering on updload
+* #410 Fix alert triggering on upload
 
 ## 0.6.0
 
