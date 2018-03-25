@@ -15,25 +15,21 @@ describe('BSlotComponent', () => {
     })
 
     it('default render', () => {
-
         const slot = 'Content'
         const component = shallow(Vue, {
             slots: {
                 default: slot
             }
         })
-
         const wrapper = shallow(BSlotComponent, {
             propsData: {
                 component: component.vm
             }
         })
-
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
     })
 
     it('render', () => {
-
         const slot = 'Content'
         const slotName = 'header'
         const component = shallow(Vue, {
@@ -41,7 +37,6 @@ describe('BSlotComponent', () => {
                 [slotName]: slot
             }
         })
-
         const tag = 'span'
         const wrapper = shallow(BSlotComponent, {
             propsData: {
@@ -50,7 +45,6 @@ describe('BSlotComponent', () => {
                 name: slotName
             }
         })
-
         expect(wrapper.html()).toBe(`<${tag}>${slot}</${tag}>`)
     })
 })

@@ -4,6 +4,7 @@
 
 * #711 Fix click event to switch (thanks @adrlen)
 * #712 Fix SSR support (thanks @anteriovieira)
+* #712 Fix ``header`` slot to tabItem
 
 ## 0.6.4
 
