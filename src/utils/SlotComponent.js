@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export default {
     name: 'BSlotComponent',
     props: {
@@ -25,7 +23,7 @@ export default {
             this.$forceUpdate()
         },
         isVueComponent() {
-            return this.component instanceof Vue
+            return this.component && this.component._isVue
         }
     },
     created() {
