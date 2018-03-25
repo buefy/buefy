@@ -359,10 +359,10 @@
             * Emit input event on month and/or year change
             */
             'focusedDateData.month'(value) {
-                this.$emit('changeMonth', value)
+                this.$emit('change-month', value)
             },
             'focusedDateData.year'(value) {
-                this.$emit('changeYear', value)
+                this.$emit('change-year', value)
             }
         },
         methods: {

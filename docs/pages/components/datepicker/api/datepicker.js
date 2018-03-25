@@ -175,12 +175,12 @@ export default [
                 parameters: '<code>value: Date</code>'
             },
             {
-                name: '<code>changeMonth</code>',
+                name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',
                 parameters: '<code>month: Number(0-11)</code>'
             },
             {
-                name: '<code>changeYear</code>',
+                name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
             }
