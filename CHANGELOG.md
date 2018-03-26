@@ -6,6 +6,7 @@
 * #712 Fix SSR support (thanks @anteriovieira)
 * #719 Fix ``header`` slot to tabItem
 * #718 Fix ``changeMonth`` and ``changeYear`` events to datepicker in ``change-month`` and ``change-year``
+* #727 Fix upload check file
 
 ## 0.6.4
 

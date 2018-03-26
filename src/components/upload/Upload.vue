@@ -132,21 +132,26 @@
             checkType(file) {
                 if (!this.accept) return true
                 const types = this.accept.split(',')
-                for (let i = 0; i < types.length; i++) {
+                if (types.length === 0) return true
+                let valid = false
+                for (let i = 0; i < types.length && !valid; i++) {
                     const type = types[i].trim()
                     if (type) {
                         if (type.substring(0, 1) === '.') {
                             // check extension
                             const extIndex = file.name.lastIndexOf('.')
-                            return extIndex >= 0 && file.name.substring(extIndex) === type
+                            if (extIndex >= 0 && file.name.substring(extIndex) === type) {
+                                valid = true
+                            }
                         } else {
                             // check mime type
-                            if (file.type.match(type)) return true
-                            else return false
+                            if (file.type.match(type)) {
+                                valid = true
+                            }
                         }
                     }
                 }
-                return true
+                return valid
             }
         }
     }
