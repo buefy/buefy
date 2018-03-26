@@ -32,12 +32,25 @@
             name: String,
             size: String
         },
-        computed: {
-            newValue: {
-                get() {
-                    return this.value
-                },
-                set(value) {
+        data() {
+            return {
+                newValue: this.value
+            }
+        },
+        watch: {
+            /**
+             * When v-model change, set internal value.
+             */
+            value(value) {
+                this.newValue = value
+            },
+            /**
+             * Emit input event to update the user v-model.
+             */
+            newValue(value) {
+                // only trigger input event
+                // when current bRadioButton is clicked.
+                if (value === this.nativeValue) {
                     this.$emit('input', value)
                 }
             }

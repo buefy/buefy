@@ -30,7 +30,7 @@
     export default {
         data() {
             return {
-                radio: 'Vane'
+                radio: 'Jack'
             }
         }
     }
