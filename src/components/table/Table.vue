@@ -304,7 +304,7 @@
                 const validVisibleData = this.visibleData.filter(
                         (row) => this.isRowCheckable(row))
                 const isAllChecked = validVisibleData.some((currentVisibleRow) => {
-                    return indexOf(this.checkedRows, currentVisibleRow, this.customIsChecked) < 0
+                    return indexOf(this.newCheckedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
             },
@@ -476,7 +476,7 @@
              * Check if the row is checked (is added to the array).
              */
             isRowChecked(row) {
-                return indexOf(this.checkedRows, row, this.customIsChecked) >= 0
+                return indexOf(this.newCheckedRows, row, this.customIsChecked) >= 0
             },
 
             /**
