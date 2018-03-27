@@ -43,7 +43,7 @@ export default [
                 name: '<code>iconPack</code>',
                 description: 'Icon pack to use if <code>hasIcon</code>, optional',
                 type: 'String',
-                values: '<code>mdi</code>, <code>fa</code>',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '—'
             },
             {
