@@ -59,9 +59,9 @@ export default {
             switch (this.size) {
                 case 'is-small': return this.size
                 case 'is-medium': return
-                case 'is-large': return this.newIconPack === 'fa'
-                    ? ''
-                    : 'is-medium'
+                case 'is-large': return this.newIconPack === 'mdi'
+                    ? 'is-medium'
+                    : ''
             }
         }
     },
