@@ -2,11 +2,13 @@
 
 ## 0.6.5
 
+* Revert some changes on Checkbox, CheckboxButton, Radio, RadioButton, Select and Switch, working as before now
 * #711 Fix click event to switch (thanks @adrlen)
 * #712 Fix SSR support (thanks @anteriovieira)
 * #719 Fix ``header`` slot to tabItem
 * #718 Fix ``changeMonth`` and ``changeYear`` events to datepicker in ``change-month`` and ``change-year``
 * #727 Fix upload check file
+* #730 Fix field with addons not updating on re-render (tanks @arlen)
 
 ## 0.6.4
 
