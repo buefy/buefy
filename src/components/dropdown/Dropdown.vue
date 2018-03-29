@@ -5,7 +5,7 @@
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle">
+            @click.stop="toggle">
             <slot name="trigger"/>
         </div>
 
