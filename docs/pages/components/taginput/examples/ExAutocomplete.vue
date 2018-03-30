@@ -10,7 +10,7 @@
                 v-model="tags"
                 :data="filteredTags"
                 autocomplete
-                :allowNew="allowNew"
+                :allow-new="allowNew"
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"
