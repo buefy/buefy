@@ -61,23 +61,44 @@ const components = {
     Upload
 }
 
-components.install = (Vue, options = {}) => {
-    // Options
-    setOptions(Object.assign(config, options))
 
-    for (const componentName in components) {
-        const component = components[componentName]
+const treeShaker = (filter = []) => {
+    return (Vue, options = {}) => {
+        // Options
+        setOptions(Object.assign(config, options))
 
-        if (component && componentName !== 'install') {
-            Vue.component(component.name, component)
+        let filteredComponents = filter.length?{}:components
+        filter.forEach(key => {
+            if(components[key])
+                filteredComponents[key] = components[key]
+            switch (key) {
+                case 'Dialog':  Vue.prototype.$dialog = Dialog
+                                break
+                case 'LoadingProgrammatic':  Vue.prototype.$loading = LoadingProgrammatic
+                                break
+                case 'ModalProgrammatic':  Vue.prototype.$modal = ModalProgrammatic
+                                break
+                case 'Snackbar':  Vue.prototype.$snackbar = Snackbar
+                                break
+                case 'Toast':  Vue.prototype.$toast = Toast
+                                break
+            }
+        })
+
+        for (const componentName in filteredComponents) {
+            const component = filteredComponents[componentName]
+
+            if (component && componentName !== 'install') {
+                Vue.component(component.name, component)
+            }
         }
     }
+}
 
-    Vue.prototype.$dialog = Dialog
-    Vue.prototype.$loading = LoadingProgrammatic
-    Vue.prototype.$modal = ModalProgrammatic
-    Vue.prototype.$snackbar = Snackbar
-    Vue.prototype.$toast = Toast
+components.install = treeShaker()
+
+const shakable = (filter)=>{
+    return { install : treeShaker(filter)}
 }
 
 export default components
@@ -87,5 +108,6 @@ export {
     LoadingProgrammatic,
     ModalProgrammatic,
     Snackbar,
-    Toast
+    Toast,
+    shakable
 }
