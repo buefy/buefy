@@ -61,27 +61,25 @@ const components = {
     Upload
 }
 
-
 const treeShaker = (filter = []) => {
     return (Vue, options = {}) => {
         // Options
         setOptions(Object.assign(config, options))
 
-        let filteredComponents = filter.length?{}:components
-        filter.forEach(key => {
-            if(components[key])
-                filteredComponents[key] = components[key]
+        let filteredComponents = filter.length ? {} : components
+        filter.forEach((key) => {
+            if (components[key]) { filteredComponents[key] = components[key] }
             switch (key) {
-                case 'Dialog':  Vue.prototype.$dialog = Dialog
-                                break
-                case 'LoadingProgrammatic':  Vue.prototype.$loading = LoadingProgrammatic
-                                break
-                case 'ModalProgrammatic':  Vue.prototype.$modal = ModalProgrammatic
-                                break
-                case 'Snackbar':  Vue.prototype.$snackbar = Snackbar
-                                break
-                case 'Toast':  Vue.prototype.$toast = Toast
-                                break
+                case 'Dialog': Vue.prototype.$dialog = Dialog
+                    break
+                case 'LoadingProgrammatic': Vue.prototype.$loading = LoadingProgrammatic
+                    break
+                case 'ModalProgrammatic': Vue.prototype.$modal = ModalProgrammatic
+                    break
+                case 'Snackbar': Vue.prototype.$snackbar = Snackbar
+                    break
+                case 'Toast': Vue.prototype.$toast = Toast
+                    break
             }
         })
 
@@ -97,8 +95,8 @@ const treeShaker = (filter = []) => {
 
 components.install = treeShaker()
 
-const shakable = (filter)=>{
-    return { install : treeShaker(filter)}
+const shakable = (filter) => {
+    return { install: treeShaker(filter) }
 }
 
 export default components
