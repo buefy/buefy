@@ -1,8 +1,10 @@
 import { shallow } from '@vue/test-utils'
 import BSlotComponent from '@utils/SlotComponent'
-import Vue from 'vue'
 
 describe('BSlotComponent', () => {
+    const MockComponent = {
+        render: (h) => h('div', {}, 'Hello!')
+    }
     it('is called', () => {
         const wrapper = shallow(BSlotComponent, {
             propsData: {
@@ -15,24 +17,24 @@ describe('BSlotComponent', () => {
     })
 
     it('default render', () => {
-        const slot = 'Content'
-        const component = shallow(Vue, {
+        const slot = '<span>Content</span>'
+        const Component = shallow(MockComponent, {
             slots: {
                 default: slot
             }
         })
         const wrapper = shallow(BSlotComponent, {
             propsData: {
-                component: component.vm
+                component: Component.vm
             }
         })
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
     })
 
     it('render', () => {
-        const slot = 'Content'
+        const slot = '<span>Content</span>'
         const slotName = 'header'
-        const component = shallow(Vue, {
+        const Component = shallow(MockComponent, {
             slots: {
                 [slotName]: slot
             }
@@ -40,11 +42,72 @@ describe('BSlotComponent', () => {
         const tag = 'span'
         const wrapper = shallow(BSlotComponent, {
             propsData: {
-                component: component.vm,
+                component: Component.vm,
                 tag: tag,
                 name: slotName
             }
         })
         expect(wrapper.html()).toBe(`<${tag}>${slot}</${tag}>`)
+    })
+
+    it('render after emit event', async () => {
+        const slot = '<span>Content</span>'
+        const Component = shallow(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const wrapper = shallow(BSlotComponent, {
+            propsData: {
+                component: Component.vm
+            }
+        })
+        Component.vm.$emit('updated', {})
+        await wrapper.vm.$nextTick()
+        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+    })
+
+    it('refresh', () => {
+        const event = 'component-event'
+        const slot = '<span>Content</span>'
+        const Component = shallow(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const refresh = jest.fn()
+        const wrapper = shallow(BSlotComponent, {
+            propsData: {
+                component: Component.vm,
+                event
+            },
+            methods: {
+                refresh
+            }
+        })
+        Component.vm.$emit(event, {})
+        expect(refresh).toHaveBeenCalledTimes(1)
+        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+    })
+
+    it('destroy', () => {
+        const slot = '<span>Content</span>'
+        const Component = shallow(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const refresh = jest.fn()
+        const wrapper = shallow(BSlotComponent, {
+            propsData: {
+                component: Component.vm
+            },
+            methods: {
+                refresh
+            }
+        })
+        wrapper.destroy()
+        Component.vm.$emit('updated', {})
+        expect(refresh).toHaveBeenCalledTimes(0)
     })
 })
