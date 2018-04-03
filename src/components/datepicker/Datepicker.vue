@@ -162,7 +162,7 @@
         mixins: [FormElementMixin],
         inheritAttrs: false,
         props: {
-            value: Date,
+            value: [Date, String],
             dayNames: {
                 type: Array,
                 default: () => {
@@ -217,7 +217,7 @@
             inline: Boolean,
             minDate: Date,
             maxDate: Date,
-            focusedDate: Date,
+            focusedDate: [Date, String],
             placeholder: String,
             readonly: {
                 type: Boolean,
@@ -267,10 +267,11 @@
             }
         },
         data() {
-            const focusedDate = this.value || this.focusedDate || new Date()
+            let focusedDate = this.value || this.focusedDate || new Date()
+            focusedDate = typeof focusedDate === 'string' ? this.dateParser(focusedDate) : new Date()
 
             return {
-                dateSelected: this.value,
+                dateSelected: focusedDate,
                 focusedDateData: {
                     month: focusedDate.getMonth(),
                     year: focusedDate.getFullYear()
