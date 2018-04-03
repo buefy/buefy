@@ -268,7 +268,7 @@
         },
         data() {
             let focusedDate = this.value || this.focusedDate || new Date()
-            focusedDate = typeof focusedDate === 'string' ? this.dateParser(focusedDate) : new Date()
+            focusedDate = typeof focusedDate === 'string' ? this.dateParser(focusedDate) : focusedDate
 
             return {
                 dateSelected: focusedDate,
@@ -325,7 +325,8 @@
             * Update internal focusedDateData
             */
             dateSelected(value) {
-                const currentDate = !value ? new Date() : value
+                const date = !value ? new Date() : value
+                const currentDate = typeof date === 'string' ? this.dateParser(date) : date
                 this.focusedDateData = {
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()
@@ -342,7 +343,7 @@
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                this.dateSelected = value
+                this.dateSelected = typeof value === 'string' ? this.dateParser(value) : value
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
