@@ -1,5 +1,9 @@
 # Buefy Changelog
 
+## 0.6.6
+
+* #746 Fix default ``dateFormatter`` function to datepicker
+
 ## 0.6.5
 
 * Revert some changes on Checkbox, CheckboxButton, Radio, RadioButton, Select and Switch, working as before now

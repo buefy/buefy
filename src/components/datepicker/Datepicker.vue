@@ -239,7 +239,10 @@
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        return date.toLocaleDateString()
+                        const dateUTC = new Date(Date.UTC(
+                            date.getFullYear(), date.getMonth(), date.getDate()
+                        ))
+                        return dateUTC.toLocaleDateString()
                     }
                 }
             },
