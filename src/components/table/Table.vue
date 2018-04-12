@@ -578,8 +578,8 @@
 
             closeDetailRow(obj) {
                 const index = this.handleDetailKey(obj)
-                const i = this.visibleDetailRows.indexOf(index)
-                this.visibleDetailRows.splice(i, 1)
+                this.visibleDetailRows = this.visibleDetailRows
+                  .filter((item) => this.handleDetailKey(item) === index)
             },
 
             isVisibleDetailRow(obj) {
