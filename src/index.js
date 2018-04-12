@@ -5,6 +5,7 @@ import { Table, TableColumn } from './components/table'
 import { Tabs, TabItem } from './components/tabs'
 import { Tag, Taglist } from './components/tag'
 import Autocomplete from './components/autocomplete'
+import Clockpicker from './components/timepicker/Clockpicker'
 import Collapse from './components/collapse'
 import Datepicker from './components/datepicker'
 import Dialog from './components/dialog'
@@ -32,6 +33,7 @@ const components = {
     Autocomplete,
     Checkbox,
     CheckboxButton,
+    Clockpicker,
     Collapse,
     Datepicker,
     Dropdown,

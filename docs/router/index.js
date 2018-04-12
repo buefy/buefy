@@ -60,6 +60,7 @@ const router = new Router({
                 route('switch', 'components/switch/Switch'),
                 route('datepicker', 'components/datepicker/Datepicker'),
                 route('timepicker', 'components/timepicker/Timepicker'),
+                route('clockpicker', 'components/clockpicker/Clockpicker'),
                 route('taginput', 'components/taginput/Taginput'),
                 route('upload', 'components/upload/Upload'),
                 route('table', 'components/table/Table'),

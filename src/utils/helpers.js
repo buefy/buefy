@@ -24,6 +24,15 @@ export function indexOf(array, obj, fn) {
 }
 
 /**
+ * Shortcut function for generating range of numbers
+ * This isn't the most efficient way, but at this time
+ * it's not being used to generate large arrays
+ */
+export function createRange(length, start = 0) {
+    return [...Array(length + start).keys()].slice(start)
+}
+
+/**
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  */
