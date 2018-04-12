@@ -1,5 +1,5 @@
 <template>
-    <b-timepicker v-model="time" inline></b-timepicker>
+    <b-clockpicker v-model="time" inline></b-clockpicker>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
     <div class="default-container">
         <h1 class="title is-spaced">Clockpicker</h1>
-        <h2 class="subtitle">An input with a dropdown/modal clock interface for selecting a time, uses native timepicker for mobile</h2>
+        <h2 class="subtitle">An input with a dropdown/modal clock interface for selecting a time, uses native timepicker for mobile.</h2>
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
@@ -18,9 +18,10 @@
             <p>Any slots are added to the footer of the timepicker.</p>
         </Example>
 
+         -->
         <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical>
-            <p>Timepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
-        </Example> -->
+            <p>Clockpicker can also be shown inline with the <code>inline</code> prop. The input is removed, set a <code>v-model</code> to get the date.</p>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -49,7 +50,9 @@
             return {
                 api,
                 ExSimple,
-                ExSimpleCode
+                ExSimpleCode,
+                ExInline,
+                ExInlineCode
             }
         }
     }

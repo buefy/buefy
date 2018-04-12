@@ -27,6 +27,7 @@ export default {
     'switch': { title: 'Switch' },
     'datepicker': { title: 'Datepicker' },
     'timepicker': { title: 'Timepicker' },
+    'clockpicker': { title: 'Clockpicker' },
     'taginput': { title: 'Taginput' },
     'upload': { title: 'Upload' },
     'table': { title: 'Table' },
