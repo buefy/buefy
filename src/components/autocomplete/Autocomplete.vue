@@ -27,6 +27,10 @@
                 v-show="isActive && (data.length > 0 || hasEmptySlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
+                    <div
+                        class="dropdown-item">
+                        <slot name="header"/>
+                    </div>
                     <a
                         v-for="(option, index) in data"
                         :key="index"
