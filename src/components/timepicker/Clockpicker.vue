@@ -1,5 +1,5 @@
 <template>
-    <div class="clock-picker">
+    <div class="clock-picker is-info">
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -30,9 +30,9 @@
                 style="height: auto;"
                 :disabled="disabled"
                 custom>
-                <header v-if="inline" class="card-header is-primary">
-                    <div class="card-header-title clock-picker-title">
-                        <div class="clock-picker-title__time">
+                <header v-if="inline" class="card-header">
+                    <div class="clock-picker__header card-header-title">
+                        <div class="clock-picker__time">
                             <span
                                 class="clock-picker__btn"
                                 :class="{ active: isSelectingHour }"
@@ -43,7 +43,7 @@
                                 :class="{ active: !isSelectingHour }"
                                 @click="isSelectingHour = false">{{ minutesDisplay }}</span>
                         </div>
-                        <div v-if="!isHourFormat24" class="clock-picker__meridien">
+                        <div v-if="!isHourFormat24" class="clock-picker__period">
                             <div
                                 class="clock-picker__btn"
                                 :class="{ active: meridienSelected == AM }"
@@ -55,25 +55,38 @@
                         </div>
                     </div>
                 </header>
-                <div class="clock-picker__body">
-                    <div v-if="!isHourFormat24 && !inline" class="clock-picker__meridien">
+                <div
+                    class="clock-picker__body"
+                    :style="{ width: (pickerSize - 20) + 'px', height: (pickerSize - 20) + 'px' }">
+                    <div v-if="!isHourFormat24 && !inline" class="clock-picker__period">
                         <div
-                            class="clock-picker__btn is-rounded"
+                            class="clock-picker__btn"
                             :class="{ active: meridienSelected == AM }"
                             @click="onMeridienClick(AM)">{{ AM }}</div>
                         <div
-                            class="clock-picker__btn is-rounded"
+                            class="clock-picker__btn"
                             :class="{ active: meridienSelected == PM }"
                             @click="onMeridienClick(PM)">{{ PM }}</div>
                     </div>
                     <b-clockpicker-face
+                        v-if="isSelectingHour"
                         :picker-size="pickerSize"
                         :min="minFaceValue"
                         :max="maxFaceValue"
-                        :face-numbers="isSelectingHour ? hours : minutes"
+                        :face-numbers="hours"
                         :disabled-values="faceDisabledValues()"
                         :double="isSelectingHour && isHourFormat24"
-                        :value="isSelectingHour ? hoursSelected : minutesSelected"
+                        :value="hoursSelected"
+                        @input="onClockInput"
+                        @change="onClockChange" />
+                    <b-clockpicker-face
+                        v-else
+                        :picker-size="pickerSize"
+                        :min="minFaceValue"
+                        :max="maxFaceValue"
+                        :face-numbers="minutes"
+                        :disabled-values="faceDisabledValues()"
+                        :value="minutesSelected"
                         @input="onClockInput"
                         @change="onClockChange" />
                 <!-- {{ value }}<br>
@@ -81,7 +94,7 @@
                 </div>
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
-                    class="clock-picker-footer">
+                    class="card-footer">
                     <slot/>
                 </footer>
             </div>
@@ -97,7 +110,6 @@ import ClockpickerFace from './ClockpickerFace'
 import { Dropdown, DropdownItem } from '../dropdown'
 import Input from '../input'
 import Field from '../field'
-import Select from '../select'
 import Icon from '../icon'
 
 export default {
@@ -106,7 +118,6 @@ export default {
         [ClockpickerFace.name]: ClockpickerFace,
         [Input.name]: Input,
         [Field.name]: Field,
-        [Select.name]: Select,
         [Icon.name]: Icon,
         [Dropdown.name]: Dropdown,
         [DropdownItem.name]: DropdownItem
@@ -127,6 +138,10 @@ export default {
         incrementMinutes: {
             type: Number,
             default: 5
+        },
+        autoSwitch: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -179,8 +194,9 @@ export default {
             // } else {
             //     this.minutesSelected = value
             // }
-
-            this.isSelectingHour = !this.isSelectingHour
+            if (this.autoSwitch || !this.inline) {
+                this.isSelectingHour = !this.isSelectingHour
+            }
         },
         onMeridienClick(value) {
             if (this.meridienSelected !== value) {

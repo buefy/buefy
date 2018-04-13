@@ -1,31 +1,43 @@
 <template>
     <div
-        class="clock-picker-clock__container"
-        :style="{ width: pickerSize + 'px', height: pickerSize + 'px' }">
+        class="clock-picker-face"
+        @mousedown="onMouseDown"
+        @mouseup="onMouseUp"
+        @mousemove="onDragMove"
+        @touchstart="onMouseDown"
+        @touchend="onMouseUp"
+        @touchmove="onDragMove">
         <div
-            class="clock-picker-clock"
-            ref="clock"
-            @mousedown="onMouseDown"
-            @mouseup="onMouseUp"
-            @mousemove="onDragMove"
-            @touchstart="onMouseDown"
-            @touchend="onMouseUp"
-            @touchmove="onDragMove">
+            class="clock-picker-face__outer_ring"
+            ref="clock">
             <div
-                class="clock-picker-clock__hand"
+                class="clock-picker-face__hand"
                 :style="{ transform: `rotate(${handRotateAngle}deg) scaleY(${handScale})` }" />
             <span
                 v-for="num of faceNumbers"
                 :key="num.value"
-                :style="{ transform: getNumberTranslate(num.value) }"
-                :class="{ 'active': num.value === displayedValue }">
+                class="clock-picker-face__number"
+                :class="{ 'active': num.value === displayedValue }"
+                :style="{ transform: getNumberTranslate(num.value) }">
                 <span>{{ num.label }}</span>
             </span>
+
         </div>
     </div>
 </template>
 
 <script>
+// These should match the variables in clockpicker.scss
+// const timeFontSize = 60
+// const periodFontSize = 16
+// const numberFontSize = 18
+
+const indicatorSize = 40
+// const handEndpointSize = 12
+
+// const paddingOuter = 10
+const paddingInner = 5
+
 export default {
     name: 'BClockpickerFace',
     props: {
@@ -54,20 +66,23 @@ export default {
          * Radius of the clock face
          */
         radius() {
-            return this.pickerSize / 2
+            return this.pickerSize / 2 -
+                paddingInner -
+                indicatorSize // -6 for padding
         },
         /**
          * Radius of the inner ring numbers
          */
         innerRadius() {
-            return this.radius - Math.max(this.radius * 0.45, 10)
+            return Math.max(this.radius * 0.6, this.radius - paddingInner - indicatorSize)
             // 48px gives enough room for the outer ring of numbers
         },
         /**
          * Radius of the outer ring numbers
          */
         outerRadius() {
-            return this.radius - 18 // 4px allows for the border
+            return this.radius
+            // half the indicator size, plus 6 for padding
         },
         degreesPerUnit() {
             return 360 / this.countPerRing
@@ -114,16 +129,19 @@ export default {
             return `translate(${x}px, ${y}px)`
         },
         getNumberCoords(value) {
-            const radius = (this.radius - 24) * this.calcHandScale(value)
+            const radius = this.isInnerRing(value) ? this.innerRadius : this.outerRadius
             return {
                 x: Math.round(radius * Math.sin((value - this.min) * this.degrees)),
                 y: Math.round(-radius * Math.cos((value - this.min) * this.degrees))
             }
         },
-        calcHandScale(value) {
+        isInnerRing(value) {
             return this.double && (value - this.min >= this.countPerRing)
-                ? (this.innerRadius / this.radius)
-                : (this.outerRadius / this.radius)
+        },
+        calcHandScale(value) {
+            return this.isInnerRing(value)
+                ? ((this.innerRadius) / this.radius)
+                : 1
         },
         onMouseDown(e) {
             e.preventDefault()
@@ -132,7 +150,7 @@ export default {
         },
         onMouseUp() {
             this.isDragging = false
-            console.log('onMouseUp: ', this.isDisabled(this.inputValue))
+            // console.log('onMouseUp: ', this.isDisabled(this.inputValue))
             if (!this.isDisabled(this.inputValue)) {
                 this.$emit('change', this.inputValue)
             }
@@ -158,15 +176,15 @@ export default {
                 value = insideClick ? this.max : this.min
             }
 
-            let debugValues = {
-                width,
-                center,
-                coords,
-                handAngle,
-                insideClick,
-                value
-            }
-            console.log(debugValues)
+            // let debugValues = {
+            //     width,
+            //     center,
+            //     coords,
+            //     handAngle,
+            //     insideClick,
+            //     value
+            // }
+            // console.log(debugValues)
 
             this.update(value)
         },

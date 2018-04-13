@@ -1,217 +1,271 @@
 
 .clock-picker {
-  display: inline-block;
-  .card-header {
-    &.is-primary {
-      background-color: $primary;
+    $transition-swing: cubic-bezier(.25,.8,.50,1);
+
+    $time-font-size: 60px;
+    $period-font-size: 16px;
+    $number-font-size: 18px;
+
+    $indicator-size: 40px;
+    $hand-endpoint-size: 12px;
+
+    $padding-outer: 10px;
+    $padding-inner: 5px;
+
+    @mixin clock-picker-colors($name, $pair) {
+        $background: nth($pair, 1);
+        $inverse: nth($pair, 2);
+
+        &.is-#{$name} {
+            .card-header {
+                background-color: $background;
+                color: $inverse;
+            }
+            .clock-picker-face {
+                &:after {
+                    background-color: $background;
+                }
+                &__hand {
+                    background-color: $background;
+                    border-color: $background;
+                }
+                &__number.active {
+                    background-color: $background;
+                    color: $inverse;
+                }
+            }
+        }
+    
     }
-  }
-  .dropdown-content {
-      padding: 0;
-  }
-  .card-content {
-    padding: 0;
-  }
-  .clock-picker__btn {
-    cursor: pointer;
-    opacity: .6;
-    &:hover, &.active {
-      opacity: 1;
+
+    display: inline-block;
+
+    @each $name, $pair in $colors {
+        @include clock-picker-colors($name, $pair)
     }
-  }
-  .clock-picker__meridien {
-    align-self: flex-end;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    margin: 8px 0 6px 8px;
-    text-transform: uppercase;
-  
-    div:only-child {
-      flex-direction: row;
+    
+    &__btn {
+        cursor: pointer;
+        opacity: 0.6;
+        &:hover,
+        &.active {
+            opacity: 1;
+        }
     }
-  }
-  .card-header-title {
-    color: #fff;
-    display: flex;
-    line-height: 1;
-    justify-content: flex-end;
-  
-    .clock-picker-title__time { 
-      white-space: nowrap;
-      span {
-        align-items: center;
-        display: inline-flex;
-        height: $clock-picker-time-font-size;
-        font-size: $clock-picker-time-font-size;
-        justify-content: center;
-      }
+    
+    &__period {
+        .clock-picker__btn {
+            font-size: $period-font-size;
+            text-transform: uppercase;
+        }
     }
-    .clock-picker-title__ampm {
-      
+
+    &__time {
+        white-space: nowrap;
+        span {
+            align-items: center;
+            display: inline-flex;
+            height: $time-font-size;
+            font-size: $time-font-size;
+            justify-content: center;
+        }
     }
-  }
-  
+    
+    .dropdown-content {
+        padding: 0;
+    }
+    .card-content {
+        padding: 0;
+    }
+    
+    &__header {
+        display: flex;
+        line-height: 1;
+        justify-content: flex-end;
+        color: inherit;
+
+        // am/pm in the title for inline display
+        .clock-picker__period {
+            align-self: flex-end;
+            display: flex;
+            flex-direction: column;
+            margin: 8px 0 6px 8px;
+        }
+    }
+    
+    &__body {
+        transition: 0.9s $transition-swing;
+        padding: $padding-outer;
+
+        .clock-picker__period {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            
+            .clock-picker__btn {
+                padding: 0 8px;
+                border-radius: $radius-rounded;
+                margin-bottom: 2px;
+                &:hover,
+                &.active {
+                    background-color: $primary;
+                    color: white;
+                }
+            }
+        }
+        
+        .clock-picker-face {
+            // Outer border circle of clock
+            border-radius: 50%;
+            position: relative;
+            background-color: $grey-lighter;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            &:after {
+                // Dot in center
+                border-radius: 50%;
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: $hand-endpoint-size;
+                height: $hand-endpoint-size;
+                z-index: 10;
+            }
+
+            &__outer_ring {
+                user-select: none;
+                height: calc(100% - #{$indicator-size + ($padding-inner * 2)});
+                width: calc(100% - #{$indicator-size + ($padding-inner * 2)});
+                position: relative;
+                background-color: #eee;
+                border-radius: 50%;
+                
+            }
+
+            // Clock face number indicators
+            &__number {
+                align-items: center;
+                border-radius: 100%;
+                cursor: default;
+                display: flex;
+                font-size: $number-font-size;
+                text-align: center;
+                justify-content: center;
+                position: absolute;
+                width: $indicator-size;
+                height: $indicator-size;
+                left: calc(50% - #{$indicator-size} / 2);
+                top: calc(50% - #{$indicator-size} / 2);
+                user-select: none;
+                // transition: 0.3s $transition-swing;
+                
+                > span {
+                    z-index: 1;
+                }
+
+                &:before,
+                &:after {
+                    content: "";
+                    height: $indicator-size;
+                    width: $indicator-size;
+                    border-radius: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                &.active {
+                    cursor: default;
+                    z-index: 2;
+                }
+
+                &.disabled {
+                    pointer-events: none;
+                }
+            }
+            
+            // &__container {
+            //     display: flex;
+            //     align-items: center;
+            //     justify-content: center;
+            //     padding: 10px;
+            // }
+    
+            &__hand {
+                height: calc(50% - #{$hand-endpoint-size / 2});
+                width: 2px;
+                bottom: 50%;
+                left: calc(50% - 1px);
+                
+                transform-origin: center bottom;
+                position: absolute;
+                will-change: transform;
+                z-index: 1;
+    
+                &:before {
+                    background: transparent;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color: inherit;
+                    border-radius: 100%;
+                    width: $hand-endpoint-size;
+                    height: $hand-endpoint-size;
+                    content: "";
+                    position: absolute;
+                    top: -($hand-endpoint-size) / 2;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+    
+                // &:after {
+                //   content: '';
+                //   position: absolute;
+                //   height: $hand-endpoint-size;
+                //   width: $hand-endpoint-size;
+                //   top: 100%;
+                //   left: 50%;
+                //   border-radius: 100%;
+                //   border-style: solid;
+                //   border-color: inherit;
+                //   background-color: inherit;
+                //   transform: translate(-50%, -50%);
+                // }
+            }
+
+            
+        }
+    }
 }
-
-
-
-
 
 .picker__title--landscape {
-  .clock-picker-title {
-    flex-direction: column;
-    justify-content: center;
-    height: 100%
-  }
-  .clock-picker-title__time {
-    text-align: right;
-
-    .picker__title__btn,
-    span {
-      height: 55px;
-      font-size: 55px;
+    .clock-picker-title {
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
     }
-  }
-  .clock-picker__meridien {
-    margin: 16px 16px 0;
-    align-self: initial;
-    text-align: center;
-  }
-}
+    .clock-picker-title__time {
+        text-align: right;
 
-$meridien-padding: .5em;
-.clock-picker__body {
-    .clock-picker__btn {
-        cursor: pointer;
-        padding-left: $meridien-padding;
-        padding-right: $meridien-padding;
-        border-radius: $radius-rounded;
-        opacity: 1;
-        &:hover, &.active {
-          background-color: $primary;
-          color: white;
+        .picker__title__btn,
+        span {
+            height: 55px;
+            font-size: 55px;
         }
     }
-    .clock-picker__meridien {
-        margin: 5px 5px 0 0;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-    .clock-picker-clock {
-      // Outer border circle of clock
-      border-radius: 50%;
-      position: relative;
-      // transition: $primary-transition;
-      user-select: none;
-      background-color: $grey-lighter;
-      width: 100%;
-      height: 100%;
-      
-      &:after { 
-        // Dot in center
-        background: #000;
-        border-radius: 50%;
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: $clock-picker-endpoint-size + 2px;
-        height: $clock-picker-endpoint-size + 2px;
-        z-index: 10;
-      }
-      &__container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        
-      }
-    
-      &__hand {
-        height: calc(50% - #{$clock-picker-indicator-size / 2});
-        width: 2px;
-        bottom: 50%;
-        left: calc(50% - 1px);
-        transform-origin: center bottom;
-        position: absolute;
-        will-change: transform;
-        z-index: 1;
-        background-color: $primary;
-        border-color: $primary;
-    
-        &:before {
-          background: transparent;
-          border-width: 2px;
-          border-style: solid;
-          border-color: inherit;
-          border-radius: 100%;
-          width: $clock-picker-endpoint-size + 2px;
-          height: $clock-picker-endpoint-size + 2px;
-          content: '';
-          position: absolute;
-          top: -($clock-picker-endpoint-size + 2px) / 2;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-    
-        // &:after {
-        //   content: '';
-        //   position: absolute;
-        //   height: $clock-picker-endpoint-size;
-        //   width: $clock-picker-endpoint-size;
-        //   top: 100%;
-        //   left: 50%;
-        //   border-radius: 100%;
-        //   border-style: solid;
-        //   border-color: inherit;
-        //   background-color: inherit;
-        //   transform: translate(-50%, -50%);
-        // }
-      }
-      > span {
-        align-items: center;
-        border-radius: 100%;
-        cursor: default;
-        display: flex;
-        font-size: $clock-picker-number-font-size;
-        justify-content: center;
-        left: calc(50% - #{$clock-picker-indicator-size} / 2);
-        height: $clock-picker-indicator-size;
-        position: absolute;
+    .clock-picker__period {
+        margin: 16px 16px 0;
+        align-self: initial;
         text-align: center;
-        top: calc(50% - #{$clock-picker-indicator-size} / 2);
-        width: $clock-picker-indicator-size;
-        user-select: none;
-      
-        > span {
-          z-index: 1;
-        }
-        &:before, &:after {
-          content: '';
-          border-radius: 100%;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          height: 14px;
-          width: 14px;
-          transform: translate(-50%, -50%);
-        }
-        &:after, &:before {
-          height: $clock-picker-indicator-size;
-          width: $clock-picker-indicator-size;
-        }
-        &.active {
-          color: #fff;
-          background-color: $primary;
-          cursor: default;
-          z-index: 2;
-        }
-        &.disabled {
-          pointer-events: none;
-        }
-      }
     }
 }
+@each $name, $pair in $colors {
+    
+}
+

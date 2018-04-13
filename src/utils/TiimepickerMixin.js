@@ -217,7 +217,7 @@ export default {
     methods: {
         formatNumber,
         onMeridienChange(value) {
-            console.log(this.hoursSelected, this.minutesSelected, this.meridienSelected)
+            // console.log(this.hoursSelected, this.minutesSelected, this.meridienSelected)
             if (this.hoursSelected !== null) {
                 if (value === PM) {
                     this.hoursSelected += 12
