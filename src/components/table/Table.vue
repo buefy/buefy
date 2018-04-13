@@ -66,7 +66,10 @@
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
 
-                            <td v-if="detailed">
+                            <td
+                                v-if="detailed"
+                                class="chevron-cell"
+                            >
                                 <a
                                     v-if="hasDetailedVisible(row)"
                                     role="button"
