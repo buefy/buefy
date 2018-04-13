@@ -3,6 +3,7 @@
 ## 0.6.6
 
 * #746 Fix default ``dateFormatter`` function to datepicker
+* #755 Fix arrow centered when table detail (thanks @wanxe)
 
 ## 0.6.5
 
