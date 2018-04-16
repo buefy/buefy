@@ -9,18 +9,18 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>disabled</code>',
+                description: 'Disables the input field and/or picker',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>hour-format</code>',
                 description: 'Hour format for input and display',
                 type: 'String',
                 values: '<code>12</code> or <code>24</code>',
-                default: '<code>24</code>'
-            },
-            {
-                name: '<code>increment-minutes</code>',
-                description: 'Step minutes for select component',
-                type: 'Number',
-                values: '—',
-                default: '<code>1</code>'
+                default: '<code>12</code>'
             },
             {
                 name: '<code>time-formatter</code>',
@@ -52,14 +52,14 @@ export default [
             },
             {
                 name: '<code>size</code>',
-                description: 'Vertical size of input and picker, optional',
+                description: 'Vertical size of input, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
             },
             {
                 name: '<code>inline</code>',
-                description: 'Datepicker is shown inline, input is removed',
+                description: 'Clockpicker is shown inline, input is removed',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -69,6 +69,13 @@ export default [
                 description: 'Does not allow to type a time, set to <code>false</code> to enable input. <b>Note that you might have to set a custom time parser</b>',
                 type: 'Boolean',
                 values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>auto-switch</code>',
+                description: 'Automatically switches between hour and minutes selection after click',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
                 default: '<code>true</code>'
             },
             {
@@ -111,7 +118,7 @@ export default [
                 description: 'Optional, position of the timepicker relative to the input',
                 type: 'String',
                 values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-left</code>',
-                default: 'Bottom right'
+                default: '<code>is-bottom-right</code>'
             },
             {
                 name: 'Any native attribute',

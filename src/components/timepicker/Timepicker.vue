@@ -100,10 +100,7 @@
 </template>
 
 <script>
-    import { default as TimepickerMixin } from '../../utils/TiimepickerMixin'
-    // import { isMobile } from '../../utils/helpers'
-    // import config from '../../utils/config'
-
+    import { default as TimepickerMixin } from '../../utils/TimepickerMixin'
     import { Dropdown, DropdownItem } from '../dropdown'
     import Input from '../input'
     import Field from '../field'

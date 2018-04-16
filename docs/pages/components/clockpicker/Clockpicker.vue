@@ -6,21 +6,23 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <!-- <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>
+        <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>
             <p>Use <code>:readonly="false"</code> to let the user type a time.</p>
         </Example>
 
         <Example :component="ExRange" :code="ExRangeCode" title="Range" vertical>
-            <p>You can limit the date range with <code>min-time</code> and <code>max-time</code> props.</p>
+            <p>You can limit the time range with <code>min-time</code> and <code>max-time</code> props.</p>
         </Example>
 
         <Example :component="ExFooter" :code="ExFooterCode" title="Footer" vertical>
-            <p>Any slots are added to the footer of the timepicker.</p>
+            <p>Any slots are added to the footer of the clockpicker.</p>
         </Example>
 
-         -->
-        <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical>
-            <p>Clockpicker can also be shown inline with the <code>inline</code> prop. The input is removed, set a <code>v-model</code> to get the date.</p>
+        <Example :component="ExColors" :code="ExColorsCode" title="Colors" vertical>
+            <p>
+                Clockpicker supports all <code>is-&lt;color&gt;</code> classes from Bulma, including custom colors added at build time.
+                It can also be shown inline with the <code>inline</code> prop.
+            </p>
         </Example>
 
         <ApiView :data="api"/>
@@ -42,8 +44,8 @@
     import ExFooter from './examples/ExFooter'
     import ExFooterCode from '!!raw-loader!./examples/ExFooter'
 
-    import ExInline from './examples/ExInline'
-    import ExInlineCode from '!!raw-loader!./examples/ExInline'
+    import ExColors from './examples/ExColors'
+    import ExColorsCode from '!!raw-loader!./examples/ExColors'
 
     export default {
         data() {
@@ -51,8 +53,14 @@
                 api,
                 ExSimple,
                 ExSimpleCode,
-                ExInline,
-                ExInlineCode
+                ExNonReadonly,
+                ExNonReadonlyCode,
+                ExRange,
+                ExRangeCode,
+                ExFooter,
+                ExFooterCode,
+                ExColors,
+                ExColorsCode
             }
         }
     }

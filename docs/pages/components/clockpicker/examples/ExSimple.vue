@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field>
-            <b-switch v-model="formatAmPm">AM/PM</b-switch>
+            <b-switch v-model="isAmPm">AM/PM</b-switch>
         </b-field>
         <b-field label="Select time">
             <b-clockpicker
@@ -15,16 +15,9 @@
 </template>
 
 <script>
+import PeriodSelectMixin from './PeriodSelectMixin'
+
 export default {
-    data() {
-        return {
-            formatAmPm: false
-        }
-    },
-    computed: {
-        format() {
-            return this.formatAmPm ? '12' : '24'
-        }
-    }
+    mixins: [ PeriodSelectMixin ]
 }
 </script>

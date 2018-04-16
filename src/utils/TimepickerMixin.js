@@ -7,65 +7,6 @@ const PM = 'PM'
 const HOUR_FORMAT_24 = '24'
 const HOUR_FORMAT_12 = '12'
 
-const formatNumber = (value) => {
-    return (value < 10 ? '0' : '') + value
-}
-
-const timeFormatter = (date, vm) => {
-    let hours = date.getHours()
-    const minutes = date.getMinutes()
-    let am = false
-    if (vm.hourFormat === HOUR_FORMAT_12) {
-        am = hours < 12
-        if (hours > 12) {
-            hours -= 12
-        } else if (hours === 0) {
-            hours = 12
-        }
-    }
-    return formatNumber(hours) + ':' + formatNumber(minutes) +
-        (vm.hourFormat === HOUR_FORMAT_12 ? (' ' + (am ? AM : PM)) : '')
-}
-
-const timeParser = (date, vm) => {
-    if (date) {
-        let dateString = date
-        let am = false
-        if (vm.hourFormat === HOUR_FORMAT_12) {
-            const dateString12 = date.split(' ')
-            dateString = dateString12[0]
-            am = dateString12[1] === AM
-        }
-        const time = dateString.split(':')
-        let hours = parseInt(time[0], 10)
-        const minutes = parseInt(time[1], 10)
-        if (isNaN(hours) || hours < 0 || hours > 23 ||
-            (vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
-            isNaN(minutes) || minutes < 0 || minutes > 59) {
-            return null
-        }
-        let d = null
-        if (vm.dateSelected && !isNaN(vm.dateSelected)) {
-            d = new Date(vm.dateSelected)
-        } else {
-            d = new Date()
-            d.setMilliseconds(0)
-            d.setSeconds(0)
-        }
-        d.setMinutes(minutes)
-        if (vm.hourFormat === HOUR_FORMAT_12) {
-            if (am && hours === 12) {
-                hours = 0
-            } else if (!am && hours !== 12) {
-                hours += 12
-            }
-        }
-        d.setHours(hours)
-        return d
-    }
-    return null
-}
-
 export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
@@ -96,21 +37,21 @@ export default {
         },
         timeFormatter: {
             type: Function,
-            default: (date, vm) => {
+            default: (date) => {
                 if (typeof config.defaultTimeFormatter === 'function') {
                     return config.defaultTimeFormatter(date)
                 } else {
-                    return timeFormatter(date, vm)
+                    return this.defaultTimeFormatter(date)
                 }
             }
         },
         timeParser: {
             type: Function,
-            default: (date, vm) => {
+            default: (date) => {
                 if (typeof config.defaultTimeParser === 'function') {
                     return config.defaultTimeParser(date)
                 } else {
-                    return timeParser(date, vm)
+                    return this.defaultTimeParser(date)
                 }
             }
         },
@@ -215,9 +156,7 @@ export default {
         }
     },
     methods: {
-        formatNumber,
         onMeridienChange(value) {
-            // console.log(this.hoursSelected, this.minutesSelected, this.meridienSelected)
             if (this.hoursSelected !== null) {
                 if (value === PM) {
                     this.hoursSelected += 12
@@ -338,7 +277,7 @@ export default {
         * Parse string into date
         */
         onChange(value) {
-            const date = this.timeParser(value, this)
+            const date = this.parseTime(value)
             this.updateInternalState(date)
             if (date && !isNaN(date)) {
                 this.dateSelected = date
@@ -346,17 +285,6 @@ export default {
                 // Force refresh input value when not valid date
                 this.dateSelected = null
                 this.$refs.input.newValue = this.dateSelected
-            }
-        },
-
-        /*
-        * Format date into string
-        */
-        formatValue(value) {
-            if (value && !isNaN(value)) {
-                return this.timeFormatter(value, this)
-            } else {
-                return null
             }
         },
 
@@ -377,8 +305,8 @@ export default {
             if (value && !isNaN(date)) {
                 const hours = date.getHours()
                 const minutes = date.getMinutes()
-                return formatNumber(hours) + ':' +
-                    formatNumber(minutes) + ':00'
+                return this.formatNumber(hours) + ':' +
+                    this.formatNumber(minutes, true) + ':00'
             }
             return ''
         },
@@ -402,6 +330,93 @@ export default {
             } else {
                 this.dateSelected = null
             }
+        },
+
+        formatNumber(value, isMinute) {
+            return this.isHourFormat24 || isMinute
+                ? this.pad(value)
+                : value
+        },
+
+        pad(value) {
+            return (value < 10 ? '0' : '') + value
+        },
+
+        /*
+        * Format date into string
+        */
+        formatValue(date) {
+            if (date && !isNaN(date)) {
+                return this.formatTime(date)
+            } else {
+                return null
+            }
+        },
+
+        formatTime(date) {
+            if (typeof config.defaultTimeFormatter === 'function') {
+                return config.defaultTimeFormatter(date)
+            } else {
+                return this.defaultTimeFormatter(date)
+            }
+        },
+        parseTime(date) {
+            if (typeof config.defaultTimeParser === 'function') {
+                return config.defaultTimeParser(date)
+            } else {
+                return this.defaultTimeParser(date)
+            }
+        },
+        defaultTimeFormatter(date) {
+            let hours = date.getHours()
+            const minutes = date.getMinutes()
+            let period = ''
+            if (this.hourFormat === HOUR_FORMAT_12) {
+                period = ' ' + (hours < 12 ? AM : PM)
+                if (hours > 12) {
+                    hours -= 12
+                } else if (hours === 0) {
+                    hours = 12
+                }
+            }
+            return this.formatNumber(hours) + ':' + this.pad(minutes) + period
+        },
+        defaultTimeParser(timeString) {
+            if (timeString) {
+                let am = false
+                if (this.hourFormat === HOUR_FORMAT_12) {
+                    const dateString12 = timeString.split(' ')
+                    timeString = dateString12[0]
+                    am = dateString12[1] === AM
+                }
+                const time = timeString.split(':')
+                let hours = parseInt(time[0], 10)
+                const minutes = parseInt(time[1], 10)
+                if (isNaN(hours) || hours < 0 || hours > 23 ||
+                    (this.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
+                    isNaN(minutes) || minutes < 0 || minutes > 59) {
+                    return null
+                }
+                let d = null
+                if (this.dateSelected && !isNaN(this.dateSelected)) {
+                    d = new Date(this.dateSelected)
+                } else {
+                    d = new Date()
+                    d.setMilliseconds(0)
+                    d.setSeconds(0)
+                }
+                d.setMinutes(minutes)
+                if (this.hourFormat === HOUR_FORMAT_12) {
+                    if (am && hours === 12) {
+                        hours = 0
+                    } else if (!am && hours !== 12) {
+                        hours += 12
+                    }
+                }
+                d.setHours(hours)
+                return d
+            }
+            return null
         }
     },
     mounted() {

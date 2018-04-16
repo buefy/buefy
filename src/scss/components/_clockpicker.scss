@@ -12,7 +12,7 @@
     $indicator-size: 40px;
     $hand-endpoint-size: 12px;
 
-    $padding-outer: 10px;
+    $padding-outer: 12px;
     $padding-inner: 5px;
 
     // mixins for supporting all $colors defined in Bulma/custom
@@ -53,8 +53,9 @@
     .dropdown-content {
         padding: 0;
     }
+    
     .card-content {
-        padding: 0;
+        padding: $padding-outer;
     }
     
     &__btn {
@@ -74,12 +75,9 @@
     }
 
     &__time {
-        white-space: nowrap;
         span {
             align-items: center;
             display: inline-flex;
-            height: $time-font-size;
-            font-size: $time-font-size;
             justify-content: center;
         }
     }
@@ -89,6 +87,15 @@
         line-height: 1;
         justify-content: flex-end;
         color: inherit;
+
+        // time display in the title for inline display
+        .clock-picker__time {
+            white-space: nowrap;
+            span {
+                height: $time-font-size;
+                font-size: $time-font-size;
+            }
+        }
 
         // am/pm in the title for inline display
         .clock-picker__period {
@@ -101,23 +108,31 @@
     
     &__body {
         transition: 0.9s $transition-swing;
-        padding: $padding-outer;
+        
+
+        .clock-picker__btn {
+            padding: 0 8px;
+            border-radius: $radius-rounded;
+            margin-bottom: 2px;
+            &:hover,
+            &.active {
+                background-color: $primary;
+                color: white;
+            }
+        }
 
         .clock-picker__period {
             position: absolute;
             top: 5px;
             right: 5px;
-            
-            .clock-picker__btn {
-                padding: 0 8px;
-                border-radius: $radius-rounded;
-                margin-bottom: 2px;
-                &:hover,
-                &.active {
-                    background-color: $primary;
-                    color: white;
-                }
-            }
+        }
+
+        .clock-picker__time {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: $period-font-size;
+
         }
         
         .clock-picker-face {
@@ -149,9 +164,7 @@
                 height: calc(100% - #{$indicator-size + ($padding-inner * 2)});
                 width: calc(100% - #{$indicator-size + ($padding-inner * 2)});
                 position: relative;
-                // background-color: #eee;
                 border-radius: 50%;
-                
             }
 
             // Clock face number indicators
@@ -169,7 +182,6 @@
                 left: calc(50% - #{$indicator-size} / 2);
                 top: calc(50% - #{$indicator-size} / 2);
                 user-select: none;
-                // transition: 0.3s $transition-swing;
                 
                 > span {
                     z-index: 1;
@@ -194,6 +206,7 @@
 
                 &.disabled {
                     pointer-events: none;
+                    opacity: .25;
                 }
             }
             
@@ -224,6 +237,10 @@
                 }
             }
         }
+    }
+    &__footer {
+        display: block;
+        padding: $padding-outer;
     }
 }
 

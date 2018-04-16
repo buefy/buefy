@@ -17,7 +17,7 @@
                 v-for="num of faceNumbers"
                 :key="num.value"
                 class="clock-picker-face__number"
-                :class="{ 'active': num.value === displayedValue }"
+                :class="getFaceNumberClasses(num)"
                 :style="{ transform: getNumberTranslate(num.value) }">
                 <span>{{ num.label }}</span>
             </span>
@@ -65,22 +65,21 @@ export default {
          * Radius of the clock face
          */
         radius() {
-            return this.pickerSize / 2 -
-                paddingInner -
-                indicatorSize // -6 for padding
+            return this.pickerSize / 2
         },
         /**
          * Radius of the outer ring of number indicators
          */
         outerRadius() {
-            return this.radius
-            // half the indicator size, plus 6 for padding
+            return this.radius -
+                paddingInner -
+                indicatorSize / 2
         },
         /**
          * Radius of the inner ring of number indicators
          */
         innerRadius() {
-            return Math.max(this.radius * 0.6, this.radius - paddingInner - indicatorSize)
+            return Math.max(this.outerRadius * 0.6, this.outerRadius - paddingInner - indicatorSize)
             // 48px gives enough room for the outer ring of numbers
         },
         /**
@@ -164,6 +163,12 @@ export default {
                 y: Math.round(-radius * Math.cos((value - this.min) * this.degrees))
             }
         },
+        getFaceNumberClasses(num) {
+            return {
+                'active': num.value === this.displayedValue,
+                'disabled': this.isDisabled(num.value)
+            }
+        },
         /**
          * Determines if a value resides on the inner ring
          */
@@ -172,7 +177,7 @@ export default {
         },
         calcHandScale(value) {
             return this.isInnerRing(value)
-                ? ((this.innerRadius) / this.radius)
+                ? ((this.innerRadius) / this.outerRadius)
                 : 1
         },
         onMouseDown(e) {
