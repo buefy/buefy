@@ -1,5 +1,5 @@
 <template>
-    <div class="clock-picker is-info">
+    <div class="clock-picker">
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -69,28 +69,15 @@
                             @click="onMeridienClick(PM)">{{ PM }}</div>
                     </div>
                     <b-clockpicker-face
-                        v-if="isSelectingHour"
                         :picker-size="pickerSize"
                         :min="minFaceValue"
                         :max="maxFaceValue"
-                        :face-numbers="hours"
+                        :face-numbers="isSelectingHour ? hours : minutes"
                         :disabled-values="faceDisabledValues()"
                         :double="isSelectingHour && isHourFormat24"
-                        :value="hoursSelected"
+                        :value="isSelectingHour ? hoursSelected : minutesSelected"
                         @input="onClockInput"
                         @change="onClockChange" />
-                    <b-clockpicker-face
-                        v-else
-                        :picker-size="pickerSize"
-                        :min="minFaceValue"
-                        :max="maxFaceValue"
-                        :face-numbers="minutes"
-                        :disabled-values="faceDisabledValues()"
-                        :value="minutesSelected"
-                        @input="onClockInput"
-                        @change="onClockChange" />
-                <!-- {{ value }}<br>
-                    {{ dateSelected }} -->
                 </div>
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
@@ -188,12 +175,6 @@ export default {
             }
         },
         onClockChange(value) {
-            // console.log('onClockChange: ', value)
-            // if (this.isSelectingHour) {
-            //     this.hoursSelected = value
-            // } else {
-            //     this.minutesSelected = value
-            // }
             if (this.autoSwitch || !this.inline) {
                 this.isSelectingHour = !this.isSelectingHour
             }

@@ -1,5 +1,8 @@
 
 .clock-picker {
+    // Clockpicker variables defined here as exact numbers
+    // must be known for use in the Vue component for calculations 
+    // to determine  number and hand positioning/size.
     $transition-swing: cubic-bezier(.25,.8,.50,1);
 
     $time-font-size: 60px;
@@ -12,36 +15,46 @@
     $padding-outer: 10px;
     $padding-inner: 5px;
 
+    // mixins for supporting all $colors defined in Bulma/custom
     @mixin clock-picker-colors($name, $pair) {
-        $background: nth($pair, 1);
-        $inverse: nth($pair, 2);
-
         &.is-#{$name} {
-            .card-header {
-                background-color: $background;
+            @include clock-picker-colors-set(nth($pair, 1), nth($pair, 2))
+        }
+    }
+
+    @mixin clock-picker-colors-set($color, $inverse) {
+        .card-header {
+            background-color: $color;
+            color: $inverse;
+        }
+        .clock-picker-face {
+            &:after {
+                background-color: $color;
+            }
+            &__hand {
+                background-color: $color;
+                border-color: $color;
+            }
+            &__number.active {
+                background-color: $color;
                 color: $inverse;
             }
-            .clock-picker-face {
-                &:after {
-                    background-color: $background;
-                }
-                &__hand {
-                    background-color: $background;
-                    border-color: $background;
-                }
-                &__number.active {
-                    background-color: $background;
-                    color: $inverse;
-                }
-            }
         }
-    
     }
 
     display: inline-block;
 
+    @include clock-picker-colors-set($primary, $primary-invert);
+
     @each $name, $pair in $colors {
         @include clock-picker-colors($name, $pair)
+    }
+    
+    .dropdown-content {
+        padding: 0;
+    }
+    .card-content {
+        padding: 0;
     }
     
     &__btn {
@@ -69,13 +82,6 @@
             font-size: $time-font-size;
             justify-content: center;
         }
-    }
-    
-    .dropdown-content {
-        padding: 0;
-    }
-    .card-content {
-        padding: 0;
     }
     
     &__header {
@@ -143,7 +149,7 @@
                 height: calc(100% - #{$indicator-size + ($padding-inner * 2)});
                 width: calc(100% - #{$indicator-size + ($padding-inner * 2)});
                 position: relative;
-                background-color: #eee;
+                // background-color: #eee;
                 border-radius: 50%;
                 
             }
@@ -191,13 +197,6 @@
                 }
             }
             
-            // &__container {
-            //     display: flex;
-            //     align-items: center;
-            //     justify-content: center;
-            //     padding: 10px;
-            // }
-    
             &__hand {
                 height: calc(50% - #{$hand-endpoint-size / 2});
                 width: 2px;
@@ -223,23 +222,7 @@
                     left: 50%;
                     transform: translate(-50%, -50%);
                 }
-    
-                // &:after {
-                //   content: '';
-                //   position: absolute;
-                //   height: $hand-endpoint-size;
-                //   width: $hand-endpoint-size;
-                //   top: 100%;
-                //   left: 50%;
-                //   border-radius: 100%;
-                //   border-style: solid;
-                //   border-color: inherit;
-                //   background-color: inherit;
-                //   transform: translate(-50%, -50%);
-                // }
             }
-
-            
         }
     }
 }
@@ -265,7 +248,3 @@
         text-align: center;
     }
 }
-@each $name, $pair in $colors {
-    
-}
-
