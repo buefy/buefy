@@ -1,5 +1,5 @@
 <template>
-    <div class="clock-picker">
+    <div class="b-clockpicker">
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -31,25 +31,25 @@
                 :disabled="disabled"
                 custom>
                 <header v-if="inline" class="card-header">
-                    <div class="clock-picker__header card-header-title">
-                        <div class="clock-picker__time">
+                    <div class="b-clockpicker-header card-header-title">
+                        <div class="b-clockpicker-time">
                             <span
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
                                 @click="isSelectingHour = true">{{ hoursDisplay }}</span>
                             <span>:</span>
                             <span
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
                                 @click="isSelectingHour = false">{{ minutesDisplay }}</span>
                         </div>
-                        <div v-if="!isHourFormat24" class="clock-picker__period">
+                        <div v-if="!isHourFormat24" class="b-clockpicker-period">
                             <div
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: meridienSelected == AM }"
                                 @click="onMeridienClick(AM)">am</div>
                             <div
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: meridienSelected == PM }"
                                 @click="onMeridienClick(PM)">pm</div>
                         </div>
@@ -57,25 +57,25 @@
                 </header>
                 <div class="card-content">
                     <div
-                        class="clock-picker__body"
+                        class="b-clockpicker-body"
                         :style="{ width: faceSize + 'px', height: faceSize + 'px' }">
-                        <div v-if="!inline" class="clock-picker__time">
+                        <div v-if="!inline" class="b-clockpicker-time">
                             <div
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
                                 @click="isSelectingHour = true">Hours</div>
                             <span
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
                                 @click="isSelectingHour = false">Min</span>
                         </div>
-                        <div v-if="!isHourFormat24 && !inline" class="clock-picker__period">
+                        <div v-if="!isHourFormat24 && !inline" class="b-clockpicker-period">
                             <div
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: meridienSelected == AM }"
                                 @click="onMeridienClick(AM)">{{ AM }}</div>
                             <div
-                                class="clock-picker__btn"
+                                class="b-clockpicker-btn"
                                 :class="{ active: meridienSelected == PM }"
                                 @click="onMeridienClick(PM)">{{ PM }}</div>
                         </div>
@@ -93,7 +93,7 @@
                 </div>
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
-                    class="clock-picker__footer card-footer">
+                    class="b-clockpicker-footer card-footer">
                     <slot/>
                 </footer>
             </div>

@@ -1,5 +1,5 @@
 
-.clock-picker {
+.b-clockpicker {
     // Clockpicker variables defined here as exact numbers
     // must be known for use in the Vue component for calculations 
     // to determine  number and hand positioning/size.
@@ -16,26 +16,26 @@
     $padding-inner: 5px;
 
     // mixins for supporting all $colors defined in Bulma/custom
-    @mixin clock-picker-colors($name, $pair) {
+    @mixin b-clockpicker-colors($name, $pair) {
         &.is-#{$name} {
-            @include clock-picker-colors-set(nth($pair, 1), nth($pair, 2))
+            @include b-clockpicker-colors-set(nth($pair, 1), nth($pair, 2))
         }
     }
 
-    @mixin clock-picker-colors-set($color, $inverse) {
+    @mixin b-clockpicker-colors-set($color, $inverse) {
         .card-header {
             background-color: $color;
             color: $inverse;
         }
-        .clock-picker-face {
+        .b-clockpicker-face {
             &:after {
                 background-color: $color;
             }
-            &__hand {
+            &-hand {
                 background-color: $color;
                 border-color: $color;
             }
-            &__number.active {
+            &-number.active {
                 background-color: $color;
                 color: $inverse;
             }
@@ -44,10 +44,10 @@
 
     display: inline-block;
 
-    @include clock-picker-colors-set($primary, $primary-invert);
+    @include b-clockpicker-colors-set($primary, $primary-invert);
 
     @each $name, $pair in $colors {
-        @include clock-picker-colors($name, $pair)
+        @include b-clockpicker-colors($name, $pair)
     }
     
     .dropdown-content {
@@ -58,7 +58,7 @@
         padding: $padding-outer;
     }
     
-    &__btn {
+    &-btn {
         cursor: pointer;
         opacity: 0.6;
         &:hover,
@@ -67,14 +67,14 @@
         }
     }
     
-    &__period {
-        .clock-picker__btn {
+    &-period {
+        .b-clockpicker-btn {
             font-size: $period-font-size;
             text-transform: uppercase;
         }
     }
 
-    &__time {
+    &-time {
         span {
             align-items: center;
             display: inline-flex;
@@ -82,14 +82,14 @@
         }
     }
     
-    &__header {
+    &-header {
         display: flex;
         line-height: 1;
         justify-content: flex-end;
         color: inherit;
 
         // time display in the title for inline display
-        .clock-picker__time {
+        .b-clockpicker-time {
             white-space: nowrap;
             span {
                 height: $time-font-size;
@@ -98,7 +98,7 @@
         }
 
         // am/pm in the title for inline display
-        .clock-picker__period {
+        .b-clockpicker-period {
             align-self: flex-end;
             display: flex;
             flex-direction: column;
@@ -106,11 +106,11 @@
         }
     }
     
-    &__body {
+    &-body {
         transition: 0.9s $transition-swing;
         
 
-        .clock-picker__btn {
+        .b-clockpicker-btn {
             padding: 0 8px;
             border-radius: $radius-rounded;
             margin-bottom: 2px;
@@ -121,13 +121,13 @@
             }
         }
 
-        .clock-picker__period {
+        .b-clockpicker-period {
             position: absolute;
             top: 5px;
             right: 5px;
         }
 
-        .clock-picker__time {
+        .b-clockpicker-time {
             position: absolute;
             top: 5px;
             left: 5px;
@@ -135,7 +135,7 @@
 
         }
         
-        .clock-picker-face {
+        .b-clockpicker-face {
             // Outer border circle of clock
             border-radius: 50%;
             position: relative;
@@ -159,7 +159,7 @@
                 z-index: 10;
             }
 
-            &__outer_ring {
+            &-outer_ring {
                 user-select: none;
                 height: calc(100% - #{$indicator-size + ($padding-inner * 2)});
                 width: calc(100% - #{$indicator-size + ($padding-inner * 2)});
@@ -168,7 +168,7 @@
             }
 
             // Clock face number indicators
-            &__number {
+            &-number {
                 align-items: center;
                 border-radius: 100%;
                 cursor: default;
@@ -210,7 +210,7 @@
                 }
             }
             
-            &__hand {
+            &-hand {
                 height: calc(50% - #{$hand-endpoint-size / 2});
                 width: 2px;
                 bottom: 50%;
@@ -238,28 +238,28 @@
             }
         }
     }
-    &__footer {
+    &-footer {
         display: block;
         padding: $padding-outer;
     }
 }
 
-.picker__title--landscape {
-    .clock-picker-title {
+.picker-title--landscape {
+    .b-clockpicker-title {
         flex-direction: column;
         justify-content: center;
         height: 100%;
     }
-    .clock-picker-title__time {
+    .b-clockpicker-title-time {
         text-align: right;
 
-        .picker__title__btn,
+        .picker-title-btn,
         span {
             height: 55px;
             font-size: 55px;
         }
     }
-    .clock-picker__period {
+    .b-clockpicker-period {
         margin: 16px 16px 0;
         align-self: initial;
         text-align: center;

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="clock-picker-face"
+        class="b-clockpicker-face"
         @mousedown="onMouseDown"
         @mouseup="onMouseUp"
         @mousemove="onDragMove"
@@ -8,15 +8,15 @@
         @touchend="onMouseUp"
         @touchmove="onDragMove">
         <div
-            class="clock-picker-face__outer_ring"
+            class="b-clockpicker-face-outer_ring"
             ref="clock">
             <div
-                class="clock-picker-face__hand"
+                class="b-clockpicker-face-hand"
                 :style="{ transform: `rotate(${handRotateAngle}deg) scaleY(${handScale})` }" />
             <span
                 v-for="num of faceNumbers"
                 :key="num.value"
-                class="clock-picker-face__number"
+                class="b-clockpicker-face-number"
                 :class="getFaceNumberClasses(num)"
                 :style="{ transform: getNumberTranslate(num.value) }">
                 <span>{{ num.label }}</span>
