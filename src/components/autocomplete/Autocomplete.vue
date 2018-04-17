@@ -24,10 +24,11 @@
             <div
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
-                v-show="isActive && (data.length > 0 || hasEmptySlot)"
+                v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
                     <div
+                        v-if="hasHeaderSlot"     
                         class="dropdown-item">
                         <slot name="header"/>
                     </div>
@@ -126,6 +127,13 @@
              */
             hasEmptySlot() {
                 return !!this.$slots.empty
+            },
+            
+            /**
+             * Check if exists "header" slot
+             */
+            hasHeaderSlot() {
+                return !!this.$slots.header
             }
         },
         watch: {
