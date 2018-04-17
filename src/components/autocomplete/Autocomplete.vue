@@ -28,7 +28,7 @@
                 ref="dropdown">
                 <div class="dropdown-content">
                     <div
-                        v-if="hasHeaderSlot"     
+                        v-if="hasHeaderSlot"
                         class="dropdown-item">
                         <slot name="header"/>
                     </div>
@@ -47,7 +47,7 @@
                         <span v-else v-html="getValue(option, true)"/>
                     </a>
                     <div
-                        v-if="data.length === 0"
+                        v-if="data.length === 0 && hasEmptySlot"
                         class="dropdown-item is-disabled">
                         <slot name="empty"/>
                     </div>
@@ -128,7 +128,7 @@
             hasEmptySlot() {
                 return !!this.$slots.empty
             },
-            
+
             /**
              * Check if exists "header" slot
              */

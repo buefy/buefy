@@ -2,6 +2,12 @@
 
 ## 0.6.6
 
+### New features
+
+* Add ``header`` slot to autocomplete
+
+### Fixes and changes
+
 * #746 Fix default ``dateFormatter`` function to datepicker
 * #755 Fix arrow centered when table detail (thanks @wanxe)
 
