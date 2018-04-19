@@ -1,3 +1,6 @@
+
+import './scss/buefy-build.scss'
+
 import { Checkbox, CheckboxButton } from './components/checkbox'
 import { Dropdown, DropdownItem } from './components/dropdown'
 import { Radio, RadioButton } from './components/radio'

@@ -23,9 +23,10 @@ module.exports = {
   },
   lib: {
     env: require('./prod.env'),
+    filename: 'buefy',
+    name: 'Buefy',
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'lib',
-    assetsPublicPath: '/',
+    assetsSubDirectory: '',
     productionSourceMap: true,
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],

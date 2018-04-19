@@ -7,80 +7,90 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-var env = config.lib.env
-
-baseWebpackConfig.entry = {
-  'Buefy': './src/index.js'
+function getFilename(name, ext, minimize) {
+  return name + (minimize ? '.min' : '') + ext
 }
 
-var webpackConfig = merge(baseWebpackConfig, {
-  module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.lib.productionSourceMap,
-      extract: true
-    })
-  },
-  devtool: config.lib.productionSourceMap ? '#source-map' : false,
-  externals: {
-    vue: 'vue'
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
-  },
-  output: {
-    path: config.lib.assetsRoot,
-    filename: utils.assetsLibPath('buefy.min.js'),
-    library: '[name]',
-    libraryTarget: 'umd'
-  },
-  plugins: [
-    // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    new webpack.DefinePlugin({
-      'process.env': env
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
-    }),
-    // extract css into its own file
-    new ExtractTextPlugin({
-      filename: utils.assetsLibPath('[name].min.css')
-    }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
-    })
-  ]
-})
+module.exports = function(options) {
 
-if (config.lib.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+  baseWebpackConfig.entry = ['./src/index.js']
 
-  webpackConfig.plugins.push(
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp(
-        '\\.(' +
-        config.lib.productionGzipExtensions.join('|') +
-        ')$'
+  var webpackConfig = merge(baseWebpackConfig, {
+    module: {
+      rules: utils.styleLoaders({
+        sourceMap: config.lib.productionSourceMap,
+        extract: true,
+        minimize: options.minimize
+      })
+    },
+    devtool: config.lib.productionSourceMap ? '#source-map' : false,
+    externals: {
+      vue: 'vue'
+    },
+    output: {
+      path: config.lib.assetsRoot,
+      filename: utils.assetsLibPath(
+        getFilename(config.lib.filename, '.js', options.minimize)
       ),
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  )
+      library: config.lib.name,
+      libraryTarget: 'umd'
+    },
+    plugins: [
+      // http://vuejs.github.io/vue-loader/en/workflow/production.html
+      new webpack.DefinePlugin({
+        'process.env': config.lib.env
+      }),
+      // extract css into its own file
+      new ExtractTextPlugin({
+        filename: utils.assetsLibPath(
+          getFilename(config.lib.filename, '.css', options.minimize)
+        )
+      })
+    ]
+  })
+
+  if (options.minimize) {
+    webpackConfig.plugins.push(
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false
+        },
+        sourceMap: true
+      })
+    )
+    webpackConfig.plugins.push(
+      new OptimizeCSSPlugin({
+        cssProcessorOptions: {
+          safe: true
+        }
+      })
+    )
+  }
+
+  if (config.lib.productionGzip) {
+    var CompressionWebpackPlugin = require('compression-webpack-plugin')
+  
+    webpackConfig.plugins.push(
+      new CompressionWebpackPlugin({
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: new RegExp(
+          '\\.(' +
+          config.lib.productionGzipExtensions.join('|') +
+          ')$'
+        ),
+        threshold: 10240,
+        minRatio: 0.8
+      })
+    )
+  }
+  
+  if (config.lib.bundleAnalyzerReport) {
+    var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  }
+
+  return webpackConfig
 }
 
-if (config.lib.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-}
 
-module.exports = webpackConfig

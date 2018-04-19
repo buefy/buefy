@@ -19,7 +19,8 @@ exports.cssLoaders = function (options) {
   var cssLoader = {
     loader: 'css-loader',
     options: {
-      minimize: process.env.NODE_ENV === 'production',
+      minimize: typeof options.minimize !== 'undefined'
+        ? options.minimize : process.env.NODE_ENV === 'production',
       sourceMap: options.sourceMap
     }
   }
@@ -31,7 +32,8 @@ exports.cssLoaders = function (options) {
       loaders.push({
         loader: loader + '-loader',
         options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
+          sourceMap: options.sourceMap,
+          minimize: cssLoader.options.minimize
         })
       })
     }

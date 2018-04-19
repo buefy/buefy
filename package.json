@@ -28,12 +28,7 @@
     "unit": "jest",
     "test": "npm run lint && npm run unit",
     "test:watch": "npm run unit -- --watchAll",
-    "build:lib:clean": "rimraf lib",
-    "build:lib:js": "node build/build-lib.js",
-    "build:lib:sass": "node-sass --output-style expanded --source-map true --include-path node_modules src/scss/buefy-build.scss lib/buefy.css",
-    "build:lib:autoprefix": "postcss --use autoprefixer --output lib/buefy.css lib/buefy.css",
-    "build:lib:cssnano": "postcss --use cssnano --no-map --output lib/buefy.min.css lib/buefy.css",
-    "build:lib": "npm run build:lib:clean && npm run build:lib:js && npm run build:lib:sass && npm run build:lib:autoprefix && npm run build:lib:cssnano",
+    "build:lib": "node build/build-lib.js",
     "build:docs": "node build/build.js",
     "build": "npm run build:lib && npm run build:docs",
     "cov": "./node_modules/codcov/bin/codcov"
