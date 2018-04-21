@@ -21,14 +21,7 @@
                 :style="{ transform: getNumberTranslate(num.value) }">
                 <span>{{ num.label }}</span>
             </span>
-
         </div>
-        <!-- <div style="position: absolute; bottom:4px; left:4px">
-            {{ handRotateAngle }}
-        </div>
-        <div style="position: absolute; bottom:4px; right:4px">
-            {{ prevAngle }}
-        </div> -->
     </div>
 </template>
 
@@ -111,16 +104,7 @@ export default {
             while (currentAngle < 0) currentAngle += 360
             let targetAngle = this.calcHandAngle(this.displayedValue)
             let degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle)
-            // if (this.prevAngle < 0) degreesDiff *= -1
             let angle = this.prevAngle + degreesDiff
-
-            // console.log('-------------------------')
-            // console.log('prevAngle    ', this.prevAngle)
-            // console.log('currentAngle ', currentAngle)
-            // console.log('targetAngle  ', targetAngle)
-            // console.log('degreesDiff  ', degreesDiff)
-            // console.log('angle        ', angle)
-
             return angle
         },
         /**
@@ -227,7 +211,6 @@ export default {
         },
         onMouseUp() {
             this.isDragging = false
-            // console.log('onMouseUp: ', this.isDisabled(this.inputValue))
             if (!this.isDisabled(this.inputValue)) {
                 this.$emit('change', this.inputValue)
             }

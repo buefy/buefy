@@ -182,7 +182,6 @@ export default {
     },
     methods: {
         onClockInput(value) {
-            // console.log('onClockInput: ', value)
             if (this.isSelectingHour) {
                 this.hoursSelected = value
                 this.onHoursChange(value)

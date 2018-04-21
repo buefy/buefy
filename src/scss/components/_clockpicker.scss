@@ -108,7 +108,6 @@
     
     &-body {
         transition: 0.9s $transition-swing;
-        
 
         .b-clockpicker-btn {
             padding: 0 8px;
@@ -242,27 +241,5 @@
     &-footer {
         display: block;
         padding: $padding-outer;
-    }
-}
-
-.picker-title--landscape {
-    .b-clockpicker-title {
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-    }
-    .b-clockpicker-title-time {
-        text-align: right;
-
-        .picker-title-btn,
-        span {
-            height: 55px;
-            font-size: 55px;
-        }
-    }
-    .b-clockpicker-period {
-        margin: 16px 16px 0;
-        align-self: initial;
-        text-align: center;
     }
 }
