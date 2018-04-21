@@ -192,7 +192,7 @@ export default {
             }
         },
         onClockChange(value) {
-            if (this.autoSwitch || !this.inline) {
+            if (this.autoSwitch && this.isSelectingHour) {
                 this.isSelectingHour = !this.isSelectingHour
             }
         },

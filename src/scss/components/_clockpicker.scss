@@ -159,7 +159,7 @@
                 z-index: 10;
             }
 
-            &-outer_ring {
+            &-outer-ring {
                 user-select: none;
                 height: calc(100% - #{$indicator-size + ($padding-inner * 2)});
                 width: calc(100% - #{$indicator-size + ($padding-inner * 2)});
@@ -220,7 +220,8 @@
                 position: absolute;
                 will-change: transform;
                 z-index: 1;
-    
+                // transition: .3s $transition-swing;
+
                 &:before {
                     background: transparent;
                     border-width: 2px;
