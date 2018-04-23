@@ -9,7 +9,7 @@ $radio-active-background-color: $primary !default;
         & + .radio {
             margin-left: 0.5em;
         }
-        input[type=radio] {
+        input {
             display: none;
             + .check {
                 display: flex;
@@ -44,15 +44,15 @@ $radio-active-background-color: $primary !default;
             opacity: 0.5;
         }
         &:hover {
-            input[type=radio] + .check {
+            input + .check {
                 border-color: $radio-active-background-color;
             }
         }
         &:focus {
-            input[type=radio] + .check {
+            input + .check {
                 box-shadow: 0 0 0.5em rgba($grey, 0.8);
             }
-            input[type=radio]:checked + .check {
+            input:checked + .check {
                 box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
             }
         }

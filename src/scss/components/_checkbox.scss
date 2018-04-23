@@ -10,7 +10,7 @@ $checkbox-checkmark-color: $primary-invert !default;
         & + .checkbox {
             margin-left: 0.5em;
         }
-        input[type=checkbox] {
+        input {
             display: none;
             + .check {
                 width: 1.25em;
@@ -32,15 +32,15 @@ $checkbox-checkmark-color: $primary-invert !default;
             opacity: 0.5;
         }
         &:hover {
-            input[type=checkbox] + .check {
+            input + .check {
                 border-color: $checkbox-active-background-color;
             }
         }
         &:focus {
-            input[type=checkbox] + .check {
+            input + .check {
                 box-shadow: 0 0 0.5em rgba($grey, 0.8);
             }
-            input[type=checkbox]:checked + .check {
+            input:checked + .check {
                 box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
             }
         }

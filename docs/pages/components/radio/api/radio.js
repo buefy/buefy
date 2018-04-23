@@ -36,6 +36,13 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
+            },
+            {
+                name: '<code>custom-class</code>',
+                description: 'class to be applied to the radio buttons, optional',
+                type: 'String, Object',
+                values: '—',
+                default: '<code>b-radio radio</code>'
             }
         ],
         events: [
