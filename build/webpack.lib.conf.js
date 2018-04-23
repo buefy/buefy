@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
+var package = require('../package.json')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -65,11 +66,19 @@ module.exports = function(options) {
         }
       })
     )
+  } else {
+    webpackConfig.plugins.push(
+      new webpack.BannerPlugin({
+        banner: `/*! Buefy v${package.version} | MIT License | github.com/buefy/buefy */ `,
+        raw: true,
+        entryOnly: true
+      })
+    )
   }
 
   if (config.lib.productionGzip) {
     var CompressionWebpackPlugin = require('compression-webpack-plugin')
-  
+
     webpackConfig.plugins.push(
       new CompressionWebpackPlugin({
         asset: '[path].gz[query]',
@@ -84,7 +93,7 @@ module.exports = function(options) {
       })
     )
   }
-  
+
   if (config.lib.bundleAnalyzerReport) {
     var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
     webpackConfig.plugins.push(new BundleAnalyzerPlugin())
@@ -92,5 +101,3 @@ module.exports = function(options) {
 
   return webpackConfig
 }
-
-

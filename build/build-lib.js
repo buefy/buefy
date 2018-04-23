@@ -36,10 +36,6 @@ rm(path.join(config.lib.assetsRoot, config.lib.assetsSubDirectory), err => {
       chunkModules: false
     }) + '\n\n')
 
-    console.log(chalk.cyan('  Build complete.\n'))
-    console.log(chalk.yellow(
-      '  Tip: Now you are ready to publish your library to npm.\n' +
-      '  Then users can import it as an es6 module: import {{camelcase name}} from \'{{ name }}\'\n'
-    ))
+    spinner.succeed('Build complete!')
   })
 })
