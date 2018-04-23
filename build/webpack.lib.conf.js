@@ -1,6 +1,7 @@
 var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
+var fs = require('fs')
 var config = require('../config')
 var package = require('../package.json')
 var merge = require('webpack-merge')
@@ -8,13 +9,25 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-function getFilename(name, ext, minimize) {
-  return name + (minimize ? '.min' : '') + ext
+function getFilename(ext, minimize) {
+  return '[name]' + (minimize ? '.min' : '') + ext
 }
 
 module.exports = function(options) {
 
-  baseWebpackConfig.entry = ['./src/index.js']
+  if (options.components) {
+    baseWebpackConfig.entry = {}
+    var files = fs.readdirSync('./src/components/')
+    files.forEach(component => {
+      var entryKey = `components/${component}/${component}`
+      var entryValue = `./src/components/${component}/index.js`
+      baseWebpackConfig.entry[entryKey] = entryValue
+    })
+  } else {
+    baseWebpackConfig.entry = {
+      [config.lib.filename]: './src/index.js'
+    }
+  }
 
   var webpackConfig = merge(baseWebpackConfig, {
     module: {
@@ -30,9 +43,7 @@ module.exports = function(options) {
     },
     output: {
       path: config.lib.assetsRoot,
-      filename: utils.assetsLibPath(
-        getFilename(config.lib.filename, '.js', options.minimize)
-      ),
+      filename: utils.assetsLibPath(getFilename('.js', options.minimize)),
       library: config.lib.name,
       libraryTarget: 'umd'
     },
@@ -43,9 +54,7 @@ module.exports = function(options) {
       }),
       // extract css into its own file
       new ExtractTextPlugin({
-        filename: utils.assetsLibPath(
-          getFilename(config.lib.filename, '.css', options.minimize)
-        )
+        filename: utils.assetsLibPath(getFilename('.css', options.minimize))
       })
     ]
   })

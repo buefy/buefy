@@ -22,6 +22,10 @@ rm(path.join(config.lib.assetsRoot, config.lib.assetsSubDirectory), err => {
     }),
     webpackConfig({
       minimize: false
+    }),
+    webpackConfig({
+      components: true,
+      minimize: true
     })
   ]
 

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Modal from './Modal'
 
-export { Modal }
-export default {
+import { registerComponentAsPlugin, registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+
+const ModalProgrammatic = {
     open(params) {
         let content
         let parent
@@ -18,7 +19,8 @@ export default {
         }
         const propsData = Object.assign(defaultParam, params)
 
-        const ModalComponent = Vue.extend(Modal)
+        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        const ModalComponent = vm.extend(Modal)
         return new ModalComponent({
             parent,
             el: document.createElement('div'),
@@ -26,3 +28,9 @@ export default {
         })
     }
 }
+
+registerComponentAsPlugin(Modal)
+registerComponentProgrammaticAsPlugin('$modal', ModalProgrammatic)
+
+export { Modal }
+export default ModalProgrammatic

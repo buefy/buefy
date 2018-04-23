@@ -30,6 +30,7 @@ import Tooltip from './components/tooltip'
 import Upload from './components/upload'
 
 import config, { setOptions } from './utils/config'
+import { use } from './utils/plugins'
 
 const components = {
     Autocomplete,
@@ -82,6 +83,8 @@ components.install = (Vue, options = {}) => {
     Vue.prototype.$snackbar = Snackbar
     Vue.prototype.$toast = Toast
 }
+
+use(components)
 
 export default components
 

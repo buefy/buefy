@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import Dialog from './Dialog'
 
+import { registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+
 function open(propsData) {
-    const DialogComponent = Vue.extend(Dialog)
+    const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+    const DialogComponent = vm.extend(Dialog)
     return new DialogComponent({
         el: document.createElement('div'),
         propsData
     })
 }
 
-export default {
+const DialogProgrammatic = {
     alert(params) {
         let message
         if (typeof params === 'string') message = params
@@ -34,3 +37,7 @@ export default {
         return open(propsData)
     }
 }
+
+registerComponentProgrammaticAsPlugin('$dialog', DialogProgrammatic)
+
+export default DialogProgrammatic
