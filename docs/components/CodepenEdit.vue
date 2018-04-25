@@ -118,7 +118,6 @@
                 }
 
                 return this.$options.filters.pre(`
-                    Vue.use(Buefy.default)
 
                     ${js || ''}
 

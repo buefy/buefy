@@ -45,7 +45,10 @@
                     If you want to use your own theme / variables go to
                     <router-link to="/documentation/customization">customization section</router-link>.
                 </b-message>
-                <CodeView :code="importing | pre" lang="javascript" expanded/>
+                <h5 class="subtitle is-5"> Bundle </h5>
+                <CodeView :code="importingBundle | pre" lang="javascript" expanded/>
+                <h5 class="subtitle is-5"> Individual Components </h5>
+                <CodeView :code="importingComponents | pre" lang="javascript" expanded/>
             </div>
         </div>
 
@@ -58,7 +61,6 @@
             <div class="media-content">
                 <h3 class="subtitle">CDN / Standalone:</h3>
                 <CodeView :code="importingCDNHtml | pre" expanded/>
-                <CodeView :code="importingCDNJs | pre" lang="javascript" expanded/>
             </div>
         </div>
 
@@ -107,18 +109,21 @@
     export default {
         data() {
             return {
-                importing: `
+                importingBundle: `
                 import Vue from 'vue'
                 import Buefy from 'buefy'
                 import 'buefy/lib/buefy.css'
 
                 Vue.use(Buefy)
+                `,
+                importingComponents: `
+                import Vue from 'vue'
+                import { Field, Input } from 'buefy/dist/components'
+                import 'buefy/lib/buefy.css'
 
-                // OR
-
-                Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                Vue.component(Buefy.Table.name, Buefy.Table)
-                Vue.component(Buefy.Switch.name, Buefy.Switch)`,
+                Vue.use(Field)
+                Vue.use(Input)
+                `,
                 importingSSR: `
                 import Vue from 'vue'
                 import Buefy from 'buefy'
@@ -143,14 +148,28 @@
                     ]
                 }`,
                 importingCDNHtml: `
-                <!-- Buefy CSS -->
-                <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+                </head>
 
-                <!-- Buefy JavaScript -->
-                <script src="https://unpkg.com/buefy"><\/script>`,
-                importingCDNJs: `
-                // Global variable
-                Vue.use(Buefy.default)`,
+                <body>
+                    <div id="app">
+                    <!-- Buefy components here -->
+                    </div>
+
+                    <script src="https://unpkg.com/vue"></\script>
+                    <script src="https://unpkg.com/buefy"></\script>
+                    <script>
+                        new Vue({
+                            el: '#app'
+                        })
+                    </\script>
+                </body>
+                </html>`,
                 materialIcons: '<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">'
             }
         }
