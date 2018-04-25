@@ -1,7 +1,13 @@
 import Select from './Select'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Select)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Select)
+    }
+}
 
-export default Select
+use(Plugin)
+
+export default Plugin

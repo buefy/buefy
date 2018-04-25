@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Loading from './Loading'
 
-import { registerComponentAsPlugin, registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const LoadingProgrammatic = {
     open(params) {
@@ -19,8 +19,13 @@ const LoadingProgrammatic = {
     }
 }
 
-registerComponentAsPlugin(Loading)
-registerComponentProgrammaticAsPlugin('$loading', LoadingProgrammatic)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Loading)
+        registerComponentProgrammatic(Vue, '$loading', LoadingProgrammatic)
+    }
+}
 
-export { Loading }
-export default LoadingProgrammatic
+use(Plugin)
+
+export default Plugin

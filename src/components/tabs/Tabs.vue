@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
     import SlotComponent from '../../utils/SlotComponent'
 
     export default {

@@ -1,7 +1,13 @@
 import Pagination from './Pagination'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Pagination)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Pagination)
+    }
+}
 
-export default Pagination
+use(Plugin)
+
+export default Plugin

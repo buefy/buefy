@@ -1,7 +1,13 @@
 import Autocomplete from './Autocomplete'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Autocomplete)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Autocomplete)
+    }
+}
 
-export default Autocomplete
+use(Plugin)
+
+export default Plugin

@@ -1,7 +1,13 @@
 import Notification from './Notification'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Notification)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Notification)
+    }
+}
 
-export default Notification
+use(Plugin)
+
+export default Plugin

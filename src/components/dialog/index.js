@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Dialog from './Dialog'
 
-import { registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 function open(propsData) {
     const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
@@ -38,6 +38,13 @@ const DialogProgrammatic = {
     }
 }
 
-registerComponentProgrammaticAsPlugin('$dialog', DialogProgrammatic)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Dialog)
+        registerComponentProgrammatic(Vue, '$dialog', DialogProgrammatic)
+    }
+}
 
-export default DialogProgrammatic
+use(Plugin)
+
+export default Plugin

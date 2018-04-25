@@ -1,11 +1,15 @@
 import Dropdown from './Dropdown'
 import DropdownItem from './DropdownItem'
 
-import { registerComponentsAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentsAsPlugin([Dropdown, DropdownItem])
-
-export {
-    Dropdown,
-    DropdownItem
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Dropdown)
+        registerComponent(Vue, DropdownItem)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

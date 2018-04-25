@@ -1,7 +1,13 @@
 import Input from './Input'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Input)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Input)
+    }
+}
 
-export default Input
+use(Plugin)
+
+export default Plugin

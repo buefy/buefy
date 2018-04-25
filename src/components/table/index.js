@@ -1,11 +1,15 @@
 import Table from './Table'
 import TableColumn from './TableColumn'
 
-import { registerComponentsAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentsAsPlugin([Table, TableColumn])
-
-export {
-    Table,
-    TableColumn
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Table)
+        registerComponent(Vue, TableColumn)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

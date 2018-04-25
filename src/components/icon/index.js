@@ -1,7 +1,13 @@
 import Icon from './Icon'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Icon)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Icon)
+    }
+}
 
-export default Icon
+use(Plugin)
+
+export default Plugin

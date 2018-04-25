@@ -29,17 +29,32 @@ rm(path.join(config.lib.assetsRoot, config.lib.assetsSubDirectory), err => {
     })
   ]
 
-  webpack(configs, function (err, stats) {
-    spinner.stop()
-    if (err) throw err
-    process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
-    }) + '\n\n')
+  var promises = []
 
-    spinner.succeed('Build complete!')
+  configs.forEach(function (config) {
+    var promise = new Promise(function (resolve, reject) {
+      webpack(config, function (err, stats) {
+          if (err) reject(err)
+          else resolve(stats)
+      })
+    })
+    promises.push(promise)
   })
+
+  Promise.all(promises).then(function (results) {
+    results.forEach(function (stats) {
+      process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+      }) + '\n\n')
+    }) 
+    spinner.stop()
+    spinner.succeed('Build complete!')
+  }).catch(function (err) {
+    throw err
+  })
+  
 })

@@ -1,11 +1,15 @@
 import Tabs from './Tabs'
 import TabItem from './TabItem'
 
-import { registerComponentsAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentsAsPlugin([Tabs, TabItem])
-
-export {
-    Tabs,
-    TabItem
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Tabs)
+        registerComponent(Vue, TabItem)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

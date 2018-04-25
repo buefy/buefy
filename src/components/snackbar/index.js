@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Snackbar from './Snackbar'
 
-import { registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 const SnackbarProgrammatic = {
     open(params) {
@@ -24,6 +24,12 @@ const SnackbarProgrammatic = {
     }
 }
 
-registerComponentProgrammaticAsPlugin('$snackbar', SnackbarProgrammatic)
+const Plugin = {
+    install(Vue) {
+        registerComponentProgrammatic(Vue, '$snackbar', SnackbarProgrammatic)
+    }
+}
 
-export default SnackbarProgrammatic
+use(Plugin)
+
+export default Plugin

@@ -1,13 +1,13 @@
 import Field from './Field'
-import FieldBody from './FieldBody'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Field)
-
-export default Field
-
-export {
-    Field,
-    FieldBody
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Field)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

@@ -1,7 +1,13 @@
 import Message from './Message'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Message)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Message)
+    }
+}
 
-export default Message
+use(Plugin)
+
+export default Plugin

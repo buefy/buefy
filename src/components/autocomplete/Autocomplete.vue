@@ -60,7 +60,7 @@
 <script>
     import { getValueByPath, escapeRegExpChars } from '../../utils/helpers'
     import FormElementMixin from '../../utils/FormElementMixin'
-    import Input from '../input'
+    import Input from '../input/Input'
 
     export default {
         name: 'BAutocomplete',

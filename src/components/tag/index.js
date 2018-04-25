@@ -1,11 +1,15 @@
 import Tag from './Tag'
 import Taglist from './Taglist'
 
-import { registerComponentsAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentsAsPlugin([Tag, Taglist])
-
-export {
-    Tag,
-    Taglist
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Tag)
+        registerComponent(Vue, Taglist)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

@@ -1,7 +1,13 @@
 import Datepicker from './Datepicker'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Datepicker)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Datepicker)
+    }
+}
 
-export default Datepicker
+use(Plugin)
+
+export default Plugin

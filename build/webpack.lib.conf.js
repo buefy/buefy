@@ -7,6 +7,7 @@ var package = require('../package.json')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var OptimizeJsPlugin = require('optimize-js-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 function getFilename(ext, minimize) {
@@ -16,12 +17,17 @@ function getFilename(ext, minimize) {
 module.exports = function(options) {
 
   if (options.components) {
-    baseWebpackConfig.entry = {}
-    var files = fs.readdirSync('./src/components/')
+    var root = './src/components/'
+    baseWebpackConfig.entry = {
+      'components/index': `${root}/index.js`
+    }
+    var files = fs.readdirSync(root)
     files.forEach(component => {
-      var entryKey = `components/${component}/${component}`
-      var entryValue = `./src/components/${component}/index.js`
-      baseWebpackConfig.entry[entryKey] = entryValue
+      if (fs.statSync(path.join(root, component)).isDirectory()) {
+        var entryKey = `components/${component}/index`
+        var entryValue = `${root}/${component}/index.js`
+        baseWebpackConfig.entry[entryKey] = entryValue
+      }
     })
   } else {
     baseWebpackConfig.entry = {
@@ -55,7 +61,13 @@ module.exports = function(options) {
       // extract css into its own file
       new ExtractTextPlugin({
         filename: utils.assetsLibPath(getFilename('.css', options.minimize))
-      })
+      }),
+      new webpack.BannerPlugin({
+        banner: `/*! Buefy v${package.version} | MIT License | github.com/buefy/buefy */ `,
+        raw: true,
+        entryOnly: true
+      }),
+      new webpack.optimize.ModuleConcatenationPlugin()
     ]
   })
 
@@ -65,8 +77,14 @@ module.exports = function(options) {
         compress: {
           warnings: false
         },
+        output: {
+          comments: false
+        },
         sourceMap: true
       })
+    )
+    webpackConfig.plugins.push(
+      new webpack.optimize.OccurrenceOrderPlugin()
     )
     webpackConfig.plugins.push(
       new OptimizeCSSPlugin({
@@ -75,14 +93,11 @@ module.exports = function(options) {
         }
       })
     )
-  } else {
-    webpackConfig.plugins.push(
-      new webpack.BannerPlugin({
-        banner: `/*! Buefy v${package.version} | MIT License | github.com/buefy/buefy */ `,
-        raw: true,
-        entryOnly: true
-      })
-    )
+  }
+
+  if (options.components) {
+    webpackConfig.output.filename = utils.assetsLibPath(getFilename('.js', false))
+    webpackConfig.devtool = false
   }
 
   if (config.lib.productionGzip) {

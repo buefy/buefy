@@ -1,7 +1,13 @@
 import Timepicker from './Timepicker'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Timepicker)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Timepicker)
+    }
+}
 
-export default Timepicker
+use(Plugin)
+
+export default Plugin

@@ -69,28 +69,6 @@ describe('BSlotComponent', () => {
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
     })
 
-    it('refresh after default event (hook)', async () => {
-        const slot = '<span>Content</span>'
-        const Component = shallow(MockComponent, {
-            slots: {
-                default: slot
-            }
-        })
-        const refresh = jest.fn()
-        const wrapper = shallow(BSlotComponent, {
-            propsData: {
-                component: Component.vm
-            },
-            methods: {
-                refresh
-            }
-        })
-        Component.vm.$forceUpdate()
-        await Component.vm.$nextTick()
-        expect(refresh).toHaveBeenCalledTimes(1)
-        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
-    })
-
     it('refresh', () => {
         const event = 'component-event'
         const slot = '<span>Content</span>'

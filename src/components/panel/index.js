@@ -1,7 +1,13 @@
 import Panel from './Panel'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Panel)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Panel)
+    }
+}
 
-export default Panel
+use(Plugin)
+
+export default Plugin

@@ -64,7 +64,7 @@
 
 <script>
     import { getValueByPath } from '../../utils/helpers'
-    import Autocomplete from '../autocomplete'
+    import Autocomplete from '../autocomplete/Autocomplete'
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {

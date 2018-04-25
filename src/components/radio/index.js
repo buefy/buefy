@@ -1,11 +1,15 @@
 import Radio from './Radio'
 import RadioButton from './RadioButton'
 
-import { registerComponentsAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentsAsPlugin([Radio, RadioButton])
-
-export {
-    Radio,
-    RadioButton
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Radio)
+        registerComponent(Vue, RadioButton)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

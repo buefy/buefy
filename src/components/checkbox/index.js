@@ -1,11 +1,15 @@
 import Checkbox from './Checkbox'
 import CheckboxButton from './CheckboxButton'
 
-import { registerComponentsAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentsAsPlugin([Checkbox, CheckboxButton])
-
-export {
-    Checkbox,
-    CheckboxButton
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Checkbox)
+        registerComponent(Vue, CheckboxButton)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

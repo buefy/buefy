@@ -1,7 +1,13 @@
 import Taginput from './Taginput'
 
-import { registerComponentAsPlugin } from '../../utils/plugins'
+import { use, registerComponent } from '../../utils/plugins'
 
-registerComponentAsPlugin(Taginput)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Taginput)
+    }
+}
 
-export default Taginput
+use(Plugin)
+
+export default Plugin

@@ -28,14 +28,14 @@
 </template>
 
 <script>
-    import BSelect from '../select'
-    import BIcon from '../icon'
+    import Select from '../select/Select'
+    import Icon from '../icon/Icon'
 
     export default {
         name: 'BTableMobileSort',
         components: {
-            BSelect,
-            BIcon
+            [Select.name]: Select,
+            [Icon.name]: Icon
         },
         props: {
             currentSortColumn: Object,

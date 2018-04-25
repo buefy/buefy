@@ -9,7 +9,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -68,9 +67,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency',
-      serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-        './service-worker-prod.js'), 'utf-8')}</script>`
+      chunksSortMode: 'dependency'
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
@@ -99,15 +96,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ]),
-    // service worker caching
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'my-vue-app',
-      filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      minify: true,
-      stripPrefix: 'dist/'
-    })
+    ])
   ]
 })
 

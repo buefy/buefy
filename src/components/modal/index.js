@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Modal from './Modal'
 
-import { registerComponentAsPlugin, registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ModalProgrammatic = {
     open(params) {
@@ -29,8 +29,13 @@ const ModalProgrammatic = {
     }
 }
 
-registerComponentAsPlugin(Modal)
-registerComponentProgrammaticAsPlugin('$modal', ModalProgrammatic)
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Notification)
+        registerComponentProgrammatic(Vue, '$modal', ModalProgrammatic)
+    }
+}
 
-export { Modal }
-export default ModalProgrammatic
+use(Plugin)
+
+export default Plugin

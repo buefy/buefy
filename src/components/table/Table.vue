@@ -167,21 +167,22 @@
 
 <script>
     import { getValueByPath, indexOf } from '../../utils/helpers'
-    import { Checkbox as BCheckbox } from '../checkbox'
-    import BPagination from '../pagination'
-    import BIcon from '../icon'
 
-    import BTableMobileSort from './TableMobileSort'
-    import BTableColumn from './TableColumn'
+    import Checkbox from '../checkbox/Checkbox'
+    import Icon from '../icon/Icon'
+    import Pagination from '../pagination/Pagination'
+
+    import TableMobileSort from './TableMobileSort'
+    import TableColumn from './TableColumn'
 
     export default {
         name: 'BTable',
         components: {
-            BPagination,
-            BIcon,
-            BCheckbox,
-            BTableMobileSort,
-            BTableColumn
+            [Checkbox.name]: Checkbox,
+            [Icon.name]: Icon,
+            [Pagination.name]: Pagination,
+            [TableMobileSort.name]: TableMobileSort,
+            [TableColumn.name]: TableColumn
         },
         props: {
             data: {

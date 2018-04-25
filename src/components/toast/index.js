@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Toast from './Toast'
 
-import { registerComponentProgrammaticAsPlugin } from '../../utils/plugins'
+import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ToastProgrammatic = {
     open(params) {
@@ -20,6 +20,12 @@ const ToastProgrammatic = {
     }
 }
 
-registerComponentProgrammaticAsPlugin('$toast', ToastProgrammatic)
+const Plugin = {
+    install(Vue) {
+        registerComponentProgrammatic(Vue, '$toast', ToastProgrammatic)
+    }
+}
 
-export default ToastProgrammatic
+use(Plugin)
+
+export default Plugin
