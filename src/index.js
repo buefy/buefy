@@ -1,6 +1,4 @@
 
-import './scss/buefy-build.scss'
-
 import components from './components'
 
 import config, { setOptions } from './utils/config'

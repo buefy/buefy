@@ -3,7 +3,7 @@ var utils = require('./utils')
 var webpack = require('webpack')
 var fs = require('fs')
 var config = require('../config')
-var package = require('../package.json')
+var pack = require('../package.json')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -17,7 +17,7 @@ function getFilename(ext, minimize) {
 module.exports = function(options) {
 
   if (options.components) {
-    var root = './src/components/'
+    var root = './src/components'
     baseWebpackConfig.entry = {
       'components/index': `${root}/index.js`
     }
@@ -31,19 +31,23 @@ module.exports = function(options) {
     })
   } else {
     baseWebpackConfig.entry = {
-      [config.lib.filename]: './src/index.js'
+      [config.lib.filename]: [
+        './src/index.js',
+        './src/scss/buefy-build.scss'
+      ]
     }
   }
 
   var webpackConfig = merge(baseWebpackConfig, {
     module: {
       rules: utils.styleLoaders({
-        sourceMap: config.lib.productionSourceMap,
+        sourceMap: false,
         extract: true,
         minimize: options.minimize
       })
     },
-    devtool: config.lib.productionSourceMap ? '#source-map' : false,
+    // devtool: config.lib.productionSourceMap ? '#source-map' : false,
+    devtool: false,
     externals: {
       vue: 'vue'
     },
@@ -63,7 +67,7 @@ module.exports = function(options) {
         filename: utils.assetsLibPath(getFilename('.css', options.minimize))
       }),
       new webpack.BannerPlugin({
-        banner: `/*! Buefy v${package.version} | MIT License | github.com/buefy/buefy */ `,
+        banner: `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */ `,
         raw: true,
         entryOnly: true
       }),
@@ -80,7 +84,7 @@ module.exports = function(options) {
         output: {
           comments: false
         },
-        sourceMap: true
+        sourceMap: false
       })
     )
     webpackConfig.plugins.push(
@@ -96,8 +100,8 @@ module.exports = function(options) {
   }
 
   if (options.components) {
+    delete webpackConfig.output.library
     webpackConfig.output.filename = utils.assetsLibPath(getFilename('.js', false))
-    webpackConfig.devtool = false
   }
 
   if (config.lib.productionGzip) {
