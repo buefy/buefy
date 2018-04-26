@@ -29,9 +29,21 @@ $radio-active-background-color: $primary !default;
                     transform: scale(0);
                     transition: transform $speed-slow $easing;
                 }
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name}:before {
+                        background: $color;
+                    }
+                }
             }
             &:checked + .check {
                 border-color: $radio-active-background-color;
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name} {
+                        border-color: $color;
+                    }
+                }
                 &:before {
                     transform: scale(1);
                 }
@@ -46,6 +58,12 @@ $radio-active-background-color: $primary !default;
         &:hover {
             input[type=radio] + .check {
                 border-color: $radio-active-background-color;
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name} {
+                        border-color: $color;
+                    }
+                }
             }
         }
         &:focus {
@@ -54,6 +72,12 @@ $radio-active-background-color: $primary !default;
             }
             input[type=radio]:checked + .check {
                 box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name} {
+                        box-shadow: 0 0 0.5em rgba($color, 0.8);
+                    }
+                }
             }
         }
         &.is-small {
@@ -65,5 +89,5 @@ $radio-active-background-color: $primary !default;
         &.is-large {
             @include control-large;
         }
-    }    
+    }
 }

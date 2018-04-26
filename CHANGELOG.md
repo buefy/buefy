@@ -5,6 +5,7 @@
 ### New features
 
 * Add ``header`` slot to autocomplete
+* Add ``type`` prop to checkbox and radio
 
 ### Fixes and changes
 
