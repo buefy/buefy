@@ -1,5 +1,5 @@
 
-import components from './components'
+import * as components from './components'
 
 import config, { setOptions } from './utils/config'
 import { use } from './utils/plugins'

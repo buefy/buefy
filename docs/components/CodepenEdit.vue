@@ -30,10 +30,10 @@
                 hasHtml: false,
                 externalScripts: [
                     'https://unpkg.com/vue/dist/vue.min.js',
-                    'https://unpkg.com/buefy'
+                    'https://unpkg.com/buefy/dist/buefy.min.js'
                 ],
                 externalStyles: [
-                    'https://unpkg.com/buefy/lib/buefy.min.css',
+                    'https://unpkg.com/buefy/dist/buefy.min.css',
                     'https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
                 ]
             }

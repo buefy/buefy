@@ -114,10 +114,10 @@ Common used NPM scripts:
 # serve docs with hot reload at localhost:8080
 $ npm run dev
 
-# build lib in /lib folder
+# build lib in /dist folder
 $ npm run build:lib
 
-# build docs in /dist folder
+# build docs in /dist-docs folder
 $ npm run build:docs
 
 # build docs and lib

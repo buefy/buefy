@@ -45,7 +45,7 @@ Bundle
 ```javascript
 import Vue from 'vue';
 import Buefy from 'buefy';
-import 'buefy/lib/buefy.css';
+import 'buefy/dist/buefy.css';
 
 Vue.use(Buefy);
 
@@ -55,7 +55,17 @@ or Individual Components
 
 import Vue from 'vue'
 import { Field, Input } from 'buefy/dist/components'
-import 'buefy/lib/buefy.css'
+import 'buefy/dist/buefy.css'
+
+Vue.use(Field)
+Vue.use(Input)
+
+or
+
+import Vue from 'vue'
+import Field from 'buefy/dist/components/field'
+import Input from 'buefy/dist/components/input'
+import 'buefy/dist/buefy.css'
 
 Vue.use(Field)
 Vue.use(Input)
@@ -73,10 +83,10 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 ```html
 <!-- Buefy CSS -->
-<link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
 
 <!-- Buefy JavaScript -->
-<script src="https://unpkg.com/buefy"></script>
+<script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 ```
 
 ## Browser support

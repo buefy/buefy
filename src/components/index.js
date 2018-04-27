@@ -27,7 +27,7 @@ import Toast from './toast'
 import Tooltip from './tooltip'
 import Upload from './upload'
 
-export default {
+export {
     Autocomplete,
     Checkbox,
     Collapse,

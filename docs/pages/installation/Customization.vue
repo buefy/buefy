@@ -55,7 +55,7 @@
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
                 <b-message type="is-warning">
-                    Please note that <code class="javascript">import 'buefy/lib/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
+                    Please note that <code class="javascript">import 'buefy/dist/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
                 </b-message>
                 <CodeView :code="importing | pre" lang="javascript" expanded/>
             </div>

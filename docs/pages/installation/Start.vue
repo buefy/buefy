@@ -26,8 +26,8 @@
             <div class="media-content">
                 <h3 class="subtitle">Use unpkg <b>CDN</b> (or download):</h3>
                 <div class="content">
-                    <p>JavaScript: <a href="https://unpkg.com/buefy" target="_blank">https://unpkg.com/buefy</a></p>
-                    <p>CSS: <a href="https://unpkg.com/buefy/lib/buefy.min.css" target="_blank">https://unpkg.com/buefy/lib/buefy.min.css</a></p>
+                    <p>JavaScript: <a href="https://unpkg.com/buefy/dist/buefy.min.js" target="_blank">https://unpkg.com/buefy/dist/buefy.min.js</a></p>
+                    <p>CSS: <a href="https://unpkg.com/buefy/dist/buefy.min.css" target="_blank">https://unpkg.com/buefy/dist/buefy.min.css</a></p>
                 </div>
             </div>
         </div>
@@ -112,14 +112,24 @@
                 importingBundle: `
                 import Vue from 'vue'
                 import Buefy from 'buefy'
-                import 'buefy/lib/buefy.css'
+                import 'buefy/dist/buefy.css'
 
                 Vue.use(Buefy)
                 `,
                 importingComponents: `
                 import Vue from 'vue'
                 import { Field, Input } from 'buefy/dist/components'
-                import 'buefy/lib/buefy.css'
+                import 'buefy/dist/buefy.css'
+
+                Vue.use(Field)
+                Vue.use(Input)
+
+                or 
+
+                import Vue from 'vue'
+                import Field from 'buefy/dist/components/field'
+                import Input from 'buefy/dist/components/input'
+                import 'buefy/dist/buefy.css'
 
                 Vue.use(Field)
                 Vue.use(Input)
@@ -127,7 +137,7 @@
                 importingSSR: `
                 import Vue from 'vue'
                 import Buefy from 'buefy'
-                import 'buefy/lib/buefy.css'
+                import 'buefy/dist/buefy.css'
 
                 Vue.use(Buefy) `,
                 installNuxtBuefy: `
@@ -153,7 +163,7 @@
                 <head>
                     <meta charset="utf-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+                    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
                 </head>
 
                 <body>
@@ -162,7 +172,7 @@
                     </div>
 
                     <script src="https://unpkg.com/vue"></\script>
-                    <script src="https://unpkg.com/buefy"></\script>
+                    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></\script>
                     <script>
                         new Vue({
                             el: '#app'
