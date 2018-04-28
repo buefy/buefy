@@ -9,6 +9,7 @@ export default {
     'tooltip': { title: 'Tooltip' },
     'modal': { title: 'Modal' },
     'tabs': { title: 'Tabs' },
+    'button': { title: 'Button' },
     'collapse': { title: 'Collapse' },
     'panel': { title: 'Panel' },
     'tag': { title: 'Tag' },

@@ -43,6 +43,7 @@ const router = new Router({
                 route('modal', 'components/modal/Modal'),
                 route('tabs', 'components/tabs/Tabs'),
                 route('collapse', 'components/collapse/Collapse'),
+                route('button', 'components/button/Button'),
                 route('panel', 'components/panel/Panel'),
                 route('tag', 'components/tag/Tag'),
                 route('dialog', 'components/dialog/Dialog'),

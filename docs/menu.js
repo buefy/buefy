@@ -17,6 +17,7 @@ export default {
         {
             category: 'UI components',
             pages: [
+                { name: 'Button', path: '/documentation/button' },
                 { name: 'Collapse', path: '/documentation/collapse' },
                 { name: 'Dialog', path: '/documentation/dialog', isUpdated: true },
                 { name: 'Dropdown', path: '/documentation/dropdown' },
