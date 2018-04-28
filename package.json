@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.3",
-    "@vue/test-utils": "^1.0.0-beta.12",
+    "@vue/test-utils": "^1.0.0-beta.15",
     "autoprefixer": "^7.1.1",
     "axios": "^0.16.2",
     "babel-core": "^6.22.1",
