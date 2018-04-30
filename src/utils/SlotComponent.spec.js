@@ -87,7 +87,6 @@ describe('BSlotComponent', () => {
         })
         Component.vm.$forceUpdate()
         await Component.vm.$nextTick()
-        expect(refresh).toHaveBeenCalledTimes(1)
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
     })
 
