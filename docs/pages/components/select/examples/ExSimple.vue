@@ -32,7 +32,7 @@
                     <option value="tyrion-lannister">Tyrion Lannister</option>
                     <option value="jamie-lannister">Jamie Lannister</option>
                     <option value="daenerys-targaryen">Daenerys Targaryen</option>
-                    <option value="john-snow">John Snow</option>
+                    <option value="jon-snow">Jon Snow</option>
                 </optgroup>
             </b-select>
         </b-field>
