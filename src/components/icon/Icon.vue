@@ -93,7 +93,7 @@
                     case 'eye-off': return 'eye-slash'
                     case 'menu-down': return 'caret-down'
                     case 'menu-up': return 'caret-up'
-                    default: return null
+                    default: return value
                 }
             }
         }
