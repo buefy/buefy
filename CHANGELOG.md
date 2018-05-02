@@ -6,6 +6,7 @@
 
 * Add ``header`` slot to autocomplete
 * Add ``type`` prop to checkbox and radio
+* Add ``on-paste-separators`` prop to tagInput
 
 ### Fixes and changes
 
