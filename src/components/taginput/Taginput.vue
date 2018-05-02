@@ -106,6 +106,10 @@
                 type: Array,
                 default: () => [13, 188]
             },
+            onPasteSeparators: {
+                type: Array,
+                default: () => [',']
+            },
             removeOnKeys: {
                 type: Array,
                 default: () => [8]
@@ -163,6 +167,18 @@
 
             tagsLength() {
                 return this.tags.length
+            },
+
+            /**
+             * If Taginput has onPasteSeparators prop,
+             * returning new RegExp used to split pasted string.
+             */
+            separatorsAsRegExp() {
+                const sep = this.onPasteSeparators
+
+                return sep.length ? new RegExp(sep.map((s) => {
+                    return s ? s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') : null
+                }).join('|'), 'g') : null
             }
         },
         watch: {
@@ -185,11 +201,22 @@
             addTag(tag) {
                 const tagToAdd = tag || this.newTag.trim()
 
-                // Add the tag input if it is not blank or previously added.
-                if (tagToAdd && this.tags.indexOf(tagToAdd) === -1) {
-                    this.tags.push(tagToAdd)
-                    this.$emit('input', this.tags)
-                    this.$emit('add', tagToAdd)
+                if (tagToAdd) {
+                    const reg = this.separatorsAsRegExp
+                    if (reg && tagToAdd.match(reg)) {
+                        tagToAdd.split(reg)
+                            .map((t) => t.trim())
+                            .filter((t) => t.length !== 0)
+                            .map(this.addTag)
+                        return
+                    }
+
+                    // Add the tag input if it is not blank or previously added.
+                    if (this.tags.indexOf(tagToAdd) === -1) {
+                        this.tags.push(tagToAdd)
+                        this.$emit('input', this.tags)
+                        this.$emit('add', tagToAdd)
+                    }
                 }
 
                 this.newTag = ''
