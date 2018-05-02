@@ -89,6 +89,13 @@ export default [
                 default: '<code>[13, 188]</code>'
             },
             {
+                name: '<code>validation</code>',
+                description: 'Function to validate the value of the tag before adding',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => true</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',
