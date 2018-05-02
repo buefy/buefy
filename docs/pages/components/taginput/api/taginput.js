@@ -89,6 +89,13 @@ export default [
                 default: '<code>[13, 188]</code>'
             },
             {
+                name: '<code>on-paste-separators</code>',
+                description: 'Array of chars used to split when pasting a new string',
+                type: 'Array',
+                values: '—',
+                default: '<code>[\',\']</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',
