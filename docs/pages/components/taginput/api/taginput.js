@@ -89,7 +89,7 @@ export default [
                 default: '<code>[13, 188]</code>'
             },
             {
-                name: '<code>validation</code>',
+                name: '<code>beforeAdding</code>',
                 description: 'Function to validate the value of the tag before adding',
                 type: 'Function',
                 values: '—',

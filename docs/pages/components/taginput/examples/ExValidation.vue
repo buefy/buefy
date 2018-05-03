@@ -3,7 +3,7 @@
         <b-field label="Tags with 3 characters">
             <b-taginput
                 v-model="tags" 
-                :validation="validation">
+                :before-adding="beforeAdding">
             </b-taginput>
         </b-field>
     </section>
@@ -21,7 +21,7 @@
             }
         },
         methods: {
-        	validation(tag) {
+        	beforeAdding(tag) {
         		return tag.length === 3;
         	},
         },

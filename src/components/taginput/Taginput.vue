@@ -111,7 +111,7 @@
                 default: () => [8]
             },
             allowNew: Boolean,
-            validation: {
+            beforeAdding: {
                 type: Function,
                 default: () => true
             }
@@ -190,7 +190,7 @@
                 const tagToAdd = tag || this.newTag.trim()
 
                 // Add the tag input if it is not blank or previously added.
-                if (tagToAdd && this.tags.indexOf(tagToAdd) === -1 && this.validation(tagToAdd)) {
+                if (tagToAdd && this.tags.indexOf(tagToAdd) === -1 && this.beforeAdding(tagToAdd)) {
                     this.tags.push(tagToAdd)
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
