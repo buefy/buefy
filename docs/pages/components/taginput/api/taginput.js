@@ -96,6 +96,13 @@ export default [
                 default: '<code>[\',\']</code>'
             },
             {
+                name: '<code>before-adding</code>',
+                description: 'Function to validate the value of the tag before adding',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => true</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',

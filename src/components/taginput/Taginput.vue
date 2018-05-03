@@ -106,15 +106,19 @@
                 type: Array,
                 default: () => [13, 188]
             },
-            onPasteSeparators: {
-                type: Array,
-                default: () => [',']
-            },
             removeOnKeys: {
                 type: Array,
                 default: () => [8]
             },
-            allowNew: Boolean
+            allowNew: Boolean,
+            onPasteSeparators: {
+                type: Array,
+                default: () => [',']
+            },
+            beforeAdding: {
+                type: Function,
+                default: () => true
+            }
         },
         data() {
             return {
@@ -212,7 +216,7 @@
                     }
 
                     // Add the tag input if it is not blank or previously added.
-                    if (this.tags.indexOf(tagToAdd) === -1) {
+                    if (this.tags.indexOf(tagToAdd) === -1 && this.beforeAdding(tagToAdd)) {
                         this.tags.push(tagToAdd)
                         this.$emit('input', this.tags)
                         this.$emit('add', tagToAdd)
