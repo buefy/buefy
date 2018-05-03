@@ -89,6 +89,13 @@ export default [
                 default: '<code>[13, 188]</code>'
             },
             {
+                name: '<code>on-paste-separators</code>',
+                description: 'Array of chars used to split when pasting a new string',
+                type: 'Array',
+                values: '—',
+                default: '<code>[\',\']</code>'
+            },
+            {
                 name: '<code>before-adding</code>',
                 description: 'Function to validate the value of the tag before adding',
                 type: 'Function',

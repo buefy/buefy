@@ -6,11 +6,14 @@
 
 * Add ``header`` slot to autocomplete
 * Add ``type`` prop to checkbox and radio
+* Add ``on-paste-separators`` prop to tagInput
+* Add ``before-adding`` prop to tagInput
 
 ### Fixes and changes
 
 * #746 Fix default ``dateFormatter`` function to datepicker
 * #755 Fix arrow centered when table detail (thanks @wanxe)
+* #787 Fix type in horizontal field when message is empty
 
 ## 0.6.5
 

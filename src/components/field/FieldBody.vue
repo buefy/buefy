@@ -18,7 +18,7 @@
                 if (this.message) {
                     return h('b-field', { attrs: { message: this.message, 'type': this.type } }, [v])
                 }
-                return h('b-field', {}, [v])
+                return h('b-field', { attrs: { 'type': this.type } }, [v])
             }))
         }
     }
