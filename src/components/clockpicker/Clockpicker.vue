@@ -1,5 +1,5 @@
 <template>
-    <div class="b-clockpicker">
+    <div class="b-clockpicker" :class="type">
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -103,8 +103,7 @@
 </template>
 
 <script>
-import { default as TimepickerMixin } from '../../utils/TimepickerMixin'
-
+import TimepickerMixin from '../../utils/TimepickerMixin'
 import ClockpickerFace from './ClockpickerFace'
 import { Dropdown, DropdownItem } from '../dropdown'
 import Input from '../input'
@@ -143,6 +142,10 @@ export default {
         autoSwitch: {
             type: Boolean,
             default: true
+        },
+        type: {
+            type: String,
+            default: 'is-primary'
         }
     },
     data() {
@@ -155,8 +158,11 @@ export default {
         hoursDisplay() {
             if (this.hoursSelected == null) return '--'
             if (this.isHourFormat24) return this.pad(this.hoursSelected)
-            if (this.meridienSelected === this.PM) return this.hoursSelected - 12
-            return this.hoursSelected
+
+            let display = this.hoursSelected
+            if (this.meridienSelected === this.PM) display -= 12
+            if (display === 0) display = 12
+            return display
         },
         minutesDisplay() {
             return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected)
