@@ -20,6 +20,7 @@
             <p class="subtitle">Grid</p>
             <ul>
                 <li><a href="https://bulma.io/documentation/columns/" target="_blank">Grid system</a></li>
+                <li><a href="https://bulma.io/documentation/layout/tiles/" target="_blank">Tile system</a></li>
             </ul>
 
             <p class="subtitle">Elements</p>
