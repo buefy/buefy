@@ -13,6 +13,7 @@
 * #746 Fix default ``dateFormatter`` function to datepicker
 * #755 Fix arrow centered when table detail (thanks @wanxe)
 * #787 Fix type in horizontal field when message is empty
+* #814 Reset scroll to modal before destroy
 
 ## 0.6.5
 
