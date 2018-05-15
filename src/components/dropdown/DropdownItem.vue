@@ -32,7 +32,7 @@
         computed: {
             anchorClasses() {
                 return {
-                    'is-disabled': this.disabled,
+                    'is-disabled': this.$parent.disabled || this.disabled,
                     'is-paddingless': this.paddingless,
                     'is-active': this.value !== null && this.value === this.$parent.selected
                 }
@@ -50,7 +50,7 @@
              * Check if item can be clickable.
              */
             isClickable() {
-                return !this.separator && !this.disabled && !this.custom
+                return !this.$parent.disabled && !this.separator && !this.disabled && !this.custom
             }
         },
         methods: {
