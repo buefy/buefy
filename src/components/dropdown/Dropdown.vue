@@ -18,8 +18,7 @@
         </transition>
         <transition name="fade">
             <div
-                v-if="!disabled || inline"
-                v-show="isActive || hoverable || inline"
+                v-show="(!disabled && (isActive || hoverable)) || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu">
                 <div class="dropdown-content">
