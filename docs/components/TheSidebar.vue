@@ -1,5 +1,20 @@
 <template>
     <aside class="sidebar menu is-hidden-touch">
+        <b-field label="Search in docs">
+            <b-autocomplete
+                v-model="search"
+                placeholder="Insert a component name"
+                :data="componentPages"
+                field="name"
+                :keep-first="true"
+                :open-on-focus="true"
+                icon="magnify"
+                @select="select($event)"
+            />
+        </b-field>
+
+        <hr style="background-color:#dbdbdb;height:1px;">
+
         <template v-for="(items, i) in data">
             <p
                 class="menu-label has-text-weight-bold"
@@ -53,12 +68,39 @@
         },
         data() {
             return {
-                isExpanded: true
+                isExpanded: true,
+                search: '',
+                selected: null
+            }
+        },
+        computed: {
+            componentPages() {
+                let componentPages = []
+
+                if (this.data) {
+                    this.data.filter((category) => {
+                        if (category.category === 'UI components') {
+                            category.pages.filter((page) => {
+                                const pageName = page.name
+                                if (pageName) {
+                                    if (pageName.startsWith(this.search)) componentPages.push(page)
+                                }
+                            })
+                        }
+                    })
+                }
+                return componentPages
             }
         },
         methods: {
             toggle() {
                 this.isExpanded = !this.isExpanded
+            },
+            select(option) {
+                if (option) {
+                    this.$router.push(option.path)
+                    this.$nextTick(() => { this.search = '' })
+                }
             }
         }
     }
