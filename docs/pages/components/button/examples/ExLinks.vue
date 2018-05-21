@@ -2,7 +2,7 @@
 	<section>
 
 		<div class="block">
-			<b-button btn="is-primary" text="Div (no link)" />
+			<b-button btn="is-primary" text="Button (no link)" />
 
 			<b-button btn="is-primary" type="submit" text="Submit (no link)" />
 

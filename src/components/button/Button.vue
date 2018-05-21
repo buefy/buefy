@@ -57,7 +57,7 @@
                 return (this.to)
                     ? 'router-link' : (this.href)
                         ? 'a' : (this.type)
-                            ? 'input' : 'div'
+                            ? 'input' : 'button'
             }
         }
     }
