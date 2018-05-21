@@ -2,48 +2,130 @@ export default [
     {
         props: [
             {
-                name: '<code>open</code>',
-                description: 'Whether collapse is open or not, use the .sync modifier to make it two-way binding',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>true</code>'
-            },
-            {
-                name: '<code>animation</code>',
-                description: 'Custom animation (transition name)',
+                name: '<code>text</code>',
+                description: 'Text inside the button',
                 type: 'String',
                 values: '—',
-                default: '<code>fade</code>'
-            }
-        ],
-        slots: [
-            {
-                name: 'default',
-                description: 'Content to show/hide',
-                props: '—'
+                default: '—'
             },
             {
-                name: '<code>trigger</code>',
-                description: 'Trigger content',
-                props: '<code>open: Boolean</code>'
+                name: '<code>to</code>',
+                description: 'With this prop it will act as a router-link',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>href</code>',
+                description: 'With this prop it will act as standard link',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>target</code>',
+                description: 'Target attribute of the button (to be used with the <b>href</b> prop), optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
+                name: '<code>type</code>',
+                description: 'Type attribute of the button',
+                type: 'String',
+                values: '<code>button</code>, <code>submit</code>, <code>reset</code>',
+                default: '—'
+            },
+            {
+                name: '<code>btn</code>',
+                description: 'Class assigned following the <a href="https://bulma.io/documentation/elements/button/" target="_blank">bulma docs</a>.',
+                type: 'String',
+                values: '<code>is-primary</code>, <code>is-link</code>, <code>is-info</code>, <code>is-success</code>, <code>is-warning</code>, <code>is-danger</code>',
+                default: '—'
+            },
+            {
+                name: '<code>size</code>',
+                description: 'Size of the button, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-normal</code>'
+            },
+            {
+                name: '<code>icon</code>',
+                description: 'Icon name to be added, optional',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>iconSize</code>',
+                description: 'Size of the icon, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-large</code> or <code>size</code> prop'
+            },
+            {
+                name: '<code>iconPack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
+                default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>isOutlined</code>',
+                description: 'Activates the outlined style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>isInverted</code>',
+                description: 'Activates the inverted style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>isRounded</code>',
+                description: 'Activates the rounded style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>isHovered</code>',
+                description: 'Activates the hovered state',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>isFocused</code>',
+                description: 'Activates the focused state',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>isActive</code>',
+                description: 'Activates the active state',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>isLoading</code>',
+                description: 'Activates the loading state',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [
             {
-                name: '<code>open</code>',
-                description: 'Triggers when user opened',
-                parameters: '—'
-            },
-            {
-                name: '<code>close</code>',
-                description: 'Triggers when user closed',
-                parameters: '—'
-            }
-        ],
-        methods: [
-            {
-                name: '<code>toggle</code>',
-                description: 'Toggle activation'
+                name: '<code>click</code>',
+                description: 'Triggers when clicked',
+                parameters: '<code>event: $event</code>'
             }
         ]
     }

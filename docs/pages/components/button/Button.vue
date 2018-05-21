@@ -10,7 +10,7 @@
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical />
 
-        <Example :component="ExStates" :code="ExStatesCode" title="States" />
+        <Example :component="ExStylesStates" :code="ExStylesStatesCode" title="Styles/States" />
 
         <Example :component="ExLinks" :code="ExLinksCode" title="Links" />
 
@@ -32,8 +32,8 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
-    import ExStates from './examples/ExStates'
-    import ExStatesCode from '!!raw-loader!./examples/ExStates'
+    import ExStylesStates from './examples/ExStylesStates'
+    import ExStylesStatesCode from '!!raw-loader!./examples/ExStylesStates'
 
     import ExLinks from './examples/ExLinks'
     import ExLinksCode from '!!raw-loader!./examples/ExLinks'
@@ -51,8 +51,8 @@
                 ExColorsCode,
                 ExSizes,
                 ExSizesCode,
-                ExStates,
-                ExStatesCode,
+                ExStylesStates,
+                ExStylesStatesCode,
                 ExLinks,
                 ExLinksCode,
                 ExIcons,

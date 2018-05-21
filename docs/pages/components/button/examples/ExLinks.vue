@@ -6,7 +6,7 @@
 
 			<b-button btn="is-primary" type="submit" text="Submit (no link)" />
 
-			<b-button btn="is-primary" href="/" text="Normal link" />
+			<b-button btn="is-primary" href="/" text="Standard link" />
 
 			<b-button btn="is-primary" to="/" text="Router link" />
 

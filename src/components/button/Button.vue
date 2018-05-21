@@ -1,7 +1,7 @@
 <template>
     <tag
-        :is="renderTag"
         class="button"
+        :is="renderTag"
         :to="to"
         :href="href"
         :type="type"
@@ -15,12 +15,15 @@
             'is-loading': isLoading
         }]"
         :value="type ? text : null"
+        :target="target"
+        @click="$emit('click', $event)"
     >
         <template v-if="!type">
             <b-icon
                 v-if="icon"
                 :icon="icon"
-                :size="iconSize || size"
+                :size="iconSize || size || 'is-large'"
+                :pack="iconPack"
             />
             <span v-html="text" />
         </template>
@@ -32,13 +35,15 @@
         name: 'BButton',
         props: {
             text: { type: String, default: null },
-            icon: { type: String, default: null },
-            iconSize: { type: String, default: null },
             to: { type: String, default: null },
             href: { type: String, default: null },
             type: { type: String, default: null },
+            target: { type: String, default: null },
             btn: { type: String, default: null },
-            size: { type: String, default: null },
+            size: { type: String, default: 'is-normal' },
+            icon: { type: String, default: null },
+            iconSize: { type: String, default: null },
+            iconPack: { type: String, default: null },
             isOutlined: { type: Boolean, default: false },
             isInverted: { type: Boolean, default: false },
             isRounded: { type: Boolean, default: false },
