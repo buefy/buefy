@@ -2,6 +2,12 @@
     <section>
 
         <div class="block">
+            <b-button btn="is-primary" icon="check" size="is-small" iconSize="is-small" iconPosition="before" text="Icon before text" />
+
+            <b-button btn="is-primary" icon="check" size="is-small" iconSize="is-small" iconPosition="after" text="Icon after text" />
+        </div>
+
+        <div class="block">
             <b-button btn="is-primary" icon="check" size="is-small" iconSize="is-small" text="Icon Small" />
 
             <b-button btn="is-primary" icon="check" text="Icon Normal" />

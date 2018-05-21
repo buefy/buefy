@@ -20,12 +20,18 @@
     >
         <template v-if="!type">
             <b-icon
-                v-if="icon"
+                v-if="icon && iconPosition === 'before'"
                 :icon="icon"
                 :size="iconSize || size || 'is-large'"
                 :pack="iconPack"
             />
             <span v-html="text" />
+            <b-icon
+                v-if="icon && iconPosition === 'after'"
+                :icon="icon"
+                :size="iconSize || size || 'is-large'"
+                :pack="iconPack"
+            />
         </template>
     </tag>
 </template>
@@ -43,6 +49,7 @@
             size: { type: String, default: 'is-normal' },
             icon: { type: String, default: null },
             iconSize: { type: String, default: null },
+            iconPosition: { type: String, default: 'before' },
             iconPack: { type: String, default: null },
             isOutlined: { type: Boolean, default: false },
             isInverted: { type: Boolean, default: false },

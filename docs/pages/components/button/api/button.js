@@ -65,6 +65,13 @@ export default [
                 default: '<code>is-large</code> or <code>size</code> prop'
             },
             {
+                name: '<code>icon-position</code>',
+                description: 'Put the icon before or after the text',
+                type: 'String',
+                values: '<code>before</code>, <code>after</code>',
+                default: '<code>before</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
