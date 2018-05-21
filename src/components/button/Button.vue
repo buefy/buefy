@@ -1,11 +1,10 @@
 <template>
     <tag
-        class="button"
         :is="renderTag"
         :to="to"
         :href="href"
         :type="type"
-        :class="[size, btn, {
+        :class="[size, btn, !noDefaultClass ? 'button' : '', {
             'is-outlined': isOutlined,
             'is-inverted': isInverted,
             'is-rounded': isRounded,
@@ -27,13 +26,15 @@
                     :icon="icon"
                     :size="iconSize || size || 'is-large'"
                     :pack="iconPack"
+                    :custom-class="iconClass"
                 />
-                <span v-html="text" />
+                <span v-if="text" v-html="text" />
                 <b-icon
                     v-if="icon && iconPosition === 'after'"
                     :icon="icon"
                     :size="iconSize || size || 'is-large'"
                     :pack="iconPack"
+                    :custom-class="iconClass"
                 />
             </template>
         </template>
@@ -55,13 +56,15 @@
             iconSize: { type: String, default: null },
             iconPosition: { type: String, default: 'before' },
             iconPack: { type: String, default: null },
+            iconClass: { type: String, default: null },
             isOutlined: { type: Boolean, default: false },
             isInverted: { type: Boolean, default: false },
             isRounded: { type: Boolean, default: false },
             isHovered: { type: Boolean, default: false },
             isFocused: { type: Boolean, default: false },
             isActive: { type: Boolean, default: false },
-            isLoading: { type: Boolean, default: false }
+            isLoading: { type: Boolean, default: false },
+            noDefaultClass: { type: Boolean, default: false }
         },
         computed: {
             renderTag() {

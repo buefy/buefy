@@ -79,6 +79,17 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-class</code>',
+                description: `Add class to the button icon (<code>&lt;i&gt;</code> tag), optional.
+                    <br>
+                    See <a href="https://materialdesignicons.com/getting-started" target="_blank">here for MDI</a>,
+                    <a href="http://fontawesome.io/examples/" target="_blank">here for FontAwesome 4</a> and
+                    <a href="https://fontawesome.com/how-to-use/web-fonts-with-css#additional-styling" target="_blank">here for FontAwesome 5</a> custom classes`,
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>is-outlined</code>',
                 description: 'Activates the outlined style',
                 type: 'Boolean',
@@ -123,6 +134,13 @@ export default [
             {
                 name: '<code>is-loading</code>',
                 description: 'Activates the loading state',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>no-default-class</code>',
+                description: 'Removes the default <b>button</b> class',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
