@@ -58,63 +58,63 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>iconSize</code>',
+                name: '<code>icon-size</code>',
                 description: 'Size of the icon, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '<code>is-large</code> or <code>size</code> prop'
             },
             {
-                name: '<code>iconPack</code>',
+                name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'
             },
             {
-                name: '<code>isOutlined</code>',
+                name: '<code>is-outlined</code>',
                 description: 'Activates the outlined style',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>isInverted</code>',
+                name: '<code>is-inverted</code>',
                 description: 'Activates the inverted style',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>isRounded</code>',
+                name: '<code>is-rounded</code>',
                 description: 'Activates the rounded style',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>isHovered</code>',
+                name: '<code>is-hovered</code>',
                 description: 'Activates the hovered state',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>isFocused</code>',
+                name: '<code>is-focused</code>',
                 description: 'Activates the focused state',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>isActive</code>',
+                name: '<code>is-active</code>',
                 description: 'Activates the active state',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>isLoading</code>',
+                name: '<code>is-loading</code>',
                 description: 'Activates the loading state',
                 type: 'Boolean',
                 values: '—',
