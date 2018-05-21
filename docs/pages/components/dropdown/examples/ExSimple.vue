@@ -1,10 +1,13 @@
 <template>
     <section>
         <b-dropdown>
-            <button class="button is-primary" slot="trigger">
-                <span>Click me!</span>
-                <b-icon icon="menu-down"></b-icon>
-            </button>
+            <b-button
+                text="Click me!"
+                btn="is-primary"
+                slot="trigger"
+                icon="menu-down"
+                icon-position="after"
+            />
 
             <b-dropdown-item>Action</b-dropdown-item>
             <b-dropdown-item>Another action</b-dropdown-item>
@@ -12,10 +15,13 @@
         </b-dropdown>
 
         <b-dropdown hoverable>
-            <button class="button is-info" slot="trigger">
-                <span>Hover me!</span>
-                <b-icon icon="menu-down"></b-icon>
-            </button>
+            <b-button
+                text="Hover me!"
+                btn="is-info"
+                slot="trigger"
+                icon="menu-down"
+                icon-position="after"
+            />
 
             <b-dropdown-item>Action</b-dropdown-item>
             <b-dropdown-item>Another action</b-dropdown-item>
@@ -23,10 +29,12 @@
         </b-dropdown>
 
         <b-dropdown disabled>
-            <button class="button" slot="trigger">
-                <span>Disabled</span>
-                <b-icon icon="menu-down"></b-icon>
-            </button>
+            <b-button
+                text="Disabled"
+                slot="trigger"
+                icon="menu-down"
+                icon-position="after"
+            />
 
             <b-dropdown-item>Action</b-dropdown-item>
             <b-dropdown-item>Another action</b-dropdown-item>

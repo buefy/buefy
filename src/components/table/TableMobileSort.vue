@@ -11,17 +11,20 @@
                 </option>
             </b-select>
             <div class="control">
-                <button
-                    class="button is-primary"
-                    @click="sort">
-                    <b-icon
-                        v-show="currentSortColumn === mobileSort"
-                        :class="{ 'is-desc': !isAsc }"
-                        icon="arrow-up"
-                        size="is-small"
-                        both
-                    />
-                </button>
+                <b-button
+                    btn="is-primary"
+                    @click="sort"
+                >
+                    <template slot="contents">
+                        <b-icon
+                            v-show="currentSortColumn === mobileSort"
+                            :class="{ 'is-desc': !isAsc }"
+                            icon="arrow-up"
+                            size="is-small"
+                            both
+                        />
+                    </template>
+                </b-button>
             </div>
         </div>
     </div>

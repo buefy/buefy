@@ -1,14 +1,23 @@
 <template>
     <section>
-        <button class="button is-medium is-primary" @click="alert">
-            Launch alert (default)
-        </button>
-        <button class="button is-medium is-primary" @click="alertCustom">
-            Launch alert (custom)
-        </button>
-        <button class="button is-medium is-danger" @click="alertCustomError">
-            Launch alert (custom)
-        </button>
+        <b-button
+            text="Launch alert (default)"
+            btn="is-primary"
+            size="is-medium"
+            @click="alert"
+        />
+        <b-button
+            text="Launch alert (custom)"
+            btn="is-primary"
+            size="is-medium"
+            @click="alertCustom"
+        />
+        <b-button
+            text="Launch alert (error)"
+            btn="is-danger"
+            size="is-medium"
+            @click="alertCustomError"
+        />
     </section>
 </template>
 

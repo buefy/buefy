@@ -19,22 +19,20 @@
 
                 <b-field>
                     <p class="control">
-                        <a
-                            class="button"
+                        <b-button
+                            text="Github"
+                            icon="github-circle"
                             href="https://github.com/buefy/buefy"
-                            target="_blank">
-                            <b-icon icon="github-circle"/>
-                            <span>GitHub</span>
-                        </a>
+                            target="_blank"
+                        />
                     </p>
                     <p class="control">
-                        <a
-                            class="button is-twitter"
+                        <b-button
+                            text="Twitter"
+                            icon="twitter"
                             href="https://twitter.com/rafaelpimpa"
-                            target="_blank">
-                            <b-icon icon="twitter"/>
-                            <span>Twitter</span>
-                        </a>
+                            target="_blank"
+                        />
                     </p>
                 </b-field>
             </div>

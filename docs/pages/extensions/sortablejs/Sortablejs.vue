@@ -3,18 +3,17 @@
         <h1 class="title is-spaced">Sortable</h1>
         <h2 class="subtitle">Sort a table — as a Vue directive</h2>
         <div class="buttons">
-            <a
-                class="button"
+            <b-button
+                text="Website"
                 href="http://rubaxa.github.io/Sortable"
-                target="_blank">
-                Website
-            </a>
-            <a
-                class="button"
+                target="_blank"
+            />
+
+            <b-button
+                text="Docs"
                 href="https://github.com/RubaXa/Sortable"
-                target="_blank">
-                Docs
-            </a>
+                target="_blank"
+            />
         </div>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical>

@@ -6,7 +6,7 @@
                 icon="magnify">
             </b-input>
             <p class="control">
-                <button class="button is-primary">Search</button>
+                <b-button text="Search" btn="is-primary" />
             </p>
         </b-field>
 
@@ -27,55 +27,39 @@
             </b-select>
             <b-input type="number" placeholder="0,00"></b-input>
             <p class="control">
-                <button class="button is-success">Transfer</button>
+                <b-button text="Transfer" btn="is-success" />
             </p>
         </b-field>
 
         <b-field>
             <p class="control">
-                <button class="button">
-                    <b-icon icon="format-bold"></b-icon>
-                </button>
+                <b-button icon="format-bold" />
             </p>
             <p class="control">
-                <button class="button">
-                    <b-icon icon="format-italic"></b-icon>
-                </button>
+                <b-button icon="format-italic" />
             </p>
             <p class="control">
-                <button class="button">
-                    <b-icon icon="format-underline"></b-icon>
-                </button>
+                <b-button icon="format-underline" />
             </p>
             <p class="control">
-                <button class="button">
-                    <b-icon icon="format-align-left"></b-icon>
-                </button>
+                <b-button icon="format-align-left" />
             </p>
             <p class="control">
-                <button class="button">
-                    <b-icon icon="format-align-center"></b-icon>
-                </button>
+                <b-button icon="format-align-center" />
             </p>
             <p class="control">
-                <button class="button">
-                    <b-icon icon="format-align-right"></b-icon>
-                </button>
+                <b-button icon="format-align-right" />
             </p>
             <b-input placeholder="Search..." type="search" icon="magnify"></b-input>
         </b-field>
 
         <b-field>
             <p class="control">
-                <button class="button is-primary">
-                    Button
-                </button>
+                <b-button text="Button" btn="is-primary" />
             </p>
             <p class="control">
                 <b-dropdown>
-                    <button class="button is-primary" slot="trigger">
-                        <b-icon icon="menu-down"></b-icon>
-                    </button>
+                    <b-button icon="menu-down" btn="is-primary" slot="trigger" />
 
                     <b-dropdown-item>Action</b-dropdown-item>
                     <b-dropdown-item>Another action</b-dropdown-item>
@@ -87,10 +71,7 @@
         <b-field>
             <p class="control">
                 <b-dropdown>
-                    <button class="button" slot="trigger">
-                        <span>Filters</span>
-                        <b-icon icon="menu-down"></b-icon>
-                    </button>
+                    <b-button text="Filters" icon="menu-down" slot="trigger" />
 
                     <b-dropdown-item value="open_issues">Open Issues and Pull Requests</b-dropdown-item>
                     <b-dropdown-item value="your_issues">Your Issues</b-dropdown-item>

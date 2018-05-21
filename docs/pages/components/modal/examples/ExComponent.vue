@@ -1,9 +1,6 @@
 <template>
     <section>
-        <button class="button is-primary is-medium"
-            @click="isComponentModalActive = true">
-            Launch component modal
-        </button>
+        <b-button text="Launch component modal" class="block" btn="is-primary" size="is-medium" @click="isComponentModalActive = true" />
 
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
             <modal-form v-bind="formProps"></modal-form>
@@ -43,8 +40,8 @@
                         <b-checkbox>Remember me</b-checkbox>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button" type="button" @click="$parent.close()">Close</button>
-                        <button class="button is-primary">Login</button>
+                        <b-button text="Close" @click="$parent.close()" />
+                        <b-button text="Login" btn="is-primary" @click="$parent.close()" />
                     </footer>
                 </div>
             </form>

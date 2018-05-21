@@ -3,18 +3,17 @@
         <h1 class="title is-spaced">Cleave.js </h1>
         <h2 class="subtitle">Format input text while you type — as a Vue directive</h2>
         <div class="buttons">
-            <a
-                class="button"
+            <b-button
+                text="Website"
                 href="https://nosir.github.io/cleave.js"
-                target="_blank">
-                Website
-            </a>
-            <a
-                class="button"
+                target="_blank"
+            />
+
+            <b-button
+                text="Docs"
                 href="https://github.com/nosir/cleave.js/blob/master/doc/options.md"
-                target="_blank">
-                Docs
-            </a>
+                target="_blank"
+            />
         </div>
 
         <Example :component="ExFormat" :code="ExFormatCode" vertical>

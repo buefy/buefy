@@ -1,16 +1,23 @@
 <template>
     <section>
-        <button class="button is-medium is-info" @click="confirm">
-            Launch confirm (default)
-        </button>
-
-        <button class="button is-medium is-info" @click="confirmCustom">
-            Launch confirm (custom)
-        </button>
-
-        <button class="button is-medium is-danger" @click="confirmCustomDelete">
-            Launch confirm (custom)
-        </button>
+        <b-button
+            text="Launch confirm (default)"
+            btn="is-info"
+            size="is-medium"
+            @click="confirm"
+        />
+        <b-button
+            text="Launch confirm (custom)"
+            btn="is-info"
+            size="is-medium"
+            @click="confirmCustom"
+        />
+        <b-button
+            text="Launch confirm (delete)"
+            btn="is-danger"
+            size="is-medium"
+            @click="confirmCustomDelete"
+        />
     </section>
 </template>
 

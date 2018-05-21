@@ -4,7 +4,7 @@
             <b-input placeholder="Search..." type="search" icon="magnify">
             </b-input>
             <p class="control">
-                <button class="button is-info">Search</button>
+                <b-button text="Search" btn="is-info" />
             </p>
         </b-field>
 
@@ -14,7 +14,7 @@
             <b-input placeholder="Search..." type="search" icon="magnify">
             </b-input>
             <p class="control">
-                <button class="button is-info">Search</button>
+                <b-button text="Search" btn="is-info" />
             </p>
         </b-field>
     </section>

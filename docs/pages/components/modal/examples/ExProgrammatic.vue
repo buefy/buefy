@@ -1,13 +1,8 @@
 <template>
     <section>
-        <button class="button is-primary is-medium"
-            @click="imageModal()">
-            Launch image modal (HTML)
-        </button>
-        <button class="button is-primary is-medium"
-            @click="cardModal()">
-            Launch card modal (Component)
-        </button>
+        <b-button text="Launch image modal (HTML)" btn="is-primary" size="is-medium" @click="imageModal()" />
+
+        <b-button text="Launch card modal (HTML)" btn="is-primary" size="is-medium" @click="cardModal()" />
     </section>
 </template>
 
@@ -43,8 +38,8 @@
                         <b-checkbox>Remember me</b-checkbox>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button" type="button" @click="$parent.close()">Close</button>
-                        <button class="button is-primary">Login</button>
+                        <b-button text="Close" @click="$parent.close()" />
+                        <b-button text="Login" btn="is-primary" @click="$parent.close()" />
                     </footer>
                 </div>
             </form>

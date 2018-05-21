@@ -1,12 +1,17 @@
 <template>
     <section>
-        <button class="button is-medium is-dark" @click="prompt">
-            Launch prompt (default)
-        </button>
-
-        <button class="button is-medium is-dark" @click="promptNumber">
-            Launch prompt (number)
-        </button>
+        <b-button
+            text="Launch prompt (default)"
+            btn="is-dark"
+            size="is-medium"
+            @click="prompt"
+        />
+        <b-button
+            text="Launch prompt (custom)"
+            btn="is-dark"
+            size="is-medium"
+            @click="promptNumber"
+        />
     </section>
 </template>
 

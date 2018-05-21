@@ -1,16 +1,22 @@
 <template>
     <b-dropdown v-model="isPublic">
-        <button class="button is-primary" type="button" slot="trigger">
-            <template v-if="isPublic">
-                <b-icon icon="earth"></b-icon>
-                <span>Public</span>
+        <b-button
+            btn="is-primary"
+            slot="trigger"
+            icon-position="before"
+        >
+            <template slot="contents">
+                <template v-if="isPublic">
+                    <b-icon icon="earth"></b-icon>
+                    <span>Public</span>
+                </template>
+                <template v-else>
+                    <b-icon icon="account-multiple"></b-icon>
+                    <span>Friends</span>
+                </template>
+                <b-icon icon="menu-down"></b-icon>
             </template>
-            <template v-else>
-                <b-icon icon="account-multiple"></b-icon>
-                <span>Friends</span>
-            </template>
-            <b-icon icon="menu-down"></b-icon>
-        </button>
+        </b-button>
 
         <b-dropdown-item :value="true">
             <div class="media">

@@ -6,9 +6,9 @@
             :class="[type, size]">
             <header v-if="title" class="message-header">
                 <p>{{ title }}</p>
-                <button
+                <b-button
                     v-if="closable"
-                    type="button"
+                    no-default-class
                     class="delete"
                     @click="close"
                 />

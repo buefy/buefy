@@ -2,7 +2,11 @@
     <section>
 
         <b-collapse :open="false">
-            <button class="button is-primary" slot="trigger">Click me!</button>
+            <b-button
+                text="Click me!"
+                btn="is-primary"
+                slot="trigger"
+            />
             <div class="notification">
                 <div class="content">
                     <h3>

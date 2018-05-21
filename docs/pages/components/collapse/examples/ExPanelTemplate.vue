@@ -2,10 +2,12 @@
     <section>
 
         <div class="block">
-            <button class="button is-medium is-primary"
-                @click="isOpen = !isOpen">
-                Toggle
-            </button>
+            <b-button
+                text="Toggle"
+                size="is-medium"
+                btn="is-primary"
+                @click="isOpen = !isOpen"
+            />
         </div>
 
         <b-collapse class="panel" :open.sync="isOpen">

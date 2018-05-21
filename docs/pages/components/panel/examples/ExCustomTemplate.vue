@@ -1,10 +1,7 @@
 <template>
     <section>
         <div class="block">
-            <button class="button is-medium is-primary"
-                @click="isOpen = !isOpen">
-                Toggle
-            </button>
+            <b-button text="Toggle" btn="is-primary" size="is-medium" @click="isOpen = !isOpen" />
         </div>
 
         <b-panel header="Title"

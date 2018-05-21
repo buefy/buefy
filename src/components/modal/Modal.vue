@@ -17,11 +17,14 @@
                     v-html="content"/>
                 <slot v-else/>
             </div>
-            <button
-                type="button"
+
+            <b-button
                 v-if="showX"
-                class="modal-close is-large"
-                @click="cancel('x')"/>
+                no-default-class
+                class="modal-close"
+                size="is-large"
+                @click="cancel('x')"
+            />
         </div>
     </transition>
 </template>

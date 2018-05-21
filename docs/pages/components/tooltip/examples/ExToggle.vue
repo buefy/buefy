@@ -1,25 +1,18 @@
 <template>
     <section>
-        <button class="button is-primary"
-            @click="active = !active">
-            Toggle
-        </button>
+        <b-button text="Toggle" btn="is-primary" @click="active = !active" />
         <hr>
 
         <b-tooltip label="I'm never closing"
             :active="active"
             always>
-            <button class="button">
-                Always
-            </button>
+            <b-button text="Always" />
         </b-tooltip>
 
         <b-tooltip label="Tooltip right"
             position="is-right"
             :active="active">
-            <button class="button is-dark">
-                Right
-            </button>
+            <b-button text="Right" btn="is-dark" />
         </b-tooltip>
     </section>
 </template>

@@ -40,7 +40,10 @@
                                     <b-checkbox>Remember me</b-checkbox>
                                 </section>
                                 <footer class="modal-card-foot">
-                                    <button class="button is-primary">Login</button>
+                                    <b-button
+                                        text="Login"
+                                        btn="is-primary"
+                                    />
                                 </footer>
                             </div>
                         </form>

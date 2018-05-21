@@ -1,13 +1,8 @@
 <template>
     <section>
-        <button class="button is-primary is-medium"
-            @click="isImageModalActive = true">
-            Launch image modal
-        </button>
-        <button class="button is-primary is-medium"
-            @click="isCardModalActive = true">
-            Launch card modal (keep scroll)
-        </button>
+        <b-button text="Launch image modal" btn="is-primary" size="is-medium" @click="isImageModalActive = true" />
+
+        <b-button text="Launch card modal (keep scroll)" btn="is-primary" size="is-medium" @click="isCardModalActive = true" />
 
         <b-modal :active.sync="isImageModalActive">
             <p class="image is-4by3">

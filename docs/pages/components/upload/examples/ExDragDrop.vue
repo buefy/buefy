@@ -23,10 +23,7 @@
                 :key="index"
                 class="tag is-primary" >
                 {{file.name}}
-                <button class="delete is-small"
-                    type="button"
-                    @click="deleteDropFile(index)">
-                </button>
+                <b-button no-default-class class="delete" size="is-small" @click="deleteDropFile(index)" />
             </span>
         </div>
     </section>

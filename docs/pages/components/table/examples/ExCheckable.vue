@@ -1,10 +1,6 @@
 <template>
     <section>
-        <button class="button field is-danger" @click="checkedRows = []"
-            :disabled="!checkedRows.length">
-            <b-icon icon="close"></b-icon>
-            <span>Clear checked</span>
-        </button>
+        <b-button text="Clear checked" class="field" icon="close" btn="is-danger" :disabled="!checkedRows.length" @click="checkedRows = []" />
 
         <b-tabs>
             <b-tab-item label="Table">

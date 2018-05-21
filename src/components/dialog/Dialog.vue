@@ -42,20 +42,19 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button
+                    <b-button
                         v-if="showCancel"
-                        class="button"
                         ref="cancelButton"
-                        @click="cancel('button')">
-                        {{ cancelText }}
-                    </button>
-                    <button
-                        class="button"
-                        :class="type"
+                        :text="cancelText"
+                        @click="cancel('button')"
+                    />
+
+                    <b-button
                         ref="confirmButton"
-                        @click="confirm">
-                        {{ confirmText }}
-                    </button>
+                        :text="confirmText"
+                        :class="type"
+                        @click="confirm"
+                    />
                 </footer>
             </div>
         </div>

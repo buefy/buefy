@@ -1,16 +1,10 @@
 <template>
     <section>
-        <button class="button is-medium" @click="toast">
-            Launch toast (default)
-        </button>
+        <b-button text="Launch toast (default)" size="is-medium" @click="toast" />
 
-        <button class="button is-medium is-success" @click="success">
-            Launch toast (custom)
-        </button>
+        <b-button text="Launch toast (custom)" size="is-medium" btn="is-success" @click="success" />
 
-        <button class="button is-medium is-danger" @click="danger">
-            Launch toast (custom)
-        </button>
+        <b-button text="Launch toast (custom)" size="is-medium" btn="is-danger" @click="danger" />
     </section>
 </template>
 

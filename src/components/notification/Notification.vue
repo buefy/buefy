@@ -4,10 +4,10 @@
             v-if="isActive"
             class="notification"
             :class="type">
-            <button
+            <b-button
                 v-if="closable"
+                no-default-class
                 class="delete"
-                type="button"
                 @click="close"
             />
             <div class="media">

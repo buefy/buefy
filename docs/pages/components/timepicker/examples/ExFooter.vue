@@ -3,17 +3,9 @@
         <b-timepicker v-model="time"
             placeholder="Click to select...">
 
-            <button class="button is-primary"
-                @click="time = new Date()">
-                <b-icon icon="clock"></b-icon>
-                <span>Now</span>
-            </button>
+            <b-button text="Now" btn="is-primary" icon="clock" @click="time = new Date()" />
 
-            <button class="button is-danger"
-                @click="time = null">
-                <b-icon icon="close"></b-icon>
-                <span>Clear</span>
-            </button>
+            <b-button text="Clear" btn="is-danger" icon="clock" @click="time = null" />
         </b-timepicker>
     </b-field>
 </template>

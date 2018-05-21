@@ -4,17 +4,19 @@
             :first-day-of-week="1"
             placeholder="Click to select...">
 
-            <button class="button is-primary"
-                @click="date = new Date()">
-                <b-icon icon="calendar-today"></b-icon>
-                <span>Today</span>
-            </button>
+            <b-button
+                text="Today"
+                btn="is-primary"
+                icon="calendar-today"
+                @click="date = new Date()"
+            />
 
-            <button class="button is-danger"
-                @click="date = null">
-                <b-icon icon="close"></b-icon>
-                <span>Clear</span>
-            </button>
+            <b-button
+                text="Clear"
+                btn="is-danger"
+                icon="close"
+                @click="date = null"
+            />
         </b-datepicker>
     </b-field>
 </template>

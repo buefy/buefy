@@ -2,37 +2,38 @@
     <div class="codeview">
         <figure class="highlight" :class="figureClasses">
             <div class="button-container">
-                <button class="button is-text is-small copy-code">Copy</button>
-                <button
+                <b-button
+                    class="copy-code"
+                    text="Copy"
+                    size="is-small"
+                    btn="is-text"
+                />
+                <b-button
                     v-if="!expanded"
-                    class="button is-text is-small"
-                    @click="isExpanded = false">
-                    Hide
-                </button>
+                    text="Hide"
+                    size="is-small"
+                    btn="is-text"
+                    @click="isExpanded = false"
+                />
             </div>
             <pre v-highlight><code :class="lang">{{ code }}</code></pre>
-            <button
+            <b-button
                 v-if="!isExpanded && !expanded"
                 class="codeview-showcode"
-                @click="isExpanded = true">
-                <b-icon
-                    icon="code-tags"
-                    size="is-small"
-                    custom-class="mdi-18px"
-                />
-                <span>Show code</span>
-            </button>
-            <button
+                text="Show code"
+                icon="code-tags"
+                icon-size="is-small"
+                no-default-class
+                @click="isExpanded = true"
+            />
+            <b-button
                 v-if="!expanded"
                 class="codeview-hidecode"
-                @click="isExpanded = false">
-                <b-icon
-                    icon="eye-off-outline"
-                    size="is-small"
-                    custom-class="mdi-18px"
-                />
-                <span>Hide code</span>
-            </button>
+                text="Hide code"
+                icon="eye-off-outline"
+                icon-size="is-small"
+                @click="isExpanded = false"
+            />
         </figure>
     </div>
 </template>
