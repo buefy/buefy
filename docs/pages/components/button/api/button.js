@@ -146,6 +146,13 @@ export default [
                 default: '<code>false</code>'
             }
         ],
+        slots: [
+            {
+                name: '<code>contents</code>',
+                description: 'Custom contents slot',
+                props: '—'
+            }
+        ],
         events: [
             {
                 name: '<code>click</code>',
