@@ -16,6 +16,8 @@
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons" />
 
+        <Example :component="ExCustom" :code="ExCustomCode" title="Custom contents" />
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -41,6 +43,9 @@
     import ExIcons from './examples/ExIcons'
     import ExIconsCode from '!!raw-loader!./examples/ExIcons'
 
+    import ExCustom from './examples/ExCustom'
+    import ExCustomCode from '!!raw-loader!./examples/ExCustom'
+
     export default {
         data() {
             return {
@@ -57,6 +62,8 @@
                 ExLinksCode,
                 ExIcons,
                 ExIconsCode,
+                ExCustom,
+                ExCustomCode,
             }
         }
     }

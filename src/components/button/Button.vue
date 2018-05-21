@@ -19,19 +19,23 @@
         @click="$emit('click', $event)"
     >
         <template v-if="!type">
-            <b-icon
-                v-if="icon && iconPosition === 'before'"
-                :icon="icon"
-                :size="iconSize || size || 'is-large'"
-                :pack="iconPack"
-            />
-            <span v-html="text" />
-            <b-icon
-                v-if="icon && iconPosition === 'after'"
-                :icon="icon"
-                :size="iconSize || size || 'is-large'"
-                :pack="iconPack"
-            />
+            <slot name="contents" />
+
+            <template v-if="!$slots.contents">
+                <b-icon
+                    v-if="icon && iconPosition === 'before'"
+                    :icon="icon"
+                    :size="iconSize || size || 'is-large'"
+                    :pack="iconPack"
+                />
+                <span v-html="text" />
+                <b-icon
+                    v-if="icon && iconPosition === 'after'"
+                    :icon="icon"
+                    :size="iconSize || size || 'is-large'"
+                    :pack="iconPack"
+                />
+            </template>
         </template>
     </tag>
 </template>
