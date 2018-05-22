@@ -12,6 +12,8 @@
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
+        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
+
         <Example :component="ExCheckboxButton" :code="ExCheckboxButtonCode" title="Checkbox Button">
             <p>You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
         </Example>
@@ -32,6 +34,9 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExTypes from './examples/ExTypes'
+    import ExTypesCode from '!!raw-loader!./examples/ExTypes'
+
     import ExCheckboxButton from './examples/ExCheckboxButton'
     import ExCheckboxButtonCode from '!!raw-loader!./examples/ExCheckboxButton'
 
@@ -45,6 +50,8 @@
                 ExArrayCode,
                 ExSizes,
                 ExSizesCode,
+                ExTypes,
+                ExTypesCode,
                 ExCheckboxButton,
                 ExCheckboxButtonCode
             }
