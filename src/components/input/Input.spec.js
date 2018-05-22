@@ -1,6 +1,6 @@
 import { shallow, mount } from '@vue/test-utils'
-import BInput from '@components/input'
-import BIcon from '@components/icon'
+import BInput from '@components/input/Input'
+import BIcon from '@components/icon/Icon'
 
 describe('BInput', () => {
     it('render correctly', () => {
