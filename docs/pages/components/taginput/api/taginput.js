@@ -54,6 +54,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>ellipsis</code>',
+                description: 'Adds ellipsis on tags to not overflow the text',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>field</code>',
                 description: 'Property of the object (if <code>data</code> is array of objects) to use as display text',
                 type: 'String',

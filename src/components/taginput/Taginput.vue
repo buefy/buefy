@@ -14,6 +14,7 @@
                 :attached="attached"
                 :tabstop="false"
                 :disabled="disabled"
+                :ellipsis="ellipsis"
                 closable
                 @close="removeTag(index)">
                 {{ getNormalizedTagText(tag) }}
@@ -102,6 +103,7 @@
             },
             autocomplete: Boolean,
             disabled: Boolean,
+            ellipsis: Boolean,
             confirmKeyCodes: {
                 type: Array,
                 default: () => [13, 188]

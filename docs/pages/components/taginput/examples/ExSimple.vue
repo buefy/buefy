@@ -3,6 +3,7 @@
         <b-field label="Add some tags">
             <b-taginput
                 v-model="tags"
+                ellipsis
                 icon="label"
                 placeholder="Add a tag">
             </b-taginput>
@@ -18,7 +19,7 @@
                 tags: [
                     'Auckland',
                     'Wellington',
-                    'Napier'
+                    'Very long string that would overflow'
                 ]
             }
         }
