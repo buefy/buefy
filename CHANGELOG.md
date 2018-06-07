@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.6.7
+
+### Fixes and changes
+
+* #839 Fix ``icon-pack`` from icon to be reactive
+* #840 Fix loading position to tagInput (thanks @adrlen)
+
 ## 0.6.6
 
 ### New features
