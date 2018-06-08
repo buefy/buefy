@@ -462,7 +462,7 @@
                         : (this.defaultSortDirection.toLowerCase() !== 'desc')
                 }
                 if (!this.firstTimeSort) {
-                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                   this.$emit('sort',{column:column.field,sort:this.isAsc ? 'asc' : 'desc'})
                 }
                 if (!this.backendSorting) {
                     this.newData = this.sortBy(
