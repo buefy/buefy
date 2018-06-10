@@ -46,6 +46,9 @@ $taginput-height: 1.7em;
             .icon {
                 height: $taginput-height;
             }
+            > .control.is-loading::after {
+                top: 0.375em;
+            }
         }
     }
 }
