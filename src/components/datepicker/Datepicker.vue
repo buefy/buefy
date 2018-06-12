@@ -241,7 +241,7 @@
                     } else {
 
                         const dateUTC = new Date(Date.UTC(
-                            date.getFullYear(), date.getMonth(), date.getDate(), date.getHours
+                            date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()
                         ))
                         return dateUTC.toLocaleDateString()
                     }
