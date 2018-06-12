@@ -55,7 +55,7 @@ describe('BIcon', () => {
         })
 
         expect(wrapper.find('i').classes()).toContain('mdi-eye')
-        wrapper.setData({ newPack: 'fa' })
+        wrapper.setProps({ pack: 'fa' })
 
         const equivalentIcons = {
             'check': 'check',
