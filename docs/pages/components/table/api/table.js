@@ -38,6 +38,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>fullwidth</code>',
+                description: 'You can have a fullwidth table',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>narrowed</code>',
                 description: 'Makes the cells narrower',
                 type: 'Boolean',

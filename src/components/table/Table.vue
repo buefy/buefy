@@ -196,6 +196,7 @@
                 default: () => []
             },
             bordered: Boolean,
+            fullwidth: Boolean,
             striped: Boolean,
             narrowed: Boolean,
             hoverable: Boolean,
@@ -275,6 +276,7 @@
             tableClasses() {
                 return {
                     'is-bordered': this.bordered,
+                    'is-fullwidth': this.fullwidth,
                     'is-striped': this.striped,
                     'is-narrow': this.narrowed,
                     'has-mobile-cards': this.mobileCards,

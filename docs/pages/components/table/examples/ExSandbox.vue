@@ -5,6 +5,9 @@
                 <b-switch v-model="isBordered">Bordered</b-switch>
             </div>
             <div class="control">
+                <b-switch v-model="isFullwidth">Fullwidth</b-switch>
+            </div>
+            <div class="control">
                 <b-switch v-model="isStriped">Striped</b-switch>
             </div>
             <div class="control">
@@ -30,6 +33,7 @@
         <b-table
             :data="isEmpty ? [] : data"
             :bordered="isBordered"
+            :fullwidth="isFullwidth"
             :striped="isStriped"
             :narrowed="isNarrowed"
             :hoverable="isHoverable"
@@ -96,6 +100,7 @@
                 data,
                 isEmpty: false,
                 isBordered: false,
+                isFullwidth: false,
                 isStriped: false,
                 isNarrowed: false,
                 isHoverable: false,
