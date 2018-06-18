@@ -112,7 +112,7 @@
     "vue-progressbar": "0.7.2",
     "vue-router": "2.3.1",
     "vue-style-loader": "3.0.1",
-    "vue-template-compiler": "2.5.13",
+    "vue-template-compiler": "2.5.16",
     "webpack": "2.6.1",
     "webpack-bundle-analyzer": "2.2.1",
     "webpack-dev-middleware": "1.10.0",
