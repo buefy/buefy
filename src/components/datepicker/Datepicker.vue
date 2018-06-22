@@ -239,10 +239,7 @@
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        const dateUTC = new Date(Date.UTC(
-                            date.getFullYear(), date.getMonth(), date.getDate()
-                        ))
-                        return dateUTC.toLocaleDateString()
+                        return date.toLocaleDateString()
                     }
                 }
             },
@@ -392,6 +389,9 @@
 
             /*
             * Format date into string
+            *
+            * Default value for value.getHours is 0,
+            * the time is needed to format a UTC date correctly
             */
             formatValue(value) {
                 if (value && !isNaN(value)) {
