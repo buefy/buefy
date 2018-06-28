@@ -2,6 +2,10 @@
 
 ## 0.6.7
 
+### New features
+
+* Add ``auto-close`` and ``duration`` props to message
+
 ### Fixes and changes
 
 * #839 Fix ``icon-pack`` from icon to be reactive
