@@ -5,7 +5,7 @@
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle">
+            @click.stop="toggle">
             <slot name="trigger"/>
         </div>
 
@@ -18,7 +18,7 @@
         </transition>
         <transition name="fade">
             <div
-                v-show="isActive || hoverable || inline"
+                v-show="(!disabled && (isActive || hoverable)) || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu">
                 <div class="dropdown-content">

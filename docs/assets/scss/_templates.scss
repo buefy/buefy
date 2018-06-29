@@ -1,11 +1,26 @@
+.main {
+    position: relative;
+    .section {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
 .template-horizontal {
     position: relative;
     display: flex;
     flex-direction: row;
     flex: 1;
     .default-container {
+        padding-left: 3rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
         overflow: hidden;
         width: 100%;
+        background: $white;
+        @include touch {
+            padding-left: 0;
+        }
     }
     @include touch {
         display: block;

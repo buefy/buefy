@@ -1,5 +1,35 @@
 # Buefy Changelog
 
+## 0.6.7
+
+### New features
+
+* Add ``auto-close`` and ``duration`` props to message
+
+### Fixes and changes
+
+* #839 Fix ``icon-pack`` from icon to be reactive
+* #840 Fix loading position to tagInput (thanks @adrlen)
+* #872 Fix datepicker default formatter
+
+## 0.6.6
+
+### New features
+
+* **Update Bulma to 0.7.1**
+* Add ``header`` slot to autocomplete
+* Add ``type`` prop to checkbox and radio
+* Add ``on-paste-separators`` and ``before-adding`` props to tagInput
+* #830 Add ``ellipsis`` prop to tagInput and tag components
+
+### Fixes and changes
+
+* #746 Fix default ``dateFormatter`` function to datepicker
+* #755 Fix arrow centered when table detail (thanks @wanxe)
+* #787 Fix type in horizontal field when message is empty
+* #814 Reset scroll to modal before destroy
+* #481 Fix tagInput height to match other inputs
+
 ## 0.6.5
 
 * Revert some changes on Checkbox, CheckboxButton, Radio, RadioButton, Select and Switch, working as before now

@@ -18,17 +18,17 @@ export default {
             category: 'UI components',
             pages: [
                 { name: 'Collapse', path: '/documentation/collapse' },
-                { name: 'Dialog', path: '/documentation/dialog', isUpdated: true },
+                { name: 'Dialog', path: '/documentation/dialog' },
                 { name: 'Dropdown', path: '/documentation/dropdown' },
                 {
                     category: 'Form controls',
                     pages: [
                         { name: 'Autocomplete', path: '/documentation/autocomplete', isUpdated: true },
-                        { name: 'Checkbox', path: '/documentation/checkbox' },
-                        { name: 'Datepicker', path: '/documentation/datepicker', isUpdated: true },
-                        { name: 'Field', path: '/documentation/field', isUpdated: true },
+                        { name: 'Checkbox', path: '/documentation/checkbox', isUpdated: true },
+                        { name: 'Datepicker', path: '/documentation/datepicker' },
+                        { name: 'Field', path: '/documentation/field' },
                         { name: 'Input', path: '/documentation/input' },
-                        { name: 'Radio', path: '/documentation/radio' },
+                        { name: 'Radio', path: '/documentation/radio', isUpdated: true },
                         { name: 'Select', path: '/documentation/select' },
                         { name: 'Switch', path: '/documentation/switch' },
                         { name: 'Taginput', path: '/documentation/taginput', isUpdated: true },
@@ -37,15 +37,15 @@ export default {
                     ]
                 },
                 { name: 'Icon', path: '/documentation/icon' },
-                { name: 'Loading', path: '/documentation/loading', isUpdated: true },
+                { name: 'Loading', path: '/documentation/loading' },
                 { name: 'Message', path: '/documentation/message' },
                 { name: 'Modal', path: '/documentation/modal' },
                 { name: 'Notification', path: '/documentation/notification' },
                 { name: 'Pagination', path: '/documentation/pagination' },
-                { name: 'Snackbar', path: '/documentation/snackbar', isUpdated: true },
-                { name: 'Table', path: '/documentation/table', isUpdated: true },
-                { name: 'Tabs', path: '/documentation/tabs', isUpdated: true },
-                { name: 'Tag', path: '/documentation/tag' },
+                { name: 'Snackbar', path: '/documentation/snackbar' },
+                { name: 'Table', path: '/documentation/table' },
+                { name: 'Tabs', path: '/documentation/tabs' },
+                { name: 'Tag', path: '/documentation/tag', isUpdated: true },
                 { name: 'Toast', path: '/documentation/toast' },
                 { name: 'Tooltip', path: '/documentation/tooltip' }
             ]

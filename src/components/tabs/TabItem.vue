@@ -61,9 +61,6 @@
             }
             this.$parent.tabItems.push(this)
         },
-        updated() {
-            this.$emit('updated')
-        },
         beforeDestroy() {
             const index = this.$parent.tabItems.indexOf(this)
             if (index >= 0) {

@@ -1,6 +1,19 @@
+.sidebar-bg {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    left: 0;
+    top: 0;
+    background: $background;
+    @include touch {
+        display: none;
+    }
+}
 .sidebar {
     min-width: 16rem;
-    margin-right: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-right: 0.5rem;
     position: sticky;
     top: 1rem;
     overflow: auto;
@@ -28,4 +41,3 @@
         }
     }
 }
-

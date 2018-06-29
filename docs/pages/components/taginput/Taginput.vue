@@ -42,6 +42,10 @@
             <p>You can change the style of the tags by setting the <code>rounded</code> and <code>attached</code> props.</p>
         </Example>
 
+        <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical>
+            <p>You can validate the value before adding it to the tag list</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -73,6 +77,9 @@
     import ExModifier from './examples/ExModifier'
     import ExModifierCode from '!!raw-loader!./examples/ExModifier'
 
+    import ExValidation from './examples/ExValidation'
+    import ExValidationCode from '!!raw-loader!./examples/ExValidation'
+
     export default {
         data() {
             return {
@@ -85,6 +92,7 @@
                 ExType,
                 ExSize,
                 ExModifier,
+                ExValidation,
                 ExSimpleCode,
                 ExAutocompleteCode,
                 ExTemplatedAutocompleteCode,
@@ -92,7 +100,8 @@
                 ExStateCode,
                 ExTypeCode,
                 ExSizeCode,
-                ExModifierCode
+                ExModifierCode,
+                ExValidationCode
             }
         }
     }
