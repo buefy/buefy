@@ -178,6 +178,14 @@
         beforeDestroy() {
             if (typeof window !== 'undefined') {
                 document.removeEventListener('keyup', this.keyPress)
+                // reset scroll
+                document.documentElement.classList.toggle('is-clipped', false)
+                const savedScrollTop = !this.savedScrollTop
+                    ? document.documentElement.scrollTop
+                    : this.savedScrollTop
+                document.body.classList.toggle('is-noscroll', false)
+                document.documentElement.scrollTop = savedScrollTop
+                document.body.style.top = null
             }
         }
     }

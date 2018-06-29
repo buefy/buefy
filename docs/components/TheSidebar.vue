@@ -14,7 +14,7 @@
                     <router-link v-if="page.name" :to="page.path">
                         <span class="menu-text">{{ page.name }}</span>
                         <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
+                        <b-tag v-if="page.isUpdated" type="is-info">Update</b-tag>
                     </router-link>
 
                     <!-- submenu -->
@@ -35,7 +35,7 @@
                                 <router-link :to="page.path">
                                     <span class="menu-text">{{ page.name }}</span>
                                     <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                    <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
+                                    <b-tag v-if="page.isUpdated" type="is-info">Update</b-tag>
                                 </router-link>
                             </li>
                         </ul>

@@ -12,8 +12,7 @@
                             <b-slot-component
                                 :component="tabItem"
                                 name="header"
-                                tag="span"
-                                event="updated" />
+                                tag="span" />
                         </template>
                         <template v-else>
                             <b-icon

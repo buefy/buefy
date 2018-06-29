@@ -11,12 +11,15 @@
             </div>
         </div>
 
-        <section class="section">
-            <div class="container is-fullhd template-horizontal">
-                <TheSidebar :data="menu"/>
-                <router-view/>
-            </div>
-        </section>
+        <main class="main">
+            <div class="sidebar-bg"/>
+            <section class="section">
+                <div class="container is-fullhd template-horizontal">
+                    <TheSidebar :data="menu"/>
+                    <router-view/>
+                </div>
+            </section>
+        </main>
 
         <TheFooter/>
     </section>

@@ -239,7 +239,11 @@
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        return date.toLocaleDateString()
+                        const yyyyMMdd = date.getFullYear() +
+                            '/' + (date.getMonth() + 1) +
+                            '/' + date.getDate()
+                        const d = new Date(yyyyMMdd)
+                        return d.toLocaleDateString()
                     }
                 }
             },

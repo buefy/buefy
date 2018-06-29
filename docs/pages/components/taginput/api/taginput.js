@@ -54,6 +54,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>ellipsis</code>',
+                description: 'Adds ellipsis on tags to not overflow the text',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>field</code>',
                 description: 'Property of the object (if <code>data</code> is array of objects) to use as display text',
                 type: 'String',
@@ -87,6 +94,20 @@ export default [
                 type: 'Array',
                 values: '—',
                 default: '<code>[13, 188]</code>'
+            },
+            {
+                name: '<code>on-paste-separators</code>',
+                description: 'Array of chars used to split when pasting a new string',
+                type: 'Array',
+                values: '—',
+                default: '<code>[\',\']</code>'
+            },
+            {
+                name: '<code>before-adding</code>',
+                description: 'Function to validate the value of the tag before adding',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => true</code>'
             },
             {
                 name: 'Any other native attribute or Autocomplete prop',

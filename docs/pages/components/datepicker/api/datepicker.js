@@ -114,6 +114,13 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>selectable-dates</code>',
+                description: 'Array of selectable dates',
+                type: 'Array',
+                values: '—',
+                default: '-'
+            },
+            {
                 name: '<code>month-names</code>',
                 description: 'Names of months to display in table header',
                 type: 'Array',

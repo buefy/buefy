@@ -19,7 +19,10 @@
                     <tr>
                         <th v-if="detailed" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isAllChecked" @change.native="checkAll"/>
+                            <b-checkbox
+                                :value="isAllChecked"
+                                :disabled="isAllUncheckable"
+                                @change.native="checkAll"/>
                         </th>
                         <th
                             v-for="(column, index) in newColumns"
@@ -66,7 +69,10 @@
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
 
-                            <td v-if="detailed">
+                            <td
+                                v-if="detailed"
+                                class="chevron-cell"
+                            >
                                 <a
                                     v-if="hasDetailedVisible(row)"
                                     role="button"
@@ -303,10 +309,20 @@
             isAllChecked() {
                 const validVisibleData = this.visibleData.filter(
                         (row) => this.isRowCheckable(row))
+                if (validVisibleData.length === 0) return false
                 const isAllChecked = validVisibleData.some((currentVisibleRow) => {
                     return indexOf(this.newCheckedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
+            },
+
+            /**
+             * Check if all rows in the page are checkable.
+             */
+            isAllUncheckable() {
+                const validVisibleData = this.visibleData.filter(
+                        (row) => this.isRowCheckable(row))
+                return validVisibleData.length === 0
             },
 
             /**
