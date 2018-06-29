@@ -75,13 +75,6 @@ export default [
                 default: '<code>null</code>'
             },
             {
-                name: '<code>slot</code>',
-                description: 'Set the item to be the menu trigger',
-                type: '',
-                values: '',
-                default: '<code>null</code>'
-            },
-            {
                 name: '<code>separator</code>',
                 description: 'Set the item to be a separator',
                 type: 'Boolean',
