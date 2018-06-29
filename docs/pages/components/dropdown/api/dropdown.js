@@ -78,7 +78,7 @@ export default [
                 name: '<code>slot</code>',
                 description: 'Set the item to be the menu trigger',
                 type: '',
-                values: 'trigger',
+                values: '',
                 default: '<code>null</code>'
             },
             {
@@ -115,6 +115,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            }
+        ],
+        slots: [
+            {
+                name: '<code>trigger</code>',
+                description: 'Indicates that item is the trigger for the dropdown',
+                props: '—'
             }
         ],
         events: [
