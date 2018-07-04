@@ -10,6 +10,7 @@
 
 * #839 Fix ``icon-pack`` from icon to be reactive
 * #840 Fix loading position to tagInput (thanks @adrlen)
+* #852 Fix label class to field when horizontal
 * #872 Fix datepicker default formatter
 
 ## 0.6.6
