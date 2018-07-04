@@ -117,4 +117,4 @@ https://github.com/buefy/buefy/issues/458
 
 Code released under [MIT]((https://github.com/buefy/buefy/blob/master/LICENSE)) license.
 
-Copyright (c) 2017, Rafael Beraldo.
+Copyright (c) 2018, Rafael Beraldo.

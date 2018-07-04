@@ -2,8 +2,8 @@
     <div class="field" :class="[rootClasses, fieldType()]">
         <div
             v-if="horizontal"
-            class="field-label is-normal"
-            :class="customClass">
+            class="field-label"
+            :class="[customClass, fieldLabelSize]">
             <label
                 v-if="label"
                 :for="labelFor"
@@ -66,6 +66,7 @@
             return {
                 newType: this.type,
                 newMessage: this.message,
+                fieldLabelSize: null,
                 _isField: true // Used internally by Input and Select
             }
         },
@@ -152,6 +153,15 @@
                     !this.horizontal
                 ) {
                     return 'has-addons'
+                }
+            }
+        },
+        mounted() {
+            if (this.horizontal) {
+                // Bulma docs: .is-normal for any .input or .button
+                const elements = this.$el.querySelectorAll('.input, .select, .button, .textarea')
+                if (elements.length > 0) {
+                    this.fieldLabelSize = 'is-normal'
                 }
             }
         }

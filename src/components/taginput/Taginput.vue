@@ -14,6 +14,7 @@
                 :attached="attached"
                 :tabstop="false"
                 :disabled="disabled"
+                :ellipsis="ellipsis"
                 closable
                 @close="removeTag(index)">
                 {{ getNormalizedTagText(tag) }}
@@ -102,6 +103,7 @@
             },
             autocomplete: Boolean,
             disabled: Boolean,
+            ellipsis: Boolean,
             confirmKeyCodes: {
                 type: Array,
                 default: () => [13, 188]
@@ -206,13 +208,15 @@
                 const tagToAdd = tag || this.newTag.trim()
 
                 if (tagToAdd) {
-                    const reg = this.separatorsAsRegExp
-                    if (reg && tagToAdd.match(reg)) {
-                        tagToAdd.split(reg)
-                            .map((t) => t.trim())
-                            .filter((t) => t.length !== 0)
-                            .map(this.addTag)
-                        return
+                    if (!this.autocomplete) {
+                        const reg = this.separatorsAsRegExp
+                        if (reg && tagToAdd.match(reg)) {
+                            tagToAdd.split(reg)
+                                .map((t) => t.trim())
+                                .filter((t) => t.length !== 0)
+                                .map(this.addTag)
+                            return
+                        }
                     }
 
                     // Add the tag input if it is not blank or previously added.

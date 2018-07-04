@@ -240,10 +240,11 @@
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        const dateUTC = new Date(Date.UTC(
-                            date.getFullYear(), date.getMonth(), date.getDate()
-                        ))
-                        return dateUTC.toLocaleDateString()
+                        const yyyyMMdd = date.getFullYear() +
+                            '/' + (date.getMonth() + 1) +
+                            '/' + date.getDate()
+                        const d = new Date(yyyyMMdd)
+                        return d.toLocaleDateString()
                     }
                 }
             },
