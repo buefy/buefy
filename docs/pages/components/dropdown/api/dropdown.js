@@ -110,6 +110,13 @@ export default [
                 default: '<code>false</code>'
             }
         ],
+        slots: [
+            {
+                name: '<code>trigger</code>',
+                description: 'Indicates that item is the trigger for the dropdown',
+                props: '—'
+            }
+        ],
         events: [
             {
                 name: '<code>click</code>',
