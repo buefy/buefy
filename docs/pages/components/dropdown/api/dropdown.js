@@ -45,6 +45,18 @@ export default [
                 default: '<code>true</code>'
             }
         ],
+        slots: [
+            {
+                name: 'default',
+                description: '',
+                props: ''
+            },
+            {
+                name: '<code>trigger</code>',
+                description: 'Trigger content for the dropdown',
+                props: '—'
+            }
+        ],
         events: [
             {
                 name: '<code>change</code>',
@@ -112,9 +124,9 @@ export default [
         ],
         slots: [
             {
-                name: '<code>trigger</code>',
-                description: 'Indicates that item is the trigger for the dropdown',
-                props: '—'
+                name: 'default',
+                description: '',
+                props: ''
             }
         ],
         events: [
