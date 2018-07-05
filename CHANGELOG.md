@@ -5,7 +5,7 @@
 ### New features
 
 * Add ``auto-close`` and ``duration`` props to message
-* **Table improved**: can change columns dinamically
+* **Table improved**: can change columns dynamically
 
 ### Fixes and changes
 
