@@ -118,6 +118,8 @@ export declare type SnackbarConfig = {
     duration?: number;
     container?: string;
     actionText?: string | null;
+    queue?: boolean;
+    indefinite?: boolean;
     onAction?: () => any;
 }
 export declare const Snackbar: {
