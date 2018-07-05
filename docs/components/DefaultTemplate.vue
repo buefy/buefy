@@ -1,39 +1,35 @@
 <template>
     <section :class="namespace">
-        <TheHeader ref="header"/>
+        <TheNavbar ref="header"/>
 
-        <div class="hero is-primary">
-            <div class="hero-body">
-                <div class="container">
-                    <p class="title">{{ title }}</p>
-                    <p class="subtitle">{{ subtitle }}</p>
-                </div>
+        <div class="sidebar-bg"/>
+        <section class="section">
+            <div class="container is-fullhd template-horizontal">
+                <TheSidebar :data="menu"/>
+                <main class="main">
+                    <div class="default-container">
+                        <TheBreadcrumb/>
+                        <router-view/>
+                    </div>
+                </main>
             </div>
-        </div>
-
-        <main class="main">
-            <div class="sidebar-bg"/>
-            <section class="section">
-                <div class="container is-fullhd template-horizontal">
-                    <TheSidebar :data="menu"/>
-                    <router-view/>
-                </div>
-            </section>
-        </main>
+        </section>
 
         <TheFooter/>
     </section>
 </template>
 
 <script>
-    import TheHeader from '@/components/TheHeader'
+    import TheBreadcrumb from '@/components/TheBreadcrumb'
+    import TheNavbar from '@/components/TheNavbar'
     import TheFooter from '@/components/TheFooter'
     import TheSidebar from '@/components/TheSidebar'
     import menu from '../menu'
 
     export default {
         components: {
-            TheHeader,
+            TheBreadcrumb,
+            TheNavbar,
             TheFooter,
             TheSidebar
         },

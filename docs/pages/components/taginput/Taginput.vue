@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Taginput</h1>
         <h2 class="subtitle">A simple tag input field that can have autocomplete functionality</h2>
         <hr>

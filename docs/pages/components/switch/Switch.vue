@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Switch</h1>
         <h2 class="subtitle">Switch between two opposing states</h2>
         <hr>
