@@ -13,7 +13,7 @@
             return {
                 props: {
                     title: 'Extensions',
-                    subtitle: 'See how you can improve Buefy with other packages!',
+                    subtitle: 'See how you can improve Buefy with other packages',
                     namespace: 'extensions'
                 }
             }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import { beforeEachGlobal } from './guards'
-import meta from './meta'
+import routes from './routes'
 
 Vue.use(Router)
 
@@ -10,7 +10,7 @@ function route(path, component) {
     return {
         path,
         name: path,
-        meta: meta[path],
+        meta: routes[path],
         component: () => import(`@/pages/${component}`)
     }
 }

@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Snackbar</h1>
-        <h2 class="subtitle">When a Dialog seems a bit overkill for the task, Snackbars are good candidates</h2>
-        <hr>
-
         <div class="content">
             <p>They have only one button, and by default are queued to not confuse the user.</p>
             <p><small><b>Note:</b> They queue with <router-link to="/documentation/toast">Toasts</router-link> as well.</small></p>

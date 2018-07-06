@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Dialog</h1>
-        <h2 class="subtitle">Dialogs inform users about a specific task and may contain critical information or require decisions</h2>
-        <hr>
-
         <Example :component="ExAlertDialog" :code="ExAlertDialogCode" title="Alert"/>
 
         <Example :component="ExConfirmDialog" :code="ExConfirmDialogCode" title="Confirm"/>

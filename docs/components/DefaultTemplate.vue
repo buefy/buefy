@@ -1,6 +1,6 @@
 <template>
     <section :class="namespace">
-        <TheNavbar ref="header"/>
+        <TheNavbar/>
 
         <div class="sidebar-bg"/>
         <section class="section">
@@ -8,7 +8,8 @@
                 <TheSidebar :data="menu"/>
                 <main class="main">
                     <div class="default-container">
-                        <TheBreadcrumb/>
+                        <TheHeader/>
+
                         <router-view/>
                     </div>
                 </main>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-    import TheBreadcrumb from '@/components/TheBreadcrumb'
+    import TheHeader from '@/components/TheHeader'
     import TheNavbar from '@/components/TheNavbar'
     import TheFooter from '@/components/TheFooter'
     import TheSidebar from '@/components/TheSidebar'
@@ -28,7 +29,7 @@
 
     export default {
         components: {
-            TheBreadcrumb,
+            TheHeader,
             TheNavbar,
             TheFooter,
             TheSidebar

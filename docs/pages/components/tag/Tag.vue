@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Tag</h1>
-        <h2 class="subtitle">Tag labels to insert anywhere</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <p class="content">Closable tags have a button that can be focused, it emits a <code>close</code> event when clicked or when <b>delete</b> key is pressed.</p>

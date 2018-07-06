@@ -1,0 +1,14 @@
+.docs-header {
+    border-bottom: 2px solid $white-ter;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    .breadcrumb {
+        margin-bottom: 3rem !important;
+    }
+    .subtitle {
+        &,
+        strong {
+            color: $grey;
+        }
+    }
+}

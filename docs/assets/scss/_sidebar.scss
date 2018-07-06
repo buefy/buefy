@@ -17,9 +17,8 @@
     width: 16rem;
     padding: 3rem 1rem 3rem 0;
     overflow: auto;
-    p {
+    .sidebar-label {
         margin-bottom: 0.5em;
-        // font-weight: $weight-light;
         color: $grey;
         font-size: 0.9em;
         text-transform: uppercase;

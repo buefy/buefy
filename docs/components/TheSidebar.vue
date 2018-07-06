@@ -1,7 +1,7 @@
 <template>
     <aside class="sidebar">
         <template v-for="(items, i) in data">
-            <p :key="items.category">
+            <p class="sidebar-label" :key="items.category">
                 {{ items.category }}
             </p>
             <ul :key="i">
@@ -14,9 +14,11 @@
 
                     <!-- submenu -->
                     <template v-else>
-                        <a role="button">
-                            <span class="sidebar-menu-text">{{ page.category }}</span>
-                        </a>
+                        <p>
+                            <span class="sidebar-menu-text">
+                                {{ page.category }}
+                            </span>
+                        </p>
                         <ul>
                             <li
                                 v-for="page in page.pages"

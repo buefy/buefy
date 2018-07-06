@@ -8,6 +8,12 @@
         align-items: left;
     }
 
+    .navbar-item {
+        img {
+            max-height: 2rem;
+        }
+    }
+
     .navbar-dropdown {
         .navbar-item {
             display: flex;

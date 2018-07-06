@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Tooltip</h1>
-        <h2 class="subtitle">Display a brief helper text to your user</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExStyles" :code="ExStylesCode" title="Styles" vertical/>

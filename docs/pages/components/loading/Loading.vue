@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Loading</h1>
-        <h2 class="subtitle">A simple loading overlay</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>The Loading will be closed after about 10 seconds, by pressing escape or by clicking outside.</p>
             <p>

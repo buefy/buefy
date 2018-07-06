@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Upload</h1>
-        <h2 class="subtitle">Upload one or more files</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExDragDrop" :code="ExDragDropCode" title="Drag and drop" vertical/>

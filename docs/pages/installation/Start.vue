@@ -1,10 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Start</h1>
-        <h2 class="subtitle"><b>Two ways</b> to install and use Buefy</h2>
-
-        <hr>
-
         <h3 class="title">Install</h3>
         <b-message type="is-warning">
             You need <a href="https://vuejs.org" target="_blank">Vue.js</a> <b>version 2.5+</b>.
@@ -124,7 +119,7 @@
                 Vue.use(Field)
                 Vue.use(Input)
 
-                or 
+                or
 
                 import Vue from 'vue'
                 import Field from 'buefy/dist/components/field'

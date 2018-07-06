@@ -4,6 +4,7 @@ export const beforeEachGlobal = (to, from, next) => {
     window.document.documentElement.scrollTop = 0
     window.document.title = `${to.meta.title} | Buefy`
     Vue.prototype.$eventHub.$emit('close-menu')
+    Vue.prototype.$eventHub.$emit('meta', to.meta)
 
     next()
 }
