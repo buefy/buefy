@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Sortable</h1>
         <h2 class="subtitle">Sort a table — as a Vue directive</h2>
         <div class="buttons">

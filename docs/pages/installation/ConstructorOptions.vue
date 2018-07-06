@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Constructor options</h1>
         <h2 class="subtitle">These are global default options, which are set on Buefy initialization</h2>
         <hr>

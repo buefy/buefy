@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Start</h1>
         <h2 class="subtitle"><b>Two ways</b> to install and use Buefy</h2>
 
@@ -94,7 +94,7 @@
         <h3 class="title">Include Material Design Icons</h3>
         <b-message type="is-info">
             By default Buefy uses <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>,
-            if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a> 
+            if you want to swap to <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a>
             or <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a>, go to
             <router-link to="/documentation/constructor-options">constructor options</router-link>.
         </b-message>

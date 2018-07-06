@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Checkbox</h1>
         <h2 class="subtitle">Select a single or grouped options</h2>
         <hr>

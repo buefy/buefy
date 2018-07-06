@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Customizing theme with Sass</h1>
         <h2 class="subtitle">
             If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <b>customize</b>

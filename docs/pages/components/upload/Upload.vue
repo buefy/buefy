@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Upload</h1>
         <h2 class="subtitle">Upload one or more files</h2>
         <hr>

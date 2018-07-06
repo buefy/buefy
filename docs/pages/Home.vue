@@ -1,6 +1,6 @@
 <template>
     <section class="home">
-        <TheHeader light/>
+        <TheNavbar light/>
         <div class="hero is-fullheight is-primary">
             <div class="hero-body">
                 <div class="container has-text-centered">
@@ -83,14 +83,14 @@
 
 <script>
     import ScrollReveal from 'scrollreveal'
-    import TheHeader from '../components/TheHeader'
+    import TheNavbar from '../components/TheNavbar'
     import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
 
     export default {
         name: 'App',
         components: {
-            TheHeader,
+            TheNavbar,
             TheFooter
         },
         data() {

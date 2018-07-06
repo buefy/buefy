@@ -1,0 +1,11 @@
+.footer {
+    position: relative;
+    .footer-label {
+        text-transform: uppercase;
+        font-weight: $weight-bold;
+        padding-bottom: 1rem;
+        &:not(:first-child) {
+            padding-top: 1rem;
+        }
+    }
+}

@@ -1,41 +1,30 @@
 <template>
-    <aside class="sidebar menu is-hidden-touch">
+    <aside class="sidebar">
         <template v-for="(items, i) in data">
-            <p
-                class="menu-label has-text-weight-bold"
-                :key="items.category">
+            <p :key="items.category">
                 {{ items.category }}
             </p>
-            <ul
-                class="menu-list"
-                :key="i"
-                style="margin-bottom: 2.5rem;">
+            <ul :key="i">
                 <li v-for="page in items.pages" :key="page.name">
                     <router-link v-if="page.name" :to="page.path">
-                        <span class="menu-text">{{ page.name }}</span>
+                        <span class="sidebar-menu-text">{{ page.name }}</span>
                         <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                        <b-tag v-if="page.isUpdated" type="is-info">Update</b-tag>
+                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
                     </router-link>
 
                     <!-- submenu -->
                     <template v-else>
-                        <a role="button" @click="toggle">
-                            <b-icon
-                                icon="chevron-right"
-                                size="is-small"
-                                class="chevron-icon"
-                                :custom-class="isExpanded ? 'mdi-rotate-90' : ''"
-                            />
-                            <span class="menu-text">{{ page.category }}</span>
+                        <a role="button">
+                            <span class="sidebar-menu-text">{{ page.category }}</span>
                         </a>
-                        <ul :class="{ 'is-active': isExpanded }">
+                        <ul>
                             <li
                                 v-for="page in page.pages"
                                 :key="page.name">
                                 <router-link :to="page.path">
-                                    <span class="menu-text">{{ page.name }}</span>
+                                    <span class="sidebar-menu-text">{{ page.name }}</span>
                                     <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                    <b-tag v-if="page.isUpdated" type="is-info">Update</b-tag>
+                                    <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
                                 </router-link>
                             </li>
                         </ul>
@@ -50,16 +39,6 @@
     export default {
         props: {
             data: Array
-        },
-        data() {
-            return {
-                isExpanded: true
-            }
-        },
-        methods: {
-            toggle() {
-                this.isExpanded = !this.isExpanded
-            }
         }
     }
 </script>

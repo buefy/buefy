@@ -1,11 +1,3 @@
-.main {
-    position: relative;
-    .section {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-}
-
 .template-horizontal {
     position: relative;
     display: flex;
@@ -17,12 +9,31 @@
         padding-bottom: 3rem;
         overflow: hidden;
         width: 100%;
-        background: $white;
+        &.is-header {
+            border-bottom: 2px solid $white-ter;
+        }
         @include touch {
             padding-left: 0;
         }
     }
     @include touch {
         display: block;
+    }
+}
+
+.documentation,
+.extensions {
+    position: relative;
+    .section {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .main {
+        position: relative;
+        background: $white;
+        width: 100%;
+    }
+    .breadcrumb {
+        margin-bottom: 3rem !important;
     }
 }

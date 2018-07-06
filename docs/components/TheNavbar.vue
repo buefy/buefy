@@ -1,5 +1,7 @@
 <template>
-    <header class="navbar header has-shadow" :class="{ 'is-primary is-transparent': light }">
+    <nav
+        class="navbar docs-navbar is-spaced has-shadow"
+        :class="{ 'is-primary is-transparent': light }">
         <div class="container">
             <div class="navbar-brand">
                 <router-link
@@ -18,7 +20,7 @@
                 </router-link>
 
                 <a
-                    class="navbar-item"
+                    class="navbar-item has-text-dark"
                     href="https://github.com/buefy/buefy"
                     target="_blank"
                     title="Github">
@@ -26,7 +28,7 @@
                 </a>
 
                 <a
-                    class="navbar-item"
+                    class="navbar-item has-text-twitter"
                     href="https://twitter.com/rafaelpimpa"
                     target="_blank"
                     title="Twitter">
@@ -34,7 +36,7 @@
                 </a>
 
                 <a
-                    class="navbar-item"
+                    class="navbar-item has-text-discord"
                     href="https://discordapp.com/invite/ZkdFJMr"
                     target="_blank"
                     title="Discord">
@@ -177,7 +179,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 </template>
 
 <script>

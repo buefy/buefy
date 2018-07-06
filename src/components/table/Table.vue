@@ -405,10 +405,12 @@
                     this.initSort()
                     this.firstTimeSort = false
                 } else if (newColumns.length) {
-                    for (let i = 0; i < newColumns.length; i++) {
-                        if (newColumns[i].newKey === this.currentSortColumn.newKey) {
-                            this.currentSortColumn = newColumns[i]
-                            break
+                    if (this.currentSortColumn.field) {
+                        for (let i = 0; i < newColumns.length; i++) {
+                            if (newColumns[i].field === this.currentSortColumn.field) {
+                                this.currentSortColumn = newColumns[i]
+                                break
+                            }
                         }
                     }
                 }

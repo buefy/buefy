@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Timepicker</h1>
         <h2 class="subtitle">An input with a simple dropdown/modal for selecting a time, uses native timepicker for mobile</h2>
         <hr>

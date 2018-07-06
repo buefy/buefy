@@ -1,5 +1,5 @@
 <template>
-    <div class="default-container">
+    <div>
         <h1 class="title is-spaced">Pagination</h1>
         <h2 class="subtitle">A responsive and flexible pagination</h2>
         <hr>
