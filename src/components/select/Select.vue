@@ -65,7 +65,7 @@
                     'is-loading': this.loading,
                     'is-multiple': this.multiple,
                     'is-rounded': this.rounded,
-                    'is-empty': this.selected === null
+                    'is-empty': [undefined, null, ''].includes(this.selected)
                 }]
             }
         },
