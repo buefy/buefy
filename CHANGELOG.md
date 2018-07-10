@@ -13,6 +13,7 @@
 * #840 Fix loading position to tagInput (thanks @adrlen)
 * #852 Fix label class to field when horizontal
 * #872 Fix datepicker default formatter
+* #895 Fix loading overlay when not in full page (thanks @adrlen)
 
 ## 0.6.6
 
