@@ -1,22 +1,61 @@
 <template>
-    <DefaultTemplate v-bind="props"/>
+    <main>
+        <TheNavbar/>
+
+        <section class="documentation">
+            <div class="sidebar-bg"/>
+
+            <div class="container is-fullhd docs-template-horizontal">
+                <TheSidebar :data="menu"/>
+                <div class="docs-main">
+                    <div class="docs-main-container">
+                        <TheHeader v-bind="meta"/>
+
+                        <router-view/>
+
+                        <template v-if="meta.githubPath">
+                            <hr>
+
+                            <ImproveThis v-bind="meta"/>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <TheFooter/>
+    </main>
 </template>
 
 <script>
-    import DefaultTemplate from '@/components/DefaultTemplate'
+    import TheHeader from '@/components/TheHeader'
+    import TheNavbar from '@/components/TheNavbar'
+    import TheFooter from '@/components/TheFooter'
+    import TheSidebar from '@/components/TheSidebar'
+    import ImproveThis from '@/components/ImproveThis'
+    import menu from '../menu'
 
     export default {
         components: {
-            DefaultTemplate
+            TheHeader,
+            TheNavbar,
+            TheFooter,
+            TheSidebar,
+            ImproveThis
         },
-        data() {
-            return {
-                props: {
-                    title: 'Documentation',
-                    subtitle: 'Learn everything you need to start using Buefy ;)',
-                    namespace: 'documentation'
-                }
+        computed: {
+            menu() {
+                return menu[this.meta.namespace || 'documentation']
             }
+        },
+        methods: {
+            setMetas(meta) {
+                this.meta = meta
+            }
+        },
+        created() {
+            this.$eventHub.$on('meta', this.setMetas)
+            this.setMetas(this.$router.currentRoute.meta)
         }
     }
 </script>

@@ -27,6 +27,16 @@
             </div>
         </div>
 
+        <div class="media">
+            <div class="media-left">
+                <h3 class="subtitle">3</h3>
+            </div>
+            <div class="media-content">
+                <h3 class="subtitle">Nuxt.js module via <b>NPM</b>:</h3>
+                <CodeView code="npm install nuxt-buefy" lang="bash" expanded/>
+            </div>
+        </div>
+
         <hr>
 
         <h3 class="title">Usage</h3>
@@ -40,9 +50,9 @@
                     If you want to use your own theme / variables go to
                     <router-link to="/documentation/customization">customization section</router-link>.
                 </b-message>
-                <h5 class="subtitle is-5"> Bundle </h5>
+                <h5 class="subtitle is-5">Bundle</h5>
                 <CodeView :code="importingBundle | pre" lang="javascript" expanded/>
-                <h5 class="subtitle is-5"> Individual Components </h5>
+                <h5 class="subtitle is-5">Individual Components</h5>
                 <CodeView :code="importingComponents | pre" lang="javascript" expanded/>
             </div>
         </div>
@@ -67,20 +77,10 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Nuxt.js:</h3>
-                <p>It's really very simple to start with nuxt. But we can make it even simpler by adding <a href="https://github.com/buefy/nuxt-buefy">nuxt-buefy</a>.</p>
-
-                <div class="content">
-                    <ol>
-                        <li>
-                            Install using <code>npm</code> or <code>yarn.</code> <br/>
-                            <CodeView :code="installNuxtBuefy | pre" lang="javascript" expanded/>
-                        </li>
-                        <li>
-                            Add <a href="https://github.com/buefy/nuxt-buefy">nuxt-buefy</a> to modules section of nuxt.config.js: <br />
-                            <CodeView :code="importingNuxtBuefy | pre" lang="javascript" expanded/>
-                        </li>
-                    </ol>
-                </div>
+                <p class="content">
+                    Add <a href="https://github.com/buefy/nuxt-buefy">nuxt-buefy</a> to modules section of nuxt.config.js:
+                </p>
+                <CodeView :code="importingNuxtBuefy | pre" lang="javascript" expanded/>
             </div>
         </div>
 

@@ -24,24 +24,15 @@
     import routes from '../router/routes'
 
     export default {
+        props: {
+            breadcrumb: Array,
+            title: String,
+            subtitle: String
+        },
         data() {
             return {
-                routes,
-                breadcrumb: [],
-                title: '',
-                subtitle: ''
+                routes
             }
-        },
-        methods: {
-            setMetas(meta) {
-                this.breadcrumb = meta.breadcrumb
-                this.title = meta.title
-                this.subtitle = meta.subtitle
-            }
-        },
-        created() {
-            this.$eventHub.$on('meta', this.setMetas)
-            this.setMetas(this.$router.currentRoute.meta)
         }
     }
 </script>
