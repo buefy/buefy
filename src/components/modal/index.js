@@ -31,7 +31,7 @@ const ModalProgrammatic = {
 
 const Plugin = {
     install(Vue) {
-        registerComponent(Vue, Notification)
+        registerComponent(Vue, Modal)
         registerComponentProgrammatic(Vue, '$modal', ModalProgrammatic)
     }
 }
