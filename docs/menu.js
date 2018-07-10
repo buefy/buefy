@@ -53,10 +53,15 @@ export default {
     ],
     extensions: [
         {
-            category: 'Extensions',
+            category: 'Input format',
             pages: [
-                { name: 'Cleavejs (input format)', path: '/extensions/cleavejs' },
-                { name: 'Sortable (table sort)', path: '/extensions/sortablejs' }
+                { name: 'Cleavejs', path: '/extensions/cleavejs' }
+            ]
+        },
+        {
+            category: 'Drag & drop',
+            pages: [
+                { name: 'Sortable', path: '/extensions/sortablejs' }
             ]
         }
     ]

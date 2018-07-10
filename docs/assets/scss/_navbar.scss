@@ -3,15 +3,20 @@
         box-shadow: 0 1px 0 rgba($white, 0.2);
     }
 
-    .version {
+    .is-version {
         flex-direction: column;
-        align-items: left;
+        align-items: flex-start;
     }
 
     .navbar-item {
         img {
             max-height: 2rem;
         }
+    }
+
+    .has-dropdown > .navbar-link {
+        cursor: default;
+        @include unselectable;
     }
 
     .navbar-dropdown {

@@ -6,7 +6,7 @@ export default {
     },
     start: {
         title: 'Start',
-        subtitle: '<strong>Two ways</strong> to install and use Buefy',
+        subtitle: '<strong>Three ways</strong> to install and use Buefy',
         path: '/documentation/start',
         breadcrumb: ['/', 'documentation', 'start']
     },

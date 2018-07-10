@@ -9,6 +9,7 @@
         display: none;
     }
 }
+
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -16,6 +17,7 @@
     align-items: center;
     width: 16rem;
     padding: 3rem 1rem;
+    background: $background;
     .sidebar-menu {
         width: 100%;
         .sidebar-label {
@@ -76,6 +78,7 @@
         }
     }
     @include touch {
-        display: none;
+        width: 100%;
+        order: 2;
     }
 }

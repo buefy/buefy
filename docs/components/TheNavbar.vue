@@ -62,97 +62,23 @@
                         Home
                     </router-link>
 
-                    <hr class="navbar-divider" style="display: block;">
-
-                    <router-link
-                        to="/documentation"
-                        class="navbar-item is-hidden-touch">
+                    <router-link to="/documentation" class="navbar-item">
                         Documentation
                     </router-link>
 
-                    <!-- Mobile documentation menu -->
-                    <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
-                        <div class="navbar-item">Documentation</div>
-
-                        <div class="navbar-dropdown is-boxed">
-                            <template v-for="items in menu['documentation']">
-                                <div
-                                    :key="items.category"
-                                    class="navbar-item is-subitem">
-                                    {{ items.category }}
-                                </div>
-
-                                <template v-for="page in items.pages">
-                                    <router-link
-                                        v-if="page.name"
-                                        :key="page.name"
-                                        :to="page.path"
-                                        class="navbar-item">
-                                        <span class="navbar-item-text">{{ page.name }}</span>
-                                        <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
-                                    </router-link>
-
-                                    <!-- submenu -->
-                                    <template v-else>
-                                        <div class="navbar-item" :key="page.name">
-                                            {{ page.category }}
-                                        </div>
-                                        <router-link
-                                            v-for="page in page.pages"
-                                            :key="page.name"
-                                            :to="page.path"
-                                            class="navbar-item"
-                                            style="margin-left: 1rem;">
-                                            <span class="navbar-item-text">{{ page.name }}</span>
-                                            <b-tag v-if="page.isNew" type="is-success">
-                                                New!
-                                            </b-tag>
-                                            <b-tag v-if="page.isUpdated" type="is-info">
-                                                Updated
-                                            </b-tag>
-                                        </router-link>
-                                    </template>
-                                </template>
-
-                            </template>
-                        </div>
-                    </div>
-                    <hr class="navbar-divider" style="display: block;">
-
-                    <router-link to="/extensions" class="navbar-item is-hidden-touch">
+                    <router-link to="/extensions" class="navbar-item">
                         Extensions
                     </router-link>
-
-                    <!-- Mobile extensions menu -->
-                    <div class="navbar-item has-dropdown is-hoverable is-hidden-desktop">
-                        <div class="navbar-item">Extensions</div>
-
-                        <div class="navbar-dropdown is-boxed">
-                            <template v-for="items in menu['extensions']">
-                                <router-link
-                                    v-for="page in items.pages"
-                                    :key="page.name"
-                                    :to="page.path"
-                                    class="navbar-item">
-                                    <span class="navbar-item-text">{{ page.name }}</span>
-                                    <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                </router-link>
-                            </template>
-                        </div>
-                    </div>
-
-                    <hr class="navbar-divider" style="display: block;">
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div class="navbar-link">Info</div>
 
                         <div class="navbar-dropdown is-boxed">
-                            <strong class="navbar-item version">
+                            <strong class="navbar-item is-version">
                                 <span class="has-text-primary">Buefy version</span>
                                 <span class="has-text-grey">{{ version }}</span>
                             </strong>
-                            <strong class="navbar-item version">
+                            <strong class="navbar-item is-version">
                                 <span class="has-text-bulma">Bulma version</span>
                                 <span class="has-text-grey">{{ bulmaVersion }}</span>
                             </strong>

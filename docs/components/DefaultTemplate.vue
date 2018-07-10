@@ -3,18 +3,17 @@
         <TheNavbar/>
 
         <div class="sidebar-bg"/>
-        <section class="section">
-            <div class="container is-fullhd template-horizontal">
-                <TheSidebar :data="menu"/>
-                <main class="main">
-                    <div class="default-container">
-                        <TheHeader/>
 
-                        <router-view/>
-                    </div>
-                </main>
-            </div>
-        </section>
+        <div class="container is-fullhd docs-template-horizontal">
+            <TheSidebar :data="menu"/>
+            <main class="docs-main">
+                <div class="docs-main-container">
+                    <TheHeader/>
+
+                    <router-view/>
+                </div>
+            </main>
+        </div>
 
         <TheFooter/>
     </section>
