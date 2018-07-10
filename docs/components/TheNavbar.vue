@@ -20,7 +20,8 @@
                 </router-link>
 
                 <a
-                    class="navbar-item has-text-dark"
+                    class="navbar-item"
+                    :class="{ 'has-text-dark': !light }"
                     href="https://github.com/buefy/buefy"
                     target="_blank"
                     title="Github">
@@ -28,7 +29,8 @@
                 </a>
 
                 <a
-                    class="navbar-item has-text-twitter"
+                    class="navbar-item"
+                    :class="{ 'has-text-twitter': !light }"
                     href="https://twitter.com/rafaelpimpa"
                     target="_blank"
                     title="Twitter">
@@ -36,7 +38,8 @@
                 </a>
 
                 <a
-                    class="navbar-item has-text-discord"
+                    class="navbar-item"
+                    :class="{ 'has-text-discord': !light }"
                     href="https://discordapp.com/invite/ZkdFJMr"
                     target="_blank"
                     title="Discord">
