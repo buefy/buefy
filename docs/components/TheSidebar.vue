@@ -1,39 +1,49 @@
 <template>
     <aside class="sidebar">
-        <template v-for="(items, i) in data">
-            <p class="sidebar-label" :key="items.category">
-                {{ items.category }}
-            </p>
-            <ul :key="i">
-                <li v-for="page in items.pages" :key="page.name">
-                    <router-link v-if="page.name" :to="page.path">
-                        <span class="sidebar-menu-text">{{ page.name }}</span>
-                        <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
-                    </router-link>
+        <div class="sidebar-menu">
+            <template v-for="(items, i) in data">
+                <p class="sidebar-label" :key="items.category">
+                    {{ items.category }}
+                </p>
+                <ul :key="i">
+                    <li v-for="page in items.pages" :key="page.name">
+                        <router-link v-if="page.name" :to="page.path">
+                            <span class="sidebar-menu-text">{{ page.name }}</span>
+                            <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                            <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
+                        </router-link>
 
-                    <!-- submenu -->
-                    <template v-else>
-                        <p>
-                            <span class="sidebar-menu-text">
-                                {{ page.category }}
-                            </span>
-                        </p>
-                        <ul>
-                            <li
-                                v-for="page in page.pages"
-                                :key="page.name">
-                                <router-link :to="page.path">
-                                    <span class="sidebar-menu-text">{{ page.name }}</span>
-                                    <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
-                                    <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
-                                </router-link>
-                            </li>
-                        </ul>
-                    </template>
-                </li>
-            </ul>
-        </template>
+                        <!-- submenu -->
+                        <template v-else>
+                            <p>
+                                <span class="sidebar-menu-text">
+                                    {{ page.category }}
+                                </span>
+                            </p>
+                            <ul>
+                                <li
+                                    v-for="page in page.pages"
+                                    :key="page.name">
+                                    <router-link :to="page.path">
+                                        <span class="sidebar-menu-text">{{ page.name }}</span>
+                                        <b-tag v-if="page.isNew" type="is-success">New!</b-tag>
+                                        <b-tag v-if="page.isUpdated" type="is-info">Updated</b-tag>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </template>
+                    </li>
+                </ul>
+            </template>
+        </div>
+
+        <a
+            class="sidebar-btt"
+            role="button"
+            @click="backToTop">
+            <b-icon icon="arrow-expand-up" size="is-small"/>
+            <span>Back to top</span>
+        </a>
     </aside>
 </template>
 
@@ -41,6 +51,14 @@
     export default {
         props: {
             data: Array
+        },
+        methods: {
+            backToTop() {
+                window.scroll({
+                    top: 0,
+                    behavior: 'smooth'
+                })
+            }
         }
     }
 </script>

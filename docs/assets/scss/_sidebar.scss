@@ -10,52 +10,69 @@
     }
 }
 .sidebar {
-    position: sticky;
-    top: 0;
-    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
+    align-items: center;
     width: 16rem;
-    padding: 3rem 1rem 3rem 0;
-    overflow: auto;
-    .sidebar-label {
-        margin-bottom: 0.5em;
-        color: $grey;
-        font-size: 0.9em;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-    }
-    ul {
-        margin-bottom: 1.5em;
-        margin-top: 0;
-        li {
-            margin-bottom: 0.25em;
-            font-weight: $weight-semibold;
-            li {
-                font-weight: $weight-normal;
-                font-size: 0.9rem;
-            }
+    padding: 3rem 1rem;
+    .sidebar-menu {
+        width: 100%;
+        .sidebar-label {
+            margin-bottom: 0.5em;
+            color: $grey;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
         ul {
-            margin-left: 1em;
-            margin-top: 0.25em;
-            margin-bottom: 0.5em;
-        }
-        a {
-            display: flex;
-            color: $text;
-            &.is-active {
-                color: $primary;
+            margin-bottom: 1.5em;
+            margin-top: 0;
+            li {
+                margin-bottom: 0.25em;
                 font-weight: $weight-semibold;
-                &:hover {
-                    text-decoration: underline;
+                li {
+                    font-weight: $weight-normal;
+                    font-size: 0.9rem;
                 }
             }
-            &:hover:not(.is-active) {
-                color: $link;
+            ul {
+                margin-left: 1em;
+                margin-top: 0.25em;
+                margin-bottom: 0.5em;
+            }
+            a {
+                display: flex;
+                color: $text;
+                &.is-active {
+                    color: $primary;
+                    font-weight: $weight-semibold;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                &:hover:not(.is-active) {
+                    color: $link;
+                }
+            }
+            .sidebar-menu-text {
+                flex: 1;
             }
         }
-        .sidebar-menu-text {
-            flex: 1;
+    }
+    .sidebar-btt {
+        position: sticky;
+        margin-top: 1.5rem;
+        top: calc(100vh - 3rem);
+        font-size: 0.8rem;
+        color: $text;
+        font-weight: $weight-bold;
+        .icon {
+            font-size: 18px;
+            margin-right: 0.25rem;
+        }
+        &:hover {
+            color: $link;
         }
     }
     @include touch {
