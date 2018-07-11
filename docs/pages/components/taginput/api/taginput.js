@@ -110,6 +110,13 @@ export default [
                 default: '<code>() => true</code>'
             },
             {
+                name: '<code>allow-duplicates</code>',
+                description: 'Allows adding the same tag multiple times',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',

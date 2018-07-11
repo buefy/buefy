@@ -120,6 +120,10 @@
             beforeAdding: {
                 type: Function,
                 default: () => true
+            },
+            allowDuplicates: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -219,8 +223,10 @@
                         }
                     }
 
-                    // Add the tag input if it is not blank or previously added.
-                    if (this.tags.indexOf(tagToAdd) === -1 && this.beforeAdding(tagToAdd)) {
+                    // Add the tag input if it is not blank
+                    // or previously added (if not allowDuplicates).
+                    const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
+                    if (add && this.beforeAdding(tagToAdd)) {
                         this.tags.push(tagToAdd)
                         this.$emit('input', this.tags)
                         this.$emit('add', tagToAdd)

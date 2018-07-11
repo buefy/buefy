@@ -4,8 +4,9 @@
 
 ### New features
 
-* Add ``auto-close`` and ``duration`` props to message
 * **Table improved**: can change columns dynamically
+* Add ``auto-close`` and ``duration`` props to message
+* Add ``allow-duplicates`` prop to taginput
 
 ### Fixes and changes
 
