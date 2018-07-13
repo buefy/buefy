@@ -14,8 +14,6 @@
                         <router-view/>
 
                         <template v-if="meta.githubPath">
-                            <hr>
-
                             <ImproveThis v-bind="meta"/>
                         </template>
                     </div>
@@ -33,7 +31,7 @@
     import TheFooter from '@/components/TheFooter'
     import TheSidebar from '@/components/TheSidebar'
     import ImproveThis from '@/components/ImproveThis'
-    import menu from '../menu'
+    import menuData from '@/data/menu'
 
     export default {
         components: {
@@ -43,19 +41,21 @@
             TheSidebar,
             ImproveThis
         },
-        computed: {
-            menu() {
-                return menu[this.meta.namespace || 'documentation']
+        data() {
+            return {
+                menu: [],
+                meta: {}
             }
         },
         methods: {
-            setMetas(meta) {
+            setMeta(meta) {
                 this.meta = meta
+                this.menu = menuData[this.meta.menu]
             }
         },
-        created() {
-            this.$eventHub.$on('meta', this.setMetas)
-            this.setMetas(this.$router.currentRoute.meta)
+        mounted() {
+            this.$eventHub.$on('navigate', this.setMeta)
+            this.setMeta(this.$router.currentRoute.meta)
         }
     }
 </script>
