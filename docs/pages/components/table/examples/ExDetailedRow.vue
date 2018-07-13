@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    const data = require('@/assets/data_test.json')
+    const data = require('@/data/sample.json')
 
     export default {
         data() {

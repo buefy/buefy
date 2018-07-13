@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import dataTest from '!!raw-loader!@/assets/data_test.json'
+    import dataTest from '!!raw-loader!@/data/sample.json'
 
     export default {
         props: {
@@ -69,8 +69,12 @@
                 html = html.replace(/src="static/g, 'src="https://buefy.github.io/static')
 
                 // FontAwesome
-                if (this.code.indexOf('pack="fa"') || this.code.indexOf('pack="fas"') ||
-                    this.code.indexOf('pack="far"') || this.code.indexOf('pack="fad"')) {
+                if (
+                    this.code.indexOf('pack="fa"') ||
+                    this.code.indexOf('pack="fas"') ||
+                    this.code.indexOf('pack="far"') ||
+                    this.code.indexOf('pack="fad"')
+                ) {
                     this.externalStyles.push('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
                 }
 
@@ -89,7 +93,7 @@
                     js = this.code.substring(start + 8, end)
                     js = js.replace('export default ', 'const example = ')
 
-                    js = js.replace('require(\'@/assets/data_test.json\')', dataTest)
+                    js = js.replace('require(\'@/data/sample.json\')', dataTest)
 
                     // Axios
                     if (this.code.indexOf('this.$http')) {

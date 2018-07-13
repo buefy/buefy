@@ -1,5 +1,5 @@
 <template>
-    <div class="hero has-text-centered">
+    <div class="hero docs-improve-this">
         <div class="hero-body">
             <p class="has-text-grey">
                 This page is <strong class="has-text-grey-dark">open source</strong>.

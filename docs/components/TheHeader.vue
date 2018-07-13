@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import routes from '../router/routes'
+    import routes from '@/data/routes'
 
     export default {
         props: {

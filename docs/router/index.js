@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import { beforeEachGlobal } from './guards'
-import routes from './routes'
+import { afterEachGlobal } from './guards'
+import routes from '@/data/routes'
 
 Vue.use(Router)
 
@@ -25,17 +25,15 @@ const router = new Router({
     routes: [
         route('/', 'Home'),
         {
-            path: '',
+            path: '/',
             component: Documentation,
             children: [
+                // Documentation
                 route('documentation', 'Documentation'),
-                // Installation
                 route('documentation/start', 'installation/Start'),
                 route('documentation/customization', 'installation/Customization'),
                 route('documentation/constructor-options', 'installation/ConstructorOptions'),
-                // Layout
                 route('documentation/layout', 'Layout'),
-                // Components
                 route('documentation/icon', 'components/icon/Icon'),
                 route('documentation/dropdown', 'components/dropdown/Dropdown'),
                 route('documentation/tooltip', 'components/tooltip/Tooltip'),
@@ -74,6 +72,6 @@ const router = new Router({
     ]
 })
 
-router.beforeEach(beforeEachGlobal)
+router.afterEach(afterEachGlobal)
 
 export default router

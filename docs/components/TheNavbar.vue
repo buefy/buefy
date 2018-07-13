@@ -114,7 +114,6 @@
 <script>
     import buefyPackage from '../../package'
     import bulmaPackage from 'bulma/package'
-    import menu from '../menu'
 
     export default {
         props: {
@@ -122,7 +121,6 @@
         },
         data() {
             return {
-                menu,
                 isMenuActive: false,
                 version: buefyPackage.version,
                 bulmaVersion: bulmaPackage.version
@@ -149,11 +147,8 @@
                     .toggle('is-clipped-touch', this.isMenuActive)
             }
         },
-        created() {
-            this.$eventHub.$on('close-menu', this.closeMenu)
-        },
-        beforeDestroy() {
-            this.$eventHub.$off('close-menu')
+        mounted() {
+            this.$eventHub.$on('navigate', this.closeMenu)
         }
     }
 </script>

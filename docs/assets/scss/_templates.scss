@@ -18,6 +18,12 @@
             border-bottom: 2px solid $white-ter;
         }
     }
+    .docs-improve-this {
+        text-align: center;
+        margin-top: 5em;
+        padding-top: 1.5rem;
+        border-top: 2px solid $white-ter;
+    }
     @include touch {
         .docs-template-horizontal {
             flex-direction: column;

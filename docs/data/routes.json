@@ -6,8 +6,10 @@
     },
     "documentation": {
         "title": "Documentation",
-        "subtitle": "Learn everything you need to start using Buefy ;)",
+        "subtitle": "Learn everything you need to start using Buefy",
         "path": "/documentation",
+        "githubPath": "pages/Documentation.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation"
@@ -17,349 +19,380 @@
         "title": "Start",
         "subtitle": "<strong>Three ways</strong> to install and use Buefy",
         "path": "/documentation/start",
+        "githubPath": "pages/installation/Start.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/start"
-        ],
-        "githubPath": "pages/installation/Start.vue"
+        ]
     },
     "documentation/customization": {
         "title": "Customization",
-        "subtitle": "If you're familiar with <a href=\"http://sass-lang.com\">Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps",
+        "subtitle": "If you're familiar with <a href='http://sass-lang.com' target='_blank'>Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps",
         "path": "/documentation/customization",
+        "githubPath": "pages/installation/Customization.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/customization"
-        ],
-        "githubPath": "pages/installation/Customization.vue"
+        ]
     },
     "documentation/constructor-options": {
         "title": "Constructor options",
         "subtitle": "These are global default options, which are set on Buefy initialization",
         "path": "/documentation/constructor-options",
+        "githubPath": "pages/installation/ConstructorOptions.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/constructor-options"
-        ],
-        "githubPath": "pages/installation/ConstructorOptions.vue"
+        ]
     },
     "documentation/layout": {
         "title": "Layout & elements",
         "subtitle": "Buefy has the entire Bulma's core <b>built in</b>. You can use any feature from Bulma, plus all the components Buefy offers",
         "path": "/documentation/layout",
+        "githubPath": "pages/Layout.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/layout"
-        ],
-        "githubPath": "pages/Layout.vue"
+        ]
     },
     "documentation/collapse": {
         "title": "Collapse",
         "subtitle": "Collapse is a easy way to toggle what you want",
         "path": "/documentation/collapse",
+        "githubPath": "pages/components/collapse/Collapse.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/collapse"
-        ],
-        "githubPath": "pages/components/collapse/Collapse.vue"
+        ]
     },
     "documentation/dialog": {
         "title": "Dialog",
         "subtitle": "Dialogs inform users about a specific task and may contain critical information or require decisions",
         "path": "/documentation/dialog",
+        "githubPath": "pages/components/dialog/Dialog.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/dialog"
-        ],
-        "githubPath": "pages/components/dialog/Dialog.vue"
+        ]
     },
     "documentation/dropdown": {
         "title": "Dropdown",
         "subtitle": "Dropdowns are very versatile, can used as a quick menu or even like a select for discoverable content",
         "path": "/documentation/dropdown",
+        "githubPath": "pages/components/dropdown/Dropdown.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "githubPath": "pages/components/dropdown/Dropdown.vue"
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
         "subtitle": "Icons take an important role of any application",
         "path": "/documentation/icon",
+        "githubPath": "pages/components/icon/Icon.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/icon"
-        ],
-        "githubPath": "pages/components/icon/Icon.vue"
+        ]
     },
     "documentation/tooltip": {
         "title": "Tooltip",
         "subtitle": "Display a brief helper text to your user",
         "path": "/documentation/tooltip",
+        "githubPath": "pages/components/tooltip/Tooltip.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/tooltip"
-        ],
-        "githubPath": "pages/components/tooltip/Tooltip.vue"
+        ]
     },
     "documentation/modal": {
         "title": "Modal",
         "subtitle": "Classic modal overlay to include any content you may need",
         "path": "/documentation/modal",
+        "githubPath": "pages/components/modal/Modal.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/modal"
-        ],
-        "githubPath": "pages/components/modal/Modal.vue"
+        ]
     },
     "documentation/tabs": {
         "title": "Tabs",
         "subtitle": "Responsive horizontal navigation tabs, switch between contents with ease",
         "path": "/documentation/tabs",
+        "githubPath": "pages/components/tabs/Tabs.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/tabs"
-        ],
-        "githubPath": "pages/components/tabs/Tabs.vue"
+        ]
     },
     "documentation/panel": {
         "title": "Panel",
         "subtitle": "A simple and collapsible panel",
         "path": "/documentation/panel",
+        "githubPath": "pages/components/panel/Panel.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/panel"
-        ],
-        "githubPath": "pages/components/panel/Panel.vue"
+        ]
     },
     "documentation/tag": {
         "title": "Tag",
         "subtitle": "Tag labels to insert anywhere",
         "path": "/documentation/tag",
+        "githubPath": "pages/components/tag/Tag.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/tag"
-        ],
-        "githubPath": "pages/components/tag/Tag.vue"
+        ]
     },
     "documentation/toast": {
         "title": "Toast",
         "subtitle": "Toasts are simple text messages to inform the user",
         "path": "/documentation/toast",
+        "githubPath": "pages/components/toast/Toast.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/toast"
-        ],
-        "githubPath": "pages/components/toast/Toast.vue"
+        ]
     },
     "documentation/snackbar": {
         "title": "Snackbar",
         "subtitle": "When a Dialog seems a bit overkill for the task, Snackbars are good candidates",
         "path": "/documentation/snackbar",
+        "githubPath": "pages/components/snackbar/Snackbar.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/snackbar"
-        ],
-        "githubPath": "pages/components/snackbar/Snackbar.vue"
+        ]
     },
     "documentation/notification": {
         "title": "Notification",
         "subtitle": "Bold notification blocks to alert your users of something",
         "path": "/documentation/notification",
+        "githubPath": "pages/components/notification/Notification.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/notification"
-        ],
-        "githubPath": "pages/components/notification/Notification.vue"
+        ]
     },
-    "documentation/documentation/message": {
+    "documentation/message": {
         "title": "Message",
         "subtitle": "Colored message blocks, to draw attention of your user",
         "path": "/documentation/message",
+        "githubPath": "pages/components/message/Message.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/message"
-        ],
-        "githubPath": "pages/components/message/Message.vue"
+        ]
     },
     "documentation/loading": {
         "title": "Loading",
         "subtitle": "A simple loading overlay",
         "path": "/documentation/loading",
+        "githubPath": "pages/components/loading/Loading.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/loading"
-        ],
-        "githubPath": "pages/components/loading/Loading.vue"
+        ]
     },
     "documentation/field": {
         "title": "Field",
         "subtitle": "Fields are used to add functionality to controls and to attach/group components and elements together",
         "path": "/documentation/field",
+        "githubPath": "pages/components/field/Field.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
-            "documentation/form-controls",
             "documentation/field"
-        ],
-        "githubPath": "pages/components/field/Field.vue"
+        ]
     },
     "documentation/input": {
         "title": "Input",
         "subtitle": "Get user Input. Use with <strong>Field</strong> to access all functionalities",
         "path": "/documentation/input",
+        "githubPath": "pages/components/input/Input.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/input"
-        ],
-        "githubPath": "pages/components/input/Input.vue"
+        ]
     },
     "documentation/select": {
         "title": "Select",
         "subtitle": "Select an item in a dropdown list. Use with <strong>Field</strong> to access all functionalities",
         "path": "/documentation/select",
+        "githubPath": "pages/components/select/Select.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/select"
-        ],
-        "githubPath": "pages/components/select/Select.vue"
+        ]
     },
     "documentation/autocomplete": {
         "title": "Autocomplete",
         "subtitle": "Extended input that provide suggestions while the user types. Use with <strong>Field</strong> to access all functionalities",
         "path": "/documentation/autocomplete",
+        "githubPath": "pages/components/autocomplete/Autocomplete.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/autocomplete"
-        ],
-        "githubPath": "pages/components/autocomplete/Autocomplete.vue"
+        ]
     },
     "documentation/checkbox": {
         "title": "Checkbox",
         "subtitle": "Select a single or grouped options",
         "path": "/documentation/checkbox",
+        "githubPath": "pages/components/checkbox/Checkbox.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/checkbox"
-        ],
-        "githubPath": "pages/components/checkbox/Checkbox.vue"
+        ]
     },
     "documentation/radio": {
         "title": "Radio",
         "subtitle": "Select an option from a set",
         "path": "/documentation/radio",
+        "githubPath": "pages/components/radio/Radio.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/radio"
-        ],
-        "githubPath": "pages/components/radio/Radio.vue"
+        ]
     },
     "documentation/switch": {
         "title": "Switch",
         "subtitle": "Switch between two opposing states",
         "path": "/documentation/switch",
+        "githubPath": "pages/components/switch/Switch.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/switch"
-        ],
-        "githubPath": "pages/components/switch/Switch.vue"
+        ]
     },
     "documentation/datepicker": {
         "title": "Datepicker",
         "subtitle": "An input with a simple dropdown/modal for selecting a date, uses native datepicker for mobile",
         "path": "/documentation/datepicker",
+        "githubPath": "pages/components/datepicker/Datepicker.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "githubPath": "pages/components/datepicker/Datepicker.vue"
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
         "subtitle": "An input with a simple dropdown/modal for selecting a time, uses native timepicker for mobile",
         "path": "/documentation/timepicker",
+        "githubPath": "pages/components/timepicker/Timepicker.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/timepicker"
-        ],
-        "githubPath": "pages/components/timepicker/Timepicker.vue"
+        ]
     },
     "documentation/taginput": {
         "title": "Taginput",
         "subtitle": "A simple tag input field that can have autocomplete functionality",
         "path": "/documentation/taginput",
+        "githubPath": "pages/components/taginput/Taginput.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/taginput"
-        ],
-        "githubPath": "pages/components/taginput/Taginput.vue"
+        ]
     },
     "documentation/upload": {
         "title": "Upload",
         "subtitle": "Upload one or more files",
         "path": "/documentation/upload",
+        "githubPath": "pages/components/upload/Upload.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/upload"
-        ],
-        "githubPath": "pages/components/upload/Upload.vue"
+        ]
     },
     "documentation/table": {
         "title": "Table",
         "subtitle": "Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong>",
         "path": "/documentation/table",
+        "githubPath": "pages/components/table/Table.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "githubPath": "pages/components/table/Table.vue"
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
         "subtitle": "A responsive and flexible pagination",
         "path": "/documentation/pagination",
+        "githubPath": "pages/components/pagination/Pagination.vue",
+        "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
             "documentation/pagination"
-        ],
-        "githubPath": "pages/components/pagination/Pagination.vue"
+        ]
     },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
         "path": "/extensions",
-        "namespace": "extensions",
+        "githubPath": "pages/Extensions.vue",
+        "menu": "extensions",
         "breadcrumb": [
             "/",
             "extensions"
@@ -369,33 +402,24 @@
         "title": "Cleavejs",
         "subtitle": "Format input text while you type — as a Vue directive",
         "path": "/extensions/cleavejs",
-        "namespace": "extensions",
+        "githubPath": "pages/extensions/cleavejs/Cleavejs.vue",
+        "menu": "extensions",
         "breadcrumb": [
             "/",
             "extensions",
             "extensions/cleavejs"
-        ],
-        "githubPath": "pages/extensions/cleavejs/Cleavejs.vue"
+        ]
     },
     "extensions/sortablejs": {
         "title": "Sortablejs",
         "subtitle": "Sort a table — as a Vue directive",
         "path": "/extensions/sortablejs",
-        "namespace": "extensions",
+        "githubPath": "pages/extensions/sortablejs/Sortablejs.vue",
+        "menu": "extensions",
         "breadcrumb": [
             "/",
             "extensions",
             "extensions/sortablejs"
-        ],
-        "githubPath": "pages/extensions/sortablejs/Sortablejs.vue"
-    },
-    "form-controls": {
-        "title": "Form controls",
-        "path": "/documentation/form-controls",
-        "breadcrumb": [
-            "/",
-            "documentation",
-            "form-controls"
         ]
     }
 }

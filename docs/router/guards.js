@@ -1,10 +1,7 @@
 import Vue from 'vue'
 
-export const beforeEachGlobal = (to, from, next) => {
+export const afterEachGlobal = (to, from) => {
     window.document.documentElement.scrollTop = 0
     window.document.title = `${to.meta.title} | Buefy`
-    Vue.prototype.$eventHub.$emit('close-menu')
-    Vue.prototype.$eventHub.$emit('meta', to.meta)
-
-    next()
+    Vue.prototype.$eventHub.$emit('navigate', to.meta)
 }
