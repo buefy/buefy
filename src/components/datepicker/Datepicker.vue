@@ -45,7 +45,7 @@
                                 icon="chevron-left"
                                 :pack="iconPack"
                                 both
-                                type="is-primary is-clickable"/>
+                                :type="color + ' is-clickable'"/>
                         </a>
                         <a
                             v-show="!isLastMonth && !disabled"
@@ -61,7 +61,7 @@
                                 icon="chevron-right"
                                 :pack="iconPack"
                                 both
-                                type="is-primary is-clickable"/>
+                                :type="color + ' is-clickable'"/>
                         </a>
                         <div class="pagination-list">
                             <b-field>
@@ -213,6 +213,10 @@
                         return 0
                     }
                 }
+            },
+            color: {
+                type: String,
+                default: 'is-primary'
             },
             inline: Boolean,
             minDate: Date,
