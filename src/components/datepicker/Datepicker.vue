@@ -241,7 +241,7 @@
                     } else {
                         const yyyyMMdd = date.getFullYear() +
                             '/' + (date.getMonth() + 1) +
-                            '/' + date.getDate()
+                            '/' + date.getDate() + 1
                         const d = new Date(yyyyMMdd)
                         return d.toLocaleDateString()
                     }
