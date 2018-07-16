@@ -81,9 +81,6 @@ module.exports = function(options) {
         compress: {
           warnings: false
         },
-        output: {
-          comments: false
-        },
         sourceMap: false
       })
     )
