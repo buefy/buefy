@@ -31,10 +31,7 @@ module.exports = function(options) {
     })
   } else {
     baseWebpackConfig.entry = {
-      [config.lib.filename]: [
-        './src/index.js',
-        './src/scss/buefy-build.scss'
-      ]
+      [config.lib.filename]: './src/index.js'
     }
   }
 
@@ -49,7 +46,12 @@ module.exports = function(options) {
     // devtool: config.lib.productionSourceMap ? '#source-map' : false,
     devtool: false,
     externals: {
-      vue: 'vue'
+      vue: {
+        commonjs: 'vue',
+        commonjs2: 'vue',
+        amd: 'vue',
+        root: 'Vue'
+      }
     },
     output: {
       path: config.lib.assetsRoot,

@@ -1,10 +1,12 @@
 
+import './scss/buefy-build.scss'
+
 import * as components from './components'
 
 import config, { setOptions } from './utils/config'
 import { use } from './utils/plugins'
 
-const Plugin = {
+const Buefy = {
     install(Vue, options = {}) {
         // Options
         setOptions(Object.assign(config, options))
@@ -15,6 +17,6 @@ const Plugin = {
     }
 }
 
-use(Plugin)
+use(Buefy)
 
-export default Plugin
+export default Buefy
