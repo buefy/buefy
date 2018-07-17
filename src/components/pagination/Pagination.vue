@@ -4,6 +4,7 @@
             role="button"
             href="#"
             class="pagination-previous"
+            aria-label="Previous Page"
             :disabled="!hasPrev"
             @click.prevent="prev" >
             <b-icon icon="chevron-left" both/>
@@ -12,6 +13,7 @@
             role="button"
             href="#"
             class="pagination-next"
+            aria-label="Next Page"
             :disabled="!hasNext"
             @click.prevent="next" >
             <b-icon icon="chevron-right" both/>

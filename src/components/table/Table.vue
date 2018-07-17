@@ -76,6 +76,7 @@
                                 <a
                                     v-if="hasDetailedVisible(row)"
                                     role="button"
+                                    aria-label="Details"
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
