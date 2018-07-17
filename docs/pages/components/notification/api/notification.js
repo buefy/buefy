@@ -26,6 +26,20 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>auto-close</code>',
+                description: `Hide notification after <code>duration</code>`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>duration</code>',
+                description: 'Visibility duration in miliseconds',
+                type: 'Number',
+                values: '—',
+                default: '<code>5000</code>'
+            },
+            {
                 name: '<code>has-icon</code>',
                 description: 'Adds an icon on the left side depending on the <code>type</code>',
                 type: 'Boolean',
