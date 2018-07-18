@@ -75,6 +75,18 @@
             hasCounter: {
                 type: Boolean,
                 default: true
+            },
+            stateIcon: {
+                type: Object,
+                required: false,
+                default: () => {
+                    return Object.assign({
+                        'is-success': 'check',
+                        'is-danger': 'alert-circle',
+                        'is-info': 'information',
+                        'is-warning': 'alert'
+                    }, config.defaultStatusTypeIcon)
+                }
             }
         },
         data() {
@@ -128,12 +140,7 @@
              * Icon name (MDI) based on the type.
              */
             statusTypeIcon() {
-                switch (this.statusType) {
-                    case 'is-success': return 'check'
-                    case 'is-danger': return 'alert-circle'
-                    case 'is-info': return 'information'
-                    case 'is-warning': return 'alert'
-                }
+                return this.stateIcon[this.statusType]
             },
 
             /**

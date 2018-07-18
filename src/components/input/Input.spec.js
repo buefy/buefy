@@ -2,6 +2,8 @@ import { shallow, mount } from '@vue/test-utils'
 import BInput from '@components/input'
 import BIcon from '@components/icon'
 
+import config, {setOptions} from '@utils/config'
+
 describe('BInput', () => {
     it('render correctly', () => {
         const wrapper = shallow(BInput)
@@ -162,5 +164,64 @@ describe('BInput', () => {
         expect(input.vm.statusTypeIcon).toBe('information')
         wrapper.setData({ newType: 'is-warning' })
         expect(input.vm.statusTypeIcon).toBe('alert')
+    })
+
+    it('show custom status icon by defaultStatusTypeIcon', () => {
+        setOptions(Object.assign(config, {
+            defaultStatusTypeIcon: {
+                'is-success': 'check-circle',
+                'is-danger': 'times-circle',
+                'is-info': 'info-circle'
+            }
+        }))
+        const parent = {
+            data: () => ({
+                newType: 'is-success',
+                _isField: true
+            }),
+            components: {BInput},
+            template: `<b-input/>`
+        }
+
+        const wrapper = mount(parent)
+        const input = wrapper.find(BInput)
+
+        expect(input.vm.statusTypeIcon).toBe('check-circle')
+        wrapper.setData({ newType: 'is-danger' })
+        expect(input.vm.statusTypeIcon).toBe('times-circle')
+        wrapper.setData({ newType: 'is-info' })
+        expect(input.vm.statusTypeIcon).toBe('info-circle')
+        wrapper.setData({ newType: 'is-warning' })
+        expect(input.vm.statusTypeIcon).toBe('alert')
+    })
+
+    it('show custom status icon when stateIcon is set', () => {
+        const stateIcon = {
+            'is-success': 'check-circle',
+            'is-danger': 'times-circle',
+            'is-info': 'info-circle',
+            'is-warning': 'exclamation-circle'
+        }
+
+        const parent = {
+            data: () => ({
+                newType: 'is-success',
+                _isField: true,
+                stateIcon
+            }),
+            components: {BInput},
+            template: `<b-input :stateIcon="stateIcon"/>`
+        }
+
+        const wrapper = mount(parent)
+        const input = wrapper.find(BInput)
+
+        expect(input.vm.statusTypeIcon).toBe('check-circle')
+        wrapper.setData({ newType: 'is-danger' })
+        expect(input.vm.statusTypeIcon).toBe('times-circle')
+        wrapper.setData({ newType: 'is-info' })
+        expect(input.vm.statusTypeIcon).toBe('info-circle')
+        wrapper.setData({ newType: 'is-warning' })
+        expect(input.vm.statusTypeIcon).toBe('exclamation-circle')
     })
 })

@@ -19,7 +19,8 @@ let config = {
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
-    defaultNoticeQueue: true
+    defaultNoticeQueue: true,
+    defaultStatusTypeIcon: {}
 }
 
 export default config
