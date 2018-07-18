@@ -60,6 +60,9 @@
                 throw new Error('You should wrap bTabItem on a bTabs')
             }
             this.$parent.tabItems.push(this)
+            if (this.$parent.tabItems.indexOf(this) === this.$parent.activeTab) {
+                this.isActive = true
+            }
         },
         beforeDestroy() {
             const index = this.$parent.tabItems.indexOf(this)
