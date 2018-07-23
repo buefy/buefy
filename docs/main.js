@@ -89,9 +89,15 @@ Vue.filter('pre', (text) => {
 })
 
 /* eslint-disable no-new */
-new Vue({
-    el: '#app',
+const root = new Vue({
     router,
     components: { App },
+    mounted() {
+        document.dispatchEvent(new Event('render-event'))
+    },
     template: '<App/>'
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+    root.$mount('#app')
 })

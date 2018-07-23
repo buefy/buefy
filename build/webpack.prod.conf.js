@@ -9,6 +9,15 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var PrerenderSPAPlugin = require('prerender-spa-plugin')
+var Renderer = PrerenderSPAPlugin.PuppeteerRenderer
+var routes = require('../docs/data/routes.json')
+
+// route paths
+var paths = []
+for (let key in routes) {
+    paths.push(routes[key].path)
+}
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -58,7 +67,9 @@ var webpackConfig = merge(baseWebpackConfig, {
         ? 'index.html'
         : config.build.index,
       template: 'index.html',
-      inject: true,
+      inject: process.env.NODE_ENV === 'testing'
+        ? true
+        : 'head',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -121,6 +132,17 @@ if (config.build.productionGzip) {
 if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+if (process.env.NODE_ENV !== 'test') {
+  webpackConfig.plugins.push(new PrerenderSPAPlugin({
+    staticDir: config.build.assetsRoot,
+    routes: paths,
+    renderer: new Renderer({
+      headless: false,
+      renderAfterDocumentEvent: 'render-event'
+    })
+  }))
 }
 
 module.exports = webpackConfig

@@ -90,6 +90,7 @@
     "optimize-js-plugin": "0.0.4",
     "ora": "1.2.0",
     "pre-commit": "1.2.2",
+    "prerender-spa-plugin": "3.2.1",
     "raw-loader": "0.5.1",
     "rimraf": "2.6.0",
     "sass-loader": "6.0.6",

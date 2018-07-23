@@ -19,7 +19,7 @@ function route(path, component) {
 const Documentation = () => import('@/templates/Documentation')
 
 const router = new Router({
-    mode: 'hash',
+    mode: 'history',
     linkActiveClass: 'is-active',
     base: __dirname,
     routes: [
