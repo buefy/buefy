@@ -15,6 +15,6 @@
     ],
     "theme_color": "#7957D5",
     "background_color": "#FFFFFF",
-    "start_url": "https://buefy.github.io",
+    "start_url": "/?utm_source=homescreen",
     "display": "standalone"
 }
