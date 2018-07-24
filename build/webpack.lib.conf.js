@@ -19,14 +19,14 @@ module.exports = function(options) {
   if (options.components) {
     var root = './src/components'
     baseWebpackConfig.entry = {
-      'components/index': `${root}/index.js`
+      'components/index': [`${root}/index`]
     }
     var files = fs.readdirSync(root)
     files.forEach(component => {
       if (fs.statSync(path.join(root, component)).isDirectory()) {
         var entryKey = `components/${component}/index`
-        var entryValue = `${root}/${component}/index.js`
-        baseWebpackConfig.entry[entryKey] = entryValue
+        var entryValue = `${root}/${component}/index`
+        baseWebpackConfig.entry[entryKey] = [entryValue]
       }
     })
   } else {
@@ -43,8 +43,6 @@ module.exports = function(options) {
         minimize: options.minimize
       })
     },
-    // devtool: config.lib.productionSourceMap ? '#source-map' : false,
-    devtool: false,
     externals: {
       vue: {
         commonjs: 'vue',
