@@ -87,6 +87,11 @@ module.exports = function(options) {
       })
     )
     webpackConfig.plugins.push(
+      new OptimizeJsPlugin({
+        sourceMap: false
+      })
+    )
+    webpackConfig.plugins.push(
       new webpack.optimize.OccurrenceOrderPlugin()
     )
     webpackConfig.plugins.push(
