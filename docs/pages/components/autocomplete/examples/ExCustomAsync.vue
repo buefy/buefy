@@ -49,7 +49,7 @@
             getAsyncData: debounce(function () {
                 if (!this.name.length) {
                     this.data = []
-                    return;
+                    return
                 }
                 this.isFetching = true
                 this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=${this.name}`)
