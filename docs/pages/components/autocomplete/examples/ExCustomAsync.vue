@@ -47,17 +47,22 @@
             // You have to install and import debounce to use it,
             // it's not mandatory though.
             getAsyncData: debounce(function () {
-                this.data = []
-                if (!this.name.length) return
+                if (!this.name.length) {
+                    this.data = []
+                    return;
+                }
                 this.isFetching = true
                 this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=${this.name}`)
                     .then(({ data }) => {
+                        this.data = []
                         data.results.forEach((item) => this.data.push(item))
-                        this.isFetching = false
                     })
                     .catch((error) => {
-                        this.isFetching = false
+                        this.data = []
                         throw error
+                    })
+                    .finally(() => {
+                        this.isFetching = false
                     })
             }, 500)
         }
