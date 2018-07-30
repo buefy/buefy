@@ -52,7 +52,7 @@
              * Close the Modal if canCancel.
              */
             cancel() {
-                if (!this.canCancel) return
+                if (!this.canCancel || !this.isActive) return
 
                 this.close()
             },
