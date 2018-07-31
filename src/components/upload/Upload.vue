@@ -71,7 +71,7 @@
              */
             value(value) {
                 this.newValue = value
-                if (this.newValue.length === 0) {
+                if (!this.newValue || this.newValue.length === 0) {
                     this.$refs.input.value = null
                 }
                 !this.isValid && !this.dragDrop && this.checkHtml5Validity()
