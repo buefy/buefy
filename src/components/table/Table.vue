@@ -148,7 +148,7 @@
             </table>
         </div>
 
-        <div v-if="checkable || paginated" class="level">
+        <div v-if="(checkable && hasBottomLeftSlot()) || paginated" class="level">
             <div class="level-left">
                 <slot name="bottom-left"/>
             </div>
@@ -634,6 +634,13 @@
                 if (tag !== 'th' && tag !== 'td') return false
 
                 return true
+            },
+
+            /**
+             * Check if bottom-left slot exists.
+             */
+            hasBottomLeftSlot() {
+                return typeof this.$slots['bottom-left'] !== 'undefined'
             },
 
             /**
