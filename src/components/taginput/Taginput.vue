@@ -65,13 +65,15 @@
 
 <script>
     import { getValueByPath } from '../../utils/helpers'
+    import Tag from '../tag/Tag'
     import Autocomplete from '../autocomplete/Autocomplete'
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
         name: 'BTaginput',
         components: {
-            [Autocomplete.name]: Autocomplete
+            [Autocomplete.name]: Autocomplete,
+            [Tag.name]: Tag
         },
         mixins: [FormElementMixin],
         inheritAttrs: false,
