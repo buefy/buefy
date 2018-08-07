@@ -10,6 +10,7 @@
             v-model="newValue"
             type="radio"
             :disabled="disabled"
+            :required="required"
             :name="name"
             :value="nativeValue">
         <span class="check" :class="type" />
@@ -25,6 +26,7 @@
             nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
             type: String,
             disabled: Boolean,
+            required: Boolean,
             name: String,
             size: String
         },

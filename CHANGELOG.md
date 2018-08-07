@@ -7,9 +7,11 @@
 * **Table improved**: can change columns dynamically
 * Add ``auto-close`` and ``duration`` props to message and notification
 * Add ``allow-duplicates`` prop to taginput
+* Add ``required`` prop to radio and checkbox
 
 ### Fixes and changes
 
+* #732 
 * #839 Fix ``icon-pack`` from icon to be reactive
 * #840 Fix loading position to tagInput (thanks @adrlen)
 * #852 Fix label class to field when horizontal

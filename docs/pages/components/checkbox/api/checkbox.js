@@ -38,6 +38,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>required</code>',
+                description: 'Same as native <code>required</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>name</code>',
                 description: 'Same as native <code>name</code>',
                 type: 'String',
