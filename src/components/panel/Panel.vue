@@ -25,8 +25,13 @@
 </template>
 
 <script>
+    import Icon from '../icon/Icon'
+
     export default {
         name: 'BPanel',
+        components: {
+            [Icon.name]: Icon
+        },
         props: {
             collapsible: {
                 type: Boolean,

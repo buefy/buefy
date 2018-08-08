@@ -1,3 +1,13 @@
 import Tooltip from './Tooltip'
 
-export default Tooltip
+import { use, registerComponent } from '../../utils/plugins'
+
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Tooltip)
+    }
+}
+
+use(Plugin)
+
+export default Plugin

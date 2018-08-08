@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Table</h1>
-        <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>To show a data table is very simple, you just need a <code>data</code> and a <code>columns</code> prop.</p>
         </Example>

@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Toast</h1>
-        <h2 class="subtitle">Toasts are simple text messages to inform the user</h2>
-        <hr>
-
         <div class="content">
             <p>They have a slightly transparency and are queued to not confuse the user.</p>
             <p><small><b>Note:</b> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>

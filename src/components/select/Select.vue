@@ -36,10 +36,14 @@
 </template>
 
 <script>
+    import Icon from '../icon/Icon'
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
         name: 'BSelect',
+        components: {
+            [Icon.name]: Icon
+        },
         mixins: [FormElementMixin],
         inheritAttrs: false,
         props: {

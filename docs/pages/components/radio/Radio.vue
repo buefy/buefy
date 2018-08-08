@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Radio</h1>
-        <h2 class="subtitle">Select an option from a set</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>

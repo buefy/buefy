@@ -1,9 +1,13 @@
 import Field from './Field'
-import FieldBody from './FieldBody'
 
-export default Field
+import { use, registerComponent } from '../../utils/plugins'
 
-export {
-    Field,
-    FieldBody
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Field)
+    }
 }
+
+use(Plugin)
+
+export default Plugin

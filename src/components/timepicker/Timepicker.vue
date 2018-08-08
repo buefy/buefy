@@ -104,11 +104,12 @@
     import { isMobile } from '../../utils/helpers'
     import config from '../../utils/config'
 
-    import { Dropdown, DropdownItem } from '../dropdown'
-    import Input from '../input'
-    import Field from '../field'
-    import Select from '../select'
-    import Icon from '../icon'
+    import Dropdown from '../dropdown/Dropdown'
+    import DropdownItem from '../dropdown/DropdownItem'
+    import Input from '../input/Input'
+    import Field from '../field/Field'
+    import Select from '../select/Select'
+    import Icon from '../icon/Icon'
 
     const AM = 'AM'
     const PM = 'PM'

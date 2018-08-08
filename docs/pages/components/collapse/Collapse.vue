@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Collapse</h1>
-        <h2 class="subtitle">Collapse is a easy way to toggle what you want</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExPanelTemplate" :code="ExPanelTemplateCode" title="Panel" vertical/>

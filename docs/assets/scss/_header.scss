@@ -1,0 +1,24 @@
+.docs-header {
+    border-bottom: 2px solid $white-ter;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    .breadcrumb {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        margin-bottom: 3rem !important;
+        ol, ul {
+            flex-wrap: nowrap;
+            li.is-active a {
+                pointer-events: all;
+                cursor: pointer;
+            }
+        }
+    }
+    .subtitle {
+        &,
+        strong {
+            color: $grey;
+        }
+    }
+}

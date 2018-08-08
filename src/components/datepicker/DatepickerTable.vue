@@ -29,12 +29,12 @@
 </template>
 
 <script>
-    import bDatepickerTableRow from './DatepickerTableRow'
+    import DatepickerTableRow from './DatepickerTableRow'
 
     export default {
         name: 'BDatepickerTable',
         components: {
-            bDatepickerTableRow
+            [DatepickerTableRow.name]: DatepickerTableRow
         },
         props: {
             value: Date,

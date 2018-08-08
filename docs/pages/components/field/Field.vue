@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Field</h1>
-        <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
-        <hr>
-
         <div class="content">
             <p>These components should be used as a <strong>direct child</strong> of Field:</p>
             <ul>
@@ -19,6 +15,7 @@
                 <li><code>.control</code> elements (html class)</li>
             </ul>
         </div>
+
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>

@@ -9,13 +9,17 @@ exports.assetsPath = function (_path) {
   return path.posix.join(assetsSubDirectory, _path)
 }
 
+exports.assetsLibPath = function (_path) {
+  return path.posix.join(config.lib.assetsSubDirectory, _path)
+}
+
 exports.cssLoaders = function (options) {
   options = options || {}
 
   var cssLoader = {
     loader: 'css-loader',
     options: {
-      minimize: process.env.NODE_ENV === 'production',
+      minimize: options.minimize,
       sourceMap: options.sourceMap
     }
   }
@@ -27,7 +31,8 @@ exports.cssLoaders = function (options) {
       loaders.push({
         loader: loader + '-loader',
         options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
+          sourceMap: options.sourceMap,
+          minimize: options.minimize
         })
       })
     }
@@ -47,7 +52,6 @@ exports.cssLoaders = function (options) {
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
-    postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),

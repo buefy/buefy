@@ -39,12 +39,12 @@
 </template>
 
 <script>
-    import FieldBody from './FieldBody.vue'
+    import FieldBody from './FieldBody'
 
     export default {
         name: 'BField',
         components: {
-            'b-field-body': FieldBody
+            [FieldBody.name]: FieldBody
         },
         props: {
             type: String,

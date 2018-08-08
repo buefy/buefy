@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
     import config from '../../utils/config'
     import FormElementMixin from '../../utils/FormElementMixin'
 

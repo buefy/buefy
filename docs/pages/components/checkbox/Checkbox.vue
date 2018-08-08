@@ -1,9 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Checkbox</h1>
-        <h2 class="subtitle">Select a single or grouped options</h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExArray" :code="ExArrayCode" title="Grouped (Array)" vertical>

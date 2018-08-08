@@ -1,22 +1,61 @@
 <template>
-    <DefaultTemplate v-bind="props"/>
+    <main>
+        <TheNavbar/>
+
+        <section class="documentation">
+            <div class="sidebar-bg"/>
+
+            <div class="container is-fullhd docs-template-horizontal">
+                <TheSidebar :data="menu"/>
+                <div class="docs-main">
+                    <div class="docs-main-container">
+                        <TheHeader v-bind="meta"/>
+
+                        <router-view/>
+
+                        <template v-if="meta.githubPath">
+                            <ImproveThis v-bind="meta"/>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <TheFooter/>
+    </main>
 </template>
 
 <script>
-    import DefaultTemplate from '@/components/DefaultTemplate'
+    import TheHeader from '@/components/TheHeader'
+    import TheNavbar from '@/components/TheNavbar'
+    import TheFooter from '@/components/TheFooter'
+    import TheSidebar from '@/components/TheSidebar'
+    import ImproveThis from '@/components/ImproveThis'
+    import menuData from '@/data/menu'
 
     export default {
         components: {
-            DefaultTemplate
+            TheHeader,
+            TheNavbar,
+            TheFooter,
+            TheSidebar,
+            ImproveThis
         },
         data() {
             return {
-                props: {
-                    title: 'Documentation',
-                    subtitle: 'Learn everything you need to start using Buefy ;)',
-                    namespace: 'documentation'
-                }
+                menu: [],
+                meta: {}
             }
+        },
+        methods: {
+            setMeta(meta) {
+                this.meta = meta
+                this.menu = menuData[this.meta.menu]
+            }
+        },
+        mounted() {
+            this.$eventHub.$on('navigate', this.setMeta)
+            this.setMeta(this.$router.currentRoute.meta)
         }
     }
 </script>

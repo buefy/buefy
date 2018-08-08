@@ -1,11 +1,5 @@
 <template>
     <div>
-        <h1 class="title is-spaced">Dropdown</h1>
-        <h2 class="subtitle">
-            Dropdowns are very versatile, can used as a quick menu or even like a select for discoverable content
-        </h2>
-        <hr>
-
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>
                 While it appear as a modal for tablet and smartphones,
