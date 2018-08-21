@@ -1,5 +1,5 @@
 import { shallow } from '@vue/test-utils'
-import BProgress from '@components/panel/Progress'
+import BProgress from '@components/progress/Progress'
 
 describe('BProgress', () => {
     it('is called', () => {
