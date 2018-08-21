@@ -8,6 +8,7 @@
 * Add ``auto-close`` and ``duration`` props to message and notification
 * Add ``allow-duplicates`` prop to taginput
 * Add ``required`` prop to radio and checkbox
+* #953 Add ``b-progress`` component
 
 ### Fixes and changes
 

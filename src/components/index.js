@@ -13,6 +13,7 @@ import Modal from './modal'
 import Notification from './notification'
 import Pagination from './pagination'
 import Panel from './panel'
+import Progress from './progress'
 import Radio from './radio'
 import Select from './select'
 import Snackbar from './snackbar'
@@ -42,6 +43,7 @@ export {
     Notification,
     Pagination,
     Panel,
+    Progress,
     Radio,
     Select,
     Snackbar,
