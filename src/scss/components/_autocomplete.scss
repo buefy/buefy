@@ -3,6 +3,7 @@
     .dropdown-menu {
         display: block;
         min-width: 100%;
+        max-width: 100%;
         &.is-opened-top {
             top: auto;
             bottom: 100%;
@@ -13,6 +14,9 @@
         max-height: 200px;
     }
     .dropdown-item {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         &.is-hovered {
             background: $dropdown-item-hover-background-color;
             color: $dropdown-item-hover-color;
