@@ -4,8 +4,8 @@ export default [
             {
                 name: '<code>value</code>',
                 description: 'Progress value. This value is automatically synced',
-                type: 'Number',
-                values: '0.0 - 1.0',
+                type: 'Number | String',
+                values: '<code>0.0</code> - <code>1.0</code>',
                 default: '<code>0.0</code>'
             },
             {
@@ -23,6 +23,13 @@ export default [
                 default: '<code>is-primary</code>'
             },
             {
+                name: '<code>showIcon</code>',
+                description: 'Show an icon?',
+                type: 'Boolean',
+                values:  '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>showText</code>',
                 description: 'Show a visible percentage text?',
                 type: 'Boolean',
@@ -35,6 +42,27 @@ export default [
                 type: 'Function',
                 values:  '<i>any Function returning a string</i>',
                 default: '<code>(v) => `${Math.floor(v * 100)} %`</code>'
+            },
+            {
+                name: '<code>iconChooser</code>',
+                description: 'Use your own method to use the icon you would like for the given value',
+                type: 'Function',
+                values:  '<i>any Function. Shall accept string. Must return string.</i>',
+                default: '<code>(v) => v >= \'1\' ? \'check\' : \'close\'</code>'
+            },
+            {
+                name: '<code>iconColorChooser</code>',
+                description: 'Use your own method to use a color for the icon you would like for the given value',
+                type: 'Function',
+                values:  '<i>any Function. Shall accept string. Must return string.</i>',
+                default: '<code>(v) => v >= \'1\' ? \'is-success\' : \'is-danger\'</code>'
+            },
+            {
+                name: '<code>colorChooser</code>',
+                description: 'Use your own method to use a color you would like for the given value. Only used if <code>type</code> is <code>null</code>',
+                type: 'Function',
+                values:  '<i>any Function. Shall accept string. Must return string.</i>',
+                default: '<code>(v) => v >= \'1\' ? \'is-success\' : \'is-danger\'</code>'
             }
         ]
     }

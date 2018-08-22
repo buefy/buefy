@@ -3,7 +3,7 @@
         <section>
             <b-field grouped>
                 <b-field label="Value">
-                    <b-input v-model="value" type="number" step="0.1"></b-input>
+                    <b-input v-model="value" type="number" step="0.1" max="1"></b-input>
                 </b-field>
                 <b-field label="Type">
                     <b-select placeholder="Select a type" v-model="type">
@@ -25,12 +25,15 @@
                         </option>
                     </b-select>
                 </b-field>
+                <b-field label="Show Icon">
+                    <b-checkbox v-model="showIcon"></b-checkbox>
+                </b-field>
                 <b-field label="Show Text">
                     <b-checkbox v-model="showText"></b-checkbox>
                 </b-field>
             </b-field>
             <b-field label="Progress" :addons="false">
-                <b-progress :value="value" :type="type" :size="size" :show-text="showText"></b-progress>
+                <b-progress :value="value" :type="type" :size="size" :show-text="showText" :show-icon="showIcon"></b-progress>
             </b-field>
         </section>
     </div>
@@ -45,6 +48,7 @@
                 value: 0.4,
                 type: 'is-primary',
                 size: null,
+                showIcon: true,
                 showText: true,
                 types: [null, 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger'],
                 sizes: [null, 'is-small', 'is-medium', 'is-large']

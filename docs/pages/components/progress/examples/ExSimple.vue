@@ -10,7 +10,7 @@
     export default {
         data() {
             return {
-                value: 0.4
+                value: '0.4'
             }
         }
     }
