@@ -2,7 +2,7 @@
     <div>
         <div class="tags has-addons">
             <span class="tag is-success">New!</span>
-            <span class="tag is-info">0.6.7</span>
+            <span class="tag is-info">0.6.8</span>
         </div>
 
         <Example :component="ExSimple" :code="ExSimpleCode"></Example>

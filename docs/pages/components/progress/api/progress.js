@@ -21,36 +21,20 @@ export default [
                 type: 'String',
                 values:  '<code>is-primary</code>, <code>is-link</code>, <code>is-info</code>, <code>is-success</code>, <code>is-warning</code>, <code>is-danger</code>',
                 default: '<code>is-primary</code>'
-            }
-        ],
-        slots: [
-            {
-                name: 'default',
-                description: '',
-                props: '—'
             },
             {
-                name: 'header',
-                description: '',
-                props: '—'
-            }
-        ],
-        events: [
-            {
-                name: '<code>open</code>',
-                description: 'Triggers when user opened',
-                parameters: '—'
+                name: '<code>showText</code>',
+                description: 'Show a visible percentage text?',
+                type: 'Boolean',
+                values:  '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
             },
             {
-                name: '<code>close</code>',
-                description: 'Triggers when user closed',
-                parameters: '—'
-            }
-        ],
-        methods: [
-            {
-                name: '<code>toggle</code>',
-                description: 'Toggle activation (if collapsible)'
+                name: '<code>valueFormatter</code>',
+                description: 'How the value shall be formatted to be displayed',
+                type: 'Function',
+                values:  '<i>any Function returning a string</i>',
+                default: '<code>(v) => `${Math.floor(v * 100)} %`</code>'
             }
         ]
     }

@@ -1,0 +1,12 @@
+// fixing vertical alignment only in b-progress fields
+.field.is-grouped.b-progress progress.progress {
+    margin-top: 0.25rem; // medium is equal to default
+
+    &.is-small {
+        margin-top: 0.5rem;
+    }
+
+    &.is-large {
+        margin-top: 0.1rem;
+    }
+}
