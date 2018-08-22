@@ -87,8 +87,15 @@ export declare const Dialog: {
     prompt: (params: PromptDialogConfig) => any;
 }
 
+declare type LoadingConfig = {
+    container?: any;
+    isFullPage?: boolean;
+    animation?: string;
+    canCancel?: boolean;
+    onCancel?: () => any;
+}
 export declare const LoadingProgrammatic: {
-    open: () => { close: () => any };
+    open: (params: LoadingConfig) => { close: () => any };
 }
 
 declare type ModalConfig = {
