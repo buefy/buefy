@@ -1,5 +1,8 @@
 <template>
-    <transition :name="transitionName">
+    <transition
+        :name="transitionName"
+        @before-enter="$parent.isTransitioning = true"
+        @after-enter="$parent.isTransitioning = false">
         <div v-show="isActive && visible" class="tab-item">
             <slot/>
         </div>
