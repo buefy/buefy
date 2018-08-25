@@ -8,6 +8,9 @@
 * Add ``auto-close`` and ``duration`` props to message and notification
 * Add ``allow-duplicates`` prop to taginput
 * Add ``required`` prop to radio and checkbox
+* Add ``b-menu`` component
+* Add ``b-submenu`` component
+* Add ``b-menuitem`` component
 
 ### Fixes and changes
 

@@ -387,6 +387,18 @@
             "documentation/pagination"
         ]
     },
+    "documentation/menu": {
+        "title": "Menu",
+        "subtitle": "Provide navigation menu for web pages",
+        "path": "/documentation/menu",
+        "githubPath": "pages/components/menu/Menu.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/menu"
+        ]
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",

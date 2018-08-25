@@ -46,6 +46,7 @@ const router = new Router({
                 route('documentation/toast', 'components/toast/Toast'),
                 route('documentation/snackbar', 'components/snackbar/Snackbar'),
                 route('documentation/notification', 'components/notification/Notification'),
+                route('documentation/menu', 'components/menu/Menu'),
                 route('documentation/message', 'components/message/Message'),
                 route('documentation/loading', 'components/loading/Loading'),
                 route('documentation/field', 'components/field/Field'),

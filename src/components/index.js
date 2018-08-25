@@ -9,6 +9,7 @@ import Icon from './icon'
 import Input from './input'
 import Loading from './loading'
 import Message from './message'
+import Menu from './menu'
 import Modal from './modal'
 import Notification from './notification'
 import Pagination from './pagination'
@@ -37,6 +38,7 @@ export {
     Icon,
     Input,
     Loading,
+    Menu,
     Message,
     Modal,
     Notification,

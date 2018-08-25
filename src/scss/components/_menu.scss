@@ -1,0 +1,42 @@
+.menu {
+    height: 100vh;
+    max-width: 300px;
+    box-shadow: 0 0 1px rgba(0,0,0,.15);
+
+    .divider {
+        height: 1px;
+        background-color: hsla(210,8%,1%,.13);
+    }
+
+    .submenu {
+        border-left: none;
+        margin: 0;
+        padding-left: 0;
+
+        li a {
+            padding-left: 40px;
+        }
+    }
+}
+
+.menu.is-dark {
+    background-color: $dark;
+    color: $white-ter;
+
+    .divider {
+        background-color: hsla(210,8%,100%,.16);
+    }
+
+    a {
+        color: $white-ter;
+    }
+
+    a:hover{
+        background-color: rgba(0,0,0,.075);
+    }
+
+    a.is-active{
+        color: $primary;
+        background-color: $dark;
+    }
+}
