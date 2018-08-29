@@ -40,6 +40,13 @@ export default [
                 default: '<code>5000</code>'
             },
             {
+                name: '<code>icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
+                default: '<code>mdi</code>'
+            },
+            {
                 name: '<code>has-icon</code>',
                 description: 'Adds an icon on the left side depending on the <code>type</code>',
                 type: 'Boolean',

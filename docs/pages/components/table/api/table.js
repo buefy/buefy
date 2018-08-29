@@ -197,8 +197,14 @@ export default [
                 type: 'Function (row: Object)',
                 values: '—',
                 default: 'true'
+            },
+            {
+                name: '<code>icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
+                default: '<code>mdi</code>'
             }
-
         ],
         slots: [
             {
