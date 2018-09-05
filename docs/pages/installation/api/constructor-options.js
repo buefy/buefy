@@ -155,6 +155,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultInputHasCounter</code>',
+                description: 'Default input <code>has-counter</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             }
         ]
     }

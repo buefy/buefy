@@ -74,7 +74,7 @@
             passwordReveal: Boolean,
             hasCounter: {
                 type: Boolean,
-                default: true
+                default: () => config.defaultInputHasCounter
             }
         },
         data() {
