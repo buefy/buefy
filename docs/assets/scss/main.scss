@@ -29,8 +29,8 @@
 @import "~highlight.js/styles/atelier-cave-light.css";
 
 // MDI
-$mdi-font-path: "~mdi/fonts";
-@import "~mdi/scss/materialdesignicons";
+$mdi-font-path: "~@mdi/font/fonts";
+@import "~@mdi/font/scss/materialdesignicons";
 
 // FontAwesome
 // $fa-font-path: "~font-awesome/fonts";
