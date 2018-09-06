@@ -163,7 +163,7 @@
         mixins: [FormElementMixin],
         inheritAttrs: false,
         props: {
-            value: Date,
+            value: [Date, String],
             dayNames: {
                 type: Array,
                 default: () => {
@@ -218,7 +218,7 @@
             inline: Boolean,
             minDate: Date,
             maxDate: Date,
-            focusedDate: Date,
+            focusedDate: [Date, String],
             placeholder: String,
             readonly: {
                 type: Boolean,
@@ -272,10 +272,11 @@
             }
         },
         data() {
-            const focusedDate = this.value || this.focusedDate || new Date()
+            let focusedDate = this.value || this.focusedDate || new Date()
+            focusedDate = typeof focusedDate === 'string' ? this.dateParser(focusedDate) : focusedDate
 
             return {
-                dateSelected: this.value,
+                dateSelected: focusedDate,
                 focusedDateData: {
                     month: focusedDate.getMonth(),
                     year: focusedDate.getFullYear()
@@ -329,7 +330,8 @@
             * Update internal focusedDateData
             */
             dateSelected(value) {
-                const currentDate = !value ? new Date() : value
+                const date = !value ? new Date() : value
+                const currentDate = typeof date === 'string' ? this.dateParser(date) : date
                 this.focusedDateData = {
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()
@@ -346,7 +348,7 @@
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                this.dateSelected = value
+                this.dateSelected = typeof value === 'string' ? this.dateParser(value) : value
 
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
