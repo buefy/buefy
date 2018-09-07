@@ -17,6 +17,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>indeterminate</code>',
+                description: 'Same as native <code>indeterminate</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>true-value</code>',
                 description: `Overrides the returned value when it's checked`,
                 type: 'Any',
