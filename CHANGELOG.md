@@ -8,6 +8,7 @@
 * Add ``auto-close`` and ``duration`` props to message and notification
 * Add ``allow-duplicates`` prop to taginput
 * Add ``required`` prop to radio and checkbox
+* Add ``defaultInputHasCounter`` constructor options
 
 ### Fixes and changes
 

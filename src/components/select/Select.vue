@@ -86,7 +86,7 @@
             /**
              * When selected:
              *   1. Emit input event to update the user v-model.
-             *   3. If it's invalid, validate again.
+             *   2. If it's invalid, validate again.
              */
             selected(value) {
                 this.$emit('input', value)

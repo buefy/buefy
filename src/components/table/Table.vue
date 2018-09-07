@@ -51,6 +51,7 @@
                                 <b-icon
                                     v-show="currentSortColumn === column"
                                     icon="arrow-up"
+                                    :icon-pack="iconPack"
                                     both
                                     size="is-small"
                                     :class="{ 'is-desc': !isAsc }"/>
@@ -79,6 +80,7 @@
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
+                                        :icon-pack="iconPack"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
                                 </a>
@@ -156,6 +158,7 @@
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
+                        :icon-pack="iconPack"
                         :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
@@ -178,6 +181,8 @@
     import TableMobileSort from './TableMobileSort'
     import TableColumn from './TableColumn'
 
+    import BaseElementMixin from '../../utils/BaseElementMixin'
+
     export default {
         name: 'BTable',
         components: {
@@ -187,6 +192,7 @@
             [TableMobileSort.name]: TableMobileSort,
             [TableColumn.name]: TableColumn
         },
+        mixins: [BaseElementMixin],
         props: {
             data: {
                 type: Array,
