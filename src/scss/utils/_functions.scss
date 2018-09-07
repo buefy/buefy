@@ -39,3 +39,11 @@
 
     @return svg-encode("#{$start}#{$content}#{$end}");
 }
+
+@function indeterminate($color) {
+    $start: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1">';
+    $content: '<rect style="fill:#{$color}" width="0.7" height="0.2" x=".15" y=".4"></rect>';
+    $end: '</svg>';
+
+    @return svg-encode("#{$start}#{$content}#{$end}");
+}
