@@ -45,7 +45,7 @@
     "bulma": "0.7.1"
   },
   "peerDependencies": {
-    "vue": "2.5.13"
+    "vue": "2.5.x"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free-webfonts": "1.0.3",
