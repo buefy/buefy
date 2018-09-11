@@ -1,14 +1,13 @@
-import config from './config'
+import BaseElementMixin from './BaseElementMixin'
 
 export default {
+    mixins: [BaseElementMixin],
     props: {
         size: String,
         expanded: Boolean,
         loading: Boolean,
         rounded: Boolean,
         icon: String,
-        iconPack: String,
-
         // Native options to use in HTML5 validation
         autocomplete: String,
         maxlength: [Number, String]
@@ -16,8 +15,7 @@ export default {
     data() {
         return {
             isValid: true,
-            isFocused: false,
-            newIconPack: this.iconPack || config.defaultIconPack
+            isFocused: false
         }
     },
     computed: {

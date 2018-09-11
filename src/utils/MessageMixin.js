@@ -1,6 +1,8 @@
 import Icon from '../components/icon/Icon'
+import BaseElementMixin from './BaseElementMixin'
 
 export default {
+    mixins: [BaseElementMixin],
     components: {
         [Icon.name]: Icon
     },

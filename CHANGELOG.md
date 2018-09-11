@@ -9,6 +9,7 @@
 * Add ``allow-duplicates`` prop to taginput
 * Add ``required`` prop to radio and checkbox
 * #953 Add ``b-progress`` component
+* Add ``defaultInputHasCounter`` constructor options
 
 ### Fixes and changes
 
@@ -17,6 +18,8 @@
 * #852 Fix label class to field when horizontal
 * #872 Fix datepicker default formatter
 * #895 Fix loading overlay when not in full page (thanks @adrlen)
+* #927 Fix autocomplete when option text is too long (thanks @8bu)
+* #948 Fix switch when multi line text (thanks @rhwilr)
 
 ## 0.6.6
 
