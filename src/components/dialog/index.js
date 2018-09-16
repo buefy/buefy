@@ -48,3 +48,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Dialog,
+    DialogProgrammatic
+}

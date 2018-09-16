@@ -39,3 +39,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Modal,
+    ModalProgrammatic
+}
