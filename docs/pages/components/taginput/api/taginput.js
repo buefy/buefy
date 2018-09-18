@@ -61,6 +61,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>closable</code>',
+                description: 'Add close/delete button to the tag',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>field</code>',
                 description: 'Property of the object (if <code>data</code> is array of objects) to use as display text',
                 type: 'String',

@@ -29,3 +29,7 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    ToastProgrammatic as Toast
+}

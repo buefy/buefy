@@ -29,3 +29,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Loading,
+    LoadingProgrammatic
+}

@@ -67,6 +67,7 @@
                 <b-message type="is-info">
                     To include individual styles, see <router-link to="/documentation/customization">Customization</router-link> section.
                 </b-message>
+                <CodeView title="Individual components as Vue plugins" :code="importingComponentsAsVuePlugins | pre" lang="javascript" expanded/>
                 <CodeView title="Individual components" :code="importingComponents | pre" lang="javascript" expanded/>
             </div>
         </div>
@@ -127,7 +128,7 @@
 
                 Vue.use(Buefy)
                 `,
-                importingComponents: `
+                importingComponentsAsVuePlugins: `
                 import Vue from 'vue'
                 import Table from 'buefy/dist/components/table'
                 import Input from 'buefy/dist/components/input'
@@ -135,6 +136,15 @@
 
                 Vue.use(Table)
                 Vue.use(Input)
+                `,
+                importingComponents: `
+                import Vue from 'vue'
+                import { Table } from 'buefy/dist/components/table'
+                import { Input } from 'buefy/dist/components/input'
+                import 'buefy/dist/buefy.css'
+
+                Vue.component('b-table', Table)
+                Vue.component('b-input', Input)
                 `,
                 importingSSR: `
                 import Vue from 'vue'
