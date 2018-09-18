@@ -1,5 +1,16 @@
 # Buefy Changelog
 
+## 0.7.0
+
+### New features
+
+* Add ``closable`` props to taginput (thanks @adrlen)
+
+### Fixes and changes
+
+* #992 Fix table header disappear with pagination
+* #999 Fix ``size`` prop to datepicker and timepicker
+
 ## 0.6.7
 
 ### New features
