@@ -32,7 +32,8 @@
                             v-model="hoursSelected"
                             @change.native="onHoursChange($event.target.value)"
                             :disabled="disabled"
-                            placeholder="00">
+                            placeholder="00"
+                            :size="size">
                             <option
                                 v-for="hour in hours"
                                 :value="hour.value"
@@ -45,7 +46,8 @@
                             v-model="minutesSelected"
                             @change.native="onMinutesChange($event.target.value)"
                             :disabled="disabled"
-                            placeholder="00">
+                            placeholder="00"
+                            :size="size">
                             <option
                                 v-for="minute in minutes"
                                 :value="minute.value"
@@ -58,7 +60,8 @@
                             v-model="meridienSelected"
                             @change.native="onMeridienChange($event.target.value)"
                             v-if="!isHourFormat24"
-                            :disabled="disabled">
+                            :disabled="disabled"
+                            :size="size">
                             <option
                                 v-for="meridien in meridiens"
                                 :value="meridien"

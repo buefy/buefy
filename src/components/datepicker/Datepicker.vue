@@ -30,7 +30,10 @@
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
                     </template>
-                    <div v-else class="pagination field is-centered">
+                    <div
+                        v-else
+                        class="pagination field is-centered"
+                        :class="size">
                         <a
                             v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
@@ -67,7 +70,8 @@
                             <b-field>
                                 <b-select
                                     v-model="focusedDateData.month"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="(month, index) in monthNames"
                                         :value="index"
@@ -77,7 +81,8 @@
                                 </b-select>
                                 <b-select
                                     v-model="focusedDateData.year"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="year in listOfYears"
                                         :value="year"
