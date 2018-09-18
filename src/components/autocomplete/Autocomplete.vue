@@ -33,6 +33,7 @@
                         <slot name="header"/>
                     </div>
                     <a
+                        v-show="isActive"
                         v-for="(option, index) in data"
                         :key="index"
                         class="dropdown-item"
