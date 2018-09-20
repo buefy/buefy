@@ -1,6 +1,6 @@
 <template>
     <div class="codeview">
-        <div class="codeview-title">{{ title }}</div>
+        <div v-if="title" class="codeview-title">{{ title }}</div>
         <figure class="highlight" :class="figureClasses">
             <div class="button-container">
                 <button class="button is-text is-small copy-code">Copy</button>
