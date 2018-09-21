@@ -50,6 +50,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    Dialog,
-    DialogProgrammatic
+    DialogProgrammatic as Dialog
 }
