@@ -6,6 +6,11 @@
 
         <Example :component="ExPromptDialog" :code="ExPromptDialogCode" title="Prompt"/>
 
+        <Example title="From outside Vue instance">
+            <p>You can use it on Vuex or VueRouter using this syntax:</p>
+            <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -31,7 +36,10 @@
                 ExConfirmDialog,
                 ExConfirmDialogCode,
                 ExPromptDialog,
-                ExPromptDialogCode
+                ExPromptDialogCode,
+                outsideVueInstance: `
+                import { Dialog } from 'buefy/dist/components/dialog'
+                Dialog.alert('We can use confirm and prompt methods as well')`
             }
         }
     }

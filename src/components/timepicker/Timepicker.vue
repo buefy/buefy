@@ -26,51 +26,47 @@
                 @blur="$emit('blur', $event) && checkHtml5Validity()"/>
 
             <b-dropdown-item :disabled="disabled" custom>
-                <div class="pagination-list">
-                    <b-field>
-                        <b-select
-                            v-model="hoursSelected"
-                            @change.native="onHoursChange($event.target.value)"
-                            :disabled="disabled"
-                            placeholder="00"
-                            :size="size">
-                            <option
-                                v-for="hour in hours"
-                                :value="hour.value"
-                                :key="hour.value"
-                                :disabled="isHourDisabled(hour.value)">
-                                {{ hour.label }}
-                            </option>
-                        </b-select>
-                        <b-select
-                            v-model="minutesSelected"
-                            @change.native="onMinutesChange($event.target.value)"
-                            :disabled="disabled"
-                            placeholder="00"
-                            :size="size">
-                            <option
-                                v-for="minute in minutes"
-                                :value="minute.value"
-                                :key="minute.value"
-                                :disabled="isMinuteDisabled(minute.value)">
-                                {{ minute.label }}
-                            </option>
-                        </b-select>
-                        <b-select
-                            v-model="meridienSelected"
-                            @change.native="onMeridienChange($event.target.value)"
-                            v-if="!isHourFormat24"
-                            :disabled="disabled"
-                            :size="size">
-                            <option
-                                v-for="meridien in meridiens"
-                                :value="meridien"
-                                :key="meridien">
-                                {{ meridien }}
-                            </option>
-                        </b-select>
-                    </b-field>
-                </div>
+                <b-field grouped position="is-centered">
+                    <b-select
+                        v-model="hoursSelected"
+                        @change.native="onHoursChange($event.target.value)"
+                        :disabled="disabled"
+                        placeholder="00">
+                        <option
+                            v-for="hour in hours"
+                            :value="hour.value"
+                            :key="hour.value"
+                            :disabled="isHourDisabled(hour.value)">
+                            {{ hour.label }}
+                        </option>
+                    </b-select>
+                    <span class="control is-colon">:</span>
+                    <b-select
+                        v-model="minutesSelected"
+                        @change.native="onMinutesChange($event.target.value)"
+                        :disabled="disabled"
+                        placeholder="00">
+                        <option
+                            v-for="minute in minutes"
+                            :value="minute.value"
+                            :key="minute.value"
+                            :disabled="isMinuteDisabled(minute.value)">
+                            {{ minute.label }}
+                        </option>
+                    </b-select>
+                    <b-select
+                        v-model="meridienSelected"
+                        @change.native="onMeridienChange($event.target.value)"
+                        v-if="!isHourFormat24"
+                        :disabled="disabled">
+                        <option
+                            v-for="meridien in meridiens"
+                            :value="meridien"
+                            :key="meridien">
+                            {{ meridien }}
+                        </option>
+                    </b-select>
+                </b-field>
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"

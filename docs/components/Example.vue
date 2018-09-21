@@ -5,7 +5,10 @@
             <slot/>
         </div>
 
-        <div class="example" :class="{ 'is-vertical': vertical }">
+        <div
+            v-if="code && component"
+            class="example"
+            :class="{ 'is-vertical': vertical }">
             <div class="button-container">
                 <CodepenEdit :code="code" :title="title"/>
             </div>

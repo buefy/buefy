@@ -3,17 +3,14 @@
         <div class="content">
             <p>They have a slightly transparency and are queued to not confuse the user.</p>
             <p><small><b>Note:</b> They queue with <router-link to="/documentation/snackbar">Snackbars</router-link> as well.</small></p>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.2</span>
-            </div>
-            <p>
-                You can disable queue by passing the <code>queue: false</code> object attribute or by using
-                <router-link to="/documentation/constructor-options">constructor options</router-link>.
-            </p>
         </div>
 
-        <Example :component="ExSimple" :code="ExSimpleCode"/>
+        <Example title="From inside Vue instance" :component="ExSimple" :code="ExSimpleCode"/>
+
+        <Example title="From outside Vue instance">
+            <p>You can use it on Vuex or VueRouter using this syntax:</p>
+            <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -30,7 +27,10 @@
             return {
                 api,
                 ExSimple,
-                ExSimpleCode
+                ExSimpleCode,
+                outsideVueInstance: `
+                import { Toast } from 'buefy/dist/components/toast'
+                Toast.open('Toasty!')`
             }
         }
     }

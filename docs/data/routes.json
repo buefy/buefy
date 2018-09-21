@@ -1,6 +1,7 @@
 {
     "/": {
         "title": "Buefy: lightweight UI components for Vue.js based on Bulma",
+        "subtitle": "Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.",
         "breadTitle": "Home",
         "path": "/"
     },

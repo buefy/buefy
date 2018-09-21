@@ -8,6 +8,15 @@
 
 ### Fixes and changes
 
+* **Breaking**: Change path to import components to use outside main vue instance, like:
+
+```javascript
+// see Toast, Snackbar, Modal and Dialog doc pages for more examples
+import { Toast } from 'buefy/dist/components/toast'
+Toast.open('Toasty!')
+```
+
+* Updated timepicker style (it's a little smaller now)
 * #992 Fix table header disappear with pagination
 * #999 Fix ``size`` prop to datepicker and timepicker
 
