@@ -19,6 +19,7 @@ Toast.open('Toasty!')
 ### Fixes and changes
 
 * Updated timepicker style (it's a little smaller now)
+* #970 Add Object type to ``type`` prop of field and icon
 * #992 Fix table header disappear with pagination
 * #999 Fix ``size`` prop to datepicker and timepicker
 

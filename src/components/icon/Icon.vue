@@ -10,7 +10,7 @@
     export default {
         name: 'BIcon',
         props: {
-            type: String,
+            type: [String, Object],
             pack: String,
             icon: String,
             size: String,
@@ -43,8 +43,18 @@
             newType() {
                 if (!this.type) return
 
-                const splitType = this.type.split('-')
-                if (!splitType.length) return
+                let splitType = null
+                if (typeof this.type === 'string') {
+                    splitType = this.type.split('-')
+                } else {
+                    for (let key in this.type) {
+                        if (this.type[key]) {
+                            splitType = key.split('-')
+                            break
+                        }
+                    }
+                }
+                if (splitType.length <= 1) return
 
                 return `has-text-${splitType[1]}`
             },

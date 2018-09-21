@@ -47,10 +47,10 @@
             [FieldBody.name]: FieldBody
         },
         props: {
-            type: String,
+            type: [String, Object],
             label: String,
             labelFor: String,
-            message: [String, Array],
+            message: [String, Array, Object],
             grouped: Boolean,
             groupMultiline: Boolean,
             position: String,
@@ -102,18 +102,24 @@
              * (each element is separated by <br> tag)
              */
             formattedMessage() {
-                if (this.newMessage) {
-                    if (Array.isArray(this.newMessage)) {
-                        return this.newMessage.filter((value) => {
-                            if (value) {
-                                return value
-                            }
-                        }).join(' <br> ')
-                    } else {
-                        return this.newMessage
-                    }
-                } else {
+                if (typeof this.newMessage === 'string') {
                     return this.newMessage
+                } else {
+                    let messages = []
+                    if (Array.isArray(this.newMessage)) {
+                        messages = this.newMessage
+                    } else {
+                        for (let key in this.newMessage) {
+                            if (this.newMessage[key]) {
+                                messages.push(key)
+                            }
+                        }
+                    }
+                    return messages.filter((value) => {
+                        if (value) {
+                            return value
+                        }
+                    }).join(' <br> ')
                 }
             }
         },
