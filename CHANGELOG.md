@@ -6,15 +6,17 @@
 
 * Add ``closable`` props to taginput (thanks @adrlen)
 
-### Fixes and changes
+### Breaking changes
 
-* **Breaking**: Change path to import components to use outside main vue instance, like:
-
+* Change path to import components to use outside main vue instance, like:
 ```javascript
 // see Toast, Snackbar, Modal and Dialog doc pages for more examples
 import { Toast } from 'buefy/dist/components/toast'
 Toast.open('Toasty!')
 ```
+* Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
+
+### Fixes and changes
 
 * Updated timepicker style (it's a little smaller now)
 * #992 Fix table header disappear with pagination

@@ -4,7 +4,7 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
-                type: 'Array<File>',
+                type: 'File, Array<File>',
                 values: '—',
                 default: '[]'
             },

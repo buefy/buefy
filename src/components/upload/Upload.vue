@@ -39,8 +39,7 @@
         inheritAttrs: false,
         props: {
             value: {
-                type: Array,
-                default: () => []
+                type: [File, Array]
             },
             multiple: Boolean,
             disabled: Boolean,
@@ -57,7 +56,7 @@
         },
         data() {
             return {
-                newValue: this.value || [],
+                newValue: this.value,
                 dragDropFocus: false,
                 _elementRef: 'input'
             }
@@ -71,7 +70,8 @@
              */
             value(value) {
                 this.newValue = value
-                if (!this.newValue || this.newValue.length === 0) {
+                if (!this.newValue ||
+                    (Array.isArray(this.newValue) && this.newValue.length === 0)) {
                     this.$refs.input.value = null
                 }
                 !this.isValid && !this.dragDrop && this.checkHtml5Validity()
@@ -92,24 +92,23 @@
                 if (value && value.length) {
                     if (!this.multiple) {
                         // only one element in case drag drop mode and isn't multiple
-                        if (this.dragDrop) {
-                            if (value.length === 1) {
-                                this.newValue = []
-                            } else {
-                                return false
+                        if (this.dragDrop && value.length !== 1) return false
+                        else {
+                            const file = value[0]
+                            if (this.checkType(file)) {
+                                this.newValue = file
                             }
-                        } else {
-                            this.newValue = []
                         }
                     } else {
-                        if (this.native) {
+                        // always new values if native or undefined local
+                        if (this.native || !this.newValue) {
                             this.newValue = []
                         }
-                    }
-                    for (let i = 0; i < value.length; i++) {
-                        const file = value[i]
-                        if (this.checkType(file)) {
-                            this.newValue.push(file)
+                        for (let i = 0; i < value.length; i++) {
+                            const file = value[i]
+                            if (this.checkType(file)) {
+                                this.newValue.push(file)
+                            }
                         }
                     }
                 }
