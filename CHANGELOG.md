@@ -1,5 +1,66 @@
 # Buefy Changelog
 
+## 0.7.0
+
+### New features
+
+* Add ``closable`` props to taginput (thanks @adrlen)
+
+### Breaking changes
+
+* Change path to import components to use outside main vue instance, like:
+```javascript
+// see Toast, Snackbar, Modal and Dialog doc pages for more examples
+import { Toast } from 'buefy/dist/components/toast'
+Toast.open('Toasty!')
+```
+* Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
+
+### Fixes and changes
+
+* Updated timepicker style (it's a little smaller now)
+* #970 Add Object type to ``type`` prop of field and icon
+* #992 Fix table header disappear with pagination
+* #999 Fix ``size`` prop to datepicker and timepicker
+
+## 0.6.7
+
+### New features
+
+* **Table improved**: can change columns dynamically
+* Add ``auto-close`` and ``duration`` props to message and notification
+* Add ``allow-duplicates`` prop to taginput
+* Add ``required`` prop to radio and checkbox
+* Add ``defaultInputHasCounter`` constructor options
+
+### Fixes and changes
+
+* #839 Fix ``icon-pack`` from icon to be reactive
+* #840 Fix loading position to tagInput (thanks @adrlen)
+* #852 Fix label class to field when horizontal
+* #872 Fix datepicker default formatter
+* #895 Fix loading overlay when not in full page (thanks @adrlen)
+* #927 Fix autocomplete when option text is too long (thanks @8bu)
+* #948 Fix switch when multi line text (thanks @rhwilr)
+
+## 0.6.6
+
+### New features
+
+* **Update Bulma to 0.7.1**
+* Add ``header`` slot to autocomplete
+* Add ``type`` prop to checkbox and radio
+* Add ``on-paste-separators`` and ``before-adding`` props to tagInput
+* #830 Add ``ellipsis`` prop to tagInput and tag components
+
+### Fixes and changes
+
+* #746 Fix default ``dateFormatter`` function to datepicker
+* #755 Fix arrow centered when table detail (thanks @wanxe)
+* #787 Fix type in horizontal field when message is empty
+* #814 Reset scroll to modal before destroy
+* #481 Fix tagInput height to match other inputs
+
 ## 0.6.5
 
 * Revert some changes on Checkbox, CheckboxButton, Radio, RadioButton, Select and Switch, working as before now

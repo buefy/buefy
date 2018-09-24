@@ -24,10 +24,16 @@
             <div
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
-                v-show="isActive && (data.length > 0 || hasEmptySlot)"
+                v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
                 <div class="dropdown-content">
+                    <div
+                        v-if="hasHeaderSlot"
+                        class="dropdown-item">
+                        <slot name="header"/>
+                    </div>
                     <a
+                        v-show="isActive"
                         v-for="(option, index) in data"
                         :key="index"
                         class="dropdown-item"
@@ -42,7 +48,7 @@
                         <span v-else v-html="getValue(option, true)"/>
                     </a>
                     <div
-                        v-if="data.length === 0"
+                        v-if="data.length === 0 && hasEmptySlot"
                         class="dropdown-item is-disabled">
                         <slot name="empty"/>
                     </div>
@@ -55,7 +61,7 @@
 <script>
     import { getValueByPath, escapeRegExpChars } from '../../utils/helpers'
     import FormElementMixin from '../../utils/FormElementMixin'
-    import Input from '../input'
+    import Input from '../input/Input'
 
     export default {
         name: 'BAutocomplete',
@@ -122,6 +128,13 @@
              */
             hasEmptySlot() {
                 return !!this.$slots.empty
+            },
+
+            /**
+             * Check if exists "header" slot
+             */
+            hasHeaderSlot() {
+                return !!this.$slots.header
             }
         },
         watch: {

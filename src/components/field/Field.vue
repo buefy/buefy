@@ -2,8 +2,8 @@
     <div class="field" :class="[rootClasses, fieldType()]">
         <div
             v-if="horizontal"
-            class="field-label is-normal"
-            :class="customClass">
+            class="field-label"
+            :class="[customClass, fieldLabelSize]">
             <label
                 v-if="label"
                 :for="labelFor"
@@ -39,18 +39,18 @@
 </template>
 
 <script>
-    import FieldBody from './FieldBody.vue'
+    import FieldBody from './FieldBody'
 
     export default {
         name: 'BField',
         components: {
-            'b-field-body': FieldBody
+            [FieldBody.name]: FieldBody
         },
         props: {
-            type: String,
+            type: [String, Object],
             label: String,
             labelFor: String,
-            message: [String, Array],
+            message: [String, Array, Object],
             grouped: Boolean,
             groupMultiline: Boolean,
             position: String,
@@ -66,6 +66,7 @@
             return {
                 newType: this.type,
                 newMessage: this.message,
+                fieldLabelSize: null,
                 _isField: true // Used internally by Input and Select
             }
         },
@@ -101,18 +102,24 @@
              * (each element is separated by <br> tag)
              */
             formattedMessage() {
-                if (this.newMessage) {
-                    if (Array.isArray(this.newMessage)) {
-                        return this.newMessage.filter((value) => {
-                            if (value) {
-                                return value
-                            }
-                        }).join(' <br> ')
-                    } else {
-                        return this.newMessage
-                    }
-                } else {
+                if (typeof this.newMessage === 'string') {
                     return this.newMessage
+                } else {
+                    let messages = []
+                    if (Array.isArray(this.newMessage)) {
+                        messages = this.newMessage
+                    } else {
+                        for (let key in this.newMessage) {
+                            if (this.newMessage[key]) {
+                                messages.push(key)
+                            }
+                        }
+                    }
+                    return messages.filter((value) => {
+                        if (value) {
+                            return value
+                        }
+                    }).join(' <br> ')
                 }
             }
         },
@@ -152,6 +159,15 @@
                     !this.horizontal
                 ) {
                     return 'has-addons'
+                }
+            }
+        },
+        mounted() {
+            if (this.horizontal) {
+                // Bulma docs: .is-normal for any .input or .button
+                const elements = this.$el.querySelectorAll('.input, .select, .button, .textarea')
+                if (elements.length > 0) {
+                    this.fieldLabelSize = 'is-normal'
                 }
             }
         }

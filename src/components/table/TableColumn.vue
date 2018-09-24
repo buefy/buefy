@@ -39,18 +39,33 @@
                 }
             }
         },
-        created() {
-            if (!this.$parent.$data._isTable) {
-                this.$destroy()
-                throw new Error('You should wrap bTableColumn on a bTable')
+        methods: {
+            addRefToTable() {
+                if (!this.$parent.$data._isTable) {
+                    this.$destroy()
+                    throw new Error('You should wrap bTableColumn on a bTable')
+                }
+
+                if (this.internal) return
+
+                // Since we're using scoped prop the columns gonna be multiplied,
+                // this finds when to stop based on the newKey property.
+                const repeated = this.$parent.columns.some(
+                    (column) => column.newKey === this.newKey)
+                !repeated && this.$parent.columns.push(this)
             }
-
-            if (this.internal) return
-
-            // Since we're using scoped prop the columns gonna be multiplied,
-            // this finds when to stop based on the newKey property.
-            const repeated = this.$parent.columns.some((column) => column.newKey === this.newKey)
-            !repeated && this.$parent.columns.push(this)
+        },
+        beforeMount() {
+            this.addRefToTable()
+        },
+        beforeUpdate() {
+            this.addRefToTable()
+        },
+        beforeDestroy() {
+            const index = this.$parent.columns.map((column) => column.newKey).indexOf(this.newKey)
+            if (index >= 0) {
+                this.$parent.columns.splice(index, 1)
+            }
         }
     }
 </script>

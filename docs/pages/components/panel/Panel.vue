@@ -1,13 +1,9 @@
 <template>
-    <div class="default-container">
+    <div>
         <b-message type="is-danger">
             This component has been <strong>deprecated</strong> and will be deleted soon.
             You should use the <router-link to="/documentation/collapse">new collapse component</router-link> instead.
         </b-message>
-
-        <h1 class="title is-spaced">Panel</h1>
-        <h2 class="subtitle">A simple and collapsible panel</h2>
-        <hr>
 
         <div class="example">
             <ex-simple/>

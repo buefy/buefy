@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Field</h1>
-        <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
-        <hr>
-
+    <div>
         <div class="content">
             <p>These components should be used as a <strong>direct child</strong> of Field:</p>
             <ul>
@@ -19,6 +15,7 @@
                 <li><code>.control</code> elements (html class)</li>
             </ul>
         </div>
+
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
@@ -63,7 +60,7 @@
             </div>
             <p>Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
             <b-message type="is-info">
-                <b>Note:</b> Each child element of a <code>&lt;b-field horizontal/&gt;</code> will be 
+                <b>Note:</b> Each child element of a <code>&lt;b-field horizontal/&gt;</code> will be
                 automatically wrapped inside a <code>Field</code> component.
             </b-message>
         </Example>

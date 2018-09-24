@@ -1,12 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Input</h1>
-        <h2 class="subtitle">
-            Get user Input.
-            Use with <strong><router-link to="/documentation/field">Field</router-link></strong> to access all functionalities
-        </h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExTypesStates" :code="ExTypesStatesCode" title="Types and states" vertical/>

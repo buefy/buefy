@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Tabs</h1>
-        <h2 class="subtitle">Responsive horizontal navigation tabs, switch between contents with ease</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode"/>
 
         <Example :component="ExPosition" :code="ExPositionCode" title="Position"/>

@@ -63,10 +63,11 @@
 </template>
 
 <script>
-    import Icon from '../icon'
-    import { Modal } from '../modal'
+    import Icon from '../icon/Icon'
+    import Modal from '../modal/Modal'
     import config from '../../utils/config'
     import { removeElement } from '../../utils/helpers'
+    import BaseElementMixin from '../../utils/BaseElementMixin'
 
     export default {
         name: 'BDialog',
@@ -74,11 +75,11 @@
             [Icon.name]: Icon
         },
         extends: Modal,
+        mixins: [BaseElementMixin],
         props: {
             title: String,
             message: String,
             icon: String,
-            iconPack: String,
             hasIcon: Boolean,
             type: {
                 type: String,

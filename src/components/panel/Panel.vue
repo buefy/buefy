@@ -10,7 +10,8 @@
                 class="is-pulled-right"
                 v-if="collapsible"
                 both
-                :icon="isOpen ? 'menu-up' : 'menu-down'"/>
+                :icon="isOpen ? 'menu-up' : 'menu-down'"
+                :icon-pack="iconPack" />
         </div>
         <transition :name="animation">
             <div
@@ -25,8 +26,15 @@
 </template>
 
 <script>
+    import Icon from '../icon/Icon'
+    import BaseElementMixin from '../../utils/BaseElementMixin'
+
     export default {
         name: 'BPanel',
+        components: {
+            [Icon.name]: Icon
+        },
+        mixins: [BaseElementMixin],
         props: {
             collapsible: {
                 type: Boolean,

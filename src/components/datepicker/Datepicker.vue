@@ -30,7 +30,10 @@
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
                     </template>
-                    <div v-else class="pagination field is-centered">
+                    <div
+                        v-else
+                        class="pagination field is-centered"
+                        :class="size">
                         <a
                             v-if="!isFirstMonth && !disabled"
                             class="pagination-previous"
@@ -67,7 +70,8 @@
                             <b-field>
                                 <b-select
                                     v-model="focusedDateData.month"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="(month, index) in monthNames"
                                         :value="index"
@@ -77,7 +81,8 @@
                                 </b-select>
                                 <b-select
                                     v-model="focusedDateData.year"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="year in listOfYears"
                                         :value="year"
@@ -141,11 +146,12 @@
     import { isMobile } from '../../utils/helpers'
     import config from '../../utils/config'
 
-    import { Dropdown, DropdownItem } from '../dropdown'
-    import Input from '../input'
-    import Field from '../field'
-    import Select from '../select'
-    import Icon from '../icon'
+    import Dropdown from '../dropdown/Dropdown'
+    import DropdownItem from '../dropdown/DropdownItem'
+    import Input from '../input/Input'
+    import Field from '../field/Field'
+    import Select from '../select/Select'
+    import Icon from '../icon/Icon'
     import DatepickerTable from './DatepickerTable'
 
     export default {
@@ -239,7 +245,11 @@
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        return date.toLocaleDateString()
+                        const yyyyMMdd = date.getFullYear() +
+                            '/' + (date.getMonth() + 1) +
+                            '/' + date.getDate()
+                        const d = new Date(yyyyMMdd)
+                        return d.toLocaleDateString()
                     }
                 }
             },
@@ -449,7 +459,7 @@
             */
             onChangeNativePicker(event) {
                 const date = event.target.value
-                this.dateSelected = date ? new Date(date) : null
+                this.dateSelected = date ? new Date(date.replace(/-/g, '/')) : null
             }
         }
     }

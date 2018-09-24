@@ -1,7 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Cleave.js </h1>
-        <h2 class="subtitle">Format input text while you type — as a Vue directive</h2>
+    <div>
         <div class="buttons">
             <a
                 class="button"

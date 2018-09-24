@@ -145,7 +145,7 @@ export default [
             },
             {
                 name: '<code>setSelected(selected: Any)</code>',
-                description: 'Select an option by array position (same type of <code>data</code> property)',
+                description: 'Select an option by an object (same type of <code>data</code> property)',
                 return: '—'
             }
         ]

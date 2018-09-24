@@ -10,18 +10,13 @@
     export default {
         name: 'BIcon',
         props: {
-            type: String,
+            type: [String, Object],
             pack: String,
             icon: String,
             size: String,
             customSize: String,
             customClass: String,
             both: Boolean // This is used internally to show both MDI and FA icon
-        },
-        data() {
-            return {
-                newPack: this.pack || config.defaultIconPack
-            }
         },
         computed: {
             /**
@@ -42,11 +37,24 @@
                     ? `${this.newPack}-${this.icon}`
                     : `fa-${this.getEquivalentIconOf(this.icon)}`
             },
+            newPack() {
+                return this.pack || config.defaultIconPack
+            },
             newType() {
                 if (!this.type) return
 
-                const splitType = this.type.split('-')
-                if (!splitType.length) return
+                let splitType = null
+                if (typeof this.type === 'string') {
+                    splitType = this.type.split('-')
+                } else {
+                    for (let key in this.type) {
+                        if (this.type[key]) {
+                            splitType = key.split('-')
+                            break
+                        }
+                    }
+                }
+                if (splitType.length <= 1) return
 
                 return `has-text-${splitType[1]}`
             },
@@ -57,15 +65,12 @@
                 const defaultSize = this.newPack === 'mdi'
                     ? 'mdi-24px'
                     : 'fa-lg'
-
                 const mediumSize = this.newPack === 'mdi'
                     ? 'mdi-36px'
                     : 'fa-2x'
-
                 const largeSize = this.newPack === 'mdi'
                     ? 'mdi-48px'
                     : 'fa-3x'
-
                 switch (this.size) {
                     case 'is-small': return
                     case 'is-medium': return mediumSize
@@ -93,7 +98,7 @@
                     case 'eye-off': return 'eye-slash'
                     case 'menu-down': return 'caret-down'
                     case 'menu-up': return 'caret-up'
-                    default: return null
+                    default: return value
                 }
             }
         }

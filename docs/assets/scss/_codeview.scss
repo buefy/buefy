@@ -1,5 +1,16 @@
 .codeview {
-    // background: $white-ter;
+    .codeview-title {
+        // background: lighten($primary, 10%);
+        background: $grey;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        line-height: 2;
+        min-height: 0.25rem;
+        color: $white;
+        font-size: $size-5;
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+    }
     .highlight {
         position: relative;
         text-align: left !important;

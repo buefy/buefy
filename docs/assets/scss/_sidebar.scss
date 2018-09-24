@@ -1,31 +1,83 @@
-.sidebar {
-    min-width: 16rem;
-    margin-right: 3rem;
-    position: sticky;
-    top: 1rem;
-    overflow: auto;
-    max-height: calc(100vh - 2rem);
-    .menu-list {
-        a {
-            @include unselectable;
-            display: flex;
-            position: relative;
-            padding-left: 1rem;
-            .chevron-icon {
-                position: absolute;
-                top: 12px;
-                left: 0;
-            }
-            .menu-text {
-                flex: 1 1 auto;
-            }
-        }
-        ul {
-            display: none;
-            &.is-active {
-                display: block;
-            }
-        }
+.sidebar-bg {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    left: 0;
+    top: 0;
+    background: $background;
+    @include touch {
+        display: none;
     }
 }
 
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 16rem;
+    padding: 3rem 1rem;
+    background: $background;
+    .sidebar-menu {
+        width: 100%;
+        .sidebar-label {
+            margin-bottom: 0.5em;
+            color: $grey;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        ul {
+            margin-bottom: 1.5em;
+            margin-top: 0;
+            li {
+                margin-bottom: 0.25em;
+                font-weight: $weight-semibold;
+                li {
+                    font-weight: $weight-normal;
+                    font-size: 0.9rem;
+                }
+            }
+            ul {
+                margin-left: 1em;
+                margin-top: 0.25em;
+                margin-bottom: 0.5em;
+            }
+            a {
+                display: flex;
+                color: $text;
+                &.is-active {
+                    color: $primary;
+                    font-weight: $weight-semibold;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                &:hover:not(.is-active) {
+                    color: $link;
+                }
+            }
+            .sidebar-menu-text {
+                flex: 1;
+            }
+        }
+    }
+    .sidebar-btt {
+        position: sticky;
+        margin-top: 1.5rem;
+        top: calc(100vh - 3rem);
+        font-size: 0.8rem;
+        color: $text;
+        font-weight: $weight-bold;
+        .icon {
+            font-size: 18px;
+            margin-right: 0.25rem;
+        }
+        &:hover {
+            color: $link;
+        }
+    }
+    @include touch {
+        width: 100%;
+        order: 2;
+    }
+}

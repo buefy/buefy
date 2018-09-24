@@ -1,13 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Customizing theme with Sass</h1>
-        <h2 class="subtitle">
-            If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <b>customize</b>
-            Buefy with your own theme, follow these steps
-        </h2>
-
-        <hr>
-
+    <div>
         <div class="media">
             <div class="media-left">
                 <h3 class="subtitle">1</h3>
@@ -55,7 +47,7 @@
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
                 <b-message type="is-warning">
-                    Please note that <code class="javascript">import 'buefy/lib/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
+                    Please note that <code class="javascript">import 'buefy/dist/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
                 </b-message>
                 <CodeView :code="importing | pre" lang="javascript" expanded/>
             </div>
@@ -111,13 +103,7 @@
                 import Vue from 'vue'
                 import Buefy from 'buefy'
 
-                Vue.use(Buefy)
-
-                // OR
-
-                Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                Vue.component(Buefy.Table.name, Buefy.Table)
-                Vue.component(Buefy.Switch.name, Buefy.Switch)`
+                Vue.use(Buefy)`
             }
         }
     }

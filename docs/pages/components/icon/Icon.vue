@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Icon</h1>
-        <h2 class="subtitle">Icons take an important role of any application</h2>
-        <hr>
-
+    <div>
         <p class="content">
             Buefy is compatible with both <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>
             , <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a>

@@ -12,8 +12,7 @@
                             <b-slot-component
                                 :component="tabItem"
                                 name="header"
-                                tag="span"
-                                event="updated" />
+                                tag="span" />
                         </template>
                         <template v-else>
                             <b-icon
@@ -34,7 +33,7 @@
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
     import SlotComponent from '../../utils/SlotComponent'
 
     export default {

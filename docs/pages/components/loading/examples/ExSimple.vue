@@ -10,7 +10,7 @@
         </b-field>
         <b-notification :closable="false">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :canCancel="true"></b-loading>
+            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
         </b-notification>
     </section>
 </template>
@@ -25,10 +25,9 @@
         },
         methods: {
             openLoading() {
-                const vm = this
-                vm.isLoading = true
+                this.isLoading = true
                 setTimeout(() => {
-                    vm.isLoading = false
+                    this.isLoading = false
                 }, 10 * 1000)
             }
         }

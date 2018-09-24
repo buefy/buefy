@@ -15,7 +15,7 @@ export default {
         },
         event: {
             type: String,
-            default: 'updated'
+            default: 'hook:updated'
         }
     },
     methods: {

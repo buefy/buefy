@@ -6,7 +6,10 @@
             class="pagination-previous"
             :disabled="!hasPrev"
             @click.prevent="prev" >
-            <b-icon icon="chevron-left" both/>
+            <b-icon
+                icon="chevron-left"
+                :icon-pack="iconPack"
+                both/>
         </a>
         <a
             role="button"
@@ -14,7 +17,10 @@
             class="pagination-next"
             :disabled="!hasNext"
             @click.prevent="next" >
-            <b-icon icon="chevron-right" both/>
+            <b-icon
+                icon="chevron-right"
+                :icon-pack="iconPack"
+                both/>
         </a>
         <ul class="pagination-list" v-if="!simple">
             <!--First-->
@@ -54,19 +60,26 @@
             </li>
         </ul>
         <small class="info" v-if="simple">
-            {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+            <template v-if="perPage == 1">
+                {{ firstItem }} / {{ total }}
+            </template>
+            <template v-else>
+                {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+            </template>
         </small>
     </div>
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
+    import BaseElementMixin from '../../utils/BaseElementMixin'
 
     export default {
         name: 'BPagination',
         components: {
             [Icon.name]: Icon
         },
+        mixins: [BaseElementMixin],
         props: {
             total: [Number, String],
             perPage: {

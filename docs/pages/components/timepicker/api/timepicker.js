@@ -59,7 +59,7 @@ export default [
             },
             {
                 name: '<code>inline</code>',
-                description: 'Datepicker is shown inline, input is removed',
+                description: 'Timepicker is shown inline, input is removed',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

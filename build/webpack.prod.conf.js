@@ -9,7 +9,15 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+var PrerenderSPAPlugin = require('prerender-spa-plugin')
+var Renderer = PrerenderSPAPlugin.PuppeteerRenderer
+var routes = require('../docs/data/routes.json')
+
+// route paths
+var paths = []
+for (let key in routes) {
+    paths.push(routes[key].path)
+}
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -19,7 +27,8 @@ var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
-      extract: true
+      extract: true,
+      minimize: true
     })
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
@@ -50,7 +59,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         safe: true
       }
     }),
-    // generate dist index.html with correct asset hash for caching.
+    // generate docs index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
@@ -58,7 +67,9 @@ var webpackConfig = merge(baseWebpackConfig, {
         ? 'index.html'
         : config.build.index,
       template: 'index.html',
-      inject: true,
+      inject: process.env.NODE_ENV === 'testing'
+        ? true
+        : 'head',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -67,9 +78,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency',
-      serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-        './service-worker-prod.js'), 'utf-8')}</script>`
+      chunksSortMode: 'dependency'
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
@@ -98,15 +107,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ]),
-    // service worker caching
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'my-vue-app',
-      filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      minify: true,
-      stripPrefix: 'dist/'
-    })
+    ])
   ]
 })
 
@@ -131,6 +132,17 @@ if (config.build.productionGzip) {
 if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+if (process.env.NODE_ENV !== 'test') {
+  webpackConfig.plugins.push(new PrerenderSPAPlugin({
+    staticDir: config.build.assetsRoot,
+    routes: paths,
+    renderer: new Renderer({
+      headless: false,
+      renderAfterDocumentEvent: 'render-event'
+    })
+  }))
 }
 
 module.exports = webpackConfig

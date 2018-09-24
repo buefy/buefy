@@ -17,6 +17,7 @@ $switch-active-background-color: $primary !default;
         + .check {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
             width: $switch-width;
             height: #{$switch-width / 2 + $switch-padding};
             padding: $switch-padding;

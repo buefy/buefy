@@ -7,12 +7,14 @@
 </template>
 
 <script>
+    import BaseElementMixin from '../../utils/BaseElementMixin'
+
     export default {
         name: 'BTabItem',
+        mixins: [BaseElementMixin],
         props: {
             label: String,
             icon: String,
-            iconPack: String,
             disabled: Boolean,
             visible: {
                 type: Boolean,
@@ -60,9 +62,6 @@
                 throw new Error('You should wrap bTabItem on a bTabs')
             }
             this.$parent.tabItems.push(this)
-        },
-        updated() {
-            this.$emit('updated')
         },
         beforeDestroy() {
             const index = this.$parent.tabItems.indexOf(this)

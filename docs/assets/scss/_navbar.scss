@@ -1,0 +1,37 @@
+.docs-navbar.navbar {
+    &.is-transparent {
+        box-shadow: 0 1px 0 rgba($white, 0.2);
+    }
+
+    .is-version {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-item {
+        img {
+            max-height: 2rem;
+        }
+    }
+
+    .has-dropdown > .navbar-link {
+        cursor: default;
+        @include unselectable;
+    }
+
+    .navbar-dropdown {
+        .navbar-item {
+            display: flex;
+            .navbar-item-text {
+                flex: 1;
+            }
+        }
+        .is-subitem {
+            text-transform: uppercase;
+            color: $grey;
+            &:not(:first-child) {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

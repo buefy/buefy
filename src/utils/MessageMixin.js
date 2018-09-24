@@ -1,6 +1,8 @@
-import Icon from '../components/icon'
+import Icon from '../components/icon/Icon'
+import BaseElementMixin from './BaseElementMixin'
 
 export default {
+    mixins: [BaseElementMixin],
     components: {
         [Icon.name]: Icon
     },
@@ -17,7 +19,15 @@ export default {
         type: String,
         hasIcon: Boolean,
         size: String,
-        iconSize: String
+        iconSize: String,
+        autoClose: {
+            type: Boolean,
+            default: false
+        },
+        duration: {
+            type: Number,
+            default: 5000
+        }
     },
     data() {
         return {
@@ -27,6 +37,15 @@ export default {
     watch: {
         active(value) {
             this.isActive = value
+        },
+        isActive(value) {
+            if (value) {
+                this.setAutoClose()
+            } else {
+                if (this.timer) {
+                    clearTimeout(this.timer)
+                }
+            }
         }
     },
     computed: {
@@ -56,6 +75,21 @@ export default {
             this.isActive = false
             this.$emit('close')
             this.$emit('update:active', false)
+        },
+        /**
+         * Set timer to auto close message
+         */
+        setAutoClose() {
+            if (this.autoClose) {
+                this.timer = setTimeout(() => {
+                    if (this.isActive) {
+                        this.close()
+                    }
+                }, this.duration)
+            }
         }
+    },
+    mounted() {
+        this.setAutoClose()
     }
 }

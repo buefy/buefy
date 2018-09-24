@@ -11,7 +11,11 @@ $checkbox-checkmark-color: $primary-invert !default;
             margin-left: 0.5em;
         }
         input[type=checkbox] {
-            display: none;
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            outline: none;
+            z-index: -1;
             + .check {
                 width: 1.25em;
                 height: 1.25em;
@@ -23,6 +27,14 @@ $checkbox-checkmark-color: $primary-invert !default;
             &:checked + .check {
                 background: $checkbox-active-background-color url(checkmark($checkbox-checkmark-color)) no-repeat center center;
                 border-color: $checkbox-active-background-color;
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    $color-invert: nth($pair, 2);
+                    &.is-#{$name} {
+                        background: $color url(checkmark($color-invert)) no-repeat center center;
+                        border-color: $color;
+                    }
+                }
             }
         }
         .control-label {
@@ -34,6 +46,12 @@ $checkbox-checkmark-color: $primary-invert !default;
         &:hover {
             input[type=checkbox] + .check {
                 border-color: $checkbox-active-background-color;
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name} {
+                        border-color: $color;
+                    }
+                }
             }
         }
         &:focus {
@@ -42,6 +60,12 @@ $checkbox-checkmark-color: $primary-invert !default;
             }
             input[type=checkbox]:checked + .check {
                 box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name} {
+                        box-shadow: 0 0 0.5em rgba($color, 0.8);
+                    }
+                }
             }
         }
         &.is-small {

@@ -36,10 +36,14 @@
 </template>
 
 <script>
+    import Icon from '../icon/Icon'
     import FormElementMixin from '../../utils/FormElementMixin'
 
     export default {
         name: 'BSelect',
+        components: {
+            [Icon.name]: Icon
+        },
         mixins: [FormElementMixin],
         inheritAttrs: false,
         props: {
@@ -82,7 +86,7 @@
             /**
              * When selected:
              *   1. Emit input event to update the user v-model.
-             *   3. If it's invalid, validate again.
+             *   2. If it's invalid, validate again.
              */
             selected(value) {
                 this.$emit('input', value)

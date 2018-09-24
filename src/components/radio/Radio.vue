@@ -10,9 +10,10 @@
             v-model="newValue"
             type="radio"
             :disabled="disabled"
+            :required="required"
             :name="name"
             :value="nativeValue">
-        <span class="check"/>
+        <span class="check" :class="type" />
         <span class="control-label"><slot/></span>
     </label>
 </template>
@@ -23,7 +24,9 @@
         props: {
             value: [String, Number, Boolean, Function, Object, Array, Symbol],
             nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+            type: String,
             disabled: Boolean,
+            required: Boolean,
             name: String,
             size: String
         },
