@@ -10,6 +10,9 @@ module.exports = {
         '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
         '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
     },
+    transformIgnorePatterns: [
+        '<rootDir>/node_modules/(?!mwangaben-vthelpers)'
+    ],
     moduleNameMapper: {
         '^@components/(.*)$': '<rootDir>/src/components/$1',
         '^@utils/(.*)$': '<rootDir>/src/utils/$1'
