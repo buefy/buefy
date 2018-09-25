@@ -15,6 +15,7 @@ import { Toast } from 'buefy/dist/components/toast'
 Toast.open('Toasty!')
 ```
 * Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
+* **Removed Panel component**, it was deprecated since 0.5.3
 
 ### Fixes and changes
 

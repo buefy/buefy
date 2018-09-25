@@ -12,7 +12,6 @@ import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
 import Pagination from './pagination'
-import Panel from './panel'
 import Radio from './radio'
 import Select from './select'
 import Snackbar from './snackbar'
@@ -41,7 +40,6 @@ export {
     Modal,
     Notification,
     Pagination,
-    Panel,
     Radio,
     Select,
     Snackbar,

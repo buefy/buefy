@@ -40,7 +40,6 @@ const router = new Router({
                 route('documentation/modal', 'components/modal/Modal'),
                 route('documentation/tabs', 'components/tabs/Tabs'),
                 route('documentation/collapse', 'components/collapse/Collapse'),
-                route('documentation/panel', 'components/panel/Panel'),
                 route('documentation/tag', 'components/tag/Tag'),
                 route('documentation/dialog', 'components/dialog/Dialog'),
                 route('documentation/toast', 'components/toast/Toast'),

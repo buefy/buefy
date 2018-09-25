@@ -148,18 +148,6 @@
             "documentation/tabs"
         ]
     },
-    "documentation/panel": {
-        "title": "Panel",
-        "subtitle": "A simple and collapsible panel",
-        "path": "/documentation/panel",
-        "githubPath": "pages/components/panel/Panel.vue",
-        "menu": "documentation",
-        "breadcrumb": [
-            "/",
-            "documentation",
-            "documentation/panel"
-        ]
-    },
     "documentation/tag": {
         "title": "Tag",
         "subtitle": "Tag labels to insert anywhere",
