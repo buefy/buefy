@@ -4,7 +4,7 @@ export default [
             {
                 name: '<code>type</code>',
                 description: 'Type (color) of the field and help message, also adds a matching icon, optional. Used by Input, Select and Autocomplete',
-                type: 'String',
+                type: 'String, Object',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                     <code>is-warning</code>, <code>is-danger</code>,
@@ -35,7 +35,7 @@ export default [
             {
                 name: '<code>message</code>',
                 description: 'Help message text',
-                type: 'String, Array<String>',
+                type: 'String, Array, Object',
                 values: '—',
                 default: '—'
             },
