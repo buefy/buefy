@@ -410,5 +410,17 @@
             "extensions",
             "extensions/sortablejs"
         ]
+    },
+    "extensions/veevalidate": {
+        "title": "VeeValidate",
+        "subtitle": "Validate input and show error messages",
+        "path": "/extensions/veevalidate",
+        "githubPath": "pages/extensions/veevalidate/VeeValidate.vue",
+        "menu": "extensions",
+        "breadcrumb": [
+            "/",
+            "extensions",
+            "extensions/veevalidate"
+        ]
     }
 }
