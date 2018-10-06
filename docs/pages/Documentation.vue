@@ -17,13 +17,13 @@
         </p>
 
         <blockquote>
-            This documentation assumes you know the basic of Vue.js, if you're not confortable yet with it,
+            This documentation assumes you know the basics of Vue.js, if you're not comfortable with it yet,
             it's probably not the best idea to learn from here as your first step — learn the basics then come back.
             <a href="https://vuejs.org/v2/guide" target="_blank">Vue.js</a> website is the best source for you to start with.
         </blockquote>
 
         <p>
-            Now that you know what Buefy is, get on next step and
+            Now that you know what Buefy is, get on to the next step and
             <router-link to="/documentation/start">install it</router-link>!
         </p>
     </article>
