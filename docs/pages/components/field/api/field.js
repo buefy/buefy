@@ -35,7 +35,7 @@ export default [
             {
                 name: '<code>message</code>',
                 description: 'Help message text',
-                type: 'String, Array, Object',
+                type: 'String, Object, Array<String>, Array<Object>',
                 values: '—',
                 default: '—'
             },
