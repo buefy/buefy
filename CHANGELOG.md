@@ -2,10 +2,6 @@
 
 ## 0.7.0
 
-### New features
-
-* Add ``closable`` props to taginput (thanks @adrlen)
-
 ### Breaking changes
 
 * Change path to import components to use outside main vue instance, like:
@@ -17,10 +13,14 @@ Toast.open('Toasty!')
 * Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
 * **Removed Panel component**, it was deprecated since 0.5.3
 
-### Fixes and changes
+### New features
+
+* Add ``closable`` props to taginput (thanks @adrlen)
+* #970 Add Object type to ``type`` prop of field and icon
+
+### Fixes
 
 * Updated timepicker style (it's a little smaller now)
-* #970 Add Object type to ``type`` prop of field and icon
 * #992 Fix table header disappear with pagination
 * #999 Fix ``size`` prop to datepicker and timepicker
 
