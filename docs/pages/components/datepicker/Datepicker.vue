@@ -21,10 +21,6 @@
         </Example>
 
         <Example :component="ExHeader" :code="ExHeaderCode" title="Header" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.4</span>
-            </div>
             <p>You can add your custom header to the datepicker.</p>
         </Example>
 
@@ -33,10 +29,6 @@
         </Example>
 
         <Example :component="ExEvents" :code="ExEventsCode" title="Events" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.2</span>
-            </div>
             <p>Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
         </Example>
 
