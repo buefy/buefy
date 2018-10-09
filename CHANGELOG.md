@@ -11,6 +11,7 @@ import { Toast } from 'buefy/dist/components/toast'
 Toast.open('Toasty!')
 ```
 * Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
+* Rename ``readonly`` to ``editable`` on datepicker and timepicker (now just use the prop without false value)
 * **Removed Panel component**, it was deprecated since 0.5.3
 
 ### New features

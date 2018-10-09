@@ -65,11 +65,11 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>readonly</code>',
-                description: 'Does not allow to type a time, set to <code>false</code> to enable input. <b>Note that you might have to set a custom time parser</b>',
+                name: '<code>editable</code>',
+                description: 'Enable input/typing. <b>Note that you might have to set a custom time parser</b>',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>loading</code>',

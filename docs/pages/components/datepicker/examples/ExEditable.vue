@@ -3,7 +3,7 @@
         <b-datepicker
             placeholder="Type or select a date..."
             icon="calendar-today"
-            :readonly="false">
+            editable>
         </b-datepicker>
     </b-field>
 </template>

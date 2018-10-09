@@ -19,7 +19,7 @@
                 :rounded="rounded"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="readonly"
+                :readonly="!editable"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"
@@ -225,14 +225,8 @@
             maxDate: Date,
             focusedDate: Date,
             placeholder: String,
-            readonly: {
-                type: Boolean,
-                default: true
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
+            editable: Boolean,
+            disabled: Boolean,
             unselectableDates: Array,
             unselectableDaysOfWeek: {
                 type: Array,

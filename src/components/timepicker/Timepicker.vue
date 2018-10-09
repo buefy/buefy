@@ -18,7 +18,7 @@
                 :icon-pack="iconPack"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="readonly"
+                :readonly="!editable"
                 :rounded="rounded"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
@@ -192,14 +192,8 @@
             minTime: Date,
             maxTime: Date,
             placeholder: String,
-            readonly: {
-                type: Boolean,
-                default: true
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
+            editable: Boolean,
+            disabled: Boolean,
             hourFormat: {
                 type: String,
                 default: HOUR_FORMAT_24,

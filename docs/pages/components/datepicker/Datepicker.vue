@@ -2,8 +2,8 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>
-            <p>Use <code>:readonly="false"</code> to let the user type a date.</p>
+        <Example :component="ExEditable" :code="ExEditableCode" title="Editable (non readonly)" vertical>
+            <p>Use <code>editable</code> prop to let the user type a date.</p>
             <b-message type="is-warning" has-icon>
                 Note that the default date parser is
                 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse" target="_blank">Date.parse()</a>
@@ -42,8 +42,8 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
-    import ExNonReadonly from './examples/ExNonReadonly'
-    import ExNonReadonlyCode from '!!raw-loader!./examples/ExNonReadonly'
+    import ExEditable from './examples/ExEditable'
+    import ExEditableCode from '!!raw-loader!./examples/ExEditable'
 
     import ExRange from './examples/ExRange'
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
@@ -66,8 +66,8 @@
                 api,
                 ExSimple,
                 ExSimpleCode,
-                ExNonReadonly,
-                ExNonReadonlyCode,
+                ExEditable,
+                ExEditableCode,
                 ExRange,
                 ExRangeCode,
                 ExFooter,
