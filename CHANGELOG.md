@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.7.1
+
+### Fixes
+
+* #1024 Fix upload SSR support
+* #1027 Fix ``icon-pack`` prop when individual components
+
 ## 0.7.0
 
 ### Breaking changes
