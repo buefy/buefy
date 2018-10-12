@@ -43,7 +43,7 @@
             [SlotComponent.name]: SlotComponent
         },
         props: {
-            value: [String, Number],
+            value: Number,
             expanded: Boolean,
             type: String,
             size: String,
