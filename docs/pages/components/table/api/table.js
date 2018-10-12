@@ -165,7 +165,7 @@ export default [
             },
             {
                 name: '<code>opened-detailed</code>',
-                description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (An unique key is required; check detail-key prop)',
+                description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop)',
                 type: 'Array',
                 values: '—',
                 default: '<code>[]</code>'
@@ -179,7 +179,7 @@ export default [
             },
             {
                 name: '<code>detail-key</code>',
-                description: 'Use an unique key of your data Object when use detailed or opened detailed. (id recommended)',
+                description: 'Use a unique key of your data Object when use detailed or opened detailed. (id recommended)',
                 type: 'String',
                 values: '—',
                 default: '—'
