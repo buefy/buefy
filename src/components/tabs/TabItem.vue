@@ -7,14 +7,12 @@
 </template>
 
 <script>
-    import BaseElementMixin from '../../utils/BaseElementMixin'
-
     export default {
         name: 'BTabItem',
-        mixins: [BaseElementMixin],
         props: {
             label: String,
             icon: String,
+            iconPack: String,
             disabled: Boolean,
             visible: {
                 type: Boolean,
