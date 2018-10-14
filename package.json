@@ -50,7 +50,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.3.1",
     "@mdi/font": "2.7.94",
-    "@vue/test-utils": "1.0.0-beta.15",
+    "@vue/test-utils": "^1.0.0-beta.25",
     "autoprefixer": "7.1.1",
     "axios": "0.16.2",
     "babel-core": "6.25.0",

@@ -1,22 +1,22 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BCollapse from '@components/collapse/Collapse'
 
 describe('BCollapse', () => {
     it('is called', () => {
-        const wrapper = shallow(BCollapse)
+        const wrapper = shallowMount(BCollapse)
         expect(wrapper.name()).toBe('BCollapse')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
     it('default props and vm', () => {
-        const wrapper = shallow(BCollapse)
+        const wrapper = shallowMount(BCollapse)
         expect(wrapper.props().open).toBe(true)
         expect(wrapper.props().animation).toBe('fade')
         expect(wrapper.vm.isOpen).toBe(true)
     })
 
     it('set default open prop', () => {
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: false
             }
@@ -26,7 +26,7 @@ describe('BCollapse', () => {
     })
 
     it('call toggle method', async () => {
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: false
             }
@@ -39,7 +39,7 @@ describe('BCollapse', () => {
     })
 
     it('emit a click event', () => {
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: false
             }
@@ -55,7 +55,7 @@ describe('BCollapse', () => {
     })
 
     it('update open prop', () => {
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: false
             }
@@ -68,7 +68,7 @@ describe('BCollapse', () => {
 
     it('should have trigger slot', () => {
         const triggerSlot = '<strong> Header </strong>'
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             slots: {
                 trigger: triggerSlot
             }
@@ -78,7 +78,7 @@ describe('BCollapse', () => {
 
     it('should have default slot', () => {
         const slotDefault = '<div> Content </div>'
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             slots: {
                 default: slotDefault
             }
@@ -87,7 +87,7 @@ describe('BCollapse', () => {
     })
 
     it('should emit open event', () => {
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: false
             }
@@ -99,7 +99,7 @@ describe('BCollapse', () => {
     })
 
     it('should emit close event', () => {
-        const wrapper = shallow(BCollapse, {
+        const wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: true
             }
