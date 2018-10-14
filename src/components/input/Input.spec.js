@@ -1,30 +1,30 @@
-import { shallow, mount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import BInput from '@components/input/Input'
 import BIcon from '@components/icon/Icon'
 
 describe('BInput', () => {
     it('render correctly', () => {
-        const wrapper = shallow(BInput)
+        const wrapper = shallowMount(BInput)
 
         expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('is vue instance', () => {
-        const wrapper = shallow(BInput)
+        const wrapper = shallowMount(BInput)
 
         expect(wrapper.name()).toBe('BInput')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
     it('renders input element by default', () => {
-        const wrapper = shallow(BInput)
+        const wrapper = shallowMount(BInput)
 
         expect(wrapper.contains('input')).toBeTruthy()
         expect(wrapper.classes()).toContain('control')
     })
 
     it('render textarea element when type is textarea', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: { type: 'textarea' }
         })
         const target = wrapper.find('textarea')
@@ -34,7 +34,7 @@ describe('BInput', () => {
     })
 
     it('displays the icon when the icon property is true', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: { icon: 'magnify' }
         })
         const target = wrapper.find(BIcon)
@@ -43,7 +43,7 @@ describe('BInput', () => {
     })
 
     it('display counter when the maxlength property is passed', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: { value: 'foo', maxlength: 100 }
         })
         const counter = wrapper.find('small.counter')
@@ -53,7 +53,7 @@ describe('BInput', () => {
     })
 
     it('no display counter when hasCounter property set for false', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: { maxlength: 100 }
         })
         expect(wrapper.find('small.counter').exists()).toBeTruthy()
@@ -63,7 +63,7 @@ describe('BInput', () => {
     })
 
     it('render field password when the type property is password', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: {
                 type: 'password',
                 passwordReveal: true
@@ -84,7 +84,7 @@ describe('BInput', () => {
             }
         })
 
-        wrapper.setData({ value: 'bar' })
+        wrapper.setProps({ value: 'bar' })
 
         expect(wrapper.find('input').exists()).toBeTruthy()
         expect(wrapper.find('input').attributes().type).toBe('password')
@@ -92,14 +92,14 @@ describe('BInput', () => {
         const visibilityIcon = wrapper.find('.icon.is-clickable')
         expect(visibilityIcon.exists()).toBeTruthy()
         visibilityIcon.trigger('click')
-        wrapper.setData({ passwordReveal: false })
+        wrapper.setProps({ passwordReveal: false })
         expect(wrapper.find('input').attributes().type).toBe('text')
 
         wrapper.vm.$nextTick(done)
     })
 
     it('render the placeholder and readonly attribute when passed', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             attrs: { placeholder: 'Awesome!', readonly: true }
         })
         const target = wrapper.find('input')
@@ -109,7 +109,7 @@ describe('BInput', () => {
     })
 
     it('expands input when expanded property is passed', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: { expanded: true }
         })
 
@@ -117,7 +117,7 @@ describe('BInput', () => {
     })
 
     it('display loading icon when loading property passed', () => {
-        const wrapper = shallow(BInput, {
+        const wrapper = shallowMount(BInput, {
             propsData: { loading: true, icon: 'magnify' }
         })
 
