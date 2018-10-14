@@ -180,7 +180,9 @@
         },
         beforeMount() {
             // Insert the Dialog component in body tag
-            document.body.appendChild(this.$el)
+            this.$nextTick(() => {
+                document.body.appendChild(this.$el)
+            })
         },
         mounted() {
             this.isActive = true
