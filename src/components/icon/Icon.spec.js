@@ -1,22 +1,22 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BIcon from '@components/icon/Icon'
 
 describe('BIcon', () => {
     it('render correctly', () => {
-        const wrapper = shallow(BIcon)
+        const wrapper = shallowMount(BIcon)
 
         expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('is vue instance', () => {
-        const wrapper = shallow(BIcon)
+        const wrapper = shallowMount(BIcon)
 
         expect(wrapper.name()).toBe('BIcon')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
     it('render icon when icon property is passed', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: { icon: 'eye' }
         })
 
@@ -25,7 +25,7 @@ describe('BIcon', () => {
     })
 
     it('render a colored icon when type is passed', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: {
                 icon: 'eye',
                 type: 'is-primary'
@@ -36,7 +36,7 @@ describe('BIcon', () => {
     })
 
     it('render icon package correctly when the pack property is is passed.', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: {
                 icon: 'eye',
                 pack: 'fa'
@@ -47,7 +47,7 @@ describe('BIcon', () => {
     })
 
     it('use both packages when the both property is is passed', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: {
                 icon: 'eye',
                 both: true
@@ -85,7 +85,7 @@ describe('BIcon', () => {
     })
 
     it('display size when size propery is passed', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: {
                 icon: 'eye'
             }
@@ -101,7 +101,7 @@ describe('BIcon', () => {
     })
 
     it('overrides icon font size when customSize property is passed', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: {
                 icon: 'eye',
                 pack: 'fa',
@@ -113,7 +113,7 @@ describe('BIcon', () => {
     })
 
     it('render custom classes when customClass property is passed', () => {
-        const wrapper = shallow(BIcon, {
+        const wrapper = shallowMount(BIcon, {
             propsData: {
                 icon: 'eye',
                 customClass: 'foo-bar'

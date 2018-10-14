@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BDatepickerTable from '@components/datepicker/DatepickerTable'
 
 import config, {setOptions} from '@utils/config'
@@ -15,7 +15,7 @@ describe('BDatepickerTable', () => {
     })
 
     it('is called', () => {
-        const wrapper = shallow(BDatepickerTable, {
+        const wrapper = shallowMount(BDatepickerTable, {
             propsData: {
                 dayNames: config.defaultMonthNames,
                 monthNames: config.defaultMonthNames,

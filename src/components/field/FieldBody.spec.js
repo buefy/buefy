@@ -1,9 +1,9 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BFieldBody from '@components/field/FieldBody'
 
 describe('BFieldBody', () => {
     it('is called', () => {
-        const wrapper = shallow(BFieldBody, {
+        const wrapper = shallowMount(BFieldBody, {
             slots: {
                 default: 'content'
             }
