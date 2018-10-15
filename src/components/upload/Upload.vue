@@ -32,6 +32,7 @@
 
 <script>
     import FormElementMixin from '../../utils/FormElementMixin'
+    import { File } from '../../utils/ssr'
 
     export default {
         name: 'BUpload',

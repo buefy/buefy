@@ -1,9 +1,9 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BDatepickerTableRow from '@components/datepicker/DatepickerTableRow'
 
 describe('BDatepickerTableRow', () => {
     it('is called', () => {
-        const wrapper = shallow(BDatepickerTableRow, {
+        const wrapper = shallowMount(BDatepickerTableRow, {
             propsData: {
                 week: [
                     new Date('Sun Dec 31 2017 00:00:00 GMT-0200 (-02)'),

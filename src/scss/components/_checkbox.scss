@@ -36,6 +36,18 @@ $checkbox-checkmark-color: $primary-invert !default;
                     }
                 }
             }
+            &:indeterminate + .check {
+                background: $checkbox-active-background-color url(indeterminate($checkbox-checkmark-color)) no-repeat center center;
+                border-color: $checkbox-active-background-color;
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    $color-invert: nth($pair, 2);
+                    &.is-#{$name} {
+                        background: $color url(indeterminate($color-invert)) no-repeat center center;
+                        border-color: $color;
+                    }
+                }
+            }
         }
         .control-label {
             padding-left: 0.5em;

@@ -107,7 +107,17 @@
                 } else {
                     let messages = []
                     if (Array.isArray(this.newMessage)) {
-                        messages = this.newMessage
+                        this.newMessage.forEach((message) => {
+                            if (typeof message === 'string') {
+                                messages.push(message)
+                            } else {
+                                for (let key in message) {
+                                    if (message[key]) {
+                                        messages.push(key)
+                                    }
+                                }
+                            }
+                        })
                     } else {
                         for (let key in this.newMessage) {
                             if (this.newMessage[key]) {
@@ -115,11 +125,7 @@
                             }
                         }
                     }
-                    return messages.filter((value) => {
-                        if (value) {
-                            return value
-                        }
-                    }).join(' <br> ')
+                    return messages.filter((m) => { if (m) return m }).join(' <br> ')
                 }
             }
         },

@@ -6,7 +6,7 @@ Vue.use(Buefy);
 
 const app = new Vue();
 
-const loader = app.$loading.open();
+const loader = app.$loading.open({});
 loader.close();
 
 app.$dialog.alert("Testing Buefy Typescript Typings");

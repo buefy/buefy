@@ -4,7 +4,7 @@ import './scss/buefy-build.scss'
 import * as components from './components'
 
 import config, { setOptions } from './utils/config'
-import { use } from './utils/plugins'
+import { use, registerComponentProgrammatic } from './utils/plugins'
 
 const Buefy = {
     install(Vue, options = {}) {
@@ -14,6 +14,13 @@ const Buefy = {
         for (let componentKey in components) {
             Vue.use(components[componentKey])
         }
+        // Config component
+        const BuefyProgrammatic = {
+            setOptions(options) {
+                setOptions(Object.assign(config, options))
+            }
+        }
+        registerComponentProgrammatic(Vue, '$buefy', BuefyProgrammatic)
     }
 }
 

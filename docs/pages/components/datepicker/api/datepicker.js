@@ -73,10 +73,10 @@ export default [
             },
             {
                 name: '<code>readonly</code>',
-                description: 'Does not allow to type a date, set to <code>false</code> to enable input. <b>Note that you might have to set a custom date parser</b>',
+                description: 'Enable input/typing. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>loading</code>',

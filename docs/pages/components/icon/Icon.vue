@@ -14,6 +14,14 @@
         </b-message>
         <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
 
+        <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.0</span>
+            </div>
+            <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -27,14 +35,19 @@
     import ExFa from './examples/ExFa'
     import ExFaCode from '!!raw-loader!./examples/ExFa'
 
+    import ExObjectSyntax from './examples/ExObjectSyntax'
+    import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
+
     export default {
         data() {
             return {
                 api,
                 ExMdi,
                 ExFa,
+                ExObjectSyntax,
                 ExMdiCode,
-                ExFaCode
+                ExFaCode,
+                ExObjectSyntaxCode
             }
         }
     }

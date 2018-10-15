@@ -59,6 +59,12 @@
             ]
         },
         {
+            "category": "Validation",
+            "pages": [
+                "extensions/veevalidate"
+            ]
+        },
+        {
             "category": "Drag & drop",
             "pages": [
                 "extensions/sortablejs"
