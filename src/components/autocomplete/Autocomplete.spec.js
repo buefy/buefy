@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import Helpers from 'mwangaben-vthelpers'
 import BAutocomplete from '@components/autocomplete/Autocomplete'
 
 const findStringsStartingWith = (array, value) =>
@@ -20,15 +19,14 @@ const DATA_LIST = [
     'Vue.js'
 ]
 const dropdownMenu = '.dropdown-menu'
-let wrapper, b, $input, $dropdown
+let wrapper, $input, $dropdown
 
 describe('BAutocomplete', () => {
     beforeEach(() => {
         wrapper = mount(BAutocomplete)
-        b = new Helpers(wrapper, expect)
 
-        $input = b.find('input')
-        $dropdown = b.find(dropdownMenu)
+        $input = wrapper.find('input')
+        $dropdown = wrapper.find(dropdownMenu)
     })
 
     it('is called', () => {
@@ -37,12 +35,12 @@ describe('BAutocomplete', () => {
     })
 
     it('has an input type', () => {
-        b.domHas('.control .input[type=text]')
+        expect(wrapper.contains('.control .input[type=text]')).toBeTruthy()
     })
 
     it('has a dropdown menu hidden by default', () => {
-        b.domHas(dropdownMenu)
-        b.hidden(dropdownMenu)
+        expect(wrapper.contains(dropdownMenu)).toBeTruthy()
+        expect($dropdown.isVisible()).toBeFalsy()
     })
 
     it('can emit input, focus and blur events', async () => {
@@ -50,15 +48,16 @@ describe('BAutocomplete', () => {
         wrapper.setProps({ data: DATA_LIST })
 
         $input.trigger('focus')
-        b.emitted('focus')
-        b.type(VALUE_TYPED, 'input')
+        expect(wrapper.emitted()['focus']).toBeTruthy()
+        $input.setValue(VALUE_TYPED)
 
         await wrapper.vm.$nextTick()
 
-        b.emittedContains('input', VALUE_TYPED)
+        const valueEmitted = wrapper.emitted()['input'][0]
+        expect(valueEmitted).toContainEqual(VALUE_TYPED)
 
         $input.trigger('blur')
-        b.emitted('blur')
+        expect(wrapper.emitted()['blur']).toBeTruthy()
     })
 
     it('can autocomplete with keydown', async () => {
@@ -66,12 +65,12 @@ describe('BAutocomplete', () => {
         wrapper.setProps({ data: DATA_LIST })
 
         $input.trigger('focus')
-        b.type(VALUE_TYPED, 'input')
+        $input.setValue(VALUE_TYPED)
         await wrapper.vm.$nextTick()
 
         expect($dropdown.isVisible()).toBeTruthy()
 
-        b.domHas('b')
+        expect(wrapper.contains('b')).toBeTruthy()
 
         const wordsInBold = wrapper.findAll('b')
         const itemsInDropdowm = findStringsStartingWith(DATA_LIST, VALUE_TYPED)
@@ -81,8 +80,8 @@ describe('BAutocomplete', () => {
         $input.trigger('keydown.enter')
         await wrapper.vm.$nextTick()
 
-        b.inputValueIs(itemsInDropdowm[0], 'input')
-        b.hidden(dropdownMenu)
+        expect($input.element.value).toBe(itemsInDropdowm[0])
+        expect($dropdown.isVisible()).toBeFalsy()
     })
 
     it('check validity when value change', () => {
@@ -103,7 +102,7 @@ describe('BAutocomplete', () => {
 
         $input.trigger('keyup.esc')
 
-        b.hidden(dropdownMenu)
+        expect($dropdown.isVisible()).toBeFalsy()
     })
 
     it('close dropdown on click outside', () => {
@@ -114,13 +113,13 @@ describe('BAutocomplete', () => {
 
         window.document.body.click()
 
-        b.hidden(dropdownMenu)
+        expect($dropdown.isVisible()).toBeFalsy()
     })
 
     it('open dropdown on down key click', () => {
         wrapper.setProps({ data: DATA_LIST })
 
-        b.hidden(dropdownMenu)
+        expect($dropdown.isVisible()).toBeFalsy()
 
         $input.trigger('focus')
         $input.trigger('keydown.down')
@@ -135,7 +134,7 @@ describe('BAutocomplete', () => {
             keepFirst: true
         })
 
-        b.hidden(dropdownMenu)
+        expect($dropdown.isVisible()).toBeFalsy()
 
         $input.trigger('focus')
         await wrapper.vm.$nextTick()

@@ -1,13 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
-import Helpers from 'mwangaben-vthelpers'
 import BCheckbox from '@components/checkbox/Checkbox'
 
-let wrapper, b
+let wrapper
 
 describe('BCheckbox', () => {
     beforeEach(() => {
         wrapper = shallowMount(BCheckbox)
-        b = new Helpers(wrapper, expect)
     })
 
     it('is called', () => {
@@ -16,7 +14,7 @@ describe('BCheckbox', () => {
     })
 
     it('has an input checkbox', () => {
-        b.domHas('label input[type=checkbox]')
+        expect(wrapper.contains('label input[type=checkbox]')).toBeTruthy()
     })
 
     it('emit input event with value when value change', () => {
@@ -25,6 +23,7 @@ describe('BCheckbox', () => {
         wrapper.setProps({ value: NEW_VALUE })
 
         expect(wrapper.vm.newValue).toBeTruthy()
-        b.emittedContains('input', NEW_VALUE)
+        const valueEmitted = wrapper.emitted()['input'][0]
+        expect(valueEmitted).toContainEqual(NEW_VALUE)
     })
 })
