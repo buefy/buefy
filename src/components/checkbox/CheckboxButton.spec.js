@@ -19,10 +19,10 @@ describe('BCheckboxButton', () => {
         b.domHas('label input[type=checkbox]')
     })
 
-    it('emit input event with value when value change', async () => {
+    it('emit input event with value when value change', () => {
         const NEW_VALUE = true
-        wrapper.vm.value = NEW_VALUE
-        await wrapper.vm.$nextTick()
+
+        wrapper.setProps({ value: NEW_VALUE })
 
         expect(wrapper.vm.newValue).toBeTruthy()
         b.emittedContains('input', NEW_VALUE)

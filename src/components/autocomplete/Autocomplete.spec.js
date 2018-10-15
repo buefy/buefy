@@ -61,7 +61,7 @@ describe('BAutocomplete', () => {
         b.emitted('blur')
     })
 
-    it('can autocomplete with keydown', async() => {
+    it('can autocomplete with keydown', async () => {
         const VALUE_TYPED = 'Ang'
         wrapper.setProps({ data: DATA_LIST })
 
@@ -85,18 +85,17 @@ describe('BAutocomplete', () => {
         b.hidden(dropdownMenu)
     })
 
-    it('check validity when value change', async () => {
+    it('check validity when value change', () => {
         wrapper.setProps({ data: DATA_LIST })
         wrapper.vm.$refs.input.checkHtml5Validity = jest.fn()
 
         wrapper.vm.isValid = false
-        wrapper.vm.value = 'test'
-        wrapper.vm.$nextTick()
+        wrapper.setProps({ value: 'test' })
 
         expect(wrapper.vm.$refs.input.checkHtml5Validity).toBeCalled()
     })
 
-    it('close dropdown on esc', async () => {
+    it('close dropdown on esc', () => {
         wrapper.setProps({ data: DATA_LIST })
 
         wrapper.vm.isActive = true
@@ -118,7 +117,7 @@ describe('BAutocomplete', () => {
         b.hidden(dropdownMenu)
     })
 
-    it('open dropdown on down key click', async () => {
+    it('open dropdown on down key click', () => {
         wrapper.setProps({ data: DATA_LIST })
 
         b.hidden(dropdownMenu)
