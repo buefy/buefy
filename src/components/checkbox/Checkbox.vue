@@ -8,6 +8,7 @@
         @keydown.prevent.enter.space="$refs.label.click()">
         <input
             v-model="newValue"
+            :indeterminate.prop="indeterminate"
             type="checkbox"
             :disabled="disabled"
             :required="required"
@@ -26,6 +27,7 @@
         props: {
             value: [String, Number, Boolean, Function, Object, Array, Symbol],
             nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+            indeterminate: Boolean,
             type: String,
             disabled: Boolean,
             required: Boolean,
