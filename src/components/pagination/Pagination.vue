@@ -5,10 +5,10 @@
             href="#"
             class="pagination-previous"
             :disabled="!hasPrev"
-            @click.prevent="prev" >
+            @click.prevent="prev">
             <b-icon
                 icon="chevron-left"
-                :icon-pack="iconPack"
+                :pack="iconPack"
                 both/>
         </a>
         <a
@@ -16,10 +16,10 @@
             href="#"
             class="pagination-next"
             :disabled="!hasNext"
-            @click.prevent="next" >
+            @click.prevent="next">
             <b-icon
                 icon="chevron-right"
-                :icon-pack="iconPack"
+                :pack="iconPack"
                 both/>
         </a>
         <ul class="pagination-list" v-if="!simple">
@@ -72,14 +72,12 @@
 
 <script>
     import Icon from '../icon/Icon'
-    import BaseElementMixin from '../../utils/BaseElementMixin'
 
     export default {
         name: 'BPagination',
         components: {
             [Icon.name]: Icon
         },
-        mixins: [BaseElementMixin],
         props: {
             total: [Number, String],
             perPage: {
@@ -93,7 +91,8 @@
             size: String,
             simple: Boolean,
             rounded: Boolean,
-            order: String
+            order: String,
+            iconPack: String
         },
         computed: {
             rootClasses() {

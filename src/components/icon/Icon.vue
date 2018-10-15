@@ -43,7 +43,7 @@
             newType() {
                 if (!this.type) return
 
-                let splitType = null
+                let splitType = []
                 if (typeof this.type === 'string') {
                     splitType = this.type.split('-')
                 } else {

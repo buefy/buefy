@@ -1,8 +1,6 @@
 import Icon from '../components/icon/Icon'
-import BaseElementMixin from './BaseElementMixin'
 
 export default {
-    mixins: [BaseElementMixin],
     components: {
         [Icon.name]: Icon
     },
@@ -19,6 +17,7 @@ export default {
         type: String,
         hasIcon: Boolean,
         size: String,
+        iconPack: String,
         iconSize: String,
         autoClose: {
             type: Boolean,

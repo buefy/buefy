@@ -1,4 +1,4 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Helpers from 'mwangaben-vthelpers'
 import BCheckbox from '@components/checkbox/Checkbox'
 
@@ -6,7 +6,7 @@ let wrapper, b
 
 describe('BCheckbox', () => {
     beforeEach(() => {
-        wrapper = shallow(BCheckbox)
+        wrapper = shallowMount(BCheckbox)
         b = new Helpers(wrapper, expect)
     })
 

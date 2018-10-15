@@ -95,6 +95,11 @@
 
                     js = js.replace('require(\'@/data/sample.json\')', dataTest)
 
+                    // Vue
+                    if (this.code.indexOf('vue')) {
+                        js = js.replace('import Vue from \'vue\'', '')
+                    }
+
                     // Axios
                     if (this.code.indexOf('this.$http')) {
                         js = js.replace(/this\.\$http/g, 'axios')
@@ -118,6 +123,12 @@
                     if (this.code.indexOf('sortablejs')) {
                         js = js.replace('import Sortable from \'sortablejs\'', '')
                         this.externalScripts.push('https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js')
+                    }
+
+                    // VeeValidate
+                    if (this.code.indexOf('vee-validate')) {
+                        js = js.replace('import VeeValidate from \'vee-validate\'', '')
+                        this.externalScripts.push('https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js')
                     }
                 }
 

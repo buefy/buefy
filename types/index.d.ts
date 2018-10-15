@@ -35,6 +35,7 @@ export declare type BuefyConfig = {
     defaultDatepickerMobileNative: boolean;
     defaultTimepickerMobileNative: boolean;
     defaultNoticeQueue: boolean;
+    defaultInputHasCounter: boolean;
 };
 
 declare const _default: {

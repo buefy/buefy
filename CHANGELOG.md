@@ -1,10 +1,18 @@
 # Buefy Changelog
 
-## 0.7.0
+## 0.7.1
 
 ### New features
 
-* Add ``closable`` props to taginput (thanks @adrlen)
+* Add ``indeterminate`` prop to checkbox (thanks @guanzo)
+* #1029 Upgrade vue-test-utils to latest version (thanks @lordfuoco)
+
+### Fixes
+
+* #1024 Fix upload SSR support
+* #1027 Fix ``icon-pack`` prop when individual components
+
+## 0.7.0
 
 ### Breaking changes
 
@@ -15,11 +23,17 @@ import { Toast } from 'buefy/dist/components/toast'
 Toast.open('Toasty!')
 ```
 * Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
+* Rename ``readonly`` to ``editable`` on datepicker and timepicker (now just use the prop without false value)
+* **Removed Panel component**, it was deprecated since 0.5.3
 
-### Fixes and changes
+### New features
+
+* Add ``closable`` prop to taginput (thanks @adrlen)
+* #970 Add Object type to ``type`` prop of field and icon
+
+### Fixes
 
 * Updated timepicker style (it's a little smaller now)
-* #970 Add Object type to ``type`` prop of field and icon
 * #992 Fix table header disappear with pagination
 * #999 Fix ``size`` prop to datepicker and timepicker
 

@@ -51,7 +51,7 @@
                                 <b-icon
                                     v-show="currentSortColumn === column"
                                     icon="arrow-up"
-                                    :icon-pack="iconPack"
+                                    :pack="iconPack"
                                     both
                                     size="is-small"
                                     :class="{ 'is-desc': !isAsc }"/>
@@ -80,7 +80,7 @@
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
-                                        :icon-pack="iconPack"
+                                        :pack="iconPack"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
                                 </a>
@@ -181,8 +181,6 @@
     import TableMobileSort from './TableMobileSort'
     import TableColumn from './TableColumn'
 
-    import BaseElementMixin from '../../utils/BaseElementMixin'
-
     export default {
         name: 'BTable',
         components: {
@@ -192,7 +190,6 @@
             [TableMobileSort.name]: TableMobileSort,
             [TableColumn.name]: TableColumn
         },
-        mixins: [BaseElementMixin],
         props: {
             data: {
                 type: Array,
@@ -261,7 +258,8 @@
             total: {
                 type: [Number, String],
                 default: 0
-            }
+            },
+            iconPack: String
         },
         data() {
             return {
@@ -627,7 +625,7 @@
             checkPredefinedDetailedRows() {
                 const defaultExpandedRowsDefined = this.openedDetailed.length > 0
                 if (defaultExpandedRowsDefined && !this.detailKey.length) {
-                    throw new Error('If you set a predefined opened-detailed, you must provide an unique key using the prop "detail-key"')
+                    throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"')
                 }
             },
 

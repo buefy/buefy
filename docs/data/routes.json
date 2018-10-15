@@ -148,18 +148,6 @@
             "documentation/tabs"
         ]
     },
-    "documentation/panel": {
-        "title": "Panel",
-        "subtitle": "A simple and collapsible panel",
-        "path": "/documentation/panel",
-        "githubPath": "pages/components/panel/Panel.vue",
-        "menu": "documentation",
-        "breadcrumb": [
-            "/",
-            "documentation",
-            "documentation/panel"
-        ]
-    },
     "documentation/tag": {
         "title": "Tag",
         "subtitle": "Tag labels to insert anywhere",
@@ -421,6 +409,18 @@
             "/",
             "extensions",
             "extensions/sortablejs"
+        ]
+    },
+    "extensions/veevalidate": {
+        "title": "VeeValidate",
+        "subtitle": "Validate input and show error messages",
+        "path": "/extensions/veevalidate",
+        "githubPath": "pages/extensions/veevalidate/VeeValidate.vue",
+        "menu": "extensions",
+        "breadcrumb": [
+            "/",
+            "extensions",
+            "extensions/veevalidate"
         ]
     }
 }

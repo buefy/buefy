@@ -2,8 +2,8 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>
-            <p>Use <code>:readonly="false"</code> to let the user type a time.</p>
+        <Example :component="ExEditable" :code="ExEditableCode" title="Editable (non readonly)" vertical>
+            <p>Use <code>editable</code> prop to let the user type a time.</p>
         </Example>
 
         <Example :component="ExRange" :code="ExRangeCode" title="Range" vertical>
@@ -28,8 +28,8 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
-    import ExNonReadonly from './examples/ExNonReadonly'
-    import ExNonReadonlyCode from '!!raw-loader!./examples/ExNonReadonly'
+    import ExEditable from './examples/ExEditable'
+    import ExEditableCode from '!!raw-loader!./examples/ExEditable'
 
     import ExRange from './examples/ExRange'
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
@@ -45,12 +45,12 @@
             return {
                 api,
                 ExSimple,
-                ExNonReadonly,
+                ExEditable,
                 ExRange,
                 ExFooter,
                 ExInline,
                 ExSimpleCode,
-                ExNonReadonlyCode,
+                ExEditableCode,
                 ExRangeCode,
                 ExFooterCode,
                 ExInlineCode
