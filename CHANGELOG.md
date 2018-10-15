@@ -2,6 +2,11 @@
 
 ## 0.7.1
 
+### New features
+
+* Add ``indeterminate`` prop to checkbox (thanks @guanzo)
+* #1029 Upgrade vue-test-utils to latest version (thanks @lordfuoco)
+
 ### Fixes
 
 * #1024 Fix upload SSR support
@@ -23,7 +28,7 @@ Toast.open('Toasty!')
 
 ### New features
 
-* Add ``closable`` props to taginput (thanks @adrlen)
+* Add ``closable`` prop to taginput (thanks @adrlen)
 * #970 Add Object type to ``type`` prop of field and icon
 
 ### Fixes
