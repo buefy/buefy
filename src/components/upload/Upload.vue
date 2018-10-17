@@ -40,7 +40,7 @@
         inheritAttrs: false,
         props: {
             value: {
-                type: [File, Array]
+                type: [Object, Function, File, Array]
             },
             multiple: Boolean,
             disabled: Boolean,
