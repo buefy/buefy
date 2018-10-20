@@ -18,12 +18,10 @@ describe('BCheckbox', () => {
     })
 
     it('emit input event with value when value change', () => {
-        const NEW_VALUE = true
-
-        wrapper.setProps({ value: NEW_VALUE })
-
-        expect(wrapper.vm.newValue).toBeTruthy()
+        wrapper.setProps({ value: true })
+        expect(wrapper.vm.computedValue).toBeTruthy()
+        wrapper.vm.computedValue = false
         const valueEmitted = wrapper.emitted()['input'][0]
-        expect(valueEmitted).toContainEqual(NEW_VALUE)
+        expect(valueEmitted).toContainEqual(false)
     })
 })
