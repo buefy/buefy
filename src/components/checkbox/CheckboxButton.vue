@@ -9,7 +9,7 @@
             @keydown.prevent.enter.space="$refs.label.click()">
             <slot/>
             <input
-                v-model="newValue"
+                v-model="computedValue"
                 type="checkbox"
                 :disabled="disabled"
                 :name="name"
@@ -38,6 +38,15 @@
             }
         },
         computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                }
+            },
             checked() {
                 if (Array.isArray(this.newValue)) {
                     return this.newValue.indexOf(this.nativeValue) >= 0
@@ -51,12 +60,6 @@
              */
             value(value) {
                 this.newValue = value
-            },
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                this.$emit('input', value)
             }
         }
     }
