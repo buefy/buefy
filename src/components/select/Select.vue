@@ -5,7 +5,7 @@
         <span class="select" :class="spanClasses">
 
             <select
-                v-model="selected"
+                v-model="computedValue"
                 ref="select"
                 :multiple="multiple"
                 :size="nativeSize"
@@ -58,11 +58,20 @@
         data() {
             return {
                 selected: this.value,
-                _isSelect: true,
                 _elementRef: 'select'
             }
         },
         computed: {
+            computedValue: {
+                get() {
+                    return this.selected
+                },
+                set(value) {
+                    this.selected = value
+                    this.$emit('input', value)
+                    !this.isValid && this.checkHtml5Validity()
+                }
+            },
             spanClasses() {
                 return [this.size, this.statusType, {
                     'is-fullwidth': this.expanded,
@@ -81,15 +90,6 @@
              */
             value(value) {
                 this.selected = value
-                !this.isValid && this.checkHtml5Validity()
-            },
-            /**
-             * When selected:
-             *   1. Emit input event to update the user v-model.
-             *   2. If it's invalid, validate again.
-             */
-            selected(value) {
-                this.$emit('input', value)
                 !this.isValid && this.checkHtml5Validity()
             }
         }
