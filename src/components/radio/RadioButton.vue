@@ -6,7 +6,8 @@
             :class="[newValue === nativeValue ? type : null, size]"
             :disabled="disabled"
             :tabindex="disabled ? false : 0"
-            @keydown.prevent.enter.space="$refs.label.click()">
+            @keydown.prevent.enter.space="$refs.label.click()"
+            @click.prevent>
             <slot/>
             <input
                 v-model="computedValue"
