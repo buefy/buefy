@@ -7,7 +7,7 @@
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="$refs.label.click()">
         <input
-            v-model="newValue"
+            v-model="computedValue"
             type="radio"
             :disabled="disabled"
             :required="required"
@@ -35,22 +35,23 @@
                 newValue: this.value
             }
         },
+        computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                }
+            }
+        },
         watch: {
             /**
              * When v-model change, set internal value.
              */
             value(value) {
                 this.newValue = value
-            },
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                // only trigger input event
-                // when current bRadioButton is clicked.
-                if (value === this.nativeValue) {
-                    this.$emit('input', value)
-                }
             }
         }
     }
