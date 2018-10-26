@@ -10,7 +10,11 @@ export default {
         iconPack: String,
         // Native options to use in HTML5 validation
         autocomplete: String,
-        maxlength: [Number, String]
+        maxlength: [Number, String],
+        useHTML5Validation: {
+            type: Boolean,
+            default: true,
+        },
     },
     data() {
         return {
@@ -85,7 +89,9 @@ export default {
         onBlur($event) {
             this.isFocused = false
             this.$emit('blur', $event)
-            this.checkHtml5Validity()
+            if (this.useHTML5Validation) {
+                this.checkHtml5Validity()
+            }
         },
 
         onFocus($event) {
