@@ -11,7 +11,7 @@ export default {
         // Native options to use in HTML5 validation
         autocomplete: String,
         maxlength: [Number, String],
-        useHTML5Validation: {
+        useHtml5Validation: {
             type: Boolean,
             default: true,
         },
@@ -89,7 +89,7 @@ export default {
         onBlur($event) {
             this.isFocused = false
             this.$emit('blur', $event)
-            if (this.useHTML5Validation) {
+            if (this.useHtml5Validation) {
                 this.checkHtml5Validity()
             }
         },
