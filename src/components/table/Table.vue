@@ -21,6 +21,7 @@
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox
                                 :value="isAllChecked"
+                                :indeterminate="isSomeChecked"
                                 :disabled="isAllUncheckable"
                                 @change.native="checkAll"/>
                         </th>
@@ -319,6 +320,20 @@
                     return indexOf(this.newCheckedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
+            },
+
+            /**
+             * Check if some rows in the page are checked.
+             */
+            isSomeChecked() {
+                const validVisibleData = this.visibleData.filter(
+                        (row) => this.isRowCheckable(row))
+                if (validVisibleData.length === 0) return false
+                const isSomeChecked = validVisibleData.some((currentVisibleRow) => {
+                    return indexOf(this.newCheckedRows,
+                    currentVisibleRow, this.customIsChecked) >= 0
+                })
+                return isSomeChecked && !this.isAllChecked
             },
 
             /**
