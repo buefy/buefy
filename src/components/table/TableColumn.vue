@@ -50,9 +50,9 @@
 
                 // Since we're using scoped prop the columns gonna be multiplied,
                 // this finds when to stop based on the newKey property.
-                const repeated = this.$parent.columns.some(
+                const repeated = this.$parent.newColumns.some(
                     (column) => column.newKey === this.newKey)
-                !repeated && this.$parent.columns.push(this)
+                !repeated && this.$parent.newColumns.push(this)
             }
         },
         beforeMount() {
@@ -62,9 +62,10 @@
             this.addRefToTable()
         },
         beforeDestroy() {
-            const index = this.$parent.columns.map((column) => column.newKey).indexOf(this.newKey)
+            const index = this.$parent.newColumns.map(
+                (column) => column.newKey).indexOf(this.newKey)
             if (index >= 0) {
-                this.$parent.columns.splice(index, 1)
+                this.$parent.newColumns.splice(index, 1)
             }
         }
     }
