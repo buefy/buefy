@@ -42,7 +42,7 @@
     "components"
   ],
   "dependencies": {
-    "bulma": "0.7.1"
+    "bulma": "0.7.2"
   },
   "peerDependencies": {
     "vue": "2.5.x"
