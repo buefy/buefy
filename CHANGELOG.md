@@ -4,6 +4,7 @@
 
 ### New features
 
+* **Update Bulma to 0.7.2**
 * Add ``indeterminate`` prop to checkbox (thanks @guanzo)
 * #1029 Upgrade vue-test-utils to latest version (thanks @lordfuoco)
 
@@ -11,6 +12,7 @@
 
 * #1024 Fix upload SSR support
 * #1027 Fix ``icon-pack`` prop when individual components
+* #1040 Fix prevent radio with multi-line text from shrinking (thanks @rhwilr)
 
 ## 0.7.0
 
