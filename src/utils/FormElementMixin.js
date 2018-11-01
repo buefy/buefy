@@ -14,7 +14,7 @@ export default {
         useHtml5Validation: {
             type: Boolean,
             default: true,
-        },
+        }
     },
     data() {
         return {
