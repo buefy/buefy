@@ -112,7 +112,7 @@
             },
             confirmKeyCodes: {
                 type: Array,
-                default: () => [13, 188]
+                default: () => [13, 188, 9]
             },
             removeOnKeys: {
                 type: Array,
