@@ -2,10 +2,10 @@
     <section>
         <b-field>
             <b-radio-button v-model="radioButton"
-                native-value="Nop"
+                native-value="Nope"
                 type="is-danger">
                 <b-icon icon="close"></b-icon>
-                <span>Nop</span>
+                <span>Nope</span>
             </b-radio-button>
 
             <b-radio-button v-model="radioButton"
