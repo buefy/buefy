@@ -72,7 +72,7 @@ export const isMobile = {
 export function removeElement(el) {
     if (typeof el.remove !== 'undefined') {
         el.remove()
-    } else {
+    } else if (typeof el.parentNode !== 'undefined') {
         el.parentNode.removeChild(el)
     }
 }
