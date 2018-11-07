@@ -448,6 +448,11 @@
                         let newA = getValueByPath(a, key)
                         let newB = getValueByPath(b, key)
 
+                        // sort boolean type
+                        if (typeof newA === 'boolean' && typeof newB === 'boolean') {
+                            return isAsc ? newA - newB : newB - newA
+                        }
+
                         if (!newA && newA !== 0) return 1
                         if (!newB && newB !== 0) return -1
                         if (newA === newB) return 0
