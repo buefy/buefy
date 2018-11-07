@@ -1,6 +1,13 @@
 <template>
     <span class="icon" :class="[newType, size]">
-        <i :class="[newPack, newIcon, newCustomSize, customClass]"/>
+        <i
+            v-if="!useIconComponent"
+            :class="[newPack, newIcon, newCustomSize, customClass]"/>
+
+         <component
+            v-if="useIconComponent"
+            :is="useIconComponent"
+            :icon="[newPack, newIcon]"/>
     </span>
 </template>
 
@@ -25,17 +32,9 @@
              * internal icons are always MDI.
              */
             newIcon() {
-                if (!this.both) {
-                    if (this.newPack === 'mdi') {
-                        return `${this.newPack}-${this.icon}`
-                    } else {
-                        return `fa-${this.icon}`
-                    }
-                }
-
                 return this.newPack === 'mdi'
                     ? `${this.newPack}-${this.icon}`
-                    : `fa-${this.getEquivalentIconOf(this.icon)}`
+                    : this.getFAIconOf(this.icon)
             },
             newPack() {
                 return this.pack || config.defaultIconPack
@@ -77,9 +76,19 @@
                     case 'is-large': return largeSize
                     default: return defaultSize
                 }
+            },
+            useIconComponent() {
+                return config.defaultIconComponent
             }
         },
         methods: {
+            getFAIconOf(value) {
+                if (this.useIconComponent) {
+                    return this.getEquivalentIconOf(this.icon)
+                }
+                return `fa-${this.getEquivalentIconOf(this.icon)}`
+            },
+
             /**
              * Equivalent FA icon name of the MDI.
              */
