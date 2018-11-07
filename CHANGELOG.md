@@ -13,6 +13,7 @@
 * #1024 Fix upload SSR support
 * #1027 Fix ``icon-pack`` prop when individual components
 * #1040 Fix prevent radio with multi-line text from shrinking (thanks @rhwilr)
+* #1072 Fix sorting boolean fields
 
 ## 0.7.0
 
