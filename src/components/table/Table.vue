@@ -5,7 +5,7 @@
             :current-sort-column="currentSortColumn"
             :is-asc="isAsc"
             :columns="newColumns"
-            @sort="(column) => sort(column)"
+            @sort="(column) => sortColumn(column)"
         />
 
         <div class="table-wrapper">
@@ -29,11 +29,11 @@
                             v-if="column.visible || column.visible === undefined"
                             :key="index"
                             :class="{
-                                'is-current-sort': currentSortColumn === column,
+                                'is-current-sort': currentSortColumns.indexOf(column) !== -1,
                                 'is-sortable': column.sortable
                             }"
                             :style="{ width: column.width + 'px' }"
-                            @click.stop="sort(column)">
+                            @click.stop="sortColumn(column, false, $event)">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -49,12 +49,12 @@
                                 <template v-else>{{ column.label }}</template>
 
                                 <b-icon
-                                    v-show="currentSortColumn === column"
+                                    v-show="currentSortColumns.indexOf(column) !== -1"
                                     icon="arrow-up"
                                     :pack="iconPack"
                                     both
                                     size="is-small"
-                                    :class="{ 'is-desc': !isAsc }"/>
+                                    :class="{ 'is-desc': !column.isAsc }"/>
                             </div>
                         </th>
                     </tr>
@@ -221,7 +221,10 @@
                 type: Boolean,
                 default: true
             },
-            defaultSort: [String, Array],
+            defaultSort: {
+                type: Array,
+                default: () => []
+            },
             defaultSortDirection: {
                 type: String,
                 default: 'asc'
@@ -270,8 +273,7 @@
                 newDataTotal: this.backendPagination ? this.total : this.data.length,
                 newCheckedRows: [...this.checkedRows],
                 newCurrentPage: this.currentPage,
-                currentSortColumn: {},
-                isAsc: true,
+                currentSortColumns: [],
                 firstTimeSort: true, // Used by first time initSort
                 _isTable: true // Used by TableColumn
             }
@@ -372,7 +374,7 @@
                 })
 
                 if (!this.backendSorting) {
-                    this.sort(this.currentSortColumn, true)
+                    this.sort()
                 }
                 if (!this.backendPagination) {
                     this.newDataTotal = value.length
@@ -409,14 +411,20 @@
                     this.initSort()
                     this.firstTimeSort = false
                 } else if (newColumns.length) {
-                    if (this.currentSortColumn.field) {
-                        for (let i = 0; i < newColumns.length; i++) {
-                            if (newColumns[i].field === this.currentSortColumn.field) {
-                                this.currentSortColumn = newColumns[i]
-                                break
+                    let columns = []
+                    for (let i = 0; i < newColumns.length; i++) {
+                        newColumns[i].defaultSortDirection = this.defaultSortDirection
+                        this.currentSortColumns.some((col) => {
+                            if (newColumns[i].field === col.field) {
+                                newColumns[i].isAsc = col.isAsc
+                                newColumns[i].defaultSortDirection = col.defaultSortDirection
+                                columns.push(newColumns[i])
+                                return true
                             }
-                        }
+                            return false
+                        })
                     }
+                    this.currentSortColumns = columns
                 }
             },
 
@@ -437,38 +445,50 @@
              * Sort an array by key without mutating original data.
              * Call the user sort function if it was passed.
              */
-            sortBy(array, key, fn, isAsc) {
+            // sortBy(array, key, fn, isAsc) {
+            sortBy(array, columns) {
                 let sorted = []
                 // Sorting without mutating original data
-                if (fn && typeof fn === 'function') {
-                    sorted = [...array].sort((a, b) => fn(a, b, isAsc))
-                } else {
-                    sorted = [...array].sort((a, b) => {
-                        // Get nested values from objects
-                        let newA = getValueByPath(a, key)
-                        let newB = getValueByPath(b, key)
+                sorted = [...array].sort((a, b) => {
+                    var result = 0
+                    for (var i = 0; i < columns.length; i++) {
+                        result = 0
+                        const key = columns[i].field
+                        const fn = columns[i].customSort
+                        const isAsc = columns[i].isAsc
+                        if (fn && typeof fn === 'function') {
+                            result = fn(a, b, isAsc)
+                        } else {
+                            // Get nested values from objects
+                            let newA = getValueByPath(a, key)
+                            let newB = getValueByPath(b, key)
 
-                        // sort boolean type
-                        if (typeof newA === 'boolean' && typeof newB === 'boolean') {
-                            return isAsc ? newA - newB : newB - newA
+                            // sort boolean type
+                            if (typeof newA === 'boolean' && typeof newB === 'boolean') {
+                                result = isAsc ? newA - newB : newB - newA
+                            } else if (!newA && newA !== 0) {
+                                return 1
+                            } else if (!newB && newB !== 0) {
+                                return -1
+                            } else if (newA === newB) {
+                                result = 0
+                            } else {
+                                newA = (typeof newA === 'string')
+                                    ? newA.toUpperCase()
+                                    : newA
+                                newB = (typeof newB === 'string')
+                                    ? newB.toUpperCase()
+                                    : newB
+
+                                result = isAsc
+                                    ? newA > newB ? -1 : 1
+                                    : newA > newB ? 1 : -1
+                            }
                         }
-
-                        if (!newA && newA !== 0) return 1
-                        if (!newB && newB !== 0) return -1
-                        if (newA === newB) return 0
-
-                        newA = (typeof newA === 'string')
-                            ? newA.toUpperCase()
-                            : newA
-                        newB = (typeof newB === 'string')
-                            ? newB.toUpperCase()
-                            : newB
-
-                        return isAsc
-                            ? newA > newB ? 1 : -1
-                            : newA > newB ? -1 : 1
-                    })
-                }
+                        if (result !== 0) break
+                    }
+                    return result
+                })
 
                 return sorted
             },
@@ -478,26 +498,54 @@
              * Toggle current direction on column if it's sortable
              * and not just updating the prop.
              */
-            sort(column, updatingData = false) {
+            sortColumn(column, updatingData = false, event = null) {
                 if (!column || !column.sortable) return
 
+                let columns = this.currentSortColumns
+
                 if (!updatingData) {
-                    this.isAsc = column === this.currentSortColumn
-                        ? !this.isAsc
-                        : (this.defaultSortDirection.toLowerCase() !== 'desc')
+                    if (!column.defaultSortDirection) {
+                        column.defaultSortDirection = this.defaultSortDirection
+                    }
+                    if (columns.length === 0) { // No columns
+                        column.isAsc = column.defaultSortDirection.toLowerCase() !== 'desc'
+                        columns.push(column)
+                    } else if (event && event.shiftKey) { // Multiple columns
+                        let index = columns.indexOf(column)
+                        if (index === -1) {
+                            columns.push(column)
+                            columns[columns.length - 1].isAsc = column.defaultSortDirection.toLowerCase() !== 'desc'
+                        } else {
+                            columns[index].isAsc = !columns[index].isAsc
+                        }
+                    } else { // Single column
+                        if (column === columns[0]) {
+                            columns[0].isAsc = !columns[0].isAsc
+                        } else {
+                            columns[0] = column
+                            columns[0].isAsc = column.defaultSortDirection.toLowerCase() !== 'desc'
+                        }
+                        columns.length = 1
+                    }
                 }
+
                 if (!this.firstTimeSort) {
-                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                    this.sort()
                 }
+
+                this.currentSortColumns = columns
+            },
+
+            /**
+             * Sort the data
+             * Run the sorting functions, based on the selected columns
+             */
+            sort() {
                 if (!this.backendSorting) {
-                    this.newData = this.sortBy(
-                        this.newData,
-                        column.field,
-                        column.customSort,
-                        this.isAsc
-                    )
+                    this.newData = this.sortBy(this.newData, this.currentSortColumns)
+                } else {
+                    this.$emit('sort', this.currentSortColumns.map((col) => [col.field, col.isAsc ? 'asc' : 'desc']))
                 }
-                this.currentSortColumn = column
             },
 
             /**
@@ -686,23 +734,25 @@
             initSort() {
                 if (!this.defaultSort) return
 
-                let sortField = ''
-                let sortDirection = this.defaultSortDirection
-
-                if (Array.isArray(this.defaultSort)) {
-                    sortField = this.defaultSort[0]
-                    if (this.defaultSort[1]) {
-                        sortDirection = this.defaultSort[1]
+                this.defaultSort.forEach((sort) => {
+                    let field = ''
+                    let direction = this.defaultSortDirection
+                    if (Array.isArray(sort)) {
+                        field = sort[0]
+                        if (sort[1]) {
+                            direction = sort[1]
+                        }
+                    } else {
+                        field = sort
                     }
-                } else {
-                    sortField = this.defaultSort
-                }
-
-                this.newColumns.forEach((column) => {
-                    if (column.field === sortField) {
-                        this.isAsc = sortDirection.toLowerCase() !== 'desc'
-                        this.sort(column, true)
-                    }
+                    this.newColumns.some((column) => {
+                        if (column.field === field) {
+                            column.defaultSortDirection = direction
+                            this.sortColumn(column, false, { shiftKey: true })
+                            return true
+                        }
+                        return false
+                    })
                 })
             }
         },

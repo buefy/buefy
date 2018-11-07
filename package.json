@@ -32,6 +32,7 @@
     "build:lib": "node build/build-lib.js",
     "build:docs": "node build/build.js",
     "build": "npm run build:lib && npm run build:docs",
+    "prepare": "npm run build",
     "cov": "./node_modules/codcov/bin/codcov"
   },
   "keywords": [
