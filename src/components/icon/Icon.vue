@@ -4,7 +4,7 @@
             v-if="!useIconComponent"
             :class="[newPack, newIcon, newCustomSize, customClass]"/>
 
-         <component
+        <component
             v-if="useIconComponent"
             :is="useIconComponent"
             :icon="[newPack, newIcon]"
