@@ -12,6 +12,15 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>defaultIconComponent</code>',
+                description: `Component used to render the Icon.
+                    Can be used to render FontAwesome 5 icons with the
+                    <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
+                type: 'Component',
+                values: '<code>vue-fontawesome</code>',
+                default: '<code>null</code>'
+            },
+            {
                 name: '<code>defaultContainerElement</code>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
