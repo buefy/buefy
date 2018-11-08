@@ -7,7 +7,9 @@
          <component
             v-if="useIconComponent"
             :is="useIconComponent"
-            :icon="[newPack, newIcon]"/>
+            :icon="[newPack, newIcon]"
+            :size="newCustomSize"
+            :class="[customClass]"/>
     </span>
 </template>
 
@@ -34,7 +36,7 @@
             newIcon() {
                 return this.newPack === 'mdi'
                     ? `${this.newPack}-${this.icon}`
-                    : this.getFAIconOf(this.icon)
+                    : this.addFAPrefix(this.getEquivalentIconOf(this.icon))
             },
             newPack() {
                 return this.pack || config.defaultIconPack
@@ -63,13 +65,13 @@
             customSizeByPack() {
                 const defaultSize = this.newPack === 'mdi'
                     ? 'mdi-24px'
-                    : 'fa-lg'
+                    : this.addFAPrefix('lg')
                 const mediumSize = this.newPack === 'mdi'
                     ? 'mdi-36px'
-                    : 'fa-2x'
+                    : this.addFAPrefix('2x')
                 const largeSize = this.newPack === 'mdi'
                     ? 'mdi-48px'
-                    : 'fa-3x'
+                    : this.addFAPrefix('3x')
                 switch (this.size) {
                     case 'is-small': return
                     case 'is-medium': return mediumSize
@@ -82,11 +84,11 @@
             }
         },
         methods: {
-            getFAIconOf(value) {
+            addFAPrefix(value) {
                 if (this.useIconComponent) {
-                    return this.getEquivalentIconOf(this.icon)
+                    return value
                 }
-                return `fa-${this.getEquivalentIconOf(this.icon)}`
+                return `fa-${value}`
             },
 
             /**
