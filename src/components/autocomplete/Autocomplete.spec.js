@@ -79,6 +79,7 @@ describe('BAutocomplete', () => {
         $input.trigger('keydown.down')
         $input.trigger('keydown.enter')
         await wrapper.vm.$nextTick()
+        await wrapper.vm.$nextTick()
 
         expect($input.element.value).toBe(itemsInDropdowm[0])
         expect($dropdown.isVisible()).toBeFalsy()
@@ -142,6 +143,27 @@ describe('BAutocomplete', () => {
         expect($dropdown.isVisible()).toBeTruthy()
 
         expect(wrapper.vm.hovered).toBe(DATA_LIST[0])
+    })
+
+    it('can closeOnSelect', async () => {
+        wrapper.setProps({
+            data: DATA_LIST,
+            openOnFocus: true,
+            closeOnSelect: true,
+            keepFirst: true
+        })
+
+        expect($dropdown.isVisible()).toBeFalsy()
+
+        $input.trigger('focus')
+        await wrapper.vm.$nextTick()
+
+        expect($dropdown.isVisible()).toBeTruthy()
+
+        $input.trigger('keydown.enter')
+        await wrapper.vm.$nextTick()
+
+        expect($dropdown.isVisible()).toBeFalsy()
     })
 
     it('reset events before destroy', () => {
