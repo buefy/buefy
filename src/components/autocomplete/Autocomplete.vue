@@ -82,6 +82,7 @@
             },
             keepFirst: Boolean,
             clearOnSelect: Boolean,
+            closeOnSelect: Boolean,
             openOnFocus: Boolean
         },
         data() {
@@ -215,7 +216,17 @@
                 if (this.selected !== null) {
                     this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
                 }
-                closeDropdown && this.$nextTick(() => { this.isActive = false })
+                (this.closeOnSelect || closeDropdown) &&
+                    this.$nextTick(() => { this.isActive = false })
+
+                if (this.closeOnSelect) {
+                    // If openOnFocus, we also need to blur the field so users
+                    // can immediately add another if they wish
+                    this.$el.querySelector('input').blur()
+
+                    this.hasFocus = false
+                    this.$emit('blur')
+                }
             },
 
             /**
