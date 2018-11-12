@@ -79,7 +79,6 @@ describe('BAutocomplete', () => {
         $input.trigger('keydown.down')
         $input.trigger('keydown.enter')
         await wrapper.vm.$nextTick()
-        await wrapper.vm.$nextTick()
 
         expect($input.element.value).toBe(itemsInDropdowm[0])
         expect($dropdown.isVisible()).toBeFalsy()
