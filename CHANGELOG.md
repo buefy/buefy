@@ -7,6 +7,7 @@
 * **Update Bulma to 0.7.2**
 * Add ``indeterminate`` prop to checkbox (thanks @guanzo)
 * #1029 Upgrade vue-test-utils to latest version (thanks @lordfuoco)
+* #1065 Add tab as confirm key code to taginput (thanks @williamabbott)
 
 ### Fixes
 
