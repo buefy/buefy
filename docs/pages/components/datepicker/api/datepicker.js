@@ -23,6 +23,13 @@ export default [
                 default: '<code>(date) => new Date(Date.parse(date))</code>'
             },
             {
+                name: '<code>date-instantiator</code>',
+                description: 'Function used internally to create a new Date instance',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => new Date()</code>'
+            },
+            {
                 name: '<code>min-date</code>',
                 description: 'Earliest date available for selection',
                 type: 'Date',

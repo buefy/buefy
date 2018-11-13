@@ -23,6 +23,7 @@
                 :selectable-dates="selectableDates"
                 :events="eventsInThisWeek(week, index)"
                 :indicators="indicators"
+                :today-instantiator="todayInstantiator"
                 @select="updateSelectedDate"/>
         </div>
     </section>
@@ -47,6 +48,7 @@
             maxDate: Date,
             focused: Object,
             disabled: Boolean,
+            todayInstantiator: Function,
             unselectableDates: Array,
             unselectableDaysOfWeek: Array,
             selectableDates: Array
