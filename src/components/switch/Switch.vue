@@ -11,7 +11,7 @@
         @mouseout="isMouseDown = false"
         @blur="isMouseDown = false">
         <input
-            v-model="newValue"
+            v-model="computedValue"
             type="checkbox"
             @click.stop
             :disabled="disabled"
@@ -49,18 +49,23 @@
                 isMouseDown: false
             }
         },
+        computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                }
+            }
+        },
         watch: {
             /**
              * When v-model change, set internal value.
              */
             value(value) {
                 this.newValue = value
-            },
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                this.$emit('input', value)
             }
         }
     }
