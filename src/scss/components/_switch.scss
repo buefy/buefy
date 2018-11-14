@@ -26,6 +26,7 @@ $switch-active-background-color: $primary !default;
             transition: background $speed-slow $easing;
             &:before {
                 content: "";
+                display: block;
                 border-radius: 1em;
                 width: #{($switch-width - $switch-padding * 2) / 2};
                 height: #{($switch-width - $switch-padding * 2) / 2};
