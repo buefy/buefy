@@ -38,6 +38,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>striped</code>',
+                description: 'Whether table is striped',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>narrowed</code>',
                 description: 'Makes the cells narrower',
                 type: 'Boolean',
