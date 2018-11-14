@@ -26,7 +26,7 @@ export declare type BuefyConfig = {
     defaultInputAutocomplete: 'on' | 'off';
     defaultDateFormatter?: string;
     defaultDateParser?: string;
-    defaultTodayInstantiator?: string;
+    defaultDateCreator?: string;
     defaultDayNames?: string;
     defaultMonthNames?: string;
     defaultFirstDayOfWeek?: string;

@@ -23,7 +23,7 @@ export default [
                 default: '<code>(date) => new Date(Date.parse(date))</code>'
             },
             {
-                name: '<code>date-instantiator</code>',
+                name: '<code>date-creator</code>',
                 description: 'Function used internally to create a new Date instance',
                 type: 'Function',
                 values: '—',

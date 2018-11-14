@@ -15,7 +15,7 @@ describe('BDatepickerTableRow', () => {
                     new Date('Sat Jan 06 2018 00:00:00 GMT-0200 (-02)')
                 ],
                 month: 12,
-                todayInstantiator: function () {
+                dateCreator: function () {
                     return new Date()
                 }
             }

@@ -109,7 +109,7 @@
                     :selectable-dates="selectableDates"
                     :events="events"
                     :indicators="indicators"
-                    :today-instantiator="todayInstantiator"
+                    :date-creator="dateCreator"
                     @close="$refs.dropdown.isActive = false"/>
 
                 <footer
@@ -258,11 +258,11 @@
                     }
                 }
             },
-            todayInstantiator: {
+            dateCreator: {
                 type: Function,
                 default: () => {
-                    if (typeof config.defaultTodayInstantiator === 'function') {
-                        return config.defaultTodayInstantiator()
+                    if (typeof config.defaultDateCreator === 'function') {
+                        return config.defaultDateCreator()
                     } else {
                         return new Date()
                     }
@@ -282,7 +282,7 @@
             }
         },
         data() {
-            const focusedDate = this.value || this.focusedDate || this.todayInstantiator()
+            const focusedDate = this.value || this.focusedDate || this.dateCreator()
 
             return {
                 dateSelected: this.value,
@@ -303,7 +303,7 @@
                 const latestYear = this.maxDate
                 ? this.maxDate.getFullYear()
                     : (Math.max(
-                        this.todayInstantiator().getFullYear(),
+                        this.dateCreator().getFullYear(),
                         this.focusedDateData.year) + 3)
 
                 const earliestYear = this.minDate
@@ -341,7 +341,7 @@
             * Update internal focusedDateData
             */
             dateSelected(value) {
-                const currentDate = !value ? this.todayInstantiator() : value
+                const currentDate = !value ? this.dateCreator() : value
                 this.focusedDateData = {
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()

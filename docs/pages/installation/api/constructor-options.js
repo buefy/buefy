@@ -87,8 +87,8 @@ export default [
                 default: '<code>Date.parse(date)</code>'
             },
             {
-                name: '<code>defaultTodayInstantiator</code>',
-                description: `Default datepicker <code>today-instantiator</code> attribute`,
+                name: '<code>defaultDateCreator</code>',
+                description: `Default datepicker <code>date-creator</code> attribute`,
                 type: 'Function',
                 values: '—',
                 default: '<code>new Date()</code>'

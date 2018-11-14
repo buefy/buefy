@@ -55,7 +55,7 @@
             selectableDates: Array,
             events: Array,
             indicators: String,
-            todayInstantiator: Function
+            dateCreator: Function
         },
         methods: {
             /*
@@ -155,7 +155,7 @@
 
                 return {
                     'is-selected': dateMatch(day, this.selectedDate),
-                    'is-today': dateMatch(day, this.todayInstantiator()),
+                    'is-today': dateMatch(day, this.dateCreator()),
                     'is-selectable': this.selectableDate(day) && !this.disabled,
                     'is-unselectable': !this.selectableDate(day) || this.disabled
                 }
