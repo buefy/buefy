@@ -13,14 +13,16 @@
                 @blur="$emit('blur', $event) && checkHtml5Validity()"
                 @focus="$emit('focus', $event)">
 
-                <option
-                    v-if="placeholder"
-                    :value="null"
-                    selected
-                    disabled
-                    hidden>
-                    {{ placeholder }}
-                </option>
+                <template v-if="placeholder">
+                    <option
+                        v-if="computedValue == null"
+                        :value="null"
+                        selected
+                        disabled
+                        hidden>
+                        {{ placeholder }}
+                    </option>
+                </template>
                 <slot/>
 
             </select>

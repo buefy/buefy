@@ -15,6 +15,7 @@
 * #1027 Fix ``icon-pack`` prop when individual components
 * #1040 Fix prevent radio with multi-line text from shrinking (thanks @rhwilr)
 * #1072 Fix sorting boolean fields
+* #1072 Fix IE 11 UI switch (thanks @patrickabkarian)
 
 ## 0.7.0
 
