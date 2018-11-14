@@ -8,14 +8,15 @@
 * Add ``indeterminate`` prop to checkbox (thanks @guanzo)
 * #1029 Upgrade vue-test-utils to latest version (thanks @lordfuoco)
 * #1065 Add tab as confirm key code to taginput (thanks @williamabbott)
+* #1083 Add ``date-creator`` prop to datepicker (thanks @jonagoldman)
 
 ### Fixes
 
 * #1024 Fix upload SSR support
 * #1027 Fix ``icon-pack`` prop when individual components
 * #1040 Fix prevent radio with multi-line text from shrinking (thanks @rhwilr)
+* #1067 Fix IE 11 UI switch (thanks @patrickabkarian)
 * #1072 Fix sorting boolean fields
-* #1072 Fix IE 11 UI switch (thanks @patrickabkarian)
 
 ## 0.7.0
 
