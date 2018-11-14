@@ -109,6 +109,7 @@
                     :selectable-dates="selectableDates"
                     :events="events"
                     :indicators="indicators"
+                    :date-creator="dateCreator"
                     @close="$refs.dropdown.isActive = false"/>
 
                 <footer
@@ -257,6 +258,16 @@
                     }
                 }
             },
+            dateCreator: {
+                type: Function,
+                default: () => {
+                    if (typeof config.defaultDateCreator === 'function') {
+                        return config.defaultDateCreator()
+                    } else {
+                        return new Date()
+                    }
+                }
+            },
             mobileNative: {
                 type: Boolean,
                 default: () => {
@@ -271,7 +282,7 @@
             }
         },
         data() {
-            const focusedDate = this.value || this.focusedDate || new Date()
+            const focusedDate = this.value || this.focusedDate || this.dateCreator()
 
             return {
                 dateSelected: this.value,
@@ -291,7 +302,9 @@
             listOfYears() {
                 const latestYear = this.maxDate
                 ? this.maxDate.getFullYear()
-                    : (Math.max(new Date().getFullYear(), this.focusedDateData.year) + 3)
+                    : (Math.max(
+                        this.dateCreator().getFullYear(),
+                        this.focusedDateData.year) + 3)
 
                 const earliestYear = this.minDate
                 ? this.minDate.getFullYear() : 1900
@@ -328,7 +341,7 @@
             * Update internal focusedDateData
             */
             dateSelected(value) {
-                const currentDate = !value ? new Date() : value
+                const currentDate = !value ? this.dateCreator() : value
                 this.focusedDateData = {
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()

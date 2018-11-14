@@ -87,6 +87,13 @@ export default [
                 default: '<code>Date.parse(date)</code>'
             },
             {
+                name: '<code>defaultDateCreator</code>',
+                description: `Default datepicker <code>date-creator</code> attribute`,
+                type: 'Function',
+                values: '—',
+                default: '<code>new Date()</code>'
+            },
+            {
                 name: '<code>defaultDayNames</code>',
                 description: `Default datepicker <code>day-names</code> attribute`,
                 type: 'Array',

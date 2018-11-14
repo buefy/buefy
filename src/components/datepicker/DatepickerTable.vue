@@ -23,6 +23,7 @@
                 :selectable-dates="selectableDates"
                 :events="eventsInThisWeek(week, index)"
                 :indicators="indicators"
+                :date-creator="dateCreator"
                 @select="updateSelectedDate"/>
         </div>
     </section>
@@ -47,6 +48,7 @@
             maxDate: Date,
             focused: Object,
             disabled: Boolean,
+            dateCreator: Function,
             unselectableDates: Array,
             unselectableDaysOfWeek: Array,
             selectableDates: Array

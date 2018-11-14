@@ -14,7 +14,10 @@ describe('BDatepickerTableRow', () => {
                     new Date('Fri Jan 05 2018 00:00:00 GMT-0200 (-02)'),
                     new Date('Sat Jan 06 2018 00:00:00 GMT-0200 (-02)')
                 ],
-                month: 12
+                month: 12,
+                dateCreator: function () {
+                    return new Date()
+                }
             }
         })
         expect(wrapper.name()).toBe('BDatepickerTableRow')
