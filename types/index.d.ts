@@ -16,27 +16,27 @@ declare module 'vue/types/vue' {
 
 export declare type BuefyConfig = {
     defaultContainerElement?: string,
-    defaultIconPack: 'fa' | 'mdi' | string;
+    defaultIconPack?: string;
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
-    defaultSnackbarDuration: number;
-    defaultToastDuration: number;
-    defaultTooltipType: ColorModifiers;
-    defaultTooltipAnimated: false;
-    defaultInputAutocomplete: 'on' | 'off';
-    defaultDateFormatter?: string;
-    defaultDateParser?: string;
-    defaultDateCreator?: string;
-    defaultDayNames?: string;
-    defaultMonthNames?: string;
-    defaultFirstDayOfWeek?: string;
-    defaultTimeFormatter?: string;
-    defaultTimeParser?: string;
+    defaultSnackbarDuration?: number;
+    defaultToastDuration?: number;
+    defaultTooltipType?: ColorModifiers;
+    defaultTooltipAnimated?: boolean;
+    defaultInputAutocomplete?: string;
+    defaultDateFormatter?: Function;
+    defaultDateParser?: Function;
+    defaultDateCreator?: Function;
+    defaultDayNames?: string[];
+    defaultMonthNames?: string[];
+    defaultFirstDayOfWeek?: number;
+    defaultTimeFormatter?: Function;
+    defaultTimeParser?: Function;
     defaultModalScroll?: string;
-    defaultDatepickerMobileNative: boolean;
-    defaultTimepickerMobileNative: boolean;
-    defaultNoticeQueue: boolean;
-    defaultInputHasCounter: boolean;
+    defaultDatepickerMobileNative?: boolean;
+    defaultTimepickerMobileNative?: boolean;
+    defaultNoticeQueue?: boolean;
+    defaultInputHasCounter?: boolean;
 };
 
 declare const _default: {
