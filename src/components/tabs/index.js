@@ -15,5 +15,6 @@ use(Plugin)
 export default Plugin
 
 export {
-    Tabs
+    Tabs,
+    TabItem
 }
