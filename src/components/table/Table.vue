@@ -68,7 +68,8 @@
                                 'is-checked': isRowChecked(row)
                             }]"
                             @click="selectRow(row)"
-                            @dblclick="$emit('dblclick', row)">
+                            @dblclick="$emit('dblclick', row)"
+                            @contextmenu.prevent="$emit('contextmenu', row, $event)">
 
                             <td
                                 v-if="detailed"
