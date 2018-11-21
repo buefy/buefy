@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.7.2
+
+### New features
+
+* Add ``header`` autocomplete slot to taginput
+* Fix taginput when ``allow-new`` is enabled
+
 ## 0.7.1
 
 ### New features
