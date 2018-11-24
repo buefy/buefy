@@ -362,6 +362,7 @@
              */
             data(value) {
                 // Save newColumns before resetting
+                const currentSortColumns = this.currentSortColumns
                 const newColumns = this.newColumns
 
                 this.newColumns = []
@@ -370,6 +371,9 @@
                 // Prevent table from being headless, data could change and created hook
                 // on column might not trigger
                 this.$nextTick(() => {
+                    // The column's v-for causes newColumns array to increment which
+                    // will clear currentSortColumns, restore them...
+                    this.currentSortColumns = currentSortColumns
                     if (!this.newColumns.length) this.newColumns = newColumns
                 })
 
