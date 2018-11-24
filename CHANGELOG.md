@@ -5,7 +5,11 @@
 ### New features
 
 * Add ``header`` autocomplete slot to taginput
+
+### Fixes
+
 * Fix taginput when ``allow-new`` is enabled
+* Fix pagination order when simple
 
 ## 0.7.1
 
