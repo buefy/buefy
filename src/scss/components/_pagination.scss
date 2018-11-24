@@ -11,6 +11,12 @@
     }
     &.is-simple {
         justify-content: normal;
+        &.is-centered {
+            justify-content: center;
+        }
+        &.is-right {
+            justify-content: flex-end;
+        }
     }
     .is-current {
         pointer-events: none;
