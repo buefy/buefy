@@ -6,7 +6,7 @@
                 type: String
             },
             type: {
-                type: String
+                type: [String, Object]
             }
         },
         render(createElement) {
