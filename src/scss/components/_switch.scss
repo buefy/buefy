@@ -13,7 +13,11 @@ $switch-active-background-color: $primary !default;
         margin-left: 0.5em;
     }
     input[type=checkbox] {
-        display: none;
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        outline: none;
+        z-index: -1;
         + .check {
             display: flex;
             align-items: center;

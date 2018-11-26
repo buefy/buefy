@@ -5,6 +5,7 @@
 ### New features
 
 * Add ``header`` autocomplete slot to taginput
+* Add ``required`` prop to switch
 
 ### Fixes
 
