@@ -5,6 +5,7 @@
             :current-sort-column="currentSortColumn"
             :is-asc="isAsc"
             :columns="newColumns"
+            :placeholder="mobileSortPlaceholder"
             @sort="(column) => sort(column)"
         />
 
@@ -259,7 +260,8 @@
                 type: [Number, String],
                 default: 0
             },
-            iconPack: String
+            iconPack: String,
+            mobileSortPlaceholder: String
         },
         data() {
             return {

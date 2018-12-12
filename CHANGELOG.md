@@ -6,6 +6,7 @@
 
 * Add ``header`` autocomplete slot to taginput
 * Add ``required`` prop to switch
+* Add ``mobile-sort-placeholder`` prop to table
 
 ### Fixes
 
