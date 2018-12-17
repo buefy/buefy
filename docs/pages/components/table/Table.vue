@@ -49,6 +49,13 @@
             </p>
         </Example>
 
+        <Example :component="ExCustomRow" :code="ExCustomRowCode" title="Custom rows">
+            <p>
+                By adding a prop named <code>customRow</code> with value true, you can skip the <code>tr</code> element and insert a custom component instead. <br>
+                This could be useful if you want to create your own row sub-component which has its own <code>tr</code> element as root. You can also add custom classes, attributes, etc.
+            </p>
+        </Example>
+
         <Example :component="ExToggleColumns" :code="ExToggleColumnsCode" title="Toggle columns">
             <b-message type="is-danger">
                 Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
@@ -96,6 +103,9 @@
     import ExCustomHeaders from './examples/ExCustomHeaders'
     import ExCustomHeadersCode from '!!raw-loader!./examples/ExCustomHeaders'
 
+    import ExCustomRow from './examples/ExCustomRow'
+    import ExCustomRowCode from '!!raw-loader!./examples/ExCustomRow'
+
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
@@ -117,6 +127,7 @@
                 ExDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
+                ExCustomRow,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
@@ -128,6 +139,7 @@
                 ExDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
+                ExCustomRowCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode

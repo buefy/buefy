@@ -63,6 +63,7 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
+                            v-if="!customRow"
                             :key="index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
@@ -116,11 +117,16 @@
                                 </BTableColumn>
                             </template>
                         </tr>
+                        <slot
+                            v-else
+                            :row="row"
+                            :index="index" />
 
                         <!-- Do not add `key` here (breaks details) -->
                         <!-- eslint-disable-next-line -->
                         <tr
                             v-if="detailed && isVisibleDetailRow(row)"
+                            :key="index"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -199,6 +205,10 @@
             columns: {
                 type: Array,
                 default: () => []
+            },
+            customRow: {
+                type: Boolean,
+                default: false
             },
             bordered: Boolean,
             striped: Boolean,

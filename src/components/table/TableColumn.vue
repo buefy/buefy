@@ -41,18 +41,26 @@
         },
         methods: {
             addRefToTable() {
+                var parent
+
                 if (!this.$parent.$data._isTable) {
-                    this.$destroy()
-                    throw new Error('You should wrap bTableColumn on a bTable')
+                    if (this.$parent.$parent.customRow) {
+                        parent = this.$parent.$parent
+                    } else {
+                        this.$destroy()
+                        throw new Error('You should wrap bTableColumn in a bTable or insert the customRow prop as true')
+                    }
+                } else {
+                    parent = this.$parent
                 }
 
                 if (this.internal) return
 
                 // Since we're using scoped prop the columns gonna be multiplied,
                 // this finds when to stop based on the newKey property.
-                const repeated = this.$parent.newColumns.some(
+                const repeated = parent.newColumns.some(
                     (column) => column.newKey === this.newKey)
-                !repeated && this.$parent.newColumns.push(this)
+                !repeated && parent.newColumns.push(this)
             }
         },
         beforeMount() {
