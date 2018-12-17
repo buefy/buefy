@@ -313,7 +313,7 @@
                     this.setHovered(this.data[index])
 
                     const list = this.$refs.dropdown.querySelector('.dropdown-content')
-                    const element = list.querySelectorAll('.dropdown-item:not(.is-disabled)')[index]
+                    const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
 
                     if (!element) return
 
