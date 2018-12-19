@@ -29,7 +29,7 @@
                 ExSimple,
                 ExSimpleCode,
                 outsideVueInstance: `
-                import { Toast } from 'buefy/dist/components/toast'
+                import Toast from 'buefy/dist/components/toast'
                 Toast.open('Toasty!')`
             }
         }
