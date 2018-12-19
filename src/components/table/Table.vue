@@ -403,23 +403,8 @@
                 this.newColumns = [...value]
             },
 
-            /**
-             * When newColumns change, call initSort only first time (For example async data).
-             */
-            newColumns(newColumns) {
-                if (newColumns.length && this.firstTimeSort) {
-                    this.initSort()
-                    this.firstTimeSort = false
-                } else if (newColumns.length) {
-                    if (this.currentSortColumn.field) {
-                        for (let i = 0; i < newColumns.length; i++) {
-                            if (newColumns[i].field === this.currentSortColumn.field) {
-                                this.currentSortColumn = newColumns[i]
-                                break
-                            }
-                        }
-                    }
-                }
+            newColumns(value) {
+                this.checkSort()
             },
 
             /**
@@ -637,6 +622,25 @@
             },
 
             /**
+             * Call initSort only first time (For example async data).
+             */
+            checkSort() {
+                if (this.newColumns.length && this.firstTimeSort) {
+                    this.initSort()
+                    this.firstTimeSort = false
+                } else if (this.newColumns.length) {
+                    if (this.currentSortColumn.field) {
+                        for (let i = 0; i < this.newColumns.length; i++) {
+                            if (this.newColumns[i].field === this.currentSortColumn.field) {
+                                this.currentSortColumn = this.newColumns[i]
+                                break
+                            }
+                        }
+                    }
+                }
+            },
+
+            /**
              * Check if footer slot has custom content.
              */
             hasCustomFooterSlot() {
@@ -711,6 +715,7 @@
 
         mounted() {
             this.checkPredefinedDetailedRows()
+            this.checkSort()
         }
     }
 </script>

@@ -12,6 +12,7 @@
 
 * Fix taginput when ``allow-new`` is enabled
 * Fix pagination order when simple
+* #1126 Fix init sort using columns table prop
 
 ## 0.7.1
 
