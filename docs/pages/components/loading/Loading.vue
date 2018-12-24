@@ -12,6 +12,10 @@
             <p>When you want to close the Loading, call the <code>close()</code> method from the component.</p>
         </Example>
 
+        <Example :component="ExRouterHook" :code="ExRouterHookCode" title="Using inside router hooks">
+            <p>If you want to use the loading component in a component's navigation guard.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -25,6 +29,9 @@
     import ExProgrammatically from './examples/ExProgrammatically'
     import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
 
+    import ExRouterHook from './examples/ExRouterHook'
+    import ExRouterHookCode from '!!raw-loader!./examples/ExRouterHook'
+
     export default {
         data() {
             return {
@@ -32,7 +39,9 @@
                 ExSimple,
                 ExProgrammatically,
                 ExSimpleCode,
-                ExProgrammaticallyCode
+                ExProgrammaticallyCode,
+                ExRouterHook,
+                ExRouterHookCode
             }
         }
     }
