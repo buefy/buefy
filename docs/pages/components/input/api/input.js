@@ -72,6 +72,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>text-color</code>',
+                description: 'Color to be used in input text, optional',
+                type: 'String',
+                values: 'Any Bulma text color class, or custom text color class',
+                default: '—'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

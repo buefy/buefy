@@ -75,6 +75,10 @@
             hasCounter: {
                 type: Boolean,
                 default: () => config.defaultInputHasCounter
+            },
+            textColor: {
+                type: String,
+                default: ''
             }
         },
         data() {
@@ -104,6 +108,7 @@
                 return [
                     this.statusType,
                     this.size,
+                    this.textColor,
                     { 'is-rounded': this.rounded }
                 ]
             },
