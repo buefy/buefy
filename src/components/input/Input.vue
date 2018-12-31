@@ -4,7 +4,7 @@
             v-if="type !== 'textarea'"
             ref="input"
             class="input"
-            :class="inputClasses"
+            :class="[inputClasses, customClass]"
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
@@ -18,7 +18,7 @@
             v-else
             ref="textarea"
             class="textarea"
-            :class="inputClasses"
+            :class="[inputClasses, customClass]"
             :maxlength="maxlength"
             :value="newValue"
             v-bind="$attrs"
@@ -76,7 +76,7 @@
                 type: Boolean,
                 default: () => config.defaultInputHasCounter
             },
-            textColor: {
+            customClass: {
                 type: String,
                 default: ''
             }
@@ -108,7 +108,6 @@
                 return [
                     this.statusType,
                     this.size,
-                    this.textColor,
                     { 'is-rounded': this.rounded }
                 ]
             },
