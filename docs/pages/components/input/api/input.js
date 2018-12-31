@@ -72,6 +72,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>custom-class</code>',
+                description: 'CSS classes to be applied on input',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
