@@ -2,7 +2,7 @@
     <span
         :data-label="label"
         :class="[newType, position, size, {
-            'tooltip': active,
+            'b-tooltip': active,
             'is-square': square,
             'is-animated': newAnimated,
             'is-always': always,

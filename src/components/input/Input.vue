@@ -4,7 +4,7 @@
             v-if="type !== 'textarea'"
             ref="input"
             class="input"
-            :class="inputClasses"
+            :class="[inputClasses, customClass]"
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
@@ -18,7 +18,7 @@
             v-else
             ref="textarea"
             class="textarea"
-            :class="inputClasses"
+            :class="[inputClasses, customClass]"
             :maxlength="maxlength"
             :value="newValue"
             v-bind="$attrs"
@@ -75,6 +75,10 @@
             hasCounter: {
                 type: Boolean,
                 default: () => config.defaultInputHasCounter
+            },
+            customClass: {
+                type: String,
+                default: ''
             }
         },
         data() {

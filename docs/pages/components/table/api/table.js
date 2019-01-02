@@ -211,6 +211,13 @@ export default [
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>mobile-sort-placeholder</code>',
+                description: 'Text when nothing is selected',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         slots: [

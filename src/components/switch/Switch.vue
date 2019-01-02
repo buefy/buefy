@@ -16,6 +16,7 @@
             @click.stop
             :disabled="disabled"
             :name="name"
+            :required="required"
             :value="nativeValue"
             :true-value="trueValue"
             :false-value="falseValue">
@@ -33,6 +34,7 @@
             disabled: Boolean,
             type: String,
             name: String,
+            required: Boolean,
             size: String,
             trueValue: {
                 type: [String, Number, Boolean, Function, Object, Array, Symbol],

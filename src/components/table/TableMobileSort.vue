@@ -2,6 +2,16 @@
     <div class="field table-mobile-sort">
         <div class="field has-addons">
             <b-select v-model="mobileSort" expanded>
+                <template v-if="placeholder">
+                    <option
+                        v-show="showPlaceholder"
+                        :value="{}"
+                        selected
+                        disabled
+                        hidden>
+                        {{ placeholder }}
+                    </option>
+                </template>
                 <option
                     v-for="(column, index) in columns"
                     v-if="column.sortable"
@@ -40,11 +50,17 @@
         props: {
             currentSortColumn: Object,
             isAsc: Boolean,
-            columns: Array
+            columns: Array,
+            placeholder: String
         },
         data() {
             return {
                 mobileSort: this.currentSortColumn
+            }
+        },
+        computed: {
+            showPlaceholder() {
+                return !this.columns || !this.columns.some((column) => column === this.mobileSort)
             }
         },
         watch: {
@@ -53,7 +69,6 @@
 
                 this.$emit('sort', column)
             },
-
             currentSortColumn(column) {
                 this.mobileSort = column
             }

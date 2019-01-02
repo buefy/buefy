@@ -86,7 +86,7 @@
              * When tab-items are updated, set active one.
              */
             tabItems() {
-                if (this.tabItems.length) {
+                if (this.activeTab < this.tabItems.length) {
                     this.tabItems[this.activeTab].isActive = true
                 }
             }
@@ -98,7 +98,9 @@
             changeTab(newIndex) {
                 if (this.activeTab === newIndex) return
 
-                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                if (this.activeTab < this.tabItems.length) {
+                    this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                }
                 this.tabItems[newIndex].activate(this.activeTab, newIndex)
                 this.activeTab = newIndex
                 this.$emit('change', newIndex)
@@ -113,7 +115,7 @@
             }
         },
         mounted() {
-            if (this.tabItems.length) {
+            if (this.activeTab < this.tabItems.length) {
                 this.tabItems[this.activeTab].isActive = true
             }
         }

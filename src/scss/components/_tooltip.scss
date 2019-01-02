@@ -78,7 +78,7 @@ $tooltip-multiline-sizes: (
 }
 
 // Base
-.tooltip {
+.b-tooltip {
     @include tooltip("is-top");
     @include tooltip("is-right");
     @include tooltip("is-bottom");

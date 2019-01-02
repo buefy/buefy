@@ -34,11 +34,14 @@
                 :size="size"
                 :disabled="disabled"
                 :loading="loading"
-                keep-first
+                :keep-first="!allowNew"
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
                 @select="onSelect">
+                <template :slot="headerSlotName">
+                    <slot name="header" />
+                </template>
                 <template
                     :slot="defaultSlotName"
                     slot-scope="props">
@@ -166,12 +169,20 @@
                 return this.hasEmptySlot ? 'empty' : 'dontrender'
             },
 
+            headerSlotName() {
+                return this.hasHeaderSlot ? 'header' : 'dontrender'
+            },
+
             hasDefaultSlot() {
                 return !!this.$scopedSlots.default
             },
 
             hasEmptySlot() {
                 return !!this.$slots.empty
+            },
+
+            hasHeaderSlot() {
+                return !!this.$slots.header
             },
 
             /**

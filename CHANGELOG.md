@@ -1,5 +1,19 @@
 # Buefy Changelog
 
+## 0.7.2
+
+### New features
+
+* Add ``header`` autocomplete slot to taginput
+* Add ``required`` prop to switch
+* Add ``mobile-sort-placeholder`` prop to table
+
+### Fixes
+
+* Fix taginput when ``allow-new`` is enabled
+* Fix pagination order when simple
+* #1126 Fix init sort using columns table prop
+
 ## 0.7.1
 
 ### New features

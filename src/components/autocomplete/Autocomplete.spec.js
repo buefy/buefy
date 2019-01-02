@@ -70,11 +70,7 @@ describe('BAutocomplete', () => {
 
         expect($dropdown.isVisible()).toBeTruthy()
 
-        expect(wrapper.contains('b')).toBeTruthy()
-
-        const wordsInBold = wrapper.findAll('b')
         const itemsInDropdowm = findStringsStartingWith(DATA_LIST, VALUE_TYPED)
-        expect(itemsInDropdowm).toHaveLength(wordsInBold.length)
 
         $input.trigger('keydown.down')
         $input.trigger('keydown.enter')

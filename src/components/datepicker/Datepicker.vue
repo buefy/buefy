@@ -95,22 +95,24 @@
                     </div>
                 </header>
 
-                <b-datepicker-table
-                    v-model="dateSelected"
-                    :day-names="dayNames"
-                    :month-names="monthNames"
-                    :first-day-of-week="firstDayOfWeek"
-                    :min-date="minDate"
-                    :max-date="maxDate"
-                    :focused="focusedDateData"
-                    :disabled="disabled"
-                    :unselectable-dates="unselectableDates"
-                    :unselectable-days-of-week="unselectableDaysOfWeek"
-                    :selectable-dates="selectableDates"
-                    :events="events"
-                    :indicators="indicators"
-                    :date-creator="dateCreator"
-                    @close="$refs.dropdown.isActive = false"/>
+                <div class="datepicker-body">
+                    <b-datepicker-table
+                        v-model="dateSelected"
+                        :day-names="dayNames"
+                        :month-names="monthNames"
+                        :first-day-of-week="firstDayOfWeek"
+                        :min-date="minDate"
+                        :max-date="maxDate"
+                        :focused="focusedDateData"
+                        :disabled="disabled"
+                        :unselectable-dates="unselectableDates"
+                        :unselectable-days-of-week="unselectableDaysOfWeek"
+                        :selectable-dates="selectableDates"
+                        :events="events"
+                        :indicators="indicators"
+                        :date-creator="dateCreator"
+                        @close="$refs.dropdown.isActive = false"/>
+                </div>
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"

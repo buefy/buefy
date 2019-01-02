@@ -45,7 +45,9 @@
                             :option="option"
                             :index="index"
                         />
-                        <span v-else v-html="getValue(option, true)"/>
+                        <span v-else>
+                            {{ getValue(option, true) }}
+                        </span>
                     </a>
                     <div
                         v-if="data.length === 0 && hasEmptySlot"
@@ -59,7 +61,7 @@
 </template>
 
 <script>
-    import { getValueByPath, escapeRegExpChars } from '../../utils/helpers'
+    import { getValueByPath } from '../../utils/helpers'
     import FormElementMixin from '../../utils/FormElementMixin'
     import Input from '../input/Input'
 
@@ -266,23 +268,13 @@
             /**
              * Return display text for the input.
              * If object, get value from path, or else just the value.
-             * If hightlight, find the text with regex and make bold.
              */
-            getValue(option, isHighlight = false) {
+            getValue(option) {
                 if (!option) return
 
-                const value = typeof option === 'object'
+                return typeof option === 'object'
                     ? getValueByPath(option, this.field)
                     : option
-
-                const escapedValue = typeof this.newValue === 'string'
-                    ? escapeRegExpChars(this.newValue)
-                    : this.newValue
-                const regex = new RegExp(`(${escapedValue})`, 'gi')
-
-                return isHighlight
-                    ? value.replace(regex, '<b>$1</b>')
-                    : value
             },
 
             /**
@@ -321,7 +313,7 @@
                     this.setHovered(this.data[index])
 
                     const list = this.$refs.dropdown.querySelector('.dropdown-content')
-                    const element = list.querySelectorAll('.dropdown-item:not(.is-disabled)')[index]
+                    const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
 
                     if (!element) return
 

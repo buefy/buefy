@@ -141,6 +141,11 @@ export default [
                 name: '<code>empty</code>',
                 description: 'Show like an option if <code>data</code> array prop is empty',
                 props: '—'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Show a custom header as first option',
+                props: '—'
             }
         ],
         events: [

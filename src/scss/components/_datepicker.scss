@@ -13,6 +13,9 @@
         margin-bottom: 0.875rem;
         border-bottom: 1px solid $grey-lighter;
     }
+    .datepicker-body {
+        min-height: 16.25rem;
+    }
     .datepicker-footer {
         padding-top: 0.875rem;
         border-top: 1px solid $grey-lighter;
@@ -35,6 +38,7 @@
                 font-weight: $weight-semibold;
             }
         }
+
         .datepicker-body {
             display: table-row-group;
             .datepicker-row {
@@ -118,6 +122,9 @@
         @include control-large;
     }
     @include tablet-only {
+        .datepicker-body {
+            min-height: 19.75rem;
+        }
         .datepicker-table {
             .datepicker-cell {
                 padding: 0.75rem 1rem;
@@ -125,6 +132,9 @@
         }
     }
     @include mobile {
+        .datepicker-body {
+            min-height: 12.75rem;
+        }
         .datepicker-table {
             .datepicker-cell {
                 padding: 0.25rem 0.5rem;
