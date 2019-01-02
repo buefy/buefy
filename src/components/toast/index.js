@@ -6,14 +6,20 @@ import { use, registerComponentProgrammatic } from '../../utils/plugins'
 const ToastProgrammatic = {
     open(params) {
         let message
+        let parent
         if (typeof params === 'string') message = params
 
         const defaultParam = { message }
+        if (params.parent) {
+            parent = params.parent
+            delete params.parent
+        }
         const propsData = Object.assign(defaultParam, params)
 
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
         const ToastComponent = vm.extend(Toast)
         return new ToastComponent({
+            parent,
             el: document.createElement('div'),
             propsData
         })
