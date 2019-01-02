@@ -151,7 +151,7 @@ export default [
             },
             {
                 name: '<code>per-page</code>',
-                description: 'How many rows per page (if <code>paginated</code>)',
+                description: 'How many rows per page (when the value is 0, it shows only one page with all the data) (if <code>paginated</code>)',
                 type: 'Number',
                 values: '—',
                 default: '<code>20</code>'

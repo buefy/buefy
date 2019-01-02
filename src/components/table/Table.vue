@@ -161,7 +161,7 @@
                     <b-pagination
                         :icon-pack="iconPack"
                         :total="newDataTotal"
-                        :per-page="perPage === '' ? newDataTotal : perPage"
+                        :per-page="perPage === '0' ? newDataTotal : perPage"
                         :simple="paginationSimple"
                         :size="paginationSize"
                         :current="newCurrentPage"
@@ -299,7 +299,7 @@
                 if (!this.paginated) return this.newData
 
                 const currentPage = this.newCurrentPage
-                const perPage = this.perPage === '' ? this.newData.length : this.perPage
+                const perPage = this.perPage === '0' ? this.newData.length : this.perPage
 
                 if (this.newData.length <= perPage) {
                     return this.newData
