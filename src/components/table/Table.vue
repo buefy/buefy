@@ -18,7 +18,7 @@
                 @keydown.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
-                        <th v-if="detailed" width="40px"/>
+                        <th v-if="detailed && chevron" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox
                                 :value="isAllChecked"
@@ -66,13 +66,13 @@
                             :key="index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
-                                'is-checked': isRowChecked(row)
+                                'is-checked': isRowChecked(row),
                             }]"
-                            @click="selectRow(row)"
+                            @click="detailed && !chevron ? toggleWithSelect(row):selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
 
                             <td
-                                v-if="detailed"
+                                v-if="detailed && chevron"
                                 class="chevron-cell"
                             >
                                 <a
@@ -235,6 +235,10 @@
             perPage: {
                 type: [Number, String],
                 default: 20
+            },
+            chevron: {
+                type: Boolean,
+                default: true
             },
             paginationSimple: Boolean,
             paginationSize: String,
@@ -584,6 +588,14 @@
 
                 // Syncs the detailed rows with the parent component
                 this.$emit('update:openedDetailed', this.visibleDetailRows)
+            },
+                        /**
+             * Toggle to show/hide details slot && emit row click event
+             in case chevron is hidden
+             */
+            toggleWithSelect(row) {
+                this.selectRow(row)
+                this.toggleDetails(row)
             },
 
             openDetailRow(obj) {
