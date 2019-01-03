@@ -172,7 +172,7 @@ export default [
             },
             {
                 name: '<code>chevron</code>',
-                description: 'Allow shevron icon and column to be visible. if not will make the row click expand the row',
+                description: 'Allow chevron icon and column to be visible. if not will make the row click expand the row',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

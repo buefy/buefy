@@ -18,7 +18,7 @@
                 @keydown.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
-                        <th v-if="detailed && chevron" width="40px"/>
+                        <th v-if="detailRow" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox
                                 :value="isAllChecked"
@@ -68,7 +68,7 @@
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row),
                             }]"
-                            @click="detailed && !chevron ? toggleWithSelect(row):selectRow(row)"
+                            @click="detailed && !chevron ? toggleOnclick(row) : selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
 
                             <td
@@ -283,6 +283,14 @@
             }
         },
         computed: {
+            /**
+             * return if detailed row tabled
+             * will be with chevron column an icon or not
+             */
+            detailRow() {
+                return this.detailed && this.chevron
+            },
+
             tableClasses() {
                 return {
                     'is-bordered': this.bordered,
@@ -589,11 +597,11 @@
                 // Syncs the detailed rows with the parent component
                 this.$emit('update:openedDetailed', this.visibleDetailRows)
             },
-                        /**
+            /**
              * Toggle to show/hide details slot && emit row click event
              in case chevron is hidden
              */
-            toggleWithSelect(row) {
+            toggleOnclick(row) {
                 this.selectRow(row)
                 this.toggleDetails(row)
             },
