@@ -171,8 +171,8 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>chevron</code>',
-                description: 'Allow chevron icon and column to be visible. if not will make the row click expand the row',
+                name: '<code>showDetailIcon</code>',
+                description: 'Allow chevron icon and column to be visible',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

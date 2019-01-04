@@ -18,7 +18,7 @@
                 @keydown.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
-                        <th v-if="detailRow" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox
                                 :value="isAllChecked"
@@ -68,11 +68,11 @@
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row),
                             }]"
-                            @click="detailed && !chevron ? toggleOnclick(row) : selectRow(row)"
+                            @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)">
 
                             <td
-                                v-if="detailed && chevron"
+                                v-if="showDetailRowIcon"
                                 class="chevron-cell"
                             >
                                 <a
@@ -236,7 +236,7 @@
                 type: [Number, String],
                 default: 20
             },
-            chevron: {
+            showDetailIcon: {
                 type: Boolean,
                 default: true
             },
@@ -285,10 +285,10 @@
         computed: {
             /**
              * return if detailed row tabled
-             * will be with chevron column an icon or not
+             * will be with chevron column & icon or not
              */
-            detailRow() {
-                return this.detailed && this.chevron
+            showDetailRowIcon() {
+                return this.detailed && this.showDetailIcon
             },
 
             tableClasses() {
@@ -596,14 +596,6 @@
 
                 // Syncs the detailed rows with the parent component
                 this.$emit('update:openedDetailed', this.visibleDetailRows)
-            },
-            /**
-             * Toggle to show/hide details slot && emit row click event
-             in case chevron is hidden
-             */
-            toggleOnclick(row) {
-                this.selectRow(row)
-                this.toggleDetails(row)
             },
 
             openDetailRow(obj) {
