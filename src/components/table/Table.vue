@@ -70,7 +70,7 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @contextmenu.prevent="$emit('contextmenu', row, $event)">
+                            @contextmenu="$emit('contextmenu', row, $event)">
 
                             <td
                                 v-if="detailed"

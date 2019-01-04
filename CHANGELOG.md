@@ -7,6 +7,7 @@
 * Add ``header`` autocomplete slot to taginput
 * Add ``required`` prop to switch
 * Add ``mobile-sort-placeholder`` prop to table
+* Add ``contextmenu`` event to table (thanks @gps-dev)
 
 ### Fixes
 

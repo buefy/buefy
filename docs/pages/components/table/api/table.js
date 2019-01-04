@@ -297,6 +297,11 @@ export default [
                 name: '<code>details-close</code>',
                 description: 'Triggers when details is closed',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>contextmenu</code>',
+                description: 'Triggers when right-click on a row',
+                parameters: '<code>row: Object</code>, <code>row: Object</code>'
             }
         ],
         methods: [
