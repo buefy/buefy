@@ -7,7 +7,8 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                class="label" >
+                class="label"
+                :class="[labelSrOnly ? 'is-sr-only' : '']">
                 {{ label }}
             </label>
         </div>
@@ -15,7 +16,7 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                :class="customClass"
+                :class="[labelSrOnly ? 'is-sr-only' : '', customClass]"
                 class="label">
                 {{ label }}
             </label>
@@ -60,7 +61,8 @@
                 type: Boolean,
                 default: true
             },
-            customClass: String
+            customClass: String,
+            labelSrOnly: Boolean
         },
         data() {
             return {

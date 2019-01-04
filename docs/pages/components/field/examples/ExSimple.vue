@@ -31,5 +31,13 @@
                 <option value="2">Option 2</option>
             </b-select>
         </b-field>
+
+        <p>Adding <code>label-sr-only</code> will make the label invisible but still accessible to screen readers.</p>
+        <b-field label="This label is read by a screen reader" label-for="unique-select-id" label-sr-only>
+            <b-select placeholder="Select" id="unique-select-id">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+            </b-select>
+        </b-field>
     </section>
 </template>
