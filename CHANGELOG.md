@@ -8,6 +8,7 @@
 * Add ``required`` prop to switch
 * Add ``mobile-sort-placeholder`` prop to table
 * Add ``contextmenu`` event to table (thanks @gps-dev)
+* Add ``show-detail-icon`` prop to table and toggle row detail programmatically (thanks @omer2500)
 
 ### Fixes
 

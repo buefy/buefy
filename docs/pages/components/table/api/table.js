@@ -319,6 +319,11 @@ export default [
             {
                 name: '<code>focus</code>',
                 description: 'Focus table element if is <code>focusable</code>'
+            },
+            {
+                name: '<code>toggleDetails</code>',
+                description: 'Toggle row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
             }
         ]
     },

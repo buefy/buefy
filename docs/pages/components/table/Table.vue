@@ -35,6 +35,7 @@
 
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
+            <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method</p>
         </Example>
 
         <Example :component="ExRowStatus" :code="ExRowStatusCode" title="Row status">

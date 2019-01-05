@@ -74,6 +74,7 @@
                 methodsColumns: [
                     { label: 'Name', field: 'name', renderHtml: true },
                     { label: 'Description', field: 'description', renderHtml: true },
+                    { label: 'Parameters', field: 'parameters', renderHtml: true },
                     { label: 'Return', field: 'return', renderHtml: true }
                 ]
             }
