@@ -18,7 +18,7 @@
                 @keydown.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
-                        <th v-if="detailed" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
                             <b-checkbox
                                 :value="isAllChecked"
@@ -66,14 +66,14 @@
                             :key="index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
-                                'is-checked': isRowChecked(row)
+                                'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
                             @contextmenu="$emit('contextmenu', row, $event)">
 
                             <td
-                                v-if="detailed"
+                                v-if="showDetailRowIcon"
                                 class="chevron-cell"
                             >
                                 <a
@@ -237,6 +237,10 @@
                 type: [Number, String],
                 default: 20
             },
+            showDetailIcon: {
+                type: Boolean,
+                default: true
+            },
             paginationSimple: Boolean,
             paginationSize: String,
             backendSorting: Boolean,
@@ -280,6 +284,14 @@
             }
         },
         computed: {
+            /**
+             * return if detailed row tabled
+             * will be with chevron column & icon or not
+             */
+            showDetailRowIcon() {
+                return this.detailed && this.showDetailIcon
+            },
+
             tableClasses() {
                 return {
                     'is-bordered': this.bordered,
