@@ -104,7 +104,7 @@ export default {
          */
         checkHtml5Validity() {
             if (!this.useHtml5Validation) return
-            
+
             if (this.$refs[this.$data._elementRef] === undefined) return
 
             const el = this.$el.querySelector(this.$data._elementRef)
