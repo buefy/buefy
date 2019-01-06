@@ -11,7 +11,11 @@ export default {
         // Native options to use in HTML5 validation
         autocomplete: String,
         maxlength: [Number, String],
-        useHtml5Validation: Boolean
+        useHtml5Validation: {
+            type: Boolean,
+            required: false,
+            default: config.defaultUseHtml5Validation
+        }
     },
     data() {
         return {
@@ -86,9 +90,7 @@ export default {
         onBlur($event) {
             this.isFocused = false
             this.$emit('blur', $event)
-            if (this.useHtml5Validation || config.defaultUseHtml5Validation) {
-                this.checkHtml5Validity()
-            }
+            this.checkHtml5Validity()
         },
 
         onFocus($event) {
@@ -102,6 +104,8 @@ export default {
          * and error message to parent if it's a Field.
          */
         checkHtml5Validity() {
+            if (!this.useHtml5Validation) return
+            
             if (this.$refs[this.$data._elementRef] === undefined) return
 
             const el = this.$el.querySelector(this.$data._elementRef)
