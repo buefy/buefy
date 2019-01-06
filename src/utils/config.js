@@ -21,7 +21,8 @@ let config = {
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
     defaultNoticeQueue: true,
-    defaultInputHasCounter: true
+    defaultInputHasCounter: true,
+    defaultUseHtml5Validation: true
 }
 
 export default config
