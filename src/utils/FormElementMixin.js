@@ -13,7 +13,7 @@ export default {
         maxlength: [Number, String],
         useHtml5Validation: {
             type: Boolean,
-            default: config.defaultUseHtml5Validation
+            default: () => config.defaultUseHtml5Validation
         }
     },
     data() {
