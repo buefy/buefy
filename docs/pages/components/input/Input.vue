@@ -8,6 +8,7 @@
 
         <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical>
             <p>Automatic HTML5 validation on-blur.</p>
+            <p>You can use <code>use-html5-validation</code> prop to disable the default HTML5 validation.</p>
         </Example>
 
         <Example :component="ExPassword" :code="ExPasswordCode" title="Password" vertical>

@@ -169,6 +169,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultUseHtml5Validation</code>',
+                description: 'Default form components <code>use-html5-validation</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             }
         ]
     }
