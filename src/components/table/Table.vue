@@ -26,8 +26,7 @@
                                 @change.native="checkAll"/>
                         </th>
                         <th
-                            v-for="(column, index) in newColumns"
-                            v-if="column.visible || column.visible === undefined"
+                            v-for="(column, index) in visibleColumns"
                             :key="index"
                             :class="{
                                 'is-current-sort': currentSortColumn === column,
@@ -93,6 +92,7 @@
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @change.native="checkRow(row)"
+                                    @click.native.stop
                                 />
                             </td>
 
@@ -321,6 +321,13 @@
                     const end = parseInt(start, 10) + parseInt(perPage, 10)
                     return this.newData.slice(start, end)
                 }
+            },
+
+            visibleColumns() {
+                if (!this.newColumns) return this.newColumns
+                return this.newColumns.filter((column) => {
+                    return column.visible || column.visible === undefined
+                })
             },
 
             /**

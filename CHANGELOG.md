@@ -10,6 +10,7 @@
 * Add ``contextmenu`` event to table (thanks @gps-dev)
 * Add ``show-detail-icon`` prop to table and toggle row detail programmatically (thanks @omer2500)
 * Add ``use-html5-validation`` prop to form components and ``defaultUseHtml5Validation`` constructor options (thanks @lukio3)
+* #1164 Disable selecting row on checkbox click when table is ``checkable``
 
 ### Fixes
 
