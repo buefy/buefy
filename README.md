@@ -108,13 +108,12 @@ https://github.com/buefy/buefy/issues/458
 
 * [Twitter](https://twitter.com/rafaelpimpa)
 
-## Collaborators
+## Maintainers
 
 * Walter Tommasi — [@jtommy](https://github.com/jtommy)
-* Antério Vieira — [@anteriovieira](https://twitter.com/anteriovieira)
 
 ## License
 
 Code released under [MIT]((https://github.com/buefy/buefy/blob/master/LICENSE)) license.
 
-Copyright (c) 2018, Rafael Beraldo.
+Copyright (c) 2019, Rafael Beraldo.
