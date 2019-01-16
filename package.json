@@ -4,6 +4,9 @@
   "homepage": "https://buefy.github.io",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
+  "maintainers": [
+    "Walter Tommasi <tommsi20@gmail.com>"
+  ],
   "license": "MIT",
   "main": "dist/buefy.js",
   "unpkg": "dist/buefy.min.js",
