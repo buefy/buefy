@@ -114,6 +114,6 @@ https://github.com/buefy/buefy/issues/458
 
 ## License
 
-Code released under [MIT]((https://github.com/buefy/buefy/blob/master/LICENSE)) license.
+Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
 
-Copyright (c) 2019, Rafael Beraldo.
+Copyright (c), Rafael Beraldo.
