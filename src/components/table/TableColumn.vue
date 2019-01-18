@@ -51,7 +51,10 @@
                 // Since we're using scoped prop the columns gonna be multiplied,
                 // this finds when to stop based on the newKey property.
                 const repeated = this.$parent.newColumns.some(
-                    (column) => column.newKey === this.newKey)
+                    (column) => {
+                        let columnNewKey = column.customKey || column.label
+                        return columnNewKey === this.newKey
+                    })
                 !repeated && this.$parent.newColumns.push(this)
             }
         },
