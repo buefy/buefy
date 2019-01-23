@@ -12,6 +12,7 @@
                 v-model="computedValue"
                 type="checkbox"
                 :disabled="disabled"
+                :required="required"
                 :name="name"
                 :value="nativeValue">
         </label>
@@ -25,6 +26,7 @@
             value: [String, Number, Boolean, Function, Object, Array, Symbol],
             nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
             disabled: Boolean,
+            required: Boolean,
             name: String,
             size: String,
             type: {

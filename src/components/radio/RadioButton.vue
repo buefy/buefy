@@ -12,6 +12,7 @@
                 v-model="computedValue"
                 type="radio"
                 :disabled="disabled"
+                :required="required"
                 :name="name"
                 :value="nativeValue">
         </label>
@@ -29,6 +30,7 @@
                 default: 'is-primary'
             },
             disabled: Boolean,
+            required: Boolean,
             name: String,
             size: String
         },

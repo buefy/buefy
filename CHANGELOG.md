@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.7.3
+
+### New features
+
+* Add ``required`` prop to radio-button and checkbox-button
+* Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
+
 ## 0.7.2
 
 ### New features
