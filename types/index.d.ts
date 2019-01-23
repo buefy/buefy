@@ -32,6 +32,7 @@ export declare type BuefyConfig = {
     defaultFirstDayOfWeek?: number;
     defaultTimeFormatter?: Function;
     defaultTimeParser?: Function;
+    defaultModalCanCancel?: string[];
     defaultModalScroll?: string;
     defaultDatepickerMobileNative?: boolean;
     defaultTimepickerMobileNative?: boolean;
