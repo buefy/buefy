@@ -7,6 +7,10 @@
 * Add ``required`` prop to radio-button and checkbox-button
 * Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
 
+### Fixes
+
+* #1177 Fix IE/Edge datepicker content size
+
 ## 0.7.2
 
 ### New features
