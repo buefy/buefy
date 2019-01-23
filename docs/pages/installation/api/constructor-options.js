@@ -136,6 +136,13 @@ export default [
                 default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
+                name: '<code>defaultModalCanCancel</code>',
+                description: `Default modal <code>canCancel</code> attribute`,
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>x</code>, <code>outside</code>, <code>button</code>',
+                default: `<code>['escape', 'x', 'outside', 'button']</code>`
+            },
+            {
                 name: '<code>defaultModalScroll</code>',
                 description: `Default modal/dialog <code>scroll</code> attribute`,
                 type: 'String',

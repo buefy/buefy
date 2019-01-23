@@ -17,6 +17,7 @@ let config = {
     defaultUnselectableDaysOfWeek: null,
     defaultTimeFormatter: null,
     defaultTimeParser: null,
+    defaultModalCanCancel: null,
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
