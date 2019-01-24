@@ -95,6 +95,11 @@
              * Equivalent FA icon name of the MDI.
              */
             getEquivalentIconOf(value) {
+                // Only transform the class if the both prop is set to true
+                if (!this.both) {
+                    return value
+                }
+
                 switch (value) {
                     case 'check': return 'check'
                     case 'information': return 'info-circle'
