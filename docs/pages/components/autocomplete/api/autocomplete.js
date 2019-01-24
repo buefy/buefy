@@ -132,6 +132,11 @@ export default [
                 parameters: '<code>event: $event</code>'
             },
             {
+                name: '<code>typing</code>',
+                description: 'Triggers when user is typing',
+                parameters: '<code>value: String</code>'
+            },
+            {
                 name: '<code>[any].native</code>',
                 description: 'Listen to any native event, e.g. <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
