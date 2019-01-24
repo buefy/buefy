@@ -362,7 +362,7 @@
             onInput(event) {
                 const currentValue = this.getValue(this.selected)
                 if (currentValue && currentValue === this.newValue) return
-                this.$emit('typing', this.newValue.trim())
+                this.$emit('typing', this.newValue)
             }
         },
         created() {

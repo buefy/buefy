@@ -301,7 +301,7 @@
             },
 
             onTyping($event) {
-                this.$emit('typing', $event)
+                this.$emit('typing', $event.trim())
             }
         }
     }
