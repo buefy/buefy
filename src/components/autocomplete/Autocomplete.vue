@@ -11,6 +11,7 @@
             :maxlength="maxlength"
             autocomplete="off"
             v-bind="$attrs"
+            @input="onInput"
             @focus="focused"
             @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
@@ -357,6 +358,11 @@
             onBlur(event) {
                 this.hasFocus = false
                 this.$emit('blur', event)
+            },
+            onInput(event) {
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue === this.newValue) return
+                this.$emit('typing', this.newValue)
             }
         },
         created() {
