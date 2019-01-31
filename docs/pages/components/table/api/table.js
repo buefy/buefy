@@ -171,6 +171,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>showDetailIcon</code>',
+                description: 'Allow chevron icon and column to be visible',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>opened-detailed</code>',
                 description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop)',
                 type: 'Array',
@@ -178,11 +185,11 @@ export default [
                 default: '<code>[]</code>'
             },
             {
-              name: '<code>has-detailed-visible</code>',
-              description: 'Controls the visibility of the trigger that toggles the detailed rows.',
-              type: 'Function (row: Object)',
-              values: '—',
-              default: '<code>true</code>'
+                name: '<code>has-detailed-visible</code>',
+                description: 'Controls the visibility of the trigger that toggles the detailed rows.',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>detail-key</code>',
@@ -297,6 +304,11 @@ export default [
                 name: '<code>details-close</code>',
                 description: 'Triggers when details is closed',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>contextmenu</code>',
+                description: 'Triggers when right-click on a row',
+                parameters: '<code>row: Object</code>, <code>row: Object</code>'
             }
         ],
         methods: [
@@ -307,6 +319,11 @@ export default [
             {
                 name: '<code>focus</code>',
                 description: 'Focus table element if is <code>focusable</code>'
+            },
+            {
+                name: '<code>toggleDetails</code>',
+                description: 'Toggle row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
             }
         ]
     },

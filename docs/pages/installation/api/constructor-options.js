@@ -12,6 +12,15 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>defaultIconComponent</code>',
+                description: `Component used to render the Icon.
+                    Can be used to render FontAwesome 5 icons with the
+                    <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
+                type: 'Component',
+                values: '<code>vue-fontawesome</code>',
+                default: '<code>null</code>'
+            },
+            {
                 name: '<code>defaultContainerElement</code>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
@@ -136,6 +145,13 @@ export default [
                 default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
+                name: '<code>defaultModalCanCancel</code>',
+                description: `Default modal <code>canCancel</code> attribute`,
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>x</code>, <code>outside</code>, <code>button</code>',
+                default: `<code>['escape', 'x', 'outside', 'button']</code>`
+            },
+            {
                 name: '<code>defaultModalScroll</code>',
                 description: `Default modal/dialog <code>scroll</code> attribute`,
                 type: 'String',
@@ -166,6 +182,13 @@ export default [
             {
                 name: '<code>defaultInputHasCounter</code>',
                 description: 'Default input <code>has-counter</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultUseHtml5Validation</code>',
+                description: 'Default form components <code>use-html5-validation</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

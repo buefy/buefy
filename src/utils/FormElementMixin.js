@@ -10,7 +10,11 @@ export default {
         iconPack: String,
         // Native options to use in HTML5 validation
         autocomplete: String,
-        maxlength: [Number, String]
+        maxlength: [Number, String],
+        useHtml5Validation: {
+            type: Boolean,
+            default: () => config.defaultUseHtml5Validation
+        }
     },
     data() {
         return {
@@ -99,6 +103,8 @@ export default {
          * and error message to parent if it's a Field.
          */
         checkHtml5Validity() {
+            if (!this.useHtml5Validation) return
+
             if (this.$refs[this.$data._elementRef] === undefined) return
 
             const el = this.$el.querySelector(this.$data._elementRef)
@@ -113,16 +119,18 @@ export default {
             }
             this.isValid = isValid
 
-            if (this.parentField) {
-                // Set type only if not defined
-                if (!this.parentField.type) {
-                    this.parentField.newType = type
+            this.$nextTick(() => {
+                if (this.parentField) {
+                    // Set type only if not defined
+                    if (!this.parentField.type) {
+                        this.parentField.newType = type
+                    }
+                    // Set message only if not defined
+                    if (!this.parentField.message) {
+                        this.parentField.newMessage = message
+                    }
                 }
-                // Set message only if not defined
-                if (!this.parentField.message) {
-                    this.parentField.newMessage = message
-                }
-            }
+            })
 
             return this.isValid
         }

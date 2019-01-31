@@ -5,10 +5,6 @@
         <Example :component="ExObjArray" :code="ExObjArrayCode" title="Object array"/>
 
         <Example :component="ExHeader" :code="ExHeaderCode" title="Header">
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.6</span>
-            </div>
             <p>You can add your custom header to the autocomplete.</p>
         </Example>
 

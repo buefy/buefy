@@ -1,5 +1,17 @@
 # Buefy Changelog
 
+## 0.7.3
+
+### New features
+
+* Add ``required`` prop to radio-button and checkbox-button
+* Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
+* Add ``typing`` event to autocomplete (thanks @adrlen)
+
+### Fixes
+
+* #1177 Fix IE/Edge datepicker content size
+
 ## 0.7.2
 
 ### New features
@@ -7,12 +19,17 @@
 * Add ``header`` autocomplete slot to taginput
 * Add ``required`` prop to switch
 * Add ``mobile-sort-placeholder`` prop to table
+* Add ``contextmenu`` event to table (thanks @gps-dev)
+* Add ``show-detail-icon`` prop to table and toggle row detail programmatically (thanks @omer2500)
+* Add ``use-html5-validation`` prop to form components and ``defaultUseHtml5Validation`` constructor options (thanks @lukio3)
+* #1164 Disable selecting row on checkbox click when table is ``checkable``
 
 ### Fixes
 
 * Fix taginput when ``allow-new`` is enabled
 * Fix pagination order when simple
 * #1126 Fix init sort using columns table prop
+* #898, #1154 Fix browser autocomplete using multiple fields
 
 ## 0.7.1
 

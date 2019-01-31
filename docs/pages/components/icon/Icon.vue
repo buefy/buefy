@@ -12,6 +12,10 @@
         <b-message type="is-info">
             Using <code>far</code> or <code>fad</code> while having FontAwesome free tier might have missing icons.
         </b-message>
+        <b-message type="is-info">
+            You can set the <code>defaultIconComponent</code> constructor option to render icons with the
+            <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component.
+        </b-message>
         <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
 
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>

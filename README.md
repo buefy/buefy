@@ -100,21 +100,21 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 * **Y**: Major (breaking changes)
 * **Z**: Minor or patch
 
-## Current roadmap
-
-https://github.com/buefy/buefy/issues/458
-
-## Stay in touch
-
-* [Twitter](https://twitter.com/rafaelpimpa)
-
-## Collaborators
+## Maintainers
 
 * Walter Tommasi — [@jtommy](https://github.com/jtommy)
-* Antério Vieira — [@anteriovieira](https://twitter.com/anteriovieira)
+
+## Supporting through Patreon
+
+Buefy is an open source MIT project if you are interested in supporting this project, please consider becoming a patron.
+<p align="center">
+  <a href="https://www.patreon.com/jtommy">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
+  </a>
+</p>
 
 ## License
 
-Code released under [MIT]((https://github.com/buefy/buefy/blob/master/LICENSE)) license.
+Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
 
-Copyright (c) 2018, Rafael Beraldo.
+Copyright (c), [Rafael Beraldo](https://twitter.com/rafaelpimpa).
