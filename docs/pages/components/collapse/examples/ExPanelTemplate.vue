@@ -2,14 +2,23 @@
     <section>
 
         <div class="block">
-            <button class="button is-medium is-primary"
-                @click="isOpen = !isOpen">
+            <button
+                class="button is-medium is-primary"
+                @click="isOpen = !isOpen"
+                aria-controls="contentIdForA11y2">
                 Toggle
             </button>
         </div>
 
-        <b-collapse class="panel" :open.sync="isOpen">
-            <div slot="trigger" class="panel-heading">
+        <b-collapse
+                aria-id="contentIdForA11y2"
+                class="panel"
+                :open.sync="isOpen">
+            <div
+                slot="trigger"
+                class="panel-heading"
+                role="button"
+                aria-controls="contentIdForA11y2">
                 <strong>Title</strong>
             </div>
             <p class="panel-tabs">
