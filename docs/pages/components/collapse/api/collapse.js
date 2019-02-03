@@ -14,6 +14,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '<code>fade</code>'
+            },
+            {
+                name: '<code>a11y-id</code>',
+                description: 'Id for the container div. Should be used with aria-controls on trigger for better accessibility.',
+                type: 'String',
+                values: '—',
+                default: ''
             }
         ],
         slots: [
