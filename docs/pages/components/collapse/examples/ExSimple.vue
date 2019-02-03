@@ -1,7 +1,7 @@
 <template>
     <section>
 
-        <b-collapse :open="false" a11y-id="contentIdForA11y1">
+        <b-collapse :open="false" aria-id="contentIdForA11y1">
             <button
                 class="button is-primary"
                 slot="trigger"

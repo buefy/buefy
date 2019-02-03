@@ -11,7 +11,7 @@
         </div>
 
         <b-collapse
-                a11y-id="contentIdForA11y2"
+                aria-id="contentIdForA11y2"
                 class="panel"
                 :open.sync="isOpen">
             <div

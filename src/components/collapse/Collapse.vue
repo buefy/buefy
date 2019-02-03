@@ -5,7 +5,7 @@
         </div>
         <transition :name="animation">
             <div
-                :id="a11yId"
+                :id="ariaId"
                 :aria-expanded="isOpen"
                 class="collapse-content"
                 v-show="isOpen">
@@ -27,7 +27,7 @@
                 type: String,
                 default: 'fade'
             },
-            a11yId: {
+            ariaId: {
                 type: String,
                 default: ''
             }

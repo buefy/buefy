@@ -1,7 +1,7 @@
 <template>
     <section>
 
-        <b-collapse class="card" a11y-id="contentIdForA11y3">
+        <b-collapse class="card" aria-id="contentIdForA11y3">
             <div
                 slot="trigger" 
                 slot-scope="props"
