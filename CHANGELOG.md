@@ -7,6 +7,8 @@
 * Add ``required`` prop to radio-button and checkbox-button
 * Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
 * Add ``typing`` event to autocomplete (thanks @adrlen)
+* Add support to [Font Awesome SVG component](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) (thanks @rhwilr)
+* Improve accessibility for collapse component (thanks @mateuswetah)
 
 ### Fixes
 
