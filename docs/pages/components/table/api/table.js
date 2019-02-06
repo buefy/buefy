@@ -227,8 +227,8 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>custom-key-property</code>',
-                description: 'Custom key to use for <code>tr</code> element. Useful if your <code>data</code> array prop has dynamic indices.',
+                name: '<code>custom-row-key</code>',
+                description: 'Use a unique key of your <code>data</code> Object for each row. Useful if your <code>data</code> prop has dynamic indices. (id recommended)',
                 type: 'String',
                 values: '-',
                 default: '-'
