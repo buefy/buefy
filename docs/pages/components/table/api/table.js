@@ -225,6 +225,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>custom-key-property</code>',
+                description: 'Custom key to use for <code>tr</code> element. Useful if your <code>data</code> array prop has dynamic indices.',
+                type: 'String',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [
