@@ -46,7 +46,7 @@ export default [
             },
             {
                 name: '<code>width</code>',
-                description: 'Width of the Modal, maximum of <code>960</code>',
+                description: 'Width of the Modal',
                 type: 'Number, String',
                 values: '—',
                 default: '<code>960</code>'
