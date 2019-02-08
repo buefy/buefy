@@ -9,7 +9,7 @@
             :icon="icon"
             :icon-pack="iconPack"
             :maxlength="maxlength"
-            autocomplete="off"
+            :autocomplete="newAutocomplete"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
@@ -92,6 +92,7 @@
                 hovered: null,
                 isActive: false,
                 newValue: this.value,
+                newAutocomplete: this.autocomplete || 'off',
                 isListInViewportVertically: true,
                 hasFocus: false,
                 _isAutocomplete: true,
