@@ -62,7 +62,7 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
-                            :key="index"
+                            :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row),
@@ -266,7 +266,8 @@
                 default: 0
             },
             iconPack: String,
-            mobileSortPlaceholder: String
+            mobileSortPlaceholder: String,
+            customRowKey: String
         },
         data() {
             return {
