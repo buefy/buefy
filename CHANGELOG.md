@@ -9,11 +9,14 @@
 * Add ``typing`` event to autocomplete (thanks @adrlen)
 * Add ``native-autocomplete`` prop to taginput
 * Add support to [Font Awesome SVG component](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) (thanks @rhwilr)
+* Add ``custom-key-row`` prop to table
 * Improve accessibility for collapse component (thanks @mateuswetah)
 
 ### Fixes
 
 * #1177 Fix IE/Edge datepicker content size
+* #1216 Fix reset v-model when upload cancel
+* #1219 Fix modal ``width`` prop (thanks @yxngl)
 
 ## 0.7.2
 
