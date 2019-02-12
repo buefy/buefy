@@ -95,7 +95,7 @@
                     </div>
                 </header>
 
-                <div class="datepicker-body">
+                <div class="datepicker-content">
                     <b-datepicker-table
                         v-model="dateSelected"
                         :day-names="dayNames"

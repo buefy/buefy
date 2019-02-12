@@ -2,6 +2,7 @@
     <section>
         <b-table v-sortable="sortableOptions" 
             :data="data"
+            custom-row-key="id"
             @click="(row) => $toast.open(`Clicked ${row.first_name}`)">
 
             <template slot-scope="props">

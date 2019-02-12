@@ -124,6 +124,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>readonly</code>',
+                description: 'Disable input/typing',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any other native attribute or Autocomplete prop',
                 description: '—',
                 type: '—',

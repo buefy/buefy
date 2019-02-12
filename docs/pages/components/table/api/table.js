@@ -225,6 +225,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>custom-row-key</code>',
+                description: 'Use a unique key of your <code>data</code> Object for each row. Useful if your <code>data</code> prop has dynamic indices. (id recommended)',
+                type: 'String',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

@@ -13,7 +13,7 @@ export default {
         maxlength: [Number, String],
         useHtml5Validation: {
             type: Boolean,
-            default: config.defaultUseHtml5Validation
+            default: () => config.defaultUseHtml5Validation
         }
     },
     data() {
@@ -119,16 +119,18 @@ export default {
             }
             this.isValid = isValid
 
-            if (this.parentField) {
-                // Set type only if not defined
-                if (!this.parentField.type) {
-                    this.parentField.newType = type
+            this.$nextTick(() => {
+                if (this.parentField) {
+                    // Set type only if not defined
+                    if (!this.parentField.type) {
+                        this.parentField.newType = type
+                    }
+                    // Set message only if not defined
+                    if (!this.parentField.message) {
+                        this.parentField.newMessage = message
+                    }
                 }
-                // Set message only if not defined
-                if (!this.parentField.message) {
-                    this.parentField.newMessage = message
-                }
-            }
+            })
 
             return this.isValid
         }

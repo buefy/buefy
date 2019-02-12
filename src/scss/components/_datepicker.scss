@@ -7,23 +7,22 @@
     .dropdown-item {
         font-size: inherit;
     }
-
     .datepicker-header {
         padding-bottom: 0.875rem;
         margin-bottom: 0.875rem;
         border-bottom: 1px solid $grey-lighter;
     }
-    .datepicker-body {
-        min-height: 16.25rem;
+    .datepicker-content {
+        height: 16.25rem;
     }
     .datepicker-footer {
+        margin-top: 0.875rem;
         padding-top: 0.875rem;
         border-top: 1px solid $grey-lighter;
     }
-
     .datepicker-table {
         display: table;
-        margin: 0 auto 0.875rem auto;
+        margin: 0 auto 0 auto;
         .datepicker-cell {
             text-align: center;
             vertical-align: middle;
@@ -38,7 +37,6 @@
                 font-weight: $weight-semibold;
             }
         }
-
         .datepicker-body {
             display: table-row-group;
             .datepicker-row {
@@ -122,8 +120,8 @@
         @include control-large;
     }
     @include tablet-only {
-        .datepicker-body {
-            min-height: 19.75rem;
+        .datepicker-content {
+            height: 19.75rem;
         }
         .datepicker-table {
             .datepicker-cell {
@@ -132,8 +130,8 @@
         }
     }
     @include mobile {
-        .datepicker-body {
-            min-height: 12.75rem;
+        .datepicker-content {
+            height: 12.75rem;
         }
         .datepicker-table {
             .datepicker-cell {

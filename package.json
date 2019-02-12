@@ -1,9 +1,12 @@
 {
   "name": "buefy",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "homepage": "https://buefy.github.io",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
+  "maintainers": [
+    "Walter Tommasi <tommsi20@gmail.com>"
+  ],
   "license": "MIT",
   "main": "dist/buefy.js",
   "unpkg": "dist/buefy.min.js",
@@ -45,7 +48,7 @@
     "bulma": "0.7.2"
   },
   "peerDependencies": {
-    "vue": "2.5.x"
+    "vue": "^2.5.13"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.3.1",

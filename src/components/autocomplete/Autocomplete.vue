@@ -9,8 +9,9 @@
             :icon="icon"
             :icon-pack="iconPack"
             :maxlength="maxlength"
-            autocomplete="off"
+            :autocomplete="newAutocomplete"
             v-bind="$attrs"
+            @input="onInput"
             @focus="focused"
             @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
@@ -26,14 +27,13 @@
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
-                <div class="dropdown-content">
+                <div class="dropdown-content" v-show="isActive">
                     <div
                         v-if="hasHeaderSlot"
                         class="dropdown-item">
                         <slot name="header"/>
                     </div>
                     <a
-                        v-show="isActive"
                         v-for="(option, index) in data"
                         :key="index"
                         class="dropdown-item"
@@ -92,6 +92,7 @@
                 hovered: null,
                 isActive: false,
                 newValue: this.value,
+                newAutocomplete: this.autocomplete || 'off',
                 isListInViewportVertically: true,
                 hasFocus: false,
                 _isAutocomplete: true,
@@ -358,6 +359,11 @@
             onBlur(event) {
                 this.hasFocus = false
                 this.$emit('blur', event)
+            },
+            onInput(event) {
+                const currentValue = this.getValue(this.selected)
+                if (currentValue && currentValue === this.newValue) return
+                this.$emit('typing', this.newValue)
             }
         },
         created() {

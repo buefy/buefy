@@ -1,5 +1,23 @@
 # Buefy Changelog
 
+## 0.7.3
+
+### New features
+
+* Add ``required`` prop to radio-button and checkbox-button
+* Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
+* Add ``typing`` event to autocomplete (thanks @adrlen)
+* Add ``native-autocomplete`` prop to taginput
+* Add support to [Font Awesome SVG component](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) (thanks @rhwilr)
+* Add ``custom-key-row`` prop to table
+* Improve accessibility for collapse component (thanks @mateuswetah)
+
+### Fixes
+
+* #1177 Fix IE/Edge datepicker content size
+* #1216 Fix reset v-model when upload cancel
+* #1219 Fix modal ``width`` prop (thanks @yxngl)
+
 ## 0.7.2
 
 ### New features
@@ -9,12 +27,15 @@
 * Add ``mobile-sort-placeholder`` prop to table
 * Add ``contextmenu`` event to table (thanks @gps-dev)
 * Add ``show-detail-icon`` prop to table and toggle row detail programmatically (thanks @omer2500)
+* Add ``use-html5-validation`` prop to form components and ``defaultUseHtml5Validation`` constructor options (thanks @lukio3)
+* #1164 Disable selecting row on checkbox click when table is ``checkable``
 
 ### Fixes
 
 * Fix taginput when ``allow-new`` is enabled
 * Fix pagination order when simple
 * #1126 Fix init sort using columns table prop
+* #898, #1154 Fix browser autocomplete using multiple fields
 
 ## 0.7.1
 

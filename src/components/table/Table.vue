@@ -14,8 +14,8 @@
                 class="table"
                 :class="tableClasses"
                 :tabindex="!focusable ? false : 0"
-                @keydown.prevent.up="pressedArrow(-1)"
-                @keydown.prevent.down="pressedArrow(1)">
+                @keydown.self.prevent.up="pressedArrow(-1)"
+                @keydown.self.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
@@ -26,8 +26,7 @@
                                 @change.native="checkAll"/>
                         </th>
                         <th
-                            v-for="(column, index) in newColumns"
-                            v-if="column.visible || column.visible === undefined"
+                            v-for="(column, index) in visibleColumns"
                             :key="index"
                             :class="{
                                 'is-current-sort': currentSortColumn === column,
@@ -63,7 +62,7 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
-                            :key="index"
+                            :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row),
@@ -93,6 +92,7 @@
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @change.native="checkRow(row)"
+                                    @click.native.stop
                                 />
                             </td>
 
@@ -266,7 +266,8 @@
                 default: 0
             },
             iconPack: String,
-            mobileSortPlaceholder: String
+            mobileSortPlaceholder: String,
+            customRowKey: String
         },
         data() {
             return {
@@ -321,6 +322,13 @@
                     const end = parseInt(start, 10) + parseInt(perPage, 10)
                     return this.newData.slice(start, end)
                 }
+            },
+
+            visibleColumns() {
+                if (!this.newColumns) return this.newColumns
+                return this.newColumns.filter((column) => {
+                    return column.visible || column.visible === undefined
+                })
             },
 
             /**

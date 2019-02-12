@@ -1,6 +1,7 @@
 let config = {
     defaultContainerElement: null,
     defaultIconPack: 'mdi',
+    defaultIconComponent: null,
     defaultDialogConfirmText: null,
     defaultDialogCancelText: null,
     defaultSnackbarDuration: 3500,
@@ -17,6 +18,7 @@ let config = {
     defaultUnselectableDaysOfWeek: null,
     defaultTimeFormatter: null,
     defaultTimeParser: null,
+    defaultModalCanCancel: null,
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
