@@ -16,7 +16,6 @@
                 v-show="isActive"
                 class="background"
                 :aria-hidden="!isActive"
-                tabindex="0"
             />
         </transition>
         <transition name="fade">

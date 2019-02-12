@@ -34,10 +34,7 @@
         </b-dropdown>
 
         <b-dropdown>
-            <p
-                class="tag is-success"
-                slot="trigger"
-                role="button">
+            <p class="tag is-success" slot="trigger">
                 Custom trigger
             </p>
 

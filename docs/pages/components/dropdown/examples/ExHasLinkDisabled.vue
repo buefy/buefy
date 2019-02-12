@@ -10,46 +10,40 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown
-                    v-model="navigation"
-                    position="is-bottom-left"
-                    aria-role="menu">
-                    <a
-                        class="navbar-item"
-                        slot="trigger"
-                        role="button">
+                <b-dropdown v-model="navigation" position="is-bottom-left">
+                    <a class="navbar-item" slot="trigger">
                         <span>Menu</span>
                         <b-icon icon="menu-down"></b-icon>
                     </a>
 
-                    <b-dropdown-item custom aria-role="menuitem">
+                    <b-dropdown-item custom>
                         Logged as <b>Rafael Beraldo</b>
                     </b-dropdown-item>
                     <hr class="dropdown-divider">
-                    <b-dropdown-item has-link aria-role="menuitem">
+                    <b-dropdown-item has-link>
                         <a href="https://google.com" target="_blank">
                             <b-icon icon="link"></b-icon>
                             Google (link)
                         </a>
                     </b-dropdown-item>
-                    <b-dropdown-item value="home" aria-role="menuitem">
+                    <b-dropdown-item value="home">
                         <b-icon icon="home"></b-icon>
                         Home
                     </b-dropdown-item>
-                    <b-dropdown-item value="products" aria-role="menuitem">
+                    <b-dropdown-item value="products">
                         <b-icon icon="cart"></b-icon>
                         Products
                     </b-dropdown-item>
-                    <b-dropdown-item value="blog" disabled aria-role="menuitem">
+                    <b-dropdown-item value="blog" disabled>
                         <b-icon icon="book-open"></b-icon>
                         Blog
                     </b-dropdown-item>
-                    <hr class="dropdown-divider" aria-role="menuitem">
+                    <hr class="dropdown-divider">
                     <b-dropdown-item value="settings">
                         <b-icon icon="settings"></b-icon>
                         Settings
                     </b-dropdown-item>
-                    <b-dropdown-item value="logout" aria-role="menuitem">
+                    <b-dropdown-item value="logout">
                         <b-icon icon="logout"></b-icon>
                         Logout
                     </b-dropdown-item>

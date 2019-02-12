@@ -10,16 +10,13 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown aria-role="menu" position="is-bottom-left">
-                    <a
-                        class="navbar-item"
-                        slot="trigger"
-                        role="button">
+                <b-dropdown position="is-bottom-left">
+                    <a class="navbar-item" slot="trigger">
                         <span>Login</span>
                         <b-icon icon="menu-down"></b-icon>
                     </a>
 
-                    <b-dropdown-item aria-role="menu-item" custom paddingless>
+                    <b-dropdown-item custom paddingless>
                         <form action="">
                             <div class="modal-card" style="width:300px;">
                                 <section class="modal-card-body">
