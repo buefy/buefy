@@ -5,8 +5,7 @@
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle"
-            aria-haspopup="true">
+            @click="toggle">
             <slot name="trigger"/>
         </div>
 
@@ -15,18 +14,14 @@
                 v-if="isMobileModal"
                 v-show="isActive"
                 class="background"
-                :aria-hidden="!isActive"
             />
         </transition>
         <transition name="fade">
             <div
                 v-show="(!disabled && (isActive || hoverable)) || inline"
                 ref="dropdownMenu"
-                class="dropdown-menu"
-                :aria-hidden="!isActive">
-                <div
-                    class="dropdown-content"
-                    :role="ariaRole == 'menu' ? 'menu' : 'list'">
+                class="dropdown-menu">
+                <div class="dropdown-content">
                     <slot/>
                 </div>
             </div>
@@ -58,10 +53,6 @@
             mobileModal: {
                 type: Boolean,
                 default: true
-            },
-            ariaRole: {
-                type: String,
-                default: 'list'
             }
         },
         data() {

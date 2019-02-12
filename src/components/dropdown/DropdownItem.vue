@@ -4,17 +4,13 @@
         v-else-if="!custom && !hasLink"
         class="dropdown-item"
         :class="anchorClasses"
-        @click="selectItem"
-        :role="ariaRole == 'menuitem' ? 'menuitem' : 'listitem'"
-        tabindex="0">
+        @click="selectItem">
         <slot/>
     </a>
     <div
         v-else
         :class="itemClasses"
-        @click="selectItem"
-        :role="ariaRole == 'menuitem' ? 'menuitem' : 'listitem'"
-        tabindex="0">
+        @click="selectItem">
         <slot/>
     </div>
 </template>
@@ -31,11 +27,7 @@
             disabled: Boolean,
             custom: Boolean,
             paddingless: Boolean,
-            hasLink: Boolean,
-            ariaRole: {
-                type: String,
-                default: 'listitem'
-            }
+            hasLink: Boolean
         },
         computed: {
             anchorClasses() {
