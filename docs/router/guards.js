@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 export const afterEachGlobal = (to, from) => {
     const title = `${to.meta.title} | Buefy`
-    const url = `https://buefy.github.io${to.meta.path}`
+    const url = `https://buefy.org${to.meta.path}`
     const description = to.meta.subtitle.replace(/<(.|\n)*?>/g, '')
     const updates = [
         { tag: 'meta[name="twitter:title"]', value: title },

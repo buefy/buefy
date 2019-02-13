@@ -66,7 +66,7 @@
                 if (start < 0 || end < 0) return
 
                 let html = this.code.substring(start + 10, end)
-                html = html.replace(/src="\/static/g, 'src="https://buefy.github.io/static')
+                html = html.replace(/src="\/static/g, 'src="https://buefy.org/static')
 
                 // FontAwesome
                 if (
