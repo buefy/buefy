@@ -4,6 +4,7 @@
 
 ### New features
 
+* **Update Bulma to 0.7.4**
 * Add ``required`` prop to radio-button and checkbox-button
 * Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
 * Add ``typing`` event to autocomplete (thanks @adrlen)
