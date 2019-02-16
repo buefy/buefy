@@ -102,7 +102,7 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 
 ## Maintainers
 
-* Walter Tommasi — [@jtommy](https://github.com/jtommy)
+* [Walter Tommasi](https://twitter.com/walter_tommasi)
 
 ## Supporting through Patreon
 

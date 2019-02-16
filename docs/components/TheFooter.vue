@@ -14,7 +14,7 @@
                             by
                             <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
                             with great support by
-                            <a href="https://github.com/jtommy" target="_blank">Walter Tommasi</a>.
+                            <a href="https://twitter.com/walter_tommasi" target="_blank">Walter Tommasi</a>.
                         </p>
                         <p>
                             <small>
