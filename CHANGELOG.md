@@ -13,6 +13,7 @@
 * Add ``custom-key-row`` prop to table
 * Add ``defaultToastPosition`` and ``defaultSnackbarPosition`` constructor options
 * Improve accessibility for collapse component (thanks @mateuswetah)
+* #1233 Change left margin to right margin when spacing nested fields (thanks @yxngl)
 
 ### Fixes
 
