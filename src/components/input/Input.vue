@@ -203,7 +203,11 @@
              * before ui update, helps when using masks (Cleavejs and potentially others).
              */
             onInput(event) {
-                this.$nextTick(() => { this.computedValue = event.target.value })
+                this.$nextTick(() => {
+                    if (event.target) {
+                        this.computedValue = event.target.value
+                    }
+                })
             }
         }
     }
