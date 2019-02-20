@@ -6,8 +6,8 @@
     &.is-grouped {
         .field {
             flex-shrink: 0;
-            &+.field {
-                margin-left: 0.75rem;
+            &:not(:last-child) {
+                margin-right: 0.75rem;
             }
             &.is-expanded {
                 flex-grow: 1;
