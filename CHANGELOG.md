@@ -11,6 +11,7 @@
 * Add ``native-autocomplete`` prop to taginput
 * Add support to [Font Awesome SVG component](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) (thanks @rhwilr)
 * Add ``custom-key-row`` prop to table
+* Add ``defaultToastPosition`` and ``defaultSnackbarPosition`` constructor options
 * Improve accessibility for collapse component (thanks @mateuswetah)
 
 ### Fixes

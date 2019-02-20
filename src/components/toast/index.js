@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Toast from './Toast'
 
+import config from '../../utils/config'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ToastProgrammatic = {
@@ -9,7 +10,10 @@ const ToastProgrammatic = {
         let parent
         if (typeof params === 'string') message = params
 
-        const defaultParam = { message }
+        const defaultParam = {
+            message,
+            position: config.defaultToastPosition || 'is-top'
+        }
         if (params.parent) {
             parent = params.parent
             delete params.parent
