@@ -55,8 +55,8 @@
                     css_external: this.externalStyles.join(';'),
                     js_external: this.externalScripts.join(';')
                 })
-                    .replace(/"/g, '&​quot;')
-                    .replace(/'/g, '&apos;')
+                    .replace(/"/g, '\u0022')
+                    .replace(/'/g, '\u0027')
             }
         },
         methods: {
