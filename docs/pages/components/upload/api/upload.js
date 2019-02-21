@@ -79,7 +79,7 @@ export default [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when the file list is changed',
-                parameters: '<code>value: Array</code>'
+                parameters: '<code>value: File</code> or <code>File[]</code>'
             }
         ],
         methods: [
