@@ -91,7 +91,7 @@ export default [
             {
                 name: '<code>onConfirm</code>',
                 description: 'Callback function when the confirm button is clicked',
-                type: 'Function (value: String)',
+                type: 'Function (value: String): void, Promise',
                 values: '—',
                 default: '—'
             },

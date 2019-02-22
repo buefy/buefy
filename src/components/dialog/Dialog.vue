@@ -51,7 +51,7 @@
                     </button>
                     <button
                         class="button"
-                        :class="type"
+                        :class="confirmButtonClass"
                         ref="confirmButton"
                         @click="confirm">
                         {{ confirmText }}
@@ -123,7 +123,8 @@
             return {
                 prompt,
                 isActive: false,
-                validationMessage: ''
+                validationMessage: '',
+                isConfirming: false
             }
         },
         computed: {
@@ -146,6 +147,12 @@
             },
             showCancel() {
                 return this.cancelOptions.indexOf('button') >= 0
+            },
+            confirmButtonClass() {
+                return {
+                    [this.type]: true,
+                    'is-loading': this.isConfirming
+                }
             }
         },
         methods: {
@@ -162,8 +169,20 @@
                     }
                 }
 
-                this.onConfirm(this.prompt)
-                this.close()
+                this.isConfirming = true
+                const confirmationResult = this.onConfirm(this.prompt)
+
+                Promise.resolve(confirmationResult)
+                    .then(() => {
+                        this.isConfirming = false
+
+                        this.close()
+                    })
+                    .catch((error) => {
+                        this.isConfirming = false
+
+                        throw error
+                    })
             },
 
             /**
