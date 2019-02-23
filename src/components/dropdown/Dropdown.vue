@@ -26,7 +26,7 @@
                 :aria-hidden="!isActive">
                 <div
                     class="dropdown-content"
-                    :role="ariaRole == 'menu' ? 'menu' : 'list'">
+                    :role="ariaRole == 'menu' || ariaRole == 'list' ? ariaRole : null">
                     <slot/>
                 </div>
             </div>
@@ -61,7 +61,7 @@
             },
             ariaRole: {
                 type: String,
-                default: 'list'
+                default: ''
             }
         },
         data() {

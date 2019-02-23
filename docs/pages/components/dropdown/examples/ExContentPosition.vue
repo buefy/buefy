@@ -10,11 +10,11 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown position="is-bottom-left">
+                <b-dropdown position="is-bottom-left" aria-role="menu">
                     <a  
                         class="navbar-item"
                         slot="trigger"
-                        role="button">>
+                        role="button">
                         <span>Login</span>
                         <b-icon icon="menu-down"></b-icon>
                     </a>

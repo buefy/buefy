@@ -49,7 +49,7 @@ export default [
                 description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',
                 values: '<code>list</code>, <code>menu</code>, ',
-                default: '<code>list</code>'
+                default: '—'
             }
         ],
         slots: [
@@ -133,7 +133,7 @@ export default [
                 description: 'Role attribute to be passed to list item for better accessibility. Use <code>menuitem</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',
                 values: '<code>listitem</code>, <code>menuitem</code>, ',
-                default: '<code>listitem</code>'
+                default: '—'
             }
         ],
         slots: [

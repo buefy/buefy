@@ -5,7 +5,7 @@
         class="dropdown-item"
         :class="anchorClasses"
         @click="selectItem"
-        :role="ariaRole == 'menuitem' ? 'menuitem' : 'listitem'"
+        :role="ariaRole == 'menuitem' || ariaRole == 'listitem' ? ariaRole : null"
         tabindex="0">
         <slot/>
     </a>
@@ -13,7 +13,7 @@
         v-else
         :class="itemClasses"
         @click="selectItem"
-        :role="ariaRole == 'menuitem' ? 'menuitem' : 'listitem'"
+        :role="ariaRole == 'menuitem' || ariaRole == 'listitem' ? ariaRole : null"
         tabindex="0">
         <slot/>
     </div>
@@ -34,7 +34,7 @@
             hasLink: Boolean,
             ariaRole: {
                 type: String,
-                default: 'listitem'
+                default: ''
             }
         },
         computed: {
