@@ -48,7 +48,7 @@ export default [
                 name: '<code>aria-role</code>',
                 description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',
-                values: '<code>list</code>, <code>menu</code>, ',
+                values: '<code>list</code>, <code>menu</code>',
                 default: '—'
             }
         ],
@@ -132,7 +132,7 @@ export default [
                 name: '<code>aria-role</code>',
                 description: 'Role attribute to be passed to list item for better accessibility. Use <code>menuitem</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',
-                values: '<code>listitem</code>, <code>menuitem</code>, ',
+                values: '<code>listitem</code>, <code>menuitem</code>',
                 default: '—'
             }
         ],
