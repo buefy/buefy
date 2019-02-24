@@ -12,7 +12,7 @@
 * Add support to [Font Awesome SVG component](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) (thanks @rhwilr)
 * Add ``custom-key-row`` prop to table
 * Add ``defaultToastPosition`` and ``defaultSnackbarPosition`` constructor options
-* Improve accessibility for collapse component (thanks @mateuswetah)
+* Improve accessibility for collapse and dropdown (thanks @mateuswetah)
 * #1233 Change left margin to right margin when spacing nested fields (thanks @yxngl)
 
 ### Fixes
