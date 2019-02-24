@@ -5,7 +5,7 @@
         class="dropdown-item"
         :class="anchorClasses"
         @click="selectItem"
-        :role="ariaRole == 'menuitem' || ariaRole == 'listitem' ? ariaRole : null"
+        :role="ariaRoleItem"
         tabindex="0">
         <slot/>
     </a>
@@ -13,7 +13,7 @@
         v-else
         :class="itemClasses"
         @click="selectItem"
-        :role="ariaRole == 'menuitem' || ariaRole == 'listitem' ? ariaRole : null"
+        :role="ariaRoleItem"
         tabindex="0">
         <slot/>
     </div>
@@ -53,6 +53,9 @@
                     'is-active': this.value !== null && this.value === this.$parent.selected,
                     'has-link': this.hasLink
                 }
+            },
+            ariaRoleItem() {
+                return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : null
             },
             /**
              * Check if item can be clickable.

@@ -26,7 +26,7 @@
                 :aria-hidden="!isActive">
                 <div
                     class="dropdown-content"
-                    :role="ariaRole == 'menu' || ariaRole == 'list' ? ariaRole : null">
+                    :role="ariaRoleMenu">
                     <slot/>
                 </div>
             </div>
@@ -83,6 +83,9 @@
             },
             isMobileModal() {
                 return this.mobileModal && !this.inline && !this.hoverable
+            },
+            ariaRoleMenu() {
+                return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
             }
         },
         watch: {
