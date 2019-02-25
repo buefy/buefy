@@ -38,7 +38,8 @@
                         :key="index"
                         class="dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
-                        @click="setSelected(option)">
+                        @click="setSelected(option)"
+                        @mousedown.prevent>
 
                         <slot
                             v-if="hasDefaultSlot"
