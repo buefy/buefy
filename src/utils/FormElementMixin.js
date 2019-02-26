@@ -103,7 +103,7 @@ export default {
          * and error message to parent if it's a Field.
          */
         checkHtml5Validity() {
-            if (!this.useHtml5Validation) return
+            if (this.useHtml5Validation) return
 
             if (this.$refs[this.$data._elementRef] === undefined) return
 
