@@ -113,9 +113,7 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
-                        @keyup.native.enter="toggle(true)"
-                        @click.native.stop
-                        @close="$refs.dropdown.isActive = false"/>
+                        @close="toggle(false)"/>
                 </div>
 
                 <footer
@@ -144,6 +142,7 @@
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
             @click.native.stop="toggle(true)"
+            @keyup.native.enter="toggle(true)"
             @focus="handleOnFocus"
             @blur="onBlur"/>
     </div>
@@ -483,15 +482,6 @@
                     this.$refs.dropdown.isActive = typeof active === 'boolean'
                         ? active
                         : !this.$refs.dropdown.isActive
-                }
-            },
-
-            /*
-            * Close datepicker
-            */
-            close() {
-                if (this.$refs.dropdown) {
-                    this.$refs.dropdown.isActive = false
                 }
             },
 
