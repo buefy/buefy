@@ -13,6 +13,7 @@
 * Add ``custom-key-row`` prop to table
 * Add ``defaultToastPosition`` and ``defaultSnackbarPosition`` constructor options
 * Improve accessibility for collapse and dropdown (thanks @mateuswetah)
+* Revert tab as confirm key code to taginput
 * #1233 Change left margin to right margin when spacing nested fields (thanks @yxngl)
 
 ### Fixes
