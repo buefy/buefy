@@ -42,6 +42,15 @@
                                     <span>Twitter</span>
                                 </a>
                             </p>
+                            <p class="control">
+                                <a
+                                    class="button is-patreon"
+                                    href="https://www.patreon.com/jtommy"
+                                    target="_blank">
+                                    <b-icon icon="patreon"/>
+                                    <span>Patreon</span>
+                                </a>
+                            </p>
                         </b-field>
                     </div>
 

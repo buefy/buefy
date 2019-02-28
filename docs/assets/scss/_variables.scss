@@ -3,6 +3,7 @@
 $primary: #7957d5;
 $twitter: #4099FF;
 $discord: #7289DA;
+$patreon: #f96854;;
 $bulma: #00D1B2;
 
 $colors: (
@@ -19,6 +20,7 @@ $colors: (
     "link": ($link, $link-invert),
     "twitter": ($twitter, $white),
     "discord": ($discord, $white),
+    "patreon": ($patreon, $white),
     "bulma": ($bulma, $white)
 );
 
