@@ -71,7 +71,6 @@
                             @dblclick="$emit('dblclick', row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
-                            @contextmenu="$emit('contextmenu', row, $event)"
                             @dragstart="handleDragStart($event, row, index)"
                             @drop="handleDrop($event, row, index)"
                             @dragover="handleDragOver($event, row, index)">
@@ -759,7 +758,6 @@
              */
             handleDragOver(event, row, index) {
                 this.$emit('dragover', {event, row, index})
-
             }
         },
 
