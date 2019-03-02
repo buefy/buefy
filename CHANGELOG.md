@@ -1,5 +1,13 @@
 # Buefy Changelog
 
+## 0.7.4
+
+### New features
+
+### Fixes
+
+* #1251 Fix Datepicker closing when page back to ``min-date`` month
+
 ## 0.7.3
 
 ### New features
