@@ -17,8 +17,8 @@ export default [
                     Can be used to render FontAwesome 5 icons with the
                     <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
                 type: 'Component',
-                values: '<code>vue-fontawesome</code>',
-                default: '<code>null</code>'
+                values: 'FontAwesomeIcon component name',
+                default: '<code></code>'
             },
             {
                 name: '<code>defaultContainerElement</code>',
