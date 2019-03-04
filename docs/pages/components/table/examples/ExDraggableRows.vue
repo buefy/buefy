@@ -58,6 +58,11 @@
         },
         async dragover(payload) {
           payload.event.preventDefault();
+          if(payload.row.id === 3) {
+            payload.event.dataTransfer.dropEffect = 'link'
+          } else {
+            payload.event.dataTransfer.dropEffect = 'copy'
+          }
           this.draggingOverRow = JSON.stringify(payload.row, null, 2) 
           this.draggingOverRowIndex = '[' + payload.index + ']'
         },
