@@ -240,6 +240,14 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
 
+            },
+            {
+                name: '<code>dragEffect</code>',
+                description: 'Set the effect when dragging',
+                type: 'String',
+                values: '<code>move</code>, <code>copy</code>, <code>link</code>',
+                default: '<code>copy</code>'
+
             }
         ],
         slots: [
