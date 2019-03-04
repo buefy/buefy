@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table :data="data" :columns="columns" :draggable="true" @dragstart="dragstart" @drop="drop" @dragover="dragover" :dragEffect="dragEffect"></b-table>
+    <b-table :data="data" :columns="columns" :draggable="true" @dragstart="dragstart" @drop="drop" @dragover="dragover"></b-table>
     <pre>Dragging row:{{ draggingRowIndex }}<br />{{ draggingRow }}</pre>
     <pre>Dragging over row:{{ draggingOverRowIndex }} <br />{{ draggingOverRow }}</pre>
     <pre>Dropped on:{{ droppedOnRowIndex }} <br />{{ droppedOnRow }}</pre>
@@ -48,8 +48,7 @@
               draggingOverRow: '',
               draggingOverRowIndex: '',
               droppedOnRow: '',
-              droppedOnRowIndex: '',
-              dragEffect:'copy'
+              droppedOnRowIndex: ''
           }
       },
       methods: {
@@ -59,9 +58,6 @@
         },
         async dragover(payload) {
           payload.event.preventDefault();
-          if(payload.row.id === 3) {
-            payload.event.dataTransfer.dropEffect = 'link'
-          }
           this.draggingOverRow = JSON.stringify(payload.row, null, 2) 
           this.draggingOverRowIndex = '[' + payload.index + ']'
         },

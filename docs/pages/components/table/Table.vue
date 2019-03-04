@@ -75,9 +75,6 @@
                 Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>, 
                 <code>dragover</code> and <code>drop</code> events
             </p>
-            <p>
-                Use the <code>:dragEffect</code> prop to set the dropEffect. This can be overruled on the dragover event
-            </p>
         </Example>
 
         <ApiView :data="api"/>

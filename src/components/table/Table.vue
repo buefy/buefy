@@ -71,7 +71,6 @@
                             @dblclick="$emit('dblclick', row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
-                            :dragEffect="dragEffect"
                             @dragstart="handleDragStart($event, row, index)"
                             @drop="handleDrop($event, row, index)"
                             @dragover="handleDragOver($event, row, index)">
@@ -276,10 +275,6 @@
             draggable: {
                 type: Boolean,
                 defualt: false
-            },
-            dragEffect: {
-                type: String,
-                default: 'copy'
             }
 
         },
@@ -750,7 +745,6 @@
              * Emits drag start event
              */
             handleDragStart(event, row, index) {
-                event.dataTransfer.dropEffect = this.dragEffect
                 this.$emit('dragstart', {event, row, index})
             },
             /**
@@ -763,7 +757,6 @@
              * Emits drag over event
              */
             handleDragOver(event, row, index) {
-                event.dataTransfer.dropEffect = this.dragEffect
                 this.$emit('dragover', {event, row, index})
             }
         },
