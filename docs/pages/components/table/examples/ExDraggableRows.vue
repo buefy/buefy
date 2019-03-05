@@ -1,9 +1,14 @@
 <template>
   <div>
-    <b-table :data="data" :columns="columns" :draggable="true" @dragstart="dragstart" @drop="drop" @dragover="dragover"></b-table>
-    <pre>Dragging row:{{ draggingRowIndex }}<br />{{ draggingRow }}</pre>
-    <pre>Dragging over row:{{ draggingOverRowIndex }} <br />{{ draggingOverRow }}</pre>
-    <pre>Dropped on:{{ droppedOnRowIndex }} <br />{{ droppedOnRow }}</pre>
+    <b-table
+      :data="data"
+      :columns="columns"
+      draggable
+      @dragstart="dragstart"
+      @drop="drop"
+      @dragover="dragover"
+      @dragleave="dragleave">
+    </b-table>
   </div> 
 </template>
 
@@ -43,32 +48,29 @@
                       label: 'Gender',
                   }
               ],
-              draggingRow: '',
-              draggingRowIndex: '',
-              draggingOverRow: '',
-              draggingOverRowIndex: '',
-              droppedOnRow: '',
-              droppedOnRowIndex: ''
+              draggingRow: null,
+              draggingRowIndex: null
           }
       },
       methods: {
-        async dragstart (payload) {
-          this.draggingRow = JSON.stringify(payload.row, null, 2)
-          this.draggingRowIndex = '[' + payload.index + ']'
+        dragstart (payload) {
+          this.draggingRow = payload.row
+          this.draggingRowIndex = payload.index
+          payload.event.dataTransfer.effectAllowed = 'copy'
         },
-        async dragover(payload) {
-          payload.event.preventDefault();
-          if(payload.row.id === 3) {
-            payload.event.dataTransfer.dropEffect = 'link'
-          } else {
-            payload.event.dataTransfer.dropEffect = 'copy'
-          }
-          this.draggingOverRow = JSON.stringify(payload.row, null, 2) 
-          this.draggingOverRowIndex = '[' + payload.index + ']'
+        dragover(payload) {
+          payload.event.dataTransfer.dropEffect = 'copy'
+          payload.event.target.closest('tr').classList.add('is-selected')
+          payload.event.preventDefault()
         },
-        async drop(payload) {
-          this.droppedOnRow = JSON.stringify(payload.row, null, 2)
-          this.droppedOnRowIndex = '[' + payload.index + ']'
+        dragleave(payload) {
+          payload.event.target.closest('tr').classList.remove('is-selected')
+          payload.event.preventDefault()
+        },
+        drop(payload) {
+          payload.event.target.closest('tr').classList.remove('is-selected')
+          const droppedOnRowIndex = payload.index
+          this.$toast.open(`Moved ${this.draggingRow.first_name} from row ${this.draggingRowIndex + 1} to ${droppedOnRowIndex + 1}`)
         }
       }
   }
