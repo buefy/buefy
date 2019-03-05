@@ -85,7 +85,8 @@
             },
             keepFirst: Boolean,
             clearOnSelect: Boolean,
-            openOnFocus: Boolean
+            openOnFocus: Boolean,
+            customFormatter: Function
         },
         data() {
             return {
@@ -274,6 +275,9 @@
             getValue(option) {
                 if (!option) return
 
+                if (typeof this.customFormatter !== 'undefined') {
+                    return this.customFormatter(option)
+                }
                 return typeof option === 'object'
                     ? getValueByPath(option, this.field)
                     : option

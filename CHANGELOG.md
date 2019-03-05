@@ -4,6 +4,7 @@
 
 ### New features
 
+* Add ``custom-formatter`` prop to autocomplete
 * Add ``draggable`` prop to table (thanks @suneab)
 
 ### Fixes
