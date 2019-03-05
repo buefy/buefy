@@ -6,6 +6,7 @@
 
 * Add ``custom-formatter`` prop to autocomplete
 * Add ``draggable`` prop to table (thanks @suneab)
+* Improve accessibility for notification (thanks @mateuswetah)
 
 ### Fixes
 
