@@ -73,7 +73,8 @@
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
                             @drop="handleDrop($event, row, index)"
-                            @dragover="handleDragOver($event, row, index)">
+                            @dragover="handleDragOver($event, row, index)"
+                            @dragleave="handleDragLeave($event, row, index)">
 
                             <td
                                 v-if="showDetailRowIcon"
@@ -758,6 +759,12 @@
              */
             handleDragOver(event, row, index) {
                 this.$emit('dragover', {event, row, index})
+            },
+            /**
+             * Emits drag leave event
+             */
+            handleDragLeave(event, row, index) {
+                this.$emit('dragleave', {event, row, index})
             }
         },
 
