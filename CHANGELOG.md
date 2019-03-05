@@ -4,6 +4,8 @@
 
 ### New features
 
+* Add ``draggable`` prop to table (thanks @suneab)
+
 ### Fixes
 
 * #1251 Fix Datepicker closing when page back to ``min-date`` month
