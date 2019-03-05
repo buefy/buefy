@@ -35,7 +35,7 @@
                         class="pagination field is-centered"
                         :class="size">
                         <a
-                            v-if="!isFirstMonth && !disabled"
+                            v-show="!isFirstMonth && !disabled"
                             class="pagination-previous"
                             role="button"
                             href="#"

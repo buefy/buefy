@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://buefy.github.io">
+    <a href="https://buefy.org">
         <img src="https://github.com/buefy/buefy/blob/dev/static/img/buefy-banner.png" />
     </a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/v/buefy.svg" /></a>
@@ -8,7 +8,7 @@
     <a href="https://codecov.io/gh/buefy/buefy"><img src="https://img.shields.io/codecov/c/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/l/buefy.svg" /></a>
     <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" /></a>
-    <a href="http://buefy.github.io"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
+    <a href="https://buefy.org"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
 </p>
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
@@ -27,7 +27,7 @@
 
 The documentation is in the docs directory, it serves as the demo as well.
 
-Browse [online documentation here](https://buefy.github.io).
+Browse [online documentation here](https://buefy.org/).
 
 ## Quick start
 
@@ -77,7 +77,7 @@ Vue.use(Input)
 <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
 ```
 
-If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.github.io/#/documentation/customization).
+If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.org/#/documentation/customization).
 
 ### Alternatively, you can use a CDN or even download
 
@@ -102,7 +102,7 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 
 ## Maintainers
 
-* Walter Tommasi — [@jtommy](https://github.com/jtommy)
+* [Walter Tommasi](https://twitter.com/walter_tommasi)
 
 ## Supporting through Patreon
 

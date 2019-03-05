@@ -17,8 +17,8 @@ export default [
                     Can be used to render FontAwesome 5 icons with the
                     <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
                 type: 'Component',
-                values: '<code>vue-fontawesome</code>',
-                default: '<code>null</code>'
+                values: 'FontAwesomeIcon component name',
+                default: '<code></code>'
             },
             {
                 name: '<code>defaultContainerElement</code>',
@@ -51,11 +51,25 @@ export default [
                 default: '<code>3500</code>'
             },
             {
+                name: '<code>defaultSnackbarPosition</code>',
+                description: `Default snackbar <code>position</code> attribute.`,
+                type: 'Number',
+                values: '—',
+                default: '<code></code>'
+            },
+            {
                 name: '<code>defaultToastDuration</code>',
                 description: `Default toast <code>duration</code> attribute.`,
                 type: 'Number',
                 values: '—',
                 default: '<code>2000</code>'
+            },
+            {
+                name: '<code>defaultToastPosition</code>',
+                description: `Default toast <code>position</code> attribute.`,
+                type: 'Number',
+                values: '—',
+                default: '<code></code>'
             },
             {
                 name: '<code>defaultTooltipType</code>',

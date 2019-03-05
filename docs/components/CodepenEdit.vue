@@ -55,8 +55,8 @@
                     css_external: this.externalStyles.join(';'),
                     js_external: this.externalScripts.join(';')
                 })
-                    .replace(/"/g, '&​quot;')
-                    .replace(/'/g, '&apos;')
+                    .replace(/"/g, '\u0022')
+                    .replace(/'/g, '\u0027')
             }
         },
         methods: {
@@ -66,7 +66,7 @@
                 if (start < 0 || end < 0) return
 
                 let html = this.code.substring(start + 10, end)
-                html = html.replace(/src="\/static/g, 'src="https://buefy.github.io/static')
+                html = html.replace(/src="\/static/g, 'src="https://buefy.org/static')
 
                 // FontAwesome
                 if (
