@@ -52,7 +52,14 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            }
+            },
+            {
+                name: '<code>aria-close-label</code>',
+                description: 'Label for the close button, to be read by accessibility screenreaders.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
         ],
         events: [
             {
