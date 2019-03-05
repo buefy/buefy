@@ -69,7 +69,11 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @contextmenu="$emit('contextmenu', row, $event)">
+                            @contextmenu="$emit('contextmenu', row, $event)"
+                            :draggable="draggable"
+                            @dragstart="handleDragStart($event, row, index)"
+                            @drop="handleDrop($event, row, index)"
+                            @dragover="handleDragOver($event, row, index)">
 
                             <td
                                 v-if="showDetailRowIcon"
@@ -267,7 +271,12 @@
             },
             iconPack: String,
             mobileSortPlaceholder: String,
-            customRowKey: String
+            customRowKey: String,
+            draggable: {
+                type: Boolean,
+                defualt: false
+            }
+
         },
         data() {
             return {
@@ -731,6 +740,24 @@
                         this.sort(column, true)
                     }
                 })
+            },
+            /**
+             * Emits drag start event
+             */
+            handleDragStart(event, row, index) {
+                this.$emit('dragstart', {event, row, index})
+            },
+            /**
+             * Emits drop event
+             */
+            handleDrop(event, row, index) {
+                this.$emit('drop', {event, row, index})
+            },
+            /**
+             * Emits drag over event
+             */
+            handleDragOver(event, row, index) {
+                this.$emit('dragover', {event, row, index})
             }
         },
 
