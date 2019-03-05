@@ -3,6 +3,7 @@
         <b-input
             v-model="newValue"
             ref="input"
+            type="text"
             :size="size"
             :loading="loading"
             :rounded="rounded"
