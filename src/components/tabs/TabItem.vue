@@ -1,6 +1,7 @@
 <template>
     <transition :name="transitionName">
-        <div v-show="isActive && visible" class="tab-item" v-if="!useIf || (isActive && visible)">
+        <div v-show="isActive && visible" class="tab-item" 
+             v-if="!useIf || (isActive && visible)">
             <slot/>
         </div>
     </transition>
