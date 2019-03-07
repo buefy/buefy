@@ -23,6 +23,13 @@ export default [
                 default: '<code>value</code>'
             },
             {
+                name: '<code>custom-formatter</code>',
+                description: 'Function to format date to a string for display in the input as alternative to <code>field</code> prop)',
+                type: 'Function',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>clear-on-select</code>',
                 description: 'Clear input text on select',
                 type: 'Boolean',

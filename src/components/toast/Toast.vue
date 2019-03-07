@@ -5,7 +5,9 @@
         <div
             v-show="isActive"
             class="toast"
-            :class="[type, position]">
+            :class="[type, position]"
+            :aria-hidden="!isActive"
+            role="alert">
             <div v-html="message"/>
         </div>
     </transition>
