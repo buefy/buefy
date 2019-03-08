@@ -31,6 +31,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
                 name: '<code>inline</code>',
                 description: 'Dropdown content (items) are shown inline, trigger is removed',
                 type: 'Boolean',
