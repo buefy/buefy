@@ -250,9 +250,9 @@
              * Get text for aria-label according to page number.
              */
             getAriaPageLabel(pageNumber, isCurrent) {
-                if (this.ariaPageLabel !== undefined && this.ariaPageLabel !== '' && (!isCurrent || this.ariaCurrentLabel === undefined || this.ariaCurrentLabel === '')) {
+                if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
                     return this.ariaPageLabel + ' ' + pageNumber + '.'
-                } else if (this.ariaPageLabel !== undefined && this.ariaPageLabel !== '' && isCurrent && this.ariaCurrentLabel !== undefined && this.ariaCurrentLabel !== '') {
+                } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
                     return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
                 }
                 return null
