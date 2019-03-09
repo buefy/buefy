@@ -28,6 +28,7 @@
                         v-show="currentSortColumn === mobileSort"
                         :class="{ 'is-desc': !isAsc }"
                         icon="arrow-up"
+                        :pack="iconPack"
                         size="is-small"
                         both
                     />
@@ -51,7 +52,8 @@
             currentSortColumn: Object,
             isAsc: Boolean,
             columns: Array,
-            placeholder: String
+            placeholder: String,
+            iconPack: String
         },
         data() {
             return {
