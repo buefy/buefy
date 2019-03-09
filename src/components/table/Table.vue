@@ -6,6 +6,7 @@
             :is-asc="isAsc"
             :columns="newColumns"
             :placeholder="mobileSortPlaceholder"
+            :icon-pack="iconPack"
             @sort="(column) => sort(column)"
         />
 
