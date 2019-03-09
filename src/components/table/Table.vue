@@ -171,7 +171,11 @@
                         :simple="paginationSimple"
                         :size="paginationSize"
                         :current="newCurrentPage"
-                        @change="pageChanged"/>
+                        @change="pageChanged"
+                        aria-next-label="Next page"
+                        aria-previous-label="Previous page"
+                        aria-page-label="Page"
+                        aria-current-label="Current page"/>
                 </div>
             </div>
         </div>
