@@ -49,6 +49,34 @@ export default [
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>aria-next-label</code>',
+                description: 'Accessibility label for the next page link.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-previous-label</code>',
+                description: 'Accessibility label for the previous page link.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-page-label</code>',
+                description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-current-label</code>',
+                description: 'Accessibility label for the current page link. If passed, this text will be prepended to the current page.',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         events: [

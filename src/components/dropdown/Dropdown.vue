@@ -10,7 +10,7 @@
             <slot name="trigger"/>
         </div>
 
-        <transition name="fade">
+        <transition :name="animation">
             <div
                 v-if="isMobileModal"
                 v-show="isActive"
@@ -18,7 +18,7 @@
                 :aria-hidden="!isActive"
             />
         </transition>
-        <transition name="fade">
+        <transition :name="animation">
             <div
                 v-show="(!disabled && (isActive || hoverable)) || inline"
                 ref="dropdownMenu"
@@ -62,6 +62,10 @@
             ariaRole: {
                 type: String,
                 default: ''
+            },
+            animation: {
+                type: String,
+                default: 'fade'
             }
         },
         data() {
