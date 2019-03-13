@@ -240,6 +240,34 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
 
+            },
+            {
+                name: '<code>aria-next-label</code>',
+                description: 'Accessibility label for the next page link (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-previous-label</code>',
+                description: 'Accessibility label for the previous page link (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-page-label</code>',
+                description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-current-label</code>',
+                description: 'Accessibility label for the current page link. If passed, this text will be prepended to the current page (if <code>paginated</code>)',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         slots: [
