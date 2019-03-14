@@ -118,6 +118,18 @@
             if (this.activeTab < this.tabItems.length) {
                 this.tabItems[this.activeTab].isActive = true
             }
+
+            /**
+             * Check the url hash and see if any tabs have the same label
+             * Get the index of the tab and change to that tab
+             */
+            let urlHash = window.location.hash.substr(1)
+            let urlTabIndex = this.tabItems.findIndex((tabItem) => {
+                return tabItem.label.toLowerCase().replace(' ', '-') === urlHash
+            })
+            if (urlTabIndex !== -1) {
+                this.changeTab(urlTabIndex)
+            }
         }
     }
 </script>
