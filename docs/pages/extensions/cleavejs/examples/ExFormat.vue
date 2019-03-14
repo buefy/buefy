@@ -19,8 +19,7 @@
                 placeholder="Custom"
                 :value="value"
                 v-cleave="masks.custom"
-                @input.native="onInput"
-                >
+                @input.native="onInput">
             </b-input>
             <p><b>Formatted value (v-model)</b>: {{ value }}</p>
             <p><b>Raw value</b>: {{ rawValue }}</p>
