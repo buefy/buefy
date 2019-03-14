@@ -35,7 +35,7 @@
 
     /**
      * We add a new instance of Cleave when the element
-     * is bound or updated, and destroy it when it's unbound.
+     * is bound and destroy it when it's unbound.
      */
     const cleave = {
         name: 'cleave',
