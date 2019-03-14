@@ -6,11 +6,13 @@
 
 * Add ``custom-formatter`` prop to autocomplete
 * Add ``draggable`` prop to table (thanks @suneab)
-* Improve accessibility for notification (thanks @mateuswetah)
+* Improve accessibility for notification and pagination (thanks @mateuswetah)
 
 ### Fixes
 
+* #1246 Fix Cleave.js example using Vue 2.6.x (thanks @yxngl)
 * #1251 Fix Datepicker closing when page back to ``min-date`` month
+* #1257 Fix Datepicker slow/freeze on big year input
 * Fix tabindex on switch (thanks @yxngl), radio (thanks @Sacmanxman2) and checkbox
 
 ## 0.7.3

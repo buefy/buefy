@@ -302,14 +302,15 @@
             * dates are set by props, range of years will fall within those dates.
             */
             listOfYears() {
-                const latestYear = this.maxDate
-                ? this.maxDate.getFullYear()
-                    : (Math.max(
-                        this.dateCreator().getFullYear(),
-                        this.focusedDateData.year) + 3)
+                let latestYear = this.focusedDateData.year + 3
+                if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
+                    latestYear = this.maxDate.getFullYear()
+                }
 
-                const earliestYear = this.minDate
-                ? this.minDate.getFullYear() : 1900
+                let earliestYear = (latestYear - 100) + 3
+                if (this.minDate && this.minDate.getFullYear() > earliestYear) {
+                    earliestYear = this.minDate.getFullYear()
+                }
 
                 const arrayOfYears = []
                 for (let i = earliestYear; i <= latestYear; i++) {
