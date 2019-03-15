@@ -21,7 +21,7 @@
                 :unselectable-dates="unselectableDates"
                 :unselectable-days-of-week="unselectableDaysOfWeek"
                 :selectable-dates="selectableDates"
-                :events="eventsInThisWeek(index)"
+                :events="eventsInThisWeek(week)"
                 :indicators="indicators"
                 :date-creator="dateCreator"
                 @select="updateSelectedDate"/>
@@ -170,7 +170,7 @@
                 return thisWeek
             },
 
-            eventsInThisWeek(index) {
+            eventsInThisWeek(week) {
                 return this.eventsInThisMonth.filter((event) => {
                     const stripped = new Date(Date.parse(event.date))
                     stripped.setHours(0)
@@ -179,8 +179,7 @@
                     stripped.setMilliseconds(0)
                     const timed = stripped.getTime()
 
-                    return this.weeksInThisMonth[index]
-                        .some((weekDate) => weekDate.getTime() === timed)
+                    return week.some((weekDate) => weekDate.getTime() === timed)
                 })
             }
         }

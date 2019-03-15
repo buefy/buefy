@@ -42,6 +42,6 @@ describe('BDatepickerTable', () => {
                 }
             }
         })
-        expect(wrapper.vm.eventsInThisWeek(3).length).toEqual(2)
+        expect(wrapper.vm.eventsInThisWeek(wrapper.vm.weeksInThisMonth[3]).length).toEqual(2)
     })
 })
