@@ -10,7 +10,7 @@
         </header>
         <div class="datepicker-body" :class="{'has-events':hasEvents}">
             <b-datepicker-table-row
-                v-for="(week, index) in weeksInThisMonth(focused.month, focused.year)"
+                v-for="(week, index) in weeksInThisMonth"
                 :key="index"
                 :selected-date="value"
                 :week="week"
@@ -21,7 +21,7 @@
                 :unselectable-dates="unselectableDates"
                 :unselectable-days-of-week="unselectableDaysOfWeek"
                 :selectable-dates="selectableDates"
-                :events="eventsInThisWeek(week, index)"
+                :events="eventsInThisWeek(index)"
                 :indicators="indicators"
                 :date-creator="dateCreator"
                 @select="updateSelectedDate"/>
@@ -95,6 +95,36 @@
                 }
 
                 return monthEvents
+            },
+             /*
+            * Return array of all weeks in the specified month
+            */
+            weeksInThisMonth() {
+                const month = this.focused.month
+                const year = this.focused.year
+                const weeksInThisMonth = []
+                const daysInThisMonth = new Date(year, month + 1, 0).getDate()
+
+                let startingDay = 1
+
+                while (startingDay <= daysInThisMonth + 6) {
+                    const newWeek = this.weekBuilder(startingDay, month, year)
+                    let weekValid = false
+
+                    newWeek.forEach((day) => {
+                        if (day.getMonth() === month) {
+                            weekValid = true
+                        }
+                    })
+
+                    if (weekValid) {
+                        weeksInThisMonth.push(newWeek)
+                    }
+
+                    startingDay += 7
+                }
+
+                return weeksInThisMonth
             }
         },
         methods: {
@@ -140,53 +170,18 @@
                 return thisWeek
             },
 
-            /*
-            * Return array of all weeks in the specified month
-            */
-            weeksInThisMonth(month, year) {
-                const weeksInThisMonth = []
-                const daysInThisMonth = new Date(year, month + 1, 0).getDate()
+            eventsInThisWeek(index) {
+                return this.eventsInThisMonth.filter((event) => {
+                    const stripped = new Date(Date.parse(event.date))
+                    stripped.setHours(0)
+                    stripped.setMinutes(0)
+                    stripped.setSeconds(0)
+                    stripped.setMilliseconds(0)
+                    const timed = stripped.getTime()
 
-                let startingDay = 1
-
-                while (startingDay <= daysInThisMonth + 6) {
-                    const newWeek = this.weekBuilder(startingDay, month, year)
-                    let weekValid = false
-
-                    newWeek.forEach((day) => {
-                        if (day.getMonth() === month) {
-                            weekValid = true
-                        }
-                    })
-
-                    if (weekValid) {
-                        weeksInThisMonth.push(newWeek)
-                    }
-
-                    startingDay += 7
-                }
-
-                return weeksInThisMonth
-            },
-
-            eventsInThisWeek(week, index) {
-                if (!this.eventsInThisMonth.length) return []
-
-                const weekEvents = []
-
-                let weeksInThisMonth = []
-                weeksInThisMonth = this.weeksInThisMonth(this.focused.month, this.focused.year)
-
-                for (let d = 0; d < weeksInThisMonth[index].length; d++) {
-                    for (let e = 0; e < this.eventsInThisMonth.length; e++) {
-                        const eventsInThisMonth = this.eventsInThisMonth[e].date.getTime()
-                        if (eventsInThisMonth === weeksInThisMonth[index][d].getTime()) {
-                            weekEvents.push(this.eventsInThisMonth[e])
-                        }
-                    }
-                }
-
-                return weekEvents
+                    return this.weeksInThisMonth[index]
+                        .some((weekDate) => weekDate.getTime() === timed)
+                })
             }
         }
     }
