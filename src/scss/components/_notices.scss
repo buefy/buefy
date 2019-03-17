@@ -56,7 +56,7 @@ $snackbar-color: $dark-invert !default;
                 background: $snackbar-background-color;
             }
             .button:hover {
-                background: darken($snackbar-background-color, 5);
+                background: darken($snackbar-background-color, 5%);
             }
             @each $name, $pair in $colors {
                 $color: nth($pair, 1);
