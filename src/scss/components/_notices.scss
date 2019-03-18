@@ -54,8 +54,12 @@ $snackbar-color: $dark-invert !default;
                 font-weight: $weight-semibold;
                 text-transform: uppercase;
                 background: $snackbar-background-color;
+                border: transparent;
             }
             .button:hover {
+                background: darken($snackbar-background-color, 5%);
+            }
+            .button:active {
                 background: darken($snackbar-background-color, 5%);
             }
             @each $name, $pair in $colors {
