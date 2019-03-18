@@ -1,4 +1,5 @@
 $snackbar-background-color: $dark !default;
+$snackbar-color: $dark-invert !default;
 
 .notices {
     position: fixed;
@@ -40,7 +41,7 @@ $snackbar-background-color: $dark !default;
         border-radius: $radius;
         pointer-events: auto;
         background: $snackbar-background-color;
-        color: $dark-invert;
+        color: $snackbar-color;
         min-height: 3em;
         .text {
             padding: 0.5em 1em;
@@ -52,6 +53,10 @@ $snackbar-background-color: $dark !default;
             .button {
                 font-weight: $weight-semibold;
                 text-transform: uppercase;
+                background: $snackbar-background-color;
+            }
+            .button:hover {
+                background: darken($snackbar-background-color, 5%);
             }
             @each $name, $pair in $colors {
                 $color: nth($pair, 1);
