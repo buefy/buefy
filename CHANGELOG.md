@@ -13,6 +13,7 @@
 * #1246 Fix Cleave.js example using Vue 2.6.x (thanks @yxngl)
 * #1251 Fix Datepicker closing when page back to ``min-date`` month
 * #1257 Fix Datepicker slow/freeze on big year input
+* #1282 Fix Datepicker event display wich have a time set (thanks @DonNicoJs)
 * Fix tabindex on switch (thanks @yxngl), radio (thanks @Sacmanxman2) and checkbox
 
 ## 0.7.3
