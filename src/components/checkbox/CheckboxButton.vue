@@ -12,6 +12,7 @@
                 v-model="computedValue"
                 tabindex="-1"
                 type="checkbox"
+                @click.stop
                 :disabled="disabled"
                 :required="required"
                 :name="name"
