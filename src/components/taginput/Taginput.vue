@@ -35,6 +35,7 @@
                 :disabled="disabled"
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
+                :open-on-focus="autocompleteOpenOnFocus"
                 :keep-first="!allowNew"
                 @typing="onTyping"
                 @focus="onFocus"
@@ -109,6 +110,7 @@
                 default: 'value'
             },
             autocomplete: Boolean,
+            autocompleteOpenOnFocus: Boolean,
             nativeAutocomplete: String,
             disabled: Boolean,
             ellipsis: Boolean,
