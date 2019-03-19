@@ -6,6 +6,7 @@
 
 * Add ``custom-formatter`` prop to autocomplete
 * Add ``draggable`` prop to table (thanks @suneab)
+* Add ``autocomplete-open-on-focus`` (thanks @rkacenski)
 * Improve accessibility for notification and pagination (thanks @mateuswetah)
 
 ### Fixes

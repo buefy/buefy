@@ -82,6 +82,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>autocomplete-open-on-focus</code>',
+                description: 'When <code>autocomplete</code>, it open dropdown list on focus',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>allow-new</code>',
                 description: 'When <code>autocomplete</code>, it allow to add new tags',
                 type: 'Boolean',
