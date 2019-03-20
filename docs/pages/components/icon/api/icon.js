@@ -46,7 +46,7 @@ export default [
                 description: `Add class to icon font (<code>&lt;i&gt;</code> tag), optional.
                     See <a href="https://materialdesignicons.com/getting-started" target="_blank">here for MDI</a>,
                     <a href="http://fontawesome.io/examples/" target="_blank">here for FontAwesome 4</a> and
-                    <a href="https://fontawesome.com/how-to-use/web-fonts-with-css#additional-styling" target="_blank">here for FontAwesome 5</a> custom classes`,
+                    <a href="https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs" target="_blank">here for FontAwesome 5</a> custom classes`,
                 type: 'String',
                 values: '—',
                 default: '—'
