@@ -15,6 +15,7 @@
 * #1251 Fix Datepicker closing when page back to ``min-date`` month
 * #1257 Fix Datepicker slow/freeze on big year input
 * #1282 Fix Datepicker event display wich have a time set (thanks @DonNicoJs)
+* #1290 Fix double click event for CheckBox(Button) and Radio(Button)
 * Fix tabindex on switch (thanks @yxngl), radio (thanks @Sacmanxman2) and checkbox
 
 ## 0.7.3
