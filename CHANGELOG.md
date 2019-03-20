@@ -7,7 +7,7 @@
 * **Notification improved**: can show a notification programmatically, [see docs](https://buefy.org/#/documentation/notification)
 * Add ``custom-formatter`` prop to autocomplete
 * Add ``draggable`` prop to table (thanks @suneab)
-* Improve accessibility for notification and pagination (thanks @mateuswetah)
+* Improve accessibility for notification, message and pagination (thanks @mateuswetah)
 
 ### Fixes
 

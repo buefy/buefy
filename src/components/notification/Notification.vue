@@ -37,7 +37,7 @@
         mixins: [MessageMixin],
         props: {
             position: String,
-            ariaCloseLabel: ''
+            ariaCloseLabel: String
         }
     }
 </script>
