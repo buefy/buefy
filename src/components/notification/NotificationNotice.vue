@@ -1,8 +1,6 @@
 <template>
     <b-notification
         v-bind="$options.propsData"
-        :transition-enter="transition.enter"
-        :transtion-leave="transition.leave"
         @close="close" />
 </template>
 
