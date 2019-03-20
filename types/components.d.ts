@@ -170,3 +170,16 @@ export declare type ToastConfig = {
 export declare const Toast: {
     open: (params: ToastConfig | string) => any;
 }
+
+export declare type NotificationConfig = {
+    message: string;
+    type?: ColorModifiers;
+    position?: GlobalPositions;
+    duration?: number;
+    container?: string;
+    queue?: boolean;
+    indefinite?: boolean;
+}
+export declare const NotificationProgrammatic: {
+    open: (params: NotificationConfig | string) => void;
+}

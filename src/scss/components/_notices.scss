@@ -82,9 +82,13 @@ $snackbar-color: $dark-invert !default;
             overflow: hidden;
         }
     }
+    .notification {
+        max-width: 600px;
+    }
 
     .toast,
-    .snackbar {
+    .snackbar,
+    .notification {
         // Modifiers
         &.is-top, &.is-bottom {
             align-self: center;

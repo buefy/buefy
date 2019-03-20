@@ -1,9 +1,9 @@
 <template>
-    <transition name="fade">
+    <transition :name="null">
         <article
-            v-if="isActive"
+            v-show="isActive"
             class="notification"
-            :class="type">
+            :class="[type, position]">
             <button
                 v-if="closable"
                 class="delete"
@@ -21,7 +21,8 @@
                         aria-hidden/>
                 </div>
                 <div class="media-content">
-                    <slot/>
+                    <p class="text" v-if="message">{{ message }}</p>
+                    <slot v-else/>
                 </div>
             </div>
         </article>
@@ -35,6 +36,7 @@
         name: 'BNotification',
         mixins: [MessageMixin],
         props: {
+            position: String,
             ariaCloseLabel: ''
         }
     }

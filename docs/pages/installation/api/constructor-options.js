@@ -188,7 +188,7 @@ export default [
             },
             {
                 name: '<code>defaultNoticeQueue</code>',
-                description: 'Default snackbar/toast <code>queue</code> attribute',
+                description: 'Default snackbar/toast/notification <code>queue</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

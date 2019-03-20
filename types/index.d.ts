@@ -1,6 +1,6 @@
 import _Vue from "vue";
 
-import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar } from "./components";
+import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar, NotificationProgrammatic } from "./components";
 import { ColorModifiers } from "./helpers";
 
 // Adds Buefy method signatures to Vue instance (ie this.$dialog)
@@ -10,7 +10,8 @@ declare module 'vue/types/vue' {
         $loading: typeof LoadingProgrammatic,
         $modal: typeof ModalProgrammatic,
         $snackbar: typeof Snackbar,
-        $toast: typeof Toast
+        $toast: typeof Toast,
+        $notification: typeof NotificationProgrammatic
     }
 }
 
@@ -21,6 +22,7 @@ export declare type BuefyConfig = {
     defaultDialogCancelText?: string;
     defaultSnackbarDuration?: number;
     defaultToastDuration?: number;
+    defaultNotificationDuration?: number;
     defaultTooltipType?: ColorModifiers;
     defaultTooltipAnimated?: boolean;
     defaultInputAutocomplete?: string;
@@ -49,7 +51,8 @@ export {
     LoadingProgrammatic,
     ModalProgrammatic,
     Snackbar,
-    Toast
+    Toast,
+    NotificationProgrammatic
 }
 
 export default _default;
