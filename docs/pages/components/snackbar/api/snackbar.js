@@ -34,7 +34,7 @@ export default [
             },
             {
                 name: '<code>queue</code>',
-                description: 'If should queue with others notices (snackbar/toast)',
+                description: 'If should queue with others notices (snackbar/toast/notification)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
