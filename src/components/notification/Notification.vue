@@ -1,5 +1,5 @@
 <template>
-    <transition :name="null">
+    <transition name="fade">
         <article
             v-show="isActive"
             class="notification"

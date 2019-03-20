@@ -1,11 +1,9 @@
 <template>
-    <transition
-        :enter-active-class="transition.enter"
-        :leave-active-class="transition.leave">
-        <b-notification
-            v-bind="$options.propsData"
-            @close="close" />
-    </transition>
+    <b-notification
+        v-bind="$options.propsData"
+        :transition-enter="transition.enter"
+        :transtion-leave="transition.leave"
+        @close="close" />
 </template>
 
 <script>
