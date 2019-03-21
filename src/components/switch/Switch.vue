@@ -5,7 +5,7 @@
         ref="label"
         :disabled="disabled"
         :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="toggle"
+        @keydown.prevent.enter.space="$refs.label.click()"
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
         @mouseout="isMouseDown = false"
@@ -69,15 +69,6 @@
              */
             value(value) {
                 this.newValue = value
-            }
-        },
-        methods: {
-            toggle() {
-                if (this.computedValue === this.trueValue) {
-                    this.computedValue = this.falseValue
-                } else {
-                    this.computedValue = this.trueValue
-                }
             }
         }
     }
