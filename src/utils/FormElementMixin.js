@@ -3,6 +3,7 @@ import config from '../utils/config'
 export default {
     props: {
         size: String,
+        inputSize: String,
         expanded: Boolean,
         loading: Boolean,
         rounded: Boolean,
