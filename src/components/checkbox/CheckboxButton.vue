@@ -9,9 +9,12 @@
             @keydown.prevent.enter.space="$refs.label.click()">
             <slot/>
             <input
-                v-model="newValue"
+                v-model="computedValue"
+                tabindex="-1"
                 type="checkbox"
+                @click.stop
                 :disabled="disabled"
+                :required="required"
                 :name="name"
                 :value="nativeValue">
         </label>
@@ -25,6 +28,7 @@
             value: [String, Number, Boolean, Function, Object, Array, Symbol],
             nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
             disabled: Boolean,
+            required: Boolean,
             name: String,
             size: String,
             type: {
@@ -38,6 +42,15 @@
             }
         },
         computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                }
+            },
             checked() {
                 if (Array.isArray(this.newValue)) {
                     return this.newValue.indexOf(this.nativeValue) >= 0
@@ -51,12 +64,6 @@
              */
             value(value) {
                 this.newValue = value
-            },
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                this.$emit('input', value)
             }
         }
     }

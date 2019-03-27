@@ -23,6 +23,13 @@ export default [
                 default: '<code>value</code>'
             },
             {
+                name: '<code>custom-formatter</code>',
+                description: 'Function to format date to a string for display in the input as alternative to <code>field</code> prop)',
+                type: 'Function',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>clear-on-select</code>',
                 description: 'Clear input text on select',
                 type: 'Boolean',
@@ -103,6 +110,11 @@ export default [
                 name: '<code>empty</code>',
                 description: 'Show like an option if <code>data</code> array prop is empty',
                 props: '—'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Show a custom header as first option',
+                props: '—'
             }
         ],
         events: [
@@ -127,6 +139,11 @@ export default [
                 parameters: '<code>event: $event</code>'
             },
             {
+                name: '<code>typing</code>',
+                description: 'Triggers when user is typing',
+                parameters: '<code>value: String</code>'
+            },
+            {
                 name: '<code>[any].native</code>',
                 description: 'Listen to any native event, e.g. <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
@@ -145,7 +162,7 @@ export default [
             },
             {
                 name: '<code>setSelected(selected: Any)</code>',
-                description: 'Select an option by array position (same type of <code>data</code> property)',
+                description: 'Select an option by an object (same type of <code>data</code> property)',
                 return: '—'
             }
         ]

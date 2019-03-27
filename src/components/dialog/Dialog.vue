@@ -63,8 +63,8 @@
 </template>
 
 <script>
-    import Icon from '../icon'
-    import { Modal } from '../modal'
+    import Icon from '../icon/Icon'
+    import Modal from '../modal/Modal'
     import config from '../../utils/config'
     import { removeElement } from '../../utils/helpers'
 
@@ -180,7 +180,9 @@
         },
         beforeMount() {
             // Insert the Dialog component in body tag
-            document.body.appendChild(this.$el)
+            this.$nextTick(() => {
+                document.body.appendChild(this.$el)
+            })
         },
         mounted() {
             this.isActive = true

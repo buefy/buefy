@@ -1,12 +1,14 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BSlotComponent from '@utils/SlotComponent'
 
 describe('BSlotComponent', () => {
     const MockComponent = {
         render: (h) => h('div', {}, 'Hello!')
     }
+    const defaultEvent = 'hook:updated'
+
     it('is called', () => {
-        const wrapper = shallow(BSlotComponent, {
+        const wrapper = shallowMount(BSlotComponent, {
             propsData: {
                 component: {}
             }
@@ -18,12 +20,12 @@ describe('BSlotComponent', () => {
 
     it('default render', () => {
         const slot = '<span>Content</span>'
-        const Component = shallow(MockComponent, {
+        const Component = shallowMount(MockComponent, {
             slots: {
                 default: slot
             }
         })
-        const wrapper = shallow(BSlotComponent, {
+        const wrapper = shallowMount(BSlotComponent, {
             propsData: {
                 component: Component.vm
             }
@@ -34,13 +36,13 @@ describe('BSlotComponent', () => {
     it('render', () => {
         const slot = '<span>Content</span>'
         const slotName = 'header'
-        const Component = shallow(MockComponent, {
+        const Component = shallowMount(MockComponent, {
             slots: {
                 [slotName]: slot
             }
         })
         const tag = 'span'
-        const wrapper = shallow(BSlotComponent, {
+        const wrapper = shallowMount(BSlotComponent, {
             propsData: {
                 component: Component.vm,
                 tag: tag,
@@ -52,31 +54,52 @@ describe('BSlotComponent', () => {
 
     it('render after emit event', async () => {
         const slot = '<span>Content</span>'
-        const Component = shallow(MockComponent, {
+        const Component = shallowMount(MockComponent, {
             slots: {
                 default: slot
             }
         })
-        const wrapper = shallow(BSlotComponent, {
+        const wrapper = shallowMount(BSlotComponent, {
             propsData: {
                 component: Component.vm
             }
         })
-        Component.vm.$emit('updated', {})
+        Component.vm.$emit(defaultEvent, {})
         await wrapper.vm.$nextTick()
+        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+    })
+
+    it('refresh after default event (hook)', async () => {
+        const slot = '<span>Content</span>'
+        const Component = shallowMount(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const refresh = jest.fn()
+        const wrapper = shallowMount(BSlotComponent, {
+            propsData: {
+                component: Component.vm
+            },
+            methods: {
+                refresh
+            }
+        })
+        Component.vm.$forceUpdate()
+        await Component.vm.$nextTick()
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
     })
 
     it('refresh', () => {
         const event = 'component-event'
         const slot = '<span>Content</span>'
-        const Component = shallow(MockComponent, {
+        const Component = shallowMount(MockComponent, {
             slots: {
                 default: slot
             }
         })
         const refresh = jest.fn()
-        const wrapper = shallow(BSlotComponent, {
+        const wrapper = shallowMount(BSlotComponent, {
             propsData: {
                 component: Component.vm,
                 event
@@ -92,13 +115,13 @@ describe('BSlotComponent', () => {
 
     it('destroy', () => {
         const slot = '<span>Content</span>'
-        const Component = shallow(MockComponent, {
+        const Component = shallowMount(MockComponent, {
             slots: {
                 default: slot
             }
         })
         const refresh = jest.fn()
-        const wrapper = shallow(BSlotComponent, {
+        const wrapper = shallowMount(BSlotComponent, {
             propsData: {
                 component: Component.vm
             },
@@ -107,7 +130,7 @@ describe('BSlotComponent', () => {
             }
         })
         wrapper.destroy()
-        Component.vm.$emit('updated', {})
+        Component.vm.$emit(defaultEvent, {})
         expect(refresh).toHaveBeenCalledTimes(0)
     })
 })

@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Message</h1>
-        <h2 class="subtitle">Colored message blocks, to draw attention of your user</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
@@ -15,6 +11,10 @@
         </Example>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
+
+        <Example :component="ExAutoClose" :code="ExAutoCloseCode" title="Auto Close" vertical>
+            <p>Message will be automatically closed after <code>duration</code>.</p>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -38,6 +38,9 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExAutoClose from './examples/ExAutoClose'
+    import ExAutoCloseCode from '!!raw-loader!./examples/ExAutoClose'
+
     export default {
         data() {
             return {
@@ -47,11 +50,13 @@
                 ExIcons,
                 ExHeaderless,
                 ExSizes,
+                ExAutoClose,
                 ExSimpleCode,
                 ExTypesCode,
                 ExIconsCode,
                 ExHeaderlessCode,
-                ExSizesCode
+                ExSizesCode,
+                ExAutoCloseCode
             }
         }
     }

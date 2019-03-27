@@ -1,13 +1,9 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Datepicker</h1>
-        <h2 class="subtitle">An input with a simple dropdown/modal for selecting a date, uses native datepicker for mobile</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>
-            <p>Use <code>:readonly="false"</code> to let the user type a date.</p>
+        <Example :component="ExEditable" :code="ExEditableCode" title="Editable (non readonly)" vertical>
+            <p>Use <code>editable</code> prop to let the user type a date.</p>
             <b-message type="is-warning" has-icon>
                 Note that the default date parser is
                 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse" target="_blank">Date.parse()</a>
@@ -25,10 +21,6 @@
         </Example>
 
         <Example :component="ExHeader" :code="ExHeaderCode" title="Header" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.4</span>
-            </div>
             <p>You can add your custom header to the datepicker.</p>
         </Example>
 
@@ -37,10 +29,6 @@
         </Example>
 
         <Example :component="ExEvents" :code="ExEventsCode" title="Events" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.2</span>
-            </div>
             <p>Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
         </Example>
 
@@ -54,8 +42,8 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
-    import ExNonReadonly from './examples/ExNonReadonly'
-    import ExNonReadonlyCode from '!!raw-loader!./examples/ExNonReadonly'
+    import ExEditable from './examples/ExEditable'
+    import ExEditableCode from '!!raw-loader!./examples/ExEditable'
 
     import ExRange from './examples/ExRange'
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
@@ -78,8 +66,8 @@
                 api,
                 ExSimple,
                 ExSimpleCode,
-                ExNonReadonly,
-                ExNonReadonlyCode,
+                ExEditable,
+                ExEditableCode,
                 ExRange,
                 ExRangeCode,
                 ExFooter,

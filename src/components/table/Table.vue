@@ -5,6 +5,7 @@
             :current-sort-column="currentSortColumn"
             :is-asc="isAsc"
             :columns="newColumns"
+            :placeholder="mobileSortPlaceholder"
             @sort="(column) => sort(column)"
         />
 
@@ -13,17 +14,19 @@
                 class="table"
                 :class="tableClasses"
                 :tabindex="!focusable ? false : 0"
-                @keydown.prevent.up="pressedArrow(-1)"
-                @keydown.prevent.down="pressedArrow(1)">
+                @keydown.self.prevent.up="pressedArrow(-1)"
+                @keydown.self.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length">
                     <tr>
-                        <th v-if="detailed" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox :value="isAllChecked" @change.native="checkAll"/>
+                            <b-checkbox
+                                :value="isAllChecked"
+                                :disabled="isAllUncheckable"
+                                @change.native="checkAll"/>
                         </th>
                         <th
-                            v-for="(column, index) in newColumns"
-                            v-if="column.visible || column.visible === undefined"
+                            v-for="(column, index) in visibleColumns"
                             :key="index"
                             :class="{
                                 'is-current-sort': currentSortColumn === column,
@@ -48,6 +51,7 @@
                                 <b-icon
                                     v-show="currentSortColumn === column"
                                     icon="arrow-up"
+                                    :pack="iconPack"
                                     both
                                     size="is-small"
                                     :class="{ 'is-desc': !isAsc }"/>
@@ -58,21 +62,31 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
-                            :key="index"
+                            :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
-                                'is-checked': isRowChecked(row)
+                                'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
-                            @dblclick="$emit('dblclick', row)">
+                            @dblclick="$emit('dblclick', row)"
+                            @contextmenu="$emit('contextmenu', row, $event)"
+                            :draggable="draggable"
+                            @dragstart="handleDragStart($event, row, index)"
+                            @drop="handleDrop($event, row, index)"
+                            @dragover="handleDragOver($event, row, index)"
+                            @dragleave="handleDragLeave($event, row, index)">
 
-                            <td v-if="detailed">
+                            <td
+                                v-if="showDetailRowIcon"
+                                class="chevron-cell"
+                            >
                                 <a
                                     v-if="hasDetailedVisible(row)"
                                     role="button"
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
                                         icon="chevron-right"
+                                        :pack="iconPack"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
                                 </a>
@@ -83,6 +97,7 @@
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @change.native="checkRow(row)"
+                                    @click.native.stop
                                 />
                             </td>
 
@@ -142,7 +157,7 @@
             </table>
         </div>
 
-        <div v-if="checkable || paginated" class="level">
+        <div v-if="(checkable && hasBottomLeftSlot()) || paginated" class="level">
             <div class="level-left">
                 <slot name="bottom-left"/>
             </div>
@@ -150,12 +165,17 @@
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
+                        :icon-pack="iconPack"
                         :total="newDataTotal"
                         :per-page="perPage"
                         :simple="paginationSimple"
                         :size="paginationSize"
                         :current="newCurrentPage"
-                        @change="pageChanged"/>
+                        @change="pageChanged"
+                        :aria-next-label="ariaNextLabel"
+                        :aria-previous-label="ariaPreviousLabel"
+                        :aria-page-label="ariaPageLabel"
+                        :aria-current-label="ariaCurrentLabel" />
                 </div>
             </div>
         </div>
@@ -164,21 +184,22 @@
 
 <script>
     import { getValueByPath, indexOf } from '../../utils/helpers'
-    import { Checkbox as BCheckbox } from '../checkbox'
-    import BPagination from '../pagination'
-    import BIcon from '../icon'
 
-    import BTableMobileSort from './TableMobileSort'
-    import BTableColumn from './TableColumn'
+    import Checkbox from '../checkbox/Checkbox'
+    import Icon from '../icon/Icon'
+    import Pagination from '../pagination/Pagination'
+
+    import TableMobileSort from './TableMobileSort'
+    import TableColumn from './TableColumn'
 
     export default {
         name: 'BTable',
         components: {
-            BPagination,
-            BIcon,
-            BCheckbox,
-            BTableMobileSort,
-            BTableColumn
+            [Checkbox.name]: Checkbox,
+            [Icon.name]: Icon,
+            [Pagination.name]: Pagination,
+            [TableMobileSort.name]: TableMobileSort,
+            [TableColumn.name]: TableColumn
         },
         props: {
             data: {
@@ -225,6 +246,10 @@
                 type: [Number, String],
                 default: 20
             },
+            showDetailIcon: {
+                type: Boolean,
+                default: true
+            },
             paginationSimple: Boolean,
             paginationSize: String,
             backendSorting: Boolean,
@@ -248,7 +273,18 @@
             total: {
                 type: [Number, String],
                 default: 0
-            }
+            },
+            iconPack: String,
+            mobileSortPlaceholder: String,
+            customRowKey: String,
+            draggable: {
+                type: Boolean,
+                defualt: false
+            },
+            ariaNextLabel: String,
+            ariaPreviousLabel: String,
+            ariaPageLabel: String,
+            ariaCurrentLabel: String
         },
         data() {
             return {
@@ -266,6 +302,14 @@
             }
         },
         computed: {
+            /**
+             * return if detailed row tabled
+             * will be with chevron column & icon or not
+             */
+            showDetailRowIcon() {
+                return this.detailed && this.showDetailIcon
+            },
+
             tableClasses() {
                 return {
                     'is-bordered': this.bordered,
@@ -297,16 +341,33 @@
                 }
             },
 
+            visibleColumns() {
+                if (!this.newColumns) return this.newColumns
+                return this.newColumns.filter((column) => {
+                    return column.visible || column.visible === undefined
+                })
+            },
+
             /**
              * Check if all rows in the page are checked.
              */
             isAllChecked() {
                 const validVisibleData = this.visibleData.filter(
                         (row) => this.isRowCheckable(row))
+                if (validVisibleData.length === 0) return false
                 const isAllChecked = validVisibleData.some((currentVisibleRow) => {
                     return indexOf(this.newCheckedRows, currentVisibleRow, this.customIsChecked) < 0
                 })
                 return !isAllChecked
+            },
+
+            /**
+             * Check if all rows in the page are checkable.
+             */
+            isAllUncheckable() {
+                const validVisibleData = this.visibleData.filter(
+                        (row) => this.isRowCheckable(row))
+                return validVisibleData.length === 0
             },
 
             /**
@@ -380,21 +441,8 @@
                 this.newColumns = [...value]
             },
 
-            /**
-             * When newColumns change, call initSort only first time (For example async data).
-             */
-            newColumns(newColumns) {
-                if (newColumns.length && this.firstTimeSort) {
-                    this.initSort()
-                    this.firstTimeSort = false
-                } else if (newColumns.length) {
-                    for (let i = 0; i < newColumns.length; i++) {
-                        if (newColumns[i].newKey === this.currentSortColumn.newKey) {
-                            this.currentSortColumn = newColumns[i]
-                            break
-                        }
-                    }
-                }
+            newColumns(value) {
+                this.checkSort()
             },
 
             /**
@@ -424,6 +472,11 @@
                         // Get nested values from objects
                         let newA = getValueByPath(a, key)
                         let newB = getValueByPath(b, key)
+
+                        // sort boolean type
+                        if (typeof newA === 'boolean' && typeof newB === 'boolean') {
+                            return isAsc ? newA - newB : newB - newA
+                        }
 
                         if (!newA && newA !== 0) return 1
                         if (!newB && newB !== 0) return -1
@@ -602,7 +655,26 @@
             checkPredefinedDetailedRows() {
                 const defaultExpandedRowsDefined = this.openedDetailed.length > 0
                 if (defaultExpandedRowsDefined && !this.detailKey.length) {
-                    throw new Error('If you set a predefined opened-detailed, you must provide an unique key using the prop "detail-key"')
+                    throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"')
+                }
+            },
+
+            /**
+             * Call initSort only first time (For example async data).
+             */
+            checkSort() {
+                if (this.newColumns.length && this.firstTimeSort) {
+                    this.initSort()
+                    this.firstTimeSort = false
+                } else if (this.newColumns.length) {
+                    if (this.currentSortColumn.field) {
+                        for (let i = 0; i < this.newColumns.length; i++) {
+                            if (this.newColumns[i].field === this.currentSortColumn.field) {
+                                this.currentSortColumn = this.newColumns[i]
+                                break
+                            }
+                        }
+                    }
                 }
             },
 
@@ -616,6 +688,13 @@
                 if (tag !== 'th' && tag !== 'td') return false
 
                 return true
+            },
+
+            /**
+             * Check if bottom-left slot exists.
+             */
+            hasBottomLeftSlot() {
+                return typeof this.$slots['bottom-left'] !== 'undefined'
             },
 
             /**
@@ -669,11 +748,36 @@
                         this.sort(column, true)
                     }
                 })
+            },
+            /**
+             * Emits drag start event
+             */
+            handleDragStart(event, row, index) {
+                this.$emit('dragstart', {event, row, index})
+            },
+            /**
+             * Emits drop event
+             */
+            handleDrop(event, row, index) {
+                this.$emit('drop', {event, row, index})
+            },
+            /**
+             * Emits drag over event
+             */
+            handleDragOver(event, row, index) {
+                this.$emit('dragover', {event, row, index})
+            },
+            /**
+             * Emits drag leave event
+             */
+            handleDragLeave(event, row, index) {
+                this.$emit('dragleave', {event, row, index})
             }
         },
 
         mounted() {
             this.checkPredefinedDetailedRows()
+            this.checkSort()
         }
     }
 </script>

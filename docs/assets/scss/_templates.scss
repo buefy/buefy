@@ -1,13 +1,40 @@
-.template-horizontal {
+.documentation {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    .default-container {
+    .docs-template-horizontal {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+    }
+    .docs-main {
+        position: relative;
+        background: $white;
         overflow: hidden;
         width: 100%;
     }
+    .docs-main-container {
+        padding: 3rem;
+        &.is-header {
+            border-bottom: 2px solid $white-ter;
+        }
+    }
+    .docs-improve-this {
+        text-align: center;
+        margin-top: 5em;
+        padding-top: 1.5rem;
+        border-top: 2px solid $white-ter;
+    }
     @include touch {
-        display: block;
+        .docs-template-horizontal {
+            flex-direction: column;
+        }
+        .docs-main-container {
+            padding: 1.5rem;
+        }
+    }
+    @include fullhd {
+        .docs-main-container {
+            margin-right: -3rem;
+        }
     }
 }

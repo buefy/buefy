@@ -50,7 +50,11 @@
             },
             canCancel: {
                 type: [Array, Boolean],
-                default: () => ['escape', 'x', 'outside', 'button']
+                default: () => {
+                    return config.defaultModalCanCancel
+                        ? config.defaultModalCanCancel
+                        : ['escape', 'x', 'outside', 'button']
+                }
             },
             onCancel: {
                 type: Function,
@@ -105,7 +109,11 @@
                 if (typeof window === 'undefined') return
 
                 if (this.scroll === 'clip') {
-                    document.documentElement.classList.toggle('is-clipped', this.isActive)
+                    if (this.isActive) {
+                        document.documentElement.classList.add('is-clipped')
+                    } else {
+                        document.documentElement.classList.remove('is-clipped')
+                    }
                     return
                 }
 
@@ -113,7 +121,11 @@
                     ? document.documentElement.scrollTop
                     : this.savedScrollTop
 
-                document.body.classList.toggle('is-noscroll', this.isActive)
+                if (this.isActive) {
+                    document.body.classList.add('is-noscroll')
+                } else {
+                    document.body.classList.remove('is-noscroll')
+                }
 
                 if (this.isActive) {
                     document.body.style.top = `-${this.savedScrollTop}px`
@@ -178,6 +190,14 @@
         beforeDestroy() {
             if (typeof window !== 'undefined') {
                 document.removeEventListener('keyup', this.keyPress)
+                // reset scroll
+                document.documentElement.classList.remove('is-clipped')
+                const savedScrollTop = !this.savedScrollTop
+                    ? document.documentElement.scrollTop
+                    : this.savedScrollTop
+                document.body.classList.remove('is-noscroll')
+                document.documentElement.scrollTop = savedScrollTop
+                document.body.style.top = null
             }
         }
     }

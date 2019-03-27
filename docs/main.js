@@ -21,6 +21,7 @@ Vue.prototype.$http = Axios
 Vue.prototype.$eventHub = new Vue()
 
 Vue.use(Buefy, {
+    // defaultModalScroll: 'keep'
     // defaultIconPack: 'fa',
     // defaultSnackbarDuration: 999999,
     // defaultToastDuration: 999999
@@ -88,9 +89,15 @@ Vue.filter('pre', (text) => {
 })
 
 /* eslint-disable no-new */
-new Vue({
-    el: '#app',
+const root = new Vue({
     router,
     components: { App },
+    mounted() {
+        document.dispatchEvent(new Event('render-event'))
+    },
     template: '<App/>'
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+    root.$mount('#app')
 })

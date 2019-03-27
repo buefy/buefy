@@ -1,14 +1,15 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Dialog</h1>
-        <h2 class="subtitle">Dialogs inform users about a specific task and may contain critical information or require decisions</h2>
-        <hr>
-
+    <div>
         <Example :component="ExAlertDialog" :code="ExAlertDialogCode" title="Alert"/>
 
         <Example :component="ExConfirmDialog" :code="ExConfirmDialogCode" title="Confirm"/>
 
         <Example :component="ExPromptDialog" :code="ExPromptDialogCode" title="Prompt"/>
+
+        <Example title="From outside Vue instance">
+            <p>You can use it on Vuex or VueRouter using this syntax:</p>
+            <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -35,7 +36,10 @@
                 ExConfirmDialog,
                 ExConfirmDialogCode,
                 ExPromptDialog,
-                ExPromptDialogCode
+                ExPromptDialogCode,
+                outsideVueInstance: `
+                import { Dialog } from 'buefy/dist/components/dialog'
+                Dialog.alert('We can use confirm and prompt methods as well')`
             }
         }
     }

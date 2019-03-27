@@ -4,11 +4,11 @@
             v-if="type !== 'textarea'"
             ref="input"
             class="input"
-            :class="inputClasses"
+            :class="[inputClasses, customClass]"
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
-            :value="newValue"
+            :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
             @blur="onBlur"
@@ -18,9 +18,9 @@
             v-else
             ref="textarea"
             class="textarea"
-            :class="inputClasses"
+            :class="[inputClasses, customClass]"
             :maxlength="maxlength"
-            :value="newValue"
+            :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
             @blur="onBlur"
@@ -45,7 +45,7 @@
             @click.native="togglePasswordVisibility"/>
 
         <small
-            v-if="maxlength && hasCounter"
+            v-if="maxlength && hasCounter && type !== 'number'"
             class="help counter"
             :class="{ 'is-invisible': !isFocused }">
             {{ valueLength }} / {{ maxlength }}
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
     import config from '../../utils/config'
     import FormElementMixin from '../../utils/FormElementMixin'
 
@@ -74,7 +74,11 @@
             passwordReveal: Boolean,
             hasCounter: {
                 type: Boolean,
-                default: true
+                default: () => config.defaultInputHasCounter
+            },
+            customClass: {
+                type: String,
+                default: ''
             }
         },
         data() {
@@ -89,6 +93,16 @@
             }
         },
         computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                    !this.isValid && this.checkHtml5Validity()
+                }
+            },
             rootClasses() {
                 return [
                     this.iconPosition,
@@ -153,26 +167,21 @@
              * Get value length
              */
             valueLength() {
-                return this.newValue ? this.newValue.length : 0
+                if (typeof this.computedValue === 'string') {
+                    return this.computedValue.length
+                } else if (typeof this.computedValue === 'number') {
+                    return this.computedValue.toString().length
+                }
+                return 0
             }
         },
         watch: {
             /**
              * When v-model is changed:
              *   1. Set internal value.
-             *   2. If it's invalid, validate again.
              */
             value(value) {
                 this.newValue = value
-            },
-
-            /**
-             * Update user's v-model and validate again whenever
-             * internal value is changed.
-             */
-            newValue(value) {
-                this.$emit('input', value)
-                !this.isValid && this.checkHtml5Validity()
             }
         },
         methods: {
@@ -194,7 +203,11 @@
              * before ui update, helps when using masks (Cleavejs and potentially others).
              */
             onInput(event) {
-                this.$nextTick(() => { this.newValue = event.target.value })
+                this.$nextTick(() => {
+                    if (event.target) {
+                        this.computedValue = event.target.value
+                    }
+                })
             }
         }
     }

@@ -1,23 +1,16 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Snackbar</h1>
-        <h2 class="subtitle">When a Dialog seems a bit overkill for the task, Snackbars are good candidates</h2>
-        <hr>
-
+    <div>
         <div class="content">
             <p>They have only one button, and by default are queued to not confuse the user.</p>
             <p><small><b>Note:</b> They queue with <router-link to="/documentation/toast">Toasts</router-link> as well.</small></p>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.2</span>
-            </div>
-            <p>
-                You can disable queue by passing the <code>queue: false</code> object attribute or by using
-                <router-link to="/documentation/constructor-options">constructor options</router-link>.
-            </p>
         </div>
 
-        <Example :component="ExSimple" :code="ExSimpleCode"/>
+        <Example title="From inside Vue instance" :component="ExSimple" :code="ExSimpleCode"/>
+
+        <Example title="From outside Vue instance">
+            <p>You can use it on Vuex or VueRouter using this syntax:</p>
+            <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -34,7 +27,10 @@
             return {
                 api,
                 ExSimple,
-                ExSimpleCode
+                ExSimpleCode,
+                outsideVueInstance: `
+                import { Snackbar } from 'buefy/dist/components/snackbar'
+                Snackbar.open('Look at me!')`
             }
         }
     }

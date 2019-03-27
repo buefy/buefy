@@ -1,20 +1,30 @@
 <template>
-    <div class="pagination" :class="rootClasses">
+    <nav class="pagination" :class="rootClasses">
         <a
             role="button"
             href="#"
             class="pagination-previous"
             :disabled="!hasPrev"
-            @click.prevent="prev" >
-            <b-icon icon="chevron-left" both/>
+            @click.prevent="prev"
+            :aria-label="ariaPreviousLabel">
+            <b-icon
+                icon="chevron-left"
+                :pack="iconPack"
+                both
+                aria-hidden/>
         </a>
         <a
             role="button"
             href="#"
             class="pagination-next"
             :disabled="!hasNext"
-            @click.prevent="next" >
-            <b-icon icon="chevron-right" both/>
+            @click.prevent="next"
+            :aria-label="ariaNextLabel">
+            <b-icon
+                icon="chevron-right"
+                :pack="iconPack"
+                both
+                aria-hidden/>
         </a>
         <ul class="pagination-list" v-if="!simple">
             <!--First-->
@@ -23,7 +33,8 @@
                     role="button"
                     href="#"
                     class="pagination-link"
-                    @click.prevent="first">
+                    @click.prevent="first"
+                    :aria-label="getAriaPageLabel(1, false)">
                     1
                 </a>
             </li>
@@ -36,7 +47,9 @@
                     href="#"
                     class="pagination-link"
                     :class="{ 'is-current': page.isCurrent }"
-                    @click.prevent="page.click">
+                    @click.prevent="page.click"
+                    :aria-label="getAriaPageLabel(page.number, page.isCurrent)"
+                    :aria-current="page.isCurrent">
                     {{ page.number }}
                 </a>
             </li>
@@ -48,19 +61,25 @@
                     role="button"
                     href="#"
                     class="pagination-link"
-                    @click.prevent="last">
+                    @click.prevent="last"
+                    :aria-label="getAriaPageLabel(pageCount, false)">
                     {{ pageCount }}
                 </a>
             </li>
         </ul>
         <small class="info" v-if="simple">
-            {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+            <template v-if="perPage == 1">
+                {{ firstItem }} / {{ total }}
+            </template>
+            <template v-else>
+                {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+            </template>
         </small>
-    </div>
+    </nav>
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
 
     export default {
         name: 'BPagination',
@@ -80,7 +99,12 @@
             size: String,
             simple: Boolean,
             rounded: Boolean,
-            order: String
+            order: String,
+            iconPack: String,
+            ariaNextLabel: String,
+            ariaPreviousLabel: String,
+            ariaPageLabel: String,
+            ariaCurrentLabel: String
         },
         computed: {
             rootClasses() {
@@ -220,6 +244,18 @@
                 if (!this.hasNext) return
                 this.$emit('change', this.current + 1)
                 this.$emit('update:current', this.current + 1)
+            },
+
+            /**
+             * Get text for aria-label according to page number.
+             */
+            getAriaPageLabel(pageNumber, isCurrent) {
+                if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
+                    return this.ariaPageLabel + ' ' + pageNumber + '.'
+                } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
+                    return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
+                }
+                return null
             }
         }
     }

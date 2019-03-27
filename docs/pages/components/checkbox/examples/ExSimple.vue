@@ -16,6 +16,11 @@
             </b-checkbox>
         </div>
         <div class="field">
+            <b-checkbox :indeterminate="true">
+                Indeterminate
+            </b-checkbox>
+        </div>
+        <div class="field">
             <b-checkbox disabled>Disabled</b-checkbox>
         </div>
     </section>

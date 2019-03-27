@@ -84,6 +84,9 @@
                 background-color: transparent;
             }
         }
+        .chevron-cell {
+          vertical-align:middle
+        }
         .checkbox-cell {
             width: 40px;
             .checkbox {
@@ -155,13 +158,12 @@
                     td {
                         display: flex;
                         width: auto;
-                        justify-content: flex-end;
+                        justify-content: space-between;
                         text-align: right;
                         border-bottom: 1px solid $background;
                         &:before {
                             content: attr(data-label);
                             font-weight: $weight-semibold;
-                            margin-right: auto;
                             padding-right: 0.5em;
                             text-align: left;
                         }

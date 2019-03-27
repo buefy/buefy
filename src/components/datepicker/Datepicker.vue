@@ -19,7 +19,7 @@
                 :rounded="rounded"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="readonly"
+                :readonly="!editable"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
                 @focus="$emit('focus', $event)"
@@ -30,9 +30,12 @@
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
                     </template>
-                    <div v-else class="pagination field is-centered">
+                    <div
+                        v-else
+                        class="pagination field is-centered"
+                        :class="size">
                         <a
-                            v-if="!isFirstMonth && !disabled"
+                            v-show="!isFirstMonth && !disabled"
                             class="pagination-previous"
                             role="button"
                             href="#"
@@ -67,7 +70,8 @@
                             <b-field>
                                 <b-select
                                     v-model="focusedDateData.month"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="(month, index) in monthNames"
                                         :value="index"
@@ -77,7 +81,8 @@
                                 </b-select>
                                 <b-select
                                     v-model="focusedDateData.year"
-                                    :disabled="disabled">
+                                    :disabled="disabled"
+                                    :size="size">
                                     <option
                                         v-for="year in listOfYears"
                                         :value="year"
@@ -90,21 +95,24 @@
                     </div>
                 </header>
 
-                <b-datepicker-table
-                    v-model="dateSelected"
-                    :day-names="dayNames"
-                    :month-names="monthNames"
-                    :first-day-of-week="firstDayOfWeek"
-                    :min-date="minDate"
-                    :max-date="maxDate"
-                    :focused="focusedDateData"
-                    :disabled="disabled"
-                    :unselectable-dates="unselectableDates"
-                    :unselectable-days-of-week="unselectableDaysOfWeek"
-                    :selectable-dates="selectableDates"
-                    :events="events"
-                    :indicators="indicators"
-                    @close="$refs.dropdown.isActive = false"/>
+                <div class="datepicker-content">
+                    <b-datepicker-table
+                        v-model="dateSelected"
+                        :day-names="dayNames"
+                        :month-names="monthNames"
+                        :first-day-of-week="firstDayOfWeek"
+                        :min-date="minDate"
+                        :max-date="maxDate"
+                        :focused="focusedDateData"
+                        :disabled="disabled"
+                        :unselectable-dates="unselectableDates"
+                        :unselectable-days-of-week="unselectableDaysOfWeek"
+                        :selectable-dates="selectableDates"
+                        :events="events"
+                        :indicators="indicators"
+                        :date-creator="dateCreator"
+                        @close="$refs.dropdown.isActive = false"/>
+                </div>
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
@@ -141,11 +149,12 @@
     import { isMobile } from '../../utils/helpers'
     import config from '../../utils/config'
 
-    import { Dropdown, DropdownItem } from '../dropdown'
-    import Input from '../input'
-    import Field from '../field'
-    import Select from '../select'
-    import Icon from '../icon'
+    import Dropdown from '../dropdown/Dropdown'
+    import DropdownItem from '../dropdown/DropdownItem'
+    import Input from '../input/Input'
+    import Field from '../field/Field'
+    import Select from '../select/Select'
+    import Icon from '../icon/Icon'
     import DatepickerTable from './DatepickerTable'
 
     export default {
@@ -219,14 +228,8 @@
             maxDate: Date,
             focusedDate: Date,
             placeholder: String,
-            readonly: {
-                type: Boolean,
-                default: true
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
+            editable: Boolean,
+            disabled: Boolean,
             unselectableDates: Array,
             unselectableDaysOfWeek: {
                 type: Array,
@@ -239,7 +242,11 @@
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        return date.toLocaleDateString()
+                        const yyyyMMdd = date.getFullYear() +
+                            '/' + (date.getMonth() + 1) +
+                            '/' + date.getDate()
+                        const d = new Date(yyyyMMdd)
+                        return d.toLocaleDateString()
                     }
                 }
             },
@@ -250,6 +257,16 @@
                         return config.defaultDateParser(date)
                     } else {
                         return new Date(Date.parse(date))
+                    }
+                }
+            },
+            dateCreator: {
+                type: Function,
+                default: () => {
+                    if (typeof config.defaultDateCreator === 'function') {
+                        return config.defaultDateCreator()
+                    } else {
+                        return new Date()
                     }
                 }
             },
@@ -267,7 +284,7 @@
             }
         },
         data() {
-            const focusedDate = this.value || this.focusedDate || new Date()
+            const focusedDate = this.value || this.focusedDate || this.dateCreator()
 
             return {
                 dateSelected: this.value,
@@ -285,12 +302,15 @@
             * dates are set by props, range of years will fall within those dates.
             */
             listOfYears() {
-                const latestYear = this.maxDate
-                ? this.maxDate.getFullYear()
-                    : (Math.max(new Date().getFullYear(), this.focusedDateData.year) + 3)
+                let latestYear = this.focusedDateData.year + 3
+                if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
+                    latestYear = this.maxDate.getFullYear()
+                }
 
-                const earliestYear = this.minDate
-                ? this.minDate.getFullYear() : 1900
+                let earliestYear = (latestYear - 100) + 3
+                if (this.minDate && this.minDate.getFullYear() > earliestYear) {
+                    earliestYear = this.minDate.getFullYear()
+                }
 
                 const arrayOfYears = []
                 for (let i = earliestYear; i <= latestYear; i++) {
@@ -324,7 +344,7 @@
             * Update internal focusedDateData
             */
             dateSelected(value) {
-                const currentDate = !value ? new Date() : value
+                const currentDate = !value ? this.dateCreator() : value
                 this.focusedDateData = {
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()
@@ -449,7 +469,7 @@
             */
             onChangeNativePicker(event) {
                 const date = event.target.value
-                this.dateSelected = date ? new Date(date) : null
+                this.dateSelected = date ? new Date(date.replace(/-/g, '/')) : null
             }
         }
     }

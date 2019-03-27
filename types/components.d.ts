@@ -87,8 +87,15 @@ export declare const Dialog: {
     prompt: (params: PromptDialogConfig) => any;
 }
 
+declare type LoadingConfig = {
+    container?: any;
+    isFullPage?: boolean;
+    animation?: string;
+    canCancel?: boolean;
+    onCancel?: () => any;
+}
 export declare const LoadingProgrammatic: {
-    open: () => { close: () => any };
+    open: (params: LoadingConfig) => { close: () => any };
 }
 
 declare type ModalConfig = {
@@ -118,6 +125,8 @@ export declare type SnackbarConfig = {
     duration?: number;
     container?: string;
     actionText?: string | null;
+    queue?: boolean;
+    indefinite?: boolean;
     onAction?: () => any;
 }
 export declare const Snackbar: {
@@ -151,8 +160,26 @@ export declare type ToastConfig = {
      * to absolute. Meaning that the container should be fixed.
      */
     container?: string;
+    
+    /**
+     * disable queue
+     */
+    queue?: boolean;
 }
 
 export declare const Toast: {
     open: (params: ToastConfig | string) => any;
+}
+
+export declare type NotificationConfig = {
+    message: string;
+    type?: ColorModifiers;
+    position?: GlobalPositions;
+    duration?: number;
+    container?: string;
+    queue?: boolean;
+    indefinite?: boolean;
+}
+export declare const NotificationProgrammatic: {
+    open: (params: NotificationConfig | string) => void;
 }

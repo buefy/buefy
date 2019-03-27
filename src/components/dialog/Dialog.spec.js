@@ -1,9 +1,9 @@
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BDialog from '@components/dialog/Dialog'
 
 describe('BDialog', () => {
     it('is called', () => {
-        const wrapper = shallow(BDialog, {
+        const wrapper = shallowMount(BDialog, {
             attachToDocument: true
         })
         expect(wrapper.name()).toBe('BDialog')

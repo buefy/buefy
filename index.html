@@ -7,41 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
-    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
-    <!-- Add to home screen for Android and modern mobile browsers -->
-    <link rel="manifest" href="/static/manifest.json">
-    <meta name="theme-color" content="#7957D5">
-
-    <!-- Add to home screen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="buefy">
-    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
-    <!-- Add to home screen for Windows -->
-    <meta name="msapplication-TileImage" content="/static/img/icons/apple-touch-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#FFFFFF">
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
             if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
     <% }}} %>
 
+    <link rel="canonical" href="https://buefy.org">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="mask-icon" href="/static/img/icons/safari-pinned-tab.svg" color="#7957D5">
+    <link rel="shortcut icon" href="/static/img/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#603CBA">
+    <meta name="msapplication-config" content="/static/browserconfig.xml">
+    <meta name="theme-color" content="#7957D5">
+
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://buefy.github.io">
+    <meta property="og:url" content="https://buefy.org">
     <meta property="og:title" content="Buefy: lightweight UI components for Vue.js based on Bulma">
     <meta property="og:site_name" content="Buefy">
     <meta property="og:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
-    <meta property="og:image" content="https://buefy.github.io/static/img/buefy-banner.png">
+    <meta property="og:image" content="https://buefy.org/static/img/buefy-banner.png">
     <meta property="og:image:type" content="image/jpeg">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@rafaelpimpa">
     <meta name="twitter:title" content="Buefy: lightweight UI components for Vue.js based on Bulma">
     <meta name="twitter:description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
-    <meta name="twitter:image" content="https://buefy.github.io/static/img/buefy-banner.png">
+    <meta name="twitter:image" content="https://buefy.org/static/img/buefy-banner.png">
 
     <title>Buefy: lightweight UI components for Vue.js based on Bulma</title>
 </head>

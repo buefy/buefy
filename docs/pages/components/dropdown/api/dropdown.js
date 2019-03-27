@@ -31,6 +31,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
                 name: '<code>inline</code>',
                 description: 'Dropdown content (items) are shown inline, trigger is removed',
                 type: 'Boolean',
@@ -43,6 +50,25 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
+                type: 'String',
+                values: '<code>list</code>, <code>menu</code>',
+                default: '—'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: '',
+                props: ''
+            },
+            {
+                name: '<code>trigger</code>',
+                description: 'Trigger content for the dropdown',
+                props: '—'
             }
         ],
         events: [
@@ -108,6 +134,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: 'Role attribute to be passed to list item for better accessibility. Use <code>menuitem</code> only in situations where your dropdown is related to navigation menus.',
+                type: 'String',
+                values: '<code>listitem</code>, <code>menuitem</code>',
+                default: '—'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: '',
+                props: ''
             }
         ],
         events: [

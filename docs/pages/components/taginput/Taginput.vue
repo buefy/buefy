@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Taginput</h1>
-        <h2 class="subtitle">A simple tag input field that can have autocomplete functionality</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExAutocomplete" :code="ExAutocompleteCode" title="Autocomplete" vertical>
@@ -14,10 +10,6 @@
         </Example>
 
         <Example :component="ExTemplatedAutocomplete" :code="ExTemplatedAutocompleteCode" title="Templated Autocomplete" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.4</span>
-            </div>
             <p>
                 Slots are available for autocomplete items and the empty message, like with the <router-link to="/documentation/autocomplete">Autocomplete</router-link> control.
             </p>
@@ -40,6 +32,10 @@
 
         <Example :component="ExModifier" :code="ExModifierCode" title="Modifiers" vertical>
             <p>You can change the style of the tags by setting the <code>rounded</code> and <code>attached</code> props.</p>
+        </Example>
+
+        <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical>
+            <p>You can validate the value before adding it to the tag list</p>
         </Example>
 
         <ApiView :data="api"/>
@@ -73,6 +69,9 @@
     import ExModifier from './examples/ExModifier'
     import ExModifierCode from '!!raw-loader!./examples/ExModifier'
 
+    import ExValidation from './examples/ExValidation'
+    import ExValidationCode from '!!raw-loader!./examples/ExValidation'
+
     export default {
         data() {
             return {
@@ -85,6 +84,7 @@
                 ExType,
                 ExSize,
                 ExModifier,
+                ExValidation,
                 ExSimpleCode,
                 ExAutocompleteCode,
                 ExTemplatedAutocompleteCode,
@@ -92,7 +92,8 @@
                 ExStateCode,
                 ExTypeCode,
                 ExSizeCode,
-                ExModifierCode
+                ExModifierCode,
+                ExValidationCode
             }
         }
     }

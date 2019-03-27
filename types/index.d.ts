@@ -1,6 +1,6 @@
 import _Vue from "vue";
 
-import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar } from "./components";
+import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar, NotificationProgrammatic } from "./components";
 import { ColorModifiers } from "./helpers";
 
 // Adds Buefy method signatures to Vue instance (ie this.$dialog)
@@ -10,31 +10,36 @@ declare module 'vue/types/vue' {
         $loading: typeof LoadingProgrammatic,
         $modal: typeof ModalProgrammatic,
         $snackbar: typeof Snackbar,
-        $toast: typeof Toast
+        $toast: typeof Toast,
+        $notification: typeof NotificationProgrammatic
     }
 }
 
 export declare type BuefyConfig = {
     defaultContainerElement?: string,
-    defaultIconPack: 'fa' | 'mdi' | string;
+    defaultIconPack?: string;
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
-    defaultSnackbarDuration: number;
-    defaultToastDuration: number;
-    defaultTooltipType: ColorModifiers;
-    defaultTooltipAnimated: false;
-    defaultInputAutocomplete: 'on' | 'off';
-    defaultDateFormatter?: string;
-    defaultDateParser?: string;
-    defaultDayNames?: string;
-    defaultMonthNames?: string;
-    defaultFirstDayOfWeek?: string;
-    defaultTimeFormatter?: string;
-    defaultTimeParser?: string;
+    defaultSnackbarDuration?: number;
+    defaultToastDuration?: number;
+    defaultNotificationDuration?: number;
+    defaultTooltipType?: ColorModifiers;
+    defaultTooltipAnimated?: boolean;
+    defaultInputAutocomplete?: string;
+    defaultDateFormatter?: Function;
+    defaultDateParser?: Function;
+    defaultDateCreator?: Function;
+    defaultDayNames?: string[];
+    defaultMonthNames?: string[];
+    defaultFirstDayOfWeek?: number;
+    defaultTimeFormatter?: Function;
+    defaultTimeParser?: Function;
+    defaultModalCanCancel?: string[];
     defaultModalScroll?: string;
-    defaultDatepickerMobileNative: boolean;
-    defaultTimepickerMobileNative: boolean;
-    defaultNoticeQueue: boolean;
+    defaultDatepickerMobileNative?: boolean;
+    defaultTimepickerMobileNative?: boolean;
+    defaultNoticeQueue?: boolean;
+    defaultInputHasCounter?: boolean;
 };
 
 declare const _default: {
@@ -46,7 +51,8 @@ export {
     LoadingProgrammatic,
     ModalProgrammatic,
     Snackbar,
-    Toast
+    Toast,
+    NotificationProgrammatic
 }
 
 export default _default;

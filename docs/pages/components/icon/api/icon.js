@@ -4,7 +4,7 @@ export default [
             {
                 name: '<code>type</code>',
                 description: 'Type (color) of the icon, optional',
-                type: 'String',
+                type: 'String, Object',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                     <code>is-warning</code>, <code>is-danger</code>,
@@ -46,7 +46,7 @@ export default [
                 description: `Add class to icon font (<code>&lt;i&gt;</code> tag), optional.
                     See <a href="https://materialdesignicons.com/getting-started" target="_blank">here for MDI</a>,
                     <a href="http://fontawesome.io/examples/" target="_blank">here for FontAwesome 4</a> and
-                    <a href="https://fontawesome.com/how-to-use/web-fonts-with-css#additional-styling" target="_blank">here for FontAwesome 5</a> custom classes`,
+                    <a href="https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs" target="_blank">here for FontAwesome 5</a> custom classes`,
                 type: 'String',
                 values: '—',
                 default: '—'

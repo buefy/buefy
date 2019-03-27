@@ -3,22 +3,22 @@
         name: 'BFieldBody',
         props: {
             message: {
-                type: [String]
+                type: String
             },
             type: {
-                type: [String]
+                type: [String, Object]
             }
         },
-        render(h) {
-            return h('div', { attrs: { 'class': 'field-body' } }, this.$slots.default.map((v) => {
+        render(createElement) {
+            return createElement('div', { attrs: { 'class': 'field-body' } }, this.$slots.default.map((element) => {
                 // skip returns and comments
-                if (!v.tag) {
-                    return v
+                if (!element.tag) {
+                    return element
                 }
                 if (this.message) {
-                    return h('b-field', { attrs: { message: this.message, 'type': this.type } }, [v])
+                    return createElement('b-field', { attrs: { message: this.message, 'type': this.type } }, [element])
                 }
-                return h('b-field', {}, [v])
+                return createElement('b-field', { attrs: { 'type': this.type } }, [element])
             }))
         }
     }

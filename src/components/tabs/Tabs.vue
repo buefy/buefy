@@ -12,8 +12,7 @@
                             <b-slot-component
                                 :component="tabItem"
                                 name="header"
-                                tag="span"
-                                event="updated" />
+                                tag="span" />
                         </template>
                         <template v-else>
                             <b-icon
@@ -34,7 +33,7 @@
 </template>
 
 <script>
-    import Icon from '../icon'
+    import Icon from '../icon/Icon'
     import SlotComponent from '../../utils/SlotComponent'
 
     export default {
@@ -44,7 +43,7 @@
             [SlotComponent.name]: SlotComponent
         },
         props: {
-            value: [String, Number],
+            value: Number,
             expanded: Boolean,
             type: String,
             size: String,
@@ -87,7 +86,7 @@
              * When tab-items are updated, set active one.
              */
             tabItems() {
-                if (this.tabItems.length) {
+                if (this.activeTab < this.tabItems.length) {
                     this.tabItems[this.activeTab].isActive = true
                 }
             }
@@ -99,7 +98,9 @@
             changeTab(newIndex) {
                 if (this.activeTab === newIndex) return
 
-                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                if (this.activeTab < this.tabItems.length) {
+                    this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                }
                 this.tabItems[newIndex].activate(this.activeTab, newIndex)
                 this.activeTab = newIndex
                 this.$emit('change', newIndex)
@@ -114,7 +115,7 @@
             }
         },
         mounted() {
-            if (this.tabItems.length) {
+            if (this.activeTab < this.tabItems.length) {
                 this.tabItems[this.activeTab].isActive = true
             }
         }

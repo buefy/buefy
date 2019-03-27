@@ -29,7 +29,11 @@
             :current-page.sync="currentPage"
             :pagination-simple="isPaginationSimple"
             :default-sort-direction="defaultSortDirection"
-            default-sort="user.first_name">
+            default-sort="user.first_name"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page">
 
             <template slot-scope="props">
                 <b-table-column field="id" label="ID" width="40" sortable numeric>
@@ -62,7 +66,7 @@
 </template>
 
 <script>
-    const data = require('@/assets/data_test.json')
+    const data = require('@/data/sample.json')
 
     export default {
         data() {

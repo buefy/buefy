@@ -1,13 +1,10 @@
 // Colors
+
 $primary: #7957d5;
 $twitter: #4099FF;
-$twitter-invert: findColorInvert($twitter);
-$facebook: #4267B2;
-$facebook-invert: findColorInvert($facebook);
-$googleplus: #DB4437;
-$googleplus-invert: findColorInvert($googleplus);
+$discord: #7289DA;
+$patreon: #f96854;;
 $bulma: #00D1B2;
-$bulma-invert: findColorInvert($bulma);
 
 $colors: (
     "white": ($white, $black),
@@ -15,21 +12,20 @@ $colors: (
     "light": ($light, $light-invert),
     "grey": ($grey, $light-invert),
     "dark": ($dark, $dark-invert),
-    "primary": ($primary, $primary-invert),
+    "primary": ($primary, $white),
     "info": ($info, $info-invert),
     "success": ($success, $success-invert),
     "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
     "link": ($link, $link-invert),
-    "twitter": ($twitter, $twitter-invert),
-    "facebook": ($facebook, $facebook-invert),
-    "googleplus": ($googleplus, $googleplus-invert),
-    "bulma": ($bulma, $bulma-invert)
+    "twitter": ($twitter, $white),
+    "discord": ($discord, $white),
+    "patreon": ($patreon, $white),
+    "bulma": ($bulma, $white)
 );
 
-$link: $primary;
-$link-invert: $primary-invert;
-$link-visited: $grey;
-$link-focus-border: $primary;
-
 $navbar-height: 3.25rem;
+$navbar-item-active-color: $primary;
+
+$menu-item-active-background-color: $primary;
+$menu-item-hover-background-color: $grey-lighter;

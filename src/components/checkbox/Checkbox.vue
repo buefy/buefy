@@ -7,14 +7,18 @@
         :tabindex="disabled ? false : 0"
         @keydown.prevent.enter.space="$refs.label.click()">
         <input
-            v-model="newValue"
+            v-model="computedValue"
+            tabindex="-1"
+            :indeterminate.prop="indeterminate"
             type="checkbox"
+            @click.stop
             :disabled="disabled"
+            :required="required"
             :name="name"
             :value="nativeValue"
             :true-value="trueValue"
             :false-value="falseValue">
-        <span class="check"/>
+        <span class="check" :class="type" />
         <span class="control-label"><slot/></span>
     </label>
 </template>
@@ -25,7 +29,10 @@
         props: {
             value: [String, Number, Boolean, Function, Object, Array, Symbol],
             nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+            indeterminate: Boolean,
+            type: String,
             disabled: Boolean,
+            required: Boolean,
             name: String,
             size: String,
             trueValue: {
@@ -42,18 +49,23 @@
                 newValue: this.value
             }
         },
+        computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                }
+            }
+        },
         watch: {
             /**
              * When v-model change, set internal value.
              */
             value(value) {
                 this.newValue = value
-            },
-            /**
-             * Emit input event to update the user v-model.
-             */
-            newValue(value) {
-                this.$emit('input', value)
             }
         }
     }

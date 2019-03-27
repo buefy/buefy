@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BIcon render correctly 1`] = `<span class="icon"><i class="mdi mdi-undefined mdi-24px"></i></span>`;

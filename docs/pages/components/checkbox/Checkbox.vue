@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Checkbox</h1>
-        <h2 class="subtitle">Select a single or grouped options</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExArray" :code="ExArrayCode" title="Grouped (Array)" vertical>
@@ -11,6 +7,8 @@
         </Example>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
+
+        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
         <Example :component="ExCheckboxButton" :code="ExCheckboxButtonCode" title="Checkbox Button">
             <p>You have to wrap them on a <router-link to="/documentation/field">Field</router-link>.</p>
@@ -32,6 +30,9 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExTypes from './examples/ExTypes'
+    import ExTypesCode from '!!raw-loader!./examples/ExTypes'
+
     import ExCheckboxButton from './examples/ExCheckboxButton'
     import ExCheckboxButtonCode from '!!raw-loader!./examples/ExCheckboxButton'
 
@@ -45,6 +46,8 @@
                 ExArrayCode,
                 ExSizes,
                 ExSizesCode,
+                ExTypes,
+                ExTypesCode,
                 ExCheckboxButton,
                 ExCheckboxButtonCode
             }

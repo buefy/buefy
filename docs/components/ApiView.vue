@@ -11,19 +11,35 @@
                 </h3>
                 <b-tabs>
                     <b-tab-item v-if="component.props" label="Properties">
-                        <b-table :data="component.props" :columns="propsColumns"/>
+                        <b-table
+                            :mobile-cards="false"
+                            :data="component.props"
+                            :columns="propsColumns"
+                        />
                     </b-tab-item>
 
                     <b-tab-item v-if="component.slots" label="Slots">
-                        <b-table :data="component.slots" :columns="slotsColumns"/>
+                        <b-table
+                            :mobile-cards="false"
+                            :data="component.slots"
+                            :columns="slotsColumns"
+                        />
                     </b-tab-item>
 
                     <b-tab-item v-if="component.events" label="Events">
-                        <b-table :data="component.events" :columns="eventsColumns"/>
+                        <b-table
+                            :mobile-cards="false"
+                            :data="component.events"
+                            :columns="eventsColumns"
+                        />
                     </b-tab-item>
 
                     <b-tab-item v-if="component.methods" label="Methods">
-                        <b-table :data="component.methods" :columns="methodsColumns"/>
+                        <b-table
+                            :mobile-cards="false"
+                            :data="component.methods"
+                            :columns="methodsColumns"
+                        />
                     </b-tab-item>
                 </b-tabs>
             </div>
@@ -58,6 +74,7 @@
                 methodsColumns: [
                     { label: 'Name', field: 'name', renderHtml: true },
                     { label: 'Description', field: 'description', renderHtml: true },
+                    { label: 'Parameters', field: 'parameters', renderHtml: true },
                     { label: 'Return', field: 'return', renderHtml: true }
                 ]
             }

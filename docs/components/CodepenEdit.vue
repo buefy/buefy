@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import dataTest from '!!raw-loader!@/assets/data_test.json'
+    import dataTest from '!!raw-loader!@/data/sample.json'
 
     export default {
         props: {
@@ -30,10 +30,10 @@
                 hasHtml: false,
                 externalScripts: [
                     'https://unpkg.com/vue/dist/vue.min.js',
-                    'https://unpkg.com/buefy'
+                    'https://unpkg.com/buefy/dist/buefy.min.js'
                 ],
                 externalStyles: [
-                    'https://unpkg.com/buefy/lib/buefy.min.css',
+                    'https://unpkg.com/buefy/dist/buefy.min.css',
                     'https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
                 ]
             }
@@ -55,8 +55,8 @@
                     css_external: this.externalStyles.join(';'),
                     js_external: this.externalScripts.join(';')
                 })
-                    .replace(/"/g, '&​quot;')
-                    .replace(/'/g, '&apos;')
+                    .replace(/"/g, '\u0022')
+                    .replace(/'/g, '\u0027')
             }
         },
         methods: {
@@ -66,11 +66,15 @@
                 if (start < 0 || end < 0) return
 
                 let html = this.code.substring(start + 10, end)
-                html = html.replace(/src="static/g, 'src="https://buefy.github.io/static')
+                html = html.replace(/src="\/static/g, 'src="https://buefy.org/static')
 
                 // FontAwesome
-                if (this.code.indexOf('pack="fa"') || this.code.indexOf('pack="fas"') ||
-                    this.code.indexOf('pack="far"') || this.code.indexOf('pack="fad"')) {
+                if (
+                    this.code.indexOf('pack="fa"') ||
+                    this.code.indexOf('pack="fas"') ||
+                    this.code.indexOf('pack="far"') ||
+                    this.code.indexOf('pack="fad"')
+                ) {
                     this.externalStyles.push('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
                 }
 
@@ -89,7 +93,12 @@
                     js = this.code.substring(start + 8, end)
                     js = js.replace('export default ', 'const example = ')
 
-                    js = js.replace('require(\'@/assets/data_test.json\')', dataTest)
+                    js = js.replace('require(\'@/data/sample.json\')', dataTest)
+
+                    // Vue
+                    if (this.code.indexOf('vue')) {
+                        js = js.replace('import Vue from \'vue\'', '')
+                    }
 
                     // Axios
                     if (this.code.indexOf('this.$http')) {
@@ -115,10 +124,15 @@
                         js = js.replace('import Sortable from \'sortablejs\'', '')
                         this.externalScripts.push('https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js')
                     }
+
+                    // VeeValidate
+                    if (this.code.indexOf('vee-validate')) {
+                        js = js.replace('import VeeValidate from \'vee-validate\'', '')
+                        this.externalScripts.push('https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js')
+                    }
                 }
 
                 return this.$options.filters.pre(`
-                    Vue.use(Buefy.default)
 
                     ${js || ''}
 

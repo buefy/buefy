@@ -4,7 +4,7 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
-                type: 'Array<File>',
+                type: 'File, Array<File>',
                 values: '—',
                 default: '[]'
             },
@@ -79,7 +79,7 @@ export default [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when the file list is changed',
-                parameters: '<code>value: Array</code>'
+                parameters: '<code>value: File</code> or <code>File[]</code>'
             }
         ],
         methods: [

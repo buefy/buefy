@@ -23,6 +23,13 @@ export default [
                 default: '<code>(date) => new Date(Date.parse(date))</code>'
             },
             {
+                name: '<code>date-creator</code>',
+                description: 'Function used internally to create a new Date instance',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => new Date()</code>'
+            },
+            {
                 name: '<code>min-date</code>',
                 description: 'Earliest date available for selection',
                 type: 'Date',
@@ -73,10 +80,10 @@ export default [
             },
             {
                 name: '<code>readonly</code>',
-                description: 'Does not allow to type a date, set to <code>false</code> to enable input. <b>Note that you might have to set a custom date parser</b>',
+                description: 'Enable input/typing. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>loading</code>',
@@ -111,6 +118,13 @@ export default [
                 description: 'Array of unselectable days of week',
                 type: 'Array',
                 values: '<code>0 - 6 (Sunday is 0, Monday is 1, and so on)</code>',
+                default: '-'
+            },
+            {
+                name: '<code>selectable-dates</code>',
+                description: 'Array of selectable dates',
+                type: 'Array',
+                values: '—',
                 default: '-'
             },
             {

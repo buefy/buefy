@@ -1,0 +1,74 @@
+{
+    "documentation": [
+        {
+            "category": "Installation",
+            "pages": [
+                "documentation/start",
+                "documentation/customization",
+                "documentation/constructor-options"
+            ]
+        },
+        {
+            "category": "Layout",
+            "pages": [
+                "documentation/layout"
+            ]
+        },
+        {
+            "category": "UI components",
+            "pages": [
+                "documentation/collapse",
+                "documentation/dialog",
+                "documentation/dropdown",
+                {
+                    "category": "Form controls",
+                    "pages": [
+                        "documentation/autocomplete",
+                        "documentation/checkbox",
+                        "documentation/datepicker",
+                        "documentation/field",
+                        "documentation/input",
+                        "documentation/radio",
+                        "documentation/select",
+                        "documentation/switch",
+                        "documentation/taginput",
+                        "documentation/timepicker",
+                        "documentation/upload"
+                    ]
+                },
+                "documentation/icon",
+                "documentation/loading",
+                "documentation/message",
+                "documentation/modal",
+                "documentation/notification",
+                "documentation/pagination",
+                "documentation/snackbar",
+                "documentation/table",
+                "documentation/tabs",
+                "documentation/tag",
+                "documentation/toast",
+                "documentation/tooltip"
+            ]
+        }
+    ],
+    "extensions": [
+        {
+            "category": "Input format",
+            "pages": [
+                "extensions/cleavejs"
+            ]
+        },
+        {
+            "category": "Validation",
+            "pages": [
+                "extensions/veevalidate"
+            ]
+        },
+        {
+            "category": "Drag & drop",
+            "pages": [
+                "extensions/sortablejs"
+            ]
+        }
+    ]
+}

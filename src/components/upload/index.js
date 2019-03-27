@@ -1,3 +1,17 @@
 import Upload from './Upload'
 
-export default Upload
+import { use, registerComponent } from '../../utils/plugins'
+
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Upload)
+    }
+}
+
+use(Plugin)
+
+export default Plugin
+
+export {
+    Upload
+}

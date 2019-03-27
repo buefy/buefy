@@ -12,6 +12,15 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>defaultIconComponent</code>',
+                description: `Component used to render the Icon.
+                    Can be used to render FontAwesome 5 icons with the
+                    <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
+                type: 'Component',
+                values: 'FontAwesomeIcon component name',
+                default: '<code></code>'
+            },
+            {
                 name: '<code>defaultContainerElement</code>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
@@ -42,11 +51,25 @@ export default [
                 default: '<code>3500</code>'
             },
             {
+                name: '<code>defaultSnackbarPosition</code>',
+                description: `Default snackbar <code>position</code> attribute.`,
+                type: 'Number',
+                values: '—',
+                default: '<code></code>'
+            },
+            {
                 name: '<code>defaultToastDuration</code>',
                 description: `Default toast <code>duration</code> attribute.`,
                 type: 'Number',
                 values: '—',
                 default: '<code>2000</code>'
+            },
+            {
+                name: '<code>defaultToastPosition</code>',
+                description: `Default toast <code>position</code> attribute.`,
+                type: 'Number',
+                values: '—',
+                default: '<code></code>'
             },
             {
                 name: '<code>defaultTooltipType</code>',
@@ -85,6 +108,13 @@ export default [
                 type: 'Function',
                 values: '—',
                 default: '<code>Date.parse(date)</code>'
+            },
+            {
+                name: '<code>defaultDateCreator</code>',
+                description: `Default datepicker <code>date-creator</code> attribute`,
+                type: 'Function',
+                values: '—',
+                default: '<code>new Date()</code>'
             },
             {
                 name: '<code>defaultDayNames</code>',
@@ -129,6 +159,13 @@ export default [
                 default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
+                name: '<code>defaultModalCanCancel</code>',
+                description: `Default modal <code>canCancel</code> attribute`,
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>x</code>, <code>outside</code>, <code>button</code>',
+                default: `<code>['escape', 'x', 'outside', 'button']</code>`
+            },
+            {
                 name: '<code>defaultModalScroll</code>',
                 description: `Default modal/dialog <code>scroll</code> attribute`,
                 type: 'String',
@@ -151,7 +188,21 @@ export default [
             },
             {
                 name: '<code>defaultNoticeQueue</code>',
-                description: 'Default snackbar/toast <code>queue</code> attribute',
+                description: 'Default snackbar/toast/notification <code>queue</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultInputHasCounter</code>',
+                description: 'Default input <code>has-counter</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultUseHtml5Validation</code>',
+                description: 'Default form components <code>use-html5-validation</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

@@ -1,5 +1,5 @@
 <template>
-    <b-dropdown v-model="isPublic">
+    <b-dropdown v-model="isPublic" aria-role="list">
         <button class="button is-primary" type="button" slot="trigger">
             <template v-if="isPublic">
                 <b-icon icon="earth"></b-icon>
@@ -12,7 +12,7 @@
             <b-icon icon="menu-down"></b-icon>
         </button>
 
-        <b-dropdown-item :value="true">
+        <b-dropdown-item :value="true" aria-role="listitem">
             <div class="media">
                 <b-icon class="media-left" icon="earth"></b-icon>
                 <div class="media-content">
@@ -22,7 +22,7 @@
             </div>
         </b-dropdown-item>
 
-        <b-dropdown-item :value="false">
+        <b-dropdown-item :value="false" aria-role="listitem">
             <div class="media">
                 <b-icon class="media-left" icon="account-multiple"></b-icon>
                 <div class="media-content">

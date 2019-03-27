@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Table</h1>
-        <h2 class="subtitle">Tabulated data are sometimes needed, it's even better when it's <strong>responsive</strong></h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>To show a data table is very simple, you just need a <code>data</code> and a <code>columns</code> prop.</p>
         </Example>
@@ -39,6 +35,11 @@
 
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.2</span>
+            </div>
+            <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
         </Example>
 
         <Example :component="ExRowStatus" :code="ExRowStatusCode" title="Row status">
@@ -67,6 +68,13 @@
                 then manage it with <code>page-change</code> and <code>sort</code> events.
             </p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
+        </Example>
+
+        <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows">
+            <p>
+                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>, 
+                <code>dragover</code> and <code>drop</code> events
+            </p>
         </Example>
 
         <ApiView :data="api"/>
@@ -109,6 +117,9 @@
     import ExAsyncData from './examples/ExAsyncData'
     import ExAsyncDataCode from '!!raw-loader!./examples/ExAsyncData'
 
+    import ExDraggableRows from './examples/ExDraggableRows'
+    import ExDraggableRowsCode from '!!raw-loader!./examples/ExDraggableRows'
+
     export default {
         data() {
             return {
@@ -125,6 +136,7 @@
                 ExFooter,
                 ExAsyncData,
                 ExSimpleCode,
+                ExDraggableRows,
                 ExSandboxCode,
                 ExSelectionCode,
                 ExCheckableCode,
@@ -134,7 +146,8 @@
                 ExCustomHeadersCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
-                ExAsyncDataCode
+                ExAsyncDataCode,
+                ExDraggableRowsCode
             }
         }
     }

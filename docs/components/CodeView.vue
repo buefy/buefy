@@ -1,5 +1,6 @@
 <template>
     <div class="codeview">
+        <div v-if="title" class="codeview-title">{{ title }}</div>
         <figure class="highlight" :class="figureClasses">
             <div class="button-container">
                 <button class="button is-text is-small copy-code">Copy</button>
@@ -46,7 +47,8 @@
             },
             bordered: Boolean,
             code: String,
-            expanded: Boolean
+            expanded: Boolean,
+            title: String
         },
         data() {
             return {

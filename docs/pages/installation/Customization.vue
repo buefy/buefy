@@ -1,13 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Customizing theme with Sass</h1>
-        <h2 class="subtitle">
-            If you're familiar with <a href="http://sass-lang.com/">Sass</a> and want to <b>customize</b>
-            Buefy with your own theme, follow these steps
-        </h2>
-
-        <hr>
-
+    <div>
         <div class="media">
             <div class="media-left">
                 <h3 class="subtitle">1</h3>
@@ -27,7 +19,7 @@
                 <h3 class="subtitle">Set your variables with Sass</h3>
                 <b-message type="is-info">
                     <div class="content">
-                        <p><b>Tip:</b> You can see all Bulma's variables <a href="http://bulma.io/documentation/overview/variables/" target="_blank">here</a>.</p>
+                        <p><b>Tip:</b> You can see <a href="http://bulma.io/documentation/overview/variables/" target="_blank">all of Bulma's variables</a>.</p>
                         <p>There's also two other variables created by Buefy:</p>
                         <ol>
                             <li><code>$speed-slow: 150ms !default</code></li>
@@ -55,18 +47,11 @@
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
                 <b-message type="is-warning">
-                    Please note that <code class="javascript">import 'buefy/lib/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
+                    Please note that <code class="javascript">import 'buefy/dist/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
                 </b-message>
                 <CodeView :code="importing | pre" lang="javascript" expanded/>
             </div>
         </div>
-
-        <hr>
-
-        <b-message type="is-info">
-            If you're still not sure how to proceed, take a look at this <a href="https://github.com/rafaelpimpa/buefy-simple" target="_blank">
-            repository with a basic setup to customize Buefy</a>.
-        </b-message>
     </div>
 </template>
 
@@ -111,13 +96,7 @@
                 import Vue from 'vue'
                 import Buefy from 'buefy'
 
-                Vue.use(Buefy)
-
-                // OR
-
-                Vue.component(Buefy.Checkbox.name, Buefy.Checkbox)
-                Vue.component(Buefy.Table.name, Buefy.Table)
-                Vue.component(Buefy.Switch.name, Buefy.Switch)`
+                Vue.use(Buefy)`
             }
         }
     }

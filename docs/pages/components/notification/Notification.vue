@@ -1,14 +1,26 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Notification</h1>
-        <h2 class="subtitle">Bold notification blocks to alert your users of something</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
+
+        <Example :component="ExAutoClose" :code="ExAutoCloseCode" title="Auto Close" vertical>
+            <p>Notification will be automatically closed after <code>duration</code>.</p>
+        </Example>
+
+        <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.4</span>
+            </div>
+        </Example>
+
+         <Example title="From outside Vue instance">
+            <p>You can use it on Vuex or VueRouter using this syntax:</p>
+            <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -26,6 +38,12 @@
     import ExIcons from './examples/ExIcons'
     import ExIconsCode from '!!raw-loader!./examples/ExIcons'
 
+    import ExAutoClose from './examples/ExAutoClose'
+    import ExAutoCloseCode from '!!raw-loader!./examples/ExAutoClose'
+
+    import ExProgrammatically from './examples/ExProgrammatically'
+    import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
+
     export default {
         data() {
             return {
@@ -33,9 +51,18 @@
                 ExSimple,
                 ExTypes,
                 ExIcons,
+                ExAutoClose,
                 ExSimpleCode,
                 ExTypesCode,
-                ExIconsCode
+                ExIconsCode,
+                ExAutoClose,
+                ExAutoCloseCode,
+                ExProgrammatically,
+                ExProgrammaticallyCode,
+                outsideVueInstance: `
+                    import { NotificationProgrammatic as Notification } from 'buefy/dist/components/notification'
+                    Notification.open('Notify!')
+                `
             }
         }
     }

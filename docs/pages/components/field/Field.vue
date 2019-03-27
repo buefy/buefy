@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Field</h1>
-        <h2 class="subtitle">Fields are used to add functionality to controls and to attach/group components and elements together</h2>
-        <hr>
-
+    <div>
         <div class="content">
             <p>These components should be used as a <strong>direct child</strong> of Field:</p>
             <ul>
@@ -19,9 +15,18 @@
                 <li><code>.control</code> elements (html class)</li>
             </ul>
         </div>
+
         <hr>
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
+
+        <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.0</span>
+            </div>
+            <p>You can also use object syntax for <code>type</code> and <code>message</code> props just like Vuejs <code>class</code>.</p>
+        </Example>
 
         <Example :component="ExAddons" :code="ExAddonsCode" title="Addons" vertical>
             <p>The above cited components are automatically attached together when inside a Field.</p>
@@ -57,22 +62,14 @@
         <Example :component="ExCombineAddonsGroups" :code="ExCombineAddonsGroupsCode" title="Combining addons and groups"/>
 
         <Example :component="ExHorizontal" :code="ExHorizontalCode" title="Horizontal">
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.2</span>
-            </div>
             <p>Add the <code>horizontal</code> prop for aligning label and control in horizontal forms.</p>
             <b-message type="is-info">
-                <b>Note:</b> Each child element of a <code>&lt;b-field horizontal/&gt;</code> will be 
+                <b>Note:</b> Each child element of a <code>&lt;b-field horizontal/&gt;</code> will be
                 automatically wrapped inside a <code>Field</code> component.
             </b-message>
         </Example>
 
         <Example :component="ExCustomClass" :code="ExCustomClassCode" title="Label classes">
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.4</span>
-            </div>
             <p>Add the <code>custom-class</code> prop to adjust the styling of the label.</p>
         </Example>
 
@@ -85,6 +82,9 @@
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
+
+    import ExObjectSyntax from './examples/ExObjectSyntax'
+    import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
 
     import ExAddons from './examples/ExAddons'
     import ExAddonsCode from '!!raw-loader!./examples/ExAddons'
@@ -115,6 +115,7 @@
             return {
                 api,
                 ExSimple,
+                ExObjectSyntax,
                 ExAddons,
                 ExGroups,
                 ExGroupExpanded,
@@ -124,6 +125,7 @@
                 ExHorizontal,
                 ExCustomClass,
                 ExSimpleCode,
+                ExObjectSyntaxCode,
                 ExAddonsCode,
                 ExGroupsCode,
                 ExGroupExpandedCode,

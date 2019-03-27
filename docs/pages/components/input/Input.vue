@@ -1,12 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Input</h1>
-        <h2 class="subtitle">
-            Get user Input.
-            Use with <strong><router-link to="/documentation/field">Field</router-link></strong> to access all functionalities
-        </h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExTypesStates" :code="ExTypesStatesCode" title="Types and states" vertical/>
@@ -15,6 +8,11 @@
 
         <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical>
             <p>Automatic HTML5 validation on-blur.</p>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.2</span>
+            </div>
+            <p>You can use <code>use-html5-validation</code> prop to disable the default HTML5 validation.</p>
         </Example>
 
         <Example :component="ExPassword" :code="ExPasswordCode" title="Password" vertical>

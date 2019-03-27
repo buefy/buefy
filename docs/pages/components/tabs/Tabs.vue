@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Tabs</h1>
-        <h2 class="subtitle">Responsive horizontal navigation tabs, switch between contents with ease</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode"/>
 
         <Example :component="ExPosition" :code="ExPositionCode" title="Position"/>
@@ -22,10 +18,6 @@
         </Example>
 
          <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode" title="Custom Headers">
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.6.4</span>
-            </div>
             <p>
                 By adding a slot named <code>header</code> you can customize the header of a tab item.
             </p>
