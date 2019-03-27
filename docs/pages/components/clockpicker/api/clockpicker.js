@@ -9,13 +9,6 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>disabled</code>',
-                description: 'Disables the input field and/or picker',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
                 name: '<code>hour-format</code>',
                 description: 'Hour format for input and display',
                 type: 'String',
@@ -65,18 +58,18 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>readonly</code>',
-                description: 'Does not allow to type a time, set to <code>false</code> to enable input. <b>Note that you might have to set a custom time parser</b>',
+                name: '<code>editable</code>',
+                description: 'Enable input/typing. <b>Note that you might have to set a custom time parser</b>',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
-                name: '<code>auto-switch</code>',
-                description: 'Automatically switches between hour and minutes selection after click',
+                name: '<code>disabled</code>',
+                description: 'Disables the input field and/or picker',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
-                default: '<code>true</code>'
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>loading</code>',
@@ -118,7 +111,14 @@ export default [
                 description: 'Optional, position of the timepicker relative to the input',
                 type: 'String',
                 values: '<code>is-top-right</code>, <code>is-top-left</code>, <code>is-bottom-left</code>',
-                default: '<code>is-bottom-right</code>'
+                default: '<code>Bottom Right</code>'
+            },
+            {
+                name: '<code>auto-switch</code>',
+                description: 'Automatically switches between hour and minutes selection after click',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
             },
             {
                 name: 'Any native attribute',

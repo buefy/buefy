@@ -1,9 +1,5 @@
 <template>
-    <div class="default-container">
-        <h1 class="title is-spaced">Clockpicker</h1>
-        <h2 class="subtitle">An input with a dropdown/modal clock interface for selecting a time, uses native timepicker for mobile.</h2>
-        <hr>
-
+    <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>

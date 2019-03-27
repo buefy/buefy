@@ -118,6 +118,11 @@
             [DropdownItem.name]: DropdownItem
         },
         mixins: [TimepickerMixin],
-        inheritAttrs: false
+        inheritAttrs: false,
+        data() {
+            return {
+                _isTimepicker: true
+            }
+        }
     }
 </script>

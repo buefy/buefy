@@ -18,7 +18,7 @@
                 :icon-pack="iconPack"
                 :loading="loading"
                 :disabled="disabled"
-                :readonly="readonly"
+                :readonly="!editable"
                 :rounded="rounded"
                 v-bind="$attrs"
                 @change.native="onChange($event.target.value)"
@@ -148,7 +148,8 @@ export default {
     data() {
         return {
             isSelectingHour: true,
-            isDragging: false
+            isDragging: false,
+            _isClockpicker: true
         }
     },
     computed: {
@@ -204,9 +205,6 @@ export default {
         },
         faceDisabledValues() {
             return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
-        },
-        pad(value) {
-            return (value < 10 ? '0' : '') + value
         }
     },
     created() {

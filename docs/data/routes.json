@@ -330,9 +330,9 @@
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
-        "subtitle": "An input with a simple dropdown/modal for selecting a time, uses native timepicker for mobile",
+        "subtitle": "An input with a dropdown/modal clock interface for selecting a time, uses native timepicker for mobile",
         "path": "/documentation/clockpicker",
-        "githubPath": "pages/components/clockpicker/Clcokpicker.vue",
+        "githubPath": "pages/components/clockpicker/Clockpicker.vue",
         "menu": "documentation",
         "breadcrumb": [
             "/",

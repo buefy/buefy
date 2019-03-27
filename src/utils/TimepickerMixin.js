@@ -16,14 +16,8 @@ export default {
         minTime: Date,
         maxTime: Date,
         placeholder: String,
-        readonly: {
-            type: Boolean,
-            default: true
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
+        editable: Boolean,
+        disabled: Boolean,
         hourFormat: {
             type: String,
             default: HOUR_FORMAT_24,
@@ -38,21 +32,13 @@ export default {
         timeFormatter: {
             type: Function,
             default: (date) => {
-                if (typeof config.defaultTimeFormatter === 'function') {
-                    return config.defaultTimeFormatter(date)
-                } else {
-                    return this.defaultTimeFormatter(date)
-                }
+                this.formatTime(date)
             }
         },
         timeParser: {
             type: Function,
             default: (date) => {
-                if (typeof config.defaultTimeParser === 'function') {
-                    return config.defaultTimeParser(date)
-                } else {
-                    return this.defaultTimeParser(date)
-                }
+                this.parseTime(date)
             }
         },
         mobileNative: {
@@ -71,7 +57,6 @@ export default {
             minutesSelected: null,
             meridienSelected: null,
             _elementRef: 'input',
-            _isTimepicker: true,
             AM,
             PM,
             HOUR_FORMAT_24,
@@ -379,7 +364,7 @@ export default {
                     hours = 12
                 }
             }
-            return this.formatNumber(hours) + ':' + this.pad(minutes) + period
+            return this.pad(hours) + ':' + this.pad(minutes) + period
         },
         defaultTimeParser(timeString) {
             if (timeString) {

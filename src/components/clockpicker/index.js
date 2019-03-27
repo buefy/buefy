@@ -1,3 +1,17 @@
 import Clockpicker from './Clockpicker'
 
-export default Clockpicker
+import { use, registerComponent } from '../../utils/plugins'
+
+const Plugin = {
+    install(Vue) {
+        registerComponent(Vue, Clockpicker)
+    }
+}
+
+use(Plugin)
+
+export default Plugin
+
+export {
+    Clockpicker
+}
