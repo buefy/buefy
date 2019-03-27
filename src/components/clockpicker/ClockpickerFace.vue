@@ -8,20 +8,19 @@
         @touchend="onMouseUp"
         @touchmove="onDragMove">
         <div
-            class="b-clockpicker-face-outer_ring"
+            class="b-clockpicker-face-outer-ring"
             ref="clock">
             <div
                 class="b-clockpicker-face-hand"
-                :style="{ transform: `rotate(${handRotateAngle}deg) scaleY(${handScale})` }" />
+                :style="handStyle" />
             <span
-                v-for="num of faceNumbers"
-                :key="num.value"
+                v-for="(num, index) of faceNumbers"
+                :key="index"
                 class="b-clockpicker-face-number"
                 :class="getFaceNumberClasses(num)"
                 :style="{ transform: getNumberTranslate(num.value) }">
                 <span>{{ num.label }}</span>
             </span>
-
         </div>
     </div>
 </template>
@@ -45,7 +44,8 @@ export default {
     data() {
         return {
             isDragging: false,
-            inputValue: null
+            inputValue: this.value,
+            prevAngle: 720
         }
     },
     computed: {
@@ -100,7 +100,12 @@ export default {
          * selected value
          */
         handRotateAngle() {
-            return this.degreesPerUnit * (this.displayedValue - this.min)
+            let currentAngle = this.prevAngle
+            while (currentAngle < 0) currentAngle += 360
+            let targetAngle = this.calcHandAngle(this.displayedValue)
+            let degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle)
+            let angle = this.prevAngle + degreesDiff
+            return angle
         },
         /**
          * Determines how long the selector hand is based on if the
@@ -108,6 +113,12 @@ export default {
          */
         handScale() {
             return this.calcHandScale(this.displayedValue)
+        },
+        handStyle() {
+            return {
+                transform: `rotate(${this.handRotateAngle}deg) scaleY(${this.handScale})`,
+                transition: '.3s cubic-bezier(.25,.8,.50,1)'
+            }
         },
         /**
          * The value the hand should be pointing at
@@ -118,6 +129,9 @@ export default {
     },
     watch: {
         value(value) {
+            if (value !== this.inputValue) {
+                this.prevAngle = this.handRotateAngle
+            }
             this.inputValue = value
         }
     },
@@ -133,6 +147,11 @@ export default {
             const dy = p1.y - p0.y
 
             return Math.sqrt(dx * dx + dy * dy)
+        },
+        shortestDistanceDegrees(start, stop) {
+            const modDiff = (stop - start) % 360
+            let shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180)
+            return (modDiff + 360) % 360 < 180 ? shortestDistance * 1 : shortestDistance * -1
         },
         /**
          * Calculates the angle of the line from the center point
@@ -175,6 +194,11 @@ export default {
         isInnerRing(value) {
             return this.double && (value - this.min >= this.countPerRing)
         },
+        calcHandAngle(value) {
+            let angle = this.degreesPerUnit * (value - this.min)
+            if (this.isInnerRing(value)) angle -= 360
+            return angle
+        },
         calcHandScale(value) {
             return this.isInnerRing(value)
                 ? ((this.innerRadius) / this.outerRadius)
@@ -187,7 +211,6 @@ export default {
         },
         onMouseUp() {
             this.isDragging = false
-            // console.log('onMouseUp: ', this.isDisabled(this.inputValue))
             if (!this.isDisabled(this.inputValue)) {
                 this.$emit('change', this.inputValue)
             }
@@ -200,7 +223,7 @@ export default {
             const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
             const center = { x: width / 2, y: -width / 2 }
             const coords = { x: clientX - left, y: top - clientY }
-            const handAngle = Math.round(this.coordToAngle(center, coords)) % 360
+            const handAngle = Math.round(this.coordToAngle(center, coords) + 360) % 360
             const insideClick = this.double && this.euclidean(center, coords) <
                 (this.outerRadius + this.innerRadius) / 2 - 16
 
@@ -216,8 +239,9 @@ export default {
         },
         update(value) {
             if (this.inputValue !== value && !this.isDisabled(value)) {
+                this.prevAngle = this.handRotateAngle
                 this.inputValue = value
-                this.$emit('input', this.inputValue)
+                this.$emit('input', value)
             }
         }
     }

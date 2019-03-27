@@ -17,7 +17,8 @@
         <Example :component="ExColors" :code="ExColorsCode" title="Colors" vertical>
             <p>
                 Clockpicker supports all <code>is-&lt;color&gt;</code> classes from Bulma, including custom colors added at build time.
-                It can also be shown inline with the <code>inline</code> prop.
+                This can be specified in the <code>class</code> property or in the <code>type</code> property. 
+                Inline display is also availble by specifying the <code>inline</code> prop.
             </p>
         </Example>
 

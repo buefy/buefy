@@ -13,7 +13,7 @@
             <b-clockpicker
                 v-model="time"
                 inline
-                :class="{ ['is-' + selectedColor]: true }"
+                :type="'is-' + selectedColor"
                 :hour-format="format"></b-clockpicker>
         </div>
     </section>

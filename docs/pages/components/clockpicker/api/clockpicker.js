@@ -9,6 +9,16 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>type</code>',
+                description: 'Type (color) of the button <strong>when checked</strong>',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '<code>is-primary</code>'
+            },
+            {
                 name: '<code>hour-format</code>',
                 description: 'Hour format for input and display',
                 type: 'String',
