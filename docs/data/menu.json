@@ -25,6 +25,7 @@
                     "pages": [
                         "documentation/autocomplete",
                         "documentation/checkbox",
+                        "documentation/clockpicker",
                         "documentation/datepicker",
                         "documentation/field",
                         "documentation/input",

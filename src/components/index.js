@@ -1,6 +1,7 @@
 import Autocomplete from './autocomplete'
 import Checkbox from './checkbox'
 import Collapse from './collapse'
+import Clockpicker from './clockpicker'
 import Datepicker from './datepicker'
 import Dialog from './dialog'
 import Dropdown from './dropdown'
@@ -28,6 +29,7 @@ import Upload from './upload'
 export {
     Autocomplete,
     Checkbox,
+    Clockpicker,
     Collapse,
     Datepicker,
     Dialog,
