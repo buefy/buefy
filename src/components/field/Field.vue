@@ -31,7 +31,7 @@
             <slot/>
         </template>
         <p
-            v-if="newMessage && !horizontal"
+            v-show="newMessage && !horizontal"
             v-html="formattedMessage"
             class="help"
             :class="newType"
