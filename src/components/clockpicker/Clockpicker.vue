@@ -103,121 +103,119 @@
 </template>
 
 <script>
-import TimepickerMixin from '../../utils/TimepickerMixin'
-import ClockpickerFace from './ClockpickerFace'
-import { Dropdown, DropdownItem } from '../dropdown'
-import Input from '../input'
-import Field from '../field'
-import Icon from '../icon'
+    import TimepickerMixin from '../../utils/TimepickerMixin'
 
-const outerPadding = 12
+    import Dropdown from '../dropdown/Dropdown'
+    import DropdownItem from '../dropdown/DropdownItem'
+    import Input from '../input/Input'
+    import Field from '../field/Field'
+    import Icon from '../icon/Icon'
+    import ClockpickerFace from './ClockpickerFace'
 
-export default {
-    name: 'BClockpicker',
-    components: {
-        [ClockpickerFace.name]: ClockpickerFace,
-        [Input.name]: Input,
-        [Field.name]: Field,
-        [Icon.name]: Icon,
-        [Dropdown.name]: Dropdown,
-        [DropdownItem.name]: DropdownItem
-    },
-    mixins: [TimepickerMixin],
-    props: {
-        pickerSize: {
-            type: Number,
-            default: 290
-        },
-        hourFormat: {
-            type: String,
-            default: '12',
-            validator: (value) => {
-                return value === '24' || value === '12'
-            }
-        },
-        incrementMinutes: {
-            type: Number,
-            default: 5
-        },
-        autoSwitch: {
-            type: Boolean,
-            default: true
-        },
-        type: {
-            type: String,
-            default: 'is-primary'
-        }
-    },
-    data() {
-        return {
-            isSelectingHour: true,
-            isDragging: false,
-            _isClockpicker: true
-        }
-    },
-    computed: {
-        hoursDisplay() {
-            if (this.hoursSelected == null) return '--'
-            if (this.isHourFormat24) return this.pad(this.hoursSelected)
+    const outerPadding = 12
 
-            let display = this.hoursSelected
-            if (this.meridienSelected === this.PM) display -= 12
-            if (display === 0) display = 12
-            return display
+    export default {
+        name: 'BClockpicker',
+        components: {
+            [ClockpickerFace.name]: ClockpickerFace,
+            [Input.name]: Input,
+            [Field.name]: Field,
+            [Icon.name]: Icon,
+            [Dropdown.name]: Dropdown,
+            [DropdownItem.name]: DropdownItem
         },
-        minutesDisplay() {
-            return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected)
+        mixins: [TimepickerMixin],
+        props: {
+            pickerSize: {
+                type: Number,
+                default: 290
+            },
+            hourFormat: {
+                type: String,
+                default: '12',
+                validator: (value) => {
+                    return value === '24' || value === '12'
+                }
+            },
+            incrementMinutes: {
+                type: Number,
+                default: 5
+            },
+            autoSwitch: {
+                type: Boolean,
+                default: true
+            },
+            type: {
+                type: String,
+                default: 'is-primary'
+            }
         },
-        minFaceValue() {
-            return this.isSelectingHour &&
-                !this.isHourFormat24 &&
-                this.meridienSelected === this.PM ? 12 : 0
+        data() {
+            return {
+                isSelectingHour: true,
+                isDragging: false,
+                _isClockpicker: true
+            }
         },
-        maxFaceValue() {
-            return this.isSelectingHour
-                ? (!this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23)
-                : 59
+        computed: {
+            hoursDisplay() {
+                if (this.hoursSelected == null) return '--'
+                if (this.isHourFormat24) return this.pad(this.hoursSelected)
+
+                let display = this.hoursSelected
+                if (this.meridienSelected === this.PM) display -= 12
+                if (display === 0) display = 12
+                return display
+            },
+            minutesDisplay() {
+                return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected)
+            },
+            minFaceValue() {
+                return this.isSelectingHour &&
+                    !this.isHourFormat24 &&
+                    this.meridienSelected === this.PM ? 12 : 0
+            },
+            maxFaceValue() {
+                return this.isSelectingHour
+                    ? (!this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23)
+                    : 59
+            },
+            faceFormatter() {
+                return this.isSelectingHour && !this.isHourFormat24
+                    ? (val) => val
+                    : this.formatNumber
+            },
+            faceSize() {
+                return this.pickerSize - (outerPadding * 2)
+            }
         },
-        faceFormatter() {
-            return this.isSelectingHour && !this.isHourFormat24
-                ? (val) => val
-                : this.formatNumber
+        methods: {
+            onClockInput(value) {
+                if (this.isSelectingHour) {
+                    this.hoursSelected = value
+                    this.onHoursChange(value)
+                } else {
+                    this.minutesSelected = value
+                    this.onMinutesChange(value)
+                }
+            },
+            onClockChange(value) {
+                if (this.autoSwitch && this.isSelectingHour) {
+                    this.isSelectingHour = !this.isSelectingHour
+                }
+            },
+            onMeridienClick(value) {
+                if (this.meridienSelected !== value) {
+                    this.meridienSelected = value
+                    this.onMeridienChange(value)
+                }
+            },
+            faceDisabledValues() {
+                return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
+            }
         },
-        faceSize() {
-            return this.pickerSize - (outerPadding * 2)
+        created() {
+            this.incrementMinutes = 5
         }
-    },
-    methods: {
-        onClockInput(value) {
-            if (this.isSelectingHour) {
-                this.hoursSelected = value
-                this.onHoursChange(value)
-            } else {
-                this.minutesSelected = value
-                this.onMinutesChange(value)
-            }
-        },
-        onClockChange(value) {
-            if (this.autoSwitch && this.isSelectingHour) {
-                this.isSelectingHour = !this.isSelectingHour
-            }
-        },
-        onMeridienClick(value) {
-            if (this.meridienSelected !== value) {
-                this.meridienSelected = value
-                this.onMeridienChange(value)
-            }
-        },
-        faceDisabledValues() {
-            return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
-        }
-    },
-    created() {
-        this.incrementMinutes = 5
     }
-}
 </script>
-
-<style>
-
-</style>
