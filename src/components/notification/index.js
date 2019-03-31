@@ -13,7 +13,7 @@ const NotificationProgrammatic = {
 
         const defaultParam = {
             message,
-            position: config.defaultNotificationPosition || 'is-bottom-right'
+            position: config.defaultNotificationPosition || 'is-top-right'
         }
         if (params.parent) {
             parent = params.parent
