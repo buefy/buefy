@@ -388,6 +388,18 @@
             "documentation/pagination"
         ]
     },
+    "documentation/button": {
+        "title": "Button",
+        "subtitle": "The classic button, in different colors, sizes, and states",
+        "path": "/documentation/button",
+        "githubPath": "pages/components/button/Button.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/button"
+        ]
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",

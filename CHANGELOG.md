@@ -4,6 +4,7 @@
 
 ### New features
 
+* **New component: Button**, [see docs](https://buefy.org/#/documentation/button)
 * **New component: Clockpicker**, [see docs](https://buefy.org/#/documentation/clockpicker) (thanks @SharpSeeEr)
 * **Notification improved**: can show a notification programmatically, [see docs](https://buefy.org/#/documentation/notification)
 * Add ``custom-formatter`` prop to autocomplete

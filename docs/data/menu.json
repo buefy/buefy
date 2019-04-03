@@ -17,6 +17,7 @@
         {
             "category": "UI components",
             "pages": [
+                "documentation/button",
                 "documentation/collapse",
                 "documentation/dialog",
                 "documentation/dropdown",

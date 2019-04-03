@@ -61,6 +61,7 @@ const router = new Router({
                 route('documentation/upload', 'components/upload/Upload'),
                 route('documentation/table', 'components/table/Table'),
                 route('documentation/pagination', 'components/pagination/Pagination'),
+                route('documentation/button', 'components/button/Button'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
