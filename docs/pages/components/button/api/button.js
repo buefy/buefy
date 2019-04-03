@@ -3,13 +3,6 @@ export default [
         props: [
             {
                 name: '<code>type</code>',
-                description: 'Input type, like native',
-                type: 'String',
-                values: 'Any native input type, and <code>textarea</code>',
-                default: '<code>text</code>'
-            },
-            {
-                name: '<code>type</code>',
                 description: 'Type (color) of the control, optional',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
