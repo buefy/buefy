@@ -10,13 +10,16 @@
     }
     .tab-content {
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         display: flex;
         flex-direction: column;
         padding: 1rem;
         .tab-item {
             flex-shrink: 0;
             flex-basis: auto;
+        }
+        &.is-transitioning {
+            overflow: hidden;
         }
     }
     &:not(:last-child) {

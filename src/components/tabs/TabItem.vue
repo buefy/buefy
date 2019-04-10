@@ -57,7 +57,15 @@
                 if (!this.$parent.animated) {
                     return vnode
                 }
-                return createElement('transition', { props: { 'name': this.transitionName } }, [vnode])
+                return createElement('transition', {
+                    props: {
+                        'name': this.transitionName
+                    },
+                    on: {
+                        'before-enter': () => { this.$parent.isTransitioning = true },
+                        'after-enter': () => { this.$parent.isTransitioning = false }
+                    }
+                }, [vnode])
             }
         }
     }
