@@ -13,6 +13,7 @@
 
 ### Fixes
 
+* #956 Fix hidden overflow on tabs (thanks @Baggs)
 * #1246 Fix Cleave.js example using Vue 2.6.x (thanks @yxngl)
 * #1251 Fix Datepicker closing when page back to ``min-date`` month
 * #1257 Fix Datepicker slow/freeze on big year input
