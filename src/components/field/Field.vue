@@ -8,7 +8,7 @@
                 v-if="label"
                 :for="labelFor"
                 class="label"
-                :class="labelClasses">
+                :class="[labelSrOnly ? 'is-sr-only' : '']">
                 {{ label }}
             </label>
         </div>
@@ -16,7 +16,7 @@
             <label
                 v-if="label"
                 :for="labelFor"
-                :class="labelClasses"
+                :class="[labelSrOnly ? 'is-sr-only' : '', customClass]"
                 class="label">
                 {{ label }}
             </label>
@@ -129,11 +129,6 @@
                     }
                     return messages.filter((m) => { if (m) return m }).join(' <br> ')
                 }
-            },
-            labelClasses() {
-                return [
-                    { 'is-sr-only': this.labelSrOnly }
-                ]
             }
         },
         watch: {
