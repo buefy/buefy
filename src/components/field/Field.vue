@@ -31,7 +31,7 @@
             <slot/>
         </template>
         <p
-            v-show="newMessage && !horizontal"
+            v-if="newMessage && !horizontal"
             v-html="formattedMessage"
             class="help"
             :class="newType"
@@ -157,8 +157,7 @@
 
                 let renderedNode = 0
                 if (this.$slots.default) {
-                    renderedNode = this.$slots.default
-                                        .reduce((i, node) => node.tag ? i + 1 : i, 0)
+                    renderedNode = this.$slots.default.reduce((i, node) => node.tag ? i + 1 : i, 0)
                 }
                 if (
                     renderedNode > 1 &&
