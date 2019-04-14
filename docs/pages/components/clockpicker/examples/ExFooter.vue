@@ -26,13 +26,16 @@
 </template>
 
 <script>
-import PeriodSelectMixin from './PeriodSelectMixin'
-
 export default {
-    mixins: [ PeriodSelectMixin ],
     data() {
         return {
-            time: new Date()
+            time: new Date(),
+            isAmPm: false
+        }
+    },
+    computed: {
+        format() {
+            return this.isAmPm ? '12' : '24'
         }
     }
 }

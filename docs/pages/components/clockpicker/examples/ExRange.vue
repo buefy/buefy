@@ -30,10 +30,7 @@
 </template>
 
 <script>
-import PeriodSelectMixin from './PeriodSelectMixin'
-
 export default {
-    mixins: [ PeriodSelectMixin ],
     data() {
         const min = new Date()
         min.setHours(9)
@@ -44,6 +41,12 @@ export default {
         return {
             minTime: min,
             maxTime: max,
+            isAmPm: false
+        }
+    },
+    computed: {
+        format() {
+            return this.isAmPm ? '12' : '24'
         }
     }
 }

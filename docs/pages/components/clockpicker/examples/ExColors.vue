@@ -20,13 +20,11 @@
 </template>
 
 <script>
-import PeriodSelectMixin from './PeriodSelectMixin'
-
 export default {
-    mixins: [ PeriodSelectMixin ],
     data() {
         return {
             time: new Date(),
+            isAmPm: false,
             selectedColor: 'primary',
             colors: [
                 'primary',
@@ -39,6 +37,11 @@ export default {
                 'light',
                 'dark'
             ]
+        }
+    },
+    computed: {
+        format() {
+            return this.isAmPm ? '12' : '24'
         }
     }
 }
