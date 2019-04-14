@@ -73,6 +73,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>is-sr-only</code>',
+                description: 'Hide label visually but keep the element available to be announced by a screen reader',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }
