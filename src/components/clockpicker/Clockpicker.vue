@@ -1,5 +1,5 @@
 <template>
-    <div class="b-clockpicker" :class="type">
+    <div class="b-clockpicker control" :class="[size, type, {'is-expanded': expanded}]">
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -27,7 +27,6 @@
 
             <div
                 class="card"
-                style="height: auto;"
                 :disabled="disabled"
                 custom>
                 <header v-if="inline" class="card-header">

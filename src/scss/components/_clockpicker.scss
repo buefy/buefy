@@ -42,16 +42,26 @@
         }
     }
 
-    display: inline-block;
-
     @include b-clockpicker-colors-set($primary, $primary-invert);
 
     @each $name, $pair in $colors {
         @include b-clockpicker-colors($name, $pair)
     }
-    
-    .dropdown-content {
+
+    .dropdown-menu {
+        min-width: 0;
+    }
+    .dropdown,
+    .dropdown-trigger {
+        width: 100%;
+    }
+    .dropdown-item {
+        font-size: inherit;
         padding: 0;
+    }
+    .dropdown-content {
+        padding-top: 0;
+        padding-bottom: 0;
     }
     
     .card-content {
@@ -241,5 +251,15 @@
     &-footer {
         display: block;
         padding: $padding-outer;
+    }
+    // Sizes
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium {
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
     }
 }
