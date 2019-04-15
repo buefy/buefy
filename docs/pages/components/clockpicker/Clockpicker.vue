@@ -3,7 +3,7 @@
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExNonReadonly" :code="ExNonReadonlyCode" title="Non read-only" vertical>
-            <p>Use <code>:readonly="false"</code> to let the user type a time.</p>
+            <p>Use <code>editable</code> to let the user type a time.</p>
         </Example>
 
         <Example :component="ExRange" :code="ExRangeCode" title="Range" vertical>

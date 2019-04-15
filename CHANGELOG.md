@@ -5,6 +5,7 @@
 ### Fixes
 
 * Enable native timepicker to clockpicker when ``mobile-native``  (default ``true``)
+* Fix clockpicker docs
 
 ## 0.7.4
 

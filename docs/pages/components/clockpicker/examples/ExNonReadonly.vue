@@ -8,7 +8,7 @@
                 placeholder="Type or select a date..."
                 icon="clock"
                 :hour-format="format"
-                :readonly="false">
+                editable>
             </b-clockpicker>
         </b-field>
     </section>
