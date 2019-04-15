@@ -98,6 +98,25 @@
                 </footer>
             </div>
         </b-dropdown>
+        <b-input
+            v-else
+            ref="input"
+            type="time"
+            autocomplete="off"
+            :value="formatHHMMSS(value)"
+            :placeholder="placeholder"
+            :size="size"
+            :icon="icon"
+            :icon-pack="iconPack"
+            :loading="loading"
+            :max="formatHHMMSS(maxTime)"
+            :min="formatHHMMSS(minTime)"
+            :disabled="disabled"
+            :readonly="false"
+            v-bind="$attrs"
+            @change.native="onChangeNativePicker"
+            @focus="$emit('focus', $event)"
+            @blur="$emit('blur', $event) && checkHtml5Validity()"/>
     </div>
 
 </template>

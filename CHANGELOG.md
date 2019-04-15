@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.7.5
+
+### Fixes
+
+* Enable native timepicker to clockpicker when ``mobile-native``  (default ``true``)
+
 ## 0.7.4
 
 ### New features
