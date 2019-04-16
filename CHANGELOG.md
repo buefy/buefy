@@ -4,8 +4,10 @@
 
 ### Fixes
 
+* Fix #1325 input emit to upload
 * Enable native timepicker to clockpicker when ``mobile-native``  (default ``true``)
-* Fix clockpicker docs
+* Fix clockpicker docs and input size
+* Fix upload opening in IE 11
 
 ## 0.7.4
 
