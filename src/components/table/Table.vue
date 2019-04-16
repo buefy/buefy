@@ -32,7 +32,7 @@
                                 'is-current-sort': currentSortColumn === column,
                                 'is-sortable': column.sortable
                             }"
-                            :style="{ width: column.width + 'px' }"
+                            :style="{ width: column.width }"
                             @click.stop="sort(column)">
                             <div
                                 class="th-wrap"
