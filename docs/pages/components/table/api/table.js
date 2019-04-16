@@ -420,7 +420,7 @@ export default [
             {
                 name: '<code>width</code>',
                 description: 'Column fixed width in pixels',
-                type: 'Number',
+                type: 'String',
                 values: '—',
                 default: '—'
             },
