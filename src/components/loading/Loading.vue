@@ -5,7 +5,8 @@
             :class="{ 'is-full-page': isFullPage }"
             v-if="isActive">
             <div class="loading-background" @click="cancel"/>
-            <div class="loading-icon"/>
+            <div class="loading-icon" v-if="!hasDefaultSlot" />
+            <slot v-if="hasDefaultSlot"/>
         </div>
     </transition>
 </template>
@@ -40,6 +41,11 @@
         data() {
             return {
                 isActive: this.active || false
+            }
+        },
+        computed: {
+            hasDefaultSlot() {
+                return !!this.$slots.default
             }
         },
         watch: {

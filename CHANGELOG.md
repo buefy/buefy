@@ -2,6 +2,8 @@
 
 ## 0.7.5
 
+* **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
+
 ### Fixes
 
 * Fix #1325 input emit to upload
@@ -13,9 +15,9 @@
 
 ### New features
 
-* **New component: Button**, [see docs](https://buefy.org/#/documentation/button)
-* **New component: Clockpicker**, [see docs](https://buefy.org/#/documentation/clockpicker) (thanks @SharpSeeEr)
-* **Notification improved**: can show a notification programmatically, [see docs](https://buefy.org/#/documentation/notification)
+* **New component: Button**, [see docs](https://buefy.org/documentation/button)
+* **New component: Clockpicker**, [see docs](https://buefy.org/documentation/clockpicker) (thanks @SharpSeeEr)
+* **Notification improved**: can show a notification programmatically, [see docs](https://buefy.org/documentation/notification)
 * Add ``custom-formatter`` prop to autocomplete
 * Add ``draggable`` prop to table (thanks @suneab)
 * Improve accessibility for notification, message and pagination (thanks @mateuswetah)

@@ -12,6 +12,14 @@
             <p>When you want to close the Loading, call the <code>close()</code> method from the component.</p>
         </Example>
 
+        <Example :component="ExTemplated" :code="ExTemplatedCode" title="Templated">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.5</span>
+            </div>
+            <p>Slot is available for loading content.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -25,14 +33,19 @@
     import ExProgrammatically from './examples/ExProgrammatically'
     import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
 
+    import ExTemplated from './examples/ExTemplated'
+    import ExTemplatedCode from '!!raw-loader!./examples/ExTemplated'
+
     export default {
         data() {
             return {
                 api,
                 ExSimple,
                 ExProgrammatically,
+                ExTemplated,
                 ExSimpleCode,
-                ExProgrammaticallyCode
+                ExProgrammaticallyCode,
+                ExTemplatedCode
             }
         }
     }
