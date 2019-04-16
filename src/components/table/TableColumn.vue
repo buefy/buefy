@@ -15,7 +15,15 @@
             customKey: [String, Number],
             field: String,
             meta: [String, Number, Boolean, Function, Object, Array, Symbol],
-            width: [Number, String],
+            width: {
+                type: String,
+                validator(value) {
+                    return [
+                        '%',
+                        'px'
+                    ].indexOf(value) > -1
+                }
+            },
             numeric: Boolean,
             centered: Boolean,
             sortable: Boolean,
