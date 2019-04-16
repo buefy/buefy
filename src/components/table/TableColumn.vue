@@ -15,15 +15,7 @@
             customKey: [String, Number],
             field: String,
             meta: [String, Number, Boolean, Function, Object, Array, Symbol],
-            width: {
-                type: String,
-                validator(value) {
-                    return [
-                        '%',
-                        'px'
-                    ].indexOf(value) > -1
-                }
-            },
+            width: [String, Number],
             numeric: Boolean,
             centered: Boolean,
             sortable: Boolean,
@@ -36,7 +28,10 @@
         },
         data() {
             return {
-                newKey: this.customKey || this.label
+                newKey: this.customKey || this.label,
+                newWidth: typeof this.width === 'number'
+                    ? this.width + 'px'
+                    : this.width
             }
         },
         computed: {
@@ -57,7 +52,8 @@
                 if (this.internal) return
 
                 // Since we're using scoped prop the columns gonna be multiplied,
-                // this finds when to stop based on the newKey property.
+                // this finds when to stop based on the 
+                property.
                 const repeated = this.$parent.newColumns.some(
                     (column) => column.newKey === this.newKey)
                 !repeated && this.$parent.newColumns.push(this)
