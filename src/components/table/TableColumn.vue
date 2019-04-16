@@ -15,7 +15,7 @@
             customKey: [String, Number],
             field: String,
             meta: [String, Number, Boolean, Function, Object, Array, Symbol],
-            width: [String, Number],
+            width: [Number, String],
             numeric: Boolean,
             centered: Boolean,
             sortable: Boolean,
