@@ -92,6 +92,9 @@
                 }
                 const value = event.target.files || event.dataTransfer.files
                 if (value.length === 0) {
+                    if (!this.newValue) {
+                        return
+                    }
                     this.newValue = null
                 } else if (!this.multiple) {
                     // only one element in case drag drop mode and isn't multiple
@@ -100,8 +103,10 @@
                         const file = value[0]
                         if (this.checkType(file)) {
                             this.newValue = file
-                        } else {
+                        } else if (this.newValue) {
                             this.newValue = null
+                        } else {
+                            return
                         }
                     }
                 } else {
