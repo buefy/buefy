@@ -126,7 +126,7 @@
                         <!-- Do not add `key` here (breaks details) -->
                         <!-- eslint-disable-next-line -->
                         <tr
-                            v-if="detailed && isVisibleDetailRow(row)"
+                            v-if="detailed && !customDetailRow && isVisibleDetailRow(row)"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -137,6 +137,12 @@
                                 </div>
                             </td>
                         </tr>
+                        <slot
+                            v-else-if="detailed && customDetailRow && isVisibleDetailRow(row)"
+                            name="detail"
+                            :row="row"
+                            :index="index"
+                        />
                     </template>
                 </tbody>
                 <tbody v-else>
@@ -268,6 +274,10 @@
             detailKey: {
                 type: String,
                 default: ''
+            },
+            customDetailRow: {
+                type: Boolean,
+                default: false
             },
             backendPagination: Boolean,
             total: {
