@@ -3,6 +3,7 @@
 ## 0.7.5
 
 * **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
+* Add ``destroy-on-hide`` prop to tabs
 
 ### Fixes
 

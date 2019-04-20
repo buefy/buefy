@@ -51,6 +51,10 @@
             animated: {
                 type: Boolean,
                 default: true
+            },
+            destroyOnHide: {
+                type: Boolean,
+                default: false
             }
         },
         data() {

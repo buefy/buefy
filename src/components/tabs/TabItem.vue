@@ -52,11 +52,20 @@
             }
         },
         render(createElement) {
-            if (this.isActive && this.visible) {
-                const vnode = createElement('div', { attrs: { 'class': 'tab-item' } }, this.$slots.default)
-                if (!this.$parent.animated) {
-                    return vnode
+            // if destroy apply v-if
+            if (this.$parent.destroyOnHide) {
+                if (!this.isActive || !this.visible) {
+                    return
                 }
+            }
+            const vnode = createElement('div', {
+                style: {
+                    display: this.isActive && this.visible ? '' : 'none'
+                },
+                attrs: { 'class': 'tab-item' }
+            }, this.$slots.default)
+            // check animated prop
+            if (this.$parent.animated) {
                 return createElement('transition', {
                     props: {
                         'name': this.transitionName
@@ -67,6 +76,7 @@
                     }
                 }, [vnode])
             }
+            return vnode
         }
     }
 </script>
