@@ -218,7 +218,8 @@
             "/",
             "documentation",
             "documentation/loading"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/field": {
         "title": "Field",
@@ -338,7 +339,8 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -410,7 +412,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isNew": true
     },
     "extensions": {
         "title": "Extensions",
