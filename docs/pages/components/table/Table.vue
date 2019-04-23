@@ -42,6 +42,14 @@
             <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
         </Example>
 
+        <Example :component="ExCustomDetailedRow" :code="ExCustomDetailedRowCode" title="Custom Detailed rows">
+            <p>You can add anything you like into the <code>detail</code> named scoped by providing the <code>customDetailRow</code> prop to the table.</p>
+            <b-message type="is-warning">
+                Be cautious when using a custom detailed row and toggling the display of columns,
+                as you will have to manage either the content within (with <code>colspan</code>) or the columns themselves dependent on the content displayed.
+            </b-message>
+        </Example>
+
         <Example :component="ExRowStatus" :code="ExRowStatusCode" title="Row status">
             <p>Use the <code>row-class</code> prop to return a class name. It's a function that receives <code>row</code> and <code>index</code> parameters.</p>
             <p>Note that <strong>you have to style the class yourself</strong>.</p>
@@ -102,6 +110,9 @@
     import ExDetailedRow from './examples/ExDetailedRow'
     import ExDetailedRowCode from '!!raw-loader!./examples/ExDetailedRow'
 
+    import ExCustomDetailedRow from './examples/ExCustomDetailedRow';
+    import ExCustomDetailedRowCode from '!!raw-loader!./examples/ExCustomDetailedRow';
+
     import ExRowStatus from './examples/ExRowStatus'
     import ExRowStatusCode from '!!raw-loader!./examples/ExRowStatus'
 
@@ -130,6 +141,7 @@
                 ExCheckable,
                 ExPaginationSort,
                 ExDetailedRow,
+                ExCustomDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
                 ExToggleColumns,
@@ -142,6 +154,7 @@
                 ExCheckableCode,
                 ExPaginationSortCode,
                 ExDetailedRowCode,
+                ExCustomDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
                 ExToggleColumnsCode,
