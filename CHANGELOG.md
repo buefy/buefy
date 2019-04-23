@@ -2,6 +2,7 @@
 
 ## 0.7.5
 
+* **New component: Numberinput**, [see docs](https://buefy.org/documentation/numberinput)
 * **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
 * Add ``destroy-on-hide`` prop to tabs
 
