@@ -6,6 +6,7 @@
 * **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
 * Add ``destroy-on-hide`` prop to tabs
 * Add ``custom-detail-row`` prop to table
+* Add ``open-on-focus`` prop and improved accessibility for datepicker (thanks @imfaber)
 
 ### Fixes
 
