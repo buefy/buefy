@@ -21,9 +21,11 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
+                @click.native.stop="toggle(true)"
+                @keyup.native.enter="toggle(true)"
                 @change.native="onChange($event.target.value)"
-                @focus="$emit('focus', $event)"
-                @blur="$emit('blur', $event) && checkHtml5Validity()"/>
+                @focus="handleOnFocus"
+                @blur="onBlur" />
 
             <b-dropdown-item :disabled="disabled" custom>
                 <header class="datepicker-header">
@@ -111,7 +113,7 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
-                        @close="$refs.dropdown.isActive = false"/>
+                        @close="toggle(false)"/>
                 </div>
 
                 <footer
@@ -139,8 +141,10 @@
             :readonly="false"
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
-            @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event) && checkHtml5Validity()"/>
+            @click.native.stop="toggle(true)"
+            @keyup.native.enter="toggle(true)"
+            @focus="handleOnFocus"
+            @blur="onBlur"/>
     </div>
 </template>
 
@@ -281,7 +285,8 @@
             indicators: {
                 type: String,
                 default: 'dots'
-            }
+            },
+            openOnFocus: Boolean
         },
         data() {
             const focusedDate = this.value || this.focusedDate || this.dateCreator()
@@ -350,9 +355,7 @@
                     year: currentDate.getFullYear()
                 }
                 this.$emit('input', value)
-                if (this.$refs.dropdown) {
-                    this.$refs.dropdown.isActive = false
-                }
+                this.toggle()
             },
 
             /**
@@ -470,6 +473,47 @@
             onChangeNativePicker(event) {
                 const date = event.target.value
                 this.dateSelected = date ? new Date(date.replace(/-/g, '/')) : null
+            },
+
+            /*
+            * Toggle datepicker
+            */
+            toggle(active) {
+                if (this.$refs.dropdown) {
+                    this.$refs.dropdown.isActive = typeof active === 'boolean'
+                        ? active
+                        : !this.$refs.dropdown.isActive
+                }
+            },
+
+            /*
+            * Call default onFocus method and show datepicker
+            */
+            handleOnFocus() {
+                this.onFocus()
+                if (this.openOnFocus) {
+                    this.toggle(true)
+                }
+            },
+
+            /**
+             * Keypress event that is bound to the document.
+             */
+            keyPress(event) {
+                // Esc key
+                if (this.$refs.dropdown.isActive && event.keyCode === 27) {
+                    this.toggle(false)
+                }
+            }
+        },
+        created() {
+            if (typeof window !== 'undefined') {
+                document.addEventListener('keyup', this.keyPress)
+            }
+        },
+        beforeDestroy() {
+            if (typeof window !== 'undefined') {
+                document.removeEventListener('keyup', this.keyPress)
             }
         }
     }
