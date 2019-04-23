@@ -62,6 +62,7 @@ const router = new Router({
                 route('documentation/table', 'components/table/Table'),
                 route('documentation/pagination', 'components/pagination/Pagination'),
                 route('documentation/button', 'components/button/Button'),
+                route('documentation/numberinput', 'components/numberinput/Numberinput'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),

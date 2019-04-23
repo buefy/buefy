@@ -13,6 +13,7 @@ import Loading from './loading'
 import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
+import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Radio from './radio'
 import Select from './select'
@@ -43,6 +44,7 @@ export {
     Message,
     Modal,
     Notification,
+    Numberinput,
     Pagination,
     Radio,
     Select,

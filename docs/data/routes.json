@@ -400,6 +400,18 @@
             "documentation/button"
         ]
     },
+    "documentation/numberinput": {
+        "title": "Numberinput",
+        "subtitle": "A simple number input with controls",
+        "path": "/documentation/numberinput",
+        "githubPath": "pages/components/numberinput/Numberinput.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/numberinput"
+        ]
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
