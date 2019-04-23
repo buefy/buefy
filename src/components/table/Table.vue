@@ -126,7 +126,7 @@
                         <!-- Do not add `key` here (breaks details) -->
                         <!-- eslint-disable-next-line -->
                         <tr
-                            v-if="detailed && !customDetailRow && isVisibleDetailRow(row)"
+                            v-if="isActiveDetailRow(row)"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -138,7 +138,7 @@
                             </td>
                         </tr>
                         <slot
-                            v-else-if="detailed && customDetailRow && isVisibleDetailRow(row)"
+                            v-if="isActiveCustomDetailRow(row)"
                             name="detail"
                             :row="row"
                             :index="index"
@@ -649,6 +649,14 @@
                 const index = this.handleDetailKey(obj)
                 const result = this.visibleDetailRows.indexOf(index) >= 0
                 return result
+            },
+
+            isActiveDetailRow(row) {
+                return this.detailed && !this.customDetailRow && this.isVisibleDetailRow(row)
+            },
+
+            isActiveCustomDetailRow(row) {
+                return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
             },
 
             /**
