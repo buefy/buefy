@@ -10,6 +10,7 @@
             :maxlength="maxlength"
             :value="computedValue"
             v-bind="$attrs"
+            @change="onChange"
             @input="onInput"
             @blur="onBlur"
             @focus="onFocus">
@@ -22,6 +23,7 @@
             :maxlength="maxlength"
             :value="computedValue"
             v-bind="$attrs"
+            @change="onChange"
             @input="onInput"
             @blur="onBlur"
             @focus="onFocus"/>
@@ -67,6 +69,10 @@
         inheritAttrs: false,
         props: {
             value: [Number, String],
+            lazy: {
+                type: Boolean,
+                default: false
+            },
             type: {
                 type: String,
                 default: 'text'
@@ -99,7 +105,6 @@
                 },
                 set(value) {
                     this.newValue = value
-                    this.$emit('input', value)
                     !this.isValid && this.checkHtml5Validity()
                 }
             },
@@ -206,6 +211,20 @@
                 this.$nextTick(() => {
                     if (event.target) {
                         this.computedValue = event.target.value
+                        if (!this.lazy) this.$emit('input', value)
+                    }
+                })
+            }
+            
+            /**
+             * Input's 'input' event listener, 'nextTick' is used to prevent event firing
+             * before ui update, helps when using masks (Cleavejs and potentially others).
+             */
+            onInput(event) {
+                this.$nextTick(() => {
+                    if (event.target) {
+                        this.computedValue = event.target.value
+                        if (this.lazy) this.$emit('input', value)
                     }
                 })
             }
