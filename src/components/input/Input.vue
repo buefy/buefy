@@ -216,7 +216,7 @@
                     }
                 })
             },
-            
+
             /**
              * Input's 'change' event listener, 'nextTick' is used to prevent event firing
              * before ui update, helps when using masks (Cleavejs and potentially others).
