@@ -210,7 +210,7 @@
              */
             onInput(event) {
                 this.$nextTick(() => {
-                    if (event.target) {
+                    if (event.target && event.target.value !== undefined) {
                         this.computedValue = event.target.value
                         if (!this.lazy) this.$emit('input', value)
                     }
@@ -224,7 +224,7 @@
              */
             onChange(event) {
                 this.$nextTick(() => {
-                    if (event.target) {
+                    if (event.target && event.target.value !== undefined) {
                         this.computedValue = event.target.value
                         if (this.lazy) this.$emit('input', value)
                     }
