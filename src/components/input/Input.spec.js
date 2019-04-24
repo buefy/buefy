@@ -167,7 +167,6 @@ describe('BInput', () => {
     })
     
     it('fires input on input native event if lazy is false', async () => {
-        const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
         })
@@ -175,11 +174,11 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
-        $input.setValue(VALUE_TYPED)
+        $input.trigger('input', {value: 't'});
 
         await wrapper.vm.$nextTick()
 
-        expect(wrapper.emitted()['input'].length).toBe(1)
+        expect(wrapper.emitted().input).toBeTruthy()
     })
     
     it('dont fires input on change native event if lazy is false', async () => {
@@ -191,19 +190,19 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
-        $input.setValue(VALUE_TYPED)
+        $input.trigger('input', {value: 't'});
 
         await wrapper.vm.$nextTick()
+        expect(wrapper.emitted().input).toBeTruthy()
 
         $input.trigger('blur');
 
         await wrapper.vm.$nextTick()
 
-        expect(wrapper.emitted()['input'].length).toBe(1)
+        expect(wrapper.emitted().input ? wrapper.emitted().input.length : 0).toBe(1)
     })
     
     it('dont fires input on input native event if lazy is true', async () => {
-        const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true }
         })
@@ -211,15 +210,14 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
-        $input.setValue(VALUE_TYPED)
+        $input.trigger('input', {value: 't'});
 
         await wrapper.vm.$nextTick()
 
-        expect(wrapper.emitted()['input'].length).toBe(0)
+        expect(wrapper.emitted().input).toBeFalsy()
     })
     
     it('fires input on change native event if lazy is true', async () => {
-        const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true  }
         })
@@ -227,14 +225,15 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
-        $input.setValue(VALUE_TYPED)
+        $input.trigger('input', {value: 't'});
 
         await wrapper.vm.$nextTick()
+        expect(wrapper.emitted().input).toBeFalsy()
         
         $input.trigger('blur');
         
         await wrapper.vm.$nextTick()
 
-        expect(wrapper.emitted()['input'].length).toBe(1)
+        expect(wrapper.emitted().input).toBeTruthy()
     })
 })
