@@ -171,6 +171,7 @@ describe('BInput', () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
         })
+        const $input = wrapper.find('input')
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
@@ -186,15 +187,16 @@ describe('BInput', () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
         })
+        const $input = wrapper.find('input')
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
         $input.setValue(VALUE_TYPED)
 
         await wrapper.vm.$nextTick()
-        
+
         $input.trigger('blur');
-        
+
         await wrapper.vm.$nextTick()
 
         expect(wrapper.emitted()['input'].length).toBe(1)
@@ -205,6 +207,7 @@ describe('BInput', () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true }
         })
+        const $input = wrapper.find('input')
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
@@ -220,6 +223,7 @@ describe('BInput', () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true  }
         })
+        const $input = wrapper.find('input')
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
