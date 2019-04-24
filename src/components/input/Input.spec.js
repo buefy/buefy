@@ -166,7 +166,7 @@ describe('BInput', () => {
         expect(input.vm.statusTypeIcon).toBe('alert')
     })
     
-    it('fires input on input native event if lazy is false', () => {
+    it('fires input on input native event if lazy is false', async () => {
         const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
@@ -181,7 +181,7 @@ describe('BInput', () => {
         expect(wrapper.emitted()['input'].length).toBe(1)
     })
     
-    it('dont fires input on change native event if lazy is false', () => {
+    it('dont fires input on change native event if lazy is false', async () => {
         const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
@@ -200,7 +200,7 @@ describe('BInput', () => {
         expect(wrapper.emitted()['input'].length).toBe(1)
     })
     
-    it('dont fires input on input native event if lazy is true', () => {
+    it('dont fires input on input native event if lazy is true', async () => {
         const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true }
@@ -215,7 +215,7 @@ describe('BInput', () => {
         expect(wrapper.emitted()['input'].length).toBe(0)
     })
     
-    it('fires input on change native event if lazy is true', () => {
+    it('fires input on change native event if lazy is true', async () => {
         const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true  }
