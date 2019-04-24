@@ -206,6 +206,7 @@
             /**
              * Input's 'input' event listener, 'nextTick' is used to prevent event firing
              * before ui update, helps when using masks (Cleavejs and potentially others).
+             * Fires input event to parent if lazy modifier is set to false
              */
             onInput(event) {
                 this.$nextTick(() => {
@@ -214,11 +215,12 @@
                         if (!this.lazy) this.$emit('input', value)
                     }
                 })
-            }
+            },
             
             /**
-             * Input's 'input' event listener, 'nextTick' is used to prevent event firing
+             * Input's 'change' event listener, 'nextTick' is used to prevent event firing
              * before ui update, helps when using masks (Cleavejs and potentially others).
+             * Fires input event to parent if lazy modifier is set to true
              */
             onChange(event) {
                 this.$nextTick(() => {
