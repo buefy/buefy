@@ -220,7 +220,7 @@
              * Input's 'input' event listener, 'nextTick' is used to prevent event firing
              * before ui update, helps when using masks (Cleavejs and potentially others).
              */
-            onInput(event) {
+            onChange(event) {
                 this.$nextTick(() => {
                     if (event.target) {
                         this.computedValue = event.target.value
