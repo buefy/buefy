@@ -174,13 +174,12 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
+
         $input.trigger('input', {value: 't'});
-
         await wrapper.vm.$nextTick()
-
         expect(wrapper.emitted().input).toBeTruthy()
     })
-    
+
     it('dont fires input on change native event if lazy is false', async () => {
         const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
@@ -190,18 +189,16 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
-        $input.trigger('input', {value: 't'});
 
+        $input.trigger('input', {value: 't'});
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeTruthy()
 
         $input.trigger('change');
-
         await wrapper.vm.$nextTick()
-
         expect(wrapper.emitted().input ? wrapper.emitted().input.length : 0).toBe(1)
     })
-    
+
     it('dont fires input on input native event if lazy is true', async () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true }
@@ -210,13 +207,12 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
+
         $input.trigger('input', {value: 't'});
-
         await wrapper.vm.$nextTick()
-
         expect(wrapper.emitted().input).toBeFalsy()
     })
-    
+
     it('fires input on change native event if lazy is true', async () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '', lazy: true  }
@@ -229,11 +225,9 @@ describe('BInput', () => {
 
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeFalsy()
-        
-        $input.trigger('change');
-        
-        await wrapper.vm.$nextTick()
 
+        $input.trigger('change');
+        await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeTruthy()
     })
 })
