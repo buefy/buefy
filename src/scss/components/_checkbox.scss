@@ -48,6 +48,20 @@ $checkbox-checkmark-color: $primary-invert !default;
                     }
                 }
             }
+            &:focus {
+                + .check {
+                    box-shadow: 0 0 0.5em rgba($grey, 0.8);
+                }
+                &:checked + .check {
+                    box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
+                    @each $name, $pair in $colors {
+                        $color: nth($pair, 1);
+                        &.is-#{$name} {
+                            box-shadow: 0 0 0.5em rgba($color, 0.8);
+                        }
+                    }
+                }
+            }
         }
         .control-label {
             padding-left: 0.5em;
@@ -62,20 +76,6 @@ $checkbox-checkmark-color: $primary-invert !default;
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         border-color: $color;
-                    }
-                }
-            }
-        }
-        &:focus {
-            input[type=checkbox] + .check {
-                box-shadow: 0 0 0.5em rgba($grey, 0.8);
-            }
-            input[type=checkbox]:checked + .check {
-                box-shadow: 0 0 0.5em rgba($checkbox-active-background-color, 0.8);
-                @each $name, $pair in $colors {
-                    $color: nth($pair, 1);
-                    &.is-#{$name} {
-                        box-shadow: 0 0 0.5em rgba($color, 0.8);
                     }
                 }
             }

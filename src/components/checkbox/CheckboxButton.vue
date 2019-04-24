@@ -3,20 +3,23 @@
         <label
             class="b-checkbox checkbox button"
             ref="label"
-            :class="[checked ? type : null, size, { 'is-disabled': disabled }]"
+            :class="[checked ? type : null, size, {
+                'is-disabled': disabled,
+                'is-focused': isFocused
+            }]"
             :disabled="disabled"
-            :tabindex="disabled ? false : 0"
-            @keydown.prevent.enter.space="$refs.label.click()">
+            @keydown.prevent.enter="$refs.label.click()">
             <slot/>
             <input
                 v-model="computedValue"
-                tabindex="-1"
                 type="checkbox"
                 @click.stop
                 :disabled="disabled"
                 :required="required"
                 :name="name"
-                :value="nativeValue">
+                :value="nativeValue"
+                @focus="isFocused = true"
+                @blur="isFocused = false">
         </label>
     </div>
 </template>
@@ -38,7 +41,8 @@
         },
         data() {
             return {
-                newValue: this.value
+                newValue: this.value,
+                isFocused: false
             }
         },
         computed: {
