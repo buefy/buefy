@@ -75,8 +75,6 @@ describe('BInput', () => {
         expect(target.attributes().type).toBe('password')
     })
 
-    
-    
     it('toggles the visibility of the password to true when the togglePasswordVisibility method is called', (done) => {
         const wrapper = mount(BInput, {
             propsData: {
@@ -165,7 +163,7 @@ describe('BInput', () => {
         wrapper.setData({ newType: 'is-warning' })
         expect(input.vm.statusTypeIcon).toBe('alert')
     })
-    
+
     it('fires input on input native event if lazy is false', async () => {
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
@@ -175,13 +173,12 @@ describe('BInput', () => {
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
 
-        $input.trigger('input', {value: 't'});
+        $input.trigger('input', {value: 't'})
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeTruthy()
     })
 
     it('dont fires input on change native event if lazy is false', async () => {
-        const VALUE_TYPED = 't'
         const wrapper = shallowMount(BInput, {
             propsData: { value: '' }
         })
@@ -190,11 +187,11 @@ describe('BInput', () => {
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
 
-        $input.trigger('input', {value: 't'});
+        $input.trigger('input', {value: 't'})
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeTruthy()
 
-        $input.trigger('change');
+        $input.trigger('change')
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input ? wrapper.emitted().input.length : 0).toBe(1)
     })
@@ -208,7 +205,7 @@ describe('BInput', () => {
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
 
-        $input.trigger('input', {value: 't'});
+        $input.trigger('input', {value: 't'})
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeFalsy()
     })
@@ -221,12 +218,12 @@ describe('BInput', () => {
 
         $input.trigger('focus')
         expect(wrapper.emitted()['focus']).toBeTruthy()
-        $input.trigger('input', {value: 't'});
+        $input.trigger('input', {value: 't'})
 
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeFalsy()
 
-        $input.trigger('change');
+        $input.trigger('change')
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeTruthy()
     })
