@@ -210,9 +210,9 @@
              */
             onInput(event) {
                 this.$nextTick(() => {
-                    if (event.target && event.target.value !== undefined) {
+                    if (event.target) {
                         this.computedValue = event.target.value
-                        if (!this.lazy) this.$emit('input', value)
+                        if (!this.lazy) this.$emit('input', this.computedValue)
                     }
                 })
             },
@@ -224,9 +224,9 @@
              */
             onChange(event) {
                 this.$nextTick(() => {
-                    if (event.target && event.target.value !== undefined) {
+                    if (event.target) {
                         this.computedValue = event.target.value
-                        if (this.lazy) this.$emit('input', value)
+                        if (this.lazy) this.$emit('input', this.computedValue)
                     }
                 })
             }
