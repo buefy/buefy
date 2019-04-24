@@ -212,7 +212,7 @@ describe('BInput', () => {
 
     it('fires input on change native event if lazy is true', async () => {
         const wrapper = shallowMount(BInput, {
-            propsData: { value: '', lazy: true  }
+            propsData: { value: '', lazy: true }
         })
         const $input = wrapper.find('input')
 
