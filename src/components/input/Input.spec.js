@@ -195,7 +195,7 @@ describe('BInput', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeTruthy()
 
-        $input.trigger('blur');
+        $input.trigger('change');
 
         await wrapper.vm.$nextTick()
 
@@ -230,7 +230,7 @@ describe('BInput', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted().input).toBeFalsy()
         
-        $input.trigger('blur');
+        $input.trigger('change');
         
         await wrapper.vm.$nextTick()
 
