@@ -75,6 +75,8 @@ describe('BInput', () => {
         expect(target.attributes().type).toBe('password')
     })
 
+    
+    
     it('toggles the visibility of the password to true when the togglePasswordVisibility method is called', (done) => {
         const wrapper = mount(BInput, {
             propsData: {
@@ -162,5 +164,73 @@ describe('BInput', () => {
         expect(input.vm.statusTypeIcon).toBe('information')
         wrapper.setData({ newType: 'is-warning' })
         expect(input.vm.statusTypeIcon).toBe('alert')
+    })
+    
+    it('fires input on input native event if lazy is false', () => {
+        const VALUE_TYPED = 't'
+        const wrapper = shallowMount(BInput, {
+            propsData: { value: '' }
+        })
+
+        $input.trigger('focus')
+        expect(wrapper.emitted()['focus']).toBeTruthy()
+        $input.setValue(VALUE_TYPED)
+
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted()['input'].length).toBe(1)
+    })
+    
+    it('dont fires input on change native event if lazy is false', () => {
+        const VALUE_TYPED = 't'
+        const wrapper = shallowMount(BInput, {
+            propsData: { value: '' }
+        })
+
+        $input.trigger('focus')
+        expect(wrapper.emitted()['focus']).toBeTruthy()
+        $input.setValue(VALUE_TYPED)
+
+        await wrapper.vm.$nextTick()
+        
+        $input.trigger('blur');
+        
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted()['input'].length).toBe(1)
+    })
+    
+    it('dont fires input on input native event if lazy is true', () => {
+        const VALUE_TYPED = 't'
+        const wrapper = shallowMount(BInput, {
+            propsData: { value: '', lazy: true }
+        })
+
+        $input.trigger('focus')
+        expect(wrapper.emitted()['focus']).toBeTruthy()
+        $input.setValue(VALUE_TYPED)
+
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted()['input'].length).toBe(0)
+    })
+    
+    it('fires input on change native event if lazy is true', () => {
+        const VALUE_TYPED = 't'
+        const wrapper = shallowMount(BInput, {
+            propsData: { value: '', lazy: true  }
+        })
+
+        $input.trigger('focus')
+        expect(wrapper.emitted()['focus']).toBeTruthy()
+        $input.setValue(VALUE_TYPED)
+
+        await wrapper.vm.$nextTick()
+        
+        $input.trigger('blur');
+        
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted()['input'].length).toBe(1)
     })
 })
