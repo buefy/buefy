@@ -67,7 +67,9 @@ const router = new Router({
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
                 route('extensions/sortablejs', 'extensions/sortablejs/Sortablejs'),
-                route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate')
+                route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate'),
+                // Expo
+                route('expo', 'Expo')
             ]
         },
         // Global redirect

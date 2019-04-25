@@ -3,10 +3,10 @@
         <TheNavbar/>
 
         <section class="documentation">
-            <div class="sidebar-bg"/>
+            <div v-if="!meta.hideSidebar" class="sidebar-bg"/>
 
             <div class="container is-fullhd docs-template-horizontal">
-                <TheSidebar :data="menu"/>
+                <TheSidebar v-if="!meta.hideSidebar" :data="menu"/>
                 <div class="docs-main">
                     <div class="docs-main-container">
                         <TheHeader v-bind="meta"/>

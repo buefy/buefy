@@ -461,5 +461,17 @@
             "extensions",
             "extensions/veevalidate"
         ]
+    },
+    "expo": {
+        "title": "Expo",
+        "subtitle": "See how devs are using Buefy to create beautiful websites and apps!",
+        "path": "/expo",
+        "githubPath": "pages/Expo.vue",
+        "menu": "expo",
+        "breadcrumb": [
+            "/",
+            "expo"
+        ],
+        "hideSidebar": true
     }
 }

@@ -73,6 +73,12 @@
                             class="navbar-item has-text-weight-semibold">
                             Extensions
                         </router-link>
+
+                        <router-link
+                            to="/expo"
+                            class="navbar-item has-text-weight-semibold">
+                            Expo
+                        </router-link>
                     </div>
                 </div>
             </div>

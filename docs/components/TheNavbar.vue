@@ -73,6 +73,10 @@
                         Extensions
                     </router-link>
 
+                    <router-link to="/expo" class="navbar-item">
+                        Expo
+                    </router-link>
+
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div class="navbar-link">Info</div>
 

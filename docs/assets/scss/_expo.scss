@@ -1,0 +1,17 @@
+.expo {
+    .image-has-shadow {
+        box-shadow: 0 4px 10px 0 rgba($dark, 0.25);
+        margin: 1rem;
+    }
+
+    .expo-head {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 1.5rem;
+        .expo-head-text {
+            font-weight: $weight-semibold;
+            padding-right: 1rem;
+        }
+    }
+}

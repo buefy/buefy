@@ -30,8 +30,9 @@
                     </div>
 
                     <div class="buttons">
-                        <router-link class="button is-medium home-hero"
-                                     to="/documentation/start">
+                        <router-link
+                            class="button is-medium home-hero"
+                            to="/documentation/start">
                             Get started
                         </router-link>
                         <a class="button is-medium is-primary home-hero"
@@ -48,7 +49,7 @@
         <section class="hero">
             <div class="hero-body">
                 <div class="container">
-                    <nav class="columns">
+                    <div class="columns">
                         <div class="column has-text-centered features">
                             <b-icon icon="github-circle" size="is-large"/>
                             <p class="title is-4"><strong>Free</strong></p>
@@ -72,7 +73,43 @@
                             <p class="title is-4"><strong>Lightweight</strong></p>
                             <p class="subtitle">No other internal dependency</p>
                         </div>
-                    </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero is-medium is-light">
+            <div class="hero-body">
+                <div class="container">
+                    <p class="content is-size-5 has-text-centered">
+                        Websites and apps
+                        <a @click="tweet"><strong class="has-text-link">#MadeWithBuefy</strong></a>
+                        from the <router-link to="/expo"><strong class="has-text-link">Expo page</strong></router-link>
+                    </p>
+                    <div class="columns">
+                        <div
+                            v-for="item in expo"
+                            :key="item.title"
+                            class="column has-text-centered is-one-quarter">
+
+                            <a
+                                :href="item.url"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                <img class="image-has-shadow" :src="getImg(item.img)" :alt="item.title">
+                            </a>
+
+                            <p>
+                                <a
+                                    class="has-text-weight-semibold"
+                                    :href="item.url"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    {{ item.title }}
+                                </a> <br>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -86,6 +123,7 @@
     import TheNavbar from '../components/TheNavbar'
     import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
+    import expoData from '@/data/expo'
 
     export default {
         name: 'App',
@@ -95,7 +133,25 @@
         },
         data() {
             return {
-                version: Package.version
+                version: Package.version,
+                expo: expoData.filter((item) => {
+                    return item.featured
+                })
+            }
+        },
+        methods: {
+            tweet() {
+                const width = 575
+                const height = 400
+                const left = (window.screen.width - width) / 2
+                const top = (window.screen.height - height) / 2
+                const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=My website made with Buefy!&hashtags=madewithbuefy`
+                const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
+
+                window.open(url, '', opts)
+            },
+            getImg(img) {
+                return require(`@/assets/expo/${img}`)
             }
         },
         mounted() {
