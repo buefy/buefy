@@ -59,9 +59,10 @@
                 }
             }
             const vnode = createElement('div', {
-                style: {
-                    display: this.isActive && this.visible ? '' : 'none'
-                },
+                directives: [{
+                    name: 'show',
+                    value: this.isActive && this.visible
+                }],
                 attrs: { 'class': 'tab-item' }
             }, this.$slots.default)
             // check animated prop
