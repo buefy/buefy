@@ -59,6 +59,21 @@ $switch-active-background-color: $primary !default;
                 transform: translate3d(percentage(16 / ($switch-width-number * 16)), 0, 0);
             }
         }
+        &:focus {
+            outline: none;
+            + .check {
+                box-shadow: 0 0 0.5em rgba($grey, 0.6);
+            }
+            &:checked + .check {
+                box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name} {
+                        box-shadow: 0 0 0.5em rgba($color, 0.8);
+                    }
+                }
+            }
+        }
     }
     .control-label {
         padding-left: 0.5em;
@@ -73,21 +88,6 @@ $switch-active-background-color: $primary !default;
                 $color: nth($pair, 1);
                 &.is-#{$name} {
                     background: rgba($color, 0.9);
-                }
-            }
-        }
-    }
-    &:focus {
-        outline: none;
-        input[type=checkbox] + .check {
-            box-shadow: 0 0 0.5em rgba($grey, 0.6);
-        }
-        input[type=checkbox]:checked + .check {
-            box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
-            @each $name, $pair in $colors {
-                $color: nth($pair, 1);
-                &.is-#{$name} {
-                    box-shadow: 0 0 0.5em rgba($color, 0.8);
                 }
             }
         }
