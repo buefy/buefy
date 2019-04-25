@@ -10,6 +10,7 @@
 
 ### Fixes
 
+* Fix #1320 space keydown on Firefox to checkbox and switch
 * Fix #1325 input emit to upload
 * Enable native timepicker to clockpicker when ``mobile-native``  (default ``true``)
 * Fix clockpicker docs and input size
