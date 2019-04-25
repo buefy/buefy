@@ -146,7 +146,8 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tag": {
         "title": "Tag",
@@ -376,7 +377,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
