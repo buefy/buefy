@@ -1,11 +1,17 @@
 # Buefy Changelog
 
+## 0.7.6
+
+### Fixes
+
+* Fix #1351 b-tabs is-disabled css rule
+
 ## 0.7.5
 
 * **New component: Numberinput**, [see docs](https://buefy.org/documentation/numberinput)
 * **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
 * Add ``destroy-on-hide`` prop to tabs
-* Add ``custom-detail-row`` prop to table
+* Add ``custom-detail-row`` prop to table (thanks @EvanBarbour3)
 * Add ``open-on-focus`` prop and improved accessibility for datepicker (thanks @imfaber)
 
 ### Fixes
