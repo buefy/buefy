@@ -20,7 +20,7 @@
             <b-numberinput loading></b-numberinput>
         </b-field>
 
-        <b-field label="Quantiy"
+        <b-field label="Quantity"
             type="is-danger"
             message="Quantity is invalid">
             <b-numberinput></b-numberinput>
