@@ -96,7 +96,7 @@
         },
         data() {
             return {
-                newValue: this.value || parseFloat(this.min) || 0,
+                newValue: !isNaN(this.value) ? this.value : parseFloat(this.min) || 0,
                 newStep: this.step || 1,
                 _elementRef: 'input'
             }
@@ -107,8 +107,12 @@
                     return this.newValue
                 },
                 set(value) {
-                    this.newValue = value
-                    this.$emit('input', value)
+                    let newValue = value
+                    if (value === '') {
+                        newValue = parseFloat(this.min) || 0
+                    }
+                    this.newValue = newValue
+                    this.$emit('input', newValue)
                     !this.isValid && this.checkHtml5Validity()
                 }
             },
@@ -201,7 +205,7 @@
             },
             onChange(event) {
                 const value = event.target.value
-                if (value) {
+                if (value !== '') {
                     const number = parseFloat(value)
                     if (number < this.minNumber) {
                         this.computedValue = this.minNumber
