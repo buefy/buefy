@@ -2,11 +2,13 @@
     .tabs {
         margin-bottom: 0;
         flex-shrink: 0;
-    }
-    .is-disabled {
-        pointer-events: none;
-        cursor: not-allowed;
-        opacity: 0.5;
+        li {
+            &.is-disabled {
+                pointer-events: none;
+                cursor: not-allowed;
+                opacity: 0.5;
+            }
+        }
     }
     .tab-content {
         position: relative;
