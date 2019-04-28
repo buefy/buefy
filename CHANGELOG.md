@@ -4,7 +4,8 @@
 
 ### Fixes
 
-* Fix #1351 b-tabs is-disabled css rule
+* Fix #1351 tabs is-disabled css rule
+* Fix #1352 numberinput when empty string
 
 ## 0.7.5
 
