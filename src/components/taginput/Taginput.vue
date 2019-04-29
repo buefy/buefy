@@ -293,6 +293,12 @@
                 if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
                     this.removeLastTag()
                 }
+
+                // If an enter key pressed and there's no current input, 
+                // emit an event for custom handling (e.g. submit requests)
+                if (this.newTag.length < 1 && event.keyCode === 13)
+                    this.$emit('submit', $event.trim()) 
+
                 // Stop if is to accept select only
                 if (this.autocomplete && !this.allowNew) return
 
