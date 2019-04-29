@@ -299,8 +299,8 @@
 
                     this.isListInViewportVertically = (
                         rect.top >= 0 &&
-                        rect.bottom <= (window.innerHeight ||
-                            document.documentElement.clientHeight)
+                        rect.bottom <= (document.documentElement.clientHeight ||
+                            window.innerHeight)
                     )
                 })
             },
