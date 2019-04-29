@@ -5,20 +5,22 @@
             class="field-label"
             :class="[customClass, fieldLabelSize]">
             <label
-                v-if="label"
+                v-if="label || $slots.label"
                 :for="labelFor"
                 :class="customClass"
                 class="label" >
-                {{ label }}
+                <slot v-if="$slots.label" name="label"/>
+                <template v-else>{{ label }}</template>
             </label>
         </div>
         <template v-else>
             <label
-                v-if="label"
+                v-if="label || $slots.label"
                 :for="labelFor"
                 :class="customClass"
                 class="label">
-                {{ label }}
+                <slot v-if="$slots.label" name="label"/>
+                <template v-else>{{ label }}</template>
             </label>
         </template>
         <b-field-body
