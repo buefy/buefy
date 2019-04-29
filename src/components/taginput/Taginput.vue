@@ -39,6 +39,7 @@
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
+                @submit="onSubmit"
                 @keydown.native="keydown"
                 @select="onSelect">
                 <template :slot="headerSlotName">
@@ -294,11 +295,6 @@
                     this.removeLastTag()
                 }
 
-                // If an enter key pressed and there's no current input, 
-                // emit an event for custom handling (e.g. submit requests)
-                if (this.newTag.length < 1 && event.keyCode === 13)
-                    this.$emit('submit', $event.trim()) 
-
                 // Stop if is to accept select only
                 if (this.autocomplete && !this.allowNew) return
 
@@ -310,6 +306,10 @@
 
             onTyping($event) {
                 this.$emit('typing', $event.trim())
+            },
+
+            onSubmit() {
+                this.$emit('submit')
             }
         }
     }

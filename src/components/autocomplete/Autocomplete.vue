@@ -244,7 +244,12 @@
              * Select the hovered option.
              */
             enterPressed() {
-                if (this.hovered === null) return
+                // If an enter key pressed and there's nothing hovered,
+                // emit an event for custom handling (e.g. submit requests)
+                if (this.hovered === null) {
+                    this.$emit('submit')
+                    return
+                }
                 this.setSelected(this.hovered)
             },
 
