@@ -308,8 +308,8 @@
                 this.$emit('typing', $event.trim())
             },
 
-            onSubmit() {
-                this.$emit('submit')
+            onSubmit(event) {
+                this.$emit('submit', event)
             }
         }
     }

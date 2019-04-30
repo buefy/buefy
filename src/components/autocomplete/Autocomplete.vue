@@ -243,11 +243,19 @@
              * Enter key listener.
              * Select the hovered option.
              */
-            enterPressed() {
-                // If an enter key pressed and there's nothing hovered,
+            enterPressed(event) {
+                // When auto complete is activated,
+                // if the enter key is pressed and there's nothing hovered,
                 // emit an event for custom handling (e.g. submit requests)
-                if (this.hovered === null) {
-                    this.$emit('submit')
+                if (this.newAutocomplete !== 'off' && this.hovered === null) {
+                    this.$emit('submit', event)
+                    return
+                }
+                // When auto complete is not activated,
+                // if the enter key is pressed and there's nothing in the input,
+                // emit an event for custom handling
+                if (this.newAutocomplete === 'off' && !this.newValue) {
+                    this.$emit('submit', event)
                     return
                 }
                 this.setSelected(this.hovered)
