@@ -1,5 +1,6 @@
 <template>
-    <div class="autocomplete control" :class="{'is-expanded': expanded}" ref="autocomplete_control">
+    <div class="autocomplete control" :class="{'is-expanded': expanded}" 
+        ref="autocomplete_control">
         <b-input
             v-model="newValue"
             ref="input"
