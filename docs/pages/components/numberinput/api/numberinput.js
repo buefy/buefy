@@ -10,10 +10,13 @@ export default [
             },
             {
                 name: '<code>type</code>',
-                description: 'Input type, like native',
+                description: 'Type (color) of the control, optional',
                 type: 'String',
-                values: 'Any native input type, and <code>textarea</code>',
-                default: '<code>text</code>'
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                <code>is-warning</code>, <code>is-danger</code>,
+                and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '<code>is-primary</code>'
             },
             {
                 name: '<code>size</code>',
