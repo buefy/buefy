@@ -1,7 +1,7 @@
 <template>
     <div
         class="autocomplete control"
-        :class="{ 'is-expanded': expanded }" 
+        :class="{ 'is-expanded': expanded }"
         ref="autocomplete_control">
         <b-input
             v-model="newValue"
@@ -207,8 +207,8 @@
                     this.selectFirstOption(value)
                 }
 
-                this.$nextTick(() => this.calcDropdownInViewportVertical());
-            },
+                this.$nextTick(() => this.calcDropdownInViewportVertical())
+            }
         },
         methods: {
             /**
@@ -299,7 +299,7 @@
              * Calculate if the dropdown is vertically visible when activated,
              * otherwise it is openened upwards.
              */
-            calcDropdownInViewportVertical(){
+            calcDropdownInViewportVertical() {
                  this.$nextTick(() => {
                     /**
                     * return if dropdown is inactive
@@ -392,7 +392,9 @@
                 this.$emit('typing', this.newValue)
             },
             onScroll(){
-                if(this.onScrollDirection)this.calcDropdownInViewportVertical();
+                if (this.onScrollDirection) {
+                    this.calcDropdownInViewportVertical();
+                }
             }
         },
         created() {
