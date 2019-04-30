@@ -312,16 +312,16 @@
                     if (this.$refs.dropdown === undefined) return
 
                     const rect = this.$refs.dropdown.getBoundingClientRect()
-                    const parrentRect = this.$refs.autocomplete_control.getBoundingClientRect()
+                    const parentRect = this.$refs.autocomplete_control.getBoundingClientRect()
 
                     this.isTopDirection = this.preferTop
                     /* eslint-disable */               
-                    ? parrentRect.top >= rect.height ? true : parrentRect.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
-                    : parrentRect.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
+                    ? parentRect.top >= rect.height ? true : parentRect.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
+                    : parentRect.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
 
-                    // this.isTopDirection = parrentRect.top >= rect.height*(this.topDirectionPrefer?2:1) ? true :
-                    // this.isTopDirection = parrentRect.bottom + rect.height > window.innerHeight && parrentRect.top + rect.height > window.innerHeight throw err('there no space for dropdown-menu, add more elements');
-                    // this.isTopDirection = parrentRect.bottom + rect.height <= (window.innerHeight || document.documentElement.clientHeight) ? parrentRect.top>rect.height?true:false : true;
+                    // this.isTopDirection = parentRect.top >= rect.height*(this.topDirectionPrefer?2:1) ? true :
+                    // this.isTopDirection = parentRect.bottom + rect.height > window.innerHeight && parentRect.top + rect.height > window.innerHeight throw err('there no space for dropdown-menu, add more elements');
+                    // this.isTopDirection = parentRect.bottom + rect.height <= (window.innerHeight || document.documentElement.clientHeight) ? parentRect.top>rect.height?true:false : true;
                     /* eslint-enable */
                 })
             },
