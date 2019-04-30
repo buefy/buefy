@@ -1,6 +1,8 @@
 <template>
-    <div class="autocomplete control" :class="{'is-expanded': expanded}" 
-        ref="autocomplete_control">
+    <div 
+		class="autocomplete control"
+		:class="{'is-expanded': expanded}" 
+		ref="autocomplete_control">
         <b-input
             v-model="newValue"
             ref="input"
@@ -89,7 +91,7 @@
             openOnFocus: Boolean,
             customFormatter: Function,
             onScrollDirection: Boolean,
-            onScrollDirectionPrefer: {
+            directionPrefer: {
                 type: String,
                 default: 'is-top',
                 validator: (value) => {
@@ -109,7 +111,7 @@
                 newAutocomplete: this.autocomplete || 'off',
                 isTopDirection: true,
                 hasFocus: false,
-                preferTop: this.onScrollDirectionPrefer === 'is-top' ? true : false || false
+                preferTop: this.directionPrefer === 'is-top' ? true : false || false
             }
         },
         computed: {
@@ -298,14 +300,14 @@
              */
             calcDropdownInViewportVertical(){
                  this.$nextTick(() => {
-					/**
-					* return if dropdown is inactive
-					*/
+                    /**
+                    * return if dropdown is inactive
+                    */
                     if (!this.isActive) return;
                     /**
                      * this.$refs.dropdown may be undefined
                      * when Autocomplete is conditional rendered
-                     */														   
+                     */
                     if (this.$refs.dropdown === undefined) return;
 
                     const rect = this.$refs.dropdown.getBoundingClientRect()
