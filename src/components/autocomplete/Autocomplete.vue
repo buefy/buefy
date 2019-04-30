@@ -300,30 +300,30 @@
              * otherwise it is openened upwards.
              */
             calcDropdownInViewportVertical() {
-                 this.$nextTick(() => {
+                this.$nextTick(() => {
                     /**
-                    * return if dropdown is inactive
-                    */
-                    if (!this.isActive) return;
+                     * return if dropdown is inactive
+                     */
+                    if (!this.isActive) return
                     /**
                      * this.$refs.dropdown may be undefined
                      * when Autocomplete is conditional rendered
                      */
-                    if (this.$refs.dropdown === undefined) return;
+                    if (this.$refs.dropdown === undefined) return
 
                     const rect = this.$refs.dropdown.getBoundingClientRect()
-                    const autocomplete_control = this.$refs.autocomplete_control.getBoundingClientRect();
+                    const parrentRect = this.$refs.autocomplete_control.getBoundingClientRect()
 
-                    this.isTopDirection = this.preferTop ?
-                        autocomplete_control.top >= rect.height ? true : autocomplete_control.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
-                        :
-                        autocomplete_control.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
-                    
-                    
-                    // this.isTopDirection = autocomplete_control.top >= rect.height*(this.topDirectionPrefer?2:1) ? true :
-                    // this.isTopDirection = autocomplete_control.bottom + rect.height > window.innerHeight && autocomplete_control.top + rect.height > window.innerHeight throw err('there no space for dropdown-menu, add more elements');
-                    // this.isTopDirection = autocomplete_control.bottom + rect.height <= (window.innerHeight || document.documentElement.clientHeight) ? autocomplete_control.top>rect.height?true:false : true;
-                });
+                    this.isTopDirection = this.preferTop
+                    /* eslint-disable */               
+                    ? parrentRect.top >= rect.height ? true : parrentRect.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
+                    : parrentRect.bottom + rect.height < (window.innerHeight || document.documentElement.clientHeight) ? false : true
+
+                    // this.isTopDirection = parrentRect.top >= rect.height*(this.topDirectionPrefer?2:1) ? true :
+                    // this.isTopDirection = parrentRect.bottom + rect.height > window.innerHeight && parrentRect.top + rect.height > window.innerHeight throw err('there no space for dropdown-menu, add more elements');
+                    // this.isTopDirection = parrentRect.bottom + rect.height <= (window.innerHeight || document.documentElement.clientHeight) ? parrentRect.top>rect.height?true:false : true;
+                    /* eslint-enable */
+                })
             },
 
             /**
@@ -391,16 +391,16 @@
                 if (currentValue && currentValue === this.newValue) return
                 this.$emit('typing', this.newValue)
             },
-            onScroll(){
+            onScroll() {
                 if (this.onScrollDirection) {
-                    this.calcDropdownInViewportVertical();
+                    this.calcDropdownInViewportVertical()
                 }
             }
         },
         created() {
             if (typeof window !== 'undefined') {
                 document.addEventListener('click', this.clickedOutside)
-                window.addEventListener('resize', this.calcDropdownInViewportVertical)
+                window.addEventListener('resize', this.calcropdownInViewportVertical)
                 window.addEventListener('scroll', this.onScroll)
             }
         },
