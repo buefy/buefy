@@ -6,7 +6,10 @@
         margin-bottom: 1.5rem;
     }
     @include touch {
+        // assign auto to y too
         overflow-x: auto;
+        // asign to y - visible
+        overflow: visible;
     }
 }
 
