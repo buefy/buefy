@@ -23,14 +23,14 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>canCancel</code>',
+                name: '<code>can-cancel</code>',
                 description: `Can close Loading by pressing escape or clicking outside`,
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>onCancel</code>',
+                name: '<code>on-cancel</code>',
                 description: `Callback function to call after user canceled (pressed escape / clicked outside)`,
                 type: 'Function',
                 values: '—',

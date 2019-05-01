@@ -18,7 +18,7 @@
             ref="table"
             detailed
             hoverable
-            customDetailRow
+            custom-detail-row
             :opened-detailed="['Board Games']"
             :default-sort="['name', 'asc']"
             detail-key="name"
