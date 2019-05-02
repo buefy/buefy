@@ -6,7 +6,7 @@
             v-show="isActive"
             class="snackbar"
             :class="[type,position]">
-            <p class="text">{{ message }}</p>
+            <div class="text" v-html="message"/>
             <div
                 v-if="actionText"
                 class="action"
