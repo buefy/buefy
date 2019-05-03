@@ -19,7 +19,7 @@
         },
         data() {
             return {
-                newDuration: this.duration || config.detaultNotificationDuration
+                newDuration: this.duration || config.defaultNotificationDuration
             }
         }
     }
