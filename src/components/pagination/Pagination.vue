@@ -11,7 +11,7 @@
                 icon="chevron-left"
                 :pack="iconPack"
                 both
-                aria-hidden/>
+                aria-hidden="true"/>
         </a>
         <a
             role="button"
@@ -24,7 +24,7 @@
                 icon="chevron-right"
                 :pack="iconPack"
                 both
-                aria-hidden/>
+                aria-hidden="true"/>
         </a>
         <ul class="pagination-list" v-if="!simple">
             <!--First-->
