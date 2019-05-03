@@ -53,9 +53,10 @@ export default [
             {
                 name: '<code>defaultSnackbarPosition</code>',
                 description: `Default snackbar <code>position</code> attribute.`,
-                type: 'Number',
-                values: '—',
-                default: '<code></code>'
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-bottom-right</code>'
             },
             {
                 name: '<code>defaultToastDuration</code>',
@@ -67,9 +68,25 @@ export default [
             {
                 name: '<code>defaultToastPosition</code>',
                 description: `Default toast <code>position</code> attribute.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-top</code>'
+            },
+            {
+                name: '<code>defaultNotificationDuration</code>',
+                description: `Default notification <code>duration</code> attribute.`,
                 type: 'Number',
                 values: '—',
-                default: '<code></code>'
+                default: '<code>2000</code>'
+            },
+            {
+                name: '<code>defaultNotificationPosition</code>',
+                description: `Default notification <code>position</code> attribute for programmatically opening.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-bottom-right</code>'
             },
             {
                 name: '<code>defaultTooltipType</code>',
