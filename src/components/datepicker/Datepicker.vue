@@ -99,7 +99,8 @@
 
                 <div class="datepicker-content">
                     <b-datepicker-table
-                        v-model="dateSelected"
+                        :value="dateSelected"
+                        @input="DatepickerTableChanged"
                         :day-names="dayNames"
                         :month-names="monthNames"
                         :first-day-of-week="firstDayOfWeek"
@@ -354,8 +355,8 @@
                     month: currentDate.getMonth(),
                     year: currentDate.getFullYear()
                 }
-                this.$emit('input', value)
-                this.toggle()
+                // this.$emit('input', value)
+                this.toggle(false)
             },
 
             /**
@@ -408,6 +409,7 @@
                     this.dateSelected = null
                     this.$refs.input.newValue = this.dateSelected
                 }
+                // this.$emit('input', this.dateSelected)
             },
 
             /*
@@ -435,7 +437,11 @@
                     this.focusedDateData.year -= 1
                 }
             },
-
+            DatepickerTableChanged(value) {
+                // console.log('DatepickerTableChanged')
+                // console.log(value)
+                this.$emit('input', value)
+            },
             /*
             * Either increment month by 1 if not December or increment year by 1
             * and set month to 0 (January)
@@ -473,6 +479,7 @@
             onChangeNativePicker(event) {
                 const date = event.target.value
                 this.dateSelected = date ? new Date(date.replace(/-/g, '/')) : null
+                // this.$emit('input', this.dateSelected)
             },
 
             /*
