@@ -13,9 +13,9 @@ export default [
                 description: 'Type (color) of the control, optional',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
-                <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
-                <code>is-warning</code>, <code>is-danger</code>,
-                and any other colors you've set in the <code>$colors</code> list on Sass`,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
                 default: '<code>is-primary</code>'
             },
             {
@@ -33,13 +33,6 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>password-reveal</code>',
-                description: 'Add the reveal password functionality',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
                 name: '<code>loading</code>',
                 description: 'Add the loading state to the input',
                 type: 'Boolean',
@@ -47,38 +40,45 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>icon</code>',
-                description: 'Icon name to be added',
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>icon-pack</code>',
-                description: 'Icon pack to use',
-                type: 'String',
-                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
-                default: '<code>mdi</code>'
-            },
-            {
-                name: '<code>maxlength</code>',
-                description: 'Same as native <code>maxlength</code>, plus character counter',
-                type: 'String, Number',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>has-counter</code>',
-                description: 'Show character counter when <code>maxlength</code> prop is passed',
+                name: '<code>editable</code>',
+                description: 'Editable input',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
             {
-                name: '<code>custom-class</code>',
-                description: 'CSS classes to be applied on input',
-                type: 'String',
+                name: '<code>min</code>',
+                description: 'Minimum allowed value',
+                type: 'Number, String',
                 values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>max</code>',
+                description: 'Maxinimum allowed value',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>step</code>',
+                description: 'Incremental number step',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>controls-rounded</code>',
+                description: 'Show rounded controls',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>controls-position</code>',
+                description: 'Position of controls',
+                type: 'String',
+                values: '<code>compact<compact>',
                 default: '—'
             },
             {
