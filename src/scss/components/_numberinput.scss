@@ -2,11 +2,9 @@
     &.field {
         margin-bottom: 0;
         &.is-grouped {
-            @include mobile {
-                div.control {
-                    flex-grow: 1;
-                    flex-shrink: 1;
-                }
+            div.control {
+                flex-grow: 1;
+                flex-shrink: 1;
             }
         }
     }

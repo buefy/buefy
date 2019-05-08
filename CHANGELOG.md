@@ -8,6 +8,7 @@
 
 * Fix #1351 tabs is-disabled css rule
 * Fix #1352 numberinput when empty string
+* Fix #1382 numberinput layout
 
 ## 0.7.5
 
