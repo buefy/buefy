@@ -2,6 +2,8 @@
 
 ## 0.7.6
 
+* Add ``label`` slot to field (thanks @yxngl)
+
 ### Fixes
 
 * Fix #1351 tabs is-disabled css rule
