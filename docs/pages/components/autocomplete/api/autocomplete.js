@@ -24,7 +24,7 @@ export default [
             },
             {
                 name: '<code>custom-formatter</code>',
-                description: 'Function to format date to a string for display in the input as alternative to <code>field</code> prop)',
+                description: 'Function to format an option to a string for display in the input as alternative to <code>field</code> prop)',
                 type: 'Function',
                 values: '—',
                 default: ''
