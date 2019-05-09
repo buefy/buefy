@@ -11,6 +11,7 @@
             :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
+            @change="onChange"
             @blur="onBlur"
             @focus="onFocus">
 
@@ -23,6 +24,7 @@
             :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
+            @change="onChange"
             @blur="onBlur"
             @focus="onFocus"/>
 
@@ -208,6 +210,9 @@
                         this.computedValue = event.target.value
                     }
                 })
+            },
+            onChange(event) {
+                this.$emit('change')
             }
         }
     }
