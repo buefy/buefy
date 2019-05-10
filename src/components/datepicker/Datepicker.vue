@@ -501,7 +501,7 @@
              */
             keyPress(event) {
                 // Esc key
-                if (this.$refs.dropdown.isActive && event.keyCode === 27) {
+                if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                     this.toggle(false)
                 }
             }
