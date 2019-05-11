@@ -55,6 +55,11 @@
                         class="dropdown-item is-disabled">
                         <slot name="empty"/>
                     </div>
+                    <div
+                        v-if="hasFooterSlot"
+                        class="dropdown-item">
+                        <slot name="footer"/>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -140,6 +145,13 @@
              */
             hasHeaderSlot() {
                 return !!this.$slots.header
+            },
+
+            /**
+             * Check if exists "footer" slot
+             */
+            hasFooterSlot() {
+                return !!this.$slots.footer
             }
         },
         watch: {
