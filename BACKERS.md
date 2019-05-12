@@ -7,3 +7,4 @@ You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtomm
 - [Prine Software Engineering](https://www.patreon.com/user/creators?u=18435748)
 - [Daniele Luchi](https://www.patreon.com/user/creators?u=17495343)
 - [Jonas Dehairs](https://www.patreon.com/user/creators?u=132517333)
+- [alcalbg](https://www.patreon.com/alcalbg)
