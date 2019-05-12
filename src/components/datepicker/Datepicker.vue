@@ -466,7 +466,7 @@
             */
             onChangeNativePicker(event) {
                 const date = event.target.value
-                this.dateSelected = date ? new Date(date.replace(/-/g, '/')) : null
+                this.computedValue = date ? new Date(date.replace(/-/g, '/')) : null
             },
 
             /*
