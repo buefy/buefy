@@ -115,6 +115,11 @@ export default [
                 name: '<code>header</code>',
                 description: 'Show a custom header as first option',
                 props: '—'
+            },
+            {
+                name: '<code>footer</code>',
+                description: 'Show a custom footer as last option',
+                props: '—'
             }
         ],
         events: [
