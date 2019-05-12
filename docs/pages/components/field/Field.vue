@@ -74,6 +74,10 @@
         </Example>
 
         <Example :component="ExLabelSlot" :code="ExLabelSlotCode" title="Label slot">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.6</span>
+            </div>
             <p>Use the <code>label</code> slot for complex labels with HTML content or components. Note it overrides the <code>label</code> prop.</p>
         </Example>
 

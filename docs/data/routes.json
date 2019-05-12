@@ -219,8 +219,7 @@
             "/",
             "documentation",
             "documentation/loading"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/field": {
         "title": "Field",
@@ -232,7 +231,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/input": {
         "title": "Input",
@@ -268,7 +268,8 @@
             "/",
             "documentation",
             "documentation/autocomplete"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -340,8 +341,7 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -377,8 +377,7 @@
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -415,7 +414,7 @@
             "documentation",
             "documentation/numberinput"
         ],
-        "isNew": true
+        "isUpdated": true
     },
     "extensions": {
         "title": "Extensions",
