@@ -3,6 +3,7 @@
 ## 0.7.6
 
 * Add ``label`` slot to field (thanks @yxngl)
+* Add ``footer`` slot to autocomplete (thanks @LeoMouyna)
 
 ### Fixes
 

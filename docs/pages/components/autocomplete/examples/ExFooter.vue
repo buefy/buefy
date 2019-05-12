@@ -8,7 +8,7 @@
                 :data="filteredDataArray"
                 placeholder="e.g. Orange"
                 @select="option => selected = option">
-                <template slot="header">
+                <template slot="footer">
                     <a @click="showAddFruit">
                         <span> Add new... </span>
                     </a> 
