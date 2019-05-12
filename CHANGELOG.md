@@ -7,6 +7,7 @@
 
 ### Fixes
 
+* Fix #1347, #1361 datepicker v-model and initial toggle
 * Fix #1351 tabs is-disabled css rule
 * Fix #1352 numberinput when empty string
 * Fix #1382 numberinput layout
