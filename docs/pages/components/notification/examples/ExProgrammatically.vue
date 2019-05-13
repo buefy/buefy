@@ -30,7 +30,7 @@
                 this.$notification.open({
                     duration: 5000,
                     message: `Something's not good, also I'm on bottom`,
-                    position: 'is-top-right',
+                    position: 'is-bottom-right',
                     type: 'is-danger',
                     hasIcon: true
                 })
