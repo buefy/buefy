@@ -27,6 +27,7 @@ $radio-active-background-color: $primary !default;
                 transition: background $speed-slow $easing;
                 &:before {
                     content: "";
+                    display: flex;
                     border-radius: 50%;
                     width: 0.625em;
                     height: 0.625em;
