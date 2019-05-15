@@ -66,7 +66,8 @@
             animation: {
                 type: String,
                 default: 'fade'
-            }
+            },
+            multiple: Boolean
         },
         data() {
             return {
@@ -115,11 +116,25 @@
              *   3. Close the dropdown.
              */
             selectItem(value) {
-                if (this.selected !== value) {
-                    this.$emit('change', value)
-                    this.selected = value
+                if (this.multiple) {
+                    if (this.selected) {
+                        const index = this.selected.indexOf(value)
+                        if (index === -1) {
+                            this.selected.push(value)
+                        } else {
+                            this.selected.splice(index, 1)
+                        }
+                    } else {
+                        this.selected = [value]
+                    }
+                    this.$emit('change', this.selected)
+                } else {
+                    if (this.selected !== value) {
+                        this.selected = value
+                        this.$emit('change', this.selected)
+                    }
                 }
-                this.$emit('input', value)
+                this.$emit('input', this.selected)
                 this.isActive = false
             },
 

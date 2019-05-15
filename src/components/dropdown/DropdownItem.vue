@@ -42,7 +42,7 @@
                 return {
                     'is-disabled': this.$parent.disabled || this.disabled,
                     'is-paddingless': this.paddingless,
-                    'is-active': this.value !== null && this.value === this.$parent.selected
+                    'is-active': this.isActive
                 }
             },
             itemClasses() {
@@ -50,7 +50,7 @@
                     'dropdown-item': !this.hasLink,
                     'is-disabled': this.disabled,
                     'is-paddingless': this.paddingless,
-                    'is-active': this.value !== null && this.value === this.$parent.selected,
+                    'is-active': this.isActive,
                     'has-link': this.hasLink
                 }
             },
@@ -62,6 +62,11 @@
              */
             isClickable() {
                 return !this.$parent.disabled && !this.separator && !this.disabled && !this.custom
+            },
+            isActive() {
+                if (this.$parent.selected === null) return false
+                if (this.$parent.multiple) return this.$parent.selected.indexOf(this.value) >= 0
+                return this.value === this.$parent.selected
             }
         },
         methods: {
