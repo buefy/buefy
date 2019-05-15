@@ -72,6 +72,11 @@ export declare type DialogConfig = {
      * to avoid shifting background, but will set <code>&lt;body&gt;</code> to position fixed, might break some layouts
      */
     scroll?: 'clip' | 'keep';
+
+    /**
+     * Focus on confirm or cancel button (when dialog is not prompt)
+     */
+    focusOn?: 'confirm' | 'cancel';
 }
 
 type PromptDialogConfig = DialogConfig & {
