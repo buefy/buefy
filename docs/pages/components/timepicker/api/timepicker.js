@@ -114,6 +114,13 @@ export default [
                 default: 'Bottom right'
             },
             {
+                name: '<code>open-on-focus</code>',
+                description: 'Open timepicker on input focus',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

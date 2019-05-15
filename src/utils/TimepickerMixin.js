@@ -48,7 +48,8 @@ export default {
             }
         },
         position: String,
-        unselectableTimes: Array
+        unselectableTimes: Array,
+        openOnFocus: Boolean
     },
     data() {
         return {
@@ -64,6 +65,15 @@ export default {
         }
     },
     computed: {
+        computedValue: {
+            get() {
+                return this.dateSelected
+            },
+            set(value) {
+                this.dateSelected = value
+                this.$emit('input', value)
+            }
+        },
         hours() {
             const hours = []
             const numberOfHours = this.isHourFormat24 ? 24 : 12
@@ -114,30 +124,23 @@ export default {
         }
     },
     watch: {
-
-        hourFormat(value) {
+        hourFormat() {
             if (this.hoursSelected !== null) {
                 this.meridienSelected = this.hoursSelected >= 12 ? PM : AM
             }
         },
-
-        /**
-        * Emit input event with selected date as payload.
-        */
-        dateSelected(value) {
-            this.$emit('input', value)
-        },
-
         /**
          * When v-model is changed:
          *   1. Update internal value.
          *   2. If it's invalid, validate again.
          */
-        value(value) {
-            this.updateInternalState(value)
-            this.dateSelected = value
-
-            !this.isValid && this.$refs.input.checkHtml5Validity()
+        value: {
+            handler(value) {
+                this.updateInternalState(value)
+                this.toggle(false)
+                !this.isValid && this.$refs.input.checkHtml5Validity()
+            },
+            immediate: true
         }
     },
     methods: {
@@ -193,6 +196,7 @@ export default {
                 this.minutesSelected = null
                 this.meridienSelected = AM
             }
+            this.dateSelected = value
         },
 
         isHourDisabled(hour) {
@@ -265,20 +269,32 @@ export default {
             const date = this.parseTime(value)
             this.updateInternalState(date)
             if (date && !isNaN(date)) {
-                this.dateSelected = date
+                this.computedValue = date
             } else {
                 // Force refresh input value when not valid date
-                this.dateSelected = null
-                this.$refs.input.newValue = this.dateSelected
+                this.computedValue = null
+                this.$refs.input.newValue = this.computedValue
             }
         },
 
         /*
-        * Close dropdown time picker
+        * Toggle timepicker
         */
-        close() {
+        toggle(active) {
             if (this.$refs.dropdown) {
-                this.$refs.dropdown.isActive = false
+                this.$refs.dropdown.isActive = typeof active === 'boolean'
+                    ? active
+                    : !this.$refs.dropdown.isActive
+            }
+        },
+
+        /*
+        * Call default onFocus method and show timepicker
+        */
+        handleOnFocus() {
+            this.onFocus()
+            if (this.openOnFocus) {
+                this.toggle(true)
             }
         },
 
@@ -303,17 +319,17 @@ export default {
             const date = event.target.value
             if (date) {
                 if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    this.dateSelected = new Date(this.dateSelected)
+                    this.computedValue = new Date(this.dateSelected)
                 } else {
-                    this.dateSelected = new Date()
-                    this.dateSelected.setMilliseconds(0)
-                    this.dateSelected.setSeconds(0)
+                    this.computedValue = new Date()
+                    this.computedValue.setMilliseconds(0)
+                    this.computedValue.setSeconds(0)
                 }
                 const time = date.split(':')
-                this.dateSelected.setHours(parseInt(time[0], 10))
-                this.dateSelected.setMinutes(parseInt(time[1], 10))
+                this.computedValue.setHours(parseInt(time[0], 10))
+                this.computedValue.setMinutes(parseInt(time[1], 10))
             } else {
-                this.dateSelected = null
+                this.computedValue = null
             }
         },
 
@@ -402,9 +418,25 @@ export default {
                 return d
             }
             return null
+        },
+        /**
+         * Keypress event that is bound to the document.
+         */
+        keyPress(event) {
+            // Esc key
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+                this.toggle(false)
+            }
         }
     },
-    mounted() {
-        this.updateInternalState(this.value)
+    created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
 }

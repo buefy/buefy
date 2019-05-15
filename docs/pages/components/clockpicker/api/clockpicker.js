@@ -131,6 +131,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>open-on-focus</code>',
+                description: 'Open clockpicker on input focus',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
