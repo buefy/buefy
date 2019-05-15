@@ -4,6 +4,7 @@
 
 * Add ``label`` slot to field (thanks @yxngl)
 * Add ``footer`` slot to autocomplete (thanks @LeoMouyna)
+* Add ``open-on-focus`` prop and improved accessibility for timepicker and clockpicker
 
 ### Fixes
 
@@ -11,6 +12,7 @@
 * Fix #1351 tabs is-disabled css rule
 * Fix #1352 numberinput when empty string
 * Fix #1382 numberinput layout
+* Fix #1402 radio button on IE11 (thanks @timEulitz)
 
 ## 0.7.5
 
