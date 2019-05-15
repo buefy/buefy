@@ -307,14 +307,9 @@
                     return this.dateSelected
                 },
                 set(value) {
-                    const currentDate = !value ? this.dateCreator() : value
-                    this.focusedDateData = {
-                        month: currentDate.getMonth(),
-                        year: currentDate.getFullYear()
-                    }
-                    this.dateSelected = currentDate
-                    this.$emit('input', value)
+                    this.updateInternalState(value)
                     this.toggle(false)
+                    this.$emit('input', value)
                 }
             },
             /*
@@ -365,7 +360,7 @@
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                this.dateSelected = value
+                this.updateInternalState(value)
                 this.toggle(false)
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
@@ -467,6 +462,15 @@
             onChangeNativePicker(event) {
                 const date = event.target.value
                 this.computedValue = date ? new Date(date.replace(/-/g, '/')) : null
+            },
+
+            updateInternalState(value) {
+                const currentDate = !value ? this.dateCreator() : value
+                this.focusedDateData = {
+                    month: currentDate.getMonth(),
+                    year: currentDate.getFullYear()
+                }
+                this.dateSelected = value
             },
 
             /*
