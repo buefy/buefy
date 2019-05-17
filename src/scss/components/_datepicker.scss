@@ -4,6 +4,12 @@
     .dropdown-trigger {
         width: 100%;
     }
+    .dropdown-menu {
+	left: initial !important;
+	top: initial !important;
+	position:fixed;
+	padding-top: 40px !important;
+    }
     .dropdown-item {
         font-size: inherit;
     }
