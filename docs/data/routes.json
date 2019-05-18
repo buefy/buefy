@@ -402,7 +402,8 @@
             "/",
             "documentation",
             "documentation/button"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/numberinput": {
         "title": "Numberinput",

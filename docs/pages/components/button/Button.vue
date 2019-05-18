@@ -10,6 +10,13 @@
 
         <Example :component="ExTags" :code="ExTagsCode" title="Tags" vertical/>
 
+        <Example :component="ExRouter" :code="ExRouterCode" title="Router" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.6</span>
+            </div>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -32,6 +39,9 @@
     import ExTags from './examples/ExTags'
     import ExTagsCode from '!!raw-loader!./examples/ExTags'
 
+    import ExRouter from './examples/ExRouter'
+    import ExRouterCode from '!!raw-loader!./examples/ExRouter'
+
     export default {
         data() {
             return {
@@ -41,11 +51,13 @@
                 ExIcons,
                 ExSizes,
                 ExTags,
+                ExRouter,
                 ExSimpleCode,
                 ExTypesStatesCode,
                 ExIconsCode,
                 ExSizesCode,
-                ExTagsCode
+                ExTagsCode,
+                ExRouterCode
             }
         }
     }

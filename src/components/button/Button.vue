@@ -2,6 +2,7 @@
     <component
         :is="tag"
         class="button"
+        v-bind="$attrs"
         :type="nativeType"
         :class="[size, type, {
             'is-rounded': rounded,
@@ -75,7 +76,8 @@
                     return [
                         'button',
                         'a',
-                        'input'
+                        'input',
+                        'router-link'
                     ].indexOf(value) >= 0
                 }
             }
