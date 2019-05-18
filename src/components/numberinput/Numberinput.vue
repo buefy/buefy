@@ -22,6 +22,7 @@
 
         <b-input
             type="number"
+            ref="input"
             v-model.number="computedValue"
             v-bind="$attrs"
             :step="newStep"
@@ -113,7 +114,7 @@
                     }
                     this.newValue = newValue
                     this.$emit('input', newValue)
-                    !this.isValid && this.checkHtml5Validity()
+                    this.$refs.input.checkHtml5Validity()
                 }
             },
             fieldClasses() {
@@ -202,17 +203,6 @@
                 }
                 clearInterval(this._$intervalRef)
                 this._$intervalRef = null
-            },
-            onChange(event) {
-                const value = event.target.value
-                if (value !== '') {
-                    const number = parseFloat(value)
-                    if (number < this.minNumber) {
-                        this.computedValue = this.minNumber
-                    } else if (number > this.maxNumber) {
-                        this.computedValue = this.maxNumber
-                    }
-                }
             }
         }
     }
