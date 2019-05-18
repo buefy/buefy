@@ -5,11 +5,13 @@
 * Add ``label`` slot to field (thanks @yxngl)
 * Add ``footer`` slot to autocomplete (thanks @LeoMouyna)
 * Add ``open-on-focus`` prop and improved accessibility for timepicker and clockpicker
+* Add ``multiple`` prop to dropdown
 
 ### Fixes
 
+* Fix #817 radio button off-center issue
 * Fix #1347, #1361 datepicker v-model and initial toggle
-* Fix #1351 tabs is-disabled css rule
+* Fix #1351 tabs `is-disabled` css rule
 * Fix #1352 numberinput when empty string
 * Fix #1382 numberinput layout
 * Fix #1390 missing prop to dialog type
