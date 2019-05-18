@@ -318,7 +318,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -330,7 +331,8 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -342,7 +344,8 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/taginput": {
         "title": "Taginput",
