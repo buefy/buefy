@@ -86,11 +86,5 @@
         "date": "2019-04-24",
         "img": "prevue.png",
         "url": "https://pre-vue.herokuapp.com"
-    },
-    {
-        "title": "Marvel Match",
-        "date": "2019-05-02",
-        "img": "marvelmatch.png",
-        "url": "https://marvelmatch.com"
     }
 ]
