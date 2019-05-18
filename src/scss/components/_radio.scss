@@ -1,4 +1,5 @@
 $radio-active-background-color: $primary !default;
+$radio-size: 1.25em !default;
 
 .b-radio {
     &.radio {
@@ -17,23 +18,28 @@ $radio-active-background-color: $primary !default;
             z-index: -1;
             + .check {
                 display: flex;
-                align-items: center;
-                justify-content: center;
                 flex-shrink: 0;
-                width: 1.25em;
-                height: 1.25em;
-                border: 2px solid $grey;
-                border-radius: 50%;
+                position: relative;
+                cursor: pointer;
+                width: $radio-size;
+                height: $radio-size;
                 transition: background $speed-slow $easing;
+                border-radius: 50%;
+                border: 2px solid $grey;
                 &:before {
                     content: "";
                     display: flex;
-                    border-radius: 50%;
-                    width: 0.625em;
-                    height: 0.625em;
-                    background: $radio-active-background-color;
-                    transform: scale(0);
+                    position: absolute;
+                    left: 50%;
+                    margin-left: calc(-#{$radio-size}/2);
+                    bottom: 50%;
+                    margin-bottom: calc(-#{$radio-size}/2);
+                    width: $radio-size;
+                    height: $radio-size;
                     transition: transform $speed-slow $easing;
+                    border-radius: 50%;
+                    transform: scale(0);
+                    background-color: $radio-active-background-color;
                 }
                 @each $name, $pair in $colors {
                     $color: nth($pair, 1);
@@ -51,7 +57,7 @@ $radio-active-background-color: $primary !default;
                     }
                 }
                 &:before {
-                    transform: scale(1);
+                    transform: scale(.5);
                 }
             }
         }
