@@ -57,6 +57,13 @@ export default [
                 type: 'String',
                 values: '<code>list</code>, <code>menu</code>',
                 default: '—'
+            },
+            {
+                name: '<code>multiple</code>',
+                description: 'Allows multiple selections',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
