@@ -85,7 +85,7 @@
                             :min="minFaceValue"
                             :max="maxFaceValue"
                             :face-numbers="isSelectingHour ? hours : minutes"
-                            :disabled-values="faceDisabledValues()"
+                            :disabled-values="faceDisabledValues"
                             :double="isSelectingHour && isHourFormat24"
                             :value="isSelectingHour ? hoursSelected : minutesSelected"
                             @input="onClockInput"
@@ -208,6 +208,9 @@
             },
             faceSize() {
                 return this.pickerSize - (outerPadding * 2)
+            },
+            faceDisabledValues() {
+                return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
             }
         },
         methods: {
@@ -230,13 +233,7 @@
                     this.meridienSelected = value
                     this.onMeridienChange(value)
                 }
-            },
-            faceDisabledValues() {
-                return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
             }
-        },
-        created() {
-            this.incrementMinutes = 5
         }
     }
 </script>
