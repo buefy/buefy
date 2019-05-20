@@ -174,15 +174,15 @@ export default {
         updateDateSelected(hours, minutes, meridiens) {
             if (hours != null && minutes != null &&
                 ((!this.isHourFormat24 && meridiens !== null) || this.isHourFormat24)) {
-                if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    this.dateSelected = new Date(this.dateSelected)
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    this.computedValue = new Date(this.computedValue)
                 } else {
-                    this.dateSelected = new Date()
-                    this.dateSelected.setMilliseconds(0)
-                    this.dateSelected.setSeconds(0)
+                    this.computedValue = new Date()
+                    this.computedValue.setMilliseconds(0)
+                    this.computedValue.setSeconds(0)
                 }
-                this.dateSelected.setHours(hours)
-                this.dateSelected.setMinutes(minutes)
+                this.computedValue.setHours(hours)
+                this.computedValue.setMinutes(minutes)
             }
         },
 
@@ -318,8 +318,8 @@ export default {
         onChangeNativePicker(event) {
             const date = event.target.value
             if (date) {
-                if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    this.computedValue = new Date(this.dateSelected)
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    this.computedValue = new Date(this.computedValue)
                 } else {
                     this.computedValue = new Date()
                     this.computedValue.setMilliseconds(0)
@@ -399,8 +399,8 @@ export default {
                     return null
                 }
                 let d = null
-                if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    d = new Date(this.dateSelected)
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    d = new Date(this.computedValue)
                 } else {
                     d = new Date()
                     d.setMilliseconds(0)
