@@ -2,6 +2,18 @@
 
 ## 0.7.6
 
+### New features
+
+* **Update Bulma to 0.7.5**
+
+### Fixes
+
+* Fix #1418 timepicker and clockpicker `input` event emit
+
+## 0.7.6
+
+### New features
+
 * Add ``label`` slot to field (thanks @yxngl)
 * Add ``footer`` slot to autocomplete (thanks @LeoMouyna)
 * Add ``open-on-focus`` prop and improved accessibility for timepicker and clockpicker
@@ -18,6 +30,8 @@
 * Fix #1402 radio button on IE11 (thanks @timEulitz)
 
 ## 0.7.5
+
+### New features
 
 * **New component: Numberinput**, [see docs](https://buefy.org/documentation/numberinput)
 * **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
