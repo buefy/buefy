@@ -83,7 +83,7 @@
             ref="input"
             type="time"
             autocomplete="off"
-            :value="formatHHMMSS(value)"
+            :value="formatHHMMSS(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"

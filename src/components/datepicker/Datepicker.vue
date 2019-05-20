@@ -129,7 +129,7 @@
             ref="input"
             type="date"
             autocomplete="off"
-            :value="formatYYYYMMDD(value)"
+            :value="formatYYYYMMDD(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
