@@ -137,7 +137,6 @@ export default {
         value: {
             handler(value) {
                 this.updateInternalState(value)
-                this.toggle(false)
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
             immediate: true
@@ -286,6 +285,13 @@ export default {
                     ? active
                     : !this.$refs.dropdown.isActive
             }
+        },
+
+        /*
+        * Close timepicker
+        */
+        close() {
+            this.toggle(false)
         },
 
         /*
