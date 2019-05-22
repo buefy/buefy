@@ -6,7 +6,7 @@
         @include overlay;
         position: fixed;
         background-color: rgba($black, 0.86);
-        z-index: 10;
+        z-index: 40;
         cursor: pointer;
         @include desktop {
             display: none;
@@ -89,6 +89,7 @@
                 transform: translate3d(-50%, -25%, 0);
                 white-space: normal;
                 overflow-y: auto;
+                z-index: 50;
                 .dropdown-item {
                     padding: 1rem 1.5rem;
                 }
