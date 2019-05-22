@@ -20,10 +20,12 @@
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox
-                                :value="isAllChecked"
-                                :disabled="isAllUncheckable"
-                                @change.native="checkAll"/>
+                            <template v-if="headerCheckable">
+                                <b-checkbox
+                                    :value="isAllChecked"
+                                    :disabled="isAllUncheckable"
+                                    @change.native="checkAll"/>
+                            </template>
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
@@ -223,6 +225,10 @@
             loading: Boolean,
             detailed: Boolean,
             checkable: Boolean,
+            headerCheckable: {
+                type: Boolean,
+                default: true
+            },
             selected: Object,
             focusable: Boolean,
             customIsChecked: Function,

@@ -5,10 +5,12 @@
 ### New features
 
 * **Update Bulma to 0.7.5**
+* Add ``headerCheckable`` prop to table
 * #1424 Prevent close on click when ``multiple`` dropdown
 
 ### Fixes
 
+* Fix #1150 dropdown z-index on mobile
 * Fix #1418 timepicker and clockpicker `input` event emit
 
 ## 0.7.6

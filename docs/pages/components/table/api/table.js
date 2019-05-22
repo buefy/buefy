@@ -87,6 +87,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>header-checkable</code>',
+                description: 'Show check/uncheck all checkbox in table header when <code>checkable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>mobile-cards</code>',
                 description: 'Rows appears as cards on mobile (collapse rows)',
                 type: 'Boolean',
