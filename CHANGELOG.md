@@ -5,7 +5,7 @@
 ### New features
 
 * **Update Bulma to 0.7.5**
-* Add ``headerCheckable`` prop to table
+* Add ``header-checkable`` prop to table
 * #1424 Prevent close on click when ``multiple`` dropdown
 
 ### Fixes

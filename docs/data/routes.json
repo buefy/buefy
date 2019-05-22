@@ -147,8 +147,7 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tag": {
         "title": "Tag",
@@ -232,8 +231,7 @@
             "/",
             "documentation",
             "documentation/field"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/input": {
         "title": "Input",
@@ -269,8 +267,7 @@
             "/",
             "documentation",
             "documentation/autocomplete"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -318,8 +315,7 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -331,8 +327,7 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -344,8 +339,7 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -381,7 +375,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -405,8 +400,7 @@
             "/",
             "documentation",
             "documentation/button"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/numberinput": {
         "title": "Numberinput",
@@ -418,8 +412,7 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ],
-        "isUpdated": true
+        ]
     },
     "extensions": {
         "title": "Extensions",
