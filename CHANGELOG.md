@@ -5,6 +5,7 @@
 ### New features
 
 * **Update Bulma to 0.7.5**
+* #1424 Prevent close on click when ``multiple`` dropdown
 
 ### Fixes
 

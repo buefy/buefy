@@ -135,7 +135,9 @@
                     }
                 }
                 this.$emit('input', this.selected)
-                this.isActive = false
+                if (!this.multiple) {
+                    this.isActive = false
+                }
             },
 
             /**
