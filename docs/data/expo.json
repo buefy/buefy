@@ -1,5 +1,36 @@
 [
     {
+        "title": "Marvel Match",
+        "date": "2019-05-24",
+        "img": "marvelmatch.png",
+        "url": "https://marvelmatch.com"
+    },
+    {
+        "title": "FOE Tools",
+        "date": "2019-05-24",
+        "img": "foe-tools.png",
+        "url": "https://foe-tools.github.io"
+    },
+    {
+        "title": "Brand Finance",
+        "date": "2019-05-24",
+        "img": "brandirectory.png",
+        "url": "https://brandirectory.com"
+    },
+    {
+        "title": "Repo Remover",
+        "date": "2019-05-24",
+        "img": "reporemover.png",
+        "url": "https://reporemover.xyz",
+        "featured": true
+    },
+    {
+        "title": "Nest&Cut",
+        "date": "2019-05-22",
+        "img": "nestandcut.png",
+        "url": "https://nestandcut.com"
+    },
+    {
         "title": "Openbook",
         "date": "2019-04-24",
         "img": "openbook.png",
@@ -16,8 +47,7 @@
         "title": "Switchblade",
         "date": "2019-04-24",
         "img": "switchblade.png",
-        "url": "https://switchblade.xyz",
-        "featured": true
+        "url": "https://switchblade.xyz"
     },
     {
         "title": "Moonlight",
@@ -86,11 +116,5 @@
         "date": "2019-04-24",
         "img": "prevue.png",
         "url": "https://pre-vue.herokuapp.com"
-    },
-    {
-        "title": "Nest&Cut",
-        "date": "2019-05-22",
-        "img": "nestandcut.png",
-        "url": "https://nestandcut.com"
     }
 ]
