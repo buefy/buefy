@@ -13,6 +13,15 @@
         </b-field>
 
         <b-field>
+            <b-input placeholder="User handle (custom validation for only lowercase)"
+              type="text"
+              required
+              validation-message="Only lowercase is allowed"
+              pattern="[a-z]*">
+            </b-input>
+        </b-field>
+
+        <b-field>
             <b-input placeholder="URL" type="url"></b-input>
         </b-field>
 
