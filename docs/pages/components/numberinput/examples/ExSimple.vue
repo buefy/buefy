@@ -13,7 +13,7 @@
         </b-field>
 
         <b-field label="Rounded">
-            <b-numberinput rounded></b-numberinput>
+            <b-numberinput controls-rounded></b-numberinput>
         </b-field>
 
         <b-field label="Loading">
