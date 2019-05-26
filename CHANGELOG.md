@@ -16,6 +16,7 @@
 * Fix #1150 dropdown z-index on mobile
 * Fix #1418 timepicker and clockpicker `input` event emit
 * Fix #1429 datepicker and timepicker exclusive opening
+* Fix #1433 timepicker default formatter and parser
 
 ## 0.7.6
 

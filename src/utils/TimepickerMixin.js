@@ -7,6 +7,59 @@ const PM = 'PM'
 const HOUR_FORMAT_24 = '24'
 const HOUR_FORMAT_12 = '12'
 
+const defaultTimeFormatter = (date, vm) => {
+    let hours = date.getHours()
+    const minutes = date.getMinutes()
+    let period = ''
+    if (vm.hourFormat === HOUR_FORMAT_12) {
+        period = ' ' + (hours < 12 ? AM : PM)
+        if (hours > 12) {
+            hours -= 12
+        } else if (hours === 0) {
+            hours = 12
+        }
+    }
+    return vm.pad(hours) + ':' + vm.pad(minutes) + period
+}
+
+const defaultTimeParser = (timeString, vm) => {
+    if (timeString) {
+        let am = false
+        if (vm.hourFormat === HOUR_FORMAT_12) {
+            const dateString12 = timeString.split(' ')
+            timeString = dateString12[0]
+            am = dateString12[1] === AM
+        }
+        const time = timeString.split(':')
+        let hours = parseInt(time[0], 10)
+        const minutes = parseInt(time[1], 10)
+        if (isNaN(hours) || hours < 0 || hours > 23 ||
+            (vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
+            isNaN(minutes) || minutes < 0 || minutes > 59) {
+            return null
+        }
+        let d = null
+        if (vm.computedValue && !isNaN(vm.computedValue)) {
+            d = new Date(vm.computedValue)
+        } else {
+            d = new Date()
+            d.setMilliseconds(0)
+            d.setSeconds(0)
+        }
+        d.setMinutes(minutes)
+        if (this.hourFormat === HOUR_FORMAT_12) {
+            if (am && hours === 12) {
+                hours = 0
+            } else if (!am && hours !== 12) {
+                hours += 12
+            }
+        }
+        d.setHours(hours)
+        return d
+    }
+    return null
+}
+
 export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
@@ -31,14 +84,22 @@ export default {
         },
         timeFormatter: {
             type: Function,
-            default: (date) => {
-                this.formatTime(date)
+            default: (date, vm) => {
+                if (typeof config.defaultTimeFormatter === 'function') {
+                    return config.defaultTimeFormatter(date)
+                } else {
+                    return defaultTimeFormatter(date, vm)
+                }
             }
         },
         timeParser: {
             type: Function,
-            default: (date) => {
-                this.parseTime(date)
+            default: (date, vm) => {
+                if (typeof config.defaultTimeParser === 'function') {
+                    return config.defaultTimeParser(date)
+                } else {
+                    return defaultTimeParser(date, vm)
+                }
             }
         },
         mobileNative: {
@@ -265,7 +326,7 @@ export default {
         * Parse string into date
         */
         onChange(value) {
-            const date = this.parseTime(value)
+            const date = this.timeParser(value, this)
             this.updateInternalState(date)
             if (date && !isNaN(date)) {
                 this.computedValue = date
@@ -354,76 +415,10 @@ export default {
         */
         formatValue(date) {
             if (date && !isNaN(date)) {
-                return this.formatTime(date)
+                return this.timeFormatter(date, this)
             } else {
                 return null
             }
-        },
-
-        formatTime(date) {
-            if (typeof config.defaultTimeFormatter === 'function') {
-                return config.defaultTimeFormatter(date)
-            } else {
-                return this.defaultTimeFormatter(date)
-            }
-        },
-        parseTime(date) {
-            if (typeof config.defaultTimeParser === 'function') {
-                return config.defaultTimeParser(date)
-            } else {
-                return this.defaultTimeParser(date)
-            }
-        },
-        defaultTimeFormatter(date) {
-            let hours = date.getHours()
-            const minutes = date.getMinutes()
-            let period = ''
-            if (this.hourFormat === HOUR_FORMAT_12) {
-                period = ' ' + (hours < 12 ? AM : PM)
-                if (hours > 12) {
-                    hours -= 12
-                } else if (hours === 0) {
-                    hours = 12
-                }
-            }
-            return this.pad(hours) + ':' + this.pad(minutes) + period
-        },
-        defaultTimeParser(timeString) {
-            if (timeString) {
-                let am = false
-                if (this.hourFormat === HOUR_FORMAT_12) {
-                    const dateString12 = timeString.split(' ')
-                    timeString = dateString12[0]
-                    am = dateString12[1] === AM
-                }
-                const time = timeString.split(':')
-                let hours = parseInt(time[0], 10)
-                const minutes = parseInt(time[1], 10)
-                if (isNaN(hours) || hours < 0 || hours > 23 ||
-                    (this.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
-                    isNaN(minutes) || minutes < 0 || minutes > 59) {
-                    return null
-                }
-                let d = null
-                if (this.computedValue && !isNaN(this.computedValue)) {
-                    d = new Date(this.computedValue)
-                } else {
-                    d = new Date()
-                    d.setMilliseconds(0)
-                    d.setSeconds(0)
-                }
-                d.setMinutes(minutes)
-                if (this.hourFormat === HOUR_FORMAT_12) {
-                    if (am && hours === 12) {
-                        hours = 0
-                    } else if (!am && hours !== 12) {
-                        hours += 12
-                    }
-                }
-                d.setHours(hours)
-                return d
-            }
-            return null
         },
         /**
          * Keypress event that is bound to the document.
