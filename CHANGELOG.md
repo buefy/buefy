@@ -6,12 +6,16 @@
 
 * **Update Bulma to 0.7.5**
 * Add ``header-checkable`` prop to table
+* Add ``toggle`` method to datepicker
+* Add ``defaultDropdownMobileModal`` constructor option
+* Add ``validation-message`` prop to input (thanks @jankeesvw)
 * #1424 Prevent close on click when ``multiple`` dropdown
 
 ### Fixes
 
 * Fix #1150 dropdown z-index on mobile
 * Fix #1418 timepicker and clockpicker `input` event emit
+* Fix #1429 datepicker and timepicker exclusive opening
 
 ## 0.7.6
 
