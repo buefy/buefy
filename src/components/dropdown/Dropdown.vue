@@ -35,6 +35,8 @@
 </template>
 
 <script>
+    import config from '../../utils/config'
+
     export default {
         name: 'BDropdown',
         props: {
@@ -57,7 +59,9 @@
             },
             mobileModal: {
                 type: Boolean,
-                default: true
+                default: () => {
+                    return config.defaultDropdownMobileModal
+                }
             },
             ariaRole: {
                 type: String,
