@@ -21,7 +21,6 @@
                 :readonly="!editable"
                 :rounded="rounded"
                 v-bind="$attrs"
-                @click.native.stop="toggle(true)"
                 @keyup.native.enter="toggle(true)"
                 @change.native="onChange($event.target.value)"
                 @focus="handleOnFocus"
@@ -94,8 +93,6 @@
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
-            @click.native.stop="toggle(true)"
-            @keyup.native.enter="toggle(true)"
             @change.native="onChange($event.target.value)"
             @focus="handleOnFocus"
             @blur="onBlur() && checkHtml5Validity()"/>

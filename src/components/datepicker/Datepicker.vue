@@ -21,8 +21,8 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
-                @click.native.stop="toggle(true)"
-                @keyup.native.enter="toggle(true)"
+                @click.native="onInputClick"
+                @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
                 @focus="handleOnFocus"
                 @blur="onBlur" />
@@ -113,7 +113,7 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
-                        @close="toggle(false)"/>
+                        @close="togglePicker(false)"/>
                 </div>
 
                 <footer
@@ -141,8 +141,6 @@
             :readonly="false"
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
-            @click.native.stop="toggle(true)"
-            @keyup.native.enter="toggle(true)"
             @focus="handleOnFocus"
             @blur="onBlur"/>
     </div>
@@ -308,7 +306,7 @@
                 },
                 set(value) {
                     this.updateInternalState(value)
-                    this.toggle(false)
+                    this.togglePicker(false)
                     this.$emit('input', value)
                 }
             },
@@ -361,7 +359,7 @@
              */
             value(value) {
                 this.updateInternalState(value)
-                this.toggle(false)
+                this.togglePicker(false)
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
 
@@ -476,7 +474,7 @@
             /*
             * Toggle datepicker
             */
-            toggle(active) {
+            togglePicker(active) {
                 if (this.$refs.dropdown) {
                     this.$refs.dropdown.isActive = typeof active === 'boolean'
                         ? active
@@ -487,10 +485,26 @@
             /*
             * Call default onFocus method and show datepicker
             */
-            handleOnFocus() {
-                this.onFocus()
+            handleOnFocus(event) {
+                this.onFocus(event)
                 if (this.openOnFocus) {
-                    this.toggle(true)
+                    this.togglePicker(true)
+                }
+            },
+
+            /*
+            * Toggle dropdown
+            */
+            toggle() {
+                this.$refs.dropdown.toggle()
+            },
+
+            /*
+            * Avoid dropdown toggle when is already visible
+            */
+            onInputClick(event) {
+                if (this.$refs.dropdown.isActive) {
+                    event.stopPropagation()
                 }
             },
 
@@ -500,7 +514,7 @@
             keyPress(event) {
                 // Esc key
                 if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
-                    this.toggle(false)
+                    this.togglePicker(false)
                 }
             }
         },
