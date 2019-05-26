@@ -205,6 +205,12 @@ export default [
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
             }
+        ],
+        methods: [
+            {
+                name: '<code>toggle</code>',
+                description: 'Toggle activation (picker visibility)'
+            }
         ]
     }
 ]

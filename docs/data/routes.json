@@ -315,7 +315,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
