@@ -5,6 +5,7 @@
 ### New features
 
 * **Update Bulma to 0.7.5**
+* **Datepicker improved**: add month picker, [see docs](https://buefy.org/documentation/datepicker)
 * Add ``header-checkable`` prop to table
 * Add ``toggle`` method to datepicker
 * Add ``defaultDropdownMobileModal`` constructor option

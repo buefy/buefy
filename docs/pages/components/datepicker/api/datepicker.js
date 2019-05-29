@@ -170,6 +170,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>type</code>',
+                description: 'Type of picker',
+                type: 'String',
+                values: '<code>month</code>',
+                default: '-'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
