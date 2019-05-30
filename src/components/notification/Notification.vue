@@ -21,7 +21,10 @@
                         aria-hidden/>
                 </div>
                 <div class="media-content">
-                    <p class="text" v-if="message">{{ message }}</p>
+                    <p
+                        class="text"
+                        v-if="message"
+                        v-html="message" />
                     <slot v-else/>
                 </div>
             </div>
