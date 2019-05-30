@@ -16,7 +16,7 @@
 ## Sponsors
 
 <a href="https://www.talent-pool.com" target="_blank">
-  <img src="https://raw.githubusercontent.com/buefy/buefy/dev/docs/assets/sponsors/twago.png" height="30px" />
+  <img src="https://raw.githubusercontent.com/buefy/buefy/master/docs/assets/sponsors/twago.png" height="40px" />
 </a>
 
 ## Features
