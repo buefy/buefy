@@ -37,7 +37,7 @@
                         class="pagination field is-centered"
                         :class="size">
                         <a
-                            v-show="!isFirstMonth && !disabled"
+                            v-show="!showPrev && !disabled"
                             class="pagination-previous"
                             role="button"
                             href="#"
@@ -53,7 +53,7 @@
                                 type="is-primary is-clickable"/>
                         </a>
                         <a
-                            v-show="!isLastMonth && !disabled"
+                            v-show="!showNext && !disabled"
                             class="pagination-next"
                             role="button"
                             href="#"
@@ -384,15 +384,21 @@
                 return arrayOfYears.reverse()
             },
 
-            isFirstMonth() {
+            showPrev() {
                 if (!this.minDate) return false
+                if (this.isTypeMonth) {
+                    return this.focusedDateData.year <= this.minDate.getFullYear()
+                }
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
                 const date = new Date(this.minDate.getFullYear(), this.minDate.getMonth())
                 return (dateToCheck <= date)
             },
 
-            isLastMonth() {
+            showNext() {
                 if (!this.maxDate) return false
+                if (this.isTypeMonth) {
+                    return this.focusedDateData.year >= this.maxDate.getFullYear()
+                }
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
                 const date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth())
                 return (dateToCheck >= date)
