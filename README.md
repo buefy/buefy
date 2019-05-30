@@ -13,6 +13,10 @@
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
+## Sponsors
+
+<img src="https://raw.githubusercontent.com/buefy/buefy/dev/docs/assets/sponsors/twago.png" />
+
 ## Features
 
 * Keep your current Bulma theme / variables easily
