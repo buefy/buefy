@@ -177,7 +177,7 @@ export default [
                 default: '-'
             },
             {
-                name: '<code>type</code>',
+                name: '<code>years-to-show</code>',
                 description: 'No of Years to show starting from selected year in the years dropdown',
                 type: 'Number',
                 values: '<code>Any positive number</code>',
