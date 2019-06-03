@@ -335,6 +335,10 @@
                         'month'
                     ].indexOf(value) >= 0
                 }
+            },
+            yearsToShow: {
+                type: Number,
+                default: 3,
             }
         },
         data() {
@@ -366,12 +370,12 @@
             * dates are set by props, range of years will fall within those dates.
             */
             listOfYears() {
-                let latestYear = this.focusedDateData.year + 3
+                let latestYear = this.focusedDateData.year + this.yearsToShow
                 if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
                     latestYear = this.maxDate.getFullYear()
                 }
 
-                let earliestYear = (latestYear - 100) + 3
+                let earliestYear = (latestYear - 100) + this.yearsToShow
                 if (this.minDate && this.minDate.getFullYear() > earliestYear) {
                     earliestYear = this.minDate.getFullYear()
                 }
