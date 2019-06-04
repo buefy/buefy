@@ -55,6 +55,9 @@
                 <template :slot="emptySlotName">
                     <slot name="empty" />
                 </template>
+                <template :slot="footerSlotName">
+                    <slot name="footer" />
+                </template>
             </b-autocomplete>
         </div>
 
@@ -177,6 +180,10 @@
                 return this.hasHeaderSlot ? 'header' : 'dontrender'
             },
 
+            footerSlotName() {
+                return this.hasHeaderSlot ? 'footer' : 'dontrender'
+            },
+
             hasDefaultSlot() {
                 return !!this.$scopedSlots.default
             },
@@ -187,6 +194,10 @@
 
             hasHeaderSlot() {
                 return !!this.$slots.header
+            },
+
+            hasFooterSlot() {
+                return !!this.$slots.footer
             },
 
             /**
