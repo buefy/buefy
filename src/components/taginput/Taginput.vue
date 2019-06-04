@@ -16,6 +16,7 @@
                 :disabled="disabled"
                 :ellipsis="ellipsis"
                 :closable="closable"
+                :title="ellipsis && getNormalizedTagText(tag)"
                 @close="removeTag(index)">
                 {{ getNormalizedTagText(tag) }}
             </b-tag>

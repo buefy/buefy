@@ -55,7 +55,7 @@ export default [
             },
             {
                 name: '<code>ellipsis</code>',
-                description: 'Adds ellipsis on tags to not overflow the text',
+                description: 'Adds ellipsis on tags to not overflow the text. Title is then added to the tag with full text',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
