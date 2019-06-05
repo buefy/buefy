@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.7.8
+
+### Fixes
+
+* Fix #1450 clockpicker rounded style (thanks @atinybeardedman)
+
 ## 0.7.7
 
 ### New features
