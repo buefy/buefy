@@ -64,8 +64,13 @@
         padding-bottom: 0;
     }
     
-   .card {
+    .card {
         border-radius: $radius;
+    }
+
+    .card-header {
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
     }
 
     .card-content {
