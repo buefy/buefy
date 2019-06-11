@@ -121,18 +121,14 @@ $floating-in-height: 3.25em;
         > :not(.datepicker):not(.timepicker):not(.taginput) {
             .input,
             .textarea,
-            .select {
-                &:not(.is-multiple) {
-                    height: $floating-in-height;
-                    &::after {
-                        margin-top: -0.125em;
-                    }
-                    select {
-                        &:not(.is-multiple) {
-                            padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-                            height: $floating-in-height;
-                        }
-                    }
+            select {
+                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                height: $floating-in-height;
+            }
+            .select:not(multiple) {
+                height: $floating-in-height;
+                &::after {
+                    margin-top: -0.125em;
                 }
             }
         }     
