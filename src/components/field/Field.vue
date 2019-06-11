@@ -5,7 +5,7 @@
             class="field-label"
             :class="[customClass, fieldLabelSize]">
             <label
-                v-if="label || $slots.label"
+                v-if="hasLabel"
                 :for="labelFor"
                 :class="customClass"
                 class="label" >
@@ -15,7 +15,7 @@
         </div>
         <template v-else>
             <label
-                v-if="label || $slots.label"
+                v-if="hasLabel"
                 :for="labelFor"
                 :class="customClass"
                 class="label">
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+    import config from '../../utils/config'
     import FieldBody from './FieldBody'
 
     export default {
@@ -63,7 +64,11 @@
                 type: Boolean,
                 default: true
             },
-            customClass: String
+            customClass: String,
+            labelPosition: {
+                type: String,
+                default: () => { return config.defaultFieldLabelPosition }
+            }
         },
         data() {
             return {
@@ -78,7 +83,11 @@
                 return [this.newPosition, {
                     'is-expanded': this.expanded,
                     'is-grouped-multiline': this.groupMultiline,
-                    'is-horizontal': this.horizontal
+                    'is-horizontal': this.horizontal,
+                    'is-floating-in-label': this.hasLabel && !this.horizontal &&
+                        this.labelPosition === 'inside',
+                    'is-floating-label': this.hasLabel && !this.horizontal &&
+                        this.labelPosition === 'on-border'
                 }]
             },
             /**
@@ -130,6 +139,9 @@
                     }
                     return messages.filter((m) => { if (m) return m }).join(' <br> ')
                 }
+            },
+            hasLabel() {
+                return this.label || this.$slots.label
             }
         },
         watch: {

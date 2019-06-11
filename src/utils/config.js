@@ -29,7 +29,8 @@ let config = {
     defaultNoticeQueue: true,
     defaultInputHasCounter: true,
     defaultUseHtml5Validation: true,
-    defaultDropdownMobileModal: true
+    defaultDropdownMobileModal: true,
+    defaultFielLabelPosition: null
 }
 
 export default config
