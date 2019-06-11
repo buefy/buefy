@@ -2,6 +2,10 @@
 
 ## 0.7.8
 
+### New features
+
+* Add ``label-position`` prop to field
+
 ### Fixes
 
 * Fix #1450 clockpicker rounded style (thanks @atinybeardedman)
