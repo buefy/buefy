@@ -95,7 +95,7 @@ $floating-in-height: 3.25em;
     }
     &.is-floating-in-label {
         position: relative;
-        .label + :not(.b-numberinput) {
+        .label {
             position: absolute;
             top: 0.25em;
             left: 1em;
