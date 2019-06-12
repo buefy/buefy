@@ -193,11 +193,11 @@
                 this._$intervalRef = this._$intervalRef = setInterval(() => {
                     if (inc) this.increment()
                     else this.decrement()
-                }, 100)
+                }, 250)
             },
             onStopLongPress(inc) {
                 const d = new Date()
-                if (d - this._$intervalTime < 100) {
+                if (d - this._$intervalTime < 250) {
                     if (inc) this.increment()
                     else this.decrement()
                 }
