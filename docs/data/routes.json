@@ -134,7 +134,8 @@
             "/",
             "documentation",
             "documentation/modal"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",

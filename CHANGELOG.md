@@ -5,6 +5,7 @@
 ### New features
 
 * Add ``label-position`` prop to field
+* Add ``full-screen`` prop to modal
 
 ### Fixes
 
