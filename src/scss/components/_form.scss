@@ -48,7 +48,7 @@ $floating-in-height: 3.25em;
 .field {
     &.is-floating-label {
         position: relative;
-        .label + &:not(.b-numberinput) {
+        .label {
             position: absolute;
             top: -0.775em;
             left: 1em;
