@@ -48,7 +48,7 @@ $floating-in-height: 3.25em;
 .field {
     &.is-floating-label {
         position: relative;
-        .label {
+        .label + &:not(.b-numberinput) {
             position: absolute;
             top: -0.775em;
             left: 1em;
@@ -95,7 +95,7 @@ $floating-in-height: 3.25em;
     }
     &.is-floating-in-label {
         position: relative;
-        .label {
+        .label + :not(.b-numberinput) {
             position: absolute;
             top: 0.25em;
             left: 1em;
@@ -115,6 +115,7 @@ $floating-in-height: 3.25em;
         > .datepicker, > .timepicker {
             .input {
                 padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                padding-bottom: 1px;
                 height: $floating-in-height;
             }
         }
@@ -123,20 +124,28 @@ $floating-in-height: 3.25em;
             .textarea,
             select {
                 padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                padding-bottom: 1px;
                 height: $floating-in-height;
             }
             .select:not(multiple) {
                 height: $floating-in-height;
+                &.is-loading {
+                    &::after {
+                        margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                    }
+                }
                 &::after {
-                    margin-top: -0.125em;
+                    margin-top: 1px;
                 }
             }
         }     
         > :not(.taginput) {
             .is-left.icon,
             .is-right.icon {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
                 height: $floating-in-height;
+            }
+            .is-left.icon {
+                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
             }
         }
         .control.is-loading::after {
