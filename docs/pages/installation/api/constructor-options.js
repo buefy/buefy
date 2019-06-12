@@ -223,6 +223,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultFieldLabelPosition</code>',
+                description: 'Default field position of label',
+                type: 'String',
+                values: '<code>inside</code>,<code>on-border</code>',
+                default: '-'
             }
         ]
     }
