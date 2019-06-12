@@ -14,6 +14,19 @@
             <CodeView lang="javascript" :code="programmaticSyntax | pre" expanded/>
         </Example>
 
+        <Example :component="ExProgrammatic" :code="ExProgrammaticCode" title="Programmatic">
+            <p>Syntax:</p>
+            <CodeView lang="javascript" :code="programmaticSyntax | pre" expanded/>
+        </Example>
+
+        <Example :component="ExFullScreen" :code="ExFullScreenCode" title="Full Screen">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.8</span>
+            </div>
+            <p>Add the <code>full-screen</code> prop to cover the whole page.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -30,6 +43,9 @@
     import ExProgrammatic from './examples/ExProgrammatic'
     import ExProgrammaticCode from '!!raw-loader!./examples/ExProgrammatic'
 
+    import ExFullScreen from './examples/ExFullScreen'
+    import ExFullScreenCode from '!!raw-loader!./examples/ExFullScreen'
+
     export default {
         data() {
             return {
@@ -37,9 +53,11 @@
                 ExSimple,
                 ExComponent,
                 ExProgrammatic,
+                ExFullScreen,
                 ExSimpleCode,
                 ExComponentCode,
                 ExProgrammaticCode,
+                ExFullScreenCode,
                 programmaticSyntax: `
                 // From inside Vue instance
                 this.$modal.open(props)

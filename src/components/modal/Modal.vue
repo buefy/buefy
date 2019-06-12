@@ -1,11 +1,14 @@
 <template>
     <transition :name="animation">
-        <div v-if="isActive" class="modal is-active">
+        <div
+            v-if="isActive"
+            class="modal is-active"
+            :class="{ 'is-full-screen': fullScreen }">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
-                :style="{ maxWidth: newWidth }">
+                :style="customStlye">
                 <component
                     v-if="component"
                     v-bind="props"
@@ -73,7 +76,8 @@
                         'keep'
                     ].indexOf(value) >= 0
                 }
-            }
+            },
+            fullScreen: Boolean
         },
         data() {
             return {
@@ -94,6 +98,12 @@
             },
             showX() {
                 return this.cancelOptions.indexOf('x') >= 0
+            },
+            customStlye() {
+                if (!this.fullScreen) {
+                    return { maxWidth: this.newWidth }
+                }
+                return null
             }
         },
         watch: {
