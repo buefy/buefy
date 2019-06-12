@@ -98,8 +98,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -231,7 +230,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/input": {
         "title": "Input",
@@ -315,8 +315,7 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -376,8 +375,7 @@
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
