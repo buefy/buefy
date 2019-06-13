@@ -385,7 +385,7 @@
                 }
 
                 const arrayOfYears = []
-                for (let i = earliestYear; i <= latestYear; i++) {
+                for (let i = earliestYear, populated = 0; i <= latestYear && populated <= this.yearsRange; i++, populated++) {
                     arrayOfYears.push(i)
                 }
 
