@@ -73,6 +73,14 @@
             <p>Add the <code>custom-class</code> prop to adjust the styling of the label.</p>
         </Example>
 
+        <Example :component="ExLabelSlot" :code="ExLabelSlotCode" title="Label slot">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.6</span>
+            </div>
+            <p>Use the <code>label</code> slot for complex labels with HTML content or components. Note it overrides the <code>label</code> prop.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -110,6 +118,9 @@
     import ExCustomClass from './examples/ExCustomClass'
     import ExCustomClassCode from '!!raw-loader!./examples/ExCustomClass'
 
+    import ExLabelSlot from './examples/ExLabelSlot'
+    import ExLabelSlotCode from '!!raw-loader!./examples/ExLabelSlot'
+
     export default {
         data() {
             return {
@@ -124,6 +135,7 @@
                 ExCombineAddonsGroups,
                 ExHorizontal,
                 ExCustomClass,
+                ExLabelSlot,
                 ExSimpleCode,
                 ExObjectSyntaxCode,
                 ExAddonsCode,
@@ -133,7 +145,8 @@
                 ExPositionsCode,
                 ExCombineAddonsGroupsCode,
                 ExHorizontalCode,
-                ExCustomClassCode
+                ExCustomClassCode,
+                ExLabelSlotCode
             }
         }
     }

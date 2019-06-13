@@ -13,7 +13,7 @@
         border-bottom: 1px solid $grey-lighter;
     }
     .datepicker-content {
-        height: 16.25rem;
+        height: 16.25rem;   
     }
     .datepicker-footer {
         margin-top: 0.875rem;
@@ -41,26 +41,39 @@
             display: table-row-group;
             .datepicker-row {
                 display: table-row;
+            }
+            .datepicker-months {
+                display: inline-flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                width: 17rem;
                 .datepicker-cell {
-                    &.is-unselectable {
-                        color: $grey-light;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 33.33%;
+                    height: 2.5rem;
+                }
+            }
+            .datepicker-cell {
+                &.is-unselectable {
+                    color: $grey-light;
+                }
+                &.is-today {
+                    border: solid 1px rgba($primary, 0.5);
+                }
+                &.is-selectable {
+                    color: $grey-dark;
+                    &:hover:not(.is-selected),
+                    &:focus:not(.is-selected) {
+                        background-color: $background;
+                        color: $black;
+                        cursor: pointer;
                     }
-                    &.is-today {
-                        border: solid 1px rgba($primary, 0.5);
-                    }
-                    &.is-selectable {
-                        color: $grey-dark;
-                        &:hover:not(.is-selected),
-                        &:focus:not(.is-selected) {
-                            background-color: $background;
-                            color: $black;
-                            cursor: pointer;
-                        }
-                    }
-                    &.is-selected {
-                        background-color: $primary;
-                        color: $primary-invert;
-                    }
+                }
+                &.is-selected {
+                    background-color: $primary;
+                    color: $primary-invert;
                 }
             }
             &.has-events {

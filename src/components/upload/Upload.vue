@@ -22,6 +22,7 @@
         <input
             ref="input"
             type="file"
+            :class="{'file-draggable': dragDrop}"
             v-bind="$attrs"
             :multiple="multiple"
             :accept="accept"
@@ -90,27 +91,40 @@
                     this.updateDragDropFocus(false)
                 }
                 const value = event.target.files || event.dataTransfer.files
-                if (value && value.length) {
-                    if (!this.multiple) {
-                        // only one element in case drag drop mode and isn't multiple
-                        if (this.dragDrop && value.length !== 1) return false
-                        else {
-                            const file = value[0]
-                            if (this.checkType(file)) {
-                                this.newValue = file
-                            }
+                if (value.length === 0) {
+                    if (!this.newValue) {
+                        return
+                    }
+                    this.newValue = null
+                } else if (!this.multiple) {
+                    // only one element in case drag drop mode and isn't multiple
+                    if (this.dragDrop && value.length !== 1) return
+                    else {
+                        const file = value[0]
+                        if (this.checkType(file)) {
+                            this.newValue = file
+                        } else if (this.newValue) {
+                            this.newValue = null
+                        } else {
+                            return
                         }
-                    } else {
-                        // always new values if native or undefined local
-                        if (this.native || !this.newValue) {
-                            this.newValue = []
+                    }
+                } else {
+                    // always new values if native or undefined local
+                    let newValues = false
+                    if (this.native || !this.newValue) {
+                        this.newValue = []
+                        newValues = true
+                    }
+                    for (let i = 0; i < value.length; i++) {
+                        const file = value[i]
+                        if (this.checkType(file)) {
+                            this.newValue.push(file)
+                            newValues = true
                         }
-                        for (let i = 0; i < value.length; i++) {
-                            const file = value[i]
-                            if (this.checkType(file)) {
-                                this.newValue.push(file)
-                            }
-                        }
+                    }
+                    if (!newValues) {
+                        return
                     }
                 }
                 this.$emit('input', this.newValue)
@@ -140,7 +154,9 @@
                         if (type.substring(0, 1) === '.') {
                             // check extension
                             const extIndex = file.name.lastIndexOf('.')
-                            if (extIndex >= 0 && file.name.substring(extIndex) === type) {
+                            const extension = extIndex >= 0
+                                ? file.name.substring(extIndex) : ''
+                            if (extension.toLowerCase() === type.toLowerCase()) {
                                 valid = true
                             }
                         } else {

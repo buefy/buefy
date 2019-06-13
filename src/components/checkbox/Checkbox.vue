@@ -4,12 +4,12 @@
         :class="[size, { 'is-disabled': disabled }]"
         ref="label"
         :disabled="disabled"
-        :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="$refs.label.click()">
+        @keydown.prevent.enter="$refs.label.click()">
         <input
             v-model="computedValue"
             :indeterminate.prop="indeterminate"
             type="checkbox"
+            @click.stop
             :disabled="disabled"
             :required="required"
             :name="name"

@@ -46,7 +46,7 @@ export default [
             },
             {
                 name: '<code>width</code>',
-                description: 'Width of the Modal, maximum of <code>960</code>',
+                description: 'Width of the Modal',
                 type: 'Number, String',
                 values: '—',
                 default: '<code>960</code>'
@@ -66,14 +66,14 @@ export default [
                 default: '<code>zoom-out</code>'
             },
             {
-                name: '<code>canCancel</code>',
+                name: '<code>can-cancel</code>',
                 description: `Can close Modal by clicking 'X', pressing escape or clicking outside`,
                 type: 'Boolean, Array',
                 values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
                 default: `<code>['escape', 'x', 'outside']</code>`
             },
             {
-                name: '<code>onCancel</code>',
+                name: '<code>on-cancel</code>',
                 description: `Callback function to call after user canceled (clicked 'X' / pressed escape / clicked outside)`,
                 type: 'Function',
                 values: '—',

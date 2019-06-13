@@ -79,6 +79,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

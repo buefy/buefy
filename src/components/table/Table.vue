@@ -20,10 +20,12 @@
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable">
-                            <b-checkbox
-                                :value="isAllChecked"
-                                :disabled="isAllUncheckable"
-                                @change.native="checkAll"/>
+                            <template v-if="headerCheckable">
+                                <b-checkbox
+                                    :value="isAllChecked"
+                                    :disabled="isAllUncheckable"
+                                    @change.native="checkAll"/>
+                            </template>
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
@@ -62,14 +64,19 @@
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
-                            :key="index"
+                            :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @contextmenu="$emit('contextmenu', row, $event)">
+                            @contextmenu="$emit('contextmenu', row, $event)"
+                            :draggable="draggable"
+                            @dragstart="handleDragStart($event, row, index)"
+                            @drop="handleDrop($event, row, index)"
+                            @dragover="handleDragOver($event, row, index)"
+                            @dragleave="handleDragLeave($event, row, index)">
 
                             <td
                                 v-if="showDetailRowIcon"
@@ -121,7 +128,7 @@
                         <!-- Do not add `key` here (breaks details) -->
                         <!-- eslint-disable-next-line -->
                         <tr
-                            v-if="detailed && isVisibleDetailRow(row)"
+                            v-if="isActiveDetailRow(row)"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -132,6 +139,12 @@
                                 </div>
                             </td>
                         </tr>
+                        <slot
+                            v-if="isActiveCustomDetailRow(row)"
+                            name="detail"
+                            :row="row"
+                            :index="index"
+                        />
                     </template>
                 </tbody>
                 <tbody v-else>
@@ -166,7 +179,11 @@
                         :simple="paginationSimple"
                         :size="paginationSize"
                         :current="newCurrentPage"
-                        @change="pageChanged"/>
+                        @change="pageChanged"
+                        :aria-next-label="ariaNextLabel"
+                        :aria-previous-label="ariaPreviousLabel"
+                        :aria-page-label="ariaPageLabel"
+                        :aria-current-label="ariaCurrentLabel" />
                 </div>
             </div>
         </div>
@@ -208,6 +225,10 @@
             loading: Boolean,
             detailed: Boolean,
             checkable: Boolean,
+            headerCheckable: {
+                type: Boolean,
+                default: true
+            },
             selected: Object,
             focusable: Boolean,
             customIsChecked: Function,
@@ -260,13 +281,26 @@
                 type: String,
                 default: ''
             },
+            customDetailRow: {
+                type: Boolean,
+                default: false
+            },
             backendPagination: Boolean,
             total: {
                 type: [Number, String],
                 default: 0
             },
             iconPack: String,
-            mobileSortPlaceholder: String
+            mobileSortPlaceholder: String,
+            customRowKey: String,
+            draggable: {
+                type: Boolean,
+                defualt: false
+            },
+            ariaNextLabel: String,
+            ariaPreviousLabel: String,
+            ariaPageLabel: String,
+            ariaCurrentLabel: String
         },
         data() {
             return {
@@ -623,6 +657,14 @@
                 return result
             },
 
+            isActiveDetailRow(row) {
+                return this.detailed && !this.customDetailRow && this.isVisibleDetailRow(row)
+            },
+
+            isActiveCustomDetailRow(row) {
+                return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
+            },
+
             /**
             * When the detailKey is defined we use the object[detailKey] as index.
             * If not, use the object reference by default.
@@ -730,6 +772,30 @@
                         this.sort(column, true)
                     }
                 })
+            },
+            /**
+             * Emits drag start event
+             */
+            handleDragStart(event, row, index) {
+                this.$emit('dragstart', {event, row, index})
+            },
+            /**
+             * Emits drop event
+             */
+            handleDrop(event, row, index) {
+                this.$emit('drop', {event, row, index})
+            },
+            /**
+             * Emits drag over event
+             */
+            handleDragOver(event, row, index) {
+                this.$emit('dragover', {event, row, index})
+            },
+            /**
+             * Emits drag leave event
+             */
+            handleDragLeave(event, row, index) {
+                this.$emit('dragleave', {event, row, index})
             }
         },
 

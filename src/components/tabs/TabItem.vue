@@ -1,11 +1,3 @@
-<template>
-    <transition :name="transitionName">
-        <div v-show="isActive && visible" class="tab-item">
-            <slot/>
-        </div>
-    </transition>
-</template>
-
 <script>
     export default {
         name: 'BTabItem',
@@ -30,13 +22,9 @@
              * Activate tab, alter animation name based on the index.
              */
             activate(oldIndex, index) {
-                if (!this.$parent.animated) {
-                    this.transitionName = null
-                } else {
-                    this.transitionName = index < oldIndex
-                        ? 'slide-next'
-                        : 'slide-prev'
-                }
+                this.transitionName = index < oldIndex
+                    ? 'slide-next'
+                    : 'slide-prev'
                 this.isActive = true
             },
 
@@ -44,13 +32,9 @@
              * Deactivate tab, alter animation name based on the index.
              */
             deactivate(oldIndex, index) {
-                if (!this.$parent.animated) {
-                    this.transitionName = null
-                } else {
-                    this.transitionName = index < oldIndex
-                        ? 'slide-next'
-                        : 'slide-prev'
-                }
+                this.transitionName = index < oldIndex
+                    ? 'slide-next'
+                    : 'slide-prev'
                 this.isActive = false
             }
         },
@@ -66,6 +50,34 @@
             if (index >= 0) {
                 this.$parent.tabItems.splice(index, 1)
             }
+        },
+        render(createElement) {
+            // if destroy apply v-if
+            if (this.$parent.destroyOnHide) {
+                if (!this.isActive || !this.visible) {
+                    return
+                }
+            }
+            const vnode = createElement('div', {
+                directives: [{
+                    name: 'show',
+                    value: this.isActive && this.visible
+                }],
+                attrs: { 'class': 'tab-item' }
+            }, this.$slots.default)
+            // check animated prop
+            if (this.$parent.animated) {
+                return createElement('transition', {
+                    props: {
+                        'name': this.transitionName
+                    },
+                    on: {
+                        'before-enter': () => { this.$parent.isTransitioning = true },
+                        'after-enter': () => { this.$parent.isTransitioning = false }
+                    }
+                }, [vnode])
+            }
+            return vnode
         }
     }
 </script>

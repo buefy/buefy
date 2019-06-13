@@ -10,7 +10,9 @@
             <slot/>
             <input
                 v-model="computedValue"
+                tabindex="-1"
                 type="radio"
+                @click.stop
                 :disabled="disabled"
                 :required="required"
                 :name="name"

@@ -17,6 +17,14 @@
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customizing with v-model"/>
 
+        <Example :component="ExCustomizeMultiple" :code="ExCustomizeMultipleCode" title="Multiple">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.6</span>
+            </div>
+            <p>Add the <code>multiple</code> prop to select one or more item.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -36,6 +44,9 @@
     import ExCustomize from './examples/ExCustomize'
     import ExCustomizeCode from '!!raw-loader!./examples/ExCustomize'
 
+    import ExCustomizeMultiple from './examples/ExCustomizeMultiple'
+    import ExCustomizeMultipleCode from '!!raw-loader!./examples/ExCustomizeMultiple'
+
     export default {
         data() {
             return {
@@ -47,7 +58,9 @@
                 ExHasLinkDisabled,
                 ExHasLinkDisabledCode,
                 ExCustomize,
-                ExCustomizeCode
+                ExCustomizeCode,
+                ExCustomizeMultiple,
+                ExCustomizeMultipleCode
             }
         }
     }

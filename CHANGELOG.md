@@ -1,16 +1,103 @@
 # Buefy Changelog
 
+## 0.7.7
+
+### New features
+
+* **Update Bulma to 0.7.5**
+* **Datepicker improved**: add month picker, [see docs](https://buefy.org/documentation/datepicker)
+* Add ``header-checkable`` prop to table
+* Add ``toggle`` method to datepicker
+* Add ``defaultDropdownMobileModal`` constructor option
+* Add ``validation-message`` prop to input (thanks @jankeesvw)
+* #1424 Prevent close on click when ``multiple`` dropdown
+
+### Fixes
+
+* Fix #1150 dropdown z-index on mobile
+* Fix #1418 timepicker and clockpicker `input` event emit
+* Fix #1429 datepicker and timepicker exclusive opening
+* Fix #1433 timepicker default formatter and parser
+
+## 0.7.6
+
+### New features
+
+* Add ``label`` slot to field (thanks @yxngl)
+* Add ``footer`` slot to autocomplete (thanks @LeoMouyna)
+* Add ``open-on-focus`` prop and improved accessibility for timepicker and clockpicker
+* Add ``multiple`` prop to dropdown
+
+### Fixes
+
+* Fix #817 radio button off-center issue
+* Fix #1347, #1361 datepicker v-model and initial toggle
+* Fix #1351 tabs `is-disabled` css rule
+* Fix #1352 numberinput when empty string
+* Fix #1382 numberinput layout
+* Fix #1390 missing prop to dialog type
+* Fix #1402 radio button on IE11 (thanks @timEulitz)
+
+## 0.7.5
+
+### New features
+
+* **New component: Numberinput**, [see docs](https://buefy.org/documentation/numberinput)
+* **Loading improved**: can show a custom content, [see docs](https://buefy.org/documentation/loading)
+* Add ``destroy-on-hide`` prop to tabs
+* Add ``custom-detail-row`` prop to table (thanks @EvanBarbour3)
+* Add ``open-on-focus`` prop and improved accessibility for datepicker (thanks @imfaber)
+
+### Fixes
+
+* Fix #1320 space keydown on Firefox to checkbox and switch
+* Fix #1325 input emit to upload
+* Enable native timepicker to clockpicker when ``mobile-native``  (default ``true``)
+* Fix clockpicker docs and input size
+* Fix upload opening in IE 11
+
+## 0.7.4
+
+### New features
+
+* **New component: Button**, [see docs](https://buefy.org/documentation/button)
+* **New component: Clockpicker**, [see docs](https://buefy.org/documentation/clockpicker) (thanks @SharpSeeEr)
+* **Notification improved**: can show a notification programmatically, [see docs](https://buefy.org/documentation/notification)
+* Add ``custom-formatter`` prop to autocomplete
+* Add ``draggable`` prop to table (thanks @suneab)
+* Improve accessibility for notification, message and pagination (thanks @mateuswetah)
+
+### Fixes
+
+* #956 Fix hidden overflow on tabs (thanks @Baggs)
+* #1246 Fix Cleave.js example using Vue 2.6.x (thanks @yxngl)
+* #1251 Fix Datepicker closing when page back to ``min-date`` month
+* #1257 Fix Datepicker slow/freeze on big year input
+* #1282 Fix Datepicker event display wich have a time set (thanks @DonNicoJs)
+* #1290 Fix double click event for CheckBox(Button) and Radio(Button) (thanks @yxngl)
+* Fix tabindex on switch (thanks @yxngl), radio (thanks @Sacmanxman2) and checkbox
+
 ## 0.7.3
 
 ### New features
 
+* **Update Bulma to 0.7.4**
 * Add ``required`` prop to radio-button and checkbox-button
 * Add ``defaultModalCanCancel`` constructor options (thanks @quimarche)
 * Add ``typing`` event to autocomplete (thanks @adrlen)
+* Add ``native-autocomplete`` prop to taginput
+* Add support to [Font Awesome SVG component](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) (thanks @rhwilr)
+* Add ``custom-key-row`` prop to table
+* Add ``defaultToastPosition`` and ``defaultSnackbarPosition`` constructor options
+* Improve accessibility for collapse and dropdown (thanks @mateuswetah)
+* Revert tab as confirm key code to taginput
+* #1233 Change left margin to right margin when spacing nested fields (thanks @yxngl)
 
 ### Fixes
 
 * #1177 Fix IE/Edge datepicker content size
+* #1216 Fix reset v-model when upload cancel
+* #1219 Fix modal ``width`` prop (thanks @yxngl)
 
 ## 0.7.2
 
@@ -126,7 +213,7 @@ Toast.open('Toasty!')
 
 ### New features
 
-* **Add nuxt-buefy on docs**, [see here](https://buefy.github.io/#/documentation/start) (thanks @anteriovieira)
+* **Add nuxt-buefy on docs**, [see here](https://buefy.org/documentation/start) (thanks @anteriovieira)
 * Add ``indefinite`` prop to snackbar
 * Add ``header`` slot to datepicker
 * Add ``header`` slot to tabItem
@@ -156,7 +243,7 @@ Toast.open('Toasty!')
 
 ### New features
 
-* **New extension: Sortable.js**, [see here](https://buefy.github.io/#/extensions/sortablejs)
+* **New extension: Sortable.js**, [see here](https://buefy.org/extensions/sortablejs)
 * **Update Bulma to 0.6.2**
 * **Add Font Awesome 5 support** (http://fontawesome.com/)
 * Add ``columns`` prop to table, you can now pass an array instead of adding scoped slots (for simple tables)
@@ -185,7 +272,7 @@ Toast.open('Toasty!')
 
 ### New features
 
-* **New component: Tag Input**, [see docs](https://buefy.github.io/#/documentation/taginput) (thanks @jgerbes)
+* **New component: Tag Input**, [see docs](https://buefy.org/documentation/taginput) (thanks @jgerbes)
 * #125 Add ``queue`` prop to toast/snackbar and ``defaultNoticeQueue`` constructor option
     * Note that the animations aren't perfect right now
 * #432 **Datepicker improved**: can add event indicators on it (thanks @chasegiunta)
@@ -229,9 +316,9 @@ Toast.open('Toasty!')
 
 ### New features
 
-* **New component: Timepicker**, [see docs](https://buefy.github.io/#/documentation/timepicker)
-* **New component: Checkbox Button**, [see docs](https://buefy.github.io/#/documentation/checkbox)
-* **New docs section: Extensions**, [see here](https://buefy.github.io/#/extensions/cleavejs)
+* **New component: Timepicker**, [see docs](https://buefy.org/documentation/timepicker)
+* **New component: Checkbox Button**, [see docs](https://buefy.org/documentation/checkbox)
+* **New docs section: Extensions**, [see here](https://buefy.org/extensions/cleavejs)
 * Support for Bulma 0.6.1
 * Add ``disabled`` prop to tabItem
 * Add ``focusable`` prop to table
@@ -261,7 +348,7 @@ Toast.open('Toasty!')
 
 ## 0.5.4
 
-* **Deprecated** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props, use new ``inputAttrs`` prop, [see docs](https://buefy.github.io/#/documentation/dialog)
+* **Deprecated** prompt dialog ``inputPlaceholder``, ``inputName`` and ``inputMaxlength`` props, use new ``inputAttrs`` prop, [see docs](https://buefy.org/documentation/dialog)
 * Fix ``focus`` method on select
 * Table with ``selected`` prop can now be natigated with keyboard
 * #251, #345 Add ``bottom-left`` slot to table
@@ -273,8 +360,8 @@ Toast.open('Toasty!')
 
 ## 0.5.3
 
-* **New component: Collapse**, [see docs](https://buefy.github.io/#/documentation/collapse)
-* **Panel deprecated**, use new Collapse component, [old docs here](https://buefy.github.io/#/documentation/panel)
+* **New component: Collapse**, [see docs](https://buefy.org/documentation/collapse)
+* **Panel deprecated**, use new Collapse component, [old docs here](https://buefy.org/documentation/panel)
 * Update Bulma to v0.5.3
 * #223 Add ``footer`` slot to table
 * #246 Remove ``key`` on detailed rows of table component (thanks @Tirke)
@@ -307,8 +394,8 @@ Toast.open('Toasty!')
 
 ## 0.5.1
 
-* **New component: Datepicker**, [see docs](https://buefy.github.io/#/documentation/datepicker) (thanks @bartboy011)
-* **New component: Tag**, [see docs](https://buefy.github.io/#/documentation/tag)
+* **New component: Datepicker**, [see docs](https://buefy.org/documentation/datepicker) (thanks @bartboy011)
+* **New component: Tag**, [see docs](https://buefy.org/documentation/tag)
 * #195 Add ``custom-key`` prop to table column, add it when you want a column without label
 * #221 Add backend pagination support to table (thanks @cappuc)
 * #214 Add ``active`` prop to tooltip
@@ -341,20 +428,20 @@ Toast.open('Toasty!')
 * ``change`` events for all form controls (Input, Select Autocomplete, Checkbox, RadioGroup, Switch) that returned pure value will now return ``$event`` (and require ``.native`` modifier), use ``input`` instead
 * Checkbox ``custom-value`` prop renamed to ``native-value``
     * ``checked`` prop removed
-* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.github.io/#/documentation/checkbox)
+* **Removed CheckboxGroup**, just add the same ``v-model`` to multiple Checkboxes and set a ``native-value``, [see docs](https://buefy.org/documentation/checkbox)
 * Radio and Radio Button ``value`` prop renamed to ``native-value``
     * Add ``v-model`` support
     * Radio Buttons have to be wrapped on a field
-* **Removed RadioGroup**, just add the same ``v-model`` to multiple Radios/RadioButtons and set a ``native-value`` [see docs](https://buefy.github.io/#/documentation/radio)
+* **Removed RadioGroup**, just add the same ``v-model`` to multiple Radios/RadioButtons and set a ``native-value`` [see docs](https://buefy.org/documentation/radio)
 * Remove switch ``checked`` prop
 
 ### New stuff
 
-* **New component: Upload**, [see docs](https://buefy.github.io/#/documentation/upload) (thanks @jtommy)
+* **New component: Upload**, [see docs](https://buefy.org/documentation/upload) (thanks @jtommy)
 * Field ``position`` prop works for ``grouped`` fields
 * Add ``group-multiline`` prop to field
 * Add ``size`` prop to message
-* #191 Add detail option (collapse) to table row, [see docs](https://buefy.github.io/#/documentation/table) (thanks @wanxe)
+* #191 Add detail option (collapse) to table row, [see docs](https://buefy.org/documentation/table) (thanks @wanxe)
 * #201 Add support to array on Field ``message`` prop (thanks @jtommy)
 * #207 Add ``centered`` prop to table column
 * Add ``native-value``, ``true-value`` and ``false-value`` props to switch
@@ -365,10 +452,10 @@ Toast.open('Toasty!')
 
 ## 0.4.6
 
-* **New component: Menu**, [see docs](https://buefy.github.io/#/documentation/menu) (thanks @tsctao)
-* **New component: Panel**, [see docs](https://buefy.github.io/#/documentation/panel) (thanks @jtommy)
-* **New component: Loading**, [see docs](https://buefy.github.io/#/documentation/loading) (thanks @jtommy)
-* **Dropdown improved**: can add any content on it, can be triggered by hover, [see docs](https://buefy.github.io/#/documentation/dropdown)
+* **New component: Menu**, [see docs](https://buefy.org/documentation/menu) (thanks @tsctao)
+* **New component: Panel**, [see docs](https://buefy.org/documentation/panel) (thanks @jtommy)
+* **New component: Loading**, [see docs](https://buefy.org/documentation/loading) (thanks @jtommy)
+* **Dropdown improved**: can add any content on it, can be triggered by hover, [see docs](https://buefy.org/documentation/dropdown)
 * Remove ``narrowed`` prop from dropdown
 * Update Bulma to v0.4.4
 * Add CDN install method and JSFiddle examples
@@ -406,8 +493,8 @@ Toast.open('Toasty!')
 
 ## 0.4.3
 
-* Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](https://buefy.github.io/#/documentation/switch)
-* Add tons of props to Autocomplete, [see here](https://buefy.github.io/#/documentation/autocomplete)
+* Update switch animation (it was laggy) and causing weird behavior within ``<keep-alive>`` components, [see updated animation](https://buefy.org/documentation/switch)
+* Add tons of props to Autocomplete, [see here](https://buefy.org/documentation/autocomplete)
 * **Dropdown button as addon now needs a ``.control`` element wrapping**
 * Add some useful methods on docs for Input, Select, Autocomplete and Table
 * Fix autocomplete list width
@@ -450,15 +537,15 @@ Toast.open('Toasty!')
 
 ### I've broke some stuff...
 
-* Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax, [see docs](https://buefy.github.io/#/documentation/dropdown)
+* Remove ``label``, ``icon`` and ``icon-pack`` properties from **DropdownOption** thanks to the new syntax, [see docs](https://buefy.org/documentation/dropdown)
 * Remove ``content`` property from **TableColumn**, use ``v-html`` on an element inside TableColumn instead
 * **Field**, **Snackbar** and **Toast** ``position`` property now needs the ``is-`` prefix (eg. ``is-top-left`` or ``is-centered``) — *Gotta fix these inconsistencies while it's still in beta*
 * Remove ``on-off`` prop from Switch
 
 ### Additions and fixes
 
-* **New component: Autocomplete**, [see docs](https://buefy.github.io/#/documentation/autocomplete)
-* **Switch design overhaul**, [see new style](https://buefy.github.io/#/documentation/switch)
+* **New component: Autocomplete**, [see docs](https://buefy.org/documentation/autocomplete)
+* **Switch design overhaul**, [see new style](https://buefy.org/documentation/switch)
 * Fix Tabs dynamic height
 * Add one more Sass variable: ``$speed-slower: 250ms !default``
 * Add ``size`` prop to Switch
@@ -477,7 +564,7 @@ Toast.open('Toasty!')
 
 ## 0.3.2
 
-* **New component: Tabs**, [see docs](https://buefy.github.io/#/documentation/tabs)
+* **New component: Tabs**, [see docs](https://buefy.org/documentation/tabs)
 * Add ``content`` prop to TableColumn, use this instead of ``v-html`` or it might break on tables with ``mobile-cards`` (collapsed rows)
 * Alert Dialog accepts string as well
 * Dialog open with focus on confirm button (easier to just hit enter)

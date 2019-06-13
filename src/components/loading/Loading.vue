@@ -5,7 +5,9 @@
             :class="{ 'is-full-page': isFullPage }"
             v-if="isActive">
             <div class="loading-background" @click="cancel"/>
-            <div class="loading-icon"/>
+            <slot>
+                <div class="loading-icon" />
+            </slot>
         </div>
     </transition>
 </template>

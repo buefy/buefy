@@ -3,13 +3,14 @@
         <b-input
             v-model="newValue"
             ref="input"
+            type="text"
             :size="size"
             :loading="loading"
             :rounded="rounded"
             :icon="icon"
             :icon-pack="iconPack"
             :maxlength="maxlength"
-            autocomplete="off"
+            :autocomplete="newAutocomplete"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
@@ -54,6 +55,11 @@
                         class="dropdown-item is-disabled">
                         <slot name="empty"/>
                     </div>
+                    <div
+                        v-if="hasFooterSlot"
+                        class="dropdown-item">
+                        <slot name="footer"/>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -84,7 +90,8 @@
             },
             keepFirst: Boolean,
             clearOnSelect: Boolean,
-            openOnFocus: Boolean
+            openOnFocus: Boolean,
+            customFormatter: Function
         },
         data() {
             return {
@@ -92,6 +99,7 @@
                 hovered: null,
                 isActive: false,
                 newValue: this.value,
+                newAutocomplete: this.autocomplete || 'off',
                 isListInViewportVertically: true,
                 hasFocus: false,
                 _isAutocomplete: true,
@@ -137,6 +145,13 @@
              */
             hasHeaderSlot() {
                 return !!this.$slots.header
+            },
+
+            /**
+             * Check if exists "footer" slot
+             */
+            hasFooterSlot() {
+                return !!this.$slots.footer
             }
         },
         watch: {
@@ -272,6 +287,9 @@
             getValue(option) {
                 if (!option) return
 
+                if (typeof this.customFormatter !== 'undefined') {
+                    return this.customFormatter(option)
+                }
                 return typeof option === 'object'
                     ? getValueByPath(option, this.field)
                     : option

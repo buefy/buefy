@@ -163,6 +163,20 @@ export default [
                 default: 'Bottom right'
             },
             {
+                name: '<code>open-on-focus</code>',
+                description: 'Open datepicker on input focus',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>type</code>',
+                description: 'Type of picker',
+                type: 'String',
+                values: '<code>month</code>',
+                default: '-'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -197,6 +211,12 @@ export default [
                 name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>toggle</code>',
+                description: 'Toggle activation (picker visibility)'
             }
         ]
     }

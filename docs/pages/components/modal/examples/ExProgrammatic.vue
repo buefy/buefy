@@ -56,7 +56,7 @@
             imageModal() {
                 this.$modal.open(
                     `<p class="image is-4by3">
-                        <img src="https://buefy.github.io/static/img/placeholder-1280x960.png">
+                        <img src="https://buefy.org/static/img/placeholder-1280x960.png">
                     </p>`
                 )
             },

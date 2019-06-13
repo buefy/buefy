@@ -2,7 +2,7 @@
     <article class="content">
         <p>
             Buefy (pronounced /ˈbyo͞oˌfī/, like <b>beau-fy</b>) is a user interface component library made on top
-            of two <em>fresh</em> but very well known frameworks, being them
+            of two <em>fresh</em> but very well known frameworks, them being
             <a href="https://vuejs.org" target="_blank">Vue.js</a> and <a href="https://bulma.io/">Bulma</a>.
             Buefy has two core principles: 1. keep stuff simple and 2. be lightweight.
         </p>

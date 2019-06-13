@@ -12,11 +12,17 @@
         <b-message type="is-info">
             Using <code>far</code> or <code>fad</code> while having FontAwesome free tier might have missing icons.
         </b-message>
+        
+        <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
+
         <b-message type="is-info">
             You can set the <code>defaultIconComponent</code> constructor option to render icons with the
             <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component.
         </b-message>
-        <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
+
+        <div class="example is-paddingless">
+            <CodeView :code="usage | pre" lang="javascript" expanded/>
+        </div>
 
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
             <div class="tags has-addons">
@@ -51,7 +57,27 @@
                 ExObjectSyntax,
                 ExMdiCode,
                 ExFaCode,
-                ExObjectSyntaxCode
+                ExObjectSyntaxCode,
+                usage: `
+                import { library } from '@fortawesome/fontawesome-svg-core';
+                // internal icons
+                import { faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+                    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+                    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload } from "@fortawesome/free-solid-svg-icons";
+                import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+                library.add(faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+                    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+                    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload);
+                Vue.component('vue-fontawesome', FontAwesomeIcon);
+
+                // ...
+
+                import Buefy from 'buefy'
+                Vue.use(Buefy, {
+                  defaultIconComponent: 'vue-fontawesome',
+                  defaultIconPack: 'fas',
+                });`
             }
         }
     }

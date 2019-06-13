@@ -17,9 +17,9 @@
         <b-field :addons="false">
             <b-input
                 placeholder="Custom"
-                v-model="value"
+                :value="value"
                 v-cleave="masks.custom"
-                @input.native="getRawValue">
+                @input.native="onInput">
             </b-input>
             <p><b>Formatted value (v-model)</b>: {{ value }}</p>
             <p><b>Raw value</b>: {{ rawValue }}</p>
@@ -34,17 +34,12 @@
 
     /**
      * We add a new instance of Cleave when the element
-     * is bound or updated, and destroy it when it's unbound.
+     * is bound and destroy it when it's unbound.
      */
     const cleave = {
         name: 'cleave',
         bind(el, binding) {
             const input = el.querySelector('input')
-            input._vCleave = new Cleave(input, binding.value)
-        },
-        update(el, binding) {
-            const input = el.querySelector('input')
-            input._vCleave.destroy()
             input._vCleave = new Cleave(input, binding.value)
         },
         unbind(el) {
@@ -75,8 +70,9 @@
             }
         },
         methods: {
-            getRawValue(event) {
+            onInput(event) {
                 this.rawValue = event.target._vCleave.getRawValue()
+                this.value = event.target._vCleave.getFormattedValue()
             }
         }
     }

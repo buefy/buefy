@@ -26,7 +26,7 @@
                 </li>
             </ul>
         </nav>
-        <section class="tab-content">
+        <section class="tab-content" :class="{'is-transitioning': isTransitioning}">
             <slot/>
         </section>
     </div>
@@ -51,6 +51,10 @@
             animated: {
                 type: Boolean,
                 default: true
+            },
+            destroyOnHide: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -58,6 +62,7 @@
                 activeTab: this.value || 0,
                 tabItems: [],
                 contentHeight: 0,
+                isTransitioning: false,
                 _isTabs: true // Used internally by TabItem
             }
         },

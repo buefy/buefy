@@ -37,4 +37,12 @@
         color: lighten($primary, 20%);
         background: darken($primary, 20%);
     }
+    iframe {
+        height: 30px;
+    }
+    .hero {
+        .container:not(:last-child) {
+            margin-bottom: 3em;
+        }
+    }
 }

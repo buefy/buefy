@@ -1,14 +1,15 @@
 <template>
     <transition name="fade">
         <article
-            v-if="isActive"
+            v-show="isActive"
             class="notification"
-            :class="type">
+            :class="[type, position]">
             <button
                 v-if="closable"
                 class="delete"
                 type="button"
                 @click="close"
+                :aria-label="ariaCloseLabel"
             />
             <div class="media">
                 <div v-if="icon && hasIcon" class="media-left">
@@ -16,10 +17,15 @@
                         :icon="icon"
                         :pack="iconPack"
                         both
-                        size="is-large"/>
+                        size="is-large"
+                        aria-hidden/>
                 </div>
                 <div class="media-content">
-                    <slot/>
+                    <p
+                        class="text"
+                        v-if="message"
+                        v-html="message" />
+                    <slot v-else/>
                 </div>
             </div>
         </article>
@@ -31,6 +37,10 @@
 
     export default {
         name: 'BNotification',
-        mixins: [MessageMixin]
+        mixins: [MessageMixin],
+        props: {
+            position: String,
+            ariaCloseLabel: String
+        }
     }
 </script>

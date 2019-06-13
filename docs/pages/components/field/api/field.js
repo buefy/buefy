@@ -74,6 +74,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             }
+        ],
+        slots: [
+            {
+                name: '<code>label</code>',
+                description: 'Custom label',
+                props: '-'
+            }
         ]
     }
 ]

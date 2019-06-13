@@ -1,8 +1,13 @@
 <template>
     <section>
 
-        <b-collapse class="card">
-            <div slot="trigger" slot-scope="props" class="card-header">
+        <b-collapse class="card" aria-id="contentIdForA11y3">
+            <div
+                slot="trigger" 
+                slot-scope="props"
+                class="card-header"
+                role="button"
+                aria-controls="contentIdForA11y3">
                 <p class="card-header-title">
                     Component
                 </p>

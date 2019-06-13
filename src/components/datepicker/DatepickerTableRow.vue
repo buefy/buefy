@@ -13,7 +13,6 @@
                 @keydown.enter.prevent="emitChosenDate(day)"
                 @keydown.space.prevent="emitChosenDate(day)">
                 {{ day.getDate() }}
-
                 <div class="events" v-if="eventsDateMatch(day)">
                     <div
                         class="event"
@@ -21,7 +20,6 @@
                         v-for="(event, index) in eventsDateMatch(day)"
                         :key="index"/>
                 </div>
-
             </a>
             <div
                 v-else

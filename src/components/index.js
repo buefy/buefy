@@ -1,6 +1,8 @@
 import Autocomplete from './autocomplete'
+import Button from './button'
 import Checkbox from './checkbox'
 import Collapse from './collapse'
+import Clockpicker from './clockpicker'
 import Datepicker from './datepicker'
 import Dialog from './dialog'
 import Dropdown from './dropdown'
@@ -11,6 +13,7 @@ import Loading from './loading'
 import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
+import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Radio from './radio'
 import Select from './select'
@@ -27,7 +30,9 @@ import Upload from './upload'
 
 export {
     Autocomplete,
+    Button,
     Checkbox,
+    Clockpicker,
     Collapse,
     Datepicker,
     Dialog,
@@ -39,6 +44,7 @@ export {
     Message,
     Modal,
     Notification,
+    Numberinput,
     Pagination,
     Radio,
     Select,

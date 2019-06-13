@@ -37,7 +37,7 @@ export default [
                 description: 'Visibility duration in miliseconds',
                 type: 'Number',
                 values: '—',
-                default: '<code>5000</code>'
+                default: '<code>2000</code>'
             },
             {
                 name: '<code>icon-pack</code>',
@@ -52,6 +52,48 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-close-label</code>',
+                description: 'Label for the close button, to be read by accessibility screenreaders.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>message</code>',
+                description: 'Message text',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>position</code>',
+                description: 'Which position the notification will appear when programmatically',
+                type: 'String',
+                values: '<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>',
+                default: '<code>is-bottom-right</code>'
+            },
+            {
+                name: '<code>queue</code>',
+                description: 'If should queue with others notices (snackbar/toast/notification)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>indefinite</code>',
+                description: 'Show the Notification indefinitely until it is dismissed when programmatically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>container</code>',
+                description: 'DOM element the toast will be created on. Note that this also changes the <code>position</code> of the toast from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>.',
+                type: 'String',
+                values: '—',
+                default: '<code>body</code>'
             }
         ],
         events: [

@@ -73,6 +73,10 @@
                         Extensions
                     </router-link>
 
+                    <router-link to="/expo" class="navbar-item">
+                        Expo
+                    </router-link>
+
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div class="navbar-link">Info</div>
 
@@ -132,7 +136,7 @@
                 const height = 400
                 const left = (window.screen.width - width) / 2
                 const top = (window.screen.height - height) / 2
-                const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa`
+                const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa, @walter_tommasi`
                 const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
 
                 window.open(url, '', opts)

@@ -43,7 +43,14 @@ export default [
                 type: 'String',
                 values: '<code>is-centered</code>, <code>is-right</code>',
                 default: '—'
-            }
+            },
+            {
+                name: '<code>destroy-on-hide</code>',
+                description: 'Destroy tabitem on hide',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         events: [
             {

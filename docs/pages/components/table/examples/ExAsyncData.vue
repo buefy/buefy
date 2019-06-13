@@ -9,6 +9,10 @@
             :total="total"
             :per-page="perPage"
             @page-change="onPageChange"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page"
 
             backend-sorting
             :default-sort-direction="defaultSortOrder"

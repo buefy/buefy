@@ -14,7 +14,8 @@ export default {
         useHtml5Validation: {
             type: Boolean,
             default: () => config.defaultUseHtml5Validation
-        }
+        },
+        validationMessage: String
     },
     data() {
         return {
@@ -83,7 +84,10 @@ export default {
         focus() {
             if (this.$data._elementRef === undefined) return
 
-            this.$nextTick(() => this.$el.querySelector(this.$data._elementRef).focus())
+            this.$nextTick(() => {
+                const el = this.$el.querySelector(this.$data._elementRef)
+                if (el) el.focus()
+            })
         },
 
         onBlur($event) {
@@ -114,7 +118,7 @@ export default {
             let isValid = true
             if (!el.checkValidity()) {
                 type = 'is-danger'
-                message = el.validationMessage
+                message = this.validationMessage || el.validationMessage
                 isValid = false
             }
             this.isValid = isValid

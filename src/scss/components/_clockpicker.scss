@@ -1,0 +1,265 @@
+
+.b-clockpicker {
+    // Clockpicker variables defined here as exact numbers
+    // must be known for use in the Vue component for calculations 
+    // to determine  number and hand positioning/size.
+    $transition-swing: cubic-bezier(.25,.8,.50,1);
+
+    $time-font-size: 60px;
+    $period-font-size: 16px;
+    $number-font-size: 18px;
+
+    $indicator-size: 40px;
+    $hand-endpoint-size: 12px;
+
+    $padding-outer: 12px;
+    $padding-inner: 5px;
+
+    // mixins for supporting all $colors defined in Bulma/custom
+    @mixin b-clockpicker-colors($name, $pair) {
+        &.is-#{$name} {
+            @include b-clockpicker-colors-set(nth($pair, 1), nth($pair, 2))
+        }
+    }
+
+    @mixin b-clockpicker-colors-set($color, $inverse) {
+        .card-header {
+            background-color: $color;
+            color: $inverse;
+        }
+        .b-clockpicker-face {
+            &:after {
+                background-color: $color;
+            }
+            &-hand {
+                background-color: $color;
+                border-color: $color;
+            }
+            &-number.active {
+                background-color: $color;
+                color: $inverse;
+            }
+        }
+    }
+
+    @include b-clockpicker-colors-set($primary, $primary-invert);
+
+    @each $name, $pair in $colors {
+        @include b-clockpicker-colors($name, $pair)
+    }
+
+    .dropdown-menu {
+        min-width: 0;
+    }
+    .dropdown,
+    .dropdown-trigger {
+        width: 100%;
+    }
+    .dropdown-item {
+        font-size: inherit;
+        padding: 0;
+    }
+    .dropdown-content {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    .card-content {
+        padding: $padding-outer;
+    }
+    
+    &-btn {
+        cursor: pointer;
+        opacity: 0.6;
+        &:hover,
+        &.active {
+            opacity: 1;
+        }
+    }
+    
+    &-period {
+        .b-clockpicker-btn {
+            font-size: $period-font-size;
+            text-transform: uppercase;
+        }
+    }
+
+    &-time {
+        span {
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+        }
+    }
+    
+    &-header {
+        display: flex;
+        line-height: 1;
+        justify-content: flex-end;
+        color: inherit;
+
+        // time display in the title for inline display
+        .b-clockpicker-time {
+            white-space: nowrap;
+            span {
+                height: $time-font-size;
+                font-size: $time-font-size;
+            }
+        }
+
+        // am/pm in the title for inline display
+        .b-clockpicker-period {
+            align-self: flex-end;
+            display: flex;
+            flex-direction: column;
+            margin: 8px 0 6px 8px;
+        }
+    }
+    
+    &-body {
+        transition: 0.9s $transition-swing;
+
+        .b-clockpicker-btn {
+            padding: 0 8px;
+            border-radius: $radius-rounded;
+            margin-bottom: 2px;
+            &:hover,
+            &.active {
+                background-color: $primary;
+                color: white;
+            }
+        }
+
+        .b-clockpicker-period {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .b-clockpicker-time {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: $period-font-size;
+
+        }
+        
+        .b-clockpicker-face {
+            // Outer border circle of clock
+            border-radius: 50%;
+            position: relative;
+            background-color: $grey-lighter;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            &:after {
+                // Dot in center
+                border-radius: 50%;
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: $hand-endpoint-size;
+                height: $hand-endpoint-size;
+                z-index: 10;
+            }
+
+            &-outer-ring {
+                user-select: none;
+                height: calc(100% - #{$indicator-size + ($padding-inner * 2)});
+                width: calc(100% - #{$indicator-size + ($padding-inner * 2)});
+                position: relative;
+                border-radius: 50%;
+            }
+
+            // Clock face number indicators
+            &-number {
+                align-items: center;
+                border-radius: 100%;
+                cursor: default;
+                display: flex;
+                font-size: $number-font-size;
+                text-align: center;
+                justify-content: center;
+                position: absolute;
+                width: $indicator-size;
+                height: $indicator-size;
+                left: calc(50% - #{$indicator-size} / 2);
+                top: calc(50% - #{$indicator-size} / 2);
+                user-select: none;
+                
+                > span {
+                    z-index: 1;
+                }
+
+                &:before,
+                &:after {
+                    content: "";
+                    height: $indicator-size;
+                    width: $indicator-size;
+                    border-radius: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                &.active {
+                    cursor: default;
+                    z-index: 2;
+                }
+
+                &.disabled {
+                    pointer-events: none;
+                    opacity: .25;
+                }
+            }
+            
+            &-hand {
+                height: calc(50% - #{$hand-endpoint-size / 2});
+                width: 2px;
+                bottom: 50%;
+                left: calc(50% - 1px);
+                
+                transform-origin: center bottom;
+                position: absolute;
+                will-change: transform;
+                z-index: 1;
+                // transition: .3s $transition-swing;
+
+                &:before {
+                    background: transparent;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color: inherit;
+                    border-radius: 100%;
+                    width: $hand-endpoint-size;
+                    height: $hand-endpoint-size;
+                    content: "";
+                    position: absolute;
+                    top: -($hand-endpoint-size) / 2;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+    &-footer {
+        display: block;
+        padding: $padding-outer;
+    }
+    // Sizes
+    &.is-small {
+        @include control-small;
+    }
+    &.is-medium {
+        @include control-medium;
+    }
+    &.is-large {
+        @include control-large;
+    }
+}

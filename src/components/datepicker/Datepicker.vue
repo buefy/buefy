@@ -11,7 +11,7 @@
                 ref="input"
                 slot="trigger"
                 autocomplete="off"
-                :value="formatValue(dateSelected)"
+                :value="formatValue(computedValue)"
                 :placeholder="placeholder"
                 :size="size"
                 :icon="icon"
@@ -21,9 +21,11 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
+                @click.native="onInputClick"
+                @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
-                @focus="$emit('focus', $event)"
-                @blur="$emit('blur', $event) && checkHtml5Validity()"/>
+                @focus="handleOnFocus"
+                @blur="onBlur" />
 
             <b-dropdown-item :disabled="disabled" custom>
                 <header class="datepicker-header">
@@ -35,14 +37,14 @@
                         class="pagination field is-centered"
                         :class="size">
                         <a
-                            v-if="!isFirstMonth && !disabled"
+                            v-show="!showPrev && !disabled"
                             class="pagination-previous"
                             role="button"
                             href="#"
                             :disabled="disabled"
-                            @click.prevent="decrementMonth"
-                            @keydown.enter.prevent="decrementMonth"
-                            @keydown.space.prevent="decrementMonth">
+                            @click.prevent="prev"
+                            @keydown.enter.prevent="prev"
+                            @keydown.space.prevent="prev">
 
                             <b-icon
                                 icon="chevron-left"
@@ -51,14 +53,14 @@
                                 type="is-primary is-clickable"/>
                         </a>
                         <a
-                            v-show="!isLastMonth && !disabled"
+                            v-show="!showNext && !disabled"
                             class="pagination-next"
                             role="button"
                             href="#"
                             :disabled="disabled"
-                            @click.prevent="incrementMonth"
-                            @keydown.enter.prevent="incrementMonth"
-                            @keydown.space.prevent="incrementMonth">
+                            @click.prevent="next"
+                            @keydown.enter.prevent="next"
+                            @keydown.space.prevent="next">
 
                             <b-icon
                                 icon="chevron-right"
@@ -69,6 +71,7 @@
                         <div class="pagination-list">
                             <b-field>
                                 <b-select
+                                    v-if="!isTypeMonth"
                                     v-model="focusedDateData.month"
                                     :disabled="disabled"
                                     :size="size">
@@ -95,9 +98,11 @@
                     </div>
                 </header>
 
-                <div class="datepicker-content">
+                <div
+                    v-if="!isTypeMonth"
+                    class="datepicker-content">
                     <b-datepicker-table
-                        v-model="dateSelected"
+                        v-model="computedValue"
                         :day-names="dayNames"
                         :month-names="monthNames"
                         :first-day-of-week="firstDayOfWeek"
@@ -111,7 +116,24 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
-                        @close="$refs.dropdown.isActive = false"/>
+                        :type-month="isTypeMonth"
+                        @close="togglePicker(false)"/>
+                </div>
+                <div v-else>
+                    <b-datepicker-month
+                        v-model="computedValue"
+                        :month-names="monthNames"
+                        :min-date="minDate"
+                        :max-date="maxDate"
+                        :focused="focusedDateData"
+                        :disabled="disabled"
+                        :unselectable-dates="unselectableDates"
+                        :unselectable-days-of-week="unselectableDaysOfWeek"
+                        :selectable-dates="selectableDates"
+                        :events="events"
+                        :indicators="indicators"
+                        :date-creator="dateCreator"
+                        @close="togglePicker(false)"/>
                 </div>
 
                 <footer
@@ -125,22 +147,22 @@
         <b-input
             v-else
             ref="input"
-            type="date"
+            :type="!isTypeMonth ? 'date' : 'month'"
             autocomplete="off"
-            :value="formatYYYYMMDD(value)"
+            :value="formatNative(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
             :icon-pack="iconPack"
             :loading="loading"
-            :max="formatYYYYMMDD(maxDate)"
-            :min="formatYYYYMMDD(minDate)"
+            :max="formatNative(maxDate)"
+            :min="formatNative(minDate)"
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
             @change.native="onChangeNativePicker"
-            @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event) && checkHtml5Validity()"/>
+            @focus="handleOnFocus"
+            @blur="onBlur"/>
     </div>
 </template>
 
@@ -155,12 +177,39 @@
     import Field from '../field/Field'
     import Select from '../select/Select'
     import Icon from '../icon/Icon'
+
     import DatepickerTable from './DatepickerTable'
+    import DatepickerMonth from './DatepickerMonth'
+
+    const defaultDateFormatter = (date, vm) => {
+        const yyyyMMdd = date.getFullYear() +
+            '/' + (date.getMonth() + 1) +
+            '/' + date.getDate()
+        const d = new Date(yyyyMMdd)
+        return !vm.isTypeMonth ? d.toLocaleDateString()
+            : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
+    }
+
+    const defaultDateParser = (date, vm) => {
+        if (!vm.isTypeMonth) return new Date(Date.parse(date))
+        if (date) {
+            const s = date.split('/')
+            const year = s[0].length === 4 ? s[0] : s[1]
+            const month = s[0].length === 2 ? s[0] : s[1]
+            if (year && month) {
+                const d = new Date(parseInt(year, 10), parseInt(month - 1, 10), 1)
+                d.setHours(0, 0, 0, 0)
+                return d
+            }
+        }
+        return null
+    }
 
     export default {
         name: 'BDatepicker',
         components: {
             [DatepickerTable.name]: DatepickerTable,
+            [DatepickerMonth.name]: DatepickerMonth,
             [Input.name]: Input,
             [Field.name]: Field,
             [Select.name]: Select,
@@ -238,25 +287,21 @@
             selectableDates: Array,
             dateFormatter: {
                 type: Function,
-                default: (date) => {
+                default: (date, vm) => {
                     if (typeof config.defaultDateFormatter === 'function') {
                         return config.defaultDateFormatter(date)
                     } else {
-                        const yyyyMMdd = date.getFullYear() +
-                            '/' + (date.getMonth() + 1) +
-                            '/' + date.getDate()
-                        const d = new Date(yyyyMMdd)
-                        return d.toLocaleDateString()
+                        return defaultDateFormatter(date, vm)
                     }
                 }
             },
             dateParser: {
                 type: Function,
-                default: (date) => {
+                default: (date, vm) => {
                     if (typeof config.defaultDateParser === 'function') {
                         return config.defaultDateParser(date)
                     } else {
-                        return new Date(Date.parse(date))
+                        return defaultDateParser(date, vm)
                     }
                 }
             },
@@ -281,6 +326,15 @@
             indicators: {
                 type: String,
                 default: 'dots'
+            },
+            openOnFocus: Boolean,
+            type: {
+                type: String,
+                validator: (value) => {
+                    return [
+                        'month'
+                    ].indexOf(value) >= 0
+                }
             }
         },
         data() {
@@ -297,19 +351,30 @@
             }
         },
         computed: {
+            computedValue: {
+                get() {
+                    return this.dateSelected
+                },
+                set(value) {
+                    this.updateInternalState(value)
+                    this.togglePicker(false)
+                    this.$emit('input', value)
+                }
+            },
             /*
             * Returns an array of years for the year dropdown. If earliest/latest
             * dates are set by props, range of years will fall within those dates.
             */
             listOfYears() {
-                const latestYear = this.maxDate
-                ? this.maxDate.getFullYear()
-                    : (Math.max(
-                        this.dateCreator().getFullYear(),
-                        this.focusedDateData.year) + 3)
+                let latestYear = this.focusedDateData.year + 3
+                if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
+                    latestYear = this.maxDate.getFullYear()
+                }
 
-                const earliestYear = this.minDate
-                ? this.minDate.getFullYear() : 1900
+                let earliestYear = (latestYear - 100) + 3
+                if (this.minDate && this.minDate.getFullYear() > earliestYear) {
+                    earliestYear = this.minDate.getFullYear()
+                }
 
                 const arrayOfYears = []
                 for (let i = earliestYear; i <= latestYear; i++) {
@@ -319,15 +384,21 @@
                 return arrayOfYears.reverse()
             },
 
-            isFirstMonth() {
+            showPrev() {
                 if (!this.minDate) return false
+                if (this.isTypeMonth) {
+                    return this.focusedDateData.year <= this.minDate.getFullYear()
+                }
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
                 const date = new Date(this.minDate.getFullYear(), this.minDate.getMonth())
                 return (dateToCheck <= date)
             },
 
-            isLastMonth() {
+            showNext() {
                 if (!this.maxDate) return false
+                if (this.isTypeMonth) {
+                    return this.focusedDateData.year >= this.maxDate.getFullYear()
+                }
                 const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
                 const date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth())
                 return (dateToCheck >= date)
@@ -335,33 +406,21 @@
 
             isMobile() {
                 return this.mobileNative && isMobile.any()
+            },
+
+            isTypeMonth() {
+                return this.type === 'month'
             }
         },
         watch: {
-            /*
-            * Emit input event with selected date as payload, set isActive to false.
-            * Update internal focusedDateData
-            */
-            dateSelected(value) {
-                const currentDate = !value ? this.dateCreator() : value
-                this.focusedDateData = {
-                    month: currentDate.getMonth(),
-                    year: currentDate.getFullYear()
-                }
-                this.$emit('input', value)
-                if (this.$refs.dropdown) {
-                    this.$refs.dropdown.isActive = false
-                }
-            },
-
             /**
              * When v-model is changed:
              *   1. Update internal value.
              *   2. If it's invalid, validate again.
              */
             value(value) {
-                this.dateSelected = value
-
+                this.updateInternalState(value)
+                this.togglePicker(false)
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
 
@@ -386,23 +445,16 @@
         },
         methods: {
             /*
-            * Emit input event with selected date as payload for v-model in parent
-            */
-            updateSelectedDate(date) {
-                this.dateSelected = date
-            },
-
-            /*
             * Parse string into date
             */
             onChange(value) {
-                const date = this.dateParser(value)
+                const date = this.dateParser(value, this)
                 if (date && !isNaN(date)) {
-                    this.dateSelected = date
+                    this.computedValue = date
                 } else {
                     // Force refresh input value when not valid date
-                    this.dateSelected = null
-                    this.$refs.input.newValue = this.dateSelected
+                    this.computedValue = null
+                    this.$refs.input.newValue = this.computedValue
                 }
             },
 
@@ -411,7 +463,7 @@
             */
             formatValue(value) {
                 if (value && !isNaN(value)) {
-                    return this.dateFormatter(value)
+                    return this.dateFormatter(value, this)
                 } else {
                     return null
                 }
@@ -419,32 +471,45 @@
 
             /*
             * Either decrement month by 1 if not January or decrement year by 1
-            * and set month to 11 (December)
+            * and set month to 11 (December) or decrement year when 'month'
             */
-            decrementMonth() {
+            prev() {
                 if (this.disabled) return
 
-                if (this.focusedDateData.month > 0) {
-                    this.focusedDateData.month -= 1
-                } else {
-                    this.focusedDateData.month = 11
+                if (this.isTypeMonth) {
                     this.focusedDateData.year -= 1
+                } else {
+                    if (this.focusedDateData.month > 0) {
+                        this.focusedDateData.month -= 1
+                    } else {
+                        this.focusedDateData.month = 11
+                        this.focusedDateData.year -= 1
+                    }
                 }
             },
 
             /*
             * Either increment month by 1 if not December or increment year by 1
-            * and set month to 0 (January)
+            * and set month to 0 (January) or increment year when 'month'
             */
-            incrementMonth() {
+            next() {
                 if (this.disabled) return
 
-                if (this.focusedDateData.month < 11) {
-                    this.focusedDateData.month += 1
-                } else {
-                    this.focusedDateData.month = 0
+                if (this.isTypeMonth) {
                     this.focusedDateData.year += 1
+                } else {
+                    if (this.focusedDateData.month < 11) {
+                        this.focusedDateData.month += 1
+                    } else {
+                        this.focusedDateData.month = 0
+                        this.focusedDateData.year += 1
+                    }
                 }
+            },
+
+            formatNative(value) {
+                return this.isTypeMonth
+                    ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value)
             },
 
             /*
@@ -464,11 +529,91 @@
             },
 
             /*
+            * Format date into string 'YYYY-MM'
+            */
+            formatYYYYMM(value) {
+                const date = new Date(value)
+                if (value && !isNaN(date)) {
+                    const year = date.getFullYear()
+                    const month = date.getMonth() + 1
+                    return year + '-' +
+                        ((month < 10 ? '0' : '') + month)
+                }
+                return ''
+            },
+
+            /*
             * Parse date from string
             */
             onChangeNativePicker(event) {
                 const date = event.target.value
-                this.dateSelected = date ? new Date(date.replace(/-/g, '/')) : null
+                this.computedValue = date ? new Date(date.replace(/-/g, '/')) : null
+            },
+
+            updateInternalState(value) {
+                const currentDate = !value ? this.dateCreator() : value
+                this.focusedDateData = {
+                    month: currentDate.getMonth(),
+                    year: currentDate.getFullYear()
+                }
+                this.dateSelected = value
+            },
+
+            /*
+            * Toggle datepicker
+            */
+            togglePicker(active) {
+                if (this.$refs.dropdown) {
+                    this.$refs.dropdown.isActive = typeof active === 'boolean'
+                        ? active
+                        : !this.$refs.dropdown.isActive
+                }
+            },
+
+            /*
+            * Call default onFocus method and show datepicker
+            */
+            handleOnFocus(event) {
+                this.onFocus(event)
+                if (this.openOnFocus) {
+                    this.togglePicker(true)
+                }
+            },
+
+            /*
+            * Toggle dropdown
+            */
+            toggle() {
+                this.$refs.dropdown.toggle()
+            },
+
+            /*
+            * Avoid dropdown toggle when is already visible
+            */
+            onInputClick(event) {
+                if (this.$refs.dropdown.isActive) {
+                    event.stopPropagation()
+                }
+            },
+
+            /**
+             * Keypress event that is bound to the document.
+             */
+            keyPress(event) {
+                // Esc key
+                if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+                    this.togglePicker(false)
+                }
+            }
+        },
+        created() {
+            if (typeof window !== 'undefined') {
+                document.addEventListener('keyup', this.keyPress)
+            }
+        },
+        beforeDestroy() {
+            if (typeof window !== 'undefined') {
+                document.removeEventListener('keyup', this.keyPress)
             }
         }
     }

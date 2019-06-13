@@ -98,7 +98,8 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/icon": {
         "title": "Icon",
@@ -314,7 +315,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -326,6 +328,18 @@
             "/",
             "documentation",
             "documentation/timepicker"
+        ]
+    },
+    "documentation/clockpicker": {
+        "title": "Clockpicker",
+        "subtitle": "An input with a dropdown/modal clock interface for selecting a time, uses native timepicker for mobile",
+        "path": "/documentation/clockpicker",
+        "githubPath": "pages/components/clockpicker/Clockpicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/clockpicker"
         ]
     },
     "documentation/taginput": {
@@ -362,7 +376,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -374,6 +389,30 @@
             "/",
             "documentation",
             "documentation/pagination"
+        ]
+    },
+    "documentation/button": {
+        "title": "Button",
+        "subtitle": "The classic button, in different colors, sizes, and states",
+        "path": "/documentation/button",
+        "githubPath": "pages/components/button/Button.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/button"
+        ]
+    },
+    "documentation/numberinput": {
+        "title": "Numberinput",
+        "subtitle": "A simple number input with controls",
+        "path": "/documentation/numberinput",
+        "githubPath": "pages/components/numberinput/Numberinput.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/numberinput"
         ]
     },
     "extensions": {
@@ -422,5 +461,17 @@
             "extensions",
             "extensions/veevalidate"
         ]
+    },
+    "expo": {
+        "title": "Expo",
+        "subtitle": "See how devs are using Buefy to create beautiful websites and apps!",
+        "path": "/expo",
+        "githubPath": "pages/Expo.vue",
+        "menu": "expo",
+        "breadcrumb": [
+            "/",
+            "expo"
+        ],
+        "hideSidebar": true
     }
 }

@@ -1,0 +1,27 @@
+.b-numberinput {
+    &.field {
+        margin-bottom: 0;
+        &.is-grouped {
+            div.control {
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
+        }
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+    }
+    input[type=number] {
+        -moz-appearance:textfield;
+    }
+    input[type=number] {
+        text-align: center;
+    }
+    .button {
+        &.is-rounded {
+            padding-left: 0.75em;
+            padding-right: 0.75em;
+        }
+    }   
+}

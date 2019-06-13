@@ -17,8 +17,8 @@ export default [
                     Can be used to render FontAwesome 5 icons with the
                     <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
                 type: 'Component',
-                values: '<code>vue-fontawesome</code>',
-                default: '<code>null</code>'
+                values: 'FontAwesomeIcon component name',
+                default: '<code></code>'
             },
             {
                 name: '<code>defaultContainerElement</code>',
@@ -51,11 +51,42 @@ export default [
                 default: '<code>3500</code>'
             },
             {
+                name: '<code>defaultSnackbarPosition</code>',
+                description: `Default snackbar <code>position</code> attribute.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-bottom-right</code>'
+            },
+            {
                 name: '<code>defaultToastDuration</code>',
                 description: `Default toast <code>duration</code> attribute.`,
                 type: 'Number',
                 values: '—',
                 default: '<code>2000</code>'
+            },
+            {
+                name: '<code>defaultToastPosition</code>',
+                description: `Default toast <code>position</code> attribute.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-top</code>'
+            },
+            {
+                name: '<code>defaultNotificationDuration</code>',
+                description: `Default notification <code>duration</code> attribute.`,
+                type: 'Number',
+                values: '—',
+                default: '<code>2000</code>'
+            },
+            {
+                name: '<code>defaultNotificationPosition</code>',
+                description: `Default notification <code>position</code> attribute for programmatically opening.`,
+                type: 'String',
+                values: `<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>,
+                    <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>`,
+                default: '<code>is-bottom-right</code>'
             },
             {
                 name: '<code>defaultTooltipType</code>',
@@ -174,7 +205,7 @@ export default [
             },
             {
                 name: '<code>defaultNoticeQueue</code>',
-                description: 'Default snackbar/toast <code>queue</code> attribute',
+                description: 'Default snackbar/toast/notification <code>queue</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

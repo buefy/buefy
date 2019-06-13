@@ -17,6 +17,7 @@
         {
             "category": "UI components",
             "pages": [
+                "documentation/button",
                 "documentation/collapse",
                 "documentation/dialog",
                 "documentation/dropdown",
@@ -25,9 +26,11 @@
                     "pages": [
                         "documentation/autocomplete",
                         "documentation/checkbox",
+                        "documentation/clockpicker",
                         "documentation/datepicker",
                         "documentation/field",
                         "documentation/input",
+                        "documentation/numberinput",
                         "documentation/radio",
                         "documentation/select",
                         "documentation/switch",

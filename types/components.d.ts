@@ -72,6 +72,11 @@ export declare type DialogConfig = {
      * to avoid shifting background, but will set <code>&lt;body&gt;</code> to position fixed, might break some layouts
      */
     scroll?: 'clip' | 'keep';
+
+    /**
+     * Focus on confirm or cancel button (when dialog is not prompt)
+     */
+    focusOn?: 'confirm' | 'cancel';
 }
 
 type PromptDialogConfig = DialogConfig & {
@@ -169,4 +174,17 @@ export declare type ToastConfig = {
 
 export declare const Toast: {
     open: (params: ToastConfig | string) => any;
+}
+
+export declare type NotificationConfig = {
+    message: string;
+    type?: ColorModifiers;
+    position?: GlobalPositions;
+    duration?: number;
+    container?: string;
+    queue?: boolean;
+    indefinite?: boolean;
+}
+export declare const NotificationProgrammatic: {
+    open: (params: NotificationConfig | string) => void;
 }

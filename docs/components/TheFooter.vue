@@ -14,7 +14,7 @@
                             by
                             <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
                             with great support by
-                            <a href="https://github.com/jtommy" target="_blank">Walter Tommasi</a>.
+                            <a href="https://twitter.com/walter_tommasi" target="_blank">Walter Tommasi</a>.
                         </p>
                         <p>
                             <small>
@@ -42,6 +42,15 @@
                                     <span>Twitter</span>
                                 </a>
                             </p>
+                            <p class="control">
+                                <a
+                                    class="button is-patreon"
+                                    href="https://www.patreon.com/jtommy"
+                                    target="_blank">
+                                    <b-icon icon="patreon"/>
+                                    <span>Patreon</span>
+                                </a>
+                            </p>
                         </b-field>
                     </div>
 
@@ -63,6 +72,12 @@
                             to="/extensions"
                             class="navbar-item has-text-weight-semibold">
                             Extensions
+                        </router-link>
+
+                        <router-link
+                            to="/expo"
+                            class="navbar-item has-text-weight-semibold">
+                            Expo
                         </router-link>
                     </div>
                 </div>
