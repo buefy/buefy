@@ -339,6 +339,10 @@
             yearsToShow: {
                 type: Number,
                 default: 3
+            },
+            yearsRange: {
+                type: Number,
+                default: 10
             }
         },
         data() {
