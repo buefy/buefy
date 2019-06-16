@@ -197,9 +197,7 @@
             const year = s[0].length === 4 ? s[0] : s[1]
             const month = s[0].length === 2 ? s[0] : s[1]
             if (year && month) {
-                const d = new Date(parseInt(year, 10), parseInt(month - 1, 10), 1)
-                d.setHours(0, 0, 0, 0)
-                return d
+                return new Date(parseInt(year, 10), parseInt(month - 1, 10), 1, 0, 0, 0, 0)
             }
         }
         return null
