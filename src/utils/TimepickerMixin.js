@@ -55,7 +55,7 @@ const defaultTimeParser = (timeString, vm) => {
             }
         }
         d.setHours(hours)
-        return d
+        return new Date(d.geTime())
     }
     return null
 }
@@ -234,15 +234,17 @@ export default {
         updateDateSelected(hours, minutes, meridiens) {
             if (hours != null && minutes != null &&
                 ((!this.isHourFormat24 && meridiens !== null) || this.isHourFormat24)) {
+                let time = null
                 if (this.computedValue && !isNaN(this.computedValue)) {
-                    this.computedValue = new Date(this.computedValue)
+                    time = new Date(this.computedValue)
                 } else {
-                    this.computedValue = new Date()
-                    this.computedValue.setMilliseconds(0)
-                    this.computedValue.setSeconds(0)
+                    time = new Date()
+                    time.setMilliseconds(0)
+                    time.setSeconds(0)
                 }
-                this.computedValue.setHours(hours)
-                this.computedValue.setMinutes(minutes)
+                time.setHours(hours)
+                time.setMinutes(minutes)
+                this.computedValue = new Date(time.getTime())
             }
         },
 
@@ -385,16 +387,18 @@ export default {
         onChangeNativePicker(event) {
             const date = event.target.value
             if (date) {
+                let time = null
                 if (this.computedValue && !isNaN(this.computedValue)) {
-                    this.computedValue = new Date(this.computedValue)
+                    time = new Date(this.computedValue)
                 } else {
-                    this.computedValue = new Date()
-                    this.computedValue.setMilliseconds(0)
-                    this.computedValue.setSeconds(0)
+                    time = new Date()
+                    time.setMilliseconds(0)
+                    time.setSeconds(0)
                 }
-                const time = date.split(':')
-                this.computedValue.setHours(parseInt(time[0], 10))
-                this.computedValue.setMinutes(parseInt(time[1], 10))
+                const t = date.split(':')
+                time.setHours(parseInt(t[0], 10))
+                time.setMinutes(parseInt(t[1], 10))
+                this.computedValue = new Date(time.getTime())
             } else {
                 this.computedValue = null
             }
