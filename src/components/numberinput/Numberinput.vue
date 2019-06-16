@@ -37,6 +37,7 @@
             :icon-pack="iconPack"
             :autocomplete="autocomplete"
             :expanded="expanded"
+            :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)" />
 
@@ -114,7 +115,7 @@
                     }
                     this.newValue = newValue
                     this.$emit('input', newValue)
-                    this.$refs.input.checkHtml5Validity()
+                    !this.isValid && this.$refs.input.checkHtml5Validity()
                 }
             },
             fieldClasses() {
