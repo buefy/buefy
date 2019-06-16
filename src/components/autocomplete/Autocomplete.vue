@@ -11,6 +11,7 @@
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
+            :use-html5-validation="useHtml5Validation"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"

@@ -21,6 +21,7 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
+                :use-html5-validation="useHtml5Validation"
                 @click.native="onInputClick"
                 @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
@@ -160,6 +161,7 @@
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
+            :use-html5-validation="useHtml5Validation"
             @change.native="onChangeNativePicker"
             @focus="handleOnFocus"
             @blur="onBlur"/>

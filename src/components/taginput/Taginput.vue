@@ -37,6 +37,7 @@
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
                 :keep-first="!allowNew"
+                :use-html5-validation="useHtml5Validation"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
