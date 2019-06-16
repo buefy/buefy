@@ -13,6 +13,7 @@
 * Fix #1450 clockpicker rounded style (thanks @atinybeardedman)
 * Fix #1455 margins to taginput (thanks @francoism90)
 * Fix #1460 long press click on plus/minus buttons to numberinput
+* Fix #1470 override ``label-weight`` Bulma variable
 
 ## 0.7.7
 
