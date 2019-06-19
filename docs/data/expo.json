@@ -1,5 +1,12 @@
 [
     {
+        "title": "Travelstop",
+        "date": "2019-06-13",
+        "img": "travelstop.png",
+        "url": "https://travelstop.com",
+        "featured": true
+    },
+    {
         "title": "Marvel Match",
         "date": "2019-05-24",
         "img": "marvelmatch.png",
@@ -72,8 +79,7 @@
         "title": "Counter Network",
         "date": "2019-04-24",
         "img": "counter-network.png",
-        "url": "https://counter.network",
-        "featured": true
+        "url": "https://counter.network"
     },
     {
         "title": "Gods Unchained",
@@ -116,11 +122,5 @@
         "date": "2019-04-24",
         "img": "prevue.png",
         "url": "https://pre-vue.herokuapp.com"
-    },
-    {
-        "title": "Travelstop",
-        "date": "2019-06-13",
-        "img": "travelstop.png",
-        "url": "https://travelstop.com"
     }
 ]
