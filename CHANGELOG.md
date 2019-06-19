@@ -6,6 +6,7 @@
 
 * Add ``label-position`` prop to field
 * Add ``full-screen`` prop to modal
+* Add ``enable-seconds`` prop to timepicker
 
 ### Fixes
 
