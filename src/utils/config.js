@@ -30,7 +30,8 @@ let config = {
     defaultInputHasCounter: true,
     defaultUseHtml5Validation: true,
     defaultDropdownMobileModal: true,
-    defaultFielLabelPosition: null
+    defaultFielLabelPosition: null,
+    defaultDatepickerYearsRange: [-100, 3]
 }
 
 export default config

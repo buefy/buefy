@@ -230,6 +230,13 @@ export default [
                 type: 'String',
                 values: '<code>inside</code>,<code>on-border</code>',
                 default: '-'
+            },
+            {
+                name: '<code>defaultDatepickerYearsRange</code>',
+                description: 'Default years range relative to selected year',
+                type: 'Array',
+                values: '-',
+                default: '<code>[-100, 3]</code>'
             }
         ]
     }

@@ -177,6 +177,13 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>years-range</code>',
+                description: 'Years range relative to selected year',
+                type: 'Array',
+                values: '-',
+                default: '<code>[-100, 3]</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

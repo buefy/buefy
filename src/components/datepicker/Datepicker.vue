@@ -328,6 +328,12 @@
                 default: 'dots'
             },
             openOnFocus: Boolean,
+            yearsRange: {
+                type: Array,
+                default: () => {
+                    return config.defaultDatepickerYearsRange
+                }
+            },
             type: {
                 type: String,
                 validator: (value) => {
@@ -366,12 +372,12 @@
             * dates are set by props, range of years will fall within those dates.
             */
             listOfYears() {
-                let latestYear = this.focusedDateData.year + 3
+                let latestYear = this.focusedDateData.year + this.yearsRange[1]
                 if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
                     latestYear = this.maxDate.getFullYear()
                 }
 
-                let earliestYear = (latestYear - 100) + 3
+                let earliestYear = this.focusedDateData.year + this.yearsRange[0]
                 if (this.minDate && this.minDate.getFullYear() > earliestYear) {
                     earliestYear = this.minDate.getFullYear()
                 }
