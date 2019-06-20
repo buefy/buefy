@@ -197,6 +197,7 @@
                 }, 250)
             },
             onStopLongPress(inc) {
+                if (!this._$intervalRef) return
                 const d = new Date()
                 if (d - this._$intervalTime < 250) {
                     if (inc) this.increment()
