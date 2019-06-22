@@ -15,8 +15,10 @@
 * Fix #1450 clockpicker rounded style (thanks @atinybeardedman)
 * Fix #1455 margins to taginput (thanks @francoism90)
 * Fix #1460 long press click on plus/minus buttons to numberinput
+* Fix #1462 table column width when a column is toggled invisible and visible again (thanks @service-paradis)
 * Fix #1469 ``use-html5-validation`` prop to numberinput
 * Fix #1470 override ``label-weight`` Bulma variable
+* Fix #1480 cancelling long press on Chromium (thanks @yxngl)
 
 ## 0.7.7
 
