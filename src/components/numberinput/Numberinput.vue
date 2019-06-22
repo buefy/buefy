@@ -185,7 +185,8 @@
                 }
             },
             onControlClick(event, inc) {
-                if (event.detail !== 0) return
+                // IE 11 -> filter click event
+                if (event.detail !== 0 || event.type === 'click') return
                 if (inc) this.increment()
                 else this.decrement()
             },
@@ -193,7 +194,7 @@
                 if (event.button !== 0 && event.type !== 'touchstart') return
                 this._$intervalTime = new Date()
                 clearInterval(this._$intervalRef)
-                this._$intervalRef = this._$intervalRef = setInterval(() => {
+                this._$intervalRef = setInterval(() => {
                     if (inc) this.increment()
                     else this.decrement()
                 }, 250)
