@@ -22,7 +22,7 @@ let config = {
     defaultUnselectableDaysOfWeek: null,
     defaultTimeFormatter: null,
     defaultTimeParser: null,
-    defaultModalCanCancel: null,
+    defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
