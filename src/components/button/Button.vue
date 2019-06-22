@@ -77,7 +77,11 @@
                         'button',
                         'a',
                         'input',
-                        'router-link'
+                        'router-link',
+                        'nuxt-link',
+                        'n-link',
+                        'NuxtLink',
+                        'NLink'
                     ].indexOf(value) >= 0
                 }
             }
