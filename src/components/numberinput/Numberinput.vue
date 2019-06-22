@@ -1,17 +1,18 @@
 <template>
     <div class="b-numberinput field" :class="fieldClasses">
-        <p class="control">
+        <p
+            class="control"
+            @mouseup="onStopLongPress(false)"
+            @mouseleave="onStopLongPress(false)"
+            @touchend="onStopLongPress(false)"
+            @touchcancel="onStopLongPress(false)">
             <button
                 type="button"
                 class="button"
                 :class="buttonClasses"
                 :disabled="disabled || disabledMin"
                 @mousedown="onStartLongPress($event, false)"
-                @mouseup="onStopLongPress(false)"
-                @mouseleave="onStopLongPress(false)"
                 @touchstart.prevent="onStartLongPress($event, false)"
-                @touchend="onStopLongPress(false)"
-                @touchcancel="onStopLongPress(false)"
                 @click="onControlClick($event, false)">
                 <b-icon
                     icon="minus"
@@ -41,18 +42,19 @@
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)" />
 
-        <p class="control">
+        <p
+            class="control"
+            @mouseup="onStopLongPress(true)"
+            @mouseleave="onStopLongPress(true)"
+            @touchend="onStopLongPress(true)"
+            @touchcancel="onStopLongPress(true)">
             <button
                 type="button"
                 class="button"
                 :class="buttonClasses"
                 :disabled="disabled || disabledMax"
                 @mousedown="onStartLongPress($event, true)"
-                @mouseup="onStopLongPress(true)"
-                @mouseleave="onStopLongPress(true)"
                 @touchstart.prevent="onStartLongPress($event, true)"
-                @touchend="onStopLongPress(true)"
-                @touchcancel="onStopLongPress(true)"
                 @click="onControlClick($event, true)">
                 <b-icon
                     icon="plus"
