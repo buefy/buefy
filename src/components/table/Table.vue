@@ -34,7 +34,9 @@
                                 'is-current-sort': currentSortColumn === column,
                                 'is-sortable': column.sortable
                             }"
-                            :style="{ width: column.width + 'px' }"
+                            :style="{
+                                width: column.width === undefined ? null : column.width + 'px'
+                            }"
                             @click.stop="sort(column)">
                             <div
                                 class="th-wrap"
