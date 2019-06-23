@@ -346,11 +346,11 @@
             },
             nearbyMonthDays: {
                 type: Boolean,
-                default: true
+                default: () => config.defaultDatepickerNearbyMonthDays
             },
             nearbySelectableMonthDays: {
                 type: Boolean,
-                default: false
+                default: () => config.defaultDatepickerNearbySelectableMonthDays
             }
         },
         data() {

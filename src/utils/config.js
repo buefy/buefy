@@ -31,7 +31,9 @@ let config = {
     defaultUseHtml5Validation: true,
     defaultDropdownMobileModal: true,
     defaultFielLabelPosition: null,
-    defaultDatepickerYearsRange: [-100, 3]
+    defaultDatepickerYearsRange: [-100, 3],
+    defaultDatepickerNearbyMonthDays: true,
+    defaultDatepickerNearbySelectableMonthDays: false
 }
 
 export default config

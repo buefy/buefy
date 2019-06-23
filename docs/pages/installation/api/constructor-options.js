@@ -237,7 +237,21 @@ export default [
                 type: 'Array',
                 values: '-',
                 default: '<code>[-100, 3]</code>'
-            }
+            },
+            {
+                name: '<code>defaultDatepickerNearbyMonthDays</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbySelectableMonthDays</code>',
+                description: 'It allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]
