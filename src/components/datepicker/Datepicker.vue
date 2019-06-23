@@ -118,6 +118,8 @@
                         :indicators="indicators"
                         :date-creator="dateCreator"
                         :type-month="isTypeMonth"
+                        :nearby-month-days="nearbyMonthDays"
+                        :nearby-selectable-month-days="nearbySelectableMonthDays"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -341,6 +343,14 @@
                         'month'
                     ].indexOf(value) >= 0
                 }
+            },
+            nearbyMonthDays: {
+                type: Boolean,
+                default: true
+            },
+            nearbySelectableMonthDays: {
+                type: Boolean,
+                default: false
             }
         },
         data() {

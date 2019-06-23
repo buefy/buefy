@@ -4,7 +4,7 @@
             <a
                 v-if="selectableDate(day) && !disabled"
                 :key="index"
-                :class="[classObject(day), {'has-event':eventsDateMatch(day)}, indicators]"
+                :class="[classObject(day), {'has-event': eventsDateMatch(day)}, indicators]"
                 class="datepicker-cell"
                 role="button"
                 href="#"
@@ -53,7 +53,9 @@
             selectableDates: Array,
             events: Array,
             indicators: String,
-            dateCreator: Function
+            dateCreator: Function,
+            nearbyMonthDays: Boolean,
+            nearbySelectableMonthDays: Boolean
         },
         methods: {
             /*
@@ -71,7 +73,9 @@
                     validity.push(day <= this.maxDate)
                 }
 
-                validity.push(day.getMonth() === this.month)
+                if (this.nearbyMonthDays && !this.nearbySelectableMonthDays) {
+                    validity.push(day.getMonth() === this.month)
+                }
 
                 if (this.selectableDates) {
                     for (let i = 0; i < this.selectableDates.length; i++) {
@@ -155,7 +159,9 @@
                     'is-selected': dateMatch(day, this.selectedDate),
                     'is-today': dateMatch(day, this.dateCreator()),
                     'is-selectable': this.selectableDate(day) && !this.disabled,
-                    'is-unselectable': !this.selectableDate(day) || this.disabled
+                    'is-unselectable': !this.selectableDate(day) || this.disabled,
+                    'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
+                    'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month
                 }
             }
         }

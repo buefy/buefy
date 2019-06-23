@@ -75,6 +75,9 @@
                     background-color: $primary;
                     color: $primary-invert;
                 }
+                &.is-nearby:not(.is-selected) {
+                    color: $grey-light;
+                }
             }
             &.has-events {
                 .datepicker-cell {

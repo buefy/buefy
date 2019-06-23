@@ -24,6 +24,8 @@
                 :events="eventsInThisWeek(week)"
                 :indicators="indicators"
                 :date-creator="dateCreator"
+                :nearby-month-days="nearbyMonthDays"
+                :nearby-selectable-month-days="nearbySelectableMonthDays"
                 @select="updateSelectedDate"/>
         </div>
     </section>
@@ -51,7 +53,9 @@
             dateCreator: Function,
             unselectableDates: Array,
             unselectableDaysOfWeek: Array,
-            selectableDates: Array
+            selectableDates: Array,
+            nearbyMonthDays: Boolean,
+            nearbySelectableMonthDays: Boolean
         },
         computed: {
             visibleDayNames() {

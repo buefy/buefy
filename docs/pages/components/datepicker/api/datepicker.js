@@ -184,6 +184,20 @@ export default [
                 default: '<code>[-100, 3]</code>'
             },
             {
+                name: '<code>nearby-month-days</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>nearby-selectable-month-days</code>',
+                description: 'When <code>nearby-month-days</code>, it allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

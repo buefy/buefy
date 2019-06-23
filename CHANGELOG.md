@@ -7,7 +7,7 @@
 * Add ``label-position`` prop to field
 * Add ``full-screen`` prop to modal
 * Add ``enable-seconds`` prop to timepicker
-* Add ``years-range`` prop to datepicker
+* Add ``years-range``, ``nearby-month-days``, ``nearby-selectable-month-days`` prop to datepicker
 
 ### Fixes
 
