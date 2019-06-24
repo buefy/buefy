@@ -49,8 +49,8 @@ export default [
             },
             {
                 name: '<code>has-navigation</code>',
-                description: `Next and previous buttons below the componente.
-                    You can use this property if you want to usyour custom navigation items.`,
+                description: `Next and previous buttons below the component.
+                    You can use this property if you want to use your own custom navigation items.`,
                 type: 'String',
                 values: '—',
                 default: '<code>true</code>'
@@ -129,7 +129,7 @@ export default [
             {
                 name: '<code>clickable</code>',
                 description: `Item can be used directly to navigate.
-                    If undefined, completed steps are clickable while the other are not`,
+                    If undefined, completed steps are clickable while the others are not.`,
                 type: 'Boolean',
                 values: '—',
                 default: '—'
