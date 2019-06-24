@@ -416,6 +416,19 @@
             "documentation/numberinput"
         ]
     },
+    "documentation/steps": {
+        "title": "Steps",
+        "subtitle": "Responsive horizontal process steps",
+        "path": "/documentation/steps",
+        "githubPath": "pages/components/steps/Steps.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/steps"
+        ],
+        "isNew": true
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
