@@ -32,7 +32,7 @@
         <section class="step-content" :class="{'is-transitioning': isTransitioning}">
             <slot/>
         </section>
-        <nav class="ste-navigation">
+        <nav v-if="hasNavigation" class="step-navigation">
             <a
                 role="button"
                 href="#"
@@ -86,6 +86,10 @@
                 default: false
             },
             iconPack: String,
+            hasNavigation: {
+                type: Boolean,
+                default: true
+            },
             ariaNextLabel: String,
             ariaPreviousLabel: String
         },

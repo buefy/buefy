@@ -48,6 +48,14 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>has-navigation</code>',
+                description: `Next and previous buttons below the componente.
+                    You can use this property if you want to usyour custom navigation items.`,
+                type: 'String',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>aria-page-label</code>',
                 description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
                 type: 'String',
