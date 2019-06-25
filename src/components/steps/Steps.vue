@@ -75,7 +75,7 @@
         },
         props: {
             value: Number,
-            type: String | Object,
+            type: [String, Object],
             size: String,
             animated: {
                 type: Boolean,
