@@ -50,7 +50,7 @@ const defaultTimeParser = (timeString, vm) => {
         }
         d.setSeconds(seconds)
         d.setMinutes(minutes)
-        if (this.hourFormat === HOUR_FORMAT_12) {
+        if (vm.hourFormat === HOUR_FORMAT_12) {
             if (am && hours === 12) {
                 hours = 0
             } else if (!am && hours !== 12) {
