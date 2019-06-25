@@ -123,7 +123,7 @@
             },
 
             eventsDateMatch(day) {
-                if (!this.events.length) return false
+                if (!this.events || !this.events.length) return false
 
                 const dayEvents = []
 
