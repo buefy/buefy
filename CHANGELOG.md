@@ -4,6 +4,7 @@
 
 ### New features
 
+* **New component: Steps**, [see docs](https://buefy.org/documentation/steps)
 * Add ``label-position`` prop to field
 * Add ``full-screen`` prop to modal
 * Add ``enable-seconds`` prop to timepicker
