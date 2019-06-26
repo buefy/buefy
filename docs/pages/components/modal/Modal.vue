@@ -14,11 +14,6 @@
             <CodeView lang="javascript" :code="programmaticSyntax | pre" expanded/>
         </Example>
 
-        <Example :component="ExProgrammatic" :code="ExProgrammaticCode" title="Programmatic">
-            <p>Syntax:</p>
-            <CodeView lang="javascript" :code="programmaticSyntax | pre" expanded/>
-        </Example>
-
         <Example :component="ExFullScreen" :code="ExFullScreenCode" title="Full Screen">
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
