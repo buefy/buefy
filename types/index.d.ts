@@ -15,26 +15,6 @@ declare module 'vue/types/vue' {
     }
 }
 
-declare module 'buefy/dist/components/dialog' {
-    export { Dialog };
-}
-
-declare module 'buefy/dist/components/modal' {
-    export { ModalProgrammatic };
-}
-
-declare module 'buefy/dist/components/toast' {
-    export { Toast };
-}
-
-declare module 'buefy/dist/components/snackbar' {
-    export { Snackbar };
-}
-
-declare module 'buefy/dist/components/notification' {
-    export { NotificationProgrammatic };
-}
-
 export declare type BuefyConfig = {
     defaultContainerElement?: string,
     defaultIconPack?: string;
