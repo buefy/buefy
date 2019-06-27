@@ -30,7 +30,7 @@ let config = {
     defaultInputHasCounter: true,
     defaultUseHtml5Validation: true,
     defaultDropdownMobileModal: true,
-    defaultFielLabelPosition: null,
+    defaultFieldLabelPosition: null,
     defaultDatepickerYearsRange: [-100, 3],
     defaultDatepickerNearbyMonthDays: true,
     defaultDatepickerNearbySelectableMonthDays: false
