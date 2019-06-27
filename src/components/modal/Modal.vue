@@ -3,7 +3,7 @@
         <div
             v-if="isActive"
             class="modal is-active"
-            :class="{ 'is-full-screen': fullScreen }">
+            :class="[{'is-full-screen': fullScreen}, customClass]">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
@@ -75,7 +75,8 @@
                     ].indexOf(value) >= 0
                 }
             },
-            fullScreen: Boolean
+            fullScreen: Boolean,
+            customClass: String
         },
         data() {
             return {
