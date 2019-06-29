@@ -600,6 +600,10 @@ export default {
         * Toggle dropdown
         */
         toggle() {
+            if (this.mobileNative) {
+                this.$refs.input.$el.click()
+                return
+            }
             this.$refs.dropdown.toggle()
         },
 
