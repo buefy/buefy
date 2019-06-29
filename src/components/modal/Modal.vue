@@ -33,50 +33,23 @@
 import { removeElement } from '../../utils/helpers'
 import config from '../../utils/config'
 
-    export default {
-        name: 'BModal',
-        props: {
-            active: Boolean,
-            component: [Object, Function],
-            content: String,
-            programmatic: Boolean,
-            props: Object,
-            events: Object,
-            width: {
-                type: [String, Number],
-                default: 960
-            },
-            hasModalCard: Boolean,
-            animation: {
-                type: String,
-                default: 'zoom-out'
-            },
-            canCancel: {
-                type: [Array, Boolean],
-                default: () => {
-                    return config.defaultModalCanCancel
-                }
-            },
-            onCancel: {
-                type: Function,
-                default: () => {}
-            },
-            scroll: {
-                type: String,
-                default: () => {
-                    return config.defaultModalScroll
-                        ? config.defaultModalScroll
-                        : 'clip'
-                },
-                validator: (value) => {
-                    return [
-                        'clip',
-                        'keep'
-                    ].indexOf(value) >= 0
-                }
-            },
-            fullScreen: Boolean,
-            customClass: String
+export default {
+    name: 'BModal',
+    props: {
+        active: Boolean,
+        component: [Object, Function],
+        content: String,
+        programmatic: Boolean,
+        props: Object,
+        events: Object,
+        width: {
+            type: [String, Number],
+            default: 960
+        },
+        hasModalCard: Boolean,
+        animation: {
+            type: String,
+            default: 'zoom-out'
         },
         canCancel: {
             type: [Array, Boolean],
@@ -102,7 +75,8 @@ import config from '../../utils/config'
                 ].indexOf(value) >= 0
             }
         },
-        fullScreen: Boolean
+        fullScreen: Boolean,
+        customClass: String
     },
     data() {
         return {
