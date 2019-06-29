@@ -33,14 +33,14 @@
 </template>
 
 <script>
-    import MessageMixin from '../../utils/MessageMixin.js'
+import MessageMixin from '../../utils/MessageMixin.js'
 
-    export default {
-        name: 'BNotification',
-        mixins: [MessageMixin],
-        props: {
-            position: String,
-            ariaCloseLabel: String
-        }
+export default {
+    name: 'BNotification',
+    mixins: [MessageMixin],
+    props: {
+        position: String,
+        ariaCloseLabel: String
     }
+}
 </script>

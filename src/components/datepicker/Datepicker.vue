@@ -171,466 +171,466 @@
 </template>
 
 <script>
-    import FormElementMixin from '../../utils/FormElementMixin'
-    import { isMobile } from '../../utils/helpers'
-    import config from '../../utils/config'
+import FormElementMixin from '../../utils/FormElementMixin'
+import { isMobile } from '../../utils/helpers'
+import config from '../../utils/config'
 
-    import Dropdown from '../dropdown/Dropdown'
-    import DropdownItem from '../dropdown/DropdownItem'
-    import Input from '../input/Input'
-    import Field from '../field/Field'
-    import Select from '../select/Select'
-    import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown'
+import DropdownItem from '../dropdown/DropdownItem'
+import Input from '../input/Input'
+import Field from '../field/Field'
+import Select from '../select/Select'
+import Icon from '../icon/Icon'
 
-    import DatepickerTable from './DatepickerTable'
-    import DatepickerMonth from './DatepickerMonth'
+import DatepickerTable from './DatepickerTable'
+import DatepickerMonth from './DatepickerMonth'
 
-    const defaultDateFormatter = (date, vm) => {
-        const yyyyMMdd = date.getFullYear() +
-            '/' + (date.getMonth() + 1) +
-            '/' + date.getDate()
-        const d = new Date(yyyyMMdd)
-        return !vm.isTypeMonth ? d.toLocaleDateString()
-            : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
-    }
+const defaultDateFormatter = (date, vm) => {
+    const yyyyMMdd = date.getFullYear() +
+        '/' + (date.getMonth() + 1) +
+        '/' + date.getDate()
+    const d = new Date(yyyyMMdd)
+    return !vm.isTypeMonth ? d.toLocaleDateString()
+        : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
+}
 
-    const defaultDateParser = (date, vm) => {
-        if (!vm.isTypeMonth) return new Date(Date.parse(date))
-        if (date) {
-            const s = date.split('/')
-            const year = s[0].length === 4 ? s[0] : s[1]
-            const month = s[0].length === 2 ? s[0] : s[1]
-            if (year && month) {
-                return new Date(parseInt(year, 10), parseInt(month - 1, 10), 1, 0, 0, 0, 0)
-            }
+const defaultDateParser = (date, vm) => {
+    if (!vm.isTypeMonth) return new Date(Date.parse(date))
+    if (date) {
+        const s = date.split('/')
+        const year = s[0].length === 4 ? s[0] : s[1]
+        const month = s[0].length === 2 ? s[0] : s[1]
+        if (year && month) {
+            return new Date(parseInt(year, 10), parseInt(month - 1, 10), 1, 0, 0, 0, 0)
         }
-        return null
     }
+    return null
+}
 
-    export default {
-        name: 'BDatepicker',
-        components: {
-            [DatepickerTable.name]: DatepickerTable,
-            [DatepickerMonth.name]: DatepickerMonth,
-            [Input.name]: Input,
-            [Field.name]: Field,
-            [Select.name]: Select,
-            [Icon.name]: Icon,
-            [Dropdown.name]: Dropdown,
-            [DropdownItem.name]: DropdownItem
-        },
-        mixins: [FormElementMixin],
-        inheritAttrs: false,
-        props: {
-            value: Date,
-            dayNames: {
-                type: Array,
-                default: () => {
-                    if (Array.isArray(config.defaultDayNames)) {
-                        return config.defaultDayNames
-                    } else {
-                        return [
-                            'Su',
-                            'M',
-                            'Tu',
-                            'W',
-                            'Th',
-                            'F',
-                            'S'
-                        ]
-                    }
-                }
-            },
-            monthNames: {
-                type: Array,
-                default: () => {
-                    if (Array.isArray(config.defaultMonthNames)) {
-                        return config.defaultMonthNames
-                    } else {
-                        return [
-                            'January',
-                            'February',
-                            'March',
-                            'April',
-                            'May',
-                            'June',
-                            'July',
-                            'August',
-                            'September',
-                            'October',
-                            'November',
-                            'December'
-                        ]
-                    }
-                }
-            },
-            firstDayOfWeek: {
-                type: Number,
-                default: () => {
-                    if (typeof config.defaultFirstDayOfWeek === 'number') {
-                        return config.defaultFirstDayOfWeek
-                    } else {
-                        return 0
-                    }
-                }
-            },
-            inline: Boolean,
-            minDate: Date,
-            maxDate: Date,
-            focusedDate: Date,
-            placeholder: String,
-            editable: Boolean,
-            disabled: Boolean,
-            unselectableDates: Array,
-            unselectableDaysOfWeek: {
-                type: Array,
-                default: () => { return config.defaultUnselectableDaysOfWeek }
-            },
-            selectableDates: Array,
-            dateFormatter: {
-                type: Function,
-                default: (date, vm) => {
-                    if (typeof config.defaultDateFormatter === 'function') {
-                        return config.defaultDateFormatter(date)
-                    } else {
-                        return defaultDateFormatter(date, vm)
-                    }
-                }
-            },
-            dateParser: {
-                type: Function,
-                default: (date, vm) => {
-                    if (typeof config.defaultDateParser === 'function') {
-                        return config.defaultDateParser(date)
-                    } else {
-                        return defaultDateParser(date, vm)
-                    }
-                }
-            },
-            dateCreator: {
-                type: Function,
-                default: () => {
-                    if (typeof config.defaultDateCreator === 'function') {
-                        return config.defaultDateCreator()
-                    } else {
-                        return new Date()
-                    }
-                }
-            },
-            mobileNative: {
-                type: Boolean,
-                default: () => {
-                    return config.defaultDatepickerMobileNative
-                }
-            },
-            position: String,
-            events: Array,
-            indicators: {
-                type: String,
-                default: 'dots'
-            },
-            openOnFocus: Boolean,
-            yearsRange: {
-                type: Array,
-                default: () => {
-                    return config.defaultDatepickerYearsRange
-                }
-            },
-            type: {
-                type: String,
-                validator: (value) => {
+export default {
+    name: 'BDatepicker',
+    components: {
+        [DatepickerTable.name]: DatepickerTable,
+        [DatepickerMonth.name]: DatepickerMonth,
+        [Input.name]: Input,
+        [Field.name]: Field,
+        [Select.name]: Select,
+        [Icon.name]: Icon,
+        [Dropdown.name]: Dropdown,
+        [DropdownItem.name]: DropdownItem
+    },
+    mixins: [FormElementMixin],
+    inheritAttrs: false,
+    props: {
+        value: Date,
+        dayNames: {
+            type: Array,
+            default: () => {
+                if (Array.isArray(config.defaultDayNames)) {
+                    return config.defaultDayNames
+                } else {
                     return [
-                        'month'
-                    ].indexOf(value) >= 0
+                        'Su',
+                        'M',
+                        'Tu',
+                        'W',
+                        'Th',
+                        'F',
+                        'S'
+                    ]
                 }
-            },
-            nearbyMonthDays: {
-                type: Boolean,
-                default: () => config.defaultDatepickerNearbyMonthDays
-            },
-            nearbySelectableMonthDays: {
-                type: Boolean,
-                default: () => config.defaultDatepickerNearbySelectableMonthDays
             }
         },
-        data() {
-            const focusedDate = this.value || this.focusedDate || this.dateCreator()
-
-            return {
-                dateSelected: this.value,
-                focusedDateData: {
-                    month: focusedDate.getMonth(),
-                    year: focusedDate.getFullYear()
-                },
-                _elementRef: 'input',
-                _isDatepicker: true
+        monthNames: {
+            type: Array,
+            default: () => {
+                if (Array.isArray(config.defaultMonthNames)) {
+                    return config.defaultMonthNames
+                } else {
+                    return [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December'
+                    ]
+                }
             }
         },
-        computed: {
-            computedValue: {
-                get() {
-                    return this.dateSelected
-                },
-                set(value) {
-                    this.updateInternalState(value)
-                    this.togglePicker(false)
-                    this.$emit('input', value)
+        firstDayOfWeek: {
+            type: Number,
+            default: () => {
+                if (typeof config.defaultFirstDayOfWeek === 'number') {
+                    return config.defaultFirstDayOfWeek
+                } else {
+                    return 0
                 }
-            },
-            /*
-            * Returns an array of years for the year dropdown. If earliest/latest
-            * dates are set by props, range of years will fall within those dates.
-            */
-            listOfYears() {
-                let latestYear = this.focusedDateData.year + this.yearsRange[1]
-                if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
-                    latestYear = this.maxDate.getFullYear()
-                }
-
-                let earliestYear = this.focusedDateData.year + this.yearsRange[0]
-                if (this.minDate && this.minDate.getFullYear() > earliestYear) {
-                    earliestYear = this.minDate.getFullYear()
-                }
-
-                const arrayOfYears = []
-                for (let i = earliestYear; i <= latestYear; i++) {
-                    arrayOfYears.push(i)
-                }
-
-                return arrayOfYears.reverse()
-            },
-
-            showPrev() {
-                if (!this.minDate) return false
-                if (this.isTypeMonth) {
-                    return this.focusedDateData.year <= this.minDate.getFullYear()
-                }
-                const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
-                const date = new Date(this.minDate.getFullYear(), this.minDate.getMonth())
-                return (dateToCheck <= date)
-            },
-
-            showNext() {
-                if (!this.maxDate) return false
-                if (this.isTypeMonth) {
-                    return this.focusedDateData.year >= this.maxDate.getFullYear()
-                }
-                const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
-                const date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth())
-                return (dateToCheck >= date)
-            },
-
-            isMobile() {
-                return this.mobileNative && isMobile.any()
-            },
-
-            isTypeMonth() {
-                return this.type === 'month'
             }
         },
-        watch: {
-            /**
-             * When v-model is changed:
-             *   1. Update internal value.
-             *   2. If it's invalid, validate again.
-             */
-            value(value) {
+        inline: Boolean,
+        minDate: Date,
+        maxDate: Date,
+        focusedDate: Date,
+        placeholder: String,
+        editable: Boolean,
+        disabled: Boolean,
+        unselectableDates: Array,
+        unselectableDaysOfWeek: {
+            type: Array,
+            default: () => { return config.defaultUnselectableDaysOfWeek }
+        },
+        selectableDates: Array,
+        dateFormatter: {
+            type: Function,
+            default: (date, vm) => {
+                if (typeof config.defaultDateFormatter === 'function') {
+                    return config.defaultDateFormatter(date)
+                } else {
+                    return defaultDateFormatter(date, vm)
+                }
+            }
+        },
+        dateParser: {
+            type: Function,
+            default: (date, vm) => {
+                if (typeof config.defaultDateParser === 'function') {
+                    return config.defaultDateParser(date)
+                } else {
+                    return defaultDateParser(date, vm)
+                }
+            }
+        },
+        dateCreator: {
+            type: Function,
+            default: () => {
+                if (typeof config.defaultDateCreator === 'function') {
+                    return config.defaultDateCreator()
+                } else {
+                    return new Date()
+                }
+            }
+        },
+        mobileNative: {
+            type: Boolean,
+            default: () => {
+                return config.defaultDatepickerMobileNative
+            }
+        },
+        position: String,
+        events: Array,
+        indicators: {
+            type: String,
+            default: 'dots'
+        },
+        openOnFocus: Boolean,
+        yearsRange: {
+            type: Array,
+            default: () => {
+                return config.defaultDatepickerYearsRange
+            }
+        },
+        type: {
+            type: String,
+            validator: (value) => {
+                return [
+                    'month'
+                ].indexOf(value) >= 0
+            }
+        },
+        nearbyMonthDays: {
+            type: Boolean,
+            default: () => config.defaultDatepickerNearbyMonthDays
+        },
+        nearbySelectableMonthDays: {
+            type: Boolean,
+            default: () => config.defaultDatepickerNearbySelectableMonthDays
+        }
+    },
+    data() {
+        const focusedDate = this.value || this.focusedDate || this.dateCreator()
+
+        return {
+            dateSelected: this.value,
+            focusedDateData: {
+                month: focusedDate.getMonth(),
+                year: focusedDate.getFullYear()
+            },
+            _elementRef: 'input',
+            _isDatepicker: true
+        }
+    },
+    computed: {
+        computedValue: {
+            get() {
+                return this.dateSelected
+            },
+            set(value) {
                 this.updateInternalState(value)
                 this.togglePicker(false)
-                !this.isValid && this.$refs.input.checkHtml5Validity()
-            },
-
-            focusedDate(value) {
-                if (value) {
-                    this.focusedDateData = {
-                        month: value.getMonth(),
-                        year: value.getFullYear()
-                    }
-                }
-            },
-
-            /*
-            * Emit input event on month and/or year change
-            */
-            'focusedDateData.month'(value) {
-                this.$emit('change-month', value)
-            },
-            'focusedDateData.year'(value) {
-                this.$emit('change-year', value)
+                this.$emit('input', value)
             }
         },
-        methods: {
-            /*
-            * Parse string into date
-            */
-            onChange(value) {
-                const date = this.dateParser(value, this)
-                if (date && !isNaN(date)) {
-                    this.computedValue = date
-                } else {
-                    // Force refresh input value when not valid date
-                    this.computedValue = null
-                    this.$refs.input.newValue = this.computedValue
-                }
-            },
+        /*
+        * Returns an array of years for the year dropdown. If earliest/latest
+        * dates are set by props, range of years will fall within those dates.
+        */
+        listOfYears() {
+            let latestYear = this.focusedDateData.year + this.yearsRange[1]
+            if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
+                latestYear = this.maxDate.getFullYear()
+            }
 
-            /*
-            * Format date into string
-            */
-            formatValue(value) {
-                if (value && !isNaN(value)) {
-                    return this.dateFormatter(value, this)
-                } else {
-                    return null
-                }
-            },
+            let earliestYear = this.focusedDateData.year + this.yearsRange[0]
+            if (this.minDate && this.minDate.getFullYear() > earliestYear) {
+                earliestYear = this.minDate.getFullYear()
+            }
 
-            /*
-            * Either decrement month by 1 if not January or decrement year by 1
-            * and set month to 11 (December) or decrement year when 'month'
-            */
-            prev() {
-                if (this.disabled) return
+            const arrayOfYears = []
+            for (let i = earliestYear; i <= latestYear; i++) {
+                arrayOfYears.push(i)
+            }
 
-                if (this.isTypeMonth) {
-                    this.focusedDateData.year -= 1
-                } else {
-                    if (this.focusedDateData.month > 0) {
-                        this.focusedDateData.month -= 1
-                    } else {
-                        this.focusedDateData.month = 11
-                        this.focusedDateData.year -= 1
-                    }
-                }
-            },
+            return arrayOfYears.reverse()
+        },
 
-            /*
-            * Either increment month by 1 if not December or increment year by 1
-            * and set month to 0 (January) or increment year when 'month'
-            */
-            next() {
-                if (this.disabled) return
+        showPrev() {
+            if (!this.minDate) return false
+            if (this.isTypeMonth) {
+                return this.focusedDateData.year <= this.minDate.getFullYear()
+            }
+            const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
+            const date = new Date(this.minDate.getFullYear(), this.minDate.getMonth())
+            return (dateToCheck <= date)
+        },
 
-                if (this.isTypeMonth) {
-                    this.focusedDateData.year += 1
-                } else {
-                    if (this.focusedDateData.month < 11) {
-                        this.focusedDateData.month += 1
-                    } else {
-                        this.focusedDateData.month = 0
-                        this.focusedDateData.year += 1
-                    }
-                }
-            },
+        showNext() {
+            if (!this.maxDate) return false
+            if (this.isTypeMonth) {
+                return this.focusedDateData.year >= this.maxDate.getFullYear()
+            }
+            const dateToCheck = new Date(this.focusedDateData.year, this.focusedDateData.month)
+            const date = new Date(this.maxDate.getFullYear(), this.maxDate.getMonth())
+            return (dateToCheck >= date)
+        },
 
-            formatNative(value) {
-                return this.isTypeMonth
-                    ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value)
-            },
+        isMobile() {
+            return this.mobileNative && isMobile.any()
+        },
 
-            /*
-            * Format date into string 'YYYY-MM-DD'
-            */
-            formatYYYYMMDD(value) {
-                const date = new Date(value)
-                if (value && !isNaN(date)) {
-                    const year = date.getFullYear()
-                    const month = date.getMonth() + 1
-                    const day = date.getDate()
-                    return year + '-' +
-                        ((month < 10 ? '0' : '') + month) + '-' +
-                        ((day < 10 ? '0' : '') + day)
-                }
-                return ''
-            },
+        isTypeMonth() {
+            return this.type === 'month'
+        }
+    },
+    watch: {
+        /**
+        * When v-model is changed:
+        *   1. Update internal value.
+        *   2. If it's invalid, validate again.
+        */
+        value(value) {
+            this.updateInternalState(value)
+            this.togglePicker(false)
+            !this.isValid && this.$refs.input.checkHtml5Validity()
+        },
 
-            /*
-            * Format date into string 'YYYY-MM'
-            */
-            formatYYYYMM(value) {
-                const date = new Date(value)
-                if (value && !isNaN(date)) {
-                    const year = date.getFullYear()
-                    const month = date.getMonth() + 1
-                    return year + '-' +
-                        ((month < 10 ? '0' : '') + month)
-                }
-                return ''
-            },
-
-            /*
-            * Parse date from string
-            */
-            onChangeNativePicker(event) {
-                const date = event.target.value
-                this.computedValue = date ? new Date(date.replace(/-/g, '/')) : null
-            },
-
-            updateInternalState(value) {
-                const currentDate = !value ? this.dateCreator() : value
+        focusedDate(value) {
+            if (value) {
                 this.focusedDateData = {
-                    month: currentDate.getMonth(),
-                    year: currentDate.getFullYear()
-                }
-                this.dateSelected = value
-            },
-
-            /*
-            * Toggle datepicker
-            */
-            togglePicker(active) {
-                if (this.$refs.dropdown) {
-                    this.$refs.dropdown.isActive = typeof active === 'boolean'
-                        ? active
-                        : !this.$refs.dropdown.isActive
-                }
-            },
-
-            /*
-            * Call default onFocus method and show datepicker
-            */
-            handleOnFocus(event) {
-                this.onFocus(event)
-                if (this.openOnFocus) {
-                    this.togglePicker(true)
-                }
-            },
-
-            /*
-            * Toggle dropdown
-            */
-            toggle() {
-                this.$refs.dropdown.toggle()
-            },
-
-            /*
-            * Avoid dropdown toggle when is already visible
-            */
-            onInputClick(event) {
-                if (this.$refs.dropdown.isActive) {
-                    event.stopPropagation()
-                }
-            },
-
-            /**
-             * Keypress event that is bound to the document.
-             */
-            keyPress(event) {
-                // Esc key
-                if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
-                    this.togglePicker(false)
+                    month: value.getMonth(),
+                    year: value.getFullYear()
                 }
             }
         },
-        created() {
-            if (typeof window !== 'undefined') {
-                document.addEventListener('keyup', this.keyPress)
+
+        /*
+        * Emit input event on month and/or year change
+        */
+        'focusedDateData.month'(value) {
+            this.$emit('change-month', value)
+        },
+        'focusedDateData.year'(value) {
+            this.$emit('change-year', value)
+        }
+    },
+    methods: {
+        /*
+        * Parse string into date
+        */
+        onChange(value) {
+            const date = this.dateParser(value, this)
+            if (date && !isNaN(date)) {
+                this.computedValue = date
+            } else {
+                // Force refresh input value when not valid date
+                this.computedValue = null
+                this.$refs.input.newValue = this.computedValue
             }
         },
-        beforeDestroy() {
-            if (typeof window !== 'undefined') {
-                document.removeEventListener('keyup', this.keyPress)
+
+        /*
+        * Format date into string
+        */
+        formatValue(value) {
+            if (value && !isNaN(value)) {
+                return this.dateFormatter(value, this)
+            } else {
+                return null
+            }
+        },
+
+        /*
+        * Either decrement month by 1 if not January or decrement year by 1
+        * and set month to 11 (December) or decrement year when 'month'
+        */
+        prev() {
+            if (this.disabled) return
+
+            if (this.isTypeMonth) {
+                this.focusedDateData.year -= 1
+            } else {
+                if (this.focusedDateData.month > 0) {
+                    this.focusedDateData.month -= 1
+                } else {
+                    this.focusedDateData.month = 11
+                    this.focusedDateData.year -= 1
+                }
+            }
+        },
+
+        /*
+        * Either increment month by 1 if not December or increment year by 1
+        * and set month to 0 (January) or increment year when 'month'
+        */
+        next() {
+            if (this.disabled) return
+
+            if (this.isTypeMonth) {
+                this.focusedDateData.year += 1
+            } else {
+                if (this.focusedDateData.month < 11) {
+                    this.focusedDateData.month += 1
+                } else {
+                    this.focusedDateData.month = 0
+                    this.focusedDateData.year += 1
+                }
+            }
+        },
+
+        formatNative(value) {
+            return this.isTypeMonth
+                ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value)
+        },
+
+        /*
+        * Format date into string 'YYYY-MM-DD'
+        */
+        formatYYYYMMDD(value) {
+            const date = new Date(value)
+            if (value && !isNaN(date)) {
+                const year = date.getFullYear()
+                const month = date.getMonth() + 1
+                const day = date.getDate()
+                return year + '-' +
+                    ((month < 10 ? '0' : '') + month) + '-' +
+                    ((day < 10 ? '0' : '') + day)
+            }
+            return ''
+        },
+
+        /*
+        * Format date into string 'YYYY-MM'
+        */
+        formatYYYYMM(value) {
+            const date = new Date(value)
+            if (value && !isNaN(date)) {
+                const year = date.getFullYear()
+                const month = date.getMonth() + 1
+                return year + '-' +
+                    ((month < 10 ? '0' : '') + month)
+            }
+            return ''
+        },
+
+        /*
+        * Parse date from string
+        */
+        onChangeNativePicker(event) {
+            const date = event.target.value
+            this.computedValue = date ? new Date(date.replace(/-/g, '/')) : null
+        },
+
+        updateInternalState(value) {
+            const currentDate = !value ? this.dateCreator() : value
+            this.focusedDateData = {
+                month: currentDate.getMonth(),
+                year: currentDate.getFullYear()
+            }
+            this.dateSelected = value
+        },
+
+        /*
+        * Toggle datepicker
+        */
+        togglePicker(active) {
+            if (this.$refs.dropdown) {
+                this.$refs.dropdown.isActive = typeof active === 'boolean'
+                    ? active
+                    : !this.$refs.dropdown.isActive
+            }
+        },
+
+        /*
+        * Call default onFocus method and show datepicker
+        */
+        handleOnFocus(event) {
+            this.onFocus(event)
+            if (this.openOnFocus) {
+                this.togglePicker(true)
+            }
+        },
+
+        /*
+        * Toggle dropdown
+        */
+        toggle() {
+            this.$refs.dropdown.toggle()
+        },
+
+        /*
+        * Avoid dropdown toggle when is already visible
+        */
+        onInputClick(event) {
+            if (this.$refs.dropdown.isActive) {
+                event.stopPropagation()
+            }
+        },
+
+        /**
+        * Keypress event that is bound to the document.
+        */
+        keyPress(event) {
+            // Esc key
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+                this.togglePicker(false)
             }
         }
+    },
+    created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
+    beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('keyup', this.keyPress)
+        }
     }
+}
 </script>

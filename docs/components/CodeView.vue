@@ -39,29 +39,29 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            lang: {
-                type: String,
-                default: 'html'
-            },
-            bordered: Boolean,
-            code: String,
-            expanded: Boolean,
-            title: String
+export default {
+    props: {
+        lang: {
+            type: String,
+            default: 'html'
         },
-        data() {
+        bordered: Boolean,
+        code: String,
+        expanded: Boolean,
+        title: String
+    },
+    data() {
+        return {
+            isExpanded: false
+        }
+    },
+    computed: {
+        figureClasses() {
             return {
-                isExpanded: false
-            }
-        },
-        computed: {
-            figureClasses() {
-                return {
-                    'is-collapsed': !this.bordered && !this.expanded,
-                    'is-expanded': this.isExpanded || this.expanded
-                }
+                'is-collapsed': !this.bordered && !this.expanded,
+                'is-expanded': this.isExpanded || this.expanded
             }
         }
     }
+}
 </script>

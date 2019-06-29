@@ -64,173 +64,173 @@
 </template>
 
 <script>
-    import Icon from '../icon/Icon'
-    import SlotComponent from '../../utils/SlotComponent'
+import Icon from '../icon/Icon'
+import SlotComponent from '../../utils/SlotComponent'
 
-    export default {
-        name: 'BSteps',
-        components: {
-            [Icon.name]: Icon,
-            [SlotComponent.name]: SlotComponent
+export default {
+    name: 'BSteps',
+    components: {
+        [Icon.name]: Icon,
+        [SlotComponent.name]: SlotComponent
+    },
+    props: {
+        value: Number,
+        type: [String, Object],
+        size: String,
+        animated: {
+            type: Boolean,
+            default: true
         },
-        props: {
-            value: Number,
-            type: [String, Object],
-            size: String,
-            animated: {
-                type: Boolean,
-                default: true
-            },
-            destroyOnHide: {
-                type: Boolean,
-                default: false
-            },
-            iconPack: String,
-            hasNavigation: {
-                type: Boolean,
-                default: true
-            },
-            ariaNextLabel: String,
-            ariaPreviousLabel: String
+        destroyOnHide: {
+            type: Boolean,
+            default: false
         },
-        data() {
-            return {
-                activeStep: this.value || 0,
-                stepItems: [],
-                contentHeight: 0,
-                isTransitioning: false,
-                _isSteps: true // Used internally by StepItem
-            }
+        iconPack: String,
+        hasNavigation: {
+            type: Boolean,
+            default: true
         },
-        computed: {
-            mainClasses() {
-                return [
-                    this.type,
-                    this.size
-                ]
-            },
+        ariaNextLabel: String,
+        ariaPreviousLabel: String
+    },
+    data() {
+        return {
+            activeStep: this.value || 0,
+            stepItems: [],
+            contentHeight: 0,
+            isTransitioning: false,
+            _isSteps: true // Used internally by StepItem
+        }
+    },
+    computed: {
+        mainClasses() {
+            return [
+                this.type,
+                this.size
+            ]
+        },
 
-            reversedStepItems() {
-                return this.stepItems.slice().reverse()
-            },
+        reversedStepItems() {
+            return this.stepItems.slice().reverse()
+        },
 
-            /**
+        /**
             * Check the first visible step index.
             */
-            firstVisibleStepIndex() {
-                return this.stepItems.findIndex((step, idx) => {
-                    return step.visible
-                })
-            },
+        firstVisibleStepIndex() {
+            return this.stepItems.findIndex((step, idx) => {
+                return step.visible
+            })
+        },
 
-            /**
+        /**
             * Check if previous button is available.
             */
-            hasPrev() {
-                return this.firstVisibleStepIndex >= 0 &&
-                    this.activeStep > this.firstVisibleStepIndex
-            },
+        hasPrev() {
+            return this.firstVisibleStepIndex >= 0 &&
+                this.activeStep > this.firstVisibleStepIndex
+        },
 
-            /**
+        /**
             * Check the last visible step index.
             */
-            lastVisibleStepIndex() {
-                let idx = this.reversedStepItems.findIndex((step, idx) => {
-                    return step.visible
-                })
-                if (idx >= 0) {
-                    return this.stepItems.length - 1 - idx
-                }
-                return idx
-            },
+        lastVisibleStepIndex() {
+            let idx = this.reversedStepItems.findIndex((step, idx) => {
+                return step.visible
+            })
+            if (idx >= 0) {
+                return this.stepItems.length - 1 - idx
+            }
+            return idx
+        },
 
-            /**
+        /**
             * Check if next button is available.
             */
-            hasNext() {
-                return this.lastVisibleStepIndex >= 0 &&
-                    this.activeStep < this.lastVisibleStepIndex
-            }
+        hasNext() {
+            return this.lastVisibleStepIndex >= 0 &&
+                this.activeStep < this.lastVisibleStepIndex
+        }
+    },
+    watch: {
+        /**
+        * When v-model is changed set the new active step.
+        */
+        value(value) {
+            this.changeStep(value)
         },
-        watch: {
-            /**
-             * When v-model is changed set the new active step.
-             */
-            value(value) {
-                this.changeStep(value)
-            },
 
-            /**
-             * When step-items are updated, set active one.
-             */
-            stepItems() {
-                if (this.activeStep < this.stepItems.length) {
-                    this.stepItems[this.activeStep].isActive = true
-                }
-            }
-        },
-        methods: {
-            /**
-             * Change the active step and emit change event.
-             */
-            changeStep(newIndex) {
-                if (this.activeStep === newIndex) return
-
-                if (this.activeStep < this.stepItems.length) {
-                    this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
-                }
-                this.stepItems[newIndex].activate(this.activeStep, newIndex)
-                this.activeStep = newIndex
-                this.$emit('change', newIndex)
-            },
-
-            /**
-            * Return if the step should be clickable or not.
-            */
-            isItemClickable(stepItem) {
-                if (stepItem.clickable === undefined) {
-                    return stepItem.completed
-                }
-                return stepItem.clickable
-            },
-
-            /**
-             * Step click listener, emit input event and change active step.
-             */
-            stepClick(value) {
-                this.$emit('input', value)
-                this.changeStep(value)
-            },
-
-            /**
-            * Previous button click listener.
-            */
-            prev() {
-                if (!this.hasPrev) return
-                let prevItemIdx = this.reversedStepItems.findIndex((step, idx) => {
-                    return this.stepItems.length - 1 - idx < this.activeStep && step.visible
-                })
-                if (prevItemIdx >= 0) {
-                    prevItemIdx = this.stepItems.length - 1 - prevItemIdx
-                }
-                this.changeStep(prevItemIdx)
-            },
-
-            /**
-            * Previous button click listener.
-            */
-            next() {
-                if (!this.hasNext) return
-                const nextItemIdx = this.stepItems.findIndex((step, idx) => {
-                    return idx > this.activeStep && step.visible
-                })
-                this.changeStep(nextItemIdx)
-            }
-        },
-        mounted() {
+        /**
+        * When step-items are updated, set active one.
+        */
+        stepItems() {
             if (this.activeStep < this.stepItems.length) {
                 this.stepItems[this.activeStep].isActive = true
             }
         }
+    },
+    methods: {
+        /**
+        * Change the active step and emit change event.
+        */
+        changeStep(newIndex) {
+            if (this.activeStep === newIndex) return
+
+            if (this.activeStep < this.stepItems.length) {
+                this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
+            }
+            this.stepItems[newIndex].activate(this.activeStep, newIndex)
+            this.activeStep = newIndex
+            this.$emit('change', newIndex)
+        },
+
+        /**
+            * Return if the step should be clickable or not.
+            */
+        isItemClickable(stepItem) {
+            if (stepItem.clickable === undefined) {
+                return stepItem.completed
+            }
+            return stepItem.clickable
+        },
+
+        /**
+        * Step click listener, emit input event and change active step.
+        */
+        stepClick(value) {
+            this.$emit('input', value)
+            this.changeStep(value)
+        },
+
+        /**
+            * Previous button click listener.
+            */
+        prev() {
+            if (!this.hasPrev) return
+            let prevItemIdx = this.reversedStepItems.findIndex((step, idx) => {
+                return this.stepItems.length - 1 - idx < this.activeStep && step.visible
+            })
+            if (prevItemIdx >= 0) {
+                prevItemIdx = this.stepItems.length - 1 - prevItemIdx
+            }
+            this.changeStep(prevItemIdx)
+        },
+
+        /**
+            * Previous button click listener.
+            */
+        next() {
+            if (!this.hasNext) return
+            const nextItemIdx = this.stepItems.findIndex((step, idx) => {
+                return idx > this.activeStep && step.visible
+            })
+            this.changeStep(nextItemIdx)
+        }
+    },
+    mounted() {
+        if (this.activeStep < this.stepItems.length) {
+            this.stepItems[this.activeStep].isActive = true
+        }
     }
+}
 </script>

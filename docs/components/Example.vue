@@ -26,18 +26,18 @@
 </template>
 
 <script>
-    import CodepenEdit from './CodepenEdit'
+import CodepenEdit from './CodepenEdit'
 
-    export default {
-        components: {
-            CodepenEdit
-        },
-        props: {
-            component: [Object, Function],
-            code: String,
-            title: String,
-            paddingless: Boolean,
-            vertical: Boolean
-        }
+export default {
+    components: {
+        CodepenEdit
+    },
+    props: {
+        component: [Object, Function],
+        code: String,
+        title: String,
+        paddingless: Boolean,
+        vertical: Boolean
     }
+}
 </script>
