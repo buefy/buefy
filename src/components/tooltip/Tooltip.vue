@@ -8,7 +8,8 @@
             'is-always': always,
             'is-multiline': multilined,
             'is-dashed': dashed
-    }]">
+        }]"
+        :style="{'transition-delay': `${delay}ms`}">
         <slot/>
     </span>
 </template>
@@ -27,14 +28,31 @@ export default {
         label: String,
         position: {
             type: String,
-            default: 'is-top',
-            validator(value) {
-                return [
-                    'is-top',
-                    'is-bottom',
-                    'is-left',
-                    'is-right'
-                ].indexOf(value) > -1
+            label: String,
+            position: {
+                type: String,
+                default: 'is-top',
+                validator(value) {
+                    return [
+                        'is-top',
+                        'is-bottom',
+                        'is-left',
+                        'is-right'
+                    ].indexOf(value) > -1
+                }
+            },
+            always: Boolean,
+            animated: Boolean,
+            square: Boolean,
+            dashed: Boolean,
+            multilined: Boolean,
+            size: {
+                type: String,
+                default: 'is-medium'
+            },
+            delay: {
+                type: Number,
+                default: 0
             }
         },
         always: Boolean,

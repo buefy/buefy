@@ -1,7 +1,7 @@
 import _Vue from "vue";
 
 import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar, NotificationProgrammatic } from "./components";
-import { ColorModifiers } from "./helpers";
+import { ColorModifiers, GlobalPositions } from "./helpers";
 
 // Adds Buefy method signatures to Vue instance (ie this.$dialog)
 declare module 'vue/types/vue' {
@@ -15,34 +15,18 @@ declare module 'vue/types/vue' {
     }
 }
 
-declare module 'buefy/dist/components/dialog' {
-    export { Dialog };
-}
-
-declare module 'buefy/dist/components/modal' {
-    export { ModalProgrammatic };
-}
-
-declare module 'buefy/dist/components/toast' {
-    export { Toast };
-}
-
-declare module 'buefy/dist/components/snackbar' {
-    export { Snackbar };
-}
-
-declare module 'buefy/dist/components/notification' {
-    export { NotificationProgrammatic };
-}
-
 export declare type BuefyConfig = {
     defaultContainerElement?: string,
     defaultIconPack?: string;
+    defaultIconComponent?: string;
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
     defaultSnackbarDuration?: number;
+    defaultSnackbarPosition?: GlobalPositions;
     defaultToastDuration?: number;
+    defaultToastPosition?: GlobalPositions;
     defaultNotificationDuration?: number;
+    defaultNotificationPosition?: GlobalPositions;
     defaultTooltipType?: ColorModifiers;
     defaultTooltipAnimated?: boolean;
     defaultInputAutocomplete?: string;
@@ -52,6 +36,7 @@ export declare type BuefyConfig = {
     defaultDayNames?: string[];
     defaultMonthNames?: string[];
     defaultFirstDayOfWeek?: number;
+    defaultUnselectableDaysOfWeek?: number[];
     defaultTimeFormatter?: Function;
     defaultTimeParser?: Function;
     defaultModalCanCancel?: string[];
@@ -60,6 +45,12 @@ export declare type BuefyConfig = {
     defaultTimepickerMobileNative?: boolean;
     defaultNoticeQueue?: boolean;
     defaultInputHasCounter?: boolean;
+    defaultUseHtml5Validation?: boolean;
+    defaultDropdownMobileModal?: boolean;
+    defaultFieldLabelPosition?: 'inside' | 'on-border';
+    defaultDatepickerYearsRange?: number[];
+    defaultDatepickerNearbyMonthDays?: boolean;
+    defaultDatepickerNearbySelectableMonthDays?: boolean;
 };
 
 declare const _default: {
