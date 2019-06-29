@@ -8,7 +8,8 @@
             'is-always': always,
             'is-multiline': multilined,
             'is-dashed': dashed
-    }]">
+        }]"
+        :style="{'transition-delay': `${delay}ms`}">
         <slot/>
     </span>
 </template>
@@ -45,6 +46,10 @@
             size: {
                 type: String,
                 default: 'is-medium'
+            },
+            delay: {
+                type: Number,
+                default: 0
             }
         },
         computed: {
