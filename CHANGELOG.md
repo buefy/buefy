@@ -1,5 +1,16 @@
 # Buefy Changelog
 
+## 0.7.9
+
+### New features
+
+* Add ``custom-class`` prop to modal (thanks @CobraClutch)
+* Add ``delay`` prop to tooltip (thanks @service-paradis)
+
+### Fixes
+
+* Fix build errors using typescript
+
 ## 0.7.8
 
 ### New features
