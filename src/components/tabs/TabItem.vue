@@ -9,6 +9,10 @@ export default {
         visible: {
             type: Boolean,
             default: true
+        },
+        value: {
+            type: [String, Number, Boolean, Object, Array, Symbol, Function],
+            default: null
         }
     },
     data() {

@@ -7,7 +7,7 @@
                     :key="index"
                     v-show="tabItem.visible"
                     :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
-                    <a @click="tabClick(index)">
+                    <a @click="tabClick(index, tabItem)">
                         <template v-if="tabItem.$slots.header">
                             <b-slot-component
                                 :component="tabItem"
@@ -114,9 +114,10 @@ export default {
         /**
         * Tab click listener, emit input event and change active tab.
         */
-        tabClick(value) {
+        tabClick(value, tabItem) {
             this.$emit('input', value)
             this.changeTab(value)
+            tabItem.$emit('click', tabItem.value)
         }
     },
     mounted() {
