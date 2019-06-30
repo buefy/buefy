@@ -98,8 +98,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -135,7 +134,8 @@
             "/",
             "documentation",
             "documentation/modal"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -231,7 +231,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/input": {
         "title": "Input",
@@ -315,7 +316,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -327,7 +329,8 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -375,8 +378,7 @@
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -413,6 +415,19 @@
             "documentation",
             "documentation/numberinput"
         ]
+    },
+    "documentation/steps": {
+        "title": "Steps",
+        "subtitle": "Responsive horizontal process steps",
+        "path": "/documentation/steps",
+        "githubPath": "pages/components/steps/Steps.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/steps"
+        ],
+        "isNew": true
     },
     "extensions": {
         "title": "Extensions",

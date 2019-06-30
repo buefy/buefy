@@ -21,7 +21,10 @@
                         aria-hidden/>
                 </div>
                 <div class="media-content">
-                    <p class="text" v-if="message">{{ message }}</p>
+                    <p
+                        class="text"
+                        v-if="message"
+                        v-html="message" />
                     <slot v-else/>
                 </div>
             </div>
@@ -30,14 +33,14 @@
 </template>
 
 <script>
-    import MessageMixin from '../../utils/MessageMixin.js'
+import MessageMixin from '../../utils/MessageMixin.js'
 
-    export default {
-        name: 'BNotification',
-        mixins: [MessageMixin],
-        props: {
-            position: String,
-            ariaCloseLabel: String
-        }
+export default {
+    name: 'BNotification',
+    mixins: [MessageMixin],
+    props: {
+        position: String,
+        ariaCloseLabel: String
     }
+}
 </script>

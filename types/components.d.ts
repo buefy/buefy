@@ -184,6 +184,7 @@ export declare type NotificationConfig = {
     container?: string;
     queue?: boolean;
     indefinite?: boolean;
+    hasIcon?: boolean;
 }
 export declare const NotificationProgrammatic: {
     open: (params: NotificationConfig | string) => void;

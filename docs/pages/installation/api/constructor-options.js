@@ -223,7 +223,35 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
-            }
+            },
+            {
+                name: '<code>defaultFieldLabelPosition</code>',
+                description: 'Default field position of label',
+                type: 'String',
+                values: '<code>inside</code>,<code>on-border</code>',
+                default: '-'
+            },
+            {
+                name: '<code>defaultDatepickerYearsRange</code>',
+                description: 'Default years range relative to selected year',
+                type: 'Array',
+                values: '-',
+                default: '<code>[-100, 3]</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbyMonthDays</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbySelectableMonthDays</code>',
+                description: 'It allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]

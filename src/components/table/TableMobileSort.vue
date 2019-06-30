@@ -38,45 +38,45 @@
 </template>
 
 <script>
-    import Select from '../select/Select'
-    import Icon from '../icon/Icon'
+import Select from '../select/Select'
+import Icon from '../icon/Icon'
 
-    export default {
-        name: 'BTableMobileSort',
-        components: {
-            [Select.name]: Select,
-            [Icon.name]: Icon
-        },
-        props: {
-            currentSortColumn: Object,
-            isAsc: Boolean,
-            columns: Array,
-            placeholder: String
-        },
-        data() {
-            return {
-                mobileSort: this.currentSortColumn
-            }
-        },
-        computed: {
-            showPlaceholder() {
-                return !this.columns || !this.columns.some((column) => column === this.mobileSort)
-            }
-        },
-        watch: {
-            mobileSort(column) {
-                if (this.currentSortColumn === column) return
+export default {
+    name: 'BTableMobileSort',
+    components: {
+        [Select.name]: Select,
+        [Icon.name]: Icon
+    },
+    props: {
+        currentSortColumn: Object,
+        isAsc: Boolean,
+        columns: Array,
+        placeholder: String
+    },
+    data() {
+        return {
+            mobileSort: this.currentSortColumn
+        }
+    },
+    computed: {
+        showPlaceholder() {
+            return !this.columns || !this.columns.some((column) => column === this.mobileSort)
+        }
+    },
+    watch: {
+        mobileSort(column) {
+            if (this.currentSortColumn === column) return
 
-                this.$emit('sort', column)
-            },
-            currentSortColumn(column) {
-                this.mobileSort = column
-            }
+            this.$emit('sort', column)
         },
-        methods: {
-            sort() {
-                this.$emit('sort', this.mobileSort)
-            }
+        currentSortColumn(column) {
+            this.mobileSort = column
+        }
+    },
+    methods: {
+        sort() {
+            this.$emit('sort', this.mobileSort)
         }
     }
+}
 </script>

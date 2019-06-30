@@ -26,36 +26,36 @@
 </template>
 
 <script>
-    import TheHeader from '@/components/TheHeader'
-    import TheNavbar from '@/components/TheNavbar'
-    import TheFooter from '@/components/TheFooter'
-    import TheSidebar from '@/components/TheSidebar'
-    import ImproveThis from '@/components/ImproveThis'
-    import menuData from '@/data/menu'
+import TheHeader from '@/components/TheHeader'
+import TheNavbar from '@/components/TheNavbar'
+import TheFooter from '@/components/TheFooter'
+import TheSidebar from '@/components/TheSidebar'
+import ImproveThis from '@/components/ImproveThis'
+import menuData from '@/data/menu'
 
-    export default {
-        components: {
-            TheHeader,
-            TheNavbar,
-            TheFooter,
-            TheSidebar,
-            ImproveThis
-        },
-        data() {
-            return {
-                menu: [],
-                meta: {}
-            }
-        },
-        methods: {
-            setMeta(meta) {
-                this.meta = meta
-                this.menu = menuData[this.meta.menu]
-            }
-        },
-        mounted() {
-            this.$eventHub.$on('navigate', this.setMeta)
-            this.setMeta(this.$router.currentRoute.meta)
+export default {
+    components: {
+        TheHeader,
+        TheNavbar,
+        TheFooter,
+        TheSidebar,
+        ImproveThis
+    },
+    data() {
+        return {
+            menu: [],
+            meta: {}
         }
+    },
+    methods: {
+        setMeta(meta) {
+            this.meta = meta
+            this.menu = menuData[this.meta.menu]
+        }
+    },
+    mounted() {
+        this.$eventHub.$on('navigate', this.setMeta)
+        this.setMeta(this.$router.currentRoute.meta)
     }
+}
 </script>

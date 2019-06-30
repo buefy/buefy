@@ -55,7 +55,7 @@ export default [
             },
             {
                 name: '<code>ellipsis</code>',
-                description: 'Adds ellipsis on tags to not overflow the text',
+                description: 'Adds ellipsis on tags to not overflow the text. Title is then added to the tag with full text',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -76,7 +76,7 @@ export default [
             },
             {
                 name: '<code>autocomplete</code>',
-                description: 'Add autocomplete feature',
+                description: 'Add autocomplete feature (if <code>true</code>, any Autocomplete props may be used too)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -131,7 +131,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: 'Any other native attribute or Autocomplete prop',
+                name: 'Any other native attribute',
                 description: '—',
                 type: '—',
                 values: '—',

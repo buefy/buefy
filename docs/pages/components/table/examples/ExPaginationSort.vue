@@ -20,11 +20,6 @@
             <div class="control is-flex">
                 <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
             </div>
-            <b-select v-model="paginationPosition" :disabled="!isPaginated">
-                <option value="bottom">bottom pagination</option>
-                <option value="top">top pagination</option>
-                <option value="both">both</option>
-            </b-select>
         </b-field>
 
         <b-table
@@ -33,7 +28,6 @@
             :per-page="perPage"
             :current-page.sync="currentPage"
             :pagination-simple="isPaginationSimple"
-            :pagination-position="paginationPosition"
             :default-sort-direction="defaultSortDirection"
             default-sort="user.first_name"
             aria-next-label="Next page"
@@ -80,7 +74,6 @@
                 data,
                 isPaginated: true,
                 isPaginationSimple: false,
-                paginationPosition: 'bottom',
                 defaultSortDirection: 'asc',
                 currentPage: 1,
                 perPage: 5

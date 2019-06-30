@@ -8,21 +8,25 @@
             'is-always': always,
             'is-multiline': multilined,
             'is-dashed': dashed
-    }]">
+        }]"
+        :style="{'transition-delay': `${delay}ms`}">
         <slot/>
     </span>
 </template>
 
 <script>
-    import config from '../../utils/config'
+import config from '../../utils/config'
 
-    export default {
-        name: 'BTooltip',
-        props: {
-            active: {
-                type: Boolean,
-                default: true
-            },
+export default {
+    name: 'BTooltip',
+    props: {
+        active: {
+            type: Boolean,
+            default: true
+        },
+        type: String,
+        label: String,
+        position: {
             type: String,
             label: String,
             position: {
@@ -45,15 +49,29 @@
             size: {
                 type: String,
                 default: 'is-medium'
+            },
+            delay: {
+                type: Number,
+                default: 0
             }
         },
-        computed: {
-            newType() {
-                return this.type || config.defaultTooltipType
-            },
-            newAnimated() {
-                return this.animated || config.defaultTooltipAnimated
-            }
+        always: Boolean,
+        animated: Boolean,
+        square: Boolean,
+        dashed: Boolean,
+        multilined: Boolean,
+        size: {
+            type: String,
+            default: 'is-medium'
+        }
+    },
+    computed: {
+        newType() {
+            return this.type || config.defaultTooltipType
+        },
+        newAnimated() {
+            return this.animated || config.defaultTooltipAnimated
         }
     }
+}
 </script>

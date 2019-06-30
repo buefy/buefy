@@ -64,7 +64,8 @@
                 this.$modal.open({
                     parent: this,
                     component: ModalForm,
-                    hasModalCard: true
+                    hasModalCard: true,
+                    customClass: 'custom-class custom-class-2'
                 })
             }
         }

@@ -103,7 +103,7 @@ export default [
                 name: '<code>mobile-native</code>',
                 description: 'Enable native timepicker on mobile',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
+                values: '',
                 default: '<code>true</code>'
             },
             {
@@ -118,6 +118,13 @@ export default [
                 description: 'Open timepicker on input focus',
                 type: 'Boolean',
                 values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>enable-seconds</code>',
+                description: 'Show seconds picker',
+                type: 'Boolean',
+                values: '-',
                 default: '<code>false</code>'
             },
             {

@@ -109,6 +109,7 @@ $tooltip-multiline-sizes: (
     }
     &:not([data-label=""]):hover:before,
     &:not([data-label=""]):hover:after {
+        transition-delay: inherit;
         opacity: 1;
         visibility: visible;
     }

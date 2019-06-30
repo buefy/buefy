@@ -170,6 +170,34 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>type</code>',
+                description: 'Type of picker',
+                type: 'String',
+                values: '<code>month</code>',
+                default: '-'
+            },
+            {
+                name: '<code>years-range</code>',
+                description: 'Years range relative to selected year',
+                type: 'Array',
+                values: '-',
+                default: '<code>[-100, 3]</code>'
+            },
+            {
+                name: '<code>nearby-month-days</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>nearby-selectable-month-days</code>',
+                description: 'When <code>nearby-month-days</code>, it allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -204,6 +232,12 @@ export default [
                 name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>toggle</code>',
+                description: 'Toggle activation (picker visibility)'
             }
         ]
     }

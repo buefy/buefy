@@ -22,13 +22,18 @@ let config = {
     defaultUnselectableDaysOfWeek: null,
     defaultTimeFormatter: null,
     defaultTimeParser: null,
-    defaultModalCanCancel: null,
+    defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
     defaultNoticeQueue: true,
     defaultInputHasCounter: true,
-    defaultUseHtml5Validation: true
+    defaultUseHtml5Validation: true,
+    defaultDropdownMobileModal: true,
+    defaultFieldLabelPosition: null,
+    defaultDatepickerYearsRange: [-100, 3],
+    defaultDatepickerNearbyMonthDays: true,
+    defaultDatepickerNearbySelectableMonthDays: false
 }
 
 export default config
