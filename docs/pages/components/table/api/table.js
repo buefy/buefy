@@ -80,6 +80,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>checkbox-position</code>',
+                description: 'Position of the checkbox (if <code>checkable</code> is true)',
+                type: 'String',
+                values: '<code>left</code> or <code>right</code>',
+                default: '<code>left</code>'
+            },
+            {
                 name: '<code>checked-rows</code>',
                 description: 'Set which rows are checked, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Array<Object>',
