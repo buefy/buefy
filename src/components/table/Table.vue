@@ -19,7 +19,7 @@
                 <thead v-if="newColumns.length">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
-                        <th class="checkbox-cell" v-if="checkable">
+                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -61,6 +61,14 @@
                                     :class="{ 'is-desc': !isAsc }"/>
                             </div>
                         </th>
+                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
+                            <template v-if="headerCheckable">
+                                <b-checkbox
+                                    :value="isAllChecked"
+                                    :disabled="isAllUncheckable"
+                                    @change.native="checkAll"/>
+                            </template>
+                        </th>
                     </tr>
                 </thead>
                 <tbody v-if="visibleData.length">
@@ -96,7 +104,9 @@
                                 </a>
                             </td>
 
-                            <td class="checkbox-cell" v-if="checkable">
+                            <td
+                                class="checkbox-cell"
+                                v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
@@ -125,6 +135,17 @@
                                     </template>
                                 </BTableColumn>
                             </template>
+
+                            <td
+                                class="checkbox-cell"
+                                v-if="checkable && checkboxPosition === 'right'">
+                                <b-checkbox
+                                    :disabled="!isRowCheckable(row)"
+                                    :value="isRowChecked(row)"
+                                    @change.native="checkRow(row)"
+                                    @click.native.stop
+                                />
+                            </td>
                         </tr>
 
                         <!-- Do not add `key` here (breaks details) -->
@@ -230,6 +251,16 @@ export default {
         headerCheckable: {
             type: Boolean,
             default: true
+        },
+        checkboxPosition: {
+            type: String,
+            default: 'left',
+            validator: (value) => {
+                return [
+                    'left',
+                    'right'
+                ].indexOf(value) >= 0
+            }
         },
         selected: Object,
         focusable: Boolean,
