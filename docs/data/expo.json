@@ -1,36 +1,5 @@
 [
     {
-        "title": "Philips Talent Pool",
-        "date": "2019-06-19",
-        "img": "philips-talentpool.png",
-        "url": "https://philips.talent-pool.com/projects"
-    },
-    {
-        "title": "FileGator",
-        "date": "2019-06-18",
-        "img": "filegator.png",
-        "url": "https://filegator.io"
-    },
-    {
-        "title": "Traject Ubudu",
-        "date": "2019-06-18",
-        "img": "traject-ubudu.png",
-        "url": "https://traject.ubudu.com"
-    },
-    {
-        "title": "Travelstop",
-        "date": "2019-06-13",
-        "img": "travelstop.png",
-        "url": "https://travelstop.com",
-        "featured": true
-    },
-    {
-        "title": "Git Stars",
-        "date": "2019-06-01",
-        "img": "git-stars.png",
-        "url": "https://git-stars.netlify.com"
-    },
-    {
         "title": "Marvel Match",
         "date": "2019-05-24",
         "img": "marvelmatch.png",
@@ -103,7 +72,8 @@
         "title": "Counter Network",
         "date": "2019-04-24",
         "img": "counter-network.png",
-        "url": "https://counter.network"
+        "url": "https://counter.network",
+        "featured": true
     },
     {
         "title": "Gods Unchained",

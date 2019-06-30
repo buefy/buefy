@@ -46,14 +46,13 @@ describe('BDatepicker', () => {
         expect($dropdown.isVisible()).toBeTruthy()
     })
 
-    it('call toggle method', async () => {
+    it('call toggle method', () => {
         wrapper.vm.$refs.dropdown.isActive = false
         wrapper.vm.toggle()
-        await wrapper.vm.$nextTick()
         expect(wrapper.vm.$refs.dropdown.isActive).toBeTruthy()
         expect($dropdown.isVisible()).toBeTruthy()
-        wrapper.vm.toggle()
-        await wrapper.vm.$nextTick()
+
+        wrapper.vm.toggle(false)
         expect(wrapper.vm.$refs.dropdown.isActive).toBeFalsy()
     })
 

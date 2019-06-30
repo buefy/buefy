@@ -25,50 +25,50 @@
 </template>
 
 <script>
-export default {
-    name: 'BCheckboxButton',
-    props: {
-        value: [String, Number, Boolean, Function, Object, Array, Symbol],
-        nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
-        disabled: Boolean,
-        required: Boolean,
-        name: String,
-        size: String,
-        type: {
-            type: String,
-            default: 'is-primary'
-        }
-    },
-    data() {
-        return {
-            newValue: this.value,
-            isFocused: false
-        }
-    },
-    computed: {
-        computedValue: {
-            get() {
-                return this.newValue
-            },
-            set(value) {
-                this.newValue = value
-                this.$emit('input', value)
+    export default {
+        name: 'BCheckboxButton',
+        props: {
+            value: [String, Number, Boolean, Function, Object, Array, Symbol],
+            nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+            disabled: Boolean,
+            required: Boolean,
+            name: String,
+            size: String,
+            type: {
+                type: String,
+                default: 'is-primary'
             }
         },
-        checked() {
-            if (Array.isArray(this.newValue)) {
-                return this.newValue.indexOf(this.nativeValue) >= 0
+        data() {
+            return {
+                newValue: this.value,
+                isFocused: false
             }
-            return this.newValue === this.nativeValue
-        }
-    },
-    watch: {
-        /**
-         * When v-model change, set internal value.
-         */
-        value(value) {
-            this.newValue = value
+        },
+        computed: {
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value
+                    this.$emit('input', value)
+                }
+            },
+            checked() {
+                if (Array.isArray(this.newValue)) {
+                    return this.newValue.indexOf(this.nativeValue) >= 0
+                }
+                return this.newValue === this.nativeValue
+            }
+        },
+        watch: {
+            /**
+             * When v-model change, set internal value.
+             */
+            value(value) {
+                this.newValue = value
+            }
         }
     }
-}
 </script>

@@ -73,13 +73,6 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            },
-            {
-                name: '<code>label-position</code>',
-                description: 'Position of label',
-                type: 'String',
-                values: '<code>inside</code>, <code>on-border</code>',
-                default: '-'
             }
         ],
         slots: [

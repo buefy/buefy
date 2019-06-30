@@ -24,20 +24,6 @@
             <p>You can add your custom header to the datepicker.</p>
         </Example>
 
-        <Example :component="ExMonth" :code="ExMonthCode" title="Month picker" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.7.7</span>
-            </div>
-        </Example>
-
-        <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.7.7</span>
-            </div>
-        </Example>
-
         <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical>
             <p>Datepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         </Example>
@@ -68,12 +54,6 @@
     import ExHeader from './examples/ExHeader'
     import ExHeaderCode from '!!raw-loader!./examples/ExHeader'
 
-    import ExProgrammatically from './examples/ExProgrammatically'
-    import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
-
-    import ExMonth from './examples/ExMonth'
-    import ExMonthCode from '!!raw-loader!./examples/ExMonth'
-
     import ExInline from './examples/ExInline'
     import ExInlineCode from '!!raw-loader!./examples/ExInline'
 
@@ -94,14 +74,10 @@
                 ExFooterCode,
                 ExHeader,
                 ExHeaderCode,
-                ExProgrammatically,
-                ExProgrammaticallyCode,
                 ExInline,
                 ExInlineCode,
                 ExEvents,
-                ExEventsCode,
-                ExMonth,
-                ExMonthCode
+                ExEventsCode
             }
         }
     }

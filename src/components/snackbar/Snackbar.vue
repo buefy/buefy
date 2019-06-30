@@ -6,7 +6,7 @@
             v-show="isActive"
             class="snackbar"
             :class="[type,position]">
-            <div class="text" v-html="message"/>
+            <p class="text">{{ message }}</p>
             <div
                 v-if="actionText"
                 class="action"
@@ -19,40 +19,40 @@
 </template>
 
 <script>
-import config from '../../utils/config'
-import NoticeMixin from '../../utils/NoticeMixin.js'
+    import config from '../../utils/config'
+    import NoticeMixin from '../../utils/NoticeMixin.js'
 
-export default {
-    name: 'BSnackbar',
-    mixins: [NoticeMixin],
-    props: {
-        actionText: {
-            type: String,
-            default: 'OK'
+    export default {
+        name: 'BSnackbar',
+        mixins: [NoticeMixin],
+        props: {
+            actionText: {
+                type: String,
+                default: 'OK'
+            },
+            onAction: {
+                type: Function,
+                default: () => {}
+            },
+            indefinite: {
+                type: Boolean,
+                default: false
+            }
         },
-        onAction: {
-            type: Function,
-            default: () => {}
+        data() {
+            return {
+                newDuration: this.duration || config.defaultSnackbarDuration
+            }
         },
-        indefinite: {
-            type: Boolean,
-            default: false
-        }
-    },
-    data() {
-        return {
-            newDuration: this.duration || config.defaultSnackbarDuration
-        }
-    },
-    methods: {
-        /**
-        * Click listener.
-        * Call action prop before closing (from Mixin).
-        */
-        action() {
-            this.onAction()
-            this.close()
+        methods: {
+            /**
+             * Click listener.
+             * Call action prop before closing (from Mixin).
+             */
+            action() {
+                this.onAction()
+                this.close()
+            }
         }
     }
-}
 </script>

@@ -1,4 +1,6 @@
-$floating-in-height: 3.25em;
+.label {
+    font-weight: $weight-semibold
+}
 
 .field {
     &.is-grouped {
@@ -37,119 +39,6 @@ $floating-in-height: 3.25em;
             .select select {
                 border-radius: 0
             }
-        }
-    }
-}
-
-.field {
-    &.is-floating-label {
-        position: relative;
-        .label {
-            position: absolute;
-            top: -0.775em;
-            left: 1em;
-            font-size: calc(#{$size-normal} * 3 / 4);
-            background-color: transparent;
-            padding-left: 0.125em;
-            padding-right: 0.125em;
-            z-index: 5;
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0.775em;
-                left: 0;
-                right: 0;
-                height: 0.375em;
-                background-color: #fff;
-                z-index: -1;
-            }
-            &.is-small {
-                font-size: calc(#{$size-small} * 3 / 4);
-            }
-            &.is-medium {
-                font-size: calc(#{$size-medium} * 3 / 4);
-            }
-            &.is-large {
-                font-size: calc(#{$size-large} * 3 / 4);
-            }
-        }
-        .input,
-        .textarea,
-        .select
-        select {
-            &:focus {
-                box-shadow: none;
-            }
-        }
-        .taginput .taginput-container.is-focusable {
-            padding-top: 0.475em;
-            &.is-focused {
-                box-shadow: none;
-            }
-        }
-    }
-    &.is-floating-in-label {
-        position: relative;
-        .label {
-            position: absolute;
-            top: 0.25em;
-            left: 1em;
-            font-size: calc(#{$size-normal} * 3 / 4);
-            background-color: transparent;
-            z-index: 5;
-            &.is-small {
-                font-size: calc(#{$size-small} * 3 / 4);
-            }
-            &.is-medium {
-                font-size: calc(#{$size-medium} * 3 / 4);
-            }
-            &.is-large {
-                font-size: calc(#{$size-large} * 3 / 4);
-            }
-        }
-        > .datepicker, > .timepicker {
-            .input {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-                padding-bottom: 1px;
-                height: $floating-in-height;
-            }
-        }
-        > :not(.datepicker):not(.timepicker):not(.taginput) {
-            .input,
-            .textarea,
-            select {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-                padding-bottom: 1px;
-                height: $floating-in-height;
-            }
-            .select:not(multiple) {
-                height: $floating-in-height;
-                &.is-loading {
-                    &::after {
-                        margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-                    }
-                }
-                &::after {
-                    margin-top: 1px;
-                }
-            }
-        }     
-        > :not(.taginput) {
-            .is-left.icon,
-            .is-right.icon {
-                height: $floating-in-height;
-            }
-            .is-left.icon {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-            }
-        }
-        .control.is-loading::after {
-            margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-        }
-        .taginput .taginput-container.is-focusable {
-            // 0.275em - 1px _taginput.scss
-            padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
         }
     }
 }

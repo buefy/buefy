@@ -73,13 +73,6 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '<code>is-medium</code>'
-            },
-            {
-                name: '<code>delay</code>',
-                description: 'Tooltip delay before it appears (number in ms)',
-                type: 'Number',
-                values: "—",
-                default: '<code>0</code>'
             }
         ]
     }

@@ -38,7 +38,7 @@
             danger() {
                 this.$snackbar.open({
                     duration: 5000,
-                    message: 'Snackbar with red action, positioned on bottom-left and a callback.<br>Note: <em>Message can include html</em>.',
+                    message: 'Snackbar with red action, positioned on bottom-left and a callback',
                     type: 'is-danger',
                     position: 'is-bottom-left',
                     actionText: 'Undo',

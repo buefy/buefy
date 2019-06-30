@@ -70,7 +70,7 @@ $checkbox-checkmark-color: $primary-invert !default;
             opacity: 0.5;
         }
         &:hover {
-            input[type=checkbox]:not(:disabled) + .check {
+            input[type=checkbox] + .check {
                 border-color: $checkbox-active-background-color;
                 @each $name, $pair in $colors {
                     $color: nth($pair, 1);

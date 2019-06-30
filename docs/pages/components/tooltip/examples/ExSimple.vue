@@ -26,12 +26,5 @@
                 Left
             </button>
         </b-tooltip>
-
-        <b-tooltip label="delayed by 1000ms"
-            :delay="1000">
-            <button class="button is-primary">
-                Delayed
-            </button>
-        </b-tooltip>
     </section>
 </template>

@@ -16,41 +16,41 @@
 </template>
 
 <script>
-export default {
-    name: 'BCollapse',
-    props: {
-        open: {
-            type: Boolean,
-            default: true
+    export default {
+        name: 'BCollapse',
+        props: {
+            open: {
+                type: Boolean,
+                default: true
+            },
+            animation: {
+                type: String,
+                default: 'fade'
+            },
+            ariaId: {
+                type: String,
+                default: ''
+            }
         },
-        animation: {
-            type: String,
-            default: 'fade'
+        data() {
+            return {
+                isOpen: this.open
+            }
         },
-        ariaId: {
-            type: String,
-            default: ''
-        }
-    },
-    data() {
-        return {
-            isOpen: this.open
-        }
-    },
-    watch: {
-        open(value) {
-            this.isOpen = value
-        }
-    },
-    methods: {
-        /**
-        * Toggle and emit events
-        */
-        toggle() {
-            this.isOpen = !this.isOpen
-            this.$emit('update:open', this.isOpen)
-            this.$emit(this.isOpen ? 'open' : 'close')
+        watch: {
+            open(value) {
+                this.isOpen = value
+            }
+        },
+        methods: {
+            /**
+             * Toggle and emit events
+             */
+            toggle() {
+                this.isOpen = !this.isOpen
+                this.$emit('update:open', this.isOpen)
+                this.$emit(this.isOpen ? 'open' : 'close')
+            }
         }
     }
-}
 </script>

@@ -78,38 +78,9 @@
             </div>
         </section>
 
-        <section class="hero is-light">
+        <section class="hero is-medium is-light">
             <div class="hero-body">
                 <div class="container">
-                    <p class="content is-size-5 has-text-left">
-                        Sponsors
-                    </p>
-                    <div class="columns">
-                        <div
-                            v-for="item in sponsors"
-                            :key="item.title"
-                            class="column has-text-centered is-one-quarter">
-
-                            <a
-                                :href="item.url"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                <img class="image-has-shadow" :src="getSponsorImg(item.img)" :alt="item.title">
-                            </a>
-
-                            <p>
-                                <a
-                                    class="has-text-weight-semibold"
-                                    :href="item.url"
-                                    target="_blank"
-                                    rel="noopener noreferrer">
-                                    {{ item.title }}
-                                </a> <br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container expo">
                     <p class="content is-size-5 has-text-centered">
                         Websites and apps
                         <a @click="tweet"><strong class="has-text-link">#MadeWithBuefy</strong></a>
@@ -125,7 +96,7 @@
                                 :href="item.url"
                                 target="_blank"
                                 rel="noopener noreferrer">
-                                <img class="image-has-shadow" :src="getExpoImg(item.img)" :alt="item.title">
+                                <img class="image-has-shadow" :src="getImg(item.img)" :alt="item.title">
                             </a>
 
                             <p>
@@ -153,7 +124,6 @@
     import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
     import expoData from '@/data/expo'
-    import sponsorsData from '@/data/sponsors'
 
     export default {
         name: 'App',
@@ -166,8 +136,7 @@
                 version: Package.version,
                 expo: expoData.filter((item) => {
                     return item.featured
-                }),
-                sponsors: sponsorsData
+                })
             }
         },
         methods: {
@@ -181,11 +150,8 @@
 
                 window.open(url, '', opts)
             },
-            getExpoImg(img) {
+            getImg(img) {
                 return require(`@/assets/expo/${img}`)
-            },
-            getSponsorImg(img) {
-                return require(`@/assets/sponsors/${img}`)
             }
         },
         mounted() {

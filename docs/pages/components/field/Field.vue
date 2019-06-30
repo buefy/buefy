@@ -20,17 +20,6 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExLabelPosition" :code="ExLabelPositionCode" title="Label Position" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.7.8</span>
-            </div>
-            <p>Add the <code>label-position</code> prop to modify field style.</p>
-            <b-message type="is-info">
-                You can set the <code>defaultFieldLabelPosition</code> constructor option to override the default style
-            </b-message>
-        </Example>
-
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
@@ -132,9 +121,6 @@
     import ExLabelSlot from './examples/ExLabelSlot'
     import ExLabelSlotCode from '!!raw-loader!./examples/ExLabelSlot'
 
-    import ExLabelPosition from './examples/ExLabelPosition'
-    import ExLabelPositionCode from '!!raw-loader!./examples/ExLabelPosition'
-
     export default {
         data() {
             return {
@@ -150,7 +136,6 @@
                 ExHorizontal,
                 ExCustomClass,
                 ExLabelSlot,
-                ExLabelPosition,
                 ExSimpleCode,
                 ExObjectSyntaxCode,
                 ExAddonsCode,
@@ -161,8 +146,7 @@
                 ExCombineAddonsGroupsCode,
                 ExHorizontalCode,
                 ExCustomClassCode,
-                ExLabelSlotCode,
-                ExLabelPositionCode
+                ExLabelSlotCode
             }
         }
     }

@@ -38,31 +38,31 @@
 </template>
 
 <script>
-export default {
-    name: 'BTag',
-    props: {
-        attached: Boolean,
-        closable: Boolean,
-        type: String,
-        size: String,
-        rounded: Boolean,
-        disabled: Boolean,
-        ellipsis: Boolean,
-        tabstop: {
-            type: Boolean,
-            default: true
-        }
-    },
-    methods: {
-        /**
-        * Emit close event when delete button is clicked
-        * or delete key is pressed.
-        */
-        close() {
-            if (this.disabled) return
+    export default {
+        name: 'BTag',
+        props: {
+            attached: Boolean,
+            closable: Boolean,
+            type: String,
+            size: String,
+            rounded: Boolean,
+            disabled: Boolean,
+            ellipsis: Boolean,
+            tabstop: {
+                type: Boolean,
+                default: true
+            }
+        },
+        methods: {
+            /**
+             * Emit close event when delete button is clicked
+             * or delete key is pressed.
+             */
+            close() {
+                if (this.disabled) return
 
-            this.$emit('close')
+                this.$emit('close')
+            }
         }
     }
-}
 </script>

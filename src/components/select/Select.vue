@@ -37,62 +37,62 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
-import FormElementMixin from '../../utils/FormElementMixin'
+    import Icon from '../icon/Icon'
+    import FormElementMixin from '../../utils/FormElementMixin'
 
-export default {
-    name: 'BSelect',
-    components: {
-        [Icon.name]: Icon
-    },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
-    props: {
-        value: {
-            type: [String, Number, Boolean, Object, Array, Symbol, Function],
-            default: null
+    export default {
+        name: 'BSelect',
+        components: {
+            [Icon.name]: Icon
         },
-        placeholder: String,
-        multiple: Boolean,
-        nativeSize: [String, Number]
-    },
-    data() {
-        return {
-            selected: this.value,
-            _elementRef: 'select'
-        }
-    },
-    computed: {
-        computedValue: {
-            get() {
-                return this.selected
+        mixins: [FormElementMixin],
+        inheritAttrs: false,
+        props: {
+            value: {
+                type: [String, Number, Boolean, Object, Array, Symbol, Function],
+                default: null
             },
-            set(value) {
-                this.selected = value
-                this.$emit('input', value)
-                !this.isValid && this.checkHtml5Validity()
+            placeholder: String,
+            multiple: Boolean,
+            nativeSize: [String, Number]
+        },
+        data() {
+            return {
+                selected: this.value,
+                _elementRef: 'select'
             }
         },
-        spanClasses() {
-            return [this.size, this.statusType, {
-                'is-fullwidth': this.expanded,
-                'is-loading': this.loading,
-                'is-multiple': this.multiple,
-                'is-rounded': this.rounded,
-                'is-empty': this.selected === null
-            }]
-        }
-    },
-    watch: {
-        /**
-        * When v-model is changed:
-        *   1. Set the selected option.
-        *   2. If it's invalid, validate again.
-        */
-        value(value) {
-            this.selected = value
-            !this.isValid && this.checkHtml5Validity()
+        computed: {
+            computedValue: {
+                get() {
+                    return this.selected
+                },
+                set(value) {
+                    this.selected = value
+                    this.$emit('input', value)
+                    !this.isValid && this.checkHtml5Validity()
+                }
+            },
+            spanClasses() {
+                return [this.size, this.statusType, {
+                    'is-fullwidth': this.expanded,
+                    'is-loading': this.loading,
+                    'is-multiple': this.multiple,
+                    'is-rounded': this.rounded,
+                    'is-empty': this.selected === null
+                }]
+            }
+        },
+        watch: {
+            /**
+             * When v-model is changed:
+             *   1. Set the selected option.
+             *   2. If it's invalid, validate again.
+             */
+            value(value) {
+                this.selected = value
+                !this.isValid && this.checkHtml5Validity()
+            }
         }
     }
-}
 </script>

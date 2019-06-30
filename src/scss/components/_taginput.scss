@@ -6,7 +6,6 @@ $taginput-height: 1.7em;
             @extend .input;
             padding-bottom: 0;
             padding-top: calc(0.275em - 1px);
-            padding-left: 0;
             align-items: center;
             display: flex;
             flex-wrap: wrap;
@@ -26,7 +25,7 @@ $taginput-height: 1.7em;
                 height: $taginput-height;
             }
             &:not(:last-child) {
-                margin-left: 0.275rem;
+                margin-right: 0.275rem;
             }
         }
 

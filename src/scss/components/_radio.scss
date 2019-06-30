@@ -68,7 +68,7 @@ $radio-size: 1.25em !default;
             opacity: 0.5;
         }
         &:hover {
-            input[type=radio]:not(:disabled) + .check {
+            input[type=radio] + .check {
                 border-color: $radio-active-background-color;
                 @each $name, $pair in $colors {
                     $color: nth($pair, 1);
