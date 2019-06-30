@@ -6,6 +6,7 @@
 
 * Add ``custom-class`` prop to modal (thanks @CobraClutch)
 * Add ``delay`` prop to tooltip (thanks @service-paradis)
+* Add ``checkbox-position`` prop to table (thanks @service-paradis)
 
 ### Fixes
 
