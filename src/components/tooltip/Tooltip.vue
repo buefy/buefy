@@ -28,31 +28,14 @@ export default {
         label: String,
         position: {
             type: String,
-            label: String,
-            position: {
-                type: String,
-                default: 'is-top',
-                validator(value) {
-                    return [
-                        'is-top',
-                        'is-bottom',
-                        'is-left',
-                        'is-right'
-                    ].indexOf(value) > -1
-                }
-            },
-            always: Boolean,
-            animated: Boolean,
-            square: Boolean,
-            dashed: Boolean,
-            multilined: Boolean,
-            size: {
-                type: String,
-                default: 'is-medium'
-            },
-            delay: {
-                type: Number,
-                default: 0
+            default: 'is-top',
+            validator(value) {
+                return [
+                    'is-top',
+                    'is-bottom',
+                    'is-left',
+                    'is-right'
+                ].indexOf(value) > -1
             }
         },
         always: Boolean,
@@ -63,6 +46,10 @@ export default {
         size: {
             type: String,
             default: 'is-medium'
+        },
+        delay: {
+            type: Number,
+            default: 0
         }
     },
     computed: {
