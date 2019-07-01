@@ -8,7 +8,7 @@
             <div
                 class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
-                :style="customStlye">
+                :style="customStyle">
                 <component
                     v-if="component"
                     v-bind="props"
@@ -98,7 +98,7 @@ export default {
         showX() {
             return this.cancelOptions.indexOf('x') >= 0
         },
-        customStlye() {
+        customStyle() {
             if (!this.fullScreen) {
                 return { maxWidth: this.newWidth }
             }
