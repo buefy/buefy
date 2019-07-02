@@ -58,7 +58,7 @@ const defaultTimeParser = (timeString, vm) => {
             }
         }
         d.setHours(hours)
-        return new Date(d.geTime())
+        return new Date(d.getTime())
     }
     return null
 }
