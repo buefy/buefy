@@ -1,5 +1,6 @@
 .upload {
     position: relative;
+    display: inline-flex;
     input[type=file] {
         position: absolute;
         top: 0;
@@ -14,7 +15,6 @@
         }
     }
     .upload-draggable {
-        display: inline-block;
         cursor: pointer;
         padding: 0.25em;
         border: 1px dashed $grey-light;
