@@ -30,4 +30,72 @@
     &.is-fullwidth {
         width: 100%;
     }
+    &.has-mobile-accordion {
+        .accordion-header {
+            display: none;
+        }
+        @media(max-width: $tablet) {
+            .tab-item-inner {
+                padding: 1rem;
+            }
+            > .tabs {
+                display: none;
+                &.is-toggle a {
+                    &:first-child {
+                        border-radius: $tabs-toggle-link-radius $tabs-toggle-link-radius 0 0;
+                    }
+                }
+            }
+            .tab-content {
+                padding: 0;
+                &.is-boxed .tab-item.is-active {
+                    border: $tabs-border-bottom-width $tabs-border-bottom-color $tabs-border-bottom-style;
+                    border-top-width: 0;
+                    border-radius: 0 0 $tabs-boxed-link-radius $tabs-boxed-link-radius;
+                }
+                &.is-boxed span:last-child a { border-radius: $tabs-toggle-link-radius $tabs-toggle-link-radius 0 0; }
+                &.is-toggle .tab-item.is-active {
+                    border-left: $tabs-border-bottom-width $tabs-border-bottom-color $tabs-border-bottom-style;
+                    border-right: $tabs-border-bottom-width $tabs-border-bottom-color $tabs-border-bottom-style;
+                    border-radius: 0 0 $tabs-toggle-link-radius $tabs-toggle-link-radius;
+                    &:last-child {
+                        border-radius: 0 0 $tabs-toggle-link-radius $tabs-toggle-link-radius;
+                    }
+                }
+            }
+            .accordion-header {
+                display: block;
+            }
+            .tab-item {
+                &.is-active {
+                    &.is-boxed {
+                    }
+                    &.is-toggle {
+                       border: $tabs-border-bottom-width $tabs-border-bottom-color $tabs-border-bottom-style;
+                    }
+                }
+            }
+
+            &.has-animated-accordion {
+                // overwrite _animate.css to expand and collapse
+                .slide-next-enter-active,
+                .slide-next-leave-active,
+                .slide-prev-enter-active,
+                .slide-prev-leave-active {
+                    transition: height $speed-slower cubic-bezier(0.785, 0.135, 0.150, 0.860);
+                    overflow: hidden;
+                }
+                .slide-prev-leave-to, .slide-next-enter {
+                    transform: none;
+                    position: static;
+                    height: 0;
+                }
+                .slide-prev-enter, .slide-next-leave-to {
+                    transform: none;
+                    position: static;
+                    height: 0;
+                }
+            }
+        }
+    }
 }

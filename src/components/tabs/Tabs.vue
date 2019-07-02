@@ -1,5 +1,5 @@
 <template>
-    <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
+    <div class="b-tabs" :class="tabClasses">
         <nav class="tabs" :class="navClasses">
             <ul>
                 <li
@@ -26,103 +26,112 @@
                 </li>
             </ul>
         </nav>
-        <section class="tab-content" :class="{'is-transitioning': isTransitioning}">
-            <slot/>
+        <section class="tab-content" :class="[type, {'is-transitioning': isTransitioning}]">
+            <slot />
         </section>
     </div>
 </template>
 
 <script>
-import Icon from '../icon/Icon'
-import SlotComponent from '../../utils/SlotComponent'
+    import Icon from '../icon/Icon'
+    import SlotComponent from '../../utils/SlotComponent'
 
-export default {
-    name: 'BTabs',
-    components: {
-        [Icon.name]: Icon,
-        [SlotComponent.name]: SlotComponent
-    },
-    props: {
-        value: Number,
-        expanded: Boolean,
-        type: String,
-        size: String,
-        position: String,
-        animated: {
-            type: Boolean,
-            default: true
+    export default {
+        name: 'BTabs',
+        components: {
+            [Icon.name]: Icon,
+            [SlotComponent.name]: SlotComponent
         },
-        destroyOnHide: {
-            type: Boolean,
-            default: false
-        }
-    },
-    data() {
-        return {
-            activeTab: this.value || 0,
-            tabItems: [],
-            contentHeight: 0,
-            isTransitioning: false,
-            _isTabs: true // Used internally by TabItem
-        }
-    },
-    computed: {
-        navClasses() {
-            return [
-                this.type,
-                this.size,
-                this.position,
-                {
+        props: {
+            value: Number,
+            expanded: Boolean,
+            type: String,
+            size: String,
+            position: String,
+            animated: {
+                type: Boolean,
+                default: true
+            },
+            hasMobileAccordion: Boolean,
+            animatedAccordion: {
+                type: Boolean,
+                default: true
+            }
+        },
+        data() {
+            return {
+                activeTab: this.value || 0,
+                tabItems: [],
+                contentHeight: 0,
+                isTransitioning: false,
+                _isTabs: true // Used internally by TabItem
+            }
+        },
+        computed: {
+            navClasses() {
+                return [
+                    this.type,
+                    this.size,
+                    this.position,
+                    {
+                        'is-fullwidth': this.expanded,
+                        'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
+                    }
+                ]
+            },
+            tabClasses() {
+                return {
                     'is-fullwidth': this.expanded,
-                    'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
+                    'has-mobile-accordion': this.hasMobileAccordion,
+                    'has-animated-accordion': this.animatedAccordion
                 }
-            ]
-        }
-    },
-    watch: {
-        /**
-        * When v-model is changed set the new active tab.
-        */
-        value(value) {
-            this.changeTab(value)
+            }
         },
+        watch: {
+            /**
+             * When v-model is changed set the new active tab.
+             */
+            value(value) {
+                this.changeTab(value)
+            },
 
-        /**
-        * When tab-items are updated, set active one.
-        */
-        tabItems() {
+            /**
+             * When tab-items are updated, set active one.
+             */
+            tabItems() {
+                if (this.activeTab < this.tabItems.length) {
+                    this.tabItems[this.activeTab].isActive = true
+                }
+            }
+        },
+        methods: {
+            /**
+             * Change the active tab and emit change event.
+             */
+            changeTab(newIndex) {
+                if (this.activeTab === newIndex) return
+
+                if (this.activeTab < this.tabItems.length) {
+                    this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
+                }
+                this.tabItems[newIndex].activate(this.activeTab, newIndex)
+                this.activeTab = newIndex
+                this.$emit('change', newIndex)
+            },
+
+            /**
+             * Tab click listener, emit input event and change active tab.
+             */
+            tabClick(value) {
+                this.$emit('input', value)
+                this.changeTab(value)
+            }
+        },
+        mounted() {
             if (this.activeTab < this.tabItems.length) {
                 this.tabItems[this.activeTab].isActive = true
             }
-        }
-    },
-    methods: {
-        /**
-        * Change the active tab and emit change event.
-        */
-        changeTab(newIndex) {
-            if (this.activeTab === newIndex) return
-
-            if (this.activeTab < this.tabItems.length) {
-                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
-            }
-            this.tabItems[newIndex].activate(this.activeTab, newIndex)
-            this.activeTab = newIndex
-            this.$emit('change', newIndex)
-        },
-
-        /**
-        * Tab click listener, emit input event and change active tab.
-        */
-        tabClick(value) {
-            this.$emit('input', value)
-            this.changeTab(value)
-        }
-    },
-    mounted() {
-        if (this.activeTab < this.tabItems.length) {
-            this.tabItems[this.activeTab].isActive = true
+            this.$on('changeTab', this.changeTab)
         }
     }
-}
 </script>

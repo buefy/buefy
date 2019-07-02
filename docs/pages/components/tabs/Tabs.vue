@@ -2,6 +2,8 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode"/>
 
+        <Example :component="ExResponsive" :code="ExResponsiveCode" title="Mobile accordion (resize page)"/>
+
         <Example :component="ExPosition" :code="ExPositionCode" title="Position"/>
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons"/>
@@ -33,6 +35,9 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
+    import ExResponsive from './examples/ExResponsive'
+    import ExResponsiveCode from '!!raw-loader!./examples/ExResponsive'
+
     import ExPosition from './examples/ExPosition'
     import ExPositionCode from '!!raw-loader!./examples/ExPosition'
 
@@ -56,12 +61,14 @@
             return {
                 api,
                 ExSimple,
+                ExResponsive,
                 ExPosition,
                 ExIcons,
                 ExSizes,
                 ExTypes,
                 ExExpanded,
                 ExSimpleCode,
+                ExResponsiveCode,
                 ExPositionCode,
                 ExIconsCode,
                 ExSizesCode,
