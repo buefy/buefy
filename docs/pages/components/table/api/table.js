@@ -164,6 +164,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>pagination-position</code>',
+                description: 'Pagination position (if <code>paginated</code>)',
+                type: 'String',
+                values: '<code>bottom</code>, <code>top</code>, <code>both</code>',
+                default: '<code>bottom</code>'
+            },
+            {
                 name: '<code>per-page</code>',
                 description: 'How many rows per page (if <code>paginated</code>)',
                 type: 'Number',
@@ -319,9 +326,14 @@ export default [
             },
             {
                 name: '<code>bottom-left</code>',
-                description: 'Custom bottom-left (opposite side of pagination)',
+                description: 'Custom bottom-left (opposite side of bottom pagination)',
                 props: '—'
-            }
+            },
+            {
+                name: '<code>top-left</code>',
+                description: 'Custom top-left (opposite side of top pagination)',
+                props: '—'
+            },
         ],
         events: [
             {
