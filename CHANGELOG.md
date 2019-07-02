@@ -11,6 +11,7 @@
 ### Fixes
 
 * Fix build errors using typescript
+* Fix #1516 month picker on iOS
 
 ## 0.7.8
 
