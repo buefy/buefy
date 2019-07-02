@@ -9,6 +9,31 @@
             @sort="(column) => sort(column)"
         />
 
+        <div
+            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')"
+            class="top level">
+            <div class="level-left">
+                <slot name="top-left"/>
+            </div>
+
+            <div class="level-right">
+                <div v-if="paginated" class="level-item">
+                    <b-pagination
+                        :icon-pack="iconPack"
+                        :total="newDataTotal"
+                        :per-page="perPage"
+                        :simple="paginationSimple"
+                        :size="paginationSize"
+                        :current="newCurrentPage"
+                        @change="pageChanged"
+                        :aria-next-label="ariaNextLabel"
+                        :aria-previous-label="ariaPreviousLabel"
+                        :aria-page-label="ariaPageLabel"
+                        :aria-current-label="ariaCurrentLabel" />
+                </div>
+            </div>
+        </div>
+
         <div class="table-wrapper">
             <table
                 class="table"
@@ -188,7 +213,10 @@
             </table>
         </div>
 
-        <div v-if="(checkable && hasBottomLeftSlot()) || paginated" class="level">
+        <div
+            v-if="(checkable && hasBottomLeftSlot()) ||
+            (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
+            class="level">
             <div class="level-left">
                 <slot name="bottom-left"/>
             </div>
@@ -297,6 +325,17 @@ export default {
         },
         paginationSimple: Boolean,
         paginationSize: String,
+        paginationPosition: {
+            type: String,
+            default: 'bottom',
+            validator: (value) => {
+                return [
+                    'bottom',
+                    'top',
+                    'both'
+                ].indexOf(value) >= 0
+            }
+        },
         backendSorting: Boolean,
         rowClass: {
             type: Function,
