@@ -14,7 +14,7 @@
                     <a
                         class="step-link"
                         :class="{'is-clickable': isItemClickable(stepItem)}"
-                        @click="stepItem.clickable && stepClick(index)">
+                        @click="isItemClickable(stepItem) && stepClick(index)">
                         <div class="step-marker">
                             <b-icon
                                 v-if="stepItem.icon"
