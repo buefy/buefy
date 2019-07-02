@@ -8,6 +8,7 @@
         height: 100%;
         opacity: 0;
         outline: none;
+        cursor: pointer;
         &.file-draggable {
             z-index: -1;
         }

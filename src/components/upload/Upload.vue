@@ -27,7 +27,6 @@
             :multiple="multiple"
             :accept="accept"
             :disabled="disabled"
-            :use-html5-validation="useHtml5Validation"
             @change="onFileChange">
     </label>
 </template>
