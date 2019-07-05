@@ -9,6 +9,15 @@ module.exports = {
   ],
   rules: {
     // disable now, but enable in the future
-    'vue/attributes-order': 'off'
+    'vue/attributes-order': 'off',
+    'vue/html-self-closing': ['error', {
+      'html': {
+        'void': 'never',
+        'normal': 'always',
+        'component': 'always'
+      },
+      'svg': 'always',
+      'math': 'always'
+    }]
   }
 }

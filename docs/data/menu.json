@@ -41,6 +41,7 @@
                 },
                 "documentation/icon",
                 "documentation/loading",
+                "documentation/menu",
                 "documentation/message",
                 "documentation/modal",
                 "documentation/notification",

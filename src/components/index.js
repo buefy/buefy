@@ -10,6 +10,7 @@ import Field from './field'
 import Icon from './icon'
 import Input from './input'
 import Loading from './loading'
+import Menu from './menu'
 import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
@@ -42,6 +43,7 @@ export {
     Icon,
     Input,
     Loading,
+    Menu,
     Message,
     Modal,
     Notification,

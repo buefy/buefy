@@ -1,5 +1,5 @@
 
-import './scss/buefy-build.scss'
+// import './scss/buefy-build.scss'
 
 import * as components from './components'
 

@@ -36,10 +36,10 @@ export default {
             this.component.$off(this.event, this.refresh)
         }
     },
-    render(h) {
+    render(createElement) {
         if (this.isVueComponent()) {
             const slots = this.component.$slots[this.name]
-            return h(this.tag, {}, slots)
+            return createElement(this.tag, {}, slots)
         }
     }
 }

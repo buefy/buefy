@@ -43,6 +43,7 @@ export default {
     components: {
         [Icon.name]: Icon
     },
+    inheritAttrs: false,
     props: {
         type: [String, Object],
         size: String,
