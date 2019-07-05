@@ -4,14 +4,18 @@
 
 ### New features
 
+* **New component: Menu**, [see docs](https://buefy.org/documentation/menu)
 * Add ``custom-class`` prop to modal (thanks @CobraClutch)
 * Add ``delay`` prop to tooltip (thanks @service-paradis)
 * Add ``checkbox-position`` prop to table (thanks @service-paradis)
+* Add ``pagination-position`` prop to table (thanks @service-paradis)
 
 ### Fixes
 
 * Fix build errors using typescript
+* Fix upload on iOS
 * Fix #1516 month picker on iOS
+* Fix #1526 timepicker default parser
 
 ## 0.7.8
 
