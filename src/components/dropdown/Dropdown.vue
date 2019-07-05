@@ -205,7 +205,9 @@ export default {
             if (!this.isActive) {
                 // if not active, toggle after clickOutside event
                 // this fixes toggling programmatic
-                this.$nextTick(() => { this.isActive = !this.isActive })
+                setTimeout(() => {
+                    this.isActive = !this.isActive
+                }, 150)
             } else {
                 this.isActive = !this.isActive
             }
