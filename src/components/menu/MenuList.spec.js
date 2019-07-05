@@ -1,17 +1,6 @@
 import { mount } from '@vue/test-utils'
 import BMenuList from '@components/menu/MenuList'
 
-const Menu = {
-    components: { BMenuList },
-    template: `
-      <div>
-        <b-menu-list>
-            <template slot="label">Test</template>
-        </b-menu-list>
-      </div>
-    `
-}
-
 describe('BMenuList', () => {
     it('is called', () => {
         const Menu = {
