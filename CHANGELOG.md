@@ -14,7 +14,7 @@
 
 * Fix build errors using typescript
 * Fix upload on iOS
-* Fix #1515 toggle datepicker
+* Fix #1515 toggle datepicker programmatically
 * Fix #1516 month picker on iOS
 * Fix #1526 timepicker default parser
 
