@@ -3,6 +3,7 @@
         <b-field>
             <b-datepicker
                 ref="datepicker"
+                expanded
                 placeholder="Select a date">
             </b-datepicker>
             <b-button
