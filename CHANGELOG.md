@@ -12,7 +12,7 @@
 
 ### Fixes
 
-* Fix build errors using typescript
+* Fix build errors using typescript and return type of snackbar and notification
 * Fix upload on iOS
 * Fix #1515 toggle datepicker programmatically
 * Fix #1516 month picker on iOS
