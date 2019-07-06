@@ -205,9 +205,12 @@ export default {
             if (!this.isActive) {
                 // if not active, toggle after clickOutside event
                 // this fixes toggling programmatic
-                setTimeout(() => {
-                    this.isActive = !this.isActive
-                }, 150)
+                this.$nextTick(() => {
+                    const value = !this.isActive
+                    this.isActive = value
+                    // Vue 2.6.x ???
+                    setTimeout(() => (this.isActive = value))
+                })
             } else {
                 this.isActive = !this.isActive
             }
