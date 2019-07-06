@@ -32,21 +32,3 @@
         </b-menu-list>
     </b-menu>
 </template>
-
-<script>
-export default {
-    data() {
-        return {
-            menu: [
-                { label: 'Info', icon: 'information-outline' },
-                { label: '', icon: 'settings',
-                    children: [
-                        { label: 'Info', icon: 'information-outline' },
-                        { label: 'Info', icon: 'information-outline' }
-                    ]
-                }
-            ]
-        }
-    }
-}
-</script>
