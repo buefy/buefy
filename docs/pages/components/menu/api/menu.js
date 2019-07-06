@@ -18,6 +18,20 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>icon</code>',
+                description: 'Icon name',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: '—',
+                default: '<code>mdi</code>'
             }
         ],
         slots: [
