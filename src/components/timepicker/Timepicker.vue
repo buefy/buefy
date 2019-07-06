@@ -98,6 +98,7 @@
             v-else
             ref="input"
             type="time"
+            :step="nativeStep"
             autocomplete="off"
             :value="formatHHMMSS(computedValue)"
             :placeholder="placeholder"
@@ -141,6 +142,11 @@ export default {
     data() {
         return {
             _isTimepicker: true
+        }
+    },
+    computed: {
+        nativeStep() {
+            if (this.enableSeconds) return '1'
         }
     }
 }

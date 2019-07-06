@@ -14,6 +14,7 @@
 
 * Fix build errors using typescript and return type of snackbar and notification
 * Fix upload on iOS
+* Fix native timepicker when ``enable-seconds``
 * Fix #1515 toggle datepicker programmatically
 * Fix #1516 month picker on iOS
 * Fix #1526 timepicker default parser
