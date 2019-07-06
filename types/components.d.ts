@@ -135,7 +135,7 @@ export declare type SnackbarConfig = {
     onAction?: () => any;
 }
 export declare const Snackbar: {
-    open: (params: SnackbarConfig | string) => void;
+    open: (params: SnackbarConfig | string) => { close: () => any };
 }
 
 export declare type ToastConfig = {
