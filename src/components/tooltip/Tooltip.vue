@@ -9,7 +9,7 @@
             'is-multiline': multilined,
             'is-dashed': dashed
         }]"
-        :style="{'transition-delay': `${delay}ms`}">
+        :style="{'transition-delay': `${newDelay}ms`}">
         <slot/>
     </span>
 </template>
@@ -47,10 +47,7 @@ export default {
             type: String,
             default: 'is-medium'
         },
-        delay: {
-            type: Number,
-            default: 0
-        }
+        delay: Number
     },
     computed: {
         newType() {
@@ -58,6 +55,9 @@ export default {
         },
         newAnimated() {
             return this.animated || config.defaultTooltipAnimated
+        },
+        newDelay() {
+            return this.delay || config.defaultTooltipDelay
         }
     }
 }
