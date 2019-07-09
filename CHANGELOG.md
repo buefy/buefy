@@ -1,5 +1,10 @@
 # Buefy Changelog
 
+## 0.7.10
+
+* Fix #1536 build error using Sass customization
+* Fix menu component example on codepen and/or simple html page
+
 ## 0.7.9
 
 ### New features
