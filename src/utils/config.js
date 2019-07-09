@@ -12,6 +12,7 @@ let config = {
     defaultNotificationPosition: null,
     defaultTooltipType: 'is-primary',
     defaultTooltipAnimated: false,
+    defaultTooltipDelay: 0,
     defaultInputAutocomplete: 'on',
     defaultDateFormatter: null,
     defaultDateParser: null,
