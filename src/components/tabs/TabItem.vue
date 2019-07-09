@@ -43,13 +43,14 @@ export default {
             this.$destroy()
             throw new Error('You should wrap bTabItem on a bTabs')
         }
-        this.$parent.tabItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy() {
         const index = this.$parent.tabItems.indexOf(this)
         if (index >= 0) {
             this.$parent.tabItems.splice(index, 1)
         }
+        this.$parent.refreshSlots()
     },
     render(createElement) {
         // if destroy apply v-if

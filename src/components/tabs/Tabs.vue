@@ -60,7 +60,7 @@ export default {
     data() {
         return {
             activeTab: this.value || 0,
-            tabItems: [],
+            defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
             _isTabs: true // Used internally by TabItem
@@ -77,6 +77,11 @@ export default {
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
             ]
+        },
+        tabItems() {
+            return this.defaultSlots
+                .filter((vnode) => vnode.componentInstance && vnode.componentOptions && vnode.componentOptions.tag === 'b-tab-item')
+                .map((vnode) => vnode.componentInstance)
         }
     },
     watch: {
@@ -97,6 +102,9 @@ export default {
         }
     },
     methods: {
+        refreshSlots() {
+            this.defaultSlots = this.$slots.default
+        },
         /**
         * Change the active tab and emit change event.
         */
@@ -123,6 +131,7 @@ export default {
         if (this.activeTab < this.tabItems.length) {
             this.tabItems[this.activeTab].isActive = true
         }
+        this.refreshSlots()
     }
 }
 </script>
