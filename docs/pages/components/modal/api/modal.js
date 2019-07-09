@@ -86,7 +86,14 @@ export default [
                 type: 'String',
                 values: '<code>clip</code>, <code>keep</code>',
                 default: '<code>clip</code>'
-            }
+            },
+            {
+                name: '<code>custom-class</code>',
+                description: 'CSS classes to be applied on modal',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
         ],
         events: [
             {
