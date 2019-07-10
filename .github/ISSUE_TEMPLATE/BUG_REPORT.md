@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve Buefy
-labels: bug
+labels: 
 ---
 
 <!-- PLEASE READ THE FOLLOWING INSTRUCTIONS -->
