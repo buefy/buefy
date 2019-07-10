@@ -229,12 +229,12 @@ export default {
         this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`)
         this.setSize()
         if (typeof window !== 'undefined') {
-            document.addEventListener('resize', this.setSize)
+            window.addEventListener('resize', this.setSize)
         }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
-            document.removeEventListener('resize', this.setSize)
+            window.removeEventListener('resize', this.setSize)
         }
     }
 }
