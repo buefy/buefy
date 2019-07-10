@@ -1,5 +1,25 @@
 # Buefy Changelog
 
+## 0.8.0
+
+### Breaking changes
+
+* Change path to import components to use outside main vue instance, like:
+```javascript
+// see Toast, Snackbar, Modal and Dialog doc pages for more examples
+import { Toast } from 'buefy/dist/es/components/toast'
+Toast.open('Toasty!')
+```
+
+### New features
+
+* Improve to tree shaking when importing individual components
+* Add ``defaultTooltipDelay`` constructor option (thanks @service-paradis)
+
+### Fixes
+
+* Fix #1541 emit `input` event when change step (thanks @service-paradis)
+
 ## 0.7.10
 
 * Fix #1536 build error using Sass customization
