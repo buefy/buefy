@@ -79,10 +79,10 @@
 
                                 <b-icon
                                     v-show="currentSortColumn === column"
-                                    icon="arrow-up"
+                                    :icon="sortIcon"
                                     :pack="iconPack"
                                     both
-                                    size="is-small"
+                                    :size="sortIconSize"
                                     :class="{ 'is-desc': !isAsc }"/>
                             </div>
                         </th>
@@ -309,6 +309,14 @@ export default {
         defaultSortDirection: {
             type: String,
             default: 'asc'
+        },
+        sortIcon: {
+            type: String,
+            default: 'arrow-up'
+        },
+        sortIconSize: {
+            type: String,
+            default: 'is-small'
         },
         paginated: Boolean,
         currentPage: {

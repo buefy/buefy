@@ -25,6 +25,17 @@
                 <option value="top">top pagination</option>
                 <option value="both">both</option>
             </b-select>
+            <b-select v-model="sortIcon">
+                <option value="arrow-up">Arrow sort icon</option>
+                <option value="menu-up">Caret sort icon</option>
+                <option value="chevron-up">Chevron sort icon </option>
+            </b-select>
+            <b-select v-model="sortIconSize">
+                <option value="is-small">Small sort icon</option>
+                <option value="">Regular sort icon</option>
+                <option value="is-medium">Medium sort icon</option>
+                <option value="is-large">Large sort icon</option>
+            </b-select>
         </b-field>
 
         <b-table
@@ -35,6 +46,8 @@
             :pagination-simple="isPaginationSimple"
             :pagination-position="paginationPosition"
             :default-sort-direction="defaultSortDirection"
+            :sort-icon="sortIcon"
+            :sort-icon-size="sortIconSize"
             default-sort="user.first_name"
             aria-next-label="Next page"
             aria-previous-label="Previous page"
@@ -82,6 +95,8 @@
                 isPaginationSimple: false,
                 paginationPosition: 'bottom',
                 defaultSortDirection: 'asc',
+                sortIcon: 'arrow-up',
+                sortIconSize: 'is-small',
                 currentPage: 1,
                 perPage: 5
             }
