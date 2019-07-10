@@ -7,7 +7,7 @@
 * Change path to import components to use outside main vue instance, like:
 ```javascript
 // see Toast, Snackbar, Modal and Dialog doc pages for more examples
-import { Toast } from 'buefy/dist/es/components/toast'
+import { Toast } from 'buefy'
 Toast.open('Toasty!')
 ```
 
