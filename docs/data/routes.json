@@ -442,6 +442,19 @@
         ],
         "isNew": true
     },
+     "documentation/slider": {
+        "title": "Slider",
+        "subtitle": "A slider",
+        "path": "/documentation/slider",
+        "githubPath": "pages/components/slider/Slider.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/slider"
+       ],
+        "isNew": true
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",

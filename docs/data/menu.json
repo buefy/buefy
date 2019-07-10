@@ -33,6 +33,7 @@
                         "documentation/numberinput",
                         "documentation/radio",
                         "documentation/select",
+                        "documentation/slider",
                         "documentation/switch",
                         "documentation/taginput",
                         "documentation/timepicker",

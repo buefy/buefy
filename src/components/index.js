@@ -18,6 +18,7 @@ import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Radio from './radio'
 import Select from './select'
+import Slider from './slider'
 import Snackbar from './snackbar'
 import Steps from './steps'
 import Switch from './switch'
@@ -51,6 +52,7 @@ export {
     Pagination,
     Radio,
     Select,
+    Slider,
     Snackbar,
     Steps,
     Switch,
