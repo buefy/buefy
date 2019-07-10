@@ -213,6 +213,7 @@ export default {
             if (prevItemIdx >= 0) {
                 prevItemIdx = this.stepItems.length - 1 - prevItemIdx
             }
+            this.$emit('input', prevItemIdx)
             this.changeStep(prevItemIdx)
         },
 
@@ -224,6 +225,7 @@ export default {
             const nextItemIdx = this.stepItems.findIndex((step, idx) => {
                 return idx > this.activeStep && step.visible
             })
+            this.$emit('input', nextItemIdx)
             this.changeStep(nextItemIdx)
         }
     },
