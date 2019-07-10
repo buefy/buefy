@@ -79,8 +79,7 @@ export default {
             firstValue: null,
             secondValue: null,
             dragging: false,
-            isRange: false,
-            sliderSize: 1
+            isRange: false
         }
     },
     computed: {
@@ -184,31 +183,30 @@ export default {
                 }
             }
         },
-        setPosition(percent) {
-            const targetValue = this.min + percent * (this.max - this.min) / 100
-            if (!this.isRange) {
-                this.$refs.button1.setPosition(percent)
-                return
-            }
-            let button
-            if (Math.abs(this.minValue - targetValue) < Math.abs(this.maxValue - targetValue)) {
-                button = this.firstValue < this.secondValue ? 'button1' : 'button2'
-            } else {
-                button = this.firstValue > this.secondValue ? 'button1' : 'button2'
-            }
-            this.$refs[button].setPosition(percent)
-        },
         onSliderClick(event) {
             if (this.disabled || this.dragging) return
             console.log('clicked')
             const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
-            this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100)
+            const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100
+            const targetValue = this.min + percent * (this.max - this.min) / 100
+            const diffFirst = Math.abs(targetValue - this.firstValue)
+            if (!this.isRange) {
+                if (diffFirst < this.step / 2) return
+                this.$refs.button1.setPosition(percent)
+            } else {
+                const diffSecond = Math.abs(targetValue - this.secondValue)
+                if (diffFirst <= diffSecond) {
+                    if (diffFirst < this.step / 2) return
+                    this.$refs['button1'].setPosition(percent)
+                } else {
+                    if (diffSecond < this.step / 2) return
+                    this.$refs['button2'].setPosition(percent)
+                }
+            }
             this.emitChange()
         },
         setSize() {
-            if (this.$refs.slider) {
-                this.sliderSize = this.$refs.slider['clientWidth']
-            }
+            this.sliderSize = this.$refs.slider['clientWidth']
         },
         emitChange() {
             this.$emit('change', this.isRange
