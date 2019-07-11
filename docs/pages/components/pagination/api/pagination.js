@@ -44,6 +44,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>Rounded</code>',
+                description: 'Rounded button styles',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
