@@ -24,11 +24,13 @@
             <b-slider-thumb
                 v-model="value1"
                 :type="newTooltipType"
+                :rounded="thumbRounded"
                 ref="button1"/>
             <b-slider-thumb
                 v-model="value2"
-                ref="button2"
                 :type="newTooltipType"
+                :rounded="thumbRounded"
+                ref="button2"
                 v-if="isRange"/>
         </div>
     </div>
@@ -70,6 +72,10 @@ export default {
             default: true
         },
         tooltipType: String,
+        thumbRounded: {
+            type: Boolean,
+            default: false
+        },
         disabled: {
             type: Boolean,
             default: false

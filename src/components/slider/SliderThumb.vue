@@ -1,7 +1,7 @@
 <template>
     <div
         class="b-slider-thumb-wrapper"
-        :class="{ 'is-hovered': hovering, 'is-dragging': dragging }"
+        :class="{ 'is-rounded': rounded, 'is-hovered': hovering, 'is-dragging': dragging }"
         :style="wrapperStyle">
         <b-tooltip
             :label="value.toString()"
@@ -40,7 +40,8 @@ export default {
         type: {
             type: String,
             default: ''
-        }
+        },
+        rounded: Boolean
     },
     data() {
         return {
