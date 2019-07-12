@@ -23,10 +23,12 @@
             </template>
             <b-slider-thumb
                 v-model="value1"
+                :type="newTooltipType"
                 ref="button1"/>
             <b-slider-thumb
                 v-model="value2"
                 ref="button2"
+                :type="newTooltipType"
                 v-if="isRange"/>
         </div>
     </div>
@@ -67,6 +69,7 @@ export default {
             type: Boolean,
             default: true
         },
+        tooltipType: String,
         disabled: {
             type: Boolean,
             default: false
@@ -77,7 +80,8 @@ export default {
             value1: null,
             value2: null,
             dragging: false,
-            isRange: false
+            isRange: false,
+            newTooltipType: this.tooltipType ? this.tooltipType : this.type
         }
     },
     computed: {

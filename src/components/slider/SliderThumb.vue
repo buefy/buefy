@@ -5,6 +5,7 @@
         :style="wrapperStyle">
         <b-tooltip
             :label="value.toString()"
+            :type="type"
             :always="dragging"
             :active="showTooltip">
             <div
@@ -35,6 +36,10 @@ export default {
         value: {
             type: Number,
             default: 0
+        },
+        type: {
+            type: String,
+            default: ''
         }
     },
     data() {
