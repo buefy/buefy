@@ -80,11 +80,15 @@ $slider-output-radius: $radius !default;
         }
     }
     &.is-disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-        .b-slider-thumb {
+        .b-slider-track {
             cursor: not-allowed;
-            transform: scale(1);
+            opacity: 0.5;
+        }
+        .b-slider-thumb-wrapper {
+            cursor: not-allowed;
+            .b-slider-thumb {
+                transform: scale(1);
+            }
         }
     }
     @include slider-size($size-normal);

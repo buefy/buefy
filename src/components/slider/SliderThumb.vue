@@ -7,14 +7,14 @@
             :label="value.toString()"
             :type="type"
             :always="dragging"
-            :active="showTooltip">
+            :active="!disabled && showTooltip">
             <div
                 class="b-slider-thumb"
+                :tabindex="disabled ? false : 0"
                 @mouseenter="handleMouseEnter"
                 @mouseleave="handleMouseLeave"
                 @mousedown="onButtonDown"
                 @touchstart="onButtonDown"
-                tabindex="0"
                 @focus="handleMouseEnter"
                 @blur="handleMouseLeave"
                 @keydown.left.prevent="onLeftKeyDown"
