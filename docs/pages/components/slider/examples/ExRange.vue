@@ -6,7 +6,7 @@
         </b-field>
 
         <b-field>
-            <b-slider v-model="values2" class="is-warning" :min="3" :max="8" :step="2" @change="log2">
+            <b-slider v-model="values2" type="is-warning" :min="3" :max="8" :step="2" @change="log2" show-ticks>
             </b-slider>
         </b-field>
 

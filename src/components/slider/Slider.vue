@@ -1,7 +1,7 @@
 <template>
     <div
         class="b-slider"
-        :class="{ 'is-dragging': dragging }"
+        :class="[size, type, {'is-dragging': dragging, 'is-disabled': disabled}]"
         role="slider"
         :aria-valuemin="min"
         :aria-valuemax="max"
@@ -9,7 +9,6 @@
         :aria-disabled="disabled">
         <div
             class="b-slider-track"
-            :class="{ 'is-disabled': disabled }"
             @click="onSliderClick"
             ref="slider">
             <div
@@ -23,10 +22,10 @@
                     :style="getTickStyle(item)"/>
             </template>
             <b-slider-thumb
-                v-model="firstValue"
+                v-model="value1"
                 ref="button1"/>
             <b-slider-thumb
-                v-model="secondValue"
+                v-model="value2"
                 ref="button2"
                 v-if="isRange"/>
         </div>
@@ -34,7 +33,6 @@
 </template>
 
 <script>
-import FormElementMixin from '../../utils/FormElementMixin'
 import SliderThumb from './SliderThumb'
 
 export default {
@@ -42,8 +40,6 @@ export default {
     components: {
         [SliderThumb.name]: SliderThumb
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
     props: {
         value: {
             type: [Number, Array],
@@ -61,6 +57,8 @@ export default {
             type: Number,
             default: 1
         },
+        type: String,
+        size: String,
         showTicks: {
             type: Boolean,
             default: false
@@ -76,8 +74,8 @@ export default {
     },
     data() {
         return {
-            firstValue: null,
-            secondValue: null,
+            value1: null,
+            value2: null,
             dragging: false,
             isRange: false
         }
@@ -94,15 +92,15 @@ export default {
             return result
         },
         minValue() {
-            return Math.min(this.firstValue, this.secondValue)
+            return Math.min(this.value1, this.value2)
         },
         maxValue() {
-            return Math.max(this.firstValue, this.secondValue)
+            return Math.max(this.value1, this.value2)
         },
         barSize() {
             return this.isRange
                 ? `${100 * (this.maxValue - this.minValue) / (this.max - this.min)}%`
-                : `${100 * (this.firstValue - this.min) / (this.max - this.min)}%`
+                : `${100 * (this.value1 - this.min) / (this.max - this.min)}%`
         },
         barStart() {
             return this.isRange
@@ -130,18 +128,16 @@ export default {
         value(value) {
             this.setValues(value)
         },
-        firstValue(val) {
-            console.log('First changed:' + val)
-            this.isThumbReversed = this.firstValue > this.secondValue
+        value1(val) {
+            this.isThumbReversed = this.value1 > this.value2
             if (this.isRange) {
                 this.$emit('input', [this.minValue, this.maxValue])
             } else {
                 this.$emit('input', val)
             }
         },
-        secondValue(val) {
-            console.log('Second changed:' + val)
-            this.isThumbReversed = this.firstValue > this.secondValue
+        value2(val) {
+            this.isThumbReversed = this.value1 > this.value2
             if (this.isRange) {
                 this.$emit('input', [this.minValue, this.maxValue])
             }
@@ -158,9 +154,6 @@ export default {
             if (this.min > this.max) {
                 return
             }
-            console.log('?')
-            console.log(newValue)
-            console.log(this.isThumbReversed)
             if (Array.isArray(newValue)) {
                 this.isRange = true
                 const smallValue = typeof newValue[0] !== 'number' || isNaN(newValue[0])
@@ -169,32 +162,26 @@ export default {
                 const largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1])
                     ? this.max
                     : Math.max(Math.min(this.max, newValue[1]), this.min)
-                console.log('INIT')
-                console.log(smallValue)
-                console.log(largeValue)
-                this.firstValue = this.isThumbReversed ? largeValue : smallValue
-                this.secondValue = this.isThumbReversed ? smallValue : largeValue
+                this.value1 = this.isThumbReversed ? largeValue : smallValue
+                this.value2 = this.isThumbReversed ? smallValue : largeValue
             } else {
                 this.isRange = false
-                if (isNaN(newValue)) {
-                    this.firstValue = this.min
-                } else {
-                    this.firstValue = Math.min(this.max, Math.max(this.min, newValue))
-                }
+                this.value1 = isNaN(newValue)
+                    ? this.min
+                    : Math.min(this.max, Math.max(this.min, newValue))
             }
         },
         onSliderClick(event) {
             if (this.disabled || this.dragging) return
-            console.log('clicked')
             const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
             const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100
             const targetValue = this.min + percent * (this.max - this.min) / 100
-            const diffFirst = Math.abs(targetValue - this.firstValue)
+            const diffFirst = Math.abs(targetValue - this.value1)
             if (!this.isRange) {
                 if (diffFirst < this.step / 2) return
                 this.$refs.button1.setPosition(percent)
             } else {
-                const diffSecond = Math.abs(targetValue - this.secondValue)
+                const diffSecond = Math.abs(targetValue - this.value2)
                 if (diffFirst <= diffSecond) {
                     if (diffFirst < this.step / 2) return
                     this.$refs['button1'].setPosition(percent)
@@ -211,7 +198,7 @@ export default {
         emitChange() {
             this.$emit('change', this.isRange
                 ? [this.minValue, this.maxValue]
-                : this.firstValue)
+                : this.value1)
         },
         getTickStyle(position) {
             return { 'left': position + '%' }
@@ -223,9 +210,8 @@ export default {
     },
     mounted() {
         // TODO valuenow?
-        const valuetext = this.isRange ? `${this.firstValue}-${this.secondValue}` : this.firstValue
+        const valuetext = this.isRange ? `${this.value1}-${this.value2}` : this.value1
         this.$el.setAttribute('aria-valuetext', valuetext)
-        // label screen reader
         this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`)
         this.setSize()
         if (typeof window !== 'undefined') {
@@ -238,5 +224,4 @@ export default {
         }
     }
 }
-
 </script>
