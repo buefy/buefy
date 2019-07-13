@@ -73,7 +73,8 @@ export default {
         value(value) {
             this.newValue = value
             if (!this.newValue ||
-            (Array.isArray(this.newValue) && this.newValue.length === 0)) {
+            (Array.isArray(this.newValue) && this.newValue.length === 0) ||
+            value.findIndex((x) => x.name === this.$refs.input.files[0].name) < 0) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
