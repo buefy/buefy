@@ -72,17 +72,8 @@ export default {
          */
         value(value) {
             this.newValue = value
-            // IE +11 findIndex
-            function findFileInArray(array, fileName) {
-                for (let i = 0; i < array.length; ++i) {
-                    if (array[i].name === fileName) {
-                        return i
-                    }
-                }
-                return -1
-            }
             if (!this.newValue || (Array.isArray(this.newValue) && this.newValue.length === 0) ||
-            findFileInArray(this.newValue, this.$refs.input.files[0].name) < 0) {
+            !this.newValue.some((f) => f.name === this.$refs.input.files[0].name)) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
