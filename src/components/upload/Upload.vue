@@ -72,8 +72,15 @@ export default {
          */
         value(value) {
             this.newValue = value
+
+            function findFileInArray(arr, name) {
+                return arr.some(function (arrVal) {
+                    return name === arrVal.name
+                })
+            }
+
             if (!this.newValue || (Array.isArray(this.newValue) && this.newValue.length === 0) ||
-            !this.newValue.some((f) => f.name === this.$refs.input.files[0].name)) {
+            !findFileInArray(this.newValue, this.$refs.input.files[0].name)) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
