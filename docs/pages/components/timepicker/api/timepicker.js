@@ -128,6 +128,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>default-minutes</code>',
+                description: 'Default value when hours change',
+                type: 'Number',
+                values: '-',
+                default: '-'
+            },
+            {
+                name: '<code>default-seconds</code>',
+                description: 'Default value when hours or minutes change',
+                type: 'Number',
+                values: '-',
+                default: '-'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

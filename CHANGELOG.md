@@ -16,6 +16,7 @@ Toast.open('Toasty!')
 * Improve to tree shaking when importing individual components
 * Add ``defaultTooltipDelay`` constructor option (thanks @service-paradis)
 * Add ``sort-icon`` and ``sort-icon-size`` to table (@modularcoder)
+* Add ``default-minutes`` and ``default-seconds`` to timepicker
 
 ### Fixes
 
