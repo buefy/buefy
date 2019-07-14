@@ -37,8 +37,8 @@
     "build:js:watch": "rollup -c --watch",
     "build:scss": "node-sass --output-style expanded src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss --level 1 --format breaksWith=lf --output dist/buefy.min.css dist/buefy.css",
     "build:scss:watch": "node-sass src/scss/buefy-build.scss --w",
-    "build:lib": "npm run build:lib && npm run build:scss",
-    "build:lib:watch": "concurrently \"npm run build:lib:watch\" \"npm run build:scss:watch \" ",
+    "build:lib": "npm run build:js && npm run build:scss",
+    "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js",
     "build": "npm run build:lib && npm run build:docs",
     "cov": "./node_modules/codcov/bin/codcov"
