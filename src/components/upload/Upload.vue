@@ -65,16 +65,24 @@ export default {
     },
     watch: {
         /**
-        * When v-model is changed:
-        *   1. Set internal value.
-        *   2. Reset input value if array is empty
-        *   3. If it's invalid, validate again.
-        */
+         * When v-model is changed:
+         *   1. Set internal value.
+         *   2. Reset input value if array is empty or when input file is not found in newValue
+         *   3. If it's invalid, validate again.
+         */
         value(value) {
             this.newValue = value
-            if (!this.newValue ||
-            (Array.isArray(this.newValue) && this.newValue.length === 0) ||
-            this.newValue.findIndex((x) => x.name === this.$refs.input.files[0].name) < 0) {
+            // IE +11 findIndex
+            function findFileInArray(array, fileName) {
+                for (let i = 0; i < array.length; ++i) {
+                    if (array[i].name === fileName) {
+                        return i
+                    }
+                }
+                return -1
+            }
+            if (!this.newValue || (Array.isArray(this.newValue) && this.newValue.length === 0) ||
+            findFileInArray(this.newValue, this.$refs.input.files[0].name) < 0) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
