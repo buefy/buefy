@@ -7,7 +7,7 @@
 * Change path to import components to use outside main vue instance, like:
 ```javascript
 // see Toast, Snackbar, Modal and Dialog doc pages for more examples
-import { Toast } from 'buefy'
+import { Toast } from 'buefy/dist/es/components/toast'
 Toast.open('Toasty!')
 ```
 
@@ -15,6 +15,7 @@ Toast.open('Toasty!')
 
 * Improve to tree shaking when importing individual components
 * Add ``defaultTooltipDelay`` constructor option (thanks @service-paradis)
+* Add ``sort-icon`` and ``sort-icon-size`` to table (@modularcoder)
 
 ### Fixes
 
