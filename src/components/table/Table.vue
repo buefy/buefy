@@ -69,11 +69,14 @@
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
                             }">
-                                <template v-if="column.$slots && column.$slots.header">
+                                <template v-if="column.$scopedSlots && column.$scopedSlots.header">
                                     <b-slot-component
                                         :component="column"
+                                        :scoped="true"
                                         name="header"
-                                        tag="span" />
+                                        tag="span"
+                                        :props="{ column }"
+                                    />
                                 </template>
                                 <template v-else-if="$scopedSlots.header">
                                     <slot
