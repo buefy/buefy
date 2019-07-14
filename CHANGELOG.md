@@ -20,6 +20,7 @@ Toast.open('Toasty!')
 ### Fixes
 
 * Fix #1541 emit `input` event when change step (thanks @service-paradis)
+* Fix #1544 years select datepicker when max/min being passed
 
 ## 0.7.10
 

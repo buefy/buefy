@@ -384,12 +384,12 @@ export default {
         listOfYears() {
             let latestYear = this.focusedDateData.year + this.yearsRange[1]
             if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
-                latestYear = this.maxDate.getFullYear()
+                latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year)
             }
 
             let earliestYear = this.focusedDateData.year + this.yearsRange[0]
             if (this.minDate && this.minDate.getFullYear() > earliestYear) {
-                earliestYear = this.minDate.getFullYear()
+                earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year)
             }
 
             const arrayOfYears = []
