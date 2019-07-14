@@ -34,7 +34,7 @@
             :size="iconSize"/>
 
         <b-icon
-            v-if="!loading && (passwordReveal || statusType)"
+            v-if="!loading && (passwordReveal || statusTypeIcon)"
             class="is-right"
             :class="{ 'is-clickable': passwordReveal }"
             :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
@@ -122,7 +122,7 @@ export default {
             ]
         },
         hasIconRight() {
-            return this.passwordReveal || this.loading || this.statusType
+            return this.passwordReveal || this.loading || this.statusTypeIcon
         },
 
         /**

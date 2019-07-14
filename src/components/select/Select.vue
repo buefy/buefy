@@ -22,6 +22,7 @@
                         {{ placeholder }}
                     </option>
                 </template>
+
                 <slot/>
 
             </select>
