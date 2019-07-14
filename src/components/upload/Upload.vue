@@ -22,7 +22,6 @@
         <input
             ref="input"
             type="file"
-            :class="{'file-draggable': dragDrop}"
             v-bind="$attrs"
             :multiple="multiple"
             :accept="accept"
