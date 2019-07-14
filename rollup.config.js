@@ -26,16 +26,15 @@ const componentsFolder = 'components/'
 const components = fs.readdirSync(baseFolder + componentsFolder)
     .filter((f) => (fs.statSync(path.join(baseFolder + componentsFolder, f)).isDirectory()))
 
-const mapComponent = (name = '') => {
-    const componentFolder = name ? `${name}/` : ''
+const mapComponent = (name) => {
     return [
         {
-            input: baseFolder + componentsFolder + componentFolder + 'index.js',
+            input: baseFolder + componentsFolder + `${name}/index.js`,
             external: ['vue'],
             output: {
                 format: 'umd',
                 name: !name ? 'buefy' : name,
-                file: `dist/components/${componentFolder}index.js`,
+                file: `dist/components/${name}/index.js`,
                 banner: bannerTxt,
                 exports: 'named',
                 globals: {
@@ -55,11 +54,11 @@ const mapComponent = (name = '') => {
             ]
         },
         {
-            input: baseFolder + componentsFolder + componentFolder + 'index.js',
+            input: baseFolder + componentsFolder + `${name}/index.js`,
             external: ['vue'],
             output: {
                 format: 'esm',
-                file: `dist/es/components/${componentFolder}index.js`,
+                file: `dist/es/components/${name}/index.js`,
                 banner: bannerTxt
             },
             plugins: [
@@ -80,8 +79,6 @@ const mapComponent = (name = '') => {
 const config = [
     // individual components
     ...components.map((f) => mapComponent(f)).reduce((r, a) => r.concat(a), []),
-    // individual components wrapper
-    ...mapComponent(),
     {
         input: 'src/index.js',
         external: ['vue'],
