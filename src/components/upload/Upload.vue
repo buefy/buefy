@@ -95,6 +95,9 @@ export default {
                 if (!this.newValue) {
                     return
                 }
+                if (!this.native) {
+                    this.newValue = null
+                }
             } else if (!this.multiple) {
                 // only one element in case drag drop mode and isn't multiple
                 if (this.dragDrop && value.length !== 1) return
