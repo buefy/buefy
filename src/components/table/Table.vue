@@ -75,7 +75,7 @@
                                         :scoped="true"
                                         name="header"
                                         tag="span"
-                                        :props="{ column }"
+                                        :props="{ column, index }"
                                     />
                                 </template>
                                 <template v-else-if="$scopedSlots.header">
