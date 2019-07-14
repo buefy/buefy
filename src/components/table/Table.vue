@@ -69,12 +69,19 @@
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
                             }">
-                                <slot
-                                    v-if="$scopedSlots.header"
-                                    name="header"
-                                    :column="column"
-                                    :index="index"
-                                />
+                                <template v-if="column.$slots && column.$slots.header">
+                                    <b-slot-component
+                                        :component="column"
+                                        name="header"
+                                        tag="span" />
+                                </template>
+                                <template v-else-if="$scopedSlots.header">
+                                    <slot
+                                        name="header"
+                                        :column="column"
+                                        :index="index"
+                                    />
+                                </template>
                                 <template v-else>{{ column.label }}</template>
 
                                 <b-icon
@@ -247,6 +254,7 @@ import { getValueByPath, indexOf } from '../../utils/helpers'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Pagination from '../pagination/Pagination'
+import SlotComponent from '../../utils/SlotComponent'
 
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
@@ -257,6 +265,7 @@ export default {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
         [Pagination.name]: Pagination,
+        [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
         [TableColumn.name]: TableColumn
     },
