@@ -85,7 +85,8 @@ export default {
             value2: null,
             dragging: false,
             isRange: false,
-            newTooltipType: this.tooltipType ? this.tooltipType : this.type
+            newTooltipType: this.tooltipType ? this.tooltipType : this.type,
+            _isSlider: true // Used by SliderThumb
         }
     },
     computed: {

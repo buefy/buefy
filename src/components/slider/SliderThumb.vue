@@ -168,6 +168,12 @@ export default {
                 this.oldValue = value
             }
         }
+    },
+    created() {
+        if (!this.$parent.$data._isSlider) {
+            this.$destroy()
+            throw new Error('You should wrap bSliderThumb on a bSlider')
+        }
     }
 }
 </script>
