@@ -1,13 +1,17 @@
 <template>
     <section>
-        <b-field>
-            <b-slider type="is-primary" v-model="number"></b-slider>
-        </b-field>
-            <b-slider size="is-large" v-model="number2" :showTooltip="false"></b-slider>
-        <b-field>
-            <b-slider></b-slider>
+        <b-field label="Simple">
+            <b-slider v-model="value"></b-slider>
         </b-field>
 
+        <b-field label="Disabled">
+            <b-slider disabled></b-slider>
+        </b-field>
+
+        <p>Temporary test for use with horizontal field</p>
+        <b-field label="slider" horizontal>
+            <b-slider></b-slider>
+        </b-field>
     </section>
 </template>
 
@@ -15,8 +19,7 @@
     export default {
         data() {
             return {
-                number: NaN,
-                number2: 12
+                value: 5
             }
         }
     }
