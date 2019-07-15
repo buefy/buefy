@@ -17,12 +17,12 @@ export default {
     name: 'BProgress',
     props: {
         type: {
-            type: String | Object,
+            type: [String, Object],
             default: 'is-darkgrey'
         },
         size: String,
         value: {
-            type: undefined | Number,
+            type: Number,
             default: undefined
         },
         max: {
