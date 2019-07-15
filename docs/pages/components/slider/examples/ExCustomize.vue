@@ -1,6 +1,6 @@
 <template>
     <section>
-        <b-field label="Tooltip color">
+        <b-field label="Tooltip type">
             <b-slider tooltip-type="is-light"></b-slider>
         </b-field>
 
