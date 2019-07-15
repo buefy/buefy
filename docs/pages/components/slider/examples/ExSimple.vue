@@ -7,11 +7,6 @@
         <b-field label="Disabled">
             <b-slider disabled></b-slider>
         </b-field>
-
-        <p>Temporary test for use with horizontal field</p>
-        <b-field label="slider" horizontal>
-            <b-slider></b-slider>
-        </b-field>
     </section>
 </template>
 

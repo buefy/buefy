@@ -1,7 +1,5 @@
 <template>
     <div>
-        <p>test</p>
-
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
