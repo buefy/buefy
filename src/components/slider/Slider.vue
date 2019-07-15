@@ -1,7 +1,7 @@
 <template>
     <div
         class="b-slider"
-        :class="[size, type, {'is-dragging': dragging, 'is-disabled': disabled}]"
+        :class="[size, type, rootClasses]"
         role="slider"
         :aria-valuemin="min"
         :aria-valuemax="max"
@@ -24,12 +24,10 @@
             <b-slider-thumb
                 v-model="value1"
                 :type="newTooltipType"
-                :rounded="thumbRounded"
                 ref="button1"/>
             <b-slider-thumb
                 v-model="value2"
                 :type="newTooltipType"
-                :rounded="thumbRounded"
                 ref="button2"
                 v-if="isRange"/>
         </div>
@@ -72,7 +70,7 @@ export default {
             default: true
         },
         tooltipType: String,
-        thumbRounded: {
+        rounded: {
             type: Boolean,
             default: false
         },
@@ -128,6 +126,13 @@ export default {
             return {
                 width: this.barSize,
                 left: this.barStart
+            }
+        },
+        rootClasses() {
+            return {
+                'is-rounded': this.rounded,
+                'is-dragging': this.dragging,
+                'is-disabled': this.disabled
             }
         }
     },

@@ -63,18 +63,14 @@ $slider-output-radius: $radius !default;
             border-radius: $slider-thumb-radius;
             background: $slider-thumb-background;
         }
-        &.is-rounded {
-            .b-slider-thumb {
-                border-radius: $radius-rounded;
-            }
-        }
         &:active {
             .b-slider-thumb {
                 transform: scale(1.25);
             }
         }
     }
-    &.is-circle {
+
+    &.is-rounded {
         .b-slider-thumb {
             border-radius: $radius-rounded;
         }
@@ -91,6 +87,7 @@ $slider-output-radius: $radius !default;
             }
         }
     }
+
     @include slider-size($size-normal);
     &.is-small {
         @include slider-size($size-small);
