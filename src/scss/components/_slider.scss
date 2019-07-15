@@ -8,9 +8,7 @@ $slider-thumb-radius: $radius !default;
 $slider-thumb-border: 1px solid $grey-light !default;
 $slider-thumb-shadow: none !default;
 $slider-thumb-to-track-ratio: 2 !default;
-$slider-output-width: 3rem !default;
-$slider-output-background: $grey-dark !default;
-$slider-output-radius: $radius !default;
+$slider-tick-background: $grey-light !default;
 
 @mixin slider-size($size) {
 	$track-height: $size / $slider-thumb-to-track-ratio;
@@ -23,6 +21,10 @@ $slider-output-radius: $radius !default;
 	.b-slider-thumb {
 		height: $thumb-size;
 		width: $thumb-size;
+    }
+
+    .b-slider-tick {
+        height: $track-height;
     }
 }
 
@@ -110,9 +112,9 @@ $slider-output-radius: $radius !default;
 
     .b-slider-tick {
         position: absolute;
+		width: 0.2em;
         transform: translateX(-50%);
-        height: 0.75em;
-        width: 0.2em;
-        background: $grey-light;
+        background: $slider-tick-background;
+        border-radius: $radius-rounded;
     }
 }
