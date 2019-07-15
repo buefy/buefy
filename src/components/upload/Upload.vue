@@ -95,7 +95,7 @@ export default {
                 if (!this.newValue) {
                     return
                 }
-                if (!this.native) {
+                if (this.native) {
                     this.newValue = null
                 }
             } else if (!this.multiple) {
