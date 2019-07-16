@@ -7,7 +7,7 @@
             :label="value.toString()"
             :type="type"
             :always="dragging"
-            :active="!disabled && showTooltip">
+            :active="!disabled && tooltip">
             <div
                 class="b-slider-thumb"
                 :tabindex="disabled ? false : 0"
@@ -40,6 +40,10 @@ export default {
         type: {
             type: String,
             default: ''
+        },
+        tooltip: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -64,9 +68,6 @@ export default {
         },
         step() {
             return this.$parent.step
-        },
-        showTooltip() {
-            return this.$parent.showTooltip
         },
         precision() {
             return this.$parent.precision

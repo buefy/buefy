@@ -14,20 +14,22 @@
             <div
                 class="b-slider-fill"
                 :style="barStyle"/>
-            <template v-if="showTicks">
+            <template v-if="ticks">
                 <div
                     class="b-slider-tick"
-                    v-for="(item, key) in ticks"
+                    v-for="(item, key) in tickPositions"
                     :key="key"
                     :style="getTickStyle(item)"/>
             </template>
             <b-slider-thumb
                 v-model="value1"
                 :type="newTooltipType"
+                :tooltip="tooltip"
                 ref="button1"/>
             <b-slider-thumb
                 v-model="value2"
                 :type="newTooltipType"
+                :tooltip="tooltip"
                 ref="button2"
                 v-if="isRange"/>
         </div>
@@ -61,11 +63,11 @@ export default {
         },
         type: String,
         size: String,
-        showTicks: {
+        ticks: {
             type: Boolean,
             default: false
         },
-        showTooltip: {
+        tooltip: {
             type: Boolean,
             default: true
         },
@@ -90,8 +92,8 @@ export default {
         }
     },
     computed: {
-        ticks() {
-            if (!this.showTicks || this.min > this.max || this.step === 0) return []
+        tickPositions() {
+            if (!this.ticks || this.min > this.max || this.step === 0) return []
             const stopCount = (this.max - this.min) / this.step
             const stepWidth = 100 * this.step / (this.max - this.min)
             const result = []

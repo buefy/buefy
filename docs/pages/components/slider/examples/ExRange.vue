@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field>
-            <b-slider v-model="numbers" type="is-primary" :min="1" :max="15" :step="0.5" show-ticks>
+            <b-slider v-model="numbers" type="is-primary" :min="1" :max="15" :step="0.5" ticks>
             </b-slider>
         </b-field>
 

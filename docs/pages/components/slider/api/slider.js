@@ -4,123 +4,97 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
-                type: 'String, Number',
+                type: 'Number, Array',
                 values: '—',
                 default: '—'
             },
             {
+                name: '<code>min</code>',
+                description: 'Minimum value',
+                type: 'Number',
+                values: '—',
+                default: '<code>0</code>'
+            },
+            {
+                name: '<code>max</code>',
+                description: 'Maximum value',
+                type: 'Number',
+                values: '—',
+                default: '<code>100</code>'
+            },
+            {
+                name: '<code>step</code>',
+                description: 'Step interval of ticks',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
                 name: '<code>type</code>',
-                description: 'Type (color) of the control, optional',
+                description: 'Type (color) of the slider, optional',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                 <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                 <code>is-warning</code>, <code>is-danger</code>,
                 and any other colors you've set in the <code>$colors</code> list on Sass`,
-                default: '<code>is-primary</code>'
+                default: '-'
             },
             {
                 name: '<code>size</code>',
-                description: 'Vertical size of input, optional',
+                description: 'Thickness of the slider, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
             },
             {
-                name: '<code>expanded</code>',
-                description: 'Makes input full width when inside a grouped or addon field',
+                name: '<code>ticks</code>',
+                description: 'Show tick marks',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>password-reveal</code>',
-                description: 'Add the reveal password functionality',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
-                name: '<code>loading</code>',
-                description: 'Add the loading state to the input',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
-                name: '<code>icon</code>',
-                description: 'Icon name to be added',
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>icon-pack</code>',
-                description: 'Icon pack to use',
-                type: 'String',
-                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
-                default: '<code>mdi</code>'
-            },
-            {
-                name: '<code>maxlength</code>',
-                description: 'Same as native <code>maxlength</code>, plus character counter',
-                type: 'String, Number',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>has-counter</code>',
-                description: 'Show character counter when <code>maxlength</code> prop is passed',
+                name: '<code>tooltip</code>',
+                description: 'Show tooltip when thumb is being dragged',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
             {
-                name: '<code>custom-class</code>',
-                description: 'CSS classes to be applied on input',
+                name: '<code>tooltipType</code>',
+                description: 'The type (color) of the tootip. Defaults to <code>type</code>',
                 type: 'String',
-                values: '—',
-                default: '—'
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                <code>is-warning</code>, <code>is-danger</code>,
+                and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '<code>type</code>'
             },
             {
-                name: 'Any native attribute',
-                description: '—',
-                type: '—',
+                name: '<code>rounded</code>',
+                description: 'Rounded thumb',
+                type: 'Boolean',
                 values: '—',
-                default: '—'
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>disabled</code>',
+                description: 'Disabled',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when value is changed',
-                parameters: '<code>value: String|Number</code>'
+                parameters: '<code>value: Number|Array</code>'
             },
             {
-                name: '<code>focus</code>',
-                description: 'Triggers when input has received focus',
-                parameters: '<code>event: $event</code>'
-            },
-            {
-                name: '<code>blur</code>',
-                description: 'Triggers when input has lost focus',
-                parameters: '<code>event: $event</code>'
-            },
-            {
-                name: '<code>[any].native</code>',
-                description: 'Listen to any native event, e.g. <code>click.native</code>',
-                parameters: '<code>event: $event</code>'
-            }
-        ],
-        methods: [
-            {
-                name: '<code>checkHtml5Validity</code>',
-                description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',
-                return: '<code>isValid: Boolean</code>'
-            },
-            {
-                name: '<code>focus</code>',
-                description: 'Set focus (internally uses the native <code>.select()</code> method)',
-                return: '—'
+                name: '<code>change</code>',
+                description: 'Triggers when value is changed after user interaction',
+                parameters: '<code>value: Number|Array</code>'
             }
         ]
     }
