@@ -21,8 +21,8 @@
                 @keydown.right.prevent="onRightKeyDown"
                 @keydown.down.prevent="onLeftKeyDown"
                 @keydown.up.prevent="onRightKeyDown"
-                @keydown.page-up.prevent="onPgupKeyDown"
-                @keydown.page-down.prevent="onPgdnKeyDown"/>
+                @keydown.home.prevent="onHomeKeyDown"
+                @keydown.end.prevent="onEndKeyDown"/>
         </b-tooltip>
     </div>
 </template>
@@ -119,13 +119,13 @@ export default {
             this.setPosition(this.newPosition)
             this.$parent.emitChange()
         },
-        onPgdnKeyDown() {
+        onHomeKeyDown() {
             if (this.disabled || this.value === this.min) return
             this.newPosition = 0
             this.setPosition(this.newPosition)
             this.$parent.emitChange()
         },
-        onPgupKeyDown() {
+        onEndKeyDown() {
             if (this.disabled || this.value === this.max) return
             this.newPosition = 100
             this.setPosition(this.newPosition)
