@@ -61,7 +61,7 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>tooltipType</code>',
+                name: '<code>tooltip-type</code>',
                 description: 'The type (color) of the tootip. Defaults to <code>type</code>',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
@@ -79,7 +79,7 @@ export default [
             },
             {
                 name: '<code>disabled</code>',
-                description: 'Disabled',
+                description: 'Disable the slider',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

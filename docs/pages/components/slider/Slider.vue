@@ -8,7 +8,9 @@
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customization" vertical/>
 
-        <Example :component="ExRange" :code="ExRangeCode" title="Range slider"/>
+        <Example :component="ExRange" :code="ExRangeCode" title="Range slider">
+            <p>Just bind the value to an Array.</p>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
