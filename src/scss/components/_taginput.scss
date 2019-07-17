@@ -24,6 +24,9 @@ $taginput-height: 1.7em;
                 margin-bottom: 0;
                 font-size: 0.9em;
                 height: $taginput-height;
+                &.is-delete {
+                    width: $taginput-height;
+                }
             }
             &:not(:last-child) {
                 margin-left: 0.275rem;
