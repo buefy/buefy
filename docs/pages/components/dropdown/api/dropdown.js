@@ -122,6 +122,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Item can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>custom</code>',
                 description: 'Item is not a clickable item',
                 type: 'Boolean',

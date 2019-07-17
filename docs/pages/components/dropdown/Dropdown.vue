@@ -9,6 +9,7 @@
 
         <Example :component="ExContentPosition" :code="ExContentPositionCode" title="Content and position" paddingless>
             <p>Add the <code>custom</code> prop to the item to add <strong>any type of content</strong>.</p>
+            <p>Add the <code>:focusable="false"</code> prop to the <code>dropdown-item</code> if you dont want it to be focusable.</p>
         </Example>
 
         <Example :component="ExHasLinkDisabled" :code="ExHasLinkDisabledCode" title="Links within" paddingless>
