@@ -22,6 +22,7 @@ Toast.open('Toasty!')
 * Add ``default-minutes`` and ``default-seconds`` to timepicker
 * Add ``focusable`` prop to dropdown (thanks @service-paradis)
 * Add ``mouseenter `` and ``mouseleave`` events to table (thanks @afm-sayem)
+* Add ``rounded`` and ``outlined`` prop to switch (thanks @service-paradis)
 
 ### Fixes
 
@@ -217,7 +218,7 @@ Toast.open('Toasty!')
 * Change path to import components to use outside main vue instance, like:
 ```javascript
 // see Toast, Snackbar, Modal and Dialog doc pages for more examples
-import { Toast } from 'buefy/dist/components/toast'
+import { ToastProgrammatic as Toast } from 'buefy'
 Toast.open('Toasty!')
 ```
 * Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``

@@ -130,8 +130,7 @@
                 `,
                 importingComponentsAsVuePlugins: `
                 import Vue from 'vue'
-                import Table from 'buefy/dist/components/table'
-                import Input from 'buefy/dist/components/input'
+                import { Table, Input } from 'buefy'
                 import 'buefy/dist/buefy.css'
 
                 Vue.use(Table)
@@ -139,8 +138,8 @@
                 `,
                 importingComponents: `
                 import Vue from 'vue'
-                import { Table } from 'buefy/dist/components/table'
-                import { Input } from 'buefy/dist/components/input'
+                import { Table } from 'buefy/dist/es/components/table'
+                import { Input } from 'buefy/dist/es/components/input'
                 import 'buefy/dist/buefy.css'
 
                 Vue.component('b-table', Table)

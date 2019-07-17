@@ -60,7 +60,7 @@
                 ExProgrammatically,
                 ExProgrammaticallyCode,
                 outsideVueInstance: `
-                    import { NotificationProgrammatic as Notification } from 'buefy/dist/components/notification'
+                    import { NotificationProgrammatic as Notification } from 'buefy'
                     Notification.open('Notify!')
                 `
             }
