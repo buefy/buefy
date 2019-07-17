@@ -104,7 +104,8 @@ const config = [
         external: ['vue'],
         output: {
             format: 'cjs',
-            file: 'dist/buefy.cjs.js'
+            file: 'dist/buefy.cjs.js',
+            exports: 'named'
         },
         plugins: [
             replace({ 'process.env.NODE_ENV': 'production' }),
@@ -126,6 +127,7 @@ const config = [
             format: 'umd',
             name: 'buefy',
             file: 'dist/buefy.js',
+            exports: 'named',
             banner: bannerTxt,
             globals: {
                 vue: 'Vue'
