@@ -1,7 +1,7 @@
 <template>
     <section class="example-section">
         <p :id="`${slugifiedTitle}`" class="title is-4">
-            <router-link :to="`#${slugifiedTitle}`">#</router-link>
+            <router-link v-if="title" :to="`#${slugifiedTitle}`">#</router-link>
             {{ title }}
         </p>
         <div class="content">
@@ -44,6 +44,7 @@ export default {
     },
     computed: {
         slugifiedTitle() {
+            if (!this.title) return ''
             return this.title.toLowerCase()
                 .replace(/\s+/g, '-') // Replace spaces with -
                 .replace(/[^\w-]+/g, '') // Remove all non-word chars
