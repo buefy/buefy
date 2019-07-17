@@ -24,3 +24,5 @@ const Buefy = {
 use(Buefy)
 
 export default Buefy
+
+export * from './components'
