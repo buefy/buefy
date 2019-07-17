@@ -415,6 +415,16 @@ export default [
                 description: 'Triggers when dragging over a row',
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
 
+            },
+            {
+                name: '<code> mouseover </code>',
+                description: 'Triggers when mouse enters a row',
+                parameters: '<code> row: Object </code>'
+            },
+            {
+                name: '<code> mouseleave </code>',
+                description: 'Triggers when mouse leaves a row',
+                parameters: '<code> row: Object </code>'
             }
         ],
         methods: [
