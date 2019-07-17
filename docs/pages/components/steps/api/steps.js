@@ -120,16 +120,9 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
-                name: '<code>completed</code>',
-                description: 'Step is considered completed',
-                type: 'Boolean',
-                values: '—',
-                default: 'false'
-            },
-            {
                 name: '<code>clickable</code>',
                 description: `Item can be used directly to navigate.
-                    If undefined, completed steps are clickable while the others are not.`,
+                    If undefined, previous steps are clickable while the others are not.`,
                 type: 'Boolean',
                 values: '—',
                 default: '—'

@@ -6,10 +6,9 @@ export default {
         type: String | Object,
         icon: String,
         iconPack: String,
-        clickable: Boolean,
-        completed: {
+        clickable: {
             type: Boolean,
-            default: false
+            default: undefined
         },
         visible: {
             type: Boolean,
