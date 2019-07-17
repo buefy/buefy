@@ -601,7 +601,9 @@ export default {
         */
         toggle() {
             if (this.mobileNative && this.isMobile) {
-                this.$refs.input.$el.click()
+                const input = this.$refs.input.$refs.input
+                input.focus()
+                input.click()
                 return
             }
             this.$refs.dropdown.toggle()

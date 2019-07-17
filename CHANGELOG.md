@@ -7,7 +7,7 @@
 * Change path to import components to use outside main vue instance, like:
 ```javascript
 // see Toast, Snackbar, Modal and Dialog doc pages for more examples
-import { Toast } from 'buefy/dist/es/components/toast'
+import { ToastProgrammatic as Toast } from 'buefy'
 Toast.open('Toasty!')
 ```
 * Fix #1529 pagination ellipsis behavior (thanks @service-paradis)
@@ -28,6 +28,7 @@ Toast.open('Toasty!')
 
 * Fix #1541 emit `input` event when change step (thanks @service-paradis)
 * Fix #1544 years select datepicker when max/min being passed
+* Fix #1565 datepicker programmatically on mobile
 * Fix issues on delete last selected element and on reset upload (thanks @it-fm)
 
 ## 0.7.10
@@ -218,7 +219,7 @@ Toast.open('Toasty!')
 * Change path to import components to use outside main vue instance, like:
 ```javascript
 // see Toast, Snackbar, Modal and Dialog doc pages for more examples
-import { ToastProgrammatic as Toast } from 'buefy'
+import { Toast } from 'buefy/dist/components/toast'
 Toast.open('Toasty!')
 ```
 * Upload component accepts a single `File` and `Array<File>` when multiple as ``v-model``
