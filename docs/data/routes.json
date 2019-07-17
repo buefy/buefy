@@ -442,6 +442,18 @@
         ],
         "isNew": true
     },
+    "documentation/progress": {
+        "title": "Progress",
+        "subtitle": "Wrapper around Bulma / Native HTML progress bars",
+        "path": "/documentation/progress",
+        "githubPath": "pages/components/progress/Progress.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/progress"
+        ]
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
