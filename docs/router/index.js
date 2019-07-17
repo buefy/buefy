@@ -76,7 +76,14 @@ const router = new Router({
         },
         // Global redirect
         { path: '*', redirect: '' }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        if (to.hash) {
+            return {
+                selector: to.hash
+            }
+        }
+    }
 })
 
 router.afterEach(afterEachGlobal)
