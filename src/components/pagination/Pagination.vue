@@ -151,7 +151,7 @@ export default {
         * Check if first ellipsis should be visible.
         */
         hasFirstEllipsis() {
-            return this.current >= 4
+            return this.current >= 5
         },
 
         /**
@@ -165,7 +165,7 @@ export default {
         * Check if last ellipsis should be visible.
         */
         hasLastEllipsis() {
-            return this.current < this.pageCount - 2 && this.current <= this.pageCount - 3
+            return this.current < this.pageCount - 3
         },
 
         /**
@@ -182,8 +182,14 @@ export default {
         pagesInRange() {
             if (this.simple) return
 
-            const left = Math.max(1, this.current - 1)
-            const right = Math.min(this.current + 1, this.pageCount)
+            let left = Math.max(1, this.current - 1)
+            if (left - 1 === 2) {
+                left-- // Do not show the ellipsis if there is only one to hide
+            }
+            let right = Math.min(this.current + 1, this.pageCount)
+            if (this.pageCount - right === 2) {
+                right++ // Do not show the ellipsis if there is only one to hide
+            }
 
             const pages = []
             for (let i = left; i <= right; i++) {
