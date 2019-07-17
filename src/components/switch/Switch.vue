@@ -45,7 +45,7 @@ export default {
         },
         rounded: {
             type: Boolean,
-            default: false
+            default: true
         },
         outlined: {
             type: Boolean,
