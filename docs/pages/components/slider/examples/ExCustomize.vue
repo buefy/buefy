@@ -14,7 +14,7 @@
 
         <b-field label="Show ticks">
             <div>
-                <b-slider type="is-primary" :min="1" :max="10" ticks></b-slider>
+                <b-slider :min="1" :max="10" ticks></b-slider>
                 <b-slider size="is-large" :min="1" :max="10" ticks></b-slider>
             </div>
         </b-field>

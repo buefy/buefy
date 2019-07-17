@@ -61,7 +61,10 @@ export default {
             type: Number,
             default: 1
         },
-        type: String,
+        type: {
+            type: String,
+            default: 'is-primary'
+        },
         size: String,
         ticks: {
             type: Boolean,
