@@ -51,11 +51,17 @@ export default {
         setMeta(meta) {
             this.meta = meta
             this.menu = menuData[this.meta.menu]
+        },
+        scrollTo(hash) {
+            location.href = hash
         }
     },
     mounted() {
         this.$eventHub.$on('navigate', this.setMeta)
         this.setMeta(this.$router.currentRoute.meta)
+        if (this.$route.hash) {
+            setTimeout(() => this.scrollTo(this.$route.hash), 1)
+        }
     }
 }
 </script>
