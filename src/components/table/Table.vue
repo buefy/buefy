@@ -116,7 +116,7 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @mouseover="$emit('mouseover', row)"
+                            @mouseenter="$emit('mouseenter', row)"
                             @mouseleave="$emit('mouseleave', row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
