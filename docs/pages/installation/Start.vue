@@ -46,29 +46,10 @@
                     </div>
                 </b-message>
                 <CodeView title="Full bundle (recommended)" :code="importingBundle | pre" lang="javascript" expanded/>
-
-                <b-message type="is-danger">
-                    <div class="content">
-                        <p>
-                            If you only need a couple of Buefy's components, might be a good idea to include individuals.
-                        </p>
-                        <p>
-                            Bear in mind that every individual component has everything they need to work by themselves —
-                            including <strong>too many</strong> components individually will <strong>INCREASE</strong>
-                            your project's build size, adding the full bundle is recomended in that case.
-                        </p>
-                        <p>
-                            In general, <strong>don't go over 3 components</strong> here.
-                            If you want more than that, add the full bundle.
-                        </p>
-                    </div>
-                </b-message>
-
+                <CodeView title="Individual components as Vue plugins" :code="importingComponentsAsVuePlugins | pre" lang="javascript" expanded/>
                 <b-message type="is-info">
                     To include individual styles, see <router-link to="/documentation/customization">Customization</router-link> section.
-                </b-message>
-                <CodeView title="Individual components as Vue plugins" :code="importingComponentsAsVuePlugins | pre" lang="javascript" expanded/>
-                <CodeView title="Individual components" :code="importingComponents | pre" lang="javascript" expanded/>
+                </b-message> 
             </div>
         </div>
 
@@ -135,15 +116,6 @@
 
                 Vue.use(Table)
                 Vue.use(Input)
-                `,
-                importingComponents: `
-                import Vue from 'vue'
-                import { Table } from 'buefy/dist/es/components/table'
-                import { Input } from 'buefy/dist/es/components/input'
-                import 'buefy/dist/buefy.css'
-
-                Vue.component('b-table', Table)
-                Vue.component('b-input', Input)
                 `,
                 importingSSR: `
                 import Vue from 'vue'
