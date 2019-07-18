@@ -96,6 +96,14 @@ export default {
             type: [Number, String],
             default: 1
         },
+        before: {
+            type: [Number, String],
+            default: 1
+        },
+        after: {
+            type: [Number, String],
+            default: 1
+        },
         size: String,
         simple: Boolean,
         rounded: Boolean,
@@ -116,6 +124,14 @@ export default {
                     'is-rounded': this.rounded
                 }
             ]
+        },
+
+        beforeCurrent() {
+            return parseInt(this.before)
+        },
+
+        afterCurrent() {
+            return parseInt(this.after)
         },
 
         /**
@@ -151,7 +167,7 @@ export default {
         * Check if first ellipsis should be visible.
         */
         hasFirstEllipsis() {
-            return this.current >= 5
+            return this.current >= (this.beforeCurrent + 4)
         },
 
         /**
@@ -165,7 +181,7 @@ export default {
         * Check if last ellipsis should be visible.
         */
         hasLastEllipsis() {
-            return this.current < this.pageCount - 3
+            return this.current < this.pageCount - (2 + this.afterCurrent)
         },
 
         /**
@@ -182,11 +198,11 @@ export default {
         pagesInRange() {
             if (this.simple) return
 
-            let left = Math.max(1, this.current - 1)
+            let left = Math.max(2, this.current - this.beforeCurrent)
             if (left - 1 === 2) {
                 left-- // Do not show the ellipsis if there is only one to hide
             }
-            let right = Math.min(this.current + 1, this.pageCount)
+            let right = Math.min(this.current + this.afterCurrent, this.pageCount)
             if (this.pageCount - right === 2) {
                 right++ // Do not show the ellipsis if there is only one to hide
             }

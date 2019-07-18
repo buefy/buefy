@@ -16,6 +16,20 @@ export default [
                 default: '<code>20</code>'
             },
             {
+                name: '<code>before</code>',
+                description: 'Items to show before current page',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
+                name: '<code>after</code>',
+                description: 'Items to show after current page',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
                 name: '<code>current</code>',
                 description: 'Current page number, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Number',
