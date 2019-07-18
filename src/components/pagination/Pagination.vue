@@ -160,7 +160,7 @@ export default {
         * Check if first page button should be visible.
         */
         hasFirst() {
-            return this.current >= 3
+            return this.current >= (2 + this.beforeCurrent)
         },
 
         /**
@@ -174,7 +174,7 @@ export default {
         * Check if last page button should be visible.
         */
         hasLast() {
-            return this.current <= this.pageCount - 2
+            return this.current <= this.pageCount - (1 + this.afterCurrent)
         },
 
         /**
@@ -198,7 +198,7 @@ export default {
         pagesInRange() {
             if (this.simple) return
 
-            let left = Math.max(2, this.current - this.beforeCurrent)
+            let left = Math.max(1, this.current - this.beforeCurrent)
             if (left - 1 === 2) {
                 left-- // Do not show the ellipsis if there is only one to hide
             }
