@@ -1,12 +1,7 @@
 <template>
     <div
         class="b-slider"
-        :class="[size, type, rootClasses]"
-        role="slider"
-        :aria-valuemin="min"
-        :aria-valuemax="max"
-        aria-orientation="horizontal"
-        :aria-disabled="disabled">
+        :class="[size, type, rootClasses]">
         <div
             class="b-slider-track"
             @click="onSliderClick"
@@ -25,13 +20,27 @@
                 v-model="value1"
                 :type="newTooltipType"
                 :tooltip="tooltip"
-                ref="button1"/>
+                ref="button1"
+                role="slider"
+                :aria-valuenow="value1"
+                :aria-valuemin="min"
+                :aria-valuemax="max"
+                aria-orientation="horizontal"
+                :aria-label="Array.isArray(ariaLabel) ? ariaLabel[0] : ariaLabel"
+                :aria-disabled="disabled"/>
             <b-slider-thumb
                 v-model="value2"
                 :type="newTooltipType"
                 :tooltip="tooltip"
                 ref="button2"
-                v-if="isRange"/>
+                v-if="isRange"
+                role="slider"
+                :aria-valuenow="value2"
+                :aria-valuemin="min"
+                :aria-valuemax="max"
+                aria-orientation="horizontal"
+                :aria-label="Array.isArray(ariaLabel) ? ariaLabel[1] : ''"
+                :aria-disabled="disabled"/>
         </div>
     </div>
 </template>
@@ -84,7 +93,8 @@ export default {
         disabled: {
             type: Boolean,
             default: false
-        }
+        },
+        ariaLabel: [String, Array]
     },
     data() {
         return {
@@ -227,10 +237,6 @@ export default {
         this.isThumbReversed = false
     },
     mounted() {
-        // TODO valuenow?
-        const valuetext = this.isRange ? `${this.value1}-${this.value2}` : this.value1
-        this.$el.setAttribute('aria-valuetext', valuetext)
-        this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`)
         this.setSize()
         if (typeof window !== 'undefined') {
             window.addEventListener('resize', this.setSize)

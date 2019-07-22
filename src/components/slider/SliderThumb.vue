@@ -11,6 +11,7 @@
             <div
                 class="b-slider-thumb"
                 :tabindex="disabled ? false : 0"
+                v-bind="$attrs"
                 @mousedown="onButtonDown"
                 @touchstart="onButtonDown"
                 @focus="onFocus"
@@ -32,6 +33,7 @@ export default {
     components: {
         [Tooltip.name]: Tooltip
     },
+    inheritAttrs: false,
     props: {
         value: {
             type: Number,
