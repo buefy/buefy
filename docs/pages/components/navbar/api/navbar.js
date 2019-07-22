@@ -70,5 +70,17 @@ export default [
             props: '—'
           },
       ]
+  },
+  {
+      title: 'Navbar Item',
+      props: [
+          {
+              name: '<code>tag</code>',
+              description: 'Sets the type of the component that have to render as navbar-item',
+              type: 'Boolean',
+              values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
+              default: 'a'
+          }
+      ]
   }
 ]
