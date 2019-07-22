@@ -1,4 +1,4 @@
-<template>
+<template functional>
     <component
         :is="tag"
         class="navbar-item"
