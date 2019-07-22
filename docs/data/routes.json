@@ -137,6 +137,19 @@
         ],
         "isUpdated": true
     },
+    "documentation/navbar": {
+        "title": "Navbar",
+        "subtitle": "A responsive horizontal navbar that can support images, links, buttons, and dropdowns",
+        "path": "/documentation/navbar",
+        "githubPath": "pages/components/navbar/Navbar.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/navbar"
+        ],
+        "isNew": true
+    },
     "documentation/tabs": {
         "title": "Tabs",
         "subtitle": "Responsive horizontal navigation tabs, switch between contents with ease",
