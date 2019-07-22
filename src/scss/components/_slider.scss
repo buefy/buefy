@@ -67,16 +67,18 @@ $slider-mark-size: 0.75rem !default;
         transform: translateX(-50%);
         cursor: grab;
 
-        &.is-dragging {
-            cursor: grabbing;
-        }
         .b-slider-thumb {
             box-shadow: $slider-thumb-shadow;
             border: $slider-thumb-border;
             border-radius: $slider-thumb-radius;
             background: $slider-thumb-background;
+            &:focus {
+                transform: scale(1.25);
+            }
         }
-        &:active {
+
+        &.is-dragging {
+            cursor: grabbing;
             .b-slider-thumb {
                 transform: scale(1.25);
             }
