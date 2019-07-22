@@ -1,5 +1,41 @@
 # Buefy Changelog
 
+## 0.8.0
+
+### Breaking changes
+
+* Change path to import components to use outside main vue instance, like:
+```javascript
+// see Toast, Snackbar, Modal and Dialog doc pages for more examples
+import { ToastProgrammatic as Toast } from 'buefy'
+Toast.open('Toasty!')
+```
+* Fix #1529 pagination ellipsis behavior (thanks @service-paradis)
+* Fix #1550 improve the default behavior for clickable steps (thanks @service-paradis)
+
+### New features
+
+* **New component: Progress Bar**, [see docs](https://buefy.org/documentation/progress)
+* Improve to tree shaking when importing individual components
+* Add ``defaultTooltipDelay`` constructor option (thanks @service-paradis)
+* Add ``sort-icon`` and ``sort-icon-size`` props to table (@modularcoder)
+* Add ``default-minutes`` and ``default-seconds`` to timepicker
+* Add ``focusable`` prop to dropdown (thanks @service-paradis)
+* Add ``mouseenter `` and ``mouseleave`` events to table (thanks @afm-sayem)
+* Add ``rounded`` and ``outlined`` prop to switch (thanks @service-paradis)
+
+### Fixes
+
+* Fix #1541 emit `input` event when change step (thanks @service-paradis)
+* Fix #1544 years select datepicker when max/min being passed
+* Fix #1565 datepicker programmatically on mobile
+* Fix issues on delete last selected element and on reset upload (thanks @it-fm)
+
+## 0.7.10
+
+* Fix #1536 build error using Sass customization
+* Fix menu component example on codepen and/or simple html page
+
 ## 0.7.9
 
 ### New features
@@ -12,8 +48,10 @@
 
 ### Fixes
 
-* Fix build errors using typescript
+* Fix build errors using typescript and return type of snackbar and notification
 * Fix upload on iOS
+* Fix native timepicker when ``enable-seconds``
+* Fix #1515 toggle datepicker programmatically
 * Fix #1516 month picker on iOS
 * Fix #1526 timepicker default parser
 

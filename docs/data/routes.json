@@ -231,8 +231,7 @@
             "/",
             "documentation",
             "documentation/field"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/input": {
         "title": "Input",
@@ -366,7 +365,8 @@
             "/",
             "documentation",
             "documentation/upload"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/table": {
         "title": "Table",
@@ -378,7 +378,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -426,8 +427,7 @@
             "/",
             "documentation",
             "documentation/steps"
-        ],
-        "isNew": true
+        ]
     },
     "documentation/menu": {
         "title": "Menu",
@@ -452,7 +452,20 @@
             "/",
             "documentation",
             "documentation/slider"
-       ],
+        ],
+        "isNew": true
+    },
+    "documentation/progress": {
+        "title": "Progress",
+        "subtitle": "Wrapper around Bulma / Native HTML progress bars",
+        "path": "/documentation/progress",
+        "githubPath": "pages/components/progress/Progress.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/progress"
+        ],
         "isNew": true
     },
     "extensions": {

@@ -22,7 +22,6 @@
         <input
             ref="input"
             type="file"
-            :class="{'file-draggable': dragDrop}"
             v-bind="$attrs"
             :multiple="multiple"
             :accept="accept"
@@ -65,15 +64,19 @@ export default {
     },
     watch: {
         /**
-        * When v-model is changed:
-        *   1. Set internal value.
-        *   2. Reset input value if array is empty
-        *   3. If it's invalid, validate again.
-        */
+         *   When v-model is changed:
+         *   1. Get value from input file
+         *   2. Set internal value.
+         *   3. Reset input value if array is empty or when input file is not found in newValue
+         *   4. If it's invalid, validate again.
+         */
         value(value) {
+            let inputFiles = this.$refs.input.files
             this.newValue = value
-            if (!this.newValue ||
-            (Array.isArray(this.newValue) && this.newValue.length === 0)) {
+
+            if (!this.newValue || (Array.isArray(this.newValue) && this.newValue.length === 0) ||
+            !inputFiles[0] ||
+            !this.newValue.some(function (a) { return a.name === inputFiles[0].name })) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
@@ -95,7 +98,9 @@ export default {
                 if (!this.newValue) {
                     return
                 }
-                this.newValue = null
+                if (this.native) {
+                    this.newValue = null
+                }
             } else if (!this.multiple) {
                 // only one element in case drag drop mode and isn't multiple
                 if (this.dragDrop && value.length !== 1) return

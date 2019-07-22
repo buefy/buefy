@@ -1,6 +1,9 @@
 <template>
-    <section class="api-view">
-        <h2 class="title is-4">API</h2>
+    <section id="api-view" class="api-view">
+        <h2 class="title is-4">
+            <router-link to="#api-view">#</router-link>
+            API
+        </h2>
 
         <template v-for="component in data">
             <div :key="component.title">

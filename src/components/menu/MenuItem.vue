@@ -8,25 +8,20 @@
                 'is-disabled': disabled
             }"
             @click="onClick($event)">
-
             <b-icon
                 v-if="icon"
                 :icon="icon"
                 :pack="iconPack"
                 size="is-small"
             />
-
             <span v-if="label">{{ label }}</span>
-            <span v-else>
-                <slot
-                    name="label"
-                    :expanded="newExpanded"
-                    :active="newActive"
-                />
-            </span>
-
+            <slot
+                v-else
+                name="label"
+                :expanded="newExpanded"
+                :active="newActive"
+            />
         </component>
-
         <!-- sub menu items -->
         <template v-if="$slots.default">
             <transition :name="animation">
@@ -35,7 +30,6 @@
                 </ul>
             </transition>
         </template>
-
     </li>
 </template>
 

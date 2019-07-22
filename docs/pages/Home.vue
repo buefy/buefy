@@ -80,7 +80,7 @@
 
         <section class="hero is-light">
             <div class="hero-body">
-                <div class="container">
+                <div class="container" v-if="sponsors && sponsors.length">
                     <p class="content is-size-5 has-text-left">
                         Sponsors
                     </p>

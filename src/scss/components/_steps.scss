@@ -8,7 +8,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 $steps-maker-default-color: $grey-light !default;
 $steps-marker-default-border: .2em solid #fff !default;
 $steps-default-color: $grey-lighter !default;
-$steps-completed-color: $primary !default;
+$steps-previous-color: $primary !default;
 $steps-active-color: $primary !default;
 $steps-divider-height: .2em !default;
 
@@ -110,7 +110,7 @@ $steps-divider-height: .2em !default;
                                 background-position: left bottom;
                             }
                         }
-                        &.is-completed {
+                        &.is-previous {
                             .step-marker {
                                 color: $color-invert;
                                 background-color: $color;
@@ -165,10 +165,10 @@ $steps-divider-height: .2em !default;
                         background-position: left bottom;
                     }
                 }
-                &.is-completed {
+                &.is-previous {
                     .step-marker {
                         color: $white;
-                        background-color: $steps-completed-color;
+                        background-color: $steps-previous-color;
                     }
 
                     &::before {

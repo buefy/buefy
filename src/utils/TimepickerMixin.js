@@ -118,7 +118,9 @@ export default {
         position: String,
         unselectableTimes: Array,
         openOnFocus: Boolean,
-        enableSeconds: Boolean
+        enableSeconds: Boolean,
+        defaultMinutes: Number,
+        defaultSeconds: Number
     },
     data() {
         return {
@@ -241,6 +243,12 @@ export default {
         },
 
         onHoursChange(value) {
+            if (!this.minutesSelected && this.defaultMinutes) {
+                this.minutesSelected = this.defaultMinutes
+            }
+            if (!this.secondsSelected && this.defaultSeconds) {
+                this.secondsSelected = this.defaultSeconds
+            }
             this.updateDateSelected(
                 parseInt(value, 10),
                 this.minutesSelected,
@@ -250,6 +258,9 @@ export default {
         },
 
         onMinutesChange(value) {
+            if (!this.secondsSelected && this.defaultSeconds) {
+                this.secondsSelected = this.defaultSeconds
+            }
             this.updateDateSelected(
                 this.hoursSelected,
                 parseInt(value, 10),

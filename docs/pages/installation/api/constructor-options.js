@@ -106,6 +106,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>defaultTooltipDelay</code>',
+                description: 'Default tooltip <code>delay</code> attribute.',
+                type: 'Number',
+                values: "—",
+                default: '<code>0</code>'
+            },
+            {
                 name: '<code>defaultInputAutocomplete</code>',
                 description: `Default input <code>autocomplete</code> attribute.`,
                 type: 'String',
@@ -159,7 +166,7 @@ export default [
                 description: `Default datepicker <code>unselectable-days-of-week</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: '-'
+                default: '—'
             },
             {
                 name: '<code>defaultTimeFormatter</code>',
@@ -229,27 +236,27 @@ export default [
                 description: 'Default field position of label',
                 type: 'String',
                 values: '<code>inside</code>,<code>on-border</code>',
-                default: '-'
+                default: '—'
             },
             {
                 name: '<code>defaultDatepickerYearsRange</code>',
                 description: 'Default years range relative to selected year',
                 type: 'Array',
-                values: '-',
+                values: '—',
                 default: '<code>[-100, 3]</code>'
             },
             {
                 name: '<code>defaultDatepickerNearbyMonthDays</code>',
                 description: 'Show/Hide nearby month days (prev and next month)',
                 type: 'Boolean',
-                values: '-',
+                values: '—',
                 default: '<code>true</code>'
             },
             {
                 name: '<code>defaultDatepickerNearbySelectableMonthDays</code>',
                 description: 'It allows to select/unselect nearby month days',
                 type: 'Boolean',
-                values: '-',
+                values: '—',
                 default: '<code>false</code>'
             },
         ]

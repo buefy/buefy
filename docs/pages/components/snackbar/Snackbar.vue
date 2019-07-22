@@ -29,7 +29,7 @@
                 ExSimple,
                 ExSimpleCode,
                 outsideVueInstance: `
-                import { Snackbar } from 'buefy/dist/components/snackbar'
+                import { SnackbarProgrammatic as Snackbar } from 'buefy'
                 Snackbar.open('Look at me!')`
             }
         }

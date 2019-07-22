@@ -66,6 +66,7 @@ const router = new Router({
                 route('documentation/steps', 'components/steps/Steps'),
                 route('documentation/menu', 'components/menu/Menu'),
                 route('documentation/slider', 'components/slider/Slider'),
+                route('documentation/progress', 'components/progress/Progress'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
@@ -77,7 +78,14 @@ const router = new Router({
         },
         // Global redirect
         { path: '*', redirect: '' }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        if (to.hash) {
+            return {
+                selector: to.hash
+            }
+        }
+    }
 })
 
 router.afterEach(afterEachGlobal)

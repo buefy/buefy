@@ -135,7 +135,7 @@ export declare type SnackbarConfig = {
     onAction?: () => any;
 }
 export declare const Snackbar: {
-    open: (params: SnackbarConfig | string) => void;
+    open: (params: SnackbarConfig | string) => any;
 }
 
 export declare type ToastConfig = {
@@ -187,5 +187,5 @@ export declare type NotificationConfig = {
     hasIcon?: boolean;
 }
 export declare const NotificationProgrammatic: {
-    open: (params: NotificationConfig | string) => void;
+    open: (params: NotificationConfig | string) => any;
 }

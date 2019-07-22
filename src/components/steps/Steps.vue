@@ -9,12 +9,12 @@
                     class="step-item"
                     :class="[stepItem.type || type, {
                         'is-active': activeStep === index,
-                        'is-completed': stepItem.completed || activeStep > index
+                        'is-previous': activeStep > index
                 }]">
                     <a
                         class="step-link"
-                        :class="{'is-clickable': isItemClickable(stepItem)}"
-                        @click="isItemClickable(stepItem) && stepClick(index)">
+                        :class="{'is-clickable': isItemClickable(stepItem, index)}"
+                        @click="isItemClickable(stepItem, index) && stepClick(index)">
                         <div class="step-marker">
                             <b-icon
                                 v-if="stepItem.icon"
@@ -187,9 +187,9 @@ export default {
         /**
             * Return if the step should be clickable or not.
             */
-        isItemClickable(stepItem) {
+        isItemClickable(stepItem, index) {
             if (stepItem.clickable === undefined) {
-                return stepItem.completed
+                return this.activeStep > index
             }
             return stepItem.clickable
         },
@@ -213,6 +213,7 @@ export default {
             if (prevItemIdx >= 0) {
                 prevItemIdx = this.stepItems.length - 1 - prevItemIdx
             }
+            this.$emit('input', prevItemIdx)
             this.changeStep(prevItemIdx)
         },
 
@@ -224,6 +225,7 @@ export default {
             const nextItemIdx = this.stepItems.findIndex((step, idx) => {
                 return idx > this.activeStep && step.visible
             })
+            this.$emit('input', nextItemIdx)
             this.changeStep(nextItemIdx)
         }
     },

@@ -59,6 +59,20 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Rounded style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>outlined</code>',
+                description: 'Outlined style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [

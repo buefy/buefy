@@ -1,6 +1,9 @@
 <template>
     <section class="example-section">
-        <p class="title is-4">{{ title }}</p>
+        <p :id="`${slugifiedTitle}`" class="title is-4">
+            <router-link v-if="title" :to="`#${slugifiedTitle}`">#</router-link>
+            {{ title }}
+        </p>
         <div class="content">
             <slot/>
         </div>
@@ -38,6 +41,17 @@ export default {
         title: String,
         paddingless: Boolean,
         vertical: Boolean
+    },
+    computed: {
+        slugifiedTitle() {
+            if (!this.title) return ''
+            return this.title.toLowerCase()
+                .replace(/\s+/g, '-') // Replace spaces with -
+                .replace(/[^\w-]+/g, '') // Remove all non-word chars
+                .replace(/--+/g, '-') // Replace multiple - with single -
+                .replace(/^-+/, '') // Trim - from start of text
+                .replace(/-+$/, '') // Trim - from end of text
+        }
     }
 }
 </script>

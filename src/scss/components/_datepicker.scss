@@ -135,24 +135,4 @@
     &.is-large {
         @include control-large;
     }
-    @include tablet-only {
-        .datepicker-content {
-            height: 19.75rem;
-        }
-        .datepicker-table {
-            .datepicker-cell {
-                padding: 0.75rem 1rem;
-            }
-        }
-    }
-    @include mobile {
-        .datepicker-content {
-            height: 12.75rem;
-        }
-        .datepicker-table {
-            .datepicker-cell {
-                padding: 0.25rem 0.5rem;
-            }
-        }
-    }
 }

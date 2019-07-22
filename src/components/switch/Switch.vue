@@ -1,7 +1,7 @@
 <template>
     <label
         class="switch"
-        :class="[size, { 'is-disabled': disabled }]"
+        :class="newClass"
         ref="label"
         :disabled="disabled"
         @keydown.prevent.enter="$refs.label.click()"
@@ -42,6 +42,14 @@ export default {
         falseValue: {
             type: [String, Number, Boolean, Function, Object, Array, Symbol],
             default: false
+        },
+        rounded: {
+            type: Boolean,
+            default: true
+        },
+        outlined: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -59,6 +67,14 @@ export default {
                 this.newValue = value
                 this.$emit('input', value)
             }
+        },
+        newClass() {
+            return [
+                this.size,
+                { 'is-disabled': this.disabled },
+                { 'is-rounded': this.rounded },
+                { 'is-outlined': this.outlined }
+            ]
         }
     },
     watch: {
