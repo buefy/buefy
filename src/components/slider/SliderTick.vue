@@ -1,6 +1,7 @@
 <template>
     <div
         class="b-slider-tick"
+        :class="{ 'is-tick-hidden': hidden }"
         :style="getTickStyle(position)">
         <span v-if="$slots.default" class="b-slider-tick-label">
             <slot/>
@@ -18,10 +19,13 @@ export default {
         }
     },
     computed: {
-        position: function () {
+        position() {
             const pos = (this.value - this.$parent.min) /
                 (this.$parent.max - this.$parent.min) * 100
             return (pos >= 0 && pos <= 100) ? pos : 0
+        },
+        hidden() {
+            return this.value === this.$parent.min || this.value === this.$parent.max
         }
     },
     methods: {
