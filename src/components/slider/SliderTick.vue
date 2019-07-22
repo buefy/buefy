@@ -2,7 +2,7 @@
     <div
         class="b-slider-tick"
         :style="getTickStyle(position)">
-        <span v-if="$slots.default" class="b-slider-mark">
+        <span v-if="$slots.default" class="b-slider-tick-label">
             <slot/>
         </span>
     </div>

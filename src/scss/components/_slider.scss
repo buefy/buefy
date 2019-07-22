@@ -32,11 +32,10 @@ $slider-mark-size: 0.75rem !default;
         height: $tick-height;
     }
 
-    .b-slider-mark {
+    .b-slider-tick-label {
         font-size: $slider-mark-size;
         position: absolute;
         top: calc(#{$track-height} / 2 + 2px);
-        transform: translateX(-50%);
     }
 }
 
@@ -124,6 +123,8 @@ $slider-mark-size: 0.75rem !default;
 
     .b-slider-tick {
         position: absolute;
+        display: flex;
+        justify-content: center;
 		width: $slider-tick-width;
         transform: translateX(-50%);
         background: $slider-tick-background;
