@@ -1,22 +1,20 @@
 <template>
     <div
         class="b-slider-thumb-wrapper"
-        :class="{ 'is-hovered': hovering, 'is-dragging': dragging }"
+        :class="{ 'is-dragging': dragging }"
         :style="wrapperStyle">
         <b-tooltip
             :label="value.toString()"
             :type="type"
-            :always="dragging"
+            :always="dragging || isFocused"
             :active="!disabled && tooltip">
             <div
                 class="b-slider-thumb"
                 :tabindex="disabled ? false : 0"
-                @mouseenter="handleMouseEnter"
-                @mouseleave="handleMouseLeave"
                 @mousedown="onButtonDown"
                 @touchstart="onButtonDown"
-                @focus="handleMouseEnter"
-                @blur="handleMouseLeave"
+                @focus="onFocus"
+                @blur="onBlur"
                 @keydown.left.prevent="onLeftKeyDown"
                 @keydown.right.prevent="onRightKeyDown"
                 @keydown.down.prevent="onLeftKeyDown"
@@ -50,7 +48,7 @@ export default {
     },
     data() {
         return {
-            hovering: false,
+            isFocused: false,
             dragging: false,
             startX: 0,
             startPosition: 0,
@@ -87,11 +85,11 @@ export default {
         }
     },
     methods: {
-        handleMouseEnter() {
-            this.hovering = true
+        onFocus() {
+            this.isFocused = true
         },
-        handleMouseLeave() {
-            this.hovering = false
+        onBlur() {
+            this.isFocused = false
         },
         onButtonDown(event) {
             if (this.disabled) return
