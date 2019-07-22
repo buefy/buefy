@@ -13,7 +13,7 @@ describe('BNavbar', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
-    it('should the nav tag', () => {
+    it('should have a nav tag', () => {
         expect(wrapper.contains('nav')).toBeTruthy()
     })
 
