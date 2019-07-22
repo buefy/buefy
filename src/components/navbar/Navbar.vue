@@ -36,6 +36,7 @@ export default {
         NavbarItem
     },
     props: {
+        type: [String, Object],
         transparent: {
             type: Boolean,
             default: false
@@ -64,6 +65,7 @@ export default {
         },
         computedClasses() {
             return [
+                this.type,
                 { [FIXED_TOP_CLASS]: this.fixedTop },
                 { [FIXED_BOTTOM_CLASS]: this.fixedBottom }
             ]
