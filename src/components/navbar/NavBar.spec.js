@@ -55,20 +55,22 @@ describe('BNavbar', () => {
     })
 
     describe('BNavbarItem', () => {
-        let wrapper
-        beforeEach(() => {
-            wrapper = mount(BNavbarItem)
-        })
-
         it('is called', () => {
             expect(wrapper.isVueInstance()).toBeTruthy()
         })
 
-        it('should be an anchor tag by default', () => {
-            const anchorTag = wrapper.find('a')
-            expect(anchorTag.is('a')).toBe(true)
+        it('correctly renders the provided tag', () => {
+            const tag = 'div'
+            const NavbarItem = {
+                components: { BNavbarItem },
+                template: `
+                  <div>
+                    <b-navbar-item tag="${tag}"></b-navbar-item>
+                  </div>
+                `
+            }
+            const wrapper = mount(NavbarItem)
+            expect(wrapper.contains(tag)).toBeTruthy()
         })
-
-        xit('should be functional', () => {})
     })
 })
