@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "dist/buefy.cjs.js",
   "unpkg": "dist/buefy.min.js",
-  "module": "dist/es/buefy.js",
+  "module": "dist/buefy.esm.js",
   "typings": "types/index.d.ts",
   "files": [
     "dist",

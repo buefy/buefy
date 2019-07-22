@@ -14,8 +14,15 @@ const babelConfig = {
     exclude: 'node_modules/**',
     runtimeHelpers: true,
     babelrc: false,
-    presets: [['@babel/preset-env', { useBuiltIns: 'usage' }]],
-    plugins: ['@babel/plugin-syntax-dynamic-import']
+    presets: [['@babel/env', { useBuiltIns: 'entry', corejs: { version: 2 } }]],
+    env: {
+        es: {
+            plugins: [['@babel/plugin-transform-modules-commonjs', { loose: true }]]
+        },
+        esm: {
+            presets: [['@babel/env', { modules: false }]]
+        }
+    }
 }
 
 const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
@@ -33,7 +40,7 @@ const mapComponent = (name) => {
             external: ['vue'],
             output: {
                 format: 'umd',
-                name: !name ? 'buefy' : name,
+                name: name,
                 file: `dist/components/${name}/index.js`,
                 banner: bannerTxt,
                 exports: 'named',
@@ -58,7 +65,7 @@ const mapComponent = (name) => {
             external: ['vue'],
             output: {
                 format: 'esm',
-                file: `dist/es/components/${name}/index.js`,
+                file: `dist/esm/components/${name}/index.js`,
                 banner: bannerTxt
             },
             plugins: [
@@ -84,7 +91,7 @@ const config = [
         external: ['vue'],
         output: {
             format: 'esm',
-            file: `dist/es/buefy.js`,
+            file: `dist/buefy.esm.js`,
             banner: bannerTxt
         },
         plugins: [
@@ -96,7 +103,8 @@ const config = [
             vue({
                 css: true,
                 compileTemplate: true
-            })
+            }),
+            babel(babelConfig)
         ]
     },
     {
