@@ -1,5 +1,6 @@
 export default [
     {
+        title: "Slider",
         props: [
             {
                 name: '<code>v-model</code>',
@@ -83,7 +84,21 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-label</code>',
+                description: 'Accessibility label for the thumbs',
+                type: 'String, Array',
+                values: '—',
+                default: '-'
             }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Use SliderTick for custom ticks and labels',
+                props: ''
+            },
         ],
         events: [
             {
@@ -95,6 +110,25 @@ export default [
                 name: '<code>change</code>',
                 description: 'Triggers when value is changed after user interaction',
                 parameters: '<code>value: Number|Array</code>'
+            }
+        ]
+    },
+    {
+        title: 'SliderTick',
+        props: [
+            {
+                name: '<code>value</code>',
+                description: 'The value that the tick represents',
+                type: 'Number',
+                values: '—',
+                default: '-'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Label',
+                props: ''
             }
         ]
     }

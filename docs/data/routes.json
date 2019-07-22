@@ -444,7 +444,7 @@
     },
      "documentation/slider": {
         "title": "Slider",
-        "subtitle": "A slider",
+        "subtitle": "A slider to select a value or range from a given range",
         "path": "/documentation/slider",
         "githubPath": "pages/components/slider/Slider.vue",
         "menu": "documentation",

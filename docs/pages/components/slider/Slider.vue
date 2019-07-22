@@ -8,7 +8,9 @@
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customization" vertical/>
 
-        <Example :component="ExTick" :code="ExTickCode" title="Tick and label" vertical/>
+        <Example :component="ExTick" :code="ExTickCode" title="Tick and label" vertical>
+            <p>Use Slider Tick component to add custom ticks and labels</p>
+        </Example>
 
         <Example :component="ExRange" :code="ExRangeCode" title="Range slider">
             <p>Just bind the value to an Array.</p>
