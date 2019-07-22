@@ -1,0 +1,63 @@
+export default [
+  {
+      props: [
+          {
+              name: '<code>transparent</code>',
+              description: 'To seamlessly integrate the navbar in any visual context, you can add the is-transparent modifier on the navbar component. This will remove any hover or active background from the navbar items',
+              type: 'Boolean',
+              values: '—',
+              default: 'false'
+          },
+          {
+              name: '<code>fixedTop</code>',
+              description: 'Fixes the navbar to the top of the page',
+              type: 'Boolean',
+              values: '—',
+              default: '<code>false</code>'
+          },
+          {
+              name: '<code>fixedBottom</code>',
+              description: 'Fixes the navbar to the bottom of the page',
+              type: 'Boolean',
+              values: '—',
+              default: '<code>false</code>'
+          },
+          {
+              name: '<code>isActive</code>',
+              description: 'To control the behaviour of the mobile menu programmatically',
+              type: 'Boolean',
+              values: '—',
+              default: '<code>false</code>'
+          },
+      ],
+      events: [
+          {
+              name: '<code>update:isActive</code>',
+              description: 'To sync the isActive prop',
+              parameters: '<code>value: Boolean</code>'
+          }
+      ],
+      slots: [
+          {
+            name: 'brand',
+            description: 'The slot for the brand logo',
+            props: '—'
+          },
+          {
+            name: 'burger',
+            description: 'The slot for the burger that triggers the menu toggle',
+            props: '<code>isOpened: Boolean</code>, <code>toggleActive: Function</code>'
+          },
+          {
+            name: 'start',
+            description: '',
+            props: '—'
+          },
+          {
+            name: 'end',
+            description: '',
+            props: '—'
+          },
+      ]
+  }
+]
