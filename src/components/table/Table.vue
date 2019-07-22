@@ -69,20 +69,30 @@
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
                             }">
-                                <slot
-                                    v-if="$scopedSlots.header"
-                                    name="header"
-                                    :column="column"
-                                    :index="index"
-                                />
+                                <template v-if="column.$scopedSlots && column.$scopedSlots.header">
+                                    <b-slot-component
+                                        :component="column"
+                                        :scoped="true"
+                                        name="header"
+                                        tag="span"
+                                        :props="{ column, index }"
+                                    />
+                                </template>
+                                <template v-else-if="$scopedSlots.header">
+                                    <slot
+                                        name="header"
+                                        :column="column"
+                                        :index="index"
+                                    />
+                                </template>
                                 <template v-else>{{ column.label }}</template>
 
                                 <b-icon
                                     v-show="currentSortColumn === column"
-                                    icon="arrow-up"
+                                    :icon="sortIcon"
                                     :pack="iconPack"
                                     both
-                                    size="is-small"
+                                    :size="sortIconSize"
                                     :class="{ 'is-desc': !isAsc }"/>
                             </div>
                         </th>
@@ -106,6 +116,8 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
+                            @mouseenter="$emit('mouseenter', row)"
+                            @mouseleave="$emit('mouseleave', row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
@@ -247,6 +259,7 @@ import { getValueByPath, indexOf } from '../../utils/helpers'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Pagination from '../pagination/Pagination'
+import SlotComponent from '../../utils/SlotComponent'
 
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
@@ -257,6 +270,7 @@ export default {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
         [Pagination.name]: Pagination,
+        [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
         [TableColumn.name]: TableColumn
     },
@@ -309,6 +323,14 @@ export default {
         defaultSortDirection: {
             type: String,
             default: 'asc'
+        },
+        sortIcon: {
+            type: String,
+            default: 'arrow-up'
+        },
+        sortIconSize: {
+            type: String,
+            default: 'is-small'
         },
         paginated: Boolean,
         currentPage: {

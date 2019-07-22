@@ -1,6 +1,3 @@
-
-import './scss/buefy-build.scss'
-
 import * as components from './components'
 
 import config, { setOptions } from './utils/config'
@@ -27,3 +24,13 @@ const Buefy = {
 use(Buefy)
 
 export default Buefy
+
+// export all components as vue plugin
+export * from './components'
+// export programmatic component
+export { DialogProgrammatic } from './components/dialog'
+export { LoadingProgrammatic } from './components/loading'
+export { ModalProgrammatic } from './components/modal'
+export { NotificationProgrammatic } from './components/notification'
+export { SnackbarProgrammatic } from './components/snackbar'
+export { ToastProgrammatic } from './components/toast'

@@ -6,7 +6,7 @@
         :class="anchorClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        tabindex="0">
+        :tabindex="focusable ? 0 : null">
         <slot/>
     </a>
     <div
@@ -14,7 +14,7 @@
         :class="itemClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        tabindex="0">
+        :tabindex="focusable ? 0 : null">
         <slot/>
     </div>
 </template>
@@ -30,6 +30,10 @@ export default {
         separator: Boolean,
         disabled: Boolean,
         custom: Boolean,
+        focusable: {
+            type: Boolean,
+            default: true
+        },
         paddingless: Boolean,
         hasLink: Boolean,
         ariaRole: {

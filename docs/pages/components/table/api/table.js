@@ -31,6 +31,20 @@ export default [
                 default: '<code>asc</code>'
             },
             {
+                name: '<code>sort-icon</code>',
+                description: `Sets the header sorting icon`,
+                type: 'String',
+                values: '-',
+                default: '<code>arrow-up</code>'
+            },
+            {
+                name: '<code>sort-icon-size</code>',
+                description: `Sets the size of the sorting icon`,
+                type: 'String',
+                values: '<code>is-small</code>, <code></code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-small</code>'
+            },
+            {
                 name: '<code>bordered</code>',
                 description: 'Border to all cells',
                 type: 'Boolean',
@@ -401,6 +415,16 @@ export default [
                 description: 'Triggers when dragging over a row',
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
 
+            },
+            {
+                name: '<code> mouseenter </code>',
+                description: 'Triggers when mouse enters a row',
+                parameters: '<code> row: Object </code>'
+            },
+            {
+                name: '<code> mouseleave </code>',
+                description: 'Triggers when mouse leaves a row',
+                parameters: '<code> row: Object </code>'
             }
         ],
         methods: [

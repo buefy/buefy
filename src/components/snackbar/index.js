@@ -42,5 +42,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    SnackbarProgrammatic as Snackbar
+    SnackbarProgrammatic
 }

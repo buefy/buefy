@@ -46,6 +46,7 @@
                 "documentation/modal",
                 "documentation/notification",
                 "documentation/pagination",
+                "documentation/progress",
                 "documentation/snackbar",
                 "documentation/steps",
                 "documentation/table",

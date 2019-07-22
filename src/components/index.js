@@ -16,6 +16,7 @@ import Modal from './modal'
 import Notification from './notification'
 import Numberinput from './numberinput'
 import Pagination from './pagination'
+import Progress from './progress'
 import Radio from './radio'
 import Select from './select'
 import Snackbar from './snackbar'
@@ -49,6 +50,7 @@ export {
     Notification,
     Numberinput,
     Pagination,
+    Progress,
     Radio,
     Select,
     Snackbar,

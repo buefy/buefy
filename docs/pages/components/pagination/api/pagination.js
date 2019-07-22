@@ -45,7 +45,7 @@ export default [
             },
             {
                 name: '<code>rounded</code>',
-                description: 'Rounded pagination buttons',
+                description: 'Rounded button styles',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
