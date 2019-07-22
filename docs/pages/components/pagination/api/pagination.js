@@ -44,6 +44,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>rounded</code>',
+                description: 'Rounded pagination buttons',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
