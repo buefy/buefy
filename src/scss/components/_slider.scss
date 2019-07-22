@@ -12,6 +12,7 @@ $slider-tick-to-track-ratio: 0.5 !default;
 $slider-tick-width: 3px !default;
 $slider-tick-radius: $radius !default;
 $slider-tick-background: $grey-light !default;
+$slider-mark-size: 0.75rem !default;
 
 @mixin slider-size($size) {
 	$track-height: $size / $slider-thumb-to-track-ratio;
@@ -29,6 +30,13 @@ $slider-tick-background: $grey-light !default;
 
     .b-slider-tick {
         height: $tick-height;
+    }
+
+    .b-slider-mark {
+        font-size: $slider-mark-size;
+        position: absolute;
+        top: calc(#{$track-height} / 2 + 2px);
+        transform: translateX(-50%);
     }
 }
 

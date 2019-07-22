@@ -5,7 +5,7 @@
         </b-field>
 
         <b-field label="Disabled">
-            <b-slider disabled></b-slider>
+            <b-slider :value="30" disabled></b-slider>
         </b-field>
     </section>
 </template>

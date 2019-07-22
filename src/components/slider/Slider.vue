@@ -15,12 +15,12 @@
                 class="b-slider-fill"
                 :style="barStyle"/>
             <template v-if="ticks">
-                <div
-                    class="b-slider-tick"
-                    v-for="(item, key) in tickPositions"
+                <b-slider-tick
+                    v-for="(val, key) in tickValues"
                     :key="key"
-                    :style="getTickStyle(item)"/>
+                    :value="val"/>
             </template>
+            <slot/>
             <b-slider-thumb
                 v-model="value1"
                 :type="newTooltipType"
@@ -38,11 +38,13 @@
 
 <script>
 import SliderThumb from './SliderThumb'
+import SliderTick from './SliderTick'
 
 export default {
     name: 'BSlider',
     components: {
-        [SliderThumb.name]: SliderThumb
+        [SliderThumb.name]: SliderThumb,
+        [SliderTick.name]: SliderTick
     },
     props: {
         value: {
@@ -91,17 +93,15 @@ export default {
             dragging: false,
             isRange: false,
             newTooltipType: this.tooltipType ? this.tooltipType : this.type,
-            _isSlider: true // Used by SliderThumb
+            _isSlider: true // Used by Thumb and Tick
         }
     },
     computed: {
-        tickPositions() {
+        tickValues() {
             if (!this.ticks || this.min > this.max || this.step === 0) return []
-            const stopCount = (this.max - this.min) / this.step
-            const stepWidth = 100 * this.step / (this.max - this.min)
             const result = []
-            for (let i = 1; i < stopCount; i++) {
-                result.push(i * stepWidth)
+            for (let i = this.min + this.step; i < this.max; i = i + this.step) {
+                result.push(i)
             }
             return result
         },
@@ -220,9 +220,6 @@ export default {
             this.$emit('change', this.isRange
                 ? [this.minValue, this.maxValue]
                 : this.value1)
-        },
-        getTickStyle(position) {
-            return { 'left': position + '%' }
         }
     },
     created() {

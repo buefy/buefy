@@ -8,6 +8,8 @@
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customization" vertical/>
 
+        <Example :component="ExTick" :code="ExTickCode" title="Tick and label" vertical/>
+
         <Example :component="ExRange" :code="ExRangeCode" title="Range slider">
             <p>Just bind the value to an Array.</p>
         </Example>
@@ -28,6 +30,8 @@
     import ExTypesCode from '!!raw-loader!./examples/ExTypes'
     import ExCustomize from './examples/ExCustomize'
     import ExCustomizeCode from '!!raw-loader!./examples/ExCustomize'
+    import ExTick from './examples/ExTick'
+    import ExTickCode from '!!raw-loader!./examples/ExTick'
     import ExRange from './examples/ExRange'
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
 
@@ -43,6 +47,8 @@
                 ExTypesCode,
                 ExCustomize,
                 ExCustomizeCode,
+                ExTick,
+                ExTickCode,
                 ExRange,
                 ExRangeCode
             }
