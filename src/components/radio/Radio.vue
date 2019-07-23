@@ -4,11 +4,9 @@
         ref="label"
         :class="[size, { 'is-disabled': disabled }]"
         :disabled="disabled"
-        :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="$refs.label.click()">
+        @keydown.prevent.enter="$refs.label.click()">
         <input
             v-model="computedValue"
-            tabindex="-1"
             type="radio"
             @click.stop
             :disabled="disabled"
