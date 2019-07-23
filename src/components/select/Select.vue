@@ -10,6 +10,7 @@
                 :multiple="multiple"
                 :size="nativeSize"
                 v-bind="$attrs"
+                v-on="$listeners"
                 @blur="$emit('blur', $event) && checkHtml5Validity()"
                 @focus="$emit('focus', $event)">
 

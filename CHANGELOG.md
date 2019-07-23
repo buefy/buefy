@@ -17,9 +17,12 @@ Toast.open('Toasty!')
 ```
 * Fix #1529 pagination ellipsis behavior (thanks @service-paradis)
 * Fix #1550 improve the default behavior for clickable steps (thanks @service-paradis)
+* Add ``v-on:$listeners`` to internal native select of select component
 
 ### New features
 
+* **New component: Slider**, [see docs](https://buefy.org/documentation/slider) (thanks @yxngl)
+* **New component: Navbar**, [see docs](https://buefy.org/documentation/navbar) (thanks @wanxe)
 * **New component: Progress Bar**, [see docs](https://buefy.org/documentation/progress)
 * Improve to tree shaking when importing individual components
 * Add ``defaultTooltipDelay`` constructor option (thanks @service-paradis)
