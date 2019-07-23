@@ -4,12 +4,12 @@
         ref="label"
         :class="[size, { 'is-disabled': disabled }]"
         :disabled="disabled"
-        :tabindex="disabled ? false : 0"
-        @keydown.prevent.enter.space="$refs.label.click()">
+        @click="focus"
+        @keydown.prevent.enter="$refs.label.click()">
         <input
             v-model="computedValue"
-            tabindex="-1"
             type="radio"
+            ref="input"
             @click.stop
             :disabled="disabled"
             :required="required"
@@ -54,6 +54,12 @@ export default {
         */
         value(value) {
             this.newValue = value
+        }
+    },
+    methods: {
+        focus() {
+            // MacOS FireFox and Safari do not focus when clicked
+            this.$refs.input.focus()
         }
     }
 }

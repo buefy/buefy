@@ -4,11 +4,13 @@
         :class="[size, { 'is-disabled': disabled }]"
         ref="label"
         :disabled="disabled"
+        @click="focus"
         @keydown.prevent.enter="$refs.label.click()">
         <input
             v-model="computedValue"
             :indeterminate.prop="indeterminate"
             type="checkbox"
+            ref="input"
             @click.stop
             :disabled="disabled"
             :required="required"
@@ -64,6 +66,12 @@ export default {
          */
         value(value) {
             this.newValue = value
+        }
+    },
+    methods: {
+        focus() {
+            // MacOS FireFox and Safari do not focus when clicked
+            this.$refs.input.focus()
         }
     }
 }

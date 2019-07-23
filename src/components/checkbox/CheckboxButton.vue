@@ -8,11 +8,13 @@
                 'is-focused': isFocused
             }]"
             :disabled="disabled"
+            @click="focus"
             @keydown.prevent.enter="$refs.label.click()">
             <slot/>
             <input
                 v-model="computedValue"
                 type="checkbox"
+                ref="input"
                 @click.stop
                 :disabled="disabled"
                 :required="required"
@@ -68,6 +70,12 @@ export default {
          */
         value(value) {
             this.newValue = value
+        }
+    },
+    methods: {
+        focus() {
+            // MacOS FireFox and Safari do not focus when clicked
+            this.$refs.input.focus()
         }
     }
 }

@@ -60,6 +60,20 @@ $radio-size: 1.25em !default;
                     transform: scale(.5);
                 }
             }
+            &:focus {
+                + .check {
+                    box-shadow: 0 0 0.5em rgba($grey, 0.8);
+                }
+                &:checked + .check {
+                    box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
+                    @each $name, $pair in $colors {
+                        $color: nth($pair, 1);
+                        &.is-#{$name} {
+                            box-shadow: 0 0 0.5em rgba($color, 0.8);
+                        }
+                    }
+                }
+            }
         }
         .control-label {
             padding-left: 0.5em;
@@ -74,20 +88,6 @@ $radio-size: 1.25em !default;
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         border-color: $color;
-                    }
-                }
-            }
-        }
-        &:focus {
-            input[type=radio] + .check {
-                box-shadow: 0 0 0.5em rgba($grey, 0.8);
-            }
-            input[type=radio]:checked + .check {
-                box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
-                @each $name, $pair in $colors {
-                    $color: nth($pair, 1);
-                    &.is-#{$name} {
-                        box-shadow: 0 0 0.5em rgba($color, 0.8);
                     }
                 }
             }
