@@ -55,8 +55,9 @@ const mapComponent = (name) => {
                 }),
                 cjs(),
                 vue({
-                    css: true,
-                    compileTemplate: true
+                    template: {
+                        isProduction: true
+                    }
                 })
             ]
         },
@@ -75,8 +76,9 @@ const mapComponent = (name) => {
                 }),
                 cjs(),
                 vue({
-                    css: true,
-                    compileTemplate: true
+                    template: {
+                        isProduction: true
+                    }
                 })
             ]
         }
@@ -101,8 +103,9 @@ const config = [
             }),
             cjs(),
             vue({
-                css: true,
-                compileTemplate: true
+                template: {
+                    isProduction: true
+                }
             }),
             babel(babelConfig)
         ]
@@ -122,8 +125,9 @@ const config = [
             }),
             cjs(),
             vue({
-                css: true,
-                compileTemplate: true
+                template: {
+                    isProduction: true
+                }
             }),
             babel(babelConfig)
         ]
@@ -148,8 +152,9 @@ const config = [
             }),
             cjs(),
             vue({
-                css: true,
-                compileTemplate: true
+                template: {
+                    isProduction: true
+                }
             }),
             babel(babelConfig)
         ]

@@ -4,9 +4,14 @@
 
 ### Breaking changes
 
+* Change path to import individual components, like:
+```javascript
+import { Table } from 'buefy'
+Vue.use(Table)
+```
 * Change path to import components to use outside main vue instance, like:
 ```javascript
-// see Toast, Snackbar, Modal and Dialog doc pages for more examples
+// see Toast, Snackbar, Modal, Dialog, Loading and Notification doc pages for more examples
 import { ToastProgrammatic as Toast } from 'buefy'
 Toast.open('Toasty!')
 ```
