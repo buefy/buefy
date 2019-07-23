@@ -516,6 +516,18 @@ export default [
                 values: '—',
                 default: '—'
             }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: '<strong>Required</strong>, table column body',
+                props: '-'
+            },
+            {
+                name: '<code>header</code>',
+                description: 'Table column custom header',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            }
         ]
     }
 ]

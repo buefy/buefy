@@ -98,7 +98,8 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/icon": {
         "title": "Icon",
@@ -134,8 +135,7 @@
             "/",
             "documentation",
             "documentation/modal"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/navbar": {
         "title": "Navbar",
@@ -316,7 +316,8 @@
             "/",
             "documentation",
             "documentation/switch"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datepicker": {
         "title": "Datepicker",
@@ -329,7 +330,7 @@
             "documentation",
             "documentation/datepicker"
         ],
-        "isUpdated": true
+        "isUpdated": "true"
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -378,8 +379,7 @@
             "/",
             "documentation",
             "documentation/upload"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/table": {
         "title": "Table",
@@ -404,7 +404,8 @@
             "/",
             "documentation",
             "documentation/pagination"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/button": {
         "title": "Button",
@@ -440,7 +441,8 @@
             "/",
             "documentation",
             "documentation/steps"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/menu": {
         "title": "Menu",
@@ -452,8 +454,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isNew": true
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
