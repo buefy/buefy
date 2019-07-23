@@ -4,6 +4,7 @@
         :class="newClass"
         ref="label"
         :disabled="disabled"
+        @click="focus"
         @keydown.prevent.enter="$refs.label.click()"
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
@@ -12,6 +13,7 @@
         <input
             v-model="computedValue"
             type="checkbox"
+            ref="input"
             @click.stop
             :disabled="disabled"
             :name="name"
@@ -83,6 +85,12 @@ export default {
         */
         value(value) {
             this.newValue = value
+        }
+    },
+    methods: {
+        focus() {
+            // MacOS FireFox and Safari do not focus when clicked
+            this.$refs.input.focus()
         }
     }
 }
