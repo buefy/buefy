@@ -20,6 +20,7 @@ import Pagination from './pagination'
 import Progress from './progress'
 import Radio from './radio'
 import Select from './select'
+import Slider from './slider'
 import Snackbar from './snackbar'
 import Steps from './steps'
 import Switch from './switch'
@@ -55,6 +56,7 @@ export {
     Progress,
     Radio,
     Select,
+    Slider,
     Snackbar,
     Steps,
     Switch,

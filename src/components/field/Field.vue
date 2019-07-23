@@ -185,7 +185,7 @@ export default {
     mounted() {
         if (this.horizontal) {
             // Bulma docs: .is-normal for any .input or .button
-            const elements = this.$el.querySelectorAll('.input, .select, .button, .textarea')
+            const elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider')
             if (elements.length > 0) {
                 this.fieldLabelSize = 'is-normal'
             }

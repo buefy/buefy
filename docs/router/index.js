@@ -66,6 +66,7 @@ const router = new Router({
                 route('documentation/numberinput', 'components/numberinput/Numberinput'),
                 route('documentation/steps', 'components/steps/Steps'),
                 route('documentation/menu', 'components/menu/Menu'),
+                route('documentation/slider', 'components/slider/Slider'),
                 route('documentation/progress', 'components/progress/Progress'),
                 // Extensions
                 route('extensions', 'Extensions'),

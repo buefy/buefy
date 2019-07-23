@@ -455,6 +455,19 @@
         ],
         "isNew": true
     },
+     "documentation/slider": {
+        "title": "Slider",
+        "subtitle": "A slider to select a value or range from a given range",
+        "path": "/documentation/slider",
+        "githubPath": "pages/components/slider/Slider.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/slider"
+        ],
+        "isNew": true
+    },
     "documentation/progress": {
         "title": "Progress",
         "subtitle": "Wrapper around Bulma / Native HTML progress bars",
@@ -465,7 +478,8 @@
             "/",
             "documentation",
             "documentation/progress"
-        ]
+        ],
+        "isNew": true
     },
     "extensions": {
         "title": "Extensions",
