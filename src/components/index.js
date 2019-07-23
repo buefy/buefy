@@ -14,6 +14,7 @@ import Menu from './menu'
 import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
+import Navbar from './navbar'
 import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Progress from './progress'
@@ -47,6 +48,7 @@ export {
     Menu,
     Message,
     Modal,
+    Navbar,
     Notification,
     Numberinput,
     Pagination,
