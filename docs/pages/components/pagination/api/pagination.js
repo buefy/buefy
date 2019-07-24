@@ -16,15 +16,15 @@ export default [
                 default: '<code>20</code>'
             },
             {
-                name: '<code>before</code>',
-                description: 'Items to show before current page',
+                name: '<code>range-before</code>',
+                description: 'Number of pagination items to show before current page',
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
             },
             {
-                name: '<code>after</code>',
-                description: 'Items to show after current page',
+                name: '<code>range-after</code>',
+                description: 'Items to paginatation items to show after current page',
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'

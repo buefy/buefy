@@ -10,10 +10,10 @@
         </b-field>
         <b-field grouped group-multiline>
             <b-field label="Show buttons before current">
-                <b-input type="number" v-model="before"></b-input>
+                <b-input type="number" v-model="rangeBefore" min="0"></b-input>
             </b-field>
             <b-field label="Show buttons after current">
-                <b-input type="number" v-model="after"></b-input>
+                <b-input type="number" v-model="rangeAfter" min="0"></b-input>
             </b-field>
         </b-field>
         <b-field grouped group-multiline>
@@ -42,8 +42,8 @@
         <b-pagination
             :total="total"
             :current.sync="current"
-            :before="before"
-            :after="after"
+            :range-before="rangeBefore"
+            :range-after="rangeAfter"
             :order="order"
             :size="size"
             :simple="isSimple"
@@ -64,8 +64,8 @@
                 total: 200,
                 current: 10,
                 perPage: 10,
-                before: 3,
-                after: 1,
+                rangeBefore: 3,
+                rangeAfter: 1,
                 order: '',
                 size: '',
                 isSimple: false,

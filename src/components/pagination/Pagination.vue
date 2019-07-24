@@ -96,11 +96,11 @@ export default {
             type: [Number, String],
             default: 1
         },
-        before: {
+        rangeBefore: {
             type: [Number, String],
             default: 1
         },
-        after: {
+        rangeAfter: {
             type: [Number, String],
             default: 1
         },
@@ -127,11 +127,11 @@ export default {
         },
 
         beforeCurrent() {
-            return parseInt(this.before)
+            return parseInt(this.rangeBefore)
         },
 
         afterCurrent() {
-            return parseInt(this.after)
+            return parseInt(this.rangeAfter)
         },
 
         /**
