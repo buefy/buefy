@@ -96,6 +96,14 @@ export default {
             type: [Number, String],
             default: 1
         },
+        rangeBefore: {
+            type: [Number, String],
+            default: 1
+        },
+        rangeAfter: {
+            type: [Number, String],
+            default: 1
+        },
         size: String,
         simple: Boolean,
         rounded: Boolean,
@@ -116,6 +124,14 @@ export default {
                     'is-rounded': this.rounded
                 }
             ]
+        },
+
+        beforeCurrent() {
+            return parseInt(this.rangeBefore)
+        },
+
+        afterCurrent() {
+            return parseInt(this.rangeAfter)
         },
 
         /**
@@ -144,28 +160,28 @@ export default {
         * Check if first page button should be visible.
         */
         hasFirst() {
-            return this.current >= 3
+            return this.current >= (2 + this.beforeCurrent)
         },
 
         /**
         * Check if first ellipsis should be visible.
         */
         hasFirstEllipsis() {
-            return this.current >= 5
+            return this.current >= (this.beforeCurrent + 4)
         },
 
         /**
         * Check if last page button should be visible.
         */
         hasLast() {
-            return this.current <= this.pageCount - 2
+            return this.current <= this.pageCount - (1 + this.afterCurrent)
         },
 
         /**
         * Check if last ellipsis should be visible.
         */
         hasLastEllipsis() {
-            return this.current < this.pageCount - 3
+            return this.current < this.pageCount - (2 + this.afterCurrent)
         },
 
         /**
@@ -182,11 +198,11 @@ export default {
         pagesInRange() {
             if (this.simple) return
 
-            let left = Math.max(1, this.current - 1)
+            let left = Math.max(1, this.current - this.beforeCurrent)
             if (left - 1 === 2) {
                 left-- // Do not show the ellipsis if there is only one to hide
             }
-            let right = Math.min(this.current + 1, this.pageCount)
+            let right = Math.min(this.current + this.afterCurrent, this.pageCount)
             if (this.pageCount - right === 2) {
                 right++ // Do not show the ellipsis if there is only one to hide
             }
