@@ -145,7 +145,7 @@ export default {
     },
     data() {
         return {
-            tags: this.value.slice(0) || [],
+            tags: Array.isArray(this.value) ? Array.from(this.value) : (this.value || []),
             newTag: '',
             _elementRef: 'input',
             _isTaginput: true
