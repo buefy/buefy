@@ -105,6 +105,23 @@
                             </template>
                         </th>
                     </tr>
+                    <tr v-if="searchable && hasSearchablenewColumns">
+                        <th
+                            v-for="(column, index) in newColumns"
+                            v-if="(column.visible || column.visible === undefined)"
+                            :key="index"
+                            :style="{ width: column.width + 'px' }">
+                            <div class="th-wrap">
+                                <div v-if="column.searchable">
+                                    <b-field>
+                                        <b-input
+                                            v-model="filters[column.field]"
+                                            :type="column.numeric ? 'number' : 'text'" />
+                                    </b-field>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
@@ -290,6 +307,7 @@ export default {
         loading: Boolean,
         detailed: Boolean,
         checkable: Boolean,
+        searchable: Boolean,
         headerCheckable: {
             type: Boolean,
             default: true
@@ -407,6 +425,7 @@ export default {
             newCurrentPage: this.currentPage,
             currentSortColumn: {},
             isAsc: true,
+            filters: {},
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -490,6 +509,15 @@ export default {
         },
 
         /**
+        * Check if has any searchable column.
+        */
+        hasSearchablenewColumns() {
+          return this.newColumns.some((column) => {
+              return column.searchable
+          })
+        },
+
+        /**
         * Return total column count based if it's checkable or expanded
         */
         columnCount() {
@@ -553,6 +581,14 @@ export default {
 
         newColumns(value) {
             this.checkSort()
+        },
+
+        filters: {
+                handler(value) {
+                    this.newData = this.data.filter(
+                        (row) => this.isRowFiltered(row))
+                },
+                deep: true
         },
 
         /**
@@ -757,6 +793,24 @@ export default {
 
         isActiveCustomDetailRow(row) {
             return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
+        },
+
+
+        isRowFiltered(row) {
+            for (const key in this.filters) {
+                // remove key if empty
+                if (!this.filters[key]) {
+                    delete this.filters[key]
+                    return true
+                }
+                if (Number.isInteger(row[key])) {
+                    if (row[key] !== Number(this.filters[key])) return false
+                } else {
+                    const re = new RegExp(this.filters[key])
+                    if (!row[key].match(re)) return false
+                }
+            }
+            return true
         },
 
         /**
