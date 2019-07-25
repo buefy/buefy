@@ -145,7 +145,7 @@ export default {
     },
     data() {
         return {
-            tags: this.value || [],
+            tags: this.value.slice(0) || [],
             newTag: '',
             _elementRef: 'input',
             _isTaginput: true
