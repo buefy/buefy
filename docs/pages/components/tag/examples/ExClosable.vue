@@ -4,6 +4,7 @@
             <b-tag v-if="isTag1Active"
                 type="is-primary"
                 closable
+                aria-close-label="Close tag"
                 @close="isTag1Active = false">
                 Colored closable tag label
             </b-tag>
@@ -13,6 +14,7 @@
             <b-tag v-if="isTag2Active"
                 attached
                 closable
+                aria-close-label="Close tag"
                 @close="isTag2Active = false">
                 Attached closable tag label
             </b-tag>
@@ -23,6 +25,7 @@
                 type="is-danger"
                 attached
                 closable
+                aria-close-label="Close tag"
                 @close="isTag3Active = false">
                 Colored attached closable tag label
             </b-tag>
