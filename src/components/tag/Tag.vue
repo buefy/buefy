@@ -10,6 +10,7 @@
         <a
             class="tag is-delete"
             role="button"
+            aria-label="close"
             :tabindex="tabstop ? 0 : false"
             :disabled="disabled"
             :class="[size, { 'is-rounded': rounded }]"
@@ -28,6 +29,7 @@
         <a
             v-if="closable"
             role="button"
+            aria-label="close"
             class="delete is-small"
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
