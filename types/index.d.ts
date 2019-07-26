@@ -46,6 +46,7 @@ export declare type BuefyConfig = {
     defaultTimepickerMobileNative?: boolean;
     defaultNoticeQueue?: boolean;
     defaultInputHasCounter?: boolean;
+    defaultTaginputHasCounter?: boolean;
     defaultUseHtml5Validation?: boolean;
     defaultDropdownMobileModal?: boolean;
     defaultFieldLabelPosition?: 'inside' | 'on-border';

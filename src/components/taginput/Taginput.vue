@@ -62,14 +62,14 @@
             </b-autocomplete>
         </div>
 
-        <p v-if="maxtags || maxlength" class="help counter">
+        <small v-if="hasCounter && (maxtags || maxlength)" class="help counter">
             <template v-if="maxlength && valueLength > 0">
                 {{ valueLength }} / {{ maxlength }}
             </template>
             <template v-else-if="maxtags">
                 {{ tagsLength }} / {{ maxtags }}
             </template>
-        </p>
+        </small>
     </div>
 </template>
 
@@ -77,6 +77,7 @@
 import { getValueByPath } from '../../utils/helpers'
 import Tag from '../tag/Tag'
 import Autocomplete from '../autocomplete/Autocomplete'
+import config from '../../utils/config'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {
@@ -108,6 +109,10 @@ export default {
         maxtags: {
             type: [Number, String],
             required: false
+        },
+        hasCounter: {
+            type: Boolean,
+            default: () => config.defaultTaginputHasCounter
         },
         field: {
             type: String,
