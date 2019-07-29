@@ -2,9 +2,6 @@
 
 You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtommy)
 
-### Gold Sponsor ($250+)
-- [Twago - Team2Venture GmbH](https://www.twago.com)
-
 ### $10+
 - [Working Group Two](https://www.patreon.com/wgtwo)
 - [Prine Software Engineering](https://www.patreon.com/user/creators?u=18435748)
