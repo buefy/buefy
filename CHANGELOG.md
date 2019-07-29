@@ -42,6 +42,7 @@ Toast.open('Toasty!')
 * Fix #1541 emit `input` event when change step (thanks @service-paradis)
 * Fix #1544 years select datepicker when max/min being passed
 * Fix #1565 datepicker programmatically on mobile
+* Fix #1591 datepicker on mobile using different timezone
 * Fix issues on delete last selected element and on reset upload (thanks @it-fm)
 
 ## 0.7.10
