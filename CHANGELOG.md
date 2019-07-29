@@ -17,7 +17,9 @@ Toast.open('Toasty!')
 ```
 * Fix #1529 pagination ellipsis behavior (thanks @service-paradis)
 * Fix #1550 improve the default behavior for clickable steps (thanks @service-paradis)
+* Fix #1586 focus issue to radio, checkbox and switch (thanks @yxngl)
 * Add ``v-on:$listeners`` to internal native select of select component
+* Remove ``span`` around default b-table-column slot (thanks @service-paradis)
 
 ### New features
 
@@ -32,6 +34,8 @@ Toast.open('Toasty!')
 * Add ``focusable`` prop to dropdown (thanks @service-paradis)
 * Add ``mouseenter `` and ``mouseleave`` events to table (thanks @afm-sayem)
 * Add ``rounded`` and ``outlined`` prop to switch (thanks @service-paradis)
+* Add ``aria-close-label`` prop to taginput (thanks @yxngl)
+* Add ``has-counter`` prop to taginput (thanks @dejangeci)
 
 ### Fixes
 
