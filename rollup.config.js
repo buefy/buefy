@@ -17,7 +17,9 @@ const babelConfig = {
     presets: [['@babel/env', { useBuiltIns: 'entry', corejs: { version: 2 } }]],
     env: {
         es: {
-            plugins: [['@babel/plugin-transform-modules-commonjs', { loose: true }]]
+            plugins: [
+                ['@babel/plugin-transform-modules-commonjs', { loose: true }]
+            ]
         },
         esm: {
             presets: [['@babel/env', { modules: false }]]
@@ -25,113 +27,73 @@ const babelConfig = {
     }
 }
 
-const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
+const bannerTxt = `/*! Buefy v${
+    pack.version
+} | MIT License | github.com/buefy/buefy */`
 
 const baseFolder = './src/'
 const componentsFolder = 'components/'
 
-const components = fs.readdirSync(baseFolder + componentsFolder)
-    .filter((f) => (fs.statSync(path.join(baseFolder + componentsFolder, f)).isDirectory()))
+const components = fs
+    .readdirSync(baseFolder + componentsFolder)
+    .filter((f) =>
+        fs.statSync(path.join(baseFolder + componentsFolder, f)).isDirectory()
+    )
 
-const mapComponent = (name) => {
-    return [
-        {
-            input: baseFolder + componentsFolder + `${name}/index.js`,
-            external: ['vue'],
-            output: {
-                format: 'umd',
-                name: name,
-                file: `dist/components/${name}/index.js`,
-                banner: bannerTxt,
-                exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                }
-            },
-            plugins: [
-                replace({ 'process.env.NODE_ENV': 'production' }),
-                node({
-                    extensions: ['.vue', '.js']
-                }),
-                cjs(),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                })
-            ]
-        },
-        {
-            input: baseFolder + componentsFolder + `${name}/index.js`,
-            external: ['vue'],
-            output: {
-                format: 'esm',
-                file: `dist/esm/components/${name}/index.js`,
-                banner: bannerTxt
-            },
-            plugins: [
-                replace({ 'process.env.NODE_ENV': 'production' }),
-                node({
-                    extensions: ['.vue', '.js']
-                }),
-                cjs(),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                })
-            ]
-        }
-    ]
-}
+const entries = [
+    './src/index.js',
+    ...components.map(
+        (name) => baseFolder + componentsFolder + `${name}`
+    )
+]
 
 const config = [
-    // individual components
-    ...components.map((f) => mapComponent(f)).reduce((r, a) => r.concat(a), []),
     {
-        input: 'src/index.js',
+        input: entries,
         external: ['vue'],
         output: {
             format: 'esm',
-            file: `dist/buefy.esm.js`,
+            dir: `dist/esm`,
             banner: bannerTxt
         },
         plugins: [
-            replace({ 'process.env.NODE_ENV': 'production' }),
             node({
                 extensions: ['.vue', '.js']
             }),
-            cjs(),
             vue({
                 template: {
                     isProduction: true
                 }
             }),
-            babel(babelConfig)
+            babel(babelConfig),
+            cjs(),
+            replace({ 'process.env.NODE_ENV': 'production' })
         ]
     },
+
     {
-        input: 'src/index.js',
+        input: entries,
         external: ['vue'],
         output: {
             format: 'cjs',
-            file: 'dist/buefy.cjs.js',
+            dir: 'dist/cjs',
             exports: 'named'
         },
         plugins: [
-            replace({ 'process.env.NODE_ENV': 'production' }),
             node({
                 extensions: ['.vue', '.js']
             }),
-            cjs(),
             vue({
                 template: {
                     isProduction: true
                 }
             }),
-            babel(babelConfig)
+            babel(babelConfig),
+            cjs(),
+            replace({ 'process.env.NODE_ENV': 'production' })
         ]
     },
+
     {
         input: 'src/index.js',
         external: ['vue'],
@@ -164,7 +126,12 @@ const config = [
 export default () => {
     if (process.env.MINIFY === 'true') {
         config.forEach((c) => {
-            c.output.file = c.output.file.replace(/\.js/g, '.min.js')
+            if (c.output.file) {
+                c.output.file = c.output.file.replace(/\.js/g, '.min.js')
+            }
+            if (c.output.dir) {
+                c.output.dir = c.output.dir + '-min'
+            }
             c.plugins.push(terser())
         })
     }
