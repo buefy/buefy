@@ -37,8 +37,8 @@ describe('BDatepickerTable', () => {
                 monthNames: config.defaultMonthNames,
                 events: [new Date('July 22, 2018 07:22:13'), new Date('July 23, 2018 00:00:00')],
                 focused: {
-                    month: config.focusedDate.getMonth(),
-                    year: config.focusedDate.getFullYear()
+                    month: 6,
+                    year: 2018
                 }
             }
         })
