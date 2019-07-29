@@ -11,7 +11,7 @@ describe('BProgress', () => {
     it('add value attribute when a value is passed', () => {
         const value = 50
         const wrapper = shallowMount(BProgress)
-        wrapper.vm.value = value
+        wrapper.setProps({ value })
 
         expect(wrapper.find('.progress').attributes().value).toEqual(`${value}`)
     })
@@ -55,12 +55,10 @@ describe('BProgress', () => {
 
             it('display the trailing zeroes when setting the keepTrailingZeroes prop', () => {
                 const value = 50
-                const max = 100
                 const keepTrailingZeroes = true
                 const wrapper = shallowMount(BProgress, {
                     propsData: {
                         value,
-                        max,
                         keepTrailingZeroes,
                         showValue: true
                     }
