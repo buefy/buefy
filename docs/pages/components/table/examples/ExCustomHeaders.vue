@@ -35,10 +35,12 @@
             </b-table-column>
 
             <b-table-column label="Gender">
-                <b-icon pack="fas"
-                    :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                </b-icon>
-                {{ props.row.gender }}
+                <span>
+                    <b-icon pack="fas"
+                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                    </b-icon>
+                    {{ props.row.gender }}
+                </span>
             </b-table-column>
         </template>
     </b-table>
