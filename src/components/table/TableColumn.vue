@@ -3,7 +3,7 @@
         v-if="visible"
         :class="rootClasses"
         :data-label="label">
-        <span><slot/></span>
+        <slot/>
     </td>
 </template>
 
