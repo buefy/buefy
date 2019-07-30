@@ -3,7 +3,7 @@
         <b-table v-sortable="sortableOptions" 
             :data="data"
             custom-row-key="id"
-            @click="(row) => $toast.open(`Clicked ${row.first_name}`)">
+            @click="(row) => $buefy.toast.open(`Clicked ${row.first_name}`)">
 
             <template slot-scope="props">
                 <b-table-column field="id" label="ID" width="40" numeric>
@@ -57,7 +57,7 @@
                     }
                 }
                 data[evt.newIndex] = item
-                vnode.context.$toast.open(`Moved ${item.first_name} from row ${evt.oldIndex + 1} to ${evt.newIndex + 1}`)
+                vnode.context.$buefy.toast.open(`Moved ${item.first_name} from row ${evt.oldIndex + 1} to ${evt.newIndex + 1}`)
             }
         })
     }

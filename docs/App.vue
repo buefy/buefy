@@ -26,11 +26,11 @@ export default {
             })
 
             this.clipboard.on('success', (e) => {
-                this.$toast.open('Copied to clipboard!')
+                this.$buefy.toast.open('Copied to clipboard!')
             })
 
             this.clipboard.on('error', (e) => {
-                this.$toast.open({
+                this.$buefy.toast.open({
                     message: 'Error while copying to clipboard :(',
                     type: 'is-danger'
                 })

@@ -15,6 +15,11 @@ Vue.use(Table)
 import { ToastProgrammatic as Toast } from 'buefy'
 Toast.open('Toasty!')
 ```
+* Fix #1268 add ``$buefy`` namespace for each programmatic components
+```javascript
+// see Toast, Snackbar, Modal, Dialog, Loading and Notification doc pages for more examples
+this.$buefy.toast.open('Toasty!')
+```
 * Fix #1529 pagination ellipsis behavior (thanks @service-paradis)
 * Fix #1550 improve the default behavior for clickable steps (thanks @service-paradis)
 * Fix #1586 focus issue to radio, checkbox and switch (thanks @yxngl)

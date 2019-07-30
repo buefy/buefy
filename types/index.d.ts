@@ -1,18 +1,28 @@
 import _Vue from "vue";
 
-import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar, NotificationProgrammatic } from "./components";
+import {
+    DialogProgrammatic,
+    ModalProgrammatic,
+    LoadingProgrammatic,
+    ToastProgrammatic,
+    SnackbarProgrammatic,
+    NotificationProgrammatic } from "./components";
 import { ColorModifiers, GlobalPositions } from "./helpers";
 
-// Adds Buefy method signatures to Vue instance (ie this.$dialog)
+// Adds Buefy method signatures to Vue instance (ie this.$buefy.dialog)
 declare module 'vue/types/vue' {
     interface Vue {
-        $dialog: typeof Dialog,
-        $loading: typeof LoadingProgrammatic,
-        $modal: typeof ModalProgrammatic,
-        $snackbar: typeof Snackbar,
-        $toast: typeof Toast,
-        $notification: typeof NotificationProgrammatic
+        $buefy: BuefyNamespace
     }
+}
+
+export declare type BuefyNamespace = {
+    dialog: typeof DialogProgrammatic,
+    loading: typeof LoadingProgrammatic,
+    modal: typeof ModalProgrammatic,
+    snackbar: typeof SnackbarProgrammatic,
+    toast: typeof ToastProgrammatic,
+    notification: typeof NotificationProgrammatic
 }
 
 export declare type BuefyConfig = {
@@ -60,11 +70,11 @@ declare const _default: {
 };
 
 export {
-    Dialog,
+    DialogProgrammatic,
     LoadingProgrammatic,
     ModalProgrammatic,
-    Snackbar,
-    Toast,
+    SnackbarProgrammatic,
+    ToastProgrammatic,
     NotificationProgrammatic
 }
 

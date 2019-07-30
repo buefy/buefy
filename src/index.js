@@ -17,7 +17,7 @@ const Buefy = {
                 setOptions(Object.assign(config, options))
             }
         }
-        registerComponentProgrammatic(Vue, '$buefy', BuefyProgrammatic)
+        registerComponentProgrammatic(Vue, 'config', BuefyProgrammatic)
     }
 }
 

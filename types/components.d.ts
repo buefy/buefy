@@ -86,7 +86,7 @@ type PromptDialogConfig = DialogConfig & {
     inputAttrs?: any;
 };
 
-export declare const Dialog: {
+export declare const DialogProgrammatic: {
     alert: (params: DialogConfig | string) => any;
     confirm: (params: DialogConfig) => any;
     prompt: (params: PromptDialogConfig) => any;
@@ -134,7 +134,7 @@ export declare type SnackbarConfig = {
     indefinite?: boolean;
     onAction?: () => any;
 }
-export declare const Snackbar: {
+export declare const SnackbarProgrammatic: {
     open: (params: SnackbarConfig | string) => any;
 }
 
@@ -172,7 +172,7 @@ export declare type ToastConfig = {
     queue?: boolean;
 }
 
-export declare const Toast: {
+export declare const ToastProgrammatic: {
     open: (params: ToastConfig | string) => any;
 }
 

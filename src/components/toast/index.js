@@ -32,7 +32,7 @@ const ToastProgrammatic = {
 
 const Plugin = {
     install(Vue) {
-        registerComponentProgrammatic(Vue, '$toast', ToastProgrammatic)
+        registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic)
     }
 }
 

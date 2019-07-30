@@ -22,7 +22,7 @@
             :opened-detailed="['Board Games']"
             :default-sort="['name', 'asc']"
             detail-key="name"
-            @details-open="(row, index) => $toast.open(`Expanded ${row.name}`)"
+            @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.name}`)"
             :show-detail-icon="showDetailIcon">
 
             <template slot-scope="props">

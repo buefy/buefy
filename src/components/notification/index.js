@@ -34,7 +34,7 @@ const NotificationProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Notification)
-        registerComponentProgrammatic(Vue, '$notification', NotificationProgrammatic)
+        registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic)
     }
 }
 

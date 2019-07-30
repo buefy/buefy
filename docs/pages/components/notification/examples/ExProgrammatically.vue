@@ -18,16 +18,16 @@
     export default {
         methods: {
             simple() {
-                this.$notification.open('Something happened')
+                this.$buefy.notification.open('Something happened')
             },
             success() {
-                this.$notification.open({
+                this.$buefy.notification.open({
                     message: 'Something happened correctly!',
                     type: 'is-success'
                 })
             },
             danger() {
-                this.$notification.open({
+                this.$buefy.notification.open({
                     duration: 5000,
                     message: `Something's not good, also I'm on bottom`,
                     position: 'is-bottom-right',
