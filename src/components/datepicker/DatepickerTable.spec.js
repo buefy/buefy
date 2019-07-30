@@ -44,4 +44,21 @@ describe('BDatepickerTable', () => {
         })
         expect(wrapper.vm.eventsInThisWeek(wrapper.vm.weeksInThisMonth[3]).length).toEqual(2)
     })
+
+    it('emit input event with selected date as payload when updateSelectedDate is called', () => {
+        const wrapper = shallowMount(BDatepickerTable, {
+            propsData: {
+                dayNames: config.defaultDayNames,
+                monthNames: config.defaultMonthNames,
+                focused: {
+                    month: config.focusedDate.getMonth(),
+                    year: config.focusedDate.getFullYear()
+                }
+            }
+        })
+        const newDate = new Date()
+        wrapper.vm.updateSelectedDate(newDate)
+        const valueEmitted = wrapper.emitted()['input'][0]
+        expect(valueEmitted).toContainEqual(newDate)
+    })
 })
