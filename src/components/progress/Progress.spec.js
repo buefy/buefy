@@ -8,6 +8,12 @@ describe('BProgress', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        const wrapper = shallowMount(BProgress)
+
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('add value attribute when a value is passed', () => {
         const value = 50
         const wrapper = shallowMount(BProgress)

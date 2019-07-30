@@ -25,6 +25,16 @@ describe('BField', () => {
         expect(wrapper.vm._data).toEqual(expect.objectContaining({fieldLabelSize: 'is-normal'}))
     })
 
+    it('sets input class with type value when prop "type" is changed dynamically', () => {
+        const type = 'is-danger'
+        const wrapper = mount(BField, {
+            localVue,
+            slots: { default: [BInput] }
+        })
+        wrapper.setProps({ type })
+        expect(wrapper.find('.input').classes()).toContain(type)
+    })
+
     describe('class names for the root div.field', () => {
         it('contains "is-expanded" when prop "expanded" is set', () => {
             const wrapper = shallowMount(BField, { propsData: { expanded: true } })
@@ -52,6 +62,14 @@ describe('BField', () => {
             const message = 'Some string message'
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
+            expect(wrapper.find('.field').find('p.help').text()).toEqual(message)
+        })
+
+        it('changes the <p> element content in the root div.field when "message" prop is changed dynamically', () => {
+            const message = 'Some string message'
+            const mountOptions = generateMountOptions({ message: 'initial message' })
+            const wrapper = shallowMount(BField, mountOptions)
+            wrapper.setProps({ message })
             expect(wrapper.find('.field').find('p.help').text()).toEqual(message)
         })
 
