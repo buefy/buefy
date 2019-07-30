@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BSwitch render correctly 1`] = `<label class="switch is-rounded"><input type="checkbox" true-value="true" value="false"> <span class="check"></span> <span class="control-label"></span></label>`;
