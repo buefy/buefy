@@ -8,10 +8,11 @@
     "Walter Tommasi <tommsi20@gmail.com>"
   ],
   "license": "MIT",
-  "main": "dist/buefy.cjs.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "unpkg": "dist/buefy.min.js",
-  "module": "dist/buefy.esm.js",
   "typings": "types/index.d.ts",
+  "sideEffects": false,
   "files": [
     "dist",
     "src",
