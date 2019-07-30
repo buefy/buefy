@@ -1,5 +1,4 @@
 import vue from 'rollup-plugin-vue'
-import replace from 'rollup-plugin-replace'
 import node from 'rollup-plugin-node-resolve'
 import cjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
@@ -14,22 +13,10 @@ const babelConfig = {
     exclude: 'node_modules/**',
     runtimeHelpers: true,
     babelrc: false,
-    presets: [['@babel/env', { useBuiltIns: 'entry', corejs: { version: 2 } }]],
-    env: {
-        es: {
-            plugins: [
-                ['@babel/plugin-transform-modules-commonjs', { loose: true }]
-            ]
-        },
-        esm: {
-            presets: [['@babel/env', { modules: false }]]
-        }
-    }
+    presets: [['@babel/env', { useBuiltIns: 'entry', corejs: { version: 2 }, modules: false }]]
 }
 
-const bannerTxt = `/*! Buefy v${
-    pack.version
-} | MIT License | github.com/buefy/buefy */`
+const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
 
 const baseFolder = './src/'
 const componentsFolder = 'components/'
@@ -40,98 +27,122 @@ const components = fs
         fs.statSync(path.join(baseFolder + componentsFolder, f)).isDirectory()
     )
 
-const entries = [
-    './src/index.js',
-    ...components.map(
-        (name) => baseFolder + componentsFolder + `${name}`
-    )
-]
-
-const config = [
-    {
-        input: entries,
-        external: ['vue'],
-        output: {
-            format: 'esm',
-            dir: `dist/esm`,
-            banner: bannerTxt
-        },
-        plugins: [
-            node({
-                extensions: ['.vue', '.js']
-            }),
-            vue({
-                template: {
-                    isProduction: true
-                }
-            }),
-            babel(babelConfig),
-            cjs(),
-            replace({ 'process.env.NODE_ENV': 'production' })
-        ]
-    },
-
-    {
-        input: entries,
-        external: ['vue'],
-        output: {
-            format: 'cjs',
-            dir: 'dist/cjs',
-            exports: 'named'
-        },
-        plugins: [
-            node({
-                extensions: ['.vue', '.js']
-            }),
-            vue({
-                template: {
-                    isProduction: true
-                }
-            }),
-            babel(babelConfig),
-            cjs(),
-            replace({ 'process.env.NODE_ENV': 'production' })
-        ]
-    },
-
-    {
-        input: 'src/index.js',
-        external: ['vue'],
-        output: {
-            format: 'umd',
-            name: 'buefy',
-            file: 'dist/buefy.js',
-            exports: 'named',
-            banner: bannerTxt,
-            globals: {
-                vue: 'Vue'
-            }
-        },
-        plugins: [
-            replace({ 'process.env.NODE_ENV': 'production' }),
-            node({
-                extensions: ['.vue', '.js']
-            }),
-            cjs(),
-            vue({
-                template: {
-                    isProduction: true
-                }
-            }),
-            babel(babelConfig)
-        ]
-    }
-]
+const entries = {
+    'index': './src/index.js',
+    ...components.reduce((obj, name) => {
+        obj[name] = (baseFolder + componentsFolder + name)
+        return obj
+    }, {})
+}
 
 export default () => {
+    const mapComponent = (name) => {
+        return [
+            {
+                input: baseFolder + componentsFolder + `${name}/index.js`,
+                external: ['vue'],
+                output: {
+                    format: 'umd',
+                    name: name,
+                    file: `dist/components/${name}/index.js`,
+                    banner: bannerTxt,
+                    exports: 'named',
+                    globals: {
+                        vue: 'Vue'
+                    }
+                },
+                plugins: [
+                    node({
+                        extensions: ['.vue', '.js']
+                    }),
+                    cjs(),
+                    vue({
+                        template: {
+                            isProduction: true
+                        }
+                    }),
+                    babel(babelConfig)
+                ]
+            }
+        ]
+    }
+
+    let config = [
+        {
+            input: entries,
+            external: ['vue'],
+            output: {
+                format: 'esm',
+                dir: `dist/esm`
+            },
+            plugins: [
+                node({
+                    extensions: ['.vue', '.js']
+                }),
+                vue({
+                    template: {
+                        isProduction: true
+                    }
+                }),
+                babel(babelConfig),
+                cjs()
+            ]
+        },
+        {
+            input: entries,
+            external: ['vue'],
+            output: {
+                format: 'cjs',
+                dir: 'dist/cjs',
+                exports: 'named'
+            },
+            plugins: [
+                node({
+                    extensions: ['.vue', '.js']
+                }),
+                vue({
+                    template: {
+                        isProduction: true
+                    }
+                }),
+                babel(babelConfig),
+                cjs()
+            ]
+        },
+        {
+            input: 'src/index.js',
+            external: ['vue'],
+            output: {
+                format: 'umd',
+                name: 'buefy',
+                file: 'dist/buefy.js',
+                exports: 'named',
+                banner: bannerTxt,
+                globals: {
+                    vue: 'Vue'
+                }
+            },
+            plugins: [
+                node({
+                    extensions: ['.vue', '.js']
+                }),
+                cjs(),
+                vue({
+                    template: {
+                        isProduction: true
+                    }
+                }),
+                babel(babelConfig)
+            ]
+        },
+        // individual components
+        ...components.map((f) => mapComponent(f)).reduce((r, a) => r.concat(a), [])
+    ]
+
     if (process.env.MINIFY === 'true') {
+        config = config.filter((c) => c.output.format === 'umd')
         config.forEach((c) => {
-            if (c.output.file) {
-                c.output.file = c.output.file.replace(/\.js/g, '.min.js')
-            }
-            if (c.output.dir) {
-                c.output.dir = c.output.dir + '-min'
-            }
+            c.output.file = c.output.file.replace(/\.js/g, '.min.js')
             c.plugins.push(terser())
         })
     }

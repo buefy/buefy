@@ -26,7 +26,7 @@ Toast.open('Toasty!')
 * **New component: Slider**, [see docs](https://buefy.org/documentation/slider) (thanks @yxngl)
 * **New component: Navbar**, [see docs](https://buefy.org/documentation/navbar) (thanks @wanxe)
 * **New component: Progress Bar**, [see docs](https://buefy.org/documentation/progress) (thanks @service-paradis)
-* Improve to tree shaking when importing individual components
+* Improve to tree shaking using ESM format
 * Add ``header`` slot to table column
 * Add ``defaultTooltipDelay`` constructor option (thanks @service-paradis)
 * Add ``sort-icon`` and ``sort-icon-size`` props to table (@modularcoder)
