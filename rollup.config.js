@@ -13,7 +13,7 @@ const babelConfig = {
     exclude: 'node_modules/**',
     runtimeHelpers: true,
     babelrc: false,
-    presets: [['@babel/env', { useBuiltIns: 'entry', corejs: { version: 2 }, modules: false }]]
+    presets: [['@babel/preset-env', { modules: false }]]
 }
 
 const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
@@ -126,13 +126,13 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                cjs(),
                 vue({
                     template: {
                         isProduction: true
                     }
                 }),
-                babel(babelConfig)
+                babel(babelConfig),
+                cjs()
             ]
         },
         // individual components
