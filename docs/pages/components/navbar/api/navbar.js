@@ -10,22 +10,22 @@ export default [
               default: 'false'
           },
           {
-              name: '<code>fixedTop</code>',
+              name: '<code>fixed-top</code>',
               description: 'Fixes the navbar to the top of the page',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
           },
           {
-              name: '<code>fixedBottom</code>',
+              name: '<code>fixed-bottom</code>',
               description: 'Fixes the navbar to the bottom of the page',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
           },
           {
-              name: '<code>isActive</code>',
-              description: 'To control the behaviour of the mobile menu programmatically',
+              name: '<code>is-active</code>',
+              description: 'To control the behaviour of the mobile menu programmatically, use the <code>.sync</code> modifier to make it two-way binding',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
@@ -40,13 +40,6 @@ export default [
                     and any other colors you've set in the <code>$colors</code> list on Sass`,
               default: '—'
           },
-      ],
-      events: [
-          {
-              name: '<code>update:isActive</code>',
-              description: 'To sync the isActive prop',
-              parameters: '<code>value: Boolean</code>'
-          }
       ],
       slots: [
           {
