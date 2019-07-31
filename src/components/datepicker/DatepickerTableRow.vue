@@ -14,7 +14,8 @@
                 :disabled="disabled"
                 @click.prevent="emitChosenDate(day)"
                 @keydown.enter.prevent="emitChosenDate(day)"
-                @keydown.space.prevent="emitChosenDate(day)">
+                @keydown.space.prevent="emitChosenDate(day)"
+                @mouseenter="setRangeHoverEndDate(day)">
                 {{ day.getDate() }}
                 <div class="events" v-if="eventsDateMatch(day)">
                     <div
@@ -39,7 +40,10 @@
 export default {
     name: 'BDatepickerTableRow',
     props: {
-        selectedDate: Date,
+        selectedDate: {
+            type: [Date, Array]
+        },
+        hoveredDateRange: Array,
         week: {
             type: Array,
             required: true
@@ -206,18 +210,57 @@ export default {
                     return false
                 }
 
+                if (Array.isArray(dateTwo)) {
+                    return dateTwo.some((date) => (
+                        dateOne.getDate() === date.getDate() &&
+                        dateOne.getFullYear() === date.getFullYear() &&
+                        dateOne.getMonth() === date.getMonth()
+                    ))
+                }
                 return (dateOne.getDate() === dateTwo.getDate() &&
                     dateOne.getFullYear() === dateTwo.getFullYear() &&
                     dateOne.getMonth() === dateTwo.getMonth())
             }
 
+            function dateWithin(dateOne, dates) {
+                if (!Array.isArray(dates)) { return false }
+
+                return dateOne > dates[0] && dateOne < dates[1]
+            }
+
             return {
-                'is-selected': dateMatch(day, this.selectedDate),
+                'is-selected': dateMatch(day, this.selectedDate) || dateWithin(day, this.selectedDate),
+                'is-first-selected':
+                    dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[0]),
+                'is-within-selected':
+                    dateWithin(day, this.selectedDate),
+                'is-last-selected':
+                    dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[1]),
+                'is-within-hovered-range':
+                    this.hoveredDateRange && this.hoveredDateRange.length === 2 &&
+                    (dateMatch(day, this.hoveredDateRange) ||
+                        dateWithin(day, this.hoveredDateRange)),
+                'is-first-hovered': dateMatch(
+                    day,
+                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]
+                ),
+                'is-within-hovered':
+                    dateWithin(day, this.hoveredDateRange),
+                'is-last-hovered': dateMatch(
+                    day,
+                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]
+                ),
                 'is-today': dateMatch(day, this.dateCreator()),
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled,
                 'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
                 'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month
+            }
+        },
+        setRangeHoverEndDate(day) {
+            const isRangeInput = Array.isArray(this.selectedDate)
+            if (isRangeInput) {
+                this.$emit('rangeHoverEndDate', day)
             }
         }
     }
