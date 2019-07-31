@@ -146,8 +146,6 @@ export default {
             this.$emit('input', this.selected)
             if (!this.multiple) {
                 this.isActive = !this.closeOnClick
-                /*
-                * breaking change
                 if (this.hoverable && this.closeOnClick) {
                     this.isHoverable = false
                     // Timeout for the animation complete before destroying
@@ -155,7 +153,6 @@ export default {
                         this.isHoverable = true
                     }, 250)
                 }
-               */
             }
         },
 
