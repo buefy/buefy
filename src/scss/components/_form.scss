@@ -134,7 +134,7 @@ $floating-in-height: 3.25em;
                     margin-top: 1px;
                 }
             }
-        }     
+        }
         > :not(.taginput) {
             .is-left.icon,
             .is-right.icon {
@@ -150,6 +150,57 @@ $floating-in-height: 3.25em;
         .taginput .taginput-container.is-focusable {
             // 0.275em - 1px _taginput.scss
             padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
+        }
+        &.has-numberinput {
+            .b-numberinput {
+                .control {
+                    .button {
+                        height: $floating-in-height;
+                    }
+                }
+            }
+        }
+    }
+    &.is-floating-label, &.is-floating-in-label {
+        &.has-numberinput {
+            .label {
+                margin-left: calc(#{$size-normal} * 3);
+            }
+            &.has-numberinput-is-small {
+                .label {
+                    margin-left: calc(#{$size-small} * 3);
+                }
+            }
+            &.has-numberinput-is-medium {
+                .label {
+                    margin-left: calc(#{$size-medium} * 3);
+                }
+            }
+            &.has-numberinput-is-large {
+                .label {
+                    margin-left: calc(#{$size-large} * 3);
+                }
+            }
+        }
+        &.has-numberinput-compact {
+            .label {
+                margin-left: calc(#{$size-normal} * 2.25);
+            }
+            &.has-numberinput-is-small {
+                .label {
+                    margin-left: calc(#{$size-small} * 2.25);
+                }
+            }
+            &.has-numberinput-is-medium {
+                .label {
+                    margin-left: calc(#{$size-medium} * 2.25);
+                }
+            }
+            &.has-numberinput-is-large {
+                .label {
+                    margin-left: calc(#{$size-large} * 2.25);
+                }
+            }
         }
     }
 }
