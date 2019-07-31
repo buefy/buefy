@@ -145,18 +145,20 @@ export default {
             return this.label || this.$slots.label
         },
         numberInputClasses() {
-            const numberinput = this.$slots.default.find((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)
-            if (numberinput) {
-                const classes = ['has-numberinput']
-                const controlsPosition = numberinput.componentOptions.propsData.controlsPosition
-                const size = numberinput.componentOptions.propsData.size
-                if (controlsPosition) {
-                    classes.push(`has-numberinput-${controlsPosition}`)
+            if (this.$slots.default) {
+                const numberinput = this.$slots.default.filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
+                if (numberinput) {
+                    const classes = ['has-numberinput']
+                    const controlsPosition = numberinput.componentOptions.propsData.controlsPosition
+                    const size = numberinput.componentOptions.propsData.size
+                    if (controlsPosition) {
+                        classes.push(`has-numberinput-${controlsPosition}`)
+                    }
+                    if (size) {
+                        classes.push(`has-numberinput-${size}`)
+                    }
+                    return classes
                 }
-                if (size) {
-                    classes.push(`has-numberinput-${size}`)
-                }
-                return classes
             }
             return null
         }
