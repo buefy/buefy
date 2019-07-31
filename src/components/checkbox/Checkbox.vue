@@ -27,8 +27,8 @@
 export default {
     name: 'BCheckbox',
     props: {
-        value: [String, Number, Boolean, Function, Object, Array, Symbol],
-        nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+        value: [String, Number, Boolean, Function, Object, Array],
+        nativeValue: [String, Number, Boolean, Function, Object, Array],
         indeterminate: Boolean,
         type: String,
         disabled: Boolean,
@@ -36,11 +36,11 @@ export default {
         name: String,
         size: String,
         trueValue: {
-            type: [String, Number, Boolean, Function, Object, Array, Symbol],
+            type: [String, Number, Boolean, Function, Object, Array],
             default: true
         },
         falseValue: {
-            type: [String, Number, Boolean, Function, Object, Array, Symbol],
+            type: [String, Number, Boolean, Function, Object, Array],
             default: false
         }
     },
