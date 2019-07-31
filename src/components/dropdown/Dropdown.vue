@@ -41,7 +41,7 @@ export default {
     name: 'BDropdown',
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Symbol, Function],
+            type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
         disabled: Boolean,

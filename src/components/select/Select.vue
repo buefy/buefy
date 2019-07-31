@@ -51,7 +51,7 @@ export default {
     inheritAttrs: false,
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Symbol, Function],
+            type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
         placeholder: String,
