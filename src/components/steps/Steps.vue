@@ -41,7 +41,7 @@
                 @click.prevent="prev"
                 :aria-label="ariaPreviousLabel">
                 <b-icon
-                    icon="chevron-left"
+                    :icon="newIconPrev"
                     :pack="iconPack"
                     both
                     aria-hidden="true"/>
@@ -54,7 +54,7 @@
                 @click.prevent="next"
                 :aria-label="ariaNextLabel">
                 <b-icon
-                    icon="chevron-right"
+                    :icon="newIconNext"
                     :pack="iconPack"
                     both
                     aria-hidden="true"/>
@@ -66,6 +66,7 @@
 <script>
 import Icon from '../icon/Icon'
 import SlotComponent from '../../utils/SlotComponent'
+import config from '../../utils/config'
 
 export default {
     name: 'BSteps',
@@ -86,6 +87,8 @@ export default {
             default: false
         },
         iconPack: String,
+        iconPrev: String,
+        iconNext: String,
         hasNavigation: {
             type: Boolean,
             default: true
@@ -114,9 +117,16 @@ export default {
             return this.stepItems.slice().reverse()
         },
 
+        newIconPrev() {
+            return this.iconPrev || config.defaultIconPrev
+        },
+        newIconNext() {
+            return this.iconNext || config.defaultIconNext
+        },
+
         /**
-            * Check the first visible step index.
-            */
+         * Check the first visible step index.
+         */
         firstVisibleStepIndex() {
             return this.stepItems.findIndex((step, idx) => {
                 return step.visible
@@ -124,8 +134,8 @@ export default {
         },
 
         /**
-            * Check if previous button is available.
-            */
+         * Check if previous button is available.
+         */
         hasPrev() {
             return this.firstVisibleStepIndex >= 0 &&
                 this.activeStep > this.firstVisibleStepIndex
