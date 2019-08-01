@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.8.1
+
+### Fixes
+
+* Fix field component when slot is empty
+* Revert breaking change ``v-on:$listeners`` to internal native select of select
+
 ## 0.8.0
 
 ### Breaking changes
