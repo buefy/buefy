@@ -105,10 +105,14 @@ export default {
             this.$emit('update:isActive', this.internalIsActive)
         },
         setBodyClass(className) {
-            document.body.classList.add(className)
+            if (typeof window !== 'undefined') {
+                document.body.classList.add(className)
+            }
         },
         removeBodyClass(className) {
-            document.body.classList.remove(className)
+            if (typeof window !== 'undefined') {
+                document.body.classList.remove(className)
+            }
         },
         checkIfFixedPropertiesAreColliding() {
             const areColliding = this.fixedTop && this.fixedBottom

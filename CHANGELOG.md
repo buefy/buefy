@@ -6,6 +6,7 @@
 
 * Fix field component when slot is empty
 * Revert breaking change ``v-on:$listeners`` to internal native select of select
+* Fix #1620 navbar SSR support
 
 ## 0.8.0
 
