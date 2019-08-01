@@ -61,7 +61,7 @@ export default {
         nearbySelectableMonthDays: Boolean,
         showWeekNumber: {
             type: Boolean,
-            default: () => 0
+            default: () => false
         },
         rulesForFirstWeek: {
             type: Number,

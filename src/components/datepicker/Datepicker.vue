@@ -357,7 +357,7 @@ export default {
         },
         showWeekNumber: {
             type: Boolean,
-            default: () => 0
+            default: () => false
         },
         rulesForFirstWeek: {
             type: Number,
