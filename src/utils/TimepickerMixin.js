@@ -177,7 +177,7 @@ export default {
             const minutes = []
             for (let i = 0; i < 60; i += this.incrementMinutes) {
                 minutes.push({
-                    label: this.formatNumber(i),
+                    label: this.formatNumber(i, true),
                     value: i
                 })
             }
@@ -188,7 +188,7 @@ export default {
             const seconds = []
             for (let i = 0; i < 60; i += this.incrementSeconds) {
                 seconds.push({
-                    label: this.formatNumber(i),
+                    label: this.formatNumber(i, true),
                     value: i
                 })
             }
@@ -501,8 +501,8 @@ export default {
             }
         },
 
-        formatNumber(value, isMinute) {
-            return this.isHourFormat24 || isMinute
+        formatNumber(value, prependZero) {
+            return this.isHourFormat24 || prependZero
                 ? this.pad(value)
                 : value
         },
