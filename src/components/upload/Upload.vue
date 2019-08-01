@@ -76,7 +76,8 @@ export default {
 
             if (!this.newValue || (Array.isArray(this.newValue) && this.newValue.length === 0) ||
             !inputFiles[0] ||
-            !this.newValue.some(function (a) { return a.name === inputFiles[0].name })) {
+            (Array.isArray(this.newValue) &&
+            !this.newValue.some(function (a) { return a.name === inputFiles[0].name }))) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
