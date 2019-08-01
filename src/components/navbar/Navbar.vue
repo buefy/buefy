@@ -24,7 +24,6 @@
 
 <script>
 import NavbarBurger from './NavbarBurger.vue'
-import NavbarItem from './NavbarItem.vue'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
@@ -32,8 +31,7 @@ const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
 export default {
     name: 'BNavbar',
     components: {
-        NavbarBurger,
-        NavbarItem
+        NavbarBurger
     },
     props: {
         type: [String, Object],
