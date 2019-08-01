@@ -1,6 +1,8 @@
 <template>
     <div class="datepicker-row">
-        <a class="datepicker-cell" v-if="showWeekNumber"> {{ getWeekNumber(week[6]) }} </a>
+        <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
+            {{ getWeekNumber(week[6]) }}
+        </a>
         <template v-for="(day, index) in week">
             <a
                 v-if="selectableDate(day) && !disabled"

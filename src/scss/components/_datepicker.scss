@@ -78,6 +78,9 @@
                 &.is-nearby:not(.is-selected) {
                     color: $grey-light;
                 }
+                &.is-week-number {
+                    cursor: default;
+                }
             }
             &.has-events {
                 .datepicker-cell {

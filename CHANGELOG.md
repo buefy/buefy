@@ -2,6 +2,10 @@
 
 ## 0.8.1
 
+### New features
+
+Add ``show-week-number`` to datepicker (thanks @quadra-diffusion)
+
 ### Fixes
 
 * Fix field component when slot is empty
