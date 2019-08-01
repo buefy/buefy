@@ -8,6 +8,7 @@ Add ``show-week-number`` to datepicker (thanks @quadra-diffusion)
 
 ### Fixes
 
+* Fix navbar internal implementation (thanks @wanxe)
 * Fix field component when slot is empty
 * Revert breaking change ``v-on:$listeners`` to internal native select of select
 * Fix #1616 upload check on change when single (thanks @yxngl)
