@@ -74,10 +74,11 @@ export default {
             let inputFiles = this.$refs.input.files
             this.newValue = value
 
-            if (!this.newValue || (Array.isArray(this.newValue) && this.newValue.length === 0) ||
-            !inputFiles[0] ||
-            (Array.isArray(this.newValue) &&
-            !this.newValue.some(function (a) { return a.name === inputFiles[0].name }))) {
+            if (!this.newValue ||
+                (Array.isArray(this.newValue) && this.newValue.length === 0) ||
+                !inputFiles[0] ||
+                (Array.isArray(this.newValue) &&
+                    !this.newValue.some(function (a) { return a.name === inputFiles[0].name }))) {
                 this.$refs.input.value = null
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
