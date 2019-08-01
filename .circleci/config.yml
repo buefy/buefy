@@ -36,7 +36,6 @@ jobs:
       - run:
           name: Run tests
           command: npm run unit
-          no_output_timeout: 20m
 
       # run codecov
       - run:
