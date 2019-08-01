@@ -7,6 +7,7 @@
 * Fix field component when slot is empty
 * Revert breaking change ``v-on:$listeners`` to internal native select of select
 * Fix #1616 upload check on change when single (thanks @yxngl)
+* Fix #1619 incorrect minute display format for 12 hour using timepicker
 * Fix #1620 navbar SSR support
 
 ## 0.8.0

@@ -203,11 +203,6 @@ export default {
                 ? (!this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23)
                 : 59
         },
-        faceFormatter() {
-            return this.isSelectingHour && !this.isHourFormat24
-                ? (val) => val
-                : this.formatNumber
-        },
         faceSize() {
             return this.pickerSize - (outerPadding * 2)
         },

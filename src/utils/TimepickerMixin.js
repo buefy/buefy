@@ -471,7 +471,7 @@ export default {
                 const hours = date.getHours()
                 const minutes = date.getMinutes()
                 const seconds = date.getSeconds()
-                return this.formatNumber(hours) + ':' +
+                return this.formatNumber(hours, true) + ':' +
                     this.formatNumber(minutes, true) + ':' +
                     this.formatNumber(seconds, true)
             }
