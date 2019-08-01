@@ -72,6 +72,20 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-prev</code>',
+                description: 'Icon to use for previous button',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>icon-next</code>',
+                description: 'Icon to use for next button',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link.',
                 type: 'String',
