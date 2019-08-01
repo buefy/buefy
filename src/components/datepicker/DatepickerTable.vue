@@ -26,6 +26,9 @@
                 :date-creator="dateCreator"
                 :nearby-month-days="nearbyMonthDays"
                 :nearby-selectable-month-days="nearbySelectableMonthDays"
+                :show-week-number="showWeekNumber"
+                :first-day-of-week="firstDayOfWeek"
+                :rules-for-first-week="rulesForFirstWeek"
                 @select="updateSelectedDate"/>
         </div>
     </section>
@@ -55,7 +58,15 @@ export default {
         unselectableDaysOfWeek: Array,
         selectableDates: Array,
         nearbyMonthDays: Boolean,
-        nearbySelectableMonthDays: Boolean
+        nearbySelectableMonthDays: Boolean,
+        showWeekNumber: {
+            type: Boolean,
+            default: () => 0
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        }
     },
     computed: {
         visibleDayNames() {
@@ -66,6 +77,7 @@ export default {
                 visibleDayNames.push(currentDayName)
                 index++
             }
+            if (this.showWeekNumber) visibleDayNames.unshift('')
             return visibleDayNames
         },
 
