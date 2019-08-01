@@ -21,6 +21,22 @@ export default [
                 default: '<code></code>'
             },
             {
+                name: '<code>defaultIconPrev</code>',
+                description: `Icon used internally for prev. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>defaultIconNext</code>',
+                description: `Icon used internally for next. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>defaultContainerElement</code>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
