@@ -107,6 +107,20 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-prev</code>',
+                description: 'Icon to use for previous month',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>icon-next</code>',
+                description: 'Icon to use for next month',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>unselectable-dates</code>',
                 description: 'Array of unselectable dates',
                 type: 'Array',

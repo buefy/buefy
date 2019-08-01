@@ -48,7 +48,7 @@
                             @keydown.space.prevent="prev">
 
                             <b-icon
-                                icon="chevron-left"
+                                :icon="newIconPrev"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable"/>
@@ -64,7 +64,7 @@
                             @keydown.space.prevent="next">
 
                             <b-icon
-                                icon="chevron-right"
+                                :icon="newIconNext"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable"/>
@@ -351,7 +351,9 @@ export default {
         nearbySelectableMonthDays: {
             type: Boolean,
             default: () => config.defaultDatepickerNearbySelectableMonthDays
-        }
+        },
+        iconPrev: String,
+        iconNext: String
     },
     data() {
         const focusedDate = this.value || this.focusedDate || this.dateCreator()
@@ -398,6 +400,13 @@ export default {
             }
 
             return arrayOfYears.reverse()
+        },
+
+        newIconPrev() {
+            return this.iconPrev || config.defaultIconPrev
+        },
+        newIconNext() {
+            return this.iconNext || config.defaultIconNext
         },
 
         showPrev() {
