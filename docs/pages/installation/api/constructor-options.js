@@ -266,6 +266,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>defaultDatepickerShowWeekNumber</code>',
+                description: 'It allows to display week number',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]

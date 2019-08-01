@@ -35,7 +35,8 @@ let config = {
     defaultFieldLabelPosition: null,
     defaultDatepickerYearsRange: [-100, 3],
     defaultDatepickerNearbyMonthDays: true,
-    defaultDatepickerNearbySelectableMonthDays: false
+    defaultDatepickerNearbySelectableMonthDays: false,
+    defaultDatepickerShowWeekNumber: false
 }
 
 export default config

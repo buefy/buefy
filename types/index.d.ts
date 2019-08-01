@@ -63,6 +63,7 @@ export declare type BuefyConfig = {
     defaultDatepickerYearsRange?: number[];
     defaultDatepickerNearbyMonthDays?: boolean;
     defaultDatepickerNearbySelectableMonthDays?: boolean;
+    defaultDatepickerShowWeekNumber?: boolean;
 };
 
 declare const _default: {

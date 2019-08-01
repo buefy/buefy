@@ -357,7 +357,7 @@ export default {
         },
         showWeekNumber: {
             type: Boolean,
-            default: () => false
+            default: () => config.defaultDatepickerShowWeekNumber
         },
         rulesForFirstWeek: {
             type: Number,
