@@ -198,6 +198,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>show-number-week</code>',
+                description: 'Display week number',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rules-for-first-week</code>',
+                description: 'Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other',
+                type: 'Number',
+                values: '-',
+                default: '<code>4</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

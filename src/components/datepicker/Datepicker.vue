@@ -107,6 +107,7 @@
                         :day-names="dayNames"
                         :month-names="monthNames"
                         :first-day-of-week="firstDayOfWeek"
+                        :rules-for-first-week="rulesForFirstWeek"
                         :min-date="minDate"
                         :max-date="maxDate"
                         :focused="focusedDateData"
@@ -120,6 +121,7 @@
                         :type-month="isTypeMonth"
                         :nearby-month-days="nearbyMonthDays"
                         :nearby-selectable-month-days="nearbySelectableMonthDays"
+                        :show-week-number="showWeekNumber"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -162,6 +164,7 @@
             :min="formatNative(minDate)"
             :disabled="disabled"
             :readonly="false"
+            :show-week-number="showWeekNumber"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChangeNativePicker"
@@ -351,6 +354,14 @@ export default {
         nearbySelectableMonthDays: {
             type: Boolean,
             default: () => config.defaultDatepickerNearbySelectableMonthDays
+        },
+        showWeekNumber: {
+            type: Boolean,
+            default: () => false
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
         }
     },
     data() {

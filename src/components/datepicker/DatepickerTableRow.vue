@@ -1,5 +1,6 @@
 <template>
     <div class="datepicker-row">
+        <a class="datepicker-cell" v-if="showWeekNumber"> {{ getWeekNumber(week[6]) }} </a>
         <template v-for="(day, index) in week">
             <a
                 v-if="selectableDate(day) && !disabled"
@@ -55,9 +56,62 @@ export default {
         indicators: String,
         dateCreator: Function,
         nearbyMonthDays: Boolean,
-        nearbySelectableMonthDays: Boolean
+        nearbySelectableMonthDays: Boolean,
+        showWeekNumber: {
+            type: Boolean,
+            default: () => false
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        },
+        firstDayOfWeek: Number
     },
     methods: {
+        firstWeekOffset(year, dow, doy) {
+            // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+            var fwd = 7 + dow - doy
+            // first-week day local weekday -- which local weekday is fwd
+            var firstJanuary = new Date(year, 0, fwd)
+            var fwdlw = (7 + firstJanuary.getDay() - dow) % 7
+            return -fwdlw + fwd - 1
+        },
+        daysInYear(year) {
+            return this.isLeapYear(year) ? 366 : 365
+        },
+        isLeapYear(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+        },
+        getSetDayOfYear(input) {
+            var dayOfYear = Math.round((input - new Date(input.getFullYear(), 0, 1)) / 864e5) + 1
+            return dayOfYear
+        },
+        weeksInYear(year, dow, doy) {
+            var weekOffset = this.firstWeekOffset(year, dow, doy)
+            var weekOffsetNext = this.firstWeekOffset(year + 1, dow, doy)
+            return (this.daysInYear(year) - weekOffset + weekOffsetNext) / 7
+        },
+        getWeekNumber(mom) {
+            var dow = this.firstDayOfWeek // first day of week
+            // Rules for the first week : 1 for the 1st January, 4 for the 4th January
+            var doy = this.rulesForFirstWeek
+            var weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy)
+            var week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1
+            var resWeek
+            var resYear
+            if (week < 1) {
+                resYear = mom.getFullYear() - 1
+                resWeek = week + this.weeksInYear(resYear, dow, doy)
+            } else if (week > this.weeksInYear(mom.getFullYear(), dow, doy)) {
+                resWeek = week - this.weeksInYear(mom.getFullYear(), dow, doy)
+                resYear = mom.getFullYear() + 1
+            } else {
+                resYear = mom.getFullYear()
+                resWeek = week
+            }
+
+            return resWeek
+        },
         /*
         * Check that selected day is within earliest/latest params and
         * is within this month
