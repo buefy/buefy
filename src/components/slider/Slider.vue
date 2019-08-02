@@ -144,6 +144,9 @@ export default {
                 left: this.barStart
             }
         },
+        sliderSize() {
+            return this.$refs.slider['clientWidth']
+        },
         rootClasses() {
             return {
                 'is-rounded': this.rounded,
@@ -223,9 +226,6 @@ export default {
             }
             this.emitChange()
         },
-        setSize() {
-            this.sliderSize = this.$refs.slider['clientWidth']
-        },
         emitChange() {
             this.$emit('change', this.isRange
                 ? [this.minValue, this.maxValue]
@@ -235,17 +235,6 @@ export default {
     created() {
         this.setValues(this.value)
         this.isThumbReversed = false
-    },
-    mounted() {
-        this.setSize()
-        if (typeof window !== 'undefined') {
-            window.addEventListener('resize', this.setSize)
-        }
-    },
-    beforeDestroy() {
-        if (typeof window !== 'undefined') {
-            window.removeEventListener('resize', this.setSize)
-        }
     }
 }
 </script>
