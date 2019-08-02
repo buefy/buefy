@@ -12,7 +12,9 @@
   "module": "dist/esm/index.js",
   "unpkg": "dist/buefy.min.js",
   "typings": "types/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "dist",
     "src",
