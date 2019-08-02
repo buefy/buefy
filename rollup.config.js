@@ -143,7 +143,11 @@ export default () => {
         config = config.filter((c) => c.output.format === 'umd')
         config.forEach((c) => {
             c.output.file = c.output.file.replace(/\.js/g, '.min.js')
-            c.plugins.push(terser())
+            c.plugins.push(terser({
+                output: {
+                    comments: "/^!/"
+                }
+            }))
         })
     }
     return config
