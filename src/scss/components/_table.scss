@@ -173,7 +173,7 @@
         }
     }
 
-    .level {
+    .level:not(.top) {
         padding-bottom: 1.5rem;
     }
 

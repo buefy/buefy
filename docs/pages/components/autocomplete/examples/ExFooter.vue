@@ -48,7 +48,7 @@
         },
         methods: {
             showAddFruit() {
-                this.$dialog.prompt({
+                this.$buefy.dialog.prompt({
                     message: `Fruit`,
                     inputAttrs: {
                         placeholder: 'e.g. Watermelon',

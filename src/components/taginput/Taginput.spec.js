@@ -9,3 +9,13 @@ describe('BTaginput', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 })
+
+it('no display counter when hasCounter property set for false', () => {
+    const wrapper = shallowMount(BTaginput, {
+        propsData: { maxlength: 100 }
+    })
+    expect(wrapper.find('small.counter').exists()).toBeTruthy()
+
+    wrapper.setProps({ hasCounter: false })
+    expect(wrapper.find('small.counter').exists()).toBeFalsy()
+})

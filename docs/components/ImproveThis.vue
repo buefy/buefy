@@ -18,9 +18,9 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            githubPath: String
-        }
+export default {
+    props: {
+        githubPath: String
     }
+}
 </script>

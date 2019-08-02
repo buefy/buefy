@@ -13,7 +13,7 @@
         border-bottom: 1px solid $grey-lighter;
     }
     .datepicker-content {
-        height: 16.25rem;
+        height: 16.25rem;   
     }
     .datepicker-footer {
         margin-top: 0.875rem;
@@ -41,26 +41,45 @@
             display: table-row-group;
             .datepicker-row {
                 display: table-row;
+            }
+            .datepicker-months {
+                display: inline-flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                width: 17rem;
                 .datepicker-cell {
-                    &.is-unselectable {
-                        color: $grey-light;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 33.33%;
+                    height: 2.5rem;
+                }
+            }
+            .datepicker-cell {
+                &.is-unselectable {
+                    color: $grey-light;
+                }
+                &.is-today {
+                    border: solid 1px rgba($primary, 0.5);
+                }
+                &.is-selectable {
+                    color: $grey-dark;
+                    &:hover:not(.is-selected),
+                    &:focus:not(.is-selected) {
+                        background-color: $background;
+                        color: $black;
+                        cursor: pointer;
                     }
-                    &.is-today {
-                        border: solid 1px rgba($primary, 0.5);
-                    }
-                    &.is-selectable {
-                        color: $grey-dark;
-                        &:hover:not(.is-selected),
-                        &:focus:not(.is-selected) {
-                            background-color: $background;
-                            color: $black;
-                            cursor: pointer;
-                        }
-                    }
-                    &.is-selected {
-                        background-color: $primary;
-                        color: $primary-invert;
-                    }
+                }
+                &.is-selected {
+                    background-color: $primary;
+                    color: $primary-invert;
+                }
+                &.is-nearby:not(.is-selected) {
+                    color: $grey-light;
+                }
+                &.is-week-number {
+                    cursor: default;
                 }
             }
             &.has-events {
@@ -118,25 +137,5 @@
     }
     &.is-large {
         @include control-large;
-    }
-    @include tablet-only {
-        .datepicker-content {
-            height: 19.75rem;
-        }
-        .datepicker-table {
-            .datepicker-cell {
-                padding: 0.75rem 1rem;
-            }
-        }
-    }
-    @include mobile {
-        .datepicker-content {
-            height: 12.75rem;
-        }
-        .datepicker-table {
-            .datepicker-cell {
-                padding: 0.25rem 0.5rem;
-            }
-        }
     }
 }

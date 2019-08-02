@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
     created(): any {
-        this.$dialog
+        this.$buefy.dialog
     },
     methods: {
         test(): string {

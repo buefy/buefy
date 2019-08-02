@@ -55,7 +55,7 @@ export default [
             },
             {
                 name: '<code>max</code>',
-                description: 'Maxinimum allowed value',
+                description: 'Maximum allowed value',
                 type: 'Number, String',
                 values: '—',
                 default: '—'

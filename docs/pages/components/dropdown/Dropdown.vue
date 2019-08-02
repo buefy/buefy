@@ -9,6 +9,7 @@
 
         <Example :component="ExContentPosition" :code="ExContentPositionCode" title="Content and position" paddingless>
             <p>Add the <code>custom</code> prop to the item to add <strong>any type of content</strong>.</p>
+            <p>Add the <code>:focusable="false"</code> prop to the <code>dropdown-item</code> if you dont want it to be focusable.</p>
         </Example>
 
         <Example :component="ExHasLinkDisabled" :code="ExHasLinkDisabledCode" title="Links within" paddingless>
@@ -16,6 +17,14 @@
         </Example>
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customizing with v-model"/>
+
+        <Example :component="ExCustomizeMultiple" :code="ExCustomizeMultipleCode" title="Multiple">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.7.6</span>
+            </div>
+            <p>Add the <code>multiple</code> prop to select one or more item.</p>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -36,6 +45,9 @@
     import ExCustomize from './examples/ExCustomize'
     import ExCustomizeCode from '!!raw-loader!./examples/ExCustomize'
 
+    import ExCustomizeMultiple from './examples/ExCustomizeMultiple'
+    import ExCustomizeMultipleCode from '!!raw-loader!./examples/ExCustomizeMultiple'
+
     export default {
         data() {
             return {
@@ -47,7 +59,9 @@
                 ExHasLinkDisabled,
                 ExHasLinkDisabledCode,
                 ExCustomize,
-                ExCustomizeCode
+                ExCustomizeCode,
+                ExCustomizeMultiple,
+                ExCustomizeMultipleCode
             }
         }
     }

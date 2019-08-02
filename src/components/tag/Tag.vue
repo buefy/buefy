@@ -10,6 +10,7 @@
         <a
             class="tag is-delete"
             role="button"
+            :aria-label="ariaCloseLabel"
             :tabindex="tabstop ? 0 : false"
             :disabled="disabled"
             :class="[size, { 'is-rounded': rounded }]"
@@ -28,6 +29,7 @@
         <a
             v-if="closable"
             role="button"
+            :aria-label="ariaCloseLabel"
             class="delete is-small"
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
@@ -38,31 +40,32 @@
 </template>
 
 <script>
-    export default {
-        name: 'BTag',
-        props: {
-            attached: Boolean,
-            closable: Boolean,
-            type: String,
-            size: String,
-            rounded: Boolean,
-            disabled: Boolean,
-            ellipsis: Boolean,
-            tabstop: {
-                type: Boolean,
-                default: true
-            }
+export default {
+    name: 'BTag',
+    props: {
+        attached: Boolean,
+        closable: Boolean,
+        type: String,
+        size: String,
+        rounded: Boolean,
+        disabled: Boolean,
+        ellipsis: Boolean,
+        tabstop: {
+            type: Boolean,
+            default: true
         },
-        methods: {
-            /**
-             * Emit close event when delete button is clicked
-             * or delete key is pressed.
-             */
-            close() {
-                if (this.disabled) return
+        ariaCloseLabel: String
+    },
+    methods: {
+        /**
+        * Emit close event when delete button is clicked
+        * or delete key is pressed.
+        */
+        close() {
+            if (this.disabled) return
 
-                this.$emit('close')
-            }
+            this.$emit('close')
         }
     }
+}
 </script>

@@ -1,0 +1,45 @@
+
+.progress-wrapper {
+    position: relative;
+
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+
+    .progress-value {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: calc(1rem / 1.5);
+        line-height: 1rem;
+        font-weight: bold;
+    }
+
+    .progress {
+        margin-bottom: 0;
+
+        &.is-small {
+            + .progress-value {
+                font-size: calc(0.75rem / 1.5);
+                line-height: 0.75rem;
+            }
+        }
+        &.is-medium {
+            + .progress-value {
+                font-size: calc(1.25rem / 1.5);
+                line-height: 1.25rem;
+            }
+        }
+        &.is-large {
+            + .progress-value {
+                font-size: calc(1.5rem / 1.5);
+                line-height: 1.5rem;
+            }
+        }
+
+        &::-webkit-progress-value {
+            transition: width 0.5s ease;
+        }
+    }
+}

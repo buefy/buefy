@@ -54,17 +54,18 @@
     export default {
         methods: {
             imageModal() {
-                this.$modal.open(
+                this.$buefy.modal.open(
                     `<p class="image is-4by3">
                         <img src="https://buefy.org/static/img/placeholder-1280x960.png">
                     </p>`
                 )
             },
             cardModal() {
-                this.$modal.open({
+                this.$buefy.modal.open({
                     parent: this,
                     component: ModalForm,
-                    hasModalCard: true
+                    hasModalCard: true,
+                    customClass: 'custom-class custom-class-2'
                 })
             }
         }

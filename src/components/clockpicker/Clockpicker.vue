@@ -21,6 +21,7 @@
                 :readonly="!editable"
                 :rounded="rounded"
                 v-bind="$attrs"
+                :use-html5-validation="useHtml5Validation"
                 @click.native.stop="toggle(true)"
                 @keyup.native.enter="toggle(true)"
                 @change.native="onChangeNativePicker"
@@ -85,7 +86,7 @@
                             :min="minFaceValue"
                             :max="maxFaceValue"
                             :face-numbers="isSelectingHour ? hours : minutes"
-                            :disabled-values="faceDisabledValues()"
+                            :disabled-values="faceDisabledValues"
                             :double="isSelectingHour && isHourFormat24"
                             :value="isSelectingHour ? hoursSelected : minutesSelected"
                             @input="onClockInput"
@@ -104,7 +105,7 @@
             ref="input"
             type="time"
             autocomplete="off"
-            :value="formatHHMMSS(value)"
+            :value="formatHHMMSS(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
@@ -115,6 +116,7 @@
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
+            :use-html5-validation="useHtml5Validation"
             @click.native.stop="toggle(true)"
             @keyup.native.enter="toggle(true)"
             @change.native="onChangeNativePicker"
@@ -125,118 +127,110 @@
 </template>
 
 <script>
-    import TimepickerMixin from '../../utils/TimepickerMixin'
-    import Dropdown from '../dropdown/Dropdown'
-    import DropdownItem from '../dropdown/DropdownItem'
-    import Input from '../input/Input'
-    import Field from '../field/Field'
-    import Icon from '../icon/Icon'
-    import ClockpickerFace from './ClockpickerFace'
+import TimepickerMixin from '../../utils/TimepickerMixin'
+import Dropdown from '../dropdown/Dropdown'
+import DropdownItem from '../dropdown/DropdownItem'
+import Input from '../input/Input'
+import Field from '../field/Field'
+import Icon from '../icon/Icon'
+import ClockpickerFace from './ClockpickerFace'
 
-    const outerPadding = 12
+const outerPadding = 12
 
-    export default {
-        name: 'BClockpicker',
-        components: {
-            [ClockpickerFace.name]: ClockpickerFace,
-            [Input.name]: Input,
-            [Field.name]: Field,
-            [Icon.name]: Icon,
-            [Dropdown.name]: Dropdown,
-            [DropdownItem.name]: DropdownItem
+export default {
+    name: 'BClockpicker',
+    components: {
+        [ClockpickerFace.name]: ClockpickerFace,
+        [Input.name]: Input,
+        [Field.name]: Field,
+        [Icon.name]: Icon,
+        [Dropdown.name]: Dropdown,
+        [DropdownItem.name]: DropdownItem
+    },
+    mixins: [TimepickerMixin],
+    props: {
+        pickerSize: {
+            type: Number,
+            default: 290
         },
-        mixins: [TimepickerMixin],
-        props: {
-            pickerSize: {
-                type: Number,
-                default: 290
-            },
-            hourFormat: {
-                type: String,
-                default: '12',
-                validator: (value) => {
-                    return value === '24' || value === '12'
-                }
-            },
-            incrementMinutes: {
-                type: Number,
-                default: 5
-            },
-            autoSwitch: {
-                type: Boolean,
-                default: true
-            },
-            type: {
-                type: String,
-                default: 'is-primary'
+        hourFormat: {
+            type: String,
+            default: '12',
+            validator: (value) => {
+                return value === '24' || value === '12'
             }
         },
-        data() {
-            return {
-                isSelectingHour: true,
-                isDragging: false,
-                _isClockpicker: true
-            }
+        incrementMinutes: {
+            type: Number,
+            default: 5
         },
-        computed: {
-            hoursDisplay() {
-                if (this.hoursSelected == null) return '--'
-                if (this.isHourFormat24) return this.pad(this.hoursSelected)
+        autoSwitch: {
+            type: Boolean,
+            default: true
+        },
+        type: {
+            type: String,
+            default: 'is-primary'
+        }
+    },
+    data() {
+        return {
+            isSelectingHour: true,
+            isDragging: false,
+            _isClockpicker: true
+        }
+    },
+    computed: {
+        hoursDisplay() {
+            if (this.hoursSelected == null) return '--'
+            if (this.isHourFormat24) return this.pad(this.hoursSelected)
 
-                let display = this.hoursSelected
-                if (this.meridienSelected === this.PM) display -= 12
-                if (display === 0) display = 12
-                return display
-            },
-            minutesDisplay() {
-                return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected)
-            },
-            minFaceValue() {
-                return this.isSelectingHour &&
-                    !this.isHourFormat24 &&
-                    this.meridienSelected === this.PM ? 12 : 0
-            },
-            maxFaceValue() {
-                return this.isSelectingHour
-                    ? (!this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23)
-                    : 59
-            },
-            faceFormatter() {
-                return this.isSelectingHour && !this.isHourFormat24
-                    ? (val) => val
-                    : this.formatNumber
-            },
-            faceSize() {
-                return this.pickerSize - (outerPadding * 2)
+            let display = this.hoursSelected
+            if (this.meridienSelected === this.PM) display -= 12
+            if (display === 0) display = 12
+            return display
+        },
+        minutesDisplay() {
+            return this.minutesSelected == null ? '--' : this.pad(this.minutesSelected)
+        },
+        minFaceValue() {
+            return this.isSelectingHour &&
+                !this.isHourFormat24 &&
+            this.meridienSelected === this.PM ? 12 : 0
+        },
+        maxFaceValue() {
+            return this.isSelectingHour
+                ? (!this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23)
+                : 59
+        },
+        faceSize() {
+            return this.pickerSize - (outerPadding * 2)
+        },
+        faceDisabledValues() {
+            return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
+        }
+    },
+    methods: {
+        onClockInput(value) {
+            if (this.isSelectingHour) {
+                this.hoursSelected = value
+                this.onHoursChange(value)
+            } else {
+                this.minutesSelected = value
+                this.onMinutesChange(value)
             }
         },
-        methods: {
-            onClockInput(value) {
-                if (this.isSelectingHour) {
-                    this.hoursSelected = value
-                    this.onHoursChange(value)
-                } else {
-                    this.minutesSelected = value
-                    this.onMinutesChange(value)
-                }
-            },
-            onClockChange(value) {
-                if (this.autoSwitch && this.isSelectingHour) {
-                    this.isSelectingHour = !this.isSelectingHour
-                }
-            },
-            onMeridienClick(value) {
-                if (this.meridienSelected !== value) {
-                    this.meridienSelected = value
-                    this.onMeridienChange(value)
-                }
-            },
-            faceDisabledValues() {
-                return this.isSelectingHour ? this.isHourDisabled : this.isMinuteDisabled
+        onClockChange(value) {
+            if (this.autoSwitch && this.isSelectingHour) {
+                this.isSelectingHour = !this.isSelectingHour
             }
         },
-        created() {
-            this.incrementMinutes = 5
+        onMeridienClick(value) {
+            if (this.meridienSelected !== value) {
+                this.meridienSelected = value
+                this.onMeridienChange(value)
+            }
         }
     }
+}
 </script>

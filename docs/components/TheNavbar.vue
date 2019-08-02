@@ -116,43 +116,43 @@
 </template>
 
 <script>
-    import buefyPackage from '../../package'
-    import bulmaPackage from 'bulma/package'
+import buefyPackage from '../../package'
+import bulmaPackage from 'bulma/package'
 
-    export default {
-        props: {
-            light: Boolean
-        },
-        data() {
-            return {
-                isMenuActive: false,
-                version: buefyPackage.version,
-                bulmaVersion: bulmaPackage.version
-            }
-        },
-        methods: {
-            tweet() {
-                const width = 575
-                const height = 400
-                const left = (window.screen.width - width) / 2
-                const top = (window.screen.height - height) / 2
-                const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa, @walter_tommasi`
-                const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
-
-                window.open(url, '', opts)
-            },
-            closeMenu() {
-                this.isMenuActive = false
-            },
-            toggleHtmlClip() {
-                document
-                    .documentElement
-                    .classList
-                    .toggle('is-clipped-touch', this.isMenuActive)
-            }
-        },
-        mounted() {
-            this.$eventHub.$on('navigate', this.closeMenu)
+export default {
+    props: {
+        light: Boolean
+    },
+    data() {
+        return {
+            isMenuActive: false,
+            version: buefyPackage.version,
+            bulmaVersion: bulmaPackage.version
         }
+    },
+    methods: {
+        tweet() {
+            const width = 575
+            const height = 400
+            const left = (window.screen.width - width) / 2
+            const top = (window.screen.height - height) / 2
+            const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa, @walter_tommasi`
+            const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
+
+            window.open(url, '', opts)
+        },
+        closeMenu() {
+            this.isMenuActive = false
+        },
+        toggleHtmlClip() {
+            document
+                .documentElement
+                .classList
+                .toggle('is-clipped-touch', this.isMenuActive)
+        }
+    },
+    mounted() {
+        this.$eventHub.$on('navigate', this.closeMenu)
     }
+}
 </script>

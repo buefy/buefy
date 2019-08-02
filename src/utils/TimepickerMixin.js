@@ -7,6 +7,62 @@ const PM = 'PM'
 const HOUR_FORMAT_24 = '24'
 const HOUR_FORMAT_12 = '12'
 
+const defaultTimeFormatter = (date, vm) => {
+    let hours = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+    let period = ''
+    if (vm.hourFormat === HOUR_FORMAT_12) {
+        period = ' ' + (hours < 12 ? AM : PM)
+        if (hours > 12) {
+            hours -= 12
+        } else if (hours === 0) {
+            hours = 12
+        }
+    }
+    return vm.pad(hours) + ':' + vm.pad(minutes) +
+        (vm.enableSeconds ? (':' + vm.pad(seconds)) : '') + period
+}
+
+const defaultTimeParser = (timeString, vm) => {
+    if (timeString) {
+        let am = false
+        if (vm.hourFormat === HOUR_FORMAT_12) {
+            const dateString12 = timeString.split(' ')
+            timeString = dateString12[0]
+            am = dateString12[1] === AM
+        }
+        const time = timeString.split(':')
+        let hours = parseInt(time[0], 10)
+        const minutes = parseInt(time[1], 10)
+        const seconds = vm.enableSeconds ? parseInt(time[2], 10) : 0
+        if (isNaN(hours) || hours < 0 || hours > 23 ||
+            (vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
+            isNaN(minutes) || minutes < 0 || minutes > 59) {
+            return null
+        }
+        let d = null
+        if (vm.computedValue && !isNaN(vm.computedValue)) {
+            d = new Date(vm.computedValue)
+        } else {
+            d = new Date()
+            d.setMilliseconds(0)
+        }
+        d.setSeconds(seconds)
+        d.setMinutes(minutes)
+        if (vm.hourFormat === HOUR_FORMAT_12) {
+            if (am && hours === 12) {
+                hours = 0
+            } else if (!am && hours !== 12) {
+                hours += 12
+            }
+        }
+        d.setHours(hours)
+        return new Date(d.getTime())
+    }
+    return null
+}
+
 export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
@@ -29,16 +85,28 @@ export default {
             type: Number,
             default: 1
         },
+        incrementSeconds: {
+            type: Number,
+            default: 1
+        },
         timeFormatter: {
             type: Function,
-            default: (date) => {
-                this.formatTime(date)
+            default: (date, vm) => {
+                if (typeof config.defaultTimeFormatter === 'function') {
+                    return config.defaultTimeFormatter(date)
+                } else {
+                    return defaultTimeFormatter(date, vm)
+                }
             }
         },
         timeParser: {
             type: Function,
-            default: (date) => {
-                this.parseTime(date)
+            default: (date, vm) => {
+                if (typeof config.defaultTimeParser === 'function') {
+                    return config.defaultTimeParser(date)
+                } else {
+                    return defaultTimeParser(date, vm)
+                }
             }
         },
         mobileNative: {
@@ -49,13 +117,17 @@ export default {
         },
         position: String,
         unselectableTimes: Array,
-        openOnFocus: Boolean
+        openOnFocus: Boolean,
+        enableSeconds: Boolean,
+        defaultMinutes: Number,
+        defaultSeconds: Number
     },
     data() {
         return {
             dateSelected: this.value,
             hoursSelected: null,
             minutesSelected: null,
+            secondsSelected: null,
             meridienSelected: null,
             _elementRef: 'input',
             AM,
@@ -105,12 +177,24 @@ export default {
             const minutes = []
             for (let i = 0; i < 60; i += this.incrementMinutes) {
                 minutes.push({
-                    label: this.formatNumber(i),
+                    label: this.formatNumber(i, true),
                     value: i
                 })
             }
             return minutes
         },
+
+        seconds() {
+            const seconds = []
+            for (let i = 0; i < 60; i += this.incrementSeconds) {
+                seconds.push({
+                    label: this.formatNumber(i, true),
+                    value: i
+                })
+            }
+            return seconds
+        },
+
         meridiens() {
             return [AM, PM]
         },
@@ -137,7 +221,6 @@ export default {
         value: {
             handler(value) {
                 this.updateInternalState(value)
-                this.toggle(false)
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             },
             immediate: true
@@ -152,37 +235,63 @@ export default {
                     this.hoursSelected -= 12
                 }
             }
-            this.updateDateSelected(this.hoursSelected, this.minutesSelected, value)
+            this.updateDateSelected(
+                this.hoursSelected,
+                this.minutesSelected,
+                this.enableSeconds ? this.secondsSelected : 0,
+                value)
         },
 
         onHoursChange(value) {
+            if (!this.minutesSelected && this.defaultMinutes) {
+                this.minutesSelected = this.defaultMinutes
+            }
+            if (!this.secondsSelected && this.defaultSeconds) {
+                this.secondsSelected = this.defaultSeconds
+            }
             this.updateDateSelected(
                 parseInt(value, 10),
                 this.minutesSelected,
+                this.enableSeconds ? this.secondsSelected : 0,
                 this.meridienSelected
             )
         },
 
         onMinutesChange(value) {
+            if (!this.secondsSelected && this.defaultSeconds) {
+                this.secondsSelected = this.defaultSeconds
+            }
             this.updateDateSelected(
                 this.hoursSelected,
+                parseInt(value, 10),
+                this.enableSeconds ? this.secondsSelected : 0,
+                this.meridienSelected
+            )
+        },
+
+        onSecondsChange(value) {
+            this.updateDateSelected(
+                this.hoursSelected,
+                this.minutesSelected,
                 parseInt(value, 10),
                 this.meridienSelected
             )
         },
 
-        updateDateSelected(hours, minutes, meridiens) {
+        updateDateSelected(hours, minutes, seconds, meridiens) {
             if (hours != null && minutes != null &&
                 ((!this.isHourFormat24 && meridiens !== null) || this.isHourFormat24)) {
-                if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    this.dateSelected = new Date(this.dateSelected)
+                let time = null
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    time = new Date(this.computedValue)
                 } else {
-                    this.dateSelected = new Date()
-                    this.dateSelected.setMilliseconds(0)
-                    this.dateSelected.setSeconds(0)
+                    time = new Date()
+                    time.setMilliseconds(0)
                 }
-                this.dateSelected.setHours(hours)
-                this.dateSelected.setMinutes(minutes)
+                time.setHours(hours)
+                time.setMinutes(minutes)
+                time.setSeconds(seconds)
+                this.computedValue = new Date(time.getTime())
             }
         },
 
@@ -190,10 +299,12 @@ export default {
             if (value) {
                 this.hoursSelected = value.getHours()
                 this.minutesSelected = value.getMinutes()
+                this.secondsSelected = value.getSeconds()
                 this.meridienSelected = value.getHours() >= 12 ? PM : AM
             } else {
                 this.hoursSelected = null
                 this.minutesSelected = null
+                this.secondsSelected = null
                 this.meridienSelected = AM
             }
             this.dateSelected = value
@@ -213,18 +324,19 @@ export default {
             }
             if (this.unselectableTimes) {
                 if (!disabled) {
-                    if (this.minutesSelected !== null) {
-                        const unselectable = this.unselectableTimes.filter((time) => {
+                    const unselectable = this.unselectableTimes.filter((time) => {
+                        if (this.enableSeconds && this.secondsSelected !== null) {
+                            return time.getHours() === hour &&
+                                time.getMinutes() === this.minutesSelected &&
+                                time.getSeconds() === this.secondsSelected
+                        } else if (this.minutesSelected !== null) {
                             return time.getHours() === hour &&
                                 time.getMinutes() === this.minutesSelected
-                        })
-                        disabled = unselectable.length > 0
-                    } else {
-                        const unselectable = this.unselectableTimes.filter((time) => {
+                        } else {
                             return time.getHours() === hour
-                        })
-                        disabled = unselectable.length === this.minutes.length
-                    }
+                        }
+                    })
+                    disabled = unselectable.length > 0
                 }
             }
             return disabled
@@ -244,8 +356,52 @@ export default {
                     if (this.maxTime) {
                         if (!disabled) {
                             const maxHours = this.maxTime.getHours()
-                            const minMinutes = this.maxTime.getMinutes()
-                            disabled = this.hoursSelected === maxHours && minute > minMinutes
+                            const maxMinutes = this.maxTime.getMinutes()
+                            disabled = this.hoursSelected === maxHours && minute > maxMinutes
+                        }
+                    }
+                }
+                if (this.unselectableTimes) {
+                    if (!disabled) {
+                        const unselectable = this.unselectableTimes.filter((time) => {
+                            if (this.enableSeconds && this.secondsSelected !== null) {
+                                return time.getHours() === this.hoursSelected &&
+                                    time.getMinutes() === minute &&
+                                    time.getSeconds() === this.secondsSelected
+                            } else {
+                                return time.getHours() === this.hoursSelected &&
+                                    time.getMinutes() === minute
+                            }
+                        })
+                        disabled = unselectable.length > 0
+                    }
+                }
+            }
+            return disabled
+        },
+
+        isSecondDisabled(second) {
+            let disabled = false
+            if (this.minutesSelected !== null) {
+                if (this.isMinuteDisabled(this.minutesSelected)) {
+                    disabled = true
+                } else {
+                    if (this.minTime) {
+                        const minHours = this.minTime.getHours()
+                        const minMinutes = this.minTime.getMinutes()
+                        const minSeconds = this.minTime.getSeconds()
+                        disabled = this.hoursSelected === minHours &&
+                            this.minutesSelected === minMinutes &&
+                            second < minSeconds
+                    }
+                    if (this.maxTime) {
+                        if (!disabled) {
+                            const maxHours = this.maxTime.getHours()
+                            const maxMinutes = this.maxTime.getMinutes()
+                            const maxSeconds = this.maxTime.getSeconds()
+                            disabled = this.hoursSelected === maxHours &&
+                                this.minutesSelected === maxMinutes &&
+                                second > maxSeconds
                         }
                     }
                 }
@@ -253,7 +409,8 @@ export default {
                     if (!disabled) {
                         const unselectable = this.unselectableTimes.filter((time) => {
                             return time.getHours() === this.hoursSelected &&
-                                time.getMinutes() === minute
+                                time.getMinutes() === this.minutesSelected &&
+                                time.getSeconds() === second
                         })
                         disabled = unselectable.length > 0
                     }
@@ -266,7 +423,7 @@ export default {
         * Parse string into date
         */
         onChange(value) {
-            const date = this.parseTime(value)
+            const date = this.timeParser(value, this)
             this.updateInternalState(date)
             if (date && !isNaN(date)) {
                 this.computedValue = date
@@ -289,6 +446,13 @@ export default {
         },
 
         /*
+        * Close timepicker
+        */
+        close() {
+            this.toggle(false)
+        },
+
+        /*
         * Call default onFocus method and show timepicker
         */
         handleOnFocus() {
@@ -306,8 +470,10 @@ export default {
             if (value && !isNaN(date)) {
                 const hours = date.getHours()
                 const minutes = date.getMinutes()
-                return this.formatNumber(hours) + ':' +
-                    this.formatNumber(minutes, true) + ':00'
+                const seconds = date.getSeconds()
+                return this.formatNumber(hours, true) + ':' +
+                    this.formatNumber(minutes, true) + ':' +
+                    this.formatNumber(seconds, true)
             }
             return ''
         },
@@ -318,23 +484,25 @@ export default {
         onChangeNativePicker(event) {
             const date = event.target.value
             if (date) {
-                if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    this.computedValue = new Date(this.dateSelected)
+                let time = null
+                if (this.computedValue && !isNaN(this.computedValue)) {
+                    time = new Date(this.computedValue)
                 } else {
-                    this.computedValue = new Date()
-                    this.computedValue.setMilliseconds(0)
-                    this.computedValue.setSeconds(0)
+                    time = new Date()
+                    time.setMilliseconds(0)
                 }
-                const time = date.split(':')
-                this.computedValue.setHours(parseInt(time[0], 10))
-                this.computedValue.setMinutes(parseInt(time[1], 10))
+                const t = date.split(':')
+                time.setHours(parseInt(t[0], 10))
+                time.setMinutes(parseInt(t[1], 10))
+                time.setSeconds(t[2] ? parseInt(t[2], 10) : 0)
+                this.computedValue = new Date(time.getTime())
             } else {
                 this.computedValue = null
             }
         },
 
-        formatNumber(value, isMinute) {
-            return this.isHourFormat24 || isMinute
+        formatNumber(value, prependZero) {
+            return this.isHourFormat24 || prependZero
                 ? this.pad(value)
                 : value
         },
@@ -348,76 +516,10 @@ export default {
         */
         formatValue(date) {
             if (date && !isNaN(date)) {
-                return this.formatTime(date)
+                return this.timeFormatter(date, this)
             } else {
                 return null
             }
-        },
-
-        formatTime(date) {
-            if (typeof config.defaultTimeFormatter === 'function') {
-                return config.defaultTimeFormatter(date)
-            } else {
-                return this.defaultTimeFormatter(date)
-            }
-        },
-        parseTime(date) {
-            if (typeof config.defaultTimeParser === 'function') {
-                return config.defaultTimeParser(date)
-            } else {
-                return this.defaultTimeParser(date)
-            }
-        },
-        defaultTimeFormatter(date) {
-            let hours = date.getHours()
-            const minutes = date.getMinutes()
-            let period = ''
-            if (this.hourFormat === HOUR_FORMAT_12) {
-                period = ' ' + (hours < 12 ? AM : PM)
-                if (hours > 12) {
-                    hours -= 12
-                } else if (hours === 0) {
-                    hours = 12
-                }
-            }
-            return this.pad(hours) + ':' + this.pad(minutes) + period
-        },
-        defaultTimeParser(timeString) {
-            if (timeString) {
-                let am = false
-                if (this.hourFormat === HOUR_FORMAT_12) {
-                    const dateString12 = timeString.split(' ')
-                    timeString = dateString12[0]
-                    am = dateString12[1] === AM
-                }
-                const time = timeString.split(':')
-                let hours = parseInt(time[0], 10)
-                const minutes = parseInt(time[1], 10)
-                if (isNaN(hours) || hours < 0 || hours > 23 ||
-                    (this.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
-                    isNaN(minutes) || minutes < 0 || minutes > 59) {
-                    return null
-                }
-                let d = null
-                if (this.dateSelected && !isNaN(this.dateSelected)) {
-                    d = new Date(this.dateSelected)
-                } else {
-                    d = new Date()
-                    d.setMilliseconds(0)
-                    d.setSeconds(0)
-                }
-                d.setMinutes(minutes)
-                if (this.hourFormat === HOUR_FORMAT_12) {
-                    if (am && hours === 12) {
-                        hours = 0
-                    } else if (!am && hours !== 12) {
-                        hours += 12
-                    }
-                }
-                d.setHours(hours)
-                return d
-            }
-            return null
         },
         /**
          * Keypress event that is bound to the document.

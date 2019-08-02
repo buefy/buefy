@@ -41,7 +41,7 @@ const DialogProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Dialog)
-        registerComponentProgrammatic(Vue, '$dialog', DialogProgrammatic)
+        registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic)
     }
 }
 
@@ -50,5 +50,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    DialogProgrammatic as Dialog
+    DialogProgrammatic
 }

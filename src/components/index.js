@@ -10,14 +10,19 @@ import Field from './field'
 import Icon from './icon'
 import Input from './input'
 import Loading from './loading'
+import Menu from './menu'
 import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
+import Navbar from './navbar'
 import Numberinput from './numberinput'
 import Pagination from './pagination'
+import Progress from './progress'
 import Radio from './radio'
 import Select from './select'
+import Slider from './slider'
 import Snackbar from './snackbar'
+import Steps from './steps'
 import Switch from './switch'
 import Table from './table'
 import Tabs from './tabs'
@@ -41,14 +46,19 @@ export {
     Icon,
     Input,
     Loading,
+    Menu,
     Message,
     Modal,
+    Navbar,
     Notification,
     Numberinput,
     Pagination,
+    Progress,
     Radio,
     Select,
+    Slider,
     Snackbar,
+    Steps,
     Switch,
     Table,
     Tabs,

@@ -1,5 +1,73 @@
 [
     {
+        "title": "Menuver",
+        "date": "2019-08-01",
+        "img": "menuver.png",
+        "url": "https://menuver.com"
+    },
+    {
+        "title": "Philips Talent Pool",
+        "date": "2019-06-19",
+        "img": "philips-talentpool.png",
+        "url": "https://philips.talent-pool.com/projects"
+    },
+    {
+        "title": "FileGator",
+        "date": "2019-06-18",
+        "img": "filegator.png",
+        "url": "https://filegator.io"
+    },
+    {
+        "title": "Traject Ubudu",
+        "date": "2019-06-18",
+        "img": "traject-ubudu.png",
+        "url": "https://traject.ubudu.com"
+    },
+    {
+        "title": "Travelstop",
+        "date": "2019-06-13",
+        "img": "travelstop.png",
+        "url": "https://travelstop.com",
+        "featured": true
+    },
+    {
+        "title": "Git Stars",
+        "date": "2019-06-01",
+        "img": "git-stars.png",
+        "url": "https://git-stars.netlify.com"
+    },
+    {
+        "title": "Marvel Match",
+        "date": "2019-05-24",
+        "img": "marvelmatch.png",
+        "url": "https://marvelmatch.com"
+    },
+    {
+        "title": "FOE Tools",
+        "date": "2019-05-24",
+        "img": "foe-tools.png",
+        "url": "https://foe-tools.github.io"
+    },
+    {
+        "title": "Brand Finance",
+        "date": "2019-05-24",
+        "img": "brandirectory.png",
+        "url": "https://brandirectory.com"
+    },
+    {
+        "title": "Repo Remover",
+        "date": "2019-05-24",
+        "img": "reporemover.png",
+        "url": "https://reporemover.xyz",
+        "featured": true
+    },
+    {
+        "title": "Nest&Cut",
+        "date": "2019-05-22",
+        "img": "nestandcut.png",
+        "url": "https://nestandcut.com"
+    },
+    {
         "title": "Openbook",
         "date": "2019-04-24",
         "img": "openbook.png",
@@ -16,8 +84,7 @@
         "title": "Switchblade",
         "date": "2019-04-24",
         "img": "switchblade.png",
-        "url": "https://switchblade.xyz",
-        "featured": true
+        "url": "https://switchblade.xyz"
     },
     {
         "title": "Moonlight",
@@ -42,8 +109,7 @@
         "title": "Counter Network",
         "date": "2019-04-24",
         "img": "counter-network.png",
-        "url": "https://counter.network",
-        "featured": true
+        "url": "https://counter.network"
     },
     {
         "title": "Gods Unchained",
@@ -86,11 +152,5 @@
         "date": "2019-04-24",
         "img": "prevue.png",
         "url": "https://pre-vue.herokuapp.com"
-    },
-    {
-        "title": "Marvel Match",
-        "date": "2019-05-02",
-        "img": "marvelmatch.png",
-        "url": "https://marvelmatch.com"
     }
 ]

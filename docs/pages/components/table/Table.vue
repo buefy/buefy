@@ -57,8 +57,11 @@
 
         <Example :component="ExCustomHeaders" :code="ExCustomHeadersCode" title="Custom headers">
             <p>
-                By adding a scoped slot named <code>header</code> you can customize the headers.
+                By adding a scoped slot named <code>header</code> in table component you can customize the headers.
                 Use the <code>meta</code> prop on column to pass anything you may need.
+            </p>
+            <p>
+                Previous scoped slot named <code>header</code> in table will be deprecated.
             </p>
         </Example>
 

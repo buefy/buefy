@@ -1,10 +1,16 @@
 <template>
     <section>
-        <button class="button field is-danger" @click="checkedRows = []"
-            :disabled="!checkedRows.length">
-            <b-icon icon="close"></b-icon>
-            <span>Clear checked</span>
-        </button>
+        <b-field grouped group-multiline>
+            <button class="button field is-danger" @click="checkedRows = []"
+                :disabled="!checkedRows.length">
+                <b-icon icon="close"></b-icon>
+                <span>Clear checked</span>
+            </button>
+            <b-select v-model="checkboxPosition">
+                <option value="left">Checkbox at left</option>
+                <option value="right">Checkbox at right</option>
+            </b-select>
+        </b-field>
 
         <b-tabs>
             <b-tab-item label="Table">
@@ -13,7 +19,8 @@
                     :columns="columns"
                     :checked-rows.sync="checkedRows"
                     :is-row-checkable="(row) => row.id !== 3"
-                    checkable>
+                    checkable
+                    :checkbox-position="checkboxPosition">
 
                     <template slot="bottom-left">
                         <b>Total checked</b>: {{ checkedRows.length }}
@@ -41,6 +48,7 @@
 
             return {
                 data,
+                checkboxPosition: 'left',
                 checkedRows: [data[1], data[3]],
                 columns: [
                     {

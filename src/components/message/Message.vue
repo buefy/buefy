@@ -34,18 +34,18 @@
 </template>
 
 <script>
-    import MessageMixin from '../../utils/MessageMixin.js'
+import MessageMixin from '../../utils/MessageMixin.js'
 
-    export default {
-        name: 'BMessage',
-        mixins: [MessageMixin],
-        props: {
-            ariaCloseLabel: String
-        },
-        data() {
-            return {
-                newIconSize: this.iconSize || this.size || 'is-large'
-            }
+export default {
+    name: 'BMessage',
+    mixins: [MessageMixin],
+    props: {
+        ariaCloseLabel: String
+    },
+    data() {
+        return {
+            newIconSize: this.iconSize || this.size || 'is-large'
         }
     }
+}
 </script>

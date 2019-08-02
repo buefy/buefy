@@ -8,7 +8,7 @@
     export default {
         methods: {
             clickMe() {
-                this.$notification.open('Clicked!!')
+                this.$buefy.notification.open('Clicked!!')
             }
         }
     }

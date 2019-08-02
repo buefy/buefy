@@ -22,7 +22,7 @@
             :opened-detailed="['Board Games']"
             :default-sort="['name', 'asc']"
             detail-key="name"
-            @details-open="(row, index) => $toast.open(`Expanded ${row.name}`)"
+            @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.name}`)"
             :show-detail-icon="showDetailIcon">
 
             <template slot-scope="props">
@@ -80,7 +80,7 @@
             </template>
 
             <template slot="detail" slot-scope="props">
-                <tr v-for="item in props.row.items">
+                <tr v-for="(item, index) in props.row.items" :key="index">
                     <td v-if="showDetailIcon"></td>
                     <td v-show="columnsVisible['name'].display" >&nbsp;&nbsp;&nbsp;&nbsp;{{ item.name }}</td>
                     <td v-show="columnsVisible['sold'].display" class="has-text-centered">{{ item.sold }}</td>

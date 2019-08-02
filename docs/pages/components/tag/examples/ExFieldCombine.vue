@@ -26,19 +26,39 @@
 
         <b-field grouped group-multiline>
             <div class="control">
-                <b-tag type="is-primary" attached closable>Technology</b-tag>
+                <b-tag type="is-primary"
+                    attached
+                    aria-close-label="Close tag"
+                    closable>
+                    Technology
+                </b-tag>
             </div>
 
             <div class="control">
-                <b-tag type="is-primary" attached closable>Vuejs</b-tag>
+                <b-tag type="is-primary"
+                    attached
+                    aria-close-label="Close tag"
+                    closable>
+                    Vuejs
+                </b-tag>
             </div>
 
             <div class="control">
-                <b-tag type="is-primary" attached closable>CSS</b-tag>
+                <b-tag type="is-primary"
+                    attached
+                    aria-close-label="Close tag"
+                    closable>
+                    CSS
+                </b-tag>
             </div>
 
             <div class="control">
-                <b-tag type="is-primary" attached closable>Flexbox</b-tag>
+                <b-tag type="is-primary"
+                    attached
+                    aria-close-label="Close tag"
+                    closable>
+                    Flexbox
+                </b-tag>
             </div>
         </b-field>
     </section>

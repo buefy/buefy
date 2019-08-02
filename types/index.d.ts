@@ -1,30 +1,45 @@
 import _Vue from "vue";
 
-import { Dialog, ModalProgrammatic, LoadingProgrammatic, Toast, Snackbar, NotificationProgrammatic } from "./components";
-import { ColorModifiers } from "./helpers";
+import {
+    DialogProgrammatic,
+    ModalProgrammatic,
+    LoadingProgrammatic,
+    ToastProgrammatic,
+    SnackbarProgrammatic,
+    NotificationProgrammatic } from "./components";
+import { ColorModifiers, GlobalPositions } from "./helpers";
 
-// Adds Buefy method signatures to Vue instance (ie this.$dialog)
+// Adds Buefy method signatures to Vue instance (ie this.$buefy.dialog)
 declare module 'vue/types/vue' {
     interface Vue {
-        $dialog: typeof Dialog,
-        $loading: typeof LoadingProgrammatic,
-        $modal: typeof ModalProgrammatic,
-        $snackbar: typeof Snackbar,
-        $toast: typeof Toast,
-        $notification: typeof NotificationProgrammatic
+        $buefy: BuefyNamespace
     }
+}
+
+export declare type BuefyNamespace = {
+    dialog: typeof DialogProgrammatic,
+    loading: typeof LoadingProgrammatic,
+    modal: typeof ModalProgrammatic,
+    snackbar: typeof SnackbarProgrammatic,
+    toast: typeof ToastProgrammatic,
+    notification: typeof NotificationProgrammatic
 }
 
 export declare type BuefyConfig = {
     defaultContainerElement?: string,
     defaultIconPack?: string;
+    defaultIconComponent?: string;
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
     defaultSnackbarDuration?: number;
+    defaultSnackbarPosition?: GlobalPositions;
     defaultToastDuration?: number;
+    defaultToastPosition?: GlobalPositions;
     defaultNotificationDuration?: number;
+    defaultNotificationPosition?: GlobalPositions;
     defaultTooltipType?: ColorModifiers;
     defaultTooltipAnimated?: boolean;
+    defaultTooltipDelay?: number;
     defaultInputAutocomplete?: string;
     defaultDateFormatter?: Function;
     defaultDateParser?: Function;
@@ -32,6 +47,7 @@ export declare type BuefyConfig = {
     defaultDayNames?: string[];
     defaultMonthNames?: string[];
     defaultFirstDayOfWeek?: number;
+    defaultUnselectableDaysOfWeek?: number[];
     defaultTimeFormatter?: Function;
     defaultTimeParser?: Function;
     defaultModalCanCancel?: string[];
@@ -40,6 +56,14 @@ export declare type BuefyConfig = {
     defaultTimepickerMobileNative?: boolean;
     defaultNoticeQueue?: boolean;
     defaultInputHasCounter?: boolean;
+    defaultTaginputHasCounter?: boolean;
+    defaultUseHtml5Validation?: boolean;
+    defaultDropdownMobileModal?: boolean;
+    defaultFieldLabelPosition?: 'inside' | 'on-border';
+    defaultDatepickerYearsRange?: number[];
+    defaultDatepickerNearbyMonthDays?: boolean;
+    defaultDatepickerNearbySelectableMonthDays?: boolean;
+    defaultDatepickerShowWeekNumber?: boolean;
 };
 
 declare const _default: {
@@ -47,11 +71,11 @@ declare const _default: {
 };
 
 export {
-    Dialog,
+    DialogProgrammatic,
     LoadingProgrammatic,
     ModalProgrammatic,
-    Snackbar,
-    Toast,
+    SnackbarProgrammatic,
+    ToastProgrammatic,
     NotificationProgrammatic
 }
 

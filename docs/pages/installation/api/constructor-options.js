@@ -106,6 +106,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>defaultTooltipDelay</code>',
+                description: 'Default tooltip <code>delay</code> attribute.',
+                type: 'Number',
+                values: "—",
+                default: '<code>0</code>'
+            },
+            {
                 name: '<code>defaultInputAutocomplete</code>',
                 description: `Default input <code>autocomplete</code> attribute.`,
                 type: 'String',
@@ -159,7 +166,7 @@ export default [
                 description: `Default datepicker <code>unselectable-days-of-week</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: '-'
+                default: '—'
             },
             {
                 name: '<code>defaultTimeFormatter</code>',
@@ -218,12 +225,54 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>defaultTaginputHasCounter</code>',
+                description: 'Default taginput <code>has-counter</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>defaultUseHtml5Validation</code>',
                 description: 'Default form components <code>use-html5-validation</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
-            }
+            },
+            {
+                name: '<code>defaultFieldLabelPosition</code>',
+                description: 'Default field position of label',
+                type: 'String',
+                values: '<code>inside</code>,<code>on-border</code>',
+                default: '—'
+            },
+            {
+                name: '<code>defaultDatepickerYearsRange</code>',
+                description: 'Default years range relative to selected year',
+                type: 'Array',
+                values: '—',
+                default: '<code>[-100, 3]</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbyMonthDays</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultDatepickerNearbySelectableMonthDays</code>',
+                description: 'It allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultDatepickerShowWeekNumber</code>',
+                description: 'It allows to display week number',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]

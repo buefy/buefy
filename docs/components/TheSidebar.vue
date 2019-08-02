@@ -46,26 +46,26 @@
 </template>
 
 <script>
-    import routes from '@/data/routes'
+import routes from '@/data/routes'
 
-    export default {
-        props: {
-            data: Array
+export default {
+    props: {
+        data: Array
+    },
+    methods: {
+        normalizedData(items) {
+            return items.map((item) => {
+                return typeof item === 'string'
+                    ? routes[item]
+                    : item
+            })
         },
-        methods: {
-            normalizedData(items) {
-                return items.map((item) => {
-                    return typeof item === 'string'
-                        ? routes[item]
-                        : item
-                })
-            },
-            backToTop() {
-                window.scroll({
-                    top: 0,
-                    behavior: 'smooth'
-                })
-            }
+        backToTop() {
+            window.scroll({
+                top: 0,
+                behavior: 'smooth'
+            })
         }
     }
+}
 </script>

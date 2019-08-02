@@ -1,0 +1,207 @@
+/*
+This project is based on
+"bulma-steps" (https://github.com/Wikiki/bulma-steps) by
+Wikiki (https://github.com/Wikiki) licensed under
+MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
+*/
+
+$steps-maker-default-color: $grey-light !default;
+$steps-marker-default-border: .2em solid #fff !default;
+$steps-default-color: $grey-lighter !default;
+$steps-previous-color: $primary !default;
+$steps-active-color: $primary !default;
+$steps-divider-height: .2em !default;
+
+@mixin steps-size($size) {
+    font-size: $size;
+    min-height: $size * 2;
+
+    .step-items {
+        .step-item {
+            .step-marker {
+                height: $size * 2;
+                width: $size * 2;
+                position: absolute;
+                left: calc(50% - #{$size});
+
+                .icon {
+               *, *:before {
+                        font-size: $size;
+                    }
+                }
+            }
+
+            .step-details {
+                margin-top: $size * 2;
+                margin-left: .5em;
+                margin-right: .5em;
+                padding-top: .2em;
+
+                .step-title {
+                    font-size: $size * 1.2;
+                    font-weight: $weight-semibold;
+                }
+            }
+
+            &:not(:first-child) {
+                &::before {
+                    height: $steps-divider-height;
+                    width: 100%;
+                    bottom: 0;
+                    left: -50%;
+                    top: #{$size};
+                }
+            }
+        }
+    }
+}
+
+.b-steps {
+    .steps {
+        .step-items {
+            display: flex;
+            flex-wrap: wrap;
+
+            .step-item {
+                margin-top: 0;
+                position: relative;
+                flex-grow: 1;
+                flex-basis: 0;
+
+                .step-link {
+                    color: $body-color;
+
+                    &:not(.is-clickable) {
+                        cursor: not-allowed;
+                    }
+                }
+
+                .step-marker {
+                    align-items: center;
+                    display: flex;
+                    border-radius: 50%;
+                    font-weight: $weight-bold;
+                    justify-content: center;
+                    background: $steps-maker-default-color;
+                    color: $white;
+                    border: $steps-marker-default-border;
+                    z-index: 1;
+                }
+
+                // Override marker color per step
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    $color-invert: nth($pair, 2);
+
+                    &.is-#{$name} {
+                        &::before {
+                            background: linear-gradient(to left, $steps-default-color 50%, $color 50%);
+                            background-size: 200% 100%;
+                            background-position: right bottom;
+                        }
+                        &.is-active {
+                            .step-marker {
+                                background-color: $white;
+                                border-color: $color;
+                                color: $color;
+                            }
+
+                            &::before {
+                                background-position: left bottom;
+                            }
+                        }
+                        &.is-previous {
+                            .step-marker {
+                                color: $color-invert;
+                                background-color: $color;
+                            }
+
+                            &::before {
+                                background-position: left bottom;
+                            }
+                        }
+                    }
+                }
+
+                .step-marker{
+                    color: $white;
+                }
+
+                .step-details {
+                    text-align: center;
+                }
+
+                &:not(:first-child) {
+                    flex-basis: 1em;
+                    flex-grow: 1;
+                    flex-shrink: 1;
+
+                    &::before {
+                        // This will contain the divider
+                        content: " ";
+                        display: block;
+                        position: absolute;
+                    }
+                }
+
+                &::before {
+                    background: linear-gradient(to left, $steps-default-color 50%, $steps-active-color 50%);
+                    background-size: 200% 100%;
+                    background-position: right bottom;
+                }
+
+                &.is-active {
+                    .step-link {
+                        cursor: default;
+                    }
+
+                    .step-marker {
+                        background-color: $white;
+                        border-color: $steps-active-color;
+                        color: $steps-active-color;
+                    }
+
+                    &::before {
+                        background-position: left bottom;
+                    }
+                }
+                &.is-previous {
+                    .step-marker {
+                        color: $white;
+                        background-color: $steps-previous-color;
+                    }
+
+                    &::before {
+                        background-position: left bottom;
+                    }
+                }
+            }
+        }
+
+        + .step-content {
+            position: relative;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            .step-item {
+                flex-shrink: 0;
+                flex-basis: auto;
+            }
+            &.is-transitioning {
+                overflow: hidden;
+            }
+        }
+
+        @include steps-size($size-normal);
+        &.is-small {
+            @include steps-size($size-small);
+        }
+        &.is-medium {
+            @include steps-size($size-medium);
+        }
+        &.is-large {
+            @include steps-size($size-large);
+        }
+    }
+}

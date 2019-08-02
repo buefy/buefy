@@ -21,7 +21,7 @@
                 :readonly="!editable"
                 :rounded="rounded"
                 v-bind="$attrs"
-                @click.native.stop="toggle(true)"
+                :use-html5-validation="useHtml5Validation"
                 @keyup.native.enter="toggle(true)"
                 @change.native="onChange($event.target.value)"
                 @focus="handleOnFocus"
@@ -56,6 +56,22 @@
                             {{ minute.label }}
                         </option>
                     </b-select>
+                    <template v-if="enableSeconds">
+                        <span class="control is-colon">:</span>
+                        <b-select
+                            v-model="secondsSelected"
+                            @change.native="onSecondsChange($event.target.value)"
+                            :disabled="disabled"
+                            placeholder="00">
+                            <option
+                                v-for="second in seconds"
+                                :value="second.value"
+                                :key="second.value"
+                                :disabled="isSecondDisabled(second.value)">
+                                {{ second.label }}
+                            </option>
+                        </b-select>
+                    </template>
                     <b-select
                         v-model="meridienSelected"
                         @change.native="onMeridienChange($event.target.value)"
@@ -82,8 +98,9 @@
             v-else
             ref="input"
             type="time"
+            :step="nativeStep"
             autocomplete="off"
-            :value="formatHHMMSS(value)"
+            :value="formatHHMMSS(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
@@ -94,8 +111,7 @@
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
-            @click.native.stop="toggle(true)"
-            @keyup.native.enter="toggle(true)"
+            :use-html5-validation="useHtml5Validation"
             @change.native="onChange($event.target.value)"
             @focus="handleOnFocus"
             @blur="onBlur() && checkHtml5Validity()"/>
@@ -103,30 +119,35 @@
 </template>
 
 <script>
-    import TimepickerMixin from '../../utils/TimepickerMixin'
-    import Dropdown from '../dropdown/Dropdown'
-    import DropdownItem from '../dropdown/DropdownItem'
-    import Input from '../input/Input'
-    import Field from '../field/Field'
-    import Select from '../select/Select'
-    import Icon from '../icon/Icon'
+import TimepickerMixin from '../../utils/TimepickerMixin'
+import Dropdown from '../dropdown/Dropdown'
+import DropdownItem from '../dropdown/DropdownItem'
+import Input from '../input/Input'
+import Field from '../field/Field'
+import Select from '../select/Select'
+import Icon from '../icon/Icon'
 
-    export default {
-        name: 'BTimepicker',
-        components: {
-            [Input.name]: Input,
-            [Field.name]: Field,
-            [Select.name]: Select,
-            [Icon.name]: Icon,
-            [Dropdown.name]: Dropdown,
-            [DropdownItem.name]: DropdownItem
-        },
-        mixins: [TimepickerMixin],
-        inheritAttrs: false,
-        data() {
-            return {
-                _isTimepicker: true
-            }
+export default {
+    name: 'BTimepicker',
+    components: {
+        [Input.name]: Input,
+        [Field.name]: Field,
+        [Select.name]: Select,
+        [Icon.name]: Icon,
+        [Dropdown.name]: Dropdown,
+        [DropdownItem.name]: DropdownItem
+    },
+    mixins: [TimepickerMixin],
+    inheritAttrs: false,
+    data() {
+        return {
+            _isTimepicker: true
+        }
+    },
+    computed: {
+        nativeStep() {
+            if (this.enableSeconds) return '1'
         }
     }
+}
 </script>

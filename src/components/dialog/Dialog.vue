@@ -63,144 +63,146 @@
 </template>
 
 <script>
-    import Icon from '../icon/Icon'
-    import Modal from '../modal/Modal'
-    import config from '../../utils/config'
-    import { removeElement } from '../../utils/helpers'
+import Icon from '../icon/Icon'
+import Modal from '../modal/Modal'
+import config from '../../utils/config'
+import { removeElement } from '../../utils/helpers'
 
-    export default {
-        name: 'BDialog',
-        components: {
-            [Icon.name]: Icon
+export default {
+    name: 'BDialog',
+    components: {
+        [Icon.name]: Icon
+    },
+    extends: Modal,
+    props: {
+        title: String,
+        message: String,
+        icon: String,
+        iconPack: String,
+        hasIcon: Boolean,
+        type: {
+            type: String,
+            default: 'is-primary'
         },
-        extends: Modal,
-        props: {
-            title: String,
-            message: String,
-            icon: String,
-            iconPack: String,
-            hasIcon: Boolean,
-            type: {
-                type: String,
-                default: 'is-primary'
-            },
-            size: String,
-            confirmText: {
-                type: String,
-                default: () => {
-                    return config.defaultDialogConfirmText
-                        ? config.defaultDialogConfirmText
-                        : 'OK'
-                }
-            },
-            cancelText: {
-                type: String,
-                default: () => {
-                    return config.defaultDialogCancelText
-                        ? config.defaultDialogCancelText
-                        : 'Cancel'
-                }
-            },
-            hasInput: Boolean, // Used internally to know if it's prompt
-            inputAttrs: {
-                type: Object,
-                default: () => ({})
-            },
-            onConfirm: {
-                type: Function,
-                default: () => {}
-            },
-            focusOn: {
-                type: String,
-                default: 'confirm'
+        size: String,
+        confirmText: {
+            type: String,
+            default: () => {
+                return config.defaultDialogConfirmText
+                    ? config.defaultDialogConfirmText
+                    : 'OK'
             }
         },
-        data() {
-            const prompt = this.hasInput
-                ? this.inputAttrs.value || ''
-                : ''
-
-            return {
-                prompt,
-                isActive: false,
-                validationMessage: ''
+        cancelText: {
+            type: String,
+            default: () => {
+                return config.defaultDialogCancelText
+                    ? config.defaultDialogCancelText
+                    : 'Cancel'
             }
         },
-        computed: {
-            /**
-             * Icon name (MDI) based on the type.
-             */
-            iconByType() {
-                switch (this.type) {
-                    case 'is-info':
-                        return 'information'
-                    case 'is-success':
-                        return 'check-circle'
-                    case 'is-warning':
-                        return 'alert'
-                    case 'is-danger':
-                        return 'alert-circle'
-                    default:
-                        return null
+        hasInput: Boolean, // Used internally to know if it's prompt
+        inputAttrs: {
+            type: Object,
+            default: () => ({})
+        },
+        onConfirm: {
+            type: Function,
+            default: () => {}
+        },
+        focusOn: {
+            type: String,
+            default: 'confirm'
+        }
+    },
+    data() {
+        const prompt = this.hasInput
+            ? this.inputAttrs.value || ''
+            : ''
+
+        return {
+            prompt,
+            isActive: false,
+            validationMessage: ''
+        }
+    },
+    computed: {
+        /**
+        * Icon name (MDI) based on the type.
+        */
+        iconByType() {
+            switch (this.type) {
+                case 'is-info':
+                    return 'information'
+                case 'is-success':
+                    return 'check-circle'
+                case 'is-warning':
+                    return 'alert'
+                case 'is-danger':
+                    return 'alert-circle'
+                default:
+                    return null
+            }
+        },
+        showCancel() {
+            return this.cancelOptions.indexOf('button') >= 0
+        }
+    },
+    methods: {
+        /**
+        * If it's a prompt Dialog, validate the input.
+        * Call the onConfirm prop (function) and close the Dialog.
+        */
+        confirm() {
+            if (this.$refs.input !== undefined) {
+                if (!this.$refs.input.checkValidity()) {
+                    this.validationMessage = this.$refs.input.validationMessage
+                    this.$nextTick(() => this.$refs.input.select())
+                    return
                 }
-            },
-            showCancel() {
-                return this.cancelOptions.indexOf('button') >= 0
             }
-        },
-        methods: {
-            /**
-             * If it's a prompt Dialog, validate the input.
-             * Call the onConfirm prop (function) and close the Dialog.
-             */
-            confirm() {
-                if (this.$refs.input !== undefined) {
-                    if (!this.$refs.input.checkValidity()) {
-                        this.validationMessage = this.$refs.input.validationMessage
-                        this.$nextTick(() => this.$refs.input.select())
-                        return
-                    }
-                }
 
-                this.onConfirm(this.prompt)
-                this.close()
-            },
-
-            /**
-             * Close the Dialog.
-             */
-            close() {
-                this.isActive = false
-                // Timeout for the animation complete before destroying
-                setTimeout(() => {
-                    this.$destroy()
-                    removeElement(this.$el)
-                }, 150)
-            }
+            this.onConfirm(this.prompt)
+            this.close()
         },
-        beforeMount() {
-            // Insert the Dialog component in body tag
+
+        /**
+        * Close the Dialog.
+        */
+        close() {
+            this.isActive = false
+            // Timeout for the animation complete before destroying
+            setTimeout(() => {
+                this.$destroy()
+                removeElement(this.$el)
+            }, 150)
+        }
+    },
+    beforeMount() {
+        // Insert the Dialog component in body tag
+        if (typeof window !== 'undefined') {
             this.$nextTick(() => {
                 document.body.appendChild(this.$el)
             })
-        },
-        mounted() {
-            this.isActive = true
-
-            if (typeof this.inputAttrs.required === 'undefined') {
-                this.$set(this.inputAttrs, 'required', true)
-            }
-
-            this.$nextTick(() => {
-                // Handle which element receives focus
-                if (this.hasInput) {
-                    this.$refs.input.focus()
-                } else if (this.focusOn === 'cancel' && this.showCancel) {
-                    this.$refs.cancelButton.focus()
-                } else {
-                    this.$refs.confirmButton.focus()
-                }
-            })
         }
+    },
+    mounted() {
+        this.isActive = true
+
+        if (typeof this.inputAttrs.required === 'undefined') {
+            this.$set(this.inputAttrs, 'required', true)
+        }
+
+        this.$nextTick(() => {
+            // Handle which element receives focus
+            if (this.hasInput) {
+                this.$refs.input.focus()
+            } else if (this.focusOn === 'cancel' && this.showCancel) {
+                this.$refs.cancelButton.focus()
+            } else {
+                this.$refs.confirmButton.focus()
+            }
+        })
     }
+}
 </script>

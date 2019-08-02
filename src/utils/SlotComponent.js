@@ -9,6 +9,12 @@ export default {
             type: String,
             default: 'default'
         },
+        scoped: {
+            type: Boolean
+        },
+        props: {
+            type: Object
+        },
         tag: {
             type: String,
             default: 'div'
@@ -36,10 +42,11 @@ export default {
             this.component.$off(this.event, this.refresh)
         }
     },
-    render(h) {
+    render(createElement) {
         if (this.isVueComponent()) {
-            const slots = this.component.$slots[this.name]
-            return h(this.tag, {}, slots)
+            return createElement(this.tag, {},
+                this.scoped ? this.component.$scopedSlots[this.name](this.props)
+                    : this.component.$slots[this.name])
         }
     }
 }

@@ -1,9 +1,10 @@
 <template>
     <label
         class="switch"
-        :class="[size, { 'is-disabled': disabled }]"
+        :class="newClass"
         ref="label"
         :disabled="disabled"
+        @click="focus"
         @keydown.prevent.enter="$refs.label.click()"
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
@@ -12,6 +13,7 @@
         <input
             v-model="computedValue"
             type="checkbox"
+            ref="input"
             @click.stop
             :disabled="disabled"
             :name="name"
@@ -25,49 +27,71 @@
 </template>
 
 <script>
-    export default {
-        name: 'BSwitch',
-        props: {
-            value: [String, Number, Boolean, Function, Object, Array, Symbol],
-            nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
-            disabled: Boolean,
-            type: String,
-            name: String,
-            required: Boolean,
-            size: String,
-            trueValue: {
-                type: [String, Number, Boolean, Function, Object, Array, Symbol],
-                default: true
+export default {
+    name: 'BSwitch',
+    props: {
+        value: [String, Number, Boolean, Function, Object, Array],
+        nativeValue: [String, Number, Boolean, Function, Object, Array],
+        disabled: Boolean,
+        type: String,
+        name: String,
+        required: Boolean,
+        size: String,
+        trueValue: {
+            type: [String, Number, Boolean, Function, Object, Array],
+            default: true
+        },
+        falseValue: {
+            type: [String, Number, Boolean, Function, Object, Array],
+            default: false
+        },
+        rounded: {
+            type: Boolean,
+            default: true
+        },
+        outlined: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            newValue: this.value,
+            isMouseDown: false
+        }
+    },
+    computed: {
+        computedValue: {
+            get() {
+                return this.newValue
             },
-            falseValue: {
-                type: [String, Number, Boolean, Function, Object, Array, Symbol],
-                default: false
-            }
-        },
-        data() {
-            return {
-                newValue: this.value,
-                isMouseDown: false
-            }
-        },
-        computed: {
-            computedValue: {
-                get() {
-                    return this.newValue
-                },
-                set(value) {
-                    this.newValue = value
-                    this.$emit('input', value)
-                }
-            }
-        },
-        watch: {
-            /**
-             * When v-model change, set internal value.
-             */
-            value(value) {
+            set(value) {
                 this.newValue = value
+                this.$emit('input', value)
             }
+        },
+        newClass() {
+            return [
+                this.size,
+                { 'is-disabled': this.disabled },
+                { 'is-rounded': this.rounded },
+                { 'is-outlined': this.outlined }
+            ]
+        }
+    },
+    watch: {
+        /**
+        * When v-model change, set internal value.
+        */
+        value(value) {
+            this.newValue = value
+        }
+    },
+    methods: {
+        focus() {
+            // MacOS FireFox and Safari do not focus when clicked
+            this.$refs.input.focus()
         }
     }
+}
 </script>

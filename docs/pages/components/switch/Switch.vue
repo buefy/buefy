@@ -6,6 +6,8 @@
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
+        <Example :component="ExStyles" :code="ExStylesCode" title="Styles" vertical/>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -22,6 +24,9 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExStyles from './examples/ExStyles'
+    import ExStylesCode from '!!raw-loader!./examples/ExStyles'
+
     export default {
         data() {
             return {
@@ -29,9 +34,11 @@
                 ExSimple,
                 ExTypes,
                 ExSizes,
+                ExStyles,
                 ExSimpleCode,
                 ExTypesCode,
-                ExSizesCode
+                ExSizesCode,
+                ExStylesCode
             }
         }
     }

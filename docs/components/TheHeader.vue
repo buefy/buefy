@@ -21,18 +21,18 @@
 </template>
 
 <script>
-    import routes from '@/data/routes'
+import routes from '@/data/routes'
 
-    export default {
-        props: {
-            breadcrumb: Array,
-            title: String,
-            subtitle: String
-        },
-        data() {
-            return {
-                routes
-            }
+export default {
+    props: {
+        breadcrumb: Array,
+        title: String,
+        subtitle: String
+    },
+    data() {
+        return {
+            routes
         }
     }
+}
 </script>

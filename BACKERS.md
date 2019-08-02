@@ -8,3 +8,4 @@ You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtomm
 - [Daniele Luchi](https://www.patreon.com/user/creators?u=17495343)
 - [Jonas Dehairs](https://www.patreon.com/user/creators?u=132517333)
 - [alcalbg](https://www.patreon.com/alcalbg)
+- [Gevorg Harutyunyan](https://www.patreon.com/modularcoder)

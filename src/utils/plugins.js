@@ -10,5 +10,6 @@ export const registerComponent = (Vue, component) => {
 }
 
 export const registerComponentProgrammatic = (Vue, property, component) => {
-    Vue.prototype[property] = component
+    if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {}
+    Vue.prototype.$buefy[property] = component
 }

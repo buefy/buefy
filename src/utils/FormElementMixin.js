@@ -14,7 +14,8 @@ export default {
         useHtml5Validation: {
             type: Boolean,
             default: () => config.defaultUseHtml5Validation
-        }
+        },
+        validationMessage: String
     },
     data() {
         return {
@@ -117,7 +118,7 @@ export default {
             let isValid = true
             if (!el.checkValidity()) {
                 type = 'is-danger'
-                message = el.validationMessage
+                message = this.validationMessage || el.validationMessage
                 isValid = false
             }
             this.isValid = isValid

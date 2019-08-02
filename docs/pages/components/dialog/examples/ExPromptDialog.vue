@@ -14,17 +14,17 @@
     export default {
         methods: {
             prompt() {
-                this.$dialog.prompt({
+                this.$buefy.dialog.prompt({
                     message: `What's your name?`,
                     inputAttrs: {
                         placeholder: 'e.g. Walter',
                         maxlength: 10
                     },
-                    onConfirm: (value) => this.$toast.open(`Your name is: ${value}`)
+                    onConfirm: (value) => this.$buefy.toast.open(`Your name is: ${value}`)
                 })
             },
             promptNumber() {
-                this.$dialog.prompt({
+                this.$buefy.dialog.prompt({
                     message: `What's your age?`,
                     inputAttrs: {
                         type: 'number',
@@ -33,7 +33,7 @@
                         maxlength: 2,
                         min: 18
                     },
-                    onConfirm: (value) => this.$toast.open(`Your age is: ${value}`)
+                    onConfirm: (value) => this.$buefy.toast.open(`Your age is: ${value}`)
                 })
             }
         }
