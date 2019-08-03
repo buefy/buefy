@@ -1,5 +1,13 @@
 # Buefy Changelog
 
+## 0.8.2
+
+### Fixes
+
+* Fix #1624 autosizing slider into container (thanks @yxngl)
+* Fix #1625 Buefy global name in UMD format
+* Fix #1626 include CSS files as side effects (thanks @modularcoder)
+
 ## 0.8.1
 
 ### New features
