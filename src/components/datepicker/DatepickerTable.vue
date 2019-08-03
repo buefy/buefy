@@ -29,7 +29,10 @@
                 :show-week-number="showWeekNumber"
                 :first-day-of-week="firstDayOfWeek"
                 :rules-for-first-week="rulesForFirstWeek"
-                @select="updateSelectedDate"/>
+                :range="range"
+                :hovered-date-range="hoveredDateRange"
+                @select="updateSelectedDate"
+                @rangeHoverEndDate="setRangeHoverEndDate"/>
         </div>
     </section>
 </template>
@@ -37,13 +40,17 @@
 <script>
 import DatepickerTableRow from './DatepickerTableRow'
 
+const isDefined = (d) => d !== undefined
+
 export default {
     name: 'BDatepickerTable',
     components: {
         [DatepickerTableRow.name]: DatepickerTableRow
     },
     props: {
-        value: Date,
+        value: {
+            type: [Date, Array]
+        },
         dayNames: Array,
         monthNames: Array,
         firstDayOfWeek: Number,
@@ -66,6 +73,14 @@ export default {
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
+        },
+        range: Boolean
+    },
+    data() {
+        return {
+            selectedBeginDate: undefined,
+            selectedEndDate: undefined,
+            hoveredEndDate: undefined
         }
     },
     computed: {
@@ -141,6 +156,18 @@ export default {
             }
 
             return weeksInThisMonth
+        },
+        hoveredDateRange() {
+            if (!this.range) {
+                return []
+            }
+            if (!isNaN(this.selectedEndDate)) {
+                return []
+            }
+            if (this.hoveredEndDate < this.selectedBeginDate) {
+                return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined)
+            }
+            return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined)
         }
     },
     methods: {
@@ -148,7 +175,33 @@ export default {
         * Emit input event with selected date as payload for v-model in parent
         */
         updateSelectedDate(date) {
-            this.$emit('input', date)
+            if (!this.range) {
+                this.$emit('input', date)
+            } else {
+                this.handleSelectRangeDate(date)
+            }
+        },
+
+        /*
+        * If both begin and end dates are set, reset the end date and set the begin date.
+        * If only begin date is selected, emit an array of the begin date and the new date.
+        * If not set, only set the begin date.
+        */
+        handleSelectRangeDate(date) {
+            if (this.selectedBeginDate && this.selectedEndDate) {
+                this.selectedBeginDate = date
+                this.selectedEndDate = undefined
+            } else if (this.selectedBeginDate && !this.selectedEndDate) {
+                if (this.selectedBeginDate > date) {
+                    this.selectedEndDate = this.selectedBeginDate
+                    this.selectedBeginDate = date
+                } else {
+                    this.selectedEndDate = date
+                }
+                this.$emit('input', [this.selectedBeginDate, this.selectedEndDate])
+            } else {
+                this.selectedBeginDate = date
+            }
         },
 
         /*
@@ -197,6 +250,10 @@ export default {
 
                 return week.some((weekDate) => weekDate.getTime() === timed)
             })
+        },
+
+        setRangeHoverEndDate(day) {
+            this.hoveredEndDate = day
         }
     }
 }
