@@ -505,9 +505,7 @@ export default {
                 const isArrayWithValidDates = Array.isArray(value) && value.every((v) => !isNaN(v))
                 return isArrayWithValidDates ? this.dateFormatter(value, this) : null
             }
-            if (value && !isNaN(value)) {
-                return this.dateFormatter(value, this)
-            }
+            return (value && !isNaN(value)) ? this.dateFormatter(value, this) : null
         },
 
         /*

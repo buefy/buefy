@@ -2,6 +2,8 @@
 
 ## 0.8.2
 
+* Add range selection using ``range`` prop to datepicker (thanks @afifsohaili)
+
 ### Fixes
 
 * Fix #1624 autosizing slider into container (thanks @yxngl)
