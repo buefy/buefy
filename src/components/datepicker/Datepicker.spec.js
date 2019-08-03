@@ -90,4 +90,64 @@ describe('BDatepicker', () => {
         window.document.dispatchEvent(keyupEvent)
         wrapper.vm.$nextTick(() => expect($dropdown.isVisible()).toBeFalsy())
     })
+
+    describe('#dateFormatter', () => {
+        it('should add one to month since month in dates starts from 0', () => {
+            const dateToFormat = new Date(2019, 3, 1)
+            const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
+            expect(formattedDate).toEqual('2019-4-1')
+        })
+
+        it('should format based on 2-digit numeric locale date with type === month', () => {
+            wrapper.setProps({
+                type: 'month'
+            })
+            const dateToFormat = new Date(2019, 3, 1)
+            const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
+            expect(formattedDate).toEqual('2019-04')
+        })
+
+        it('should format a range of dates passed via array', () => {
+            const dateToFormat = [
+                new Date(2019, 3, 1),
+                new Date(2019, 3, 3)
+            ]
+            const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
+            expect(formattedDate).toEqual('2019-4-1 - 2019-4-3')
+        })
+    })
+
+    describe('#formatValue', () => {
+        it('should call dateFormatter, passing the date', () => {
+            const mockDateFormatter = jest.fn()
+            wrapper.setProps({
+                dateFormatter: mockDateFormatter
+            })
+            const date = new Date()
+            wrapper.vm.formatValue(date)
+            expect(mockDateFormatter.mock.calls[0][0]).toEqual(date)
+        })
+
+        it('should not call dateFormatter when value is undefined or NaN', () => {
+            const mockDateFormatter = jest.fn()
+            wrapper.setProps({
+                dateFormatter: mockDateFormatter
+            })
+            wrapper.vm.formatValue(undefined)
+            expect(mockDateFormatter.mock.calls.length).toEqual(0)
+            wrapper.vm.formatValue('buefy')
+            expect(mockDateFormatter.mock.calls.length).toEqual(0)
+        })
+
+        it('should not call dateFormatter when value is an array with undefined or NaN elements', () => {
+            const mockDateFormatter = jest.fn()
+            wrapper.setProps({
+                dateFormatter: mockDateFormatter
+            })
+            wrapper.vm.formatValue([new Date(), undefined])
+            expect(mockDateFormatter.mock.calls.length).toEqual(0)
+            wrapper.vm.formatValue([new Date(), 'buefy'])
+            expect(mockDateFormatter.mock.calls.length).toEqual(0)
+        })
+    })
 })

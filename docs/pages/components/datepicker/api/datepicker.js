@@ -212,6 +212,13 @@ export default [
                 default: '<code>4</code>'
             },
             {
+                name: '<code>range</code>',
+                description: 'Flag to allow choosing a range of date',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
