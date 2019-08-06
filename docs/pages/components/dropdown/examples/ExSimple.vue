@@ -1,6 +1,15 @@
 <template>
     <section>
-        <b-dropdown aria-role="list">
+        <b-field label="Can close the first dropdown by">
+            <b-select v-model="canClose">
+                <option value="escape">using escape key only</option>
+                <option value="outside">clicking outside only</option>
+                <option :value="true">using both</option>
+            </b-select>
+        </b-field>
+
+
+        <b-dropdown aria-role="list" :canClose="canClose">
             <button class="button is-primary" slot="trigger">
                 <span>Click me!</span>
                 <b-icon icon="menu-down"></b-icon>
@@ -47,6 +56,17 @@
         </b-dropdown>
     </section>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            canClose: true
+        }
+    }
+}
+</script>
+
 
 <style scoped>
     .tag {
