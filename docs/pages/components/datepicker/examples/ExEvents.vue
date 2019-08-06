@@ -3,23 +3,11 @@
         <b-field>
             <b-switch v-model="bars">Bars</b-switch>
         </b-field>
-        <b-field grouped group-multiline>
-            <b-select v-model="prevIcon">
-                <option value="chevron-left">Chevron prev icon </option>
-                <option value="arrow-left">Arrow prev icon</option>
-            </b-select>
-            <b-select v-model="nextIcon">
-                <option value="chevron-right">Chevron next icon </option>
-                <option value="arrow-right">Arrow next icon</option>
-            </b-select>
-        </b-field>
         <b-datepicker
             inline
             v-model="date"
             :events="events"
             :indicators="indicators"
-            :icon-prev="prevIcon"
-            :icon-next="nextIcon"
             >
         </b-datepicker>
     </span>
@@ -79,9 +67,7 @@
                         type: 'is-info'
                     }
                 ],
-                bars: false,
-                prevIcon: 'chevron-left',
-                nextIcon: 'chevron-right'
+                bars: false
             }
         }
     }

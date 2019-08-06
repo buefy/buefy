@@ -44,7 +44,6 @@
 
         <Example :component="ExEvents" :code="ExEventsCode" title="Events" vertical>
             <p>Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
-            <p>You can also customize the icons used to navigate months.</p>
         </Example>
 
         <ApiView :data="api"/>
