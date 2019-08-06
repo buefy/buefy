@@ -8,7 +8,7 @@
             @click.prevent="prev"
             :aria-label="ariaPreviousLabel">
             <b-icon
-                :icon="newIconPrev"
+                :icon="iconPrev"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
@@ -21,7 +21,7 @@
             @click.prevent="next"
             :aria-label="ariaNextLabel">
             <b-icon
-                :icon="newIconNext"
+                :icon="iconNext"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
@@ -110,8 +110,14 @@ export default {
         rounded: Boolean,
         order: String,
         iconPack: String,
-        iconPrev: String,
-        iconNext: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
@@ -135,13 +141,6 @@ export default {
 
         afterCurrent() {
             return parseInt(this.rangeAfter)
-        },
-
-        newIconPrev() {
-            return this.iconPrev || config.defaultIconPrev
-        },
-        newIconNext() {
-            return this.iconNext || config.defaultIconNext
         },
 
         /**

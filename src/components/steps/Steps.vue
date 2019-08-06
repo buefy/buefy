@@ -41,7 +41,7 @@
                 @click.prevent="prev"
                 :aria-label="ariaPreviousLabel">
                 <b-icon
-                    :icon="newIconPrev"
+                    :icon="iconPrev"
                     :pack="iconPack"
                     both
                     aria-hidden="true"/>
@@ -54,7 +54,7 @@
                 @click.prevent="next"
                 :aria-label="ariaNextLabel">
                 <b-icon
-                    :icon="newIconNext"
+                    :icon="iconNext"
                     :pack="iconPack"
                     both
                     aria-hidden="true"/>
@@ -87,8 +87,14 @@ export default {
             default: false
         },
         iconPack: String,
-        iconPrev: String,
-        iconNext: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         hasNavigation: {
             type: Boolean,
             default: true
@@ -115,13 +121,6 @@ export default {
 
         reversedStepItems() {
             return this.stepItems.slice().reverse()
-        },
-
-        newIconPrev() {
-            return this.iconPrev || config.defaultIconPrev
-        },
-        newIconNext() {
-            return this.iconNext || config.defaultIconNext
         },
 
         /**
