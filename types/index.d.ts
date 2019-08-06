@@ -29,6 +29,8 @@ export declare type BuefyConfig = {
     defaultContainerElement?: string,
     defaultIconPack?: string;
     defaultIconComponent?: string;
+    defaultIconPrev?: string;
+    defaultIconNext?: string;
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
     defaultSnackbarDuration?: number;

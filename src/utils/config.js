@@ -2,6 +2,8 @@ let config = {
     defaultContainerElement: null,
     defaultIconPack: 'mdi',
     defaultIconComponent: null,
+    defaultIconPrev: 'chevron-left',
+    defaultIconNext: 'chevron-right',
     defaultDialogConfirmText: null,
     defaultDialogCancelText: null,
     defaultSnackbarDuration: 3500,
