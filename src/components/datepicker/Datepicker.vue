@@ -330,6 +330,14 @@ export default {
             default: 'dots'
         },
         openOnFocus: Boolean,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         yearsRange: {
             type: Array,
             default: () => {
@@ -351,14 +359,6 @@ export default {
         nearbySelectableMonthDays: {
             type: Boolean,
             default: () => config.defaultDatepickerNearbySelectableMonthDays
-        },
-        iconPrev: {
-            type: String,
-            default: config.defaultIconPrev
-        },
-        iconNext: {
-            type: String,
-            default: config.defaultIconNext
         }
     },
     data() {
