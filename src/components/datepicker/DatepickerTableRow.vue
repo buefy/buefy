@@ -67,6 +67,7 @@ export default {
             type: Boolean,
             default: () => false
         },
+        range: Boolean,
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
@@ -258,8 +259,7 @@ export default {
             }
         },
         setRangeHoverEndDate(day) {
-            const isRangeInput = Array.isArray(this.selectedDate)
-            if (isRangeInput) {
+            if (this.range) {
                 this.$emit('rangeHoverEndDate', day)
             }
         }

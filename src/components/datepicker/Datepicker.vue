@@ -383,9 +383,8 @@ export default {
         }
     },
     data() {
-        const focusedDate = Array.isArray(this.value)
-            ? this.value[0]
-            : (this.value || this.focusedDate || this.dateCreator())
+        const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
+            this.focusedDate || this.dateCreator()
 
         return {
             dateSelected: this.value,
