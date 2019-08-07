@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BRadioButton render correctly 1`] = `<div class="control"><label class="b-radio radio button is-primary"> <input type="radio" value="false"></label></div>`;
