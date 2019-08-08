@@ -16,4 +16,13 @@ describe('BTabs', () => {
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
+
+    it('emit input event with value when tabClick is called', () => {
+        const val = 1
+        wrapper.vm.changeTab = jest.fn()
+        wrapper.vm.tabClick(val)
+        const valueEmitted = wrapper.emitted()['input'][0]
+        expect(valueEmitted).toContainEqual(val)
+        expect(wrapper.vm.changeTab).toHaveBeenCalled()
+    })
 })
