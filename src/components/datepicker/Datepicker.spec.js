@@ -37,8 +37,6 @@ describe('BDatepicker', () => {
                     transition: false
                 }
             })
-            $dropdown = wrapper.find(dropdownMenu)
-            $input = wrapper.find('input')
         })
 
         it('is called', () => {
@@ -47,6 +45,7 @@ describe('BDatepicker', () => {
         })
 
         it('render correctly', () => {
+            wrapper.setProps({dateCreator: () => {}})
             expect(wrapper.html()).toMatchSnapshot()
         })
 

@@ -370,22 +370,7 @@ exports[`BDatepicker simple render correctly 1`] = `
                 </div>
             </header>
             <div class="datepicker-content">
-                <bdatepickertable-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" indicators="dots" focused="[object Object]" datecreator="function _default() {
-                    /* istanbul ignore next */cov_95bzvpi9s.f[11]++;
-                    cov_95bzvpi9s.s[59]++;
-
-                    if (typeof _config2.default.defaultDateCreator === 'function') {
-                        /* istanbul ignore next */cov_95bzvpi9s.b[15][0]++;
-                        cov_95bzvpi9s.s[60]++;
-
-                        return _config2.default.defaultDateCreator();
-                    } else {
-                        /* istanbul ignore next */cov_95bzvpi9s.b[15][1]++;
-                        cov_95bzvpi9s.s[61]++;
-
-                        return new Date();
-                    }
-                }" nearbymonthdays="true" rulesforfirstweek="4"></bdatepickertable-stub>
+                <bdatepickertable-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" indicators="dots" focused="[object Object]" datecreator="function dateCreator() {}" nearbymonthdays="true" rulesforfirstweek="4"></bdatepickertable-stub>
             </div>
             <!---->
         </bdropdownitem-stub>
