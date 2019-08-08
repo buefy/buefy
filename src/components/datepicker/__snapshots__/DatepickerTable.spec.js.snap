@@ -25,12 +25,6 @@ exports[`BDatepickerTable render correctly 1`] = `
 
         </div>
     </header>
-    <div class="datepicker-body">
-        <bdatepickertablerow-stub hovereddaterange="" week="Fri Jun 01 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jun 02 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sun Jun 03 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jun 04 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jun 05 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jun 06 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jun 07 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="5" events="" rulesforfirstweek="4"></bdatepickertablerow-stub>
-        <bdatepickertablerow-stub hovereddaterange="" week="Fri Jun 08 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jun 09 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sun Jun 10 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jun 11 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jun 12 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jun 13 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jun 14 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="5" events="" rulesforfirstweek="4"></bdatepickertablerow-stub>
-        <bdatepickertablerow-stub hovereddaterange="" week="Fri Jun 15 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jun 16 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sun Jun 17 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jun 18 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jun 19 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jun 20 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jun 21 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="5" events="" rulesforfirstweek="4"></bdatepickertablerow-stub>
-        <bdatepickertablerow-stub hovereddaterange="" week="Fri Jun 22 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jun 23 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sun Jun 24 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jun 25 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jun 26 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jun 27 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jun 28 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="5" events="" rulesforfirstweek="4"></bdatepickertablerow-stub>
-        <bdatepickertablerow-stub hovereddaterange="" week="Fri Jun 29 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jun 30 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sun Jul 01 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jul 02 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jul 03 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jul 04 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jul 05 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="5" events="" rulesforfirstweek="4"></bdatepickertablerow-stub>
-    </div>
+    <div class="datepicker-body"></div>
 </section>
 `;

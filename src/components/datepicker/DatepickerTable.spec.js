@@ -12,7 +12,7 @@ describe('BDatepickerTable', () => {
                 'August', 'September', 'October', 'November', 'December'
             ],
             defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
-            focusedDate: new Date('2018-07')
+            focusedDate: new Date(Date.UTC(2018, 7, 1))
         }))
 
         defaultProps = () => ({
@@ -39,6 +39,9 @@ describe('BDatepickerTable', () => {
         const wrapper = shallowMount(BDatepickerTable, {
             propsData: {
                 ...defaultProps()
+            },
+            computed: {
+                weeksInThisMonth: jest.fn()
             }
         })
         expect(wrapper.html()).toMatchSnapshot()
