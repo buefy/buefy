@@ -1,15 +1,18 @@
 import { shallowMount } from '@vue/test-utils'
 import BTabs from '@components/tabs/Tabs'
+import BTabItem from '@components/tabs/TabItem'
 
 let wrapper
 
-describe('BTabs', () => {
+describe('BTabItem', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BTabs)
+        wrapper = shallowMount(BTabItem, {
+            parentComponent: BTabs
+        })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BTabs')
+        expect(wrapper.name()).toBe('BTabItem')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
