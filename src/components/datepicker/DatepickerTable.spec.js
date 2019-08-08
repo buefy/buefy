@@ -4,6 +4,12 @@ import config, {setOptions} from '@utils/config'
 
 let defaultProps
 
+const newDate = (y, m, d) => {
+    const date = new Date(Date.UTC(y, m, d))
+    date.getDate = jest.fn(() => date.getUTCDate())
+    return date
+}
+
 describe('BDatepickerTable', () => {
     beforeEach(() => {
         setOptions(Object.assign(config, {
@@ -12,7 +18,7 @@ describe('BDatepickerTable', () => {
                 'August', 'September', 'October', 'November', 'December'
             ],
             defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
-            focusedDate: new Date(Date.UTC(2018, 7, 1))
+            focusedDate: newDate(2018, 7, 1)
         }))
 
         defaultProps = () => ({
