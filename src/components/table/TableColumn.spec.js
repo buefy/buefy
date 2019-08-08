@@ -1,8 +1,16 @@
 import { shallowMount } from '@vue/test-utils'
-import BTable from '@components/table/Table'
 import BTableColumn from '@components/table/TableColumn'
 
 let wrapper
+const BTable = {
+    template: '<b-table-stub></b-table-stub>',
+    data() {
+        return {
+            newColumns: [],
+            _isTable: true
+        }
+    }
+}
 
 describe('BTableColumn', () => {
     beforeEach(() => {
