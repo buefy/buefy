@@ -16,4 +16,26 @@ describe('BMenuItem', () => {
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
+
+    it('sets newActive when active is changed', () => {
+        wrapper.setProps({active: true})
+        expect(wrapper.vm.newActive).toBeTruthy()
+    })
+
+    it('sets newExpanded when expanded is changed', () => {
+        wrapper.setProps({expanded: true})
+        expect(wrapper.vm.newExpanded).toBeTruthy()
+    })
+
+    it('manage onClick', () => {
+        wrapper.vm.reset = jest.fn()
+        wrapper.vm.onClick()
+
+        expect(wrapper.vm.reset).toHaveBeenCalled()
+        expect(wrapper.vm.newExpanded).toBeTruthy()
+        expect(wrapper.emitted()['update:expanded'][0]).toContainEqual(false)
+        expect(wrapper.vm.newActive).toBeTruthy()
+        expect(wrapper.emitted()['update:active'][0]).toContainEqual(true)
+        expect(wrapper.emitted()['click']).toBeTruthy()
+    })
 })
