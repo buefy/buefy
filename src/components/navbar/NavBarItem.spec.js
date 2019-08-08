@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BNavbarItem from '@components/navbar/NavbarItem.vue'
 
 let wrapper
@@ -6,18 +6,11 @@ let wrapper
 describe('BNavbarItem', () => {
     const tag = 'div'
     beforeEach(() => {
-        const NavbarItem = {
-            components: { BNavbarItem },
-            template: `
-            <div>
-                <b-navbar-item tag="${tag}"></b-navbar-item>
-            </div>
-            `
-        }
-        wrapper = mount(NavbarItem)
+        wrapper = shallowMount(BNavbarItem)
     })
 
     it('is called', () => {
+        expect(wrapper.name()).toBe('BNavbarItem')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
@@ -26,6 +19,7 @@ describe('BNavbarItem', () => {
     })
 
     it('correctly renders the provided tag', () => {
+        wrapper.setProps({tag})
         expect(wrapper.contains(tag)).toBeTruthy()
     })
 })
