@@ -1,11 +1,19 @@
 import { shallowMount } from '@vue/test-utils'
 import BClockpickerFace from '@components/clockpicker/ClockpickerFace'
 
-describe('BClockpickerFace', () => {
-    it('is called', () => {
-        const wrapper = shallowMount(BClockpickerFace)
+let wrapper
 
+describe('BClockpickerFace', () => {
+    beforeEach(() => {
+        wrapper = shallowMount(BClockpickerFace)
+    })
+
+    it('is called', () => {
         expect(wrapper.name()).toBe('BClockpickerFace')
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
     })
 })

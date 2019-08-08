@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BClockpicker render correctly 1`] = `
+<div class="b-clockpicker control is-primary">
+    <bdropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
+        <binput-stub type="text" hascounter="true" customclass="" autocomplete="off" readonly="readonly" use-html5-validation="true"></binput-stub>
+        <div custom="" class="card">
+            <!---->
+            <div class="card-content">
+                <div class="b-clockpicker-body" style="width: 266px; height: 266px;">
+                    <div class="b-clockpicker-time">
+                        <div class="b-clockpicker-btn active">Hours</div> <span class="b-clockpicker-btn">Min</span>
+                    </div>
+                    <div class="b-clockpicker-period">
+                        <div class="b-clockpicker-btn active">AM</div>
+                        <div class="b-clockpicker-btn">PM</div>
+                    </div>
+                    <bclockpickerface-stub pickersize="266" min="0" max="11" facenumbers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabledvalues="function boundFn(a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }"></bclockpickerface-stub>
+                </div>
+            </div>
+            <!---->
+        </div>
+    </bdropdown-stub>
+</div>
+`;
