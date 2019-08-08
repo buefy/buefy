@@ -24,6 +24,11 @@ describe('BDatepickerTableRow', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        const wrapper = shallowMount(BDatepickerTableRow, { propsData })
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     describe('classObject', function () {
         it('should have is-selected class for all range of dates selected', function () {
             const wrapper = shallowMount(BDatepickerTableRow, {

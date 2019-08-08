@@ -3,12 +3,37 @@ import {
 } from '@vue/test-utils'
 import BDatepicker from '@components/datepicker/Datepicker'
 
+import config, {setOptions} from '@utils/config'
+
 const dropdownMenu = '.dropdown-menu'
-let wrapper, $dropdown, $input
+let wrapper, defaultProps, $dropdown, $input
 
 describe('BDatepicker', () => {
     beforeEach(() => {
+        beforeEach(() => {
+            setOptions(Object.assign(config, {
+                defaultMonthNames: [
+                    'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                    'August', 'September', 'October', 'November', 'December'
+                ],
+                defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
+                focusedDate: new Date('2018-07')
+            }))
+
+            defaultProps = () => ({
+                dayNames: config.defaultDayNames,
+                monthNames: config.defaultMonthNames,
+                focused: {
+                    month: config.focusedDate.getMonth(),
+                    year: config.focusedDate.getFullYear()
+                }
+            })
+        })
+
         wrapper = mount(BDatepicker, {
+            propsData: {
+                ...defaultProps
+            },
             stubs: {
                 transition: false
             }
@@ -20,6 +45,10 @@ describe('BDatepicker', () => {
     it('is called', () => {
         expect(wrapper.name()).toBe('BDatepicker')
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('has an input type', () => {

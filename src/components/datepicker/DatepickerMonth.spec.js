@@ -3,6 +3,8 @@ import BDatepickerMonth from '@components/datepicker/DatepickerMonth'
 
 import config, {setOptions} from '@utils/config'
 
+let wrapper
+
 describe('BDatepickerMonth', () => {
     beforeEach(() => {
         setOptions(Object.assign(config, {
@@ -12,12 +14,8 @@ describe('BDatepickerMonth', () => {
             ],
             focusedDate: new Date('2018-07')
         }))
-    })
 
-    const dateCreator = () => new Date()
-
-    it('is called', () => {
-        const wrapper = shallowMount(BDatepickerMonth, {
+        wrapper = shallowMount(BDatepickerMonth, {
             propsData: {
                 monthNames: config.defaultMonthNames,
                 focused: {
@@ -27,7 +25,16 @@ describe('BDatepickerMonth', () => {
                 dateCreator
             }
         })
+    })
+
+    const dateCreator = () => new Date()
+
+    it('is called', () => {
         expect(wrapper.name()).toBe('BDatepickerMonth')
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
     })
 })

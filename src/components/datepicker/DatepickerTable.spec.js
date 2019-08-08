@@ -2,6 +2,8 @@ import { shallowMount } from '@vue/test-utils'
 import BDatepickerTable from '@components/datepicker/DatepickerTable'
 import config, {setOptions} from '@utils/config'
 
+let defaultProps
+
 describe('BDatepickerTable', () => {
     beforeEach(() => {
         setOptions(Object.assign(config, {
@@ -12,21 +14,34 @@ describe('BDatepickerTable', () => {
             defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
             focusedDate: new Date('2018-07')
         }))
+
+        defaultProps = () => ({
+            dayNames: config.defaultDayNames,
+            monthNames: config.defaultMonthNames,
+            focused: {
+                month: config.focusedDate.getMonth(),
+                year: config.focusedDate.getFullYear()
+            }
+        })
     })
 
     it('is called', () => {
         const wrapper = shallowMount(BDatepickerTable, {
             propsData: {
-                dayNames: config.defaultDayNames,
-                monthNames: config.defaultMonthNames,
-                focused: {
-                    month: config.focusedDate.getMonth(),
-                    year: config.focusedDate.getFullYear()
-                }
+                ...defaultProps()
             }
         })
         expect(wrapper.name()).toBe('BDatepickerTable')
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        const wrapper = shallowMount(BDatepickerTable, {
+            propsData: {
+                ...defaultProps()
+            }
+        })
+        expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('assign events to weeks even if the event has a time', () => {
@@ -47,12 +62,7 @@ describe('BDatepickerTable', () => {
     it('emit input event with selected date as payload when updateSelectedDate is called', () => {
         const wrapper = shallowMount(BDatepickerTable, {
             propsData: {
-                dayNames: config.defaultDayNames,
-                monthNames: config.defaultMonthNames,
-                focused: {
-                    month: config.focusedDate.getMonth(),
-                    year: config.focusedDate.getFullYear()
-                }
+                ...defaultProps()
             }
         })
         const newDate = new Date()
@@ -65,15 +75,6 @@ describe('BDatepickerTable', () => {
         const selectedBeginDate = new Date(2019, 3, 10)
         const threeDaysAfterBeginDate = new Date(2019, 3, 13)
         const threeDaysBeforeBeginDate = new Date(2019, 3, 7)
-
-        const defaultProps = () => ({
-            dayNames: config.defaultDayNames,
-            monthNames: config.defaultMonthNames,
-            focused: {
-                month: config.focusedDate.getMonth(),
-                year: config.focusedDate.getFullYear()
-            }
-        })
 
         it('should return an empty array when props range is false', () => {
             const wrapper = shallowMount(BDatepickerTable, {
