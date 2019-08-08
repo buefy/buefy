@@ -1,15 +1,18 @@
 import { shallowMount } from '@vue/test-utils'
 import BTable from '@components/table/Table'
+import BTableColumn from '@components/table/TableColumn'
 
 let wrapper
 
-describe('BTable', () => {
+describe('BTableColumn', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BTable)
+        wrapper = shallowMount(BTableColumn, {
+            parentComponent: BTable
+        })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BTable')
+        expect(wrapper.name()).toBe('BTableColumn')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 

@@ -13,6 +13,10 @@ describe('BTableMobileSort', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     describe('showPlaceholder', () => {
         it('is true if there are no columns', () => {
             expect(wrapper.vm.showPlaceholder).toBeTruthy()
