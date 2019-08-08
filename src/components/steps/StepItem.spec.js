@@ -19,4 +19,14 @@ describe('BSteps', () => {
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
+
+    it('set isActive when activate is called', () => {
+        wrapper.vm.activate()
+        expect(wrapper.vm.isActive).toBeTruthy()
+    })
+
+    it('reset isActive when deactivate is called', () => {
+        wrapper.vm.deactivate()
+        expect(wrapper.vm.isActive).toBeFalsy()
+    })
 })
