@@ -93,6 +93,16 @@ describe('BDatepicker', () => {
         expect(wrapper.emitted()['blur']).toBeTruthy()
     })
 
+    it('it react accordingly when setting computedValue', () => {
+        const date = new Date()
+        wrapper.vm.updateInternalState = jest.fn()
+        wrapper.vm.togglePicker = jest.fn()
+        wrapper.vm.computedValue = date
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalled()
+        expect(wrapper.vm.togglePicker).toHaveBeenCalled()
+        expect(wrapper.emitted()['input']).toBeTruthy()
+    })
+
     it('can open datepicker on openOnfocus', () => {
         wrapper.setProps({
             openOnFocus: true
