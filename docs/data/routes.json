@@ -482,6 +482,19 @@
         ],
         "isNew": true
     },
+    "documentation/rate": {
+        "title": "Rate",
+        "subtitle": "A quick rating operation on something",
+        "path": "/documentation/rate",
+        "githubPath": "pages/components/rate/Rate.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/rate"
+        ],
+        "isNew": true
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
