@@ -3,8 +3,6 @@
 exports[`BDatepickerTableRow render correctly 1`] = `
 <div class="datepicker-row">
     <!----> <a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
-        30
-        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
         31
         <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
         1
@@ -16,5 +14,7 @@ exports[`BDatepickerTableRow render correctly 1`] = `
         4
         <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
         5
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        6
         <!----></a></div>
 `;

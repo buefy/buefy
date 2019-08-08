@@ -1,15 +1,20 @@
 import { shallowMount } from '@vue/test-utils'
 import BDatepickerTableRow from '@components/datepicker/DatepickerTableRow'
 
+const newDate = (y, m, d) => {
+    const date = new Date(Date.UTC(y, m, d))
+    date.getDate = jest.fn(() => date.getUTCDate())
+    return date
+}
 const propsData = {
     week: [
-        new Date(Date.UTC(2017, 12, 31)),
-        new Date(Date.UTC(2018, 1, 1)),
-        new Date(Date.UTC(2018, 1, 2)),
-        new Date(Date.UTC(2018, 1, 3)),
-        new Date(Date.UTC(2018, 1, 4)),
-        new Date(Date.UTC(2018, 1, 5)),
-        new Date(Date.UTC(2018, 1, 6))
+        newDate(2017, 12, 31),
+        newDate(2018, 1, 1),
+        newDate(2018, 1, 2),
+        newDate(2018, 1, 3),
+        newDate(2018, 1, 4),
+        newDate(2018, 1, 5),
+        newDate(2018, 1, 6)
     ],
     month: 12,
     dateCreator: function () {
