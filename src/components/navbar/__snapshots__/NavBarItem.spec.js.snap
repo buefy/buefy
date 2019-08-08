@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BNavbarItem render correctly 1`] = `
+<div>
+    <div class="navbar-item"></div>
+</div>
+`;
