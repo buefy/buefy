@@ -1,8 +1,15 @@
 import { shallowMount } from '@vue/test-utils'
-import BDropdown from '@components/dropdown/Dropdown'
 import BDropdownItem from '@components/dropdown/DropdownItem'
 
 let wrapper
+const BDropdown = {
+    template: '<b-dropdown-stub></b-dropdown-stub>',
+    data() {
+        return {
+            _isDropdown: true
+        }
+    }
+}
 
 describe('BDropdownItem', () => {
     beforeEach(() => {

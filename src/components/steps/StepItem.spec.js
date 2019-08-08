@@ -1,8 +1,16 @@
 import { shallowMount } from '@vue/test-utils'
-import BSteps from '@components/steps/Steps'
 import BStepItem from '@components/steps/StepItem'
 
 let wrapper
+const BSteps = {
+    template: '<b-step-stub></b-step-stub>',
+    data() {
+        return {
+            stepItems: [],
+            _isSteps: true
+        }
+    }
+}
 
 describe('BSteps', () => {
     beforeEach(() => {

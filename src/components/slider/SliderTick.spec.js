@@ -1,8 +1,15 @@
 import { shallowMount } from '@vue/test-utils'
-import BSlider from '@components/slider/Slider'
 import BSliderTick from '@components/slider/SliderTick'
 
 let wrapper
+const BSlider = {
+    template: '<b-slider-stub></b-slider-stub>',
+    data() {
+        return {
+            _isSlider: true
+        }
+    }
+}
 
 describe('BSliderTick', () => {
     beforeEach(() => {

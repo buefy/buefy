@@ -1,8 +1,16 @@
 import { shallowMount } from '@vue/test-utils'
-import BTabs from '@components/tabs/Tabs'
 import BTabItem from '@components/tabs/TabItem'
 
 let wrapper
+const BTabs = {
+    template: '<b-tab-stub></b-tab-stub>',
+    data() {
+        return {
+            tabItems: [],
+            _isTabs: true
+        }
+    }
+}
 
 describe('BTabItem', () => {
     beforeEach(() => {
