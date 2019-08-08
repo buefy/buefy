@@ -15,6 +15,11 @@ describe('BField', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        const wrapper = shallowMount(BField)
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('sets fieldLabelSize to "is-normal" when horizontal==true and input elements are inside', () => {
         const wrapper = mount(BField, {
             localVue,

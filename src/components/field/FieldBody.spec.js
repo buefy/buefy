@@ -17,6 +17,15 @@ describe('BFieldBody', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        const wrapper = shallowMount(BFieldBody, {
+            slots: {
+                default: 'content'
+            }
+        })
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('should render the text when the child is a text', () => {
         const text = 'text'
         const wrapper = shallowMount(BFieldBody, {
