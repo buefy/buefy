@@ -1,15 +1,15 @@
 import { shallowMount } from '@vue/test-utils'
-import BSlider from '@components/slider/Slider'
+import BSliderThumb from '@components/slider/SliderThumb'
 
 let wrapper
 
-describe('BSlider', () => {
+describe('BSliderThumb', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BSlider)
+        wrapper = shallowMount(BSliderThumb)
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BSlider')
+        expect(wrapper.name()).toBe('BSliderThumb')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 

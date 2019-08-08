@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BSliderThumb render correctly 1`] = `
+<div class="b-slider-thumb-wrapper">
+    <btooltip-stub active="true" type="" label="0" position="is-top" size="is-medium">
+        <div tabindex="0" class="b-slider-thumb"></div>
+    </btooltip-stub>
+</div>
+`;

@@ -1,15 +1,18 @@
 import { shallowMount } from '@vue/test-utils'
 import BSlider from '@components/slider/Slider'
+import BSliderTick from '@components/slider/SliderTick'
 
 let wrapper
 
-describe('BSlider', () => {
+describe('BSliderTick', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BSlider)
+        wrapper = shallowMount(BSliderTick, {
+            parentComponent: BSlider
+        })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BSlider')
+        expect(wrapper.name()).toBe('BSliderTick')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
