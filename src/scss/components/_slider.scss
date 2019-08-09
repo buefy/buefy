@@ -70,6 +70,7 @@ $slider-mark-size: 0.75rem !default;
         transform: translate(-50%, -50%);
         cursor: grab;
         top: 50%;
+        flex-direction: column; // Fix shrinked thumb at the end in IE 11
 
         .b-slider-thumb {
             box-shadow: $slider-thumb-shadow;
