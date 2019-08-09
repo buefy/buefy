@@ -69,8 +69,8 @@ $slider-mark-size: 0.75rem !default;
         display: inline-flex;
         align-items: center;
         position: absolute;
-        transform: translate(-50%, -50%);
         cursor: grab;
+        transform: translate(-50%, -50%);
         top: 50%;
         flex-direction: column; // Fix shrinked thumb at the end in IE 11
 
@@ -134,9 +134,9 @@ $slider-mark-size: 0.75rem !default;
         position: absolute;
 		width: $slider-tick-width;
         transform: translate(-50%, -50%);
+        top: 50%;
         background: $slider-tick-background;
         border-radius: $slider-tick-radius;
-        top: 50%;
         &.is-tick-hidden {
             background: transparent;
         }
