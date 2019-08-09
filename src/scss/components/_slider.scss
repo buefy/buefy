@@ -36,6 +36,8 @@ $slider-mark-size: 0.75rem !default;
         font-size: $slider-mark-size;
         position: absolute;
         top: calc(#{$track-height} / 2 + 2px);
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -130,8 +132,6 @@ $slider-mark-size: 0.75rem !default;
 
     .b-slider-tick {
         position: absolute;
-        display: flex;
-        justify-content: center;
 		width: $slider-tick-width;
         transform: translate(-50%, -50%);
         background: $slider-tick-background;
