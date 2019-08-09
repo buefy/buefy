@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BTableMobileSort render correctly 1`] = `
+<div class="field table-mobile-sort">
+    <div class="field has-addons">
+        <bselect-stub expanded="">
+            <!---->
+        </bselect-stub>
+        <div class="control"><button class="button is-primary">
+                <bicon-stub icon="arrow-up" size="is-small" both="true" class="is-desc"></bicon-stub>
+            </button></div>
+    </div>
+</div>
+`;

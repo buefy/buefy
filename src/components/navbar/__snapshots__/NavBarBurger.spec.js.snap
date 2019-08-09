@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BNavbarBurger render correctly 1`] = `<a role="button" aria-label="menu" class="navbar-burger burger"><span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span></a>`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BDropdown render correctly 1`] = `
+<div class="dropdown is-mobile-modal">
+    <div role="button" aria-haspopup="true" class="dropdown-trigger"></div>
+    <div aria-hidden="true" class="background" style="display: none;" name="fade"></div>
+    <div aria-hidden="true" class="dropdown-menu" style="display: none;" name="fade">
+        <div class="dropdown-content"></div>
+    </div>
+</div>
+`;

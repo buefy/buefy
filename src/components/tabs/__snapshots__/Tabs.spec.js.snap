@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BTabs render correctly 1`] = `
+<div class="b-tabs">
+    <nav class="tabs">
+        <ul></ul>
+    </nav>
+    <section class="tab-content"></section>
+</div>
+`;

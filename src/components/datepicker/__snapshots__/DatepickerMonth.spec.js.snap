@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BDatepickerMonth render correctly 1`] = `
+<section class="datepicker-table">
+    <div class="datepicker-body">
+        <div class="datepicker-months"><a role="button" href="#" class="datepicker-cell is-selectable">
+                January
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                February
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                March
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                April
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                May
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                June
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                July
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                August
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                September
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                October
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                November
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                December
+                <!----></a></div>
+    </div>
+</section>
+`;

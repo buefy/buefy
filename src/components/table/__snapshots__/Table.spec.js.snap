@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BTable render correctly 1`] = `
+<div class="b-table">
+    <!---->
+    <!---->
+    <div class="table-wrapper">
+        <table class="table has-mobile-cards">
+            <!---->
+            <tbody>
+                <tr class="is-empty">
+                    <td colspan="0"></td>
+                </tr>
+            </tbody>
+            <!---->
+        </table>
+    </div>
+    <!---->
+</div>
+`;

@@ -4,9 +4,13 @@ import BTimepicker from '@components/timepicker/Timepicker'
 describe('BTimepicker', () => {
     it('is called', () => {
         const wrapper = shallowMount(BTimepicker)
-
         expect(wrapper.name()).toBe('BTimepicker')
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        const wrapper = shallowMount(BTimepicker)
+        expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('returns "1" for nativeStep is enableSeconds is true', () => {

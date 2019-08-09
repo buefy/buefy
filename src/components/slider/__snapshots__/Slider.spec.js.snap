@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BSlider render correctly 1`] = `
+<div class="b-slider is-primary">
+    <div class="b-slider-track">
+        <div class="b-slider-fill" style="width: 0%; left: 0%;"></div>
+        <!---->
+        <bsliderthumb-stub value="0" type="is-primary" tooltip="true" role="slider" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-orientation="horizontal"></bsliderthumb-stub>
+        <!---->
+    </div>
+</div>
+`;
