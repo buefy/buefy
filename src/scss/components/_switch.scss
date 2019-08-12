@@ -8,6 +8,7 @@ $switch-active-background-color: $primary !default;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    position: relative;
     @include unselectable;
     & + .switch {
         margin-left: 0.5em;
