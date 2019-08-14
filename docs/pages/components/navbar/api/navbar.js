@@ -54,12 +54,12 @@ export default [
           },
           {
             name: 'start',
-            description: '',
+            description: 'Items that will appear on the left',
             props: '—'
           },
           {
             name: 'end',
-            description: '',
+            description: 'Items that  will appear on the right',
             props: '—'
           },
       ]

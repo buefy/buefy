@@ -11,6 +11,7 @@
 <script>
 export default {
     name: 'BNavbarItem',
+    inheritAttrs: false,
     props: {
         tag: {
             type: String,
