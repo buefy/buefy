@@ -19,12 +19,12 @@
                     v-else-if="content"
                     v-html="content"/>
                 <slot v-else/>
+                <button
+                    type="button"
+                    v-if="showX"
+                    class="modal-close is-large"
+                    @click="cancel('x')"/>
             </div>
-            <button
-                type="button"
-                v-if="showX"
-                class="modal-close is-large"
-                @click="cancel('x')"/>
         </div>
     </transition>
 </template>
