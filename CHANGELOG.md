@@ -1,5 +1,19 @@
 # Buefy Changelog
 
+## 0.8.3
+
+### New features
+
+Add ``can-close`` prop to dropdown (thanks @service-paradis)
+Add ``icon-prev`` and ``icon-next`` props to datepicker, steps and pagination  (thanks @service-paradis)
+
+### Fixes
+
+* Fix selection UI to datepicker when empty range
+* Fix slider style for IE 11 (thanks @yxngl)
+* Fix #1646 navbar item when tag prop is ``router-link`` (thanks @wanxe)
+* Fix #1648 modal becomes clipped using switch (thanks @yxngl)
+
 ## 0.8.2
 
 * Add range selection using ``range`` prop to datepicker (thanks @afifsohaili)
@@ -14,7 +28,7 @@
 
 ### New features
 
-Add ``show-week-number`` to datepicker (thanks @quadra-diffusion)
+Add ``show-week-number`` prop to datepicker (thanks @quadra-diffusion)
 
 ### Fixes
 
