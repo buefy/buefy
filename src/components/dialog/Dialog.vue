@@ -14,7 +14,9 @@
                     class="modal-card-body"
                     :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <div class="media">
-                        <div class="media-left" v-if="hasIcon">
+                        <div
+                            class="media-left"
+                            v-if="hasIcon && (icon || iconByType)">
                             <b-icon
                                 :icon="icon ? icon : iconByType"
                                 :pack="iconPack"
