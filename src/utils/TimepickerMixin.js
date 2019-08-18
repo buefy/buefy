@@ -243,10 +243,10 @@ export default {
         },
 
         onHoursChange(value) {
-            if (!this.minutesSelected && this.defaultMinutes) {
+            if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
                 this.minutesSelected = this.defaultMinutes
             }
-            if (!this.secondsSelected && this.defaultSeconds) {
+            if (!this.secondsSelected && typeof this.defaultSeconds !== 'undefined') {
                 this.secondsSelected = this.defaultSeconds
             }
             this.updateDateSelected(

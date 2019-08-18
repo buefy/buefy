@@ -11,6 +11,7 @@ Add ``icon-prev`` and ``icon-next`` props to datepicker, steps and pagination  (
 
 * Fix selection UI to datepicker when empty range
 * Fix slider style for IE 11 (thanks @yxngl)
+* Fix ``default-minutes`` and ``default-seconds`` props when value is 0
 * Fix #1646 navbar item when tag prop is ``router-link`` (thanks @wanxe)
 * Fix #1648 modal becomes clipped using switch (thanks @yxngl)
 
