@@ -140,12 +140,32 @@ export default () => {
                 cjs()
             ]
         },
+        {
+            input: 'src/index.js',
+            external: ['vue'],
+            output: {
+                format: 'esm',
+                file: 'dist/buefy.esm.js'
+            },
+            plugins: [
+                node({
+                    extensions: ['.vue', '.js']
+                }),
+                vue({
+                    template: {
+                        isProduction: true
+                    }
+                }),
+                babel(babelConfig),
+                cjs()
+            ]
+        },
         // individual components
         ...components.map((f) => mapComponent(f)).reduce((r, a) => r.concat(a), [])
     ]
 
     if (process.env.MINIFY === 'true') {
-        config = config.filter((c) => c.output.format === 'umd')
+        config = config.filter((c) => !!c.output.file)
         config.forEach((c) => {
             c.output.file = c.output.file.replace(/\.js/g, '.min.js')
             c.plugins.push(terser({
