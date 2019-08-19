@@ -102,11 +102,13 @@ export default {
             value2: null,
             dragging: false,
             isRange: false,
-            newTooltipType: this.tooltipType ? this.tooltipType : this.type,
             _isSlider: true // Used by Thumb and Tick
         }
     },
     computed: {
+        newTooltipType() {
+            return this.tooltipType ? this.tooltipType : this.type
+        },
         tickValues() {
             if (!this.ticks || this.min > this.max || this.step === 0) return []
             const result = []
