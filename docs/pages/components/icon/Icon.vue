@@ -114,8 +114,8 @@
                                 'chevron-down': 'arrow-down',
                                 eye: 'eye',
                                 'eye-off': 'unlock',
-                                'menu-down': 'menu-down',
-                                'menu-up': 'menu-up'
+                                'menu-down': 'arrow-down-circled',
+                                'menu-up': 'arrow-up-circled'
                             }
                         }
                     }
