@@ -289,6 +289,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>customIconPacks</code>',
+                description: 'Allows you to define your own custom icon pack to be used in Buefy.',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
         ]
     }
 ]
