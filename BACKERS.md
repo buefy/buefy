@@ -9,3 +9,4 @@ You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtomm
 - [Jonas Dehairs](https://www.patreon.com/user/creators?u=132517333)
 - [alcalbg](https://www.patreon.com/alcalbg)
 - [Gevorg Harutyunyan](https://www.patreon.com/modularcoder)
+- [JustBoil.me](https://www.patreon.com/user/creators?u=23452260)
