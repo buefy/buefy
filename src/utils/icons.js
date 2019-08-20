@@ -27,8 +27,8 @@ let faIcons = {
         'chevron-left': 'angle-left',
         'chevron-down': 'angle-down',
         'eye-off': 'eye-slash',
-        'menu-down': 'arrow-down-circled',
-        'menu-up': 'arrow-up-circled'
+        'menu-down': 'caret-down',
+        'menu-up': 'caret-up'
     }
 }
 
