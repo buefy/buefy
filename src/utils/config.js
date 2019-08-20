@@ -38,7 +38,9 @@ let config = {
     defaultDatepickerYearsRange: [-100, 3],
     defaultDatepickerNearbyMonthDays: true,
     defaultDatepickerNearbySelectableMonthDays: false,
-    defaultDatepickerShowWeekNumber: false
+    defaultDatepickerShowWeekNumber: false,
+
+    customIconPacks: null
 }
 
 export default config

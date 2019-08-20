@@ -12,7 +12,7 @@
         <b-message type="is-info">
             Using <code>far</code> or <code>fad</code> while having FontAwesome free tier might have missing icons.
         </b-message>
-        
+
         <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
 
         <b-message type="is-info">
@@ -32,6 +32,15 @@
             <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
         </Example>
 
+        <Example :component="ExCustom" :code="ExCustomCode | pre" title="Custom font" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.8.3</span>
+            </div>
+            <p>You can also add your own custom font
+            (<a href="https://github.com/roalcantara/captain-icons" target="_blank">Captain Icons</a> is used in this example).</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -48,6 +57,8 @@
     import ExObjectSyntax from './examples/ExObjectSyntax'
     import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
 
+    import ExCustom from './examples/ExCustom'
+
     export default {
         data() {
             return {
@@ -58,6 +69,7 @@
                 ExMdiCode,
                 ExFaCode,
                 ExObjectSyntaxCode,
+                ExCustom,
                 usage: `
                 import { library } from '@fortawesome/fontawesome-svg-core';
                 // internal icons
@@ -77,7 +89,38 @@
                 Vue.use(Buefy, {
                   defaultIconComponent: 'vue-fontawesome',
                   defaultIconPack: 'fas',
-                });`
+                });`,
+                ExCustomCode: `
+                Vue.use(Buefy, {
+                    defaultIconPack: 'cap-icon',
+                    customIconPacks: {
+                        'cap-icon': {
+                            sizes: {
+                                default: 'is-size-5',
+                                'is-small': '',
+                                'is-medium': 'is-size-3',
+                                'is-large': 'is-size-1'
+                            },
+                            iconPrefix: 'ci-',
+                            internalIcons: {
+                                check: 'check',
+                                information: 'info',
+                                'check-circle': 'info-circle',
+                                alert: 'info',
+                                'alert-circle': 'info-circle',
+                                'arrow-up': 'arrow-up',
+                                'chevron-right': 'arrow-right',
+                                'chevron-left': 'arrow-left',
+                                'chevron-down': 'arrow-down',
+                                eye: 'eye',
+                                'eye-off': 'unlock',
+                                'menu-down': 'menu-down',
+                                'menu-up': 'menu-up'
+                            }
+                        }
+                    }
+                });
+                `
             }
         }
     }
