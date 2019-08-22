@@ -8,6 +8,7 @@ Add ``can-close`` prop to dropdown (thanks @service-paradis)
 Add ``icon-prev`` and ``icon-next`` props to datepicker, steps and pagination  (thanks @service-paradis)
 Add ``lazy`` prop to slider (thanks @yxngl)
 Add `dragging`, `dragstart` and `dragend` events to slider (thanks @yxngl)
+Add ``setValidity`` method to form components (thanks @GerryWilko)
 
 ### Fixes
 
@@ -17,6 +18,7 @@ Add `dragging`, `dragstart` and `dragend` events to slider (thanks @yxngl)
 * Fix pagination compatibility using IE 11 (thanks @service-paradis)
 * Fix #1646 navbar item when tag prop is ``router-link`` (thanks @wanxe)
 * Fix #1648 modal becomes clipped using switch (thanks @yxngl)
+* Fix #1670 simple upload on IE 11
 * Fix #1678 show autocomplete option when value is 0
 * Fix #1686 disable timepicker hour if no enabled minutes available (thanks @philnee)
 
