@@ -22,4 +22,15 @@ describe('BTimepicker', () => {
 
         expect(wrapper.vm.nativeStep).toBe('1')
     })
+
+    it('disables hour if no selectable minutes available', () => {
+        const wrapper = shallowMount(BTimepicker, {
+            propsData: {
+                'min-time': new Date(2019, 8, 22, 11, 55),
+                'increment-minutes': 10
+            }
+        })
+        expect(wrapper.find('option[value="11"]').hasAttribute('disabled', 'disabled')).toBe(true)
+        expect(wrapper.find('option[value="12"]').hasAttribute('disabled', 'disabled')).toBe(false)
+    })
 })
