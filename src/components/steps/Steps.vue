@@ -127,9 +127,9 @@ export default {
          * Check the first visible step index.
          */
         firstVisibleStepIndex() {
-            return this.stepItems.findIndex((step, idx) => {
-                return step.visible
-            })
+            return this.stepItems.map(
+                (step, idx) => step.visible
+            ).indexOf(true)
         },
 
         /**
@@ -141,12 +141,12 @@ export default {
         },
 
         /**
-            * Check the last visible step index.
-            */
+         * Check the last visible step index.
+         */
         lastVisibleStepIndex() {
-            let idx = this.reversedStepItems.findIndex((step, idx) => {
-                return step.visible
-            })
+            let idx = this.reversedStepItems.map(
+                (step, idx) => step.visible
+            ).indexOf(true)
             if (idx >= 0) {
                 return this.stepItems.length - 1 - idx
             }
@@ -212,13 +212,13 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         prev() {
             if (!this.hasPrev) return
-            let prevItemIdx = this.reversedStepItems.findIndex((step, idx) => {
-                return this.stepItems.length - 1 - idx < this.activeStep && step.visible
-            })
+            let prevItemIdx = this.reversedStepItems.map(
+                (step, idx) => this.stepItems.length - 1 - idx < this.activeStep && step.visible
+            ).indexOf(true)
             if (prevItemIdx >= 0) {
                 prevItemIdx = this.stepItems.length - 1 - prevItemIdx
             }
@@ -227,13 +227,13 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         next() {
             if (!this.hasNext) return
-            const nextItemIdx = this.stepItems.findIndex((step, idx) => {
-                return idx > this.activeStep && step.visible
-            })
+            const nextItemIdx = this.stepItems.map(
+                (step, idx) => idx > this.activeStep && step.visible
+            ).indexOf(true)
             this.$emit('input', nextItemIdx)
             this.changeStep(nextItemIdx)
         }
