@@ -67,6 +67,7 @@
 import Icon from '../icon/Icon'
 import SlotComponent from '../../utils/SlotComponent'
 import config from '../../utils/config'
+import { findIndex } from '../../utils/helpers'
 
 export default {
     name: 'BSteps',
@@ -127,7 +128,7 @@ export default {
          * Check the first visible step index.
          */
         firstVisibleStepIndex() {
-            return this.stepItems.findIndex((step, idx) => {
+            return findIndex(this.stepItems, (step, idx) => {
                 return step.visible
             })
         },
@@ -144,7 +145,7 @@ export default {
             * Check the last visible step index.
             */
         lastVisibleStepIndex() {
-            let idx = this.reversedStepItems.findIndex((step, idx) => {
+            let idx = findIndex(this.reversedStepItems, (step, idx) => {
                 return step.visible
             })
             if (idx >= 0) {
@@ -212,11 +213,11 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         prev() {
             if (!this.hasPrev) return
-            let prevItemIdx = this.reversedStepItems.findIndex((step, idx) => {
+            let prevItemIdx = findIndex(this.reversedStepItems, (step, idx) => {
                 return this.stepItems.length - 1 - idx < this.activeStep && step.visible
             })
             if (prevItemIdx >= 0) {
@@ -231,7 +232,7 @@ export default {
             */
         next() {
             if (!this.hasNext) return
-            const nextItemIdx = this.stepItems.findIndex((step, idx) => {
+            const nextItemIdx = findIndex(this.stepItems, (step, idx) => {
                 return idx > this.activeStep && step.visible
             })
             this.$emit('input', nextItemIdx)
