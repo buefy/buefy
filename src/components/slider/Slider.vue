@@ -179,10 +179,10 @@ export default {
             this.onInternalValueUpdate()
         },
         min() {
-            this.setValues()
+            this.setValues(this.value)
         },
         max() {
-            this.setValues()
+            this.setValues(this.value)
         }
     },
     methods: {
