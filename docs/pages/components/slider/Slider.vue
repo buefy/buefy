@@ -16,6 +16,10 @@
             <p>Just bind the value to an Array.</p>
         </Example>
 
+        <Example :component="ExLazy" :code="ExLazyCode" title="Lazy update">
+            <p>Use <code>lazy</code> to update <code>v-model</code> only when dragging is finished.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 
@@ -36,6 +40,8 @@
     import ExTickCode from '!!raw-loader!./examples/ExTick'
     import ExRange from './examples/ExRange'
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
+    import ExLazy from './examples/ExLazy'
+    import ExLazyCode from '!!raw-loader!./examples/ExLazy'
 
     export default {
         data() {
@@ -52,7 +58,9 @@
                 ExTick,
                 ExTickCode,
                 ExRange,
-                ExRangeCode
+                ExRangeCode,
+                ExLazy,
+                ExLazyCode
             }
         }
     }
