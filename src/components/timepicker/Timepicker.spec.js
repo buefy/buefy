@@ -30,7 +30,7 @@ describe('BTimepicker', () => {
                 'increment-minutes': 10
             }
         })
-        expect(wrapper.find('option[value="11"]').hasAttribute('disabled', 'disabled')).toBe(true)
-        expect(wrapper.find('option[value="12"]').hasAttribute('disabled', 'disabled')).toBe(false)
+        expect(wrapper.find('option[value="11"]').attributes()['disabled']).toBe('disabled')
+        expect(wrapper.find('option[value="12"]').attributes()['disabled']).not.toBe('disabled')
     })
 })
