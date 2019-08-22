@@ -19,6 +19,7 @@
         <Example :component="ExLazy" :code="ExLazyCode" title="Lazy update">
             <p>Use <code>lazy</code> to update <code>v-model</code> only when dragging is finished.</p>
         </Example>
+
         <ApiView :data="api"/>
     </div>
 
