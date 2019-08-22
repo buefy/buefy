@@ -205,6 +205,7 @@ export default {
                 this.value1 = isNaN(newValue)
                     ? this.min
                     : Math.min(this.max, Math.max(this.min, newValue))
+                this.value2 = null
             }
         },
         onInternalValueUpdate() {
