@@ -24,33 +24,6 @@ export function indexOf(array, obj, fn) {
 }
 
 /**
- * Polyfill for findIndex for incompatible browsers (cough cough IE)
- * Inspired from https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
- */
-export function findIndex(array, fn) {
-    if (Array.prototype.findIndex) {
-        return array.findIndex(fn)
-    } else {
-        if (array === null) {
-            throw new TypeError('findIndex called on null or undefined')
-        } else if (typeof fn !== 'function') {
-            throw new TypeError('argument must be a function')
-        }
-
-        const list = Object(array)
-        // Makes sures is always has an positive integer as length.
-        const length = list.length >>> 0
-        var thisArg = arguments[1]
-        for (let i = 0; i < length; i++) {
-            if (fn.call(thisArg, list[i], i, list)) {
-                return i
-            }
-        }
-        return -1
-    }
-}
-
-/**
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  */
