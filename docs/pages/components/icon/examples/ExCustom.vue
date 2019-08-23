@@ -93,7 +93,7 @@
 </template>
 
 <script>
-    import config, { setOptions } from "../../../../../src/utils/config"
+    import config from "../../../../../src/utils/config"
 
     const customIconConfig = {
         customIconPacks: {
@@ -106,16 +106,16 @@
                 },
                 iconPrefix: 'ci-',
                 internalIcons: {
-                    check: 'check',
-                    information: 'info',
+                    'check': 'check',
+                    'information': 'info',
                     'check-circle': 'info-circle',
-                    alert: 'info',
+                    'alert': 'info',
                     'alert-circle': 'info-circle',
                     'arrow-up': 'arrow-up',
                     'chevron-right': 'arrow-right',
                     'chevron-left': 'arrow-left',
                     'chevron-down': 'arrow-down',
-                    eye: 'eye',
+                    'eye': 'eye',
                     'eye-off': 'unlock',
                     'menu-down': 'arrow-down-circled',
                     'menu-up': 'arrow-up-circled'
@@ -125,7 +125,7 @@
     }
     export default {
         created() {
-            setOptions(Object.assign(config, customIconConfig))
+            this.$buefy.config.setOptions(Object.assign(config, customIconConfig))
         }
     }
 </script>

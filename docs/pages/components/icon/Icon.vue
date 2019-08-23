@@ -32,7 +32,7 @@
             <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
         </Example>
 
-        <Example :component="ExCustom" :code="ExCustomCode | pre" title="Custom font" vertical>
+        <Example :component="ExCustom" :code="ExCustomCode" title="Custom font" vertical>
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
                 <span class="tag is-info">0.8.3</span>
@@ -58,6 +58,7 @@
     import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
 
     import ExCustom from './examples/ExCustom'
+    import ExCustomCode from '!!raw-loader!./examples/ExCustom'
 
     export default {
         data() {
@@ -70,6 +71,7 @@
                 ExFaCode,
                 ExObjectSyntaxCode,
                 ExCustom,
+                ExCustomCode,
                 usage: `
                 import { library } from '@fortawesome/fontawesome-svg-core';
                 // internal icons
@@ -89,38 +91,7 @@
                 Vue.use(Buefy, {
                   defaultIconComponent: 'vue-fontawesome',
                   defaultIconPack: 'fas',
-                });`,
-                ExCustomCode: `
-                Vue.use(Buefy, {
-                    defaultIconPack: 'cap-icon',
-                    customIconPacks: {
-                        'cap-icon': {
-                            sizes: {
-                                default: 'is-size-5',
-                                'is-small': '',
-                                'is-medium': 'is-size-3',
-                                'is-large': 'is-size-1'
-                            },
-                            iconPrefix: 'ci-',
-                            internalIcons: {
-                                check: 'check',
-                                information: 'info',
-                                'check-circle': 'info-circle',
-                                alert: 'info',
-                                'alert-circle': 'info-circle',
-                                'arrow-up': 'arrow-up',
-                                'chevron-right': 'arrow-right',
-                                'chevron-left': 'arrow-left',
-                                'chevron-down': 'arrow-down',
-                                eye: 'eye',
-                                'eye-off': 'unlock',
-                                'menu-down': 'arrow-down-circled',
-                                'menu-up': 'arrow-up-circled'
-                            }
-                        }
-                    }
-                });
-                `
+                });`
             }
         }
     }
