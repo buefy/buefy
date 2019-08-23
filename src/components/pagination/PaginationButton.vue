@@ -1,13 +1,14 @@
 <template>
     <component
         :is="tag"
-        v-bind="$attrs"
         role="button"
         :href="href"
+        :disabled="isDisabled"
         class="pagination-link"
-        :class="{ 'is-current': page.isCurrent }"
+        :class="{ 'is-current': page.isCurrent, [page.class]: true }"
+        v-bind="$attrs"
         @click.prevent="page.click"
-        :aria-label="getAriaPageLabel(page.number, page.isCurrent)"
+        :aria-label="page['aria-label']"
         :aria-current="page.isCurrent">
         <slot>{{ page.number }}</slot>
     </component>
@@ -33,6 +34,10 @@ export default {
                     'NLink'
                 ].indexOf(value) >= 0
             }
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -40,19 +45,9 @@ export default {
             if (this.tag === 'a') {
                 return '#'
             }
-        }
-    },
-    methods: {
-        /**
-        * Get text for aria-label according to page number.
-        */
-        getAriaPageLabel(pageNumber, isCurrent) {
-            if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
-                return this.ariaPageLabel + ' ' + pageNumber + '.'
-            } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
-                return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
-            }
-            return null
+        },
+        isDisabled() {
+            return this.disabled || this.page.disabled
         }
     }
 }

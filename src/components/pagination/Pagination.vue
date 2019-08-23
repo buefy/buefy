@@ -1,32 +1,65 @@
 <template>
     <nav class="pagination" :class="rootClasses">
-        <a
-            role="button"
-            href="#"
-            class="pagination-previous"
-            :disabled="!hasPrev"
-            @click.prevent="prev"
-            :aria-label="ariaPreviousLabel">
+        <slot
+            v-if="$scopedSlots.previous"
+            name="previous"
+            :page="getPage(current - 1, {
+                disabled: !hasPrev,
+                class: 'pagination-previous',
+                'aria-label': ariaPreviousLabel
+        })">
             <b-icon
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
-        </a>
-        <a
-            role="button"
-            href="#"
-            class="pagination-next"
-            :disabled="!hasNext"
-            @click.prevent="next"
-            :aria-label="ariaNextLabel">
+        </slot>
+        <BPaginationButton
+            v-else
+            class="pagination-previous"
+            :disabled="!hasPrev"
+            :page="getPage(current - 1)">
+            <b-icon
+                :icon="iconPrev"
+                :pack="iconPack"
+                both
+                aria-hidden="true"/>
+        </BPaginationButton>
+        <slot
+            v-if="$scopedSlots.next"
+            name="next"
+            :page="getPage(current + 1, {
+                disabled: !hasNext,
+                class: 'pagination-next',
+                'aria-label': ariaNextLabel
+        })">
             <b-icon
                 :icon="iconNext"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
-        </a>
-        <ul class="pagination-list" v-if="!simple">
+        </slot>
+        <BPaginationButton
+            v-else
+            class="pagination-next"
+            :disabled="!hasNext"
+            :page="getPage(current + 1)">
+            <b-icon
+                :icon="iconNext"
+                :pack="iconPack"
+                both
+                aria-hidden="true"/>
+        </BPaginationButton>
+
+        <small class="info" v-if="simple">
+            <template v-if="perPage == 1">
+                {{ firstItem }} / {{ total }}
+            </template>
+            <template v-else>
+                {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+            </template>
+        </small>
+        <ul class="pagination-list" v-else>
             <!--First-->
             <li v-if="hasFirst">
                 <slot
@@ -62,14 +95,6 @@
                     :page="getPage(pageCount)" />
             </li>
         </ul>
-        <small class="info" v-if="simple">
-            <template v-if="perPage == 1">
-                {{ firstItem }} / {{ total }}
-            </template>
-            <template v-else>
-                {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
-            </template>
-        </small>
     </nav>
 </template>
 
@@ -229,28 +254,22 @@ export default {
         }
     },
     methods: {
-        getPage(num) {
+        getPage(num, options = {}) {
             return {
                 number: num,
                 isCurrent: this.current === num,
                 click: (event) => {
-                    if (this.current === num) return
+                    if (this.current === num || num < 1 || num > this.pageCount) return
                     this.$emit('change', num)
                     this.$emit('update:current', num)
 
                     // Set focus on element to keep tab order
                     this.$nextTick(() => event.target.focus())
-                }
+                },
+                disabled: options.disabled || false,
+                class: options.class || '',
+                'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
             }
-        },
-
-        /**
-        * Previous button click listener.
-        */
-        prev() {
-            if (!this.hasPrev) return
-            this.$emit('change', this.current - 1)
-            this.$emit('update:current', this.current - 1)
         },
 
         /**
@@ -260,6 +279,19 @@ export default {
             if (!this.hasNext) return
             this.$emit('change', this.current + 1)
             this.$emit('update:current', this.current + 1)
+        },
+
+        /**
+        * Get text for aria-label according to page number.
+        */
+        getAriaPageLabel(pageNumber, isCurrent) {
+            console.log(this)
+            if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
+                return this.ariaPageLabel + ' ' + pageNumber + '.'
+            } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
+                return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
+            }
+            return null
         }
     }
 }

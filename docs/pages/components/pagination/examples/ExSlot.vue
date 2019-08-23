@@ -4,6 +4,7 @@
             :total="200"
             :current.sync="current"
             :per-page="10">
+
             <b-pagination-button
                 slot-scope="props"
                 :page="props.page"
@@ -11,6 +12,25 @@
                 :to="`/documentation/pagination#page${props.page.number}`">
                 {{ convertToRoman(props.page.number) }}
             </b-pagination-button>
+
+            <b-pagination-button
+                slot="previous"
+                slot-scope="props"
+                :page="props.page"
+                tag="router-link"
+                :to="`/documentation/pagination#page${props.page.number}`">
+                Previous
+            </b-pagination-button>
+
+            <b-pagination-button
+                slot="next"
+                slot-scope="props"
+                :page="props.page"
+                tag="router-link"
+                :to="`/documentation/pagination#page${props.page.number}`">
+                Next
+            </b-pagination-button>
+
         </b-pagination>
     </section>
 </template>
