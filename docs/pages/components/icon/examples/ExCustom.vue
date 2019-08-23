@@ -93,8 +93,6 @@
 </template>
 
 <script>
-    import config from "../../../../../src/utils/config"
-
     const customIconConfig = {
         customIconPacks: {
             'icon': {
@@ -125,7 +123,7 @@
     }
     export default {
         created() {
-            this.$buefy.config.setOptions(Object.assign(config, customIconConfig))
+            this.$buefy.config.setOptions(customIconConfig)
         }
     }
 </script>
