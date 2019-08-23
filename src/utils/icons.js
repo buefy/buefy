@@ -2,7 +2,7 @@ import config from '../utils/config'
 
 let mdiIcons = {
     sizes: {
-        default: 'mdi-24px',
+        'default': 'mdi-24px',
         'is-small': '',
         'is-medium': 'mdi-36px',
         'is-large': 'mdi-48px'
@@ -13,15 +13,15 @@ let mdiIcons = {
 const faIconPrefix = config.defaultIconComponent ? '' : 'fa-'
 let faIcons = {
     sizes: {
-        default: faIconPrefix + 'lg',
+        'default': faIconPrefix + 'lg',
         'is-small': '',
         'is-medium': faIconPrefix + '2x',
         'is-large': faIconPrefix + '3x'
     },
     iconPrefix: faIconPrefix,
     internalIcons: {
-        information: 'info-circle',
-        alert: 'exclamation-triangle',
+        'information': 'info-circle',
+        'alert': 'exclamation-triangle',
         'alert-circle': 'exclamation-circle',
         'chevron-right': 'angle-right',
         'chevron-left': 'angle-left',

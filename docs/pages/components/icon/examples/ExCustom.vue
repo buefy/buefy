@@ -99,7 +99,7 @@
         customIconPacks: {
             'cap-icon': {
                 sizes: {
-                    default: 'is-size-5',
+                    'default': 'is-size-5',
                     'is-small': '',
                     'is-medium': 'is-size-3',
                     'is-large': 'is-size-1'
