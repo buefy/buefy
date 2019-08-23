@@ -32,7 +32,7 @@
             <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
         </Example>
 
-        <Example :component="ExCustom" :code="ExCustomCode" title="Custom font" vertical>
+        <Example :component="ExCustom" :code="ExCustomCode" title="Custom Icon Pack" vertical>
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
                 <span class="tag is-info">0.8.3</span>
