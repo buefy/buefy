@@ -4,10 +4,11 @@
 
 ### New features
 
+Add ``customIconPacks`` constructor option to use custom icon packs (thanks @service-paradis)
 Add ``can-close`` prop to dropdown (thanks @service-paradis)
 Add ``icon-prev`` and ``icon-next`` props to datepicker, steps and pagination  (thanks @service-paradis)
 Add ``lazy`` prop to slider (thanks @yxngl)
-Add `dragging`, `dragstart` and `dragend` events to slider (thanks @yxngl)
+Add ``dragging``, ``dragstart`` and ``dragend`` events to slider (thanks @yxngl)
 Add ``setValidity`` method to form components (thanks @GerryWilko)
 
 ### Fixes

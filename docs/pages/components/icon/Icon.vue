@@ -3,7 +3,7 @@
         <p class="content">
             Buefy is compatible with both <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a>
             , <a href="http://fontawesome.io/" target="_blank">FontAwesome 4</a>
-            and <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a>.
+            and <a href="https://fontawesome.com/" target="_blank">FontAwesome 5</a> but you can also add your custom icon pack.<br>
             They adapt to most elements background automatically — but you can also override their colors.
         </p>
 
