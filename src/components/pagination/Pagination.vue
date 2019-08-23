@@ -273,15 +273,6 @@ export default {
         },
 
         /**
-        * Next button click listener.
-        */
-        next() {
-            if (!this.hasNext) return
-            this.$emit('change', this.current + 1)
-            this.$emit('update:current', this.current + 1)
-        },
-
-        /**
         * Get text for aria-label according to page number.
         */
         getAriaPageLabel(pageNumber, isCurrent) {
