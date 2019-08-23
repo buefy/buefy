@@ -276,7 +276,6 @@ export default {
         * Get text for aria-label according to page number.
         */
         getAriaPageLabel(pageNumber, isCurrent) {
-            console.log(this)
             if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
                 return this.ariaPageLabel + ' ' + pageNumber + '.'
             } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
