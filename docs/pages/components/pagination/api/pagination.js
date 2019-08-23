@@ -115,6 +115,20 @@ export default [
                 default: '—'
             }
         ],
+        slots: [
+            {
+                name: 'default',
+                description: 'This is to customize numbered pagination buttons with the Button subcomponent.',
+            },
+            {
+                name: 'next',
+                description: 'This is to customize the next pagination button with the Button subcomponent.',
+            },
+            {
+                name: 'previous',
+                description: 'This is to customize the previous pagination button with the Button subcomponent.',
+            }
+        ],
         events: [
             {
                 name: '<code>change</code>',
