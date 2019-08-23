@@ -33,6 +33,10 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
+        <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
+            <p>Sorting multiple</p>
+        </Example>
+
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
             <div class="tags has-addons">
@@ -42,13 +46,6 @@
             <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
         </Example>
 
-        <Example :component="ExCustomDetailedRow" :code="ExCustomDetailedRowCode" title="Custom Detailed rows">
-            <p>You can add anything you like into the <code>detail</code> named scoped by providing the <code>customDetailRow</code> prop to the table.</p>
-            <b-message type="is-warning">
-                Be cautious when using a custom detailed row and toggling the display of columns,
-                as you will have to manage either the content within (with <code>colspan</code>) or the columns themselves dependent on the content displayed.
-            </b-message>
-        </Example>
 
         <Example :component="ExRowStatus" :code="ExRowStatusCode" title="Row status">
             <p>Use the <code>row-class</code> prop to return a class name. It's a function that receives <code>row</code> and <code>index</code> parameters.</p>
@@ -110,6 +107,9 @@
     import ExPaginationSort from './examples/ExPaginationSort'
     import ExPaginationSortCode from '!!raw-loader!./examples/ExPaginationSort'
 
+    import ExSortMultiple from './examples/ExSortMultiple'
+    import ExSortMultipleCode from '!!raw-loader!./examples/ExSortMultiple'
+
     import ExDetailedRow from './examples/ExDetailedRow'
     import ExDetailedRowCode from '!!raw-loader!./examples/ExDetailedRow'
 
@@ -143,6 +143,7 @@
                 ExSelection,
                 ExCheckable,
                 ExPaginationSort,
+                ExSortMultiple,
                 ExDetailedRow,
                 ExCustomDetailedRow,
                 ExRowStatus,
@@ -156,6 +157,7 @@
                 ExSelectionCode,
                 ExCheckableCode,
                 ExPaginationSortCode,
+                ExSortMultipleCode,
                 ExDetailedRowCode,
                 ExCustomDetailedRowCode,
                 ExRowStatusCode,

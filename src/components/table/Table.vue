@@ -56,7 +56,7 @@
                             v-for="(column, index) in visibleColumns"
                             :key="index"
                             :class="{
-                                'is-current-sort': currentSortColumn === column,
+                                'is-current-sort': currentSortColumn === column && !sortMultiple,
                                 'is-sortable': column.sortable
                             }"
                             :style="{
@@ -86,8 +86,21 @@
                                     />
                                 </template>
                                 <template v-else>{{ column.label }}</template>
-
+                                <template
+                                    v-if="sortMultiple && sortMultipleData.find(i =>
+                                    i.field === column.field)">
+                                    <b-icon
+                                        :icon="sortIcon"
+                                        :pack="iconPack"
+                                        both
+                                        :size="sortIconSize"
+                                        :class="{ 'is-desc': isDesc(column)}"
+                                    />
+                                    {{ sortMultipleData.findIndex(i =>
+                                    i.field === column.field) + 1 }}
+                                </template>
                                 <b-icon
+                                    v-else-if="!sortMultiple"
                                     v-show="currentSortColumn === column"
                                     :icon="sortIcon"
                                     :pack="iconPack"
@@ -360,6 +373,14 @@ export default {
             }
         },
         backendSorting: Boolean,
+        sortMultiple: {
+            type: Boolean,
+            default: false
+        },
+        sortMultipleData: {
+            type: Array,
+            default: () => []
+        },
         rowClass: {
             type: Function,
             default: () => ''
@@ -569,6 +590,11 @@ export default {
         }
     },
     methods: {
+        isDesc(column) {
+            let foundSortData = this.sortMultipleData.length > 0
+                ? this.sortMultipleData.find((i) => i.field === column.field) : false
+            return foundSortData ? foundSortData.order === 'desc' : false
+        },
         /**
         * Sort an array by key without mutating original data.
         * Call the user sort function if it was passed.
