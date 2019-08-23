@@ -106,19 +106,19 @@
                 },
                 iconPrefix: 'ion-md-',
                 internalIcons: {
-                    'check': 'check',
-                    'information': 'info',
-                    'check-circle': 'check-circle',
-                    'alert': 'exclamation-triangle',
-                    'alert-circle': 'exclamation-circle',
-                    'arrow-up': 'chevron-up',
-                    'chevron-right': 'arrow-right',
-                    'chevron-left': 'chevron-left',
-                    'chevron-down': 'chevron-down',
+                    'check': 'checkmark',
+                    'information': 'information',
+                    'check-circle': 'checkmark-circle-outline',
+                    'alert': 'alert',
+                    'alert-circle': 'alert',
+                    'arrow-up': 'arrow-up',
+                    'chevron-right': 'arrow-forward',
+                    'chevron-left': 'arrow-back',
+                    'chevron-down': 'arrow-down',
                     'eye': 'eye',
-                    'eye-off': 'eye-slash',
-                    'menu-down': 'caret-down',
-                    'menu-up': 'caret-up'
+                    'eye-off': 'eye-off',
+                    'menu-down': 'arrow-dropdown',
+                    'menu-up': 'arrow-dropup'
                 }
             }
         }
