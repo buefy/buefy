@@ -29,42 +29,37 @@
         <ul class="pagination-list" v-if="!simple">
             <!--First-->
             <li v-if="hasFirst">
-                <a
-                    role="button"
-                    href="#"
-                    class="pagination-link"
-                    @click.prevent="first"
-                    :aria-label="getAriaPageLabel(1, false)">
-                    1
-                </a>
+                <slot
+                    v-if="$scopedSlots.default"
+                    :page="getPage(1)"
+                />
+                <BPaginationButton
+                    v-else
+                    :page="getPage(1)" />
             </li>
             <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
 
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
-                <a
-                    role="button"
-                    href="#"
-                    class="pagination-link"
-                    :class="{ 'is-current': page.isCurrent }"
-                    @click.prevent="page.click"
-                    :aria-label="getAriaPageLabel(page.number, page.isCurrent)"
-                    :aria-current="page.isCurrent">
-                    {{ page.number }}
-                </a>
+                <slot
+                    v-if="$scopedSlots.default"
+                    :page="page"
+                />
+                <BPaginationButton
+                    v-else
+                    :page="page" />
             </li>
 
             <!--Last-->
             <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
             <li v-if="hasLast">
-                <a
-                    role="button"
-                    href="#"
-                    class="pagination-link"
-                    @click.prevent="last"
-                    :aria-label="getAriaPageLabel(pageCount, false)">
-                    {{ pageCount }}
-                </a>
+                <slot
+                    v-if="$scopedSlots.default"
+                    :page="getPage(pageCount)"
+                />
+                <BPaginationButton
+                    v-else
+                    :page="getPage(pageCount)" />
             </li>
         </ul>
         <small class="info" v-if="simple">
@@ -79,13 +74,15 @@
 </template>
 
 <script>
+import PaginationButton from './PaginationButton'
 import Icon from '../icon/Icon'
 import config from '../../utils/config'
 
 export default {
     name: 'BPagination',
     components: {
-        [Icon.name]: Icon
+        [Icon.name]: Icon,
+        [PaginationButton.name]: PaginationButton
     },
     props: {
         total: [Number, String],
@@ -218,18 +215,7 @@ export default {
 
             const pages = []
             for (let i = left; i <= right; i++) {
-                pages.push({
-                    number: i,
-                    isCurrent: this.current === i,
-                    click: (event) => {
-                        if (this.current === i) return
-                        this.$emit('change', i)
-                        this.$emit('update:current', i)
-
-                        // Set focus on element to keep tab order
-                        this.$nextTick(() => event.target.focus())
-                    }
-                })
+                pages.push(this.getPage(i))
             }
             return pages
         }
@@ -243,6 +229,21 @@ export default {
         }
     },
     methods: {
+        getPage(num) {
+            return {
+                number: num,
+                isCurrent: this.current === num,
+                click: (event) => {
+                    if (this.current === num) return
+                    this.$emit('change', num)
+                    this.$emit('update:current', num)
+
+                    // Set focus on element to keep tab order
+                    this.$nextTick(() => event.target.focus())
+                }
+            }
+        },
+
         /**
         * Previous button click listener.
         */
@@ -253,40 +254,12 @@ export default {
         },
 
         /**
-        * First button click listener.
-        */
-        first() {
-            this.$emit('change', 1)
-            this.$emit('update:current', 1)
-        },
-
-        /**
-        * Last button click listener.
-        */
-        last() {
-            this.$emit('change', this.pageCount)
-            this.$emit('update:current', this.pageCount)
-        },
-
-        /**
         * Next button click listener.
         */
         next() {
             if (!this.hasNext) return
             this.$emit('change', this.current + 1)
             this.$emit('update:current', this.current + 1)
-        },
-
-        /**
-        * Get text for aria-label according to page number.
-        */
-        getAriaPageLabel(pageNumber, isCurrent) {
-            if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
-                return this.ariaPageLabel + ' ' + pageNumber + '.'
-            } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
-                return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
-            }
-            return null
         }
     }
 }

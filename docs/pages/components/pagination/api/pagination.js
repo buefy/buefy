@@ -1,5 +1,6 @@
 export default [
     {
+        title: 'Pagination',
         props: [
             {
                 name: '<code>total</code>',
@@ -119,6 +120,32 @@ export default [
                 name: '<code>change</code>',
                 description: 'Triggers when the current page is changed',
                 parameters: '<code>value: Number</code>'
+            }
+        ]
+    },
+    {
+        title: 'Button',
+        props: [
+            {
+                name: '<code>page</code>',
+                description: 'The prop page need to be passed upon the component (<code>:page="props.page"</code>).',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>tag</code>',
+                description: 'Button tag name',
+                type: 'String',
+                values: '<code>a</code>, <code>button</code>, <code>input</code>, <code>router-link</code>, <code>nuxt-link</code> or other nuxt alias',
+                default: '<code>a</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: '<strong>Required</strong>, pagination button content',
+                props: '-'
             }
         ]
     }
