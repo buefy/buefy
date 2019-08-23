@@ -119,14 +119,17 @@ export default [
             {
                 name: 'default',
                 description: 'This is to customize numbered pagination buttons with the Button subcomponent.',
+                props: '<code>:page="props.page"</code>'
             },
             {
                 name: 'next',
                 description: 'This is to customize the next pagination button with the Button subcomponent.',
+                props: '<code>:page="props.page"</code>'
             },
             {
                 name: 'previous',
                 description: 'This is to customize the previous pagination button with the Button subcomponent.',
+                props: '<code>:page="props.page"</code>'
             }
         ],
         events: [
