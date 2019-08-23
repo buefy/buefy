@@ -12,7 +12,7 @@
         <b-message type="is-info">
             Using <code>far</code> or <code>fad</code> while having FontAwesome free tier might have missing icons.
         </b-message>
-        
+
         <Example :component="ExFa" :code="ExFaCode" title="FontAwesome" vertical/>
 
         <b-message type="is-info">
@@ -32,6 +32,15 @@
             <p>You can also use object syntax for <code>type</code> props just like Vuejs <code>class</code>.</p>
         </Example>
 
+        <Example :component="ExCustom" :code="ExCustomCode" title="Custom Icon Pack" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.8.3</span>
+            </div>
+            <p>You can also add your own custom font
+            (<a href="https://ionicons.com" target="_blank">Ionicons</a> is used in this example).</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -48,6 +57,9 @@
     import ExObjectSyntax from './examples/ExObjectSyntax'
     import ExObjectSyntaxCode from '!!raw-loader!./examples/ExObjectSyntax'
 
+    import ExCustom from './examples/ExCustom'
+    import ExCustomCode from '!!raw-loader!./examples/ExCustom'
+
     export default {
         data() {
             return {
@@ -58,6 +70,8 @@
                 ExMdiCode,
                 ExFaCode,
                 ExObjectSyntaxCode,
+                ExCustom,
+                ExCustomCode,
                 usage: `
                 import { library } from '@fortawesome/fontawesome-svg-core';
                 // internal icons
