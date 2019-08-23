@@ -2,89 +2,89 @@
     <section>
         <div class="block">
             <b-icon
-                pack="cap-icon"
-                icon="user"
+                pack="icon"
+                icon="person"
                 size="is-small">
             </b-icon>
             <b-icon
-                pack="cap-icon"
+                pack="icon"
                 icon="home"
                 size="is-small">
             </b-icon>
             <b-icon
-                pack="cap-icon"
-                icon="gear"
+                pack="icon"
+                icon="apps"
                 size="is-small">
             </b-icon>
         </div>
 
         <div class="block">
             <b-icon
-                pack="cap-icon"
-                icon="user">
+                pack="icon"
+                icon="person">
             </b-icon>
             <b-icon
-                pack="cap-icon"
+                pack="icon"
                 icon="home">
             </b-icon>
             <b-icon
-                pack="cap-icon"
-                icon="gear">
+                pack="icon"
+                icon="apps">
             </b-icon>
         </div>
 
         <div class="block">
             <b-icon
-                pack="cap-icon"
-                icon="user"
+                pack="icon"
+                icon="person"
                 size="is-medium">
             </b-icon>
             <b-icon
-                pack="cap-icon"
+                pack="icon"
                 icon="home"
                 size="is-medium">
             </b-icon>
             <b-icon
-                pack="cap-icon"
-                icon="gear"
+                pack="icon"
+                icon="apps"
                 size="is-medium">
             </b-icon>
         </div>
 
         <div class="block">
             <b-icon
-                pack="cap-icon"
-                icon="user"
+                pack="icon"
+                icon="person"
                 size="is-large"
                 type="is-success">
             </b-icon>
             <b-icon
-                pack="cap-icon"
+                pack="icon"
                 icon="home"
                 size="is-large"
                 type="is-info">
             </b-icon>
             <b-icon
-                pack="cap-icon"
-                icon="gear"
+                pack="icon"
+                icon="apps"
                 size="is-large"
                 type="is-primary">
             </b-icon>
         </div>
 
         <button class="button is-dark">
-            <b-icon pack="cap-icon" icon="check"></b-icon>
+            <b-icon pack="icon" icon="checkmark"></b-icon>
             <span>Finish</span>
         </button>
 
         <button class="button is-warning">
-            <b-icon pack="cap-icon" icon="check"></b-icon>
+            <b-icon pack="icon" icon="checkmark"></b-icon>
             <span>Finish</span>
         </button>
 
         <button class="button is-warning">
             <b-icon
-                pack="cap-icon"
+                pack="icon"
                 icon="refresh">
             </b-icon>
             <span>Refresh</span>
@@ -97,28 +97,28 @@
 
     const customIconConfig = {
         customIconPacks: {
-            'cap-icon': {
+            'icon': {
                 sizes: {
                     'default': 'is-size-5',
                     'is-small': '',
                     'is-medium': 'is-size-3',
                     'is-large': 'is-size-1'
                 },
-                iconPrefix: 'ci-',
+                iconPrefix: 'ion-md-',
                 internalIcons: {
                     'check': 'check',
                     'information': 'info',
-                    'check-circle': 'info-circle',
-                    'alert': 'info',
-                    'alert-circle': 'info-circle',
-                    'arrow-up': 'arrow-up',
+                    'check-circle': 'check-circle',
+                    'alert': 'exclamation-triangle',
+                    'alert-circle': 'exclamation-circle',
+                    'arrow-up': 'chevron-up',
                     'chevron-right': 'arrow-right',
-                    'chevron-left': 'arrow-left',
-                    'chevron-down': 'arrow-down',
+                    'chevron-left': 'chevron-left',
+                    'chevron-down': 'chevron-down',
                     'eye': 'eye',
-                    'eye-off': 'unlock',
-                    'menu-down': 'arrow-down-circled',
-                    'menu-up': 'arrow-up-circled'
+                    'eye-off': 'eye-slash',
+                    'menu-down': 'caret-down',
+                    'menu-up': 'caret-up'
                 }
             }
         }
@@ -131,5 +131,5 @@
 </script>
 
 <style scoped>
-    @import "https://unpkg.com/captain-icons/dist/captain-icons.min.css";
+    @import "https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css";
 </style>
