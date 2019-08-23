@@ -87,7 +87,9 @@
                                 </template>
                                 <template v-else>{{ column.label }}</template>
                                 <template
-                                    v-if="sortMultiple && sortMultipleData.find(i =>
+                                    v-if="backendSorting &&
+                                        sortMultiple &&
+                                        sortMultipleData.find(i =>
                                     i.field === column.field)">
                                     <b-icon
                                         :icon="sortIcon"

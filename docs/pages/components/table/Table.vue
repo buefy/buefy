@@ -33,8 +33,12 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
-        <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
-            <p>Sorting multiple</p>
+        <Example :component="ExCustomDetailedRow" :code="ExCustomDetailedRowCode" title="Custom Detailed rows">
+            <p>You can add anything you like into the <code>detail</code> named scoped by providing the <code>customDetailRow</code> prop to the table.</p>
+            <b-message type="is-warning">
+                Be cautious when using a custom detailed row and toggling the display of columns,
+                as you will have to manage either the content within (with <code>colspan</code>) or the columns themselves dependent on the content displayed.
+            </b-message>
         </Example>
 
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
@@ -76,6 +80,11 @@
                 then manage it with <code>page-change</code> and <code>sort</code> events.
             </p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
+        </Example>
+
+        <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
+            <p>To sort on additional columns, use <code>sort-multiple</code>. Will only work if <code>backend-sorting</code> is enabled</p>
+            <p>Use <code>sort-multiple-data</code> prop with your custom sorting priority</p>
         </Example>
 
         <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows">

@@ -5,13 +5,13 @@
           <b-switch v-model="multipleColumnsSwitch">Sort multiple rows</b-switch>
       </div>
       <div class="control is-flex">
-          <span class="button" @click="resetPriority">reset</span>
+          <span class="button" @click="resetPriority" :disabled="sortingPrioirty.length === 0">Reset sorting</span>
       </div>
     </b-field>
     <b-table 
     :data="data"
-    :backend-sorting="true"
     @sort="sortPressed"
+    :backend-sorting="true"
     :sort-multiple="multipleColumnsSwitch"
     :sort-multiple-data="sortingPrioirty"
     >

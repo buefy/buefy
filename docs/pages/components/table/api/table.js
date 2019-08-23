@@ -129,6 +129,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>backend-sorting</code>',
+                description: `Columns won't be sorted with Javascript, use with <code>sort</code> event to sort in your backend`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>sort-multiple-data</code>',
+                description: `Set icons in headers to match your custom sort`,
+                type: '	Array<Object>',
+                values: '—',
+                default: '<code>[]</code>'
+            },
+            {
                 name: '<code>backend-pagination</code>',
                 description: `Rows won't be paginated with Javascript, use with <code>page-change</code> event to paginate in your backend`,
                 type: 'Boolean',
