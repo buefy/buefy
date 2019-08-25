@@ -4,6 +4,7 @@
         role="navigation"
         aria-label="main navigation"
         :class="computedClasses"
+        v-click-outside="closeMenu"
     >
         <div class="navbar-brand">
             <slot name="brand"/>
@@ -24,6 +25,7 @@
 
 <script>
 import NavbarBurger from './NavbarBurger.vue'
+import clickOutside from '../../directives/clickOutside'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
@@ -34,6 +36,9 @@ export default {
     name: 'BNavbar',
     components: {
         NavbarBurger
+    },
+    directives: {
+        clickOutside
     },
     props: {
         type: [String, Object],
@@ -102,6 +107,13 @@ export default {
     methods: {
         toggleActive() {
             this.internalIsActive = !this.internalIsActive
+            this.emitUpdateParentEvent()
+        },
+        closeMenu() {
+            this.internalIsActive = false
+            this.emitUpdateParentEvent()
+        },
+        emitUpdateParentEvent() {
             this.$emit('update:isActive', this.internalIsActive)
         },
         setBodyClass(className) {
