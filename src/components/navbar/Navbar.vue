@@ -26,7 +26,9 @@
 import NavbarBurger from './NavbarBurger.vue'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
+const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
+const BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom'
 
 export default {
     name: 'BNavbar',
@@ -80,9 +82,9 @@ export default {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
                 if (isSet) {
-                    return this.setBodyClass(FIXED_TOP_CLASS)
+                    return this.setBodyClass(BODY_FIXED_TOP_CLASS)
                 }
-                this.removeBodyClass(FIXED_TOP_CLASS)
+                this.removeBodyClass(BODY_FIXED_TOP_CLASS)
             },
             immediate: true
         },
@@ -90,9 +92,9 @@ export default {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
                 if (isSet) {
-                    return this.setBodyClass(FIXED_BOTTOM_CLASS)
+                    return this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
                 }
-                this.removeBodyClass(FIXED_BOTTOM_CLASS)
+                this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
             },
             immediate: true
         }
