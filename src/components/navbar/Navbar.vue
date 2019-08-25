@@ -1,32 +1,10 @@
-<template>
-    <nav
-        class="navbar"
-        role="navigation"
-        aria-label="main navigation"
-        :class="computedClasses"
-    >
-        <div class="navbar-brand">
-            <slot name="brand"/>
-            <slot name="burger" v-bind="{ isOpened, toggleActive }">
-                <navbar-burger @click.native="toggleActive" :is-opened="isOpened"/>
-            </slot>
-        </div>
-        <div class="navbar-menu" :class="{ 'is-active': isOpened }">
-            <div class="navbar-start">
-                <slot name="start" />
-            </div>
-            <div class="navbar-end">
-                <slot name="end" />
-            </div>
-        </div>
-    </nav>
-</template>
-
 <script>
 import NavbarBurger from './NavbarBurger.vue'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
+
+const isFilled = (str) => !!str
 
 export default {
     name: 'BNavbar',
@@ -50,6 +28,10 @@ export default {
         isActive: {
             type: Boolean,
             default: false
+        },
+        wrapperClass: {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -117,11 +99,74 @@ export default {
             if (areColliding) {
                 throw new Error('You should choose if the BNavbar is fixed bottom or fixed top, but not both')
             }
+        },
+        genNavbar(createElement) {
+            let navBarSlots = [
+                this.genNavbarBrandNode(createElement),
+                this.genNavbarSlotsNode(createElement)
+            ]
+
+            if (!isFilled(this.wrapperClass)) {
+                return this.genNavbarSlots(createElement, navBarSlots)
+            }
+
+            const navWrapper = createElement('div', {
+                class: this.wrapperClass
+            }, navBarSlots)
+
+            return this.genNavbarSlots(createElement, [navWrapper])
+        },
+        genNavbarSlots(createElement, slots) {
+            return createElement('nav', {
+                staticClass: 'navbar',
+                class: this.computedClasses,
+                attrs: {
+                    role: 'navigation',
+                    'aria-label': 'main navigation'
+                }
+            }, slots)
+        },
+        genNavbarBrandNode(createElement) {
+            return createElement('div', {
+                class: 'navbar-brand'
+            }, [this.$slots.brand, this.genBurgerNode(createElement)])
+        },
+        genBurgerNode(createElement) {
+            const defaultBurgerNode = createElement('navbar-burger', {
+                props: {
+                    isOpened: this.isOpened
+                },
+                nativeOn: {
+                    click: this.toggleActive
+                }
+            })
+
+            const hasBurgerSlot = !!this.$scopedSlots.burger
+            return hasBurgerSlot
+                ? this.$scopedSlots.burger({
+                    isOpened: this.isOpened,
+                    toggleActive: this.toggleActive
+                })
+                : defaultBurgerNode
+        },
+        genNavbarSlotsNode(createElement) {
+            return createElement('div', {
+                staticClass: 'navbar-menu',
+                class: { 'is-active': this.isOpened }
+            }, [this.genMenuPosition(createElement, 'start'), this.genMenuPosition(createElement, 'end')])
+        },
+        genMenuPosition(createElement, positionName) {
+            return createElement('div', {
+                staticClass: `navbar-${positionName}`
+            }, this.$slots[positionName])
         }
     },
     beforeDestroy() {
         this.removeBodyClass(FIXED_BOTTOM_CLASS)
         this.removeBodyClass(FIXED_TOP_CLASS)
+    },
+    render(createElement) {
+        return this.genNavbar(createElement)
     }
 }
 </script>
