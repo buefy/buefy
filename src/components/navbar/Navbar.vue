@@ -136,7 +136,7 @@ export default {
                 props: {
                     isOpened: this.isOpened
                 },
-                nativeOn: {
+                on: {
                     click: this.toggleActive
                 }
             })
