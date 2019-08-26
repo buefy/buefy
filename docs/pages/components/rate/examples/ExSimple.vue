@@ -1,6 +1,7 @@
 <template>
     <section>
-        <b-rate @change="success"></b-rate>
+        <b-rate custom-text="With MDI"></b-rate>
+        <b-rate icon-pack="fas" @change="success" custom-text="With Font Awesome"></b-rate>
     </section>
 </template>
 <script>
