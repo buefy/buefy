@@ -1,27 +1,32 @@
 <template>
-    <div class="rate" :class="[size, { 'is-disabled': disabled }]">
-        <ul
-            class="rate-list"
-            @mouseleave="resetNewValue">
-            <li
-                v-for="(rate, index) in max"
-                class="rate-item"
-                :class="rateClass(rate)"
-                :key="index">
-                <i
-                    class="rate-icon"
-                    :class="icon"
-                    @mousemove="previewRate(rate, $event)"
-                    @click.prevent="confirmValue(rate)">
-                    <span
-                        v-if="checkHalf(rate)"
-                        class="rate-new"
-                        :class="icon"
-                        :style="halfStyle"/>
-                </i>
-            </li>
-        </ul>
-        <div class="rate-text" v-if="showText || showScore || disabled || customText">
+    <div class="rate" :class="{ 'is-disabled': disabled }">
+        <div
+            v-for="(item, index) in max"
+            class="rate-item"
+            :class="rateClass(item)"
+            :key="index"
+            @mousemove="previewRate(item, $event)"
+            @mouseleave="resetNewValue"
+            @click.prevent="confirmValue(item)">
+            <b-icon
+                class="is-rate"
+                :pack="iconPack"
+                :icon="icon"
+                :size="size"
+            />
+            <b-icon
+                v-if="checkHalf(item)"
+                class="is-half"
+                :pack="iconPack"
+                :icon="icon"
+                :size="size"
+                :style="halfStyle"
+            />
+        </div>
+        <div
+            class="rate-text"
+            :class="size"
+            v-if="showText || showScore || customText">
             <span>{{ showMe }}</span>
             <span v-if="customText && !showText">{{ customText }}</span>
         </div>
@@ -29,8 +34,13 @@
 </template>
 
 <script>
+import Icon from '../icon/Icon'
+
 export default {
     name: 'BRate',
+    components: {
+        [Icon.name]: Icon
+    },
     props: {
         value: {
             type: Number,
@@ -42,10 +52,12 @@ export default {
         },
         icon: {
             type: String,
-            default: 'fas fa-star'
+            default: 'star'
         },
+        iconPack: String,
         size: String,
         disabled: Boolean,
+        allowhalf: Boolean,
         showScore: Boolean,
         showText: Boolean,
         customText: String,
@@ -59,7 +71,7 @@ export default {
     data() {
         return {
             newValue: this.value,
-            hoverRate: -1
+            hoverValue: 0
         }
     },
     computed: {
@@ -68,7 +80,7 @@ export default {
         },
         showMe() {
             let result = ''
-            if (this.showScore || this.disabled) {
+            if (this.showScore) {
                 result = this.disabled ? this.value : this.newValue
                 if (result === 0) {
                     result = ''
@@ -91,37 +103,33 @@ export default {
     methods: {
         resetNewValue() {
             if (this.disabled) return
-            this.hoverRate = -1
+            this.hoverValue = 0
         },
-        previewRate(rate, event) {
+        previewRate(index, event) {
             if (this.disabled) return
-            // emit hover-change event for preview
-            if (rate !== this.hoverRate) {
-                this.$emit('on-hover-change', rate)
-            }
-            this.hoverRate = rate
+            this.hoverValue = index
+            event.stopPropagation()
         },
-        confirmValue(rate) {
+        confirmValue(index) {
             if (this.disabled) return
-            this.newValue = rate
+            this.newValue = index
             this.$emit('change', this.newValue)
             this.$emit('input', this.newValue)
         },
-        checkHalf(rate) {
+        checkHalf(index) {
             let showWhenDisabled = this.disabled && this.valueDecimal > 0 &&
-            rate - 1 < this.value && rate > this.value
+            index - 1 < this.value && index > this.value
             return showWhenDisabled
         },
-        rateClass(rate) {
-            const onRate = 'set-on'
-            const halfRate = 'set-half'
-            const checkHover = this.hoverRate !== -1
-            const currentIndex = checkHover ? this.hoverRate : this.newValue
-            const lastItemIndex = Math.ceil(currentIndex)
-            return {
-                [onRate]: this.disabled ? rate < lastItemIndex : rate <= lastItemIndex,
-                [halfRate]: (rate === lastItemIndex) && this.disabled
+        rateClass(index) {
+            let output = ''
+            const currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue
+            if (index <= currentValue) {
+                output = 'set-on'
+            } else if (this.disabled && (Math.ceil(this.value) === index)) {
+                output = 'set-half'
             }
+            return output
         }
     }
 }
