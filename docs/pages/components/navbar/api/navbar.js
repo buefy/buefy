@@ -35,9 +35,9 @@ export default [
               description: 'Type (color) of the background, optional',
               type: 'String, ',
               values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
-              <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
-              <code>is-warning</code>, <code>is-danger</code>,
-              and any other colors you've set in the <code>$colors</code> list on Sass`,
+                  <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                  <code>is-warning</code>, <code>is-danger</code>,
+                  and any other colors you've set in the <code>$colors</code> list on Sass`,
               default: '—'
             },
             {
@@ -46,6 +46,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>close-on-click</code>',
+                description: 'Control the behavior of the mobile menu by clicking on a link or outside the menu',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>false</code>'
             },
       ],
       slots: [

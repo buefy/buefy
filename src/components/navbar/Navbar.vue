@@ -1,5 +1,6 @@
 <script>
 import NavbarBurger from './NavbarBurger.vue'
+import clickOutside from '../../directives/clickOutside'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
@@ -12,6 +13,9 @@ export default {
     name: 'BNavbar',
     components: {
         NavbarBurger
+    },
+    directives: {
+        clickOutside
     },
     props: {
         type: [String, Object],
@@ -34,6 +38,10 @@ export default {
         wrapperClass: {
             type: String,
             default: ''
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -84,6 +92,15 @@ export default {
     methods: {
         toggleActive() {
             this.internalIsActive = !this.internalIsActive
+            this.emitUpdateParentEvent()
+        },
+        closeMenu() {
+            if (this.closeOnClick) {
+                this.internalIsActive = false
+                this.emitUpdateParentEvent()
+            }
+        },
+        emitUpdateParentEvent() {
             this.$emit('update:isActive', this.internalIsActive)
         },
         setBodyClass(className) {
@@ -112,6 +129,7 @@ export default {
                 return this.genNavbarSlots(createElement, navBarSlots)
             }
 
+            // It wraps the slots into a div with the provided wrapperClass prop
             const navWrapper = createElement('div', {
                 class: this.wrapperClass
             }, navBarSlots)
@@ -125,7 +143,13 @@ export default {
                 attrs: {
                     role: 'navigation',
                     'aria-label': 'main navigation'
-                }
+                },
+                directives: [
+                    {
+                        name: 'click-outside',
+                        value: this.closeMenu
+                    }
+                ]
             }, slots)
         },
         genNavbarBrandNode(createElement) {
@@ -167,7 +191,7 @@ export default {
         this.removeBodyClass(FIXED_BOTTOM_CLASS)
         this.removeBodyClass(FIXED_TOP_CLASS)
     },
-    render(createElement) {
+    render(createElement, fn) {
         return this.genNavbar(createElement)
     }
 }
