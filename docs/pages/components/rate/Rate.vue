@@ -2,7 +2,7 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExFull" :code="ExFullCode" title="Custom Icon and other"/>
+        <Example :component="ExFull" :code="ExFullCode" title="Custom Rate"/>
 
         <ApiView :data="api"/>
     </div>
