@@ -2,7 +2,27 @@
     <section>
         <b-field grouped group-multiline>
             <b-field label="Max">
-                <b-numberinput v-model="maxs" min="1" controls-position="compact"></b-numberinput>
+                <b-numberinput v-model="maxs" min="1" controls-position="compact">
+                </b-numberinput>
+            </b-field>
+            <b-field label="Pack Icon">
+                <b-input v-model="packs" placeholder="e.g. mdi, fa or other">
+                </b-input>
+            </b-field>
+            <b-field label="Icon">
+                <b-input v-model="icons">
+                </b-input>
+            </b-field>
+        </b-field>
+        <b-field grouped group-multiline>
+            <b-field label="Value">
+                <b-numberinput v-model="rate" min="0" :max="maxs" 
+                    :step="isDisabled ? '.1' : '1'" controls-position="compact">
+                </b-numberinput>
+            </b-field>
+            <b-field label="Custom Text">
+                <b-input v-model="custom" placeholder="e.g. Points or Total rates" :disabled="text">
+                </b-input>
             </b-field>
             <b-field label="Size">
                <b-select v-model="sizes">
@@ -12,36 +32,25 @@
                     <option value="is-large">is-large</option>
                 </b-select>
             </b-field>
-            <b-field label="Icon">
-                <b-input v-model="icons">
-                </b-input>
-            </b-field>
-        </b-field>
-        <b-field grouped group-multiline>
-            <b-field label="Value">
-                <b-input v-model="rate">
-                </b-input>
-            </b-field>
-            <b-field label="Custom Text">
-                <b-input v-model="custom" :disabled="text">
-                </b-input>
-            </b-field>
         </b-field>
         <div class="block">
-            <b-switch v-model="score" :disabled="text || isDisabled">Show Score</b-switch>
+            <b-switch v-model="score" :disabled="text">Show Score</b-switch>
             <b-switch v-model="text" :disabled="score">Show Text</b-switch>
-            <b-switch v-model="isDisabled" :disabled="text">Read Only (Half star)</b-switch>
+            <b-switch v-model="isDisabled">Read Only (Support Decimal)</b-switch>
+            <b-switch v-model="isSpaced">Space</b-switch>
         </div>
         <hr>
         <b-rate 
             v-model="rate"
+            :icon-pack="packs"
             :icon="icons" 
             :max='maxs' 
             :size="sizes"
             :show-score="score"
             :show-text="text"
             :custom-text="custom"
-            :disabled="isDisabled">
+            :disabled="isDisabled"
+            :spaced="isSpaced">
         </b-rate>
     </section>
 </template>
@@ -49,14 +58,16 @@
     export default {
         data() {
             return {
-                rate: 0,
-                custom: '',
+                rate: 4.6,
                 maxs: 5,
                 sizes: '',
-                icons: 'mdi mdi-star',
-                score: true,
+                packs: '',
+                icons: 'star',
+                score: false,
                 text: false,
-                isDisabled: false
+                custom: '',
+                isSpaced: false,
+                isDisabled: true
             }
         }
     }
