@@ -57,7 +57,6 @@ export default {
         iconPack: String,
         size: String,
         disabled: Boolean,
-        allowhalf: Boolean,
         showScore: Boolean,
         showText: Boolean,
         customText: String,
