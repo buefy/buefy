@@ -187,7 +187,7 @@ export default {
         },
 
         footerSlotName() {
-            return this.hasHeaderSlot ? 'footer' : 'dontrender'
+            return this.hasFooterSlot ? 'footer' : 'dontrender'
         },
 
         hasDefaultSlot() {
