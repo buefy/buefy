@@ -50,7 +50,7 @@ export default [
             {
                 name: '<code>close-on-click</code>',
                 description: 'Control the behavior of the mobile menu by clicking on a link or outside the menu',
-                type: 'String',
+                type: 'Boolean',
                 values: '<code>true</code>, <code>false</code>',
                 default: '<code>true</code>'
             },
