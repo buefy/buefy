@@ -33,4 +33,14 @@ describe('BNavbar', () => {
         const menuContainer = navBar.find('.navbar-menu')
         expect(menuContainer.classes('is-active')).toBe(true)
     })
+
+    it('should wrap the slots into a wrapper when we set the wrapperClass prop', () => {
+        const navBar = mount(BNavbar, {
+            propsData: {
+                wrapperClass: 'container'
+            }
+        })
+
+        expect(navBar.find('.container').exists()).toBe(true)
+    })
 })
