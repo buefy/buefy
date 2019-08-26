@@ -1,28 +1,3 @@
-<template>
-    <nav
-        class="navbar"
-        role="navigation"
-        aria-label="main navigation"
-        :class="computedClasses"
-        v-click-outside="closeMenu"
-    >
-        <div class="navbar-brand">
-            <slot name="brand"/>
-            <slot name="burger" v-bind="{ isOpened, toggleActive }">
-                <navbar-burger @click.native="toggleActive" :is-opened="isOpened"/>
-            </slot>
-        </div>
-        <div class="navbar-menu" :class="{ 'is-active': isOpened }">
-            <div class="navbar-start">
-                <slot name="start" />
-            </div>
-            <div class="navbar-end">
-                <slot name="end" />
-            </div>
-        </div>
-    </nav>
-</template>
-
 <script>
 import NavbarBurger from './NavbarBurger.vue'
 import clickOutside from '../../directives/clickOutside'
@@ -32,13 +7,12 @@ const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
 const BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom'
 
+const isFilled = (str) => !!str
+
 export default {
     name: 'BNavbar',
     components: {
         NavbarBurger
-    },
-    directives: {
-        clickOutside
     },
     props: {
         type: [String, Object],
@@ -57,6 +31,14 @@ export default {
         isActive: {
             type: Boolean,
             default: false
+        },
+        wrapperClass: {
+            type: String,
+            default: ''
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -110,8 +92,10 @@ export default {
             this.emitUpdateParentEvent()
         },
         closeMenu() {
-            this.internalIsActive = false
-            this.emitUpdateParentEvent()
+            if (this.closeOnClick) {
+                this.internalIsActive = false
+                this.emitUpdateParentEvent()
+            }
         },
         emitUpdateParentEvent() {
             this.$emit('update:isActive', this.internalIsActive)
@@ -131,11 +115,78 @@ export default {
             if (areColliding) {
                 throw new Error('You should choose if the BNavbar is fixed bottom or fixed top, but not both')
             }
+        },
+        genNavbar(createElement) {
+            let navBarSlots = [
+                this.genNavbarBrandNode(createElement),
+                this.genNavbarSlotsNode(createElement)
+            ]
+
+            if (!isFilled(this.wrapperClass)) {
+                return this.genNavbarSlots(createElement, navBarSlots)
+            }
+
+            const navWrapper = createElement('div', {
+                class: this.wrapperClass
+            }, navBarSlots)
+
+            return this.genNavbarSlots(createElement, [navWrapper])
+        },
+        genNavbarSlots(createElement, slots) {
+            return createElement('nav', {
+                staticClass: 'navbar',
+                class: this.computedClasses,
+                attrs: {
+                    role: 'navigation',
+                    'aria-label': 'main navigation'
+                },
+                directives: [clickOutside],
+                on: {
+                    'v-click-outside': this.closeMenu()
+                }
+            }, slots)
+        },
+        genNavbarBrandNode(createElement) {
+            return createElement('div', {
+                class: 'navbar-brand'
+            }, [this.$slots.brand, this.genBurgerNode(createElement)])
+        },
+        genBurgerNode(createElement) {
+            const defaultBurgerNode = createElement('navbar-burger', {
+                props: {
+                    isOpened: this.isOpened
+                },
+                on: {
+                    click: this.toggleActive
+                }
+            })
+
+            const hasBurgerSlot = !!this.$scopedSlots.burger
+            return hasBurgerSlot
+                ? this.$scopedSlots.burger({
+                    isOpened: this.isOpened,
+                    toggleActive: this.toggleActive
+                })
+                : defaultBurgerNode
+        },
+        genNavbarSlotsNode(createElement) {
+            return createElement('div', {
+                staticClass: 'navbar-menu',
+                class: { 'is-active': this.isOpened }
+            }, [this.genMenuPosition(createElement, 'start'), this.genMenuPosition(createElement, 'end')])
+        },
+        genMenuPosition(createElement, positionName) {
+            return createElement('div', {
+                staticClass: `navbar-${positionName}`
+            }, this.$slots[positionName])
         }
     },
     beforeDestroy() {
         this.removeBodyClass(FIXED_BOTTOM_CLASS)
         this.removeBodyClass(FIXED_TOP_CLASS)
+    },
+    render(createElement) {
+        return this.genNavbar(createElement)
     }
 }
 </script>
