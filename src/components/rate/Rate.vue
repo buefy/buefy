@@ -1,5 +1,5 @@
 <template>
-    <div class="rate" :class="{ 'is-disabled': disabled }">
+    <div class="rate" :class="{ 'is-disabled': disabled, 'is-spaced': spaced }">
         <div
             v-for="(item, index) in max"
             class="rate-item"
@@ -9,7 +9,6 @@
             @mouseleave="resetNewValue"
             @click.prevent="confirmValue(item)">
             <b-icon
-                class="is-rate"
                 :pack="iconPack"
                 :icon="icon"
                 :size="size"
@@ -56,6 +55,7 @@ export default {
         },
         iconPack: String,
         size: String,
+        spaced: Boolean,
         disabled: Boolean,
         showScore: Boolean,
         showText: Boolean,
