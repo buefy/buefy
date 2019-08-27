@@ -1,5 +1,8 @@
 <template>
-    <transition :name="animation">
+    <transition
+        :name="animation"
+        @after-enter="afterEnter"
+        @before-leave="beforeLeave">
         <div
             v-if="isActive"
             class="modal is-active"
@@ -20,9 +23,10 @@
                     v-html="content"/>
                 <slot v-else/>
                 <button
+                    ref="closeButton"
                     type="button"
                     v-if="showX"
-                    class="modal-close is-large"
+                    class="modal-close is-large is-invisible"
                     @click="cancel('x')"/>
             </div>
         </div>
@@ -180,6 +184,20 @@ export default {
         keyPress(event) {
             // Esc key
             if (this.isActive && event.keyCode === 27) this.cancel('escape')
+        },
+
+        /**
+        * Transition after-enter hook
+        */
+        afterEnter() {
+            if (this.showX) this.$refs.closeButton.classList.toggle('is-invisible')
+        },
+
+        /**
+        * Transition before-leave hook
+        */
+        beforeLeave() {
+            if (this.showX) this.$refs.closeButton.classList.toggle('is-invisible')
         }
     },
     created() {
