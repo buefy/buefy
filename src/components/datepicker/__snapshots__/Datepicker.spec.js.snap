@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BDatepicker simple render correctly 1`] = `
+exports[`BDatepicker render correctly 1`] = `
 <div class="datepicker control">
     <bdropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
         <binput-stub type="text" hascounter="true" customclass="" autocomplete="off" readonly="readonly" use-html5-validation="true"></binput-stub>
