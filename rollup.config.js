@@ -145,7 +145,8 @@ export default () => {
             external: ['vue'],
             output: {
                 format: 'esm',
-                file: 'dist/buefy.esm.js'
+                file: 'dist/buefy.esm.js',
+                banner: bannerTxt
             },
             plugins: [
                 node({
