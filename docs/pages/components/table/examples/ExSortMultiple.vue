@@ -5,6 +5,9 @@
           <b-switch v-model="multipleColumnsSwitch">Sort multiple rows</b-switch>
       </div>
       <div class="control is-flex">
+          <b-switch v-model="onlyWhenKeyIsDown">Only enable on ALT + CLICK</b-switch>
+      </div>
+      <div class="control is-flex">
           <span class="button" @click="resetPriority" :disabled="sortingPrioirty.length === 0">Reset sorting</span>
       </div>
     </b-field>
@@ -44,7 +47,8 @@ const dataSource = [
           return {
             multipleColumnsSwitch: true,
             data: [],
-            sortingPrioirty: []
+            sortingPrioirty: [],
+            onlyWhenKeyIsDown: false
           }
       },
       methods: {
@@ -52,12 +56,17 @@ const dataSource = [
           this.sortingPrioirty = []
           this.loadAsyncData()
         },
-        sortPressed(field, order) {
-          let existingPriority = this.sortingPrioirty.find(i => i.field === field)
-          if(existingPriority) {
-            existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
+        sortPressed(field, order, event) {
+          if(!this.onlyWhenKeyIsDown || (this.onlyWhenKeyIsDown && event.altKey)) {
+            let existingPriority = this.sortingPrioirty.find(i => i.field === field)
+            if(existingPriority) {
+              existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
+              existingPriority.orderIndicator = this.sortingPrioirty.indexOf(existingPriority) + 1
+            } else {
+              this.sortingPrioirty.push({field, order, orderIndicator: this.sortingPrioirty.length + 1})
+            }
           } else {
-            this.sortingPrioirty.push({field, order})
+            this.sortingPrioirty = [{field, order, orderIndicator: 1}]
           }
           this.loadAsyncData()
         },

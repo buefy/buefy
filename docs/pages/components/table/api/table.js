@@ -137,7 +137,7 @@ export default [
             },
             {
                 name: '<code>sort-multiple-data</code>',
-                description: `Set icons in headers to match your custom sort`,
+                description: `Used to set header information of multi sort - e.g. <code> [{field: 'name', order: 'asc', orderIndicator: '1'}]</code>`,
                 type: '	Array<Object>',
                 values: '—',
                 default: '<code>[]</code>'

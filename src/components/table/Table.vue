@@ -62,7 +62,7 @@
                             :style="{
                                 width: column.width === undefined ? null : column.width + 'px'
                             }"
-                            @click.stop="sort(column)">
+                            @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -98,8 +98,8 @@
                                         :size="sortIconSize"
                                         :class="{ 'is-desc': isDesc(column)}"
                                     />
-                                    {{ sortMultipleData.findIndex(i =>
-                                    i.field === column.field) + 1 }}
+                                    {{ sortMultipleData.find(i =>
+                                    i.field === column.field).orderIndicator }}
                                 </template>
                                 <b-icon
                                     v-else-if="!sortMultiple"
@@ -593,9 +593,11 @@ export default {
     },
     methods: {
         isDesc(column) {
-            let foundSortData = this.sortMultipleData.length > 0
-                ? this.sortMultipleData.find((i) => i.field === column.field) : false
-            return foundSortData ? foundSortData.order === 'desc' : false
+            let findColumnInData = this.sortMultipleData.filter((i) => i.field === column.field)
+            if (findColumnInData.length > 0) {
+                return findColumnInData[0].order === 'desc'
+            }
+            return false
         },
         /**
         * Sort an array by key without mutating original data.
@@ -642,7 +644,7 @@ export default {
         * Toggle current direction on column if it's sortable
         * and not just updating the prop.
         */
-        sort(column, updatingData = false) {
+        sort(column, updatingData = false, event) {
             if (!column || !column.sortable) return
 
             if (!updatingData) {
@@ -651,7 +653,7 @@ export default {
                     : (this.defaultSortDirection.toLowerCase() !== 'desc')
             }
             if (!this.firstTimeSort) {
-                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
+                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event)
             }
             if (!this.backendSorting) {
                 this.newData = this.sortBy(
