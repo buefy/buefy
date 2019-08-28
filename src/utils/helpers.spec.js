@@ -1,4 +1,4 @@
-import { getValueByPath, indexOf, escapeRegExpChars, removeElement } from './helpers'
+import { getValueByPath, indexOf, merge, escapeRegExpChars, removeElement } from './helpers'
 
 describe('helpers', () => {
     describe('getValueByPath', () => {
@@ -55,6 +55,60 @@ describe('helpers', () => {
             expect(indexOf(arr, obj5, fnc)).toBe(-1)
             expect(indexOf(null, obj1, fnc)).toBe(-1)
             expect(indexOf(arr, obj1)).toBe(0)
+        })
+    })
+
+    describe('merge', () => {
+        describe('shallow merges', () => {
+            it('merges objects', () => {
+                const a = { a: 'discard' }
+                const b = { a: 'test' }
+                expect(merge(a, b)).toEqual({ a: 'test' })
+            })
+
+            it('extends objects', () => {
+                const a = { a: 'test' }
+                const b = { b: 'test' }
+                expect(merge(a, b)).toEqual({ a: 'test', b: 'test' })
+            })
+
+            it('extends a property with an object', () => {
+                const a = { a: 'test' }
+                const b = { b: { c: 'test' } }
+                expect(merge(a, b)).toEqual({ a: 'test', b: { c: 'test' } })
+            })
+
+            it('replaces a property with an object', () => {
+                const a = { b: 'whatever', a: 'test' }
+                const b = { b: { c: 'test' } }
+                expect(merge(a, b)).toEqual({ a: 'test', b: { c: 'test' } })
+            })
+        })
+
+        describe('deep merges', () => {
+            it('merges objects', () => {
+                const a = { test: { a: 'discard', b: 'test' } }
+                const b = { test: { a: 'test' } }
+                expect(merge(a, b)).toEqual({ test: { a: 'test', b: 'test' } })
+            })
+
+            it('extends objects', () => {
+                const a = { test: { a: 'test' } }
+                const b = { test: { b: 'test' } }
+                expect(merge(a, b)).toEqual({ test: { a: 'test', b: 'test' } })
+            })
+
+            it('extends a property with an object', () => {
+                const a = { test: { a: 'test' } }
+                const b = { test: { b: { c: 'test' } } }
+                expect(merge(a, b)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+            })
+
+            it('replaces a property with an object', () => {
+                const a = { test: { b: 'whatever', a: 'test' } }
+                const b = { test: { b: { c: 'test' } } }
+                expect(merge(a, b)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+            })
         })
     })
 
