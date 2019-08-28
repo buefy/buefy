@@ -36,12 +36,11 @@ export default {
             default: false
         },
         wrapperClass: {
-            type: String,
-            default: ''
+            type: String
         },
         closeOnClick: {
             type: Boolean,
-            default: false
+            default: true
         }
     },
     data() {
