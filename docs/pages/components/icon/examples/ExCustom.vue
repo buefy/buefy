@@ -122,8 +122,6 @@
 </template>
 
 <script>
-    import config from "../../../../../src/utils/config"
-
     const customIconConfig = {
         customIconPacks: {
             'fas': {
