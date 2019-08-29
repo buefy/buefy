@@ -23,10 +23,9 @@
                     v-html="content"/>
                 <slot v-else/>
                 <button
-                    ref="closeButton"
                     type="button"
-                    v-if="showX"
-                    class="modal-close is-large is-invisible"
+                    v-if="showX && !animating"
+                    class="modal-close is-large"
                     @click="cancel('x')"/>
             </div>
         </div>
@@ -88,7 +87,8 @@ export default {
             savedScrollTop: null,
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
-                : this.width
+                : this.width,
+            animating: true
         }
     },
     computed: {
@@ -190,14 +190,14 @@ export default {
         * Transition after-enter hook
         */
         afterEnter() {
-            if (this.showX) this.$refs.closeButton.classList.toggle('is-invisible')
+            this.animating = false
         },
 
         /**
         * Transition before-leave hook
         */
         beforeLeave() {
-            if (this.showX) this.$refs.closeButton.classList.toggle('is-invisible')
+            this.animating = true
         }
     },
     created() {
