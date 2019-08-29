@@ -48,6 +48,9 @@ export default {
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
+    model: {
+        event: 'change',
+    },
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],
@@ -70,7 +73,7 @@ export default {
             },
             set(value) {
                 this.selected = value
-                this.$emit('input', value)
+                this.$emit('change', value)
                 !this.isValid && this.checkHtml5Validity()
             }
         },
