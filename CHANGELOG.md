@@ -23,6 +23,7 @@
 * Fix pagination compatibility using IE 11 (thanks @service-paradis)
 * Fix set active menu item on click when tag is ``router-link``
 * Fix navbar adding incorrect class to body when fixed at top/bottom (thanks @Silvea12)
+* Fix datepicker height using different size, it'll show always 6 weeks for each month
 * Fix #1646 navbar item when tag prop is ``router-link`` (thanks @wanxe)
 * Fix #1648 modal becomes clipped using switch (thanks @yxngl)
 * Fix #1670 simple upload on IE 11
