@@ -138,6 +138,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>hours-label</code>',
+                description: `Label to show on hour button`,
+                type: 'String',
+                values: '—',
+                default: `<code>Hours</code>`
+            },
+            {
+                name: '<code>minutes-label</code>',
+                description: `Label to show on minutes button`,
+                type: 'String',
+                values: '—',
+                default: `<code>Min</code>`
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

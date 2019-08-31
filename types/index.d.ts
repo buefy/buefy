@@ -66,8 +66,9 @@ export declare type BuefyConfig = {
     defaultDatepickerNearbyMonthDays?: boolean;
     defaultDatepickerNearbySelectableMonthDays?: boolean;
     defaultDatepickerShowWeekNumber?: boolean;
-
     customIconPacks?: any;
+    defaultClockpickerHoursLabel?: string;
+    defaultClockpickerMinutesLabel?: string;
 };
 
 declare const _default: {

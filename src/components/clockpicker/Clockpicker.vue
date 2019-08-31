@@ -65,11 +65,11 @@
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
-                                @click="isSelectingHour = true">Hours</div>
+                                @click="isSelectingHour = true">{{ hoursLabel }}</div>
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
-                                @click="isSelectingHour = false">Min</span>
+                                @click="isSelectingHour = false">{{ minutesLabel }}</span>
                         </div>
                         <div v-if="!isHourFormat24 && !inline" class="b-clockpicker-period">
                             <div
@@ -134,6 +134,7 @@ import Input from '../input/Input'
 import Field from '../field/Field'
 import Icon from '../icon/Icon'
 import ClockpickerFace from './ClockpickerFace'
+import config from '../../utils/config'
 
 const outerPadding = 12
 
@@ -171,6 +172,14 @@ export default {
         type: {
             type: String,
             default: 'is-primary'
+        },
+        hoursLabel: {
+            type: String,
+            default: () => config.defaultClockpickerHoursLabel || 'Hours'
+        },
+        minutesLabel: {
+            type: String,
+            default: () => config.defaultClockpickerMinutesLabel || 'Min'
         }
     },
     data() {
