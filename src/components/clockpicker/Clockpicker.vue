@@ -27,7 +27,6 @@
                 @change.native="onChangeNativePicker"
                 @focus="handleOnFocus"
                 @blur="onBlur() && checkHtml5Validity()"/>
-
             <div
                 class="card"
                 :disabled="disabled"
@@ -123,18 +122,19 @@
             @focus="handleOnFocus"
             @blur="onBlur() && checkHtml5Validity()"/>
     </div>
-
 </template>
 
 <script>
 import TimepickerMixin from '../../utils/TimepickerMixin'
+import config from '../../utils/config'
+
 import Dropdown from '../dropdown/Dropdown'
 import DropdownItem from '../dropdown/DropdownItem'
 import Input from '../input/Input'
 import Field from '../field/Field'
 import Icon from '../icon/Icon'
+
 import ClockpickerFace from './ClockpickerFace'
-import config from '../../utils/config'
 
 const outerPadding = 12
 
