@@ -79,15 +79,53 @@ export default [
       ]
   },
   {
-      title: 'Navbar Item',
-      props: [
-          {
-              name: '<code>tag</code>',
-              description: 'Sets the type of the component that have to render as navbar-item',
-              type: 'Boolean',
-              values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
-              default: 'a'
-          }
-      ]
+    title: 'Navbar Item',
+    props: [
+        {
+            name: '<code>tag</code>',
+            description: 'Sets the type of the component that have to render as navbar-item',
+            type: 'Boolean',
+            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
+            default: 'a'
+        },
+        {
+            name: '<code>active</code>',
+            description: 'Item is active',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        }
+    ]
+  },
+  {
+    title: 'Navbar Dropdown',
+    props: [
+        {
+            name: '<code>hoverable</code>',
+            description: 'Dropdown will be triggered by hover instead of click',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>active</code>',
+            description: 'Item is active',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        }
+    ],
+    slots: [
+        {
+            name: 'default',
+            description: 'Menu item body',
+            props: '—'
+        },
+        {
+            name: '<code>label</code>',
+            description: 'Dropdown menu custom label',
+            props: '-'
+        }
+    ]
   }
 ]

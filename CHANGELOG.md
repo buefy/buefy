@@ -12,8 +12,9 @@
 * Add ``dragging``, ``dragstart`` and ``dragend`` events to slider (thanks @yxngl)
 * Add ``setValidity`` method to form components (thanks @GerryWilko)
 * Add ``hours-label`` and ``minutes-label`` props to clockpicker
-* #1677 Add ``wrapper-class`` prop to navbar (thanks @wanxe)
 * Improve steps look on mobile (thanks @service-paradis)
+* #1677 Add ``wrapper-class`` prop to navbar (thanks @wanxe)
+* #1712 Add navbardropdown component
 
 ### Fixes
 
