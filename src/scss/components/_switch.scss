@@ -117,6 +117,7 @@ $switch-active-background-color: $primary !default;
                 @each $name, $pair in $colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
+                        background: transparent;
                         border-color: $color;
                         &:before {
                             background: $color;
