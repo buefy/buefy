@@ -65,7 +65,7 @@ export default [
                 name: '<code>has-navigation</code>',
                 description: `Next and previous buttons below the component.
                     You can use this property if you want to use your own custom navigation items.`,
-                type: 'String',
+                type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
