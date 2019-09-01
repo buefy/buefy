@@ -15,7 +15,7 @@ exports[`BClockpicker render correctly 1`] = `
                         <div class="b-clockpicker-btn active">AM</div>
                         <div class="b-clockpicker-btn">PM</div>
                     </div>
-                    <bclockpickerface-stub pickersize="266" min="0" max="11" facenumbers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabledvalues="function boundFn (a) {
+                    <bclockpickerface-stub pickersize="266" min="0" max="11" facenumbers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabledvalues="function boundFn(a) {
     var l = arguments.length;
     return l
       ? l > 1
