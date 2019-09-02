@@ -111,8 +111,7 @@ describe('BDatepickerTableRow', () => {
     })
 
     it('manage inner date functions accordingly', () => {
-        const thisMonth = new Date().getMonth()
-        const day = newDate(2019, thisMonth, 28)
+        const day = newDate(2019, 7, 28)
 
         expect(wrapper.vm.firstWeekOffset(
             2019,
