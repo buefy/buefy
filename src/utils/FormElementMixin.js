@@ -101,28 +101,17 @@ export default {
             this.$emit('focus', $event)
         },
 
-        /**
-         * Check HTML5 validation, set isValid property.
-         * If validation fail, send 'is-danger' type,
-         * and error message to parent if it's a Field.
-         */
-        checkHtml5Validity() {
-            if (!this.useHtml5Validation) return
+        getElement() {
+            return this.$el.querySelector(this.$data._elementRef)
+        },
 
-            if (this.$refs[this.$data._elementRef] === undefined) return
+        setInvalid() {
+            let type = 'is-danger'
+            let message = this.validationMessage || this.getElement().validationMessage
+            this.setValidity(type, message)
+        },
 
-            const el = this.$el.querySelector(this.$data._elementRef)
-
-            let type = null
-            let message = null
-            let isValid = true
-            if (!el.checkValidity()) {
-                type = 'is-danger'
-                message = this.validationMessage || el.validationMessage
-                isValid = false
-            }
-            this.isValid = isValid
-
+        setValidity(type, message) {
             this.$nextTick(() => {
                 if (this.parentField) {
                     // Set type only if not defined
@@ -135,6 +124,25 @@ export default {
                     }
                 }
             })
+        },
+
+        /**
+         * Check HTML5 validation, set isValid property.
+         * If validation fail, send 'is-danger' type,
+         * and error message to parent if it's a Field.
+         */
+        checkHtml5Validity() {
+            if (!this.useHtml5Validation) return
+
+            if (this.$refs[this.$data._elementRef] === undefined) return
+
+            if (!this.getElement().checkValidity()) {
+                this.setInvalid()
+                this.isValid = false
+            } else {
+                this.setValidity(null, null)
+                this.isValid = true
+            }
 
             return this.isValid
         }

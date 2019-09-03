@@ -8,7 +8,7 @@
             @click.prevent="prev"
             :aria-label="ariaPreviousLabel">
             <b-icon
-                icon="chevron-left"
+                :icon="iconPrev"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
@@ -21,7 +21,7 @@
             @click.prevent="next"
             :aria-label="ariaNextLabel">
             <b-icon
-                icon="chevron-right"
+                :icon="iconNext"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
@@ -80,6 +80,7 @@
 
 <script>
 import Icon from '../icon/Icon'
+import config from '../../utils/config'
 
 export default {
     name: 'BPagination',
@@ -109,6 +110,14 @@ export default {
         rounded: Boolean,
         order: String,
         iconPack: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,

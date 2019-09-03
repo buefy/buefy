@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BTaginput render correctly 1`] = `
+<div class="taginput control">
+    <div class="taginput-container is-focusable">
+        <bautocomplete-stub value="" data="" field="value" keepfirst="true" use-html5-validation="true"><template></template> <template></template> <template></template></bautocomplete-stub>
+    </div>
+    <!---->
+</div>
+`;

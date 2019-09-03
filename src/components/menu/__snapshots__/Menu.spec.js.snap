@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BMenu render correctly 1`] = `<div class="menu"></div>`;

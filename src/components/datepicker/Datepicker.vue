@@ -48,7 +48,7 @@
                             @keydown.space.prevent="prev">
 
                             <b-icon
-                                icon="chevron-left"
+                                :icon="iconPrev"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable"/>
@@ -64,7 +64,7 @@
                             @keydown.space.prevent="next">
 
                             <b-icon
-                                icon="chevron-right"
+                                :icon="iconNext"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable"/>
@@ -339,6 +339,14 @@ export default {
             default: 'dots'
         },
         openOnFocus: Boolean,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         yearsRange: {
             type: Array,
             default: () => {
@@ -375,9 +383,8 @@ export default {
         }
     },
     data() {
-        const focusedDate = Array.isArray(this.value)
-            ? this.value[0]
-            : (this.value || this.focusedDate || this.dateCreator())
+        const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
+            this.focusedDate || this.dateCreator()
 
         return {
             dateSelected: this.value,

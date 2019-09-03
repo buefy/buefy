@@ -243,10 +243,10 @@ export default {
         },
 
         onHoursChange(value) {
-            if (!this.minutesSelected && this.defaultMinutes) {
+            if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
                 this.minutesSelected = this.defaultMinutes
             }
-            if (!this.secondsSelected && this.defaultSeconds) {
+            if (!this.secondsSelected && typeof this.defaultSeconds !== 'undefined') {
                 this.secondsSelected = this.defaultSeconds
             }
             this.updateDateSelected(
@@ -314,7 +314,10 @@ export default {
             let disabled = false
             if (this.minTime) {
                 const minHours = this.minTime.getHours()
-                disabled = hour < minHours
+                const noMinutesAvailable = this.minutes.every((minute) => {
+                    return this.isMinuteDisabledForHour(hour, minute.value)
+                })
+                disabled = hour < minHours || noMinutesAvailable
             }
             if (this.maxTime) {
                 if (!disabled) {
@@ -342,24 +345,31 @@ export default {
             return disabled
         },
 
+        isMinuteDisabledForHour(hour, minute) {
+            let disabled = false
+            if (this.minTime) {
+                const minHours = this.minTime.getHours()
+                const minMinutes = this.minTime.getMinutes()
+                disabled = hour === minHours && minute < minMinutes
+            }
+            if (this.maxTime) {
+                if (!disabled) {
+                    const maxHours = this.maxTime.getHours()
+                    const maxMinutes = this.maxTime.getMinutes()
+                    disabled = hour === maxHours && minute > maxMinutes
+                }
+            }
+
+            return disabled
+        },
+
         isMinuteDisabled(minute) {
             let disabled = false
             if (this.hoursSelected !== null) {
                 if (this.isHourDisabled(this.hoursSelected)) {
                     disabled = true
                 } else {
-                    if (this.minTime) {
-                        const minHours = this.minTime.getHours()
-                        const minMinutes = this.minTime.getMinutes()
-                        disabled = this.hoursSelected === minHours && minute < minMinutes
-                    }
-                    if (this.maxTime) {
-                        if (!disabled) {
-                            const maxHours = this.maxTime.getHours()
-                            const maxMinutes = this.maxTime.getMinutes()
-                            disabled = this.hoursSelected === maxHours && minute > maxMinutes
-                        }
-                    }
+                    disabled = this.isMinuteDisabledForHour(this.hoursSelected, minute)
                 }
                 if (this.unselectableTimes) {
                     if (!disabled) {

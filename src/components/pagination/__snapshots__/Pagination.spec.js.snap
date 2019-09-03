@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BPagination render correctly 1`] = `
+<nav class="pagination"><a role="button" href="#" disabled="disabled" class="pagination-previous">
+        <bicon-stub icon="chevron-left" both="true" aria-hidden="true"></bicon-stub>
+    </a> <a role="button" href="#" disabled="disabled" class="pagination-next">
+        <bicon-stub icon="chevron-right" both="true" aria-hidden="true"></bicon-stub>
+    </a>
+    <ul class="pagination-list">
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+    </ul>
+    <!---->
+</nav>
+`;

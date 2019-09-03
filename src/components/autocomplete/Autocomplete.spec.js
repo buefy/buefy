@@ -34,6 +34,10 @@ describe('BAutocomplete', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('has an input type', () => {
         expect(wrapper.contains('.control .input[type=text]')).toBeTruthy()
     })

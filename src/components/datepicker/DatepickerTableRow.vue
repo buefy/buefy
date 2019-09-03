@@ -67,6 +67,7 @@ export default {
             type: Boolean,
             default: () => false
         },
+        range: Boolean,
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
@@ -76,10 +77,10 @@ export default {
     methods: {
         firstWeekOffset(year, dow, doy) {
             // first-week day -- which january is always in the first week (4 for iso, 1 for other)
-            var fwd = 7 + dow - doy
+            const fwd = 7 + dow - doy
             // first-week day local weekday -- which local weekday is fwd
-            var firstJanuary = new Date(year, 0, fwd)
-            var fwdlw = (7 + firstJanuary.getDay() - dow) % 7
+            const firstJanuary = new Date(year, 0, fwd)
+            const fwdlw = (7 + firstJanuary.getDay() - dow) % 7
             return -fwdlw + fwd - 1
         },
         daysInYear(year) {
@@ -89,22 +90,21 @@ export default {
             return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
         },
         getSetDayOfYear(input) {
-            var dayOfYear = Math.round((input - new Date(input.getFullYear(), 0, 1)) / 864e5) + 1
-            return dayOfYear
+            return Math.round((input - new Date(input.getFullYear(), 0, 1)) / 864e5) + 1
         },
         weeksInYear(year, dow, doy) {
-            var weekOffset = this.firstWeekOffset(year, dow, doy)
-            var weekOffsetNext = this.firstWeekOffset(year + 1, dow, doy)
+            const weekOffset = this.firstWeekOffset(year, dow, doy)
+            const weekOffsetNext = this.firstWeekOffset(year + 1, dow, doy)
             return (this.daysInYear(year) - weekOffset + weekOffsetNext) / 7
         },
         getWeekNumber(mom) {
-            var dow = this.firstDayOfWeek // first day of week
+            const dow = this.firstDayOfWeek // first day of week
             // Rules for the first week : 1 for the 1st January, 4 for the 4th January
-            var doy = this.rulesForFirstWeek
-            var weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy)
-            var week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1
-            var resWeek
-            var resYear
+            const doy = this.rulesForFirstWeek
+            const weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy)
+            const week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1
+            let resWeek
+            let resYear
             if (week < 1) {
                 resYear = mom.getFullYear() - 1
                 resWeek = week + this.weeksInYear(resYear, dow, doy)
@@ -258,8 +258,7 @@ export default {
             }
         },
         setRangeHoverEndDate(day) {
-            const isRangeInput = Array.isArray(this.selectedDate)
-            if (isRangeInput) {
+            if (this.range) {
                 this.$emit('rangeHoverEndDate', day)
             }
         }

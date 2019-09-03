@@ -11,12 +11,8 @@
 <script>
 export default {
     data() {
-        const today = new Date()
         return {
-            dates: [
-                today,
-                new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2)
-            ]
+            dates: []
         }
     }
 }

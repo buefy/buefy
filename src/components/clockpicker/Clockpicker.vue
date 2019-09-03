@@ -27,7 +27,6 @@
                 @change.native="onChangeNativePicker"
                 @focus="handleOnFocus"
                 @blur="onBlur() && checkHtml5Validity()"/>
-
             <div
                 class="card"
                 :disabled="disabled"
@@ -65,11 +64,11 @@
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
-                                @click="isSelectingHour = true">Hours</div>
+                                @click="isSelectingHour = true">{{ hoursLabel }}</div>
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
-                                @click="isSelectingHour = false">Min</span>
+                                @click="isSelectingHour = false">{{ minutesLabel }}</span>
                         </div>
                         <div v-if="!isHourFormat24 && !inline" class="b-clockpicker-period">
                             <div
@@ -123,16 +122,18 @@
             @focus="handleOnFocus"
             @blur="onBlur() && checkHtml5Validity()"/>
     </div>
-
 </template>
 
 <script>
 import TimepickerMixin from '../../utils/TimepickerMixin'
+import config from '../../utils/config'
+
 import Dropdown from '../dropdown/Dropdown'
 import DropdownItem from '../dropdown/DropdownItem'
 import Input from '../input/Input'
 import Field from '../field/Field'
 import Icon from '../icon/Icon'
+
 import ClockpickerFace from './ClockpickerFace'
 
 const outerPadding = 12
@@ -171,6 +172,14 @@ export default {
         type: {
             type: String,
             default: 'is-primary'
+        },
+        hoursLabel: {
+            type: String,
+            default: () => config.defaultClockpickerHoursLabel || 'Hours'
+        },
+        minutesLabel: {
+            type: String,
+            default: () => config.defaultClockpickerMinutesLabel || 'Min'
         }
     },
     data() {

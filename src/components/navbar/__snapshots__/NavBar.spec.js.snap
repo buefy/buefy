@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BNavbar render correctly 1`] = `
+<nav role="navigation" aria-label="main navigation" class="navbar">
+    <div class="navbar-brand"><a role="button" aria-label="menu" class="navbar-burger burger"><span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span></a></div>
+    <div class="navbar-menu">
+        <div class="navbar-start"></div>
+        <div class="navbar-end"></div>
+    </div>
+</nav>
+`;

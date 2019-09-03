@@ -134,24 +134,12 @@ export default {
             const month = this.focused.month
             const year = this.focused.year
             const weeksInThisMonth = []
-            const daysInThisMonth = new Date(year, month + 1, 0).getDate()
 
             let startingDay = 1
 
-            while (startingDay <= daysInThisMonth + 6) {
+            while (weeksInThisMonth.length < 6) {
                 const newWeek = this.weekBuilder(startingDay, month, year)
-                let weekValid = false
-
-                newWeek.forEach((day) => {
-                    if (day.getMonth() === month) {
-                        weekValid = true
-                    }
-                })
-
-                if (weekValid) {
-                    weeksInThisMonth.push(newWeek)
-                }
-
+                weeksInThisMonth.push(newWeek)
                 startingDay += 7
             }
 

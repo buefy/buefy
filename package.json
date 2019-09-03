@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
@@ -34,7 +34,7 @@
     "lint": "eslint --ext .js,.vue src docs",
     "lint:fix": "eslint --ext .js,.vue src docs --fix",
     "lint:staged": "lint-staged",
-    "unit": "jest",
+    "unit": "jest --runInBand",
     "test": "npm run lint && npm run unit",
     "test:watch": "npm run unit -- --watchAll",
     "build:js": "rollup -c && rollup -c --environment MINIFY",

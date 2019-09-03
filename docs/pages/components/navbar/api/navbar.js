@@ -35,11 +35,25 @@ export default [
               description: 'Type (color) of the background, optional',
               type: 'String, ',
               values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
-                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
-                    <code>is-warning</code>, <code>is-danger</code>,
-                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                  <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                  <code>is-warning</code>, <code>is-danger</code>,
+                  and any other colors you've set in the <code>$colors</code> list on Sass`,
               default: '—'
-          },
+            },
+            {
+                name: '<code>wrapper-class</code>',
+                description: 'To wrap the navbar content into an div with the provided class',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>close-on-click</code>',
+                description: 'Control the behavior of the mobile menu by clicking on a link or outside the menu',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>false</code>'
+            },
       ],
       slots: [
           {
@@ -54,26 +68,64 @@ export default [
           },
           {
             name: 'start',
-            description: '',
+            description: 'Items that will appear on the left',
             props: '—'
           },
           {
             name: 'end',
-            description: '',
+            description: 'Items that  will appear on the right',
             props: '—'
           },
       ]
   },
   {
-      title: 'Navbar Item',
-      props: [
-          {
-              name: '<code>tag</code>',
-              description: 'Sets the type of the component that have to render as navbar-item',
-              type: 'Boolean',
-              values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
-              default: 'a'
-          }
-      ]
+    title: 'Navbar Item',
+    props: [
+        {
+            name: '<code>tag</code>',
+            description: 'Sets the type of the component that have to render as navbar-item',
+            type: 'Boolean',
+            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
+            default: 'a'
+        },
+        {
+            name: '<code>active</code>',
+            description: 'Item is active',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        }
+    ]
+  },
+  {
+    title: 'Navbar Dropdown',
+    props: [
+        {
+            name: '<code>hoverable</code>',
+            description: 'Dropdown will be triggered by hover instead of click',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>active</code>',
+            description: 'Item is active',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        }
+    ],
+    slots: [
+        {
+            name: 'default',
+            description: 'Menu item body',
+            props: '—'
+        },
+        {
+            name: '<code>label</code>',
+            description: 'Dropdown menu custom label',
+            props: '-'
+        }
+    ]
   }
 ]

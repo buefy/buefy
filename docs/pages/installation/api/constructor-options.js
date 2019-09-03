@@ -21,6 +21,22 @@ export default [
                 default: '<code></code>'
             },
             {
+                name: '<code>defaultIconPrev</code>',
+                description: `Icon used internally for prev. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>defaultIconNext</code>',
+                description: `Icon used internally for next. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>defaultContainerElement</code>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
@@ -273,6 +289,27 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>customIconPacks</code>',
+                description: 'Allows you to define your own custom icon pack to be used in Buefy.',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>defaultClockpickerHoursLabel</code>',
+                description: `Default clockpicker <code>hours-label</code> attribute`,
+                type: 'String',
+                values: '—',
+                default: `<code>Hours</code>`
+            },
+            {
+                name: '<code>defaultClockpickerMinutesLabel</code>',
+                description: `Default clockpicker <code>minutes-label</code> attribute`,
+                type: 'String',
+                values: '—',
+                default: `<code>Min</code>`
+            }
         ]
     }
 ]
