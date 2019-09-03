@@ -14,9 +14,8 @@
 </template>
 
 <script>
-import {merge} from '../../utils/helpers'
 import config from '../../utils/config'
-import icons from '../../utils/icons'
+import getIcons from '../../utils/icons'
 
 export default {
     name: 'BIcon',
@@ -32,10 +31,7 @@ export default {
     },
     computed: {
         iconConfig() {
-            let allIcons = icons
-            if (config.customIconPacks) {
-                allIcons = merge(icons, config.customIconPacks)
-            }
+            let allIcons = getIcons()
             return allIcons[this.newPack]
         },
         iconPrefix() {
