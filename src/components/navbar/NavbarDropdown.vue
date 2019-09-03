@@ -36,6 +36,11 @@ export default {
             _isNavDropdown: true // Used internally by NavbarItem
         }
     },
+    watch: {
+        active(value) {
+            this.newActive = value
+        }
+    },
     methods: {
         showMenu() {
             this.newActive = true
