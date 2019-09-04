@@ -18,7 +18,10 @@
 export default {
     name: 'BPaginationButton',
     props: {
-        page: Object,
+        page: {
+            type: Object,
+            required: true
+        },
         tag: {
             type: String,
             default: 'a',
