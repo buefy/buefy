@@ -113,6 +113,13 @@ export default [
             type: 'Boolean',
             values: '-',
             default: 'false'
+        },
+        {
+            name: '<code>is-right</code>',
+            description: 'Dropdown will be anchored to the right side',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
         }
     ],
     slots: [

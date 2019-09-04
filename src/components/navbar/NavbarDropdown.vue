@@ -11,7 +11,7 @@
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </a>
-        <div class="navbar-dropdown">
+        <div class="navbar-dropdown" :class="{'is-right': isRight}">
             <slot />
         </div>
     </div>
@@ -28,7 +28,11 @@ export default {
     props: {
         label: String,
         hoverable: Boolean,
-        active: Boolean
+        active: Boolean,
+        isRight: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
