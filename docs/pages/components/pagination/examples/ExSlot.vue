@@ -8,6 +8,7 @@
             <b-pagination-button
                 slot-scope="props"
                 :page="props.page"
+                :id="`page${props.page.number}`"
                 tag="router-link"
                 :to="`/documentation/pagination#page${props.page.number}`">
                 {{ convertToRoman(props.page.number) }}
@@ -62,5 +63,15 @@
                 return convertedRoman;
             }
         },
+        watch: {
+            $route: {
+                immediate: true,
+                handler(newVal, oldVal) {
+                    if (newVal.hash) {
+                        this.current = parseInt(newVal.hash.replace(/\#page/g, ''))
+                    }
+                },
+            },
+        }
     }
 </script>
