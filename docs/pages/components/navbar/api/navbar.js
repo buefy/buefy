@@ -115,7 +115,7 @@ export default [
             default: 'false'
         },
         {
-            name: '<code>is-right</code>',
+            name: '<code>right</code>',
             description: 'Dropdown will be anchored to the right side',
             type: 'Boolean',
             values: '-',
