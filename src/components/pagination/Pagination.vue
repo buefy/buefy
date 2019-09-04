@@ -254,18 +254,47 @@ export default {
         }
     },
     methods: {
+        /**
+        * Previous button click listener.
+        */
+        prev(event) {
+            this.changePage(this.current - 1, event)
+        },
+        /**
+        * Next button click listener.
+        */
+        next(event) {
+            this.changePage(this.current + 1, event)
+        },
+        /**
+        * First button click listener.
+        */
+        first(event) {
+            this.changePage(1, event)
+        },
+        /**
+        * Last button click listener.
+        */
+        last(event) {
+            this.changePage(this.pageCount, event)
+        },
+
+        changePage(num, event) {
+            if (this.current === num || num < 1 || num > this.pageCount) return
+            this.$emit('change', num)
+            this.$emit('update:current', num)
+
+            // Set focus on element to keep tab order
+            if (event && event.target) {
+                this.$nextTick(() => event.target.focus())
+            }
+        },
+
         getPage(num, options = {}) {
             return {
                 number: num,
                 isCurrent: this.current === num,
-                click: (event) => {
-                    if (this.current === num || num < 1 || num > this.pageCount) return
-                    this.$emit('change', num)
-                    this.$emit('update:current', num)
-
-                    // Set focus on element to keep tab order
-                    this.$nextTick(() => event.target.focus())
-                },
+                click: (event) => this.changePage(num, event),
                 disabled: options.disabled || false,
                 class: options.class || '',
                 'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
