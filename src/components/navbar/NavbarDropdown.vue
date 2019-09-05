@@ -7,11 +7,21 @@
         }"
         v-click-outside="closeMenu"
     >
-        <a class="navbar-link" @click="newActive = true">
+        <a 
+            class="navbar-link"
+            :class="{
+                'is-arrowless': arrowless
+            }"
+            @click="newActive = true">
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </a>
-        <div class="navbar-dropdown" :class="{'is-right': right}">
+        <div
+            class="navbar-dropdown"
+            :class="{
+                'is-right': right,
+                'is-boxed': boxed
+            }">
             <slot />
         </div>
     </div>
@@ -29,10 +39,9 @@ export default {
         label: String,
         hoverable: Boolean,
         active: Boolean,
-        right: {
-            type: Boolean,
-            default: false
-        }
+        right: Boolean,
+        arrowless: Boolean,
+        boxed: Boolean
     },
     data() {
         return {

@@ -1,5 +1,15 @@
 # Buefy Changelog
 
+## 0.8.4
+
+### New features
+
+* Add style props (``is-boxed``, etc) to navbar and navbarcomponent
+
+### Fixes
+
+* Fix #1744 icon component using vue-fontawesome
+
 ## 0.8.3
 
 ### New features

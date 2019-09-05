@@ -4,7 +4,7 @@ export default [
       props: [
           {
               name: '<code>transparent</code>',
-              description: 'To seamlessly integrate the navbar in any visual context, you can add the is-transparent modifier on the navbar component. This will remove any hover or active background from the navbar items',
+              description: 'Rremove any hover or active background from the navbar items',
               type: 'Boolean',
               values: '—',
               default: 'false'
@@ -54,6 +54,20 @@ export default [
                 values: '<code>true</code>, <code>false</code>',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>spaced</code>',
+                description: 'Sets Top and Bottom paddings with 1rem, Left and Right paddings with 2rem',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>shadow</code>',
+                description: 'Add a shadow to navbar',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            }
       ],
       slots: [
           {
@@ -117,6 +131,20 @@ export default [
         {
             name: '<code>right</code>',
             description: 'Dropdown will be anchored to the right side',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>arrowless</code>',
+            description: 'Show/hide arrow icon on dropdown',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>boxed</code>',
+            description: 'Show a boxed version of the dropdown',
             type: 'Boolean',
             values: '-',
             default: 'false'
