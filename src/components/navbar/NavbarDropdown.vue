@@ -7,7 +7,7 @@
         }"
         v-click-outside="closeMenu"
     >
-        <a 
+        <a
             class="navbar-link"
             :class="{
                 'is-arrowless': arrowless
@@ -21,7 +21,8 @@
             :class="{
                 'is-right': right,
                 'is-boxed': boxed
-            }">
+            }"
+        >
             <slot />
         </div>
     </div>
