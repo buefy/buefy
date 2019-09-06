@@ -4,7 +4,7 @@ export default [
       props: [
           {
               name: '<code>transparent</code>',
-              description: 'Rremove any hover or active background from the navbar items',
+              description: 'Remove any hover or active background from the navbar items',
               type: 'Boolean',
               values: '—',
               default: 'false'
