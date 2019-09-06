@@ -160,7 +160,13 @@ export default {
         },
         genNavbarBrandNode(createElement) {
             return createElement('div', {
-                class: 'navbar-brand'
+                class: 'navbar-brand',
+                directives: [
+                    {
+                        name: 'click-outside',
+                        value: this.closeMenu
+                    }
+                ]
             }, [this.$slots.brand, this.genBurgerNode(createElement)])
         },
         genBurgerNode(createElement) {
