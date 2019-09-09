@@ -44,28 +44,28 @@ describe('BSteps', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('calls changeStep when value is changed', () => {
-        wrapper.vm.changeStep = jest.fn()
+    it('calls changeActive when value is changed', () => {
+        wrapper.vm.changeActive = jest.fn()
         wrapper.setProps({value: 1})
-        expect(wrapper.vm.changeStep).toHaveBeenCalled()
+        expect(wrapper.vm.changeActive).toHaveBeenCalled()
     })
 
-    it('emit change event with value when changeStep is called', () => {
+    it('emit change event with value when changeActive is called', () => {
         const idx = 1
-        wrapper.vm.changeStep(idx)
+        wrapper.vm.changeActive(idx)
         const valueEmitted = wrapper.emitted()['change'][0]
         expect(valueEmitted).toContainEqual(idx)
-        expect(wrapper.vm.activeStep).toEqual(idx)
+        expect(wrapper.vm.activeChild).toEqual(idx)
 
-        expect(() => wrapper.vm.changeStep(3)).toThrow()
+        expect(() => wrapper.vm.changeActive(3)).toThrow()
     })
 
-    it('emit input event with value when stepClick is called', () => {
-        wrapper.vm.changeStep = jest.fn()
-        wrapper.vm.stepClick(1)
+    it('emit input event with value when childClick is called', () => {
+        wrapper.vm.changeActive = jest.fn()
+        wrapper.vm.childClick(1)
         const valueEmitted = wrapper.emitted()['input'][0]
         expect(valueEmitted).toContainEqual(1)
-        expect(wrapper.vm.changeStep).toHaveBeenCalled()
+        expect(wrapper.vm.changeActive).toHaveBeenCalled()
     })
 
     it('manage next/previous listener', () => {
@@ -76,20 +76,20 @@ describe('BSteps', () => {
         expect(wrapper.vm.hasNext).toBeTruthy()
         wrapper.vm.next()
         expect(wrapper.emitted()['input'][0]).toContainEqual(next)
-        expect(wrapper.vm.activeStep).toBe(next)
+        expect(wrapper.vm.activeChild).toBe(next)
         expect(wrapper.vm.hasNext).toBeFalsy()
 
         wrapper.vm.next()
-        expect(wrapper.vm.activeStep).toBe(next)
+        expect(wrapper.vm.activeChild).toBe(next)
 
         expect(wrapper.vm.hasPrev).toBeTruthy()
         wrapper.vm.prev()
         expect(wrapper.emitted()['input'][1]).toContainEqual(first)
-        expect(wrapper.vm.activeStep).toBe(first)
+        expect(wrapper.vm.activeChild).toBe(first)
         expect(wrapper.vm.hasPrev).toBeFalsy()
 
         wrapper.vm.prev()
-        expect(wrapper.vm.activeStep).toBe(first)
+        expect(wrapper.vm.activeChild).toBe(first)
     })
 
     it('manage wrapper classes as expected', () => {
