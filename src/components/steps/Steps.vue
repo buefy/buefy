@@ -3,28 +3,28 @@
         <nav class="steps" :class="mainClasses">
             <ul class="step-items">
                 <li
-                    v-for="(stepItem, index) in stepItems"
+                    v-for="(childItem, index) in childItems"
                     :key="index"
-                    v-show="stepItem.visible"
+                    v-show="childItem.visible"
                     class="step-item"
-                    :class="[stepItem.type || type, {
-                        'is-active': activeStep === index,
-                        'is-previous': activeStep > index
+                    :class="[childItem.type || type, {
+                        'is-active': activeChild === index,
+                        'is-previous': activeChild > index
                 }]">
                     <a
                         class="step-link"
-                        :class="{'is-clickable': isItemClickable(stepItem, index)}"
-                        @click="isItemClickable(stepItem, index) && stepClick(index)">
+                        :class="{'is-clickable': isItemClickable(childItem, index)}"
+                        @click="isItemClickable(childItem, index) && childClick(index)">
                         <div class="step-marker">
                             <b-icon
-                                v-if="stepItem.icon"
-                                :icon="stepItem.icon"
-                                :pack="stepItem.iconPack"
+                                v-if="childItem.icon"
+                                :icon="childItem.icon"
+                                :pack="childItem.iconPack"
                                 :size="size"/>
-                            <span v-else-if="stepItem.step">{{ stepItem.step }}</span>
+                            <span v-else-if="childItem.step">{{ childItem.step }}</span>
                         </div>
                         <div class="step-details">
-                            <span class="step-title">{{ stepItem.label }}</span>
+                            <span class="step-title">{{ childItem.label }}</span>
                         </div>
                     </a>
                 </li>
@@ -68,28 +68,13 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
-import SlotComponent from '../../utils/SlotComponent'
+import TabbedMixin from '../../utils/TabbedMixin.js'
 import config from '../../utils/config'
 
 export default {
     name: 'BSteps',
-    components: {
-        [Icon.name]: Icon,
-        [SlotComponent.name]: SlotComponent
-    },
+    mixins: [TabbedMixin],
     props: {
-        value: Number,
-        type: [String, Object],
-        size: String,
-        animated: {
-            type: Boolean,
-            default: true
-        },
-        destroyOnHide: {
-            type: Boolean,
-            default: false
-        },
         iconPack: String,
         iconPrev: {
             type: String,
@@ -107,11 +92,6 @@ export default {
             type: Boolean,
             default: true
         },
-        vertical: {
-            type: Boolean,
-            default: false
-        },
-        position: String,
         labelPosition: {
             type: String,
             validator(value) {
@@ -132,10 +112,6 @@ export default {
     },
     data() {
         return {
-            activeStep: this.value || 0,
-            defaultSlots: [],
-            contentHeight: 0,
-            isTransitioning: false,
             _isSteps: true // Used internally by StepItem
         }
     },
@@ -161,7 +137,7 @@ export default {
             ]
         },
 
-        stepItems() {
+        childItems() {
             return this.defaultSlots
                 .filter((vnode) =>
                     vnode.componentInstance &&
@@ -170,15 +146,15 @@ export default {
                 .map((vnode) => vnode.componentInstance)
         },
 
-        reversedStepItems() {
-            return this.stepItems.slice().reverse()
+        reversedChildItems() {
+            return this.childItems.slice().reverse()
         },
 
         /**
          * Check the first visible step index.
          */
         firstVisibleStepIndex() {
-            return this.stepItems.map(
+            return this.childItems.map(
                 (step, idx) => step.visible
             ).indexOf(true)
         },
@@ -188,18 +164,18 @@ export default {
          */
         hasPrev() {
             return this.firstVisibleStepIndex >= 0 &&
-                this.activeStep > this.firstVisibleStepIndex
+                this.activeChild > this.firstVisibleStepIndex
         },
 
         /**
          * Check the last visible step index.
          */
         lastVisibleStepIndex() {
-            let idx = this.reversedStepItems.map(
+            let idx = this.reversedChildItems.map(
                 (step, idx) => step.visible
             ).indexOf(true)
             if (idx >= 0) {
-                return this.stepItems.length - 1 - idx
+                return this.childItems.length - 1 - idx
             }
             return idx
         },
@@ -209,7 +185,7 @@ export default {
          */
         hasNext() {
             return this.lastVisibleStepIndex >= 0 &&
-                this.activeStep < this.lastVisibleStepIndex
+                this.activeChild < this.lastVisibleStepIndex
         },
 
         navigationProps() {
@@ -225,71 +201,15 @@ export default {
             }
         }
     },
-    watch: {
-        /**
-        * When v-model is changed set the new active step.
-        */
-        value(value) {
-            this.changeStep(value)
-        },
-
-        /**
-        * When step-items are updated, set active one.
-        */
-        stepItems() {
-            if (this.activeStep < this.stepItems.length) {
-                let previous = this.activeStep
-                this.stepItems.map((step, idx) => {
-                    if (step.isActive) {
-                        previous = idx
-                        if (previous < this.stepItems.length) {
-                            this.stepItems[previous].isActive = false
-                        }
-                    }
-                })
-                this.stepItems[this.activeStep].isActive = true
-            } else if (this.activeStep > 0) {
-                this.changeStep(this.activeStep - 1)
-            }
-        }
-    },
     methods: {
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-
-        /**
-         * Change the active step and emit change event.
-         */
-        changeStep(newIndex) {
-            if (this.activeStep === newIndex) return
-
-            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
-
-            if (this.activeStep < this.stepItems.length) {
-                this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
-            }
-            this.stepItems[newIndex].activate(this.activeStep, newIndex)
-            this.activeStep = newIndex
-            this.$emit('change', newIndex)
-        },
-
         /**
          * Return if the step should be clickable or not.
          */
         isItemClickable(stepItem, index) {
             if (stepItem.clickable === undefined) {
-                return this.activeStep > index
+                return this.activeChild > index
             }
             return stepItem.clickable
-        },
-
-        /**
-         * Step click listener, emit input event and change active step.
-         */
-        stepClick(value) {
-            this.$emit('input', value)
-            this.changeStep(value)
         },
 
         /**
@@ -297,14 +217,14 @@ export default {
          */
         prev() {
             if (!this.hasPrev) return
-            let prevItemIdx = this.reversedStepItems.map(
-                (step, idx) => this.stepItems.length - 1 - idx < this.activeStep && step.visible
+            let prevItemIdx = this.reversedChildItems.map(
+                (step, idx) => this.childItems.length - 1 - idx < this.activeChild && step.visible
             ).indexOf(true)
             if (prevItemIdx >= 0) {
-                prevItemIdx = this.stepItems.length - 1 - prevItemIdx
+                prevItemIdx = this.childItems.length - 1 - prevItemIdx
             }
             this.$emit('input', prevItemIdx)
-            this.changeStep(prevItemIdx)
+            this.changeActive(prevItemIdx)
         },
 
         /**
@@ -312,18 +232,12 @@ export default {
          */
         next() {
             if (!this.hasNext) return
-            const nextItemIdx = this.stepItems.map(
-                (step, idx) => idx > this.activeStep && step.visible
+            const nextItemIdx = this.childItems.map(
+                (step, idx) => idx > this.activeChild && step.visible
             ).indexOf(true)
             this.$emit('input', nextItemIdx)
-            this.changeStep(nextItemIdx)
+            this.changeActive(nextItemIdx)
         }
-    },
-    mounted() {
-        if (this.activeStep < this.stepItems.length) {
-            this.stepItems[this.activeStep].isActive = true
-        }
-        this.refreshSlots()
     }
 }
 </script>
