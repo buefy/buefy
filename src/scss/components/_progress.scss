@@ -38,6 +38,16 @@
             }
         }
 
+        // TODO Remove below when the following PR will be merged in Bulma:
+        // https://github.com/jgthms/bulma/pull/2540
+        // From this Bulma Issue:
+        // https://github.com/jgthms/bulma/issues/2539
+        &:indeterminate {
+            &::-ms-fill {
+                animation-name: none
+            }
+        }
+
         &::-webkit-progress-value {
             transition: width 0.5s ease;
         }
