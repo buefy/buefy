@@ -2,7 +2,11 @@
     <b-menu>
         <b-menu-list label="Menu">
             <b-menu-item icon="information-outline" label="Info"></b-menu-item>
-            <b-menu-item icon="settings" active expanded>
+            <b-menu-item
+                icon="settings"
+                :active="isActive"
+                :expanded="isActive"
+                @click="isActive = !isActive">
                 <template slot="label" slot-scope="props">
                     Administrator
                     <b-icon
@@ -11,7 +15,17 @@
                     </b-icon>
                 </template>
                 <b-menu-item icon="account" label="Users"></b-menu-item>
-                <b-menu-item icon="cellphone-link" label="Devices"></b-menu-item>
+                <b-menu-item icon="cellphone-link">
+                    <template slot="label" slot-scope="props">
+                        Devices
+                        <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
+                        <b-icon icon="dots-vertical" slot="trigger"></b-icon>
+                            <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
+                            <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
+                            <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+                        </b-dropdown>
+                    </template>
+                </b-menu-item>
                 <b-menu-item icon="cash-multiple" label="Payments" disabled></b-menu-item>
             </b-menu-item>
             <b-menu-item icon="account" label="My Account">
@@ -33,3 +47,13 @@
         </b-menu-list>
     </b-menu>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                isActive: true
+            }
+        }
+    }
+</script>
