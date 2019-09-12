@@ -58,14 +58,14 @@
         <b-field label="Search..." :label-position="labelPosition" grouped>
             <b-input placeholder="Search..." type="search"></b-input>
             <p class="control">
-                <button class="button is-primary">Search</button>
+                <b-button class="button is-primary">Search</b-button>
             </p>
         </b-field>
 
         <b-field label="Search..." :label-position="labelPosition">
             <b-input placeholder="Search..." type="search"></b-input>
             <p class="control">
-                <button class="button is-primary">Search</button>
+                <b-button class="button is-primary">Search</b-button>
             </p>
         </b-field>
     </section>
