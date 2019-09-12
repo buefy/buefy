@@ -12,7 +12,7 @@
             :class="{
                 'is-arrowless': arrowless
             }"
-            @click="newActive = true">
+            @click="newActive = !newActive">
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </a>
