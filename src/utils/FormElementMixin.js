@@ -105,6 +105,10 @@ export default {
             return this.$el.querySelector(this.$data._elementRef)
         },
 
+        scrollTo(options) {
+            this.getElement().scrollIntoView(options);
+        },
+
         setInvalid() {
             let type = 'is-danger'
             let message = this.validationMessage || this.getElement().validationMessage
