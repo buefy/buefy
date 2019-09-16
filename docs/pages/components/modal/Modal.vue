@@ -27,6 +27,7 @@
 </template>
 
 <script>
+    // Update data here to include 'full-screen' option
     import api from './api/modal'
 
     import ExSimple from './examples/ExSimple'
