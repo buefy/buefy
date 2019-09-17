@@ -8,11 +8,13 @@
 
 ### Fixes
 
+* Fix build using import individual components
 * Fix #1717 notification margin when ``queue`` is false and ``position`` is bottom-(right/left) (thanks @service-paradis)
 * Fix #1741 toggle on navbar dropdown
 * Fix #1743 add check outside click on navbar brand (thanks @wanxe)
 * Fix #1744 icon component using vue-fontawesome
 * Fix #1748 progressbar style on IE when indeterminate (thanks @service-paradis)
+* Fix #1761 grouped/addons size with ``inside`` position label (thanks @service-paradis)
 
 ## 0.8.3
 
