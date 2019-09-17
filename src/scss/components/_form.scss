@@ -160,6 +160,16 @@ $floating-in-height: 3.25em;
                 }
             }
         }
+
+        &.has-addons, &.is-grouped {
+            .control {
+                .button,
+                .input,
+                .select select {
+                    height: $floating-in-height
+                }
+            }
+        }
     }
     &.is-floating-label, &.is-floating-in-label {
         &.has-numberinput {
