@@ -106,7 +106,7 @@ export default {
         },
 
         scrollTo(options) {
-            this.getElement().scrollIntoView(options);
+            this.getElement().scrollIntoView(options)
         },
 
         setInvalid() {
