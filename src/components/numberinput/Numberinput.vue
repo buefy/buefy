@@ -123,7 +123,8 @@ export default {
         fieldClasses() {
             return [
                 { 'has-addons': this.controlsPosition === 'compact' },
-                { 'is-grouped': this.controlsPosition !== 'compact' }
+                { 'is-grouped': this.controlsPosition !== 'compact' },
+                { 'is-expanded': this.expanded }
             ]
         },
         buttonClasses() {

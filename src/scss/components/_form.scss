@@ -39,6 +39,31 @@ $floating-in-height: 3.25em;
             }
         }
     }
+    // Fix for number input with addons
+    &.has-addons {
+        .b-numberinput {
+            &:not(:first-child) {
+                .control:first-child {
+                    .button,
+                    .input,
+                    .select select {
+                        border-bottom-left-radius: 0;
+                        border-top-left-radius: 0;
+                    }
+                }
+            }
+            &:not(:last-child) {
+                .control:last-child {
+                    .button,
+                    .input,
+                    .select select {
+                        border-bottom-right-radius: 0;
+                        border-top-right-radius: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .field {

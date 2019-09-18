@@ -7,10 +7,16 @@
                 flex-shrink: 1;
             }
         }
+        &.has-addons {
+            &.is-expanded {
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
+        }
     }
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
     }
     input[type=number] {
         -moz-appearance:textfield;
@@ -23,5 +29,5 @@
             padding-left: 0.75em;
             padding-right: 0.75em;
         }
-    }   
+    }
 }
