@@ -15,7 +15,6 @@
         </Example>
 
         <ApiView :data="api"/>
-
         <VariablesView :data="variables"/>
     </div>
 </template>

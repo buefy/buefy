@@ -6,5 +6,9 @@ export default [
     {
         name: '<code>$checkbox-checkmark-color</code>',
         default: '<code>$primary-invert</code>'
+    },
+    {
+        name: '<code>$checkbox-size</code>',
+        default: '<code>1.25em</code>'
     }
 ]
