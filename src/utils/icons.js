@@ -41,7 +41,8 @@ const getIcons = () => {
         fa: faIcons(),
         fas: faIcons(),
         far: faIcons(),
-        fad: faIcons()
+        fad: faIcons(),
+        fab: faIcons()
     }
 
     if (config && config.customIconPacks) {
