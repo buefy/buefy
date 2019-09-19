@@ -10,6 +10,8 @@ jobs:
       - image: circleci/node:10.14-browsers
 
     working_directory: ~/repo
+    environment:
+      TZ: "Europe/Rome"
 
     steps:
       - checkout
