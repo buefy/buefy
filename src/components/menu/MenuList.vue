@@ -5,7 +5,11 @@ export default {
     props: {
         label: String,
         icon: String,
-        iconPack: String
+        iconPack: String,
+        ariaRole: {
+            type: String,
+            default: ''
+        }
     },
     render(createElement, context) {
         let vlabel = null
@@ -26,7 +30,7 @@ export default {
                         ] : context.props.label
                     : slots.label)
         }
-        const vnode = createElement('ul', { attrs: { 'class': 'menu-list' } }, slots.default)
+        const vnode = createElement('ul', { attrs: { 'class': 'menu-list', 'role': context.props.ariaRole === 'menu' ? context.props.ariaRole : null } }, slots.default)
         return vlabel ? [ vlabel, vnode ] : vnode
     }
 }
