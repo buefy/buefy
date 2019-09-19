@@ -1,6 +1,6 @@
 $rate-color: $grey-lighter !default;
 $rate-color-active: darken($warning, 5%) !default;
-$rate-space: 5px !default;
+$rate-spaced: 0.25rem !default;
 
 .rate {
   align-items: center;
@@ -9,7 +9,7 @@ $rate-space: 5px !default;
     margin-bottom: ($block-spacing / 2);
   }
   &.is-spaced .rate-item:not(:last-child) {
-    margin-right: $rate-space;
+    margin-right: $rate-spaced;
   }
   &.is-disabled .rate-item {
     cursor: initial;
@@ -29,31 +29,22 @@ $rate-space: 5px !default;
     &.set-half .is-half {
       color: $rate-color-active;
     }
+    &.set-half .is-half {
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+    }
   }
   .icon {
     color: $rate-color;
+    line-height: 1;
     pointer-events: none;
     width: inherit;
-    // fix MDI when half star in all size
-    line-height: 1;
   }
   .is-half > i {
-    // This follow width in rate.vue
-    // Because b-icon not support custom style
     position: absolute;
     left: 0;
-    top: 0;
-    width: inherit;
-    overflow: hidden;
-    // fix FA not same height + position from size default (fa-lg)
-    &.fa-lg {
-      top: 1.25px;
-      line-height: 1;
-    }
-    // fix MDI position from size medium (mdi-36px)
-    &.mdi-36px {
-      top: -1.5px;
-    }
   }
   .rate-text {
     align-items: center;
@@ -64,10 +55,10 @@ $rate-space: 5px !default;
       font-size: calc(#{$size-small} - 2px);
     }
     &.is-medium {
-      font-size: calc(#{$size-medium} - 4px);
+      font-size: calc(#{$size-medium} - 2px);
     }
     &.is-large {
-      font-size: calc(#{$size-large} - 4px);
+      font-size: calc(#{$size-large} - 2px);
     }
   }
 }
