@@ -22,46 +22,39 @@ describe('BPagination', () => {
     })
 
     it('returns firstItem accordingly', () => {
+        wrapper.setProps({current: 0})
+        expect(wrapper.vm.firstItem).toEqual(0)
+
         wrapper.setProps({current: 5})
         const expected = wrapper.vm.current * wrapper.vm.perPage - wrapper.vm.perPage + 1
         expect(wrapper.vm.firstItem).toEqual(expected)
     })
 
     it('should emit change with value of 1 when calling first', () => {
+        wrapper.setProps({current: 5})
         wrapper.vm.first()
-        const changeEmitted = wrapper.emitted()['change'][0]
-        expect(changeEmitted).toContainEqual(1)
-        wrapper.vm.first()
-        const currentEmitted = wrapper.emitted()['update:current'][0]
-        expect(currentEmitted).toContainEqual(1)
+        expect(wrapper.emitted()['change'][0]).toContainEqual(1)
+        expect(wrapper.emitted()['update:current'][0]).toContainEqual(1)
     })
 
     it('should emit change with value of pageCount when calling last', () => {
+        wrapper.setProps({current: 5})
         wrapper.vm.last()
-        const changeEmitted = wrapper.emitted()['change'][0]
-        expect(changeEmitted).toContainEqual(wrapper.vm.pageCount)
-        wrapper.vm.first()
-        const currentEmitted = wrapper.emitted()['update:current'][0]
-        expect(currentEmitted).toContainEqual(wrapper.vm.pageCount)
+        expect(wrapper.emitted()['change'][0]).toContainEqual(wrapper.vm.pageCount)
+        expect(wrapper.emitted()['update:current'][0]).toContainEqual(wrapper.vm.pageCount)
     })
 
     it('should emit change when calling prev', () => {
         wrapper.setProps({current: 5})
         wrapper.vm.prev()
-        const changeEmitted = wrapper.emitted()['change'][0]
-        expect(changeEmitted).toContainEqual(4)
-        wrapper.vm.first()
-        const currentEmitted = wrapper.emitted()['update:current'][0]
-        expect(currentEmitted).toContainEqual(4)
+        expect(wrapper.emitted()['change'][0]).toContainEqual(4)
+        expect(wrapper.emitted()['update:current'][0]).toContainEqual(4)
     })
 
     it('should emit change when calling next', () => {
-        wrapper.setProps({total: 100})
+        wrapper.setProps({total: 100, current: 4})
         wrapper.vm.next()
-        const changeEmitted = wrapper.emitted()['change'][0]
-        expect(changeEmitted).toContainEqual(2)
-        wrapper.vm.first()
-        const currentEmitted = wrapper.emitted()['update:current'][0]
-        expect(currentEmitted).toContainEqual(2)
+        expect(wrapper.emitted()['change'][0]).toContainEqual(5)
+        expect(wrapper.emitted()['update:current'][0]).toContainEqual(5)
     })
 })

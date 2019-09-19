@@ -9,11 +9,13 @@
         <Example :component="ExStyles" :code="ExStylesCode" title="Styles" vertical/>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/switch'
+    import variables from './variables/switch'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -31,6 +33,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypes,
                 ExSizes,

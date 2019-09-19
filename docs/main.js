@@ -11,6 +11,7 @@ import hljs from 'highlight.js'
 
 import ApiView from './components/ApiView'
 import CodeView from './components/CodeView'
+import VariablesView from './components/VariablesView'
 import Example from './components/Example'
 
 Vue.config.productionTip = false
@@ -41,6 +42,7 @@ Vue.use(VueAnalytics, {
 })
 Vue.component('ApiView', ApiView)
 Vue.component('CodeView', CodeView)
+Vue.component('VariablesView', VariablesView)
 Vue.component('Example', Example)
 
 Vue.directive('highlight', {
