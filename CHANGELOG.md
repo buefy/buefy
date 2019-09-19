@@ -1,11 +1,12 @@
 # Buefy Changelog
 
 ## 0.8.4
-
+ 
 ### New features
 
 * Add style props (``is-boxed``, etc) to navbar and navbarcomponent
 * Add pagination buttons customization (thanks @service-paradis)
+* Improve accessibility for menu (thanks @mateuswetah)
 
 ### Fixes
 
