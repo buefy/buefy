@@ -5,16 +5,10 @@
                 <div class="columns">
                     <div class="column">
                         <p>
-                            Made with
-                            <b-icon
-                                icon="heart"
-                                type="is-danger"
-                                style="vertical-align: middle;"
-                            />
-                            by
-                            <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
-                            with great support by
+                            Maintained by
                             <a href="https://twitter.com/walter_tommasi" target="_blank">Walter Tommasi</a>.
+                            Authored by
+                            <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
                         </p>
                         <p>
                             <small>
@@ -31,15 +25,6 @@
                                     target="_blank">
                                     <b-icon icon="github-circle"/>
                                     <span>GitHub</span>
-                                </a>
-                            </p>
-                            <p class="control">
-                                <a
-                                    class="button is-twitter"
-                                    href="https://twitter.com/rafaelpimpa"
-                                    target="_blank">
-                                    <b-icon icon="twitter"/>
-                                    <span>Twitter</span>
                                 </a>
                             </p>
                             <p class="control">
