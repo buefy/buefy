@@ -5,6 +5,7 @@
 ### New features
 
 * Add style props (``is-boxed``, etc) to navbar and navbarcomponent
+* Add pagination buttons customization (thanks @service-paradis)
 
 ### Fixes
 
@@ -15,6 +16,7 @@
 * Fix #1744 icon component using vue-fontawesome
 * Fix #1748 progressbar style on IE when indeterminate (thanks @service-paradis)
 * Fix #1761 grouped/addons size with ``inside`` position label (thanks @service-paradis)
+* Fix #1773 numberinput issues with groups and addons (thanks @service-paradis)
 
 ## 0.8.3
 
