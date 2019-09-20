@@ -3,7 +3,8 @@
         <div
             v-if="isActive"
             class="dialog modal is-active"
-            :class="size">
+            :class="size"
+            v-trap-focus="trapFocus">
             <div class="modal-background" @click="cancel('outside')"/>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
@@ -65,6 +66,7 @@
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import Icon from '../icon/Icon'
 import Modal from '../modal/Modal'
 import config from '../../utils/config'
@@ -74,6 +76,9 @@ export default {
     name: 'BDialog',
     components: {
         [Icon.name]: Icon
+    },
+    directives: {
+        trapFocus
     },
     extends: Modal,
     props: {
@@ -115,6 +120,10 @@ export default {
         focusOn: {
             type: String,
             default: 'confirm'
+        },
+        trapFocus: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
