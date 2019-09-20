@@ -41,7 +41,9 @@ export default {
         closeOnClick: {
             type: Boolean,
             default: true
-        }
+        },
+        spaced: Boolean,
+        shadow: Boolean
     },
     data() {
         return {
@@ -55,8 +57,13 @@ export default {
         computedClasses() {
             return [
                 this.type,
-                { [FIXED_TOP_CLASS]: this.fixedTop },
-                { [FIXED_BOTTOM_CLASS]: this.fixedBottom }
+                {
+                    [FIXED_TOP_CLASS]: this.fixedTop,
+                    [FIXED_BOTTOM_CLASS]: this.fixedBottom,
+                    'is-spaced': this.spaced,
+                    'has-shadow': this.shadow,
+                    'is-transparent': this.transparent
+                }
             ]
         }
     },
@@ -153,7 +160,13 @@ export default {
         },
         genNavbarBrandNode(createElement) {
             return createElement('div', {
-                class: 'navbar-brand'
+                class: 'navbar-brand',
+                directives: [
+                    {
+                        name: 'click-outside',
+                        value: this.closeMenu
+                    }
+                ]
             }, [this.$slots.brand, this.genBurgerNode(createElement)])
         },
         genBurgerNode(createElement) {

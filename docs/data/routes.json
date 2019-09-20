@@ -98,8 +98,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -209,7 +208,8 @@
             "/",
             "documentation",
             "documentation/notification"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/message": {
         "title": "Message",
@@ -245,7 +245,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/input": {
         "title": "Input",
@@ -329,8 +330,7 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -342,8 +342,7 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -428,7 +427,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/steps": {
         "title": "Steps",
@@ -440,8 +440,7 @@
             "/",
             "documentation",
             "documentation/steps"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/menu": {
         "title": "Menu",
@@ -466,8 +465,7 @@
             "/",
             "documentation",
             "documentation/slider"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/progress": {
         "title": "Progress",
@@ -479,7 +477,8 @@
             "/",
             "documentation",
             "documentation/progress"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "extensions": {
         "title": "Extensions",

@@ -4,7 +4,7 @@ export default [
       props: [
           {
               name: '<code>transparent</code>',
-              description: 'To seamlessly integrate the navbar in any visual context, you can add the is-transparent modifier on the navbar component. This will remove any hover or active background from the navbar items',
+              description: 'Remove any hover or active background from the navbar items',
               type: 'Boolean',
               values: '—',
               default: 'false'
@@ -54,6 +54,20 @@ export default [
                 values: '<code>true</code>, <code>false</code>',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>spaced</code>',
+                description: 'Sets Top and Bottom paddings with 1rem, Left and Right paddings with 2rem',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>shadow</code>',
+                description: 'Add a shadow to navbar',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            }
       ],
       slots: [
           {
@@ -84,7 +98,7 @@ export default [
         {
             name: '<code>tag</code>',
             description: 'Sets the type of the component that have to render as navbar-item',
-            type: 'Boolean',
+            type: 'String',
             values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
             default: 'a'
         },
@@ -110,6 +124,27 @@ export default [
         {
             name: '<code>active</code>',
             description: 'Item is active',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>right</code>',
+            description: 'Dropdown will be anchored to the right side',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>arrowless</code>',
+            description: 'Show/hide arrow icon on dropdown',
+            type: 'Boolean',
+            values: '-',
+            default: 'false'
+        },
+        {
+            name: '<code>boxed</code>',
+            description: 'Show a boxed version of the dropdown',
             type: 'Boolean',
             values: '-',
             default: 'false'

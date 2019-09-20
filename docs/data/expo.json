@@ -1,5 +1,18 @@
 [
     {
+        "title": "Kulap",
+        "date": "2019-09-04",
+        "img": "kulap.png",
+        "url": "https://www.kulap.io",
+        "featured": true
+    },
+    {
+        "title": "Gravium Wallet",
+        "date": "2019-09-03",
+        "img": "gravium.png",
+        "url": "https://gravium.io/wallet-2-0"
+    },
+    {
         "title": "JustBoil.me",
         "date": "2019-08-20",
         "img": "justboilme.png",
@@ -70,8 +83,7 @@
         "title": "Repo Remover",
         "date": "2019-05-24",
         "img": "reporemover.png",
-        "url": "https://reporemover.xyz",
-        "featured": true
+        "url": "https://reporemover.xyz"
     },
     {
         "title": "Nest&Cut",

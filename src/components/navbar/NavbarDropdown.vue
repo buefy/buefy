@@ -7,11 +7,22 @@
         }"
         v-click-outside="closeMenu"
     >
-        <a class="navbar-link" @click="newActive = true">
+        <a
+            class="navbar-link"
+            :class="{
+                'is-arrowless': arrowless
+            }"
+            @click="newActive = !newActive">
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </a>
-        <div class="navbar-dropdown">
+        <div
+            class="navbar-dropdown"
+            :class="{
+                'is-right': right,
+                'is-boxed': boxed
+            }"
+        >
             <slot />
         </div>
     </div>
@@ -28,12 +39,20 @@ export default {
     props: {
         label: String,
         hoverable: Boolean,
-        active: Boolean
+        active: Boolean,
+        right: Boolean,
+        arrowless: Boolean,
+        boxed: Boolean
     },
     data() {
         return {
             newActive: this.active,
             _isNavDropdown: true // Used internally by NavbarItem
+        }
+    },
+    watch: {
+        active(value) {
+            this.newActive = value
         }
     },
     methods: {

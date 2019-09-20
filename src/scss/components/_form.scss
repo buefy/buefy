@@ -1,4 +1,4 @@
-$floating-in-height: 3.25em;
+$floating-in-height: 3.25em !default;
 
 .field {
     &.is-grouped {
@@ -36,6 +36,31 @@ $floating-in-height: 3.25em;
             .input,
             .select select {
                 border-radius: 0
+            }
+        }
+    }
+    // Fix for number input with addons
+    &.has-addons {
+        .b-numberinput {
+            &:not(:first-child) {
+                .control:first-child {
+                    .button,
+                    .input,
+                    .select select {
+                        border-bottom-left-radius: 0;
+                        border-top-left-radius: 0;
+                    }
+                }
+            }
+            &:not(:last-child) {
+                .control:last-child {
+                    .button,
+                    .input,
+                    .select select {
+                        border-bottom-right-radius: 0;
+                        border-top-right-radius: 0;
+                    }
+                }
             }
         }
     }
@@ -157,6 +182,16 @@ $floating-in-height: 3.25em;
                     .button {
                         height: $floating-in-height;
                     }
+                }
+            }
+        }
+
+        &.has-addons, &.is-grouped {
+            .control {
+                .button,
+                .input,
+                .select select {
+                    height: $floating-in-height
                 }
             }
         }

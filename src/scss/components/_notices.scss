@@ -110,6 +110,15 @@ $snackbar-color: $dark-invert !default;
     }
     &.is-bottom {
         flex-direction: column-reverse;
+
+        // Since the columns are reversed, we need to reverse the margin logic from
+        // :not(:last-child) to :not(:first-child)
+        .notification {
+            margin-bottom: 0;
+            &:not(:first-child) {
+                margin-bottom: 1.5rem;
+            }
+        }
     }
     &.has-custom-container {
         position: absolute;
