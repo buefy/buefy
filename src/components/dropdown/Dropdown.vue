@@ -23,7 +23,8 @@
                 v-show="(!disabled && (isActive || isHoverable)) || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu"
-                :aria-hidden="!isActive">
+                :aria-hidden="!isActive"
+                v-trap-focus="trapFocus">
                 <div
                     class="dropdown-content"
                     :role="ariaRoleMenu">
@@ -35,12 +36,16 @@
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
 export default {
     name: 'BDropdown',
+    directives: {
+        trapFocus
+    },
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],
@@ -74,6 +79,10 @@ export default {
             default: 'fade'
         },
         multiple: Boolean,
+        trapFocus: {
+            type: Boolean,
+            default: false
+        },
         closeOnClick: {
             type: Boolean,
             default: true
