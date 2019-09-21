@@ -5,11 +5,13 @@
         <Example :component="ExFull" :code="ExFullCode" title="Custom Rate"/>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/rate'
+    import variables from './variables/rate'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -21,6 +23,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExFull,
                 ExSimpleCode,

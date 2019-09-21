@@ -1,5 +1,7 @@
 <template>
-    <div class="rate" :class="{ 'is-disabled': disabled, 'is-spaced': spaced }">
+    <div
+        class="rate"
+        :class="{ 'is-disabled': disabled, 'is-spaced': spaced, 'is-rtl': rtl }">
         <div
             v-for="(item, index) in max"
             class="rate-item"
@@ -34,7 +36,6 @@
 
 <script>
 import Icon from '../icon/Icon'
-
 export default {
     name: 'BRate',
     components: {
@@ -56,16 +57,12 @@ export default {
         iconPack: String,
         size: String,
         spaced: Boolean,
+        rtl: Boolean,
         disabled: Boolean,
         showScore: Boolean,
         showText: Boolean,
         customText: String,
-        texts: {
-            type: Array,
-            default() {
-                return ['Very Bad', 'Bad', 'Good', 'Very Good', 'Awesome']
-            }
-        }
+        texts: Array
     },
     data() {
         return {
@@ -81,9 +78,7 @@ export default {
             let result = ''
             if (this.showScore) {
                 result = this.disabled ? this.value : this.newValue
-                if (result === 0) {
-                    result = ''
-                }
+                if (result === 0) result = ''
             } else if (this.showText) {
                 result = this.texts[Math.ceil(this.newValue) - 1]
             }
