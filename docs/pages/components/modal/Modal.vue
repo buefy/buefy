@@ -7,6 +7,9 @@
                 A modal with a component. When you want to close the Modal, call the 'close' method —
                 <code>this.$parent.close()</code> — from the injected component.
             </p>
+            <p>
+                `trap-focus` prop could be useful in this case.
+            </p>
         </Example>
 
         <Example :component="ExProgrammatic" :code="ExProgrammaticCode" title="Programmatic">

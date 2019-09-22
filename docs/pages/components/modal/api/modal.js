@@ -88,6 +88,13 @@ export default [
                 default: '<code>clip</code>'
             },
             {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the modal.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>custom-class</code>',
                 description: 'CSS classes to be applied on modal',
                 type: 'String',

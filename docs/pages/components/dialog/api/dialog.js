@@ -116,6 +116,13 @@ export default [
                 type: 'String',
                 values: '<code>confirm</code>, <code>cancel</code>',
                 default: '<code>confirm</code>'
+            },
+            {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the dialog.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }

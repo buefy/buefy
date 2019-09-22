@@ -6,7 +6,8 @@
         <div
             v-if="isActive"
             class="modal is-active"
-            :class="[{'is-full-screen': fullScreen}, customClass]">
+            :class="[{'is-full-screen': fullScreen}, customClass]"
+            v-trap-focus="trapFocus">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
@@ -33,11 +34,15 @@
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import { removeElement } from '../../utils/helpers'
 import config from '../../utils/config'
 
 export default {
     name: 'BModal',
+    directives: {
+        trapFocus
+    },
     props: {
         active: Boolean,
         component: [Object, Function],
@@ -79,6 +84,10 @@ export default {
             }
         },
         fullScreen: Boolean,
+        trapFocus: {
+            type: Boolean,
+            default: false
+        },
         customClass: String
     },
     data() {
