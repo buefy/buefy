@@ -90,7 +90,8 @@ export default {
         canClose: {
             type: [Array, Boolean],
             default: true
-        }
+        },
+        expanded: Boolean
     },
     data() {
         return {
@@ -107,7 +108,8 @@ export default {
                 'is-hoverable': this.hoverable,
                 'is-inline': this.inline,
                 'is-active': this.isActive || this.inline,
-                'is-mobile-modal': this.isMobileModal
+                'is-mobile-modal': this.isMobileModal,
+                'is-expanded': this.expanded
             }]
         },
         isMobileModal() {

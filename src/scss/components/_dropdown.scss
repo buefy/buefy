@@ -28,7 +28,20 @@
             white-space: nowrap;
         }
     }
-
+    &.is-expanded {
+        width: 100%;
+        .dropdown-trigger {
+            width: 100%;
+        }
+        .dropdown-menu {
+            width: 100%;
+        }
+        &.is-mobile-modal {
+            .dropdown-menu {
+                max-width: 100%;
+            }
+        }
+    }
     &:not(.is-disabled) {
         .dropdown-menu {
             .dropdown-item {
