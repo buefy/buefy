@@ -54,21 +54,12 @@ or Individual Components
 ```javascript
 
 import Vue from 'vue'
-import { Field, Input } from 'buefy/dist/components'
+import { Field, Input } from 'buefy'
 import 'buefy/dist/buefy.css'
 
 Vue.use(Field)
 Vue.use(Input)
 
-or
-
-import Vue from 'vue'
-import Field from 'buefy/dist/components/field'
-import Input from 'buefy/dist/components/input'
-import 'buefy/dist/buefy.css'
-
-Vue.use(Field)
-Vue.use(Input)
 ```
 
 ### 3 Include Material Design Icons
