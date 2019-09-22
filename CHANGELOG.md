@@ -1,7 +1,18 @@
 # Buefy Changelog
 
+## 0.8.5
+
+### New features
+
+* #1706 Add ``trap-focus`` prop to modal, dialog and dropdown (thanks @service-paradis)
+* #1775 Add ``expanded`` prop to dropdown
+
+### Fixes
+
+* Fix #1784 navbar navigation on mobile reverting #1743
+
 ## 0.8.4
- 
+
 ### New features
 
 * Add style props (``is-boxed``, etc) to navbar and navbarcomponent
