@@ -20,6 +20,7 @@
                 v-model="value1"
                 :type="newTooltipType"
                 :tooltip="tooltip"
+                :custom-formatter="customFormatter"
                 ref="button1"
                 role="slider"
                 :aria-valuenow="value1"
@@ -34,6 +35,7 @@
                 v-model="value2"
                 :type="newTooltipType"
                 :tooltip="tooltip"
+                :custom-formatter="customFormatter"
                 ref="button2"
                 v-if="isRange"
                 role="slider"
@@ -102,6 +104,7 @@ export default {
             type: Boolean,
             default: false
         },
+        customFormatter: Function,
         ariaLabel: [String, Array]
     },
     data() {

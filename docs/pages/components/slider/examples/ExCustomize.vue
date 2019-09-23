@@ -8,6 +8,10 @@
             <b-slider :tooltip="false"></b-slider>
         </b-field>
 
+        <b-field label="Custom tooltip label">
+            <b-slider :custom-formatter="val => val + '%'"></b-slider>
+        </b-field>
+
         <b-field label="Rounded thumb">
             <b-slider rounded></b-slider>
         </b-field>
