@@ -86,6 +86,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>custom-formatter</code>',
+                description: 'Function to format the tooltip label for display',
+                type: 'Function',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-label</code>',
                 description: 'Accessibility label for the thumbs',
                 type: 'String, Array',
