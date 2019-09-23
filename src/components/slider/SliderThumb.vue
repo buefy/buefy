@@ -83,7 +83,7 @@ export default {
         },
         tooltipValue() {
             return typeof this.customFormatter !== 'undefined'
-                ? this.customFormatter(this.value.toString())
+                ? this.customFormatter(this.value)
                 : this.value.toString()
         }
     },
