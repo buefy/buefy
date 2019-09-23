@@ -32,6 +32,7 @@
                         "documentation/input",
                         "documentation/numberinput",
                         "documentation/radio",
+                        "documentation/rate",
                         "documentation/select",
                         "documentation/slider",
                         "documentation/switch",
