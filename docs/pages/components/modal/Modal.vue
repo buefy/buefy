@@ -8,7 +8,7 @@
                 <code>this.$parent.close()</code> — from the injected component.
             </p>
             <p>
-                `trap-focus` prop could be useful in this case.
+                <code>trap-focus</code> prop could be useful in this case.
             </p>
         </Example>
 
