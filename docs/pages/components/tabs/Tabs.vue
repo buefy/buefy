@@ -2,6 +2,11 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode"/>
 
+        <Example :component="ExDynamic" :code="ExDynamicCode" title="Dynamic">
+            <p>Items can be created / modified / deleted and will always keep the defined order.</p>
+            <p>You can also use <code>v-if</code> to show (or not) a Tab Item.</p>
+        </Example>
+
         <Example :component="ExPosition" :code="ExPositionCode" title="Position"/>
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons"/>
@@ -33,6 +38,9 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
+    import ExDynamic from './examples/ExDynamic'
+    import ExDynamicCode from '!!raw-loader!./examples/ExDynamic'
+
     import ExPosition from './examples/ExPosition'
     import ExPositionCode from '!!raw-loader!./examples/ExPosition'
 
@@ -56,12 +64,14 @@
             return {
                 api,
                 ExSimple,
+                ExDynamic,
                 ExPosition,
                 ExIcons,
                 ExSizes,
                 ExTypes,
                 ExExpanded,
                 ExSimpleCode,
+                ExDynamicCode,
                 ExPositionCode,
                 ExIconsCode,
                 ExSizesCode,
