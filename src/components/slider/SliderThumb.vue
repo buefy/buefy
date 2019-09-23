@@ -4,7 +4,7 @@
         :class="{ 'is-dragging': dragging }"
         :style="wrapperStyle">
         <b-tooltip
-            :label="tooltipValue"
+            :label="tooltipLabel"
             :type="type"
             :always="dragging || isFocused"
             :active="!disabled && tooltip">
@@ -81,7 +81,7 @@ export default {
         wrapperStyle() {
             return { left: this.currentPosition }
         },
-        tooltipValue() {
+        tooltipLabel() {
             return typeof this.customFormatter !== 'undefined'
                 ? this.customFormatter(this.value)
                 : this.value.toString()
