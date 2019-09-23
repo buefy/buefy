@@ -81,7 +81,7 @@ export default {
         multiple: Boolean,
         trapFocus: {
             type: Boolean,
-            default: false
+            default: config.defaultTrapFocus
         },
         closeOnClick: {
             type: Boolean,

@@ -123,7 +123,7 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: false
+            default: config.defaultTrapFocus
         }
     },
     data() {

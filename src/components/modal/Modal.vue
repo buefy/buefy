@@ -86,7 +86,7 @@ export default {
         fullScreen: Boolean,
         trapFocus: {
             type: Boolean,
-            default: false
+            default: config.defaultTrapFocus
         },
         customClass: String
     },
