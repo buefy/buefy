@@ -21,6 +21,10 @@
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
         </Example>
 
+         <Example :component="ExCategory" :code="ExCategoryCode" title="Present element by category">
+            <p>You can present element with a category resume.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -43,6 +47,9 @@
     import ExCustomAsync from './examples/ExCustomAsync'
     import ExCustomAsyncCode from '!!raw-loader!./examples/ExCustomAsync'
 
+    import ExCategory from './examples/ExCategory'
+    import ExCategoryCode from '!!raw-loader!./examples/ExCategory'
+
     export default {
         data() {
             return {
@@ -56,7 +63,9 @@
                 ExFooter,
                 ExFooterCode,
                 ExCustomAsyncCode,
-                ExCustomAsync
+                ExCustomAsync,
+                ExCategory,
+                ExCategoryCode
             }
         }
     }
