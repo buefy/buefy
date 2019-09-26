@@ -1,0 +1,10 @@
+[{"id":1,"category":"Installation","article_title":"Start"},
+    {"id":2,"category":"Installation","article_title":"Customization"},
+    {"id":3,"category":"Installation","article_title":"Constructor-options"},
+    {"id":4,"category":"Layout","article_title":"Layout"},
+    {"id":5,"category":"UI Components","article_title":"Button"},
+    {"id":6,"category":"UI Components","article_title":"Collapse"},
+    {"id":7,"category":"UI Components","article_title":"Dialog"},
+    {"id":8,"category":"UI Components","article_title":"Dropdown"},
+    {"id":9,"category":"UI Components","article_title":"Slider"}
+]    
