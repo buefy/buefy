@@ -13,6 +13,9 @@
         overflow: auto;
         max-height: 200px;
     }
+    .category {
+        font-weight: $weight-semibold;
+    }
     .dropdown-item {
         white-space: nowrap;
         overflow: hidden;
