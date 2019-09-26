@@ -4,6 +4,9 @@
             <b-switch v-model="allowNew">
                 Allow new tags
             </b-switch>
+            <b-switch v-model="openOnFocus">
+                Open on focus
+            </b-switch>
         </div>
         <b-field label="Enter some tags">
             <b-taginput
@@ -11,9 +14,8 @@
                 :data="filteredTags"
                 autocomplete
                 :allow-new="allowNew"
+                :open-on-focus="openOnFocus"
                 field="user.first_name"
-                icon="label"
-                placeholder="Add a tag"
                 @typing="getFilteredTags">
             </b-taginput>
         </b-field>
@@ -30,7 +32,8 @@
                 filteredTags: data,
                 isSelectOnly: false,
                 tags: [],
-                allowNew: false
+                allowNew: false,
+                openOnFocus: false
             }
         },
         methods: {
