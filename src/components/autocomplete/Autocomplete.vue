@@ -35,22 +35,49 @@
                         class="dropdown-item">
                         <slot name="header"/>
                     </div>
-                    <a
-                        v-for="(option, index) in data"
-                        :key="index"
-                        class="dropdown-item"
-                        :class="{ 'is-hovered': option === hovered }"
-                        @click="setSelected(option)">
+                    <div v-if= "!category">
+                        <a
+                            v-for="(option, index) in data"
+                            :key="index"
+                            class="dropdown-item"
+                            :class="{ 'is-hovered': option === hovered }"
+                            @click="setSelected(option)">
 
-                        <slot
-                            v-if="hasDefaultSlot"
-                            :option="option"
-                            :index="index"
-                        />
-                        <span v-else>
-                            {{ getValue(option, true) }}
-                        </span>
-                    </a>
+                            <slot
+                                v-if="hasDefaultSlot"
+                                :option="option"
+                                :index="index"
+                            />
+                            <span v-else>
+                                {{ getValue(option, true) }}
+                            </span>
+                        </a>
+                    </div>
+                    <div v-if= "category">
+                        <label
+                            class="dropdown-item"
+                            v-for="valCategory in listOfCategory"
+                            :key="valCategory">
+                            <span class="category">{{ valCategory }}</span>
+                            <a
+                                v-for="(option, index) in
+                                data.filter(cat => cat.category==valCategory)"
+                                :key="index"
+                                class="dropdown-item"
+                                :class="{ 'is-hovered': option === hovered }"
+                                @click="setSelected(option)">
+
+                                <slot
+                                    v-if="hasDefaultSlot"
+                                    :option="option"
+                                    :index="index"
+                                />
+                                <span v-else>
+                                    {{ getValue(option, true) }}
+                                </span>
+                            </a>
+                        </label>
+                    </div>
                     <div
                         v-if="data.length === 0 && hasEmptySlot"
                         class="dropdown-item is-disabled">
@@ -85,6 +112,10 @@ export default {
             type: Array,
             default: () => []
         },
+        listOfCategory: {
+            type: Array,
+            default: () => []
+        },
         field: {
             type: String,
             default: 'value'
@@ -92,7 +123,11 @@ export default {
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
-        customFormatter: Function
+        customFormatter: Function,
+        category: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -198,6 +233,7 @@ export default {
          */
         value(value) {
             this.newValue = value
+            this.initializeListOfCategory()
             !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
@@ -219,6 +255,21 @@ export default {
             if (option === undefined) return
 
             this.hovered = option
+        },
+
+        /**
+        * Get the array of category from the data
+         */
+        initializeListOfCategory() {
+            if (this.category) {
+                var i
+                this.listOfCategory = []
+                for (i = 0; i < this.data.length; i += 1) {
+                    if (!this.listOfCategory.includes(this.data[i].category)) {
+                        this.listOfCategory.push(this.data[i].category)
+                    }
+                }
+            }
         },
 
         /**
@@ -382,6 +433,11 @@ export default {
             const currentValue = this.getValue(this.selected)
             if (currentValue && currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
+        }
+    },
+    mounted() {
+        if (this.category) {
+            this.initializeListOfCategory()
         }
     },
     created() {
