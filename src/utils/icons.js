@@ -4,7 +4,7 @@ import {merge} from '../utils/helpers'
 const mdiIcons = {
     sizes: {
         'default': 'mdi-24px',
-        'is-small': '',
+        'is-small': null,
         'is-medium': 'mdi-36px',
         'is-large': 'mdi-48px'
     },
@@ -15,8 +15,8 @@ const faIcons = () => {
     const faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
     return {
         sizes: {
-            'default': '',
-            'is-small': '',
+            'default': null,
+            'is-small': null,
             'is-medium': faIconPrefix + 'lg',
             'is-large': faIconPrefix + '2x'
         },
