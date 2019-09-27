@@ -269,6 +269,7 @@ export default {
                         this.listOfCategory.push(this.data[i].category)
                     }
                 }
+                this.listOfCategory.sort()
             }
         },
 
