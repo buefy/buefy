@@ -4,6 +4,9 @@ import BAutocomplete from '@components/autocomplete/Autocomplete'
 const findStringsStartingWith = (array, value) =>
     array.filter((x) => x.startsWith(value))
 
+const findStringsStartingCategoryWith = (array, value) =>
+    array.filter((x) => x.article_title.startsWith(value))
+
 const DATA_LIST = [
     'Angular',
     'Angular 2',
@@ -18,6 +21,19 @@ const DATA_LIST = [
     'RxJS',
     'Vue.js'
 ]
+
+const DATA_LIST_CATEGORY = [
+    {'id': 1, 'category': 'Installation', 'article_title': 'Start'},
+    {'id': 2, 'category': 'Installation', 'article_title': 'Customization'},
+    {'id': 3, 'category': 'Installation', 'article_title': 'Constructor-options'},
+    {'id': 4, 'category': 'Layout', 'article_title': 'Layout'},
+    {'id': 5, 'category': 'UI Components', 'article_title': 'Button'},
+    {'id': 6, 'category': 'UI Components', 'article_title': 'Collapse'},
+    {'id': 7, 'category': 'UI Components', 'article_title': 'Dialog'},
+    {'id': 8, 'category': 'UI Components', 'article_title': 'Dropdown'},
+    {'id': 9, 'category': 'UI Components', 'article_title': 'Slider'}
+]
+
 const dropdownMenu = '.dropdown-menu'
 let wrapper, $input, $dropdown
 
@@ -45,6 +61,23 @@ describe('BAutocomplete', () => {
     it('has a dropdown menu hidden by default', () => {
         expect(wrapper.contains(dropdownMenu)).toBeTruthy()
         expect($dropdown.isVisible()).toBeFalsy()
+    })
+
+    it('use category', async () => {
+        wrapper.setProps({ category: true })
+        wrapper.setProps({ data: DATA_LIST_CATEGORY })
+        const VALUE_TYPED = 'Dia'
+        $input.trigger('focus')
+        $input.setValue(VALUE_TYPED)
+        await wrapper.vm.$nextTick()
+
+        expect($dropdown.isVisible()).toBeTruthy()
+
+        const itemsInDropdowm = findStringsStartingCategoryWith(DATA_LIST_CATEGORY, VALUE_TYPED)
+        expect(itemsInDropdowm[0].article_title).toBe('Dialog')
+
+        wrapper.vm.initializeListOfCategory()
+        expect(wrapper.vm.listOfCategory.length).toBe(3)
     })
 
     it('can emit input, focus and blur events', async () => {
