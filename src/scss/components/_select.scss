@@ -1,5 +1,10 @@
 .select {
     select {
+        // TODO Remove below when the following problem will be fixed from Bulma or Safari:
+        // https://github.com/jgthms/bulma/issues/2626
+        // https://bugs.webkit.org/show_bug.cgi?id=202055
+        text-rendering: auto !important;
+
         padding-right: 2.5em;
         option {
             color: $grey-dark;
