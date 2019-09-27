@@ -10,7 +10,6 @@
                 :multiple="multiple"
                 :size="nativeSize"
                 v-bind="$attrs"
-                v-on="$listeners"
                 @blur="$emit('blur', $event) && checkHtml5Validity()"
                 @focus="$emit('focus', $event)">
 
@@ -51,7 +50,7 @@ export default {
     inheritAttrs: false,
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Symbol, Function],
+            type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
         placeholder: String,

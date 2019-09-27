@@ -39,7 +39,7 @@
             :show-value="showValue"
             :format="format"
             :precision="precision"
-            :keep-trailing-zeroes="keepTrailingZeroes" />
+            :keep-trailing-zeroes="keepTrailingZeroes"></b-progress>
     </section>
 </template>
 

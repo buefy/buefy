@@ -15,9 +15,3 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
-
-export {
-    Menu,
-    MenuList,
-    MenuItem
-}

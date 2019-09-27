@@ -27,7 +27,7 @@ export default [
             },
             {
                 name: '<code>auto-close</code>',
-                description: `Hide notification after <code>duration</code>`,
+                description: `Hide notification after <code>duration</code> only not programmatic`,
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

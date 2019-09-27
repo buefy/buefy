@@ -5,7 +5,7 @@
         </b-field>
         <b-datepicker
             inline
-            v-model="date" 
+            v-model="date"
             :events="events"
             :indicators="indicators"
             >

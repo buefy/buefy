@@ -338,7 +338,7 @@ export default {
          * If object, get value from path, or else just the value.
          */
         getValue(option) {
-            if (!option) return
+            if (option === null) return
 
             if (typeof this.customFormatter !== 'undefined') {
                 return this.customFormatter(option)

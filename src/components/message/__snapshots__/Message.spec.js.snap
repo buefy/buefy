@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BMessage render correctly 1`] = `
+<article class="message" name="fade">
+    <!---->
+    <section class="message-body">
+        <div class="media">
+            <!---->
+            <div class="media-content"></div>
+        </div>
+    </section>
+</article>
+`;

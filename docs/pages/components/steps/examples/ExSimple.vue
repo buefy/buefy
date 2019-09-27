@@ -10,7 +10,22 @@
             <b-switch v-model="hasNavigation"> Navigation Buttons </b-switch>
             <b-switch v-model="isProfileSuccess"> Set <code>is-success</code> for profile </b-switch>
         </div>
-        <b-steps v-model="activeStep" :animated="isAnimated" :has-navigation="hasNavigation">
+        <b-field v-if="hasNavigation" grouped group-multiline>
+            <b-select v-model="prevIcon">
+                <option value="chevron-left">Chevron prev icon </option>
+                <option value="arrow-left">Arrow prev icon</option>
+            </b-select>
+            <b-select v-model="nextIcon">
+                <option value="chevron-right">Chevron next icon </option>
+                <option value="arrow-right">Arrow next icon</option>
+            </b-select>
+        </b-field>
+        <b-steps
+            v-model="activeStep"
+            :animated="isAnimated"
+            :has-navigation="hasNavigation"
+            :icon-prev="prevIcon"
+            :icon-next="nextIcon">
             <b-step-item label="Account" :clickable="isStepsClickable">
                 Lorem ipsum dolor sit amet.
             </b-step-item>
@@ -44,6 +59,8 @@
                 showSocial: false,
                 isAnimated: true,
                 hasNavigation: true,
+                prevIcon: 'chevron-left',
+                nextIcon: 'chevron-right',
                 isStepsClickable: false,
                 isProfileSuccess: false
             }

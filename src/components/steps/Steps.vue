@@ -41,7 +41,7 @@
                 @click.prevent="prev"
                 :aria-label="ariaPreviousLabel">
                 <b-icon
-                    icon="chevron-left"
+                    :icon="iconPrev"
                     :pack="iconPack"
                     both
                     aria-hidden="true"/>
@@ -54,7 +54,7 @@
                 @click.prevent="next"
                 :aria-label="ariaNextLabel">
                 <b-icon
-                    icon="chevron-right"
+                    :icon="iconNext"
                     :pack="iconPack"
                     both
                     aria-hidden="true"/>
@@ -66,6 +66,7 @@
 <script>
 import Icon from '../icon/Icon'
 import SlotComponent from '../../utils/SlotComponent'
+import config from '../../utils/config'
 
 export default {
     name: 'BSteps',
@@ -86,6 +87,14 @@ export default {
             default: false
         },
         iconPack: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         hasNavigation: {
             type: Boolean,
             default: true
@@ -115,29 +124,29 @@ export default {
         },
 
         /**
-            * Check the first visible step index.
-            */
+         * Check the first visible step index.
+         */
         firstVisibleStepIndex() {
-            return this.stepItems.findIndex((step, idx) => {
-                return step.visible
-            })
+            return this.stepItems.map(
+                (step, idx) => step.visible
+            ).indexOf(true)
         },
 
         /**
-            * Check if previous button is available.
-            */
+         * Check if previous button is available.
+         */
         hasPrev() {
             return this.firstVisibleStepIndex >= 0 &&
                 this.activeStep > this.firstVisibleStepIndex
         },
 
         /**
-            * Check the last visible step index.
-            */
+         * Check the last visible step index.
+         */
         lastVisibleStepIndex() {
-            let idx = this.reversedStepItems.findIndex((step, idx) => {
-                return step.visible
-            })
+            let idx = this.reversedStepItems.map(
+                (step, idx) => step.visible
+            ).indexOf(true)
             if (idx >= 0) {
                 return this.stepItems.length - 1 - idx
             }
@@ -203,13 +212,13 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         prev() {
             if (!this.hasPrev) return
-            let prevItemIdx = this.reversedStepItems.findIndex((step, idx) => {
-                return this.stepItems.length - 1 - idx < this.activeStep && step.visible
-            })
+            let prevItemIdx = this.reversedStepItems.map(
+                (step, idx) => this.stepItems.length - 1 - idx < this.activeStep && step.visible
+            ).indexOf(true)
             if (prevItemIdx >= 0) {
                 prevItemIdx = this.stepItems.length - 1 - prevItemIdx
             }
@@ -218,13 +227,13 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         next() {
             if (!this.hasNext) return
-            const nextItemIdx = this.stepItems.findIndex((step, idx) => {
-                return idx > this.activeStep && step.visible
-            })
+            const nextItemIdx = this.stepItems.map(
+                (step, idx) => idx > this.activeStep && step.visible
+            ).indexOf(true)
             this.$emit('input', nextItemIdx)
             this.changeStep(nextItemIdx)
         }

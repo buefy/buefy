@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BDatepickerTableRow render correctly 1`] = `
+<div class="datepicker-row">
+    <!----> <a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        31
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        1
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        2
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        3
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        4
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        5
+        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        6
+        <!----></a></div>
+`;

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BDatepickerTable render correctly 1`] = `
+<section class="datepicker-table">
+    <header class="datepicker-header">
+        <div class="datepicker-cell">
+
+        </div>
+        <div class="datepicker-cell">
+
+        </div>
+        <div class="datepicker-cell">
+
+        </div>
+        <div class="datepicker-cell">
+
+        </div>
+        <div class="datepicker-cell">
+
+        </div>
+        <div class="datepicker-cell">
+
+        </div>
+        <div class="datepicker-cell">
+
+        </div>
+    </header>
+    <div class="datepicker-body"></div>
+</section>
+`;

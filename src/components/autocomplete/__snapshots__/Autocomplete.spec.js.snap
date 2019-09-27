@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BAutocomplete render correctly 1`] = `
+<div class="autocomplete control">
+    <div class="control is-clearfix"><input type="text" autocomplete="off" class="input">
+        <!---->
+        <!---->
+        <!---->
+    </div>
+    <div class="dropdown-menu" style="display: none;" name="fade">
+        <div class="dropdown-content" style="display: none;">
+            <!---->
+            <!---->
+            <!---->
+        </div>
+    </div>
+</div>
+`;

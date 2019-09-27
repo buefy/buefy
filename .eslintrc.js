@@ -8,8 +8,6 @@ module.exports = {
     'buefy',
   ],
   rules: {
-    // disable now, but enable in the future
-    'no-console': 'off',
     'vue/attributes-order': 'off',
     'vue/html-self-closing': ['error', {
       'html': {

@@ -30,8 +30,8 @@
 export default {
     name: 'BCheckboxButton',
     props: {
-        value: [String, Number, Boolean, Function, Object, Array, Symbol],
-        nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+        value: [String, Number, Boolean, Function, Object, Array],
+        nativeValue: [String, Number, Boolean, Function, Object, Array],
         disabled: Boolean,
         required: Boolean,
         name: String,

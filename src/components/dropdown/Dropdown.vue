@@ -37,11 +37,13 @@
 <script>
 import config from '../../utils/config'
 
+const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
+
 export default {
     name: 'BDropdown',
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Symbol, Function],
+            type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
         disabled: Boolean,
@@ -75,6 +77,10 @@ export default {
         closeOnClick: {
             type: Boolean,
             default: true
+        },
+        canClose: {
+            type: [Array, Boolean],
+            default: true
         }
     },
     data() {
@@ -97,6 +103,13 @@ export default {
         },
         isMobileModal() {
             return this.mobileModal && !this.inline && !this.hoverable
+        },
+        cancelOptions() {
+            return typeof this.canClose === 'boolean'
+                ? this.canClose
+                    ? DEFAULT_CLOSE_OPTIONS
+                    : []
+                : this.canClose
         },
         ariaRoleMenu() {
             return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
@@ -146,8 +159,6 @@ export default {
             this.$emit('input', this.selected)
             if (!this.multiple) {
                 this.isActive = !this.closeOnClick
-                /*
-                * breaking change
                 if (this.hoverable && this.closeOnClick) {
                     this.isHoverable = false
                     // Timeout for the animation complete before destroying
@@ -155,7 +166,6 @@ export default {
                         this.isHoverable = true
                     }, 250)
                 }
-               */
             }
         },
 
@@ -191,9 +201,21 @@ export default {
         * Close dropdown if clicked outside.
         */
         clickedOutside(event) {
+            if (this.cancelOptions.indexOf('outside') < 0) return
             if (this.inline) return
 
             if (!this.isInWhiteList(event.target)) this.isActive = false
+        },
+
+        /**
+         * Keypress event that is bound to the document
+         */
+        keyPress(event) {
+            // Esc key
+            if (this.isActive && event.keyCode === 27) {
+                if (this.cancelOptions.indexOf('escape') < 0) return
+                this.isActive = false
+            }
         },
 
         /**
@@ -219,11 +241,13 @@ export default {
     created() {
         if (typeof window !== 'undefined') {
             document.addEventListener('click', this.clickedOutside)
+            document.addEventListener('keyup', this.keyPress)
         }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
+            document.removeEventListener('keyup', this.keyPress)
         }
     }
 }

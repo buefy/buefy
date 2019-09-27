@@ -1,5 +1,36 @@
 [
     {
+        "title": "Kulap",
+        "date": "2019-09-04",
+        "img": "kulap.png",
+        "url": "https://www.kulap.io",
+        "featured": true
+    },
+    {
+        "title": "Gravium Wallet",
+        "date": "2019-09-03",
+        "img": "gravium.png",
+        "url": "https://gravium.io/wallet-2-0"
+    },
+    {
+        "title": "JustBoil.me",
+        "date": "2019-08-20",
+        "img": "justboilme.png",
+        "url": "https://justboil.me"
+    },
+    {
+        "title": "Course Cosmos",
+        "date": "2019-08-11",
+        "img": "coursecosmos.png",
+        "url": "https://coursecosmos.com"
+    },
+    {
+        "title": "Menuver",
+        "date": "2019-08-01",
+        "img": "menuver.png",
+        "url": "https://menuver.com"
+    },
+    {
         "title": "Philips Talent Pool",
         "date": "2019-06-19",
         "img": "philips-talentpool.png",
@@ -52,8 +83,7 @@
         "title": "Repo Remover",
         "date": "2019-05-24",
         "img": "reporemover.png",
-        "url": "https://reporemover.xyz",
-        "featured": true
+        "url": "https://reporemover.xyz"
     },
     {
         "title": "Nest&Cut",
@@ -62,10 +92,10 @@
         "url": "https://nestandcut.com"
     },
     {
-        "title": "Openbook",
+        "title": "Okuna",
         "date": "2019-04-24",
         "img": "openbook.png",
-        "url": "https://www.open-book.org",
+        "url": "https://www.okuna.io",
         "featured": true
     },
     {

@@ -51,6 +51,23 @@
             :label-position="labelPosition">
             <b-input maxlength="200" type="textarea"></b-input>
         </b-field>
+
+        <hr>
+        <p class="title is-6">Also works for grouped field and with addons.</p>
+
+        <b-field label="Search..." :label-position="labelPosition" grouped>
+            <b-input placeholder="Search..." type="search"></b-input>
+            <p class="control">
+                <b-button class="button is-primary">Search</b-button>
+            </p>
+        </b-field>
+
+        <b-field label="Search..." :label-position="labelPosition">
+            <b-input placeholder="Search..." type="search"></b-input>
+            <p class="control">
+                <b-button class="button is-primary">Search</b-button>
+            </p>
+        </b-field>
     </section>
 </template>
 

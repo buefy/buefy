@@ -187,7 +187,7 @@ export default {
         },
 
         footerSlotName() {
-            return this.hasHeaderSlot ? 'footer' : 'dontrender'
+            return this.hasFooterSlot ? 'footer' : 'dontrender'
         },
 
         hasDefaultSlot() {
@@ -295,7 +295,7 @@ export default {
         },
 
         removeTag(index) {
-            var tag = this.tags.splice(index, 1)[0]
+            const tag = this.tags.splice(index, 1)[0]
             this.$emit('input', this.tags)
             this.$emit('remove', tag)
             return tag

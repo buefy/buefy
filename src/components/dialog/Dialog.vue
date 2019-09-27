@@ -14,7 +14,9 @@
                     class="modal-card-body"
                     :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <div class="media">
-                        <div class="media-left" v-if="hasIcon">
+                        <div
+                            class="media-left"
+                            v-if="hasIcon && (icon || iconByType)">
                             <b-icon
                                 :icon="icon ? icon : iconByType"
                                 :pack="iconPack"
@@ -180,9 +182,11 @@ export default {
     },
     beforeMount() {
         // Insert the Dialog component in body tag
-        this.$nextTick(() => {
-            document.body.appendChild(this.$el)
-        })
+        if (typeof window !== 'undefined') {
+            this.$nextTick(() => {
+                document.body.appendChild(this.$el)
+            })
+        }
     },
     mounted() {
         this.isActive = true

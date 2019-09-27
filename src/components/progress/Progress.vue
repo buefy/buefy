@@ -7,7 +7,7 @@
             :max="max">{{ newValue }}</progress>
         <p
             v-if="showValue"
-            class="progress-value has-text-white"><slot>{{ newValue }}</slot></p>
+            class="progress-value"><slot>{{ newValue }}</slot></p>
     </div>
 </template>
 
