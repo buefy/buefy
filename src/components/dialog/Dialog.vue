@@ -3,7 +3,8 @@
         <div
             v-if="isActive"
             class="dialog modal is-active"
-            :class="size">
+            :class="size"
+            v-trap-focus="trapFocus">
             <div class="modal-background" @click="cancel('outside')"/>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
@@ -14,7 +15,9 @@
                     class="modal-card-body"
                     :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
                     <div class="media">
-                        <div class="media-left" v-if="hasIcon">
+                        <div
+                            class="media-left"
+                            v-if="hasIcon && (icon || iconByType)">
                             <b-icon
                                 :icon="icon ? icon : iconByType"
                                 :pack="iconPack"
@@ -63,6 +66,7 @@
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import Icon from '../icon/Icon'
 import Modal from '../modal/Modal'
 import config from '../../utils/config'
@@ -72,6 +76,9 @@ export default {
     name: 'BDialog',
     components: {
         [Icon.name]: Icon
+    },
+    directives: {
+        trapFocus
     },
     extends: Modal,
     props: {
@@ -113,6 +120,10 @@ export default {
         focusOn: {
             type: String,
             default: 'confirm'
+        },
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
         }
     },
     data() {
@@ -180,9 +191,11 @@ export default {
     },
     beforeMount() {
         // Insert the Dialog component in body tag
-        this.$nextTick(() => {
-            document.body.appendChild(this.$el)
-        })
+        if (typeof window !== 'undefined') {
+            this.$nextTick(() => {
+                document.body.appendChild(this.$el)
+            })
+        }
     },
     mounted() {
         this.isActive = true

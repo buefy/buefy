@@ -24,7 +24,7 @@ export default {
     name: 'BDropdownItem',
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Symbol, Function],
+            type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
         separator: Boolean,

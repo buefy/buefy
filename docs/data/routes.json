@@ -98,8 +98,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -111,7 +110,8 @@
             "/",
             "documentation",
             "documentation/icon"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tooltip": {
         "title": "Tooltip",
@@ -148,7 +148,7 @@
             "documentation",
             "documentation/navbar"
         ],
-        "isNew": true
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -208,7 +208,8 @@
             "/",
             "documentation",
             "documentation/notification"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/message": {
         "title": "Message",
@@ -244,7 +245,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/input": {
         "title": "Input",
@@ -316,8 +318,7 @@
             "/",
             "documentation",
             "documentation/switch"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/datepicker": {
         "title": "Datepicker",
@@ -329,8 +330,7 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -342,8 +342,7 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -391,8 +390,7 @@
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -429,7 +427,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isUpdated": "true"
     },
     "documentation/steps": {
         "title": "Steps",
@@ -441,8 +440,7 @@
             "/",
             "documentation",
             "documentation/steps"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/menu": {
         "title": "Menu",
@@ -454,7 +452,8 @@
             "/",
             "documentation",
             "documentation/menu"
-        ]
+        ],
+        "isUpdated": "true"
     },
      "documentation/slider": {
         "title": "Slider",
@@ -466,8 +465,7 @@
             "/",
             "documentation",
             "documentation/slider"
-        ],
-        "isNew": true
+        ]
     },
     "documentation/progress": {
         "title": "Progress",
@@ -479,6 +477,19 @@
             "/",
             "documentation",
             "documentation/progress"
+        ],
+        "isUpdated": "true"
+    },
+    "documentation/rate": {
+        "title": "Rate",
+        "subtitle": "A quick rating operation on something",
+        "path": "/documentation/rate",
+        "githubPath": "pages/components/rate/Rate.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/rate"
         ],
         "isNew": true
     },

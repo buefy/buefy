@@ -11,11 +11,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/radio'
+    import variables from './variables/radio'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -33,6 +35,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSizes,
                 ExTypes,

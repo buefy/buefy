@@ -43,6 +43,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    Notification,
     NotificationProgrammatic
 }

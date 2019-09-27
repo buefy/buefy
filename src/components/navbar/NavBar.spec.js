@@ -1,7 +1,5 @@
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import BNavbar from '@components/navbar/Navbar.vue'
-import BNavbarBurger from '@components/navbar/NavbarBurger.vue'
-import BNavbarItem from '@components/navbar/NavbarItem.vue'
 
 describe('BNavbar', () => {
     let wrapper
@@ -11,6 +9,10 @@ describe('BNavbar', () => {
 
     it('is called', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('should have a nav tag', () => {
@@ -32,45 +34,13 @@ describe('BNavbar', () => {
         expect(menuContainer.classes('is-active')).toBe(true)
     })
 
-    describe('BNavbarBurger', () => {
-        let wrapper
-        beforeEach(() => {
-            wrapper = shallowMount(BNavbarBurger)
-        })
-
-        it('is called', () => {
-            expect(wrapper.isVueInstance()).toBeTruthy()
-        })
-
-        it('should be an anchor tag', () => {
-            const anchorTag = wrapper.find('.navbar-burger')
-            expect(anchorTag.is('a')).toBe(true)
-        })
-
-        it('should have the is-active class when the prop isOpened is true', () => {
-            const burgerWrapper = mount(BNavbarBurger)
-            burgerWrapper.setProps({ isOpened: true })
-            expect(burgerWrapper.classes('is-active')).toBe(true)
-        })
-    })
-
-    describe('BNavbarItem', () => {
-        it('is called', () => {
-            expect(wrapper.isVueInstance()).toBeTruthy()
-        })
-
-        it('correctly renders the provided tag', () => {
-            const tag = 'div'
-            const NavbarItem = {
-                components: { BNavbarItem },
-                template: `
-                  <div>
-                    <b-navbar-item tag="${tag}"></b-navbar-item>
-                  </div>
-                `
+    it('should wrap the slots into a wrapper when we set the wrapperClass prop', () => {
+        const navBar = mount(BNavbar, {
+            propsData: {
+                wrapperClass: 'container'
             }
-            const wrapper = mount(NavbarItem)
-            expect(wrapper.contains(tag)).toBeTruthy()
         })
+
+        expect(navBar.find('.container').exists()).toBe(true)
     })
 })

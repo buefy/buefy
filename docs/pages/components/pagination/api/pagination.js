@@ -1,5 +1,6 @@
 export default [
     {
+        title: 'Pagination',
         props: [
             {
                 name: '<code>total</code>',
@@ -72,6 +73,20 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-prev</code>',
+                description: 'Icon to use for previous button',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>icon-next</code>',
+                description: 'Icon to use for next button',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link.',
                 type: 'String',
@@ -100,11 +115,54 @@ export default [
                 default: '—'
             }
         ],
+        slots: [
+            {
+                name: 'default',
+                description: 'This is to customize numbered pagination buttons with the Button subcomponent.',
+                props: '<code>:page="props.page"</code>'
+            },
+            {
+                name: 'next',
+                description: 'This is to customize the next pagination button with the Button subcomponent.',
+                props: '<code>:page="props.page"</code>'
+            },
+            {
+                name: 'previous',
+                description: 'This is to customize the previous pagination button with the Button subcomponent.',
+                props: '<code>:page="props.page"</code>'
+            }
+        ],
         events: [
             {
                 name: '<code>change</code>',
                 description: 'Triggers when the current page is changed',
                 parameters: '<code>value: Number</code>'
+            }
+        ]
+    },
+    {
+        title: 'Button',
+        props: [
+            {
+                name: '<code>page</code>',
+                description: 'The prop page need to be passed upon the component (<code>:page="props.page"</code>).',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>tag</code>',
+                description: 'Button tag name',
+                type: 'String',
+                values: '<code>a</code>, <code>button</code>, <code>input</code>, <code>router-link</code>, <code>nuxt-link</code> or other nuxt alias',
+                default: '<code>a</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: '<strong>Required</strong>, pagination button content',
+                props: '-'
             }
         ]
     }

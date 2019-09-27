@@ -14,7 +14,7 @@ export default {
         label: String,
         customKey: [String, Number],
         field: String,
-        meta: [String, Number, Boolean, Function, Object, Array, Symbol],
+        meta: [String, Number, Boolean, Function, Object, Array],
         width: [Number, String],
         numeric: Boolean,
         centered: Boolean,

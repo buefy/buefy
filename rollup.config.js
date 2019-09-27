@@ -13,7 +13,7 @@ const babelConfig = {
     exclude: 'node_modules/**',
     runtimeHelpers: true,
     babelrc: false,
-    presets: [['@babel/env', { useBuiltIns: 'entry', corejs: { version: 2 }, modules: false }]]
+    presets: [['@babel/preset-env', { modules: false }]]
 }
 
 const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
@@ -35,6 +35,11 @@ const entries = {
     }, {})
 }
 
+const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 export default () => {
     const mapComponent = (name) => {
         return [
@@ -43,7 +48,7 @@ export default () => {
                 external: ['vue'],
                 output: {
                     format: 'umd',
-                    name: name,
+                    name: capitalize(name),
                     file: `dist/components/${name}/index.js`,
                     banner: bannerTxt,
                     exports: 'named',
@@ -114,7 +119,7 @@ export default () => {
             external: ['vue'],
             output: {
                 format: 'umd',
-                name: 'buefy',
+                name: capitalize('buefy'),
                 file: 'dist/buefy.js',
                 exports: 'named',
                 banner: bannerTxt,
@@ -126,13 +131,34 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                cjs(),
                 vue({
                     template: {
                         isProduction: true
                     }
                 }),
-                babel(babelConfig)
+                babel(babelConfig),
+                cjs()
+            ]
+        },
+        {
+            input: 'src/index.js',
+            external: ['vue'],
+            output: {
+                format: 'esm',
+                file: 'dist/buefy.esm.js',
+                banner: bannerTxt
+            },
+            plugins: [
+                node({
+                    extensions: ['.vue', '.js']
+                }),
+                vue({
+                    template: {
+                        isProduction: true
+                    }
+                }),
+                babel(babelConfig),
+                cjs()
             ]
         },
         // individual components
@@ -140,10 +166,14 @@ export default () => {
     ]
 
     if (process.env.MINIFY === 'true') {
-        config = config.filter((c) => c.output.format === 'umd')
+        config = config.filter((c) => !!c.output.file)
         config.forEach((c) => {
             c.output.file = c.output.file.replace(/\.js/g, '.min.js')
-            c.plugins.push(terser())
+            c.plugins.push(terser({
+                output: {
+                    comments: '/^!/'
+                }
+            }))
         })
     }
     return config

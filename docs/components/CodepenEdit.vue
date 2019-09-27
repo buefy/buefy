@@ -133,13 +133,10 @@ export default {
             }
 
             return this.$options.filters.pre(`
-
-                    ${js || ''}
-
-                    const app = new Vue(${js ? 'example' : ''})
-
-                    app.$mount('#app')
-                `)
+                ${js || ''}
+                const app = new Vue(${js ? 'example' : ''})
+                app.$mount('#app')
+            `)
         },
         getStyle() {
             const match = this.code.match(/<style.*>/)

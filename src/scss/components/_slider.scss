@@ -36,6 +36,8 @@ $slider-mark-size: 0.75rem !default;
         font-size: $slider-mark-size;
         position: absolute;
         top: calc(#{$track-height} / 2 + 2px);
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -59,13 +61,18 @@ $slider-mark-size: 0.75rem !default;
         background: $slider-track-background;
         border-radius: $slider-track-radius;
         border: $slider-track-border;
+        // Fix alignment in IE 11. Cancel out for others
+        top: 50%;
+        transform: translateY(-50%);
     }
     .b-slider-thumb-wrapper {
         display: inline-flex;
         align-items: center;
         position: absolute;
-        transform: translateX(-50%);
         cursor: grab;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        flex-direction: column; // Fix shrinked thumb at the end in IE 11
 
         .b-slider-thumb {
             box-shadow: $slider-thumb-shadow;
@@ -125,10 +132,9 @@ $slider-mark-size: 0.75rem !default;
 
     .b-slider-tick {
         position: absolute;
-        display: flex;
-        justify-content: center;
 		width: $slider-tick-width;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
+        top: 50%;
         background: $slider-tick-background;
         border-radius: $slider-tick-radius;
         &.is-tick-hidden {

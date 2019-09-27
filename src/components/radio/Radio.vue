@@ -24,8 +24,8 @@
 export default {
     name: 'BRadio',
     props: {
-        value: [String, Number, Boolean, Function, Object, Array, Symbol],
-        nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+        value: [String, Number, Boolean, Function, Object, Array],
+        nativeValue: [String, Number, Boolean, Function, Object, Array],
         type: String,
         disabled: Boolean,
         required: Boolean,

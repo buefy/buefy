@@ -11,11 +11,13 @@
         <Example :component="ExToggle" :code="ExToggleCode" title="Toggle" vertical/>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/tooltip'
+    import variables from './variables/tooltip'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -33,6 +35,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExStyles,
                 ExMultilined,

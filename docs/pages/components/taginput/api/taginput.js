@@ -121,7 +121,7 @@ export default [
                 description: 'Function to validate the value of the tag before adding',
                 type: 'Function',
                 values: '—',
-                default: '<code>() => true</code>'
+                default: '<code>(tagToAdd) => true</code>'
             },
             {
                 name: '<code>allow-duplicates</code>',

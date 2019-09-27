@@ -1,9 +1,13 @@
 <template>
-    <transition :name="animation">
+    <transition
+        :name="animation"
+        @after-enter="afterEnter"
+        @before-leave="beforeLeave">
         <div
             v-if="isActive"
             class="modal is-active"
-            :class="[{'is-full-screen': fullScreen}, customClass]">
+            :class="[{'is-full-screen': fullScreen}, customClass]"
+            v-trap-focus="trapFocus">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
@@ -19,22 +23,26 @@
                     v-else-if="content"
                     v-html="content"/>
                 <slot v-else/>
+                <button
+                    type="button"
+                    v-if="showX && !animating"
+                    class="modal-close is-large"
+                    @click="cancel('x')"/>
             </div>
-            <button
-                type="button"
-                v-if="showX"
-                class="modal-close is-large"
-                @click="cancel('x')"/>
         </div>
     </transition>
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import { removeElement } from '../../utils/helpers'
 import config from '../../utils/config'
 
 export default {
     name: 'BModal',
+    directives: {
+        trapFocus
+    },
     props: {
         active: Boolean,
         component: [Object, Function],
@@ -76,6 +84,10 @@ export default {
             }
         },
         fullScreen: Boolean,
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
+        },
         customClass: String
     },
     data() {
@@ -84,7 +96,8 @@ export default {
             savedScrollTop: null,
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
-                : this.width
+                : this.width,
+            animating: true
         }
     },
     computed: {
@@ -180,6 +193,20 @@ export default {
         keyPress(event) {
             // Esc key
             if (this.isActive && event.keyCode === 27) this.cancel('escape')
+        },
+
+        /**
+        * Transition after-enter hook
+        */
+        afterEnter() {
+            this.animating = false
+        },
+
+        /**
+        * Transition before-leave hook
+        */
+        beforeLeave() {
+            this.animating = true
         }
     },
     created() {

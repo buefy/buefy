@@ -20,6 +20,7 @@
                 v-model="value1"
                 :type="newTooltipType"
                 :tooltip="tooltip"
+                :custom-formatter="customFormatter"
                 ref="button1"
                 role="slider"
                 :aria-valuenow="value1"
@@ -27,11 +28,14 @@
                 :aria-valuemax="max"
                 aria-orientation="horizontal"
                 :aria-label="Array.isArray(ariaLabel) ? ariaLabel[0] : ariaLabel"
-                :aria-disabled="disabled"/>
+                :aria-disabled="disabled"
+                @dragstart="onDragStart"
+                @dragend="onDragEnd" />
             <b-slider-thumb
                 v-model="value2"
                 :type="newTooltipType"
                 :tooltip="tooltip"
+                :custom-formatter="customFormatter"
                 ref="button2"
                 v-if="isRange"
                 role="slider"
@@ -40,7 +44,9 @@
                 :aria-valuemax="max"
                 aria-orientation="horizontal"
                 :aria-label="Array.isArray(ariaLabel) ? ariaLabel[1] : ''"
-                :aria-disabled="disabled"/>
+                :aria-disabled="disabled"
+                @dragstart="onDragStart"
+                @dragend="onDragEnd" />
         </div>
     </div>
 </template>
@@ -94,6 +100,11 @@ export default {
             type: Boolean,
             default: false
         },
+        lazy: {
+            type: Boolean,
+            default: false
+        },
+        customFormatter: Function,
         ariaLabel: [String, Array]
     },
     data() {
@@ -102,11 +113,13 @@ export default {
             value2: null,
             dragging: false,
             isRange: false,
-            newTooltipType: this.tooltipType ? this.tooltipType : this.type,
             _isSlider: true // Used by Thumb and Tick
         }
     },
     computed: {
+        newTooltipType() {
+            return this.tooltipType ? this.tooltipType : this.type
+        },
         tickValues() {
             if (!this.ticks || this.min > this.max || this.step === 0) return []
             const result = []
@@ -144,6 +157,9 @@ export default {
                 left: this.barStart
             }
         },
+        sliderSize() {
+            return this.$refs.slider['clientWidth']
+        },
         rootClasses() {
             return {
                 'is-rounded': this.rounded,
@@ -159,25 +175,17 @@ export default {
         value(value) {
             this.setValues(value)
         },
-        value1(val) {
-            this.isThumbReversed = this.value1 > this.value2
-            if (this.isRange) {
-                this.$emit('input', [this.minValue, this.maxValue])
-            } else {
-                this.$emit('input', val)
-            }
+        value1() {
+            this.onInternalValueUpdate()
         },
-        value2(val) {
-            this.isThumbReversed = this.value1 > this.value2
-            if (this.isRange) {
-                this.$emit('input', [this.minValue, this.maxValue])
-            }
+        value2() {
+            this.onInternalValueUpdate()
         },
         min() {
-            this.setValues()
+            this.setValues(this.value)
         },
         max() {
-            this.setValues()
+            this.setValues(this.value)
         }
     },
     methods: {
@@ -200,10 +208,22 @@ export default {
                 this.value1 = isNaN(newValue)
                     ? this.min
                     : Math.min(this.max, Math.max(this.min, newValue))
+                this.value2 = null
+            }
+        },
+        onInternalValueUpdate() {
+            if (this.isRange) {
+                this.isThumbReversed = this.value1 > this.value2
+            }
+            if (!this.lazy || !this.dragging) {
+                this.emitValue('input')
+            }
+            if (this.dragging) {
+                this.emitValue('dragging')
             }
         },
         onSliderClick(event) {
-            if (this.disabled || this.dragging) return
+            if (this.disabled || this.isTrackClickDisabled) return
             const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
             const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100
             const targetValue = this.min + percent * (this.max - this.min) / 100
@@ -221,31 +241,34 @@ export default {
                     this.$refs['button2'].setPosition(percent)
                 }
             }
-            this.emitChange()
+            this.emitValue('change')
         },
-        setSize() {
-            this.sliderSize = this.$refs.slider['clientWidth']
+        onDragStart() {
+            this.dragging = true
+            this.$emit('dragstart')
         },
-        emitChange() {
-            this.$emit('change', this.isRange
+        onDragEnd() {
+            this.isTrackClickDisabled = true
+            setTimeout(() => {
+                // avoid triggering onSliderClick after dragend
+                this.isTrackClickDisabled = false
+            }, 0)
+            this.dragging = false
+            this.$emit('dragend')
+            if (this.lazy) {
+                this.emitValue('input')
+            }
+        },
+        emitValue(type) {
+            this.$emit(type, this.isRange
                 ? [this.minValue, this.maxValue]
                 : this.value1)
         }
     },
     created() {
-        this.setValues(this.value)
         this.isThumbReversed = false
-    },
-    mounted() {
-        this.setSize()
-        if (typeof window !== 'undefined') {
-            window.addEventListener('resize', this.setSize)
-        }
-    },
-    beforeDestroy() {
-        if (typeof window !== 'undefined') {
-            window.removeEventListener('resize', this.setSize)
-        }
+        this.isTrackClickDisabled = false
+        this.setValues(this.value)
     }
 }
 </script>

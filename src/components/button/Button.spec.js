@@ -1,15 +1,23 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import BButton from '@components/button/Button'
 
+let wrapper
+
 describe('BButton', () => {
+    beforeEach(() => {
+        wrapper = shallowMount(BButton)
+    })
+
     it('is called', () => {
-        const wrapper = shallowMount(BButton)
         expect(wrapper.name()).toBe('BButton')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('emit a click event', () => {
-        const wrapper = shallowMount(BButton)
         const click = jest.fn()
         wrapper.vm.$on('click', click)
         wrapper.find('.button').trigger('click')
@@ -17,7 +25,7 @@ describe('BButton', () => {
     })
 
     it('should show icon', () => {
-        const wrapper = mount(BButton, {
+        wrapper = mount(BButton, {
             propsData: {
                 iconLeft: 'plus'
             }
@@ -26,7 +34,7 @@ describe('BButton', () => {
     })
 
     it('should be medium', () => {
-        const wrapper = shallowMount(BButton, {
+        wrapper = shallowMount(BButton, {
             propsData: {
                 size: 'is-medium'
             }
@@ -35,7 +43,7 @@ describe('BButton', () => {
     })
 
     it('should be small + icon', () => {
-        const wrapper = mount(BButton, {
+        wrapper = mount(BButton, {
             propsData: {
                 size: 'is-small',
                 iconLeft: 'plus'
@@ -46,7 +54,7 @@ describe('BButton', () => {
     })
 
     it('should be large + icon', () => {
-        const wrapper = mount(BButton, {
+        wrapper = mount(BButton, {
             propsData: {
                 size: 'is-large',
                 iconLeft: 'plus'

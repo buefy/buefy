@@ -1,6 +1,6 @@
-$switch-width-number: 2.75;
-$switch-width: $switch-width-number * 1em;
-$switch-padding: 0.2em;
+$switch-width-number: 2.75 !default;
+$switch-width: $switch-width-number * 1em !default;
+$switch-padding: 0.2em !default;
 
 $switch-active-background-color: $primary !default;
 
@@ -8,6 +8,7 @@ $switch-active-background-color: $primary !default;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    position: relative;
     @include unselectable;
     & + .switch {
         margin-left: 0.5em;
@@ -116,6 +117,7 @@ $switch-active-background-color: $primary !default;
                 @each $name, $pair in $colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
+                        background: transparent;
                         border-color: $color;
                         &:before {
                             background: $color;

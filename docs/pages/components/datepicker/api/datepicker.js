@@ -107,6 +107,20 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-prev</code>',
+                description: 'Icon to use for previous month',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>icon-next</code>',
+                description: 'Icon to use for next month',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>unselectable-dates</code>',
                 description: 'Array of unselectable dates',
                 type: 'Array',
@@ -195,6 +209,27 @@ export default [
                 description: 'When <code>nearby-month-days</code>, it allows to select/unselect nearby month days',
                 type: 'Boolean',
                 values: '-',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>show-number-week</code>',
+                description: 'Display week number',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rules-for-first-week</code>',
+                description: 'Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other',
+                type: 'Number',
+                values: '-',
+                default: '<code>4</code>'
+            },
+            {
+                name: '<code>range</code>',
+                description: 'Flag to allow choosing a range of date',
+                type: 'Boolean',
+                values: '—',
                 default: '<code>false</code>'
             },
             {

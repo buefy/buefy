@@ -41,6 +41,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    Modal,
     ModalProgrammatic
 }

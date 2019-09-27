@@ -1,5 +1,5 @@
 <template>
-    <li>
+    <li :role="ariaRoleMenu">
         <component
             :is="tag"
             v-bind="$attrs"
@@ -7,7 +7,8 @@
                 'is-active': newActive,
                 'is-disabled': disabled
             }"
-            @click="onClick($event)">
+            @click="onClick($event)"
+            @click.native="onClick($event)">
             <b-icon
                 v-if="icon"
                 :icon="icon"
@@ -66,12 +67,21 @@ export default {
                     'NLink'
                 ].indexOf(value) >= 0
             }
+        },
+        ariaRole: {
+            type: String,
+            default: ''
         }
     },
     data() {
         return {
             newActive: this.active,
             newExpanded: this.expanded
+        }
+    },
+    computed: {
+        ariaRoleMenu() {
+            return this.ariaRole === 'menuitem' ? this.ariaRole : null
         }
     },
     watch: {

@@ -80,7 +80,7 @@
             </template>
 
             <template slot="detail" slot-scope="props">
-                <tr v-for="(item, index) in props.row.items" :key="index">
+                <tr v-for="(item, index) in props.row.items" :key="item.name">
                     <td v-if="showDetailIcon"></td>
                     <td v-show="columnsVisible['name'].display" >&nbsp;&nbsp;&nbsp;&nbsp;{{ item.name }}</td>
                     <td v-show="columnsVisible['sold'].display" class="has-text-centered">{{ item.sold }}</td>

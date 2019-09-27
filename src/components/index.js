@@ -19,6 +19,7 @@ import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Progress from './progress'
 import Radio from './radio'
+import Rate from './rate'
 import Select from './select'
 import Slider from './slider'
 import Snackbar from './snackbar'
@@ -55,6 +56,7 @@ export {
     Pagination,
     Progress,
     Radio,
+    Rate,
     Select,
     Slider,
     Snackbar,

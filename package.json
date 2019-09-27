@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "0.7.10",
+  "version": "0.8.4",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
@@ -12,7 +12,10 @@
   "module": "dist/esm/index.js",
   "unpkg": "dist/buefy.min.js",
   "typings": "types/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
   "files": [
     "dist",
     "src",
@@ -31,12 +34,12 @@
     "lint": "eslint --ext .js,.vue src docs",
     "lint:fix": "eslint --ext .js,.vue src docs --fix",
     "lint:staged": "lint-staged",
-    "unit": "jest",
+    "unit": "jest --runInBand",
     "test": "npm run lint && npm run unit",
     "test:watch": "npm run unit -- --watchAll",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:js:watch": "rollup -c --watch",
-    "build:scss": "node-sass --output-style expanded src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss --level 1 --format breaksWith=lf --output dist/buefy.min.css dist/buefy.css",
+    "build:scss": "node-sass --output-style expanded src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "build:scss:watch": "node-sass src/scss/buefy-build.scss --w",
     "build:lib": "npm run build:js && npm run build:scss",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",

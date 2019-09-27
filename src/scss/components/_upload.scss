@@ -46,3 +46,14 @@
         }
     }
 }
+// temporary IE 11 hack !!!
+@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {  
+    .upload {
+        input[type=file] {
+            z-index: auto;
+        }
+        .upload-draggable + input[type=file] {
+            z-index: -1;
+        }
+    }
+}

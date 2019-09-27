@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BSnackbar render correctly 1`] = `
+<div class="snackbar is-dark is-top" style="" enter-active-class="fadeInDown" leave-active-class="fadeOut">
+    <div class="text"></div>
+    <div class="action is-dark"><button class="button">OK</button></div>
+</div>
+`;

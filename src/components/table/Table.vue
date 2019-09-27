@@ -121,6 +121,7 @@
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
+                            @dragend="handleDragEnd($event, row, index)"
                             @drop="handleDrop($event, row, index)"
                             @dragover="handleDragOver($event, row, index)"
                             @dragleave="handleDragLeave($event, row, index)">
@@ -872,6 +873,12 @@ export default {
         */
         handleDragStart(event, row, index) {
             this.$emit('dragstart', {event, row, index})
+        },
+        /**
+        * Emits drag leave event
+        */
+        handleDragEnd(event, row, index) {
+            this.$emit('dragend', {event, row, index})
         },
         /**
         * Emits drop event

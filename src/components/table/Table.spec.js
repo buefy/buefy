@@ -1,10 +1,19 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BTable from '@components/table/Table'
 
+let wrapper
+
 describe('BTable', () => {
+    beforeEach(() => {
+        wrapper = shallowMount(BTable)
+    })
+
     it('is called', () => {
-        const wrapper = mount(BTable)
         expect(wrapper.name()).toBe('BTable')
         expect(wrapper.isVueInstance()).toBeTruthy()
+    })
+
+    it('render correctly', () => {
+        expect(wrapper.html()).toMatchSnapshot()
     })
 })
