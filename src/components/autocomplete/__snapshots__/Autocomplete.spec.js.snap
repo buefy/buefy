@@ -10,6 +10,8 @@ exports[`BAutocomplete render correctly 1`] = `
     <div class="dropdown-menu" style="display: none;" name="fade">
         <div class="dropdown-content" style="display: none;">
             <!---->
+            <div></div>
+            <!---->
             <!---->
             <!---->
         </div>
