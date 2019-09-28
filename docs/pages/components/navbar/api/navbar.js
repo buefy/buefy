@@ -52,7 +52,7 @@ export default [
                 description: 'Control the behavior of the mobile menu by clicking on a link or outside the menu',
                 type: 'Boolean',
                 values: '<code>true</code>, <code>false</code>',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>spaced</code>',
