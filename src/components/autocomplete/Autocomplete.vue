@@ -123,6 +123,15 @@ export default {
                     whiteList.push(child)
                 }
             }
+            if (this.$parent.$data._isTaginput) {
+                // Add taginput container
+                whiteList.push(this.$parent.$el)
+                // Add .tag and .delete
+                const tagInputChildren = this.$parent.$el.querySelectorAll('*')
+                for (const tagInputChild of tagInputChildren) {
+                    whiteList.push(tagInputChild)
+                }
+            }
 
             return whiteList
         },
