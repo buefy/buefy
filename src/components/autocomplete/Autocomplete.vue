@@ -123,7 +123,7 @@ export default {
                     whiteList.push(child)
                 }
             }
-            if (this.$parent.$options.name === 'BTaginput') {
+            if (this.$parent.$data._isTaginput) {
                 // Add taginput container
                 whiteList.push(this.$parent.$el)
                 // Add .tag and .delete
