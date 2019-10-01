@@ -4,15 +4,18 @@
 
 ### New features
 
+* **New component: Rate**, [see docs](https://buefy.org/documentation/rate) (thanks @apolokaklab)
 * #1706 Add ``trap-focus`` prop to modal, dialog and dropdown (thanks @service-paradis)
 * #1775 Add ``expanded`` prop to dropdown
 * Add ``custom-formatter`` prop to slider (thanks @yxngl)
 
 ### Fixes
 
+* Fix #1286 taginput close when autocomplete (thanks @wrabit)
 * Fix #1784 navbar navigation on mobile reverting #1743
 * Fix #1780 alignment using h1 tag on steps (thanks @service-paradis)
 * Fix #1786 icons warning for vue-fontawesome (thanks @service-paradis)
+* Fix #1814 set ``icon-pack`` pagination using table (thanks @service-paradis)
 
 ## 0.8.4
 
