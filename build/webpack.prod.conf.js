@@ -140,7 +140,7 @@ if (process.env.NODE_ENV !== 'test') {
     routes: paths,
     renderer: new Renderer({
       headless: false,
-      timeout: 0,
+      maxConcurrentRoutes: 6,
       renderAfterDocumentEvent: 'render-event'
     })
   }))
