@@ -74,7 +74,8 @@
             "/",
             "documentation",
             "documentation/collapse"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/dialog": {
         "title": "Dialog",
@@ -208,8 +209,7 @@
             "/",
             "documentation",
             "documentation/notification"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/message": {
         "title": "Message",
@@ -245,8 +245,7 @@
             "/",
             "documentation",
             "documentation/field"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/input": {
         "title": "Input",
@@ -402,8 +401,7 @@
             "/",
             "documentation",
             "documentation/pagination"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/button": {
         "title": "Button",
@@ -427,8 +425,7 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/steps": {
         "title": "Steps",
@@ -440,7 +437,8 @@
             "/",
             "documentation",
             "documentation/steps"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/menu": {
         "title": "Menu",
@@ -452,8 +450,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isUpdated": "true"
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
@@ -465,7 +462,8 @@
             "/",
             "documentation",
             "documentation/slider"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/progress": {
         "title": "Progress",
@@ -477,8 +475,7 @@
             "/",
             "documentation",
             "documentation/progress"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/rate": {
         "title": "Rate",
