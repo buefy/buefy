@@ -16,6 +16,7 @@
 * Fix #1780 alignment using h1 tag on steps (thanks @service-paradis)
 * Fix #1786 icons warning for vue-fontawesome (thanks @service-paradis)
 * Fix #1814 set ``icon-pack`` pagination using table (thanks @service-paradis)
+* Fix #1821 datepicker reset using empty array when ``range``
 
 ## 0.8.4
 

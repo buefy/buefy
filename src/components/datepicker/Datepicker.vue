@@ -598,7 +598,7 @@ export default {
 
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
-                ? value[0]
+                ? (!value.length ? this.dateCreator() : value[0])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
                 month: currentDate.getMonth(),
