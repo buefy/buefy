@@ -8,6 +8,7 @@
 * #1706 Add ``trap-focus`` prop to modal, dialog and dropdown (thanks @service-paradis)
 * #1775 Add ``expanded`` prop to dropdown
 * Add ``custom-formatter`` prop to slider (thanks @yxngl)
+* Add ``position`` prop to collapse
 
 ### Fixes
 

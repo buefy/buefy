@@ -6,6 +6,8 @@
 
         <Example :component="ExCardTemplate" :code="ExCardTemplateCode" title="Card" vertical/>
 
+        <Example :component="ExPosition" :code="ExPositionCode" title="Position" vertical/>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -22,6 +24,9 @@
     import ExCardTemplate from './examples/ExCardTemplate'
     import ExCardTemplateCode from '!!raw-loader!./examples/ExCardTemplate'
 
+    import ExPosition from './examples/ExPosition'
+    import ExPositionCode from '!!raw-loader!./examples/ExPosition'
+
     export default {
         data() {
             return {
@@ -31,7 +36,9 @@
                 ExPanelTemplate,
                 ExPanelTemplateCode,
                 ExCardTemplate,
-                ExCardTemplateCode
+                ExCardTemplateCode,
+                ExPosition,
+                ExPositionCode
             }
         }
     }
