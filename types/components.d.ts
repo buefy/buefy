@@ -77,6 +77,11 @@ export declare type DialogConfig = {
      * Focus on confirm or cancel button (when dialog is not prompt)
      */
     focusOn?: 'confirm' | 'cancel';
+
+    /**
+    * Trap focus inside the dialog.
+    */
+    trapFocus?: boolean;
 }
 
 type PromptDialogConfig = DialogConfig & {
@@ -117,6 +122,7 @@ declare type ModalConfig = {
     canCancel?: boolean | Array<any>;
     onCancel?: () => any;
     scroll?: 'clip' | 'keep';
+    trapFocus?: boolean;
 }
 
 export declare const ModalProgrammatic: {
@@ -165,7 +171,7 @@ export declare type ToastConfig = {
      * to absolute. Meaning that the container should be fixed.
      */
     container?: string;
-    
+
     /**
      * disable queue
      */
