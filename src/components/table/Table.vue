@@ -63,7 +63,8 @@
                                 'is-sortable': column.sortable
                             }"
                             :style="{
-                                width: column.width === undefined ? null : column.width + 'px'
+                                width: column.width === undefined ? null :
+                                (column.width == 'number' ? column.width + 'px' : column.width )
                             }"
                             @click.stop="sort(column)">
                             <div
