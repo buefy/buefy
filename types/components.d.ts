@@ -122,6 +122,7 @@ declare type ModalConfig = {
     canCancel?: boolean | Array<any>;
     onCancel?: () => any;
     scroll?: 'clip' | 'keep';
+    trapFocus?: boolean;
 }
 
 export declare const ModalProgrammatic: {
