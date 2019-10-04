@@ -101,7 +101,7 @@ export default {
         * Change the active tab and emit change event.
         */
         changeTab(newIndex) {
-            if (this.activeTab === newIndex) return
+            if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return
 
             if (this.activeTab < this.tabItems.length) {
                 this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
