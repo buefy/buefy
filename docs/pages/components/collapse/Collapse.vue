@@ -8,6 +8,8 @@
 
         <Example :component="ExPosition" :code="ExPositionCode" title="Position" vertical/>
 
+        <Example :component="ExAccordion" :code="ExAccordionCode" title="Accordion Effect" vertical/>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -27,6 +29,9 @@
     import ExPosition from './examples/ExPosition'
     import ExPositionCode from '!!raw-loader!./examples/ExPosition'
 
+    import ExAccordion from './examples/ExAccordion'
+    import ExAccordionCode from '!!raw-loader!./examples/ExAccordion'
+
     export default {
         data() {
             return {
@@ -38,7 +43,9 @@
                 ExCardTemplate,
                 ExCardTemplateCode,
                 ExPosition,
-                ExPositionCode
+                ExPositionCode,
+                ExAccordion,
+                ExAccordionCode
             }
         }
     }
