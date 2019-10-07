@@ -7,7 +7,9 @@
             v-if="isActive"
             class="modal is-active"
             :class="[{'is-full-screen': fullScreen}, customClass]"
-            v-trap-focus="trapFocus">
+            v-trap-focus="trapFocus"
+            :role="ariaRole"
+            :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
@@ -88,7 +90,17 @@ export default {
             type: Boolean,
             default: config.defaultTrapFocus
         },
-        customClass: String
+        customClass: String,
+        ariaRole: {
+            type: String,
+            validator: (value) => {
+                return [
+                    'dialog',
+                    'alertdialog'
+                ].indexOf(value) >= 0
+            }
+        },
+        ariaModal: Boolean
     },
     data() {
         return {
