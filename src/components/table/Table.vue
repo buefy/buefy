@@ -64,7 +64,8 @@
                             }"
                             :style="{
                                 width: column.width === undefined ? null :
-                                (column.width == 'number' ? column.width + 'px' : column.width )
+                                (typeof column.width == 'number' ? column.width + 'px' :
+                                column.width)
                             }"
                             @click.stop="sort(column)">
                             <div
