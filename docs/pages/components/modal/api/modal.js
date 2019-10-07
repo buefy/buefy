@@ -101,6 +101,20 @@ export default [
                 values: '—',
                 default: '—'
             },
+            {
+                name: '<code>aria-role</code>',
+                description: `Role attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '<code>dialog</code>, <code>alertdialog</code>',
+                default: '—'
+            },
+            {
+                name: '<code>aria-modal</code>',
+                description: `Improve accessiblity when enabled.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            }
         ],
         events: [
             {

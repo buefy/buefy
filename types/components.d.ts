@@ -79,9 +79,19 @@ export declare type DialogConfig = {
     focusOn?: 'confirm' | 'cancel';
 
     /**
-    * Trap focus inside the dialog.
-    */
+     * Trap focus inside the dialog.
+     */
     trapFocus?: boolean;
+
+    /**
+     * Role attribute to be passed to modal container for better accessibility.
+     */
+    ariaRole?: 'dialog' | 'alertdialog';
+
+   /**
+    * Improve accessiblity when enabled.
+    */
+   ariaModal?: boolean;
 }
 
 type PromptDialogConfig = DialogConfig & {
@@ -122,7 +132,21 @@ declare type ModalConfig = {
     canCancel?: boolean | Array<any>;
     onCancel?: () => any;
     scroll?: 'clip' | 'keep';
+
+    /**
+     * Trap focus inside the dialog.
+     */
     trapFocus?: boolean;
+
+    /**
+     * Role attribute to be passed to modal container for better accessibility.
+     */
+    ariaRole?: 'dialog' | 'alertdialog';
+
+    /**
+     * Improve accessiblity when enabled.
+     */
+    ariaModal?: boolean;
 }
 
 export declare const ModalProgrammatic: {

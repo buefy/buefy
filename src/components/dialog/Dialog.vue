@@ -4,7 +4,9 @@
             v-if="isActive"
             class="dialog modal is-active"
             :class="size"
-            v-trap-focus="trapFocus">
+            v-trap-focus="trapFocus"
+            :role="ariaRole"
+            :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
@@ -124,7 +126,17 @@ export default {
         trapFocus: {
             type: Boolean,
             default: config.defaultTrapFocus
-        }
+        },
+        ariaRole: {
+            type: String,
+            validator: (value) => {
+                return [
+                    'dialog',
+                    'alertdialog'
+                ].indexOf(value) >= 0
+            }
+        },
+        ariaModal: Boolean
     },
     data() {
         const prompt = this.hasInput
