@@ -165,11 +165,10 @@
             :min="formatNative(minDate)"
             :disabled="disabled"
             :readonly="false"
-            :show-week-number="showWeekNumber"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChangeNativePicker"
-            @focus="handleOnFocus"
+            @focus="onFocus"
             @blur="onBlur"/>
     </div>
 </template>
@@ -380,6 +379,10 @@ export default {
         range: {
             type: Boolean,
             default: false
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -612,9 +615,11 @@ export default {
         */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                this.$refs.dropdown.isActive = typeof active === 'boolean'
-                    ? active
-                    : !this.$refs.dropdown.isActive
+                if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = typeof active === 'boolean'
+                        ? active
+                        : !this.$refs.dropdown.isActive
+                }
             }
         },
 
