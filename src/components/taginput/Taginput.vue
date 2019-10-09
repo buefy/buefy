@@ -293,7 +293,6 @@ export default {
             this.$nextTick(() => {
                 this.newTag = ''
             })
-            // this.$emit('typing', '')
         },
 
         removeTag(index) {
