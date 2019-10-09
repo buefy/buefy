@@ -20,6 +20,7 @@ $taginput-height: 1.7em !default;
             margin-bottom: calc(0.275em - 1px);
             font-size: 0.9em;
             height: $taginput-height;
+            margin-left: 0.275rem;
             .tag {
                 margin-bottom: 0;
                 font-size: 0.9em;
@@ -27,9 +28,6 @@ $taginput-height: 1.7em !default;
                 &.is-delete {
                     width: $taginput-height;
                 }
-            }
-            &:not(:last-child) {
-                margin-left: 0.275rem;
             }
         }
 
