@@ -264,6 +264,7 @@ export default {
                     this.tags.push(tagToAdd)
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
+                    this.$emit('typing', '')
                 }
             }
 
@@ -292,6 +293,7 @@ export default {
             this.$nextTick(() => {
                 this.newTag = ''
             })
+            // this.$emit('typing', '')
         },
 
         removeTag(index) {
