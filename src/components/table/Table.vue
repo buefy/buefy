@@ -168,8 +168,7 @@
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @change.native="checkRow(row)"
-                                    @click.native.stop
+                                    @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
 
@@ -200,8 +199,7 @@
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @change.native="checkRow(row)"
-                                    @click.native.stop
+                                    @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
                         </tr>
@@ -425,6 +423,7 @@ export default {
             newData: this.data,
             newDataTotal: this.backendPagination ? this.total : this.data.length,
             newCheckedRows: [...this.checkedRows],
+            lastCheckedRowIndex: null,
             newCurrentPage: this.currentPage,
             currentSortColumn: {},
             isAsc: true,
@@ -715,10 +714,14 @@ export default {
 
         /**
         * Row checkbox click listener.
-        * Add or remove a single row.
         */
-        checkRow(row) {
-            if (!this.isRowChecked(row)) {
+        checkRow(row, index, event) {
+            const lastIndex = this.lastCheckedRowIndex
+            this.lastCheckedRowIndex = index
+
+            if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
+                this.shiftCheckRow(row, index, lastIndex)
+            } else if (!this.isRowChecked(row)) {
                 this.newCheckedRows.push(row)
             } else {
                 this.removeCheckedRow(row)
@@ -728,6 +731,27 @@ export default {
 
             // Emit checked rows to update user variable
             this.$emit('update:checkedRows', this.newCheckedRows)
+        },
+
+        /**
+         * Check row when shift is pressed.
+         */
+        shiftCheckRow(row, index, lastCheckedRowIndex) {
+            // Get the subset of the list between the two indicies
+            const subset = this.visibleData.slice(
+                Math.min(index, lastCheckedRowIndex),
+                Math.max(index, lastCheckedRowIndex) + 1
+            )
+
+            // Determine the operation based on the state of the clicked checkbox
+            const shouldCheck = !this.isRowChecked(row)
+
+            subset.forEach((item) => {
+                this.removeCheckedRow(item)
+                if (shouldCheck && this.isRowCheckable(item)) {
+                    this.newCheckedRows.push(item)
+                }
+            })
         },
 
         /**
