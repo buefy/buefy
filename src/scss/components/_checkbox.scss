@@ -1,6 +1,8 @@
 $checkbox-active-background-color: $primary !default;
 $checkbox-background-color: transparent !default;
 $checkbox-border-color: $grey !default;
+$checkbox-border-radius: $radius !default;
+$checkbox-border-width: 2px !default;
 $checkbox-checkmark-color: $primary-invert !default;
 $checkbox-size: 1.25em !default;
 
@@ -23,8 +25,8 @@ $checkbox-size: 1.25em !default;
                 width: $checkbox-size;
                 height: $checkbox-size;
                 flex-shrink: 0;
-                border-radius: $radius;
-                border: 2px solid $checkbox-border-color;
+                border-radius: $checkbox-border-radius;
+                border: $checkbox-border-width solid $checkbox-border-color;
                 transition: background $speed-slow $easing;
                 background: $checkbox-background-color
             }
