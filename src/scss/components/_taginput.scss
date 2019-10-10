@@ -2,6 +2,7 @@ $taginput-height: 1.7em !default;
 
 .taginput {
     .taginput-container {
+        margin-bottom: 12px;
         padding-top: calc(0.275em - 1px);
         &.is-focusable {
             @extend .input;
