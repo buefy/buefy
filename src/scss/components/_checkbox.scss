@@ -1,4 +1,6 @@
 $checkbox-active-background-color: $primary !default;
+$checkbox-background-color: transparent !default;
+$checkbox-border-color: $grey !default;
 $checkbox-checkmark-color: $primary-invert !default;
 $checkbox-size: 1.25em !default;
 
@@ -22,8 +24,9 @@ $checkbox-size: 1.25em !default;
                 height: $checkbox-size;
                 flex-shrink: 0;
                 border-radius: $radius;
-                border: 2px solid $grey;
+                border: 2px solid $checkbox-border-color;
                 transition: background $speed-slow $easing;
+                background: $checkbox-background-color
             }
             &:checked + .check {
                 background: $checkbox-active-background-color url(checkmark($checkbox-checkmark-color)) no-repeat center center;
