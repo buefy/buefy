@@ -72,7 +72,7 @@ export default {
             return {
                 'is-fullwidth': this.expanded,
                 'is-vertical': this.vertical,
-                [this.position]: this.vertical
+                [this.position]: this.position && this.vertical
             }
         },
         navClasses() {
@@ -80,7 +80,7 @@ export default {
                 this.type,
                 this.size,
                 {
-                    [this.position]: !this.vertical,
+                    [this.position]: this.position && !this.vertical,
                     'is-fullwidth': this.expanded,
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
