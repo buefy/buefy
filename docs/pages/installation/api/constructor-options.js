@@ -317,6 +317,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>defaultButtonRounded</code>',
+                description: 'Default config to to make all buttons rounded.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]
