@@ -52,6 +52,13 @@ export default [
                 default: '<code>960</code>'
             },
             {
+                name: '<code>full-screen</code>',
+                description: 'Display modal as full screen',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>has-modal-card</code>',
                 description: `If your modal content has a <code>.modal-card</code> as root, add this prop or the card might break on mobile`,
                 type: 'Boolean',
