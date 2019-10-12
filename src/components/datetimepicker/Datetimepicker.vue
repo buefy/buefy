@@ -5,11 +5,18 @@
         v-model="computedValue"
         v-bind="datepicker"
         :open-on-focus="openOnFocus"
+        :position="position"
+        :loading="loading"
         :inline="inline"
         :editable="editable"
         :close-on-click="false"
         :date-formatter="defaultDatetimeFormatter"
-        :date-parser="defaultDatetimeParser">
+        :date-parser="defaultDatetimeParser"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :icon="icon"
+        :icon-pack="iconPack"
+        :size="datepickerSize">
         <nav class="level is-mobile">
             <div
                 class="level-item has-text-centered"
@@ -23,6 +30,9 @@
                     v-model="computedValue"
                     inline
                     :editable="editable"
+                    :min-time="minTime"
+                    :max-time="maxTime"
+                    :size="timepickerSize"
                 />
             </div>
             <div
@@ -78,23 +88,28 @@ export default {
             type: Boolean,
             default: false
         },
+        icon: String,
+        iconPack: String,
         inline: Boolean,
         openOnFocus: Boolean,
+        position: String,
         mobileNative: {
             type: Boolean,
             default: true
         },
+        minDatetime: Date,
+        maxDatetime: Date,
         datetimeFormatter: {
             type: Function
         },
         datetimeParser: {
             type: Function
         },
-        timeCreator: {
+        datetimeCreator: {
             type: Function,
             default: (date) => {
-                if (typeof config.defaultDatetimeTimeCreator === 'function') {
-                    return config.defaultDatetimeTimeCreator(date)
+                if (typeof config.defaultDatetimeCreator === 'function') {
+                    return config.defaultDatetimeCreator(date)
                 } else {
                     return date
                 }
@@ -114,11 +129,10 @@ export default {
                 return this.newValue
             },
             set(value) {
-                let val = value
                 if (value !== null && typeof value !== 'undefined') {
-                    val = new Date(value.getTime())
+                    let val = new Date(value.getTime())
                     if (this.newValue) {
-                        // on datepicker select -> maintain time part
+                        // restore time part
                         if (value.getHours() === 0 &&
                             value.getMinutes() === 0 &&
                             value.getSeconds() === 0) {
@@ -127,15 +141,59 @@ export default {
                                 this.newValue.getSeconds(), 0)
                         }
                     } else {
-                        val = this.timeCreator(val)
+                        val = this.datetimeCreator(value)
                     }
+                    // check min and max range
+                    if (this.minDatetime && val < this.minDatetime) {
+                        val = this.minDatetime
+                    } else if (this.maxDatetime && val > this.maxDatetime) {
+                        val = this.maxDatetime
+                    }
+                    this.newValue = new Date(val.getTime())
+                } else {
+                    this.newValue = value
                 }
-                this.newValue = val
-                this.$emit('input', value)
+                this.$emit('input', this.newValue)
             }
         },
         isMobile() {
             return this.mobileNative && isMobile.any()
+        },
+        minDate() {
+            if (!this.minDatetime) return null
+            return new Date(this.minDatetime.getFullYear(),
+                this.minDatetime.getMonth(),
+                this.minDatetime.getDate(), 0, 0, 0, 0)
+        },
+        maxDate() {
+            if (!this.maxDatetime) return null
+            return new Date(this.maxDatetime.getFullYear(),
+                this.maxDatetime.getMonth(),
+                this.maxDatetime.getDate(), 0, 0, 0, 0)
+        },
+        minTime() {
+            if (!this.minDatetime) return null
+            if (this.newValue === null || typeof this.newValue === 'undefined') return null
+            if (this.minDatetime.getFullYear() === this.newValue.getFullYear() &&
+                this.minDatetime.getMonth() === this.newValue.getMonth() &&
+                this.minDatetime.getDate() === this.newValue.getDate()) {
+                return this.minDatetime
+            }
+        },
+        maxTime() {
+            if (!this.maxDatetime) return null
+            if (this.newValue === null || typeof this.newValue === 'undefined') return null
+            if (this.maxDatetime.getFullYear() === this.newValue.getFullYear() &&
+                this.maxDatetime.getMonth() === this.newValue.getMonth() &&
+                this.maxDatetime.getDate() === this.newValue.getDate()) {
+                return this.maxDatetime
+            }
+        },
+        datepickerSize() {
+            return this.datepicker && this.datepicker.size ? this.datepicker.size : this.size
+        },
+        timepickerSize() {
+            return this.timepicker && this.timepicker.size ? this.timepicker.size : this.size
         }
     },
     watch: {
@@ -159,13 +217,15 @@ export default {
             } else if (typeof config.defaultDatetimeParser === 'function') {
                 return config.defaultDatetimeParser(date)
             } else {
-                const yyyyMMdd = date.getFullYear() +
-                    '/' + (date.getMonth() + 1) +
-                    '/' + date.getDate()
-                const d = new Date(yyyyMMdd)
-                return d.toLocaleDateString() +
-                    ' ' +
-                    this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker)
+                if (this.$refs.timepicker) {
+                    const yyyyMMdd = date.getFullYear() +
+                        '/' + (date.getMonth() + 1) +
+                        '/' + date.getDate()
+                    const d = new Date(yyyyMMdd)
+                    return d.toLocaleDateString() +
+                        ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker)
+                }
+                return null
             }
         },
         /*
@@ -192,6 +252,12 @@ export default {
                     ((seconds < 10 ? '0' : '') + seconds)
             }
             return ''
+        }
+    },
+    mounted() {
+        // $refs attached, it's time to refresh datepicker (input)
+        if (this.newValue) {
+            this.$refs.datepicker.$forceUpdate()
         }
     }
 }

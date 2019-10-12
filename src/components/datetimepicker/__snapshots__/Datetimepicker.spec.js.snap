@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Datetimepicker render correctly 1`] = `
+<bdatepicker-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" dateformatter="function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" dateparser="function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" datecreator="function _default() {
+                    /* istanbul ignore next */cov_1yh4yim62k.f[11]++;
+                    cov_1yh4yim62k.s[59]++;
+
+                    if (typeof _config2.default.defaultDateCreator === 'function') {
+                        /* istanbul ignore next */cov_1yh4yim62k.b[15][0]++;
+                        cov_1yh4yim62k.s[60]++;
+
+                        return _config2.default.defaultDateCreator();
+                    } else {
+                        /* istanbul ignore next */cov_1yh4yim62k.b[15][1]++;
+                        cov_1yh4yim62k.s[61]++;
+
+                        return new Date();
+                    }
+                }" mobilenative="true" indicators="dots" iconprev="chevron-left" iconnext="chevron-right" yearsrange="-100,3" nearbymonthdays="true" rulesforfirstweek="4">
+    <nav class="level is-mobile">
+        <!---->
+        <div class="level-item has-text-centered">
+            <btimepicker-stub inline=""></btimepicker-stub>
+        </div>
+        <!---->
+    </nav>
+</bdatepicker-stub>
+`;

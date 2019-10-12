@@ -28,6 +28,7 @@
                         "documentation/checkbox",
                         "documentation/clockpicker",
                         "documentation/datepicker",
+                        "documentation/datetimepicker",
                         "documentation/field",
                         "documentation/input",
                         "documentation/numberinput",
