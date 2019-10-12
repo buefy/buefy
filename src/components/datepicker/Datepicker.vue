@@ -593,7 +593,7 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date) : null
+            this.computedValue = date ? new Date(date + 'T00:00:00') : null
         },
 
         updateInternalState(value) {
