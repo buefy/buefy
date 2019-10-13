@@ -53,6 +53,13 @@
             <p>Dates selected can be within a range.</p>
         </Example>
 
+        <Example :component="ExMultipleInput" :code="ExMultipleInputCode" title="Select multiple dates" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+            </div>
+            <p>Multiple dates can be selected and don't have to be contiguous.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -90,6 +97,9 @@
     import ExRangeInput from './examples/ExRangeInput'
     import ExRangeInputCode from '!!raw-loader!./examples/ExRangeInput'
 
+    import ExMultipleInput from './examples/ExMultipleInput'
+    import ExMultipleInputCode from '!!raw-loader!./examples/ExMultipleInput'
+
     export default {
         data() {
             return {
@@ -113,7 +123,9 @@
                 ExMonth,
                 ExMonthCode,
                 ExRangeInput,
-                ExRangeInputCode
+                ExRangeInputCode,
+                ExMultipleInput,
+                ExMultipleInputCode
             }
         }
     }

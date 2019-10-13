@@ -123,6 +123,7 @@
                         :nearby-selectable-month-days="nearbySelectableMonthDays"
                         :show-week-number="showWeekNumber"
                         :range="range"
+                        :multiple="multiple"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -190,14 +191,15 @@ import DatepickerMonth from './DatepickerMonth'
 
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
-    return targetDates.map((date) => {
+    const dates = targetDates.map((date) => {
         const yyyyMMdd = date.getFullYear() +
             '/' + (date.getMonth() + 1) +
             '/' + date.getDate()
         const d = new Date(yyyyMMdd)
         return !vm.isTypeMonth ? d.toLocaleDateString()
             : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
-    }).join(' - ')
+    })
+    return !vm.multiple ? dates.join(' - ') : dates.join(', ')
 }
 
 const defaultDateParser = (date, vm) => {
@@ -383,6 +385,10 @@ export default {
         closeOnClick: {
             type: Boolean,
             default: true
+        },
+        multiple: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -406,7 +412,7 @@ export default {
             },
             set(value) {
                 this.updateInternalState(value)
-                this.togglePicker(false)
+                if (!this.multiple) this.togglePicker(false)
                 this.$emit('input', value)
             }
         },
@@ -469,7 +475,7 @@ export default {
         */
         value(value) {
             this.updateInternalState(value)
-            this.togglePicker(false)
+            if (!this.multiple) this.togglePicker(false)
             !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
@@ -596,7 +602,7 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date + ' 00:00:00') : null
+            this.computedValue = date ? new Date(date + 'T00:00:00') : null
         },
 
         updateInternalState(value) {

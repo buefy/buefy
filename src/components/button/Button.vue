@@ -37,6 +37,7 @@
 
 <script>
 import Icon from '../icon/Icon'
+import config from '../../utils/config'
 
 export default {
     name: 'BButton',
@@ -51,7 +52,12 @@ export default {
         iconPack: String,
         iconLeft: String,
         iconRight: String,
-        rounded: Boolean,
+        rounded: {
+            type: Boolean,
+            default: () => {
+                return config.defaultButtonRounded
+            }
+        },
         loading: Boolean,
         outlined: Boolean,
         inverted: Boolean,

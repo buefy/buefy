@@ -1,5 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import BButton from '@components/button/Button'
+import config, {setOptions} from '@utils/config'
 
 let wrapper
 
@@ -62,5 +63,17 @@ describe('BButton', () => {
         })
         expect(wrapper.classes()).toContain('is-large')
         expect(wrapper.contains('.icon')).toBe(true)
+    })
+
+    it('should be rounded when default config set to true', () => {
+        setOptions(Object.assign(config, {
+            defaultButtonRounded: true
+        }))
+        wrapper = mount(BButton, {
+            propsData: {
+                rounded: config.defaultButtonRounded
+            }
+        })
+        expect(wrapper.classes()).toContain('is-rounded')
     })
 })

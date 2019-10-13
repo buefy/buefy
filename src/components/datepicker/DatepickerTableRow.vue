@@ -68,6 +68,7 @@ export default {
             default: () => false
         },
         range: Boolean,
+        multiple: Boolean,
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
@@ -204,9 +205,10 @@ export default {
         * Build classObject for cell using validations
         */
         classObject(day) {
-            function dateMatch(dateOne, dateTwo) {
+            function dateMatch(dateOne, dateTwo, multiple) {
                 // if either date is null or undefined, return false
-                if (!dateOne || !dateTwo) {
+                // if using multiple flag, return false
+                if (!dateOne || !dateTwo || multiple) {
                     return false
                 }
 
@@ -222,20 +224,28 @@ export default {
                     dateOne.getMonth() === dateTwo.getMonth())
             }
 
-            function dateWithin(dateOne, dates) {
-                if (!Array.isArray(dates)) { return false }
+            function dateWithin(dateOne, dates, multiple) {
+                if (!Array.isArray(dates) || multiple) { return false }
 
                 return dateOne > dates[0] && dateOne < dates[1]
             }
 
             return {
-                'is-selected': dateMatch(day, this.selectedDate) || dateWithin(day, this.selectedDate),
+                'is-selected': dateMatch(day, this.selectedDate) || dateWithin(day, this.selectedDate, this.multiple),
                 'is-first-selected':
-                    dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[0]),
+                    dateMatch(
+                        day,
+                        Array.isArray(this.selectedDate) && this.selectedDate[0],
+                        this.multiple
+                    ),
                 'is-within-selected':
-                    dateWithin(day, this.selectedDate),
+                    dateWithin(day, this.selectedDate, this.multiple),
                 'is-last-selected':
-                    dateMatch(day, Array.isArray(this.selectedDate) && this.selectedDate[1]),
+                    dateMatch(
+                        day,
+                        Array.isArray(this.selectedDate) && this.selectedDate[1],
+                        this.multiple
+                    ),
                 'is-within-hovered-range':
                     this.hoveredDateRange && this.hoveredDateRange.length === 2 &&
                     (dateMatch(day, this.hoveredDateRange) ||

@@ -193,6 +193,19 @@ describe('BDatepicker', () => {
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
             expect(formattedDate).toEqual('2019-4-1 - 2019-4-3')
         })
+
+        it('should format multiple dates passed via array', () => {
+            wrapper.setProps({
+                multiple: true
+            })
+            const dateToFormat = [
+                new Date(2019, 3, 1),
+                new Date(2019, 3, 13),
+                new Date(2019, 3, 3)
+            ]
+            const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
+            expect(formattedDate).toEqual('2019-4-1, 2019-4-13, 2019-4-3')
+        })
     })
 
     describe('#formatValue', () => {
