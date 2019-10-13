@@ -103,6 +103,35 @@ describe('BDatepickerTableRow', () => {
         })
     })
 
+    describe('classObject with multiple dates', function () {
+        beforeEach(() => {
+            wrapper.setProps({
+                selectedDate: [propsData.week[1], propsData.week[5], propsData.week[3]],
+                multiple: true
+            })
+        })
+
+        it('should have is-selected class for all dates selected', function () {
+            expect(wrapper.findAll('.is-selected').length).toBe(3)
+        })
+
+        it('should not have is-first-selected class for the first date selected within the range', function () {
+            const {wrappers: [firstSelectedCell]} = wrapper.findAll('.is-selected')
+            expect(firstSelectedCell.classes()).not.toContain('is-first-selected')
+        })
+
+        it('should not have is-within-selected class for the dates selected within the range', function () {
+            const withinSelectedRangeCells = wrapper.findAll('.is-selected.is-within-selected')
+            expect(withinSelectedRangeCells.length).toBe(0)
+        })
+
+        it('should not have is-last-selected class for the last date selected within the range', function () {
+            // wrappers should return 3 elements. Destructure to get the last one
+            const {wrappers: [, , lastSelectedCell]} = wrapper.findAll('.is-selected')
+            expect(lastSelectedCell.classes()).not.toContain('is-last-selected')
+        })
+    })
+
     it('manage accordingly leap years', () => {
         expect(wrapper.vm.isLeapYear(2020)).toBeTruthy()
         expect(wrapper.vm.daysInYear(2020)).toBe(366)

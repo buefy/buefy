@@ -32,7 +32,8 @@
                 :range="range"
                 :hovered-date-range="hoveredDateRange"
                 @select="updateSelectedDate"
-                @rangeHoverEndDate="setRangeHoverEndDate"/>
+                @rangeHoverEndDate="setRangeHoverEndDate"
+                :multiple="multiple"/>
         </div>
     </section>
 </template>
@@ -74,13 +75,15 @@ export default {
             type: Number,
             default: () => 4
         },
-        range: Boolean
+        range: Boolean,
+        multiple: Boolean
     },
     data() {
         return {
             selectedBeginDate: undefined,
             selectedEndDate: undefined,
-            hoveredEndDate: undefined
+            hoveredEndDate: undefined,
+            multipleSelectedDates: []
         }
     },
     computed: {
@@ -163,10 +166,12 @@ export default {
         * Emit input event with selected date as payload for v-model in parent
         */
         updateSelectedDate(date) {
-            if (!this.range) {
+            if (!this.range && !this.multiple) {
                 this.$emit('input', date)
-            } else {
+            } else if (this.range) {
                 this.handleSelectRangeDate(date)
+            } else if (this.multiple) {
+                this.handleSelectMultipleDates(date)
             }
         },
 
@@ -190,6 +195,25 @@ export default {
             } else {
                 this.selectedBeginDate = date
             }
+        },
+
+        /*
+        * If selected date already exists list of selected dates, remove it from the list
+        * Otherwise, add date to list of selected dates
+        */
+        handleSelectMultipleDates(date) {
+            if (
+                this.multipleSelectedDates.find((selectedDate) =>
+                    selectedDate.valueOf() === date.valueOf()
+                )
+            ) {
+                this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
+                    selectedDate.valueOf() !== date.valueOf()
+                )
+            } else {
+                this.multipleSelectedDates.push(date)
+            }
+            this.$emit('input', this.multipleSelectedDates)
         },
 
         /*

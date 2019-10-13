@@ -233,6 +233,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>multiple</code>',
+                description: 'Flag to allow choosing multiple dates',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
