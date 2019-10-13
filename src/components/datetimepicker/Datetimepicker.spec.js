@@ -13,12 +13,6 @@ describe('Datetimepicker', () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
-    /*
-    it('render correctly', () => {
-        expect(wrapper.html()).toMatchSnapshot()
-    })
-    */
-
     it('react accordingly when setting computedValue', () => {
         const date = new Date()
         wrapper.vm.computedValue = date
