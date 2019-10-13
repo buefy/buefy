@@ -16,7 +16,8 @@
         :max-date="maxDate"
         :icon="icon"
         :icon-pack="iconPack"
-        :size="datepickerSize">
+        :size="datepickerSize"
+        :range="false">
         <nav class="level is-mobile">
             <div
                 class="level-item has-text-centered"

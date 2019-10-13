@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Datetimepicker render correctly 1`] = `
-<bdatepicker-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" dateformatter="function boundFn (a) {
+<bdatepicker-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" dateformatter="function boundFn(a) {
     var l = arguments.length;
     return l
       ? l > 1
