@@ -47,6 +47,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: 'mdi, fa, fas, far, fab, fad, fal',
+                default: '<code>mdi</code>'
+            },
+            {
                 name: '<code>min</code>',
                 description: 'Minimum allowed value',
                 type: 'Number, String',
