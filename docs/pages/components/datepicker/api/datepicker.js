@@ -261,11 +261,6 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when value is changed',
-                parameters: '<code>value: Date</code>'
-            },
-            {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',
                 parameters: '<code>month: Number(0-11)</code>'

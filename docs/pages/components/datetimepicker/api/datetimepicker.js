@@ -9,43 +9,29 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>hour-format</code>',
-                description: 'Hour format for input and display',
-                type: 'String',
-                values: '<code>12</code> or <code>24</code>',
-                default: '<code>24</code>'
-            },
-            {
-                name: '<code>increment-minutes</code>',
-                description: 'Step minutes for select component',
-                type: 'Number',
-                values: '—',
-                default: '<code>1</code>'
-            },
-            {
-                name: '<code>time-formatter</code>',
-                description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
+                name: '<code>datetime-formatter</code>',
+                description: 'Function to format datetime (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
                 values: '—',
                 default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
-                name: '<code>time-parser</code>',
-                description: 'Function to parse string to a time (<code>Date</code> type) for set a time from the input to the component',
+                name: '<code>datetime-parser</code>',
+                description: 'Function to parse string to a datetime (<code>Date</code> type) for set a datetime from the input to the component',
                 type: 'Function',
                 values: '—',
                 default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
-                name: '<code>min-time</code>',
-                description: 'Earliest time available for selection',
+                name: '<code>min-datetime</code>',
+                description: 'Earliest datetime available for selection',
                 type: 'Date',
                 values: '—',
                 default: '—'
             },
             {
-                name: '<code>max-time</code>',
-                description: 'Latest time available for selection',
+                name: '<code>max-datetime</code>',
+                description: 'Latest datetime available for selection',
                 type: 'Date',
                 values: '—',
                 default: '—'
@@ -94,7 +80,7 @@ export default [
             },
             {
                 name: '<code>mobile-native</code>',
-                description: 'Enable native timepicker on mobile',
+                description: 'Enable native datetimepicker on mobile',
                 type: 'Boolean',
                 values: '',
                 default: '<code>true</code>'
@@ -137,15 +123,32 @@ export default [
         ],
         slots: [
             {
-                name: 'default',
-                description: 'Footer',
+                name: 'left',
+                description: 'Left side of footer',
                 props: '—'
+            },
+            {
+                name: 'right',
+                description: 'Right side of footer',
+                props: '—'
+            }
+        ],
+        events: [
+            {
+                name: '<code>change-month</code>',
+                description: 'Triggers when calendar month is changed',
+                parameters: '<code>month: Number(0-11)</code>'
+            },
+            {
+                name: '<code>change-year</code>',
+                description: 'Triggers when calendar year is changed',
+                parameters: '<code>year: Number</code>'
             }
         ],
         methods: [
             {
-                name: '<code>close</code>',
-                description: 'Close dropdown'
+                name: '<code>toggle</code>',
+                description: 'Toggle activation (picker visibility)'
             }
         ]
     }

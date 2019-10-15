@@ -19,7 +19,9 @@
         :size="datepickerSize"
         :range="false"
         :disabled="disabled"
-        :mobile-native="mobileNative">
+        :mobile-native="mobileNative"
+        @change-month="$emit('change-month', $event)"
+        @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
             <div
                 class="level-item has-text-centered"
@@ -264,6 +266,9 @@ export default {
                     ((seconds < 10 ? '0' : '') + seconds)
             }
             return ''
+        },
+        toggle() {
+            this.$refs.datepicker.toggle()
         }
     },
     mounted() {
