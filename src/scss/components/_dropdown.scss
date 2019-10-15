@@ -90,7 +90,7 @@
     }
     @include touch {
         &.is-mobile-modal {
-            .dropdown-menu {
+            > .dropdown-menu {
                 position: fixed;
                 width: calc(100vw - 40px);
                 max-width: 460px;
@@ -103,8 +103,10 @@
                 white-space: normal;
                 overflow-y: auto;
                 z-index: 50;
-                .dropdown-item {
-                    padding: 1rem 1.5rem;
+                > .dropdown-content {
+                    > .dropdown-item {
+                        padding: 1rem 1.5rem;
+                    }
                 }
             }
         }

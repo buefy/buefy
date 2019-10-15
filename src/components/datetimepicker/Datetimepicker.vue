@@ -17,7 +17,9 @@
         :icon="icon"
         :icon-pack="iconPack"
         :size="datepickerSize"
-        :range="false">
+        :range="false"
+        :disabled="disabled"
+        :mobile-native="mobileNative">
         <nav class="level is-mobile">
             <div
                 class="level-item has-text-centered"
@@ -34,6 +36,7 @@
                     :min-time="minTime"
                     :max-time="maxTime"
                     :size="timepickerSize"
+                    :disabled="timepickerDisabled"
                 />
             </div>
             <div
@@ -89,6 +92,8 @@ export default {
             type: Boolean,
             default: false
         },
+        placeholder: String,
+        disabled: Boolean,
         icon: String,
         iconPack: String,
         inline: Boolean,
@@ -130,7 +135,7 @@ export default {
                 return this.newValue
             },
             set(value) {
-                if (value !== null && typeof value !== 'undefined') {
+                if (value) {
                     let val = new Date(value.getTime())
                     if (this.newValue) {
                         // restore time part
@@ -191,10 +196,16 @@ export default {
             }
         },
         datepickerSize() {
-            return this.datepicker && this.datepicker.size ? this.datepicker.size : this.size
+            return this.datepicker && this.datepicker.size
+                ? this.datepicker.size : this.size
         },
         timepickerSize() {
-            return this.timepicker && this.timepicker.size ? this.timepicker.size : this.size
+            return this.timepicker && this.timepicker.size
+                ? this.timepicker.size : this.size
+        },
+        timepickerDisabled() {
+            return this.timepicker && this.timepicker.disabled
+                ? this.timepicker.disabled : this.disabled
         }
     },
     watch: {
