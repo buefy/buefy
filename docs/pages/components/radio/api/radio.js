@@ -122,7 +122,7 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            },
+            }
         ]
     }
 ]
