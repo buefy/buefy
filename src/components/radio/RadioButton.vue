@@ -1,5 +1,5 @@
 <template>
-    <div class="control">
+    <div class="control" :class="{ 'is-expanded': expanded }">
         <label
             class="b-radio radio button"
             ref="label"
@@ -38,6 +38,7 @@ export default {
         },
         disabled: Boolean,
         required: Boolean,
+        expanded: Boolean,
         name: String,
         size: String
     },
