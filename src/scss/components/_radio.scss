@@ -4,7 +4,7 @@ $radio-size: 1.25em !default;
 .b-radio {
     &.radio {
         outline: none;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         @include unselectable;
         & + .radio {
