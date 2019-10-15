@@ -10,6 +10,7 @@
 * Add ``multiple`` prop to datepicker (thanks @jamenamcinteer)
 * Add ``vertical`` prop to tabs (thanks @service-paradis)
 * Add ``defaultButtonRounded`` constructor option (thanks @bohdan-prylutskyi)
+* Add a slot for overriding navigation to steps (thanks @service-paradis)
 * Add more customization variables to checkbox (thanks @HugoHeneault)
 * Improve accessibility to modal (thanks @service-paradis)
 
