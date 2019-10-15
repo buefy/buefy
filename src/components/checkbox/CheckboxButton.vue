@@ -1,5 +1,5 @@
 <template>
-    <div class="control" :class="{ "is-expanded": expanded }">
+    <div class="control" :class="{ 'is-expanded': expanded }">
         <label
             class="b-checkbox checkbox button"
             ref="label"
