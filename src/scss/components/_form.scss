@@ -242,8 +242,9 @@ $floating-in-height: 3.25em !default;
 
 .control {
     .help.counter {
-        float: right;
+        float: none;
         margin-left: 0.5em;
+        text-align: right;
     }
     .icon {
         &.is-clickable {
