@@ -355,6 +355,18 @@
             "documentation/clockpicker"
         ]
     },
+    "documentation/datetimepicker": {
+        "title": "Datetimepicker",
+        "subtitle": "An input with a simple dropdown/modal for selecting a date and time, uses native datetimepicker for mobile",
+        "path": "/documentation/datetimepicker",
+        "githubPath": "pages/components/datetimepicker/Datetimepicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/datetimepicker"
+        ]
+    },
     "documentation/taginput": {
         "title": "Taginput",
         "subtitle": "A simple tag input field that can have autocomplete functionality",
