@@ -150,7 +150,7 @@ declare type ModalConfig = {
 }
 
 export declare const ModalProgrammatic: {
-    open: (params: ModalConfig | string) => any;
+    open: (params: ModalConfig | string) => { close: () => any };
 }
 
 export declare type SnackbarConfig = {
@@ -165,7 +165,7 @@ export declare type SnackbarConfig = {
     onAction?: () => any;
 }
 export declare const SnackbarProgrammatic: {
-    open: (params: SnackbarConfig | string) => any;
+    open: (params: SnackbarConfig | string) => { close: () => any };
 }
 
 export declare type ToastConfig = {
@@ -203,7 +203,7 @@ export declare type ToastConfig = {
 }
 
 export declare const ToastProgrammatic: {
-    open: (params: ToastConfig | string) => any;
+    open: (params: ToastConfig | string) => { close: () => any };
 }
 
 export declare type NotificationConfig = {
@@ -217,5 +217,5 @@ export declare type NotificationConfig = {
     hasIcon?: boolean;
 }
 export declare const NotificationProgrammatic: {
-    open: (params: NotificationConfig | string) => any;
+    open: (params: NotificationConfig | string) => { close: () => any };
 }
