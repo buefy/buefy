@@ -6,6 +6,12 @@
     .dropdown-trigger {
         width: 100%;
     }
+    // unset opacity when dropdow is disabled
+    .dropdown {
+        &.is-disabled {
+            opacity: 1;
+        }
+    }
     .dropdown-item {
         font-size: inherit;
         padding: 0;

@@ -4,6 +4,12 @@
     .dropdown-trigger {
         width: 100%;
     }
+    // unset opacity when dropdow is disabled
+    .dropdown {
+        &.is-disabled {
+            opacity: 1;
+        }
+    }
     .dropdown-item {
         font-size: inherit;
     }
@@ -90,7 +96,6 @@
                 &.is-selected {
                     background-color: $primary;
                     color: $primary-invert;
-
                     &.is-first-selected {
                         background-color: $primary;
                         color: $primary-invert;
