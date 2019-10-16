@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 import BTable from '@components/table/Table'
 
 describe('BTable', () => {
+    let wrapper
     beforeEach(() => {
         wrapper = shallowMount(BTable)
     })
