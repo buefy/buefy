@@ -518,7 +518,7 @@ export default {
         hasSearchablenewColumns() {
             return this.newColumns.some((column) => {
                 return column.searchable
-          })
+            })
         },
 
         /**
