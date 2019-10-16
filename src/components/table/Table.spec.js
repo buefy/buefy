@@ -45,6 +45,5 @@ describe('BTable', () => {
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
-
     })
-  })
+})
