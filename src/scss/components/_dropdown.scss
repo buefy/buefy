@@ -1,3 +1,5 @@
+$dropdown-mobile-breakpoint: $desktop !default;
+
 .dropdown {
     & + .dropdown {
         margin-left: 0.5em;
@@ -8,7 +10,7 @@
         background-color: rgba($black, 0.86);
         z-index: 40;
         cursor: pointer;
-        @include desktop {
+        @media screen and (min-width: $dropdown-mobile-breakpoint) {
             display: none;
         }
     }
@@ -88,7 +90,7 @@
             left: auto;
         }
     }
-    @include touch {
+    @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
         &.is-mobile-modal {
             > .dropdown-menu {
                 position: fixed;
