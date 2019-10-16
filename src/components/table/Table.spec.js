@@ -1,8 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import BTable from '@components/table/Table'
 
-let wrapper
-
 describe('BTable', () => {
     beforeEach(() => {
         wrapper = shallowMount(BTable)
@@ -42,9 +40,10 @@ describe('BTable', () => {
             ]
         })
         expect(wrapper.vm.hasSearchablenewColumns).toBe(true)
-      
+    })
+
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
 
     })
-})
+  })
