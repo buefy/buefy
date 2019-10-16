@@ -512,8 +512,8 @@ export default {
         * Check if has any searchable column.
         */
         hasSearchablenewColumns() {
-          return this.newColumns.some((column) => {
-              return column.searchable
+            return this.newColumns.some((column) => {
+                return column.searchable
           })
         },
 
@@ -584,11 +584,11 @@ export default {
         },
 
         filters: {
-                handler(value) {
-                    this.newData = this.data.filter(
-                        (row) => this.isRowFiltered(row))
-                },
-                deep: true
+            handler(value) {
+                this.newData = this.data.filter(
+                    (row) => this.isRowFiltered(row))
+            },
+            deep: true
         },
 
         /**
@@ -794,7 +794,6 @@ export default {
         isActiveCustomDetailRow(row) {
             return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
         },
-
 
         isRowFiltered(row) {
             for (const key in this.filters) {
