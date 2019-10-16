@@ -52,6 +52,13 @@ export default [
                 default: '<code>960</code>'
             },
             {
+                name: '<code>full-screen</code>',
+                description: 'Display modal as full screen',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>has-modal-card</code>',
                 description: `If your modal content has a <code>.modal-card</code> as root, add this prop or the card might break on mobile`,
                 type: 'Boolean',
@@ -88,12 +95,33 @@ export default [
                 default: '<code>clip</code>'
             },
             {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the modal.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>custom-class</code>',
                 description: 'CSS classes to be applied on modal',
                 type: 'String',
                 values: '—',
                 default: '—'
             },
+            {
+                name: '<code>aria-role</code>',
+                description: `Role attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '<code>dialog</code>, <code>alertdialog</code>',
+                default: '—'
+            },
+            {
+                name: '<code>aria-modal</code>',
+                description: `Improve accessiblity when enabled.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            }
         ],
         events: [
             {

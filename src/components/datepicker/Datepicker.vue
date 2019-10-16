@@ -48,7 +48,7 @@
                             @keydown.space.prevent="prev">
 
                             <b-icon
-                                icon="chevron-left"
+                                :icon="iconPrev"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable"/>
@@ -64,7 +64,7 @@
                             @keydown.space.prevent="next">
 
                             <b-icon
-                                icon="chevron-right"
+                                :icon="iconNext"
                                 :pack="iconPack"
                                 both
                                 type="is-primary is-clickable"/>
@@ -107,6 +107,7 @@
                         :day-names="dayNames"
                         :month-names="monthNames"
                         :first-day-of-week="firstDayOfWeek"
+                        :rules-for-first-week="rulesForFirstWeek"
                         :min-date="minDate"
                         :max-date="maxDate"
                         :focused="focusedDateData"
@@ -120,6 +121,9 @@
                         :type-month="isTypeMonth"
                         :nearby-month-days="nearbyMonthDays"
                         :nearby-selectable-month-days="nearbySelectableMonthDays"
+                        :show-week-number="showWeekNumber"
+                        :range="range"
+                        :multiple="multiple"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -165,7 +169,7 @@
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChangeNativePicker"
-            @focus="handleOnFocus"
+            @focus="onFocus"
             @blur="onBlur"/>
     </div>
 </template>
@@ -186,12 +190,16 @@ import DatepickerTable from './DatepickerTable'
 import DatepickerMonth from './DatepickerMonth'
 
 const defaultDateFormatter = (date, vm) => {
-    const yyyyMMdd = date.getFullYear() +
-        '/' + (date.getMonth() + 1) +
-        '/' + date.getDate()
-    const d = new Date(yyyyMMdd)
-    return !vm.isTypeMonth ? d.toLocaleDateString()
-        : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
+    const targetDates = Array.isArray(date) ? date : [date]
+    const dates = targetDates.map((date) => {
+        const yyyyMMdd = date.getFullYear() +
+            '/' + (date.getMonth() + 1) +
+            '/' + date.getDate()
+        const d = new Date(yyyyMMdd)
+        return !vm.isTypeMonth ? d.toLocaleDateString()
+            : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
+    })
+    return !vm.multiple ? dates.join(' - ') : dates.join(', ')
 }
 
 const defaultDateParser = (date, vm) => {
@@ -222,7 +230,9 @@ export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
-        value: Date,
+        value: {
+            type: [Date, Array]
+        },
         dayNames: {
             type: Array,
             default: () => {
@@ -330,6 +340,14 @@ export default {
             default: 'dots'
         },
         openOnFocus: Boolean,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         yearsRange: {
             type: Array,
             default: () => {
@@ -351,10 +369,31 @@ export default {
         nearbySelectableMonthDays: {
             type: Boolean,
             default: () => config.defaultDatepickerNearbySelectableMonthDays
+        },
+        showWeekNumber: {
+            type: Boolean,
+            default: () => config.defaultDatepickerShowWeekNumber
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        },
+        range: {
+            type: Boolean,
+            default: false
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: true
+        },
+        multiple: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
-        const focusedDate = this.value || this.focusedDate || this.dateCreator()
+        const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
+            this.focusedDate || this.dateCreator()
 
         return {
             dateSelected: this.value,
@@ -373,7 +412,7 @@ export default {
             },
             set(value) {
                 this.updateInternalState(value)
-                this.togglePicker(false)
+                if (!this.multiple) this.togglePicker(false)
                 this.$emit('input', value)
             }
         },
@@ -436,7 +475,7 @@ export default {
         */
         value(value) {
             this.updateInternalState(value)
-            this.togglePicker(false)
+            if (!this.multiple) this.togglePicker(false)
             !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
@@ -478,11 +517,11 @@ export default {
         * Format date into string
         */
         formatValue(value) {
-            if (value && !isNaN(value)) {
-                return this.dateFormatter(value, this)
-            } else {
-                return null
+            if (Array.isArray(value)) {
+                const isArrayWithValidDates = Array.isArray(value) && value.every((v) => !isNaN(v))
+                return isArrayWithValidDates ? this.dateFormatter(value, this) : null
             }
+            return (value && !isNaN(value)) ? this.dateFormatter(value, this) : null
         },
 
         /*
@@ -563,11 +602,13 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date) : null
+            this.computedValue = date ? new Date(date + 'T00:00:00') : null
         },
 
         updateInternalState(value) {
-            const currentDate = !value ? this.dateCreator() : value
+            const currentDate = Array.isArray(value)
+                ? (!value.length ? this.dateCreator() : value[0])
+                : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
                 month: currentDate.getMonth(),
                 year: currentDate.getFullYear()
@@ -580,9 +621,11 @@ export default {
         */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                this.$refs.dropdown.isActive = typeof active === 'boolean'
-                    ? active
-                    : !this.$refs.dropdown.isActive
+                if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = typeof active === 'boolean'
+                        ? active
+                        : !this.$refs.dropdown.isActive
+                }
             }
         },
 
@@ -619,8 +662,8 @@ export default {
         },
 
         /**
-        * Keypress event that is bound to the document.
-        */
+         * Keypress event that is bound to the document.
+         */
         keyPress(event) {
             // Esc key
             if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {

@@ -1,72 +1,56 @@
 <template>
     <nav class="pagination" :class="rootClasses">
-        <a
-            role="button"
-            href="#"
+        <slot
+            v-if="$scopedSlots.previous"
+            name="previous"
+            :page="getPage(current - 1, {
+                disabled: !hasPrev,
+                class: 'pagination-previous',
+                'aria-label': ariaPreviousLabel
+        })">
+            <b-icon
+                :icon="iconPrev"
+                :pack="iconPack"
+                both
+                aria-hidden="true"/>
+        </slot>
+        <BPaginationButton
+            v-else
             class="pagination-previous"
             :disabled="!hasPrev"
-            @click.prevent="prev"
-            :aria-label="ariaPreviousLabel">
+            :page="getPage(current - 1)">
             <b-icon
-                icon="chevron-left"
+                :icon="iconPrev"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
-        </a>
-        <a
-            role="button"
-            href="#"
+        </BPaginationButton>
+        <slot
+            v-if="$scopedSlots.next"
+            name="next"
+            :page="getPage(current + 1, {
+                disabled: !hasNext,
+                class: 'pagination-next',
+                'aria-label': ariaNextLabel
+        })">
+            <b-icon
+                :icon="iconNext"
+                :pack="iconPack"
+                both
+                aria-hidden="true"/>
+        </slot>
+        <BPaginationButton
+            v-else
             class="pagination-next"
             :disabled="!hasNext"
-            @click.prevent="next"
-            :aria-label="ariaNextLabel">
+            :page="getPage(current + 1)">
             <b-icon
-                icon="chevron-right"
+                :icon="iconNext"
                 :pack="iconPack"
                 both
                 aria-hidden="true"/>
-        </a>
-        <ul class="pagination-list" v-if="!simple">
-            <!--First-->
-            <li v-if="hasFirst">
-                <a
-                    role="button"
-                    href="#"
-                    class="pagination-link"
-                    @click.prevent="first"
-                    :aria-label="getAriaPageLabel(1, false)">
-                    1
-                </a>
-            </li>
-            <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+        </BPaginationButton>
 
-            <!--Pages-->
-            <li v-for="page in pagesInRange" :key="page.number">
-                <a
-                    role="button"
-                    href="#"
-                    class="pagination-link"
-                    :class="{ 'is-current': page.isCurrent }"
-                    @click.prevent="page.click"
-                    :aria-label="getAriaPageLabel(page.number, page.isCurrent)"
-                    :aria-current="page.isCurrent">
-                    {{ page.number }}
-                </a>
-            </li>
-
-            <!--Last-->
-            <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
-            <li v-if="hasLast">
-                <a
-                    role="button"
-                    href="#"
-                    class="pagination-link"
-                    @click.prevent="last"
-                    :aria-label="getAriaPageLabel(pageCount, false)">
-                    {{ pageCount }}
-                </a>
-            </li>
-        </ul>
         <small class="info" v-if="simple">
             <template v-if="perPage == 1">
                 {{ firstItem }} / {{ total }}
@@ -75,16 +59,55 @@
                 {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
             </template>
         </small>
+        <ul class="pagination-list" v-else>
+            <!--First-->
+            <li v-if="hasFirst">
+                <slot
+                    v-if="$scopedSlots.default"
+                    :page="getPage(1)"
+                />
+                <BPaginationButton
+                    v-else
+                    :page="getPage(1)" />
+            </li>
+            <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+
+            <!--Pages-->
+            <li v-for="page in pagesInRange" :key="page.number">
+                <slot
+                    v-if="$scopedSlots.default"
+                    :page="page"
+                />
+                <BPaginationButton
+                    v-else
+                    :page="page" />
+            </li>
+
+            <!--Last-->
+            <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+            <li v-if="hasLast">
+                <slot
+                    v-if="$scopedSlots.default"
+                    :page="getPage(pageCount)"
+                />
+                <BPaginationButton
+                    v-else
+                    :page="getPage(pageCount)" />
+            </li>
+        </ul>
     </nav>
 </template>
 
 <script>
+import PaginationButton from './PaginationButton'
 import Icon from '../icon/Icon'
+import config from '../../utils/config'
 
 export default {
     name: 'BPagination',
     components: {
-        [Icon.name]: Icon
+        [Icon.name]: Icon,
+        [PaginationButton.name]: PaginationButton
     },
     props: {
         total: [Number, String],
@@ -109,6 +132,14 @@ export default {
         rounded: Boolean,
         order: String,
         iconPack: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
@@ -209,18 +240,7 @@ export default {
 
             const pages = []
             for (let i = left; i <= right; i++) {
-                pages.push({
-                    number: i,
-                    isCurrent: this.current === i,
-                    click: (event) => {
-                        if (this.current === i) return
-                        this.$emit('change', i)
-                        this.$emit('update:current', i)
-
-                        // Set focus on element to keep tab order
-                        this.$nextTick(() => event.target.focus())
-                    }
-                })
+                pages.push(this.getPage(i))
             }
             return pages
         }
@@ -237,35 +257,48 @@ export default {
         /**
         * Previous button click listener.
         */
-        prev() {
-            if (!this.hasPrev) return
-            this.$emit('change', this.current - 1)
-            this.$emit('update:current', this.current - 1)
+        prev(event) {
+            this.changePage(this.current - 1, event)
         },
-
-        /**
-        * First button click listener.
-        */
-        first() {
-            this.$emit('change', 1)
-            this.$emit('update:current', 1)
-        },
-
-        /**
-        * Last button click listener.
-        */
-        last() {
-            this.$emit('change', this.pageCount)
-            this.$emit('update:current', this.pageCount)
-        },
-
         /**
         * Next button click listener.
         */
-        next() {
-            if (!this.hasNext) return
-            this.$emit('change', this.current + 1)
-            this.$emit('update:current', this.current + 1)
+        next(event) {
+            this.changePage(this.current + 1, event)
+        },
+        /**
+        * First button click listener.
+        */
+        first(event) {
+            this.changePage(1, event)
+        },
+        /**
+        * Last button click listener.
+        */
+        last(event) {
+            this.changePage(this.pageCount, event)
+        },
+
+        changePage(num, event) {
+            if (this.current === num || num < 1 || num > this.pageCount) return
+            this.$emit('change', num)
+            this.$emit('update:current', num)
+
+            // Set focus on element to keep tab order
+            if (event && event.target) {
+                this.$nextTick(() => event.target.focus())
+            }
+        },
+
+        getPage(num, options = {}) {
+            return {
+                number: num,
+                isCurrent: this.current === num,
+                click: (event) => this.changePage(num, event),
+                disabled: options.disabled || false,
+                class: options.class || '',
+                'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
+            }
         },
 
         /**

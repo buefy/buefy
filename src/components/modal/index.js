@@ -32,7 +32,7 @@ const ModalProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Modal)
-        registerComponentProgrammatic(Vue, '$modal', ModalProgrammatic)
+        registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic)
     }
 }
 
@@ -41,6 +41,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    Modal,
     ModalProgrammatic
 }

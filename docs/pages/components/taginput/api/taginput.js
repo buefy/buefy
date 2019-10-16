@@ -23,6 +23,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>has-counter</code>',
+                description: 'Show counter when <code>maxlength</code> or <code>maxtags</code> props are passed',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>type</code>',
                 description: 'Type (color) of the tags, optional',
                 type: 'String',
@@ -114,7 +121,7 @@ export default [
                 description: 'Function to validate the value of the tag before adding',
                 type: 'Function',
                 values: '—',
-                default: '<code>() => true</code>'
+                default: '<code>(tagToAdd) => true</code>'
             },
             {
                 name: '<code>allow-duplicates</code>',

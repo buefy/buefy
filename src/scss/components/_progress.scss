@@ -1,3 +1,4 @@
+$progress-text-color: $white !default;
 
 .progress-wrapper {
     position: relative;
@@ -11,9 +12,10 @@
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        font-size: calc(1rem / 1.5);
-        line-height: 1rem;
+        font-size: calc(#{$size-normal} / 1.5);
+        line-height: $size-normal;
         font-weight: bold;
+        color: $progress-text-color;
     }
 
     .progress {
@@ -21,20 +23,30 @@
 
         &.is-small {
             + .progress-value {
-                font-size: calc(0.75rem / 1.5);
-                line-height: 0.75rem;
+                font-size: calc(#{$size-small} / 1.5);
+                line-height: $size-small;
             }
         }
         &.is-medium {
             + .progress-value {
-                font-size: calc(1.25rem / 1.5);
-                line-height: 1.25rem;
+                font-size: calc(#{$size-medium} / 1.5);
+                line-height: $size-medium;
             }
         }
         &.is-large {
             + .progress-value {
-                font-size: calc(1.5rem / 1.5);
-                line-height: 1.5rem;
+                font-size: calc(#{$size-large} / 1.5);
+                line-height: $size-large;
+            }
+        }
+
+        // TODO Remove below when the following PR will be merged in Bulma:
+        // https://github.com/jgthms/bulma/pull/2540
+        // From this Bulma Issue:
+        // https://github.com/jgthms/bulma/issues/2539
+        &:indeterminate {
+            &::-ms-fill {
+                animation-name: none
             }
         }
 

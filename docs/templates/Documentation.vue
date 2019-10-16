@@ -60,7 +60,7 @@ export default {
         this.$eventHub.$on('navigate', this.setMeta)
         this.setMeta(this.$router.currentRoute.meta)
         if (this.$route.hash) {
-            this.scrollTo(this.$route.hash)
+            this.$nextTick(() => this.scrollTo(this.$route.hash))
         }
     }
 }

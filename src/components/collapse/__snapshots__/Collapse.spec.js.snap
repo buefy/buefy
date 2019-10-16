@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BCollapse default render correctly 1`] = `
+<div class="collapse">
+    <div class="collapse-trigger"></div>
+    <div id="" aria-expanded="true" class="collapse-content"></div>
+</div>
+`;

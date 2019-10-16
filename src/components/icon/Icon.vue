@@ -15,11 +15,13 @@
 
 <script>
 import config from '../../utils/config'
+import getIcons from '../../utils/icons'
 
 export default {
     name: 'BIcon',
     props: {
         type: [String, Object],
+        component: String,
         pack: String,
         icon: String,
         size: String,
@@ -28,15 +30,23 @@ export default {
         both: Boolean // This is used internally to show both MDI and FA icon
     },
     computed: {
+        iconConfig() {
+            let allIcons = getIcons()
+            return allIcons[this.newPack]
+        },
+        iconPrefix() {
+            if (this.iconConfig && this.iconConfig.iconPrefix) {
+                return this.iconConfig.iconPrefix
+            }
+            return ''
+        },
         /**
         * Internal icon name based on the pack.
         * If pack is 'fa', gets the equivalent FA icon name of the MDI,
         * internal icons are always MDI.
         */
         newIcon() {
-            return this.newPack === 'mdi'
-                ? `${this.newPack}-${this.icon}`
-                : this.addFAPrefix(this.getEquivalentIconOf(this.icon))
+            return `${this.iconPrefix}${this.getEquivalentIconOf(this.icon)}`
         },
         newPack() {
             return this.pack || config.defaultIconPack
@@ -63,36 +73,22 @@ export default {
             return this.customSize || this.customSizeByPack
         },
         customSizeByPack() {
-            const defaultSize = this.newPack === 'mdi'
-                ? 'mdi-24px'
-                : this.addFAPrefix('lg')
-            const mediumSize = this.newPack === 'mdi'
-                ? 'mdi-36px'
-                : this.addFAPrefix('2x')
-            const largeSize = this.newPack === 'mdi'
-                ? 'mdi-48px'
-                : this.addFAPrefix('3x')
-            switch (this.size) {
-                case 'is-small': return
-                case 'is-medium': return mediumSize
-                case 'is-large': return largeSize
-                default: return defaultSize
+            if (this.iconConfig && this.iconConfig.sizes) {
+                if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+                    return this.iconConfig.sizes[this.size]
+                } else if (this.iconConfig.sizes.default) {
+                    return this.iconConfig.sizes.default
+                }
             }
+            return null
         },
         useIconComponent() {
-            return config.defaultIconComponent
+            return this.component || config.defaultIconComponent
         }
     },
     methods: {
-        addFAPrefix(value) {
-            if (this.useIconComponent) {
-                return value
-            }
-            return `fa-${value}`
-        },
-
         /**
-        * Equivalent FA icon name of the MDI.
+        * Equivalent icon name of the MDI.
         */
         getEquivalentIconOf(value) {
             // Only transform the class if the both prop is set to true
@@ -100,22 +96,12 @@ export default {
                 return value
             }
 
-            switch (value) {
-                case 'check': return 'check'
-                case 'information': return 'info-circle'
-                case 'check-circle': return 'check-circle'
-                case 'alert': return 'exclamation-triangle'
-                case 'alert-circle': return 'exclamation-circle'
-                case 'arrow-up': return 'arrow-up'
-                case 'chevron-right': return 'angle-right'
-                case 'chevron-left': return 'angle-left'
-                case 'chevron-down': return 'angle-down'
-                case 'eye': return 'eye'
-                case 'eye-off': return 'eye-slash'
-                case 'menu-down': return 'caret-down'
-                case 'menu-up': return 'caret-up'
-                default: return value
+            if (this.iconConfig &&
+                this.iconConfig.internalIcons &&
+                this.iconConfig.internalIcons[value]) {
+                return this.iconConfig.internalIcons[value]
             }
+            return value
         }
     }
 }

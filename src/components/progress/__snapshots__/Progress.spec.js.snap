@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BProgress render correctly 1`] = `
+<div class="progress-wrapper"><progress max="100" class="progress is-darkgrey"></progress>
+    <!---->
+</div>
+`;

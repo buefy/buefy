@@ -88,7 +88,8 @@ export default {
                     this.labelPosition === 'inside',
                 'is-floating-label': this.hasLabel && !this.horizontal &&
                     this.labelPosition === 'on-border'
-            }]
+            },
+            this.numberInputClasses]
         },
         /**
         * Correct Bulma class for the side of the addon or group.
@@ -142,6 +143,24 @@ export default {
         },
         hasLabel() {
             return this.label || this.$slots.label
+        },
+        numberInputClasses() {
+            if (this.$slots.default) {
+                const numberinput = this.$slots.default.filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
+                if (numberinput) {
+                    const classes = ['has-numberinput']
+                    const controlsPosition = numberinput.componentOptions.propsData.controlsPosition
+                    const size = numberinput.componentOptions.propsData.size
+                    if (controlsPosition) {
+                        classes.push(`has-numberinput-${controlsPosition}`)
+                    }
+                    if (size) {
+                        classes.push(`has-numberinput-${size}`)
+                    }
+                    return classes
+                }
+            }
+            return null
         }
     },
     watch: {

@@ -32,7 +32,14 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '<code>mdi</code>'
-            }
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is really related to navigation.',
+                type: 'String',
+                values: '<code>menu</code>',
+                default: '—'
+            },
         ],
         slots: [
             {
@@ -105,6 +112,13 @@ export default [
                 type: 'String',
                 values: '<code>a</code>, <code>router-link</code>, <code>nuxt-link</code> or other nuxt alias',
                 default: '<code>a</code>'
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: 'Role attribute to be passed to list item for better accessibility. Use <code>menuitem</code> only in situations where your menu item is really related to navigation.',
+                type: 'String',
+                values: '<code>menuitem</code>',
+                default: '—'
             },
             {
                 name: 'Any native attribute',

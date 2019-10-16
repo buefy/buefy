@@ -18,13 +18,13 @@
     export default {
         methods: {
             confirm() {
-                this.$dialog.confirm({
+                this.$buefy.dialog.confirm({
                     message: 'Continue on this task?',
-                    onConfirm: () => this.$toast.open('User confirmed')
+                    onConfirm: () => this.$buefy.toast.open('User confirmed')
                 })
             },
             confirmCustom() {
-                this.$dialog.confirm({
+                this.$buefy.dialog.confirm({
                     title: 'Privacy Politics',
                     message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Fusce id fermentum quam. Proin sagittis,
@@ -49,17 +49,17 @@
                     cancelText: 'Disagree',
                     confirmText: 'Agree',
                     type: 'is-success',
-                    onConfirm: () => this.$toast.open('User agreed')
+                    onConfirm: () => this.$buefy.toast.open('User agreed')
                 })
             },
             confirmCustomDelete() {
-                this.$dialog.confirm({
+                this.$buefy.dialog.confirm({
                     title: 'Deleting account',
                     message: 'Are you sure you want to <b>delete</b> your account? This action cannot be undone.',
                     confirmText: 'Delete Account',
                     type: 'is-danger',
                     hasIcon: true,
-                    onConfirm: () => this.$toast.open('Account deleted!')
+                    onConfirm: () => this.$buefy.toast.open('Account deleted!')
                 })
             }
         }

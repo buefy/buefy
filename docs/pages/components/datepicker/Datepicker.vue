@@ -46,6 +46,20 @@
             <p>Dates can be passed to the datepicker with the <code>events</code> prop and shown with indicators.</p>
         </Example>
 
+        <Example :component="ExRangeInput" :code="ExRangeInputCode" title="Select a range of dates" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+            </div>
+            <p>Dates selected can be within a range.</p>
+        </Example>
+
+        <Example :component="ExMultipleInput" :code="ExMultipleInputCode" title="Select multiple dates" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+            </div>
+            <p>Multiple dates can be selected and don't have to be contiguous.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -80,6 +94,12 @@
     import ExEvents from './examples/ExEvents'
     import ExEventsCode from '!!raw-loader!./examples/ExEvents'
 
+    import ExRangeInput from './examples/ExRangeInput'
+    import ExRangeInputCode from '!!raw-loader!./examples/ExRangeInput'
+
+    import ExMultipleInput from './examples/ExMultipleInput'
+    import ExMultipleInputCode from '!!raw-loader!./examples/ExMultipleInput'
+
     export default {
         data() {
             return {
@@ -101,7 +121,11 @@
                 ExEvents,
                 ExEventsCode,
                 ExMonth,
-                ExMonthCode
+                ExMonthCode,
+                ExRangeInput,
+                ExRangeInputCode,
+                ExMultipleInput,
+                ExMultipleInputCode
             }
         }
     }

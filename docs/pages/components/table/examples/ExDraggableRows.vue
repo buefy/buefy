@@ -70,7 +70,7 @@
         drop(payload) {
           payload.event.target.closest('tr').classList.remove('is-selected')
           const droppedOnRowIndex = payload.index
-          this.$toast.open(`Moved ${this.draggingRow.first_name} from row ${this.draggingRowIndex + 1} to ${droppedOnRowIndex + 1}`)
+          this.$buefy.toast.open(`Moved ${this.draggingRow.first_name} from row ${this.draggingRowIndex + 1} to ${droppedOnRowIndex + 1}`)
         }
       }
   }

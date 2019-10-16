@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BModal render correctly 1`] = `
+<transition-stub name="zoom-out">
+    <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="animation-content modal-content" style="max-width: 960px;">
+            <!---->
+        </div>
+    </div>
+</transition-stub>
+`;

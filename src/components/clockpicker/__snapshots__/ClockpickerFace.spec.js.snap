@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BClockpickerFace render correctly 1`] = `
+<div class="b-clockpicker-face">
+    <div class="b-clockpicker-face-outer-ring">
+        <div class="b-clockpicker-face-hand" style="transform: rotate(720deg) scaleY(1);"></div>
+    </div>
+</div>
+`;

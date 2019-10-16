@@ -2,6 +2,8 @@ let config = {
     defaultContainerElement: null,
     defaultIconPack: 'mdi',
     defaultIconComponent: null,
+    defaultIconPrev: 'chevron-left',
+    defaultIconNext: 'chevron-right',
     defaultDialogConfirmText: null,
     defaultDialogCancelText: null,
     defaultSnackbarDuration: 3500,
@@ -29,13 +31,19 @@ let config = {
     defaultTimepickerMobileNative: true,
     defaultNoticeQueue: true,
     defaultInputHasCounter: true,
+    defaultTaginputHasCounter: true,
     defaultUseHtml5Validation: true,
     defaultDropdownMobileModal: true,
     defaultFieldLabelPosition: null,
     defaultDatepickerYearsRange: [-100, 3],
     defaultDatepickerNearbyMonthDays: true,
-    defaultDatepickerNearbySelectableMonthDays: false
-}
+    defaultDatepickerNearbySelectableMonthDays: false,
+    defaultDatepickerShowWeekNumber: false,
+    defaultTrapFocus: false,
+    defaultButtonRounded: false,
+
+    customIconPacks: null
+} // TODO defaultTrapFocus to true in the next breaking change
 
 export default config
 

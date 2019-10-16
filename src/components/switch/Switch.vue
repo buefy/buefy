@@ -30,19 +30,19 @@
 export default {
     name: 'BSwitch',
     props: {
-        value: [String, Number, Boolean, Function, Object, Array, Symbol],
-        nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+        value: [String, Number, Boolean, Function, Object, Array],
+        nativeValue: [String, Number, Boolean, Function, Object, Array],
         disabled: Boolean,
         type: String,
         name: String,
         required: Boolean,
         size: String,
         trueValue: {
-            type: [String, Number, Boolean, Function, Object, Array, Symbol],
+            type: [String, Number, Boolean, Function, Object, Array],
             default: true
         },
         falseValue: {
-            type: [String, Number, Boolean, Function, Object, Array, Symbol],
+            type: [String, Number, Boolean, Function, Object, Array],
             default: false
         },
         rounded: {

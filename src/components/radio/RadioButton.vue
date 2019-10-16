@@ -1,5 +1,5 @@
 <template>
-    <div class="control">
+    <div class="control" :class="{ 'is-expanded': expanded }">
         <label
             class="b-radio radio button"
             ref="label"
@@ -30,14 +30,15 @@
 export default {
     name: 'BRadioButton',
     props: {
-        value: [String, Number, Boolean, Function, Object, Array, Symbol],
-        nativeValue: [String, Number, Boolean, Function, Object, Array, Symbol],
+        value: [String, Number, Boolean, Function, Object, Array],
+        nativeValue: [String, Number, Boolean, Function, Object, Array],
         type: {
             type: String,
             default: 'is-primary'
         },
         disabled: Boolean,
         required: Boolean,
+        expanded: Boolean,
         name: String,
         size: String
     },

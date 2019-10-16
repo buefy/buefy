@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BTag render correctly 1`] = `
+<span class="tag"><span class=""></span>
+<!----></span>
+`;

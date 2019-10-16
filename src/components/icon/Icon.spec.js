@@ -35,6 +35,17 @@ describe('BIcon', () => {
         expect(wrapper.classes()).toContain('has-text-primary')
     })
 
+    it('returns correct color for newType when type is passed as an object', () => {
+        const wrapper = shallowMount(BIcon, {
+            propsData: {
+                icon: 'eye',
+                type: {'is-primary': true}
+            }
+        })
+
+        expect(wrapper.vm.newType).toEqual('has-text-primary')
+    })
+
     it('render icon package correctly when the pack property is is passed.', () => {
         const wrapper = shallowMount(BIcon, {
             propsData: {

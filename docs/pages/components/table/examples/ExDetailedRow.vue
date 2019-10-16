@@ -15,7 +15,7 @@
             :opened-detailed="defaultOpenedDetails"
             detailed
             detail-key="id"
-            @details-open="(row, index) => $toast.open(`Expanded ${row.user.first_name}`)"
+            @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.user.first_name}`)"
             :show-detail-icon="showDetailIcon"
             aria-next-label="Next page"
             aria-previous-label="Previous page"
@@ -49,10 +49,12 @@
                 </b-table-column>
 
                 <b-table-column label="Gender">
-                    <b-icon pack="fa"
-                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                    </b-icon>
-                    {{ props.row.gender }}
+                    <span>
+                        <b-icon pack="fas"
+                            :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                        </b-icon>
+                        {{ props.row.gender }}
+                    </span>
                 </b-table-column>
             </template>
 

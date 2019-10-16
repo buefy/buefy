@@ -18,16 +18,16 @@
     export default {
         methods: {
             toast() {
-                this.$toast.open('Something happened')
+                this.$buefy.toast.open('Something happened')
             },
             success() {
-                this.$toast.open({
+                this.$buefy.toast.open({
                     message: 'Something happened correctly!',
                     type: 'is-success'
                 })
             },
             danger() {
-                this.$toast.open({
+                this.$buefy.toast.open({
                     duration: 5000,
                     message: `Something's not good, also I'm on bottom`,
                     position: 'is-bottom',

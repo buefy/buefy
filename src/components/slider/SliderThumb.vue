@@ -4,7 +4,7 @@
         :class="{ 'is-dragging': dragging }"
         :style="wrapperStyle">
         <b-tooltip
-            :label="value.toString()"
+            :label="tooltipLabel"
             :type="type"
             :always="dragging || isFocused"
             :active="!disabled && tooltip">
@@ -46,7 +46,8 @@ export default {
         tooltip: {
             type: Boolean,
             default: true
-        }
+        },
+        customFormatter: Function
     },
     data() {
         return {
@@ -79,11 +80,11 @@ export default {
         },
         wrapperStyle() {
             return { left: this.currentPosition }
-        }
-    },
-    watch: {
-        dragging(val) {
-            this.$parent.dragging = val
+        },
+        tooltipLabel() {
+            return typeof this.customFormatter !== 'undefined'
+                ? this.customFormatter(this.value)
+                : this.value.toString()
         }
     },
     methods: {
@@ -110,29 +111,30 @@ export default {
             this.newPosition = parseFloat(this.currentPosition) -
                 this.step / (this.max - this.min) * 100
             this.setPosition(this.newPosition)
-            this.$parent.emitChange()
+            this.$parent.emitValue('change')
         },
         onRightKeyDown() {
             if (this.disabled || this.value === this.max) return
             this.newPosition = parseFloat(this.currentPosition) +
                 this.step / (this.max - this.min) * 100
             this.setPosition(this.newPosition)
-            this.$parent.emitChange()
+            this.$parent.emitValue('change')
         },
         onHomeKeyDown() {
             if (this.disabled || this.value === this.min) return
             this.newPosition = 0
             this.setPosition(this.newPosition)
-            this.$parent.emitChange()
+            this.$parent.emitValue('change')
         },
         onEndKeyDown() {
             if (this.disabled || this.value === this.max) return
             this.newPosition = 100
             this.setPosition(this.newPosition)
-            this.$parent.emitChange()
+            this.$parent.emitValue('change')
         },
         onDragStart(event) {
             this.dragging = true
+            this.$emit('dragstart')
             if (event.type === 'touchstart') {
                 event.clientX = event.touches[0].clientX
             }
@@ -151,14 +153,12 @@ export default {
             }
         },
         onDragEnd() {
+            this.dragging = false
+            this.$emit('dragend')
             if (this.value !== this.oldValue) {
-                this.$parent.emitChange()
+                this.$parent.emitValue('change')
             }
-            setTimeout(() => {
-                // defer to prevent triggering click on the track
-                this.dragging = false
-                this.setPosition(this.newPosition)
-            })
+            this.setPosition(this.newPosition)
             if (typeof window !== 'undefined') {
                 document.removeEventListener('mousemove', this.onDragging)
                 document.removeEventListener('touchmove', this.onDragging)

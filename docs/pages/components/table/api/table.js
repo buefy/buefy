@@ -401,28 +401,32 @@ export default [
                 parameters: '<code>row: Object</code>, <code>row: Object</code>'
             },
             {
-                name: '<code> dragstart </code>',
+                name: '<code>dragstart</code>',
                 description: 'Triggers when starting to drag a row',
                 parameters: '<code> row: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
             },
             {
-                name: '<code> drop </code>',
+                name: '<code>dragend</code>',
+                description: 'Triggers when ending to drag a row',
+                parameters: '<code> row: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>drop</code>',
                 description: 'Triggers when dropping on a row',
                 parameters: '<code> row: Object </code>, <code> drop: Event </code>, <code> index: Number </code>'
             },
             {
-                name: '<code> dragover </code>',
+                name: '<code>dragover</code>',
                 description: 'Triggers when dragging over a row',
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
-
             },
             {
-                name: '<code> mouseenter </code>',
+                name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
                 parameters: '<code> row: Object </code>'
             },
             {
-                name: '<code> mouseleave </code>',
+                name: '<code>mouseleave</code>',
                 description: 'Triggers when mouse leaves a row',
                 parameters: '<code> row: Object </code>'
             }
@@ -439,6 +443,16 @@ export default [
             {
                 name: '<code>toggleDetails</code>',
                 description: 'Toggle row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>openDetailRow</code>',
+                description: 'Open row detail if table is <code>detailed</code>',
+                parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>closeDetailRow</code>',
+                description: 'Close row detail if table is <code>detailed</code>',
                 parameters: '<code>row: Object</code>'
             }
         ]

@@ -123,6 +123,15 @@ export default {
                     whiteList.push(child)
                 }
             }
+            if (this.$parent.$data._isTaginput) {
+                // Add taginput container
+                whiteList.push(this.$parent.$el)
+                // Add .tag and .delete
+                const tagInputChildren = this.$parent.$el.querySelectorAll('*')
+                for (const tagInputChild of tagInputChildren) {
+                    whiteList.push(tagInputChild)
+                }
+            }
 
             return whiteList
         },
@@ -286,7 +295,7 @@ export default {
          * If object, get value from path, or else just the value.
          */
         getValue(option) {
-            if (!option) return
+            if (option === null) return
 
             if (typeof this.customFormatter !== 'undefined') {
                 return this.customFormatter(option)

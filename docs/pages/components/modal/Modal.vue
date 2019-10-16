@@ -7,6 +7,9 @@
                 A modal with a component. When you want to close the Modal, call the 'close' method —
                 <code>this.$parent.close()</code> — from the injected component.
             </p>
+            <p>
+                <code>trap-focus</code> prop could be useful in this case.
+            </p>
         </Example>
 
         <Example :component="ExProgrammatic" :code="ExProgrammaticCode" title="Programmatic">
@@ -55,7 +58,7 @@
                 ExFullScreenCode,
                 programmaticSyntax: `
                 // From inside Vue instance
-                this.$modal.open(props)
+                this.$buefy.modal.open(props)
 
                 // From outside Vue instance
                 import { ModalProgrammatic as Modal } from 'buefy'

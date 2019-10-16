@@ -22,7 +22,7 @@ const LoadingProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Loading)
-        registerComponentProgrammatic(Vue, '$loading', LoadingProgrammatic)
+        registerComponentProgrammatic(Vue, 'loading', LoadingProgrammatic)
     }
 }
 
@@ -31,6 +31,5 @@ use(Plugin)
 export default Plugin
 
 export {
-    Loading,
     LoadingProgrammatic
 }

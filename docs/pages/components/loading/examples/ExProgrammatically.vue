@@ -23,7 +23,7 @@
         },
         methods: {
             open() {
-                const loadingComponent = this.$loading.open({
+                const loadingComponent = this.$buefy.loading.open({
                     container: this.isFullPage ? null : this.$refs.element.$el
                 })
                 setTimeout(() => loadingComponent.close(), 3 * 1000)

@@ -32,40 +32,44 @@
         <section class="step-content" :class="{'is-transitioning': isTransitioning}">
             <slot/>
         </section>
-        <nav v-if="hasNavigation" class="step-navigation">
-            <a
-                role="button"
-                href="#"
-                class="pagination-previous"
-                :disabled="!hasPrev"
-                @click.prevent="prev"
-                :aria-label="ariaPreviousLabel">
-                <b-icon
-                    icon="chevron-left"
-                    :pack="iconPack"
-                    both
-                    aria-hidden="true"/>
-            </a>
-            <a
-                role="button"
-                href="#"
-                class="pagination-next"
-                :disabled="!hasNext"
-                @click.prevent="next"
-                :aria-label="ariaNextLabel">
-                <b-icon
-                    icon="chevron-right"
-                    :pack="iconPack"
-                    both
-                    aria-hidden="true"/>
-            </a>
-        </nav>
+        <slot
+            name="navigation"
+            :previous="navigationProps.previous"
+            :next="navigationProps.next">
+            <nav v-if="hasNavigation" class="step-navigation">
+                <a
+                    role="button"
+                    class="pagination-previous"
+                    :disabled="navigationProps.previous.disabled"
+                    @click.prevent="navigationProps.previous.action"
+                    :aria-label="ariaPreviousLabel">
+                    <b-icon
+                        :icon="iconPrev"
+                        :pack="iconPack"
+                        both
+                        aria-hidden="true"/>
+                </a>
+                <a
+                    role="button"
+                    class="pagination-next"
+                    :disabled="navigationProps.next.disabled"
+                    @click.prevent="navigationProps.next.action"
+                    :aria-label="ariaNextLabel">
+                    <b-icon
+                        :icon="iconNext"
+                        :pack="iconPack"
+                        both
+                        aria-hidden="true"/>
+                </a>
+            </nav>
+        </slot>
     </div>
 </template>
 
 <script>
 import Icon from '../icon/Icon'
 import SlotComponent from '../../utils/SlotComponent'
+import config from '../../utils/config'
 
 export default {
     name: 'BSteps',
@@ -86,6 +90,14 @@ export default {
             default: false
         },
         iconPack: String,
+        iconPrev: {
+            type: String,
+            default: config.defaultIconPrev
+        },
+        iconNext: {
+            type: String,
+            default: config.defaultIconNext
+        },
         hasNavigation: {
             type: Boolean,
             default: true
@@ -115,29 +127,29 @@ export default {
         },
 
         /**
-            * Check the first visible step index.
-            */
+         * Check the first visible step index.
+         */
         firstVisibleStepIndex() {
-            return this.stepItems.findIndex((step, idx) => {
-                return step.visible
-            })
+            return this.stepItems.map(
+                (step, idx) => step.visible
+            ).indexOf(true)
         },
 
         /**
-            * Check if previous button is available.
-            */
+         * Check if previous button is available.
+         */
         hasPrev() {
             return this.firstVisibleStepIndex >= 0 &&
                 this.activeStep > this.firstVisibleStepIndex
         },
 
         /**
-            * Check the last visible step index.
-            */
+         * Check the last visible step index.
+         */
         lastVisibleStepIndex() {
-            let idx = this.reversedStepItems.findIndex((step, idx) => {
-                return step.visible
-            })
+            let idx = this.reversedStepItems.map(
+                (step, idx) => step.visible
+            ).indexOf(true)
             if (idx >= 0) {
                 return this.stepItems.length - 1 - idx
             }
@@ -145,11 +157,24 @@ export default {
         },
 
         /**
-            * Check if next button is available.
-            */
+         * Check if next button is available.
+         */
         hasNext() {
             return this.lastVisibleStepIndex >= 0 &&
                 this.activeStep < this.lastVisibleStepIndex
+        },
+
+        navigationProps() {
+            return {
+                previous: {
+                    disabled: !this.hasPrev,
+                    action: this.prev
+                },
+                next: {
+                    disabled: !this.hasNext,
+                    action: this.next
+                }
+            }
         }
     },
     watch: {
@@ -203,13 +228,13 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         prev() {
             if (!this.hasPrev) return
-            let prevItemIdx = this.reversedStepItems.findIndex((step, idx) => {
-                return this.stepItems.length - 1 - idx < this.activeStep && step.visible
-            })
+            let prevItemIdx = this.reversedStepItems.map(
+                (step, idx) => this.stepItems.length - 1 - idx < this.activeStep && step.visible
+            ).indexOf(true)
             if (prevItemIdx >= 0) {
                 prevItemIdx = this.stepItems.length - 1 - prevItemIdx
             }
@@ -218,13 +243,13 @@ export default {
         },
 
         /**
-            * Previous button click listener.
-            */
+         * Previous button click listener.
+         */
         next() {
             if (!this.hasNext) return
-            const nextItemIdx = this.stepItems.findIndex((step, idx) => {
-                return idx > this.activeStep && step.visible
-            })
+            const nextItemIdx = this.stepItems.map(
+                (step, idx) => idx > this.activeStep && step.visible
+            ).indexOf(true)
             this.$emit('input', nextItemIdx)
             this.changeStep(nextItemIdx)
         }

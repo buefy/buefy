@@ -4,6 +4,12 @@
     .dropdown-trigger {
         width: 100%;
     }
+    // unset opacity when dropdow is disabled
+    .dropdown {
+        &.is-disabled {
+            opacity: 1;
+        }
+    }
     .dropdown-item {
         font-size: inherit;
     }
@@ -11,9 +17,6 @@
         padding-bottom: 0.875rem;
         margin-bottom: 0.875rem;
         border-bottom: 1px solid $grey-lighter;
-    }
-    .datepicker-content {
-        height: 16.25rem;   
     }
     .datepicker-footer {
         margin-top: 0.875rem;
@@ -70,13 +73,51 @@
                         color: $black;
                         cursor: pointer;
                     }
+                    &.is-within-hovered-range {
+                        &.is-first-hovered {
+                            background-color: $grey;
+                            color: $grey-lighter;
+                            border-bottom-right-radius: 0;
+                            border-top-right-radius: 0;
+                        }
+                        &.is-within-hovered {
+                            background-color: $background;
+                            color: $black;
+                            border-radius: 0;
+                        }
+                        &.is-last-hovered {
+                            background-color: $grey;
+                            color: $grey-lighter;
+                            border-bottom-left-radius: 0;
+                            border-top-left-radius: 0;
+                        }
+                    }
                 }
                 &.is-selected {
                     background-color: $primary;
                     color: $primary-invert;
+                    &.is-first-selected {
+                        background-color: $primary;
+                        color: $primary-invert;
+                        border-bottom-right-radius: 0;
+                        border-top-right-radius: 0;
+                    }
+                    &.is-within-selected {
+                        background-color: rgba($primary, 0.5);
+                        border-radius: 0;
+                    }
+                    &.is-last-selected {
+                        background-color: $primary;
+                        color: $primary-invert;
+                        border-bottom-left-radius: 0;
+                        border-top-left-radius: 0;
+                    }
                 }
                 &.is-nearby:not(.is-selected) {
                     color: $grey-light;
+                }
+                &.is-week-number {
+                    cursor: default;
                 }
             }
             &.has-events {

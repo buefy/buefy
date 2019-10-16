@@ -30,15 +30,6 @@
 
                 <a
                     class="navbar-item"
-                    :class="{ 'has-text-twitter': !light }"
-                    href="https://twitter.com/rafaelpimpa"
-                    target="_blank"
-                    title="Twitter">
-                    <b-icon icon="twitter"/>
-                </a>
-
-                <a
-                    class="navbar-item"
                     :class="{ 'has-text-discord': !light }"
                     href="https://discordapp.com/invite/ZkdFJMr"
                     target="_blank"

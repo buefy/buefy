@@ -1,69 +1,75 @@
 import { shallowMount } from '@vue/test-utils'
 import BCollapse from '@components/collapse/Collapse'
 
+let wrapper
+
 describe('BCollapse', () => {
-    it('is called', () => {
-        const wrapper = shallowMount(BCollapse)
-        expect(wrapper.name()).toBe('BCollapse')
-        expect(wrapper.isVueInstance()).toBeTruthy()
-    })
-
-    it('default props and vm', () => {
-        const wrapper = shallowMount(BCollapse)
-        expect(wrapper.props().open).toBe(true)
-        expect(wrapper.props().animation).toBe('fade')
-        expect(wrapper.vm.isOpen).toBe(true)
-    })
-
-    it('set default open prop', () => {
-        const wrapper = shallowMount(BCollapse, {
-            propsData: {
-                open: false
-            }
+    describe('default', () => {
+        beforeEach(() => {
+            wrapper = shallowMount(BCollapse)
         })
-        expect(wrapper.props().open).toBe(false)
-        expect(wrapper.vm.isOpen).toBe(false)
-    })
 
-    it('call toggle method', async () => {
-        const wrapper = shallowMount(BCollapse, {
-            propsData: {
-                open: false
-            }
+        it('is called', () => {
+            expect(wrapper.name()).toBe('BCollapse')
+            expect(wrapper.isVueInstance()).toBeTruthy()
         })
-        expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
-        wrapper.vm.toggle()
-        await wrapper.vm.$nextTick()
-        expect(wrapper.vm.isOpen).toBe(true)
-        expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
-    })
 
-    it('emit a click event', () => {
-        const wrapper = shallowMount(BCollapse, {
-            propsData: {
-                open: false
-            }
+        it('default props and vm', () => {
+            expect(wrapper.props().open).toBe(true)
+            expect(wrapper.props().animation).toBe('fade')
+            expect(wrapper.vm.isOpen).toBe(true)
         })
-        expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
-        const updateOpen = jest.fn()
-        wrapper.vm.$on('update:open', updateOpen)
-        wrapper.find('.collapse-trigger').trigger('click')
-        expect(updateOpen).toHaveBeenCalledTimes(1)
-        expect(updateOpen).toHaveBeenCalledWith(true)
-        expect(wrapper.vm.isOpen).toBe(true)
-        expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
-    })
 
-    it('update open prop', () => {
-        const wrapper = shallowMount(BCollapse, {
-            propsData: {
-                open: false
-            }
+        it('render correctly', () => {
+            expect(wrapper.html()).toMatchSnapshot()
         })
-        expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
-        wrapper.setProps({ open: true })
-        expect(wrapper.vm.isOpen).toBe(true)
-        expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
+    })
+    describe('open prop is false', () => {
+        beforeEach(() => {
+            wrapper = shallowMount(BCollapse, {
+                propsData: {
+                    open: false
+                }
+            })
+        })
+
+        it('set default open prop', () => {
+            expect(wrapper.props().open).toBe(false)
+            expect(wrapper.vm.isOpen).toBe(false)
+        })
+
+        it('call toggle method', async () => {
+            expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
+            wrapper.vm.toggle()
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.isOpen).toBe(true)
+            expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
+        })
+
+        it('emit a click event', () => {
+            expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
+            const updateOpen = jest.fn()
+            wrapper.vm.$on('update:open', updateOpen)
+            wrapper.find('.collapse-trigger').trigger('click')
+            expect(updateOpen).toHaveBeenCalledTimes(1)
+            expect(updateOpen).toHaveBeenCalledWith(true)
+            expect(wrapper.vm.isOpen).toBe(true)
+            expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
+        })
+
+        it('should emit open event', () => {
+            const open = jest.fn()
+            wrapper.vm.$on('open', open)
+            wrapper.find('.collapse-trigger').trigger('click')
+            expect(open).toHaveBeenCalledTimes(1)
+        })
+
+        it('update open prop', () => {
+            expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
+            wrapper.setProps({ open: true })
+            expect(wrapper.vm.isOpen).toBe(true)
+            expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
+        })
     })
 
     it('should have trigger slot', () => {
@@ -78,7 +84,7 @@ describe('BCollapse', () => {
 
     it('should have default slot', () => {
         const slotDefault = '<div> Content </div>'
-        const wrapper = shallowMount(BCollapse, {
+        wrapper = shallowMount(BCollapse, {
             slots: {
                 default: slotDefault
             }
@@ -86,20 +92,8 @@ describe('BCollapse', () => {
         expect(wrapper.find('.collapse-content :first-child').html()).toBe(slotDefault)
     })
 
-    it('should emit open event', () => {
-        const wrapper = shallowMount(BCollapse, {
-            propsData: {
-                open: false
-            }
-        })
-        const open = jest.fn()
-        wrapper.vm.$on('open', open)
-        wrapper.find('.collapse-trigger').trigger('click')
-        expect(open).toHaveBeenCalledTimes(1)
-    })
-
     it('should emit close event', () => {
-        const wrapper = shallowMount(BCollapse, {
+        wrapper = shallowMount(BCollapse, {
             propsData: {
                 open: true
             }

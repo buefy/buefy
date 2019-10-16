@@ -1,5 +1,10 @@
 $checkbox-active-background-color: $primary !default;
+$checkbox-background-color: transparent !default;
+$checkbox-border-color: $grey !default;
+$checkbox-border-radius: $radius !default;
+$checkbox-border-width: 2px !default;
 $checkbox-checkmark-color: $primary-invert !default;
+$checkbox-size: 1.25em !default;
 
 .b-checkbox {
     &.checkbox {
@@ -17,12 +22,13 @@ $checkbox-checkmark-color: $primary-invert !default;
             outline: none;
             z-index: -1;
             + .check {
-                width: 1.25em;
-                height: 1.25em;
+                width: $checkbox-size;
+                height: $checkbox-size;
                 flex-shrink: 0;
-                border-radius: $radius;
-                border: 2px solid $grey;
+                border-radius: $checkbox-border-radius;
+                border: $checkbox-border-width solid $checkbox-border-color;
                 transition: background $speed-slow $easing;
+                background: $checkbox-background-color
             }
             &:checked + .check {
                 background: $checkbox-active-background-color url(checkmark($checkbox-checkmark-color)) no-repeat center center;
@@ -65,6 +71,9 @@ $checkbox-checkmark-color: $primary-invert !default;
         }
         .control-label {
             padding-left: 0.5em;
+        }
+        &.button {
+            display: flex;
         }
         &[disabled] {
             opacity: 0.5;

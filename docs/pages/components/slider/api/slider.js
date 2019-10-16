@@ -86,11 +86,18 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>custom-formatter</code>',
+                description: 'Function to format the tooltip label for display',
+                type: 'Function',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-label</code>',
                 description: 'Accessibility label for the thumbs',
                 type: 'String, Array',
                 values: '—',
-                default: '-'
+                default: '—'
             }
         ],
         slots: [
@@ -110,6 +117,21 @@ export default [
                 name: '<code>change</code>',
                 description: 'Triggers when value is changed after user interaction',
                 parameters: '<code>value: Number|Array</code>'
+            },
+            {
+                name: '<code>dragstart</code>',
+                description: 'Triggers when thumb is pressed',
+                parameters: '—'
+            },
+            {
+                name: '<code>dragend</code>',
+                description: 'Triggers when thumb is released',
+                parameters: '—'
+            },
+            {
+                name: '<code>dragging</code>',
+                description: 'Triggers when thumb is being dragged',
+                parameters: '<code>value: Number|Array</code>'
             }
         ]
     },
@@ -121,7 +143,7 @@ export default [
                 description: 'The value that the tick represents',
                 type: 'Number',
                 values: '—',
-                default: '-'
+                default: '—'
             }
         ],
         slots: [

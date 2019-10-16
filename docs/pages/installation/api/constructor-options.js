@@ -21,6 +21,22 @@ export default [
                 default: '<code></code>'
             },
             {
+                name: '<code>defaultIconPrev</code>',
+                description: `Icon used internally for prev. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-left</code>'
+            },
+            {
+                name: '<code>defaultIconNext</code>',
+                description: `Icon used internally for next. —
+                    Used in Datepicker, Pagination and Steps for example`,
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>defaultContainerElement</code>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
@@ -225,6 +241,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>defaultTaginputHasCounter</code>',
+                description: 'Default taginput <code>has-counter</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>defaultUseHtml5Validation</code>',
                 description: 'Default form components <code>use-html5-validation</code> attribute',
                 type: 'Boolean',
@@ -255,6 +278,48 @@ export default [
             {
                 name: '<code>defaultDatepickerNearbySelectableMonthDays</code>',
                 description: 'It allows to select/unselect nearby month days',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultDatepickerShowWeekNumber</code>',
+                description: 'It allows to display week number',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>customIconPacks</code>',
+                description: 'Allows you to define your own custom icon pack to be used in Buefy.',
+                type: 'Object',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>defaultClockpickerHoursLabel</code>',
+                description: `Default clockpicker <code>hours-label</code> attribute`,
+                type: 'String',
+                values: '—',
+                default: `<code>Hours</code>`
+            },
+            {
+                name: '<code>defaultClockpickerMinutesLabel</code>',
+                description: `Default clockpicker <code>minutes-label</code> attribute`,
+                type: 'String',
+                values: '—',
+                default: `<code>Min</code>`
+            },
+            {
+                name: '<code>defaultTrapFocus</code>',
+                description: 'Default config to trap focus inside components (Dialog, Dropdown and Modal).',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultButtonRounded</code>',
+                description: 'Default config to to make all buttons rounded.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
