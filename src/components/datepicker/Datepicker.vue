@@ -504,7 +504,8 @@ export default {
         */
         onChange(value) {
             const date = this.dateParser(value, this)
-            if (date && !isNaN(date)) {
+            if (date && (!isNaN(date) ||
+                (Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1])))) {
                 this.computedValue = date
             } else {
                 // Force refresh input value when not valid date
