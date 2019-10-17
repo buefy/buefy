@@ -1,3 +1,6 @@
+$icon-svg-width: 1.5rem !default;
+$icon-svg-height: 1.5rem !default;
+
 .icon {
     @include unselectable;
     cursor: inherit;
@@ -7,7 +10,7 @@
         stroke-width: 0;
         stroke: currentColor;
         pointer-events: none;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: $icon-svg-width;
+        height: $icon-svg-height;
     }
 }
