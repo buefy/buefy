@@ -63,7 +63,8 @@
                                 'is-sortable': column.sortable
                             }"
                             :style="{
-                                width: column.width === undefined ? null : column.width + 'px'
+                                width: column.width === undefined ? null :
+                                (isNaN(column.width) ? column.width : column.width + 'px')
                             }"
                             @click.stop="sort(column)">
                             <div
