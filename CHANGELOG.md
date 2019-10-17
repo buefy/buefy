@@ -21,6 +21,7 @@
 * Fix #1834 datepicker on ios mobile (thanks @bohdan-prylutskyi)
 * Fix #1875 datepicker disabled style
 * Fix #1883 ``date-parser`` function when range 
+* Fix taginput style when maxtags and using ``label-position`` prop on field
 
 ## 0.8.5
 
