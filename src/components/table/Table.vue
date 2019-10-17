@@ -64,7 +64,7 @@
                             }"
                             :style="{
                                 width: column.width === undefined ? null :
-                                (isNaN(parseInt(column.width)) ? column.width : column.width + 'px')
+                                (isNaN(column.width) ? column.width : column.width + 'px')
                             }"
                             @click.stop="sort(column)">
                             <div
