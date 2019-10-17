@@ -1,5 +1,9 @@
 $snackbar-background-color: $dark !default;
 $snackbar-color: $dark-invert !default;
+$snackbar-border-radius: $radius !default;
+
+$toast-border-radius: 2em !default;
+$toast-opacity: 0.92 !default;
 
 .notices {
     position: fixed;
@@ -18,10 +22,10 @@ $snackbar-color: $dark-invert !default;
         margin: 0.5em 0;
         text-align: center;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-        border-radius: 2em;
+        border-radius: $toast-border-radius;
         padding: 0.75em 1.5em;
         pointer-events: auto;
-        opacity: 0.92;
+        opacity: $toast-opacity;
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
             $color-invert: nth($pair, 2);
@@ -38,7 +42,7 @@ $snackbar-color: $dark-invert !default;
         animation-duration: $speed-slow;
         margin: 0.5em 0;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-        border-radius: $radius;
+        border-radius: $snackbar-border-radius;
         pointer-events: auto;
         background: $snackbar-background-color;
         color: $snackbar-color;
@@ -100,7 +104,7 @@ $snackbar-color: $dark-invert !default;
             align-self: flex-start;
         }
         &.is-toast {
-            opacity: 0.92;
+            opacity: $toast-opacity;
         }
     }
 
