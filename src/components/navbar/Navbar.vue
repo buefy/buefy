@@ -42,6 +42,10 @@ export default {
             type: Boolean,
             default: true
         },
+        mobileBurger: {
+            type: Boolean,
+            default: true
+        },
         spaced: Boolean,
         shadow: Boolean
     },
@@ -164,22 +168,24 @@ export default {
             }, [this.$slots.brand, this.genBurgerNode(createElement)])
         },
         genBurgerNode(createElement) {
-            const defaultBurgerNode = createElement('navbar-burger', {
-                props: {
-                    isOpened: this.isOpened
-                },
-                on: {
-                    click: this.toggleActive
-                }
-            })
-
-            const hasBurgerSlot = !!this.$scopedSlots.burger
-            return hasBurgerSlot
-                ? this.$scopedSlots.burger({
-                    isOpened: this.isOpened,
-                    toggleActive: this.toggleActive
+            if (this.mobileBurger) {
+                const defaultBurgerNode = createElement('navbar-burger', {
+                    props: {
+                        isOpened: this.isOpened
+                    },
+                    on: {
+                        click: this.toggleActive
+                    }
                 })
-                : defaultBurgerNode
+
+                const hasBurgerSlot = !!this.$scopedSlots.burger
+                return hasBurgerSlot
+                    ? this.$scopedSlots.burger({
+                        isOpened: this.isOpened,
+                        toggleActive: this.toggleActive
+                    })
+                    : defaultBurgerNode
+            }
         },
         genNavbarSlotsNode(createElement) {
             return createElement('div', {
