@@ -112,6 +112,7 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
+<<<<<<< HEAD
                             :style="{
                                 width: column.width === undefined
                                     ? null
@@ -122,6 +123,15 @@
                                       v-model="filters[column.field]"
                                       :type="column.numeric ? 'number' : 'text'" />
                                 </template>
+=======
+                            :style="{ width: column.width === undefined ? null : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            <div class="th-wrap">
+                              <template v-if="column.searchable">
+                                <b-input
+                                   v-model="filters[column.field]"
+                                   :type="column.numeric ? 'number' : 'text'" />
+                              </template>
+>>>>>>> 07213d149bb631a74fc30a8dc3258f889ad20de7
                             </div>
                         </th>
                     </tr>
