@@ -114,13 +114,13 @@
                             :key="index"
                             :style="{
                                 width: column.width === undefined
-                            ? null
-                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                                    ? null
+                                    : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
                                     <b-input
-                                    v-model="filters[column.field]"
-                                    :type="column.numeric ? 'number' : 'text'" />
+                                        v-model="filters[column.field]"
+                                        :type="column.numeric ? 'number' : 'text'" />
                                 </template>
                             </div>
                         </th>
