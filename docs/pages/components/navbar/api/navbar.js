@@ -55,6 +55,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>mobile-burger</code>',
+                description: 'Use to display or not the burger on mobile resolution.',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>spaced</code>',
                 description: 'Sets Top and Bottom paddings with 1rem, Left and Right paddings with 2rem',
                 type: 'Boolean',
