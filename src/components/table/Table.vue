@@ -110,18 +110,18 @@
                     </tr>
                     <tr v-if="searchable && hasSearchablenewColumns">
                         <th
-                            v-for="(column, index) in newColumns"
-                            v-if="(column.visible || column.visible === undefined)"
+                            v-for="(column, index) in visibleColumns"
                             :key="index"
-                            :style="{ width: column.width + 'px' }">
+                            :style="{
+                                width: column.width === undefined
+                                    ? null
+                                    : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
-                                <div v-if="column.searchable">
-                                    <b-field>
-                                        <b-input
-                                            v-model="filters[column.field]"
-                                            :type="column.numeric ? 'number' : 'text'" />
-                                    </b-field>
-                                </div>
+                                <template v-if="column.searchable">
+                                    <b-input
+                                      v-model="filters[column.field]"
+                                      :type="column.numeric ? 'number' : 'text'" />
+                                </template>
                             </div>
                         </th>
                     </tr>
@@ -276,12 +276,11 @@
 
 <script>
 import { getValueByPath, indexOf } from '../../utils/helpers'
-
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
+import Input from '../input/Input'
 import Pagination from '../pagination/Pagination'
 import SlotComponent from '../../utils/SlotComponent'
-
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
 
@@ -290,6 +289,7 @@ export default {
     components: {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
+        [Input.name]: Input,
         [Pagination.name]: Pagination,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
