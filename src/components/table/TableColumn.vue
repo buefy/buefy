@@ -18,6 +18,7 @@ export default {
         width: [Number, String],
         numeric: Boolean,
         centered: Boolean,
+        searchable: Boolean,
         sortable: Boolean,
         visible: {
             type: Boolean,

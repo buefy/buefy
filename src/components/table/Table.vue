@@ -109,6 +109,23 @@
                             </template>
                         </th>
                     </tr>
+                    <tr v-if="searchable && hasSearchablenewColumns">
+                        <th
+                            v-for="(column, index) in visibleColumns"
+                            :key="index"
+                            :style="{
+                                width: column.width === undefined
+                                    ? null
+                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            <div class="th-wrap">
+                                <template v-if="column.searchable">
+                                    <b-input
+                                        v-model="filters[column.field]"
+                                        :type="column.numeric ? 'number' : 'text'" />
+                                </template>
+                            </div>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
@@ -260,12 +277,11 @@
 
 <script>
 import { getValueByPath, indexOf } from '../../utils/helpers'
-
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
+import Input from '../input/Input'
 import Pagination from '../pagination/Pagination'
 import SlotComponent from '../../utils/SlotComponent'
-
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
 
@@ -274,6 +290,7 @@ export default {
     components: {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
+        [Input.name]: Input,
         [Pagination.name]: Pagination,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
@@ -295,6 +312,7 @@ export default {
         loading: Boolean,
         detailed: Boolean,
         checkable: Boolean,
+        searchable: Boolean,
         headerCheckable: {
             type: Boolean,
             default: true
@@ -412,6 +430,7 @@ export default {
             newCurrentPage: this.currentPage,
             currentSortColumn: {},
             isAsc: true,
+            filters: {},
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -495,6 +514,15 @@ export default {
         },
 
         /**
+        * Check if has any searchable column.
+        */
+        hasSearchablenewColumns() {
+            return this.newColumns.some((column) => {
+                return column.searchable
+            })
+        },
+
+        /**
         * Return total column count based if it's checkable or expanded
         */
         columnCount() {
@@ -558,6 +586,14 @@ export default {
 
         newColumns(value) {
             this.checkSort()
+        },
+
+        filters: {
+            handler(value) {
+                this.newData = this.data.filter(
+                    (row) => this.isRowFiltered(row))
+            },
+            deep: true
         },
 
         /**
@@ -762,6 +798,23 @@ export default {
 
         isActiveCustomDetailRow(row) {
             return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
+        },
+
+        isRowFiltered(row) {
+            for (const key in this.filters) {
+                // remove key if empty
+                if (!this.filters[key]) {
+                    delete this.filters[key]
+                    return true
+                }
+                if (Number.isInteger(row[key])) {
+                    if (row[key] !== Number(this.filters[key])) return false
+                } else {
+                    const re = new RegExp(this.filters[key])
+                    if (!row[key].match(re)) return false
+                }
+            }
+            return true
         },
 
         /**
