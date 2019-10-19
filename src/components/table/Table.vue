@@ -595,9 +595,9 @@ export default {
         },
 
         /**
-            * When the user wants to control the detailed rows via props.
-            * Or wants to open the details of certain row with the router for example.
-            */
+        * When the user wants to control the detailed rows via props.
+        * Or wants to open the details of certain row with the router for example.
+        */
         openedDetailed(expandedRows) {
             this.visibleDetailRows = expandedRows
         },

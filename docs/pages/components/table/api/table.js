@@ -529,7 +529,14 @@ export default [
                 type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
-            }
+            },
+            {
+                name: '<code>searcable</code>',
+                description: 'Add a input below the header to filter data',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         slots: [
             {
