@@ -28,9 +28,6 @@ describe('BTable', () => {
 
     it('has the filter row visible when searchable', () => {
         wrapper.setProps({
-            searchable: 'true'
-        })
-        wrapper.setProps({
             columns: [
                 {
                     field: 'id',

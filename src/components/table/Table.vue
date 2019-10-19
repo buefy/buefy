@@ -109,13 +109,12 @@
                             </template>
                         </th>
                     </tr>
-                    <tr v-if="searchable && hasSearchablenewColumns">
+                    <tr v-if="hasSearchablenewColumns">
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
                             :style="{
-                                width: column.width === undefined
-                                    ? null
+                                width: column.width === undefined ? null
                             : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
@@ -312,7 +311,6 @@ export default {
         loading: Boolean,
         detailed: Boolean,
         checkable: Boolean,
-        searchable: Boolean,
         headerCheckable: {
             type: Boolean,
             default: true

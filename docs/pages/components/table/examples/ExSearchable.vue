@@ -2,8 +2,7 @@
     <section>
         <b-table
             :data="data"
-            :columns="columns"
-            searchable>
+            :columns="columns">
         </b-table>
     </section>
 </template>
