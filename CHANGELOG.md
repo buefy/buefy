@@ -5,11 +5,14 @@
 ### New features
 
 * **New component: Datetimepicker**, [see docs](https://buefy.org/documentation/datetimepicker)
+* Add ``searchable`` prop to table column (thanks @robertmarney, @tonystonee, @quadra-diffusion)
 * Add ``expanded`` prop to radio button (thanks @saaso)
 * Add ``expanded`` prop to checkbox button (thanks @saaso)
 * Add ``multiple`` prop to datepicker (thanks @jamenamcinteer)
 * Add ``vertical`` prop to tabs (thanks @service-paradis)
 * Add ``defaultButtonRounded`` constructor option (thanks @bohdan-prylutskyi)
+* Add ``mobile-burger`` prop to navbar (thanks @service-paradis)
+* Add ``click`` event to navbar item
 * Add a slot for overriding navigation to steps (thanks @service-paradis)
 * Add more customization variables to checkbox (thanks @HugoHeneault)
 * Add new SCSS variables to toast, snackbar and icon (thanks @service-paradis)
