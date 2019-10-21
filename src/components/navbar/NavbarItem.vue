@@ -6,9 +6,7 @@
             'is-active': active
         }"
         v-bind="$attrs"
-        @click="$emit('click', $event)"
-        @click.native="$emit('click', $event)"
-    >
+        v-on="$listeners">
         <slot/>
     </component>
 </template>
