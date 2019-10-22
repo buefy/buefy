@@ -12,7 +12,8 @@
 * Add ``vertical`` prop to tabs (thanks @service-paradis)
 * Add ``defaultButtonRounded`` constructor option (thanks @bohdan-prylutskyi)
 * Add ``mobile-burger`` prop to navbar (thanks @service-paradis)
-* Add ``click`` event to navbar item
+* Add ``v-on:listeners`` to navbar item
+* Add ``expanded`` prop to button (thanks @service-paradis)
 * Add a slot for overriding navigation to steps (thanks @service-paradis)
 * Add more customization variables to checkbox (thanks @HugoHeneault)
 * Add new SCSS variables to toast, snackbar and icon (thanks @service-paradis)
