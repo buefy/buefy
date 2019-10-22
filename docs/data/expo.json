@@ -1,5 +1,17 @@
 [
     {
+        "title": "EL Catre",
+        "date": "2019-10-22",
+        "img": "elcatre.jpg",
+        "url": "https://elcatre.com/"
+    },
+    {
+        "title": "Frenl",
+        "date": "2019-10-20",
+        "img": "frenl.png",
+        "url": "https://www.frenl.com"
+    },
+    {
         "title": "Kulap",
         "date": "2019-09-04",
         "img": "kulap.png",
