@@ -531,7 +531,7 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>searcable</code>',
+                name: '<code>searchable</code>',
                 description: 'Add a input below the header to filter data',
                 type: 'Boolean',
                 values: '—',
