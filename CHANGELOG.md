@@ -1,7 +1,53 @@
 # Buefy Changelog
 
+## 0.8.6
+
+### New features
+
+* **New component: Datetimepicker**, [see docs](https://buefy.org/documentation/datetimepicker)
+* Add ``searchable`` prop to table column (thanks @robertmarney, @tonystonee, @quadra-diffusion)
+* Add ``expanded`` prop to radio button (thanks @saaso)
+* Add ``expanded`` prop to checkbox button (thanks @saaso)
+* Add ``multiple`` prop to datepicker (thanks @jamenamcinteer)
+* Add ``vertical`` prop to tabs (thanks @service-paradis)
+* Add ``defaultButtonRounded`` constructor option (thanks @bohdan-prylutskyi)
+* Add ``mobile-burger`` prop to navbar (thanks @service-paradis)
+* Add ``v-on:listeners`` to navbar item
+* Add ``expanded`` prop to button (thanks @service-paradis)
+* Add a slot for overriding navigation to steps (thanks @service-paradis)
+* Add more customization variables to checkbox (thanks @HugoHeneault)
+* Add new SCSS variables to toast, snackbar and icon (thanks @service-paradis)
+* Improve accessibility to modal (thanks @service-paradis)
+* Enable to set a custom width (%, ...) to table column (thanks @druppy)
+
+### Fixes
+
+* Fix #1834 datepicker on ios mobile (thanks @bohdan-prylutskyi)
+* Fix #1875 datepicker disabled style
+* Fix #1883 ``date-parser`` function when range 
+* Fix taginput style when maxtags and using ``label-position`` prop on field
+
+## 0.8.5
+
+### New features
+
+* **New component: Rate**, [see docs](https://buefy.org/documentation/rate) (thanks @apolokaklab)
+* #1706 Add ``trap-focus`` prop to modal, dialog and dropdown (thanks @service-paradis)
+* #1775 Add ``expanded`` prop to dropdown
+* Add ``custom-formatter`` prop to slider (thanks @yxngl)
+* Add ``position`` prop to collapse
+
+### Fixes
+
+* Fix #1286 taginput close when autocomplete (thanks @wrabit)
+* Fix #1784 navbar navigation on mobile reverting #1743
+* Fix #1780 alignment using h1 tag on steps (thanks @service-paradis)
+* Fix #1786 icons warning for vue-fontawesome (thanks @service-paradis)
+* Fix #1814 set ``icon-pack`` pagination using table (thanks @service-paradis)
+* Fix #1821 datepicker reset using empty array when ``range``
+
 ## 0.8.4
- 
+
 ### New features
 
 * Add style props (``is-boxed``, etc) to navbar and navbarcomponent

@@ -6,7 +6,7 @@
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
     <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://codecov.io/gh/buefy/buefy"><img src="https://img.shields.io/codecov/c/github/buefy/buefy.svg?style=flat-square" /></a>
-    <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/l/buefy.svg" /></a>
+    <a href="https://github.com/buefy/buefy/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/buefy.svg" /></a>
     <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" /></a>
     <a href="https://buefy.org"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
 </p>
@@ -54,21 +54,12 @@ or Individual Components
 ```javascript
 
 import Vue from 'vue'
-import { Field, Input } from 'buefy/dist/components'
+import { Field, Input } from 'buefy'
 import 'buefy/dist/buefy.css'
 
 Vue.use(Field)
 Vue.use(Input)
 
-or
-
-import Vue from 'vue'
-import Field from 'buefy/dist/components/field'
-import Input from 'buefy/dist/components/input'
-import 'buefy/dist/buefy.css'
-
-Vue.use(Field)
-Vue.use(Input)
 ```
 
 ### 3 Include Material Design Icons

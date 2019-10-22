@@ -1,20 +1,3 @@
-<template>
-    <div class="collapse">
-        <div class="collapse-trigger" @click="toggle">
-            <slot name="trigger" :open="isOpen" />
-        </div>
-        <transition :name="animation">
-            <div
-                :id="ariaId"
-                :aria-expanded="isOpen"
-                class="collapse-content"
-                v-show="isOpen">
-                <slot/>
-            </div>
-        </transition>
-    </div>
-</template>
-
 <script>
 export default {
     name: 'BCollapse',
@@ -30,6 +13,16 @@ export default {
         ariaId: {
             type: String,
             default: ''
+        },
+        position: {
+            type: String,
+            default: 'is-top',
+            validator(value) {
+                return [
+                    'is-top',
+                    'is-bottom'
+                ].indexOf(value) > -1
+            }
         }
     },
     data() {
@@ -51,6 +44,26 @@ export default {
             this.$emit('update:open', this.isOpen)
             this.$emit(this.isOpen ? 'open' : 'close')
         }
+    },
+    render(createElement) {
+        const trigger = createElement('div', {
+            staticClass: 'collapse-trigger', on: { click: this.toggle }
+        }, this.$scopedSlots.trigger
+            ? [this.$scopedSlots.trigger({ open: this.isOpen })]
+            : [this.$slots.trigger]
+        )
+        const content = createElement('transition', { props: { name: this.animation } }, [
+            createElement('div', {
+                staticClass: 'collapse-content',
+                attrs: { 'id': this.ariaId, 'aria-expanded': this.isOpen },
+                directives: [{
+                    name: 'show',
+                    value: this.isOpen
+                }]
+            }, this.$slots.default)
+        ])
+        return createElement('div', { staticClass: 'collapse' },
+            this.position === 'is-top' ? [trigger, content] : [content, trigger])
     }
 }
 </script>

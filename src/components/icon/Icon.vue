@@ -80,7 +80,7 @@ export default {
                     return this.iconConfig.sizes.default
                 }
             }
-            return ''
+            return null
         },
         useIconComponent() {
             return this.component || config.defaultIconComponent

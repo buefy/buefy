@@ -4,6 +4,7 @@ import Checkbox from './checkbox'
 import Collapse from './collapse'
 import Clockpicker from './clockpicker'
 import Datepicker from './datepicker'
+import Datetimepicker from './datetimepicker'
 import Dialog from './dialog'
 import Dropdown from './dropdown'
 import Field from './field'
@@ -19,6 +20,7 @@ import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Progress from './progress'
 import Radio from './radio'
+import Rate from './rate'
 import Select from './select'
 import Slider from './slider'
 import Snackbar from './snackbar'
@@ -40,6 +42,7 @@ export {
     Clockpicker,
     Collapse,
     Datepicker,
+    Datetimepicker,
     Dialog,
     Dropdown,
     Field,
@@ -55,6 +58,7 @@ export {
     Pagination,
     Progress,
     Radio,
+    Rate,
     Select,
     Slider,
     Snackbar,

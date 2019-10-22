@@ -8,6 +8,7 @@
             'is-rounded': rounded,
             'is-loading': loading,
             'is-outlined': outlined,
+            'is-fullwidth': expanded,
             'is-inverted': inverted,
             'is-focused': focused,
             'is-active': active,
@@ -37,6 +38,7 @@
 
 <script>
 import Icon from '../icon/Icon'
+import config from '../../utils/config'
 
 export default {
     name: 'BButton',
@@ -51,9 +53,15 @@ export default {
         iconPack: String,
         iconLeft: String,
         iconRight: String,
-        rounded: Boolean,
+        rounded: {
+            type: Boolean,
+            default: () => {
+                return config.defaultButtonRounded
+            }
+        },
         loading: Boolean,
         outlined: Boolean,
+        expanded: Boolean,
         inverted: Boolean,
         focused: Boolean,
         active: Boolean,

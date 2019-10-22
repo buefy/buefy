@@ -6,7 +6,7 @@
             'is-active': active
         }"
         v-bind="$attrs"
-    >
+        v-on="$listeners">
         <slot/>
     </component>
 </template>

@@ -233,6 +233,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>multiple</code>',
+                description: 'Flag to allow choosing multiple dates',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -253,11 +260,6 @@ export default [
             }
         ],
         events: [
-            {
-                name: '<code>input</code>',
-                description: 'Triggers when value is changed',
-                parameters: '<code>value: Date</code>'
-            },
             {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',

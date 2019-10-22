@@ -6,6 +6,9 @@
             :is-asc="isAsc"
             :columns="newColumns"
             :placeholder="mobileSortPlaceholder"
+            :icon-pack="iconPack"
+            :sort-icon="sortIcon"
+            :sort-icon-size="sortIconSize"
             @sort="(column) => sort(column)"
         />
 
@@ -60,7 +63,8 @@
                                 'is-sortable': column.sortable
                             }"
                             :style="{
-                                width: column.width === undefined ? null : column.width + 'px'
+                                width: column.width === undefined ? null :
+                                (isNaN(column.width) ? column.width : column.width + 'px')
                             }"
                             @click.stop="sort(column)">
                             <div
@@ -103,6 +107,22 @@
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
                             </template>
+                        </th>
+                    </tr>
+                    <tr v-if="hasSearchablenewColumns">
+                        <th
+                            v-for="(column, index) in visibleColumns"
+                            :key="index"
+                            :style="{
+                                width: column.width === undefined ? null
+                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            <div class="th-wrap">
+                                <template v-if="column.searchable">
+                                    <b-input
+                                        v-model="filters[column.field]"
+                                        :type="column.numeric ? 'number' : 'text'" />
+                                </template>
+                            </div>
                         </th>
                     </tr>
                 </thead>
@@ -148,8 +168,7 @@
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @change.native="checkRow(row)"
-                                    @click.native.stop
+                                    @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
 
@@ -180,8 +199,7 @@
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @change.native="checkRow(row)"
-                                    @click.native.stop
+                                    @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
                         </tr>
@@ -256,12 +274,11 @@
 
 <script>
 import { getValueByPath, indexOf } from '../../utils/helpers'
-
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
+import Input from '../input/Input'
 import Pagination from '../pagination/Pagination'
 import SlotComponent from '../../utils/SlotComponent'
-
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
 
@@ -270,6 +287,7 @@ export default {
     components: {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
+        [Input.name]: Input,
         [Pagination.name]: Pagination,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
@@ -405,9 +423,11 @@ export default {
             newData: this.data,
             newDataTotal: this.backendPagination ? this.total : this.data.length,
             newCheckedRows: [...this.checkedRows],
+            lastCheckedRowIndex: null,
             newCurrentPage: this.currentPage,
             currentSortColumn: {},
             isAsc: true,
+            filters: {},
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -491,6 +511,15 @@ export default {
         },
 
         /**
+        * Check if has any searchable column.
+        */
+        hasSearchablenewColumns() {
+            return this.newColumns.some((column) => {
+                return column.searchable
+            })
+        },
+
+        /**
         * Return total column count based if it's checkable or expanded
         */
         columnCount() {
@@ -556,10 +585,18 @@ export default {
             this.checkSort()
         },
 
+        filters: {
+            handler(value) {
+                this.newData = this.data.filter(
+                    (row) => this.isRowFiltered(row))
+            },
+            deep: true
+        },
+
         /**
-            * When the user wants to control the detailed rows via props.
-            * Or wants to open the details of certain row with the router for example.
-            */
+        * When the user wants to control the detailed rows via props.
+        * Or wants to open the details of certain row with the router for example.
+        */
         openedDetailed(expandedRows) {
             this.visibleDetailRows = expandedRows
         },
@@ -677,10 +714,14 @@ export default {
 
         /**
         * Row checkbox click listener.
-        * Add or remove a single row.
         */
-        checkRow(row) {
-            if (!this.isRowChecked(row)) {
+        checkRow(row, index, event) {
+            const lastIndex = this.lastCheckedRowIndex
+            this.lastCheckedRowIndex = index
+
+            if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
+                this.shiftCheckRow(row, index, lastIndex)
+            } else if (!this.isRowChecked(row)) {
                 this.newCheckedRows.push(row)
             } else {
                 this.removeCheckedRow(row)
@@ -690,6 +731,27 @@ export default {
 
             // Emit checked rows to update user variable
             this.$emit('update:checkedRows', this.newCheckedRows)
+        },
+
+        /**
+         * Check row when shift is pressed.
+         */
+        shiftCheckRow(row, index, lastCheckedRowIndex) {
+            // Get the subset of the list between the two indicies
+            const subset = this.visibleData.slice(
+                Math.min(index, lastCheckedRowIndex),
+                Math.max(index, lastCheckedRowIndex) + 1
+            )
+
+            // Determine the operation based on the state of the clicked checkbox
+            const shouldCheck = !this.isRowChecked(row)
+
+            subset.forEach((item) => {
+                this.removeCheckedRow(item)
+                if (shouldCheck && this.isRowCheckable(item)) {
+                    this.newCheckedRows.push(item)
+                }
+            })
         },
 
         /**
@@ -758,6 +820,23 @@ export default {
 
         isActiveCustomDetailRow(row) {
             return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
+        },
+
+        isRowFiltered(row) {
+            for (const key in this.filters) {
+                // remove key if empty
+                if (!this.filters[key]) {
+                    delete this.filters[key]
+                    return true
+                }
+                if (Number.isInteger(row[key])) {
+                    if (row[key] !== Number(this.filters[key])) return false
+                } else {
+                    const re = new RegExp(this.filters[key])
+                    if (!row[key].match(re)) return false
+                }
+            }
+            return true
         },
 
         /**

@@ -69,6 +69,7 @@ export declare type BuefyConfig = {
     customIconPacks?: any;
     defaultClockpickerHoursLabel?: string;
     defaultClockpickerMinutesLabel?: string;
+    defaultTrapFocus?: boolean;
 };
 
 declare const _default: {

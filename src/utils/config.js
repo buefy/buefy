@@ -39,9 +39,11 @@ let config = {
     defaultDatepickerNearbyMonthDays: true,
     defaultDatepickerNearbySelectableMonthDays: false,
     defaultDatepickerShowWeekNumber: false,
+    defaultTrapFocus: false,
+    defaultButtonRounded: false,
 
     customIconPacks: null
-}
+} // TODO defaultTrapFocus to true in the next breaking change
 
 export default config
 

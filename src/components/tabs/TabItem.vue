@@ -63,7 +63,7 @@ export default {
                 name: 'show',
                 value: this.isActive && this.visible
             }],
-            attrs: { 'class': 'tab-item' }
+            class: 'tab-item'
         }, this.$slots.default)
         // check animated prop
         if (this.$parent.animated) {

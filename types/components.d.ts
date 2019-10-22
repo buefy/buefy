@@ -77,6 +77,21 @@ export declare type DialogConfig = {
      * Focus on confirm or cancel button (when dialog is not prompt)
      */
     focusOn?: 'confirm' | 'cancel';
+
+    /**
+     * Trap focus inside the dialog.
+     */
+    trapFocus?: boolean;
+
+    /**
+     * Role attribute to be passed to modal container for better accessibility.
+     */
+    ariaRole?: 'dialog' | 'alertdialog';
+
+   /**
+    * Improve accessiblity when enabled.
+    */
+   ariaModal?: boolean;
 }
 
 type PromptDialogConfig = DialogConfig & {
@@ -117,10 +132,25 @@ declare type ModalConfig = {
     canCancel?: boolean | Array<any>;
     onCancel?: () => any;
     scroll?: 'clip' | 'keep';
+
+    /**
+     * Trap focus inside the dialog.
+     */
+    trapFocus?: boolean;
+
+    /**
+     * Role attribute to be passed to modal container for better accessibility.
+     */
+    ariaRole?: 'dialog' | 'alertdialog';
+
+    /**
+     * Improve accessiblity when enabled.
+     */
+    ariaModal?: boolean;
 }
 
 export declare const ModalProgrammatic: {
-    open: (params: ModalConfig | string) => any;
+    open: (params: ModalConfig | string) => { close: () => any };
 }
 
 export declare type SnackbarConfig = {
@@ -135,7 +165,7 @@ export declare type SnackbarConfig = {
     onAction?: () => any;
 }
 export declare const SnackbarProgrammatic: {
-    open: (params: SnackbarConfig | string) => any;
+    open: (params: SnackbarConfig | string) => { close: () => any };
 }
 
 export declare type ToastConfig = {
@@ -165,7 +195,7 @@ export declare type ToastConfig = {
      * to absolute. Meaning that the container should be fixed.
      */
     container?: string;
-    
+
     /**
      * disable queue
      */
@@ -173,7 +203,7 @@ export declare type ToastConfig = {
 }
 
 export declare const ToastProgrammatic: {
-    open: (params: ToastConfig | string) => any;
+    open: (params: ToastConfig | string) => { close: () => any };
 }
 
 export declare type NotificationConfig = {
@@ -187,5 +217,5 @@ export declare type NotificationConfig = {
     hasIcon?: boolean;
 }
 export declare const NotificationProgrammatic: {
-    open: (params: NotificationConfig | string) => any;
+    open: (params: NotificationConfig | string) => { close: () => any };
 }

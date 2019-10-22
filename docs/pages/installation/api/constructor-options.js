@@ -309,7 +309,21 @@ export default [
                 type: 'String',
                 values: '—',
                 default: `<code>Min</code>`
-            }
+            },
+            {
+                name: '<code>defaultTrapFocus</code>',
+                description: 'Default config to trap focus inside components (Dialog, Dropdown and Modal).',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultButtonRounded</code>',
+                description: 'Default config to to make all buttons rounded.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ]
     }
 ]

@@ -40,6 +40,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>expanded</code>',
+                description: 'Button will be expanded (full-width)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon-left</code>',
                 description: 'Icon name to show on the left',
                 type: 'String',

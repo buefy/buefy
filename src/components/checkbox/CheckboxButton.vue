@@ -1,5 +1,5 @@
 <template>
-    <div class="control">
+    <div class="control" :class="{ 'is-expanded': expanded }">
         <label
             class="b-checkbox checkbox button"
             ref="label"
@@ -34,6 +34,7 @@ export default {
         nativeValue: [String, Number, Boolean, Function, Object, Array],
         disabled: Boolean,
         required: Boolean,
+        expanded: Boolean,
         name: String,
         size: String,
         type: {

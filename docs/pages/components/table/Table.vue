@@ -26,6 +26,10 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
+        <Example :component="ExSearchable" :code="ExSearchableCode" title="Searchable">
+            <p>You can add search filtering to rows by using the <code>searchable</code> prop.</p>
+        </Example>
+
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
             <p>You can also use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
@@ -83,7 +87,7 @@
 
         <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows">
             <p>
-                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>, 
+                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>,
                 <code>dragover</code> and <code>drop</code> events
             </p>
         </Example>
@@ -106,6 +110,9 @@
 
     import ExCheckable from './examples/ExCheckable'
     import ExCheckableCode from '!!raw-loader!./examples/ExCheckable'
+
+    import ExSearchable from './examples/ExSearchable'
+    import ExSearchableCode from '!!raw-loader!./examples/ExSearchable'
 
     import ExPaginationSort from './examples/ExPaginationSort'
     import ExPaginationSortCode from '!!raw-loader!./examples/ExPaginationSort'
@@ -142,6 +149,7 @@
                 ExSandbox,
                 ExSelection,
                 ExCheckable,
+                ExSearchable,
                 ExPaginationSort,
                 ExDetailedRow,
                 ExCustomDetailedRow,
@@ -155,6 +163,7 @@
                 ExSandboxCode,
                 ExSelectionCode,
                 ExCheckableCode,
+                ExSearchableCode,
                 ExPaginationSortCode,
                 ExDetailedRowCode,
                 ExCustomDetailedRowCode,
