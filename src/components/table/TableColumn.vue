@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { repeated, addColumn, removeColumn, cancelBeforeDestroy } from './provide'
+
 export default {
     name: 'BTableColumn',
     props: {
@@ -32,6 +34,12 @@ export default {
             newKey: this.customKey || this.label
         }
     },
+    inject: {
+        repeated,
+        addColumn,
+        removeColumn,
+        cancelBeforeDestroy
+    },
     computed: {
         rootClasses() {
             return {
@@ -42,18 +50,14 @@ export default {
     },
     methods: {
         addRefToTable() {
-            if (!this.$parent.$data._isTable) {
+            if (!this.repeated && !this.addColumn && !this.removeColumn) {
                 this.$destroy()
                 throw new Error('You should wrap bTableColumn on a bTable')
             }
 
             if (this.internal) return
 
-            // Since we're using scoped prop the columns gonna be multiplied,
-            // this finds when to stop based on the newKey property.
-            const repeated = this.$parent.newColumns.some(
-                (column) => column.newKey === this.newKey)
-            !repeated && this.$parent.newColumns.push(this)
+            !this.repeated(this.newKey) && this.addColumn(this)
         }
     },
     beforeMount() {
@@ -63,16 +67,8 @@ export default {
         this.addRefToTable()
     },
     beforeDestroy() {
-        if (this.sortable) {
-            if (!this.$parent.visibleData.length) return
-            if (this.$parent.$children.filter((vm) => vm.$options._componentTag === 'b-table-column' &&
-                vm.$data.newKey === this.newKey).length !== 1) return
-        }
-        const index = this.$parent.newColumns.map(
-            (column) => column.newKey).indexOf(this.newKey)
-        if (index >= 0) {
-            this.$parent.newColumns.splice(index, 1)
-        }
+        if (this.sortable && this.cancelBeforeDestroy) return
+        this.removeColumn(this.newKey)
     }
 }
 </script>

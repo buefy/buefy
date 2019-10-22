@@ -1,13 +1,13 @@
 import { shallowMount } from '@vue/test-utils'
 import BTableColumn from '@components/table/TableColumn'
+import { createProvideOptions } from './provide'
 
 let wrapper
 const BTable = {
     template: '<b-table-stub></b-table-stub>',
     data() {
         return {
-            newColumns: [],
-            _isTable: true
+            newColumns: []
         }
     }
 }
@@ -15,7 +15,10 @@ const BTable = {
 describe('BTableColumn', () => {
     beforeEach(() => {
         wrapper = shallowMount(BTableColumn, {
-            parentComponent: BTable
+            parentComponent: BTable,
+            provide() {
+                return createProvideOptions(this)
+            }
         })
     })
 

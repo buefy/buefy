@@ -284,6 +284,7 @@ import Pagination from '../pagination/Pagination'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
+import { createProvideOptions } from './provide'
 
 export default {
     name: 'BTable',
@@ -431,9 +432,11 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
-            firstTimeSort: true, // Used by first time initSort
-            _isTable: true // Used by TableColumn
+            firstTimeSort: true // Used by first time initSort
         }
+    },
+    provide() {
+        return createProvideOptions(this)
     },
     computed: {
         /**
