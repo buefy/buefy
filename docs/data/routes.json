@@ -5,6 +5,16 @@
         "breadTitle": "Home",
         "path": "/"
     },
+    "404": {
+        "title": "Page not found",
+        "subtitle": "Sorry, we couldn’t find the page you were looking for",
+        "breadTitle": "404",
+        "path": "/404",
+        "breadcrumb": [
+            "/",
+            "404"
+        ]
+    },
     "documentation": {
         "title": "Documentation",
         "subtitle": "Learn everything you need to start using Buefy",
