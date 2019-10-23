@@ -81,7 +81,7 @@ const router = new Router({
             ]
         },
         // Global redirect
-        // { path: '*', redirect: '' }
+        // { path: '*', redirect: '404' }
         // 404 page
         {
             path: '*',
