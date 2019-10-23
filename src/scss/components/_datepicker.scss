@@ -1,3 +1,15 @@
+$datepicker-background-color: $dropdown-content-background-color !default;
+$datepicker-radius: $dropdown-content-radius !default;
+$datepicker-shadow: $dropdown-content-shadow !default;
+$datepicker-header-color: $grey !default;
+$datepicker-today-border: solid 1px rgba($primary, 0.5) !default;
+$datepicker-item-color: $grey-dark !default;
+$datepicker-item-disabled-color: $grey-light !default;
+$datepicker-item-hover-color: $black !default;
+$datepicker-item-hover-background-color: $background !default;
+$datepicker-item-selected-color: $primary-invert !default;
+$datepicker-item-selected-background-color: $primary !default;
+
 .datepicker {
     font-size: 0.875rem;
     .dropdown,
@@ -9,6 +21,11 @@
         &.is-disabled {
             opacity: 1;
         }
+    }
+    .dropdown-content {
+        background-color: $datepicker-background-color;
+        border-radius: $datepicker-radius;
+        box-shadow: $datepicker-shadow;
     }
     .dropdown-item {
         font-size: inherit;
@@ -36,7 +53,7 @@
         .datepicker-header {
             display: table-header-group;
             .datepicker-cell {
-                color: $grey;
+                color: $datepicker-header-color;
                 font-weight: $weight-semibold;
             }
         }
@@ -60,17 +77,17 @@
             }
             .datepicker-cell {
                 &.is-unselectable {
-                    color: $grey-light;
+                    color: $datepicker-item-disabled-color;
                 }
                 &.is-today {
-                    border: solid 1px rgba($primary, 0.5);
+                    border: $datepicker-today-border;
                 }
                 &.is-selectable {
-                    color: $grey-dark;
+                    color: $datepicker-item-color;
                     &:hover:not(.is-selected),
                     &:focus:not(.is-selected) {
-                        background-color: $background;
-                        color: $black;
+                        background-color: $datepicker-item-hover-background-color;
+                        color: $datepicker-item-hover-color;
                         cursor: pointer;
                     }
                     &.is-within-hovered-range {
@@ -81,8 +98,8 @@
                             border-top-right-radius: 0;
                         }
                         &.is-within-hovered {
-                            background-color: $background;
-                            color: $black;
+                            background-color: $datepicker-item-hover-background-color;
+                            color: $datepicker-item-hover-color;
                             border-radius: 0;
                         }
                         &.is-last-hovered {
@@ -94,21 +111,21 @@
                     }
                 }
                 &.is-selected {
-                    background-color: $primary;
-                    color: $primary-invert;
+                    background-color: $datepicker-item-selected-background-color;
+                    color: $datepicker-item-selected-color;
                     &.is-first-selected {
-                        background-color: $primary;
-                        color: $primary-invert;
+                        background-color: $datepicker-item-selected-background-color;
+                        color: $datepicker-item-selected-color;
                         border-bottom-right-radius: 0;
                         border-top-right-radius: 0;
                     }
                     &.is-within-selected {
-                        background-color: rgba($primary, 0.5);
+                        background-color: rgba($datepicker-item-selected-background-color, 0.5);
                         border-radius: 0;
                     }
                     &.is-last-selected {
-                        background-color: $primary;
-                        color: $primary-invert;
+                        background-color: $datepicker-item-selected-background-color;
+                        color: $datepicker-item-selected-color;
                         border-bottom-left-radius: 0;
                         border-top-left-radius: 0;
                     }
@@ -159,7 +176,7 @@
                             // Currently datepicker only uses primary coloring
                             // Ensure indicator is visible when selected
                             &.is-primary {
-                                background-color: lighten($primary,15);
+                                background-color: lighten($primary, 15);
                             }
                         }
                     }
