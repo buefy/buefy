@@ -1,0 +1,95 @@
+// variables in progress
+.carousel {
+	position: relative;
+	// width: 100%;
+    .carousel-list {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        min-height: 100%;
+        &:hover .carousel-arrow.is-hovered {
+            opacity: 1;
+        }
+    }
+    .carousel-item {
+        transition: all 0.3s $easing;
+        flex: none;
+        // min-height: 200px;
+        width: 100%;
+    }
+    .carousel-arrow {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        transition: .5s $easing;
+        &.is-hovered {
+            opacity: 0;
+        }
+        .icon {
+            background: #fff;
+            color: $primary;
+            cursor: pointer;
+            border: 1px solid #fff;
+            border-radius: $radius-rounded;
+            outline: 0;
+            transition: .5s $easing;
+            &:hover {
+                border: 1px solid $primary;
+                opacity: 1;
+            }
+            &.is-left {
+              margin-right: auto;
+            }
+            &.is-right {
+                margin-left: auto;
+            }
+        }
+    }
+    .carousel-pause {
+        position: absolute;
+        top: 0;
+        right: 0.15rem;
+        z-index: 1;
+        transition: .5s $easing;
+    }
+    .carousel-indicator {
+        width: 100%;
+        padding: 0.35rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.is-inside {
+            position: absolute;
+            bottom: 0;
+            z-index: 1;
+        }
+        .indicator-item {
+            &:not(:last-child) {
+                margin-right: 0.25rem;
+            }
+            .is-dots {
+                display: block;
+                width: 10px;
+                height: 10px;
+                border: 1px solid $primary;
+                border-radius: 10px;
+                background: $white;
+                margin: 3px;
+                outline: none;
+                &.active {
+                    background: $primary;
+                    border: 1px solid $white;
+                }
+            }
+        }
+    }
+}
