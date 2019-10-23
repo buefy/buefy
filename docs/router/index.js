@@ -85,8 +85,8 @@ const router = new Router({
         // 404 page
         {
             path: '*',
-            name: '404',
-            meta: routes['404'],
+            name: 'notfound',
+            meta: routes['notfound'],
             component: NotFound
         }
     ],

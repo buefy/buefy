@@ -5,14 +5,10 @@
         "breadTitle": "Home",
         "path": "/"
     },
-    "404": {
+    "notfound": {
         "title": "Page not found",
         "subtitle": "Sorry, we couldn’t find the page you were looking for",
-        "path": "/404",
-        "breadcrumb": [
-            "/",
-            "404"
-        ]
+        "path": "/notfound"
     },
     "documentation": {
         "title": "Documentation",
