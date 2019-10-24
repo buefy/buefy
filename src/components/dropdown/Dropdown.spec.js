@@ -17,6 +17,16 @@ describe('BDropdown', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
+    it('manage props validator', () => {
+        const position = wrapper.vm.$options.props.position
+
+        expect(position.type).toBe(String)
+        expect(position.validator && position.validator('is-top')).toBeFalsy()
+        expect(position.validator && position.validator('is-top-left')).toBeTruthy()
+        expect(position.validator && position.validator('is-top-right')).toBeTruthy()
+        expect(position.validator && position.validator('is-bottom-left')).toBeTruthy()
+    })
+
     it('react accordingly when changing v-model', () => {
         const value = 'value'
         wrapper.setProps({ value })
@@ -123,6 +133,11 @@ describe('BDropdown', () => {
 
     it('manage toggle function accordingly', (done) => {
         wrapper.vm.isActive = true
+        wrapper.setProps({ disabled: true })
+        wrapper.vm.toggle()
+        expect(wrapper.vm.isActive).toBeTruthy()
+
+        wrapper.setProps({ disabled: false })
         wrapper.vm.toggle()
         expect(wrapper.vm.isActive).toBeFalsy()
 
