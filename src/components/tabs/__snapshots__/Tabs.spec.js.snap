@@ -3,7 +3,12 @@
 exports[`BTabs render correctly 1`] = `
 <div class="b-tabs">
     <nav class="tabs">
-        <ul></ul>
+        <ul>
+            <li class="is-active"><a>
+                    <!----> <span></span></a></li>
+            <li class=""><a>
+                    <!----> <span></span></a></li>
+        </ul>
     </nav>
     <section class="tab-content"></section>
 </div>

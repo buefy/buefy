@@ -29,6 +29,12 @@ describe('BCheckboxButton', () => {
         expect(valueEmitted).toContainEqual(false)
     })
 
+    it('manage checked accordingly when value is an array', () => {
+        wrapper.vm.computedValue = [1, 2, 3]
+        wrapper.setProps({ nativeValue: 1 })
+        expect(wrapper.vm.checked).toBeTruthy()
+    })
+
     it('method focus() gives focus to the input element', (done) => {
         wrapper.vm.$refs.input.focus = jest.fn()
         wrapper.vm.focus()
