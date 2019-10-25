@@ -33,12 +33,9 @@ const mergeFn = (target, source) => {
     const replaced = Object.getOwnPropertyNames(source)
         .map((prop) =>
             ({ [prop]: isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop] }))
-        .reduce((a, b) => ({ ...a, ...b }), {})
+        .reduce((a, b) => Object.assign({}, a, b))
 
-    return {
-        ...target,
-        ...replaced
-    }
+    return Object.assign({}, target, replaced)
 }
 export const merge = mergeFn
 
