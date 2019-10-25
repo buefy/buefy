@@ -79,7 +79,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>readonly</code>',
+                name: '<code>editable</code>',
                 description: 'Enable input/typing. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
