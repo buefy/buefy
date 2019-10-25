@@ -8,7 +8,7 @@
             <div
                 v-if="arrow"
                 class="carousel-arrow"
-                :class="arrowStyle">
+                :class="{'is-hovered': arrowHover}">
                 <b-icon
                     v-if="checkArrow(0)"
                     class="is-left"
@@ -27,7 +27,9 @@
                     both />
             </div>
         </div>
-        <div v-if="paused" class="carousel-pause">
+        <div
+            v-if="pauseHover && pauseInfo && isPause"
+            class="carousel-pause is-unselectable">
             <span class="tag">Pause</span>
         </div>
         <div
@@ -36,17 +38,16 @@
             :class="{'is-inside': indicatorInside}">
             <a
                 v-for="(item, index) in items"
-                @click="itemClick(index)"
                 class="indicator-item"
+                :class="{'is-active': index === activeItem}"
+                @mouseover="modeChange('hover', index)"
+                @click="modeChange('click', index)"
                 :key="index">
                 <slot
-                    v-if="$scopedSlots.indicators"
                     :i="index"
-                    :active="activeItem"
-                    name="indicators"/>
-                <span
-                    v-else
-                    :class="[{'active': index === activeItem}, indicatorStyle]"/>
+                    name="indicators">
+                    <span class="indicator-style" :class="indicatorStyle"/>
+                </slot>
             </a>
         </div>
     </div>
@@ -54,6 +55,7 @@
 
 <script>
 import Icon from '../icon/Icon'
+
 export default {
     name: 'BCarousel',
     components: {
@@ -64,15 +66,23 @@ export default {
             type: Number,
             default: 0
         },
-        animated: {
+        animate: {
             type: String,
             default: 'slide'
+        },
+        interval: {
+            type: Number,
+            default: 3500
         },
         autoplay: {
             type: Boolean,
             default: true
         },
         pauseHover: {
+            type: Boolean,
+            default: true
+        },
+        pauseInfo: {
             type: Boolean,
             default: true
         },
@@ -84,11 +94,12 @@ export default {
             type: Boolean,
             default: true
         },
-        arrowStyle: {
-            type: String,
-            default: 'is-hovered' // always
+        arrowHover: {
+            type: Boolean,
+            default: true
         },
         iconPack: String,
+        iconSize: String,
         IconPrev: {
             type: String,
             default: 'chevron-left'
@@ -97,7 +108,6 @@ export default {
             type: String,
             default: 'chevron-right'
         },
-        iconSize: String,
         indicator: {
             type: Boolean,
             default: true
@@ -106,21 +116,21 @@ export default {
             type: Boolean,
             default: true
         },
+        indicatorMode: {
+            type: String,
+            default: 'click'
+        },
         indicatorStyle: {
             type: String,
             default: 'is-dots'
-        },
-        interval: {
-            type: Number,
-            default: 3500
         }
     },
     data() {
         return {
             _isCarousel: true,
             activeItem: this.value,
+            isPause: false,
             items: [],
-            paused: false,
             timer: null
         }
     },
@@ -136,7 +146,7 @@ export default {
         * When tab-items are updated, set active one.
         */
         items() {
-            if (this.activeItem < this.items.length - 1) {
+            if (this.activeItem < this.items.length) {
                 this.items[this.activeItem].isActive = true
             }
         },
@@ -152,7 +162,7 @@ export default {
         */
         pauseTimer() {
             if (!this.pauseHover && this.autoplay) return
-            this.paused = true
+            this.isPause = true
             if (this.timer) {
                 clearInterval(this.timer)
                 this.timer = null
@@ -160,7 +170,7 @@ export default {
         },
         startTimer() {
             if (!this.autoplay || this.interval <= 0 || this.timer) return
-            this.paused = false
+            this.isPause = false
             this.timer = setInterval(() => {
                 if (this.activeItem === this.items.length - 1) {
                     this.changeTab(0)
@@ -175,7 +185,7 @@ export default {
         changeTab(newIndex) {
             if (this.activeItem === newIndex) return
 
-            if (this.activeItem < this.items.length - 1) {
+            if (this.activeItem < this.items.length) {
                 this.items[this.activeItem].deactivate(this.activeItem, newIndex)
             }
             this.items[newIndex].activate(this.activeItem, newIndex)
@@ -189,6 +199,12 @@ export default {
         itemClick(value) {
             this.$emit('input', value)
             this.changeTab(value)
+        },
+        modeChange(type, value) {
+            if (this.indicatorMode === type) {
+                this.$emit('input', value)
+                this.changeTab(value)
+            }
         },
         prev() {
             return this.activeItem === 0

@@ -3,18 +3,18 @@
         <div style="padding: 1.5rem">
             <b-field grouped group-multiline position="is-centered">
                 <b-field label="Value">
-                    <b-numberinput v-model="carousel" min="0" controls-position="compact"/>
+                    <b-numberinput v-model="carousel" min="0" :max="carousels.length - 1" controls-position="compact"/>
                 </b-field>
                 <b-field label="Interval">
                     <b-numberinput v-model="interval" min="0" controls-position="compact" step="1000"/>
                 </b-field>
-                <b-field label="Animated">
+                <b-field label="animate">
                     <b-field>
-                        <b-radio-button v-model="animated"
+                        <b-radio-button v-model="animate"
                             native-value="fade">
                             Fade
                         </b-radio-button>
-                        <b-radio-button v-model="animated"
+                        <b-radio-button v-model="animate"
                             native-value="slide">
                             Slide
                         </b-radio-button>
@@ -25,32 +25,35 @@
             <div class="columns">
                 <div class="column is-narrow">
                     <b-switch v-model="autoPlay">Autoplay</b-switch><br>
-                    <b-switch v-model="pauseHover">Pause on hover</b-switch><hr>
+                    <b-switch v-model="pauseHover">Pause on hover</b-switch>
+                    <b-switch v-model="pauseInfo">Pause info</b-switch>
+                    <hr>
                     <b-switch v-model="indicator"><strong>Indicator</strong></b-switch>
-                    <b-field horizontal label="Inside:">
-                        <b-switch v-model="indicatorInside" :disabled="!indicator"/>
+                    <b-switch v-model="indicatorInside" :disabled="!indicator">Inside</b-switch>
+                    <b-field horizontal label="Mode:">
+                        <b-field>
+                            <b-radio-button v-model="indicatorMode"
+                                native-value="click"
+                                :disabled="!indicator">
+                                <span>Click</span>
+                            </b-radio-button>
+                            <b-radio-button v-model="indicatorMode"
+                                native-value="hover"
+                                :disabled="!indicator">
+                                <span>Hover</span>
+                            </b-radio-button>
+                        </b-field>
                     </b-field>
                     <b-field horizontal label="Style:">
                         <b-field>
-                            <b-radio-button v-model="indicatorStyle"
-                                native-value="is-dots"
-                                :disabled="!indicator">
+                            <b-radio-button v-model="indicatorStyle" native-value="is-boxs" :disabled="!indicator">
+                                <span>Boxs</span>
+                            </b-radio-button>
+                            <b-radio-button v-model="indicatorStyle" native-value="is-dots" :disabled="!indicator">
                                 <span>Dots</span>
                             </b-radio-button>
-                            <b-radio-button v-model="indicatorStyle"
-                                native-value="is-stick"
-                                :disabled="!indicator">
-                                <span>Stick</span>
-                            </b-radio-button>
-                            <b-radio-button v-model="indicatorStyle"
-                                native-value="is-line"
-                                :disabled="!indicator">
-                                <span>Line</span>
-                            </b-radio-button>
-                            <b-radio-button v-model="indicatorStyle"
-                                native-value="is-box"
-                                :disabled="!indicator">
-                                <span>Box</span>
+                            <b-radio-button v-model="indicatorStyle" native-value="is-lines" :disabled="!indicator">
+                                <span>Lines</span>
                             </b-radio-button>
                         </b-field>
                     </b-field>
@@ -58,28 +61,8 @@
                 <div class="is-hidden-mobile" style="border-left: whitesmoke solid 2px"></div>
                 <div class="column">
                     <b-switch v-model="arrow"><strong>Arrow</strong></b-switch>
-                    <b-field horizontal label="Style:">
-                        <b-field>
-                            <b-radio-button v-model="arrowStyle"
-                                native-value="is-hovered"
-                                :disabled="!arrow">
-                                <span>is-hovered</span>
-                            </b-radio-button>
-                            <b-radio-button v-model="arrowStyle"
-                                native-value="is-always"
-                                :disabled="!arrow">
-                                <span>is-always</span>
-                            </b-radio-button>
-                            <b-radio-button v-model="arrowStyle"
-                                native-value="is-hidden"
-                                :disabled="!arrow">
-                                <span>is-hidden</span>
-                            </b-radio-button>
-                        </b-field>
-                        <b-field>
-                            <b-switch v-model="arrowBoth" :disabled="!arrow">Both</b-switch>
-                        </b-field>
-                    </b-field>
+                    <b-switch v-model="arrowBoth" :disabled="!arrow">Both</b-switch>
+                    <b-switch v-model="arrowHover" :disabled="!arrow">Hover</b-switch>
                     <b-field grouped group-multiline position="is-centered">
                         <b-field label="Arrow Icon Pack">
                             <b-input v-model="iconPack" placeholder="e.g. mdi, fa or other"/>
@@ -92,6 +75,9 @@
                                 <option value="is-large">is-large</option>
                             </b-select>
                         </b-field>
+                    </b-field>
+
+                    <b-field grouped group-multiline  position="is-centered">
                         <b-field label="Arrow Icon Prev">
                             <b-input v-model="iconPrev"/>
                         </b-field>
@@ -105,12 +91,13 @@
         
         <b-carousel
             v-model="carousel"
-            :animated="animated"
+            :animate="animate"
             :autoplay="autoPlay"
             :pause-hover="pauseHover"
+            :pause-info="pauseInfo"
             :arrow="arrow"
             :arrow-both="arrowBoth"
-            :arrow-style="arrowStyle"
+            :arrow-hover="arrowHover"
             :icon-pack="iconPack"
             :icon-prev="iconPrev"
             :icon-next="iconNext"
@@ -118,6 +105,7 @@
             :interval="interval"
             :indicator="indicator"
             :indicator-inside="indicatorInside"
+            :indicator-mode="indicatorMode"
             :indicator-style="indicatorStyle">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                 <section :class="`hero is-medium is-${carousel.color}`">
@@ -135,19 +123,21 @@ export default {
     data() {
         return {
             carousel: 0,
-            animated: 'slide',
+            animate: 'slide',
             autoPlay: false,
             pauseHover: false,
+            pauseInfo: false,
             arrow: true,
             arrowBoth: false,
-            arrowStyle: 'is-hovered',
+            arrowHover: false,
             interval: 3000,
             iconPack: 'mdi',
             iconPrev: 'chevron-left',
             iconNext: 'chevron-right',
-            iconSize: 'is-medium',
+            iconSize: '',
             indicator: true,
             indicatorInside: true,
+            indicatorMode: 'click',
             indicatorStyle: 'is-dots',
             carousels: [
                 { title: 'Slide 1', color: 'dark' },

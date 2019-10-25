@@ -13,6 +13,13 @@
             opacity: 1;
         }
     }
+    .carousel-pause {
+        position: absolute;
+        top: 0;
+        right: 0.15rem;
+        z-index: 1;
+        transition: .5s $easing;
+    }
     .carousel-item {
         transition: all 0.3s $easing;
         flex: none;
@@ -31,6 +38,9 @@
         margin-left: 1rem;
         margin-right: 1rem;
         transition: .5s $easing;
+        @include mobile {
+            display: none;
+        }
         &.is-hovered {
             opacity: 0;
         }
@@ -54,16 +64,9 @@
             }
         }
     }
-    .carousel-pause {
-        position: absolute;
-        top: 0;
-        right: 0.15rem;
-        z-index: 1;
-        transition: .5s $easing;
-    }
     .carousel-indicator {
         width: 100%;
-        padding: 0.35rem;
+        padding: .5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -74,20 +77,31 @@
         }
         .indicator-item {
             &:not(:last-child) {
-                margin-right: 0.25rem;
+                margin-right: .5rem;
             }
-            .is-dots {
+            &.is-active .indicator-style,
+            .indicator-style:hover {
+                background: $primary;
+                border: 1px solid $white;
+            }
+            .indicator-style {
                 display: block;
-                width: 10px;
-                height: 10px;
                 border: 1px solid $primary;
-                border-radius: 10px;
                 background: $white;
-                margin: 3px;
                 outline: none;
-                &.active {
-                    background: $primary;
-                    border: 1px solid $white;
+                transition: .3s $easing;
+                &.is-boxs {
+                    height: 10px;
+                    width: 10px;
+                }
+                &.is-dots {
+                    border-radius: 10px;
+                    height: 10px;
+                    width: 10px;
+                }
+                &.is-lines {
+                    height: 5px;
+                    width: 25px;
                 }
             }
         }
