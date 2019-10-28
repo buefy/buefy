@@ -84,7 +84,7 @@ export default [
                 description: 'Close dropdown when content is clicked',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             }
         ],
         slots: [
