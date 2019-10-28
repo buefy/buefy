@@ -78,6 +78,13 @@ export default [
                 type: 'Boolean, Array',
                 values: '<code>escape</code>, <code>outside</code>',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>close-on-click</code>',
+                description: 'Close dropdown when content is clicked',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
