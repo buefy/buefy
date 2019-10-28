@@ -589,6 +589,9 @@ export default {
             handler(value) {
                 this.newData = this.data.filter(
                     (row) => this.isRowFiltered(row))
+                if (!this.backendPagination) {
+                    this.newDataTotal = this.newData.length
+                }
             },
             deep: true
         },
