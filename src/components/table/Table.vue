@@ -834,10 +834,10 @@ export default {
                     return true
                 }
                 if (Number.isInteger(row[key])) {
-                    if (row[key] !== Number(this.filters[key])) return false
+                    if (getValueByPath(row, key) !== Number(this.filters[key])) return false
                 } else {
                     const re = new RegExp(this.filters[key])
-                    if (!row[key].match(re)) return false
+                    if (!getValueByPath(row, key).match(re)) return false
                 }
             }
             return true
