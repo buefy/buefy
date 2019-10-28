@@ -716,6 +716,7 @@ export default {
         * Row checkbox click listener.
         */
         checkRow(row, index, event) {
+            if (!this.isRowCheckable(row)) return
             const lastIndex = this.lastCheckedRowIndex
             this.lastCheckedRowIndex = index
 
