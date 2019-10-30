@@ -589,6 +589,9 @@ export default {
             handler(value) {
                 this.newData = this.data.filter(
                     (row) => this.isRowFiltered(row))
+                if (!this.backendPagination) {
+                    this.newDataTotal = this.newData.length
+                }
             },
             deep: true
         },
@@ -716,6 +719,7 @@ export default {
         * Row checkbox click listener.
         */
         checkRow(row, index, event) {
+            if (!this.isRowCheckable(row)) return
             const lastIndex = this.lastCheckedRowIndex
             this.lastCheckedRowIndex = index
 
@@ -830,10 +834,10 @@ export default {
                     return true
                 }
                 if (Number.isInteger(row[key])) {
-                    if (row[key] !== Number(this.filters[key])) return false
+                    if (getValueByPath(row, key) !== Number(this.filters[key])) return false
                 } else {
                     const re = new RegExp(this.filters[key])
-                    if (!row[key].match(re)) return false
+                    if (!getValueByPath(row, key).match(re)) return false
                 }
             }
             return true
