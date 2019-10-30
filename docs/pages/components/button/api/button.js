@@ -94,6 +94,11 @@ export default [
                 name: '<code>click</code>',
                 description: 'Triggers on click',
                 parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>[any].native</code>',
+                description: 'Listen to any event using this syntax, e.g <code>mousedown.native</code>',
+                parameters: '<code>event: $event</code>'
             }
         ]
     }
