@@ -17,6 +17,7 @@
         :icon="icon"
         :icon-pack="iconPack"
         :size="datepickerSize"
+        :placeholder="placeholder"
         :range="false"
         :disabled="disabled"
         :mobile-native="mobileNative"
