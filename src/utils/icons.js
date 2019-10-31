@@ -47,7 +47,7 @@ const getIcons = () => {
     }
 
     if (config && config.customIconPacks) {
-        icons = merge(icons, config.customIconPacks)
+        icons = merge(icons, config.customIconPacks, true)
     }
 
     return icons
