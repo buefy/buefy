@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Dialog from './Dialog'
 
+import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 function open(propsData) {
@@ -14,18 +15,20 @@ function open(propsData) {
 
 const DialogProgrammatic = {
     alert(params) {
-        let message
-        if (typeof params === 'string') message = params
-        const defaultParam = {
-            canCancel: false,
-            message
+        if (typeof params === 'string') {
+            params = {
+                message: params
+            }
         }
-        const propsData = Object.assign(defaultParam, params)
+        const defaultParam = {
+            canCancel: false
+        }
+        const propsData = merge(defaultParam, params)
         return open(propsData)
     },
     confirm(params) {
         const defaultParam = {}
-        const propsData = Object.assign(defaultParam, params)
+        const propsData = merge(defaultParam, params)
         return open(propsData)
     },
     prompt(params) {
@@ -33,7 +36,7 @@ const DialogProgrammatic = {
             hasInput: true,
             confirmText: 'Done'
         }
-        const propsData = Object.assign(defaultParam, params)
+        const propsData = merge(defaultParam, params)
         return open(propsData)
     }
 }
