@@ -10,7 +10,7 @@
                 :class="customClass"
                 class="label" >
                 <slot v-if="$slots.label" name="label"/>
-                <template v-else>{{ label }}</template>
+                <template v-else><span v-html="label"></span></template>
             </label>
         </div>
         <template v-else>
@@ -20,7 +20,7 @@
                 :class="customClass"
                 class="label">
                 <slot v-if="$slots.label" name="label"/>
-                <template v-else>{{ label }}</template>
+                <template v-else><span v-html="label"></span></template>
             </label>
         </template>
         <b-field-body
