@@ -110,6 +110,8 @@
                         </th>
                     </tr>
                     <tr v-if="hasSearchablenewColumns">
+                        <th v-if="showDetailRowIcon" width="40px"/>
+                        <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
@@ -124,6 +126,7 @@
                                 </template>
                             </div>
                         </th>
+                        <th v-if="checkable && checkboxPosition === 'right'" />
                     </tr>
                 </thead>
                 <tbody v-if="visibleData.length">
