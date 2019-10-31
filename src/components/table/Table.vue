@@ -833,7 +833,7 @@ export default {
                     delete this.filters[key]
                     return true
                 }
-                if (Number.isInteger(row[key])) {
+                if (Number.isInteger(getValueByPath(row, key))) {
                     if (getValueByPath(row, key) !== Number(this.filters[key])) return false
                 } else {
                     const re = new RegExp(this.filters[key])
