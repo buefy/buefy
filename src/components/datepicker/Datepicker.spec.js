@@ -50,14 +50,11 @@ describe('BDatepicker', () => {
             focusedDate: newDate(2018, 7, 1)
         }))
 
-        defaultProps = () => ({
+        defaultProps = {
             dayNames: config.defaultDayNames,
             monthNames: config.defaultMonthNames,
-            focused: {
-                month: config.focusedDate.getMonth(),
-                year: config.focusedDate.getFullYear()
-            }
-        })
+            focusedDate: config.focusedDate
+        }
 
         wrapper = shallowMount(BDatepicker, {
             propsData: {
@@ -196,7 +193,7 @@ describe('BDatepicker', () => {
         wrapper.setProps({
             minDate: newDate(2017, 1, 1)
         })
-        expect(wrapper.vm.listOfYears).toEqual([2022, 2021, 2020, 2019, 2018, 2017])
+        expect(wrapper.vm.listOfYears).toEqual([2021, 2020, 2019, 2018, 2017])
 
         wrapper.setProps({
             maxDate: newDate(2020, 1, 1)

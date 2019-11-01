@@ -13,7 +13,7 @@ exports[`BDatepicker render correctly 1`] = `
                     </a>
                     <div class="pagination-list">
                         <bfield-stub addons="true">
-                            <bselect-stub value="9">
+                            <bselect-stub value="6">
                                 <option value="0">
                                     January
                                 </option>
@@ -51,10 +51,7 @@ exports[`BDatepicker render correctly 1`] = `
                                     December
                                 </option>
                             </bselect-stub>
-                            <bselect-stub value="2019">
-                                <option value="2022">
-                                    2022
-                                </option>
+                            <bselect-stub value="2018">
                                 <option value="2021">
                                     2021
                                 </option>
@@ -363,6 +360,9 @@ exports[`BDatepicker render correctly 1`] = `
                                 </option>
                                 <option value="1919">
                                     1919
+                                </option>
+                                <option value="1918">
+                                    1918
                                 </option>
                             </bselect-stub>
                         </bfield-stub>
