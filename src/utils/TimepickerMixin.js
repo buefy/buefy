@@ -562,7 +562,8 @@ export default {
          */
         keyPress(event) {
             // Esc key
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+            const { key } = event
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.toggle(false)
             }
         },

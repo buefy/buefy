@@ -84,7 +84,8 @@ export default {
         */
         keyPress(event) {
             // Esc key
-            if (event.keyCode === 27) this.cancel()
+            const { key } = event
+            if (key === 'Escape' || key === 'Esc') this.cancel()
         }
     },
     created() {

@@ -30,9 +30,8 @@ export default {
          */
         keyPress(event) {
             // Esc key
-            // TODO: use code instead (because keyCode is actually deprecated)
-            // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-            if (event.keyCode === 27) {
+            const { key } = event
+            if (key === 'Escape' || key === 'Esc') {
                 this.closeMenuRecursive(this, ['NavBar'])
             }
         },

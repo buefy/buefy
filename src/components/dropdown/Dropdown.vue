@@ -241,7 +241,8 @@ export default {
          */
         keyPress(event) {
             // Esc key
-            if (this.isActive && event.keyCode === 27) {
+            const { key } = event
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) {
                 if (this.cancelOptions.indexOf('escape') < 0) return
                 this.isActive = false
             }
