@@ -13,7 +13,7 @@ exports[`BDatepicker render correctly 1`] = `
                     </a>
                     <div class="pagination-list">
                         <bfield-stub addons="true">
-                            <bselect-stub value="6">
+                            <bselect-stub value="7">
                                 <option value="0">
                                     January
                                 </option>

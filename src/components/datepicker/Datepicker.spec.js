@@ -47,7 +47,7 @@ describe('BDatepicker', () => {
             defaultMonthNames,
             defaultDayNames,
             defaultFirstDayOfWeek,
-            focusedDate: newDate(2018, 7, 1)
+            focusedDate: newDate(2018, 7, 15)
         }))
 
         defaultProps = {
