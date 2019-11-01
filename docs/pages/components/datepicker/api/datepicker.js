@@ -261,6 +261,11 @@ export default [
         ],
         events: [
             {
+                name: '<code>input</code>',
+                description: 'Triggers when the value of datepicker is changed',
+                parameters: '<code>value: Number</code>'
+            },
+            {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',
                 parameters: '<code>month: Number(0-11)</code>'
