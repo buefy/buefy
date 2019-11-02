@@ -15,7 +15,7 @@
             'is-hovered': hovered,
             'is-selected': selected
         }]"
-        @click="$emit('click', $event)"
+        v-on="$listeners"
     >
         <b-icon
             v-if="iconLeft"
