@@ -16,6 +16,18 @@ const babelConfig = {
     presets: [['@babel/preset-env', { modules: false }]]
 }
 
+const vuePluginConfig = {
+    template: {
+        isProduction: true,
+        compilerOptions: {
+            // disable whitespace https://github.com/vuejs/vue/blob/3dcd85b82693765b13e866132bcaa318ef086fe5/src/compiler/parser/index.js#L342
+            whitespace: '',
+            // enable whitespace removing, we don't need it in frameworks https://github.com/vuejs/vue/blob/3dcd85b82693765b13e866132bcaa318ef086fe5/src/compiler/parser/index.js#L351
+            preserveWhitespace: false
+        }
+    }
+}
+
 const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
 
 const baseFolder = './src/'
@@ -61,11 +73,7 @@ export default () => {
                         extensions: ['.vue', '.js']
                     }),
                     cjs(),
-                    vue({
-                        template: {
-                            isProduction: true
-                        }
-                    }),
+                    vue(vuePluginConfig),
                     babel(babelConfig)
                 ]
             }
@@ -84,11 +92,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
@@ -105,11 +109,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
@@ -131,11 +131,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
@@ -152,11 +148,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
