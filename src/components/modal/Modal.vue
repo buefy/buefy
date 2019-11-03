@@ -185,7 +185,7 @@ export default {
         * Call the onCancel prop (function).
         * Emit events, and destroy modal if it's programmatic.
         */
-        close() {            
+        close() {
             this.$emit('close')
             this.$emit('update:active', false)
             // if the events prop has a close event call it.
