@@ -189,7 +189,7 @@ export default {
             this.$emit('close')
             this.$emit('update:active', false)
             // if the events prop has a close event call it.
-            this.events.close && this.events.close()
+            this.events && this.events.close && this.events.close()
 
             // Timeout for the animation complete before destroying
             if (this.programmatic) {
