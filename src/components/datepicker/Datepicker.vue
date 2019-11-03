@@ -140,6 +140,7 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
+                        :multiple="multiple"
                         @close="togglePicker(false)"/>
                 </div>
 
