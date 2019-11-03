@@ -109,13 +109,12 @@ export default {
     },
     methods: {
         selectMultipleDates(date) {
-            if (
-                this.multipleSelectedDates.find((selectedDate) =>
-                    selectedDate.valueOf() === date.valueOf()
-                )
-            ) {
+            const multipleSelct = this.multipleSelectedDates.find((selectedDate) =>
+                selectedDate.getTime() === date.getTime()
+            )
+            if (multipleSelct) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
-                    selectedDate.valueOf() !== date.valueOf()
+                    selectedDate.getTime() !== date.getTime()
                 )
             } else {
                 this.multipleSelectedDates.push(date)

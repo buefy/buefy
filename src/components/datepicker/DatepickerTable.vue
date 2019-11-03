@@ -202,13 +202,12 @@ export default {
         * Otherwise, add date to list of selected dates
         */
         handleSelectMultipleDates(date) {
-            if (
-                this.multipleSelectedDates.find((selectedDate) =>
-                    selectedDate.valueOf() === date.valueOf()
-                )
-            ) {
+            const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
+                selectedDate.getTime() === date.getTime()
+            )
+            if (multipleSelect) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
-                    selectedDate.valueOf() !== date.valueOf()
+                    selectedDate.getTime() !== date.getTime()
                 )
             } else {
                 this.multipleSelectedDates.push(date)
