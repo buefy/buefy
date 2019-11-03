@@ -186,7 +186,7 @@ export default {
         * Emit events, and destroy modal if it's programmatic.
         */
         close() {
-            this.$emit('close')
+            this.events.close && this.events.close()
             this.$emit('update:active', false)
 
             // Timeout for the animation complete before destroying
