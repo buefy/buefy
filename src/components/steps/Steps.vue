@@ -32,34 +32,37 @@
         <section class="step-content" :class="{'is-transitioning': isTransitioning}">
             <slot/>
         </section>
-        <nav v-if="hasNavigation" class="step-navigation">
-            <a
-                role="button"
-                href="#"
-                class="pagination-previous"
-                :disabled="!hasPrev"
-                @click.prevent="prev"
-                :aria-label="ariaPreviousLabel">
-                <b-icon
-                    :icon="iconPrev"
-                    :pack="iconPack"
-                    both
-                    aria-hidden="true"/>
-            </a>
-            <a
-                role="button"
-                href="#"
-                class="pagination-next"
-                :disabled="!hasNext"
-                @click.prevent="next"
-                :aria-label="ariaNextLabel">
-                <b-icon
-                    :icon="iconNext"
-                    :pack="iconPack"
-                    both
-                    aria-hidden="true"/>
-            </a>
-        </nav>
+        <slot
+            name="navigation"
+            :previous="navigationProps.previous"
+            :next="navigationProps.next">
+            <nav v-if="hasNavigation" class="step-navigation">
+                <a
+                    role="button"
+                    class="pagination-previous"
+                    :disabled="navigationProps.previous.disabled"
+                    @click.prevent="navigationProps.previous.action"
+                    :aria-label="ariaPreviousLabel">
+                    <b-icon
+                        :icon="iconPrev"
+                        :pack="iconPack"
+                        both
+                        aria-hidden="true"/>
+                </a>
+                <a
+                    role="button"
+                    class="pagination-next"
+                    :disabled="navigationProps.next.disabled"
+                    @click.prevent="navigationProps.next.action"
+                    :aria-label="ariaNextLabel">
+                    <b-icon
+                        :icon="iconNext"
+                        :pack="iconPack"
+                        both
+                        aria-hidden="true"/>
+                </a>
+            </nav>
+        </slot>
     </div>
 </template>
 
@@ -154,11 +157,24 @@ export default {
         },
 
         /**
-            * Check if next button is available.
-            */
+         * Check if next button is available.
+         */
         hasNext() {
             return this.lastVisibleStepIndex >= 0 &&
                 this.activeStep < this.lastVisibleStepIndex
+        },
+
+        navigationProps() {
+            return {
+                previous: {
+                    disabled: !this.hasPrev,
+                    action: this.prev
+                },
+                next: {
+                    disabled: !this.hasNext,
+                    action: this.next
+                }
+            }
         }
     },
     watch: {

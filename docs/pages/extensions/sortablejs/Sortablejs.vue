@@ -3,13 +3,13 @@
         <div class="buttons">
             <a
                 class="button"
-                href="http://rubaxa.github.io/Sortable"
+                href="https://sortablejs.github.io/Sortable/"
                 target="_blank">
                 Website
             </a>
             <a
                 class="button"
-                href="https://github.com/RubaXa/Sortable"
+                href="https://github.com/SortableJS/Sortable"
                 target="_blank">
                 Docs
             </a>

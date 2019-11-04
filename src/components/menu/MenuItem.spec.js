@@ -29,9 +29,14 @@ describe('BMenuItem', () => {
 
     it('manage onClick', () => {
         wrapper.vm.reset = jest.fn()
+
+        wrapper.setProps({disabled: true})
         wrapper.vm.onClick()
 
-        expect(wrapper.vm.reset).toHaveBeenCalled()
+        wrapper.setProps({disabled: false})
+        wrapper.vm.onClick()
+
+        expect(wrapper.vm.reset).toHaveBeenCalledTimes(1)
         expect(wrapper.vm.newExpanded).toBeTruthy()
         expect(wrapper.emitted()['update:expanded'][0]).toContainEqual(false)
         expect(wrapper.vm.newActive).toBeTruthy()

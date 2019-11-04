@@ -30,4 +30,103 @@
     &.is-fullwidth {
         width: 100%;
     }
+    &.is-vertical {
+        display: flex;
+        flex-direction: row;
+
+        .tabs {
+            ul {
+                flex-direction: column;
+                border-bottom-color: transparent;
+
+                li {
+                    width: 100%;
+
+                    a {
+                        justify-content: left;
+                    }
+                }
+            }
+
+            &.is-boxed {
+                li {
+                    a {
+                        border-bottom-color: transparent !important;
+                        border-right-color: $tabs-border-bottom-color !important;
+                        border-radius: $tabs-boxed-link-radius 0 0 $tabs-boxed-link-radius;
+                    }
+
+                    &.is-active {
+                        a {
+                            border-bottom-color: $tabs-border-bottom-color !important;
+                            border-right-color: transparent !important;
+                        }
+                    }
+                }
+            }
+            &.is-toggle {
+                li {
+                    + li {
+                        margin-left: 0;
+                    }
+                    &:first-child {
+                        a {
+                            border-radius: $tabs-toggle-link-radius $tabs-toggle-link-radius 0 0;
+                        }
+                    }
+                    &:last-child {
+                        a {
+                            border-radius: 0 0 $tabs-toggle-link-radius $tabs-toggle-link-radius;
+                        }
+                    }
+                }
+            }
+            &.is-fullwidth {
+                li {
+                    a {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+        .tab-content {
+            flex-grow: 1;
+        }
+
+        &.is-right {
+            flex-direction: row-reverse;
+
+            .tabs {
+                ul {
+                    a {
+                        flex-direction: row-reverse;
+
+                        .icon:first-child {
+                            margin-right: 0;
+                            margin-left: 0.5em
+                        }
+                    }
+                }
+
+                &.is-boxed {
+                    li {
+                        a {
+                            border-bottom-color: transparent !important;
+                            border-right-color: transparent !important;
+                            border-left-color: $tabs-border-bottom-color !important;
+                            border-radius: 0 $tabs-boxed-link-radius $tabs-boxed-link-radius 0;
+                        }
+
+                        &.is-active {
+                            a {
+                                border-bottom-color: $tabs-border-bottom-color !important;
+                                border-right-color: $tabs-border-bottom-color !important;
+                                border-left-color: transparent !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

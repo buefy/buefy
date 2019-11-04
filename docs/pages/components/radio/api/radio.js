@@ -115,6 +115,13 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '—'
+            },
+            {
+                name: '<code>expanded</code>',
+                description: 'Radio button will be expanded (full-width)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }

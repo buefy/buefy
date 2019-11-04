@@ -5,6 +5,11 @@
         "breadTitle": "Home",
         "path": "/"
     },
+    "notfound": {
+        "title": "Page not found",
+        "subtitle": "Sorry, we couldn’t find the page you were looking for",
+        "path": "/notfound"
+    },
     "documentation": {
         "title": "Documentation",
         "subtitle": "Learn everything you need to start using Buefy",
@@ -98,8 +103,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -111,8 +115,7 @@
             "/",
             "documentation",
             "documentation/icon"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tooltip": {
         "title": "Tooltip",
@@ -136,7 +139,8 @@
             "/",
             "documentation",
             "documentation/modal"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/navbar": {
         "title": "Navbar",
@@ -161,7 +165,8 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tag": {
         "title": "Tag",
@@ -185,7 +190,8 @@
             "/",
             "documentation",
             "documentation/toast"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/snackbar": {
         "title": "Snackbar",
@@ -197,7 +203,8 @@
             "/",
             "documentation",
             "documentation/snackbar"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/notification": {
         "title": "Notification",
@@ -293,7 +300,8 @@
             "/",
             "documentation",
             "documentation/checkbox"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/radio": {
         "title": "Radio",
@@ -305,7 +313,8 @@
             "/",
             "documentation",
             "documentation/radio"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/switch": {
         "title": "Switch",
@@ -330,7 +339,7 @@
             "documentation",
             "documentation/datepicker"
         ],
-        "isUpdated": "true"
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -342,8 +351,7 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -357,6 +365,19 @@
             "documentation/clockpicker"
         ]
     },
+    "documentation/datetimepicker": {
+        "title": "Datetimepicker",
+        "subtitle": "An input with a simple dropdown/modal for selecting a date and time, uses native datetimepicker for mobile",
+        "path": "/documentation/datetimepicker",
+        "githubPath": "pages/components/datetimepicker/Datetimepicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/datetimepicker"
+        ],
+        "isNew": true
+    },
     "documentation/taginput": {
         "title": "Taginput",
         "subtitle": "A simple tag input field that can have autocomplete functionality",
@@ -367,7 +388,8 @@
             "/",
             "documentation",
             "documentation/taginput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/upload": {
         "title": "Upload",
@@ -391,7 +413,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -403,8 +426,7 @@
             "/",
             "documentation",
             "documentation/pagination"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/button": {
         "title": "Button",
@@ -440,8 +462,7 @@
             "/",
             "documentation",
             "documentation/steps"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/menu": {
         "title": "Menu",
@@ -453,8 +474,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isUpdated": "true"
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
@@ -479,6 +499,18 @@
             "/",
             "documentation",
             "documentation/progress"
+        ]
+    },
+    "documentation/rate": {
+        "title": "Rate",
+        "subtitle": "A quick rating operation on something",
+        "path": "/documentation/rate",
+        "githubPath": "pages/components/rate/Rate.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/rate"
         ]
     },
     "extensions": {

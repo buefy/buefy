@@ -6,6 +6,10 @@
 
         <Example :component="ExCardTemplate" :code="ExCardTemplateCode" title="Card" vertical/>
 
+        <Example :component="ExPosition" :code="ExPositionCode" title="Position" vertical/>
+
+        <Example :component="ExAccordion" :code="ExAccordionCode" title="Accordion Effect" vertical/>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -22,6 +26,12 @@
     import ExCardTemplate from './examples/ExCardTemplate'
     import ExCardTemplateCode from '!!raw-loader!./examples/ExCardTemplate'
 
+    import ExPosition from './examples/ExPosition'
+    import ExPositionCode from '!!raw-loader!./examples/ExPosition'
+
+    import ExAccordion from './examples/ExAccordion'
+    import ExAccordionCode from '!!raw-loader!./examples/ExAccordion'
+
     export default {
         data() {
             return {
@@ -31,7 +41,11 @@
                 ExPanelTemplate,
                 ExPanelTemplateCode,
                 ExCardTemplate,
-                ExCardTemplateCode
+                ExCardTemplateCode,
+                ExPosition,
+                ExPositionCode,
+                ExAccordion,
+                ExAccordionCode
             }
         }
     }

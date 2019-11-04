@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Loading from './Loading'
 
+import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const LoadingProgrammatic = {
@@ -8,7 +9,7 @@ const LoadingProgrammatic = {
         const defaultParam = {
             programmatic: true
         }
-        const propsData = Object.assign(defaultParam, params)
+        const propsData = merge(defaultParam, params)
 
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
         const LoadingComponent = vm.extend(Loading)

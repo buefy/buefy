@@ -116,6 +116,27 @@ export default [
                 type: 'String',
                 values: '<code>confirm</code>, <code>cancel</code>',
                 default: '<code>confirm</code>'
+            },
+            {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the dialog.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: `Role attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '<code>dialog</code>, <code>alertdialog</code>',
+                default: '—'
+            },
+            {
+                name: '<code>aria-modal</code>',
+                description: `Improve accessiblity when enabled.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }

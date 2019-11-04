@@ -110,8 +110,8 @@ export default {
         },
 
         setupContainer() {
-            this.parentTop = document.querySelector('.notices.is-top')
-            this.parentBottom = document.querySelector('.notices.is-bottom')
+            this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top')
+            this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom')
 
             if (this.parentTop && this.parentBottom) return
 
