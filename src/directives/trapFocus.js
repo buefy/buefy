@@ -35,7 +35,6 @@ const bind = (el, { value = true }) => {
                 }
             }
             el.addEventListener('keydown', onKeyDown)
-            firstFocusable.focus()
         }
     }
 }
