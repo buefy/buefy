@@ -8,6 +8,7 @@
             class="modal is-active"
             :class="[{'is-full-screen': fullScreen}, customClass]"
             v-trap-focus="trapFocus"
+            tabindex="-1"
             :role="ariaRole"
             :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
@@ -134,6 +135,11 @@ export default {
     watch: {
         active(value) {
             this.isActive = value
+            this.$nextTick(() => {
+                if (value && this.$el && this.$el.focus) {
+                    this.$el.focus()
+                }
+            })
         },
         isActive() {
             this.handleScroll()
