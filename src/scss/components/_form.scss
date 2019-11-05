@@ -107,11 +107,15 @@ $floating-in-height: 3.25em !default;
                 box-shadow: none;
             }
         }
-        .taginput .taginput-container.is-focusable {
+        .taginput .taginput-container {
             padding-top: 0.475em;
             &.is-focused {
                 box-shadow: none;
             }
+        }
+        .taginput .counter {
+            float: none;
+            text-align: right;
         }
     }
     &.is-floating-in-label {
@@ -172,10 +176,15 @@ $floating-in-height: 3.25em !default;
         .control.is-loading::after {
             margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
         }
-        .taginput .taginput-container.is-focusable {
+        .taginput .taginput-container {
             // 0.275em - 1px _taginput.scss
             padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
         }
+        .taginput .counter {
+            float: none;
+            text-align: right;
+        }
+      
         &.has-numberinput {
             .b-numberinput {
                 .control {

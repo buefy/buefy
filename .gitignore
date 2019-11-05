@@ -10,3 +10,4 @@ debug.log*
 .idea/
 cypress/videos/
 cypress/screenshots/
+.vscode/

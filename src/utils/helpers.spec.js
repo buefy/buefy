@@ -89,25 +89,25 @@ describe('helpers', () => {
             it('merges objects', () => {
                 const a = { test: { a: 'discard', b: 'test' } }
                 const b = { test: { a: 'test' } }
-                expect(merge(a, b)).toEqual({ test: { a: 'test', b: 'test' } })
+                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: 'test' } })
             })
 
             it('extends objects', () => {
                 const a = { test: { a: 'test' } }
                 const b = { test: { b: 'test' } }
-                expect(merge(a, b)).toEqual({ test: { a: 'test', b: 'test' } })
+                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: 'test' } })
             })
 
             it('extends a property with an object', () => {
                 const a = { test: { a: 'test' } }
                 const b = { test: { b: { c: 'test' } } }
-                expect(merge(a, b)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
             })
 
             it('replaces a property with an object', () => {
                 const a = { test: { b: 'whatever', a: 'test' } }
                 const b = { test: { b: { c: 'test' } } }
-                expect(merge(a, b)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
             })
         })
     })

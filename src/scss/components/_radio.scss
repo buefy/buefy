@@ -78,6 +78,9 @@ $radio-size: 1.25em !default;
         .control-label {
             padding-left: 0.5em;
         }
+        &.button {
+            display: flex;
+        }
         &[disabled] {
             opacity: 0.5;
         }

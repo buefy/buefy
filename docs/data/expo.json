@@ -1,5 +1,35 @@
 [
     {
+        "title": "Dogs Welcome",
+        "date": "2019-05-11",
+        "img": "dogswelcome.png",
+        "url": "https://dogswelcome.in/"
+    },
+    {
+        "title": "Rate My Meeting",
+        "date": "2019-05-11",
+        "img": "ratemymeeting.png",
+        "url": "https://ratemymeeting.co/"
+    },
+    {
+        "title": "Rekord Cloud",
+        "date": "2019-05-11",
+        "img": "rekordcloud.png",
+        "url": "https://rekord.cloud/"
+    },
+    {
+        "title": "EL Catre",
+        "date": "2019-10-22",
+        "img": "elcatre.jpg",
+        "url": "https://elcatre.com/"
+    },
+    {
+        "title": "Frenl",
+        "date": "2019-10-20",
+        "img": "frenl.png",
+        "url": "https://www.frenl.com"
+    },
+    {
         "title": "Kulap",
         "date": "2019-09-04",
         "img": "kulap.png",
@@ -23,12 +53,6 @@
         "date": "2019-08-11",
         "img": "coursecosmos.png",
         "url": "https://coursecosmos.com"
-    },
-    {
-        "title": "Menuver",
-        "date": "2019-08-01",
-        "img": "menuver.png",
-        "url": "https://menuver.com"
     },
     {
         "title": "Philips Talent Pool",

@@ -79,7 +79,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>readonly</code>',
+                name: '<code>editable</code>',
                 description: 'Enable input/typing. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
@@ -233,6 +233,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>multiple</code>',
+                description: 'Flag to allow choosing multiple dates',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -255,8 +262,8 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when value is changed',
-                parameters: '<code>value: Date</code>'
+                description: 'Triggers when the value of datepicker is changed',
+                parameters: '<code>value: Number</code>'
             },
             {
                 name: '<code>change-month</code>',

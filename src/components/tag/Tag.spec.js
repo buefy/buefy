@@ -23,6 +23,10 @@ describe('BTag', () => {
         const close = jest.fn()
         wrapper.vm.$on('close', close)
         wrapper.vm.close()
+
+        wrapper.setProps({ disabled: true })
+        wrapper.vm.close()
+
         expect(close).toHaveBeenCalledTimes(1)
     })
 })

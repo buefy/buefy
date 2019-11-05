@@ -4,8 +4,10 @@ import clickOutside from '../../directives/clickOutside'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
+const BODY_SPACED_FIXED_TOP_CLASS = 'has-spaced-navbar-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
 const BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom'
+const BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom'
 
 const isFilled = (str) => !!str
 
@@ -39,6 +41,10 @@ export default {
             type: String
         },
         closeOnClick: {
+            type: Boolean,
+            default: true
+        },
+        mobileBurger: {
             type: Boolean,
             default: true
         },
@@ -77,20 +83,24 @@ export default {
         fixedTop: {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
+                const className = this.spaced
+                    ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS
                 if (isSet) {
-                    return this.setBodyClass(BODY_FIXED_TOP_CLASS)
+                    return this.setBodyClass(className)
                 }
-                this.removeBodyClass(BODY_FIXED_TOP_CLASS)
+                this.removeBodyClass(className)
             },
             immediate: true
         },
         fixedBottom: {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
+                const className = this.spaced
+                    ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS
                 if (isSet) {
-                    return this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                    return this.setBodyClass(className)
                 }
-                this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                this.removeBodyClass(className)
             },
             immediate: true
         }
@@ -164,22 +174,24 @@ export default {
             }, [this.$slots.brand, this.genBurgerNode(createElement)])
         },
         genBurgerNode(createElement) {
-            const defaultBurgerNode = createElement('navbar-burger', {
-                props: {
-                    isOpened: this.isOpened
-                },
-                on: {
-                    click: this.toggleActive
-                }
-            })
-
-            const hasBurgerSlot = !!this.$scopedSlots.burger
-            return hasBurgerSlot
-                ? this.$scopedSlots.burger({
-                    isOpened: this.isOpened,
-                    toggleActive: this.toggleActive
+            if (this.mobileBurger) {
+                const defaultBurgerNode = createElement('navbar-burger', {
+                    props: {
+                        isOpened: this.isOpened
+                    },
+                    on: {
+                        click: this.toggleActive
+                    }
                 })
-                : defaultBurgerNode
+
+                const hasBurgerSlot = !!this.$scopedSlots.burger
+                return hasBurgerSlot
+                    ? this.$scopedSlots.burger({
+                        isOpened: this.isOpened,
+                        toggleActive: this.toggleActive
+                    })
+                    : defaultBurgerNode
+            }
         },
         genNavbarSlotsNode(createElement) {
             return createElement('div', {

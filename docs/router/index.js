@@ -17,6 +17,7 @@ function route(path, component) {
 
 // Templates
 const Documentation = () => import('@/templates/Documentation')
+const NotFound = () => import('@/pages/404')
 
 const router = new Router({
     mode: 'history',
@@ -69,6 +70,7 @@ const router = new Router({
                 route('documentation/slider', 'components/slider/Slider'),
                 route('documentation/progress', 'components/progress/Progress'),
                 route('documentation/rate', 'components/rate/Rate'),
+                route('documentation/datetimepicker', 'components/datetimepicker/Datetimepicker'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
@@ -79,7 +81,14 @@ const router = new Router({
             ]
         },
         // Global redirect
-        { path: '*', redirect: '' }
+        // { path: '*', redirect: '404' }
+        // 404 page
+        {
+            path: '*',
+            name: 'notfound',
+            meta: routes['notfound'],
+            component: NotFound
+        }
     ],
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {

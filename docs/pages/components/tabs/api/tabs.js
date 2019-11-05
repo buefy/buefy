@@ -45,6 +45,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>vertical</code>',
+                description: 'Display the tabs vertically. The content will be placed at right.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>destroy-on-hide</code>',
                 description: 'Destroy tabitem on hide',
                 type: 'Boolean',
