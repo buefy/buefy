@@ -27,7 +27,8 @@
                 <slot v-else/>
                 <button
                     type="button"
-                    v-if="showX && !animating"
+                    v-if="showX"
+                    v-show="!animating"
                     class="modal-close is-large"
                     @click="cancel('x')"/>
             </div>
