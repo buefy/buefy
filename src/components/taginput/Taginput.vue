@@ -330,8 +330,7 @@ export default {
             }
         },
 
-        keydown(event) {
-            const { key } = event
+        keydown({ key, preventDefault }) {
             if (this.removeOnKeys.indexOf(key) !== -1 && !this.newTag.length) {
                 this.removeLastTag()
             }
@@ -339,7 +338,7 @@ export default {
             if (this.autocomplete && !this.allowNew) return
 
             if (this.confirmKeys.indexOf(key) >= 0) {
-                event.preventDefault()
+                preventDefault()
                 this.addTag()
             }
         },

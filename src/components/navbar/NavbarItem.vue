@@ -28,9 +28,7 @@ export default {
         /**
          * Keypress event that is bound to the document
          */
-        keyPress(event) {
-            // Esc key
-            const { key } = event
+        keyPress({ key }) {
             if (key === 'Escape' || key === 'Esc') {
                 this.closeMenuRecursive(this, ['NavBar'])
             }
