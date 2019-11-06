@@ -7,7 +7,7 @@
                     :key="index"
                     v-show="tabItem.visible"
                     :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
-                    <a @click="tabClick(index)">
+                    <a @click="activeTab !== index && tabClick(index)">
                         <template v-if="tabItem.$slots.header">
                             <b-slot-component
                                 :component="tabItem"
