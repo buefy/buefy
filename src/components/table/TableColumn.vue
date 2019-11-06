@@ -63,6 +63,7 @@ export default {
         this.addRefToTable()
     },
     beforeDestroy() {
+        if( !this.$parent.visibleData.length ) return
         const index = this.$parent.newColumns.map(
             (column) => column.newKey).indexOf(this.newKey)
         if (index >= 0) {
