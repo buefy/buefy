@@ -29,9 +29,11 @@
         <b-icon
             v-if="icon"
             class="is-left"
+            :class="{'is-clickable': iconClickable}"
             :icon="icon"
             :pack="iconPack"
-            :size="iconSize"/>
+            :size="iconSize"
+            @click.native="iconClick"/>
 
         <b-icon
             v-if="!loading && (passwordReveal || statusTypeIcon)"
@@ -72,6 +74,7 @@ export default {
             default: 'text'
         },
         passwordReveal: Boolean,
+        iconClickable: Boolean,
         hasCounter: {
             type: Boolean,
             default: () => config.defaultInputHasCounter
@@ -207,6 +210,13 @@ export default {
                 if (event.target) {
                     this.computedValue = event.target.value
                 }
+            })
+        },
+
+        iconClick(event) {
+            this.$emit('icon-click', event)
+            this.$nextTick(() => {
+                this.$refs.input.focus()
             })
         }
     }

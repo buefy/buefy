@@ -58,6 +58,13 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-clickable</code>',
+                description: 'Make the icon clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>maxlength</code>',
                 description: 'Same as native <code>maxlength</code>, plus character counter',
                 type: 'String, Number',
@@ -107,6 +114,11 @@ export default [
             {
                 name: '<code>blur</code>',
                 description: 'Triggers when input has lost focus',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>icon-click</code>',
+                description: 'Triggers when the icon is clickable and have been clicked',
                 parameters: '<code>event: $event</code>'
             },
             {
