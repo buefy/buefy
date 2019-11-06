@@ -166,4 +166,24 @@ describe('BInput', () => {
         wrapper.setData({ newType: 'is-warning' })
         expect(input.vm.statusTypeIcon).toBe('alert')
     })
+
+    it('manage the click on icon', (done) => {
+        const wrapper = mount(BInput, {
+            propsData: {
+                icon: 'magnify',
+                iconClickable: true
+            }
+        })
+
+        expect(wrapper.find('input').exists()).toBeTruthy()
+
+        const visibilityIcon = wrapper.find('.icon.is-clickable')
+        expect(visibilityIcon.exists()).toBeTruthy()
+        visibilityIcon.trigger('click')
+
+        wrapper.vm.$nextTick(() => {
+            expect(wrapper.emitted()['icon-click']).toBeTruthy()
+            done()
+        })
+    })
 })
