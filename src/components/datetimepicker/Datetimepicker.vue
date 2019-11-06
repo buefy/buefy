@@ -9,6 +9,7 @@
         :loading="loading"
         :inline="inline"
         :editable="editable"
+        :expanded="expanded"
         :close-on-click="false"
         :date-formatter="defaultDatetimeFormatter"
         :date-parser="defaultDatetimeParser"
