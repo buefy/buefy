@@ -839,7 +839,7 @@ export default {
                 if (Number.isInteger(getValueByPath(row, key))) {
                     if (getValueByPath(row, key) !== Number(this.filters[key])) return false
                 } else {
-                    const re = new RegExp(this.filters[key])
+                    const re = new RegExp(this.filters[key], 'i')
                     if (!getValueByPath(row, key).match(re)) return false
                 }
             }
