@@ -6,6 +6,17 @@
 
 <script>
 export default {
-    name: 'BMenu'
+    name: 'BMenu',
+    props: {
+        accordion: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return {
+            _isMenu: true // Used by MenuItem
+        }
+    }
 }
 </script>
