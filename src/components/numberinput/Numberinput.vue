@@ -113,7 +113,7 @@ export default {
             set(value) {
                 let newValue = value
                 if (value === '') {
-                    newValue = parseFloat(this.min) || 0
+                    newValue = parseFloat(this.min) || null
                 }
                 this.newValue = newValue
                 this.$emit('input', newValue)
