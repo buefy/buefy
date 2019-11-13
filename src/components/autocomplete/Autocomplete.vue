@@ -32,13 +32,13 @@
                 <div class="dropdown-content" v-show="isActive">
                     <div
                         v-if="hasHeaderSlot"
-                        class="dropdown-item">
+                        class="dropdown-item b-dropdown-item">
                         <slot name="header"/>
                     </div>
                     <a
                         v-for="(option, index) in data"
                         :key="index"
-                        class="dropdown-item"
+                        class="dropdown-item b-dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
@@ -53,12 +53,12 @@
                     </a>
                     <div
                         v-if="data.length === 0 && hasEmptySlot"
-                        class="dropdown-item is-disabled">
+                        class="dropdown-item is-disabled b-dropdown-item">
                         <slot name="empty"/>
                     </div>
                     <div
                         v-if="hasFooterSlot"
-                        class="dropdown-item">
+                        class="dropdown-item b-dropdown-item">
                         <slot name="footer"/>
                     </div>
                 </div>
