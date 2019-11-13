@@ -39,7 +39,7 @@
                         v-for="(option, index) in data"
                         :key="index"
                         class="dropdown-item"
-                        :class="{ itemClass, 'is-hovered': option === hovered }"
+                        :class="[itemClass, { 'is-hovered': option === hovered }]"
                         @click="setSelected(option)">
 
                         <slot
