@@ -48,7 +48,7 @@ $dropdown-disabled-opacity: 0.5 !default;
     }
     &:not(.is-disabled) {
         .dropdown-menu {
-            .dropdown-item {
+            %b-dropdown-item, .dropdown-item {
                 &.is-disabled {
                     opacity: $dropdown-disabled-opacity;
                 }
@@ -108,7 +108,7 @@ $dropdown-disabled-opacity: 0.5 !default;
                 overflow-y: auto;
                 z-index: 50;
                 > .dropdown-content {
-                    > .dropdown-item {
+                    > %b-dropdown-item, .dropdown-item {
                         padding: 1rem 1.5rem;
                     }
                 }
