@@ -27,7 +27,7 @@ $dropdown-disabled-opacity: 0.5 !default;
             }
         }
         .has-link a {
-            @extend .dropdown-item;
+            @extend %b-dropdown-item;
             padding-right: 3rem;
             white-space: nowrap;
         }
