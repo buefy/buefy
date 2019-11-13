@@ -2,10 +2,10 @@
     <section>
         <b-field>
             <b-checkbox-button v-model="checkboxGroup"
-                native-value="Nop"
+                native-value="Nope"
                 type="is-danger">
                 <b-icon icon="close"></b-icon>
-                <span>Nop</span>
+                <span>Nope</span>
             </b-checkbox-button>
 
             <b-checkbox-button v-model="checkboxGroup"
