@@ -381,6 +381,7 @@ export default {
             }
         },
         backendSorting: Boolean,
+        backendFiltering: Boolean,
         rowClass: {
             type: Function,
             default: () => ''
@@ -590,10 +591,14 @@ export default {
 
         filters: {
             handler(value) {
-                this.newData = this.data.filter(
-                    (row) => this.isRowFiltered(row))
-                if (!this.backendPagination) {
-                    this.newDataTotal = this.newData.length
+                if (this.backendFiltering) {
+                    this.$emit('filters-change', value)
+                } else {
+                    this.newData = this.data.filter(
+                        (row) => this.isRowFiltered(row))
+                    if (!this.backendPagination) {
+                        this.newDataTotal = this.newData.length
+                    }
                 }
             },
             deep: true
