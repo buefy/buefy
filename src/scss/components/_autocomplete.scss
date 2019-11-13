@@ -26,6 +26,9 @@
             cursor: not-allowed;
         }
     }
+    .b-dropdown-item {
+        
+    }
     &.is-small {
         @include control-small;
     }
