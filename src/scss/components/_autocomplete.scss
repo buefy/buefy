@@ -13,7 +13,7 @@
         overflow: auto;
         max-height: 200px;
     }
-    .dropdown-item {
+    %b-dropdown-item, .dropdown-item {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
