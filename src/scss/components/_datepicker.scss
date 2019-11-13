@@ -27,7 +27,7 @@ $datepicker-item-selected-background-color: $primary !default;
         border-radius: $datepicker-radius;
         box-shadow: $datepicker-shadow;
     }
-    .dropdown-item {
+    %b-dropdown-item, .dropdown-item {
         font-size: inherit;
     }
     .datepicker-header {
