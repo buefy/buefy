@@ -26,8 +26,11 @@ $dropdown-disabled-opacity: 0.5 !default;
                 }
             }
         }
+        .b-dropdown-item {
+            
+        }
         .has-link a {
-            @extend .dropdown-item;
+            @extend .b-dropdown-item;
             padding-right: 3rem;
             white-space: nowrap;
         }
