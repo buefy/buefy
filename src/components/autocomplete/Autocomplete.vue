@@ -39,7 +39,7 @@
                         v-for="(option, index) in data"
                         :key="index"
                         class="dropdown-item"
-                        :class="{ 'is-hovered': option === hovered }"
+                        :class="{ itemClass, 'is-hovered': option === hovered }"
                         @click="setSelected(option)">
 
                         <slot
@@ -92,7 +92,8 @@ export default {
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
-        customFormatter: Function
+        customFormatter: Function,
+        itemClass: String
     },
     data() {
         return {
