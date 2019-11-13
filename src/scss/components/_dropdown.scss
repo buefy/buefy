@@ -17,7 +17,7 @@ $dropdown-disabled-opacity: 0.5 !default;
         }
     }
     .dropdown-menu {
-        .dropdown-item {
+        %b-dropdown-item, .dropdown-item {
             &.is-disabled {
                 cursor: not-allowed;
                 &:hover {
