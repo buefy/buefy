@@ -2,7 +2,7 @@
     <hr v-if="separator" class="dropdown-divider">
     <a
         v-else-if="!custom && !hasLink"
-        class="dropdown-item"
+        class="dropdown-item b-dropdown-item"
         :class="anchorClasses"
         @click="selectItem"
         :role="ariaRoleItem"
@@ -51,7 +51,7 @@ export default {
         },
         itemClasses() {
             return {
-                'dropdown-item': !this.hasLink,
+                'dropdown-item b-dropdown-item': !this.hasLink,
                 'is-disabled': this.disabled,
                 'is-paddingless': this.paddingless,
                 'is-active': this.isActive,
