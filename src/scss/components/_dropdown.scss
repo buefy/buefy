@@ -56,6 +56,9 @@ $dropdown-disabled-opacity: 0.5 !default;
                     opacity: $dropdown-disabled-opacity;
                 }
             }
+            .b-dropdown-item {
+                
+            }
         }
     }
     .navbar-item {
@@ -113,6 +116,9 @@ $dropdown-disabled-opacity: 0.5 !default;
                 > .dropdown-content {
                     > .dropdown-item {
                         padding: 1rem 1.5rem;
+                    }
+                    > .b-dropdown-item {
+                        
                     }
                 }
             }
