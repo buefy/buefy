@@ -836,11 +836,14 @@ export default {
                     delete this.filters[key]
                     return true
                 }
-                if (Number.isInteger(getValueByPath(row, key))) {
-                    if (getValueByPath(row, key) !== Number(this.filters[key])) return false
+                let value = this.getValueByPath(row, key)
+                if (value == null) return false
+                if (Number.isInteger(value)) {
+                    if (value !== Number(this.filters[key])) return false
                 } else {
-                    const re = new RegExp(this.filters[key], 'i')
-                    if (!getValueByPath(row, key).match(re)) return false
+                    var re = new RegExp(this.filters[key])
+                    if (typeof value === 'boolean') value = `${value}`
+                    if (!value.match(re)) return false
                 }
             }
             return true
