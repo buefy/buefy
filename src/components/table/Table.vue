@@ -841,7 +841,7 @@ export default {
                 if (Number.isInteger(value)) {
                     if (value !== Number(this.filters[key])) return false
                 } else {
-                    var re = new RegExp(this.filters[key])
+                    const re = new RegExp(this.filters[key], 'i')
                     if (typeof value === 'boolean') value = `${value}`
                     if (!value.match(re)) return false
                 }
