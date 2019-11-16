@@ -63,8 +63,11 @@ export default {
         this.addRefToTable()
     },
     beforeDestroy() {
-        if (!this.$parent.visibleData.length) return
-        if (this.$parent.$children.filter((vm) => vm.$options._componentTag === 'b-table-column' && vm.$data.newKey === this.newKey).length !== 1) return
+        if (this.sortable) {
+            if (!this.$parent.visibleData.length) return
+            if (this.$parent.$children.filter((vm) => vm.$options._componentTag === 'b-table-column' &&
+                vm.$data.newKey === this.newKey).length !== 1) return
+        }
         const index = this.$parent.newColumns.map(
             (column) => column.newKey).indexOf(this.newKey)
         if (index >= 0) {
