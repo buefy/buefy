@@ -11,14 +11,12 @@
             :sort-icon-size="sortIconSize"
             @sort="(column) => sort(column)"
         />
-
         <div
             v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')"
             class="top level">
             <div class="level-left">
                 <slot name="top-left"/>
             </div>
-
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
@@ -36,7 +34,6 @@
                 </div>
             </div>
         </div>
-
         <div class="table-wrapper">
             <table
                 class="table"
@@ -148,7 +145,6 @@
                             @drop="handleDrop($event, row, index)"
                             @dragover="handleDragOver($event, row, index)"
                             @dragleave="handleDragLeave($event, row, index)">
-
                             <td
                                 v-if="showDetailRowIcon"
                                 class="chevron-cell"
@@ -164,7 +160,6 @@
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
                                 </a>
                             </td>
-
                             <td
                                 class="checkbox-cell"
                                 v-if="checkable && checkboxPosition === 'left'">
@@ -174,7 +169,6 @@
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
-
                             <slot
                                 v-if="$scopedSlots.default"
                                 :row="row"
@@ -195,7 +189,6 @@
                                     </template>
                                 </BTableColumn>
                             </template>
-
                             <td
                                 class="checkbox-cell"
                                 v-if="checkable && checkboxPosition === 'right'">
@@ -206,7 +199,6 @@
                                 />
                             </td>
                         </tr>
-
                         <!-- Do not add `key` here (breaks details) -->
                         <!-- eslint-disable-next-line -->
                         <tr
@@ -246,7 +238,6 @@
                 </tfoot>
             </table>
         </div>
-
         <div
             v-if="(checkable && hasBottomLeftSlot()) ||
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
@@ -254,7 +245,6 @@
             <div class="level-left">
                 <slot name="bottom-left"/>
             </div>
-
             <div class="level-right">
                 <div v-if="paginated" class="level-item">
                     <b-pagination
