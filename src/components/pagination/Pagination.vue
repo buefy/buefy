@@ -50,13 +50,12 @@
                 both
                 aria-hidden="true"/>
         </BPaginationButton>
-
         <small class="info" v-if="simple">
             <template v-if="perPage == 1">
-                {{ firstItem }} / {{ total }}
+                {{firstItem}} / {{total}}
             </template>
             <template v-else>
-                {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+                {{firstItem}}-{{ Math.min(current * perPage, total) }} / {{total}}
             </template>
         </small>
         <ul class="pagination-list" v-else>
@@ -71,7 +70,6 @@
                     :page="getPage(1)" />
             </li>
             <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
-
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
                 <slot
@@ -82,7 +80,6 @@
                     v-else
                     :page="page" />
             </li>
-
             <!--Last-->
             <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
             <li v-if="hasLast">
