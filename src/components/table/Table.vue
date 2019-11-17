@@ -86,7 +86,7 @@
                                         :index="index"
                                     />
                                 </template>
-                                <template v-else>{{ column.label }}</template>
+                                <template v-else>{{column.label}}</template>
 
                                 <b-icon
                                     v-show="currentSortColumn === column"
@@ -185,7 +185,7 @@
                                         v-html="getValueByPath(row, column.field)"
                                     />
                                     <template v-else>
-                                        {{ getValueByPath(row, column.field) }}
+                                        {{getValueByPath(row, column.field)}}
                                     </template>
                                 </BTableColumn>
                             </template>
