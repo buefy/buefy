@@ -143,7 +143,10 @@ export default {
                     let val = new Date(value.getTime())
                     if (this.newValue) {
                         // restore time part
-                        if (value.getHours() === 0 &&
+                        if ((value.getDate() !== this.newValue.getDate() ||
+                            value.getMonth() !== this.newValue.getMonth() ||
+                            value.getFullYear() !== this.newValue.getFullYear()) &&
+                            value.getHours() === 0 &&
                             value.getMinutes() === 0 &&
                             value.getSeconds() === 0) {
                             val.setHours(this.newValue.getHours(),
