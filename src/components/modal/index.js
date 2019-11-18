@@ -44,5 +44,6 @@ use(Plugin)
 export default Plugin
 
 export {
-    ModalProgrammatic
+    ModalProgrammatic,
+    Modal as BModal
 }

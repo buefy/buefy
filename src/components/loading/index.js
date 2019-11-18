@@ -32,5 +32,6 @@ use(Plugin)
 export default Plugin
 
 export {
-    LoadingProgrammatic
+    LoadingProgrammatic,
+    Loading as BLoading
 }

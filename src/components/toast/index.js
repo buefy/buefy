@@ -44,5 +44,6 @@ use(Plugin)
 export default Plugin
 
 export {
-    ToastProgrammatic
+    ToastProgrammatic,
+    Toast as BToast
 }

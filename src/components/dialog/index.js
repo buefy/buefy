@@ -53,5 +53,6 @@ use(Plugin)
 export default Plugin
 
 export {
-    DialogProgrammatic
+    DialogProgrammatic,
+    Dialog as BDialog
 }

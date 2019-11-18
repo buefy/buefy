@@ -13,3 +13,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Radio as BRadio,
+    RadioButton as BRadioButton
+}
