@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BRate render correctly 1`] = `
+<div class="rate">
+    <div class="rate-item">
+        <b-icon-stub icon="star"></b-icon-stub>
+        <!---->
+    </div>
+    <div class="rate-item">
+        <b-icon-stub icon="star"></b-icon-stub>
+        <!---->
+    </div>
+    <div class="rate-item">
+        <b-icon-stub icon="star"></b-icon-stub>
+        <!---->
+    </div>
+    <div class="rate-item">
+        <b-icon-stub icon="star"></b-icon-stub>
+        <!---->
+    </div>
+    <div class="rate-item">
+        <b-icon-stub icon="star"></b-icon-stub>
+        <!---->
+    </div>
+    <!---->
+</div>
+`;
