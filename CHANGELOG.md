@@ -23,7 +23,7 @@
 * Fix #1812 extending a component
 * Fix #1909, #1902, #1898 issues on searchable table column (thanks @dauriata and @service-paradis )
 * Fix #1951 modal a11y improvements (thanks @service-paradis)
-* Fix #1963 erase number-input value
+* Fix #1963 erase numberinput value
 * Fix #1972 using min and max native datepicker and timepicker props
 * Fix #1986 setting 00:00 on datetimepicker
 

@@ -103,7 +103,8 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/icon": {
         "title": "Icon",
@@ -139,8 +140,7 @@
             "/",
             "documentation",
             "documentation/modal"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/navbar": {
         "title": "Navbar",
@@ -152,8 +152,7 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -165,8 +164,7 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tag": {
         "title": "Tag",
@@ -190,8 +188,7 @@
             "/",
             "documentation",
             "documentation/toast"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/snackbar": {
         "title": "Snackbar",
@@ -203,8 +200,7 @@
             "/",
             "documentation",
             "documentation/snackbar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/notification": {
         "title": "Notification",
@@ -240,7 +236,8 @@
             "/",
             "documentation",
             "documentation/loading"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/field": {
         "title": "Field",
@@ -264,7 +261,8 @@
             "/",
             "documentation",
             "documentation/input"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/select": {
         "title": "Select",
@@ -300,8 +298,7 @@
             "/",
             "documentation",
             "documentation/checkbox"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/radio": {
         "title": "Radio",
@@ -313,8 +310,7 @@
             "/",
             "documentation",
             "documentation/radio"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/switch": {
         "title": "Switch",
@@ -338,8 +334,7 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -376,7 +371,7 @@
             "documentation",
             "documentation/datetimepicker"
         ],
-        "isNew": true
+        "isUpdated": true
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -388,8 +383,7 @@
             "/",
             "documentation",
             "documentation/taginput"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/upload": {
         "title": "Upload",
@@ -450,7 +444,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/steps": {
         "title": "Steps",
@@ -474,7 +469,8 @@
             "/",
             "documentation",
             "documentation/menu"
-        ]
+        ],
+        "isUpdated": true
     },
      "documentation/slider": {
         "title": "Slider",
@@ -486,8 +482,7 @@
             "/",
             "documentation",
             "documentation/slider"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/progress": {
         "title": "Progress",
