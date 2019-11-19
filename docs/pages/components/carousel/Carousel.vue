@@ -1,54 +1,23 @@
 <template>
     <div>
-        <Example :component="ExSimple" :code="ExSimpleCode" paddingless vertical />
-        <Example title="Custom Carousel" :component="ExFull" :code="ExFullCode" paddingless />
-        <Example title="Custom Indicators" :component="ExIndicator" :code="ExIndicatorCode" paddingless>
-            Source Images from picsum and Unsplash
-        </Example>
-
         <div class="content">
-            <h4>Todo</h4>
-            <div class="columns">
-                <div class="column">
-                    <h6>General:</h6>
-                    <ol type="1">
-                        <li><s>Auto Play</s></li>
-                        <li><s>Pause on hover</s></li>
-                        <li><s>Animated: fade, slide</s></li>
-                        <li>Responsive with Custom CSS <code>height</code> or use <code>.image</code></li>
-                        <li>Support <code>touchDrag</code></li>
-                        <li>Support <code>mouseDrag</code></li>
-                        <li>Support <code>event.key</code></li>
-                        <li>like google card without <code>$el.getBoundingClientRect()</code> or use columns with card for <code>b-carousel-card</code></li>
-                    </ol>
-                </div>
-                <div class="column">
-                    <h6>Arrow:</h6>
-                    <ol type="1">
-                        <li><s>Between both</s></li>
-                        <li><s>Style: Hover, Always, Hidden</s></li>
-                        <li><s>Icon: Pack, Size, Prev, Next</s></li>
-                    </ol>
-                    <h6>Indicator:</h6>
-                    <ol type="1">
-                        <li><s>Inside/Outside</s></li>
-                        <li>
-                            Style: <s>Dots</s>, Stick, Line, Box
-                        </li>
-                        <li><s>Custom Indicator</s></li>
-                    </ol>
-                </div>
-            </div>
-            <h4>Bugs</h4>
-            <ul>
-                <li><s>Blank if click Prev or Next</s></li>
-                <li>Custom indicator: in :src include <code>props.i + 1</code></li>
-            </ul>
+            <blockquote>
+                Because images can take a few seconds to load (or not at all), use the <code>image</code> container to specify a <strong>precisely sized</strong>
+                container so that your layout isn't broken because of image loading or image errors - Bulma <a href="https://bulma.io/documentation/elements/image/" target="_blank">image</a>.
+            </blockquote>
         </div>
-        <hr>
-        <b-message type="is-info">
-            <strong>Api, Test and Variable on Progress!</strong>
-        </b-message>
+
+        <Example :component="ExSimple" :code="ExSimpleCode" paddingless vertical />
+
+        <Example title="Custom" :component="ExFull" :code="ExFullCode" paddingless />
+
+        <Example title="Arrow" :component="ExArrow" :code="ExArrowCode" paddingless />
+
+        <Example title="Indicator" :component="ExIndicator" :code="ExIndicatorCode" paddingless />
+
+        <Example title="Custom Indicators" :component="ExCustomIndicator" :code="ExCustomIndicatorCode" paddingless>
+            Source by <a href="https://picsum.photos/" target="_blank">Picsum</a> Images from <a href="https://unsplash.com/" target="_blank">Unsplash</a>.
+        </Example>
 
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
@@ -61,11 +30,15 @@
 
     import ExSimple from './examples/ExSimple'
     import ExFull from './examples/ExFull'
+    import ExArrow from './examples/ExArrow'
     import ExIndicator from './examples/ExIndicator'
+    import ExCustomIndicator from './examples/ExCustomIndicator'
 
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
     import ExFullCode from '!!raw-loader!./examples/ExFull'
+    import ExArrowCode from '!!raw-loader!./examples/ExArrow'
     import ExIndicatorCode from '!!raw-loader!./examples/ExIndicator'
+    import ExCustomIndicatorCode from '!!raw-loader!./examples/ExCustomIndicator'
 
     export default {
         data() {
@@ -74,10 +47,14 @@
                 variables,
                 ExSimple,
                 ExFull,
+                ExArrow,
                 ExIndicator,
+                ExCustomIndicator,
                 ExSimpleCode,
                 ExFullCode,
-                ExIndicatorCode
+                ExArrowCode,
+                ExIndicatorCode,
+                ExCustomIndicatorCode
             }
         }
     }
