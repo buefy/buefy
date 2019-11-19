@@ -3,15 +3,15 @@
         <div style="padding: 1.5rem">
             <b-field grouped group-multiline position="is-centered">
                 <b-switch v-model="autoPlay">Autoplay</b-switch>
-                <b-switch v-model="pauseHover">Pause on hover</b-switch>
-                <b-switch v-model="pauseInfo">Pause info</b-switch>
+                <b-switch v-model="pauseHover" :disabled="!autoPlay">Pause on hover</b-switch>
+                <b-switch v-model="pauseInfo" :disabled="!autoPlay">Pause info</b-switch>
             </b-field><br>
             <b-field grouped group-multiline position="is-centered">
                 <b-field label="Value">
                     <b-numberinput v-model="carousel" min="0" :max="carousels.length - 1" controls-position="compact"/>
                 </b-field>
                 <b-field label="Interval">
-                    <b-numberinput v-model="interval" min="0" controls-position="compact" step="1000"/>
+                    <b-numberinput v-model="interval" min="0" controls-position="compact" step="1000" :disabled="!autoPlay"/>
                 </b-field>
                 <b-field label="animated">
                     <b-field>
@@ -51,7 +51,7 @@ export default {
     data() {
         return {
             carousel: 0,
-            animated: 'slide',
+            animated: 'fade',
             autoPlay: false,
             pauseHover: false,
             pauseInfo: false,

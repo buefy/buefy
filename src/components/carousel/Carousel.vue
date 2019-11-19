@@ -71,10 +71,7 @@ export default {
             type: String,
             default: 'slide'
         },
-        interval: {
-            type: Number,
-            default: 3000
-        },
+        interval: Number,
         autoplay: {
             type: Boolean,
             default: true
@@ -159,11 +156,11 @@ export default {
     },
     methods: {
         startTimer() {
-            if (!this.autoplay || this.interval <= 0 || this.timer) return
+            if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
                 this.next()
-            }, this.interval)
+            }, (this.interval || config.defaultCarouselInterval))
         },
         pauseTimer() {
             if (!this.pauseHover && this.autoplay) return
