@@ -184,7 +184,7 @@ export default {
             this.activeItem = newIndex
             this.$emit('change', newIndex)
         },
-// Indicator trigger, emit input event and change active item.
+        // Indicator trigger, emit input event and change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
