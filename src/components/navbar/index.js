@@ -15,3 +15,9 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Navbar as BNavbar,
+    NavbarItem as BNavbarItem,
+    NavbarDropdown as BNavbarDropdown
+}

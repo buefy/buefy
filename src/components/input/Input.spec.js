@@ -2,31 +2,29 @@ import { shallowMount, mount } from '@vue/test-utils'
 import BInput from '@components/input/Input'
 import BIcon from '@components/icon/Icon'
 
-describe('BInput', () => {
-    it('render correctly', () => {
-        const wrapper = shallowMount(BInput)
+let wrapper
 
+describe('BInput', () => {
+    beforeEach(() => {
+        wrapper = shallowMount(BInput)
+    })
+
+    it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('is vue instance', () => {
-        const wrapper = shallowMount(BInput)
-
         expect(wrapper.name()).toBe('BInput')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
     it('renders input element by default', () => {
-        const wrapper = shallowMount(BInput)
-
         expect(wrapper.contains('input')).toBeTruthy()
         expect(wrapper.classes()).toContain('control')
     })
 
     it('render textarea element when type is textarea', () => {
-        const wrapper = shallowMount(BInput, {
-            propsData: { type: 'textarea' }
-        })
+        wrapper.setProps({ type: 'textarea' })
         const target = wrapper.find('textarea')
 
         expect(target.exists()).toBeTruthy()
@@ -34,28 +32,30 @@ describe('BInput', () => {
     })
 
     it('displays the icon when the icon property is true', () => {
-        const wrapper = shallowMount(BInput, {
-            propsData: { icon: 'magnify' }
-        })
+        wrapper.setProps({ icon: 'magnify' })
         const target = wrapper.find(BIcon)
 
         expect(target.exists()).toBeTruthy()
     })
 
     it('display counter when the maxlength property is passed', () => {
-        const wrapper = shallowMount(BInput, {
-            propsData: { value: 'foo', maxlength: 100 }
+        wrapper.setProps({
+            value: 'foo',
+            maxlength: 100
         })
         const counter = wrapper.find('small.counter')
 
         expect(counter.exists()).toBeTruthy()
         expect(counter.text()).toBe('3 / 100')
+
+        wrapper.setProps({
+            value: 1234
+        })
+        expect(counter.text()).toBe('4 / 100')
     })
 
     it('no display counter when hasCounter property set for false', () => {
-        const wrapper = shallowMount(BInput, {
-            propsData: { maxlength: 100 }
-        })
+        wrapper.setProps({ maxlength: 100 })
         expect(wrapper.find('small.counter').exists()).toBeTruthy()
 
         wrapper.setProps({ hasCounter: false })
@@ -87,12 +87,16 @@ describe('BInput', () => {
         wrapper.setProps({ value: 'bar' })
 
         expect(wrapper.find('input').exists()).toBeTruthy()
+        expect(wrapper.vm.newType).toBe('password')
+        expect(wrapper.vm.isPasswordVisible).toBeFalsy()
         expect(wrapper.find('input').attributes().type).toBe('password')
 
         const visibilityIcon = wrapper.find('.icon.is-clickable')
         expect(visibilityIcon.exists()).toBeTruthy()
         visibilityIcon.trigger('click')
         wrapper.setProps({ passwordReveal: false })
+        expect(wrapper.vm.newType).toBe('text')
+        expect(wrapper.vm.isPasswordVisible).toBeTruthy()
         expect(wrapper.find('input').attributes().type).toBe('text')
 
         wrapper.vm.$nextTick(done)
@@ -109,16 +113,15 @@ describe('BInput', () => {
     })
 
     it('expands input when expanded property is passed', () => {
-        const wrapper = shallowMount(BInput, {
-            propsData: { expanded: true }
-        })
+        wrapper.setProps({ expanded: true })
 
         expect(wrapper.classes()).toContain('is-expanded')
     })
 
     it('display loading icon when loading property passed', () => {
-        const wrapper = shallowMount(BInput, {
-            propsData: { loading: true, icon: 'magnify' }
+        wrapper.setProps({
+            loading: true,
+            icon: 'magnify'
         })
 
         expect(wrapper.classes()).toContain('is-loading')
@@ -162,5 +165,25 @@ describe('BInput', () => {
         expect(input.vm.statusTypeIcon).toBe('information')
         wrapper.setData({ newType: 'is-warning' })
         expect(input.vm.statusTypeIcon).toBe('alert')
+    })
+
+    it('manage the click on icon', (done) => {
+        const wrapper = mount(BInput, {
+            propsData: {
+                icon: 'magnify',
+                iconClickable: true
+            }
+        })
+
+        expect(wrapper.find('input').exists()).toBeTruthy()
+
+        const visibilityIcon = wrapper.find('.icon.is-clickable')
+        expect(visibilityIcon.exists()).toBeTruthy()
+        visibilityIcon.trigger('click')
+
+        wrapper.vm.$nextTick(() => {
+            expect(wrapper.emitted()['icon-click']).toBeTruthy()
+            done()
+        })
     })
 })

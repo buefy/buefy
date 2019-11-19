@@ -5,7 +5,8 @@
             ref="dropdown"
             :position="position"
             :disabled="disabled"
-            :inline="inline">
+            :inline="inline"
+            :mobile-modal="mobileModal">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -140,6 +141,7 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
+                        :multiple="multiple"
                         @close="togglePicker(false)"/>
                 </div>
 
@@ -389,6 +391,12 @@ export default {
         multiple: {
             type: Boolean,
             default: false
+        },
+        mobileModal: {
+            type: Boolean,
+            default: () => {
+                return config.defaultDatepickerMobileModal
+            }
         }
     },
     data() {

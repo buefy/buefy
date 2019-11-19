@@ -20,7 +20,11 @@ describe('BButton', () => {
 
     it('emit a click event', () => {
         const click = jest.fn()
-        wrapper.vm.$on('click', click)
+        wrapper = shallowMount(BButton, {
+            listeners: {
+                'click': click
+            }
+        })
         wrapper.find('.button').trigger('click')
         expect(click).toHaveBeenCalledTimes(1)
     })

@@ -79,7 +79,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>readonly</code>',
+                name: '<code>editable</code>',
                 description: 'Enable input/typing. <b>Note that you might have to set a custom date parser</b>',
                 type: 'Boolean',
                 values: '—',
@@ -260,6 +260,11 @@ export default [
             }
         ],
         events: [
+            {
+                name: '<code>input</code>',
+                description: 'Triggers when the value of datepicker is changed',
+                parameters: '<code>value: Number</code>'
+            },
             {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',

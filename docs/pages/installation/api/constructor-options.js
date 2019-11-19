@@ -319,11 +319,18 @@ export default [
             },
             {
                 name: '<code>defaultButtonRounded</code>',
-                description: 'Default config to to make all buttons rounded.',
+                description: 'Default config to make all buttons rounded.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>defaultCarouselInterval</code>',
+                description: 'Default carousel <code>interval</code> attribute',
+                type: 'Number',
+                values: '—',
+                default: '<code>3500</code>'
+            }
         ]
     }
 ]

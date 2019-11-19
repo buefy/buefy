@@ -82,6 +82,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>controls</code>',
+                description: 'Showing controls(+/-)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>controls-position</code>',
                 description: 'Position of controls',
                 type: 'String',

@@ -107,8 +107,10 @@ export default {
             items.forEach((item) => {
                 if (item !== this) {
                     this.reset(item)
-                    item.newExpanded = false
-                    item.$emit('update:expanded', item.newActive)
+                    if (!parent.$data._isMenu || (parent.$data._isMenu && parent.accordion)) {
+                        item.newExpanded = false
+                        item.$emit('update:expanded', item.newActive)
+                    }
                     item.newActive = false
                     item.$emit('update:active', item.newActive)
                 }

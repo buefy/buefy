@@ -19,6 +19,7 @@ let config = {
     defaultDateFormatter: null,
     defaultDateParser: null,
     defaultDateCreator: null,
+    defaultTimeCreator: null,
     defaultDayNames: null,
     defaultMonthNames: null,
     defaultFirstDayOfWeek: null,
@@ -39,12 +40,14 @@ let config = {
     defaultDatepickerNearbyMonthDays: true,
     defaultDatepickerNearbySelectableMonthDays: false,
     defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerMobileModal: true,
     defaultTrapFocus: false,
     defaultButtonRounded: false,
+    defaultCarouselInterval: 3500,
 
     customIconPacks: null
 } // TODO defaultTrapFocus to true in the next breaking change
 
-export default config
+export { config as default }
 
 export const setOptions = (options) => { config = options }

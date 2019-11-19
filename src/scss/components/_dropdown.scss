@@ -1,4 +1,6 @@
 $dropdown-mobile-breakpoint: $desktop !default;
+$dropdown-background-color: rgba($black, 0.86) !default;
+$dropdown-disabled-opacity: 0.5 !default;
 
 .dropdown {
     & + .dropdown {
@@ -7,7 +9,7 @@ $dropdown-mobile-breakpoint: $desktop !default;
     .background {
         @include overlay;
         position: fixed;
-        background-color: rgba($black, 0.86);
+        background-color: $dropdown-background-color;
         z-index: 40;
         cursor: pointer;
         @media screen and (min-width: $dropdown-mobile-breakpoint) {
@@ -48,7 +50,7 @@ $dropdown-mobile-breakpoint: $desktop !default;
         .dropdown-menu {
             .dropdown-item {
                 &.is-disabled {
-                    opacity: 0.5;
+                    opacity: $dropdown-disabled-opacity;
                 }
             }
         }
@@ -57,7 +59,7 @@ $dropdown-mobile-breakpoint: $desktop !default;
         height: 100%;
     }
     &.is-disabled {
-        opacity: 0.5;
+        opacity: $dropdown-disabled-opacity;
         cursor: not-allowed;
         .dropdown-trigger {
             pointer-events: none;

@@ -1,5 +1,5 @@
 import config from '../utils/config'
-import {merge} from '../utils/helpers'
+import { merge } from '../utils/helpers'
 
 const mdiIcons = {
     sizes: {
@@ -47,7 +47,7 @@ const getIcons = () => {
     }
 
     if (config && config.customIconPacks) {
-        icons = merge(icons, config.customIconPacks)
+        icons = merge(icons, config.customIconPacks, true)
     }
 
     return icons

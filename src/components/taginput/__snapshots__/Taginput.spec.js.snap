@@ -3,7 +3,7 @@
 exports[`BTaginput render correctly 1`] = `
 <div class="taginput control">
     <div class="taginput-container is-focusable">
-        <bautocomplete-stub value="" data="" field="value" keepfirst="true" use-html5-validation="true"><template></template> <template></template> <template></template></bautocomplete-stub>
+        <b-autocomplete-stub usehtml5validation="true" value="" data="" field="value" keepfirst="true"><template></template> <template></template> <template></template></b-autocomplete-stub>
     </div>
     <!---->
 </div>

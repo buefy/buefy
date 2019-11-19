@@ -61,11 +61,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/datepicker'
+    import variables from './variables/datepicker'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -104,6 +106,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 ExEditable,

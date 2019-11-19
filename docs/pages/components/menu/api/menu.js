@@ -1,6 +1,15 @@
 export default [
     {
         title: 'Menu',
+        props: [
+            {
+                name: '<code>accordion</code>',
+                description: 'Close automatically the previous selected menu list',
+                type: 'Boolean',
+                values: '—',
+                default: 'true'
+            }
+        ],
         slots: [
             {
                 name: 'default',

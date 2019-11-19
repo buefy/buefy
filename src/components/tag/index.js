@@ -13,3 +13,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Tag as BTag,
+    Taglist as BTaglist
+}
