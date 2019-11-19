@@ -19,6 +19,7 @@ let config = {
     defaultDateFormatter: null,
     defaultDateParser: null,
     defaultDateCreator: null,
+    defaultTimeCreator: null,
     defaultDayNames: null,
     defaultMonthNames: null,
     defaultFirstDayOfWeek: null,

@@ -142,6 +142,13 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>time-creator</code>',
+                description: 'Function used internally to create a new Date instance',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => new Date()</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

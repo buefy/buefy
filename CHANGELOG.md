@@ -12,6 +12,7 @@
 * Add more customization variables for dropdown and loading (thanks @HugoHeneault)
 * Add more customization variables for datepicker (thanks @service-paradis)
 * Add ``defaultDatepickerMobileModal`` constructor option (thanks @ievhen-soloviov)
+* #2000 Add ``time-creator`` prop to timepicker
 
 ### Fixes
 

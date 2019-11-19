@@ -45,7 +45,7 @@ const defaultTimeParser = (timeString, vm) => {
         if (vm.computedValue && !isNaN(vm.computedValue)) {
             d = new Date(vm.computedValue)
         } else {
-            d = new Date()
+            d = vm.timeCreator()
             d.setMilliseconds(0)
         }
         d.setSeconds(seconds)
@@ -113,6 +113,16 @@ export default {
             type: Boolean,
             default: () => {
                 return config.defaultTimepickerMobileNative
+            }
+        },
+        timeCreator: {
+            type: Function,
+            default: () => {
+                if (typeof config.defaultTimeCreator === 'function') {
+                    return config.defaultTimeCreator()
+                } else {
+                    return new Date()
+                }
             }
         },
         position: String,
@@ -285,7 +295,7 @@ export default {
                 if (this.computedValue && !isNaN(this.computedValue)) {
                     time = new Date(this.computedValue)
                 } else {
-                    time = new Date()
+                    time = this.timeCreator()
                     time.setMilliseconds(0)
                 }
                 time.setHours(hours)
