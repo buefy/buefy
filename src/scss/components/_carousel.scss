@@ -23,6 +23,7 @@ $carousel-indicator-spaced: .5rem !default;
         }
     }
     .carousel-pause {
+        pointer-events: none;
         position: absolute;
         top: 0;
         right: 0.15rem;
