@@ -13,3 +13,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Carousel as BCarousel,
+    CarouselItem as BCarouselItem
+}
