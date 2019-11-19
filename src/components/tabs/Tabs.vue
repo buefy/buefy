@@ -123,6 +123,7 @@ export default {
         * Tab click listener, emit input event and change active tab.
         */
         tabClick(value) {
+            if (this.activeTab === value) return
             this.$emit('input', value)
             this.changeTab(value)
         }

@@ -45,6 +45,6 @@ let config = {
     customIconPacks: null
 } // TODO defaultTrapFocus to true in the next breaking change
 
-export default config
+export { config as default }
 
 export const setOptions = (options) => { config = options }

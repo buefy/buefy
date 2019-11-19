@@ -44,7 +44,9 @@
 export default {
     name: 'BDatepickerMonth',
     props: {
-        value: Date,
+        value: {
+            type: [Date, Array]
+        },
         monthNames: Array,
         events: Array,
         indicators: String,
@@ -55,7 +57,13 @@ export default {
         dateCreator: Function,
         unselectableDates: Array,
         unselectableDaysOfWeek: Array,
-        selectableDates: Array
+        selectableDates: Array,
+        multiple: Boolean
+    },
+    data() {
+        return {
+            multipleSelectedDates: []
+        }
     },
     computed: {
         hasEvents() {
@@ -100,6 +108,20 @@ export default {
         }
     },
     methods: {
+        selectMultipleDates(date) {
+            const multipleSelct = this.multipleSelectedDates.find((selectedDate) =>
+                selectedDate.getTime() === date.getTime()
+            )
+            if (multipleSelct) {
+                this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
+                    selectedDate.getTime() !== date.getTime()
+                )
+            } else {
+                this.multipleSelectedDates.push(date)
+            }
+            this.$emit('input', this.multipleSelectedDates)
+        },
+
         selectableDate(day) {
             const validity = []
 
@@ -165,18 +187,26 @@ export default {
         * Build classObject for cell using validations
         */
         classObject(day) {
-            function dateMatch(dateOne, dateTwo) {
+            function dateMatch(dateOne, dateTwo, multiple) {
                 // if either date is null or undefined, return false
-                if (!dateOne || !dateTwo) {
+                if (!dateOne || !dateTwo || multiple) {
                     return false
                 }
 
                 return (dateOne.getFullYear() === dateTwo.getFullYear() &&
                     dateOne.getMonth() === dateTwo.getMonth())
             }
+            function dateMultipleSelected(dateOne, dates, multiple) {
+                if (!Array.isArray(dates) || !multiple) { return false }
+                return dates.some((date) => (
+                    dateOne.getDate() === date.getDate() &&
+                    dateOne.getFullYear() === date.getFullYear() &&
+                    dateOne.getMonth() === date.getMonth()
+                ))
+            }
 
             return {
-                'is-selected': dateMatch(day, this.value),
+                'is-selected': dateMatch(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
                 'is-today': dateMatch(day, this.dateCreator()),
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled
@@ -188,8 +218,12 @@ export default {
         emitChosenDate(day) {
             if (this.disabled) return
 
-            if (this.selectableDate(day)) {
-                this.$emit('input', day)
+            if (!this.multiple) {
+                if (this.selectableDate(day)) {
+                    this.$emit('input', day)
+                }
+            } else {
+                this.selectMultipleDates(day)
             }
         }
     }

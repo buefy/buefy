@@ -47,17 +47,14 @@ describe('BDatepicker', () => {
             defaultMonthNames,
             defaultDayNames,
             defaultFirstDayOfWeek,
-            focusedDate: newDate(2018, 7, 1)
+            focusedDate: newDate(2018, 7, 15)
         }))
 
-        defaultProps = () => ({
+        defaultProps = {
             dayNames: config.defaultDayNames,
             monthNames: config.defaultMonthNames,
-            focused: {
-                month: config.focusedDate.getMonth(),
-                year: config.focusedDate.getFullYear()
-            }
-        })
+            focusedDate: config.focusedDate
+        }
 
         wrapper = shallowMount(BDatepicker, {
             propsData: {
@@ -139,6 +136,23 @@ describe('BDatepicker', () => {
         wrapper.vm.prev()
         expect(wrapper.vm.focusedDateData.year).toBe(2018)
         expect(wrapper.vm.focusedDateData.month).toBe(11)
+
+        date = newDate(2021, 1, 1)
+        wrapper.setProps({
+            focusedDate: date,
+            type: 'month'
+        })
+        wrapper.vm.prev()
+        expect(wrapper.vm.focusedDateData.year).toBe(2020)
+
+        date = newDate(2021, 1, 1)
+        wrapper.setProps({
+            focusedDate: date,
+            type: 'month',
+            disabled: true
+        })
+        wrapper.vm.prev()
+        expect(wrapper.vm.focusedDateData.year).toBe(2021)
     })
 
     it('react accordingly when calling next', () => {
@@ -156,6 +170,35 @@ describe('BDatepicker', () => {
         wrapper.vm.next()
         expect(wrapper.vm.focusedDateData.year).toBe(2020)
         expect(wrapper.vm.focusedDateData.month).toBe(0)
+
+        date = newDate(2021, 1, 1)
+        wrapper.setProps({
+            focusedDate: date,
+            type: 'month'
+        })
+        wrapper.vm.next()
+        expect(wrapper.vm.focusedDateData.year).toBe(2022)
+
+        date = newDate(2021, 1, 1)
+        wrapper.setProps({
+            focusedDate: date,
+            type: 'month',
+            disabled: true
+        })
+        wrapper.vm.next()
+        expect(wrapper.vm.focusedDateData.year).toBe(2021)
+    })
+
+    it('handles accordingly the list of years', () => {
+        wrapper.setProps({
+            minDate: newDate(2017, 1, 1)
+        })
+        expect(wrapper.vm.listOfYears).toEqual([2021, 2020, 2019, 2018, 2017])
+
+        wrapper.setProps({
+            maxDate: newDate(2020, 1, 1)
+        })
+        expect(wrapper.vm.listOfYears.sort()).toEqual([2020, 2019, 2018, 2017].sort())
     })
 
     it('handles accordingly focus', () => {

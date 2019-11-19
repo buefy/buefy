@@ -4,7 +4,9 @@
         <b-field>
             <b-input placeholder="Search..."
                 type="search"
-                icon="magnify">
+                icon="magnify"
+                icon-clickable
+                @icon-click="searchIconClick">
             </b-input>
         </b-field>
 
@@ -46,3 +48,13 @@
         </b-field>
     </section>
 </template>
+
+<script>
+    export default {
+        methods: {
+            searchIconClick() {
+                alert('You wanna make a search?')
+            }
+        }
+    }
+</script>

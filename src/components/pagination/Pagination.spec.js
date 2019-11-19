@@ -31,17 +31,31 @@ describe('BPagination', () => {
     })
 
     it('should emit change with value of 1 when calling first', () => {
+        wrapper.setProps({current: 1})
+        wrapper.vm.first()
+
         wrapper.setProps({current: 5})
         wrapper.vm.first()
         expect(wrapper.emitted()['change'][0]).toContainEqual(1)
         expect(wrapper.emitted()['update:current'][0]).toContainEqual(1)
     })
 
-    it('should emit change with value of pageCount when calling last', () => {
+    it('should emit change with value of pageCount when calling last', (done) => {
+        const event = {
+            target: {
+                focus: jest.fn()
+            }
+        }
+
         wrapper.setProps({current: 5})
-        wrapper.vm.last()
+        wrapper.vm.last(event)
         expect(wrapper.emitted()['change'][0]).toContainEqual(wrapper.vm.pageCount)
         expect(wrapper.emitted()['update:current'][0]).toContainEqual(wrapper.vm.pageCount)
+
+        wrapper.vm.$nextTick(() => {
+            expect(event.target.focus).toHaveBeenCalled()
+            done()
+        })
     })
 
     it('should emit change when calling prev', () => {
@@ -56,5 +70,12 @@ describe('BPagination', () => {
         wrapper.vm.next()
         expect(wrapper.emitted()['change'][0]).toContainEqual(5)
         expect(wrapper.emitted()['update:current'][0]).toContainEqual(5)
+    })
+
+    it('set current to last if page count is smaller than current', () => {
+        wrapper.vm.last = jest.fn()
+        wrapper.setProps({total: 100, current: 3})
+        wrapper.setProps({total: 40})
+        expect(wrapper.vm.last).toHaveBeenCalled()
     })
 })
