@@ -4,6 +4,7 @@
 
 ### New features
 
+* **New component: Carousel**, [see docs](https://buefy.org/documentation/carousel)
 * Add ``controls`` prop to number input (thanks @afwn90cj93201nixr2e1re)
 * Add ``accordion`` prop to menu
 * Add ``icon-click`` event to input (thanks @service-paradis)

@@ -11,18 +11,18 @@
                 :class="{'is-hovered': arrowHover}">
                 <b-icon
                     v-if="checkArrow(0)"
-                    class="is-left"
+                    class="has-icons-left"
                     @click.native.prevent="prev"
                     :pack="iconPack"
-                    :icon="IconPrev"
+                    :icon="iconPrev"
                     :size="iconSize"
                     both />
                 <b-icon
                     v-if="checkArrow(carouselItems.length - 1)"
-                    class="is-right"
+                    class="has-icons-right"
                     @click.native.prevent="next"
                     :pack="iconPack"
-                    :icon="IconNext"
+                    :icon="iconNext"
                     :size="iconSize"
                     both />
             </div>
@@ -55,6 +55,7 @@
 
 <script>
 import config from '../../utils/config'
+
 import Icon from '../icon/Icon'
 
 export default {
@@ -98,11 +99,11 @@ export default {
         },
         iconPack: String,
         iconSize: String,
-        IconPrev: {
+        iconPrev: {
             type: String,
             default: config.defaultIconPrev
         },
-        IconNext: {
+        iconNext: {
             type: String,
             default: config.defaultIconNext
         },
