@@ -1,72 +1,70 @@
-// variables in progress
+$carousel-arrow-background: $white !default;
+$carousel-arrow-color: $primary !default;
+$carousel-arrow-icon-spaced: 1.5rem !default;
+$carousel-arrow-top: 45% !default;
+
+$carousel-indicator-background: $primary !default;
+$carousel-indicator-border: $white !default;
+$carousel-indicator-spaced: .5rem !default;
+
 .carousel {
+    @extend %unselectable;
 	position: relative;
-	// width: 100%;
     .carousel-list {
         position: relative;
         display: flex;
         overflow: hidden;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        min-height: 100%;
         &:hover .carousel-arrow.is-hovered {
             opacity: 1;
+        }
+        .carousel-item {
+            flex: none;
+            width: 100%;
         }
     }
     .carousel-pause {
         position: absolute;
         top: 0;
         right: 0.15rem;
-        z-index: 1;
         transition: .5s $easing;
-    }
-    .carousel-item {
-        transition: all 0.3s $easing;
-        flex: none;
-        // min-height: 200px;
-        width: 100%;
     }
     .carousel-arrow {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin-left: 1rem;
-        margin-right: 1rem;
         transition: .5s $easing;
-        @include mobile {
-            display: none;
-        }
         &.is-hovered {
             opacity: 0;
-        }
-        .icon {
-            background: #fff;
-            color: $primary;
-            cursor: pointer;
-            border: 1px solid #fff;
-            border-radius: $radius-rounded;
-            outline: 0;
-            transition: .5s $easing;
-            &:hover {
-                border: 1px solid $primary;
+            // when touch added, delete this!
+            @include mobile {
                 opacity: 1;
             }
-            &.is-left {
-              margin-right: auto;
+        }
+        .icon {
+            background: $carousel-arrow-background;
+            color: $carousel-arrow-color;
+            cursor: pointer;
+            border: 1px solid $carousel-arrow-background;
+            border-radius: $radius-rounded;
+            outline: 0;
+            &:hover {
+                border: 1px solid $carousel-arrow-color;
+                opacity: 1;
             }
-            &.is-right {
-                margin-left: auto;
+            &.has-icons-left,
+            &.has-icons-right {
+                top: $carousel-arrow-top;
+                position: absolute;
+                z-index: 1;
+            }
+            &.has-icons-left {
+                left: $carousel-arrow-icon-spaced;
+            }
+            &.has-icons-right {
+                right: $carousel-arrow-icon-spaced;
             }
         }
     }
     .carousel-indicator {
         width: 100%;
-        padding: .5rem;
+        padding: $carousel-indicator-spaced;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -77,17 +75,17 @@
         }
         .indicator-item {
             &:not(:last-child) {
-                margin-right: .5rem;
+                margin-right: $carousel-indicator-spaced;
             }
             &.is-active .indicator-style,
             .indicator-style:hover {
-                background: $primary;
-                border: 1px solid $white;
+                background: $carousel-indicator-background;
+                border: 1px solid $carousel-indicator-border;
             }
             .indicator-style {
                 display: block;
-                border: 1px solid $primary;
-                background: $white;
+                border: 1px solid $carousel-indicator-background;
+                background: $carousel-indicator-border;
                 outline: none;
                 transition: .3s $easing;
                 &.is-boxs {

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BCarouselItem render correctly 1`] = `<div class="carousel-item" style="display: none;"></div>`;

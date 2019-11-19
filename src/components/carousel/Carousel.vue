@@ -12,15 +12,15 @@
                 <b-icon
                     v-if="checkArrow(0)"
                     class="is-left"
-                    @click.native="prev"
+                    @click.native.prevent="prev"
                     :pack="iconPack"
                     :icon="IconPrev"
                     :size="iconSize"
                     both />
                 <b-icon
-                    v-if="checkArrow(items.length - 1)"
+                    v-if="checkArrow(carouselItems.length - 1)"
                     class="is-right"
-                    @click.native="next"
+                    @click.native.prevent="next"
                     :pack="iconPack"
                     :icon="IconNext"
                     :size="iconSize"
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div
-            v-if="pauseHover && pauseInfo && isPause"
-            class="carousel-pause is-unselectable">
+            v-if="autoplay && pauseHover && pauseInfo && isPause"
+            class="carousel-pause">
             <span class="tag">Pause</span>
         </div>
         <div
@@ -37,7 +37,7 @@
             class="carousel-indicator"
             :class="{'is-inside': indicatorInside}">
             <a
-                v-for="(item, index) in items"
+                v-for="(item, index) in carouselItems"
                 class="indicator-item"
                 :class="{'is-active': index === activeItem}"
                 @mouseover="modeChange('hover', index)"
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 import Icon from '../icon/Icon'
 
 export default {
@@ -66,13 +67,13 @@ export default {
             type: Number,
             default: 0
         },
-        animate: {
+        animated: {
             type: String,
             default: 'slide'
         },
         interval: {
             type: Number,
-            default: 3500
+            default: 3000
         },
         autoplay: {
             type: Boolean,
@@ -102,11 +103,11 @@ export default {
         iconSize: String,
         IconPrev: {
             type: String,
-            default: 'chevron-left'
+            default: config.defaultIconPrev
         },
         IconNext: {
             type: String,
-            default: 'chevron-right'
+            default: config.defaultIconNext
         },
         indicator: {
             type: Boolean,
@@ -129,8 +130,8 @@ export default {
         return {
             _isCarousel: true,
             activeItem: this.value,
+            carouselItems: [],
             isPause: false,
-            items: [],
             timer: null
         }
     },
@@ -139,27 +140,31 @@ export default {
         * When v-model is changed set the new active tab.
         */
         value(value) {
-            this.changeTab(value)
+            this.changeItem(value, false)
         },
-
         /**
         * When tab-items are updated, set active one.
         */
-        items() {
-            if (this.activeItem < this.items.length) {
-                this.items[this.activeItem].isActive = true
+        carouselItems() {
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].isActive = true
             }
         },
+        /**
+         *  When autoplay is change, set by status
+         */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
         }
     },
     methods: {
-        /*
-        clickTrigger(index, data) {
-            this.$emit('click', index, data)
+        startTimer() {
+            if (!this.autoplay || this.interval <= 0 || this.timer) return
+            this.isPause = false
+            this.timer = setInterval(() => {
+                this.next()
+            }, this.interval)
         },
-        */
         pauseTimer() {
             if (!this.pauseHover && this.autoplay) return
             this.isPause = true
@@ -168,51 +173,33 @@ export default {
                 this.timer = null
             }
         },
-        startTimer() {
-            if (!this.autoplay || this.interval <= 0 || this.timer) return
-            this.isPause = false
-            this.timer = setInterval(() => {
-                if (this.activeItem === this.items.length - 1) {
-                    this.changeTab(0)
-                } else {
-                    this.changeTab(this.activeItem + 1)
-                }
-            }, this.interval)
-        },
         /**
         * Change the active item and emit change event.
+        * action only for animated slide, there true = next, false = prev
         */
-        changeTab(newIndex) {
+        changeItem(newIndex, action) {
             if (this.activeItem === newIndex) return
-
-            if (this.activeItem < this.items.length) {
-                this.items[this.activeItem].deactivate(this.activeItem, newIndex)
-            }
-            this.items[newIndex].activate(this.activeItem, newIndex)
+            this.carouselItems[this.activeItem].status(false, action)
+            this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
             this.$emit('change', newIndex)
         },
-
-        /**
-        * Item click listener, emit input event and change active item.
-        */
-        itemClick(value) {
-            this.$emit('input', value)
-            this.changeTab(value)
-        },
-        modeChange(type, value) {
-            if (this.indicatorMode === type) {
+// Indicator trigger, emit input event and change active item.
+        modeChange(trigger, value) {
+            if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
-                this.changeTab(value)
+                this.changeItem(value, false)
             }
         },
         prev() {
             return this.activeItem === 0
-                ? this.changeTab(this.items.length - 1) : this.changeTab(this.activeItem - 1)
+                ? this.changeItem(this.carouselItems.length - 1, true)
+                : this.changeItem(this.activeItem - 1, true)
         },
         next() {
-            return this.activeItem === this.items.length - 1
-                ? this.changeTab(0) : this.changeTab(this.activeItem + 1)
+            return this.activeItem === this.carouselItems.length - 1
+                ? this.changeItem(0, false)
+                : this.changeItem(this.activeItem + 1, false)
         },
         // checking arrow between both
         checkArrow(value) {
@@ -221,6 +208,9 @@ export default {
         }
     },
     mounted() {
+        if (this.activeItem < this.carouselItems.length) {
+            this.carouselItems[this.activeItem].isActive = true
+        }
         this.startTimer()
     },
     beforeDestroy() {

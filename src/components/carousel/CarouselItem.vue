@@ -5,6 +5,7 @@
         </div>
     </transition>
 </template>
+
 <script>
 export default {
     name: 'BCarouselItem',
@@ -25,23 +26,13 @@ export default {
     },
     methods: {
         /**
-        * Activate tab, alter animation name based on the index.
+        * Status of item, alter animation name based on action.
         */
-        activate(oldIndex, index) {
-            this.transitionName = index < oldIndex
+        status(value, action) {
+            this.transitionName = action
                 ? 'slide-next'
                 : 'slide-prev'
-            this.isActive = true
-        },
-
-        /**
-        * Deactivate tab, alter animation name based on the index.
-        */
-        deactivate(oldIndex, index) {
-            this.transitionName = index < oldIndex
-                ? 'slide-next'
-                : 'slide-prev'
-            this.isActive = false
+            this.isActive = value
         }
     },
     created() {
@@ -49,7 +40,13 @@ export default {
             this.$destroy()
             throw new Error('You should wrap bCarouselItem on a bCarousel')
         }
-        this.$parent.items.push(this)
+        this.$parent.carouselItems.push(this)
+    },
+    beforeDestroy() {
+        const index = this.$parent.carouselItems.indexOf(this)
+        if (index >= 0) {
+            this.$parent.carouselItems.splice(index, 1)
+        }
     }
 }
 </script>
