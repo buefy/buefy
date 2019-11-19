@@ -1,0 +1,108 @@
+$carousel-arrow-background: $white !default;
+$carousel-arrow-color: $primary !default;
+$carousel-arrow-icon-spaced: 1.5rem !default;
+$carousel-arrow-top: 45% !default;
+
+$carousel-indicator-background: $primary !default;
+$carousel-indicator-border: $white !default;
+$carousel-indicator-spaced: .5rem !default;
+
+.carousel {
+    @extend %unselectable;
+	position: relative;
+    .carousel-list {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        &:hover .carousel-arrow.is-hovered {
+            opacity: 1;
+        }
+        .carousel-item {
+            flex: none;
+            width: 100%;
+        }
+    }
+    .carousel-pause {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        right: 0.15rem;
+        transition: .5s $easing;
+    }
+    .carousel-arrow {
+        transition: .5s $easing;
+        &.is-hovered {
+            opacity: 0;
+            // when touch added, delete this!
+            @include mobile {
+                opacity: 1;
+            }
+        }
+        .icon {
+            background: $carousel-arrow-background;
+            color: $carousel-arrow-color;
+            cursor: pointer;
+            border: 1px solid $carousel-arrow-background;
+            border-radius: $radius-rounded;
+            outline: 0;
+            &:hover {
+                border: 1px solid $carousel-arrow-color;
+                opacity: 1;
+            }
+            &.has-icons-left,
+            &.has-icons-right {
+                top: $carousel-arrow-top;
+                position: absolute;
+                z-index: 1;
+            }
+            &.has-icons-left {
+                left: $carousel-arrow-icon-spaced;
+            }
+            &.has-icons-right {
+                right: $carousel-arrow-icon-spaced;
+            }
+        }
+    }
+    .carousel-indicator {
+        width: 100%;
+        padding: $carousel-indicator-spaced;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.is-inside {
+            position: absolute;
+            bottom: 0;
+            z-index: 1;
+        }
+        .indicator-item {
+            &:not(:last-child) {
+                margin-right: $carousel-indicator-spaced;
+            }
+            &.is-active .indicator-style,
+            .indicator-style:hover {
+                background: $carousel-indicator-background;
+                border: 1px solid $carousel-indicator-border;
+            }
+            .indicator-style {
+                display: block;
+                border: 1px solid $carousel-indicator-background;
+                background: $carousel-indicator-border;
+                outline: none;
+                transition: .3s $easing;
+                &.is-boxs {
+                    height: 10px;
+                    width: 10px;
+                }
+                &.is-dots {
+                    border-radius: 10px;
+                    height: 10px;
+                    width: 10px;
+                }
+                &.is-lines {
+                    height: 5px;
+                    width: 25px;
+                }
+            }
+        }
+    }
+}

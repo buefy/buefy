@@ -501,6 +501,19 @@
             "documentation/progress"
         ]
     },
+    "documentation/carousel": {
+        "title": "Carousel",
+        "subtitle": "A Slideshow for cycling images in confined spaces",
+        "path": "/documentation/carousel",
+        "githubPath": "pages/components/carousel/Carousel.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/carousel"
+        ],
+        "isNew": true
+    },
     "documentation/rate": {
         "title": "Rate",
         "subtitle": "A quick rating operation on something",

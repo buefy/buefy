@@ -42,6 +42,7 @@ let config = {
     defaultDatepickerMobileModal: true,
     defaultTrapFocus: false,
     defaultButtonRounded: false,
+    defaultCarouselInterval: 3500,
 
     customIconPacks: null
 } // TODO defaultTrapFocus to true in the next breaking change
