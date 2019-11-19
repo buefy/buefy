@@ -101,7 +101,7 @@ export default {
                 return this.newValue
             },
             set(value) {
-                if(this.trim)value.trim()
+                this.trim && value.trim()
                 this.newValue = value
                 this.$emit('input', value)
                 !this.isValid && this.checkHtml5Validity()
