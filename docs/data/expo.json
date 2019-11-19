@@ -18,6 +18,12 @@
         "url": "https://rekord.cloud/"
     },
     {
+        "title": "Yan Dev",
+        "date": "2019-25-10",
+        "img": "yandev.png",
+        "url": "https://yandev.de/"
+    },
+    {
         "title": "EL Catre",
         "date": "2019-10-22",
         "img": "elcatre.jpg",
@@ -53,12 +59,6 @@
         "date": "2019-08-11",
         "img": "coursecosmos.png",
         "url": "https://coursecosmos.com"
-    },
-    {
-        "title": "Philips Talent Pool",
-        "date": "2019-06-19",
-        "img": "philips-talentpool.png",
-        "url": "https://philips.talent-pool.com/projects"
     },
     {
         "title": "FileGator",
@@ -194,11 +194,5 @@
         "date": "2019-04-24",
         "img": "pumpipumpe-map.png",
         "url": "https://map.pumpipumpe.ch"
-    },
-    {
-        "title": "Prevue",
-        "date": "2019-04-24",
-        "img": "prevue.png",
-        "url": "https://pre-vue.herokuapp.com"
     }
 ]

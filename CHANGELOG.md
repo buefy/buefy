@@ -10,6 +10,7 @@
 * Add multiple support to Datepicker when type is ``month`` 
 * Add more customization variables for dropdown and loading (thanks @HugoHeneault)
 * Add more customization variables for datepicker (thanks @service-paradis)
+* Add ``defaultDatepickerMobileModal`` constructor option (thanks @ievhen-soloviov)
 
 ### Fixes
 
@@ -24,7 +25,6 @@
 * Fix #1963 erase number-input value
 * Fix #1972 using min and max native datepicker and timepicker props
 * Fix #1986 setting 00:00 on datetimepicker
-
 
 ## 0.8.6
 
