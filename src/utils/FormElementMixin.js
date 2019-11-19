@@ -15,7 +15,8 @@ export default {
             type: Boolean,
             default: () => config.defaultUseHtml5Validation
         },
-        validationMessage: String
+        validationMessage: String,
+        trim: Boolean
     },
     data() {
         return {
