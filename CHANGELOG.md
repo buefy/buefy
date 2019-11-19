@@ -4,7 +4,7 @@
 
 ### New features
 
-* **New component: Carousel**, [see docs](https://buefy.org/documentation/carousel)
+* **New component: Carousel**, [see docs](https://buefy.org/documentation/carousel) (thanks @apolokaklab)
 * Add ``controls`` prop to number input (thanks @afwn90cj93201nixr2e1re)
 * Add ``accordion`` prop to menu
 * Add ``icon-click`` event to input (thanks @service-paradis)
@@ -22,7 +22,7 @@
 * Fix page number count when filtering data (thanks @yxngl)
 * Fix placeholder to datetimepicker (thanks @yxngl)
 * Fix #1812 extending a component
-* Fix #1909, #1902, #1898 issues on searchable table column (thanks @dauriata and @service-paradis )
+* Fix #1909, #1902, #1898 issues on searchable table column (thanks @dauriata and @service-paradis)
 * Fix #1951 modal a11y improvements (thanks @service-paradis)
 * Fix #1963 erase numberinput value
 * Fix #1972 using min and max native datepicker and timepicker props
