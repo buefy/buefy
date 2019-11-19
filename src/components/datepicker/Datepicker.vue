@@ -6,7 +6,7 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
-            :mobile-modal="useModal">
+            :mobile-modal="mobileModal">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -392,10 +392,10 @@ export default {
             type: Boolean,
             default: false
         },
-        useModal: {
+        mobileModal: {
             type: Boolean,
             default: () => {
-                return config.defaultDropdownMobileModal
+                return config.defaultDatepickerMobileModal
             }
         }
     },
