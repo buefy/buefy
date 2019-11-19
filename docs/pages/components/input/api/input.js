@@ -93,6 +93,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>trim</code>',
+                description: 'Value will be trimmed on input event(like in v-model.trim)',
+                type: 'Boolean',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
