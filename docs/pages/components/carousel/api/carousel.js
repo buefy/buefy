@@ -81,7 +81,7 @@ export default [
             },
             {
                 name: '<code>icon-prev</code>',
-                description: 'pause <code>autoplay</code> if the mouse enters the slide.',
+                description: 'Icon to use for previous arrow',
                 type: 'String',
                 values: '—',
                 default: '<code>chevron-left</code>'
