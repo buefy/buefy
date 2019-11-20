@@ -8,10 +8,10 @@ $checkbox-size: 1.25em !default;
 
 .b-checkbox {
     &.checkbox {
+        @extend %unselectable;
         outline: none;
         display: inline-flex;
         align-items: center;
-        @include unselectable;
         & + .checkbox {
             margin-left: 0.5em;
         }
