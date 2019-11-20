@@ -15,7 +15,7 @@ const Buefy = {
         // Config component
         const BuefyProgrammatic = {
             getOptions() {
-                return config;
+                return config
             },
             setOptions(options) {
                 setOptions(merge(config, options, true))
