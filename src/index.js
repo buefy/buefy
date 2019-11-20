@@ -14,7 +14,7 @@ const Buefy = {
         }
         // Config component
         const BuefyProgrammatic = {
-            getOptions(){
+            getOptions() {
                 return config;
             },
             setOptions(options) {
