@@ -1,7 +1,5 @@
 <template>
     <div class="timepicker control" :class="[size, {'is-expanded': expanded}]">
-        {{ tzOffset }}
-        {{ dateSelected }}
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
