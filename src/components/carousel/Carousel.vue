@@ -2,7 +2,9 @@
     <div
         class="carousel"
         @mouseenter="pauseTimer"
-        @mouseleave="startTimer">
+        @mouseleave="startTimer"
+        @touchstart.stop="touchStart"
+        @touchend.stop="touchEnd">
         <div class="carousel-list">
             <slot />
             <div
@@ -203,6 +205,19 @@ export default {
         checkArrow(value) {
             if (this.arrowBoth) return true
             if (this.activeItem !== value) return true
+        },
+        touchStart(event) {
+            this.startX = event.changedTouches[0].pageX
+        },
+        touchEnd(event) {
+            const diffX = event.changedTouches[0].pageX - this.startX
+            if (Math.abs(diffX) > 50) {
+                if (diffX < 0) {
+                    this.next()
+                } else {
+                    this.prev()
+                }
+            }
         }
     },
     mounted() {

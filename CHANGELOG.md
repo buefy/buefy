@@ -1,5 +1,18 @@
 # Buefy Changelog
 
+## 0.8.8
+
+### New features
+
+* Add ``subheadings`` prop/slot to table (thanks @arambert)
+* Add ``container`` prop to dialog (thanks @service-paradis)
+* Add touch events to carousel on mobile
+
+### Fixes
+
+* Fix custom icon pack improving merge internal function (thanks @service-paradis)
+* Fix #2006 tabs when nested each other (thanks @service-paradis)
+
 ## 0.8.7
 
 ### New features
