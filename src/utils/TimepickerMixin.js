@@ -134,6 +134,7 @@ export default {
         openOnFocus: Boolean,
         enableSeconds: Boolean,
         defaultMinutes: Number,
+        defaultSeconds: Number
         defaultSeconds: Number,
         focusable: {
             type: Boolean,
@@ -146,7 +147,7 @@ export default {
     },
     data() {
         return {
-            dateSelected: new Date(this.value.getTime() + this.tzOffset * 60000),
+            dateSelected: this.value,
             hoursSelected: null,
             minutesSelected: null,
             secondsSelected: null,
@@ -161,10 +162,10 @@ export default {
     computed: {
         computedValue: {
             get() {
-                return new Date(this.dateSelected.getTime() + this.tzOffset * 60000)
+                return this.dateSelected
             },
             set(value) {
-                this.dateSelected = new Date(value.getTime() + this.tzOffset * 60000)
+                this.dateSelected = value
                 this.$emit('input', this.dateSelected)
             }
         },
