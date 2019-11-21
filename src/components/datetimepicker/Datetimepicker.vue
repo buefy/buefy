@@ -166,7 +166,7 @@ export default {
                     } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
                         val = this.adjustValue(this.maxDatetime)
                     }
-                    this.newValue = new Date(val.getTime())
+                    this.newValue = this.adjustValue(new Date(val.getTime()))
                 } else {
                     this.newValue = this.adjustValue(this.value)
                 }
