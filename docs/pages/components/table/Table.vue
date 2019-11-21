@@ -28,6 +28,9 @@
 
         <Example :component="ExSearchable" :code="ExSearchableCode" title="Searchable">
             <p>You can add search filtering to rows by using the <code>searchable</code> prop.</p>
+            <b-message type="is-warning">
+                This feature is not available on mobile when <code>mobile-card</code>.
+            </b-message>
         </Example>
 
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
