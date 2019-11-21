@@ -24,6 +24,7 @@ export default {
             type: Boolean,
             default: true
         },
+        subheading: [String, Number],
         customSort: Function,
         internal: Boolean // Used internally by Table
     },

@@ -324,6 +324,11 @@ export default [
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             },
             {
+                name: '<code>subheading</code>',
+                description: 'Table subheading',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
                 name: '<code>detail</code>',
                 description: 'Row detail (collapsible)',
                 props: '<code>row: Object</code>, <code>index: Number</code>'
@@ -537,6 +542,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>subheading</code>',
+                description: 'Column subheading text',
+                type: 'String, Number',
+                values: '—',
+                default: '—'
+            },
         ],
         slots: [
             {
@@ -547,6 +559,11 @@ export default [
             {
                 name: '<code>header</code>',
                 description: 'Table column custom header',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>subheading</code>',
+                description: 'Table column custom subheading',
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             }
         ]

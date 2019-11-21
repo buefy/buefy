@@ -69,6 +69,15 @@
             </p>
         </Example>
 
+        <Example :component="ExSubheadings" :code="ExSubheadingsCode" title="Subheadings">
+            <p>
+                Use the <code>subheading</code> prop on columns to add subheadings. This is particularly useful to display a summary when dealing with long tables.
+            </p>
+            <p>
+                By adding a scoped slot named <code>subheading</code> in table component you can customize the subheadings.
+            </p>
+        </Example>
+
         <Example :component="ExToggleColumns" :code="ExToggleColumnsCode" title="Toggle columns">
             <b-message type="is-danger">
                 Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
@@ -129,6 +138,9 @@
     import ExCustomHeaders from './examples/ExCustomHeaders'
     import ExCustomHeadersCode from '!!raw-loader!./examples/ExCustomHeaders'
 
+    import ExSubheadings from './examples/ExSubheadings'
+    import ExSubheadingsCode from '!!raw-loader!./examples/ExSubheadings'
+
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
@@ -155,6 +167,7 @@
                 ExCustomDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
+                ExSubheadings,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
@@ -169,6 +182,7 @@
                 ExCustomDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
+                ExSubheadingsCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode,
