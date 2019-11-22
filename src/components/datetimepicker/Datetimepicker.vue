@@ -1,6 +1,6 @@
 <template>
     <b-datepicker
-        v-if="!isMobile || inline"
+        v-if="!isMobile || inline || tzOffset != 0"
         ref="datepicker"
         v-model="computedValue"
         v-bind="datepicker"
@@ -21,7 +21,7 @@
         :placeholder="placeholder"
         :range="false"
         :disabled="disabled"
-        :mobile-native="mobileNative"
+        :mobile-native="mobileNative && tzOffset != 0"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
@@ -41,6 +41,7 @@
                     :max-time="maxTime"
                     :size="timepickerSize"
                     :disabled="timepickerDisabled"
+                    :mobile-native="mobileNative && tzOffset != 0"
                 />
             </div>
             <div
