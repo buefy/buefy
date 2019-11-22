@@ -21,7 +21,7 @@
         :placeholder="placeholder"
         :range="false"
         :disabled="disabled"
-        :mobile-native="mobileNative && tzOffset != 0"
+        :mobile-native="mobileNative && tzOffset == 0"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
@@ -41,7 +41,7 @@
                     :max-time="maxTime"
                     :size="timepickerSize"
                     :disabled="timepickerDisabled"
-                    :mobile-native="mobileNative && tzOffset != 0"
+                    :mobile-native="mobileNative && tzOffset == 0"
                 />
             </div>
             <div
@@ -167,7 +167,7 @@ export default {
                     } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
                         val = this.adjustValue(this.maxDatetime)
                     }
-                    this.newValue = this.adjustValue(new Date(val.getTime()))
+                    this.newValue = new Date(val.getTime())
                 } else {
                     this.newValue = this.adjustValue(this.value)
                 }
