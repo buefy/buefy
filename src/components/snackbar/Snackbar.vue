@@ -5,7 +5,8 @@
         <div
             v-show="isActive"
             class="snackbar"
-            :class="[type,position]">
+            :class="[type,position]"
+            :role="actionText ? 'alertdialog' : 'alert'">
             <div class="text" v-html="message"/>
             <div
                 v-if="actionText"
