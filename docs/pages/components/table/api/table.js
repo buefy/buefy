@@ -403,7 +403,7 @@ export default [
             {
                 name: '<code>contextmenu</code>',
                 description: 'Triggers when right-click on a row',
-                parameters: '<code>row: Object</code>, <code>row: Object</code>'
+                parameters: '<code>row: Object</code>, <code>contextMenuNativeEvent: Event</code>'
             },
             {
                 name: '<code>dragstart</code>',
