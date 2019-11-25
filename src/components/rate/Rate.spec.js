@@ -2,10 +2,15 @@ import { shallowMount } from '@vue/test-utils'
 import BRate from '@components/rate/Rate'
 
 let wrapper
+const BIcon = {
+    template: '<b-icon-stub></b-icon-stub>'
+}
 
 describe('BRate', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BRate)
+        wrapper = shallowMount(BRate, {
+            component: BIcon
+        })
     })
 
     it('is vue instance', () => {
