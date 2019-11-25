@@ -184,6 +184,7 @@ export default {
         },
 
         minutes() {
+            if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.')
             const minutes = []
             for (let i = 0; i < 60; i += this.incrementMinutes) {
                 minutes.push({
@@ -195,6 +196,7 @@ export default {
         },
 
         seconds() {
+            if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.')
             const seconds = []
             for (let i = 0; i < 60; i += this.incrementSeconds) {
                 seconds.push({
