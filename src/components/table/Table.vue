@@ -449,7 +449,7 @@ export default {
         customRowKey: String,
         draggable: {
             type: Boolean,
-            defualt: false
+            default: false
         },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
