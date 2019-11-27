@@ -1,9 +1,11 @@
 import Autocomplete from './autocomplete'
 import Button from './button'
+import Carousel from './carousel'
 import Checkbox from './checkbox'
 import Collapse from './collapse'
 import Clockpicker from './clockpicker'
 import Datepicker from './datepicker'
+import Datetimepicker from './datetimepicker'
 import Dialog from './dialog'
 import Dropdown from './dropdown'
 import Field from './field'
@@ -19,6 +21,7 @@ import Numberinput from './numberinput'
 import Pagination from './pagination'
 import Progress from './progress'
 import Radio from './radio'
+import Rate from './rate'
 import Select from './select'
 import Slider from './slider'
 import Snackbar from './snackbar'
@@ -36,10 +39,12 @@ import Upload from './upload'
 export {
     Autocomplete,
     Button,
+    Carousel,
     Checkbox,
     Clockpicker,
     Collapse,
     Datepicker,
+    Datetimepicker,
     Dialog,
     Dropdown,
     Field,
@@ -55,6 +60,7 @@ export {
     Pagination,
     Progress,
     Radio,
+    Rate,
     Select,
     Slider,
     Snackbar,

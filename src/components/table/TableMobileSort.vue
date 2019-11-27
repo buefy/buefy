@@ -27,8 +27,9 @@
                     <b-icon
                         v-show="currentSortColumn === mobileSort"
                         :class="{ 'is-desc': !isAsc }"
-                        icon="arrow-up"
-                        size="is-small"
+                        :icon="sortIcon"
+                        :pack="iconPack"
+                        :size="sortIconSize"
                         both
                     />
                 </button>
@@ -51,7 +52,16 @@ export default {
         currentSortColumn: Object,
         isAsc: Boolean,
         columns: Array,
-        placeholder: String
+        placeholder: String,
+        iconPack: String,
+        sortIcon: {
+            type: String,
+            default: 'arrow-up'
+        },
+        sortIconSize: {
+            type: String,
+            default: 'is-small'
+        }
     },
     data() {
         return {

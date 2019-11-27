@@ -103,7 +103,7 @@ $steps-divider-height: .2em !default;
                 margin-top: 0;
                 position: relative;
                 flex-grow: 1;
-                flex-basis: 0;
+                flex-basis: 1em;
 
                 .step-link {
                     color: $body-color;
@@ -169,8 +169,6 @@ $steps-divider-height: .2em !default;
                 }
 
                 &:not(:first-child), &:only-child {
-                    flex-basis: 1em;
-                    flex-grow: 1;
                     flex-shrink: 1;
 
                     &::before {

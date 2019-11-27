@@ -111,11 +111,39 @@ export default [
                 default: '<code>clip</code>'
             },
             {
+                name: '<code>container</code>',
+                description: 'DOM element the dialog will be created on. Note that this also changes the <code>position</code> of the dialog from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>. Also note that this will override the <code>defaultContainerElement</code> if you specified it in your Buefy Constructor Options. See Constructor options for more details.',
+                type: 'String',
+                values: '—',
+                default: '<code>body</code>'
+            },
+            {
                 name: '<code>focusOn</code>',
                 description: 'Focus on confirm or cancel button (when dialog is not prompt)',
                 type: 'String',
                 values: '<code>confirm</code>, <code>cancel</code>',
                 default: '<code>confirm</code>'
+            },
+            {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the dialog.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-role</code>',
+                description: `Role attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '<code>dialog</code>, <code>alertdialog</code>',
+                default: '—'
+            },
+            {
+                name: '<code>aria-modal</code>',
+                description: `Improve accessiblity when enabled.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }

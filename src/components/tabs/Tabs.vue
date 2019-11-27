@@ -1,5 +1,5 @@
 <template>
-    <div class="b-tabs" :class="{ 'is-fullwidth': expanded }">
+    <div class="b-tabs" :class="mainClasses">
         <nav class="tabs" :class="navClasses">
             <ul>
                 <li
@@ -55,7 +55,8 @@ export default {
         destroyOnHide: {
             type: Boolean,
             default: false
-        }
+        },
+        vertical: Boolean
     },
     data() {
         return {
@@ -67,12 +68,19 @@ export default {
         }
     },
     computed: {
+        mainClasses() {
+            return {
+                'is-fullwidth': this.expanded,
+                'is-vertical': this.vertical,
+                [this.position]: this.position && this.vertical
+            }
+        },
         navClasses() {
             return [
                 this.type,
                 this.size,
-                this.position,
                 {
+                    [this.position]: this.position && !this.vertical,
                     'is-fullwidth': this.expanded,
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
@@ -101,7 +109,7 @@ export default {
         * Change the active tab and emit change event.
         */
         changeTab(newIndex) {
-            if (this.activeTab === newIndex) return
+            if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return
 
             if (this.activeTab < this.tabItems.length) {
                 this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
@@ -115,6 +123,7 @@ export default {
         * Tab click listener, emit input event and change active tab.
         */
         tabClick(value) {
+            if (this.activeTab === value) return
             this.$emit('input', value)
             this.changeTab(value)
         }

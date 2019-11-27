@@ -1,5 +1,5 @@
 <template>
-    <li>
+    <li :role="ariaRoleMenu">
         <component
             :is="tag"
             v-bind="$attrs"
@@ -67,12 +67,21 @@ export default {
                     'NLink'
                 ].indexOf(value) >= 0
             }
+        },
+        ariaRole: {
+            type: String,
+            default: ''
         }
     },
     data() {
         return {
             newActive: this.active,
             newExpanded: this.expanded
+        }
+    },
+    computed: {
+        ariaRoleMenu() {
+            return this.ariaRole === 'menuitem' ? this.ariaRole : null
         }
     },
     watch: {
@@ -98,8 +107,10 @@ export default {
             items.forEach((item) => {
                 if (item !== this) {
                     this.reset(item)
-                    item.newExpanded = false
-                    item.$emit('update:expanded', item.newActive)
+                    if (!parent.$data._isMenu || (parent.$data._isMenu && parent.accordion)) {
+                        item.newExpanded = false
+                        item.$emit('update:expanded', item.newActive)
+                    }
                     item.newActive = false
                     item.$emit('update:active', item.newActive)
                 }

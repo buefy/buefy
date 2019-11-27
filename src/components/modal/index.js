@@ -1,23 +1,26 @@
 import Vue from 'vue'
 import Modal from './Modal'
 
+import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ModalProgrammatic = {
     open(params) {
-        let content
         let parent
-        if (typeof params === 'string') content = params
+        if (typeof params === 'string') {
+            params = {
+                content: params
+            }
+        }
 
         const defaultParam = {
-            programmatic: true,
-            content
+            programmatic: true
         }
         if (params.parent) {
             parent = params.parent
             delete params.parent
         }
-        const propsData = Object.assign(defaultParam, params)
+        const propsData = merge(defaultParam, params)
 
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
         const ModalComponent = vm.extend(Modal)
@@ -41,5 +44,6 @@ use(Plugin)
 export default Plugin
 
 export {
-    ModalProgrammatic
+    ModalProgrammatic,
+    Modal as BModal
 }

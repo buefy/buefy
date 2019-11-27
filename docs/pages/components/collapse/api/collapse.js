@@ -21,6 +21,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: ''
+            },
+            {
+                name: '<code>position</code>',
+                description: 'Trigger position',
+                type: 'String',
+                values: '<code>is-top</code>, <code>is-bottom</code>',
+                default: '<code>is-top</code>'
             }
         ],
         slots: [

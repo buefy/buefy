@@ -1,6 +1,7 @@
 <template>
     <div class="b-numberinput field" :class="fieldClasses">
         <p
+            v-if="controls"
             class="control"
             @mouseup="onStopLongPress(false)"
             @mouseleave="onStopLongPress(false)"
@@ -20,7 +21,6 @@
                     :size="iconSize"/>
             </button>
         </p>
-
         <b-input
             type="number"
             ref="input"
@@ -41,8 +41,8 @@
             :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)" />
-
         <p
+            v-if="controls"
             class="control"
             @mouseup="onStopLongPress(true)"
             @mouseleave="onStopLongPress(true)"
@@ -92,6 +92,10 @@ export default {
             type: Boolean,
             default: true
         },
+        controls: {
+            type: Boolean,
+            default: true
+        },
         controlsRounded: {
             type: Boolean,
             default: false
@@ -113,7 +117,7 @@ export default {
             set(value) {
                 let newValue = value
                 if (value === '') {
-                    newValue = parseFloat(this.min) || 0
+                    newValue = parseFloat(this.min) || null
                 }
                 this.newValue = newValue
                 this.$emit('input', newValue)

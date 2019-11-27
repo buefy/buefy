@@ -47,6 +47,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: 'mdi, fa, fas, far, fab, fad, fal',
+                default: '<code>mdi</code>'
+            },
+            {
                 name: '<code>min</code>',
                 description: 'Minimum allowed value',
                 type: 'Number, String',
@@ -73,6 +80,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>controls</code>',
+                description: 'Showing controls(+/-)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>controls-position</code>',

@@ -26,6 +26,13 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
+        <Example :component="ExSearchable" :code="ExSearchableCode" title="Searchable">
+            <p>You can add search filtering to rows by using the <code>searchable</code> prop.</p>
+            <b-message type="is-warning">
+                This feature is not available on mobile when <code>mobile-card</code>.
+            </b-message>
+        </Example>
+
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
             <p>To make a column sortable, add the <code>sortable</code> prop on it and specify a <code>field</code> name.</p>
             <p>You can also use the <code>default-sort</code> prop to determine the default sort column and order. The column must be <code>sortable</code> to work.</p>
@@ -65,6 +72,15 @@
             </p>
         </Example>
 
+        <Example :component="ExSubheadings" :code="ExSubheadingsCode" title="Subheadings">
+            <p>
+                Use the <code>subheading</code> prop on columns to add subheadings. This is particularly useful to display a summary when dealing with long tables.
+            </p>
+            <p>
+                By adding a scoped slot named <code>subheading</code> in table component you can customize the subheadings.
+            </p>
+        </Example>
+
         <Example :component="ExToggleColumns" :code="ExToggleColumnsCode" title="Toggle columns">
             <b-message type="is-danger">
                 Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
@@ -83,7 +99,7 @@
 
         <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows">
             <p>
-                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>, 
+                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>,
                 <code>dragover</code> and <code>drop</code> events
             </p>
         </Example>
@@ -107,6 +123,9 @@
     import ExCheckable from './examples/ExCheckable'
     import ExCheckableCode from '!!raw-loader!./examples/ExCheckable'
 
+    import ExSearchable from './examples/ExSearchable'
+    import ExSearchableCode from '!!raw-loader!./examples/ExSearchable'
+
     import ExPaginationSort from './examples/ExPaginationSort'
     import ExPaginationSortCode from '!!raw-loader!./examples/ExPaginationSort'
 
@@ -121,6 +140,9 @@
 
     import ExCustomHeaders from './examples/ExCustomHeaders'
     import ExCustomHeadersCode from '!!raw-loader!./examples/ExCustomHeaders'
+
+    import ExSubheadings from './examples/ExSubheadings'
+    import ExSubheadingsCode from '!!raw-loader!./examples/ExSubheadings'
 
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
@@ -142,11 +164,13 @@
                 ExSandbox,
                 ExSelection,
                 ExCheckable,
+                ExSearchable,
                 ExPaginationSort,
                 ExDetailedRow,
                 ExCustomDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
+                ExSubheadings,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
@@ -155,11 +179,13 @@
                 ExSandboxCode,
                 ExSelectionCode,
                 ExCheckableCode,
+                ExSearchableCode,
                 ExPaginationSortCode,
                 ExDetailedRowCode,
                 ExCustomDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
+                ExSubheadingsCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode,

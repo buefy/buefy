@@ -18,11 +18,13 @@ export default {
         width: [Number, String],
         numeric: Boolean,
         centered: Boolean,
+        searchable: Boolean,
         sortable: Boolean,
         visible: {
             type: Boolean,
             default: true
         },
+        subheading: [String, Number],
         customSort: Function,
         internal: Boolean // Used internally by Table
     },
@@ -62,6 +64,11 @@ export default {
         this.addRefToTable()
     },
     beforeDestroy() {
+        if (this.sortable) {
+            if (!this.$parent.visibleData.length) return
+            if (this.$parent.$children.filter((vm) => vm.$options._componentTag === 'b-table-column' &&
+                vm.$data.newKey === this.newKey).length !== 1) return
+        }
         const index = this.$parent.newColumns.map(
             (column) => column.newKey).indexOf(this.newKey)
         if (index >= 0) {

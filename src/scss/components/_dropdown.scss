@@ -1,3 +1,7 @@
+$dropdown-mobile-breakpoint: $desktop !default;
+$dropdown-background-color: rgba($black, 0.86) !default;
+$dropdown-disabled-opacity: 0.5 !default;
+
 .dropdown {
     & + .dropdown {
         margin-left: 0.5em;
@@ -5,10 +9,10 @@
     .background {
         @include overlay;
         position: fixed;
-        background-color: rgba($black, 0.86);
+        background-color: $dropdown-background-color;
         z-index: 40;
         cursor: pointer;
-        @include desktop {
+        @media screen and (min-width: $dropdown-mobile-breakpoint) {
             display: none;
         }
     }
@@ -28,12 +32,25 @@
             white-space: nowrap;
         }
     }
-
+    &.is-expanded {
+        width: 100%;
+        .dropdown-trigger {
+            width: 100%;
+        }
+        .dropdown-menu {
+            width: 100%;
+        }
+        &.is-mobile-modal {
+            .dropdown-menu {
+                max-width: 100%;
+            }
+        }
+    }
     &:not(.is-disabled) {
         .dropdown-menu {
             .dropdown-item {
                 &.is-disabled {
-                    opacity: 0.5;
+                    opacity: $dropdown-disabled-opacity;
                 }
             }
         }
@@ -42,7 +59,7 @@
         height: 100%;
     }
     &.is-disabled {
-        opacity: 0.5;
+        opacity: $dropdown-disabled-opacity;
         cursor: not-allowed;
         .dropdown-trigger {
             pointer-events: none;
@@ -75,9 +92,9 @@
             left: auto;
         }
     }
-    @include touch {
+    @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
         &.is-mobile-modal {
-            .dropdown-menu {
+            > .dropdown-menu {
                 position: fixed;
                 width: calc(100vw - 40px);
                 max-width: 460px;
@@ -90,8 +107,10 @@
                 white-space: normal;
                 overflow-y: auto;
                 z-index: 50;
-                .dropdown-item {
-                    padding: 1rem 1.5rem;
+                > .dropdown-content {
+                    > .dropdown-item {
+                        padding: 1rem 1.5rem;
+                    }
                 }
             }
         }

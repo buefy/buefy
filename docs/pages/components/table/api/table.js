@@ -324,6 +324,11 @@ export default [
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             },
             {
+                name: '<code>subheading</code>',
+                description: 'Table subheading',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
                 name: '<code>detail</code>',
                 description: 'Row detail (collapsible)',
                 props: '<code>row: Object</code>, <code>index: Number</code>'
@@ -398,7 +403,7 @@ export default [
             {
                 name: '<code>contextmenu</code>',
                 description: 'Triggers when right-click on a row',
-                parameters: '<code>row: Object</code>, <code>row: Object</code>'
+                parameters: '<code>row: Object</code>, <code>contextMenuNativeEvent: Event</code>'
             },
             {
                 name: '<code>dragstart</code>',
@@ -529,7 +534,21 @@ export default [
                 type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
-            }
+            },
+            {
+                name: '<code>searchable</code>',
+                description: 'Add a input below the header to filter data',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>subheading</code>',
+                description: 'Column subheading text',
+                type: 'String, Number',
+                values: '—',
+                default: '—'
+            },
         ],
         slots: [
             {
@@ -540,6 +559,11 @@ export default [
             {
                 name: '<code>header</code>',
                 description: 'Table column custom header',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>subheading</code>',
+                description: 'Table column custom subheading',
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             }
         ]

@@ -15,3 +15,9 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Menu as BMenu,
+    MenuList as BMenuList,
+    MenuItem as BMenuItem
+}

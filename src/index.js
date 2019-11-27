@@ -1,20 +1,24 @@
 import * as components from './components'
 
+import { merge } from './utils/helpers'
 import config, { setOptions } from './utils/config'
 import { use, registerComponentProgrammatic } from './utils/plugins'
 
 const Buefy = {
     install(Vue, options = {}) {
         // Options
-        setOptions(Object.assign(config, options))
+        setOptions(merge(config, options, true))
         // Components
         for (let componentKey in components) {
             Vue.use(components[componentKey])
         }
         // Config component
         const BuefyProgrammatic = {
+            getOptions() {
+                return config
+            },
             setOptions(options) {
-                setOptions(Object.assign(config, options))
+                setOptions(merge(config, options, true))
             }
         }
         registerComponentProgrammatic(Vue, 'config', BuefyProgrammatic)

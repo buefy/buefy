@@ -6,7 +6,11 @@
         <div
             v-if="isActive"
             class="modal is-active"
-            :class="[{'is-full-screen': fullScreen}, customClass]">
+            :class="[{'is-full-screen': fullScreen}, customClass]"
+            v-trap-focus="trapFocus"
+            tabindex="-1"
+            :role="ariaRole"
+            :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
@@ -24,7 +28,8 @@
                 <slot v-else/>
                 <button
                     type="button"
-                    v-if="showX && !animating"
+                    v-if="showX"
+                    v-show="!animating"
                     class="modal-close is-large"
                     @click="cancel('x')"/>
             </div>
@@ -33,11 +38,15 @@
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import { removeElement } from '../../utils/helpers'
 import config from '../../utils/config'
 
 export default {
     name: 'BModal',
+    directives: {
+        trapFocus
+    },
     props: {
         active: Boolean,
         component: [Object, Function],
@@ -79,7 +88,21 @@ export default {
             }
         },
         fullScreen: Boolean,
-        customClass: String
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
+        },
+        customClass: String,
+        ariaRole: {
+            type: String,
+            validator: (value) => {
+                return [
+                    'dialog',
+                    'alertdialog'
+                ].indexOf(value) >= 0
+            }
+        },
+        ariaModal: Boolean
     },
     data() {
         return {
@@ -112,6 +135,11 @@ export default {
     watch: {
         active(value) {
             this.isActive = value
+            this.$nextTick(() => {
+                if (value && this.$el && this.$el.focus) {
+                    this.$el.focus()
+                }
+            })
         },
         isActive() {
             this.handleScroll()

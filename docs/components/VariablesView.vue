@@ -21,12 +21,19 @@ export default {
     props: {
         data: Array
     },
-    data() {
-        return {
-            variablesColumns: [
-                { label: 'Name', field: 'name', renderHtml: true },
-                { label: 'Default', field: 'default', renderHtml: true }
-            ]
+    computed: {
+        variablesColumns() {
+            let columns = []
+            if (this.data.some((d) => d.name !== undefined)) {
+                columns.push({ label: 'Name', field: 'name', renderHtml: true })
+            }
+            if (this.data.some((d) => d.description !== undefined)) {
+                columns.push({ label: 'Description', field: 'description', renderHtml: true })
+            }
+            if (this.data.some((d) => d.default !== undefined)) {
+                columns.push({ label: 'Default', field: 'default', renderHtml: true })
+            }
+            return columns
         }
     }
 }

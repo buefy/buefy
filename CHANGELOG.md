@@ -1,11 +1,99 @@
 # Buefy Changelog
 
+## 0.8.8
+
+### New features
+
+* Add ``subheadings`` prop/slot to table (thanks @arambert)
+* Add ``container`` prop to dialog (thanks @service-paradis)
+* Add touch events to carousel on mobile
+
+### Fixes
+
+* Fix custom icon pack improving merge internal function (thanks @service-paradis)
+* Fix #2006 tabs when nested each other (thanks @service-paradis)
+
+## 0.8.7
+
+### New features
+
+* **New component: Carousel**, [see docs](https://buefy.org/documentation/carousel) (thanks @apolokaklab)
+* Add ``controls`` prop to number input (thanks @afwn90cj93201nixr2e1re)
+* Add ``accordion`` prop to menu
+* Add ``icon-click`` event to input (thanks @service-paradis)
+* Add multiple support to Datepicker when type is ``month`` 
+* Add more customization variables for dropdown and loading (thanks @HugoHeneault)
+* Add more customization variables for datepicker (thanks @service-paradis)
+* Add ``defaultDatepickerMobileModal`` constructor option (thanks @ievhen-soloviov)
+* #2000 Add ``time-creator`` prop to timepicker
+
+### Fixes
+
+* Fix IE compatibility using multiple datepicker
+* Fix datetimepicker ignores expanded prop (thanks @cypressious)
+* Fix disabled checkbox in table (thanks @yxngl)
+* Fix page number count when filtering data (thanks @yxngl)
+* Fix placeholder to datetimepicker (thanks @yxngl)
+* Fix #1812 extending a component
+* Fix #1909, #1902, #1898 issues on searchable table column (thanks @dauriata and @service-paradis)
+* Fix #1951 modal a11y improvements (thanks @service-paradis)
+* Fix #1963 erase numberinput value
+* Fix #1972 using min and max native datepicker and timepicker props
+* Fix #1986 setting 00:00 on datetimepicker
+
+## 0.8.6
+
+### New features
+
+* **New component: Datetimepicker**, [see docs](https://buefy.org/documentation/datetimepicker)
+* Add ``searchable`` prop to table column (thanks @robertmarney, @tonystonee, @quadra-diffusion)
+* Add ``expanded`` prop to radio button (thanks @saaso)
+* Add ``expanded`` prop to checkbox button (thanks @saaso)
+* Add ``multiple`` prop to datepicker (thanks @jamenamcinteer)
+* Add ``vertical`` prop to tabs (thanks @service-paradis)
+* Add ``defaultButtonRounded`` constructor option (thanks @bohdan-prylutskyi)
+* Add ``mobile-burger`` prop to navbar (thanks @service-paradis)
+* Add ``v-on:listeners`` to navbar item
+* Add ``expanded`` prop to button (thanks @service-paradis)
+* Add a slot for overriding navigation to steps (thanks @service-paradis)
+* Add more customization variables to checkbox (thanks @HugoHeneault)
+* Add new SCSS variables to toast, snackbar and icon (thanks @service-paradis)
+* Improve accessibility to modal (thanks @service-paradis)
+* Enable to set a custom width (%, ...) to table column (thanks @druppy)
+
+### Fixes
+
+* Fix #1834 datepicker on ios mobile (thanks @bohdan-prylutskyi)
+* Fix #1875 datepicker disabled style
+* Fix #1883 ``date-parser`` function when range 
+* Fix taginput style when maxtags and using ``label-position`` prop on field
+
+## 0.8.5
+
+### New features
+
+* **New component: Rate**, [see docs](https://buefy.org/documentation/rate) (thanks @apolokaklab)
+* #1706 Add ``trap-focus`` prop to modal, dialog and dropdown (thanks @service-paradis)
+* #1775 Add ``expanded`` prop to dropdown
+* Add ``custom-formatter`` prop to slider (thanks @yxngl)
+* Add ``position`` prop to collapse
+
+### Fixes
+
+* Fix #1286 taginput close when autocomplete (thanks @wrabit)
+* Fix #1784 navbar navigation on mobile reverting #1743
+* Fix #1780 alignment using h1 tag on steps (thanks @service-paradis)
+* Fix #1786 icons warning for vue-fontawesome (thanks @service-paradis)
+* Fix #1814 set ``icon-pack`` pagination using table (thanks @service-paradis)
+* Fix #1821 datepicker reset using empty array when ``range``
+
 ## 0.8.4
 
 ### New features
 
 * Add style props (``is-boxed``, etc) to navbar and navbarcomponent
 * Add pagination buttons customization (thanks @service-paradis)
+* Improve accessibility for menu (thanks @mateuswetah)
 
 ### Fixes
 

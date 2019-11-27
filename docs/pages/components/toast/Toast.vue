@@ -13,11 +13,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/toast'
+    import variables from './variables/toast'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -26,6 +28,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 outsideVueInstance: `

@@ -13,3 +13,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Pagination as BPagination,
+    PaginationButton as BPaginationButton
+}

@@ -5,6 +5,11 @@
         "breadTitle": "Home",
         "path": "/"
     },
+    "notfound": {
+        "title": "Page not found",
+        "subtitle": "Sorry, we couldn’t find the page you were looking for",
+        "path": "/notfound"
+    },
     "documentation": {
         "title": "Documentation",
         "subtitle": "Learn everything you need to start using Buefy",
@@ -111,8 +116,7 @@
             "/",
             "documentation",
             "documentation/icon"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tooltip": {
         "title": "Tooltip",
@@ -148,8 +152,7 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -233,7 +236,8 @@
             "/",
             "documentation",
             "documentation/loading"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/field": {
         "title": "Field",
@@ -257,7 +261,8 @@
             "/",
             "documentation",
             "documentation/input"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/select": {
         "title": "Select",
@@ -329,8 +334,7 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -356,6 +360,19 @@
             "documentation",
             "documentation/clockpicker"
         ]
+    },
+    "documentation/datetimepicker": {
+        "title": "Datetimepicker",
+        "subtitle": "An input with a simple dropdown/modal for selecting a date and time, uses native datetimepicker for mobile",
+        "path": "/documentation/datetimepicker",
+        "githubPath": "pages/components/datetimepicker/Datetimepicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/datetimepicker"
+        ],
+        "isUpdated": true
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -391,7 +408,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -403,8 +421,7 @@
             "/",
             "documentation",
             "documentation/pagination"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/button": {
         "title": "Button",
@@ -428,7 +445,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/steps": {
         "title": "Steps",
@@ -440,8 +458,7 @@
             "/",
             "documentation",
             "documentation/steps"
-        ],
-        "isUpdated": "true"
+        ]
     },
     "documentation/menu": {
         "title": "Menu",
@@ -454,7 +471,7 @@
             "documentation",
             "documentation/menu"
         ],
-        "isUpdated": "true"
+        "isUpdated": true
     },
      "documentation/slider": {
         "title": "Slider",
@@ -466,8 +483,7 @@
             "/",
             "documentation",
             "documentation/slider"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/progress": {
         "title": "Progress",
@@ -479,6 +495,31 @@
             "/",
             "documentation",
             "documentation/progress"
+        ]
+    },
+    "documentation/carousel": {
+        "title": "Carousel",
+        "subtitle": "A Slideshow for cycling images in confined spaces",
+        "path": "/documentation/carousel",
+        "githubPath": "pages/components/carousel/Carousel.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/carousel"
+        ],
+        "isNew": true
+    },
+    "documentation/rate": {
+        "title": "Rate",
+        "subtitle": "A quick rating operation on something",
+        "path": "/documentation/rate",
+        "githubPath": "pages/components/rate/Rate.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/rate"
         ]
     },
     "extensions": {

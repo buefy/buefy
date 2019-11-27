@@ -20,6 +20,7 @@
                         placeholder: 'e.g. Walter',
                         maxlength: 10
                     },
+                    trapFocus: true,
                     onConfirm: (value) => this.$buefy.toast.open(`Your name is: ${value}`)
                 })
             },
@@ -33,6 +34,7 @@
                         maxlength: 2,
                         min: 18
                     },
+                    trapFocus: true,
                     onConfirm: (value) => this.$buefy.toast.open(`Your age is: ${value}`)
                 })
             }

@@ -10,15 +10,16 @@ describe('BSteps', () => {
             stepItems: [
                 {
                     isActive: true,
-                    clickable: false,
                     activate: jest.fn(),
-                    deactivate: jest.fn()
+                    deactivate: jest.fn(),
+                    visible: true
                 },
                 {
                     isActive: false,
                     clickable: false,
                     activate: jest.fn(),
-                    deactivate: jest.fn()
+                    deactivate: jest.fn(),
+                    visible: true
                 }
             ]
         })
@@ -53,5 +54,28 @@ describe('BSteps', () => {
         const valueEmitted = wrapper.emitted()['input'][0]
         expect(valueEmitted).toContainEqual(1)
         expect(wrapper.vm.changeStep).toHaveBeenCalled()
+    })
+
+    it('manage next/previous listener', () => {
+        const first = 0
+        const next = first + 1
+
+        expect(wrapper.vm.hasNext).toBeTruthy()
+        wrapper.vm.next()
+        expect(wrapper.emitted()['input'][0]).toContainEqual(next)
+        expect(wrapper.vm.activeStep).toBe(next)
+        expect(wrapper.vm.hasNext).toBeFalsy()
+
+        wrapper.vm.next()
+        expect(wrapper.vm.activeStep).toBe(next)
+
+        expect(wrapper.vm.hasPrev).toBeTruthy()
+        wrapper.vm.prev()
+        expect(wrapper.emitted()['input'][1]).toContainEqual(first)
+        expect(wrapper.vm.activeStep).toBe(first)
+        expect(wrapper.vm.hasPrev).toBeFalsy()
+
+        wrapper.vm.prev()
+        expect(wrapper.vm.activeStep).toBe(first)
     })
 })

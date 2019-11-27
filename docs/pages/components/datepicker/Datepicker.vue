@@ -53,12 +53,21 @@
             <p>Dates selected can be within a range.</p>
         </Example>
 
+        <Example :component="ExMultipleInput" :code="ExMultipleInputCode" title="Select multiple dates" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+            </div>
+            <p>Multiple dates can be selected and don't have to be contiguous.</p>
+        </Example>
+
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/datepicker'
+    import variables from './variables/datepicker'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -90,10 +99,14 @@
     import ExRangeInput from './examples/ExRangeInput'
     import ExRangeInputCode from '!!raw-loader!./examples/ExRangeInput'
 
+    import ExMultipleInput from './examples/ExMultipleInput'
+    import ExMultipleInputCode from '!!raw-loader!./examples/ExMultipleInput'
+
     export default {
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 ExEditable,
@@ -113,7 +126,9 @@
                 ExMonth,
                 ExMonthCode,
                 ExRangeInput,
-                ExRangeInputCode
+                ExRangeInputCode,
+                ExMultipleInput,
+                ExMultipleInputCode
             }
         }
     }

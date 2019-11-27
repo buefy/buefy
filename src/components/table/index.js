@@ -13,3 +13,8 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Table as BTable,
+    TableColumn as BTableColumn
+}

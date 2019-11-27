@@ -23,6 +23,8 @@
             </p>
         </Example>
 
+        <Example :component="ExVertical" :code="ExVerticalCode" title="Vertical"/>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -51,6 +53,9 @@
     import ExCustomHeaders from './examples/ExCustomHeaders'
     import ExCustomHeadersCode from '!!raw-loader!./examples/ExCustomHeaders'
 
+    import ExVertical from './examples/ExVertical'
+    import ExVerticalCode from '!!raw-loader!./examples/ExVertical'
+
     export default {
         data() {
             return {
@@ -68,7 +73,9 @@
                 ExTypesCode,
                 ExExpandedCode,
                 ExCustomHeaders,
-                ExCustomHeadersCode
+                ExCustomHeadersCode,
+                ExVertical,
+                ExVerticalCode
             }
         }
     }

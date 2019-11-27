@@ -5,7 +5,8 @@
             ref="dropdown"
             :position="position"
             :disabled="disabled"
-            :inline="inline">
+            :inline="inline"
+            :mobile-modal="mobileModal">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -123,6 +124,7 @@
                         :nearby-selectable-month-days="nearbySelectableMonthDays"
                         :show-week-number="showWeekNumber"
                         :range="range"
+                        :multiple="multiple"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -139,6 +141,7 @@
                         :events="events"
                         :indicators="indicators"
                         :date-creator="dateCreator"
+                        :multiple="multiple"
                         @close="togglePicker(false)"/>
                 </div>
 
@@ -165,11 +168,10 @@
             :min="formatNative(minDate)"
             :disabled="disabled"
             :readonly="false"
-            :show-week-number="showWeekNumber"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChangeNativePicker"
-            @focus="handleOnFocus"
+            @focus="onFocus"
             @blur="onBlur"/>
     </div>
 </template>
@@ -191,14 +193,15 @@ import DatepickerMonth from './DatepickerMonth'
 
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
-    return targetDates.map((date) => {
+    const dates = targetDates.map((date) => {
         const yyyyMMdd = date.getFullYear() +
             '/' + (date.getMonth() + 1) +
             '/' + date.getDate()
         const d = new Date(yyyyMMdd)
         return !vm.isTypeMonth ? d.toLocaleDateString()
             : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
-    }).join(' - ')
+    })
+    return !vm.multiple ? dates.join(' - ') : dates.join(', ')
 }
 
 const defaultDateParser = (date, vm) => {
@@ -380,6 +383,20 @@ export default {
         range: {
             type: Boolean,
             default: false
+        },
+        closeOnClick: {
+            type: Boolean,
+            default: true
+        },
+        multiple: {
+            type: Boolean,
+            default: false
+        },
+        mobileModal: {
+            type: Boolean,
+            default: () => {
+                return config.defaultDatepickerMobileModal
+            }
         }
     },
     data() {
@@ -403,7 +420,7 @@ export default {
             },
             set(value) {
                 this.updateInternalState(value)
-                this.togglePicker(false)
+                if (!this.multiple) this.togglePicker(false)
                 this.$emit('input', value)
             }
         },
@@ -466,7 +483,7 @@ export default {
         */
         value(value) {
             this.updateInternalState(value)
-            this.togglePicker(false)
+            if (!this.multiple) this.togglePicker(false)
             !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
@@ -495,7 +512,8 @@ export default {
         */
         onChange(value) {
             const date = this.dateParser(value, this)
-            if (date && !isNaN(date)) {
+            if (date && (!isNaN(date) ||
+                (Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1])))) {
                 this.computedValue = date
             } else {
                 // Force refresh input value when not valid date
@@ -593,12 +611,12 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date + ' 00:00:00') : null
+            this.computedValue = date ? new Date(date + 'T00:00:00') : null
         },
 
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
-                ? value[0]
+                ? (!value.length ? this.dateCreator() : value[0])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
                 month: currentDate.getMonth(),
@@ -612,9 +630,11 @@ export default {
         */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                this.$refs.dropdown.isActive = typeof active === 'boolean'
-                    ? active
-                    : !this.$refs.dropdown.isActive
+                if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = typeof active === 'boolean'
+                        ? active
+                        : !this.$refs.dropdown.isActive
+                }
             }
         },
 

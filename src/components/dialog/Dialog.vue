@@ -3,7 +3,10 @@
         <div
             v-if="isActive"
             class="dialog modal is-active"
-            :class="size">
+            :class="dialogClass"
+            v-trap-focus="trapFocus"
+            :role="ariaRole"
+            :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
@@ -65,6 +68,7 @@
 </template>
 
 <script>
+import trapFocus from '../../directives/trapFocus'
 import Icon from '../icon/Icon'
 import Modal from '../modal/Modal'
 import config from '../../utils/config'
@@ -74,6 +78,9 @@ export default {
     name: 'BDialog',
     components: {
         [Icon.name]: Icon
+    },
+    directives: {
+        trapFocus
     },
     extends: Modal,
     props: {
@@ -112,10 +119,28 @@ export default {
             type: Function,
             default: () => {}
         },
+        container: {
+            type: String,
+            default: config.defaultContainerElement
+        },
         focusOn: {
             type: String,
             default: 'confirm'
-        }
+        },
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
+        },
+        ariaRole: {
+            type: String,
+            validator: (value) => {
+                return [
+                    'dialog',
+                    'alertdialog'
+                ].indexOf(value) >= 0
+            }
+        },
+        ariaModal: Boolean
     },
     data() {
         const prompt = this.hasInput
@@ -129,6 +154,11 @@ export default {
         }
     },
     computed: {
+        dialogClass() {
+            return [this.size, {
+                'has-custom-container': this.container !== null
+            }]
+        },
         /**
         * Icon name (MDI) based on the type.
         */
@@ -181,10 +211,11 @@ export default {
         }
     },
     beforeMount() {
-        // Insert the Dialog component in body tag
+        // Insert the Dialog component in the element container
         if (typeof window !== 'undefined') {
             this.$nextTick(() => {
-                document.body.appendChild(this.$el)
+                const container = document.querySelector(this.container) || document.body
+                container.appendChild(this.$el)
             })
         }
     },
