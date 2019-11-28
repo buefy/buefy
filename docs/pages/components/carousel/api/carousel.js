@@ -21,7 +21,14 @@ export default [
                 description: 'Interval of the <code>autoplay</code>, in milliseconds',
                 type: 'Number',
                 values: '—',
-                default: '<code>3000</code>'
+                default: '<code>3500</code>'
+            },
+            {
+                name: '<code>has-drag</code>',
+                description: 'Toggle touch dragging, when touch not detected. auto switch mouse dragging',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>autoplay</code>',
@@ -101,6 +108,27 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>indicator-background</code>',
+                description: 'Added background for indicator',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>indicator-custom</code>',
+                description: 'use when the image is more than 6 so that the indicator is not too small',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>indicator-custom-size</code>',
+                description: 'image size on the indicator when the <code>indicator-custom</code> is used',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>',
+                default: '<code>is-small</code>'
+            },
+            {
                 name: '<code>indicator-inside</code>',
                 description: 'Display the indicator inside on carousel',
                 type: 'Boolean',
@@ -115,16 +143,47 @@ export default [
                 default: '<code>click</code>'
             },
             {
+                name: '<code>indicator-position</code>',
+                description: 'Position indicator only when <code>indicator-inside</code>',
+                type: 'String',
+                values: '<code>is-bottom</code>, <code>is-top</code>',
+                default: '<code>is-bottom</code>'
+            },
+            {
                 name: '<code>indicator-style</code>',
                 description: 'Style for indicator of carousel',
                 type: 'String',
                 values: '<code>is-boxs</code>, <code>is-dots</code>, <code>is-lines</code>',
                 default: '<code>is-dots</code>'
+            },
+            {
+                name: '<code>overlay</code>',
+                description: 'Switch like a gallery',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>progress</code>',
+                description: 'Display the progress item of carousel',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>progress-type</code>',
+                description: 'Type (color) of the progress, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '<code>is-primary</code>'
             }
         ],
         slots: [
             {
-                name: '<code>Indicators</code>',
+                name: '<code>indicators</code>',
                 description: 'Custom indicators',
                 props: '<code>i: Number</code>'
             }
