@@ -152,6 +152,11 @@ export default [
                 name: '<code>[any].native</code>',
                 description: 'Listen to any native event, e.g. <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>endOfScrollList</code>',
+                description: 'Triggers when <code>.dropdown-list</code> has reached scroll end',
+                parameters: '—'
             }
         ],
         methods: [

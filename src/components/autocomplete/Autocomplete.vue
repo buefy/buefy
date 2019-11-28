@@ -306,6 +306,17 @@ export default {
         },
 
         /**
+         * Check if the scroll list inside the dropdown
+         * reached it's end.
+         */
+        checkIfReachedTheEndOfScroll(list) {
+            if (list.clientHeight !== list.scrollHeight &&
+                list.scrollTop + list.clientHeight >= list.scrollHeight) {
+                this.$emit('endOfScrollList')
+            }
+        },
+
+        /**
          * Calculate if the dropdown is vertically visible when activated,
          * otherwise it is openened upwards.
          */
@@ -399,10 +410,20 @@ export default {
             window.addEventListener('resize', this.calcDropdownInViewportVertical)
         }
     },
+    mounted() {
+        if (this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
+        }
+    },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+        }
+        if (this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
     }
 }
