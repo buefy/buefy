@@ -30,7 +30,7 @@ describe('BCarousel', () => {
         expect(wrapper.name()).toBe('BCarousel')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
-    
+
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
@@ -70,5 +70,4 @@ describe('BCarousel', () => {
             indicatorInside && indicatorPosition
         ])
     })
-
 })
