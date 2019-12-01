@@ -82,10 +82,10 @@ export default {
          * Focus method that work dynamically depending on the component.
          */
         focus() {
-            if (this.$refs[this.$data._elementRef] === undefined) return
+            const el = this.getElement()
+            if (el === undefined) return
 
             this.$nextTick(() => {
-                const el = this.getElement()
                 if (el) el.focus()
             })
         },
@@ -134,9 +134,10 @@ export default {
         checkHtml5Validity() {
             if (!this.useHtml5Validation) return
 
-            if (this.$refs[this.$data._elementRef] === undefined) return
+            const el = this.getElement()
+            if (el === undefined) return
 
-            if (!this.getElement().checkValidity()) {
+            if (!el.checkValidity()) {
                 this.setInvalid()
                 this.isValid = false
             } else {
