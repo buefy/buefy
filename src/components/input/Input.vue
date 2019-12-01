@@ -197,7 +197,7 @@ export default {
             this.newType = this.isPasswordVisible ? 'text' : 'password'
 
             this.$nextTick(() => {
-                this.$refs.input.focus()
+                this.focus()
             })
         },
 
@@ -216,7 +216,7 @@ export default {
         iconClick(event) {
             this.$emit('icon-click', event)
             this.$nextTick(() => {
-                this.$refs.input.focus()
+                this.focus()
             })
         }
     }
