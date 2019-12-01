@@ -82,10 +82,10 @@ export default {
          * Focus method that work dynamically depending on the component.
          */
         focus() {
-            if (this.$data._elementRef === undefined) return
+            if (this.$refs[this.$data._elementRef] === undefined) return
 
             this.$nextTick(() => {
-                const el = this.$el.querySelector(this.$data._elementRef)
+                const el = this.getElement()
                 if (el) el.focus()
             })
         },
@@ -102,7 +102,7 @@ export default {
         },
 
         getElement() {
-            return this.$el.querySelector(this.$data._elementRef)
+            return this.$refs[this.$data._elementRef]
         },
 
         setInvalid() {
