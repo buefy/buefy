@@ -183,13 +183,17 @@ export default {
     },
     watch: {
         /**
-        * When v-model is changed set the new active tab.
+        * When v-model is changed set the new active item.
         */
         value(value) {
-            this.changeItem(value, false)
+            if (value < this.activeItem) {
+                this.changeItem(value, true)
+            } else {
+                this.changeItem(value, false)
+            }
         },
         /**
-        * When tab-items are updated, set active one.
+        * When carousel-items are updated, set active one.
         */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
@@ -197,8 +201,8 @@ export default {
             }
         },
         /**
-         *  When autoplay is change, set by status
-         */
+        * When autoplay is change, set by status
+        */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
         }
