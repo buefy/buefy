@@ -186,7 +186,11 @@ export default {
         * When v-model is changed set the new active item.
         */
         value(value) {
-            value < this.activeItem ? this.changeItem(value, true) : this.changeItem(value, false)
+            if (value < this.activeItem) {
+                this.changeItem(value, true)
+            } else {
+                this.changeItem(value, false)
+            }
         },
         /**
         * When carousel-items are updated, set active one.
