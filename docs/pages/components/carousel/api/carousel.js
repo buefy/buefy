@@ -153,7 +153,7 @@ export default [
                 name: '<code>indicator-style</code>',
                 description: 'Style for indicator of carousel',
                 type: 'String',
-                values: '<code>is-boxs</code>, <code>is-dots</code>, <code>is-lines</code>',
+                values: '<code>is-boxes</code>, <code>is-dots</code>, <code>is-lines</code>',
                 default: '<code>is-dots</code>'
             },
             {
