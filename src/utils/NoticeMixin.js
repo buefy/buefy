@@ -87,6 +87,7 @@ export default {
         close() {
             clearTimeout(this.timer)
             this.isActive = false
+            this.$emit('close')
 
             // Timeout for the animation complete before destroying
             setTimeout(() => {
