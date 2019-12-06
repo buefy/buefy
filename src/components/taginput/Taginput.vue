@@ -46,18 +46,18 @@
                 <template :slot="headerSlotName">
                     <slot name="header" />
                 </template>
+                <template :slot="emptySlotName">
+                    <slot name="empty" />
+                </template>
+                <template :slot="footerSlotName">
+                    <slot name="footer" />
+                </template>
                 <template
                     :slot="defaultSlotName"
                     slot-scope="props">
                     <slot
                         :option="props.option"
                         :index="props.index" />
-                </template>
-                <template :slot="emptySlotName">
-                    <slot name="empty" />
-                </template>
-                <template :slot="footerSlotName">
-                    <slot name="footer" />
                 </template>
             </b-autocomplete>
         </div>
