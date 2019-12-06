@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    // You have to install sorable.js to use it:
+    // You have to install sortable.js to use it:
     // 'npm install sortablejs'
     import Sortable from 'sortablejs'
 
