@@ -1,11 +1,11 @@
-import Vue from 'vue'
 import Dialog from './Dialog'
 
+import { VueInstance } from './utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 function open(propsData) {
-    const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+    const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : VueInstance
     const DialogComponent = vm.extend(Dialog)
     return new DialogComponent({
         el: document.createElement('div'),
