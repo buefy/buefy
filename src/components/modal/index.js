@@ -1,6 +1,6 @@
-import Vue from 'vue'
 import Modal from './Modal'
 
+import { VueInstance } from './utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
@@ -22,7 +22,7 @@ const ModalProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
 
-        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : VueInstance
         const ModalComponent = vm.extend(Modal)
         return new ModalComponent({
             parent,
