@@ -48,10 +48,10 @@ let config = {
     customIconPacks: null
 } // TODO defaultTrapFocus to true in the next breaking change
 
-let VueInstance = null
-
 export { config as default }
 
 export const setOptions = (options) => { config = options }
 
-export VueInstance
+export const setVueInstance = (Vue) => { VueInstance = Vue }
+
+export let VueInstance
