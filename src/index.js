@@ -1,11 +1,12 @@
 import * as components from './components'
 
 import { merge } from './utils/helpers'
-import config, { setOptions } from './utils/config'
+import config, { setOptions, VueInstance } from './utils/config'
 import { use, registerComponentProgrammatic } from './utils/plugins'
 
 const Buefy = {
     install(Vue, options = {}) {
+        VueInstance = Vue
         // Options
         setOptions(merge(config, options, true))
         // Components
