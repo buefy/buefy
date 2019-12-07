@@ -1,7 +1,6 @@
-import Vue from 'vue'
 import Snackbar from './Snackbar'
 
-import config from '../../utils/config'
+import config, { VueInstance } from './utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
@@ -24,7 +23,7 @@ const SnackbarProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
 
-        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : VueInstance
         const SnackbarComponent = vm.extend(Snackbar)
         return new SnackbarComponent({
             parent,
