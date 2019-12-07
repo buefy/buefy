@@ -6,7 +6,7 @@ import { use, registerComponentProgrammatic } from './utils/plugins'
 
 const Buefy = {
     install(Vue, options = {}) {
-		setVueInstance(Vue)
+        setVueInstance(Vue)
         // Options
         setOptions(merge(config, options, true))
         // Components

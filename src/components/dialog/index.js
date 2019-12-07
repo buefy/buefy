@@ -7,7 +7,7 @@ import { use, registerComponent, registerComponentProgrammatic } from '../../uti
 let localVueInstance
 
 function open(propsData) {
-	const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
+    const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
     const DialogComponent = vm.extend(Dialog)
     return new DialogComponent({
         el: document.createElement('div'),
@@ -45,7 +45,7 @@ const DialogProgrammatic = {
 
 const Plugin = {
     install(Vue) {
-		localVueInstance = Vue
+        localVueInstance = Vue
         registerComponent(Vue, Dialog)
         registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic)
     }

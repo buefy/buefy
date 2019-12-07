@@ -24,8 +24,8 @@ const ToastProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
 
-		const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
-		const ToastComponent = vm.extend(Toast)
+        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
+        const ToastComponent = vm.extend(Toast)
         return new ToastComponent({
             parent,
             el: document.createElement('div'),
@@ -36,7 +36,7 @@ const ToastProgrammatic = {
 
 const Plugin = {
     install(Vue) {
-		localVueInstance = Vue
+        localVueInstance = Vue
         registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic)
     }
 }
