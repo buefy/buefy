@@ -1,6 +1,6 @@
-import Vue from 'vue'
 import Loading from './Loading'
 
+import { VueInstance } from './utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
@@ -11,7 +11,7 @@ const LoadingProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
 
-        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : VueInstance
         const LoadingComponent = vm.extend(Loading)
         return new LoadingComponent({
             el: document.createElement('div'),
