@@ -312,7 +312,7 @@ export default {
         checkIfReachedTheEndOfScroll(list) {
             if (list.clientHeight !== list.scrollHeight &&
                 list.scrollTop + list.clientHeight >= list.scrollHeight) {
-                this.$emit('endOfScrollList')
+                this.$emit('infiniteScroll')
             }
         },
 

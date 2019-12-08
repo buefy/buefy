@@ -9,7 +9,7 @@
                 :loading="isFetching"
                 @typing="getAsyncData"
                 @select="option => selected = option"
-                @endOfScrollList="getMoreAsyncData">
+                @infiniteScroll="getMoreAsyncData">
 
                 <template slot-scope="props">
                     <div class="media">

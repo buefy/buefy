@@ -154,7 +154,7 @@ export default [
                 parameters: '<code>event: $event</code>'
             },
             {
-                name: '<code>endOfScrollList</code>',
+                name: '<code>infiniteScroll</code>',
                 description: 'Triggers when <code>.dropdown-list</code> has reached scroll end',
                 parameters: '—'
             }
