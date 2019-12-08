@@ -92,7 +92,8 @@ export default {
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
-        customFormatter: Function
+        customFormatter: Function,
+        checkInfiniteScroll: Boolean
     },
     data() {
         return {
@@ -411,7 +412,7 @@ export default {
         }
     },
     mounted() {
-        if (this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+        if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
             list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
         }
@@ -421,7 +422,7 @@ export default {
             document.removeEventListener('click', this.clickedOutside)
             window.removeEventListener('resize', this.calcDropdownInViewportVertical)
         }
-        if (this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+        if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }

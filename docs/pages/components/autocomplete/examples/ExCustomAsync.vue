@@ -7,6 +7,7 @@
                 placeholder="e.g. Fight Club"
                 field="title"
                 :loading="isFetching"
+                :checkInfiniteScroll="true"
                 @typing="getAsyncData"
                 @select="option => selected = option"
                 @infiniteScroll="getMoreAsyncData">

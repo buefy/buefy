@@ -93,6 +93,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>checkInfiniteScroll</code>',
+                description: 'Makes the component check if list reached scroll end and emit <code>infiniteScroll()</code> event.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
