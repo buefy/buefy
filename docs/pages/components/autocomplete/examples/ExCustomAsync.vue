@@ -7,10 +7,10 @@
                 placeholder="e.g. Fight Club"
                 field="title"
                 :loading="isFetching"
-                :checkInfiniteScroll="true"
+                :check-infinite-scroll="true"
                 @typing="getAsyncData"
                 @select="option => selected = option"
-                @infiniteScroll="getMoreAsyncData">
+                @infinite-scroll="getMoreAsyncData">
 
                 <template slot-scope="props">
                     <div class="media">

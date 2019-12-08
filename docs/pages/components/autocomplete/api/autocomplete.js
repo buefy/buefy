@@ -93,8 +93,8 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>checkInfiniteScroll</code>',
-                description: 'Makes the component check if list reached scroll end and emit <code>infiniteScroll()</code> event.',
+                name: '<code>check-infinite-scroll</code>',
+                description: 'Makes the component check if list reached scroll end and emit <code>infinite-sroll</code> event.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -161,7 +161,7 @@ export default [
                 parameters: '<code>event: $event</code>'
             },
             {
-                name: '<code>infiniteScroll</code>',
+                name: '<code>infinite-scroll</code>',
                 description: 'Triggers when <code>.dropdown-list</code> has reached scroll end',
                 parameters: '—'
             }
