@@ -903,7 +903,7 @@ export default {
             */
         handleDetailKey(index) {
             const key = this.detailKey
-            return !key.length
+            return !key.length || !index
                 ? index
                 : index[key]
         },
