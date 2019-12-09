@@ -1,6 +1,7 @@
 $snackbar-background-color: $dark !default;
 $snackbar-color: $dark-invert !default;
 $snackbar-border-radius: $radius !default;
+$snackbar-button-text-transform: uppercase !default;
 
 $toast-border-radius: 2em !default;
 $toast-opacity: 0.92 !default;
@@ -56,7 +57,7 @@ $toast-opacity: 0.92 !default;
             padding-left: 0;
             .button {
                 font-weight: $weight-semibold;
-                text-transform: uppercase;
+                text-transform: $snackbar-button-text-transform;
                 background: $snackbar-background-color;
                 border: transparent;
             }
