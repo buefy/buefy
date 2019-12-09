@@ -1,19 +1,47 @@
+$carousel-min-height: 120px !default;
+
 $carousel-arrow-background: $white !default;
 $carousel-arrow-color: $primary !default;
 $carousel-arrow-icon-spaced: 1.5rem !default;
-$carousel-arrow-top: 45% !default;
+$carousel-arrow-top: 50% !default;
 
-$carousel-indicator-background: $primary !default;
+$carousel-indicator-background: rgba($black, 0.50) !default;
+$carousel-indicator-color: $primary !default;
 $carousel-indicator-border: $white !default;
 $carousel-indicator-spaced: .5rem !default;
 
+$carousel-overlay-background: rgba($black, 0.86) !default;
+$carousel-overlay-z: 40 !default;
+
 .carousel {
     @extend %unselectable;
-	position: relative;
+    min-height: $carousel-min-height;
+    position: relative;
+    &.is-overlay {
+        background-color: $carousel-overlay-background;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        display: flex;
+        position: fixed;
+        z-index: $carousel-overlay-z;
+        .carousel-item img {
+            cursor: default;
+        }
+        .carousel-indicator.has-background {
+            background: transparent;
+        }
+    }
+    .progress {
+        border-radius: 2px;
+        height: 0.25rem;
+        margin-bottom: 0;
+    }
     .carousel-list {
         position: relative;
         display: flex;
         overflow: hidden;
+        width: 100%;
         &:hover .carousel-arrow.is-hovered {
             opacity: 1;
         }
@@ -27,16 +55,12 @@ $carousel-indicator-spaced: .5rem !default;
         position: absolute;
         top: 0;
         right: 0.15rem;
-        transition: .5s $easing;
+        z-index: 1;
     }
     .carousel-arrow {
         transition: .5s $easing;
         &.is-hovered {
             opacity: 0;
-            // when touch added, delete this!
-            @include mobile {
-                opacity: 1;
-            }
         }
         .icon {
             background: $carousel-arrow-background;
@@ -69,10 +93,30 @@ $carousel-indicator-spaced: .5rem !default;
         display: flex;
         align-items: center;
         justify-content: center;
+        &.has-background {
+            background: $carousel-indicator-background;
+        }
+        &.has-custom {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            @include overflow-touch;
+            overflow: hidden;
+            overflow-x: auto;
+            &.is-small .indicator-item {
+                flex: 1 0 10%;
+            }
+            &.is-medium .indicator-item {
+                flex: 1 0 16.66667%;
+            }
+        }
         &.is-inside {
             position: absolute;
-            bottom: 0;
-            z-index: 1;
+            &.is-bottom {
+                bottom: 0;
+            }
+            &.is-top {
+                top: 0;
+            }
         }
         .indicator-item {
             &:not(:last-child) {
@@ -80,16 +124,16 @@ $carousel-indicator-spaced: .5rem !default;
             }
             &.is-active .indicator-style,
             .indicator-style:hover {
-                background: $carousel-indicator-background;
+                background: $carousel-indicator-color;
                 border: 1px solid $carousel-indicator-border;
             }
             .indicator-style {
                 display: block;
-                border: 1px solid $carousel-indicator-background;
+                border: 1px solid $carousel-indicator-color;
                 background: $carousel-indicator-border;
                 outline: none;
                 transition: .3s $easing;
-                &.is-boxs {
+                &.is-boxes {
                     height: 10px;
                     width: 10px;
                 }

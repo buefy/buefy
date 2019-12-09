@@ -1,11 +1,23 @@
 <template>
     <div
         class="carousel"
+        :class="{'is-overlay': overlay}"
         @mouseenter="pauseTimer"
-        @mouseleave="startTimer"
-        @touchstart.stop="touchStart"
-        @touchend.stop="touchEnd">
-        <div class="carousel-list">
+        @mouseleave="startTimer">
+        <progress
+            v-if="progress"
+            class="progress"
+            :class="progressType"
+            :value="activeItem"
+            :max="carouselItems.length - 1">
+            {{ carouselItems.length - 1 }}
+        </progress>
+        <div
+            class="carousel-list"
+            @mousedown="dragStart"
+            @mouseup="dragEnd"
+            @touchstart.stop="dragStart"
+            @touchend.stop="dragEnd">
             <slot />
             <div
                 v-if="arrow"
@@ -37,7 +49,7 @@
         <div
             v-if="indicator"
             class="carousel-indicator"
-            :class="{'is-inside': indicatorInside}">
+            :class="indicatorClasses">
             <a
                 v-for="(item, index) in carouselItems"
                 class="indicator-item"
@@ -75,6 +87,10 @@ export default {
             default: 'slide'
         },
         interval: Number,
+        hasDrag: {
+            type: Boolean,
+            default: true
+        },
         autoplay: {
             type: Boolean,
             default: true
@@ -113,6 +129,12 @@ export default {
             type: Boolean,
             default: true
         },
+        indicatorBackground: Boolean,
+        indicatorCustom: Boolean,
+        indicatorCustomSize: {
+            type: String,
+            default: 'is-small'
+        },
         indicatorInside: {
             type: Boolean,
             default: true
@@ -121,9 +143,19 @@ export default {
             type: String,
             default: 'click'
         },
+        indicatorPosition: {
+            type: String,
+            default: 'is-bottom'
+        },
         indicatorStyle: {
             type: String,
             default: 'is-dots'
+        },
+        overlay: Boolean,
+        progress: Boolean,
+        progressType: {
+            type: String,
+            default: 'is-primary'
         }
     },
     data() {
@@ -132,18 +164,36 @@ export default {
             activeItem: this.value,
             carouselItems: [],
             isPause: false,
+            dragX: 0,
             timer: null
+        }
+    },
+    computed: {
+        indicatorClasses() {
+            return [
+                {
+                    'has-background': this.indicatorBackground,
+                    'has-custom': this.indicatorCustom,
+                    'is-inside': this.indicatorInside
+                },
+                this.indicatorCustom && this.indicatorCustomSize,
+                this.indicatorInside && this.indicatorPosition
+            ]
         }
     },
     watch: {
         /**
-        * When v-model is changed set the new active tab.
+        * When v-model is changed set the new active item.
         */
         value(value) {
-            this.changeItem(value, false)
+            if (value < this.activeItem) {
+                this.changeItem(value, true)
+            } else {
+                this.changeItem(value, false)
+            }
         },
         /**
-        * When tab-items are updated, set active one.
+        * When carousel-items are updated, set active one.
         */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
@@ -151,8 +201,8 @@ export default {
             }
         },
         /**
-         *  When autoplay is change, set by status
-         */
+        * When autoplay is change, set by status
+        */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
         }
@@ -206,17 +256,29 @@ export default {
             if (this.arrowBoth) return true
             if (this.activeItem !== value) return true
         },
-        touchStart(event) {
-            this.startX = event.changedTouches[0].pageX
+        // handle drag event
+        dragStart(event) {
+            if (!this.hasDrag) return
+            this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX
+            if (event.touches) {
+                this.pauseTimer()
+            } else {
+                event.preventDefault()
+            }
         },
-        touchEnd(event) {
-            const diffX = event.changedTouches[0].pageX - this.startX
+        dragEnd(event) {
+            if (!this.hasDrag) return
+            const detected = event.touches ? event.changedTouches[0].pageX : event.pageX
+            const diffX = detected - this.dragx
             if (Math.abs(diffX) > 50) {
                 if (diffX < 0) {
                     this.next()
                 } else {
                     this.prev()
                 }
+            }
+            if (event.touches) {
+                this.startTimer()
             }
         }
     },

@@ -205,7 +205,7 @@ export default {
             const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
                 selectedDate.getTime() === date.getTime()
             )
-            if (multipleSelect) {
+            if (multipleSelect.length) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
                     selectedDate.getTime() !== date.getTime()
                 )
