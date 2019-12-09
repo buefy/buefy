@@ -38,11 +38,13 @@
                 :autocomplete="nativeAutocomplete"
                 :keep-first="!allowNew"
                 :use-html5-validation="useHtml5Validation"
+                :check-infinite-scroll="checkInfiniteScroll"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
-                @select="onSelect">
+                @select="onSelect"
+                @infinite-scroll="emitInfiniteScroll">
                 <template :slot="headerSlotName">
                     <slot name="header" />
                 </template>
@@ -144,6 +146,10 @@ export default {
             default: () => true
         },
         allowDuplicates: {
+            type: Boolean,
+            default: false
+        },
+        checkInfiniteScroll: {
             type: Boolean,
             default: false
         }
@@ -322,6 +328,10 @@ export default {
 
         onTyping($event) {
             this.$emit('typing', $event.trim())
+        },
+
+        emitInfiniteScroll() {
+            this.$emit('infinite-scroll')
         }
     }
 }
