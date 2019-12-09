@@ -16,8 +16,9 @@
             <p>You can add your custom footer to the autocomplete.</p>
         </Example>
 
-        <Example :component="ExCustomAsync" :code="ExCustomAsyncCode" title="Async with custom template">
+        <Example :component="ExCustomAsync" :code="ExCustomAsyncCode" title="Async with custom template and infinite scroll">
             <p>You can have a custom template by adding a scoped slot to it.</p>
+            <p>With <code>check-infinite-scroll</code> and <code>infinite-scroll</code> event you can listen to the end of the scroll list to implement an infinite scroll strategy.</p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
         </Example>
 
