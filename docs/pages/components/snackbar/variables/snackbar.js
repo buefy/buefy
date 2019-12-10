@@ -10,5 +10,9 @@ export default [
     {
         name: '<code>$snackbar-border-radius</code>',
         default: '<code>$radius</code>'
+    },
+    {
+        name: '<code>$snackbar-button-text-transform</code>',
+        default: '<code>uppercase</code>'
     }
 ]
