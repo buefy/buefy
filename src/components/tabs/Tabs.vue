@@ -88,7 +88,10 @@ export default {
         },
         tabItems() {
             return this.defaultSlots
-                .filter((vnode) => vnode.componentInstance && vnode.componentOptions && vnode.componentOptions.tag === 'b-tab-item')
+                .filter((vnode) =>
+                    vnode.componentInstance &&
+                    vnode.componentInstance.$data &&
+                    vnode.componentInstance.$data._isTabItem)
                 .map((vnode) => vnode.componentInstance)
         }
     },
