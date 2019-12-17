@@ -128,6 +128,8 @@
                         :show-week-number="showWeekNumber"
                         :range="range"
                         :multiple="multiple"
+                        @range-start="date => $emit('range-start', date)"
+                        @range-end="date => $emit('range-end', date)"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
