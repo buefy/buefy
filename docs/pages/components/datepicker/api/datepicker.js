@@ -274,6 +274,16 @@ export default [
                 name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
+            },
+            {
+                name: '<code>range-start</code>',
+                description: 'Triggers when user starts selecting a date range (Only when <b>range</b> prop is set)',
+                parameters: '<code>date: Date</code>'
+            },
+            {
+                name: '<code>range-end</code>',
+                description: 'Triggers when user ends selecting a date range (Only when <b>range</b> prop is set)',
+                parameters: '<code>date: Date</code>'
             }
         ],
         methods: [
