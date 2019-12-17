@@ -212,7 +212,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>show-number-week</code>',
+                name: '<code>show-week-number</code>',
                 description: 'Display week number',
                 type: 'Boolean',
                 values: '-',

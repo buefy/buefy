@@ -37,7 +37,7 @@ export default [
                 description: 'Visibility duration in miliseconds',
                 type: 'Number',
                 values: '—',
-                default: '<code>5000</code>'
+                default: '<code>2000</code>'
             },
             {
                 name: '<code>icon-pack</code>',

@@ -138,6 +138,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>check-infinite-scroll</code>',
+                description: 'Makes the autocomplete component check if list reached scroll end and emit <code>infinite-sroll</code> event.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any other native attribute',
                 description: '—',
                 type: '—',
@@ -182,6 +189,11 @@ export default [
                 name: '<code>remove</code>',
                 description: 'Triggers when a tag has been removed',
                 parameters: '<code>value: String|Object</code>'
+            },
+            {
+                name: '<code>infinite-scroll</code>',
+                description: 'Triggers when the autocomplete <code>.dropdown-list</code> has reached scroll end',
+                parameters: '—'
             }
         ]
     }

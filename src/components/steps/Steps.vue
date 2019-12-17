@@ -201,6 +201,8 @@ export default {
         changeStep(newIndex) {
             if (this.activeStep === newIndex) return
 
+            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
+
             if (this.activeStep < this.stepItems.length) {
                 this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
             }
