@@ -177,7 +177,7 @@ $table-sticky-header-height: 300px !default;
         }
         tr.detail {
             box-shadow: inset 0 1px 3px $grey-lighter;
-            background: $white-bis;
+            background: $scheme-main-bis;
             .detail-container {
                 padding: 1rem;
             }
@@ -240,7 +240,7 @@ $table-sticky-header-height: 300px !default;
             @include table-cards
         }
     }
-    
+
     &.is-loading {
         position: relative;
         pointer-events: none;
