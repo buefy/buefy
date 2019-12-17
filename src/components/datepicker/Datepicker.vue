@@ -29,7 +29,10 @@
                 @focus="handleOnFocus"
                 @blur="onBlur" />
 
-            <b-dropdown-item :disabled="disabled" custom>
+            <b-dropdown-item
+                :disabled="disabled"
+                :focusable="focusable"
+                custom>
                 <header class="datepicker-header">
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
@@ -397,6 +400,10 @@ export default {
             default: () => {
                 return config.defaultDatepickerMobileModal
             }
+        },
+        focusable: {
+            type: Boolean,
+            default: true
         }
     },
     data() {

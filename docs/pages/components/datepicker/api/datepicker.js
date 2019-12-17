@@ -240,6 +240,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Datepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

@@ -130,7 +130,11 @@ export default {
         openOnFocus: Boolean,
         enableSeconds: Boolean,
         defaultMinutes: Number,
-        defaultSeconds: Number
+        defaultSeconds: Number,
+        focusable: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {

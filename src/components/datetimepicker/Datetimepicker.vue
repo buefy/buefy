@@ -22,6 +22,7 @@
         :range="false"
         :disabled="disabled"
         :mobile-native="mobileNative"
+        :focusable="focusable"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
@@ -41,6 +42,7 @@
                     :max-time="maxTime"
                     :size="timepickerSize"
                     :disabled="timepickerDisabled"
+                    :focusable="focusable"
                 />
             </div>
             <div
@@ -126,7 +128,11 @@ export default {
             }
         },
         datepicker: Object,
-        timepicker: Object
+        timepicker: Object,
+        focusable: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {

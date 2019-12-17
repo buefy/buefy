@@ -114,6 +114,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Datetimepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
