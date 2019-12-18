@@ -4,27 +4,34 @@ exports[`BDatepickerTable render correctly 1`] = `
 <section class="datepicker-table">
     <header class="datepicker-header">
         <div class="datepicker-cell">
-
+            Su
         </div>
         <div class="datepicker-cell">
-
+            M
         </div>
         <div class="datepicker-cell">
-
+            Tu
         </div>
         <div class="datepicker-cell">
-
+            W
         </div>
         <div class="datepicker-cell">
-
+            Th
         </div>
         <div class="datepicker-cell">
-
+            F
         </div>
         <div class="datepicker-cell">
-
+            S
         </div>
     </header>
-    <div class="datepicker-body"></div>
+    <div class="datepicker-body">
+        <bdatepickertablerow-stub selecteddate="Sat Jul 21 2018 09:10:11 GMT-0400 (Est (heure d’été))" hovereddaterange="" week="Sun Jul 01 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jul 02 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jul 03 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jul 04 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jul 05 2018 00:00:00 GMT-0400 (Est (heure d’été)),Fri Jul 06 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jul 07 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="6" unselectabledaysofweek="" events="" rulesforfirstweek="4" firstdayofweek="0"></bdatepickertablerow-stub>
+        <bdatepickertablerow-stub selecteddate="Sat Jul 21 2018 09:10:11 GMT-0400 (Est (heure d’été))" hovereddaterange="" week="Sun Jul 08 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jul 09 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jul 10 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jul 11 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jul 12 2018 00:00:00 GMT-0400 (Est (heure d’été)),Fri Jul 13 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jul 14 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="6" unselectabledaysofweek="" events="" rulesforfirstweek="4" firstdayofweek="0"></bdatepickertablerow-stub>
+        <bdatepickertablerow-stub selecteddate="Sat Jul 21 2018 09:10:11 GMT-0400 (Est (heure d’été))" hovereddaterange="" week="Sun Jul 15 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jul 16 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jul 17 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jul 18 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jul 19 2018 00:00:00 GMT-0400 (Est (heure d’été)),Fri Jul 20 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jul 21 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="6" unselectabledaysofweek="" events="" rulesforfirstweek="4" firstdayofweek="0"></bdatepickertablerow-stub>
+        <bdatepickertablerow-stub selecteddate="Sat Jul 21 2018 09:10:11 GMT-0400 (Est (heure d’été))" hovereddaterange="" week="Sun Jul 22 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jul 23 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jul 24 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Jul 25 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Jul 26 2018 00:00:00 GMT-0400 (Est (heure d’été)),Fri Jul 27 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Jul 28 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="6" unselectabledaysofweek="" events="" rulesforfirstweek="4" firstdayofweek="0"></bdatepickertablerow-stub>
+        <bdatepickertablerow-stub selecteddate="Sat Jul 21 2018 09:10:11 GMT-0400 (Est (heure d’été))" hovereddaterange="" week="Sun Jul 29 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Jul 30 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Jul 31 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Aug 01 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Aug 02 2018 00:00:00 GMT-0400 (Est (heure d’été)),Fri Aug 03 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Aug 04 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="6" unselectabledaysofweek="" events="" rulesforfirstweek="4" firstdayofweek="0"></bdatepickertablerow-stub>
+        <bdatepickertablerow-stub selecteddate="Sat Jul 21 2018 09:10:11 GMT-0400 (Est (heure d’été))" hovereddaterange="" week="Sun Aug 05 2018 00:00:00 GMT-0400 (Est (heure d’été)),Mon Aug 06 2018 00:00:00 GMT-0400 (Est (heure d’été)),Tue Aug 07 2018 00:00:00 GMT-0400 (Est (heure d’été)),Wed Aug 08 2018 00:00:00 GMT-0400 (Est (heure d’été)),Thu Aug 09 2018 00:00:00 GMT-0400 (Est (heure d’été)),Fri Aug 10 2018 00:00:00 GMT-0400 (Est (heure d’été)),Sat Aug 11 2018 00:00:00 GMT-0400 (Est (heure d’été))" month="6" unselectabledaysofweek="" events="" rulesforfirstweek="4" firstdayofweek="0"></bdatepickertablerow-stub>
+    </div>
 </section>
 `;

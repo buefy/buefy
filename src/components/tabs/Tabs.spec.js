@@ -6,7 +6,7 @@ let wrapper
 const mockTabItems = (active = false) => {
     return {
         name: 'BTabItem',
-        template: '<b-tab-item></b-tab-item>',
+        template: '<div></div>',
         data() {
             return {
                 _isTabItem: true,
