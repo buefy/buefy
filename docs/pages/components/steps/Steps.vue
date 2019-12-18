@@ -2,6 +2,11 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode"/>
 
+        <Example :component="ExDynamic" :code="ExDynamicCode" title="Dynamic">
+            <p>Items can be created / modified / deleted and will always keep the defined order.</p>
+            <p>You can also use <code>v-if</code> to show (or not) a Step Item.</p>
+        </Example>
+
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons"/>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes"/>
@@ -20,6 +25,9 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
+    import ExDynamic from './examples/ExDynamic'
+    import ExDynamicCode from '!!raw-loader!./examples/ExDynamic'
+
     import ExIcons from './examples/ExIcons'
     import ExIconsCode from '!!raw-loader!./examples/ExIcons'
 
@@ -35,10 +43,12 @@
                 api,
                 variables,
                 ExSimple,
+                ExDynamic,
                 ExIcons,
                 ExSizes,
                 ExTypes,
                 ExSimpleCode,
+                ExDynamicCode,
                 ExIconsCode,
                 ExSizesCode,
                 ExTypesCode
