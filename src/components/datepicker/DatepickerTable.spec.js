@@ -24,7 +24,7 @@ describe('BDatepickerTable', () => {
         }))
 
         defaultProps = () => ({
-            value: new Date('July 21, 2018 09:10:11'),
+            value: newDate(2018, 6, 21),
             dayNames: config.defaultDayNames,
             monthNames: config.defaultMonthNames,
             focused: {
@@ -55,23 +55,7 @@ describe('BDatepickerTable', () => {
                 ...defaultProps()
             },
             computed: {
-                weeksInThisMonth: jest.fn(() => {
-                    const weeksInThisMonth = []
-                    let day = 1
-                    let month = 'July'
-                    while (weeksInThisMonth.length < 6) {
-                        const dates = []
-                        while (dates.length < 7) {
-                            dates.push(new Date(`${month} ${day++}, 2018 00:00:00`))
-                        }
-                        if (weeksInThisMonth.length === 4) {
-                            month = 'August'
-                            day = 5
-                        }
-                        weeksInThisMonth.push(dates)
-                    }
-                    return weeksInThisMonth
-                }) // mocked for Circle CI Snapshots date management
+                weeksInThisMonth: jest.fn(() => [])
             }
         })
         expect(wrapper.html()).toMatchSnapshot()
