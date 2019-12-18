@@ -13,26 +13,33 @@ const newDate = (y, m, d) => {
 describe('BDatepickerTable', () => {
     beforeEach(() => {
         setOptions(Object.assign(config, {
+            defaultFirstDayOfWeek: 0,
             defaultMonthNames: [
                 'January', 'February', 'March', 'April', 'May', 'June', 'July',
                 'August', 'September', 'October', 'November', 'December'
             ],
             defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
-            focusedDate: newDate(2018, 7, 1)
+            focusedDate: newDate(2018, 7, 10),
+            defaultUnselectableDaysOfWeek: []
         }))
 
         defaultProps = () => ({
+            value: newDate(2018, 6, 21),
             dayNames: config.defaultDayNames,
             monthNames: config.defaultMonthNames,
             focused: {
                 month: config.focusedDate.getMonth(),
                 year: config.focusedDate.getFullYear()
-            }
+            },
+            firstDayOfWeek: config.defaultFirstDayOfWeek,
+            unselectableDaysOfWeek: config.defaultUnselectableDaysOfWeek,
+            events: []
         })
     })
 
     it('is called', () => {
         const wrapper = shallowMount(BDatepickerTable, {
+            stubs: ['b-datepicker-table-row'],
             propsData: {
                 ...defaultProps()
             }
@@ -43,11 +50,12 @@ describe('BDatepickerTable', () => {
 
     it('render correctly', () => {
         const wrapper = shallowMount(BDatepickerTable, {
+            stub: ['b-datepicker-table-row'],
             propsData: {
                 ...defaultProps()
             },
             computed: {
-                weeksInThisMonth: jest.fn()
+                weeksInThisMonth: jest.fn(() => [])
             }
         })
         expect(wrapper.html()).toMatchSnapshot()

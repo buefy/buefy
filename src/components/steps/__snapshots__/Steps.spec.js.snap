@@ -20,9 +20,9 @@ exports[`BSteps render correctly 1`] = `
     </nav>
     <section class="step-content"></section>
     <nav class="step-navigation"><a role="button" disabled="disabled" class="pagination-previous">
-            <b-icon-stub icon="chevron-left" both="true" aria-hidden="true"></b-icon-stub>
+            <bicon-stub icon="chevron-left" both="true" aria-hidden="true"></bicon-stub>
         </a> <a role="button" class="pagination-next">
-            <b-icon-stub icon="chevron-right" both="true" aria-hidden="true"></b-icon-stub>
+            <bicon-stub icon="chevron-right" both="true" aria-hidden="true"></bicon-stub>
         </a></nav>
 </div>
 `;
