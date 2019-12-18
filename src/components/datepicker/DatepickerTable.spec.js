@@ -58,14 +58,15 @@ describe('BDatepickerTable', () => {
                 weeksInThisMonth: jest.fn(() => {
                     const weeksInThisMonth = []
                     let day = 1
-                    let month = 6
+                    let month = 'July'
                     while (weeksInThisMonth.length < 6) {
                         const dates = []
                         while (dates.length < 7) {
-                            dates.push(newDate(2018, month, ++day))
+                            dates.push(new Date(`${month} ${day++}, 2018 00:00:00`))
                         }
-                        if (weeksInThisMonth.length === 5) {
-                            month++
+                        if (weeksInThisMonth.length === 4) {
+                            month = 'August'
+                            day = 5
                         }
                         weeksInThisMonth.push(dates)
                     }
