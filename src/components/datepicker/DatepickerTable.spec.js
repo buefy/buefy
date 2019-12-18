@@ -19,7 +19,7 @@ describe('BDatepickerTable', () => {
                 'August', 'September', 'October', 'November', 'December'
             ],
             defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
-            focusedDate: newDate(2018, 7, 1),
+            focusedDate: newDate(2018, 7, 10),
             defaultUnselectableDaysOfWeek: []
         }))
 
