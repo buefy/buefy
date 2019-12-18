@@ -18,7 +18,8 @@ export default {
     data() {
         return {
             isActive: false,
-            transitionName: null
+            transitionName: null,
+            _isStepItem: true // Used internally by Step
         }
     },
     methods: {
@@ -47,13 +48,10 @@ export default {
             this.$destroy()
             throw new Error('You should wrap bStepItem on a bSteps')
         }
-        this.$parent.stepItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy() {
-        const index = this.$parent.stepItems.indexOf(this)
-        if (index >= 0) {
-            this.$parent.stepItems.splice(index, 1)
-        }
+        this.$parent.refreshSlots()
     },
     render(createElement) {
         // if destroy apply v-if
