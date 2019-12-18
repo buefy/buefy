@@ -53,6 +53,24 @@ describe('BDatepickerTable', () => {
             stub: ['b-datepicker-table-row'],
             propsData: {
                 ...defaultProps()
+            },
+            computed: {
+                weeksInThisMonth: jest.fn(() => {
+                    const weeksInThisMonth = []
+                    let day = 1
+                    let month = 6
+                    while (weeksInThisMonth.length < 6) {
+                        const dates = []
+                        while (dates.length < 7) {
+                            dates.push(newDate(2018, month, ++day))
+                        }
+                        if (weeksInThisMonth.length === 5) {
+                            month++
+                        }
+                        weeksInThisMonth.push(dates)
+                    }
+                    return weeksInThisMonth
+                }) // mocked for Circle CI Snapshots date management
             }
         })
         expect(wrapper.html()).toMatchSnapshot()
