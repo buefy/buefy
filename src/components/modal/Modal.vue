@@ -135,14 +135,14 @@ export default {
     watch: {
         active(value) {
             this.isActive = value
+        },
+        isActive(value) {
+            this.handleScroll()
             this.$nextTick(() => {
                 if (value && this.$el && this.$el.focus) {
                     this.$el.focus()
                 }
             })
-        },
-        isActive() {
-            this.handleScroll()
         }
     },
     methods: {
