@@ -5,7 +5,8 @@
             ref="dropdown"
             :position="position"
             :disabled="disabled"
-            :inline="inline">
+            :inline="inline"
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"

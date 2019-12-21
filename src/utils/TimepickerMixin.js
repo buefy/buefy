@@ -555,6 +555,14 @@ export default {
             if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                 this.toggle(false)
             }
+        },
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
+            }
         }
     },
     created() {

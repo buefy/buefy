@@ -6,7 +6,8 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
-            :mobile-modal="mobileModal">
+            :mobile-modal="mobileModal"
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -686,6 +687,15 @@ export default {
             // Esc key
             if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                 this.togglePicker(false)
+            }
+        },
+
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
             }
         }
     },
