@@ -83,24 +83,30 @@ export default {
         fixedTop: {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
-                const className = this.spaced
-                    ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS
                 if (isSet) {
-                    return this.setBodyClass(className)
+                    // TODO Apply only one of the classes once PR is merged in Bulma:
+                    // https://github.com/jgthms/bulma/pull/2737
+                    this.setBodyClass(BODY_FIXED_TOP_CLASS)
+                    this.spaced && this.setBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
+                } else {
+                    this.removeBodyClass(BODY_FIXED_TOP_CLASS)
+                    this.removeBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
                 }
-                this.removeBodyClass(className)
             },
             immediate: true
         },
         fixedBottom: {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
-                const className = this.spaced
-                    ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS
                 if (isSet) {
-                    return this.setBodyClass(className)
+                    // TODO Apply only one of the classes once PR is merged in Bulma:
+                    // https://github.com/jgthms/bulma/pull/2737
+                    this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                    this.spaced && this.setBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
+                } else {
+                    this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                    this.removeBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
                 }
-                this.removeBodyClass(className)
             },
             immediate: true
         }
