@@ -239,8 +239,8 @@ export default {
             if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
                 value < this.activeItem 
-                  ? this.changeItem(value, true)
-                  : this.changeItem(value, false)
+                    ? this.changeItem(value, true)
+                    : this.changeItem(value, false)
             }
         },
         prev() {
