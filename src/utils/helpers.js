@@ -1,4 +1,13 @@
 /**
+ * +/- function to native math sign
+ */
+function signPoly(value) {
+    if (value < 0) return -1
+    return value > 0 ? 1 : 0
+}
+export const sign = Math.sign || signPoly
+
+/**
  * Get value of an object property/path even if it's nested
  */
 export function getValueByPath(obj, path) {

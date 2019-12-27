@@ -4,7 +4,7 @@
             <b-field grouped group-multiline position="is-centered">
                 <b-switch v-model="autoPlay">Autoplay</b-switch>
                 <b-switch v-model="pauseHover" :disabled="!autoPlay">Pause on hover</b-switch>
-                <b-switch v-model="pauseInfo" :disabled="!autoPlay">Pause info</b-switch>
+                <b-switch v-model="pauseInfo" :disabled="!pauseHover">Pause info</b-switch>
                 <b-switch v-model="drag">Drag event</b-switch>
             </b-field><br>
             <b-field grouped group-multiline position="is-centered">
@@ -26,6 +26,13 @@
                         </b-radio-button>
                     </b-field>
                 </b-field>
+                <b-field label="Pause Type">
+                    <b-select v-model="pauseType" :disabled="!pauseInfo">
+                        <option value="is-white">is-white</option>
+                        <option value="is-dark">is-dark</option>
+                        <option value="is-primary">is-primary</option>
+                    </b-select>
+                </b-field>
             </b-field>
         </div>
 
@@ -36,6 +43,7 @@
             :autoplay="autoPlay"
             :pause-hover="pauseHover"
             :pause-info="pauseInfo"
+            :pause-info-type="pauseType"
             :interval="interval"
             @change="info($event)">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
@@ -59,6 +67,7 @@ export default {
             autoPlay: false,
             pauseHover: false,
             pauseInfo: false,
+            pauseType: 'is-primary',
             interval: 3000,
             carousels: [
                 { title: 'Slide 1', color: 'dark' },
