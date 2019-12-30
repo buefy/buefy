@@ -30,7 +30,8 @@ export default {
     },
     data() {
         return {
-            newKey: this.customKey || this.label
+            newKey: this.customKey || this.label,
+            _isTableColumn: true
         }
     },
     computed: {
@@ -57,7 +58,7 @@ export default {
     },
     beforeDestroy() {
         if (!this.$parent.visibleData.length) return
-        if (this.$parent.$children.filter((vm) => vm.$options._componentTag === 'b-table-column' &&
+        if (this.$parent.$children.filter((vm) => vm.$data._isTableColumn &&
             vm.$data.newKey === this.newKey).length !== 1) return
         const index = this.$parent.newColumns.map(
             (column) => column.newKey).indexOf(this.newKey)
