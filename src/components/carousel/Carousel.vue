@@ -13,7 +13,7 @@
             {{ carouselItems.length - 1 }}
         </progress>
         <div
-            class="carousel-list"
+            class="carousel-items"
             @mousedown="dragStart"
             @mouseup="dragEnd"
             @touchstart.stop="dragStart"
@@ -44,8 +44,18 @@
         <div
             v-if="autoplay && pauseHover && pauseInfo && isPause"
             class="carousel-pause">
-            <span class="tag">Pause</span>
+            <span
+                class="tag"
+                :class="pauseInfoType">
+                {{ pauseText }}
+            </span>
         </div>
+        <template v-if="withCarouselList && !indicator">
+            <slot
+                :active="activeItem"
+                :switch="changeItem"
+                name="list"/>
+        </template>
         <div
             v-if="indicator"
             class="carousel-indicator"
@@ -64,6 +74,9 @@
                 </slot>
             </a>
         </div>
+        <template v-if="overlay">
+            <slot name="overlay"/>
+        </template>
     </div>
 </template>
 
@@ -102,6 +115,14 @@ export default {
         pauseInfo: {
             type: Boolean,
             default: true
+        },
+        pauseInfoType: {
+            type: String,
+            default: 'is-white'
+        },
+        pauseText: {
+            type: String,
+            default: 'Pause'
         },
         arrow: {
             type: Boolean,
@@ -156,7 +177,8 @@ export default {
         progressType: {
             type: String,
             default: 'is-primary'
-        }
+        },
+        withCarouselList: Boolean
     },
     data() {
         return {
@@ -183,26 +205,26 @@ export default {
     },
     watch: {
         /**
-        * When v-model is changed set the new active item.
-        */
+         * When v-model is changed set the new active item.
+         */
         value(value) {
             if (value < this.activeItem) {
-                this.changeItem(value, true)
+                this.changeItem(value)
             } else {
                 this.changeItem(value, false)
             }
         },
         /**
-        * When carousel-items are updated, set active one.
-        */
+         * When carousel-items are updated, set active one.
+         */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
-                this.carouselItems[this.activeItem].isActive = true
+                this.carouselItems[this.activeItem].status(true, false)
             }
         },
         /**
-        * When autoplay is change, set by status
-        */
+         *  When autoplay is change, set by status
+         */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
         }
@@ -224,27 +246,29 @@ export default {
             }
         },
         /**
-        * Change the active item and emit change event.
-        * action only for animated slide, there true = next, false = prev
-        */
-        changeItem(newIndex, action) {
+         * Change the active item and emit change event.
+         * action only for animated slide, there true = next, false = prev
+         */
+        changeItem(newIndex, action = true) {
             if (this.activeItem === newIndex) return
             this.carouselItems[this.activeItem].status(false, action)
             this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
             this.$emit('change', newIndex)
         },
-        // Indicator trigger, emit input event and change active item.
+        // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
-                this.changeItem(value, false)
+                return value < this.activeItem
+                    ? this.changeItem(value)
+                    : this.changeItem(value, false)
             }
         },
         prev() {
             return this.activeItem === 0
-                ? this.changeItem(this.carouselItems.length - 1, true)
-                : this.changeItem(this.activeItem - 1, true)
+                ? this.changeItem(this.carouselItems.length - 1)
+                : this.changeItem(this.activeItem - 1)
         },
         next() {
             return this.activeItem === this.carouselItems.length - 1
@@ -284,7 +308,7 @@ export default {
     },
     mounted() {
         if (this.activeItem < this.carouselItems.length) {
-            this.carouselItems[this.activeItem].isActive = true
+            this.carouselItems[this.activeItem].status(true, false)
         }
         this.startTimer()
     },

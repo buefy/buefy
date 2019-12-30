@@ -6,8 +6,8 @@ $carousel-arrow-icon-spaced: 1.5rem !default;
 $carousel-arrow-top: 50% !default;
 
 $carousel-indicator-background: rgba($black, 0.50) !default;
-$carousel-indicator-color: $primary !default;
 $carousel-indicator-border: $white !default;
+$carousel-indicator-color: $primary !default;
 $carousel-indicator-spaced: .5rem !default;
 
 $carousel-overlay-background: rgba($black, 0.86) !default;
@@ -23,6 +23,7 @@ $carousel-overlay-z: 40 !default;
         flex-direction: column;
         justify-content: center;
         display: flex;
+        max-height: 100vh;
         position: fixed;
         z-index: $carousel-overlay-z;
         .carousel-item img {
@@ -37,16 +38,18 @@ $carousel-overlay-z: 40 !default;
         height: 0.25rem;
         margin-bottom: 0;
     }
-    .carousel-list {
+    .carousel-items {
         position: relative;
         display: flex;
         overflow: hidden;
         width: 100%;
         &:hover .carousel-arrow.is-hovered {
-            opacity: 1;
+            @include tablet {
+                opacity: 1;
+            }
         }
         .carousel-item {
-            flex: none;
+            flex-shrink: 0;
             width: 100%;
         }
     }
@@ -56,36 +59,6 @@ $carousel-overlay-z: 40 !default;
         top: 0;
         right: 0.15rem;
         z-index: 1;
-    }
-    .carousel-arrow {
-        transition: .5s $easing;
-        &.is-hovered {
-            opacity: 0;
-        }
-        .icon {
-            background: $carousel-arrow-background;
-            color: $carousel-arrow-color;
-            cursor: pointer;
-            border: 1px solid $carousel-arrow-background;
-            border-radius: $radius-rounded;
-            outline: 0;
-            &:hover {
-                border: 1px solid $carousel-arrow-color;
-                opacity: 1;
-            }
-            &.has-icons-left,
-            &.has-icons-right {
-                top: $carousel-arrow-top;
-                position: absolute;
-                z-index: 1;
-            }
-            &.has-icons-left {
-                left: $carousel-arrow-icon-spaced;
-            }
-            &.has-icons-right {
-                right: $carousel-arrow-icon-spaced;
-            }
-        }
     }
     .carousel-indicator {
         width: 100%;
@@ -147,6 +120,85 @@ $carousel-overlay-z: 40 !default;
                     width: 25px;
                 }
             }
+        }
+    }
+}
+
+.carousel-list {
+    @extend %unselectable;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    &.has-shadow {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    }
+    &:hover .carousel-arrow.is-hovered {
+        @include tablet {
+            opacity: 1;
+        }
+    }
+    .carousel-slides {
+        position: relative;
+        display: flex;
+        width: 100%;
+        &:not(.is-dragging) {
+            transition: all $speed-slower ease-out 0s;
+        }
+        &.has-grayscale {
+            .carousel-slide {
+                img {
+                    filter: grayscale(100%);
+                }
+                &.is-active img {
+                    filter: grayscale(0%);
+                }
+            }
+        }
+        &.has-opacity {
+            .carousel-slide {
+                img {
+                    opacity: 0.25
+                }
+                &.is-active img {
+                    opacity: 1
+                }
+            }
+        }
+        .carousel-slide {
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+    }
+}
+
+.carousel-arrow {
+    transition: .5s $easing;
+    &.is-hovered {
+        opacity: 0;
+    }
+    .icon {
+        background: $carousel-arrow-background;
+        color: $carousel-arrow-color;
+        cursor: pointer;
+        border: 1px solid $carousel-arrow-background;
+        border-radius: $radius-rounded;
+        outline: 0;
+        &:hover {
+            border: 1px solid $carousel-arrow-color;
+            opacity: 1;
+        }
+        &.has-icons-left,
+        &.has-icons-right {
+            position: absolute;
+            top: $carousel-arrow-top;
+            transform: translateY(-$carousel-arrow-top);
+            z-index: 1;
+        }
+        &.has-icons-left {
+            left: $carousel-arrow-icon-spaced;
+        }
+        &.has-icons-right {
+            right: $carousel-arrow-icon-spaced;
         }
     }
 }
