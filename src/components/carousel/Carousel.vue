@@ -47,7 +47,7 @@
             <span
                 class="tag"
                 :class="pauseInfoType">
-                Pause
+                {{ pauseText }}
             </span>
         </div>
         <template v-if="withCarouselList && !indicator">
@@ -119,6 +119,10 @@ export default {
         pauseInfoType: {
             type: String,
             default: 'is-white'
+        },
+        pauseText: {
+            type: String,
+            default: 'Pause'
         },
         arrow: {
             type: Boolean,

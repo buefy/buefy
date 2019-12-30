@@ -5,15 +5,13 @@
                 <b-switch v-model="arrow">Arrow</b-switch>
                 <b-switch v-model="arrowHover" :disabled="!arrow">Arrow on hover</b-switch>
                 <b-switch v-model="drag">Drag event</b-switch>
-                <b-switch v-model="gray">Grayscale</b-switch>
+                <b-switch v-model="gray" :disabled="opacity">Grayscale</b-switch>
+                <b-switch v-model="opacity" :disabled="gray">Opacity</b-switch>
                 <b-switch v-model="repeat">Repeat</b-switch>
             </b-field><br>
             <b-field grouped group-multiline position="is-centered">
                 <b-field label="Value">
                     <b-numberinput v-model="values" min="0" :max="items.length - 1" controls-position="compact"/>
-                </b-field>
-                <b-field label="Items to Show">
-                    <b-numberinput v-model="perShow" min="0" :max="items.length - 1" controls-position="compact"/>
                 </b-field>
                 <b-field label="Items to List">
                     <b-numberinput v-model="perList" min="0" :max="items.length - 1" controls-position="compact"/>
@@ -25,11 +23,11 @@
             :data="items"
             :arrow="arrow"
             :arrowHover="arrowHover"
-            :itemsToShow="perShow"
             :itemsToList="perList"
             :repeat="repeat"
             :has-drag="drag"
-            :has-grayscale="gray" />
+            :has-grayscale="gray"
+            :has-opacity="opacity" />
     </section>
 </template>
 
@@ -41,10 +39,10 @@ export default {
             arrowHover: true,
             drag: true,
             gray: false,
+            opacity: false,
             values: 1,
-            perShow: 3,
             perList: 1,
-            repeat: false,
+            refresh: false,
             items: [
                 {
                     title: 'Slide 1',

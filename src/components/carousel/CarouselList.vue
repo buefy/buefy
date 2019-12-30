@@ -81,6 +81,7 @@ export default {
             default: true
         },
         hasGrayscale: Boolean,
+        hasOpacity: Boolean,
         repeat: Boolean,
         itemsToShow: {
             type: Number,
@@ -127,7 +128,8 @@ export default {
         listClass() {
             return [
                 {
-                    'has-grayscale': this.settings.hasGrayscale,
+                    'has-grayscale': this.settings.hasGrayscale || this.hasGrayscale,
+                    'has-opacity': this.settings.hasOpacity || this.hasOpacity,
                     'is-dragging': this.dragging
                 }
             ]

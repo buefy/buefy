@@ -62,6 +62,13 @@ export default [
                 default: '<code>is-white</code>'
             },
             {
+                name: '<code>pause-text</code>',
+                description: 'Text when pause',
+                type: 'String',
+                values: '—',
+                default: '<code>Pause</code>'
+            },
+            {
                 name: '<code>arrow</code>',
                 description: '	Display the "next" and "prev" action',
                 type: 'Boolean',
@@ -262,6 +269,13 @@ export default [
             {
                 name: '<code>has-grayscale</code>',
                 description: 'Give a effect grayscale on img',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>has-opacity</code>',
+                description: 'Give a effect opacity on img',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
