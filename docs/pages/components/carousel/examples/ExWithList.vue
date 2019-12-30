@@ -1,7 +1,7 @@
 <template>
     <b-carousel
         :autoplay="false"
-        withCarouselList
+        with-carousel-list
         :indicator="false"
         :overlay="gallery">
         <b-carousel-item v-for="(item, i) in items" :key="i">

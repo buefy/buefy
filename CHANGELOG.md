@@ -8,7 +8,7 @@
 * Add scss variables to loading and snackbar (thanks @service-paradis)
 * Add range start and end events to datepicker (thanks @lunfel)
 * Add ``close`` event to notification, snackbar and toast (thanks @service-paradis)
-* Add new props to carousel and general improvements (thanks @apolokaklab)
+* Add new props to carousel and ``carousel-list`` (thanks @apolokaklab)
 * Add ``aria-role`` prop to snackbar (thanks @service-paradis)
 * Remove Vue import and registration of Vue instance (thanks @afwn90cj93201nixr2e1re)
 * #2075 Add ``focusable`` prop to datepicker

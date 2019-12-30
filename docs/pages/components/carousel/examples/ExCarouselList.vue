@@ -22,8 +22,8 @@
             v-model="values"
             :data="items"
             :arrow="arrow"
-            :arrowHover="arrowHover"
-            :itemsToList="perList"
+            :arrow-hover="arrowHover"
+            :items-to-list="perList"
             :repeat="repeat"
             :has-drag="drag"
             :has-grayscale="gray"
@@ -65,6 +65,7 @@ export default {
                     image: 'https://picsum.photos/id/4/1230/500'
                 },
                 {
+                    title: 'Slide 6',
                     image: 'https://picsum.photos/id/5/1230/500'
                 },
                 {
