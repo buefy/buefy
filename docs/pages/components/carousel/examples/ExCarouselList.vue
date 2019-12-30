@@ -42,7 +42,7 @@ export default {
             opacity: false,
             values: 1,
             perList: 1,
-            refresh: false,
+            repeat: false,
             items: [
                 {
                     title: 'Slide 1',
