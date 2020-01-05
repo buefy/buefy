@@ -25,8 +25,8 @@
                 </b-field>
                 <b-field label="Style">
                     <b-field>
-                        <b-radio-button v-model="indicatorStyle" native-value="is-boxs" :disabled="!indicator">
-                            <span>Boxs</span>
+                        <b-radio-button v-model="indicatorStyle" native-value="is-boxes" :disabled="!indicator">
+                            <span>Boxes</span>
                         </b-radio-button>
                         <b-radio-button v-model="indicatorStyle" native-value="is-dots" :disabled="!indicator">
                             <span>Dots</span>
