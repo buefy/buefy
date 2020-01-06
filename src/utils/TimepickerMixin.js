@@ -81,6 +81,10 @@ export default {
                 return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12
             }
         },
+        incrementHours: {
+            type: Number,
+            default: 1
+        },
         incrementMinutes: {
             type: Number,
             default: 1
@@ -163,7 +167,7 @@ export default {
         hours() {
             const hours = []
             const numberOfHours = this.isHourFormat24 ? 24 : 12
-            for (let i = 0; i < numberOfHours; i++) {
+            for (let i = 0; i < numberOfHours; i += this.incrementHours) {
                 let value = i
                 let label = value
                 if (!this.isHourFormat24) {
