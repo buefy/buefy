@@ -205,7 +205,7 @@ export default {
     },
     methods: {
         refreshSlots() {
-            this.defaultSlots = this.$slots.default
+            this.defaultSlots = this.$slots.default || []
         },
 
         /**

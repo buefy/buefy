@@ -114,7 +114,7 @@ export default {
     },
     methods: {
         refreshSlots() {
-            this.defaultSlots = this.$slots.default
+            this.defaultSlots = this.$slots.default || []
         },
         /**
         * Change the active tab and emit change event.
