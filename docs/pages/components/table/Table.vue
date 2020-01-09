@@ -28,6 +28,9 @@
 
         <Example :component="ExSearchable" :code="ExSearchableCode" title="Searchable">
             <p>You can add search filtering to rows by using the <code>searchable</code> prop.</p>
+            <b-message type="is-warning">
+                This feature is not available on mobile when <code>mobile-card</code>.
+            </b-message>
         </Example>
 
         <Example :component="ExPaginationSort" :code="ExPaginationSortCode" title="Pagination and sorting">
@@ -66,6 +69,15 @@
             </p>
             <p>
                 Previous scoped slot named <code>header</code> in table will be deprecated.
+            </p>
+        </Example>
+
+        <Example :component="ExSubheadings" :code="ExSubheadingsCode" title="Subheadings">
+            <p>
+                Use the <code>subheading</code> prop on columns to add subheadings. This is particularly useful to display a summary when dealing with long tables.
+            </p>
+            <p>
+                By adding a scoped slot named <code>subheading</code> in table component you can customize the subheadings.
             </p>
         </Example>
 
@@ -129,6 +141,9 @@
     import ExCustomHeaders from './examples/ExCustomHeaders'
     import ExCustomHeadersCode from '!!raw-loader!./examples/ExCustomHeaders'
 
+    import ExSubheadings from './examples/ExSubheadings'
+    import ExSubheadingsCode from '!!raw-loader!./examples/ExSubheadings'
+
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
@@ -155,6 +170,7 @@
                 ExCustomDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
+                ExSubheadings,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
@@ -169,6 +185,7 @@
                 ExCustomDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
+                ExSubheadingsCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode,

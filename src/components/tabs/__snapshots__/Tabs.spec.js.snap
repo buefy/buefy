@@ -6,10 +6,13 @@ exports[`BTabs render correctly 1`] = `
         <ul>
             <li class="is-active"><a>
                     <!----> <span></span></a></li>
-            <li class=""><a>
+            <li class="" style="display: none;"><a>
                     <!----> <span></span></a></li>
         </ul>
     </nav>
-    <section class="tab-content"></section>
+    <section class="tab-content">
+        <div></div>
+        <div></div>
+    </section>
 </div>
 `;

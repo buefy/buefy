@@ -5,7 +5,8 @@
             ref="dropdown"
             :position="position"
             :disabled="disabled"
-            :inline="inline">
+            :inline="inline"
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -27,7 +28,10 @@
                 @focus="handleOnFocus"
                 @blur="onBlur() && checkHtml5Validity()"/>
 
-            <b-dropdown-item :disabled="disabled" custom>
+            <b-dropdown-item
+                :disabled="disabled"
+                :focusable="focusable"
+                custom>
                 <b-field grouped position="is-centered">
                     <b-select
                         v-model="hoursSelected"

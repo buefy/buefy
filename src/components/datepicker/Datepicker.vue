@@ -6,7 +6,8 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
-            :mobile-modal="mobileModal">
+            :mobile-modal="mobileModal"
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -29,7 +30,10 @@
                 @focus="handleOnFocus"
                 @blur="onBlur" />
 
-            <b-dropdown-item :disabled="disabled" custom>
+            <b-dropdown-item
+                :disabled="disabled"
+                :focusable="focusable"
+                custom>
                 <header class="datepicker-header">
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
@@ -125,6 +129,8 @@
                         :show-week-number="showWeekNumber"
                         :range="range"
                         :multiple="multiple"
+                        @range-start="date => $emit('range-start', date)"
+                        @range-end="date => $emit('range-end', date)"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -397,6 +403,10 @@ export default {
             default: () => {
                 return config.defaultDatepickerMobileModal
             }
+        },
+        focusable: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -677,6 +687,15 @@ export default {
             // Esc key
             if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                 this.togglePicker(false)
+            }
+        },
+
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
             }
         }
     },

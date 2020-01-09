@@ -212,7 +212,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>show-number-week</code>',
+                name: '<code>show-week-number</code>',
                 description: 'Display week number',
                 type: 'Boolean',
                 values: '-',
@@ -238,6 +238,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>focusable</code>',
+                description: 'Datepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: 'Any native attribute',
@@ -274,6 +281,16 @@ export default [
                 name: '<code>change-year</code>',
                 description: 'Triggers when calendar year is changed',
                 parameters: '<code>year: Number</code>'
+            },
+            {
+                name: '<code>range-start</code>',
+                description: 'Triggers when user starts selecting a date range (Only when <b>range</b> prop is set)',
+                parameters: '<code>date: Date</code>'
+            },
+            {
+                name: '<code>range-end</code>',
+                description: 'Triggers when user ends selecting a date range (Only when <b>range</b> prop is set)',
+                parameters: '<code>date: Date</code>'
             }
         ],
         methods: [

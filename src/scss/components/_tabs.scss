@@ -34,7 +34,7 @@
         display: flex;
         flex-direction: row;
 
-        .tabs {
+        > .tabs {
             ul {
                 flex-direction: column;
                 border-bottom-color: transparent;
@@ -89,14 +89,14 @@
                 }
             }
         }
-        .tab-content {
+        > .tab-content {
             flex-grow: 1;
         }
 
         &.is-right {
             flex-direction: row-reverse;
 
-            .tabs {
+            > .tabs {
                 ul {
                     a {
                         flex-direction: row-reverse;

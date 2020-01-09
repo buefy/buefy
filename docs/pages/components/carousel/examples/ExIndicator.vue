@@ -1,15 +1,18 @@
 <template>
     <section>
-        <div class="columns is-mobile is-centered is-multiline" style="padding-top:1.5rem">
-            <div class="column is-narrow">
-                <b-field>
+        <div style="padding: 1.5rem">
+            <b-field grouped group-multiline position="is-centered">
                 <b-switch v-model="indicator"><strong>Indicator</strong></b-switch>
-                </b-field>
-                <b-field>
+                <b-switch v-model="indicatorBackground" :disabled="!indicator">Background</b-switch>
                 <b-switch v-model="indicatorInside" :disabled="!indicator">Inside</b-switch>
+            </b-field><br>
+            <b-field grouped group-multiline position="is-centered">
+                <b-field label="Position" :disabled="!indicator">
+                    <b-select v-model="indicatorPosition">
+                        <option value="is-bottom">is-bottom</option>
+                        <option value="is-top">is-top</option>
+                    </b-select>
                 </b-field>
-            </div>
-            <div class="column is-narrow">
                 <b-field label="Mode">
                     <b-field>
                         <b-radio-button v-model="indicatorMode" native-value="click" :disabled="!indicator">
@@ -20,12 +23,10 @@
                         </b-radio-button>
                     </b-field>
                 </b-field>
-            </div>
-            <div class="column is-narrow">
                 <b-field label="Style">
                     <b-field>
-                        <b-radio-button v-model="indicatorStyle" native-value="is-boxs" :disabled="!indicator">
-                            <span>Boxs</span>
+                        <b-radio-button v-model="indicatorStyle" native-value="is-boxes" :disabled="!indicator">
+                            <span>Boxes</span>
                         </b-radio-button>
                         <b-radio-button v-model="indicatorStyle" native-value="is-dots" :disabled="!indicator">
                             <span>Dots</span>
@@ -35,13 +36,15 @@
                         </b-radio-button>
                     </b-field>
                 </b-field>
-            </div>
+            </b-field>
         </div>
 
         <b-carousel
             :indicator="indicator"
+            :indicator-background="indicatorBackground"
             :indicator-inside="indicatorInside"
             :indicator-mode="indicatorMode"
+            :indicator-position="indicatorPosition"
             :indicator-style="indicatorStyle">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                 <section :class="`hero is-medium is-${carousel.color}`">
@@ -59,8 +62,10 @@ export default {
     data() {
         return {
             indicator: true,
+            indicatorBackground: true,
             indicatorInside: true,
             indicatorMode: 'hover',
+            indicatorPosition: 'is-top',
             indicatorStyle: 'is-lines',
             carousels: [
                 { title: 'Slide 1', color: 'info' },

@@ -1,11 +1,12 @@
 import * as components from './components'
 
 import { merge } from './utils/helpers'
-import config, { setOptions } from './utils/config'
+import config, { setOptions, setVueInstance } from './utils/config'
 import { use, registerComponentProgrammatic } from './utils/plugins'
 
 const Buefy = {
     install(Vue, options = {}) {
+        setVueInstance(Vue)
         // Options
         setOptions(merge(config, options, true))
         // Components
@@ -14,6 +15,9 @@ const Buefy = {
         }
         // Config component
         const BuefyProgrammatic = {
+            getOptions() {
+                return config
+            },
             setOptions(options) {
                 setOptions(merge(config, options, true))
             }
@@ -35,3 +39,5 @@ export { ModalProgrammatic } from './components/modal'
 export { NotificationProgrammatic } from './components/notification'
 export { SnackbarProgrammatic } from './components/snackbar'
 export { ToastProgrammatic } from './components/toast'
+// export helpers
+export * from './utils/helpers'

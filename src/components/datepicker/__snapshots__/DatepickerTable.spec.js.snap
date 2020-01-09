@@ -4,25 +4,25 @@ exports[`BDatepickerTable render correctly 1`] = `
 <section class="datepicker-table">
     <header class="datepicker-header">
         <div class="datepicker-cell">
-
+            Su
         </div>
         <div class="datepicker-cell">
-
+            M
         </div>
         <div class="datepicker-cell">
-
+            Tu
         </div>
         <div class="datepicker-cell">
-
+            W
         </div>
         <div class="datepicker-cell">
-
+            Th
         </div>
         <div class="datepicker-cell">
-
+            F
         </div>
         <div class="datepicker-cell">
-
+            S
         </div>
     </header>
     <div class="datepicker-body"></div>

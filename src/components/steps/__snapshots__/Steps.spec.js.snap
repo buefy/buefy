@@ -4,7 +4,7 @@ exports[`BSteps render correctly 1`] = `
 <div class="b-steps">
     <nav class="steps">
         <ul class="step-items">
-            <li class="step-item is-active"><a class="step-link">
+            <li class="step-item is-active"><a class="step-link is-clickable">
                     <div class="step-marker">
                         <!---->
                     </div>
@@ -18,11 +18,14 @@ exports[`BSteps render correctly 1`] = `
                 </a></li>
         </ul>
     </nav>
-    <section class="step-content"></section>
+    <section class="step-content">
+        <div></div>
+        <div></div>
+    </section>
     <nav class="step-navigation"><a role="button" disabled="disabled" class="pagination-previous">
-            <b-icon-stub icon="chevron-left" both="true" aria-hidden="true"></b-icon-stub>
+            <bicon-stub icon="chevron-left" both="true" aria-hidden="true"></bicon-stub>
         </a> <a role="button" class="pagination-next">
-            <b-icon-stub icon="chevron-right" both="true" aria-hidden="true"></b-icon-stub>
+            <bicon-stub icon="chevron-right" both="true" aria-hidden="true"></bicon-stub>
         </a></nav>
 </div>
 `;

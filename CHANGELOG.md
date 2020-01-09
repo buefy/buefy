@@ -1,5 +1,43 @@
 # Buefy Changelog
 
+## 0.8.9
+
+### New features
+
+* Add ``infinite-scroll`` prop to autocomplete and taginput (thanks @mateuswetah) 
+* Add scss variables to loading and snackbar (thanks @service-paradis)
+* Add range start and end events to datepicker (thanks @lunfel)
+* Add ``close`` event to notification, snackbar and toast (thanks @service-paradis)
+* Add new props to carousel and ``carousel-list`` (thanks @apolokaklab)
+* Add ``aria-role`` prop to snackbar (thanks @service-paradis)
+* Remove Vue import and registration of Vue instance (thanks @afwn90cj93201nixr2e1re)
+* #2075 Add ``focusable`` prop to datepicker
+* #2085 Add ``blur`` event on picker close
+
+### Fixes
+
+* Fix taginput when autocomplete without template
+* Fix default modal background color (thanks @francoism90)
+* Fix #1387 maintain tabitems/stepitems order (thanks @service-paradis)
+* Fix #2023 ``increment-minutes`` and ``increment-seconds`` props to timepicker (thanks @GerryWilko)
+* Fix #2037 datepicker selection when multiple
+* Fix #2049 indicator style name 'is-boxs' -> 'is-boxes' (thanks @apolokaklab)
+* Fix #2062 align last tag on taginput with maxtags (thanks @andrei-dracea)
+* Fix #2093 ``trap-focus`` on programmatic modal (thanks @service-paradis)
+
+## 0.8.8
+
+### New features
+
+* Add ``subheadings`` prop/slot to table (thanks @arambert)
+* Add ``container`` prop to dialog (thanks @service-paradis)
+* Add touch events to carousel on mobile
+
+### Fixes
+
+* Fix custom icon pack improving merge internal function (thanks @service-paradis)
+* Fix #2006 tabs when nested each other (thanks @service-paradis)
+
 ## 0.8.7
 
 ### New features

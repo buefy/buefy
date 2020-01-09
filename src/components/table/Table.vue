@@ -109,6 +109,44 @@
                             </template>
                         </th>
                     </tr>
+                    <tr v-if="hasCustomSubheadings" class="is-subheading">
+                        <th v-if="showDetailRowIcon" width="40px"/>
+                        <th v-if="checkable && checkboxPosition === 'left'" />
+                        <th
+                            v-for="(column, index) in visibleColumns"
+                            :key="index"
+                            :style="{
+                                width: column.width === undefined ? null
+                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            <div
+                                class="th-wrap"
+                                :class="{
+                                    'is-numeric': column.numeric,
+                                    'is-centered': column.centered
+                            }">
+                                <template
+                                    v-if="column.$scopedSlots && column.$scopedSlots.subheading"
+                                >
+                                    <b-slot-component
+                                        :component="column"
+                                        :scoped="true"
+                                        name="subheading"
+                                        tag="span"
+                                        :props="{ column, index }"
+                                    />
+                                </template>
+                                <template v-else-if="$scopedSlots.subheading">
+                                    <slot
+                                        name="subheading"
+                                        :column="column"
+                                        :index="index"
+                                    />
+                                </template>
+                                <template v-else>{{ column.subheading }}</template>
+                            </div>
+                        </th>
+                        <th v-if="checkable && checkboxPosition === 'right'" />
+                    </tr>
                     <tr v-if="hasSearchablenewColumns">
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th v-if="checkable && checkboxPosition === 'left'" />
@@ -411,7 +449,7 @@ export default {
         customRowKey: String,
         draggable: {
             type: Boolean,
-            defualt: false
+            default: false
         },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
@@ -519,6 +557,16 @@ export default {
         hasSearchablenewColumns() {
             return this.newColumns.some((column) => {
                 return column.searchable
+            })
+        },
+
+        /**
+        * Check if has any column using subheading.
+        */
+        hasCustomSubheadings() {
+            if (this.$scopedSlots && this.$scopedSlots.subheading) return true
+            return this.newColumns.some((column) => {
+                return column.subheading || (column.$scopedSlots && column.$scopedSlots.subheading)
             })
         },
 
@@ -855,7 +903,7 @@ export default {
             */
         handleDetailKey(index) {
             const key = this.detailKey
-            return !key.length
+            return !key.length || !index
                 ? index
                 : index[key]
         },

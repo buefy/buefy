@@ -59,10 +59,6 @@ describe('BDropdown', () => {
         expect(wrapper.emitted()['change']).toBeTruthy()
 
         expect(wrapper.vm.isHoverable).toBeFalsy()
-
-        expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 250)
-        jest.advanceTimersByTime(250)
-        expect(wrapper.vm.isHoverable).toBeTruthy()
     })
 
     it('react accordingly when an item is selected with multiple prop', () => {

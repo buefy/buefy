@@ -2,8 +2,8 @@
 
 exports[`BSliderThumb render correctly 1`] = `
 <div class="b-slider-thumb-wrapper">
-    <b-tooltip-stub active="true" type="" label="0" position="is-top" size="is-medium">
+    <btooltip-stub active="true" type="" label="0" position="is-top" size="is-medium">
         <div tabindex="0" class="b-slider-thumb"></div>
-    </b-tooltip-stub>
+    </btooltip-stub>
 </div>
 `;
