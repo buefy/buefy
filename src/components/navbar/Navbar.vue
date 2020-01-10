@@ -206,8 +206,15 @@ export default {
         }
     },
     beforeDestroy() {
-        this.removeBodyClass(FIXED_BOTTOM_CLASS)
-        this.removeBodyClass(FIXED_TOP_CLASS)
+        let className = ''
+        if (this.fixedTop) {
+            className = this.spaced
+                ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS
+        } else if (this.fixedBottom) {
+            className = this.spaced
+                ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS
+        }
+        this.removeBodyClass(className)
     },
     render(createElement, fn) {
         return this.genNavbar(createElement)
