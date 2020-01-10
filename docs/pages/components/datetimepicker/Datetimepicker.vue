@@ -18,6 +18,10 @@
             <p>Datetimepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         </Example>
 
+        <Example :component="ExGranularity" :code="ExGranularityCode" title="Granularity" vertical>
+            <p>Datetimepicker can be set with a minute or hour ganularity with <code>incrementMinutes</code> or <code>incrementHours</code>.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -40,6 +44,9 @@
     import ExInline from './examples/ExInline'
     import ExInlineCode from '!!raw-loader!./examples/ExInline'
 
+    import ExGranularity from './examples/ExGranularity'
+    import ExGranularityCode from '!!raw-loader!./examples/ExGranularity'
+
     export default {
         data() {
             return {
@@ -49,11 +56,13 @@
                 ExRange,
                 ExFooter,
                 ExInline,
+                ExGranularity,
                 ExSimpleCode,
                 ExEditableCode,
                 ExRangeCode,
                 ExFooterCode,
-                ExInlineCode
+                ExInlineCode,
+                ExGranularityCode
             }
         }
     }
