@@ -165,6 +165,7 @@ export default {
             }
         },
         hours() {
+            if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.')
             const hours = []
             const numberOfHours = this.isHourFormat24 ? 24 : 12
             for (let i = 0; i < numberOfHours; i += this.incrementHours) {
