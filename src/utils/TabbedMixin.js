@@ -69,7 +69,7 @@ export default {
          * Change the active child and emit change event.
          */
         changeActive(newIndex) {
-            if (this.activeChild === newIndex || this.childItems[newIndex] === undefined) return
+            if (this.activeChild === newIndex) return
 
             if (newIndex > this.childItems.length) throw new Error('The index you trying to set is bigger than the childs length')
 
