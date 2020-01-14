@@ -576,7 +576,7 @@ export default {
         columnCount() {
             let count = this.newColumns.length
             count += this.checkable ? 1 : 0
-            count += this.detailed ? 1 : 0
+            count += (this.detailed && this.showDetailIcon) ? 1 : 0
 
             return count
         }
