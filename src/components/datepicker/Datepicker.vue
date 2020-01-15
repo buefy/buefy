@@ -7,6 +7,7 @@
             :disabled="disabled"
             :inline="inline"
             :mobile-modal="mobileModal"
+            :trap-focus="trapFocus"
             @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
@@ -407,6 +408,10 @@ export default {
         focusable: {
             type: Boolean,
             default: true
+        },
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
         }
     },
     data() {
