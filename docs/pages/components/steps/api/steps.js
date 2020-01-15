@@ -84,6 +84,18 @@ export default [
                 default: '—'
             }
         ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Step body where <code>step-item</code> can be included',
+                props: '—'
+            },
+            {
+                name: 'navigation',
+                description: 'Used to customize navigation button',
+                props: '<code>{previous, next}</code>: Each object contains <code>disabled: boolean</code> and <code>action: Function</code>'
+            }
+        ],
         events: [
             {
                 name: '<code>input</code>',
