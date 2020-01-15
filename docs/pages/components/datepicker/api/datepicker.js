@@ -247,6 +247,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>trap-focus</code>',
+                description: `Trap focus inside the datepicker.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
