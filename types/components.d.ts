@@ -134,6 +134,11 @@ declare type ModalConfig = {
     scroll?: 'clip' | 'keep';
 
     /**
+     * Display modal as full screen
+     */
+    fullScreen?: boolean;
+
+    /**
      * Trap focus inside the dialog.
      */
     trapFocus?: boolean;
