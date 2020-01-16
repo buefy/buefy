@@ -40,6 +40,13 @@ export default [
                 default: '<code>2000</code>'
             },
             {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
