@@ -98,7 +98,6 @@ export default {
     },
     computed: {
         computedTag() {
-            console.log(this.$attrs.disabled)
             if (this.$attrs.disabled !== undefined && this.$attrs.disabled !== false) {
                 return 'button'
             }
