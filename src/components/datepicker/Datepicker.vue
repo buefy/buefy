@@ -83,10 +83,11 @@
                                     :disabled="disabled"
                                     :size="size">
                                     <option
-                                        v-for="(month, index) in monthNames"
-                                        :value="index"
-                                        :key="month">
-                                        {{ month }}
+                                        v-for="month in listOfMonths"
+                                        :value="month.index"
+                                        :key="month.name"
+                                        :disabled="month.disabled">
+                                        {{ month.name }}
                                     </option>
                                 </b-select>
                                 <b-select
@@ -439,9 +440,26 @@ export default {
                 this.$emit('input', value)
             }
         },
+        listOfMonths() {
+            let minMonth = 0
+            let maxMonth = 12
+            if (this.minDate && this.focusedDateData.year === this.minDate.getFullYear()) {
+                minMonth = this.minDate.getMonth()
+            }
+            if (this.maxDate && this.focusedDateData.year === this.maxDate.getFullYear()) {
+                maxMonth = this.maxDate.getMonth()
+            }
+            return this.monthNames.map((name, index) => {
+                return {
+                    name: name,
+                    index: index,
+                    disabled: index < minMonth || index > maxMonth
+                }
+            })
+        },
         /*
-        * Returns an array of years for the year dropdown. If earliest/latest
-        * dates are set by props, range of years will fall within those dates.
+         * Returns an array of years for the year dropdown. If earliest/latest
+         * dates are set by props, range of years will fall within those dates.
         */
         listOfYears() {
             let latestYear = this.focusedDateData.year + this.yearsRange[1]
