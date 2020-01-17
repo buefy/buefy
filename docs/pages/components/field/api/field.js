@@ -34,7 +34,7 @@ export default [
             },
             {
                 name: '<code>message</code>',
-                description: 'Help message text',
+                description: 'Help message text (can contain HTML). <div class="notification is-danger">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>',
                 type: 'String, Object, Array<String>, Array<Object>',
                 values: '—',
                 default: '—'
