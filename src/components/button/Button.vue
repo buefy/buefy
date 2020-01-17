@@ -89,6 +89,7 @@ export default {
                     'router-link',
                     'nuxt-link',
                     'n-link',
+                    'RouterLink',
                     'NuxtLink',
                     'NLink'
                 ].indexOf(value) >= 0
