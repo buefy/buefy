@@ -42,6 +42,9 @@
                         </a>
                     </div>
                     <small class="home-hero">v{{ version }}</small>
+                    <div id="carbon-home" class="carbon-container">
+                        <script async type="application/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7DE23W&placement=buefyorg" id="_carbonads_js"></script>
+                    </div>
                 </div>
             </div>
         </div>

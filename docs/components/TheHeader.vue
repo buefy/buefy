@@ -15,8 +15,21 @@
             </ul>
         </nav>
 
-        <h1 class="title" v-html="title"/>
-        <h2 class="subtitle" v-html="subtitle"/>
+        <div class="columns">
+            <div class="column">
+                <h1 class="title" v-html="title"/>
+                <h2 class="subtitle" v-html="subtitle"/>
+            </div>
+            <div class="column">
+                <div class="carbon-container">
+                    <script
+                        async
+                        type="application/javascript"
+                        src="//cdn.carbonads.com/carbon.js?serve=CE7DE23W&placement=buefyorg"
+                        id="_carbonads_js"/>
+                </div>
+            </div>
+        </div>
     </header>
 </template>
 
