@@ -23,6 +23,8 @@
         :disabled="disabled"
         :mobile-native="mobileNative"
         :focusable="focusable"
+        @focus="onFocus"
+        @blur="onBlur"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
