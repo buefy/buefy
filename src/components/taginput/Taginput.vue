@@ -7,7 +7,7 @@
             @click="hasInput && focus($event)">
             <b-tag
                 v-for="(tag, index) in tags"
-                :key="index"
+                :key="getNormalizedTagText(tag) + index"
                 :type="type"
                 :size="size"
                 :rounded="rounded"
