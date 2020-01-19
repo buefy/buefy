@@ -93,7 +93,8 @@ export default {
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
         customFormatter: Function,
-        checkInfiniteScroll: Boolean
+        checkInfiniteScroll: Boolean,
+        keepOpen: Boolean
     },
     data() {
         return {
@@ -268,7 +269,7 @@ export default {
          */
         enterPressed() {
             if (this.hovered === null) return
-            this.setSelected(this.hovered)
+            this.setSelected(this.hovered, !this.keepOpen)
         },
 
         /**
@@ -281,7 +282,7 @@ export default {
                 this.isActive = false
                 return
             }
-            this.setSelected(this.hovered)
+            this.setSelected(this.hovered, !this.keepOpen)
         },
 
         /**

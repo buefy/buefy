@@ -36,6 +36,8 @@
                 :disabled="disabled"
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
+                :open-on-focus="openOnFocus"
+                :keep-open="openOnFocus"
                 :keep-first="!allowNew"
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
@@ -122,6 +124,7 @@ export default {
         },
         autocomplete: Boolean,
         nativeAutocomplete: String,
+        openOnFocus: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
         closable: {
@@ -310,6 +313,11 @@ export default {
         removeLastTag() {
             if (this.tagsLength > 0) {
                 this.removeTag(this.tagsLength - 1)
+                this.$nextTick(() => {
+                    if (this.isFocused && this.openOnFocus) {
+                        this.$refs.autocomplete.isActive = true
+                    }
+                })
             }
         },
 
