@@ -1,5 +1,25 @@
 # Buefy Changelog
 
+## 0.8.10
+
+### New features
+
+* Add ``focus``and ``blur`` event on datetimepicker
+* Add ``animation`` prop to notification (thanks @service-paradis)
+* Add ``trap-focus`` prop to datepicker (thanks @service-paradis)
+* Add ``hour-increment`` prop to timepicker (thanks @LeoMouyna)
+
+### Fixes
+
+* Fix #1473 tooltip z-index (lower than modal) (thanks @rolandschuetz)
+* Fix #1889 add body padding for fixed spaced navbar (thanks @a-kriya)
+* Fix #2109 disabled button (thanks @service-paradis)
+* Fix #2114 limit the select options of month in Datepicker with ``min-date`` and ``max-date`` (thanks @service-paradis)
+* Fix #2121 fix tabs warning when items aren't already visible (thanks @service-paradis)
+* Fix #2133 table colspan when ``detailed`` and hidden icon (thanks @rolandschuetz)
+* Fix #2135 keep open taginput on add/remove when ``open-on-focus``
+* Fix #2141 taginput using sortablejs
+
 ## 0.8.9
 
 ### New features
