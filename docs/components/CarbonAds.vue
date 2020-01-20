@@ -1,36 +1,30 @@
+<template>
+    <div class="carbon-container" ref="carbonads" />
+</template>
+
 <script>
-// https://github.com/vuejs/vuepress/blob/master/packages/%40vuepress/theme-vue/components/CarbonAds.vue
+// https://github.com/vuejs/vuefire/blob/master/packages/documentation/docs/.vuepress/components/CarbonAds.vue
 export default {
-    name: 'CarbonAds',
-    props: {
-        id: String
-    },
     watch: {
-        '$route'(to, from) {
-            if (to.path !== from.path &&
-                // Only reload if the ad has been loaded
-                // otherwise it's possible that the script is appended but
-                // the ads are not loaded yet. This would result in duplicated ads.
-                this.$el.querySelector('#carbonads')
-            ) {
-                this.$el.innerHTML = ''
-                this.load()
+        $route(to, from) {
+            if (to.path !== from.path && typeof _carbonads === 'object') {
+                // eslint-disable-next-line no-undef
+                _carbonads.refresh()
             }
         }
     },
-    methods: {
-        load() {
-            const s = document.createElement('script')
-            s.id = '_carbonads_js'
-            s.src = `//cdn.carbonads.com/carbon.js?serve=CE7DE23W&placement=buefyorg`
-            this.$el.appendChild(s)
-        }
-    },
     mounted() {
-        this.load()
-    },
-    render(h) {
-        return h('div', { staticClass: 'carbon-container', attrs: { id: this.id } })
+        if (window.__PRERENDER_INJECTED === undefined) {
+            if (this.$refs.carbonads.children.length) return
+            const script = document.createElement('script')
+            script.setAttribute('type', 'text/javascript')
+            script.setAttribute(
+                'src',
+                `//cdn.carbonads.com/carbon.js?serve=CE7DE23W&placement=buefyorg`
+            )
+            script.setAttribute('id', `_carbonads_js`)
+            this.$refs.carbonads.appendChild(script)
+        }
     }
 }
 </script>
