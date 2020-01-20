@@ -103,8 +103,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -128,7 +127,8 @@
             "/",
             "documentation",
             "documentation/tooltip"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/modal": {
         "title": "Modal",
@@ -152,7 +152,8 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -200,8 +201,7 @@
             "/",
             "documentation",
             "documentation/snackbar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/notification": {
         "title": "Notification",
@@ -238,8 +238,7 @@
             "/",
             "documentation",
             "documentation/loading"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/field": {
         "title": "Field",
@@ -374,7 +373,8 @@
             "/",
             "documentation",
             "documentation/datetimepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -436,7 +436,8 @@
             "/",
             "documentation",
             "documentation/button"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/numberinput": {
         "title": "Numberinput",
@@ -508,8 +509,7 @@
             "/",
             "documentation",
             "documentation/carousel"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/rate": {
         "title": "Rate",
@@ -556,7 +556,8 @@
             "/",
             "extensions",
             "extensions/sortablejs"
-        ]
+        ],
+        "isUpdated": true
     },
     "extensions/veevalidate": {
         "title": "VeeValidate",
