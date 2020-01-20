@@ -474,14 +474,6 @@ export default {
         }
     },
     computed: {
-        /**
-        * return if detailed row tabled
-        * will be with chevron column & icon or not
-        */
-        showDetailRowIcon() {
-            return this.detailed && this.showDetailIcon
-        },
-
         tableClasses() {
             return {
                 'is-bordered': this.bordered,
@@ -579,29 +571,25 @@ export default {
             count += (this.detailed && this.showDetailIcon) ? 1 : 0
 
             return count
+        },
+
+        /**
+        * return if detailed row tabled
+        * will be with chevron column & icon or not
+        */
+        showDetailRowIcon() {
+            return this.detailed && this.showDetailIcon
         }
     },
     watch: {
         /**
         * When data prop change:
         *   1. Update internal value.
-        *   2. Reset newColumns (thead), in case it's on a v-for loop.
-        *   3. Sort again if it's not backend-sort.
-        *   4. Set new total if it's not backend-paginated.
+        *   2. Sort again if it's not backend-sort.
+        *   3. Set new total if it's not backend-paginated.
         */
         data(value) {
-            // Save newColumns before resetting
-            const newColumns = this.newColumns
-
-            this.newColumns = []
             this.newData = value
-
-            // Prevent table from being headless, data could change and created hook
-            // on column might not trigger
-            this.$nextTick(() => {
-                if (!this.newColumns.length) this.newColumns = newColumns
-            })
-
             if (!this.backendSorting) {
                 this.sort(this.currentSortColumn, true)
             }
