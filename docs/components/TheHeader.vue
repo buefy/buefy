@@ -21,22 +21,20 @@
                 <h2 class="subtitle" v-html="subtitle"/>
             </div>
             <div class="column">
-                <div class="carbon-container">
-                    <script
-                        async
-                        type="application/javascript"
-                        src="//cdn.carbonads.com/carbon.js?serve=CE7DE23W&placement=buefyorg"
-                        id="_carbonads_js"/>
-                </div>
+                <carbon-ads />
             </div>
         </div>
     </header>
 </template>
 
 <script>
+import CarbonAds from './CarbonAds'
 import routes from '@/data/routes'
 
 export default {
+    components: {
+        CarbonAds
+    },
     props: {
         breadcrumb: Array,
         title: String,
