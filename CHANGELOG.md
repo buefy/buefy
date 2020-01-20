@@ -9,6 +9,7 @@
 * Add ``animation`` prop to notification (thanks @service-paradis)
 * Add ``trap-focus`` prop to datepicker (thanks @service-paradis)
 * Add ``hour-increment`` prop to timepicker (thanks @LeoMouyna)
+* Add ``backend-filtering`` prop and ``filters-change`` event to table (thanks @zeljkokalezic)
 
 ### Fixes
 

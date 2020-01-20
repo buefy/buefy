@@ -281,7 +281,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-
+            },
+            {
+                name: '<code>backend-filtering</code>',
+                description: `Columns won't be filtered with Javascript, use with <code>searchable</code> prop to the columns to filter in your backend`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>aria-next-label</code>',
@@ -434,6 +440,11 @@ export default [
                 name: '<code>mouseleave</code>',
                 description: 'Triggers when mouse leaves a row',
                 parameters: '<code> row: Object </code>'
+            },
+            {
+                name: '<code>filter-change</code>',
+                description: 'Triggers when filter change',
+                parameters: '<code> filter: Object </code>'
             }
         ],
         methods: [
