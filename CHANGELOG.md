@@ -4,6 +4,7 @@
 
 ### New features
 
+* Improve rendering performance on table
 * Add ``focus``and ``blur`` event on datetimepicker
 * Add ``animation`` prop to notification (thanks @service-paradis)
 * Add ``trap-focus`` prop to datepicker (thanks @service-paradis)
