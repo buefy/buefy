@@ -192,6 +192,27 @@ export default [
                 default: '<code>20</code>'
             },
             {
+                name: '<code>sort-multiple</code>',
+                description: 'Adds multiple column sorting',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>sort-multiple-data</code>',
+                description: 'Used in combination with <code>backend-sorting</code>',
+                type: 'Object',
+                values: '<code>[{field, order}]</code>',
+                default: '<code>[]</code>'
+            },
+            {
+                name: '<code>custom-key</code>',
+                description: 'Adds a key which will be required for multi column sorting to work. Will always be enabled if <code>null</code> is selected (default). Requres <code>sort-multiple</code>',
+                type: 'String',
+                values: '<code>null</code>, <code>shiftKey</code>, <code>altKey</code>, <code>ctrlKey</code>',
+                default: '<code>null</code>'
+            },
+            {
                 name: '<code>row-class</code>',
                 description: 'Add a class to row (<code>&lt;tr&gt;</code> element) based on the return',
                 type: 'Function (row: Object, index: Number)',
@@ -470,6 +491,10 @@ export default [
                 name: '<code>closeDetailRow</code>',
                 description: 'Close row detail if table is <code>detailed</code>',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>resetMultiSorting</code>',
+                description: 'Resets the multi column sorting'
             }
         ]
     },
