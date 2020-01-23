@@ -136,6 +136,10 @@ export default {
             type: Boolean,
             default: true
         },
+        repeat: {
+            type: Boolean,
+            default: true
+        },
         iconPack: String,
         iconSize: String,
         iconPrev: {
@@ -266,14 +270,18 @@ export default {
             }
         },
         prev() {
-            return this.activeItem === 0
-                ? this.changeItem(this.carouselItems.length - 1)
-                : this.changeItem(this.activeItem - 1)
+            if (this.activeItem === 0) {
+                if (this.repeat) this.changeItem(this.carouselItems.length - 1)
+            } else {
+                this.changeItem(this.activeItem - 1)
+            }
         },
         next() {
-            return this.activeItem === this.carouselItems.length - 1
-                ? this.changeItem(0, false)
-                : this.changeItem(this.activeItem + 1, false)
+            if (this.activeItem === this.carouselItems.length - 1) {
+                if (this.repeat) this.changeItem(0, false)
+            } else {
+                this.changeItem(this.activeItem + 1, false)
+            }
         },
         // checking arrow between both
         checkArrow(value) {
