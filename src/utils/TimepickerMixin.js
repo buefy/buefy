@@ -138,11 +138,15 @@ export default {
         focusable: {
             type: Boolean,
             default: true
+        },
+        tzOffset: {
+            type: Number,
+            default: 0
         }
     },
     data() {
         return {
-            dateSelected: this.value,
+            dateSelected: new Date(this.value.getTime() + this.tzOffset * 60000),
             hoursSelected: null,
             minutesSelected: null,
             secondsSelected: null,
@@ -157,11 +161,11 @@ export default {
     computed: {
         computedValue: {
             get() {
-                return this.dateSelected
+                return new Date(this.dateSelected.getTime() + this.tzOffset * 60000)
             },
             set(value) {
-                this.dateSelected = value
-                this.$emit('input', value)
+                this.dateSelected = new Date(value.getTime() + this.tzOffset * 60000)
+                this.$emit('input', this.dateSelected)
             }
         },
         hours() {
