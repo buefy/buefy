@@ -35,16 +35,18 @@
             :size="iconSize"
             @click.native="iconClick"/>
 
-        <b-icon
-            v-if="!loading && (passwordReveal || statusTypeIcon)"
-            class="is-right"
-            :class="{ 'is-clickable': passwordReveal }"
-            :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
-            :pack="iconPack"
-            :size="iconSize"
-            :type="!passwordReveal ? statusType : 'is-primary'"
-            both
-            @click.native="togglePasswordVisibility"/>
+        <slot>
+            <b-icon
+                v-if="!loading && (passwordReveal || statusTypeIcon)"
+                class="is-right"
+                :class="{ 'is-clickable': passwordReveal }"
+                :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
+                :pack="iconPack"
+                :size="iconSize"
+                :type="!passwordReveal ? statusType : 'is-primary'"
+                both
+                @click.native="togglePasswordVisibility"/>
+        </slot>
 
         <small
             v-if="maxlength && hasCounter && type !== 'number'"

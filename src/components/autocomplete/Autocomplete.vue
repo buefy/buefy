@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete control" :class="{'is-expanded': expanded}">
+    <div class="autocomplete control has-icons-right" :class="{'is-expanded': expanded}">
         <b-input
             v-model="newValue"
             ref="input"
@@ -21,7 +21,18 @@
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
-        />
+        >
+            <template v-if="hasInputText">
+                <b-icon
+                    class=" is-right is-clickable"
+                    icon="times-circle"
+                    pack="fas"
+                    type="is-secondary"
+                    :size="iconSize"
+                    both
+                    @click.native="clearInputText"/>
+            </template>
+        </b-input>
 
         <transition name="fade">
             <div
@@ -164,6 +175,13 @@ export default {
          */
         hasFooterSlot() {
             return !!this.$slots.footer
+        },
+
+        /**
+         * Check if has input text
+         */
+        hasInputText() {
+            return this.newValue
         }
     },
     watch: {
@@ -404,6 +422,9 @@ export default {
             const currentValue = this.getValue(this.selected)
             if (currentValue && currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
+        },
+        clearInputText() {
+            this.newValue = ''
         }
     },
     created() {
