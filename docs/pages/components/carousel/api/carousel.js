@@ -39,14 +39,14 @@ export default [
             },
             {
                 name: '<code>pause-hover</code>',
-                description: 'Pause carousel when autoplay and mouse enter',
+                description: 'Pause carousel when <code>autoplay</code> and mouse enter',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
             {
                 name: '<code>pause-info</code>',
-                description: 'Show infomation pause when autoplay and mouse enter',
+                description: 'Show infomation pause when <code>autoplay</code> and <code>pause-hover</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

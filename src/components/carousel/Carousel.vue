@@ -2,7 +2,7 @@
     <div
         class="carousel"
         :class="{'is-overlay': overlay}"
-        @mouseenter="pauseTimer"
+        @mouseenter="checkPause"
         @mouseleave="startTimer">
         <progress
             v-if="progress"
@@ -220,13 +220,13 @@ export default {
         },
         /**
          * When carousel-items are updated, set active one.
-         */
+         *
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
-                this.carouselItems[this.activeItem].status(true, false)
+                this.carouselItems[this.activeItem].isActive = true
             }
         },
-        /**
+         *
          *  When autoplay is change, set by status
          */
         autoplay(status) {
@@ -238,16 +238,22 @@ export default {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                this.next()
+                if (!this.repeat && this.activeItem === this.carouselItems.length - 1) {
+                    this.pauseTimer()
+                } else {
+                    this.next()
+                }
             }, (this.interval || config.defaultCarouselInterval))
         },
         pauseTimer() {
-            if (!this.pauseHover && this.autoplay) return
             this.isPause = true
             if (this.timer) {
                 clearInterval(this.timer)
                 this.timer = null
             }
+        },
+        checkPause() {
+            if (this.pauseHover && this.autoplay) return this.pauseTimer()
         },
         /**
          * Change the active item and emit change event.
@@ -270,18 +276,14 @@ export default {
             }
         },
         prev() {
-            if (this.activeItem === 0) {
-                if (this.repeat) this.changeItem(this.carouselItems.length - 1)
-            } else {
-                this.changeItem(this.activeItem - 1)
-            }
+            return this.activeItem === 0
+                ? this.changeItem(this.carouselItems.length - 1)
+                : this.changeItem(this.activeItem - 1)
         },
         next() {
-            if (this.activeItem === this.carouselItems.length - 1) {
-                if (this.repeat) this.changeItem(0, false)
-            } else {
-                this.changeItem(this.activeItem + 1, false)
-            }
+            return this.activeItem === this.carouselItems.length - 1
+                ? this.changeItem(0, false)
+                : this.changeItem(this.activeItem + 1, false)
         },
         // checking arrow between both
         checkArrow(value) {
@@ -316,7 +318,7 @@ export default {
     },
     mounted() {
         if (this.activeItem < this.carouselItems.length) {
-            this.carouselItems[this.activeItem].status(true, false)
+            this.carouselItems[this.activeItem].isActive = true
         }
         this.startTimer()
     },

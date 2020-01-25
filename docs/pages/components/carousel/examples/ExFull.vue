@@ -6,6 +6,7 @@
                 <b-switch v-model="pauseHover" :disabled="!autoPlay">Pause on hover</b-switch>
                 <b-switch v-model="pauseInfo" :disabled="!pauseHover">Pause info</b-switch>
                 <b-switch v-model="drag">Drag event</b-switch>
+                <b-switch v-model="repeat" :disabled="!autoPlay">Repeat</b-switch>
             </b-field><br>
             <b-field grouped group-multiline position="is-centered">
                 <b-field label="Value">
@@ -45,6 +46,7 @@
             :pause-info="pauseInfo"
             :pause-info-type="pauseType"
             :interval="interval"
+            :repeat="repeat"
             @change="info($event)">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                 <section :class="`hero is-medium is-${carousel.color} is-bold`">
@@ -68,6 +70,7 @@ export default {
             pauseHover: false,
             pauseInfo: false,
             pauseType: 'is-primary',
+            repeat: false,
             interval: 3000,
             carousels: [
                 { title: 'Slide 1', color: 'dark' },
