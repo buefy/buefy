@@ -212,15 +212,15 @@ export default {
         }
     },
     beforeDestroy() {
-        let className = ''
         if (this.fixedTop) {
-            className = this.spaced
+            const className = this.spaced
                 ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS
+            this.removeBodyClass(className)
         } else if (this.fixedBottom) {
-            className = this.spaced
+            const className = this.spaced
                 ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS
+            this.removeBodyClass(className)
         }
-        this.removeBodyClass(className)
     },
     render(createElement, fn) {
         return this.genNavbar(createElement)
