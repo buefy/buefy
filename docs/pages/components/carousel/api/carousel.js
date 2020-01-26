@@ -90,6 +90,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>repeat</code>',
+                description: 'Controls whether the carousel loops around at the start and end.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
