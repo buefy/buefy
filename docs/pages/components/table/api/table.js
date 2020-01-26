@@ -442,7 +442,7 @@ export default [
                 parameters: '<code> row: Object </code>'
             },
             {
-                name: '<code>filter-change</code>',
+                name: '<code>filters-change</code>',
                 description: 'Triggers when filter change',
                 parameters: '<code> filter: Object </code>'
             }
