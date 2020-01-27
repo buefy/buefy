@@ -331,7 +331,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -339,7 +339,6 @@ import Pagination from '../pagination/Pagination'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
-import orderBy from 'lodash/orderBy'
 
 export default {
     name: 'BTable',
@@ -739,8 +738,8 @@ export default {
         sortMultiColumn(column) {
             this.currentSortColumn = {}
             if (!this.backendSorting) {
-                let existingPriority = this.sortMultipleDataLocal.find((i) =>
-                    i.field === column.field)
+                let existingPriority = this.sortMultipleDataLocal.filter((i) =>
+                    i.field === column.field)[0]
                 if (existingPriority) {
                     existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
                 } else {
@@ -748,9 +747,11 @@ export default {
                         {field: column.field, order: column.isAsc}
                     )
                 }
-                this.newData = orderBy(this.newData,
-                    this.sortMultipleDataLocal.map((i) => i.field),
-                    this.sortMultipleDataLocal.map((i) => i.order))
+                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
+                })
+
+                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
             }
         },
         /**
