@@ -35,7 +35,7 @@
             :size="iconSize"
             @click.native="iconClick"/>
 
-        <slot>
+        <slot name="right-icon">
             <b-icon
                 v-if="!loading && (passwordReveal || statusTypeIcon)"
                 class="is-right"

@@ -22,9 +22,9 @@
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
         >
-            <template v-if="hasInputText">
+            <template v-if="showClearButton" slot="right-icon">
                 <b-icon
-                    class=" is-right is-clickable"
+                    class="is-right is-clickable"
                     icon="times-circle"
                     pack="fas"
                     type="is-secondary"
@@ -105,7 +105,8 @@ export default {
         openOnFocus: Boolean,
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
-        keepOpen: Boolean
+        keepOpen: Boolean,
+        clearIconButton: Boolean
     },
     data() {
         return {
@@ -180,8 +181,8 @@ export default {
         /**
          * Check if has input text
          */
-        hasInputText() {
-            return this.newValue
+        showClearButton() {
+            return this.clearIconButton && this.newValue
         }
     },
     watch: {

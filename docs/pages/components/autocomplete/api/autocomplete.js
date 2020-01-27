@@ -37,6 +37,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>clear-icon-button</code>',
+                description: 'Add a button to clear the inputed text',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>open-on-focus</code>',
                 description: 'Open dropdown list on focus',
                 type: 'Boolean',
