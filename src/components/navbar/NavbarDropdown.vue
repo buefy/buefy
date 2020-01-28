@@ -12,7 +12,10 @@
             :class="{
                 'is-arrowless': arrowless
             }"
-            @click="newActive = !newActive">
+            role="menuitem"
+            aria-haspopup="true"
+            href="#"
+            @click.prevent="newActive = !newActive">
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </a>
