@@ -15,5 +15,9 @@
         <b-message title="Warning with icon" type="is-warning" has-icon aria-close-label="Close message">
             Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-message>
+
+        <b-message title="Dark with custom icon" type="is-dark" has-icon icon="account" aria-close-label="Close message">
+            Lorem ipsum dolor sit amet, consectetur warning elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+        </b-message>
     </section>
 </template>
