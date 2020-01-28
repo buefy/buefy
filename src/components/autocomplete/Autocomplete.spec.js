@@ -164,14 +164,14 @@ describe('BAutocomplete', () => {
 
     it('clear button exists when the search input is not empty and clearIconButton property is set to true', () => {
         wrapper.setData({newValue: 'Jquery'})
-        wrapper.setProps({ clearIconButton: true })
+        wrapper.setProps({ clearable: true })
         const subject = wrapper.find('b-icon-stub').exists()
 
         expect(subject).toBeTruthy()
     })
 
     it('clears search input text when clear button gets clicked', () => {
-        wrapper.setProps({ clearIconButton: true })
+        wrapper.setProps({ clearable: true })
         wrapper.setData({newValue: 'Jquery'})
         wrapper.find('b-icon-stub').trigger('click')
         const subject = wrapper.vm.newValue

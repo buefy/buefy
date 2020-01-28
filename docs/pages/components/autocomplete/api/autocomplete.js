@@ -37,7 +37,7 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>clear-icon-button</code>',
+                name: '<code>clearable</code>',
                 description: 'Add a button to clear the inputed text',
                 type: 'Boolean',
                 values: '—',
@@ -88,6 +88,20 @@ export default [
             {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
+                type: 'String',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
+                default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>icon-right</code>',
+                description: 'Icon name to be added (Only works if clearable property is set to true)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>icon-pack-right</code>',
+                description: 'Icon pack to use on right icon',
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'

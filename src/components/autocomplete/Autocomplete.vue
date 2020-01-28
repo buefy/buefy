@@ -1,5 +1,8 @@
 <template>
-    <div class="autocomplete control has-icons-right" :class="{'is-expanded': expanded}">
+    <div
+        class="autocomplete control"
+        :class="{'is-expanded': expanded, 'has-icons-right': showClearButton}"
+    >
         <b-input
             v-model="newValue"
             ref="input"
@@ -25,9 +28,8 @@
             <template v-if="showClearButton" slot="right-icon">
                 <b-icon
                     class="is-right is-clickable"
-                    icon="times-circle"
-                    pack="fas"
-                    type="is-secondary"
+                    :icon="iconRight"
+                    :pack="iconPackRight"
                     :size="iconSize"
                     both
                     @click.native="clearInputText"/>
@@ -106,7 +108,9 @@ export default {
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
-        clearIconButton: Boolean
+        clearable: Boolean,
+        iconRight: String,
+        iconPackRight: String
     },
     data() {
         return {
@@ -182,7 +186,7 @@ export default {
          * Check if has input text
          */
         showClearButton() {
-            return this.clearIconButton && this.newValue
+            return this.clearable && this.newValue
         }
     },
     watch: {
