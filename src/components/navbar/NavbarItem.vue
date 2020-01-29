@@ -49,7 +49,7 @@ export default {
 
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
-                if (parent.$data._isNavDropdown) {
+                if (parent.$data && parent.$data._isNavDropdown) {
                     this.closeMenu()
                     parent.$parent.closeMenu()
                 } else {
