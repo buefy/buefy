@@ -1,5 +1,8 @@
 <template>
-    <div class="control" :class="rootClasses">
+    <div
+        class="control"
+        :class="[rootClasses, {'has-icons-right': showRightButton}]"
+    >
         <input
             v-if="type !== 'textarea'"
             ref="input"
@@ -35,18 +38,25 @@
             :size="iconSize"
             @click.native="iconClick"/>
 
-        <slot name="right-icon">
-            <b-icon
-                v-if="!loading && (passwordReveal || statusTypeIcon)"
-                class="is-right"
-                :class="{ 'is-clickable': passwordReveal }"
-                :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
-                :pack="iconPack"
-                :size="iconSize"
-                :type="!passwordReveal ? statusType : 'is-primary'"
-                both
-                @click.native="togglePasswordVisibility"/>
-        </slot>
+        <b-icon
+            v-if="!loading && (passwordReveal || statusTypeIcon)"
+            class="is-right"
+            :class="{ 'is-clickable': passwordReveal }"
+            :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
+            :pack="iconPack"
+            :size="iconSize"
+            :type="!passwordReveal ? statusType : 'is-primary'"
+            both
+            @click.native="togglePasswordVisibility"/>
+
+        <b-icon
+            v-else-if="showRightButton"
+            class="is-right is-clickable"
+            :icon="iconRight"
+            :pack="iconPack"
+            :size="iconSize"
+            both
+            @click.native="$emit('icon-right-click')"/>
 
         <small
             v-if="maxlength && hasCounter && type !== 'number'"
@@ -84,7 +94,8 @@ export default {
         customClass: {
             type: String,
             default: ''
-        }
+        },
+        iconRight: String
     },
     data() {
         return {
@@ -178,6 +189,9 @@ export default {
                 return this.computedValue.toString().length
             }
             return 0
+        },
+        showRightButton() {
+            return this.iconRight
         }
     },
     watch: {

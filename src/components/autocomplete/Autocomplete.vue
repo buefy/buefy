@@ -1,7 +1,7 @@
 <template>
     <div
         class="autocomplete control"
-        :class="{'is-expanded': expanded, 'has-icons-right': showClearButton}"
+        :class="{'is-expanded': expanded}"
     >
         <b-input
             v-model="newValue"
@@ -11,6 +11,7 @@
             :loading="loading"
             :rounded="rounded"
             :icon="icon"
+            :icon-right="clearButton ? 'close-circle' : ''"
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
@@ -24,17 +25,8 @@
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
-        >
-            <template v-if="showClearButton" slot="right-icon">
-                <b-icon
-                    class="is-right is-clickable"
-                    :icon="iconRight"
-                    :pack="iconPackRight"
-                    :size="iconSize"
-                    both
-                    @click.native="clearInputText"/>
-            </template>
-        </b-input>
+            @icon-right-click="clearInputText"
+        />
 
         <transition name="fade">
             <div
@@ -108,9 +100,7 @@ export default {
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
-        clearable: Boolean,
-        iconRight: String,
-        iconPackRight: String
+        clearable: Boolean
     },
     data() {
         return {
@@ -181,12 +171,8 @@ export default {
         hasFooterSlot() {
             return !!this.$slots.footer
         },
-
-        /**
-         * Check if has input text
-         */
-        showClearButton() {
-            return this.clearable && this.newValue
+        clearButton() {
+            return !!((this.clearable && this.newValue.length > 0))
         }
     },
     watch: {
@@ -429,6 +415,7 @@ export default {
             this.$emit('typing', this.newValue)
         },
         clearInputText() {
+            this.$emit('input', '')
             this.newValue = ''
         }
     },

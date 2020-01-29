@@ -37,13 +37,6 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>clearable</code>',
-                description: 'Add a button to clear the inputed text',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
                 name: '<code>open-on-focus</code>',
                 description: 'Open dropdown list on focus',
                 type: 'Boolean',
@@ -93,18 +86,11 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
-                name: '<code>icon-right</code>',
-                description: 'Icon name to be added (Only works if clearable property is set to true)',
-                type: 'String',
+                name: '<code>clearable</code>',
+                description: 'Add a button to clear the inputed text',
+                type: 'Boolean',
                 values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>icon-pack-right</code>',
-                description: 'Icon pack to use on right icon',
-                type: 'String',
-                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
-                default: '<code>mdi</code>'
+                default: 'false'
             },
             {
                 name: '<code>maxlength</code>',

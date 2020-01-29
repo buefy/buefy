@@ -4,13 +4,11 @@
         <b-field label="Find a JS framework">
             <b-autocomplete
                 rounded
-                :clearable=true
                 v-model="name"
                 :data="filteredDataArray"
                 placeholder="e.g. jQuery"
                 icon="magnify"
-                icon-right="times-circle"
-                icon-pack-right="fas"
+                :clearable=true
                 @select="option => selected = option">
                 <template slot="empty">No results found</template>
             </b-autocomplete>
