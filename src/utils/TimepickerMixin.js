@@ -138,6 +138,10 @@ export default {
         focusable: {
             type: Boolean,
             default: true
+        },
+        tzOffset: {
+            type: Number,
+            default: 0
         }
     },
     data() {
@@ -161,7 +165,7 @@ export default {
             },
             set(value) {
                 this.dateSelected = value
-                this.$emit('input', value)
+                this.$emit('input', this.dateSelected)
             }
         },
         hours() {
