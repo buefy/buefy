@@ -1,6 +1,6 @@
 <template>
     <b-datepicker
-        v-if="!isMobile || inline || tzOffset != 0"
+        v-if="!isMobile || inline"
         ref="datepicker"
         v-model="computedValue"
         v-bind="datepicker"
@@ -21,7 +21,7 @@
         :placeholder="placeholder"
         :range="false"
         :disabled="disabled"
-        :mobile-native="mobileNative && tzOffset == 0"
+        :mobile-native="isMobileNative"
         :focusable="focusable"
         @focus="onFocus"
         @blur="onBlur"
@@ -45,7 +45,7 @@
                     :size="timepickerSize"
                     :disabled="timepickerDisabled"
                     :focusable="focusable"
-                    :mobile-native="mobileNative && tzOffset == 0"
+                    :mobile-native="isMobileNative"
                 />
             </div>
             <div
@@ -183,8 +183,11 @@ export default {
                 this.$emit('input', adjustedValue)
             }
         },
+        isMobileNative() {
+            return this.mobileNative && this.tzOffset === 0
+        },
         isMobile() {
-            return this.mobileNative && isMobile.any()
+            return this.isMobileNative && isMobile.any()
         },
         minDate() {
             if (!this.minDatetime) {
