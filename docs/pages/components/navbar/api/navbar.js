@@ -115,6 +115,13 @@ export default [
             type: 'Boolean',
             values: '-',
             default: 'false'
+        },
+        {
+            name: '<code>parent</code>',
+            description: 'ref to navbar (useful with Vue Router)',
+            type: 'Object',
+            values: 'VueComponent to navbar',
+            default: 'null'
         }
     ]
   },

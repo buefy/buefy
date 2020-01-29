@@ -1,6 +1,7 @@
 <template>
     <component
         :is="tag"
+        :nav-ref="navRef"
         class="navbar-item"
         :class="{
             'is-active': active
@@ -22,6 +23,10 @@ export default {
             type: String,
             default: 'a'
         },
+        parent: {
+            type: Object,
+            default: null
+        },
         active: Boolean
     },
     methods: {
@@ -33,7 +38,7 @@ export default {
             // TODO: use code instead (because keyCode is actually deprecated)
             // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
             if (event.keyCode === 27) {
-                this.$parent.closeMenu()
+                this.closeMenu()
             }
         },
         /**
@@ -43,12 +48,20 @@ export default {
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
                 if (this.$parent.$data._isNavDropdown) {
-                    this.$parent.closeMenu()
+                    this.closeMenu()
                     this.$parent.$parent.closeMenu()
                 } else {
-                    this.$parent.closeMenu()
+                    this.closeMenu()
                 }
             }
+        },
+        /**
+         * Determine which closemenu to run
+         */
+        closeMenu() {
+            const parent = this.parent === null ? this.$parent : this.parent
+
+            parent.closeMenu()
         }
     },
     mounted() {
