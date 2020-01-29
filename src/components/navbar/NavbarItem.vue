@@ -45,11 +45,13 @@ export default {
          * Close parent if clicked outside.
          */
         handleClickEvent(event) {
+            const parent = this.parent === null ? this.$parent : this.parent
+
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
-                if (this.$parent.$data._isNavDropdown) {
+                if (parent.$data._isNavDropdown) {
                     this.closeMenu()
-                    this.$parent.$parent.closeMenu()
+                    parent.$parent.closeMenu()
                 } else {
                     this.closeMenu()
                 }
