@@ -42,4 +42,17 @@ describe('BNavbarItem', () => {
         inner.trigger('test_event')
         expect(testStub.called).toBe(true)
     })
+
+    it('runs closeMenu from a passed component reference', () => {
+        let closeMenu = sinon.stub()
+
+        let emitCloseMenu = shallowMount(BNavbarItem, {
+            propsData: {
+                parent: { closeMenu }
+            }
+        })
+
+        emitCloseMenu.trigger('click')
+        expect(closeMenu.called).toBe(true)
+    })
 })
