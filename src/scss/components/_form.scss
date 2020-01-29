@@ -86,7 +86,7 @@ $floating-in-height: 3.25em !default;
                 left: 0;
                 right: 0;
                 height: 0.375em;
-                background-color: #fff;
+                background-color: $input-background-color;
                 z-index: -1;
             }
             &.is-small {
@@ -184,7 +184,7 @@ $floating-in-height: 3.25em !default;
             float: none;
             text-align: right;
         }
-      
+
         &.has-numberinput {
             .b-numberinput {
                 .control {

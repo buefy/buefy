@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BCarousel render correctly 1`] = `
+<div class="carousel">
+    <!---->
+    <div class="carousel-items">
+        <div class="carousel-arrow is-hovered">
+            <bicon-stub icon="chevron-left" both="true" class="has-icons-left"></bicon-stub>
+            <bicon-stub icon="chevron-right" both="true" class="has-icons-right"></bicon-stub>
+        </div>
+    </div>
+    <!---->
+    <!---->
+    <div class="carousel-indicator is-inside is-bottom"><a class="indicator-item is-active"><span class="indicator-style is-dots"></span></a><a class="indicator-item"><span class="indicator-style is-dots"></span></a></div>
+    <!---->
+</div>
+`;

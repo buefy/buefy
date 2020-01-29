@@ -7,10 +7,10 @@
                 <b-switch v-model="arrowHover" :disabled="!arrow">Hover</b-switch>
             </b-field><br>
             <b-field grouped group-multiline position="is-centered">
-                <b-field label="Arrow Icon Pack">
+                <b-field label="Icon Pack">
                     <b-input v-model="iconPack" placeholder="e.g. mdi, fa or other"/>
                 </b-field>
-                <b-field label="Arrow Icon Size">
+                <b-field label="Icon Size">
                     <b-select v-model="iconSize">
                         <option value="">default</option>
                         <option value="is-small">is-small</option>
@@ -18,10 +18,10 @@
                         <option value="is-large">is-large</option>
                     </b-select>
                 </b-field>
-                <b-field label="Arrow Icon Prev">
+                <b-field label="Icon Prev">
                     <b-input v-model="iconPrev"/>
                 </b-field>
-                <b-field label="Arrow Icon Next">
+                <b-field label="Icon Next">
                     <b-input v-model="iconNext"/>
                 </b-field>
             </b-field>

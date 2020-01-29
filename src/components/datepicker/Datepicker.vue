@@ -6,7 +6,9 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
-            :mobile-modal="mobileModal">
+            :mobile-modal="mobileModal"
+            :trap-focus="trapFocus"
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -29,7 +31,10 @@
                 @focus="handleOnFocus"
                 @blur="onBlur" />
 
-            <b-dropdown-item :disabled="disabled" custom>
+            <b-dropdown-item
+                :disabled="disabled"
+                :focusable="focusable"
+                custom>
                 <header class="datepicker-header">
                     <template v-if="$slots.header !== undefined && $slots.header.length">
                         <slot name="header" />
@@ -78,10 +83,11 @@
                                     :disabled="disabled"
                                     :size="size">
                                     <option
-                                        v-for="(month, index) in monthNames"
-                                        :value="index"
-                                        :key="month">
-                                        {{ month }}
+                                        v-for="month in listOfMonths"
+                                        :value="month.index"
+                                        :key="month.name"
+                                        :disabled="month.disabled">
+                                        {{ month.name }}
                                     </option>
                                 </b-select>
                                 <b-select
@@ -125,6 +131,8 @@
                         :show-week-number="showWeekNumber"
                         :range="range"
                         :multiple="multiple"
+                        @range-start="date => $emit('range-start', date)"
+                        @range-end="date => $emit('range-end', date)"
                         @close="togglePicker(false)"/>
                 </div>
                 <div v-else>
@@ -397,6 +405,14 @@ export default {
             default: () => {
                 return config.defaultDatepickerMobileModal
             }
+        },
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        trapFocus: {
+            type: Boolean,
+            default: config.defaultTrapFocus
         }
     },
     data() {
@@ -424,9 +440,26 @@ export default {
                 this.$emit('input', value)
             }
         },
+        listOfMonths() {
+            let minMonth = 0
+            let maxMonth = 12
+            if (this.minDate && this.focusedDateData.year === this.minDate.getFullYear()) {
+                minMonth = this.minDate.getMonth()
+            }
+            if (this.maxDate && this.focusedDateData.year === this.maxDate.getFullYear()) {
+                maxMonth = this.maxDate.getMonth()
+            }
+            return this.monthNames.map((name, index) => {
+                return {
+                    name: name,
+                    index: index,
+                    disabled: index < minMonth || index > maxMonth
+                }
+            })
+        },
         /*
-        * Returns an array of years for the year dropdown. If earliest/latest
-        * dates are set by props, range of years will fall within those dates.
+         * Returns an array of years for the year dropdown. If earliest/latest
+         * dates are set by props, range of years will fall within those dates.
         */
         listOfYears() {
             let latestYear = this.focusedDateData.year + this.yearsRange[1]
@@ -677,6 +710,15 @@ export default {
             // Esc key
             if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                 this.togglePicker(false)
+            }
+        },
+
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
             }
         }
     },

@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition :name="animation">
         <article
             v-show="isActive"
             class="notification"
@@ -40,7 +40,11 @@ export default {
     mixins: [MessageMixin],
     props: {
         position: String,
-        ariaCloseLabel: String
+        ariaCloseLabel: String,
+        animation: {
+            type: String,
+            default: 'fade'
+        }
     }
 }
 </script>

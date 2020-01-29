@@ -1,10 +1,11 @@
-import Vue from 'vue'
 import Notification from './Notification'
 import NotificationNotice from './NotificationNotice'
 
-import config from '../../utils/config'
+import config, { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
+
+let localVueInstance
 
 const NotificationProgrammatic = {
     open(params) {
@@ -24,7 +25,7 @@ const NotificationProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
 
-        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : Vue
+        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const NotificationNoticeComponent = vm.extend(NotificationNotice)
         return new NotificationNoticeComponent({
             parent,
@@ -36,6 +37,7 @@ const NotificationProgrammatic = {
 
 const Plugin = {
     install(Vue) {
+        localVueInstance = Vue
         registerComponent(Vue, Notification)
         registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic)
     }

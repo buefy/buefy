@@ -141,7 +141,11 @@ if (process.env.NODE_ENV !== 'test') {
     renderer: new Renderer({
       headless: false,
       maxConcurrentRoutes: 6,
-      renderAfterDocumentEvent: 'render-event'
+      renderAfterDocumentEvent: 'render-event',
+      injectProperty: '__PRERENDER_INJECTED',
+      inject: {
+        foo: 'bar'
+      }
     })
   }))
 }

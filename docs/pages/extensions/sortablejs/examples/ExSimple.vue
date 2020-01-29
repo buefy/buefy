@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    // You have to install sorable.js to use it:
+    // You have to install sortable.js to use it:
     // 'npm install sortablejs'
     import Sortable from 'sortablejs'
 
@@ -23,7 +23,7 @@
         return Sortable.create(el, {
             ...options,
             onEnd: function (evt) {
-                const data = vnode.context.tags
+                const data = vnode.componentInstance.$data.tags
                 const item = data[evt.oldIndex]
                 if (evt.newIndex > evt.oldIndex) {
                     for (let i = evt.oldIndex; i < evt.newIndex; i++) {
@@ -35,6 +35,7 @@
                     }
                 }
                 data[evt.newIndex] = item
+                vnode.componentInstance.$emit('input', data)
                 vnode.context.$buefy.toast.open(`Moved ${item.first_name} from row ${evt.oldIndex + 1} to ${evt.newIndex + 1}`)
             }
         })

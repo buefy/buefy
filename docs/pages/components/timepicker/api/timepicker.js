@@ -149,6 +149,13 @@ export default [
                 default: '<code>() => new Date()</code>'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Timepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

@@ -22,6 +22,9 @@
         :range="false"
         :disabled="disabled"
         :mobile-native="mobileNative && tzOffset == 0"
+        :focusable="focusable"
+        @focus="onFocus"
+        @blur="onBlur"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
@@ -41,6 +44,7 @@
                     :max-time="maxTime"
                     :size="timepickerSize"
                     :disabled="timepickerDisabled"
+                    :focusable="focusable"
                     :mobile-native="mobileNative && tzOffset == 0"
                 />
             </div>
@@ -131,6 +135,10 @@ export default {
         tzOffset: {
             type: Number,
             default: 0
+        },
+        focusable: {
+            type: Boolean,
+            default: true
         }
     },
     data() {

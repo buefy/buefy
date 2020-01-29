@@ -1,9 +1,23 @@
 <template>
     <div
         class="carousel"
+        :class="{'is-overlay': overlay}"
         @mouseenter="pauseTimer"
         @mouseleave="startTimer">
-        <div class="carousel-list">
+        <progress
+            v-if="progress"
+            class="progress"
+            :class="progressType"
+            :value="activeItem"
+            :max="carouselItems.length - 1">
+            {{ carouselItems.length - 1 }}
+        </progress>
+        <div
+            class="carousel-items"
+            @mousedown="dragStart"
+            @mouseup="dragEnd"
+            @touchstart.stop="dragStart"
+            @touchend.stop="dragEnd">
             <slot />
             <div
                 v-if="arrow"
@@ -30,12 +44,22 @@
         <div
             v-if="autoplay && pauseHover && pauseInfo && isPause"
             class="carousel-pause">
-            <span class="tag">Pause</span>
+            <span
+                class="tag"
+                :class="pauseInfoType">
+                {{ pauseText }}
+            </span>
         </div>
+        <template v-if="withCarouselList && !indicator">
+            <slot
+                :active="activeItem"
+                :switch="changeItem"
+                name="list"/>
+        </template>
         <div
             v-if="indicator"
             class="carousel-indicator"
-            :class="{'is-inside': indicatorInside}">
+            :class="indicatorClasses">
             <a
                 v-for="(item, index) in carouselItems"
                 class="indicator-item"
@@ -50,6 +74,9 @@
                 </slot>
             </a>
         </div>
+        <template v-if="overlay">
+            <slot name="overlay"/>
+        </template>
     </div>
 </template>
 
@@ -73,6 +100,10 @@ export default {
             default: 'slide'
         },
         interval: Number,
+        hasDrag: {
+            type: Boolean,
+            default: true
+        },
         autoplay: {
             type: Boolean,
             default: true
@@ -85,6 +116,14 @@ export default {
             type: Boolean,
             default: true
         },
+        pauseInfoType: {
+            type: String,
+            default: 'is-white'
+        },
+        pauseText: {
+            type: String,
+            default: 'Pause'
+        },
         arrow: {
             type: Boolean,
             default: true
@@ -94,6 +133,10 @@ export default {
             default: true
         },
         arrowHover: {
+            type: Boolean,
+            default: true
+        },
+        repeat: {
             type: Boolean,
             default: true
         },
@@ -111,6 +154,12 @@ export default {
             type: Boolean,
             default: true
         },
+        indicatorBackground: Boolean,
+        indicatorCustom: Boolean,
+        indicatorCustomSize: {
+            type: String,
+            default: 'is-small'
+        },
         indicatorInside: {
             type: Boolean,
             default: true
@@ -119,10 +168,21 @@ export default {
             type: String,
             default: 'click'
         },
+        indicatorPosition: {
+            type: String,
+            default: 'is-bottom'
+        },
         indicatorStyle: {
             type: String,
             default: 'is-dots'
-        }
+        },
+        overlay: Boolean,
+        progress: Boolean,
+        progressType: {
+            type: String,
+            default: 'is-primary'
+        },
+        withCarouselList: Boolean
     },
     data() {
         return {
@@ -130,22 +190,40 @@ export default {
             activeItem: this.value,
             carouselItems: [],
             isPause: false,
+            dragX: 0,
             timer: null
+        }
+    },
+    computed: {
+        indicatorClasses() {
+            return [
+                {
+                    'has-background': this.indicatorBackground,
+                    'has-custom': this.indicatorCustom,
+                    'is-inside': this.indicatorInside
+                },
+                this.indicatorCustom && this.indicatorCustomSize,
+                this.indicatorInside && this.indicatorPosition
+            ]
         }
     },
     watch: {
         /**
-        * When v-model is changed set the new active tab.
-        */
+         * When v-model is changed set the new active item.
+         */
         value(value) {
-            this.changeItem(value, false)
+            if (value < this.activeItem) {
+                this.changeItem(value)
+            } else {
+                this.changeItem(value, false)
+            }
         },
         /**
-        * When tab-items are updated, set active one.
-        */
+         * When carousel-items are updated, set active one.
+         */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
-                this.carouselItems[this.activeItem].isActive = true
+                this.carouselItems[this.activeItem].status(true, false)
             }
         },
         /**
@@ -172,42 +250,73 @@ export default {
             }
         },
         /**
-        * Change the active item and emit change event.
-        * action only for animated slide, there true = next, false = prev
-        */
-        changeItem(newIndex, action) {
+         * Change the active item and emit change event.
+         * action only for animated slide, there true = next, false = prev
+         */
+        changeItem(newIndex, action = true) {
             if (this.activeItem === newIndex) return
             this.carouselItems[this.activeItem].status(false, action)
             this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
             this.$emit('change', newIndex)
         },
-        // Indicator trigger, emit input event and change active item.
+        // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
-                this.changeItem(value, false)
+                return value < this.activeItem
+                    ? this.changeItem(value)
+                    : this.changeItem(value, false)
             }
         },
         prev() {
-            return this.activeItem === 0
-                ? this.changeItem(this.carouselItems.length - 1, true)
-                : this.changeItem(this.activeItem - 1, true)
+            if (this.activeItem === 0) {
+                if (this.repeat) this.changeItem(this.carouselItems.length - 1)
+            } else {
+                this.changeItem(this.activeItem - 1)
+            }
         },
         next() {
-            return this.activeItem === this.carouselItems.length - 1
-                ? this.changeItem(0, false)
-                : this.changeItem(this.activeItem + 1, false)
+            if (this.activeItem === this.carouselItems.length - 1) {
+                if (this.repeat) this.changeItem(0, false)
+            } else {
+                this.changeItem(this.activeItem + 1, false)
+            }
         },
         // checking arrow between both
         checkArrow(value) {
             if (this.arrowBoth) return true
             if (this.activeItem !== value) return true
+        },
+        // handle drag event
+        dragStart(event) {
+            if (!this.hasDrag) return
+            this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX
+            if (event.touches) {
+                this.pauseTimer()
+            } else {
+                event.preventDefault()
+            }
+        },
+        dragEnd(event) {
+            if (!this.hasDrag) return
+            const detected = event.touches ? event.changedTouches[0].pageX : event.pageX
+            const diffX = detected - this.dragx
+            if (Math.abs(diffX) > 50) {
+                if (diffX < 0) {
+                    this.next()
+                } else {
+                    this.prev()
+                }
+            }
+            if (event.touches) {
+                this.startTimer()
+            }
         }
     },
     mounted() {
         if (this.activeItem < this.carouselItems.length) {
-            this.carouselItems[this.activeItem].isActive = true
+            this.carouselItems[this.activeItem].status(true, false)
         }
         this.startTimer()
     },

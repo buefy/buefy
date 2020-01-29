@@ -109,6 +109,44 @@
                             </template>
                         </th>
                     </tr>
+                    <tr v-if="hasCustomSubheadings" class="is-subheading">
+                        <th v-if="showDetailRowIcon" width="40px"/>
+                        <th v-if="checkable && checkboxPosition === 'left'" />
+                        <th
+                            v-for="(column, index) in visibleColumns"
+                            :key="index"
+                            :style="{
+                                width: column.width === undefined ? null
+                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            <div
+                                class="th-wrap"
+                                :class="{
+                                    'is-numeric': column.numeric,
+                                    'is-centered': column.centered
+                            }">
+                                <template
+                                    v-if="column.$scopedSlots && column.$scopedSlots.subheading"
+                                >
+                                    <b-slot-component
+                                        :component="column"
+                                        :scoped="true"
+                                        name="subheading"
+                                        tag="span"
+                                        :props="{ column, index }"
+                                    />
+                                </template>
+                                <template v-else-if="$scopedSlots.subheading">
+                                    <slot
+                                        name="subheading"
+                                        :column="column"
+                                        :index="index"
+                                    />
+                                </template>
+                                <template v-else>{{ column.subheading }}</template>
+                            </div>
+                        </th>
+                        <th v-if="checkable && checkboxPosition === 'right'" />
+                    </tr>
                     <tr v-if="hasSearchablenewColumns">
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th v-if="checkable && checkboxPosition === 'left'" />
@@ -139,8 +177,8 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @mouseenter="$emit('mouseenter', row)"
-                            @mouseleave="$emit('mouseleave', row)"
+                            @mouseenter="$listeners.mouseenter ? $emit('mouseenter', row) : null"
+                            @mouseleave="$listeners.mouseleave ? $emit('mouseleave', row) : null"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
@@ -381,6 +419,7 @@ export default {
             }
         },
         backendSorting: Boolean,
+        backendFiltering: Boolean,
         rowClass: {
             type: Function,
             default: () => ''
@@ -411,7 +450,7 @@ export default {
         customRowKey: String,
         draggable: {
             type: Boolean,
-            defualt: false
+            default: false
         },
         ariaNextLabel: String,
         ariaPreviousLabel: String,
@@ -436,14 +475,6 @@ export default {
         }
     },
     computed: {
-        /**
-        * return if detailed row tabled
-        * will be with chevron column & icon or not
-        */
-        showDetailRowIcon() {
-            return this.detailed && this.showDetailIcon
-        },
-
         tableClasses() {
             return {
                 'is-bordered': this.bordered,
@@ -523,37 +554,43 @@ export default {
         },
 
         /**
+        * Check if has any column using subheading.
+        */
+        hasCustomSubheadings() {
+            if (this.$scopedSlots && this.$scopedSlots.subheading) return true
+            return this.newColumns.some((column) => {
+                return column.subheading || (column.$scopedSlots && column.$scopedSlots.subheading)
+            })
+        },
+
+        /**
         * Return total column count based if it's checkable or expanded
         */
         columnCount() {
             let count = this.newColumns.length
             count += this.checkable ? 1 : 0
-            count += this.detailed ? 1 : 0
+            count += (this.detailed && this.showDetailIcon) ? 1 : 0
 
             return count
+        },
+
+        /**
+        * return if detailed row tabled
+        * will be with chevron column & icon or not
+        */
+        showDetailRowIcon() {
+            return this.detailed && this.showDetailIcon
         }
     },
     watch: {
         /**
         * When data prop change:
         *   1. Update internal value.
-        *   2. Reset newColumns (thead), in case it's on a v-for loop.
-        *   3. Sort again if it's not backend-sort.
-        *   4. Set new total if it's not backend-paginated.
+        *   2. Sort again if it's not backend-sort.
+        *   3. Set new total if it's not backend-paginated.
         */
         data(value) {
-            // Save newColumns before resetting
-            const newColumns = this.newColumns
-
-            this.newColumns = []
             this.newData = value
-
-            // Prevent table from being headless, data could change and created hook
-            // on column might not trigger
-            this.$nextTick(() => {
-                if (!this.newColumns.length) this.newColumns = newColumns
-            })
-
             if (!this.backendSorting) {
                 this.sort(this.currentSortColumn, true)
             }
@@ -590,10 +627,14 @@ export default {
 
         filters: {
             handler(value) {
-                this.newData = this.data.filter(
-                    (row) => this.isRowFiltered(row))
-                if (!this.backendPagination) {
-                    this.newDataTotal = this.newData.length
+                if (this.backendFiltering) {
+                    this.$emit('filters-change', value)
+                } else {
+                    this.newData = this.data.filter(
+                        (row) => this.isRowFiltered(row))
+                    if (!this.backendPagination) {
+                        this.newDataTotal = this.newData.length
+                    }
                 }
             },
             deep: true
@@ -855,7 +896,7 @@ export default {
             */
         handleDetailKey(index) {
             const key = this.detailKey
-            return !key.length
+            return !key.length || !index
                 ? index
                 : index[key]
         },

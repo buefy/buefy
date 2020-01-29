@@ -20,7 +20,7 @@ export default [
             },
             {
                 name: '<code>message</code>',
-                description: 'Message text',
+                description: 'Message text (can contain HTML). <div class="notification is-danger">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -109,6 +109,13 @@ export default [
                 type: 'String',
                 values: '<code>clip</code>, <code>keep</code>',
                 default: '<code>clip</code>'
+            },
+            {
+                name: '<code>container</code>',
+                description: 'DOM element the dialog will be created on. Note that this also changes the <code>position</code> of the dialog from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>. Also note that this will override the <code>defaultContainerElement</code> if you specified it in your Buefy Constructor Options. See Constructor options for more details.',
+                type: 'String',
+                values: '—',
+                default: '<code>body</code>'
             },
             {
                 name: '<code>focusOn</code>',

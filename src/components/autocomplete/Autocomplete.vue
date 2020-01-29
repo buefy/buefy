@@ -92,7 +92,9 @@ export default {
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
-        customFormatter: Function
+        customFormatter: Function,
+        checkInfiniteScroll: Boolean,
+        keepOpen: Boolean
     },
     data() {
         return {
@@ -267,7 +269,7 @@ export default {
          */
         enterPressed() {
             if (this.hovered === null) return
-            this.setSelected(this.hovered)
+            this.setSelected(this.hovered, !this.keepOpen)
         },
 
         /**
@@ -280,7 +282,7 @@ export default {
                 this.isActive = false
                 return
             }
-            this.setSelected(this.hovered)
+            this.setSelected(this.hovered, !this.keepOpen)
         },
 
         /**
@@ -303,6 +305,17 @@ export default {
             return typeof option === 'object'
                 ? getValueByPath(option, this.field)
                 : option
+        },
+
+        /**
+         * Check if the scroll list inside the dropdown
+         * reached it's end.
+         */
+        checkIfReachedTheEndOfScroll(list) {
+            if (list.clientHeight !== list.scrollHeight &&
+                list.scrollTop + list.clientHeight >= list.scrollHeight) {
+                this.$emit('infinite-scroll')
+            }
         },
 
         /**
@@ -399,10 +412,20 @@ export default {
             window.addEventListener('resize', this.calcDropdownInViewportVertical)
         }
     },
+    mounted() {
+        if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
+        }
+    },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+        }
+        if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
     }
 }

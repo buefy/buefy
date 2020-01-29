@@ -42,6 +42,7 @@
                         </a>
                     </div>
                     <small class="home-hero">v{{ version }}</small>
+                    <carbon-ads id="carbon-home" />
                 </div>
             </div>
         </div>
@@ -149,6 +150,7 @@
 
 <script>
     import ScrollReveal from 'scrollreveal'
+    import CarbonAds from '../components/CarbonAds'
     import TheNavbar from '../components/TheNavbar'
     import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
@@ -158,6 +160,7 @@
     export default {
         name: 'App',
         components: {
+            CarbonAds,
             TheNavbar,
             TheFooter
         },

@@ -21,6 +21,11 @@
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
         </Example>
 
+        <Example :component="ExInfiniteScroll" :code="ExInfiniteScrollCode" title="Async with infinite scroll">
+            <p>With <code>check-infinite-scroll</code> and <code>infinite-scroll</code> event you can listen to the end of the scroll list to implement an infinite scroll strategy.</p>
+            <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -43,6 +48,9 @@
     import ExCustomAsync from './examples/ExCustomAsync'
     import ExCustomAsyncCode from '!!raw-loader!./examples/ExCustomAsync'
 
+    import ExInfiniteScroll from './examples/ExInfiniteScroll'
+    import ExInfiniteScrollCode from '!!raw-loader!./examples/ExInfiniteScroll'
+
     export default {
         data() {
             return {
@@ -56,7 +64,9 @@
                 ExFooter,
                 ExFooterCode,
                 ExCustomAsyncCode,
-                ExCustomAsync
+                ExCustomAsync,
+                ExInfiniteScroll,
+                ExInfiniteScrollCode
             }
         }
     }

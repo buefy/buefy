@@ -18,5 +18,6 @@ module.exports = {
         '<rootDir>/node_modules/jest-serializer-vue'
     ],
     coverageDirectory: './coverage/',
-    collectCoverage: true
+    collectCoverage: true,
+    testURL: 'http://localhost/'
 }

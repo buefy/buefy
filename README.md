@@ -84,6 +84,10 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 Recent versions of Firefox, Chrome, Edge, Opera and Safari. IE10+ is only partially supported.
 
+## Contributing
+
+Please see the [contributing guidelines](./.github/CONTRIBUTING.md)
+
 ## Versioning
 
 While it's still in beta, version will follow **v0.Y.Z**, where:
@@ -103,6 +107,10 @@ Buefy is an open source MIT project if you are interested in supporting this pro
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
   </a>
 </p>
+
+## Contributing
+
+Please refer to the contribution guidelines [here](.github/CONTRIBUTING.md).
 
 ## License
 

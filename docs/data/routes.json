@@ -103,8 +103,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -128,7 +127,8 @@
             "/",
             "documentation",
             "documentation/tooltip"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/modal": {
         "title": "Modal",
@@ -152,7 +152,8 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -212,7 +213,8 @@
             "/",
             "documentation",
             "documentation/notification"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/message": {
         "title": "Message",
@@ -236,8 +238,7 @@
             "/",
             "documentation",
             "documentation/loading"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/field": {
         "title": "Field",
@@ -261,8 +262,7 @@
             "/",
             "documentation",
             "documentation/input"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/select": {
         "title": "Select",
@@ -286,7 +286,8 @@
             "/",
             "documentation",
             "documentation/autocomplete"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -334,7 +335,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -384,7 +386,8 @@
             "/",
             "documentation",
             "documentation/taginput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/upload": {
         "title": "Upload",
@@ -433,7 +436,8 @@
             "/",
             "documentation",
             "documentation/button"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/numberinput": {
         "title": "Numberinput",
@@ -445,8 +449,7 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/steps": {
         "title": "Steps",
@@ -470,8 +473,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isUpdated": true
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
@@ -507,8 +509,7 @@
             "/",
             "documentation",
             "documentation/carousel"
-        ],
-        "isNew": true
+        ]
     },
     "documentation/rate": {
         "title": "Rate",
@@ -555,7 +556,8 @@
             "/",
             "extensions",
             "extensions/sortablejs"
-        ]
+        ],
+        "isUpdated": true
     },
     "extensions/veevalidate": {
         "title": "VeeValidate",

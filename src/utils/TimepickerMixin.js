@@ -81,6 +81,10 @@ export default {
                 return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12
             }
         },
+        incrementHours: {
+            type: Number,
+            default: 1
+        },
         incrementMinutes: {
             type: Number,
             default: 1
@@ -130,7 +134,15 @@ export default {
         openOnFocus: Boolean,
         enableSeconds: Boolean,
         defaultMinutes: Number,
-        defaultSeconds: Number
+        defaultSeconds: Number,
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        tzOffset: {
+            type: Number,
+            default: 0
+        }
     },
     data() {
         return {
@@ -157,9 +169,10 @@ export default {
             }
         },
         hours() {
+            if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.')
             const hours = []
             const numberOfHours = this.isHourFormat24 ? 24 : 12
-            for (let i = 0; i < numberOfHours; i++) {
+            for (let i = 0; i < numberOfHours; i += this.incrementHours) {
                 let value = i
                 let label = value
                 if (!this.isHourFormat24) {
@@ -184,6 +197,7 @@ export default {
         },
 
         minutes() {
+            if (!this.incrementMinutes || this.incrementMinutes < 1) throw new Error('Minute increment cannot be null or less than 1.')
             const minutes = []
             for (let i = 0; i < 60; i += this.incrementMinutes) {
                 minutes.push({
@@ -195,6 +209,7 @@ export default {
         },
 
         seconds() {
+            if (!this.incrementSeconds || this.incrementSeconds < 1) throw new Error('Second increment cannot be null or less than 1.')
             const seconds = []
             for (let i = 0; i < 60; i += this.incrementSeconds) {
                 seconds.push({
@@ -548,6 +563,14 @@ export default {
             // Esc key
             if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
                 this.toggle(false)
+            }
+        },
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
             }
         }
     },

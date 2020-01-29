@@ -281,7 +281,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-
+            },
+            {
+                name: '<code>backend-filtering</code>',
+                description: `Columns won't be filtered with Javascript, use with <code>searchable</code> prop to the columns to filter in your backend`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>aria-next-label</code>',
@@ -321,6 +327,11 @@ export default [
             {
                 name: '<code>header</code>',
                 description: 'Table custom header',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>subheading</code>',
+                description: 'Table subheading',
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             },
             {
@@ -398,7 +409,7 @@ export default [
             {
                 name: '<code>contextmenu</code>',
                 description: 'Triggers when right-click on a row',
-                parameters: '<code>row: Object</code>, <code>row: Object</code>'
+                parameters: '<code>row: Object</code>, <code>contextMenuNativeEvent: Event</code>'
             },
             {
                 name: '<code>dragstart</code>',
@@ -429,6 +440,11 @@ export default [
                 name: '<code>mouseleave</code>',
                 description: 'Triggers when mouse leaves a row',
                 parameters: '<code> row: Object </code>'
+            },
+            {
+                name: '<code>filter-change</code>',
+                description: 'Triggers when filter change',
+                parameters: '<code> filter: Object </code>'
             }
         ],
         methods: [
@@ -537,6 +553,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>subheading</code>',
+                description: 'Column subheading text',
+                type: 'String, Number',
+                values: '—',
+                default: '—'
+            },
         ],
         slots: [
             {
@@ -547,6 +570,11 @@ export default [
             {
                 name: '<code>header</code>',
                 description: 'Table column custom header',
+                props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>subheading</code>',
+                description: 'Table column custom subheading',
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
             }
         ]

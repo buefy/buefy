@@ -7,7 +7,7 @@
             @click="hasInput && focus($event)">
             <b-tag
                 v-for="(tag, index) in tags"
-                :key="index"
+                :key="getNormalizedTagText(tag) + index"
                 :type="type"
                 :size="size"
                 :rounded="rounded"
@@ -36,13 +36,17 @@
                 :disabled="disabled"
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
+                :open-on-focus="openOnFocus"
+                :keep-open="openOnFocus"
                 :keep-first="!allowNew"
                 :use-html5-validation="useHtml5Validation"
+                :check-infinite-scroll="checkInfiniteScroll"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
-                @select="onSelect">
+                @select="onSelect"
+                @infinite-scroll="emitInfiniteScroll">
                 <template :slot="headerSlotName">
                     <slot name="header" />
                 </template>
@@ -120,6 +124,7 @@ export default {
         },
         autocomplete: Boolean,
         nativeAutocomplete: String,
+        openOnFocus: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
         closable: {
@@ -144,6 +149,10 @@ export default {
             default: () => true
         },
         allowDuplicates: {
+            type: Boolean,
+            default: false
+        },
+        checkInfiniteScroll: {
             type: Boolean,
             default: false
         }
@@ -304,6 +313,11 @@ export default {
         removeLastTag() {
             if (this.tagsLength > 0) {
                 this.removeTag(this.tagsLength - 1)
+                this.$nextTick(() => {
+                    if (this.isFocused && this.openOnFocus) {
+                        this.$refs.autocomplete.isActive = true
+                    }
+                })
             }
         },
 
@@ -322,6 +336,10 @@ export default {
 
         onTyping($event) {
             this.$emit('typing', $event.trim())
+        },
+
+        emitInfiniteScroll() {
+            this.$emit('infinite-scroll')
         }
     }
 }

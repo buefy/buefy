@@ -108,7 +108,7 @@ export default {
     data() {
         return {
             activeStep: this.value || 0,
-            stepItems: [],
+            defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
             _isSteps: true // Used internally by StepItem
@@ -120,6 +120,15 @@ export default {
                 this.type,
                 this.size
             ]
+        },
+
+        stepItems() {
+            return this.defaultSlots
+                .filter((vnode) =>
+                    vnode.componentInstance &&
+                    vnode.componentInstance.$data &&
+                    vnode.componentInstance.$data._isStepItem)
+                .map((vnode) => vnode.componentInstance)
         },
 
         reversedStepItems() {
@@ -195,11 +204,17 @@ export default {
         }
     },
     methods: {
+        refreshSlots() {
+            this.defaultSlots = this.$slots.default || []
+        },
+
         /**
-        * Change the active step and emit change event.
-        */
+         * Change the active step and emit change event.
+         */
         changeStep(newIndex) {
             if (this.activeStep === newIndex) return
+
+            if (newIndex > this.stepItems.length) throw new Error('The index you trying to set is bigger than the steps length')
 
             if (this.activeStep < this.stepItems.length) {
                 this.stepItems[this.activeStep].deactivate(this.activeStep, newIndex)
@@ -210,8 +225,8 @@ export default {
         },
 
         /**
-            * Return if the step should be clickable or not.
-            */
+         * Return if the step should be clickable or not.
+         */
         isItemClickable(stepItem, index) {
             if (stepItem.clickable === undefined) {
                 return this.activeStep > index
@@ -220,8 +235,8 @@ export default {
         },
 
         /**
-        * Step click listener, emit input event and change active step.
-        */
+         * Step click listener, emit input event and change active step.
+         */
         stepClick(value) {
             this.$emit('input', value)
             this.changeStep(value)
@@ -258,6 +273,7 @@ export default {
         if (this.activeStep < this.stepItems.length) {
             this.stepItems[this.activeStep].isActive = true
         }
+        this.refreshSlots()
     }
 }
 </script>

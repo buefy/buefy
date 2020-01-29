@@ -1,4 +1,13 @@
 /**
+ * +/- function to native math sign
+ */
+function signPoly(value) {
+    if (value < 0) return -1
+    return value > 0 ? 1 : 0
+}
+export const sign = Math.sign || signPoly
+
+/**
  * Get value of an object property/path even if it's nested
  */
 export function getValueByPath(obj, path) {
@@ -24,16 +33,20 @@ export function indexOf(array, obj, fn) {
 }
 
 /**
-* Merge function to replace Object.assign with deep merging possibility
-*/
+ * Merge function to replace Object.assign with deep merging possibility
+ */
 const isObject = (item) => typeof item === 'object' && !Array.isArray(item)
 const mergeFn = (target, source, deep = false) => {
     if (deep || !Object.assign) {
         const isDeep = (prop) =>
-            isObject(source[prop]) && target.hasOwnProperty(prop) && isObject(target[prop])
+            isObject(source[prop]) &&
+            target !== null &&
+            target.hasOwnProperty(prop) &&
+            isObject(target[prop])
         const replaced = Object.getOwnPropertyNames(source)
-            .map((prop) =>
-                ({ [prop]: isDeep(prop) ? mergeFn(target[prop], source[prop]) : source[prop] }))
+            .map((prop) => ({ [prop]: isDeep(prop)
+                ? mergeFn(target[prop], source[prop], deep)
+                : source[prop] }))
             .reduce((a, b) => ({ ...a, ...b }), {})
 
         return {
@@ -95,7 +108,7 @@ export const isMobile = {
 export function removeElement(el) {
     if (typeof el.remove !== 'undefined') {
         el.remove()
-    } else if (typeof el.parentNode !== 'undefined') {
+    } else if (typeof el.parentNode !== 'undefined' && el.parentNode !== null) {
         el.parentNode.removeChild(el)
     }
 }

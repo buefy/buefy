@@ -6,6 +6,7 @@
             ref="trigger"
             class="dropdown-trigger"
             @click="toggle"
+            @mouseenter="checkHoverable"
             aria-haspopup="true">
             <slot name="trigger"/>
         </div>
@@ -172,10 +173,6 @@ export default {
                 this.isActive = !this.closeOnClick
                 if (this.hoverable && this.closeOnClick) {
                     this.isHoverable = false
-                    // Timeout for the animation complete before destroying
-                    setTimeout(() => {
-                        this.isHoverable = true
-                    }, 250)
                 }
             }
         },
@@ -246,6 +243,12 @@ export default {
                 })
             } else {
                 this.isActive = !this.isActive
+            }
+        },
+
+        checkHoverable() {
+            if (this.hoverable) {
+                this.isHoverable = true
             }
         }
     },
