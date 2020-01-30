@@ -18,6 +18,7 @@ export default {
         type: String,
         hasIcon: Boolean,
         size: String,
+        icon: String,
         iconPack: String,
         iconSize: String,
         autoClose: {
@@ -52,7 +53,10 @@ export default {
         /**
          * Icon name (MDI) based on type.
          */
-        icon() {
+        computedIcon() {
+            if (this.icon) {
+                return this.icon
+            }
             switch (this.type) {
                 case 'is-info':
                     return 'information'
