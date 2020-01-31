@@ -44,7 +44,7 @@ export default [
                 description: 'Tag and input size, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
-                default: '<code>is-medium</code>'
+                default: '—'
             },
             {
                 name: '<code>rounded</code>',
