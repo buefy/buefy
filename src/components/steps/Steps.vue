@@ -36,7 +36,7 @@
             name="navigation"
             :previous="navigationProps.previous"
             :next="navigationProps.next">
-            <nav v-if="hasNavigation" class="step-navigation">
+            <nav v-if="hasNavigation" class="pagination step-navigation" role="navigation" aria-label="pagination">
                 <a
                     role="button"
                     class="pagination-previous"
@@ -61,6 +61,7 @@
                         both
                         aria-hidden="true"/>
                 </a>
+                <div class="pagination-list"></div>
             </nav>
         </slot>
     </div>
