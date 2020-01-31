@@ -8,7 +8,7 @@
                 :data="filteredDataArray"
                 placeholder="e.g. jQuery"
                 icon="magnify"
-                :clearable=true
+                clearable
                 @select="option => selected = option">
                 <template slot="empty">No results found</template>
             </b-autocomplete>

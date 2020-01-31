@@ -11,7 +11,7 @@
             :loading="loading"
             :rounded="rounded"
             :icon="icon"
-            :icon-right="clearButton ? 'close-circle' : ''"
+            :icon-right="clearButton"
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
@@ -172,7 +172,10 @@ export default {
             return !!this.$slots.footer
         },
         clearButton() {
-            return !!((this.clearable && this.newValue.length > 0))
+            if (this.clearable && this.newValue.length > 0) {
+                return 'close-circle'
+            }
+            return ''
         }
     },
     watch: {
