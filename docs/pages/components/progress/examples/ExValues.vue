@@ -22,7 +22,7 @@
             <b-switch v-model="showValue"> Show Value </b-switch>
             <b-switch v-model="keepTrailingZeroes" :disabled="!showValue"> Keep Trailing Zeroes </b-switch>
             <b-field label="Format and Precision">
-                <b-field grouped>
+                <b-field>
                     <b-select v-model="format" :disabled="!showValue">
                         <option value="raw">Raw</option>
                         <option value="percent">Percent</option>
