@@ -65,6 +65,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>icon-right-clickable</code>',
+                description: 'Make the icon right clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon-clickable</code>',
                 description: 'Make the icon clickable',
                 type: 'Boolean',

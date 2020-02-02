@@ -1,7 +1,7 @@
 <template>
     <div
         class="control"
-        :class="[rootClasses, {'has-icons-right': showRightButton}]"
+        :class="rootClasses"
     >
         <input
             v-if="type !== 'textarea'"
@@ -50,8 +50,9 @@
             @click.native="togglePasswordVisibility"/>
 
         <b-icon
-            v-else-if="showRightButton"
-            class="is-right is-clickable"
+            v-else-if="iconRight"
+            class="is-right"
+            :class="{ 'is-clickable': iconRightClickable }"
             :icon="iconRight"
             :pack="iconPack"
             :size="iconSize"
@@ -95,7 +96,8 @@ export default {
             type: String,
             default: ''
         },
-        iconRight: String
+        iconRight: String,
+        iconRightClickable: Boolean
     },
     data() {
         return {
@@ -138,7 +140,7 @@ export default {
             ]
         },
         hasIconRight() {
-            return this.passwordReveal || this.loading || this.statusTypeIcon
+            return this.passwordReveal || this.loading || this.statusTypeIcon || this.iconRight
         },
 
         /**
@@ -189,9 +191,6 @@ export default {
                 return this.computedValue.toString().length
             }
             return 0
-        },
-        showRightButton() {
-            return this.iconRight
         }
     },
     watch: {

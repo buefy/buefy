@@ -12,6 +12,7 @@
             :rounded="rounded"
             :icon="icon"
             :icon-right="clearButton"
+            icon-right-clickable
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
@@ -172,7 +173,7 @@ export default {
             return !!this.$slots.footer
         },
         clearButton() {
-            if (this.clearable && this.newValue.length > 0) {
+            if (this.clearable && this.newValue) {
                 return 'close-circle'
             }
             return ''
@@ -418,7 +419,6 @@ export default {
             this.$emit('typing', this.newValue)
         },
         clearInputText() {
-            this.$emit('input', '')
             this.newValue = ''
         }
     },
