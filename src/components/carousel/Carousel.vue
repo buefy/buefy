@@ -223,7 +223,7 @@ export default {
          */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
-                this.carouselItems[this.activeItem].status(true, false)
+                this.carouselItems[this.activeItem].isActive = true
             }
         },
         /**
@@ -238,15 +238,23 @@ export default {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                this.next()
+                if (!this.repeat && this.activeItem === this.carouselItems.length - 1) {
+                    this.pauseTimer()
+                } else {
+                    this.next()
+                }
             }, (this.interval || config.defaultCarouselInterval))
         },
         pauseTimer() {
-            if (!this.pauseHover && this.autoplay) return
             this.isPause = true
             if (this.timer) {
                 clearInterval(this.timer)
                 this.timer = null
+            }
+        },
+        checkPause() {
+            if (this.pauseHover && this.autoplay) {
+                return this.pauseTimer()
             }
         },
         /**
@@ -316,7 +324,7 @@ export default {
     },
     mounted() {
         if (this.activeItem < this.carouselItems.length) {
-            this.carouselItems[this.activeItem].status(true, false)
+            this.carouselItems[this.activeItem].isActive = true
         }
         this.startTimer()
     },
