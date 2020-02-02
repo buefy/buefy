@@ -19,11 +19,12 @@ const DATA_LIST = [
     'Vue.js'
 ]
 const dropdownMenu = '.dropdown-menu'
-let wrapper, $input, $dropdown
+let wrapper, $input, $dropdown, stubs
 
 describe('BAutocomplete', () => {
     beforeEach(() => {
-        wrapper = mount(BAutocomplete)
+        stubs = {'b-icon': true}
+        wrapper = mount(BAutocomplete, {stubs})
 
         $input = wrapper.find('input')
         $dropdown = wrapper.find(dropdownMenu)
@@ -152,5 +153,37 @@ describe('BAutocomplete', () => {
 
         expect(document.removeEventListener).toBeCalledWith('click', expect.any(Function))
         expect(window.removeEventListener).toBeCalledWith('resize', expect.any(Function))
+    })
+
+    it('clear button does not exist when the search input is empty', () => {
+        wrapper.setData({newValue: ''})
+        wrapper.setProps({ clearable: true })
+        const subject = wrapper.find('b-icon-stub').exists()
+
+        expect(subject).toBeFalsy()
+    })
+
+    it('clear button exists when the search input is not empty and clearable property is true', () => {
+        wrapper.setData({ newValue: 'Jquery' })
+        wrapper.setProps({ clearable: true })
+        const subject = wrapper.find('b-icon-stub').exists()
+
+        expect(subject).toBeTruthy()
+    })
+
+    it('clears search input text when clear button gets clicked', () => {
+        wrapper.setData({newValue: 'Jquery'})
+        wrapper.setProps({ clearable: true })
+        wrapper.find('b-icon-stub').trigger('click')
+        const subject = wrapper.vm.newValue
+
+        expect(subject).toEqual('')
+    })
+
+    it('clear button does not appear when clearable property is not set to true', () => {
+        wrapper.setData({newValue: 'Jquery'})
+        const subject = wrapper.find('b-icon-stub').exists()
+
+        expect(subject).toBeFalsy()
     })
 })

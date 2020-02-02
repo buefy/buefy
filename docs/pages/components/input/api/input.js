@@ -58,6 +58,20 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>icon-right</code>',
+                description: 'Icon name to be added on the right side',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>icon-right-clickable</code>',
+                description: 'Make the icon right clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon-clickable</code>',
                 description: 'Make the icon clickable',
                 type: 'Boolean',

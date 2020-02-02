@@ -1,5 +1,8 @@
 <template>
-    <div class="control" :class="rootClasses">
+    <div
+        class="control"
+        :class="rootClasses"
+    >
         <input
             v-if="type !== 'textarea'"
             ref="input"
@@ -46,6 +49,16 @@
             both
             @click.native="togglePasswordVisibility"/>
 
+        <b-icon
+            v-else-if="iconRight"
+            class="is-right"
+            :class="{ 'is-clickable': iconRightClickable }"
+            :icon="iconRight"
+            :pack="iconPack"
+            :size="iconSize"
+            both
+            @click.native="$emit('icon-right-click')"/>
+
         <small
             v-if="maxlength && hasCounter && type !== 'number'"
             class="help counter"
@@ -82,7 +95,9 @@ export default {
         customClass: {
             type: String,
             default: ''
-        }
+        },
+        iconRight: String,
+        iconRightClickable: Boolean
     },
     data() {
         return {
@@ -125,7 +140,7 @@ export default {
             ]
         },
         hasIconRight() {
-            return this.passwordReveal || this.loading || this.statusTypeIcon
+            return this.passwordReveal || this.loading || this.statusTypeIcon || this.iconRight
         },
 
         /**

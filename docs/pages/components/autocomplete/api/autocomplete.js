@@ -86,6 +86,13 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>clearable</code>',
+                description: 'Add a button to clear the inputed text',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
                 name: '<code>maxlength</code>',
                 description: 'Same as native <code>maxlength</code>, plus character counter',
                 type: 'String, Number',
