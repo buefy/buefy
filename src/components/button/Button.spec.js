@@ -39,10 +39,8 @@ describe('BButton', () => {
     })
 
     it('should be medium', () => {
-        wrapper = shallowMount(BButton, {
-            propsData: {
-                size: 'is-medium'
-            }
+        wrapper.setProps({
+            size: 'is-medium'
         })
         expect(wrapper.classes()).toContain('is-medium')
     })
@@ -73,11 +71,23 @@ describe('BButton', () => {
         setOptions(Object.assign(config, {
             defaultButtonRounded: true
         }))
-        wrapper = mount(BButton, {
-            propsData: {
-                rounded: config.defaultButtonRounded
-            }
+        wrapper.setProps({
+            rounded: config.defaultButtonRounded
         })
         expect(wrapper.classes()).toContain('is-rounded')
+    })
+
+    it('should set tag to "button" if disabled', () => {
+        wrapper.setProps({
+            tag: 'a'
+        })
+        expect(wrapper.vm.computedTag).toBe('a')
+
+        wrapper = shallowMount(BButton, {
+            attrs: {
+                'disabled': true
+            }
+        })
+        expect(wrapper.vm.computedTag).toBe('button')
     })
 })

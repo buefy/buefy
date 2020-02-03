@@ -96,6 +96,7 @@ describe('BAutocomplete', () => {
     })
 
     it('close dropdown on esc', () => {
+        jest.useFakeTimers()
         wrapper.setProps({ data: DATA_LIST })
 
         wrapper.vm.isActive = true
@@ -104,6 +105,13 @@ describe('BAutocomplete', () => {
         $input.trigger('keyup.esc')
 
         expect($dropdown.isVisible()).toBeFalsy()
+
+        wrapper.vm.calcDropdownInViewportVertical = jest.fn(
+            () => wrapper.vm.calcDropdownInViewportVertical
+        )
+        jest.runAllTimers()
+        expect(wrapper.vm.calcDropdownInViewportVertical).toHaveBeenCalled()
+        jest.useRealTimers()
     })
 
     it('close dropdown on click outside', () => {
@@ -128,12 +136,36 @@ describe('BAutocomplete', () => {
         expect($dropdown.isVisible()).toBeTruthy()
     })
 
-    it('can openOnFocus and keepFirst', async () => {
+    it('manages tab pressed as expected', async () => {
+        // hovered is null
+        $input.trigger('keydown.tab')
+        expect($dropdown.isVisible()).toBeFalsy()
+
+        // The first element will be hovered
         wrapper.setProps({
-            data: DATA_LIST,
             openOnFocus: true,
             keepFirst: true
         })
+        wrapper.setProps({
+            data: DATA_LIST
+        })
+        // Set props in 2 steps to trigger Watch with keepFirst true so the 1st element is hovered
+
+        $input.trigger('focus')
+        await wrapper.vm.$nextTick()
+
+        $input.trigger('keydown.tab')
+        expect($input.element.value).toBe(DATA_LIST[0])
+    })
+
+    it('can openOnFocus and keepFirst', async () => {
+        wrapper.setProps({
+            openOnFocus: true,
+            keepFirst: true
+        })
+        wrapper.setProps({
+            data: DATA_LIST
+        }) // Set props in 2 steps to trigger the Watch for data having keepFirst true
 
         expect($dropdown.isVisible()).toBeFalsy()
 
