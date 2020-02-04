@@ -3,6 +3,8 @@
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
+            :sort-multiple="sortMultiple"
+            :sort-multiple-data="sortMultipleDataComputed"
             :is-asc="isAsc"
             :columns="newColumns"
             :placeholder="mobileSortPlaceholder"
