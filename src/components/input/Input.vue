@@ -57,7 +57,7 @@
             :pack="iconPack"
             :size="iconSize"
             both
-            @click.native="$emit('icon-right-click')"/>
+            @click.native="$emit('icon-right-click', $event)"/>
 
         <small
             v-if="maxlength && hasCounter && type !== 'number'"
