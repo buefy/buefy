@@ -36,28 +36,18 @@
             :icon="icon"
             :pack="iconPack"
             :size="iconSize"
-            @click.native="iconClick"/>
+            @click.native="iconClick('icon-click', $event)"/>
 
         <b-icon
-            v-if="!loading && (passwordReveal || statusTypeIcon)"
+            v-if="!loading && hasIconRight"
             class="is-right"
-            :class="{ 'is-clickable': passwordReveal }"
-            :icon="passwordReveal ? passwordVisibleIcon : statusTypeIcon"
+            :class="{ 'is-clickable': passwordReveal || iconRightClickable }"
+            :icon="rightIcon"
             :pack="iconPack"
             :size="iconSize"
-            :type="!passwordReveal ? statusType : 'is-primary'"
+            :type="rightIconType"
             both
-            @click.native="togglePasswordVisibility"/>
-
-        <b-icon
-            v-else-if="iconRight"
-            class="is-right"
-            :class="{ 'is-clickable': iconRightClickable }"
-            :icon="iconRight"
-            :pack="iconPack"
-            :size="iconSize"
-            both
-            @click.native="$emit('icon-right-click', $event)"/>
+            @click.native="rightIconClick"/>
 
         <small
             v-if="maxlength && hasCounter && type !== 'number'"
@@ -141,6 +131,22 @@ export default {
         },
         hasIconRight() {
             return this.passwordReveal || this.loading || this.statusTypeIcon || this.iconRight
+        },
+        rightIcon() {
+            if (this.passwordReveal) {
+                return this.passwordVisibleIcon
+            } else if (this.statusTypeIcon) {
+                return this.statusTypeIcon
+            }
+            return this.iconRight
+        },
+        rightIconType() {
+            if (this.passwordReveal) {
+                return 'is-primary'
+            } else if (this.statusTypeIcon) {
+                return this.statusType
+            }
+            return null
         },
 
         /**
@@ -228,11 +234,19 @@ export default {
             })
         },
 
-        iconClick(event) {
-            this.$emit('icon-click', event)
+        iconClick(emit, event) {
+            this.$emit(emit, event)
             this.$nextTick(() => {
                 this.$refs.input.focus()
             })
+        },
+
+        rightIconClick(event) {
+            if (this.passwordReveal) {
+                this.togglePasswordVisibility()
+            } else if (this.iconRightClickable) {
+                this.iconClick('icon-right-click', event)
+            }
         }
     }
 }
