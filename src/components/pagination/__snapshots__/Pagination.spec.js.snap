@@ -3,10 +3,10 @@
 exports[`BPagination render correctly 1`] = `
 <nav class="pagination">
     <bpaginationbutton-stub page="[object Object]" tag="a" disabled="true" class="pagination-previous">
-        <bicon-stub icon="chevron-left" both="true" aria-hidden="true"></bicon-stub>
+        <b-icon-stub icon="chevron-left" both="true" aria-hidden="true"></b-icon-stub>
     </bpaginationbutton-stub>
     <bpaginationbutton-stub page="[object Object]" tag="a" disabled="true" class="pagination-next">
-        <bicon-stub icon="chevron-right" both="true" aria-hidden="true"></bicon-stub>
+        <b-icon-stub icon="chevron-right" both="true" aria-hidden="true"></b-icon-stub>
     </bpaginationbutton-stub>
     <ul class="pagination-list">
         <!---->

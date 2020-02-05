@@ -3,11 +3,11 @@
 exports[`BTableMobileSort render correctly 1`] = `
 <div class="field table-mobile-sort">
     <div class="field has-addons">
-        <bselect-stub expanded="">
+        <b-select-stub expanded="true" usehtml5validation="true">
             <!---->
-        </bselect-stub>
+        </b-select-stub>
         <div class="control"><button class="button is-primary">
-                <bicon-stub icon="arrow-up" size="is-small" both="true" class="is-desc"></bicon-stub>
+                <b-icon-stub icon="arrow-up" size="is-small" both="true" class="is-desc"></b-icon-stub>
             </button></div>
     </div>
 </div>

@@ -2,18 +2,18 @@
 
 exports[`BDatepicker render correctly 1`] = `
 <div class="datepicker control">
-    <bdropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
-        <binput-stub type="text" hascounter="true" customclass="" autocomplete="off" readonly="true" use-html5-validation="true"></binput-stub>
-        <bdropdownitem-stub custom="true" focusable="true" ariarole="">
+    <b-dropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
+        <b-input-stub autocomplete="off" usehtml5validation="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
+        <b-dropdown-item-stub custom="true" focusable="true" ariarole="">
             <header class="datepicker-header">
                 <div class="pagination field is-centered"><a role="button" href="#" class="pagination-previous">
-                        <bicon-stub type="is-primary is-clickable" icon="chevron-left" both="true"></bicon-stub>
+                        <b-icon-stub type="is-primary is-clickable" icon="chevron-left" both="true"></b-icon-stub>
                     </a> <a role="button" href="#" class="pagination-next">
-                        <bicon-stub type="is-primary is-clickable" icon="chevron-right" both="true"></bicon-stub>
+                        <b-icon-stub type="is-primary is-clickable" icon="chevron-right" both="true"></b-icon-stub>
                     </a>
                     <div class="pagination-list">
-                        <bfield-stub addons="true">
-                            <bselect-stub value="7">
+                        <b-field-stub addons="true">
+                            <b-select-stub usehtml5validation="true" value="7">
                                 <option value="0">
                                     January
                                 </option>
@@ -50,8 +50,8 @@ exports[`BDatepicker render correctly 1`] = `
                                 <option value="11">
                                     December
                                 </option>
-                            </bselect-stub>
-                            <bselect-stub value="2018">
+                            </b-select-stub>
+                            <b-select-stub usehtml5validation="true" value="2018">
                                 <option value="2021">
                                     2021
                                 </option>
@@ -364,16 +364,16 @@ exports[`BDatepicker render correctly 1`] = `
                                 <option value="1918">
                                     1918
                                 </option>
-                            </bselect-stub>
-                        </bfield-stub>
+                            </b-select-stub>
+                        </b-field-stub>
                     </div>
                 </div>
             </header>
             <div class="datepicker-content">
-                <bdatepickertable-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" indicators="dots" focused="[object Object]" datecreator="function dateCreator() {}" nearbymonthdays="true" rulesforfirstweek="4"></bdatepickertable-stub>
+                <b-datepicker-table-stub daynames="Su,M,Tu,W,Th,F,S" monthnames="January,February,March,April,May,June,July,August,September,October,November,December" firstdayofweek="0" indicators="dots" focused="[object Object]" datecreator="function dateCreator() {}" nearbymonthdays="true" rulesforfirstweek="4"></b-datepicker-table-stub>
             </div>
             <!---->
-        </bdropdownitem-stub>
-    </bdropdown-stub>
+        </b-dropdown-item-stub>
+    </b-dropdown-stub>
 </div>
 `;
