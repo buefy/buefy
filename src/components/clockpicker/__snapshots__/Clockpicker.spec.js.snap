@@ -2,8 +2,8 @@
 
 exports[`BClockpicker render correctly 1`] = `
 <div class="b-clockpicker control is-primary">
-    <bdropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
-        <binput-stub type="text" hascounter="true" customclass="" autocomplete="off" readonly="true" use-html5-validation="true"></binput-stub>
+    <b-dropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
+        <b-input-stub autocomplete="off" usehtml5validation="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
         <div custom="" class="card">
             <!---->
             <div class="card-content">
@@ -15,11 +15,11 @@ exports[`BClockpicker render correctly 1`] = `
                         <div class="b-clockpicker-btn active">AM</div>
                         <div class="b-clockpicker-btn">PM</div>
                     </div>
-                    <bclockpickerface-stub pickersize="266" min="0" max="11" facenumbers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabledvalues="function () { [native code] }"></bclockpickerface-stub>
+                    <b-clockpicker-face-stub pickersize="266" min="0" max="11" facenumbers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabledvalues="function () { [native code] }"></b-clockpicker-face-stub>
                 </div>
             </div>
             <!---->
         </div>
-    </bdropdown-stub>
+    </b-dropdown-stub>
 </div>
 `;

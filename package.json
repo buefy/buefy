@@ -67,7 +67,7 @@
     "@babel/preset-env": "7.3.4",
     "@fortawesome/fontawesome-free": "5.3.1",
     "@mdi/font": "4.8.95",
-    "@vue/test-utils": "1.0.0-beta.25",
+    "@vue/test-utils": "1.0.0-beta.29",
     "autoprefixer": "7.1.1",
     "axios": "0.18.1",
     "babel-core": "6.25.0",

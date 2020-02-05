@@ -2,11 +2,11 @@
 
 exports[`BTimepicker render correctly 1`] = `
 <div class="timepicker control">
-    <bdropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
-        <binput-stub type="text" hascounter="true" customclass="" autocomplete="off" readonly="true" use-html5-validation="true"></binput-stub>
-        <bdropdownitem-stub custom="true" focusable="true" ariarole="">
-            <bfield-stub grouped="true" position="is-centered" addons="true">
-                <bselect-stub placeholder="00">
+    <b-dropdown-stub mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true">
+        <b-input-stub autocomplete="off" usehtml5validation="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
+        <b-dropdown-item-stub custom="true" focusable="true" ariarole="">
+            <b-field-stub grouped="true" position="is-centered" addons="true">
+                <b-select-stub usehtml5validation="true" placeholder="00">
                     <option value="0">
                         00
                     </option>
@@ -79,8 +79,8 @@ exports[`BTimepicker render correctly 1`] = `
                     <option value="23">
                         23
                     </option>
-                </bselect-stub> <span class="control is-colon">:</span>
-                <bselect-stub placeholder="00">
+                </b-select-stub> <span class="control is-colon">:</span>
+                <b-select-stub usehtml5validation="true" placeholder="00">
                     <option value="0">
                         00
                     </option>
@@ -261,12 +261,12 @@ exports[`BTimepicker render correctly 1`] = `
                     <option value="59">
                         59
                     </option>
-                </bselect-stub>
+                </b-select-stub>
                 <!---->
                 <!---->
-            </bfield-stub>
+            </b-field-stub>
             <!---->
-        </bdropdownitem-stub>
-    </bdropdown-stub>
+        </b-dropdown-item-stub>
+    </b-dropdown-stub>
 </div>
 `;
