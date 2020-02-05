@@ -44,18 +44,18 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>icon</code>',
-                description: 'Icon name to be added',
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>icon</code>',
+                description: 'Icon name to be added',
+                type: 'String',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>icon-right</code>',
@@ -65,15 +65,15 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>icon-right-clickable</code>',
-                description: 'Make the icon right clickable',
+                name: '<code>icon-clickable</code>',
+                description: 'Make the icon clickable',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
-                name: '<code>icon-clickable</code>',
-                description: 'Make the icon clickable',
+                name: '<code>icon-right-clickable</code>',
+                description: 'Make the icon right clickable',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -133,6 +133,11 @@ export default [
             {
                 name: '<code>icon-click</code>',
                 description: 'Triggers when the icon is clickable and have been clicked',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>icon-right-click</code>',
+                description: 'Triggers when the right icon is clickable and have been clicked',
                 parameters: '<code>event: $event</code>'
             },
             {
