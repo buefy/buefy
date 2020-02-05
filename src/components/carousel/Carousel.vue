@@ -263,7 +263,10 @@ export default {
          */
         changeItem(newIndex, action = true) {
             if (this.activeItem === newIndex) return
-            this.carouselItems[this.activeItem].status(false, action)
+
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].status(false, action)
+            }
             this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
             this.$emit('change', newIndex)
