@@ -109,6 +109,7 @@ describe('BDatepicker', () => {
             focusedDate: date
         })
         expect(wrapper.vm.focusedDateData).toEqual({
+            day: date.getDate(),
             month: date.getMonth(),
             year: date.getFullYear()
         })
