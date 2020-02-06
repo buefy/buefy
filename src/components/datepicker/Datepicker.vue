@@ -1,5 +1,8 @@
 <template>
-    <div class="datepicker control" :class="[size, {'is-expanded': expanded}]">
+    <div
+        class="datepicker control"
+        :class="[size, {'is-expanded': expanded}]"
+    >
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -8,6 +11,8 @@
             :inline="inline"
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
+            :aria-role="ariaRole"
+            :aria-modal="!inline"
             @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
@@ -50,6 +55,7 @@
                                 role="button"
                                 href="#"
                                 :disabled="disabled"
+                                :aria-label="ariaPreviousLabel"
                                 @click.prevent="prev"
                                 @keydown.enter.prevent="prev"
                                 @keydown.space.prevent="prev">
@@ -66,6 +72,7 @@
                                 role="button"
                                 href="#"
                                 :disabled="disabled"
+                                :aria-label="ariaNextLabel"
                                 @click.prevent="next"
                                 @keydown.enter.prevent="next"
                                 @keydown.space.prevent="next">
@@ -118,7 +125,7 @@
                             :rules-for-first-week="rulesForFirstWeek"
                             :min-date="minDate"
                             :max-date="maxDate"
-                            :focused="focusedDateData"
+                            :focused.sync="focusedDateData"
                             :disabled="disabled"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
@@ -136,7 +143,6 @@
                             @range-end="date => $emit('range-end', date)"
                             @close="togglePicker(false)"/>
                     </div>
-
                     <div v-else>
                         <b-datepicker-month
                             v-model="computedValue"
@@ -418,7 +424,9 @@ export default {
         trapFocus: {
             type: Boolean,
             default: config.defaultTrapFocus
-        }
+        },
+        ariaNextLabel: String,
+        ariaPreviousLabel: String
     },
     data() {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
@@ -427,6 +435,7 @@ export default {
         return {
             dateSelected: this.value,
             focusedDateData: {
+                day: focusedDate.getDate(),
                 month: focusedDate.getMonth(),
                 year: focusedDate.getFullYear()
             },
@@ -511,6 +520,12 @@ export default {
 
         isTypeMonth() {
             return this.type === 'month'
+        },
+
+        ariaRole() {
+            if (!this.inline) {
+                return 'dialog'
+            }
         }
     },
     watch: {
@@ -528,6 +543,7 @@ export default {
         focusedDate(value) {
             if (value) {
                 this.focusedDateData = {
+                    day: value.getDate(),
                     month: value.getMonth(),
                     year: value.getFullYear()
                 }
@@ -657,6 +673,7 @@ export default {
                 ? (!value.length ? this.dateCreator() : value[0])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
+                day: currentDate.getDay(),
                 month: currentDate.getMonth(),
                 year: currentDate.getFullYear()
             }

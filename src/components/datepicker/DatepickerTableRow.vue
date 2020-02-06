@@ -5,6 +5,7 @@
         </a>
         <template v-for="(day, index) in week">
             <a
+                :ref="`day-${day.getDate()}`"
                 v-if="selectableDate(day) && !disabled"
                 :key="index"
                 :class="[classObject(day), {'has-event': eventsDateMatch(day)}, indicators]"
@@ -15,7 +16,11 @@
                 @click.prevent="emitChosenDate(day)"
                 @keydown.enter.prevent="emitChosenDate(day)"
                 @keydown.space.prevent="emitChosenDate(day)"
-                @mouseenter="setRangeHoverEndDate(day)">
+                @mouseenter="setRangeHoverEndDate(day)"
+                @keydown.arrow-left.prevent="changeFocus(day, -1)"
+                @keydown.arrow-right.prevent="changeFocus(day, 1)"
+                @keydown.arrow-up.prevent="changeFocus(day, -7)"
+                @keydown.arrow-down.prevent="changeFocus(day, 7)">
                 <span>{{ day.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(day)">
                     <div
@@ -44,6 +49,9 @@ export default {
             type: [Date, Array]
         },
         hoveredDateRange: Array,
+        day: {
+            type: Number
+        },
         week: {
             type: Array,
             required: true
@@ -74,6 +82,21 @@ export default {
             default: () => 4
         },
         firstDayOfWeek: Number
+    },
+    watch: {
+        day: {
+            handler(day) {
+                const refName = `day-${day}`
+                if (this.$refs[refName] && this.$refs[refName].length > 0) {
+                    this.$nextTick(() => {
+                        if (this.$refs[refName][0]) {
+                            this.$refs[refName][0].focus()
+                        }
+                    }) // $nextTick needed when month is changed
+                }
+            },
+            immediate: true
+        }
     },
     methods: {
         firstWeekOffset(year, dow, doy) {
@@ -271,6 +294,12 @@ export default {
             if (this.range) {
                 this.$emit('rangeHoverEndDate', day)
             }
+        },
+
+        changeFocus(day, inc) {
+            const nextDay = day
+            nextDay.setDate(day.getDate() + inc)
+            this.$emit('change-focus', nextDay)
         }
     }
 }

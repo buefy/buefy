@@ -13,6 +13,7 @@
                 v-for="(week, index) in weeksInThisMonth"
                 :key="index"
                 :selected-date="value"
+                :day="focused.day"
                 :week="week"
                 :month="focused.month"
                 :min-date="minDate"
@@ -33,7 +34,8 @@
                 :hovered-date-range="hoveredDateRange"
                 @select="updateSelectedDate"
                 @rangeHoverEndDate="setRangeHoverEndDate"
-                :multiple="multiple"/>
+                :multiple="multiple"
+                @change-focus="changeFocus"/>
         </div>
     </section>
 </template>
@@ -269,6 +271,15 @@ export default {
 
         setRangeHoverEndDate(day) {
             this.hoveredEndDate = day
+        },
+
+        changeFocus(day) {
+            const focused = {
+                day: day.getDate(),
+                month: day.getMonth(),
+                year: day.getFullYear()
+            }
+            this.$emit('update:focused', focused)
         }
     }
 }
