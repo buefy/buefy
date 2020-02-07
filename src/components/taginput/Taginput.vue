@@ -18,7 +18,9 @@
                 :closable="closable"
                 :title="ellipsis && getNormalizedTagText(tag)"
                 @close="removeTag(index)">
-                {{ getNormalizedTagText(tag) }}
+                <slot name="tag" :text="getNormalizedTagText(tag)">
+                    {{ getNormalizedTagText(tag) }}
+                </slot>
             </b-tag>
 
             <b-autocomplete
