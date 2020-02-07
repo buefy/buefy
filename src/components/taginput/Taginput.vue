@@ -18,7 +18,10 @@
                 :closable="closable"
                 :title="ellipsis && getNormalizedTagText(tag)"
                 @close="removeTag(index)">
-                <slot name="tag" :text="getNormalizedTagText(tag)">
+                <slot
+                    name="tag"
+                    :text="getNormalizedTagText(tag)"
+                    :tag="tag">
                     {{ getNormalizedTagText(tag) }}
                 </slot>
             </b-tag>
