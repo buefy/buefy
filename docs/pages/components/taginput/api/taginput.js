@@ -171,7 +171,7 @@ export default [
             {
                 name: '<code>tag</code>',
                 description: 'For customizing content in tag item.',
-                props: '<code>text: String</code>, <code>tag: String|Number|Object</code>'
+                props: '<code>tag: String|Number|Object</code>'
             }
         ],
         events: [
