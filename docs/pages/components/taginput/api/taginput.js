@@ -167,6 +167,11 @@ export default [
                 name: '<code>header</code>',
                 description: 'Show a custom header as first option',
                 props: '—'
+            },
+            {
+                name: '<code>tag</code>',
+                description: 'For customizing content in tag item.',
+                props: '<code>text: String</code>'
             }
         ],
         events: [
