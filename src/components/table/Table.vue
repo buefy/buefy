@@ -11,7 +11,8 @@
             :icon-pack="iconPack"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
-            @sort="(column) => sort(column)"
+            @sort="(column, event) => sort(column, null, event)"
+            @removePriority="(column) => removeSortingPriority(column)"
         />
 
         <div
@@ -107,6 +108,11 @@
                                     />
                                     {{ sortMultipleDataComputed.findIndex(i =>
                                     i.field === column.field) + 1 }}
+                                    <button
+                                        style="margin-left:10px"
+                                        class="delete is-small"
+                                        type="button"
+                                        @click.stop="removeSortingPriority(column)"/>
                                 </template>
 
                                 <b-icon
@@ -692,6 +698,19 @@ export default {
         }
     },
     methods: {
+        removeSortingPriority(column) {
+            if (this.backendSorting) {
+                this.$emit('sorting-priority-removed', column.field)
+            } else {
+                this.sortMultipleDataLocal = this.sortMultipleDataLocal.filter(
+                    (priority) => priority.field !== column.field)
+
+                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
+                })
+                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+            }
+        },
         resetMultiSorting() {
             this.sortMultipleDataLocal = []
             this.currentSortColumn = {}

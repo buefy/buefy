@@ -24,6 +24,7 @@
       ref="multiSortTable"
       :backend-sorting="backendSortingEnabled"
       @sort="sortPressed"
+      @sorting-priority-removed="sortingPriorityRemoved"
       
       :sort-multiple="multiColumnSortingEnabled"
       :sort-multiple-data="sortingPrioirty"
@@ -75,6 +76,12 @@ const dataSource = [
         },
 
         // Backend sorting
+        sortingPriorityRemoved(field){
+          this.sortingPrioirty = this.sortingPrioirty.filter(
+            (priority) => priority.field !== field)
+          this.loadAsyncData(this.sortingPrioirty)
+        },
+
         sortPressed(field, order, event) {
           if(this.backendSortingEnabled) {
             if(this.multiColumnSortingEnabled){

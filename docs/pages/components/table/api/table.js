@@ -398,6 +398,11 @@ export default [
                 parameters: '<code>field: String</code>, <code>order: String</code>'
             },
             {
+                name: '<code>sorting-priority-removed</code>',
+                description: 'Triggers when a multiselect sortable column remove button has been clicked ',
+                parameters: '<code>field: String</code>'
+            },
+            {
                 name: '<code>select</code>',
                 description: 'Triggers when a row is selected',
                 parameters: '<code>row: Object</code>, <code>oldRow: Object</code>'
