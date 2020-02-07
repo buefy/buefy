@@ -199,6 +199,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>row-attributes</code>',
+                description: 'Add attributes (<code>v-bind</code>) to row (<code>&lt;tr&gt;</code> element) based on the return',
+                type: 'Function (row: Object, index: Number)',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>detailed</code>',
                 description: 'Allow row details (check scoped slots documentation)',
                 type: 'Boolean',

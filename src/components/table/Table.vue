@@ -175,6 +175,7 @@
                                 'is-selected': row === selected,
                                 'is-checked': isRowChecked(row),
                             }]"
+                            v-bind="rowAttributes(row, index)"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
                             @mouseenter="$listeners.mouseenter ? $emit('mouseenter', row) : null"
@@ -423,6 +424,10 @@ export default {
         rowClass: {
             type: Function,
             default: () => ''
+        },
+        rowAttributes: {
+            type: Function,
+            default: () => {}
         },
         openedDetailed: {
             type: Array,
