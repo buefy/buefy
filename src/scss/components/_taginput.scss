@@ -14,6 +14,21 @@ $taginput-height: 1.7em !default;
             height: auto;
             cursor: text;
         }
+        &:not(.is-focusable) {
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            height: auto;
+            &.is-small {
+                @include control-small;
+            }
+            &.is-medium{
+                @include control-medium;
+            }
+            &.is-large {
+                @include control-large;
+            }
+        }
 
         > .tag,
         > .tags {
