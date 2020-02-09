@@ -2,9 +2,10 @@
     <div
         class="navbar-item has-dropdown"
         :class="{
-            'is-hoverable': hoverable,
+            'is-hoverable': isHoverable,
             'is-active': newActive
         }"
+        @mouseenter="checkHoverable"
         v-click-outside="closeMenu"
     >
         <a
@@ -45,11 +46,16 @@ export default {
         active: Boolean,
         right: Boolean,
         arrowless: Boolean,
-        boxed: Boolean
+        boxed: Boolean,
+        closeOnClick: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
             newActive: this.active,
+            isHoverable: this.hoverable,
             _isNavDropdown: true // Used internally by NavbarItem
         }
     },
@@ -66,7 +72,15 @@ export default {
         * See naming convetion of navbaritem
         */
         closeMenu() {
-            this.newActive = false
+            this.newActive = !this.closeOnClick
+            if (this.hoverable && this.closeOnClick) {
+                this.isHoverable = false
+            }
+        },
+        checkHoverable() {
+            if (this.hoverable) {
+                this.isHoverable = true
+            }
         }
     }
 }
