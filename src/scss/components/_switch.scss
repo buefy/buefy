@@ -41,7 +41,7 @@ $switch-active-background-color: $primary !default;
                 will-change: transform;
             }
             &.is-elastic:before {
-                width: 1.75em;
+                width: 1.3em;
             }
         }
         &:checked + .check {
