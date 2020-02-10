@@ -169,6 +169,11 @@ export default [
                 props: '—'
             },
             {
+                name: '<code>footer</code>',
+                description: 'Show a custom footer as last option',
+                props: '—'
+            },
+            {
                 name: '<code>tag</code>',
                 description: 'For customizing content in tag item.',
                 props: '<code>tag: String|Number|Object</code>'
