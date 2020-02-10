@@ -68,7 +68,7 @@ export default {
             }
 
             if (this.format === 'percent') {
-                const val = this.toFixed(this.value * this.max / 100)
+                const val = this.toFixed(this.value * 100 / this.max)
                 return `${val}%`
             }
             const val = this.toFixed(this.value)
