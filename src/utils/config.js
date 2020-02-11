@@ -44,6 +44,17 @@ let config = {
     defaultTrapFocus: false,
     defaultButtonRounded: false,
     defaultCarouselInterval: 3500,
+    defaultLinkTags: [
+        'a',
+        'button',
+        'input',
+        'router-link',
+        'nuxt-link',
+        'n-link',
+        'RouterLink',
+        'NuxtLink',
+        'NLink'
+    ],
 
     customIconPacks: null
 } // TODO defaultTrapFocus to true in the next breaking change
