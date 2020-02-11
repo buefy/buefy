@@ -36,6 +36,7 @@
 
 <script>
 import Icon from '../icon/Icon'
+import config from '../../utils/config'
 
 export default {
     name: 'BMenuItem',
@@ -58,15 +59,7 @@ export default {
             type: String,
             default: 'a',
             validator: (value) => {
-                return [
-                    'a',
-                    'router-link',
-                    'nuxt-link',
-                    'n-link',
-                    'RouterLink',
-                    'NuxtLink',
-                    'NLink'
-                ].indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value) >= 0
             }
         },
         ariaRole: {

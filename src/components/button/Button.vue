@@ -82,17 +82,7 @@ export default {
             type: String,
             default: 'button',
             validator: (value) => {
-                return [
-                    'button',
-                    'a',
-                    'input',
-                    'router-link',
-                    'nuxt-link',
-                    'n-link',
-                    'RouterLink',
-                    'NuxtLink',
-                    'NLink'
-                ].indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value) >= 0
             }
         }
     },
