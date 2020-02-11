@@ -96,21 +96,21 @@
 
                                 <template
                                     v-if="sortMultiple &&
-                                        sortMultipleDataComputed.find(i =>
-                                    i.field === column.field)">
+                                        sortMultipleDataComputed &&
+                                        sortMultipleDataComputed.length > 0 &&
+                                        sortMultipleDataComputed.filter(i =>
+                                    i.field === column.field).length > 0">
                                     <b-icon
                                         :icon="sortIcon"
                                         :pack="iconPack"
                                         both
                                         :size="sortIconSize"
-                                        :class="{ 'is-desc': sortMultipleDataComputed.find(i =>
-                                        i.field === column.field).order === 'desc'}"
+                                        :class="{ 'is-desc': sortMultipleDataComputed.filter(i =>
+                                        i.field === column.field)[0].order === 'desc'}"
                                     />
-                                    {{ sortMultipleDataComputed.findIndex(i =>
-                                    i.field === column.field) + 1 }}
+                                    {{ findIndexOfSortData(column) }}
                                     <button
-                                        style="margin-left:10px"
-                                        class="delete is-small"
+                                        class="delete is-small multi-sort-cancel-icon"
                                         type="button"
                                         @click.stop="removeSortingPriority(column)"/>
                                 </template>
@@ -425,7 +425,7 @@ export default {
             type: Array,
             default: () => []
         },
-        customKey: {
+        sortMultipleKey: {
             type: String,
             default: null
         },
@@ -698,6 +698,11 @@ export default {
         }
     },
     methods: {
+        findIndexOfSortData(column) {
+            let sortObj = this.sortMultipleDataComputed.filter((i) =>
+                i.field === column.field)[0]
+            return this.sortMultipleDataComputed.indexOf(sortObj) + 1
+        },
         removeSortingPriority(column) {
             if (this.backendSorting) {
                 this.$emit('sorting-priority-removed', column.field)
@@ -785,7 +790,8 @@ export default {
                 // if backend sorting is enabled, just emit the sort press like usual
                 // if the correct key combination isnt pressed, sort like usual
                 !this.backendSorting &&
-                this.sortMultiple && ((this.customKey && event[this.customKey]) || !this.customKey)
+                this.sortMultiple &&
+                ((this.sortMultipleKey && event[this.sortMultipleKey]) || !this.sortMultipleKey)
             ) {
                 this.sortMultiColumn(column)
             } else {

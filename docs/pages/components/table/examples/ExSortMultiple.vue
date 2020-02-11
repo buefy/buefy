@@ -28,7 +28,7 @@
       
       :sort-multiple="multiColumnSortingEnabled"
       :sort-multiple-data="sortingPrioirty"
-      :custom-key="customKey"
+      :sort-multiple-key="customKey"
     >
       <template slot-scope="props">
         <b-table-column field="first_name" label="First name" sortable>

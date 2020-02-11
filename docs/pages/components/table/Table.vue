@@ -48,7 +48,7 @@
             <p>To sort on additional columns, use <code>sort-multiple</code> is enabled</p>
             <p>Use <code>$refs.YOURREF.resetMultiSorting()</code> to reset the current multi column sorting</p>
             <p>Use <code>sort-multiple-data</code> prop together with <code>backend-sorting</code> if you want to use a custom sorting priority</p>
-            <p>Use <code>custom-key</code> prop if you only want to enable multi column sorting when it is in combination with a key. Use value <code>null</code> to have it always enabled (default if not specified)</p>
+            <p>Use <code>sort-multiple-key</code> prop if you only want to enable multi column sorting when it is in combination with a key. Use value <code>null</code> to have it always enabled (default if not specified)</p>
         </Example>
 
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
