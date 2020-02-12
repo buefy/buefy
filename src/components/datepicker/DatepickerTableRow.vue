@@ -20,7 +20,8 @@
                 @keydown.arrow-left.prevent="changeFocus(day, -1)"
                 @keydown.arrow-right.prevent="changeFocus(day, 1)"
                 @keydown.arrow-up.prevent="changeFocus(day, -7)"
-                @keydown.arrow-down.prevent="changeFocus(day, 7)">
+                @keydown.arrow-down.prevent="changeFocus(day, 7)"
+                :tabindex="day.getDate() === 1 ? null : -1">
                 <span>{{ day.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(day)">
                     <div
