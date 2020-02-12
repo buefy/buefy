@@ -136,6 +136,10 @@ export default {
             type: Boolean,
             default: true
         },
+        repeat: {
+            type: Boolean,
+            default: true
+        },
         iconPack: String,
         iconSize: String,
         iconPrev: {
@@ -219,7 +223,7 @@ export default {
          */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
-                this.carouselItems[this.activeItem].status(true, false)
+                this.carouselItems[this.activeItem].isActive = true
             }
         },
         /**
@@ -234,15 +238,23 @@ export default {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                this.next()
+                if (!this.repeat && this.activeItem === this.carouselItems.length - 1) {
+                    this.pauseTimer()
+                } else {
+                    this.next()
+                }
             }, (this.interval || config.defaultCarouselInterval))
         },
         pauseTimer() {
-            if (!this.pauseHover && this.autoplay) return
             this.isPause = true
             if (this.timer) {
                 clearInterval(this.timer)
                 this.timer = null
+            }
+        },
+        checkPause() {
+            if (this.pauseHover && this.autoplay) {
+                return this.pauseTimer()
             }
         },
         /**
@@ -251,7 +263,10 @@ export default {
          */
         changeItem(newIndex, action = true) {
             if (this.activeItem === newIndex) return
-            this.carouselItems[this.activeItem].status(false, action)
+
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].status(false, action)
+            }
             this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
             this.$emit('change', newIndex)
@@ -266,14 +281,18 @@ export default {
             }
         },
         prev() {
-            return this.activeItem === 0
-                ? this.changeItem(this.carouselItems.length - 1)
-                : this.changeItem(this.activeItem - 1)
+            if (this.activeItem === 0) {
+                if (this.repeat) this.changeItem(this.carouselItems.length - 1)
+            } else {
+                this.changeItem(this.activeItem - 1)
+            }
         },
         next() {
-            return this.activeItem === this.carouselItems.length - 1
-                ? this.changeItem(0, false)
-                : this.changeItem(this.activeItem + 1, false)
+            if (this.activeItem === this.carouselItems.length - 1) {
+                if (this.repeat) this.changeItem(0, false)
+            } else {
+                this.changeItem(this.activeItem + 1, false)
+            }
         },
         // checking arrow between both
         checkArrow(value) {
@@ -308,7 +327,7 @@ export default {
     },
     mounted() {
         if (this.activeItem < this.carouselItems.length) {
-            this.carouselItems[this.activeItem].status(true, false)
+            this.carouselItems[this.activeItem].isActive = true
         }
         this.startTimer()
     },

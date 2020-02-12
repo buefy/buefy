@@ -36,7 +36,7 @@ describe('BNumberinput', () => {
         })
     })
 
-    describe('Rendered', () => {
+    describe('Rendered (shallow)', () => {
         beforeEach(() => {
             wrapper = shallowMount(BNumberinput)
         })
@@ -68,6 +68,13 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.stepDecimals).toBe(1)
         })
 
+        it('manage prop value', () => {
+            const value = 5
+
+            wrapper.setProps({ value })
+            expect(wrapper.vm.newValue).toBe(value)
+        })
+
         it('can increment / decrement', () => {
             const min = 5
             const max = 6
@@ -84,6 +91,16 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBe(max)
             wrapper.vm.increment()
             expect(wrapper.vm.computedValue).toBe(max)
+        })
+
+        it('manages empty value', () => {
+            wrapper.vm.computedValue = ''
+            expect(wrapper.vm.computedValue).toBeNull()
+
+            const min = 5
+            wrapper.setProps({ min })
+            wrapper.vm.computedValue = ''
+            expect(wrapper.vm.computedValue).toBe(min)
         })
     })
 })

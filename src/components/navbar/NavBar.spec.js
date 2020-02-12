@@ -43,4 +43,27 @@ describe('BNavbar', () => {
 
         expect(navBar.find('.container').exists()).toBe(true)
     })
+
+    it('manage closing the menu as expected', () => {
+        wrapper.vm.emitUpdateParentEvent = jest.fn()
+
+        wrapper.setProps({ closeOnClick: false })
+        wrapper.vm.closeMenu()
+
+        wrapper.setProps({ closeOnClick: true })
+        wrapper.vm.closeMenu()
+
+        expect(wrapper.vm.internalIsActive).toBeFalsy()
+        expect(wrapper.vm.emitUpdateParentEvent).toHaveBeenCalledTimes(1)
+    })
+
+    it('set body classes as expected', async () => {
+        wrapper.vm.setBodyClass = jest.fn(() => wrapper.vm.setBodyClass)
+
+        wrapper.setProps({ fixedTop: true })
+        expect(wrapper.vm.setBodyClass).toHaveBeenCalled()
+
+        wrapper.setProps({ fixedTop: false, fixedBottom: true })
+        expect(wrapper.vm.setBodyClass).toHaveBeenCalled()
+    })
 })

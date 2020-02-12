@@ -23,9 +23,9 @@ exports[`BSteps render correctly 1`] = `
         <div></div>
     </section>
     <nav class="step-navigation"><a role="button" disabled="disabled" class="pagination-previous">
-            <bicon-stub icon="chevron-left" both="true" aria-hidden="true"></bicon-stub>
+            <b-icon-stub icon="chevron-left" both="true" aria-hidden="true"></b-icon-stub>
         </a> <a role="button" class="pagination-next">
-            <bicon-stub icon="chevron-right" both="true" aria-hidden="true"></bicon-stub>
+            <b-icon-stub icon="chevron-right" both="true" aria-hidden="true"></b-icon-stub>
         </a></nav>
 </div>
 `;

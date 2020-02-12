@@ -39,14 +39,14 @@ export default [
             },
             {
                 name: '<code>pause-hover</code>',
-                description: 'Pause carousel when autoplay and mouse enter',
+                description: 'Pause carousel when <code>autoplay</code> and mouse enter',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
             {
                 name: '<code>pause-info</code>',
-                description: 'Show infomation pause when autoplay and mouse enter',
+                description: 'Show infomation pause when <code>autoplay</code> and <code>pause-hover</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -85,6 +85,13 @@ export default [
             {
                 name: '<code>arrow-hover</code>',
                 description: 'Display the "next" and "prev" action when hover, but hidden on mobile',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>repeat</code>',
+                description: 'Controls whether the carousel loops around at the start and end.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

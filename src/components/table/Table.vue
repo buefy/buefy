@@ -122,7 +122,8 @@
                                     :pack="iconPack"
                                     both
                                     :size="sortIconSize"
-                                    :class="{ 'is-desc': !isAsc }"/>
+                                    :class="{'is-desc': !isAsc,
+                                             'is-invisible': currentSortColumn !== column }" />
                             </div>
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">

@@ -44,7 +44,7 @@ export default [
                 description: 'Tag and input size, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
-                default: '<code>is-medium</code>'
+                default: '—'
             },
             {
                 name: '<code>rounded</code>',
@@ -167,6 +167,16 @@ export default [
                 name: '<code>header</code>',
                 description: 'Show a custom header as first option',
                 props: '—'
+            },
+            {
+                name: '<code>footer</code>',
+                description: 'Show a custom footer as last option',
+                props: '—'
+            },
+            {
+                name: '<code>tag</code>',
+                description: 'For customizing content in tag item.',
+                props: '<code>tag: String|Number|Object</code>'
             }
         ],
         events: [

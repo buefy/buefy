@@ -1,5 +1,29 @@
 [
     {
+        "title": "Édutechno",
+        "date": "2020-02-07",
+        "img": "edutechno.png",
+        "url": "https://portail.edutechno.ca/"
+    },
+    {
+        "title": "Wotel",
+        "date": "2020-02-06",
+        "img": "wotel.png",
+        "url": "https://wotel.dev/"
+    },
+    {
+        "title": "Yakety",
+        "date": "2020-01-29",
+        "img": "yakety.png",
+        "url": "https://yakety.co.uk/"
+    },
+    {
+        "title": "Swap",
+        "date": "2020-01-29",
+        "img": "swap.png",
+        "url": "https://market.swap.gg/"
+    },
+    {
         "title": "Sponsus",
         "date": "2019-11-29",
         "img": "sponsus.png",
@@ -170,12 +194,6 @@
         "date": "2019-04-24",
         "img": "godsunchained.png",
         "url": "https://godsunchained.info"
-    },
-    {
-        "title": "Picano",
-        "date": "2019-04-24",
-        "img": "picano.png",
-        "url": "https://picano.co"
     },
     {
         "title": "Reaction Role",

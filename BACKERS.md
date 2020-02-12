@@ -10,4 +10,4 @@ You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtomm
 - [Prine Software Engineering](https://www.patreon.com/user/creators?u=18435748)
 - [Daniele Luchi](https://www.patreon.com/user/creators?u=17495343)
 - [Gevorg Harutyunyan](https://www.patreon.com/modularcoder)
-- [JustBoil.me](https://www.patreon.com/user/creators?u=23452260)
+- [Jigawatt](https://jw.solar)

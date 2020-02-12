@@ -2,7 +2,7 @@
     <transition :name="animation">
         <div
             class="loading-overlay is-active"
-            :class="{ 'is-full-page': isFullPage }"
+            :class="{ 'is-full-page': displayInFullPage }"
             v-if="isActive">
             <div class="loading-background" @click="cancel"/>
             <slot>
@@ -41,12 +41,16 @@ export default {
     },
     data() {
         return {
-            isActive: this.active || false
+            isActive: this.active || false,
+            displayInFullPage: this.isFullPage
         }
     },
     watch: {
         active(value) {
             this.isActive = value
+        },
+        isFullPage(value) {
+            this.displayInFullPage = value
         }
     },
     methods: {
@@ -95,7 +99,8 @@ export default {
             if (!this.container) {
                 document.body.appendChild(this.$el)
             } else {
-                this.isFullPage = false
+                this.displayInFullPage = false
+                this.$emit('update:is-full-page', false)
                 this.container.appendChild(this.$el)
             }
         }
