@@ -744,7 +744,9 @@ export default {
         checkAll() {
             const isAllChecked = this.isAllChecked
             this.visibleData.forEach((currentRow) => {
-                this.removeCheckedRow(currentRow)
+                if (this.isRowCheckable(currentRow)) {
+                    this.removeCheckedRow(currentRow)
+                }
                 if (!isAllChecked) {
                     if (this.isRowCheckable(currentRow)) {
                         this.newCheckedRows.push(currentRow)
