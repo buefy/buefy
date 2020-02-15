@@ -36,7 +36,7 @@
                 }
                 data[evt.newIndex] = item
                 vnode.componentInstance.$emit('input', data)
-                vnode.context.$buefy.toast.open(`Moved ${item.first_name} from row ${evt.oldIndex + 1} to ${evt.newIndex + 1}`)
+                vnode.context.$buefy.toast.open(`Moved ${item} from row ${evt.oldIndex + 1} to ${evt.newIndex + 1}`)
             }
         })
     }
