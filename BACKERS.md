@@ -11,3 +11,4 @@ You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtomm
 - [Daniele Luchi](https://www.patreon.com/user/creators?u=17495343)
 - [Gevorg Harutyunyan](https://www.patreon.com/modularcoder)
 - [Jigawatt](https://jw.solar)
+- [Ross Coundon](https://leadent.digital/)
