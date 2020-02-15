@@ -11,3 +11,7 @@ const Plugin = {
 use(Plugin)
 
 export default Plugin
+
+export {
+    Taginput as BTaginput
+}
