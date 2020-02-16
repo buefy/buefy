@@ -25,8 +25,7 @@
                 :use-html5-validation="useHtml5Validation"
                 @keyup.native.enter="toggle(true)"
                 @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus"
-                @blur="onBlur() && checkHtml5Validity()"/>
+                @focus="handleOnFocus"/>
 
             <b-dropdown-item
                 :disabled="disabled"

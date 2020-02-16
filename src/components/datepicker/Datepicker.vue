@@ -28,8 +28,7 @@
                 @click.native="onInputClick"
                 @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus"
-                @blur="onBlur" />
+                @focus="handleOnFocus" />
 
             <b-dropdown-item
                 :disabled="disabled"
@@ -718,6 +717,7 @@ export default {
          */
         onActiveChange(value) {
             if (!value) {
+                console.log('active-change', value)
                 this.onBlur()
             }
         }
