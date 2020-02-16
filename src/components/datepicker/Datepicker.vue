@@ -717,7 +717,6 @@ export default {
          */
         onActiveChange(value) {
             if (!value) {
-                console.log('active-change', value)
                 this.onBlur()
             }
         }
