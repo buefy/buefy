@@ -56,7 +56,8 @@ export default {
             type: Boolean,
             default: false
         },
-        vertical: Boolean
+        vertical: Boolean,
+        multiline: Boolean
     },
     data() {
         return {
@@ -72,6 +73,7 @@ export default {
             return {
                 'is-fullwidth': this.expanded,
                 'is-vertical': this.vertical,
+                'is-multiline': this.multiline,
                 [this.position]: this.position && this.vertical
             }
         },
