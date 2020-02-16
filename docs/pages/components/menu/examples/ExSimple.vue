@@ -4,9 +4,7 @@
             <b-menu-item icon="information-outline" label="Info"></b-menu-item>
             <b-menu-item
                 icon="settings"
-                :active="isActive"
-                :expanded="isActive"
-                @click="isActive = !isActive">
+                :active="isActive">
                 <template slot="label" slot-scope="props">
                     Administrator
                     <b-icon
