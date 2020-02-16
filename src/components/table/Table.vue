@@ -117,13 +117,15 @@
 
                                 <b-icon
                                     v-else
-                                    v-show="currentSortColumn === column"
                                     :icon="sortIcon"
                                     :pack="iconPack"
                                     both
                                     :size="sortIconSize"
-                                    :class="{'is-desc': !isAsc,
-                                             'is-invisible': currentSortColumn !== column }" />
+                                    :class="{
+                                        'is-desc': !isAsc,
+                                        'is-invisible': currentSortColumn !== column
+                                    }"
+                                />
                             </div>
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
