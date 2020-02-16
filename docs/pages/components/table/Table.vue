@@ -40,6 +40,17 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
+        <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.8.11</span>
+            </div>
+            <p>To sort on additional columns, use <code>sort-multiple</code> is enabled</p>
+            <p>Use <code>$refs.YOURREF.resetMultiSorting()</code> to reset the current multi column sorting</p>
+            <p>Use <code>sort-multiple-data</code> prop together with <code>backend-sorting</code> if you want to use a custom sorting priority</p>
+            <p>Use <code>sort-multiple-key</code> prop if you only want to enable multi column sorting when it is in combination with a key. Use value <code>null</code> to have it always enabled (default if not specified)</p>
+        </Example>
+
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
             <div class="tags has-addons">
@@ -126,6 +137,9 @@
     import ExSearchable from './examples/ExSearchable'
     import ExSearchableCode from '!!raw-loader!./examples/ExSearchable'
 
+    import ExSortMultiple from './examples/ExSortMultiple'
+    import ExSortMultipleCode from '!!raw-loader!./examples/ExSortMultiple'
+
     import ExPaginationSort from './examples/ExPaginationSort'
     import ExPaginationSortCode from '!!raw-loader!./examples/ExPaginationSort'
 
@@ -165,6 +179,7 @@
                 ExSelection,
                 ExCheckable,
                 ExSearchable,
+                ExSortMultiple,
                 ExPaginationSort,
                 ExDetailedRow,
                 ExCustomDetailedRow,
@@ -180,6 +195,7 @@
                 ExSelectionCode,
                 ExCheckableCode,
                 ExSearchableCode,
+                ExSortMultipleCode,
                 ExPaginationSortCode,
                 ExDetailedRowCode,
                 ExCustomDetailedRowCode,

@@ -3,13 +3,16 @@
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
+            :sort-multiple="sortMultiple"
+            :sort-multiple-data="sortMultipleDataComputed"
             :is-asc="isAsc"
             :columns="newColumns"
             :placeholder="mobileSortPlaceholder"
             :icon-pack="iconPack"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
-            @sort="(column) => sort(column)"
+            @sort="(column, event) => sort(column, null, event)"
+            @removePriority="(column) => removeSortingPriority(column)"
         />
 
         <div
@@ -66,7 +69,7 @@
                                 width: column.width === undefined ? null :
                                 (isNaN(column.width) ? column.width : column.width + 'px')
                             }"
-                            @click.stop="sort(column)">
+                            @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -91,7 +94,30 @@
                                 </template>
                                 <template v-else>{{ column.label }}</template>
 
+                                <template
+                                    v-if="sortMultiple &&
+                                        sortMultipleDataComputed &&
+                                        sortMultipleDataComputed.length > 0 &&
+                                        sortMultipleDataComputed.filter(i =>
+                                    i.field === column.field).length > 0">
+                                    <b-icon
+                                        :icon="sortIcon"
+                                        :pack="iconPack"
+                                        both
+                                        :size="sortIconSize"
+                                        :class="{ 'is-desc': sortMultipleDataComputed.filter(i =>
+                                        i.field === column.field)[0].order === 'desc'}"
+                                    />
+                                    {{ findIndexOfSortData(column) }}
+                                    <button
+                                        class="delete is-small multi-sort-cancel-icon"
+                                        type="button"
+                                        @click.stop="removeSortingPriority(column)"/>
+                                </template>
+
                                 <b-icon
+                                    v-else
+                                    v-show="currentSortColumn === column"
                                     :icon="sortIcon"
                                     :pack="iconPack"
                                     both
@@ -314,7 +340,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -392,6 +418,18 @@ export default {
             type: String,
             default: 'is-small'
         },
+        sortMultiple: {
+            type: Boolean,
+            default: false
+        },
+        sortMultipleData: {
+            type: Array,
+            default: () => []
+        },
+        sortMultipleKey: {
+            type: String,
+            default: null
+        },
         paginated: Boolean,
         currentPage: {
             type: Number,
@@ -459,6 +497,7 @@ export default {
     },
     data() {
         return {
+            sortMultipleDataLocal: [],
             getValueByPath,
             newColumns: [...this.columns],
             visibleDetailRows: this.openedDetailed,
@@ -475,6 +514,13 @@ export default {
         }
     },
     computed: {
+        sortMultipleDataComputed() {
+            if (this.backendSorting) {
+                return this.sortMultipleData
+            } else {
+                return this.sortMultipleDataLocal
+            }
+        },
         tableClasses() {
             return {
                 'is-bordered': this.bordered,
@@ -653,6 +699,29 @@ export default {
         }
     },
     methods: {
+        findIndexOfSortData(column) {
+            let sortObj = this.sortMultipleDataComputed.filter((i) =>
+                i.field === column.field)[0]
+            return this.sortMultipleDataComputed.indexOf(sortObj) + 1
+        },
+        removeSortingPriority(column) {
+            if (this.backendSorting) {
+                this.$emit('sorting-priority-removed', column.field)
+            } else {
+                this.sortMultipleDataLocal = this.sortMultipleDataLocal.filter(
+                    (priority) => priority.field !== column.field)
+
+                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
+                })
+                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+            }
+        },
+        resetMultiSorting() {
+            this.sortMultipleDataLocal = []
+            this.currentSortColumn = {}
+            this.newData = this.data
+        },
         /**
         * Sort an array by key without mutating original data.
         * Call the user sort function if it was passed.
@@ -693,31 +762,65 @@ export default {
             return sorted
         },
 
+        sortMultiColumn(column) {
+            this.currentSortColumn = {}
+            if (!this.backendSorting) {
+                let existingPriority = this.sortMultipleDataLocal.filter((i) =>
+                    i.field === column.field)[0]
+                if (existingPriority) {
+                    existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
+                } else {
+                    this.sortMultipleDataLocal.push(
+                        {field: column.field, order: column.isAsc}
+                    )
+                }
+                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
+                })
+
+                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+            }
+        },
         /**
         * Sort the column.
         * Toggle current direction on column if it's sortable
         * and not just updating the prop.
         */
-        sort(column, updatingData = false) {
-            if (!column || !column.sortable) return
+        sort(column, updatingData = false, event = null) {
+            if (
+                // if backend sorting is enabled, just emit the sort press like usual
+                // if the correct key combination isnt pressed, sort like usual
+                !this.backendSorting &&
+                this.sortMultiple &&
+                ((this.sortMultipleKey && event[this.sortMultipleKey]) || !this.sortMultipleKey)
+            ) {
+                this.sortMultiColumn(column)
+            } else {
+                if (!column || !column.sortable) return
 
-            if (!updatingData) {
-                this.isAsc = column === this.currentSortColumn
-                    ? !this.isAsc
-                    : (this.defaultSortDirection.toLowerCase() !== 'desc')
+                // sort multiple is enabled but the correct key combination isnt pressed so reset
+                if (this.sortMultiple) {
+                    this.sortMultipleDataLocal = []
+                }
+
+                if (!updatingData) {
+                    this.isAsc = column === this.currentSortColumn
+                        ? !this.isAsc
+                        : (this.defaultSortDirection.toLowerCase() !== 'desc')
+                }
+                if (!this.firstTimeSort) {
+                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event)
+                }
+                if (!this.backendSorting) {
+                    this.newData = this.sortBy(
+                        this.newData,
+                        column.field,
+                        column.customSort,
+                        this.isAsc
+                    )
+                }
+                this.currentSortColumn = column
             }
-            if (!this.firstTimeSort) {
-                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
-            }
-            if (!this.backendSorting) {
-                this.newData = this.sortBy(
-                    this.newData,
-                    column.field,
-                    column.customSort,
-                    this.isAsc
-                )
-            }
-            this.currentSortColumn = column
         },
 
         /**

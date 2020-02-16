@@ -68,6 +68,9 @@
             &.is-sortable .th-wrap {
                 cursor: pointer;
             }
+            .multi-sort-cancel-icon {
+                margin-left: 10px;
+            }
         }
         tr {
             &.is-selected {
