@@ -41,6 +41,5 @@ describe('BMenuItem', () => {
         expect(wrapper.emitted()['update:expanded'][0]).toContainEqual(false)
         expect(wrapper.vm.newActive).toBeTruthy()
         expect(wrapper.emitted()['update:active'][0]).toContainEqual(true)
-        expect(wrapper.emitted()['click']).toBeTruthy()
     })
 })

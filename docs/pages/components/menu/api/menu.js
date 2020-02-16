@@ -137,13 +137,6 @@ export default [
                 default: '—'
             }
         ],
-        events: [
-            {
-                name: '<code>click</code>',
-                description: 'Triggers on click',
-                parameters: '<code>event: $event</code>'
-            }
-        ],
         slots: [
             {
                 name: 'default',
