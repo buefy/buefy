@@ -8,7 +8,7 @@
                 'is-disabled': disabled
             }"
             @click="onClick($event)"
-            @click.native="onClick($event)">
+            v-on="$listeners">
             <b-icon
                 v-if="icon"
                 :icon="icon"
@@ -94,7 +94,6 @@ export default {
             this.$emit('update:expanded', this.newActive)
             this.newActive = true
             this.$emit('update:active', this.newActive)
-            this.$emit('click', event)
         },
         reset(parent) {
             const items = parent.$children.filter((c) => c.name === this.name)
