@@ -149,7 +149,7 @@
                             :month-names="monthNames"
                             :min-date="minDate"
                             :max-date="maxDate"
-                            :focused="focusedDateData"
+                            :focused.sync="focusedDateData"
                             :disabled="disabled"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
@@ -158,7 +158,8 @@
                             :indicators="indicators"
                             :date-creator="dateCreator"
                             :multiple="multiple"
-                            @close="togglePicker(false)"/>
+                            @close="togglePicker(false)"
+                            @change-focus="changeFocus"/>
                     </div>
                 </div>
 
@@ -741,6 +742,14 @@ export default {
         onActiveChange(value) {
             if (!value) {
                 this.onBlur()
+            }
+        },
+
+        changeFocus(day) {
+            this.focusedDateData = {
+                day: day.getDate(),
+                month: day.getMonth(),
+                year: day.getFullYear()
             }
         }
     },
