@@ -3,40 +3,40 @@
         <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
             <span>{{ getWeekNumber(week[6]) }}</span>
         </a>
-        <template v-for="(day, index) in week">
+        <template v-for="(weekDay, index) in week">
             <a
-                :ref="`day-${day.getDate()}`"
-                v-if="selectableDate(day) && !disabled"
+                :ref="`day-${weekDay.getDate()}`"
+                v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
-                :class="[classObject(day), {'has-event': eventsDateMatch(day)}, indicators]"
+                :class="[classObject(weekDay), {'has-event': eventsDateMatch(weekDay)}, indicators]"
                 class="datepicker-cell"
                 role="button"
                 href="#"
                 :disabled="disabled"
-                @click.prevent="emitChosenDate(day)"
-                @keydown.enter.prevent="emitChosenDate(day)"
-                @keydown.space.prevent="emitChosenDate(day)"
-                @mouseenter="setRangeHoverEndDate(day)"
-                @keydown.arrow-left.prevent="changeFocus(day, -1)"
-                @keydown.arrow-right.prevent="changeFocus(day, 1)"
-                @keydown.arrow-up.prevent="changeFocus(day, -7)"
-                @keydown.arrow-down.prevent="changeFocus(day, 7)"
-                :tabindex="day.getDate() === 1 ? null : -1">
-                <span>{{ day.getDate() }}</span>
-                <div class="events" v-if="eventsDateMatch(day)">
+                @click.prevent="emitChosenDate(weekDay)"
+                @keydown.enter.prevent="emitChosenDate(weekDay)"
+                @keydown.space.prevent="emitChosenDate(weekDay)"
+                @mouseenter="setRangeHoverEndDate(weekDay)"
+                @keydown.arrow-left.prevent="changeFocus(weekDay, -1)"
+                @keydown.arrow-right.prevent="changeFocus(weekDay, 1)"
+                @keydown.arrow-up.prevent="changeFocus(weekDay, -7)"
+                @keydown.arrow-down.prevent="changeFocus(weekDay, 7)"
+                :tabindex="day === weekDay.getDate() ? null : -1">
+                <span>{{ weekDay.getDate() }}</span>
+                <div class="events" v-if="eventsDateMatch(weekDay)">
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, index) in eventsDateMatch(day)"
+                        v-for="(event, index) in eventsDateMatch(weekDay)"
                         :key="index"/>
                 </div>
             </a>
             <div
                 v-else
                 :key="index"
-                :class="classObject(day)"
+                :class="classObject(weekDay)"
                 class="datepicker-cell">
-                <span>{{ day.getDate() }}</span>
+                <span>{{ weekDay.getDate() }}</span>
             </div>
         </template>
     </div>
