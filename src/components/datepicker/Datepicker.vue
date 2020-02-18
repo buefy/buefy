@@ -306,6 +306,7 @@ export default {
             default: () => { return config.defaultUnselectableDaysOfWeek }
         },
         selectableDates: Array,
+        defaultDateRange: Array,
         dateFormatter: {
             type: Function,
             default: (date, vm) => {
@@ -417,6 +418,10 @@ export default {
     data() {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
             this.focusedDate || this.dateCreator()
+
+        if (this.defaultDateRange && Array.isArray(this.defaultDateRange)) {
+            this.value = this.defaultDateRange
+        }
 
         return {
             dateSelected: this.value,
