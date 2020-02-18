@@ -315,9 +315,11 @@ export default {
         }
     },
     mounted() {
-        // $refs attached, it's time to refresh datepicker (input)
-        if (this.newValue) {
-            this.$refs.datepicker.$forceUpdate()
+        if (!this.isMobile || this.inline) {
+            // $refs attached, it's time to refresh datepicker (input)
+            if (this.newValue) {
+                this.$refs.datepicker.$forceUpdate()
+            }
         }
     }
 }
