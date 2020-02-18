@@ -420,7 +420,7 @@ export default {
             this.focusedDate || this.dateCreator()
 
         if (this.defaultDateRange && Array.isArray(this.defaultDateRange)) {
-            this.value = this.defaultDateRange
+            this.computedValue = this.defaultDateRange
         }
 
         return {
