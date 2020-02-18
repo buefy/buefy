@@ -4,7 +4,7 @@ exports[`BDatepickerTableRow render correctly 1`] = `
 <div class="datepicker-row">
     <!----> <a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible">
         31
-        <!----></a><a role="button" href="#" class="datepicker-cell is-selectable is-invisible">
+        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible">
         1
         <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible">
         2
