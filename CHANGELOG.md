@@ -1,5 +1,39 @@
 # Buefy Changelog
 
+## 0.8.11
+
+### New features
+
+* Add multi column sorting to table (thanks @suneab)
+* Add ``clearable`` prop to autocomplete (thanks @melogustavo) 
+* Add ``icon-right`` prop to input (thanks @melogustavo) 
+* Add ``tag`` slot to taginput (thanks @jacobgoh101)
+* Add ``tz-offset`` prop to datepicker (thanks @zedrdave)
+* Add ``repeat`` prop to carousel (thanks @GerryWilko)
+* Add ``icon`` prop to nofitication and message (thanks @service-paradis)
+* Add ``multiline`` prop to tabs
+* Add aria attributes to dropdown (thanks @mariusj)
+
+### Fixes
+
+* Fix missing export taginput component
+* Fix prevent table thead jumping when sorting is changed
+* Fix #2152 tab-item rendering using header slot (thanks @service-paradis)
+* Fix #2153 text overflow to progress bar (thanks @service-paradis)
+* Fix #2157 carousel when ``autoplay`` and no pause
+* Fix #2160 remove body classes of navbar on destroy
+* Fix #2185 taginput when over maxtags
+* Fix #2187 taginput rendering when ``attached`` and over maxtags
+* Fix #2189 'undefined' on carousel (thanks @service-paradis)
+* Fix #2190 remove margin when not exists text on button
+* Fix #2191 navbar dropdown close on click when hoverable
+* Fix #2216 menu item warning
+* Fix #2217 percentage calc on progress bar (thanks @service-paradis)
+* Fix #2219 field label when position is ``inside`` and add-on
+* Fix #2227 double blur event emitted by pickers
+* Fix #2228 check if the row is checkable before unchecking it (thanks @service-paradis)
+* Fix #2240 check ref datetimepicker on mount when ``mobile``
+
 ## 0.8.10
 
 ### New features
