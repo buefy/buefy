@@ -91,7 +91,7 @@ export default [
             {
                 name: 'default',
                 description: '',
-                props: ''
+                props: '<code>slot-scope="{ active }"</code> *Only works when not hoverable.'
             },
             {
                 name: '<code>trigger</code>',

@@ -8,7 +8,7 @@
             @click="toggle"
             @mouseenter="checkHoverable"
             aria-haspopup="true">
-            <slot name="trigger"/>
+            <slot name="trigger" :active="isActive"/>
         </div>
 
         <transition :name="animation">
