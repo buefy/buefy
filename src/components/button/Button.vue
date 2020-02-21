@@ -24,7 +24,7 @@
             :size="iconSize"
         />
         <span v-if="label">{{ label }}</span>
-        <span v-else-if="hasDefaultSlot">
+        <span v-else>
             <slot />
         </span>
         <b-icon
@@ -100,12 +100,6 @@ export default {
                 return 'is-medium'
             }
             return this.size
-        },
-        hasDefaultSlot() {
-            if (!this.$slots.default) return false
-            if (this.$slots.default.length > 1) return true
-            const text = this.$slots.default[0].text
-            return text && !!text.trim()
         }
     }
 }
