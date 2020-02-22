@@ -1,5 +1,5 @@
 <template>
-    <div class="b-table" :class="{ 'is-loading': loading }">
+    <div class="b-table" :class="tableWrapperClasses">
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
@@ -495,7 +495,8 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
-        ariaCurrentLabel: String
+        ariaCurrentLabel: String,
+        stickyHeader: Boolean
     },
     data() {
         return {
@@ -528,11 +529,17 @@ export default {
                 'is-bordered': this.bordered,
                 'is-striped': this.striped,
                 'is-narrow': this.narrowed,
-                'has-mobile-cards': this.mobileCards,
                 'is-hoverable': (
                     (this.hoverable || this.focusable) &&
                     this.visibleData.length
                 )
+            }
+        },
+        tableWrapperClasses() {
+            return {
+                'is-loading': this.loading,
+                'has-mobile-cards': this.mobileCards,
+                'has-sticky-header': this.stickyHeader
             }
         },
 

@@ -1,5 +1,16 @@
 # Buefy Changelog
 
+## 0.8.12
+
+### New features
+
+* Add ``sticky-header`` prop to table 
+
+### Fixes
+
+* Fix #2254 button with icon in the default slot
+* Fix #2250 taginput option item when autocomplete without slot
+
 ## 0.8.11
 
 ### New features

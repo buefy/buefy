@@ -92,6 +92,19 @@
             </p>
         </Example>
 
+        <Example :component="ExSticky" :code="ExStickyCode" title="Sticky Headers">
+            <p>
+                Use the <code>sticky-header</code> prop to show a scrolling table with fixed headers.
+            </p>
+            <div class="tags has-addons">
+                <span class="tag is-success">New!</span>
+                <span class="tag is-info">0.8.12</span>
+            </div>
+            <p>
+                The default height is <code>300px</code> but you can overwrite it using <code>style</code> attribute, for example <code>:style="height: 150px"</code>.
+            </p>
+        </Example>
+
         <Example :component="ExToggleColumns" :code="ExToggleColumnsCode" title="Toggle columns">
             <b-message type="is-danger">
                 Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
@@ -158,6 +171,9 @@
     import ExSubheadings from './examples/ExSubheadings'
     import ExSubheadingsCode from '!!raw-loader!./examples/ExSubheadings'
 
+    import ExSticky from './examples/ExSticky'
+    import ExStickyCode from '!!raw-loader!./examples/ExSticky'
+
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
@@ -186,6 +202,7 @@
                 ExRowStatus,
                 ExCustomHeaders,
                 ExSubheadings,
+                ExSticky,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
@@ -202,6 +219,7 @@
                 ExRowStatusCode,
                 ExCustomHeadersCode,
                 ExSubheadingsCode,
+                ExStickyCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode,
