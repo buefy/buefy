@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BTable render correctly 1`] = `
-<div class="b-table">
+<div class="b-table has-mobile-cards">
     <!---->
     <!---->
     <div class="table-wrapper">
-        <table class="table has-mobile-cards">
+        <table class="table">
             <!---->
             <tbody>
                 <tr class="is-empty">
