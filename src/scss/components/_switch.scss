@@ -28,7 +28,7 @@ $switch-active-background-color: $primary !default;
             padding: $switch-padding;
             background: $grey-light;
             border-radius: $radius;
-            transition: background $speed-slow $easing;
+            transition: background $speed-slow $easing, box-shadow $speed-slow $easing;
             &:before {
                 content: "";
                 display: block;
@@ -37,11 +37,13 @@ $switch-active-background-color: $primary !default;
                 height: #{($switch-width - $switch-padding * 2) / 2};
                 background: $background;
                 box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
-                transition: transform $speed-slow $easing, width $speed-slow $easing;
+                transition: transform $speed-slow $easing;
                 will-change: transform;
+                transform-origin: left;
             }
             &.is-elastic:before {
-                width: 1.75em;
+                transform: scaleX(1.5);
+                border-radius: 100%;
             }
         }
         &:checked + .check {
@@ -54,13 +56,14 @@ $switch-active-background-color: $primary !default;
             }
             &:before {
                 transform: translate3d(100%, 0, 0);
+                transform-origin: right;
             }
             &.is-elastic:before {
                 // Might be a little offset if base font is not 16px
-                transform: translate3d(percentage(16 / ($switch-width-number * 16)), 0, 0);
+                transform: translate3d(100%, 0, 0) scaleX(1.5);
             }
         }
-        &:focus {
+        &:focus, &:active {
             outline: none;
             + .check {
                 box-shadow: 0 0 0.5em rgba($grey, 0.6);
