@@ -1,7 +1,7 @@
 <template>
     <div class="datepicker-row">
         <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
-            <span>{{ getWeekNumber(week[6]) }}</span>
+            {{ getWeekNumber(week[6]) }}
         </a>
         <template v-for="(day, index) in week">
             <a
@@ -16,7 +16,7 @@
                 @keydown.enter.prevent="emitChosenDate(day)"
                 @keydown.space.prevent="emitChosenDate(day)"
                 @mouseenter="setRangeHoverEndDate(day)">
-                <span>{{ day.getDate() }}</span>
+                {{ day.getDate() }}
                 <div class="events" v-if="eventsDateMatch(day)">
                     <div
                         class="event"
@@ -30,7 +30,7 @@
                 :key="index"
                 :class="classObject(day)"
                 class="datepicker-cell">
-                <span>{{ day.getDate() }}</span>
+                {{ day.getDate() }}
             </div>
         </template>
     </div>
