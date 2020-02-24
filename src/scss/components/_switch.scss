@@ -56,11 +56,10 @@ $switch-active-background-color: $primary !default;
             }
             &:before {
                 transform: translate3d(100%, 0, 0);
-                transform-origin: right;
             }
             &.is-elastic:before {
                 // Might be a little offset if base font is not 16px
-                transform: translate3d(100%, 0, 0) scaleX(1.5);
+                transform: translate3d(50%, 0, 0) scaleX(1.5);
             }
         }
         &:focus, &:active {
