@@ -5,7 +5,7 @@
                 v-for="(day, index) in visibleDayNames"
                 :key="index"
                 class="datepicker-cell">
-                {{ day }}
+                <span>{{ day }}</span>
             </div>
         </header>
         <div class="datepicker-body" :class="{'has-events':hasEvents}">
