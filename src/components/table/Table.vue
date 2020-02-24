@@ -123,7 +123,7 @@
                                     :size="sortIconSize"
                                     :class="{
                                         'is-desc': !isAsc,
-                                        'is-invisible': currentSortColumn !== column
+                                        'is-hidden': currentSortColumn !== column
                                     }"
                                 />
                             </div>
