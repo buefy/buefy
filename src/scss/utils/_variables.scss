@@ -1,3 +1,6 @@
+// Bulma's Variables
+@import 'node_modules/bulma/sass/utilities/initial-variables';
+
 $speed-slow: 150ms !default;
 $speed-slower: 250ms !default;
 
@@ -12,3 +15,21 @@ $link-visited: $grey !default;
 $link-focus-border: $primary !default;
 
 $label-weight: $weight-semibold !default;
+
+@import 'node_modules/bulma/sass/utilities/functions';
+@import 'node_modules/bulma/sass/utilities/derived-variables';
+@import 'node_modules/bulma/sass/utilities/mixins';
+@import 'node_modules/bulma/sass/utilities/controls';
+
+
+// Components Variables and Mixins
+
+// Tooltip
+
+$tooltip-arrow-size: 5px !default;
+$tooltip-arrow-margin: 2px !default;
+$tooltip-multiline-sizes: (
+    small: 180px,
+    medium: 240px,
+    large: 300px
+) !default;
