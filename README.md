@@ -108,10 +108,6 @@ Buefy is an open source MIT project if you are interested in supporting this pro
   </a>
 </p>
 
-## Contributing
-
-Please refer to the contribution guidelines [here](.github/CONTRIBUTING.md).
-
 ## License
 
 Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
