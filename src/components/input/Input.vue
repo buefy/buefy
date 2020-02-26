@@ -237,7 +237,9 @@ export default {
         iconClick(emit, event) {
             this.$emit(emit, event)
             this.$nextTick(() => {
-                this.$refs.input.focus()
+                if (this.$refs.input) {
+                    this.$refs.input.focus()
+                }
             })
         },
 
