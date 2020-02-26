@@ -61,7 +61,8 @@ export default {
                 return [
                     'is-top-right',
                     'is-top-left',
-                    'is-bottom-left'
+                    'is-bottom-left',
+                    'is-bottom-right'
                 ].indexOf(value) > -1
             }
         },

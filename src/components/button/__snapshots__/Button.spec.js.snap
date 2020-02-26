@@ -2,6 +2,7 @@
 
 exports[`BButton render correctly 1`] = `
 <button type="button" class="button">
-    <!----> <span></span>
+    <!---->
+    <!---->
     <!----></button>
 `;

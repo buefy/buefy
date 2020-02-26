@@ -51,16 +51,12 @@
                         v-if="showCancel"
                         class="button"
                         ref="cancelButton"
-                        @click="cancel('button')">
-                        {{ cancelText }}
-                    </button>
+                        @click="cancel('button')">{{ cancelText }}</button>
                     <button
                         class="button"
                         :class="type"
                         ref="confirmButton"
-                        @click="confirm">
-                        {{ confirmText }}
-                    </button>
+                        @click="confirm">{{ confirmText }}</button>
                 </footer>
             </div>
         </div>
