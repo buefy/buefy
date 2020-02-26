@@ -67,6 +67,15 @@
             &.is-sortable,
             &.is-sortable .th-wrap {
                 cursor: pointer;
+
+                .is-relative {
+                    position: absolute;
+                }
+            }
+            .sort-icon, .multi-sort-cancel-icon {
+                position: absolute;
+                bottom: 50%;
+                transform: translateY(50%);
             }
             .multi-sort-cancel-icon {
                 margin-left: 10px;
