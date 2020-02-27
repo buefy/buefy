@@ -6,7 +6,10 @@
         <div class="block">
             <b-switch v-model="showBooks"> Show books item (by adding / removing from the array) </b-switch>
         </div>
-        <b-tabs v-model="activeTab">
+        <div class="block">
+            <b-switch v-model="multiline">Multiline</b-switch>
+        </div>
+        <b-tabs v-model="activeTab" :multiline="multiline">
             <template v-for="(tab, index) in tabs">
                 <b-tab-item
                     v-if="tab.displayed"
@@ -25,7 +28,8 @@
             return {
                 activeTab: 0,
                 showMusic: true,
-                showBooks: false
+                showBooks: false,
+                multiline: true
             }
         },
         computed: {
@@ -43,6 +47,21 @@
                     },
                     {
                         label: 'Videos',
+                        content: 'Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        label: 'Games',
+                        content: 'Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        label: 'Comics',
+                        content: 'Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        label: 'Movies',
                         content: 'Lorem ipsum dolor sit amet.',
                         displayed: true,
                     }
