@@ -17,6 +17,7 @@ $dropdown-disabled-opacity: 0.5 !default;
         }
     }
     .dropdown-menu {
+        display: block;
         .dropdown-item {
             &.is-disabled {
                 cursor: not-allowed;
@@ -30,6 +31,18 @@ $dropdown-disabled-opacity: 0.5 !default;
             @extend .dropdown-item;
             padding-right: 3rem;
             white-space: nowrap;
+        }
+    }
+    &.is-hoverable:not(.is-active) {
+        .dropdown-menu {
+            display: none;
+        }
+    }
+    &.is-hoverable {
+        &:hover {
+            .dropdown-menu {
+                display: inherit;
+            }
         }
     }
     &.is-expanded {
