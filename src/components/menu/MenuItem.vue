@@ -53,7 +53,7 @@ export default {
         icon: String,
         animation: {
             type: String,
-            default: 'fade'
+            default: 'slide'
         },
         tag: {
             type: String,
