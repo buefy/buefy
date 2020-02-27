@@ -15,6 +15,7 @@
 * Fix #2257 button with ``icon`` and without default slot
 * Fix #2262 numberinput custom icons
 * Fix #2272 check input ref before to focus (thanks @bender-a)
+* Fix #2273 end animation on dropdown
 
 ## 0.8.12
 
