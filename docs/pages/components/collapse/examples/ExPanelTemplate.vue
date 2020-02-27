@@ -11,6 +11,7 @@
         <b-collapse
             aria-id="contentIdForA11y2"
             class="panel"
+            animation="slide"
             :open.sync="isOpen">
             <div
                 slot="trigger"

@@ -6,6 +6,7 @@
 
 * Add ``scrollable`` prop to table
 * Add ``sticky`` prop to table column
+* Add slide animation to menu item and in the core code
 
 ### Fixes
 
