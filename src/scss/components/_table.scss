@@ -71,6 +71,13 @@
             .multi-sort-cancel-icon {
                 margin-left: 10px;
             }
+            &.is-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                left: 0;
+                z-index: 3;
+                background: $table-background-color;
+            }
         }
         tr {
             &.is-selected {
@@ -119,6 +126,16 @@
                 background: $background;
             }
         }
+
+        td {
+            &.is-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                background: $table-background-color;
+            }
+        }
     }
 
     .level:not(.top) {
@@ -136,9 +153,10 @@
         }
         tr {
             th {
+                position: -webkit-sticky;
                 position: sticky;
                 top: 0;
-                z-index: 1;
+                z-index: 2;
                 background: $table-background-color;
             }
         }
