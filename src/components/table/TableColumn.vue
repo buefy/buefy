@@ -58,12 +58,13 @@ export default {
     },
     beforeDestroy() {
         if (!this.$parent.visibleData.length) return
-        if (this.$parent.$children.filter((vm) => vm.$data._isTableColumn &&
-            vm.$data.newKey === this.newKey).length !== 1) return
-        const index = this.$parent.newColumns.map(
-            (column) => column.newKey).indexOf(this.newKey)
-        if (index >= 0) {
-            this.$parent.newColumns.splice(index, 1)
+        if (this.$parent.visibleData.length !== 1) return
+        if (this.$parent.newColumns && this.$parent.newColumns.length) {
+            const index = this.$parent.newColumns.map(
+                (column) => column.newKey).indexOf(this.newKey)
+            if (index >= 0) {
+                this.$parent.newColumns.splice(index, 1)
+            }
         }
     }
 }

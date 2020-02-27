@@ -1147,6 +1147,11 @@ export default {
     mounted() {
         this.checkPredefinedDetailedRows()
         this.checkSort()
+    },
+
+    beforeDestroy() {
+        this.newData = []
+        this.newColumns = []
     }
 }
 </script>

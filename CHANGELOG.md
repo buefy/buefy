@@ -1,5 +1,14 @@
 # Buefy Changelog
 
+## 0.8.13
+
+### New features
+
+### Fixes
+
+* Fix #2236 table performance on destroy
+* Fix #2257 button with ``icon`` and without default slot
+
 ## 0.8.12
 
 ### New features
