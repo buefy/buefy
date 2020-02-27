@@ -26,6 +26,7 @@ export default {
         },
         subheading: [String, Number],
         customSort: Function,
+        sticky: Boolean,
         internal: Boolean // Used internally by Table
     },
     data() {
@@ -38,7 +39,8 @@ export default {
         rootClasses() {
             return {
                 'has-text-right': this.numeric && !this.centered,
-                'has-text-centered': this.centered
+                'has-text-centered': this.centered,
+                'is-sticky': this.sticky
             }
         }
     },

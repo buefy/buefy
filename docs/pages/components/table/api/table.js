@@ -311,6 +311,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>sticky-header</code>',
+                description: 'Show a sticky table header',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>scrollable</code>',
+                description: 'Add a horizontal scrollbar when table is too wide',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link (if <code>paginated</code>)',
                 type: 'String',
@@ -589,6 +603,13 @@ export default [
                 type: 'String, Number',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>sticky</code>',
+                description: 'Show a sticky column',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
         ],
         slots: [

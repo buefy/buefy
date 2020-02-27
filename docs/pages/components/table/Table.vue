@@ -92,13 +92,16 @@
             </p>
         </Example>
 
-        <Example :component="ExSticky" :code="ExStickyCode" title="Sticky Headers">
+        <Example :component="ExSticky" :code="ExStickyCode" title="Sticky Headers and Columns">
             <p>
                 Use the <code>sticky-header</code> prop to show a scrolling table with fixed headers.
             </p>
+            <p>
+                Use the <code>sticky</code> prop on column to show a scrolling table with a fixed column.
+            </p>
             <div class="tags has-addons">
                 <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.8.12</span>
+                <span class="tag is-info">0.8.13</span>
             </div>
             <p>
                 The default height is <code>300px</code> but you can overwrite it using <code>style</code> attribute, for example <code>:style="height: 150px"</code>.

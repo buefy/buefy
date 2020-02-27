@@ -63,7 +63,8 @@
                             :key="index"
                             :class="{
                                 'is-current-sort': currentSortColumn === column,
-                                'is-sortable': column.sortable
+                                'is-sortable': column.sortable,
+                                'is-sticky': column.sticky
                             }"
                             :style="{
                                 width: column.width === undefined ? null :
@@ -250,7 +251,7 @@
                                 <BTableColumn
                                     v-for="column in newColumns"
                                     v-bind="column"
-                                    :key="column.field"
+                                    :key="column.customKey || column.label"
                                     internal>
                                     <span
                                         v-if="column.renderHtml"
@@ -492,6 +493,7 @@ export default {
             type: Boolean,
             default: false
         },
+        scrollable: Boolean,
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
@@ -539,7 +541,8 @@ export default {
             return {
                 'is-loading': this.loading,
                 'has-mobile-cards': this.mobileCards,
-                'has-sticky-header': this.stickyHeader
+                'has-sticky-header': this.stickyHeader,
+                'table-container': this.isScrollable
             }
         },
 
@@ -635,6 +638,17 @@ export default {
         */
         showDetailRowIcon() {
             return this.detailed && this.showDetailIcon
+        },
+
+        /**
+        * return if scrollable table
+        */
+        isScrollable() {
+            if (this.scrollable) return true
+            if (!this.newColumns) return false
+            return this.newColumns.some((column) => {
+                return column.sticky
+            })
         }
     },
     watch: {

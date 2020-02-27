@@ -4,6 +4,9 @@
 
 ### New features
 
+* Add ``scrollable`` prop to table
+* Add ``sticky`` prop to table column
+
 ### Fixes
 
 * Fix #2236 table performance on destroy
