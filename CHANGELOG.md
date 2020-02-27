@@ -9,8 +9,12 @@
 
 ### Fixes
 
+* Fix #2195 switch transition on Safari (thanks @bender-a)
+* Fix #2205 datepicker table rendering on Safari (thanks @bender-a)
 * Fix #2236 table performance on destroy
 * Fix #2257 button with ``icon`` and without default slot
+* Fix #2262 numberinput custom icons
+* Fix #2272 check input ref before to focus (thanks @bender-a)
 
 ## 0.8.12
 
