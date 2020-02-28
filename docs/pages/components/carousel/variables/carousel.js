@@ -31,7 +31,7 @@ export default [
     },
     {
         name: '<code>$carousel-indicator-color</code>',
-        description: 'The carousel indicator background',
+        description: 'The carousel indicator color',
         default: '<code>$scheme-main</code>'
     },
     {
