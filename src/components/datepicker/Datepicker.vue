@@ -33,128 +33,133 @@
             <b-dropdown-item
                 :disabled="disabled"
                 :focusable="focusable"
-                custom>
-                <header class="datepicker-header">
-                    <template v-if="$slots.header !== undefined && $slots.header.length">
-                        <slot name="header" />
-                    </template>
-                    <div
-                        v-else
-                        class="pagination field is-centered"
-                        :class="size">
-                        <a
-                            v-show="!showPrev && !disabled"
-                            class="pagination-previous"
-                            role="button"
-                            href="#"
-                            :disabled="disabled"
-                            @click.prevent="prev"
-                            @keydown.enter.prevent="prev"
-                            @keydown.space.prevent="prev">
+                custom
+                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}">
+                <div>
+                    <header class="datepicker-header">
+                        <template v-if="$slots.header !== undefined && $slots.header.length">
+                            <slot name="header" />
+                        </template>
+                        <div
+                            v-else
+                            class="pagination field is-centered"
+                            :class="size">
+                            <a
+                                v-show="!showPrev && !disabled"
+                                class="pagination-previous"
+                                role="button"
+                                href="#"
+                                :disabled="disabled"
+                                @click.prevent="prev"
+                                @keydown.enter.prevent="prev"
+                                @keydown.space.prevent="prev">
 
-                            <b-icon
-                                :icon="iconPrev"
-                                :pack="iconPack"
-                                both
-                                type="is-primary is-clickable"/>
-                        </a>
-                        <a
-                            v-show="!showNext && !disabled"
-                            class="pagination-next"
-                            role="button"
-                            href="#"
-                            :disabled="disabled"
-                            @click.prevent="next"
-                            @keydown.enter.prevent="next"
-                            @keydown.space.prevent="next">
+                                <b-icon
+                                    :icon="iconPrev"
+                                    :pack="iconPack"
+                                    both
+                                    type="is-primary is-clickable"/>
+                            </a>
+                            <a
+                                v-show="!showNext && !disabled"
+                                class="pagination-next"
+                                role="button"
+                                href="#"
+                                :disabled="disabled"
+                                @click.prevent="next"
+                                @keydown.enter.prevent="next"
+                                @keydown.space.prevent="next">
 
-                            <b-icon
-                                :icon="iconNext"
-                                :pack="iconPack"
-                                both
-                                type="is-primary is-clickable"/>
-                        </a>
-                        <div class="pagination-list">
-                            <b-field>
-                                <b-select
-                                    v-if="!isTypeMonth"
-                                    v-model="focusedDateData.month"
-                                    :disabled="disabled"
-                                    :size="size">
-                                    <option
-                                        v-for="month in listOfMonths"
-                                        :value="month.index"
-                                        :key="month.name"
-                                        :disabled="month.disabled">
-                                        {{ month.name }}
-                                    </option>
-                                </b-select>
-                                <b-select
-                                    v-model="focusedDateData.year"
-                                    :disabled="disabled"
-                                    :size="size">
-                                    <option
-                                        v-for="year in listOfYears"
-                                        :value="year"
-                                        :key="year">
-                                        {{ year }}
-                                    </option>
-                                </b-select>
-                            </b-field>
+                                <b-icon
+                                    :icon="iconNext"
+                                    :pack="iconPack"
+                                    both
+                                    type="is-primary is-clickable"/>
+                            </a>
+                            <div class="pagination-list">
+                                <b-field>
+                                    <b-select
+                                        v-if="!isTypeMonth"
+                                        v-model="focusedDateData.month"
+                                        :disabled="disabled"
+                                        :size="size">
+                                        <option
+                                            v-for="month in listOfMonths"
+                                            :value="month.index"
+                                            :key="month.name"
+                                            :disabled="month.disabled">
+                                            {{ month.name }}
+                                        </option>
+                                    </b-select>
+                                    <b-select
+                                        v-model="focusedDateData.year"
+                                        :disabled="disabled"
+                                        :size="size">
+                                        <option
+                                            v-for="year in listOfYears"
+                                            :value="year"
+                                            :key="year">
+                                            {{ year }}
+                                        </option>
+                                    </b-select>
+                                </b-field>
+                            </div>
                         </div>
+                    </header>
+                    <div
+                        v-if="!isTypeMonth"
+                        class="datepicker-content"
+                        :class="{'content-horizonal-timepicker': horizontalTimePicker}">
+                        <b-datepicker-table
+                            v-model="computedValue"
+                            :day-names="dayNames"
+                            :month-names="monthNames"
+                            :first-day-of-week="firstDayOfWeek"
+                            :rules-for-first-week="rulesForFirstWeek"
+                            :min-date="minDate"
+                            :max-date="maxDate"
+                            :focused="focusedDateData"
+                            :disabled="disabled"
+                            :unselectable-dates="unselectableDates"
+                            :unselectable-days-of-week="unselectableDaysOfWeek"
+                            :selectable-dates="selectableDates"
+                            :events="events"
+                            :indicators="indicators"
+                            :date-creator="dateCreator"
+                            :type-month="isTypeMonth"
+                            :nearby-month-days="nearbyMonthDays"
+                            :nearby-selectable-month-days="nearbySelectableMonthDays"
+                            :show-week-number="showWeekNumber"
+                            :range="range"
+                            :multiple="multiple"
+                            @range-start="date => $emit('range-start', date)"
+                            @range-end="date => $emit('range-end', date)"
+                            @close="togglePicker(false)"/>
                     </div>
-                </header>
 
-                <div
-                    v-if="!isTypeMonth"
-                    class="datepicker-content">
-                    <b-datepicker-table
-                        v-model="computedValue"
-                        :day-names="dayNames"
-                        :month-names="monthNames"
-                        :first-day-of-week="firstDayOfWeek"
-                        :rules-for-first-week="rulesForFirstWeek"
-                        :min-date="minDate"
-                        :max-date="maxDate"
-                        :focused="focusedDateData"
-                        :disabled="disabled"
-                        :unselectable-dates="unselectableDates"
-                        :unselectable-days-of-week="unselectableDaysOfWeek"
-                        :selectable-dates="selectableDates"
-                        :events="events"
-                        :indicators="indicators"
-                        :date-creator="dateCreator"
-                        :type-month="isTypeMonth"
-                        :nearby-month-days="nearbyMonthDays"
-                        :nearby-selectable-month-days="nearbySelectableMonthDays"
-                        :show-week-number="showWeekNumber"
-                        :range="range"
-                        :multiple="multiple"
-                        @range-start="date => $emit('range-start', date)"
-                        @range-end="date => $emit('range-end', date)"
-                        @close="togglePicker(false)"/>
-                </div>
-                <div v-else>
-                    <b-datepicker-month
-                        v-model="computedValue"
-                        :month-names="monthNames"
-                        :min-date="minDate"
-                        :max-date="maxDate"
-                        :focused="focusedDateData"
-                        :disabled="disabled"
-                        :unselectable-dates="unselectableDates"
-                        :unselectable-days-of-week="unselectableDaysOfWeek"
-                        :selectable-dates="selectableDates"
-                        :events="events"
-                        :indicators="indicators"
-                        :date-creator="dateCreator"
-                        :multiple="multiple"
-                        @close="togglePicker(false)"/>
+                    <div v-else>
+                        <b-datepicker-month
+                            v-model="computedValue"
+                            :month-names="monthNames"
+                            :min-date="minDate"
+                            :max-date="maxDate"
+                            :focused="focusedDateData"
+                            :disabled="disabled"
+                            :unselectable-dates="unselectableDates"
+                            :unselectable-days-of-week="unselectableDaysOfWeek"
+                            :selectable-dates="selectableDates"
+                            :events="events"
+                            :indicators="indicators"
+                            :date-creator="dateCreator"
+                            :multiple="multiple"
+                            @close="togglePicker(false)"/>
+                    </div>
                 </div>
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
-                    class="datepicker-footer">
+                    class="datepicker-footer"
+                    :class="{'footer-horizontal-timepicker': horizontalTimePicker}">
                     <slot/>
                 </footer>
             </b-dropdown-item>
@@ -300,6 +305,7 @@ export default {
         placeholder: String,
         editable: Boolean,
         disabled: Boolean,
+        horizontalTimePicker: Boolean,
         unselectableDates: Array,
         unselectableDaysOfWeek: {
             type: Array,

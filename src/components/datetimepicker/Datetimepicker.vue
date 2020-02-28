@@ -19,6 +19,7 @@
         :icon-pack="iconPack"
         :size="datepickerSize"
         :placeholder="placeholder"
+        :horizontal-time-picker = "horizontalTimePicker"
         :range="false"
         :disabled="disabled"
         :mobile-native="isMobileNative"
@@ -102,6 +103,7 @@ export default {
             default: false
         },
         placeholder: String,
+        horizontalTimePicker: Boolean,
         disabled: Boolean,
         icon: String,
         iconPack: String,

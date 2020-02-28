@@ -284,4 +284,35 @@ describe('BDatepicker', () => {
             expect(mockDateFormatter.mock.calls.length).toEqual(0)
         })
     })
+
+    describe('when horizontalTimePicker is true', () => {
+        beforeEach(() => {
+            wrapper = shallowMount(BDatepicker, {
+                stubs: {
+                    transition: false
+                },
+                slots: {
+                    default: ['<div>Custom footer</div>']
+                },
+                propsData: {
+                    horizontalTimePicker: true
+                }
+            })
+        })
+
+        it('renders a component with .dropdown-horizonal-timepicker class', () => {
+            const subject = wrapper.find('.dropdown-horizonal-timepicker')
+            expect(subject.exists()).toBeTruthy()
+        })
+
+        it('renders a component with .content-horizonal-timepicker class', () => {
+            const subject = wrapper.find('.content-horizonal-timepicker')
+            expect(subject.exists()).toBeTruthy()
+        })
+
+        it('renders a component with .footer-horizontal-timepicker class', () => {
+            const subject = wrapper.find('.footer-horizontal-timepicker')
+            expect(subject.exists()).toBeTruthy()
+        })
+    })
 })
