@@ -19,7 +19,7 @@
         :icon-pack="iconPack"
         :size="datepickerSize"
         :placeholder="placeholder"
-        :horizontal-time-picker = "horizontalTimePicker"
+        :horizontal-time-picker="horizontalTimePicker"
         :range="false"
         :disabled="disabled"
         :mobile-native="isMobileNative"

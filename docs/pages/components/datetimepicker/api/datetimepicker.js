@@ -121,7 +121,7 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>horizontalTimePicker</code>',
+                name: '<code>horizontal-time-picker</code>',
                 description: 'Changes the time picker layout to a horizontal position',
                 type: 'Boolean',
                 values: '—',

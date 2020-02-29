@@ -18,7 +18,7 @@
                 icon="calendar-today"
                 :datepicker="{ showWeekNumber }"
                 :timepicker="{ enableSeconds, hourFormat: format }"
-                horizontalTimePicker>
+                horizontal-time-picker>
             </b-datetimepicker>
         </b-field>
     </section>
