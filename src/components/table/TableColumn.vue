@@ -27,6 +27,8 @@ export default {
         subheading: [String, Number],
         customSort: Function,
         sticky: Boolean,
+        headerClass: String,
+        cellClass: String,
         internal: Boolean // Used internally by Table
     },
     data() {
@@ -37,11 +39,11 @@ export default {
     },
     computed: {
         rootClasses() {
-            return {
+            return [this.cellClass, {
                 'has-text-right': this.numeric && !this.centered,
                 'has-text-centered': this.centered,
                 'is-sticky': this.sticky
-            }
+            }]
         }
     },
     beforeMount() {

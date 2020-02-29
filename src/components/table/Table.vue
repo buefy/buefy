@@ -61,11 +61,11 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
-                            :class="{
+                            :class="[column.headerClass, {
                                 'is-current-sort': currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky
-                            }"
+                            }]"
                             :style="{
                                 width: column.width === undefined ? null :
                                 (isNaN(column.width) ? column.width : column.width + 'px')

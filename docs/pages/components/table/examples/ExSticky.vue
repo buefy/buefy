@@ -32,7 +32,9 @@
                         label: 'ID',
                         width: '40',
                         numeric: true,
-                        sticky: true
+                        sticky: true,
+                        headerClass: 'is-sticky-column-one',
+                        cellClass: "is-sticky-column-one"
                     },
                     {
                         field: 'user.first_name',
@@ -40,13 +42,15 @@
                     },
                     {
                         field: 'user.last_name',
-                        label: 'Last Name',
-                        sticky: true
+                        label: 'Last Name'
                     },
                     {
                         field: 'date',
                         label: 'Date',
-                        centered: true
+                        centered: true,
+                        sticky: true,
+                        headerClass: "is-sticky-column-two",
+                        cellClass: "is-sticky-column-two"
                     },
                     {
                         field: 'gender',
@@ -110,3 +114,14 @@
         }
     }
 </script>
+
+<style>
+    .is-sticky-column-one {
+        background: #23d160 !important;
+        color: white !important;
+    }
+    .is-sticky-column-two {
+        background: #167df0 !important;
+        color: white !important;
+    }
+</style>

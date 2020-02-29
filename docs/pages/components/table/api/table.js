@@ -611,6 +611,20 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>header-class</code>',
+                description: 'CSS classes to be applied on header',
+                type: 'String',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>cell-class</code>',
+                description: 'CSS classes to be applied on cell',
+                type: 'String',
+                values: '—',
+                default: '-'
+            }
         ],
         slots: [
             {
