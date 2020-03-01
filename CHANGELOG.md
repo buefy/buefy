@@ -4,6 +4,7 @@
 
 ### New features
 
+* Add ``selected`` slot to taginput
 * Add ``scrollable`` prop to table
 * Add ``sticky`` prop to table column
 * Add ``cellClass`` and ``headerClass`` prop to table column

@@ -5,23 +5,25 @@
             :class="[statusType, size, containerClasses]"
             :disabled="disabled"
             @click="hasInput && focus($event)">
-            <b-tag
-                v-for="(tag, index) in tags"
-                :key="getNormalizedTagText(tag) + index"
-                :type="type"
-                :size="size"
-                :rounded="rounded"
-                :attached="attached"
-                :tabstop="false"
-                :disabled="disabled"
-                :ellipsis="ellipsis"
-                :closable="closable"
-                :title="ellipsis && getNormalizedTagText(tag)"
-                @close="removeTag(index)">
-                <slot name="tag" :tag="tag">
-                    {{ getNormalizedTagText(tag) }}
-                </slot>
-            </b-tag>
+            <slot name="selected" :tags="tags">
+                <b-tag
+                    v-for="(tag, index) in tags"
+                    :key="getNormalizedTagText(tag) + index"
+                    :type="type"
+                    :size="size"
+                    :rounded="rounded"
+                    :attached="attached"
+                    :tabstop="false"
+                    :disabled="disabled"
+                    :ellipsis="ellipsis"
+                    :closable="closable"
+                    :title="ellipsis && getNormalizedTagText(tag)"
+                    @close="removeTag(index)">
+                    <slot name="tag" :tag="tag">
+                        {{ getNormalizedTagText(tag) }}
+                    </slot>
+                </b-tag>
+            </slot>
 
             <b-autocomplete
                 ref="autocomplete"
