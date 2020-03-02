@@ -106,8 +106,10 @@
                                         :pack="iconPack"
                                         both
                                         :size="sortIconSize"
-                                        :class="{ 'is-desc': sortMultipleDataComputed.filter(i =>
-                                        i.field === column.field)[0].order === 'desc'}"
+                                        :class="{
+                                            'is-desc': sortMultipleDataComputed.filter(i =>
+                                                i.field === column.field)[0].order === 'desc'
+                                        }"
                                     />
                                     {{ findIndexOfSortData(column) }}
                                     <button
@@ -117,7 +119,7 @@
                                 </template>
 
                                 <b-icon
-                                    v-else
+                                    v-else-if="column.sortable"
                                     :icon="sortIcon"
                                     :pack="iconPack"
                                     both
