@@ -13,3 +13,4 @@ You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtomm
 - [Jigawatt](https://jw.solar)
 - [Ross Coundon](https://leadent.digital)
 - [Alexander Bender](https://www.patreon.com/user/creators?u=31148264)
+- [Samuel Dubé](https://www.patreon.com/user/creators?u=31347040)
