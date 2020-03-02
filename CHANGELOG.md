@@ -7,7 +7,7 @@
 * Add ``selected`` slot to taginput
 * Add ``scrollable`` prop to table
 * Add ``sticky`` prop to table column
-* Add ``cellClass`` and ``headerClass`` prop to table column
+* Add ``cell-class`` and ``header-class`` prop to table column
 * Add slide animation to menu item and in the core code
 
 ### Fixes
@@ -17,6 +17,7 @@
 * Fix #2236 table performance on destroy
 * Fix #2257 button with ``icon`` and without default slot
 * Fix #2262 numberinput custom icons
+* Fix #2270 taginput when remove a tag on mobile
 * Fix #2272 check input ref before to focus (thanks @bender-a)
 * Fix #2273 end animation on dropdown
 

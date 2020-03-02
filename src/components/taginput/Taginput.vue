@@ -18,7 +18,7 @@
                     :ellipsis="ellipsis"
                     :closable="closable"
                     :title="ellipsis && getNormalizedTagText(tag)"
-                    @close="removeTag(index)">
+                    @close="removeTag(index, $event)">
                     <slot name="tag" :tag="tag">
                         {{ getNormalizedTagText(tag) }}
                     </slot>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { getValueByPath } from '../../utils/helpers'
+import { getValueByPath, isMobile } from '../../utils/helpers'
 import Tag from '../tag/Tag'
 import Autocomplete from '../autocomplete/Autocomplete'
 import config from '../../utils/config'
@@ -291,11 +291,11 @@ export default {
             return tag
         },
 
-        customOnBlur($event) {
+        customOnBlur(event) {
             // Add tag on-blur if not select only
             if (!this.autocomplete) this.addTag()
 
-            this.onBlur($event)
+            this.onBlur(event)
         },
 
         onSelect(option) {
@@ -307,10 +307,13 @@ export default {
             })
         },
 
-        removeTag(index) {
+        removeTag(index, event) {
             const tag = this.tags.splice(index, 1)[0]
             this.$emit('input', this.tags)
             this.$emit('remove', tag)
+            if (event && isMobile.any()) {
+                event.stopPropagation()
+            }
             return tag
         },
 
@@ -338,8 +341,8 @@ export default {
             }
         },
 
-        onTyping($event) {
-            this.$emit('typing', $event.trim())
+        onTyping(event) {
+            this.$emit('typing', event.trim())
         },
 
         emitInfiniteScroll() {
