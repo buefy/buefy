@@ -24,7 +24,7 @@
                         :tabstop="false"
                         ellipsis
                         closable
-                        @close="$refs.taginput.removeTag(index)">
+                        @close="$refs.taginput.removeTag(index, $event)">
                         {{tag.user.first_name}}
                     </b-tag>
                 </template>
