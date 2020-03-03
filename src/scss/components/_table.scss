@@ -22,11 +22,15 @@
     .icon {
         transition: transform $speed-slow $easing, opacity $speed $easing;
         &.is-desc {
-            transform: rotate(180deg) translateY(-50%) !important;
+            transform: rotate(180deg);
         }
         &.is-expanded {
             transform: rotate(90deg);
         }
+    }
+
+    .sort-icon.icon.is-desc {
+        transform: rotate(180deg) translateY(-50%) !important;
     }
 
     .table {
