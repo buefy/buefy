@@ -83,7 +83,7 @@ export default {
             selectedBeginDate: undefined,
             selectedEndDate: undefined,
             hoveredEndDate: undefined,
-            multipleSelectedDates: []
+            multipleSelectedDates: this.multiple && this.value ? this.value : []
         }
     },
     computed: {
@@ -206,11 +206,15 @@ export default {
         */
         handleSelectMultipleDates(date) {
             const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
-                selectedDate.getTime() === date.getTime()
+                selectedDate.getDate() === date.getDate() &&
+                selectedDate.getFullYear() === date.getFullYear() &&
+                selectedDate.getMonth() === date.getMonth()
             )
             if (multipleSelect.length) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
-                    selectedDate.getTime() !== date.getTime()
+                    selectedDate.getDate() !== date.getDate() ||
+                    selectedDate.getFullYear() !== date.getFullYear() ||
+                    selectedDate.getMonth() !== date.getMonth()
                 )
             } else {
                 this.multipleSelectedDates.push(date)

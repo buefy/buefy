@@ -62,7 +62,7 @@ export default {
     },
     data() {
         return {
-            multipleSelectedDates: []
+            multipleSelectedDates: this.multiple && this.value ? this.value : []
         }
     },
     computed: {
@@ -109,12 +109,16 @@ export default {
     },
     methods: {
         selectMultipleDates(date) {
-            const multipleSelct = this.multipleSelectedDates.find((selectedDate) =>
-                selectedDate.getTime() === date.getTime()
+            const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
+                selectedDate.getDate() === date.getDate() &&
+                selectedDate.getFullYear() === date.getFullYear() &&
+                selectedDate.getMonth() === date.getMonth()
             )
-            if (multipleSelct) {
+            if (multipleSelect.length) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
-                    selectedDate.getTime() !== date.getTime()
+                    selectedDate.getDate() !== date.getDate() ||
+                    selectedDate.getFullYear() !== date.getFullYear() ||
+                    selectedDate.getMonth() !== date.getMonth()
                 )
             } else {
                 this.multipleSelectedDates.push(date)

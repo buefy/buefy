@@ -12,6 +12,7 @@
 
 ### Fixes
 
+* Fix datepicker clearing selected array in the first selection when ``multiple``
 * Fix #2195 switch transition on Safari (thanks @bender-a)
 * Fix #2205 datepicker table rendering on Safari (thanks @bender-a)
 * Fix #2236 table performance on destroy
