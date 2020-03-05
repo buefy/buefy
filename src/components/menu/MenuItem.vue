@@ -93,7 +93,7 @@ export default {
             this.reset(this.$parent, menu)
             this.newExpanded = !this.newExpanded
             this.$emit('update:expanded', this.newActive)
-            if (menu.activable) {
+            if (menu && menu.activable) {
                 this.newActive = true
                 this.$emit('update:active', this.newActive)
             }
@@ -107,7 +107,7 @@ export default {
                         item.newExpanded = false
                         item.$emit('update:expanded', item.newActive)
                     }
-                    if (menu.activable) {
+                    if (menu && menu.activable) {
                         item.newActive = false
                         item.$emit('update:active', item.newActive)
                     }
@@ -116,7 +116,7 @@ export default {
         },
         getMenu() {
             let parent = this.$parent
-            while (!parent.$data._isMenu) {
+            while (parent && !parent.$data._isMenu) {
                 parent = parent.$parent
             }
             return parent
