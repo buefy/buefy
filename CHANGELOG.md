@@ -9,6 +9,7 @@
 * Add ``sticky`` prop to table column
 * Add ``cell-class`` and ``header-class`` prop to table column
 * Add slide animation to menu item and in the core code
+* #2290 Add ``activable`` prop to menu
 
 ### Fixes
 
