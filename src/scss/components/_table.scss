@@ -151,7 +151,7 @@
                     overflow-y: initial !important;
                 }
             }
-            tr:not(.is-subheading) {
+            tr:first-child {
                 th {
                     position: -webkit-sticky;
                     position: sticky;
