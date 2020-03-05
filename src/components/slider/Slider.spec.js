@@ -42,4 +42,12 @@ describe('BSlider', () => {
         wrapper.setProps({ step: 0.5 })
         expect(wrapper.vm.precision).toBe(1)
     })
+
+    describe('When biggerSliderFocus is set to true', () => {
+        it('renders a component with sliderFocus class', () => {
+            wrapper.setProps({biggerSliderFocus: true})
+            const subject = wrapper.find('.slider-focus')
+            expect(subject.exists()).toBeTruthy()
+        })
+    })
 })
