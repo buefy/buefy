@@ -9,11 +9,11 @@ $loading-full-page-icon-size: 5em !default;
     display: none;
     justify-content: center;
     overflow: hidden;
+    z-index: 999;
     &.is-active {
         display: flex
     }
     &.is-full-page {
-        z-index: 999;
         position: fixed;
         .loading-icon {
             &:after {
