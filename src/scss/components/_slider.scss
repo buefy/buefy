@@ -92,6 +92,14 @@ $slider-mark-size: 0.75rem !default;
         }
     }
 
+    &.slider-focus{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-top: -20px;
+        margin-bottom: -20px;
+        cursor: pointer;
+    }
+
     &.is-rounded {
         .b-slider-thumb {
             border-radius: $radius-rounded;
