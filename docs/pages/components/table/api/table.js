@@ -325,6 +325,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>height</code>',
+                description: 'Table fixed height in pixels',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link (if <code>paginated</code>)',
                 type: 'String',
@@ -551,7 +558,7 @@ export default [
             {
                 name: '<code>width</code>',
                 description: 'Column fixed width in pixels',
-                type: 'Number',
+                type: 'Number, String',
                 values: '—',
                 default: '—'
             },

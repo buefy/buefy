@@ -8,6 +8,7 @@
 * Add ``scrollable`` prop to table
 * Add ``sticky`` prop to table column
 * Add ``cell-class`` and ``header-class`` prop to table column
+* Add ``height`` prop to table
 * Add slide animation to menu item and in the core code
 * #2269 Add ``bigger-slider-focus`` prop to slider
 * #2290 Add ``activable`` prop to menu
@@ -23,6 +24,7 @@
 * Fix #2270 taginput when remove a tag on mobile
 * Fix #2272 check input ref before to focus (thanks @bender-a)
 * Fix #2273 end animation on dropdown
+* Fix #2292 sticky header using subheading
 * Fix #2293 focus on icon click when type "textarea"
 
 ## 0.8.12

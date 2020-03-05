@@ -1,5 +1,5 @@
 <template>
-    <div class="b-table" :class="tableWrapperClasses">
+    <div class="b-table" :class="rooClasses">
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
@@ -40,7 +40,14 @@
             </div>
         </div>
 
-        <div class="table-wrapper">
+        <div
+            class="table-wrapper"
+            :class="tableWrapperClasses"
+            :style="{
+                height: newHeight === undefined ? null :
+                (isNaN(newHeight) ? newHeight : newHeight + 'px')
+            }"
+        >
             <table
                 class="table"
                 :class="tableClasses"
@@ -500,7 +507,8 @@ export default {
         ariaPreviousLabel: String,
         ariaPageLabel: String,
         ariaCurrentLabel: String,
-        stickyHeader: Boolean
+        stickyHeader: Boolean,
+        height: [Number, String]
     },
     data() {
         return {
@@ -516,6 +524,7 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
+            newHeight: this.stickyHeader && !this.height ? '300px' : this.height,
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -541,10 +550,14 @@ export default {
         },
         tableWrapperClasses() {
             return {
-                'is-loading': this.loading,
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
                 'table-container': this.isScrollable
+            }
+        },
+        rooClasses() {
+            return {
+                'is-loading': this.loading
             }
         },
 
@@ -694,6 +707,10 @@ export default {
 
         newColumns(value) {
             this.checkSort()
+        },
+
+        height(value) {
+            this.newHeight = value
         },
 
         filters: {

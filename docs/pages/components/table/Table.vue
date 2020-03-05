@@ -104,7 +104,7 @@
                 <span class="tag is-info">0.8.13</span>
             </div>
             <p>
-                The default height is <code>300px</code> but you can overwrite it using <code>style</code> attribute, for example <code>:style="height: 150px"</code>.
+                The default height is <code>300px</code> but you can overwrite it using <code>height</code> prop, for example <code>:height="150px"</code>.
             </p>
         </Example>
 
