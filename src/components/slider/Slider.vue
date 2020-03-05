@@ -2,7 +2,7 @@
     <div
         class="b-slider"
         @click="onSliderClick"
-        :class="[size, type, rootClasses, {'slider-focus': biggerSliderFocus} ]">
+        :class="[size, type, rootClasses ]">
         <div
             class="b-slider-track"
             ref="slider">
@@ -168,7 +168,8 @@ export default {
             return {
                 'is-rounded': this.rounded,
                 'is-dragging': this.dragging,
-                'is-disabled': this.disabled
+                'is-disabled': this.disabled,
+                'slider-focus': this.biggerSliderFocus
             }
         }
     },
