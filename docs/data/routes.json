@@ -91,7 +91,8 @@
             "/",
             "documentation",
             "documentation/dialog"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/dropdown": {
         "title": "Dropdown",
@@ -103,7 +104,8 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/icon": {
         "title": "Icon",
@@ -151,8 +153,7 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -164,8 +165,7 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tag": {
         "title": "Tag",
@@ -213,8 +213,7 @@
             "/",
             "documentation",
             "documentation/notification"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/message": {
         "title": "Message",
@@ -250,8 +249,7 @@
             "/",
             "documentation",
             "documentation/field"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/input": {
         "title": "Input",
@@ -263,7 +261,8 @@
             "/",
             "documentation",
             "documentation/input"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/select": {
         "title": "Select",
@@ -287,8 +286,7 @@
             "/",
             "documentation",
             "documentation/autocomplete"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -324,7 +322,8 @@
             "/",
             "documentation",
             "documentation/switch"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datepicker": {
         "title": "Datepicker",
@@ -436,7 +435,8 @@
             "/",
             "documentation",
             "documentation/button"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/numberinput": {
         "title": "Numberinput",
@@ -485,7 +485,8 @@
             "/",
             "documentation",
             "documentation/slider"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/progress": {
         "title": "Progress",
@@ -497,8 +498,7 @@
             "/",
             "documentation",
             "documentation/progress"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/carousel": {
         "title": "Carousel",
@@ -510,8 +510,7 @@
             "/",
             "documentation",
             "documentation/carousel"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/rate": {
         "title": "Rate",
