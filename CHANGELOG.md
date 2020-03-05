@@ -21,6 +21,7 @@
 * Fix #2270 taginput when remove a tag on mobile
 * Fix #2272 check input ref before to focus (thanks @bender-a)
 * Fix #2273 end animation on dropdown
+* Fix #2293 focus on icon click when type "textarea"
 
 ## 0.8.12
 
