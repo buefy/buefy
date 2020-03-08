@@ -92,6 +92,11 @@ export declare type DialogConfig = {
     * Improve accessiblity when enabled.
     */
    ariaModal?: boolean;
+
+   /**
+    * CSS classes to be applied on modal
+    */
+   customClass?: string;
 }
 
 type PromptDialogConfig = DialogConfig & {
