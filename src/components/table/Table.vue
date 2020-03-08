@@ -44,8 +44,8 @@
             class="table-wrapper"
             :class="tableWrapperClasses"
             :style="{
-                height: newHeight === undefined ? null :
-                (isNaN(newHeight) ? newHeight : newHeight + 'px')
+                height: height === undefined ? null :
+                (isNaN(height) ? height : height + 'px')
             }"
         >
             <table
@@ -524,7 +524,6 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
-            newHeight: this.stickyHeader && !this.height ? '300px' : this.height,
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -707,10 +706,6 @@ export default {
 
         newColumns(value) {
             this.checkSort()
-        },
-
-        height(value) {
-            this.newHeight = value
         },
 
         filters: {

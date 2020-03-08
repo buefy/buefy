@@ -1,3 +1,5 @@
+$table-sticky-header-height: 300px !default;
+
 .table-wrapper {
     .table {
         margin-bottom: 0;
@@ -144,6 +146,7 @@
 
     .table-wrapper {
         &.has-sticky-header {
+            height: $table-sticky-header-height;
             overflow-y: auto;
             &.has-mobile-cards {
                 @include mobile {
