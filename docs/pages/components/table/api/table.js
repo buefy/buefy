@@ -620,7 +620,7 @@ export default [
             },
             {
                 name: '<code>header-selectable</code>',
-                description: 'Prevent text selection of header when setting this to `false`.',
+                description: 'Prevent text selection of header when setting this to <code>false</code>.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
