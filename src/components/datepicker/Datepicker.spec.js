@@ -8,6 +8,7 @@ let wrapper, defaultProps
 const newDate = (y, m, d) => {
     const date = new Date(Date.UTC(y, m, d))
     date.getDate = jest.fn(() => date.getUTCDate())
+    date.getMonth = jest.fn(() => date.getUTCMonth())
     return date
 }
 
@@ -40,6 +41,14 @@ describe('BDatepicker', () => {
             expect(wrapper.vm.monthNames).toEqual(defaultMonthNames)
             expect(wrapper.vm.dayNames).toEqual(defaultDayNames)
         })
+
+        it('manage props validator', () => {
+            const type = wrapper.vm.$options.props.type
+
+            expect(type.type).toBe(String)
+            expect(type.validator && type.validator('day')).toBeFalsy()
+            expect(type.validator && type.validator('month')).toBeTruthy()
+        })
     })
 
     beforeEach(() => {
@@ -64,6 +73,9 @@ describe('BDatepicker', () => {
                 transition: false
             }
         })
+
+        wrapper.vm.updateInternalState = jest.fn(() => wrapper.vm.updateInternalState)
+        wrapper.vm.togglePicker = jest.fn(() => wrapper.vm.togglePicker)
     })
 
     it('is called', () => {
@@ -84,22 +96,18 @@ describe('BDatepicker', () => {
 
     it('react accordingly when setting computedValue', () => {
         const date = new Date()
-        wrapper.vm.updateInternalState = jest.fn()
-        wrapper.vm.togglePicker = jest.fn()
         wrapper.vm.computedValue = date
-        expect(wrapper.vm.updateInternalState).toHaveBeenCalled()
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
         expect(wrapper.emitted()['input']).toBeTruthy()
     })
 
     it('react accordingly when changing v-model', () => {
         const date = new Date()
-        wrapper.vm.updateInternalState = jest.fn()
-        wrapper.vm.togglePicker = jest.fn()
         wrapper.setProps({
             value: date
         })
-        expect(wrapper.vm.updateInternalState).toHaveBeenCalled()
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
     })
 
@@ -190,9 +198,26 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.year).toBe(2021)
     })
 
+    it('handles accordingly the list of months', () => {
+        wrapper.setProps({
+            focusedDate: newDate(2021, 10, 16),
+            minDate: newDate(2021, 10, 15),
+            maxDate: null
+        })
+        expect(wrapper.vm.listOfMonths.filter((month) => !month.disabled).map((month) => month.name)).toEqual(['November', 'December'])
+
+        wrapper.setProps({
+            focusedDate: newDate(2021, 2, 1),
+            minDate: null,
+            maxDate: newDate(2021, 2, 15)
+        })
+        expect(wrapper.vm.listOfMonths.filter((month) => !month.disabled).map((month) => month.name)).toEqual(['January', 'February', 'March'])
+    })
+
     it('handles accordingly the list of years', () => {
         wrapper.setProps({
-            minDate: newDate(2017, 1, 1)
+            minDate: newDate(2017, 1, 1),
+            maxDate: null
         })
         expect(wrapper.vm.listOfYears).toEqual([2021, 2020, 2019, 2018, 2017])
 
@@ -204,13 +229,21 @@ describe('BDatepicker', () => {
 
     it('handles accordingly focus', () => {
         wrapper.setProps({
-            openOnFocus: true
+            openOnFocus: false
         })
         wrapper.vm.onFocus = jest.fn()
         wrapper.vm.togglePicker = jest.fn()
+
         wrapper.vm.handleOnFocus()
         expect(wrapper.vm.onFocus).toHaveBeenCalled()
-        expect(wrapper.vm.togglePicker).toHaveBeenCalled()
+        expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(0)
+
+        wrapper.setProps({
+            openOnFocus: true
+        })
+        wrapper.vm.handleOnFocus()
+        expect(wrapper.vm.onFocus).toHaveBeenCalled()
+        expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(1)
     })
 
     describe('#dateFormatter', () => {
@@ -238,17 +271,42 @@ describe('BDatepicker', () => {
             expect(formattedDate).toEqual('2019-4-1 - 2019-4-3')
         })
 
-        it('should format multiple dates passed via array', () => {
-            wrapper.setProps({
-                multiple: true
+        describe('multiple', () => {
+            beforeEach(() => {
+                wrapper.setProps({
+                    inline: true,
+                    multiple: true
+                })
+                wrapper.vm.updateInternalState = jest.fn(() => wrapper.vm.updateInternalState)
+                wrapper.vm.togglePicker = jest.fn(() => wrapper.vm.togglePicker)
             })
-            const dateToFormat = [
-                new Date(2019, 3, 1),
-                new Date(2019, 3, 13),
-                new Date(2019, 3, 3)
-            ]
-            const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-4-1, 2019-4-13, 2019-4-3')
+
+            it('should format multiple dates passed via array', () => {
+                const dateToFormat = [
+                    new Date(2019, 3, 1),
+                    new Date(2019, 3, 13),
+                    new Date(2019, 3, 3)
+                ]
+                const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
+                expect(formattedDate).toEqual('2019-4-1, 2019-4-13, 2019-4-3')
+            })
+
+            it('react accordingly when setting computedValue', () => {
+                const date = new Date()
+                wrapper.vm.computedValue = date
+                expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
+                expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(0)
+                expect(wrapper.emitted()['input']).toBeTruthy()
+            })
+
+            it('react accordingly when changing v-model', () => {
+                const date = new Date()
+                wrapper.setProps({
+                    value: date
+                })
+                expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
+                expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(0)
+            })
         })
     })
 
@@ -256,7 +314,8 @@ describe('BDatepicker', () => {
         it('should call dateFormatter, passing the date', () => {
             const mockDateFormatter = jest.fn()
             wrapper.setProps({
-                dateFormatter: mockDateFormatter
+                dateFormatter: mockDateFormatter,
+                closeOnClick: false
             })
             const date = new Date()
             wrapper.vm.formatValue(date)

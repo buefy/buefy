@@ -7,7 +7,7 @@ exports[`BDatepickerMonth render correctly 1`] = `
                 January
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 February
-                <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
                 March
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 April
@@ -17,7 +17,7 @@ exports[`BDatepickerMonth render correctly 1`] = `
                 June
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 July
-                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
+                <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 August
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 September

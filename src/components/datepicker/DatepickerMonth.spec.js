@@ -14,6 +14,7 @@ const newDate = (y, m, d) => {
 
 const thisMonth = new Date().getUTCMonth()
 let events = [
+    newDate(2018, 10, 10),
     newDate(2019, thisMonth, 2),
     newDate(2019, thisMonth, 6),
     {
@@ -63,7 +64,7 @@ describe('BDatepickerMonth', () => {
                 'January', 'February', 'March', 'April', 'May', 'June', 'July',
                 'August', 'September', 'October', 'November', 'December'
             ],
-            focusedDate: newDate(2018, 7, 11)
+            focusedDate: newDate(2019, thisMonth, 11)
         }))
 
         wrapper = shallowMount(BDatepickerMonth, {
@@ -94,6 +95,7 @@ describe('BDatepickerMonth', () => {
             events
         })
         expect(wrapper.vm.hasEvents).toBeTruthy()
+        expect(wrapper.vm.eventsInThisYear.length).toBe(events.length - 1)
     })
 
     it('emit chosen date', () => {
