@@ -45,6 +45,13 @@ export default {
                 'has-text-centered': this.centered,
                 'is-sticky': this.sticky
             }]
+        },
+
+        /**
+         * Return if column header is un-selectable
+         */
+        isHeaderUnSelectable() {
+            return !this.headerSelectable && this.sortable
         }
     },
     beforeMount() {
