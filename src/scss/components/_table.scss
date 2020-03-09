@@ -69,6 +69,7 @@ $table-sticky-header-height: 300px !default;
             &.is-sortable,
             &.is-sortable .th-wrap {
                 cursor: pointer;
+                user-select: none;
             }
             .multi-sort-cancel-icon {
                 margin-left: 10px;
