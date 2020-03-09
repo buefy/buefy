@@ -592,7 +592,7 @@ export default [
             },
             {
                 name: '<code>custom-sort</code>',
-                description: 'Custom sort method, works when is <code>sortable</code>',
+                description: 'Custom sort method, works when column is <code>sortable</code>',
                 type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
@@ -631,6 +631,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '-'
+            },
+            {
+                name: '<code>header-selectable</code>',
+                description: 'Whether the header text is selectable, works when column is <code>sortable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
