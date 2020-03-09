@@ -104,4 +104,55 @@ describe('BDatepickerMonth', () => {
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
         expect(wrapper.emitted()['input']).toBeTruthy()
     })
+
+    it('manage selectable dates as expected', () => {
+        const day = newDate(2019, 7, 7)
+
+        wrapper.setProps({
+            minDate: newDate(2019, 7, 17)
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: newDate(2019, 7, 1)
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: [newDate(2019, 5, 1), newDate(2019, 5, 2)]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+        wrapper.setProps({
+            selectableDates: [
+                newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 1),
+                newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 2),
+                day
+            ]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: null,
+            unselectableDates: [newDate(2019, 5, 1), newDate(2019, 5, 2)]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+        wrapper.setProps({
+            unselectableDates: [day]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: null,
+            unselectableDates: null,
+            unselectableDaysOfWeek: [0, 1]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+    })
 })
