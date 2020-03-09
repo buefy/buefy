@@ -277,7 +277,7 @@ export default [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when the value of datepicker is changed',
-                parameters: '<code>value: Number</code>'
+                parameters: '<code>value: Date</code>'
             },
             {
                 name: '<code>change-month</code>',
