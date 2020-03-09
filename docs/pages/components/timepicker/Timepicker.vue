@@ -18,7 +18,7 @@
             <p>Timepicker can also be shown inline with the <code>inline</code> prop, input is removed, set a <code>v-model</code> to get the date.</p>
         </Example>
 
-        <Example :component="ExGranularity" :code="ExGranularityCode" title="Ganularity" vertical>
+        <Example :component="ExGranularity" :code="ExGranularityCode" title="Granularity" vertical>
             <p>Timepicker can be set with a minute or hour ganularity with <code>incrementMinutes</code> or <code>incrementHours</code>.</p>
         </Example>
 
