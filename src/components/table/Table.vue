@@ -71,7 +71,8 @@
                             :class="[column.headerClass, {
                                 'is-current-sort': currentSortColumn === column,
                                 'is-sortable': column.sortable,
-                                'is-sticky': column.sticky
+                                'is-sticky': column.sticky,
+                                'is-unselectable': !column.headerSelectable
                             }]"
                             :style="{
                                 width: column.width === undefined ? null :
