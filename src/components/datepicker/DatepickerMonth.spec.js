@@ -8,10 +8,11 @@ let wrapper
 const newDate = (y, m, d) => {
     const date = new Date(Date.UTC(y, m, d))
     date.getDate = jest.fn(() => date.getUTCDate())
+    date.getMonth = jest.fn(() => date.getUTCMonth())
     return date
 }
 
-const thisMonth = new Date().getMonth()
+const thisMonth = new Date().getUTCMonth()
 let events = [
     newDate(2019, thisMonth, 2),
     newDate(2019, thisMonth, 6),
@@ -62,7 +63,7 @@ describe('BDatepickerMonth', () => {
                 'January', 'February', 'March', 'April', 'May', 'June', 'July',
                 'August', 'September', 'October', 'November', 'December'
             ],
-            focusedDate: newDate(2018, 7, 1)
+            focusedDate: newDate(2018, 7, 11)
         }))
 
         wrapper = shallowMount(BDatepickerMonth, {

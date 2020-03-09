@@ -15,9 +15,9 @@ exports[`BDatepickerMonth render correctly 1`] = `
                 May
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 June
-                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
-                July
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
+                July
+                <!----></a><a role="button" href="#" class="datepicker-cell is-selectable">
                 August
                 <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable">
                 September
