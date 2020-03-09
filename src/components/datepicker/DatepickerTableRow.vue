@@ -144,9 +144,9 @@ export default {
             return resWeek
         },
         /*
-        * Check that selected day is within earliest/latest params and
-        * is within this month
-        */
+         * Check that selected day is within earliest/latest params and
+         * is within this month
+         */
         selectableDate(day) {
             const validity = []
 
