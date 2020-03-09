@@ -27,10 +27,7 @@ export default {
         subheading: [String, Number],
         customSort: Function,
         sticky: Boolean,
-        headerSelectable: {
-            type: Boolean,
-            default: true
-        },
+        headerSelectable: Boolean,
         headerClass: String,
         cellClass: String,
         internal: Boolean // Used internally by Table
