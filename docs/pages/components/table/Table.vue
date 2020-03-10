@@ -132,11 +132,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/table'
+    import variables from './variables/table'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -193,6 +195,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSandbox,
                 ExSelection,
