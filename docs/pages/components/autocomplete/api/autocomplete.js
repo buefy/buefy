@@ -107,6 +107,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>max-height</code>',
+                description: 'Max height of dropdown content',
+                type: 'String, Number',
+                values: '—',
+                default: '<code>200px</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

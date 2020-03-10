@@ -1,3 +1,5 @@
+$dropdown-content-max-height: 200px !default;
+
 .autocomplete {
     position: relative;
     .dropdown-menu {
@@ -11,7 +13,7 @@
     }
     .dropdown-content {
         overflow: auto;
-        max-height: 200px;
+        max-height: $dropdown-content-max-height;
     }
     .dropdown-item {
         white-space: nowrap;
