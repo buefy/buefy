@@ -1,0 +1,32 @@
+$sidebar-background: $modal-background-background-color !default;
+
+.b-sidebar {
+    background-color: $white;
+    box-shadow: 5px 0px 13px 3px rgba($black, 0.1);
+    position: absolute;
+    z-index: 35;
+    width: 240px;
+    max-width: 75%;
+    left: 0;
+    top: 0;
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        &.is-#{$name} {
+            background-color: $color;
+        }
+    }
+    &.is-fullheight {
+        height: 100%;
+        max-height: 100%;
+        overflow: hidden;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-content: stretch;
+    }
+    .sidebar-background {
+        @include overlay;
+        background:$sidebar-background;
+    }
+    // position: fixed --> solo se non static ?
+}
