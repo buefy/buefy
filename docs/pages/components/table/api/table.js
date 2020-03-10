@@ -479,6 +479,11 @@ export default [
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
             },
             {
+                name: '<code>dragleave</code>',
+                description: 'Triggers after dragging over a row',
+                parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
                 parameters: '<code> row: Object </code>'
