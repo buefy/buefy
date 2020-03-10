@@ -28,7 +28,7 @@
                 v-trap-focus="trapFocus">
                 <div
                     class="dropdown-content"
-                    :role="ariaRoleMenu">
+                    :role="ariaRole">
                     <slot/>
                 </div>
             </div>
@@ -74,7 +74,14 @@ export default {
         },
         ariaRole: {
             type: String,
-            default: ''
+            validator(value) {
+                return [
+                    'menu',
+                    'list',
+                    'dialog'
+                ].indexOf(value) > -1
+            },
+            default: null
         },
         animation: {
             type: String,
@@ -123,9 +130,6 @@ export default {
                     ? DEFAULT_CLOSE_OPTIONS
                     : []
                 : this.canClose
-        },
-        ariaRoleMenu() {
-            return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
         }
     },
     watch: {

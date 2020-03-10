@@ -254,6 +254,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>aria-next-label</code>',
+                description: 'Accessibility label for the next month button.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-previous-label</code>',
+                description: 'Accessibility label for the previous month button.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },,
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
