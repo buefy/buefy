@@ -10,8 +10,10 @@
 * Add ``cell-class`` and ``header-class`` prop to table column
 * Add ``height`` prop to table
 * Add slide animation to menu item and in the core code
-* #2269 Add ``bigger-slider-focus`` prop to slider
+* Improve accessibility to datepicker (thanks @service-paradis)
+* #2269 Add ``bigger-slider-focus`` prop to slider (thanks @melogustavo)
 * #2290 Add ``activable`` prop to menu
+* #2308 Add ``max-height`` prop to autocomplete
 
 ### Fixes
 
