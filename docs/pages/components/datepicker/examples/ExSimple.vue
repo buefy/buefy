@@ -9,7 +9,8 @@
             <b-datepicker
                 :show-week-number="showWeekNumber"
                 placeholder="Click to select..."
-                icon="calendar-today">
+                icon="calendar-today"
+                trap-focus>
             </b-datepicker>
         </b-field>
     </section>

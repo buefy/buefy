@@ -332,6 +332,12 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>filters-event</code>',
+                description: 'Add a native event to filter',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link (if <code>paginated</code>)',
                 type: 'String',
@@ -479,6 +485,11 @@ export default [
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
             },
             {
+                name: '<code>dragleave</code>',
+                description: 'Triggers after dragging over a row',
+                parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
                 parameters: '<code> row: Object </code>'
@@ -492,6 +503,11 @@ export default [
                 name: '<code>filters-change</code>',
                 description: 'Triggers when filter change',
                 parameters: '<code> filter: Object </code>'
+            },
+            {
+                name: '<code>filters-event-[filters-event]</code>',
+                description: 'Triggers <code>filters-event</code> event from filter (it works only with Vue 2.6.x)',
+                parameters: '<code> event: Event </code>, <code> filter: Object </code>'
             }
         ],
         methods: [
@@ -617,6 +633,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>header-selectable</code>',
+                description: 'Prevent text selection of header when setting this to <code>false</code>.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>header-class</code>',

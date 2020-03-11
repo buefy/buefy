@@ -35,7 +35,11 @@
                 :class="{ 'is-opened-top': !isListInViewportVertically }"
                 v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
-                <div class="dropdown-content" v-show="isActive">
+                <div
+                    class="dropdown-content"
+                    v-show="isActive"
+                    :style="contentStyle"
+                >
                     <div
                         v-if="hasHeaderSlot"
                         class="dropdown-item">
@@ -101,7 +105,8 @@ export default {
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
-        clearable: Boolean
+        clearable: Boolean,
+        maxHeight: [String, Number]
     },
     data() {
         return {
@@ -172,11 +177,19 @@ export default {
         hasFooterSlot() {
             return !!this.$slots.footer
         },
+
         clearButton() {
             if (this.clearable && this.newValue) {
                 return 'close-circle'
             }
             return ''
+        },
+
+        contentStyle() {
+            return {
+                maxHeight: this.maxHeight === undefined
+                    ? null : (isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px')
+            }
         }
     },
     watch: {
