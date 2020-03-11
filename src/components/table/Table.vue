@@ -69,7 +69,7 @@
                             v-for="(column, index) in visibleColumns"
                             :key="index"
                             :class="[column.headerClass, {
-                                'is-current-sort': currentSortColumn === column,
+                                'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky,
                                 'is-unselectable': !column.headerSelectable
@@ -127,7 +127,7 @@
                                 </template>
 
                                 <b-icon
-                                    v-else-if="column.sortable"
+                                    v-else-if="column.sortable && !sortMultiple"
                                     :icon="sortIcon"
                                     :pack="iconPack"
                                     both
