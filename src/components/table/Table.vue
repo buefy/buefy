@@ -198,6 +198,7 @@
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
                                     <b-input
+                                        @[filtersEvent].native="onFiltersEvent"
                                         v-model="filters[column.field]"
                                         :type="column.numeric ? 'number' : 'text'" />
                                 </template>
@@ -509,7 +510,11 @@ export default {
         ariaPageLabel: String,
         ariaCurrentLabel: String,
         stickyHeader: Boolean,
-        height: [Number, String]
+        height: [Number, String],
+        filtersEvent: {
+            type: String,
+            default: ''
+        }
     },
     data() {
         return {
@@ -737,6 +742,9 @@ export default {
         }
     },
     methods: {
+        onFiltersEvent(event) {
+            this.$emit(`filters-event-${this.filtersEvent}`, { event, filters: this.filters })
+        },
         findIndexOfSortData(column) {
             let sortObj = this.sortMultipleDataComputed.filter((i) =>
                 i.field === column.field)[0]

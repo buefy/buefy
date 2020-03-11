@@ -332,6 +332,12 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>filters-event</code>',
+                description: 'Add a native event to filter',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link (if <code>paginated</code>)',
                 type: 'String',
@@ -497,6 +503,11 @@ export default [
                 name: '<code>filters-change</code>',
                 description: 'Triggers when filter change',
                 parameters: '<code> filter: Object </code>'
+            },
+            {
+                name: '<code>filters-event-[filters-event]</code>',
+                description: 'Triggers <code>filters-event</code> event from filter (it works only with Vue 2.6.x)',
+                parameters: '<code> event: Event </code>, <code> filter: Object </code>'
             }
         ],
         methods: [
