@@ -43,7 +43,7 @@ $switch-active-background-color: $primary !default;
             }
             &.is-elastic:before {
                 transform: scaleX(1.5);
-                border-radius: 100%;
+                border-radius: $radius;
             }
         }
         &:checked + .check {
@@ -102,6 +102,10 @@ $switch-active-background-color: $primary !default;
                 &:before {
                     border-radius: $radius-rounded;
                 }
+            }
+            &.is-elastic:before {
+                transform: scaleX(1.5);
+                border-radius: $radius-rounded;
             }
         }
     }
