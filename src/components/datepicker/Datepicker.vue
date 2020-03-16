@@ -364,11 +364,15 @@ export default {
         openOnFocus: Boolean,
         iconPrev: {
             type: String,
-            default: config.defaultIconPrev
+            default: () => {
+                return config.defaultIconPrev
+            }
         },
         iconNext: {
             type: String,
-            default: config.defaultIconNext
+            default: () => {
+                return config.defaultIconNext
+            }
         },
         yearsRange: {
             type: Array,
@@ -424,7 +428,9 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         ariaNextLabel: String,
         ariaPreviousLabel: String

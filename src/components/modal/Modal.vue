@@ -90,7 +90,9 @@ export default {
         fullScreen: Boolean,
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         customClass: String,
         ariaRole: {
