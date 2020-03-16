@@ -117,7 +117,9 @@ export default {
         },
         container: {
             type: String,
-            default: config.defaultContainerElement
+            default: () => {
+                return config.defaultContainerElement
+            }
         },
         focusOn: {
             type: String,
@@ -125,7 +127,9 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         ariaRole: {
             type: String,
