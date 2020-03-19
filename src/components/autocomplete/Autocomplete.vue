@@ -32,8 +32,7 @@
         <transition name="fade">
             <div
                 class="dropdown-menu"
-                :class="{ 'is-opened-top': dropdownPosition==='top' ||
-                (dropdownPosition==='auto' && !isListInViewportVertically ) }"
+                :class="{ 'is-opened-top': isOpenedTop }"
                 v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
                 <div
@@ -195,6 +194,13 @@ export default {
                 maxHeight: this.maxHeight === undefined
                     ? null : (isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px')
             }
+        },
+
+        /**
+         * Apply dropdownPosition property
+         */
+        isOpenedTop() {
+            return this.dropdownPosition === 'top' || (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
         }
     },
     watch: {
