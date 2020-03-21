@@ -112,4 +112,27 @@ Buefy is an open source MIT project if you are interested in supporting this pro
 
 Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
 
-Copyright (c), [Rafael Beraldo](https://twitter.com/rafaelpimpa).
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://twitter.com/rafaelpimpa"><img src="https://avatars2.githubusercontent.com/u/18370605?v=4" width="38px;" alt=""/><br /><sub><b>Rafael Beraldo</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=rafaelpimpa" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://edutechno.ca"><img src="https://avatars1.githubusercontent.com/u/12817388?v=4" width="38px;" alt=""/><br /><sub><b>Alexandre Paradis</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=service-paradis" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/yxngl"><img src="https://avatars0.githubusercontent.com/u/1696853?v=4" width="38px;" alt=""/><br /><sub><b>Yuxing Liao</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=yxngl" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/adrlen"><img src="https://avatars2.githubusercontent.com/u/1764097?v=4" width="38px;" alt=""/><br /><sub><b>Adrien</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=adrlen" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://paypal.me/apolokak"><img src="https://avatars2.githubusercontent.com/u/30395693?v=4" width="38px;" alt=""/><br /><sub><b>Apolokak Lab</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=apolokaklab" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/wanxe"><img src="https://avatars3.githubusercontent.com/u/10264065?v=4" width="38px;" alt=""/><br /><sub><b>Jorge Nieto</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=wanxe" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/mateuswetah"><img src="https://avatars0.githubusercontent.com/u/1184874?v=4" width="38px;" alt=""/><br /><sub><b>Mateus Machado Luna</b></sub></a><br /><a href="https://github.com/jtommy/Buefy/commits?author=mateuswetah" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
