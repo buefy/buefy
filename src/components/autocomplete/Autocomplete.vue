@@ -16,7 +16,7 @@
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
-            :use-html5-validation="useHtml5Validation"
+            :use-html5-validation="$data._useHtml5Validation"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
@@ -122,7 +122,8 @@ export default {
             isListInViewportVertically: true,
             hasFocus: false,
             _isAutocomplete: true,
-            _elementRef: 'input'
+            _elementRef: 'input',
+            _useHtml5Validation: false
         }
     },
     computed: {
@@ -248,7 +249,13 @@ export default {
          */
         value(value) {
             this.newValue = value
-            !this.isValid && this.$refs.input.checkHtml5Validity()
+            if (this.useHtml5Validation) {
+                this.$nextTick(() => {
+                    this.$data._useHtml5Validation = true
+                    this.$refs.input.checkHtml5Validity()
+                    this.$data._useHtml5Validationn = false
+                })
+            }
         },
 
         /**
