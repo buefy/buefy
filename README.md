@@ -95,9 +95,14 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 * **Y**: Major (breaking changes)
 * **Z**: Minor or patch
 
-## Maintainers
+## Core Team
 
-* [Walter Tommasi](https://twitter.com/walter_tommasi)
+<table>
+  <tr>
+    <td align="center"><a href="https://twitter.com/walter_tommasi"><img src="https://avatars0.githubusercontent.com/u/8029488?v=4" width="76px;" alt=""/><br /><sub><b>Walter Tommasi</b></sub></a><br /></td>
+  </tr>
+</table>
+
 
 ## Supporting through Patreon
 
@@ -108,10 +113,6 @@ Buefy is an open source MIT project if you are interested in supporting this pro
   </a>
 </p>
 
-## License
-
-Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -121,14 +122,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://twitter.com/rafaelpimpa"><img src="https://avatars2.githubusercontent.com/u/18370605?v=4" width="38px;" alt=""/><br /><sub><b>Rafael Beraldo</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=rafaelpimpa" title="Code">💻</a></td>
-    <td align="center"><a href="https://edutechno.ca"><img src="https://avatars1.githubusercontent.com/u/12817388?v=4" width="38px;" alt=""/><br /><sub><b>Alexandre Paradis</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=service-paradis" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/yxngl"><img src="https://avatars0.githubusercontent.com/u/1696853?v=4" width="38px;" alt=""/><br /><sub><b>Yuxing Liao</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=yxngl" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/adrlen"><img src="https://avatars2.githubusercontent.com/u/1764097?v=4" width="38px;" alt=""/><br /><sub><b>Adrien</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=adrlen" title="Code">💻</a></td>
-    <td align="center"><a href="http://paypal.me/apolokak"><img src="https://avatars2.githubusercontent.com/u/30395693?v=4" width="38px;" alt=""/><br /><sub><b>Apolokak Lab</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=apolokaklab" title="Code">💻</a></td>
-    <td align="center"><a href="http://owen.com.br"><img src="https://avatars1.githubusercontent.com/u/1490347?v=4" width="38px;" alt=""/><br /><sub><b>Antério Vieira</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=anteriovieira" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/wanxe"><img src="https://avatars3.githubusercontent.com/u/10264065?v=4" width="38px;" alt=""/><br /><sub><b>Jorge Nieto</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=wanxe" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/mateuswetah"><img src="https://avatars0.githubusercontent.com/u/1184874?v=4" width="38px;" alt=""/><br /><sub><b>Mateus Machado Luna</b></sub></a><br /><a href="https://github.com/jtommy/buefy/commits?author=mateuswetah" title="Code">💻</a></td>
+    <td align="center"><a href="http://twitter.com/rafaelpimpa"><img src="https://avatars2.githubusercontent.com/u/18370605?v=4" width="38px;" alt=""/><br /><sub><b>Rafael Beraldo</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=rafaelpimpa" title="Code">💻</a></td>
+    <td align="center"><a href="https://edutechno.ca"><img src="https://avatars1.githubusercontent.com/u/12817388?v=4" width="38px;" alt=""/><br /><sub><b>Alexandre Paradis</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=service-paradis" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/yxngl"><img src="https://avatars0.githubusercontent.com/u/1696853?v=4" width="38px;" alt=""/><br /><sub><b>Yuxing Liao</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=yxngl" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/adrlen"><img src="https://avatars2.githubusercontent.com/u/1764097?v=4" width="38px;" alt=""/><br /><sub><b>Adrien</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=adrlen" title="Code">💻</a></td>
+    <td align="center"><a href="http://paypal.me/apolokak"><img src="https://avatars2.githubusercontent.com/u/30395693?v=4" width="38px;" alt=""/><br /><sub><b>Apolokak Lab</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=apolokaklab" title="Code">💻</a></td>
+    <td align="center"><a href="http://owen.com.br"><img src="https://avatars1.githubusercontent.com/u/1490347?v=4" width="38px;" alt=""/><br /><sub><b>Antério Vieira</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=anteriovieira" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/wanxe"><img src="https://avatars3.githubusercontent.com/u/10264065?v=4" width="38px;" alt=""/><br /><sub><b>Jorge Nieto</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=wanxe" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mateuswetah"><img src="https://avatars0.githubusercontent.com/u/1184874?v=4" width="38px;" alt=""/><br /><sub><b>Mateus Machado Luna</b></sub></a><br /><a href="https://github.com/buefy/buefy/commits?author=mateuswetah" title="Code">💻</a></td>
   </tr>
 </table>
 
@@ -137,3 +138,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
