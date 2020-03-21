@@ -85,13 +85,14 @@ describe('BAutocomplete', () => {
         expect($dropdown.isVisible()).toBeFalsy()
     })
 
-    it('check validity when value change', () => {
+    it('check validity when value change', async () => {
         wrapper.setProps({ data: DATA_LIST })
         wrapper.vm.$refs.input.checkHtml5Validity = jest.fn()
 
         wrapper.vm.isValid = false
         wrapper.setProps({ value: 'test' })
 
+        await wrapper.vm.$nextTick()
         expect(wrapper.vm.$refs.input.checkHtml5Validity).toBeCalled()
     })
 
