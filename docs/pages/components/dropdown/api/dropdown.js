@@ -52,6 +52,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>expanded</code>',
+                description: 'Dropdown will be expanded (full-width)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>aria-role</code>',
                 description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',
