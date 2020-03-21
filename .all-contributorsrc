@@ -1,5 +1,5 @@
 {
-  "projectName": "Buefy",
+  "projectName": "buefy",
   "projectOwner": "jtommy",
   "repoType": "github",
   "repoHost": "https://github.com",
@@ -15,56 +15,72 @@
       "name": "Rafael Beraldo",
       "avatar_url": "https://avatars2.githubusercontent.com/u/18370605?v=4",
       "profile": "http://twitter.com/rafaelpimpa",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "service-paradis",
       "name": "Alexandre Paradis",
       "avatar_url": "https://avatars1.githubusercontent.com/u/12817388?v=4",
       "profile": "https://edutechno.ca",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "yxngl",
       "name": "Yuxing Liao",
       "avatar_url": "https://avatars0.githubusercontent.com/u/1696853?v=4",
       "profile": "https://github.com/yxngl",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "adrlen",
       "name": "Adrien",
       "avatar_url": "https://avatars2.githubusercontent.com/u/1764097?v=4",
       "profile": "https://github.com/adrlen",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "apolokaklab",
       "name": "Apolokak Lab",
       "avatar_url": "https://avatars2.githubusercontent.com/u/30395693?v=4",
       "profile": "http://paypal.me/apolokak",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "anteriovieira",
       "name": "Antério Vieira",
       "avatar_url": "https://avatars1.githubusercontent.com/u/1490347?v=4",
       "profile": "http://owen.com.br",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "wanxe",
       "name": "Jorge Nieto",
       "avatar_url": "https://avatars3.githubusercontent.com/u/10264065?v=4",
       "profile": "https://github.com/wanxe",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "mateuswetah",
       "name": "Mateus Machado Luna",
       "avatar_url": "https://avatars0.githubusercontent.com/u/1184874?v=4",
       "profile": "https://github.com/mateuswetah",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
