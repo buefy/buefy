@@ -15,63 +15,56 @@
       "name": "Rafael Beraldo",
       "avatar_url": "https://avatars2.githubusercontent.com/u/18370605?v=4",
       "profile": "http://twitter.com/rafaelpimpa",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
     },
     {
       "login": "service-paradis",
       "name": "Alexandre Paradis",
       "avatar_url": "https://avatars1.githubusercontent.com/u/12817388?v=4",
       "profile": "https://edutechno.ca",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
     },
     {
       "login": "yxngl",
       "name": "Yuxing Liao",
       "avatar_url": "https://avatars0.githubusercontent.com/u/1696853?v=4",
       "profile": "https://github.com/yxngl",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
     },
     {
       "login": "adrlen",
       "name": "Adrien",
       "avatar_url": "https://avatars2.githubusercontent.com/u/1764097?v=4",
       "profile": "https://github.com/adrlen",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
     },
     {
       "login": "apolokaklab",
       "name": "Apolokak Lab",
       "avatar_url": "https://avatars2.githubusercontent.com/u/30395693?v=4",
       "profile": "http://paypal.me/apolokak",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
+    },
+    {
+      "login": "anteriovieira",
+      "name": "Antério Vieira",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1490347?v=4",
+      "profile": "http://owen.com.br",
+      "contributions": []
     },
     {
       "login": "wanxe",
       "name": "Jorge Nieto",
       "avatar_url": "https://avatars3.githubusercontent.com/u/10264065?v=4",
       "profile": "https://github.com/wanxe",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
     },
     {
       "login": "mateuswetah",
       "name": "Mateus Machado Luna",
       "avatar_url": "https://avatars0.githubusercontent.com/u/1184874?v=4",
       "profile": "https://github.com/mateuswetah",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": []
     }
   ],
   "contributorsPerLine": 7
