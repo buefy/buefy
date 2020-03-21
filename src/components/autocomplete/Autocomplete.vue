@@ -32,7 +32,7 @@
         <transition name="fade">
             <div
                 class="dropdown-menu"
-                :class="{ 'is-opened-top': !isListInViewportVertically }"
+                :class="{ 'is-opened-top': isOpenedTop }"
                 v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
                 <div
@@ -106,7 +106,11 @@ export default {
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
         clearable: Boolean,
-        maxHeight: [String, Number]
+        maxHeight: [String, Number],
+        dropdownPosition: {
+            type: String,
+            default: 'auto'
+        }
     },
     data() {
         return {
@@ -190,6 +194,13 @@ export default {
                 maxHeight: this.maxHeight === undefined
                     ? null : (isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px')
             }
+        },
+
+        /**
+         * Apply dropdownPosition property
+         */
+        isOpenedTop() {
+            return this.dropdownPosition === 'top' || (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
         }
     },
     watch: {
@@ -198,15 +209,17 @@ export default {
          * to open upwards.
          */
         isActive(active) {
-            if (active) {
-                this.calcDropdownInViewportVertical()
-            } else {
-                this.$nextTick(() => this.setHovered(null))
-                // Timeout to wait for the animation to finish before recalculating
-                setTimeout(() => {
+            if (this.dropdownPosition === 'auto') {
+                if (active) {
                     this.calcDropdownInViewportVertical()
-                }, 100)
+                } else {
+                    // Timeout to wait for the animation to finish before recalculating
+                    setTimeout(() => {
+                        this.calcDropdownInViewportVertical()
+                    }, 100)
+                }
             }
+            if (active) this.$nextTick(() => this.setHovered(null))
         },
 
         /**
@@ -438,7 +451,7 @@ export default {
     created() {
         if (typeof window !== 'undefined') {
             document.addEventListener('click', this.clickedOutside)
-            window.addEventListener('resize', this.calcDropdownInViewportVertical)
+            if (this.dropdownPosition === 'auto') window.addEventListener('resize', this.calcDropdownInViewportVertical)
         }
     },
     mounted() {
@@ -450,7 +463,7 @@ export default {
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
-            window.removeEventListener('resize', this.calcDropdownInViewportVertical)
+            if (this.dropdownPosition === 'auto') window.removeEventListener('resize', this.calcDropdownInViewportVertical)
         }
         if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
