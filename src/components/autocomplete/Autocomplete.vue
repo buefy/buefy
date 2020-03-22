@@ -16,7 +16,7 @@
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
-            :use-html5-validation="$data._useHtml5Validation"
+            :use-html5-validation="false"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
@@ -122,8 +122,7 @@ export default {
             isListInViewportVertically: true,
             hasFocus: false,
             _isAutocomplete: true,
-            _elementRef: 'input',
-            _useHtml5Validation: false
+            _elementRef: 'input'
         }
     },
     computed: {
@@ -249,13 +248,6 @@ export default {
          */
         value(value) {
             this.newValue = value
-            if (this.useHtml5Validation) {
-                this.$nextTick(() => {
-                    this.$data._useHtml5Validation = true
-                    this.$refs.input.checkHtml5Validity()
-                    this.$data._useHtml5Validationn = false
-                })
-            }
         },
 
         /**
@@ -291,6 +283,7 @@ export default {
                 this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
             }
             closeDropdown && this.$nextTick(() => { this.isActive = false })
+            this.checkValidity()
         },
 
         /**
@@ -450,9 +443,17 @@ export default {
             const currentValue = this.getValue(this.selected)
             if (currentValue && currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
+            this.checkValidity()
         },
         clearInputText() {
             this.newValue = ''
+        },
+        checkValidity() {
+            if (this.useHtml5Validation) {
+                this.$nextTick(() => {
+                    this.checkHtml5Validity()
+                })
+            }
         }
     },
     created() {
