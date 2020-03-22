@@ -29,7 +29,7 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
-                :use-html5-validation="useHtml5Validation"
+                :use-html5-validation="false"
                 @click.native="onInputClick"
                 @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
@@ -188,7 +188,7 @@
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
-            :use-html5-validation="useHtml5Validation"
+            :use-html5-validation="false"
             @change.native="onChangeNativePicker"
             @focus="onFocus"
             @blur="onBlur"/>
@@ -459,6 +459,11 @@ export default {
                 this.updateInternalState(value)
                 if (!this.multiple) this.togglePicker(false)
                 this.$emit('input', value)
+                if (this.useHtml5Validation) {
+                    this.$nextTick(() => {
+                        this.checkHtml5Validity()
+                    })
+                }
             }
         },
         listOfMonths() {
@@ -544,7 +549,6 @@ export default {
         value(value) {
             this.updateInternalState(value)
             if (!this.multiple) this.togglePicker(false)
-            !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
         focusedDate(value) {
