@@ -68,6 +68,7 @@
     "@fortawesome/fontawesome-free": "5.3.1",
     "@mdi/font": "4.8.95",
     "@vue/test-utils": "1.0.0-beta.29",
+    "all-contributors-cli": "^6.14.0",
     "autoprefixer": "7.1.1",
     "axios": "0.18.1",
     "babel-core": "6.25.0",

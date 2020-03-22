@@ -29,7 +29,7 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
-                :use-html5-validation="useHtml5Validation"
+                :use-html5-validation="false"
                 @click.native="onInputClick"
                 @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
@@ -188,7 +188,7 @@
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
-            :use-html5-validation="useHtml5Validation"
+            :use-html5-validation="false"
             @change.native="onChangeNativePicker"
             @focus="onFocus"
             @blur="onBlur"/>
@@ -364,11 +364,15 @@ export default {
         openOnFocus: Boolean,
         iconPrev: {
             type: String,
-            default: config.defaultIconPrev
+            default: () => {
+                return config.defaultIconPrev
+            }
         },
         iconNext: {
             type: String,
-            default: config.defaultIconNext
+            default: () => {
+                return config.defaultIconNext
+            }
         },
         yearsRange: {
             type: Array,
@@ -424,7 +428,9 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         ariaNextLabel: String,
         ariaPreviousLabel: String
@@ -453,6 +459,11 @@ export default {
                 this.updateInternalState(value)
                 if (!this.multiple) this.togglePicker(false)
                 this.$emit('input', value)
+                if (this.useHtml5Validation) {
+                    this.$nextTick(() => {
+                        this.checkHtml5Validity()
+                    })
+                }
             }
         },
         listOfMonths() {
@@ -538,7 +549,6 @@ export default {
         value(value) {
             this.updateInternalState(value)
             if (!this.multiple) this.togglePicker(false)
-            !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
         focusedDate(value) {
