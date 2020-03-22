@@ -103,7 +103,7 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
   </tr>
 </table>
 
-Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Berardo</a>, the original author.
+Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
 
 ## Supporting through Patreon
 
