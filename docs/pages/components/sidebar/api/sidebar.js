@@ -1,31 +1,10 @@
 export default [
   {
-      title: 'Navbar',
+      title: 'Sidebar',
       props: [
           {
-              name: '<code>transparent</code>',
-              description: 'Remove any hover or active background from the navbar items',
-              type: 'Boolean',
-              values: '—',
-              default: 'false'
-          },
-          {
-              name: '<code>fixed-top</code>',
-              description: 'Fixes the navbar to the top of the page',
-              type: 'Boolean',
-              values: '—',
-              default: '<code>false</code>'
-          },
-          {
-              name: '<code>fixed-bottom</code>',
-              description: 'Fixes the navbar to the bottom of the page',
-              type: 'Boolean',
-              values: '—',
-              default: '<code>false</code>'
-          },
-          {
-              name: '<code>is-active</code>',
-              description: 'To control the behaviour of the mobile menu programmatically, use the <code>.sync</code> modifier to make it two-way binding',
+              name: '<code>open</code>',
+              description: 'To control the behaviour of the sidebar programmatically, use the <code>.sync</code> modifier to make it two-way binding',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
@@ -41,132 +20,81 @@ export default [
               default: '—'
             },
             {
-                name: '<code>wrapper-class</code>',
-                description: 'To wrap the navbar content into an div with the provided class',
-                type: 'String',
+                name: '<code>can-cancel</code>',
+                description: `Can close Modal by clicking 'X', pressing escape or clicking outside`,
+                type: 'Boolean, Array',
+                values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
+                default: `<code>['escape', 'x', 'outside']</code>`
+            },
+            {
+                name: '<code>on-cancel</code>',
+                description: `Callback function to call after user canceled (clicked 'X' / pressed escape / clicked outside)`,
+                type: 'Function',
                 values: '—',
                 default: '—'
             },
             {
-                name: '<code>close-on-click</code>',
-                description: 'Control the behavior of the mobile menu by clicking on a link or outside the menu',
+                name: '<code>fullwidth</code>',
+                description: 'Show sidebar in fullwidth.',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
-                default: '<code>true</code>'
+                values: '-',
+                default: '<code>false</code>'
             },
             {
-                name: '<code>mobile-burger</code>',
-                description: 'Use to display or not the burger on mobile resolution.',
+                name: '<code>fullheight</code>',
+                description: 'Show sidebar in fullheight.',
                 type: 'Boolean',
-                values: '<code>true</code>, <code>false</code>',
-                default: '<code>true</code>'
+                values: '-',
+                default: '<code>false</code>'
             },
             {
-                name: '<code>spaced</code>',
-                description: 'Sets Top and Bottom paddings with 1rem, Left and Right paddings with 2rem',
+                name: '<code>mobile</code>',
+                description: 'Reduce width on mobile',
                 type: 'Boolean',
                 values: '—',
                 default: 'false'
             },
             {
-                name: '<code>shadow</code>',
-                description: 'Add a shadow to navbar',
+                name: '<code>static</code>',
+                description: 'Add the sidebar in the current position',
                 type: 'Boolean',
                 values: '—',
                 default: 'false'
-            }
+            },
+            {
+                name: '<code>modal</code>',
+                description: 'Show a modal background when sidebar is open',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>right</code>',
+                description: 'Show the sidebar on right',
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>container</code>',
+                description: 'DOM element the sidebar will be created on.',
+                type: 'String',
+                values: '—',
+                default: '<code>body</code>'
+            },
       ],
       slots: [
           {
-            name: 'brand',
-            description: 'The slot for the brand logo',
-            props: '—'
-          },
-          {
-            name: 'burger',
-            description: 'The slot for the burger that triggers the menu toggle',
-            props: '<code>isOpened: Boolean</code>, <code>toggleActive: Function</code>'
-          },
-          {
-            name: 'start',
-            description: 'Items that will appear on the left',
-            props: '—'
-          },
-          {
-            name: 'end',
-            description: 'Items that  will appear on the right',
-            props: '—'
-          },
-      ]
-  },
-  {
-    title: 'Navbar Item',
-    props: [
-        {
-            name: '<code>tag</code>',
-            description: 'Sets the type of the component that have to render as navbar-item',
-            type: 'String',
-            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
-            default: 'a'
-        },
-        {
-            name: '<code>active</code>',
-            description: 'Item is active',
-            type: 'Boolean',
-            values: '-',
-            default: 'false'
-        }
-    ]
-  },
-  {
-    title: 'Navbar Dropdown',
-    props: [
-        {
-            name: '<code>hoverable</code>',
-            description: 'Dropdown will be triggered by hover instead of click',
-            type: 'Boolean',
-            values: '-',
-            default: 'false'
-        },
-        {
-            name: '<code>active</code>',
-            description: 'Item is active',
-            type: 'Boolean',
-            values: '-',
-            default: 'false'
-        },
-        {
-            name: '<code>right</code>',
-            description: 'Dropdown will be anchored to the right side',
-            type: 'Boolean',
-            values: '-',
-            default: 'false'
-        },
-        {
-            name: '<code>arrowless</code>',
-            description: 'Show/hide arrow icon on dropdown',
-            type: 'Boolean',
-            values: '-',
-            default: 'false'
-        },
-        {
-            name: '<code>boxed</code>',
-            description: 'Show a boxed version of the dropdown',
-            type: 'Boolean',
-            values: '-',
-            default: 'false'
-        }
-    ],
-    slots: [
-        {
             name: 'default',
-            description: 'Menu item body',
+            description: 'Content of sidebar',
             props: '—'
-        },
+          }
+      ],
+      events: [
         {
-            name: '<code>label</code>',
-            description: 'Dropdown menu custom label',
-            props: '-'
+            name: '<code>close</code>',
+            description: 'Triggers when user closed/canceled or called programmatically from the injected component',
+            parameters: '—'
         }
     ]
   }

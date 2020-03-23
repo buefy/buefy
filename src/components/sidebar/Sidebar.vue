@@ -1,27 +1,44 @@
 <template>
-    <transition :name="transitionName">
+    <div
+        class="b-sidebar"
+    >
         <div
-            v-show="isOpen"
-            class="b-sidebar"
-            :class="rootClasses">
+            class="sidebar-background"
+            v-if="modal && isOpen"
+        />
+        <transition :name="transitionName">
             <div
-                class="sidebar-background"
-                v-if="modal"
-            />
-            <slot />
-        </div>
-    </transition>
+                v-show="isOpen"
+                class="sidebar-content"
+                :class="rootClasses"
+                v-click-outside="onClickOutside">
+                <slot />
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script>
+import clickOutside from '../../directives/clickOutside'
+
 export default {
     name: 'BSidebar',
+    directives: {
+        clickOutside
+    },
     props: {
         open: Boolean,
         type: [String, Object],
         container: [Object, Function, HTMLElement],
-        programmatic: Boolean,
         modal: Boolean,
+        static: Boolean,
+        fullheight: Boolean,
+        fullwidth: Boolean,
+        right: Boolean,
+        mobile: {
+            type: Boolean,
+            default: () => false
+        },
         canCancel: {
             type: [Array, Boolean],
             default: () => ['escape', 'outside']
@@ -40,6 +57,11 @@ export default {
     computed: {
         rootClasses() {
             return [this.type, {
+                'is-fixed': !this.static,
+                'is-fullheight': this.fullheight,
+                'is-fullwidth': this.fullwidth,
+                'is-right': this.right,
+                'is-mobile': this.static && this.mobile
             }]
         },
         cancelOptions() {
@@ -52,28 +74,14 @@ export default {
     },
     watch: {
         open(value) {
-            this.setAnimation()
             this.isOpen = value
-            if (value) {
-                if (!this.container) {
-                    document.body.appendChild(this.$el)
-                } else {
-                    this.container.appendChild(this.$el)
-                }
-            }
+            this.setAnimation()
         }
     },
     methods: {
         setAnimation() {
-            this.transitionName = !this.isOpen
-                ? 'slide-next'
-                : 'slide-prev'
-        },
-        toggle() {
-            this.setAnimation()
-            this.isOpen = !this.isOpen
-            this.$emit('update:open', this.isOpen)
-            this.$emit(this.isOpen ? 'open' : 'close')
+            const open = this.right ? !this.open : this.open
+            this.transitionName = !open ? 'slide-prev' : 'slide-next'
         },
 
         /**
@@ -81,7 +89,13 @@ export default {
         */
         keyPress(event) {
             // Esc key
-            if (this.isActive && event.keyCode === 27) this.cancel('escape')
+            if (this.isOpen && event.keyCode === 27) this.cancel('escape')
+        },
+
+        onClickOutside() {
+            if (this.isOpen) {
+                this.cancel('outside')
+            }
         },
 
         /**
@@ -89,6 +103,7 @@ export default {
         */
         cancel(method) {
             if (this.cancelOptions.indexOf(method) < 0) return
+            if (this.static) return
 
             this.onCancel.apply(null, arguments)
             this.close()
@@ -99,21 +114,9 @@ export default {
         * Emit events, and destroy modal if it's programmatic.
         */
         close() {
+            this.isOpen = false
             this.$emit('close')
             this.$emit('update:open', false)
-
-            // Timeout for the animation complete before destroying
-            if (this.programmatic) {
-                this.isActive = false
-                setTimeout(() => {
-                    this.$destroy()
-                    if (!this.container) {
-                        document.body.removeChild(this.$el)
-                    } else {
-                        this.container.removeChild(this.$el)
-                    }
-                }, 150)
-            }
         }
     },
     created() {
@@ -121,17 +124,26 @@ export default {
             document.addEventListener('keyup', this.keyPress)
         }
     },
-    beforeMount() {
-        this.setAnimation()
-        //  if (this.programmatic) {
-        // }
-    },
     mounted() {
-        // if (this.programmatic) this.isActive = true
+        this.setAnimation()
+        if (!this.static) {
+            if (!this.container) {
+                document.body.appendChild(this.$el)
+            } else {
+                this.container.appendChild(this.$el)
+            }
+        }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
+        }
+        if (!this.static) {
+            if (!this.container) {
+                document.body.removeChild(this.$el)
+            } else {
+                this.container.removeChild(this.$el)
+            }
         }
     }
 }
