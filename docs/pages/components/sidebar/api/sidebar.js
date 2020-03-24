@@ -49,35 +49,35 @@ export default [
             },
             {
                 name: '<code>mobile</code>',
-                description: 'Reduce width on mobile',
-                type: 'Boolean',
-                values: '—',
-                default: 'false'
+                description: 'Custom layout on mobile',
+                type: 'String',
+                values: '<code>fullwidth</code>,<code>reduce</code>,<code>hidden</code>',
+                default: '—'
             },
             {
                 name: '<code>static</code>',
-                description: 'Add the sidebar in the current position',
+                description: 'Show the sidebar in the current position',
                 type: 'Boolean',
                 values: '—',
                 default: 'false'
             },
             {
-                name: '<code>modal</code>',
-                description: 'Show a modal background when sidebar is open',
+                name: '<code>overlay</code>',
+                description: 'Show an overlay when sidebar is open',
                 type: 'Boolean',
                 values: '—',
                 default: 'false'
             },
             {
-                name: '<code>right</code>',
-                description: 'Show the sidebar on right',
-                type: 'Boolean',
-                values: '—',
-                default: 'false'
+                name: '<code>position</code>',
+                description: 'Which position the sidebar will appear',
+                type: 'String',
+                values: '<code>left</code>,<code>right</code>',
+                default: '<code>left</code>'
             },
             {
                 name: '<code>container</code>',
-                description: 'DOM element the sidebar will be created on.',
+                description: 'DOM element the sidebar will be created on when fixed',
                 type: 'String',
                 values: '—',
                 default: '<code>body</code>'
@@ -93,7 +93,7 @@ export default [
       events: [
         {
             name: '<code>close</code>',
-            description: 'Triggers when user closed/canceled or called programmatically from the injected component',
+            description: 'Triggers when user closed/canceled',
             parameters: '—'
         }
     ]

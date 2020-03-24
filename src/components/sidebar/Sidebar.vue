@@ -1,10 +1,8 @@
 <template>
-    <div
-        class="b-sidebar"
-    >
+    <div class="b-sidebar">
         <div
             class="sidebar-background"
-            v-if="modal && isOpen"
+            v-if="overlay && isOpen"
         />
         <transition :name="transitionName">
             <div
@@ -30,14 +28,16 @@ export default {
         open: Boolean,
         type: [String, Object],
         container: [Object, Function, HTMLElement],
-        modal: Boolean,
+        overlay: Boolean,
         static: Boolean,
         fullheight: Boolean,
         fullwidth: Boolean,
-        right: Boolean,
+        position: {
+            type: String,
+            default: () => 'left'
+        },
         mobile: {
-            type: Boolean,
-            default: () => false
+            type: String
         },
         canCancel: {
             type: [Array, Boolean],
@@ -60,8 +60,10 @@ export default {
                 'is-fixed': !this.static,
                 'is-fullheight': this.fullheight,
                 'is-fullwidth': this.fullwidth,
-                'is-right': this.right,
-                'is-mobile': this.static && this.mobile
+                'is-right': this.position === 'right',
+                'is-mobile': this.static && this.mobile === 'reduce',
+                'is-hidden-mobile': this.static && this.mobile === 'hidden',
+                'is-fullwidth-mobile': this.static && this.mobile === 'fullwidth'
             }]
         },
         cancelOptions() {
@@ -80,7 +82,7 @@ export default {
     },
     methods: {
         setAnimation() {
-            const open = this.right ? !this.open : this.open
+            const open = this.position === 'right' ? !this.open : this.open
             this.transitionName = !open ? 'slide-prev' : 'slide-next'
         },
 
@@ -99,7 +101,7 @@ export default {
         },
 
         /**
-        * Close the Modal if canCancel and call the onCancel prop (function).
+        * Close the Sidebar if canCancel and call the onCancel prop (function).
         */
         cancel(method) {
             if (this.cancelOptions.indexOf(method) < 0) return
@@ -110,8 +112,7 @@ export default {
         },
 
         /**
-        * Call the onCancel prop (function).
-        * Emit events, and destroy modal if it's programmatic.
+        * Call the onCancel prop (function) and emit events
         */
         close() {
             this.isOpen = false

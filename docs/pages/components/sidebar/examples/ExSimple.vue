@@ -4,7 +4,7 @@
             type="is-light"
             :fullheight="fullheight"
             :fullwidth="fullwidth" 
-            :modal="modal"
+            :overlay="overlay"
             :open.sync="open"
         >
             <div class="p-1">
@@ -49,7 +49,7 @@
             </div>
         </b-sidebar>
         <div class="block">
-            <b-switch v-model="modal">Modal</b-switch>
+            <b-switch v-model="overlay">Overlay</b-switch>
             <b-switch v-model="fullheight">Fullheight</b-switch>
             <b-switch v-model="fullwidth">Fullwidth</b-switch>
         </div>
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       open: false,
-      modal: true,
+      overlay: true,
       fullheight: true,
       fullwidth: false
     };

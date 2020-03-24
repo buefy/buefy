@@ -22,7 +22,6 @@ $sidebar-mobile-breakpoint: $tablet !default;
             left: 0;
             top: 0;
             &.is-right {
-                position: fixed;
                 left: unset;
                 right: 0;
             }
@@ -43,6 +42,13 @@ $sidebar-mobile-breakpoint: $tablet !default;
         @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
             &.is-mobile {
                 width: $sidebar-mobile-width;
+            }
+            &.is-hidden-mobile {
+                left: $sidebar-width;
+            }
+            &.is-fullwidth-mobile {
+                width: 100%;
+                max-width: 100%;
             }
         }
     }
