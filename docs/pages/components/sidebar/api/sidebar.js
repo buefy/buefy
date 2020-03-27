@@ -77,7 +77,7 @@ export default [
             },
             {
                 name: '<code>expand-on-hover</code>',
-                description: 'Expando sidebar on hover when <code>reduced</code> or <code>mobile</code> is <code>reduce</code>',
+                description: 'Expand sidebar on hover when <code>reduced</code> or <code>mobile</code> is <code>reduce</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

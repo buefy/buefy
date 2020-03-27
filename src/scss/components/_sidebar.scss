@@ -26,12 +26,25 @@ $sidebar-mobile-breakpoint: $tablet !default;
                 right: 0;
             }
         }
+        &.is-mini {
+            width: $sidebar-mobile-width;
+        }
+        &.is-mini-expand:hover {
+            &:not(.is-fullwidth) {
+                width: $sidebar-width;
+            }
+        }
         &.is-static {
             transition: width $speed-slow $easing;
             @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
                 &.is-mini-mobile {
                     width: $sidebar-mobile-width;
-                } 
+                }
+                &.is-mini-expand:hover {
+                    &:not(.is-fullwidth-mobile) {
+                        width: $sidebar-width;
+                    }
+                }
                 &.is-hidden-mobile {
                     width: 0;
                     height: 0;
@@ -42,12 +55,6 @@ $sidebar-mobile-breakpoint: $tablet !default;
                     max-width: 100%;
                 }
             }
-        }
-        &.is-mini {
-            width: $sidebar-mobile-width;
-        } 
-        &.is-mini-expand:hover {
-            width: $sidebar-width;
         }
         &.is-fullwidth {
             width: 100%;
