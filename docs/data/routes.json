@@ -524,6 +524,18 @@
             "documentation/rate"
         ]
     },
+    "documentation/sidebar": {
+        "title": "Sidebar",
+        "subtitle": "A sidebar to use as left/right overlay or static",
+        "path": "/documentation/sidebar",
+        "githubPath": "pages/components/sidebar/Sidebar.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/sidebar"
+        ]
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",

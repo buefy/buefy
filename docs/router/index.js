@@ -72,6 +72,7 @@ const router = new Router({
                 route('documentation/carousel', 'components/carousel/Carousel'),
                 route('documentation/rate', 'components/rate/Rate'),
                 route('documentation/datetimepicker', 'components/datetimepicker/Datetimepicker'),
+                route('documentation/sidebar', 'components/sidebar/Sidebar'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),

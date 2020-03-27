@@ -52,6 +52,7 @@
                 "documentation/notification",
                 "documentation/pagination",
                 "documentation/progress",
+                "documentation/sidebar",
                 "documentation/snackbar",
                 "documentation/steps",
                 "documentation/table",
