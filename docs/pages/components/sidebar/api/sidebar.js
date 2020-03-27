@@ -55,25 +55,39 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>right</code>',
+                description: 'Show the sidebar on right',
+                type: 'Boolean',
+                values: '',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>static</code>',
                 description: 'Show the sidebar in the current position',
                 type: 'Boolean',
                 values: '—',
-                default: 'false'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>overlay</code>',
                 description: 'Show an overlay when sidebar is open',
                 type: 'Boolean',
                 values: '—',
-                default: 'false'
+                default: '<code>false</code>'
             },
             {
-                name: '<code>position</code>',
-                description: 'Which position the sidebar will appear',
-                type: 'String',
-                values: '<code>left</code>,<code>right</code>',
-                default: '<code>left</code>'
+                name: '<code>expand-on-hover</code>',
+                description: 'Expando sidebar on hover when <code>reduced</code> or <code>mobile</code> is <code>reduce</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>reduce</code>',
+                description: 'Show a small sidebar',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>container</code>',

@@ -151,19 +151,16 @@
 
 .slide-enter-active {
     transition: $speed-slow $easing;
- }
- 
- .slide-leave-active {
+}
+.slide-leave-active {
     transition: $speed-slow $easing;
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
- }
- 
- .slide-enter-to, .slide-leave {
+}
+.slide-enter-to, .slide-leave {
     max-height: 100px;
     overflow: hidden;
- }
- 
- .slide-enter, .slide-leave-to {
+}
+.slide-enter, .slide-leave-to {
     overflow: hidden;
     max-height: 0;
- }
+}

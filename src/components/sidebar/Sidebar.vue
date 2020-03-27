@@ -32,13 +32,12 @@ export default {
         static: Boolean,
         fullheight: Boolean,
         fullwidth: Boolean,
-        position: {
-            type: String,
-            default: () => 'left'
-        },
+        right: Boolean,
         mobile: {
             type: String
         },
+        reduce: Boolean,
+        expandOnHover: Boolean,
         canCancel: {
             type: [Array, Boolean],
             default: () => ['escape', 'outside']
@@ -58,11 +57,14 @@ export default {
         rootClasses() {
             return [this.type, {
                 'is-fixed': !this.static,
+                'is-static': this.static,
                 'is-fullheight': this.fullheight,
                 'is-fullwidth': this.fullwidth,
-                'is-right': this.position === 'right',
-                'is-mobile': this.static && this.mobile === 'reduce',
-                'is-hidden-mobile': this.static && this.mobile === 'hidden',
+                'is-right': this.right,
+                'is-mini': this.reduce,
+                'is-mini-expand': this.expandOnHover,
+                'is-mini-mobile': this.static && this.mobile === 'reduce',
+                'is-hidden-mobile': this.static && this.mobile === 'hide',
                 'is-fullwidth-mobile': this.static && this.mobile === 'fullwidth'
             }]
         },
@@ -82,7 +84,7 @@ export default {
     },
     methods: {
         setAnimation() {
-            const open = this.position === 'right' ? !this.open : this.open
+            const open = this.right ? !this.open : this.open
             this.transitionName = !open ? 'slide-prev' : 'slide-next'
         },
 
