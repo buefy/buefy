@@ -16,7 +16,7 @@ const ToastProgrammatic = {
         }
 
         const defaultParam = {
-            position: config.defaultToastPosition || 'is-top'
+            position: params.position || config.defaultToastPosition || 'is-top'
         }
         if (params.parent) {
             parent = params.parent
