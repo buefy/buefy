@@ -2,7 +2,7 @@
 
 exports[`BDatepicker render correctly 1`] = `
 <div class="datepicker control">
-    <b-dropdown-stub mobilemodal="true" ariarole="dialog" animation="fade" closeonclick="true" canclose="true" aria-modal="true">
+    <b-dropdown-stub mobilemodal="true" ariarole="dialog" animation="fade" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
         <b-input-stub autocomplete="off" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
         <b-dropdown-item-stub custom="true" focusable="true" ariarole="" class="">
             <div>
