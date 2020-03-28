@@ -13,6 +13,8 @@
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
             :aria-modal="!inline"
+            :append-to-body="appendToBody"
+            append-to-body-copy-parent
             @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
@@ -432,6 +434,7 @@ export default {
                 return config.defaultTrapFocus
             }
         },
+        appendToBody: Boolean,
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
