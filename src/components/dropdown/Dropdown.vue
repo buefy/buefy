@@ -108,7 +108,8 @@ export default {
             default: true
         },
         expanded: Boolean,
-        appendToBody: Boolean
+        appendToBody: Boolean,
+        appendToBodyCopyParent: Boolean
     },
     data() {
         return {
@@ -157,7 +158,7 @@ export default {
             this.$emit('active-change', value)
             this.$nextTick(() => {
                 if (this.appendToBody) {
-                    this.updateContent()
+                    this.updateAppendToBody()
                 }
             })
         }
@@ -272,26 +273,32 @@ export default {
             }
         },
 
-        updateContent() {
+        updateAppendToBody() {
             const dropdownMenu = this.$refs.dropdownMenu
             const trigger = this.$refs.trigger
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
-                this.$data._div.style.position = 'absolute'
-                this.$data._div.style.left = '0px'
-                this.$data._div.style.top = '0px'
-                this.$data._div.style.top = '99'
-                this.$data._div.classList.add('dropdown')
+                const dropdown = this.$data._div.children[0]
+                dropdown.classList.forEach((item) => dropdown.classList.remove(item))
+                dropdown.classList.add('dropdown')
                 this.rootClasses.forEach((item) => {
                     // skip position prop
                     if (item && typeof item === 'object') {
                         for (let key in item) {
                             if (item[key]) {
-                                this.$data._div.classList.add(key)
+                                dropdown.classList.add(key)
                             }
                         }
                     }
                 })
+                if (this.appendToBodyCopyParent) {
+                    const parentNode = this.$refs.dropdown.parentNode
+                    const parent = this.$data._div
+                    parent.classList.forEach((item) => parent.classList.remove(item))
+                    parentNode.classList.forEach((item) => {
+                        parent.classList.add(item)
+                    })
+                }
                 const trigger = this.$refs.trigger
                 const rect = trigger.getBoundingClientRect()
                 let top = rect.top + window.scrollY
@@ -315,10 +322,16 @@ export default {
     },
     mounted() {
         if (this.appendToBody) {
-            this.$data._div = document.createElement('div')
+            const root = document.createElement('div')
+            root.style.position = 'absolute'
+            root.style.left = '0px'
+            root.style.top = '0px'
+            const dropdown = document.createElement('div')
             const dropdownMenu = this.$refs.dropdownMenu
-            this.$data._div.appendChild(dropdownMenu)
-            document.body.appendChild(this.$data._div)
+            root.appendChild(dropdown)
+            dropdown.appendChild(dropdownMenu)
+            document.body.appendChild(root)
+            this.$data._div = root
         }
     },
     created() {

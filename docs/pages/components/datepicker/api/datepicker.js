@@ -254,6 +254,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>append-to-body</code>',
+                description: 'Append datepicker calendar to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next month button.',
                 type: 'String',
@@ -266,7 +273,7 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
-            },,
+            },
             {
                 name: 'Any native attribute',
                 description: '—',

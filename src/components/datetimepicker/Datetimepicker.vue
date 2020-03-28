@@ -24,6 +24,7 @@
         :disabled="disabled"
         :mobile-native="isMobileNative"
         :focusable="focusable"
+        :append-to-body="appendToBody"
         @focus="onFocus"
         @blur="onBlur"
         @change-month="$emit('change-month', $event)"
@@ -141,7 +142,8 @@ export default {
         focusable: {
             type: Boolean,
             default: true
-        }
+        },
+        appendToBody: Boolean
     },
     data() {
         return {

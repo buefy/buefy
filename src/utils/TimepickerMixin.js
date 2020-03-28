@@ -142,7 +142,8 @@ export default {
         tzOffset: {
             type: Number,
             default: 0
-        }
+        },
+        appendToBody: Boolean
     },
     data() {
         return {

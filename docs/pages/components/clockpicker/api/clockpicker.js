@@ -152,6 +152,13 @@ export default [
                 default: `<code>Min</code>`
             },
             {
+                name: '<code>append-to-body</code>',
+                description: 'Append clockpicker calendar to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
