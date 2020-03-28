@@ -45,6 +45,7 @@
                 :keep-first="!allowNew"
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
+                :append-to-body="appendToBody"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
@@ -159,7 +160,8 @@ export default {
         checkInfiniteScroll: {
             type: Boolean,
             default: false
-        }
+        },
+        appendToBody: Boolean
     },
     data() {
         return {
