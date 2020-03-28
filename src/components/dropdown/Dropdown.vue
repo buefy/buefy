@@ -1,5 +1,9 @@
 <template>
-    <div class="dropdown" :class="rootClasses">
+    <div
+        class="dropdown"
+        ref="dropdown"
+        :class="rootClasses"
+    >
         <div
             v-if="!inline"
             role="button"
@@ -24,6 +28,7 @@
                 v-show="(!disabled && (isActive || isHoverable)) || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu"
+                :style="style"
                 :aria-hidden="!isActive"
                 v-trap-focus="trapFocus">
                 <div
@@ -102,14 +107,17 @@ export default {
             type: [Array, Boolean],
             default: true
         },
-        expanded: Boolean
+        expanded: Boolean,
+        appendToBody: Boolean
     },
     data() {
         return {
             selected: this.value,
+            style: {},
             isActive: false,
             isHoverable: this.hoverable,
-            _isDropdown: true // Used internally by DropdownItem
+            _isDropdown: true, // Used internally by DropdownItem
+            _div: undefined // Used to append to body
         }
     },
     computed: {
@@ -147,6 +155,11 @@ export default {
         */
         isActive(value) {
             this.$emit('active-change', value)
+            this.$nextTick(() => {
+                if (this.appendToBody) {
+                    this.updateContent()
+                }
+            })
         }
     },
     methods: {
@@ -257,6 +270,55 @@ export default {
             if (this.hoverable) {
                 this.isHoverable = true
             }
+        },
+
+        updateContent() {
+            const dropdownMenu = this.$refs.dropdownMenu
+            const trigger = this.$refs.trigger
+            if (dropdownMenu && trigger) {
+                // update wrapper dropdown
+                this.$data._div.style.position = 'absolute'
+                this.$data._div.style.left = '0px'
+                this.$data._div.style.top = '0px'
+                this.$data._div.style.top = '99'
+                this.$data._div.classList.add('dropdown')
+                this.rootClasses.forEach((item) => {
+                    // skip position prop
+                    if (item && typeof item === 'object') {
+                        for (let key in item) {
+                            if (item[key]) {
+                                this.$data._div.classList.add(key)
+                            }
+                        }
+                    }
+                })
+                const trigger = this.$refs.trigger
+                const rect = trigger.getBoundingClientRect()
+                let top = rect.top + window.scrollY
+                let left = rect.left + window.scrollX
+                if (!this.position || this.position.indexOf('bottom') >= 0) {
+                    top += trigger.clientHeight
+                } else {
+                    top -= dropdownMenu.clientHeight
+                }
+                if (this.position && this.position.indexOf('left') >= 0) {
+                    left -= (dropdownMenu.clientWidth - trigger.clientWidth)
+                }
+                this.style = {
+                    position: 'absolute',
+                    top: `${top}px`,
+                    left: `${left}px`,
+                    zIndex: '99'
+                }
+            }
+        }
+    },
+    mounted() {
+        if (this.appendToBody) {
+            this.$data._div = document.createElement('div')
+            const dropdownMenu = this.$refs.dropdownMenu
+            this.$data._div.appendChild(dropdownMenu)
+            document.body.appendChild(this.$data._div)
         }
     },
     created() {
@@ -269,6 +331,9 @@ export default {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
+        }
+        if (this.appendToBody) {
+            document.body.removeChild(this.$data._div)
         }
     }
 }

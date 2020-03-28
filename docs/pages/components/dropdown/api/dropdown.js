@@ -92,6 +92,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append dropdown content to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
