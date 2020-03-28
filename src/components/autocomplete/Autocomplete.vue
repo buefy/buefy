@@ -32,7 +32,8 @@
         <transition name="fade">
             <div
                 class="dropdown-menu"
-                :class="{ 'is-opened-top': isOpenedTop }"
+                :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
+                :style="style"
                 v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown">
                 <div
@@ -110,7 +111,8 @@ export default {
         dropdownPosition: {
             type: String,
             default: 'auto'
-        }
+        },
+        appendToBody: Boolean
     },
     data() {
         return {
@@ -121,8 +123,10 @@ export default {
             newAutocomplete: this.autocomplete || 'off',
             isListInViewportVertically: true,
             hasFocus: false,
+            style: {},
             _isAutocomplete: true,
-            _elementRef: 'input'
+            _elementRef: 'input',
+            _div: undefined
         }
     },
     computed: {
@@ -376,6 +380,9 @@ export default {
                     rect.bottom <= (window.innerHeight ||
                         document.documentElement.clientHeight)
                 )
+                if (this.appendToBody) {
+                    this.updateAppendToBody()
+                }
             })
         },
 
@@ -454,6 +461,36 @@ export default {
                     this.checkHtml5Validity()
                 })
             }
+        },
+        updateAppendToBody() {
+            const dropdownMenu = this.$refs.dropdown
+            const trigger = this.$refs.input.$el
+            if (dropdownMenu && trigger) {
+                // update wrapper dropdown
+                const root = this.$data._div
+                root.classList.forEach((item) => root.classList.remove(item))
+                root.classList.add('autocomplete')
+                root.classList.add('control')
+                if (this.expandend) {
+                    root.classList.add('is-expandend')
+                }
+                const rect = trigger.getBoundingClientRect()
+                let top = rect.top + window.scrollY
+                let left = rect.left + window.scrollX
+                if (!this.isOpenedTop) {
+                    top += trigger.clientHeight
+                } else {
+                    top -= dropdownMenu.clientHeight
+                }
+                this.style = {
+                    position: 'absolute',
+                    top: `${top}px`,
+                    left: `${left}px`,
+                    width: `${trigger.clientWidth}px`,
+                    maxWidth: `${trigger.clientWidth}px`,
+                    zIndex: '99'
+                }
+            }
         }
     },
     created() {
@@ -467,6 +504,16 @@ export default {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
             list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
         }
+        if (this.appendToBody) {
+            const root = document.createElement('div')
+            root.style.position = 'absolute'
+            root.style.left = '0px'
+            root.style.top = '0px'
+            const dropdownMenu = this.$refs.dropdown
+            root.appendChild(dropdownMenu)
+            document.body.appendChild(root)
+            this.$data._div = root
+        }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
@@ -476,6 +523,9 @@ export default {
         if (this.checkInfiniteScroll && this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
+        }
+        if (this.appendToBody) {
+            document.body.removeChild(this.$data._div)
         }
     }
 }

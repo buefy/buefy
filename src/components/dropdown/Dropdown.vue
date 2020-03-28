@@ -299,7 +299,6 @@ export default {
                         parent.classList.add(item)
                     })
                 }
-                const trigger = this.$refs.trigger
                 const rect = trigger.getBoundingClientRect()
                 let top = rect.top + window.scrollY
                 let left = rect.left + window.scrollX
