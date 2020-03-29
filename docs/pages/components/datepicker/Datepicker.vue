@@ -26,14 +26,14 @@
 
         <Example :component="ExMonth" :code="ExMonthCode" title="Month picker" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.7</span>
             </div>
         </Example>
 
         <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.7</span>
             </div>
         </Example>
@@ -48,14 +48,16 @@
 
         <Example :component="ExRangeInput" :code="ExRangeInputCode" title="Select a range of dates" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.8.2</span>
             </div>
             <p>Dates selected can be within a range.</p>
         </Example>
 
         <Example :component="ExMultipleInput" :code="ExMultipleInputCode" title="Select multiple dates" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.8.6</span>
             </div>
             <p>Multiple dates can be selected and don't have to be contiguous.</p>
         </Example>

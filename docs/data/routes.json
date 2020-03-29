@@ -91,8 +91,7 @@
             "/",
             "documentation",
             "documentation/dialog"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/dropdown": {
         "title": "Dropdown",
@@ -165,7 +164,8 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tag": {
         "title": "Tag",
@@ -261,8 +261,7 @@
             "/",
             "documentation",
             "documentation/input"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/select": {
         "title": "Select",
@@ -286,7 +285,8 @@
             "/",
             "documentation",
             "documentation/autocomplete"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -348,7 +348,8 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -360,7 +361,8 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datetimepicker": {
         "title": "Datetimepicker",
@@ -410,8 +412,7 @@
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -435,8 +436,7 @@
             "/",
             "documentation",
             "documentation/button"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/numberinput": {
         "title": "Numberinput",
@@ -472,8 +472,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isUpdated": true
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
@@ -485,8 +484,7 @@
             "/",
             "documentation",
             "documentation/slider"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/progress": {
         "title": "Progress",
@@ -534,7 +532,8 @@
             "/",
             "documentation",
             "documentation/sidebar"
-        ]
+        ],
+        "isNew": "true"
     },
     "extensions": {
         "title": "Extensions",

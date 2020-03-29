@@ -42,7 +42,7 @@
 
         <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.11</span>
             </div>
             <p>To sort on additional columns, use <code>sort-multiple</code> is enabled</p>
@@ -54,7 +54,7 @@
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.2</span>
             </div>
             <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
@@ -100,7 +100,7 @@
                 Use the <code>sticky</code> prop on column to show a scrolling table with a fixed column.
             </p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.13</span>
             </div>
             <p>
