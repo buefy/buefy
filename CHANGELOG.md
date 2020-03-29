@@ -4,6 +4,24 @@
 
 ### New features
 
+* **New component: Sidebar**, [see docs](https://buefy.org/documentation/sidebar)
+* Add ``append-to-body`` prop to dropdown, autocomplete, datepicker, timepicker and datetimepicker
+* Add ``dropdown-position`` prop to dropdown
+
+
+### Fixes
+
+* Fix switch elastic animation for non-rounded (thanks @service-paradis)
+* Fix #1666 native validation on datepicker
+* Fix #2317 default icon prev and next (thanks @service-paradis)
+* Fix #2325 native validation on autocomplete
+* Fix #2336 animation on tabs when vertical (top - bottom)
+
+
+## 0.8.13
+
+### New features
+
 * Add ``selected`` slot to taginput
 * Add ``scrollable`` prop to table
 * Add ``sticky`` prop to table column
