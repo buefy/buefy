@@ -95,7 +95,8 @@ export default {
                         }
                     }) // $nextTick needed when month is changed
                 }
-            }
+            },
+            immediate: true
         }
     },
     methods: {
