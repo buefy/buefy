@@ -513,6 +513,7 @@ export default {
             root.appendChild(dropdownMenu)
             document.body.appendChild(root)
             this.$data._div = root
+            this.updateAppendToBody()
         }
     },
     beforeDestroy() {

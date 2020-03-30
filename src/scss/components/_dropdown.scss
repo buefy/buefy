@@ -16,8 +16,12 @@ $dropdown-disabled-opacity: 0.5 !default;
             display: none;
         }
     }
+    &.dropdown-menu-animation {
+        .dropdown-menu {
+            display: block;
+        }
+    }
     .dropdown-menu {
-        display: block;
         .dropdown-item {
             &.is-disabled {
                 cursor: not-allowed;

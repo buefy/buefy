@@ -1,6 +1,6 @@
 <template>
     <div
-        class="dropdown"
+        class="dropdown dropdown-menu-animation"
         ref="dropdown"
         :class="rootClasses"
     >
@@ -156,11 +156,11 @@ export default {
         */
         isActive(value) {
             this.$emit('active-change', value)
-            this.$nextTick(() => {
-                if (this.appendToBody) {
+            if (this.appendToBody) {
+                this.$nextTick(() => {
                     this.updateAppendToBody()
-                }
-            })
+                })
+            }
         }
     },
     methods: {
@@ -281,6 +281,7 @@ export default {
                 const dropdown = this.$data._div.children[0]
                 dropdown.classList.forEach((item) => dropdown.classList.remove(item))
                 dropdown.classList.add('dropdown')
+                dropdown.classList.add('dropdown-menu-animation')
                 this.rootClasses.forEach((item) => {
                     // skip position prop
                     if (item && typeof item === 'object') {
@@ -331,6 +332,7 @@ export default {
             dropdown.appendChild(dropdownMenu)
             document.body.appendChild(root)
             this.$data._div = root
+            this.updateAppendToBody()
         }
     },
     created() {
