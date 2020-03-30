@@ -10,6 +10,13 @@ export default [
               default: '<code>false</code>'
           },
           {
+            name: '<code>position</code>',
+            description: 'Set display position of sidebar',
+            type: 'String',
+            values: '<code>fixed</code>,<code>static</code>,<code>absolute</code>',
+            default: '<code>fixed</code>'
+          },
+          {
               name: '<code>type</code>',
               description: 'Type (color) of the background, optional',
               type: 'String, ',
@@ -59,13 +66,6 @@ export default [
                 description: 'Show the sidebar on right',
                 type: 'Boolean',
                 values: '',
-                default: '<code>false</code>'
-            },
-            {
-                name: '<code>static</code>',
-                description: 'Show the sidebar in the current position',
-                type: 'Boolean',
-                values: '—',
                 default: '<code>false</code>'
             },
             {

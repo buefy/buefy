@@ -21,7 +21,7 @@
       </b-field>
     </div>
     <b-sidebar
-      static
+      position="static"
       :mobile="mobile"
       :expand-on-hover="expandOnHover"
       :reduce="reduce"

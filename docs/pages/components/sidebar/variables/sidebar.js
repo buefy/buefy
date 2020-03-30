@@ -9,7 +9,7 @@ export default [
     },
     {
         name: '<code>$sidebar-width</code>',
-        default: '<code>240px</code>'
+        default: '<code>260px</code>'
     },
     {
         name: '<code>$sidebar-mobile-width</code>',

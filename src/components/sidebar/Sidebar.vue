@@ -9,7 +9,7 @@
                 v-show="isOpen"
                 class="sidebar-content"
                 :class="rootClasses"
-                v-click-outside="onClickOutside">
+                v-click-outside="clickOutside">
                 <slot />
             </div>
         </transition>
@@ -27,9 +27,18 @@ export default {
     props: {
         open: Boolean,
         type: [String, Object],
-        container: [Object, Function, HTMLElement],
         overlay: Boolean,
-        static: Boolean,
+        position: {
+            type: String,
+            default: 'fixed',
+            validator: (value) => {
+                return [
+                    'fixed',
+                    'absolute',
+                    'static'
+                ].indexOf(value) >= 0
+            }
+        },
         fullheight: Boolean,
         fullwidth: Boolean,
         right: Boolean,
@@ -56,16 +65,17 @@ export default {
     computed: {
         rootClasses() {
             return [this.type, {
-                'is-fixed': !this.static,
-                'is-static': this.static,
+                'is-fixed': this.isFixed,
+                'is-static': this.isStatic,
+                'is-absolute': this.isAbsolute,
                 'is-fullheight': this.fullheight,
                 'is-fullwidth': this.fullwidth,
                 'is-right': this.right,
                 'is-mini': this.reduce,
                 'is-mini-expand': this.expandOnHover,
-                'is-mini-mobile': this.static && this.mobile === 'reduce',
-                'is-hidden-mobile': this.static && this.mobile === 'hide',
-                'is-fullwidth-mobile': this.static && this.mobile === 'fullwidth'
+                'is-mini-mobile': this.mobile === 'reduce',
+                'is-hidden-mobile': this.mobile === 'hide',
+                'is-fullwidth-mobile': this.mobile === 'fullwidth'
             }]
         },
         cancelOptions() {
@@ -74,19 +84,28 @@ export default {
                     ? ['escape', 'outside']
                     : []
                 : this.canCancel
+        },
+        isStatic() {
+            return this.position === 'static'
+        },
+        isFixed() {
+            return this.position === 'fixed'
+        },
+        isAbsolute() {
+            return this.position === 'absolute'
         }
     },
     watch: {
-        open(value) {
-            this.isOpen = value
-            this.setAnimation()
+        open: {
+            handler(value) {
+                this.isOpen = value
+                const open = this.right ? !value : value
+                this.transitionName = !open ? 'slide-prev' : 'slide-next'
+            },
+            immediate: true
         }
     },
     methods: {
-        setAnimation() {
-            const open = this.right ? !this.open : this.open
-            this.transitionName = !open ? 'slide-prev' : 'slide-next'
-        },
 
         /**
         * Keypress event that is bound to the document.
@@ -94,12 +113,6 @@ export default {
         keyPress(event) {
             // Esc key
             if (this.isOpen && event.keyCode === 27) this.cancel('escape')
-        },
-
-        onClickOutside() {
-            if (this.isOpen) {
-                this.cancel('outside')
-            }
         },
 
         /**
@@ -120,6 +133,12 @@ export default {
             this.isOpen = false
             this.$emit('close')
             this.$emit('update:open', false)
+        },
+
+        clickOutside() {
+            if (this.isFixed && this.isOpen) {
+                this.cancel('outside')
+            }
         }
     },
     created() {
@@ -128,25 +147,16 @@ export default {
         }
     },
     mounted() {
-        this.setAnimation()
-        if (!this.static) {
-            if (!this.container) {
-                document.body.appendChild(this.$el)
-            } else {
-                this.container.appendChild(this.$el)
-            }
+        if (this.isFixed) {
+            document.body.appendChild(this.$el)
         }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
         }
-        if (!this.static) {
-            if (!this.container) {
-                document.body.removeChild(this.$el)
-            } else {
-                this.container.removeChild(this.$el)
-            }
+        if (this.isFixed) {
+            document.body.removeChild(this.$el)
         }
     }
 }
