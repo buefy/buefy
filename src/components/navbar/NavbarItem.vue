@@ -33,7 +33,7 @@ export default {
             // TODO: use code instead (because keyCode is actually deprecated)
             // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
             if (event.keyCode === 27) {
-                this.$parent.closeMenu()
+                this.closeMenuRecursive(this, ['NavBar'])
             }
         },
         /**
@@ -42,20 +42,23 @@ export default {
         handleClickEvent(event) {
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
-                const navDropDown = this.closeMenuRecursive(this, 'NavDropdown')
-                if (navDropDown) this.closeMenuRecursive(navDropDown, 'NavBar')
+                const parent = this.closeMenuRecursive(this, ['NavDropdown', 'NavBar'])
+                if (parent.$data._isNavDropdown) this.closeMenuRecursive(parent, ['NavBar'])
             }
         },
         /**
          * Close parent recursively
          */
-        closeMenuRecursive(current, targetComponentType) {
+        closeMenuRecursive(current, targetComponents) {
             if (!current.$parent) return null
-            if (current.$parent.$data[`_is${targetComponentType}`]) {
-                current.$parent.closeMenu()
-                return current.$parent
-            }
-            return this.closeMenuRecursive(current.$parent, targetComponentType)
+            const foundItem = targetComponents.reduce((acc, item) => {
+                if (current.$parent.$data[`_is${item}`]) {
+                    current.$parent.closeMenu()
+                    return current.$parent
+                }
+                return acc
+            }, null)
+            return foundItem || this.closeMenuRecursive(current.$parent, targetComponents)
         }
     },
     mounted() {
