@@ -4,7 +4,7 @@
 
 ### Fixes
 
-* Fix checking whitelist on fixed sidebar
+* Fix check whitelist on fixed sidebar
 * Fix static sidebar on esc key
 
 ## 0.8.14
