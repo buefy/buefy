@@ -60,7 +60,6 @@ export default {
         return {
             newActive: this.active,
             isHoverable: this.hoverable,
-            open: true,
             _isNavDropdown: true // Used internally by NavbarItem
         }
     },
