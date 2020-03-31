@@ -42,13 +42,20 @@ export default {
         handleClickEvent(event) {
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
-                if (this.$parent.$data._isNavDropdown) {
-                    this.$parent.closeMenu()
-                    this.$parent.$parent.closeMenu()
-                } else {
-                    this.$parent.closeMenu()
-                }
+                const navDropDown = this.closeMenuRecursive(this, 'NavDropdown')
+                if (navDropDown) this.closeMenuRecursive(navDropDown, 'NavBar')
             }
+        },
+        /**
+         * Close parent recursively
+         */
+        closeMenuRecursive(current, targetComponentType) {
+            if (!current.$parent) return null
+            if (current.$parent.$data[`_is${targetComponentType}`]) {
+                current.$parent.closeMenu()
+                return current.$parent
+            }
+            return this.closeMenuRecursive(current.$parent, targetComponentType)
         }
     },
     mounted() {

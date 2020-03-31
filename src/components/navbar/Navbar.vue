@@ -53,7 +53,8 @@ export default {
     },
     data() {
         return {
-            internalIsActive: this.isActive
+            internalIsActive: this.isActive,
+            _isNavBar: true // Used internally by NavbarItem
         }
     },
     computed: {
