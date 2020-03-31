@@ -1,6 +1,6 @@
 # Buefy Changelog
 
-## 0.8.13
+## 0.8.14
 
 ### New features
 
@@ -16,7 +16,6 @@
 * Fix #2317 default icon prev and next (thanks @service-paradis)
 * Fix #2325 native validation on autocomplete
 * Fix #2336 animation on tabs when vertical (top - bottom)
-
 
 ## 0.8.13
 
