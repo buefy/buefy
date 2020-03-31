@@ -42,8 +42,8 @@ export default {
         handleClickEvent(event) {
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
-                const parent = this.closeMenuRecursive(this, ['NavDropdown', 'NavBar'])
-                if (parent.$data._isNavDropdown) this.closeMenuRecursive(parent, ['NavBar'])
+                const parent = this.closeMenuRecursive(this, ['NavbarDropdown', 'NavBar'])
+                if (parent.$data._isNavbarDropdown) this.closeMenuRecursive(parent, ['NavBar'])
             }
         },
         /**
