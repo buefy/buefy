@@ -7,7 +7,7 @@
 * **New component: Sidebar**, [see docs](https://buefy.org/documentation/sidebar)
 * Add ``append-to-body`` prop to dropdown, autocomplete, datepicker, timepicker and datetimepicker
 * Add ``dropdown-position`` prop to dropdown
-
+* Add ``collapsible`` prop to navbar dropdown
 
 ### Fixes
 
