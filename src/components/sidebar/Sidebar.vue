@@ -1,5 +1,5 @@
 <template>
-    <div class="b-sidebar">
+    <div class="b-sidebar" @click="clickedOutside">
         <div
             class="sidebar-background"
             v-if="overlay && isOpen"
@@ -7,9 +7,9 @@
         <transition :name="transitionName">
             <div
                 v-show="isOpen"
+                ref="sidebarContent"
                 class="sidebar-content"
-                :class="rootClasses"
-                v-click-outside="clickOutside">
+                :class="rootClasses">
                 <slot />
             </div>
         </transition>
@@ -17,13 +17,8 @@
 </template>
 
 <script>
-import clickOutside from '../../directives/clickOutside'
-
 export default {
     name: 'BSidebar',
-    directives: {
-        clickOutside
-    },
     props: {
         open: Boolean,
         type: [String, Object],
@@ -59,7 +54,8 @@ export default {
     data() {
         return {
             isOpen: this.open,
-            transitionName: null
+            transitionName: null,
+            animating: true
         }
     },
     computed: {
@@ -93,6 +89,22 @@ export default {
         },
         isAbsolute() {
             return this.position === 'absolute'
+        },
+        /**
+         * White-listed items to not close when clicked.
+         * Add sidebar content and all children.
+         */
+        whiteList() {
+            const whiteList = []
+            whiteList.push(this.$refs.sidebarContent)
+            // Add all chidren from dropdown
+            if (this.$refs.sidebarContent !== undefined) {
+                const children = this.$refs.sidebarContent.querySelectorAll('*')
+                for (const child of children) {
+                    whiteList.push(child)
+                }
+            }
+            return whiteList
         }
     },
     watch: {
@@ -112,7 +124,9 @@ export default {
         */
         keyPress(event) {
             // Esc key
-            if (this.isOpen && event.keyCode === 27) this.cancel('escape')
+            if (this.isFixed) {
+                if (this.isOpen && event.keyCode === 27) this.cancel('escape')
+            }
         },
 
         /**
@@ -135,9 +149,14 @@ export default {
             this.$emit('update:open', false)
         },
 
-        clickOutside() {
-            if (this.isFixed && this.isOpen) {
-                this.cancel('outside')
+        /**
+         * Close fixed sidebar if clicked outside.
+         */
+        clickedOutside(event) {
+            if (this.isFixed) {
+                if (this.whiteList.indexOf(event.target) < 0) {
+                    this.cancel('outside')
+                }
             }
         }
     },

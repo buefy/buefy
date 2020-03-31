@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.8.15
+
+### Fixes
+
+* Fix checking whitelist on fixed sidebar
+* Fix static sidebar on esc key
+
 ## 0.8.14
 
 ### New features
