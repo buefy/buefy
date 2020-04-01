@@ -18,9 +18,7 @@ const propsData = {
         newDate(2018, 1, 6)
     ],
     month: 12,
-    dateCreator: function () {
-        return new Date()
-    }
+    dateCreator: () => newDate()
 }
 
 let wrapper
@@ -173,8 +171,41 @@ describe('BDatepickerTableRow', () => {
         expect(wrapper.emitted()['select']).toBeTruthy()
     })
 
+    it('emit focused date', () => {
+        const [y, m, d] = [2019, 4, 4]
+        const day = newDate(y, m, d)
+
+        let inc = 1
+        let expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        let valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = -1
+        expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = 7
+        expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = -7
+        expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+    })
+
     it('match event days accordingly', () => {
-        const thisMonth = new Date().getMonth()
+        const thisMonth = newDate(2019, 4, 4).getMonth()
         const day = newDate(2019, thisMonth, 6)
         const todayEvent = {
             date: day,

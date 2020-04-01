@@ -22,7 +22,7 @@ describe('BSidebar', () => {
             wrapper.setProps({open: true})
         })
 
-        it('Is called', () => {
+        it('is called', () => {
             expect(wrapper.name()).toBe('BSidebar')
             expect(wrapper.isVueInstance()).toBeTruthy()
         })
@@ -34,8 +34,10 @@ describe('BSidebar', () => {
         it('changes isOpen when open prop is modified', () => {
             wrapper.setProps({open: false})
             expect(wrapper.vm.isOpen).toBeFalsy()
+            expect(wrapper.vm.transitionName).toBe('slide-prev')
             wrapper.setProps({open: true})
             expect(wrapper.vm.isOpen).toBeTruthy()
+            expect(wrapper.vm.transitionName).toBe('slide-next')
         })
 
         it('close on cancel', (done) => {
