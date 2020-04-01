@@ -2,9 +2,11 @@
     <transition
         :name="animation"
         @after-enter="afterEnter"
-        @before-leave="beforeLeave">
+        @before-leave="beforeLeave"
+    >
         <div
-            v-if="isActive"
+            v-if="!destroyed"
+            v-show="isActive"
             class="modal is-active"
             :class="[{'is-full-screen': fullScreen}, customClass]"
             v-trap-focus="trapFocus"
@@ -104,7 +106,11 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
-        ariaModal: Boolean
+        ariaModal: Boolean,
+        destroyOnHide: {
+            type: Boolean,
+            default: () => true
+        }
     },
     data() {
         return {
@@ -113,7 +119,8 @@ export default {
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
                 : this.width,
-            animating: true
+            animating: true,
+            destroyed: false
         }
     },
     computed: {
@@ -137,6 +144,16 @@ export default {
     watch: {
         active(value) {
             this.isActive = value
+            if (this.destroyOnHide) {
+                if (!value) {
+                    // Timeout for the animation complete before destroying
+                    setTimeout(() => {
+                        this.destroyed = true
+                    }, 250)
+                } else {
+                    this.destroyed = false
+                }
+            }
         },
         isActive(value) {
             this.handleScroll()
