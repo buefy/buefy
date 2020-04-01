@@ -2,21 +2,21 @@ export default [
   {
       title: 'Sidebar',
       props: [
-          {
-              name: '<code>open</code>',
-              description: 'To control the behaviour of the sidebar programmatically, use the <code>.sync</code> modifier to make it two-way binding',
-              type: 'Boolean',
-              values: '—',
-              default: '<code>false</code>'
-          },
-          {
-            name: '<code>position</code>',
-            description: 'Set display position of sidebar',
-            type: 'String',
-            values: '<code>fixed</code>,<code>static</code>,<code>absolute</code>',
-            default: '<code>fixed</code>'
-          },
-          {
+            {
+                name: '<code>open</code>',
+                description: 'To control the behaviour of the sidebar programmatically, use the <code>.sync</code> modifier to make it two-way binding',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>position</code>',
+                description: 'Set display position of sidebar',
+                type: 'String',
+                values: '<code>fixed</code>,<code>static</code>,<code>absolute</code>',
+                default: '<code>fixed</code>'
+            },
+            {
               name: '<code>type</code>',
               description: 'Type (color) of the background, optional',
               type: 'String, ',
@@ -28,7 +28,7 @@ export default [
             },
             {
                 name: '<code>can-cancel</code>',
-                description: `Can close Modal by clicking 'X', pressing escape or clicking outside`,
+                description: `Can close Sidebar by clicking 'X', pressing escape or clicking outside`,
                 type: 'Boolean, Array',
                 values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
                 default: `<code>['escape', 'x', 'outside']</code>`
@@ -88,14 +88,7 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            },
-            {
-                name: '<code>container</code>',
-                description: 'DOM element the sidebar will be created on when fixed',
-                type: 'String',
-                values: '—',
-                default: '<code>body</code>'
-            },
+            }
       ],
       slots: [
           {
