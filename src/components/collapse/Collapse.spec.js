@@ -28,7 +28,8 @@ describe('BCollapse', () => {
         beforeEach(() => {
             wrapper = shallowMount(BCollapse, {
                 propsData: {
-                    open: false
+                    open: false,
+                    position: 'is-bottom'
                 }
             })
         })
@@ -76,6 +77,16 @@ describe('BCollapse', () => {
         const triggerSlot = '<strong> Header </strong>'
         const wrapper = shallowMount(BCollapse, {
             slots: {
+                trigger: triggerSlot
+            }
+        })
+        expect(wrapper.find('.collapse-trigger :first-child').html()).toBe(triggerSlot)
+    })
+
+    it('should have scoped trigger slot', () => {
+        const triggerSlot = '<strong> Header </strong>'
+        const wrapper = shallowMount(BCollapse, {
+            scopedSlots: {
                 trigger: triggerSlot
             }
         })

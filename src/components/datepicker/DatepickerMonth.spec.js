@@ -9,10 +9,11 @@ const newDate = (y, m, d) => {
     const date = new Date(Date.UTC(y, m, d))
     date.getDate = jest.fn(() => date.getUTCDate())
     date.getMonth = jest.fn(() => date.getUTCMonth())
+    date.getFullYear = jest.fn(() => date.getUTCFullYear())
     return date
 }
 
-const thisMonth = new Date().getUTCMonth()
+const thisMonth = newDate(2020, 4, 15).getUTCMonth()
 let events = [
     newDate(2018, 10, 10),
     newDate(2019, thisMonth, 2),
@@ -154,5 +155,65 @@ describe('BDatepickerMonth', () => {
             unselectableDaysOfWeek: [0, 1]
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+    })
+
+    it('emit focused date', () => {
+        const [y, m, d] = [2019, 4, 4]
+        const day = newDate(y, m, d)
+
+        let inc = 1
+        let expected = day
+        expected.setMonth(day.getMonth() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        let valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = -1
+        expected = day
+        expected.setMonth(day.getMonth() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = 3
+        expected = day
+        expected.setMonth(day.getMonth() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = -3
+        expected = day
+        expected.setMonth(day.getMonth() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+    })
+
+    describe('Multiple dates', () => {
+        beforeEach(() => {
+            wrapper.setProps({multiple: true})
+        })
+
+        it('should manage multiple dates update as expected', () => {
+            let date1 = newDate(2020, 3, 10)
+            let date2 = newDate(2020, 3, 15)
+            let date3 = newDate(2020, 3, 20)
+
+            wrapper.vm.emitChosenDate(date1)
+            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date1)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([date1])
+
+            wrapper.vm.emitChosenDate(date2)
+            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date2)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2])
+
+            wrapper.vm.emitChosenDate(date3)
+            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date3)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2, date3])
+
+            wrapper.vm.emitChosenDate(date1)
+            expect(wrapper.vm.multipleSelectedDates).toEqual([date2, date3])
+        })
     })
 })
