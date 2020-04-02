@@ -2,7 +2,7 @@
 
 exports[`BTimepicker render correctly 1`] = `
 <div class="timepicker control">
-    <b-dropdown-stub mobilemodal="true" animation="fade" closeonclick="true" canclose="true" appendtobodycopyparent="true">
+    <b-dropdown-stub mobilemodal="true" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true">
         <b-input-stub autocomplete="off" usehtml5validation="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
         <b-dropdown-item-stub custom="true" focusable="true" ariarole="">
             <b-field-stub grouped="true" position="is-centered" addons="true">
