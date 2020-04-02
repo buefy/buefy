@@ -1,5 +1,5 @@
 <template>
-    <div class="b-sidebar" @click="clickedOutside">
+    <div class="b-sidebar">
         <div
             class="sidebar-background"
             v-if="overlay && isOpen"
@@ -153,7 +153,7 @@ export default {
          * Close fixed sidebar if clicked outside.
          */
         clickedOutside(event) {
-            if (this.isFixed) {
+            if (this.isFixed && this.isOpen) {
                 if (this.whiteList.indexOf(event.target) < 0) {
                     this.cancel('outside')
                 }
@@ -163,6 +163,7 @@ export default {
     created() {
         if (typeof window !== 'undefined') {
             document.addEventListener('keyup', this.keyPress)
+            document.addEventListener('click', this.clickedOutside)
         }
     },
     mounted() {
@@ -173,6 +174,7 @@ export default {
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
+            document.removeEventListener('click', this.clickedOutside)
         }
         if (this.isFixed) {
             document.body.removeChild(this.$el)
