@@ -161,9 +161,6 @@ export default {
                 left: this.barStart
             }
         },
-        sliderSize() {
-            return this.$refs.slider['clientWidth']
-        },
         rootClasses() {
             return {
                 'is-rounded': this.rounded,
@@ -227,10 +224,13 @@ export default {
                 this.emitValue('dragging')
             }
         },
+        sliderSize() {
+            return this.$refs.slider.getBoundingClientRect().width
+        },
         onSliderClick(event) {
             if (this.disabled || this.isTrackClickDisabled) return
             const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
-            const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100
+            const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100
             const targetValue = this.min + percent * (this.max - this.min) / 100
             const diffFirst = Math.abs(targetValue - this.value1)
             if (!this.isRange) {
