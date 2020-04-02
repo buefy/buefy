@@ -134,7 +134,7 @@ export default {
         */
         cancel(method) {
             if (this.cancelOptions.indexOf(method) < 0) return
-            if (this.static) return
+            if (this.isStatic) return
 
             this.onCancel.apply(null, arguments)
             this.close()
