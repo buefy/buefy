@@ -110,7 +110,18 @@ export default {
         */
         tabItems() {
             if (this.activeTab < this.tabItems.length) {
-                this.tabItems[this.activeTab].isActive = true
+                let previous = this.activeTab
+                this.tabItems.map((tab, idx) => {
+                    if (tab.isActive) {
+                        previous = idx
+                        if (previous < this.tabItems.length) {
+                            this.tabItems[previous].deactivate(this.activeTab, previous)
+                        }
+                    }
+                })
+                this.tabItems[this.activeTab].activate(this.activeTab, previous)
+            } else if (this.activeTab > 0) {
+                this.changeTab(this.activeTab - 1)
             }
         }
     },

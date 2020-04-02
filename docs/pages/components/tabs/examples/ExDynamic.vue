@@ -37,32 +37,32 @@
                 return [
                     {
                         label: 'Pictures',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Pictures: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
                         label: 'Music',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Music: Lorem ipsum dolor sit amet.',
                         displayed: this.showMusic,
                     },
                     {
                         label: 'Videos',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Videos: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
                         label: 'Games',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Games: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
                         label: 'Comics',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Comics: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
                         label: 'Movies',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Movies: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     }
                 ]
@@ -77,7 +77,7 @@
             bookTab() {
                 return {
                     label: 'Books',
-                    content: 'Lorem ipsum dolor sit amet.',
+                    content: 'Books: Lorem ipsum dolor sit amet.',
                     displayed: true,
                 }
             }
