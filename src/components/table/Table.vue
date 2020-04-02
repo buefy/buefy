@@ -197,7 +197,14 @@
                             : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
+                                    <slot
+                                        v-if="$scopedSlots.searchable"
+                                        name="searchable"
+                                        :column="column"
+                                        :filters="filters"
+                                    />
                                     <b-input
+                                        v-else
                                         @[filtersEvent].native="onFiltersEvent"
                                         v-model="filters[column.field]"
                                         :type="column.numeric ? 'number' : 'text'" />

@@ -671,6 +671,11 @@ export default [
                 name: '<code>subheading</code>',
                 description: 'Table column custom subheading',
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>searchable</code>',
+                description: 'This is to customize the search input when searchable.',
+                props: '<code>column: Vue Object</code>, <code>filters: Object</code>'
             }
         ]
     }
