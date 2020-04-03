@@ -157,6 +157,10 @@ export default {
             type: Boolean,
             default: false
         },
+        removeSelected: {
+            type: Boolean,
+            default: false
+        },
         checkInfiniteScroll: {
             type: Boolean,
             default: false
@@ -271,7 +275,14 @@ export default {
                         return
                     }
                 }
-
+                // Remove the tag input previously added (if removeSelected).
+                if (this.removeSelected) {
+                    const index = this.tags.indexOf(tagToAdd)
+                    if (index >= 0) {
+                        this.tags.splice(index, 1)
+                        return
+                    }
+                }
                 // Add the tag input if it is not blank
                 // or previously added (if not allowDuplicates).
                 const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
