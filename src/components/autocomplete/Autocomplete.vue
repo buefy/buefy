@@ -11,8 +11,8 @@
             :loading="loading"
             :rounded="rounded"
             :icon="icon"
-            :icon-right="clearButton"
-            icon-right-clickable
+            :icon-right="newIconRight"
+            :icon-right-clickable="newIconRightClickable"
             :icon-pack="iconPack"
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
@@ -26,7 +26,7 @@
             @keydown.native.enter.prevent="enterPressed"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
-            @icon-right-click="clearInputText"
+            @icon-right-click="rightIconClick"
         />
 
         <transition name="fade">
@@ -112,6 +112,8 @@ export default {
             type: String,
             default: 'auto'
         },
+        iconRight: String,
+        iconRightClickable: Boolean,
         appendToBody: Boolean
     },
     data() {
@@ -186,11 +188,25 @@ export default {
             return !!this.$slots.footer
         },
 
-        clearButton() {
+        /**
+         * Apply dropdownPosition property
+         */
+        isOpenedTop() {
+            return this.dropdownPosition === 'top' || (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
+        },
+
+        newIconRight() {
             if (this.clearable && this.newValue) {
                 return 'close-circle'
             }
-            return ''
+            return this.iconRight
+        },
+
+        newIconRightClickable() {
+            if (this.clearable) {
+                return true
+            }
+            return this.iconRightClickable
         },
 
         contentStyle() {
@@ -198,13 +214,6 @@ export default {
                 maxHeight: this.maxHeight === undefined
                     ? null : (isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px')
             }
-        },
-
-        /**
-         * Apply dropdownPosition property
-         */
-        isOpenedTop() {
-            return this.dropdownPosition === 'top' || (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
         }
     },
     watch: {
@@ -453,8 +462,12 @@ export default {
             this.$emit('typing', this.newValue)
             this.checkValidity()
         },
-        clearInputText() {
-            this.newValue = ''
+        rightIconClick(event) {
+            if (this.clearable) {
+                this.newValue = ''
+            } else {
+                this.$emi('icon-right-click', event)
+            }
         },
         checkValidity() {
             if (this.useHtml5Validation) {
