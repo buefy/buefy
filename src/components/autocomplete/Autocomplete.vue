@@ -285,6 +285,7 @@ export default {
             this.$emit('select', this.selected)
             if (this.selected !== null) {
                 this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
+                this.setHovered(this.clearOnSelect ? null : this.hovered)
             }
             closeDropdown && this.$nextTick(() => { this.isActive = false })
             this.checkValidity()
