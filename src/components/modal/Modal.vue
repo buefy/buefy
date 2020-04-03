@@ -3,6 +3,7 @@
         :name="animation"
         @after-enter="afterEnter"
         @before-leave="beforeLeave"
+        @after-leave="afterLeave"
     >
         <div
             v-if="!destroyed"
@@ -109,7 +110,7 @@ export default {
         ariaModal: Boolean,
         destroyOnHide: {
             type: Boolean,
-            default: () => true
+            default: true
         }
     },
     data() {
@@ -144,18 +145,13 @@ export default {
     watch: {
         active(value) {
             this.isActive = value
+        },
+        isActive(value) {
             if (this.destroyOnHide) {
-                if (!value) {
-                    // Timeout for the animation complete before destroying
-                    setTimeout(() => {
-                        this.destroyed = true
-                    }, 250)
-                } else {
+                if (value) {
                     this.destroyed = false
                 }
             }
-        },
-        isActive(value) {
             this.handleScroll()
             this.$nextTick(() => {
                 if (value && this.$el && this.$el.focus) {
@@ -245,6 +241,15 @@ export default {
         */
         beforeLeave() {
             this.animating = true
+        },
+
+        /**
+        * Transition after-leave hook
+        */
+        afterLeave() {
+            if (this.destroyOnHide) {
+                this.destroyed = true
+            }
         }
     },
     created() {
