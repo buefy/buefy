@@ -1,10 +1,13 @@
 <template>
-    <div class="b-sidebar" @click="clickedOutside">
+    <div class="b-sidebar">
         <div
             class="sidebar-background"
             v-if="overlay && isOpen"
         />
-        <transition :name="transitionName">
+        <transition
+            :name="transitionName"
+            @before-enter="beforeEnter"
+            @after-enter="afterEnter">
             <div
                 v-show="isOpen"
                 ref="sidebarContent"
@@ -154,25 +157,45 @@ export default {
          */
         clickedOutside(event) {
             if (this.isFixed) {
-                if (this.whiteList.indexOf(event.target) < 0) {
-                    this.cancel('outside')
+                if (this.isOpen && !this.animating) {
+                    if (this.whiteList.indexOf(event.target) < 0) {
+                        this.cancel('outside')
+                    }
                 }
             }
+        },
+
+        /**
+        * Transition before-enter hook
+        */
+        beforeEnter() {
+            this.animating = true
+        },
+
+        /**
+        * Transition after-leave hook
+        */
+        afterEnter() {
+            this.animating = false
         }
     },
     created() {
         if (typeof window !== 'undefined') {
             document.addEventListener('keyup', this.keyPress)
+            document.addEventListener('click', this.clickedOutside)
         }
     },
     mounted() {
-        if (this.isFixed) {
-            document.body.appendChild(this.$el)
+        if (typeof window !== 'undefined') {
+            if (this.isFixed) {
+                document.body.appendChild(this.$el)
+            }
         }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
+            document.removeEventListener('click', this.clickedOutside)
         }
         if (this.isFixed) {
             document.body.removeChild(this.$el)
