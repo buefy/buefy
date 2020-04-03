@@ -44,6 +44,7 @@
 <script>
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
+import { removeElement, createAbsoluteElement } from '../../utils/helpers'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
@@ -118,7 +119,7 @@ export default {
             isActive: false,
             isHoverable: this.hoverable,
             _isDropdown: true, // Used internally by DropdownItem
-            _div: undefined // Used to append to body
+            _bodyEl: undefined // Used to append to body
         }
     },
     computed: {
@@ -278,7 +279,7 @@ export default {
             const trigger = this.$refs.trigger
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
-                const dropdown = this.$data._div.children[0]
+                const dropdown = this.$data._bodyEl.children[0]
                 dropdown.classList.forEach((item) => dropdown.classList.remove(item))
                 dropdown.classList.add('dropdown')
                 dropdown.classList.add('dropdown-menu-animation')
@@ -294,7 +295,7 @@ export default {
                 })
                 if (this.appendToBodyCopyParent) {
                     const parentNode = this.$refs.dropdown.parentNode
-                    const parent = this.$data._div
+                    const parent = this.$data._bodyEl
                     parent.classList.forEach((item) => parent.classList.remove(item))
                     parentNode.classList.forEach((item) => {
                         parent.classList.add(item)
@@ -322,16 +323,7 @@ export default {
     },
     mounted() {
         if (this.appendToBody) {
-            const root = document.createElement('div')
-            root.style.position = 'absolute'
-            root.style.left = '0px'
-            root.style.top = '0px'
-            const dropdown = document.createElement('div')
-            const dropdownMenu = this.$refs.dropdownMenu
-            root.appendChild(dropdown)
-            dropdown.appendChild(dropdownMenu)
-            document.body.appendChild(root)
-            this.$data._div = root
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdownMenu)
             this.updateAppendToBody()
         }
     },
@@ -347,7 +339,7 @@ export default {
             document.removeEventListener('keyup', this.keyPress)
         }
         if (this.appendToBody) {
-            document.body.removeChild(this.$data._div)
+            removeElement(this.$data._bodyEl_)
         }
     }
 }

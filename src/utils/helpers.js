@@ -113,6 +113,18 @@ export function removeElement(el) {
     }
 }
 
+export function createAbsoluteElement(el) {
+    const root = document.createElement('div')
+    root.style.position = 'absolute'
+    root.style.left = '0px'
+    root.style.top = '0px'
+    const wrapper = document.createElement('div')
+    wrapper.appendChild(el)
+    el.appendChild(el)
+    document.body.appendChild(root)
+    return el
+}
+
 /**
  * Escape regex characters
  * http://stackoverflow.com/a/6969486

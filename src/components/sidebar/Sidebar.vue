@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { removeElement } from '../../utils/helpers'
+
 export default {
     name: 'BSidebar',
     props: {
@@ -198,7 +200,7 @@ export default {
             document.removeEventListener('click', this.clickedOutside)
         }
         if (this.isFixed) {
-            document.body.removeChild(this.$el)
+            removeElement(this.$el)
         }
     }
 }

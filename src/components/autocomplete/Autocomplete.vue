@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { getValueByPath } from '../../utils/helpers'
+import { getValueByPath, removeElement, createAbsoluteElement } from '../../utils/helpers'
 import FormElementMixin from '../../utils/FormElementMixin'
 import Input from '../input/Input'
 
@@ -126,7 +126,7 @@ export default {
             style: {},
             _isAutocomplete: true,
             _elementRef: 'input',
-            _div: undefined
+            _bodyEl: undefined // Used to append to body
         }
     },
     computed: {
@@ -467,7 +467,7 @@ export default {
             const trigger = this.$refs.input.$el
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
-                const root = this.$data._div
+                const root = this.$data._bodyEl
                 root.classList.forEach((item) => root.classList.remove(item))
                 root.classList.add('autocomplete')
                 root.classList.add('control')
@@ -505,14 +505,7 @@ export default {
             list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
         }
         if (this.appendToBody) {
-            const root = document.createElement('div')
-            root.style.position = 'absolute'
-            root.style.left = '0px'
-            root.style.top = '0px'
-            const dropdownMenu = this.$refs.dropdown
-            root.appendChild(dropdownMenu)
-            document.body.appendChild(root)
-            this.$data._div = root
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown)
             this.updateAppendToBody()
         }
     },
@@ -526,7 +519,7 @@ export default {
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
-            document.body.removeChild(this.$data._div)
+            removeElement(this.$data._bodyEl)
         }
     }
 }
