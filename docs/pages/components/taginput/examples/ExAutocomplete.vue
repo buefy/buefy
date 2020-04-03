@@ -9,17 +9,14 @@
             </b-switch>
         </div>
         <b-field label="Enter some tags">
-           
             <b-taginput
-                readonly
                 v-model="tags"
                 :data="filteredTags"
                 autocomplete
-                ref="taginput"
                 :allow-new="allowNew"
                 :open-on-focus="openOnFocus"
                 field="user.first_name"
-                :icon-right="$refs.taginput && $refs.taginput.$refs.autocomplete.$data.isActive ? 'menu-up' : 'menu-down'"
+                icon="label"
                 placeholder="Add a tag"
                 @typing="getFilteredTags">
             </b-taginput>
@@ -38,7 +35,7 @@
                 isSelectOnly: false,
                 tags: [],
                 allowNew: false,
-                openOnFocus: true
+                openOnFocus: false
             }
         },
         methods: {
