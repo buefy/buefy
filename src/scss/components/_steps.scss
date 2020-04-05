@@ -11,6 +11,7 @@ $steps-default-color: $grey-lighter !default;
 $steps-previous-color: $primary !default;
 $steps-active-color: $primary !default;
 $steps-divider-height: .2em !default;
+$steps-vertical-margin: 1em 0 !default;
 
 @mixin steps-size($size) {
     font-size: $size;
@@ -255,6 +256,61 @@ $steps-divider-height: .2em !default;
                     }
                 }
             }
+        }
+    }
+
+    &.is-vertical {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        > .steps {
+            .step-items {
+                height: 100%;
+                flex-direction: column;
+                border-bottom-color: transparent;
+
+                .step-item {
+                    width: 100%;
+                    margin: $steps-vertical-margin;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &::before, &::after {
+                        background: linear-gradient(to top, $steps-default-color 50%, $steps-active-color 50%);
+                        background-size: 100% 200%;
+                        background-position: left bottom;
+                    }
+
+                    &:not(:first-child) {
+                        &::before {
+                            height: 100%;
+                            width: $steps-divider-height;
+                            top: -50%;
+                            left: calc(50% - (#{$steps-divider-height} / 2));
+                        }
+                    }
+
+                    &.is-active, &.is-previous {
+                        &::before, &::after {
+                            background-position: right top;
+                        }
+                    }
+                }
+            }
+        }
+
+        > .step-content {
+            flex-grow: 1;
+        }
+
+        > .step-navigation {
+            flex-basis: 100%;
+        }
+
+        &.is-right {
+            flex-direction: row-reverse;
         }
     }
 }
