@@ -122,7 +122,10 @@ export default {
         mainClasses() {
             return [
                 this.type,
-                this.size
+                this.size,
+                {
+                    'is-animated': this.animated
+                }
             ]
         },
 

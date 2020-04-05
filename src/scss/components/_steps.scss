@@ -246,5 +246,15 @@ $steps-divider-height: .2em !default;
         &.is-large {
             @include steps-size($size-large);
         }
+
+        &.is-animated {
+            .step-item {
+                &:not(:first-child), &:only-child {
+                    &::before {
+                        transition: background $speed-slow $easing;
+                    }
+                }
+            }
+        }
     }
 }
