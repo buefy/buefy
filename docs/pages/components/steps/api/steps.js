@@ -134,6 +134,13 @@ export default [
         title: 'Step Item',
         props: [
             {
+                name: '<code>step</code>',
+                description: 'Step marker content (when there is no icon)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>label</code>',
                 description: 'Step label',
                 type: 'String',

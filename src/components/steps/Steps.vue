@@ -21,6 +21,7 @@
                                 :icon="stepItem.icon"
                                 :pack="stepItem.iconPack"
                                 :size="size"/>
+                            <span v-else-if="stepItem.step">{{ stepItem.step }}</span>
                         </div>
                         <div class="step-details">
                             <span class="step-title">{{ stepItem.label }}</span>
