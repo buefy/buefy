@@ -70,6 +70,27 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>vertical</code>',
+                description: 'Display the steps vertically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>position</code>',
+                description: 'Position of the vertical step, optional',
+                type: 'String',
+                values: '<code>is-right</code>',
+                default: '—'
+            },
+            {
+                name: '<code>label-position</code>',
+                description: 'Position of the marker label, optional',
+                type: 'String',
+                values: '<code>bottom</code>, <code>right</code>, <code>left</code>',
+                default: '<code>bottom</code>'
+            },
+            {
                 name: '<code>aria-page-label</code>',
                 description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
                 type: 'String',

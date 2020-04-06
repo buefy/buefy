@@ -11,82 +11,105 @@ $steps-default-color: $grey-lighter !default;
 $steps-previous-color: $primary !default;
 $steps-active-color: $primary !default;
 $steps-divider-height: .2em !default;
+$steps-vertical-padding: 1em 0 !default;
 
 @mixin steps-size($size) {
-    font-size: $size;
-    min-height: $size * 2;
+    .steps {
+        font-size: $size;
+        min-height: $size * 2;
 
-    .step-items {
-        .step-item {
-            .step-marker {
-                height: $size * 2;
-                width: $size * 2;
-                position: absolute;
-                left: calc(50% - #{$size});
+        .step-items {
+            .step-item {
+                .step-marker {
+                    height: $size * 2;
+                    width: $size * 2;
 
-                .icon {
-               *, *:before {
-                        font-size: $size;
+                    .icon {
+                *, *:before {
+                            font-size: $size;
+                        }
+                    }
+                }
+
+                .step-details {
+                    .step-title {
+                        font-size: $size * 1.2;
+                        font-weight: $weight-semibold;
+                    }
+                }
+
+                &:not(:first-child), &:only-child {
+                    &::before {
+                        height: $steps-divider-height;
+                        top: #{$size};
+                    }
+                }
+                &:only-child {
+                    &::after {
+                        top: #{$size};
+                    }
+                }
+
+                @include until($tablet) {
+                    &::before, &::after, &:not(:first-child)::before {
+                        top: #{$size};
                     }
                 }
             }
+        }
+    }
 
-            .step-details {
-                margin-top: $size * 2;
-                margin-left: .5em;
-                margin-right: .5em;
-                padding-top: .2em;
-
-                .step-title {
-                    font-size: $size * 1.2;
-                    font-weight: $weight-semibold;
+    &.is-vertical {
+        > .steps {
+            &.has-label-right {
+                .step-items {
+                    .step-item {
+                        &:not(:first-child), &:only-child {
+                            &::before, &::after {
+                                left: calc(#{$size} - #{$steps-divider-height / 2});
+                            }
+                        }
+                    }
                 }
             }
-
-            &:not(:first-child), &:only-child {
-                &::before {
-                    height: $steps-divider-height;
-                    width: 100%;
-                    bottom: 0;
-                    left: -50%;
-                    top: #{$size};
+            &.has-label-left {
+                .step-items {
+                    .step-item {
+                        &:not(:first-child), &:only-child {
+                            &::before, &::after {
+                                left: auto;
+                                right: calc(#{$size} - #{$steps-divider-height / 2});
+                            }
+                        }
+                    }
                 }
             }
-            &:only-child {
-                &::after {
-                    height: $steps-divider-height;
-                    bottom: 0;
-                    top: #{$size};
-                }
-                &::before, &::after {
-                    width: 25%;
-                    left: 50%;
-                }
-                &::before {
-                    right: 50%;
-                    left: auto;
-                }
-            }
+        }
 
-            @include until($tablet) {
-                &:not(.is-active) {
-                    display: none;
+        &.is-right {
+            > .steps {
+                &.has-label-right {
+                    .step-items {
+                        .step-item {
+                            &:not(:first-child), &:only-child {
+                                &::before, &::after {
+                                    left: calc(#{$size} - #{$steps-divider-height / 2});
+                                }
+                            }
+                        }
+                    }
                 }
-
-                &::before, &::after, &:not(:first-child)::before {
-                    // This will contain the divider
-                    content: " ";
-                    display: block;
-                    position: absolute;
-                    height: $steps-divider-height;
-                    width: 25%;
-                    bottom: 0;
-                    left: 50%;
-                    top: #{$size};
-                }
-                &::before, &:not(:first-child)::before {
-                    right: 50%;
-                    left: auto;
+                &.has-label-left {
+                    .step-items {
+                        .step-item {
+                            &:not(:first-child), &:only-child {
+                                &::before, &::after {
+                                    left: auto;
+                                    right: calc(#{$size} - #{$steps-divider-height / 2});
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -106,6 +129,10 @@ $steps-divider-height: .2em !default;
                 flex-basis: 1em;
 
                 .step-link {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
                     color: $body-color;
 
                     &:not(.is-clickable) {
@@ -166,6 +193,8 @@ $steps-divider-height: .2em !default;
 
                 .step-details {
                     text-align: center;
+                    background: $body-background-color;
+                    z-index: 1;
                 }
 
                 &:not(:first-child), &:only-child {
@@ -176,6 +205,9 @@ $steps-divider-height: .2em !default;
                         content: " ";
                         display: block;
                         position: absolute;
+                        width: 100%;
+                        bottom: 0;
+                        left: -50%;
                     }
                 }
                 &:only-child {
@@ -184,6 +216,16 @@ $steps-divider-height: .2em !default;
                         content: " ";
                         display: block;
                         position: absolute;
+                        height: $steps-divider-height;
+                        bottom: 0;
+                    }
+                    &::before, &::after {
+                        width: 25%;
+                        left: 50%;
+                    }
+                    &::before {
+                        right: 50%;
+                        left: auto;
                     }
                 }
 
@@ -236,15 +278,160 @@ $steps-divider-height: .2em !default;
             }
         }
 
-        @include steps-size($size-normal);
-        &.is-small {
-            @include steps-size($size-small);
+        &.is-animated {
+            .step-item {
+                &:not(:first-child), &:only-child {
+                    &::before {
+                        transition: background $speed-slow $easing;
+                    }
+                }
+            }
         }
-        &.is-medium {
-            @include steps-size($size-medium);
+
+        &.has-label-right, &.has-label-left {
+            .step-items {
+                .step-item {
+                    .step-link {
+                        flex-direction: row;
+
+                        > .step-details {
+                            padding: .2em;
+                        }
+                    }
+                }
+            }
         }
-        &.is-large {
-            @include steps-size($size-large);
+        &.has-label-left {
+            .step-items {
+                .step-item {
+                    .step-link {
+                        flex-direction: row-reverse;
+                    }
+                }
+            }
+        }
+    }
+
+    @include steps-size($size-normal);
+    &.is-small {
+        @include steps-size($size-small);
+    }
+    &.is-medium {
+        @include steps-size($size-medium);
+    }
+    &.is-large {
+        @include steps-size($size-large);
+    }
+
+    &.is-vertical {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        > .steps {
+            .step-items {
+                height: 100%;
+                flex-direction: column;
+                border-bottom-color: transparent;
+
+                .step-item {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: $steps-vertical-padding;
+
+                    &::before, &::after {
+                        background: linear-gradient(to top, $steps-default-color 50%, $steps-active-color 50%);
+                        background-size: 100% 200%;
+                        background-position: left bottom;
+                    }
+
+                    &:not(:first-child), &:only-child {
+                        &::before {
+                            height: 100%;
+                            width: $steps-divider-height;
+                            top: -50%;
+                            left: calc(50% - #{$steps-divider-height / 2});
+                        }
+                    }
+
+                    &.is-active, &.is-previous {
+                        &::before, &::after {
+                            background-position: right top;
+                        }
+                    }
+
+                    &:only-child {
+                        &::before {
+                            top: 50%;
+                        }
+                        &::after {
+                            width: $steps-divider-height;
+                            top: auto;
+                            bottom: 50%;
+                        }
+                        &::before, &::after {
+                            height: 25%;
+                        }
+                    }
+                }
+            }
+
+            &.has-label-right {
+                .step-items {
+                    .step-item {
+                        justify-content: flex-start;
+                    }
+                }
+            }
+            &.has-label-left {
+                .step-items {
+                    .step-item {
+                        justify-content: flex-end;
+                    }
+                }
+            }
+        }
+
+        > .step-content {
+            flex-grow: 1;
+        }
+
+        > .step-navigation {
+            flex-basis: 100%;
+        }
+
+        &.is-right {
+            flex-direction: row-reverse;
+        }
+    }
+    &:not(.is-vertical) {
+        .steps {
+            .step-items {
+                .step-item{
+                    @include until($tablet) {
+                        &:not(.is-active) {
+                            display: none;
+                        }
+
+                        &::before, &::after, &:not(:first-child)::before {
+                            // This will contain the divider
+                            content: " ";
+                            display: block;
+                            position: absolute;
+                            height: $steps-divider-height;
+                            width: 25%;
+                            bottom: 0;
+                            left: 50%;
+                        }
+                        &::before, &:not(:first-child)::before {
+                            right: 50%;
+                            left: auto;
+                        }
+                    }
+                }
+            }
         }
     }
 }

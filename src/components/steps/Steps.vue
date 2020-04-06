@@ -1,5 +1,5 @@
 <template>
-    <div class="b-steps">
+    <div class="b-steps" :class="wrapperClasses">
         <nav class="steps" :class="mainClasses">
             <ul class="step-items">
                 <li
@@ -106,6 +106,22 @@ export default {
             type: Boolean,
             default: true
         },
+        vertical: {
+            type: Boolean,
+            default: false
+        },
+        position: String,
+        labelPosition: {
+            type: String,
+            validator(value) {
+                return [
+                    'bottom',
+                    'right',
+                    'left'
+                ].indexOf(value) > -1
+            },
+            default: 'bottom'
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
@@ -119,10 +135,23 @@ export default {
         }
     },
     computed: {
+        wrapperClasses() {
+            return [
+                this.size,
+                {
+                    'is-vertical': this.vertical,
+                    [this.position]: this.position && this.vertical
+                }
+            ]
+        },
         mainClasses() {
             return [
                 this.type,
-                this.size
+                {
+                    'has-label-right': this.labelPosition === 'right',
+                    'has-label-left': this.labelPosition === 'left',
+                    'is-animated': this.animated
+                }
             ]
         },
 
@@ -203,7 +232,18 @@ export default {
         */
         stepItems() {
             if (this.activeStep < this.stepItems.length) {
-                this.stepItems[this.activeStep].isActive = true
+                let previous = this.activeStep
+                this.stepItems.map((step, idx) => {
+                    if (step.isActive) {
+                        previous = idx
+                        if (previous < this.stepItems.length) {
+                            this.stepItems[previous].deactivate(this.activeStep, previous)
+                        }
+                    }
+                })
+                this.stepItems[this.activeStep].activate(this.activeStep, previous)
+            } else if (this.activeStep > 0) {
+                this.changeStep(this.activeStep - 1)
             }
         }
     },
