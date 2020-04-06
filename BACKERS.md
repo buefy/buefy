@@ -3,6 +3,7 @@
 You can join them in supporting Buefy by [Patreon](https://www.patreon.com/jtommy)
 
 ### $30+
+- [Eric Doversberger](https://www.harbourshare.com)
 - [Dario Petraroia](https://www.patreon.com/user/creators?u=25233076)
 
 ### $10+
