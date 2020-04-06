@@ -38,22 +38,22 @@
             :icon-prev="prevIcon"
             :icon-next="nextIcon"
             :label-position="labelPosition">
-            <b-step-item label="Account" :clickable="isStepsClickable">
+            <b-step-item step="1" label="Account" :clickable="isStepsClickable">
                 <h1 class="title has-text-centered">Account</h1>
                 Lorem ipsum dolor sit amet.
             </b-step-item>
 
-            <b-step-item label="Profile" :clickable="isStepsClickable" :type="{'is-success': isProfileSuccess}">
+            <b-step-item step="2" label="Profile" :clickable="isStepsClickable" :type="{'is-success': isProfileSuccess}">
                 <h1 class="title has-text-centered">Profile</h1>
                 Lorem ipsum dolor sit amet.
             </b-step-item>
 
-            <b-step-item :visible="showSocial" label="Social" :clickable="isStepsClickable">
+            <b-step-item step="3" :visible="showSocial" label="Social" :clickable="isStepsClickable">
                 <h1 class="title has-text-centered">Social</h1>
                 Lorem ipsum dolor sit amet.
             </b-step-item>
 
-            <b-step-item label="Finish" :clickable="isStepsClickable" disabled>
+            <b-step-item :step="showSocial ? 4 : 3" label="Finish" :clickable="isStepsClickable" disabled>
                 <h1 class="title has-text-centered">Finish</h1>
                 Lorem ipsum dolor sit amet.
             </b-step-item>

@@ -150,6 +150,7 @@ $steps-vertical-padding: 1em 0 !default;
                     color: $white;
                     border: $steps-marker-default-border;
                     z-index: 1;
+                    overflow: hidden;
                 }
 
                 // Override marker color per step
