@@ -111,6 +111,17 @@ export default {
             default: false
         },
         position: String,
+        labelPosition: {
+            type: String,
+            validator(value) {
+                return [
+                    'bottom',
+                    'right',
+                    'left'
+                ].indexOf(value) > -1
+            },
+            default: 'bottom'
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
@@ -125,16 +136,20 @@ export default {
     },
     computed: {
         wrapperClasses() {
-            return {
-                'is-vertical': this.vertical,
-                [this.position]: this.position && this.vertical
-            }
+            return [
+                this.size,
+                {
+                    'is-vertical': this.vertical,
+                    [this.position]: this.position && this.vertical
+                }
+            ]
         },
         mainClasses() {
             return [
                 this.type,
-                this.size,
                 {
+                    'has-label-right': this.labelPosition === 'right',
+                    'has-label-left': this.labelPosition === 'left',
                     'is-animated': this.animated
                 }
             ]

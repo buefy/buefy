@@ -24,7 +24,7 @@ export default [
         default: '<code>.2em</code>'
     },
     {
-        name: '<code>$steps-vertical-margin</code>',
+        name: '<code>$steps-vertical-padding</code>',
         default: '<code>1em 0</code>'
     }
 ]

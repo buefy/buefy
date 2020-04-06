@@ -2,7 +2,7 @@
     <section>
         <b-field grouped>
             <b-field grouped>
-                <b-switch v-model="atRight"> Right position </b-switch>
+                <b-switch v-model="position" true-value="is-right"> Right position </b-switch>
             </b-field>
             <b-field label="Size">
                 <b-select v-model="size" placeholder="Size">
@@ -12,11 +12,20 @@
                     <option value="is-large">Large</option>
                 </b-select>
             </b-field>
+            <b-field label="Label position">
+                <b-select v-model="labelPosition">
+                    <option value="bottom">Bottom</option>
+                    <option value="right">Right</option>
+                    <option value="left">Left</option>
+                </b-select>
+            </b-field>
         </b-field>
 
-        <b-steps :position="atRight ? 'is-right' : ''"
-                :size="size"
-                vertical>
+        <b-steps
+            :position="position"
+            :label-position="labelPosition"
+            :size="size"
+            vertical>
             <b-step-item label="Account" icon="account-key">
                 Account: Lorem ipsum dolor sit amet. <br />
                 Account: Lorem ipsum dolor sit amet. <br />
@@ -45,7 +54,8 @@
     export default {
         data() {
             return {
-                atRight: false,
+                labelPosition: 'bottom',
+                position: null,
                 size: null,
             }
         }

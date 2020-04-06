@@ -1,9 +1,6 @@
 <template>
     <section>
         <div class="block">
-            <button class="button" @click="activeStep = 1">Set Profile</button>
-        </div>
-        <div class="block">
             <b-switch v-model="showSocial"> Show Social step </b-switch>
             <b-switch v-model="isAnimated"> Animated </b-switch>
             <b-switch v-model="isStepsClickable"> Clickable Marker </b-switch>
@@ -14,21 +11,33 @@
             <b-switch v-model="isProfileSuccess"> Set <code>is-success</code> for profile </b-switch>
         </div>
         <b-field v-if="hasNavigation" grouped group-multiline>
-            <b-select v-model="prevIcon">
-                <option value="chevron-left">Chevron prev icon </option>
-                <option value="arrow-left">Arrow prev icon</option>
-            </b-select>
-            <b-select v-model="nextIcon">
-                <option value="chevron-right">Chevron next icon </option>
-                <option value="arrow-right">Arrow next icon</option>
-            </b-select>
+            <b-field label="Prev icon">
+                <b-select v-model="prevIcon">
+                    <option value="chevron-left">Chevron</option>
+                    <option value="arrow-left">Arrow</option>
+                </b-select>
+            </b-field>
+            <b-field label="Next icon">
+                <b-select v-model="nextIcon">
+                    <option value="chevron-right">Chevron</option>
+                    <option value="arrow-right">Arrow</option>
+                </b-select>
+            </b-field>
+            <b-field label="Label position">
+                <b-select v-model="labelPosition">
+                    <option value="bottom">Bottom</option>
+                    <option value="right">Right</option>
+                    <option value="left">Left</option>
+                </b-select>
+            </b-field>
         </b-field>
         <b-steps
             v-model="activeStep"
             :animated="isAnimated"
             :has-navigation="hasNavigation"
             :icon-prev="prevIcon"
-            :icon-next="nextIcon">
+            :icon-next="nextIcon"
+            :label-position="labelPosition">
             <b-step-item label="Account" :clickable="isStepsClickable">
                 <h1 class="title has-text-centered">Account</h1>
                 Lorem ipsum dolor sit amet.
@@ -87,6 +96,7 @@
                 customNavigation: false,
                 prevIcon: 'chevron-left',
                 nextIcon: 'chevron-right',
+                labelPosition: 'bottom',
                 isStepsClickable: false,
                 isProfileSuccess: false
             }
