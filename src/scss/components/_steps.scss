@@ -143,7 +143,7 @@ $steps-vertical-padding: 1em 0 !default;
                 .step-marker {
                     align-items: center;
                     display: flex;
-                    border-radius: 50%;
+                    border-radius: $radius;
                     font-weight: $weight-bold;
                     justify-content: center;
                     background: $steps-maker-default-color;
@@ -276,6 +276,14 @@ $steps-vertical-padding: 1em 0 !default;
             }
             &.is-transitioning {
                 overflow: hidden;
+            }
+        }
+
+        &.is-rounded {
+            .step-item {
+                .step-marker {
+                    border-radius: $radius-rounded;
+                }
             }
         }
 

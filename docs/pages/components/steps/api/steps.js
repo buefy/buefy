@@ -91,6 +91,13 @@ export default [
                 default: '<code>bottom</code>'
             },
             {
+                name: '<code>rounded</code>',
+                description: 'Rounded step markers',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>aria-page-label</code>',
                 description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
                 type: 'String',
