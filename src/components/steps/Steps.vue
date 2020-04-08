@@ -123,6 +123,10 @@ export default {
             },
             default: 'bottom'
         },
+        rounded: {
+            type: Boolean,
+            default: true
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
@@ -151,7 +155,8 @@ export default {
                 {
                     'has-label-right': this.labelPosition === 'right',
                     'has-label-left': this.labelPosition === 'left',
-                    'is-animated': this.animated
+                    'is-animated': this.animated,
+                    'is-rounded': this.rounded
                 }
             ]
         },

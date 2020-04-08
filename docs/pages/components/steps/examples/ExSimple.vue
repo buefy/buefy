@@ -3,6 +3,7 @@
         <div class="block">
             <b-switch v-model="showSocial"> Show Social step </b-switch>
             <b-switch v-model="isAnimated"> Animated </b-switch>
+            <b-switch v-model="isRounded"> Rounded </b-switch>
             <b-switch v-model="isStepsClickable"> Clickable Marker </b-switch>
         </div>
         <div class="block">
@@ -34,6 +35,7 @@
         <b-steps
             v-model="activeStep"
             :animated="isAnimated"
+            :rounded="isRounded"
             :has-navigation="hasNavigation"
             :icon-prev="prevIcon"
             :icon-next="nextIcon"
@@ -90,15 +92,19 @@
         data() {
             return {
                 activeStep: 0,
+
                 showSocial: false,
                 isAnimated: true,
+                isRounded: true,
+                isStepsClickable: false,
+
                 hasNavigation: true,
                 customNavigation: false,
+                isProfileSuccess: false,
+
                 prevIcon: 'chevron-left',
                 nextIcon: 'chevron-right',
-                labelPosition: 'bottom',
-                isStepsClickable: false,
-                isProfileSuccess: false
+                labelPosition: 'bottom'
             }
         }
     }
