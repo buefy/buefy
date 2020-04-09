@@ -573,7 +573,7 @@ export default [
             },
             {
                 name: '<code>width</code>',
-                description: 'Column fixed width in pixels',
+                description: 'Column fixed width in any unit, or pixels when none is provided',
                 type: 'Number, String',
                 values: '—',
                 default: '—'
