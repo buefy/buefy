@@ -339,7 +339,7 @@ export default {
             document.removeEventListener('keyup', this.keyPress)
         }
         if (this.appendToBody) {
-            removeElement(this.$data._bodyEl_)
+            removeElement(this.$data._bodyEl)
         }
     }
 }

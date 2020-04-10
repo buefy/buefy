@@ -119,10 +119,10 @@ export function createAbsoluteElement(el) {
     root.style.left = '0px'
     root.style.top = '0px'
     const wrapper = document.createElement('div')
+    root.appendChild(wrapper)
     wrapper.appendChild(el)
-    el.appendChild(el)
     document.body.appendChild(root)
-    return el
+    return root
 }
 
 /**
