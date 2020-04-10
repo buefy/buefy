@@ -243,11 +243,11 @@ export default {
                     if (step.isActive) {
                         previous = idx
                         if (previous < this.stepItems.length) {
-                            this.stepItems[previous].deactivate(this.activeStep, previous)
+                            this.stepItems[previous].isActive = false
                         }
                     }
                 })
-                this.stepItems[this.activeStep].activate(this.activeStep, previous)
+                this.stepItems[this.activeStep].isActive = true
             } else if (this.activeStep > 0) {
                 this.changeStep(this.activeStep - 1)
             }

@@ -2,7 +2,7 @@
 export default {
     name: 'BStepItem',
     props: {
-        step: String,
+        step: String | Number,
         label: String,
         type: String | Object,
         icon: String,
