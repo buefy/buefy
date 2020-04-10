@@ -66,12 +66,6 @@
         "url": "https://yandev.de/"
     },
     {
-        "title": "EL Catre",
-        "date": "2019-10-22",
-        "img": "elcatre.jpg",
-        "url": "https://elcatre.com/"
-    },
-    {
         "title": "Frenl",
         "date": "2019-10-20",
         "img": "frenl.png",
@@ -165,12 +159,6 @@
         "featured": true
     },
     {
-        "title": "Immunization Academy",
-        "date": "2019-04-24",
-        "img": "immunization-academy.png",
-        "url": "https://www.immunizationacademy.com"
-    },
-    {
         "title": "Switchblade",
         "date": "2019-04-24",
         "img": "switchblade.png",
@@ -194,18 +182,6 @@
         "date": "2019-04-24",
         "img": "tainacan.png",
         "url": "http://tainacan.org/"
-    },
-    {
-        "title": "Counter Network",
-        "date": "2019-04-24",
-        "img": "counter-network.png",
-        "url": "https://counter.network"
-    },
-    {
-        "title": "Gods Unchained",
-        "date": "2019-04-24",
-        "img": "godsunchained.png",
-        "url": "https://godsunchained.info"
     },
     {
         "title": "Reaction Role",
