@@ -1,16 +1,18 @@
 <template>
     <section>
-        <button class="button is-medium" @click="simple">
-            Launch notification (default)
-        </button>
+        <div class="buttons">
+            <button class="button is-medium" @click="simple">
+                Launch notification (default)
+            </button>
 
-        <button class="button is-medium is-success" @click="success">
-            Launch notification (custom)
-        </button>
+            <button class="button is-medium is-success" @click="success">
+                Launch notification (custom)
+            </button>
 
-        <button class="button is-medium is-danger" @click="danger">
-            Launch notification (custom)
-        </button>
+            <button class="button is-medium is-danger" @click="danger">
+                Launch notification (custom)
+            </button>
+        </div>
     </section>
 </template>
 

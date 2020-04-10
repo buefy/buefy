@@ -1,15 +1,27 @@
 <template>
     <section>
-        <div style="padding: 1.5rem">
-            <b-field grouped group-multiline position="is-centered">
-                <b-switch v-model="arrow">Arrow</b-switch>
-                <b-switch v-model="arrowHover" :disabled="!arrow">Arrow on hover</b-switch>
-                <b-switch v-model="drag">Drag event</b-switch>
-                <b-switch v-model="gray" :disabled="opacity">Grayscale</b-switch>
-                <b-switch v-model="opacity" :disabled="gray">Opacity</b-switch>
-                <b-switch v-model="repeat">Repeat</b-switch>
-            </b-field><br>
-            <b-field grouped group-multiline position="is-centered">
+        <div class="example-component">
+            <b-field grouped group-multiline>
+                <div class="control">
+                    <b-switch v-model="arrow">Arrow</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="arrowHover" :disabled="!arrow">Arrow on hover</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="drag">Drag event</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="gray" :disabled="opacity">Grayscale</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="opacity" :disabled="gray">Opacity</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="repeat">Repeat</b-switch>
+                </div>
+            </b-field>
+            <b-field grouped group-multiline>
                 <b-field label="Value">
                     <b-numberinput v-model="values" min="0" :max="items.length - 1" controls-position="compact"/>
                 </b-field>

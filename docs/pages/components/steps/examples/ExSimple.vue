@@ -1,16 +1,30 @@
 <template>
     <section>
-        <div class="block">
-            <b-switch v-model="showSocial"> Show Social step </b-switch>
-            <b-switch v-model="isAnimated"> Animated </b-switch>
-            <b-switch v-model="isRounded"> Rounded </b-switch>
-            <b-switch v-model="isStepsClickable"> Clickable Marker </b-switch>
-        </div>
-        <div class="block">
-            <b-switch v-model="hasNavigation"> Navigation Buttons </b-switch>
-            <b-switch v-model="customNavigation"> Custom Navigation </b-switch>
-            <b-switch v-model="isProfileSuccess"> Set <code>is-success</code> for profile </b-switch>
-        </div>
+        <b-field grouped group-multiline>
+            <div class="control">
+                <b-switch v-model="showSocial"> Show Social step </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isAnimated"> Animated </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isRounded"> Rounded </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isStepsClickable"> Clickable Marker </b-switch>
+            </div>
+        </b-field>
+        <b-field grouped group-multiline>
+            <div class="control">
+                <b-switch v-model="hasNavigation"> Navigation Buttons </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="customNavigation"> Custom Navigation </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="isProfileSuccess"> Set <code>is-success</code> for profile </b-switch>
+            </div>
+        </b-field>
         <b-field v-if="hasNavigation" grouped group-multiline>
             <b-field label="Prev icon">
                 <b-select v-model="prevIcon">
@@ -55,7 +69,7 @@
                 Lorem ipsum dolor sit amet.
             </b-step-item>
 
-            <b-step-item :step="showSocial ? 4 : 3" label="Finish" :clickable="isStepsClickable" disabled>
+            <b-step-item :step="showSocial ? '4' : '3'" label="Finish" :clickable="isStepsClickable" disabled>
                 <h1 class="title has-text-centered">Finish</h1>
                 Lorem ipsum dolor sit amet.
             </b-step-item>

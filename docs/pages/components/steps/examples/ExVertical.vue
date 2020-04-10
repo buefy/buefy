@@ -1,10 +1,10 @@
 <template>
     <section>
-        <b-field grouped>
-            <b-field grouped>
+        <b-field grouped group-multiline>
+            <div class="control">
                 <b-switch v-model="position" true-value="is-right"> Right position </b-switch>
-            </b-field>
-            <b-field label="Size">
+            </div>
+            <b-field label="Size" label-position="on-border">
                 <b-select v-model="size" placeholder="Size">
                     <option :value="null">Default</option>
                     <option value="is-small">Small</option>
@@ -12,7 +12,7 @@
                     <option value="is-large">Large</option>
                 </b-select>
             </b-field>
-            <b-field label="Label position">
+            <b-field label="Label position" label-position="on-border">
                 <b-select v-model="labelPosition">
                     <option value="bottom">Bottom</option>
                     <option value="right">Right</option>

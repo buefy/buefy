@@ -1,10 +1,10 @@
 <template>
     <section>
-        <div style="padding: 1.5rem">
-            <b-field grouped group-multiline position="is-centered">
-                <b-field>
+        <div class="example-component">
+            <b-field grouped group-multiline>
+                <div class="control">
                     <b-switch v-model="progress"><strong>Progress</strong></b-switch>
-                </b-field>
+                </div>
                 <b-field label="Type" label-position="on-border">
                     <b-select v-model="progressType" :disabled="!progress">
                         <option value="is-primary">is-primary</option>

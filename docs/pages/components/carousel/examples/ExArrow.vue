@@ -1,12 +1,18 @@
 <template>
     <section>
-        <div style="padding: 1.5rem">
-            <b-field grouped group-multiline position="is-centered">
-                <b-switch v-model="arrow"><strong>Arrow</strong></b-switch>
-                <b-switch v-model="arrowBoth" :disabled="!arrow">Both</b-switch>
-                <b-switch v-model="arrowHover" :disabled="!arrow">Hover</b-switch>
-            </b-field><br>
-            <b-field grouped group-multiline position="is-centered">
+        <div class="example-component">
+            <b-field grouped group-multiline>
+                <div class="control">
+                    <b-switch v-model="arrow"><strong>Arrow</strong></b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="arrowBoth" :disabled="!arrow">Both</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="arrowHover" :disabled="!arrow">Hover</b-switch>
+                </div>
+            </b-field>
+            <b-field grouped group-multiline>
                 <b-field label="Icon Pack">
                     <b-input v-model="iconPack" placeholder="e.g. mdi, fa or other"/>
                 </b-field>
