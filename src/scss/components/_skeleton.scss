@@ -1,0 +1,30 @@
+
+$skeleton-line-height: 1rem !default;
+$skeleton-background: linear-gradient(90deg,#b8b3b3 25%,#e2e2e2 37%,#b8b3b3 63%);
+$skeleton-border-radius: 5px !default;
+$skeleton-duration: 1.5s !default;
+
+.b-skeleton {
+    width: 100%;
+    > .b-skeleton-item {
+        background: linear-gradient(90deg,#b8b3b3 25%,#e2e2e2 37%,#b8b3b3 63%);
+        background-size: 400% 100%;
+        animation: skeleton-loading $skeleton-duration $easing infinite;
+        display: inline-block;
+        line-height: $skeleton-line-height;
+        width: 100%;
+        border-radius: $skeleton-border-radius;
+        &::after {
+            content: "\00a0";
+        }
+    }
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
