@@ -275,8 +275,8 @@ export default {
         defaultDatetimeFormatter(date) {
             if (typeof this.datetimeFormatter === 'function') {
                 return this.datetimeFormatter(date)
-            } else if (typeof config.defaultDatetimeParser === 'function') {
-                return config.defaultDatetimeParser(date)
+            } else if (typeof config.defaultDatetimeFormatter === 'function') {
+                return config.defaultDatetimeFormatter(date)
             } else {
                 if (this.$refs.timepicker) {
                     const yyyyMMdd = date.getFullYear() +
