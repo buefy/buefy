@@ -1,11 +1,11 @@
 export default [
     {
         name: '<code>$skeleton-line-height</code>',
-        default: '<code>1rem</code>'
+        default: '<code>1</code>'
     },
     {
         name: '<code>$skeleton-background</code>',
-        default: '<code>linear-gradient(90deg,#b8b3b3 25%,#e2e2e2 37%,#b8b3b3 63%)</code>'
+        default: '<code>linear-gradient(90deg,$grey-light 25%,$grey-lighter 37%,$grey-light 63%)</code>'
     },
     {
         name: '<code>$skeleton-border-radius</code>',
