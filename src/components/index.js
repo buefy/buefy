@@ -23,6 +23,7 @@ import Progress from './progress'
 import Radio from './radio'
 import Rate from './rate'
 import Select from './select'
+import Skeleton from './skeleton'
 import Sidebar from './sidebar'
 import Slider from './slider'
 import Snackbar from './snackbar'
@@ -63,6 +64,7 @@ export {
     Radio,
     Rate,
     Select,
+    Skeleton,
     Sidebar,
     Slider,
     Snackbar,
