@@ -1,5 +1,18 @@
 [
     {
+        "title": "Leasy",
+        "date": "2020-04-13",
+        "img": "leasy.png",
+        "url": "https://leasy.co/",
+        "featured": true
+    },
+    {
+        "title": "Taskflex",
+        "date": "2020-04-13",
+        "img": "taskflex.png",
+        "url": "https://www.taskflex.dk/"
+    },
+    {
         "title": "Hackdoor",
         "date": "2020-03-04",
         "img": "hackdoor.png",
@@ -75,8 +88,7 @@
         "title": "Kulap",
         "date": "2019-09-04",
         "img": "kulap.png",
-        "url": "https://www.kulap.io",
-        "featured": true
+        "url": "https://www.kulap.io"
     },
     {
         "title": "Gravium Wallet",
@@ -114,12 +126,6 @@
         "img": "travelstop.png",
         "url": "https://travelstop.com",
         "featured": true
-    },
-    {
-        "title": "Git Stars",
-        "date": "2019-06-01",
-        "img": "git-stars.png",
-        "url": "https://git-stars.netlify.com"
     },
     {
         "title": "Marvel Match",
