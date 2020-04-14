@@ -9,7 +9,7 @@ export default [
     },
     {
         name: '<code>$skeleton-border-radius</code>',
-        default: '<code>5px</code>'
+        default: '<code>$radius</code>'
     },
     {
         name: '<code>$skeleton-duration</code>',

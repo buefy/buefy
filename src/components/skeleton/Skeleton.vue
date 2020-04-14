@@ -7,6 +7,10 @@ export default {
             type: Boolean,
             default: true
         },
+        animated: {
+            type: Boolean,
+            default: true
+        },
         width: [Number, String],
         height: [Number, String],
         circle: Boolean,
@@ -33,7 +37,7 @@ export default {
                 }
             }))
         }
-        return createElement('div', { staticClass: 'b-skeleton' }, items)
+        return createElement('div', { staticClass: 'b-skeleton', class: { 'is-animated': context.props.animated } }, items)
     }
 }
 </script>

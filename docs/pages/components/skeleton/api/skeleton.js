@@ -9,6 +9,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>animated</code>',
+                description: 'Display a loading animation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>width</code>',
                 description: 'Custom width',
                 type: 'String, Number',
@@ -28,6 +35,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>count</code>',
+                description: 'Number of shapes to display',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
             }
         ]
     }
