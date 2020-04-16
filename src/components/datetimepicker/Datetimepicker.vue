@@ -67,6 +67,7 @@
         :size="size"
         :icon="icon"
         :icon-pack="iconPack"
+        :rounded="rounded"
         :loading="loading"
         :max="formatNative(maxDate)"
         :min="formatNative(minDate)"
