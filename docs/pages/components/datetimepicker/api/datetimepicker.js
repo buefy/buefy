@@ -114,6 +114,27 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Datetimepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>horizontal-time-picker</code>',
+                description: 'Changes the time picker layout to a horizontal position',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append datetimepicker calendar to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

@@ -7,21 +7,21 @@
                     :key="index"
                     v-show="tabItem.visible"
                     :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
-                    <a @click="tabClick(index)">
-                        <template v-if="tabItem.$slots.header">
-                            <b-slot-component
-                                :component="tabItem"
-                                name="header"
-                                tag="span" />
-                        </template>
-                        <template v-else>
-                            <b-icon
-                                v-if="tabItem.icon"
-                                :icon="tabItem.icon"
-                                :pack="tabItem.iconPack"
-                                :size="size"/>
-                            <span>{{ tabItem.label }}</span>
-                        </template>
+
+                    <b-slot-component
+                        v-if="tabItem.$slots.header"
+                        :component="tabItem"
+                        name="header"
+                        tag="a"
+                        @click.native="tabClick(index)"
+                    />
+                    <a v-else @click="tabClick(index)">
+                        <b-icon
+                            v-if="tabItem.icon"
+                            :icon="tabItem.icon"
+                            :pack="tabItem.iconPack"
+                            :size="size"/>
+                        <span>{{ tabItem.label }}</span>
                     </a>
                 </li>
             </ul>
@@ -56,12 +56,13 @@ export default {
             type: Boolean,
             default: false
         },
-        vertical: Boolean
+        vertical: Boolean,
+        multiline: Boolean
     },
     data() {
         return {
             activeTab: this.value || 0,
-            tabItems: [],
+            defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
             _isTabs: true // Used internally by TabItem
@@ -72,6 +73,7 @@ export default {
             return {
                 'is-fullwidth': this.expanded,
                 'is-vertical': this.vertical,
+                'is-multiline': this.multiline,
                 [this.position]: this.position && this.vertical
             }
         },
@@ -85,6 +87,14 @@ export default {
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
             ]
+        },
+        tabItems() {
+            return this.defaultSlots
+                .filter((vnode) =>
+                    vnode.componentInstance &&
+                    vnode.componentInstance.$data &&
+                    vnode.componentInstance.$data._isTabItem)
+                .map((vnode) => vnode.componentInstance)
         }
     },
     watch: {
@@ -100,11 +110,25 @@ export default {
         */
         tabItems() {
             if (this.activeTab < this.tabItems.length) {
+                let previous = this.activeTab
+                this.tabItems.map((tab, idx) => {
+                    if (tab.isActive) {
+                        previous = idx
+                        if (previous < this.tabItems.length) {
+                            this.tabItems[previous].isActive = false
+                        }
+                    }
+                })
                 this.tabItems[this.activeTab].isActive = true
+            } else if (this.activeTab > 0) {
+                this.changeTab(this.activeTab - 1)
             }
         }
     },
     methods: {
+        refreshSlots() {
+            this.defaultSlots = this.$slots.default || []
+        },
         /**
         * Change the active tab and emit change event.
         */
@@ -132,6 +156,7 @@ export default {
         if (this.activeTab < this.tabItems.length) {
             this.tabItems[this.activeTab].isActive = true
         }
+        this.refreshSlots()
     }
 }
 </script>

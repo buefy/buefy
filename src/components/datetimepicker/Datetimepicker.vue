@@ -19,9 +19,14 @@
         :icon-pack="iconPack"
         :size="datepickerSize"
         :placeholder="placeholder"
+        :horizontal-time-picker="horizontalTimePicker"
         :range="false"
         :disabled="disabled"
-        :mobile-native="mobileNative"
+        :mobile-native="isMobileNative"
+        :focusable="focusable"
+        :append-to-body="appendToBody"
+        @focus="onFocus"
+        @blur="onBlur"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
@@ -41,6 +46,8 @@
                     :max-time="maxTime"
                     :size="timepickerSize"
                     :disabled="timepickerDisabled"
+                    :focusable="focusable"
+                    :mobile-native="isMobileNative"
                 />
             </div>
             <div
@@ -97,6 +104,7 @@ export default {
             default: false
         },
         placeholder: String,
+        horizontalTimePicker: Boolean,
         disabled: Boolean,
         icon: String,
         iconPack: String,
@@ -126,11 +134,20 @@ export default {
             }
         },
         datepicker: Object,
-        timepicker: Object
+        timepicker: Object,
+        tzOffset: {
+            type: Number,
+            default: 0
+        },
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        appendToBody: Boolean
     },
     data() {
         return {
-            newValue: this.value
+            newValue: this.adjustValue(this.value)
         }
     },
     computed: {
@@ -157,51 +174,63 @@ export default {
                         val = this.datetimeCreator(value)
                     }
                     // check min and max range
-                    if (this.minDatetime && val < this.minDatetime) {
-                        val = this.minDatetime
-                    } else if (this.maxDatetime && val > this.maxDatetime) {
-                        val = this.maxDatetime
+                    if (this.minDatetime && val < this.adjustValue(this.minDatetime)) {
+                        val = this.adjustValue(this.minDatetime)
+                    } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)) {
+                        val = this.adjustValue(this.maxDatetime)
                     }
                     this.newValue = new Date(val.getTime())
                 } else {
-                    this.newValue = value
+                    this.newValue = this.adjustValue(this.value)
                 }
-                this.$emit('input', this.newValue)
+                var adjustedValue = this.adjustValue(this.newValue, true) // reverse adjust
+                this.$emit('input', adjustedValue)
             }
         },
+        isMobileNative() {
+            return this.mobileNative && this.tzOffset === 0
+        },
         isMobile() {
-            return this.mobileNative && isMobile.any()
+            return this.isMobileNative && isMobile.any()
         },
         minDate() {
-            if (!this.minDatetime) return this.datepicker ? this.datepicker.minDate : null
-            return new Date(this.minDatetime.getFullYear(),
-                this.minDatetime.getMonth(),
-                this.minDatetime.getDate(), 0, 0, 0, 0)
+            if (!this.minDatetime) {
+                return this.datepicker ? this.adjustValue(this.datepicker.minDate) : null
+            }
+            const adjMinDatetime = this.adjustValue(this.minDatetime)
+            return new Date(adjMinDatetime.getFullYear(),
+                adjMinDatetime.getMonth(),
+                adjMinDatetime.getDate(), 0, 0, 0, 0)
         },
         maxDate() {
-            if (!this.maxDatetime) return this.datepicker ? this.datepicker.maxDate : null
-            return new Date(this.maxDatetime.getFullYear(),
-                this.maxDatetime.getMonth(),
-                this.maxDatetime.getDate(), 0, 0, 0, 0)
+            if (!this.maxDatetime) {
+                return this.datepicker ? this.adjustValue(this.datepicker.maxDate) : null
+            }
+            const adjMaxDatetime = this.adjustValue(this.maxDatetime)
+            return new Date(adjMaxDatetime.getFullYear(),
+                adjMaxDatetime.getMonth(),
+                adjMaxDatetime.getDate(), 0, 0, 0, 0)
         },
         minTime() {
             if (!this.minDatetime || (this.newValue === null || typeof this.newValue === 'undefined')) {
-                return this.timepicker ? this.timepicker.minTime : null
+                return this.timepicker ? this.adjustValue(this.timepicker.minTime) : null
             }
-            if (this.minDatetime.getFullYear() === this.newValue.getFullYear() &&
-                this.minDatetime.getMonth() === this.newValue.getMonth() &&
-                this.minDatetime.getDate() === this.newValue.getDate()) {
-                return this.minDatetime
+            const adjMinDatetime = this.adjustValue(this.minDatetime)
+            if (adjMinDatetime.getFullYear() === this.newValue.getFullYear() &&
+                adjMinDatetime.getMonth() === this.newValue.getMonth() &&
+                adjMinDatetime.getDate() === this.newValue.getDate()) {
+                return adjMinDatetime
             }
         },
         maxTime() {
             if (!this.maxDatetime || (this.newValue === null || typeof this.newValue === 'undefined')) {
-                return this.timepicker ? this.timepicker.maxTime : null
+                return this.timepicker ? this.adjustValue(this.timepicker.maxTime) : null
             }
-            if (this.maxDatetime.getFullYear() === this.newValue.getFullYear() &&
-                this.maxDatetime.getMonth() === this.newValue.getMonth() &&
-                this.maxDatetime.getDate() === this.newValue.getDate()) {
-                return this.maxDatetime
+            const adjMaxDatetime = this.adjustValue(this.maxDatetime)
+            if (adjMaxDatetime.getFullYear() === this.newValue.getFullYear() &&
+                adjMaxDatetime.getMonth() === this.newValue.getMonth() &&
+                adjMaxDatetime.getDate() === this.newValue.getDate()) {
+                return adjMaxDatetime
             }
         },
         datepickerSize() {
@@ -218,11 +247,22 @@ export default {
         }
     },
     watch: {
-        value(value) {
-            this.newValue = value
+        value(val) {
+            this.newValue = this.adjustValue(this.value)
+        },
+        tzOffset(val) {
+            this.newValue = this.adjustValue(this.value)
         }
     },
     methods: {
+        adjustValue(value, reverse = false) {
+            if (!value) return value
+            if (reverse) {
+                return new Date(value.getTime() - this.tzOffset * 60000)
+            } else {
+                return new Date(value.getTime() + this.tzOffset * 60000)
+            }
+        },
         defaultDatetimeParser(date) {
             if (typeof this.datetimeParser === 'function') {
                 return this.datetimeParser(date)
@@ -235,8 +275,8 @@ export default {
         defaultDatetimeFormatter(date) {
             if (typeof this.datetimeFormatter === 'function') {
                 return this.datetimeFormatter(date)
-            } else if (typeof config.defaultDatetimeParser === 'function') {
-                return config.defaultDatetimeParser(date)
+            } else if (typeof config.defaultDatetimeFormatter === 'function') {
+                return config.defaultDatetimeFormatter(date)
             } else {
                 if (this.$refs.timepicker) {
                     const yyyyMMdd = date.getFullYear() +
@@ -279,9 +319,11 @@ export default {
         }
     },
     mounted() {
-        // $refs attached, it's time to refresh datepicker (input)
-        if (this.newValue) {
-            this.$refs.datepicker.$forceUpdate()
+        if (!this.isMobile || this.inline) {
+            // $refs attached, it's time to refresh datepicker (input)
+            if (this.newValue) {
+                this.$refs.datepicker.$forceUpdate()
+            }
         }
     }
 }

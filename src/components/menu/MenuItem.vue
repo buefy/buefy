@@ -8,7 +8,7 @@
                 'is-disabled': disabled
             }"
             @click="onClick($event)"
-            @click.native="onClick($event)">
+            v-on="$listeners">
             <b-icon
                 v-if="icon"
                 :icon="icon"
@@ -36,6 +36,7 @@
 
 <script>
 import Icon from '../icon/Icon'
+import config from '../../utils/config'
 
 export default {
     name: 'BMenuItem',
@@ -52,20 +53,13 @@ export default {
         icon: String,
         animation: {
             type: String,
-            default: 'fade'
+            default: 'slide'
         },
         tag: {
             type: String,
             default: 'a',
             validator: (value) => {
-                return [
-                    'a',
-                    'router-link',
-                    'nuxt-link',
-                    'n-link',
-                    'NuxtLink',
-                    'NLink'
-                ].indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value) >= 0
             }
         },
         ariaRole: {
@@ -95,26 +89,37 @@ export default {
     methods: {
         onClick(event) {
             if (this.disabled) return
-            this.reset(this.$parent)
-            this.newExpanded = true
+            const menu = this.getMenu()
+            this.reset(this.$parent, menu)
+            this.newExpanded = !this.newExpanded
             this.$emit('update:expanded', this.newActive)
-            this.newActive = true
-            this.$emit('update:active', this.newActive)
-            this.$emit('click', event)
+            if (menu && menu.activable) {
+                this.newActive = true
+                this.$emit('update:active', this.newActive)
+            }
         },
-        reset(parent) {
+        reset(parent, menu) {
             const items = parent.$children.filter((c) => c.name === this.name)
             items.forEach((item) => {
                 if (item !== this) {
-                    this.reset(item)
+                    this.reset(item, menu)
                     if (!parent.$data._isMenu || (parent.$data._isMenu && parent.accordion)) {
                         item.newExpanded = false
                         item.$emit('update:expanded', item.newActive)
                     }
-                    item.newActive = false
-                    item.$emit('update:active', item.newActive)
+                    if (menu && menu.activable) {
+                        item.newActive = false
+                        item.$emit('update:active', item.newActive)
+                    }
                 }
             })
+        },
+        getMenu() {
+            let parent = this.$parent
+            while (parent && !parent.$data._isMenu) {
+                parent = parent.$parent
+            }
+            return parent
         }
     }
 }

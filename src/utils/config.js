@@ -44,6 +44,17 @@ let config = {
     defaultTrapFocus: false,
     defaultButtonRounded: false,
     defaultCarouselInterval: 3500,
+    defaultLinkTags: [
+        'a',
+        'button',
+        'input',
+        'router-link',
+        'nuxt-link',
+        'n-link',
+        'RouterLink',
+        'NuxtLink',
+        'NLink'
+    ],
 
     customIconPacks: null
 } // TODO defaultTrapFocus to true in the next breaking change
@@ -51,3 +62,7 @@ let config = {
 export { config as default }
 
 export const setOptions = (options) => { config = options }
+
+export const setVueInstance = (Vue) => { VueInstance = Vue }
+
+export let VueInstance

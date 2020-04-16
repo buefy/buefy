@@ -52,10 +52,17 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>expanded</code>',
+                description: 'Dropdown will be expanded (full-width)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>aria-role</code>',
                 description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',
-                values: '<code>list</code>, <code>menu</code>',
+                values: '<code>list</code>, <code>menu</code>, <code>dialog</code>',
                 default: '—'
             },
             {
@@ -85,13 +92,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append dropdown content to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
             {
                 name: 'default',
                 description: '',
-                props: ''
+                props: '<code>slot-scope="{ active }"</code> *Only works when not hoverable.'
             },
             {
                 name: '<code>trigger</code>',

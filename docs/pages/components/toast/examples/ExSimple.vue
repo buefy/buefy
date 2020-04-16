@@ -1,16 +1,18 @@
 <template>
     <section>
-        <button class="button is-medium" @click="toast">
-            Launch toast (default)
-        </button>
+        <div class="buttons">
+            <button class="button is-medium" @click="toast">
+                Launch toast (default)
+            </button>
 
-        <button class="button is-medium is-success" @click="success">
-            Launch toast (custom)
-        </button>
+            <button class="button is-medium is-success" @click="success">
+                Launch toast (custom)
+            </button>
 
-        <button class="button is-medium is-danger" @click="danger">
-            Launch toast (custom)
-        </button>
+            <button class="button is-medium is-danger" @click="danger">
+                Launch toast (custom)
+            </button>
+        </div>
     </section>
 </template>
 

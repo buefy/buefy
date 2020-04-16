@@ -9,6 +9,9 @@ const BSteps = {
             stepItems: [],
             _isSteps: true
         }
+    },
+    methods: {
+        refreshSlots: jest.fn()
     }
 }
 
@@ -29,12 +32,22 @@ describe('BSteps', () => {
     })
 
     it('set isActive when activate is called', () => {
-        wrapper.vm.activate()
+        wrapper.vm.activate(0, 1)
+        expect(wrapper.vm.transitionName).toBe('slide-prev')
+        expect(wrapper.vm.isActive).toBeTruthy()
+
+        wrapper.vm.activate(1, 0)
+        expect(wrapper.vm.transitionName).toBe('slide-next')
         expect(wrapper.vm.isActive).toBeTruthy()
     })
 
     it('reset isActive when deactivate is called', () => {
-        wrapper.vm.deactivate()
+        wrapper.vm.deactivate(0, 1)
+        expect(wrapper.vm.transitionName).toBe('slide-prev')
+        expect(wrapper.vm.isActive).toBeFalsy()
+
+        wrapper.vm.deactivate(1, 0)
+        expect(wrapper.vm.transitionName).toBe('slide-next')
         expect(wrapper.vm.isActive).toBeFalsy()
     })
 })

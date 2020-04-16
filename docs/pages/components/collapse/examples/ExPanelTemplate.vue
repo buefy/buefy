@@ -5,15 +5,14 @@
             <button
                 class="button is-medium is-primary"
                 @click="isOpen = !isOpen"
-                aria-controls="contentIdForA11y2">
-                Toggle
-            </button>
+                aria-controls="contentIdForA11y2">Toggle</button>
         </div>
 
         <b-collapse
-                aria-id="contentIdForA11y2"
-                class="panel"
-                :open.sync="isOpen">
+            aria-id="contentIdForA11y2"
+            class="panel"
+            animation="slide"
+            :open.sync="isOpen">
             <div
                 slot="trigger"
                 class="panel-heading"

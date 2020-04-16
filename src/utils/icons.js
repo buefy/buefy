@@ -30,7 +30,8 @@ const faIcons = () => {
             'chevron-down': 'angle-down',
             'eye-off': 'eye-slash',
             'menu-down': 'caret-down',
-            'menu-up': 'caret-up'
+            'menu-up': 'caret-up',
+            'close-circle': 'times-circle'
         }
     }
 }

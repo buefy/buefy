@@ -1,0 +1,90 @@
+$sidebar-background: $modal-background-background-color !default;
+$sidebar-box-shadow: 5px 0px 13px 3px rgba($black, 0.1) !default;
+$sidebar-width: 260px !default;
+$sidebar-mobile-width: 80px !default;
+$sidebar-mobile-breakpoint: $tablet !default;
+
+.b-sidebar {
+    .sidebar-content {
+        background-color: $background;
+        box-shadow: $sidebar-box-shadow;
+        width: $sidebar-width;
+        z-index: 41;
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            &.is-#{$name} {
+                background-color: $color;
+            }
+        }
+        &.is-fixed {
+            position: fixed;
+            left: 0;
+            top: 0;
+            &.is-right {
+                left: auto;
+                right: 0;
+            }
+        }
+        &.is-absolute {
+            position: absolute;
+            left: 0;
+            top: 0;
+            &.is-right {
+                left: auto;
+                right: 0;
+            }
+        }
+        &.is-mini {
+            width: $sidebar-mobile-width;
+        }
+        &.is-mini-expand:hover {
+            &:not(.is-fullwidth) {
+                width: $sidebar-width;
+            }
+        }
+        &.is-static {
+            position: static;
+        }
+        &.is-absolute, &.is-static {
+            transition: width $speed-slow $easing;
+        }
+        &.is-fullwidth {
+            width: 100%;
+            max-width: 100%;
+        }
+        &.is-fullheight {
+            height: 100%;
+            max-height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-content: stretch;
+        }
+        @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
+            &.is-mini-mobile {
+                width: $sidebar-mobile-width;
+            }
+            &.is-mini-expand:hover {
+                &:not(.is-fullwidth-mobile) {
+                    width: $sidebar-width;
+                }
+            }
+            &.is-hidden-mobile {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+            }
+            &.is-fullwidth-mobile {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+    .sidebar-background {
+        @include overlay;
+        background: $sidebar-background;
+        position: fixed;
+        z-index: 40;
+    }
+}

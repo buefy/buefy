@@ -6,7 +6,7 @@
                     <h1 class="title">{{carousel.text}}</h1>
                 </div>
             </section>
-        </b-carousel-item>           
+        </b-carousel-item>
     </b-carousel>
 </template>
 

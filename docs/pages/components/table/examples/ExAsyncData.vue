@@ -35,7 +35,7 @@
                 </b-table-column>
 
                 <b-table-column field="release_date" label="Release Date" sortable centered>
-                    {{ props.row.release_date ? new Date(props.row.release_date).toLocaleDateString() : '' }}
+                    {{ props.row.release_date ? new Date(props.row.release_date).toLocaleDateString() : 'unknown' }}
                 </b-table-column>
 
                 <b-table-column label="Overview" width="500">
@@ -85,7 +85,7 @@
                         }
                         this.total = currentTotal
                         data.results.forEach((item) => {
-                            item.release_date = item.release_date.replace(/-/g, '/')
+                            item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
                             this.data.push(item)
                         })
                         this.loading = false

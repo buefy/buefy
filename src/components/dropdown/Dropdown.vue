@@ -1,13 +1,18 @@
 <template>
-    <div class="dropdown" :class="rootClasses">
+    <div
+        class="dropdown dropdown-menu-animation"
+        ref="dropdown"
+        :class="rootClasses"
+    >
         <div
             v-if="!inline"
             role="button"
             ref="trigger"
             class="dropdown-trigger"
             @click="toggle"
+            @mouseenter="checkHoverable"
             aria-haspopup="true">
-            <slot name="trigger"/>
+            <slot name="trigger" :active="isActive"/>
         </div>
 
         <transition :name="animation">
@@ -23,11 +28,12 @@
                 v-show="(!disabled && (isActive || isHoverable)) || inline"
                 ref="dropdownMenu"
                 class="dropdown-menu"
+                :style="style"
                 :aria-hidden="!isActive"
                 v-trap-focus="trapFocus">
                 <div
                     class="dropdown-content"
-                    :role="ariaRoleMenu">
+                    :role="ariaRole">
                     <slot/>
                 </div>
             </div>
@@ -38,6 +44,7 @@
 <script>
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
+import { removeElement, createAbsoluteElement } from '../../utils/helpers'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
@@ -60,7 +67,8 @@ export default {
                 return [
                     'is-top-right',
                     'is-top-left',
-                    'is-bottom-left'
+                    'is-bottom-left',
+                    'is-bottom-right'
                 ].indexOf(value) > -1
             }
         },
@@ -72,7 +80,14 @@ export default {
         },
         ariaRole: {
             type: String,
-            default: ''
+            validator(value) {
+                return [
+                    'menu',
+                    'list',
+                    'dialog'
+                ].indexOf(value) > -1
+            },
+            default: null
         },
         animation: {
             type: String,
@@ -81,7 +96,9 @@ export default {
         multiple: Boolean,
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         closeOnClick: {
             type: Boolean,
@@ -91,14 +108,18 @@ export default {
             type: [Array, Boolean],
             default: true
         },
-        expanded: Boolean
+        expanded: Boolean,
+        appendToBody: Boolean,
+        appendToBodyCopyParent: Boolean
     },
     data() {
         return {
             selected: this.value,
+            style: {},
             isActive: false,
             isHoverable: this.hoverable,
-            _isDropdown: true // Used internally by DropdownItem
+            _isDropdown: true, // Used internally by DropdownItem
+            _bodyEl: undefined // Used to append to body
         }
     },
     computed: {
@@ -121,9 +142,6 @@ export default {
                     ? DEFAULT_CLOSE_OPTIONS
                     : []
                 : this.canClose
-        },
-        ariaRoleMenu() {
-            return this.ariaRole === 'menu' || this.ariaRole === 'list' ? this.ariaRole : null
         }
     },
     watch: {
@@ -139,6 +157,11 @@ export default {
         */
         isActive(value) {
             this.$emit('active-change', value)
+            if (this.appendToBody) {
+                this.$nextTick(() => {
+                    this.updateAppendToBody()
+                })
+            }
         }
     },
     methods: {
@@ -172,10 +195,6 @@ export default {
                 this.isActive = !this.closeOnClick
                 if (this.hoverable && this.closeOnClick) {
                     this.isHoverable = false
-                    // Timeout for the animation complete before destroying
-                    setTimeout(() => {
-                        this.isHoverable = true
-                    }, 250)
                 }
             }
         },
@@ -247,6 +266,65 @@ export default {
             } else {
                 this.isActive = !this.isActive
             }
+        },
+
+        checkHoverable() {
+            if (this.hoverable) {
+                this.isHoverable = true
+            }
+        },
+
+        updateAppendToBody() {
+            const dropdownMenu = this.$refs.dropdownMenu
+            const trigger = this.$refs.trigger
+            if (dropdownMenu && trigger) {
+                // update wrapper dropdown
+                const dropdown = this.$data._bodyEl.children[0]
+                dropdown.classList.forEach((item) => dropdown.classList.remove(item))
+                dropdown.classList.add('dropdown')
+                dropdown.classList.add('dropdown-menu-animation')
+                this.rootClasses.forEach((item) => {
+                    // skip position prop
+                    if (item && typeof item === 'object') {
+                        for (let key in item) {
+                            if (item[key]) {
+                                dropdown.classList.add(key)
+                            }
+                        }
+                    }
+                })
+                if (this.appendToBodyCopyParent) {
+                    const parentNode = this.$refs.dropdown.parentNode
+                    const parent = this.$data._bodyEl
+                    parent.classList.forEach((item) => parent.classList.remove(item))
+                    parentNode.classList.forEach((item) => {
+                        parent.classList.add(item)
+                    })
+                }
+                const rect = trigger.getBoundingClientRect()
+                let top = rect.top + window.scrollY
+                let left = rect.left + window.scrollX
+                if (!this.position || this.position.indexOf('bottom') >= 0) {
+                    top += trigger.clientHeight
+                } else {
+                    top -= dropdownMenu.clientHeight
+                }
+                if (this.position && this.position.indexOf('left') >= 0) {
+                    left -= (dropdownMenu.clientWidth - trigger.clientWidth)
+                }
+                this.style = {
+                    position: 'absolute',
+                    top: `${top}px`,
+                    left: `${left}px`,
+                    zIndex: '99'
+                }
+            }
+        }
+    },
+    mounted() {
+        if (this.appendToBody) {
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdownMenu)
+            this.updateAppendToBody()
         }
     },
     created() {
@@ -259,6 +337,9 @@ export default {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
+        }
+        if (this.appendToBody) {
+            removeElement(this.$data._bodyEl)
         }
     }
 }

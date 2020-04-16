@@ -26,53 +26,53 @@ export default {
         },
         subheading: [String, Number],
         customSort: Function,
+        sticky: Boolean,
+        headerSelectable: {
+            type: Boolean,
+            default: true
+        },
+        headerClass: String,
+        cellClass: String,
         internal: Boolean // Used internally by Table
     },
     data() {
         return {
-            newKey: this.customKey || this.label
+            newKey: this.customKey || this.label,
+            _isTableColumn: true
         }
     },
     computed: {
         rootClasses() {
-            return {
+            return [this.cellClass, {
                 'has-text-right': this.numeric && !this.centered,
-                'has-text-centered': this.centered
-            }
-        }
-    },
-    methods: {
-        addRefToTable() {
-            if (!this.$parent.$data._isTable) {
-                this.$destroy()
-                throw new Error('You should wrap bTableColumn on a bTable')
-            }
-
-            if (this.internal) return
-
-            // Since we're using scoped prop the columns gonna be multiplied,
-            // this finds when to stop based on the newKey property.
-            const repeated = this.$parent.newColumns.some(
-                (column) => column.newKey === this.newKey)
-            !repeated && this.$parent.newColumns.push(this)
+                'has-text-centered': this.centered,
+                'is-sticky': this.sticky
+            }]
         }
     },
     beforeMount() {
-        this.addRefToTable()
-    },
-    beforeUpdate() {
-        this.addRefToTable()
+        if (!this.$parent.$data._isTable) {
+            this.$destroy()
+            throw new Error('You should wrap bTableColumn on a bTable')
+        }
+
+        if (this.internal) return
+
+        // Since we're using scoped prop the columns gonna be multiplied,
+        // this finds when to stop based on the newKey property.
+        const repeated = this.$parent.newColumns.some(
+            (column) => column.newKey === this.newKey)
+        !repeated && this.$parent.newColumns.push(this)
     },
     beforeDestroy() {
-        if (this.sortable) {
-            if (!this.$parent.visibleData.length) return
-            if (this.$parent.$children.filter((vm) => vm.$options._componentTag === 'b-table-column' &&
-                vm.$data.newKey === this.newKey).length !== 1) return
-        }
-        const index = this.$parent.newColumns.map(
-            (column) => column.newKey).indexOf(this.newKey)
-        if (index >= 0) {
-            this.$parent.newColumns.splice(index, 1)
+        if (!this.$parent.visibleData.length) return
+        if (this.$parent.newColumns.length !== 1) return
+        if (this.$parent.newColumns.length) {
+            const index = this.$parent.newColumns.map(
+                (column) => column.newKey).indexOf(this.newKey)
+            if (index >= 0) {
+                this.$parent.newColumns.splice(index, 1)
+            }
         }
     }
 }

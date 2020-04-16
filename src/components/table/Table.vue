@@ -1,15 +1,18 @@
 <template>
-    <div class="b-table" :class="{ 'is-loading': loading }">
+    <div class="b-table" :class="rooClasses">
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
+            :sort-multiple="sortMultiple"
+            :sort-multiple-data="sortMultipleDataComputed"
             :is-asc="isAsc"
             :columns="newColumns"
             :placeholder="mobileSortPlaceholder"
             :icon-pack="iconPack"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
-            @sort="(column) => sort(column)"
+            @sort="(column, event) => sort(column, null, event)"
+            @removePriority="(column) => removeSortingPriority(column)"
         />
 
         <div
@@ -37,7 +40,14 @@
             </div>
         </div>
 
-        <div class="table-wrapper">
+        <div
+            class="table-wrapper"
+            :class="tableWrapperClasses"
+            :style="{
+                height: height === undefined ? null :
+                (isNaN(height) ? height : height + 'px')
+            }"
+        >
             <table
                 class="table"
                 :class="tableClasses"
@@ -58,15 +68,17 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
-                            :class="{
-                                'is-current-sort': currentSortColumn === column,
-                                'is-sortable': column.sortable
-                            }"
+                            :class="[column.headerClass, {
+                                'is-current-sort': !sortMultiple && currentSortColumn === column,
+                                'is-sortable': column.sortable,
+                                'is-sticky': column.sticky,
+                                'is-unselectable': !column.headerSelectable
+                            }]"
                             :style="{
                                 width: column.width === undefined ? null :
                                 (isNaN(column.width) ? column.width : column.width + 'px')
                             }"
-                            @click.stop="sort(column)">
+                            @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -91,13 +103,40 @@
                                 </template>
                                 <template v-else>{{ column.label }}</template>
 
+                                <template
+                                    v-if="sortMultiple &&
+                                        sortMultipleDataComputed &&
+                                        sortMultipleDataComputed.length > 0 &&
+                                        sortMultipleDataComputed.filter(i =>
+                                    i.field === column.field).length > 0">
+                                    <b-icon
+                                        :icon="sortIcon"
+                                        :pack="iconPack"
+                                        both
+                                        :size="sortIconSize"
+                                        :class="{
+                                            'is-desc': sortMultipleDataComputed.filter(i =>
+                                                i.field === column.field)[0].order === 'desc'
+                                        }"
+                                    />
+                                    {{ findIndexOfSortData(column) }}
+                                    <button
+                                        class="delete is-small multi-sort-cancel-icon"
+                                        type="button"
+                                        @click.stop="removeSortingPriority(column)"/>
+                                </template>
+
                                 <b-icon
-                                    v-show="currentSortColumn === column"
+                                    v-else-if="column.sortable && !sortMultiple"
                                     :icon="sortIcon"
                                     :pack="iconPack"
                                     both
                                     :size="sortIconSize"
-                                    :class="{ 'is-desc': !isAsc }"/>
+                                    :class="{
+                                        'is-desc': !isAsc,
+                                        'is-invisible': currentSortColumn !== column
+                                    }"
+                                />
                             </div>
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
@@ -158,7 +197,15 @@
                             : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
+                                    <slot
+                                        v-if="$scopedSlots.searchable"
+                                        name="searchable"
+                                        :column="column"
+                                        :filters="filters"
+                                    />
                                     <b-input
+                                        v-else
+                                        @[filtersEvent].native="onFiltersEvent"
                                         v-model="filters[column.field]"
                                         :type="column.numeric ? 'number' : 'text'" />
                                 </template>
@@ -177,8 +224,8 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @mouseenter="$emit('mouseenter', row)"
-                            @mouseleave="$emit('mouseleave', row)"
+                            @mouseenter="$listeners.mouseenter ? $emit('mouseenter', row) : null"
+                            @mouseleave="$listeners.mouseleave ? $emit('mouseleave', row) : null"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
@@ -222,7 +269,7 @@
                                 <BTableColumn
                                     v-for="column in newColumns"
                                     v-bind="column"
-                                    :key="column.field"
+                                    :key="column.customKey || column.label"
                                     internal>
                                     <span
                                         v-if="column.renderHtml"
@@ -314,7 +361,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -392,6 +439,18 @@ export default {
             type: String,
             default: 'is-small'
         },
+        sortMultiple: {
+            type: Boolean,
+            default: false
+        },
+        sortMultipleData: {
+            type: Array,
+            default: () => []
+        },
+        sortMultipleKey: {
+            type: String,
+            default: null
+        },
         paginated: Boolean,
         currentPage: {
             type: Number,
@@ -419,6 +478,7 @@ export default {
             }
         },
         backendSorting: Boolean,
+        backendFiltering: Boolean,
         rowClass: {
             type: Function,
             default: () => ''
@@ -451,13 +511,21 @@ export default {
             type: Boolean,
             default: false
         },
+        scrollable: Boolean,
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
-        ariaCurrentLabel: String
+        ariaCurrentLabel: String,
+        stickyHeader: Boolean,
+        height: [Number, String],
+        filtersEvent: {
+            type: String,
+            default: ''
+        }
     },
     data() {
         return {
+            sortMultipleDataLocal: [],
             getValueByPath,
             newColumns: [...this.columns],
             visibleDetailRows: this.openedDetailed,
@@ -474,24 +542,34 @@ export default {
         }
     },
     computed: {
-        /**
-        * return if detailed row tabled
-        * will be with chevron column & icon or not
-        */
-        showDetailRowIcon() {
-            return this.detailed && this.showDetailIcon
+        sortMultipleDataComputed() {
+            if (this.backendSorting) {
+                return this.sortMultipleData
+            } else {
+                return this.sortMultipleDataLocal
+            }
         },
-
         tableClasses() {
             return {
                 'is-bordered': this.bordered,
                 'is-striped': this.striped,
                 'is-narrow': this.narrowed,
-                'has-mobile-cards': this.mobileCards,
                 'is-hoverable': (
                     (this.hoverable || this.focusable) &&
                     this.visibleData.length
                 )
+            }
+        },
+        tableWrapperClasses() {
+            return {
+                'has-mobile-cards': this.mobileCards,
+                'has-sticky-header': this.stickyHeader,
+                'table-container': this.isScrollable
+            }
+        },
+        rooClasses() {
+            return {
+                'is-loading': this.loading
             }
         },
 
@@ -576,32 +654,39 @@ export default {
         columnCount() {
             let count = this.newColumns.length
             count += this.checkable ? 1 : 0
-            count += this.detailed ? 1 : 0
+            count += (this.detailed && this.showDetailIcon) ? 1 : 0
 
             return count
+        },
+
+        /**
+        * return if detailed row tabled
+        * will be with chevron column & icon or not
+        */
+        showDetailRowIcon() {
+            return this.detailed && this.showDetailIcon
+        },
+
+        /**
+        * return if scrollable table
+        */
+        isScrollable() {
+            if (this.scrollable) return true
+            if (!this.newColumns) return false
+            return this.newColumns.some((column) => {
+                return column.sticky
+            })
         }
     },
     watch: {
         /**
         * When data prop change:
         *   1. Update internal value.
-        *   2. Reset newColumns (thead), in case it's on a v-for loop.
-        *   3. Sort again if it's not backend-sort.
-        *   4. Set new total if it's not backend-paginated.
+        *   2. Sort again if it's not backend-sort.
+        *   3. Set new total if it's not backend-paginated.
         */
         data(value) {
-            // Save newColumns before resetting
-            const newColumns = this.newColumns
-
-            this.newColumns = []
             this.newData = value
-
-            // Prevent table from being headless, data could change and created hook
-            // on column might not trigger
-            this.$nextTick(() => {
-                if (!this.newColumns.length) this.newColumns = newColumns
-            })
-
             if (!this.backendSorting) {
                 this.sort(this.currentSortColumn, true)
             }
@@ -638,10 +723,14 @@ export default {
 
         filters: {
             handler(value) {
-                this.newData = this.data.filter(
-                    (row) => this.isRowFiltered(row))
-                if (!this.backendPagination) {
-                    this.newDataTotal = this.newData.length
+                if (this.backendFiltering) {
+                    this.$emit('filters-change', value)
+                } else {
+                    this.newData = this.data.filter(
+                        (row) => this.isRowFiltered(row))
+                    if (!this.backendPagination) {
+                        this.newDataTotal = this.newData.length
+                    }
                 }
             },
             deep: true
@@ -660,6 +749,32 @@ export default {
         }
     },
     methods: {
+        onFiltersEvent(event) {
+            this.$emit(`filters-event-${this.filtersEvent}`, { event, filters: this.filters })
+        },
+        findIndexOfSortData(column) {
+            let sortObj = this.sortMultipleDataComputed.filter((i) =>
+                i.field === column.field)[0]
+            return this.sortMultipleDataComputed.indexOf(sortObj) + 1
+        },
+        removeSortingPriority(column) {
+            if (this.backendSorting) {
+                this.$emit('sorting-priority-removed', column.field)
+            } else {
+                this.sortMultipleDataLocal = this.sortMultipleDataLocal.filter(
+                    (priority) => priority.field !== column.field)
+
+                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
+                })
+                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+            }
+        },
+        resetMultiSorting() {
+            this.sortMultipleDataLocal = []
+            this.currentSortColumn = {}
+            this.newData = this.data
+        },
         /**
         * Sort an array by key without mutating original data.
         * Call the user sort function if it was passed.
@@ -700,31 +815,65 @@ export default {
             return sorted
         },
 
+        sortMultiColumn(column) {
+            this.currentSortColumn = {}
+            if (!this.backendSorting) {
+                let existingPriority = this.sortMultipleDataLocal.filter((i) =>
+                    i.field === column.field)[0]
+                if (existingPriority) {
+                    existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
+                } else {
+                    this.sortMultipleDataLocal.push(
+                        {field: column.field, order: column.isAsc}
+                    )
+                }
+                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
+                })
+
+                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+            }
+        },
         /**
         * Sort the column.
         * Toggle current direction on column if it's sortable
         * and not just updating the prop.
         */
-        sort(column, updatingData = false) {
-            if (!column || !column.sortable) return
+        sort(column, updatingData = false, event = null) {
+            if (
+                // if backend sorting is enabled, just emit the sort press like usual
+                // if the correct key combination isnt pressed, sort like usual
+                !this.backendSorting &&
+                this.sortMultiple &&
+                ((this.sortMultipleKey && event[this.sortMultipleKey]) || !this.sortMultipleKey)
+            ) {
+                this.sortMultiColumn(column)
+            } else {
+                if (!column || !column.sortable) return
 
-            if (!updatingData) {
-                this.isAsc = column === this.currentSortColumn
-                    ? !this.isAsc
-                    : (this.defaultSortDirection.toLowerCase() !== 'desc')
+                // sort multiple is enabled but the correct key combination isnt pressed so reset
+                if (this.sortMultiple) {
+                    this.sortMultipleDataLocal = []
+                }
+
+                if (!updatingData) {
+                    this.isAsc = column === this.currentSortColumn
+                        ? !this.isAsc
+                        : (this.defaultSortDirection.toLowerCase() !== 'desc')
+                }
+                if (!this.firstTimeSort) {
+                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event)
+                }
+                if (!this.backendSorting) {
+                    this.newData = this.sortBy(
+                        this.newData,
+                        column.field,
+                        column.customSort,
+                        this.isAsc
+                    )
+                }
+                this.currentSortColumn = column
             }
-            if (!this.firstTimeSort) {
-                this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc')
-            }
-            if (!this.backendSorting) {
-                this.newData = this.sortBy(
-                    this.newData,
-                    column.field,
-                    column.customSort,
-                    this.isAsc
-                )
-            }
-            this.currentSortColumn = column
         },
 
         /**
@@ -751,7 +900,9 @@ export default {
         checkAll() {
             const isAllChecked = this.isAllChecked
             this.visibleData.forEach((currentRow) => {
-                this.removeCheckedRow(currentRow)
+                if (this.isRowCheckable(currentRow)) {
+                    this.removeCheckedRow(currentRow)
+                }
                 if (!isAllChecked) {
                     if (this.isRowCheckable(currentRow)) {
                         this.newCheckedRows.push(currentRow)
@@ -903,7 +1054,7 @@ export default {
             */
         handleDetailKey(index) {
             const key = this.detailKey
-            return !key.length
+            return !key.length || !index
                 ? index
                 : index[key]
         },
@@ -1040,6 +1191,11 @@ export default {
     mounted() {
         this.checkPredefinedDetailedRows()
         this.checkSort()
+    },
+
+    beforeDestroy() {
+        this.newData = []
+        this.newColumns = []
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <component
-        :is="tag"
+        :is="computedTag"
         class="button"
         v-bind="$attrs"
         :type="nativeType"
@@ -82,20 +82,17 @@ export default {
             type: String,
             default: 'button',
             validator: (value) => {
-                return [
-                    'button',
-                    'a',
-                    'input',
-                    'router-link',
-                    'nuxt-link',
-                    'n-link',
-                    'NuxtLink',
-                    'NLink'
-                ].indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value) >= 0
             }
         }
     },
     computed: {
+        computedTag() {
+            if (this.$attrs.disabled !== undefined && this.$attrs.disabled !== false) {
+                return 'button'
+            }
+            return this.tag
+        },
         iconSize() {
             if (!this.size || this.size === 'is-medium') {
                 return 'is-small'

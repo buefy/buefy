@@ -29,5 +29,14 @@
             role="alert">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
+
+        <b-notification
+            type="is-dark"
+            has-icon
+            icon="account"
+            aria-close-label="Close notification"
+            role="alert">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+        </b-notification>
     </section>
 </template>

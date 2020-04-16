@@ -164,7 +164,8 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tag": {
         "title": "Tag",
@@ -236,8 +237,7 @@
             "/",
             "documentation",
             "documentation/loading"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/field": {
         "title": "Field",
@@ -261,8 +261,7 @@
             "/",
             "documentation",
             "documentation/input"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/select": {
         "title": "Select",
@@ -286,7 +285,8 @@
             "/",
             "documentation",
             "documentation/autocomplete"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -322,7 +322,8 @@
             "/",
             "documentation",
             "documentation/switch"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datepicker": {
         "title": "Datepicker",
@@ -334,7 +335,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -359,7 +361,8 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datetimepicker": {
         "title": "Datetimepicker",
@@ -384,7 +387,8 @@
             "/",
             "documentation",
             "documentation/taginput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/upload": {
         "title": "Upload",
@@ -408,8 +412,7 @@
             "/",
             "documentation",
             "documentation/table"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -445,8 +448,7 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/steps": {
         "title": "Steps",
@@ -470,8 +472,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isUpdated": true
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
@@ -507,8 +508,7 @@
             "/",
             "documentation",
             "documentation/carousel"
-        ],
-        "isNew": true
+        ]
     },
     "documentation/rate": {
         "title": "Rate",
@@ -521,6 +521,32 @@
             "documentation",
             "documentation/rate"
         ]
+    },
+    "documentation/sidebar": {
+        "title": "Sidebar",
+        "subtitle": "A sidebar to use as left/right overlay or static",
+        "path": "/documentation/sidebar",
+        "githubPath": "pages/components/sidebar/Sidebar.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/sidebar"
+        ],
+        "isNew": "true"
+    },
+    "documentation/skeleton": {
+        "title": "Skeleton",
+        "subtitle": "A placeholder for content to load",
+        "path": "/documentation/skeleton",
+        "githubPath": "pages/components/skeleton/Skeleton.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/skeleton"
+        ],
+        "isNew": "true"
     },
     "extensions": {
         "title": "Extensions",
@@ -567,7 +593,8 @@
             "/",
             "extensions",
             "extensions/veevalidate"
-        ]
+        ],
+        "isUpdated": true
     },
     "expo": {
         "title": "Expo",

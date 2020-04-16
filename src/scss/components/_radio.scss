@@ -3,10 +3,10 @@ $radio-size: 1.25em !default;
 
 .b-radio {
     &.radio {
+        @extend %unselectable;
         outline: none;
         display: inline-flex;
         align-items: center;
-        @include unselectable;
         & + .radio {
             margin-left: 0.5em;
         }

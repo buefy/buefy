@@ -47,7 +47,8 @@ function bind(el, { value }) {
 
 function update(el, { value }) {
     const { handler, middleware, events } = processArgs(value)
-    const instance = instances.find((instance) => instance.el === el)
+    // `filter` instead of `find` for compat with IE
+    const instance = instances.filter((instance) => instance.el === el)[0]
 
     instance.eventHandlers.forEach(({ event, handler }) =>
         document.removeEventListener(event, handler)
@@ -63,7 +64,8 @@ function update(el, { value }) {
 }
 
 function unbind(el) {
-    const instance = instances.find((instance) => instance.el === el)
+    // `filter` instead of `find` for compat with IE
+    const instance = instances.filter((instance) => instance.el === el)[0]
     instance.eventHandlers.forEach(({ event, handler }) =>
         document.removeEventListener(event, handler)
     )

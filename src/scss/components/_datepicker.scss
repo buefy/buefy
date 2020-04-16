@@ -193,4 +193,18 @@ $datepicker-item-selected-background-color: $primary !default;
     &.is-large {
         @include control-large;
     }
+    @media screen and (min-width: $desktop){
+        .footer-horizontal-timepicker {
+            border: none;
+            padding-left: 10px;
+            margin-left: 5px;
+            display: flex;
+        }
+        .dropdown-horizonal-timepicker {
+            display: flex;
+        }
+        .content-horizonal-timepicker {
+            border-right: 1px solid #dbdbdb;
+        }
+    }
 }

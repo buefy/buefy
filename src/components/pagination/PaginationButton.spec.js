@@ -29,4 +29,11 @@ describe('BPagination', () => {
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
+
+    it('returns href as expected', () => {
+        expect(wrapper.vm.href).toBe('#')
+
+        wrapper.setProps({ tag: 'button' })
+        expect(wrapper.vm.href).toBeUndefined()
+    })
 })

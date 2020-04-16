@@ -4,8 +4,8 @@ exports[`BTable render correctly 1`] = `
 <div class="b-table">
     <!---->
     <!---->
-    <div class="table-wrapper">
-        <table class="table has-mobile-cards">
+    <div class="table-wrapper has-mobile-cards">
+        <table class="table">
             <!---->
             <tbody>
                 <tr class="is-empty">

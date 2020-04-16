@@ -67,28 +67,16 @@ $floating-in-height: 3.25em !default;
 }
 
 .field {
-    &.is-floating-label {
+    &.is-floating-label,
+    &.is-floating-in-label {
         position: relative;
+
         .label {
             position: absolute;
-            top: -0.775em;
             left: 1em;
             font-size: calc(#{$size-normal} * 3 / 4);
             background-color: transparent;
-            padding-left: 0.125em;
-            padding-right: 0.125em;
             z-index: 5;
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0.775em;
-                left: 0;
-                right: 0;
-                height: 0.375em;
-                background-color: #fff;
-                z-index: -1;
-            }
             &.is-small {
                 font-size: calc(#{$size-small} * 3 / 4);
             }
@@ -97,6 +85,42 @@ $floating-in-height: 3.25em !default;
             }
             &.is-large {
                 font-size: calc(#{$size-large} * 3 / 4);
+            }
+        }
+        .taginput .counter {
+            float: none;
+            text-align: right;
+        }
+
+        &.has-addons {
+            > .label {
+                + .control {
+                    .button,
+                    .input,
+                    .select select {
+                        border-bottom-left-radius: $input-radius;
+                        border-top-left-radius: $input-radius;
+                    }
+                }
+            }
+        }
+    }
+
+    &.is-floating-label {
+        .label {
+            top: -0.775em;
+            padding-left: 0.125em;
+            padding-right: 0.125em;
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0.775em;
+                left: 0;
+                right: 0;
+                height: 0.375em;
+                background-color: $input-background-color;
+                z-index: -1;
             }
         }
         .input,
@@ -113,29 +137,10 @@ $floating-in-height: 3.25em !default;
                 box-shadow: none;
             }
         }
-        .taginput .counter {
-            float: none;
-            text-align: right;
-        }
     }
     &.is-floating-in-label {
-        position: relative;
         .label {
-            position: absolute;
             top: 0.25em;
-            left: 1em;
-            font-size: calc(#{$size-normal} * 3 / 4);
-            background-color: transparent;
-            z-index: 5;
-            &.is-small {
-                font-size: calc(#{$size-small} * 3 / 4);
-            }
-            &.is-medium {
-                font-size: calc(#{$size-medium} * 3 / 4);
-            }
-            &.is-large {
-                font-size: calc(#{$size-large} * 3 / 4);
-            }
         }
         > .datepicker, > .timepicker {
             .input {
@@ -180,11 +185,7 @@ $floating-in-height: 3.25em !default;
             // 0.275em - 1px _taginput.scss
             padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
         }
-        .taginput .counter {
-            float: none;
-            text-align: right;
-        }
-      
+
         &.has-numberinput {
             .b-numberinput {
                 .control {
@@ -244,6 +245,20 @@ $floating-in-height: 3.25em !default;
                 .label {
                     margin-left: calc(#{$size-large} * 2.25);
                 }
+            }
+        }
+    }
+    &.is-grouped-right, &.has-addons-right {
+        &.is-floating-in-label {
+            .label {
+                position: relative;
+                left: calc(3.25em + 2em);
+            }
+        }
+        &.is-floating-label {
+            .label {
+                position: relative;
+                left: calc(3.25em + 2em);
             }
         }
     }

@@ -37,6 +37,9 @@
                                 </a>
                             </p>
                         </b-field>
+                        <small>
+                            This site is powered by <a href="https://www.netlify.com">Netlify</a>
+                        </small>
                     </div>
 
                     <div class="column">

@@ -53,18 +53,65 @@ describe('BLoading', () => {
             expect(wrapper.emitted()['close']).toBeTruthy()
             expect(wrapper.emitted()['update:active']).toBeTruthy()
         })
+    })
 
-        it('manage close when programmatic', () => {
+    describe('programmatic without container', () => {
+        beforeEach(() => {
+            window.document.body.appendChild = jest.fn()
+            wrapper = shallowMount(BLoading, {
+                propsData: {
+                    programmatic: true
+                },
+                stubs: {
+                    transition: false
+                },
+                attachToDocument: true
+            })
+        })
+
+        it('Is called', () => {
+            expect(wrapper.name()).toBe('BLoading')
+            expect(wrapper.isVueInstance()).toBeTruthy()
+            expect(window.document.body.appendChild).toHaveBeenCalled()
+        })
+
+        it('manage close', () => {
             jest.useFakeTimers()
 
-            wrapper.vm.$destroy = jest.fn()
-            wrapper.setProps({programmatic: true})
+            wrapper.vm.$destroy = jest.fn(() => wrapper.vm.$destroy)
             wrapper.vm.close()
 
             expect(wrapper.vm.isActive).toBeFalsy()
             expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 150)
             jest.advanceTimersByTime(150)
             expect(wrapper.vm.$destroy).toHaveBeenCalled()
+        })
+    })
+
+    const component = document.createElement('div')
+    describe('programmatic with a container', () => {
+        beforeEach(() => {
+            component.appendChild = jest.fn()
+            wrapper = shallowMount(BLoading, {
+                propsData: {
+                    programmatic: true,
+                    container: component
+                },
+                stubs: {
+                    transition: false
+                },
+                attachToDocument: true
+            })
+        })
+
+        it('Is called', () => {
+            expect(wrapper.name()).toBe('BLoading')
+            expect(wrapper.isVueInstance()).toBeTruthy()
+            expect(component.appendChild).toHaveBeenCalled()
+        })
+
+        it('Is not full page', () => {
+            expect(wrapper.vm.displayInFullPage).toBeFalsy()
         })
     })
 })

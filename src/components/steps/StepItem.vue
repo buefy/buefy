@@ -2,6 +2,7 @@
 export default {
     name: 'BStepItem',
     props: {
+        step: String | Number,
         label: String,
         type: String | Object,
         icon: String,
@@ -18,7 +19,8 @@ export default {
     data() {
         return {
             isActive: false,
-            transitionName: null
+            transitionName: null,
+            _isStepItem: true // Used internally by Step
         }
     },
     methods: {
@@ -27,8 +29,8 @@ export default {
         */
         activate(oldIndex, index) {
             this.transitionName = index < oldIndex
-                ? 'slide-next'
-                : 'slide-prev'
+                ? this.$parent.vertical ? 'slide-down' : 'slide-next'
+                : this.$parent.vertical ? 'slide-up' : 'slide-prev'
             this.isActive = true
         },
 
@@ -37,8 +39,8 @@ export default {
         */
         deactivate(oldIndex, index) {
             this.transitionName = index < oldIndex
-                ? 'slide-next'
-                : 'slide-prev'
+                ? this.$parent.vertical ? 'slide-down' : 'slide-next'
+                : this.$parent.vertical ? 'slide-up' : 'slide-prev'
             this.isActive = false
         }
     },
@@ -47,13 +49,10 @@ export default {
             this.$destroy()
             throw new Error('You should wrap bStepItem on a bSteps')
         }
-        this.$parent.stepItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy() {
-        const index = this.$parent.stepItems.indexOf(this)
-        if (index >= 0) {
-            this.$parent.stepItems.splice(index, 1)
-        }
+        this.$parent.refreshSlots()
     },
     render(createElement) {
         // if destroy apply v-if

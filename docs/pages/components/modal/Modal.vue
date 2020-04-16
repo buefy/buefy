@@ -19,7 +19,7 @@
 
         <Example :component="ExFullScreen" :code="ExFullScreenCode" title="Full Screen">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.8</span>
             </div>
             <p>Add the <code>full-screen</code> prop to cover the whole page.</p>

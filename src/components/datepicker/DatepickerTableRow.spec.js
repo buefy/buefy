@@ -18,9 +18,7 @@ const propsData = {
         newDate(2018, 1, 6)
     ],
     month: 12,
-    dateCreator: function () {
-        return new Date()
-    }
+    dateCreator: () => newDate()
 }
 
 let wrapper
@@ -42,7 +40,8 @@ describe('BDatepickerTableRow', () => {
     describe('classObject', function () {
         beforeEach(() => {
             wrapper.setProps({
-                selectedDate: [propsData.week[1], propsData.week[5]]
+                selectedDate: [propsData.week[1], propsData.week[5]],
+                nearbySelectableMonthDays: true
             })
         })
 
@@ -161,14 +160,52 @@ describe('BDatepickerTableRow', () => {
     })
 
     it('emit chosen date', () => {
+        wrapper.vm.selectableDate = jest.fn(() => false)
+        wrapper.vm.emitChosenDate(5)
+        expect(wrapper.vm.selectableDate).toHaveBeenCalled()
+        expect(wrapper.emitted()['select']).toBeFalsy()
+
         wrapper.vm.selectableDate = jest.fn(() => true)
         wrapper.vm.emitChosenDate(5)
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
         expect(wrapper.emitted()['select']).toBeTruthy()
     })
 
+    it('emit focused date', () => {
+        const [y, m, d] = [2019, 4, 4]
+        const day = newDate(y, m, d)
+
+        let inc = 1
+        let expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        let valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = -1
+        expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = 7
+        expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+
+        inc = -7
+        expected = day
+        expected.setDate(day.getDate() + inc)
+        wrapper.vm.changeFocus(day, inc)
+        valueEmitted = wrapper.emitted()['change-focus'][0]
+        expect(valueEmitted).toContainEqual(expected)
+    })
+
     it('match event days accordingly', () => {
-        const thisMonth = new Date().getMonth()
+        const thisMonth = newDate(2019, 4, 4).getMonth()
         const day = newDate(2019, thisMonth, 6)
         const todayEvent = {
             date: day,
@@ -191,5 +228,52 @@ describe('BDatepickerTableRow', () => {
         const day = newDate(2019, thisMonth, 6)
         wrapper.vm.setRangeHoverEndDate(day)
         expect(wrapper.emitted()['rangeHoverEndDate']).toBeTruthy()
+    })
+
+    it('manage selectable dates as expected', () => {
+        const day = newDate(2019, 7, 7)
+
+        wrapper.setProps({
+            minDate: newDate(2019, 7, 17)
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: newDate(2019, 7, 1)
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+        wrapper.setProps({
+            selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2), day]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: null,
+            unselectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+        wrapper.setProps({
+            unselectableDates: [day]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: null,
+            unselectableDates: null,
+            unselectableDaysOfWeek: [0, 1]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
     })
 })

@@ -2,6 +2,7 @@ $progress-text-color: $white !default;
 
 .progress-wrapper {
     position: relative;
+    overflow: hidden;
 
     &:not(:last-child) {
         margin-bottom: 1.5rem;
@@ -16,6 +17,7 @@ $progress-text-color: $white !default;
         line-height: $size-normal;
         font-weight: bold;
         color: $progress-text-color;
+        white-space: nowrap;
     }
 
     .progress {

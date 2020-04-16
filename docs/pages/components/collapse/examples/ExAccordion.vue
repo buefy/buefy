@@ -3,6 +3,7 @@
 
         <b-collapse
             class="card"
+            animation="slide"
             v-for="(collapse, index) of collapses"
             :key="index"
             :open="isOpen == index"

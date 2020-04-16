@@ -1,3 +1,5 @@
+$table-sticky-header-height: 300px !default;
+
 .table-wrapper {
     .table {
         margin-bottom: 0;
@@ -68,6 +70,16 @@
             &.is-sortable .th-wrap {
                 cursor: pointer;
             }
+            .multi-sort-cancel-icon {
+                margin-left: 10px;
+            }
+            &.is-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                left: 0;
+                z-index: 3 !important;
+                background: $table-background-color;
+            }
         }
         tr {
             &.is-selected {
@@ -114,6 +126,42 @@
             th.is-sortable:hover {
                 border-color: $grey-lighter;
                 background: $background;
+            }
+        }
+
+        td {
+            &.is-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                background: $table-background-color;
+            }
+        }
+    }
+
+    .level:not(.top) {
+        padding-bottom: 1.5rem;
+    }
+
+    .table-wrapper {
+        &.has-sticky-header {
+            height: $table-sticky-header-height;
+            overflow-y: auto;
+            &.has-mobile-cards {
+                @include mobile {
+                    height: initial !important;
+                    overflow-y: initial !important;
+                }
+            }
+            tr:first-child {
+                th {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0;
+                    z-index: 2;
+                    background: $table-background-color;
+                }
             }
         }
         &.has-mobile-cards {
@@ -172,11 +220,7 @@
             }
         }
     }
-
-    .level:not(.top) {
-        padding-bottom: 1.5rem;
-    }
-
+    
     &.is-loading {
         position: relative;
         pointer-events: none;

@@ -7,9 +7,9 @@
         </b-carousel-item>
         <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
         <template slot="indicators" slot-scope="props">
-            <span class="al image">
-                <img :src="getImgUrl(props.i)" :title="props.i">
-            </span>
+            <figure class="al image" :draggable="false">
+                <img :draggable="false" :src="getImgUrl(props.i)" :title="props.i">
+            </figure>
         </template>
     </b-carousel>
 </template>

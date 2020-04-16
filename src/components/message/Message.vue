@@ -16,9 +16,9 @@
             </header>
             <section class="message-body">
                 <div class="media">
-                    <div v-if="icon && hasIcon" class="media-left">
+                    <div v-if="computedIcon && hasIcon" class="media-left">
                         <b-icon
-                            :icon="icon"
+                            :icon="computedIcon"
                             :pack="iconPack"
                             :class="type"
                             both

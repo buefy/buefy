@@ -17,7 +17,8 @@
                 placeholder="Click to select..."
                 icon="calendar-today"
                 :datepicker="{ showWeekNumber }"
-                :timepicker="{ enableSeconds, hourFormat: format }">
+                :timepicker="{ enableSeconds, hourFormat: format }"
+                horizontal-time-picker>
             </b-datetimepicker>
         </b-field>
     </section>

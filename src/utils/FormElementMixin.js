@@ -135,6 +135,7 @@ export default {
             if (!this.useHtml5Validation) return
 
             if (this.$refs[this.$data._elementRef] === undefined) return
+            if (this.getElement() === null) return
 
             if (!this.getElement().checkValidity()) {
                 this.setInvalid()

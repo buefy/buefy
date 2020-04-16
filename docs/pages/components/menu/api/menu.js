@@ -8,6 +8,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: 'true'
+            },
+            {
+                name: '<code>activable</code>',
+                description: 'Active automatically the clicked menu item',
+                type: 'Boolean',
+                values: '—',
+                default: 'true'
             }
         ],
         slots: [
@@ -135,13 +142,6 @@ export default [
                 type: '—',
                 values: '—',
                 default: '—'
-            }
-        ],
-        events: [
-            {
-                name: '<code>click</code>',
-                description: 'Triggers on click',
-                parameters: '<code>event: $event</code>'
             }
         ],
         slots: [
