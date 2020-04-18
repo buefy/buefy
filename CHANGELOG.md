@@ -1,5 +1,26 @@
 # Buefy Changelog
 
+## 0.8.16
+
+### New features
+
+* **New component: Skeleton**, [see docs](https://buefy.org/documentation/skeleton)
+* Add ``destroy-on-hide`` prop to modal
+* Add ``searchable`` slot to table (thanks @service-paradis)
+* Add ``icon-right`` prop to autocomplete
+* Add ``vertical``, ``step`` and ``rounded`` props to steps (thanks @service-paradis)
+
+### Fixes
+
+* Fix icon type to account for colors that are hyphenated (thanks @BrauBeast)
+* Fix width of options menu when autocomplete on taginput
+* Fix #2156 focus on tag remove
+* Fix #2211 check only one tab selected at once (thanks @service-paradis)
+* Fix #2328, #2358 slider resize (thanks @service-paradis)
+* Fix #2364 close sidebar when is not overlay
+* Fix #2371 clean hovered after select
+* Fix #2381 label-position when position is right
+
 ## 0.8.15
 
 ### Fixes
