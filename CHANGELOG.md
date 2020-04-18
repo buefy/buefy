@@ -8,7 +8,8 @@
 * Add ``destroy-on-hide`` prop to modal
 * Add ``searchable`` slot to table (thanks @service-paradis)
 * Add ``icon-right`` prop to autocomplete
-* Add ``vertical``, ``step`` and ``rounded`` props to steps (thanks @service-paradis)
+* Add ``vertical`` and ``rounded`` props to steps (thanks @service-paradis)
+* Add ``step`` prop to step item (thanks @service-paradis)
 
 ### Fixes
 

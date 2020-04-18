@@ -31,7 +31,7 @@ export default [
             },
             {
                 name: '<code>circle</code>',
-                description: 'Custom circle shape',
+                description: 'Show a circle shape',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

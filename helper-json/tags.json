@@ -18,10 +18,11 @@
             "check-infinite-scroll",
             "max-height",
             "dropdown-position",
-            "append-to-body"
+            "append-to-body",
+            "icon-right"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-autocomplete>"
+        "description": "Buefy component <b-autocomplete>",
+        "subtags": []
     },
     "b-button": {
         "attributes": [
@@ -37,8 +38,8 @@
             "native-type",
             "tag"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-button>"
+        "description": "Buefy component <b-button>",
+        "subtags": []
     },
     "b-carousel": {
         "attributes": [
@@ -72,13 +73,16 @@
             "progress-type",
             "with-carousel-list"
         ],
-        "subtags": ["b-carousel-item", "b-carousel-list"],
-        "description": "Buefy component <b-carousel>"
+        "description": "Buefy component <b-carousel>",
+        "subtags": [
+            "b-carousel-item",
+            "b-carousel-list"
+        ]
     },
     "b-carousel-item": {
         "attributes": [],
-        "subtags": [],
-        "description": "Buefy component <b-carousel-item>"
+        "description": "Buefy component <b-carousel-item>",
+        "subtags": []
     },
     "b-carousel-list": {
         "attributes": [
@@ -100,8 +104,8 @@
             "icon-prev",
             "icon-next"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-carousel-list>"
+        "description": "Buefy component <b-carousel-list>",
+        "subtags": []
     },
     "b-checkbox": {
         "attributes": [
@@ -116,8 +120,8 @@
             "size",
             "type"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-checkbox>"
+        "description": "Buefy component <b-checkbox>",
+        "subtags": []
     },
     "b-checkbox-button": {
         "attributes": [
@@ -129,8 +133,8 @@
             "size",
             "expanded"
         ],
-        "subtags": "checkbox-button",
-        "description": "Buefy component <b-checkbox-button>"
+        "description": "Buefy component <b-checkbox-button>",
+        "subtags": "checkbox-button"
     },
     "b-clockpicker": {
         "attributes": [
@@ -157,8 +161,8 @@
             "minutes-label",
             "append-to-body"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-datepicker>"
+        "description": "Buefy component <b-datepicker>",
+        "subtags": []
     },
     "b-collapse": {
         "attributes": [
@@ -167,8 +171,8 @@
             "aria-id",
             "position"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-collapse>"
+        "description": "Buefy component <b-collapse>",
+        "subtags": []
     },
     "b-datepicker": {
         "attributes": [
@@ -212,8 +216,8 @@
             "aria-next-label",
             "aria-previous-label"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-datepicker>"
+        "description": "Buefy component <b-datepicker>",
+        "subtags": []
     },
     "b-datetimepicker": {
         "attributes": [
@@ -237,8 +241,8 @@
             "horizontal-time-picker",
             "append-to-body"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-datetimepicker>"
+        "description": "Buefy component <b-datetimepicker>",
+        "subtags": []
     },
     "b-dropdown": {
         "attributes": [
@@ -257,8 +261,10 @@
             "close-on-click",
             "append-to-body"
         ],
-        "subtags": ["b-dropdown-item"],
-        "description": "Buefy component <b-dropdown>"
+        "description": "Buefy component <b-dropdown>",
+        "subtags": [
+            "b-dropdown-item"
+        ]
     },
     "b-dropdown-item": {
         "attributes": [
@@ -271,8 +277,8 @@
             "paddingless",
             "aria-role"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-dropdown-item>"
+        "description": "Buefy component <b-dropdown-item>",
+        "subtags": []
     },
     "b-field": {
         "attributes": [
@@ -288,8 +294,13 @@
             "horizontal",
             "label-position"
         ],
-        "subtags": ["b-checkbox-button", "b-input", "b-radio-button", "b-select"],
-        "description": "Buefy component <b-field>"
+        "description": "Buefy component <b-field>",
+        "subtags": [
+            "b-checkbox-button",
+            "b-input",
+            "b-radio-button",
+            "b-select"
+        ]
     },
     "b-icon": {
         "attributes": [
@@ -300,8 +311,8 @@
             "custom-size",
             "custom-class"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-icon>"
+        "description": "Buefy component <b-icon>",
+        "subtags": []
     },
     "b-input": {
         "attributes": [
@@ -321,8 +332,8 @@
             "custom-class",
             "validation-message"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-input>"
+        "description": "Buefy component <b-input>",
+        "subtags": []
     },
     "b-loading": {
         "attributes": [
@@ -332,26 +343,18 @@
             "can-cancel",
             "on-cancel"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-loading>"
+        "description": "Buefy component <b-loading>",
+        "subtags": []
     },
     "b-menu": {
         "attributes": [
             "accordion",
             "activable"
         ],
-        "subtags": ["b-menu-list"],
-        "description": "Buefy component <b-menu>"
-    },
-    "b-menu-list": {
-        "attributes": [
-            "label",
-            "icon",
-            "icon-pack",
-            "aria-role"
-        ],
-        "subtags": ["b-menu-item"],
-        "description": "Buefy component <b-menu-list>"
+        "description": "Buefy component <b-menu>",
+        "subtags": [
+            "b-menu-list"
+        ]
     },
     "b-menu-item": {
         "attributes": [
@@ -365,8 +368,20 @@
             "tag",
             "aria-role"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-menu-item>"
+        "description": "Buefy component <b-menu-item>",
+        "subtags": []
+    },
+    "b-menu-list": {
+        "attributes": [
+            "label",
+            "icon",
+            "icon-pack",
+            "aria-role"
+        ],
+        "description": "Buefy component <b-menu-list>",
+        "subtags": [
+            "b-menu-item"
+        ]
     },
     "b-message": {
         "attributes": [
@@ -383,8 +398,8 @@
             "title",
             "aria-close-label"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-message>"
+        "description": "Buefy component <b-message>",
+        "subtags": []
     },
     "b-modal": {
         "attributes": [
@@ -404,10 +419,11 @@
             "trap-focus",
             "custom-class",
             "aria-role",
-            "aria-modal"
+            "aria-modal",
+            "destroy-on-hide"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-modal>"
+        "description": "Buefy component <b-modal>",
+        "subtags": []
     },
     "b-navbar": {
         "attributes": [
@@ -460,8 +476,8 @@
             "indefinite",
             "container"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-notification>"
+        "description": "Buefy component <b-notification>",
+        "subtags": []
     },
     "b-numberinput": {
         "attributes": [
@@ -479,8 +495,8 @@
             "controls",
             "controls-position"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-numberinput>"
+        "description": "Buefy component <b-numberinput>",
+        "subtags": []
     },
     "b-pagination": {
         "attributes": [
@@ -501,16 +517,18 @@
             "aria-page-label",
             "aria-current-label"
         ],
-        "subtags": ["b-pagination-button"],
-        "description": "Buefy component <b-pagination>"
+        "description": "Buefy component <b-pagination>",
+        "subtags": [
+            "b-pagination-button"
+        ]
     },
     "b-pagination-button": {
         "attributes": [
             "page",
             "tag"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-pagination-button>"
+        "description": "Buefy component <b-pagination-button>",
+        "subtags": []
     },
     "b-progress": {
         "attributes": [
@@ -523,8 +541,8 @@
             "precision",
             "keep-trailing-zeroes"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-progress>"
+        "description": "Buefy component <b-progress>",
+        "subtags": []
     },
     "b-radio": {
         "attributes": [
@@ -536,8 +554,8 @@
             "size",
             "type"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-radio>"
+        "description": "Buefy component <b-radio>",
+        "subtags": []
     },
     "b-radio-button": {
         "attributes": [
@@ -549,8 +567,8 @@
             "size",
             "expanded"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-radio-button>"
+        "description": "Buefy component <b-radio-button>",
+        "subtags": []
     },
     "b-rate": {
         "attributes": [
@@ -567,8 +585,8 @@
             "custom-text",
             "texts"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-rate>"
+        "description": "Buefy component <b-rate>",
+        "subtags": []
     },
     "b-select": {
         "attributes": [
@@ -581,8 +599,8 @@
             "icon-pack",
             "native-size"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-select>"
+        "description": "Buefy component <b-select>",
+        "subtags": []
     },
     "b-sidebar": {
         "attributes": [
@@ -600,8 +618,20 @@
             "reduce",
             "container"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-sidebar>"
+        "description": "Buefy component <b-sidebar>",
+        "subtags": []
+    },
+    "b-skeleton": {
+        "attributes": [
+            "active",
+            "animated",
+            "width",
+            "height",
+            "circle",
+            "count"
+        ],
+        "description": "Buefy component <b-skeleton>",
+        "subtags": []
     },
     "b-slider": {
         "attributes": [
@@ -620,8 +650,21 @@
             "aria-label",
             "bigger-slider-focus"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-slider>"
+        "description": "Buefy component <b-slider>",
+        "subtags": []
+    },
+    "b-step-item": {
+        "attributes": [
+            "label",
+            "type",
+            "icon",
+            "icon-pack",
+            "clickable",
+            "visible",
+            "step"
+        ],
+        "description": "Buefy component <b-step-item>",
+        "subtags": []
     },
     "b-steps": {
         "attributes": [
@@ -635,22 +678,14 @@
             "icon-next",
             "has-navigation",
             "aria-page-label",
-            "aria-current-label"
+            "aria-current-label",
+            "vertical",
+            "rounded"
         ],
-        "subtags": ["b-step-item"],
-        "description": "Buefy component <b-steps>"
-    },
-    "b-step-item": {
-        "attributes": [
-            "label",
-            "type",
-            "icon",
-            "icon-pack",
-            "clickable",
-            "visible"
-        ],
-        "subtags": [],
-        "description": "Buefy component <b-step-item>"
+        "description": "Buefy component <b-steps>",
+        "subtags": [
+            "b-step-item"
+        ]
     },
     "b-switch": {
         "attributes": [
@@ -665,8 +700,19 @@
             "rounded",
             "outlined"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-switch>"
+        "description": "Buefy component <b-switch>",
+        "subtags": []
+    },
+    "b-tab-item": {
+        "attributes": [
+            "label",
+            "icon",
+            "icon-pack",
+            "disabled",
+            "visible"
+        ],
+        "description": "Buefy component <b-tab-item>",
+        "subtags": []
     },
     "b-table": {
         "attributes": [
@@ -723,8 +769,10 @@
             "aria-page-label",
             "aria-current-label"
         ],
-        "subtags": ["b-table-column"],
-        "description": "Buefy component <b-table>"
+        "description": "Buefy component <b-table>",
+        "subtags": [
+            "b-table-column"
+        ]
     },
     "b-table-column": {
         "attributes": [
@@ -745,8 +793,8 @@
             "header-class",
             "cell-class"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-table-column>"
+        "description": "Buefy component <b-table-column>",
+        "subtags": []
     },
     "b-tabs": {
         "attributes": [
@@ -760,19 +808,10 @@
             "destroy-on-hide",
             "multiline"
         ],
-        "subtags": ["b-tab-item"],
-        "description": "Buefy component <b-tabs>"
-    },
-    "b-tab-item": {
-        "attributes": [
-            "label",
-            "icon",
-            "icon-pack",
-            "disabled",
-            "visible"
-        ],
-        "subtags": [],
-        "description": "Buefy component <b-tab-item>"
+        "description": "Buefy component <b-tabs>",
+        "subtags": [
+            "b-tab-item"
+        ]
     },
     "b-tag": {
         "attributes": [
@@ -786,15 +825,8 @@
             "disabled",
             "aria-close-label"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-tag>"
-    },
-    "b-taglist": {
-        "attributes": [
-            "attached"
-        ],
-        "subtags": ["b-tag"],
-        "description": "Buefy component <b-taglist>"
+        "description": "Buefy component <b-tag>",
+        "subtags": []
     },
     "b-taginput": {
         "attributes": [
@@ -820,8 +852,17 @@
             "check-infinite-scroll",
             "append-to-body"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-taginput>"
+        "description": "Buefy component <b-taginput>",
+        "subtags": []
+    },
+    "b-taglist": {
+        "attributes": [
+            "attached"
+        ],
+        "description": "Buefy component <b-taglist>",
+        "subtags": [
+            "b-tag"
+        ]
     },
     "b-timepicker": {
         "attributes": [
@@ -849,8 +890,8 @@
             "focusable",
             "append-to-body"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-timepicker>"
+        "description": "Buefy component <b-timepicker>",
+        "subtags": []
     },
     "b-tooltip": {
         "attributes": [
@@ -866,8 +907,8 @@
             "size",
             "delay"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-tooltip>"
+        "description": "Buefy component <b-tooltip>",
+        "subtags": []
     },
     "b-upload": {
         "attributes": [
@@ -882,7 +923,7 @@
             "multiple",
             "native"
         ],
-        "subtags": [],
-        "description": "Buefy component <b-upload>"
+        "description": "Buefy component <b-upload>",
+        "subtags": []
     }
 }

@@ -143,7 +143,7 @@ export default [
             {
                 name: '<code>step</code>',
                 description: 'Step marker content (when there is no icon)',
-                type: 'String',
+                type: 'String | Number',
                 values: '—',
                 default: '—'
             },
