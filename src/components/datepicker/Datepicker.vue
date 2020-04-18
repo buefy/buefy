@@ -677,9 +677,16 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date + 'T00:00:00') : null
+            const s = date ? date.split('-') : []
+            if (s.length === 3) {
+                const year = parseInt(s[0], 10)
+                const month = parseInt(s[1]) - 1
+                const day = parseInt(s[2])
+                this.computedValue = new Date(year, month, day, 12)
+            } else {
+                this.computedValue = null
+            }
         },
-
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[0])
