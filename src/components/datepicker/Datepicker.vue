@@ -216,10 +216,7 @@ import DatepickerMonth from './DatepickerMonth'
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
     const dates = targetDates.map((date) => {
-        const yyyyMMdd = date.getFullYear() +
-            '/' + (date.getMonth() + 1) +
-            '/' + date.getDate()
-        const d = new Date(yyyyMMdd)
+        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
         return !vm.isTypeMonth ? d.toLocaleDateString()
             : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
     })
