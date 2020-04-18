@@ -114,7 +114,7 @@ describe('BDatepicker', () => {
         wrapper.vm.onChangeNativePicker({ target: { value: '' } })
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(null)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
-        expect(wrapper.emitted()['input']).toBeFalsy()
+        expect(wrapper.emitted()['input']).toBeNull()
     })    
     
     it('react accordingly when changing v-model', () => {
