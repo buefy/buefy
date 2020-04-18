@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { getValueByPath, isMobile } from '../../utils/helpers'
+import { getValueByPath } from '../../utils/helpers'
 import Tag from '../tag/Tag'
 import Autocomplete from '../autocomplete/Autocomplete'
 import config from '../../utils/config'
@@ -320,8 +320,9 @@ export default {
             const tag = this.tags.splice(index, 1)[0]
             this.$emit('input', this.tags)
             this.$emit('remove', tag)
-            if (event && isMobile.any()) {
-                event.stopPropagation()
+            if (event) event.stopPropagation()
+            if (this.openOnFocus) {
+                this.$refs.autocomplete.focus()
             }
             return tag
         },
@@ -329,11 +330,6 @@ export default {
         removeLastTag() {
             if (this.tagsLength > 0) {
                 this.removeTag(this.tagsLength - 1)
-                this.$nextTick(() => {
-                    if (this.isFocused && this.openOnFocus) {
-                        this.$refs.autocomplete.isActive = true
-                    }
-                })
             }
         },
 
