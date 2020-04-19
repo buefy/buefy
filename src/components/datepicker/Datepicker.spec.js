@@ -115,8 +115,8 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(null)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
         expect(wrapper.emitted()['input']).toEqual([[null]])
-    })    
-    
+    })
+
     it('react accordingly when changing v-model', () => {
         const date = new Date()
         wrapper.setProps({
