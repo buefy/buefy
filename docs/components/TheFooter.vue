@@ -33,7 +33,7 @@
                             <p class="control">
                                 <a
                                     class="button is-twitter"
-                                    href="https://twitter.com/walter_tommasiy"
+                                    href="https://twitter.com/walter_tommasi"
                                     target="_blank">
                                     <b-icon icon="twitter"/>
                                     <span>Twitter</span>
