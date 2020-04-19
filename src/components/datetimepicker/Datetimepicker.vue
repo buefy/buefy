@@ -280,10 +280,7 @@ export default {
                 return config.defaultDatetimeFormatter(date)
             } else {
                 if (this.$refs.timepicker) {
-                    const yyyyMMdd = date.getFullYear() +
-                        '/' + (date.getMonth() + 1) +
-                        '/' + date.getDate()
-                    const d = new Date(yyyyMMdd)
+                    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
                     return d.toLocaleDateString() +
                         ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker)
                 }
@@ -295,7 +292,19 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date) : null
+            const s = date ? date.split(/\D/) : []
+            if (s.length >= 5) {
+                const year = parseInt(s[0], 10)
+                const month = parseInt(s[1], 10) - 1
+                const day = parseInt(s[2], 10)
+                const hours = parseInt(s[3], 10)
+                const minutes = parseInt(s[4], 10)
+                // Seconds are omitted intentionally; they are unsupported by input
+                // type=datetime-local and cause the control to fail native validation
+                this.computedValue = new Date(year, month, day, hours, minutes)
+            } else {
+                this.computedValue = null
+            }
         },
         formatNative(value) {
             const date = new Date(value)

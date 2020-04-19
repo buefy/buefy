@@ -20,6 +20,17 @@ describe('Datetimepicker', () => {
         expect(valueEmitted).toContainEqual(date)
     })
 
+    it('react accordingly when handling native picker', () => {
+        const date = new Date(2020, 0, 1, 12, 30, 0)
+        wrapper.vm.onChangeNativePicker({ target: { value: '2020-01-01T12:30' } })
+        expect(wrapper.emitted()['input']).toEqual([[date]])
+    })
+
+    it('react accordingly when handling native picker clear', () => {
+        wrapper.vm.onChangeNativePicker({ target: { value: '' } })
+        expect(wrapper.emitted()['input']).toEqual([[undefined]])
+    })
+
     it('react accordingly when setting minDateTime prop and computedValue', () => {
         const min = new Date(2019, 9, 20, 8, 0, 0, 0)
         const date = new Date(2019, 9, 18, 0, 0, 0, 0)
