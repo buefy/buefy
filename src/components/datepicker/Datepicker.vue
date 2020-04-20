@@ -688,7 +688,7 @@ export default {
                 ? (!value.length ? this.dateCreator() : value[0])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
-                day: currentDate.getDay(),
+                day: currentDate.getDate(),
                 month: currentDate.getMonth(),
                 year: currentDate.getFullYear()
             }
