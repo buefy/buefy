@@ -102,6 +102,21 @@ describe('BDatepicker', () => {
         expect(wrapper.emitted()['input']).toBeTruthy()
     })
 
+    it('react accordingly when handling native picker', () => {
+        const date = new Date(2020, 0, 1)
+        wrapper.vm.onChangeNativePicker({ target: { value: '2020-01-01' } })
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
+        expect(wrapper.vm.togglePicker).toHaveBeenCalled()
+        expect(wrapper.emitted()['input']).toBeTruthy()
+    })
+
+    it('react accordingly when handling native picker clear', () => {
+        wrapper.vm.onChangeNativePicker({ target: { value: '' } })
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(null)
+        expect(wrapper.vm.togglePicker).toHaveBeenCalled()
+        expect(wrapper.emitted()['input']).toEqual([[null]])
+    })
+
     it('react accordingly when changing v-model', () => {
         const date = new Date()
         wrapper.setProps({

@@ -216,10 +216,7 @@ import DatepickerMonth from './DatepickerMonth'
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
     const dates = targetDates.map((date) => {
-        const yyyyMMdd = date.getFullYear() +
-            '/' + (date.getMonth() + 1) +
-            '/' + date.getDate()
-        const d = new Date(yyyyMMdd)
+        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
         return !vm.isTypeMonth ? d.toLocaleDateString()
             : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
     })
@@ -680,9 +677,16 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date + 'T00:00:00') : null
+            const s = date ? date.split('-') : []
+            if (s.length === 3) {
+                const year = parseInt(s[0], 10)
+                const month = parseInt(s[1]) - 1
+                const day = parseInt(s[2])
+                this.computedValue = new Date(year, month, day)
+            } else {
+                this.computedValue = null
+            }
         },
-
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[0])
