@@ -38,6 +38,7 @@ $sidebar-mobile-breakpoint: $tablet !default;
             width: $sidebar-mobile-width;
         }
         &.is-mini-expand:hover {
+            transition: width $speed-slow $easing;
             &:not(.is-fullwidth) {
                 width: $sidebar-width;
             }
