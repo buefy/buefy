@@ -1,7 +1,11 @@
 <template>
     <div>
         <div class="example is-paddingless">
-            <CodeView :code="usage | pre" lang="javascript" expanded/>
+            <CodeView title="Full bundle" :code="usageBundle | pre" lang="javascript" expanded/>
+        </div>
+
+        <div class="example is-paddingless">
+            <CodeView title="Individual components" :code="usageComponents | pre" lang="javascript" expanded/>
         </div>
 
         <ApiView :data="api"/>
@@ -15,12 +19,22 @@
         data() {
             return {
                 api,
-                usage: `
+                usageBundle: `
                 Vue.use(Buefy, {
                     defaultIconPack: 'fas',
                     defaultContainerElement: '#content',
                     // ...
-                })`
+                })`,
+                usageComponents: `
+                import { BuefyProgrammatic, Table, Input } from 'buefy'
+
+                Vue.use(BuefyProgrammatic, {
+                    defaultIconPack: 'fas',
+                    defaultContainerElement: '#content',
+                    // ...
+                })
+                Vue.use(Table)
+                Vue.use(Input)`
             }
         }
     }
