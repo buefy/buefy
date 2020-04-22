@@ -338,6 +338,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>card-layout</code>',
+                description: 'Rows appears as cards (collapse rows)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>aria-next-label</code>',
                 description: 'Accessibility label for the next page link (if <code>paginated</code>)',
                 type: 'String',

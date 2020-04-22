@@ -764,6 +764,7 @@
             "scrollable",
             "height",
             "filters-event",
+            "card-layout",
             "aria-next-label",
             "aria-previous-label",
             "aria-page-label",

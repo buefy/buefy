@@ -521,7 +521,8 @@ export default {
         filtersEvent: {
             type: String,
             default: ''
-        }
+        },
+        cardLayout: Boolean
     },
     data() {
         return {
@@ -543,11 +544,7 @@ export default {
     },
     computed: {
         sortMultipleDataComputed() {
-            if (this.backendSorting) {
-                return this.sortMultipleData
-            } else {
-                return this.sortMultipleDataLocal
-            }
+            return this.backendSorting ? this.sortMultipleData : this.sortMultipleDataLocal
         },
         tableClasses() {
             return {
@@ -564,6 +561,7 @@ export default {
             return {
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
+                'is-card-list': this.cardLayout,
                 'table-container': this.isScrollable
             }
         },

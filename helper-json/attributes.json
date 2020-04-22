@@ -2220,6 +2220,10 @@
         "description": "Border to all cells",
         "type": "boolean"
     },
+    "b-table/card-layout": {
+        "description": "Rows appears as cards (collapse rows)",
+        "type": "boolean"
+    },
     "b-table/checkable": {
         "description": "Rows can be checked (multiple), checked rows will have a .is-checked class if you want to style",
         "type": "boolean"
