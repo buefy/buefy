@@ -47,7 +47,7 @@
     "build:scss:watch": "node-sass src/scss/buefy-build.scss --w",
     "build:lib": "npm run build:js && npm run build:scss && copyfiles --flat helper-json/*.json dist/vetur",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
-    "build:docs": "node build/build.js",
+    "build:docs": "node build/build.js && copyfiles --flat netlify.toml dist-docs",
     "build": "npm run build:lib && npm run build:docs",
     "cov": "./node_modules/codcov/bin/codcov"
   },
