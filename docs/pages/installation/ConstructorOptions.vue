@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="example is-paddingless">
+        <div class="block">
             <CodeView title="Full bundle" :code="usageBundle | pre" lang="javascript" expanded/>
         </div>
 
-        <div class="example is-paddingless">
+        <div class="block">
             <CodeView title="Individual components" :code="usageComponents | pre" lang="javascript" expanded/>
         </div>
 
