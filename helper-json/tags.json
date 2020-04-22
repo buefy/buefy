@@ -755,6 +755,7 @@
             "detail-key",
             "custom-is-checked",
             "is-row-checkable",
+            "is-row-selectable",
             "icon-pack",
             "mobile-sort-placeholder",
             "custom-row-key",

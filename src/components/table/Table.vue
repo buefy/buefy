@@ -412,6 +412,10 @@ export default {
             }
         },
         selected: Object,
+        isRowSelectable: {
+            type: Function,
+            default: () => true
+        },
         focusable: Boolean,
         customIsChecked: Function,
         isRowCheckable: {
@@ -966,6 +970,7 @@ export default {
             this.$emit('click', row)
 
             if (this.selected === row) return
+            if (!this.isRowSelectable(row)) return
 
             // Emit new and old row
             this.$emit('select', row, this.selected)
@@ -1117,7 +1122,25 @@ export default {
                     ? this.visibleData.length - 1
                     : index
 
-            this.selectRow(this.visibleData[index])
+            const row = this.visibleData[index]
+
+            if (!this.isRowSelectable(row)) {
+                let newIndex = null
+                if (pos > 0) {
+                    for (let i = index; i < this.visibleData.length && newIndex === null; i++) {
+                        if (this.isRowSelectable(this.visibleData[i])) newIndex = i
+                    }
+                } else {
+                    for (let i = index; i >= 0 && newIndex === null; i--) {
+                        if (this.isRowSelectable(this.visibleData[i])) newIndex = i
+                    }
+                }
+                if (newIndex >= 0) {
+                    this.selectRow(this.visibleData[newIndex])
+                }
+            } else {
+                this.selectRow(row)
+            }
         },
 
         /**

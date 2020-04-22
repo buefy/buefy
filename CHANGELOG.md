@@ -11,6 +11,7 @@
 * Add ``vertical`` and ``rounded`` props to steps (thanks @service-paradis)
 * Add ``step`` prop to step item (thanks @service-paradis)
 * Add ``card-layout`` prop to table
+* Add ``is-row-selectable`` prop to table
 
 ### Fixes
 

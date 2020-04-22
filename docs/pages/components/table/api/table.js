@@ -270,7 +270,14 @@ export default [
             },
             {
                 name: '<code>is-row-checkable</code>',
-                description: 'Custom method to verify if a row is disabled, works when is <code>checkable</code>. ',
+                description: 'Custom method to verify if a row is checkable, works when is <code>checkable</code>. ',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: 'true'
+            },
+            {
+                name: '<code>is-row-selectable</code>',
+                description: 'Custom method to verify if a row is selectable, works when is <code>selected</code>. ',
                 type: 'Function (row: Object)',
                 values: '—',
                 default: 'true'

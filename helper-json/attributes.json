@@ -2322,7 +2322,11 @@
         ]
     },
     "b-table/is-row-checkable": {
-        "description": "Custom method to verify if a row is disabled, works when is checkable.",
+        "description": "Custom method to verify if a row is checkable, works when is checkable.",
+        "type": "function(row:object)"
+    },
+    "b-table/is-row-selectable": {
+        "description": "Custom method to verify if a row is selectable, works when is selected.",
         "type": "function(row:object)"
     },
     "b-table/loading": {
