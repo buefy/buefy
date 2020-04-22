@@ -124,7 +124,6 @@ export default {
             dragging: false,
             hold: 0,
             itemWidth: 0,
-            total: 0,
             settings: {}
         }
     },
@@ -145,6 +144,9 @@ export default {
             const translate = this.delta + 1 * (this.activeItem * this.itemWidth)
             const result = this.dragging ? -translate : -Math.abs(translate)
             return `transform: translateX(${result}px);`
+        },
+        total() {
+            return this.data.length - 1
         }
     },
     watch: {
@@ -251,7 +253,6 @@ export default {
         }
     },
     mounted() {
-        this.total = this.data.length - 1
         this.$nextTick(() => {
             this.update()
         })

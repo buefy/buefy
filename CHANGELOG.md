@@ -21,6 +21,7 @@
 * Fix #2364 close sidebar when is not overlay
 * Fix #2371 clean hovered after select
 * Fix #2381 label-position when position is right
+* Fix #2425 reactive data on carousel list
 
 ## 0.8.15
 
@@ -80,7 +81,7 @@
 
 ### New features
 
-* Add ``sticky-header`` prop to table 
+* Add ``sticky-header`` prop to table
 
 ### Fixes
 
@@ -92,8 +93,8 @@
 ### New features
 
 * Add multi column sorting to table (thanks @suneab)
-* Add ``clearable`` prop to autocomplete (thanks @melogustavo) 
-* Add ``icon-right`` prop to input (thanks @melogustavo) 
+* Add ``clearable`` prop to autocomplete (thanks @melogustavo)
+* Add ``icon-right`` prop to input (thanks @melogustavo)
 * Add ``tag`` slot to taginput (thanks @jacobgoh101)
 * Add ``tz-offset`` prop to datepicker (thanks @zedrdave)
 * Add ``repeat`` prop to carousel (thanks @GerryWilko)
@@ -147,7 +148,7 @@
 
 ### New features
 
-* Add ``infinite-scroll`` prop to autocomplete and taginput (thanks @mateuswetah) 
+* Add ``infinite-scroll`` prop to autocomplete and taginput (thanks @mateuswetah)
 * Add scss variables to loading and snackbar (thanks @service-paradis)
 * Add range start and end events to datepicker (thanks @lunfel)
 * Add ``close`` event to notification, snackbar and toast (thanks @service-paradis)
@@ -189,7 +190,7 @@
 * Add ``controls`` prop to number input (thanks @afwn90cj93201nixr2e1re)
 * Add ``accordion`` prop to menu
 * Add ``icon-click`` event to input (thanks @service-paradis)
-* Add multiple support to Datepicker when type is ``month`` 
+* Add multiple support to Datepicker when type is ``month``
 * Add more customization variables for dropdown and loading (thanks @HugoHeneault)
 * Add more customization variables for datepicker (thanks @service-paradis)
 * Add ``defaultDatepickerMobileModal`` constructor option (thanks @ievhen-soloviov)
@@ -233,7 +234,7 @@
 
 * Fix #1834 datepicker on ios mobile (thanks @bohdan-prylutskyi)
 * Fix #1875 datepicker disabled style
-* Fix #1883 ``date-parser`` function when range 
+* Fix #1883 ``date-parser`` function when range
 * Fix taginput style when maxtags and using ``label-position`` prop on field
 
 ## 0.8.5
