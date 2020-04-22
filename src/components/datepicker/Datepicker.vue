@@ -682,7 +682,7 @@ export default {
                 const year = parseInt(s[0], 10)
                 const month = parseInt(s[1]) - 1
                 const day = parseInt(s[2])
-                this.computedValue = new Date(year, month, day, 12)
+                this.computedValue = new Date(year, month, day)
             } else {
                 this.computedValue = null
             }

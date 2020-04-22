@@ -103,7 +103,7 @@ describe('BDatepicker', () => {
     })
 
     it('react accordingly when handling native picker', () => {
-        const date = new Date(2020, 0, 1, 12)
+        const date = new Date(2020, 0, 1)
         wrapper.vm.onChangeNativePicker({ target: { value: '2020-01-01' } })
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
