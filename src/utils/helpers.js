@@ -104,6 +104,10 @@ export function removeElement(el) {
     }
 }
 
+export function isVueComponent(c) {
+    return c && c._isVue
+}
+
 /**
  * Escape regex characters
  * http://stackoverflow.com/a/6969486

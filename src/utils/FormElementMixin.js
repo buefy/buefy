@@ -1,4 +1,5 @@
 import config from '../utils/config'
+import { isVueComponent } from './helpers'
 
 export default {
     props: {
@@ -102,7 +103,11 @@ export default {
         },
 
         getElement() {
-            return this.$refs[this.$data._elementRef]
+            let el = this.$refs[this.$data._elementRef]
+            while (isVueComponent(el)) {
+                el = el.$refs[el.$data._elementRef]
+            }
+            return el
         },
 
         setInvalid() {
