@@ -7,6 +7,53 @@ export class BComponent extends _Vue {
     [key: string]: any
 }
 
+export declare type BuefyConfig = {
+    defaultContainerElement?: string,
+    defaultIconPack?: string;
+    defaultIconComponent?: string;
+    defaultIconPrev?: string;
+    defaultIconNext?: string;
+    defaultDialogConfirmText?: string;
+    defaultDialogCancelText?: string;
+    defaultSnackbarDuration?: number;
+    defaultSnackbarPosition?: GlobalPositions;
+    defaultToastDuration?: number;
+    defaultToastPosition?: GlobalPositions;
+    defaultNotificationDuration?: number;
+    defaultNotificationPosition?: GlobalPositions;
+    defaultTooltipType?: ColorModifiers;
+    defaultTooltipAnimated?: boolean;
+    defaultTooltipDelay?: number;
+    defaultInputAutocomplete?: string;
+    defaultDateFormatter?: Function;
+    defaultDateParser?: Function;
+    defaultDateCreator?: Function;
+    defaultDayNames?: string[];
+    defaultMonthNames?: string[];
+    defaultFirstDayOfWeek?: number;
+    defaultUnselectableDaysOfWeek?: number[];
+    defaultTimeFormatter?: Function;
+    defaultTimeParser?: Function;
+    defaultModalCanCancel?: string[];
+    defaultModalScroll?: string;
+    defaultDatepickerMobileNative?: boolean;
+    defaultTimepickerMobileNative?: boolean;
+    defaultNoticeQueue?: boolean;
+    defaultInputHasCounter?: boolean;
+    defaultTaginputHasCounter?: boolean;
+    defaultUseHtml5Validation?: boolean;
+    defaultDropdownMobileModal?: boolean;
+    defaultFieldLabelPosition?: 'inside' | 'on-border';
+    defaultDatepickerYearsRange?: number[];
+    defaultDatepickerNearbyMonthDays?: boolean;
+    defaultDatepickerNearbySelectableMonthDays?: boolean;
+    defaultDatepickerShowWeekNumber?: boolean;
+    customIconPacks?: any;
+    defaultClockpickerHoursLabel?: string;
+    defaultClockpickerMinutesLabel?: string;
+    defaultTrapFocus?: boolean;
+};
+
 export declare type BDialogConfig = {
     /**
      * Dialog title
@@ -317,3 +364,11 @@ export declare type BNotificationConfig = BNoticeConfig & {
 export declare const NotificationProgrammatic: {
     open: (params: BNotificationConfig | string) => BNoticeComponent;
 }
+
+
+export declare const ConfigProgrammatic: {
+    getOptions: () => BuefyConfig
+    setOptions: (params: BuefyConfig) => any
+}
+
+
