@@ -1,8 +1,11 @@
 $speed-slow: 150ms !default;
 $speed-slower: 250ms !default;
 
-$primary: #7957d5 !default;
-$primary-invert: $white !default;
+$buefy: #7957d5 !default;
+$primary: $buefy !default;
+$primary-invert: findColorInvert($buefy) !default;
+$primary-light: findLightColor($buefy) !default;
+$primary-dark: findDarkolor($buefy) !default;
 
 $info: #167df0 !default;
 
@@ -12,3 +15,4 @@ $link-visited: $grey !default;
 $link-focus-border: $primary !default;
 
 $label-weight: $weight-semibold !default;
+$input-arrow: $buefy !default;
