@@ -70,7 +70,7 @@ $checkbox-size: 1.25em !default;
             }
         }
         .control-label {
-            padding-left: 0.5em;
+            padding-left: $control-padding-horizontal;
         }
         &.button {
             display: flex;

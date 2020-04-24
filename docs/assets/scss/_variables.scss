@@ -1,6 +1,8 @@
 // Colors
 
 $primary: #7957d5;
+$primary-dark: findLightColor(#7957d5);
+$primary-light: findDarkColor(#7957d5);
 $twitter: #4099FF;
 $discord: #7289DA;
 $patreon: #f96854;
@@ -12,7 +14,7 @@ $colors: (
     "light": ($light, $light-invert),
     "grey": ($grey, $light-invert),
     "dark": ($dark, $dark-invert),
-    "primary": ($primary, $white, findLightColor($primary), findDarkColor($primary)),
+    "primary": ($primary, $white, $primary-dark, $primary-light),
     "info": ($info, $info-invert, $info-light, $info-dark),
     "success": ($success, $success-invert, $success-light, $success-dark),
     "warning": ($warning, $warning-invert, $warning-light, $warning-dark),
