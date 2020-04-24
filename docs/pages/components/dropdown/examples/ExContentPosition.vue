@@ -10,7 +10,7 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown position="is-bottom-left" aria-role="menu" trap-focus>
+                <b-dropdown position="is-bottom-left" append-to-body aria-role="menu" trap-focus>
                     <a
                         class="navbar-item"
                         slot="trigger"

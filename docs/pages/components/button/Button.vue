@@ -12,7 +12,7 @@
 
         <Example :component="ExRouter" :code="ExRouterCode" title="Router" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.6</span>
             </div>
         </Example>

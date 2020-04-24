@@ -8,6 +8,7 @@ import VueProgressBar from 'vue-progressbar'
 import VueAnalytics from 'vue-analytics'
 import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
+import { createNewEvent } from '../src/utils/helpers'
 
 import ApiView from './components/ApiView'
 import CodeView from './components/CodeView'
@@ -95,7 +96,7 @@ const root = new Vue({
     router,
     components: { App },
     mounted() {
-        document.dispatchEvent(new Event('render-event'))
+        document.dispatchEvent(createNewEvent('render-event'))
     },
     template: '<App/>'
 })

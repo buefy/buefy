@@ -15,15 +15,26 @@
             </ul>
         </nav>
 
-        <h1 class="title" v-html="title"/>
-        <h2 class="subtitle" v-html="subtitle"/>
+        <div class="columns">
+            <div class="column">
+                <h1 class="title" v-html="title"/>
+                <h2 class="subtitle" v-html="subtitle"/>
+            </div>
+            <div class="column">
+                <carbon-ads />
+            </div>
+        </div>
     </header>
 </template>
 
 <script>
+import CarbonAds from './CarbonAds'
 import routes from '@/data/routes'
 
 export default {
+    components: {
+        CarbonAds
+    },
     props: {
         breadcrumb: Array,
         title: String,

@@ -149,6 +149,20 @@ export default [
                 default: '<code>() => new Date()</code>'
             },
             {
+                name: '<code>focusable</code>',
+                description: 'Timepicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append timepicker calendar to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

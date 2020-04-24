@@ -44,7 +44,7 @@ export default [
                 description: 'Tag and input size, optional',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
-                default: '<code>is-medium</code>'
+                default: '—'
             },
             {
                 name: '<code>rounded</code>',
@@ -100,14 +100,14 @@ export default [
                 description: 'Allow removing last tag when pressing given keys, if input is empty',
                 type: 'Array',
                 values: '—',
-                default: '<code>[8]</code>'
+                default: '<code>["Backspace"]</code>'
             },
             {
-                name: '<code>confirm-key-codes</code>',
-                description: 'Array of key codes which will add a tag when typing (default comma, enter and tab)',
+                name: '<code>confirm-keys</code>',
+                description: 'Array of key (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma and enter)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[13, 188, 9]</code>'
+                default: '<code>[",", "Enter"]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',
@@ -138,6 +138,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>check-infinite-scroll</code>',
+                description: 'Makes the autocomplete component check if list reached scroll end and emit <code>infinite-scroll</code> event.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append autocomplete content to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any other native attribute',
                 description: '—',
                 type: '—',
@@ -160,6 +174,21 @@ export default [
                 name: '<code>header</code>',
                 description: 'Show a custom header as first option',
                 props: '—'
+            },
+            {
+                name: '<code>footer</code>',
+                description: 'Show a custom footer as last option',
+                props: '—'
+            },
+            {
+                name: '<code>tag</code>',
+                description: 'For customizing content in tag item.',
+                props: '<code>tag: String|Number|Object</code>'
+            },
+            {
+                name: '<code>selected</code>',
+                description: 'For customizing content of selected item.',
+                props: '<code>tags: Array</code>'
             }
         ],
         events: [
@@ -182,6 +211,11 @@ export default [
                 name: '<code>remove</code>',
                 description: 'Triggers when a tag has been removed',
                 parameters: '<code>value: String|Object</code>'
+            },
+            {
+                name: '<code>infinite-scroll</code>',
+                description: 'Triggers when the autocomplete <code>.dropdown-list</code> has reached scroll end',
+                parameters: '—'
             }
         ]
     }

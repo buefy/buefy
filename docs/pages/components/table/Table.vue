@@ -40,10 +40,21 @@
             <p>A slot called <code>bottom-left</code> is available whenever the table is checkable or paginated, you can add anything in there.</p>
         </Example>
 
+        <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.8.11</span>
+            </div>
+            <p>To sort on additional columns, use <code>sort-multiple</code> is enabled</p>
+            <p>Use <code>$refs.YOURREF.resetMultiSorting()</code> to reset the current multi column sorting</p>
+            <p>Use <code>sort-multiple-data</code> prop together with <code>backend-sorting</code> if you want to use a custom sorting priority</p>
+            <p>Use <code>sort-multiple-key</code> prop if you only want to enable multi column sorting when it is in combination with a key. Use value <code>null</code> to have it always enabled (default if not specified)</p>
+        </Example>
+
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.2</span>
             </div>
             <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
@@ -81,6 +92,22 @@
             </p>
         </Example>
 
+        <Example :component="ExSticky" :code="ExStickyCode" title="Sticky Headers and Columns">
+            <p>
+                Use the <code>sticky-header</code> prop to show a scrolling table with fixed headers.
+            </p>
+            <p>
+                Use the <code>sticky</code> prop on column to show a scrolling table with a fixed column.
+            </p>
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.8.13</span>
+            </div>
+            <p>
+                The default height is <code>300px</code> but you can overwrite it using <code>height</code> prop or <code>$table-sticky-header-height</code> Sass variable.
+            </p>
+        </Example>
+
         <Example :component="ExToggleColumns" :code="ExToggleColumnsCode" title="Toggle columns">
             <b-message type="is-danger">
                 Always use the <code>visible</code> prop to hide/show columns, and <strong>NOT</strong> <code>v-if</code> or <code>v-show</code>.
@@ -105,11 +132,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/table'
+    import variables from './variables/table'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -125,6 +154,9 @@
 
     import ExSearchable from './examples/ExSearchable'
     import ExSearchableCode from '!!raw-loader!./examples/ExSearchable'
+
+    import ExSortMultiple from './examples/ExSortMultiple'
+    import ExSortMultipleCode from '!!raw-loader!./examples/ExSortMultiple'
 
     import ExPaginationSort from './examples/ExPaginationSort'
     import ExPaginationSortCode from '!!raw-loader!./examples/ExPaginationSort'
@@ -144,6 +176,9 @@
     import ExSubheadings from './examples/ExSubheadings'
     import ExSubheadingsCode from '!!raw-loader!./examples/ExSubheadings'
 
+    import ExSticky from './examples/ExSticky'
+    import ExStickyCode from '!!raw-loader!./examples/ExSticky'
+
     import ExToggleColumns from './examples/ExToggleColumns'
     import ExToggleColumnsCode from '!!raw-loader!./examples/ExToggleColumns'
 
@@ -160,17 +195,20 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSandbox,
                 ExSelection,
                 ExCheckable,
                 ExSearchable,
+                ExSortMultiple,
                 ExPaginationSort,
                 ExDetailedRow,
                 ExCustomDetailedRow,
                 ExRowStatus,
                 ExCustomHeaders,
                 ExSubheadings,
+                ExSticky,
                 ExToggleColumns,
                 ExFooter,
                 ExAsyncData,
@@ -180,12 +218,14 @@
                 ExSelectionCode,
                 ExCheckableCode,
                 ExSearchableCode,
+                ExSortMultipleCode,
                 ExPaginationSortCode,
                 ExDetailedRowCode,
                 ExCustomDetailedRowCode,
                 ExRowStatusCode,
                 ExCustomHeadersCode,
                 ExSubheadingsCode,
+                ExStickyCode,
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode,

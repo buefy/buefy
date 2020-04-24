@@ -37,7 +37,7 @@ export default [
                 description: 'Visibility duration in miliseconds',
                 type: 'Number',
                 values: '—',
-                default: '<code>5000</code>'
+                default: '<code>2000</code>'
             },
             {
                 name: '<code>icon-pack</code>',
@@ -48,10 +48,17 @@ export default [
             },
             {
                 name: '<code>has-icon</code>',
-                description: 'Adds an icon on the left side depending on the <code>type</code>',
+                description: 'Adds an icon on the left side depending on the <code>type</code> (or the <code>icon</code> prop if defined)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>icon</code>',
+                description: 'Icon name to use with <code>has-icon</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>size</code>',

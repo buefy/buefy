@@ -129,4 +129,12 @@
             }
         }
     }
+    &.is-multiline {
+        > .tabs {
+            ul {
+                flex-wrap: wrap;
+                flex-shrink: 1;
+            }
+        }
+    }
 }

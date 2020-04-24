@@ -1,12 +1,21 @@
 <template>
-    <div class="datepicker control" :class="[size, {'is-expanded': expanded}]">
+    <div
+        class="datepicker control"
+        :class="[size, {'is-expanded': expanded}]"
+    >
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
             :position="position"
             :disabled="disabled"
             :inline="inline"
-            :mobile-modal="mobileModal">
+            :mobile-modal="mobileModal"
+            :trap-focus="trapFocus"
+            :aria-role="ariaRole"
+            :aria-modal="!inline"
+            :append-to-body="appendToBody"
+            append-to-body-copy-parent
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -22,132 +31,144 @@
                 :disabled="disabled"
                 :readonly="!editable"
                 v-bind="$attrs"
-                :use-html5-validation="useHtml5Validation"
+                :use-html5-validation="false"
                 @click.native="onInputClick"
                 @keyup.native.enter="togglePicker(true)"
                 @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus"
-                @blur="onBlur" />
+                @focus="handleOnFocus" />
 
-            <b-dropdown-item :disabled="disabled" custom>
-                <header class="datepicker-header">
-                    <template v-if="$slots.header !== undefined && $slots.header.length">
-                        <slot name="header" />
-                    </template>
-                    <div
-                        v-else
-                        class="pagination field is-centered"
-                        :class="size">
-                        <a
-                            v-show="!showPrev && !disabled"
-                            class="pagination-previous"
-                            role="button"
-                            href="#"
-                            :disabled="disabled"
-                            @click.prevent="prev"
-                            @keydown.enter.prevent="prev"
-                            @keydown.space.prevent="prev">
+            <b-dropdown-item
+                :disabled="disabled"
+                :focusable="focusable"
+                custom
+                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}">
+                <div>
+                    <header class="datepicker-header">
+                        <template v-if="$slots.header !== undefined && $slots.header.length">
+                            <slot name="header" />
+                        </template>
+                        <div
+                            v-else
+                            class="pagination field is-centered"
+                            :class="size">
+                            <a
+                                v-show="!showPrev && !disabled"
+                                class="pagination-previous"
+                                role="button"
+                                href="#"
+                                :disabled="disabled"
+                                :aria-label="ariaPreviousLabel"
+                                @click.prevent="prev"
+                                @keydown.enter.prevent="prev"
+                                @keydown.space.prevent="prev">
 
-                            <b-icon
-                                :icon="iconPrev"
-                                :pack="iconPack"
-                                both
-                                type="is-primary is-clickable"/>
-                        </a>
-                        <a
-                            v-show="!showNext && !disabled"
-                            class="pagination-next"
-                            role="button"
-                            href="#"
-                            :disabled="disabled"
-                            @click.prevent="next"
-                            @keydown.enter.prevent="next"
-                            @keydown.space.prevent="next">
+                                <b-icon
+                                    :icon="iconPrev"
+                                    :pack="iconPack"
+                                    both
+                                    type="is-primary is-clickable"/>
+                            </a>
+                            <a
+                                v-show="!showNext && !disabled"
+                                class="pagination-next"
+                                role="button"
+                                href="#"
+                                :disabled="disabled"
+                                :aria-label="ariaNextLabel"
+                                @click.prevent="next"
+                                @keydown.enter.prevent="next"
+                                @keydown.space.prevent="next">
 
-                            <b-icon
-                                :icon="iconNext"
-                                :pack="iconPack"
-                                both
-                                type="is-primary is-clickable"/>
-                        </a>
-                        <div class="pagination-list">
-                            <b-field>
-                                <b-select
-                                    v-if="!isTypeMonth"
-                                    v-model="focusedDateData.month"
-                                    :disabled="disabled"
-                                    :size="size">
-                                    <option
-                                        v-for="(month, index) in monthNames"
-                                        :value="index"
-                                        :key="month">
-                                        {{ month }}
-                                    </option>
-                                </b-select>
-                                <b-select
-                                    v-model="focusedDateData.year"
-                                    :disabled="disabled"
-                                    :size="size">
-                                    <option
-                                        v-for="year in listOfYears"
-                                        :value="year"
-                                        :key="year">
-                                        {{ year }}
-                                    </option>
-                                </b-select>
-                            </b-field>
+                                <b-icon
+                                    :icon="iconNext"
+                                    :pack="iconPack"
+                                    both
+                                    type="is-primary is-clickable"/>
+                            </a>
+                            <div class="pagination-list">
+                                <b-field>
+                                    <b-select
+                                        v-if="!isTypeMonth"
+                                        v-model="focusedDateData.month"
+                                        :disabled="disabled"
+                                        :size="size">
+                                        <option
+                                            v-for="month in listOfMonths"
+                                            :value="month.index"
+                                            :key="month.name"
+                                            :disabled="month.disabled">
+                                            {{ month.name }}
+                                        </option>
+                                    </b-select>
+                                    <b-select
+                                        v-model="focusedDateData.year"
+                                        :disabled="disabled"
+                                        :size="size">
+                                        <option
+                                            v-for="year in listOfYears"
+                                            :value="year"
+                                            :key="year">
+                                            {{ year }}
+                                        </option>
+                                    </b-select>
+                                </b-field>
+                            </div>
                         </div>
+                    </header>
+                    <div
+                        v-if="!isTypeMonth"
+                        class="datepicker-content"
+                        :class="{'content-horizonal-timepicker': horizontalTimePicker}">
+                        <b-datepicker-table
+                            v-model="computedValue"
+                            :day-names="dayNames"
+                            :month-names="monthNames"
+                            :first-day-of-week="firstDayOfWeek"
+                            :rules-for-first-week="rulesForFirstWeek"
+                            :min-date="minDate"
+                            :max-date="maxDate"
+                            :focused.sync="focusedDateData"
+                            :disabled="disabled"
+                            :unselectable-dates="unselectableDates"
+                            :unselectable-days-of-week="unselectableDaysOfWeek"
+                            :selectable-dates="selectableDates"
+                            :events="events"
+                            :indicators="indicators"
+                            :date-creator="dateCreator"
+                            :type-month="isTypeMonth"
+                            :nearby-month-days="nearbyMonthDays"
+                            :nearby-selectable-month-days="nearbySelectableMonthDays"
+                            :show-week-number="showWeekNumber"
+                            :range="range"
+                            :multiple="multiple"
+                            @range-start="date => $emit('range-start', date)"
+                            @range-end="date => $emit('range-end', date)"
+                            @close="togglePicker(false)"/>
                     </div>
-                </header>
-
-                <div
-                    v-if="!isTypeMonth"
-                    class="datepicker-content">
-                    <b-datepicker-table
-                        v-model="computedValue"
-                        :day-names="dayNames"
-                        :month-names="monthNames"
-                        :first-day-of-week="firstDayOfWeek"
-                        :rules-for-first-week="rulesForFirstWeek"
-                        :min-date="minDate"
-                        :max-date="maxDate"
-                        :focused="focusedDateData"
-                        :disabled="disabled"
-                        :unselectable-dates="unselectableDates"
-                        :unselectable-days-of-week="unselectableDaysOfWeek"
-                        :selectable-dates="selectableDates"
-                        :events="events"
-                        :indicators="indicators"
-                        :date-creator="dateCreator"
-                        :type-month="isTypeMonth"
-                        :nearby-month-days="nearbyMonthDays"
-                        :nearby-selectable-month-days="nearbySelectableMonthDays"
-                        :show-week-number="showWeekNumber"
-                        :range="range"
-                        :multiple="multiple"
-                        @close="togglePicker(false)"/>
-                </div>
-                <div v-else>
-                    <b-datepicker-month
-                        v-model="computedValue"
-                        :month-names="monthNames"
-                        :min-date="minDate"
-                        :max-date="maxDate"
-                        :focused="focusedDateData"
-                        :disabled="disabled"
-                        :unselectable-dates="unselectableDates"
-                        :unselectable-days-of-week="unselectableDaysOfWeek"
-                        :selectable-dates="selectableDates"
-                        :events="events"
-                        :indicators="indicators"
-                        :date-creator="dateCreator"
-                        :multiple="multiple"
-                        @close="togglePicker(false)"/>
+                    <div v-else>
+                        <b-datepicker-month
+                            v-model="computedValue"
+                            :month-names="monthNames"
+                            :min-date="minDate"
+                            :max-date="maxDate"
+                            :focused.sync="focusedDateData"
+                            :disabled="disabled"
+                            :unselectable-dates="unselectableDates"
+                            :unselectable-days-of-week="unselectableDaysOfWeek"
+                            :selectable-dates="selectableDates"
+                            :events="events"
+                            :indicators="indicators"
+                            :date-creator="dateCreator"
+                            :multiple="multiple"
+                            @close="togglePicker(false)"
+                            @change-focus="changeFocus"/>
+                    </div>
                 </div>
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
-                    class="datepicker-footer">
+                    class="datepicker-footer"
+                    :class="{'footer-horizontal-timepicker': horizontalTimePicker}">
                     <slot/>
                 </footer>
             </b-dropdown-item>
@@ -163,13 +184,14 @@
             :size="size"
             :icon="icon"
             :icon-pack="iconPack"
+            :rounded="rounded"
             :loading="loading"
             :max="formatNative(maxDate)"
             :min="formatNative(minDate)"
             :disabled="disabled"
             :readonly="false"
             v-bind="$attrs"
-            :use-html5-validation="useHtml5Validation"
+            :use-html5-validation="false"
             @change.native="onChangeNativePicker"
             @focus="onFocus"
             @blur="onBlur"/>
@@ -194,10 +216,7 @@ import DatepickerMonth from './DatepickerMonth'
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
     const dates = targetDates.map((date) => {
-        const yyyyMMdd = date.getFullYear() +
-            '/' + (date.getMonth() + 1) +
-            '/' + date.getDate()
-        const d = new Date(yyyyMMdd)
+        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
         return !vm.isTypeMonth ? d.toLocaleDateString()
             : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
     })
@@ -293,6 +312,7 @@ export default {
         placeholder: String,
         editable: Boolean,
         disabled: Boolean,
+        horizontalTimePicker: Boolean,
         unselectableDates: Array,
         unselectableDaysOfWeek: {
             type: Array,
@@ -344,11 +364,15 @@ export default {
         openOnFocus: Boolean,
         iconPrev: {
             type: String,
-            default: config.defaultIconPrev
+            default: () => {
+                return config.defaultIconPrev
+            }
         },
         iconNext: {
             type: String,
-            default: config.defaultIconNext
+            default: () => {
+                return config.defaultIconNext
+            }
         },
         yearsRange: {
             type: Array,
@@ -397,7 +421,20 @@ export default {
             default: () => {
                 return config.defaultDatepickerMobileModal
             }
-        }
+        },
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        trapFocus: {
+            type: Boolean,
+            default: () => {
+                return config.defaultTrapFocus
+            }
+        },
+        appendToBody: Boolean,
+        ariaNextLabel: String,
+        ariaPreviousLabel: String
     },
     data() {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
@@ -406,6 +443,7 @@ export default {
         return {
             dateSelected: this.value,
             focusedDateData: {
+                day: focusedDate.getDate(),
                 month: focusedDate.getMonth(),
                 year: focusedDate.getFullYear()
             },
@@ -422,11 +460,33 @@ export default {
                 this.updateInternalState(value)
                 if (!this.multiple) this.togglePicker(false)
                 this.$emit('input', value)
+                if (this.useHtml5Validation) {
+                    this.$nextTick(() => {
+                        this.checkHtml5Validity()
+                    })
+                }
             }
         },
+        listOfMonths() {
+            let minMonth = 0
+            let maxMonth = 12
+            if (this.minDate && this.focusedDateData.year === this.minDate.getFullYear()) {
+                minMonth = this.minDate.getMonth()
+            }
+            if (this.maxDate && this.focusedDateData.year === this.maxDate.getFullYear()) {
+                maxMonth = this.maxDate.getMonth()
+            }
+            return this.monthNames.map((name, index) => {
+                return {
+                    name: name,
+                    index: index,
+                    disabled: index < minMonth || index > maxMonth
+                }
+            })
+        },
         /*
-        * Returns an array of years for the year dropdown. If earliest/latest
-        * dates are set by props, range of years will fall within those dates.
+         * Returns an array of years for the year dropdown. If earliest/latest
+         * dates are set by props, range of years will fall within those dates.
         */
         listOfYears() {
             let latestYear = this.focusedDateData.year + this.yearsRange[1]
@@ -473,6 +533,12 @@ export default {
 
         isTypeMonth() {
             return this.type === 'month'
+        },
+
+        ariaRole() {
+            if (!this.inline) {
+                return 'dialog'
+            }
         }
     },
     watch: {
@@ -484,12 +550,12 @@ export default {
         value(value) {
             this.updateInternalState(value)
             if (!this.multiple) this.togglePicker(false)
-            !this.isValid && this.$refs.input.checkHtml5Validity()
         },
 
         focusedDate(value) {
             if (value) {
                 this.focusedDateData = {
+                    day: value.getDate(),
                     month: value.getMonth(),
                     year: value.getFullYear()
                 }
@@ -611,14 +677,22 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date + 'T00:00:00') : null
+            const s = date ? date.split('-') : []
+            if (s.length === 3) {
+                const year = parseInt(s[0], 10)
+                const month = parseInt(s[1]) - 1
+                const day = parseInt(s[2])
+                this.computedValue = new Date(year, month, day)
+            } else {
+                this.computedValue = null
+            }
         },
-
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[0])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
+                day: currentDate.getDate(),
                 month: currentDate.getMonth(),
                 year: currentDate.getFullYear()
             }
@@ -673,10 +747,26 @@ export default {
         /**
          * Keypress event that is bound to the document.
          */
-        keyPress(event) {
-            // Esc key
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.togglePicker(false)
+            }
+        },
+
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
+            }
+        },
+
+        changeFocus(day) {
+            this.focusedDateData = {
+                day: day.getDate(),
+                month: day.getMonth(),
+                year: day.getFullYear()
             }
         }
     },

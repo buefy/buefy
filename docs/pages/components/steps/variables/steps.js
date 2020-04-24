@@ -22,5 +22,9 @@ export default [
     {
         name: '<code>$steps-divider-height</code>',
         default: '<code>.2em</code>'
+    },
+    {
+        name: '<code>$steps-vertical-padding</code>',
+        default: '<code>1em 0</code>'
     }
 ]

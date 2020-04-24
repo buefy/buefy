@@ -2,21 +2,37 @@ $taginput-height: 1.7em !default;
 
 .taginput {
     .taginput-container {
+        display: flex;
         &.is-focusable {
             @extend .input;
             padding-bottom: 0;
             padding-top: calc(0.275em - 1px);
             padding-left: 0;
             align-items: center;
-            display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
             height: auto;
             cursor: text;
         }
+        &:not(.is-focusable) {
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            height: auto;
+            &.is-small {
+                @include control-small;
+            }
+            &.is-medium{
+                @include control-medium;
+            }
+            &.is-large {
+                @include control-large;
+            }
+        }
 
         > .tag,
         > .tags {
+            margin-left: 0.275rem;
             margin-bottom: calc(0.275em - 1px);
             font-size: 0.9em;
             height: $taginput-height;
@@ -28,12 +44,10 @@ $taginput-height: 1.7em !default;
                     width: $taginput-height;
                 }
             }
-            &:not(:last-child) {
-                margin-left: 0.275rem;
-            }
         }
 
         .autocomplete {
+            position: static;
             flex: 1;
             input {
                 height: $taginput-height;

@@ -1,0 +1,35 @@
+
+$skeleton-line-height: 1 !default;
+$skeleton-background: linear-gradient(90deg, $grey-lighter 25%, rgba($grey-lighter, 0.5) 50%, $grey-lighter 75%);
+$skeleton-border-radius: $radius !default;
+$skeleton-duration: 1.5s !default;
+
+.b-skeleton {
+    width: 100%;
+    > .b-skeleton-item {
+        background: $skeleton-background;
+        background-size: 400% 100%;
+        display: inline-block;
+        line-height: $skeleton-line-height;
+        width: 100%;
+        border-radius: $skeleton-border-radius;
+        &::after {
+            content: "\00a0";
+        }
+    }
+
+    &.is-animated {
+        > .b-skeleton-item {
+            animation: skeleton-loading $skeleton-duration infinite;
+        }
+    }
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

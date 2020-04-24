@@ -19,11 +19,12 @@ const DATA_LIST = [
     'Vue.js'
 ]
 const dropdownMenu = '.dropdown-menu'
-let wrapper, $input, $dropdown
+let wrapper, $input, $dropdown, stubs
 
 describe('BAutocomplete', () => {
     beforeEach(() => {
-        wrapper = mount(BAutocomplete)
+        stubs = {'b-icon': true}
+        wrapper = mount(BAutocomplete, {stubs})
 
         $input = wrapper.find('input')
         $dropdown = wrapper.find(dropdownMenu)
@@ -84,17 +85,8 @@ describe('BAutocomplete', () => {
         expect($dropdown.isVisible()).toBeFalsy()
     })
 
-    it('check validity when value change', () => {
-        wrapper.setProps({ data: DATA_LIST })
-        wrapper.vm.$refs.input.checkHtml5Validity = jest.fn()
-
-        wrapper.vm.isValid = false
-        wrapper.setProps({ value: 'test' })
-
-        expect(wrapper.vm.$refs.input.checkHtml5Validity).toBeCalled()
-    })
-
     it('close dropdown on esc', () => {
+        jest.useFakeTimers()
         wrapper.setProps({ data: DATA_LIST })
 
         wrapper.vm.isActive = true
@@ -103,6 +95,13 @@ describe('BAutocomplete', () => {
         $input.trigger('keyup.esc')
 
         expect($dropdown.isVisible()).toBeFalsy()
+
+        wrapper.vm.calcDropdownInViewportVertical = jest.fn(
+            () => wrapper.vm.calcDropdownInViewportVertical
+        )
+        jest.runAllTimers()
+        expect(wrapper.vm.calcDropdownInViewportVertical).toHaveBeenCalled()
+        jest.useRealTimers()
     })
 
     it('close dropdown on click outside', () => {
@@ -127,12 +126,36 @@ describe('BAutocomplete', () => {
         expect($dropdown.isVisible()).toBeTruthy()
     })
 
-    it('can openOnFocus and keepFirst', async () => {
+    it('manages tab pressed as expected', async () => {
+        // hovered is null
+        $input.trigger('keydown.tab')
+        expect($dropdown.isVisible()).toBeFalsy()
+
+        // The first element will be hovered
         wrapper.setProps({
-            data: DATA_LIST,
             openOnFocus: true,
             keepFirst: true
         })
+        wrapper.setProps({
+            data: DATA_LIST
+        })
+        // Set props in 2 steps to trigger Watch with keepFirst true so the 1st element is hovered
+
+        $input.trigger('focus')
+        await wrapper.vm.$nextTick()
+
+        $input.trigger('keydown.tab')
+        expect($input.element.value).toBe(DATA_LIST[0])
+    })
+
+    it('can openOnFocus and keepFirst', async () => {
+        wrapper.setProps({
+            openOnFocus: true,
+            keepFirst: true
+        })
+        wrapper.setProps({
+            data: DATA_LIST
+        }) // Set props in 2 steps to trigger the Watch for data having keepFirst true
 
         expect($dropdown.isVisible()).toBeFalsy()
 
@@ -152,5 +175,37 @@ describe('BAutocomplete', () => {
 
         expect(document.removeEventListener).toBeCalledWith('click', expect.any(Function))
         expect(window.removeEventListener).toBeCalledWith('resize', expect.any(Function))
+    })
+
+    it('clear button does not exist when the search input is empty', () => {
+        wrapper.setData({newValue: ''})
+        wrapper.setProps({ clearable: true })
+        const subject = wrapper.find('b-icon-stub').exists()
+
+        expect(subject).toBeFalsy()
+    })
+
+    it('clear button exists when the search input is not empty and clearable property is true', () => {
+        wrapper.setData({ newValue: 'Jquery' })
+        wrapper.setProps({ clearable: true })
+        const subject = wrapper.find('b-icon-stub').exists()
+
+        expect(subject).toBeTruthy()
+    })
+
+    it('clears search input text when clear button gets clicked', () => {
+        wrapper.setData({newValue: 'Jquery'})
+        wrapper.setProps({ clearable: true })
+        wrapper.find('b-icon-stub').trigger('click')
+        const subject = wrapper.vm.newValue
+
+        expect(subject).toEqual('')
+    })
+
+    it('clear button does not appear when clearable property is not set to true', () => {
+        wrapper.setData({newValue: 'Jquery'})
+        const subject = wrapper.find('b-icon-stub').exists()
+
+        expect(subject).toBeFalsy()
     })
 })

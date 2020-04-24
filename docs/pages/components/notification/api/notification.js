@@ -40,6 +40,13 @@ export default [
                 default: '<code>2000</code>'
             },
             {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
@@ -48,10 +55,17 @@ export default [
             },
             {
                 name: '<code>has-icon</code>',
-                description: 'Adds an icon on the left side depending on the <code>type</code>',
+                description: 'Adds an icon on the left side depending on the <code>type</code> (or the <code>icon</code> prop if defined)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>icon</code>',
+                description: 'Icon name to use with <code>has-icon</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>aria-close-label</code>',
@@ -62,7 +76,7 @@ export default [
             },
             {
                 name: '<code>message</code>',
-                description: 'Message text',
+                description: 'Message text (can contain HTML). <div class="notification is-danger">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -72,7 +86,7 @@ export default [
                 description: 'Which position the notification will appear when programmatically',
                 type: 'String',
                 values: '<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>',
-                default: '<code>is-bottom-right</code>'
+                default: '<code>is-top-right</code>'
             },
             {
                 name: '<code>queue</code>',

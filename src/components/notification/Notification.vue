@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition :name="animation">
         <article
             v-show="isActive"
             class="notification"
@@ -12,9 +12,9 @@
                 :aria-label="ariaCloseLabel"
             />
             <div class="media">
-                <div v-if="icon && hasIcon" class="media-left">
+                <div v-if="computedIcon && hasIcon" class="media-left">
                     <b-icon
-                        :icon="icon"
+                        :icon="computedIcon"
                         :pack="iconPack"
                         both
                         size="is-large"
@@ -40,7 +40,11 @@ export default {
     mixins: [MessageMixin],
     props: {
         position: String,
-        ariaCloseLabel: String
+        ariaCloseLabel: String,
+        animation: {
+            type: String,
+            default: 'fade'
+        }
     }
 }
 </script>

@@ -5,7 +5,10 @@
             ref="dropdown"
             :position="position"
             :disabled="disabled"
-            :inline="inline">
+            :inline="inline"
+            :append-to-body="appendToBody"
+            append-to-body-copy-parent
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"
@@ -24,10 +27,12 @@
                 :use-html5-validation="useHtml5Validation"
                 @keyup.native.enter="toggle(true)"
                 @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus"
-                @blur="onBlur() && checkHtml5Validity()"/>
+                @focus="handleOnFocus"/>
 
-            <b-dropdown-item :disabled="disabled" custom>
+            <b-dropdown-item
+                :disabled="disabled"
+                :focusable="focusable"
+                custom>
                 <b-field grouped position="is-centered">
                     <b-select
                         v-model="hoursSelected"
@@ -105,6 +110,7 @@
             :size="size"
             :icon="icon"
             :icon-pack="iconPack"
+            :rounded="rounded"
             :loading="loading"
             :max="formatHHMMSS(maxTime)"
             :min="formatHHMMSS(minTime)"

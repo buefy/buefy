@@ -12,7 +12,7 @@
 
         <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.4</span>
             </div>
         </Example>

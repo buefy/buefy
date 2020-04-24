@@ -17,6 +17,7 @@
                 @click="onControlClick($event, false)">
                 <b-icon
                     icon="minus"
+                    both
                     :pack="iconPack"
                     :size="iconSize"/>
             </button>
@@ -58,6 +59,7 @@
                 @click="onControlClick($event, true)">
                 <b-icon
                     icon="plus"
+                    both
                     :pack="iconPack"
                     :size="iconSize"/>
             </button>

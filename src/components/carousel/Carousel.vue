@@ -13,7 +13,7 @@
             {{ carouselItems.length - 1 }}
         </progress>
         <div
-            class="carousel-list"
+            class="carousel-items"
             @mousedown="dragStart"
             @mouseup="dragEnd"
             @touchstart.stop="dragStart"
@@ -44,8 +44,18 @@
         <div
             v-if="autoplay && pauseHover && pauseInfo && isPause"
             class="carousel-pause">
-            <span class="tag">Pause</span>
+            <span
+                class="tag"
+                :class="pauseInfoType">
+                {{ pauseText }}
+            </span>
         </div>
+        <template v-if="withCarouselList && !indicator">
+            <slot
+                :active="activeItem"
+                :switch="changeItem"
+                name="list"/>
+        </template>
         <div
             v-if="indicator"
             class="carousel-indicator"
@@ -64,6 +74,9 @@
                 </slot>
             </a>
         </div>
+        <template v-if="overlay">
+            <slot name="overlay"/>
+        </template>
     </div>
 </template>
 
@@ -103,6 +116,14 @@ export default {
             type: Boolean,
             default: true
         },
+        pauseInfoType: {
+            type: String,
+            default: 'is-white'
+        },
+        pauseText: {
+            type: String,
+            default: 'Pause'
+        },
         arrow: {
             type: Boolean,
             default: true
@@ -115,15 +136,23 @@ export default {
             type: Boolean,
             default: true
         },
+        repeat: {
+            type: Boolean,
+            default: true
+        },
         iconPack: String,
         iconSize: String,
         iconPrev: {
             type: String,
-            default: config.defaultIconPrev
+            default: () => {
+                return config.defaultIconPrev
+            }
         },
         iconNext: {
             type: String,
-            default: config.defaultIconNext
+            default: () => {
+                return config.defaultIconNext
+            }
         },
         indicator: {
             type: Boolean,
@@ -156,7 +185,8 @@ export default {
         progressType: {
             type: String,
             default: 'is-primary'
-        }
+        },
+        withCarouselList: Boolean
     },
     data() {
         return {
@@ -183,14 +213,18 @@ export default {
     },
     watch: {
         /**
-        * When v-model is changed set the new active tab.
-        */
+         * When v-model is changed set the new active item.
+         */
         value(value) {
-            this.changeItem(value, false)
+            if (value < this.activeItem) {
+                this.changeItem(value)
+            } else {
+                this.changeItem(value, false)
+            }
         },
         /**
-        * When tab-items are updated, set active one.
-        */
+         * When carousel-items are updated, set active one.
+         */
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
                 this.carouselItems[this.activeItem].isActive = true
@@ -208,44 +242,61 @@ export default {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                this.next()
+                if (!this.repeat && this.activeItem === this.carouselItems.length - 1) {
+                    this.pauseTimer()
+                } else {
+                    this.next()
+                }
             }, (this.interval || config.defaultCarouselInterval))
         },
         pauseTimer() {
-            if (!this.pauseHover && this.autoplay) return
             this.isPause = true
             if (this.timer) {
                 clearInterval(this.timer)
                 this.timer = null
             }
         },
+        checkPause() {
+            if (this.pauseHover && this.autoplay) {
+                return this.pauseTimer()
+            }
+        },
         /**
-        * Change the active item and emit change event.
-        * action only for animated slide, there true = next, false = prev
-        */
-        changeItem(newIndex, action) {
+         * Change the active item and emit change event.
+         * action only for animated slide, there true = next, false = prev
+         */
+        changeItem(newIndex, action = true) {
             if (this.activeItem === newIndex) return
-            this.carouselItems[this.activeItem].status(false, action)
+
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].status(false, action)
+            }
             this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
             this.$emit('change', newIndex)
         },
-        // Indicator trigger, emit input event and change active item.
+        // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
-                this.changeItem(value, false)
+                return value < this.activeItem
+                    ? this.changeItem(value)
+                    : this.changeItem(value, false)
             }
         },
         prev() {
-            return this.activeItem === 0
-                ? this.changeItem(this.carouselItems.length - 1, true)
-                : this.changeItem(this.activeItem - 1, true)
+            if (this.activeItem === 0) {
+                if (this.repeat) this.changeItem(this.carouselItems.length - 1)
+            } else {
+                this.changeItem(this.activeItem - 1)
+            }
         },
         next() {
-            return this.activeItem === this.carouselItems.length - 1
-                ? this.changeItem(0, false)
-                : this.changeItem(this.activeItem + 1, false)
+            if (this.activeItem === this.carouselItems.length - 1) {
+                if (this.repeat) this.changeItem(0, false)
+            } else {
+                this.changeItem(this.activeItem + 1, false)
+            }
         },
         // checking arrow between both
         checkArrow(value) {

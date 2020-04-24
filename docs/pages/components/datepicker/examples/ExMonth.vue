@@ -3,7 +3,8 @@
         <b-datepicker
             type="month"
             placeholder="Click to select..."
-            icon="calendar-today">
+            icon="calendar-today"
+            trap-focus>
         </b-datepicker>
     </b-field>
 </template>

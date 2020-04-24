@@ -81,6 +81,10 @@ export default {
                 return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12
             }
         },
+        incrementHours: {
+            type: Number,
+            default: 1
+        },
         incrementMinutes: {
             type: Number,
             default: 1
@@ -130,7 +134,16 @@ export default {
         openOnFocus: Boolean,
         enableSeconds: Boolean,
         defaultMinutes: Number,
-        defaultSeconds: Number
+        defaultSeconds: Number,
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        tzOffset: {
+            type: Number,
+            default: 0
+        },
+        appendToBody: Boolean
     },
     data() {
         return {
@@ -153,13 +166,14 @@ export default {
             },
             set(value) {
                 this.dateSelected = value
-                this.$emit('input', value)
+                this.$emit('input', this.dateSelected)
             }
         },
         hours() {
+            if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.')
             const hours = []
             const numberOfHours = this.isHourFormat24 ? 24 : 12
-            for (let i = 0; i < numberOfHours; i++) {
+            for (let i = 0; i < numberOfHours; i += this.incrementHours) {
                 let value = i
                 let label = value
                 if (!this.isHourFormat24) {
@@ -546,10 +560,17 @@ export default {
         /**
          * Keypress event that is bound to the document.
          */
-        keyPress(event) {
-            // Esc key
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.toggle(false)
+            }
+        },
+        /**
+         * Emit 'blur' event on dropdown is not active (closed)
+         */
+        onActiveChange(value) {
+            if (!value) {
+                this.onBlur()
             }
         }
     },

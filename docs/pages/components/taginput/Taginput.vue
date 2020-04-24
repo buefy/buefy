@@ -15,6 +15,12 @@
             </p>
         </Example>
 
+        <Example :component="ExSelected" :code="ExSelectedCode" title="Custom selected" vertical>
+            <p>
+                You can have a custom template by adding <code>selected</code> scoped slot to it.
+            </p>
+        </Example>
+
         <Example :component="ExLimit" :code="ExLimitCode" title="Limits" vertical>
             <p>
                 You can limit the length and number of tags with the <code>maxlength</code> and <code>maxtags</code> props.
@@ -56,6 +62,9 @@
     import ExTemplatedAutocomplete from './examples/ExTemplatedAutocomplete'
     import ExTemplatedAutocompleteCode from '!!raw-loader!./examples/ExTemplatedAutocomplete'
 
+    import ExSelected from './examples/ExSelected'
+    import ExSelectedCode from '!!raw-loader!./examples/ExSelected'
+
     import ExLimit from './examples/ExLimit'
     import ExLimitCode from '!!raw-loader!./examples/ExLimit'
 
@@ -82,6 +91,7 @@
                 ExSimple,
                 ExAutocomplete,
                 ExTemplatedAutocomplete,
+                ExSelected,
                 ExLimit,
                 ExState,
                 ExType,
@@ -91,6 +101,7 @@
                 ExSimpleCode,
                 ExAutocompleteCode,
                 ExTemplatedAutocompleteCode,
+                ExSelectedCode,
                 ExLimitCode,
                 ExStateCode,
                 ExTypeCode,

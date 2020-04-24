@@ -2,25 +2,31 @@
     <div
         class="navbar-item has-dropdown"
         :class="{
-            'is-hoverable': hoverable,
+            'is-hoverable': isHoverable,
             'is-active': newActive
         }"
+        @mouseenter="checkHoverable"
         v-click-outside="closeMenu"
     >
         <a
             class="navbar-link"
             :class="{
-                'is-arrowless': arrowless
+                'is-arrowless': arrowless,
+                'is-active': newActive && collapsible
             }"
-            @click="newActive = !newActive">
+            role="menuitem"
+            aria-haspopup="true"
+            href="#"
+            @click.prevent="newActive = !newActive">
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </a>
         <div
+            v-show="!collapsible || (collapsible && newActive)"
             class="navbar-dropdown"
             :class="{
                 'is-right': right,
-                'is-boxed': boxed
+                'is-boxed': boxed,
             }"
         >
             <slot />
@@ -42,12 +48,19 @@ export default {
         active: Boolean,
         right: Boolean,
         arrowless: Boolean,
-        boxed: Boolean
+        boxed: Boolean,
+        closeOnClick: {
+            type: Boolean,
+            default: true
+        },
+        collapsible: Boolean
+
     },
     data() {
         return {
             newActive: this.active,
-            _isNavDropdown: true // Used internally by NavbarItem
+            isHoverable: this.hoverable,
+            _isNavbarDropdown: true // Used internally by NavbarItem
         }
     },
     watch: {
@@ -63,7 +76,15 @@ export default {
         * See naming convetion of navbaritem
         */
         closeMenu() {
-            this.newActive = false
+            this.newActive = !this.closeOnClick
+            if (this.hoverable && this.closeOnClick) {
+                this.isHoverable = false
+            }
+        },
+        checkHoverable() {
+            if (this.hoverable) {
+                this.isHoverable = true
+            }
         }
     }
 }

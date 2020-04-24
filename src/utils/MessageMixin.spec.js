@@ -37,7 +37,7 @@ describe('MessageMixin', () => {
         }
         for (let [key, value] of Object.entries(expected)) {
             wrapper.setProps({type: key})
-            expect(wrapper.vm.icon).toEqual(value)
+            expect(wrapper.vm.computedIcon).toEqual(value)
         }
     })
 

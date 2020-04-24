@@ -14,8 +14,8 @@
             :tabindex="tabstop ? 0 : false"
             :disabled="disabled"
             :class="[size, { 'is-rounded': rounded }]"
-            @click="close()"
-            @keyup.delete.prevent="close()"
+            @click="close"
+            @keyup.delete.prevent="close"
         />
     </div>
     <span
@@ -33,8 +33,8 @@
             class="delete is-small"
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
-            @click="close()"
-            @keyup.delete.prevent="close()"
+            @click="close"
+            @keyup.delete.prevent="close"
         />
     </span>
 </template>
@@ -61,10 +61,10 @@ export default {
         * Emit close event when delete button is clicked
         * or delete key is pressed.
         */
-        close() {
+        close(event) {
             if (this.disabled) return
 
-            this.$emit('close')
+            this.$emit('close', event)
         }
     }
 }

@@ -10,7 +10,7 @@
 
         <Example :component="ExFooter" :code="ExFooterCode" title="Footer">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.6</span>
             </div>
             <p>You can add your custom footer to the autocomplete.</p>
@@ -21,12 +21,19 @@
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
         </Example>
 
+        <Example :component="ExInfiniteScroll" :code="ExInfiniteScrollCode" title="Async with infinite scroll">
+            <p>With <code>check-infinite-scroll</code> and <code>infinite-scroll</code> event you can listen to the end of the scroll list to implement an infinite scroll strategy.</p>
+            <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
+        </Example>
+
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/autocomplete'
+    import variables from './variables/autocomplete'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -43,10 +50,14 @@
     import ExCustomAsync from './examples/ExCustomAsync'
     import ExCustomAsyncCode from '!!raw-loader!./examples/ExCustomAsync'
 
+    import ExInfiniteScroll from './examples/ExInfiniteScroll'
+    import ExInfiniteScrollCode from '!!raw-loader!./examples/ExInfiniteScroll'
+
     export default {
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 ExObjArrayCode,
@@ -56,7 +67,9 @@
                 ExFooter,
                 ExFooterCode,
                 ExCustomAsyncCode,
-                ExCustomAsync
+                ExCustomAsync,
+                ExInfiniteScroll,
+                ExInfiniteScrollCode
             }
         }
     }

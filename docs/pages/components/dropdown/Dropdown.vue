@@ -20,7 +20,7 @@
 
         <Example :component="ExCustomizeMultiple" :code="ExCustomizeMultipleCode" title="Multiple">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.6</span>
             </div>
             <p>Add the <code>multiple</code> prop to select one or more item.</p>

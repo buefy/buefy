@@ -4,6 +4,18 @@ import sinon from 'sinon'
 
 let wrapper
 
+const stubBNavBar = {
+    data() {
+        return {
+            _isNavBar: true
+        }
+    },
+    template: `
+        <div>
+            <slot />
+        </div>`
+}
+
 describe('BNavbarItem', () => {
     const tag = 'div'
     beforeEach(() => {
@@ -41,5 +53,29 @@ describe('BNavbarItem', () => {
         expect(inner.name()).toBe('div')
         inner.trigger('test_event')
         expect(testStub.called).toBe(true)
+    })
+
+    it('close on escape', () => {
+        wrapper = shallowMount(BNavbarItem, {
+            parentComponent: stubBNavBar
+        })
+        wrapper.vm.$parent.closeMenu = jest.fn()
+        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        wrapper.vm.keyPress({})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.$parent.closeMenu).toHaveBeenCalledTimes(1)
+    })
+
+    it('manage click as expected', () => {
+        wrapper = shallowMount(BNavbarItem, {
+            parentComponent: stubBNavBar
+        })
+        wrapper.vm.$parent.closeMenu = jest.fn()
+        const event = new KeyboardEvent('click')
+        wrapper.vm.handleClickEvent({
+            ...event,
+            target: { localName: 'a' }
+        })
+        expect(wrapper.vm.$parent.closeMenu).toHaveBeenCalledTimes(1)
     })
 })

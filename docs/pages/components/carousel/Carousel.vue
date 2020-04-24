@@ -25,7 +25,21 @@
         </Example>
 
         <Example title="Switch like a gallery" :component="ExGallery" :code="ExGalleryCode" paddingless>
-            You may also want to add <code>is-clipped</code> modifier to a containing element (usually <code>html</code>) to stop scroll overflow.<br>
+            <p>You may also want to add <code>is-clipped</code> modifier to a containing element (usually <code>html</code>) to stop scroll overflow.</p>
+        </Example>
+
+        <Example title="Carousel List" :component="ExCarouselList" :code="ExCarouselListCode" paddingless>
+            <p>An imposing <strong>carousel list</strong> to showcase viewer something.</p>
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.8.9</span>
+            </div>
+        </Example>
+
+        <Example title="Custom With Card" :component="ExWithCard" :code="ExWithCardCode" paddingless />
+
+        <Example title="Custom as an indicators" :component="ExWithList" :code="ExWithListCode" paddingless>
+            <p>With <strong>Breakpoint</strong> and <strong>Switch like a Gallery</strong>.</p>
         </Example>
 
         <ApiView :data="api"/>
@@ -44,6 +58,9 @@
     import ExIndicator from './examples/ExIndicator'
     import ExCustomIndicator from './examples/ExCustomIndicator'
     import ExGallery from './examples/ExGallery'
+    import ExCarouselList from './examples/ExCarouselList'
+    import ExWithCard from './examples/ExWithCard'
+    import ExWithList from './examples/ExWithList'
 
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
     import ExFullCode from '!!raw-loader!./examples/ExFull'
@@ -52,6 +69,10 @@
     import ExIndicatorCode from '!!raw-loader!./examples/ExIndicator'
     import ExCustomIndicatorCode from '!!raw-loader!./examples/ExCustomIndicator'
     import ExGalleryCode from '!!raw-loader!./examples/ExGallery'
+    import ExCarouselListCode from '!!raw-loader!./examples/ExCarouselList'
+    import ExWithCardCode from '!!raw-loader!./examples/ExWithCard'
+    import ExWithListCode from '!!raw-loader!./examples/ExWithList'
+
 
     export default {
         data() {
@@ -65,13 +86,19 @@
                 ExProgress,
                 ExCustomIndicator,
                 ExGallery,
+                ExCarouselList,
+                ExWithCard,
+                ExWithList,
                 ExSimpleCode,
                 ExFullCode,
                 ExArrowCode,
                 ExProgressCode,
                 ExIndicatorCode,
                 ExCustomIndicatorCode,
-                ExGalleryCode
+                ExGalleryCode,
+                ExCarouselListCode,
+                ExWithCardCode,
+                ExWithListCode
             }
         }
     }

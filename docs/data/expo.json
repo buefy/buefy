@@ -1,33 +1,82 @@
 [
     {
+        "title": "Leasy",
+        "date": "2020-04-13",
+        "img": "leasy.png",
+        "url": "https://leasy.co/",
+        "featured": true
+    },
+    {
+        "title": "Taskflex",
+        "date": "2020-04-13",
+        "img": "taskflex.png",
+        "url": "https://www.taskflex.dk/"
+    },
+    {
+        "title": "Hackdoor",
+        "date": "2020-03-04",
+        "img": "hackdoor.png",
+        "url": "https://www.hackdoor.io/"
+    },
+    {
+        "title": "Kennzeichen",
+        "date": "2020-02-21",
+        "img": "kennzeichenking.png",
+        "url": "https://www.kennzeichenking.de/"
+    },
+    {
+        "title": "Édutechno",
+        "date": "2020-02-07",
+        "img": "edutechno.png",
+        "url": "https://portail.edutechno.ca/"
+    },
+    {
+        "title": "Wotel",
+        "date": "2020-02-06",
+        "img": "wotel.png",
+        "url": "https://wotel.dev/"
+    },
+    {
+        "title": "Yakety",
+        "date": "2020-01-29",
+        "img": "yakety.png",
+        "url": "https://yakety.co.uk/"
+    },
+    {
+        "title": "Swap",
+        "date": "2020-01-29",
+        "img": "swap.png",
+        "url": "https://market.swap.gg/"
+    },
+    {
+        "title": "Sponsus",
+        "date": "2019-11-29",
+        "img": "sponsus.png",
+        "url": "https://sponsus.org/"
+    },
+    {
         "title": "Dogs Welcome",
-        "date": "2019-05-11",
+        "date": "2019-11-05",
         "img": "dogswelcome.png",
         "url": "https://dogswelcome.in/"
     },
     {
         "title": "Rate My Meeting",
-        "date": "2019-05-11",
+        "date": "2019-11-05",
         "img": "ratemymeeting.png",
         "url": "https://ratemymeeting.co/"
     },
     {
         "title": "Rekord Cloud",
-        "date": "2019-05-11",
+        "date": "2019-11-05",
         "img": "rekordcloud.png",
         "url": "https://rekord.cloud/"
     },
     {
         "title": "Yan Dev",
-        "date": "2019-25-10",
+        "date": "2019-10-25",
         "img": "yandev.png",
         "url": "https://yandev.de/"
-    },
-    {
-        "title": "EL Catre",
-        "date": "2019-10-22",
-        "img": "elcatre.jpg",
-        "url": "https://elcatre.com/"
     },
     {
         "title": "Frenl",
@@ -39,8 +88,7 @@
         "title": "Kulap",
         "date": "2019-09-04",
         "img": "kulap.png",
-        "url": "https://www.kulap.io",
-        "featured": true
+        "url": "https://www.kulap.io"
     },
     {
         "title": "Gravium Wallet",
@@ -80,18 +128,6 @@
         "featured": true
     },
     {
-        "title": "Git Stars",
-        "date": "2019-06-01",
-        "img": "git-stars.png",
-        "url": "https://git-stars.netlify.com"
-    },
-    {
-        "title": "Marvel Match",
-        "date": "2019-05-24",
-        "img": "marvelmatch.png",
-        "url": "https://marvelmatch.com"
-    },
-    {
         "title": "FOE Tools",
         "date": "2019-05-24",
         "img": "foe-tools.png",
@@ -123,12 +159,6 @@
         "featured": true
     },
     {
-        "title": "Immunization Academy",
-        "date": "2019-04-24",
-        "img": "immunization-academy.png",
-        "url": "https://www.immunizationacademy.com"
-    },
-    {
         "title": "Switchblade",
         "date": "2019-04-24",
         "img": "switchblade.png",
@@ -152,24 +182,6 @@
         "date": "2019-04-24",
         "img": "tainacan.png",
         "url": "http://tainacan.org/"
-    },
-    {
-        "title": "Counter Network",
-        "date": "2019-04-24",
-        "img": "counter-network.png",
-        "url": "https://counter.network"
-    },
-    {
-        "title": "Gods Unchained",
-        "date": "2019-04-24",
-        "img": "godsunchained.png",
-        "url": "https://godsunchained.info"
-    },
-    {
-        "title": "Picano",
-        "date": "2019-04-24",
-        "img": "picano.png",
-        "url": "https://picano.co"
     },
     {
         "title": "Reaction Role",

@@ -52,6 +52,8 @@
                 "documentation/notification",
                 "documentation/pagination",
                 "documentation/progress",
+                "documentation/skeleton",
+                "documentation/sidebar",
                 "documentation/snackbar",
                 "documentation/steps",
                 "documentation/table",

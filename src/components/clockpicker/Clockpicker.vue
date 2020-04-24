@@ -5,7 +5,10 @@
             ref="dropdown"
             :position="position"
             :disabled="disabled"
-            :inline="inline">
+            :inline="inline"
+            :append-to-body="appendToBody"
+            append-to-body-copy-parent
+            @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
                 ref="input"

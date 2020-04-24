@@ -59,10 +59,6 @@ describe('BDropdown', () => {
         expect(wrapper.emitted()['change']).toBeTruthy()
 
         expect(wrapper.vm.isHoverable).toBeFalsy()
-
-        expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 250)
-        jest.advanceTimersByTime(250)
-        expect(wrapper.vm.isHoverable).toBeTruthy()
     })
 
     it('react accordingly when an item is selected with multiple prop', () => {
@@ -128,6 +124,19 @@ describe('BDropdown', () => {
         wrapper.vm.isActive = true
         wrapper.setProps({ canClose: false })
         wrapper.vm.clickedOutside(event)
+        expect(wrapper.vm.isActive).toBeTruthy()
+    })
+
+    it('close on escape', () => {
+        wrapper.vm.isActive = true
+        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        wrapper.vm.keyPress({})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.isActive).toBeFalsy()
+
+        wrapper.vm.isActive = true
+        wrapper.setProps({canClose: ['click']})
+        wrapper.vm.keyPress(event)
         expect(wrapper.vm.isActive).toBeTruthy()
     })
 

@@ -1,13 +1,25 @@
 <template>
     <section>
-        <div style="padding: 1.5rem">
-            <b-field grouped group-multiline position="is-centered">
-                <b-switch v-model="autoPlay">Autoplay</b-switch>
-                <b-switch v-model="pauseHover" :disabled="!autoPlay">Pause on hover</b-switch>
-                <b-switch v-model="pauseInfo" :disabled="!autoPlay">Pause info</b-switch>
-                <b-switch v-model="drag">Drag event</b-switch>
-            </b-field><br>
-            <b-field grouped group-multiline position="is-centered">
+
+        <div class="example-component">
+            <b-field grouped group-multiline>
+                <div class="control">
+                    <b-switch v-model="autoPlay">Autoplay</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="pauseHover" :disabled="!autoPlay">Pause on hover</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="pauseInfo" :disabled="!pauseHover">Pause info</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="drag">Drag event</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="repeat" :disabled="!autoPlay">Repeat</b-switch>
+                </div>
+            </b-field>
+            <b-field grouped group-multiline>
                 <b-field label="Value">
                     <b-numberinput v-model="carousel" min="0" :max="carousels.length - 1" controls-position="compact"/>
                 </b-field>
@@ -26,6 +38,13 @@
                         </b-radio-button>
                     </b-field>
                 </b-field>
+                <b-field label="Pause Type">
+                    <b-select v-model="pauseType" :disabled="!pauseInfo">
+                        <option value="is-white">is-white</option>
+                        <option value="is-dark">is-dark</option>
+                        <option value="is-primary">is-primary</option>
+                    </b-select>
+                </b-field>
             </b-field>
         </div>
 
@@ -36,7 +55,9 @@
             :autoplay="autoPlay"
             :pause-hover="pauseHover"
             :pause-info="pauseInfo"
+            :pause-info-type="pauseType"
             :interval="interval"
+            :repeat="repeat"
             @change="info($event)">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                 <section :class="`hero is-medium is-${carousel.color} is-bold`">
@@ -59,6 +80,8 @@ export default {
             autoPlay: false,
             pauseHover: false,
             pauseInfo: false,
+            repeat: false,
+            pauseType: 'is-primary',
             interval: 3000,
             carousels: [
                 { title: 'Slide 1', color: 'dark' },

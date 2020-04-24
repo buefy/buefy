@@ -192,6 +192,27 @@ export default [
                 default: '<code>20</code>'
             },
             {
+                name: '<code>sort-multiple</code>',
+                description: 'Adds multiple column sorting',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>sort-multiple-data</code>',
+                description: 'Used in combination with <code>backend-sorting</code>',
+                type: 'Object',
+                values: '<code>[{field, order}]</code>',
+                default: '<code>[]</code>'
+            },
+            {
+                name: '<code>sort-multiple-key</code>',
+                description: 'Adds a key which will be required for multi column sorting to work. Will always be enabled if <code>null</code> is selected (default). Requres <code>sort-multiple</code>',
+                type: 'String',
+                values: '<code>null</code>, <code>shiftKey</code>, <code>altKey</code>, <code>ctrlKey</code>',
+                default: '<code>null</code>'
+            },
+            {
                 name: '<code>row-class</code>',
                 description: 'Add a class to row (<code>&lt;tr&gt;</code> element) based on the return',
                 type: 'Function (row: Object, index: Number)',
@@ -249,7 +270,14 @@ export default [
             },
             {
                 name: '<code>is-row-checkable</code>',
-                description: 'Custom method to verify if a row is disabled, works when is <code>checkable</code>. ',
+                description: 'Custom method to verify if a row is checkable, works when is <code>checkable</code>. ',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: 'true'
+            },
+            {
+                name: '<code>is-row-selectable</code>',
+                description: 'Custom method to verify if a row is selectable, works when is <code>selected</code>. ',
                 type: 'Function (row: Object)',
                 values: '—',
                 default: 'true'
@@ -281,7 +309,47 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-
+            },
+            {
+                name: '<code>backend-filtering</code>',
+                description: `Columns won't be filtered with Javascript, use with <code>searchable</code> prop to the columns to filter in your backend`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>sticky-header</code>',
+                description: 'Show a sticky table header',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>scrollable</code>',
+                description: 'Add a horizontal scrollbar when table is too wide',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>height</code>',
+                description: 'Table fixed height in pixels',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>filters-event</code>',
+                description: 'Add a native event to filter',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>card-layout</code>',
+                description: 'Rows appears as cards (collapse rows)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>aria-next-label</code>',
@@ -371,6 +439,11 @@ export default [
                 parameters: '<code>field: String</code>, <code>order: String</code>'
             },
             {
+                name: '<code>sorting-priority-removed</code>',
+                description: 'Triggers when a multiselect sortable column remove button has been clicked ',
+                parameters: '<code>field: String</code>'
+            },
+            {
                 name: '<code>select</code>',
                 description: 'Triggers when a row is selected',
                 parameters: '<code>row: Object</code>, <code>oldRow: Object</code>'
@@ -426,6 +499,11 @@ export default [
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
             },
             {
+                name: '<code>dragleave</code>',
+                description: 'Triggers after dragging over a row',
+                parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
                 parameters: '<code> row: Object </code>'
@@ -434,6 +512,16 @@ export default [
                 name: '<code>mouseleave</code>',
                 description: 'Triggers when mouse leaves a row',
                 parameters: '<code> row: Object </code>'
+            },
+            {
+                name: '<code>filters-change</code>',
+                description: 'Triggers when filter change',
+                parameters: '<code> filter: Object </code>'
+            },
+            {
+                name: '<code>filters-event-[filters-event]</code>',
+                description: 'Triggers <code>filters-event</code> event from filter (it works only with Vue 2.6.x)',
+                parameters: '<code> event: Event </code>, <code> filter: Object </code>'
             }
         ],
         methods: [
@@ -459,6 +547,10 @@ export default [
                 name: '<code>closeDetailRow</code>',
                 description: 'Close row detail if table is <code>detailed</code>',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>resetMultiSorting</code>',
+                description: 'Resets the multi column sorting'
             }
         ]
     },
@@ -495,8 +587,8 @@ export default [
             },
             {
                 name: '<code>width</code>',
-                description: 'Column fixed width in pixels',
-                type: 'Number',
+                description: 'Column fixed width in any unit, or pixels when none is provided',
+                type: 'Number, String',
                 values: '—',
                 default: '—'
             },
@@ -530,7 +622,7 @@ export default [
             },
             {
                 name: '<code>custom-sort</code>',
-                description: 'Custom sort method, works when is <code>sortable</code>',
+                description: 'Custom sort method, works when column is <code>sortable</code>',
                 type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
@@ -549,6 +641,41 @@ export default [
                 values: '—',
                 default: '—'
             },
+            {
+                name: '<code>sticky</code>',
+                description: 'Show a sticky column',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>header-selectable</code>',
+                description: 'Prevent text selection of header when setting this to <code>false</code>.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>header-class</code>',
+                description: 'CSS classes to be applied on header',
+                type: 'String',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>cell-class</code>',
+                description: 'CSS classes to be applied on cell',
+                type: 'String',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>header-selectable</code>',
+                description: 'Whether the header text is selectable, works when column is <code>sortable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            }
         ],
         slots: [
             {
@@ -565,6 +692,11 @@ export default [
                 name: '<code>subheading</code>',
                 description: 'Table column custom subheading',
                 props: '<code>column: Vue Object</code>, <code>index: Number</code>'
+            },
+            {
+                name: '<code>searchable</code>',
+                description: 'This is to customize the search input when searchable.',
+                props: '<code>column: Vue Object</code>, <code>filters: Object</code>'
             }
         ]
     }

@@ -70,6 +70,34 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>vertical</code>',
+                description: 'Display the steps vertically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>position</code>',
+                description: 'Position of the vertical step, optional',
+                type: 'String',
+                values: '<code>is-right</code>',
+                default: '—'
+            },
+            {
+                name: '<code>label-position</code>',
+                description: 'Position of the marker label, optional',
+                type: 'String',
+                values: '<code>bottom</code>, <code>right</code>, <code>left</code>',
+                default: '<code>bottom</code>'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Rounded step markers',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>aria-page-label</code>',
                 description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
                 type: 'String',
@@ -82,6 +110,18 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Step body where <code>step-item</code> can be included',
+                props: '—'
+            },
+            {
+                name: 'navigation',
+                description: 'Used to customize navigation button',
+                props: '<code>{previous, next}</code>: Each object contains <code>disabled: boolean</code> and <code>action: Function</code>'
             }
         ],
         events: [
@@ -100,6 +140,13 @@ export default [
     {
         title: 'Step Item',
         props: [
+            {
+                name: '<code>step</code>',
+                description: 'Step marker content (when there is no icon)',
+                type: 'String | Number',
+                values: '—',
+                default: '—'
+            },
             {
                 name: '<code>label</code>',
                 description: 'Step label',

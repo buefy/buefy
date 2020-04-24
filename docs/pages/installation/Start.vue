@@ -40,8 +40,8 @@
                         Even though this is gonna import <strong>ALL</strong> components to your application,
                         Buefy full bundle is optimized and still pretty small:
                         <ul>
-                            <li><strong>script</strong> is <strong>32KB</strong> min+gzip</li>
-                            <li><strong>style</strong> is <strong>28KB</strong> min+gzip (with bulma included)</li>
+                            <li><strong>script</strong> is <strong>48KB</strong> min+gzip</li>
+                            <li><strong>style</strong> is <strong>39KB</strong> min+gzip (with bulma included)</li>
                         </ul>
                     </div>
                 </b-message>

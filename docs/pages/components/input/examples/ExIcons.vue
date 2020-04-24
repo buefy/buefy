@@ -12,8 +12,12 @@
 
         <b-field>
             <b-input placeholder="Email"
+                v-model="email"
                 type="email"
-                icon="email">
+                icon="email"
+                icon-right="close-circle"
+                icon-right-clickable
+                @icon-right-click="clearIconClick">
             </b-input>
         </b-field>
 
@@ -51,9 +55,18 @@
 
 <script>
     export default {
+        data() {
+            return {
+                email: '',
+            }
+        },
         methods: {
             searchIconClick() {
                 alert('You wanna make a search?')
+            },
+            clearIconClick() {
+                this.email = '';
+                alert('Email cleared!')
             }
         }
     }

@@ -4,6 +4,20 @@
             :data="data"
             :columns="columns">
         </b-table>
+        <hr />
+        <p>You can also customize the search input using a scoped slot.</p>
+        <b-table
+            :data="data"
+            :columns="columns">
+            <b-input
+                v-if="!props.column.numeric"
+                slot="searchable"
+                slot-scope="props"
+                v-model="props.filters[props.column.field]"
+                placeholder="Search..."
+                icon="magnify"
+                size="is-small" />
+        </b-table>
     </section>
 </template>
 

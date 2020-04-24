@@ -51,16 +51,12 @@
                         v-if="showCancel"
                         class="button"
                         ref="cancelButton"
-                        @click="cancel('button')">
-                        {{ cancelText }}
-                    </button>
+                        @click="cancel('button')">{{ cancelText }}</button>
                     <button
                         class="button"
                         :class="type"
                         ref="confirmButton"
-                        @click="confirm">
-                        {{ confirmText }}
-                    </button>
+                        @click="confirm">{{ confirmText }}</button>
                 </footer>
             </div>
         </div>
@@ -121,7 +117,9 @@ export default {
         },
         container: {
             type: String,
-            default: config.defaultContainerElement
+            default: () => {
+                return config.defaultContainerElement
+            }
         },
         focusOn: {
             type: String,
@@ -129,7 +127,9 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         ariaRole: {
             type: String,

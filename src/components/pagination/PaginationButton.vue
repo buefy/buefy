@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import config from '../../utils/config'
+
 export default {
     name: 'BPaginationButton',
     props: {
@@ -26,16 +28,7 @@ export default {
             type: String,
             default: 'a',
             validator: (value) => {
-                return [
-                    'a',
-                    'button',
-                    'input',
-                    'router-link',
-                    'nuxt-link',
-                    'n-link',
-                    'NuxtLink',
-                    'NLink'
-                ].indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value) >= 0
             }
         },
         disabled: {

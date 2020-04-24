@@ -13,6 +13,7 @@
                 <b-dropdown                    
                     v-model="navigation"
                     position="is-bottom-left"
+                    append-to-body
                     aria-role="menu">
                     <a
                         class="navbar-item"

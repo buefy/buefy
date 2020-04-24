@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BCarouselList render correctly 1`] = `
+<div class="carousel-list">
+    <div class="carousel-slides" style="transform: translateX(0px);"></div>
+    <div class="carousel-arrow is-hovered">
+        <b-icon-stub icon="chevron-left" both="true" class="has-icons-left" style="display: none;"></b-icon-stub>
+        <b-icon-stub icon="chevron-right" both="true" class="has-icons-right"></b-icon-stub>
+    </div>
+</div>
+`;

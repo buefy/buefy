@@ -1,13 +1,15 @@
 <template>
     <section>
-        <button class="button is-primary is-medium"
-            @click="imageModal()">
-            Launch image modal (HTML)
-        </button>
-        <button class="button is-primary is-medium"
-            @click="cardModal()">
-            Launch card modal (Component)
-        </button>
+        <div class="buttons">
+            <button class="button is-primary is-medium"
+                @click="imageModal()">
+                Launch image modal (HTML)
+            </button>
+            <button class="button is-primary is-medium"
+                @click="cardModal()">
+                Launch card modal (Component)
+            </button>
+        </div>
     </section>
 </template>
 
@@ -65,7 +67,8 @@
                     parent: this,
                     component: ModalForm,
                     hasModalCard: true,
-                    customClass: 'custom-class custom-class-2'
+                    customClass: 'custom-class custom-class-2',
+                    trapFocus: true
                 })
             }
         }

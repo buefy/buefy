@@ -66,10 +66,10 @@ describe('BPagination', () => {
     })
 
     it('should emit change when calling next', () => {
-        wrapper.setProps({total: 100, current: 4})
+        wrapper.setProps({total: 100, current: 2})
         wrapper.vm.next()
-        expect(wrapper.emitted()['change'][0]).toContainEqual(5)
-        expect(wrapper.emitted()['update:current'][0]).toContainEqual(5)
+        expect(wrapper.emitted()['change'][0]).toContainEqual(3)
+        expect(wrapper.emitted()['update:current'][0]).toContainEqual(3)
     })
 
     it('set current to last if page count is smaller than current', () => {
@@ -77,5 +77,10 @@ describe('BPagination', () => {
         wrapper.setProps({total: 100, current: 3})
         wrapper.setProps({total: 40})
         expect(wrapper.vm.last).toHaveBeenCalled()
+    })
+
+    it('return no pages in range when simple', () => {
+        wrapper.setProps({simple: true})
+        expect(wrapper.pagesInRange).toBeUndefined()
     })
 })

@@ -1,36 +1,42 @@
 <template>
     <div class="datepicker-row">
         <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
-            {{ getWeekNumber(week[6]) }}
+            <span>{{ getWeekNumber(week[6]) }}</span>
         </a>
-        <template v-for="(day, index) in week">
+        <template v-for="(weekDay, index) in week">
             <a
-                v-if="selectableDate(day) && !disabled"
+                :ref="`day-${weekDay.getDate()}`"
+                v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
-                :class="[classObject(day), {'has-event': eventsDateMatch(day)}, indicators]"
+                :class="[classObject(weekDay), {'has-event': eventsDateMatch(weekDay)}, indicators]"
                 class="datepicker-cell"
                 role="button"
                 href="#"
                 :disabled="disabled"
-                @click.prevent="emitChosenDate(day)"
-                @keydown.enter.prevent="emitChosenDate(day)"
-                @keydown.space.prevent="emitChosenDate(day)"
-                @mouseenter="setRangeHoverEndDate(day)">
-                {{ day.getDate() }}
-                <div class="events" v-if="eventsDateMatch(day)">
+                @click.prevent="emitChosenDate(weekDay)"
+                @keydown.enter.prevent="emitChosenDate(weekDay)"
+                @keydown.space.prevent="emitChosenDate(weekDay)"
+                @mouseenter="setRangeHoverEndDate(weekDay)"
+                @keydown.arrow-left.prevent="changeFocus(weekDay, -1)"
+                @keydown.arrow-right.prevent="changeFocus(weekDay, 1)"
+                @keydown.arrow-up.prevent="changeFocus(weekDay, -7)"
+                @keydown.arrow-down.prevent="changeFocus(weekDay, 7)"
+                :tabindex="day === weekDay.getDate() ? null : -1">
+                <span>{{ weekDay.getDate() }}</span>
+                <div class="events" v-if="eventsDateMatch(weekDay)">
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, index) in eventsDateMatch(day)"
+                        v-for="(event, index) in eventsDateMatch(weekDay)"
                         :key="index"/>
                 </div>
             </a>
             <div
                 v-else
                 :key="index"
-                :class="classObject(day)"
+                :class="classObject(weekDay)"
                 class="datepicker-cell">
-                {{ day.getDate() }}
+                <span>{{ weekDay.getDate() }}</span>
             </div>
         </template>
     </div>
@@ -44,6 +50,9 @@ export default {
             type: [Date, Array]
         },
         hoveredDateRange: Array,
+        day: {
+            type: Number
+        },
         week: {
             type: Array,
             required: true
@@ -74,6 +83,21 @@ export default {
             default: () => 4
         },
         firstDayOfWeek: Number
+    },
+    watch: {
+        day: {
+            handler(day) {
+                const refName = `day-${day}`
+                if (this.$refs[refName] && this.$refs[refName].length > 0) {
+                    this.$nextTick(() => {
+                        if (this.$refs[refName][0]) {
+                            this.$refs[refName][0].focus()
+                        }
+                    }) // $nextTick needed when month is changed
+                }
+            },
+            immediate: true
+        }
     },
     methods: {
         firstWeekOffset(year, dow, doy) {
@@ -120,9 +144,9 @@ export default {
             return resWeek
         },
         /*
-        * Check that selected day is within earliest/latest params and
-        * is within this month
-        */
+         * Check that selected day is within earliest/latest params and
+         * is within this month
+         */
         selectableDate(day) {
             const validity = []
 
@@ -271,6 +295,12 @@ export default {
             if (this.range) {
                 this.$emit('rangeHoverEndDate', day)
             }
+        },
+
+        changeFocus(day, inc) {
+            const nextDay = day
+            nextDay.setDate(day.getDate() + inc)
+            this.$emit('change-focus', nextDay)
         }
     }
 }
