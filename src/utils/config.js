@@ -41,7 +41,7 @@ let config = {
     defaultDatepickerNearbySelectableMonthDays: false,
     defaultDatepickerShowWeekNumber: false,
     defaultDatepickerMobileModal: true,
-    defaultTrapFocus: false,
+    defaultTrapFocus: true,
     defaultButtonRounded: false,
     defaultCarouselInterval: 3500,
     defaultLinkTags: [
@@ -57,7 +57,7 @@ let config = {
     ],
 
     customIconPacks: null
-} // TODO defaultTrapFocus to true in the next breaking change
+}
 
 export { config as default }
 
