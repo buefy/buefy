@@ -1,5 +1,5 @@
 $dropdown-mobile-breakpoint: $desktop !default;
-$dropdown-background-color: rgba($black, 0.86) !default;
+$dropdown-background-color: rgba($scheme-invert, 0.86) !default;
 $dropdown-disabled-opacity: 0.5 !default;
 
 .dropdown {

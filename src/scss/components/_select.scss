@@ -8,7 +8,7 @@
         padding-right: 2.5em;
         option {
             color: $grey-dark;
-            padding: 0.25em 0.5em;
+            padding: $control-padding-vertical $control-padding-horizontal;
         }
         option:disabled {
             cursor: not-allowed;

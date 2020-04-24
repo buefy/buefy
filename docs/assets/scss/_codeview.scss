@@ -6,7 +6,7 @@
         padding-right: 1rem;
         line-height: 2;
         min-height: 0.25rem;
-        color: $white;
+        color: $scheme-main;
         font-size: $size-5;
         border-top-left-radius: $radius;
         border-top-right-radius: $radius;
@@ -63,7 +63,7 @@
             right: 0;
             top: 0;
             align-items: center;
-            background-color: rgba($white, 0.8);
+            background-color: rgba($scheme-main, 0.8);
             border: none;
             color: $grey;
             cursor: pointer;
