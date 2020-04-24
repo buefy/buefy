@@ -18,5 +18,9 @@ export default [
     {
         name: '<code>$sidebar-mobile-breakpoint</code>',
         default: '<code>$tablet</code>'
+    },
+    {
+        name: '<code>$sidebar-content-background</code>',
+        default: '<code>$background</code>'
     }
 ]

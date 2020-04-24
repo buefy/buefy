@@ -3,10 +3,11 @@ $sidebar-box-shadow: 5px 0px 13px 3px rgba($black, 0.1) !default;
 $sidebar-width: 260px !default;
 $sidebar-mobile-width: 80px !default;
 $sidebar-mobile-breakpoint: $tablet !default;
+$sidebar-content-background: $background !default;
 
 .b-sidebar {
     .sidebar-content {
-        background-color: $background;
+        background-color: $sidebar-content-background;
         box-shadow: $sidebar-box-shadow;
         width: $sidebar-width;
         z-index: 41;
