@@ -136,13 +136,13 @@ export default {
             type: Boolean,
             default: true
         },
-        confirmKeyCodes: {
+        confirmKeys: {
             type: Array,
-            default: () => [13, 188]
+            default: () => [',', 'Enter']
         },
         removeOnKeys: {
             type: Array,
-            default: () => [8]
+            default: () => ['Backspace']
         },
         allowNew: Boolean,
         onPasteSeparators: {
@@ -333,15 +333,15 @@ export default {
             }
         },
 
-        keydown(event) {
-            if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
+        keydown({ key, preventDefault }) {
+            if (this.removeOnKeys.indexOf(key) !== -1 && !this.newTag.length) {
                 this.removeLastTag()
             }
             // Stop if is to accept select only
             if (this.autocomplete && !this.allowNew) return
 
-            if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
-                event.preventDefault()
+            if (this.confirmKeys.indexOf(key) >= 0) {
+                preventDefault()
                 this.addTag()
             }
         },
