@@ -30,7 +30,7 @@
                             </b-menu-item>
                         </b-menu-list>
                         <b-menu-list>
-                            <b-menu-item label="Expo" icon="link" tag="router-link" target="_blank" to="/expo"></b-menu-item>
+                            <b-menu-item label="Expo" icon="link"></b-menu-item>
                         </b-menu-list>
                         <b-menu-list label="Actions">
                             <b-menu-item icon="logout" label="Logout"></b-menu-item>
@@ -95,17 +95,17 @@ export default {
                     .menu-list {
                         li {
                             a {
-                            span:nth-child(2) {
-                                display: none;
-                            }
-                            }
-                            ul {
-                            padding-left: 0;
-                            li {
-                                a {
-                                display: inline-block;
+                                span:nth-child(2) {
+                                    display: none;
                                 }
                             }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
                             }
                         }
                     }
@@ -126,17 +126,17 @@ export default {
                     .menu-list {
                         li {
                             a {
-                            span:nth-child(2) {
-                                display: none;
-                            }
-                            }
-                            ul {
-                            padding-left: 0;
-                            li {
-                                a {
-                                display: inline-block;
+                                span:nth-child(2) {
+                                    display: none;
                                 }
                             }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
                             }
                         }
                     }
