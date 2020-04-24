@@ -72,7 +72,7 @@
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky,
-                                'is-unselectable': !column.headerSelectable
+                                'is-unselectable': column.isHeaderUnSelectable
                             }]"
                             :style="{
                                 width: column.width === undefined ? null :
