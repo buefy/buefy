@@ -1,10 +1,10 @@
 <template>
     <div
         class="b-slider"
-        :class="[size, type, rootClasses]">
+        @click="onSliderClick"
+        :class="[size, type, rootClasses ]">
         <div
             class="b-slider-track"
-            @click="onSliderClick"
             ref="slider">
             <div
                 class="b-slider-fill"
@@ -105,7 +105,11 @@ export default {
             default: false
         },
         customFormatter: Function,
-        ariaLabel: [String, Array]
+        ariaLabel: [String, Array],
+        biggerSliderFocus: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -157,14 +161,12 @@ export default {
                 left: this.barStart
             }
         },
-        sliderSize() {
-            return this.$refs.slider['clientWidth']
-        },
         rootClasses() {
             return {
                 'is-rounded': this.rounded,
                 'is-dragging': this.dragging,
-                'is-disabled': this.disabled
+                'is-disabled': this.disabled,
+                'slider-focus': this.biggerSliderFocus
             }
         }
     },
@@ -222,10 +224,13 @@ export default {
                 this.emitValue('dragging')
             }
         },
+        sliderSize() {
+            return this.$refs.slider.getBoundingClientRect().width
+        },
         onSliderClick(event) {
             if (this.disabled || this.isTrackClickDisabled) return
             const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
-            const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize * 100
+            const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100
             const targetValue = this.min + percent * (this.max - this.min) / 100
             const diffFirst = Math.abs(targetValue - this.value1)
             if (!this.isRange) {

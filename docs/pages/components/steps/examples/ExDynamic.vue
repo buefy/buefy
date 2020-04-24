@@ -33,17 +33,17 @@
                 return [
                     {
                         label: 'Pictures',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Pictures: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
                         label: 'Music',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Music: Lorem ipsum dolor sit amet.',
                         displayed: this.showMusic,
                     },
                     {
                         label: 'Videos',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Videos: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     }
                 ]
@@ -58,7 +58,7 @@
             bookStep() {
                 return {
                     label: 'Books',
-                    content: 'Lorem ipsum dolor sit amet.',
+                    content: 'Books: Lorem ipsum dolor sit amet.',
                     displayed: true,
                 }
             }

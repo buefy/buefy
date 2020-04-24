@@ -1,13 +1,17 @@
 <template>
     <section>
-        <div class="block">
-            <b-switch v-model="openOnFocus">
-                Open dropdown on focus
-            </b-switch>
-            <b-switch v-model="keepFirst">
-                Keep-first <small>(will always have first option pre-selected)</small>
-            </b-switch>
-        </div>
+        <b-field grouped group-multiline>
+            <div class="control">
+                <b-switch v-model="openOnFocus">
+                    Open dropdown on focus
+                </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="keepFirst">
+                    Keep-first <small>(will always have first option pre-selected)</small>
+                </b-switch>
+            </div>
+        </b-field>
         <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find a name">
             <b-autocomplete

@@ -13,6 +13,8 @@
 
         <Example :component="ExTypes" :code="ExTypesCode" title="Types"/>
 
+        <Example :component="ExVertical" :code="ExVerticalCode" title="Vertical"/>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -37,6 +39,9 @@
     import ExTypes from './examples/ExTypes'
     import ExTypesCode from '!!raw-loader!./examples/ExTypes'
 
+    import ExVertical from './examples/ExVertical'
+    import ExVerticalCode from '!!raw-loader!./examples/ExVertical'
+
     export default {
         data() {
             return {
@@ -51,7 +56,9 @@
                 ExDynamicCode,
                 ExIconsCode,
                 ExSizesCode,
-                ExTypesCode
+                ExTypesCode,
+                ExVertical,
+                ExVerticalCode
             }
         }
     }

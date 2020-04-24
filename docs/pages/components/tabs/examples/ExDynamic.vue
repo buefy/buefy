@@ -6,7 +6,10 @@
         <div class="block">
             <b-switch v-model="showBooks"> Show books item (by adding / removing from the array) </b-switch>
         </div>
-        <b-tabs v-model="activeTab">
+        <div class="block">
+            <b-switch v-model="multiline">Multiline</b-switch>
+        </div>
+        <b-tabs v-model="activeTab" :multiline="multiline">
             <template v-for="(tab, index) in tabs">
                 <b-tab-item
                     v-if="tab.displayed"
@@ -25,7 +28,8 @@
             return {
                 activeTab: 0,
                 showMusic: true,
-                showBooks: false
+                showBooks: false,
+                multiline: true
             }
         },
         computed: {
@@ -33,17 +37,32 @@
                 return [
                     {
                         label: 'Pictures',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Pictures: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
                         label: 'Music',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Music: Lorem ipsum dolor sit amet.',
                         displayed: this.showMusic,
                     },
                     {
                         label: 'Videos',
-                        content: 'Lorem ipsum dolor sit amet.',
+                        content: 'Videos: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        label: 'Games',
+                        content: 'Games: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        label: 'Comics',
+                        content: 'Comics: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        label: 'Movies',
+                        content: 'Movies: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     }
                 ]
@@ -58,7 +77,7 @@
             bookTab() {
                 return {
                     label: 'Books',
-                    content: 'Lorem ipsum dolor sit amet.',
+                    content: 'Books: Lorem ipsum dolor sit amet.',
                     displayed: true,
                 }
             }

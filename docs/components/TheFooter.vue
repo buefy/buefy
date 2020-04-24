@@ -5,12 +5,6 @@
                 <div class="columns">
                     <div class="column">
                         <p>
-                            Maintained by
-                            <a href="https://twitter.com/walter_tommasi" target="_blank">Walter Tommasi</a>.
-                            Authored by
-                            <a href="https://twitter.com/rafaelpimpa" target="_blank">Rafael Beraldo</a>
-                        </p>
-                        <p>
                             <small>
                                 Buefy's source code is licensed under
                                 <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
@@ -36,7 +30,19 @@
                                     <span>Patreon</span>
                                 </a>
                             </p>
+                            <p class="control">
+                                <a
+                                    class="button is-twitter"
+                                    href="https://twitter.com/walter_tommasi"
+                                    target="_blank">
+                                    <b-icon icon="twitter"/>
+                                    <span>Twitter</span>
+                                </a>
+                            </p>
                         </b-field>
+                        <small>
+                            This site is powered by <a href="https://www.netlify.com">Netlify</a>
+                        </small>
                     </div>
 
                     <div class="column">

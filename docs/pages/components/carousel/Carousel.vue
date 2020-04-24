@@ -31,7 +31,7 @@
         <Example title="Carousel List" :component="ExCarouselList" :code="ExCarouselListCode" paddingless>
             <p>An imposing <strong>carousel list</strong> to showcase viewer something.</p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.9</span>
             </div>
         </Example>

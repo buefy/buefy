@@ -65,7 +65,7 @@ export default [
                 description: 'Rounded style',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>outlined</code>',

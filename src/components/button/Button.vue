@@ -24,7 +24,7 @@
             :size="iconSize"
         />
         <span v-if="label">{{ label }}</span>
-        <span v-else>
+        <span v-else-if="$slots.default">
             <slot />
         </span>
         <b-icon

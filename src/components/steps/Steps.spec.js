@@ -91,4 +91,14 @@ describe('BSteps', () => {
         wrapper.vm.prev()
         expect(wrapper.vm.activeStep).toBe(first)
     })
+
+    it('manage wrapper classes as expected', () => {
+        expect(wrapper.vm.wrapperClasses[1]['is-vertical']).toBeFalsy()
+
+        wrapper.setProps({vertical: true})
+        expect(wrapper.vm.wrapperClasses[1]['is-vertical']).toBeTruthy()
+
+        wrapper.setProps({position: 'is-right'})
+        expect(wrapper.vm.wrapperClasses[1]['is-right']).toBeTruthy()
+    })
 })

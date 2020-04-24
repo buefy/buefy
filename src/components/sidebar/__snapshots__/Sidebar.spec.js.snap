@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BSidebar open render correctly 1`] = `
+<div class="b-sidebar">
+    <!---->
+    <div class="sidebar-content is-fixed" style="" name="slide-next"></div>
+</div>
+`;
+
+exports[`BSidebar render correctly 1`] = `
+<div class="b-sidebar">
+    <!---->
+    <div class="sidebar-content is-fixed" style="display: none;" name="slide-prev"></div>
+</div>
+`;

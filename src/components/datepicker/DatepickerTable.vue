@@ -5,7 +5,7 @@
                 v-for="(day, index) in visibleDayNames"
                 :key="index"
                 class="datepicker-cell">
-                {{ day }}
+                <span>{{ day }}</span>
             </div>
         </header>
         <div class="datepicker-body" :class="{'has-events':hasEvents}">
@@ -13,6 +13,7 @@
                 v-for="(week, index) in weeksInThisMonth"
                 :key="index"
                 :selected-date="value"
+                :day="focused.day"
                 :week="week"
                 :month="focused.month"
                 :min-date="minDate"
@@ -33,7 +34,8 @@
                 :hovered-date-range="hoveredDateRange"
                 @select="updateSelectedDate"
                 @rangeHoverEndDate="setRangeHoverEndDate"
-                :multiple="multiple"/>
+                :multiple="multiple"
+                @change-focus="changeFocus"/>
         </div>
     </section>
 </template>
@@ -83,7 +85,7 @@ export default {
             selectedBeginDate: undefined,
             selectedEndDate: undefined,
             hoveredEndDate: undefined,
-            multipleSelectedDates: []
+            multipleSelectedDates: this.multiple && this.value ? this.value : []
         }
     },
     computed: {
@@ -134,6 +136,7 @@ export default {
         * Return array of all weeks in the specified month
         */
         weeksInThisMonth() {
+            this.validateFocusedDay()
             const month = this.focused.month
             const year = this.focused.year
             const weeksInThisMonth = []
@@ -206,11 +209,15 @@ export default {
         */
         handleSelectMultipleDates(date) {
             const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
-                selectedDate.getTime() === date.getTime()
+                selectedDate.getDate() === date.getDate() &&
+                selectedDate.getFullYear() === date.getFullYear() &&
+                selectedDate.getMonth() === date.getMonth()
             )
             if (multipleSelect.length) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
-                    selectedDate.getTime() !== date.getTime()
+                    selectedDate.getDate() !== date.getDate() ||
+                    selectedDate.getFullYear() !== date.getFullYear() ||
+                    selectedDate.getMonth() !== date.getMonth()
                 )
             } else {
                 this.multipleSelectedDates.push(date)
@@ -219,8 +226,8 @@ export default {
         },
 
         /*
-        * Return array of all days in the week that the startingDate is within
-        */
+         * Return array of all days in the week that the startingDate is within
+         */
         weekBuilder(startingDate, month, year) {
             const thisMonth = new Date(year, month)
 
@@ -253,6 +260,82 @@ export default {
             return thisWeek
         },
 
+        validateFocusedDay() {
+            const focusedDate = new Date(this.focused.year, this.focused.month, this.focused.day)
+            if (this.selectableDate(focusedDate)) return
+
+            let day = 0
+            // Number of days in the current month
+            const monthDays = new Date(this.focused.year, this.focused.month + 1, 0).getDate()
+            let firstFocusable = null
+            while (!firstFocusable && ++day < monthDays) {
+                const date = new Date(this.focused.year, this.focused.month, day)
+                if (this.selectableDate(date)) {
+                    firstFocusable = focusedDate
+
+                    const focused = {
+                        day: date.getDate(),
+                        month: date.getMonth(),
+                        year: date.getFullYear()
+                    }
+                    this.$emit('update:focused', focused)
+                }
+            }
+        },
+
+        /*
+         * Check that selected day is within earliest/latest params and
+         * is within this month
+         */
+        selectableDate(day) {
+            const validity = []
+
+            if (this.minDate) {
+                validity.push(day >= this.minDate)
+            }
+
+            if (this.maxDate) {
+                validity.push(day <= this.maxDate)
+            }
+
+            if (this.nearbyMonthDays && !this.nearbySelectableMonthDays) {
+                validity.push(day.getMonth() === this.focused.month)
+            }
+
+            if (this.selectableDates) {
+                for (let i = 0; i < this.selectableDates.length; i++) {
+                    const enabledDate = this.selectableDates[i]
+                    if (day.getDate() === enabledDate.getDate() &&
+                        day.getFullYear() === enabledDate.getFullYear() &&
+                        day.getMonth() === enabledDate.getMonth()) {
+                        return true
+                    } else {
+                        validity.push(false)
+                    }
+                }
+            }
+
+            if (this.unselectableDates) {
+                for (let i = 0; i < this.unselectableDates.length; i++) {
+                    const disabledDate = this.unselectableDates[i]
+                    validity.push(
+                        day.getDate() !== disabledDate.getDate() ||
+                            day.getFullYear() !== disabledDate.getFullYear() ||
+                            day.getMonth() !== disabledDate.getMonth()
+                    )
+                }
+            }
+
+            if (this.unselectableDaysOfWeek) {
+                for (let i = 0; i < this.unselectableDaysOfWeek.length; i++) {
+                    const dayOfWeek = this.unselectableDaysOfWeek[i]
+                    validity.push(day.getDay() !== dayOfWeek)
+                }
+            }
+
+            return validity.indexOf(false) < 0
+        },
+
         eventsInThisWeek(week) {
             return this.eventsInThisMonth.filter((event) => {
                 const stripped = new Date(Date.parse(event.date))
@@ -265,6 +348,15 @@ export default {
 
         setRangeHoverEndDate(day) {
             this.hoveredEndDate = day
+        },
+
+        changeFocus(day) {
+            const focused = {
+                day: day.getDate(),
+                month: day.getMonth(),
+                year: day.getFullYear()
+            }
+            this.$emit('update:focused', focused)
         }
     }
 }

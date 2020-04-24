@@ -11,6 +11,10 @@ export default {
         accordion: {
             type: Boolean,
             default: true
+        },
+        activable: {
+            type: Boolean,
+            default: true
         }
     },
     data() {

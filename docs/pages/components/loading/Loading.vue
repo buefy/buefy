@@ -14,7 +14,7 @@
 
         <Example :component="ExTemplated" :code="ExTemplatedCode" title="Templated">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.5</span>
             </div>
             <p>Slot is available for loading content.</p>

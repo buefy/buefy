@@ -58,6 +58,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>multiline</code>',
+                description: 'Tabs will be multilined',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         events: [
             {

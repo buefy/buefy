@@ -47,6 +47,7 @@ $taginput-height: 1.7em !default;
         }
 
         .autocomplete {
+            position: static;
             flex: 1;
             input {
                 height: $taginput-height;

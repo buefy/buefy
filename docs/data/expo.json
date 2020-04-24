@@ -1,5 +1,30 @@
 [
     {
+        "title": "Leasy",
+        "date": "2020-04-13",
+        "img": "leasy.png",
+        "url": "https://leasy.co/",
+        "featured": true
+    },
+    {
+        "title": "Taskflex",
+        "date": "2020-04-13",
+        "img": "taskflex.png",
+        "url": "https://www.taskflex.dk/"
+    },
+    {
+        "title": "Hackdoor",
+        "date": "2020-03-04",
+        "img": "hackdoor.png",
+        "url": "https://www.hackdoor.io/"
+    },
+    {
+        "title": "Kennzeichen",
+        "date": "2020-02-21",
+        "img": "kennzeichenking.png",
+        "url": "https://www.kennzeichenking.de/"
+    },
+    {
         "title": "Édutechno",
         "date": "2020-02-07",
         "img": "edutechno.png",
@@ -54,12 +79,6 @@
         "url": "https://yandev.de/"
     },
     {
-        "title": "EL Catre",
-        "date": "2019-10-22",
-        "img": "elcatre.jpg",
-        "url": "https://elcatre.com/"
-    },
-    {
         "title": "Frenl",
         "date": "2019-10-20",
         "img": "frenl.png",
@@ -69,8 +88,7 @@
         "title": "Kulap",
         "date": "2019-09-04",
         "img": "kulap.png",
-        "url": "https://www.kulap.io",
-        "featured": true
+        "url": "https://www.kulap.io"
     },
     {
         "title": "Gravium Wallet",
@@ -110,18 +128,6 @@
         "featured": true
     },
     {
-        "title": "Git Stars",
-        "date": "2019-06-01",
-        "img": "git-stars.png",
-        "url": "https://git-stars.netlify.com"
-    },
-    {
-        "title": "Marvel Match",
-        "date": "2019-05-24",
-        "img": "marvelmatch.png",
-        "url": "https://marvelmatch.com"
-    },
-    {
         "title": "FOE Tools",
         "date": "2019-05-24",
         "img": "foe-tools.png",
@@ -153,12 +159,6 @@
         "featured": true
     },
     {
-        "title": "Immunization Academy",
-        "date": "2019-04-24",
-        "img": "immunization-academy.png",
-        "url": "https://www.immunizationacademy.com"
-    },
-    {
         "title": "Switchblade",
         "date": "2019-04-24",
         "img": "switchblade.png",
@@ -182,18 +182,6 @@
         "date": "2019-04-24",
         "img": "tainacan.png",
         "url": "http://tainacan.org/"
-    },
-    {
-        "title": "Counter Network",
-        "date": "2019-04-24",
-        "img": "counter-network.png",
-        "url": "https://counter.network"
-    },
-    {
-        "title": "Gods Unchained",
-        "date": "2019-04-24",
-        "img": "godsunchained.png",
-        "url": "https://godsunchained.info"
     },
     {
         "title": "Reaction Role",

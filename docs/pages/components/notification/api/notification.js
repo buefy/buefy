@@ -86,7 +86,7 @@ export default [
                 description: 'Which position the notification will appear when programmatically',
                 type: 'String',
                 values: '<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>',
-                default: '<code>is-bottom-right</code>'
+                default: '<code>is-top-right</code>'
             },
             {
                 name: '<code>queue</code>',

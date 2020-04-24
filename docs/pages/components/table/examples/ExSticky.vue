@@ -1,5 +1,13 @@
 <template>
-    <b-table :data="data" :columns="columns" sticky-header></b-table>
+    <section>
+        <b-field grouped group-multiline>
+            <div class="control">
+                <b-switch v-model="stickyHeaders">Sticky Headers</b-switch>
+            </div>
+        </b-field>
+        <b-table :data="data" :columns="columns" :sticky-header="stickyHeaders"></b-table>
+    </section>
+    
 </template>
 
 <script>
@@ -16,24 +24,17 @@
                     {"id":7,"user":{"first_name":"Anthony","last_name":"Webb"},"date":"2016/08/30 23:49:38","gender":"Male"},
                     {"id":8,"user":{"first_name":"Andrew","last_name":"Greene"},"date":"2016/11/20 14:57:47","gender":"Male"},
                     {"id":9,"user":{"first_name":"Russell","last_name":"White"},"date":"2016/07/13 09:29:49","gender":"Male"},
-                    {"id":10,"user":{"first_name":"Lori","last_name":"Hunter"},"date":"2016/12/09 01:44:05","gender":"Female"},
-                    {"id":11,"user":{"first_name":"Ronald","last_name":"Wood"},"date":"2016/12/04 02:23:48","gender":"Male"},
-                    {"id":12,"user":{"first_name":"Michael","last_name":"Harper"},"date":"2016/07/27 13:28:15","gender":"Male"},
-                    {"id":13,"user":{"first_name":"George","last_name":"Dunn"},"date":"2017/03/07 12:26:52","gender":"Male"},
-                    {"id":14,"user":{"first_name":"Eric","last_name":"Rogers"},"date":"2016/06/07 05:41:52","gender":"Male"},
-                    {"id":15,"user":{"first_name":"Juan","last_name":"Meyer"},"date":"2017/02/01 04:56:34","gender":"Male"},
-                    {"id":16,"user":{"first_name":"Silvia","last_name":"Rosa"},"date":"2017/01/26 11:50:04","gender":"Female"},
-                    {"id":17,"user":{"first_name":"Lori","last_name":"Cunningham"},"date":"2016/05/01 10:00:56","gender":"Female"},
-                    {"id":18,"user":{"first_name":"Charles","last_name":"Graham"},"date":"2016/05/31 06:43:30","gender":"Male"},
-                    {"id":19,"user":{"first_name":"Henry","last_name":"Morrison"},"date":"2016/09/27 16:15:44","gender":"Male"},
-                    {"id":20,"user":{"first_name":"Albert","last_name":"Mendoza"},"date":"2016/08/08 05:29:24","gender":"Male"},
+                    {"id":10,"user":{"first_name":"Lori","last_name":"Hunter"},"date":"2016/12/09 01:44:05","gender":"Female"}
                 ],
                 columns: [
                     {
                         field: 'id',
                         label: 'ID',
                         width: '40',
-                        numeric: true
+                        numeric: true,
+                        sticky: true,
+                        headerClass: 'is-sticky-column-one',
+                        cellClass: "is-sticky-column-one"
                     },
                     {
                         field: 'user.first_name',
@@ -41,19 +42,86 @@
                     },
                     {
                         field: 'user.last_name',
-                        label: 'Last Name',
+                        label: 'Last Name'
                     },
                     {
                         field: 'date',
                         label: 'Date',
-                        centered: true
+                        centered: true,
+                        sticky: true,
+                        headerClass: "is-sticky-column-two",
+                        cellClass: "is-sticky-column-two"
                     },
                     {
                         field: 'gender',
                         label: 'Gender',
-                    }
-                ]
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column A',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column B',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column C',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column D',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column E',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column F',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column G',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column H',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column I',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column L',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column M',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column N',
+                    },
+                    {
+                        field: 'id',
+                        label: 'Column O',
+                    },
+                ],
+                stickyHeaders: true
             }
         }
     }
 </script>
+
+<style>
+    .is-sticky-column-one {
+        background: #23d160 !important;
+        color: white !important;
+    }
+    .is-sticky-column-two {
+        background: #167df0 !important;
+        color: white !important;
+    }
+</style>

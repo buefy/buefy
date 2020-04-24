@@ -98,6 +98,13 @@ export default [
                 type: 'String, Array',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>bigger-slider-focus</code>',
+                description: 'Increase the clickable area',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [

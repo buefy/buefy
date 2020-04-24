@@ -9,7 +9,7 @@
         </b-tooltip>
 
         <b-tooltip
-            label="It's not briefy, but also not long enough"
+            label="It's not brief, but it's also not long"
             size="is-small"
             multilined>
             <button class="button is-dark">
@@ -18,7 +18,7 @@
         </b-tooltip>
 
         <b-tooltip
-            label="Tooltip large multilined, because it's really long to be on a medium size. Did I tell you it's really long? Yes, it is — I asure you!"
+            label="Tooltip large multilined, because it's too long to be on a medium size. Did I tell you it's really long? Yes, it is — I assure you!"
             position="is-bottom"
             size="is-large"
             multilined>

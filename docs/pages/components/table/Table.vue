@@ -42,7 +42,7 @@
 
         <Example :component="ExSortMultiple" :code="ExSortMultipleCode" title="Sorting multiple">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.11</span>
             </div>
             <p>To sort on additional columns, use <code>sort-multiple</code> is enabled</p>
@@ -54,7 +54,7 @@
         <Example :component="ExDetailedRow" :code="ExDetailedRowCode" title="Detailed rows">
             <p>You can have detailed rows by adding a <code>detail</code> named scoped slot and the <code>detailed</code> prop.</p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.2</span>
             </div>
             <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
@@ -92,16 +92,19 @@
             </p>
         </Example>
 
-        <Example :component="ExSticky" :code="ExStickyCode" title="Sticky Headers">
+        <Example :component="ExSticky" :code="ExStickyCode" title="Sticky Headers and Columns">
             <p>
                 Use the <code>sticky-header</code> prop to show a scrolling table with fixed headers.
             </p>
+            <p>
+                Use the <code>sticky</code> prop on column to show a scrolling table with a fixed column.
+            </p>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
-                <span class="tag is-info">0.8.12</span>
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.8.13</span>
             </div>
             <p>
-                The default height is <code>300px</code> but you can overwrite it using <code>style</code> attribute, for example <code>:style="height: 150px"</code>.
+                The default height is <code>300px</code> but you can overwrite it using <code>height</code> prop or <code>$table-sticky-header-height</code> Sass variable.
             </p>
         </Example>
 
@@ -129,11 +132,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/table'
+    import variables from './variables/table'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -190,6 +195,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSandbox,
                 ExSelection,

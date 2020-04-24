@@ -4,6 +4,7 @@
             <div class="datepicker-months">
                 <template v-for="(date, index) in monthDates">
                     <a
+                        :ref="`month-${date.getMonth()}`"
                         v-if="selectableDate(date) && !disabled"
                         :key="index"
                         :class="[
@@ -17,7 +18,12 @@
                         :disabled="disabled"
                         @click.prevent="emitChosenDate(date)"
                         @keydown.enter.prevent="emitChosenDate(date)"
-                        @keydown.space.prevent="emitChosenDate(date)">
+                        @keydown.space.prevent="emitChosenDate(date)"
+                        @keydown.arrow-left.prevent="changeFocus(date, -1)"
+                        @keydown.arrow-right.prevent="changeFocus(date, 1)"
+                        @keydown.arrow-up.prevent="changeFocus(date, -3)"
+                        @keydown.arrow-down.prevent="changeFocus(date, 3)"
+                        :tabindex="focused.month === date.getMonth() ? null : -1">
                         {{ monthNames[date.getMonth()] }}
                         <div class="events" v-if="eventsDateMatch(date)">
                             <div
@@ -62,7 +68,7 @@ export default {
     },
     data() {
         return {
-            multipleSelectedDates: []
+            multipleSelectedDates: this.multiple && this.value ? this.value : []
         }
     },
     computed: {
@@ -105,16 +111,40 @@ export default {
                 months.push(d)
             }
             return months
+        },
+
+        focusedMonth() {
+            return this.focused.month
+        }
+    },
+    watch: {
+        focusedMonth: {
+            handler(month) {
+                const refName = `month-${month}`
+                if (this.$refs[refName] && this.$refs[refName].length > 0) {
+                    this.$nextTick(() => {
+                        if (this.$refs[refName][0]) {
+                            this.$refs[refName][0].focus()
+                        }
+                    }) // $nextTick needed when year is changed
+                }
+            },
+            deep: true,
+            immediate: true
         }
     },
     methods: {
         selectMultipleDates(date) {
-            const multipleSelct = this.multipleSelectedDates.find((selectedDate) =>
-                selectedDate.getTime() === date.getTime()
+            const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
+                selectedDate.getDate() === date.getDate() &&
+                selectedDate.getFullYear() === date.getFullYear() &&
+                selectedDate.getMonth() === date.getMonth()
             )
-            if (multipleSelct) {
+            if (multipleSelect.length) {
                 this.multipleSelectedDates = this.multipleSelectedDates.filter((selectedDate) =>
-                    selectedDate.getTime() !== date.getTime()
+                    selectedDate.getDate() !== date.getDate() ||
+                    selectedDate.getFullYear() !== date.getFullYear() ||
+                    selectedDate.getMonth() !== date.getMonth()
                 )
             } else {
                 this.multipleSelectedDates.push(date)
@@ -212,9 +242,10 @@ export default {
                 'is-unselectable': !this.selectableDate(day) || this.disabled
             }
         },
+
         /*
-        * Emit select event with chosen date as payload
-        */
+         * Emit select event with chosen date as payload
+         */
         emitChosenDate(day) {
             if (this.disabled) return
 
@@ -225,6 +256,12 @@ export default {
             } else {
                 this.selectMultipleDates(day)
             }
+        },
+
+        changeFocus(month, inc) {
+            const nextMonth = month
+            nextMonth.setMonth(month.getMonth() + inc)
+            this.$emit('change-focus', nextMonth)
         }
     }
 }

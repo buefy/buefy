@@ -142,7 +142,8 @@ export default {
         tzOffset: {
             type: Number,
             default: 0
-        }
+        },
+        appendToBody: Boolean
     },
     data() {
         return {
@@ -559,9 +560,8 @@ export default {
         /**
          * Keypress event that is bound to the document.
          */
-        keyPress(event) {
-            // Esc key
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.toggle(false)
             }
         },

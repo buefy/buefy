@@ -113,6 +113,18 @@ export function removeElement(el) {
     }
 }
 
+export function createAbsoluteElement(el) {
+    const root = document.createElement('div')
+    root.style.position = 'absolute'
+    root.style.left = '0px'
+    root.style.top = '0px'
+    const wrapper = document.createElement('div')
+    root.appendChild(wrapper)
+    wrapper.appendChild(el)
+    document.body.appendChild(root)
+    return root
+}
+
 /**
  * Escape regex characters
  * http://stackoverflow.com/a/6969486
@@ -134,4 +146,15 @@ export function multiColumnSort(inputArray, sortingPriority) {
     }).reduce((p, n) => p || n, 0)
 
     return array.sort(fieldSorter(sortingPriority))
+}
+
+export function createNewEvent(eventName) {
+    var event
+    if (typeof Event === 'function') {
+        event = new Event(eventName)
+    } else {
+        event = document.createEvent('Event')
+        event.initEvent(eventName, true, true)
+    }
+    return event
 }

@@ -11,7 +11,8 @@
         <a
             class="navbar-link"
             :class="{
-                'is-arrowless': arrowless
+                'is-arrowless': arrowless,
+                'is-active': newActive && collapsible
             }"
             role="menuitem"
             aria-haspopup="true"
@@ -21,10 +22,11 @@
             <slot v-else name="label" />
         </a>
         <div
+            v-show="!collapsible || (collapsible && newActive)"
             class="navbar-dropdown"
             :class="{
                 'is-right': right,
-                'is-boxed': boxed
+                'is-boxed': boxed,
             }"
         >
             <slot />
@@ -50,13 +52,15 @@ export default {
         closeOnClick: {
             type: Boolean,
             default: true
-        }
+        },
+        collapsible: Boolean
+
     },
     data() {
         return {
             newActive: this.active,
             isHoverable: this.hoverable,
-            _isNavDropdown: true // Used internally by NavbarItem
+            _isNavbarDropdown: true // Used internally by NavbarItem
         }
     },
     watch: {

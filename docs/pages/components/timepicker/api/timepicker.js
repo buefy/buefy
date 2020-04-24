@@ -156,6 +156,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>append-to-body</code>',
+                description: 'Append timepicker calendar to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

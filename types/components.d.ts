@@ -1,7 +1,60 @@
 import _Vue from "vue";
 import { ColorModifiers, GlobalPositions } from "./helpers";
 
-export declare type DialogConfig = {
+// Component base definition
+export class BComponent extends _Vue {
+    // Simple catch-all to allow any prop/type
+    [key: string]: any
+}
+
+export declare type BuefyConfig = {
+    defaultContainerElement?: string,
+    defaultIconPack?: string;
+    defaultIconComponent?: string;
+    defaultIconPrev?: string;
+    defaultIconNext?: string;
+    defaultDialogConfirmText?: string;
+    defaultDialogCancelText?: string;
+    defaultSnackbarDuration?: number;
+    defaultSnackbarPosition?: GlobalPositions;
+    defaultToastDuration?: number;
+    defaultToastPosition?: GlobalPositions;
+    defaultNotificationDuration?: number;
+    defaultNotificationPosition?: GlobalPositions;
+    defaultTooltipType?: ColorModifiers;
+    defaultTooltipAnimated?: boolean;
+    defaultTooltipDelay?: number;
+    defaultInputAutocomplete?: string;
+    defaultDateFormatter?: Function;
+    defaultDateParser?: Function;
+    defaultDateCreator?: Function;
+    defaultDayNames?: string[];
+    defaultMonthNames?: string[];
+    defaultFirstDayOfWeek?: number;
+    defaultUnselectableDaysOfWeek?: number[];
+    defaultTimeFormatter?: Function;
+    defaultTimeParser?: Function;
+    defaultModalCanCancel?: string[];
+    defaultModalScroll?: string;
+    defaultDatepickerMobileNative?: boolean;
+    defaultTimepickerMobileNative?: boolean;
+    defaultNoticeQueue?: boolean;
+    defaultInputHasCounter?: boolean;
+    defaultTaginputHasCounter?: boolean;
+    defaultUseHtml5Validation?: boolean;
+    defaultDropdownMobileModal?: boolean;
+    defaultFieldLabelPosition?: 'inside' | 'on-border';
+    defaultDatepickerYearsRange?: number[];
+    defaultDatepickerNearbyMonthDays?: boolean;
+    defaultDatepickerNearbySelectableMonthDays?: boolean;
+    defaultDatepickerShowWeekNumber?: boolean;
+    customIconPacks?: any;
+    defaultClockpickerHoursLabel?: string;
+    defaultClockpickerMinutesLabel?: string;
+    defaultTrapFocus?: boolean;
+};
+
+export declare type BDialogConfig = {
     /**
      * Dialog title
      */
@@ -92,45 +145,116 @@ export declare type DialogConfig = {
     * Improve accessiblity when enabled.
     */
    ariaModal?: boolean;
-}
 
-type PromptDialogConfig = DialogConfig & {
+   /**
+    * CSS classes to be applied on modal
+    */
+   customClass?: string;
+}
+type BPromptDialogConfig = BDialogConfig & {
     /**
      * Prompt only: input's attributes
      */
     inputAttrs?: any;
 };
-
 export declare const DialogProgrammatic: {
-    alert: (params: DialogConfig | string) => any;
-    confirm: (params: DialogConfig) => any;
-    prompt: (params: PromptDialogConfig) => any;
+    alert: (params: BDialogConfig | string) => BComponent;
+    confirm: (params: BDialogConfig) => BComponent;
+    prompt: (params: BPromptDialogConfig) => BComponent;
 }
 
-declare type LoadingConfig = {
+export class BLoadingComponent extends BComponent {
+    close: () => any
+}
+declare type BLoadingConfig = {
+    /**
+     * Element to be injected
+     */
     container?: any;
+
+    /**
+     * Loader will overlay the full page
+     */
     isFullPage?: boolean;
+
+    /**
+     * Custom animation (transition name)
+     */
     animation?: string;
+
+    /**
+     * Can close Loading by pressing escape or clicking outside
+     */
     canCancel?: boolean;
+
+    /**
+     * Callback function to call after user canceled
+     */
     onCancel?: () => any;
 }
 export declare const LoadingProgrammatic: {
-    open: (params: LoadingConfig) => { close: () => any };
+    open: (params: BLoadingConfig) => BLoadingComponent;
 }
 
-declare type ModalConfig = {
-    content?: string;
+export class BModalComponent extends BComponent {
+    close: () => any
+}
+declare type BModalConfig = {
+    /**
+     * Component to be injected, used to open a component modal programmatically
+     */
     component?: typeof _Vue;
+
+    /**
+     * Parent component of the modal, required if using component
+     */
     parent?: _Vue;
+
+    /**
+     * Props to be binded to the injected component
+     */
     props?: any;
+
+    /**
+     * Events to be binded to the injected component
+     */
     events?: {
         [index: string]: Function
     };
+
+    /**
+     * HTML content
+     */
+    content?: string;
+
+    /**
+     * Width of the Modal
+     */
     width?: string | number;
+
+    /**
+     * If your modal content has a .modal-card as root
+     */
     hasModalCard?: boolean;
+
+    /**
+     * Custom animation (transition name)
+     */
     animation?: string;
+
+    /**
+     * Can close Modal by clicking 'X', pressing escape or clicking outside
+     */
     canCancel?: boolean | Array<any>;
+
+    /**
+     * Callback function to call after user canceled
+     */
     onCancel?: () => any;
+
+    /**
+     * clip to remove the <body> scrollbar, keep to have a non scrollable scrollbar
+     */
     scroll?: 'clip' | 'keep';
 
     /**
@@ -152,75 +276,99 @@ declare type ModalConfig = {
      * Improve accessiblity when enabled.
      */
     ariaModal?: boolean;
-}
 
+    /**
+     * CSS classes to be applied on modal
+    */
+    customClass?: string;
+}
 export declare const ModalProgrammatic: {
-    open: (params: ModalConfig | string) => { close: () => any };
+    open: (params: BModalConfig | string) => BModalComponent;
 }
 
-export declare type SnackbarConfig = {
+// Notice Component base definition
+export class BNoticeComponent extends BComponent {
+    close: () => any
+}
+
+export declare type BNoticeConfig = {
+    /**
+    * Message text
+    */
     message: string;
+
+    /**
+    * Type (color) of the toast
+    */
     type?: ColorModifiers;
+
+    /**
+    * Which position the toast will appear
+    */
     position?: GlobalPositions;
+
+    /**
+    * Visibility duration in milliseconds
+    */
     duration?: number;
+
+    /**
+    * DOM element the toast will be created on.
+    * Note that this also changes the position of the toast from fixed
+    * to absolute. Meaning that the container should be fixed.
+    */
     container?: string;
-    actionText?: string | null;
+
+    /**
+    * disable queue
+    */
     queue?: boolean;
+}
+
+export declare type BSnackbarConfig = BNoticeConfig & {
+    /**
+     * Snackbar's button text
+     */
+    actionText?: string | null;
+
+    /**
+     * Show the Snackbar indefinitely until it is dismissed
+     */
     indefinite?: boolean;
+
+    /**
+     * 	Callback function when the button is clicked
+     */
     onAction?: () => any;
 }
 export declare const SnackbarProgrammatic: {
-    open: (params: SnackbarConfig | string) => { close: () => any };
+    open: (params: BSnackbarConfig | string) => BNoticeComponent;
 }
 
-export declare type ToastConfig = {
-    /**
-     * Type (color) of the toast
-     */
-    type?: ColorModifiers;
-
-    /**
-     * Message text
-     */
-    message: string;
-
-    /**
-     * Which position the toast will appear
-     */
-    position?: GlobalPositions;
-
-    /**
-     * Visibility duration in milliseconds
-     */
-    duration?: number;
-
-    /**
-     * DOM element the toast will be created on.
-     * Note that this also changes the position of the toast from fixed
-     * to absolute. Meaning that the container should be fixed.
-     */
-    container?: string;
-
-    /**
-     * disable queue
-     */
-    queue?: boolean;
-}
 
 export declare const ToastProgrammatic: {
-    open: (params: ToastConfig | string) => { close: () => any };
+    open: (params: BNoticeConfig | string) => BNoticeComponent;
 }
 
-export declare type NotificationConfig = {
-    message: string;
-    type?: ColorModifiers;
-    position?: GlobalPositions;
-    duration?: number;
-    container?: string;
-    queue?: boolean;
+export declare type BNotificationConfig = BNoticeConfig & {
+    /**
+     * Show the Notification indefinitely until it is dismissed
+     */
     indefinite?: boolean;
+
+    /**
+     * Adds an icon on the left side
+     */
     hasIcon?: boolean;
 }
 export declare const NotificationProgrammatic: {
-    open: (params: NotificationConfig | string) => { close: () => any };
+    open: (params: BNotificationConfig | string) => BNoticeComponent;
 }
+
+
+export declare const ConfigProgrammatic: {
+    getOptions: () => BuefyConfig
+    setOptions: (params: BuefyConfig) => any
+}
+
+

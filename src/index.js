@@ -4,6 +4,8 @@ import { merge } from './utils/helpers'
 import config, { setOptions, setVueInstance } from './utils/config'
 import { use, registerComponentProgrammatic } from './utils/plugins'
 
+import ConfigComponent from './utils/ConfigComponent'
+
 const Buefy = {
     install(Vue, options = {}) {
         setVueInstance(Vue)
@@ -14,15 +16,7 @@ const Buefy = {
             Vue.use(components[componentKey])
         }
         // Config component
-        const BuefyProgrammatic = {
-            getOptions() {
-                return config
-            },
-            setOptions(options) {
-                setOptions(merge(config, options, true))
-            }
-        }
-        registerComponentProgrammatic(Vue, 'config', BuefyProgrammatic)
+        registerComponentProgrammatic(Vue, 'config', ConfigComponent)
     }
 }
 
@@ -39,5 +33,6 @@ export { ModalProgrammatic } from './components/modal'
 export { NotificationProgrammatic } from './components/notification'
 export { SnackbarProgrammatic } from './components/snackbar'
 export { ToastProgrammatic } from './components/toast'
+export { ConfigComponent as ConfigProgrammatic }
 // export helpers
 export * from './utils/helpers'

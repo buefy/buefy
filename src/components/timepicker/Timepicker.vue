@@ -6,6 +6,8 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
+            :append-to-body="appendToBody"
+            append-to-body-copy-parent
             @active-change="onActiveChange">
             <b-input
                 v-if="!inline"
@@ -108,6 +110,7 @@
             :size="size"
             :icon="icon"
             :icon-pack="iconPack"
+            :rounded="rounded"
             :loading="loading"
             :max="formatHHMMSS(maxTime)"
             :min="formatHHMMSS(minTime)"

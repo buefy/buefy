@@ -109,6 +109,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>destroy-on-hide</code>',
+                description: 'Destroy modal on hide',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>aria-role</code>',
                 description: `Role attribute to be passed to modal container for better accessibility.`,
                 type: 'String',

@@ -67,7 +67,8 @@ export default {
             }
             if (splitType.length <= 1) return
 
-            return `has-text-${splitType[1]}`
+            const [, ...type] = splitType
+            return `has-text-${type.join('-')}`
         },
         newCustomSize() {
             return this.customSize || this.customSizeByPack

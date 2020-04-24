@@ -248,6 +248,20 @@ $floating-in-height: 3.25em !default;
             }
         }
     }
+    &.is-grouped-right, &.has-addons-right {
+        &.is-floating-in-label {
+            .label {
+                position: relative;
+                left: calc(3.25em + 2em);
+            }
+        }
+        &.is-floating-label {
+            .label {
+                position: relative;
+                left: calc(3.25em + 2em);
+            }
+        }
+    }
 }
 
 .control {

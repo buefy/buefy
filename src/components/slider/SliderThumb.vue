@@ -147,7 +147,7 @@ export default {
                 if (event.type === 'touchmove') {
                     event.clientX = event.touches[0].clientX
                 }
-                const diff = (event.clientX - this.startX) / this.$parent.sliderSize * 100
+                const diff = (event.clientX - this.startX) / this.$parent.sliderSize() * 100
                 this.newPosition = this.startPosition + diff
                 this.setPosition(this.newPosition)
             }

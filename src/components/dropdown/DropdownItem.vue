@@ -6,7 +6,7 @@
         :class="anchorClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        :tabindex="focusable ? 0 : null">
+        :tabindex="isFocusable ? 0 : null">
         <slot/>
     </a>
     <div
@@ -14,7 +14,7 @@
         :class="itemClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        :tabindex="focusable ? 0 : null">
+        :tabindex="isFocusable ? 0 : null">
         <slot/>
     </div>
 </template>
@@ -61,9 +61,6 @@ export default {
         ariaRoleItem() {
             return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : null
         },
-        /**
-        * Check if item can be clickable.
-        */
         isClickable() {
             return !this.$parent.disabled && !this.separator && !this.disabled && !this.custom
         },
@@ -71,6 +68,9 @@ export default {
             if (this.$parent.selected === null) return false
             if (this.$parent.multiple) return this.$parent.selected.indexOf(this.value) >= 0
             return this.value === this.$parent.selected
+        },
+        isFocusable() {
+            return this.hasLink ? false : this.focusable
         }
     },
     methods: {

@@ -107,6 +107,27 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>max-height</code>',
+                description: 'Max height of dropdown content',
+                type: 'String, Number',
+                values: '—',
+                default: '<code>200px</code>'
+            },
+            {
+                name: '<code>dropdown-position</code>',
+                description: 'Position of dropdown',
+                type: 'String',
+                values: '<code>top</code>, <code>bottom</code>, <code>auto</code>',
+                default: '<code>auto</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append autocomplete content to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

@@ -85,16 +85,6 @@ describe('BAutocomplete', () => {
         expect($dropdown.isVisible()).toBeFalsy()
     })
 
-    it('check validity when value change', () => {
-        wrapper.setProps({ data: DATA_LIST })
-        wrapper.vm.$refs.input.checkHtml5Validity = jest.fn()
-
-        wrapper.vm.isValid = false
-        wrapper.setProps({ value: 'test' })
-
-        expect(wrapper.vm.$refs.input.checkHtml5Validity).toBeCalled()
-    })
-
     it('close dropdown on esc', () => {
         jest.useFakeTimers()
         wrapper.setProps({ data: DATA_LIST })

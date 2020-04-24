@@ -2,9 +2,12 @@
     <transition
         :name="animation"
         @after-enter="afterEnter"
-        @before-leave="beforeLeave">
+        @before-leave="beforeLeave"
+        @after-leave="afterLeave"
+    >
         <div
-            v-if="isActive"
+            v-if="!destroyed"
+            v-show="isActive"
             class="modal is-active"
             :class="[{'is-full-screen': fullScreen}, customClass]"
             v-trap-focus="trapFocus"
@@ -90,7 +93,9 @@ export default {
         fullScreen: Boolean,
         trapFocus: {
             type: Boolean,
-            default: config.defaultTrapFocus
+            default: () => {
+                return config.defaultTrapFocus
+            }
         },
         customClass: String,
         ariaRole: {
@@ -102,7 +107,11 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
-        ariaModal: Boolean
+        ariaModal: Boolean,
+        destroyOnHide: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
@@ -111,7 +120,8 @@ export default {
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
                 : this.width,
-            animating: true
+            animating: true,
+            destroyed: false
         }
     },
     computed: {
@@ -137,6 +147,11 @@ export default {
             this.isActive = value
         },
         isActive(value) {
+            if (this.destroyOnHide) {
+                if (value) {
+                    this.destroyed = false
+                }
+            }
             this.handleScroll()
             this.$nextTick(() => {
                 if (value && this.$el && this.$el.focus) {
@@ -209,9 +224,8 @@ export default {
         /**
         * Keypress event that is bound to the document.
         */
-        keyPress(event) {
-            // Esc key
-            if (this.isActive && event.keyCode === 27) this.cancel('escape')
+        keyPress({ key }) {
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) this.cancel('escape')
         },
 
         /**
@@ -226,6 +240,15 @@ export default {
         */
         beforeLeave() {
             this.animating = true
+        },
+
+        /**
+        * Transition after-leave hook
+        */
+        afterLeave() {
+            if (this.destroyOnHide) {
+                this.destroyed = true
+            }
         }
     },
     created() {

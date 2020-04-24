@@ -7,6 +7,8 @@ let defaultProps
 const newDate = (y, m, d) => {
     const date = new Date(Date.UTC(y, m, d))
     date.getDate = jest.fn(() => date.getUTCDate())
+    date.getMonth = jest.fn(() => date.getUTCMonth())
+    date.getFullYear = jest.fn(() => date.getUTCFullYear())
     return date
 }
 
@@ -70,10 +72,29 @@ describe('BDatepickerTable', () => {
                 focused: {
                     month: 6,
                     year: 2018
-                }
+                },
+                showWeekNumber: true
             }
         })
         expect(wrapper.vm.eventsInThisWeek(wrapper.vm.weeksInThisMonth[3]).length).toEqual(2)
+    })
+
+    it('manage events as expected', () => {
+        const monthEvent = {
+            date: newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 13),
+            type: 'is-primary'
+        }
+        const events = [
+            newDate(2020, 3, 3),
+            monthEvent
+        ]
+        const wrapper = shallowMount(BDatepickerTable, {
+            propsData: {
+                ...defaultProps(),
+                events
+            }
+        })
+        expect(wrapper.vm.eventsInThisMonth).toEqual([monthEvent])
     })
 
     it('emit input event with selected date as payload when updateSelectedDate is called', () => {
@@ -86,6 +107,78 @@ describe('BDatepickerTable', () => {
         wrapper.vm.updateSelectedDate(newDate)
         const valueEmitted = wrapper.emitted()['input'][0]
         expect(valueEmitted).toContainEqual(newDate)
+    })
+
+    it('manage selectable dates as expected', () => {
+        const day = newDate(2019, 7, 7)
+        const wrapper = shallowMount(BDatepickerTable, {
+            propsData: {
+                ...defaultProps()
+            }
+        })
+
+        wrapper.setProps({
+            minDate: newDate(2019, 7, 17)
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: newDate(2019, 7, 1)
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+        wrapper.setProps({
+            selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2), day]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: null,
+            unselectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+        wrapper.setProps({
+            unselectableDates: [day]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            minDate: null,
+            maxDate: null,
+            selectableDates: null,
+            unselectableDates: null,
+            unselectableDaysOfWeek: [0, 1]
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+    })
+
+    it('emit focused date', () => {
+        const wrapper = shallowMount(BDatepickerTable, {
+            propsData: {
+                ...defaultProps()
+            }
+        })
+
+        const [y, m, d] = [2019, 4, 4]
+        const day = newDate(y, m, d)
+        const expected = {
+            day: day.getDate(),
+            month: day.getMonth(),
+            year: day.getFullYear()
+        }
+
+        wrapper.vm.changeFocus(day)
+        let valueEmitted = wrapper.emitted()['update:focused'][0]
+        expect(valueEmitted).toContainEqual(expected)
     })
 
     describe('#hoveredDateRange', () => {
@@ -165,6 +258,71 @@ describe('BDatepickerTable', () => {
             expect(wrapper.vm.hoveredDateRange).toEqual([
                 selectedBeginDate
             ])
+        })
+
+        it('should mange date range update as expected', () => {
+            let begin = newDate(2020, 3, 10)
+            let end = newDate(2020, 3, 15)
+            const wrapper = shallowMount(BDatepickerTable, {
+                propsData: {
+                    ...defaultProps(),
+                    range: true
+                }
+            })
+
+            wrapper.vm.updateSelectedDate(begin)
+            expect(wrapper.vm.selectedBeginDate).toBe(begin)
+            expect(wrapper.emitted()['range-start'][0]).toContainEqual(begin)
+
+            wrapper.vm.updateSelectedDate(end)
+            expect(wrapper.vm.selectedEndDate).toBe(end)
+            expect(wrapper.emitted()['range-end'][0]).toContainEqual(end)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([begin, end])
+
+            end = begin
+            begin = newDate(2020, 3, 5)
+            wrapper.vm.selectedEndDate = undefined
+            wrapper.vm.updateSelectedDate(begin)
+            expect(wrapper.vm.selectedEndDate).toBe(end)
+            expect(wrapper.vm.selectedBeginDate).toBe(begin)
+
+            wrapper.vm.updateSelectedDate(begin)
+            expect(wrapper.vm.selectedEndDate).toBe(undefined)
+            expect(wrapper.vm.selectedBeginDate).toBe(begin)
+        })
+    })
+
+    describe('Multiple dates', () => {
+        let wrapper
+        beforeEach(() => {
+            wrapper = shallowMount(BDatepickerTable, {
+                propsData: {
+                    ...defaultProps(),
+                    multiple: true,
+                    value: []
+                }
+            })
+        })
+
+        it('should manage multiple dates update as expected', () => {
+            let date1 = newDate(2020, 3, 10)
+            let date2 = newDate(2020, 3, 15)
+            let date3 = newDate(2020, 3, 20)
+
+            wrapper.vm.updateSelectedDate(date1)
+            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date1)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([date1])
+
+            wrapper.vm.updateSelectedDate(date2)
+            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date2)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2])
+
+            wrapper.vm.updateSelectedDate(date3)
+            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date3)
+            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2, date3])
+
+            wrapper.vm.updateSelectedDate(date1)
+            expect(wrapper.vm.multipleSelectedDates).toEqual([date2, date3])
         })
     })
 })

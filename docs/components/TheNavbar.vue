@@ -37,6 +37,15 @@
                     <b-icon icon="discord"/>
                 </a>
 
+                <a
+                    class="navbar-item"
+                    :class="{ 'has-text-twitter': !light }"
+                    href="https://twitter.com/walter_tommasi"
+                    target="_blank"
+                    title="Twitter">
+                    <b-icon icon="twitter"/>
+                </a>
+
                 <span
                     class="navbar-burger burger"
                     :class="{ 'is-active': isMenuActive }"
@@ -90,16 +99,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="navbar-item">
-                        <a
-                            class="button is-outlined"
-                            :class="light ? 'is-light' : 'is-twitter'"
-                            @click="tweet">
-                            <b-icon icon="twitter"/>
-                            <span>Tweet</span>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -122,16 +121,6 @@ export default {
         }
     },
     methods: {
-        tweet() {
-            const width = 575
-            const height = 400
-            const left = (window.screen.width - width) / 2
-            const top = (window.screen.height - height) / 2
-            const url = `https://twitter.com/share?url=${encodeURIComponent(document.location.protocol + '//' + document.location.host)}&text=Buefy: lightweight UI components for Vue.js based on Bulma&hashtags=buefy&via=rafaelpimpa, @walter_tommasi`
-            const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`
-
-            window.open(url, '', opts)
-        },
         closeMenu() {
             this.isMenuActive = false
         },

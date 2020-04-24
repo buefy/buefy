@@ -10,7 +10,7 @@
 
         <Example :component="ExFooter" :code="ExFooterCode" title="Footer">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.6</span>
             </div>
             <p>You can add your custom footer to the autocomplete.</p>
@@ -27,11 +27,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/autocomplete'
+    import variables from './variables/autocomplete'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -55,6 +57,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 ExObjArrayCode,

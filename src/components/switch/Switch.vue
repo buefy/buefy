@@ -73,9 +73,11 @@ export default {
         newClass() {
             return [
                 this.size,
-                { 'is-disabled': this.disabled },
-                { 'is-rounded': this.rounded },
-                { 'is-outlined': this.outlined }
+                {
+                    'is-disabled': this.disabled,
+                    'is-rounded': this.rounded,
+                    'is-outlined': this.outlined
+                }
             ]
         }
     },

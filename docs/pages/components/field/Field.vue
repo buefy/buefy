@@ -22,7 +22,7 @@
 
         <Example :component="ExLabelPosition" :code="ExLabelPositionCode" title="Label Position" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.8</span>
             </div>
             <p>Add the <code>label-position</code> prop to modify field style.</p>
@@ -33,7 +33,7 @@
 
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.0</span>
             </div>
             <p>You can also use object syntax for <code>type</code> and <code>message</code> props just like Vuejs <code>class</code>.</p>
@@ -86,7 +86,7 @@
 
         <Example :component="ExLabelSlot" :code="ExLabelSlotCode" title="Label slot">
             <div class="tags has-addons">
-                <span class="tag is-success">New!</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.6</span>
             </div>
             <p>Use the <code>label</code> slot for complex labels with HTML content or components. Note it overrides the <code>label</code> prop.</p>

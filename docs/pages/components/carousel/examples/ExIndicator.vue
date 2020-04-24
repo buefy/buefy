@@ -1,12 +1,18 @@
 <template>
     <section>
-        <div style="padding: 1.5rem">
-            <b-field grouped group-multiline position="is-centered">
-                <b-switch v-model="indicator"><strong>Indicator</strong></b-switch>
-                <b-switch v-model="indicatorBackground" :disabled="!indicator">Background</b-switch>
-                <b-switch v-model="indicatorInside" :disabled="!indicator">Inside</b-switch>
-            </b-field><br>
-            <b-field grouped group-multiline position="is-centered">
+        <div class="example-component">
+            <b-field grouped group-multiline>
+                <div class="control">
+                    <b-switch v-model="indicator"><strong>Indicator</strong></b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="indicatorBackground" :disabled="!indicator">Background</b-switch>
+                </div>
+                <div class="control">
+                    <b-switch v-model="indicatorInside" :disabled="!indicator">Inside</b-switch>
+                </div>
+            </b-field>
+            <b-field grouped group-multiline>
                 <b-field label="Position" :disabled="!indicator">
                     <b-select v-model="indicatorPosition">
                         <option value="is-bottom">is-bottom</option>
