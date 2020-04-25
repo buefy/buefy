@@ -121,7 +121,7 @@ export default {
                 ? this.width + 'px'
                 : this.width,
             animating: true,
-            destroyed: false
+            destroyed: !this.active
         }
     },
     computed: {
@@ -147,11 +147,7 @@ export default {
             this.isActive = value
         },
         isActive(value) {
-            if (this.destroyOnHide) {
-                if (value) {
-                    this.destroyed = false
-                }
-            }
+            if (value) this.destroyed = false
             this.handleScroll()
             this.$nextTick(() => {
                 if (value && this.$el && this.$el.focus) {

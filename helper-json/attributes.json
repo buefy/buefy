@@ -106,6 +106,10 @@
         "description": "Icon name to show on the right",
         "type": "string"
     },
+    "b-button/label": {
+        "description": "Button label",
+        "type": "string"
+    },
     "b-button/loading": {
         "description": "Add the loading state to the button",
         "type": "boolean"

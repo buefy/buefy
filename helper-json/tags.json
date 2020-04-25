@@ -28,6 +28,7 @@
         "attributes": [
             "type",
             "size",
+            "label",
             "loading",
             "rounded",
             "outlined",
