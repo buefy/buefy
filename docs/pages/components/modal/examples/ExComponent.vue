@@ -8,6 +8,7 @@
         <b-modal :active.sync="isComponentModalActive"
                  has-modal-card
                  trap-focus
+                 :destroy-on-hide="false"
                  aria-role="dialog"
                  aria-modal>
             <modal-form v-bind="formProps"></modal-form>
