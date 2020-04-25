@@ -52,20 +52,26 @@
                 @keydown.native="keydown"
                 @select="onSelect"
                 @infinite-scroll="emitInfiniteScroll">
-                <template :slot="headerSlotName">
+                <template
+                    v-if="hasHeaderSlot"
+                    #header>
                     <slot name="header" />
                 </template>
                 <template
-                    :slot="defaultSlotName"
-                    slot-scope="props">
+                    v-if="hasDefaultSlot"
+                    #default="props">
                     <slot
                         :option="props.option"
                         :index="props.index" />
                 </template>
-                <template :slot="emptySlotName">
+                <template
+                    v-if="hasHeaderSlot"
+                    #empty>
                     <slot name="empty" />
                 </template>
-                <template :slot="footerSlotName">
+                <template
+                    v-if="hasFooterSlot"
+                    #footer>
                     <slot name="footer" />
                 </template>
             </b-autocomplete>
@@ -187,22 +193,6 @@ export default {
 
         valueLength() {
             return this.newTag.trim().length
-        },
-
-        defaultSlotName() {
-            return this.hasDefaultSlot ? 'default' : 'dontrender'
-        },
-
-        emptySlotName() {
-            return this.hasEmptySlot ? 'empty' : 'dontrender'
-        },
-
-        headerSlotName() {
-            return this.hasHeaderSlot ? 'header' : 'dontrender'
-        },
-
-        footerSlotName() {
-            return this.hasFooterSlot ? 'footer' : 'dontrender'
         },
 
         hasDefaultSlot() {
