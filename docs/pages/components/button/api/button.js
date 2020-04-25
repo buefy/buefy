@@ -19,6 +19,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>label</code>',
+                description: 'Button label, optional when default slot',
+                type: 'String',
+                values: '',
+                default: '—'
+            },
+            {
                 name: '<code>loading</code>',
                 description: 'Add the loading state to the button',
                 type: 'Boolean',
