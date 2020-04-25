@@ -1,5 +1,15 @@
 # Buefy Changelog
 
+## 0.8.17
+
+### New features
+
+* Add types to ConfigProgrammatic
+
+### Fixes
+
+* Fix #2438 create modal content only when is active
+
 ## 0.8.16
 
 ### New features
