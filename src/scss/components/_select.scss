@@ -24,5 +24,9 @@
     &.is-empty select {
         color: rgba($grey, 0.7);
     }
-
+    // fix Bulma 0.8.2
+    &.is-loading::after {
+        top: calc(50% - (1em / 2));
+        right: calc((2.5em / 2) - .5em);
+    }
 }
