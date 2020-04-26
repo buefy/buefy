@@ -2,7 +2,7 @@
     <span ref="tooltip" :class="rootClasses">
         <transition :name="animation">
             <div
-                v-show="isActive || always"
+                v-show="active && (isActive || always)"
                 ref="content"
                 class="tooltip-content"
                 :style="style">
@@ -29,6 +29,10 @@ import { createAbsoluteElement, removeElement } from '../../utils/helpers'
 export default {
     name: 'BTooltip',
     props: {
+        active: {
+            type: Boolean,
+            default: true
+        },
         type: {
             type: String,
             default: () => config.defaultTooltipType
