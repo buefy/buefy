@@ -13,8 +13,6 @@ let config = {
     defaultNotificationDuration: 2000,
     defaultNotificationPosition: null,
     defaultTooltipType: 'is-primary',
-    defaultTooltipAnimated: false,
-    defaultTooltipDelay: 0,
     defaultInputAutocomplete: 'on',
     defaultDateFormatter: null,
     defaultDateParser: null,
@@ -55,7 +53,6 @@ let config = {
         'NuxtLink',
         'NLink'
     ],
-
     customIconPacks: null
 }
 

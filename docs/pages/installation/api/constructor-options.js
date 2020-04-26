@@ -115,20 +115,6 @@ export default [
                 default: '<code>is-primary</code>'
             },
             {
-                name: '<code>defaultTooltipAnimated</code>',
-                description: `Default tooltip <code>animated</code> attribute.`,
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
-                name: '<code>defaultTooltipDelay</code>',
-                description: 'Default tooltip <code>delay</code> attribute.',
-                type: 'Number',
-                values: "—",
-                default: '<code>0</code>'
-            },
-            {
                 name: '<code>defaultInputAutocomplete</code>',
                 description: `Default input <code>autocomplete</code> attribute.`,
                 type: 'String',

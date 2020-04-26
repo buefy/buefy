@@ -12,29 +12,24 @@ $tooltip-multiline-sizes: (
         border-top: $tooltip-arrow-size solid $color;
         border-right: $tooltip-arrow-size solid transparent;
         border-left: $tooltip-arrow-size solid transparent;
-        bottom: calc(100% + #{$tooltip-arrow-margin});
     } @else if ($direction == "is-bottom") {
         border-right: $tooltip-arrow-size solid transparent;
         border-bottom: $tooltip-arrow-size solid $color;
         border-left: $tooltip-arrow-size solid transparent;
-        top: calc(100% + #{$tooltip-arrow-margin});
     } @else if ($direction == "is-right") {
         border-top: $tooltip-arrow-size solid transparent;
         border-right: $tooltip-arrow-size solid $color;
         border-bottom: $tooltip-arrow-size solid transparent;
-        left: calc(100% + #{$tooltip-arrow-margin});
     } @else if ($direction == "is-left") {
         border-top: $tooltip-arrow-size solid transparent;
         border-bottom: $tooltip-arrow-size solid transparent;
         border-left: $tooltip-arrow-size solid $color;
-        right: calc(100% + #{$tooltip-arrow-margin});
     }
 }
 
 @mixin tooltip($direction) {
     &.#{$direction} {
-        &:before,
-        &:after {
+        .tooltip-content {
             @if ($direction == "is-top") {
                 top: auto;
                 right: auto;
@@ -61,16 +56,47 @@ $tooltip-multiline-sizes: (
                 transform: translateY(-50%);
             }
         }
+        .tooltip-content::before {
+            @if ($direction == "is-bottom") {
+                top: auto;
+                right: auto;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+            } @else if ($direction == "is-top") {
+                top: 100%;
+                right: auto;
+                bottom: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            } @else if ($direction == "is-left") {
+                top: 50%;
+                right: auto;
+                bottom: auto;
+                left: 100%;
+                transform: translateY(-50%);
+            } @else if ($direction == "is-right") {
+                top: 50%;
+                right: 100%;
+                bottom: auto;
+                left: auto;
+                transform: translateY(-50%);
+            }
+        }
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
-            &.is-#{$name}:before {
-                @include tooltip-arrow($direction, $color)
+            &.is-#{$name} {
+                .tooltip-content::before {
+                    @include tooltip-arrow($direction, $color)
+                }
             }
         }
         &.is-multiline {
             @each $name, $size in $tooltip-multiline-sizes {
-                &.is-#{$name}:after {
-                    width: $size;
+                &.is-#{$name} {
+                    .tooltip-content {
+                        width: $size;
+                    }
                 }
             }
         }
@@ -85,19 +111,7 @@ $tooltip-multiline-sizes: (
     @include tooltip("is-left");
     position: relative;
     display: inline-flex;
-    &:before,
-    &:after {
-        position: absolute;
-        content: "";
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-    &:before {
-        z-index: 39;
-    }
-    &:after {
-        content: attr(data-label);
+    .tooltip-content {
         width: auto;
         padding: 0.35rem 0.75rem;
         border-radius: $radius-large;
@@ -106,49 +120,48 @@ $tooltip-multiline-sizes: (
         box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
         z-index: 38;
         white-space: nowrap;
+        position: absolute;
     }
-    &:not([data-label=""]):hover:before,
-    &:not([data-label=""]):hover:after {
-        transition-delay: inherit;
-        opacity: 1;
-        visibility: visible;
+    .tooltip-content::before {
+        position: absolute;
+        content: "";
+        pointer-events: none;
+        z-index: 39;
     }
     // Modifiers
     @each $name, $pair in $colors {
         $color: nth($pair, 1);
         $color-invert: nth($pair, 2);
-        &.is-#{$name}:after {
-            background: $color;
-            color: $color-invert;
+        &.is-#{$name} {
+            .tooltip-content {
+                background: $color;
+                color: $color-invert;
+            }
         }
     }
-    &:not([data-label=""]).is-always {
-        &:before,
-        &:after {
+    &.is-always {
+        .tooltip-content::before,
+        .tooltip-content {
             opacity: 1;
             visibility: visible;
         }
     }
     &.is-multiline {
-        &:after {
+        .tooltip-content {
             display: flex-block;
             text-align: center;
             white-space: normal;
         }
     }
     &.is-dashed {
-        border-bottom: 1px dashed $grey-light;
-        cursor: default;
-    }
-    &.is-square {
-        &:after {
-            border-radius: 0;
+        .tooltip-trigger {
+            border-bottom: 1px dashed $grey-light;
+            cursor: default;
         }
     }
-    &.is-animated {
-        &:before,
-        &:after {
-            transition: opacity $speed $easing, visibility $speed $easing;
+    &.is-square {
+        .tooltip-content {
+            border-radius: 0;
         }
     }
 }
