@@ -6,7 +6,7 @@
 
         <Example :component="ExCustom" :code="ExCustomCode" title="Custom content" vertical>
             <div class="tags has-addons">
-                <span class="tag is-success">Since</span>
+                <span class="tag is-success">New</span>
                 <span class="tag is-info">0.9.0</span>
             </div>
             <p>Use the <code>content</code> slot for complex content with HTML or components. Note it overrides the <code>label</code> prop.</p>

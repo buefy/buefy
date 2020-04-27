@@ -15,7 +15,7 @@
         <div
             ref="trigger"
             class="tooltip-trigger"
-            @click="onClick"
+            @click.prevent="onClick"
             @mouseenter="onHover"
             @focus.capture="onFocus"
             @mouseleave="close">
@@ -100,6 +100,13 @@ export default {
             return this.animated ? this.animation : undefined
         }
     },
+    watch: {
+        isActive(value) {
+            if (this.appendToBody) {
+                this.updateAppendToBody()
+            }
+        }
+    },
     methods: {
         updateAppendToBody() {
             const tooltip = this.$refs.tooltip
@@ -128,7 +135,7 @@ export default {
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
-                wrapper.style.zIndex = '99'
+                wrapper.style.zIndex = this.isActive ? '99' : '-1'
             }
         },
         onClick() {

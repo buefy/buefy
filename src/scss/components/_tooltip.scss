@@ -126,7 +126,11 @@ $tooltip-multiline-sizes: (
         position: absolute;
         content: "";
         pointer-events: none;
-        z-index: 39;
+        z-index: 39; 
+    }
+    .tooltip-trigger {
+        width: 100%;
+        z-index: 100;
     }
     // Modifiers
     @each $name, $pair in $colors {
