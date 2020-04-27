@@ -4,6 +4,14 @@
 
         <Example :component="ExStyles" :code="ExStylesCode" title="Styles" vertical/>
 
+        <Example :component="ExCustom" :code="ExCustomCode" title="Custom content" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.9.0</span>
+            </div>
+            <p>Use the <code>content</code> slot for complex content with HTML or components. Note it overrides the <code>label</code> prop.</p>
+        </Example>
+
         <Example :component="ExMultilined" :code="ExMultilinedCode" title="Multilined" vertical>
             <p>Well, it's not always <em>that</em> brief.</p>
         </Example>
@@ -25,6 +33,9 @@
     import ExStyles from './examples/ExStyles'
     import ExStylesCode from '!!raw-loader!./examples/ExStyles'
 
+    import ExCustom from './examples/ExCustom'
+    import ExCustomCode from '!!raw-loader!./examples/ExCustom'
+
     import ExMultilined from './examples/ExMultilined'
     import ExMultilinedCode from '!!raw-loader!./examples/ExMultilined'
 
@@ -40,10 +51,12 @@
                 ExStyles,
                 ExMultilined,
                 ExToggle,
+                ExCustom,
                 ExSimpleCode,
                 ExStylesCode,
                 ExMultilinedCode,
-                ExToggleCode
+                ExToggleCode,
+                ExCustomCode
             }
         }
     }

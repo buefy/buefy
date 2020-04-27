@@ -1,10 +1,10 @@
 <template>
     <span ref="tooltip" :class="rootClasses">
-        <transition :name="animation">
+        <transition :name="newAnimation">
             <div
                 v-show="active && (isActive || always)"
                 ref="content"
-                class="tooltip-content"
+                :class="['tooltip-content', contentClass]"
                 :style="style">
                 <template v-if="label">{{ label }}</template>
                 <template v-else-if="$slots.content">
@@ -15,8 +15,10 @@
         <div
             ref="trigger"
             class="tooltip-trigger"
-            @mouseenter="isActive = true"
-            @mouseleave="isActive = false">
+            @click="onClick"
+            @mouseenter="onHover"
+            @focus.capture="onFocus"
+            @mouseleave="close">
             <slot ref="slot" />
         </div>
     </span>
@@ -38,6 +40,7 @@ export default {
             default: () => config.defaultTooltipType
         },
         label: String,
+        delay: Number,
         position: {
             type: String,
             default: 'is-top',
@@ -50,6 +53,10 @@ export default {
                 ].indexOf(value) > -1
             }
         },
+        triggers: {
+            type: Array,
+            default: () => ['hover']
+        },
         always: Boolean,
         square: Boolean,
         dashed: Boolean,
@@ -59,9 +66,18 @@ export default {
             default: 'is-medium'
         },
         appendToBody: Boolean,
+        animated: {
+            type: Boolean,
+            default: true
+        },
         animation: {
             type: String,
             default: 'fade'
+        },
+        contentClass: String,
+        autoClose: {
+            type: [Array, Boolean],
+            default: true
         }
     },
     data() {
@@ -75,11 +91,13 @@ export default {
         rootClasses() {
             return ['b-tooltip', this.type, this.position, this.size, {
                 'is-square': this.square,
-                'is-animated': this.newAnimated,
                 'is-always': this.always,
                 'is-multiline': this.multilined,
                 'is-dashed': this.dashed
             }]
+        },
+        newAnimation() {
+            return this.animated ? this.animation : undefined
         }
     },
     methods: {
@@ -112,6 +130,74 @@ export default {
                 wrapper.style.left = `${left}px`
                 wrapper.style.zIndex = '99'
             }
+        },
+        onClick() {
+            if (this.triggers.indexOf('click') < 0) return
+            // if not active, toggle after clickOutside event
+            // this fixes toggling programmatic
+            this.$nextTick(() => {
+                setTimeout(() => this.open())
+            })
+        },
+        onHover() {
+            if (this.triggers.indexOf('hover') < 0) return
+            this.open()
+        },
+        onFocus() {
+            if (this.triggers.indexOf('focus') < 0) return
+            this.open()
+        },
+        open() {
+            if (this.delay) {
+                setTimeout(() => (this.isActive = true), this.delay)
+            } else {
+                this.isActive = true
+            }
+        },
+        close() {
+            if (typeof this.autoClose === 'boolean') {
+                this.isActive = !this.autoClose
+            }
+        },
+        /**
+        * Close tooltip if clicked outside.
+        */
+        clickedOutside(event) {
+            if (this.isActive) {
+                if (Array.isArray(this.autoClose)) {
+                    if (this.autoClose.indexOf('outside') >= 0) {
+                        if (!this.isInWhiteList(event.target)) this.isActive = false
+                    } else if (this.autoClose.indexOf('inside') >= 0) {
+                        if (this.isInWhiteList(event.target)) this.isActive = false
+                    }
+                }
+            }
+        },
+        /**
+         * Keypress event that is bound to the document
+         */
+        keyPress({ key }) {
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) {
+                if (Array.isArray(this.autoClose)) {
+                    if (this.autoClose.indexOf('escape') >= 0) this.isActive = false
+                }
+            }
+        },
+        /**
+        * White-listed items to not close when clicked.
+        */
+        isInWhiteList(el) {
+            if (el === this.$refs.content) return true
+            // All chidren from content
+            if (this.$refs.content !== undefined) {
+                const children = this.$refs.content.querySelectorAll('*')
+                for (const child of children) {
+                    if (el === child) {
+                        return true
+                    }
+                }
+            }
+            return false
         }
     },
     mounted() {
@@ -120,7 +206,17 @@ export default {
             this.updateAppendToBody()
         }
     },
+    created() {
+        if (typeof window !== 'undefined') {
+            document.addEventListener('click', this.clickedOutside)
+            document.addEventListener('keyup', this.keyPress)
+        }
+    },
     beforeDestroy() {
+        if (typeof window !== 'undefined') {
+            document.removeEventListener('click', this.clickedOutside)
+            document.removeEventListener('keyup', this.keyPress)
+        }
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
