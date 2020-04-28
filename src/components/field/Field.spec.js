@@ -91,7 +91,7 @@ describe('BField', () => {
             expect(wrapper.find('p.help').html()).toContain(message.join('\n'))
         })
 
-        it('given an object as message, it grabs the keys and joins them with new lines', () => {
+        it('given an object as message, it grabs the keys and joins them with newline characters', () => {
             const message = {
                 message1: 'Some string message 1',
                 message2: 'Some string message 2',
