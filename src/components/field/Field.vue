@@ -34,10 +34,8 @@
         </template>
         <p
             v-if="newMessage && !horizontal"
-            v-html="formattedMessage"
             class="help"
-            :class="newType"
-        />
+            :class="newType">{{ formattedMessage }}</p>
     </div>
 </template>
 
@@ -112,7 +110,7 @@ export default {
         },
         /**
         * Formatted message in case it's an array
-        * (each element is separated by <br> tag)
+        * (each element is separated by new line)
         */
         formattedMessage() {
             if (typeof this.newMessage === 'string') {
@@ -138,7 +136,7 @@ export default {
                         }
                     }
                 }
-                return messages.filter((m) => { if (m) return m }).join(' <br> ')
+                return messages.filter((m) => { if (m) return m }).join('\n')
             }
         },
         hasLabel() {

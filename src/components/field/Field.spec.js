@@ -78,7 +78,7 @@ describe('BField', () => {
             expect(wrapper.find('.field').find('p.help').text()).toEqual(message)
         })
 
-        it('given an array of string as message, it joins the messages with line breaks', () => {
+        it('given an array of string as message, it joins the messages with newline characters', () => {
             const message = [
                 'Some string message 1',
                 'Some string message 2',
@@ -88,10 +88,10 @@ describe('BField', () => {
             ]
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
-            expect(wrapper.find('p.help').html()).toContain(message.join(' <br> '))
+            expect(wrapper.find('p.help').html()).toContain(message.join('\n'))
         })
 
-        it('given an object as message, it grabs the keys and joins them with line breaks', () => {
+        it('given an object as message, it grabs the keys and joins them with new lines', () => {
             const message = {
                 message1: 'Some string message 1',
                 message2: 'Some string message 2',
@@ -101,11 +101,11 @@ describe('BField', () => {
             }
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
-            expect(wrapper.find('p.help').html()).toContain(Object.keys(message).join(' <br> '))
+            expect(wrapper.find('p.help').html()).toContain(Object.keys(message).join('\n'))
         })
 
         it(`given an array of string with an object as one of the elements as message, it grabs the
-        keys of the object and joins them with the messages with line breaks`, () => {
+        keys of the object and joins them with the messages with newline characters`, () => {
             const message = [
                 'Some string message 1',
                 {
@@ -123,7 +123,7 @@ describe('BField', () => {
                 'message3',
                 message[2],
                 message[3]
-            ].join(' <br> '))
+            ].join('\n'))
         })
     })
 
