@@ -64,6 +64,10 @@ $floating-in-height: 3.25em !default;
             }
         }
     }
+
+    .help {
+        white-space: pre-wrap;
+    }
 }
 
 .field {
@@ -268,7 +272,6 @@ $floating-in-height: 3.25em !default;
     .help.counter {
         float: right;
         margin-left: 0.5em;
-        white-space: pre-wrap;
     }
     .icon {
         &.is-clickable {
