@@ -26,5 +26,9 @@ export default [
     {
         name: '<code>$steps-vertical-padding</code>',
         default: '<code>1em 0</code>'
+    },
+    {
+        name: '<code>$steps-mobile-max-width</code>',
+        default: '<code>$tablet</code>'
     }
 ]
