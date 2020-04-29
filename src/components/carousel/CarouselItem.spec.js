@@ -6,9 +6,12 @@ const BCarousel = {
     template: '<b-carousel-stub></b-carousel-stub>',
     data() {
         return {
-            carouselItems: [],
+            childItems: [],
             _isCarousel: true
         }
+    },
+    methods: {
+        refreshSlots: jest.fn()
     }
 }
 
