@@ -1,51 +1,54 @@
 <template>
     <b-table :data="data">
-        <template slot-scope="props">
-            <b-table-column field="id" label="ID" width="40" numeric>
-                <template slot="header" slot-scope="{ column }">
-                    <b-tooltip append-to-body dashed>
-                        <template v-slot:content>
-                            {{ column.label }}
-                        </template>
-                        {{ column.label }}
-                    </b-tooltip>
-                </template> 
+
+        <b-table-column field="id" label="ID" width="40" numeric>
+            <template v-slot:header="{ column }">
+                <b-tooltip :label="column.label" append-to-body dashed>
+                    {{ column.label }}
+                </b-tooltip>
+            </template>
+            <template v-slot="props">
                 {{ props.row.id }}
-            </b-table-column>
+            </template>
+        </b-table-column>
 
-            <b-table-column field="user.first_name" label="First Name">
-                <template slot="header" slot-scope="{ column }">
-                    <b-tooltip :label="column.label" append-to-body dashed>
-                        {{ column.label }}
-                    </b-tooltip>
-                </template>
+        <b-table-column field="user.first_name" label="First Name">
+            <template v-slot:header="{ column }">
+                <b-tooltip :label="column.label" append-to-body dashed>
+                    {{ column.label }}
+                </b-tooltip>
+            </template>
+            <template v-slot="props">
                 {{ props.row.first_name }}
-            </b-table-column>
+            </template>
+        </b-table-column>
 
-            <b-table-column field="user.last_name" label="Last Name">
-                <template slot="header" slot-scope="{ column }">
-                    <b-tooltip :label="column.label" append-to-body dashed>
-                        {{ column.label }}
-                    </b-tooltip>
-                </template>
+        <b-table-column field="user.last_name" label="Last Name">
+            <template v-slot:header="{ column }">
+                <b-tooltip :label="column.label" append-to-body dashed>
+                    {{ column.label }}
+                </b-tooltip>
+            </template>
+            <template v-slot="props">
                 {{ props.row.last_name }}
-            </b-table-column>
+            </template>
+        </b-table-column>
 
-            <b-table-column field="date" label="Date" centered>
-                <span class="tag is-success">
-                    {{ new Date(props.row.date).toLocaleDateString() }}
-                </span>
-            </b-table-column>
+        <b-table-column field="date" label="Date" centered v-slot="props">
+            <span class="tag is-success">
+                {{ new Date(props.row.date).toLocaleDateString() }}
+            </span>
+        </b-table-column>
 
-            <b-table-column label="Gender">
-                <span>
-                    <b-icon pack="fas"
-                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                    </b-icon>
-                    {{ props.row.gender }}
-                </span>
-            </b-table-column>
-        </template>
+        <b-table-column label="Gender" v-slot="props">
+            <span>
+                <b-icon pack="fas"
+                    :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                </b-icon>
+                {{ props.row.gender }}
+            </span>
+        </b-table-column>
+
     </b-table>
 </template>
 

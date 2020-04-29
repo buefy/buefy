@@ -1,13 +1,6 @@
-<template>
-    <td
-        v-if="visible"
-        :class="rootClasses"
-        :data-label="label">
-        <slot/>
-    </td>
-</template>
-
 <script>
+import { toCssWidth } from '../../utils/helpers'
+
 export default {
     name: 'BTableColumn',
     props: {
@@ -29,8 +22,7 @@ export default {
         sticky: Boolean,
         headerSelectable: Boolean,
         headerClass: String,
-        cellClass: String,
-        internal: Boolean // Used internally by Table
+        cellClass: String
     },
     data() {
         return {
@@ -46,7 +38,14 @@ export default {
                 'is-sticky': this.sticky
             }]
         },
-
+        style() {
+            return {
+                width: toCssWidth(this.width)
+            }
+        },
+        hasDefaultSlot() {
+            return !!this.$scopedSlots.default
+        },
         /**
          * Return if column header is un-selectable
          */
@@ -54,30 +53,16 @@ export default {
             return !this.headerSelectable && this.sortable
         }
     },
-    beforeMount() {
+    created() {
         if (!this.$parent.$data._isTable) {
             this.$destroy()
             throw new Error('You should wrap bTableColumn on a bTable')
         }
-
-        if (this.internal) return
-
-        // Since we're using scoped prop the columns gonna be multiplied,
-        // this finds when to stop based on the newKey property.
-        const repeated = this.$parent.newColumns.some(
-            (column) => column.newKey === this.newKey)
-        !repeated && this.$parent.newColumns.push(this)
+        this.$parent.refreshSlots()
     },
-    beforeDestroy() {
-        if (!this.$parent.visibleData.length) return
-        if (this.$parent.newColumns.length !== 1) return
-        if (this.$parent.newColumns.length) {
-            const index = this.$parent.newColumns.map(
-                (column) => column.newKey).indexOf(this.newKey)
-            if (index >= 0) {
-                this.$parent.newColumns.splice(index, 1)
-            }
-        }
+    render(createElement) {
+        // renderless
+        return null
     }
 }
 </script>
