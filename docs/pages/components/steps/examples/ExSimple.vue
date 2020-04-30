@@ -45,6 +45,13 @@
                     <option value="left">Left</option>
                 </b-select>
             </b-field>
+            <b-field label="Mobile mode" class="is-hidden-desktop">
+                <b-select v-model="mobileMode">
+                    <option :value="null">-</option>
+                    <option value="minimalist">Minimalist</option>
+                    <option value="compact">Compact</option>
+                </b-select>
+            </b-field>
         </b-field>
         <b-steps
             v-model="activeStep"
@@ -53,7 +60,8 @@
             :has-navigation="hasNavigation"
             :icon-prev="prevIcon"
             :icon-next="nextIcon"
-            :label-position="labelPosition">
+            :label-position="labelPosition"
+            :mobile-mode="mobileMode">
             <b-step-item step="1" label="Account" :clickable="isStepsClickable">
                 <h1 class="title has-text-centered">Account</h1>
                 Lorem ipsum dolor sit amet.
@@ -118,7 +126,9 @@
 
                 prevIcon: 'chevron-left',
                 nextIcon: 'chevron-right',
-                labelPosition: 'bottom'
+                labelPosition: 'bottom',
+
+                mobileMode: 'minimalist'
             }
         }
     }

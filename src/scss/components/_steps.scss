@@ -12,6 +12,7 @@ $steps-previous-color: $primary !default;
 $steps-active-color: $primary !default;
 $steps-divider-height: .2em !default;
 $steps-vertical-padding: 1em 0 !default;
+$steps-mobile-max-width: $tablet !default;
 
 @mixin steps-size($size) {
     .steps {
@@ -50,7 +51,7 @@ $steps-vertical-padding: 1em 0 !default;
                     }
                 }
 
-                @include until($tablet) {
+                @include until($steps-mobile-max-width) {
                     &::before, &::after, &:not(:first-child)::before {
                         top: #{$size};
                     }
@@ -417,26 +418,39 @@ $steps-vertical-padding: 1em 0 !default;
     }
     &:not(.is-vertical) {
         .steps {
-            .step-items {
-                .step-item{
-                    @include until($tablet) {
-                        &:not(.is-active) {
-                            display: none;
-                        }
+            @include until($steps-mobile-max-width) {
+                &.mobile-minimalist {
+                    .step-items {
+                        .step-item {
+                            &:not(.is-active) {
+                                display: none;
+                            }
 
-                        &::before, &::after, &:not(:first-child)::before {
-                            // This will contain the divider
-                            content: " ";
-                            display: block;
-                            position: absolute;
-                            height: $steps-divider-height;
-                            width: 25%;
-                            bottom: 0;
-                            left: 50%;
+                            &::before, &::after, &:not(:first-child)::before {
+                                // This will contain the divider
+                                content: " ";
+                                display: block;
+                                position: absolute;
+                                height: $steps-divider-height;
+                                width: 25%;
+                                bottom: 0;
+                                left: 50%;
+                            }
+                            &::before, &:not(:first-child)::before {
+                                right: 50%;
+                                left: auto;
+                            }
                         }
-                        &::before, &:not(:first-child)::before {
-                            right: 50%;
-                            left: auto;
+                    }
+                }
+                &.mobile-compact {
+                    .step-items {
+                        .step-item {
+                            &:not(.is-active) {
+                                .step-details {
+                                    display: none;
+                                }
+                            }
                         }
                     }
                 }
