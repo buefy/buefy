@@ -11,7 +11,7 @@ export default [
             },
             {
                 name: '<code>columns</code>',
-                description: 'Table columns, you can also add <code>renderHtml: true</code> on each column object',
+                description: 'Table columns',
                 type: 'Array<Object> (same as TableColumns props)',
                 values: '—',
                 default: '—'
@@ -350,6 +350,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>show-header</code>',
+                description: 'Show table column header',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>aria-next-label</code>',

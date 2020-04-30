@@ -57,7 +57,7 @@
                 :tabindex="!focusable ? false : 0"
                 @keydown.self.prevent.up="pressedArrow(-1)"
                 @keydown.self.prevent.down="pressedArrow(1)">
-                <thead v-if="newColumns.length">
+                <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
@@ -512,7 +512,11 @@ export default {
             type: String,
             default: ''
         },
-        cardLayout: Boolean
+        cardLayout: Boolean,
+        showHeader: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
