@@ -33,7 +33,8 @@
                 v-trap-focus="trapFocus">
                 <div
                     class="dropdown-content"
-                    :role="ariaRole">
+                    :role="ariaRole"
+                    :style="contentStyle">
                     <slot/>
                 </div>
             </div>
@@ -61,6 +62,11 @@ export default {
         disabled: Boolean,
         hoverable: Boolean,
         inline: Boolean,
+        scrollable: Boolean,
+        maxHeight: {
+            type: [String, Number],
+            default: 200
+        },
         position: {
             type: String,
             validator(value) {
@@ -142,6 +148,14 @@ export default {
                     ? DEFAULT_CLOSE_OPTIONS
                     : []
                 : this.canClose
+        },
+        contentStyle() {
+            return {
+                maxHeight: this.scrollable
+                    ? this.maxHeight === undefined
+                        ? null : (isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px') : null,
+                overflow: this.scrollable ? 'auto' : null
+            }
         }
     },
     watch: {

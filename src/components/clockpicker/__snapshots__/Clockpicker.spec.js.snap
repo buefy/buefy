@@ -2,7 +2,7 @@
 
 exports[`BClockpicker render correctly 1`] = `
 <div class="b-clockpicker control is-primary">
-    <b-dropdown-stub mobilemodal="true" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true">
+    <b-dropdown-stub maxheight="200" mobilemodal="true" animation="fade" closeonclick="true" canclose="true" appendtobodycopyparent="true">
         <b-input-stub autocomplete="off" usehtml5validation="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
         <div custom="" class="card">
             <!---->
