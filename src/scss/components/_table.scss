@@ -85,10 +85,6 @@ $table-sticky-header-height: 300px !default;
         }
     }
 
-    .sort-icon.icon.is-desc {
-        transform: rotate(180deg) translateY(-50%) !important;
-    }
-
     .table {
         width: 100%;
         border: 1px solid transparent;
@@ -127,15 +123,6 @@ $table-sticky-header-height: 300px !default;
             &.is-sortable,
             &.is-sortable .th-wrap {
                 cursor: pointer;
-
-                .is-relative {
-                    position: absolute;
-                }
-            }
-            .sort-icon, .multi-sort-cancel-icon {
-                position: absolute;
-                bottom: 50%;
-                transform: translateY(50%);
             }
             .multi-sort-cancel-icon {
                 margin-left: 10px;
@@ -177,7 +164,7 @@ $table-sticky-header-height: 300px !default;
         }
         tr.detail {
             box-shadow: inset 0 1px 3px $grey-lighter;
-            background: $scheme-main-bis;
+            background: $white-bis;
             .detail-container {
                 padding: 1rem;
             }
@@ -240,7 +227,7 @@ $table-sticky-header-height: 300px !default;
             @include table-cards
         }
     }
-
+    
     &.is-loading {
         position: relative;
         pointer-events: none;

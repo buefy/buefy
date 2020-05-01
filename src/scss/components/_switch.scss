@@ -79,7 +79,7 @@ $switch-active-background-color: $primary !default;
         }
     }
     .control-label {
-        padding-left: $control-padding-horizontal;
+        padding-left: 0.5em;
     }
     &:hover {
         input[type=checkbox] + .check {

@@ -82,8 +82,9 @@ export default {
         /**
         * Keypress event that is bound to the document.
         */
-        keyPress({ key }) {
-            if (key === 'Escape' || key === 'Esc') this.cancel()
+        keyPress(event) {
+            // Esc key
+            if (event.keyCode === 27) this.cancel()
         }
     },
     created() {

@@ -125,10 +125,6 @@ export function createAbsoluteElement(el) {
     return root
 }
 
-export function isVueComponent(c) {
-    return c && c._isVue
-}
-
 /**
  * Escape regex characters
  * http://stackoverflow.com/a/6969486
@@ -161,8 +157,4 @@ export function createNewEvent(eventName) {
         event.initEvent(eventName, true, true)
     }
     return event
-}
-
-export function toCssWidth(width) {
-    return width === undefined ? null : (isNaN(width) ? width : width + 'px')
 }

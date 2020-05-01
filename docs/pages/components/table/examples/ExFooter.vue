@@ -7,26 +7,27 @@
         </b-field>
         <b-table :data="tableDataSimple">
 
-            <b-table-column label="ID" width="40" numeric v-slot="props">
-                {{ props.row.id }}
-            </b-table-column>
+            <template slot-scope="props">
+                <b-table-column label="ID" width="40" numeric>
+                    {{ props.row.id }}
+                </b-table-column>
 
-            <b-table-column label="First Name" v-slot="props">
-                {{ props.row.first_name }}
-            </b-table-column>
+                <b-table-column label="First Name">
+                    {{ props.row.first_name }}
+                </b-table-column>
 
-            <b-table-column label="Last Name" v-slot="props">
-                {{ props.row.last_name }}
-            </b-table-column>
+                <b-table-column label="Last Name">
+                    {{ props.row.last_name }}
+                </b-table-column>
 
-            <b-table-column label="Date" centered v-slot="props">
-                {{ new Date(props.row.date).toLocaleDateString() }}
-            </b-table-column>
+                <b-table-column label="Date" centered>
+                    {{ new Date(props.row.date).toLocaleDateString() }}
+                </b-table-column>
 
-            <b-table-column label="Gender" v-slot="props">
-                {{ props.row.gender }}
-            </b-table-column>
-
+                <b-table-column label="Gender">
+                    {{ props.row.gender }}
+                </b-table-column>
+            </template>
 
             <template slot="footer" v-if="!isCustom">
                 <div class="has-text-right">

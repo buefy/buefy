@@ -240,8 +240,9 @@ export default {
         /**
          * Keypress event that is bound to the document
          */
-        keyPress({ key }) {
-            if (this.isActive && (key === 'Escape' || key === 'Esc')) {
+        keyPress(event) {
+            // Esc key
+            if (this.isActive && event.keyCode === 27) {
                 if (this.cancelOptions.indexOf('escape') < 0) return
                 this.isActive = false
             }

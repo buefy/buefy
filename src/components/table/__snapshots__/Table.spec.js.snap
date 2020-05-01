@@ -8,7 +8,6 @@ exports[`BTable render correctly 1`] = `
         <table class="table">
             <!---->
             <tbody>
-                <!---->
                 <tr class="is-empty">
                     <td colspan="0"></td>
                 </tr>

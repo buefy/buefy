@@ -4,33 +4,25 @@ import BIcon from '@components/icon/Icon'
 
 let wrapper
 
-const mockCarouselItems = (active = false) => {
-    return {
-        name: 'BCarouselItem',
-        template: '<div></div>',
-        data() {
-            return {
-                _isCarouselItem: true,
-                isActive: active
-            }
-        },
-        methods: {
-            status: jest.fn()
-        }
-    }
-}
-
 describe('BCarousel', () => {
     beforeEach(() => {
         wrapper = shallowMount(BCarousel, {
-            Component: BIcon,
-            stub: ['b-carousel-item'],
-            slots: {
-                default: [
-                    mockCarouselItems(true),
-                    mockCarouselItems()
-                ]
-            }
+            Component: BIcon
+        })
+        wrapper.setData({
+            carouselItems: [
+                {
+                    isActive: true,
+                    status: jest.fn(),
+                    $slots: {}
+                },
+                {
+                    isActive: false,
+                    clickable: false,
+                    status: jest.fn(),
+                    $slots: {}
+                }
+            ]
         })
     })
 
@@ -46,11 +38,11 @@ describe('BCarousel', () => {
     it('reacts when value changes', () => {
         let value = 1
         wrapper.setProps({ value })
-        expect(wrapper.vm.activeChild).toBe(value)
+        expect(wrapper.vm.activeItem).toBe(value)
 
         value = 0
         wrapper.setProps({ value })
-        expect(wrapper.vm.activeChild).toBe(value)
+        expect(wrapper.vm.activeItem).toBe(value)
     })
 
     it('reacts when autoplay changes', () => {
@@ -100,21 +92,21 @@ describe('BCarousel', () => {
         wrapper.setProps({ value: last, repeat })
 
         wrapper.vm.prev()
-        expect(wrapper.vm.activeChild).toBe(first)
+        expect(wrapper.vm.activeItem).toBe(first)
         wrapper.vm.prev()
-        expect(wrapper.vm.activeChild).toBe(first) // Wont go below 0 without repeat prop
+        expect(wrapper.vm.activeItem).toBe(first) // Wont go below 0 without repeat prop
         repeat = true
         wrapper.setProps({ repeat })
         wrapper.vm.prev()
-        expect(wrapper.vm.activeChild).toBe(last) // Will be set to the last value using repeat
+        expect(wrapper.vm.activeItem).toBe(last) // Will be set to the last value using repeat
 
         wrapper.vm.next()
-        expect(wrapper.vm.activeChild).toBe(first) // Navigate to the first value with repeat
+        expect(wrapper.vm.activeItem).toBe(first) // Navigate to the first value with repeat
         wrapper.vm.next()
-        expect(wrapper.vm.activeChild).toBe(last)
+        expect(wrapper.vm.activeItem).toBe(last)
         repeat = false
         wrapper.setProps({ repeat })
         wrapper.vm.next()
-        expect(wrapper.vm.activeChild).toBe(last) // Wont go above last when not using repeat
+        expect(wrapper.vm.activeItem).toBe(last) // Wont go above last when not using repeat
     })
 })

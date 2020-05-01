@@ -1,8 +1,5 @@
 <template>
     <div class="b-table" :class="rooClasses">
-
-        <slot />
-
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
@@ -57,7 +54,7 @@
                 :tabindex="!focusable ? false : 0"
                 @keydown.self.prevent.up="pressedArrow(-1)"
                 @keydown.self.prevent.down="pressedArrow(1)">
-                <thead v-if="newColumns.length && showHeader">
+                <thead v-if="newColumns.length">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
@@ -75,9 +72,12 @@
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky,
-                                'is-unselectable': column.isHeaderUnSelectable
+                                'is-unselectable': !column.headerSelectable
                             }]"
-                            :style="column.style"
+                            :style="{
+                                width: column.width === undefined ? null :
+                                (isNaN(column.width) ? column.width : column.width + 'px')
+                            }"
                             @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
@@ -88,51 +88,55 @@
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.header">
                                     <b-slot-component
                                         :component="column"
-                                        scoped
+                                        :scoped="true"
                                         name="header"
                                         tag="span"
                                         :props="{ column, index }"
                                     />
                                 </template>
-                                <template v-else>
-                                    <span class="is-relative">
-                                        {{ column.label }}
-                                        <template
-                                            v-if="sortMultiple &&
-                                                sortMultipleDataComputed &&
-                                                sortMultipleDataComputed.length > 0 &&
-                                                sortMultipleDataComputed.filter(i =>
-                                            i.field === column.field).length > 0">
-                                            <b-icon
-                                                :icon="sortIcon"
-                                                :pack="iconPack"
-                                                both
-                                                :size="sortIconSize"
-                                                :class="{
-                                                    'is-desc': sortMultipleDataComputed.filter(i =>
-                                                i.field === column.field)[0].order === 'desc'}"
-                                            />
-                                            {{ findIndexOfSortData(column) }}
-                                            <button
-                                                class="delete is-small multi-sort-cancel-icon"
-                                                type="button"
-                                                @click.stop="removeSortingPriority(column)"/>
-                                        </template>
-
-                                        <b-icon
-                                            v-else
-                                            :icon="sortIcon"
-                                            :pack="iconPack"
-                                            both
-                                            :size="sortIconSize"
-                                            class="sort-icon"
-                                            :class="{
-                                                'is-desc': !isAsc,
-                                                'is-invisible': currentSortColumn !== column
-                                            }"
-                                        />
-                                    </span>
+                                <template v-else-if="$scopedSlots.header">
+                                    <slot
+                                        name="header"
+                                        :column="column"
+                                        :index="index"
+                                    />
                                 </template>
+                                <template v-else>{{ column.label }}</template>
+
+                                <template
+                                    v-if="sortMultiple &&
+                                        sortMultipleDataComputed &&
+                                        sortMultipleDataComputed.length > 0 &&
+                                        sortMultipleDataComputed.filter(i =>
+                                    i.field === column.field).length > 0">
+                                    <b-icon
+                                        :icon="sortIcon"
+                                        :pack="iconPack"
+                                        both
+                                        :size="sortIconSize"
+                                        :class="{
+                                            'is-desc': sortMultipleDataComputed.filter(i =>
+                                                i.field === column.field)[0].order === 'desc'
+                                        }"
+                                    />
+                                    {{ findIndexOfSortData(column) }}
+                                    <button
+                                        class="delete is-small multi-sort-cancel-icon"
+                                        type="button"
+                                        @click.stop="removeSortingPriority(column)"/>
+                                </template>
+
+                                <b-icon
+                                    v-else-if="column.sortable && !sortMultiple"
+                                    :icon="sortIcon"
+                                    :pack="iconPack"
+                                    both
+                                    :size="sortIconSize"
+                                    :class="{
+                                        'is-desc': !isAsc,
+                                        'is-invisible': currentSortColumn !== column
+                                    }"
+                                />
                             </div>
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
@@ -150,7 +154,9 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
-                            :style="column.style">
+                            :style="{
+                                width: column.width === undefined ? null
+                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -162,10 +168,17 @@
                                 >
                                     <b-slot-component
                                         :component="column"
-                                        scoped
+                                        :scoped="true"
                                         name="subheading"
                                         tag="span"
                                         :props="{ column, index }"
+                                    />
+                                </template>
+                                <template v-else-if="$scopedSlots.subheading">
+                                    <slot
+                                        name="subheading"
+                                        :column="column"
+                                        :index="index"
                                     />
                                 </template>
                                 <template v-else>{{ column.subheading }}</template>
@@ -179,7 +192,9 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
-                            :style="column.style">
+                            :style="{
+                                width: column.width === undefined ? null
+                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
                                     <slot
@@ -199,7 +214,7 @@
                         <th v-if="checkable && checkboxPosition === 'right'" />
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="visibleData.length">
                     <template v-for="(row, index) in visibleData">
                         <tr
                             :key="customRowKey ? row[customRowKey] : index"
@@ -245,21 +260,25 @@
                                 />
                             </td>
 
-                            <template v-for="(column, index) in visibleColumns">
-
-                                <template v-if="column.$scopedSlots && column.$scopedSlots.default">
-                                    <b-slot-component
-                                        :key="(column.customKey || column.label) + index"
-                                        :component="column"
-                                        scoped
-                                        name="default"
-                                        tag="td"
-                                        :class="column.rootClasses"
-                                        :data-label="column.label"
-                                        :props="{ row, column, index }"
+                            <slot
+                                v-if="$scopedSlots.default"
+                                :row="row"
+                                :index="index"
+                            />
+                            <template v-else>
+                                <BTableColumn
+                                    v-for="column in newColumns"
+                                    v-bind="column"
+                                    :key="column.customKey || column.label"
+                                    internal>
+                                    <span
+                                        v-if="column.renderHtml"
+                                        v-html="getValueByPath(row, column.field)"
                                     />
-                                </template>
-
+                                    <template v-else>
+                                        {{ getValueByPath(row, column.field) }}
+                                    </template>
+                                </BTableColumn>
                             </template>
 
                             <td
@@ -273,9 +292,10 @@
                             </td>
                         </tr>
 
+                        <!-- Do not add `key` here (breaks details) -->
+                        <!-- eslint-disable-next-line -->
                         <tr
                             v-if="isActiveDetailRow(row)"
-                            :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -293,19 +313,14 @@
                             :index="index"
                         />
                     </template>
-
-                    <slot v-if="loading" name="loading"/>
-
-                    <tr
-                        v-if="!visibleData.length"
-                        class="is-empty">
+                </tbody>
+                <tbody v-else>
+                    <tr class="is-empty">
                         <td :colspan="columnCount">
                             <slot name="empty"/>
                         </td>
                     </tr>
-
                 </tbody>
-
                 <tfoot v-if="$slots.footer !== undefined">
                     <tr class="table-footer">
                         <slot name="footer" v-if="hasCustomFooterSlot()"/>
@@ -347,7 +362,6 @@
 
 <script>
 import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
-import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -512,16 +526,13 @@ export default {
             type: String,
             default: ''
         },
-        cardLayout: Boolean,
-        showHeader: {
-            type: Boolean,
-            default: true
-        }
+        cardLayout: Boolean
     },
     data() {
         return {
             sortMultipleDataLocal: [],
             getValueByPath,
+            newColumns: [...this.columns],
             visibleDetailRows: this.openedDetailed,
             newData: this.data,
             newDataTotal: this.backendPagination ? this.total : this.data.length,
@@ -531,7 +542,6 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
-            defaultSlots: [],
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -561,7 +571,7 @@ export default {
         },
         rooClasses() {
             return {
-                'is-loading': this.loading && !this.$slots.loading
+                'is-loading': this.loading
             }
         },
 
@@ -668,35 +678,6 @@ export default {
             return this.newColumns.some((column) => {
                 return column.sticky
             })
-        },
-
-        newColumns() {
-            if (this.columns && this.columns.length) {
-                return this.columns.map((column) => {
-                    const TableColumnComponent = VueInstance.extend(TableColumn)
-                    const component = new TableColumnComponent(
-                        { parent: this, propsData: column }
-                    )
-                    component.$scopedSlots = {
-                        default: (props) => {
-                            const vnode = component.$createElement('span', {
-                                domProps: {
-                                    innerHTML: getValueByPath(props.row, column.field)
-                                }
-                            })
-                            return [vnode]
-                        }
-                    }
-
-                    return component
-                })
-            }
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isTableColumn)
-                .map((vnode) => vnode.componentInstance)
         }
     },
     watch: {
@@ -734,11 +715,13 @@ export default {
             this.newCheckedRows = [...rows]
         },
 
-        /*
+        columns(value) {
+            this.newColumns = [...value]
+        },
+
         newColumns(value) {
             this.checkSort()
         },
-        */
 
         filters: {
             handler(value) {
@@ -1069,9 +1052,9 @@ export default {
         },
 
         /**
-        * When the detailKey is defined we use the object[detailKey] as index.
-        * If not, use the object reference by default.
-        */
+            * When the detailKey is defined we use the object[detailKey] as index.
+            * If not, use the object reference by default.
+            */
         handleDetailKey(index) {
             const key = this.detailKey
             return !key.length || !index
@@ -1223,16 +1206,17 @@ export default {
         */
         handleDragLeave(event, row, index) {
             this.$emit('dragleave', {event, row, index})
-        },
-
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
         }
     },
+
     mounted() {
-        this.refreshSlots()
         this.checkPredefinedDetailedRows()
         this.checkSort()
+    },
+
+    beforeDestroy() {
+        this.newData = []
+        this.newColumns = []
     }
 }
 </script>

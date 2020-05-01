@@ -98,15 +98,6 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>mobile mode</code>',
-                description: 'How Steps will be displayed for mobile user',
-                type: 'String',
-                values: `<code>minimalist</code>: Only the active Step is displayed,
-                    <code>compact</code>: Step label is displayed only for the active,
-                    <code>null</code>: Will keep the same behavior as desktop`,
-                default: '<code>minimalist</code>'
-            },
-            {
                 name: '<code>aria-page-label</code>',
                 description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
                 type: 'String',

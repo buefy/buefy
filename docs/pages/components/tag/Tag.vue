@@ -15,8 +15,8 @@
             <p>Combine with field to group attached tags.</p>
         </Example>
 
-        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes and types" vertical>
-            <p>Two additional sizes. Many colors with light variant.</p>
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical>
+            <p>Two additional sizes.</p>
         </Example>
 
         <ApiView :data="api"/>

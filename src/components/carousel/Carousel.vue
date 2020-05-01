@@ -8,9 +8,9 @@
             v-if="progress"
             class="progress"
             :class="progressType"
-            :value="activeChild"
-            :max="childItems.length - 1">
-            {{ childItems.length - 1 }}
+            :value="activeItem"
+            :max="carouselItems.length - 1">
+            {{ carouselItems.length - 1 }}
         </progress>
         <div
             class="carousel-items"
@@ -32,7 +32,7 @@
                     :size="iconSize"
                     both />
                 <b-icon
-                    v-if="checkArrow(childItems.length - 1)"
+                    v-if="checkArrow(carouselItems.length - 1)"
                     class="has-icons-right"
                     @click.native.prevent="next"
                     :pack="iconPack"
@@ -52,8 +52,8 @@
         </div>
         <template v-if="withCarouselList && !indicator">
             <slot
-                :active="activeChild"
-                :switch="changeActive"
+                :active="activeItem"
+                :switch="changeItem"
                 name="list"/>
         </template>
         <div
@@ -61,9 +61,9 @@
             class="carousel-indicator"
             :class="indicatorClasses">
             <a
-                v-for="(item, index) in childItems"
+                v-for="(item, index) in carouselItems"
                 class="indicator-item"
-                :class="{'is-active': index === activeChild}"
+                :class="{'is-active': index === activeItem}"
                 @mouseover="modeChange('hover', index)"
                 @click="modeChange('click', index)"
                 :key="index">
@@ -191,8 +191,8 @@ export default {
     data() {
         return {
             _isCarousel: true,
-            activeChild: this.value || 0,
-            defaultSlots: [],
+            activeItem: this.value,
+            carouselItems: [],
             isPause: false,
             dragX: 0,
             timer: null
@@ -209,14 +209,6 @@ export default {
                 this.indicatorCustom && this.indicatorCustomSize,
                 this.indicatorInside && this.indicatorPosition
             ]
-        },
-        childItems() {
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isCarouselItem)
-                .map((vnode) => vnode.componentInstance)
         }
     },
     watch: {
@@ -224,29 +216,18 @@ export default {
          * When v-model is changed set the new active item.
          */
         value(value) {
-            if (value < this.activeChild) {
-                this.changeActive(value)
+            if (value < this.activeItem) {
+                this.changeItem(value)
             } else {
-                this.changeActive(value, false)
+                this.changeItem(value, false)
             }
         },
         /**
          * When carousel-items are updated, set active one.
          */
-        childItems() {
-            if (this.activeChild < this.childItems.length) {
-                let previous = this.activeChild
-                this.childItems.map((child, idx) => {
-                    if (child.isActive) {
-                        previous = idx
-                        if (previous < this.childItems.length) {
-                            this.childItems[previous].isActive = false
-                        }
-                    }
-                })
-                this.childItems[this.activeChild].isActive = true
-            } else if (this.activeChild > 0) {
-                this.changeActive(this.activeChild - 1)
+        carouselItems() {
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].isActive = true
             }
         },
         /**
@@ -257,15 +238,11 @@ export default {
         }
     },
     methods: {
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-
         startTimer() {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                if (!this.repeat && this.activeChild === this.childItems.length - 1) {
+                if (!this.repeat && this.activeItem === this.carouselItems.length - 1) {
                     this.pauseTimer()
                 } else {
                     this.next()
@@ -288,45 +265,43 @@ export default {
          * Change the active item and emit change event.
          * action only for animated slide, there true = next, false = prev
          */
-        changeActive(newIndex, action = true) {
-            if (this.activeChild === newIndex) return
+        changeItem(newIndex, action = true) {
+            if (this.activeItem === newIndex) return
 
-            if (newIndex > this.childItems.length) throw new Error('The index you trying to set is bigger than the childs length')
-
-            if (this.activeChild < this.childItems.length) {
-                this.childItems[this.activeChild].status(false, action)
+            if (this.activeItem < this.carouselItems.length) {
+                this.carouselItems[this.activeItem].status(false, action)
             }
-            this.childItems[newIndex].status(true, action)
-            this.activeChild = newIndex
+            this.carouselItems[newIndex].status(true, action)
+            this.activeItem = newIndex
             this.$emit('change', newIndex)
         },
         // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
                 this.$emit('input', value)
-                return value < this.activeChild
-                    ? this.changeActive(value)
-                    : this.changeActive(value, false)
+                return value < this.activeItem
+                    ? this.changeItem(value)
+                    : this.changeItem(value, false)
             }
         },
         prev() {
-            if (this.activeChild === 0) {
-                if (this.repeat) this.changeActive(this.childItems.length - 1)
+            if (this.activeItem === 0) {
+                if (this.repeat) this.changeItem(this.carouselItems.length - 1)
             } else {
-                this.changeActive(this.activeChild - 1)
+                this.changeItem(this.activeItem - 1)
             }
         },
         next() {
-            if (this.activeChild === this.childItems.length - 1) {
-                if (this.repeat) this.changeActive(0, false)
+            if (this.activeItem === this.carouselItems.length - 1) {
+                if (this.repeat) this.changeItem(0, false)
             } else {
-                this.changeActive(this.activeChild + 1, false)
+                this.changeItem(this.activeItem + 1, false)
             }
         },
         // checking arrow between both
         checkArrow(value) {
             if (this.arrowBoth) return true
-            if (this.activeChild !== value) return true
+            if (this.activeItem !== value) return true
         },
         // handle drag event
         dragStart(event) {
@@ -355,10 +330,9 @@ export default {
         }
     },
     mounted() {
-        if (this.activeChild < this.childItems.length) {
-            this.childItems[this.activeChild].isActive = true
+        if (this.activeItem < this.carouselItems.length) {
+            this.carouselItems[this.activeItem].isActive = true
         }
-        this.refreshSlots()
         this.startTimer()
     },
     beforeDestroy() {

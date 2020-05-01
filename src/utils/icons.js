@@ -15,10 +15,10 @@ const faIcons = () => {
     const faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
     return {
         sizes: {
-            'default': null,
+            'default': faIconPrefix + 'lg',
             'is-small': null,
-            'is-medium': faIconPrefix + 'lg',
-            'is-large': faIconPrefix + '2x'
+            'is-medium': faIconPrefix + '2x',
+            'is-large': faIconPrefix + '3x'
         },
         iconPrefix: faIconPrefix,
         internalIcons: {

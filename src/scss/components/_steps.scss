@@ -12,7 +12,6 @@ $steps-previous-color: $primary !default;
 $steps-active-color: $primary !default;
 $steps-divider-height: .2em !default;
 $steps-vertical-padding: 1em 0 !default;
-$steps-mobile-max-width: $tablet !default;
 
 @mixin steps-size($size) {
     .steps {
@@ -51,7 +50,7 @@ $steps-mobile-max-width: $tablet !default;
                     }
                 }
 
-                @include until($steps-mobile-max-width) {
+                @include until($tablet) {
                     &::before, &::after, &:not(:first-child)::before {
                         top: #{$size};
                     }
@@ -148,7 +147,7 @@ $steps-mobile-max-width: $tablet !default;
                     font-weight: $weight-bold;
                     justify-content: center;
                     background: $steps-maker-default-color;
-                    color: $scheme-main;
+                    color: $white;
                     border: $steps-marker-default-border;
                     z-index: 1;
                     overflow: hidden;
@@ -167,7 +166,7 @@ $steps-mobile-max-width: $tablet !default;
                         }
                         &.is-active {
                             .step-marker {
-                                background-color: $scheme-main;
+                                background-color: $white;
                                 border-color: $color;
                                 color: $color;
                             }
@@ -190,7 +189,7 @@ $steps-mobile-max-width: $tablet !default;
                 }
 
                 .step-marker{
-                    color: $scheme-main;
+                    color: $white;
                 }
 
                 .step-details {
@@ -242,7 +241,7 @@ $steps-mobile-max-width: $tablet !default;
                     }
 
                     .step-marker {
-                        background-color: $scheme-main;
+                        background-color: $white;
                         border-color: $steps-active-color;
                         color: $steps-active-color;
                     }
@@ -253,7 +252,7 @@ $steps-mobile-max-width: $tablet !default;
                 }
                 &.is-previous {
                     .step-marker {
-                        color: $scheme-main;
+                        color: $white;
                         background-color: $steps-previous-color;
                     }
 
@@ -417,39 +416,26 @@ $steps-mobile-max-width: $tablet !default;
     }
     &:not(.is-vertical) {
         .steps {
-            @include until($steps-mobile-max-width) {
-                &.mobile-minimalist {
-                    .step-items {
-                        .step-item {
-                            &:not(.is-active) {
-                                display: none;
-                            }
-
-                            &::before, &::after, &:not(:first-child)::before {
-                                // This will contain the divider
-                                content: " ";
-                                display: block;
-                                position: absolute;
-                                height: $steps-divider-height;
-                                width: 25%;
-                                bottom: 0;
-                                left: 50%;
-                            }
-                            &::before, &:not(:first-child)::before {
-                                right: 50%;
-                                left: auto;
-                            }
+            .step-items {
+                .step-item{
+                    @include until($tablet) {
+                        &:not(.is-active) {
+                            display: none;
                         }
-                    }
-                }
-                &.mobile-compact {
-                    .step-items {
-                        .step-item {
-                            &:not(.is-active) {
-                                .step-details {
-                                    display: none;
-                                }
-                            }
+
+                        &::before, &::after, &:not(:first-child)::before {
+                            // This will contain the divider
+                            content: " ";
+                            display: block;
+                            position: absolute;
+                            height: $steps-divider-height;
+                            width: 25%;
+                            bottom: 0;
+                            left: 50%;
+                        }
+                        &::before, &:not(:first-child)::before {
+                            right: 50%;
+                            left: auto;
                         }
                     }
                 }

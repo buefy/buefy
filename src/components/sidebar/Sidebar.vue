@@ -127,9 +127,10 @@ export default {
         /**
         * Keypress event that is bound to the document.
         */
-        keyPress({ key }) {
+        keyPress(event) {
+            // Esc key
             if (this.isFixed) {
-                if (this.isOpen && (key === 'Escape' || key === 'Esc')) this.cancel('escape')
+                if (this.isOpen && event.keyCode === 27) this.cancel('escape')
             }
         },
 

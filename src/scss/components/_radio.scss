@@ -76,7 +76,7 @@ $radio-size: 1.25em !default;
             }
         }
         .control-label {
-            padding-left: $control-padding-horizontal;
+            padding-left: 0.5em;
         }
         &.button {
             display: flex;
