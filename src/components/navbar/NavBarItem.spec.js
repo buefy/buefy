@@ -60,7 +60,7 @@ describe('BNavbarItem', () => {
             parentComponent: stubBNavBar
         })
         wrapper.vm.$parent.closeMenu = jest.fn()
-        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        const event = new KeyboardEvent('keyup', {'keyCode': 27})
         wrapper.vm.keyPress({})
         wrapper.vm.keyPress(event)
         expect(wrapper.vm.$parent.closeMenu).toHaveBeenCalledTimes(1)

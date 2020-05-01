@@ -3,12 +3,16 @@
 exports[`BTaginput render correctly 1`] = `
 <div class="taginput control">
     <div class="taginput-container is-focusable">
+<<<<<<< HEAD
         <b-autocomplete-stub usehtml5validation="true" value="" data="" field="value" keepfirst="true" dropdownposition="auto">
             <!---->
             <!---->
             <!---->
             <!---->
         </b-autocomplete-stub>
+=======
+        <b-autocomplete-stub usehtml5validation="true" value="" data="" field="value" keepfirst="true" dropdownposition="auto"><template></template> <template></template> <template></template></b-autocomplete-stub>
+>>>>>>> parent of 230bc267... Add scrollable and max-height to b-dropdown (#2467)
     </div>
     <!---->
 </div>

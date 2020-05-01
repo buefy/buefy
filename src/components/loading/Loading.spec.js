@@ -48,15 +48,6 @@ describe('BLoading', () => {
             })
         })
 
-        it('close on escape', () => {
-            wrapper.vm.isActive = true
-            wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
-            const event = new KeyboardEvent('keyup', {'key': 'Escape'})
-            wrapper.vm.keyPress({})
-            wrapper.vm.keyPress(event)
-            expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
-        })
-
         it('emit events on close', () => {
             wrapper.vm.close()
             expect(wrapper.emitted()['close']).toBeTruthy()

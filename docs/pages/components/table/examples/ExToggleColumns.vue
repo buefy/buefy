@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field grouped group-multiline>
-            <div v-for="(column, index) in columnsTemplate"
+            <div v-for="(column, index) in columnsTemplate" 
                 :key="index"
                 class="control">
                 <b-checkbox v-model="column.visible">
@@ -11,13 +11,14 @@
         </b-field>
 
         <b-table :data="tableDataSimple">
-            <b-table-column v-for="(column, index) in columnsTemplate"
-                :key="index"
-                :label="column.title"
-                :visible="column.visible"
-                v-slot="props">
-                {{ props.row[column.field] }}
-            </b-table-column>
+            <template slot-scope="props">
+                <b-table-column v-for="(column, index) in columnsTemplate"
+                    :key="index"
+                    :label="column.title"
+                    :visible="column.visible">
+                    {{ props.row[column.field] }}
+                </b-table-column>
+            </template>
         </b-table>
     </section>
 </template>

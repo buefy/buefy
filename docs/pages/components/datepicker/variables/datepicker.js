@@ -29,7 +29,7 @@ export default [
     },
     {
         name: '<code>$datepicker-item-hover-color</code>',
-        default: '<code>$scheme-invert</code>'
+        default: '<code>$black</code>'
     },
     {
         name: '<code>$datepicker-item-hover-background-color</code>',

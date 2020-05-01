@@ -1,5 +1,4 @@
 import config from '../utils/config'
-import { isVueComponent } from './helpers'
 
 export default {
     props: {
@@ -83,10 +82,10 @@ export default {
          * Focus method that work dynamically depending on the component.
          */
         focus() {
-            const el = this.getElement()
-            if (el === undefined) return
+            if (this.$data._elementRef === undefined) return
 
             this.$nextTick(() => {
+                const el = this.$el.querySelector(this.$data._elementRef)
                 if (el) el.focus()
             })
         },
@@ -103,11 +102,7 @@ export default {
         },
 
         getElement() {
-            let el = this.$refs[this.$data._elementRef]
-            while (isVueComponent(el)) {
-                el = el.$refs[el.$data._elementRef]
-            }
-            return el
+            return this.$el.querySelector(this.$data._elementRef)
         },
 
         setInvalid() {
@@ -139,10 +134,10 @@ export default {
         checkHtml5Validity() {
             if (!this.useHtml5Validation) return
 
-            const el = this.getElement()
-            if (el === undefined) return
+            if (this.$refs[this.$data._elementRef] === undefined) return
+            if (this.getElement() === null) return
 
-            if (!el.checkValidity()) {
+            if (!this.getElement().checkValidity()) {
                 this.setInvalid()
                 this.isValid = false
             } else {

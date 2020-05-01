@@ -6,7 +6,7 @@ const BTabs = {
     template: '<b-tab-stub></b-tab-stub>',
     data() {
         return {
-            childItems: [],
+            tabItems: [],
             _isTabs: true
         }
     },

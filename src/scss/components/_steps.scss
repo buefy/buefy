@@ -148,7 +148,7 @@ $steps-mobile-max-width: $tablet !default;
                     font-weight: $weight-bold;
                     justify-content: center;
                     background: $steps-maker-default-color;
-                    color: $scheme-main;
+                    color: $white;
                     border: $steps-marker-default-border;
                     z-index: 1;
                     overflow: hidden;
@@ -167,7 +167,7 @@ $steps-mobile-max-width: $tablet !default;
                         }
                         &.is-active {
                             .step-marker {
-                                background-color: $scheme-main;
+                                background-color: $white;
                                 border-color: $color;
                                 color: $color;
                             }
@@ -190,7 +190,7 @@ $steps-mobile-max-width: $tablet !default;
                 }
 
                 .step-marker{
-                    color: $scheme-main;
+                    color: $white;
                 }
 
                 .step-details {
@@ -242,7 +242,7 @@ $steps-mobile-max-width: $tablet !default;
                     }
 
                     .step-marker {
-                        background-color: $scheme-main;
+                        background-color: $white;
                         border-color: $steps-active-color;
                         color: $steps-active-color;
                     }
@@ -253,7 +253,7 @@ $steps-mobile-max-width: $tablet !default;
                 }
                 &.is-previous {
                     .step-marker {
-                        color: $scheme-main;
+                        color: $white;
                         background-color: $steps-previous-color;
                     }
 

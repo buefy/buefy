@@ -6,7 +6,7 @@ const BSteps = {
     template: '<b-step-stub></b-step-stub>',
     data() {
         return {
-            childItems: [],
+            stepItems: [],
             _isSteps: true
         }
     },
