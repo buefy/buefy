@@ -63,7 +63,7 @@ export default [
             },
             {
                 name: '<code>tooltip-type</code>',
-                description: 'The type (color) of the tootip. Defaults to <code>type</code>',
+                description: 'The type (color) of the tooltip. Defaults to <code>type</code>',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                 <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
