@@ -8,21 +8,21 @@
     }
     .docs-main {
         position: relative;
-        background: $white;
+        background: $scheme-main;
         overflow: hidden;
         width: 100%;
     }
     .docs-main-container {
         padding: 3rem;
         &.is-header {
-            border-bottom: 2px solid $white-ter;
+            border-bottom: 2px solid $scheme-main-ter;
         }
     }
     .docs-improve-this {
         text-align: center;
         margin-top: 5em;
         padding-top: 1.5rem;
-        border-top: 2px solid $white-ter;
+        border-top: 2px solid $scheme-main-ter;
     }
     @include touch {
         .docs-template-horizontal {

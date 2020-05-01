@@ -55,30 +55,30 @@ describe('BTabs', () => {
         expect(wrapper.vm.mainClasses['is-centered']).toBeTruthy()
     })
 
-    it('calls changeTab when value is changed', () => {
-        wrapper.vm.changeTab = jest.fn()
+    it('calls changeActive when value is changed', () => {
+        wrapper.vm.changeActive = jest.fn()
         wrapper.setProps({value: 1})
-        expect(wrapper.vm.changeTab).toHaveBeenCalled()
+        expect(wrapper.vm.changeActive).toHaveBeenCalled()
     })
 
-    it('emit change event with value when changeTab is called', () => {
+    it('emit change event with value when changeActive is called', () => {
         const idx = 1
-        wrapper.vm.changeTab(idx)
+        wrapper.vm.changeActive(idx)
         const valueEmitted = wrapper.emitted()['change'][0]
         expect(valueEmitted).toContainEqual(idx)
-        expect(wrapper.vm.activeTab).toEqual(idx)
+        expect(wrapper.vm.activeChild).toEqual(idx)
     })
 
-    it('emit input event with value when tabClick is called', () => {
+    it('emit input event with value when childClick is called', () => {
         const val = 1
-        wrapper.vm.changeTab = jest.fn((newIndex) => {
-            wrapper.vm.activeTab = newIndex
+        wrapper.vm.changeActive = jest.fn((newIndex) => {
+            wrapper.vm.activeChild = newIndex
         })
-        wrapper.vm.tabClick(val)
-        wrapper.vm.tabClick(val)
+        wrapper.vm.childClick(val)
+        wrapper.vm.childClick(val)
         const valueEmitted = wrapper.emitted()['input'][0]
         expect(valueEmitted).toContainEqual(val)
         // Will be called only once even if we clicked multiple times
-        expect(wrapper.vm.changeTab).toHaveBeenCalledTimes(1)
+        expect(wrapper.vm.changeActive).toHaveBeenCalledTimes(1)
     })
 })

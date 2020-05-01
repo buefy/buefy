@@ -6,8 +6,8 @@
 
         <b-tooltip label="Maybe you like a little animation"
             position="is-bottom"
-            animated>
-            <button class="button">Animated</button>
+            :animated="false">
+            <button class="button">No animation</button>
         </b-tooltip>
 
         <b-tooltip label="You prefer dark?"

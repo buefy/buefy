@@ -3,7 +3,10 @@
         <template slot-scope="props">
             <b-table-column field="id" label="ID" width="40" numeric>
                 <template slot="header" slot-scope="{ column }">
-                    <b-tooltip :label="column.label" dashed>
+                    <b-tooltip append-to-body dashed>
+                        <template v-slot:content>
+                            {{ column.label }}
+                        </template>
                         {{ column.label }}
                     </b-tooltip>
                 </template> 
@@ -12,7 +15,7 @@
 
             <b-table-column field="user.first_name" label="First Name">
                 <template slot="header" slot-scope="{ column }">
-                    <b-tooltip :label="column.label" dashed>
+                    <b-tooltip :label="column.label" append-to-body dashed>
                         {{ column.label }}
                     </b-tooltip>
                 </template>
@@ -21,7 +24,7 @@
 
             <b-table-column field="user.last_name" label="Last Name">
                 <template slot="header" slot-scope="{ column }">
-                    <b-tooltip :label="column.label" dashed>
+                    <b-tooltip :label="column.label" append-to-body dashed>
                         {{ column.label }}
                     </b-tooltip>
                 </template>
