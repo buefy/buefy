@@ -99,7 +99,21 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            }
+            },
+            {
+                name: '<code>scrollable</code>',
+                description: 'Dropdown content will be scrollable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>max-height</code>',
+                description: 'Max height of dropdown content',
+                type: 'String, Number',
+                values: '—',
+                default: '<code>200px</code>'
+            },
         ],
         slots: [
             {
