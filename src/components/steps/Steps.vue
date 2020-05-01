@@ -127,6 +127,16 @@ export default {
             type: Boolean,
             default: true
         },
+        mobileMode: {
+            type: String,
+            validator(value) {
+                return [
+                    'minimalist',
+                    'compact'
+                ].indexOf(value) > -1
+            },
+            default: 'minimalist'
+        },
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
@@ -156,7 +166,8 @@ export default {
                     'has-label-right': this.labelPosition === 'right',
                     'has-label-left': this.labelPosition === 'left',
                     'is-animated': this.animated,
-                    'is-rounded': this.rounded
+                    'is-rounded': this.rounded,
+                    [`mobile-${this.mobileMode}`]: this.mobileMode !== null
                 }
             ]
         },
