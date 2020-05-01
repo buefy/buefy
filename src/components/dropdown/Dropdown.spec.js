@@ -127,6 +127,19 @@ describe('BDropdown', () => {
         expect(wrapper.vm.isActive).toBeTruthy()
     })
 
+    it('close on escape', () => {
+        wrapper.vm.isActive = true
+        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        wrapper.vm.keyPress({})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.isActive).toBeFalsy()
+
+        wrapper.vm.isActive = true
+        wrapper.setProps({canClose: ['click']})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.isActive).toBeTruthy()
+    })
+
     it('manage toggle function accordingly', (done) => {
         wrapper.vm.isActive = true
         wrapper.setProps({ disabled: true })

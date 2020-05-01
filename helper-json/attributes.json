@@ -2397,6 +2397,10 @@
         "description": "Allow chevron icon and column to be visible",
         "type": "boolean"
     },
+    "b-table/show-header": {
+        "description": "Show table column header",
+        "type": "boolean"
+    },
     "b-table/sort-icon": {
         "description": "Sets the header sorting icon",
         "type": "string"

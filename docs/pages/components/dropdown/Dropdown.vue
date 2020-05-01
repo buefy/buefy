@@ -26,6 +26,15 @@
             <p>Add the <code>multiple</code> prop to select one or more item.</p>
         </Example>
 
+        <Example :component="ExCustomizeScrollable" :code="ExCustomizeScrollableCode" title="Scrollable">
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.x.x</span>
+            </div>
+            <p>Add the <code>scrollable</code> prop to make the list scollable.</p>
+            <p>When the <code>scrollable</code> prop is set to <code>true</code>, use the <code>max-height</code> prop to define the max height of the list.</p>
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -50,6 +59,9 @@
     import ExCustomizeMultiple from './examples/ExCustomizeMultiple'
     import ExCustomizeMultipleCode from '!!raw-loader!./examples/ExCustomizeMultiple'
 
+    import ExCustomizeScrollable from './examples/ExCustomizeScrollable'
+    import ExCustomizeScrollableCode from '!!raw-loader!./examples/ExCustomizeScrollable'
+
     export default {
         data() {
             return {
@@ -64,7 +76,9 @@
                 ExCustomize,
                 ExCustomizeCode,
                 ExCustomizeMultiple,
-                ExCustomizeMultipleCode
+                ExCustomizeMultipleCode,
+                ExCustomizeScrollable,
+                ExCustomizeScrollableCode
             }
         }
     }

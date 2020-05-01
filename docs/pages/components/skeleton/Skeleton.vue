@@ -28,6 +28,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExSimpleCode,
                 ExMediaTemplate,

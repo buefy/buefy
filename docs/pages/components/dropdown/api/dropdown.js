@@ -59,6 +59,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>scrollable</code>',
+                description: 'Dropdown content will be scrollable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>max-height</code>',
+                description: 'Max height of dropdown content',
+                type: 'String, Number',
+                values: '—',
+                default: '<code>200px</code>'
+            },
+            {
                 name: '<code>aria-role</code>',
                 description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
                 type: 'String',

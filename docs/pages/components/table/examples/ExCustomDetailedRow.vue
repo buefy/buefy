@@ -25,59 +25,61 @@
             @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.name}`)"
             :show-detail-icon="showDetailIcon">
 
-            <template slot-scope="props">
-                <b-table-column
-                    field="name"
-                    :visible="columnsVisible['name'].display"
-                    :label="columnsVisible['name'].title"
-                    width="300"
-                    sortable
-                >
-                    <template v-if="showDetailIcon">
+            <b-table-column
+                field="name"
+                :visible="columnsVisible['name'].display"
+                :label="columnsVisible['name'].title"
+                width="300"
+                sortable
+                v-slot="props"
+            >
+                <template v-if="showDetailIcon">
+                    {{ props.row.name }}
+                </template>
+                <template v-else>
+                    <a @click="toggle(props.row)">
                         {{ props.row.name }}
-                    </template>
-                    <template v-else>
-                        <a @click="toggle(props.row)">
-                            {{ props.row.name }}
-                        </a>
-                    </template>
-                </b-table-column>
+                    </a>
+                </template>
+            </b-table-column>
 
-                <b-table-column
-                    field="sold"
-                    :visible="columnsVisible['sold'].display"
-                    :label="columnsVisible['sold'].title"
-                    sortable
-                    centered
-                >
-                    {{ props.row.sold }}
-                </b-table-column>
+            <b-table-column
+                field="sold"
+                :visible="columnsVisible['sold'].display"
+                :label="columnsVisible['sold'].title"
+                sortable
+                centered
+                v-slot="props"
+            >
+                {{ props.row.sold }}
+            </b-table-column>
 
-                <b-table-column
-                    field="available"
-                    :visible="columnsVisible['available'].display"
-                    :label="columnsVisible['available'].title"
-                    sortable
-                    centered
-                >
-                    {{ props.row.available }}
-                </b-table-column>
+            <b-table-column
+                field="available"
+                :visible="columnsVisible['available'].display"
+                :label="columnsVisible['available'].title"
+                sortable
+                centered
+                v-slot="props"
+            >
+                {{ props.row.available }}
+            </b-table-column>
 
-                <b-table-column
-                    :visible="columnsVisible['cleared'].display"
-                    :label="columnsVisible['cleared'].title"
-                    centered
-                >
-                    <span :class="
-                            [
-                                'tag',
-                                {'is-danger': props.row.sold / props.row.available <= 0.45},
-                                {'is-success': props.row.sold / props.row.available > 0.45}
-                            ]">
-                        {{ Math.round((props.row.sold / props.row.available) * 100) }}%
-                    </span>
-                </b-table-column>
-            </template>
+            <b-table-column
+                :visible="columnsVisible['cleared'].display"
+                :label="columnsVisible['cleared'].title"
+                centered
+                v-slot="props"
+            >
+                <span :class="
+                        [
+                            'tag',
+                            {'is-danger': props.row.sold / props.row.available <= 0.45},
+                            {'is-success': props.row.sold / props.row.available > 0.45}
+                        ]">
+                    {{ Math.round((props.row.sold / props.row.available) * 100) }}%
+                </span>
+            </b-table-column>
 
             <template slot="detail" slot-scope="props">
                 <tr v-for="item in props.row.items" :key="item.name">
