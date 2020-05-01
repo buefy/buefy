@@ -1955,7 +1955,7 @@
         "type": "boolean"
     },
     "b-slider/tooltip-type": {
-        "description": "The type (color) of the tootip. Defaults to type",
+        "description": "The type (color) of the tooltip. Defaults to type",
         "type": "string"
     },
     "b-slider/type": {

@@ -311,7 +311,7 @@ export default {
             this.$emit('input', this.tags)
             this.$emit('remove', tag)
             if (event) event.stopPropagation()
-            if (this.openOnFocus) {
+            if (this.openOnFocus && this.$refs.autocomplete) {
                 this.$refs.autocomplete.focus()
             }
             return tag
