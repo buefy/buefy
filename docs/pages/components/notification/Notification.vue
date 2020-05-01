@@ -2,9 +2,7 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical>
-            <p>Many colors with light variant.</p>
-        </Example>
+        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
 

@@ -27,7 +27,10 @@ export default {
         subheading: [String, Number],
         customSort: Function,
         sticky: Boolean,
-        headerSelectable: Boolean,
+        headerSelectable: {
+            type: Boolean,
+            default: true
+        },
         headerClass: String,
         cellClass: String,
         internal: Boolean // Used internally by Table
@@ -45,13 +48,6 @@ export default {
                 'has-text-centered': this.centered,
                 'is-sticky': this.sticky
             }]
-        },
-
-        /**
-         * Return if column header is un-selectable
-         */
-        isHeaderUnSelectable() {
-            return !this.headerSelectable && this.sortable
         }
     },
     beforeMount() {

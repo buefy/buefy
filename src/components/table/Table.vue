@@ -72,7 +72,7 @@
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky,
-                                'is-unselectable': column.isHeaderUnSelectable
+                                'is-unselectable': !column.headerSelectable
                             }]"
                             :style="{
                                 width: column.width === undefined ? null :
@@ -101,45 +101,42 @@
                                         :index="index"
                                     />
                                 </template>
-                                <template v-else>
-                                    <span class="is-relative">
-                                        {{ column.label }}
-                                        <template
-                                            v-if="sortMultiple &&
-                                                sortMultipleDataComputed &&
-                                                sortMultipleDataComputed.length > 0 &&
-                                                sortMultipleDataComputed.filter(i =>
-                                            i.field === column.field).length > 0">
-                                            <b-icon
-                                                :icon="sortIcon"
-                                                :pack="iconPack"
-                                                both
-                                                :size="sortIconSize"
-                                                :class="{
-                                                    'is-desc': sortMultipleDataComputed.filter(i =>
-                                                i.field === column.field)[0].order === 'desc'}"
-                                            />
-                                            {{ findIndexOfSortData(column) }}
-                                            <button
-                                                class="delete is-small multi-sort-cancel-icon"
-                                                type="button"
-                                                @click.stop="removeSortingPriority(column)"/>
-                                        </template>
+                                <template v-else>{{ column.label }}</template>
 
-                                        <b-icon
-                                            v-else
-                                            :icon="sortIcon"
-                                            :pack="iconPack"
-                                            both
-                                            :size="sortIconSize"
-                                            class="sort-icon"
-                                            :class="{
-                                                'is-desc': !isAsc,
-                                                'is-invisible': currentSortColumn !== column
-                                            }"
-                                        />
-                                    </span>
+                                <template
+                                    v-if="sortMultiple &&
+                                        sortMultipleDataComputed &&
+                                        sortMultipleDataComputed.length > 0 &&
+                                        sortMultipleDataComputed.filter(i =>
+                                    i.field === column.field).length > 0">
+                                    <b-icon
+                                        :icon="sortIcon"
+                                        :pack="iconPack"
+                                        both
+                                        :size="sortIconSize"
+                                        :class="{
+                                            'is-desc': sortMultipleDataComputed.filter(i =>
+                                                i.field === column.field)[0].order === 'desc'
+                                        }"
+                                    />
+                                    {{ findIndexOfSortData(column) }}
+                                    <button
+                                        class="delete is-small multi-sort-cancel-icon"
+                                        type="button"
+                                        @click.stop="removeSortingPriority(column)"/>
                                 </template>
+
+                                <b-icon
+                                    v-else-if="column.sortable && !sortMultiple"
+                                    :icon="sortIcon"
+                                    :pack="iconPack"
+                                    both
+                                    :size="sortIconSize"
+                                    :class="{
+                                        'is-desc': !isAsc,
+                                        'is-invisible': currentSortColumn !== column
+                                    }"
+                                />
                             </div>
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">

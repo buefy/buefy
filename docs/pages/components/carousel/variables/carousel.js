@@ -7,7 +7,7 @@ export default [
     {
         name: '<code>$carousel-arrow-background</code>',
         description: 'The carousel arrow background',
-        default: '<code>$scheme-main</code>'
+        default: '<code>$white</code>'
     },
     {
         name: '<code>$carousel-arrow-color</code>',
@@ -27,12 +27,7 @@ export default [
     {
         name: '<code>$carousel-indicator-background</code>',
         description: 'The carousel indicator background',
-        default: '<code>rgba($scheme-invert, 0.45)</code>'
-    },
-    {
-        name: '<code>$carousel-indicator-color</code>',
-        description: 'The carousel indicator color',
-        default: '<code>$scheme-main</code>'
+        default: '<code>rgba($black, 0.45)</code>'
     },
     {
         name: '<code>$carousel-indicator-border</code>',
@@ -52,7 +47,7 @@ export default [
     {
         name: '<code>$carousel-overlay-background</code>',
         description: 'The carousel background when overlay',
-        default: '<code>rgba($scheme-invert, 0.86)</code>'
+        default: '<code>rgba($black, 0.86)</code>'
     },
     {
         name: '<code>$carousel-overlay-z</code>',

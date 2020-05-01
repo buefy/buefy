@@ -21,7 +21,7 @@ export default [
     },
     {
         name: '<code>$slider-thumb-background</code>',
-        default: '<code>$scheme-main</code>'
+        default: '<code>$white</code>'
     },
     {
         name: '<code>$slider-thumb-radius</code>',

@@ -7,7 +7,7 @@ export default [
     {
         name: '<code>$dropdown-background-color</code>',
         description: 'Modal background color when the dropdown is shown as a modal.',
-        default: '<code>rgba($scheme-invert, 0.86)</code>'
+        default: '<code>rgba($black, 0.86)</code>'
     },
     {
         name: '<code>$dropdown-disabled-opacity:</code>',
