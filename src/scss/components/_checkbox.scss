@@ -12,8 +12,9 @@ $checkbox-size: 1.25em !default;
         outline: none;
         display: inline-flex;
         align-items: center;
-        & + .checkbox {
-            margin-left: 0.5em;
+        margin-right: 0.5em;
+        & + .checkbox:last-child {
+            margin-right: 0;
         }
         input[type=checkbox] {
             position: absolute;
