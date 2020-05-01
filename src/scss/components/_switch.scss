@@ -10,8 +10,9 @@ $switch-active-background-color: $primary !default;
     display: inline-flex;
     align-items: center;
     position: relative;
-    & + .switch {
-        margin-left: 0.5em;
+    margin-right: 0.5em;
+    & + .switch:last-child {
+        margin-right: 0;
     }
     input[type=checkbox] {
         position: absolute;
