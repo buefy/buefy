@@ -64,7 +64,10 @@ export default {
         hoverable: Boolean,
         inline: Boolean,
         scrollable: Boolean,
-        maxHeight: [String, Number],
+        maxHeight: {
+            type: [String, Number],
+            default: 200
+        },
         position: {
             type: String,
             validator(value) {
@@ -252,9 +255,8 @@ export default {
         /**
          * Keypress event that is bound to the document
          */
-        keyPress(event) {
-            // Esc key
-            if (this.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) {
                 if (this.cancelOptions.indexOf('escape') < 0) return
                 this.isActive = false
             }
