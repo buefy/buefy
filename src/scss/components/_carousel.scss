@@ -1,16 +1,16 @@
 $carousel-min-height: 120px !default;
 
-$carousel-arrow-background: $white !default;
+$carousel-arrow-background: $scheme-main !default;
 $carousel-arrow-color: $primary !default;
 $carousel-arrow-icon-spaced: 1.5rem !default;
 $carousel-arrow-top: 50% !default;
 
-$carousel-indicator-background: rgba($black, 0.50) !default;
-$carousel-indicator-border: $white !default;
+$carousel-indicator-background: rgba($scheme-invert, 0.50) !default;
+$carousel-indicator-border: $scheme-main !default;
 $carousel-indicator-color: $primary !default;
 $carousel-indicator-spaced: .5rem !default;
 
-$carousel-overlay-background: rgba($black, 0.86) !default;
+$carousel-overlay-background: rgba($scheme-invert, 0.86) !default;
 $carousel-overlay-z: 40 !default;
 
 .carousel {
@@ -34,7 +34,7 @@ $carousel-overlay-z: 40 !default;
         }
     }
     .progress {
-        border-radius: 2px;
+        border-radius: $radius-small;
         height: 0.25rem;
         margin-bottom: 0;
     }
@@ -111,7 +111,7 @@ $carousel-overlay-z: 40 !default;
                     width: 10px;
                 }
                 &.is-dots {
-                    border-radius: 10px;
+                    border-radius: $radius-rounded;
                     height: 10px;
                     width: 10px;
                 }

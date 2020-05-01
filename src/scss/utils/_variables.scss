@@ -2,7 +2,9 @@ $speed-slow: 150ms !default;
 $speed-slower: 250ms !default;
 
 $primary: #7957d5 !default;
-$primary-invert: $white !default;
+$primary-invert: findColorInvert(#7957d5) !default;
+$primary-light: findLightColor(#7957d5) !default;
+$primary-dark: findDarkColor(#7957d5) !default;
 
 $info: #167df0 !default;
 

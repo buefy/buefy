@@ -40,15 +40,29 @@ describe('BSidebar', () => {
             expect(wrapper.vm.transitionName).toBe('slide-next')
         })
 
-        it('close on cancel', (done) => {
+        it('close on cancel', () => {
             wrapper.setProps({canCancel: true})
             wrapper.vm.isOpen = true
-            wrapper.vm.close = jest.fn()
+            wrapper.vm.close = jest.fn(() => wrapper.vm.close)
             wrapper.vm.cancel('outside')
-            wrapper.vm.$nextTick(() => {
-                expect(wrapper.vm.close).toHaveBeenCalled()
-                done()
-            })
+
+            wrapper.setProps({canCancel: false})
+            wrapper.vm.cancel('outside')
+
+            expect(wrapper.vm.close).toHaveBeenCalledTimes(1)
+        })
+
+        it('close on escape', () => {
+            wrapper.setProps({open: true})
+            wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
+            const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+            wrapper.vm.keyPress({})
+            wrapper.vm.keyPress(event)
+
+            wrapper.setProps({position: 'static'})
+            wrapper.vm.keyPress(event)
+
+            expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
         })
 
         it('emit events on close', () => {

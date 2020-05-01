@@ -11,6 +11,7 @@ export default {
     name: 'BCarouselItem',
     data() {
         return {
+            _isCarouselItem: true,
             isActive: false,
             transitionName: null
         }
@@ -40,13 +41,10 @@ export default {
             this.$destroy()
             throw new Error('You should wrap bCarouselItem on a bCarousel')
         }
-        this.$parent.carouselItems.push(this)
+        this.$parent.refreshSlots()
     },
     beforeDestroy() {
-        const index = this.$parent.carouselItems.indexOf(this)
-        if (index >= 0) {
-            this.$parent.carouselItems.splice(index, 1)
-        }
+        this.$parent.refreshSlots()
     }
 }
 </script>
