@@ -14,5 +14,9 @@ export default [
     {
         name: '<code>$skeleton-duration</code>',
         default: '<code>1.5s</code>'
+    },
+    {
+        name: '<code>$skeleton-margin-top</code>',
+        default: '<code>.5rem</code>'
     }
 ]
