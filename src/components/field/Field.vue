@@ -33,11 +33,18 @@
             <slot/>
         </template>
         <p
-            v-if="newMessage && !horizontal"
-            v-html="formattedMessage"
+            v-if="hasMessage && !horizontal"
             class="help"
             :class="newType"
-        />
+        >
+            <slot v-if="$slots.message" name="message"/>
+            <template v-else>
+                <template v-for="(mess, i) in formattedMessage">
+                    {{ mess }}
+                    <br :key="i" v-if="(i + 1) < formattedMessage.length">
+                </template>
+            </template>
+        </p>
     </div>
 </template>
 
@@ -116,33 +123,35 @@ export default {
         */
         formattedMessage() {
             if (typeof this.newMessage === 'string') {
-                return this.newMessage
-            } else {
-                let messages = []
-                if (Array.isArray(this.newMessage)) {
-                    this.newMessage.forEach((message) => {
-                        if (typeof message === 'string') {
-                            messages.push(message)
-                        } else {
-                            for (let key in message) {
-                                if (message[key]) {
-                                    messages.push(key)
-                                }
+                return [this.newMessage]
+            }
+            let messages = []
+            if (Array.isArray(this.newMessage)) {
+                this.newMessage.forEach((message) => {
+                    if (typeof message === 'string') {
+                        messages.push(message)
+                    } else {
+                        for (let key in message) {
+                            if (message[key]) {
+                                messages.push(key)
                             }
                         }
-                    })
-                } else {
-                    for (let key in this.newMessage) {
-                        if (this.newMessage[key]) {
-                            messages.push(key)
-                        }
+                    }
+                })
+            } else {
+                for (let key in this.newMessage) {
+                    if (this.newMessage[key]) {
+                        messages.push(key)
                     }
                 }
-                return messages.filter((m) => { if (m) return m }).join(' <br> ')
             }
+            return messages.filter((m) => { if (m) return m })
         },
         hasLabel() {
             return this.label || this.$slots.label
+        },
+        hasMessage() {
+            return this.newMessage || this.$slots.message
         },
         numberInputClasses() {
             if (this.$slots.default) {
