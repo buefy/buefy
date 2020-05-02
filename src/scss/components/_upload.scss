@@ -44,6 +44,12 @@
                 }
             }
         }
+        &.is-expanded {
+            width: 100%;
+        }
+    }
+    &.is-expanded {
+        width: 100%;
     }
 }
 // temporary IE 11 hack !!!

@@ -1,5 +1,5 @@
 <template>
-    <label class="upload control">
+    <label class="upload control" :class="{'is-expanded' : expanded}">
         <template v-if="!dragDrop">
             <slot/>
         </template>
@@ -10,7 +10,8 @@
             :class="[type, {
                 'is-loading': loading,
                 'is-disabled': disabled,
-                'is-hovered': dragDropFocus
+                'is-hovered': dragDropFocus,
+                'is-expanded': expanded,
             }]"
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
@@ -51,6 +52,10 @@ export default {
             default: 'is-primary'
         },
         native: {
+            type: Boolean,
+            default: false
+        },
+        expanded: {
             type: Boolean,
             default: false
         }
