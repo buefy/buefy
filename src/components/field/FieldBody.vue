@@ -3,7 +3,7 @@ export default {
     name: 'BFieldBody',
     props: {
         message: {
-            type: String
+            type: [String, Array]
         },
         type: {
             type: [String, Object]

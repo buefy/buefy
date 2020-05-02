@@ -88,7 +88,7 @@ describe('BField', () => {
             ]
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
-            expect(wrapper.find('p.help').html()).toContain(message.join(' <br> '))
+            expect(wrapper.find('p.help').html().split('<br>').length).toEqual(message.length)
         })
 
         it('given an object as message, it grabs the keys and joins them with line breaks', () => {
@@ -101,7 +101,7 @@ describe('BField', () => {
             }
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
-            expect(wrapper.find('p.help').html()).toContain(Object.keys(message).join(' <br> '))
+            expect(wrapper.find('p.help').html().split('<br>').length).toEqual(Object.keys(message).length)
         })
 
         it(`given an array of string with an object as one of the elements as message, it grabs the
@@ -117,13 +117,7 @@ describe('BField', () => {
             ]
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
-            expect(wrapper.find('p.help').html()).toContain([
-                message[0],
-                'message2',
-                'message3',
-                message[2],
-                message[3]
-            ].join(' <br> '))
+            expect(wrapper.find('p.help').html().split('<br>').length).toEqual(5)
         })
     })
 
