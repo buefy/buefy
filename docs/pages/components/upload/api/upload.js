@@ -73,7 +73,14 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            }
+            },
+            {
+                name: '<code>expanded</code>',
+                description: 'Upload will be expanded (full-width)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         events: [
             {
