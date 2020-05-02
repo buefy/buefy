@@ -1,3 +1,5 @@
+$select-arrow-color: $primary !default;
+
 .select {
     select {
         // TODO Remove below when the following problem will be fixed from Bulma or Safari:
@@ -23,6 +25,11 @@
     }
     &.is-empty select {
         color: rgba($grey, 0.7);
+    }
+    &:not(.is-loading) {
+        &::after {
+            border-color: $select-arrow-color !important;
+        }
     }
     // fix Bulma 0.8.2
     &.is-loading::after {
