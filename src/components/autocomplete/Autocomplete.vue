@@ -27,6 +27,7 @@
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
             @icon-right-click="rightIconClick"
+            @icon-click="(event) => $emit('icon-click', event)"
         />
 
         <transition name="fade">
