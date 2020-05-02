@@ -12,7 +12,9 @@ $skeleton-duration: 1.5s !default;
         display: inline-block;
         line-height: $skeleton-line-height;
         width: 100%;
-        border-radius: $skeleton-border-radius;
+        &.is-rounded {
+            border-radius: $skeleton-border-radius;
+        }
         &::after {
             content: "\00a0";
         }
