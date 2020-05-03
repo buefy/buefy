@@ -3,6 +3,8 @@
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExDragDrop" :code="ExDragDropCode" title="Drag and drop" vertical/>
+        
+        <Example :component="ExExpanded" :code="ExExpandedCode" title="Expanded" vertical/>
 
         <ApiView :data="api"/>
     </div>
@@ -17,14 +19,19 @@
     import ExDragDrop from './examples/ExDragDrop'
     import ExDragDropCode from '!!raw-loader!./examples/ExDragDrop'
 
+    import ExExpanded from './examples/ExExpanded'
+    import ExExpandedCode from '!!raw-loader!./examples/ExExpanded'
+
     export default {
         data() {
             return {
                 api,
                 ExSimple,
                 ExDragDrop,
+                ExExpanded,
                 ExSimpleCode,
-                ExDragDropCode
+                ExDragDropCode,
+                ExExpandedCode
             }
         }
     }

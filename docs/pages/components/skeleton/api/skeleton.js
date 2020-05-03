@@ -16,6 +16,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>rounded</code>',
+                description: 'Rounded style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>width</code>',
                 description: 'Custom width',
                 type: 'String, Number',

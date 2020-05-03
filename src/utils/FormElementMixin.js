@@ -62,7 +62,7 @@ export default {
         statusMessage() {
             if (!this.parentField) return
 
-            return this.parentField.newMessage
+            return this.parentField.newMessage || this.parentField.$slots.message
         },
 
         /**

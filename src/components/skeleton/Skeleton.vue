@@ -14,6 +14,10 @@ export default {
         width: [Number, String],
         height: [Number, String],
         circle: Boolean,
+        rounded: {
+            type: Boolean,
+            default: true
+        },
         count: {
             type: Number,
             default: 1
@@ -27,6 +31,7 @@ export default {
         for (let i = 0; i < context.props.count; i++) {
             items.push(createElement('div', {
                 staticClass: 'b-skeleton-item',
+                class: { 'is-rounded': context.props.rounded },
                 key: i,
                 style: {
                     height: height === undefined ? null
