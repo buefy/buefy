@@ -542,7 +542,6 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
-            newDataFilter: this.data,
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
