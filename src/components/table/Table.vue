@@ -18,30 +18,15 @@
             @removePriority="(column) => removeSortingPriority(column)"
         />
 
-        <div
+        <b-table-pagination
             v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')"
-            class="top level">
-            <div class="level-left">
-                <slot name="top-left"/>
-            </div>
-
-            <div class="level-right">
-                <div v-if="paginated" class="level-item">
-                    <b-pagination
-                        :icon-pack="iconPack"
-                        :total="newDataTotal"
-                        :per-page="perPage"
-                        :simple="paginationSimple"
-                        :size="paginationSize"
-                        :current="newCurrentPage"
-                        @change="pageChanged"
-                        :aria-next-label="ariaNextLabel"
-                        :aria-previous-label="ariaPreviousLabel"
-                        :aria-page-label="ariaPageLabel"
-                        :aria-current-label="ariaCurrentLabel" />
-                </div>
-            </div>
-        </div>
+            v-bind="$props"
+            :total="newDataTotal"
+            :current.sync="newCurrentPage"
+            @page-change="(event) => $emit('page-change', event)"
+        >
+            <slot name="top-left"/>
+        </b-table-pagination>
 
         <div
             class="table-wrapper"
@@ -317,31 +302,17 @@
             </table>
         </div>
 
-        <div
+        <b-table-pagination
             v-if="(checkable && hasBottomLeftSlot()) ||
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
-            class="level">
-            <div class="level-left">
-                <slot name="bottom-left"/>
-            </div>
+            v-bind="$props"
+            :total="newDataTotal"
+            :current-page.sync="newCurrentPage"
+            @page-change="(event) => $emit('page-change', event)"
+        >
+            <slot name="bottom-left"/>
+        </b-table-pagination>
 
-            <div class="level-right">
-                <div v-if="paginated" class="level-item">
-                    <b-pagination
-                        :icon-pack="iconPack"
-                        :total="newDataTotal"
-                        :per-page="perPage"
-                        :simple="paginationSimple"
-                        :size="paginationSize"
-                        :current="newCurrentPage"
-                        @change="pageChanged"
-                        :aria-next-label="ariaNextLabel"
-                        :aria-previous-label="ariaPreviousLabel"
-                        :aria-page-label="ariaPageLabel"
-                        :aria-current-label="ariaCurrentLabel" />
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -355,6 +326,7 @@ import Pagination from '../pagination/Pagination'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
+import TablePagination from './TablePagination'
 
 export default {
     name: 'BTable',
@@ -365,7 +337,8 @@ export default {
         [Pagination.name]: Pagination,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
-        [TableColumn.name]: TableColumn
+        [TableColumn.name]: TableColumn,
+        [TablePagination.name]: TablePagination
     },
     props: {
         data: {
@@ -454,8 +427,6 @@ export default {
             type: Boolean,
             default: true
         },
-        paginationSimple: Boolean,
-        paginationSize: String,
         paginationPosition: {
             type: String,
             default: 'bottom',
@@ -687,7 +658,6 @@ export default {
                             return [vnode]
                         }
                     }
-
                     return component
                 })
             }
@@ -761,10 +731,6 @@ export default {
         */
         openedDetailed(expandedRows) {
             this.visibleDetailRows = expandedRows
-        },
-
-        currentPage(newVal) {
-            this.newCurrentPage = newVal
         }
     },
     methods: {
@@ -994,15 +960,6 @@ export default {
 
             // Emit new row to update user variable
             this.$emit('update:selected', row)
-        },
-
-        /**
-        * Paginator change listener.
-        */
-        pageChanged(page) {
-            this.newCurrentPage = page > 0 ? page : 1
-            this.$emit('page-change', this.newCurrentPage)
-            this.$emit('update:currentPage', this.newCurrentPage)
         },
 
         /**
