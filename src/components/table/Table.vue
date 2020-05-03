@@ -1173,26 +1173,34 @@ export default {
         * Initial sorted column based on the default-sort prop.
         */
         initSort() {
-            if (!this.defaultSort) return
+            if (!this.backendSorting) {
+                if (this.sortMultiple && this.sortMultipleData) {
+                    this.sortMultipleData.forEach((column) => {
+                        this.sortMultiColumn(column)
+                    })
+                } else {
+                    if (!this.defaultSort) return
 
-            let sortField = ''
-            let sortDirection = this.defaultSortDirection
+                    let sortField = ''
+                    let sortDirection = this.defaultSortDirection
 
-            if (Array.isArray(this.defaultSort)) {
-                sortField = this.defaultSort[0]
-                if (this.defaultSort[1]) {
-                    sortDirection = this.defaultSort[1]
+                    if (Array.isArray(this.defaultSort)) {
+                        sortField = this.defaultSort[0]
+                        if (this.defaultSort[1]) {
+                            sortDirection = this.defaultSort[1]
+                        }
+                    } else {
+                        sortField = this.defaultSort
+                    }
+
+                    const sortColumn = this.newColumns.filter(
+                        (column) => (column.field === sortField))[0]
+                    if (sortColumn) {
+                        this.isAsc = sortDirection.toLowerCase() !== 'desc'
+                        this.sort(sortColumn, true)
+                    }
                 }
-            } else {
-                sortField = this.defaultSort
             }
-
-            this.newColumns.forEach((column) => {
-                if (column.field === sortField) {
-                    this.isAsc = sortDirection.toLowerCase() !== 'desc'
-                    this.sort(column, true)
-                }
-            })
         },
         /**
         * Emits drag start event
