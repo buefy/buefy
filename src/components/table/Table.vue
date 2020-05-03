@@ -542,6 +542,7 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
+            newDataFilter: this.data,
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
@@ -733,6 +734,14 @@ export default {
                     if (!this.backendPagination) {
                         this.newDataTotal = this.newData.length
                     }
+                    if (!this.backendSorting) {
+                        if (this.sortMultiple &&
+                            this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
+                            this.doSortMultiColumn()
+                        } else if (Object.keys(this.currentSortColumn).length > 0) {
+                            this.doSortSingleColumn(this.currentSortColumn)
+                        }
+                    }
                 }
             },
             deep: true
@@ -829,13 +838,17 @@ export default {
                         {field: column.field, order: column.isAsc}
                     )
                 }
-                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
-                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
-                })
-
-                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+                this.doSortMultiColumn()
             }
         },
+
+        doSortMultiColumn() {
+            let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                return (i.order && i.order === 'desc' ? '-' : '') + i.field
+            })
+            this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+        },
+
         /**
         * Sort the column.
         * Toggle current direction on column if it's sortable
@@ -867,15 +880,19 @@ export default {
                     this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event)
                 }
                 if (!this.backendSorting) {
-                    this.newData = this.sortBy(
-                        this.newData,
-                        column.field,
-                        column.customSort,
-                        this.isAsc
-                    )
+                    this.doSortSingleColumn(column)
                 }
                 this.currentSortColumn = column
             }
+        },
+
+        doSortSingleColumn(column) {
+            this.newData = this.sortBy(
+                this.newData,
+                column.field,
+                column.customSort,
+                this.isAsc
+            )
         },
 
         /**
@@ -1077,7 +1094,7 @@ export default {
                 this.initSort()
                 this.firstTimeSort = false
             } else if (this.newColumns.length) {
-                if (this.currentSortColumn.field) {
+                if (Object.keys(this.currentSortColumn).length > 0) {
                     for (let i = 0; i < this.newColumns.length; i++) {
                         if (this.newColumns[i].field === this.currentSortColumn.field) {
                             this.currentSortColumn = this.newColumns[i]
