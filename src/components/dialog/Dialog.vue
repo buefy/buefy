@@ -28,7 +28,14 @@
                                 size="is-large"/>
                         </div>
                         <div class="media-content">
-                            <p v-html="message"/>
+                            <p>
+                                <template v-if="$slots.default">
+                                    <slot />
+                                </template>
+                                <template v-else>
+                                    {{ message }}
+                                </template>
+                            </p>
 
                             <div v-if="hasInput" class="field">
                                 <div class="control">

@@ -7,7 +7,14 @@
             class="snackbar"
             :class="[type,position]"
             :role="actionText ? 'alertdialog' : 'alert'">
-            <div class="text" v-html="message"/>
+            <div class="text">
+                <template v-if="$slots.default">
+                    <slot />
+                </template>
+                <template v-else>
+                    {{ message }}
+                </template>
+            </div>
             <div
                 v-if="actionText"
                 class="action"

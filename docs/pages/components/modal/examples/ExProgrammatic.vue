@@ -56,11 +56,13 @@
     export default {
         methods: {
             imageModal() {
-                this.$buefy.modal.open(
-                    `<p class="image is-4by3">
-                        <img src="https://buefy.org/static/img/placeholder-1280x960.png">
-                    </p>`
-                )
+                const h = this.$createElement
+                const vnode = h('p', { class: "image is-4by3" }, [
+                    h('img', { attrs: { src: 'https://buefy.org/static/img/placeholder-1280x960.png' }})
+                ])
+                this.$buefy.modal.open({
+                    content: [ vnode ]
+                })
             },
             cardModal() {
                 this.$buefy.modal.open({

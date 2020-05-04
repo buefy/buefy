@@ -25,9 +25,7 @@
                     v-on="events"
                     :is="component"
                     @close="close"/>
-                <div
-                    v-else-if="content"
-                    v-html="content"/>
+                <div v-else-if="content"> {{ content }} </div>
                 <slot v-else/>
                 <button
                     type="button"
