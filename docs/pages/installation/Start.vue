@@ -45,7 +45,7 @@
                         </ul>
                     </div>
                 </b-message>
-                <CodeView title="Full bundle (recommended)" :code="importingBundle | pre" lang="javascript" expanded/>
+                <CodeView title="Full bundle" :code="importingBundle | pre" lang="javascript" expanded/>
                 <CodeView title="Individual components as Vue plugins" :code="importingComponentsAsVuePlugins | pre" lang="javascript" expanded/>
                 <b-message type="is-info">
                     To include individual styles, see <router-link to="/documentation/customization">Customization</router-link> section.
