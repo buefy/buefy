@@ -467,7 +467,7 @@ export default {
             if (this.clearable) {
                 this.newValue = ''
             } else {
-                this.$emi('icon-right-click', event)
+                this.$emit('icon-right-click', event)
             }
         },
         checkValidity() {
