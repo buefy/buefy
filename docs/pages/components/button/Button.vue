@@ -18,11 +18,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/button'
+    import variables from './variables/button'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -46,6 +48,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypesStates,
                 ExIcons,
