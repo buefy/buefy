@@ -5,6 +5,15 @@
     .dropdown,
     .dropdown-trigger {
         width: 100%;
+        .input[readonly] {
+            box-shadow: $input-shadow;
+            &:focus,
+            &.is-focused,
+            &:active,
+            &.is-active {
+                box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
+            }
+        }
     }
     // unset opacity when dropdow is disabled
     .dropdown {
