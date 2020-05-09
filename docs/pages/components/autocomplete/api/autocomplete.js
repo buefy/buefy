@@ -166,7 +166,7 @@ export default [
             {
                 name: '<code>select</code>',
                 description: 'Triggers when an option is selected or unset',
-                parameters: '<code>option: String|Number|Object</code>'
+                parameters: '<code>option: String|Number|Object, event: $event</code>'
             },
             {
                 name: '<code>focus</code>',
