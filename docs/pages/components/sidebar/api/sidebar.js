@@ -83,6 +83,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>expand-on-hover-fixed</code>',
+                description: 'Expand sidebar on hover with fixed position when <code>reduced</code> or <code>mobile</code> is <code>reduce</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>reduce</code>',
                 description: 'Show a small sidebar',
                 type: 'Boolean',
