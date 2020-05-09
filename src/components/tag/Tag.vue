@@ -13,7 +13,7 @@
             :aria-label="ariaCloseLabel"
             :tabindex="tabstop ? 0 : false"
             :disabled="disabled"
-            :class="[size, { 'is-rounded': rounded }]"
+            :class="[size, closeType, { 'is-rounded': rounded }]"
             @click="close"
             @keyup.delete.prevent="close"
         />
@@ -31,6 +31,7 @@
             role="button"
             :aria-label="ariaCloseLabel"
             class="delete is-small"
+            :class="[{'tag is-paddingless is-rounded' : closeType}, closeType]"
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
             @click="close"
@@ -54,7 +55,8 @@ export default {
             type: Boolean,
             default: true
         },
-        ariaCloseLabel: String
+        ariaCloseLabel: String,
+        closeType: String
     },
     methods: {
         /**
