@@ -164,7 +164,10 @@ $table-sticky-header-height: 300px !default;
             }
         }
         .chevron-cell {
-          vertical-align:middle
+            vertical-align: middle;
+            > a {
+                color: $input-arrow !important;
+            }
         }
         .checkbox-cell {
             width: 40px;
