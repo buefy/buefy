@@ -44,6 +44,7 @@ let config = {
     defaultTrapFocus: false,
     defaultButtonRounded: false,
     defaultCarouselInterval: 3500,
+    defaultTabsAnimated: true,
     defaultLinkTags: [
         'a',
         'button',

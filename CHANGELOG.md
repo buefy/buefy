@@ -10,6 +10,8 @@
 * Add ``mobile-mode`` prop and ``$steps-mobile-max-width`` SCSS variable to step
 * Add ``expand-on-hover-fixed`` prop to sidebar
 * Add ``expanded`` prop to upload (thanks @kaangokdemir)
+* Add ``close-type`` prop to tag (thanks @kaangokdemir)
+* Add ``defaultTabsAnimated`` constructor options
 * #2474 Add ``icon-click`` event to autcomplete
 * #2487 Add native event as second parameter of ``select`` event on autocomplete
 

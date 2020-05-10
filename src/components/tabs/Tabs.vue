@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 import Icon from '../icon/Icon'
 import SlotComponent from '../../utils/SlotComponent'
 
@@ -50,7 +51,9 @@ export default {
         position: String,
         animated: {
             type: Boolean,
-            default: true
+            default: () => {
+                return config.defaultTabsAnimated
+            }
         },
         destroyOnHide: {
             type: Boolean,
