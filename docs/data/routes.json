@@ -103,7 +103,8 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/icon": {
         "title": "Icon",
@@ -139,8 +140,7 @@
             "/",
             "documentation",
             "documentation/modal"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/navbar": {
         "title": "Navbar",
@@ -164,8 +164,7 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tag": {
         "title": "Tag",
@@ -177,7 +176,8 @@
             "/",
             "documentation",
             "documentation/tag"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/toast": {
         "title": "Toast",
@@ -299,7 +299,8 @@
             "/",
             "documentation",
             "documentation/checkbox"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/radio": {
         "title": "Radio",
@@ -311,7 +312,8 @@
             "/",
             "documentation",
             "documentation/radio"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/switch": {
         "title": "Switch",
@@ -323,7 +325,8 @@
             "/",
             "documentation",
             "documentation/switch"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datepicker": {
         "title": "Datepicker",
@@ -335,7 +338,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -347,7 +351,8 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -371,7 +376,8 @@
             "/",
             "documentation",
             "documentation/datetimepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -396,7 +402,8 @@
             "/",
             "documentation",
             "documentation/upload"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/table": {
         "title": "Table",
@@ -482,8 +489,7 @@
             "/",
             "documentation",
             "documentation/slider"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/progress": {
         "title": "Progress",
@@ -531,7 +537,8 @@
             "/",
             "documentation",
             "documentation/sidebar"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/skeleton": {
         "title": "Skeleton",
@@ -544,7 +551,7 @@
             "documentation",
             "documentation/skeleton"
         ],
-        "isNew": true
+        "isUpdated": true
     },
     "extensions": {
         "title": "Extensions",

@@ -52,7 +52,7 @@
                         :key="index"
                         class="dropdown-item"
                         :class="{ 'is-hovered': option === hovered }"
-                        @click="setSelected(option)">
+                        @click="setSelected(option, undefined, $event)">
 
                         <slot
                             v-if="hasDefaultSlot"
@@ -288,14 +288,14 @@ export default {
          * Set which option is currently selected, update v-model,
          * update input value and close dropdown.
          */
-        setSelected(option, closeDropdown = true) {
+        setSelected(option, closeDropdown = true, event = undefined) {
             if (option === undefined) return
 
             this.selected = option
-            this.$emit('select', this.selected)
+            this.$emit('select', this.selected, event)
             if (this.selected !== null) {
                 this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
-                this.setHovered(this.clearOnSelect ? null : this.hovered)
+                this.setHovered(null)
             }
             closeDropdown && this.$nextTick(() => { this.isActive = false })
             this.checkValidity()
@@ -321,9 +321,9 @@ export default {
          * Enter key listener.
          * Select the hovered option.
          */
-        enterPressed() {
+        enterPressed(event) {
             if (this.hovered === null) return
-            this.setSelected(this.hovered, !this.keepOpen)
+            this.setSelected(this.hovered, !this.keepOpen, event)
         },
 
         /**
@@ -331,12 +331,12 @@ export default {
          * Select hovered option if it exists, close dropdown, then allow
          * native handling to move to next tabbable element.
          */
-        tabPressed() {
+        tabPressed(event) {
             if (this.hovered === null) {
                 this.isActive = false
                 return
             }
-            this.setSelected(this.hovered, !this.keepOpen)
+            this.setSelected(this.hovered, !this.keepOpen, event)
         },
 
         /**
@@ -467,7 +467,7 @@ export default {
             if (this.clearable) {
                 this.newValue = ''
             } else {
-                this.$emi('icon-right-click', event)
+                this.$emit('icon-right-click', event)
             }
         },
         checkValidity() {

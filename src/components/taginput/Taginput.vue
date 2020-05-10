@@ -239,7 +239,7 @@ export default {
          * When v-model is changed set internal value.
          */
         value(value) {
-            this.tags = value
+            this.tags = Array.isArray(value) ? value.slice(0) : (value || [])
         },
 
         hasInput() {

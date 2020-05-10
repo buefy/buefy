@@ -25,11 +25,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/notification'
+    import variables from './variables/notification'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -50,6 +52,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypes,
                 ExIcons,

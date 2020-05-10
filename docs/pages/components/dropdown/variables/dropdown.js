@@ -14,4 +14,8 @@ export default [
         description: 'Defines dropdown disabled opacity.',
         default: '<code>0.5</code>'
     },
+    {
+        name: 'Bulma variables',
+        default: '<a target="_blank" href="https://bulma.io/documentation/components/dropdown/#variables">Link</a>'
+    }
 ]

@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 import TabbedMixin from '../../utils/TabbedMixin.js'
 
 export default {
@@ -44,6 +45,12 @@ export default {
     mixins: [TabbedMixin],
     props: {
         expanded: Boolean,
+        animated: {
+            type: Boolean,
+            default: () => {
+                return config.defaultTabsAnimated
+            }
+        },
         multiline: Boolean
     },
     data() {

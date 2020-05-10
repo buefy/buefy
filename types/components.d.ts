@@ -48,10 +48,14 @@ export declare type BuefyConfig = {
     defaultDatepickerNearbyMonthDays?: boolean;
     defaultDatepickerNearbySelectableMonthDays?: boolean;
     defaultDatepickerShowWeekNumber?: boolean;
-    customIconPacks?: any;
     defaultClockpickerHoursLabel?: string;
     defaultClockpickerMinutesLabel?: string;
     defaultTrapFocus?: boolean;
+    defaultButtonRounded?: boolean;
+    defaultCarouselInterval?: number;
+    defaultTabsAnimated?: boolean;
+    defaultLinkTags: string[];
+    customIconPacks?: any;
 };
 
 export declare type BDialogConfig = {

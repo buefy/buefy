@@ -42,11 +42,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/icon'
+    import variables from './variables/icon'
 
     import ExMdi from './examples/ExMdi'
     import ExMdiCode from '!!raw-loader!./examples/ExMdi'
@@ -64,6 +66,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExMdi,
                 ExFa,
                 ExObjectSyntax,

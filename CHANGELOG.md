@@ -1,5 +1,31 @@
 # Buefy Changelog
 
+## 0.8.18
+
+### New features
+
+* Add ``message`` slot to field
+* Add ``scrollable`` and ``max-height`` to dropdown (thanks @franciscoh017)
+* Add ``rounded`` prop to skeleton
+* Add ``mobile-mode`` prop and ``$steps-mobile-max-width`` SCSS variable to step
+* Add ``expand-on-hover-fixed`` prop to sidebar
+* Add ``expanded`` prop to upload (thanks @kaangokdemir)
+* Add ``close-type`` prop to tag (thanks @kaangokdemir)
+* Add ``defaultTabsAnimated`` constructor options
+* #2474 Add ``icon-click`` event to autcomplete
+* #2487 Add native event as second parameter of ``select`` event on autocomplete
+
+### Fixes
+
+* Fix security (XSS) on message field
+* Fix taginput shallow copy in watcher (thanks @lunfel)
+* Fix #2456 double message when field horizontal and multiple fields
+* Fix #2459 checkbox, radio, switch group on mobile
+* Fix #2469 keep sort during search
+* Fix #2485 datepicker and timepicker default shadow when not editable
+* Fix #2489 dropdown item padding on mobile when ``has-link``
+* Fix #2493 clean hovered on select option (autocomplete and taginput)
+
 ## 0.8.17
 
 ### New features

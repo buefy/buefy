@@ -41,6 +41,9 @@ $sidebar-mobile-breakpoint: $tablet !default;
             transition: width $speed-slow $easing;
             &:not(.is-fullwidth) {
                 width: $sidebar-width;
+                &.is-mini-expand-fixed {
+                    position: fixed;
+                }
             }
         }
         &.is-static {
@@ -69,6 +72,9 @@ $sidebar-mobile-breakpoint: $tablet !default;
             &.is-mini-expand:hover {
                 &:not(.is-fullwidth-mobile) {
                     width: $sidebar-width;
+                    &.is-mini-expand-fixed {
+                        position: fixed;
+                    }
                 }
             }
             &.is-hidden-mobile {

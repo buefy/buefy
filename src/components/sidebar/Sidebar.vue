@@ -47,6 +47,7 @@ export default {
         },
         reduce: Boolean,
         expandOnHover: Boolean,
+        expandOnHoverFixed: Boolean,
         canCancel: {
             type: [Array, Boolean],
             default: () => ['escape', 'outside']
@@ -74,6 +75,7 @@ export default {
                 'is-right': this.right,
                 'is-mini': this.reduce,
                 'is-mini-expand': this.expandOnHover,
+                'is-mini-expand-fixed': this.expandOnHover && this.expandOnHoverFixed,
                 'is-mini-mobile': this.mobile === 'reduce',
                 'is-hidden-mobile': this.mobile === 'hide',
                 'is-fullwidth-mobile': this.mobile === 'fullwidth'

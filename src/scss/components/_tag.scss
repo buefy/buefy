@@ -5,4 +5,15 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+    .delete, &.is-delete {
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            &.is-#{$name} {
+                background: $color;
+                &:hover {
+                    background-color: darken($color, 10%);
+                }
+            }
+        }
+    }
 }

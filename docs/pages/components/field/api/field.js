@@ -87,6 +87,11 @@ export default [
                 name: '<code>label</code>',
                 description: 'Custom label',
                 props: '-'
+            },
+            {
+                name: '<code>message</code>',
+                description: 'Custom message',
+                props: '-'
             }
         ]
     }
