@@ -176,7 +176,8 @@
             "/",
             "documentation",
             "documentation/tag"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/toast": {
         "title": "Toast",
