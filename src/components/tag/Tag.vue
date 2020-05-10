@@ -31,7 +31,7 @@
             role="button"
             :aria-label="ariaCloseLabel"
             class="delete is-small"
-            :class="[{'tag is-paddingless is-rounded' : closeType}, closeType]"
+            :class="closeType"
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
             @click="close"
