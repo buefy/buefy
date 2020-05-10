@@ -297,6 +297,9 @@ export default {
                 dropdown.classList.forEach((item) => dropdown.classList.remove(item))
                 dropdown.classList.add('dropdown')
                 dropdown.classList.add('dropdown-menu-animation')
+                if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+                    dropdown.classList.add(this.$vnode.data.staticClass)
+                }
                 this.rootClasses.forEach((item) => {
                     // skip position prop
                     if (item && typeof item === 'object') {
