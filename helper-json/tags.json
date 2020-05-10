@@ -260,7 +260,9 @@
             "trap-focus",
             "can-close",
             "close-on-click",
-            "append-to-body"
+            "append-to-body",
+            "scrollable",
+            "max-height"
         ],
         "description": "Buefy component <b-dropdown>",
         "subtags": [
@@ -617,7 +619,7 @@
             "overlay",
             "expand-on-hover",
             "reduce",
-            "container"
+            "expand-on-hover-fixed"
         ],
         "description": "Buefy component <b-sidebar>",
         "subtags": []
@@ -629,6 +631,7 @@
             "width",
             "height",
             "circle",
+            "rounded",
             "count"
         ],
         "description": "Buefy component <b-skeleton>",
@@ -681,7 +684,8 @@
             "aria-page-label",
             "aria-current-label",
             "vertical",
-            "rounded"
+            "rounded",
+            "mobile-mode"
         ],
         "description": "Buefy component <b-steps>",
         "subtags": [
@@ -826,6 +830,7 @@
             "ellipsis",
             "tabstop",
             "disabled",
+            "close-type",
             "aria-close-label"
         ],
         "description": "Buefy component <b-tag>",
@@ -924,7 +929,8 @@
             "accept",
             "loading",
             "multiple",
-            "native"
+            "native",
+            "expanded"
         ],
         "description": "Buefy component <b-upload>",
         "subtags": []

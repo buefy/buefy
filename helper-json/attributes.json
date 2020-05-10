@@ -849,8 +849,16 @@
         "description": "Use it if your item is an anchor tag or router-link",
         "type": "boolean"
     },
+    "b-dropdown-item/max-height": {
+        "description": "Max height of dropdown content",
+        "type": "string|number"
+    },
     "b-dropdown-item/paddingless": {
         "description": "Remove padding",
+        "type": "boolean"
+    },
+    "b-dropdown-item/scrollable": {
+        "description": "Dropdown content will be scrollable",
         "type": "boolean"
     },
     "b-dropdown-item/separator": {
@@ -1826,12 +1834,12 @@
         "description": "Can close Modal by clicking 'X', pressing escape or clicking outside",
         "type": "boolean|array"
     },
-    "b-sidebar/container": {
-        "description": "DOM element the sidebar will be created on when fixed",
-        "type": "string"
-    },
     "b-sidebar/expand-on-hover": {
         "description": "Expand sidebar on hover when reduced or mobile is reduce",
+        "type": "boolean"
+    },
+    "b-sidebar/expand-on-hover-fixed": {
+        "description": "Expand sidebar on hover with fixed position when reduced or mobile is reduce",
         "type": "boolean"
     },
     "b-sidebar/fullheight": {
@@ -1901,6 +1909,10 @@
     "b-skeleton/height": {
         "description": "Custom height",
         "type": "number|string"
+    },
+    "b-skeleton/rounded": {
+        "description": "Rounded style",
+        "type": "boolean"
     },
     "b-skeleton/width": {
         "description": "Custom width",
@@ -2047,6 +2059,14 @@
     "b-steps/icon-prev": {
         "description": "Icon to use for navigation button",
         "type": "string"
+    },
+    "b-steps/mobile-mode": {
+        "description": "Custom layout on mobile",
+        "options": [
+            "minimalist",
+            "compact",
+            null
+        ]
     },
     "b-steps/size": {
         "description": "Size of the step, optional",
@@ -2491,6 +2511,10 @@
         "description": "Add close/delete button to the tag",
         "type": "boolean"
     },
+    "b-tag/close-type": {
+        "description": "Type (color) of the cross button of tag, optional",
+        "type": "string"
+    },
     "b-tag/disabled": {
         "description": "Disable delete button",
         "type": "boolean"
@@ -2811,6 +2835,10 @@
     },
     "b-upload/drag-drop": {
         "description": "Accepts drag & drop and change its style",
+        "type": "boolean"
+    },
+    "b-upload/expanded": {
+        "description": "Upload will be expanded (full-width)",
         "type": "boolean"
     },
     "b-upload/loading": {
