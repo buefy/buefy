@@ -164,6 +164,13 @@ export default {
             if (status && this.asIndicator) {
                 this.getWidth()
             }
+        },
+        '$props': {
+            handler(value) {
+                this.initConfig()
+                this.update()
+            },
+            deep: true
         }
     },
     methods: {
@@ -258,7 +265,9 @@ export default {
         })
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.update)
+        if (typeof window !== 'undefined') {
+            window.removeEventListener('resize', this.update)
+        }
     }
 }
 </script>
