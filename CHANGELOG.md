@@ -22,6 +22,7 @@
 * Fix #2469 keep sort during search
 * Fix #2485 datepicker and timepicker default shadow when not editable
 * Fix #2489 dropdown item padding on mobile when ``has-link``
+* Fix #2493 clean hovered on select option (autocomplete and taginput)
 
 ## 0.8.17
 
