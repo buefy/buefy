@@ -356,6 +356,19 @@ $steps-mobile-max-width: $tablet !default;
                         background-position: left bottom;
                     }
 
+                    // Override marker connector color per step
+                    @each $name, $pair in $colors {
+                        $color: nth($pair, 1);
+
+                        &.is-#{$name} {
+                            &::before, &::after {
+                                background: linear-gradient(to top, $steps-default-color 50%, $color 50%);
+                                background-size: 100% 200%;
+                                background-position: left bottom;
+                            }
+                        }
+                    }
+
                     &:not(:first-child), &:only-child {
                         &::before {
                             height: 100%;
