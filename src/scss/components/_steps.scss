@@ -5,6 +5,7 @@ Wikiki (https://github.com/Wikiki) licensed under
 MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 */
 
+$steps-details-background-color: $body-background-color !default;
 $steps-maker-default-color: $grey-light !default;
 $steps-marker-default-border: .2em solid #fff !default;
 $steps-default-color: $grey-lighter !default;
@@ -36,6 +37,7 @@ $steps-mobile-max-width: $tablet !default;
                     .step-title {
                         font-size: $size * 1.2;
                         font-weight: $weight-semibold;
+                        line-height: $size;
                     }
                 }
 
@@ -304,6 +306,7 @@ $steps-mobile-max-width: $tablet !default;
                         flex-direction: row;
 
                         > .step-details {
+                            background-color: $steps-details-background-color;
                             padding: .2em;
                         }
                     }
@@ -411,6 +414,17 @@ $steps-mobile-max-width: $tablet !default;
                 .step-items {
                     .step-item {
                         justify-content: flex-end;
+                    }
+                }
+            }
+            &:not(.has-label-right):not(.has-label-left) {
+                .step-items {
+                    .step-item {
+                        .step-link {
+                            > .step-details {
+                                background-color: $steps-details-background-color;
+                            }
+                        }
                     }
                 }
             }
