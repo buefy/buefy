@@ -404,15 +404,16 @@ $steps-mobile-max-width: $tablet !default;
                     }
                 }
             }
-            &:not(.has-label-right):not(.has-label-left) {.step-items {
-                .step-item {
-                    .step-link {
-                        > .step-details {
-                            background-color: $steps-details-background-color;
+            &:not(.has-label-right):not(.has-label-left) {
+                .step-items {
+                    .step-item {
+                        .step-link {
+                            > .step-details {
+                                background-color: $steps-details-background-color;
+                            }
                         }
                     }
                 }
-            }
             }
         }
 
