@@ -21,6 +21,17 @@ export default {
         count: {
             type: Number,
             default: 1
+        },
+        position: {
+            type: String,
+            default: '',
+            validator(value) {
+                return [
+                    '',
+                    'is-centered',
+                    'is-right'
+                ].indexOf(value) > -1
+            }
         }
     },
     render(createElement, context) {
@@ -42,7 +53,7 @@ export default {
                 }
             }))
         }
-        return createElement('div', { staticClass: 'b-skeleton', class: { 'is-animated': context.props.animated } }, items)
+        return createElement('div', { staticClass: 'b-skeleton', class: { 'is-animated': context.props.animated, [context.props.position]: context.props.position } }, items)
     }
 }
 </script>

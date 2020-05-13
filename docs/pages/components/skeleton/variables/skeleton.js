@@ -1,7 +1,7 @@
 export default [
     {
         name: '<code>$skeleton-line-height</code>',
-        default: '<code>1</code>'
+        default: '<code>$body-line-height</code>'
     },
     {
         name: '<code>$skeleton-background</code>',

@@ -49,7 +49,14 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
-            }
+						},
+            {
+                name: '<code>position</code>',
+                description: 'Position of the skeleton, optional',
+                type: 'String',
+                values: '<code>is-centered</code>, <code>is-right</code>',
+                default: '—'
+						},
         ]
     }
 ]
