@@ -21,6 +21,9 @@ $skeleton-margin-top: .5rem !default;
         &::after {
             content: "\00a0";
         }
+        + .b-skeleton-item {
+            margin-top: $skeleton-margin-top;
+        }
     }
     &.is-animated {
         > .b-skeleton-item {
