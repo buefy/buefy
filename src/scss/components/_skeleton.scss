@@ -6,7 +6,6 @@ $skeleton-duration: 1.5s !default;
 $skeleton-margin-top: .5rem !default;
 
 .b-skeleton {
-    display: flex;
     width: 100%;
     > .b-skeleton-item {
         background: $skeleton-background;
