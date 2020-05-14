@@ -197,12 +197,17 @@
                             : (isNaN(column.width) ? column.width : column.width + 'px') }">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
-                                    <slot
-                                        v-if="$scopedSlots.searchable"
-                                        name="searchable"
-                                        :column="column"
-                                        :filters="filters"
-                                    />
+                                    <template
+                                        v-if="column.$scopedSlots
+                                        && column.$scopedSlots.searchable">
+                                        <b-slot-component
+                                            :component="column"
+                                            :scoped="true"
+                                            name="searchable"
+                                            tag="span"
+                                            :props="{ column, filters }"
+                                        />
+                                    </template>
                                     <b-input
                                         v-else
                                         @[filtersEvent].native="onFiltersEvent"
