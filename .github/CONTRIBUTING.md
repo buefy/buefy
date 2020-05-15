@@ -100,7 +100,7 @@ Sass example:
 
 # Development Setup
 
-You need [Node.js](http://nodejs.org/) **version 6+**.
+You need [Node.js](http://nodejs.org/) **version >= 6 and <= 11**.
 
 After cloning the repo, run:
 
