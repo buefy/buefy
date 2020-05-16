@@ -79,7 +79,7 @@ export default {
         [SlotComponent.name]: SlotComponent
     },
     props: {
-        value: Number,
+        value: [Number, String],
         type: [String, Object],
         size: String,
         animated: {
@@ -142,7 +142,7 @@ export default {
     },
     data() {
         return {
-            activeStep: this.value || 0,
+            activeStep: 0,
             defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false,
@@ -282,7 +282,7 @@ export default {
             }
             this.stepItems[newIndex].activate(this.activeStep, newIndex)
             this.activeStep = newIndex
-            this.$emit('change', newIndex)
+            this.$emit('change', this.getValueByIndex(newIndex))
         },
 
         /**
@@ -298,9 +298,9 @@ export default {
         /**
          * Step click listener, emit input event and change active step.
          */
-        stepClick(value) {
-            this.$emit('input', value)
-            this.changeStep(value)
+        stepClick(index) {
+            this.$emit('input', this.getValueByIndex(index))
+            this.changeStep(index)
         },
 
         /**
@@ -314,7 +314,7 @@ export default {
             if (prevItemIdx >= 0) {
                 prevItemIdx = this.stepItems.length - 1 - prevItemIdx
             }
-            this.$emit('input', prevItemIdx)
+            this.$emit('input', this.getValueByIndex(prevItemIdx))
             this.changeStep(prevItemIdx)
         },
 
@@ -326,11 +326,24 @@ export default {
             const nextItemIdx = this.stepItems.map(
                 (step, idx) => idx > this.activeStep && step.visible
             ).indexOf(true)
-            this.$emit('input', nextItemIdx)
+            this.$emit('input', this.getValueByIndex(nextItemIdx))
             this.changeStep(nextItemIdx)
+        },
+
+        getIndexByValue(value, defaultValue) {
+            let index = this.stepItems.map((t) =>
+                t.$options.propsData ? t.$options.propsData.value : defaultValue
+            ).indexOf(value)
+            return index >= 0 ? index : defaultValue
+        },
+
+        getValueByIndex(index) {
+            const propsData = this.stepItems[index].$options.propsData
+            return propsData ? propsData.value : index
         }
     },
     mounted() {
+        this.activeTab = this.getIndexByValue(this.value, this.activeTab)
         if (this.activeStep < this.stepItems.length) {
             this.stepItems[this.activeStep].isActive = true
         }

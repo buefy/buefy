@@ -160,12 +160,15 @@ export default {
         },
 
         getIndexByValue(value, defaultValue) {
-            let index = this.tabItems.map((t) => t.$options.propsData.value).indexOf(value)
+            let index = this.tabItems.map((t) =>
+                t.$options.propsData ? t.$options.propsData.value : defaultValue
+            ).indexOf(value)
             return index >= 0 ? index : defaultValue
         },
 
         getValueByIndex(index) {
-            return this.tabItems[index].$options.propsData.value
+            const propsData = this.tabItems[index].$options.propsData
+            return propsData ? propsData.value : index
         }
     },
     mounted() {
