@@ -147,7 +147,7 @@ export default [
         ],
     },
     {
-        title: 'Step Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>step</code>',

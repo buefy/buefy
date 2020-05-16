@@ -80,7 +80,7 @@ export default [
         ]
     },
     {
-        title: 'Tab Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>label</code>',

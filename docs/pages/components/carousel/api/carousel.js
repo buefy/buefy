@@ -243,7 +243,7 @@ export default [
         ]
     },
     {
-        title: 'Carousel List',
+        title: 'List',
         props: [
             {
                 name: '<code>v-model</code>',
