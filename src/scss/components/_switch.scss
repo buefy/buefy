@@ -30,6 +30,15 @@ $switch-active-background-color: $primary !default;
             background: $grey-light;
             border-radius: $radius;
             transition: background $speed-slow $easing, box-shadow $speed-slow $easing;
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name}-passive, &:hover {
+                    background: $color;
+                }
+                &.input[type=checkbox] + &.check {
+                    background: 'pink';
+                }
+            }    
             &:before {
                 content: "";
                 display: block;
@@ -67,6 +76,12 @@ $switch-active-background-color: $primary !default;
             outline: none;
             + .check {
                 box-shadow: 0 0 0.5em rgba($grey, 0.6);
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name}-passive {
+                        box-shadow: 0 0 0.5em rgba($color, 0.8);
+                    }
+                }
             }
             &:checked + .check {
                 box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
@@ -85,6 +100,12 @@ $switch-active-background-color: $primary !default;
     &:hover {
         input[type=checkbox] + .check {
             background: rgba($grey-light, 0.9);
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                &.is-#{$name}-passive {
+                    background: rgba($color, 0.9);
+                }
+            }
         }
         input[type=checkbox]:checked + .check {
             background: rgba($switch-active-background-color, 0.9);
@@ -115,6 +136,18 @@ $switch-active-background-color: $primary !default;
             + .check {
                 background: transparent;
                 border: .1rem solid $grey-light;
+                @each $name, $pair in $colors {
+                    $color: nth($pair, 1);
+                    &.is-#{$name}-passive {
+                        border: .1rem solid rgba($color, 0.9);
+                        &:before {
+                            background: $color
+                        }
+                        &:hover {
+                            border-color: rgba($color, 0.9);
+                        }
+                    }
+                }
                 &:before {
                     background: $grey-light;
                 }
