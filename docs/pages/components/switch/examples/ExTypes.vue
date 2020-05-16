@@ -29,5 +29,12 @@
                 Warning
             </b-switch>
         </div>
+        <div class="field">
+            <b-switch 
+                :value="false"
+                passive-type='is-danger'>
+                Danger(Passive)
+            </b-switch>
+        </div>
     </section>
 </template>
