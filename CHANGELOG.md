@@ -5,6 +5,7 @@
 ### New features
 
 * Add ``value`` prop to tabs-item and steps-item
+* Add ``size`` prop to skeleton
 * #2507 ``icon-right`` get higher priority than status icon on input
 * #2513 add cursor pointer to pickers when not editable
 
