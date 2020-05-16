@@ -241,7 +241,8 @@ export default {
         * When v-model is changed set the new active step.
         */
         value(value) {
-            this.changeStep(value)
+            const index = this.getIndexByValue(value)
+            this.changeStep(index)
         },
 
         /**
@@ -330,20 +331,20 @@ export default {
             this.changeStep(nextItemIdx)
         },
 
-        getIndexByValue(value, defaultValue) {
+        getIndexByValue(value) {
             let index = this.stepItems.map((t) =>
-                t.$options.propsData ? t.$options.propsData.value : defaultValue
+                t.$options.propsData ? t.$options.propsData.value : undefined
             ).indexOf(value)
-            return index >= 0 ? index : defaultValue
+            return index >= 0 ? index : value
         },
 
         getValueByIndex(index) {
             const propsData = this.stepItems[index].$options.propsData
-            return propsData ? propsData.value : index
+            return propsData && propsData.value ? propsData.value : index
         }
     },
     mounted() {
-        this.activeTab = this.getIndexByValue(this.value, this.activeTab)
+        this.activeTab = this.getIndexByValue(this.value || 0)
         if (this.activeStep < this.stepItems.length) {
             this.stepItems[this.activeStep].isActive = true
         }

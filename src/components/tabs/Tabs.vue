@@ -105,7 +105,7 @@ export default {
         * When v-model is changed set the new active tab.
         */
         value(value) {
-            const index = this.getIndexByValue(value, this.activeTab)
+            const index = this.getIndexByValue(value, value)
             this.changeTab(index)
         },
 
@@ -159,20 +159,20 @@ export default {
             this.defaultSlots = this.$slots.default || []
         },
 
-        getIndexByValue(value, defaultValue) {
+        getIndexByValue(value) {
             let index = this.tabItems.map((t) =>
-                t.$options.propsData ? t.$options.propsData.value : defaultValue
+                t.$options.propsData ? t.$options.propsData.value : undefined
             ).indexOf(value)
-            return index >= 0 ? index : defaultValue
+            return index >= 0 ? index : value
         },
 
         getValueByIndex(index) {
             const propsData = this.tabItems[index].$options.propsData
-            return propsData ? propsData.value : index
+            return propsData && propsData.value ? propsData.value : index
         }
     },
     mounted() {
-        this.activeTab = this.getIndexByValue(this.value, this.activeTab)
+        this.activeTab = this.getIndexByValue(this.value || 0)
         if (this.activeTab < this.tabItems.length) {
             this.tabItems[this.activeTab].isActive = true
         }
