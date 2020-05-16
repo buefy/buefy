@@ -31,10 +31,21 @@
         </div>
         <div class="field">
             <b-switch 
-                :value="false"
-                passive-type='is-danger'>
-                Danger(Passive)
+                v-model="lightMode"
+                passive-type='is-dark'
+                type='is-warning'>
+                {{ lightMode ? "Light Mode" : "Dark Mode" }}
             </b-switch>
         </div>
     </section>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            lightMode: false
+        }
+    }
+}
+</script>
