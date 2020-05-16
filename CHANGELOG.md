@@ -1,5 +1,22 @@
 # Buefy Changelog
 
+## 0.8.19
+
+### New features
+
+* Add ``value`` prop to tabs-item and steps-item
+* #2507 ``icon-right`` get higher priority than status icon on input
+* #2513 add cursor pointer to pickers when not editable
+
+### Fixes
+
+* Fix #2499 remove prevent click on carousel slide
+* Fix #2501 set ``type`` when ``vertical`` on steps (thanks @service-paradis)
+* Fix #2503 searchable table column slot
+* Fix #2504 display on skeletons (thanks @EmmanuelVlad)
+* Fix #2509 keep table search filtering when data are updated (thanks @VictorCazanave)
+* Fix #2514 radio-button and checkbox-button style
+
 ## 0.8.18
 
 ### New features
