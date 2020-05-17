@@ -3,9 +3,9 @@
 ## 0.8.19
 
 ### New features
-
 * Add ``value`` prop to tabs-item and steps-item
 * Add ``size`` prop to skeleton
+* Add ``passive-type`` prop for switch (thanks @kaangokdemir)
 * #2507 ``icon-right`` get higher priority than status icon on input
 * #2513 add cursor pointer to pickers when not editable
 
