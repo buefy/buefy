@@ -167,12 +167,17 @@
                             :style="column.style">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
-                                    <slot
-                                        v-if="$scopedSlots.searchable"
-                                        name="searchable"
-                                        :column="column"
-                                        :filters="filters"
-                                    />
+                                    <template
+                                        v-if="column.$scopedSlots
+                                        && column.$scopedSlots.searchable">
+                                        <b-slot-component
+                                            :component="column"
+                                            :scoped="true"
+                                            name="searchable"
+                                            tag="span"
+                                            :props="{ column, filters }"
+                                        />
+                                    </template>
                                     <b-input
                                         v-else
                                         @[filtersEvent].native="onFiltersEvent"
@@ -673,16 +678,21 @@ export default {
         /**
         * When data prop change:
         *   1. Update internal value.
-        *   2. Sort again if it's not backend-sort.
-        *   3. Set new total if it's not backend-paginated.
+        *   2. Filter data if it's not backend-filtered.
+        *   3. Sort again if it's not backend-sorted.
+        *   4. Set new total if it's not backend-paginated.
         */
         data(value) {
             this.newData = value
+            if (!this.backendFiltering) {
+                this.newData = value.filter(
+                    (row) => this.isRowFiltered(row))
+            }
             if (!this.backendSorting) {
                 this.sort(this.currentSortColumn, true)
             }
             if (!this.backendPagination) {
-                this.newDataTotal = value.length
+                this.newDataTotal = this.newData.length
             }
         },
 

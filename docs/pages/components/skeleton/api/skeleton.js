@@ -23,6 +23,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>size</code>',
+                description: 'Vertical size of skeleton, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
                 name: '<code>width</code>',
                 description: 'Custom width',
                 type: 'String, Number',

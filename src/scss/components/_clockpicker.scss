@@ -1,7 +1,7 @@
 
 .b-clockpicker {
     // Clockpicker variables defined here as exact numbers
-    // must be known for use in the Vue component for calculations 
+    // must be known for use in the Vue component for calculations
     // to determine  number and hand positioning/size.
     $transition-swing: cubic-bezier(.25,.8,.50,1);
 
@@ -54,6 +54,16 @@
     .dropdown,
     .dropdown-trigger {
         width: 100%;
+        .input[readonly] {
+            cursor: pointer;
+            box-shadow: $input-shadow;
+            &:focus,
+            &.is-focused,
+            &:active,
+            &.is-active {
+                box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
+            }
+        }
     }
     .dropdown-item {
         font-size: inherit;
@@ -63,7 +73,7 @@
         padding-top: 0;
         padding-bottom: 0;
     }
-    
+
     .card {
         border-radius: $radius;
     }
@@ -76,7 +86,7 @@
     .card-content {
         padding: $padding-outer;
     }
-    
+
     &-btn {
         cursor: pointer;
         opacity: 0.6;
@@ -85,7 +95,7 @@
             opacity: 1;
         }
     }
-    
+
     &-period {
         .b-clockpicker-btn {
             font-size: $period-font-size;
@@ -100,7 +110,7 @@
             justify-content: center;
         }
     }
-    
+
     &-header {
         display: flex;
         line-height: 1;
@@ -124,7 +134,7 @@
             margin: 8px 0 6px 8px;
         }
     }
-    
+
     &-body {
         transition: 0.9s $transition-swing;
 
@@ -152,7 +162,7 @@
             font-size: $period-font-size;
 
         }
-        
+
         .b-clockpicker-face {
             // Outer border circle of clock
             border-radius: 50%;
@@ -200,7 +210,7 @@
                 left: calc(50% - #{$indicator-size} / 2);
                 top: calc(50% - #{$indicator-size} / 2);
                 user-select: none;
-                
+
                 > span {
                     z-index: 1;
                 }
@@ -227,13 +237,13 @@
                     opacity: .25;
                 }
             }
-            
+
             &-hand {
                 height: calc(50% - #{$hand-endpoint-size / 2});
                 width: 2px;
                 bottom: 50%;
                 left: calc(50% - 1px);
-                
+
                 transform-origin: center bottom;
                 position: absolute;
                 will-change: transform;

@@ -44,4 +44,12 @@ describe('BSwitch', () => {
             done()
         })
     })
+
+    it('applies passiveType prop properly', () => {
+        const passiveType = 'is-danger'
+        const value = false
+        wrapper.setProps({ passiveType, value })
+        const switchElement = wrapper.find('.check')
+        expect(switchElement.classes()).toContain('is-danger-passive')
+    })
 })

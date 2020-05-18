@@ -137,17 +137,17 @@ export default [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when step is clicked',
-                parameters: '<code>index: Number</code>'
+                parameters: '<code>value: String|Number</code>'
             },
             {
                 name: '<code>change</code>',
                 description: 'Triggers when active step is changed',
-                parameters: '<code>index: Number</code>'
+                parameters: '<code>value: String|Number</code>'
             }
         ],
     },
     {
-        title: 'Step Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>step</code>',
@@ -160,6 +160,13 @@ export default [
                 name: '<code>label</code>',
                 description: 'Step label',
                 type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>value</code>',
+                description: 'Step value',
+                type: 'Number, String',
                 values: '—',
                 default: '—'
             },

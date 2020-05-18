@@ -90,7 +90,7 @@ export default [
         ]
     },
     {
-        title: 'Checkbox Button',
+        title: 'Button',
         props: [
             {
                 name: '<code>v-model</code>',

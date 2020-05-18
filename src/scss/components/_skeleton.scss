@@ -1,24 +1,29 @@
 
-$skeleton-line-height: 1 !default;
 $skeleton-background: linear-gradient(90deg, $grey-lighter 25%, rgba($grey-lighter, 0.5) 50%, $grey-lighter 75%);
 $skeleton-border-radius: $radius !default;
 $skeleton-duration: 1.5s !default;
 $skeleton-margin-top: .5rem !default;
 
+@mixin steps-size($size) {
+    > .b-skeleton-item {
+        line-height: $size;
+    }
+}
+
 .b-skeleton {
-    display: flex;
     width: 100%;
     > .b-skeleton-item {
         background: $skeleton-background;
         background-size: 400% 100%;
-        display: inline-flex;
-        line-height: $skeleton-line-height;
         width: 100%;
         &.is-rounded {
             border-radius: $skeleton-border-radius;
         }
         &::after {
             content: "\00a0";
+        }
+        + .b-skeleton-item {
+            margin-top: $skeleton-margin-top;
         }
     }
     &.is-animated {
@@ -28,6 +33,16 @@ $skeleton-margin-top: .5rem !default;
     }
     + .b-skeleton {
         margin-top: $skeleton-margin-top;
+    }
+    @include steps-size($size-normal);
+    &.is-small {
+        @include steps-size($size-small);
+    }
+    &.is-medium {
+        @include steps-size($size-medium);
+    }
+    &.is-large {
+        @include steps-size($size-large);
     }
 }
 
