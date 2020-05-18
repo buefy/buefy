@@ -26,7 +26,7 @@ export default {
     },
     data() {
         return {
-            activeChild: this.value || 0,
+            activeChild: 0,
             defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false
@@ -37,7 +37,8 @@ export default {
          * When v-model is changed set the new active child.
          */
         value(value) {
-            this.changeActive(value)
+            const index = this.getIndexByValue(value, value)
+            this.changeTab(index)
         },
 
         /**
@@ -61,10 +62,6 @@ export default {
         }
     },
     methods: {
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-
         /**
          * Change the active child and emit change event.
          */
@@ -78,19 +75,36 @@ export default {
             }
             this.childItems[newIndex].activate(this.activeChild, newIndex)
             this.activeChild = newIndex
-            this.$emit('change', newIndex)
+            this.$emit('change', this.getValueByIndex(newIndex))
         },
 
         /**
         * Child click listener, emit input event and change active child.
         */
-        childClick(value) {
-            if (this.activeChild === value) return
-            this.$emit('input', value)
-            this.changeActive(value)
+        childClick(index) {
+            if (this.activeChild === index) return
+            this.$emit('input', this.getValueByIndex(index))
+            this.changeActive(index)
+        },
+
+        refreshSlots() {
+            this.defaultSlots = this.$slots.default || []
+        },
+
+        getIndexByValue(value) {
+            let index = this.childItems.map((t) =>
+                t.$options.propsData ? t.$options.propsData.value : undefined
+            ).indexOf(value)
+            return index >= 0 ? index : value
+        },
+
+        getValueByIndex(index) {
+            const propsData = this.childItems[index].$options.propsData
+            return propsData && propsData.value ? propsData.value : index
         }
     },
     mounted() {
+        this.activeTab = this.getIndexByValue(this.value || 0)
         if (this.activeChild < this.childItems.length) {
             this.childItems[this.activeChild].isActive = true
         }

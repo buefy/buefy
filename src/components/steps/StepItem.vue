@@ -5,8 +5,8 @@ export default {
     name: 'BStepItem',
     mixins: [TabbedChildMixin],
     props: {
-        step: String | Number,
-        type: String | Object,
+        step: [String, Number],
+        type: [String, Object],
         clickable: {
             type: Boolean,
             default: undefined
