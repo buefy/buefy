@@ -32,7 +32,8 @@ export default {
                     'is-right'
                 ].indexOf(value) > -1
             }
-        }
+        },
+        size: String
     },
     render(createElement, context) {
         if (!context.props.active) return
@@ -53,7 +54,10 @@ export default {
                 }
             }))
         }
-        return createElement('div', { staticClass: 'b-skeleton', class: { 'is-animated': context.props.animated, [context.props.position]: context.props.position } }, items)
+        return createElement('div', {
+            staticClass: 'b-skeleton',
+            class: [ context.props.size, context.props.position, { 'is-animated': context.props.animated } ]
+        }, items)
     }
 }
 </script>

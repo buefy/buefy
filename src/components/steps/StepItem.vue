@@ -2,9 +2,9 @@
 export default {
     name: 'BStepItem',
     props: {
-        step: String | Number,
+        step: [String, Number],
         label: String,
-        type: String | Object,
+        type: [String, Object],
         icon: String,
         iconPack: String,
         clickable: {
@@ -14,7 +14,8 @@ export default {
         visible: {
             type: Boolean,
             default: true
-        }
+        },
+        value: [String, Number]
     },
     data() {
         return {

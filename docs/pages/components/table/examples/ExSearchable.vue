@@ -7,16 +7,24 @@
         <hr />
         <p>You can also customize the search input using a scoped slot.</p>
         <b-table
-            :data="data"
-            :columns="columns">
-            <b-input
-                v-if="!props.column.numeric"
-                slot="searchable"
-                slot-scope="props"
-                v-model="props.filters[props.column.field]"
-                placeholder="Search..."
-                icon="magnify"
-                size="is-small" />
+            :data="data">
+            <template slot-scope="props">
+                <template v-for="column in columns">
+                    <b-table-column :key="column.id" v-bind="column">
+                        <template
+                            v-if="column.searchable && !column.numeric"
+                            slot="searchable"
+                            slot-scope="props">
+                            <b-input
+                                v-model="props.filters[props.column.field]"
+                                placeholder="Search..."
+                                icon="magnify"
+                                size="is-small" />
+                        </template>
+                        {{ props.row[column.field] }}
+                    </b-table-column>
+                </template>
+            </template>
         </b-table>
     </section>
 </template>

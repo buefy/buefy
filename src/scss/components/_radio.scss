@@ -7,9 +7,11 @@ $radio-size: 1.25em !default;
         outline: none;
         display: inline-flex;
         align-items: center;
-        margin-right: 0.5em;
-        & + .radio:last-child {
-            margin-right: 0;
+        &:not(.button) {
+            margin-right: 0.5em;
+            & + .radio:last-child {
+                margin-right: 0;
+            }
         }
         // reset Bulma
         & + .radio {

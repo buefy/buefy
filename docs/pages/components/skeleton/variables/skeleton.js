@@ -1,9 +1,5 @@
 export default [
     {
-        name: '<code>$skeleton-line-height</code>',
-        default: '<code>$body-line-height</code>'
-    },
-    {
         name: '<code>$skeleton-background</code>',
         default: '<code>linear-gradient(90deg, $grey-lighter 25%, rgba($grey-lighter, 0.5) 50%, $grey-lighter 75%)</code>'
     },
