@@ -97,7 +97,7 @@ export default [
             },
             {
                 name: '<code>open-on-focus</code>',
-                description: 'Opens the dropdown with choices when the input field is focused',
+                description: 'Opens a dropdown with choices when the input field is focused',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
