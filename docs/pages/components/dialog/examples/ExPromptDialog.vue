@@ -1,14 +1,23 @@
 <template>
     <section>
         <div class="buttons">
-            <button class="button is-medium is-dark" @click="prompt">Launch prompt (default)</button>
-
-            <button class="button is-medium is-dark" @click="promptNumber">Launch prompt (number)</button>
+            <button
+                class="button is-medium is-dark"
+                @click="prompt">
+                Launch prompt (default)
+            </button>
 
             <button
                 class="button is-medium is-dark"
-                @click="promptNotClosed"
-            >Launch prompt (Not closing default)</button>
+                @click="promptNumber">
+                Launch prompt (number)
+            </button>
+
+            <button
+                class="button is-medium is-dark"
+                @click="promptNotClosed">
+                Launch prompt (Not closing default)
+            </button>
         </div>
     </section>
 </template>
@@ -57,7 +66,7 @@ export default {
                     setTimeout(() => {
                         this.$buefy.toast.open(`Success message send!`)
                         close()
-                    }, 2000);
+                    }, 2000)
                 }
             })
         }
