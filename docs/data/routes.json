@@ -601,6 +601,19 @@
         ],
         "isUpdated": true
     },
+    "extensions/bulmacssvars": {
+        "title": "BulmaCssVars",
+        "subtitle": "Use CSS Variables for Bulma",
+        "path": "/extensions/bulmacssvars",
+        "githubPath": "pages/extensions/bulmacssvars/BulmaCssVars.vue",
+        "menu": "extensions",
+        "breadcrumb": [
+            "/",
+            "extensions",
+            "extensions/bulmacssvars"
+        ],
+        "isUpdated": true
+    },
     "expo": {
         "title": "Expo",
         "subtitle": "See how devs are using Buefy to create beautiful websites and apps!",
