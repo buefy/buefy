@@ -3,6 +3,7 @@
 ## 0.8.19
 
 ### New features
+
 * Add ``value`` prop to tabs-item and steps-item
 * Add ``size`` prop to skeleton
 * Add ``passive-type`` prop for switch (thanks @kaangokdemir)
