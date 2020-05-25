@@ -781,7 +781,11 @@
   },
   "b-dialog/onConfirm": {
     "description": "Callback function when the confirm button is clicked",
-    "type": "function(value: string)"
+    "type": "function(value: string| dialog: vueinstance)"
+  },
+  "b-dialog/closeOnConfirm": {
+    "description": "Turning this prop into false allows to make async requests in onConfirm callback",
+    "type": "boolean"
   },
   "b-dialog/onCancel": {
     "description": "Callback function when the dialog is canceled (cancel button is clicked / pressed escape / clicked outside)",
@@ -2429,6 +2433,10 @@
   },
   "b-taginput/allow-new": {
     "description": "When autocomplete, it allow to add new tags",
+    "type": "boolean"
+  },
+  "b-taginput/open-on-focus": {
+    "description": "Opens a dropdown with choices when the input field is focused",
     "type": "boolean"
   },
   "b-taginput/remove-on-keys": {
