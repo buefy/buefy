@@ -1,8 +1,21 @@
 # Buefy Changelog
 
+## 0.8.20
+
+### New features
+
+* Add ``close-on-confirm`` prop to dialog (thanks @kaangokdemir)
+* Add bulma-css-vars extension to docs (thanks @wtho)
+
+### Fixes
+
+* Fix typo activeStep variable (thanks @speedpro)
+* Fix #2518 open autocomplete on clearable icon when ``open-on-focus``
+
 ## 0.8.19
 
 ### New features
+
 * Add ``value`` prop to tabs-item and steps-item
 * Add ``size`` prop to skeleton
 * Add ``passive-type`` prop for switch (thanks @kaangokdemir)

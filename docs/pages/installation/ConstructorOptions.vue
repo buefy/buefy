@@ -26,15 +26,15 @@
                     // ...
                 })`,
                 usageComponents: `
-                import { BuefyProgrammatic, Table, Input } from 'buefy'
+                import { ConfigProgrammatic, Table, Input } from 'buefy'
 
-                Vue.use(BuefyProgrammatic, {
+                Vue.use(Table)
+                Vue.use(Input)
+                ConfigProgrammatic.setOptions({
                     defaultIconPack: 'fas',
                     defaultContainerElement: '#content',
                     // ...
-                })
-                Vue.use(Table)
-                Vue.use(Input)`
+                })`
             }
         }
     }

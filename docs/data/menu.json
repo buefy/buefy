@@ -82,6 +82,12 @@
             "pages": [
                 "extensions/sortablejs"
             ]
+        },
+        {
+            "category": "CSS Variables",
+            "pages": [
+                "extensions/bulmacssvars"
+            ]
         }
     ]
 }
