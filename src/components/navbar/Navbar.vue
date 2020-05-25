@@ -84,6 +84,7 @@ export default {
         fixedTop: {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
+                if (!this.fixedTop) return false
                 if (isSet) {
                     // TODO Apply only one of the classes once PR is merged in Bulma:
                     // https://github.com/jgthms/bulma/pull/2737
@@ -99,6 +100,7 @@ export default {
         fixedBottom: {
             handler(isSet) {
                 this.checkIfFixedPropertiesAreColliding()
+                if (!this.fixedBottom) return false
                 if (isSet) {
                     // TODO Apply only one of the classes once PR is merged in Bulma:
                     // https://github.com/jgthms/bulma/pull/2737
