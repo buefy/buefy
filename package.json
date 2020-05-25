@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "0.8.19",
+  "version": "0.8.20",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
