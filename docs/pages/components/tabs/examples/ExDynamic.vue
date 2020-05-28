@@ -10,10 +10,11 @@
             <b-switch v-model="multiline">Multiline</b-switch>
         </div>
         <b-tabs v-model="activeTab" :multiline="multiline">
-            <template v-for="(tab, index) in tabs">
+            <template v-for="tab in tabs">
                 <b-tab-item
                     v-if="tab.displayed"
-                    :key="index"
+                    :key="tab.id"
+                    :id="tab.id"
                     :label="tab.label">
                     {{ tab.content }}
                 </b-tab-item>
@@ -26,7 +27,7 @@
     export default {
         data() {
             return {
-                activeTab: 0,
+                activeTab: 'pictures',
                 showMusic: true,
                 showBooks: false,
                 multiline: true
@@ -36,31 +37,37 @@
             baseTabs() {
                 return [
                     {
+                        id: 'pictures',
                         label: 'Pictures',
                         content: 'Pictures: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
+                        id: 'music',
                         label: 'Music',
                         content: 'Music: Lorem ipsum dolor sit amet.',
                         displayed: this.showMusic,
                     },
                     {
+                        id: 'videos',
                         label: 'Videos',
                         content: 'Videos: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
+                        id: 'games',
                         label: 'Games',
                         content: 'Games: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
+                        id: 'comics',
                         label: 'Comics',
                         content: 'Comics: Lorem ipsum dolor sit amet.',
                         displayed: true,
                     },
                     {
+                        id: 'movies',
                         label: 'Movies',
                         content: 'Movies: Lorem ipsum dolor sit amet.',
                         displayed: true,
@@ -76,6 +83,7 @@
             },
             bookTab() {
                 return {
+                    id: 'books',
                     label: 'Books',
                     content: 'Books: Lorem ipsum dolor sit amet.',
                     displayed: true,

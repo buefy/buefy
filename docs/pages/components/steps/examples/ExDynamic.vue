@@ -6,11 +6,15 @@
         <div class="block">
             <b-switch v-model="showBooks"> Show books item (by adding / removing from the array) </b-switch>
         </div>
+        <div class="block">
+            <b-switch v-model="showGames"> Show games item (by using the visible property) </b-switch>
+        </div>
         <b-steps v-model="activeStep">
             <template v-for="(step, index) in steps">
                 <b-step-item
                     v-if="step.displayed"
                     :key="index"
+                    :visible="step.visible"
                     :label="step.label">
                     {{ step.content }}
                 </b-step-item>
@@ -25,7 +29,8 @@
             return {
                 activeStep: 0,
                 showMusic: true,
-                showBooks: false
+                showBooks: false,
+                showGames: false
             }
         },
         computed: {
@@ -42,10 +47,16 @@
                         displayed: this.showMusic,
                     },
                     {
+                        label: 'Games',
+                        content: 'Games: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                        visible: this.showGames
+                    },
+                    {
                         label: 'Videos',
                         content: 'Videos: Lorem ipsum dolor sit amet.',
                         displayed: true,
-                    }
+                    },
                 ]
             },
             steps() {

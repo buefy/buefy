@@ -136,11 +136,6 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when step is clicked',
-                parameters: '<code>index: Number</code>'
-            },
-            {
-                name: '<code>change</code>',
                 description: 'Triggers when active step is changed',
                 parameters: '<code>index: Number</code>'
             }
@@ -149,6 +144,13 @@ export default [
     {
         title: 'Step Item',
         props: [
+            {
+                name: '<code>id</code>',
+                description: 'Step id',
+                type: 'String',
+                values: '—',
+                default: 'Element position in slot'
+            },
             {
                 name: '<code>step</code>',
                 description: 'Step marker content (when there is no icon)',

@@ -5,9 +5,9 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value, tab index',
-                type: 'Number',
+                type: 'String, Number, Null',
                 values: '—',
-                default: '<code>0</code>'
+                default: '<code>undefined</code>'
             },
             {
                 name: '<code>expanded</code>',
@@ -69,19 +69,21 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when tab is clicked',
+                description: 'Triggers when tab is changed',
                 parameters: '<code>index: Number</code>'
             },
-            {
-                name: '<code>change</code>',
-                description: 'Triggers when active tab is changed',
-                parameters: '<code>index: Number</code>'
-            }
         ]
     },
     {
         title: 'Tab Item',
         props: [
+            {
+                name: '<code>id</code>',
+                description: 'Tab id',
+                type: 'String',
+                values: '—',
+                default: 'Element position in slot'
+            },
             {
                 name: '<code>label</code>',
                 description: 'Tab label',
