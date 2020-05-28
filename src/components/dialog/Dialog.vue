@@ -122,6 +122,10 @@ export default {
             type: Function,
             default: () => {}
         },
+        closeOnConfirm: {
+            type: Boolean,
+            default: true
+        },
         container: {
             type: String,
             default: () => {
@@ -200,9 +204,8 @@ export default {
                     return
                 }
             }
-
-            this.onConfirm(this.prompt)
-            this.close()
+            this.onConfirm(this.prompt, this)
+            if (this.closeOnConfirm) this.close()
         },
 
         /**

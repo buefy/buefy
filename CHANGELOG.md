@@ -1,5 +1,36 @@
 # Buefy Changelog
 
+## 0.8.20
+
+### New features
+
+* Add ``close-on-confirm`` prop to dialog (thanks @kaangokdemir)
+* Add bulma-css-vars extension to docs (thanks @wtho)
+
+### Fixes
+
+* Fix typo activeStep variable (thanks @speedpro)
+* Fix #2518 open autocomplete on clearable icon when ``open-on-focus``
+
+## 0.8.19
+
+### New features
+
+* Add ``value`` prop to tabs-item and steps-item
+* Add ``size`` prop to skeleton
+* Add ``passive-type`` prop for switch (thanks @kaangokdemir)
+* #2507 ``icon-right`` get higher priority than status icon on input
+* #2513 add cursor pointer to pickers when not editable
+
+### Fixes
+
+* Fix #2499 remove prevent click on carousel slide
+* Fix #2501 set ``type`` when ``vertical`` on steps (thanks @service-paradis)
+* Fix #2503 searchable table column slot
+* Fix #2504 display on skeletons (thanks @EmmanuelVlad)
+* Fix #2509 keep table search filtering when data are updated (thanks @VictorCazanave)
+* Fix #2514 radio-button and checkbox-button style
+
 ## 0.8.18
 
 ### New features

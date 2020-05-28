@@ -93,6 +93,13 @@ export default [
                 default: 'false'
             },
             {
+                name: '<code>icon-right</code>',
+                description: 'Icon name to be added on the right side',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>maxlength</code>',
                 description: 'Same as native <code>maxlength</code>, plus character counter',
                 type: 'String, Number',

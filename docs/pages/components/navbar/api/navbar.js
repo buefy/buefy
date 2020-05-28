@@ -100,7 +100,7 @@ export default [
       ]
   },
   {
-    title: 'Navbar Item',
+    title: 'Item',
     props: [
         {
             name: '<code>tag</code>',
@@ -119,7 +119,7 @@ export default [
     ]
   },
   {
-    title: 'Navbar Dropdown',
+    title: 'Dropdown',
     props: [
         {
             name: '<code>hoverable</code>',

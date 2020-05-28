@@ -10,7 +10,8 @@ export default {
         visible: {
             type: Boolean,
             default: true
-        }
+        },
+        value: [String, Number]
     },
     inject: {$tabbed: {name: '$tabbed', default: false}},
     data() {

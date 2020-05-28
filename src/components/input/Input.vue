@@ -135,18 +135,18 @@ export default {
         rightIcon() {
             if (this.passwordReveal) {
                 return this.passwordVisibleIcon
-            } else if (this.statusTypeIcon) {
-                return this.statusTypeIcon
+            } else if (this.iconRight) {
+                return this.iconRight
             }
-            return this.iconRight
+            return this.statusTypeIcon
         },
         rightIconType() {
             if (this.passwordReveal) {
                 return 'is-primary'
-            } else if (this.statusTypeIcon) {
-                return this.statusType
+            } else if (this.iconRight) {
+                return null
             }
-            return null
+            return this.statusType
         },
 
         /**

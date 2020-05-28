@@ -75,7 +75,7 @@ export default [
         ]
     },
     {
-        title: 'Tab Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>id</code>',
@@ -88,6 +88,13 @@ export default [
                 name: '<code>label</code>',
                 description: 'Tab label',
                 type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>value</code>',
+                description: 'Tab value',
+                type: 'Number, String',
                 values: '—',
                 default: '—'
             },

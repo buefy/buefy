@@ -36,13 +36,13 @@ $sidebar-mobile-breakpoint: $tablet !default;
         }
         &.is-mini {
             width: $sidebar-mobile-width;
-        }
-        &.is-mini-expand:hover {
-            transition: width $speed-slow $easing;
-            &:not(.is-fullwidth) {
-                width: $sidebar-width;
-                &.is-mini-expand-fixed {
-                    position: fixed;
+            &.is-mini-expand:hover {
+                transition: width $speed-slow $easing;
+                &:not(.is-fullwidth) {
+                    width: $sidebar-width;
+                    &.is-mini-expand-fixed {
+                        position: fixed;
+                    }
                 }
             }
         }
@@ -68,12 +68,12 @@ $sidebar-mobile-breakpoint: $tablet !default;
         @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
             &.is-mini-mobile {
                 width: $sidebar-mobile-width;
-            }
-            &.is-mini-expand:hover {
-                &:not(.is-fullwidth-mobile) {
-                    width: $sidebar-width;
-                    &.is-mini-expand-fixed {
-                        position: fixed;
+                &.is-mini-expand:hover {
+                    &:not(.is-fullwidth-mobile) {
+                        width: $sidebar-width;
+                        &.is-mini-expand-fixed {
+                            position: fixed;
+                        }
                     }
                 }
             }
