@@ -31,7 +31,7 @@ describe('BSteps', () => {
     })
 
     it('emit input event with value when active step is modified', async () => {
-        wrapper.vm.activeId = wrapper.vm.items[0].id
+        wrapper.vm.activeId = wrapper.vm.items[0].value
 
         await wrapper.vm.$nextTick() // Wait until $emits have been handled
 

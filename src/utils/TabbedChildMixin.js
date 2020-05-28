@@ -1,9 +1,5 @@
 export default {
     props: {
-        id: {
-            type: String,
-            default() { return this._uid.toString() }
-        },
         label: String,
         icon: String,
         iconPack: String,
@@ -11,7 +7,10 @@ export default {
             type: Boolean,
             default: true
         },
-        value: [String, Number]
+        value: {
+            type: String,
+            default() { return this._uid.toString() }
+        }
     },
     inject: {$tabbed: {name: '$tabbed', default: false}},
     data() {

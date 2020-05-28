@@ -45,7 +45,7 @@ export default {
         if (typeof this.value === 'number') {
             // Backward compatibility: converts the index value to an id
             const value = Math.max(0, Math.min(this.value, this.items.length - 1))
-            this.activeId = this.items[value].id
+            this.activeId = this.items[value].value
         } else {
             this.activeId = this.value
         }
@@ -54,7 +54,7 @@ export default {
         activeItem() {
             return this.activeId === undefined ? this.childItems[0]
                 : (this.activeId === null ? null
-                    : this.childItems.find((i) => i.id === this.activeId))
+                    : this.childItems.find((i) => i.value === this.activeId))
         },
         /**
          * When items are added/removed sort them according to their position
@@ -73,7 +73,7 @@ export default {
             if (typeof value === 'number') {
                 // Backward compatibility: converts the index value to an id
                 value = Math.max(0, Math.min(value, this.items.length - 1))
-                this.activeId = this.items[value].id
+                this.activeId = this.items[value].value
             } else {
                 this.activeId = value
             }
@@ -83,7 +83,7 @@ export default {
          */
         activeId(val, oldValue) {
             const oldTab = oldValue !== undefined && oldValue !== null
-                ? this.childItems.find((i) => i.id === oldValue) : null
+                ? this.childItems.find((i) => i.value === oldValue) : null
 
             if (oldTab && this.activeItem) {
                 oldTab.deactivate(this.activeItem.index)
@@ -91,7 +91,7 @@ export default {
             }
 
             val = this.activeItem
-                ? (typeof this.value === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.id)
+                ? (typeof this.value === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value)
                 : undefined
 
             if (val !== this.value) {
@@ -111,7 +111,7 @@ export default {
         * Child click listener, emit input event and change active child.
         */
         childClick(child) {
-            this.activeId = child.id
+            this.activeId = child.value
         }
     }
 }

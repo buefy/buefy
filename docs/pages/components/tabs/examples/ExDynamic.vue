@@ -14,7 +14,7 @@
                 <b-tab-item
                     v-if="tab.displayed"
                     :key="tab.id"
-                    :id="tab.id"
+                    :value="tab.id"
                     :label="tab.label">
                     {{ tab.content }}
                 </b-tab-item>
@@ -77,7 +77,7 @@
             tabs() {
                 const tabs = [...this.baseTabs]
                 if (this.showBooks) {
-                    tabs.splice(tabs.length - 1, 0, this.bookTab);
+                    tabs.splice(tabs.length - 2, 0, this.bookTab);
                 }
                 return tabs
             },

@@ -4,7 +4,7 @@
             <ul>
                 <li
                     v-for="childItem in items"
-                    :key="childItem.id"
+                    :key="childItem.value"
                     v-show="childItem.visible"
                     :class="{ 'is-active': childItem.isActive,
                               'is-disabled': childItem.disabled }">

@@ -78,13 +78,6 @@ export default [
         title: 'Item',
         props: [
             {
-                name: '<code>id</code>',
-                description: 'Tab id',
-                type: 'String',
-                values: '—',
-                default: 'Element position in slot'
-            },
-            {
                 name: '<code>label</code>',
                 description: 'Tab label',
                 type: 'String',
@@ -93,10 +86,10 @@ export default [
             },
             {
                 name: '<code>value</code>',
-                description: 'Tab value',
-                type: 'Number, String',
+                description: 'Tab identifier',
+                type: 'String',
                 values: '—',
-                default: '—'
+                default: 'Element position in slot'
             },
             {
                 name: '<code>icon</code>',

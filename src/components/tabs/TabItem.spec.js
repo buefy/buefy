@@ -7,9 +7,9 @@ let wrapper
 const WrapperComp = {
     template: `
         <BTabs>
-            <BTabItem id="tab1"/>
-            <BTabItem ref="testItem" id="tab2"/>
-            <BTabItem id="tab3" :visible="false"/>
+            <BTabItem value="tab1"/>
+            <BTabItem ref="testItem" value="tab2"/>
+            <BTabItem value="tab3" :visible="false"/>
         </BTabs>`,
     components: {
         BTabs, BTabItem
@@ -24,7 +24,7 @@ describe('BTabItem', () => {
     it('is called', () => {
         expect(wrapper.name()).toBe('BTabItem')
         expect(wrapper.isVueInstance()).toBeTruthy()
-        expect(wrapper.vm.id).toBe('tab2')
+        expect(wrapper.vm.value).toBe('tab2')
     })
 
     it('render correctly', () => {

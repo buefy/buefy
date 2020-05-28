@@ -145,13 +145,6 @@ export default [
         title: 'Item',
         props: [
             {
-                name: '<code>id</code>',
-                description: 'Step id',
-                type: 'String',
-                values: '—',
-                default: 'Element position in slot'
-            },
-            {
                 name: '<code>step</code>',
                 description: 'Step marker content (when there is no icon)',
                 type: 'String | Number',
@@ -167,10 +160,10 @@ export default [
             },
             {
                 name: '<code>value</code>',
-                description: 'Step value',
-                type: 'Number, String',
+                description: 'Step identifier',
+                type: 'String',
                 values: '—',
-                default: '—'
+                default: 'Element position in slot'
             },
             {
                 name: '<code>type</code>',

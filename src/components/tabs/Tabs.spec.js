@@ -7,8 +7,8 @@ let wrapper
 const WrapperComp = {
     template: `
         <BTabs value="tab1">
-            <BTabItem id="tab1"></BTabItem>
-            <BTabItem id="tab2" :visible="false"></BTabItem>
+            <BTabItem value="tab1"></BTabItem>
+            <BTabItem value="tab2" :visible="false"></BTabItem>
         </BTabs>`,
     components: {
         BTabs, BTabItem
