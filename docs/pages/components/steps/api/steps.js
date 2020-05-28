@@ -4,10 +4,10 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Binding value, step index',
-                type: 'Number',
+                description: 'Binding value, step index. Passing undefined will show the first step',
+                type: 'Number, String',
                 values: '—',
-                default: '<code>0</code>'
+                default: '<code>undefined</code>'
             },
             {
                 name: '<code>animated</code>',
@@ -163,7 +163,7 @@ export default [
                 description: 'Step identifier',
                 type: 'String',
                 values: '—',
-                default: 'Element position in slot'
+                default: 'Vnode uid'
             },
             {
                 name: '<code>type</code>',

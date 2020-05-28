@@ -4,7 +4,7 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Binding value, tab index',
+                description: 'Binding value, tab index. Passing undefined will show the first tab, null will show no tab',
                 type: 'String, Number, Null',
                 values: '—',
                 default: '<code>undefined</code>'
@@ -89,7 +89,7 @@ export default [
                 description: 'Tab identifier',
                 type: 'String',
                 values: '—',
-                default: 'Element position in slot'
+                default: 'Vnode uid'
             },
             {
                 name: '<code>icon</code>',
