@@ -111,4 +111,24 @@ describe('BSteps', () => {
         wrapper.setProps({position: 'is-right'})
         expect(wrapper.vm.wrapperClasses[1]['is-right']).toBeTruthy()
     })
+
+    it('throws an error when there is no item', () => {
+        const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
+
+        try {
+            wrapper = mount({
+                template: `<BSteps/>`,
+                components: {
+                    BSteps
+                },
+                destroyed() {
+                    spy()
+                }
+            })
+        } catch (error) {
+            expect(error.message).stringMatching(/item inside/)
+        } finally {
+            spy.mockRestore()
+        }
+    })
 })

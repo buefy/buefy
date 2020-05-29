@@ -21,26 +21,36 @@ export default {
     },
     computed: {
         parent() {
-            return this.$tabbed ? this.$tabbed : false
+            return this.$tabbed
         },
         index() {
-            // this.$parent refers to the direct parent component
-            // while this.parent refers to the Tabs component
-            let el = this.$parent
-            let child = this
+            let index = 0
+            const tag = this.$vnode.tag.split('-').pop()
 
-            // This needs improvement to be able to work with different levels of nesting
-            while (el && el !== this.parent && el.$children.filter((comp) => {
-                return comp.tag === child.$vnode.tag
-            }).length < 1) {
-                child = el
-                el = el.$parent
+            const deepSearch = (children) => {
+                for (let child of children) {
+                    if (child.tag && child.tag.split('-').pop() === tag) {
+                        if (this.$vnode === child) {
+                            return true
+                        }
+                        index += 1
+                    } else if (child.tag) {
+                        const sub = child.componentInstance
+                            ? (child.componentInstance.$scopedSlots.default
+                                ? child.componentInstance.$scopedSlots.default()
+                                : child.componentInstance.$children)
+                            : child.children
+                        if (Array.isArray(sub) && sub.length > 0) {
+                            if (deepSearch(sub.map((e) => e.$vnode))) { return true }
+                        }
+                    }
+                }
+                return false
             }
-            let children = el.$scopedSlots.default ? el.$scopedSlots.default() : el.$children
 
-            return children.filter((comp) => {
-                return comp.tag === child.$vnode.tag
-            }).indexOf(child.$vnode) || 0
+            deepSearch(this.parent.$scopedSlots.default())
+
+            return index
         },
         isActive() {
             return this.parent.activeItem === this

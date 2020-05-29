@@ -81,6 +81,7 @@ describe('BTabs', () => {
             template: `
                 <div>
                     <BTabItem></BTabItem>
+                    <BTabItem></BTabItem>
                 </div>`,
             components: {BTabItem}
         }
@@ -97,8 +98,8 @@ describe('BTabs', () => {
             }
         }).find(BTabs)
 
-        expect(wrapper.vm.items.length).toBe(3)
-        expect(wrapper.vm.items.map((i) => i.index)).toEqual([0, 1, 2])
+        expect(wrapper.vm.items.length).toBe(6)
+        expect(wrapper.vm.items.map((i) => i.index)).toEqual([0, 1, 2, 3, 4, 5])
     })
 
     it('doesn\'t show a tab if value is null', () => {

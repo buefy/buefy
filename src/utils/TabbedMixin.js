@@ -42,6 +42,11 @@ export default {
         }
     },
     mounted() {
+        if (this.childItems.length < 1) {
+            this.$destroy()
+            throw new Error('A ' + this.$vnode.tag + ' must have at least 1 item inside')
+        }
+
         if (typeof this.value === 'number') {
             // Backward compatibility: converts the index value to an id
             const value = Math.max(0, Math.min(this.value, this.items.length - 1))
