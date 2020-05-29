@@ -70,7 +70,7 @@ export default [
             {
                 name: '<code>input</code>',
                 description: 'Triggers when tab is changed',
-                parameters: '<code>index: Number</code>'
+                parameters: '<code>value: String|Number</code>'
             },
         ]
     },
