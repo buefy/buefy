@@ -25,11 +25,10 @@ export default {
         },
         index() {
             let index = 0
-            const tag = this.$vnode.tag.split('-').pop()
 
             const deepSearch = (children) => {
                 for (let child of children) {
-                    if (child.tag && child.tag.split('-').pop() === tag) {
+                    if (child.tag === this.$vnode.tag) {
                         if (this.$vnode === child) {
                             return true
                         }

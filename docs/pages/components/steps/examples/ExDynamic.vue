@@ -56,7 +56,7 @@
                         label: 'Videos',
                         content: 'Videos: Lorem ipsum dolor sit amet.',
                         displayed: true,
-                    },
+                    }
                 ]
             },
             steps() {
