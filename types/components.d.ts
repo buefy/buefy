@@ -107,12 +107,17 @@ export declare type BDialogConfig = {
     /**
      * Can close dialog by clicking cancel button, pressing escape or clicking outside
      */
-    canCancel?: boolean | Array<any>;
+    canCancel?: boolean | Array<'escape' | 'button' | 'outside'>;
+
+    /**
+     * Turning this prop into false allows to make async requests in onConfirm callback
+     */
+    closeOnConfirm?: boolean;
 
     /**
      * Callback function when the confirm button is clicked
      */
-    onConfirm?: (value: string) => any;
+    onConfirm?: (value: string, dialog: BComponent) => any;
 
     /**
      * Callback function when the dialog is canceled (cancel button is clicked / pressed escape / clicked outside)
