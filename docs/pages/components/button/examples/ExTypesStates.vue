@@ -14,9 +14,14 @@
         </div>
 
         <div class="buttons">
+            <b-button>Normal</b-button>
             <b-button disabled>Disabled</b-button>
             <b-button loading>Loading</b-button>
             <b-button rounded>Rounded</b-button>
+            <b-button focused>Focused</b-button>
+            <b-button hovered>Hovered</b-button>
+            <b-button selected>Selected</b-button>
+            <b-button active>Active</b-button>
         </div>
 
         <div class="buttons">
