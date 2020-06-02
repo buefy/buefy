@@ -57,8 +57,8 @@ export default {
         */
         pageChanged(page) {
             this.newCurrentPage = page > 0 ? page : 1
-            this.$emit('page-change', this.newCurrentPage)
             this.$emit('update:currentPage', this.newCurrentPage)
+            this.$emit('page-change', this.newCurrentPage)
         }
     }
 }

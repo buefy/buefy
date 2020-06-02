@@ -33,6 +33,6 @@ export { ModalProgrammatic } from './components/modal'
 export { NotificationProgrammatic } from './components/notification'
 export { SnackbarProgrammatic } from './components/snackbar'
 export { ToastProgrammatic } from './components/toast'
-export { ConfigComponent as ConfigProgrammatic }
+export { default as ConfigProgrammatic } from './utils/ConfigComponent'
 // export helpers
 export * from './utils/helpers'
