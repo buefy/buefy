@@ -54,7 +54,7 @@ export declare type BuefyConfig = {
     defaultButtonRounded?: boolean;
     defaultCarouselInterval?: number;
     defaultTabsAnimated?: boolean;
-    defaultLinkTags: string[];
+    defaultLinkTags?: string[];
     customIconPacks?: any;
 };
 
