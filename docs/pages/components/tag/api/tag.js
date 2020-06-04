@@ -24,7 +24,7 @@ export default [
             },
             {
                 name: '<code>size</code>',
-                description: 'Size of the tab, optional',
+                description: 'Size of the tag, optional',
                 type: 'String',
                 values: '<code>is-medium</code>, <code>is-large</code>',
                 default: '—'
@@ -92,7 +92,7 @@ export default [
         props: [
             {
                 name: '<code>attached</code>',
-                description: 'Tabs inside are attached together',
+                description: 'Tags inside are attached together',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
