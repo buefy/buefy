@@ -4,7 +4,8 @@
             ref="progress"
             class="progress"
             :class="newType"
-            :max="max">{{ newValue }}</progress>
+            :max="max"
+            :value="value">{{ newValue }}</progress>
         <p
             v-if="showValue"
             class="progress-value"><slot>{{ newValue }}</slot></p>
@@ -76,22 +77,24 @@ export default {
         }
     },
     watch: {
-        value(value) {
-            this.setValue(value)
+        /**
+         * When value is changed back to undefined, value of native progress get reset to 0.
+         * Need to add and remove the value attribute to have the indeterminate or not.
+         */
+        isIndeterminate: {
+            handler(indeterminate) {
+                this.$nextTick(() => {
+                    if (indeterminate) {
+                        this.$refs.progress.removeAttribute('value')
+                    } else {
+                        this.$refs.progress.setAttribute('value', this.value)
+                    }
+                })
+            },
+            immediate: true
         }
     },
     methods: {
-        /**
-        * When value is changed back to undefined, value of native progress get reset to 0.
-        * Need to add and remove the value attribute to have the indeterminate or not.
-        */
-        setValue(value) {
-            if (this.isIndeterminate) {
-                this.$refs.progress.removeAttribute('value')
-            } else {
-                this.$refs.progress.setAttribute('value', value)
-            }
-        },
         // Custom function that imitate the javascript toFixed method with improved rounding
         toFixed(num) {
             let fixed = (+(`${Math.round(+(`${num}e${this.precision}`))}e${-this.precision}`)).toFixed(this.precision)
@@ -100,9 +103,6 @@ export default {
             }
             return fixed
         }
-    },
-    mounted() {
-        this.setValue(this.value)
     }
 }
 </script>
