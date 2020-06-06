@@ -341,6 +341,7 @@ export default [
             {
                 name: '<code>filters-event</code>',
                 description: 'Add a native event to filter',
+                type: 'String',
                 values: '—',
                 default: '—'
             },

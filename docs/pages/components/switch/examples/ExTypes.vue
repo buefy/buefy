@@ -29,5 +29,23 @@
                 Warning
             </b-switch>
         </div>
+        <div class="field">
+            <b-switch 
+                v-model="lightMode"
+                passive-type='is-dark'
+                type='is-warning'>
+                {{ lightMode ? "Light Mode" : "Dark Mode" }}
+            </b-switch>
+        </div>
     </section>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            lightMode: false
+        }
+    }
+}
+</script>

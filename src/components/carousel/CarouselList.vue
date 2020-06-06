@@ -11,7 +11,7 @@
             <div
                 class="carousel-slide"
                 :class="{'is-active': activeItem === index}"
-                @click.prevent="checkAsIndicator(index, $event)"
+                @click="checkAsIndicator(index, $event)"
                 v-for="(list, index) in data"
                 :key="index"
                 :style="itemStyle">

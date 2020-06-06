@@ -96,6 +96,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>open-on-focus</code>',
+                description: 'Opens a dropdown with choices when the input field is focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>remove-on-keys</code>',
                 description: 'Allow removing last tag when pressing given keys, if input is empty',
                 type: 'Array',

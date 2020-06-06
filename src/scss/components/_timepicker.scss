@@ -6,6 +6,7 @@
     .dropdown-trigger {
         width: 100%;
         .input[readonly] {
+            cursor: pointer;
             box-shadow: $input-shadow;
             &:focus,
             &.is-focused,

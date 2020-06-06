@@ -12,6 +12,16 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>passive-type</code>',
+                description: 'Type (color) of the switch when switch is passive, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '—'
+            },
+            {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
                 type: 'Any',
