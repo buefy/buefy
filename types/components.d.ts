@@ -13,6 +13,7 @@ export declare type BuefyConfig = {
     defaultIconComponent?: string;
     defaultIconPrev?: string;
     defaultIconNext?: string;
+    defaultLocale?: undefined | string | string[],
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
     defaultSnackbarDuration?: number;

@@ -30,16 +30,35 @@
                     <b-numberinput v-model="precision" :disabled="!showValue" controls-position="compact" />
                 </b-field>
             </b-field>
+            <b-field label="Locale">
+                <b-select v-model="locale" :disabled="!showValue">
+                    <option value="de-DE">de-DE</option>
+                    <option value="en-CA">en-CA</option>
+                    <option value="en-GB">en-GB</option>
+                    <option value="en-US">en-US</option>
+                    <option value="es-ES">es-ES</option>
+                    <option value="es-MX">es-MX</option>
+                    <option value="fr-CA">fr-CA</option>
+                    <option value="fr-FR">fr-FR</option>
+                    <option value="it-IT">it-IT</option>
+                    <option value="ja-JP">ja-JP</option>
+                    <option value="pt-BR">pt-BR</option>
+                    <option value="ru-RU">ru-RU</option>
+                    <option value="zn-CN">zn-CN</option>
+                </b-select>
+            </b-field>
         </div>
 
         <b-progress
             :type="type"
             :size="size"
-            :value="indeterminate ? undefined : 80"
+            :max="100000"
+            :value="indeterminate ? undefined : 80500"
             :show-value="showValue"
             :format="format"
             :precision="precision"
-            :keep-trailing-zeroes="keepTrailingZeroes"></b-progress>
+            :keep-trailing-zeroes="keepTrailingZeroes"
+            :locale="locale"></b-progress>
     </section>
 </template>
 
@@ -53,7 +72,8 @@
                 showValue: true,
                 format: 'raw',
                 precision: 2,
-                keepTrailingZeroes: false
+                keepTrailingZeroes: false,
+                locale: undefined,
             }
         }
     }

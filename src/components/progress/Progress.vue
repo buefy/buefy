@@ -4,7 +4,8 @@
             ref="progress"
             class="progress"
             :class="newType"
-            :max="max">{{ newValue }}</progress>
+            :max="max"
+            :value="value">{{ newValue }}</progress>
         <p
             v-if="showValue"
             class="progress-value"><slot>{{ newValue }}</slot></p>
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 
 export default {
     name: 'BProgress',
@@ -50,6 +52,12 @@ export default {
         keepTrailingZeroes: {
             type: Boolean,
             default: false
+        },
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
         }
     },
     computed: {
@@ -67,42 +75,45 @@ export default {
                 return undefined
             }
 
+            const minimumFractionDigits = this.keepTrailingZeroes ? this.precision : 0
+            const maximumFractionDigits = this.precision
             if (this.format === 'percent') {
-                const val = this.toFixed(this.value * 100 / this.max)
-                return `${val}%`
+                return new Intl.NumberFormat(
+                    this.locale,
+                    {
+                        style: 'percent',
+                        minimumFractionDigits: minimumFractionDigits,
+                        maximumFractionDigits: maximumFractionDigits
+                    }
+                ).format(this.value / this.max)
             }
-            const val = this.toFixed(this.value)
-            return val
+
+            return new Intl.NumberFormat(
+                this.locale,
+                {
+                    minimumFractionDigits: minimumFractionDigits,
+                    maximumFractionDigits: maximumFractionDigits
+                }
+            ).format(this.value)
         }
     },
     watch: {
-        value(value) {
-            this.setValue(value)
-        }
-    },
-    methods: {
         /**
         * When value is changed back to undefined, value of native progress get reset to 0.
         * Need to add and remove the value attribute to have the indeterminate or not.
         */
-        setValue(value) {
-            if (this.isIndeterminate) {
-                this.$refs.progress.removeAttribute('value')
-            } else {
-                this.$refs.progress.setAttribute('value', value)
-            }
-        },
-        // Custom function that imitate the javascript toFixed method with improved rounding
-        toFixed(num) {
-            let fixed = (+(`${Math.round(+(`${num}e${this.precision}`))}e${-this.precision}`)).toFixed(this.precision)
-            if (!this.keepTrailingZeroes) {
-                fixed = fixed.replace(/\.?0+$/, '')
-            }
-            return fixed
+        isIndeterminate: {
+            handler(indeterminate) {
+                this.$nextTick(() => {
+                    if (indeterminate) {
+                        this.$refs.progress.removeAttribute('value')
+                    } else {
+                        this.$refs.progress.setAttribute('value', this.value)
+                    }
+                })
+            },
+            immediate: true
         }
-    },
-    mounted() {
-        this.setValue(this.value)
     }
 }
 </script>

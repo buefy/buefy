@@ -37,7 +37,15 @@ export default [
                 default: '<code>chevron-right</code>'
             },
             {
-                name: '<code>defaultContainerElement</code>',
+                name: '<code>defaultLocale</code>',
+                description: `Will be used for default date and number formatting. Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
+            },
+            {
+                name: '<code>defaultContainerElement</>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
                     Meaning that the container <em>should</em> be <code>fixed</code>.`,
