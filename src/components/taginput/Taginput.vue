@@ -10,6 +10,7 @@
                     v-for="(tag, index) in tags"
                     :key="getNormalizedTagText(tag) + index"
                     :type="type"
+                    :close-type="closeType"
                     :size="size"
                     :rounded="rounded"
                     :attached="attached"
@@ -107,6 +108,7 @@ export default {
             default: () => []
         },
         type: String,
+        closeType: String,
         rounded: {
             type: Boolean,
             default: false

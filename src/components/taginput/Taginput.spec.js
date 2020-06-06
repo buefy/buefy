@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import BTaginput from '@components/taginput/Taginput'
+import BTag from '@components/tag/Tag'
 
 describe('BTaginput', () => {
     it('is called', () => {
@@ -21,5 +22,15 @@ describe('BTaginput', () => {
 
         wrapper.setProps({ hasCounter: false })
         expect(wrapper.find('small.counter').exists()).toBeFalsy()
+    })
+
+    it('should send close-type prop to BTag component properly', () => {
+        const value = ['Test Value']
+        const closeType = 'is-danger'
+        const wrapper = shallowMount(BTaginput, {
+            propsData: { value, closeType }
+        })
+        const Tag = wrapper.find(BTag)
+        expect(Tag.attributes('closetype')).toBe(closeType)
     })
 })
