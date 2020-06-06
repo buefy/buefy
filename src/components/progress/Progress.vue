@@ -81,14 +81,17 @@ export default {
          * When value is changed back to undefined, value of native progress get reset to 0.
          * Need to add and remove the value attribute to have the indeterminate or not.
          */
-        isIndeterminate(indeterminate) {
-            this.$nextTick(() => {
-                if (indeterminate) {
-                    this.$refs.progress.removeAttribute('value')
-                } else {
-                    this.$refs.progress.setAttribute('value', this.value)
-                }
-            })
+        isIndeterminate: {
+            handler(indeterminate) {
+                this.$nextTick(() => {
+                    if (indeterminate) {
+                        this.$refs.progress.removeAttribute('value')
+                    } else {
+                        this.$refs.progress.setAttribute('value', this.value)
+                    }
+                })
+            },
+            immediate: true
         }
     },
     methods: {

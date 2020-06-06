@@ -14,21 +14,24 @@ describe('BProgress', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('add value attribute when a value is passed', () => {
+    it('add value attribute when a value is passed', async () => {
         const value = 50
         const wrapper = shallowMount(BProgress)
         wrapper.setProps({ value })
 
+        await wrapper.vm.$nextTick()
         expect(wrapper.find('.progress').attributes().value).toEqual(`${value}`)
     })
 
     describe('Passing a value prop', () => {
-        it('add value attribute to the <progress> element', () => {
-            const value = 50
+        it('remove value attribute to the <progress> element', async () => {
+            const value = null
             const wrapper = shallowMount(BProgress, {
                 propsData: {value}
             })
-            expect(wrapper.find('.progress').attributes().value).toEqual(`${value}`)
+
+            await wrapper.vm.$nextTick()
+            expect(wrapper.find('.progress').attributes().value).toEqual(undefined)
         })
 
         describe('Passing true to show-value prop', () => {
