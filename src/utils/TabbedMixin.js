@@ -38,7 +38,7 @@ export default {
          */
         value(value) {
             const index = this.getIndexByValue(value, value)
-            this.changeTab(index)
+            this.changeActive(index)
         },
 
         /**
