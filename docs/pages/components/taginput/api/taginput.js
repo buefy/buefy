@@ -40,6 +40,16 @@ export default [
                 default: '<code>is-light</code>'
             },
             {
+                name: '<code>closeType</code>',
+                description: 'Type (color) of the close icon, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '-'
+            },
+            {
                 name: '<code>size</code>',
                 description: 'Tag and input size, optional',
                 type: 'String',

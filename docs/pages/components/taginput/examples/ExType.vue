@@ -34,6 +34,14 @@
                 type="is-danger">
             </b-taginput>
         </b-field>
+
+        <b-field label="Close Type">
+            <b-taginput
+                v-model="tags"
+                type="is-dark"
+                close-type="is-danger">
+            </b-taginput>
+        </b-field>
     </section>
 </template>
 
