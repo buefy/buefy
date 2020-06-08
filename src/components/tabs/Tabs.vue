@@ -3,23 +3,20 @@
         <nav class="tabs" :class="navClasses">
             <ul>
                 <li
-                    v-for="(childItem, index) in childItems"
-                    :key="index"
+                    v-for="childItem in items"
+                    :key="childItem.value"
                     v-show="childItem.visible"
-                    :class="{
-                        'is-active': activeChild === index,
-                        'is-disabled': childItem.disabled
-                    }"
-                >
+                    :class="{ 'is-active': childItem.isActive,
+                              'is-disabled': childItem.disabled }">
 
                     <b-slot-component
                         v-if="childItem.$slots.header"
                         :component="childItem"
                         name="header"
                         tag="a"
-                        @click.native="childClick(index)"
+                        @click.native="childClick(childItem)"
                     />
-                    <a v-else @click="childClick(index)">
+                    <a v-else @click="childClick(childItem)">
                         <b-icon
                             v-if="childItem.icon"
                             :icon="childItem.icon"
@@ -53,11 +50,6 @@ export default {
         },
         multiline: Boolean
     },
-    data() {
-        return {
-            _isTabs: true // Used internally by TabItem
-        }
-    },
     computed: {
         mainClasses() {
             return {
@@ -77,14 +69,6 @@ export default {
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
             ]
-        },
-        childItems() {
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isTabItem)
-                .map((vnode) => vnode.componentInstance)
         }
     }
 }

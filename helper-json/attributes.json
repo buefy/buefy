@@ -1860,8 +1860,8 @@
     "type": "function"
   },
   "b-steps/value": {
-    "description": "Binding value, step index",
-    "type": "number"
+    "description": "Binding value, step index. Passing undefined will show the first step",
+    "type": "number|string"
   },
   "b-steps/animated": {
     "description": "Steps have slide animation",
@@ -1932,8 +1932,8 @@
     "type": "string"
   },
   "b-steps-item/value": {
-    "description": "Step value",
-    "type": "number|string"
+    "description": "Step identifier",
+    "type": "string"
   },
   "b-steps-item/type": {
     "description": "Default Type/Style for the step, optional\n                    This will override parent type. Could be used to set a completed step to\n                    is-success for example",
@@ -2004,7 +2004,7 @@
     "type": "array<object>"
   },
   "b-table/columns": {
-    "description": "Table columns, you can also add renderHtml: true on each column object",
+    "description": "Table columns",
     "type": "array<object>(same as tablecolumns props)"
   },
   "b-table/default-sort": {
@@ -2199,6 +2199,10 @@
     "description": "Rows appears as cards (collapse rows)",
     "type": "boolean"
   },
+  "b-table/show-header": {
+    "description": "Show table column header",
+    "type": "boolean"
+  },
   "b-table/aria-next-label": {
     "description": "Accessibility label for the next page link (if paginated)",
     "type": "string"
@@ -2252,7 +2256,7 @@
     "type": "boolean"
   },
   "b-table-column/custom-sort": {
-    "description": "Custom sort method, works when is sortable",
+    "description": "Custom sort method, works when column is sortable",
     "type": "function(a: object| b: object, isasc: boolean)"
   },
   "b-table-column/searchable": {
@@ -2268,7 +2272,7 @@
     "type": "boolean"
   },
   "b-table-column/header-selectable": {
-    "description": "Prevent text selection of header when setting this to false.",
+    "description": "Whether the header text is selectable, works when column is sortable",
     "type": "boolean"
   },
   "b-table-column/header-class": {
@@ -2280,8 +2284,8 @@
     "type": "string"
   },
   "b-tabs/value": {
-    "description": "Binding value, tab index",
-    "type": "number|string"
+    "description": "Binding value, tab index. Passing undefined will show the first tab, null will show no tab",
+    "type": "string|number, null"
   },
   "b-tabs/expanded": {
     "description": "Make tab full width",
@@ -2320,8 +2324,8 @@
     "type": "string"
   },
   "b-tabs-item/value": {
-    "description": "Tab value",
-    "type": "number|string"
+    "description": "Tab identifier",
+    "type": "string"
   },
   "b-tabs-item/icon": {
     "description": "Icon name",
@@ -2443,8 +2447,8 @@
     "description": "Allow removing last tag when pressing given keys, if input is empty",
     "type": "array"
   },
-  "b-taginput/confirm-key-codes": {
-    "description": "Array of key codes which will add a tag when typing (default comma, enter and tab)",
+  "b-taginput/confirm-keys": {
+    "description": "Array of key (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma and enter)",
     "type": "array"
   },
   "b-taginput/on-paste-separators": {

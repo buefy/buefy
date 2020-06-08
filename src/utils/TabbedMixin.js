@@ -7,7 +7,10 @@ export default {
         [SlotComponent.name]: SlotComponent
     },
     props: {
-        value: Number,
+        value: {
+            type: [String, Number],
+            default: undefined
+        },
         type: [String, Object],
         size: String,
         animated: {
@@ -24,90 +27,96 @@ export default {
             default: false
         }
     },
+    provide() {
+        return {
+            $tabbed: this
+        }
+    },
     data() {
         return {
-            activeChild: 0,
+            activeId: this.value, // Internal state
+            childItems: [],
             defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false
         }
     },
+    mounted() {
+        if (this.childItems.length < 1) {
+            this.$destroy()
+            throw new Error('A ' + this.$vnode.tag + ' must have at least 1 item inside')
+        }
+
+        if (typeof this.value === 'number') {
+            // Backward compatibility: converts the index value to an id
+            const value = Math.max(0, Math.min(this.value, this.items.length - 1))
+            this.activeId = this.items[value].value
+        } else {
+            this.activeId = this.value
+        }
+    },
+    computed: {
+        activeItem() {
+            return this.activeId === undefined ? this.childItems[0]
+                : (this.activeId === null ? null
+                    : this.childItems.find((i) => i.value === this.activeId))
+        },
+        /**
+         * When items are added/removed sort them according to their position
+         */
+        items() {
+            return this.childItems.slice().sort((i1, i2) => {
+                return i1.index - i2.index
+            })
+        }
+    },
     watch: {
         /**
-         * When v-model is changed set the new active child.
+         * When v-model is changed set the new active tab.
          */
         value(value) {
-            const index = this.getIndexByValue(value, value)
-            this.changeTab(index)
+            if (typeof value === 'number') {
+                // Backward compatibility: converts the index value to an id
+                value = Math.max(0, Math.min(value, this.items.length - 1))
+                this.activeId = this.items[value].value
+            } else {
+                this.activeId = value
+            }
         },
-
         /**
-         * When child-items are updated, set active one.
+         * Sync internal state with external state
          */
-        childItems() {
-            if (this.activeChild < this.childItems.length) {
-                let previous = this.activeChild
-                this.childItems.map((child, idx) => {
-                    if (child.isActive) {
-                        previous = idx
-                        if (previous < this.childItems.length) {
-                            this.childItems[previous].isActive = false
-                        }
-                    }
-                })
-                this.childItems[this.activeChild].isActive = true
-            } else if (this.activeChild > 0) {
-                this.changeActive(this.activeChild - 1)
+        activeId(val, oldValue) {
+            const oldTab = oldValue !== undefined && oldValue !== null
+                ? this.childItems.find((i) => i.value === oldValue) : null
+
+            if (oldTab && this.activeItem) {
+                oldTab.deactivate(this.activeItem.index)
+                this.activeItem.activate(oldTab.index)
+            }
+
+            val = this.activeItem
+                ? (typeof this.value === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value)
+                : undefined
+
+            if (val !== this.value) {
+                this.$emit('input', val)
             }
         }
     },
     methods: {
-        /**
-         * Change the active child and emit change event.
-         */
-        changeActive(newIndex) {
-            if (this.activeChild === newIndex) return
-
-            if (newIndex > this.childItems.length) throw new Error('The index you trying to set is bigger than the childs length')
-
-            if (this.activeChild < this.childItems.length) {
-                this.childItems[this.activeChild].deactivate(this.activeChild, newIndex)
-            }
-            this.childItems[newIndex].activate(this.activeChild, newIndex)
-            this.activeChild = newIndex
-            this.$emit('change', this.getValueByIndex(newIndex))
+        _registerItem(item) {
+            this.childItems.push(item)
+        },
+        _unregisterItem(item) {
+            this.childItems = this.childItems.filter((i) => i !== item)
         },
 
         /**
         * Child click listener, emit input event and change active child.
         */
-        childClick(index) {
-            if (this.activeChild === index) return
-            this.$emit('input', this.getValueByIndex(index))
-            this.changeActive(index)
-        },
-
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-
-        getIndexByValue(value) {
-            let index = this.childItems.map((t) =>
-                t.$options.propsData ? t.$options.propsData.value : undefined
-            ).indexOf(value)
-            return index >= 0 ? index : value
-        },
-
-        getValueByIndex(index) {
-            const propsData = this.childItems[index].$options.propsData
-            return propsData && propsData.value ? propsData.value : index
+        childClick(child) {
+            this.activeId = child.value
         }
-    },
-    mounted() {
-        this.activeTab = this.getIndexByValue(this.value || 0)
-        if (this.activeChild < this.childItems.length) {
-            this.childItems[this.activeChild].isActive = true
-        }
-        this.refreshSlots()
     }
 }

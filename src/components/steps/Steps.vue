@@ -3,18 +3,18 @@
         <nav class="steps" :class="mainClasses">
             <ul class="step-items">
                 <li
-                    v-for="(childItem, index) in childItems"
-                    :key="index"
+                    v-for="childItem in items"
+                    :key="childItem.value"
                     v-show="childItem.visible"
                     class="step-item"
                     :class="[childItem.type || type, {
-                        'is-active': activeChild === index,
-                        'is-previous': activeChild > index
+                        'is-active': childItem.isActive,
+                        'is-previous': activeItem.index > childItem.index
                 }]">
                     <a
                         class="step-link"
-                        :class="{'is-clickable': isItemClickable(childItem, index)}"
-                        @click="isItemClickable(childItem, index) && childClick(index)">
+                        :class="{'is-clickable': isItemClickable(childItem)}"
+                        @click="isItemClickable(childItem) && childClick(childItem)">
                         <div class="step-marker">
                             <b-icon
                                 v-if="childItem.icon"
@@ -120,12 +120,11 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
-    data() {
-        return {
-            _isSteps: true // Used internally by StepItem
-        }
-    },
     computed: {
+        // Override mixin implementation to always have a value
+        activeItem() {
+            return this.childItems.find((i) => i.value === this.activeId) || this.childItems[0]
+        },
         wrapperClasses() {
             return [
                 this.size,
@@ -148,55 +147,49 @@ export default {
             ]
         },
 
-        childItems() {
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isStepItem)
-                .map((vnode) => vnode.componentInstance)
-        },
-
-        reversedChildItems() {
-            return this.childItems.slice().reverse()
-        },
-
-        /**
-         * Check the first visible step index.
-         */
-        firstVisibleStepIndex() {
-            return this.childItems.map(
-                (step, idx) => step.visible
-            ).indexOf(true)
-        },
-
         /**
          * Check if previous button is available.
          */
         hasPrev() {
-            return this.firstVisibleStepIndex >= 0 &&
-                this.activeChild > this.firstVisibleStepIndex
+            return !!this.prevItem
         },
 
         /**
-         * Check the last visible step index.
+         * Retrieves the next visible item
          */
-        lastVisibleStepIndex() {
-            let idx = this.reversedChildItems.map(
-                (step, idx) => step.visible
-            ).indexOf(true)
-            if (idx >= 0) {
-                return this.childItems.length - 1 - idx
+        nextItem() {
+            let nextItem = null
+            let idx = this.activeItem ? this.items.indexOf(this.activeItem) + 1 : 0
+            for (; idx < this.items.length; idx++) {
+                if (this.items[idx].visible) {
+                    nextItem = this.items[idx]
+                    break
+                }
             }
-            return idx
+            return nextItem
+        },
+
+        /**
+         * Retrieves the previous visible item
+         */
+        prevItem() {
+            if (!this.activeItem) { return null }
+
+            let prevItem = null
+            for (let idx = this.items.indexOf(this.activeItem) - 1; idx >= 0; idx--) {
+                if (this.items[idx].visible) {
+                    prevItem = this.items[idx]
+                    break
+                }
+            }
+            return prevItem
         },
 
         /**
          * Check if next button is available.
          */
         hasNext() {
-            return this.lastVisibleStepIndex >= 0 &&
-                this.activeChild < this.lastVisibleStepIndex
+            return !!this.nextItem
         },
 
         navigationProps() {
@@ -216,9 +209,9 @@ export default {
         /**
          * Return if the step should be clickable or not.
          */
-        isItemClickable(stepItem, index) {
+        isItemClickable(stepItem) {
             if (stepItem.clickable === undefined) {
-                return this.activeChild > index
+                return stepItem.index < this.activeItem.index
             }
             return stepItem.clickable
         },
@@ -227,27 +220,18 @@ export default {
          * Previous button click listener.
          */
         prev() {
-            if (!this.hasPrev) return
-            let prevItemIdx = this.reversedChildItems.map(
-                (step, idx) => this.childItems.length - 1 - idx < this.activeChild && step.visible
-            ).indexOf(true)
-            if (prevItemIdx >= 0) {
-                prevItemIdx = this.childItems.length - 1 - prevItemIdx
+            if (this.hasPrev) {
+                this.activeId = this.prevItem.value
             }
-            this.$emit('input', prevItemIdx)
-            this.changeActive(prevItemIdx)
         },
 
         /**
          * Previous button click listener.
          */
         next() {
-            if (!this.hasNext) return
-            const nextItemIdx = this.childItems.map(
-                (step, idx) => idx > this.activeChild && step.visible
-            ).indexOf(true)
-            this.$emit('input', nextItemIdx)
-            this.changeActive(nextItemIdx)
+            if (this.hasNext) {
+                this.activeId = this.nextItem.value
+            }
         }
     }
 }

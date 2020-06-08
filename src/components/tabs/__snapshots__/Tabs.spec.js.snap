@@ -11,8 +11,8 @@ exports[`BTabs render correctly 1`] = `
         </ul>
     </nav>
     <section class="tab-content">
-        <div></div>
-        <div></div>
+        <div class="tab-item"></div>
+        <div class="tab-item" style="display: none;"></div>
     </section>
 </div>
 `;

@@ -9,16 +9,14 @@ export default {
     },
     data() {
         return {
-            elementClass: 'tab-item',
-            _isTabItem: true // Used internally by Tab
+            elementClass: 'tab-item'
         }
     },
     created() {
-        if (!this.$parent.$data._isTabs) {
+        if (!this.parent) {
             this.$destroy()
-            throw new Error('You should wrap bTabItem on a bTabs')
+            throw new Error('You should wrap bTabItem in a bTabs')
         }
-        this.$parent.refreshSlots()
     }
 }
 </script>
