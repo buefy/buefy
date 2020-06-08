@@ -1,5 +1,6 @@
 
-$skeleton-background: linear-gradient(90deg, $grey-lighter 25%, rgba($grey-lighter, 0.5) 50%, $grey-lighter 75%);
+$skeleton-color: $grey-lighter !default;
+$skeleton-background: linear-gradient(90deg, $skeleton-color 25%, rgba($skeleton-color, 0.5) 50%, $skeleton-color 75%);
 $skeleton-border-radius: $radius !default;
 $skeleton-duration: 1.5s !default;
 $skeleton-margin-top: .5rem !default;
