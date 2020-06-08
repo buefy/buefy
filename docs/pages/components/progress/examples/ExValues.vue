@@ -73,7 +73,7 @@
                 format: 'raw',
                 precision: 2,
                 keepTrailingZeroes: false,
-                locale: undefined,
+                locale: undefined // Browser locale
             }
         }
     }

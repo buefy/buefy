@@ -16,7 +16,13 @@ export default {
             type: Boolean,
             default: () => config.defaultUseHtml5Validation
         },
-        validationMessage: String
+        validationMessage: String,
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
+        }
     },
     data() {
         return {

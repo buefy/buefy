@@ -5,9 +5,10 @@
         <Example :component="ExEditable" :code="ExEditableCode" title="Editable (non readonly)" vertical>
             <p>Use <code>editable</code> prop to let the user type a date.</p>
             <b-message type="is-warning" has-icon>
-                Note that the default date parser is
+                Datepicker will try to parse the date using the specified locale format (or the browser locale if not defined).
+                Note that it will fallback to
                 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse" target="_blank">Date.parse()</a>
-                and it only works for <b>mm-dd-yyyy</b> format. If your locale is different, you have to pass a custom one with
+                which only works for <b>mm-dd-yyyy</b> format. If it does not fit your requirements, you have to pass a custom one with
                 <code>date-parser</code> prop, or by setting a <router-link to="/documentation/constructor-options">constructor option</router-link>.
             </b-message>
         </Example>
