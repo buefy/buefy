@@ -292,11 +292,21 @@ export default {
         },
         dayNames: {
             type: Array,
-            default: () => config.defaultDayNames
+            default: () => {
+                if (!Array.isArray(config.defaultDayNames)) {
+                    return undefined
+                }
+                return config.defaultDayNames
+            }
         },
         monthNames: {
             type: Array,
-            default: () => config.defaultMonthNames
+            default: () => {
+                if (!Array.isArray(config.defaultMonthNames)) {
+                    return undefined
+                }
+                return config.defaultMonthNames
+            }
         },
         firstDayOfWeek: {
             type: Number,
