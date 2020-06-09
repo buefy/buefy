@@ -116,7 +116,8 @@ export default {
         },
         expanded: Boolean,
         appendToBody: Boolean,
-        appendToBodyCopyParent: Boolean
+        appendToBodyCopyParent: Boolean,
+        closeOnWindowScroll: Boolean
     },
     data() {
         return {
@@ -174,6 +175,11 @@ export default {
             if (this.appendToBody) {
                 this.$nextTick(() => {
                     this.updateAppendToBody()
+                })
+            }
+            if (this.closeOnWindowScroll && value) {
+                this.$nextTick(() => {
+                    this.activeWindowScrollClose()
                 })
             }
         }
@@ -336,6 +342,18 @@ export default {
                     zIndex: '99'
                 }
             }
+        },
+
+        activeWindowScrollClose() {
+            // Use a local state to ensure function isnt called more then once
+            let triggered = false
+            const func = () => {
+                if (triggered) return
+                if (this.$refs.optionsDropdown) this.toggle()
+                triggered = true
+                window.removeEventListener('scroll', func)
+            }
+            window.addEventListener('scroll', func)
         }
     },
     mounted() {
