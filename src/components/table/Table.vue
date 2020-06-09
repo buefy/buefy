@@ -871,7 +871,11 @@ export default {
                 this.sortMultiple &&
                 ((this.sortMultipleKey && event[this.sortMultipleKey]) || !this.sortMultipleKey)
             ) {
-                this.sortMultiColumn(column)
+                if (updatingData) {
+                    this.doSortMultiColumn()
+                } else {
+                    this.sortMultiColumn(column)
+                }
             } else {
                 if (!column || !column.sortable) return
 
