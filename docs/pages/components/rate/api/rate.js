@@ -86,8 +86,16 @@ export default [
               values: '—',
               default: '—'
           },
+          {
+              name: '<code>locale</code>',
+              description: `Accept a string with a BCP 47 language tag, or an array of such strings.
+              See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+              type: 'String, Array of String',
+              values: '—',
+              default: '<code>undefined</code>: default to browser locale.'
+          },
       ],
-      events: [ 
+      events: [
           {
               name: '<code>change</code>',
               description: 'Triggers when rate value is changed',

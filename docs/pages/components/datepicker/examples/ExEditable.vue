@@ -2,6 +2,7 @@
     <section>
         <b-field label="Locale">
             <b-select v-model="locale">
+                <option :value="undefined"></option>
                 <option value="de-DE">de-DE</option>
                 <option value="en-CA">en-CA</option>
                 <option value="en-GB">en-GB</option>
