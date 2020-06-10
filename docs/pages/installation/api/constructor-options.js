@@ -332,11 +332,25 @@ export default [
                 default: '<code>3500</code>'
             },
             {
+                name: '<code>defaultTabsExpanded</code>',
+                description: 'Default tabs <code>expanded</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>defaultTabsAnimated</code>',
                 description: 'Default tabs <code>animated</code> attribute',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultTabsType</code>',
+                description: 'Default tabs <code>type</code> attribute',
+                type: 'String',
+                values: '<code>is-boxed</code>, <code>is-toggle</code>',
+                default: '—'
             },
             {
                 name: '<code>defaultLinkTags</code>',

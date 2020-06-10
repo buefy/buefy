@@ -45,8 +45,18 @@ export default {
     },
     props: {
         value: [Number, String],
-        expanded: Boolean,
-        type: String,
+        expanded: {
+            type: Boolean,
+            default: () => {
+                return config.defaultTabsExpanded
+            }
+        },
+        type: {
+            type: String,
+            default: () => {
+                return config.defaultTabsType
+            }
+        },
         size: String,
         position: String,
         animated: {
