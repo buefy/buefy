@@ -18,15 +18,20 @@
             @removePriority="(column) => removeSortingPriority(column)"
         />
 
-        <b-table-pagination
-            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')"
-            v-bind="$props"
-            :total="newDataTotal"
-            :current.sync="newCurrentPage"
-            @page-change="(event) => $emit('page-change', event)"
-        >
-            <slot name="top-left"/>
-        </b-table-pagination>
+        <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
+            <slot name="pagination">
+                <b-table-pagination  
+                    v-bind="$attrs"
+                    :per-page="perPage"
+                    :paginated="paginated"
+                    :total="newDataTotal"
+                    :current-page.sync="newCurrentPage"
+                    @page-change="(event) => $emit('page-change', event)"
+                >
+                    <slot name="top-left"/>
+                </b-table-pagination>
+            </slot>
+        </template>
 
         <div
             class="table-wrapper"
@@ -307,16 +312,23 @@
             </table>
         </div>
 
-        <b-table-pagination
+        <template
             v-if="(checkable && hasBottomLeftSlot()) ||
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
-            v-bind="$props"
-            :total="newDataTotal"
-            :current-page.sync="newCurrentPage"
-            @page-change="(event) => $emit('page-change', event)"
         >
-            <slot name="bottom-left"/>
-        </b-table-pagination>
+            <slot name="pagination">
+                <o-table-pagination
+                    v-bind="$attrs"
+                    :per-page="perPage"
+                    :paginated="paginated"
+                    :total="newDataTotal"
+                    :current-page.sync="newCurrentPage"
+                    @page-change="(event) => $emit('page-change', event)"
+                >
+                    <slot name="bottom-left"/>
+                </o-table-pagination>
+            </slot>
+        </template>
 
     </div>
 </template>
@@ -344,6 +356,12 @@ export default {
         [TableMobileSort.name]: TableMobileSort,
         [TableColumn.name]: TableColumn,
         [TablePagination.name]: TablePagination
+    },
+    inheritAttrs: false,
+    provide() {
+        return {
+            $table: this
+        }
     },
     props: {
         data: {
@@ -704,6 +722,10 @@ export default {
             if (!this.backendPagination) return
 
             this.newDataTotal = newTotal
+        },
+
+        currentPage(newVal) {
+            this.newCurrentPage = newVal
         },
 
         /**
