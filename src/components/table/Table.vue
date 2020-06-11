@@ -1,5 +1,5 @@
 <template>
-    <div class="b-table" :class="rooClasses">
+    <div class="b-table">
 
         <slot />
 
@@ -18,9 +18,10 @@
             @removePriority="(column) => removeSortingPriority(column)"
         />
 
-        <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
+        <template
+            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
             <slot name="pagination">
-                <b-table-pagination  
+                <b-table-pagination
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
@@ -289,8 +290,6 @@
                         />
                     </template>
 
-                    <slot v-if="loading" name="loading"/>
-
                     <tr
                         v-if="!visibleData.length"
                         class="is-empty">
@@ -310,6 +309,13 @@
                     </tr>
                 </tfoot>
             </table>
+
+            <template v-if="loading">
+                <slot name="loading">
+                    <b-loading :is-full-page="false" :active.sync="loading" />
+                </slot>
+            </template>
+
         </div>
 
         <template
@@ -317,7 +323,7 @@
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
         >
             <slot name="pagination">
-                <o-table-pagination
+                <b-table-pagination
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
@@ -326,7 +332,7 @@
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="bottom-left"/>
-                </o-table-pagination>
+                </b-table-pagination>
             </slot>
         </template>
 
@@ -340,6 +346,7 @@ import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
 import Pagination from '../pagination/Pagination'
+import Loading from '../loading/Loading'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
@@ -352,6 +359,7 @@ export default {
         [Icon.name]: Icon,
         [Input.name]: Input,
         [Pagination.name]: Pagination,
+        [Loading.name]: Loading,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
         [TableColumn.name]: TableColumn,
@@ -550,12 +558,8 @@ export default {
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
                 'is-card-list': this.cardLayout,
-                'table-container': this.isScrollable
-            }
-        },
-        rooClasses() {
-            return {
-                'is-loading': this.loading && !this.$slots.loading
+                'table-container': this.isScrollable,
+                'is-relative': this.loading && !this.$slots.loading
             }
         },
 
