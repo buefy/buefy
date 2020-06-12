@@ -50,6 +50,11 @@
             }
             &.is-colon {
                 font-size: 1.7em;
+                line-height: 1.7em;
+
+                &:last-child {
+                    padding-right: $control-padding-horizontal;
+                }
             }
         }
     }
