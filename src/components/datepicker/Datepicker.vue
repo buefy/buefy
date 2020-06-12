@@ -214,29 +214,17 @@ import DatepickerTable from './DatepickerTable'
 import DatepickerMonth from './DatepickerMonth'
 
 const defaultDateFormatter = (date, vm) => {
-    const dtf = new Intl.DateTimeFormat(vm.locale, { timezome: 'UTC' })
-    const dtfMonth = new Intl.DateTimeFormat(vm.locale, {
-        year: 'numeric',
-        month: '2-digit',
-        timezome: 'UTC'
-    })
     const targetDates = Array.isArray(date) ? date : [date]
     const dates = targetDates.map((date) => {
         const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
-        return !vm.isTypeMonth ? dtf.format(d) : dtfMonth.format(d)
+        return !vm.isTypeMonth ? vm.dtf.format(d) : vm.dtfMonth.format(d)
     })
     return !vm.multiple ? dates.join(' - ') : dates.join(', ')
 }
 
 const defaultDateParser = (date, vm) => {
-    const dtf = new Intl.DateTimeFormat(vm.locale, { timezome: 'UTC' })
-    const dtfMonth = new Intl.DateTimeFormat(vm.locale, {
-        year: 'numeric',
-        month: '2-digit',
-        timezome: 'UTC'
-    })
-    if (dtf.formatToParts && typeof dtf.formatToParts === 'function') {
-        const formatRegex = (vm.isTypeMonth ? dtfMonth : dtf)
+    if (vm.dtf.formatToParts && typeof vm.dtf.formatToParts === 'function') {
+        const formatRegex = (vm.isTypeMonth ? vm.dtfMonth : vm.dtf)
             .formatToParts(new Date(2000, 11, 25)).map((part) => {
                 if (part.type === 'literal') {
                     return part.value
@@ -467,6 +455,22 @@ export default {
                     })
                 }
             }
+        },
+        localeOptions() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: 'numeric',
+                month: 'numeric'
+            }).resolvedOptions()
+        },
+        dtf() {
+            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+        },
+        dtfMonth() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: this.localeOptions.year || 'numeric',
+                month: this.localeOptions.month || '2-digit',
+                timezome: 'UTC'
+            })
         },
         newMonthNames() {
             if (Array.isArray(this.monthNames)) {

@@ -143,9 +143,7 @@ export default {
         },
         mobileNative: {
             type: Boolean,
-            default: () => {
-                return config.defaultTimepickerMobileNative
-            }
+            default: () => config.defaultTimepickerMobileNative
         },
         timeCreator: {
             type: Function,
@@ -567,8 +565,8 @@ export default {
         },
 
         /*
-        * Parse string into date
-        */
+         * Parse string into date
+         */
         onChange(value) {
             const date = this.timeParser(value, this)
             this.updateInternalState(date)
@@ -582,8 +580,8 @@ export default {
         },
 
         /*
-        * Toggle timepicker
-        */
+         * Toggle timepicker
+         */
         toggle(active) {
             if (this.$refs.dropdown) {
                 this.$refs.dropdown.isActive = typeof active === 'boolean'
@@ -593,15 +591,15 @@ export default {
         },
 
         /*
-        * Close timepicker
-        */
+         * Close timepicker
+         */
         close() {
             this.toggle(false)
         },
 
         /*
-        * Call default onFocus method and show timepicker
-        */
+         * Call default onFocus method and show timepicker
+         */
         handleOnFocus() {
             this.onFocus()
             if (this.openOnFocus) {
@@ -610,8 +608,8 @@ export default {
         },
 
         /*
-        * Format date into string 'HH-MM-SS'
-        */
+         * Format date into string 'HH-MM-SS'
+         */
         formatHHMMSS(value) {
             const date = new Date(value)
             if (value && !isNaN(date)) {
@@ -626,8 +624,8 @@ export default {
         },
 
         /*
-        * Parse time from string
-        */
+         * Parse time from string
+         */
         onChangeNativePicker(event) {
             const date = event.target.value
             if (date) {
@@ -659,8 +657,8 @@ export default {
         },
 
         /*
-        * Format date into string
-        */
+         * Format date into string
+         */
         formatValue(date) {
             if (date && !isNaN(date)) {
                 return this.timeFormatter(date, this)
