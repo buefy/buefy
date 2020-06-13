@@ -12,6 +12,7 @@
                 background: $color;
                 &:hover {
                     background-color: darken($color, 10%);
+                    text-decoration: none;
                 }
             }
         }
