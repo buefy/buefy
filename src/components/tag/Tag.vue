@@ -25,6 +25,7 @@
                 :icon="closeIcon"
                 :size="size"
                 :type="closeIconType"
+                :pack="closeIconPack"
             />
             <a/>
     </a></div>
