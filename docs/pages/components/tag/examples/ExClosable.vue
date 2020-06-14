@@ -50,6 +50,18 @@
                 Attached tag label with colored close type
             </b-tag>
         </div>
+        <div class="field">
+            <b-tag v-if="isTag6Active"
+                close-type='is-warning'
+                close-icon-type='is-dark'
+                attached
+                closable
+                close-icon='delete'
+                aria-close-label="Close tag"
+                @close="isTag6Active = false">
+                Attached tag label with custom and colored icon
+            </b-tag>
+        </div>
     </section>
 </template>
 
@@ -62,6 +74,7 @@
                 isTag3Active: true,
                 isTag4Active: true,
                 isTag5Active: true,
+                isTag6Active: true,
             }
         }
     }

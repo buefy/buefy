@@ -5,15 +5,23 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-    .delete, &.is-delete {
+    .delete, &.is-delete, &.has-delete-icon {
         @each $name, $pair in $colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
                 background: $color;
                 &:hover {
                     background-color: darken($color, 10%);
+                    text-decoration: none;
                 }
             }
+        }
+    }
+    &.has-delete-icon {
+        padding: 0px;
+        .icon:first-child:not(:last-child) {
+            margin-right: 0px;
+            margin-left: 0px;
         }
     }
 }
