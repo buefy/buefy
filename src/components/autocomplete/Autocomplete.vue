@@ -343,7 +343,7 @@ export default {
          * Close dropdown if clicked outside.
          */
         clickedOutside(event) {
-            const target = isCustomElement(this) ? event.composedPath()[0] : event.target;
+            const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (this.whiteList.indexOf(target) < 0) this.isActive = false
         },
 

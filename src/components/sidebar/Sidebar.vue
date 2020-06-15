@@ -162,7 +162,7 @@ export default {
         clickedOutside(event) {
             if (this.isFixed) {
                 if (this.isOpen && !this.animating) {
-                    const target = isCustomElement(this) ? event.composedPath()[0] : event.target;
+                    const target = isCustomElement(this) ? event.composedPath()[0] : event.target
                     if (this.whiteList.indexOf(target) < 0) {
                         this.cancel('outside')
                     }

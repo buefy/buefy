@@ -160,5 +160,5 @@ export function createNewEvent(eventName) {
 }
 
 export function isCustomElement(vm) {
-   return 'shadowRoot' in  vm.$root.$options
+    return 'shadowRoot' in vm.$root.$options
 }

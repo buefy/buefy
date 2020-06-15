@@ -248,7 +248,7 @@ export default {
             if (this.cancelOptions.indexOf('outside') < 0) return
             if (this.inline) return
 
-            const target = isCustomElement(this) ? event.composedPath()[0] : event.target;
+            const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (!this.isInWhiteList(target)) this.isActive = false
         },
 
