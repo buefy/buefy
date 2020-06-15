@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { removeElement } from '../../utils/helpers'
+import { removeElement, isCustomElement } from '../../utils/helpers'
 
 export default {
     name: 'BSidebar',
@@ -162,7 +162,8 @@ export default {
         clickedOutside(event) {
             if (this.isFixed) {
                 if (this.isOpen && !this.animating) {
-                    if (this.whiteList.indexOf(event.target) < 0) {
+                    const target = isCustomElement(this) ? event.composedPath()[0] : event.target;
+                    if (this.whiteList.indexOf(target) < 0) {
                         this.cancel('outside')
                     }
                 }
