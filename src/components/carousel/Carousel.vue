@@ -228,6 +228,8 @@ export default {
         carouselItems() {
             if (this.activeItem < this.carouselItems.length) {
                 this.carouselItems[this.activeItem].isActive = true
+            } else if (this.carouselItems[0] !== undefined) {
+                this.carouselItems[0].isActive = true
             }
         },
         /**
@@ -237,6 +239,7 @@ export default {
             status ? this.startTimer() : this.pauseTimer()
         }
     },
+
     methods: {
         startTimer() {
             if (!this.autoplay || this.timer) return
@@ -270,6 +273,10 @@ export default {
 
             if (this.activeItem < this.carouselItems.length) {
                 this.carouselItems[this.activeItem].status(false, action)
+            }
+
+            if (this.carouselItems[newIndex] === undefined) {
+                newIndex = 0
             }
             this.carouselItems[newIndex].status(true, action)
             this.activeItem = newIndex
