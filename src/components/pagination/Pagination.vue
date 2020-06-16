@@ -285,8 +285,8 @@ export default {
 
         changePage(num, event) {
             if (this.current === num || num < 1 || num > this.pageCount) return
-            this.$emit('change', num)
             this.$emit('update:current', num)
+            this.$emit('change', num)
 
             // Set focus on element to keep tab order
             if (event && event.target) {
