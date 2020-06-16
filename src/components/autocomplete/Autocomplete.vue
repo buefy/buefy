@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { getValueByPath, removeElement, createAbsoluteElement } from '../../utils/helpers'
+import { getValueByPath, removeElement, createAbsoluteElement, isCustomElement } from '../../utils/helpers'
 import FormElementMixin from '../../utils/FormElementMixin'
 import Input from '../input/Input'
 
@@ -343,7 +343,8 @@ export default {
          * Close dropdown if clicked outside.
          */
         clickedOutside(event) {
-            if (this.whiteList.indexOf(event.target) < 0) this.isActive = false
+            const target = isCustomElement(this) ? event.composedPath()[0] : event.target
+            if (this.whiteList.indexOf(target) < 0) this.isActive = false
         },
 
         /**

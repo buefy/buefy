@@ -45,7 +45,7 @@
 <script>
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
-import { removeElement, createAbsoluteElement } from '../../utils/helpers'
+import { removeElement, createAbsoluteElement, isCustomElement } from '../../utils/helpers'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
@@ -248,7 +248,8 @@ export default {
             if (this.cancelOptions.indexOf('outside') < 0) return
             if (this.inline) return
 
-            if (!this.isInWhiteList(event.target)) this.isActive = false
+            const target = isCustomElement(this) ? event.composedPath()[0] : event.target
+            if (!this.isInWhiteList(target)) this.isActive = false
         },
 
         /**
