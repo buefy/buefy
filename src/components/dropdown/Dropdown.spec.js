@@ -147,4 +147,14 @@ describe('BDropdown', () => {
             done()
         })
     })
+    it('close dropdown on scroll', (done) => {
+        wrapper.vm.isActive = true
+        wrapper.setProps({ closeOnWindowScroll: true })
+
+        // window.pageYOffset = 200
+        window.scrollTop = 200
+        expect(wrapper.vm.isActive).toBeFalsy()
+
+        done()
+    })
 })

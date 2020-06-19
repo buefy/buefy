@@ -114,6 +114,13 @@ export default [
                 values: '—',
                 default: '<code>200px</code>'
             },
+            {
+                name: '<code>close-on-window-scroll</code>',
+                description: 'Close the active dropdown once the window is scrolled',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         slots: [
             {
