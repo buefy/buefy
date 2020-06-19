@@ -27,12 +27,6 @@
                         </ol>
                     </div>
                 </b-message>
-                <b-message type="is-warning">
-                    You might also have to install <code>node-sass</code> and <code>sass-loader</code> depending on your environment.
-                </b-message>
-                <p class="block">
-                    It can be done in your <b>App.vue</b> within the <code>&lt;style lang="scss"&gt;</code> tag, or in a separate <b>.scss</b> file.
-                </p>
                 <div class="example is-paddingless">
                     <CodeView :code="sass | pre" lang="sass" expanded/>
                 </div>

@@ -14,16 +14,14 @@ export default {
     },
     data() {
         return {
-            elementClass: 'step-item',
-            _isStepItem: true // Used internally by Step
+            elementClass: 'step-item'
         }
     },
     created() {
-        if (!this.$parent.$data._isSteps) {
+        if (!this.parent) {
             this.$destroy()
-            throw new Error('You should wrap bStepItem on a bSteps')
+            throw new Error('You should wrap bStepItem in a bSteps')
         }
-        this.$parent.refreshSlots()
     }
 }
 </script>

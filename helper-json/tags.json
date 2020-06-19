@@ -814,6 +814,7 @@
       "height",
       "filters-event",
       "card-layout",
+      "show-header",
       "aria-next-label",
       "aria-previous-label",
       "aria-page-label",
@@ -841,7 +842,8 @@
       "sticky",
       "header-selectable",
       "header-class",
-      "cell-class"
+      "cell-class",
+      "header-selectable"
     ],
     "description": "Buefy component <b-table-column>",
     "subtags": []
@@ -917,7 +919,7 @@
       "allow-new",
       "open-on-focus",
       "remove-on-keys",
-      "confirm-key-codes",
+      "confirm-keys",
       "on-paste-separators",
       "before-adding",
       "allow-duplicates",

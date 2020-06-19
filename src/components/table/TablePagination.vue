@@ -12,7 +12,7 @@
                     :per-page="perPage"
                     :simple="paginationSimple"
                     :size="paginationSize"
-                    :current="currentPage"
+                    :current="newCurrentPage"
                     :rounded="rounded"
                     @change="pageChanged"
                     :aria-next-label="ariaNextLabel"
@@ -47,7 +47,7 @@ export default {
         }
     },
     watch: {
-        current(newVal) {
+        currentPage(newVal) {
             this.newCurrentPage = newVal
         }
     },

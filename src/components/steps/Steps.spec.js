@@ -1,38 +1,24 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import BSteps from '@components/steps/Steps'
+import BStepItem from '@components/steps/StepItem'
 
 let wrapper
 
-const mockStepItems = (active = false) => {
-    return {
-        name: 'BStepItem',
-        template: '<div></div>',
-        data() {
-            return {
-                _isStepItem: true,
-                isActive: active,
-                visible: true,
-                clickable: active || undefined
-            }
-        },
-        methods: {
-            activate: jest.fn(),
-            deactivate: jest.fn()
-        }
+const WrapperComp = {
+    template: `
+        <BSteps :value="1">
+            <BStepItem></BStepItem>
+            <BStepItem :visible="false"></BStepItem>
+            <BStepItem :clickable="false"></BStepItem>
+        </BSteps>`,
+    components: {
+        BSteps, BStepItem
     }
 }
 
 describe('BSteps', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BSteps, {
-            stub: ['b-step-item'],
-            slots: {
-                default: [
-                    mockStepItems(true),
-                    mockStepItems()
-                ]
-            }
-        })
+        wrapper = mount(WrapperComp, { sync: false }).find(BSteps)
     })
 
     it('is called', () => {
@@ -44,52 +30,76 @@ describe('BSteps', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('calls changeActive when value is changed', () => {
-        wrapper.vm.changeActive = jest.fn()
-        wrapper.setProps({value: 1})
-        expect(wrapper.vm.changeActive).toHaveBeenCalled()
+    it('emit input event with value when active step is modified', async () => {
+        wrapper.vm.activeId = wrapper.vm.items[0].value
+
+        await wrapper.vm.$nextTick() // Wait until $emits have been handled
+
+        const valueEmitted = wrapper.emitted().input
+
+        expect(valueEmitted).toBeTruthy()
+        expect(valueEmitted.length).toBe(1)
+        expect(valueEmitted[0][0]).toBe(0)
     })
 
-    it('emit change event with value when changeActive is called', () => {
-        const idx = 1
-        wrapper.vm.changeActive(idx)
-        const valueEmitted = wrapper.emitted()['change'][0]
-        expect(valueEmitted).toContainEqual(idx)
-        expect(wrapper.vm.activeChild).toEqual(idx)
-
-        expect(() => wrapper.vm.changeActive(3)).toThrow()
-    })
-
-    it('emit input event with value when childClick is called', () => {
-        wrapper.vm.changeActive = jest.fn()
-        wrapper.vm.childClick(1)
-        const valueEmitted = wrapper.emitted()['input'][0]
-        expect(valueEmitted).toContainEqual(1)
-        expect(wrapper.vm.changeActive).toHaveBeenCalled()
-    })
-
-    it('manage next/previous listener', () => {
+    it('manage next/previous listener', async () => {
         const first = 0
-        const next = first + 1
-        wrapper.setProps({value: first})
+        const next = first + 2
+
+        // First input
+        wrapper.setProps({value: 0})
+
+        await wrapper.vm.$nextTick() // Wait until $emits have been handled
+
+        expect(wrapper.vm.value).toBe(0)
 
         expect(wrapper.vm.hasNext).toBeTruthy()
         wrapper.vm.next()
-        expect(wrapper.emitted()['input'][0]).toContainEqual(next)
-        expect(wrapper.vm.activeChild).toBe(next)
+
+        await wrapper.vm.$nextTick() // Wait until $emits have been handled
+
+        // Simulate v-model
+        wrapper.setProps(
+            {value: wrapper.emitted().input[wrapper.emitted().input.length - 1][0]}
+        )
+
+        const emitted = wrapper.emitted().input
+
+        expect(emitted).toBeTruthy()
+        expect(emitted.length).toBe(1)
+        expect(emitted[0][0]).toBe(next)
+
         expect(wrapper.vm.hasNext).toBeFalsy()
 
         wrapper.vm.next()
-        expect(wrapper.vm.activeChild).toBe(next)
+
+        await wrapper.vm.$nextTick() // Wait until $emits have been handled
+
+        // Simulate v-model
+        wrapper.setProps(
+            {value: wrapper.emitted().input[wrapper.emitted().input.length - 1][0]}
+        )
+
+        expect(wrapper.emitted().input.length).toBe(1) // To still be
 
         expect(wrapper.vm.hasPrev).toBeTruthy()
         wrapper.vm.prev()
-        expect(wrapper.emitted()['input'][1]).toContainEqual(first)
-        expect(wrapper.vm.activeChild).toBe(first)
+
+        await wrapper.vm.$nextTick() // Wait until $emits have been handled
+
+        // Simulate v-model
+        wrapper.setProps(
+            {value: wrapper.emitted().input[wrapper.emitted().input.length - 1][0]}
+        )
+
+        expect(wrapper.emitted().input.length).toBe(2)
+        expect(wrapper.emitted().input[1][0]).toBe(first)
         expect(wrapper.vm.hasPrev).toBeFalsy()
 
         wrapper.vm.prev()
-        expect(wrapper.vm.activeChild).toBe(first)
+        await wrapper.vm.$nextTick() // Wait until $emits have been handled
+
+        expect(wrapper.emitted().input.length).toBe(2) // To still be
     })
 
     it('manage wrapper classes as expected', () => {
@@ -100,5 +110,25 @@ describe('BSteps', () => {
 
         wrapper.setProps({position: 'is-right'})
         expect(wrapper.vm.wrapperClasses[1]['is-right']).toBeTruthy()
+    })
+
+    it('throws an error when there is no item', () => {
+        const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
+
+        try {
+            wrapper = mount({
+                template: `<BSteps/>`,
+                components: {
+                    BSteps
+                },
+                destroyed() {
+                    spy()
+                }
+            })
+        } catch (error) {
+            expect(error.message).stringMatching(/item inside/)
+        } finally {
+            spy.mockRestore()
+        }
     })
 })

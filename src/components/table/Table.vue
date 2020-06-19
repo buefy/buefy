@@ -1,5 +1,5 @@
 <template>
-    <div class="b-table" :class="rooClasses">
+    <div class="b-table">
 
         <slot />
 
@@ -18,15 +18,21 @@
             @removePriority="(column) => removeSortingPriority(column)"
         />
 
-        <b-table-pagination
-            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')"
-            v-bind="$props"
-            :total="newDataTotal"
-            :current.sync="newCurrentPage"
-            @page-change="(event) => $emit('page-change', event)"
-        >
-            <slot name="top-left"/>
-        </b-table-pagination>
+        <template
+            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
+            <slot name="pagination">
+                <b-table-pagination
+                    v-bind="$attrs"
+                    :per-page="perPage"
+                    :paginated="paginated"
+                    :total="newDataTotal"
+                    :current-page.sync="newCurrentPage"
+                    @page-change="(event) => $emit('page-change', event)"
+                >
+                    <slot name="top-left"/>
+                </b-table-pagination>
+            </slot>
+        </template>
 
         <div
             class="table-wrapper"
@@ -284,8 +290,6 @@
                         />
                     </template>
 
-                    <slot v-if="loading" name="loading"/>
-
                     <tr
                         v-if="!visibleData.length"
                         class="is-empty">
@@ -305,18 +309,32 @@
                     </tr>
                 </tfoot>
             </table>
+
+            <template v-if="loading">
+                <slot name="loading">
+                    <b-loading :is-full-page="false" :active.sync="loading" />
+                </slot>
+            </template>
+
         </div>
 
-        <b-table-pagination
+        <template
             v-if="(checkable && hasBottomLeftSlot()) ||
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
-            v-bind="$props"
-            :total="newDataTotal"
-            :current-page.sync="newCurrentPage"
-            @page-change="(event) => $emit('page-change', event)"
         >
-            <slot name="bottom-left"/>
-        </b-table-pagination>
+            <slot name="pagination">
+                <b-table-pagination
+                    v-bind="$attrs"
+                    :per-page="perPage"
+                    :paginated="paginated"
+                    :total="newDataTotal"
+                    :current-page.sync="newCurrentPage"
+                    @page-change="(event) => $emit('page-change', event)"
+                >
+                    <slot name="bottom-left"/>
+                </b-table-pagination>
+            </slot>
+        </template>
 
     </div>
 </template>
@@ -328,6 +346,7 @@ import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
 import Pagination from '../pagination/Pagination'
+import Loading from '../loading/Loading'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
@@ -340,10 +359,17 @@ export default {
         [Icon.name]: Icon,
         [Input.name]: Input,
         [Pagination.name]: Pagination,
+        [Loading.name]: Loading,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
         [TableColumn.name]: TableColumn,
         [TablePagination.name]: TablePagination
+    },
+    inheritAttrs: false,
+    provide() {
+        return {
+            $table: this
+        }
     },
     props: {
         data: {
@@ -532,12 +558,8 @@ export default {
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
                 'is-card-list': this.cardLayout,
-                'table-container': this.isScrollable
-            }
-        },
-        rooClasses() {
-            return {
-                'is-loading': this.loading && !this.$slots.loading
+                'table-container': this.isScrollable,
+                'is-relative': this.loading && !this.$slots.loading
             }
         },
 
@@ -704,6 +726,10 @@ export default {
             if (!this.backendPagination) return
 
             this.newDataTotal = newTotal
+        },
+
+        currentPage(newVal) {
+            this.newCurrentPage = newVal
         },
 
         /**
