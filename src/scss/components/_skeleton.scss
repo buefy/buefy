@@ -11,6 +11,9 @@ $skeleton-margin-top: .5rem !default;
 }
 
 .b-skeleton {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
     width: 100%;
     > .b-skeleton-item {
         background: $skeleton-background;
@@ -30,6 +33,12 @@ $skeleton-margin-top: .5rem !default;
         > .b-skeleton-item {
             animation: skeleton-loading $skeleton-duration infinite;
         }
+    }
+    &.is-centered {
+        align-items: center;
+    }
+    &.is-right {
+        align-items: flex-end;
     }
     + .b-skeleton {
         margin-top: $skeleton-margin-top;

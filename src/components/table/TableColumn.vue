@@ -3,6 +3,9 @@ import { toCssWidth } from '../../utils/helpers'
 
 export default {
     name: 'BTableColumn',
+    inject: {
+        $table: { name: '$table', default: false }
+    },
     props: {
         label: String,
         customKey: [String, Number],
@@ -54,11 +57,11 @@ export default {
         }
     },
     created() {
-        if (!this.$parent.$data._isTable) {
+        if (!this.$table) {
             this.$destroy()
             throw new Error('You should wrap bTableColumn on a bTable')
         }
-        this.$parent.refreshSlots()
+        this.$table.refreshSlots()
     },
     render(createElement) {
         // renderless
