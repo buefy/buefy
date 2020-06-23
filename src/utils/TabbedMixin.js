@@ -1,7 +1,9 @@
 import Icon from '../components/icon/Icon'
 import SlotComponent from '../utils/SlotComponent'
+import ProviderParentMixin from './ProviderParentMixin'
 
-export default {
+export default (cmp) => ({
+    mixins: [ProviderParentMixin(cmp)],
     components: {
         [Icon.name]: Icon,
         [SlotComponent.name]: SlotComponent
@@ -27,25 +29,19 @@ export default {
             default: false
         }
     },
-    provide() {
-        return {
-            $tabbed: this
-        }
-    },
     data() {
         return {
             activeId: this.value, // Internal state
-            childItems: [],
             defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false
         }
     },
     mounted() {
-        if (this.childItems.length < 1) {
-            this.$destroy()
-            throw new Error('A ' + this.$vnode.tag + ' must have at least 1 item inside')
-        }
+        // if (this.childItems.length < 1) {
+        //     this.$destroy()
+        //     throw new Error(this.$options.name + ' must have at least 1 item inside')
+        // }
 
         if (typeof this.value === 'number') {
             // Backward compatibility: converts the index value to an id
@@ -57,17 +53,12 @@ export default {
     },
     computed: {
         activeItem() {
-            return this.activeId === undefined ? this.childItems[0]
+            return this.activeId === undefined ? this.items[0]
                 : (this.activeId === null ? null
                     : this.childItems.find((i) => i.value === this.activeId))
         },
-        /**
-         * When items are added/removed sort them according to their position
-         */
         items() {
-            return this.childItems.slice().sort((i1, i2) => {
-                return i1.index - i2.index
-            })
+            return this.sortedItems
         }
     },
     watch: {
@@ -105,13 +96,6 @@ export default {
         }
     },
     methods: {
-        _registerItem(item) {
-            this.childItems.push(item)
-        },
-        _unregisterItem(item) {
-            this.childItems = this.childItems.filter((i) => i !== item)
-        },
-
         /**
         * Child click listener, emit input event and change active child.
         */
@@ -119,4 +103,4 @@ export default {
             this.activeId = child.value
         }
     }
-}
+})
