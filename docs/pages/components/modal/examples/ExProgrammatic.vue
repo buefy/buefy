@@ -73,7 +73,6 @@
                     parent: this,
                     component: ModalForm,
                     hasModalCard: true,
-                    showX: false,
                     customClass: 'custom-class custom-class-2',
                     trapFocus: true
                 })
