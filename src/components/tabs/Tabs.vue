@@ -6,9 +6,8 @@
                     v-for="childItem in items"
                     :key="childItem.value"
                     v-show="childItem.visible"
-                    :class="{ 'is-active': childItem.isActive,
-                              'is-disabled': childItem.disabled }">
-
+                    :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
+                                                       'is-disabled': childItem.disabled }]">
                     <b-slot-component
                         v-if="childItem.$slots.header"
                         :component="childItem"
@@ -39,7 +38,7 @@ import TabbedMixin from '../../utils/TabbedMixin.js'
 
 export default {
     name: 'BTabs',
-    mixins: [TabbedMixin],
+    mixins: [TabbedMixin('tab')],
     props: {
         expanded: Boolean,
         animated: {

@@ -3,11 +3,17 @@ import BTabs from '@components/tabs/Tabs'
 import BTabItem from '@components/tabs/TabItem'
 
 let wrapper
+let wrapperParent
 
 const WrapperComp = {
+    data() {
+        return {
+            show1: true
+        }
+    },
     template: `
         <BTabs>
-            <BTabItem value="tab1"/>
+            <BTabItem v-if="show1" value="tab1"/>
             <BTabItem ref="testItem" value="tab2"/>
             <BTabItem value="tab3" :visible="false"/>
         </BTabs>`,
@@ -18,7 +24,8 @@ const WrapperComp = {
 
 describe('BTabItem', () => {
     beforeEach(() => {
-        wrapper = mount(WrapperComp).find({ ref: 'testItem' })
+        wrapperParent = mount(WrapperComp)
+        wrapper = wrapperParent.find({ ref: 'testItem' })
     })
 
     it('is called', () => {
@@ -33,6 +40,15 @@ describe('BTabItem', () => {
 
     it('computes its position correctly', () => {
         expect(wrapper.vm.index).toBe(1)
+    })
+
+    it('will recompute indexes when a sibling gets removed', async () => {
+        expect(wrapper.vm.index).toBe(1)
+        wrapperParent.vm.show1 = false
+
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.vm.index).toBe(0)
     })
 
     it('transition correctly when activate is called', () => {

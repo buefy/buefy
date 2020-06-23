@@ -7,7 +7,7 @@
                     :key="childItem.value"
                     v-show="childItem.visible"
                     class="step-item"
-                    :class="[childItem.type || type, {
+                    :class="[childItem.type || type, childItem.headerClass, {
                         'is-active': childItem.isActive,
                         'is-previous': activeItem.index > childItem.index
                 }]">
@@ -73,7 +73,7 @@ import config from '../../utils/config'
 
 export default {
     name: 'BSteps',
-    mixins: [TabbedMixin],
+    mixins: [TabbedMixin('step')],
     props: {
         iconPack: String,
         iconPrev: {
@@ -123,7 +123,7 @@ export default {
     computed: {
         // Override mixin implementation to always have a value
         activeItem() {
-            return this.childItems.find((i) => i.value === this.activeId) || this.childItems[0]
+            return this.childItems.find((i) => i.value === this.activeId) || this.items[0]
         },
         wrapperClasses() {
             return [
