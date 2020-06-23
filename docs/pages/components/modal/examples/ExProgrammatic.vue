@@ -21,6 +21,10 @@
                 <div class="modal-card" style="width: auto">
                     <header class="modal-card-head">
                         <p class="modal-card-title">Login</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="$emit('close')"/>
                     </header>
                     <section class="modal-card-body">
                         <b-field label="Email">
@@ -45,7 +49,7 @@
                         <b-checkbox>Remember me</b-checkbox>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button" type="button" @click="$parent.close()">Close</button>
+                        <button class="button" type="button" @click="$emit('close')">Close</button>
                         <button class="button is-primary">Login</button>
                     </footer>
                 </div>
@@ -69,6 +73,7 @@
                     parent: this,
                     component: ModalForm,
                     hasModalCard: true,
+                    showX: false,
                     customClass: 'custom-class custom-class-2',
                     trapFocus: true
                 })
