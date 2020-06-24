@@ -1,21 +1,17 @@
 import { shallowMount } from '@vue/test-utils'
 import BCarousel from '@components/carousel/Carousel'
 import BIcon from '@components/icon/Icon'
+import InjectedChildMixin from '../../utils/InjectedChildMixin'
 
 let wrapper
 
-const mockCarouselItems = (active = false) => {
-    return {
-        name: 'BCarouselItem',
-        template: '<div></div>',
-        data() {
-            return {
-                _isCarouselItem: true,
-                isActive: active
-            }
-        },
-        methods: {
-            status: jest.fn()
+const mockCarouselItems = {
+    mixins: [InjectedChildMixin('carousel')],
+    name: 'BCarouselItem',
+    template: '<div></div>',
+    computed: {
+        isActive() {
+            return this.parent.activeChild === this.index
         }
     }
 }
@@ -23,12 +19,13 @@ const mockCarouselItems = (active = false) => {
 describe('BCarousel', () => {
     beforeEach(() => {
         wrapper = shallowMount(BCarousel, {
+            sync: false,
             Component: BIcon,
-            stub: ['b-carousel-item'],
+            stubs: {'b-carousel-item': mockCarouselItems},
             slots: {
                 default: [
-                    mockCarouselItems(true),
-                    mockCarouselItems()
+                    '<b-carousel-item/>',
+                    '<b-carousel-item/>'
                 ]
             }
         })
@@ -43,28 +40,35 @@ describe('BCarousel', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('reacts when value changes', () => {
+    it('reacts when value changes', async () => {
         let value = 1
         wrapper.setProps({ value })
+        await wrapper.vm.$nextTick()
         expect(wrapper.vm.activeChild).toBe(value)
 
         value = 0
         wrapper.setProps({ value })
+        await wrapper.vm.$nextTick()
         expect(wrapper.vm.activeChild).toBe(value)
     })
 
-    it('reacts when autoplay changes', () => {
+    it('reacts when autoplay changes', async () => {
         wrapper.vm.startTimer = jest.fn(wrapper.vm.startTimer)
         wrapper.vm.pauseTimer = jest.fn(wrapper.vm.pauseTimer)
         wrapper.vm.next = jest.fn(wrapper.vm.next)
 
         let autoplay = false
         wrapper.setProps({ autoplay })
+        await wrapper.vm.$nextTick()
+
         expect(wrapper.vm.autoplay).toBe(autoplay)
         expect(wrapper.vm.pauseTimer).toHaveBeenCalled()
 
         autoplay = true
         wrapper.setProps({ autoplay })
+
+        await wrapper.vm.$nextTick()
+
         expect(wrapper.vm.autoplay).toBe(autoplay)
         expect(wrapper.vm.startTimer).toHaveBeenCalled()
     })
@@ -116,5 +120,12 @@ describe('BCarousel', () => {
         wrapper.setProps({ repeat })
         wrapper.vm.next()
         expect(wrapper.vm.activeChild).toBe(last) // Wont go above last when not using repeat
+    })
+
+    it('pauses on hover', async () => {
+        jest.useFakeTimers()
+        wrapper.setProps({ autoplay: true, 'pause-hover': false, interval: 1 })
+
+        jest.runOnlyPendingTimers()
     })
 })

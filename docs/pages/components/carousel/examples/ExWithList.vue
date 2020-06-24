@@ -14,7 +14,7 @@
             <b-carousel-list
                 v-model="props.active"
                 :data="items"
-                :config="al"
+                v-bind="al"
                 :refresh="gallery"
                 @switch="props.switch($event, false)"
                 as-indicator />

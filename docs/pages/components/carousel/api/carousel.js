@@ -261,7 +261,7 @@ export default [
             },
             {
                 name: '<code>config</code>',
-                description: 'An object to pass all configs',
+                description: 'This property was removed, if you were using it, simply rename <code>:config</code> to <code>v-bind</code>',
                 type: 'Object',
                 values: '—',
                 default: '—'

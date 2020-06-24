@@ -7,7 +7,7 @@
         <div
             class="carousel-slides"
             :class="listClass"
-            :style="transformStyle">
+            :style="'transform:translateX('+translation+'px)'">
             <div
                 class="carousel-slide"
                 :class="{'is-active': activeItem === index}"
@@ -23,6 +23,7 @@
                     <figure class="image">
                         <img
                             :src="list.image"
+                            :alt="list.alt"
                             :title="list.title">
                     </figure>
                 </slot>
@@ -33,7 +34,7 @@
             class="carousel-arrow"
             :class="{'is-hovered': arrowHover}">
             <b-icon
-                v-show="activeItem > 0"
+                v-show="hasPrev"
                 class="has-icons-left"
                 @click.native.prevent="prev"
                 :pack="iconPack"
@@ -41,7 +42,7 @@
                 :size="iconSize"
                 both />
             <b-icon
-                v-show="checkArrow(total)"
+                v-show="hasNext"
                 class="has-icons-right"
                 @click.native.prevent="next"
                 :pack="iconPack"
@@ -53,7 +54,7 @@
 </template>
 
 <script>
-import { merge, sign } from '../../utils/helpers'
+import {sign} from '../../utils/helpers'
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
@@ -64,10 +65,6 @@ export default {
         [Icon.name]: Icon
     },
     props: {
-        config: {
-            type: Object,
-            default: () => ({})
-        },
         data: {
             type: Array,
             default: () => []
@@ -114,17 +111,20 @@ export default {
                 return config.defaultIconNext
             }
         },
-        refresh: Boolean
+        refresh: Boolean,
+        breakpoints: {
+            type: Object,
+            default: () => ({})
+        }
     },
     data() {
         return {
             activeItem: this.value,
-            breakpoints: {},
             delta: 0,
             dragging: false,
             hold: 0,
-            itemWidth: 0,
-            settings: {}
+            windowWidth: 0,
+            touch: false
         }
     },
     computed: {
@@ -140,13 +140,44 @@ export default {
         itemStyle() {
             return `width: ${this.itemWidth}px;`
         },
-        transformStyle() {
-            const translate = this.delta + 1 * (this.activeItem * this.itemWidth)
-            const result = this.dragging ? -translate : -Math.abs(translate)
-            return `transform: translateX(${result}px);`
+        translation() {
+            return -Math.max(0, Math.min(
+                (this.data.length - this.settings.itemsToShow) * this.itemWidth,
+                this.delta + (this.activeItem * this.itemWidth)
+            ))
         },
         total() {
-            return this.data.length - 1
+            return this.data.length - this.settings.itemsToShow
+        },
+        hasPrev() {
+            return (this.repeat || this.activeItem > 0)
+        },
+        hasNext() {
+            return (this.repeat || this.activeItem < this.total)
+        },
+        breakpointKeys() {
+            return Object.keys(this.breakpoints).sort((a, b) => a - b)
+        },
+        settings() {
+            let breakpoint = this.breakpointKeys.find((breakpoint) => {
+                if (this.windowWidth < breakpoint) {
+                    return true
+                }
+            })
+            if (breakpoint) {
+                return {...this.$props, ...this.breakpoints[breakpoint]}
+            }
+            return this.$props
+        },
+        itemWidth() {
+            if (this.windowWidth) { // Ensure component is mounted
+                /* eslint-disable-next-line */
+                this.asIndicator && this.refresh; // We force the computed property to refresh if this prop is changed
+
+                const rect = this.$el.getBoundingClientRect()
+                return rect.width / this.settings.itemsToShow
+            }
+            return 0
         }
     },
     watch: {
@@ -155,69 +186,33 @@ export default {
          */
         value(value) {
             this.switchTo(value)
-        },
-        /**
-         * Only for overlay and as indicator.
-         * when call overlay with click.
-         */
-        refresh(status) {
-            if (status && this.asIndicator) {
-                this.getWidth()
-            }
-        },
-        '$props': {
-            handler(value) {
-                this.initConfig()
-                this.update()
-            },
-            deep: true
         }
     },
     methods: {
-        initConfig() {
-            this.breakpoints = this.config.breakpoints
-            this.settings = merge(this.$props, this.config, true)
+        mod(n, mod) {
+            return ((n % mod) + mod) % mod // JS modulo bug with negative numbers
         },
-        getWidth() {
-            const rect = this.$el.getBoundingClientRect()
-            this.itemWidth = rect.width / this.settings.itemsToShow
-        },
-        update() {
-            if (this.breakpoints) {
-                this.updateConfig()
-            }
-            this.getWidth()
-        },
-        updateConfig() {
-            const breakpoints = Object.keys(this.breakpoints).sort((a, b) => b - a)
-            let checking
-            breakpoints.some((breakpoint) => {
-                checking = window.matchMedia(`(min-width: ${breakpoint}px)`).matches
-                if (checking) {
-                    this.settings = this.config.breakpoints[breakpoint]
-                    return true
-                }
-            })
-            if (!checking) {
-                this.settings = this.config
-            }
+        resized() {
+            this.windowWidth = window.innerWidth
         },
         switchTo(newIndex) {
-            if (newIndex < 0 ||
-                this.activeItem === newIndex ||
-                (!this.repeat && newIndex > this.total)) return
-            const result = this.repeat && newIndex > this.total ? 0 : newIndex
-            this.activeItem = result
-            this.$emit('switch', result)
+            if (newIndex === this.activeItem) { return }
+
+            if (this.repeat) {
+                newIndex = this.mod(newIndex, this.total + 1)
+            }
+            newIndex = Math.min(this.total, Math.max(0, newIndex))
+            this.activeItem = newIndex
+            if (this.value !== newIndex) {
+                this.$emit('input', newIndex)
+            }
+            this.$emit('switch', newIndex) // BC
         },
         next() {
-            this.switchTo(this.activeItem + this.itemsToList)
+            this.switchTo(this.activeItem + this.settings.itemsToList)
         },
         prev() {
-            this.switchTo(this.activeItem - this.itemsToList)
-        },
-        checkArrow(value) {
-            if (this.repeat || this.activeItem !== value) return true
+            this.switchTo(this.activeItem - this.settings.itemsToList)
         },
         checkAsIndicator(value, e) {
             if (!this.asIndicator) return
@@ -228,46 +223,43 @@ export default {
         },
         // handle drag event
         dragStart(event) {
-            if (!this.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
+            if (this.dragging || !this.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
             this.hold = new Date().getTime()
             this.dragging = true
-            this.dragStartX = event.touches ? event.touches[0].clientX : event.clientX
-            window.addEventListener(event.touches ? 'touchmove' : 'mousemove', this.dragMove)
-            window.addEventListener(event.touches ? 'touchend' : 'mouseup', this.dragEnd)
+            this.touch = !!event.touches
+            this.dragStartX = this.touch ? event.touches[0].clientX : event.clientX
+            window.addEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
+            window.addEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)
         },
         dragMove(event) {
+            if (!this.dragging) return
             this.dragEndX = event.touches ? event.touches[0].clientX : event.clientX
-            const deltaX = this.dragEndX - this.dragStartX
-            this.delta = deltaX < 0 ? Math.abs(deltaX) : -Math.abs(deltaX)
+            this.delta = this.dragStartX - this.dragEndX
             if (!event.touches) {
                 event.preventDefault()
             }
         },
-        dragEnd(event) {
+        dragEnd() {
+            if (!this.dragging) return
             const signCheck = 1 * sign(this.delta)
             const results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15)// Hack
             this.switchTo(this.activeItem + signCheck * results)
             this.dragging = false
             this.delta = 0
-            window.removeEventListener(event.touches ? 'touchmove' : 'mousemove', this.dragMove)
-            window.removeEventListener(event.touches ? 'touchend' : 'mouseup', this.dragEnd)
-        }
-    },
-    created() {
-        this.initConfig()
-        if (typeof window !== 'undefined') {
-            window.addEventListener('resize', this.update)
+            window.removeEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
+            window.removeEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)
         }
     },
     mounted() {
-        this.$nextTick(() => {
-            this.update()
-        })
+        window.addEventListener('resize', this.resized)
+        this.resized()
+        if (this.$attrs.config) {
+            throw new Error('The config prop was removed, you need to use v-bind instead')
+        }
     },
     beforeDestroy() {
-        if (typeof window !== 'undefined') {
-            window.removeEventListener('resize', this.update)
-        }
+        window.removeEventListener('resize', this.resized)
+        this.dragEnd()
     }
 }
 </script>

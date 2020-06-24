@@ -2,7 +2,7 @@
     <div
         class="carousel"
         :class="{'is-overlay': overlay}"
-        @mouseenter="pauseTimer"
+        @mouseenter="checkPause"
         @mouseleave="startTimer">
         <progress
             v-if="progress"
@@ -61,12 +61,12 @@
             class="carousel-indicator"
             :class="indicatorClasses">
             <a
-                v-for="(item, index) in childItems"
+                v-for="(item, index) in sortedItems"
                 class="indicator-item"
-                :class="{'is-active': index === activeChild}"
+                :class="{'is-active': item.isActive}"
                 @mouseover="modeChange('hover', index)"
                 @click="modeChange('click', index)"
-                :key="index">
+                :key="item._uid">
                 <slot
                     :i="index"
                     name="indicators">
@@ -84,12 +84,14 @@
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
+import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 export default {
     name: 'BCarousel',
     components: {
         [Icon.name]: Icon
     },
+    mixins: [ProviderParentMixin('carousel')],
     props: {
         value: {
             type: Number,
@@ -190,9 +192,8 @@ export default {
     },
     data() {
         return {
-            _isCarousel: true,
+            transition: 'next',
             activeChild: this.value || 0,
-            defaultSlots: [],
             isPause: false,
             dragX: 0,
             timer: null
@@ -209,14 +210,6 @@ export default {
                 this.indicatorCustom && this.indicatorCustomSize,
                 this.indicatorInside && this.indicatorPosition
             ]
-        },
-        childItems() {
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isCarouselItem)
-                .map((vnode) => vnode.componentInstance)
         }
     },
     watch: {
@@ -224,28 +217,13 @@ export default {
          * When v-model is changed set the new active item.
          */
         value(value) {
-            if (value < this.activeChild) {
-                this.changeActive(value)
-            } else {
-                this.changeActive(value, false)
-            }
+            this.changeActive(value, value < this.activeChild)
         },
         /**
          * When carousel-items are updated, set active one.
          */
-        childItems() {
-            if (this.activeChild < this.childItems.length) {
-                let previous = this.activeChild
-                this.childItems.map((child, idx) => {
-                    if (child.isActive) {
-                        previous = idx
-                        if (previous < this.childItems.length) {
-                            this.childItems[previous].isActive = false
-                        }
-                    }
-                })
-                this.childItems[this.activeChild].isActive = true
-            } else if (this.activeChild > 0) {
+        sortedItems(items) {
+            if (this.activeChild >= items.length && this.activeChild > 0) {
                 this.changeActive(this.activeChild - 1)
             }
         },
@@ -257,15 +235,11 @@ export default {
         }
     },
     methods: {
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-
         startTimer() {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                if (!this.repeat && this.activeChild === this.childItems.length - 1) {
+                if (!this.repeat && this.activeChild >= this.childItems.length - 1) {
                     this.pauseTimer()
                 } else {
                     this.next()
@@ -281,7 +255,7 @@ export default {
         },
         checkPause() {
             if (this.pauseHover && this.autoplay) {
-                return this.pauseTimer()
+                this.pauseTimer()
             }
         },
         /**
@@ -291,22 +265,19 @@ export default {
         changeActive(newIndex, action = true) {
             if (this.activeChild === newIndex) return
 
-            if (newIndex > this.childItems.length) throw new Error('The index you trying to set is bigger than the childs length')
+            newIndex = Math.max(0, Math.min(this.childItems.length - 1, newIndex))
 
-            if (this.activeChild < this.childItems.length) {
-                this.childItems[this.activeChild].status(false, action)
-            }
-            this.childItems[newIndex].status(true, action)
+            this.transition = action ? 'next' : 'prev'
             this.activeChild = newIndex
-            this.$emit('change', newIndex)
+            if (newIndex !== this.value) {
+                this.$emit('input', newIndex)
+            }
+            this.$emit('change', newIndex) // BC
         },
         // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
-                this.$emit('input', value)
-                return value < this.activeChild
-                    ? this.changeActive(value)
-                    : this.changeActive(value, false)
+                return this.changeActive(value, value < this.activeChild)
             }
         },
         prev() {
@@ -317,7 +288,7 @@ export default {
             }
         },
         next() {
-            if (this.activeChild === this.childItems.length - 1) {
+            if (this.activeChild >= this.childItems.length - 1) {
                 if (this.repeat) this.changeActive(0, false)
             } else {
                 this.changeActive(this.activeChild + 1, false)
@@ -355,10 +326,6 @@ export default {
         }
     },
     mounted() {
-        if (this.activeChild < this.childItems.length) {
-            this.childItems[this.activeChild].isActive = true
-        }
-        this.refreshSlots()
         this.startTimer()
     },
     beforeDestroy() {
