@@ -228,10 +228,16 @@ export default {
             }
         },
         /**
-         *  When autoplay is change, set by status
+         *  When autoplay is changed, start or pause timer accordingly
          */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
+        },
+        /**
+         *  Since the timer can get paused at the end, if repeat is changed we need to restart it
+         */
+        repeat(status) {
+            if (status) { this.startTimer() }
         }
     },
     methods: {
