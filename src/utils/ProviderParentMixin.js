@@ -29,7 +29,7 @@ export default (itemName, needsItems = true, needsSorted = true) => {
                  * And mark the items with their index
                  */
                 childItems(items) {
-                    if (items.length > 0) {
+                    if (items.length > 0 && this.$scopedSlots.default) {
                         let tag = items[0].$vnode.tag
                         let index = 0
 
