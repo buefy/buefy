@@ -179,4 +179,12 @@ describe('BCarousel', () => {
 
         expect(wrapper.vm.activeChild).toBe(1)
     })
+
+    it('destroys correctly', async () => {
+        wrapper.setProps({autoplay: true})
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.timer).toBeTruthy()
+        wrapper.destroy()
+        expect(wrapper.vm.timer).toBeFalsy()
+    })
 })
