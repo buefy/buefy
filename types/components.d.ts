@@ -117,6 +117,13 @@ export declare type BDialogConfig = {
     closeOnConfirm?: boolean;
 
     /**
+    * DOM element the dialog will be created on.
+    * Note that this also changes the position of the dialog from fixed
+    * to absolute. Meaning that the container should be fixed.
+    */
+    container?: string;
+
+    /**
      * Callback function when the confirm button is clicked
      */
     onConfirm?: (value: string, dialog: BComponent) => any;
