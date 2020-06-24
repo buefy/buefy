@@ -61,7 +61,7 @@ describe('BNumberinput', () => {
             wrapper.find('.control.plus').trigger('mouseup')
 
             expect(wrapper.vm.computedValue).toBeGreaterThan(200)
-            expect(wrapper.vm.computedValue).toBeLessThan(300)
+            expect(wrapper.vm.computedValue).toBeLessThan(600)
         })
 
         it('increments/decrements on long pressing', async () => {
