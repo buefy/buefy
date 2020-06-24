@@ -59,17 +59,17 @@ describe('BCarouselList', () => {
 
     it('uses breakpoints', async () => {
         wrapper.setProps({
-            itemsToShow: 8,
-            itemsToList: 2,
+            itemsToShow: 4,
+            itemsToList: 1,
             breakpoints: {
                 768: {
                     hasGrayscale: false,
-                    itemsToShow: 4,
-                    itemsToList: 1
+                    itemsToShow: 6,
+                    itemsToList: 2
                 },
                 960: {
                     hasGrayscale: true,
-                    itemsToShow: 6
+                    itemsToShow: 8
                 }
             }
         })

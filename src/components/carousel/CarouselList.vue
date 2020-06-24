@@ -32,22 +32,22 @@
         <div
             v-if="arrow"
             class="carousel-arrow"
-            :class="{'is-hovered': arrowHover}">
+            :class="{'is-hovered': settings.arrowHover}">
             <b-icon
                 v-show="hasPrev"
                 class="has-icons-left"
                 @click.native.prevent="prev"
-                :pack="iconPack"
-                :icon="iconPrev"
-                :size="iconSize"
+                :pack="settings.iconPack"
+                :icon="settings.iconPrev"
+                :size="settings.iconSize"
                 both />
             <b-icon
                 v-show="hasNext"
                 class="has-icons-right"
                 @click.native.prevent="next"
-                :pack="iconPack"
-                :icon="iconNext"
-                :size="iconSize"
+                :pack="settings.iconPack"
+                :icon="settings.iconNext"
+                :size="settings.iconSize"
                 both />
         </div>
     </div>
@@ -131,8 +131,8 @@ export default {
         listClass() {
             return [
                 {
-                    'has-grayscale': this.settings.hasGrayscale || this.hasGrayscale,
-                    'has-opacity': this.settings.hasOpacity || this.hasOpacity,
+                    'has-grayscale': this.settings.hasGrayscale,
+                    'has-opacity': this.settings.hasOpacity,
                     'is-dragging': this.dragging
                 }
             ]
@@ -150,17 +150,17 @@ export default {
             return this.data.length - this.settings.itemsToShow
         },
         hasPrev() {
-            return (this.repeat || this.activeItem > 0)
+            return (this.settings.repeat || this.activeItem > 0)
         },
         hasNext() {
-            return (this.repeat || this.activeItem < this.total)
+            return (this.settings.repeat || this.activeItem < this.total)
         },
         breakpointKeys() {
-            return Object.keys(this.breakpoints).sort((a, b) => a - b)
+            return Object.keys(this.breakpoints).sort((a, b) => b - a)
         },
         settings() {
             let breakpoint = this.breakpointKeys.find((breakpoint) => {
-                if (this.windowWidth < breakpoint) {
+                if (this.windowWidth >= breakpoint) {
                     return true
                 }
             })
@@ -198,7 +198,7 @@ export default {
         switchTo(newIndex) {
             if (newIndex === this.activeItem) { return }
 
-            if (this.repeat) {
+            if (this.settings.repeat) {
                 newIndex = this.mod(newIndex, this.total + 1)
             }
             newIndex = Math.min(this.total, Math.max(0, newIndex))
@@ -223,7 +223,7 @@ export default {
         },
         // handle drag event
         dragStart(event) {
-            if (this.dragging || !this.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
+            if (this.dragging || !this.settings.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
             this.hold = new Date().getTime()
             this.dragging = true
             this.touch = !!event.touches
