@@ -34,15 +34,15 @@ export default {
             gallery: false,
             al: {
                 hasGrayscale: true,
-                itemsToShow: 2,
+                itemsToShow: 6,
                 breakpoints: {
                     768: {
                         hasGrayscale: false,
-                        itemsToShow: 4
+                        itemsToShow: 2
                     },
                     960: {
                         hasGrayscale: true,
-                        itemsToShow: 6
+                        itemsToShow: 4
                     }
                 }
             },
