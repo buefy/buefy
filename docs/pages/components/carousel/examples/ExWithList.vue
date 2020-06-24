@@ -12,10 +12,10 @@
         <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
         <template slot="list" slot-scope="props">
             <b-carousel-list
+                ref="list"
                 v-model="props.active"
                 :data="items"
                 v-bind="al"
-                :refresh="gallery"
                 @switch="props.switch($event, false)"
                 as-indicator />
         </template>
@@ -86,9 +86,9 @@ export default {
         switchGallery(value) {
             this.gallery = value
             if (value) {
-                return document.documentElement.classList.add('is-clipped')
+                document.documentElement.classList.add('is-clipped')
             } else {
-                return document.documentElement.classList.remove('is-clipped')
+                document.documentElement.classList.remove('is-clipped')
             }
         }
     }

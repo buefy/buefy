@@ -111,7 +111,6 @@ export default {
                 return config.defaultIconNext
             }
         },
-        refresh: Boolean,
         breakpoints: {
             type: Object,
             default: () => ({})
@@ -124,7 +123,9 @@ export default {
             dragging: false,
             hold: 0,
             windowWidth: 0,
-            touch: false
+            touch: false,
+            observer: null,
+            refresh_: 0
         }
     },
     computed: {
@@ -172,7 +173,7 @@ export default {
         itemWidth() {
             if (this.windowWidth) { // Ensure component is mounted
                 /* eslint-disable-next-line */
-                this.asIndicator && this.refresh; // We force the computed property to refresh if this prop is changed
+                this.refresh_; // We force the computed property to refresh if this prop is changed
 
                 const rect = this.$el.getBoundingClientRect()
                 return rect.width / this.settings.itemsToShow
@@ -248,9 +249,16 @@ export default {
             this.delta = 0
             window.removeEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
             window.removeEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)
+        },
+        refresh() {
+            this.$nextTick(() => {
+                this.refresh_++
+            })
         }
     },
     mounted() {
+        this.observer = new ResizeObserver(this.refresh)
+        this.observer.observe(this.$el)
         window.addEventListener('resize', this.resized)
         this.resized()
         if (this.$attrs.config) {
@@ -258,7 +266,8 @@ export default {
         }
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resized)
+        this.observer.disconnect()
+        this.window.removeEventListener('resize', this.resized)
         this.dragEnd()
     }
 }
