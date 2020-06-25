@@ -260,13 +260,6 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>config</code>',
-                description: 'This property was removed, if you were using it, simply rename <code>:config</code> to <code>v-bind</code>',
-                type: 'Object',
-                values: '—',
-                default: '—'
-            },
-            {
                 name: '<code>has-drag</code>',
                 description: 'Toggle touch dragging, when touch not detected. auto switch mouse dragging',
                 type: 'Boolean',

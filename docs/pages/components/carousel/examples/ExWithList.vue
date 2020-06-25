@@ -33,7 +33,7 @@ export default {
             gallery: false,
             al: {
                 hasGrayscale: true,
-                itemsToShow: 8,
+                itemsToShow: 2,
                 breakpoints: {
                     768: {
                         hasGrayscale: false,
