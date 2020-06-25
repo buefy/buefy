@@ -8,11 +8,33 @@ function signPoly(value) {
 export const sign = Math.sign || signPoly
 
 /**
+ * Native modulo bug with negative numbers
+ * @param n
+ * @param mod
+ * @returns {number}
+ */
+function mod(n, mod) {
+    return ((n % mod) + mod) % mod
+}
+
+/**
+ * Asserts a value is beetween min and max
+ * @param val
+ * @param min
+ * @param max
+ * @returns {number}
+ */
+function bound(val, min, max) {
+    return Math.max(min, Math.min(max, val))
+}
+
+export {mod, bound}
+
+/**
  * Get value of an object property/path even if it's nested
  */
 export function getValueByPath(obj, path) {
-    const value = path.split('.').reduce((o, i) => o ? o[i] : null, obj)
-    return value
+    return path.split('.').reduce((o, i) => o ? o[i] : null, obj)
 }
 
 /**

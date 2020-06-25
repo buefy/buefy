@@ -369,7 +369,7 @@ export default [
             {
                 name: '<code>item</code>',
                 description: 'Custom item',
-                props: '<code>list: Array</code>, <code>index: Number</code>, <code>active: Number</code>'
+                props: '<code>...item</code>, <code>index: Number</code>, <code>active: Number</code>, <code>scroll: Number</code>'
             }
         ],
         events: [

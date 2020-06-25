@@ -85,6 +85,7 @@ import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
 import ProviderParentMixin from '../../utils/ProviderParentMixin'
+import {mod, bound} from '../../utils/helpers'
 
 export default {
     name: 'BCarousel',
@@ -217,7 +218,7 @@ export default {
          * When v-model is changed set the new active item.
          */
         value(value) {
-            this.changeActive(value, value < this.activeChild)
+            this.changeActive(value)
         },
         /**
          * When carousel-items are updated, set active one.
@@ -268,12 +269,17 @@ export default {
          * Change the active item and emit change event.
          * action only for animated slide, there true = next, false = prev
          */
-        changeActive(newIndex, action = true) {
-            if (this.activeChild === newIndex) return
+        changeActive(newIndex, direction = 0) {
+            if (this.activeChild === newIndex || isNaN(newIndex)) return
 
-            newIndex = Math.max(0, Math.min(this.childItems.length - 1, newIndex))
+            direction = direction || (newIndex - this.activeChild)
 
-            this.transition = action ? 'next' : 'prev'
+            newIndex = this.repeat ? mod(newIndex, this.childItems.length)
+                : bound(newIndex, 0, this.childItems.length - 1)
+
+            this.transition = direction > 0 ? 'prev' : 'next'
+            // Transition names are reversed from the actual direction for correct effect
+
             this.activeChild = newIndex
             if (newIndex !== this.value) {
                 this.$emit('input', newIndex)
@@ -283,22 +289,14 @@ export default {
         // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
-                return this.changeActive(value, value < this.activeChild)
+                return this.changeActive(value)
             }
         },
         prev() {
-            if (this.activeChild === 0) {
-                if (this.repeat) this.changeActive(this.childItems.length - 1)
-            } else {
-                this.changeActive(this.activeChild - 1)
-            }
+            this.changeActive(this.activeChild - 1, -1)
         },
         next() {
-            if (this.activeChild >= this.childItems.length - 1) {
-                if (this.repeat) this.changeActive(0, false)
-            } else {
-                this.changeActive(this.activeChild + 1, false)
-            }
+            this.changeActive(this.activeChild + 1, 1)
         },
         // checking arrow between both
         checkArrow(value) {

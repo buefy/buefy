@@ -1,7 +1,7 @@
 <template>
     <div
         class="carousel-list"
-        :class="{'has-shadow': activeItem > 0}"
+        :class="{'has-shadow': scrollIndex > 0}"
         @mousedown.stop.prevent="dragStart"
         @touchstart="dragStart">
         <div
@@ -9,16 +9,19 @@
             :class="listClass"
             :style="'transform:translateX('+translation+'px)'">
             <div
-                class="carousel-slide"
-                :class="{'is-active': activeItem === index}"
-                @click="checkAsIndicator(index, $event)"
                 v-for="(list, index) in data"
+                class="carousel-slide"
+                :class="{'is-active': asIndicator ? activeItem === index : scrollIndex === index}"
+                @mouseup="checkAsIndicator(index, $event)"
+                @touchend="checkAsIndicator(index, $event)"
                 :key="index"
                 :style="itemStyle">
                 <slot
-                    :list="list"
                     :index="index"
                     :active="activeItem"
+                    :scroll="scrollIndex"
+                    v-bind="list"
+                    :list="list"
                     name="item">
                     <figure class="image">
                         <img
@@ -54,7 +57,7 @@
 </template>
 
 <script>
-import {sign} from '../../utils/helpers'
+import {sign, mod, bound} from '../../utils/helpers'
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
@@ -70,6 +73,10 @@ export default {
             default: () => []
         },
         value: {
+            type: Number,
+            default: 0
+        },
+        scrollValue: {
             type: Number,
             default: 0
         },
@@ -119,6 +126,7 @@ export default {
     data() {
         return {
             activeItem: this.value,
+            scrollIndex: this.asIndicator ? this.scrollValue : this.value,
             delta: 0,
             dragging: false,
             hold: 0,
@@ -142,19 +150,19 @@ export default {
             return `width: ${this.itemWidth}px;`
         },
         translation() {
-            return -Math.max(0, Math.min(
-                (this.data.length - this.settings.itemsToShow) * this.itemWidth,
-                this.delta + (this.activeItem * this.itemWidth)
-            ))
+            return -bound(
+                this.delta + (this.scrollIndex * this.itemWidth), 0,
+                (this.data.length - this.settings.itemsToShow) * this.itemWidth
+            )
         },
         total() {
             return this.data.length - this.settings.itemsToShow
         },
         hasPrev() {
-            return (this.settings.repeat || this.activeItem > 0)
+            return (this.settings.repeat || this.scrollIndex > 0)
         },
         hasNext() {
-            return (this.settings.repeat || this.activeItem < this.total)
+            return (this.settings.repeat || this.scrollIndex < this.total)
         },
         breakpointKeys() {
             return Object.keys(this.breakpoints).sort((a, b) => b - a)
@@ -186,46 +194,59 @@ export default {
          * When v-model is changed set the new active item.
          */
         value(value) {
+            this.switchTo(this.asIndicator ? value - (this.itemsToShow - 3) / 2 : value)
+            if (this.activeItem !== value) {
+                this.activeItem = bound(value, 0, this.data.length - 1)
+            }
+        },
+
+        scrollValue(value) {
             this.switchTo(value)
         }
     },
     methods: {
-        mod(n, mod) {
-            return ((n % mod) + mod) % mod // JS modulo bug with negative numbers
-        },
         resized() {
             this.windowWidth = window.innerWidth
         },
         switchTo(newIndex) {
-            if (newIndex === this.activeItem) { return }
+            if (newIndex === this.scrollIndex || isNaN(newIndex)) { return }
 
             if (this.settings.repeat) {
-                newIndex = this.mod(newIndex, this.total + 1)
+                newIndex = mod(newIndex, this.total + 1)
             }
-            newIndex = Math.min(this.total, Math.max(0, newIndex))
-            this.activeItem = newIndex
-            if (this.value !== newIndex) {
+            newIndex = bound(newIndex, 0, this.total)
+            this.scrollIndex = newIndex
+            if (!this.asIndicator && this.value !== newIndex) {
                 this.$emit('input', newIndex)
+            } else if (this.scrollIndex !== newIndex) {
+                this.$emit('updated:scroll', newIndex)
             }
-            this.$emit('switch', newIndex) // BC
         },
         next() {
-            this.switchTo(this.activeItem + this.settings.itemsToList)
+            this.switchTo(this.scrollIndex + this.settings.itemsToList)
         },
         prev() {
-            this.switchTo(this.activeItem - this.settings.itemsToList)
+            this.switchTo(this.scrollIndex - this.settings.itemsToList)
         },
-        checkAsIndicator(value, e) {
+        checkAsIndicator(value, event) {
             if (!this.asIndicator) return
-            const timeCheck = new Date().getTime()
-            // al solution: holding, 100 - 400 not 100% but 200 is better!
-            if (!e.touches && (timeCheck - this.hold) > 200) return
-            this.switchTo(value)
+
+            const dragEndX = event.touches ? event.touches[0].clientX : event.clientX
+            if (this.hold - Date.now() > 2000 || Math.abs(this.dragStartX - dragEndX) > 10) return
+
+            this.dragging = false
+            this.hold = 0
+            event.preventDefault()
+
+            // Make the item appear in the middle
+            this.activeItem = value
+
+            this.$emit('switch', value)
         },
         // handle drag event
         dragStart(event) {
             if (this.dragging || !this.settings.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
-            this.hold = new Date().getTime()
+            this.hold = Date.now()
             this.dragging = true
             this.touch = !!event.touches
             this.dragStartX = this.touch ? event.touches[0].clientX : event.clientX
@@ -234,17 +255,19 @@ export default {
         },
         dragMove(event) {
             if (!this.dragging) return
-            this.dragEndX = event.touches ? event.touches[0].clientX : event.clientX
-            this.delta = this.dragStartX - this.dragEndX
+            const dragEndX = event.touches ? event.touches[0].clientX : event.clientX
+            this.delta = this.dragStartX - dragEndX
             if (!event.touches) {
                 event.preventDefault()
             }
         },
         dragEnd() {
-            if (!this.dragging) return
-            const signCheck = 1 * sign(this.delta)
-            const results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15)// Hack
-            this.switchTo(this.activeItem + signCheck * results)
+            if (!this.dragging && !this.hold) return
+            if (this.hold) {
+                const signCheck = sign(this.delta)
+                const results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15)// Hack
+                this.switchTo(this.scrollIndex + signCheck * results)
+            }
             this.dragging = false
             this.delta = 0
             window.removeEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
@@ -267,7 +290,7 @@ export default {
     },
     beforeDestroy() {
         this.observer.disconnect()
-        this.window.removeEventListener('resize', this.resized)
+        window.removeEventListener('resize', this.resized)
         this.dragEnd()
     }
 }

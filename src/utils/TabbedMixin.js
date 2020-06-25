@@ -1,6 +1,7 @@
 import Icon from '../components/icon/Icon'
 import SlotComponent from '../utils/SlotComponent'
 import ProviderParentMixin from './ProviderParentMixin'
+import {bound} from './helpers'
 
 export default (cmp) => ({
     mixins: [ProviderParentMixin(cmp)],
@@ -40,7 +41,7 @@ export default (cmp) => ({
     mounted() {
         if (typeof this.value === 'number') {
             // Backward compatibility: converts the index value to an id
-            const value = Math.max(0, Math.min(this.value, this.items.length - 1))
+            const value = bound(this.value, 0, this.items.length - 1)
             this.activeId = this.items[value].value
         } else {
             this.activeId = this.value
@@ -63,7 +64,7 @@ export default (cmp) => ({
         value(value) {
             if (typeof value === 'number') {
                 // Backward compatibility: converts the index value to an id
-                value = Math.max(0, Math.min(value, this.items.length - 1))
+                value = bound(value, 0, this.items.length - 1)
                 this.activeId = this.items[value].value
             } else {
                 this.activeId = value

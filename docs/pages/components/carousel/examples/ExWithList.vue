@@ -12,7 +12,6 @@
         <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
         <template slot="list" slot-scope="props">
             <b-carousel-list
-                ref="list"
                 v-model="props.active"
                 :data="items"
                 v-bind="al"
