@@ -103,7 +103,7 @@ describe('BCarouselList', () => {
             value: 8
         })
 
-        expect(wrapper.vm.activeItem).toBe(4)
+        expect(wrapper.vm.scrollIndex).toBe(4)
         expect(wrapper.vm.hasNext).toBe(false)
     })
 
@@ -115,19 +115,19 @@ describe('BCarouselList', () => {
             value: 0
         })
 
-        expect(wrapper.vm.activeItem).toBe(0)
+        expect(wrapper.vm.scrollIndex).toBe(0)
         wrapper.vm.next()
         wrapper.vm.next()
         wrapper.vm.next()
         wrapper.vm.next()
         await wrapper.vm.$nextTick()
-        expect(wrapper.vm.activeItem).toBe(4)
+        expect(wrapper.vm.scrollIndex).toBe(4)
 
         wrapper.vm.next()
-        expect(wrapper.vm.activeItem).toBe(0)
+        expect(wrapper.vm.scrollIndex).toBe(0)
 
         wrapper.vm.prev()
-        expect(wrapper.vm.activeItem).toBe(4)
+        expect(wrapper.vm.scrollIndex).toBe(4)
     })
 
     it('removes events listener when removed', () => {
