@@ -63,6 +63,7 @@
                 <section :class="`hero is-medium is-${carousel.color} is-bold`">
                     <div class="hero-body has-text-centered">
                         <h1 class="title">{{carousel.title}}</h1>
+                        <b-input :placeholder="carousel.title"></b-input>
                     </div>
                 </section>
             </b-carousel-item>
@@ -71,7 +72,10 @@
 </template>
 
 <script>
+import BInput from "../../../../../src/components/input/Input";
+import BField from "../../../../../src/components/field/Field";
 export default {
+    components: {BField, BInput},
     data() {
         return {
             carousel: 0,

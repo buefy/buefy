@@ -324,11 +324,10 @@ export default {
                 } else {
                     this.prev()
                 }
-            } else if (event.target.tagName !== 'A' && !event.target.closest('.carousel-arrow')) {
-                this.sortedItems[this.activeChild].$emit('click')
-                this.$emit('click')
             } else {
                 event.target.click()
+                this.sortedItems[this.activeChild].$emit('click')
+                this.$emit('click')
             }
             if (event.touches) {
                 this.startTimer()
