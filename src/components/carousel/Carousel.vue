@@ -131,10 +131,6 @@ export default {
             type: Boolean,
             default: true
         },
-        arrowBoth: {
-            type: Boolean,
-            default: true
-        },
         arrowHover: {
             type: Boolean,
             default: true
@@ -300,7 +296,7 @@ export default {
         },
         // checking arrow between both
         checkArrow(value) {
-            if (this.arrowBoth) return true
+            if (this.repeat) return true
             if (this.activeChild !== value) return true
         },
         // handle drag event

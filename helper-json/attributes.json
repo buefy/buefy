@@ -171,10 +171,6 @@
     "description": "\tDisplay the \"next\" and \"prev\" action",
     "type": "boolean"
   },
-  "b-carousel/arrow-both": {
-    "description": "Display the \"next\" and \"prev\" action when first or last item",
-    "type": "boolean"
-  },
   "b-carousel/arrow-hover": {
     "description": "Display the \"next\" and \"prev\" action when hover, but hidden on mobile",
     "type": "boolean"

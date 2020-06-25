@@ -35,7 +35,7 @@
 
         <b-carousel
             :arrow="arrow"
-            :arrow-both="arrowBoth"
+            :repeat="arrowBoth"
             :arrow-hover="arrowHover"
             :icon-pack="iconPack"
             :icon-prev="iconPrev"

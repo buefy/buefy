@@ -76,13 +76,6 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>arrow-both</code>',
-                description: 'Display the "next" and "prev" action when first or last item',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>true</code>'
-            },
-            {
                 name: '<code>arrow-hover</code>',
                 description: 'Display the "next" and "prev" action when hover, but hidden on mobile',
                 type: 'Boolean',
