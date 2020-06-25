@@ -59,6 +59,7 @@
 <script>
 import {sign, mod, bound} from '../../utils/helpers'
 import config from '../../utils/config'
+import ResizeObserver from 'resize-observer-polyfill'
 
 import Icon from '../icon/Icon'
 

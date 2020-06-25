@@ -120,6 +120,7 @@
     "pre-commit": "1.2.2",
     "prerender-spa-plugin": "3.4.0",
     "raw-loader": "0.5.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rimraf": "2.6.0",
     "rollup": "1.17.0",
     "rollup-copy-plugin": "0.1.0",
