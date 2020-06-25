@@ -129,7 +129,7 @@ export default {
             activeItem: this.value,
             scrollIndex: this.asIndicator ? this.scrollValue : this.value,
             delta: 0,
-            dragging: false,
+            dragX: false,
             hold: 0,
             windowWidth: 0,
             touch: false,
@@ -138,6 +138,9 @@ export default {
         }
     },
     computed: {
+        dragging() {
+            return this.dragX !== false
+        },
         listClass() {
             return [
                 {
@@ -200,7 +203,6 @@ export default {
                 this.activeItem = bound(value, 0, this.data.length - 1)
             }
         },
-
         scrollValue(value) {
             this.switchTo(value)
         }
@@ -233,9 +235,9 @@ export default {
             if (!this.asIndicator) return
 
             const dragEndX = event.touches ? event.touches[0].clientX : event.clientX
-            if (this.hold - Date.now() > 2000 || Math.abs(this.dragStartX - dragEndX) > 10) return
+            if (this.hold - Date.now() > 2000 || Math.abs(this.dragX - dragEndX) > 10) return
 
-            this.dragging = false
+            this.dragX = false
             this.hold = 0
             event.preventDefault()
 
@@ -248,16 +250,15 @@ export default {
         dragStart(event) {
             if (this.dragging || !this.settings.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
             this.hold = Date.now()
-            this.dragging = true
             this.touch = !!event.touches
-            this.dragStartX = this.touch ? event.touches[0].clientX : event.clientX
+            this.dragX = this.touch ? event.touches[0].clientX : event.clientX
             window.addEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
             window.addEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)
         },
         dragMove(event) {
             if (!this.dragging) return
             const dragEndX = event.touches ? event.touches[0].clientX : event.clientX
-            this.delta = this.dragStartX - dragEndX
+            this.delta = this.dragX - dragEndX
             if (!event.touches) {
                 event.preventDefault()
             }
@@ -269,7 +270,6 @@ export default {
                 const results = Math.round(Math.abs(this.delta / this.itemWidth) + 0.15)// Hack
                 this.switchTo(this.scrollIndex + signCheck * results)
             }
-            this.dragging = false
             this.delta = 0
             window.removeEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
             window.removeEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)

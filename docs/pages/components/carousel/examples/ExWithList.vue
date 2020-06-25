@@ -3,9 +3,10 @@
         :autoplay="false"
         with-carousel-list
         :indicator="false"
-        :overlay="gallery">
+        :overlay="gallery"
+        @click="switchGallery(true)">
         <b-carousel-item v-for="(item, i) in items" :key="i">
-            <figure @click="switchGallery(true)" class="image">
+            <figure class="image">
                 <img :src="item.image">
             </figure>
         </b-carousel-item>

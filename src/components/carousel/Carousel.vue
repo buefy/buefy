@@ -18,15 +18,16 @@
             @mouseup="dragEnd"
             @touchstart.stop="dragStart"
             @touchend.stop="dragEnd">
-            <slot />
+            <slot/>
             <div
                 v-if="arrow"
                 class="carousel-arrow"
+                @mousedown.stop
                 :class="{'is-hovered': arrowHover}">
                 <b-icon
                     v-if="checkArrow(0)"
                     class="has-icons-left"
-                    @click.native.prevent="prev"
+                    @click.native="prev"
                     :pack="iconPack"
                     :icon="iconPrev"
                     :size="iconSize"
@@ -34,7 +35,7 @@
                 <b-icon
                     v-if="checkArrow(childItems.length - 1)"
                     class="has-icons-right"
-                    @click.native.prevent="next"
+                    @click.native="next"
                     :pack="iconPack"
                     :icon="iconNext"
                     :size="iconSize"
@@ -196,7 +197,7 @@ export default {
             transition: 'next',
             activeChild: this.value || 0,
             isPause: false,
-            dragX: 0,
+            dragX: false,
             timer: null
         }
     },
@@ -305,8 +306,8 @@ export default {
         },
         // handle drag event
         dragStart(event) {
-            if (!this.hasDrag) return
-            this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX
+            if (!this.hasDrag || !event.target.draggable) return
+            this.dragX = event.touches ? event.changedTouches[0].pageX : event.pageX
             if (event.touches) {
                 this.pauseTimer()
             } else {
@@ -314,19 +315,25 @@ export default {
             }
         },
         dragEnd(event) {
-            if (!this.hasDrag) return
+            if (this.dragX === false) return
             const detected = event.touches ? event.changedTouches[0].pageX : event.pageX
-            const diffX = detected - this.dragx
+            const diffX = detected - this.dragX
             if (Math.abs(diffX) > 50) {
                 if (diffX < 0) {
                     this.next()
                 } else {
                     this.prev()
                 }
+            } else if (event.target.tagName !== 'A' && !event.target.closest('.carousel-arrow')) {
+                this.sortedItems[this.activeChild].$emit('click')
+                this.$emit('click')
+            } else {
+                event.target.click()
             }
             if (event.touches) {
                 this.startTimer()
             }
+            this.dragX = false
         }
     },
     mounted() {
