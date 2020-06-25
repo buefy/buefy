@@ -22,7 +22,6 @@
             <div
                 v-if="arrow"
                 class="carousel-arrow"
-                @mousedown.stop
                 :class="{'is-hovered': arrowHover}">
                 <b-icon
                     v-if="checkArrow(0)"
@@ -318,7 +317,7 @@ export default {
             if (this.dragX === false) return
             const detected = event.touches ? event.changedTouches[0].pageX : event.pageX
             const diffX = detected - this.dragX
-            if (Math.abs(diffX) > 50) {
+            if (Math.abs(diffX) > 30) {
                 if (diffX < 0) {
                     this.next()
                 } else {

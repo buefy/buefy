@@ -2,7 +2,7 @@
     <div
         class="carousel-list"
         :class="{'has-shadow': scrollIndex > 0}"
-        @mousedown.stop.prevent="dragStart"
+        @mousedown.prevent="dragStart"
         @touchstart="dragStart">
         <div
             class="carousel-slides"
@@ -271,6 +271,7 @@ export default {
                 this.switchTo(this.scrollIndex + signCheck * results)
             }
             this.delta = 0
+            this.dragX = false
             window.removeEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
             window.removeEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)
         },
