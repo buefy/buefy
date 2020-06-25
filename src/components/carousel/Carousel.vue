@@ -305,7 +305,8 @@ export default {
         },
         // handle drag event
         dragStart(event) {
-            if (!this.hasDrag || !event.target.draggable) return
+            if (!this.hasDrag ||
+                (!event.target.draggable && !event.target.tagName.match(/^(section|div|h[1-6]|p)$/i))) return
             this.dragX = event.touches ? event.changedTouches[0].pageX : event.pageX
             if (event.touches) {
                 this.pauseTimer()
