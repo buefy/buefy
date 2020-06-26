@@ -282,18 +282,22 @@ export default {
         }
     },
     mounted() {
-        this.observer = new ResizeObserver(this.refresh)
-        this.observer.observe(this.$el)
-        window.addEventListener('resize', this.resized)
-        this.resized()
+        if (typeof window !== 'undefined') {
+            this.observer = new ResizeObserver(this.refresh)
+            this.observer.observe(this.$el)
+            window.addEventListener('resize', this.resized)
+            this.resized()
+        }
         if (this.$attrs.config) {
             throw new Error('The config prop was removed, you need to use v-bind instead')
         }
     },
     beforeDestroy() {
-        this.observer.disconnect()
-        window.removeEventListener('resize', this.resized)
-        this.dragEnd()
+        if (typeof window !== 'undefined') {
+            this.observer.disconnect()
+            window.removeEventListener('resize', this.resized)
+            this.dragEnd()
+        }
     }
 }
 </script>

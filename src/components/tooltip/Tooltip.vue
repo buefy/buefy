@@ -208,7 +208,7 @@ export default {
         }
     },
     mounted() {
-        if (this.appendToBody) {
+        if (this.appendToBody && typeof window !== 'undefined') {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
             this.updateAppendToBody()
         }
