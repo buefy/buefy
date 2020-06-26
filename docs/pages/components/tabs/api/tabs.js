@@ -118,6 +118,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'true'
+            },
+            {
+                name: '<code>headerClass</code>',
+                description: 'The classes to add to the tab header',
+                type: 'String, Array, Object',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

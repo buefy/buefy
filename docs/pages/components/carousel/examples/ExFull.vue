@@ -63,6 +63,8 @@
                 <section :class="`hero is-medium is-${carousel.color} is-bold`">
                     <div class="hero-body has-text-centered">
                         <h1 class="title">{{carousel.title}}</h1>
+                        <b-input :placeholder="carousel.title"></b-input>
+                        <p>A link that <a href="#arrow">goes to arrow</a></p>
                     </div>
                 </section>
             </b-carousel-item>

@@ -1,18 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 import BCarouselItem from '@components/carousel/CarouselItem'
+import { default as ProviderParentMixin, Sorted } from '../../utils/ProviderParentMixin'
 
 let wrapper
 const BCarousel = {
     template: '<b-carousel-stub></b-carousel-stub>',
-    data() {
-        return {
-            childItems: [],
-            _isCarousel: true
-        }
-    },
-    methods: {
-        refreshSlots: jest.fn()
-    }
+    mixins: [ProviderParentMixin('carousel', Sorted)]
 }
 
 describe('BCarouselItem', () => {
@@ -29,10 +22,5 @@ describe('BCarouselItem', () => {
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
-    })
-
-    it('set action when status is called', () => {
-        wrapper.vm.status()
-        expect(wrapper.vm.isActive).toBeFalsy()
     })
 })

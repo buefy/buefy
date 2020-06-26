@@ -24,9 +24,14 @@
                     v-bind="props"
                     v-on="events"
                     :is="component"
-                    @close="close"/>
+                    :can-cancel="canCancel"
+                    @close="close"
+                />
                 <div v-else-if="content"> {{ content }} </div>
-                <slot v-else/>
+                <slot
+                    v-else
+                    :can-cancel="canCancel"
+                    :close="close"/>
                 <button
                     type="button"
                     v-if="showX"
@@ -131,7 +136,7 @@ export default {
                 : this.canCancel
         },
         showX() {
-            return this.cancelOptions.indexOf('x') >= 0
+            return this.cancelOptions.indexOf('x') >= 0 && !this.hasModalCard
         },
         customStyle() {
             if (!this.fullScreen) {

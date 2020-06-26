@@ -16,3 +16,12 @@ exports[`BTabs render correctly 1`] = `
     </section>
 </div>
 `;
+
+exports[`BTabs still renders if there is no item 1`] = `
+<div class="b-tabs">
+    <nav class="tabs">
+        <ul></ul>
+    </nav>
+    <section class="tab-content"></section>
+</div>
+`;

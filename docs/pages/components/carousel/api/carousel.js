@@ -46,7 +46,7 @@ export default [
             },
             {
                 name: '<code>pause-info</code>',
-                description: 'Show infomation pause when <code>autoplay</code> and <code>pause-hover</code>',
+                description: 'Show information pause when <code>autoplay</code> and <code>pause-hover</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -71,13 +71,6 @@ export default [
             {
                 name: '<code>arrow</code>',
                 description: '	Display the "next" and "prev" action',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>true</code>'
-            },
-            {
-                name: '<code>arrow-both</code>',
-                description: 'Display the "next" and "prev" action when first or last item',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -239,6 +232,19 @@ export default [
                 name: '<code>input</code>',
                 description: 'Triggers when <code>indicator-mode</code> value is changed',
                 parameters: '<code>value: Boolean</code>, <code>value: String</code>'
+            },
+            {
+                name: '<code>click</code>',
+                description: 'Non native click event, will trigger only when clicking an element that should normally not be clickable/focusable',
+            }
+        ]
+    },
+    {
+      title: 'CarouselItem',
+        events: [
+            {
+                name: '<code>click</code>',
+                description: 'Non native click event, will trigger only on an element that should normally not be clickable/focusable',
             }
         ]
     },
@@ -256,13 +262,6 @@ export default [
                 name: '<code>data</code>',
                 description: 'Carousel-list data',
                 type: 'Array',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>config</code>',
-                description: 'An object to pass all configs',
-                type: 'Object',
                 values: '—',
                 default: '—'
             },
@@ -369,7 +368,7 @@ export default [
             {
                 name: '<code>item</code>',
                 description: 'Custom item',
-                props: '<code>list: Array</code>, <code>index: Number</code>, <code>active: Number</code>'
+                props: '<code>...item</code> (all the properties of the item are bound at the root), <code>index: Number</code>, <code>active: Number</code>, <code>scroll: Number</code>'
             }
         ],
         events: [

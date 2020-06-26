@@ -3,9 +3,10 @@
         :autoplay="false"
         with-carousel-list
         :indicator="false"
-        :overlay="gallery">
+        :overlay="gallery"
+        @click="switchGallery(true)">
         <b-carousel-item v-for="(item, i) in items" :key="i">
-            <figure @click="switchGallery(true)" class="image">
+            <figure class="image">
                 <img :src="item.image">
             </figure>
         </b-carousel-item>
@@ -14,8 +15,7 @@
             <b-carousel-list
                 v-model="props.active"
                 :data="items"
-                :config="al"
-                :refresh="gallery"
+                v-bind="al"
                 @switch="props.switch($event, false)"
                 as-indicator />
         </template>
@@ -86,9 +86,9 @@ export default {
         switchGallery(value) {
             this.gallery = value
             if (value) {
-                return document.documentElement.classList.add('is-clipped')
+                document.documentElement.classList.add('is-clipped')
             } else {
-                return document.documentElement.classList.remove('is-clipped')
+                document.documentElement.classList.remove('is-clipped')
             }
         }
     }

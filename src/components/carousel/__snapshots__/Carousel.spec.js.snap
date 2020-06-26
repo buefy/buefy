@@ -7,8 +7,8 @@ exports[`BCarousel render correctly 1`] = `
         <div></div>
         <div></div>
         <div class="carousel-arrow is-hovered">
-            <b-icon-stub icon="chevron-left" both="true" class="has-icons-left"></b-icon-stub>
-            <b-icon-stub icon="chevron-right" both="true" class="has-icons-right"></b-icon-stub>
+            <b-icon-stub icon="chevron-left" both="true" class="has-icons-left" style="display: none;"></b-icon-stub>
+            <b-icon-stub icon="chevron-right" both="true" class="has-icons-right" style=""></b-icon-stub>
         </div>
     </div>
     <!---->

@@ -108,4 +108,14 @@ describe('BTabs', () => {
         expect(wrapper.vm.activeId).toBeNull()
         expect(wrapper.vm.activeTab).toBe(undefined)
     })
+
+    it('still renders if there is no item', () => {
+        wrapper = mount({
+            template: `<BTabs value="tab1"></BTabs>`,
+            components: {
+                BTabs
+            }
+        }).find(BTabs)
+        expect(wrapper.html()).toMatchSnapshot()
+    })
 })

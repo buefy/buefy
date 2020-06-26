@@ -20,8 +20,11 @@
 </template>
 
 <script>
+import InjectedChildMixin from '../../utils/InjectedChildMixin'
+
 export default {
     name: 'BDropdownItem',
+    mixins: [InjectedChildMixin('dropdown')],
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],
@@ -44,7 +47,7 @@ export default {
     computed: {
         anchorClasses() {
             return {
-                'is-disabled': this.$parent.disabled || this.disabled,
+                'is-disabled': this.parent.disabled || this.disabled,
                 'is-paddingless': this.paddingless,
                 'is-active': this.isActive
             }
@@ -62,12 +65,12 @@ export default {
             return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : null
         },
         isClickable() {
-            return !this.$parent.disabled && !this.separator && !this.disabled && !this.custom
+            return !this.parent.disabled && !this.separator && !this.disabled && !this.custom
         },
         isActive() {
-            if (this.$parent.selected === null) return false
-            if (this.$parent.multiple) return this.$parent.selected.indexOf(this.value) >= 0
-            return this.value === this.$parent.selected
+            if (this.parent.selected === null) return false
+            if (this.parent.multiple) return this.parent.selected.indexOf(this.value) >= 0
+            return this.value === this.parent.selected
         },
         isFocusable() {
             return this.hasLink ? false : this.focusable
@@ -80,14 +83,8 @@ export default {
         selectItem() {
             if (!this.isClickable) return
 
-            this.$parent.selectItem(this.value)
+            this.parent.selectItem(this.value)
             this.$emit('click')
-        }
-    },
-    created() {
-        if (!this.$parent.$data._isDropdown) {
-            this.$destroy()
-            throw new Error('You should wrap bDropdownItem on a bDropdown')
         }
     }
 }

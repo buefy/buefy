@@ -1,20 +1,20 @@
 <template>
     <b-carousel-list v-model="test" :data="items" :items-to-show="2">
-        <template slot="item" slot-scope="props">
+        <template slot="item" slot-scope="list">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-5by4">
-                        <a @click="info(props.index)"><img :src="props.list.image"></a>
+                        <a @click="info(list.index)"><img :src="list.image"></a>
                     </figure>
                     <b-tag type="is-danger" rounded style="position: absolute; top: 0;"><b>50%</b></b-tag>
                 </div>
                 <div class="card-content">
                     <div class="content">
-                        <p class="title is-6">{{ props.list.title }}</p>
+                        <p class="title is-6">{{ list.title }}</p>
                         <p class="subtitle is-7">@johnsmith</p>
                         <div class="field is-grouped" >
-                            <p class="control" v-if="props.list.rating">
-                                <b-rate :value="props.list.rating" show-score disabled/>
+                            <p class="control" v-if="list.rating">
+                                <b-rate :value="list.rating" show-score disabled/>
                             </p>
                             <p class="control" style="margin-left: auto">
                                 <button class="button is-small is-danger is-outlined"><b-icon size="is-small" icon="heart"/></button>

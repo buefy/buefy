@@ -2,7 +2,7 @@
     <div
         class="carousel"
         :class="{'is-overlay': overlay}"
-        @mouseenter="pauseTimer"
+        @mouseenter="checkPause"
         @mouseleave="startTimer">
         <progress
             v-if="progress"
@@ -18,23 +18,23 @@
             @mouseup="dragEnd"
             @touchstart.stop="dragStart"
             @touchend.stop="dragEnd">
-            <slot />
+            <slot/>
             <div
                 v-if="arrow"
                 class="carousel-arrow"
                 :class="{'is-hovered': arrowHover}">
                 <b-icon
-                    v-if="checkArrow(0)"
+                    v-show="hasPrev"
                     class="has-icons-left"
-                    @click.native.prevent="prev"
+                    @click.native="prev"
                     :pack="iconPack"
                     :icon="iconPrev"
                     :size="iconSize"
                     both />
                 <b-icon
-                    v-if="checkArrow(childItems.length - 1)"
+                    v-show="hasNext"
                     class="has-icons-right"
-                    @click.native.prevent="next"
+                    @click.native="next"
                     :pack="iconPack"
                     :icon="iconNext"
                     :size="iconSize"
@@ -61,12 +61,12 @@
             class="carousel-indicator"
             :class="indicatorClasses">
             <a
-                v-for="(item, index) in childItems"
+                v-for="(item, index) in sortedItems"
                 class="indicator-item"
-                :class="{'is-active': index === activeChild}"
+                :class="{'is-active': item.isActive}"
                 @mouseover="modeChange('hover', index)"
                 @click="modeChange('click', index)"
-                :key="index">
+                :key="item._uid">
                 <slot
                     :i="index"
                     name="indicators">
@@ -84,12 +84,15 @@
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
+import {default as ProviderParentMixin, Sorted} from '../../utils/ProviderParentMixin'
+import {mod, bound} from '../../utils/helpers'
 
 export default {
     name: 'BCarousel',
     components: {
         [Icon.name]: Icon
     },
+    mixins: [ProviderParentMixin('carousel', Sorted)],
     props: {
         value: {
             type: Number,
@@ -125,10 +128,6 @@ export default {
             default: 'Pause'
         },
         arrow: {
-            type: Boolean,
-            default: true
-        },
-        arrowBoth: {
             type: Boolean,
             default: true
         },
@@ -190,11 +189,10 @@ export default {
     },
     data() {
         return {
-            _isCarousel: true,
+            transition: 'next',
             activeChild: this.value || 0,
-            defaultSlots: [],
             isPause: false,
-            dragX: 0,
+            dragX: false,
             timer: null
         }
     },
@@ -210,13 +208,13 @@ export default {
                 this.indicatorInside && this.indicatorPosition
             ]
         },
-        childItems() {
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isCarouselItem)
-                .map((vnode) => vnode.componentInstance)
+
+        // checking arrows
+        hasPrev() {
+            return this.repeat || this.activeChild !== 0
+        },
+        hasNext() {
+            return this.repeat || this.activeChild < this.childItems.length - 1
         }
     },
     watch: {
@@ -224,48 +222,35 @@ export default {
          * When v-model is changed set the new active item.
          */
         value(value) {
-            if (value < this.activeChild) {
-                this.changeActive(value)
-            } else {
-                this.changeActive(value, false)
-            }
+            this.changeActive(value)
         },
         /**
          * When carousel-items are updated, set active one.
          */
-        childItems() {
-            if (this.activeChild < this.childItems.length) {
-                let previous = this.activeChild
-                this.childItems.map((child, idx) => {
-                    if (child.isActive) {
-                        previous = idx
-                        if (previous < this.childItems.length) {
-                            this.childItems[previous].isActive = false
-                        }
-                    }
-                })
-                this.childItems[this.activeChild].isActive = true
-            } else if (this.activeChild > 0) {
+        sortedItems(items) {
+            if (this.activeChild >= items.length && this.activeChild > 0) {
                 this.changeActive(this.activeChild - 1)
             }
         },
         /**
-         *  When autoplay is change, set by status
+         *  When autoplay is changed, start or pause timer accordingly
          */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
+        },
+        /**
+         *  Since the timer can get paused at the end, if repeat is changed we need to restart it
+         */
+        repeat(status) {
+            if (status) { this.startTimer() }
         }
     },
     methods: {
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-
         startTimer() {
             if (!this.autoplay || this.timer) return
             this.isPause = false
             this.timer = setInterval(() => {
-                if (!this.repeat && this.activeChild === this.childItems.length - 1) {
+                if (!this.repeat && this.activeChild >= this.childItems.length - 1) {
                     this.pauseTimer()
                 } else {
                     this.next()
@@ -281,57 +266,47 @@ export default {
         },
         checkPause() {
             if (this.pauseHover && this.autoplay) {
-                return this.pauseTimer()
+                this.pauseTimer()
             }
         },
         /**
          * Change the active item and emit change event.
          * action only for animated slide, there true = next, false = prev
          */
-        changeActive(newIndex, action = true) {
-            if (this.activeChild === newIndex) return
+        changeActive(newIndex, direction = 0) {
+            if (this.activeChild === newIndex || isNaN(newIndex)) return
 
-            if (newIndex > this.childItems.length) throw new Error('The index you trying to set is bigger than the childs length')
+            direction = direction || (newIndex - this.activeChild)
 
-            if (this.activeChild < this.childItems.length) {
-                this.childItems[this.activeChild].status(false, action)
-            }
-            this.childItems[newIndex].status(true, action)
+            newIndex = this.repeat ? mod(newIndex, this.childItems.length)
+                : bound(newIndex, 0, this.childItems.length - 1)
+
+            this.transition = direction > 0 ? 'prev' : 'next'
+            // Transition names are reversed from the actual direction for correct effect
+
             this.activeChild = newIndex
-            this.$emit('change', newIndex)
+            if (newIndex !== this.value) {
+                this.$emit('input', newIndex)
+            }
+            this.$emit('change', newIndex) // BC
         },
         // Indicator trigger when change active item.
         modeChange(trigger, value) {
             if (this.indicatorMode === trigger) {
-                this.$emit('input', value)
-                return value < this.activeChild
-                    ? this.changeActive(value)
-                    : this.changeActive(value, false)
+                return this.changeActive(value)
             }
         },
         prev() {
-            if (this.activeChild === 0) {
-                if (this.repeat) this.changeActive(this.childItems.length - 1)
-            } else {
-                this.changeActive(this.activeChild - 1)
-            }
+            this.changeActive(this.activeChild - 1, -1)
         },
         next() {
-            if (this.activeChild === this.childItems.length - 1) {
-                if (this.repeat) this.changeActive(0, false)
-            } else {
-                this.changeActive(this.activeChild + 1, false)
-            }
-        },
-        // checking arrow between both
-        checkArrow(value) {
-            if (this.arrowBoth) return true
-            if (this.activeChild !== value) return true
+            this.changeActive(this.activeChild + 1, 1)
         },
         // handle drag event
         dragStart(event) {
-            if (!this.hasDrag) return
-            this.dragx = event.touches ? event.changedTouches[0].pageX : event.pageX
+            if (!this.hasDrag ||
+                (!event.target.draggable && event.target.textContent.trim() === '')) return
+            this.dragX = event.touches ? event.changedTouches[0].pageX : event.pageX
             if (event.touches) {
                 this.pauseTimer()
             } else {
@@ -339,26 +314,27 @@ export default {
             }
         },
         dragEnd(event) {
-            if (!this.hasDrag) return
+            if (this.dragX === false) return
             const detected = event.touches ? event.changedTouches[0].pageX : event.pageX
-            const diffX = detected - this.dragx
-            if (Math.abs(diffX) > 50) {
+            const diffX = detected - this.dragX
+            if (Math.abs(diffX) > 30) {
                 if (diffX < 0) {
                     this.next()
                 } else {
                     this.prev()
                 }
+            } else {
+                event.target.click()
+                this.sortedItems[this.activeChild].$emit('click')
+                this.$emit('click')
             }
             if (event.touches) {
                 this.startTimer()
             }
+            this.dragX = false
         }
     },
     mounted() {
-        if (this.activeChild < this.childItems.length) {
-            this.childItems[this.activeChild].isActive = true
-        }
-        this.refreshSlots()
         this.startTimer()
     },
     beforeDestroy() {

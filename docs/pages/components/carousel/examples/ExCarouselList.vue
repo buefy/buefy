@@ -25,8 +25,11 @@
                 <b-field label="Value">
                     <b-numberinput v-model="values" min="0" :max="items.length - 1" controls-position="compact"/>
                 </b-field>
+                <b-field label="Items to Show">
+                    <b-numberinput v-model="perList" min="1" :max="items.length" controls-position="compact"/>
+                </b-field>
                 <b-field label="Items to List">
-                    <b-numberinput v-model="perList" min="0" :max="items.length - 1" controls-position="compact"/>
+                    <b-numberinput v-model="increment" min="1" :max="items.length - 1" controls-position="compact"/>
                 </b-field>
             </b-field>
         </div>
@@ -35,7 +38,8 @@
             :data="items"
             :arrow="arrow"
             :arrow-hover="arrowHover"
-            :items-to-list="perList"
+            :items-to-show="perList"
+            :items-to-list="increment"
             :repeat="repeat"
             :has-drag="drag"
             :has-grayscale="gray"
@@ -53,7 +57,8 @@ export default {
             gray: false,
             opacity: false,
             values: 1,
-            perList: 1,
+            perList: 4,
+            increment: 1,
             repeat: false,
             items: [
                 {

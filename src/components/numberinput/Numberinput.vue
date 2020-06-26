@@ -2,11 +2,11 @@
     <div class="b-numberinput field" :class="fieldClasses">
         <p
             v-if="controls"
-            class="control"
-            @mouseup="onStopLongPress(false)"
-            @mouseleave="onStopLongPress(false)"
-            @touchend="onStopLongPress(false)"
-            @touchcancel="onStopLongPress(false)">
+            class="control minus"
+            @mouseup="onStopLongPress"
+            @mouseleave="onStopLongPress"
+            @touchend="onStopLongPress"
+            @touchcancel="onStopLongPress">
             <button
                 type="button"
                 class="button"
@@ -44,11 +44,11 @@
             @blur="$emit('blur', $event)" />
         <p
             v-if="controls"
-            class="control"
-            @mouseup="onStopLongPress(true)"
-            @mouseleave="onStopLongPress(true)"
-            @touchend="onStopLongPress(true)"
-            @touchcancel="onStopLongPress(true)">
+            class="control plus"
+            @mouseup="onStopLongPress"
+            @mouseleave="onStopLongPress"
+            @touchend="onStopLongPress"
+            @touchcancel="onStopLongPress">
             <button
                 type="button"
                 class="button"
@@ -85,6 +85,7 @@ export default {
         min: [Number, String],
         max: [Number, String],
         step: [Number, String],
+        exponential: [Boolean, Number],
         disabled: Boolean,
         type: {
             type: String,
@@ -108,6 +109,7 @@ export default {
         return {
             newValue: !isNaN(this.value) ? this.value : parseFloat(this.min) || 0,
             newStep: this.step || 1,
+            timesPressed: 1,
             _elementRef: 'input'
         }
     },
@@ -193,27 +195,27 @@ export default {
         },
         onControlClick(event, inc) {
             // IE 11 -> filter click event
-            if (event.detail !== 0 || event.type === 'click') return
+            if (event.detail !== 0 || event.type !== 'click') return
             if (inc) this.increment()
             else this.decrement()
         },
+        longPressTick(inc) {
+            if (inc) this.increment()
+            else this.decrement()
+
+            this._$intervalRef = setTimeout(() => {
+                this.longPressTick(inc)
+            }, this.exponential ? (250 / (this.exponential * this.timesPressed++)) : 250)
+        },
         onStartLongPress(event, inc) {
             if (event.button !== 0 && event.type !== 'touchstart') return
-            this._$intervalTime = new Date()
-            clearInterval(this._$intervalRef)
-            this._$intervalRef = setInterval(() => {
-                if (inc) this.increment()
-                else this.decrement()
-            }, 250)
+            clearTimeout(this._$intervalRef)
+            this.longPressTick(inc)
         },
-        onStopLongPress(inc) {
+        onStopLongPress() {
             if (!this._$intervalRef) return
-            const d = new Date()
-            if (d - this._$intervalTime < 250) {
-                if (inc) this.increment()
-                else this.decrement()
-            }
-            clearInterval(this._$intervalRef)
+            this.timesPressed = 1
+            clearTimeout(this._$intervalRef)
             this._$intervalRef = null
         }
     }
