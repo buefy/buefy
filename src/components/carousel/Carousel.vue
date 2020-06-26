@@ -214,7 +214,7 @@ export default {
             return this.repeat || this.activeChild !== 0
         },
         hasNext() {
-            return this.repeat || this.activeChild < this.childItems.length
+            return this.repeat || this.activeChild < this.childItems.length - 1
         }
     },
     watch: {
