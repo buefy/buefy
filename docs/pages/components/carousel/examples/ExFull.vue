@@ -73,10 +73,7 @@
 </template>
 
 <script>
-import BInput from "../../../../../src/components/input/Input";
-import BField from "../../../../../src/components/field/Field";
 export default {
-    components: {BField, BInput},
     data() {
         return {
             carousel: 0,
