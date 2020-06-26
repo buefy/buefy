@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import InjectedChildMixin from '../../utils/InjectedChildMixin'
+import {default as InjectedChildMixin, Sorted} from '../../utils/InjectedChildMixin'
 
 export default {
     name: 'BCarouselItem',
-    mixins: [InjectedChildMixin('carousel')],
+    mixins: [InjectedChildMixin('carousel', Sorted)],
     data() {
         return {
             transitionName: null

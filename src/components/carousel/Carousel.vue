@@ -24,7 +24,7 @@
                 class="carousel-arrow"
                 :class="{'is-hovered': arrowHover}">
                 <b-icon
-                    v-if="checkArrow(0)"
+                    v-show="hasPrev"
                     class="has-icons-left"
                     @click.native="prev"
                     :pack="iconPack"
@@ -32,7 +32,7 @@
                     :size="iconSize"
                     both />
                 <b-icon
-                    v-if="checkArrow(childItems.length - 1)"
+                    v-show="hasNext"
                     class="has-icons-right"
                     @click.native="next"
                     :pack="iconPack"
@@ -84,7 +84,7 @@
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
+import {default as ProviderParentMixin, Sorted} from '../../utils/ProviderParentMixin'
 import {mod, bound} from '../../utils/helpers'
 
 export default {
@@ -92,7 +92,7 @@ export default {
     components: {
         [Icon.name]: Icon
     },
-    mixins: [ProviderParentMixin('carousel')],
+    mixins: [ProviderParentMixin('carousel', Sorted)],
     props: {
         value: {
             type: Number,
@@ -207,6 +207,14 @@ export default {
                 this.indicatorCustom && this.indicatorCustomSize,
                 this.indicatorInside && this.indicatorPosition
             ]
+        },
+
+        // checking arrows
+        hasPrev() {
+            return this.repeat || this.activeChild !== 0
+        },
+        hasNext() {
+            return this.repeat || this.activeChild < this.childItems.length
         }
     },
     watch: {
@@ -293,11 +301,6 @@ export default {
         },
         next() {
             this.changeActive(this.activeChild + 1, 1)
-        },
-        // checking arrow between both
-        checkArrow(value) {
-            if (this.repeat) return true
-            if (this.activeChild !== value) return true
         },
         // handle drag event
         dragStart(event) {

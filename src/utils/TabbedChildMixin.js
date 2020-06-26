@@ -1,7 +1,7 @@
-import InjectedChildMixin from './InjectedChildMixin'
+import {default as InjectedChildMixin, Sorted} from './InjectedChildMixin'
 
 export default (parentCmp) => ({
-    mixins: [InjectedChildMixin(parentCmp)],
+    mixins: [InjectedChildMixin(parentCmp, Sorted)],
     props: {
         label: String,
         icon: String,

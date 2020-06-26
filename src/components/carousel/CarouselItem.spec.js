@@ -1,11 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 import BCarouselItem from '@components/carousel/CarouselItem'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
+import { default as ProviderParentMixin, Sorted } from '../../utils/ProviderParentMixin'
 
 let wrapper
 const BCarousel = {
     template: '<b-carousel-stub></b-carousel-stub>',
-    mixins: [ProviderParentMixin('carousel')]
+    mixins: [ProviderParentMixin('carousel', Sorted)]
 }
 
 describe('BCarouselItem', () => {

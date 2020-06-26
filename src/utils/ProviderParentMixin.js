@@ -1,4 +1,12 @@
-export default (itemName, needsItems = true, needsSorted = true) => {
+import {hasFlag} from './helpers'
+
+const items = 1
+const sorted = 3
+
+export const Items = items
+export const Sorted = sorted
+
+export default (itemName, flags = 0) => {
     const mixin = {
         provide() {
             return {
@@ -7,7 +15,7 @@ export default (itemName, needsItems = true, needsSorted = true) => {
         }
     }
 
-    if (needsItems) {
+    if (hasFlag(flags, items)) {
         mixin.data = function () {
             return {
                 childItems: []
@@ -22,7 +30,7 @@ export default (itemName, needsItems = true, needsSorted = true) => {
             }
         }
 
-        if (needsSorted) {
+        if (hasFlag(flags, sorted)) {
             mixin.watch = {
                 /**
                  * When items are added/removed deep search in the elements default's slot

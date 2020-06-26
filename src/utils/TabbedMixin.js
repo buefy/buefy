@@ -1,10 +1,10 @@
 import Icon from '../components/icon/Icon'
 import SlotComponent from '../utils/SlotComponent'
-import ProviderParentMixin from './ProviderParentMixin'
+import { default as ProviderParentMixin, Sorted } from './ProviderParentMixin'
 import {bound} from './helpers'
 
 export default (cmp) => ({
-    mixins: [ProviderParentMixin(cmp)],
+    mixins: [ProviderParentMixin(cmp, Sorted)],
     components: {
         [Icon.name]: Icon,
         [SlotComponent.name]: SlotComponent

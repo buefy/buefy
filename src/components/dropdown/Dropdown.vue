@@ -46,7 +46,7 @@
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
 import { removeElement, createAbsoluteElement } from '../../utils/helpers'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
+import { default as ProviderParentMixin, Sorted } from '../../utils/ProviderParentMixin'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
@@ -55,7 +55,7 @@ export default {
     directives: {
         trapFocus
     },
-    mixins: [ProviderParentMixin('dropdown', false, false)],
+    mixins: [ProviderParentMixin('dropdown', Sorted)],
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],

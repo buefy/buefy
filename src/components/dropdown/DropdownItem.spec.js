@@ -1,11 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 import BDropdownItem from '@components/dropdown/DropdownItem'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
+import { default as ProviderParentMixin, Sorted } from '../../utils/ProviderParentMixin'
 
 let wrapper
 const dropdownSelected = 'val'
 const BDropdown = {
-    mixins: [ProviderParentMixin('dropdown', false, false)],
+    mixins: [ProviderParentMixin('dropdown', Sorted)],
     template: '<b-dropdown-stub></b-dropdown-stub>',
     data() {
         return {

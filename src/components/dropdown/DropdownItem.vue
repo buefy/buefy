@@ -24,7 +24,7 @@ import InjectedChildMixin from '../../utils/InjectedChildMixin'
 
 export default {
     name: 'BDropdownItem',
-    mixins: [InjectedChildMixin('dropdown', false)],
+    mixins: [InjectedChildMixin('dropdown')],
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],

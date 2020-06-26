@@ -1,12 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
 import BCarousel from '@components/carousel/Carousel'
 import BIcon from '@components/icon/Icon'
-import InjectedChildMixin from '../../utils/InjectedChildMixin'
+import {default as InjectedChildMixin, Sorted} from '../../utils/InjectedChildMixin'
 
 let wrapper
 
 const mockCarouselItems = {
-    mixins: [InjectedChildMixin('carousel')],
+    mixins: [InjectedChildMixin('carousel', Sorted)],
     name: 'BCarouselItem',
     template: '<div></div>',
     computed: {

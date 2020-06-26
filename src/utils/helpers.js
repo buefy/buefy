@@ -8,6 +8,16 @@ function signPoly(value) {
 export const sign = Math.sign || signPoly
 
 /**
+ * Checks if the flag is set
+ * @param val
+ * @param flag
+ * @returns {boolean}
+ */
+function hasFlag(val, flag) {
+    return (val & flag) === flag
+}
+
+/**
  * Native modulo bug with negative numbers
  * @param n
  * @param mod
@@ -28,7 +38,7 @@ function bound(val, min, max) {
     return Math.max(min, Math.min(max, val))
 }
 
-export {mod, bound}
+export {mod, bound, hasFlag}
 
 /**
  * Get value of an object property/path even if it's nested

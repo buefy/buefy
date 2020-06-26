@@ -1,10 +1,20 @@
-export default (parentItemName, needsSorted = true) => {
+import {hasFlag} from './helpers'
+
+const sorted = 1
+const optional = 2
+
+export const Sorted = sorted
+export const Optional = optional
+
+export default (parentItemName, flags = 0) => {
     const mixin = {
         inject: {parent: {from: 'b' + parentItemName, default: false}},
         created() {
             if (!this.parent) {
-                this.$destroy()
-                throw new Error('You should wrap ' + this.$options.name + ' in a b' + parentItemName + 's')
+                if (!hasFlag(flags, optional)) {
+                    this.$destroy()
+                    throw new Error('You should wrap ' + this.$options.name + ' in a ' + parentItemName)
+                }
             } else if (this.parent._registerItem) {
                 this.parent._registerItem(this)
             }
@@ -15,7 +25,7 @@ export default (parentItemName, needsSorted = true) => {
             }
         }
     }
-    if (needsSorted) {
+    if (hasFlag(flags, sorted)) {
         mixin.data = () => {
             return {
                 index: null
