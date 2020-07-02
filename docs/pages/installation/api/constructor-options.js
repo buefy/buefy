@@ -37,7 +37,15 @@ export default [
                 default: '<code>chevron-right</code>'
             },
             {
-                name: '<code>defaultContainerElement</code>',
+                name: '<code>defaultLocale</code>',
+                description: `Will be used for default date and number formatting. Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
+            },
+            {
+                name: '<code>defaultContainerElement</>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
                     Meaning that the container <em>should</em> be <code>fixed</code>.`,
@@ -126,14 +134,14 @@ export default [
                 description: `Default datepicker <code>date-formatter</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>date.toLocaleDateString()</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
             },
             {
                 name: '<code>defaultDateParser</code>',
                 description: `Default datepicker <code>date-parser</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>Date.parse(date)</code>'
+                default: 'Tries to parse the date using the locale specific format. Fallback to <code>Date.parse</code>'
             },
             {
                 name: '<code>defaultDateCreator</code>',
@@ -147,14 +155,14 @@ export default [
                 description: `Default datepicker <code>day-names</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: `<code>['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S']</code>`
+                default: `default to browser locale`
             },
             {
                 name: '<code>defaultMonthNames</code>',
                 description: `Default datepicker <code>month-names</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: `<code>['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']</code>`
+                default: `default to browser locale`
             },
             {
                 name: '<code>defaultFirstDayOfWeek</code>',

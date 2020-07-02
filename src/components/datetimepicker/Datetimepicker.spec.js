@@ -5,7 +5,11 @@ let wrapper
 
 describe('Datetimepicker', () => {
     beforeEach(() => {
-        wrapper = shallowMount(Datetimepicker)
+        wrapper = shallowMount(Datetimepicker, {
+            propsData: {
+                locale: 'en-US'
+            }
+        })
     })
 
     it('is called', () => {
@@ -84,10 +88,7 @@ describe('Datetimepicker', () => {
         const date = new Date(2019, 9, 1, 8, 30, 0, 0)
         wrapper = mount(Datetimepicker, {
             propsData: {
-                value: date,
-                timepicker: {
-                    enableSeconds: true
-                }
+                value: date
             },
             stubs: {
                 transition: false
@@ -95,6 +96,6 @@ describe('Datetimepicker', () => {
             sync: false
         })
         await wrapper.vm.$nextTick()
-        expect(wrapper.find('input').element.value).toEqual('2019-10-1 08:30:00')
+        expect(wrapper.find('input').element.value).toEqual('2019-10-1 08:30')
     })
 })

@@ -1,24 +1,23 @@
 import { mount } from '@vue/test-utils'
+import BTable from '@components/table/Table'
 import BTableColumn from '@components/table/TableColumn'
 
 let wrapper
-const BTable = {
-    template: '<b-table-stub></b-table-stub>',
-    data() {
-        return {
-            _isTable: true
-        }
-    },
-    methods: {
-        refreshSlots() { }
+const WrapperComp = {
+    template: `
+        <BTable>
+            <BTableColumn/>
+            <BTableColumn ref="testItem" />
+            <BTableColumn />
+        </BTable>`,
+    components: {
+        BTable, BTableColumn
     }
 }
 
 describe('BTableColumn', () => {
     beforeEach(() => {
-        wrapper = mount(BTableColumn, {
-            parentComponent: BTable
-        })
+        wrapper = mount(WrapperComp, { sync: false }).find({ ref: 'testItem' })
     })
 
     it('is called', () => {

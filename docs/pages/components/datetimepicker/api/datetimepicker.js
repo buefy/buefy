@@ -13,14 +13,14 @@ export default [
                 description: 'Function to format datetime (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
+                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(time)</code>'
             },
             {
                 name: '<code>datetime-parser</code>',
                 description: 'Function to parse string to a datetime (<code>Date</code> type) for set a datetime from the input to the component',
                 type: 'Function',
                 values: '—',
-                default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
+                default: 'Tries to parse the time using the locale specific format. Fallback to <code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
                 name: '<code>min-datetime</code>',
@@ -133,6 +133,14 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>locale</code>',
+                description: `Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
             },
             {
                 name: 'Any native attribute',

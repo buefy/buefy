@@ -4,7 +4,11 @@ exports[`BNotification render correctly 1`] = `
 <article class="notification" name="fade"><button type="button" class="delete"></button>
     <div class="media">
         <!---->
-        <div class="media-content"></div>
+        <div class="media-content">
+            <p class="text">
+
+            </p>
+        </div>
     </div>
 </article>
 `;
