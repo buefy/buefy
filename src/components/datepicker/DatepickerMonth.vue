@@ -17,12 +17,7 @@
                         href="#"
                         :disabled="disabled"
                         @click.prevent="emitChosenDate(date)"
-                        @keydown.enter.prevent="emitChosenDate(date)"
-                        @keydown.space.prevent="emitChosenDate(date)"
-                        @keydown.arrow-left.prevent="changeFocus(date, -1)"
-                        @keydown.arrow-right.prevent="changeFocus(date, 1)"
-                        @keydown.arrow-up.prevent="changeFocus(date, -3)"
-                        @keydown.arrow-down.prevent="changeFocus(date, 3)"
+                        @keydown.prevent="manageKeydown($event, date)"
                         :tabindex="focused.month === date.getMonth() ? null : -1">
                         {{ monthNames[date.getMonth()] }}
                         <div class="events" v-if="eventsDateMatch(date)">
@@ -240,6 +235,40 @@ export default {
                 'is-today': dateMatch(day, this.dateCreator()),
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled
+            }
+        },
+
+        manageKeydown({ key }, date) {
+            // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
+            switch (key) {
+                case ' ':
+                case 'Space':
+                case 'Spacebar':
+                case 'Enter': {
+                    this.emitChosenDate(date)
+                    break
+                }
+
+                case 'ArrowLeft':
+                case 'Left': {
+                    this.changeFocus(date, -1)
+                    break
+                }
+                case 'ArrowRight':
+                case 'Right': {
+                    this.changeFocus(date, 1)
+                    break
+                }
+                case 'ArrowUp':
+                case 'Up': {
+                    this.changeFocus(date, -3)
+                    break
+                }
+                case 'ArrowDown':
+                case 'Down': {
+                    this.changeFocus(date, 3)
+                    break
+                }
             }
         },
 
