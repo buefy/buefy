@@ -12,7 +12,7 @@
 </template>
 
 <script>
-const clickableWhiteList = ['div', 'span']
+const clickableWhiteList = ['div', 'span', 'input']
 
 export default {
     name: 'BNavbarItem',
