@@ -163,6 +163,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>reset-on-meridian-change</code>',
+                description: 'Reset timepicker values on meridian change',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

@@ -143,7 +143,11 @@ export default {
             type: Number,
             default: 0
         },
-        appendToBody: Boolean
+        appendToBody: Boolean,
+        resetOnMeridianChange: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -254,7 +258,12 @@ export default {
     },
     methods: {
         onMeridienChange(value) {
-            if (this.hoursSelected !== null) {
+            if (this.hoursSelected !== null && this.resetOnMeridianChange) {
+                this.hoursSelected = null
+                this.minutesSelected = null
+                this.secondsSelected = null
+                this.computedValue = null
+            } else if (this.hoursSelected !== null) {
                 if (value === PM) {
                     this.hoursSelected += 12
                 } else if (value === AM) {
