@@ -5,7 +5,11 @@ let wrapper
 
 describe('BDropdown', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BDropdown)
+        wrapper = shallowMount(BDropdown, {
+            slots: {
+                trigger: '<button class="trigger">trigger</button>'
+            }
+        })
     })
 
     it('is called', () => {
@@ -111,6 +115,11 @@ describe('BDropdown', () => {
 
         el = wrapper.vm.$refs.trigger
         expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
+
+        el = wrapper.vm.$refs.trigger.querySelector('.trigger')
+        expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
+
+        wrapper.vm.$refs.trigger = undefined
 
         el = document.createElement('div')
         expect(wrapper.vm.isInWhiteList(el)).toBeFalsy()
