@@ -49,19 +49,19 @@ describe('BNumberinput', () => {
             wrapper.find('.control.plus').trigger('mouseup')
             await wrapper.vm.$nextTick()
 
-            expect(wrapper.vm.computedValue).toBeGreaterThan(40)
-            expect(wrapper.vm.computedValue).toBeLessThan(60)
+            expect(wrapper.vm.computedValue).toBeGreaterThan(90)
+            expect(wrapper.vm.computedValue).toBeLessThan(150)
 
             wrapper.setProps({exponential: 3, value: 0, step: 1})
 
             wrapper.find('.control.plus button').trigger('mousedown')
 
-            await wait(1500)
+            await wait(1000)
 
             wrapper.find('.control.plus').trigger('mouseup')
 
-            expect(wrapper.vm.computedValue).toBeGreaterThan(80)
-            expect(wrapper.vm.computedValue).toBeLessThan(100)
+            expect(wrapper.vm.computedValue).toBeGreaterThan(200)
+            expect(wrapper.vm.computedValue).toBeLessThan(600)
         })
 
         it('increments/decrements on long pressing', async () => {
