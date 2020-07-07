@@ -99,7 +99,7 @@ export default {
         toFixed(num) {
             let fixed = (+(`${Math.round(+(`${num}e${this.precision}`))}e${-this.precision}`)).toFixed(this.precision)
             if (!this.keepTrailingZeroes) {
-                fixed = fixed.replace(/\.?0+$/, '')
+                fixed = fixed.replace(/\.0+$/, '')
             }
             return fixed
         }
