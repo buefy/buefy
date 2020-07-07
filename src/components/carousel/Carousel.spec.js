@@ -50,6 +50,11 @@ describe('BCarousel', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.activeChild).toBe(value)
 
+        value = 3
+        wrapper.setProps({ value })
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.activeChild).toBe(1)
+
         value = 0
         wrapper.setProps({ value })
         await wrapper.vm.$nextTick()
@@ -101,7 +106,10 @@ describe('BCarousel', () => {
         ])
     })
 
-    it('manage next and previous accordingly', () => {
+    it('manage next and previous accordingly', async () => {
+        wrapper.vm.startTimer = jest.fn(() => wrapper.vm.startTimer)
+        wrapper.vm.pauseTimer = jest.fn(() => wrapper.vm.pauseTimer)
+
         const first = 0
         const last = 1
         let repeat = false
@@ -115,6 +123,8 @@ describe('BCarousel', () => {
         wrapper.setProps({ repeat })
         wrapper.vm.prev()
         expect(wrapper.vm.activeChild).toBe(last) // Will be set to the last value using repeat
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.startTimer).toHaveBeenCalled()
 
         wrapper.vm.next()
         expect(wrapper.vm.activeChild).toBe(first) // Navigate to the first value with repeat
@@ -124,6 +134,21 @@ describe('BCarousel', () => {
         wrapper.setProps({ repeat })
         wrapper.vm.next()
         expect(wrapper.vm.activeChild).toBe(last) // Wont go above last when not using repeat
+    })
+
+    it('manage interaction with indicators', async () => {
+        let indicator = wrapper.find('.indicator-item')
+
+        const first = 0
+        const last = 1
+        wrapper.setProps({ value: last })
+        await wrapper.vm.$nextTick()
+
+        indicator.trigger('mouseover') // no change since indicatorMode is 'click'
+        expect(wrapper.vm.activeChild).toBe(last)
+
+        indicator.trigger('click')
+        expect(wrapper.vm.activeChild).toBe(first)
     })
 
     it('autoplays', async () => {
@@ -180,11 +205,100 @@ describe('BCarousel', () => {
         expect(wrapper.vm.activeChild).toBe(1)
     })
 
+    it('drags correctly on mobile', async () => {
+        const first = 0
+        const last = 1
+        wrapper.setProps({ value: first })
+        wrapper.vm.startTimer = jest.fn(() => wrapper.vm.startTimer)
+        wrapper.vm.pauseTimer = jest.fn(() => wrapper.vm.pauseTimer)
+
+        let event = {
+            target: {
+                draggable: true
+            },
+            touches: true,
+            changedTouches: [{
+                pageX: 50
+            }]
+        }
+
+        // Dragging enough to go to next slide
+        await wrapper.vm.$nextTick()
+        wrapper.vm.dragStart(event)
+        expect(wrapper.vm.pauseTimer).toHaveBeenCalled()
+        await wrapper.vm.$nextTick()
+        event.changedTouches[0].pageX = 0
+        wrapper.vm.dragEnd(event)
+        expect(wrapper.vm.activeChild).toBe(last)
+
+        // Dragging enough to go to previous slide
+        await wrapper.vm.$nextTick()
+        wrapper.vm.dragStart(event)
+        expect(wrapper.vm.pauseTimer).toHaveBeenCalled()
+        await wrapper.vm.$nextTick()
+        event.changedTouches[0].pageX = 50
+        wrapper.vm.dragEnd(event)
+        expect(wrapper.vm.activeChild).toBe(first)
+        expect(wrapper.vm.startTimer).toHaveBeenCalled()
+    })
+
+    it('drags correctly on desktop', async () => {
+        const first = 0
+        const last = 1
+        wrapper.setProps({ value: first })
+
+        let event = {
+            target: {
+                draggable: true,
+                click: jest.fn()
+            },
+            pageX: 50,
+            preventDefault: jest.fn()
+        }
+
+        // Dragging enough to go to next slide
+        await wrapper.vm.$nextTick()
+        wrapper.vm.dragStart(event)
+        expect(event.preventDefault).toHaveBeenCalled()
+        await wrapper.vm.$nextTick()
+        event.pageX = 0
+        wrapper.vm.dragEnd(event)
+        expect(wrapper.vm.activeChild).toBe(last)
+
+        // Dragging enough to go to previous slide
+        await wrapper.vm.$nextTick()
+        wrapper.vm.dragStart(event)
+        expect(event.preventDefault).toHaveBeenCalled()
+        await wrapper.vm.$nextTick()
+        event.pageX = 50
+        wrapper.vm.dragEnd(event)
+        expect(wrapper.vm.activeChild).toBe(first)
+
+        // Considering a tiny slide for a click
+        await wrapper.vm.$nextTick()
+        wrapper.vm.dragStart(event)
+        expect(event.preventDefault).toHaveBeenCalled()
+        await wrapper.vm.$nextTick()
+        event.pageX = 55
+        wrapper.vm.dragEnd(event)
+        expect(wrapper.vm.activeChild).toBe(first)
+        expect(event.target.click).toHaveBeenCalled()
+        expect(wrapper.emitted()['click']).toBeTruthy()
+    })
+
     it('destroys correctly', async () => {
         wrapper.setProps({autoplay: true})
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.timer).toBeTruthy()
         wrapper.destroy()
         expect(wrapper.vm.timer).toBeFalsy()
+    })
+
+    it('reset timer before destroy', () => {
+        wrapper.vm.pauseTimer = jest.fn(() => wrapper.vm.pauseTimer)
+
+        wrapper.destroy()
+
+        expect(wrapper.vm.pauseTimer).toHaveBeenCalled()
     })
 })

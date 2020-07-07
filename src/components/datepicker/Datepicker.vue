@@ -21,7 +21,7 @@
                 ref="input"
                 slot="trigger"
                 autocomplete="off"
-                :value="formatValue(computedValue)"
+                :value="formattedValue"
                 :placeholder="placeholder"
                 :size="size"
                 :icon="icon"
@@ -455,6 +455,9 @@ export default {
                     })
                 }
             }
+        },
+        formattedValue() {
+            return this.formatValue(this.computedValue)
         },
         localeOptions() {
             return new Intl.DateTimeFormat(this.locale, {
