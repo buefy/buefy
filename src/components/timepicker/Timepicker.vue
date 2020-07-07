@@ -116,6 +116,7 @@
             :min="formatHHMMSS(minTime)"
             :disabled="disabled"
             :readonly="false"
+            :reset-on-meridian-change="isReset"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChange($event.target.value)"
