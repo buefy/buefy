@@ -367,6 +367,7 @@
 
 <script>
 import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
+import debounce from '../../utils/debounce'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -531,7 +532,8 @@ export default {
             type: String,
             default: ''
         },
-        cardLayout: Boolean
+        cardLayout: Boolean,
+        debounceSearch: Number
     },
     data() {
         return {
@@ -733,24 +735,19 @@ export default {
             this.checkSort()
         },
 
+        debounceSearch: {
+            handler(value) {
+                this.debouncedHandleFiltersChange = debounce(this.handleFiltersChange, value)
+            },
+            immediate: true
+        },
+
         filters: {
             handler(value) {
-                if (this.backendFiltering) {
-                    this.$emit('filters-change', value)
+                if (this.debounceSearch) {
+                    this.debouncedHandleFiltersChange(value)
                 } else {
-                    this.newData = this.data.filter(
-                        (row) => this.isRowFiltered(row))
-                    if (!this.backendPagination) {
-                        this.newDataTotal = this.newData.length
-                    }
-                    if (!this.backendSorting) {
-                        if (this.sortMultiple &&
-                            this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
-                            this.doSortMultiColumn()
-                        } else if (Object.keys(this.currentSortColumn).length > 0) {
-                            this.doSortSingleColumn(this.currentSortColumn)
-                        }
-                    }
+                    this.handleFiltersChange(value)
                 }
             },
             deep: true
@@ -771,6 +768,25 @@ export default {
     methods: {
         onFiltersEvent(event) {
             this.$emit(`filters-event-${this.filtersEvent}`, { event, filters: this.filters })
+        },
+        handleFiltersChange(value) {
+            if (this.backendFiltering) {
+                this.$emit('filters-change', value)
+            } else {
+                this.newData = this.data.filter(
+                    (row) => this.isRowFiltered(row))
+                if (!this.backendPagination) {
+                    this.newDataTotal = this.newData.length
+                }
+                if (!this.backendSorting) {
+                    if (this.sortMultiple &&
+                        this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
+                        this.doSortMultiColumn()
+                    } else if (Object.keys(this.currentSortColumn).length > 0) {
+                        this.doSortSingleColumn(this.currentSortColumn)
+                    }
+                }
+            }
         },
         findIndexOfSortData(column) {
             let sortObj = this.sortMultipleDataComputed.filter((i) =>

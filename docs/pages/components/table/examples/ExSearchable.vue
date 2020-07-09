@@ -5,6 +5,12 @@
             :columns="columns">
         </b-table>
         <hr />
+        <p>You can debounce search filter to avoid multiple filtering when typing.</p>
+        <b-table
+            :data="data"
+            :columns="columns"
+            :debounce-search="1000">
+        </b-table>
         <p>You can also customize the search input using a scoped slot.</p>
         <b-table
             :data="data">
