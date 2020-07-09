@@ -379,6 +379,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>debounce-search</code>',
+                description: 'Sets the filtering debounce time (in milliseconds)',
+                type: 'Number',
+                values: '—',
+                default: '—'
             }
         ],
         slots: [
