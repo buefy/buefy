@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
+import { useFakeTimers } from 'sinon'
 import BInput from '@components/input/Input'
 import BTable from '@components/table/Table'
 
@@ -137,6 +138,22 @@ describe('BTable', () => {
             bodyRows = wrapper.findAll('tbody tr')
 
             expect(bodyRows).toHaveLength(3) // Jesse, John and Justin
+        })
+
+        it('debounce search filtering when debounce-search is defined', () => {
+            let clock = useFakeTimers()
+            wrapper.setProps({
+                debounceSearch: 1000
+            })
+            for (let i = 0; i < 10; i++) {
+                searchInput.vm.$emit('input', 'J'.repeat(10 - i))
+                clock.tick(500)
+                bodyRows = wrapper.findAll('tbody tr')
+                expect(bodyRows).toHaveLength(5) // No filtering yet
+            }
+            clock.tick(1000)
+            bodyRows = wrapper.findAll('tbody tr')
+            expect(bodyRows).toHaveLength(2) // Filtering after debounce
         })
     })
 })
