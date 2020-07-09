@@ -192,6 +192,7 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
+                            :class="{'is-sticky': column.sticky}"
                             :style="{
                                 width: column.width === undefined ? null
                             : (isNaN(column.width) ? column.width : column.width + 'px') }">
