@@ -468,7 +468,7 @@ export default {
             if (this.clearable) {
                 this.newValue = ''
                 if (this.openOnFocus) {
-                    this.$el.focus()
+                    this.$refs.input.$el.focus()
                 }
             } else {
                 this.$emit('icon-right-click', event)
