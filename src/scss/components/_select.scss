@@ -20,6 +20,12 @@
             font-style: normal;
             padding: 0.25em 0;
         }
+
+        &[disabled] {
+            // Chrome add `opacity: 0.7` on disabled select, but not on disabled input fields.
+            // every disabled fields now have the same look.
+            opacity: 1;
+        }
     }
     &.is-empty select {
         color: rgba($grey, 0.7);
