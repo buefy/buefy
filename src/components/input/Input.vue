@@ -87,7 +87,8 @@ export default {
             default: ''
         },
         iconRight: String,
-        iconRightClickable: Boolean
+        iconRightClickable: Boolean,
+        iconSize: String
     },
     data() {
         return {

@@ -1023,6 +1023,10 @@
     "description": "Make the icon right clickable",
     "type": "boolean"
   },
+  "b-input/icon-size": {
+    "description": "Size of the icon, optional",
+    "type": "string"
+  },
   "b-input/maxlength": {
     "description": "Same as native maxlength, plus character counter",
     "type": "string|number"

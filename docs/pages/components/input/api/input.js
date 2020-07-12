@@ -79,6 +79,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>icon-size</code>',
+                description: 'Size of the icon, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
                 name: '<code>maxlength</code>',
                 description: 'Same as native <code>maxlength</code>, plus character counter',
                 type: 'String, Number',
