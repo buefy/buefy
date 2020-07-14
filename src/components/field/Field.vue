@@ -1,5 +1,5 @@
 <template>
-    <div class="field" :class="[rootClasses, fieldType()]">
+    <div class="field" :class="rootClasses">
         <div
             v-if="horizontal"
             class="field-label"
@@ -29,6 +29,9 @@
             :type="newType">
             <slot/>
         </b-field-body>
+        <div v-else-if="grouped || hasAddons()" class="field-body">
+            <b-field :addons="false" :class="innerFieldClasses"><slot/></b-field>
+        </div>
         <template v-else>
             <slot/>
         </template>
@@ -87,9 +90,8 @@ export default {
     },
     computed: {
         rootClasses() {
-            return [this.newPosition, {
+            return [{
                 'is-expanded': this.expanded,
-                'is-grouped-multiline': this.groupMultiline,
                 'is-horizontal': this.horizontal,
                 'is-floating-in-label': this.hasLabel && !this.horizontal &&
                     this.labelPosition === 'inside',
@@ -97,6 +99,15 @@ export default {
                     this.labelPosition === 'on-border'
             },
             this.numberInputClasses]
+        },
+        innerFieldClasses() {
+            return [
+                this.fieldType(),
+                this.newPosition,
+                {
+                    'is-grouped-multiline': this.groupMultiline
+                }
+            ]
         },
         /**
         * Correct Bulma class for the side of the addon or group.
@@ -196,18 +207,18 @@ export default {
         */
         fieldType() {
             if (this.grouped) return 'is-grouped'
-
+            if (this.hasAddons()) return 'has-addons'
+        },
+        hasAddons() {
             let renderedNode = 0
             if (this.$slots.default) {
                 renderedNode = this.$slots.default.reduce((i, node) => node.tag ? i + 1 : i, 0)
             }
-            if (
+            return (
                 renderedNode > 1 &&
                 this.addons &&
                 !this.horizontal
-            ) {
-                return 'has-addons'
-            }
+            )
         }
     },
     mounted() {

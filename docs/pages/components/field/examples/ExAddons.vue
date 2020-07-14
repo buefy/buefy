@@ -1,6 +1,6 @@
 <template>
     <section>
-        <b-field>
+        <b-field message="What do you want to search?">
             <b-input placeholder="Search..."
                 type="search"
                 icon="magnify">
@@ -10,7 +10,7 @@
             </p>
         </b-field>
 
-        <b-field>
+        <b-field message="What a beautiful email!!">
             <b-input placeholder="This is expanded" expanded></b-input>
             <p class="control">
                 <span class="button is-static">@gmail.com</span>
