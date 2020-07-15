@@ -296,10 +296,10 @@ export default {
 
         getNormalizedTagText(tag) {
             if (typeof tag === 'object') {
-                return getValueByPath(tag, this.field)
+                tag = getValueByPath(tag, this.field)
             }
 
-            return tag
+            return `${tag}`
         },
 
         customOnBlur(event) {
