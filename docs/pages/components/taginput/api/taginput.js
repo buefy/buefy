@@ -124,7 +124,7 @@ export default [
                 description: 'Array of key codes which will add a tag when typing (default comma, enter and tab)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[13, 188, 9]</code>'
+                default: '<code>[13, 188]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',
