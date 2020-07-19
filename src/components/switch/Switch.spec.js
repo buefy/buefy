@@ -29,10 +29,11 @@ describe('BSwitch', () => {
     })
 
     it('emit input event when computedValue is set', () => {
+        const originalValue = wrapper.vm.computedValue
         const newValue = 'switch value'
         wrapper.vm.computedValue = newValue
         const valueEmitted = wrapper.emitted()['input'][0]
-        expect(wrapper.vm.newValue).toBe(newValue)
+        expect(wrapper.vm.computedValue).toBe(originalValue)
         expect(valueEmitted).toContainEqual(newValue)
     })
 
