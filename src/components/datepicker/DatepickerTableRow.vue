@@ -83,13 +83,13 @@ export default {
         day: {
             handler(day) {
                 const refName = `day-${day}`
-                if (this.$refs[refName] && this.$refs[refName].length > 0) {
-                    this.$nextTick(() => {
+                this.$nextTick(() => {
+                    if (this.$refs[refName] && this.$refs[refName].length > 0) {
                         if (this.$refs[refName][0]) {
                             this.$refs[refName][0].focus()
                         }
-                    }) // $nextTick needed when month is changed
-                }
+                    }
+                }) // $nextTick needed when month is changed
             },
             immediate: true
         }
@@ -329,6 +329,7 @@ export default {
         changeFocus(day, inc) {
             const nextDay = day
             nextDay.setDate(day.getDate() + inc)
+            console.log('changeFocus', inc, nextDay)
             this.$emit('change-focus', nextDay)
         }
     }
