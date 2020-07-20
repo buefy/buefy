@@ -329,7 +329,6 @@ export default {
         changeFocus(day, inc) {
             const nextDay = day
             nextDay.setDate(day.getDate() + inc)
-            console.log('changeFocus', inc, nextDay)
             this.$emit('change-focus', nextDay)
         }
     }
