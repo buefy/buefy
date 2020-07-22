@@ -52,7 +52,7 @@ export default {
     },
     props: {
         active: Boolean,
-        component: [Object, Function],
+        component: [Object, Function, String],
         content: String,
         programmatic: Boolean,
         props: Object,
