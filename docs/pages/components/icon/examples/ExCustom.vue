@@ -1,94 +1,184 @@
 <template>
     <section>
         <div class="block">
-            <b-icon
-                pack="ionicons"
-                icon="person"
-                size="is-small">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="home"
-                size="is-small">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="apps"
-                size="is-small">
-            </b-icon>
+            <p>
+                <a href="https://ionicons.com" target="_blank">ionicons</a>
+            </p>
+            <div class="block">
+                <b-icon
+                    pack="ionicons"
+                    icon="person"
+                    size="is-small">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="home"
+                    size="is-small">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="apps"
+                    size="is-small">
+                </b-icon>
+            </div>
+            <div class="block">
+                <b-icon
+                    pack="ionicons"
+                    icon="person">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="home">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="apps">
+                </b-icon>
+            </div>
+            <div class="block">
+                <b-icon
+                    pack="ionicons"
+                    icon="person"
+                    size="is-medium">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="home"
+                    size="is-medium">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="apps"
+                    size="is-medium">
+                </b-icon>
+            </div>
+            <div class="block">
+                <b-icon
+                    pack="ionicons"
+                    icon="person"
+                    size="is-large"
+                    type="is-success">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="home"
+                    size="is-large"
+                    type="is-info">
+                </b-icon>
+                <b-icon
+                    pack="ionicons"
+                    icon="apps"
+                    size="is-large"
+                    type="is-primary">
+                </b-icon>
+            </div>
+
+            <button class="button is-dark">
+                <b-icon pack="ionicons" icon="checkmark"></b-icon>
+                <span>Finish</span>
+            </button>
+            <button class="button is-warning">
+                <b-icon pack="ionicons" icon="checkmark"></b-icon>
+                <span>Finish</span>
+            </button>
+            <button class="button is-warning">
+                <b-icon
+                    pack="ionicons"
+                    icon="refresh">
+                </b-icon>
+                <span>Refresh</span>
+            </button>
         </div>
 
         <div class="block">
-            <b-icon
-                pack="ionicons"
-                icon="person">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="home">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="apps">
-            </b-icon>
+            <p>
+                <a href="https://iconscout.com/unicons" target="_blank">unicons</a>
+            </p>
+            <div class="block">
+                <b-icon
+                    pack="uil"
+                    icon="user"
+                    size="is-small">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="home"
+                    size="is-small">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="apps"
+                    size="is-small">
+                </b-icon>
+            </div>
+            <div class="block">
+                <b-icon
+                    pack="uil"
+                    icon="user">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="home">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="apps">
+                </b-icon>
+            </div>
+            <div class="block">
+                <b-icon
+                    pack="uil"
+                    icon="user"
+                    size="is-medium">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="home"
+                    size="is-medium">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="apps"
+                    size="is-medium">
+                </b-icon>
+            </div>
+            <div class="block">
+                <b-icon
+                    pack="uil"
+                    icon="user"
+                    size="is-large"
+                    type="is-success">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="home"
+                    size="is-large"
+                    type="is-info">
+                </b-icon>
+                <b-icon
+                    pack="uil"
+                    icon="apps"
+                    size="is-large"
+                    type="is-primary">
+                </b-icon>
+            </div>
+
+            <button class="button is-dark">
+                <b-icon pack="uil" icon="check"></b-icon>
+                <span>Finish</span>
+            </button>
+            <button class="button is-warning">
+                <b-icon pack="uil" icon="check"></b-icon>
+                <span>Finish</span>
+            </button>
+            <button class="button is-warning">
+                <b-icon
+                    pack="uil"
+                    icon="refresh">
+                </b-icon>
+                <span>Refresh</span>
+            </button>
         </div>
-
-        <div class="block">
-            <b-icon
-                pack="ionicons"
-                icon="person"
-                size="is-medium">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="home"
-                size="is-medium">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="apps"
-                size="is-medium">
-            </b-icon>
-        </div>
-
-        <div class="block">
-            <b-icon
-                pack="ionicons"
-                icon="person"
-                size="is-large"
-                type="is-success">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="home"
-                size="is-large"
-                type="is-info">
-            </b-icon>
-            <b-icon
-                pack="ionicons"
-                icon="apps"
-                size="is-large"
-                type="is-primary">
-            </b-icon>
-        </div>
-
-        <button class="button is-dark">
-            <b-icon pack="ionicons" icon="checkmark"></b-icon>
-            <span>Finish</span>
-        </button>
-
-        <button class="button is-warning">
-            <b-icon pack="ionicons" icon="checkmark"></b-icon>
-            <span>Finish</span>
-        </button>
-
-        <button class="button is-warning">
-            <b-icon
-                pack="ionicons"
-                icon="refresh">
-            </b-icon>
-            <span>Refresh</span>
-        </button>
 
         <div class="block">
             <p>
@@ -155,6 +245,30 @@
                     'menu-down': 'arrow-dropdown',
                     'menu-up': 'arrow-dropup'
                 }
+            },
+            'uil': {
+                sizes: {
+                    'default': 'is-size-5',
+                    'is-small': '',
+                    'is-medium': 'is-size-3',
+                    'is-large': 'is-size-1'
+                },
+                iconPrefix: 'uil-',
+                internalIcons: {
+                    'check': 'check',
+                    'information': 'information',
+                    'check-circle': 'checkmark-circle',
+                    'alert': 'exclamation',
+                    'alert-circle': 'exclamation-circle',
+                    'arrow-up': 'arrow-up',
+                    'chevron-right': 'angle-right',
+                    'chevron-left': 'angle-left',
+                    'chevron-down': 'arrow-down',
+                    'eye': 'eye',
+                    'eye-off': 'eye-slash',
+                    'menu-down': 'angle-down',
+                    'menu-up': 'angle-up'
+                }
             }
         }
     }
@@ -167,4 +281,5 @@
 
 <style scoped>
     @import "https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css";
+    @import "https://unicons.iconscout.com/release/v2.1.11/css/unicons.css";
 </style>
