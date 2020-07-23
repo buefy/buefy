@@ -37,8 +37,7 @@
                 <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.3</span>
             </div>
-            <p>You can also add your own custom font
-            (<a href="https://ionicons.com" target="_blank">Ionicons</a> is used in this example).</p>
+            <p>You can also add your own custom font.</p>
         </Example>
 
         <ApiView :data="api"/>
