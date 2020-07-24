@@ -67,6 +67,20 @@ export default [
                 values: '—',
                 default: '—'
             }
+        ],
+        methods: [
+            {
+                name: '<code>open</code>',
+                description: 'Opens the snackbar',
+                parameters: 'String, Object',
+                return: 'Reference to the opened Snackbar'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Close the snackbar',
+                parameters: '—',
+                return: '—'
+            }
         ]
     }
 ]
