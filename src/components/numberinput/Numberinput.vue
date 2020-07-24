@@ -6,7 +6,8 @@
             @mouseup="onStopLongPress(false)"
             @mouseleave="onStopLongPress(false)"
             @touchend="onStopLongPress(false)"
-            @touchcancel="onStopLongPress(false)">
+            @touchcancel="onStopLongPress(false)"
+        >
             <button
                 type="button"
                 class="button"
@@ -14,12 +15,13 @@
                 :disabled="disabled || disabledMin"
                 @mousedown="onStartLongPress($event, false)"
                 @touchstart.prevent="onStartLongPress($event, false)"
-                @click="onControlClick($event, false)">
+                @click="onControlClick($event, false)"
+            >
                 <b-icon
                     icon="minus"
                     both
                     :pack="iconPack"
-                    :size="iconSize"/>
+                    :size="iconSize" />
             </button>
         </p>
         <b-input
@@ -41,14 +43,16 @@
             :expanded="expanded"
             :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event)" />
+            @blur="$emit('blur', $event)"
+        />
         <p
             v-if="controls"
             class="control"
             @mouseup="onStopLongPress(true)"
             @mouseleave="onStopLongPress(true)"
             @touchend="onStopLongPress(true)"
-            @touchcancel="onStopLongPress(true)">
+            @touchcancel="onStopLongPress(true)"
+        >
             <button
                 type="button"
                 class="button"
@@ -56,12 +60,13 @@
                 :disabled="disabled || disabledMax"
                 @mousedown="onStartLongPress($event, true)"
                 @touchstart.prevent="onStartLongPress($event, true)"
-                @click="onControlClick($event, true)">
+                @click="onControlClick($event, true)"
+            >
                 <b-icon
                     icon="plus"
                     both
                     :pack="iconPack"
-                    :size="iconSize"/>
+                    :size="iconSize" />
             </button>
         </p>
     </div>
@@ -134,29 +139,24 @@ export default {
             ]
         },
         buttonClasses() {
-            return [
-                this.type,
-                this.size,
-                { 'is-rounded': this.controlsRounded }
-            ]
+            return [this.type, this.size, { 'is-rounded': this.controlsRounded }]
         },
         minNumber() {
-            return typeof this.min === 'string'
-                ? parseFloat(this.min) : this.min
+            return typeof this.min === 'string' ? parseFloat(this.min) : this.min
         },
         maxNumber() {
-            return typeof this.max === 'string'
-                ? parseFloat(this.max) : this.max
+            return typeof this.max === 'string' ? parseFloat(this.max) : this.max
         },
         stepNumber() {
             return typeof this.newStep === 'string'
-                ? parseFloat(this.newStep) : this.newStep
+                ? parseFloat(this.newStep)
+                : this.newStep
         },
         disabledMin() {
-            return (this.computedValue - this.stepNumber) < this.minNumber
+            return this.computedValue - this.stepNumber < this.minNumber
         },
         disabledMax() {
-            return (this.computedValue + this.stepNumber) > this.maxNumber
+            return this.computedValue + this.stepNumber > this.maxNumber
         },
         stepDecimals() {
             const step = this.stepNumber.toString()
@@ -167,26 +167,36 @@ export default {
             return 0
         }
     },
+
     watch: {
-        /**
-        * When v-model is changed:
-        *   1. Set internal value.
-        */
+    /**
+     * When v-model is changed:
+     *   1. Set internal value.
+     */
         value(value) {
             this.newValue = value
+        },
+        step: {
+            handler(val) {
+                this.newStep = val
+            }
         }
     },
     methods: {
         decrement() {
-            if (typeof this.minNumber === 'undefined' ||
-            (this.computedValue - this.stepNumber) >= this.minNumber) {
+            if (
+                typeof this.minNumber === 'undefined' ||
+        this.computedValue - this.stepNumber >= this.minNumber
+            ) {
                 const value = this.computedValue - this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
         increment() {
-            if (typeof this.maxNumber === 'undefined' ||
-            (this.computedValue + this.stepNumber) <= this.maxNumber) {
+            if (
+                typeof this.maxNumber === 'undefined' ||
+        this.computedValue + this.stepNumber <= this.maxNumber
+            ) {
                 const value = this.computedValue + this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
