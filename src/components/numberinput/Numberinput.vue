@@ -175,10 +175,8 @@ export default {
         value(value) {
             this.newValue = value
         },
-        step: {
-            handler(val) {
-                this.newStep = val
-            }
+        step(value) {
+            this.newStep = value
         }
     },
     methods: {
