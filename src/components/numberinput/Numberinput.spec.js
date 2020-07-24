@@ -93,6 +93,17 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBe(max)
         })
 
+        it('can increment / decrement with a step', () => {
+            const start = 5
+            const step = 3.5
+            wrapper.vm.computedValue = start
+            wrapper.setProps({ step })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - step)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - (step * 2))
+        })
+
         it('manages empty value', () => {
             wrapper.vm.computedValue = ''
             expect(wrapper.vm.computedValue).toBeNull()

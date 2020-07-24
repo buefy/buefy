@@ -174,6 +174,9 @@ export default {
         */
         value(value) {
             this.newValue = value
+        },
+        step(value) {
+            this.newStep = value
         }
     },
     methods: {
