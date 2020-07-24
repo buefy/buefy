@@ -6,7 +6,7 @@
             </button>
 
             <button class="button is-medium is-warning" @click="warning">
-                {{ snackbarRef ? 'Close' : 'Launch' }} Warning snackbar (custom)
+                Launch snackbar (custom)
             </button>
 
             <button class="button is-medium is-danger" @click="danger">
@@ -18,35 +18,24 @@
 
 <script>
     export default {
-        data() {
-            return {
-                snackbarRef: null,
-            }
-        },
         methods: {
             snackbar() {
                 this.$buefy.snackbar.open(`Default, positioned bottom-right with a green 'OK' button`)
             },
             warning() {
-                if (this.snackbarRef) {
-                    this.snackbarRef.close()
-                    this.snackbarRef = null
-                } else {
-                    this.snackbarRef = this.$buefy.snackbar.open({
-                        message: 'Yellow button and positioned on top, click to close',
-                        type: 'is-warning',
-                        position: 'is-top',
-                        actionText: 'Retry',
-                        indefinite: true,
-                        onAction: () => {
-                            this.snackbarRef = null
-                            this.$buefy.toast.open({
-                                message: 'Action pressed',
-                                queue: false
-                            })
-                        }
-                    })
-                }
+                this.$buefy.snackbar.open({
+                    message: 'Yellow button and positioned on top, click to close',
+                    type: 'is-warning',
+                    position: 'is-top',
+                    actionText: 'Retry',
+                    indefinite: true,
+                    onAction: () => {
+                        this.$buefy.toast.open({
+                            message: 'Action pressed',
+                            queue: false
+                        })
+                    }
+                })
             },
             danger() {
                 this.$buefy.snackbar.open({
