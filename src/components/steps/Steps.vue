@@ -68,11 +68,16 @@
 </template>
 
 <script>
+import Icon from '../icon/Icon'
+
 import TabbedMixin from '../../utils/TabbedMixin.js'
 import config from '../../utils/config'
 
 export default {
     name: 'BSteps',
+    components: {
+        [Icon.name]: Icon
+    },
     mixins: [TabbedMixin('step')],
     props: {
         iconPack: String,
