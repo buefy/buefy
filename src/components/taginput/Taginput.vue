@@ -273,14 +273,6 @@ export default {
                         return
                     }
                 }
-                // Remove the tag input previously added (if not allowDuplicates).
-                if (!this.allowDuplicates) {
-                    const index = this.tags.indexOf(tagToAdd)
-                    if (index >= 0) {
-                        this.tags.splice(index, 1)
-                        return
-                    }
-                }
                 // Add the tag input if it is not blank
                 // or previously added (if not allowDuplicates).
                 const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
