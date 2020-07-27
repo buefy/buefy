@@ -6,7 +6,8 @@
             @mouseup="onStopLongPress(false)"
             @mouseleave="onStopLongPress(false)"
             @touchend="onStopLongPress(false)"
-            @touchcancel="onStopLongPress(false)">
+            @touchcancel="onStopLongPress(false)"
+        >
             <button
                 type="button"
                 class="button"
@@ -14,12 +15,13 @@
                 :disabled="disabled || disabledMin"
                 @mousedown="onStartLongPress($event, false)"
                 @touchstart.prevent="onStartLongPress($event, false)"
-                @click="onControlClick($event, false)">
+                @click="onControlClick($event, false)"
+            >
                 <b-icon
                     icon="minus"
                     both
                     :pack="iconPack"
-                    :size="iconSize"/>
+                    :size="iconSize" />
             </button>
         </p>
         <b-input
@@ -39,16 +41,19 @@
             :icon-pack="iconPack"
             :autocomplete="autocomplete"
             :expanded="expanded"
+            :placeholder="placeholder"
             :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event)" />
+            @blur="$emit('blur', $event)"
+        />
         <p
             v-if="controls"
             class="control"
             @mouseup="onStopLongPress(true)"
             @mouseleave="onStopLongPress(true)"
             @touchend="onStopLongPress(true)"
-            @touchcancel="onStopLongPress(true)">
+            @touchcancel="onStopLongPress(true)"
+        >
             <button
                 type="button"
                 class="button"
@@ -56,12 +61,13 @@
                 :disabled="disabled || disabledMax"
                 @mousedown="onStartLongPress($event, true)"
                 @touchstart.prevent="onStartLongPress($event, true)"
-                @click="onControlClick($event, true)">
+                @click="onControlClick($event, true)"
+            >
                 <b-icon
                     icon="plus"
                     both
                     :pack="iconPack"
-                    :size="iconSize"/>
+                    :size="iconSize" />
             </button>
         </p>
     </div>
@@ -82,7 +88,9 @@ export default {
     inheritAttrs: false,
     props: {
         value: Number,
-        min: [Number, String],
+        min: {
+            type: [Number, String]
+        },
         max: [Number, String],
         step: [Number, String],
         disabled: Boolean,
@@ -102,11 +110,12 @@ export default {
             type: Boolean,
             default: false
         },
-        controlsPosition: String
+        controlsPosition: String,
+        placeholder: [Number, String]
     },
     data() {
         return {
-            newValue: !isNaN(this.value) ? this.value : parseFloat(this.min) || 0,
+            newValue: this.value,
             newStep: this.step || 1,
             _elementRef: 'input'
         }
@@ -118,8 +127,8 @@ export default {
             },
             set(value) {
                 let newValue = value
-                if (value === '') {
-                    newValue = parseFloat(this.min) || null
+                if (value === '' || value === undefined || value === null) {
+                    newValue = this.minNumber || null
                 }
                 this.newValue = newValue
                 this.$emit('input', newValue)
@@ -134,29 +143,22 @@ export default {
             ]
         },
         buttonClasses() {
-            return [
-                this.type,
-                this.size,
-                { 'is-rounded': this.controlsRounded }
-            ]
+            return [this.type, this.size, { 'is-rounded': this.controlsRounded }]
         },
         minNumber() {
-            return typeof this.min === 'string'
-                ? parseFloat(this.min) : this.min
+            return typeof this.min === 'string' ? parseFloat(this.min) : this.min
         },
         maxNumber() {
-            return typeof this.max === 'string'
-                ? parseFloat(this.max) : this.max
+            return typeof this.max === 'string' ? parseFloat(this.max) : this.max
         },
         stepNumber() {
-            return typeof this.newStep === 'string'
-                ? parseFloat(this.newStep) : this.newStep
+            return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
         },
         disabledMin() {
-            return (this.computedValue - this.stepNumber) < this.minNumber
+            return this.computedValue - this.stepNumber < this.minNumber
         },
         disabledMax() {
-            return (this.computedValue + this.stepNumber) > this.maxNumber
+            return this.computedValue + this.stepNumber > this.maxNumber
         },
         stepDecimals() {
             const step = this.stepNumber.toString()
@@ -168,12 +170,15 @@ export default {
         }
     },
     watch: {
-        /**
-        * When v-model is changed:
-        *   1. Set internal value.
-        */
-        value(value) {
-            this.newValue = value
+    /**
+     * When v-model is changed:
+     *   1. Set internal value.
+     */
+        value: {
+            immediate: true,
+            handler(value) {
+                this.newValue = value
+            }
         },
         step(value) {
             this.newStep = value
@@ -181,15 +186,27 @@ export default {
     },
     methods: {
         decrement() {
-            if (typeof this.minNumber === 'undefined' ||
-            (this.computedValue - this.stepNumber) >= this.minNumber) {
+            if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
+                if (!this.computedValue) {
+                    if (this.maxNumber) {
+                        this.computedValue = this.maxNumber
+                        return
+                    }
+                    this.computedValue = 0
+                }
                 const value = this.computedValue - this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
         increment() {
-            if (typeof this.maxNumber === 'undefined' ||
-            (this.computedValue + this.stepNumber) <= this.maxNumber) {
+            if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
+                if (!this.computedValue) {
+                    if (this.minNumber) {
+                        this.computedValue = this.minNumber
+                        return
+                    }
+                    this.computedValue = 0
+                }
                 const value = this.computedValue + this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
