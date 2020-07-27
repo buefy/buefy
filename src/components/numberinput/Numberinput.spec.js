@@ -75,6 +75,18 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.newValue).toBe(value)
         })
 
+        it('allows a placeholder', () => {
+            const placeholder = 90
+            const value = 10
+
+            wrapper.setProps({ placeholder })
+            expect(wrapper.vm.placeholder).toBe(placeholder)
+
+            // Only user input should set value, i.e. placeholder shouldn't set value
+            wrapper.setProps({ value })
+            expect(wrapper.vm.newValue).toBe(value)
+        })
+
         it('can increment / decrement', () => {
             const min = 5
             const max = 6
@@ -96,8 +108,9 @@ describe('BNumberinput', () => {
         it('can increment / decrement with a step', () => {
             const start = 5
             const step = 3.5
+            const min = -5
             wrapper.vm.computedValue = start
-            wrapper.setProps({ step })
+            wrapper.setProps({ step, min })
             wrapper.vm.decrement()
             expect(wrapper.vm.computedValue).toBe(start - step)
             wrapper.vm.decrement()
