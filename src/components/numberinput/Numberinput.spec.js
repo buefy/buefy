@@ -29,11 +29,6 @@ describe('BNumberinput', () => {
             expect(wrapper.contains('button')).toBeTruthy()
             expect(wrapper.classes()).toContain('has-addons')
         })
-
-        it('default value is 0', () => {
-            const input = wrapper.find('input')
-            expect(input.element.value).toBe('0')
-        })
     })
 
     describe('Rendered (shallow)', () => {
