@@ -87,6 +87,32 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.newValue).toBe(value)
         })
 
+        it('expects placeholder to not override v-model value', () => {
+            const placeholder = 90
+            const value = 10
+            const newValue = 20
+
+            wrapper.setProps({ placeholder, value })
+            expect(wrapper.vm.placeholder).toBe(placeholder)
+            wrapper.setProps({ value: newValue })
+
+            // Only user input should set value, i.e. placeholder shouldn't set value
+            expect(wrapper.vm.newValue).toBe(newValue)
+        })
+
+        it('allows a string placeholder value', () => {
+            const placeholder = '90'
+            const newValue = 20
+
+            wrapper.setProps({ placeholder })
+            expect(wrapper.vm.placeholder).toBe(placeholder)
+            wrapper.setProps({ value: newValue })
+            expect(wrapper.vm.value).toBe(20)
+            expect(wrapper.vm.computedValue).toBe(20)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(21)
+        })
+
         it('can increment / decrement', () => {
             const min = 5
             const max = 6

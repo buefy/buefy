@@ -5,11 +5,7 @@
     </b-field>
 
     <b-field label="Input with placeholder and min">
-      <b-numberinput
-        v-model="numberPlaceholder"
-        :placeholder="99"
-        :min="95"
-      ></b-numberinput>
+      <b-numberinput v-model="numberPlaceholder" placeholder="99" :min="95"></b-numberinput>
     </b-field>
 
     <b-field label="Input readonly">
@@ -43,8 +39,8 @@ export default {
   data() {
     return {
       number: 10,
-      numberPlaceholder: undefined,
-    };
-  },
-};
+      numberPlaceholder: undefined
+    }
+  }
+}
 </script>

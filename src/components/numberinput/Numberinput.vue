@@ -88,8 +88,7 @@ export default {
     props: {
         value: Number,
         min: {
-            type: [Number, String],
-            default: 0
+            type: [Number, String]
         },
         max: [Number, String],
         step: [Number, String],
@@ -111,11 +110,11 @@ export default {
             default: false
         },
         controlsPosition: String,
-        placeholder: Number
+        placeholder: [Number, String]
     },
     data() {
         return {
-            newValue: this.value || this.placeholder || this.min,
+            newValue: this.value,
             newStep: this.step || 1,
             _elementRef: 'input'
         }
@@ -128,7 +127,7 @@ export default {
             set(value) {
                 let newValue = value
                 if (value === '') {
-                    newValue = parseFloat(this.min) || null
+                    newValue = this.minNumber || null
                 }
                 this.newValue = newValue
                 this.$emit('input', newValue)
@@ -151,10 +150,11 @@ export default {
         maxNumber() {
             return typeof this.max === 'string' ? parseFloat(this.max) : this.max
         },
+        placeholderNumber() {
+            return typeof this.placeholder === 'string' ? parseFloat(this.placeholder) : this.placeholder
+        },
         stepNumber() {
-            return typeof this.newStep === 'string'
-                ? parseFloat(this.newStep)
-                : this.newStep
+            return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
         },
         disabledMin() {
             return this.computedValue - this.stepNumber < this.minNumber
@@ -176,8 +176,11 @@ export default {
      * When v-model is changed:
      *   1. Set internal value.
      */
-        value(value) {
-            this.newValue = value
+        value: {
+            immediate: true,
+            handler(value) {
+                this.newValue = value || this.placeholderNumber || 0
+            }
         },
         step(value) {
             this.newStep = value
@@ -185,19 +188,13 @@ export default {
     },
     methods: {
         decrement() {
-            if (
-                typeof this.minNumber === 'undefined' ||
-        this.computedValue - this.stepNumber >= this.minNumber
-            ) {
+            if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
                 const value = this.computedValue - this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
         increment() {
-            if (
-                typeof this.maxNumber === 'undefined' ||
-        this.computedValue + this.stepNumber <= this.maxNumber
-            ) {
+            if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
                 const value = this.computedValue + this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
