@@ -58,7 +58,7 @@ export default [
                 name: '<code>mobile</code>',
                 description: 'Custom layout on mobile',
                 type: 'String',
-                values: '<code>fullwidth</code>,<code>reduce</code>,<code>hidden</code>',
+                values: '<code>fullwidth</code>,<code>reduce</code>,<code>hide</code>',
                 default: '—'
             },
             {
