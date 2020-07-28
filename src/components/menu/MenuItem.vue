@@ -13,7 +13,7 @@
                 v-if="icon"
                 :icon="icon"
                 :pack="iconPack"
-                size="is-small"
+                :size="size"
             />
             <span v-if="label">{{ label }}</span>
             <slot
@@ -65,6 +65,10 @@ export default {
         ariaRole: {
             type: String,
             default: ''
+        },
+        size: {
+            type: String,
+            default: 'is-small'
         }
     },
     data() {
