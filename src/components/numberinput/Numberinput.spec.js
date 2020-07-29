@@ -34,11 +34,6 @@ describe('BNumberinput', () => {
             expect(wrapper.classes()).toContain('has-addons')
         })
 
-        it('default value is 0', () => {
-            const input = wrapper.find('input')
-            expect(input.element.value).toBe('0')
-        })
-
         it('increments/decrements on long pressing exponentially', async () => {
             wrapper.setProps({exponential: true, value: 1, step: 1})
 
