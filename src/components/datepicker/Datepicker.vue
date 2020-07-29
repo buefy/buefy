@@ -21,7 +21,7 @@
                 ref="input"
                 slot="trigger"
                 autocomplete="off"
-                :value="formatValue(computedValue)"
+                :value="formattedValue"
                 :placeholder="placeholder"
                 :size="size"
                 :icon="icon"
@@ -121,8 +121,8 @@
                         :class="{'content-horizonal-timepicker': horizontalTimePicker}">
                         <b-datepicker-table
                             v-model="computedValue"
-                            :day-names="dayNames"
-                            :month-names="monthNames"
+                            :day-names="newDayNames"
+                            :month-names="newMonthNames"
                             :first-day-of-week="firstDayOfWeek"
                             :rules-for-first-week="rulesForFirstWeek"
                             :min-date="minDate"
@@ -148,7 +148,7 @@
                     <div v-else>
                         <b-datepicker-month
                             v-model="computedValue"
-                            :month-names="monthNames"
+                            :month-names="newMonthNames"
                             :min-date="minDate"
                             :max-date="maxDate"
                             :focused.sync="focusedDateData"
@@ -200,7 +200,7 @@
 
 <script>
 import FormElementMixin from '../../utils/FormElementMixin'
-import { isMobile } from '../../utils/helpers'
+import { isMobile, getMonthNames, getWeekdayNames, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
 import Dropdown from '../dropdown/Dropdown'
@@ -217,13 +217,37 @@ const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
     const dates = targetDates.map((date) => {
         const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
-        return !vm.isTypeMonth ? d.toLocaleDateString()
-            : d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit' })
+        return !vm.isTypeMonth ? vm.dtf.format(d) : vm.dtfMonth.format(d)
     })
     return !vm.multiple ? dates.join(' - ') : dates.join(', ')
 }
 
 const defaultDateParser = (date, vm) => {
+    if (vm.dtf.formatToParts && typeof vm.dtf.formatToParts === 'function') {
+        const formatRegex = (vm.isTypeMonth ? vm.dtfMonth : vm.dtf)
+            .formatToParts(new Date(2000, 11, 25)).map((part) => {
+                if (part.type === 'literal') {
+                    return part.value
+                }
+                return `((?!=<${part.type}>)\\d+)`
+            }).join('')
+        const dateGroups = matchWithGroups(formatRegex, date)
+
+        // We do a simple validation for the group.
+        // If it is not valid, it will fallback to Date.parse below
+        if (
+            dateGroups.year &&
+            dateGroups.year.length === 4 &&
+            dateGroups.month &&
+            dateGroups.month <= 12
+        ) {
+            if (vm.isTypeMonth) return new Date(dateGroups.year, dateGroups.month - 1)
+            else if (dateGroups.day && dateGroups.day <= 31) {
+                return new Date(dateGroups.year, dateGroups.month - 1, dateGroups.day, 12)
+            }
+        }
+    }
+    // Fallback if formatToParts is not supported or if we were not able to parse a valid date
     if (!vm.isTypeMonth) return new Date(Date.parse(date))
     if (date) {
         const s = date.split('/')
@@ -257,42 +281,19 @@ export default {
         dayNames: {
             type: Array,
             default: () => {
-                if (Array.isArray(config.defaultDayNames)) {
-                    return config.defaultDayNames
-                } else {
-                    return [
-                        'Su',
-                        'M',
-                        'Tu',
-                        'W',
-                        'Th',
-                        'F',
-                        'S'
-                    ]
+                if (!Array.isArray(config.defaultDayNames)) {
+                    return undefined
                 }
+                return config.defaultDayNames
             }
         },
         monthNames: {
             type: Array,
             default: () => {
-                if (Array.isArray(config.defaultMonthNames)) {
-                    return config.defaultMonthNames
-                } else {
-                    return [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
-                        'June',
-                        'July',
-                        'August',
-                        'September',
-                        'October',
-                        'November',
-                        'December'
-                    ]
+                if (!Array.isArray(config.defaultMonthNames)) {
+                    return undefined
                 }
+                return config.defaultMonthNames
             }
         },
         firstDayOfWeek: {
@@ -316,7 +317,7 @@ export default {
         unselectableDates: Array,
         unselectableDaysOfWeek: {
             type: Array,
-            default: () => { return config.defaultUnselectableDaysOfWeek }
+            default: () => config.defaultUnselectableDaysOfWeek
         },
         selectableDates: Array,
         dateFormatter: {
@@ -351,9 +352,7 @@ export default {
         },
         mobileNative: {
             type: Boolean,
-            default: () => {
-                return config.defaultDatepickerMobileNative
-            }
+            default: () => config.defaultDatepickerMobileNative
         },
         position: String,
         events: Array,
@@ -364,21 +363,15 @@ export default {
         openOnFocus: Boolean,
         iconPrev: {
             type: String,
-            default: () => {
-                return config.defaultIconPrev
-            }
+            default: () => config.defaultIconPrev
         },
         iconNext: {
             type: String,
-            default: () => {
-                return config.defaultIconNext
-            }
+            default: () => config.defaultIconNext
         },
         yearsRange: {
             type: Array,
-            default: () => {
-                return config.defaultDatepickerYearsRange
-            }
+            default: () => config.defaultDatepickerYearsRange
         },
         type: {
             type: String,
@@ -418,9 +411,7 @@ export default {
         },
         mobileModal: {
             type: Boolean,
-            default: () => {
-                return config.defaultDatepickerMobileModal
-            }
+            default: () => config.defaultDatepickerMobileModal
         },
         focusable: {
             type: Boolean,
@@ -428,9 +419,7 @@ export default {
         },
         trapFocus: {
             type: Boolean,
-            default: () => {
-                return config.defaultTrapFocus
-            }
+            default: () => config.defaultTrapFocus
         },
         appendToBody: Boolean,
         ariaNextLabel: String,
@@ -467,6 +456,37 @@ export default {
                 }
             }
         },
+        formattedValue() {
+            return this.formatValue(this.computedValue)
+        },
+        localeOptions() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: 'numeric',
+                month: 'numeric'
+            }).resolvedOptions()
+        },
+        dtf() {
+            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+        },
+        dtfMonth() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: this.localeOptions.year || 'numeric',
+                month: this.localeOptions.month || '2-digit',
+                timezome: 'UTC'
+            })
+        },
+        newMonthNames() {
+            if (Array.isArray(this.monthNames)) {
+                return this.monthNames
+            }
+            return getMonthNames(this.locale)
+        },
+        newDayNames() {
+            if (Array.isArray(this.dayNames)) {
+                return this.dayNames
+            }
+            return getWeekdayNames(this.locale, this.firstDayOfWeek)
+        },
         listOfMonths() {
             let minMonth = 0
             let maxMonth = 12
@@ -476,7 +496,7 @@ export default {
             if (this.maxDate && this.focusedDateData.year === this.maxDate.getFullYear()) {
                 maxMonth = this.maxDate.getMonth()
             }
-            return this.monthNames.map((name, index) => {
+            return this.newMonthNames.map((name, index) => {
                 return {
                     name: name,
                     index: index,
@@ -487,7 +507,7 @@ export default {
         /*
          * Returns an array of years for the year dropdown. If earliest/latest
          * dates are set by props, range of years will fall within those dates.
-        */
+         */
         listOfYears() {
             let latestYear = this.focusedDateData.year + this.yearsRange[1]
             if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
@@ -543,10 +563,10 @@ export default {
     },
     watch: {
         /**
-        * When v-model is changed:
-        *   1. Update internal value.
-        *   2. If it's invalid, validate again.
-        */
+         * When v-model is changed:
+         *   1. Update internal value.
+         *   2. If it's invalid, validate again.
+         */
         value(value) {
             this.updateInternalState(value)
             if (!this.multiple) this.togglePicker(false)
@@ -563,8 +583,8 @@ export default {
         },
 
         /*
-        * Emit input event on month and/or year change
-        */
+         * Emit input event on month and/or year change
+         */
         'focusedDateData.month'(value) {
             this.$emit('change-month', value)
         },
@@ -574,8 +594,8 @@ export default {
     },
     methods: {
         /*
-        * Parse string into date
-        */
+         * Parse string into date
+         */
         onChange(value) {
             const date = this.dateParser(value, this)
             if (date && (!isNaN(date) ||
@@ -589,8 +609,8 @@ export default {
         },
 
         /*
-        * Format date into string
-        */
+         * Format date into string
+         */
         formatValue(value) {
             if (Array.isArray(value)) {
                 const isArrayWithValidDates = Array.isArray(value) && value.every((v) => !isNaN(v))
@@ -600,9 +620,9 @@ export default {
         },
 
         /*
-        * Either decrement month by 1 if not January or decrement year by 1
-        * and set month to 11 (December) or decrement year when 'month'
-        */
+         * Either decrement month by 1 if not January or decrement year by 1
+         * and set month to 11 (December) or decrement year when 'month'
+         */
         prev() {
             if (this.disabled) return
 
@@ -619,9 +639,9 @@ export default {
         },
 
         /*
-        * Either increment month by 1 if not December or increment year by 1
-        * and set month to 0 (January) or increment year when 'month'
-        */
+         * Either increment month by 1 if not December or increment year by 1
+         * and set month to 0 (January) or increment year when 'month'
+         */
         next() {
             if (this.disabled) return
 
@@ -643,8 +663,8 @@ export default {
         },
 
         /*
-        * Format date into string 'YYYY-MM-DD'
-        */
+         * Format date into string 'YYYY-MM-DD'
+         */
         formatYYYYMMDD(value) {
             const date = new Date(value)
             if (value && !isNaN(date)) {
@@ -659,8 +679,8 @@ export default {
         },
 
         /*
-        * Format date into string 'YYYY-MM'
-        */
+         * Format date into string 'YYYY-MM'
+         */
         formatYYYYMM(value) {
             const date = new Date(value)
             if (value && !isNaN(date)) {
@@ -673,8 +693,8 @@ export default {
         },
 
         /*
-        * Parse date from string
-        */
+         * Parse date from string
+         */
         onChangeNativePicker(event) {
             const date = event.target.value
             const s = date ? date.split('-') : []
@@ -700,8 +720,8 @@ export default {
         },
 
         /*
-        * Toggle datepicker
-        */
+         * Toggle datepicker
+         */
         togglePicker(active) {
             if (this.$refs.dropdown) {
                 if (this.closeOnClick) {
@@ -713,8 +733,8 @@ export default {
         },
 
         /*
-        * Call default onFocus method and show datepicker
-        */
+         * Call default onFocus method and show datepicker
+         */
         handleOnFocus(event) {
             this.onFocus(event)
             if (this.openOnFocus) {
@@ -723,8 +743,8 @@ export default {
         },
 
         /*
-        * Toggle dropdown
-        */
+         * Toggle dropdown
+         */
         toggle() {
             if (this.mobileNative && this.isMobile) {
                 const input = this.$refs.input.$refs.input
@@ -736,8 +756,8 @@ export default {
         },
 
         /*
-        * Avoid dropdown toggle when is already visible
-        */
+         * Avoid dropdown toggle when is already visible
+         */
         onInputClick(event) {
             if (this.$refs.dropdown.isActive) {
                 event.stopPropagation()
@@ -747,9 +767,8 @@ export default {
         /**
          * Keypress event that is bound to the document.
          */
-        keyPress(event) {
-            // Esc key
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.togglePicker(false)
             }
         },

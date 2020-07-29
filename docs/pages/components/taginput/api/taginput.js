@@ -117,14 +117,14 @@ export default [
                 description: 'Allow removing last tag when pressing given keys, if input is empty',
                 type: 'Array',
                 values: '—',
-                default: '<code>[8]</code>'
+                default: '<code>["Backspace"]</code>'
             },
             {
-                name: '<code>confirm-key-codes</code>',
-                description: 'Array of key codes which will add a tag when typing (default comma, enter and tab)',
+                name: '<code>confirm-keys</code>',
+                description: 'Array of key (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma and enter)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[13, 188, 9]</code>'
+                default: '<code>[",", "Enter"]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',

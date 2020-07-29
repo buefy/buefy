@@ -22,41 +22,39 @@
             aria-page-label="Page"
             aria-current-label="Current page">
 
-            <template slot-scope="props">
-                <b-table-column field="id" label="ID" width="40" numeric>
-                    {{ props.row.id }}
-                </b-table-column>
+            <b-table-column field="id" label="ID" width="40" numeric v-slot="props">
+                {{ props.row.id }}
+            </b-table-column>
 
-                <b-table-column field="user.first_name" label="First Name" sortable>
-                    <template v-if="showDetailIcon">
+            <b-table-column field="user.first_name" label="First Name" sortable v-slot="props">
+                <template v-if="showDetailIcon">
+                    {{ props.row.user.first_name }}
+                </template>
+                <template v-else>
+                    <a @click="toggle(props.row)">
                         {{ props.row.user.first_name }}
-                    </template>
-                    <template v-else>
-                        <a @click="toggle(props.row)">
-                            {{ props.row.user.first_name }}
-                        </a>
-                    </template>
-                </b-table-column>
+                    </a>
+                </template>
+            </b-table-column>
 
-                <b-table-column field="user.last_name" label="Last Name" sortable>
-                    {{ props.row.user.last_name }}
-                </b-table-column>
+            <b-table-column field="user.last_name" label="Last Name" sortable v-slot="props">
+                {{ props.row.user.last_name }}
+            </b-table-column>
 
-                <b-table-column field="date" label="Date" sortable centered>
-                    <span class="tag is-success">
-                        {{ new Date(props.row.date).toLocaleDateString() }}
-                    </span>
-                </b-table-column>
+            <b-table-column field="date" label="Date" sortable centered v-slot="props">
+                <span class="tag is-success">
+                    {{ new Date(props.row.date).toLocaleDateString() }}
+                </span>
+            </b-table-column>
 
-                <b-table-column label="Gender">
-                    <span>
-                        <b-icon pack="fas"
-                            :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                        </b-icon>
-                        {{ props.row.gender }}
-                    </span>
-                </b-table-column>
-            </template>
+            <b-table-column label="Gender" v-slot="props">
+                <span>
+                    <b-icon pack="fas"
+                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                    </b-icon>
+                    {{ props.row.gender }}
+                </span>
+            </b-table-column>
 
             <template slot="detail" slot-scope="props">
                 <article class="media">

@@ -1,7 +1,7 @@
 <template>
-    <b-carousel :autoplay="false" indicator-custom :indicator-inside="false" :overlay="gallery">
+    <b-carousel :autoplay="false" indicator-custom :indicator-inside="false" :overlay="gallery" @click="switchGallery(true)">
         <b-carousel-item v-for="(item, i) in 20" :key="i">
-            <a @click="switchGallery(true)" class="image ">
+            <a class="image ">
                 <img :src="getImgUrl(i)">
             </a>
         </b-carousel-item>

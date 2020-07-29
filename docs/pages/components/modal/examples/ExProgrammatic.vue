@@ -21,6 +21,10 @@
                 <div class="modal-card" style="width: auto">
                     <header class="modal-card-head">
                         <p class="modal-card-title">Login</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="$emit('close')"/>
                     </header>
                     <section class="modal-card-body">
                         <b-field label="Email">
@@ -45,7 +49,7 @@
                         <b-checkbox>Remember me</b-checkbox>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button" type="button" @click="$parent.close()">Close</button>
+                        <button class="button" type="button" @click="$emit('close')">Close</button>
                         <button class="button is-primary">Login</button>
                     </footer>
                 </div>
@@ -56,11 +60,13 @@
     export default {
         methods: {
             imageModal() {
-                this.$buefy.modal.open(
-                    `<p class="image is-4by3">
-                        <img src="https://buefy.org/static/img/placeholder-1280x960.png">
-                    </p>`
-                )
+                const h = this.$createElement
+                const vnode = h('p', { class: "image is-4by3" }, [
+                    h('img', { attrs: { src: 'https://buefy.org/static/img/placeholder-1280x960.png' }})
+                ])
+                this.$buefy.modal.open({
+                    content: [ vnode ]
+                })
             },
             cardModal() {
                 this.$buefy.modal.open({

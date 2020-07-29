@@ -53,20 +53,26 @@
                 @keydown.native="keydown"
                 @select="onSelect"
                 @infinite-scroll="emitInfiniteScroll">
-                <template :slot="headerSlotName">
+                <template
+                    v-if="hasHeaderSlot"
+                    #header>
                     <slot name="header" />
                 </template>
                 <template
-                    :slot="defaultSlotName"
-                    slot-scope="props">
+                    v-if="hasDefaultSlot"
+                    #default="props">
                     <slot
                         :option="props.option"
                         :index="props.index" />
                 </template>
-                <template :slot="emptySlotName">
+                <template
+                    v-if="hasHeaderSlot"
+                    #empty>
                     <slot name="empty" />
                 </template>
-                <template :slot="footerSlotName">
+                <template
+                    v-if="hasFooterSlot"
+                    #footer>
                     <slot name="footer" />
                 </template>
             </b-autocomplete>
@@ -138,13 +144,13 @@ export default {
             type: Boolean,
             default: true
         },
-        confirmKeyCodes: {
+        confirmKeys: {
             type: Array,
-            default: () => [13, 188]
+            default: () => [',', 'Enter']
         },
         removeOnKeys: {
             type: Array,
-            default: () => [8]
+            default: () => ['Backspace']
         },
         allowNew: Boolean,
         onPasteSeparators: {
@@ -189,22 +195,6 @@ export default {
 
         valueLength() {
             return this.newTag.trim().length
-        },
-
-        defaultSlotName() {
-            return this.hasDefaultSlot ? 'default' : 'dontrender'
-        },
-
-        emptySlotName() {
-            return this.hasEmptySlot ? 'empty' : 'dontrender'
-        },
-
-        headerSlotName() {
-            return this.hasHeaderSlot ? 'header' : 'dontrender'
-        },
-
-        footerSlotName() {
-            return this.hasFooterSlot ? 'footer' : 'dontrender'
         },
 
         hasDefaultSlot() {
@@ -327,15 +317,15 @@ export default {
             }
         },
 
-        keydown(event) {
-            if (this.removeOnKeys.indexOf(event.keyCode) !== -1 && !this.newTag.length) {
+        keydown({ key, preventDefault }) {
+            if (this.removeOnKeys.indexOf(key) !== -1 && !this.newTag.length) {
                 this.removeLastTag()
             }
             // Stop if is to accept select only
             if (this.autocomplete && !this.allowNew) return
 
-            if (this.confirmKeyCodes.indexOf(event.keyCode) >= 0) {
-                event.preventDefault()
+            if (this.confirmKeys.indexOf(key) >= 0) {
+                preventDefault()
                 this.addTag()
             }
         },

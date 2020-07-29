@@ -1,9 +1,13 @@
+import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import { useFakeTimers } from 'sinon'
 import BInput from '@components/input/Input'
 import BTable from '@components/table/Table'
+import { setVueInstance } from '../../utils/config'
 
 describe('BTable', () => {
+    setVueInstance(Vue)
+
     let wrapper
     beforeEach(() => {
         wrapper = shallowMount(BTable)

@@ -1,4 +1,5 @@
 import config from '../utils/config'
+import { isVueComponent } from './helpers'
 
 export default {
     props: {
@@ -15,7 +16,13 @@ export default {
             type: Boolean,
             default: () => config.defaultUseHtml5Validation
         },
-        validationMessage: String
+        validationMessage: String,
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
+        }
     },
     data() {
         return {
@@ -82,10 +89,10 @@ export default {
          * Focus method that work dynamically depending on the component.
          */
         focus() {
-            if (this.$data._elementRef === undefined) return
+            const el = this.getElement()
+            if (el === undefined) return
 
             this.$nextTick(() => {
-                const el = this.$el.querySelector(this.$data._elementRef)
                 if (el) el.focus()
             })
         },
@@ -102,7 +109,11 @@ export default {
         },
 
         getElement() {
-            return this.$el.querySelector(this.$data._elementRef)
+            let el = this.$refs[this.$data._elementRef]
+            while (isVueComponent(el)) {
+                el = el.$refs[el.$data._elementRef]
+            }
+            return el
         },
 
         setInvalid() {
@@ -134,10 +145,10 @@ export default {
         checkHtml5Validity() {
             if (!this.useHtml5Validation) return
 
-            if (this.$refs[this.$data._elementRef] === undefined) return
-            if (this.getElement() === null) return
+            const el = this.getElement()
+            if (el === undefined) return
 
-            if (!this.getElement().checkValidity()) {
+            if (!el.checkValidity()) {
                 this.setInvalid()
                 this.isValid = false
             } else {

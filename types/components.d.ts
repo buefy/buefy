@@ -13,6 +13,7 @@ export declare type BuefyConfig = {
     defaultIconComponent?: string;
     defaultIconPrev?: string;
     defaultIconNext?: string;
+    defaultLocale?: undefined | string | string[],
     defaultDialogConfirmText?: string;
     defaultDialogCancelText?: string;
     defaultSnackbarDuration?: number;
@@ -69,7 +70,7 @@ export declare type BDialogConfig = {
     /**
      * Message text
      */
-    message: string;
+    message: string | any[];
 
     /**
      * Adds an icon on the left side depending on the <code>type</code> or <code>icon</code>
@@ -313,7 +314,7 @@ export declare type BNoticeConfig = {
     /**
     * Message text
     */
-    message: string;
+    message: string | any[];
 
     /**
     * Type (color) of the toast

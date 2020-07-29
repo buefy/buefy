@@ -35,7 +35,9 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 import Icon from '../icon/Icon'
+
 export default {
     name: 'BRate',
     components: {
@@ -62,7 +64,13 @@ export default {
         showScore: Boolean,
         showText: Boolean,
         customText: String,
-        texts: Array
+        texts: Array,
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
+        }
     },
     data() {
         return {
@@ -78,7 +86,11 @@ export default {
             let result = ''
             if (this.showScore) {
                 result = this.disabled ? this.value : this.newValue
-                if (result === 0) result = ''
+                if (result === 0) {
+                    result = ''
+                } else {
+                    result = new Intl.NumberFormat(this.locale).format(this.value)
+                }
             } else if (this.showText) {
                 result = this.texts[Math.ceil(this.newValue) - 1]
             }

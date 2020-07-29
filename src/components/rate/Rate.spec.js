@@ -39,10 +39,10 @@ describe('BRate', () => {
         expect(wrapper.vm.showMe).toBe(texts[value - 1])
 
         wrapper.setProps({ showScore: true })
-        expect(wrapper.vm.showMe).toBe(value)
+        expect(wrapper.vm.showMe).toBe(`${value}`)
 
         wrapper.setProps({ disabled: true })
-        expect(wrapper.vm.showMe).toBe(value)
+        expect(wrapper.vm.showMe).toBe(`${value}`)
 
         value = 0
         wrapper.setProps({ value, showScore: true })

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 
 export default {
     name: 'BProgress',
@@ -51,6 +52,12 @@ export default {
         keepTrailingZeroes: {
             type: Boolean,
             default: false
+        },
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
         }
     },
     computed: {
@@ -68,12 +75,26 @@ export default {
                 return undefined
             }
 
+            const minimumFractionDigits = this.keepTrailingZeroes ? this.precision : 0
+            const maximumFractionDigits = this.precision
             if (this.format === 'percent') {
-                const val = this.toFixed(this.value * 100 / this.max)
-                return `${val}%`
+                return new Intl.NumberFormat(
+                    this.locale,
+                    {
+                        style: 'percent',
+                        minimumFractionDigits: minimumFractionDigits,
+                        maximumFractionDigits: maximumFractionDigits
+                    }
+                ).format(this.value / this.max)
             }
-            const val = this.toFixed(this.value)
-            return val
+
+            return new Intl.NumberFormat(
+                this.locale,
+                {
+                    minimumFractionDigits: minimumFractionDigits,
+                    maximumFractionDigits: maximumFractionDigits
+                }
+            ).format(this.value)
         }
     },
     watch: {
@@ -92,16 +113,6 @@ export default {
                 })
             },
             immediate: true
-        }
-    },
-    methods: {
-        // Custom function that imitate the javascript toFixed method with improved rounding
-        toFixed(num) {
-            let fixed = (+(`${Math.round(+(`${num}e${this.precision}`))}e${-this.precision}`)).toFixed(this.precision)
-            if (!this.keepTrailingZeroes) {
-                fixed = fixed.replace(/\.0+$/, '')
-            }
-            return fixed
         }
     }
 }

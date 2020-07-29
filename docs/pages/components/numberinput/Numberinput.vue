@@ -10,6 +10,8 @@
 
         <Example :component="ExStep" :code="ExStepCode" title="Steps" vertical/>
 
+        <Example :component="ExExpon" :code="ExExponCode" title="Exponential increment" vertical/>
+
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customization" vertical />
@@ -34,6 +36,9 @@
     import ExStep from './examples/ExStep'
     import ExStepCode from '!!raw-loader!./examples/ExStep'
 
+    import ExExpon from './examples/ExExpon'
+    import ExExponCode from '!!raw-loader!./examples/ExExpon'
+
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
@@ -53,6 +58,8 @@
                 ExSimpleCode,
                 ExTypesCode,
                 ExStepCode,
+                ExExpon,
+                ExExponCode,
                 ExCustomizeCode,
                 ExRangeCode,
                 ExSizesCode

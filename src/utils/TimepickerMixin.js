@@ -1,5 +1,5 @@
 import FormElementMixin from './FormElementMixin'
-import { isMobile } from './helpers'
+import { isMobile, matchWithGroups } from './helpers'
 import config from './config'
 
 const AM = 'AM'
@@ -8,29 +8,65 @@ const HOUR_FORMAT_24 = '24'
 const HOUR_FORMAT_12 = '12'
 
 const defaultTimeFormatter = (date, vm) => {
-    let hours = date.getHours()
-    const minutes = date.getMinutes()
-    const seconds = date.getSeconds()
-    let period = ''
-    if (vm.hourFormat === HOUR_FORMAT_12) {
-        period = ' ' + (hours < 12 ? AM : PM)
-        if (hours > 12) {
-            hours -= 12
-        } else if (hours === 0) {
-            hours = 12
-        }
-    }
-    return vm.pad(hours) + ':' + vm.pad(minutes) +
-        (vm.enableSeconds ? (':' + vm.pad(seconds)) : '') + period
+    return vm.dtf.format(date)
 }
 
 const defaultTimeParser = (timeString, vm) => {
     if (timeString) {
+        let d = null
+        if (vm.computedValue && !isNaN(vm.computedValue)) {
+            d = new Date(vm.computedValue)
+        } else {
+            d = vm.timeCreator()
+            d.setMilliseconds(0)
+        }
+
+        if (vm.dtf.formatToParts && typeof vm.dtf.formatToParts === 'function') {
+            const formatRegex = vm.dtf
+                .formatToParts(d).map((part) => {
+                    if (part.type === 'literal') {
+                        return part.value.replace(/ /g, '\\s?')
+                    } else if (part.type === 'dayPeriod') {
+                        return `((?!=<${part.type}>)(${vm.amString}|${vm.pmString}|${AM}|${PM}|${AM.toLowerCase()}|${PM.toLowerCase()})?)`
+                    }
+                    return `((?!=<${part.type}>)\\d+)`
+                }).join('')
+            const timeGroups = matchWithGroups(formatRegex, timeString)
+
+            // We do a simple validation for the group.
+            // If it is not valid, it will fallback to Date.parse below
+            timeGroups.hour = timeGroups.hour ? parseInt(timeGroups.hour, 10) : null
+            timeGroups.minute = timeGroups.minute ? parseInt(timeGroups.minute, 10) : null
+            timeGroups.second = timeGroups.second ? parseInt(timeGroups.second, 10) : null
+            if (
+                timeGroups.hour &&
+                timeGroups.hour >= 0 &&
+                timeGroups.hour < 24 &&
+                timeGroups.minute &&
+                timeGroups.minute >= 0 &&
+                timeGroups.minute < 59
+            ) {
+                if (timeGroups.dayPeriod &&
+                    (
+                        timeGroups.dayPeriod.toLowerCase() === vm.pmString.toLowerCase() ||
+                        timeGroups.dayPeriod.toLowerCase() === PM.toLowerCase()
+                    ) &&
+                    timeGroups.hour < 12) {
+                    timeGroups.hour += 12
+                }
+                d.setHours(timeGroups.hour)
+                d.setMinutes(timeGroups.minute)
+                d.setSeconds(timeGroups.second || 0)
+                return d
+            }
+        }
+
+        // Fallback if formatToParts is not supported or if we were not able to parse a valid date
         let am = false
         if (vm.hourFormat === HOUR_FORMAT_12) {
             const dateString12 = timeString.split(' ')
             timeString = dateString12[0]
-            am = dateString12[1] === AM
+            am = (dateString12[1] === vm.amString || dateString12[1] === AM)
         }
         const time = timeString.split(':')
         let hours = parseInt(time[0], 10)
@@ -40,13 +76,6 @@ const defaultTimeParser = (timeString, vm) => {
             (vm.hourFormat === HOUR_FORMAT_12 && (hours < 1 || hours > 12)) ||
             isNaN(minutes) || minutes < 0 || minutes > 59) {
             return null
-        }
-        let d = null
-        if (vm.computedValue && !isNaN(vm.computedValue)) {
-            d = new Date(vm.computedValue)
-        } else {
-            d = vm.timeCreator()
-            d.setMilliseconds(0)
         }
         d.setSeconds(seconds)
         d.setMinutes(minutes)
@@ -76,7 +105,6 @@ export default {
         disabled: Boolean,
         hourFormat: {
             type: String,
-            default: HOUR_FORMAT_24,
             validator: (value) => {
                 return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12
             }
@@ -115,9 +143,7 @@ export default {
         },
         mobileNative: {
             type: Boolean,
-            default: () => {
-                return config.defaultTimepickerMobileNative
-            }
+            default: () => config.defaultTimepickerMobileNative
         },
         timeCreator: {
             type: Function,
@@ -173,6 +199,87 @@ export default {
                 this.$emit('input', this.dateSelected)
             }
         },
+        localeOptions() {
+            return new Intl.DateTimeFormat(this.locale, {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: this.enableSeconds ? 'numeric' : undefined
+            }).resolvedOptions()
+        },
+        dtf() {
+            return new Intl.DateTimeFormat(this.locale, {
+                hour: this.localeOptions.hour || 'numeric',
+                minute: this.localeOptions.minute || 'numeric',
+                second: this.enableSeconds ? this.localeOptions.second || 'numeric' : undefined,
+                hour12: !this.isHourFormat24,
+                timezome: 'UTC'
+            })
+        },
+        newHourFormat() {
+            return this.hourFormat || (this.localeOptions.hour12 ? HOUR_FORMAT_12 : HOUR_FORMAT_24)
+        },
+        sampleTime() {
+            let d = this.timeCreator()
+            d.setHours(10)
+            d.setSeconds(0)
+            d.setMinutes(0)
+            d.setMilliseconds(0)
+            return d
+        },
+        hourLiteral() {
+            if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                let d = this.sampleTime
+                const parts = this.dtf.formatToParts(d)
+                const literal = parts.find((part, idx) => (idx > 0 && parts[idx - 1].type === 'hour'))
+                if (literal) {
+                    return literal.value
+                }
+            }
+            return ':'
+        },
+        minuteLiteral() {
+            if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                let d = this.sampleTime
+                const parts = this.dtf.formatToParts(d)
+                const literal = parts.find((part, idx) => (idx > 0 && parts[idx - 1].type === 'minute'))
+                if (literal) {
+                    return literal.value
+                }
+            }
+            return ':'
+        },
+        secondLiteral() {
+            if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                let d = this.sampleTime
+                const parts = this.dtf.formatToParts(d)
+                const literal = parts.find((part, idx) => (idx > 0 && parts[idx - 1].type === 'second'))
+                if (literal) {
+                    return literal.value
+                }
+            }
+        },
+        amString() {
+            if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                let d = this.sampleTime
+                d.setHours(10)
+                const dayPeriod = this.dtf.formatToParts(d).find((part) => part.type === 'dayPeriod')
+                if (dayPeriod) {
+                    return dayPeriod.value
+                }
+            }
+            return this.AM
+        },
+        pmString() {
+            if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                let d = this.sampleTime
+                d.setHours(20)
+                const dayPeriod = this.dtf.formatToParts(d).find((part) => part.type === 'dayPeriod')
+                if (dayPeriod) {
+                    return dayPeriod.value
+                }
+            }
+            return this.PM
+        },
         hours() {
             if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.')
             const hours = []
@@ -183,11 +290,13 @@ export default {
                 if (!this.isHourFormat24) {
                     value = (i + 1)
                     label = value
-                    if (this.meridienSelected === this.AM) {
+                    if (this.meridienSelected === this.amString ||
+                        this.meridienSelected === this.AM) {
                         if (value === 12) {
                             value = 0
                         }
-                    } else if (this.meridienSelected === this.PM) {
+                    } else if (this.meridienSelected === this.pmString ||
+                        this.meridienSelected === this.PM) {
                         if (value !== 12) {
                             value += 12
                         }
@@ -226,7 +335,7 @@ export default {
         },
 
         meridiens() {
-            return [AM, PM]
+            return [this.amString, this.pmString]
         },
 
         isMobile() {
@@ -234,13 +343,13 @@ export default {
         },
 
         isHourFormat24() {
-            return this.hourFormat === HOUR_FORMAT_24
+            return this.newHourFormat === HOUR_FORMAT_24
         }
     },
     watch: {
         hourFormat() {
             if (this.hoursSelected !== null) {
-                this.meridienSelected = this.hoursSelected >= 12 ? PM : AM
+                this.meridienSelected = this.hoursSelected >= 12 ? this.pmString : this.amString
             }
         },
         /**
@@ -264,9 +373,9 @@ export default {
                 this.secondsSelected = null
                 this.computedValue = null
             } else if (this.hoursSelected !== null) {
-                if (value === PM) {
+                if (value === this.pmString || value === PM) {
                     this.hoursSelected += 12
-                } else if (value === AM) {
+                } else if (value === this.amString || value === AM) {
                     this.hoursSelected -= 12
                 }
             }
@@ -335,12 +444,12 @@ export default {
                 this.hoursSelected = value.getHours()
                 this.minutesSelected = value.getMinutes()
                 this.secondsSelected = value.getSeconds()
-                this.meridienSelected = value.getHours() >= 12 ? PM : AM
+                this.meridienSelected = value.getHours() >= 12 ? this.pmString : this.amString
             } else {
                 this.hoursSelected = null
                 this.minutesSelected = null
                 this.secondsSelected = null
-                this.meridienSelected = AM
+                this.meridienSelected = this.amString
             }
             this.dateSelected = value
         },
@@ -465,8 +574,8 @@ export default {
         },
 
         /*
-        * Parse string into date
-        */
+         * Parse string into date
+         */
         onChange(value) {
             const date = this.timeParser(value, this)
             this.updateInternalState(date)
@@ -480,8 +589,8 @@ export default {
         },
 
         /*
-        * Toggle timepicker
-        */
+         * Toggle timepicker
+         */
         toggle(active) {
             if (this.$refs.dropdown) {
                 this.$refs.dropdown.isActive = typeof active === 'boolean'
@@ -491,15 +600,15 @@ export default {
         },
 
         /*
-        * Close timepicker
-        */
+         * Close timepicker
+         */
         close() {
             this.toggle(false)
         },
 
         /*
-        * Call default onFocus method and show timepicker
-        */
+         * Call default onFocus method and show timepicker
+         */
         handleOnFocus() {
             this.onFocus()
             if (this.openOnFocus) {
@@ -508,8 +617,8 @@ export default {
         },
 
         /*
-        * Format date into string 'HH-MM-SS'
-        */
+         * Format date into string 'HH-MM-SS'
+         */
         formatHHMMSS(value) {
             const date = new Date(value)
             if (value && !isNaN(date)) {
@@ -524,8 +633,8 @@ export default {
         },
 
         /*
-        * Parse time from string
-        */
+         * Parse time from string
+         */
         onChangeNativePicker(event) {
             const date = event.target.value
             if (date) {
@@ -557,8 +666,8 @@ export default {
         },
 
         /*
-        * Format date into string
-        */
+         * Format date into string
+         */
         formatValue(date) {
             if (date && !isNaN(date)) {
                 return this.timeFormatter(date, this)
@@ -569,9 +678,8 @@ export default {
         /**
          * Keypress event that is bound to the document.
          */
-        keyPress(event) {
-            // Esc key
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.toggle(false)
             }
         },

@@ -85,6 +85,10 @@ $table-sticky-header-height: 300px !default;
         }
     }
 
+    .sort-icon.icon.is-desc {
+        transform: rotate(180deg) translateY(-50%) !important;
+    }
+
     .table {
         width: 100%;
         border: 1px solid transparent;
@@ -123,6 +127,15 @@ $table-sticky-header-height: 300px !default;
             &.is-sortable,
             &.is-sortable .th-wrap {
                 cursor: pointer;
+
+                .is-relative {
+                    position: absolute;
+                }
+            }
+            .sort-icon, .multi-sort-cancel-icon {
+                position: absolute;
+                bottom: 50%;
+                transform: translateY(50%);
             }
             .multi-sort-cancel-icon {
                 margin-left: 10px;
@@ -151,7 +164,10 @@ $table-sticky-header-height: 300px !default;
             }
         }
         .chevron-cell {
-          vertical-align:middle
+            vertical-align: middle;
+            > a {
+                color: $input-arrow !important;
+            }
         }
         .checkbox-cell {
             width: 40px;
@@ -164,7 +180,7 @@ $table-sticky-header-height: 300px !default;
         }
         tr.detail {
             box-shadow: inset 0 1px 3px $grey-lighter;
-            background: $white-bis;
+            background: $scheme-main-bis;
             .detail-container {
                 padding: 1rem;
             }
@@ -225,21 +241,6 @@ $table-sticky-header-height: 300px !default;
         }
         &.is-card-list {
             @include table-cards
-        }
-    }
-    
-    &.is-loading {
-        position: relative;
-        pointer-events: none;
-        opacity: 0.5;
-        &:after {
-            @include loader;
-            position: absolute;
-            top: 4em;
-            left: calc(50% - 2.5em);
-            width: 5em;
-            height: 5em;
-            border-width: 0.25em;
         }
     }
 }

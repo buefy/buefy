@@ -4,6 +4,7 @@ let config = {
     defaultIconComponent: null,
     defaultIconPrev: 'chevron-left',
     defaultIconNext: 'chevron-right',
+    defaultLocale: undefined,
     defaultDialogConfirmText: null,
     defaultDialogCancelText: null,
     defaultSnackbarDuration: 3500,
@@ -13,8 +14,6 @@ let config = {
     defaultNotificationDuration: 2000,
     defaultNotificationPosition: null,
     defaultTooltipType: 'is-primary',
-    defaultTooltipAnimated: false,
-    defaultTooltipDelay: 0,
     defaultInputAutocomplete: 'on',
     defaultDateFormatter: null,
     defaultDateParser: null,
@@ -41,7 +40,7 @@ let config = {
     defaultDatepickerNearbySelectableMonthDays: false,
     defaultDatepickerShowWeekNumber: false,
     defaultDatepickerMobileModal: true,
-    defaultTrapFocus: false,
+    defaultTrapFocus: true,
     defaultButtonRounded: false,
     defaultCarouselInterval: 3500,
     defaultTabsExpanded: false,
@@ -58,9 +57,8 @@ let config = {
         'NuxtLink',
         'NLink'
     ],
-
     customIconPacks: null
-} // TODO defaultTrapFocus to true in the next breaking change
+}
 
 export { config as default }
 

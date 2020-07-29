@@ -60,7 +60,7 @@
     "components"
   ],
   "dependencies": {
-    "bulma": "0.7.5"
+    "bulma": "0.9.0"
   },
   "peerDependencies": {
     "vue": "^2.5.18"
@@ -112,7 +112,7 @@
     "jest": "23.5.0",
     "jest-serializer-vue": "0.3.0",
     "lint-staged": "6.1.1",
-    "node-sass": "4.11.0",
+    "node-sass": "4.14.1",
     "opn": "4.0.2",
     "optimize-css-assets-webpack-plugin": "3.2.0",
     "optimize-js-plugin": "0.0.4",
@@ -120,6 +120,7 @@
     "pre-commit": "1.2.2",
     "prerender-spa-plugin": "3.4.0",
     "raw-loader": "0.5.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rimraf": "2.6.0",
     "rollup": "1.17.0",
     "rollup-copy-plugin": "0.1.0",
@@ -138,14 +139,14 @@
     "uglifyjs-webpack-plugin": "1.2.5",
     "url-loader": "0.5.8",
     "vee-validate": "2.1.0-beta.9",
-    "vue": "2.5.18",
+    "vue": "2.6.11",
     "vue-analytics": "4.1.3",
     "vue-jest": "2.5.0",
-    "vue-loader": "12.1.0",
+    "vue-loader": "15.9.0",
     "vue-progressbar": "0.7.2",
-    "vue-router": "2.3.1",
+    "vue-router": "3.1.6",
     "vue-style-loader": "3.0.1",
-    "vue-template-compiler": "2.5.18",
+    "vue-template-compiler": "2.6.11",
     "webpack": "3.10.0",
     "webpack-bundle-analyzer": "2.9.2",
     "webpack-dev-server": "2.11.1",

@@ -46,7 +46,7 @@ describe('BProgress', () => {
                 expect(wrapper.find('.progress-wrapper').find('p.progress-value').text()).toEqual(`${value}`)
             })
 
-            it('display the value as percent when passing "percent" for the format prop', () => {
+            it('display the value as percent when passing "percent" for the format prop', async () => {
                 const value = 50
                 const max = 100
                 const format = 'percent'
@@ -55,10 +55,12 @@ describe('BProgress', () => {
                         value,
                         max,
                         format,
-                        showValue: true
+                        showValue: true,
+                        locale: 'en-US'
                     }
                 })
 
+                await wrapper.vm.$nextTick()
                 expect(wrapper.find('.progress').text()).toEqual(`${value * max / 100}%`)
             })
 

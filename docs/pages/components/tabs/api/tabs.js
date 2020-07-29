@@ -4,10 +4,10 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Binding value, tab index',
-                type: 'Number, String',
+                description: 'Binding value, tab index. Passing undefined will show the first tab, null will show no tab',
+                type: 'String, Number, Null',
                 values: '—',
-                default: '<code>0</code>'
+                default: '<code>undefined</code>'
             },
             {
                 name: '<code>expanded</code>',
@@ -69,14 +69,9 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when tab is clicked',
+                description: 'Triggers when tab is changed',
                 parameters: '<code>value: String|Number</code>'
             },
-            {
-                name: '<code>change</code>',
-                description: 'Triggers when active tab is changed',
-                parameters: '<code>value: String|Number</code>'
-            }
         ]
     },
     {
@@ -91,10 +86,10 @@ export default [
             },
             {
                 name: '<code>value</code>',
-                description: 'Tab value',
-                type: 'Number, String',
+                description: 'Tab identifier',
+                type: 'String',
                 values: '—',
-                default: '—'
+                default: 'Vnode uid'
             },
             {
                 name: '<code>icon</code>',
@@ -123,6 +118,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'true'
+            },
+            {
+                name: '<code>headerClass</code>',
+                description: 'The classes to add to the tab header',
+                type: 'String, Array, Object',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

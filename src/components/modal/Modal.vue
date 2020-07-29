@@ -24,11 +24,14 @@
                     v-bind="props"
                     v-on="events"
                     :is="component"
-                    @close="close"/>
-                <div
-                    v-else-if="content"
-                    v-html="content"/>
-                <slot v-else/>
+                    :can-cancel="canCancel"
+                    @close="close"
+                />
+                <div v-else-if="content"> {{ content }} </div>
+                <slot
+                    v-else
+                    :can-cancel="canCancel"
+                    :close="close"/>
                 <button
                     type="button"
                     v-if="showX"
@@ -133,7 +136,7 @@ export default {
                 : this.canCancel
         },
         showX() {
-            return this.cancelOptions.indexOf('x') >= 0
+            return this.cancelOptions.indexOf('x') >= 0 && !this.hasModalCard
         },
         customStyle() {
             if (!this.fullScreen) {
@@ -220,9 +223,8 @@ export default {
         /**
         * Keypress event that is bound to the document.
         */
-        keyPress(event) {
-            // Esc key
-            if (this.isActive && event.keyCode === 27) this.cancel('escape')
+        keyPress({ key }) {
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) this.cancel('escape')
         },
 
         /**

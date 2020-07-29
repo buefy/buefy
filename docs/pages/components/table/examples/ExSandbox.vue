@@ -37,48 +37,33 @@
             :focusable="isFocusable"
             :mobile-cards="hasMobileCards">
 
-            <template slot-scope="props">
-                <b-table-column field="id" label="ID" width="40" numeric>
-                    {{ props.row.id }}
-                </b-table-column>
+            <b-table-column field="id" label="ID" width="40" numeric v-slot="props">
+                {{ props.row.id }}
+            </b-table-column>
 
-                <b-table-column field="first_name" label="First Name">
-                    {{ props.row.first_name }}
-                </b-table-column>
+            <b-table-column field="first_name" label="First Name" v-slot="props">
+                {{ props.row.first_name }}
+            </b-table-column>
 
-                <b-table-column field="last_name" label="Last Name">
-                    {{ props.row.last_name }}
-                </b-table-column>
+            <b-table-column field="last_name" label="Last Name" v-slot="props">
+                {{ props.row.last_name }}
+            </b-table-column>
 
-                <b-table-column field="date" label="Date" centered>
-                    <span class="tag is-success">
-                        {{ new Date(props.row.date).toLocaleDateString() }}
-                    </span>
-                </b-table-column>
+            <b-table-column field="date" label="Date" centered v-slot="props">
+                <span class="tag is-success">
+                    {{ new Date(props.row.date).toLocaleDateString() }}
+                </span>
+            </b-table-column>
 
-                <b-table-column label="Gender">
-                    <span>
-                        <b-icon pack="fas"
-                            :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                        </b-icon>
-                        {{ props.row.gender }}
-                    </span>
-                </b-table-column>
-            </template>
+            <b-table-column label="Gender" v-slot="props">
+                <span>
+                    <b-icon pack="fas"
+                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                    </b-icon>
+                    {{ props.row.gender }}
+                </span>
+            </b-table-column>
 
-            <template slot="empty">
-                <section class="section">
-                    <div class="content has-text-grey has-text-centered">
-                        <p>
-                            <b-icon
-                                icon="emoticon-sad"
-                                size="is-large">
-                            </b-icon>
-                        </p>
-                        <p>Nothing here.</p>
-                    </div>
-                </section>
-            </template>
         </b-table>
     </section>
 </template>

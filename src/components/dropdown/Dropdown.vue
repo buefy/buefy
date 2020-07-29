@@ -46,6 +46,7 @@
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
 import { removeElement, createAbsoluteElement, isCustomElement } from '../../utils/helpers'
+import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
@@ -54,6 +55,7 @@ export default {
     directives: {
         trapFocus
     },
+    mixins: [ProviderParentMixin('dropdown')],
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],
@@ -124,7 +126,6 @@ export default {
             style: {},
             isActive: false,
             isHoverable: this.hoverable,
-            _isDropdown: true, // Used internally by DropdownItem
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -255,9 +256,8 @@ export default {
         /**
          * Keypress event that is bound to the document
          */
-        keyPress(event) {
-            // Esc key
-            if (this.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) {
                 if (this.cancelOptions.indexOf('escape') < 0) return
                 this.isActive = false
             }

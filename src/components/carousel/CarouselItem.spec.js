@@ -1,25 +1,36 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import BCarousel from '@components/carousel/Carousel'
 import BCarouselItem from '@components/carousel/CarouselItem'
 
 let wrapper
-const BCarousel = {
-    template: '<b-carousel-stub></b-carousel-stub>',
+let wrapperParent
+let wrapperCarousel
+
+const WrapperComp = {
     data() {
         return {
-            carouselItems: [],
-            _isCarousel: true
+            show1: true
         }
+    },
+    template: `
+        <BCarousel ref="carousel">
+            <BCarouselItem value="item1"/>
+            <BCarouselItem ref="testItem" value="item2"/>
+            <BCarouselItem value="item3"/>
+        </BCarousel>`,
+    components: {
+        BCarousel, BCarouselItem
     }
 }
 
 describe('BCarouselItem', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BCarouselItem, {
-            parentComponent: BCarousel
-        })
+        wrapperParent = mount(WrapperComp, { sync: false })
+        wrapperCarousel = wrapperParent.find({ ref: 'carousel' })
+        wrapper = wrapperParent.find({ ref: 'testItem' })
     })
 
-    it('is vue instance', () => {
+    it('is called', () => {
         expect(wrapper.name()).toBe('BCarouselItem')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
@@ -28,8 +39,19 @@ describe('BCarouselItem', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('set action when status is called', () => {
-        wrapper.vm.status()
-        expect(wrapper.vm.isActive).toBeFalsy()
+    it('computes its position correctly', () => {
+        expect(wrapper.vm.index).toBe(1)
+    })
+
+    it('transition correctly', () => {
+        wrapperCarousel.vm.changeActive(2)
+        expect(wrapper.vm.transition).toBe('slide-prev')
+
+        wrapperCarousel.vm.changeActive(0)
+        expect(wrapper.vm.transition).toBe('slide-next')
+
+        wrapperCarousel.setProps({ animated: 'fade' })
+        wrapperCarousel.vm.changeActive(0)
+        expect(wrapper.vm.transition).toBe('fade')
     })
 })

@@ -75,6 +75,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>exponential</code>',
+                description: 'The factor of incrementation on long press',
+                type: 'Boolean, Number',
+                values: 'Between <code>0</code> excluded and <code>10</code>, setting to <code>true</code> is equivalent to passing <code>true</code>',
+                default: 'false'
+            },
+            {
                 name: '<code>controls-rounded</code>',
                 description: 'Show rounded controls',
                 type: 'Boolean',

@@ -38,8 +38,8 @@ describe('BDatepicker', () => {
 
         it('should have valid default values', () => {
             expect(wrapper.vm.firstDayOfWeek).toBe(0)
-            expect(wrapper.vm.monthNames).toEqual(defaultMonthNames)
-            expect(wrapper.vm.dayNames).toEqual(defaultDayNames)
+            expect(wrapper.vm.newMonthNames.length).toBe(defaultMonthNames.length)
+            expect(wrapper.vm.newDayNames.length).toBe(defaultDayNames.length)
         })
 
         it('manage props validator', () => {

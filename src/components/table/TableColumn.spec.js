@@ -1,30 +1,27 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import BTable from '@components/table/Table'
 import BTableColumn from '@components/table/TableColumn'
 
 let wrapper
-const BTable = {
-    template: '<b-table-stub></b-table-stub>',
-    data() {
-        return {
-            newColumns: [],
-            _isTable: true
-        }
+const WrapperComp = {
+    template: `
+        <BTable>
+            <BTableColumn/>
+            <BTableColumn ref="testItem" />
+            <BTableColumn />
+        </BTable>`,
+    components: {
+        BTable, BTableColumn
     }
 }
 
 describe('BTableColumn', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BTableColumn, {
-            parentComponent: BTable
-        })
+        wrapper = mount(WrapperComp, { sync: false }).find({ ref: 'testItem' })
     })
 
     it('is called', () => {
         expect(wrapper.name()).toBe('BTableColumn')
         expect(wrapper.isVueInstance()).toBeTruthy()
-    })
-
-    it('render correctly', () => {
-        expect(wrapper.html()).toMatchSnapshot()
     })
 })

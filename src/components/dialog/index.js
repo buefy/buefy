@@ -6,13 +6,23 @@ import { use, registerComponent, registerComponentProgrammatic } from '../../uti
 
 let localVueInstance
 
-function open(propsData) {
+function open(defaultParam, params) {
+    let slot
+    if (Array.isArray(params.message)) {
+        slot = params.message
+        delete params.message
+    }
+    const propsData = merge(defaultParam, params)
     const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
     const DialogComponent = vm.extend(Dialog)
-    return new DialogComponent({
+    const instance = new DialogComponent({
         el: document.createElement('div'),
         propsData
     })
+    if (slot) {
+        instance.$slots.default = slot
+    }
+    return instance
 }
 
 const DialogProgrammatic = {
@@ -25,21 +35,18 @@ const DialogProgrammatic = {
         const defaultParam = {
             canCancel: false
         }
-        const propsData = merge(defaultParam, params)
-        return open(propsData)
+        return open(defaultParam, params)
     },
     confirm(params) {
         const defaultParam = {}
-        const propsData = merge(defaultParam, params)
-        return open(propsData)
+        return open(defaultParam, params)
     },
     prompt(params) {
         const defaultParam = {
             hasInput: true,
             confirmText: 'Done'
         }
-        const propsData = merge(defaultParam, params)
-        return open(propsData)
+        return open(defaultParam, params)
     }
 }
 

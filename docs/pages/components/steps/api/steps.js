@@ -4,10 +4,10 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Binding value, step index',
-                type: 'Number',
+                description: 'Binding value, step index. Passing undefined will show the first step',
+                type: 'Number, String',
                 values: '—',
-                default: '<code>0</code>'
+                default: '<code>undefined</code>'
             },
             {
                 name: '<code>animated</code>',
@@ -136,11 +136,6 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when step is clicked',
-                parameters: '<code>value: String|Number</code>'
-            },
-            {
-                name: '<code>change</code>',
                 description: 'Triggers when active step is changed',
                 parameters: '<code>value: String|Number</code>'
             }
@@ -165,10 +160,10 @@ export default [
             },
             {
                 name: '<code>value</code>',
-                description: 'Step value',
-                type: 'Number, String',
+                description: 'Step identifier',
+                type: 'String',
                 values: '—',
-                default: '—'
+                default: 'Vnode uid'
             },
             {
                 name: '<code>type</code>',
@@ -210,6 +205,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'true'
+            },
+            {
+                name: '<code>headerClass</code>',
+                description: 'The classes to add to the step label container',
+                type: 'String, Array, Object',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

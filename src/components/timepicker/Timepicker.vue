@@ -47,7 +47,7 @@
                             {{ hour.label }}
                         </option>
                     </b-select>
-                    <span class="control is-colon">:</span>
+                    <span class="control is-colon">{{ hourLiteral }}</span>
                     <b-select
                         v-model="minutesSelected"
                         @change.native="onMinutesChange($event.target.value)"
@@ -62,7 +62,7 @@
                         </option>
                     </b-select>
                     <template v-if="enableSeconds">
-                        <span class="control is-colon">:</span>
+                        <span class="control is-colon">{{ minuteLiteral }}</span>
                         <b-select
                             v-model="secondsSelected"
                             @change.native="onSecondsChange($event.target.value)"
@@ -76,6 +76,7 @@
                                 {{ second.label }}
                             </option>
                         </b-select>
+                        <span class="control is-colon">{{ secondLiteral }}</span>
                     </template>
                     <b-select
                         v-model="meridienSelected"
