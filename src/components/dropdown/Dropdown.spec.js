@@ -53,7 +53,7 @@ describe('BDropdown', () => {
         trigger.trigger('mouseenter')
         expect(wrapper.vm.isHoverable).toBeFalsy()
 
-        wrapper.setProps({ hoverable: true })
+        wrapper.setProps({ triggers: ['hover'] })
         trigger.trigger('mouseenter')
         expect(wrapper.vm.isHoverable).toBeTruthy()
     })
