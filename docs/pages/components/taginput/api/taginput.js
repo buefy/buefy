@@ -148,6 +148,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>create-tag</code>',
+                description: 'Function to create tag item to push into v-model (tags)',
+                type: 'Function',
+                values: '—',
+                default: '<code>(tagToAdd) => tagToAdd</code>'
+            },
+            {
                 name: '<code>readonly</code>',
                 description: 'Disable input/typing',
                 type: 'Boolean',

@@ -169,6 +169,10 @@ export default {
             type: Boolean,
             default: false
         },
+        createTag: {
+            type: Function,
+            default: (tag) => tag
+        },
         appendToBody: Boolean
     },
     data() {
@@ -267,7 +271,7 @@ export default {
                 // or previously added (if not allowDuplicates).
                 const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
                 if (add && this.beforeAdding(tagToAdd)) {
-                    this.tags.push(tagToAdd)
+                    this.tags.push(this.createTag(tagToAdd))
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
                 }
