@@ -47,6 +47,7 @@ let config = {
     defaultTabsAnimated: true,
     defaultTabsType: null,
     defaultStatusIcon: true,
+    defaultProgrammaticPromise: false,
     defaultLinkTags: [
         'a',
         'button',

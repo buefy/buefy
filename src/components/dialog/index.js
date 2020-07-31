@@ -1,28 +1,26 @@
 import Dialog from './Dialog'
 
-import { VueInstance } from '../../utils/config'
+import config, { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
 
-function open(defaultParam, params) {
-    let slot
-    if (Array.isArray(params.message)) {
-        slot = params.message
-        delete params.message
-    }
-    const propsData = merge(defaultParam, params)
+function open(propsData) {
     const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
     const DialogComponent = vm.extend(Dialog)
-    const instance = new DialogComponent({
+    const component = new DialogComponent({
         el: document.createElement('div'),
         propsData
     })
-    if (slot) {
-        instance.$slots.default = slot
+    if (!config.defaultProgrammaticPromise) {
+        return component
+    } else {
+        return new Promise((resolve) => {
+            component.$on('confirm', (event) => resolve({ result: event || true, dialog: component }))
+            component.$on('cancel', () => resolve({ result: false, dialog: component }))
+        })
     }
-    return instance
 }
 
 const DialogProgrammatic = {
@@ -35,18 +33,21 @@ const DialogProgrammatic = {
         const defaultParam = {
             canCancel: false
         }
-        return open(defaultParam, params)
+        const propsData = merge(defaultParam, params)
+        return open(propsData)
     },
     confirm(params) {
         const defaultParam = {}
-        return open(defaultParam, params)
+        const propsData = merge(defaultParam, params)
+        return open(propsData)
     },
     prompt(params) {
         const defaultParam = {
             hasInput: true,
             confirmText: 'Done'
         }
-        return open(defaultParam, params)
+        const propsData = merge(defaultParam, params)
+        return open(propsData)
     }
 }
 

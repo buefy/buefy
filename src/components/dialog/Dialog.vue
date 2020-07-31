@@ -204,6 +204,7 @@ export default {
                     return
                 }
             }
+            this.$emit('confirm', this.prompt)
             this.onConfirm(this.prompt, this)
             if (this.closeOnConfirm) this.close()
         },

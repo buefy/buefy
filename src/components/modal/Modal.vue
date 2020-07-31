@@ -197,7 +197,7 @@ export default {
         */
         cancel(method) {
             if (this.cancelOptions.indexOf(method) < 0) return
-
+            this.$emit('cancel', arguments)
             this.onCancel.apply(null, arguments)
             this.close()
         },
