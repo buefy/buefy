@@ -354,6 +354,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>defaultProgrammaticPromise</code>',
+                description: `Return a promise using programmatic component`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>defaultLinkTags</code>',
                 description: 'Default link tags accepted as tag in some component (Button, MenuItem, PaginationButton). Can be used when using custom component or other Vue Router plugin like inertia.',
                 type: 'string',
