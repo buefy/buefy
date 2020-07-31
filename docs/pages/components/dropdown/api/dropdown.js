@@ -10,11 +10,11 @@ export default [
                 default: '<code>null</code>'
             },
             {
-                name: '<code>hoverable</code>',
-                description: 'Dropdown will be triggered by hover instead of click',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
+                name: '<code>triggers</code>',
+                description: 'Dropdown will be triggered by any events',
+                type: 'Array',
+                values: '<code>click</code>.<code>hover</code>,<code>contextmenu</code>,<code>focus</code>',
+                default: '<code>[\'click\']</code>'
             },
             {
                 name: '<code>position</code>',

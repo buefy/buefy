@@ -9,8 +9,10 @@
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle"
-            @mouseenter="checkHoverable"
+            @click="onClick"
+            @contextmenu.prevent="onContextMenu"
+            @mouseenter="onHover"
+            @focus.capture="onFocus"
             aria-haspopup="true">
             <slot name="trigger" :active="isActive"/>
         </div>
@@ -45,7 +47,7 @@
 <script>
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
-import { removeElement, createAbsoluteElement, isCustomElement } from '../../utils/helpers'
+import { removeElement, createAbsoluteElement, isCustomElement, toCssWidth } from '../../utils/helpers'
 import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
@@ -62,7 +64,6 @@ export default {
             default: null
         },
         disabled: Boolean,
-        hoverable: Boolean,
         inline: Boolean,
         scrollable: Boolean,
         maxHeight: {
@@ -79,6 +80,10 @@ export default {
                     'is-bottom-right'
                 ].indexOf(value) > -1
             }
+        },
+        triggers: {
+            type: Array,
+            default: () => ['click']
         },
         mobileModal: {
             type: Boolean,
@@ -125,7 +130,7 @@ export default {
             selected: this.value,
             style: {},
             isActive: false,
-            isHoverable: this.hoverable,
+            isHoverable: false,
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -141,7 +146,7 @@ export default {
             }]
         },
         isMobileModal() {
-            return this.mobileModal && !this.inline && !this.hoverable
+            return this.mobileModal && !this.inline
         },
         cancelOptions() {
             return typeof this.canClose === 'boolean'
@@ -152,11 +157,12 @@ export default {
         },
         contentStyle() {
             return {
-                maxHeight: this.scrollable
-                    ? this.maxHeight === undefined
-                        ? null : (isNaN(this.maxHeight) ? this.maxHeight : this.maxHeight + 'px') : null,
+                maxHeight: this.scrollable ? toCssWidth(this.maxHeight) : null,
                 overflow: this.scrollable ? 'auto' : null
             }
+        },
+        hoverable() {
+            return this.triggers.indexOf('hover') >= 0
         }
     },
     watch: {
@@ -263,6 +269,23 @@ export default {
             }
         },
 
+        onClick() {
+            if (this.triggers.indexOf('click') < 0) return
+            this.toggle()
+        },
+        onContextMenu() {
+            if (this.triggers.indexOf('contextmenu') < 0) return
+            this.toggle()
+        },
+        onHover() {
+            if (this.triggers.indexOf('hover') < 0) return
+            this.isHoverable = true
+        },
+        onFocus() {
+            if (this.triggers.indexOf('focus') < 0) return
+            this.toggle()
+        },
+
         /**
         * Toggle dropdown if it's not disabled.
         */
@@ -280,12 +303,6 @@ export default {
                 })
             } else {
                 this.isActive = !this.isActive
-            }
-        },
-
-        checkHoverable() {
-            if (this.hoverable) {
-                this.isHoverable = true
             }
         },
 
