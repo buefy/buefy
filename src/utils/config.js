@@ -46,6 +46,7 @@ let config = {
     defaultTabsExpanded: false,
     defaultTabsAnimated: true,
     defaultTabsType: null,
+    defaultStatusIcon: true,
     defaultLinkTags: [
         'a',
         'button',

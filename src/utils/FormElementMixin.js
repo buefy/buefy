@@ -22,6 +22,12 @@ export default {
             default: () => {
                 return config.defaultLocale
             }
+        },
+        statusIcon: {
+            type: Boolean,
+            default: () => {
+                return config.defaultStatusIcon
+            }
         }
     },
     data() {

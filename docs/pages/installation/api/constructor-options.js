@@ -21,6 +21,13 @@ export default [
                 default: '<code></code>'
             },
             {
+                name: '<code>defaultStatusIcon</code>',
+                description: `Automatically show status icon on input component`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>defaultIconPrev</code>',
                 description: `Icon used internally for prev. —
                     Used in Datepicker, Pagination and Steps for example`,

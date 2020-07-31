@@ -130,7 +130,7 @@ export default {
             ]
         },
         hasIconRight() {
-            return this.passwordReveal || this.loading || this.statusTypeIcon || this.iconRight
+            return this.passwordReveal || this.loading || (this.statusIcon && this.statusTypeIcon) || this.iconRight
         },
         rightIcon() {
             if (this.passwordReveal) {
