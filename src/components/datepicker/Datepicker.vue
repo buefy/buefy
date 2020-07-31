@@ -614,7 +614,7 @@ export default {
         formatValue(value) {
             if (Array.isArray(value)) {
                 const isArrayWithValidDates = Array.isArray(value) && value.every((v) => !isNaN(v))
-                return isArrayWithValidDates ? this.dateFormatter(value, this) : null
+                return isArrayWithValidDates ? this.dateFormatter([...value], this) : null
             }
             return (value && !isNaN(value)) ? this.dateFormatter(value, this) : null
         },
