@@ -3,7 +3,7 @@
 exports[`BDatepicker render correctly 1`] = `
 <div class="datepicker control">
     <b-dropdown-stub maxheight="200" mobilemodal="true" ariarole="dialog" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
-        <b-input-stub autocomplete="off" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
+        <b-input-stub autocomplete="off" statusicon="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
         <b-dropdown-item-stub custom="true" focusable="true" ariarole="" class="">
             <div>
                 <header class="datepicker-header">
@@ -14,7 +14,7 @@ exports[`BDatepicker render correctly 1`] = `
                         </a>
                         <div class="pagination-list">
                             <b-field-stub addons="true">
-                                <b-select-stub usehtml5validation="true" value="7">
+                                <b-select-stub usehtml5validation="true" statusicon="true" value="7">
                                     <option value="0">
                                         January
                                     </option>
@@ -52,7 +52,7 @@ exports[`BDatepicker render correctly 1`] = `
                                         December
                                     </option>
                                 </b-select-stub>
-                                <b-select-stub usehtml5validation="true" value="2018">
+                                <b-select-stub usehtml5validation="true" statusicon="true" value="2018">
                                     <option value="2021">
                                         2021
                                     </option>

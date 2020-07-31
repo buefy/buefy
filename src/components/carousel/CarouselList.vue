@@ -59,7 +59,6 @@
 <script>
 import {sign, mod, bound} from '../../utils/helpers'
 import config from '../../utils/config'
-import ResizeObserver from 'resize-observer-polyfill'
 
 import Icon from '../icon/Icon'
 
@@ -283,8 +282,10 @@ export default {
     },
     mounted() {
         if (typeof window !== 'undefined') {
-            this.observer = new ResizeObserver(this.refresh)
-            this.observer.observe(this.$el)
+            if (window.ResizeObserver) {
+                this.observer = new ResizeObserver(this.refresh)
+                this.observer.observe(this.$el)
+            }
             window.addEventListener('resize', this.resized)
             this.resized()
         }
@@ -294,7 +295,9 @@ export default {
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
-            this.observer.disconnect()
+            if (window.ResizeObserver) {
+                this.observer.disconnect()
+            }
             window.removeEventListener('resize', this.resized)
             this.dragEnd()
         }

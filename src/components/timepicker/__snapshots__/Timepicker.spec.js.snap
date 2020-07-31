@@ -3,10 +3,10 @@
 exports[`BTimepicker render correctly 1`] = `
 <div class="timepicker control">
     <b-dropdown-stub maxheight="200" mobilemodal="true" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true">
-        <b-input-stub autocomplete="off" usehtml5validation="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
+        <b-input-stub autocomplete="off" usehtml5validation="true" statusicon="true" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
         <b-dropdown-item-stub custom="true" focusable="true" ariarole="">
             <b-field-stub grouped="true" position="is-centered" addons="true">
-                <b-select-stub usehtml5validation="true" placeholder="00">
+                <b-select-stub usehtml5validation="true" statusicon="true" placeholder="00">
                     <option value="0">
                         00
                     </option>
@@ -80,7 +80,7 @@ exports[`BTimepicker render correctly 1`] = `
                         23
                     </option>
                 </b-select-stub> <span class="control is-colon">:</span>
-                <b-select-stub usehtml5validation="true" placeholder="00">
+                <b-select-stub usehtml5validation="true" statusicon="true" placeholder="00">
                     <option value="0">
                         00
                     </option>

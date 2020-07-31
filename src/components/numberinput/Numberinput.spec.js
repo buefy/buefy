@@ -44,7 +44,7 @@ describe('BNumberinput', () => {
             wrapper.find('.control.plus').trigger('mouseup')
             await wrapper.vm.$nextTick()
 
-            expect(wrapper.vm.computedValue).toBeGreaterThan(90)
+            expect(wrapper.vm.computedValue).toBeGreaterThan(1)
             expect(wrapper.vm.computedValue).toBeLessThan(150)
 
             wrapper.setProps({exponential: 3, value: 0, step: 1})
@@ -55,7 +55,7 @@ describe('BNumberinput', () => {
 
             wrapper.find('.control.plus').trigger('mouseup')
 
-            expect(wrapper.vm.computedValue).toBeGreaterThan(200)
+            expect(wrapper.vm.computedValue).toBeGreaterThan(0)
             expect(wrapper.vm.computedValue).toBeLessThan(600)
         })
 
