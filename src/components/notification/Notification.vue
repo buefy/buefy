@@ -11,7 +11,7 @@
                 @click="close"
                 :aria-label="ariaCloseLabel"
             />
-            <div class="media">
+            <div class="media" v-if="$slots.default || message">
                 <div v-if="computedIcon && hasIcon" class="media-left">
                     <b-icon
                         :icon="computedIcon"
