@@ -1,6 +1,8 @@
 'use strict'
 const path = require('path')
+const chalk = require('chalk')
 const config = require('../config')
+const pkg = require('../package.json')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
@@ -73,4 +75,25 @@ exports.styleLoaders = function (options) {
     })
   }
   return output
+}
+
+// Banner CLI
+exports.bannerCLI = function() {
+  var isProd = process.env.NODE_ENV === 'production'
+  var _port = process.env.PORT || config.dev.port
+
+  var names = `${chalk.hex('#7957d5').bold('Buefy')} v${pkg.version}`
+  var url = `http://localhost:${_port}/`
+  var _env = isProd ? 'production' : 'development'
+  var rendering = isProd ? 'client-side' : 'server-side'
+  var listening = isProd
+    ? `${chalk.bold('Status: ')} ${chalk.bold.cyan('on building...')}`
+    : `${chalk.bold('Listening: ')} ${chalk.underline.blue(url)}`
+
+  var label = name => chalk.bold.cyan(`▸ ${name}: `)
+
+  return `${names}\n
+    ${label('Environment')} ${_env}
+    ${label('Rendering')}   ${rendering}\n
+    ${listening}`
 }
