@@ -240,7 +240,7 @@ export default [
         ]
     },
     {
-      title: 'CarouselItem',
+      title: 'Item',
         events: [
             {
                 name: '<code>click</code>',
