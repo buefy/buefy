@@ -1,10 +1,11 @@
-var fs = require('fs');
-var path = require('path');
+'use strict'
+const fs = require('fs');
+const path = require('path');
 
 const buefyDir = path.resolve(__dirname, '../docs/pages/components')
 
-var tags = {}
-var attributes = {}
+let tags = {}
+let attributes = {}
 
 fs.readdirSync(buefyDir, { withFileTypes: true })
     .filter(item => item.isDirectory()
@@ -62,4 +63,3 @@ fs.writeFile(path.resolve(__dirname, '../helper-json/attributes.json'), JSON.str
         return console.log(err);
     }
 })
-
