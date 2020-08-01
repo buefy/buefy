@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const routes = require('../docs/data/routes.json')
@@ -42,11 +43,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false
+        },
+        sourceMap: true
+      }
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -83,7 +86,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module, count) {
+      minChunks: function (module) {
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&
@@ -138,8 +141,14 @@ if (process.env.NODE_ENV !== 'test') {
   webpackConfig.plugins.push(new PrerenderSPAPlugin({
     staticDir: config.build.assetsRoot,
     routes: paths,
+    postProcess: (renderedRoute) => {
+      renderedRoute.html = renderedRoute.html
+        .replace('id="app"', 'id="app" data-server-rendered="true"')
+
+      return renderedRoute
+    },
     renderer: new Renderer({
-      maxConcurrentRoutes: 6,
+      maxConcurrentRoutes: 5,
       renderAfterDocumentEvent: 'render-event',
       injectProperty: '__PRERENDER_INJECTED',
       inject: {

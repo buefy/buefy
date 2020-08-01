@@ -31,9 +31,6 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
   quiet: true
 })
 
-const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: false
-})
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
@@ -59,7 +56,9 @@ app.use(devMiddleware)
 
 // enable hot-reload and state-preserving
 // compilation error display
-app.use(hotMiddleware)
+app.use(require('webpack-hot-middleware')(compiler, {
+  log: false
+}))
 
 // serve pure static assets
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
@@ -67,18 +66,15 @@ app.use(staticPath, express.static('./static'))
 
 const uri = 'http://localhost:' + port
 
-let _resolve
 const readyPromise = new Promise(resolve => {
-  _resolve = resolve
-})
-
-console.log('> Starting dev server...')
-devMiddleware.waitUntilValid(() => {
-  // when env is testing, don't need open it
-  if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-    open(uri)
-  }
-  _resolve()
+  console.log('> Starting dev server...')
+  devMiddleware.waitUntilValid(() => {
+    // when env is testing, don't need open it
+    if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+      open(uri)
+    }
+    resolve()
+  })
 })
 
 const server = app.listen(port)
