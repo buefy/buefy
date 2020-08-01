@@ -78,19 +78,19 @@ exports.styleLoaders = function (options) {
 }
 
 // Banner CLI
-exports.bannerCLI = function() {
-  var isProd = process.env.NODE_ENV === 'production'
-  var _port = process.env.PORT || config.dev.port
+exports.bannerCLI = () => {
+  let isProd = process.env.NODE_ENV === 'production'
+  let _port = process.env.PORT || config.dev.port
 
-  var names = `${chalk.hex('#7957d5').bold('Buefy')} v${pkg.version}`
-  var url = `http://localhost:${_port}/`
-  var _env = isProd ? 'production' : 'development'
-  var rendering = isProd ? 'client-side' : 'server-side'
-  var listening = isProd
+  const names = `${chalk.hex('#7957d5').bold('Buefy')} v${pkg.version}`
+  const url = `http://localhost:${_port}/`
+  let _env = isProd ? 'production' : 'development'
+  let rendering = isProd ? 'client-side' : 'server-side'
+  let listening = isProd
     ? `${chalk.bold('Status: ')} ${chalk.bold.cyan('on building...')}`
     : `${chalk.bold('Listening: ')} ${chalk.underline.blue(url)}`
 
-  var label = name => chalk.bold.cyan(`▸ ${name}: `)
+  const label = name => chalk.bold.cyan(`▸ ${name}: `)
 
   return `${names}\n
     ${label('Environment')} ${_env}
