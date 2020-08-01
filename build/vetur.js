@@ -40,6 +40,7 @@ fs.readdirSync(buefyDir, { withFileTypes: true })
                 mainTag.subtags.push(htmlName)
             }
 
+            if (tag.props === undefined) return
             tag.props.forEach(prop => {
                 const name = prop.name.replace('<code>', '').replace('</code>', '').replace('v-model', 'value')
                 if (!name.includes('Any'))
