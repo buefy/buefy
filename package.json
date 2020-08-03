@@ -43,8 +43,8 @@
     "test:watch": "npm run unit -- --watchAll",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:js:watch": "rollup -c --watch",
-    "build:scss": "node-sass --output-style expanded src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
-    "build:scss:watch": "node-sass src/scss/buefy-build.scss --w",
+    "build:scss": "sass src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
+    "build:scss:watch": "sass src/scss/buefy-build.scss --watch",
     "build:lib": "npm run build:js && npm run build:scss && npm run vetur && copyfiles --flat helper-json/*.json dist/vetur",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js && copyfiles --flat netlify.toml dist-docs",
@@ -63,7 +63,7 @@
     "bulma": "0.9.0"
   },
   "peerDependencies": {
-    "vue": "^2.5.18"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@applitools/eyes-cypress": "3.7.5",
@@ -112,7 +112,6 @@
     "jest": "23.5.0",
     "jest-serializer-vue": "0.3.0",
     "lint-staged": "6.1.1",
-    "node-sass": "4.14.1",
     "opn": "4.0.2",
     "optimize-css-assets-webpack-plugin": "3.2.0",
     "optimize-js-plugin": "0.0.4",
@@ -120,7 +119,6 @@
     "pre-commit": "1.2.2",
     "prerender-spa-plugin": "3.4.0",
     "raw-loader": "0.5.1",
-    "resize-observer-polyfill": "^1.5.1",
     "rimraf": "2.6.0",
     "rollup": "1.17.0",
     "rollup-copy-plugin": "0.1.0",
@@ -130,7 +128,8 @@
     "rollup-plugin-replace": "2.1.0",
     "rollup-plugin-terser": "4.0.4",
     "rollup-plugin-vue": "5.0.0",
-    "sass-loader": "6.0.6",
+    "sass": "1.26.10",
+    "sass-loader": "7.3.1",
     "scrollreveal": "3.3.6",
     "semver": "5.3.0",
     "shelljs": "0.8.3",
