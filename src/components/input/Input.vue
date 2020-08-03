@@ -11,9 +11,8 @@
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
-            :value="computedValue"
+            v-model="computedValue"
             v-bind="$attrs"
-            @input="onInput"
             @blur="onBlur"
             @focus="onFocus">
 
@@ -23,9 +22,8 @@
             class="textarea"
             :class="[inputClasses, customClass]"
             :maxlength="maxlength"
-            :value="computedValue"
+            v-model="computedValue"
             v-bind="$attrs"
-            @input="onInput"
             @blur="onBlur"
             @focus="onFocus"/>
 
@@ -220,18 +218,6 @@ export default {
 
             this.$nextTick(() => {
                 this.focus()
-            })
-        },
-
-        /**
-        * Input's 'input' event listener, 'nextTick' is used to prevent event firing
-        * before ui update, helps when using masks (Cleavejs and potentially others).
-        */
-        onInput(event) {
-            this.$nextTick(() => {
-                if (event.target) {
-                    this.computedValue = event.target.value
-                }
             })
         },
 
