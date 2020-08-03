@@ -216,7 +216,7 @@
         customIconPacks: {
             'fas': {
                 sizes: {
-                    'default': null,
+                    'default': '',
                     'is-small': 'fa-xs',
                     'is-medium': 'fa-lg',
                     'is-large': 'fa-2x'

@@ -1091,8 +1091,7 @@ export default {
                     if (value !== Number(this.filters[key])) return false
                 } else {
                     const re = new RegExp(this.filters[key], 'i')
-                    if (typeof value === 'boolean') value = `${value}`
-                    if (!value.match(re)) return false
+                    if (!re.test(value)) return false
                 }
             }
             return true

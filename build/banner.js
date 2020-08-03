@@ -1,3 +1,4 @@
+'use strict'
 const pack = require('../package.json')
 
 const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */\n`
