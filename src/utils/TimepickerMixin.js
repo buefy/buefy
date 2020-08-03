@@ -479,11 +479,19 @@ export default {
                         } else if (this.minutesSelected !== null) {
                             return time.getHours() === hour &&
                                 time.getMinutes() === this.minutesSelected
-                        } else {
-                            return time.getHours() === hour
                         }
+                        return false
                     })
-                    disabled = unselectable.length > 0
+                    if (unselectable.length > 0) {
+                        disabled = true
+                    } else {
+                        disabled = this.minutes.every((minute) => {
+                            return this.unselectableTimes.filter((time) => {
+                                return time.getHours() === hour &&
+                                    time.getMinutes() === minute.value
+                            }).length > 0
+                        })
+                    }
                 }
             }
             return disabled
