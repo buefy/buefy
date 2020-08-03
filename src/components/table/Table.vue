@@ -170,7 +170,7 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="index"
-                            :style="column.style">
+                            :style="column.style"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
