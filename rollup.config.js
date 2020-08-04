@@ -41,6 +41,15 @@ const capitalize = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
+const vuePluginConfig = {
+    template: {
+        isProduction: true,
+        compilerOptions: {
+            whitespace: 'condense'
+        }
+    }
+}
+
 export default () => {
     const mapComponent = (name) => {
         return [
@@ -62,11 +71,7 @@ export default () => {
                         extensions: ['.vue', '.js']
                     }),
                     cjs(),
-                    vue({
-                        template: {
-                            isProduction: true
-                        }
-                    }),
+                    vue(vuePluginConfig),
                     babel(babelConfig)
                 ]
             }
@@ -85,11 +90,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
@@ -106,11 +107,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
@@ -132,11 +129,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]
@@ -153,11 +146,7 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
-                vue({
-                    template: {
-                        isProduction: true
-                    }
-                }),
+                vue(vuePluginConfig),
                 babel(babelConfig),
                 cjs()
             ]

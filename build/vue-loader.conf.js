@@ -10,5 +10,8 @@ module.exports = {
       : config.dev.cssSourceMap,
     extract: isProduction
   }),
-  esModule: false // example of setting to false
+  compilerOptions: {
+    whitespace: 'condense'
+  },
+  esModule: false // example of setting to false,
 }
