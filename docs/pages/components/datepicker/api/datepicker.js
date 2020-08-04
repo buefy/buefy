@@ -300,6 +300,11 @@ export default [
                 name: 'header',
                 description: 'Header',
                 props: '—'
+            },
+            {
+                name: 'trigger',
+                description: 'Trigger',
+                props: '—'
             }
         ],
         events: [

@@ -9,27 +9,30 @@
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
-            <b-input
-                v-if="!inline"
-                ref="input"
-                slot="trigger"
-                autocomplete="off"
-                :value="formatValue(computedValue)"
-                :placeholder="placeholder"
-                :size="size"
-                :icon="icon"
-                :icon-pack="iconPack"
-                :loading="loading"
-                :disabled="disabled"
-                :readonly="!editable"
-                :rounded="rounded"
-                v-bind="$attrs"
-                :use-html5-validation="useHtml5Validation"
-                @click.native.stop="toggle(true)"
-                @keyup.native.enter="toggle(true)"
-                @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus"
-                @blur="onBlur() && checkHtml5Validity()"/>
+            <template #trigger v-if="!inline">
+                <slot name="trigger">
+                    <b-input
+                        ref="input"
+                        slot="trigger"
+                        autocomplete="off"
+                        :value="formatValue(computedValue)"
+                        :placeholder="placeholder"
+                        :size="size"
+                        :icon="icon"
+                        :icon-pack="iconPack"
+                        :loading="loading"
+                        :disabled="disabled"
+                        :readonly="!editable"
+                        :rounded="rounded"
+                        v-bind="$attrs"
+                        :use-html5-validation="useHtml5Validation"
+                        @click.native.stop="toggle(true)"
+                        @keyup.native.enter="toggle(true)"
+                        @change.native="onChange($event.target.value)"
+                        @focus="handleOnFocus"
+                        @blur="onBlur() && checkHtml5Validity()"/>
+                </slot>
+            </template>
             <div
                 class="card"
                 :disabled="disabled"

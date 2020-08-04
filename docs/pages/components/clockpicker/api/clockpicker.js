@@ -179,6 +179,11 @@ export default [
                 name: 'default',
                 description: 'Footer',
                 props: '—'
+            },
+            {
+                name: 'trigger',
+                description: 'Trigger',
+                props: '—'
             }
         ],
         methods: [

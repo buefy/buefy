@@ -16,26 +16,28 @@
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
-            <b-input
-                v-if="!inline"
-                ref="input"
-                slot="trigger"
-                autocomplete="off"
-                :value="formattedValue"
-                :placeholder="placeholder"
-                :size="size"
-                :icon="icon"
-                :icon-pack="iconPack"
-                :rounded="rounded"
-                :loading="loading"
-                :disabled="disabled"
-                :readonly="!editable"
-                v-bind="$attrs"
-                :use-html5-validation="false"
-                @click.native="onInputClick"
-                @keyup.native.enter="togglePicker(true)"
-                @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus" />
+            <template #trigger v-if="!inline">
+                <slot name="trigger">
+                    <b-input
+                        ref="input"
+                        autocomplete="off"
+                        :value="formattedValue"
+                        :placeholder="placeholder"
+                        :size="size"
+                        :icon="icon"
+                        :icon-pack="iconPack"
+                        :rounded="rounded"
+                        :loading="loading"
+                        :disabled="disabled"
+                        :readonly="!editable"
+                        v-bind="$attrs"
+                        :use-html5-validation="false"
+                        @click.native="onInputClick"
+                        @keyup.native.enter="togglePicker(true)"
+                        @change.native="onChange($event.target.value)"
+                        @focus="handleOnFocus" />
+                </slot>
+            </template>
 
             <b-dropdown-item
                 :disabled="disabled"
