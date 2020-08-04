@@ -1202,32 +1202,30 @@ export default {
         * Initial sorted column based on the default-sort prop.
         */
         initSort() {
-            if (!this.backendSorting) {
-                if (this.sortMultiple && this.sortMultipleData) {
-                    this.sortMultipleData.forEach((column) => {
-                        this.sortMultiColumn(column)
-                    })
+            if (this.sortMultiple && this.sortMultipleData) {
+                this.sortMultipleData.forEach((column) => {
+                    this.sortMultiColumn(column)
+                })
+            } else {
+                if (!this.defaultSort) return
+
+                let sortField = ''
+                let sortDirection = this.defaultSortDirection
+
+                if (Array.isArray(this.defaultSort)) {
+                    sortField = this.defaultSort[0]
+                    if (this.defaultSort[1]) {
+                        sortDirection = this.defaultSort[1]
+                    }
                 } else {
-                    if (!this.defaultSort) return
+                    sortField = this.defaultSort
+                }
 
-                    let sortField = ''
-                    let sortDirection = this.defaultSortDirection
-
-                    if (Array.isArray(this.defaultSort)) {
-                        sortField = this.defaultSort[0]
-                        if (this.defaultSort[1]) {
-                            sortDirection = this.defaultSort[1]
-                        }
-                    } else {
-                        sortField = this.defaultSort
-                    }
-
-                    const sortColumn = this.newColumns.filter(
-                        (column) => (column.field === sortField))[0]
-                    if (sortColumn) {
-                        this.isAsc = sortDirection.toLowerCase() !== 'desc'
-                        this.sort(sortColumn, true)
-                    }
+                const sortColumn = this.newColumns.filter(
+                    (column) => (column.field === sortField))[0]
+                if (sortColumn) {
+                    this.isAsc = sortDirection.toLowerCase() !== 'desc'
+                    this.sort(sortColumn, true)
                 }
             }
         },
