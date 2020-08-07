@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="b-tooltips">
         <b-tooltip position="is-bottom" multilined>
             <button class="button is-primary">Html Content</button>
             <template v-slot:content>
@@ -18,3 +18,14 @@
         </b-tooltip>
     </section>
 </template>
+
+<style lang="scss" scoped>
+.b-tooltips {
+    .b-tooltip:not(:last-child) {
+        margin-right: .5em
+    }
+    .b-tooltip {
+        margin-bottom: .5em
+    }
+}
+</style>

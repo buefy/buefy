@@ -1,5 +1,6 @@
 <template>
-    <section>
+    <section class="b-tooltips">
+
         <b-tooltip
             label="Tooltip multilined, probably because it's too long for a casual tooltip"
             multilined>
@@ -28,3 +29,14 @@
         </b-tooltip>
     </section>
 </template>
+
+<style lang="scss" scoped>
+.b-tooltips {
+    .b-tooltip:not(:last-child) {
+        margin-right: .5em
+    }
+    .b-tooltip {
+        margin-bottom: .5em
+    }
+}
+</style>

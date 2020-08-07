@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="b-tooltips">
         <b-tooltip label="Text is dashed" dashed>
             Simple text
         </b-tooltip>
@@ -33,3 +33,14 @@
         </b-tooltip>
     </section>
 </template>
+
+<style lang="scss" scoped>
+.b-tooltips {
+    .b-tooltip:not(:last-child) {
+        margin-right: .5em
+    }
+    .b-tooltip {
+        margin-bottom: .5em
+    }
+}
+</style>
