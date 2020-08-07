@@ -321,7 +321,8 @@ export default {
             }
         },
 
-        keydown({ key, preventDefault }) {
+        keydown(event) {
+            const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
             if (this.removeOnKeys.indexOf(key) !== -1 && !this.newTag.length) {
                 this.removeLastTag()
             }
@@ -329,7 +330,7 @@ export default {
             if (this.autocomplete && !this.allowNew) return
 
             if (this.confirmKeys.indexOf(key) >= 0) {
-                preventDefault()
+                event.preventDefault()
                 this.addTag()
             }
         },

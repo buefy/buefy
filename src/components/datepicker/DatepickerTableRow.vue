@@ -80,18 +80,15 @@ export default {
         firstDayOfWeek: Number
     },
     watch: {
-        day: {
-            handler(day) {
-                const refName = `day-${day}`
-                this.$nextTick(() => {
-                    if (this.$refs[refName] && this.$refs[refName].length > 0) {
-                        if (this.$refs[refName][0]) {
-                            this.$refs[refName][0].focus()
-                        }
+        day(day) {
+            const refName = `day-${day}`
+            this.$nextTick(() => {
+                if (this.$refs[refName] && this.$refs[refName].length > 0) {
+                    if (this.$refs[refName][0]) {
+                        this.$refs[refName][0].focus()
                     }
-                }) // $nextTick needed when month is changed
-            },
-            immediate: true
+                }
+            }) // $nextTick needed when month is changed
         }
     },
     methods: {

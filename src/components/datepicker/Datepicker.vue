@@ -606,7 +606,9 @@ export default {
             } else {
                 // Force refresh input value when not valid date
                 this.computedValue = null
-                this.$refs.input.newValue = this.computedValue
+                if (this.$refs.input) {
+                    this.$refs.input.newValue = this.computedValue
+                }
             }
         },
 
