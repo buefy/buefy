@@ -113,19 +113,15 @@ export default {
         }
     },
     watch: {
-        focusedMonth: {
-            handler(month) {
-                const refName = `month-${month}`
-                if (this.$refs[refName] && this.$refs[refName].length > 0) {
-                    this.$nextTick(() => {
-                        if (this.$refs[refName][0]) {
-                            this.$refs[refName][0].focus()
-                        }
-                    }) // $nextTick needed when year is changed
-                }
-            },
-            deep: true,
-            immediate: true
+        focusedMonth(month) {
+            const refName = `month-${month}`
+            if (this.$refs[refName] && this.$refs[refName].length > 0) {
+                this.$nextTick(() => {
+                    if (this.$refs[refName][0]) {
+                        this.$refs[refName][0].focus()
+                    }
+                }) // $nextTick needed when year is changed
+            }
         }
     },
     methods: {
