@@ -201,7 +201,7 @@
                         <tr
                             :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
-                                'is-selected': row === selected,
+                                'is-selected': isRowSelected(row, selected),
                                 'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
@@ -932,6 +932,13 @@ export default {
                 column.customSort,
                 this.isAsc
             )
+        },
+
+        isRowSelected(row, selected) {
+            if (this.customRowKey) {
+                return row[this.customRowKey] === selected[this.customRowKey]
+            }
+            return row === selected
         },
 
         /**
