@@ -341,7 +341,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -1097,7 +1097,7 @@ export default {
                 if (Number.isInteger(value)) {
                     if (value !== Number(this.filters[key])) return false
                 } else {
-                    const re = new RegExp(this.filters[key], 'i')
+                    const re = new RegExp(escapeRegExpChars(this.filters[key]), 'i')
                     if (!re.test(value)) return false
                 }
             }
