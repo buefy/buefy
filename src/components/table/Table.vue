@@ -201,7 +201,7 @@
                         <tr
                             :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
-                                'is-selected': row === selected,
+                                'is-selected': isRowSelected(row, selected),
                                 'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
@@ -341,7 +341,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -934,6 +934,13 @@ export default {
             )
         },
 
+        isRowSelected(row, selected) {
+            if (this.customRowKey) {
+                return row[this.customRowKey] === selected[this.customRowKey]
+            }
+            return row === selected
+        },
+
         /**
         * Check if the row is checked (is added to the array).
         */
@@ -1090,7 +1097,7 @@ export default {
                 if (Number.isInteger(value)) {
                     if (value !== Number(this.filters[key])) return false
                 } else {
-                    const re = new RegExp(this.filters[key], 'i')
+                    const re = new RegExp(escapeRegExpChars(this.filters[key]), 'i')
                     if (!re.test(value)) return false
                 }
             }
