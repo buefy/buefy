@@ -73,21 +73,23 @@
                 </b-icon>
             </div>
 
-            <button class="button is-dark">
-                <b-icon pack="ionicons" icon="checkmark"></b-icon>
-                <span>Finish</span>
-            </button>
-            <button class="button is-warning">
-                <b-icon pack="ionicons" icon="checkmark"></b-icon>
-                <span>Finish</span>
-            </button>
-            <button class="button is-warning">
-                <b-icon
-                    pack="ionicons"
-                    icon="refresh">
-                </b-icon>
-                <span>Refresh</span>
-            </button>
+            <div class="buttons">
+                <button class="button is-dark">
+                    <b-icon pack="ionicons" icon="checkmark"></b-icon>
+                    <span>Finish</span>
+                </button>
+                <button class="button is-warning">
+                    <b-icon pack="ionicons" icon="checkmark"></b-icon>
+                    <span>Finish</span>
+                </button>
+                <button class="button is-warning">
+                    <b-icon
+                        pack="ionicons"
+                        icon="refresh">
+                    </b-icon>
+                    <span>Refresh</span>
+                </button>
+            </div>
         </div>
 
         <div class="block">
@@ -163,21 +165,23 @@
                 </b-icon>
             </div>
 
-            <button class="button is-dark">
-                <b-icon pack="uil" icon="check"></b-icon>
-                <span>Finish</span>
-            </button>
-            <button class="button is-warning">
-                <b-icon pack="uil" icon="check"></b-icon>
-                <span>Finish</span>
-            </button>
-            <button class="button is-warning">
-                <b-icon
-                    pack="uil"
-                    icon="refresh">
-                </b-icon>
-                <span>Refresh</span>
-            </button>
+            <div class="buttons">
+                <button class="button is-dark">
+                    <b-icon pack="uil" icon="check"></b-icon>
+                    <span>Finish</span>
+                </button>
+                <button class="button is-warning">
+                    <b-icon pack="uil" icon="check"></b-icon>
+                    <span>Finish</span>
+                </button>
+                <button class="button is-warning">
+                    <b-icon
+                        pack="uil"
+                        icon="refresh">
+                    </b-icon>
+                    <span>Refresh</span>
+                </button>
+            </div>
         </div>
 
         <div class="block">
