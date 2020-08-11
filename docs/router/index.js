@@ -74,6 +74,7 @@ const router = new Router({
                 route('documentation/datetimepicker', 'components/datetimepicker/Datetimepicker'),
                 route('documentation/sidebar', 'components/sidebar/Sidebar'),
                 route('documentation/skeleton', 'components/skeleton/Skeleton'),
+                route('documentation/image', 'components/image/Image'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),

@@ -542,6 +542,18 @@
         ],
         "isUpdated": true
     },
+    "documentation/image": {
+        "title": "Image",
+        "subtitle": "Lazy loading responsive images",
+        "path": "/documentation/image",
+        "githubPath": "pages/components/image/Image.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/image"
+        ]
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",

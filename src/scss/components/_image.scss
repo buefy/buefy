@@ -1,0 +1,20 @@
+$image-placeholder-blur-enabled: true !default;
+$image-placeholder-blur: 10px !default;
+
+.b-image-wrapper {
+    > img {
+        object-fit: cover;
+
+        &.has-ratio,
+        &.placeholder {
+            @extend %overlay;
+            height: 100%;
+            width: 100%;
+        }
+        @if $image-placeholder-blur-enabled {
+            &.placeholder {
+                filter: blur($image-placeholder-blur);
+            }
+        }
+    }
+}

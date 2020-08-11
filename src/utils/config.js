@@ -59,6 +59,11 @@ let config = {
         'NuxtLink',
         'NLink'
     ],
+    defaultImageWebpFallback: null,
+    defaultImageLazy: true,
+    defaultImageResponsive: true,
+    defaultImageRatio: null,
+    defaultImageSrcsetFormatter: null,
     customIconPacks: null
 }
 
