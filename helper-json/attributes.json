@@ -975,6 +975,46 @@
     "description": "Add class to icon font (&lt;i&gt; tag), optional.\n                    See <a href=\"https://materialdesignicons.com/getting-started\" target=\"_blank\">here for MDI</a>,\n                    <a href=\"http://fontawesome.io/examples/\" target=\"_blank\">here for FontAwesome 4</a> and\n                    <a href=\"https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs\" target=\"_blank\">here for FontAwesome 5</a> custom classes",
     "type": "string"
   },
+  "b-image/src": {
+      "description": "The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers thst do not support this format yet.",
+      "type": "string"
+  },
+  "b-image/webp-fallback": {
+      "description": "Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.",
+      "type": "string"
+  },
+  "b-image/lazy": {
+      "description": "Use IntersectionObserver to display the image only when in viewport.",
+      "type": "boolean"
+  },
+  "b-image/responsive": {
+      "description": "The image will take 100% of the parent width. Use this with ratio to prevent page jump when images are loading.",
+      "type": "boolean"
+  },
+  "b-image/ratio": {
+      "description": "The space will be reserved. Prevent page jump when images are loading when using responsive.",
+      "type": "string"
+  },
+  "b-image/placeholder": {
+      "description": "The image that will be displayed before the src load. Useful if you want to use lqip technique. Will use webp-fallback if only an extension is given.",
+      "type": "string"
+  },
+  "b-image/srcset": {
+      "description": "You can enter a valid srcset value (ex. 'image1.webp 400w,image2.webp 800w'). Will use webp-fallback if only an extension is given.",
+      "type": "string"
+  },
+  "b-image/srcset-sizes": {
+      "description": "It will generate a srcset string using those sizes.",
+      "type": "array<number>"
+  },
+  "b-image/srcset-formatter": {
+      "description": "Function to format src according to a given size.",
+      "type": "function"
+  },
+  "b-image/rounded": {
+      "description": "Rounded image",
+      "type": "boolean"
+  },
   "b-input/value": {
     "description": "Binding value",
     "type": "string|number"

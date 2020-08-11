@@ -366,6 +366,41 @@ export default [
                 type: 'string',
                 values: '—',
                 default: '<code>[a, button, input, router-link, nuxt-link, n-link, RouterLink, NuxtLink, NLink]</code>'
+            },
+            {
+                name: '<code>defaultImageWebpFallback</code>',
+                description: `Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.`,
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>defaultImageLazy</code>',
+                description: `Use IntersectionObserver to display the image only when in viewport.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultImageResponsive</code>',
+                description: `The image will take 100% of the parent width. Use this with <code>ratio</code> to prevent page jump when images are loading.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultImageRatio</code>',
+                description: `Default datepicker <code>date-formatter</code> attribute`,
+                type: 'String',
+                values: '<code>1by1</code>, <code>5by4</code>, <code>4by3</code>, <code>3by2</code>, <code>5by3</code>, <code>16by9</code>, <code>2by1</code>, <code>3by1</code>, <code>4by5</code>, <code>3by4</code>, <code>2by3</code>, <code>3by5</code>, <code>9by16</code>, <code>1by2</code> <code>1by3</code> or any string having this format <code>{number}by{number}</code>',
+                default: '—'
+            },
+            {
+                name: '<code>defaultImageSrcsetFormatter</code>',
+                description: `Function to format src according to a given size.`,
+                type: 'Function',
+                values: '—',
+                default: '(src, size) => `${srcFilename}-${size}.${srcExt}`'
             }
         ]
     }

@@ -58,6 +58,11 @@ export declare type BuefyConfig = {
     defaultTabsAnimated?: boolean;
     defaultTabsType?: string;
     defaultLinkTags?: string[];
+    defaultImageWebpFallback?: string,
+    defaultImageLazy?: boolean,
+    defaultImageResponsive?: boolean,
+    defaultImageRatio?: string,
+    defaultImageSrcsetFormatter?: Function,
     customIconPacks?: any;
 };
 

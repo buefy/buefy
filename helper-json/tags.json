@@ -334,6 +334,22 @@
     "description": "Buefy component <b-icon>",
     "subtags": []
   },
+  "b-image": {
+      "attributes": [
+        "src",
+        "webp-fallback",
+        "lazy",
+        "responsive",
+        "ratio",
+        "placeholder",
+        "srcset",
+        "srcset-sizes",
+        "srcset-formatter",
+        "rounded"
+      ],
+      "description": "Buefy component <b-image>",
+      "subtags": []
+  },
   "b-input": {
     "attributes": [
       "value",
