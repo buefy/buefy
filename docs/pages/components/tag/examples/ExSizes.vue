@@ -1,12 +1,12 @@
 <template>
     <section>
-        <p>
+        <b-taglist>
             <b-tag type="is-dark">Default</b-tag>
             <b-tag type="is-primary" size="is-medium">Medium</b-tag>
             <b-tag type="is-info" size="is-large">Large</b-tag>
-        </p>
+        </b-taglist>
 
-        <p>
+        <b-taglist>
             <b-tag type="is-primary">Primary</b-tag>
             <b-tag type="is-primary is-light">Light primary</b-tag>
 
@@ -29,6 +29,6 @@
             <b-tag type="is-light">Light</b-tag>
 
             <b-tag type="is-dark">Dark</b-tag>
-        </p>
+        </b-taglist>
     </section>
 </template>
