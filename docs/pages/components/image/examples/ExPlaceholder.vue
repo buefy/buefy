@@ -1,0 +1,9 @@
+<template>
+    <section>
+        <b-image
+            src="https://picsum.photos/800/450"
+            placeholder="/static/img/icons/favicon-32x32.png"
+            ratio="16by9"
+        ></b-image>
+    </section>
+</template>
