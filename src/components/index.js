@@ -10,6 +10,7 @@ import Dialog from './dialog'
 import Dropdown from './dropdown'
 import Field from './field'
 import Icon from './icon'
+import Image from './image'
 import Input from './input'
 import Loading from './loading'
 import Menu from './menu'
@@ -51,6 +52,7 @@ export {
     Dropdown,
     Field,
     Icon,
+    Image,
     Input,
     Loading,
     Menu,
