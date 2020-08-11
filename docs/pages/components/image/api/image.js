@@ -3,7 +3,7 @@ export default [
         props: [
             {
                 name: '<code>src</code>',
-                description: 'The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers thst do not support this format yet.',
+                description: 'The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers that do not support this format yet.',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -70,6 +70,12 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+        ],
+        slots: [
+            {
+                name: '<code>placeholder</code>',
+                description: 'This is to customize the placeholder waiting the image to load.',
             },
         ],
         events: [

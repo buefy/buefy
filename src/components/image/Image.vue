@@ -16,12 +16,16 @@
             >
         </transition>
         <transition name="fade">
-            <img
+            <slot
                 v-if="isPlaceholderDisplayed"
-                :src="computedPlaceholder"
-                :class="imgClasses"
-                class="placeholder"
+                name="placeholder"
             >
+                <img
+                    :src="computedPlaceholder"
+                    :class="imgClasses"
+                    class="placeholder"
+                >
+            </slot>
         </transition>
     </figure>
 </template>
@@ -163,8 +167,12 @@ export default {
         isPlaceholderDisplayed() {
             return (
                 !this.loaded &&
-                this.placeholder &&
-                (this.webpSupportVerified || !this.isPlaceholderWepb)
+                (
+                    this.$slots.placeholder || (
+                        this.placeholder &&
+                        (this.webpSupportVerified || !this.isPlaceholderWepb)
+                    )
+                )
             )
         },
         computedSrcset() {
