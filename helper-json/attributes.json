@@ -976,7 +976,7 @@
     "type": "string"
   },
   "b-image/src": {
-      "description": "The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers thst do not support this format yet.",
+      "description": "The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers that do not support this format yet.",
       "type": "string"
   },
   "b-image/webp-fallback": {
