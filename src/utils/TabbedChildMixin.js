@@ -22,7 +22,8 @@ export default (parentCmp) => ({
     data() {
         return {
             transitionName: null,
-            elementClass: 'item'
+            elementClass: 'item',
+            elementRole: null
         }
     },
     computed: {
@@ -61,7 +62,13 @@ export default (parentCmp) => ({
                 name: 'show',
                 value: this.isActive && this.visible
             }],
-            attrs: { 'class': this.elementClass }
+            attrs: {
+                'class': this.elementClass,
+                'role': this.elementRole,
+                'id': `${this.value}-content`,
+                'aria-labelledby': this.elementRole ? `${this.value}-label` : null,
+                'tabindex': this.isActive ? 0 : -1
+            }
         }, this.$slots.default)
         // check animated prop
         if (this.parent.animated) {

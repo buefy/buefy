@@ -156,7 +156,15 @@ export default {
          * Check if previous button is available.
          */
         hasPrev() {
-            return !!this.prevItem
+            return this.prevItemIdx !== null
+        },
+
+        /**
+         * Retrieves the next visible item index
+         */
+        nextItemIdx() {
+            let idx = this.activeItem ? this.items.indexOf(this.activeItem) : 0
+            return this.getNextItemIdx(idx)
         },
 
         /**
@@ -164,14 +172,19 @@ export default {
          */
         nextItem() {
             let nextItem = null
-            let idx = this.activeItem ? this.items.indexOf(this.activeItem) + 1 : 0
-            for (; idx < this.items.length; idx++) {
-                if (this.items[idx].visible) {
-                    nextItem = this.items[idx]
-                    break
-                }
+            if (this.nextItemIdx !== null) {
+                nextItem = this.items[this.nextItemIdx]
             }
             return nextItem
+        },
+
+        /**
+        * Retrieves the next visible item index
+        */
+        prevItemIdx() {
+            if (!this.activeItem) { return null }
+            let idx = this.items.indexOf(this.activeItem)
+            return this.getPrevItemIdx(idx)
         },
 
         /**
@@ -181,11 +194,8 @@ export default {
             if (!this.activeItem) { return null }
 
             let prevItem = null
-            for (let idx = this.items.indexOf(this.activeItem) - 1; idx >= 0; idx--) {
-                if (this.items[idx].visible) {
-                    prevItem = this.items[idx]
-                    break
-                }
+            if (this.prevItemIdx !== null) {
+                prevItem = this.items[this.prevItemIdx]
             }
             return prevItem
         },
@@ -194,7 +204,7 @@ export default {
          * Check if next button is available.
          */
         hasNext() {
-            return !!this.nextItem
+            return this.nextItemIdx !== null
         },
 
         navigationProps() {
