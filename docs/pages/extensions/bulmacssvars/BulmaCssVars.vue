@@ -34,7 +34,7 @@
             return {
                 npmInstallSnippet: `npm install -S bulma-css-vars
 npm install -D sass
-node ./node_modules/bin/bulma-css-vars --init`,
+node ./node_modules/.bin/bulma-css-vars --init`,
                 vueCompSnippet: `import './main.scss'`,
                 scriptSnippet: `"scripts": {
   "bulma-css-vars": "bulma-css-vars"
