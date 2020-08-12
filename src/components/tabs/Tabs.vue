@@ -118,7 +118,8 @@ export default {
                         prevIdx !== null &&
                         this.$refs.tabLink &&
                         prevIdx < this.$refs.tabLink.length &&
-                        !this.items[prevIdx].disabled
+                        !this.items[prevIdx].disabled &&
+                        this.$refs.tabLink[prevIdx].focus
                     ) {
                         this.$refs.tabLink[prevIdx].focus()
                     }
@@ -136,7 +137,8 @@ export default {
                         nextIdx !== null &&
                         this.$refs.tabLink &&
                         nextIdx < this.$refs.tabLink.length &&
-                        !this.items[nextIdx].disabled
+                        !this.items[nextIdx].disabled &&
+                        this.$refs.tabLink[nextIdx].focus
                     ) {
                         this.$refs.tabLink[nextIdx].focus()
                     }
