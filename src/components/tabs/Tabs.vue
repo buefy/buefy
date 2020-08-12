@@ -107,8 +107,8 @@ export default {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
             const { key } = event
             switch (key) {
-                case 'ArrowLeft':
-                case 'Left': {
+                case this.vertical ? 'ArrowUp' : 'ArrowLeft':
+                case this.vertical ? 'Up' : 'Left': {
                     let prevIdx = this.getPrevItemIdx(this.currentFocus, true)
                     if (prevIdx === null) {
                         // We try to give focus back to the last visible element
@@ -125,8 +125,8 @@ export default {
                     event.preventDefault()
                     break
                 }
-                case 'ArrowRight':
-                case 'Right': {
+                case this.vertical ? 'ArrowDown' : 'ArrowRight':
+                case this.vertical ? 'Down' : 'Right': {
                     let nextIdx = this.getNextItemIdx(this.currentFocus, true)
                     if (nextIdx === null) {
                         // We try to give focus back to the first visible element
