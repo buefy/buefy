@@ -70,56 +70,36 @@ export default {
     watch: {
         /**
          *   When v-model is changed:
-         *   1. Get value from input file
-         *   2. Set internal value.
-         *   3. Reset input value if array is empty or when input file is not found in newValue
-         *   4. If it's invalid, validate again.
+         *   1. Set internal value.
+         *   2. Reset interna input file value
+         *   3. If it's invalid, validate again.
          */
         value(value) {
-            let inputFiles = this.$refs.input.files
             this.newValue = value
-
-            if (!this.newValue ||
-                (Array.isArray(this.newValue) && this.newValue.length === 0) ||
-                !inputFiles[0] ||
-                (Array.isArray(this.newValue) &&
-                    !this.newValue.some(function (a) { return a.name === inputFiles[0].name }))) {
-                this.$refs.input.value = null
-            }
+            this.$refs.input.value = null
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
         }
     },
     methods: {
-
         /**
         * Listen change event on input type 'file',
         * emit 'input' event and validate
         */
         onFileChange(event) {
             if (this.disabled || this.loading) return
-            if (this.dragDrop) {
-                this.updateDragDropFocus(false)
-            }
+            if (this.dragDrop) this.updateDragDropFocus(false)
             const value = event.target.files || event.dataTransfer.files
             if (value.length === 0) {
-                if (!this.newValue) {
-                    return
-                }
-                if (this.native) {
-                    this.newValue = null
-                }
+                if (!this.newValue) return
+                if (this.native) this.newValue = null
             } else if (!this.multiple) {
                 // only one element in case drag drop mode and isn't multiple
                 if (this.dragDrop && value.length !== 1) return
                 else {
                     const file = value[0]
-                    if (this.checkType(file)) {
-                        this.newValue = file
-                    } else if (this.newValue) {
-                        this.newValue = null
-                    } else {
-                        return
-                    }
+                    if (this.checkType(file)) this.newValue = file
+                    else if (this.newValue) this.newValue = null
+                    else return
                 }
             } else {
                 // always new values if native or undefined local
@@ -135,9 +115,7 @@ export default {
                         newValues = true
                     }
                 }
-                if (!newValues) {
-                    return
-                }
+                if (!newValues) return
             }
             this.$emit('input', this.newValue)
             !this.dragDrop && this.checkHtml5Validity()
