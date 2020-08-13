@@ -1,5 +1,51 @@
 # Buefy Changelog
 
+## 0.9.0
+
+### Breaking changes
+
+* **Table**, new default slot and table column syntax
+
+From
+```html
+<b-table :data="myData">
+    <template slot-scope="props">
+        <b-table-column field="name" label="Name">
+            {{ props.row.name }}
+        </b-table-column>
+        <b-table-column field="age" numeric label="Age">
+            {{ props.row.age }}
+        </b-table-column>
+    </template>
+</b-table>
+```
+
+To
+```html
+<b-table :data="myData">
+    <b-table-column field="name" label="Name" v-slot="props">
+        {{ props.row.name }}
+    </b-table-column>
+    <b-table-column field="age" label="Age">
+        <template v-slot:default="props">
+            {{ props.row.age }}
+        </template>
+    </b-table-column>
+</b-table>
+```
+
+* Show ``check-all`` checkbox when table cards
+
+### New features
+
+* **New component: Image**, [see docs](https://buefy.org/documentation/image)
+
+### Fixes
+
+* Fix XSS on programmatic components
+* Fix #2732 upload emit ``input`` when same file
+* Fix #2738 regex check when ``searchable`` table
+
 ## 0.8.20
 
 ### New features
