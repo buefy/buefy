@@ -7,12 +7,8 @@ import { use, registerComponent, registerComponentProgrammatic } from '../../uti
 let localVueInstance
 
 function open(propsData) {
-    let slot
-    // vnode array
-    if (Array.isArray(propsData.message)) {
-        slot = propsData.message
-        delete propsData.message
-    }
+    const slot = propsData.message
+    delete propsData.message
     const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
     const DialogComponent = vm.extend(Dialog)
     const component = new DialogComponent({
@@ -20,7 +16,11 @@ function open(propsData) {
         propsData
     })
     if (slot) {
-        component.$slots.default = slot
+        const CustomSlot = vm.extend({
+            template: `<div>${slot}</div>`
+        })
+        component.$slots.default = new CustomSlot().$mount()._vnode
+        component.$forceUpdate()
     }
     if (!config.defaultProgrammaticPromise) {
         return component

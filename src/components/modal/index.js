@@ -23,7 +23,7 @@ const ModalProgrammatic = {
             delete params.parent
         }
         let slot
-        if (Array.isArray(params.content)) {
+        if (params.content) {
             slot = params.content
             delete params.content
         }
@@ -31,15 +31,19 @@ const ModalProgrammatic = {
 
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ModalComponent = vm.extend(Modal)
-        const instance = new ModalComponent({
+        const component = new ModalComponent({
             parent,
             el: document.createElement('div'),
             propsData
         })
         if (slot) {
-            instance.$slots.default = slot
+            const CustomSlot = vm.extend({
+                template: `<div>${slot}</div>`
+            })
+            component.$slots.default = new CustomSlot().$mount()._vnode
+            component.$forceUpdate()
         }
-        return instance
+        return component
     }
 }
 
