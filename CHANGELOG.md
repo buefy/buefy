@@ -8,6 +8,7 @@
 * **Table**, new default slot and table column syntax
 
 From
+
 ```html
 <b-table :data="myData">
     <template slot-scope="props">
@@ -22,6 +23,7 @@ From
 ```
 
 To
+
 ```html
 <b-table :data="myData">
     <b-table-column field="name" label="Name" v-slot="props">
@@ -37,6 +39,40 @@ To
 
 * Show ``check-all`` checkbox when table cards
 
+* **Internationalization**, Buefy is now using Intl package to format dates and numbers A prop named `locale` which accept a BCP 47 language tag have been added to some components. The default value for this prop is `undefined` which will use the browser locale. It can affect the following components:
+  * Progress:
+    * Intl is used to format the displayed value
+  * Rate
+    * Intl is used to format the displayed score
+  * Datepicker and Datetimepicker:
+    * Intl is used to get month names
+    * Intl is used to get week day names
+    * Intl is used to format the displayed date(s)
+    * Intl is used to parse the given date when `editable`
+  * Timepicker, Clockpicker and Datetimepicker
+    * Intl is used to get separators
+    * Intl is used to format the displayed time
+    * Intl is used to parse the given date when `editable`
+
+* **Configuration**
+  * `defaultTrapFocus` is now `true`. It can affect the following components:
+    * Datepicker
+    * Dialog
+    * Dropdown
+    * Modal
+  * `defaultLocale`
+    * Default value is `undefined`, which means it will use the user browser locale
+    * It accept a string with a BCP 47 language tag, or an array of such strings (see [Unicode BCP 47 locale identifier](https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance)).
+  * `monthNames`
+    * Default value is now undefined. It will use the given locale (default to browser locale) to get localized month names
+  * `dayNames`
+    * Default value is now undefined. It will use the given locale (default to browser locale) to get localized day names
+
+* Use KeyboardEvent.key instead of keyCode. It can affect the following component:
+  * Taginput:
+    * `remove-on-keys` default is now `["Backspace"]` instead of `[8]`
+    * `confirm-key-codes` is now called `confirm-keys` and the default is `[",", "Enter"]` instead of `[13, 188]`
+
 ### New features
 
 * **New component: Image**, [see docs](https://buefy.org/documentation/image)
@@ -44,8 +80,15 @@ To
 ### Fixes
 
 * Fix XSS on programmatic components
+* Fix #1226 and #2658 Using message with fields addons and groups
+* Fix #2518 set Autocomplete focus on clear
+* Fix #2599 Disabled b-select and b-input have different colors
+* Fix #2631 Table with sticky searchable column
+* Fix #2647 Progress bar truncate whole number zeroes
+* Fix #2683 Datepicker lost focus using arrow keys
 * Fix #2732 upload emit ``input`` when same file
 * Fix #2738 regex check when ``searchable`` table
+* Improve Datepicker a11y on older browsers (#2641)
 
 ## 0.8.20
 
