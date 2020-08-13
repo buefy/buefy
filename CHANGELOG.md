@@ -4,6 +4,7 @@
 
 ### Breaking changes
 
+* **Bulma** [0.8.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#big-update) and [0.9.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#090)
 * **Table**, new default slot and table column syntax
 
 From
