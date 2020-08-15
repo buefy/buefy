@@ -4,7 +4,9 @@
 
 ### Breaking changes
 
+* **Vue.js** Support 2.6+
 * **Bulma** [0.8.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#big-update) and [0.9.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#090)
+
 * **Table**, new default slot and table column syntax
 
 From
@@ -37,7 +39,13 @@ To
 </b-table>
 ```
 
+* Add ``triggers`` prop and remove ``hoverable`` prop to dropdown
+* Add placeholder option to number inputs removing default value 0 (thanks @rcoundon)
 * Show ``check-all`` checkbox when table cards
+* Build with ``condense`` option to avoid leading/trailing whitespaces
+* SVG: 
+    * $icon-svg-width: auto !default;
+    * $icon-svg-height: auto !default;
 
 * **Internationalization**, Buefy is now using Intl package to format dates and numbers A prop named `locale` which accept a BCP 47 language tag have been added to some components. The default value for this prop is `undefined` which will use the browser locale. It can affect the following components:
   * Progress:
@@ -76,16 +84,31 @@ To
 ### New features
 
 * **New component: Image**, [see docs](https://buefy.org/documentation/image)
+* #1953 Add promise support to dialog using ``defaultPromiseProgrammatically`` constructor options
+* #2553 Add trigger slot to datepicker, timepicker and datetimepicker
+* #2568 Hide content message when empty slot
+* #2577 Add ``defaultStatusIcon`` constructor option and ``status-icon`` prop to field
+* Add ``icon-size`` prop to menu item (thanks @cyberShaw)
+* Add ``debounce-search`` prop to table (thanks @sc0ra)
+* Add ``reset-on-meridian-change`` to timepicker (thanks @taverasady)
+* Add ``close-icon `` into tag component (thanks @kaangokdemir)
+* Improve handle events for customElement components (thanks @vvkk77)
 
 ### Fixes
 
 * Fix XSS on programmatic components
 * Fix #1226 and #2658 Using message with fields addons and groups
 * Fix #2518 set Autocomplete focus on clear
+* Fix #2584 default table sort when backend
 * Fix #2599 Disabled b-select and b-input have different colors
 * Fix #2631 Table with sticky searchable column
 * Fix #2647 Progress bar truncate whole number zeroes
 * Fix #2683 Datepicker lost focus using arrow keys
+* Fix #2684 timepicker hour check using ``unselectable-dates``
+* Fix #2639 datepicker clone before formatter
+* Fix #2706 number input steps (thanks @rcoundon)
+* Fix #2707 autocomplete index error using arrow keys
+* Fix #2725 open autocomplete when focused
 * Fix #2732 upload emit ``input`` when same file
 * Fix #2738 regex check when ``searchable`` table
 * Improve Datepicker a11y on older browsers (#2641)
