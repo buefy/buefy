@@ -104,7 +104,8 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/icon": {
         "title": "Icon",
@@ -116,7 +117,8 @@
             "/",
             "documentation",
             "documentation/icon"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tooltip": {
         "title": "Tooltip",
@@ -128,7 +130,8 @@
             "/",
             "documentation",
             "documentation/tooltip"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/modal": {
         "title": "Modal",
@@ -140,7 +143,8 @@
             "/",
             "documentation",
             "documentation/modal"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/navbar": {
         "title": "Navbar",
@@ -152,7 +156,8 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -164,7 +169,8 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tag": {
         "title": "Tag",
@@ -176,7 +182,8 @@
             "/",
             "documentation",
             "documentation/tag"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/toast": {
         "title": "Toast",
@@ -248,7 +255,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/input": {
         "title": "Input",
@@ -333,7 +341,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -345,7 +354,8 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -357,7 +367,8 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datetimepicker": {
         "title": "Datetimepicker",
@@ -369,7 +380,8 @@
             "/",
             "documentation",
             "documentation/datetimepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -381,7 +393,8 @@
             "/",
             "documentation",
             "documentation/taginput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/upload": {
         "title": "Upload",
@@ -393,7 +406,8 @@
             "/",
             "documentation",
             "documentation/upload"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/table": {
         "title": "Table",
@@ -405,7 +419,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -441,7 +456,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/steps": {
         "title": "Steps",
@@ -466,7 +482,8 @@
             "/",
             "documentation",
             "documentation/menu"
-        ]
+        ],
+        "isUpdated": true
     },
      "documentation/slider": {
         "title": "Slider",
@@ -490,7 +507,8 @@
             "/",
             "documentation",
             "documentation/progress"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/carousel": {
         "title": "Carousel",
@@ -502,7 +520,8 @@
             "/",
             "documentation",
             "documentation/carousel"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/rate": {
         "title": "Rate",
@@ -526,8 +545,7 @@
             "/",
             "documentation",
             "documentation/sidebar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/skeleton": {
         "title": "Skeleton",
@@ -552,7 +570,8 @@
             "/",
             "documentation",
             "documentation/image"
-        ]
+        ],
+        "isNew": true
     },
     "extensions": {
         "title": "Extensions",
