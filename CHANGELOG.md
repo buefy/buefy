@@ -4,7 +4,7 @@
 
 ### Breaking changes
 
-* **Vue.js** Support 2.6+
+* **Vue.js** 2.6+ is now the minimum required version
 * **Bulma** [0.8.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#big-update) and [0.9.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#090)
 
 * **Table**, new default slot and table column syntax
@@ -42,10 +42,12 @@ To
 * Add ``triggers`` prop and remove ``hoverable`` prop to dropdown
 * Add placeholder option to number inputs removing default value 0 (thanks @rcoundon)
 * Show ``check-all`` checkbox when table cards
+* Refacor carousel and carousel list and removing ``config`` prop too  (thanks @Tofandel)
+* Add ``position`` prop and default alignment to skeleton (thanks @EmmanuelVlad)
 * Build with ``condense`` option to avoid leading/trailing whitespaces
 * SVG: 
-    * $icon-svg-width: auto !default;
-    * $icon-svg-height: auto !default;
+    * ``$icon-svg-width: auto !default``;
+    * ``$icon-svg-height: auto !default``;
 
 * **Internationalization**, Buefy is now using Intl package to format dates and numbers A prop named `locale` which accept a BCP 47 language tag have been added to some components. The default value for this prop is `undefined` which will use the browser locale. It can affect the following components:
   * Progress:
@@ -91,19 +93,27 @@ To
 * Add ``icon-size`` prop to menu item (thanks @cyberShaw)
 * Add ``debounce-search`` prop to table (thanks @sc0ra)
 * Add ``reset-on-meridian-change`` to timepicker (thanks @taverasady)
-* Add ``close-icon `` into tag component (thanks @kaangokdemir)
+* Add ``close-icon `` to tag (thanks @kaangokdemir)
+* Add ``close-type `` to tag input (thanks @kaangokdemir)
+* Add ``header-class`` prop to tab item and step item (thanks @Tofandel)
+* Add ``exponential`` prop to number input (thanks @Tofandel)
+* Add ``defaultTabsType`` and ``defaultTabsExpanded`` constructor options (thanks @wrabit)
 * Improve handle events for customElement components (thanks @vvkk77)
+* Refactor components (table, tabs, steps, carousel, etc) using provide/inject
 
 ### Fixes
 
 * Fix XSS on programmatic components
 * Fix #1226 and #2658 Using message with fields addons and groups
+* Fix #2196 carousel v-model sync using arrow navigation buttons (thanks @Tofandel)
 * Fix #2518 set Autocomplete focus on clear
 * Fix #2584 default table sort when backend
-* Fix #2599 Disabled b-select and b-input have different colors
-* Fix #2631 Table with sticky searchable column
-* Fix #2647 Progress bar truncate whole number zeroes
-* Fix #2683 Datepicker lost focus using arrow keys
+* Fix #2591 carousel does not continue to slide even ``pause-hover`` is false (thanks @Tofandel)
+* Fix #2599 disabled select and input have different colors
+* Fix #2608 taginput wrong value when ``allow-duplicates`` is false (thanks @nithesh247)
+* Fix #2631 table with sticky searchable column
+* Fix #2647 progress bar truncate whole number zeroes
+* Fix #2683 datepicker lost focus using arrow keys
 * Fix #2684 timepicker hour check using ``unselectable-dates``
 * Fix #2639 datepicker clone before formatter
 * Fix #2706 number input steps (thanks @rcoundon)
@@ -111,7 +121,7 @@ To
 * Fix #2725 open autocomplete when focused
 * Fix #2732 upload emit ``input`` when same file
 * Fix #2738 regex check when ``searchable`` table
-* Improve Datepicker a11y on older browsers (#2641)
+* Improve datepicker a11y on older browsers (#2641)
 
 ## 0.8.20
 
