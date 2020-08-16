@@ -87,6 +87,7 @@ To
 ### New features
 
 * **New component: Image**, [see docs](https://buefy.org/documentation/image)
+* **.sync deprecated** (except of table), use ``v-model`` but you can use ``.sync`` until next breaking version
 * #1953 Add promise support to dialog using ``defaultPromiseProgrammatically`` constructor options
 * #2553 Add trigger slot to datepicker, timepicker and datetimepicker
 * #2568 Hide content message when empty slot
@@ -105,7 +106,7 @@ To
 ### Fixes
 
 * Fix XSS on programmatic components
-* Fix #1226 and #2658 Using message with fields addons and groups
+* Fix #1226 and #2658 using message with fields addons and groups
 * Fix #2196 carousel v-model sync using arrow navigation buttons (thanks @Tofandel)
 * Fix #2518 set Autocomplete focus on clear
 * Fix #2584 default table sort when backend

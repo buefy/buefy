@@ -109,6 +109,11 @@ export default {
         [Icon.name]: Icon,
         [PaginationButton.name]: PaginationButton
     },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'current',
+        event: 'update:current'
+    },
     props: {
         total: [Number, String],
         perPage: {

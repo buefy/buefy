@@ -18,6 +18,11 @@ import { HTMLElement } from '../../utils/ssr'
 
 export default {
     name: 'BLoading',
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         active: Boolean,
         programmatic: Boolean,

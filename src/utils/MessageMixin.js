@@ -4,6 +4,11 @@ export default {
     components: {
         [Icon.name]: Icon
     },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         active: {
             type: Boolean,

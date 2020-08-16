@@ -5,12 +5,13 @@
             Launch component modal
         </button>
 
-        <b-modal :active.sync="isComponentModalActive"
-                 has-modal-card
-                 trap-focus
-                 :destroy-on-hide="false"
-                 aria-role="dialog"
-                 aria-modal>
+        <b-modal 
+            v-model="isComponentModalActive"
+            has-modal-card
+            trap-focus
+            :destroy-on-hide="false"
+            aria-role="dialog"
+            aria-modal>
             <template #default="props">
                 <modal-form v-bind="formProps" @close="props.close"></modal-form>
             </template>

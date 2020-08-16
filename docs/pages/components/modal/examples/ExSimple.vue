@@ -11,13 +11,13 @@
             </button>
         </div>
 
-        <b-modal :active.sync="isImageModalActive">
+        <b-modal v-model="isImageModalActive">
             <p class="image is-4by3">
                 <img src="/static/img/placeholder-1280x960.png">
             </p>
         </b-modal>
 
-        <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
+        <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">

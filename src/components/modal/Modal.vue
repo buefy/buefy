@@ -53,6 +53,11 @@ export default {
     directives: {
         trapFocus
     },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         active: Boolean,
         component: [Object, Function, String],

@@ -12,7 +12,7 @@
             aria-id="contentIdForA11y2"
             class="panel"
             animation="slide"
-            :open.sync="isOpen">
+            v-model="isOpen">
             <div
                 slot="trigger"
                 class="panel-heading"
