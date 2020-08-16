@@ -44,6 +44,7 @@ To
 * Show ``check-all`` checkbox when table cards
 * Refacor carousel and carousel list and removing ``config`` prop too  (thanks @Tofandel)
 * Add ``position`` prop and default alignment to skeleton (thanks @EmmanuelVlad)
+* Replace ``is-active`` with ``active`` prop to navbar
 * Build with ``condense`` option to avoid leading/trailing whitespaces
 * SVG: 
     * ``$icon-svg-width: auto !default``;
