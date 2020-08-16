@@ -31,7 +31,7 @@ Browse [online documentation here](https://buefy.org/).
 
 ## Quick start
 
-You need [Vue.js](https://vuejs.org/) **version 2.5+**.
+You need [Vue.js](https://vuejs.org/) **version 2.6+**.
 
 ### 1 Install via npm
 
