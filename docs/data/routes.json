@@ -599,7 +599,7 @@
     },
     "extensions/sortablejs": {
         "title": "Sortablejs",
-        "subtitle": "Sort a table — as a Vue directive",
+        "subtitle": "Sort tags — as a Vue directive",
         "path": "/extensions/sortablejs",
         "githubPath": "pages/extensions/sortablejs/Sortablejs.vue",
         "menu": "extensions",
