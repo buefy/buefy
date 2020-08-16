@@ -45,6 +45,7 @@ To
 * Refacor carousel and carousel list and removing ``config`` prop too  (thanks @Tofandel)
 * Add ``position`` prop and default alignment to skeleton (thanks @EmmanuelVlad)
 * Replace ``is-active`` with ``active`` prop to navbar
+* Replace default value of ``defaultDatepickerYearsRange`` constructor option from ``[-100, 3]`` to ``[-100, 10]``
 * Build with ``condense`` option to avoid leading/trailing whitespaces
 * SVG: 
     * ``$icon-svg-width: auto !default``;
