@@ -40,7 +40,18 @@ export default {
     name: 'BTabs',
     mixins: [TabbedMixin('tab')],
     props: {
-        expanded: Boolean,
+        expanded: {
+            type: Boolean,
+            default: () => {
+                return config.defaultTabsExpanded
+            }
+        },
+        type: {
+            type: [String, Object],
+            default: () => {
+                return config.defaultTabsType
+            }
+        },
         animated: {
             type: Boolean,
             default: () => {

@@ -80,6 +80,7 @@ export default {
     },
     mixins: [TabbedMixin('step')],
     props: {
+        type: [String, Object],
         iconPack: String,
         iconPrev: {
             type: String,
