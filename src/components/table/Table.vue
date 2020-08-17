@@ -935,6 +935,9 @@ export default {
         },
 
         isRowSelected(row, selected) {
+            if (!selected) {
+                return false
+            }
             if (this.customRowKey) {
                 return row[this.customRowKey] === selected[this.customRowKey]
             }
