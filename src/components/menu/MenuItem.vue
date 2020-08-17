@@ -5,6 +5,7 @@
             v-bind="$attrs"
             :class="{
                 'is-active': newActive,
+                'is-expanded': newExpanded,
                 'is-disabled': disabled
             }"
             @click="onClick($event)"
