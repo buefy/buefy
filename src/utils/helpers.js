@@ -296,7 +296,6 @@ export function toVDom(html, createElement) {
     const doc = new DOMParser().parseFromString(html, 'text/html')
     const root = doc.body.firstChild
     const create = (node, createElement, acc) => {
-        const tag = node.tagName ? node.tagName : 'div'
         const siblings = []
         let sibling = node.nextSibling
         while (sibling) {
@@ -317,7 +316,19 @@ export function toVDom(html, createElement) {
             }
             sibling = sibling.nextSibling
         }
-        acc.push(createElement(tag, {}, [node.textContent, ...siblings]))
+        const children = []
+        if (node.tagName) {
+            const childNodes = node.childNodes
+            for (let i = 0; i < childNodes.length; i++) {
+                const childNode = childNodes[i]
+                if (childNode.tagName) {
+                    create(childNode, createElement, children)
+                } else {
+                    children.push(childNode.textContent)
+                }
+            }
+        }
+        acc.push(createElement(node.tagName || 'div', {}, [node.textContent, ...children, ...siblings]))
     }
     const nodes = []
     create(root, createElement, nodes)

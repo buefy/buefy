@@ -1,7 +1,7 @@
 import Toast from './Toast'
 
 import config, { VueInstance } from '../../utils/config'
-import { merge } from '../../utils/helpers'
+import { merge, toVDom } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
@@ -34,10 +34,7 @@ const ToastProgrammatic = {
             propsData
         })
         if (slot) {
-            const CustomSlot = vm.extend({
-                template: `<div>${slot}</div>`
-            })
-            component.$slots.default = new CustomSlot().$mount()._vnode
+            component.$slots.default = toVDom(slot, component.$createElement)
             component.$forceUpdate()
         }
         return component

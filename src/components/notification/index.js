@@ -2,7 +2,7 @@ import Notification from './Notification'
 import NotificationNotice from './NotificationNotice'
 
 import config, { VueInstance } from '../../utils/config'
-import { merge } from '../../utils/helpers'
+import { merge, toVDom } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
@@ -36,10 +36,7 @@ const NotificationProgrammatic = {
             propsData
         })
         if (slot) {
-            const CustomSlot = vm.extend({
-                template: `<div>${slot}</div>`
-            })
-            component.$slots.default = new CustomSlot().$mount()._vnode
+            component.$slots.default = toVDom(slot, component.$createElement)
             component.$forceUpdate()
         }
         // fix animation
