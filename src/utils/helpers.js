@@ -291,3 +291,36 @@ export function isWebpSupported() {
 export function isCustomElement(vm) {
     return 'shadowRoot' in vm.$root.$options
 }
+
+export function toVDom(html, createElement) {
+    const doc = new DOMParser().parseFromString(html, 'text/html')
+    const root = doc.body.firstChild
+    const create = (node, createElement, acc) => {
+        const tag = node.tagName ? node.tagName : 'div'
+        const siblings = []
+        let sibling = node.nextSibling
+        while (sibling) {
+            if (sibling.tagName) {
+                let children = []
+                const childNodes = sibling.childNodes
+                for (let i = 0; i < childNodes.length; i++) {
+                    const childNode = childNodes[i]
+                    if (childNode.tagName) {
+                        create(childNode, createElement, children)
+                    } else {
+                        children.push(childNode.textContent)
+                    }
+                }
+                siblings.push(createElement(sibling.tagName, {}, [...children]))
+            } else {
+                siblings.push(sibling.textContent)
+            }
+            sibling = sibling.nextSibling
+        }
+        acc.push(createElement(tag, {}, [node.textContent, ...siblings]))
+    }
+    const nodes = []
+    create(root, createElement, nodes)
+    console.log(nodes)
+    return nodes
+}
