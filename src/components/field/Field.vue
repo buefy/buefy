@@ -30,7 +30,12 @@
             <slot/>
         </b-field-body>
         <div v-else-if="grouped || groupMultiline || hasAddons()" class="field-body">
-            <b-field :addons="false" :class="innerFieldClasses"><slot/></b-field>
+            <b-field
+                :addons="false"
+                :type="newType"
+                :class="innerFieldClasses">
+                <slot/>
+            </b-field>
         </div>
         <template v-else>
             <slot/>
