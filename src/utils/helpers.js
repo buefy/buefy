@@ -321,6 +321,5 @@ export function toVDom(html, createElement) {
     }
     const nodes = []
     create(root, createElement, nodes)
-    console.log(nodes)
     return nodes
 }
