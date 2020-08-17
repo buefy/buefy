@@ -15,7 +15,7 @@
             :opened-detailed="defaultOpenedDetails"
             detailed
             detail-key="id"
-            @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.user.first_name}`)"
+            @details-open="(row) => $buefy.toast.open(`Expanded ${row.user.first_name}`)"
             :show-detail-icon="showDetailIcon"
             aria-next-label="Next page"
             aria-previous-label="Previous page"

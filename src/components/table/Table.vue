@@ -61,7 +61,7 @@
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + index + 'header'"
                             :class="[column.headerClass, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
@@ -140,7 +140,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + index + 'subheading'"
                             :style="column.style">
                             <div
                                 class="th-wrap"
@@ -169,7 +169,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + index + 'searchable'"
                             :style="column.style"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
@@ -242,11 +242,11 @@
                                 />
                             </td>
 
-                            <template v-for="(column, index) in visibleColumns">
+                            <template v-for="(column, colindex) in visibleColumns">
 
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.default">
                                     <b-slot-component
-                                        :key="(column.customKey || column.label) + index"
+                                        :key="column.newKey + index + ':' + colindex"
                                         :component="column"
                                         scoped
                                         name="default"
