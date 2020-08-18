@@ -179,7 +179,7 @@ export default {
         return {
             tags: Array.isArray(this.value) ? this.value.slice(0) : (this.value || []),
             newTag: '',
-            _elementRef: 'input',
+            _elementRef: 'autocomplete',
             _isTaginput: true
         }
     },
