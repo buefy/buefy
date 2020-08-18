@@ -1,5 +1,20 @@
 # Buefy Changelog
 
+## 0.9.1
+
+### New features
+
+* Add ``is-expanded`` class to menu item (thanks @btkostner)
+
+### Fixes
+
+* Fix #2750 internal html to vdom using programmatic components
+* Fix #2751 table props index value
+* Fix #2752 incorrect base css
+* Fix #2753 field type when addons
+* Fix #2761 close tooltip when delay
+* Fix indeterminate watcher in progress (thanks @service-paradis)
+
 ## 0.9.0
 
 ### Breaking changes
@@ -101,6 +116,7 @@ To
 * Add ``header-class`` prop to tab item and step item (thanks @Tofandel)
 * Add ``exponential`` prop to number input (thanks @Tofandel)
 * Add ``defaultTabsType`` and ``defaultTabsExpanded`` constructor options (thanks @wrabit)
+* Add ``create-tag`` prop to taginput
 * Improve handle events for customElement components (thanks @vvkk77)
 * Refactor components (table, tabs, steps, carousel, etc) using provide/inject
 
