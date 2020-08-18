@@ -84,6 +84,7 @@ export default {
         return {
             isActive: false,
             style: {},
+            delayTimer: null,
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -156,12 +157,15 @@ export default {
         },
         open() {
             if (this.delay) {
-                setTimeout(() => (this.isActive = true), this.delay)
+                this.delayTimer = setTimeout(() => (this.isActive = true), this.delay)
             } else {
                 this.isActive = true
             }
         },
         close() {
+            if (this.delayTimer) {
+                clearTimeout(this.delayTimer)
+            }
             if (typeof this.autoClose === 'boolean') {
                 this.isActive = !this.autoClose
             }
