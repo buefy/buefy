@@ -84,6 +84,7 @@ export default {
         return {
             isActive: false,
             style: {},
+            timer: null,
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -156,7 +157,10 @@ export default {
         },
         open() {
             if (this.delay) {
-                setTimeout(() => (this.isActive = true), this.delay)
+                this.timer = setTimeout(() => {
+                    this.isActive = true
+                    this.timer = null
+                }, this.delay)
             } else {
                 this.isActive = true
             }
@@ -164,6 +168,7 @@ export default {
         close() {
             if (typeof this.autoClose === 'boolean') {
                 this.isActive = !this.autoClose
+                if (this.autoClose && this.timer) clearTimeout(this.timer)
             }
         },
         /**
