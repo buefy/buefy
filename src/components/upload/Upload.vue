@@ -76,7 +76,9 @@ export default {
          */
         value(value) {
             this.newValue = value
-            this.$refs.input.value = null
+            if (!value || (Array.isArray(value) && value.length === 0)) {
+                this.$refs.input.value = null
+            }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
         }
     },
