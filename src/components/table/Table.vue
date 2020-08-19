@@ -38,10 +38,7 @@
         <div
             class="table-wrapper"
             :class="tableWrapperClasses"
-            :style="{
-                height: height === undefined ? null :
-                (isNaN(height) ? height : height + 'px')
-            }"
+            :style="tableStyle"
         >
             <table
                 class="table"
@@ -62,7 +59,7 @@
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="column.newKey + index + 'header'"
+                            :key="column.newKey + ':' + index + 'header'"
                             :class="[column.headerClass, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
@@ -141,7 +138,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="column.newKey + index + 'subheading'"
+                            :key="column.newKey + ':' + index + 'subheading'"
                             :style="column.style">
                             <div
                                 class="th-wrap"
@@ -170,7 +167,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="column.newKey + index + 'searchable'"
+                            :key="column.newKey + ':' + index + 'searchable'"
                             :style="column.style"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
@@ -247,7 +244,7 @@
 
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.default">
                                     <b-slot-component
-                                        :key="column.newKey + index + ':' + colindex"
+                                        :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
                                         scoped
                                         name="default"
@@ -343,7 +340,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -565,6 +562,11 @@ export default {
                 'is-card-list': this.cardLayout,
                 'table-container': this.isScrollable,
                 'is-relative': this.loading && !this.$slots.loading
+            }
+        },
+        tableStyle() {
+            return {
+                height: toCssWidth(this.height)
             }
         },
 
