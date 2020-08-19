@@ -57,11 +57,12 @@ To
 * Add ``triggers`` prop and remove ``hoverable`` prop to dropdown
 * Add placeholder option to number inputs removing default value 0 (thanks @rcoundon)
 * Show ``check-all`` checkbox when table cards
-* Refacor carousel and carousel list and removing ``config`` prop too  (thanks @Tofandel)
+* Refactor carousel and carousel list and removing ``config`` prop too  (thanks @Tofandel)
 * Add ``position`` prop and default alignment to skeleton (thanks @EmmanuelVlad)
 * Replace ``is-active`` with ``active`` prop to navbar
 * Replace default value of ``defaultDatepickerYearsRange`` constructor option from ``[-100, 3]`` to ``[-100, 10]``
 * Build with ``condense`` option to avoid leading/trailing whitespaces
+* Remove support to ``.sync`` modifier on ``current-page`` prop of table component (you have to use ``page-change`` event)
 * SVG: 
     * ``$icon-svg-width: auto !default``;
     * ``$icon-svg-height: auto !default``;
@@ -103,7 +104,7 @@ To
 ### New features
 
 * **New component: Image**, [see docs](https://buefy.org/documentation/image)
-* **.sync deprecated** (except of table), use ``v-model`` but you can use ``.sync`` until next breaking version
+* **.sync deprecated** (except of selected and checked-rows), use ``v-model`` but you can use ``.sync`` until next breaking version
 * #1953 Add promise support to dialog using ``defaultPromiseProgrammatically`` constructor options
 * #2553 Add trigger slot to datepicker, timepicker and datetimepicker
 * #2568 Hide content message when empty slot

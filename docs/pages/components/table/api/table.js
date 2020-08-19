@@ -144,7 +144,7 @@ export default [
             },
             {
                 name: '<code>current-page</code>',
-                description: `Current page of table data (if <code>paginated</code>), use the <code>.sync</code> modifier to make it two-way binding`,
+                description: `Current page of table data (if <code>paginated</code>)`,
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
