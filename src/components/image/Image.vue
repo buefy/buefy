@@ -9,6 +9,7 @@
                 v-if="isDisplayed"
                 :srcset="computedSrcset"
                 :src="computedSrc"
+                :alt="alt"
                 :class="imgClasses"
                 :width="computedWidth"
                 :sizes="computedSizes"
@@ -39,6 +40,7 @@ export default {
     name: 'BImage',
     props: {
         src: String,
+        alt: String,
         srcFallback: String,
         webpFallback: {
             type: String,

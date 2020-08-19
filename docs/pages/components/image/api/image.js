@@ -9,6 +9,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>alt</code>',
+                description: 'The image alternate text, if it cannot be displayed.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>src-fallback</code>',
                 description: 'The image url you want to display if the image specified using <code>src</code> fails to load.',
                 type: 'String',
