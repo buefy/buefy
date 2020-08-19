@@ -224,15 +224,13 @@ export function getMonthNames(locale = undefined, format = 'long') {
  * @param  {String} format long (ex. Thursday), short (ex. Thu) or narrow (T)
  * @return {Array<String>} An array of weekday names
  */
-export function getWeekdayNames(locale = undefined, firstDayOfWeek = 0, format = 'narrow') {
+export function getWeekdayNames(locale = undefined, format = 'narrow') {
     const dates = []
-    for (let i = 1, j = 0; j < 7; i++) {
-        const d = new Date(Date.UTC(2000, 0, i))
-        const day = d.getUTCDay()
-        if (day === firstDayOfWeek + 1 || j > 0) {
-            dates.push(d)
-            j++
-        }
+    const dt = new Date(2000, 0, 1)
+    const dayOfWeek = dt.getDay()
+    dt.setDate(dt.getDate() - dayOfWeek)
+    for (let i = 0; i < 7; i++) {
+        dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + i))
     }
     const dtf = new Intl.DateTimeFormat(locale, {
         weekday: format,

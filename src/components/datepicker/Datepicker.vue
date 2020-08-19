@@ -489,7 +489,7 @@ export default {
             if (Array.isArray(this.dayNames)) {
                 return this.dayNames
             }
-            return getWeekdayNames(this.locale, this.firstDayOfWeek)
+            return getWeekdayNames(this.locale)
         },
         listOfMonths() {
             let minMonth = 0
