@@ -30,7 +30,10 @@
 
         <Example :component="ExError" :code="ExErrorCode" title="Fallback on error" vertical>
             <p>
-                You can use <code>src-fallback</code> to display another image if the original fails to load.
+                You can use <code>alt</code> to display an alternative text if the <code>src</code> fails to load.
+            </p>
+            <p>
+                You can also use <code>src-fallback</code> to display another image if the original fails to load.
             </p>
         </Example>
 

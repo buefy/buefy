@@ -10,6 +10,7 @@
 
         <b-image
             src="https://picsum.photos/600/400"
+            alt="A random image"
             ratio="6by4"
             :rounded="rounded"
         ></b-image>
