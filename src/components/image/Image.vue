@@ -13,6 +13,7 @@
                 :class="imgClasses"
                 :width="computedWidth"
                 :sizes="computedSizes"
+                :loading="computedNativeLazy"
                 @load="onLoad"
                 @error="onError"
             >
@@ -89,6 +90,7 @@ export default {
             clientWidth: 0,
             webpSupportVerified: false,
             webpSupported: false,
+            nativeLazySupported: 'loading' in HTMLImageElement.prototype,
             observer: null,
             inViewPort: false,
             bulmaKnownRatio: ['square', '1by1', '5by4', '4by3', '3by2', '5by3', '16by9', 'b2y1', '3by1', '4by5', '3by4', '2by3', '3by5', '9by16', '1by2', '1by3'],
@@ -151,10 +153,15 @@ export default {
                 return this.clientWidth
             }
         },
+        computedNativeLazy() {
+            if (this.lazy && this.nativeLazySupported) {
+                return 'lazy'
+            }
+        },
         isDisplayed() {
             return (
                 (this.webpSupportVerified || !this.isWepb) &&
-                (this.inViewPort || !this.lazy)
+                (!this.lazy || this.nativeLazySupported || this.inViewPort)
             )
         },
         placeholderExt() {
@@ -243,7 +250,7 @@ export default {
                 this.webpSupported = supported
             })
         }
-        if (this.lazy && typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+        if (this.lazy && !this.nativeLazySupported && typeof window !== 'undefined' && 'IntersectionObserver' in window) {
             this.observer = new IntersectionObserver((events) => {
                 const {target, isIntersecting} = events[0]
                 if (isIntersecting && !this.inViewPort) {
