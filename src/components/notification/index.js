@@ -2,7 +2,7 @@ import Notification from './Notification'
 import NotificationNotice from './NotificationNotice'
 
 import config, { VueInstance } from '../../utils/config'
-import { merge, toVDom } from '../../utils/helpers'
+import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
@@ -23,8 +23,11 @@ const NotificationProgrammatic = {
             parent = params.parent
             delete params.parent
         }
-        const slot = params.message
-        delete params.message
+        let slot
+        if (Array.isArray(params.message)) {
+            slot = params.message
+            delete params.message
+        }
         // fix animation
         params.active = false
         const propsData = merge(defaultParam, params)
@@ -36,7 +39,7 @@ const NotificationProgrammatic = {
             propsData
         })
         if (slot) {
-            component.$slots.default = toVDom(slot, component.$createElement)
+            component.$slots.default = slot
             component.$forceUpdate()
         }
         // fix animation

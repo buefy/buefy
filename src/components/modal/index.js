@@ -1,7 +1,7 @@
 import Modal from './Modal'
 
 import { VueInstance } from '../../utils/config'
-import { merge, toVDom } from '../../utils/helpers'
+import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
@@ -23,12 +23,11 @@ const ModalProgrammatic = {
             delete params.parent
         }
         let slot
-        if (params.content) {
+        if (Array.isArray(params.content)) {
             slot = params.content
             delete params.content
         }
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ModalComponent = vm.extend(Modal)
         const component = new ModalComponent({
@@ -37,7 +36,7 @@ const ModalProgrammatic = {
             propsData
         })
         if (slot) {
-            component.$slots.default = toVDom(slot, component.$createElement)
+            component.$slots.default = slot
             component.$forceUpdate()
         }
         return component

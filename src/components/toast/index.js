@@ -1,7 +1,7 @@
 import Toast from './Toast'
 
 import config, { VueInstance } from '../../utils/config'
-import { merge, toVDom } from '../../utils/helpers'
+import { merge } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
@@ -22,10 +22,12 @@ const ToastProgrammatic = {
             parent = params.parent
             delete params.parent
         }
-        const slot = params.message
-        delete params.message
+        let slot
+        if (Array.isArray(params.message)) {
+            slot = params.message
+            delete params.message
+        }
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ToastComponent = vm.extend(Toast)
         const component = new ToastComponent({
@@ -34,7 +36,7 @@ const ToastProgrammatic = {
             propsData
         })
         if (slot) {
-            component.$slots.default = toVDom(slot, component.$createElement)
+            component.$slots.default = slot
             component.$forceUpdate()
         }
         return component

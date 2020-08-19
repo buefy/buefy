@@ -33,7 +33,7 @@
                                     <slot />
                                 </template>
                                 <template v-else>
-                                    {{ message }}
+                                    <div v-html="message" />
                                 </template>
                             </p>
 
@@ -88,7 +88,7 @@ export default {
     extends: Modal,
     props: {
         title: String,
-        message: String,
+        message: [String, Array],
         icon: String,
         iconPack: String,
         hasIcon: Boolean,

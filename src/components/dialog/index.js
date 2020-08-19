@@ -1,14 +1,17 @@
 import Dialog from './Dialog'
 
 import config, { VueInstance } from '../../utils/config'
-import { merge, toVDom } from '../../utils/helpers'
+import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 let localVueInstance
 
 function open(propsData) {
-    const slot = propsData.message
-    delete propsData.message
+    let slot
+    if (Array.isArray(propsData.message)) {
+        slot = propsData.message
+        delete propsData.message
+    }
     const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
     const DialogComponent = vm.extend(Dialog)
     const component = new DialogComponent({
@@ -16,7 +19,7 @@ function open(propsData) {
         propsData
     })
     if (slot) {
-        component.$slots.default = toVDom(slot, component.$createElement)
+        component.$slots.default = slot
         component.$forceUpdate()
     }
     if (!config.defaultProgrammaticPromise) {
