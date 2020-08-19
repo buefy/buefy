@@ -136,7 +136,7 @@ export default {
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
-                wrapper.style.zIndex = this.isActive ? '99' : '-1'
+                wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
             }
         },
         onClick() {
