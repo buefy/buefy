@@ -8,14 +8,12 @@
             :class="[type, position]"
             :aria-hidden="!isActive"
             role="alert">
-            <div>
-                <template v-if="$slots.default">
-                    <slot />
-                </template>
-                <template v-else>
-                    {{ message }}
-                </template>
-            </div>
+            <template v-if="$slots.default">
+                <slot />
+            </template>
+            <template v-else>
+                <div v-html="message" />
+            </template>
         </div>
     </transition>
 </template>

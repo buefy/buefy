@@ -1,5 +1,148 @@
 # Buefy Changelog
 
+## 0.9.1
+
+### New features
+
+* Add ``is-expanded`` class to menu item (thanks @btkostner)
+
+### Fixes
+
+* Fix #2750 internal html to vdom using programmatic components
+* Fix #2751 table props index value
+* Fix #2752 incorrect base css
+* Fix #2753 field type when addons
+* Fix #2761 close tooltip when delay
+* Fix indeterminate watcher in progress (thanks @service-paradis)
+
+## 0.9.0
+
+### Breaking changes
+
+* **Vue.js** 2.6+ is now the minimum required version
+* **Bulma** [0.8.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#big-update) and [0.9.0](https://github.com/jgthms/bulma/blob/master/CHANGELOG.md#090)
+
+* **Table**, new default slot and table column syntax
+
+From
+
+```html
+<b-table :data="myData">
+    <template slot-scope="props">
+        <b-table-column field="name" label="Name">
+            {{ props.row.name }}
+        </b-table-column>
+        <b-table-column field="age" numeric label="Age">
+            {{ props.row.age }}
+        </b-table-column>
+    </template>
+</b-table>
+```
+
+To
+
+```html
+<b-table :data="myData">
+    <b-table-column field="name" label="Name" v-slot="props">
+        {{ props.row.name }}
+    </b-table-column>
+    <b-table-column field="age" label="Age">
+        <template v-slot:default="props">
+            {{ props.row.age }}
+        </template>
+    </b-table-column>
+</b-table>
+```
+
+* Add ``triggers`` prop and remove ``hoverable`` prop to dropdown
+* Add placeholder option to number inputs removing default value 0 (thanks @rcoundon)
+* Show ``check-all`` checkbox when table cards
+* Refactor carousel and carousel list and removing ``config`` prop too  (thanks @Tofandel)
+* Add ``position`` prop and default alignment to skeleton (thanks @EmmanuelVlad)
+* Replace ``is-active`` with ``active`` prop to navbar
+* Replace default value of ``defaultDatepickerYearsRange`` constructor option from ``[-100, 3]`` to ``[-100, 10]``
+* Build with ``condense`` option to avoid leading/trailing whitespaces
+* Remove support to ``.sync`` modifier on ``current-page`` prop of table component (you have to use ``page-change`` event)
+* SVG: 
+    * ``$icon-svg-width: auto !default``;
+    * ``$icon-svg-height: auto !default``;
+
+* **Internationalization**, Buefy is now using Intl package to format dates and numbers A prop named `locale` which accept a BCP 47 language tag have been added to some components. The default value for this prop is `undefined` which will use the browser locale. It can affect the following components:
+  * Progress:
+    * Intl is used to format the displayed value
+  * Rate
+    * Intl is used to format the displayed score
+  * Datepicker and Datetimepicker:
+    * Intl is used to get month names
+    * Intl is used to get week day names
+    * Intl is used to format the displayed date(s)
+    * Intl is used to parse the given date when `editable`
+  * Timepicker, Clockpicker and Datetimepicker
+    * Intl is used to get separators
+    * Intl is used to format the displayed time
+    * Intl is used to parse the given date when `editable`
+
+* **Configuration**
+  * `defaultTrapFocus` is now `true`. It can affect the following components:
+    * Datepicker
+    * Dialog
+    * Dropdown
+    * Modal
+  * `defaultLocale`
+    * Default value is `undefined`, which means it will use the user browser locale
+    * It accept a string with a BCP 47 language tag, or an array of such strings (see [Unicode BCP 47 locale identifier](https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance)).
+  * `monthNames`
+    * Default value is now undefined. It will use the given locale (default to browser locale) to get localized month names
+  * `dayNames`
+    * Default value is now undefined. It will use the given locale (default to browser locale) to get localized day names
+
+* Use KeyboardEvent.key instead of keyCode. It can affect the following component:
+  * Taginput:
+    * `remove-on-keys` default is now `["Backspace"]` instead of `[8]`
+    * `confirm-key-codes` is now called `confirm-keys` and the default is `[",", "Enter"]` instead of `[13, 188]`
+
+### New features
+
+* **New component: Image**, [see docs](https://buefy.org/documentation/image)
+* **.sync deprecated** (except of selected and checked-rows), use ``v-model`` but you can use ``.sync`` until next breaking version
+* #1953 Add promise support to dialog using ``defaultPromiseProgrammatically`` constructor options
+* #2553 Add trigger slot to datepicker, timepicker and datetimepicker
+* #2568 Hide content message when empty slot
+* #2577 Add ``defaultStatusIcon`` constructor option and ``status-icon`` prop to field
+* Add ``icon-size`` prop to menu item (thanks @cyberShaw)
+* Add ``debounce-search`` prop to table (thanks @sc0ra)
+* Add ``reset-on-meridian-change`` to timepicker (thanks @taverasady)
+* Add ``close-icon `` to tag (thanks @kaangokdemir)
+* Add ``close-type `` to tag input (thanks @kaangokdemir)
+* Add ``header-class`` prop to tab item and step item (thanks @Tofandel)
+* Add ``exponential`` prop to number input (thanks @Tofandel)
+* Add ``defaultTabsType`` and ``defaultTabsExpanded`` constructor options (thanks @wrabit)
+* Add ``create-tag`` prop to taginput
+* Improve handle events for customElement components (thanks @vvkk77)
+* Refactor components (table, tabs, steps, carousel, etc) using provide/inject
+
+### Fixes
+
+* Fix XSS on programmatic components
+* Fix #1226 and #2658 using message with fields addons and groups
+* Fix #2196 carousel v-model sync using arrow navigation buttons (thanks @Tofandel)
+* Fix #2518 set Autocomplete focus on clear
+* Fix #2584 default table sort when backend
+* Fix #2591 carousel does not continue to slide even ``pause-hover`` is false (thanks @Tofandel)
+* Fix #2599 disabled select and input have different colors
+* Fix #2608 taginput wrong value when ``allow-duplicates`` is false (thanks @nithesh247)
+* Fix #2631 table with sticky searchable column
+* Fix #2647 progress bar truncate whole number zeroes
+* Fix #2683 datepicker lost focus using arrow keys
+* Fix #2684 timepicker hour check using ``unselectable-dates``
+* Fix #2639 datepicker clone before formatter
+* Fix #2706 number input steps (thanks @rcoundon)
+* Fix #2707 autocomplete index error using arrow keys
+* Fix #2725 open autocomplete when focused
+* Fix #2732 upload emit ``input`` when same file
+* Fix #2738 regex check when ``searchable`` table
+* Improve datepicker a11y on older browsers (#2641)
+
 ## 0.8.20
 
 ### New features

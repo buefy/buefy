@@ -8,7 +8,6 @@ let localVueInstance
 
 function open(propsData) {
     let slot
-    // vnode array
     if (Array.isArray(propsData.message)) {
         slot = propsData.message
         delete propsData.message
@@ -21,6 +20,7 @@ function open(propsData) {
     })
     if (slot) {
         component.$slots.default = slot
+        component.$forceUpdate()
     }
     if (!config.defaultProgrammaticPromise) {
         return component

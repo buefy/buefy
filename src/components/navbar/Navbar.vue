@@ -19,6 +19,11 @@ export default {
     directives: {
         clickOutside
     },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         type: [String, Object],
         transparent: {
@@ -33,7 +38,7 @@ export default {
             type: Boolean,
             default: false
         },
-        isActive: {
+        active: {
             type: Boolean,
             default: false
         },
@@ -53,7 +58,7 @@ export default {
     },
     data() {
         return {
-            internalIsActive: this.isActive,
+            internalIsActive: this.active,
             _isNavBar: true // Used internally by NavbarItem
         }
     },
@@ -75,9 +80,9 @@ export default {
         }
     },
     watch: {
-        isActive: {
-            handler(isActive) {
-                this.internalIsActive = isActive
+        active: {
+            handler(active) {
+                this.internalIsActive = active
             },
             immediate: true
         },
@@ -124,7 +129,7 @@ export default {
             }
         },
         emitUpdateParentEvent() {
-            this.$emit('update:isActive', this.internalIsActive)
+            this.$emit('update:active', this.internalIsActive)
         },
         setBodyClass(className) {
             if (typeof window !== 'undefined') {

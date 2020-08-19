@@ -24,7 +24,7 @@ export default [
               default: '<code>false</code>'
           },
           {
-              name: '<code>is-active</code>',
+              name: '<code>active</code>',
               description: 'To control the behaviour of the mobile menu programmatically, use the <code>.sync</code> modifier to make it two-way binding',
               type: 'Boolean',
               values: '—',

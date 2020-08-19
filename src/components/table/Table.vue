@@ -25,6 +25,7 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
                     @page-change="(event) => $emit('page-change', event)"
@@ -37,10 +38,7 @@
         <div
             class="table-wrapper"
             :class="tableWrapperClasses"
-            :style="{
-                height: height === undefined ? null :
-                (isNaN(height) ? height : height + 'px')
-            }"
+            :style="tableStyle"
         >
             <table
                 class="table"
@@ -61,7 +59,7 @@
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'header'"
                             :class="[column.headerClass, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
@@ -140,7 +138,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'subheading'"
                             :style="column.style">
                             <div
                                 class="th-wrap"
@@ -169,7 +167,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'searchable'"
                             :style="column.style"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
@@ -242,11 +240,11 @@
                                 />
                             </td>
 
-                            <template v-for="(column, index) in visibleColumns">
+                            <template v-for="(column, colindex) in visibleColumns">
 
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.default">
                                     <b-slot-component
-                                        :key="(column.customKey || column.label) + index"
+                                        :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
                                         scoped
                                         name="default"
@@ -328,6 +326,7 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
                     @page-change="(event) => $emit('page-change', event)"
@@ -341,7 +340,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -563,6 +562,11 @@ export default {
                 'is-card-list': this.cardLayout,
                 'table-container': this.isScrollable,
                 'is-relative': this.loading && !this.$slots.loading
+            }
+        },
+        tableStyle() {
+            return {
+                height: toCssWidth(this.height)
             }
         },
 
@@ -935,6 +939,9 @@ export default {
         },
 
         isRowSelected(row, selected) {
+            if (!selected) {
+                return false
+            }
             if (this.customRowKey) {
                 return row[this.customRowKey] === selected[this.customRowKey]
             }

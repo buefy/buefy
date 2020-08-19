@@ -22,14 +22,14 @@ describe('BNavbar', () => {
     it('should emmit the sync event when the burger menu was clicked', () => {
         const anchorTag = wrapper.find('.navbar-burger')
         anchorTag.trigger('click')
-        const valueEmitted = wrapper.emitted()['update:isActive'][0]
+        const valueEmitted = wrapper.emitted()['update:active'][0]
         expect(valueEmitted).toContainEqual(true)
         expect(wrapper.vm.isOpened).toBe(true)
     })
 
-    it('should have the is-active class when we set the isActive prop manually', () => {
+    it('should have the is-active class when we set the active prop manually', () => {
         const navBar = mount(BNavbar)
-        navBar.setProps({ isActive: true })
+        navBar.setProps({ active: true })
         const menuContainer = navBar.find('.navbar-menu')
         expect(menuContainer.classes('is-active')).toBe(true)
     })

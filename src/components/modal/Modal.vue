@@ -27,7 +27,9 @@
                     :can-cancel="canCancel"
                     @close="close"
                 />
-                <div v-else-if="content"> {{ content }} </div>
+                <template v-else-if="content">
+                    <div v-html="content" />
+                </template>
                 <slot
                     v-else
                     :can-cancel="canCancel"
@@ -53,10 +55,15 @@ export default {
     directives: {
         trapFocus
     },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         active: Boolean,
         component: [Object, Function, String],
-        content: String,
+        content: [String, Array],
         programmatic: Boolean,
         props: Object,
         events: Object,

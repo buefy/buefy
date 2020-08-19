@@ -28,6 +28,15 @@
             </p>
         </Example>
 
+        <Example :component="ExError" :code="ExErrorCode" title="Fallback on error" vertical>
+            <p>
+                You can use <code>alt</code> to display an alternative text if the <code>src</code> fails to load.
+            </p>
+            <p>
+                You can also use <code>src-fallback</code> to display another image if the original fails to load.
+            </p>
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -45,6 +54,8 @@
     import ExPlaceholderCode from '!!raw-loader!./examples/ExPlaceholder'
     import ExSrcset from './examples/ExSrcset'
     import ExSrcsetCode from '!!raw-loader!./examples/ExSrcset'
+    import ExError from './examples/ExError'
+    import ExErrorCode from '!!raw-loader!./examples/ExError'
 
     export default {
         data() {
@@ -59,6 +70,8 @@
                 ExPlaceholderCode,
                 ExSrcset,
                 ExSrcsetCode,
+                ExError,
+                ExErrorCode
             }
         }
     }

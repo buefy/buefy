@@ -42,7 +42,7 @@
             :data="data"
             :paginated="isPaginated"
             :per-page="perPage"
-            :current-page.sync="currentPage"
+            :current-page="currentPage"
             :pagination-simple="isPaginationSimple"
             :pagination-position="paginationPosition"
             :default-sort-direction="defaultSortDirection"

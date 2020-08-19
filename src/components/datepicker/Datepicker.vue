@@ -129,7 +129,7 @@
                             :rules-for-first-week="rulesForFirstWeek"
                             :min-date="minDate"
                             :max-date="maxDate"
-                            :focused.sync="focusedDateData"
+                            :focused="focusedDateData"
                             :disabled="disabled"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
@@ -145,7 +145,8 @@
                             :multiple="multiple"
                             @range-start="date => $emit('range-start', date)"
                             @range-end="date => $emit('range-end', date)"
-                            @close="togglePicker(false)"/>
+                            @close="togglePicker(false)"
+                            @update:focused="focusedDateData = $event" />
                     </div>
                     <div v-else>
                         <b-datepicker-month
@@ -153,7 +154,7 @@
                             :month-names="newMonthNames"
                             :min-date="minDate"
                             :max-date="maxDate"
-                            :focused.sync="focusedDateData"
+                            :focused="focusedDateData"
                             :disabled="disabled"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
@@ -163,7 +164,8 @@
                             :date-creator="dateCreator"
                             :multiple="multiple"
                             @close="togglePicker(false)"
-                            @change-focus="changeFocus"/>
+                            @change-focus="changeFocus"
+                            @update:focused="focusedDateData = $event" />
                     </div>
                 </div>
 

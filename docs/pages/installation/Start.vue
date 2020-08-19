@@ -19,7 +19,7 @@
 
         <b-message type="is-warning" size="is-medium">
             For any installation and usage method, you need
-            <strong><a href="https://vuejs.org" target="_blank">Vue.js</a> version 2.5+</strong>.
+            <strong><a href="https://vuejs.org" target="_blank">Vue.js</a> version 2.6+</strong>.
         </b-message>
 
         <div class="media">

@@ -2,7 +2,7 @@
     <section>
         <b-pagination
             :total="200"
-            :current.sync="current"
+            v-model="current"
             :per-page="10">
 
             <b-pagination-button

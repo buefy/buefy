@@ -10,7 +10,7 @@
         </b-field>
         <b-notification :closable="false">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
-            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
+            <b-loading :is-full-page="isFullPage" v-model="isLoading" :can-cancel="true"></b-loading>
         </b-notification>
     </section>
 </template>

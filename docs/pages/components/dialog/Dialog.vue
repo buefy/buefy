@@ -11,6 +11,11 @@
             <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
         </Example>
 
+        <Example title="Promise">
+            <p>You can set <code>defaultProgrammaticPromise</code> constructor option to get a Promise</p>
+            <CodeView lang="javascript" :code="promise | pre" expanded/>
+        </Example>
+
         <ApiView :data="api"/>
     </div>
 </template>
@@ -39,7 +44,12 @@
                 ExPromptDialogCode,
                 outsideVueInstance: `
                 import { DialogProgrammatic as Dialog } from 'buefy'
-                Dialog.alert('We can use confirm and prompt methods as well')`
+                Dialog.alert('We can use confirm and prompt methods as well')`,
+                promise: `
+                const { result, dialog } = await this.$buefy.dialog.confirm({
+                    message: 'Are you sure?',
+                    closeOnConfirm: false
+                });`
             }
         }
     }

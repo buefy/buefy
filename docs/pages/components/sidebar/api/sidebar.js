@@ -31,7 +31,7 @@ export default [
                 description: `Can close Sidebar by clicking 'X', pressing escape or clicking outside`,
                 type: 'Boolean, Array',
                 values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
-                default: `<code>['escape', 'x', 'outside']</code>`
+                default: `<code>['escape', 'outside']</code>`
             },
             {
                 name: '<code>on-cancel</code>',

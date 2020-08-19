@@ -2,8 +2,6 @@
 
 exports[`BToast render correctly 1`] = `
 <div role="alert" class="toast is-dark is-top" style="" enter-active-class="fadeInDown" leave-active-class="fadeOut">
-    <div>
-
-    </div>
+    <div></div>
 </div>
 `;

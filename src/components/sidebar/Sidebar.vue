@@ -24,6 +24,11 @@ import { removeElement, isCustomElement } from '../../utils/helpers'
 
 export default {
     name: 'BSidebar',
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'open',
+        event: 'update:open'
+    },
     props: {
         open: Boolean,
         type: [String, Object],

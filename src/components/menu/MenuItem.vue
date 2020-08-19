@@ -5,6 +5,7 @@
             v-bind="$attrs"
             :class="{
                 'is-active': newActive,
+                'is-expanded': newExpanded,
                 'is-disabled': disabled
             }"
             @click="onClick($event)"
@@ -44,6 +45,11 @@ export default {
         [Icon.name]: Icon
     },
     inheritAttrs: false,
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         label: String,
         active: Boolean,

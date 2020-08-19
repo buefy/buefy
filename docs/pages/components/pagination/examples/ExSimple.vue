@@ -55,7 +55,7 @@
         <hr>
         <b-pagination
             :total="total"
-            :current.sync="current"
+            v-model="current"
             :range-before="rangeBefore"
             :range-after="rangeAfter"
             :order="order"

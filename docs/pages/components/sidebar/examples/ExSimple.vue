@@ -6,7 +6,7 @@
       :fullwidth="fullwidth"
       :overlay="overlay"
       :right="right"
-      :open.sync="open"
+      v-model="open"
     >
       <div class="p-1">
         <img
