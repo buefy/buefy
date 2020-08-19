@@ -9,6 +9,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>src-fallback</code>',
+                description: 'The image url you want to display if the image specified using <code>src</code> fails to load.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>webp-fallback</code>',
                 description: 'Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.',
                 type: 'String',
@@ -82,6 +89,11 @@ export default [
             {
                 name: '<code>load</code>',
                 description: 'Triggers when the image is loaded.',
+                parameters: '<code>event: Event</code>, <code>src: String</code>'
+            },
+            {
+                name: '<code>error</code>',
+                description: 'Triggers when the image fails to load.',
                 parameters: '<code>event: Event</code>, <code>src: String</code>'
             },
         ],
