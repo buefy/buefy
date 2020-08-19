@@ -116,6 +116,9 @@ export default {
                 // update wrapper tooltip
                 const tooltipEl = this.$data._bodyEl.children[0]
                 tooltipEl.classList.forEach((item) => tooltipEl.classList.remove(item))
+                if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+                    tooltipEl.classList.add(this.$vnode.data.staticClass)
+                }
                 this.rootClasses.forEach((item) => {
                     if (typeof item === 'object') {
                         for (let key in item) {
