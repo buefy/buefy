@@ -10,9 +10,10 @@
                 :srcset="computedSrcset"
                 :src="computedSrc"
                 :class="imgClasses"
-                @load="onLoad"
                 :width="computedWidth"
                 :sizes="computedSizes"
+                @load="onLoad"
+                @error="onError"
             >
         </transition>
         <transition name="fade">
@@ -38,6 +39,7 @@ export default {
     name: 'BImage',
     props: {
         src: String,
+        srcFallback: String,
         webpFallback: {
             type: String,
             default: () => {
@@ -88,7 +90,8 @@ export default {
             observer: null,
             inViewPort: false,
             bulmaKnownRatio: ['square', '1by1', '5by4', '4by3', '3by2', '5by3', '16by9', 'b2y1', '3by1', '4by5', '3by4', '2by3', '3by5', '9by16', '1by2', '1by3'],
-            loaded: false
+            loaded: false,
+            failed: false
         }
     },
     computed: {
@@ -129,13 +132,17 @@ export default {
             return this.srcExt === 'webp'
         },
         computedSrc() {
+            let src = this.src
+            if (this.failed && this.srcFallback) {
+                src = this.srcFallback
+            }
             if (!this.webpSupported && this.isWepb && this.webpFallback) {
                 if (this.webpFallback.startsWith('.')) {
-                    return this.src.replace(/\.webp/gi, `${this.webpFallback}`)
+                    return src.replace(/\.webp/gi, `${this.webpFallback}`)
                 }
                 return this.webpFallback
             }
-            return this.src
+            return src
         },
         computedWidth() {
             if (this.responsive && this.clientWidth > 0) {
@@ -214,8 +221,17 @@ export default {
         },
         onLoad(event) {
             this.loaded = true
+            this.emit('load', event)
+        },
+        onError(event) {
+            this.emit('error', event)
+            if (!this.failed) {
+                this.failed = true
+            }
+        },
+        emit(eventName, event) {
             const { target } = event
-            this.$emit('load', event, target.currentSrc || target.src || this.computedSrc)
+            this.$emit(eventName, event, target.currentSrc || target.src || this.computedSrc)
         }
     },
     created() {
