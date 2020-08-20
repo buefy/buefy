@@ -1,6 +1,6 @@
 export default [
     {
         name: '<code>$taginput-height</code>',
-        default: '<code>1.7em</code>'
+        default: '<code>calc(2em - 1px)</code>'
     }
 ]
