@@ -31,6 +31,9 @@
                 <span class="tag is-success">New</span>
                 <span class="tag is-info">0.9.0</span>
             </div>
+            <b-message type="is-warning">
+                You should disable the default <code>mobile-native</code> in order to avoid a different UI on mobile
+            </b-message>
         </Example>
 
         <Example :component="ExMonth" :code="ExMonthCode" title="Month picker" vertical>

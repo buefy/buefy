@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field label="Select a date" grouped>
-            <b-datepicker v-model="selected">
+            <b-datepicker v-model="selected" :mobile-native="false">
                 <template v-slot:trigger>
                     <b-button
                         icon-left="calendar-today"
