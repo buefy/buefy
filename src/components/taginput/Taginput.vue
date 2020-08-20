@@ -44,6 +44,8 @@
                 :open-on-focus="openOnFocus"
                 :keep-open="openOnFocus"
                 :keep-first="!allowNew"
+                :group-field="groupField"
+                :group-options="groupOptions"
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
                 :append-to-body="appendToBody"
@@ -136,6 +138,8 @@ export default {
             default: 'value'
         },
         autocomplete: Boolean,
+        groupField: String,
+        groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
         disabled: Boolean,

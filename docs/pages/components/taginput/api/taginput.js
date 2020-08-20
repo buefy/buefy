@@ -99,6 +99,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>group-field</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as display text of group',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
+                name: '<code>group-options</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as key to get items array of each group, optional',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>allow-new</code>',
                 description: 'When <code>autocomplete</code>, it allow to add new tags',
                 type: 'Boolean',
