@@ -11,8 +11,9 @@
             :type="newType"
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
-            v-model="computedValue"
+            :value="computedValue"
             v-bind="$attrs"
+            @input="onInput"
             @blur="onBlur"
             @focus="onFocus">
 
@@ -22,8 +23,9 @@
             class="textarea"
             :class="[inputClasses, customClass]"
             :maxlength="maxlength"
-            v-model="computedValue"
+            :value="computedValue"
             v-bind="$attrs"
+            @input="onInput"
             @blur="onBlur"
             @focus="onFocus"/>
 
@@ -106,7 +108,6 @@ export default {
             set(value) {
                 this.newValue = value
                 this.$emit('input', value)
-                !this.isValid && this.checkHtml5Validity()
             }
         },
         rootClasses() {
@@ -234,6 +235,12 @@ export default {
             } else if (this.iconRightClickable) {
                 this.iconClick('icon-right-click', event)
             }
+        },
+
+        onInput(event) {
+            const value = event.target.value
+            this.computedValue = value
+            !this.isValid && this.checkHtml5Validity()
         }
     }
 }
