@@ -15,7 +15,7 @@ $progress-text-color: $scheme-main !default;
         transform: translateX(-50%);
         font-size: calc(#{$size-normal} / 1.5);
         line-height: $size-normal;
-        font-weight: bold;
+        font-weight: $weight-bold;
         color: $progress-text-color;
         white-space: nowrap;
     }
