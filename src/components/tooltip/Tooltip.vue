@@ -15,7 +15,7 @@
         <div
             ref="trigger"
             class="tooltip-trigger"
-            @click.prevent="onClick"
+            @click="onClick"
             @mouseenter="onHover"
             @focus.capture="onFocus"
             @mouseleave="close">
