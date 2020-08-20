@@ -14,9 +14,13 @@
         <Example :component="ExPlaceholder" :code="ExPlaceholderCode" title="Placeholder" vertical>
             <p>
                 You can use a placeholder image that will be loaded at start and will be displayed until the <code>src</code> gets loaded.
-                If you reload this page, you will see a blurred Buefy logo appear upon <code>src</code> is loaded.
+                You can reload the page to see what is happening.
             </p>
-            <p>Can be useful if you want to use the LQIP technique for example.</p>
+            <p>
+                In the first example, you will see a blurred Buefy logo appear upon <code>src</code> is loaded.<br>
+                In the second example, you will see the lqip effect while a smaller blurred version of the image upon <code>src</code> is loaded.<br>
+                In the third example, you will see Buefy skeleton appear upon <code>src</code> is loaded.
+            </p>
         </Example>
 
         <Example :component="ExSrcset" :code="ExSrcsetCode" title="srcset" vertical>

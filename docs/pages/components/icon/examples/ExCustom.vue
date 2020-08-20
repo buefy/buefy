@@ -247,7 +247,8 @@
                     'eye': 'eye',
                     'eye-off': 'eye-off',
                     'menu-down': 'arrow-dropdown',
-                    'menu-up': 'arrow-dropup'
+                    'menu-up': 'arrow-dropup',
+                    'close-circle': 'close-circle-outline'
                 }
             },
             'uil': {
@@ -271,7 +272,8 @@
                     'eye': 'eye',
                     'eye-off': 'eye-slash',
                     'menu-down': 'angle-down',
-                    'menu-up': 'angle-up'
+                    'menu-up': 'angle-up',
+                    'close-circle': 'times-circle'
                 }
             }
         }
