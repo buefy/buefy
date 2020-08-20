@@ -16,6 +16,7 @@
             ref="trigger"
             class="tooltip-trigger"
             @click="onClick"
+            @contextmenu.prevent="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
             @mouseleave="close">
@@ -152,6 +153,10 @@ export default {
         },
         onHover() {
             if (this.triggers.indexOf('hover') < 0) return
+            this.open()
+        },
+        onContextMenu() {
+            if (this.triggers.indexOf('contextmenu') < 0) return
             this.open()
         },
         onFocus() {
