@@ -32,7 +32,7 @@
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
                 :style="style"
-                v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
+                v-show="isActive && (computedData.length > 0 || hasEmptySlot || hasHeaderSlot)"
                 ref="dropdown"
             >
                 <div
@@ -42,22 +42,39 @@
                     <div v-if="hasHeaderSlot" class="dropdown-item">
                         <slot name="header" />
                     </div>
-                    <a
-                        v-for="(option, index) in data"
-                        :key="index"
-                        class="dropdown-item"
-                        :class="{ 'is-hovered': option === hovered }"
-                        @click="setSelected(option, undefined, $event)"
-                    >
-                        <slot
-                            v-if="hasDefaultSlot"
-                            :option="option"
-                            :index="index" />
-                        <span v-else>
-                            {{ getValue(option, true) }}
-                        </span>
-                    </a>
-                    <div v-if="data.length === 0 && hasEmptySlot" class="dropdown-item is-disabled">
+                    <template v-for="(element, groupindex) in computedData">
+                        <div
+                            v-if="element.group"
+                            :key="groupindex + 'group'"
+                            class="dropdown-item">
+                            <slot
+                                v-if="hasGroupSlot"
+                                name="group"
+                                :group="element.group"
+                                :index="groupindex" />
+                            <span class="has-text-weight-bold" v-else>
+                                {{ element.group }}
+                            </span>
+                        </div>
+                        <a
+                            v-for="(option, index) in element.items"
+                            :key="groupindex + ':' + index"
+                            class="dropdown-item"
+                            :class="{ 'is-hovered': option === hovered }"
+                            @click="setSelected(option, undefined, $event)"
+                        >
+                            <slot
+                                v-if="hasDefaultSlot"
+                                :option="option"
+                                :index="index" />
+                            <span v-else>
+                                {{ getValue(option, true) }}
+                            </span>
+                        </a>
+                    </template>
+                    <div
+                        v-if="computedData.length === 0 && hasEmptySlot"
+                        class="dropdown-item is-disabled">
                         <slot name="empty" />
                     </div>
                     <div v-if="hasFooterSlot" class="dropdown-item">
@@ -109,6 +126,8 @@ export default {
             type: String,
             default: 'auto'
         },
+        groupField: String,
+        groupOptions: String,
         iconRight: String,
         iconRightClickable: Boolean,
         appendToBody: Boolean
@@ -129,6 +148,32 @@ export default {
         }
     },
     computed: {
+        computedData() {
+            if (this.groupField) {
+                if (this.groupOptions) {
+                    const newData = []
+                    this.data.forEach((option) => {
+                        const group = getValueByPath(option, this.groupField)
+                        const items = getValueByPath(option, this.groupOptions)
+                        newData.push({ group, items })
+                    })
+                    return newData
+                } else {
+                    const tmp = {}
+                    this.data.forEach((option) => {
+                        const group = getValueByPath(option, this.groupField)
+                        if (!tmp[group]) tmp[group] = []
+                        tmp[group].push(option)
+                    })
+                    const newData = []
+                    Object.keys(this.data).forEach((group) => {
+                        newData.push({ group, items: this.data[group] })
+                    })
+                    return newData
+                }
+            }
+            return [{ items: this.data }]
+        },
         /**
          * White-listed items to not close when clicked.
          * Add input, dropdown and all children.
@@ -165,6 +210,13 @@ export default {
         },
 
         /**
+         * Check if exists group slot
+         */
+        hasGroupSlot() {
+            return !!this.$scopedSlots.group
+        },
+
+        /**
          * Check if exists "empty" slot
          */
         hasEmptySlot() {
@@ -191,7 +243,7 @@ export default {
         isOpenedTop() {
             return (
                 this.dropdownPosition === 'top' ||
-        (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
+                    (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
             )
         },
 
@@ -401,11 +453,13 @@ export default {
         keyArrows(direction) {
             const sum = direction === 'down' ? 1 : -1
             if (this.isActive) {
-                let index = this.data.indexOf(this.hovered) + sum
-                index = index > this.data.length - 1 ? this.data.length - 1 : index
+                const data = this.computedData.map(
+                    (d) => d.items).reduce((a, b) => ([...a, ...b]), [])
+                let index = data.indexOf(this.hovered) + sum
+                index = index > data.length - 1 ? data.length - 1 : index
                 index = index < 0 ? 0 : index
 
-                this.setHovered(this.data[index])
+                this.setHovered(data[index])
 
                 const list = this.$refs.dropdown.querySelector('.dropdown-content')
                 const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
@@ -436,7 +490,7 @@ export default {
             if (this.openOnFocus) {
                 this.isActive = true
                 if (this.keepFirst) {
-                    this.selectFirstOption(this.data)
+                    this.selectFirstOption(this.computedData)
                 }
             }
             this.hasFocus = true

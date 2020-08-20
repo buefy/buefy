@@ -16,6 +16,14 @@
             <p>You can add your custom footer to the autocomplete.</p>
         </Example>
 
+        <Example :component="ExGroups" :code="ExGroupsCode" title="Groups">
+            <div class="tags has-addons">
+                <span class="tag is-success">New</span>
+                <span class="tag is-info">0.9.2</span>
+            </div>
+            <p>You can show options by groups</p>
+        </Example>
+
         <Example :component="ExCustomAsync" :code="ExCustomAsyncCode" title="Async with custom template">
             <p>You can have a custom template by adding a scoped slot to it.</p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
@@ -47,6 +55,9 @@
     import ExFooter from './examples/ExFooter'
     import ExFooterCode from '!!raw-loader!./examples/ExFooter'
 
+    import ExGroups from './examples/ExGroups'
+    import ExGroupsCode from '!!raw-loader!./examples/ExGroups'
+
     import ExCustomAsync from './examples/ExCustomAsync'
     import ExCustomAsyncCode from '!!raw-loader!./examples/ExCustomAsync'
 
@@ -69,7 +80,9 @@
                 ExCustomAsyncCode,
                 ExCustomAsync,
                 ExInfiniteScroll,
-                ExInfiniteScrollCode
+                ExInfiniteScrollCode,
+                ExGroups,
+                ExGroupsCode
             }
         }
     }

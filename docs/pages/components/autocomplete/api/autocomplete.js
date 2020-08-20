@@ -30,6 +30,20 @@ export default [
                 default: ''
             },
             {
+                name: '<code>group-field</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as display text of group',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
+                name: '<code>group-options</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as key to get items array of each group, optional',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>clear-on-select</code>',
                 description: 'Clear input text on select',
                 type: 'Boolean',
