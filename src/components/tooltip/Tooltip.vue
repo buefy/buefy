@@ -41,7 +41,10 @@ export default {
             default: () => config.defaultTooltipType
         },
         label: String,
-        delay: Number,
+        delay: {
+            type: Number,
+            default: () => config.defaultTooltipDelay
+        },
         position: {
             type: String,
             default: 'is-top',

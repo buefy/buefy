@@ -130,6 +130,13 @@ export default [
                 default: '<code>is-primary</code>'
             },
             {
+                name: '<code>defaultTooltipDelay</code>',
+                description: `Default tooltip delay attribute.`,
+                type: 'Number',
+                values: `-`,
+                default: '-'
+            },
+            {
                 name: '<code>defaultInputAutocomplete</code>',
                 description: `Default input <code>autocomplete</code> attribute.`,
                 type: 'String',
