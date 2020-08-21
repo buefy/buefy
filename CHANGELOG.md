@@ -1,5 +1,27 @@
 # Buefy Changelog
 
+## 0.9.2
+
+### New features
+
+* Add ``group-label`` and ``group-options`` prop to autocomplete and taginput
+* Add support to vnode array on programmatic component using ``message`` prop 
+* Add ``defaultTooltipDelay`` constructor option
+* Add ``contextmenu`` event to tooltip triggers
+* Add ``alt``, ``src-fallback`` and ``error`` prop to image (thanks @service-paradis)
+* Add append staticClass to tooltip when ``append-to-body``
+
+### Fixes
+
+* Fix #2767 restore v-html on programmatic component (dialog, snackbar, toast, modal, loading, notification)
+* Fix #2773 remove ``select-arrow-color`` in order to use Bulma ``input-arrow`` sass variable
+* Fix #2774 datepicker weekday names by locale
+* Fix #2778 tooltip using `append-to-body` and `always` (thanks @jacenre)
+* Fix #2783 unclickable content on tooltip
+* Fix #2789 space on menu-item 
+* Fix #2791 right margin on number input (thanks @user501254)
+* Fix taginput default height in order to be compliant with Bulma 0.8.x breaking changes
+
 ## 0.9.1
 
 ### New features
