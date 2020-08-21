@@ -8,7 +8,6 @@
                 group-options="items"
                 open-on-focus
                 :data="filteredDataObj"
-                field="user.first_name"
                 @select="option => (selected = option)"
             >
             </b-autocomplete>

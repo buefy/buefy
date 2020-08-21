@@ -166,8 +166,8 @@ export default {
                         tmp[group].push(option)
                     })
                     const newData = []
-                    Object.keys(this.data).forEach((group) => {
-                        newData.push({ group, items: this.data[group] })
+                    Object.keys(tmp).forEach((group) => {
+                        newData.push({ group, items: tmp[group] })
                     })
                     return newData
                 }
@@ -283,7 +283,6 @@ export default {
                     }, 100)
                 }
             }
-            if (active) this.$nextTick(() => this.setHovered(null))
         },
 
         /**
