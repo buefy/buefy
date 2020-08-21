@@ -13,6 +13,7 @@
 
 ### Fixes
 
+* Fix #2759 overlay on table when loading
 * Fix #2767 restore v-html on programmatic component (dialog, snackbar, toast, modal, loading, notification)
 * Fix #2773 remove ``select-arrow-color`` in order to use Bulma ``input-arrow`` sass variable
 * Fix #2774 datepicker weekday names by locale
