@@ -224,6 +224,7 @@ $table-sticky-header-height: 300px !default;
     }
 
     .table-wrapper {
+        position: relative;
         &.has-sticky-header {
             height: $table-sticky-header-height;
             overflow-y: auto;

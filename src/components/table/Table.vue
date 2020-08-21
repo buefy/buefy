@@ -560,8 +560,7 @@ export default {
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
                 'is-card-list': this.cardLayout,
-                'table-container': this.isScrollable,
-                'is-relative': this.loading && !this.$slots.loading
+                'table-container': this.isScrollable
             }
         },
         tableStyle() {
