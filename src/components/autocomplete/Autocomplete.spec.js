@@ -164,7 +164,6 @@ describe('BAutocomplete', () => {
         await wrapper.vm.$nextTick()
 
         expect($dropdown.isVisible()).toBeTruthy()
-        expect(wrapper.vm.setHovered).toHaveBeenCalled()
     })
 
     it('manages tab pressed as expected', async () => {
