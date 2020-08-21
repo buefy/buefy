@@ -16,7 +16,7 @@
                 :pack="iconPack"
                 :size="size"
             />
-            <span v-if="label">{{ label }}</span>
+            <span v-if="label"> {{ label }} </span>
             <slot
                 v-else
                 name="label"
