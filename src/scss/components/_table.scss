@@ -144,6 +144,7 @@ $table-sticky-header-height: 300px !default;
             .sort-icon, .multi-sort-cancel-icon {
                 position: absolute;
                 bottom: 50%;
+                left: 100%;
                 transform: translateY(50%);
             }
             .multi-sort-cancel-icon {
