@@ -42,9 +42,6 @@ $floating-in-height: 3.25em !default;
     // Fix for number input with addons
     &.has-addons {
         .b-numberinput {
-            .control {
-                margin-right: unset;
-            }
             &:not(:first-child) {
                 .control:first-child {
                     .button,
@@ -64,6 +61,11 @@ $floating-in-height: 3.25em !default;
                         border-top-right-radius: 0;
                     }
                 }
+            }
+        }
+        &.b-numberinput {
+            .control {
+                margin-right: unset;
             }
         }
     }
