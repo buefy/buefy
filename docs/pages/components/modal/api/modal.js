@@ -135,6 +135,16 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when user closed/canceled or called programmatically from the injected component',
                 parameters: '—'
+            },
+            {
+                name: '<code>after-opened</code>',
+                description: 'Triggers after animation open complete.',
+                parameters: '—'
+            },
+            {
+                name: '<code>after-closed</code>',
+                description: 'Triggers after animation close complete.',
+                parameters: '—'
             }
         ]
     }

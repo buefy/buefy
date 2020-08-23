@@ -91,4 +91,14 @@ describe('BModal', () => {
         jest.advanceTimersByTime(150)
         expect(wrapper.vm.$destroy).toHaveBeenCalled()
     })
+
+    it('emit event on animation open and end', () => {
+        wrapper.vm.afterEnter()
+        expect(wrapper.emitted()['after-opened']).toBeTruthy()
+    })
+
+    it('emit event on animation close and end', () => {
+        wrapper.vm.afterLeave()
+        expect(wrapper.emitted()['after-closed']).toBeTruthy()
+    })
 })
