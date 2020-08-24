@@ -73,7 +73,7 @@
                         </a>
                     </template>
                     <div
-                        v-if="computedData.length === 0 && hasEmptySlot"
+                        v-if="(computedData.length > 0 && computedData[0].length === 0) && hasEmptySlot"
                         class="dropdown-item is-disabled">
                         <slot name="empty" />
                     </div>
