@@ -176,6 +176,11 @@ export default [
                 name: '<code>footer</code>',
                 description: 'Show a custom footer as last option',
                 props: '—'
+            },
+            {
+                name: '<code>group</code>',
+                description: 'Control how the group header is output',
+                props: '—'
             }
         ],
         events: [
