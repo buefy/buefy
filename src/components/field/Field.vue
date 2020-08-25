@@ -65,6 +65,17 @@ export default {
     components: {
         [FieldBody.name]: FieldBody
     },
+    provide() {
+        return {
+            'BField': this
+        }
+    },
+    inject: {
+        parent: {
+            from: 'BField',
+            default: false
+        }
+    }, // Used internally only when using Field in Field
     props: {
         type: [String, Object],
         label: String,
@@ -138,6 +149,9 @@ export default {
         * (each element is separated by <br> tag)
         */
         formattedMessage() {
+            if (this.parent) {
+                return '' // Message will be displayed in parent field
+            }
             if (typeof this.newMessage === 'string') {
                 return [this.newMessage]
             }
@@ -201,6 +215,18 @@ export default {
         */
         message(value) {
             this.newMessage = value
+        },
+
+        /**
+        * Set parent message if we use Field in Field.
+        */
+        newMessage(value) {
+            if (this.parent) {
+                if (!this.parent.type) {
+                    this.parent.newType = this.newType
+                }
+                this.parent.newMessage = value
+            }
         }
     },
     methods: {
