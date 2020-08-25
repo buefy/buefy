@@ -29,7 +29,7 @@ export default [
                 name: '<code>triggers</code>',
                 description: 'Tooltip will be triggered by any events',
                 type: 'Array',
-                values: '<code>click</code>.<code>hover</code>,<code>focus</code>',
+                values: '<code>click</code>,<code>hover</code>,<code>focus</code>,<code>contextmenu</code>',
                 default: '<code>[\'hover\']</code>'
             },
             {
