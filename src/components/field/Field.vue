@@ -181,7 +181,7 @@ export default {
             return this.label || this.$slots.label
         },
         hasMessage() {
-            return this.newMessage || this.$slots.message
+            return (!this.parent && this.newMessage) || this.$slots.message
         },
         numberInputClasses() {
             if (this.$slots.default) {
