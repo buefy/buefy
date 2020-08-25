@@ -29,7 +29,7 @@
             :type="newType">
             <slot/>
         </b-field-body>
-        <div v-else-if="grouped || groupMultiline || hasAddons()" class="field-body">
+        <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
                 :type="newType"
@@ -125,6 +125,9 @@ export default {
                 }
             ]
         },
+        hasInnerField() {
+            return this.grouped || this.groupMultiline || this.hasAddons()
+        },
         /**
         * Correct Bulma class for the side of the addon or group.
         *
@@ -149,7 +152,7 @@ export default {
         * (each element is separated by <br> tag)
         */
         formattedMessage() {
-            if (this.parent) {
+            if (this.parent && this.parent.hasInnerField) {
                 return '' // Message will be displayed in parent field
             }
             if (typeof this.newMessage === 'string') {
@@ -181,7 +184,8 @@ export default {
             return this.label || this.$slots.label
         },
         hasMessage() {
-            return (!this.parent && this.newMessage) || this.$slots.message
+            return ((!this.parent || !this.parent.hasInnerField) && this.newMessage) ||
+                this.$slots.message
         },
         numberInputClasses() {
             if (this.$slots.default) {
@@ -221,7 +225,7 @@ export default {
         * Set parent message if we use Field in Field.
         */
         newMessage(value) {
-            if (this.parent) {
+            if (this.parent && this.parent.hasInnerField) {
                 if (!this.parent.type) {
                     this.parent.newType = this.newType
                 }
