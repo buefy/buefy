@@ -68,7 +68,7 @@
                         :index="props.index" />
                 </template>
                 <template
-                    v-if="hasHeaderSlot"
+                    v-if="hasEmptySlot"
                     #empty>
                     <slot name="empty" />
                 </template>
