@@ -153,13 +153,17 @@ export default {
         * Position of the icon or if it's both sides.
         */
         iconPosition() {
-            if (this.icon && this.hasIconRight) {
-                return 'has-icons-left has-icons-right'
-            } else if (!this.icon && this.hasIconRight) {
-                return 'has-icons-right'
-            } else if (this.icon) {
-                return 'has-icons-left'
+            let iconClasses = ''
+
+            if (this.icon) {
+                iconClasses += 'has-icons-left '
             }
+
+            if (this.hasIconRight) {
+                iconClasses += 'has-icons-right'
+            }
+
+            return iconClasses
         },
 
         /**
