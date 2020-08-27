@@ -159,7 +159,8 @@ export default {
             this.open()
         },
         onContextMenu(e) {
-            if (this.triggers.indexOf('contextmenu') < 0) return e.preventDefault()
+            if (this.triggers.indexOf('contextmenu') < 0) return
+            e.preventDefault()
             this.open()
         },
         onFocus() {
