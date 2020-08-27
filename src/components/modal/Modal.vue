@@ -239,7 +239,7 @@ export default {
         */
         afterEnter() {
             this.animating = false
-            this.$emit('after-opened')
+            this.$emit('after-enter')
         },
 
         /**
@@ -256,7 +256,7 @@ export default {
             if (this.destroyOnHide) {
                 this.destroyed = true
             }
-            this.$emit('after-closed')
+            this.$emit('after-leave')
         }
     },
     created() {

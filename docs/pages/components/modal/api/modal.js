@@ -137,13 +137,13 @@ export default [
                 parameters: '—'
             },
             {
-                name: '<code>after-opened</code>',
-                description: 'Triggers after animation open complete.',
+                name: '<code>after-enter</code>',
+                description: 'Triggers when the modal transition <code>after-enter</code> hook is called.',
                 parameters: '—'
             },
             {
-                name: '<code>after-closed</code>',
-                description: 'Triggers after animation close complete.',
+                name: '<code>after-leave</code>',
+                description: 'Triggers when the modal transition <code>after-leave</code> hook is called.',
                 parameters: '—'
             }
         ]

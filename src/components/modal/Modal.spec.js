@@ -92,13 +92,13 @@ describe('BModal', () => {
         expect(wrapper.vm.$destroy).toHaveBeenCalled()
     })
 
-    it('emit event on animation open and end', () => {
+    it('emit event on transition after-enter hook.', () => {
         wrapper.vm.afterEnter()
-        expect(wrapper.emitted()['after-opened']).toBeTruthy()
+        expect(wrapper.emitted()['after-enter']).toBeTruthy()
     })
 
-    it('emit event on animation close and end', () => {
+    it('emit event on transition after-leave hook.', () => {
         wrapper.vm.afterLeave()
-        expect(wrapper.emitted()['after-closed']).toBeTruthy()
+        expect(wrapper.emitted()['after-leave']).toBeTruthy()
     })
 })
