@@ -135,6 +135,16 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when user closed/canceled or called programmatically from the injected component',
                 parameters: '—'
+            },
+            {
+                name: '<code>after-enter</code>',
+                description: 'Triggers when the modal transition <code>after-enter</code> hook is called.',
+                parameters: '—'
+            },
+            {
+                name: '<code>after-leave</code>',
+                description: 'Triggers when the modal transition <code>after-leave</code> hook is called.',
+                parameters: '—'
             }
         ]
     }
