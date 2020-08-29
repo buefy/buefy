@@ -14,6 +14,7 @@
             :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
+            @change="onChange"
             @blur="onBlur"
             @focus="onFocus">
 
@@ -26,6 +27,7 @@
             :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
+            @change="onChange"
             @blur="onBlur"
             @focus="onFocus"/>
 
@@ -75,6 +77,10 @@ export default {
         type: {
             type: String,
             default: 'text'
+        },
+        lazy: {
+            type: Boolean,
+            default: false
         },
         passwordReveal: Boolean,
         iconClickable: Boolean,
@@ -242,7 +248,20 @@ export default {
         },
 
         onInput(event) {
-            const value = event.target.value
+            if (!this.lazy) {
+                const value = event.target.value
+                this.updateValue(value)
+            }
+        },
+
+        onChange(event) {
+            if (this.lazy) {
+                const value = event.target.value
+                this.updateValue(value)
+            }
+        },
+
+        updateValue(value) {
             this.computedValue = value
             !this.isValid && this.checkHtml5Validity()
         }

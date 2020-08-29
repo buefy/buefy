@@ -65,7 +65,7 @@ $sidebar-mobile-breakpoint: $tablet !default;
             flex-direction: column;
             align-content: stretch;
         }
-        @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
+        @media screen and (max-width: $sidebar-mobile-breakpoint - 1px) {
             &.is-mini-mobile {
                 width: $sidebar-mobile-width;
                 &.is-mini-expand:hover {
