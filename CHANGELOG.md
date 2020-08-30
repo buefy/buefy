@@ -1,5 +1,20 @@
 # Buefy Changelog
 
+## 0.9.3
+
+### New features
+
+* Add ``after-enter`` and ``after-leave`` events tp modal (thanks @aglio)
+* Add ``lazy`` prop to input (thanks @304NotModified)
+* Add new progress bar text color (thanks @service-paradis) 
+
+### Fixes
+
+* Fix empty slot check in autocomplete
+* Fix empty slot name in taginput (thanks @rubjo)
+* Fix contextmenu event always being prevented on tooltips (thanks @adriaanmeuris)
+* Fix use correct sidebar breakpoint variable (thanks @btkostner)
+
 ## 0.9.2
 
 ### New features
