@@ -55,13 +55,15 @@ export default {
          * Get the type prop from parent if it's a Field.
          */
         statusType() {
-            if (!this.parentField) return
-            if (!this.parentField.newType) return
-            if (typeof this.parentField.newType === 'string') {
-                return this.parentField.newType
+            const { newType } = this.parentField || {}
+
+            if (!newType) return
+
+            if (typeof newType === 'string') {
+                return newType
             } else {
-                for (let key in this.parentField.newType) {
-                    if (this.parentField.newType[key]) {
+                for (const key in newType) {
+                    if (newType[key]) {
                         return key
                     }
                 }

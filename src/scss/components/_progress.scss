@@ -1,5 +1,3 @@
-$progress-text-color: $scheme-main !default;
-
 .progress-wrapper {
     position: relative;
     overflow: hidden;
@@ -16,7 +14,7 @@ $progress-text-color: $scheme-main !default;
         font-size: calc(#{$size-normal} / 1.5);
         line-height: $size-normal;
         font-weight: $weight-bold;
-        color: $progress-text-color;
+        color: findColorInvert($progress-bar-background-color);
         white-space: nowrap;
     }
 
@@ -54,6 +52,22 @@ $progress-text-color: $scheme-main !default;
 
         &::-webkit-progress-value {
             transition: width 0.5s ease;
+        }
+
+        &.is-more-than-half {
+            +.progress-value {
+                color: findColorInvert($progress-value-background-color);
+            }
+
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                $color-invert: nth($pair, 2);
+                &.is-#{$name} {
+                    + .progress-value {
+                        color: $color-invert;
+                    }
+                }
+            }
         }
     }
 }

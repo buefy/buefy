@@ -67,7 +67,10 @@ export default {
         newType() {
             return [
                 this.size,
-                this.type
+                this.type,
+                {
+                    'is-more-than-half': this.value && this.value > this.max / 2
+                }
             ]
         },
         newValue() {

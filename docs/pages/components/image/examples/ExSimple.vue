@@ -9,6 +9,12 @@
         </div>
 
         <b-image
+            :src="require('@/assets/buefy.png')"
+            alt="The Buefy Logo"
+            ratio="601by235"
+            :rounded="rounded"
+        ></b-image>
+        <b-image
             src="https://picsum.photos/600/400"
             alt="A random image"
             ratio="6by4"

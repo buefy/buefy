@@ -91,4 +91,14 @@ describe('BModal', () => {
         jest.advanceTimersByTime(150)
         expect(wrapper.vm.$destroy).toHaveBeenCalled()
     })
+
+    it('emit event on transition after-enter hook.', () => {
+        wrapper.vm.afterEnter()
+        expect(wrapper.emitted()['after-enter']).toBeTruthy()
+    })
+
+    it('emit event on transition after-leave hook.', () => {
+        wrapper.vm.afterLeave()
+        expect(wrapper.emitted()['after-leave']).toBeTruthy()
+    })
 })
