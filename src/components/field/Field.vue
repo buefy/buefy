@@ -29,7 +29,7 @@
             :type="newType">
             <slot/>
         </b-field-body>
-        <div v-else-if="grouped || groupMultiline || hasAddons()" class="field-body">
+        <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
                 :type="newType"
@@ -65,6 +65,17 @@ export default {
     components: {
         [FieldBody.name]: FieldBody
     },
+    provide() {
+        return {
+            'BField': this
+        }
+    },
+    inject: {
+        parent: {
+            from: 'BField',
+            default: false
+        }
+    }, // Used internally only when using Field in Field
     props: {
         type: [String, Object],
         label: String,
@@ -114,6 +125,9 @@ export default {
                 }
             ]
         },
+        hasInnerField() {
+            return this.grouped || this.groupMultiline || this.hasAddons()
+        },
         /**
         * Correct Bulma class for the side of the addon or group.
         *
@@ -138,6 +152,9 @@ export default {
         * (each element is separated by <br> tag)
         */
         formattedMessage() {
+            if (this.parent && this.parent.hasInnerField) {
+                return '' // Message will be displayed in parent field
+            }
             if (typeof this.newMessage === 'string') {
                 return [this.newMessage]
             }
@@ -167,7 +184,8 @@ export default {
             return this.label || this.$slots.label
         },
         hasMessage() {
-            return this.newMessage || this.$slots.message
+            return ((!this.parent || !this.parent.hasInnerField) && this.newMessage) ||
+                this.$slots.message
         },
         numberInputClasses() {
             if (this.$slots.default) {
@@ -201,6 +219,18 @@ export default {
         */
         message(value) {
             this.newMessage = value
+        },
+
+        /**
+        * Set parent message if we use Field in Field.
+        */
+        newMessage(value) {
+            if (this.parent && this.parent.hasInnerField) {
+                if (!this.parent.type) {
+                    this.parent.newType = this.newType
+                }
+                this.parent.newMessage = value
+            }
         }
     },
     methods: {
