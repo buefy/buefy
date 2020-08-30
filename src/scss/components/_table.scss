@@ -2,16 +2,20 @@ $table-sticky-header-height: 300px !default;
 
 @mixin table-cards {
     thead {
-        th {
-            display: none;
-        }
-        .checkbox-cell {
-            display: block;
-            width: 100%;
-            text-align: right;
-            margin-bottom: 1rem;
-            border: 0;
-        }
+        tr {
+            box-shadow: none;
+            border-width: 0;
+            th {
+                display: none;
+            }
+            .checkbox-cell {
+                display: block;
+                width: 100%;
+                text-align: right;
+                margin-bottom: 1rem;
+                border: 0;
+            }
+        }        
     }
     tfoot {
          th {
