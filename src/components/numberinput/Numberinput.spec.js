@@ -212,16 +212,25 @@ describe('BNumberinput', () => {
         })
 
         it('can increment / decrement with minStep', () => {
-            const start = 5.5
-            const step = 2
+            const start = 5.51
+            const step = 0.2
+            const minStep = 0.01
             const min = -5
-            const minStep = 0.5
             wrapper.vm.computedValue = start
             wrapper.setProps({ step, min, minStep })
             wrapper.vm.decrement()
-            expect(wrapper.vm.computedValue).toBe(start - step)
+            expect(wrapper.vm.computedValue).toBe(5.31)
             wrapper.vm.decrement()
-            expect(wrapper.vm.computedValue).toBe(start - (step * 2))
+            expect(wrapper.vm.computedValue).toBe(5.11)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(5.31)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(5.51)
+
+            const newMinStep = 0.1
+            wrapper.setProps({ minStep: newMinStep })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(5.3)
         })
 
         it('manages empty value', () => {
