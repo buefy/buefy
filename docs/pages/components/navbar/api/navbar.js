@@ -31,7 +31,7 @@ export default [
               default: '<code>false</code>'
           },
           {
-            name: '<code>is-centered</code>',
+            name: '<code>centered</code>',
             description: 'To center the navbar-start slot',
             type: 'Boolean',
             values: '—',

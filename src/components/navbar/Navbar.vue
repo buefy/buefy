@@ -38,7 +38,7 @@ export default {
             type: Boolean,
             default: false
         },
-        isCentered: {
+        centered: {
             type: Boolean,
             default: false
         },
@@ -72,7 +72,7 @@ export default {
                 {
                     [FIXED_TOP_CLASS]: this.fixedTop,
                     [FIXED_BOTTOM_CLASS]: this.fixedBottom,
-                    [BODY_CENTERED_CLASS]: this.isCentered,
+                    [BODY_CENTERED_CLASS]: this.centered,
                     'is-spaced': this.spaced,
                     'has-shadow': this.shadow,
                     'is-transparent': this.transparent
