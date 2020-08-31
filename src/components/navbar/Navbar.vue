@@ -8,6 +8,7 @@ const BODY_SPACED_FIXED_TOP_CLASS = 'has-spaced-navbar-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
 const BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom'
 const BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom'
+const BODY_CENTERED_CLASS = 'has-navbar-centered'
 
 const isFilled = (str) => !!str
 
@@ -42,6 +43,10 @@ export default {
             type: Boolean,
             default: false
         },
+        centered: {
+            type: Boolean,
+            default: false
+        },
         wrapperClass: {
             type: String
         },
@@ -72,6 +77,7 @@ export default {
                 {
                     [FIXED_TOP_CLASS]: this.fixedTop,
                     [FIXED_BOTTOM_CLASS]: this.fixedBottom,
+                    [BODY_CENTERED_CLASS]: this.centered,
                     'is-spaced': this.spaced,
                     'has-shadow': this.shadow,
                     'is-transparent': this.transparent

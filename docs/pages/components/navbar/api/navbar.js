@@ -31,6 +31,13 @@ export default [
               default: '<code>false</code>'
           },
           {
+            name: '<code>centered</code>',
+            description: 'To center the navbar-start slot',
+            type: 'Boolean',
+            values: '—',
+            default: '<code>false</code>'
+          },
+          {
               name: '<code>type</code>',
               description: 'Type (color) of the background, optional',
               type: 'String, ',

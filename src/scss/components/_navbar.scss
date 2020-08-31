@@ -1,0 +1,12 @@
+.navbar {
+    &.has-navbar-centered {
+        .navbar-start {
+            justify-content: center;
+            margin-left: auto;
+        }
+    
+        .navbar-end {
+            margin-left: 0;
+        }
+    }
+}
