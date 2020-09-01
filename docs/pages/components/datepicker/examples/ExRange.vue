@@ -15,8 +15,8 @@
 
             return {
                 date: new Date(),
-                minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
-                maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15)
+                minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
+                maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
             }
         }
     }
