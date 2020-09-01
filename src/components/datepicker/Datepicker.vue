@@ -433,6 +433,10 @@ export default {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
             this.focusedDate || this.dateCreator()
 
+        if (this.maxDate) {
+            focusedDate.setFullYear(this.maxDate.getFullYear())
+        }
+
         return {
             dateSelected: this.value,
             focusedDateData: {
