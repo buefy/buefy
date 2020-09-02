@@ -1,5 +1,6 @@
 export default [
     {
+        title: 'Progress',
         props: [
             {
                 name: '<code>type</code>',
@@ -70,6 +71,47 @@ export default [
                 values: '—',
                 default: '<code>undefined</code>: default to browser locale.'
             }
+        ],
+        slots: [
+            {
+                name: '<code>default</code>',
+                description: 'This will be displayed inside the progress bar instead of the calculated value',
+                props: '—'
+            },
+            {
+                name: '<code>bar</code>',
+                description: 'You can insert <code>b-progress-bar</code> components if you want to have multiple bars.',
+                props: '—'
+            }
+        ]
+    },
+    {
+        'title': 'Bar',
+        'props': [
+            {
+                name: '<code>type</code>',
+                description: 'Type (color) of the progress bar, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: 'inherited from parent'
+            },
+            {
+                name: '<code>value</code>',
+                description: 'The progress value.',
+                type: 'Number',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>show-value</code>',
+                description: 'If the value should be displayed inside the progress bar.',
+                type: 'Boolean',
+                values: '—',
+                default: 'inherited from parent'
+            },
         ],
         slots: [
             {
