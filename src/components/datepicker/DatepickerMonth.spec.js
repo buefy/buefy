@@ -106,6 +106,15 @@ describe('BDatepickerMonth', () => {
         expect(wrapper.emitted()['input']).toBeTruthy()
     })
 
+    it('emit input when updateSelectedDate is called with range props false', () => {
+        wrapper.setProps({
+            range: false
+        })
+        wrapper.vm.selectableDate = jest.fn(() => true)
+        wrapper.vm.updateSelectedDate(5)
+        expect(wrapper.emitted()['input']).toBeTruthy()
+    })
+
     it('manage selectable dates as expected', () => {
         const day = newDate(2019, 7, 7)
 
@@ -214,6 +223,60 @@ describe('BDatepickerMonth', () => {
 
             wrapper.vm.emitChosenDate(date1)
             expect(wrapper.vm.multipleSelectedDates).toEqual([date2, date3])
+        })
+    })
+
+    describe('ClassObject with range props', () => {
+        beforeEach(() => {
+            wrapper.setProps({
+                range: true,
+                focused: {
+                    month: newDate(2020, 1, 1).getMonth(),
+                    year: newDate(2020, 1, 1).getFullYear()
+                },
+                value: [newDate(2020, 1, 1), newDate(2020, 5, 1)]
+            })
+        })
+
+        it('should have is-selected class for all range of dates selected', () => {
+            expect(wrapper.findAll('section > div > div > .is-selected').length).toBe(5)
+        })
+
+        it('should have is-first-selected class for the first date selected within the range', () => {
+            expect(wrapper.findAll('section > div > div > .is-selected').at(0).classes()).toContain('is-first-selected')
+        })
+
+        it('should have is-within-selected class for the dates selected within the range', () => {
+            expect(wrapper.findAll('section > div > div > .is-selected.is-within-selected').length).toBe(3)
+        })
+
+        it('should have is-last-selected class for the last date selected within the range', () => {
+            expect(wrapper.findAll('section > div > div > .is-selected').at(4).classes()).toContain('is-last-selected')
+        })
+
+        describe('hoverd class with range props', () => {
+            beforeEach(() => {
+                wrapper.setData({
+                    selectedBeginDate: newDate(2020, 3, 1),
+                    hoveredEndDate: newDate(2020, 6, 1)
+                })
+            })
+
+            it('should have is-within-hovered-range class for all range of dates hovered', () => {
+                expect(wrapper.findAll('section > div > div > .is-within-hovered-range').length).toBe(4)
+            })
+
+            it('should have is-first-hovered class for the first date hovered within the range', () => {
+                expect(wrapper.findAll('section > div > div > .is-first-hovered').at(0).classes()).toContain('is-first-hovered')
+            })
+
+            it('should have is-within-hovered class for the dates hovered within the range', () => {
+                expect(wrapper.findAll('section > div > div > .is-within-hovered-range.is-within-hovered').length).toBe(2)
+            })
+
+            it('should have is-last-hovered class for the last date hovered within the range', () => {
+                expect(wrapper.findAll('section > div > div > .is-within-hovered-range').at(3).classes()).toContain('is-last-hovered')
+            })
         })
     })
 })

@@ -289,3 +289,5 @@ export function isWebpSupported() {
 export function isCustomElement(vm) {
     return 'shadowRoot' in vm.$root.$options
 }
+
+export const isDefined = (d) => d !== undefined
