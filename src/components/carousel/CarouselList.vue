@@ -288,6 +288,8 @@ export default {
             }
             window.addEventListener('resize', this.resized)
             document.addEventListener('animationend', this.refresh)
+            document.addEventListener('transitionend', this.refresh)
+            document.addEventListener('transitionstart', this.refresh)
             this.resized()
         }
         if (this.$attrs.config) {
@@ -301,6 +303,8 @@ export default {
             }
             window.removeEventListener('resize', this.resized)
             document.removeEventListener('animationend', this.refresh)
+            document.removeEventListener('transitionend', this.refresh)
+            document.removeEventListener('transitionstart', this.refresh)
             this.dragEnd()
         }
     }
