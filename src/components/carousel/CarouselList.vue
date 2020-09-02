@@ -287,7 +287,7 @@ export default {
                 this.observer.observe(this.$el)
             }
             window.addEventListener('resize', this.resized)
-            window.addEventListener('animationend', this.refresh)
+            document.addEventListener('animationend', this.refresh)
             this.resized()
         }
         if (this.$attrs.config) {
@@ -300,7 +300,7 @@ export default {
                 this.observer.disconnect()
             }
             window.removeEventListener('resize', this.resized)
-            window.removeEventListener('animationend', this.refresh)
+            document.removeEventListener('animationend', this.refresh)
             this.dragEnd()
         }
     }
