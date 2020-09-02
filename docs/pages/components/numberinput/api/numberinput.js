@@ -72,7 +72,14 @@ export default [
                 description: 'Incremental number step',
                 type: 'Number, String',
                 values: '—',
-                default: '—'
+                default: '1'
+            },
+            {
+                name: '<code>min-step</code>',
+                description: 'Minimum step-size allowed. Input value is validated to be integer multiple of <code>min-step</code>',
+                type: 'Number, String',
+                values: '—',
+                default: 'Defaults to value of <code>step</code>'
             },
             {
                 name: '<code>exponential</code>',

@@ -29,7 +29,7 @@
             ref="input"
             v-model.number="computedValue"
             v-bind="$attrs"
-            :step="newStep"
+            :step="minStepNumber"
             :max="max"
             :min="min"
             :size="size"
@@ -93,6 +93,7 @@ export default {
         },
         max: [Number, String],
         step: [Number, String],
+        minStep: [Number, String],
         exponential: [Boolean, Number],
         disabled: Boolean,
         type: {
@@ -118,6 +119,7 @@ export default {
         return {
             newValue: this.value,
             newStep: this.step || 1,
+            newMinStep: this.minStep,
             timesPressed: 1,
             _elementRef: 'input'
         }
@@ -156,6 +158,10 @@ export default {
         stepNumber() {
             return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
         },
+        minStepNumber() {
+            const step = typeof this.newMinStep !== 'undefined' ? this.newMinStep : this.newStep
+            return typeof step === 'string' ? parseFloat(step) : step
+        },
         disabledMin() {
             return this.computedValue - this.stepNumber < this.minNumber
         },
@@ -163,7 +169,7 @@ export default {
             return this.computedValue + this.stepNumber > this.maxNumber
         },
         stepDecimals() {
-            const step = this.stepNumber.toString()
+            const step = this.minStepNumber.toString()
             const index = step.indexOf('.')
             if (index >= 0) {
                 return step.substring(index + 1).length
@@ -184,6 +190,9 @@ export default {
         },
         step(value) {
             this.newStep = value
+        },
+        minStep(value) {
+            this.newMinStep = value
         }
     },
     methods: {
