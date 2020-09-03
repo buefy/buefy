@@ -28,7 +28,7 @@
         <Example :component="ExTrigger" :code="ExTriggerCode" title="Trigger" vertical>
             <p>You can add your custom trigger component/s to the datepicker.</p>
             <div class="tags has-addons">
-                <span class="tag is-success">New</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.9.0</span>
             </div>
             <b-message type="is-warning">

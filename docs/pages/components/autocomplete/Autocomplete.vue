@@ -18,7 +18,7 @@
 
         <Example :component="ExGroups" :code="ExGroupsCode" title="Groups">
             <div class="tags has-addons">
-                <span class="tag is-success">New</span>
+                <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.9.2</span>
             </div>
             <p>You can show options by groups</p>

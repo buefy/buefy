@@ -104,8 +104,7 @@
             "/",
             "documentation",
             "documentation/dropdown"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/icon": {
         "title": "Icon",
@@ -117,8 +116,7 @@
             "/",
             "documentation",
             "documentation/icon"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/tooltip": {
         "title": "Tooltip",
@@ -143,8 +141,7 @@
             "/",
             "documentation",
             "documentation/modal"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/navbar": {
         "title": "Navbar",
@@ -182,8 +179,7 @@
             "/",
             "documentation",
             "documentation/tag"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/toast": {
         "title": "Toast",
@@ -354,8 +350,7 @@
             "/",
             "documentation",
             "documentation/timepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/clockpicker": {
         "title": "Clockpicker",
@@ -367,8 +362,7 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/datetimepicker": {
         "title": "Datetimepicker",
@@ -380,8 +374,7 @@
             "/",
             "documentation",
             "documentation/datetimepicker"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/taginput": {
         "title": "Taginput",
@@ -393,8 +386,7 @@
             "/",
             "documentation",
             "documentation/taginput"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/upload": {
         "title": "Upload",
@@ -406,8 +398,7 @@
             "/",
             "documentation",
             "documentation/upload"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/table": {
         "title": "Table",
@@ -482,8 +473,7 @@
             "/",
             "documentation",
             "documentation/menu"
-        ],
-        "isUpdated": true
+        ]
     },
      "documentation/slider": {
         "title": "Slider",
@@ -557,8 +547,7 @@
             "/",
             "documentation",
             "documentation/skeleton"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/image": {
         "title": "Image",
@@ -570,8 +559,7 @@
             "/",
             "documentation",
             "documentation/image"
-        ],
-        "isNew": true
+        ]
     },
     "extensions": {
         "title": "Extensions",
@@ -582,8 +570,7 @@
         "breadcrumb": [
             "/",
             "extensions"
-        ],
-        "isUpdated": true
+        ]
     },
     "extensions/cleavejs": {
         "title": "Cleavejs",
