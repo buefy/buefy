@@ -18,7 +18,7 @@ $table-sticky-header-height: 300px !default;
                 margin-bottom: 1rem;
                 border: 0;
             }
-        }        
+        }
     }
     tfoot {
          th {
@@ -162,7 +162,7 @@ $table-sticky-header-height: 300px !default;
                 position: sticky;
                 left: 0;
                 z-index: 3 !important;
-                background: $table-background-color;
+                background: $table-head-background-color;
             }
         }
         tr {
