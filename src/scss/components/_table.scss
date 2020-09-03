@@ -1,6 +1,9 @@
 $table-sticky-header-height: 300px !default;
 
 @mixin table-cards {
+    .table {
+        background-color: transparent;
+    }
     thead {
         tr {
             box-shadow: none;
@@ -41,9 +44,9 @@ $table-sticky-header-height: 300px !default;
         }
         // Disables is-*
         &:not([class*="is-"]) {
-            background: inherit;
+            background: $table-background-color;
             &:hover {
-                background-color: inherit;
+                background-color: $table-background-color;
             }
         }
         &.detail {
@@ -250,13 +253,6 @@ $table-sticky-header-height: 300px !default;
             }
         }
         &.has-mobile-cards {
-            tr {
-                background: $table-background-color!important;
-            }
-
-            .table {
-                background-color: transparent;
-            }
             @include mobile {
                 @include table-cards
             }
