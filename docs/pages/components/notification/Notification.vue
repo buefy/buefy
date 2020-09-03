@@ -2,7 +2,9 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
-        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
+        <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical>
+            <p>Many colors with light variant.</p>
+        </Example>
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
 
@@ -23,11 +25,13 @@
         </Example>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/notification'
+    import variables from './variables/notification'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -48,6 +52,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypes,
                 ExIcons,

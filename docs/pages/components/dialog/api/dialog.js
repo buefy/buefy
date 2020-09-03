@@ -21,7 +21,7 @@ export default [
             {
                 name: '<code>message</code>',
                 description: 'Message text (can contain HTML). <div class="notification is-danger">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>',
-                type: 'String',
+                type: 'String, Array<VNode>',
                 values: '—',
                 default: '—'
             },
@@ -91,9 +91,16 @@ export default [
             {
                 name: '<code>onConfirm</code>',
                 description: 'Callback function when the confirm button is clicked',
-                type: 'Function (value: String)',
+                type: 'Function (value: String, dialog: VueInstance)',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>closeOnConfirm</code>',
+                description: 'Turning this prop into false allows to make async requests in <code>onConfirm</code> callback',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>onCancel</code>',

@@ -31,7 +31,7 @@
             danger() {
                 this.$buefy.toast.open({
                     duration: 5000,
-                    message: `Something's not good, also I'm on bottom`,
+                    message: `Something's not good, also I'm on <b>bottom</b>`,
                     position: 'is-bottom',
                     type: 'is-danger'
                 })

@@ -1,5 +1,5 @@
 $dropdown-mobile-breakpoint: $desktop !default;
-$dropdown-background-color: rgba($black, 0.86) !default;
+$dropdown-background-color: rgba($scheme-invert, 0.86) !default;
 $dropdown-disabled-opacity: 0.5 !default;
 
 .dropdown {
@@ -125,7 +125,7 @@ $dropdown-disabled-opacity: 0.5 !default;
                 overflow-y: auto;
                 z-index: 50 !important;
                 > .dropdown-content {
-                    > .dropdown-item {
+                    > .dropdown-item, > .has-link a {
                         padding: 1rem 1.5rem;
                     }
                 }

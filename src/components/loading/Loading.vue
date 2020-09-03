@@ -18,6 +18,11 @@ import { HTMLElement } from '../../utils/ssr'
 
 export default {
     name: 'BLoading',
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         active: Boolean,
         programmatic: Boolean,
@@ -82,9 +87,8 @@ export default {
         /**
         * Keypress event that is bound to the document.
         */
-        keyPress(event) {
-            // Esc key
-            if (event.keyCode === 27) this.cancel()
+        keyPress({ key }) {
+            if (key === 'Escape' || key === 'Esc') this.cancel()
         }
     },
     created() {

@@ -20,10 +20,15 @@
 </template>
 
 <script>
-import { removeElement } from '../../utils/helpers'
+import { removeElement, isCustomElement } from '../../utils/helpers'
 
 export default {
     name: 'BSidebar',
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'open',
+        event: 'update:open'
+    },
     props: {
         open: Boolean,
         type: [String, Object],
@@ -47,6 +52,7 @@ export default {
         },
         reduce: Boolean,
         expandOnHover: Boolean,
+        expandOnHoverFixed: Boolean,
         canCancel: {
             type: [Array, Boolean],
             default: () => ['escape', 'outside']
@@ -74,6 +80,7 @@ export default {
                 'is-right': this.right,
                 'is-mini': this.reduce,
                 'is-mini-expand': this.expandOnHover,
+                'is-mini-expand-fixed': this.expandOnHover && this.expandOnHoverFixed,
                 'is-mini-mobile': this.mobile === 'reduce',
                 'is-hidden-mobile': this.mobile === 'hide',
                 'is-fullwidth-mobile': this.mobile === 'fullwidth'
@@ -127,10 +134,9 @@ export default {
         /**
         * Keypress event that is bound to the document.
         */
-        keyPress(event) {
-            // Esc key
+        keyPress({ key }) {
             if (this.isFixed) {
-                if (this.isOpen && event.keyCode === 27) this.cancel('escape')
+                if (this.isOpen && (key === 'Escape' || key === 'Esc')) this.cancel('escape')
             }
         },
 
@@ -160,7 +166,8 @@ export default {
         clickedOutside(event) {
             if (this.isFixed) {
                 if (this.isOpen && !this.animating) {
-                    if (this.whiteList.indexOf(event.target) < 0) {
+                    const target = isCustomElement(this) ? event.composedPath()[0] : event.target
+                    if (this.whiteList.indexOf(target) < 0) {
                         this.cancel('outside')
                     }
                 }

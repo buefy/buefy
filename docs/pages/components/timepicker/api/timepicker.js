@@ -13,7 +13,7 @@ export default [
                 description: 'Hour format for input and display',
                 type: 'String',
                 values: '<code>12</code> or <code>24</code>',
-                default: '<code>24</code>'
+                default: '<code>undefined</code>: default to browser locale.'
             },
             {
                 name: '<code>increment-minutes</code>',
@@ -27,14 +27,14 @@ export default [
                 description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
+                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(time)</code>'
             },
             {
                 name: '<code>time-parser</code>',
                 description: 'Function to parse string to a time (<code>Date</code> type) for set a time from the input to the component',
                 type: 'Function',
                 values: '—',
-                default: '<code>HH:mm</code> or <code>HH:mm AM/PM</code>'
+                default: 'Tries to parse the time using the locale specific format. Fallback to <code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
                 name: '<code>min-time</code>',
@@ -163,6 +163,21 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>locale</code>',
+                description: `Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
+            },
+            {
+                name: '<code>reset-on-meridian-change</code>',
+                description: 'Reset timepicker values on meridian change',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -174,6 +189,11 @@ export default [
             {
                 name: 'default',
                 description: 'Footer',
+                props: '—'
+            },
+            {
+                name: 'trigger',
+                description: 'Trigger',
                 props: '—'
             }
         ],

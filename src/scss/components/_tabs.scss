@@ -33,7 +33,7 @@
     &.is-vertical {
         display: flex;
         flex-direction: row;
-
+        flex-wrap: wrap;
         > .tabs {
             ul {
                 flex-direction: column;

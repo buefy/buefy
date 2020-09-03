@@ -14,6 +14,7 @@
             :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
+            @change="onChange"
             @blur="onBlur"
             @focus="onFocus">
 
@@ -26,6 +27,7 @@
             :value="computedValue"
             v-bind="$attrs"
             @input="onInput"
+            @change="onChange"
             @blur="onBlur"
             @focus="onFocus"/>
 
@@ -76,6 +78,10 @@ export default {
             type: String,
             default: 'text'
         },
+        lazy: {
+            type: Boolean,
+            default: false
+        },
         passwordReveal: Boolean,
         iconClickable: Boolean,
         hasCounter: {
@@ -108,7 +114,6 @@ export default {
             set(value) {
                 this.newValue = value
                 this.$emit('input', value)
-                !this.isValid && this.checkHtml5Validity()
             }
         },
         rootClasses() {
@@ -130,36 +135,41 @@ export default {
             ]
         },
         hasIconRight() {
-            return this.passwordReveal || this.loading || this.statusTypeIcon || this.iconRight
+            return this.passwordReveal ||
+                this.loading || (this.statusIcon && this.statusTypeIcon) || this.iconRight
         },
         rightIcon() {
             if (this.passwordReveal) {
                 return this.passwordVisibleIcon
-            } else if (this.statusTypeIcon) {
-                return this.statusTypeIcon
+            } else if (this.iconRight) {
+                return this.iconRight
             }
-            return this.iconRight
+            return this.statusTypeIcon
         },
         rightIconType() {
             if (this.passwordReveal) {
                 return 'is-primary'
-            } else if (this.statusTypeIcon) {
-                return this.statusType
+            } else if (this.iconRight) {
+                return null
             }
-            return null
+            return this.statusType
         },
 
         /**
         * Position of the icon or if it's both sides.
         */
         iconPosition() {
-            if (this.icon && this.hasIconRight) {
-                return 'has-icons-left has-icons-right'
-            } else if (!this.icon && this.hasIconRight) {
-                return 'has-icons-right'
-            } else if (this.icon) {
-                return 'has-icons-left'
+            let iconClasses = ''
+
+            if (this.icon) {
+                iconClasses += 'has-icons-left '
             }
+
+            if (this.hasIconRight) {
+                iconClasses += 'has-icons-right'
+            }
+
+            return iconClasses
         },
 
         /**
@@ -218,26 +228,14 @@ export default {
             this.newType = this.isPasswordVisible ? 'text' : 'password'
 
             this.$nextTick(() => {
-                this.$refs[this.$data._elementRef].focus()
-            })
-        },
-
-        /**
-        * Input's 'input' event listener, 'nextTick' is used to prevent event firing
-        * before ui update, helps when using masks (Cleavejs and potentially others).
-        */
-        onInput(event) {
-            this.$nextTick(() => {
-                if (event.target) {
-                    this.computedValue = event.target.value
-                }
+                this.focus()
             })
         },
 
         iconClick(emit, event) {
             this.$emit(emit, event)
             this.$nextTick(() => {
-                this.$refs[this.$data._elementRef].focus()
+                this.focus()
             })
         },
 
@@ -247,6 +245,25 @@ export default {
             } else if (this.iconRightClickable) {
                 this.iconClick('icon-right-click', event)
             }
+        },
+
+        onInput(event) {
+            if (!this.lazy) {
+                const value = event.target.value
+                this.updateValue(value)
+            }
+        },
+
+        onChange(event) {
+            if (this.lazy) {
+                const value = event.target.value
+                this.updateValue(value)
+            }
+        },
+
+        updateValue(value) {
+            this.computedValue = value
+            !this.isValid && this.checkHtml5Validity()
         }
     }
 }

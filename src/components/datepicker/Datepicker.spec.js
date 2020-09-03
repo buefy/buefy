@@ -38,8 +38,8 @@ describe('BDatepicker', () => {
 
         it('should have valid default values', () => {
             expect(wrapper.vm.firstDayOfWeek).toBe(0)
-            expect(wrapper.vm.monthNames).toEqual(defaultMonthNames)
-            expect(wrapper.vm.dayNames).toEqual(defaultDayNames)
+            expect(wrapper.vm.newMonthNames.length).toBe(defaultMonthNames.length)
+            expect(wrapper.vm.newDayNames.length).toBe(defaultDayNames.length)
         })
 
         it('manage props validator', () => {
@@ -100,6 +100,21 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
         expect(wrapper.emitted()['input']).toBeTruthy()
+    })
+
+    it('react accordingly when handling native picker', () => {
+        const date = new Date(2020, 0, 1)
+        wrapper.vm.onChangeNativePicker({ target: { value: '2020-01-01' } })
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
+        expect(wrapper.vm.togglePicker).toHaveBeenCalled()
+        expect(wrapper.emitted()['input']).toBeTruthy()
+    })
+
+    it('react accordingly when handling native picker clear', () => {
+        wrapper.vm.onChangeNativePicker({ target: { value: '' } })
+        expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(null)
+        expect(wrapper.vm.togglePicker).toHaveBeenCalled()
+        expect(wrapper.emitted()['input']).toEqual([[null]])
     })
 
     it('react accordingly when changing v-model', () => {
@@ -219,7 +234,9 @@ describe('BDatepicker', () => {
             minDate: newDate(2017, 1, 1),
             maxDate: null
         })
-        expect(wrapper.vm.listOfYears).toEqual([2021, 2020, 2019, 2018, 2017])
+        const y = [2017]
+        for (let i = 1; i <= 11; i++) y.push(y[i - 1] + 1)
+        expect(wrapper.vm.listOfYears).toEqual(y.reverse())
 
         wrapper.setProps({
             maxDate: newDate(2020, 1, 1)

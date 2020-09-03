@@ -4,7 +4,17 @@ export default [
         props: [
             {
                 name: '<code>type</code>',
-                description: 'Type (color) of the icon, optional',
+                description: 'Type (color) of the tag, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '—'
+            },
+            {
+                name: '<code>close-type</code>',
+                description: 'Type (color) of the cross button of tag, optional',
                 type: 'String',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
@@ -14,7 +24,7 @@ export default [
             },
             {
                 name: '<code>size</code>',
-                description: 'Size of the tab, optional',
+                description: 'Size of the tag, optional',
                 type: 'String',
                 values: '<code>is-medium</code>, <code>is-large</code>',
                 default: '—'
@@ -67,6 +77,30 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '-'
+            },
+            {
+                name: '<code>close-icon</code>',
+                description: 'Replace times in close button with a customized icon. <code>closable</code> and <code>attached</code> props should be needed.',
+                type: 'String',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>close-icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fab</code>,  <code>fad</code>, <code>fal</code>',
+                default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>close-icon-type</code>',
+                description: 'Type (color) of the close icon of tag, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '—'
             }
         ],
         events: [
@@ -82,7 +116,7 @@ export default [
         props: [
             {
                 name: '<code>attached</code>',
-                description: 'Tabs inside are attached together',
+                description: 'Tags inside are attached together',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

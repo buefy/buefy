@@ -19,29 +19,28 @@
             :default-sort="[sortField, sortOrder]"
             @sort="onSort">
 
-            <template slot-scope="props">
-                <b-table-column field="original_title" label="Title" sortable>
-                    {{ props.row.original_title }}
-                </b-table-column>
+            <b-table-column field="original_title" label="Title" sortable v-slot="props">
+                {{ props.row.original_title }}
+            </b-table-column>
 
-                <b-table-column field="vote_average" label="Vote Average" numeric sortable>
-                    <span class="tag" :class="type(props.row.vote_average)">
-                        {{ props.row.vote_average }}
-                    </span>
-                </b-table-column>
+            <b-table-column field="vote_average" label="Vote Average" numeric sortable v-slot="props">
+                <span class="tag" :class="type(props.row.vote_average)">
+                    {{ props.row.vote_average }}
+                </span>
+            </b-table-column>
 
-                <b-table-column field="vote_count" label="Vote Count" numeric sortable>
-                     {{ props.row.vote_count }}
-                </b-table-column>
+            <b-table-column field="vote_count" label="Vote Count" numeric sortable v-slot="props">
+                    {{ props.row.vote_count }}
+            </b-table-column>
 
-                <b-table-column field="release_date" label="Release Date" sortable centered>
-                    {{ props.row.release_date ? new Date(props.row.release_date).toLocaleDateString() : 'unknown' }}
-                </b-table-column>
+            <b-table-column field="release_date" label="Release Date" sortable centered v-slot="props">
+                {{ props.row.release_date ? new Date(props.row.release_date).toLocaleDateString() : 'unknown' }}
+            </b-table-column>
 
-                <b-table-column label="Overview" width="500">
-                    {{ props.row.overview | truncate(80) }}
-                </b-table-column>
-            </template>
+            <b-table-column label="Overview" width="500" v-slot="props">
+                {{ props.row.overview | truncate(80) }}
+            </b-table-column>
+
         </b-table>
     </section>
 </template>

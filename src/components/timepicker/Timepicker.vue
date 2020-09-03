@@ -9,25 +9,27 @@
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
-            <b-input
-                v-if="!inline"
-                ref="input"
-                slot="trigger"
-                autocomplete="off"
-                :value="formatValue(computedValue)"
-                :placeholder="placeholder"
-                :size="size"
-                :icon="icon"
-                :icon-pack="iconPack"
-                :loading="loading"
-                :disabled="disabled"
-                :readonly="!editable"
-                :rounded="rounded"
-                v-bind="$attrs"
-                :use-html5-validation="useHtml5Validation"
-                @keyup.native.enter="toggle(true)"
-                @change.native="onChange($event.target.value)"
-                @focus="handleOnFocus"/>
+            <template #trigger v-if="!inline">
+                <slot name="trigger">
+                    <b-input
+                        ref="input"
+                        autocomplete="off"
+                        :value="formatValue(computedValue)"
+                        :placeholder="placeholder"
+                        :size="size"
+                        :icon="icon"
+                        :icon-pack="iconPack"
+                        :loading="loading"
+                        :disabled="disabled"
+                        :readonly="!editable"
+                        :rounded="rounded"
+                        v-bind="$attrs"
+                        :use-html5-validation="useHtml5Validation"
+                        @keyup.native.enter="toggle(true)"
+                        @change.native="onChange($event.target.value)"
+                        @focus="handleOnFocus"/>
+                </slot>
+            </template>
 
             <b-dropdown-item
                 :disabled="disabled"
@@ -47,7 +49,7 @@
                             {{ hour.label }}
                         </option>
                     </b-select>
-                    <span class="control is-colon">:</span>
+                    <span class="control is-colon">{{ hourLiteral }}</span>
                     <b-select
                         v-model="minutesSelected"
                         @change.native="onMinutesChange($event.target.value)"
@@ -62,7 +64,7 @@
                         </option>
                     </b-select>
                     <template v-if="enableSeconds">
-                        <span class="control is-colon">:</span>
+                        <span class="control is-colon">{{ minuteLiteral }}</span>
                         <b-select
                             v-model="secondsSelected"
                             @change.native="onSecondsChange($event.target.value)"
@@ -76,6 +78,7 @@
                                 {{ second.label }}
                             </option>
                         </b-select>
+                        <span class="control is-colon">{{ secondLiteral }}</span>
                     </template>
                     <b-select
                         v-model="meridienSelected"
@@ -110,11 +113,13 @@
             :size="size"
             :icon="icon"
             :icon-pack="iconPack"
+            :rounded="rounded"
             :loading="loading"
             :max="formatHHMMSS(maxTime)"
             :min="formatHHMMSS(minTime)"
             :disabled="disabled"
             :readonly="false"
+            :reset-on-meridian-change="isReset"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChange($event.target.value)"

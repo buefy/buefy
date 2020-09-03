@@ -7,7 +7,7 @@ export default {
             type: String,
             default: 'is-dark'
         },
-        message: String,
+        message: [String, Array],
         duration: Number,
         queue: {
             type: Boolean,

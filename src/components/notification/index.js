@@ -23,15 +23,28 @@ const NotificationProgrammatic = {
             parent = params.parent
             delete params.parent
         }
+        let slot
+        if (Array.isArray(params.message)) {
+            slot = params.message
+            delete params.message
+        }
+        // fix animation
+        params.active = false
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const NotificationNoticeComponent = vm.extend(NotificationNotice)
-        return new NotificationNoticeComponent({
+        const component = new NotificationNoticeComponent({
             parent,
             el: document.createElement('div'),
             propsData
         })
+        if (slot) {
+            component.$slots.default = slot
+            component.$forceUpdate()
+        }
+        // fix animation
+        component.$children[0].isActive = true
+        return component
     }
 }
 

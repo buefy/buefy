@@ -21,6 +21,13 @@ export default [
                 default: '<code></code>'
             },
             {
+                name: '<code>defaultStatusIcon</code>',
+                description: `Automatically show status icon on input component`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>defaultIconPrev</code>',
                 description: `Icon used internally for prev. —
                     Used in Datepicker, Pagination and Steps for example`,
@@ -37,7 +44,15 @@ export default [
                 default: '<code>chevron-right</code>'
             },
             {
-                name: '<code>defaultContainerElement</code>',
+                name: '<code>defaultLocale</code>',
+                description: `Will be used for default date and number formatting. Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
+            },
+            {
+                name: '<code>defaultContainerElement</>',
                 description: `Default container attribute for floating Notices (Toasts & Snackbars). Note that this also
                     changes the <code>position</code> of the Notices from <code>fixed</code> to <code>absolute</code>.
                     Meaning that the container <em>should</em> be <code>fixed</code>.`,
@@ -115,18 +130,11 @@ export default [
                 default: '<code>is-primary</code>'
             },
             {
-                name: '<code>defaultTooltipAnimated</code>',
-                description: `Default tooltip <code>animated</code> attribute.`,
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
                 name: '<code>defaultTooltipDelay</code>',
-                description: 'Default tooltip <code>delay</code> attribute.',
+                description: `Default tooltip delay attribute.`,
                 type: 'Number',
-                values: "—",
-                default: '<code>0</code>'
+                values: `-`,
+                default: '-'
             },
             {
                 name: '<code>defaultInputAutocomplete</code>',
@@ -140,14 +148,14 @@ export default [
                 description: `Default datepicker <code>date-formatter</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>date.toLocaleDateString()</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
             },
             {
                 name: '<code>defaultDateParser</code>',
                 description: `Default datepicker <code>date-parser</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>Date.parse(date)</code>'
+                default: 'Tries to parse the date using the locale specific format. Fallback to <code>Date.parse</code>'
             },
             {
                 name: '<code>defaultDateCreator</code>',
@@ -161,14 +169,14 @@ export default [
                 description: `Default datepicker <code>day-names</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: `<code>['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S']</code>`
+                default: `default to browser locale`
             },
             {
                 name: '<code>defaultMonthNames</code>',
                 description: `Default datepicker <code>month-names</code> attribute`,
                 type: 'Array',
                 values: '—',
-                default: `<code>['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']</code>`
+                default: `default to browser locale`
             },
             {
                 name: '<code>defaultFirstDayOfWeek</code>',
@@ -332,11 +340,74 @@ export default [
                 default: '<code>3500</code>'
             },
             {
+                name: '<code>defaultTabsExpanded</code>',
+                description: 'Default tabs <code>expanded</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultTabsAnimated</code>',
+                description: 'Default tabs <code>animated</code> attribute',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultTabsType</code>',
+                description: 'Default tabs <code>type</code> attribute',
+                type: 'String',
+                values: '<code>is-boxed</code>, <code>is-toggle</code>',
+                default: '—'
+            },
+            {
+                name: '<code>defaultProgrammaticPromise</code>',
+                description: `Return a promise using programmatic component`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>defaultLinkTags</code>',
                 description: 'Default link tags accepted as tag in some component (Button, MenuItem, PaginationButton). Can be used when using custom component or other Vue Router plugin like inertia.',
                 type: 'string',
                 values: '—',
                 default: '<code>[a, button, input, router-link, nuxt-link, n-link, RouterLink, NuxtLink, NLink]</code>'
+            },
+            {
+                name: '<code>defaultImageWebpFallback</code>',
+                description: `Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.`,
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>defaultImageLazy</code>',
+                description: `Use IntersectionObserver to display the image only when in viewport.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultImageResponsive</code>',
+                description: `The image will take 100% of the parent width. Use this with <code>ratio</code> to prevent page jump when images are loading.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>defaultImageRatio</code>',
+                description: `Default datepicker <code>date-formatter</code> attribute`,
+                type: 'String',
+                values: '<code>1by1</code>, <code>5by4</code>, <code>4by3</code>, <code>3by2</code>, <code>5by3</code>, <code>16by9</code>, <code>2by1</code>, <code>3by1</code>, <code>4by5</code>, <code>3by4</code>, <code>2by3</code>, <code>3by5</code>, <code>9by16</code>, <code>1by2</code> <code>1by3</code> or any string having this format <code>{number}by{number}</code>',
+                default: '—'
+            },
+            {
+                name: '<code>defaultImageSrcsetFormatter</code>',
+                description: `Function to format src according to a given size.`,
+                type: 'Function',
+                values: '—',
+                default: '(src, size) => `${srcFilename}-${size}.${srcExt}`'
             }
         ]
     }

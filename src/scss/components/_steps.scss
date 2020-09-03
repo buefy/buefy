@@ -5,6 +5,7 @@ Wikiki (https://github.com/Wikiki) licensed under
 MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 */
 
+$steps-details-background-color: $body-background-color !default;
 $steps-maker-default-color: $grey-light !default;
 $steps-marker-default-border: .2em solid #fff !default;
 $steps-default-color: $grey-lighter !default;
@@ -12,6 +13,7 @@ $steps-previous-color: $primary !default;
 $steps-active-color: $primary !default;
 $steps-divider-height: .2em !default;
 $steps-vertical-padding: 1em 0 !default;
+$steps-mobile-max-width: $tablet !default;
 
 @mixin steps-size($size) {
     .steps {
@@ -35,6 +37,7 @@ $steps-vertical-padding: 1em 0 !default;
                     .step-title {
                         font-size: $size * 1.2;
                         font-weight: $weight-semibold;
+                        line-height: $size;
                     }
                 }
 
@@ -50,7 +53,7 @@ $steps-vertical-padding: 1em 0 !default;
                     }
                 }
 
-                @include until($tablet) {
+                @include until($steps-mobile-max-width) {
                     &::before, &::after, &:not(:first-child)::before {
                         top: #{$size};
                     }
@@ -147,7 +150,7 @@ $steps-vertical-padding: 1em 0 !default;
                     font-weight: $weight-bold;
                     justify-content: center;
                     background: $steps-maker-default-color;
-                    color: $white;
+                    color: $scheme-main;
                     border: $steps-marker-default-border;
                     z-index: 1;
                     overflow: hidden;
@@ -166,7 +169,7 @@ $steps-vertical-padding: 1em 0 !default;
                         }
                         &.is-active {
                             .step-marker {
-                                background-color: $white;
+                                background-color: $scheme-main;
                                 border-color: $color;
                                 color: $color;
                             }
@@ -189,12 +192,11 @@ $steps-vertical-padding: 1em 0 !default;
                 }
 
                 .step-marker{
-                    color: $white;
+                    color: $scheme-main;
                 }
 
                 .step-details {
                     text-align: center;
-                    background: $body-background-color;
                     z-index: 1;
                 }
 
@@ -242,7 +244,7 @@ $steps-vertical-padding: 1em 0 !default;
                     }
 
                     .step-marker {
-                        background-color: $white;
+                        background-color: $scheme-main;
                         border-color: $steps-active-color;
                         color: $steps-active-color;
                     }
@@ -253,7 +255,7 @@ $steps-vertical-padding: 1em 0 !default;
                 }
                 &.is-previous {
                     .step-marker {
-                        color: $white;
+                        color: $scheme-main;
                         background-color: $steps-previous-color;
                     }
 
@@ -304,6 +306,7 @@ $steps-vertical-padding: 1em 0 !default;
                         flex-direction: row;
 
                         > .step-details {
+                            background-color: $steps-details-background-color;
                             padding: .2em;
                         }
                     }
@@ -356,6 +359,19 @@ $steps-vertical-padding: 1em 0 !default;
                         background-position: left bottom;
                     }
 
+                    // Override marker connector color per step
+                    @each $name, $pair in $colors {
+                        $color: nth($pair, 1);
+
+                        &.is-#{$name} {
+                            &::before, &::after {
+                                background: linear-gradient(to top, $steps-default-color 50%, $color 50%);
+                                background-size: 100% 200%;
+                                background-position: left bottom;
+                            }
+                        }
+                    }
+
                     &:not(:first-child), &:only-child {
                         &::before {
                             height: 100%;
@@ -401,6 +417,17 @@ $steps-vertical-padding: 1em 0 !default;
                     }
                 }
             }
+            &:not(.has-label-right):not(.has-label-left) {
+                .step-items {
+                    .step-item {
+                        .step-link {
+                            > .step-details {
+                                background-color: $steps-details-background-color;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         > .step-content {
@@ -417,26 +444,38 @@ $steps-vertical-padding: 1em 0 !default;
     }
     &:not(.is-vertical) {
         .steps {
-            .step-items {
-                .step-item{
-                    @include until($tablet) {
-                        &:not(.is-active) {
-                            display: none;
+            @include until($steps-mobile-max-width) {
+                &.mobile-minimalist {
+                    .step-items {
+                        .step-item {
+                            &:not(.is-active) {
+                                display: none;
+                            }
+                            &::before, &::after, &:not(:first-child)::before {
+                                // This will contain the divider
+                                content: " ";
+                                display: block;
+                                position: absolute;
+                                height: $steps-divider-height;
+                                width: 25%;
+                                bottom: 0;
+                                left: 50%;
+                            }
+                            &::before, &:not(:first-child)::before {
+                                right: 50%;
+                                left: auto;
+                            }
                         }
-
-                        &::before, &::after, &:not(:first-child)::before {
-                            // This will contain the divider
-                            content: " ";
-                            display: block;
-                            position: absolute;
-                            height: $steps-divider-height;
-                            width: 25%;
-                            bottom: 0;
-                            left: 50%;
-                        }
-                        &::before, &:not(:first-child)::before {
-                            right: 50%;
-                            left: auto;
+                    }
+                }
+                &.mobile-compact {
+                    .step-items {
+                        .step-item {
+                            &:not(.is-active) {
+                                .step-details {
+                                    display: none;
+                                }
+                            }
                         }
                     }
                 }

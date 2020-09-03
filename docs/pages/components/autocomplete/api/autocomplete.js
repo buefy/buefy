@@ -30,6 +30,20 @@ export default [
                 default: ''
             },
             {
+                name: '<code>group-field</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as display text of group',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
+                name: '<code>group-options</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as key to get items array of each group, optional',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>clear-on-select</code>',
                 description: 'Clear input text on select',
                 type: 'Boolean',
@@ -91,6 +105,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: 'false'
+            },
+            {
+                name: '<code>icon-right</code>',
+                description: 'Icon name to be added on the right side',
+                type: 'String',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>maxlength</code>',
@@ -155,6 +176,11 @@ export default [
                 name: '<code>footer</code>',
                 description: 'Show a custom footer as last option',
                 props: '—'
+            },
+            {
+                name: '<code>group</code>',
+                description: 'Control how the group header is output',
+                props: '—'
             }
         ],
         events: [
@@ -166,7 +192,7 @@ export default [
             {
                 name: '<code>select</code>',
                 description: 'Triggers when an option is selected or unset',
-                parameters: '<code>option: String|Number|Object</code>'
+                parameters: '<code>option: String|Number|Object, event: $event</code>'
             },
             {
                 name: '<code>focus</code>',

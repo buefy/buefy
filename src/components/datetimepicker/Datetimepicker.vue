@@ -23,6 +23,7 @@
         :range="false"
         :disabled="disabled"
         :mobile-native="isMobileNative"
+        :locale="locale"
         :focusable="focusable"
         :append-to-body="appendToBody"
         @focus="onFocus"
@@ -48,6 +49,7 @@
                     :disabled="timepickerDisabled"
                     :focusable="focusable"
                     :mobile-native="isMobileNative"
+                    :locale="locale"
                 />
             </div>
             <div
@@ -67,6 +69,7 @@
         :size="size"
         :icon="icon"
         :icon-pack="iconPack"
+        :rounded="rounded"
         :loading="loading"
         :max="formatNative(maxDate)"
         :min="formatNative(minDate)"
@@ -81,12 +84,14 @@
 
 <script>
 import FormElementMixin from '../../utils/FormElementMixin'
-import { isMobile } from '../../utils/helpers'
+import { isMobile, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
 import Datepicker from '../datepicker/Datepicker'
 import Timepicker from '../timepicker/Timepicker'
 
+const AM = 'AM'
+const PM = 'PM'
 export default {
     name: 'BDatetimepicker',
     components: {
@@ -187,6 +192,28 @@ export default {
                 this.$emit('input', adjustedValue)
             }
         },
+        localeOptions() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: this.enableSeconds() ? 'numeric' : undefined
+            }).resolvedOptions()
+        },
+        dtf() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: this.localeOptions.year || 'numeric',
+                month: this.localeOptions.month || 'numeric',
+                day: this.localeOptions.day || 'numeric',
+                hour: this.localeOptions.hour || 'numeric',
+                minute: this.localeOptions.minute || 'numeric',
+                second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
+                hour12: !this.isHourFormat24(),
+                timezome: 'UTC'
+            })
+        },
         isMobileNative() {
             return this.mobileNative && this.tzOffset === 0
         },
@@ -255,6 +282,18 @@ export default {
         }
     },
     methods: {
+        enableSeconds() {
+            if (this.$refs.timepicker) {
+                return this.$refs.timepicker.enableSeconds
+            }
+            return false
+        },
+        isHourFormat24() {
+            if (this.$refs.timepicker) {
+                return this.$refs.timepicker.isHourFormat24
+            }
+            return !this.localeOptions.hour12
+        },
         adjustValue(value, reverse = false) {
             if (!value) return value
             if (reverse) {
@@ -269,6 +308,53 @@ export default {
             } else if (typeof config.defaultDatetimeParser === 'function') {
                 return config.defaultDatetimeParser(date)
             } else {
+                if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                    let dayPeriods = [AM, PM, AM.toLowerCase(), PM.toLowerCase()]
+                    if (this.$refs.timepicker) {
+                        dayPeriods.push(this.$refs.timepicker.amString)
+                        dayPeriods.push(this.$refs.timepicker.pmString)
+                    }
+                    const parts = this.dtf.formatToParts(new Date())
+                    const formatRegex = parts.map((part, idx) => {
+                        if (part.type === 'literal') {
+                            if (idx + 1 < parts.length && parts[idx + 1].type === 'hour') {
+                                return `[^\\d]+`
+                            }
+                            return part.value.replace(/ /g, '\\s?')
+                        } else if (part.type === 'dayPeriod') {
+                            return `((?!=<${part.type}>)(${dayPeriods.join('|')})?)`
+                        }
+                        return `((?!=<${part.type}>)\\d+)`
+                    }).join('')
+                    const datetimeGroups = matchWithGroups(formatRegex, date)
+
+                    // We do a simple validation for the group.
+                    // If it is not valid, it will fallback to Date.parse below
+                    if (
+                        datetimeGroups.year &&
+                        datetimeGroups.year.length === 4 &&
+                        datetimeGroups.month &&
+                        datetimeGroups.month <= 12 &&
+                        datetimeGroups.day &&
+                        datetimeGroups.day <= 31 &&
+                        datetimeGroups.hour &&
+                        datetimeGroups.hour >= 0 &&
+                        datetimeGroups.hour < 24 &&
+                        datetimeGroups.minute &&
+                        datetimeGroups.minute >= 0 &&
+                        datetimeGroups.minute < 59
+                    ) {
+                        const d = new Date(
+                            datetimeGroups.year,
+                            datetimeGroups.month - 1,
+                            datetimeGroups.day,
+                            datetimeGroups.hour,
+                            datetimeGroups.minute,
+                            datetimeGroups.second || 0)
+                        return d
+                    }
+                }
+
                 return new Date(Date.parse(date))
             }
         },
@@ -278,15 +364,7 @@ export default {
             } else if (typeof config.defaultDatetimeFormatter === 'function') {
                 return config.defaultDatetimeFormatter(date)
             } else {
-                if (this.$refs.timepicker) {
-                    const yyyyMMdd = date.getFullYear() +
-                        '/' + (date.getMonth() + 1) +
-                        '/' + date.getDate()
-                    const d = new Date(yyyyMMdd)
-                    return d.toLocaleDateString() +
-                        ' ' + this.$refs.timepicker.timeFormatter(date, this.$refs.timepicker)
-                }
-                return null
+                return this.dtf.format(date)
             }
         },
         /*
@@ -294,7 +372,19 @@ export default {
         */
         onChangeNativePicker(event) {
             const date = event.target.value
-            this.computedValue = date ? new Date(date) : null
+            const s = date ? date.split(/\D/) : []
+            if (s.length >= 5) {
+                const year = parseInt(s[0], 10)
+                const month = parseInt(s[1], 10) - 1
+                const day = parseInt(s[2], 10)
+                const hours = parseInt(s[3], 10)
+                const minutes = parseInt(s[4], 10)
+                // Seconds are omitted intentionally; they are unsupported by input
+                // type=datetime-local and cause the control to fail native validation
+                this.computedValue = new Date(year, month, day, hours, minutes)
+            } else {
+                this.computedValue = null
+            }
         },
         formatNative(value) {
             const date = new Date(value)

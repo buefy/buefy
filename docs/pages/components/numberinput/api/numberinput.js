@@ -72,7 +72,21 @@ export default [
                 description: 'Incremental number step',
                 type: 'Number, String',
                 values: '—',
-                default: '—'
+                default: '1'
+            },
+            {
+                name: '<code>min-step</code>',
+                description: 'Minimum step-size allowed. Input value is validated to be integer multiple of <code>min-step</code>',
+                type: 'Number, String',
+                values: '—',
+                default: 'Defaults to value of <code>step</code>'
+            },
+            {
+                name: '<code>exponential</code>',
+                description: 'The factor of incrementation on long press',
+                type: 'Boolean, Number',
+                values: 'Between <code>0</code> excluded and <code>10</code>, setting to <code>true</code> is equivalent to passing <code>true</code>',
+                default: 'false'
             },
             {
                 name: '<code>controls-rounded</code>',

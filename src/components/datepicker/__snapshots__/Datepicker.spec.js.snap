@@ -2,8 +2,7 @@
 
 exports[`BDatepicker render correctly 1`] = `
 <div class="datepicker control">
-    <b-dropdown-stub mobilemodal="true" ariarole="dialog" animation="fade" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
-        <b-input-stub autocomplete="off" type="text" hascounter="true" customclass="" readonly="true"></b-input-stub>
+    <b-dropdown-stub maxheight="200" triggers="click" mobilemodal="true" ariarole="dialog" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
         <b-dropdown-item-stub custom="true" focusable="true" ariarole="" class="">
             <div>
                 <header class="datepicker-header">
@@ -14,7 +13,7 @@ exports[`BDatepicker render correctly 1`] = `
                         </a>
                         <div class="pagination-list">
                             <b-field-stub addons="true">
-                                <b-select-stub usehtml5validation="true" value="7">
+                                <b-select-stub usehtml5validation="true" statusicon="true" value="7">
                                     <option value="0">
                                         January
                                     </option>
@@ -52,7 +51,28 @@ exports[`BDatepicker render correctly 1`] = `
                                         December
                                     </option>
                                 </b-select-stub>
-                                <b-select-stub usehtml5validation="true" value="2018">
+                                <b-select-stub usehtml5validation="true" statusicon="true" value="2018">
+                                    <option value="2028">
+                                        2028
+                                    </option>
+                                    <option value="2027">
+                                        2027
+                                    </option>
+                                    <option value="2026">
+                                        2026
+                                    </option>
+                                    <option value="2025">
+                                        2025
+                                    </option>
+                                    <option value="2024">
+                                        2024
+                                    </option>
+                                    <option value="2023">
+                                        2023
+                                    </option>
+                                    <option value="2022">
+                                        2022
+                                    </option>
                                     <option value="2021">
                                         2021
                                     </option>

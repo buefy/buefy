@@ -68,4 +68,11 @@ describe('BDialog', () => {
         expect(wrapper.vm.isActive).toBeFalsy()
         expect(wrapper.vm.onConfirm).toHaveBeenCalled()
     })
+
+    it('closeOnConfirm prop equals false', () => {
+        wrapper.setProps({ onConfirm: jest.fn(), closeOnConfirm: false })
+        wrapper.vm.confirm()
+        expect(wrapper.vm.isActive).toBeTruthy()
+        expect(wrapper.vm.onConfirm).toHaveBeenCalled()
+    })
 })

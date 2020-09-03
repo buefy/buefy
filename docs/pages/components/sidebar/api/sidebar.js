@@ -31,7 +31,7 @@ export default [
                 description: `Can close Sidebar by clicking 'X', pressing escape or clicking outside`,
                 type: 'Boolean, Array',
                 values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
-                default: `<code>['escape', 'x', 'outside']</code>`
+                default: `<code>['escape', 'outside']</code>`
             },
             {
                 name: '<code>on-cancel</code>',
@@ -58,7 +58,7 @@ export default [
                 name: '<code>mobile</code>',
                 description: 'Custom layout on mobile',
                 type: 'String',
-                values: '<code>fullwidth</code>,<code>reduce</code>,<code>hidden</code>',
+                values: '<code>fullwidth</code>,<code>reduce</code>,<code>hide</code>',
                 default: '—'
             },
             {
@@ -78,6 +78,13 @@ export default [
             {
                 name: '<code>expand-on-hover</code>',
                 description: 'Expand sidebar on hover when <code>reduced</code> or <code>mobile</code> is <code>reduce</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>expand-on-hover-fixed</code>',
+                description: 'Expand sidebar on hover with fixed position when <code>reduced</code> or <code>mobile</code> is <code>reduce</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

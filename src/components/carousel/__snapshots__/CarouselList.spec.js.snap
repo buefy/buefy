@@ -2,10 +2,35 @@
 
 exports[`BCarouselList render correctly 1`] = `
 <div class="carousel-list">
-    <div class="carousel-slides" style="transform: translateX(0px);"></div>
+    <div class="carousel-slides" style="transform: translateX(0px);">
+        <div class="carousel-slide is-active" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/0/1230/500" title="Slide 1"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/1/1230/500" title="Slide 2"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/2/1230/500" title="Slide 3"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/3/1230/500" title="Slide 4"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/4/1230/500" title="Slide 5"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/5/1230/500" title="Slide 6"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/6/1230/500" title="Slide 7"></figure>
+        </div>
+        <div class="carousel-slide" style="width: 0px;">
+            <figure class="image"><img src="https://picsum.photos/id/7/1230/500" title="Slide 8"></figure>
+        </div>
+    </div>
     <div class="carousel-arrow is-hovered">
         <b-icon-stub icon="chevron-left" both="true" class="has-icons-left" style="display: none;"></b-icon-stub>
-        <b-icon-stub icon="chevron-right" both="true" class="has-icons-right" style=""></b-icon-stub>
+        <b-icon-stub icon="chevron-right" both="true" class="has-icons-right"></b-icon-stub>
     </div>
 </div>
 `;

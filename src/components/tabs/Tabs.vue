@@ -3,25 +3,25 @@
         <nav class="tabs" :class="navClasses">
             <ul>
                 <li
-                    v-for="(tabItem, index) in tabItems"
-                    :key="index"
-                    v-show="tabItem.visible"
-                    :class="{ 'is-active': activeTab === index, 'is-disabled': tabItem.disabled }">
-
+                    v-for="childItem in items"
+                    :key="childItem.value"
+                    v-show="childItem.visible"
+                    :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
+                                                       'is-disabled': childItem.disabled }]">
                     <b-slot-component
-                        v-if="tabItem.$slots.header"
-                        :component="tabItem"
+                        v-if="childItem.$slots.header"
+                        :component="childItem"
                         name="header"
                         tag="a"
-                        @click.native="tabClick(index)"
+                        @click.native="childClick(childItem)"
                     />
-                    <a v-else @click="tabClick(index)">
+                    <a v-else @click="childClick(childItem)">
                         <b-icon
-                            v-if="tabItem.icon"
-                            :icon="tabItem.icon"
-                            :pack="tabItem.iconPack"
+                            v-if="childItem.icon"
+                            :icon="childItem.icon"
+                            :pack="childItem.iconPack"
                             :size="size"/>
-                        <span>{{ tabItem.label }}</span>
+                        <span>{{ childItem.label }}</span>
                     </a>
                 </li>
             </ul>
@@ -33,40 +33,32 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
-import SlotComponent from '../../utils/SlotComponent'
+import config from '../../utils/config'
+import TabbedMixin from '../../utils/TabbedMixin.js'
 
 export default {
     name: 'BTabs',
-    components: {
-        [Icon.name]: Icon,
-        [SlotComponent.name]: SlotComponent
-    },
+    mixins: [TabbedMixin('tab')],
     props: {
-        value: Number,
-        expanded: Boolean,
-        type: String,
-        size: String,
-        position: String,
+        expanded: {
+            type: Boolean,
+            default: () => {
+                return config.defaultTabsExpanded
+            }
+        },
+        type: {
+            type: [String, Object],
+            default: () => {
+                return config.defaultTabsType
+            }
+        },
         animated: {
             type: Boolean,
-            default: true
+            default: () => {
+                return config.defaultTabsAnimated
+            }
         },
-        destroyOnHide: {
-            type: Boolean,
-            default: false
-        },
-        vertical: Boolean,
         multiline: Boolean
-    },
-    data() {
-        return {
-            activeTab: this.value || 0,
-            defaultSlots: [],
-            contentHeight: 0,
-            isTransitioning: false,
-            _isTabs: true // Used internally by TabItem
-        }
     },
     computed: {
         mainClasses() {
@@ -87,76 +79,7 @@ export default {
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
             ]
-        },
-        tabItems() {
-            return this.defaultSlots
-                .filter((vnode) =>
-                    vnode.componentInstance &&
-                    vnode.componentInstance.$data &&
-                    vnode.componentInstance.$data._isTabItem)
-                .map((vnode) => vnode.componentInstance)
         }
-    },
-    watch: {
-        /**
-        * When v-model is changed set the new active tab.
-        */
-        value(value) {
-            this.changeTab(value)
-        },
-
-        /**
-        * When tab-items are updated, set active one.
-        */
-        tabItems() {
-            if (this.activeTab < this.tabItems.length) {
-                let previous = this.activeTab
-                this.tabItems.map((tab, idx) => {
-                    if (tab.isActive) {
-                        previous = idx
-                        if (previous < this.tabItems.length) {
-                            this.tabItems[previous].isActive = false
-                        }
-                    }
-                })
-                this.tabItems[this.activeTab].isActive = true
-            } else if (this.activeTab > 0) {
-                this.changeTab(this.activeTab - 1)
-            }
-        }
-    },
-    methods: {
-        refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
-        },
-        /**
-        * Change the active tab and emit change event.
-        */
-        changeTab(newIndex) {
-            if (this.activeTab === newIndex || this.tabItems[newIndex] === undefined) return
-
-            if (this.activeTab < this.tabItems.length) {
-                this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex)
-            }
-            this.tabItems[newIndex].activate(this.activeTab, newIndex)
-            this.activeTab = newIndex
-            this.$emit('change', newIndex)
-        },
-
-        /**
-        * Tab click listener, emit input event and change active tab.
-        */
-        tabClick(value) {
-            if (this.activeTab === value) return
-            this.$emit('input', value)
-            this.changeTab(value)
-        }
-    },
-    mounted() {
-        if (this.activeTab < this.tabItems.length) {
-            this.tabItems[this.activeTab].isActive = true
-        }
-        this.refreshSlots()
     }
 }
 </script>

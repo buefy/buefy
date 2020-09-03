@@ -44,6 +44,7 @@
                     ]
                 },
                 "documentation/icon",
+                "documentation/image",
                 "documentation/loading",
                 "documentation/menu",
                 "documentation/message",
@@ -81,6 +82,12 @@
             "category": "Drag & drop",
             "pages": [
                 "extensions/sortablejs"
+            ]
+        },
+        {
+            "category": "CSS Variables",
+            "pages": [
+                "extensions/bulmacssvars"
             ]
         }
     ]

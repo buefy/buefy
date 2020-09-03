@@ -7,7 +7,7 @@
                 aria-controls="contentIdForA11y3">
                 <p class="card-header-title">
                     <template v-if="!loading">Component</template>
-                    <b-skeleton :active="loading"></b-skeleton>
+                    <b-skeleton size="is-large" :active="loading"></b-skeleton>
                 </p>
             </div>
             <div class="card-content">
@@ -16,21 +16,21 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
                         <a>#buefy</a>.
                     </template>
-                    <b-skeleton :active="loading" :count="2"></b-skeleton>
+                    <b-skeleton size="is-large" :active="loading" :count="2"></b-skeleton>
                 </div>
             </div>
             <footer class="card-footer">
                 <a class="card-footer-item">
                     <template v-if="!loading">Save</template>
-                    <b-skeleton :active="loading"></b-skeleton>
+                    <b-skeleton size="is-large" :active="loading"></b-skeleton>
                 </a>
                 <a class="card-footer-item">
                     <template v-if="!loading">Edit</template>
-                    <b-skeleton :active="loading"></b-skeleton>
+                    <b-skeleton size="is-large" :active="loading"></b-skeleton>
                 </a>
                 <a class="card-footer-item">
                     <template v-if="!loading">Delete</template>
-                    <b-skeleton :active="loading"></b-skeleton>
+                    <b-skeleton size="is-large" :active="loading"></b-skeleton>
                 </a>
             </footer>
         </div>

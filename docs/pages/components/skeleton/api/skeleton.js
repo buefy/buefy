@@ -16,6 +16,20 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>rounded</code>',
+                description: 'Rounded style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>size</code>',
+                description: 'Vertical size of skeleton, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
                 name: '<code>width</code>',
                 description: 'Custom width',
                 type: 'String, Number',
@@ -31,7 +45,7 @@ export default [
             },
             {
                 name: '<code>circle</code>',
-                description: 'Custom circle shape',
+                description: 'Show a circle shape',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -42,7 +56,14 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
-            }
+						},
+            {
+                name: '<code>position</code>',
+                description: 'Position of the skeleton, optional',
+                type: 'String',
+                values: '<code>is-centered</code>, <code>is-right</code>',
+                default: '—'
+						},
         ]
     }
 ]

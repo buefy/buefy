@@ -19,28 +19,28 @@
         <b-switch v-model="backendSortingEnabled" @input="resetPriority">Backend sorting</b-switch>
       </div>
     </b-field>
-    <b-table 
+    <b-table
       :data="data"
       ref="multiSortTable"
       :backend-sorting="backendSortingEnabled"
       @sort="sortPressed"
       @sorting-priority-removed="sortingPriorityRemoved"
-      
+
       :sort-multiple="multiColumnSortingEnabled"
-      :sort-multiple-data="sortingPrioirty"
+      :sort-multiple-data="sortingPriority"
       :sort-multiple-key="customKey"
     >
-      <template slot-scope="props">
-        <b-table-column field="first_name" label="First name" sortable>
+
+        <b-table-column field="first_name" label="First name" sortable v-slot="props">
             {{ props.row.first_name }}
         </b-table-column>
-        <b-table-column field="last_name" label="Last name" sortable>
+        <b-table-column field="last_name" label="Last name" sortable v-slot="props">
             {{ props.row.last_name }}
         </b-table-column>
-        <b-table-column field="team" label="Team" sortable>
+        <b-table-column field="team" label="Team" sortable v-slot="props">
             {{ props.row.team }}
         </b-table-column>
-      </template>
+
     </b-table>
   </div>
 </template>
@@ -61,7 +61,7 @@ const dataSource = [
             backendSortingEnabled: false,
             multiColumnSortingEnabled: true,
             data: [],
-            sortingPrioirty: []
+            sortingPriority: []
           }
       },
       methods: {
@@ -70,33 +70,33 @@ const dataSource = [
 
           // reset local backend sorting
           if(this.backendSortingEnabled) {
-            this.sortingPrioirty = []
+            this.sortingPriority = []
             this.loadAsyncData()
           }
         },
 
         // Backend sorting
         sortingPriorityRemoved(field){
-          this.sortingPrioirty = this.sortingPrioirty.filter(
+          this.sortingPriority = this.sortingPriority.filter(
             (priority) => priority.field !== field)
-          this.loadAsyncData(this.sortingPrioirty)
+          this.loadAsyncData(this.sortingPriority)
         },
 
         sortPressed(field, order, event) {
           if(this.backendSortingEnabled) {
             if(this.multiColumnSortingEnabled){
               if((this.customKey && event[this.customKey]) || !this.customKey) {
-                let existingPriority = this.sortingPrioirty.find(i => i.field === field)
+                let existingPriority = this.sortingPriority.find(i => i.field === field)
                 if(existingPriority) {
                   existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
                 } else {
                   // request sorted data from backend
-                  this.sortingPrioirty.push({field, order})
+                  this.sortingPriority.push({field, order})
                 }
-                this.loadAsyncData(this.sortingPrioirty)
+                this.loadAsyncData(this.sortingPriority)
               } else {
                 // request regular sorted data from backend
-                this.sortingPrioirty = [] // [{field, order}]
+                this.sortingPriority = [] // [{field, order}]
                 this.loadAsyncData([{field, order}])
               }
             }
@@ -104,10 +104,10 @@ const dataSource = [
         },
 
         // "API request" for data
-        async loadAsyncData(sortingPrioirty = []) {
+        async loadAsyncData(sortingPriority = []) {
           let mockdata = JSON.parse(JSON.stringify(dataSource));
           // get data already sorted from the backend using sortingPriority
-          this.data = orderBy(mockdata, sortingPrioirty.map(i => i.field), sortingPrioirty.map(i => i.order))
+          this.data = orderBy(mockdata, sortingPriority.map(i => i.field), sortingPriority.map(i => i.order))
         }
       },
       created () {

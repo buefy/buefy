@@ -1,5 +1,8 @@
 <template>
-    <div class="b-table" :class="rooClasses">
+    <div class="b-table">
+
+        <slot />
+
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
             :current-sort-column="currentSortColumn"
@@ -15,38 +18,27 @@
             @removePriority="(column) => removeSortingPriority(column)"
         />
 
-        <div
-            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')"
-            class="top level">
-            <div class="level-left">
-                <slot name="top-left"/>
-            </div>
-
-            <div class="level-right">
-                <div v-if="paginated" class="level-item">
-                    <b-pagination
-                        :icon-pack="iconPack"
-                        :total="newDataTotal"
-                        :per-page="perPage"
-                        :simple="paginationSimple"
-                        :size="paginationSize"
-                        :current="newCurrentPage"
-                        @change="pageChanged"
-                        :aria-next-label="ariaNextLabel"
-                        :aria-previous-label="ariaPreviousLabel"
-                        :aria-page-label="ariaPageLabel"
-                        :aria-current-label="ariaCurrentLabel" />
-                </div>
-            </div>
-        </div>
+        <template
+            v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
+            <slot name="pagination">
+                <b-table-pagination
+                    v-bind="$attrs"
+                    :per-page="perPage"
+                    :paginated="paginated"
+                    :icon-pack="iconPack"
+                    :total="newDataTotal"
+                    :current-page.sync="newCurrentPage"
+                    @page-change="(event) => $emit('page-change', event)"
+                >
+                    <slot name="top-left"/>
+                </b-table-pagination>
+            </slot>
+        </template>
 
         <div
             class="table-wrapper"
             :class="tableWrapperClasses"
-            :style="{
-                height: height === undefined ? null :
-                (isNaN(height) ? height : height + 'px')
-            }"
+            :style="tableStyle"
         >
             <table
                 class="table"
@@ -54,7 +46,7 @@
                 :tabindex="!focusable ? false : 0"
                 @keydown.self.prevent.up="pressedArrow(-1)"
                 @keydown.self.prevent.down="pressedArrow(1)">
-                <thead v-if="newColumns.length">
+                <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
@@ -67,17 +59,14 @@
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'header'"
                             :class="[column.headerClass, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
                                 'is-sticky': column.sticky,
-                                'is-unselectable': !column.headerSelectable
+                                'is-unselectable': column.isHeaderUnSelectable
                             }]"
-                            :style="{
-                                width: column.width === undefined ? null :
-                                (isNaN(column.width) ? column.width : column.width + 'px')
-                            }"
+                            :style="column.style"
                             @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
@@ -88,55 +77,51 @@
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.header">
                                     <b-slot-component
                                         :component="column"
-                                        :scoped="true"
+                                        scoped
                                         name="header"
                                         tag="span"
                                         :props="{ column, index }"
                                     />
                                 </template>
-                                <template v-else-if="$scopedSlots.header">
-                                    <slot
-                                        name="header"
-                                        :column="column"
-                                        :index="index"
-                                    />
-                                </template>
-                                <template v-else>{{ column.label }}</template>
+                                <template v-else>
+                                    <span class="is-relative">
+                                        {{ column.label }}
+                                        <template
+                                            v-if="sortMultiple &&
+                                                sortMultipleDataComputed &&
+                                                sortMultipleDataComputed.length > 0 &&
+                                                sortMultipleDataComputed.filter(i =>
+                                            i.field === column.field).length > 0">
+                                            <b-icon
+                                                :icon="sortIcon"
+                                                :pack="iconPack"
+                                                both
+                                                :size="sortIconSize"
+                                                :class="{
+                                                    'is-desc': sortMultipleDataComputed.filter(i =>
+                                                i.field === column.field)[0].order === 'desc'}"
+                                            />
+                                            {{ findIndexOfSortData(column) }}
+                                            <button
+                                                class="delete is-small multi-sort-cancel-icon"
+                                                type="button"
+                                                @click.stop="removeSortingPriority(column)"/>
+                                        </template>
 
-                                <template
-                                    v-if="sortMultiple &&
-                                        sortMultipleDataComputed &&
-                                        sortMultipleDataComputed.length > 0 &&
-                                        sortMultipleDataComputed.filter(i =>
-                                    i.field === column.field).length > 0">
-                                    <b-icon
-                                        :icon="sortIcon"
-                                        :pack="iconPack"
-                                        both
-                                        :size="sortIconSize"
-                                        :class="{
-                                            'is-desc': sortMultipleDataComputed.filter(i =>
-                                                i.field === column.field)[0].order === 'desc'
-                                        }"
-                                    />
-                                    {{ findIndexOfSortData(column) }}
-                                    <button
-                                        class="delete is-small multi-sort-cancel-icon"
-                                        type="button"
-                                        @click.stop="removeSortingPriority(column)"/>
+                                        <b-icon
+                                            v-else
+                                            :icon="sortIcon"
+                                            :pack="iconPack"
+                                            both
+                                            :size="sortIconSize"
+                                            class="sort-icon"
+                                            :class="{
+                                                'is-desc': !isAsc,
+                                                'is-invisible': currentSortColumn !== column
+                                            }"
+                                        />
+                                    </span>
                                 </template>
-
-                                <b-icon
-                                    v-else-if="column.sortable && !sortMultiple"
-                                    :icon="sortIcon"
-                                    :pack="iconPack"
-                                    both
-                                    :size="sortIconSize"
-                                    :class="{
-                                        'is-desc': !isAsc,
-                                        'is-invisible': currentSortColumn !== column
-                                    }"
-                                />
                             </div>
                         </th>
                         <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
@@ -153,10 +138,8 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
-                            :style="{
-                                width: column.width === undefined ? null
-                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            :key="column.newKey + ':' + index + 'subheading'"
+                            :style="column.style">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -168,17 +151,10 @@
                                 >
                                     <b-slot-component
                                         :component="column"
-                                        :scoped="true"
+                                        scoped
                                         name="subheading"
                                         tag="span"
                                         :props="{ column, index }"
-                                    />
-                                </template>
-                                <template v-else-if="$scopedSlots.subheading">
-                                    <slot
-                                        name="subheading"
-                                        :column="column"
-                                        :index="index"
                                     />
                                 </template>
                                 <template v-else>{{ column.subheading }}</template>
@@ -191,18 +167,22 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
-                            :style="{
-                                width: column.width === undefined ? null
-                            : (isNaN(column.width) ? column.width : column.width + 'px') }">
+                            :key="column.newKey + ':' + index + 'searchable'"
+                            :style="column.style"
+                            :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
-                                    <slot
-                                        v-if="$scopedSlots.searchable"
-                                        name="searchable"
-                                        :column="column"
-                                        :filters="filters"
-                                    />
+                                    <template
+                                        v-if="column.$scopedSlots
+                                        && column.$scopedSlots.searchable">
+                                        <b-slot-component
+                                            :component="column"
+                                            :scoped="true"
+                                            name="searchable"
+                                            tag="span"
+                                            :props="{ column, filters }"
+                                        />
+                                    </template>
                                     <b-input
                                         v-else
                                         @[filtersEvent].native="onFiltersEvent"
@@ -214,12 +194,12 @@
                         <th v-if="checkable && checkboxPosition === 'right'" />
                     </tr>
                 </thead>
-                <tbody v-if="visibleData.length">
+                <tbody>
                     <template v-for="(row, index) in visibleData">
                         <tr
                             :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
-                                'is-selected': row === selected,
+                                'is-selected': isRowSelected(row, selected),
                                 'is-checked': isRowChecked(row),
                             }]"
                             @click="selectRow(row)"
@@ -260,25 +240,21 @@
                                 />
                             </td>
 
-                            <slot
-                                v-if="$scopedSlots.default"
-                                :row="row"
-                                :index="index"
-                            />
-                            <template v-else>
-                                <BTableColumn
-                                    v-for="column in newColumns"
-                                    v-bind="column"
-                                    :key="column.customKey || column.label"
-                                    internal>
-                                    <span
-                                        v-if="column.renderHtml"
-                                        v-html="getValueByPath(row, column.field)"
+                            <template v-for="(column, colindex) in visibleColumns">
+
+                                <template v-if="column.$scopedSlots && column.$scopedSlots.default">
+                                    <b-slot-component
+                                        :key="column.newKey + ':' + index + ':' + colindex"
+                                        :component="column"
+                                        scoped
+                                        name="default"
+                                        tag="td"
+                                        :class="column.rootClasses"
+                                        :data-label="column.label"
+                                        :props="{ row, column, index }"
                                     />
-                                    <template v-else>
-                                        {{ getValueByPath(row, column.field) }}
-                                    </template>
-                                </BTableColumn>
+                                </template>
+
                             </template>
 
                             <td
@@ -292,10 +268,9 @@
                             </td>
                         </tr>
 
-                        <!-- Do not add `key` here (breaks details) -->
-                        <!-- eslint-disable-next-line -->
                         <tr
                             v-if="isActiveDetailRow(row)"
+                            :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
                             class="detail">
                             <td :colspan="columnCount">
                                 <div class="detail-container">
@@ -313,14 +288,17 @@
                             :index="index"
                         />
                     </template>
-                </tbody>
-                <tbody v-else>
-                    <tr class="is-empty">
+
+                    <tr
+                        v-if="!visibleData.length"
+                        class="is-empty">
                         <td :colspan="columnCount">
                             <slot name="empty"/>
                         </td>
                     </tr>
+
                 </tbody>
+
                 <tfoot v-if="$slots.footer !== undefined">
                     <tr class="table-footer">
                         <slot name="footer" v-if="hasCustomFooterSlot()"/>
@@ -330,45 +308,49 @@
                     </tr>
                 </tfoot>
             </table>
+
+            <template v-if="loading">
+                <slot name="loading">
+                    <b-loading :is-full-page="false" :active.sync="loading" />
+                </slot>
+            </template>
+
         </div>
 
-        <div
+        <template
             v-if="(checkable && hasBottomLeftSlot()) ||
             (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
-            class="level">
-            <div class="level-left">
-                <slot name="bottom-left"/>
-            </div>
+        >
+            <slot name="pagination">
+                <b-table-pagination
+                    v-bind="$attrs"
+                    :per-page="perPage"
+                    :paginated="paginated"
+                    :icon-pack="iconPack"
+                    :total="newDataTotal"
+                    :current-page.sync="newCurrentPage"
+                    @page-change="(event) => $emit('page-change', event)"
+                >
+                    <slot name="bottom-left"/>
+                </b-table-pagination>
+            </slot>
+        </template>
 
-            <div class="level-right">
-                <div v-if="paginated" class="level-item">
-                    <b-pagination
-                        :icon-pack="iconPack"
-                        :total="newDataTotal"
-                        :per-page="perPage"
-                        :simple="paginationSimple"
-                        :size="paginationSize"
-                        :current="newCurrentPage"
-                        @change="pageChanged"
-                        :aria-next-label="ariaNextLabel"
-                        :aria-previous-label="ariaPreviousLabel"
-                        :aria-page-label="ariaPageLabel"
-                        :aria-current-label="ariaCurrentLabel" />
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
+import debounce from '../../utils/debounce'
+import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
-import Pagination from '../pagination/Pagination'
+import Loading from '../loading/Loading'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
 import TableColumn from './TableColumn'
+import TablePagination from './TablePagination'
 
 export default {
     name: 'BTable',
@@ -376,10 +358,17 @@ export default {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
         [Input.name]: Input,
-        [Pagination.name]: Pagination,
+        [Loading.name]: Loading,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
-        [TableColumn.name]: TableColumn
+        [TableColumn.name]: TableColumn,
+        [TablePagination.name]: TablePagination
+    },
+    inheritAttrs: false,
+    provide() {
+        return {
+            $table: this
+        }
     },
     props: {
         data: {
@@ -412,6 +401,10 @@ export default {
             }
         },
         selected: Object,
+        isRowSelectable: {
+            type: Function,
+            default: () => true
+        },
         focusable: Boolean,
         customIsChecked: Function,
         isRowCheckable: {
@@ -464,8 +457,6 @@ export default {
             type: Boolean,
             default: true
         },
-        paginationSimple: Boolean,
-        paginationSize: String,
         paginationPosition: {
             type: String,
             default: 'bottom',
@@ -521,13 +512,18 @@ export default {
         filtersEvent: {
             type: String,
             default: ''
-        }
+        },
+        cardLayout: Boolean,
+        showHeader: {
+            type: Boolean,
+            default: true
+        },
+        debounceSearch: Number
     },
     data() {
         return {
             sortMultipleDataLocal: [],
             getValueByPath,
-            newColumns: [...this.columns],
             visibleDetailRows: this.openedDetailed,
             newData: this.data,
             newDataTotal: this.backendPagination ? this.total : this.data.length,
@@ -537,17 +533,14 @@ export default {
             currentSortColumn: {},
             isAsc: true,
             filters: {},
+            defaultSlots: [],
             firstTimeSort: true, // Used by first time initSort
             _isTable: true // Used by TableColumn
         }
     },
     computed: {
         sortMultipleDataComputed() {
-            if (this.backendSorting) {
-                return this.sortMultipleData
-            } else {
-                return this.sortMultipleDataLocal
-            }
+            return this.backendSorting ? this.sortMultipleData : this.sortMultipleDataLocal
         },
         tableClasses() {
             return {
@@ -564,12 +557,13 @@ export default {
             return {
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
+                'is-card-list': this.cardLayout,
                 'table-container': this.isScrollable
             }
         },
-        rooClasses() {
+        tableStyle() {
             return {
-                'is-loading': this.loading
+                height: toCssWidth(this.height)
             }
         },
 
@@ -676,22 +670,55 @@ export default {
             return this.newColumns.some((column) => {
                 return column.sticky
             })
+        },
+
+        newColumns() {
+            if (this.columns && this.columns.length) {
+                return this.columns.map((column) => {
+                    const TableColumnComponent = VueInstance.extend(TableColumn)
+                    const component = new TableColumnComponent(
+                        { parent: this, propsData: column }
+                    )
+                    component.$scopedSlots = {
+                        default: (props) => {
+                            const vnode = component.$createElement('span', {
+                                domProps: {
+                                    innerHTML: getValueByPath(props.row, column.field)
+                                }
+                            })
+                            return [vnode]
+                        }
+                    }
+                    return component
+                })
+            }
+            return this.defaultSlots
+                .filter((vnode) =>
+                    vnode.componentInstance &&
+                    vnode.componentInstance.$data &&
+                    vnode.componentInstance.$data._isTableColumn)
+                .map((vnode) => vnode.componentInstance)
         }
     },
     watch: {
         /**
         * When data prop change:
         *   1. Update internal value.
-        *   2. Sort again if it's not backend-sort.
-        *   3. Set new total if it's not backend-paginated.
+        *   2. Filter data if it's not backend-filtered.
+        *   3. Sort again if it's not backend-sorted.
+        *   4. Set new total if it's not backend-paginated.
         */
         data(value) {
             this.newData = value
+            if (!this.backendFiltering) {
+                this.newData = value.filter(
+                    (row) => this.isRowFiltered(row))
+            }
             if (!this.backendSorting) {
                 this.sort(this.currentSortColumn, true)
             }
             if (!this.backendPagination) {
-                this.newDataTotal = value.length
+                this.newDataTotal = this.newData.length
             }
         },
 
@@ -705,6 +732,10 @@ export default {
             this.newDataTotal = newTotal
         },
 
+        currentPage(newVal) {
+            this.newCurrentPage = newVal
+        },
+
         /**
         * When checkedRows prop change, update internal value without
         * mutating original data.
@@ -713,24 +744,25 @@ export default {
             this.newCheckedRows = [...rows]
         },
 
-        columns(value) {
-            this.newColumns = [...value]
-        },
-
+        /*
         newColumns(value) {
             this.checkSort()
+        },
+        */
+
+        debounceSearch: {
+            handler(value) {
+                this.debouncedHandleFiltersChange = debounce(this.handleFiltersChange, value)
+            },
+            immediate: true
         },
 
         filters: {
             handler(value) {
-                if (this.backendFiltering) {
-                    this.$emit('filters-change', value)
+                if (this.debounceSearch) {
+                    this.debouncedHandleFiltersChange(value)
                 } else {
-                    this.newData = this.data.filter(
-                        (row) => this.isRowFiltered(row))
-                    if (!this.backendPagination) {
-                        this.newDataTotal = this.newData.length
-                    }
+                    this.handleFiltersChange(value)
                 }
             },
             deep: true
@@ -742,15 +774,30 @@ export default {
         */
         openedDetailed(expandedRows) {
             this.visibleDetailRows = expandedRows
-        },
-
-        currentPage(newVal) {
-            this.newCurrentPage = newVal
         }
     },
     methods: {
         onFiltersEvent(event) {
             this.$emit(`filters-event-${this.filtersEvent}`, { event, filters: this.filters })
+        },
+        handleFiltersChange(value) {
+            if (this.backendFiltering) {
+                this.$emit('filters-change', value)
+            } else {
+                this.newData = this.data.filter(
+                    (row) => this.isRowFiltered(row))
+                if (!this.backendPagination) {
+                    this.newDataTotal = this.newData.length
+                }
+                if (!this.backendSorting) {
+                    if (this.sortMultiple &&
+                        this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
+                        this.doSortMultiColumn()
+                    } else if (Object.keys(this.currentSortColumn).length > 0) {
+                        this.doSortSingleColumn(this.currentSortColumn)
+                    }
+                }
+            }
         },
         findIndexOfSortData(column) {
             let sortObj = this.sortMultipleDataComputed.filter((i) =>
@@ -827,13 +874,17 @@ export default {
                         {field: column.field, order: column.isAsc}
                     )
                 }
-                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
-                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
-                })
-
-                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+                this.doSortMultiColumn()
             }
         },
+
+        doSortMultiColumn() {
+            let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
+                return (i.order && i.order === 'desc' ? '-' : '') + i.field
+            })
+            this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+        },
+
         /**
         * Sort the column.
         * Toggle current direction on column if it's sortable
@@ -847,7 +898,11 @@ export default {
                 this.sortMultiple &&
                 ((this.sortMultipleKey && event[this.sortMultipleKey]) || !this.sortMultipleKey)
             ) {
-                this.sortMultiColumn(column)
+                if (updatingData) {
+                    this.doSortMultiColumn()
+                } else {
+                    this.sortMultiColumn(column)
+                }
             } else {
                 if (!column || !column.sortable) return
 
@@ -865,15 +920,29 @@ export default {
                     this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event)
                 }
                 if (!this.backendSorting) {
-                    this.newData = this.sortBy(
-                        this.newData,
-                        column.field,
-                        column.customSort,
-                        this.isAsc
-                    )
+                    this.doSortSingleColumn(column)
                 }
                 this.currentSortColumn = column
             }
+        },
+
+        doSortSingleColumn(column) {
+            this.newData = this.sortBy(
+                this.newData,
+                column.field,
+                column.customSort,
+                this.isAsc
+            )
+        },
+
+        isRowSelected(row, selected) {
+            if (!selected) {
+                return false
+            }
+            if (this.customRowKey) {
+                return row[this.customRowKey] === selected[this.customRowKey]
+            }
+            return row === selected
         },
 
         /**
@@ -968,21 +1037,13 @@ export default {
             this.$emit('click', row)
 
             if (this.selected === row) return
+            if (!this.isRowSelectable(row)) return
 
             // Emit new and old row
             this.$emit('select', row, this.selected)
 
             // Emit new row to update user variable
             this.$emit('update:selected', row)
-        },
-
-        /**
-        * Paginator change listener.
-        */
-        pageChanged(page) {
-            this.newCurrentPage = page > 0 ? page : 1
-            this.$emit('page-change', this.newCurrentPage)
-            this.$emit('update:currentPage', this.newCurrentPage)
         },
 
         /**
@@ -1040,18 +1101,17 @@ export default {
                 if (Number.isInteger(value)) {
                     if (value !== Number(this.filters[key])) return false
                 } else {
-                    const re = new RegExp(this.filters[key], 'i')
-                    if (typeof value === 'boolean') value = `${value}`
-                    if (!value.match(re)) return false
+                    const re = new RegExp(escapeRegExpChars(this.filters[key]), 'i')
+                    if (!re.test(value)) return false
                 }
             }
             return true
         },
 
         /**
-            * When the detailKey is defined we use the object[detailKey] as index.
-            * If not, use the object reference by default.
-            */
+        * When the detailKey is defined we use the object[detailKey] as index.
+        * If not, use the object reference by default.
+        */
         handleDetailKey(index) {
             const key = this.detailKey
             return !key.length || !index
@@ -1074,7 +1134,7 @@ export default {
                 this.initSort()
                 this.firstTimeSort = false
             } else if (this.newColumns.length) {
-                if (this.currentSortColumn.field) {
+                if (Object.keys(this.currentSortColumn).length > 0) {
                     for (let i = 0; i < this.newColumns.length; i++) {
                         if (this.newColumns[i].field === this.currentSortColumn.field) {
                             this.currentSortColumn = this.newColumns[i]
@@ -1119,7 +1179,25 @@ export default {
                     ? this.visibleData.length - 1
                     : index
 
-            this.selectRow(this.visibleData[index])
+            const row = this.visibleData[index]
+
+            if (!this.isRowSelectable(row)) {
+                let newIndex = null
+                if (pos > 0) {
+                    for (let i = index; i < this.visibleData.length && newIndex === null; i++) {
+                        if (this.isRowSelectable(this.visibleData[i])) newIndex = i
+                    }
+                } else {
+                    for (let i = index; i >= 0 && newIndex === null; i--) {
+                        if (this.isRowSelectable(this.visibleData[i])) newIndex = i
+                    }
+                }
+                if (newIndex >= 0) {
+                    this.selectRow(this.visibleData[newIndex])
+                }
+            } else {
+                this.selectRow(row)
+            }
         },
 
         /**
@@ -1135,26 +1213,32 @@ export default {
         * Initial sorted column based on the default-sort prop.
         */
         initSort() {
-            if (!this.defaultSort) return
-
-            let sortField = ''
-            let sortDirection = this.defaultSortDirection
-
-            if (Array.isArray(this.defaultSort)) {
-                sortField = this.defaultSort[0]
-                if (this.defaultSort[1]) {
-                    sortDirection = this.defaultSort[1]
-                }
+            if (this.sortMultiple && this.sortMultipleData) {
+                this.sortMultipleData.forEach((column) => {
+                    this.sortMultiColumn(column)
+                })
             } else {
-                sortField = this.defaultSort
-            }
+                if (!this.defaultSort) return
 
-            this.newColumns.forEach((column) => {
-                if (column.field === sortField) {
-                    this.isAsc = sortDirection.toLowerCase() !== 'desc'
-                    this.sort(column, true)
+                let sortField = ''
+                let sortDirection = this.defaultSortDirection
+
+                if (Array.isArray(this.defaultSort)) {
+                    sortField = this.defaultSort[0]
+                    if (this.defaultSort[1]) {
+                        sortDirection = this.defaultSort[1]
+                    }
+                } else {
+                    sortField = this.defaultSort
                 }
-            })
+
+                const sortColumn = this.newColumns.filter(
+                    (column) => (column.field === sortField))[0]
+                if (sortColumn) {
+                    this.isAsc = sortDirection.toLowerCase() !== 'desc'
+                    this.sort(sortColumn, true)
+                }
+            }
         },
         /**
         * Emits drag start event
@@ -1185,17 +1269,16 @@ export default {
         */
         handleDragLeave(event, row, index) {
             this.$emit('dragleave', {event, row, index})
+        },
+
+        refreshSlots() {
+            this.defaultSlots = this.$slots.default || []
         }
     },
-
     mounted() {
+        this.refreshSlots()
         this.checkPredefinedDetailedRows()
         this.checkSort()
-    },
-
-    beforeDestroy() {
-        this.newData = []
-        this.newColumns = []
     }
 }
 </script>

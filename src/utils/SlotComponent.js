@@ -1,3 +1,5 @@
+import { isVueComponent } from './helpers'
+
 export default {
     name: 'BSlotComponent',
     props: {
@@ -27,23 +29,20 @@ export default {
     methods: {
         refresh() {
             this.$forceUpdate()
-        },
-        isVueComponent() {
-            return this.component && this.component._isVue
         }
     },
     created() {
-        if (this.isVueComponent()) {
+        if (isVueComponent(this.component)) {
             this.component.$on(this.event, this.refresh)
         }
     },
     beforeDestroy() {
-        if (this.isVueComponent()) {
+        if (isVueComponent(this.component)) {
             this.component.$off(this.event, this.refresh)
         }
     },
     render(createElement) {
-        if (this.isVueComponent()) {
+        if (isVueComponent(this.component)) {
             return createElement(this.tag, {},
                 this.scoped ? this.component.$scopedSlots[this.name](this.props)
                     : this.component.$slots[this.name])

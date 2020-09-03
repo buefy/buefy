@@ -24,11 +24,18 @@ export default [
               default: '<code>false</code>'
           },
           {
-              name: '<code>is-active</code>',
+              name: '<code>active</code>',
               description: 'To control the behaviour of the mobile menu programmatically, use the <code>.sync</code> modifier to make it two-way binding',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
+          },
+          {
+            name: '<code>centered</code>',
+            description: 'To center the navbar-start slot',
+            type: 'Boolean',
+            values: '—',
+            default: '<code>false</code>'
           },
           {
               name: '<code>type</code>',
@@ -100,7 +107,7 @@ export default [
       ]
   },
   {
-    title: 'Navbar Item',
+    title: 'Item',
     props: [
         {
             name: '<code>tag</code>',
@@ -119,7 +126,7 @@ export default [
     ]
   },
   {
-    title: 'Navbar Dropdown',
+    title: 'Dropdown',
     props: [
         {
             name: '<code>hoverable</code>',

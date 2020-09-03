@@ -22,15 +22,24 @@ const ToastProgrammatic = {
             parent = params.parent
             delete params.parent
         }
+        let slot
+        if (Array.isArray(params.message)) {
+            slot = params.message
+            delete params.message
+        }
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ToastComponent = vm.extend(Toast)
-        return new ToastComponent({
+        const component = new ToastComponent({
             parent,
             el: document.createElement('div'),
             propsData
         })
+        if (slot) {
+            component.$slots.default = slot
+            component.$forceUpdate()
+        }
+        return component
     }
 }
 

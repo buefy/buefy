@@ -1,6 +1,8 @@
 // Colors
 
 $primary: #7957d5;
+$primary-dark: findLightColor(#7957d5);
+$primary-light: findDarkColor(#7957d5);
 $twitter: #4099FF;
 $discord: #7289DA;
 $patreon: #f96854;
@@ -12,16 +14,16 @@ $colors: (
     "light": ($light, $light-invert),
     "grey": ($grey, $light-invert),
     "dark": ($dark, $dark-invert),
-    "primary": ($primary, $white),
-    "info": ($info, $info-invert),
-    "success": ($success, $success-invert),
-    "warning": ($warning, $warning-invert),
-    "danger": ($danger, $danger-invert),
-    "link": ($link, $link-invert),
-    "twitter": ($twitter, $white),
-    "discord": ($discord, $white),
-    "patreon": ($patreon, $white),
-    "bulma": ($bulma, $white)
+    "primary": ($primary, $white, $primary-dark, $primary-light),
+    "info": ($info, $info-invert, $info-light, $info-dark),
+    "success": ($success, $success-invert, $success-light, $success-dark),
+    "warning": ($warning, $warning-invert, $warning-light, $warning-dark),
+    "danger": ($danger, $danger-invert, $danger-light, $danger-dark),
+    "link": ($link, $link-invert, $link-light, $link-dark),
+    "twitter": ($twitter, $white, findLightColor($twitter), findDarkColor($twitter)),
+    "discord": ($discord, $white, findLightColor($discord), findDarkColor($discord)),
+    "patreon": ($patreon, $white, findLightColor($patreon), findDarkColor($patreon)),
+    "bulma": ($bulma, $white, findLightColor($bulma), findDarkColor($bulma))
 );
 
 $navbar-height: 3.25rem;
@@ -29,3 +31,8 @@ $navbar-item-active-color: $primary;
 
 $menu-item-active-background-color: $primary;
 $menu-item-hover-background-color: $grey-lighter;
+
+$link: $primary;
+$link-invert: $primary-invert;
+$link-visited: $grey;
+$link-focus-border: $primary;

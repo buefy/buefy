@@ -1,13 +1,14 @@
 import { shallowMount } from '@vue/test-utils'
 import BDropdownItem from '@components/dropdown/DropdownItem'
+import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 let wrapper
 const dropdownSelected = 'val'
 const BDropdown = {
+    mixins: [ProviderParentMixin('dropdown')],
     template: '<b-dropdown-stub></b-dropdown-stub>',
     data() {
         return {
-            _isDropdown: true,
             selected: dropdownSelected
         }
     }

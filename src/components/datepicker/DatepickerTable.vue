@@ -42,8 +42,7 @@
 
 <script>
 import DatepickerTableRow from './DatepickerTableRow'
-
-const isDefined = (d) => d !== undefined
+import { isDefined } from '../../utils/helpers'
 
 export default {
     name: 'BDatepickerTable',

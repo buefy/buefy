@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="b-tooltips">
         <button class="button is-primary"
             @click="active = !active">
             Toggle
@@ -33,3 +33,14 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+.b-tooltips {
+    .b-tooltip:not(:last-child) {
+        margin-right: .5em
+    }
+    .b-tooltip {
+        margin-bottom: .5em
+    }
+}
+</style>

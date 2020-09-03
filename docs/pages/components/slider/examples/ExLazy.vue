@@ -1,12 +1,10 @@
 <template>
     <section>
         <b-field grouped>
-            <b-field expanded>
-                <b-slider v-model="value" lazy></b-slider>
-            </b-field>
-            <b-field>
-                <b-input v-model="value" type="number"></b-input>
-            </b-field>
+            <b-input v-model="value" type="number"></b-input>
+        </b-field>
+        <b-field>
+            <b-slider v-model="value" lazy></b-slider>
         </b-field>
     </section>
 </template>

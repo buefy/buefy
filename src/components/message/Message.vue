@@ -14,7 +14,7 @@
                     :aria-label="ariaCloseLabel"
                 />
             </header>
-            <section class="message-body">
+            <section class="message-body" v-if="$slots.default">
                 <div class="media">
                     <div v-if="computedIcon && hasIcon" class="media-left">
                         <b-icon

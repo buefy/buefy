@@ -63,6 +63,11 @@ $floating-in-height: 3.25em !default;
                 }
             }
         }
+        &.b-numberinput {
+            .control {
+                margin-right: unset;
+            }
+        }
     }
 }
 
@@ -196,7 +201,7 @@ $floating-in-height: 3.25em !default;
             }
         }
 
-        &.has-addons, &.is-grouped {
+        .has-addons, .is-grouped {
             .control {
                 .button,
                 .input,
@@ -274,5 +279,10 @@ $floating-in-height: 3.25em !default;
             pointer-events: auto;
             cursor: pointer;
         }
+    }
+    // fix Bulma 0.8.2
+    &.is-loading::after {
+        top: calc(50% - (1em / 2));
+        right: calc((2.5em / 2) - .5em);
     }
 }

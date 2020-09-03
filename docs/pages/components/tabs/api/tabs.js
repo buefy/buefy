@@ -4,10 +4,10 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Binding value, tab index',
-                type: 'Number',
+                description: 'Binding value, tab index. Passing undefined will show the first tab, null will show no tab',
+                type: 'String, Number, Null',
                 values: '—',
-                default: '<code>0</code>'
+                default: '<code>undefined</code>'
             },
             {
                 name: '<code>expanded</code>',
@@ -22,6 +22,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>slide-next</code> <code>slide-prev</code>'
             },
             {
                 name: '<code>type</code>',
@@ -69,18 +76,13 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when tab is clicked',
-                parameters: '<code>index: Number</code>'
+                description: 'Triggers when tab is changed',
+                parameters: '<code>value: String|Number</code>'
             },
-            {
-                name: '<code>change</code>',
-                description: 'Triggers when active tab is changed',
-                parameters: '<code>index: Number</code>'
-            }
         ]
     },
     {
-        title: 'Tab Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>label</code>',
@@ -88,6 +90,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>value</code>',
+                description: 'Tab identifier',
+                type: 'String',
+                values: '—',
+                default: 'Vnode uid'
             },
             {
                 name: '<code>icon</code>',
@@ -116,6 +125,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'true'
+            },
+            {
+                name: '<code>headerClass</code>',
+                description: 'The classes to add to the tab header',
+                type: 'String, Array, Object',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

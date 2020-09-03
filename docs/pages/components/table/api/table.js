@@ -11,7 +11,7 @@ export default [
             },
             {
                 name: '<code>columns</code>',
-                description: 'Table columns, you can also add <code>renderHtml: true</code> on each column object',
+                description: 'Table columns',
                 type: 'Array<Object> (same as TableColumns props)',
                 values: '—',
                 default: '—'
@@ -144,7 +144,7 @@ export default [
             },
             {
                 name: '<code>current-page</code>',
-                description: `Current page of table data (if <code>paginated</code>), use the <code>.sync</code> modifier to make it two-way binding`,
+                description: `Current page of table data (if <code>paginated</code>)`,
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
@@ -270,7 +270,14 @@ export default [
             },
             {
                 name: '<code>is-row-checkable</code>',
-                description: 'Custom method to verify if a row is disabled, works when is <code>checkable</code>. ',
+                description: 'Custom method to verify if a row is checkable, works when is <code>checkable</code>. ',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: 'true'
+            },
+            {
+                name: '<code>is-row-selectable</code>',
+                description: 'Custom method to verify if a row is selectable, works when is <code>selected</code>. ',
                 type: 'Function (row: Object)',
                 values: '—',
                 default: 'true'
@@ -334,8 +341,23 @@ export default [
             {
                 name: '<code>filters-event</code>',
                 description: 'Add a native event to filter',
+                type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>card-layout</code>',
+                description: 'Rows appears as cards (collapse rows)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>show-header</code>',
+                description: 'Show table column header',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>aria-next-label</code>',
@@ -362,6 +384,13 @@ export default [
                 name: '<code>aria-current-label</code>',
                 description: 'Accessibility label for the current page link. If passed, this text will be prepended to the current page (if <code>paginated</code>)',
                 type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>debounce-search</code>',
+                description: 'Sets the filtering debounce time (in milliseconds)',
+                type: 'Number',
                 values: '—',
                 default: '—'
             }
@@ -608,7 +637,7 @@ export default [
             },
             {
                 name: '<code>custom-sort</code>',
-                description: 'Custom sort method, works when is <code>sortable</code>',
+                description: 'Custom sort method, works when column is <code>sortable</code>',
                 type: 'Function (a: Object, b: Object, isAsc: Boolean)',
                 values: '—',
                 default: '—'
@@ -654,6 +683,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '-'
+            },
+            {
+                name: '<code>header-selectable</code>',
+                description: 'Whether the header text is selectable, works when column is <code>sortable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [

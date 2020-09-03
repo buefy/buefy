@@ -1,5 +1,6 @@
 <template>
-    <section>
+    <section class="b-tooltips">
+
         <b-tooltip label="Tooltip right"
             position="is-right">
             <button class="button is-dark">
@@ -35,3 +36,14 @@
         </b-tooltip>
     </section>
 </template>
+
+<style lang="scss" scoped>
+.b-tooltips {
+    .b-tooltip:not(:last-child) {
+        margin-right: .5em
+    }
+    .b-tooltip {
+        margin-bottom: .5em
+    }
+}
+</style>

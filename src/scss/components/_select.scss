@@ -8,7 +8,7 @@
         padding-right: 2.5em;
         option {
             color: $grey-dark;
-            padding: 0.25em 0.5em;
+            padding: $control-padding-vertical $control-padding-horizontal;
         }
         option:disabled {
             cursor: not-allowed;
@@ -20,9 +20,19 @@
             font-style: normal;
             padding: 0.25em 0;
         }
+
+        &[disabled] {
+            // Chrome add `opacity: 0.7` on disabled select, but not on disabled input fields.
+            // every disabled fields now have the same look.
+            opacity: 1;
+        }
     }
     &.is-empty select {
         color: rgba($grey, 0.7);
     }
-
+    // fix Bulma 0.8.2
+    &.is-loading::after {
+        top: calc(50% - (1em / 2));
+        right: calc((2.5em / 2) - .5em);
+    }
 }

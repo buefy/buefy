@@ -5,7 +5,11 @@ let wrapper
 
 describe('BClockpicker', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BClockpicker)
+        wrapper = shallowMount(BClockpicker, {
+            propsData: {
+                locale: 'en-US'
+            }
+        })
     })
 
     it('is called', () => {

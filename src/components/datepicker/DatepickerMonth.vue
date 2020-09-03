@@ -16,13 +16,9 @@
                         role="button"
                         href="#"
                         :disabled="disabled"
-                        @click.prevent="emitChosenDate(date)"
-                        @keydown.enter.prevent="emitChosenDate(date)"
-                        @keydown.space.prevent="emitChosenDate(date)"
-                        @keydown.arrow-left.prevent="changeFocus(date, -1)"
-                        @keydown.arrow-right.prevent="changeFocus(date, 1)"
-                        @keydown.arrow-up.prevent="changeFocus(date, -3)"
-                        @keydown.arrow-down.prevent="changeFocus(date, 3)"
+                        @click.prevent="updateSelectedDate(date)"
+                        @mouseenter="setRangeHoverEndDate(date)"
+                        @keydown.prevent="manageKeydown($event, date)"
                         :tabindex="focused.month === date.getMonth() ? null : -1">
                         {{ monthNames[date.getMonth()] }}
                         <div class="events" v-if="eventsDateMatch(date)">
@@ -47,6 +43,8 @@
 </template>
 
 <script>
+import { isDefined } from '../../utils/helpers'
+
 export default {
     name: 'BDatepickerMonth',
     props: {
@@ -64,10 +62,14 @@ export default {
         unselectableDates: Array,
         unselectableDaysOfWeek: Array,
         selectableDates: Array,
+        range: Boolean,
         multiple: Boolean
     },
     data() {
         return {
+            selectedBeginDate: undefined,
+            selectedEndDate: undefined,
+            hoveredEndDate: undefined,
             multipleSelectedDates: this.multiple && this.value ? this.value : []
         }
     },
@@ -115,22 +117,31 @@ export default {
 
         focusedMonth() {
             return this.focused.month
+        },
+
+        hoveredDateRange() {
+            if (!this.range) {
+                return []
+            }
+            if (!isNaN(this.selectedEndDate)) {
+                return []
+            }
+            if (this.hoveredEndDate < this.selectedBeginDate) {
+                return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined)
+            }
+            return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined)
         }
     },
     watch: {
-        focusedMonth: {
-            handler(month) {
-                const refName = `month-${month}`
-                if (this.$refs[refName] && this.$refs[refName].length > 0) {
-                    this.$nextTick(() => {
-                        if (this.$refs[refName][0]) {
-                            this.$refs[refName][0].focus()
-                        }
-                    }) // $nextTick needed when year is changed
-                }
-            },
-            deep: true,
-            immediate: true
+        focusedMonth(month) {
+            const refName = `month-${month}`
+            if (this.$refs[refName] && this.$refs[refName].length > 0) {
+                this.$nextTick(() => {
+                    if (this.$refs[refName][0]) {
+                        this.$refs[refName][0].focus()
+                    }
+                }) // $nextTick needed when year is changed
+            }
         }
     },
     methods: {
@@ -222,9 +233,19 @@ export default {
                 if (!dateOne || !dateTwo || multiple) {
                     return false
                 }
-
+                if (Array.isArray(dateTwo)) {
+                    return dateTwo.some((date) => (
+                        dateOne.getFullYear() === date.getFullYear() &&
+                        dateOne.getMonth() === date.getMonth()
+                    ))
+                }
                 return (dateOne.getFullYear() === dateTwo.getFullYear() &&
                     dateOne.getMonth() === dateTwo.getMonth())
+            }
+            function dateWithin(dateOne, dates, multiple) {
+                if (!Array.isArray(dates) || multiple) { return false }
+
+                return dateOne > dates[0] && dateOne < dates[1]
             }
             function dateMultipleSelected(dateOne, dates, multiple) {
                 if (!Array.isArray(dates) || !multiple) { return false }
@@ -236,10 +257,87 @@ export default {
             }
 
             return {
-                'is-selected': dateMatch(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
+                'is-selected': dateMatch(day, this.value, this.multiple) ||
+                               dateWithin(day, this.value, this.multiple) ||
+                               dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
+                'is-first-selected':
+                    dateMatch(
+                        day,
+                        Array.isArray(this.value) && this.value[0],
+                        this.multiple
+                    ),
+                'is-within-selected':
+                    dateWithin(day, this.value, this.multiple),
+                'is-last-selected':
+                    dateMatch(
+                        day,
+                        Array.isArray(this.value) && this.value[1],
+                        this.multiple
+                    ),
+                'is-within-hovered-range':
+                    this.hoveredDateRange && this.hoveredDateRange.length === 2 &&
+                    (dateMatch(day, this.hoveredDateRange) ||
+                        dateWithin(day, this.hoveredDateRange)),
+                'is-first-hovered': dateMatch(
+                    day,
+                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]
+                ),
+                'is-within-hovered':
+                    dateWithin(day, this.hoveredDateRange),
+                'is-last-hovered': dateMatch(
+                    day,
+                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]
+                ),
                 'is-today': dateMatch(day, this.dateCreator()),
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled
+            }
+        },
+
+        manageKeydown({ key }, date) {
+            // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
+            switch (key) {
+                case ' ':
+                case 'Space':
+                case 'Spacebar':
+                case 'Enter': {
+                    this.updateSelectedDate(date)
+                    break
+                }
+
+                case 'ArrowLeft':
+                case 'Left': {
+                    this.changeFocus(date, -1)
+                    break
+                }
+                case 'ArrowRight':
+                case 'Right': {
+                    this.changeFocus(date, 1)
+                    break
+                }
+                case 'ArrowUp':
+                case 'Up': {
+                    this.changeFocus(date, -3)
+                    break
+                }
+                case 'ArrowDown':
+                case 'Down': {
+                    this.changeFocus(date, 3)
+                    break
+                }
+            }
+        },
+
+        /*
+        * Emit input event with selected date as payload for v-model in parent
+        */
+        updateSelectedDate(date) {
+            if (!this.range && !this.multiple) {
+                this.emitChosenDate(date)
+            } else if (this.range) {
+                this.handleSelectRangeDate(date)
+            } else if (this.multiple) {
+                this.selectMultipleDates(date)
             }
         },
 
@@ -255,6 +353,38 @@ export default {
                 }
             } else {
                 this.selectMultipleDates(day)
+            }
+        },
+
+        /*
+        * If both begin and end dates are set, reset the end date and set the begin date.
+        * If only begin date is selected, emit an array of the begin date and the new date.
+        * If not set, only set the begin date.
+        */
+        handleSelectRangeDate(date) {
+            if (this.disabled) return
+            if (this.selectedBeginDate && this.selectedEndDate) {
+                this.selectedBeginDate = date
+                this.selectedEndDate = undefined
+                this.$emit('range-start', date)
+            } else if (this.selectedBeginDate && !this.selectedEndDate) {
+                if (this.selectedBeginDate > date) {
+                    this.selectedEndDate = this.selectedBeginDate
+                    this.selectedBeginDate = date
+                } else {
+                    this.selectedEndDate = date
+                }
+                this.$emit('range-end', date)
+                this.$emit('input', [this.selectedBeginDate, this.selectedEndDate])
+            } else {
+                this.selectedBeginDate = date
+                this.$emit('range-start', date)
+            }
+        },
+
+        setRangeHoverEndDate(day) {
+            if (this.range) {
+                this.hoveredEndDate = day
             }
         },
 

@@ -21,7 +21,9 @@
             :value="nativeValue"
             :true-value="trueValue"
             :false-value="falseValue">
-        <span class="check" :class="[{ 'is-elastic': isMouseDown && !disabled }, type]"/>
+        <span
+            class="check"
+            :class="checkClasses"/>
         <span class="control-label"><slot/></span>
     </label>
 </template>
@@ -34,6 +36,7 @@ export default {
         nativeValue: [String, Number, Boolean, Function, Object, Array, Date],
         disabled: Boolean,
         type: String,
+        passiveType: String,
         name: String,
         required: Boolean,
         size: String,
@@ -78,6 +81,13 @@ export default {
                     'is-rounded': this.rounded,
                     'is-outlined': this.outlined
                 }
+            ]
+        },
+        checkClasses() {
+            return [
+                { 'is-elastic': this.isMouseDown && !this.disabled },
+                (this.passiveType && `${this.passiveType}-passive`),
+                this.type
             ]
         }
     },

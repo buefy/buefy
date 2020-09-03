@@ -19,6 +19,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>label</code>',
+                description: 'Button label, optional when default slot',
+                type: 'String',
+                values: '',
+                default: '—'
+            },
+            {
                 name: '<code>loading</code>',
                 description: 'Add the loading state to the button',
                 type: 'Boolean',
@@ -35,6 +42,41 @@ export default [
             {
                 name: '<code>outlined</code>',
                 description: 'Outlined style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>focused</code>',
+                description: 'Focused style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>inverted</code>',
+                description: 'Inverted style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>hovered</code>',
+                description: 'Hovered style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>active</code>',
+                description: 'Active style',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>selected</code>',
+                description: 'Selected style',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

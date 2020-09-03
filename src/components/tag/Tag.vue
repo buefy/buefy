@@ -8,16 +8,27 @@
             </span>
         </span>
         <a
-            class="tag is-delete"
+            class="tag"
             role="button"
             :aria-label="ariaCloseLabel"
             :tabindex="tabstop ? 0 : false"
             :disabled="disabled"
-            :class="[size, { 'is-rounded': rounded }]"
+            :class="[size,
+                     closeType,
+                     {'is-rounded': rounded},
+                     closeIcon ? 'has-delete-icon' : 'is-delete']"
             @click="close"
-            @keyup.delete.prevent="close"
-        />
-    </div>
+            @keyup.delete.prevent="close">
+            <b-icon
+                custom-class=""
+                v-if="closeIcon"
+                :icon="closeIcon"
+                :size="size"
+                :type="closeIconType"
+                :pack="closeIconPack"
+            />
+            <a/>
+    </a></div>
     <span
         v-else
         class="tag"
@@ -31,6 +42,7 @@
             role="button"
             :aria-label="ariaCloseLabel"
             class="delete is-small"
+            :class="closeType"
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
             @click="close"
@@ -54,7 +66,11 @@ export default {
             type: Boolean,
             default: true
         },
-        ariaCloseLabel: String
+        ariaCloseLabel: String,
+        closeType: String,
+        closeIcon: String,
+        closeIconPack: String,
+        closeIconType: String
     },
     methods: {
         /**

@@ -1,5 +1,9 @@
 export default [
     {
+        name: '<code>$steps-details-background-color</code>',
+        default: '<code>$body-background-color</code>'
+    },
+    {
         name: '<code>$steps-maker-default-color</code>',
         default: '<code>$grey-light</code>'
     },
@@ -26,5 +30,9 @@ export default [
     {
         name: '<code>$steps-vertical-padding</code>',
         default: '<code>1em 0</code>'
+    },
+    {
+        name: '<code>$steps-mobile-max-width</code>',
+        default: '<code>$tablet</code>'
     }
 ]

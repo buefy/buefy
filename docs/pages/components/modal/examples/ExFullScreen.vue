@@ -5,8 +5,11 @@
             Launch component modal
         </button>
 
-        <b-modal :active.sync="isComponentModalActive"
-            has-modal-card full-screen :can-cancel="false">
+        <b-modal 
+            v-model="isComponentModalActive"
+            has-modal-card
+            full-screen 
+            :can-cancel="false">
             <modal-form v-bind="formProps"></modal-form>
         </b-modal>
     </section>

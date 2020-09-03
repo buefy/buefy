@@ -26,7 +26,7 @@ export default [
         ]
     },
     {
-        title: 'Menu List',
+        title: 'List',
         props: [
             {
                 name: '<code>label</code>',
@@ -71,7 +71,7 @@ export default [
         ]
     },
     {
-        title: 'Menu Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>label</code>',

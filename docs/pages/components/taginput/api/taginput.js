@@ -40,6 +40,16 @@ export default [
                 default: '<code>is-light</code>'
             },
             {
+                name: '<code>closeType</code>',
+                description: 'Type (color) of the close icon, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: '-'
+            },
+            {
                 name: '<code>size</code>',
                 description: 'Tag and input size, optional',
                 type: 'String',
@@ -89,8 +99,29 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>group-field</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as display text of group',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
+                name: '<code>group-options</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as key to get items array of each group, optional',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>allow-new</code>',
                 description: 'When <code>autocomplete</code>, it allow to add new tags',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>open-on-focus</code>',
+                description: 'Opens a dropdown with choices when the input field is focused',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -100,14 +131,14 @@ export default [
                 description: 'Allow removing last tag when pressing given keys, if input is empty',
                 type: 'Array',
                 values: '—',
-                default: '<code>[8]</code>'
+                default: '<code>["Backspace"]</code>'
             },
             {
-                name: '<code>confirm-key-codes</code>',
-                description: 'Array of key codes which will add a tag when typing (default comma, enter and tab)',
+                name: '<code>confirm-keys</code>',
+                description: 'Array of key (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma and enter)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[13, 188, 9]</code>'
+                default: '<code>[",", "Enter"]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',
@@ -129,6 +160,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>create-tag</code>',
+                description: 'Function to create tag item to push into v-model (tags)',
+                type: 'Function',
+                values: '—',
+                default: '<code>(tagToAdd) => tagToAdd</code>'
             },
             {
                 name: '<code>readonly</code>',

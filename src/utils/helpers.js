@@ -8,11 +8,43 @@ function signPoly(value) {
 export const sign = Math.sign || signPoly
 
 /**
+ * Checks if the flag is set
+ * @param val
+ * @param flag
+ * @returns {boolean}
+ */
+function hasFlag(val, flag) {
+    return (val & flag) === flag
+}
+
+/**
+ * Native modulo bug with negative numbers
+ * @param n
+ * @param mod
+ * @returns {number}
+ */
+function mod(n, mod) {
+    return ((n % mod) + mod) % mod
+}
+
+/**
+ * Asserts a value is beetween min and max
+ * @param val
+ * @param min
+ * @param max
+ * @returns {number}
+ */
+function bound(val, min, max) {
+    return Math.max(min, Math.min(max, val))
+}
+
+export {mod, bound, hasFlag}
+
+/**
  * Get value of an object property/path even if it's nested
  */
 export function getValueByPath(obj, path) {
-    const value = path.split('.').reduce((o, i) => o ? o[i] : null, obj)
-    return value
+    return path.split('.').reduce((o, i) => o ? o[i] : null, obj)
 }
 
 /**
@@ -125,6 +157,10 @@ export function createAbsoluteElement(el) {
     return root
 }
 
+export function isVueComponent(c) {
+    return c && c._isVue
+}
+
 /**
  * Escape regex characters
  * http://stackoverflow.com/a/6969486
@@ -158,3 +194,100 @@ export function createNewEvent(eventName) {
     }
     return event
 }
+
+export function toCssWidth(width) {
+    return width === undefined ? null : (isNaN(width) ? width : width + 'px')
+}
+
+/**
+ * Return month names according to a specified locale
+ * @param  {String} locale A bcp47 localerouter. undefined will use the user browser locale
+ * @param  {String} format long (ex. March), short (ex. Mar) or narrow (M)
+ * @return {Array<String>} An array of month names
+ */
+export function getMonthNames(locale = undefined, format = 'long') {
+    const dates = []
+    for (let i = 0; i < 12; i++) {
+        dates.push(new Date(2000, i, 15))
+    }
+    const dtf = new Intl.DateTimeFormat(locale, {
+        month: format,
+        timezome: 'UTC'
+    })
+    return dates.map((d) => dtf.format(d))
+}
+
+/**
+ * Return weekday names according to a specified locale
+ * @param  {String} locale A bcp47 localerouter. undefined will use the user browser locale
+ * @param  {Number} first day of week index
+ * @param  {String} format long (ex. Thursday), short (ex. Thu) or narrow (T)
+ * @return {Array<String>} An array of weekday names
+ */
+export function getWeekdayNames(locale = undefined, format = 'narrow') {
+    const dates = []
+    const dt = new Date(2000, 0, 1)
+    const dayOfWeek = dt.getDay()
+    dt.setDate(dt.getDate() - dayOfWeek)
+    for (let i = 0; i < 7; i++) {
+        dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + i))
+    }
+    const dtf = new Intl.DateTimeFormat(locale, {
+        weekday: format,
+        timezome: 'UTC'
+    })
+    return dates.map((d) => dtf.format(d))
+}
+
+/**
+ * Accept a regex with group names and return an object
+ * ex. matchWithGroups(/((?!=<year>)\d+)\/((?!=<month>)\d+)\/((?!=<day>)\d+)/, '2000/12/25')
+ * will return { year: 2000, month: 12, day: 25 }
+ * @param  {String} includes injections of (?!={groupname}) for each group
+ * @param  {String} the string to run regex
+ * @return {Object} an object with a property for each group having the group's match as the value
+ */
+export function matchWithGroups(pattern, str) {
+    const matches = str.match(pattern)
+    return pattern
+        // get the pattern as a string
+        .toString()
+        // suss out the groups
+        .match(/<(.+?)>/g)
+        // remove the braces
+        .map((group) => {
+            const groupMatches = group.match(/<(.+)>/)
+            if (!groupMatches || groupMatches.length <= 0) {
+                return null
+            }
+            return group.match(/<(.+)>/)[1]
+        })
+        // create an object with a property for each group having the group's match as the value
+        .reduce((acc, curr, index, arr) => {
+            if (matches && matches.length > index) {
+                acc[curr] = matches[index + 1]
+            } else {
+                acc[curr] = null
+            }
+            return acc
+        }, {})
+}
+
+/**
+ * Based on
+ * https://github.com/fregante/supports-webp
+ */
+export function isWebpSupported() {
+    return new Promise((resolve) => {
+        const image = new Image()
+        image.onerror = () => resolve(false)
+        image.onload = () => resolve(image.width === 1)
+        image.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA='
+    }).catch(() => false)
+}
+
+export function isCustomElement(vm) {
+    return 'shadowRoot' in vm.$root.$options
+}
+
+export const isDefined = (d) => d !== undefined

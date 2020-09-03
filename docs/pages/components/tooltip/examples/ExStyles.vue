@@ -1,13 +1,13 @@
 <template>
-    <section>
+    <section class="b-tooltips">
         <b-tooltip label="Text is dashed" dashed>
             Simple text
         </b-tooltip>
 
         <b-tooltip label="Maybe you like a little animation"
             position="is-bottom"
-            animated>
-            <button class="button">Animated</button>
+            :animated="false">
+            <button class="button">No animation</button>
         </b-tooltip>
 
         <b-tooltip label="You prefer dark?"
@@ -33,3 +33,14 @@
         </b-tooltip>
     </section>
 </template>
+
+<style lang="scss" scoped>
+.b-tooltips {
+    .b-tooltip:not(:last-child) {
+        margin-right: .5em
+    }
+    .b-tooltip {
+        margin-bottom: .5em
+    }
+}
+</style>

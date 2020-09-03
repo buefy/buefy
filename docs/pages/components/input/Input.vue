@@ -19,14 +19,21 @@
             <p>You can use the <code>password-reveal</code> prop to add a button that reveals password.</p>
         </Example>
 
+        <Example :component="ExLazy" :code="ExLazyCode" title="Lazy" vertical>
+            <p>You could make the binding lazy, comparable with <code>v-model.lazy</code>, see <a href="https://vuejs.org/v2/guide/forms.html#lazy">.lazy modifier</a>. 
+            As <code>v-model.lazy</code> won't work with custom components like Buefy, you could use this property.</p>
+        </Example>
+
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/input'
+    import variables from './variables/input'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -46,10 +53,14 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExLazy from './examples/ExLazy'
+    import ExLazyCode from '!!raw-loader!./examples/ExLazy'
+
     export default {
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExTypesStates,
                 ExIcons,
@@ -61,7 +72,9 @@
                 ExIconsCode,
                 ExValidationCode,
                 ExPasswordCode,
-                ExSizesCode
+                ExSizesCode,
+                ExLazy,
+                ExLazyCode
             }
         }
     }

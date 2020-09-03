@@ -9,6 +9,10 @@ export default {
         ariaRole: {
             type: String,
             default: ''
+        },
+        size: {
+            type: String,
+            default: 'is-small'
         }
     },
     render(createElement, context) {
@@ -23,7 +27,7 @@ export default {
                                 props: {
                                     'icon': context.props.icon,
                                     'pack': context.props.iconPack,
-                                    'size': 'is-small'
+                                    'size': context.props.size
                                 }
                             }),
                             createElement('span', {}, context.props.label)

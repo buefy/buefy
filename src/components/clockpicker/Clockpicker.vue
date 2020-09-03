@@ -9,27 +9,30 @@
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
-            <b-input
-                v-if="!inline"
-                ref="input"
-                slot="trigger"
-                autocomplete="off"
-                :value="formatValue(computedValue)"
-                :placeholder="placeholder"
-                :size="size"
-                :icon="icon"
-                :icon-pack="iconPack"
-                :loading="loading"
-                :disabled="disabled"
-                :readonly="!editable"
-                :rounded="rounded"
-                v-bind="$attrs"
-                :use-html5-validation="useHtml5Validation"
-                @click.native.stop="toggle(true)"
-                @keyup.native.enter="toggle(true)"
-                @change.native="onChangeNativePicker"
-                @focus="handleOnFocus"
-                @blur="onBlur() && checkHtml5Validity()"/>
+            <template #trigger v-if="!inline">
+                <slot name="trigger">
+                    <b-input
+                        ref="input"
+                        slot="trigger"
+                        autocomplete="off"
+                        :value="formatValue(computedValue)"
+                        :placeholder="placeholder"
+                        :size="size"
+                        :icon="icon"
+                        :icon-pack="iconPack"
+                        :loading="loading"
+                        :disabled="disabled"
+                        :readonly="!editable"
+                        :rounded="rounded"
+                        v-bind="$attrs"
+                        :use-html5-validation="useHtml5Validation"
+                        @click.native.stop="toggle(true)"
+                        @keyup.native.enter="toggle(true)"
+                        @change.native="onChange($event.target.value)"
+                        @focus="handleOnFocus"
+                        @blur="onBlur() && checkHtml5Validity()"/>
+                </slot>
+            </template>
             <div
                 class="card"
                 :disabled="disabled"
@@ -41,7 +44,7 @@
                                 class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
                                 @click="isSelectingHour = true">{{ hoursDisplay }}</span>
-                            <span>:</span>
+                            <span>{{ hourLiteral }}</span>
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
@@ -50,12 +53,16 @@
                         <div v-if="!isHourFormat24" class="b-clockpicker-period">
                             <div
                                 class="b-clockpicker-btn"
-                                :class="{ active: meridienSelected == AM }"
-                                @click="onMeridienClick(AM)">am</div>
+                                :class="{
+                                    active: meridienSelected === amString || meridienSelected === AM
+                                }"
+                                @click="onMeridienClick(amString)">{{ amString }}</div>
                             <div
                                 class="b-clockpicker-btn"
-                                :class="{ active: meridienSelected == PM }"
-                                @click="onMeridienClick(PM)">pm</div>
+                                :class="{
+                                    active: meridienSelected === pmString || meridienSelected === PM
+                                }"
+                                @click="onMeridienClick(pmString)">{{ pmString }}</div>
                         </div>
                     </div>
                 </header>
@@ -76,12 +83,16 @@
                         <div v-if="!isHourFormat24 && !inline" class="b-clockpicker-period">
                             <div
                                 class="b-clockpicker-btn"
-                                :class="{ active: meridienSelected == AM }"
-                                @click="onMeridienClick(AM)">{{ AM }}</div>
+                                :class="{
+                                    active: meridienSelected === amString || meridienSelected === AM
+                                }"
+                                @click="onMeridienClick(amString)">{{ amString }}</div>
                             <div
                                 class="b-clockpicker-btn"
-                                :class="{ active: meridienSelected == PM }"
-                                @click="onMeridienClick(PM)">{{ PM }}</div>
+                                :class="{
+                                    active: meridienSelected === pmString || meridienSelected === PM
+                                }"
+                                @click="onMeridienClick(pmString)">{{ pmString }}</div>
                         </div>
                         <b-clockpicker-face
                             :picker-size="faceSize"
@@ -157,13 +168,6 @@ export default {
             type: Number,
             default: 290
         },
-        hourFormat: {
-            type: String,
-            default: '12',
-            validator: (value) => {
-                return value === '24' || value === '12'
-            }
-        },
         incrementMinutes: {
             type: Number,
             default: 5
@@ -198,7 +202,9 @@ export default {
             if (this.isHourFormat24) return this.pad(this.hoursSelected)
 
             let display = this.hoursSelected
-            if (this.meridienSelected === this.PM) display -= 12
+            if (this.meridienSelected === this.pmString || this.meridienSelected === this.PM) {
+                display -= 12
+            }
             if (display === 0) display = 12
             return display
         },
@@ -208,11 +214,16 @@ export default {
         minFaceValue() {
             return this.isSelectingHour &&
                 !this.isHourFormat24 &&
-            this.meridienSelected === this.PM ? 12 : 0
+            (this.meridienSelected === this.pmString || this.meridienSelected === this.PM) ? 12 : 0
         },
         maxFaceValue() {
             return this.isSelectingHour
-                ? (!this.isHourFormat24 && this.meridienSelected === this.AM ? 11 : 23)
+                ? (
+                    !this.isHourFormat24 &&
+                    (this.meridienSelected === this.amString || this.meridienSelected === this.AM)
+                        ? 11
+                        : 23
+                )
                 : 59
         },
         faceSize() {

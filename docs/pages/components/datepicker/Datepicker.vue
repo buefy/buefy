@@ -5,9 +5,10 @@
         <Example :component="ExEditable" :code="ExEditableCode" title="Editable (non readonly)" vertical>
             <p>Use <code>editable</code> prop to let the user type a date.</p>
             <b-message type="is-warning" has-icon>
-                Note that the default date parser is
+                Datepicker will try to parse the date using the specified locale format (or the browser locale if not defined).
+                Note that it will fallback to
                 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/parse" target="_blank">Date.parse()</a>
-                and it only works for <b>mm-dd-yyyy</b> format. If your locale is different, you have to pass a custom one with
+                which only works for <b>mm-dd-yyyy</b> format. If it does not fit your requirements, you have to pass a custom one with
                 <code>date-parser</code> prop, or by setting a <router-link to="/documentation/constructor-options">constructor option</router-link>.
             </b-message>
         </Example>
@@ -22,6 +23,17 @@
 
         <Example :component="ExHeader" :code="ExHeaderCode" title="Header" vertical>
             <p>You can add your custom header to the datepicker.</p>
+        </Example>
+
+        <Example :component="ExTrigger" :code="ExTriggerCode" title="Trigger" vertical>
+            <p>You can add your custom trigger component/s to the datepicker.</p>
+            <div class="tags has-addons">
+                <span class="tag is-success">New</span>
+                <span class="tag is-info">0.9.0</span>
+            </div>
+            <b-message type="is-warning">
+                You should disable the default <code>mobile-native</code> in order to avoid a different UI on mobile
+            </b-message>
         </Example>
 
         <Example :component="ExMonth" :code="ExMonthCode" title="Month picker" vertical>
@@ -89,6 +101,9 @@
     import ExProgrammatically from './examples/ExProgrammatically'
     import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
 
+    import ExTrigger from './examples/ExTrigger'
+    import ExTriggerCode from '!!raw-loader!./examples/ExTrigger'
+
     import ExMonth from './examples/ExMonth'
     import ExMonthCode from '!!raw-loader!./examples/ExMonth'
 
@@ -121,6 +136,8 @@
                 ExHeaderCode,
                 ExProgrammatically,
                 ExProgrammaticallyCode,
+                ExTrigger,
+                ExTriggerCode,
                 ExInline,
                 ExInlineCode,
                 ExEvents,

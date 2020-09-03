@@ -13,14 +13,14 @@ export default [
                 description: 'Function to format date to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => date.toLocaleDateString()</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
             },
             {
                 name: '<code>date-parser</code>',
                 description: 'Function to parse string to a date for set a date from the input to the component',
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => new Date(Date.parse(date))</code>'
+                default: 'Tries to parse the date using the locale specific format. Fallback to <code>Date.parse</code>'
             },
             {
                 name: '<code>date-creator</code>',
@@ -142,18 +142,26 @@ export default [
                 default: '-'
             },
             {
+                name: '<code>locale</code>',
+                description: `Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
+            },
+            {
                 name: '<code>month-names</code>',
                 description: 'Names of months to display in table header',
                 type: 'Array',
                 values: '—',
-                default: '<code>["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]</code>'
+                default: '<code>undefined</code>: default to browser locale.'
             },
             {
                 name: '<code>day-names</code>',
                 description: 'Names of days to display in table header',
                 type: 'Array',
                 values: '—',
-                default: '<code>["Su", "M", "Tu", "W", "Th", "F", "S"]</code>'
+                default: '<code>undefined</code>: default to browser locale.'
             },
             {
                 name: '<code>first-day-of-week</code>',
@@ -291,6 +299,11 @@ export default [
             {
                 name: 'header',
                 description: 'Header',
+                props: '—'
+            },
+            {
+                name: 'trigger',
+                description: 'Trigger',
                 props: '—'
             }
         ],

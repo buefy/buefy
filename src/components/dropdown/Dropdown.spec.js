@@ -5,7 +5,11 @@ let wrapper
 
 describe('BDropdown', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BDropdown)
+        wrapper = shallowMount(BDropdown, {
+            slots: {
+                trigger: '<button class="trigger">trigger</button>'
+            }
+        })
     })
 
     it('is called', () => {
@@ -33,9 +37,25 @@ describe('BDropdown', () => {
         expect(wrapper.vm.selected).toBe(value)
     })
 
-    it('emit activity when it changes', () => {
+    it('emit activity when it changes', async () => {
+        wrapper.vm.updateAppendToBody = jest.fn(() => wrapper.vm.updateAppendToBody)
+        wrapper.setProps({ appendToBody: true })
+
         wrapper.vm.isActive = true
         expect(wrapper.emitted()['active-change']).toBeTruthy()
+
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.updateAppendToBody).toHaveBeenCalled()
+    })
+
+    it('react accordingly on mouse over', () => {
+        const trigger = wrapper.find({ ref: 'trigger' })
+        trigger.trigger('mouseenter')
+        expect(wrapper.vm.isHoverable).toBeFalsy()
+
+        wrapper.setProps({ triggers: ['hover'] })
+        trigger.trigger('mouseenter')
+        expect(wrapper.vm.isHoverable).toBeTruthy()
     })
 
     it('react accordingly when an item is selected', () => {
@@ -96,6 +116,11 @@ describe('BDropdown', () => {
         el = wrapper.vm.$refs.trigger
         expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
 
+        el = wrapper.vm.$refs.trigger.querySelector('.trigger')
+        expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
+
+        wrapper.vm.$refs.trigger = undefined
+
         el = document.createElement('div')
         expect(wrapper.vm.isInWhiteList(el)).toBeFalsy()
     })
@@ -127,6 +152,19 @@ describe('BDropdown', () => {
         expect(wrapper.vm.isActive).toBeTruthy()
     })
 
+    it('close on escape', () => {
+        wrapper.vm.isActive = true
+        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        wrapper.vm.keyPress({})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.isActive).toBeFalsy()
+
+        wrapper.vm.isActive = true
+        wrapper.setProps({canClose: ['click']})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.isActive).toBeTruthy()
+    })
+
     it('manage toggle function accordingly', (done) => {
         wrapper.vm.isActive = true
         wrapper.setProps({ disabled: true })
@@ -146,5 +184,14 @@ describe('BDropdown', () => {
             expect(wrapper.vm.isActive).toBeTruthy()
             done()
         })
+    })
+
+    it('reset events before destroy', () => {
+        document.removeEventListener = jest.fn()
+
+        wrapper.destroy()
+
+        expect(document.removeEventListener).toBeCalledWith('click', expect.any(Function))
+        expect(document.removeEventListener).toBeCalledWith('keyup', expect.any(Function))
     })
 })

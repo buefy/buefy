@@ -4,10 +4,10 @@ export default [
         props: [
             {
                 name: '<code>v-model</code>',
-                description: 'Binding value, step index',
-                type: 'Number',
+                description: 'Binding value, step index. Passing undefined will show the first step',
+                type: 'Number, String',
                 values: '—',
-                default: '<code>0</code>'
+                default: '<code>undefined</code>'
             },
             {
                 name: '<code>animated</code>',
@@ -15,6 +15,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>slide-next</code> <code>slide-prev</code>'
             },
             {
                 name: '<code>type</code>',
@@ -98,6 +105,15 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>mobile-mode</code>',
+                description: 'How Steps will be displayed for mobile user',
+                type: 'String',
+                values: `<code>minimalist</code>: Only the active Step is displayed,
+                    <code>compact</code>: Step label is displayed only for the active,
+                    <code>null</code>: Will keep the same behavior as desktop`,
+                default: '<code>minimalist</code>'
+            },
+            {
                 name: '<code>aria-page-label</code>',
                 description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
                 type: 'String',
@@ -127,23 +143,18 @@ export default [
         events: [
             {
                 name: '<code>input</code>',
-                description: 'Triggers when step is clicked',
-                parameters: '<code>index: Number</code>'
-            },
-            {
-                name: '<code>change</code>',
                 description: 'Triggers when active step is changed',
-                parameters: '<code>index: Number</code>'
+                parameters: '<code>value: String|Number</code>'
             }
         ],
     },
     {
-        title: 'Step Item',
+        title: 'Item',
         props: [
             {
                 name: '<code>step</code>',
                 description: 'Step marker content (when there is no icon)',
-                type: 'String',
+                type: 'String | Number',
                 values: '—',
                 default: '—'
             },
@@ -153,6 +164,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>value</code>',
+                description: 'Step identifier',
+                type: 'String',
+                values: '—',
+                default: 'Vnode uid'
             },
             {
                 name: '<code>type</code>',
@@ -194,6 +212,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: 'true'
+            },
+            {
+                name: '<code>headerClass</code>',
+                description: 'The classes to add to the step label container',
+                type: 'String, Array, Object',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

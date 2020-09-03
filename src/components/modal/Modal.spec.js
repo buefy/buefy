@@ -65,6 +65,16 @@ describe('BModal', () => {
         expect(wrapper.vm.close).toHaveBeenCalledTimes(1)
     })
 
+    it('close on escape', () => {
+        wrapper.setProps({canCancel: true})
+        wrapper.setProps({active: true})
+        wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
+        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        wrapper.vm.keyPress({})
+        wrapper.vm.keyPress(event)
+        expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
+    })
+
     it('emit events on close', () => {
         jest.useFakeTimers()
 
@@ -80,5 +90,15 @@ describe('BModal', () => {
         expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 150)
         jest.advanceTimersByTime(150)
         expect(wrapper.vm.$destroy).toHaveBeenCalled()
+    })
+
+    it('emit event on transition after-enter hook.', () => {
+        wrapper.vm.afterEnter()
+        expect(wrapper.emitted()['after-enter']).toBeTruthy()
+    })
+
+    it('emit event on transition after-leave hook.', () => {
+        wrapper.vm.afterLeave()
+        expect(wrapper.emitted()['after-leave']).toBeTruthy()
     })
 })

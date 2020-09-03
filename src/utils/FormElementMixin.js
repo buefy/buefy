@@ -1,4 +1,5 @@
 import config from '../utils/config'
+import { isVueComponent } from './helpers'
 
 export default {
     props: {
@@ -15,7 +16,19 @@ export default {
             type: Boolean,
             default: () => config.defaultUseHtml5Validation
         },
-        validationMessage: String
+        validationMessage: String,
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
+        },
+        statusIcon: {
+            type: Boolean,
+            default: () => {
+                return config.defaultStatusIcon
+            }
+        }
     },
     data() {
         return {
@@ -42,13 +55,15 @@ export default {
          * Get the type prop from parent if it's a Field.
          */
         statusType() {
-            if (!this.parentField) return
-            if (!this.parentField.newType) return
-            if (typeof this.parentField.newType === 'string') {
-                return this.parentField.newType
+            const { newType } = this.parentField || {}
+
+            if (!newType) return
+
+            if (typeof newType === 'string') {
+                return newType
             } else {
-                for (let key in this.parentField.newType) {
-                    if (this.parentField.newType[key]) {
+                for (const key in newType) {
+                    if (newType[key]) {
                         return key
                     }
                 }
@@ -61,7 +76,7 @@ export default {
         statusMessage() {
             if (!this.parentField) return
 
-            return this.parentField.newMessage
+            return this.parentField.newMessage || this.parentField.$slots.message
         },
 
         /**
@@ -82,10 +97,10 @@ export default {
          * Focus method that work dynamically depending on the component.
          */
         focus() {
-            if (this.$data._elementRef === undefined) return
+            const el = this.getElement()
+            if (el === undefined) return
 
             this.$nextTick(() => {
-                const el = this.$el.querySelector(this.$data._elementRef)
                 if (el) el.focus()
             })
         },
@@ -102,7 +117,11 @@ export default {
         },
 
         getElement() {
-            return this.$el.querySelector(this.$data._elementRef)
+            let el = this.$refs[this.$data._elementRef]
+            while (isVueComponent(el)) {
+                el = el.$refs[el.$data._elementRef]
+            }
+            return el
         },
 
         setInvalid() {
@@ -134,10 +153,10 @@ export default {
         checkHtml5Validity() {
             if (!this.useHtml5Validation) return
 
-            if (this.$refs[this.$data._elementRef] === undefined) return
-            if (this.getElement() === null) return
+            const el = this.getElement()
+            if (el === undefined) return
 
-            if (!this.getElement().checkValidity()) {
+            if (!el.checkValidity()) {
                 this.setInvalid()
                 this.isValid = false
             } else {

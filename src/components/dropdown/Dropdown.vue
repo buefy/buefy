@@ -9,8 +9,10 @@
             role="button"
             ref="trigger"
             class="dropdown-trigger"
-            @click="toggle"
-            @mouseenter="checkHoverable"
+            @click="onClick"
+            @contextmenu.prevent="onContextMenu"
+            @mouseenter="onHover"
+            @focus.capture="onFocus"
             aria-haspopup="true">
             <slot name="trigger" :active="isActive"/>
         </div>
@@ -33,7 +35,8 @@
                 v-trap-focus="trapFocus">
                 <div
                     class="dropdown-content"
-                    :role="ariaRole">
+                    :role="ariaRole"
+                    :style="contentStyle">
                     <slot/>
                 </div>
             </div>
@@ -44,7 +47,8 @@
 <script>
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
-import { removeElement, createAbsoluteElement } from '../../utils/helpers'
+import { removeElement, createAbsoluteElement, isCustomElement, toCssWidth } from '../../utils/helpers'
+import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
 
@@ -53,14 +57,19 @@ export default {
     directives: {
         trapFocus
     },
+    mixins: [ProviderParentMixin('dropdown')],
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
         disabled: Boolean,
-        hoverable: Boolean,
         inline: Boolean,
+        scrollable: Boolean,
+        maxHeight: {
+            type: [String, Number],
+            default: 200
+        },
         position: {
             type: String,
             validator(value) {
@@ -71,6 +80,10 @@ export default {
                     'is-bottom-right'
                 ].indexOf(value) > -1
             }
+        },
+        triggers: {
+            type: Array,
+            default: () => ['click']
         },
         mobileModal: {
             type: Boolean,
@@ -117,8 +130,7 @@ export default {
             selected: this.value,
             style: {},
             isActive: false,
-            isHoverable: this.hoverable,
-            _isDropdown: true, // Used internally by DropdownItem
+            isHoverable: false,
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -134,7 +146,7 @@ export default {
             }]
         },
         isMobileModal() {
-            return this.mobileModal && !this.inline && !this.hoverable
+            return this.mobileModal && !this.inline
         },
         cancelOptions() {
             return typeof this.canClose === 'boolean'
@@ -142,6 +154,15 @@ export default {
                     ? DEFAULT_CLOSE_OPTIONS
                     : []
                 : this.canClose
+        },
+        contentStyle() {
+            return {
+                maxHeight: this.scrollable ? toCssWidth(this.maxHeight) : null,
+                overflow: this.scrollable ? 'auto' : null
+            }
+        },
+        hoverable() {
+            return this.triggers.indexOf('hover') >= 0
         }
     },
     watch: {
@@ -234,18 +255,35 @@ export default {
             if (this.cancelOptions.indexOf('outside') < 0) return
             if (this.inline) return
 
-            if (!this.isInWhiteList(event.target)) this.isActive = false
+            const target = isCustomElement(this) ? event.composedPath()[0] : event.target
+            if (!this.isInWhiteList(target)) this.isActive = false
         },
 
         /**
          * Keypress event that is bound to the document
          */
-        keyPress(event) {
-            // Esc key
-            if (this.isActive && event.keyCode === 27) {
+        keyPress({ key }) {
+            if (this.isActive && (key === 'Escape' || key === 'Esc')) {
                 if (this.cancelOptions.indexOf('escape') < 0) return
                 this.isActive = false
             }
+        },
+
+        onClick() {
+            if (this.triggers.indexOf('click') < 0) return
+            this.toggle()
+        },
+        onContextMenu() {
+            if (this.triggers.indexOf('contextmenu') < 0) return
+            this.toggle()
+        },
+        onHover() {
+            if (this.triggers.indexOf('hover') < 0) return
+            this.isHoverable = true
+        },
+        onFocus() {
+            if (this.triggers.indexOf('focus') < 0) return
+            this.toggle()
         },
 
         /**
@@ -268,12 +306,6 @@ export default {
             }
         },
 
-        checkHoverable() {
-            if (this.hoverable) {
-                this.isHoverable = true
-            }
-        },
-
         updateAppendToBody() {
             const dropdownMenu = this.$refs.dropdownMenu
             const trigger = this.$refs.trigger
@@ -283,6 +315,9 @@ export default {
                 dropdown.classList.forEach((item) => dropdown.classList.remove(item))
                 dropdown.classList.add('dropdown')
                 dropdown.classList.add('dropdown-menu-animation')
+                if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+                    dropdown.classList.add(this.$vnode.data.staticClass)
+                }
                 this.rootClasses.forEach((item) => {
                     // skip position prop
                     if (item && typeof item === 'object') {
