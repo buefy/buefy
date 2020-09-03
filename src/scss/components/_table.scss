@@ -250,6 +250,13 @@ $table-sticky-header-height: 300px !default;
             }
         }
         &.has-mobile-cards {
+            tr {
+                background: $table-background-color!important;
+            }
+
+            .table {
+                background-color: transparent;
+            }
             @include mobile {
                 @include table-cards
             }
