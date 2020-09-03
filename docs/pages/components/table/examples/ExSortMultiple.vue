@@ -86,7 +86,7 @@ const dataSource = [
           if(this.backendSortingEnabled) {
             if(this.multiColumnSortingEnabled){
               if((this.customKey && event[this.customKey]) || !this.customKey) {
-                let existingPriority = this.sortingPriority.find(i => i.field === field)
+                let existingPriority = this.sortingPriority.filter(i => i.field === field)[0]
                 if(existingPriority) {
                   existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
                 } else {

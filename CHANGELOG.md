@@ -4,16 +4,23 @@
 
 ### New features
 
+* Add ``animation`` prop to steps and tabs
+* Add ``range`` to datepicker when type is ``month`` (thanks @ryo-gk)
 * Add ``after-enter`` and ``after-leave`` events tp modal (thanks @aglio)
+* Add ``min-step`` prop to number input (thanks @abroekhof)
 * Add ``lazy`` prop to input (thanks @304NotModified)
+* Add ``centered`` propt to navbar (thanks @holtolee)
 * Add new progress bar text color (thanks @service-paradis) 
 
 ### Fixes
 
+* Fix #2830 carousel animation refresh (thanks @Tofandel)
+* Fix #2824 background color marging when table cards (thanks @holtolee)
 * Fix empty slot check in autocomplete
 * Fix empty slot name in taginput (thanks @rubjo)
 * Fix contextmenu event always being prevented on tooltips (thanks @adriaanmeuris)
 * Fix use correct sidebar breakpoint variable (thanks @btkostner)
+* Fix focused date when max date < current date (thanks @re2005)
 
 ## 0.9.2
 
