@@ -24,6 +24,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>animation</code>',
+                description: 'Custom animation (transition name)',
+                type: 'String',
+                values: '—',
+                default: '<code>slide-next</code> <code>slide-prev</code>'
+            },
+            {
                 name: '<code>type</code>',
                 description: 'Type/Style of the tab, optional',
                 type: 'String',

@@ -67,7 +67,7 @@ export default (parentCmp) => ({
         if (this.parent.animated) {
             return createElement('transition', {
                 props: {
-                    'name': this.transitionName
+                    'name': this.parent.animation || this.transitionName
                 },
                 on: {
                     'before-enter': () => { this.parent.isTransitioning = true },

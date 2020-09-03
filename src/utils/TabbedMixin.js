@@ -19,6 +19,7 @@ export default (cmp) => ({
             type: Boolean,
             default: true
         },
+        animation: String,
         vertical: {
             type: Boolean,
             default: false
