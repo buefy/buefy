@@ -25,8 +25,13 @@
 </template>
 
 <script>
+import Pagination from '../pagination/Pagination'
+
 export default {
     name: 'BTablePagination',
+    components: {
+        [Pagination.name]: Pagination
+    },
     props: {
         paginated: Boolean,
         total: [Number, String],
