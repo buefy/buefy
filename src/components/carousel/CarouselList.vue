@@ -171,11 +171,11 @@ export default {
             return Object.keys(this.breakpoints).sort((a, b) => b - a)
         },
         settings() {
-            let breakpoint = this.breakpointKeys.find((breakpoint) => {
+            let breakpoint = this.breakpointKeys.filter((breakpoint) => {
                 if (this.windowWidth >= breakpoint) {
                     return true
                 }
-            })
+            })[0]
             if (breakpoint) {
                 return {...this.$props, ...this.breakpoints[breakpoint]}
             }
