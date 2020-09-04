@@ -129,7 +129,7 @@ export default {
             this.emitUpdateParentEvent()
         },
         closeMenu() {
-            if (this.closeOnClick) {
+            if (this.closeOnClick && this.internalIsActive) {
                 this.internalIsActive = false
                 this.emitUpdateParentEvent()
             }
