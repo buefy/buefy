@@ -47,10 +47,16 @@ describe('BNavbar', () => {
     it('manage closing the menu as expected', () => {
         wrapper.vm.emitUpdateParentEvent = jest.fn()
 
-        wrapper.setProps({ closeOnClick: false })
+        wrapper.setProps({
+            active: true,
+            closeOnClick: false
+        })
         wrapper.vm.closeMenu()
 
-        wrapper.setProps({ closeOnClick: true })
+        wrapper.setProps({
+            active: true,
+            closeOnClick: true
+        })
         wrapper.vm.closeMenu()
 
         expect(wrapper.vm.internalIsActive).toBeFalsy()
