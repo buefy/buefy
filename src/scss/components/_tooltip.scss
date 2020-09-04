@@ -89,6 +89,15 @@ $tooltip-multiline-sizes: (
                 .tooltip-content::before {
                     @include tooltip-arrow($direction, $color)
                 }
+                // If light and dark colors are provided
+                @if length($pair) >= 4 {
+                    $color-light: nth($pair, 3);
+                    &.is-light {
+                        .tooltip-content::before {
+                            @include tooltip-arrow($direction, $color-light)
+                        }
+                    }
+                }
             }
         }
         &.is-multiline {
@@ -126,7 +135,7 @@ $tooltip-multiline-sizes: (
         position: absolute;
         content: "";
         pointer-events: none;
-        z-index: 38; 
+        z-index: 38;
     }
     .tooltip-trigger {
         width: 100%;
@@ -139,6 +148,17 @@ $tooltip-multiline-sizes: (
             .tooltip-content {
                 background: $color;
                 color: $color-invert;
+            }
+            // If light and dark colors are provided
+            @if length($pair) >= 4 {
+                $color-light: nth($pair, 3);
+                $color-dark: nth($pair, 4);
+                &.is-light {
+                    .tooltip-content {
+                        background: $color-light;
+                        color: $color-dark;
+                    }
+                }
             }
         }
     }
