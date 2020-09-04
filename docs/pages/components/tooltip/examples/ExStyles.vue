@@ -31,6 +31,12 @@
             square>
             <button class="button">Square</button>
         </b-tooltip>
+
+        <b-tooltip label="You love the light variant, dont you?"
+            type="is-primary is-light"
+            position="is-bottom">
+            <button class="button">Primary light variant</button>
+        </b-tooltip>
     </section>
 </template>
 
