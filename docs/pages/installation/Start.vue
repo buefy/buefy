@@ -4,7 +4,7 @@
             <router-link :to="`#${slugifyTitle('Icons')}`">#</router-link>
             Icons
         </p>
-        <p class="subtitle">Several components uses icons, you might want to add a pack</p>
+        <p class="subtitle">Several components use icons, you might want to add a pack</p>
         <CodeView title="Material Design Icons CDN" :code="materialIcons" expanded/>
         <CodeView title="Font Awesome 5 CDN" :code="fontAwesome5" expanded/>
         <div class="content">
