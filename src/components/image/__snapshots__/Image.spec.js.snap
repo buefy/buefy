@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BImage render correctly 1`] = `
-<figure class="b-image-wrapper image">
-    <!---->
+<figure class="b-image-wrapper image"><img loading="lazy" class="" name="fade" width="500">
     <!---->
 </figure>
 `;
