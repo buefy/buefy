@@ -90,7 +90,7 @@ export default {
             clientWidth: 0,
             webpSupportVerified: false,
             webpSupported: false,
-            nativeLazySupported: 'loading' in HTMLImageElement.prototype,
+            useNativeLazy: false,
             observer: null,
             inViewPort: false,
             bulmaKnownRatio: ['square', '1by1', '5by4', '4by3', '3by2', '5by3', '16by9', 'b2y1', '3by1', '4by5', '3by4', '2by3', '3by5', '9by16', '1by2', '1by3'],
@@ -154,14 +154,14 @@ export default {
             }
         },
         computedNativeLazy() {
-            if (this.lazy && this.nativeLazySupported) {
+            if (this.lazy && this.useNativeLazy) {
                 return 'lazy'
             }
         },
         isDisplayed() {
             return (
                 (this.webpSupportVerified || !this.isWepb) &&
-                (!this.lazy || this.nativeLazySupported || this.inViewPort)
+                (!this.lazy || this.useNativeLazy || this.inViewPort)
             )
         },
         placeholderExt() {
@@ -250,14 +250,23 @@ export default {
                 this.webpSupported = supported
             })
         }
-        if (this.lazy && !this.nativeLazySupported && typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-            this.observer = new IntersectionObserver((events) => {
-                const {target, isIntersecting} = events[0]
-                if (isIntersecting && !this.inViewPort) {
-                    this.inViewPort = true
-                    this.observer.unobserve(target)
-                }
-            })
+        if (this.lazy) {
+            // We use native lazy loading if supported
+            // We try to use Intersection Observer if native lazy loading is not supported
+            // We use the lazy attribute anyway if we cannot detect support (SSR for example).
+            const nativeLazySupported = typeof window !== 'undefined' && 'HTMLImageElement' in window && 'loading' in HTMLImageElement.prototype
+            const intersectionObserverSupported = typeof window !== 'undefined' && 'IntersectionObserver' in window
+            if (!nativeLazySupported && intersectionObserverSupported) {
+                this.observer = new IntersectionObserver((events) => {
+                    const {target, isIntersecting} = events[0]
+                    if (isIntersecting && !this.inViewPort) {
+                        this.inViewPort = true
+                        this.observer.unobserve(target)
+                    }
+                })
+            } else {
+                this.useNativeLazy = true
+            }
         }
     },
     mounted() {
