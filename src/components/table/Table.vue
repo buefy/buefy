@@ -736,6 +736,10 @@ export default {
             this.newCurrentPage = newVal
         },
 
+        newCurrentPage(newVal) {
+            this.$emit('update:currentPage', newVal)
+        },
+
         /**
         * When checkedRows prop change, update internal value without
         * mutating original data.
