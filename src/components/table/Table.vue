@@ -646,7 +646,7 @@ export default {
         * Return total column count based if it's checkable or expanded
         */
         columnCount() {
-            let count = this.newColumns.length
+            let count = this.visibleColumns.length
             count += this.checkable ? 1 : 0
             count += (this.detailed && this.showDetailIcon) ? 1 : 0
 
