@@ -49,6 +49,7 @@
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
                 :append-to-body="appendToBody"
+                :confirm-keys="confirmKeys"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
@@ -150,7 +151,7 @@ export default {
         },
         confirmKeys: {
             type: Array,
-            default: () => [',', 'Enter']
+            default: () => [',', 'Tab', 'Enter']
         },
         removeOnKeys: {
             type: Array,
@@ -334,7 +335,8 @@ export default {
             if (this.autocomplete && !this.allowNew) return
 
             if (this.confirmKeys.indexOf(key) >= 0) {
-                event.preventDefault()
+                // Allow Tab to advance to next field regardless
+                if (key !== 'Tab') event.preventDefault()
                 this.addTag()
             }
         },
