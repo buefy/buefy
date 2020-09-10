@@ -397,7 +397,7 @@ export default [
             },
             {
                 name: '<code>defaultImageRatio</code>',
-                description: `Default datepicker <code>date-formatter</code> attribute`,
+                description: `The space will be reserved. Prevent page jump when images are loading when using <code>responsive</code>.`,
                 type: 'String',
                 values: '<code>1by1</code>, <code>5by4</code>, <code>4by3</code>, <code>3by2</code>, <code>5by3</code>, <code>16by9</code>, <code>2by1</code>, <code>3by1</code>, <code>4by5</code>, <code>3by4</code>, <code>2by3</code>, <code>3by5</code>, <code>9by16</code>, <code>1by2</code> <code>1by3</code> or any string having this format <code>{number}by{number}</code>',
                 default: '—'
