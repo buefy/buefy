@@ -1,3 +1,24 @@
+@mixin progress-size() {
+    &.is-small {
+        + .progress-value, .progress-value {
+            font-size: calc(#{$size-small} / 1.5);
+            line-height: $size-small;
+        }
+    }
+    &.is-medium {
+        + .progress-value, .progress-value {
+            font-size: calc(#{$size-medium} / 1.5);
+            line-height: $size-medium;
+        }
+    }
+    &.is-large {
+        + .progress-value, .progress-value {
+            font-size: calc(#{$size-large} / 1.5);
+            line-height: $size-large;
+        }
+    }
+}
+
 .progress-wrapper {
     position: relative;
     overflow: hidden;
@@ -18,27 +39,10 @@
         white-space: nowrap;
     }
 
-    .progress {
+    .progress, .progress-bar {
         margin-bottom: 0;
 
-        &.is-small {
-            + .progress-value {
-                font-size: calc(#{$size-small} / 1.5);
-                line-height: $size-small;
-            }
-        }
-        &.is-medium {
-            + .progress-value {
-                font-size: calc(#{$size-medium} / 1.5);
-                line-height: $size-medium;
-            }
-        }
-        &.is-large {
-            + .progress-value {
-                font-size: calc(#{$size-large} / 1.5);
-                line-height: $size-large;
-            }
-        }
+        @include progress-size();
 
         // TODO Remove below when the following PR will be merged in Bulma:
         // https://github.com/jgthms/bulma/pull/2540
@@ -64,6 +68,36 @@
                 $color-invert: nth($pair, 2);
                 &.is-#{$name} {
                     + .progress-value {
+                        color: $color-invert;
+                    }
+                }
+            }
+        }
+    }
+
+    &.is-not-native {
+        @extend .progress;
+        white-space: nowrap;
+        background-color: $progress-bar-background-color;
+        border-radius: $progress-border-radius;
+
+        .progress-bar {
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+            height: 100%;
+            background-color: $progress-value-background-color;
+
+            .progress-value {
+                color: findColorInvert($progress-value-background-color);
+            }
+
+            @each $name, $pair in $colors {
+                $color: nth($pair, 1);
+                $color-invert: nth($pair, 2);
+                &.is-#{$name} {
+                    background-color: $color;
+                    .progress-value {
                         color: $color-invert;
                     }
                 }

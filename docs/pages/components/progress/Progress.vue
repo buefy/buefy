@@ -9,7 +9,12 @@
         <Example :component="ExValues" :code="ExValuesCode" title="Values" vertical/>
 
         <Example :component="ExSlot" :code="ExSlotCode" title="Slot" vertical>
-            <p>There is also a default slot if you want to display anything you want inside the progress bar</p>
+            <p>There is also a default slot if you want to display anything you want inside the progress bar.</p>
+        </Example>
+
+        <Example :component="ExBars" :code="ExBarsCode" title="Multiple bars" vertical>
+            <p>You can also include multiple progress bars in a progress component if you need.</p>
+            <p><i>* This will not use the native <code>progress</code> element.</i></p>
         </Example>
 
         <ApiView :data="api"/>
@@ -36,6 +41,9 @@
     import ExSlot from './examples/ExSlot'
     import ExSlotCode from '!!raw-loader!./examples/ExSlot'
 
+    import ExBars from './examples/ExBars'
+    import ExBarsCode from '!!raw-loader!./examples/ExBars'
+
     export default {
         data() {
             return {
@@ -50,7 +58,9 @@
                 ExTypesCode,
                 ExSizesCode,
                 ExValuesCode,
-                ExSlotCode
+                ExSlotCode,
+                ExBars,
+                ExBarsCode
             }
         }
     }

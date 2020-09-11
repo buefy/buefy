@@ -1,22 +1,26 @@
 <template>
-    <div class="progress-wrapper">
+    <div class="progress-wrapper" :class="wrapperClasses">
         <progress
+            v-if="isNative"
             ref="progress"
             class="progress"
             :class="newType"
             :max="max"
             :value="value">{{ newValue }}</progress>
+        <slot v-else name="bar" />
         <p
-            v-if="showValue"
+            v-if="isNative && showValue"
             class="progress-value"><slot>{{ newValue }}</slot></p>
     </div>
 </template>
 
 <script>
 import config from '../../utils/config'
+import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 export default {
     name: 'BProgress',
+    mixins: [ProviderParentMixin('progress')],
     props: {
         type: {
             type: [String, Object],
@@ -74,30 +78,16 @@ export default {
             ]
         },
         newValue() {
-            if (this.value === undefined || this.value === null || isNaN(this.value)) {
-                return undefined
+            return this.calculateValue(this.value)
+        },
+        isNative() {
+            return this.$slots.bar === undefined
+        },
+        wrapperClasses() {
+            return {
+                'is-not-native': !this.isNative,
+                [this.size]: !this.isNative
             }
-
-            const minimumFractionDigits = this.keepTrailingZeroes ? this.precision : 0
-            const maximumFractionDigits = this.precision
-            if (this.format === 'percent') {
-                return new Intl.NumberFormat(
-                    this.locale,
-                    {
-                        style: 'percent',
-                        minimumFractionDigits: minimumFractionDigits,
-                        maximumFractionDigits: maximumFractionDigits
-                    }
-                ).format(this.value / this.max)
-            }
-
-            return new Intl.NumberFormat(
-                this.locale,
-                {
-                    minimumFractionDigits: minimumFractionDigits,
-                    maximumFractionDigits: maximumFractionDigits
-                }
-            ).format(this.value)
         }
     },
     watch: {
@@ -115,6 +105,34 @@ export default {
                     }
                 }
             })
+        }
+    },
+    methods: {
+        calculateValue(value) {
+            if (value === undefined || value === null || isNaN(value)) {
+                return undefined
+            }
+
+            const minimumFractionDigits = this.keepTrailingZeroes ? this.precision : 0
+            const maximumFractionDigits = this.precision
+            if (this.format === 'percent') {
+                return new Intl.NumberFormat(
+                    this.locale,
+                    {
+                        style: 'percent',
+                        minimumFractionDigits: minimumFractionDigits,
+                        maximumFractionDigits: maximumFractionDigits
+                    }
+                ).format(value / this.max)
+            }
+
+            return new Intl.NumberFormat(
+                this.locale,
+                {
+                    minimumFractionDigits: minimumFractionDigits,
+                    maximumFractionDigits: maximumFractionDigits
+                }
+            ).format(value)
         }
     }
 }
