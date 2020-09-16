@@ -19,6 +19,7 @@
     >
         <b-icon
             v-if="iconLeft"
+            :type="iconType"
             :pack="iconPack"
             :icon="iconLeft"
             :size="iconSize"
@@ -29,6 +30,7 @@
         </span>
         <b-icon
             v-if="iconRight"
+            :type="iconType"
             :pack="iconPack"
             :icon="iconRight"
             :size="iconSize"
@@ -53,6 +55,7 @@ export default {
         iconPack: String,
         iconLeft: String,
         iconRight: String,
+        iconType: String,
         rounded: {
             type: Boolean,
             default: () => {
