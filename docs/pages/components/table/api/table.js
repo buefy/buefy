@@ -399,7 +399,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>rowIndex: Number</code>, <code>columnIndex: Number</code>,'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>,'
             },
             {
                 name: '<code>header</code>',
