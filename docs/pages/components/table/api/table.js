@@ -399,7 +399,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>index: Number</code>'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>rowIndex: Number</code>, <code>columnIndex: Number</code>,'
             },
             {
                 name: '<code>header</code>',
@@ -447,6 +447,11 @@ export default [
                 name: '<code>dblclick</code>',
                 description: 'Triggers when a row is double clicked',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>cellClick</code>',
+                description: 'Triggers when a cell is clicked',
+                parameters: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>rowIndex: Number</code>, <code>columnIndex: Number</code>,'
             },
             {
                 name: '<code>sort</code>',

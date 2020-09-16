@@ -251,7 +251,9 @@
                                         tag="td"
                                         :class="column.rootClasses"
                                         :data-label="column.label"
-                                        :props="{ row, column, index }"
+                                        :props="{ row, column, index, colindex }"
+                                        @click.native="$emit('cellClick',row, column,
+                                                             index, colindex, $event)"
                                     />
                                 </template>
 
