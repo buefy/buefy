@@ -52,14 +52,17 @@ fs.readdirSync(buefyDir, { withFileTypes: true })
                 }
             });
         });
-    });
+    }
+);
 
-fs.writeFile(path.resolve(__dirname, '../helper-json/tags.json'), JSON.stringify(tags, null, 2), function (err, data) {
+fs.mkdirSync(path.resolve(__dirname, '../dist/vetur'), { recursive: true })
+
+fs.writeFile(path.resolve(__dirname, '../dist/vetur/tags.json'), JSON.stringify(tags, null, 2), function (err, data) {
     if (err) {
         return console.log(err);
     }
 })
-fs.writeFile(path.resolve(__dirname, '../helper-json/attributes.json'), JSON.stringify(attributes, null, 2), function (err, data) {
+fs.writeFile(path.resolve(__dirname, '../dist/vetur/attributes.json'), JSON.stringify(attributes, null, 2), function (err, data) {
     if (err) {
         return console.log(err);
     }

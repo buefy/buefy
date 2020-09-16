@@ -45,7 +45,7 @@
     "build:js:watch": "rollup -c --watch",
     "build:scss": "sass src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "build:scss:watch": "sass src/scss/buefy-build.scss --watch",
-    "build:lib": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur && copyfiles --flat helper-json/*.json dist/vetur",
+    "build:lib": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js && copyfiles --flat netlify.toml dist-docs",
     "build": "npm run build:lib && npm run build:docs",
