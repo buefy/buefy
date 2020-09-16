@@ -18,7 +18,7 @@ export default [
                     <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
                 type: 'Component',
                 values: 'FontAwesomeIcon component name',
-                default: '<code></code>'
+                default: '—'
             },
             {
                 name: '<code>defaultStatusIcon</code>',
@@ -133,8 +133,8 @@ export default [
                 name: '<code>defaultTooltipDelay</code>',
                 description: `Default tooltip delay attribute.`,
                 type: 'Number',
-                values: `-`,
-                default: '-'
+                values: `—`,
+                default: '—'
             },
             {
                 name: '<code>defaultInputAutocomplete</code>',
@@ -323,7 +323,7 @@ export default [
                 description: 'Default config to trap focus inside components (Dialog, Dropdown and Modal).',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>defaultButtonRounded</code>',
