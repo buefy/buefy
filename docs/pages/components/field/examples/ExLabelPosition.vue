@@ -58,7 +58,7 @@
         <b-field label="Find a JS framework" :label-position="labelPosition">
             <b-autocomplete
                 rounded
-                :data="['111', '222']"
+                :data="['jQuery', 'Vue', 'React']"
                 placeholder="e.g. jQuery"
                 icon="magnify"
                 clearable
@@ -90,7 +90,7 @@
 
         <b-field label="Add some tags" :label-position="labelPosition">
             <b-taginput
-                :value="['1111', '222']"
+                :value="['My first tag', 'My second tag']"
                 ellipsis
                 icon="label"
                 placeholder="Add a tag">
