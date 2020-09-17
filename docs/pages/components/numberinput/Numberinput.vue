@@ -14,6 +14,8 @@
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
+        <Example :component="ExAlignment" :code="ExAlignmentCode" title="Alignment and position" vertical/>
+
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customization" vertical />
 
         <ApiView :data="api"/>
@@ -42,6 +44,9 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExAlignment from './examples/ExAlignment'
+    import ExAlignmentCode from '!!raw-loader!./examples/ExAlignment'
+
     import ExCustomize from './examples/ExCustomize'
     import ExCustomizeCode from '!!raw-loader!./examples/ExCustomize'
 
@@ -52,6 +57,7 @@
                 ExSimple,
                 ExTypes,
                 ExStep,
+                ExAlignment,
                 ExCustomize,
                 ExRange,
                 ExSizes,
@@ -60,6 +66,7 @@
                 ExStepCode,
                 ExExpon,
                 ExExponCode,
+                ExAlignmentCode,
                 ExCustomizeCode,
                 ExRangeCode,
                 ExSizesCode
