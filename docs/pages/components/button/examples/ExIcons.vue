@@ -1,16 +1,16 @@
 <template>
     <section>
         <div class="buttons">
-            <b-button icon-type="is-danger" size="is-small"
+            <b-button size="is-small"
                 icon-left="github-circle">
                 Add
             </b-button>
 
-            <b-button icon-type="is-success" icon-left="github-circle">
+            <b-button icon-left="github-circle">
                 Add
             </b-button>
 
-            <b-button icon-type="is-primary" size="is-medium"
+            <b-button size="is-medium"
                 icon-left="github-circle">
                 Add
             </b-button>
