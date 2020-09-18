@@ -59,22 +59,73 @@
 
                 // Set your colors
                 $primary: #8c67ef;
+                $primary-light: findLightColor($primary);
+                $primary-dark: findDarkColor($primary);
                 $primary-invert: findColorInvert($primary);
                 $twitter: #4099FF;
                 $twitter-invert: findColorInvert($twitter);
 
+                // Lists and maps
+                $custom-colors: null !default;
+                $custom-shades: null !default;
+                
                 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-                $colors: (
-                    "white": ($white, $black),
-                    "black": ($black, $white),
-                    "light": ($light, $light-invert),
-                    "dark": ($dark, $dark-invert),
-                    "primary": ($primary, $primary-invert),
-                    "info": ($info, $info-invert),
-                    "success": ($success, $success-invert),
-                    "warning": ($warning, $warning-invert),
-                    "danger": ($danger, $danger-invert),
-                    "twitter": ($twitter, $twitter-invert)
+                $colors: mergeColorMaps(
+                    (
+                        "white": (
+                            $white,
+                            $black,
+                        ),
+                        "black": (
+                            $black,
+                            $white,
+                        ),
+                        "light": (
+                            $light,
+                            $light-invert,
+                        ),
+                        "dark": (
+                            $dark,
+                            $dark-invert,
+                        ),
+                        "primary": (
+                            $primary,
+                            $primary-invert,
+                            $primary-light,
+                            $primary-dark,
+                        ),
+                        "link": (
+                            $link,
+                            $link-invert,
+                            $link-light,
+                            $link-dark,
+                        ),
+                        "info": (
+                            $info,
+                            $info-invert,
+                            $info-light,
+                            $info-dark,
+                        ),
+                        "success": (
+                            $success,
+                            $success-invert,
+                            $success-light,
+                            $success-dark,
+                        ),
+                        "warning": (
+                            $warning,
+                            $warning-invert,
+                            $warning-light,
+                            $warning-dark,
+                        ),
+                        "danger": (
+                            $danger,
+                            $danger-invert,
+                            $danger-light,
+                            $danger-dark,
+                        ),
+                    ),
+                    $custom-colors
                 );
 
                 // Links
