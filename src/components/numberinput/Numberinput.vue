@@ -224,7 +224,7 @@ export default {
     methods: {
         decrement() {
             if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
-                if (!this.computedValue) {
+                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
                     if (this.maxNumber) {
                         this.computedValue = this.maxNumber
                         return
@@ -237,7 +237,7 @@ export default {
         },
         increment() {
             if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
-                if (!this.computedValue) {
+                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
                     if (this.minNumber) {
                         this.computedValue = this.minNumber
                         return
