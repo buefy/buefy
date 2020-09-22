@@ -13,7 +13,7 @@ export default [
                 name: '<code>triggers</code>',
                 description: 'Dropdown will be triggered by any events',
                 type: 'Array',
-                values: '<code>click</code>.<code>hover</code>,<code>contextmenu</code>,<code>focus</code>',
+                values: '<code>click</code>,<code>hover</code>,<code>contextmenu</code>,<code>focus</code>',
                 default: '<code>[\'click\']</code>'
             },
             {
