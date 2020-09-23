@@ -51,7 +51,7 @@ $slider-mark-size: 0.75rem !default;
         align-items: center;
         position: relative;
         cursor: pointer;
-        background: $grey-lighter;
+        background: $slider-track-background;
         border-radius: $slider-radius;
     }
     .b-slider-fill {
