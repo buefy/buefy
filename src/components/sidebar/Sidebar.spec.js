@@ -96,10 +96,10 @@ describe('BSidebar', () => {
 
     it('manage the whitelisted items accordingly', async () => {
         let el = wrapper.vm.$refs.sidebarContent
-        expect(wrapper.vm.whiteList).toContain(el)
+        expect(wrapper.vm.getWhiteList()).toContain(el)
 
         el = wrapper.vm.$refs.sidebarContent.querySelector('.content')
-        expect(wrapper.vm.whiteList).toContain(el)
+        expect(wrapper.vm.getWhiteList()).toContain(el)
     })
 
     it('reset events before destroy', () => {
