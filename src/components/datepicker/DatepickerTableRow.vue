@@ -5,7 +5,7 @@
         </a>
         <template v-for="(weekDay, index) in week">
             <a
-                :ref="`day-${weekDay.getDate()}`"
+                :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
                 :class="[classObject(weekDay), {'has-event': eventsDateMatch(weekDay)}, indicators]"
@@ -81,7 +81,7 @@ export default {
     },
     watch: {
         day(day) {
-            const refName = `day-${day}`
+            const refName = `day-${this.month}-${day}`
             this.$nextTick(() => {
                 if (this.$refs[refName] && this.$refs[refName].length > 0) {
                     if (this.$refs[refName][0]) {
@@ -326,6 +326,13 @@ export default {
         changeFocus(day, inc) {
             const nextDay = day
             nextDay.setDate(day.getDate() + inc)
+            while (
+                (!this.minDate || nextDay > this.minDate) &&
+                (!this.maxDate || nextDay < this.maxDate) &&
+                !this.selectableDate(nextDay)
+            ) {
+                nextDay.setDate(day.getDate() + Math.sign(inc))
+            }
             this.$emit('change-focus', nextDay)
         }
     }
