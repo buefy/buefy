@@ -93,6 +93,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>minlength</code>',
+                description: 'Same as native <code>minlength</code>',
+                type: 'String, Number',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>has-counter</code>',
                 description: 'Show character counter when <code>maxlength</code> prop is passed',
                 type: 'Boolean',
