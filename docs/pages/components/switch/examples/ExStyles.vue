@@ -30,11 +30,16 @@
                 <option value="is-large">is-large</option>
             </b-select>
         </b-field>
+        <b-field label="Left Label">
+            <b-radio v-model='leftLabel' :native-value='false'>False</b-radio>
+            <b-radio v-model='leftLabel' :native-value='true'>True</b-radio>
+        </b-field>
         <b-switch
             :rounded="isRounded"
             :outlined="isOutlined"
             :size="size"
             :type="type"
+            :left-label='leftLabel'
             :passive-type='passiveType'>Sample</b-switch>
     </section>
 </template>
@@ -48,6 +53,7 @@
                 passiveType: null,
                 isRounded: false,
                 isOutlined: false,
+                leftLabel: false,
             }
         }
     }

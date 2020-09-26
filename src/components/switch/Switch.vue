@@ -55,6 +55,10 @@ export default {
         outlined: {
             type: Boolean,
             default: false
+        },
+        leftLabel: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -79,7 +83,8 @@ export default {
                 {
                     'is-disabled': this.disabled,
                     'is-rounded': this.rounded,
-                    'is-outlined': this.outlined
+                    'is-outlined': this.outlined,
+                    'has-left-label': this.leftLabel
                 }
             ]
         },
