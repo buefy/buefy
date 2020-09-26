@@ -94,9 +94,20 @@ $switch-active-background-color: $primary !default;
             }
         }
     }
-    .control-label {
-        padding-left: $control-padding-horizontal;
+
+    &.has-left-label {
+        flex-direction: row-reverse;
+        .control-label {
+            padding-right: $control-padding-horizontal;
+        }
     }
+
+    &:not(.has-left-label) {
+        .control-label {
+            padding-left: $control-padding-horizontal;
+        }
+    }
+
     &:hover {
         input[type=checkbox] + .check {
             background: rgba($grey-light, 0.9);

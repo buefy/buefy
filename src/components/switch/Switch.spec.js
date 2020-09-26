@@ -52,4 +52,17 @@ describe('BSwitch', () => {
         const switchElement = wrapper.find('.check')
         expect(switchElement.classes()).toContain('is-danger-passive')
     })
+
+    it('does not have a label at left by default', () => {
+        const value = false
+        wrapper.setProps({ value })
+        expect(wrapper.classes()).not.toContain('has-left-label')
+    })
+
+    it('has label at left is left-label prop has been sent', () => {
+        const leftLabel = true
+        const value = false
+        wrapper.setProps({ leftLabel, value })
+        expect(wrapper.classes()).toContain('has-left-label')
+    })
 })
