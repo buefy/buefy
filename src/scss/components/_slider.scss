@@ -90,6 +90,15 @@ $slider-mark-size: 0.75rem !default;
                 transform: scale(1.25);
             }
         }
+
+        &.has-indicator {
+            .b-slider-thumb {
+                padding: 16px 10px;
+                display: flex;
+                align-items: center;
+                width: auto;
+            }
+        }
     }
 
     &.slider-focus{
