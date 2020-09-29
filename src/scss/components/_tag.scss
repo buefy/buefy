@@ -6,7 +6,7 @@
         text-overflow: ellipsis;
     }
     .delete, &.is-delete, &.has-delete-icon {
-        @each $name, $pair in $colors {
+        @each $name, $pair in $tag-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
                 background: $color;

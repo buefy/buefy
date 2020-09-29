@@ -34,5 +34,9 @@ export default [
     {
         name: '<code>$steps-mobile-max-width</code>',
         default: '<code>$tablet</code>'
+    },
+    {
+        name: '<code>$steps-colors</code>',
+        default: '<code>$colors</code>'
     }
 ]

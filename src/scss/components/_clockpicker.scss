@@ -15,7 +15,7 @@
     $padding-outer: 12px;
     $padding-inner: 5px;
 
-    // mixins for supporting all $colors defined in Bulma/custom
+    // mixins for supporting all $form-colors defined in Bulma/custom
     @mixin b-clockpicker-colors($name, $pair) {
         &.is-#{$name} {
             @include b-clockpicker-colors-set(nth($pair, 1), nth($pair, 2))
@@ -44,7 +44,7 @@
 
     @include b-clockpicker-colors-set($primary, $primary-invert);
 
-    @each $name, $pair in $colors {
+    @each $name, $pair in $form-colors {
         @include b-clockpicker-colors($name, $pair)
     }
 

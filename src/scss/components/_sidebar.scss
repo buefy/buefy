@@ -3,6 +3,7 @@ $sidebar-box-shadow: 5px 0px 13px 3px rgba($black, 0.1) !default;
 $sidebar-width: 260px !default;
 $sidebar-mobile-width: 80px !default;
 $sidebar-mobile-breakpoint: $tablet !default;
+$sidebar-colors: $navbar-colors !default;
 
 .b-sidebar {
     .sidebar-content {
@@ -10,7 +11,7 @@ $sidebar-mobile-breakpoint: $tablet !default;
         box-shadow: $sidebar-box-shadow;
         width: $sidebar-width;
         z-index: 41;
-        @each $name, $pair in $colors {
+        @each $name, $pair in $sidebar-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
                 background-color: $color;

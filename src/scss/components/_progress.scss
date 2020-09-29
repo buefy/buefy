@@ -63,7 +63,7 @@
                 color: findColorInvert($progress-value-background-color);
             }
 
-            @each $name, $pair in $colors {
+            @each $name, $pair in $progress-colors {
                 $color: nth($pair, 1);
                 $color-invert: nth($pair, 2);
                 &.is-#{$name} {
@@ -92,7 +92,7 @@
                 color: findColorInvert($progress-value-background-color);
             }
 
-            @each $name, $pair in $colors {
+            @each $name, $pair in $progress-colors {
                 $color: nth($pair, 1);
                 $color-invert: nth($pair, 2);
                 &.is-#{$name} {
