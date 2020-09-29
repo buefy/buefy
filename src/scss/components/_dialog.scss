@@ -11,8 +11,8 @@
                 margin-top: 16px;
             }
             &.is-titleless {
-                border-top-left-radius: $radius-large;
-                border-top-right-radius: $radius-large;
+                border-top-left-radius: $card-radius;
+                border-top-right-radius: $card-radius;
             }
         }
         .modal-card-foot {

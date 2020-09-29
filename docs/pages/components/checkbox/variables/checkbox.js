@@ -26,5 +26,9 @@ export default [
     {
         name: '<code>$checkbox-size</code>',
         default: '<code>1.25em</code>'
+    },
+    {
+        name: '<code>$checkbox-colors</code>',
+        default: '<code>$form-colors</code>'
     }
 ]

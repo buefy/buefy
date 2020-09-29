@@ -58,5 +58,9 @@ export default [
     {
         name: '<code>$slider-mark-size</code>',
         default: '<code>0.75rem</code>'
+    },
+    {
+        name: '<code>$slider-colors</code>',
+        default: '<code>$colors</code>'
     }
 ]

@@ -44,16 +44,6 @@
 
         @include progress-size();
 
-        // TODO Remove below when the following PR will be merged in Bulma:
-        // https://github.com/jgthms/bulma/pull/2540
-        // From this Bulma Issue:
-        // https://github.com/jgthms/bulma/issues/2539
-        &:indeterminate {
-            &::-ms-fill {
-                animation-name: none
-            }
-        }
-
         &::-webkit-progress-value {
             transition: width 0.5s ease;
         }
@@ -63,7 +53,7 @@
                 color: findColorInvert($progress-value-background-color);
             }
 
-            @each $name, $pair in $colors {
+            @each $name, $pair in $progress-colors {
                 $color: nth($pair, 1);
                 $color-invert: nth($pair, 2);
                 &.is-#{$name} {
@@ -92,7 +82,7 @@
                 color: findColorInvert($progress-value-background-color);
             }
 
-            @each $name, $pair in $colors {
+            @each $name, $pair in $progress-colors {
                 $color: nth($pair, 1);
                 $color-invert: nth($pair, 2);
                 &.is-#{$name} {

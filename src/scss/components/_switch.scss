@@ -1,8 +1,8 @@
 $switch-width-number: 2.75 !default;
 $switch-width: $switch-width-number * 1em !default;
 $switch-padding: 0.2em !default;
-
 $switch-active-background-color: $primary !default;
+$switch-colors: $form-colors !default;
 
 .switch {
     @extend %unselectable;
@@ -30,7 +30,7 @@ $switch-active-background-color: $primary !default;
             background: $grey-light;
             border-radius: $radius;
             transition: background $speed-slow $easing, box-shadow $speed-slow $easing;
-            @each $name, $pair in $colors {
+            @each $name, $pair in $switch-colors {
                 $color: nth($pair, 1);
                 &.is-#{$name}-passive, &:hover {
                     background: $color;
@@ -38,7 +38,7 @@ $switch-active-background-color: $primary !default;
                 &.input[type=checkbox] + &.check {
                     background: 'pink';
                 }
-            }    
+            }
             &:before {
                 content: "";
                 display: block;
@@ -58,7 +58,7 @@ $switch-active-background-color: $primary !default;
         }
         &:checked + .check {
             background: $switch-active-background-color;
-            @each $name, $pair in $colors {
+            @each $name, $pair in $switch-colors {
                 $color: nth($pair, 1);
                 &.is-#{$name} {
                     background: $color;
@@ -76,7 +76,7 @@ $switch-active-background-color: $primary !default;
             outline: none;
             + .check {
                 box-shadow: 0 0 0.5em rgba($grey, 0.6);
-                @each $name, $pair in $colors {
+                @each $name, $pair in $switch-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name}-passive {
                         box-shadow: 0 0 0.5em rgba($color, 0.8);
@@ -85,7 +85,7 @@ $switch-active-background-color: $primary !default;
             }
             &:checked + .check {
                 box-shadow: 0 0 0.5em rgba($switch-active-background-color, 0.8);
-                @each $name, $pair in $colors {
+                @each $name, $pair in $switch-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         box-shadow: 0 0 0.5em rgba($color, 0.8);
@@ -111,7 +111,7 @@ $switch-active-background-color: $primary !default;
     &:hover {
         input[type=checkbox] + .check {
             background: rgba($grey-light, 0.9);
-            @each $name, $pair in $colors {
+            @each $name, $pair in $switch-colors {
                 $color: nth($pair, 1);
                 &.is-#{$name}-passive {
                     background: rgba($color, 0.9);
@@ -120,7 +120,7 @@ $switch-active-background-color: $primary !default;
         }
         input[type=checkbox]:checked + .check {
             background: rgba($switch-active-background-color, 0.9);
-            @each $name, $pair in $colors {
+            @each $name, $pair in $switch-colors {
                 $color: nth($pair, 1);
                 &.is-#{$name} {
                     background: rgba($color, 0.9);
@@ -147,7 +147,7 @@ $switch-active-background-color: $primary !default;
             + .check {
                 background: transparent;
                 border: .1rem solid $grey-light;
-                @each $name, $pair in $colors {
+                @each $name, $pair in $switch-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name}-passive {
                         border: .1rem solid rgba($color, 0.9);
@@ -165,7 +165,7 @@ $switch-active-background-color: $primary !default;
             }
             &:checked + .check {
                 border-color: $switch-active-background-color;
-                @each $name, $pair in $colors {
+                @each $name, $pair in $switch-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         background: transparent;
@@ -188,7 +188,7 @@ $switch-active-background-color: $primary !default;
             input[type=checkbox]:checked + .check {
                 background: transparent;
                 border-color: rgba($switch-active-background-color, 0.9);
-                @each $name, $pair in $colors {
+                @each $name, $pair in $switch-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         border-color: rgba($color, 0.9);

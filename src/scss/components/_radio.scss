@@ -1,5 +1,6 @@
 $radio-active-background-color: $primary !default;
 $radio-size: 1.25em !default;
+$radio-colors: $form-colors !default;
 
 .b-radio {
     &.radio {
@@ -48,7 +49,7 @@ $radio-size: 1.25em !default;
                     transform: scale(0);
                     background-color: $radio-active-background-color;
                 }
-                @each $name, $pair in $colors {
+                @each $name, $pair in $radio-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name}:before {
                         background: $color;
@@ -57,7 +58,7 @@ $radio-size: 1.25em !default;
             }
             &:checked + .check {
                 border-color: $radio-active-background-color;
-                @each $name, $pair in $colors {
+                @each $name, $pair in $radio-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         border-color: $color;
@@ -73,7 +74,7 @@ $radio-size: 1.25em !default;
                 }
                 &:checked + .check {
                     box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
-                    @each $name, $pair in $colors {
+                    @each $name, $pair in $radio-colors {
                         $color: nth($pair, 1);
                         &.is-#{$name} {
                             box-shadow: 0 0 0.5em rgba($color, 0.8);
@@ -94,7 +95,7 @@ $radio-size: 1.25em !default;
         &:hover {
             input[type=radio]:not(:disabled) + .check {
                 border-color: $radio-active-background-color;
-                @each $name, $pair in $colors {
+                @each $name, $pair in $radio-colors {
                     $color: nth($pair, 1);
                     &.is-#{$name} {
                         border-color: $color;
