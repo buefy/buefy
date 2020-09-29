@@ -4,6 +4,7 @@
         ref="datepicker"
         v-model="computedValue"
         v-bind="datepicker"
+        :rounded="rounded"
         :open-on-focus="openOnFocus"
         :position="position"
         :loading="loading"
