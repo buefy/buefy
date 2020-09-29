@@ -82,6 +82,11 @@ $floating-in-height: 3.25em !default;
             font-size: calc(#{$size-normal} * 3 / 4);
             background-color: transparent;
             z-index: 5;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: calc(100% - 2em);
+            overflow: hidden;
+
             &.is-small {
                 font-size: calc(#{$size-small} * 3 / 4);
             }
