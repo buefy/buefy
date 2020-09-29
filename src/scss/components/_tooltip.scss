@@ -1,11 +1,11 @@
 $tooltip-arrow-size: 5px !default;
 $tooltip-arrow-margin: 2px !default;
-
 $tooltip-multiline-sizes: (
     small: 180px,
     medium: 240px,
     large: 300px
 ) !default;
+$tooltip-colors: $colors !default;
 
 @mixin tooltip-arrow-color($direction, $color) {
     @if ($direction == "is-top") {
@@ -87,7 +87,7 @@ $tooltip-multiline-sizes: (
                 border-bottom: $tooltip-arrow-size solid transparent;
             }
         }
-        @each $name, $pair in $colors {
+        @each $name, $pair in $tooltip-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
                 .tooltip-content::before {
@@ -136,7 +136,7 @@ $tooltip-multiline-sizes: (
         width: 100%;
     }
     // Modifiers
-    @each $name, $pair in $colors {
+    @each $name, $pair in $tooltip-colors {
         $color: nth($pair, 1);
         $color-invert: nth($pair, 2);
         &.is-#{$name} {

@@ -16,5 +16,9 @@ export default [
             large: 300px
         )
         </code>`
+    },
+    {
+        name: '<code>$tooltip-colors</code>',
+        default: '<code>$colors</code>'
     }
 ]

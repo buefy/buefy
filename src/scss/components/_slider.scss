@@ -13,6 +13,7 @@ $slider-tick-width: 3px !default;
 $slider-tick-radius: $radius !default;
 $slider-tick-background: $grey-light !default;
 $slider-mark-size: 0.75rem !default;
+$slider-colors: $colors !default;
 
 @mixin slider-size($size) {
 	$track-height: $size / $slider-thumb-to-track-ratio;
@@ -51,7 +52,7 @@ $slider-mark-size: 0.75rem !default;
         align-items: center;
         position: relative;
         cursor: pointer;
-        background: $grey-lighter;
+        background: $slider-track-background;
         border-radius: $slider-radius;
     }
     .b-slider-fill {
@@ -88,6 +89,15 @@ $slider-mark-size: 0.75rem !default;
             cursor: grabbing;
             .b-slider-thumb {
                 transform: scale(1.25);
+            }
+        }
+
+        &.has-indicator {
+            .b-slider-thumb {
+                padding: 16px 10px;
+                display: flex;
+                align-items: center;
+                width: auto;
             }
         }
     }
@@ -129,7 +139,7 @@ $slider-mark-size: 0.75rem !default;
         @include slider-size($size-large);
     }
 
-    @each $name, $pair in $colors {
+    @each $name, $pair in $slider-colors {
         $color: nth($pair, 1);
         &.is-#{$name} {
             .b-slider-fill {

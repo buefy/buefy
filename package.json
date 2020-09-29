@@ -60,7 +60,7 @@
     "components"
   ],
   "dependencies": {
-    "bulma": "0.9.0"
+    "bulma": "0.9.1"
   },
   "peerDependencies": {
     "vue": "^2.6.11"

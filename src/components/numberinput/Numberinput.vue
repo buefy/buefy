@@ -1,25 +1,26 @@
 <template>
     <div class="b-numberinput field" :class="fieldClasses">
         <p
-            v-if="controls"
-            class="control minus"
-            @mouseup="onStopLongPress(false)"
-            @mouseleave="onStopLongPress(false)"
-            @touchend="onStopLongPress(false)"
-            @touchcancel="onStopLongPress(false)"
+            v-for="control in controlsLeft"
+            :key="control"
+            :class="['control', control]"
+            @mouseup="onStopLongPress"
+            @mouseleave="onStopLongPress"
+            @touchend="onStopLongPress"
+            @touchcancel="onStopLongPress"
         >
             <button
                 type="button"
                 class="button"
                 :class="buttonClasses"
-                :disabled="disabled || disabledMin"
-                @mousedown="onStartLongPress($event, false)"
-                @touchstart.prevent="onStartLongPress($event, false)"
-                @click="onControlClick($event, false)"
+                :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
+                @mousedown="onStartLongPress($event, control === 'plus')"
+                @touchstart.prevent="onStartLongPress($event, control === 'plus')"
+                @click="onControlClick($event, control === 'plus')"
             >
                 <b-icon
-                    icon="minus"
                     both
+                    :icon="control"
                     :pack="iconPack"
                     :size="iconSize" />
             </button>
@@ -46,26 +47,28 @@
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)"
         />
+
         <p
-            v-if="controls"
-            class="control plus"
-            @mouseup="onStopLongPress(true)"
-            @mouseleave="onStopLongPress(true)"
-            @touchend="onStopLongPress(true)"
-            @touchcancel="onStopLongPress(true)"
+            v-for="control in controlsRight"
+            :key="control"
+            :class="['control', control]"
+            @mouseup="onStopLongPress"
+            @mouseleave="onStopLongPress"
+            @touchend="onStopLongPress"
+            @touchcancel="onStopLongPress"
         >
             <button
                 type="button"
                 class="button"
                 :class="buttonClasses"
-                :disabled="disabled || disabledMax"
-                @mousedown="onStartLongPress($event, true)"
-                @touchstart.prevent="onStartLongPress($event, true)"
-                @click="onControlClick($event, true)"
+                :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
+                @mousedown="onStartLongPress($event, control === 'plus')"
+                @touchstart.prevent="onStartLongPress($event, control === 'plus')"
+                @click="onControlClick($event, control === 'plus')"
             >
                 <b-icon
-                    icon="plus"
                     both
+                    :icon="control"
                     :pack="iconPack"
                     :size="iconSize" />
             </button>
@@ -108,6 +111,17 @@ export default {
             type: Boolean,
             default: true
         },
+        controlsAlignment: {
+            type: String,
+            default: 'center',
+            validator: (value) => {
+                return [
+                    'left',
+                    'right',
+                    'center'
+                ].indexOf(value) >= 0
+            }
+        },
         controlsRounded: {
             type: Boolean,
             default: false
@@ -138,6 +152,18 @@ export default {
                 this.$emit('input', newValue)
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             }
+        },
+        controlsLeft() {
+            if (this.controls && this.controlsAlignment !== 'right') {
+                return this.controlsAlignment === 'left' ? ['minus', 'plus'] : ['minus']
+            }
+            return []
+        },
+        controlsRight() {
+            if (this.controls && this.controlsAlignment !== 'left') {
+                return this.controlsAlignment === 'right' ? ['minus', 'plus'] : ['plus']
+            }
+            return []
         },
         fieldClasses() {
             return [
@@ -198,7 +224,7 @@ export default {
     methods: {
         decrement() {
             if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
-                if (!this.computedValue) {
+                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
                     if (this.maxNumber) {
                         this.computedValue = this.maxNumber
                         return
@@ -211,7 +237,7 @@ export default {
         },
         increment() {
             if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
-                if (!this.computedValue) {
+                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
                     if (this.minNumber) {
                         this.computedValue = this.minNumber
                         return

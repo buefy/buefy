@@ -21,6 +21,7 @@
                 :type="newTooltipType"
                 :tooltip="tooltip"
                 :custom-formatter="customFormatter"
+                :indicator="indicator"
                 ref="button1"
                 role="slider"
                 :aria-valuenow="value1"
@@ -36,6 +37,7 @@
                 :type="newTooltipType"
                 :tooltip="tooltip"
                 :custom-formatter="customFormatter"
+                :indicator="indicator"
                 ref="button2"
                 v-if="isRange"
                 role="slider"
@@ -108,6 +110,10 @@ export default {
         customFormatter: Function,
         ariaLabel: [String, Array],
         biggerSliderFocus: {
+            type: Boolean,
+            default: false
+        },
+        indicator: {
             type: Boolean,
             default: false
         }

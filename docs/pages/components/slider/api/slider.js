@@ -59,6 +59,13 @@ export default [
                 description: 'Show tooltip when thumb is being dragged',
                 type: 'Boolean',
                 values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>indicator</code>',
+                description: 'Show v-model value inside thumb',
+                type: 'Boolean',
+                values: '—',
                 default: '<code>true</code>'
             },
             {

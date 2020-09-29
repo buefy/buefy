@@ -101,22 +101,6 @@ export default {
         },
         isAbsolute() {
             return this.position === 'absolute'
-        },
-        /**
-         * White-listed items to not close when clicked.
-         * Add sidebar content and all children.
-         */
-        whiteList() {
-            const whiteList = []
-            whiteList.push(this.$refs.sidebarContent)
-            // Add all chidren from dropdown
-            if (this.$refs.sidebarContent !== undefined) {
-                const children = this.$refs.sidebarContent.querySelectorAll('*')
-                for (const child of children) {
-                    whiteList.push(child)
-                }
-            }
-            return whiteList
         }
     },
     watch: {
@@ -130,6 +114,22 @@ export default {
         }
     },
     methods: {
+        /**
+        * White-listed items to not close when clicked.
+        * Add sidebar content and all children.
+        */
+        getWhiteList() {
+            const whiteList = []
+            whiteList.push(this.$refs.sidebarContent)
+            // Add all chidren from dropdown
+            if (this.$refs.sidebarContent !== undefined) {
+                const children = this.$refs.sidebarContent.querySelectorAll('*')
+                for (const child of children) {
+                    whiteList.push(child)
+                }
+            }
+            return whiteList
+        },
 
         /**
         * Keypress event that is bound to the document.
@@ -167,7 +167,7 @@ export default {
             if (this.isFixed) {
                 if (this.isOpen && !this.animating) {
                     const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-                    if (this.whiteList.indexOf(target) < 0) {
+                    if (this.getWhiteList().indexOf(target) < 0) {
                         this.cancel('outside')
                     }
                 }

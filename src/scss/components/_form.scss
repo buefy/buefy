@@ -82,6 +82,11 @@ $floating-in-height: 3.25em !default;
             font-size: calc(#{$size-normal} * 3 / 4);
             background-color: transparent;
             z-index: 5;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: calc(100% - 2em);
+            overflow: hidden;
+
             &.is-small {
                 font-size: calc(#{$size-small} * 3 / 4);
             }
@@ -144,69 +149,85 @@ $floating-in-height: 3.25em !default;
         }
     }
     &.is-floating-in-label {
-        .label {
+        > .label {
             top: 0.25em;
-        }
-        > .datepicker, > .timepicker {
-            .input {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-                padding-bottom: 1px;
-                height: $floating-in-height;
-            }
-        }
-        > :not(.datepicker):not(.timepicker):not(.taginput) {
-            .input,
-            .textarea,
-            select {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-                padding-bottom: 1px;
-                height: $floating-in-height;
-            }
-            .select:not(multiple) {
-                height: $floating-in-height;
-                &.is-loading {
-                    &::after {
-                        margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+
+            + .control {
+                &.datepicker, &.timepicker {
+                    .input {
+                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                        padding-bottom: 1px;
+                        height: $floating-in-height;
                     }
                 }
-                &::after {
-                    margin-top: 1px;
+                &:not(.datepicker):not(.timepicker):not(.taginput) {
+                    .input,
+                    .textarea,
+                    select {
+                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                        padding-bottom: 1px;
+                        height: $floating-in-height;
+                    }
+                    .select:not(multiple) {
+                        height: $floating-in-height;
+                        &.is-loading {
+                            &::after {
+                                margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                            }
+                        }
+                        &::after {
+                            margin-top: 1px;
+                        }
+                    }
+                }
+                &.taginput {
+                    .taginput-container {
+                        // 0.275em - 1px _taginput.scss
+                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
+                    }
+                }
+                &:not(.taginput) {
+                    .is-left.icon,
+                    .is-right.icon {
+                        height: $floating-in-height;
+                    }
+                    .is-left.icon {
+                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                    }
+                }
+                &.is-loading::after {
+                    margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
                 }
             }
-        }
-        > :not(.taginput) {
-            .is-left.icon,
-            .is-right.icon {
-                height: $floating-in-height;
+
+            // With addons or grouped
+            + .field-body {
+                > .is-grouped, > .has-addons {
+                    .control {
+                        .input,
+                        .textarea,
+                        select {
+                            padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                            padding-bottom: 1px;
+                        }
+                        .input,
+                        .textarea,
+                        select,
+                        .button {
+                            height: $floating-in-height;
+                        }
+                    }
+                }
             }
-            .is-left.icon {
-                padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-            }
-        }
-        .control.is-loading::after {
-            margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
-        }
-        .taginput .taginput-container {
-            // 0.275em - 1px _taginput.scss
-            padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
         }
 
         &.has-numberinput {
             .b-numberinput {
                 .control {
+                    .input,
                     .button {
                         height: $floating-in-height;
                     }
-                }
-            }
-        }
-
-        .has-addons, .is-grouped {
-            .control {
-                .button,
-                .input,
-                .select select {
-                    height: $floating-in-height
                 }
             }
         }

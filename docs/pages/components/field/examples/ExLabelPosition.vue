@@ -55,6 +55,56 @@
             <b-input maxlength="200" type="textarea"></b-input>
         </b-field>
 
+        <b-field label="Find a JS framework" :label-position="labelPosition">
+            <b-autocomplete
+                rounded
+                :data="['jQuery', 'Vue', 'React']"
+                placeholder="e.g. jQuery"
+                icon="magnify"
+                clearable
+                @select="option => selected = option">
+                <template slot="empty">No results found</template>
+            </b-autocomplete>
+        </b-field>
+
+        <b-field label="Select a date" :label-position="labelPosition">
+            <b-datepicker
+                placeholder="Click to select..."
+                icon="calendar-today"
+                trap-focus>
+            </b-datepicker>
+        </b-field>
+
+        <b-field label="Select datetime" :label-position="labelPosition">
+            <b-datetimepicker
+                rounded
+                placeholder="Click to select..."
+                icon="calendar-today"
+                horizontal-time-picker>
+            </b-datetimepicker>
+        </b-field>
+
+        <b-field label="Number!" :label-position="labelPosition">
+            <b-numberinput laceholder="99" :min="95"></b-numberinput>
+        </b-field>
+
+        <b-field label="Add some tags" :label-position="labelPosition">
+            <b-taginput
+                :value="['My first tag', 'My second tag']"
+                ellipsis
+                icon="label"
+                placeholder="Add a tag">
+            </b-taginput>
+        </b-field>
+
+        <b-field label="Select time" :label-position="labelPosition">
+            <b-timepicker
+                rounded
+                placeholder="Click to select..."
+                icon="clock">
+            </b-timepicker>
+        </b-field>
+
         <hr>
         <p class="title is-6">Also works for grouped field and with addons.</p>
 
