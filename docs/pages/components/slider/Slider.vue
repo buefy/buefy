@@ -20,6 +20,10 @@
             <p>Use <code>lazy</code> to update <code>v-model</code> only when dragging is finished.</p>
         </Example>
 
+        <Example :component="ExIndicator" :code="ExIndicatorCode" title="Indicator">
+            <p>Use <code>indicator</code> to show <code>v-model</code> inside the thumb.</p>
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -44,6 +48,8 @@
     import ExRangeCode from '!!raw-loader!./examples/ExRange'
     import ExLazy from './examples/ExLazy'
     import ExLazyCode from '!!raw-loader!./examples/ExLazy'
+    import ExIndicator from './examples/ExIndicator'
+    import ExIndicatorCode from '!!raw-loader!./examples/ExIndicator'
 
     export default {
         data() {
@@ -63,7 +69,9 @@
                 ExRange,
                 ExRangeCode,
                 ExLazy,
-                ExLazyCode
+                ExLazyCode,
+                ExIndicator,
+                ExIndicatorCode
             }
         }
     }
