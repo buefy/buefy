@@ -90,7 +90,7 @@ export default {
             isActive: false,
             style: {},
             triggerStyle: {
-                zIndex: this.appendToBody ? '100' : 'auto'
+                zIndex: this.appendToBody ? '100' : undefined
             },
             timer: null,
             _bodyEl: undefined // Used to append to body
