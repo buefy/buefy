@@ -19,7 +19,8 @@
             @contextmenu="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
-            @mouseleave="close">
+            @mouseleave="close"
+            :style="triggerStyle">
             <slot ref="slot" />
         </div>
     </span>
@@ -88,6 +89,9 @@ export default {
         return {
             isActive: false,
             style: {},
+            triggerStyle: {
+                zIndex: this.appendToBody ? '100' : 'auto'
+            },
             timer: null,
             _bodyEl: undefined // Used to append to body
         }
