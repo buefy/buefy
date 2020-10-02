@@ -45,6 +45,13 @@ export default [
                 default: '<code>is-small</code>'
             },
             {
+                name: '<code>before-sort</code>',
+                description: 'Sets the function which called when a sortable column clicked. This function will be called before sorting procedure starts. You can stop sorting procedure by returning <code>true</code> with this function',
+                type: 'Function',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>bordered</code>',
                 description: 'Border to all cells',
                 type: 'Boolean',
