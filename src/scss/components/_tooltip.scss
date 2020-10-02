@@ -189,4 +189,7 @@ $tooltip-colors: $colors !default;
             border-radius: 0;
         }
     }
+    &.is-trigger {
+        z-index: 100;
+    }
 }

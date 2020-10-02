@@ -19,8 +19,7 @@
             @contextmenu="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
-            @mouseleave="close"
-            :style="triggerStyle">
+            @mouseleave="close">
             <slot ref="slot" />
         </div>
     </span>
@@ -89,9 +88,6 @@ export default {
         return {
             isActive: false,
             style: {},
-            triggerStyle: {
-                zIndex: this.appendToBody ? '100' : undefined
-            },
             timer: null,
             _bodyEl: undefined // Used to append to body
         }
@@ -102,7 +98,8 @@ export default {
                 'is-square': this.square,
                 'is-always': this.always,
                 'is-multiline': this.multilined,
-                'is-dashed': this.dashed
+                'is-dashed': this.dashed,
+                'is-trigger': this.appendToBody
             }]
         },
         newAnimation() {
