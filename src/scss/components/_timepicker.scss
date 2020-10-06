@@ -34,6 +34,8 @@
             font-size: 1.25em;
             margin-right: 0 !important;
             .select {
+                margin: 0 0.125em;
+
                 select {
                     font-weight: $weight-semibold;
                     padding-right: $control-padding-horizontal;
