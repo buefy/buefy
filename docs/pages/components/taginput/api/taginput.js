@@ -85,6 +85,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>aria-close-label</code>',
+                description: 'Accessibility label for the close button',
+                type: 'String',
+                values: '—',
+                default: '-'
+            },
+            {
                 name: '<code>field</code>',
                 description: 'Property of the object (if <code>data</code> is array of objects) to use as display text',
                 type: 'String',

@@ -18,6 +18,7 @@
                     :disabled="disabled"
                     :ellipsis="ellipsis"
                     :closable="closable"
+                    :aria-close-label="ariaCloseLabel"
                     :title="ellipsis && getNormalizedTagText(tag)"
                     @close="removeTag(index, $event)">
                     <slot name="tag" :tag="tag">
@@ -148,6 +149,7 @@ export default {
             type: Boolean,
             default: true
         },
+        ariaCloseLabel: String,
         confirmKeys: {
             type: Array,
             default: () => [',', 'Enter']
