@@ -99,7 +99,14 @@ export default [
                 description: `Trap focus inside the modal.`,
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>auto-focus</code>',
+                description: `Automatically focus modal when active.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>custom-class</code>',

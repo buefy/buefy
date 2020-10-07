@@ -136,7 +136,7 @@ export default [
                 description: `Trap focus inside the dialog.`,
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>aria-role</code>',
