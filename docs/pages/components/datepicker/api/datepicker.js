@@ -259,7 +259,7 @@ export default [
                 description: `Trap focus inside the datepicker.`,
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>append-to-body</code>',
