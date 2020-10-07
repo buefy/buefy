@@ -107,6 +107,12 @@ export default {
                 return config.defaultTrapFocus
             }
         },
+        autoFocus: {
+            type: Boolean,
+            default: () => {
+                return config.defaultAutoFocus
+            }
+        },
         customClass: String,
         ariaRole: {
             type: String,
@@ -160,7 +166,7 @@ export default {
             if (value) this.destroyed = false
             this.handleScroll()
             this.$nextTick(() => {
-                if (value && this.$el && this.$el.focus) {
+                if (value && this.$el && this.$el.focus && this.autoFocus) {
                     this.$el.focus()
                 }
             })

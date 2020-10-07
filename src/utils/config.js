@@ -42,6 +42,7 @@ let config = {
     defaultDatepickerShowWeekNumber: false,
     defaultDatepickerMobileModal: true,
     defaultTrapFocus: true,
+    defaultAutoFocus: true,
     defaultButtonRounded: false,
     defaultCarouselInterval: 3500,
     defaultTabsExpanded: false,
