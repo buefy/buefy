@@ -48,7 +48,7 @@ export default {
                 hour: 'numeric',
                 minute: 'numeric',
                 second: this.enableSeconds ? 'numeric' : undefined,
-                timezome: 'UTC'
+                timezone: 'UTC'
             })
             return dtf.format(new Date(2020, 11, 11, 13, 14, 15))
         }
