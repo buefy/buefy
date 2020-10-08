@@ -147,9 +147,9 @@ export default {
                 let newValue = value
                 if (value === '' || value === undefined || value === null) {
                     if (this.minNumber !== undefined) {
-                      newValue = this.minNumber;
+                        newValue = this.minNumber
                     } else {
-                      newValue = null;
+                        newValue = null
                     }
                 }
                 this.newValue = newValue
