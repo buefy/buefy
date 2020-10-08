@@ -174,7 +174,7 @@ export default [
             },
             {
                 name: '<code>type</code>',
-                description: `Default Type/Style for the step, optional
+                description: `Default Type/Style for the step, optional.
                     This will override parent type. Could be used to set a completed step to
                     <code>is-success</code> for example`,
                 type: 'String',
