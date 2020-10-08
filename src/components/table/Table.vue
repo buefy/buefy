@@ -1250,30 +1250,35 @@ export default {
         * Emits drag start event
         */
         handleDragStart(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragstart', {event, row, index})
         },
         /**
         * Emits drag leave event
         */
         handleDragEnd(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragend', {event, row, index})
         },
         /**
         * Emits drop event
         */
         handleDrop(event, row, index) {
+            if (!this.draggable) return
             this.$emit('drop', {event, row, index})
         },
         /**
         * Emits drag over event
         */
         handleDragOver(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragover', {event, row, index})
         },
         /**
         * Emits drag leave event
         */
         handleDragLeave(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragleave', {event, row, index})
         },
 

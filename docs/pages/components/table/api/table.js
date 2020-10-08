@@ -207,7 +207,7 @@ export default [
             },
             {
                 name: '<code>sort-multiple-key</code>',
-                description: 'Adds a key which will be required for multi column sorting to work. Will always be enabled if <code>null</code> is selected (default). Requres <code>sort-multiple</code>',
+                description: 'Adds a key which will be required for multi column sorting to work. Will always be enabled if <code>null</code> is selected (default). Requires <code>sort-multiple</code>',
                 type: 'String',
                 values: '<code>null</code>, <code>shiftKey</code>, <code>altKey</code>, <code>ctrlKey</code>',
                 default: '<code>null</code>'

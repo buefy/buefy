@@ -77,7 +77,7 @@ export default [
                 description: `Trap focus inside the dropdown.`,
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>can-close</code>',
