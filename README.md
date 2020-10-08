@@ -2,7 +2,7 @@
     <a href="https://buefy.org">
         <img src="https://raw.githubusercontent.com/buefy/buefy/master/static/img/buefy-banner.png" />
     </a>
-    <a href="https://github.com/buefy/buefy/releases"><img src="https://img.shields.io/github/v/release/buefy/buefy?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURUxpcXpW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1opGJjYAAAAPdFJOUwAKxPTjm0FusSKBFTBX1eRe1+UAAAEzSURBVCjPdZKxSgNBEIbnCk+CEaIgSIhFtAmobKXYXSecKHcQxDInvkBAsbA59bSyyCE+gr2xt9InsPAV1MYme3JB0N/Z292LFvmLYedndvab3SUaJ2fmX9p4OW/tpaN84QKsrb7N3UQCqwmu7Paj7AQI5/BljLr3OgF0q8GP2XOYRbOQkSNkpDsEOd0gS0tjHj4dYFCrBJk++AmnFOOTpjGsFUaMkDrI6RqbumcHZ47AuitkV1MI+JUAawl2DJbYeHa9Al33dHb3aRJ4XwI+dMk9kQJttJFFdjoFSnVg2RoKlKYEvq2hQInumM4oLpZxYRu2nFSFNRQoxx6GpoBBfb4Gr7wyXjaJh8O2MRg0pGpPRS0F+nALDNISFC0eBSsjUCX5Vj7U4yLr8rj/56FZ437BL2W5ltKCnKBjAAAAV3pUWHRSYXcgcHJvZmlsZSB0eXBlIGlwdGMAAHic4/IMCHFWKCjKT8vMSeVSAAMjCy5jCxMjE0uTFAMTIESANMNkAyOzVCDL2NTIxMzEHMQHy4BIoEouAOoXEXTyQjWVAAAAAElFTkSuQmCC&color=7957d5&labelColor=lightgrey" /></a>
+    <a href="https://github.com/buefy/buefy/releases"><img src="https://img.shields.io/github/v/release/buefy/buefy?logo=buefy&color=7957d5&labelColor=lightgrey" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/v/buefy.svg?logo=npm" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
     <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
