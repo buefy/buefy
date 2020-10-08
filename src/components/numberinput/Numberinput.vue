@@ -146,7 +146,11 @@ export default {
             set(value) {
                 let newValue = value
                 if (value === '' || value === undefined || value === null) {
-                    newValue = this.minNumber || null
+                    if (this.minNumber !== undefined) {
+                        newValue = this.minNumber
+                    } else {
+                        newValue = null
+                    }
                 }
                 this.newValue = newValue
                 this.$emit('input', newValue)
