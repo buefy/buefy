@@ -22,6 +22,8 @@
                 :tooltip="tooltip"
                 :custom-formatter="customFormatter"
                 :indicator="indicator"
+                :format="format"
+                :locale="locale"
                 ref="button1"
                 role="slider"
                 :aria-valuenow="value1"
@@ -38,6 +40,8 @@
                 :tooltip="tooltip"
                 :custom-formatter="customFormatter"
                 :indicator="indicator"
+                :format="format"
+                :locale="locale"
                 ref="button2"
                 v-if="isRange"
                 role="slider"
@@ -56,6 +60,7 @@
 <script>
 import SliderThumb from './SliderThumb'
 import SliderTick from './SliderTick'
+import config from '../../utils/config'
 import {bound} from '../../utils/helpers'
 
 export default {
@@ -116,6 +121,22 @@ export default {
         indicator: {
             type: Boolean,
             default: false
+        },
+        format: {
+            type: String,
+            default: 'raw',
+            validator: (value) => {
+                return [
+                    'raw',
+                    'percent'
+                ].indexOf(value) >= 0
+            }
+        },
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
         }
     },
     data() {

@@ -4,7 +4,7 @@
         :class="{ 'is-dragging': dragging, 'has-indicator': indicator}"
         :style="wrapperStyle">
         <b-tooltip
-            :label="tooltipLabel"
+            :label="formattedValue"
             :type="type"
             :always="dragging || isFocused"
             :active="!disabled && tooltip">
@@ -22,7 +22,7 @@
                 @keydown.up.prevent="onRightKeyDown"
                 @keydown.home.prevent="onHomeKeyDown"
                 @keydown.end.prevent="onEndKeyDown">
-                <span v-if="indicator">{{ value }}</span>
+                <span v-if="indicator">{{ formattedValue }}</span>
             </div>
         </b-tooltip>
     </div>
@@ -30,6 +30,8 @@
 
 <script>
 import Tooltip from '../tooltip/Tooltip'
+import config from '../../utils/config'
+
 export default {
     name: 'BSliderThumb',
     components: {
@@ -53,7 +55,23 @@ export default {
             type: Boolean,
             default: false
         },
-        customFormatter: Function
+        customFormatter: Function,
+        format: {
+            type: String,
+            default: 'raw',
+            validator: (value) => {
+                return [
+                    'raw',
+                    'percent'
+                ].indexOf(value) >= 0
+            }
+        },
+        locale: {
+            type: [String, Array],
+            default: () => {
+                return config.defaultLocale
+            }
+        }
     },
     data() {
         return {
@@ -87,10 +105,21 @@ export default {
         wrapperStyle() {
             return { left: this.currentPosition }
         },
-        tooltipLabel() {
-            return typeof this.customFormatter !== 'undefined'
-                ? this.customFormatter(this.value)
-                : this.value.toString()
+        formattedValue() {
+            if (typeof this.customFormatter !== 'undefined') {
+                return this.customFormatter(this.value)
+            }
+
+            if (this.format === 'percent') {
+                return new Intl.NumberFormat(
+                    this.locale,
+                    {
+                        style: 'percent'
+                    }
+                ).format(((this.value - this.min)) / (this.max - this.min))
+            }
+
+            return new Intl.NumberFormat(this.locale).format(this.value)
         }
     },
     methods: {
