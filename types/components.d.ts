@@ -1,5 +1,5 @@
 import _Vue from "vue";
-import { ColorModifiers, GlobalPositions } from "./helpers";
+import {ColorModifiers, GlobalPositions, SizesModifiers} from "./helpers";
 
 // Component base definition
 export class BComponent extends _Vue {
@@ -95,7 +95,7 @@ export declare type BDialogConfig = {
     /**
      * Dialog\'s size, optional
      */
-    size?: 'is-small' | 'is-medium' | 'is-large';
+    size?: SizesModifiers;
 
     /**
      * Custom animation (transition name)
@@ -412,4 +412,22 @@ export interface TableColumn {
     'header-selectable'?: boolean;
     'header-class'?: string;
     'cell-class'?: string;
+}
+
+export interface ButtonProps {
+    type?: ColorModifiers,
+    size?: SizesModifiers,
+    label?: string;
+    loading?: boolean;
+    rounded?: boolean;
+    outlined?: boolean;
+    focused?: boolean;
+    inverted?: boolean;
+    hovered?: boolean;
+    active?: boolean;
+    expanded?: boolean;
+    'icon-left'?: string;
+    'icon-right'?: string;
+    'native-type'?: string;
+    'tag'?: 'button' | 'a' | 'input' | 'router-link' | 'nuxt-link' | string;
 }
