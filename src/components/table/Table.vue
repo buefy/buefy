@@ -49,7 +49,9 @@
                 <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
-                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
+                        <th
+                            :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
+                            v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -124,7 +126,9 @@
                                 </template>
                             </div>
                         </th>
-                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
+                        <th
+                            :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
+                            v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -231,7 +235,7 @@
                             </td>
 
                             <td
-                                class="checkbox-cell"
+                                :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -260,7 +264,7 @@
                             </template>
 
                             <td
-                                class="checkbox-cell"
+                                :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -401,6 +405,10 @@ export default {
                     'right'
                 ].indexOf(value) >= 0
             }
+        },
+        stickyCheckbox: {
+            type: Boolean,
+            default: false
         },
         selected: Object,
         isRowSelectable: {
