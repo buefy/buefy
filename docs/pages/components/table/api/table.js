@@ -101,6 +101,13 @@ export default [
                 default: '<code>left</code>'
             },
             {
+                name: '<code>sticky-checkbox</code>',
+                description: 'Make the checkbox column sticky when <code>checkable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>checked-rows</code>',
                 description: 'Set which rows are checked, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Array<Object>',

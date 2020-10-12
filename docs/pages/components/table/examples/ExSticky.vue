@@ -13,6 +13,17 @@
             :columns="columns"
             :sticky-header="stickyHeaders"
         ></b-table>
+        <br />
+        Use <code>checkable</code> and <code>sticky-checkbox</code> to make a sticky checkbox column.
+        <br />
+        <br />
+        <b-table
+            :data="data"
+            :columns="checkableColumns"
+            :sticky-header="stickyHeaders"
+            checkable
+            sticky-checkbox
+        ></b-table>
     </section>
 </template>
 
@@ -172,7 +183,89 @@ export default {
                     label: "Column O"
                 }
             ];
-        }
+        },
+        checkableColumns() {
+            return [
+                {
+                    field: "id",
+                    label: "ID",
+                    width: "40",
+                    numeric: true,
+                    sticky: false,
+                },
+                {
+                    field: "user.first_name",
+                    label: "First Name"
+                },
+                {
+                    field: "user.last_name",
+                    label: "Last Name"
+                },
+                {
+                    field: "date",
+                    label: "Date",
+                    searchable: this.dateSearchable,
+                    centered: true,
+                    sticky: false,
+                },
+                {
+                    field: "gender",
+                    label: "Gender"
+                },
+                {
+                    field: "id",
+                    label: "Column A"
+                },
+                {
+                    field: "id",
+                    label: "Column B"
+                },
+                {
+                    field: "id",
+                    label: "Column C"
+                },
+                {
+                    field: "id",
+                    label: "Column D"
+                },
+                {
+                    field: "id",
+                    label: "Column E"
+                },
+                {
+                    field: "id",
+                    label: "Column F"
+                },
+                {
+                    field: "id",
+                    label: "Column G"
+                },
+                {
+                    field: "id",
+                    label: "Column H"
+                },
+                {
+                    field: "id",
+                    label: "Column I"
+                },
+                {
+                    field: "id",
+                    label: "Column L"
+                },
+                {
+                    field: "id",
+                    label: "Column M"
+                },
+                {
+                    field: "id",
+                    label: "Column N"
+                },
+                {
+                    field: "id",
+                    label: "Column O"
+                }
+            ];
+        },
     }
 };
 </script>
