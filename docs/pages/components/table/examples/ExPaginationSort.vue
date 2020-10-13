@@ -20,6 +20,9 @@
             <div class="control is-flex">
                 <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
             </div>
+            <div class="control is-flex">
+                <b-switch v-model="isPaginationRounded" :disabled="!isPaginated">Rounded pagination</b-switch>
+            </div>
             <b-select v-model="paginationPosition" :disabled="!isPaginated">
                 <option value="bottom">bottom pagination</option>
                 <option value="top">top pagination</option>
@@ -46,6 +49,7 @@
             :pagination-simple="isPaginationSimple"
             :pagination-position="paginationPosition"
             :default-sort-direction="defaultSortDirection"
+            :pagination-rounded="isPaginationRounded"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
             default-sort="user.first_name"
@@ -94,6 +98,7 @@
                 data,
                 isPaginated: true,
                 isPaginationSimple: false,
+                isPaginationRounded: false,
                 paginationPosition: 'bottom',
                 defaultSortDirection: 'asc',
                 sortIcon: 'arrow-up',

@@ -178,6 +178,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>pagination-rounded</code>',
+                description: 'Rounded pagination (if <code>paginated</code>)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>pagination-size</code>',
                 description: 'Pagination size (if <code>paginated</code>)',
                 type: 'String',

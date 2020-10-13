@@ -25,6 +25,7 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
@@ -332,6 +333,7 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
@@ -478,6 +480,7 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
+        paginationRounded: Boolean,
         backendSorting: Boolean,
         backendFiltering: Boolean,
         rowClass: {
