@@ -6,7 +6,7 @@
         <b-tooltip
             :label="formattedValue"
             :type="type"
-            :always="dragging || isFocused"
+            :always="dragging || isFocused || tooltipAlways"
             :active="!disabled && tooltip">
             <div
                 class="b-slider-thumb"
@@ -71,6 +71,10 @@ export default {
             default: () => {
                 return config.defaultLocale
             }
+        },
+        tooltipAlways: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
