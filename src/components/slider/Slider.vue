@@ -17,6 +17,7 @@
             </template>
             <slot/>
             <b-slider-thumb
+                :tooltip-always="tooltipAlways"
                 v-model="value1"
                 :type="newTooltipType"
                 :tooltip="tooltip"
@@ -35,6 +36,7 @@
                 @dragstart="onDragStart"
                 @dragend="onDragEnd" />
             <b-slider-thumb
+                :tooltip-always="tooltipAlways"
                 v-model="value2"
                 :type="newTooltipType"
                 :tooltip="tooltip"
@@ -137,6 +139,10 @@ export default {
             default: () => {
                 return config.defaultLocale
             }
+        },
+        tooltipAlways: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
