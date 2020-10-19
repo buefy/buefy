@@ -3,7 +3,7 @@
         <div class="buttons">
             <a
                 class="button"
-                href="https://sortablejs.github.io/Sortable/"
+                href="https://sortablejs.github.io/sortablejs/"
                 target="_blank">
                 Website
             </a>
