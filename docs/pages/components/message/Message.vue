@@ -10,6 +10,10 @@
             <p>Message without title becomes headerless, they are always non-closable.</p>
         </Example>
 
+        <Example :component="ExCustomHeader" :code="ExCustomHeaderCode" title="Custom Header" vertical>
+            <p>It is also possible to customize the header using the corresponding slot.</p>
+        </Example>
+
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
         <Example :component="ExAutoClose" :code="ExAutoCloseCode" title="Auto Close" vertical>
@@ -37,6 +41,9 @@
     import ExHeaderless from './examples/ExHeaderless'
     import ExHeaderlessCode from '!!raw-loader!./examples/ExHeaderless'
 
+    import ExCustomHeader from './examples/ExCustomHeader'
+    import ExCustomHeaderCode from '!!raw-loader!./examples/ExCustomHeader'
+
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
@@ -52,12 +59,14 @@
                 ExTypes,
                 ExIcons,
                 ExHeaderless,
+                ExCustomHeader,
                 ExSizes,
                 ExAutoClose,
                 ExSimpleCode,
                 ExTypesCode,
                 ExIconsCode,
                 ExHeaderlessCode,
+                ExCustomHeaderCode,
                 ExSizesCode,
                 ExAutoCloseCode
             }
