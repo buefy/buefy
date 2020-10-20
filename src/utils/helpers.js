@@ -150,6 +150,7 @@ export function createAbsoluteElement(el) {
     root.style.position = 'absolute'
     root.style.left = '0px'
     root.style.top = '0px'
+    root.style.width = '100%'
     const wrapper = document.createElement('div')
     root.appendChild(wrapper)
     wrapper.appendChild(el)

@@ -244,7 +244,6 @@ export default {
                     }
                 }
             }
-
             return false
         },
 
@@ -307,23 +306,24 @@ export default {
         },
 
         updateAppendToBody() {
+            const dropdown = this.$refs.dropdown
             const dropdownMenu = this.$refs.dropdownMenu
             const trigger = this.$refs.trigger
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
-                const dropdown = this.$data._bodyEl.children[0]
-                dropdown.classList.forEach((item) => dropdown.classList.remove(item))
-                dropdown.classList.add('dropdown')
-                dropdown.classList.add('dropdown-menu-animation')
+                const dropdownWrapper = this.$data._bodyEl.children[0]
+                dropdownWrapper.classList.forEach((item) => dropdownWrapper.classList.remove(item))
+                dropdownWrapper.classList.add('dropdown')
+                dropdownWrapper.classList.add('dropdown-menu-animation')
                 if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
-                    dropdown.classList.add(this.$vnode.data.staticClass)
+                    dropdownWrapper.classList.add(this.$vnode.data.staticClass)
                 }
                 this.rootClasses.forEach((item) => {
                     // skip position prop
                     if (item && typeof item === 'object') {
                         for (let key in item) {
                             if (item[key]) {
-                                dropdown.classList.add(key)
+                                dropdownWrapper.classList.add(key)
                             }
                         }
                     }
@@ -351,7 +351,8 @@ export default {
                     position: 'absolute',
                     top: `${top}px`,
                     left: `${left}px`,
-                    zIndex: '99'
+                    zIndex: '99',
+                    width: this.expanded ? `${dropdown.offsetWidth}px` : undefined
                 }
             }
         }
