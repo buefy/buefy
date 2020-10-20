@@ -1,6 +1,10 @@
 <template>
     <div class="datepicker-row">
-        <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
+        <a
+            class="datepicker-cell is-week-number"
+            :class="{'is-clickable': weekNumberClickable }"
+            v-if="showWeekNumber"
+            @click.prevent="clickWeekNumber(getWeekNumber(week[6]))">
             <span>{{ getWeekNumber(week[6]) }}</span>
         </a>
         <template v-for="(weekDay, index) in week">
@@ -40,6 +44,9 @@
 <script>
 export default {
     name: 'BDatepickerTableRow',
+    inject: {
+        $datepicker: { name: '$datepicker', default: false }
+    },
     props: {
         selectedDate: {
             type: [Date, Array]
@@ -67,16 +74,11 @@ export default {
         dateCreator: Function,
         nearbyMonthDays: Boolean,
         nearbySelectableMonthDays: Boolean,
-        showWeekNumber: {
-            type: Boolean,
-            default: () => false
-        },
+        showWeekNumber: Boolean,
+        weekNumberClickable: Boolean,
         range: Boolean,
         multiple: Boolean,
-        rulesForFirstWeek: {
-            type: Number,
-            default: () => 4
-        },
+        rulesForFirstWeek: Number,
         firstDayOfWeek: Number
     },
     watch: {
@@ -134,6 +136,11 @@ export default {
             }
 
             return resWeek
+        },
+        clickWeekNumber(week) {
+            if (this.weekNumberClickable) {
+                this.$datepicker.$emit('week-number-click', week)
+            }
         },
         /*
          * Check that selected day is within earliest/latest params and

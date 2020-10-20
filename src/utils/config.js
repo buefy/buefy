@@ -40,6 +40,7 @@ let config = {
     defaultDatepickerNearbyMonthDays: true,
     defaultDatepickerNearbySelectableMonthDays: false,
     defaultDatepickerShowWeekNumber: false,
+    defaultDatepickerWeekNumberClickable: false,
     defaultDatepickerMobileModal: true,
     defaultTrapFocus: true,
     defaultAutoFocus: true,

@@ -141,6 +141,7 @@
                             :nearby-month-days="nearbyMonthDays"
                             :nearby-selectable-month-days="nearbySelectableMonthDays"
                             :show-week-number="showWeekNumber"
+                            :week-number-clickable="weekNumberClickable"
                             :range="range"
                             :multiple="multiple"
                             @range-start="date => $emit('range-start', date)"
@@ -281,6 +282,11 @@ export default {
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
+    provide() {
+        return {
+            $datepicker: this
+        }
+    },
     props: {
         value: {
             type: [Date, Array]
@@ -399,6 +405,10 @@ export default {
         showWeekNumber: {
             type: Boolean,
             default: () => config.defaultDatepickerShowWeekNumber
+        },
+        weekNumberClickable: {
+            type: Boolean,
+            default: () => config.defaultDatepickerWeekNumberClickable
         },
         rulesForFirstWeek: {
             type: Number,

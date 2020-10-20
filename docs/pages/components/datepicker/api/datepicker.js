@@ -227,6 +227,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>week-number-clickable</code>',
+                description: 'Enable click on week number',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>rules-for-first-week</code>',
                 description: 'Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other',
                 type: 'Number',
@@ -332,6 +339,11 @@ export default [
                 name: '<code>range-end</code>',
                 description: 'Triggers when user ends selecting a date range (Only when <b>range</b> prop is set)',
                 parameters: '<code>date: Date</code>'
+            },
+            {
+                name: '<code>week-number-click</code>',
+                description: 'Triggers when user click on week number (Only when <b>show-week-number</b> and <b>week-number-clickable</b> props are set)',
+                parameters: '<code>week: Number</code>'
             }
         ],
         methods: [
