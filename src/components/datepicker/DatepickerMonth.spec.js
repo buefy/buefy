@@ -247,7 +247,7 @@ describe('BDatepickerMonth', () => {
         })
 
         it('should have is-within-selected class for the dates selected within the range', () => {
-            expect(wrapper.findAll('section > div > div > .is-selected.is-within-selected').length).toBe(4)
+            expect(wrapper.findAll('section > div > div > .is-selected.is-within-selected').length).toBe(3)
         })
 
         it('should have is-last-selected class for the last date selected within the range', () => {
@@ -271,7 +271,7 @@ describe('BDatepickerMonth', () => {
             })
 
             it('should have is-within-hovered class for the dates hovered within the range', () => {
-                expect(wrapper.findAll('section > div > div > .is-within-hovered-range.is-within-hovered').length).toBe(3)
+                expect(wrapper.findAll('section > div > div > .is-within-hovered-range.is-within-hovered').length).toBe(2)
             })
 
             it('should have is-last-hovered class for the last date hovered within the range', () => {

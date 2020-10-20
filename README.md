@@ -90,7 +90,7 @@ Please see the [contributing guidelines](./.github/CONTRIBUTING.md)
 
 ## Versioning
 
-While it's still in beta, version will follow **v0.Y.Z**, where:
+Version will follow **v0.Y.Z**, where:
 
 * **Y**: Major (breaking changes)
 * **Z**: Minor or patch

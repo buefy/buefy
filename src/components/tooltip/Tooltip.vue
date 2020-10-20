@@ -4,8 +4,7 @@
             <div
                 v-show="active && (isActive || always)"
                 ref="content"
-                :class="['tooltip-content', contentClass]"
-                :style="style">
+                :class="['tooltip-content', contentClass]">
                 <template v-if="label">{{ label }}</template>
                 <template v-else-if="$slots.content">
                     <slot name="content" />
@@ -15,6 +14,7 @@
         <div
             ref="trigger"
             class="tooltip-trigger"
+            :style="triggerStyle"
             @click="onClick"
             @contextmenu="onContextMenu"
             @mouseenter="onHover"
@@ -87,7 +87,7 @@ export default {
     data() {
         return {
             isActive: false,
-            style: {},
+            triggerStyle: {},
             timer: null,
             _bodyEl: undefined // Used to append to body
         }
@@ -144,6 +144,7 @@ export default {
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
                 wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
+                this.triggerStyle = { zIndex: this.isActive || this.always ? '100' : undefined }
             }
         },
         onClick() {
