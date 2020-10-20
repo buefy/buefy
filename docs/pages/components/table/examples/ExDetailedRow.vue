@@ -31,7 +31,7 @@
                     {{ props.row.user.first_name }}
                 </template>
                 <template v-else>
-                    <a @click="toggle(props.row)">
+                    <a @click="props.toggleDetails(props.row)">
                         {{ props.row.user.first_name }}
                     </a>
                 </template>
@@ -92,11 +92,6 @@
                 data,
                 defaultOpenedDetails: [1],
                 showDetailIcon: true
-            }
-        },
-        methods: {
-            toggle(row) {
-                this.$refs.table.toggleDetails(row)
             }
         }
     }

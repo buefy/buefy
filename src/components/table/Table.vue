@@ -51,7 +51,7 @@
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
                         <th
-                            :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
+                            :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
@@ -128,7 +128,7 @@
                             </div>
                         </th>
                         <th
-                            :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
+                            :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
@@ -236,7 +236,7 @@
                             </td>
 
                             <td
-                                :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
+                                :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -256,8 +256,8 @@
                                         tag="td"
                                         :class="column.rootClasses"
                                         :data-label="column.label"
-                                        :props="{ row, column, index, colindex }"
-                                        @click.native="$emit('cellClick',row, column,
+                                        :props="{ row, column, index, colindex, toggleDetails }"
+                                        @click.native="$emit('cellClick', row, column,
                                                              index, colindex, $event)"
                                     />
                                 </template>
@@ -265,7 +265,7 @@
                             </template>
 
                             <td
-                                :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
+                                :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -284,7 +284,8 @@
                                     <slot
                                         name="detail"
                                         :row="row"
-                                        :index="index"/>
+                                        :index="index"
+                                    />
                                 </div>
                             </td>
                         </tr>
