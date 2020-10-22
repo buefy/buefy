@@ -29,7 +29,7 @@ export default (parentCmp) => ({
         isActive() {
             return this.parent.activeItem === this
         },
-        hasHeaderSlotData() {
+        hasHeaderSlot() {
             return this.$slots.header
         }
     },
