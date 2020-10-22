@@ -12,6 +12,10 @@
             </b-tab-item>
 
             <b-tab-item label="Music">
+                <template #header>
+        <b-icon icon="alert-circle"></b-icon>
+        <span>Music</span>
+      </template>
                 Lorem <br>
                 ipsum <br>
                 dolor <br>
