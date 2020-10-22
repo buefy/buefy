@@ -179,7 +179,9 @@ export function multiColumnSort(inputArray, sortingPriority) {
     const fieldSorter = (fields) => (a, b) => fields.map((o) => {
         let dir = 1
         if (o[0] === '-') { dir = -1; o = o.substring(1) }
-        return a[o] > b[o] ? dir : a[o] < b[o] ? -(dir) : 0
+        const aValue = getValueByPath(a, o)
+        const bValue = getValueByPath(b, o)
+        return aValue > bValue ? dir : aValue < bValue ? -(dir) : 0
     }).reduce((p, n) => p || n, 0)
 
     return array.sort(fieldSorter(sortingPriority))
