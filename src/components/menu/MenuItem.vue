@@ -102,7 +102,7 @@ export default {
             const menu = this.getMenu()
             this.reset(this.$parent, menu)
             this.newExpanded = !this.newExpanded
-            this.$emit('update:expanded', this.newActive)
+            this.$emit('update:expanded', this.newExpanded)
             if (menu && menu.activable) {
                 this.newActive = true
                 this.$emit('update:active', this.newActive)
