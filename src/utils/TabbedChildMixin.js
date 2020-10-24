@@ -28,9 +28,6 @@ export default (parentCmp) => ({
     computed: {
         isActive() {
             return this.parent.activeItem === this
-        },
-        hasHeaderSlot() {
-            return this.$slots.header
         }
     },
     methods: {

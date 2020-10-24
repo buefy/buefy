@@ -9,7 +9,7 @@
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
                                                        'is-disabled': childItem.disabled }]">
                     <b-slot-component
-                        v-if="childItem.hasHeaderSlot"
+                        v-if="childItem.$scopedSlots.header"
                         :component="childItem"
                         name="header"
                         tag="a"
