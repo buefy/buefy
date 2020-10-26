@@ -159,9 +159,7 @@ export default {
                     }
                 }
             }
-            if (!valid) {
-                this.$emit("invalid");
-            }
+            if (!valid) this.$emit('invalid')
             return valid
         }
     }
