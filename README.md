@@ -105,15 +105,6 @@ Version will follow **v0.Y.Z**, where:
 
 Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
 
-## Supporting through Patreon
-
-Buefy is an open source MIT project if you are interested in supporting this project, please consider becoming a patron.
-<p align="center">
-  <a href="https://www.patreon.com/jtommy">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
-  </a>
-</p>
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
