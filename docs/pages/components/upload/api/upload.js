@@ -81,6 +81,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>rounded</code>',
+                description: 'Upload will be rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
         ],
         events: [
             {
