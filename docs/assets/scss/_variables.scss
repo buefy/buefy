@@ -7,6 +7,7 @@ $twitter: #4099FF;
 $discord: #7289DA;
 $patreon: #f96854;
 $bulma: #00D1B2;
+$vuetelemetry: #0bdca0;
 
 $colors: (
     "white": ($white, $black),
@@ -23,7 +24,8 @@ $colors: (
     "twitter": ($twitter, $white, findLightColor($twitter), findDarkColor($twitter)),
     "discord": ($discord, $white, findLightColor($discord), findDarkColor($discord)),
     "patreon": ($patreon, $white, findLightColor($patreon), findDarkColor($patreon)),
-    "bulma": ($bulma, $white, findLightColor($bulma), findDarkColor($bulma))
+    "bulma": ($bulma, $white, findLightColor($bulma), findDarkColor($bulma)),
+    "vuetelemetry": ($vuetelemetry, $white, findLightColor($vuetelemetry), findDarkColor($vuetelemetry))
 );
 
 $navbar-height: 3.25rem;

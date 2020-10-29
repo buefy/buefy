@@ -3,12 +3,21 @@
         <div class="expo-head">
             <div class="expo-head-text">Show us your own project or job!</div>
             <div class="expo-head-button">
-                <button
-                    class="button is-twitter"
-                    @click="tweet">
-                    <b-icon icon="twitter"/>
-                    <span>#MadeWithBuefy</span>
-                </button>
+                <div class="buttons">
+                    <button
+                        class="button is-twitter"
+                        @click="tweet">
+                        <b-icon icon="twitter"/>
+                        <span>#MadeWithBuefy</span>
+                    </button>
+                    <a
+                        class="button is-vuetelemetry"
+                        href="https://vuetelemetry.com/explore?ui.slug=buefy&_sort=lastDetectedAt%3Adesc"
+                        target="_blank">
+                        <b-icon icon="nuxt"/>
+                        <span>Explore VueTelemetry</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="columns is-multiline">
