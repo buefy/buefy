@@ -16,13 +16,7 @@ export default {
   data() {
     return {
       file: {},
-      dropFiles: []
     };
   },
-  methods: {
-    deleteDropFile(index) {
-      this.dropFiles.splice(index, 1);
-    }
-  }
 };
 </script>
