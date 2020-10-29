@@ -463,7 +463,7 @@ export default [
                 parameters: '<code>row: Object</code>'
             },
             {
-                name: '<code>cellClick</code>',
+                name: '<code>cellclick</code>',
                 description: 'Triggers when a cell is clicked',
                 parameters: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>rowIndex: Number</code>, <code>columnIndex: Number</code>,'
             },

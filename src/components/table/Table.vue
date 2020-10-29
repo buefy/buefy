@@ -257,8 +257,7 @@
                                         :class="column.rootClasses"
                                         :data-label="column.label"
                                         :props="{ row, column, index, colindex, toggleDetails }"
-                                        @click.native="$emit('cellClick', row, column,
-                                                             index, colindex, $event)"
+                                        @click.native="$emit('cellclick',row,column,index,colindex)"
                                     />
                                 </template>
 
