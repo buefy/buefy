@@ -100,6 +100,13 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>confirm-keys</code>',
+                description: 'Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will select an option when typing (default tab and enter)',
+                type: 'Array',
+                values: '—',
+                default: '<code>["Tab", "Enter"]</code>'
+            },
+            {
                 name: '<code>clearable</code>',
                 description: 'Add a button to clear the inputed text',
                 type: 'Boolean',
