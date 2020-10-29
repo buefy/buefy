@@ -19,6 +19,7 @@
             @contextmenu="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
+            @blur.capture="close"
             @mouseleave="close">
             <slot ref="slot" />
         </div>
