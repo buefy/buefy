@@ -3,7 +3,7 @@ export default [
         props: [
             {
                 name: '<code>active</code>',
-                description: 'Whether modal is active or not, use the <code>.sync</code> modifier to make it two-way binding',
+                description: 'Whether loading is active or not, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
