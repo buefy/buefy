@@ -34,7 +34,7 @@ export default {
             ],
             externalStyles: [
                 'https://unpkg.com/buefy/dist/buefy.min.css',
-                'https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
+                'https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css'
             ]
         }
     },
