@@ -1,5 +1,5 @@
 <template>
-    <label class="upload control" :class="{'is-expanded' : expanded}">
+    <label class="upload control" :class="{'is-expanded' : expanded, 'is-rounded' : rounded}">
         <template v-if="!dragDrop">
             <slot/>
         </template>
@@ -56,6 +56,10 @@ export default {
             default: false
         },
         expanded: {
+            type: Boolean,
+            default: false
+        },
+        rounded: {
             type: Boolean,
             default: false
         }
