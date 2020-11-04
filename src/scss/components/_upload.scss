@@ -1,7 +1,7 @@
 .upload {
     position: relative;
     display: inline-flex;
-    input[type=file] {
+    input[type="file"] {
         position: absolute;
         top: 0;
         left: 0;
@@ -53,15 +53,20 @@
     }
     &.is-rounded {
         border-radius: $radius-rounded;
+
+        .file-name {
+            border-top-right-radius: $radius-rounded;
+            border-bottom-right-radius: $radius-rounded;
+        }
     }
 }
 // temporary IE 11 hack !!!
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     .upload {
-        input[type=file] {
+        input[type="file"] {
             z-index: auto;
         }
-        .upload-draggable + input[type=file] {
+        .upload-draggable + input[type="file"] {
             z-index: -1;
         }
     }
