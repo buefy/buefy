@@ -1,6 +1,6 @@
 <template>
   <section>
-    <b-field label="Include filename">
+    <b-field label="Included filename">
       <b-field class="file is-primary" :class="{'has-name': !!file}">
         <b-upload v-model="file" class="file-label" rounded>
           <span class="file-cta">
@@ -11,7 +11,7 @@
       </b-field>
     </b-field>
 
-    <b-field label="Seperate filename">
+    <b-field label="Separated filename">
         <b-field class="file is-primary"  :class="{'has-name': !!file}">
             <b-upload v-model="file" class="file-label" rounded>
                 <span class="file-cta">
