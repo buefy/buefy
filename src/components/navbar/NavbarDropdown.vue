@@ -89,8 +89,3 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-.is-boxed {
-    display: none;
-}
-</style>
