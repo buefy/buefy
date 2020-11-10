@@ -29,6 +29,10 @@
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="top-left"/>
@@ -337,6 +341,10 @@
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="bottom-left"/>
