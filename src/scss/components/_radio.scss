@@ -88,6 +88,10 @@ $radio-colors: $form-colors !default;
         }
         &.button {
             display: flex;
+
+            &.is-selected {
+                z-index: 1;
+            }
         }
         &[disabled] {
             opacity: 0.5;
