@@ -1,10 +1,10 @@
 <template>
     <section>
-        <div class="field">
+        <b-field>
             <b-tag>Tag label</b-tag>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-tag rounded>Rounded tag label</b-tag>
-        </div>
+        </b-field>
     </section>
 </template>

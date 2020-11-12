@@ -12,14 +12,14 @@
                     <div class="content">
                         <p class="title is-6">{{ list.title }}</p>
                         <p class="subtitle is-7">@johnsmith</p>
-                        <div class="field is-grouped" >
+                        <b-field grouped >
                             <p class="control" v-if="list.rating">
                                 <b-rate :value="list.rating" show-score disabled/>
                             </p>
                             <p class="control" style="margin-left: auto">
                                 <b-button size="is-small" type="is-danger" icon-left="heart" outlined />
                             </p>
-                        </div>
+                        </b-field>
                     </div>
                 </div>
             </div>

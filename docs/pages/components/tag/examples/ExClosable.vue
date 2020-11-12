@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="field">
+        <b-field>
             <b-tag v-if="isTag1Active"
                 type="is-primary"
                 closable
@@ -8,8 +8,8 @@
                 @close="isTag1Active = false">
                 Colored closable tag label
             </b-tag>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-tag v-if="isTag2Active"
                 type="is-success"
                 closable
@@ -18,9 +18,9 @@
                 @close="isTag2Active = false">
                 Colored closable tag label with colored closed icon
             </b-tag>
-        </div>
+        </b-field>
 
-        <div class="field">
+        <b-field>
             <b-tag v-if="isTag3Active"
                 attached
                 closable
@@ -28,9 +28,9 @@
                 @close="isTag3Active = false">
                 Attached closable tag label
             </b-tag>
-        </div>
+        </b-field>
 
-        <div class="field">
+        <b-field>
             <b-tag v-if="isTag4Active"
                 type="is-danger"
                 attached
@@ -39,8 +39,8 @@
                 @close="isTag4Active = false">
                 Colored attached closable tag label
             </b-tag>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-tag v-if="isTag5Active"
                 close-type='is-danger'
                 attached
@@ -49,8 +49,8 @@
                 @close="isTag5Active = false">
                 Attached tag label with colored close type
             </b-tag>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-tag v-if="isTag6Active"
                 close-type='is-warning'
                 close-icon-type='is-dark'
@@ -61,7 +61,7 @@
                 @close="isTag6Active = false">
                 Attached tag label with custom and colored icon
             </b-tag>
-        </div>
+        </b-field>
     </section>
 </template>
 
