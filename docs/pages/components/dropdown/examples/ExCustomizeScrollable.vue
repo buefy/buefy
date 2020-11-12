@@ -15,23 +15,22 @@
                     </b-slider>
                 </div>
             </b-field>
-        </div>   
-        
+        </div>
+
         <b-dropdown
             :scrollable="isScrollable"
             :max-height="maxHeight"
             v-model="currentMenu"
             aria-role="list"
         >
-            <button class="button is-primary" type="button" slot="trigger">
-                <template>
-                    <b-icon :icon="currentMenu.icon"></b-icon>
-                    <span>{{currentMenu.text}}</span>
-                </template>
-                <b-icon icon="menu-down"></b-icon>
-            </button>
+            <b-button
+                slot="trigger"
+                :label="currentMenu.text"
+                type="is-primary"
+                :icon-left="currentMenu.icon"
+                icon-right="menu-down" />
 
-            <b-dropdown-item 
+            <b-dropdown-item
                 v-for="(menu, index) in menus"
                 :key="index"
                 :value="menu" aria-role="listitem">

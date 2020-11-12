@@ -17,7 +17,7 @@
                                 <b-rate :value="list.rating" show-score disabled/>
                             </p>
                             <p class="control" style="margin-left: auto">
-                                <button class="button is-small is-danger is-outlined"><b-icon size="is-small" icon="heart"/></button>
+                                <b-button size="is-small" type="is-danger" icon-left="heart" outlined />
                             </p>
                         </div>
                     </div>

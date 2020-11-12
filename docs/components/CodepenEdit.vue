@@ -5,10 +5,12 @@
         action="https://codepen.io/pen/define/"
         target="_blank"
         rel="noopener">
-        <button class="button is-text is-small">
-            <span>CodePen</span>
-            <b-icon icon="open-in-new" size="is-small"/>
-        </button>
+        <b-button
+            label="CodePen"
+            type="is-text"
+            size="is-small"
+            icon-right="open-in-new"
+            native-type="submit"/>
 
         <input
             type="hidden"

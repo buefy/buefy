@@ -2,10 +2,12 @@
     <section>
 
         <div class="block">
-            <button
-                class="button is-medium is-primary"
+            <b-button
+                label="Toggle"
+                type="is-primary"
+                size="is-medium"
                 @click="isOpen = !isOpen"
-                aria-controls="contentIdForA11y2">Toggle</button>
+                aria-controls="contentIdForA11y2" />
         </div>
 
         <b-collapse

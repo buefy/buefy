@@ -3,13 +3,17 @@
         <div v-if="title" class="codeview-title">{{ title }}</div>
         <figure class="highlight" :class="figureClasses">
             <div class="button-container">
-                <button class="button is-text is-small copy-code">Copy</button>
-                <button
+                <b-button
+                    type="is-text"
+                    size="is-small"
+                    class="copy-code"
+                    label="Copy" />
+                <b-button
                     v-if="!expanded"
-                    class="button is-text is-small"
-                    @click="isExpanded = false">
-                    Hide
-                </button>
+                    type="is-text"
+                    size="is-small"
+                    label="Hide"
+                    @click="isExpanded = false" />
             </div>
             <pre v-highlight><code :class="lang">{{ code }}</code></pre>
             <button

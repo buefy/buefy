@@ -2,19 +2,22 @@
     <b-field label="Select datetime">
         <b-datetimepicker v-model="datetime"
             placeholder="Click to select...">
+
             <template slot="left">
-                <button class="button is-primary"
-                    @click="datetime = new Date()">
-                    <b-icon icon="clock"></b-icon>
-                    <span>Now</span>
-                </button>
+                <b-button
+                    label="Now"
+                    type="is-primary"
+                    icon-left="clock"
+                    @click="datetime = new Date()" />
             </template>
+
             <template slot="right">
-                <button class="button is-danger"
-                    @click="datetime = null">
-                    <b-icon icon="close"></b-icon>
-                    <span>Clear</span>
-                </button>
+                <b-button
+                    label="Clear"
+                    type="is-danger"
+                    icon-left="close"
+                    outlined
+                    @click="datetime = null" />
             </template>
         </b-datetimepicker>
     </b-field>

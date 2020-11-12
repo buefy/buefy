@@ -2,10 +2,11 @@
     <section>
 
         <b-collapse :open="false" aria-id="contentIdForA11y1">
-            <button
-                class="button is-primary"
+            <b-button
                 slot="trigger"
-                aria-controls="contentIdForA11y1">Click me!</button>
+                label="Click me!"
+                type="is-primary"
+                aria-controls="contentIdForA11y1" />
             <div class="notification">
                 <div class="content">
                     <h3>

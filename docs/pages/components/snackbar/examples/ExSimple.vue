@@ -1,17 +1,20 @@
 <template>
     <section>
         <div class="buttons">
-            <button class="button is-medium" @click="snackbar">
-                Launch snackbar (default)
-            </button>
-
-            <button class="button is-medium is-warning" @click="warning">
-                Launch snackbar (custom)
-            </button>
-
-            <button class="button is-medium is-danger" @click="danger">
-                Launch snackbar (custom)
-            </button>
+            <b-button
+                label="Launch snackbar (default)"
+                size="is-medium"
+                @click="snackbar" />
+            <b-button
+                label="Launch snackbar (custom)"
+                type="is-warning"
+                size="is-medium"
+                @click="warning" />
+            <b-button
+                label="Launch snackbar (custom)"
+                type="is-danger"
+                size="is-medium"
+                @click="danger" />
         </div>
     </section>
 </template>
