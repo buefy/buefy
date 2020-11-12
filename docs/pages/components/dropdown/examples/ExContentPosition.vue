@@ -47,7 +47,9 @@
                                     <b-checkbox>Remember me</b-checkbox>
                                 </section>
                                 <footer class="modal-card-foot">
-                                    <button class="button is-primary">Login</button>
+                                    <b-button
+                                        label="Login"
+                                        type="is-primary" />
                                 </footer>
                             </div>
                         </form>

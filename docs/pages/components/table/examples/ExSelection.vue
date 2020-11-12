@@ -1,10 +1,13 @@
 <template>
     <section>
-        <button class="button field is-danger" @click="selected = null"
-            :disabled="!selected">
-            <b-icon icon="close"></b-icon>
-            <span>Clear selected</span>
-        </button>
+        <b-field>
+            <b-button
+                label="Clear selected"
+                type="is-danger"
+                icon-left="close"
+                :disabled="!selected"
+                @click="selected = null" />
+        </b-field>
 
         <b-tabs>
             <b-tab-item label="Table">

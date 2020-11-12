@@ -1,11 +1,13 @@
 <template>
     <section>
         <b-field grouped group-multiline>
-            <button class="button field is-danger" @click="checkedRows = []"
-                :disabled="!checkedRows.length">
-                <b-icon icon="close"></b-icon>
-                <span>Clear checked</span>
-            </button>
+            <b-button
+                label="Clear checked"
+                type="is-danger"
+                icon-left="close"
+                class="field"
+                @click="checkedRows = []" />
+
             <b-select v-model="checkboxPosition">
                 <option value="left">Checkbox at left</option>
                 <option value="right">Checkbox at right</option>

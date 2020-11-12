@@ -2,10 +2,12 @@
     <section>
 
         <b-dropdown aria-role="list">
-            <button class="button is-primary" slot="trigger" slot-scope="{ active }">
-                <span>Click me!</span>
-                <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
-            </button>
+            <b-button
+                slot="trigger"
+                slot-scope="{ active }"
+                label="Click me!"
+                type="is-primary"
+                :icon-right="active ? 'menu-up' : 'menu-down'" />
 
             <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
             <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
@@ -13,10 +15,11 @@
         </b-dropdown>
 
         <b-dropdown :triggers="['hover']" aria-role="list">
-            <button class="button is-info" slot="trigger">
-                <span>Hover me!</span>
-                <b-icon icon="menu-down"></b-icon>
-            </button>
+            <b-button
+                slot="trigger"
+                label="Hover me!"
+                type="is-info"
+                icon-right="menu-down" />
 
             <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
             <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
@@ -24,10 +27,10 @@
         </b-dropdown>
 
         <b-dropdown disabled aria-role="list">
-            <button class="button" slot="trigger">
-                <span>Disabled</span>
-                <b-icon icon="menu-down"></b-icon>
-            </button>
+            <b-button
+                slot="trigger"
+                label="Disabled"
+                icon-right="menu-down" />
 
             <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
             <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
@@ -48,12 +51,10 @@
         </b-dropdown>
 
         <b-dropdown :triggers="['contextmenu']" aria-role="list">
-            <button
-                class="button is-link"
+            <b-button
                 slot="trigger"
-                role="button">
-                Right click
-            </button>
+                type="is-link"
+                label="Right click" />
 
             <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
             <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>

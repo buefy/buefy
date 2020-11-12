@@ -9,17 +9,17 @@
                 placeholder="Click to select..."
                 :hour-format="format">
 
-                <button class="button is-primary"
-                    @click="time = new Date()">
-                    <b-icon icon="clock"></b-icon>
-                    <span>Now</span>
-                </button>
-
-                <button class="button is-danger"
-                    @click="time = null">
-                    <b-icon icon="close"></b-icon>
-                    <span>Clear</span>
-                </button>
+                <b-button
+                    label="Now"
+                    type="is-primary"
+                    icon-left="clock"
+                    @click="time = new Date()" />
+                <b-button
+                    label="Clear"
+                    type="is-danger"
+                    icon-left="close"
+                    outlined
+                    @click="time = null" />
             </b-clockpicker>
         </b-field>
     </section>

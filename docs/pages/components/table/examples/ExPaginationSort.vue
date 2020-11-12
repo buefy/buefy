@@ -12,7 +12,10 @@
                 <option value="20">20 per page</option>
             </b-select>
             <div class="control">
-                <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
+                <b-button
+                    label="Set page to 2"
+                    :disabled="!isPaginated"
+                    @click="currentPage = 2" />
             </div>
             <div class="control is-flex">
                 <b-switch v-model="isPaginated">Paginated</b-switch>
