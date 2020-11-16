@@ -93,7 +93,8 @@ export default {
             default: ''
         },
         iconRight: String,
-        iconRightClickable: Boolean
+        iconRightClickable: Boolean,
+        iconRightType: String,
     },
     data() {
         return {
@@ -150,7 +151,7 @@ export default {
             if (this.passwordReveal) {
                 return 'is-primary'
             } else if (this.iconRight) {
-                return null
+                return this.iconRightType || null
             }
             return this.statusType
         },
