@@ -25,6 +25,7 @@
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
+                        :icon-right="iconRight"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -359,6 +360,7 @@ export default {
             default: () => config.defaultDatepickerMobileNative
         },
         position: String,
+        iconRight: String,
         events: Array,
         indicators: {
             type: String,
