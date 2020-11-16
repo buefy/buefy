@@ -94,7 +94,7 @@ export default {
         },
         iconRight: String,
         iconRightClickable: Boolean,
-        iconRightType: String,
+        iconRightType: String
     },
     data() {
         return {
