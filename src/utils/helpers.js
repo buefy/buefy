@@ -215,7 +215,7 @@ export function getMonthNames(locale = undefined, format = 'long') {
     }
     const dtf = new Intl.DateTimeFormat(locale, {
         month: format,
-        timezome: 'UTC'
+        timeZone: 'UTC'
     })
     return dates.map((d) => dtf.format(d))
 }
@@ -237,7 +237,7 @@ export function getWeekdayNames(locale = undefined, format = 'narrow') {
     }
     const dtf = new Intl.DateTimeFormat(locale, {
         weekday: format,
-        timezome: 'UTC'
+        timeZone: 'UTC'
     })
     return dates.map((d) => dtf.format(d))
 }
