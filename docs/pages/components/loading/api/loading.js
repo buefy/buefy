@@ -37,6 +37,13 @@ export default [
                 default: '—'
             }
         ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Loading icon',
+                props: '—'
+            },
+        ],
         events: [
             {
                 name: '<code>close</code>',
