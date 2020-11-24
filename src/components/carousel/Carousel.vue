@@ -265,6 +265,13 @@ export default {
                 this.timer = null
             }
         },
+        restartTimer() {
+            if (this.timer) {
+                clearInterval(this.timer)
+                this.timer = null
+            }
+            this.startTimer()
+        },
         checkPause() {
             if (this.pauseHover && this.autoplay) {
                 this.pauseTimer()
@@ -299,9 +306,11 @@ export default {
         },
         prev() {
             this.changeActive(this.activeChild - 1, -1)
+            this.restartTimer()
         },
         next() {
             this.changeActive(this.activeChild + 1, 1)
+            this.restartTimer()
         },
         // handle drag event
         dragStart(event) {
