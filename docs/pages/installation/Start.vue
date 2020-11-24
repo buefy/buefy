@@ -43,7 +43,7 @@
                 <div class="title is-4">Usage</div>
                 <b-message type="is-success">
                     <div class="content">
-                        Even though this is gonna import <strong>ALL</strong> components to your application,
+                        Even though this is going to import <strong>ALL</strong> components to your application,
                         Buefy full bundle is optimized and still pretty small:
                         <ul>
                             <li><strong>script</strong> is <strong>48KB</strong> min+gzip</li>
