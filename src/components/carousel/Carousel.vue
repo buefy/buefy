@@ -265,7 +265,7 @@ export default {
                 this.timer = null
             }
         },
-        restartTimer(){
+        restartTimer() {
             this.pauseTimer()
             this.startTimer()
         },
