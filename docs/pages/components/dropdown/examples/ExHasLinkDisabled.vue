@@ -10,18 +10,20 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown                    
+                <b-dropdown
                     v-model="navigation"
                     position="is-bottom-left"
                     append-to-body
                     aria-role="menu">
-                    <a
-                        class="navbar-item"
-                        slot="trigger"
-                        role="button">
-                        <span>Menu</span>
-                        <b-icon icon="menu-down"></b-icon>
-                    </a>
+                    <template #trigger>
+                        <a
+                            class="navbar-item"
+                            role="button">
+                            <span>Menu</span>
+                            <b-icon icon="menu-down"></b-icon>
+                        </a>
+                    </template>
+
 
                     <b-dropdown-item custom aria-role="menuitem">
                         Logged as <b>Rafael Beraldo</b>
