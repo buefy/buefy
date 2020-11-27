@@ -3,7 +3,7 @@
         <b-datetimepicker v-model="datetime"
             placeholder="Click to select...">
 
-            <template slot="left">
+            <template #left>
                 <b-button
                     label="Now"
                     type="is-primary"
@@ -11,7 +11,7 @@
                     @click="datetime = new Date()" />
             </template>
 
-            <template slot="right">
+            <template #right>
                 <b-button
                     label="Clear"
                     type="is-danger"

@@ -11,13 +11,15 @@
         <div class="navbar-menu">
             <div class="navbar-end">
                 <b-dropdown position="is-bottom-left" append-to-body aria-role="menu" trap-focus>
-                    <a
-                        class="navbar-item"
-                        slot="trigger"
-                        role="button">
-                        <span>Login</span>
-                        <b-icon icon="menu-down"></b-icon>
-                    </a>
+                    <template #trigger>
+                        <a
+                            class="navbar-item"
+                            role="button">
+                            <span>Login</span>
+                            <b-icon icon="menu-down"></b-icon>
+                        </a>
+                    </template>
+
 
                     <b-dropdown-item
                         aria-role="menu-item"
