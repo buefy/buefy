@@ -23,12 +23,14 @@
             v-model="currentMenu"
             aria-role="list"
         >
-            <b-button
-                slot="trigger"
-                :label="currentMenu.text"
-                type="is-primary"
-                :icon-left="currentMenu.icon"
-                icon-right="menu-down" />
+            <template #trigger>
+                <b-button
+                    :label="currentMenu.text"
+                    type="is-primary"
+                    :icon-left="currentMenu.icon"
+                    icon-right="menu-down" />
+            </template>
+
 
             <b-dropdown-item
                 v-for="(menu, index) in menus"

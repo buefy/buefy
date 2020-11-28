@@ -15,13 +15,14 @@
             class="panel"
             animation="slide"
             v-model="isOpen">
-            <div
-                slot="trigger"
-                class="panel-heading"
-                role="button"
-                aria-controls="contentIdForA11y2">
-                <strong>Title</strong>
-            </div>
+            <template #trigger>
+                <div
+                    class="panel-heading"
+                    role="button"
+                    aria-controls="contentIdForA11y2">
+                    <strong>Title</strong>
+                </div>
+            </template>
             <p class="panel-tabs">
                 <a class="is-active">All</a>
                 <a>Public</a>

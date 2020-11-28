@@ -24,7 +24,7 @@
                     checkable
                     :checkbox-position="checkboxPosition">
 
-                    <template slot="bottom-left">
+                    <template #bottom-left>
                         <b>Total checked</b>: {{ checkedRows.length }}
                     </template>
                 </b-table>

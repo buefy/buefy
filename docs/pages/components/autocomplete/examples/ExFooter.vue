@@ -8,12 +8,12 @@
                 :data="filteredDataArray"
                 placeholder="e.g. Orange"
                 @select="option => selected = option">
-                <template slot="footer">
+                <template #footer>
                     <a @click="showAddFruit">
                         <span> Add new... </span>
-                    </a> 
+                    </a>
                 </template>
-                <template slot="empty">No results for {{name}}</template>
+                <template #empty>No results for {{name}}</template>
             </b-autocomplete>
         </b-field>
     </section>

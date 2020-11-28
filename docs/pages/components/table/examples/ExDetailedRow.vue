@@ -56,7 +56,7 @@
                 </span>
             </b-table-column>
 
-            <template slot="detail" slot-scope="props">
+            <template #detail="props">
                 <article class="media">
                     <figure class="media-left">
                         <p class="image is-64x64">

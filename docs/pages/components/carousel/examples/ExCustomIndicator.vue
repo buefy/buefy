@@ -5,9 +5,9 @@
               <img :src="getImgUrl(i)">
             </span>
         </b-carousel-item>
-        <template slot="indicators" slot-scope="props">
+        <template #indicators="props">
             <span class="al image">
-                <img :src="getImgUrl(props.i)" :title="props.i">
+               <img :src="getImgUrl(props.i)" :title="props.i">
             </span>
         </template>
     </b-carousel>

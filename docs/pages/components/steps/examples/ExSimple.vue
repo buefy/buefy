@@ -86,8 +86,7 @@
 
             <template
                 v-if="customNavigation"
-                slot="navigation"
-                slot-scope="{previous, next}">
+                #navigation="{previous, next}">
                 <b-button
                     outlined
                     type="is-danger"

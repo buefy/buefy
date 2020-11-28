@@ -1,20 +1,22 @@
 <template>
     <b-dropdown v-model="isPublic" aria-role="list">
 
-        <b-button
-            v-if="isPublic"
-            slot="trigger"
-            label="Public"
-            type="is-primary"
-            icon-left="earth"
-            icon-right="menu-down" />
-        <b-button
-            v-else
-            slot="trigger"
-            label="Friends"
-            type="is-primary"
-            icon-left="account-multiple"
-            icon-right="menu-down" />
+        <template v-if="isPublic" #trigger>
+            <b-button
+                label="Public"
+                type="is-primary"
+                icon-left="earth"
+                icon-right="menu-down" />
+        </template>
+
+        <template v-else #trigger>
+            <b-button
+                label="Friends"
+                type="is-primary"
+                icon-left="account-multiple"
+                icon-right="menu-down" />
+        </template>
+
 
         <b-dropdown-item :value="true" aria-role="listitem">
             <div class="media">

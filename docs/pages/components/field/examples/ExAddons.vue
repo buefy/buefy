@@ -59,7 +59,9 @@
             </p>
             <p class="control">
                 <b-dropdown>
-                    <b-button slot="trigger" type="is-primary" icon-left="menu-down" />
+                    <template #trigger>
+                        <b-button type="is-primary" icon-left="menu-down" />
+                    </template>
 
                     <b-dropdown-item>Action</b-dropdown-item>
                     <b-dropdown-item>Another action</b-dropdown-item>
@@ -71,7 +73,9 @@
         <b-field>
             <p class="control">
                 <b-dropdown>
-                    <b-button slot="trigger" label="Filters" icon-right="menu-down" />
+                    <template #trigger>
+                        <b-button label="Filters" icon-right="menu-down" />
+                    </template>
 
                     <b-dropdown-item value="open_issues">Open Issues and Pull Requests</b-dropdown-item>
                     <b-dropdown-item value="your_issues">Your Issues</b-dropdown-item>

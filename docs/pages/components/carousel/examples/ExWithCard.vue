@@ -1,6 +1,6 @@
 <template>
     <b-carousel-list v-model="test" :data="items" :items-to-show="2">
-        <template slot="item" slot-scope="list">
+        <template #item="list">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-5by4">

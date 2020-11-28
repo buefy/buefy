@@ -5,12 +5,14 @@
             v-model="selectedOptions"
             multiple
             aria-role="list">
-            <b-button
-                slot="trigger"
-                type="is-primary"
-                icon-right="menu-down">
-                Selected ({{ selectedOptions.length }})
-            </b-button>
+            <template #trigger>
+                <b-button
+                    type="is-primary"
+                    icon-right="menu-down">
+                    Selected ({{ selectedOptions.length }})
+                </b-button>
+            </template>
+
 
             <b-dropdown-item value="option1" aria-role="listitem">
                 <span>Option 1</span>
