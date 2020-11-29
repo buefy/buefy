@@ -66,6 +66,13 @@ export default [
                 type: 'Function',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>cancelText</code>',
+                description: `Snackbar's cancel button text. Default is no cancel button`,
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         methods: [

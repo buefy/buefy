@@ -80,6 +80,9 @@ $snackbar-box-shadow: $notices-box-shadow !default;
                 }
             }
         }
+        .action.is-cancel {
+            padding-right: 0;
+        }
         @include mobile {
             width: 100%;
             margin: 0;

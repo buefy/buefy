@@ -356,6 +356,11 @@ export declare type BSnackbarConfig = BNoticeConfig & {
     actionText?: string | null;
 
     /**
+     * Snackbar's cancel button text
+     */
+    cancelText?: string | null;
+
+    /**
      * Show the Snackbar indefinitely until it is dismissed
      */
     indefinite?: boolean;
