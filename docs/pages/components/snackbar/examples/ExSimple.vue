@@ -15,6 +15,10 @@
                 type="is-danger"
                 size="is-medium"
                 @click="danger" />
+            <b-button
+                label="Launch snackbar (with cancel)"
+                size="is-medium"
+                @click="hasCancel" />
         </div>
     </section>
 </template>
@@ -54,6 +58,13 @@
                             queue: false
                         })
                     }
+                })
+            },
+            hasCancel() {
+                this.$buefy.snackbar.open({
+                    indefinite: true,
+                    message: 'Snackbar with a cancel button.',
+                    cancelText: 'Cancel',
                 })
             }
         }

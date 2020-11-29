@@ -14,6 +14,12 @@
                 <div class="text" v-html="message" />
             </template>
             <div
+                v-if="cancelText"
+                class="action is-light is-cancel"
+                @click="close">
+                <button class="button">{{ cancelText }}</button>
+            </div>
+            <div
                 v-if="actionText"
                 class="action"
                 @click="action"
@@ -39,6 +45,10 @@ export default {
         onAction: {
             type: Function,
             default: () => {}
+        },
+        cancelText: {
+            type: String | null,
+            default: null
         },
         indefinite: {
             type: Boolean,
