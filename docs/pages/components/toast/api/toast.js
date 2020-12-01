@@ -40,6 +40,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>indefinite</code>',
+                description: 'Show indefinitely until it is dismissed programmatically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>container</code>',
                 description: 'DOM element the toast will be created on. Note that this also changes the <code>position</code> of the toast from <code>fixed</code> to <code>absolute</code>. Meaning that the container should be <code>fixed</code>. Also note that this will override the <code>defaultContainerElement</code> if you specified it in your Buefy Constructor Options. See Constructor options for more details.',
                 type: 'String',
