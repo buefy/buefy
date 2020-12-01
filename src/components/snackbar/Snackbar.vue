@@ -49,10 +49,6 @@ export default {
         cancelText: {
             type: String | null,
             default: null
-        },
-        indefinite: {
-            type: Boolean,
-            default: false
         }
     },
     data() {

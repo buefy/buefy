@@ -322,12 +322,12 @@ export declare type BNoticeConfig = {
     message: string | any[];
 
     /**
-    * Type (color) of the toast
+    * Type (color)
     */
     type?: ColorModifiers;
 
     /**
-    * Which position the toast will appear
+    * Which position it will appear
     */
     position?: GlobalPositions;
 
@@ -337,8 +337,13 @@ export declare type BNoticeConfig = {
     duration?: number;
 
     /**
-    * DOM element the toast will be created on.
-    * Note that this also changes the position of the toast from fixed
+     * Show indefinitely until it is dismissed
+     */
+    indefinite?: boolean;
+
+    /**
+    * DOM element it will be created on.
+    * Note that this also changes the position of the element from fixed
     * to absolute. Meaning that the container should be fixed.
     */
     container?: string;
@@ -361,11 +366,6 @@ export declare type BSnackbarConfig = BNoticeConfig & {
     cancelText?: string | null;
 
     /**
-     * Show the Snackbar indefinitely until it is dismissed
-     */
-    indefinite?: boolean;
-
-    /**
      * 	Callback function when the button is clicked
      */
     onAction?: () => any;
@@ -380,11 +380,6 @@ export declare const ToastProgrammatic: {
 }
 
 export declare type BNotificationConfig = BNoticeConfig & {
-    /**
-     * Show the Notification indefinitely until it is dismissed
-     */
-    indefinite?: boolean;
-
     /**
      * Adds an icon on the left side
      */
