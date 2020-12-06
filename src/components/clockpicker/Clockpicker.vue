@@ -30,7 +30,7 @@
                         @keyup.native.enter="toggle(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus"
-                        @blur="onBlur() && checkHtml5Validity()"/>
+                        @blur="checkHtml5Validity()"/>
                 </slot>
             </template>
             <div
