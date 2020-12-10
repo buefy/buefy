@@ -10,7 +10,35 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <b-dropdown position="is-bottom-left" append-to-body aria-role="menu" trap-focus>
+                <b-dropdown
+                    append-to-body
+                    aria-role="menu"
+                    scrollable
+                    max-height="200"
+                    trap-focus
+                >
+                    <template #trigger>
+                        <a
+                            class="navbar-item"
+                            role="button">
+                            <span>Categories</span>
+                            <b-icon icon="menu-down"></b-icon>
+                        </a>
+                    </template>
+
+                    <b-dropdown-item custom aria-role="listitem">
+                      <b-input v-model="searchTerm" placeholder="search" expanded />
+                  </b-dropdown-item>
+
+                    <b-dropdown-item v-for="item of filteredData" :key="item" aria-role="listitem">{{item}}</b-dropdown-item>
+                </b-dropdown>
+
+                <b-dropdown
+                    position="is-bottom-left"
+                    append-to-body
+                    aria-role="menu"
+                    trap-focus
+                >
                     <template #trigger>
                         <a
                             class="navbar-item"
@@ -61,3 +89,32 @@
         </div>
     </nav>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                searchTerm: '',
+                  data: [
+                    'Angular',
+                    'Angular 2',
+                    'Aurelia',
+                    'Backbone',
+                    'Ember',
+                    'jQuery',
+                    'Meteor',
+                    'Node.js',
+                    'Polymer',
+                    'React',
+                    'RxJS',
+                    'Vue.js'
+                ],
+            }
+        },
+        computed: {
+            filteredData() {
+                return this.data.filter((item) => item.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >= 0);
+            }
+        }
+    }
+</script>
