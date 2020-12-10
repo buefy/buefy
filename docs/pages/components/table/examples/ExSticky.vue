@@ -12,7 +12,6 @@
             :data="data"
             :columns="columns"
             :sticky-header="stickyHeaders"
-            striped
         ></b-table>
         <br />
         Use <code>checkable</code> and <code>sticky-checkbox</code> to make a sticky checkbox column.
@@ -24,6 +23,7 @@
             :sticky-header="stickyHeaders"
             checkable
             sticky-checkbox
+            striped
         ></b-table>
     </section>
 </template>
@@ -107,8 +107,8 @@ export default {
                     width: "40",
                     numeric: true,
                     sticky: true,
-                    //headerClass: "is-sticky-column-one",
-                    //cellClass: "is-sticky-column-one"
+                    headerClass: "is-sticky-column-one",
+                    cellClass: "is-sticky-column-one"
                 },
                 {
                     field: "user.first_name",
