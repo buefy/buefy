@@ -22,7 +22,7 @@
             <slot v-else name="label" />
         </a>
         <div
-            v-show="!collapsible || (collapsible && newActive)"
+            v-show="isShowDropDownItems"
             class="navbar-dropdown"
             :class="{
                 'is-right': right,
@@ -36,12 +36,14 @@
 
 <script>
 import clickOutside from '../../directives/clickOutside'
+import { isMobile } from '@utils/helpers'
 
 export default {
     name: 'BNavbarDropdown',
     directives: {
         clickOutside
     },
+
     props: {
         label: String,
         hoverable: Boolean,
@@ -56,6 +58,7 @@ export default {
         collapsible: Boolean
 
     },
+
     data() {
         return {
             newActive: this.active,
@@ -63,11 +66,23 @@ export default {
             _isNavbarDropdown: true // Used internally by NavbarItem
         }
     },
+
+    computed: {
+        isShowDropDownItems() {
+            if (isMobile.any()) {
+                return !this.collapsible || (this.collapsible && this.newActive)
+            }
+
+            return true
+        }
+    },
+
     watch: {
         active(value) {
             this.newActive = value
         }
     },
+
     methods: {
         showMenu() {
             this.newActive = true
@@ -77,6 +92,7 @@ export default {
         */
         closeMenu() {
             this.newActive = !this.closeOnClick
+
             if (this.hoverable && this.closeOnClick) {
                 this.isHoverable = false
             }
