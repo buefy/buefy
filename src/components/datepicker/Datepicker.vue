@@ -536,16 +536,12 @@ export default {
          * dates are set by props, range of years will fall within those dates.
          */
         listOfYears() {
+            let latestYear, earliestYear
 
-            let latestYear , earliestYear;
-
-            if(this.explicitYears){
-
-                latestYear   = this.maxDate.getFullYear();
-                earliestYear = this.minDate.getFullYear();
-
-            }else{
-
+            if (this.explicitYears) {
+                latestYear = this.maxDate.getFullYear()
+                earliestYear = this.minDate.getFullYear()
+            } else {
                 latestYear = this.focusedDateData.year + this.yearsRange[1]
                 if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
                     latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year)
@@ -556,7 +552,6 @@ export default {
                     earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year)
                 }
             }
-          
 
             const arrayOfYears = []
             for (let i = earliestYear; i <= latestYear; i++) {
