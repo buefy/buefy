@@ -420,6 +420,10 @@ export default {
             type: Boolean,
             default: false
         },
+        explicitYears: {
+            type: Boolean,
+            default: false
+        },
         closeOnClick: {
             type: Boolean,
             default: true
@@ -532,15 +536,27 @@ export default {
          * dates are set by props, range of years will fall within those dates.
          */
         listOfYears() {
-            let latestYear = this.focusedDateData.year + this.yearsRange[1]
-            if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
-                latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year)
-            }
 
-            let earliestYear = this.focusedDateData.year + this.yearsRange[0]
-            if (this.minDate && this.minDate.getFullYear() > earliestYear) {
-                earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year)
+            let latestYear , earliestYear;
+
+            if(this.explicitYears){
+
+                latestYear   = this.maxDate.getFullYear();
+                earliestYear = this.minDate.getFullYear();
+
+            }else{
+
+                latestYear = this.focusedDateData.year + this.yearsRange[1]
+                if (this.maxDate && this.maxDate.getFullYear() < latestYear) {
+                    latestYear = Math.max(this.maxDate.getFullYear(), this.focusedDateData.year)
+                }
+
+                earliestYear = this.focusedDateData.year + this.yearsRange[0]
+                if (this.minDate && this.minDate.getFullYear() > earliestYear) {
+                    earliestYear = Math.min(this.minDate.getFullYear(), this.focusedDateData.year)
+                }
             }
+          
 
             const arrayOfYears = []
             for (let i = earliestYear; i <= latestYear; i++) {
