@@ -149,7 +149,7 @@ export default {
                 : this.canCancel
         },
         showX() {
-            return this.cancelOptions.indexOf('x') >= 0 && !this.hasModalCard
+            return this.cancelOptions.indexOf('x') >= 0
         },
         customStyle() {
             if (!this.fullScreen) {
