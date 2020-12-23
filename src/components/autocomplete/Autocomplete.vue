@@ -63,12 +63,13 @@
                             @click="setSelected(option, undefined, $event)"
                         >
                             <slot
-                                v-if="hasDefaultSlot"
                                 :option="option"
-                                :index="index" />
-                            <span v-else>
-                                {{ getValue(option, true) }}
-                            </span>
+                                :index="index"
+                            >
+                                <span>
+                                    {{ getValue(option, true) }}
+                                </span>
+                            </slot>
                         </a>
                     </template>
                     <div
