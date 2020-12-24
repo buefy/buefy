@@ -55,6 +55,8 @@
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
+                @compositionstart.native="isComposing = true"
+                @compositionend.native="isComposing = false"
                 @select="onSelect"
                 @infinite-scroll="emitInfiniteScroll">
                 <template
@@ -186,6 +188,7 @@ export default {
         return {
             tags: Array.isArray(this.value) ? this.value.slice(0) : (this.value || []),
             newTag: '',
+            isComposing: false,
             _elementRef: 'autocomplete',
             _isTaginput: true
         }
@@ -339,6 +342,7 @@ export default {
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // Allow Tab to advance to next field regardless
                 if (key !== 'Tab') event.preventDefault()
+                if (key === 'Enter' && this.isComposing) return
                 this.addTag()
             }
         },
