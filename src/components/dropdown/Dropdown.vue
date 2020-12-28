@@ -336,6 +336,7 @@ export default {
                     parentNode.classList.forEach((item) => {
                         parent.classList.add(item)
                     })
+                    parentNode.style.zIndex = this.isActive ? '-1' : '0'
                 }
                 const rect = trigger.getBoundingClientRect()
                 let top = rect.top + window.scrollY
