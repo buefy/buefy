@@ -326,7 +326,11 @@ export default {
         data(value) {
             // Keep first option always pre-selected
             if (this.keepFirst) {
-                this.selectFirstOption(this.computedData)
+                this.$nextTick(() => {
+                    if (this.isActive) {
+                        this.selectFirstOption(this.computedData)
+                    }
+                })
             }
         }
     },
@@ -396,7 +400,13 @@ export default {
          */
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) this.isActive = false
+            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
+                if (this.keepFirst && this.hovered) {
+                    this.setSelected(this.hovered, true)
+                } else {
+                    this.isActive = false
+                }
+            }
         },
 
         /**
