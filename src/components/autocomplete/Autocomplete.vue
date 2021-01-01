@@ -326,7 +326,11 @@ export default {
         data(value) {
             // Keep first option always pre-selected
             if (this.keepFirst) {
-                this.selectFirstOption(this.computedData)
+                this.$nextTick(() => {
+                    if (this.isActive) {
+                        this.selectFirstOption(this.computedData)
+                    }
+                })
             }
         }
     },
