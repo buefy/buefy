@@ -13,6 +13,7 @@
             v-trap-focus="trapFocus"
             tabindex="-1"
             :role="ariaRole"
+            :aria-label="ariaLabel"
             :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
@@ -124,6 +125,12 @@ export default {
             }
         },
         ariaModal: Boolean,
+        ariaLabel: {
+            type: String,
+            validator: (value) => {
+                return Boolean(value)
+            }
+        },
         destroyOnHide: {
             type: Boolean,
             default: true
