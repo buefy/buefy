@@ -166,6 +166,11 @@ export declare type BDialogConfig = {
     ariaRole?: 'dialog' | 'alertdialog';
 
    /**
+    * Aria label attribute to be passed to modal container for better accessibility.
+    */
+   ariaLabel?: string;
+
+   /**
     * Improve accessiblity when enabled.
     */
    ariaModal?: boolean;
