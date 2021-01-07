@@ -233,7 +233,7 @@ export default {
         checkAsIndicator(value, event) {
             if (!this.asIndicator) return
 
-            const dragEndX = event.touches ? event.touches[0].clientX : event.clientX
+            const dragEndX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX
             if (this.hold - Date.now() > 2000 || Math.abs(this.dragX - dragEndX) > 10) return
 
             this.dragX = false
@@ -256,7 +256,8 @@ export default {
         },
         dragMove(event) {
             if (!this.dragging) return
-            const dragEndX = event.touches ? event.touches[0].clientX : event.clientX
+            const dragEndX = event.touches
+                ? (event.changedTouches[0] || event.touches[0]).clientX : event.clientX
             this.delta = this.dragX - dragEndX
             if (!event.touches) {
                 event.preventDefault()
