@@ -256,8 +256,8 @@ export default {
         },
         dragMove(event) {
             if (!this.dragging) return
-            const dragEndX = event.touches ?
-                (event.changedTouches[0] || event.touches[0]).clientX : event.clientX
+            const dragEndX = event.touches
+                ? (event.changedTouches[0] || event.touches[0]).clientX : event.clientX
             this.delta = this.dragX - dragEndX
             if (!event.touches) {
                 event.preventDefault()
