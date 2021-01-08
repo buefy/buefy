@@ -92,35 +92,13 @@ export default {
             },
             immediate: true
         },
-        fixedTop: {
-            handler(isSet) {
-                this.checkIfFixedPropertiesAreColliding()
-                if (isSet) {
-                    // TODO Apply only one of the classes once PR is merged in Bulma:
-                    // https://github.com/jgthms/bulma/pull/2737
-                    this.setBodyClass(BODY_FIXED_TOP_CLASS)
-                    this.spaced && this.setBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
-                } else {
-                    this.removeBodyClass(BODY_FIXED_TOP_CLASS)
-                    this.removeBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
-                }
-            },
-            immediate: true
+        fixedTop(isSet) {
+            // toggle body class only on update to handle multiple navbar
+            this.setBodyFixedTopClass(isSet)
         },
-        fixedBottom: {
-            handler(isSet) {
-                this.checkIfFixedPropertiesAreColliding()
-                if (isSet) {
-                    // TODO Apply only one of the classes once PR is merged in Bulma:
-                    // https://github.com/jgthms/bulma/pull/2737
-                    this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
-                    this.spaced && this.setBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
-                } else {
-                    this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
-                    this.removeBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
-                }
-            },
-            immediate: true
+        bottomTop(isSet) {
+            // toggle body class only on update to handle multiple navbar
+            this.setBodyFixedBottomClass(isSet)
         }
     },
     methods: {
@@ -221,7 +199,35 @@ export default {
             return createElement('div', {
                 staticClass: `navbar-${positionName}`
             }, this.$slots[positionName])
+        },
+        setBodyFixedTopClass(isSet) {
+            this.checkIfFixedPropertiesAreColliding()
+            if (isSet) {
+                // TODO Apply only one of the classes once PR is merged in Bulma:
+                // https://github.com/jgthms/bulma/pull/2737
+                this.setBodyClass(BODY_FIXED_TOP_CLASS)
+                this.spaced && this.setBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
+            } else {
+                this.removeBodyClass(BODY_FIXED_TOP_CLASS)
+                this.removeBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
+            }
+        },
+        setBodyFixedBottomClass(isSet) {
+            this.checkIfFixedPropertiesAreColliding()
+            if (isSet) {
+                // TODO Apply only one of the classes once PR is merged in Bulma:
+                // https://github.com/jgthms/bulma/pull/2737
+                this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                this.spaced && this.setBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
+            } else {
+                this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                this.removeBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
+            }
         }
+    },
+    beforeMount() {
+        this.fixedTop && this.setBodyFixedTopClass(true)
+        this.fixedBottom && this.setBodyFixedBottomClass(true)
     },
     beforeDestroy() {
         if (this.fixedTop) {
