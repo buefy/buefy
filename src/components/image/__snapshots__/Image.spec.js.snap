@@ -5,3 +5,8 @@ exports[`BImage render correctly 1`] = `
     <!---->
 </figure>
 `;
+
+exports[`BImage render placeholder correctly 1`] = `
+<figure class="b-image-wrapper image">
+    <!----> <img src="my-image-source.png" alt="Alt text" class="placeholder" name="fade"></figure>
+`;

@@ -25,6 +25,7 @@
             >
                 <img
                     :src="computedPlaceholder"
+                    :alt="alt"
                     :class="imgClasses"
                     class="placeholder"
                 >
