@@ -23,6 +23,22 @@ describe('BImage', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
+    it('render placeholder correctly', () => {
+        const baseName = 'my-image-source'
+        const alt = 'Alt text'
+        const placeholder = `${baseName}.png`
+        const src = `${baseName}.webp`
+        const wrapper = shallowMount(BImage, {
+            propsData: {
+                alt,
+                placeholder,
+                src
+            }
+        })
+
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('compute the image src as expected', () => {
         const baseName = 'my-image-source'
         const src = `${baseName}.webp`
