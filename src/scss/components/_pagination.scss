@@ -1,8 +1,8 @@
 .pagination {
     .pagination-next,
     .pagination-previous {
-        padding-left: 0.25em;
-        padding-right: 0.25em;
+        padding-left: 0.75em;
+        padding-right: 0.75em;
         &.is-disabled {
             pointer-events: none;
             cursor: not-allowed;
