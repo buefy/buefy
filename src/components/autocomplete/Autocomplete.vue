@@ -351,7 +351,7 @@ export default {
         setSelected(option, closeDropdown = true, event = undefined) {
             if (option === undefined) return
 
-            this.selected = option
+            this.selected = option === null ? {} : option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
                 this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
