@@ -7,7 +7,7 @@
         class="pagination-link"
         :class="{ 'is-current': page.isCurrent, [page.class]: true }"
         v-bind="$attrs"
-        @click.prevent="page.click"
+        @click.prevent="()=>(page.click(),$emit('update:page',page + 1))"
         :aria-label="page['aria-label']"
         :aria-current="page.isCurrent">
         <slot>{{ page.number }}</slot>
