@@ -23,6 +23,7 @@
             <b-button type="is-light">Light</b-button>
             <b-button type="is-dark">Dark</b-button>
             <b-button type="is-text">Text</b-button>
+            <b-button type="is-ghost">Ghost</b-button>
         </div>
 
         <div class="buttons">
