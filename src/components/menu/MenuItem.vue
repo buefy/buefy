@@ -6,7 +6,8 @@
             :class="{
                 'is-active': newActive,
                 'is-expanded': newExpanded,
-                'is-disabled': disabled
+                'is-disabled': disabled,
+                'icon-text': icon,
             }"
             @click="onClick($event)"
             v-on="$listeners">
