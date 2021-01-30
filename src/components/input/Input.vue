@@ -114,7 +114,11 @@ export default {
             },
             set(value) {
                 this.newValue = value
-                this.$emit('input', value)
+                if (isNaN(value)) {
+                    this.$emit('input', value)
+                } else {
+                    this.$emit('input', Number(value))
+                }
             }
         },
         rootClasses() {
