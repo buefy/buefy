@@ -332,6 +332,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>draggable-column</code>',
+                description: 'Allows columns to be draggable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>backend-filtering</code>',
                 description: `Columns won't be filtered with Javascript, use with <code>searchable</code> prop to the columns to filter in your backend`,
                 type: 'Boolean',
