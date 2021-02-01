@@ -552,6 +552,31 @@ export default [
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
             },
             {
+                name: '<code>columndragstart</code>',
+                description: 'Triggers when starting to drag a column',
+                parameters: '<code> column: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragend</code>',
+                description: 'Triggers when ending to drag a column',
+                parameters: '<code> column: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndrop</code>',
+                description: 'Triggers when dropping on a column',
+                parameters: '<code> column: Object </code>, <code> drop: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragover</code>',
+                description: 'Triggers when dragging over a column',
+                parameters: '<code> column: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragleave</code>',
+                description: 'Triggers after dragging over a column',
+                parameters: '<code> column: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
                 parameters: '<code> row: Object </code>, <code> event: Event </code>'
