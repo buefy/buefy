@@ -30,6 +30,7 @@ const components = fs
 const entries = {
     'index': './src/index.js',
     'helpers': './src/utils/helpers.js',
+    'config': './src/utils/ConfigComponent.js',
     ...components.reduce((obj, name) => {
         obj[name] = (baseFolder + componentsFolder + name)
         return obj
