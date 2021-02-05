@@ -155,4 +155,29 @@ describe('BImage', () => {
 
         expect(window.removeEventListener).toBeCalledWith('resize', expect.any(Function))
     })
+
+    describe('has caption', () => {
+        it('as last element', () => {
+            const wrapper = shallowMount(BImage, {
+                slots: {
+                    caption: ['<div>This is a caption</div>']
+                }
+            })
+
+            expect(wrapper.html()).toMatchSnapshot()
+        })
+
+        it('as first element', () => {
+            const wrapper = shallowMount(BImage, {
+                slots: {
+                    caption: ['<div>This is a caption</div>']
+                },
+                propsData: {
+                    captionFirst: true
+                }
+            })
+
+            expect(wrapper.html()).toMatchSnapshot()
+        })
+    })
 })
