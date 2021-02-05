@@ -1,7 +1,7 @@
 <template>
     <b-carousel-list v-model="test" :data="items" :items-to-show="2">
         <template #item="list">
-            <div class="card">
+            <b-carousel-list-item class="card">
                 <div class="card-image">
                     <figure class="image is-5by4">
                         <a @click="info(list.index)"><img :src="list.image"></a>
@@ -22,7 +22,7 @@
                         </b-field>
                     </div>
                 </div>
-            </div>
+            </b-carousel-list-item>
         </template>
     </b-carousel-list>
 </template>
