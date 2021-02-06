@@ -15,7 +15,8 @@
         transition-property: opacity, visibility, transform;
     }
 
-    .navbar-item.has-dropdown.is-active .is-boxed{
+    .navbar-item.has-dropdown.is-active .is-boxed,
+    .navbar-item.has-dropdown.is-hoverable:hover .is-boxed {
         visibility: visible;
     }
 }
