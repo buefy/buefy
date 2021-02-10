@@ -4,6 +4,9 @@
         :class="figureClasses"
         :style="figureStyles"
     >
+        <figcaption v-if="isCaptionFirst">
+            <slot name="caption" />
+        </figcaption>
         <transition name="fade">
             <img
                 v-if="isDisplayed"
@@ -25,11 +28,15 @@
             >
                 <img
                     :src="computedPlaceholder"
+                    :alt="alt"
                     :class="imgClasses"
                     class="placeholder"
                 >
             </slot>
         </transition>
+        <figcaption v-if="isCaptionLast">
+            <slot name="caption" />
+        </figcaption>
     </figure>
 </template>
 
@@ -81,6 +88,10 @@ export default {
             }
         },
         rounded: {
+            type: Boolean,
+            default: false
+        },
+        captionFirst: {
             type: Boolean,
             default: false
         }
@@ -210,6 +221,12 @@ export default {
             if (this.computedSrcset && this.computedWidth) {
                 return `${this.computedWidth}px`
             }
+        },
+        isCaptionFirst() {
+            return this.$slots.caption && this.captionFirst
+        },
+        isCaptionLast() {
+            return this.$slots.caption && !this.captionFirst
         }
     },
     methods: {

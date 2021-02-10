@@ -143,7 +143,7 @@ export default {
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
                 : this.width,
-            animating: true,
+            animating: !this.active,
             destroyed: !this.active
         }
     },
