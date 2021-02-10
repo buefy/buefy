@@ -261,7 +261,7 @@ $table-sticky-header-height: 300px !default;
                     position: -webkit-sticky;
                     position: sticky;
                     top: 0;
-                    z-index: 2;
+                    z-index: 200;
                     background: $table-background-color;
                 }
             }
