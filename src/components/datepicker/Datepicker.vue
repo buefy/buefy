@@ -489,13 +489,13 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
                 month: this.localeOptions.month || '2-digit',
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         newMonthNames() {

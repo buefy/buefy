@@ -13,7 +13,7 @@ export default [
                 description: 'Function to format date to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timeZone: "UTC" }).format(date)</code>'
             },
             {
                 name: '<code>date-parser</code>',
