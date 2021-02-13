@@ -28,7 +28,7 @@
         <b-input
             type="number"
             ref="input"
-            v-model.number="computedValue"
+            v-model="computedValue"
             v-bind="$attrs"
             :step="minStepNumber"
             :max="max"
@@ -153,7 +153,9 @@ export default {
                     }
                 }
                 this.newValue = newValue
-                this.$emit('input', newValue)
+                if (!isNaN(newValue) && newValue !== null && newValue !== '-0') {
+                    this.$emit('input', Number(newValue))
+                }
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             }
         },
