@@ -331,7 +331,7 @@ export default {
         },
 
         changeFocus(day, inc) {
-            const nextDay = day
+            const nextDay = new Date(day)
             nextDay.setDate(day.getDate() + inc)
             while (
                 (!this.minDate || nextDay > this.minDate) &&
@@ -340,6 +340,7 @@ export default {
             ) {
                 nextDay.setDate(day.getDate() + Math.sign(inc))
             }
+            this.setRangeHoverEndDate(nextDay)
             this.$emit('change-focus', nextDay)
         }
     }
