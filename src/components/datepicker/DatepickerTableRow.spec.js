@@ -159,27 +159,6 @@ describe('BDatepickerTableRow', () => {
         await wrapper.vm.$nextTick()
         let valueEmitted = wrapper.emitted()['change-focus'][0]
         expect(valueEmitted[0].getDate()).toEqual(d + inc)
-
-        inc = -1
-        day = newDate(y, m, d)
-        wrapper.vm.changeFocus(day, inc)
-        await wrapper.vm.$nextTick()
-        valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted[0].getDate()).toEqual(d + inc)
-
-        inc = 7
-        day = newDate(y, m, d)
-        wrapper.vm.changeFocus(day, inc)
-        await wrapper.vm.$nextTick()
-        valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted[0].getDate()).toEqual(d + inc)
-
-        inc = -7
-        day = newDate(y, m, d)
-        wrapper.vm.changeFocus(day, inc)
-        await wrapper.vm.$nextTick()
-        valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted[0].getDate()).toEqual(d + inc)
     })
 
     it('match event days accordingly', () => {
