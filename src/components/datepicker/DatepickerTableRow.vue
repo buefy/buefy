@@ -342,7 +342,7 @@ export default {
         },
 
         changeFocus(day, inc) {
-            const nextDay = new Date(day)
+            const nextDay = new Date(day.getTime())
             nextDay.setDate(day.getDate() + inc)
             while (
                 (!this.minDate || nextDay > this.minDate) &&
