@@ -231,7 +231,7 @@ export default {
          * Show the input field if a maxtags hasn't been set or reached.
          */
         hasInput() {
-            return this.maxtags == null || this.tagsLength < this.maxtags
+            return this.maxtags == null || this.maxtags === 1 || this.tagsLength < this.maxtags
         },
 
         tagsLength() {
@@ -281,6 +281,9 @@ export default {
                 // or previously added (if not allowDuplicates).
                 const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
                 if (add && this.beforeAdding(tagToAdd)) {
+                    if (this.maxtags === 1) {
+                        this.tags = [] // replace existing tag if only 1 is allowed
+                    }
                     this.tags.push(this.createTag(tagToAdd))
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
