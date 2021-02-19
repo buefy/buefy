@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import config from '../../utils/config'
+
 export default {
     name: 'BSwitch',
     props: {
@@ -50,7 +52,9 @@ export default {
         },
         rounded: {
             type: Boolean,
-            default: true
+            default: () => {
+                return config.defaultSwitchRounded
+            }
         },
         outlined: {
             type: Boolean,
