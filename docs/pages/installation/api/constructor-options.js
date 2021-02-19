@@ -333,6 +333,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>defaultSwitchRounded</code>',
+                description: 'Default config to make all switch rounded.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>defaultCarouselInterval</code>',
                 description: 'Default carousel <code>interval</code> attribute',
                 type: 'Number',

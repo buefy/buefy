@@ -53,6 +53,7 @@ export declare type BuefyConfig = {
     defaultClockpickerMinutesLabel?: string;
     defaultTrapFocus?: boolean;
     defaultButtonRounded?: boolean;
+    defaultSwitchRounded?: boolean;
     defaultCarouselInterval?: number;
     defaultTabsExpanded?: boolean;
     defaultTabsAnimated?: boolean;
