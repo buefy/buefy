@@ -9,10 +9,10 @@
                 icon="label"
                 placeholder="Add a tag"
                 @typing="getFilteredTags">
-                <template slot-scope="props">
+                <template v-slot="props">
                     <strong>{{props.option.id}}</strong>: {{props.option.user.first_name}}
                 </template>
-                <template slot="empty">
+                <template #empty>
                     There are no items
                 </template>
             </b-taginput>

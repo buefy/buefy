@@ -12,13 +12,19 @@
                 <option value="20">20 per page</option>
             </b-select>
             <div class="control">
-                <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
+                <b-button
+                    label="Set page to 2"
+                    :disabled="!isPaginated"
+                    @click="currentPage = 2" />
             </div>
             <div class="control is-flex">
                 <b-switch v-model="isPaginated">Paginated</b-switch>
             </div>
             <div class="control is-flex">
                 <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
+            </div>
+            <div class="control is-flex">
+                <b-switch v-model="isPaginationRounded" :disabled="!isPaginated">Rounded pagination</b-switch>
             </div>
             <b-select v-model="paginationPosition" :disabled="!isPaginated">
                 <option value="bottom">bottom pagination</option>
@@ -46,6 +52,7 @@
             :pagination-simple="isPaginationSimple"
             :pagination-position="paginationPosition"
             :default-sort-direction="defaultSortDirection"
+            :pagination-rounded="isPaginationRounded"
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
             default-sort="user.first_name"
@@ -94,6 +101,7 @@
                 data,
                 isPaginated: true,
                 isPaginationSimple: false,
+                isPaginationRounded: false,
                 paginationPosition: 'bottom',
                 defaultSortDirection: 'asc',
                 sortIcon: 'arrow-up',

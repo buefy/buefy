@@ -50,7 +50,7 @@ export default {
     inheritAttrs: false,
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Function],
+            type: [String, Number, Boolean, Object, Array, Function, Date],
             default: null
         },
         placeholder: String,

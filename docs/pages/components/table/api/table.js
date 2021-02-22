@@ -101,6 +101,13 @@ export default [
                 default: '<code>left</code>'
             },
             {
+                name: '<code>sticky-checkbox</code>',
+                description: 'Make the checkbox column sticky when <code>checkable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>checked-rows</code>',
                 description: 'Set which rows are checked, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Array<Object>',
@@ -166,6 +173,13 @@ export default [
             {
                 name: '<code>pagination-simple</code>',
                 description: 'Simple pagination (if <code>paginated</code>)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>pagination-rounded</code>',
+                description: 'Rounded pagination (if <code>paginated</code>)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -399,7 +413,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>,'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>, <code>toggleDetails: Function (row: Object)</code>'
             },
             {
                 name: '<code>header</code>',
@@ -449,7 +463,7 @@ export default [
                 parameters: '<code>row: Object</code>'
             },
             {
-                name: '<code>cellClick</code>',
+                name: '<code>cellclick</code>',
                 description: 'Triggers when a cell is clicked',
                 parameters: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>rowIndex: Number</code>, <code>columnIndex: Number</code>,'
             },
@@ -653,6 +667,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>custom-search</code>',
+                description: 'Custom search method, works when column is <code>searchable</code>',
+                type: 'Function (a: Object, input: String)',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>subheading</code>',

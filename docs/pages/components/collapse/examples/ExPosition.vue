@@ -11,10 +11,12 @@
             </p>
         </div>
         <b-collapse :open="false" position="is-bottom" aria-id="contentIdForA11y1">
-            <a slot="trigger" slot-scope="props" aria-controls="contentIdForA11y1">
-                <b-icon :icon="!props.open ? 'menu-down' : 'menu-up'"></b-icon>
-                {{ !props.open ? 'All options' : 'Fewer options' }}
-            </a>
+            <template #trigger="props">
+                <a aria-controls="contentIdForA11y1">
+                    <b-icon :icon="!props.open ? 'menu-down' : 'menu-up'"></b-icon>
+                    {{ !props.open ? 'All options' : 'Fewer options' }}
+                </a>
+            </template>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br/>
                 Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. <br/>

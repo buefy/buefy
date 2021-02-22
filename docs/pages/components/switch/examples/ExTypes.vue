@@ -1,42 +1,42 @@
 <template>
     <section>
-        <div class="field">
+        <b-field>
             <b-switch :value="true">
                 Default
             </b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch :value="true"
             type="is-info">
                 Info
             </b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch :value="true"
             type="is-success">
                 Success
             </b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch :value="true"
             type="is-danger">
                 Danger
             </b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch :value="true"
             type="is-warning">
                 Warning
             </b-switch>
-        </div>
-        <div class="field">
-            <b-switch 
+        </b-field>
+        <b-field>
+            <b-switch
                 v-model="lightMode"
                 passive-type='is-dark'
                 type='is-warning'>
                 {{ lightMode ? "Light Mode" : "Dark Mode" }}
             </b-switch>
-        </div>
+        </b-field>
     </section>
 </template>
 

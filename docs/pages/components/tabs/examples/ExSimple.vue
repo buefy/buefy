@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="block">
-            <button class="button" @click="activeTab = 1">Set Music</button>
+            <b-button label="Set Music" @click="activeTab = 1" />
         </div>
         <div class="block">
             <b-switch v-model="showBooks"> Show Books item </b-switch>

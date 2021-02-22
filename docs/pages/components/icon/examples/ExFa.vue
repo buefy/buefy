@@ -73,24 +73,24 @@
         </div>
 
         <div class="buttons">
-            <button class="button is-dark">
-                <b-icon pack="fas" icon="check"></b-icon>
-                <span>Finish</span>
-            </button>
-
-            <button class="button is-warning">
-                <b-icon pack="fas" icon="check"></b-icon>
-                <span>Finish</span>
-            </button>
-
-            <button class="button is-warning">
+            <b-button
+                label="Finish"
+                type="is-dark"
+                icon-pack="fas"
+                icon-left="check" />
+            <b-button
+                label="Finish"
+                type="is-warning"
+                icon-pack="fas"
+                icon-left="check" />
+            <b-button type="is-warning">
                 <b-icon
                     pack="fas"
                     icon="sync-alt"
                     custom-class="fa-spin">
                 </b-icon>
                 <span>Refresh</span>
-            </button>
+            </b-button>
         </div>
     </section>
 </template>

@@ -28,6 +28,7 @@
                 :nearby-month-days="nearbyMonthDays"
                 :nearby-selectable-month-days="nearbySelectableMonthDays"
                 :show-week-number="showWeekNumber"
+                :week-number-clickable="weekNumberClickable"
                 :first-day-of-week="firstDayOfWeek"
                 :rules-for-first-week="rulesForFirstWeek"
                 :range="range"
@@ -68,14 +69,9 @@ export default {
         selectableDates: Array,
         nearbyMonthDays: Boolean,
         nearbySelectableMonthDays: Boolean,
-        showWeekNumber: {
-            type: Boolean,
-            default: () => false
-        },
-        rulesForFirstWeek: {
-            type: Number,
-            default: () => 4
-        },
+        showWeekNumber: Boolean,
+        weekNumberClickable: Boolean,
+        rulesForFirstWeek: Number,
         range: Boolean,
         multiple: Boolean
     },

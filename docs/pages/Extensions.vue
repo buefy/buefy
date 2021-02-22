@@ -1,7 +1,7 @@
 <template>
     <article class="content">
         <p>
-            Buefy has no dependencies aside from Bulma. But sometimes we need to add a very specific funcionality to our application.
+            Buefy has no dependencies aside from Bulma. But sometimes we need to add a very specific functionality to our application.
         </p>
         <p>
             These extensions are some examples of how you can extend some of the components using external libraries.

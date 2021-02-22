@@ -5,7 +5,8 @@
                 v-model="tags"
                 ellipsis
                 icon="label"
-                placeholder="Add a tag">
+                placeholder="Add a tag"
+                aria-close-label="Delete this tag">
             </b-taginput>
         </b-field>
         <p class="content"><b>Tags:</b> {{ tags }}</p>

@@ -1,17 +1,23 @@
 <template>
     <section>
         <div class="buttons">
-            <button class="button is-medium is-info" @click="confirm">
-                Launch confirm (default)
-            </button>
+            <b-button
+                label="Launch confirm (default)"
+                type="is-info"
+                size="is-medium"
+                @click="confirm" />
 
-            <button class="button is-medium is-info" @click="confirmCustom">
-                Launch confirm (custom)
-            </button>
+            <b-button
+                label="Launch confirm (custom)"
+                type="is-info"
+                size="is-medium"
+                @click="confirmCustom" />
 
-            <button class="button is-medium is-danger" @click="confirmCustomDelete">
-                Launch confirm (custom)
-            </button>
+            <b-button
+                label="Launch confirm (custom)"
+                type="is-danger"
+                size="is-medium"
+                @click="confirmCustomDelete" />
         </div>
     </section>
 </template>

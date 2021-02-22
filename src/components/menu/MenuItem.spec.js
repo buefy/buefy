@@ -38,6 +38,6 @@ describe('BMenuItem', () => {
 
         expect(wrapper.vm.reset).toHaveBeenCalledTimes(1)
         expect(wrapper.vm.newExpanded).toBeTruthy()
-        expect(wrapper.emitted()['update:expanded'][0]).toContainEqual(false)
+        expect(wrapper.emitted()['update:expanded'][0]).toContainEqual(true)
     })
 })

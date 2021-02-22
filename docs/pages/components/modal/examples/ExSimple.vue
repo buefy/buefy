@@ -1,14 +1,16 @@
 <template>
     <section>
         <div class="buttons">
-            <button class="button is-primary is-medium"
-                @click="isImageModalActive = true">
-                Launch image modal
-            </button>
-            <button class="button is-primary is-medium"
-                @click="isCardModalActive = true">
-                Launch card modal (keep scroll)
-            </button>
+            <b-button
+                label="Launch image modal"
+                type="is-primary"
+                size="is-medium"
+                @click="isImageModalActive = true" />
+            <b-button
+                label="Launch card modal (keep scroll)"
+                type="is-primary"
+                size="is-medium"
+                @click="isCardModalActive = true" />
         </div>
 
         <b-modal v-model="isImageModalActive">

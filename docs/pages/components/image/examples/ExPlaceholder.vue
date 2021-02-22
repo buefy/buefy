@@ -16,11 +16,12 @@
             src="https://picsum.photos/id/1062/800/400"
             ratio="2by1"
         >
-            <b-skeleton
-                class="skeleton-placeholder"
-                slot="placeholder"
-                height="100%"
-            ></b-skeleton>
+            <template #placeholder>
+                <b-skeleton
+                    class="skeleton-placeholder"
+                    height="100%"
+                ></b-skeleton>
+            </template>
         </b-image>
     </section>
 </template>

@@ -17,7 +17,7 @@ export default [
             },
             {
                 name: '<code>datetime-parser</code>',
-                description: 'Function to parse string to a datetime (<code>Date</code> type) for setting the component's datetime from the input',
+                description: `Function to parse string to a datetime (<code>Date</code> type) for setting the component's datetime from the input`,
                 type: 'Function',
                 values: '—',
                 default: 'Tries to parse the time using the locale specific format. Fallback to <code>HH:mm</code> or <code>HH:mm AM/PM</code>'

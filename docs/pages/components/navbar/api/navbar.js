@@ -113,7 +113,7 @@ export default [
             name: '<code>tag</code>',
             description: 'Sets the type of the component that have to render as navbar-item',
             type: 'String',
-            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
+            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and it\'s html attributes like href, to, etc...',
             default: 'a'
         },
         {

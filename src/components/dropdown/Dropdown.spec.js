@@ -1,9 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 import BDropdown from '@components/dropdown/Dropdown'
 
-let wrapper
-
 describe('BDropdown', () => {
+    const val1 = 'val1'
+    const val2 = 'val2'
+    let wrapper
+
     beforeEach(() => {
         wrapper = shallowMount(BDropdown, {
             slots: {
@@ -58,27 +60,38 @@ describe('BDropdown', () => {
         expect(wrapper.vm.isHoverable).toBeTruthy()
     })
 
-    it('react accordingly when an item is selected', () => {
+    it('react accordingly when new item is selected', () => {
         jest.useFakeTimers()
 
-        const val1 = 'val1'
         wrapper.vm.selectItem(val1)
-        expect(wrapper.emitted()['input']).toBeTruthy()
-
-        wrapper.vm.selectItem(val1)
-        expect(wrapper.emitted()['input']).toBeTruthy()
+        expect(wrapper.emitted().input).toHaveLength(1)
+        expect(wrapper.emitted().input[0]).toEqual([val1])
+        expect(wrapper.emitted().change).toHaveLength(1)
+        expect(wrapper.emitted().change[0]).toEqual([val1])
 
         wrapper.setProps({
             hoverable: true,
             closeOnClick: true
         })
 
-        const val2 = 'val2'
         wrapper.vm.selectItem(val2)
-        expect(wrapper.vm.selected).toBe(val2)
-        expect(wrapper.emitted()['change']).toBeTruthy()
+        expect(wrapper.emitted().input).toHaveLength(2)
+        expect(wrapper.emitted().input[1]).toEqual([val2])
+        expect(wrapper.emitted().change).toHaveLength(2)
+        expect(wrapper.emitted().change[1]).toEqual([val2])
 
         expect(wrapper.vm.isHoverable).toBeFalsy()
+    })
+
+    it('react accordingly when same item is selected', () => {
+        jest.useFakeTimers()
+
+        // will emit only input event
+        wrapper.setProps({ value: val1 })
+        wrapper.vm.selectItem(val1)
+        expect(wrapper.emitted().input).toHaveLength(1)
+        expect(wrapper.emitted().input[0]).toEqual([val1])
+        expect(wrapper.emitted().change).toBeUndefined()
     })
 
     it('react accordingly when an item is selected with multiple prop', () => {
@@ -89,19 +102,27 @@ describe('BDropdown', () => {
         wrapper.vm.selected = null
 
         // no initial value, will return an array with the only selected option
-        const val1 = 'val1'
         wrapper.vm.selectItem(val1)
-        expect(wrapper.vm.selected).toEqual([val1])
-        expect(wrapper.emitted()['change']).toBeTruthy()
+        expect(wrapper.emitted().input).toHaveLength(1)
+        expect(wrapper.emitted().input[0]).toEqual([[val1]])
+        expect(wrapper.emitted().change).toHaveLength(1)
+        expect(wrapper.emitted().change[0]).toEqual([[val1]])
 
         // will return an array with the new value appended
-        const val2 = 'val2'
+        wrapper.setProps({ value: [val1] })
         wrapper.vm.selectItem(val2)
-        expect(wrapper.vm.selected).toEqual([val1, val2])
+        expect(wrapper.emitted().input).toHaveLength(2)
+        expect(wrapper.emitted().input[1]).toEqual([[val1, val2]])
+        expect(wrapper.emitted().change).toHaveLength(2)
+        expect(wrapper.emitted().change[1]).toEqual([[val1, val2]])
 
         // will remove the last selection since it was part of the list
+        wrapper.setProps({ value: [val1, val2] })
         wrapper.vm.selectItem(val2)
-        expect(wrapper.vm.selected).toEqual([val1])
+        expect(wrapper.emitted().input).toHaveLength(3)
+        expect(wrapper.emitted().input[2]).toEqual([[val1]])
+        expect(wrapper.emitted().change).toHaveLength(3)
+        expect(wrapper.emitted().change[2]).toEqual([[val1]])
     })
 
     it('manage the whitelisted items accordingly', () => {
@@ -154,13 +175,13 @@ describe('BDropdown', () => {
 
     it('close on escape', () => {
         wrapper.vm.isActive = true
-        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        const event = new KeyboardEvent('keyup', { 'key': 'Escape' })
         wrapper.vm.keyPress({})
         wrapper.vm.keyPress(event)
         expect(wrapper.vm.isActive).toBeFalsy()
 
         wrapper.vm.isActive = true
-        wrapper.setProps({canClose: ['click']})
+        wrapper.setProps({ canClose: ['click'] })
         wrapper.vm.keyPress(event)
         expect(wrapper.vm.isActive).toBeTruthy()
     })

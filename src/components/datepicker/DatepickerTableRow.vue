@@ -1,6 +1,10 @@
 <template>
     <div class="datepicker-row">
-        <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
+        <a
+            class="datepicker-cell is-week-number"
+            :class="{'is-clickable': weekNumberClickable }"
+            v-if="showWeekNumber"
+            @click.prevent="clickWeekNumber(getWeekNumber(week[6]))">
             <span>{{ getWeekNumber(week[6]) }}</span>
         </a>
         <template v-for="(weekDay, index) in week">
@@ -15,7 +19,7 @@
                 :disabled="disabled"
                 @click.prevent="emitChosenDate(weekDay)"
                 @mouseenter="setRangeHoverEndDate(weekDay)"
-                @keydown.prevent="manageKeydown($event, weekDay)"
+                @keydown="manageKeydown($event, weekDay)"
                 :tabindex="day === weekDay.getDate() ? null : -1">
                 <span>{{ weekDay.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(weekDay)">
@@ -40,6 +44,9 @@
 <script>
 export default {
     name: 'BDatepickerTableRow',
+    inject: {
+        $datepicker: { name: '$datepicker', default: false }
+    },
     props: {
         selectedDate: {
             type: [Date, Array]
@@ -67,16 +74,11 @@ export default {
         dateCreator: Function,
         nearbyMonthDays: Boolean,
         nearbySelectableMonthDays: Boolean,
-        showWeekNumber: {
-            type: Boolean,
-            default: () => false
-        },
+        showWeekNumber: Boolean,
+        weekNumberClickable: Boolean,
         range: Boolean,
         multiple: Boolean,
-        rulesForFirstWeek: {
-            type: Number,
-            default: () => 4
-        },
+        rulesForFirstWeek: Number,
         firstDayOfWeek: Number
     },
     watch: {
@@ -134,6 +136,11 @@ export default {
             }
 
             return resWeek
+        },
+        clickWeekNumber(week) {
+            if (this.weekNumberClickable) {
+                this.$datepicker.$emit('week-number-click', week)
+            }
         },
         /*
          * Check that selected day is within earliest/latest params and
@@ -289,9 +296,16 @@ export default {
             }
         },
 
-        manageKeydown({ key }, weekDay) {
+        manageKeydown(event, weekDay) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
+            const { key } = event
+            let preventDefault = true
             switch (key) {
+                case 'Tab': {
+                    preventDefault = false
+                    break
+                }
+
                 case ' ':
                 case 'Space':
                 case 'Spacebar':
@@ -321,10 +335,14 @@ export default {
                     break
                 }
             }
+
+            if (preventDefault) {
+                event.preventDefault()
+            }
         },
 
         changeFocus(day, inc) {
-            const nextDay = day
+            const nextDay = new Date(day.getTime())
             nextDay.setDate(day.getDate() + inc)
             while (
                 (!this.minDate || nextDay > this.minDate) &&
@@ -333,6 +351,7 @@ export default {
             ) {
                 nextDay.setDate(day.getDate() + Math.sign(inc))
             }
+            this.setRangeHoverEndDate(nextDay)
             this.$emit('change-focus', nextDay)
         }
     }

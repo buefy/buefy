@@ -4,6 +4,10 @@
             <b-slider v-model="sliderValue" :tooltip-type="sliderType"></b-slider>
         </b-field>
 
+        <b-field label="Tooltip Always">
+            <b-slider tooltip-always></b-slider>
+        </b-field>
+        
         <b-field label="Hide tooltip">
             <b-slider :tooltip="false"></b-slider>
         </b-field>

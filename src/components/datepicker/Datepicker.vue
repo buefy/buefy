@@ -25,6 +25,7 @@
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
+                        :icon-right="iconRight"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -141,6 +142,7 @@
                             :nearby-month-days="nearbyMonthDays"
                             :nearby-selectable-month-days="nearbySelectableMonthDays"
                             :show-week-number="showWeekNumber"
+                            :week-number-clickable="weekNumberClickable"
                             :range="range"
                             :multiple="multiple"
                             @range-start="date => $emit('range-start', date)"
@@ -281,6 +283,11 @@ export default {
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
+    provide() {
+        return {
+            $datepicker: this
+        }
+    },
     props: {
         value: {
             type: [Date, Array]
@@ -362,6 +369,7 @@ export default {
             default: () => config.defaultDatepickerMobileNative
         },
         position: String,
+        iconRight: String,
         events: Array,
         indicators: {
             type: String,
@@ -400,6 +408,10 @@ export default {
             type: Boolean,
             default: () => config.defaultDatepickerShowWeekNumber
         },
+        weekNumberClickable: {
+            type: Boolean,
+            default: () => config.defaultDatepickerWeekNumberClickable
+        },
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
@@ -436,7 +448,7 @@ export default {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
             this.focusedDate || this.dateCreator()
 
-        if (!this.value && this.maxDate && this.maxDate.getFullYear() < new Date().getFullYear()) {
+        if (!this.value && this.maxDate && this.maxDate.getFullYear() < focusedDate.getFullYear()) {
             focusedDate.setFullYear(this.maxDate.getFullYear())
         }
 
@@ -477,13 +489,13 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
                 month: this.localeOptions.month || '2-digit',
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         newMonthNames() {

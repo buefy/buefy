@@ -1,6 +1,9 @@
 <template>
     <section>
-        <button class="button block" @click="isActive = true" :disabled="isActive">Show</button>
+        <b-button
+            label="Show"
+            :disabled="isActive"
+            @click="isActive = true" />
         <b-notification
             auto-close type="is-danger"
             v-model="isActive"

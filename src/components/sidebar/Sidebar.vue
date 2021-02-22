@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import config from '../../utils/config'
 import { removeElement, isCustomElement } from '../../utils/helpers'
 
 export default {
@@ -60,13 +61,28 @@ export default {
         onCancel: {
             type: Function,
             default: () => {}
+        },
+        scroll: {
+            type: String,
+            default: () => {
+                return config.defaultModalScroll
+                    ? config.defaultModalScroll
+                    : 'clip'
+            },
+            validator: (value) => {
+                return [
+                    'clip',
+                    'keep'
+                ].indexOf(value) >= 0
+            }
         }
     },
     data() {
         return {
             isOpen: this.open,
             transitionName: null,
-            animating: true
+            animating: true,
+            savedScrollTop: null
         }
     },
     computed: {
@@ -107,6 +123,9 @@ export default {
         open: {
             handler(value) {
                 this.isOpen = value
+                if (this.overlay) {
+                    this.handleScroll()
+                }
                 const open = this.right ? !value : value
                 this.transitionName = !open ? 'slide-prev' : 'slide-next'
             },
@@ -186,6 +205,38 @@ export default {
         */
         afterEnter() {
             this.animating = false
+        },
+
+        handleScroll() {
+            if (typeof window === 'undefined') return
+
+            if (this.scroll === 'clip') {
+                if (this.open) {
+                    document.documentElement.classList.add('is-clipped')
+                } else {
+                    document.documentElement.classList.remove('is-clipped')
+                }
+                return
+            }
+
+            this.savedScrollTop = !this.savedScrollTop
+                ? document.documentElement.scrollTop
+                : this.savedScrollTop
+
+            if (this.open) {
+                document.body.classList.add('is-noscroll')
+            } else {
+                document.body.classList.remove('is-noscroll')
+            }
+
+            if (this.open) {
+                document.body.style.top = `-${this.savedScrollTop}px`
+                return
+            }
+
+            document.documentElement.scrollTop = this.savedScrollTop
+            document.body.style.top = null
+            this.savedScrollTop = null
         }
     },
     created() {
@@ -200,11 +251,24 @@ export default {
                 document.body.appendChild(this.$el)
             }
         }
+        if (this.overlay && this.open) {
+            this.handleScroll()
+        }
     },
     beforeDestroy() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
             document.removeEventListener('click', this.clickedOutside)
+            if (this.overlay) {
+                // reset scroll
+                document.documentElement.classList.remove('is-clipped')
+                const savedScrollTop = !this.savedScrollTop
+                    ? document.documentElement.scrollTop
+                    : this.savedScrollTop
+                document.body.classList.remove('is-noscroll')
+                document.documentElement.scrollTop = savedScrollTop
+                document.body.style.top = null
+            }
         }
         if (this.isFixed) {
             removeElement(this.$el)

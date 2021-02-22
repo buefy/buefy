@@ -25,9 +25,14 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="top-left"/>
@@ -49,7 +54,9 @@
                 <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
-                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
+                        <th
+                            :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
+                            v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -124,7 +131,9 @@
                                 </template>
                             </div>
                         </th>
-                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
+                        <th
+                            :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
+                            v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -231,7 +240,7 @@
                             </td>
 
                             <td
-                                class="checkbox-cell"
+                                :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -251,16 +260,15 @@
                                         tag="td"
                                         :class="column.rootClasses"
                                         :data-label="column.label"
-                                        :props="{ row, column, index, colindex }"
-                                        @click.native="$emit('cellClick',row, column,
-                                                             index, colindex, $event)"
+                                        :props="{ row, column, index, colindex, toggleDetails }"
+                                        @click.native="$emit('cellclick',row,column,index,colindex)"
                                     />
                                 </template>
 
                             </template>
 
                             <td
-                                class="checkbox-cell"
+                                :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -279,7 +287,8 @@
                                     <slot
                                         name="detail"
                                         :row="row"
-                                        :index="index"/>
+                                        :index="index"
+                                    />
                                 </div>
                             </td>
                         </tr>
@@ -328,9 +337,14 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="bottom-left"/>
@@ -402,6 +416,10 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
+        stickyCheckbox: {
+            type: Boolean,
+            default: false
+        },
         selected: Object,
         isRowSelectable: {
             type: Function,
@@ -470,6 +488,7 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
+        paginationRounded: Boolean,
         backendSorting: Boolean,
         backendFiltering: Boolean,
         rowClass: {
@@ -1102,13 +1121,19 @@ export default {
                     delete this.filters[key]
                     return true
                 }
-                let value = this.getValueByPath(row, key)
-                if (value == null) return false
-                if (Number.isInteger(value)) {
-                    if (value !== Number(this.filters[key])) return false
+                const input = this.filters[key]
+                const column = this.newColumns.filter((c) => c.field === key)[0]
+                if (column && column.customSearch && typeof column.customSearch === 'function') {
+                    return column.customSearch(row, input)
                 } else {
-                    const re = new RegExp(escapeRegExpChars(this.filters[key]), 'i')
-                    if (!re.test(value)) return false
+                    let value = this.getValueByPath(row, key)
+                    if (value == null) return false
+                    if (Number.isInteger(value)) {
+                        if (value !== Number(input)) return false
+                    } else {
+                        const re = new RegExp(escapeRegExpChars(input), 'i')
+                        if (!re.test(value)) return false
+                    }
                 }
             }
             return true

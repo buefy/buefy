@@ -1,5 +1,5 @@
 import _Vue from "vue";
-import { ColorModifiers, GlobalPositions } from "./helpers";
+import {ColorModifiers, GlobalPositions, SizesModifiers} from "./helpers";
 
 // Component base definition
 export class BComponent extends _Vue {
@@ -53,6 +53,7 @@ export declare type BuefyConfig = {
     defaultClockpickerMinutesLabel?: string;
     defaultTrapFocus?: boolean;
     defaultButtonRounded?: boolean;
+    defaultSwitchRounded?: boolean;
     defaultCarouselInterval?: number;
     defaultTabsExpanded?: boolean;
     defaultTabsAnimated?: boolean;
@@ -95,7 +96,7 @@ export declare type BDialogConfig = {
     /**
      * Dialog\'s size, optional
      */
-    size?: 'is-small' | 'is-medium' | 'is-large';
+    size?: SizesModifiers;
 
     /**
      * Custom animation (transition name)
@@ -164,6 +165,11 @@ export declare type BDialogConfig = {
      * Role attribute to be passed to modal container for better accessibility.
      */
     ariaRole?: 'dialog' | 'alertdialog';
+
+   /**
+    * Aria label attribute to be passed to modal container for better accessibility.
+    */
+   ariaLabel?: string;
 
    /**
     * Improve accessiblity when enabled.
@@ -322,12 +328,12 @@ export declare type BNoticeConfig = {
     message: string | any[];
 
     /**
-    * Type (color) of the toast
+    * Type (color)
     */
     type?: ColorModifiers;
 
     /**
-    * Which position the toast will appear
+    * Which position it will appear
     */
     position?: GlobalPositions;
 
@@ -337,8 +343,13 @@ export declare type BNoticeConfig = {
     duration?: number;
 
     /**
-    * DOM element the toast will be created on.
-    * Note that this also changes the position of the toast from fixed
+     * Show indefinitely until it is dismissed
+     */
+    indefinite?: boolean;
+
+    /**
+    * DOM element it will be created on.
+    * Note that this also changes the position of the element from fixed
     * to absolute. Meaning that the container should be fixed.
     */
     container?: string;
@@ -356,9 +367,9 @@ export declare type BSnackbarConfig = BNoticeConfig & {
     actionText?: string | null;
 
     /**
-     * Show the Snackbar indefinitely until it is dismissed
+     * Snackbar's cancel button text
      */
-    indefinite?: boolean;
+    cancelText?: string | null;
 
     /**
      * 	Callback function when the button is clicked
@@ -376,11 +387,6 @@ export declare const ToastProgrammatic: {
 
 export declare type BNotificationConfig = BNoticeConfig & {
     /**
-     * Show the Notification indefinitely until it is dismissed
-     */
-    indefinite?: boolean;
-
-    /**
      * Adds an icon on the left side
      */
     hasIcon?: boolean;
@@ -393,23 +399,4 @@ export declare const NotificationProgrammatic: {
 export declare const ConfigProgrammatic: {
     getOptions: () => BuefyConfig
     setOptions: (params: BuefyConfig) => any
-}
-
-export interface TableColumn {
-    label?: string;
-    'custom-key'?: string | number;
-    field?: string | number;
-    meta?: any;
-    width?: number | string;
-    numeric?: boolean;
-    centered?: boolean;
-    sortable?: boolean;
-    visible?: boolean;
-    'custom-sort'?: (a: object, b: object, isAsc: boolean) => void;
-    searchable?: boolean;
-    subheading?: string | number;
-    sticky?: boolean;
-    'header-selectable'?: boolean;
-    'header-class'?: string;
-    'cell-class'?: string;
 }

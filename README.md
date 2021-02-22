@@ -2,7 +2,7 @@
     <a href="https://buefy.org">
         <img src="https://raw.githubusercontent.com/buefy/buefy/master/static/img/buefy-banner.png" />
     </a>
-    <a href="https://github.com/buefy/buefy/releases"><img src="https://img.shields.io/github/v/release/buefy/buefy?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURUxpcXpW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1npW1opGJjYAAAAPdFJOUwAKxPTjm0FusSKBFTBX1eRe1+UAAAEzSURBVCjPdZKxSgNBEIbnCk+CEaIgSIhFtAmobKXYXSecKHcQxDInvkBAsbA59bSyyCE+gr2xt9InsPAV1MYme3JB0N/Z292LFvmLYedndvab3SUaJ2fmX9p4OW/tpaN84QKsrb7N3UQCqwmu7Paj7AQI5/BljLr3OgF0q8GP2XOYRbOQkSNkpDsEOd0gS0tjHj4dYFCrBJk++AmnFOOTpjGsFUaMkDrI6RqbumcHZ47AuitkV1MI+JUAawl2DJbYeHa9Al33dHb3aRJ4XwI+dMk9kQJttJFFdjoFSnVg2RoKlKYEvq2hQInumM4oLpZxYRu2nFSFNRQoxx6GpoBBfb4Gr7wyXjaJh8O2MRg0pGpPRS0F+nALDNISFC0eBSsjUCX5Vj7U4yLr8rj/56FZ437BL2W5ltKCnKBjAAAAV3pUWHRSYXcgcHJvZmlsZSB0eXBlIGlwdGMAAHic4/IMCHFWKCjKT8vMSeVSAAMjCy5jCxMjE0uTFAMTIESANMNkAyOzVCDL2NTIxMzEHMQHy4BIoEouAOoXEXTyQjWVAAAAAElFTkSuQmCC&color=7957d5&labelColor=lightgrey" /></a>
+    <a href="https://github.com/buefy/buefy/releases"><img src="https://img.shields.io/github/v/release/buefy/buefy?logo=buefy&color=7957d5&labelColor=lightgrey" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/v/buefy.svg?logo=npm" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
     <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
@@ -65,7 +65,7 @@ Vue.use(Input)
 ### 3 Include Material Design Icons
 
 ```html
-<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
 ```
 
 If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.org/documentation/customization).
@@ -90,7 +90,7 @@ Please see the [contributing guidelines](./.github/CONTRIBUTING.md)
 
 ## Versioning
 
-While it's still in beta, version will follow **v0.Y.Z**, where:
+Version will follow **v0.Y.Z**, where:
 
 * **Y**: Major (breaking changes)
 * **Z**: Minor or patch
@@ -104,15 +104,6 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 </table>
 
 Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
-
-## Supporting through Patreon
-
-Buefy is an open source MIT project if you are interested in supporting this project, please consider becoming a patron.
-<p align="center">
-  <a href="https://www.patreon.com/jtommy">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
-  </a>
-</p>
 
 ## Contributors ✨
 
