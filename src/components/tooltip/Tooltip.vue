@@ -191,9 +191,13 @@ export default {
         clickedOutside(event) {
             if (this.isActive) {
                 if (Array.isArray(this.autoClose)) {
-                    if (this.autoClose.indexOf('outside') >= 0) {
-                        if (!this.isInWhiteList(event.target)) this.isActive = false
-                    } else if (this.autoClose.indexOf('inside') >= 0) {
+                    if (this.autoClose.includes('outside')) {
+                        if (!this.isInWhiteList(event.target)) {
+                            this.isActive = false
+                            return
+                        }
+                    }
+                    if (this.autoClose.includes('inside')) {
                         if (this.isInWhiteList(event.target)) this.isActive = false
                     }
                 }
