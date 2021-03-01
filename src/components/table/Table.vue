@@ -205,6 +205,32 @@
                 </thead>
                 <tbody>
                     <template v-for="(row, index) in visibleData">
+                        <template
+                            v-if="groupBy
+                                && (
+                                    !visibleData[index-1]
+                                || row[groupBy] !== visibleData[index-1][groupBy]
+                            )"
+                        >
+                            <tr
+                                :key="customRowKey
+                                    ? row[customRowKey] + '-group'
+                                : index + '-group'"
+                                :class="rowGroupClass"
+                            >
+                                <td v-if="checkable && checkboxPosition === 'left'">&nbsp;</td>
+                                <td :colspan="visibleColumns.length - (checkable ? 1 : 0)">
+                                    <slot
+                                        name="row-group"
+                                        :row="row"
+                                        :group-by="groupBy">
+                                        <strong>{{ row[groupBy] }}</strong>
+                                    </slot>
+                                </td>
+                                <td v-if="checkable && checkboxPosition === 'left'">&nbsp;</td>
+                            </tr>
+                        </template>
+
                         <tr
                             :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {
@@ -539,7 +565,12 @@ export default {
             type: Boolean,
             default: true
         },
-        debounceSearch: Number
+        debounceSearch: Number,
+        groupBy: String,
+        rowGroupClass: {
+            type: String,
+            default: 'has-background-light'
+        }
     },
     data() {
         return {

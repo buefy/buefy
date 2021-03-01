@@ -131,6 +131,10 @@
             </p>
         </Example>
 
+        <Example :component="ExRowGrouping" :code="ExRowGroupingCode" title="Row groups">
+            <p>Group rows because it's cool</p>
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -191,6 +195,9 @@
     import ExDraggableRows from './examples/ExDraggableRows'
     import ExDraggableRowsCode from '!!raw-loader!./examples/ExDraggableRows'
 
+    import ExRowGrouping from "./examples/ExRowGrouping";
+    import ExRowGroupingCode from "!!raw-loader!./examples/ExRowGrouping";
+
     export default {
         data() {
             return {
@@ -229,7 +236,9 @@
                 ExToggleColumnsCode,
                 ExFooterCode,
                 ExAsyncDataCode,
-                ExDraggableRowsCode
+                ExDraggableRowsCode,
+                ExRowGrouping,
+                ExRowGroupingCode,
             }
         }
     }
