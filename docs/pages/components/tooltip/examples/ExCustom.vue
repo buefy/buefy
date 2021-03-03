@@ -1,10 +1,10 @@
 <template>
     <section class="b-tooltips">
         <b-tooltip position="is-bottom" multilined>
-            <b-button label="Html Content" type="is-primary" />
             <template v-slot:content>
                 <b>Lorem ipsum dolor sit amet</b>, consectetur warning elit. <i>Fusce id fermentum quam</i>.
             </template>
+            <b-button label="Html Content" type="is-primary" />
         </b-tooltip>
 
         <b-tooltip type="is-light" :triggers="['click']" :auto-close="['outside', 'escape']">
