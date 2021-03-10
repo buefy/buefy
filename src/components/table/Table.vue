@@ -278,26 +278,30 @@
                             </td>
                         </tr>
 
-                        <tr
-                            v-if="isActiveDetailRow(row)"
+                        <transition
                             :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
-                            class="detail">
-                            <td :colspan="columnCount">
-                                <div class="detail-container">
-                                    <slot
-                                        name="detail"
-                                        :row="row"
-                                        :index="index"
-                                    />
-                                </div>
-                            </td>
-                        </tr>
-                        <slot
-                            v-if="isActiveCustomDetailRow(row)"
-                            name="detail"
-                            :row="row"
-                            :index="index"
-                        />
+                            :name="detailTransition"
+                        >
+                            <tr
+                                v-if="isActiveDetailRow(row)"
+                                class="detail">
+                                <td :colspan="columnCount">
+                                    <div class="detail-container">
+                                        <slot
+                                            name="detail"
+                                            :row="row"
+                                            :index="index"
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <slot
+                                v-if="isActiveCustomDetailRow(row)"
+                                name="detail"
+                                :row="row"
+                                :index="index"
+                            />
+                        </transition>
                     </template>
 
                     <tr
@@ -504,6 +508,10 @@ export default {
             default: () => true
         },
         detailKey: {
+            type: String,
+            default: ''
+        },
+        detailTransition: {
             type: String,
             default: ''
         },
