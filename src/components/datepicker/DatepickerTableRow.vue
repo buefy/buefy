@@ -12,7 +12,7 @@
                 :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
-                :class="[classObject(weekDay), {'has-event': eventsDateMatch(weekDay)}, indicators]"
+                :class="classObject(weekDay)"
                 class="datepicker-cell"
                 role="button"
                 href="#"
@@ -36,6 +36,13 @@
                 :class="classObject(weekDay)"
                 class="datepicker-cell">
                 <span>{{ weekDay.getDate() }}</span>
+                <div class="events" v-if="eventsDateMatch(weekDay)">
+                    <div
+                        class="event"
+                        :class="event.type"
+                        v-for="(event, index) in eventsDateMatch(weekDay)"
+                        :key="index"/>
+                </div>
             </div>
         </template>
     </div>
@@ -287,7 +294,9 @@ export default {
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled,
                 'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
-                'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month
+                'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month,
+                'has-event': this.eventsDateMatch(day),
+                [this.indicators]: this.eventsDateMatch(day)
             }
         },
         setRangeHoverEndDate(day) {
