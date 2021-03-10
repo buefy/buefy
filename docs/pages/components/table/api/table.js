@@ -276,6 +276,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>detail-transition</code>',
+                description: 'Transition name to use when toggling row details.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>custom-is-checked</code>',
                 description: 'Custom method to verify if row is checked, works when is <code>checkable</code>. Useful for backend pagination',
                 type: 'Function (a: Object, b: Object)',
