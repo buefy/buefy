@@ -291,38 +291,4 @@ describe('BDatepickerTable', () => {
             expect(wrapper.vm.selectedBeginDate).toBe(begin)
         })
     })
-
-    describe('Multiple dates', () => {
-        let wrapper
-        beforeEach(() => {
-            wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
-                    ...defaultProps(),
-                    multiple: true,
-                    value: []
-                }
-            })
-        })
-
-        it('should manage multiple dates update as expected', () => {
-            let date1 = newDate(2020, 3, 10)
-            let date2 = newDate(2020, 3, 15)
-            let date3 = newDate(2020, 3, 20)
-
-            wrapper.vm.updateSelectedDate(date1)
-            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date1)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([date1])
-
-            wrapper.vm.updateSelectedDate(date2)
-            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date2)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2])
-
-            wrapper.vm.updateSelectedDate(date3)
-            expect(wrapper.vm.multipleSelectedDates).toContainEqual(date3)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2, date3])
-
-            wrapper.vm.updateSelectedDate(date1)
-            expect(wrapper.vm.multipleSelectedDates).toEqual([date2, date3])
-        })
-    })
 })
