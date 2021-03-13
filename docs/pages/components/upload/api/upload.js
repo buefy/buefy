@@ -55,7 +55,7 @@ export default [
             },
             {
                 name: '<code>loading</code>',
-                description: 'Add the loading state',
+                description: 'Add the loading state to the drag & drop area',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
