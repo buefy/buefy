@@ -1,6 +1,6 @@
-@import "../../node_modules/bulma/sass/utilities/functions";
-@import "../../node_modules/bulma/sass/utilities/initial-variables";
+@import "../../../bulma//sass/utilities//functions.sass";
+@import "../../../bulma/sass/utilities/initial-variables.sass";
 @import "utils/_all";
-@import "../../node_modules/bulma/bulma";
+@import "../../../bulma/bulma";
 @import "utils/variables-ext";
 @import "buefy";
