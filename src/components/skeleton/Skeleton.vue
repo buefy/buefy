@@ -1,4 +1,6 @@
 <script>
+import {h as createElement} from 'vue-demi'
+
 export default {
     name: 'BSkeleton',
     functional: true,
@@ -35,7 +37,7 @@ export default {
         },
         size: String
     },
-    render(createElement, context) {
+    render(context) {
         if (!context.props.active) return
         const items = []
         const width = context.props.width

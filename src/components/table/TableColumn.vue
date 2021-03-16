@@ -1,4 +1,5 @@
 <script>
+import {h as createElement} from 'vue-demi'
 import { toCssWidth } from '../../utils/helpers'
 
 export default {
@@ -64,7 +65,7 @@ export default {
         }
         this.$table.refreshSlots()
     },
-    render(createElement) {
+    render() {
         // renderless
         return null
     }

@@ -1,5 +1,5 @@
 import config from '../utils/config'
-import { isVueComponent } from './helpers'
+import { isVueComponent, getSlot } from './helpers'
 
 export default {
     props: {
@@ -76,7 +76,7 @@ export default {
         statusMessage() {
             if (!this.parentField) return
 
-            return this.parentField.newMessage || this.parentField.$slots.message
+            return this.parentField.newMessage || getSlot(this.parentField.$slots, 'message')
         },
 
         /**

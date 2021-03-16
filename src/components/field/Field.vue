@@ -58,6 +58,7 @@
 
 <script>
 import config from '../../utils/config'
+import {getSlot} from '../../utils/helpers'
 import FieldBody from './FieldBody'
 
 export default {
@@ -181,15 +182,15 @@ export default {
             return messages.filter((m) => { if (m) return m })
         },
         hasLabel() {
-            return this.label || this.$slots.label
+            return this.label || getSlot(this.$slots, 'label')
         },
         hasMessage() {
             return ((!this.parent || !this.parent.hasInnerField) && this.newMessage) ||
-                this.$slots.message
+                getSlot(this.$slots, 'message')
         },
         numberInputClasses() {
-            if (this.$slots.default) {
-                const numberinput = this.$slots.default.filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
+            if (getSlot(this.$slots, 'default')) {
+                const numberinput = getSlot(this.$slots, 'default').filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
                 if (numberinput) {
                     const classes = ['has-numberinput']
                     const controlsPosition = numberinput.componentOptions.propsData.controlsPosition
@@ -246,8 +247,8 @@ export default {
         },
         hasAddons() {
             let renderedNode = 0
-            if (this.$slots.default) {
-                renderedNode = this.$slots.default.reduce((i, node) => node.tag ? i + 1 : i, 0)
+            if (getSlot(this.$slots, 'default')) {
+                renderedNode = getSlot(this.$slots, 'default').reduce((i, node) => node.tag ? i + 1 : i, 0)
             }
             return (
                 renderedNode > 1 &&

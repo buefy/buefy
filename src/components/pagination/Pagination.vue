@@ -1,7 +1,7 @@
 <template>
     <nav class="pagination" :class="rootClasses">
         <slot
-            v-if="$scopedSlots.previous"
+            v-if="($scopedSlots || $slots).previous"
             name="previous"
             :page="getPage(current - 1, {
                 disabled: !hasPrev,
@@ -27,7 +27,7 @@
                 aria-hidden="true"/>
         </BPaginationButton>
         <slot
-            v-if="$scopedSlots.next"
+            v-if="($scopedSlots || $slots).next"
             name="next"
             :page="getPage(current + 1, {
                 disabled: !hasNext,
@@ -65,7 +65,7 @@
             <!--First-->
             <li v-if="hasFirst">
                 <slot
-                    v-if="$scopedSlots.default"
+                    v-if="($scopedSlots || $slots).default"
                     :page="getPage(1)"
                 />
                 <BPaginationButton
@@ -77,7 +77,7 @@
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
                 <slot
-                    v-if="$scopedSlots.default"
+                    v-if="($scopedSlots || $slots).default"
                     :page="page"
                 />
                 <BPaginationButton
@@ -89,7 +89,7 @@
             <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
             <li v-if="hasLast">
                 <slot
-                    v-if="$scopedSlots.default"
+                    v-if="($scopedSlots || $slots).default"
                     :page="getPage(pageCount)"
                 />
                 <BPaginationButton

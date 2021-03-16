@@ -9,7 +9,7 @@
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
                                                        'is-disabled': childItem.disabled }]">
                     <b-slot-component
-                        v-if="childItem.$scopedSlots.header"
+                        v-if="typeof (childItem.$scopedSlots || childItem.$slots).header === 'function'"
                         :component="childItem"
                         name="header"
                         tag="a"
@@ -36,9 +36,11 @@
 import config from '../../utils/config'
 import TabbedMixin from '../../utils/TabbedMixin.js'
 
+const tabbedMixin = TabbedMixin('tab')
+
 export default {
     name: 'BTabs',
-    mixins: [TabbedMixin('tab')],
+    mixins: [tabbedMixin],
     props: {
         expanded: {
             type: Boolean,
@@ -58,7 +60,7 @@ export default {
                 return config.defaultTabsAnimated
             }
         },
-        multiline: Boolean
+        multiline: Boolean,
     },
     computed: {
         mainClasses() {
@@ -79,7 +81,7 @@ export default {
                     'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
                 }
             ]
-        }
+        },
     }
 }
 </script>

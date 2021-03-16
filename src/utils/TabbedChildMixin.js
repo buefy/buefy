@@ -1,7 +1,11 @@
+import {defineComponent} from 'vue-demi'
 import {default as InjectedChildMixin, Sorted} from './InjectedChildMixin'
+import TabbedChildMixinRender from './TabbedChildMixinRender'
+import {getSlot} from '../utils/helpers'
+import {h as createElement} from 'vue-demi'
 
-export default (parentCmp) => ({
-    mixins: [InjectedChildMixin(parentCmp, Sorted)],
+export default (parentCmp) => defineComponent({
+    mixins: [InjectedChildMixin(parentCmp, Sorted), TabbedChildMixinRender],
     props: {
         label: String,
         icon: String,
@@ -12,7 +16,7 @@ export default (parentCmp) => ({
         },
         value: {
             type: String,
-            default() { return this._uid.toString() }
+            default() { return Math.random().toString() }
         },
         headerClass: {
             type: [String, Array, Object],
@@ -28,6 +32,9 @@ export default (parentCmp) => ({
     computed: {
         isActive() {
             return this.parent.activeItem === this
+        },
+        show() {
+            return this.isActive && this.visible
         }
     },
     methods: {
@@ -48,33 +55,5 @@ export default (parentCmp) => ({
                 ? this.parent.vertical ? 'slide-down' : 'slide-next'
                 : this.parent.vertical ? 'slide-up' : 'slide-prev'
         }
-    },
-    render(createElement) {
-        // if destroy apply v-if
-        if (this.parent.destroyOnHide) {
-            if (!this.isActive || !this.visible) {
-                return
-            }
-        }
-        const vnode = createElement('div', {
-            directives: [{
-                name: 'show',
-                value: this.isActive && this.visible
-            }],
-            attrs: { 'class': this.elementClass }
-        }, this.$slots.default)
-        // check animated prop
-        if (this.parent.animated) {
-            return createElement('transition', {
-                props: {
-                    'name': this.parent.animation || this.transitionName
-                },
-                on: {
-                    'before-enter': () => { this.parent.isTransitioning = true },
-                    'after-enter': () => { this.parent.isTransitioning = false }
-                }
-            }, [vnode])
-        }
-        return vnode
     }
 })

@@ -11,7 +11,7 @@
             <a
                 :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
-                :key="index"
+                :key="index + 'selectable'"
                 :class="classObject(weekDay)"
                 class="datepicker-cell"
                 role="button"

@@ -6,7 +6,7 @@
                     <a
                         :ref="`month-${date.getMonth()}`"
                         v-if="selectableDate(date) && !disabled"
-                        :key="index"
+                        :key="index + 'selectable'"
                         :class="[
                             classObject(date),
                             {'has-event': eventsDateMatch(date)},

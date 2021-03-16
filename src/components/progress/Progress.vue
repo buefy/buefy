@@ -81,7 +81,7 @@ export default {
             return this.calculateValue(this.value)
         },
         isNative() {
-            return this.$slots.bar === undefined
+            return getSlot(this.$slots, 'bar') === undefined
         },
         wrapperClasses() {
             return {

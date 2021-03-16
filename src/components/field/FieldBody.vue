@@ -1,4 +1,7 @@
 <script>
+import {h as createElement} from 'vue-demi'
+import {getSlot} from '../../utils/helpers'
+
 export default {
     name: 'BFieldBody',
     props: {
@@ -9,9 +12,9 @@ export default {
             type: [String, Object]
         }
     },
-    render(createElement) {
+    render() {
         let first = true
-        return createElement('div', { attrs: { 'class': 'field-body' } }, this.$slots.default.map((element) => {
+        return createElement('div', { attrs: { 'class': 'field-body' } }, getSlot(this.$slots, 'default').map((element) => {
             // skip returns and comments
             if (!element.tag) {
                 return element

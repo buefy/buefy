@@ -60,10 +60,11 @@
     "components"
   ],
   "dependencies": {
-    "bulma": "0.9.2"
+    "bulma": "0.9.2",
+    "vue-demi": "^0.7.3"
   },
   "peerDependencies": {
-    "vue": "^2.6.11"
+    "vue": "^2.6.11 || >=3.0.7"
   },
   "devDependencies": {
     "@applitools/eyes-cypress": "3.7.5",
@@ -72,6 +73,7 @@
     "@babel/preset-env": "7.3.4",
     "@fortawesome/fontawesome-free": "5.3.1",
     "@mdi/font": "4.8.95",
+    "@vue/compiler-sfc": "^3.0.7",
     "@vue/test-utils": "1.0.0-beta.29",
     "all-contributors-cli": "6.14.0",
     "autoprefixer": "7.1.1",
@@ -90,6 +92,7 @@
     "cleave.js": "1.0.1",
     "clipboard": "1.7.1",
     "codecov": "3.7.1",
+    "concurrently": "^6.0.0",
     "connect-history-api-fallback": "1.3.0",
     "copy-webpack-plugin": "4.3.1",
     "copyfiles": "2.2.0",
@@ -120,7 +123,7 @@
     "prerender-spa-plugin": "3.4.0",
     "raw-loader": "0.5.1",
     "rimraf": "2.6.0",
-    "rollup": "1.17.0",
+    "rollup": "^2.41.4",
     "rollup-copy-plugin": "0.1.0",
     "rollup-plugin-babel": "4.3.2",
     "rollup-plugin-commonjs": "9.2.1",
@@ -128,6 +131,7 @@
     "rollup-plugin-replace": "2.1.0",
     "rollup-plugin-terser": "4.0.4",
     "rollup-plugin-vue": "5.0.0",
+    "rollup-plugin-vue-next": "npm:rollup-plugin-vue@next",
     "sass": "1.26.10",
     "sass-loader": "7.3.1",
     "scrollreveal": "3.3.6",
@@ -135,10 +139,11 @@
     "shelljs": "0.8.4",
     "sinon": "7.5.0",
     "sortablejs": "1.7.0",
+    "typescript": "^4.2.3",
     "uglifyjs-webpack-plugin": "1.2.5",
     "url-loader": "0.5.8",
     "vee-validate": "2.1.0-beta.9",
-    "vue": "2.6.11",
+    "vue": "3.0.7",
     "vue-analytics": "4.1.3",
     "vue-jest": "2.5.0",
     "vue-loader": "15.9.3",
@@ -146,6 +151,8 @@
     "vue-router": "3.1.6",
     "vue-style-loader": "3.0.1",
     "vue-template-compiler": "2.6.11",
+    "vue-test-utils": "npm:@vue/test-utils@^2.0.0-rc.4",
+    "vue2": "npm:vue@2",
     "webpack": "3.10.0",
     "webpack-bundle-analyzer": "2.9.2",
     "webpack-dev-server": "2.11.1",

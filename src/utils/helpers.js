@@ -294,3 +294,8 @@ export function isCustomElement(vm) {
 }
 
 export const isDefined = (d) => d !== undefined
+
+export function getSlot (slots, name, props) {
+    const value = slots[name]
+    return typeof value === 'function' ? value(props) : value
+}

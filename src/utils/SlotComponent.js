@@ -1,4 +1,5 @@
-import { isVueComponent } from './helpers'
+import { isVueComponent, getSlot } from './helpers'
+import {h as createElement} from 'vue-demi'
 
 export default {
     name: 'BSlotComponent',
@@ -41,11 +42,14 @@ export default {
             this.component.$off(this.event, this.refresh)
         }
     },
-    render(createElement) {
+    render() {
         if (isVueComponent(this.component)) {
-            return createElement(this.tag, {},
-                this.scoped ? this.component.$scopedSlots[this.name](this.props)
-                    : this.component.$slots[this.name])
+            const scopedSlots = this.component.scoped
+                ? (this.component.$scopedSlots | this.component.$slots)
+                : this.component.$slots
+
+            return createElement(this.tag, {}, getSlot(scopedSlots, this.name, this.props)
+            )
         }
     }
 }

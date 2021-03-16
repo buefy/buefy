@@ -29,7 +29,7 @@ const ModalProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
-        const ModalComponent = vm.extend(Modal)
+        const ModalComponent = (vm.extend || vm.component)(Modal)
         const component = new ModalComponent({
             parent,
             el: document.createElement('div'),

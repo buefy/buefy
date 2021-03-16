@@ -1,6 +1,8 @@
 <script>
+import {h as createElement} from 'vue-demi'
 import NavbarBurger from './NavbarBurger.vue'
 import clickOutside from '../../directives/clickOutside'
+import {getSlot} from '../../utils/helpers'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
@@ -167,7 +169,7 @@ export default {
         genNavbarBrandNode(createElement) {
             return createElement('div', {
                 class: 'navbar-brand'
-            }, [this.$slots.brand, this.genBurgerNode(createElement)])
+            }, [getSlot(this.$slots, 'brand'), this.genBurgerNode(createElement)])
         },
         genBurgerNode(createElement) {
             if (this.mobileBurger) {
@@ -198,7 +200,7 @@ export default {
         genMenuPosition(createElement, positionName) {
             return createElement('div', {
                 staticClass: `navbar-${positionName}`
-            }, this.$slots[positionName])
+            }, getSlot(this.$slots, positionName))
         },
         setBodyFixedTopClass(isSet) {
             this.checkIfFixedPropertiesAreColliding()
@@ -240,7 +242,7 @@ export default {
             this.removeBodyClass(className)
         }
     },
-    render(createElement, fn) {
+    render() {
         return this.genNavbar(createElement)
     }
 }

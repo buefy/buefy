@@ -42,7 +42,7 @@
 
 <script>
 import config from '../../utils/config'
-import { isWebpSupported } from '../../utils/helpers'
+import { isWebpSupported, getSlot } from '../../utils/helpers'
 
 export default {
     name: 'BImage',
@@ -195,7 +195,7 @@ export default {
             return (
                 !this.loaded &&
                 (
-                    this.$slots.placeholder || (
+                    getSlot(this.$slots, 'placeholder') || (
                         this.placeholder &&
                         (this.webpSupportVerified || !this.isPlaceholderWepb)
                     )
@@ -223,10 +223,10 @@ export default {
             }
         },
         isCaptionFirst() {
-            return this.$slots.caption && this.captionFirst
+            return getSlot(this.$slots, 'caption') && this.captionFirst
         },
         isCaptionLast() {
-            return this.$slots.caption && !this.captionFirst
+            return getSlot(this.$slots, 'caption') && !this.captionFirst
         }
     },
     methods: {

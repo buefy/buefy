@@ -1,4 +1,4 @@
-import vue from 'rollup-plugin-vue'
+import vue from 'rollup-plugin-vue-next'
 import node from 'rollup-plugin-node-resolve'
 import cjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'

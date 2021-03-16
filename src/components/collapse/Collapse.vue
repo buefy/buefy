@@ -1,4 +1,7 @@
 <script>
+import {getSlot} from '../../utils/helpers'
+import {h as createElement} from 'vue-demi'
+
 export default {
     name: 'BCollapse',
     // deprecated, to replace with default 'value' in the next breaking change
@@ -50,12 +53,12 @@ export default {
             this.$emit(this.isOpen ? 'open' : 'close')
         }
     },
-    render(createElement) {
+    render() {
         const trigger = createElement('div', {
             staticClass: 'collapse-trigger', on: { click: this.toggle }
-        }, this.$scopedSlots.trigger
-            ? [this.$scopedSlots.trigger({ open: this.isOpen })]
-            : [this.$slots.trigger]
+        }, (this.$scopedSlots || this.$slots).trigger
+            ? [(this.$scopedSlots || this.$slots).trigger({ open: this.isOpen })]
+            : [getSlot(this.$slots, 'trigger')]
         )
         const content = createElement('transition', { props: { name: this.animation } }, [
             createElement('div', {
@@ -65,7 +68,7 @@ export default {
                     name: 'show',
                     value: this.isOpen
                 }]
-            }, this.$slots.default)
+            }, getSlot(this.$slots, 'default'))
         ])
         return createElement('div', { staticClass: 'collapse' },
             this.position === 'is-top' ? [trigger, content] : [content, trigger])

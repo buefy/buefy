@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { getValueByPath } from '../../utils/helpers'
+import { getValueByPath, getSlot } from '../../utils/helpers'
 import Tag from '../tag/Tag'
 import Autocomplete from '../autocomplete/Autocomplete'
 import config from '../../utils/config'
@@ -212,19 +212,19 @@ export default {
         },
 
         hasDefaultSlot() {
-            return !!this.$scopedSlots.default
+            return !!(this.$scopedSlots || this.$slots).default
         },
 
         hasEmptySlot() {
-            return !!this.$slots.empty
+            return !!getSlot(this.$slots, 'empty')
         },
 
         hasHeaderSlot() {
-            return !!this.$slots.header
+            return !!getSlot(this.$slots, 'header')
         },
 
         hasFooterSlot() {
-            return !!this.$slots.footer
+            return !!getSlot(this.$slots, 'footer')
         },
 
         /**

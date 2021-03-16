@@ -28,7 +28,8 @@
                     :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
-                    :current-page.sync="newCurrentPage"
+                    v-bind:current-page="newCurrentPage"
+                    @update:title="newCurrentPage = $event"
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
                     :aria-page-label="ariaPageLabel"
@@ -81,7 +82,7 @@
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
                             }">
-                                <template v-if="column.$scopedSlots && column.$scopedSlots.header">
+                                <template v-if="getScopedSlots(column).header">
                                     <b-slot-component
                                         :component="column"
                                         scoped
@@ -156,7 +157,7 @@
                                     'is-centered': column.centered
                             }">
                                 <template
-                                    v-if="column.$scopedSlots && column.$scopedSlots.subheading"
+                                    v-if="getScopedSlots(column).subheading"
                                 >
                                     <b-slot-component
                                         :component="column"
@@ -182,8 +183,7 @@
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
                                     <template
-                                        v-if="column.$scopedSlots
-                                        && column.$scopedSlots.searchable">
+                                        v-if="getScopedSlots(column).searchable">
                                         <b-slot-component
                                             :component="column"
                                             :scoped="true"
@@ -204,10 +204,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="(row, index) in visibleData">
-                        <tr
-                            :key="customRowKey ? row[customRowKey] : index"
-                            :class="[rowClass(row, index), {
+                    <template :key="customRowKey ? row[customRowKey] : index" v-for="(row, index) in visibleData">
+                        <tr :class="[rowClass(row, index), {
                                 'is-selected': isRowSelected(row, selected),
                                 'is-checked': isRowChecked(row),
                             }]"
@@ -251,7 +249,7 @@
 
                             <template v-for="(column, colindex) in visibleColumns">
 
-                                <template v-if="column.$scopedSlots && column.$scopedSlots.default">
+                                <template v-if="getScopedSlots(column).default">
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
@@ -278,11 +276,9 @@
                             </td>
                         </tr>
 
-                        <transition
-                            :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
-                            :name="detailTransition"
-                        >
+                        <transition :name="detailTransition">
                             <tr
+                                :key="(customRowKey ? row[customRowKey] : index)"
                                 v-if="isActiveDetailRow(row)"
                                 class="detail">
                                 <td :colspan="columnCount">
@@ -363,6 +359,7 @@
 import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
+import {getSlot} from '../../utils/helpers'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -727,7 +724,7 @@ export default {
                     vnode.componentInstance.$data &&
                     vnode.componentInstance.$data._isTableColumn)
                 .map((vnode) => vnode.componentInstance)
-        }
+        },
     },
     watch: {
         /**
@@ -1188,9 +1185,9 @@ export default {
         * Check if footer slot has custom content.
         */
         hasCustomFooterSlot() {
-            if (this.$slots.footer.length > 1) return true
+            if (getSlot(this.$slots, 'footer').length > 1) return true
 
-            const tag = this.$slots.footer[0].tag
+            const tag = getSlot(this.$slots, 'footer')[0].tag
             if (tag !== 'th' && tag !== 'td') return false
 
             return true
@@ -1200,7 +1197,7 @@ export default {
         * Check if bottom-left slot exists.
         */
         hasBottomLeftSlot() {
-            return typeof this.$slots['bottom-left'] !== 'undefined'
+            return typeof getSlot(this.$slots, 'bottom-left') !== 'undefined'
         },
 
         /**
@@ -1320,7 +1317,10 @@ export default {
         },
 
         refreshSlots() {
-            this.defaultSlots = this.$slots.default || []
+            this.defaultSlots = getSlot(this.$slots, 'default') || []
+        },
+        getScopedSlots(vm) {
+            return vm.$scopedSlots || vm.$slots
         }
     },
     mounted() {

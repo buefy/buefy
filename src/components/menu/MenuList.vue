@@ -1,4 +1,6 @@
 <script>
+import {h as createElement} from 'vue-demi'
+
 export default {
     name: 'BMenuList',
     functional: true,
@@ -15,7 +17,7 @@ export default {
             default: 'is-small'
         }
     },
-    render(createElement, context) {
+    render(context) {
         let vlabel = null
         const slots = context.slots()
         if (context.props.label || slots.label) {

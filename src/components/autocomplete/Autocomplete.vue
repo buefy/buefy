@@ -91,7 +91,8 @@ import {
     removeElement,
     createAbsoluteElement,
     isCustomElement,
-    toCssWidth
+    toCssWidth,
+    getSlot
 } from '../../utils/helpers'
 import FormElementMixin from '../../utils/FormElementMixin'
 import Input from '../input/Input'
@@ -227,21 +228,21 @@ export default {
          * Check if exists "empty" slot
          */
         hasEmptySlot() {
-            return !!this.$slots.empty
+            return !!getSlot(this.$slots, 'empty')
         },
 
         /**
          * Check if exists "header" slot
          */
         hasHeaderSlot() {
-            return !!this.$slots.header
+            return !!getSlot(this.$slots, 'header')
         },
 
         /**
          * Check if exists "footer" slot
          */
         hasFooterSlot() {
-            return !!this.$slots.footer
+            return !!getSlot(this.$slots, 'footer')
         },
 
         /**
