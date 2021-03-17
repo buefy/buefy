@@ -295,13 +295,13 @@
                                     </div>
                                 </td>
                             </tr>
-                            <slot
-                                v-if="isActiveCustomDetailRow(row)"
-                                name="detail"
-                                :row="row"
-                                :index="index"
-                            />
                         </transition>
+                        <slot
+                            v-if="isActiveCustomDetailRow(row)"
+                            name="detail"
+                            :row="row"
+                            :index="index"
+                        />
                     </template>
 
                     <tr
