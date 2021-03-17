@@ -547,7 +547,7 @@ export default [
             {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
-                parameters: '<code> row: Object </code>'
+                parameters: '<code> row: Object </code>, <code> event: Event </code>'
             },
             {
                 name: '<code>mouseleave</code>',
