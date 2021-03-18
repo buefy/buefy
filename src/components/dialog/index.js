@@ -38,6 +38,10 @@ const DialogProgrammatic = {
             params = {
                 message: params
             }
+        } else if (typeof params === 'number') {
+            params = {
+                message: params.toString()
+            }
         }
         const defaultParam = {
             canCancel: false
