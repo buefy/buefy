@@ -128,7 +128,8 @@
             "/",
             "documentation",
             "documentation/tooltip"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/modal": {
         "title": "Modal",
@@ -152,7 +153,8 @@
             "/",
             "documentation",
             "documentation/navbar"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -164,7 +166,8 @@
             "/",
             "documentation",
             "documentation/tabs"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/tag": {
         "title": "Tag",
@@ -248,7 +251,8 @@
             "/",
             "documentation",
             "documentation/field"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/input": {
         "title": "Input",
@@ -333,7 +337,8 @@
             "/",
             "documentation",
             "documentation/datepicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -405,7 +410,8 @@
             "/",
             "documentation",
             "documentation/table"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -441,7 +447,8 @@
             "/",
             "documentation",
             "documentation/numberinput"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/steps": {
         "title": "Steps",
@@ -490,7 +497,8 @@
             "/",
             "documentation",
             "documentation/progress"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/carousel": {
         "title": "Carousel",
@@ -502,7 +510,8 @@
             "/",
             "documentation",
             "documentation/carousel"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/rate": {
         "title": "Rate",
@@ -526,8 +535,7 @@
             "/",
             "documentation",
             "documentation/sidebar"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/skeleton": {
         "title": "Skeleton",
@@ -539,8 +547,7 @@
             "/",
             "documentation",
             "documentation/skeleton"
-        ],
-        "isUpdated": true
+        ]
     },
     "documentation/image": {
         "title": "Image",
@@ -563,8 +570,7 @@
         "breadcrumb": [
             "/",
             "extensions"
-        ],
-        "isUpdated": true
+        ]
     },
     "extensions/cleavejs": {
         "title": "Cleavejs",
@@ -580,7 +586,7 @@
     },
     "extensions/sortablejs": {
         "title": "Sortablejs",
-        "subtitle": "Sort a table — as a Vue directive",
+        "subtitle": "Sort tags — as a Vue directive",
         "path": "/extensions/sortablejs",
         "githubPath": "pages/extensions/sortablejs/Sortablejs.vue",
         "menu": "extensions",

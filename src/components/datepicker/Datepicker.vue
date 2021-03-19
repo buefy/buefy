@@ -25,6 +25,7 @@
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
+                        :icon-right="iconRight"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -129,7 +130,7 @@
                             :rules-for-first-week="rulesForFirstWeek"
                             :min-date="minDate"
                             :max-date="maxDate"
-                            :focused.sync="focusedDateData"
+                            :focused="focusedDateData"
                             :disabled="disabled"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
@@ -141,11 +142,13 @@
                             :nearby-month-days="nearbyMonthDays"
                             :nearby-selectable-month-days="nearbySelectableMonthDays"
                             :show-week-number="showWeekNumber"
+                            :week-number-clickable="weekNumberClickable"
                             :range="range"
                             :multiple="multiple"
                             @range-start="date => $emit('range-start', date)"
                             @range-end="date => $emit('range-end', date)"
-                            @close="togglePicker(false)"/>
+                            @close="togglePicker(false)"
+                            @update:focused="focusedDateData = $event" />
                     </div>
                     <div v-else>
                         <b-datepicker-month
@@ -153,7 +156,7 @@
                             :month-names="newMonthNames"
                             :min-date="minDate"
                             :max-date="maxDate"
-                            :focused.sync="focusedDateData"
+                            :focused="focusedDateData"
                             :disabled="disabled"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
@@ -161,9 +164,13 @@
                             :events="events"
                             :indicators="indicators"
                             :date-creator="dateCreator"
+                            :range="range"
                             :multiple="multiple"
+                            @range-start="date => $emit('range-start', date)"
+                            @range-end="date => $emit('range-end', date)"
                             @close="togglePicker(false)"
-                            @change-focus="changeFocus"/>
+                            @change-focus="changeFocus"
+                            @update:focused="focusedDateData = $event" />
                     </div>
                 </div>
 
@@ -276,6 +283,11 @@ export default {
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
+    provide() {
+        return {
+            $datepicker: this
+        }
+    },
     props: {
         value: {
             type: [Date, Array]
@@ -357,6 +369,7 @@ export default {
             default: () => config.defaultDatepickerMobileNative
         },
         position: String,
+        iconRight: String,
         events: Array,
         indicators: {
             type: String,
@@ -395,6 +408,10 @@ export default {
             type: Boolean,
             default: () => config.defaultDatepickerShowWeekNumber
         },
+        weekNumberClickable: {
+            type: Boolean,
+            default: () => config.defaultDatepickerWeekNumberClickable
+        },
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
@@ -430,6 +447,10 @@ export default {
     data() {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
             this.focusedDate || this.dateCreator()
+
+        if (!this.value && this.maxDate && this.maxDate.getFullYear() < focusedDate.getFullYear()) {
+            focusedDate.setFullYear(this.maxDate.getFullYear())
+        }
 
         return {
             dateSelected: this.value,
@@ -468,13 +489,13 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
                 month: this.localeOptions.month || '2-digit',
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         newMonthNames() {
@@ -487,7 +508,7 @@ export default {
             if (Array.isArray(this.dayNames)) {
                 return this.dayNames
             }
-            return getWeekdayNames(this.locale, this.firstDayOfWeek)
+            return getWeekdayNames(this.locale)
         },
         listOfMonths() {
             let minMonth = 0

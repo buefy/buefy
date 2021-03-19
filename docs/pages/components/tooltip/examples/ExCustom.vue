@@ -1,7 +1,7 @@
 <template>
     <section class="b-tooltips">
         <b-tooltip position="is-bottom" multilined>
-            <button class="button is-primary">Html Content</button>
+            <b-button label="Html Content" type="is-primary" />
             <template v-slot:content>
                 <b>Lorem ipsum dolor sit amet</b>, consectetur warning elit. <i>Fusce id fermentum quam</i>.
             </template>
@@ -14,7 +14,7 @@
                 <b-icon icon="thumb-down" type="is-warning"></b-icon>
                 <b-icon icon="emoticon-cool"></b-icon>
             </template>
-            <button class="button is-light">Action</button>
+            <b-button label="Action" type="is-light" />
         </b-tooltip>
     </section>
 </template>

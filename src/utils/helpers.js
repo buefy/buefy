@@ -150,6 +150,7 @@ export function createAbsoluteElement(el) {
     root.style.position = 'absolute'
     root.style.left = '0px'
     root.style.top = '0px'
+    root.style.width = '100%'
     const wrapper = document.createElement('div')
     root.appendChild(wrapper)
     wrapper.appendChild(el)
@@ -178,7 +179,9 @@ export function multiColumnSort(inputArray, sortingPriority) {
     const fieldSorter = (fields) => (a, b) => fields.map((o) => {
         let dir = 1
         if (o[0] === '-') { dir = -1; o = o.substring(1) }
-        return a[o] > b[o] ? dir : a[o] < b[o] ? -(dir) : 0
+        const aValue = getValueByPath(a, o)
+        const bValue = getValueByPath(b, o)
+        return aValue > bValue ? dir : aValue < bValue ? -(dir) : 0
     }).reduce((p, n) => p || n, 0)
 
     return array.sort(fieldSorter(sortingPriority))
@@ -212,7 +215,7 @@ export function getMonthNames(locale = undefined, format = 'long') {
     }
     const dtf = new Intl.DateTimeFormat(locale, {
         month: format,
-        timezome: 'UTC'
+        timeZone: 'UTC'
     })
     return dates.map((d) => dtf.format(d))
 }
@@ -224,19 +227,17 @@ export function getMonthNames(locale = undefined, format = 'long') {
  * @param  {String} format long (ex. Thursday), short (ex. Thu) or narrow (T)
  * @return {Array<String>} An array of weekday names
  */
-export function getWeekdayNames(locale = undefined, firstDayOfWeek = 0, format = 'narrow') {
+export function getWeekdayNames(locale = undefined, format = 'narrow') {
     const dates = []
-    for (let i = 1, j = 0; j < 7; i++) {
-        const d = new Date(Date.UTC(2000, 0, i))
-        const day = d.getUTCDay()
-        if (day === firstDayOfWeek + 1 || j > 0) {
-            dates.push(d)
-            j++
-        }
+    const dt = new Date(2000, 0, 1)
+    const dayOfWeek = dt.getDay()
+    dt.setDate(dt.getDate() - dayOfWeek)
+    for (let i = 0; i < 7; i++) {
+        dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + i))
     }
     const dtf = new Intl.DateTimeFormat(locale, {
         weekday: format,
-        timezome: 'UTC'
+        timeZone: 'UTC'
     })
     return dates.map((d) => dtf.format(d))
 }
@@ -291,3 +292,5 @@ export function isWebpSupported() {
 export function isCustomElement(vm) {
     return 'shadowRoot' in vm.$root.$options
 }
+
+export const isDefined = (d) => d !== undefined

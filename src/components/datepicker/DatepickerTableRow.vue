@@ -1,21 +1,25 @@
 <template>
     <div class="datepicker-row">
-        <a class="datepicker-cell is-week-number" v-if="showWeekNumber">
+        <a
+            class="datepicker-cell is-week-number"
+            :class="{'is-clickable': weekNumberClickable }"
+            v-if="showWeekNumber"
+            @click.prevent="clickWeekNumber(getWeekNumber(week[6]))">
             <span>{{ getWeekNumber(week[6]) }}</span>
         </a>
         <template v-for="(weekDay, index) in week">
             <a
-                :ref="`day-${weekDay.getDate()}`"
+                :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
-                :class="[classObject(weekDay), {'has-event': eventsDateMatch(weekDay)}, indicators]"
+                :class="classObject(weekDay)"
                 class="datepicker-cell"
                 role="button"
                 href="#"
                 :disabled="disabled"
                 @click.prevent="emitChosenDate(weekDay)"
                 @mouseenter="setRangeHoverEndDate(weekDay)"
-                @keydown.prevent="manageKeydown($event, weekDay)"
+                @keydown="manageKeydown($event, weekDay)"
                 :tabindex="day === weekDay.getDate() ? null : -1">
                 <span>{{ weekDay.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(weekDay)">
@@ -32,6 +36,13 @@
                 :class="classObject(weekDay)"
                 class="datepicker-cell">
                 <span>{{ weekDay.getDate() }}</span>
+                <div class="events" v-if="eventsDateMatch(weekDay)">
+                    <div
+                        class="event"
+                        :class="event.type"
+                        v-for="(event, index) in eventsDateMatch(weekDay)"
+                        :key="index"/>
+                </div>
             </div>
         </template>
     </div>
@@ -40,6 +51,9 @@
 <script>
 export default {
     name: 'BDatepickerTableRow',
+    inject: {
+        $datepicker: { name: '$datepicker', default: false }
+    },
     props: {
         selectedDate: {
             type: [Date, Array]
@@ -67,21 +81,16 @@ export default {
         dateCreator: Function,
         nearbyMonthDays: Boolean,
         nearbySelectableMonthDays: Boolean,
-        showWeekNumber: {
-            type: Boolean,
-            default: () => false
-        },
+        showWeekNumber: Boolean,
+        weekNumberClickable: Boolean,
         range: Boolean,
         multiple: Boolean,
-        rulesForFirstWeek: {
-            type: Number,
-            default: () => 4
-        },
+        rulesForFirstWeek: Number,
         firstDayOfWeek: Number
     },
     watch: {
         day(day) {
-            const refName = `day-${day}`
+            const refName = `day-${this.month}-${day}`
             this.$nextTick(() => {
                 if (this.$refs[refName] && this.$refs[refName].length > 0) {
                     if (this.$refs[refName][0]) {
@@ -134,6 +143,11 @@ export default {
             }
 
             return resWeek
+        },
+        clickWeekNumber(week) {
+            if (this.weekNumberClickable) {
+                this.$datepicker.$emit('week-number-click', week)
+            }
         },
         /*
          * Check that selected day is within earliest/latest params and
@@ -280,7 +294,9 @@ export default {
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled,
                 'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
-                'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month
+                'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month,
+                'has-event': this.eventsDateMatch(day),
+                [this.indicators]: this.eventsDateMatch(day)
             }
         },
         setRangeHoverEndDate(day) {
@@ -289,9 +305,16 @@ export default {
             }
         },
 
-        manageKeydown({ key }, weekDay) {
+        manageKeydown(event, weekDay) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
+            const { key } = event
+            let preventDefault = true
             switch (key) {
+                case 'Tab': {
+                    preventDefault = false
+                    break
+                }
+
                 case ' ':
                 case 'Space':
                 case 'Spacebar':
@@ -321,11 +344,23 @@ export default {
                     break
                 }
             }
+
+            if (preventDefault) {
+                event.preventDefault()
+            }
         },
 
         changeFocus(day, inc) {
-            const nextDay = day
+            const nextDay = new Date(day.getTime())
             nextDay.setDate(day.getDate() + inc)
+            while (
+                (!this.minDate || nextDay > this.minDate) &&
+                (!this.maxDate || nextDay < this.maxDate) &&
+                !this.selectableDate(nextDay)
+            ) {
+                nextDay.setDate(day.getDate() + Math.sign(inc))
+            }
+            this.setRangeHoverEndDate(nextDay)
             this.$emit('change-focus', nextDay)
         }
     }

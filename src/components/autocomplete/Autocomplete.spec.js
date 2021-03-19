@@ -99,8 +99,8 @@ describe('BAutocomplete', () => {
 
         const itemsInDropdowm = findStringsStartingWith(DATA_LIST, VALUE_TYPED)
 
-        $input.trigger('keydown.down')
-        $input.trigger('keydown.enter')
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
         await wrapper.vm.$nextTick()
 
         expect($input.element.value).toBe(itemsInDropdowm[0])
@@ -112,9 +112,9 @@ describe('BAutocomplete', () => {
 
         expect($dropdown.isVisible()).toBeTruthy()
 
-        $input.trigger('keydown.down')
-        $input.trigger('keydown.down')
-        $input.trigger('keydown.enter')
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
         await wrapper.vm.$nextTick()
 
         expect($input.element.value).toBe(itemsInDropdowm[1])
@@ -164,12 +164,11 @@ describe('BAutocomplete', () => {
         await wrapper.vm.$nextTick()
 
         expect($dropdown.isVisible()).toBeTruthy()
-        expect(wrapper.vm.setHovered).toHaveBeenCalled()
     })
 
     it('manages tab pressed as expected', async () => {
         // hovered is null
-        $input.trigger('keydown.tab')
+        $input.trigger('keydown', {'key': 'Tab'})
         expect($dropdown.isVisible()).toBeFalsy()
 
         // The first element will be hovered
@@ -185,7 +184,7 @@ describe('BAutocomplete', () => {
         $input.trigger('focus')
         await wrapper.vm.$nextTick()
 
-        $input.trigger('keydown.tab')
+        $input.trigger('keydown', {'key': 'Tab'})
         expect($input.element.value).toBe(DATA_LIST[0])
     })
 
@@ -208,11 +207,11 @@ describe('BAutocomplete', () => {
         wrapper.vm.isActive = true
         expect($dropdown.isVisible()).toBeTruthy()
 
-        $input.trigger('keydown.enter')
+        $input.trigger('keydown', {'key': 'Enter'})
         expect(wrapper.vm.hovered).toBeNull()
 
-        $input.trigger('keydown.down')
-        $input.trigger('keydown.enter')
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
         expect($input.element.value).toBe(data[0].name)
     })
 
@@ -225,8 +224,8 @@ describe('BAutocomplete', () => {
         wrapper.vm.isActive = true
         expect($dropdown.isVisible()).toBeTruthy()
 
-        $input.trigger('keydown.down')
-        $input.trigger('keydown.enter')
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
         expect($input.element.value).toBe('')
     })
 
@@ -239,8 +238,8 @@ describe('BAutocomplete', () => {
         wrapper.vm.isActive = true
         expect($dropdown.isVisible()).toBeTruthy()
 
-        $input.trigger('keydown.down')
-        $input.trigger('keydown.enter')
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
         expect($input.element.value).toBe(`${DATA_LIST[0]} formatted`)
     })
 

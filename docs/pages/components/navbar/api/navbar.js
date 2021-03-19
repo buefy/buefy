@@ -24,11 +24,18 @@ export default [
               default: '<code>false</code>'
           },
           {
-              name: '<code>is-active</code>',
+              name: '<code>active</code>',
               description: 'To control the behaviour of the mobile menu programmatically, use the <code>.sync</code> modifier to make it two-way binding',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
+          },
+          {
+            name: '<code>centered</code>',
+            description: 'To center the navbar-start slot',
+            type: 'Boolean',
+            values: '—',
+            default: '<code>false</code>'
           },
           {
               name: '<code>type</code>',
@@ -106,7 +113,7 @@ export default [
             name: '<code>tag</code>',
             description: 'Sets the type of the component that have to render as navbar-item',
             type: 'String',
-            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and his html attributes like href, to, etc...',
+            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and it\'s html attributes like href, to, etc...',
             default: 'a'
         },
         {

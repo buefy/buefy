@@ -25,6 +25,17 @@
             <p>You can add your custom header to the datepicker.</p>
         </Example>
 
+        <Example :component="ExTrigger" :code="ExTriggerCode" title="Trigger" vertical>
+            <p>You can add your custom trigger component/s to the datepicker.</p>
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.9.0</span>
+            </div>
+            <b-message type="is-warning">
+                You should disable the default <code>mobile-native</code> in order to avoid a different UI on mobile
+            </b-message>
+        </Example>
+
         <Example :component="ExMonth" :code="ExMonthCode" title="Month picker" vertical>
             <div class="tags has-addons">
                 <span class="tag is-success">Since</span>
@@ -90,6 +101,9 @@
     import ExProgrammatically from './examples/ExProgrammatically'
     import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
 
+    import ExTrigger from './examples/ExTrigger'
+    import ExTriggerCode from '!!raw-loader!./examples/ExTrigger'
+
     import ExMonth from './examples/ExMonth'
     import ExMonthCode from '!!raw-loader!./examples/ExMonth'
 
@@ -122,6 +136,8 @@
                 ExHeaderCode,
                 ExProgrammatically,
                 ExProgrammaticallyCode,
+                ExTrigger,
+                ExTriggerCode,
                 ExInline,
                 ExInlineCode,
                 ExEvents,

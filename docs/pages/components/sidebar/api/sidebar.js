@@ -28,10 +28,10 @@ export default [
             },
             {
                 name: '<code>can-cancel</code>',
-                description: `Can close Sidebar by clicking 'X', pressing escape or clicking outside`,
+                description: `Can close Sidebar pressing escape or clicking outside`,
                 type: 'Boolean, Array',
-                values: '<code>escape</code>, <code>x</code>, <code>outside</code>',
-                default: `<code>['escape', 'x', 'outside']</code>`
+                values: '<code>escape</code>, <code>outside</code>',
+                default: `<code>['escape', 'outside']</code>`
             },
             {
                 name: '<code>on-cancel</code>',
@@ -95,7 +95,15 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
-            }
+            },
+            {
+                name: '<code>scroll</code>',
+                description: `<code>clip</code> to remove the <code>&lt;body&gt;</code> scrollbar, <code>keep</code> to have a non scrollable scrollbar
+                    to avoid shifting background, but will set <code>&lt;body&gt;</code> to position fixed, might break some layouts`,
+                type: 'String',
+                values: '<code>clip</code>, <code>keep</code>',
+                default: '<code>clip</code>'
+            },
       ],
       slots: [
           {

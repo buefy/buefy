@@ -31,7 +31,7 @@ $snackbar-box-shadow: $notices-box-shadow !default;
         padding: 0.75em 1.5em;
         pointer-events: auto;
         opacity: $toast-opacity;
-        @each $name, $pair in $colors {
+        @each $name, $pair in $notification-colors {
             $color: nth($pair, 1);
             $color-invert: nth($pair, 2);
             &.is-#{$name} {
@@ -71,7 +71,7 @@ $snackbar-box-shadow: $notices-box-shadow !default;
             .button:active {
                 background: darken($snackbar-background-color, 5%);
             }
-            @each $name, $pair in $colors {
+            @each $name, $pair in $notification-colors {
                 $color: nth($pair, 1);
                 &.is-#{$name} {
                     .button {
@@ -79,6 +79,9 @@ $snackbar-box-shadow: $notices-box-shadow !default;
                     }
                 }
             }
+        }
+        .action.is-cancel {
+            padding-right: 0;
         }
         @include mobile {
             width: 100%;

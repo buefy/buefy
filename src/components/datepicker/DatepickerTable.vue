@@ -28,6 +28,7 @@
                 :nearby-month-days="nearbyMonthDays"
                 :nearby-selectable-month-days="nearbySelectableMonthDays"
                 :show-week-number="showWeekNumber"
+                :week-number-clickable="weekNumberClickable"
                 :first-day-of-week="firstDayOfWeek"
                 :rules-for-first-week="rulesForFirstWeek"
                 :range="range"
@@ -42,8 +43,7 @@
 
 <script>
 import DatepickerTableRow from './DatepickerTableRow'
-
-const isDefined = (d) => d !== undefined
+import { isDefined } from '../../utils/helpers'
 
 export default {
     name: 'BDatepickerTable',
@@ -69,14 +69,9 @@ export default {
         selectableDates: Array,
         nearbyMonthDays: Boolean,
         nearbySelectableMonthDays: Boolean,
-        showWeekNumber: {
-            type: Boolean,
-            default: () => false
-        },
-        rulesForFirstWeek: {
-            type: Number,
-            default: () => 4
-        },
+        showWeekNumber: Boolean,
+        weekNumberClickable: Boolean,
+        rulesForFirstWeek: Number,
         range: Boolean,
         multiple: Boolean
     },
@@ -84,11 +79,18 @@ export default {
         return {
             selectedBeginDate: undefined,
             selectedEndDate: undefined,
-            hoveredEndDate: undefined,
-            multipleSelectedDates: this.multiple && this.value ? this.value : []
+            hoveredEndDate: undefined
         }
     },
     computed: {
+        multipleSelectedDates: {
+            get() {
+                return this.multiple && this.value ? this.value : []
+            },
+            set(value) {
+                this.$emit('input', value)
+            }
+        },
         visibleDayNames() {
             const visibleDayNames = []
             let index = this.firstDayOfWeek
@@ -220,9 +222,8 @@ export default {
                     selectedDate.getMonth() !== date.getMonth()
                 )
             } else {
-                this.multipleSelectedDates.push(date)
+                this.multipleSelectedDates = [...this.multipleSelectedDates, date]
             }
-            this.$emit('input', this.multipleSelectedDates)
         },
 
         /*

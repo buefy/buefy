@@ -18,7 +18,8 @@
             v-else
             class="pagination-previous"
             :disabled="!hasPrev"
-            :page="getPage(current - 1)">
+            :page="getPage(current - 1)"
+            :aria-label="ariaPreviousLabel">
             <b-icon
                 :icon="iconPrev"
                 :pack="iconPack"
@@ -43,7 +44,8 @@
             v-else
             class="pagination-next"
             :disabled="!hasNext"
-            :page="getPage(current + 1)">
+            :page="getPage(current + 1)"
+            :aria-label="ariaNextLabel">
             <b-icon
                 :icon="iconNext"
                 :pack="iconPack"
@@ -108,6 +110,11 @@ export default {
     components: {
         [Icon.name]: Icon,
         [PaginationButton.name]: PaginationButton
+    },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'current',
+        event: 'update:current'
     },
     props: {
         total: [Number, String],

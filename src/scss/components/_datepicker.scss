@@ -161,7 +161,7 @@ $datepicker-item-selected-background-color: $primary !default;
                             position: absolute;
                             width: 100%;
                             .event {
-                                @each $name, $pair in $colors {
+                                @each $name, $pair in $form-colors {
                                     $color: nth($pair, 1);
                                     &.is-#{$name} {
                                         background-color: $color;

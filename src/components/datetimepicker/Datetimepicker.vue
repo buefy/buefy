@@ -4,6 +4,7 @@
         ref="datepicker"
         v-model="computedValue"
         v-bind="datepicker"
+        :rounded="rounded"
         :open-on-focus="openOnFocus"
         :position="position"
         :loading="loading"
@@ -211,7 +212,7 @@ export default {
                 minute: this.localeOptions.minute || 'numeric',
                 second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
                 hour12: !this.isHourFormat24(),
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         isMobileNative() {

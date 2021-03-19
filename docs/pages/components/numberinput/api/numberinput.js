@@ -72,7 +72,14 @@ export default [
                 description: 'Incremental number step',
                 type: 'Number, String',
                 values: '—',
-                default: '—'
+                default: '1'
+            },
+            {
+                name: '<code>min-step</code>',
+                description: 'Minimum step-size allowed. Input value is validated to be integer multiple of <code>min-step</code>',
+                type: 'Number, String',
+                values: '—',
+                default: 'Defaults to value of <code>step</code>'
             },
             {
                 name: '<code>exponential</code>',
@@ -82,6 +89,13 @@ export default [
                 default: 'false'
             },
             {
+                name: '<code>controls</code>',
+                description: 'Show controls (+/-)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>controls-rounded</code>',
                 description: 'Show rounded controls',
                 type: 'Boolean',
@@ -89,18 +103,18 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>controls</code>',
-                description: 'Showing controls(+/-)',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>true</code>'
-            },
-            {
                 name: '<code>controls-position</code>',
                 description: 'Position of controls',
                 type: 'String',
-                values: '<code>compact<compact>',
+                values: '<code>compact</code>',
                 default: '—'
+            },
+            {
+                name: '<code>controls-alignment</code>',
+                description: 'Alignment of controls',
+                type: 'String',
+                values: '<code>left</code>, <code>right</code>, <code>center</code>',
+                default: '<code>center</code>'
             },
             {
                 name: 'Any native attribute',

@@ -1,23 +1,25 @@
 <template>
     <section>
         <div class="buttons">
-            <button class="button is-primary is-medium"
-                @click="isImageModalActive = true">
-                Launch image modal
-            </button>
-            <button class="button is-primary is-medium"
-                @click="isCardModalActive = true">
-                Launch card modal (keep scroll)
-            </button>
+            <b-button
+                label="Launch image modal"
+                type="is-primary"
+                size="is-medium"
+                @click="isImageModalActive = true" />
+            <b-button
+                label="Launch card modal (keep scroll)"
+                type="is-primary"
+                size="is-medium"
+                @click="isCardModalActive = true" />
         </div>
 
-        <b-modal :active.sync="isImageModalActive">
+        <b-modal v-model="isImageModalActive">
             <p class="image is-4by3">
                 <img src="/static/img/placeholder-1280x960.png">
             </p>
         </b-modal>
 
-        <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
+        <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">

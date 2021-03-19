@@ -80,6 +80,7 @@ export default {
     },
     mixins: [TabbedMixin('step')],
     props: {
+        type: [String, Object],
         iconPack: String,
         iconPrev: {
             type: String,
@@ -128,7 +129,7 @@ export default {
     computed: {
         // Override mixin implementation to always have a value
         activeItem() {
-            return this.childItems.find((i) => i.value === this.activeId) || this.items[0]
+            return this.childItems.filter((i) => i.value === this.activeId)[0] || this.items[0]
         },
         wrapperClasses() {
             return [

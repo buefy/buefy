@@ -14,9 +14,13 @@
         <Example :component="ExPlaceholder" :code="ExPlaceholderCode" title="Placeholder" vertical>
             <p>
                 You can use a placeholder image that will be loaded at start and will be displayed until the <code>src</code> gets loaded.
-                If you reload this page, you will see a blurred Buefy logo appear upon <code>src</code> is loaded.
+                You can reload the page to see what is happening.
             </p>
-            <p>Can be useful if you want to use the LQIP technique for example.</p>
+            <p>
+                In the first example, you will see a blurred Buefy logo appear upon <code>src</code> is loaded.<br>
+                In the second example, you will see the lqip effect while a smaller blurred version of the image upon <code>src</code> is loaded.<br>
+                In the third example, you will see Buefy skeleton appear upon <code>src</code> is loaded.
+            </p>
         </Example>
 
         <Example :component="ExSrcset" :code="ExSrcsetCode" title="srcset" vertical>
@@ -25,6 +29,15 @@
             </p>
             <p>
                 When using <code>srcsetSizes</code>, it will generate a string like <code>"`${srcFilename}-${size}.${srcExt} ${size}w`"</code> for each sizes. You can control this format using the <code>srcsetFormatter</code> prop
+            </p>
+        </Example>
+
+        <Example :component="ExError" :code="ExErrorCode" title="Fallback on error" vertical>
+            <p>
+                You can use <code>alt</code> to display an alternative text if the <code>src</code> fails to load.
+            </p>
+            <p>
+                You can also use <code>src-fallback</code> to display another image if the original fails to load.
             </p>
         </Example>
 
@@ -45,6 +58,8 @@
     import ExPlaceholderCode from '!!raw-loader!./examples/ExPlaceholder'
     import ExSrcset from './examples/ExSrcset'
     import ExSrcsetCode from '!!raw-loader!./examples/ExSrcset'
+    import ExError from './examples/ExError'
+    import ExErrorCode from '!!raw-loader!./examples/ExError'
 
     export default {
         data() {
@@ -59,6 +74,8 @@
                 ExPlaceholderCode,
                 ExSrcset,
                 ExSrcsetCode,
+                ExError,
+                ExErrorCode
             }
         }
     }

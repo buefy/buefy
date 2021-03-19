@@ -265,6 +265,10 @@ export default {
                 this.timer = null
             }
         },
+        restartTimer() {
+            this.pauseTimer()
+            this.startTimer()
+        },
         checkPause() {
             if (this.pauseHover && this.autoplay) {
                 this.pauseTimer()
@@ -289,6 +293,7 @@ export default {
             if (newIndex !== this.value) {
                 this.$emit('input', newIndex)
             }
+            this.restartTimer()
             this.$emit('change', newIndex) // BC
         },
         // Indicator trigger when change active item.
@@ -306,7 +311,7 @@ export default {
         // handle drag event
         dragStart(event) {
             if (!this.hasDrag ||
-                (!event.target.draggable && event.target.textContent.trim() === '')) return
+                !event.target.draggable) return
             this.dragX = event.touches ? event.changedTouches[0].pageX : event.pageX
             if (event.touches) {
                 this.pauseTimer()

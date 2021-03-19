@@ -4,15 +4,21 @@
         :class="figureClasses"
         :style="figureStyles"
     >
+        <figcaption v-if="isCaptionFirst">
+            <slot name="caption" />
+        </figcaption>
         <transition name="fade">
             <img
                 v-if="isDisplayed"
                 :srcset="computedSrcset"
                 :src="computedSrc"
+                :alt="alt"
                 :class="imgClasses"
-                @load="onLoad"
                 :width="computedWidth"
                 :sizes="computedSizes"
+                :loading="computedNativeLazy"
+                @load="onLoad"
+                @error="onError"
             >
         </transition>
         <transition name="fade">
@@ -22,11 +28,15 @@
             >
                 <img
                     :src="computedPlaceholder"
+                    :alt="alt"
                     :class="imgClasses"
                     class="placeholder"
                 >
             </slot>
         </transition>
+        <figcaption v-if="isCaptionLast">
+            <slot name="caption" />
+        </figcaption>
     </figure>
 </template>
 
@@ -38,6 +48,8 @@ export default {
     name: 'BImage',
     props: {
         src: String,
+        alt: String,
+        srcFallback: String,
         webpFallback: {
             type: String,
             default: () => {
@@ -78,6 +90,10 @@ export default {
         rounded: {
             type: Boolean,
             default: false
+        },
+        captionFirst: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -85,10 +101,12 @@ export default {
             clientWidth: 0,
             webpSupportVerified: false,
             webpSupported: false,
+            useNativeLazy: false,
             observer: null,
             inViewPort: false,
             bulmaKnownRatio: ['square', '1by1', '5by4', '4by3', '3by2', '5by3', '16by9', 'b2y1', '3by1', '4by5', '3by4', '2by3', '3by5', '9by16', '1by2', '1by3'],
-            loaded: false
+            loaded: false,
+            failed: false
         }
     },
     computed: {
@@ -129,23 +147,32 @@ export default {
             return this.srcExt === 'webp'
         },
         computedSrc() {
+            let src = this.src
+            if (this.failed && this.srcFallback) {
+                src = this.srcFallback
+            }
             if (!this.webpSupported && this.isWepb && this.webpFallback) {
                 if (this.webpFallback.startsWith('.')) {
-                    return this.src.replace(/\.webp/gi, `${this.webpFallback}`)
+                    return src.replace(/\.webp/gi, `${this.webpFallback}`)
                 }
                 return this.webpFallback
             }
-            return this.src
+            return src
         },
         computedWidth() {
             if (this.responsive && this.clientWidth > 0) {
                 return this.clientWidth
             }
         },
+        computedNativeLazy() {
+            if (this.lazy && this.useNativeLazy) {
+                return 'lazy'
+            }
+        },
         isDisplayed() {
             return (
                 (this.webpSupportVerified || !this.isWepb) &&
-                (this.inViewPort || !this.lazy)
+                (!this.lazy || this.useNativeLazy || this.inViewPort)
             )
         },
         placeholderExt() {
@@ -194,6 +221,12 @@ export default {
             if (this.computedSrcset && this.computedWidth) {
                 return `${this.computedWidth}px`
             }
+        },
+        isCaptionFirst() {
+            return this.$slots.caption && this.captionFirst
+        },
+        isCaptionLast() {
+            return this.$slots.caption && !this.captionFirst
         }
     },
     methods: {
@@ -214,8 +247,17 @@ export default {
         },
         onLoad(event) {
             this.loaded = true
+            this.emit('load', event)
+        },
+        onError(event) {
+            this.emit('error', event)
+            if (!this.failed) {
+                this.failed = true
+            }
+        },
+        emit(eventName, event) {
             const { target } = event
-            this.$emit('load', event, target.currentSrc || target.src || this.computedSrc)
+            this.$emit(eventName, event, target.currentSrc || target.src || this.computedSrc)
         }
     },
     created() {
@@ -225,14 +267,23 @@ export default {
                 this.webpSupported = supported
             })
         }
-        if (this.lazy && typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-            this.observer = new IntersectionObserver((events) => {
-                const {target, isIntersecting} = events[0]
-                if (isIntersecting && !this.inViewPort) {
-                    this.inViewPort = true
-                    this.observer.unobserve(target)
-                }
-            })
+        if (this.lazy) {
+            // We use native lazy loading if supported
+            // We try to use Intersection Observer if native lazy loading is not supported
+            // We use the lazy attribute anyway if we cannot detect support (SSR for example).
+            const nativeLazySupported = typeof window !== 'undefined' && 'HTMLImageElement' in window && 'loading' in HTMLImageElement.prototype
+            const intersectionObserverSupported = typeof window !== 'undefined' && 'IntersectionObserver' in window
+            if (!nativeLazySupported && intersectionObserverSupported) {
+                this.observer = new IntersectionObserver((events) => {
+                    const {target, isIntersecting} = events[0]
+                    if (isIntersecting && !this.inViewPort) {
+                        this.inViewPort = true
+                        this.observer.unobserve(target)
+                    }
+                })
+            } else {
+                this.useNativeLazy = true
+            }
         }
     },
     mounted() {

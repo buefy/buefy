@@ -18,6 +18,7 @@
                     :disabled="disabled"
                     :ellipsis="ellipsis"
                     :closable="closable"
+                    :aria-close-label="ariaCloseLabel"
                     :title="ellipsis && getNormalizedTagText(tag)"
                     @close="removeTag(index, $event)">
                     <slot name="tag" :tag="tag">
@@ -44,13 +45,18 @@
                 :open-on-focus="openOnFocus"
                 :keep-open="openOnFocus"
                 :keep-first="!allowNew"
+                :group-field="groupField"
+                :group-options="groupOptions"
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
                 :append-to-body="appendToBody"
+                :confirm-keys="confirmKeys"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
+                @compositionstart.native="isComposing = true"
+                @compositionend.native="isComposing = false"
                 @select="onSelect"
                 @infinite-scroll="emitInfiniteScroll">
                 <template
@@ -66,7 +72,7 @@
                         :index="props.index" />
                 </template>
                 <template
-                    v-if="hasHeaderSlot"
+                    v-if="hasEmptySlot"
                     #empty>
                     <slot name="empty" />
                 </template>
@@ -136,6 +142,8 @@ export default {
             default: 'value'
         },
         autocomplete: Boolean,
+        groupField: String,
+        groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
         disabled: Boolean,
@@ -144,9 +152,10 @@ export default {
             type: Boolean,
             default: true
         },
+        ariaCloseLabel: String,
         confirmKeys: {
             type: Array,
-            default: () => [',', 'Enter']
+            default: () => [',', 'Tab', 'Enter']
         },
         removeOnKeys: {
             type: Array,
@@ -179,7 +188,8 @@ export default {
         return {
             tags: Array.isArray(this.value) ? this.value.slice(0) : (this.value || []),
             newTag: '',
-            _elementRef: 'input',
+            isComposing: false,
+            _elementRef: 'autocomplete',
             _isTaginput: true
         }
     },
@@ -330,7 +340,9 @@ export default {
             if (this.autocomplete && !this.allowNew) return
 
             if (this.confirmKeys.indexOf(key) >= 0) {
-                event.preventDefault()
+                // Allow Tab to advance to next field regardless
+                if (key !== 'Tab') event.preventDefault()
+                if (key === 'Enter' && this.isComposing) return
                 this.addTag()
             }
         },

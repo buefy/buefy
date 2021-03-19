@@ -4,8 +4,7 @@
             <div
                 v-show="active && (isActive || always)"
                 ref="content"
-                :class="['tooltip-content', contentClass]"
-                :style="style">
+                :class="['tooltip-content', contentClass]">
                 <template v-if="label">{{ label }}</template>
                 <template v-else-if="$slots.content">
                     <slot name="content" />
@@ -15,9 +14,12 @@
         <div
             ref="trigger"
             class="tooltip-trigger"
-            @click.prevent="onClick"
+            :style="triggerStyle"
+            @click="onClick"
+            @contextmenu="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
+            @blur.capture="close"
             @mouseleave="close">
             <slot ref="slot" />
         </div>
@@ -40,7 +42,10 @@ export default {
             default: () => config.defaultTooltipType
         },
         label: String,
-        delay: Number,
+        delay: {
+            type: Number,
+            default: () => config.defaultTooltipDelay
+        },
         position: {
             type: String,
             default: 'is-top',
@@ -83,7 +88,8 @@ export default {
     data() {
         return {
             isActive: false,
-            style: {},
+            triggerStyle: {},
+            timer: null,
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -115,6 +121,9 @@ export default {
                 // update wrapper tooltip
                 const tooltipEl = this.$data._bodyEl.children[0]
                 tooltipEl.classList.forEach((item) => tooltipEl.classList.remove(item))
+                if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+                    tooltipEl.classList.add(this.$vnode.data.staticClass)
+                }
                 this.rootClasses.forEach((item) => {
                     if (typeof item === 'object') {
                         for (let key in item) {
@@ -135,7 +144,8 @@ export default {
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
-                wrapper.style.zIndex = this.isActive ? '99' : '-1'
+                wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
+                this.triggerStyle = { zIndex: this.isActive || this.always ? '100' : undefined }
             }
         },
         onClick() {
@@ -150,13 +160,21 @@ export default {
             if (this.triggers.indexOf('hover') < 0) return
             this.open()
         },
+        onContextMenu(e) {
+            if (this.triggers.indexOf('contextmenu') < 0) return
+            e.preventDefault()
+            this.open()
+        },
         onFocus() {
             if (this.triggers.indexOf('focus') < 0) return
             this.open()
         },
         open() {
             if (this.delay) {
-                setTimeout(() => (this.isActive = true), this.delay)
+                this.timer = setTimeout(() => {
+                    this.isActive = true
+                    this.timer = null
+                }, this.delay)
             } else {
                 this.isActive = true
             }
@@ -164,6 +182,7 @@ export default {
         close() {
             if (typeof this.autoClose === 'boolean') {
                 this.isActive = !this.autoClose
+                if (this.autoClose && this.timer) clearTimeout(this.timer)
             }
         },
         /**
@@ -172,9 +191,13 @@ export default {
         clickedOutside(event) {
             if (this.isActive) {
                 if (Array.isArray(this.autoClose)) {
-                    if (this.autoClose.indexOf('outside') >= 0) {
-                        if (!this.isInWhiteList(event.target)) this.isActive = false
-                    } else if (this.autoClose.indexOf('inside') >= 0) {
+                    if (this.autoClose.includes('outside')) {
+                        if (!this.isInWhiteList(event.target)) {
+                            this.isActive = false
+                            return
+                        }
+                    }
+                    if (this.autoClose.includes('inside')) {
                         if (this.isInWhiteList(event.target)) this.isActive = false
                     }
                 }

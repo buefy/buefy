@@ -27,11 +27,15 @@ describe('BModal', () => {
 
     it('manage props validator', () => {
         const ariaRole = wrapper.vm.$options.props.ariaRole
+        const ariaLabel = wrapper.vm.$options.props.ariaLabel
 
         expect(ariaRole.type).toBe(String)
         expect(ariaRole.validator && ariaRole.validator('d')).toBeFalsy()
         expect(ariaRole.validator && ariaRole.validator('dialog')).toBeTruthy()
         expect(ariaRole.validator && ariaRole.validator('alertdialog')).toBeTruthy()
+        expect(ariaLabel.type).toBe(String)
+        expect(ariaLabel.validator && ariaLabel.validator('')).toBeFalsy()
+        expect(ariaLabel.validator && ariaLabel.validator('d')).toBeTruthy()
     })
 
     it('manage default config props values', () => {
@@ -90,5 +94,15 @@ describe('BModal', () => {
         expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 150)
         jest.advanceTimersByTime(150)
         expect(wrapper.vm.$destroy).toHaveBeenCalled()
+    })
+
+    it('emit event on transition after-enter hook.', () => {
+        wrapper.vm.afterEnter()
+        expect(wrapper.emitted()['after-enter']).toBeTruthy()
+    })
+
+    it('emit event on transition after-leave hook.', () => {
+        wrapper.vm.afterLeave()
+        expect(wrapper.emitted()['after-leave']).toBeTruthy()
     })
 })

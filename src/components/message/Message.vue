@@ -4,8 +4,11 @@
             v-if="isActive"
             class="message"
             :class="[type, size]">
-            <header v-if="title" class="message-header">
-                <p>{{ title }}</p>
+            <header v-if="$slots.header || title" class="message-header">
+                <div v-if="$slots.header">
+                    <slot name="header" />
+                </div>
+                <p v-else-if="title">{{ title }}</p>
                 <button
                     v-if="closable"
                     type="button"

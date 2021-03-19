@@ -84,7 +84,7 @@ export default [
             },
             {
                 name: '<code>[any].native</code>',
-                description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
+                description: 'Listen to any event using this syntax, e.g <code>@click.native</code>',
                 parameters: '<code>event: $event</code>'
             }
         ]

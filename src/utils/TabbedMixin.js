@@ -14,12 +14,12 @@ export default (cmp) => ({
             type: [String, Number],
             default: undefined
         },
-        type: [String, Object],
         size: String,
         animated: {
             type: Boolean,
             default: true
         },
+        animation: String,
         vertical: {
             type: Boolean,
             default: false

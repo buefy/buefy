@@ -101,6 +101,13 @@ export default [
                 default: '<code>left</code>'
             },
             {
+                name: '<code>sticky-checkbox</code>',
+                description: 'Make the checkbox column sticky when <code>checkable</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>checked-rows</code>',
                 description: 'Set which rows are checked, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Array<Object>',
@@ -144,7 +151,7 @@ export default [
             },
             {
                 name: '<code>current-page</code>',
-                description: `Current page of table data (if <code>paginated</code>), use the <code>.sync</code> modifier to make it two-way binding`,
+                description: `Current page of table data (if <code>paginated</code>)`,
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
@@ -166,6 +173,13 @@ export default [
             {
                 name: '<code>pagination-simple</code>',
                 description: 'Simple pagination (if <code>paginated</code>)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>pagination-rounded</code>',
+                description: 'Rounded pagination (if <code>paginated</code>)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -207,7 +221,7 @@ export default [
             },
             {
                 name: '<code>sort-multiple-key</code>',
-                description: 'Adds a key which will be required for multi column sorting to work. Will always be enabled if <code>null</code> is selected (default). Requres <code>sort-multiple</code>',
+                description: 'Adds a key which will be required for multi column sorting to work. Will always be enabled if <code>null</code> is selected (default). Requires <code>sort-multiple</code>',
                 type: 'String',
                 values: '<code>null</code>, <code>shiftKey</code>, <code>altKey</code>, <code>ctrlKey</code>',
                 default: '<code>null</code>'
@@ -257,6 +271,13 @@ export default [
             {
                 name: '<code>detail-key</code>',
                 description: 'Use a unique key of your data Object when use detailed or opened detailed. (id recommended)',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>detail-transition</code>',
+                description: 'Transition name to use when toggling row details.',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -399,7 +420,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>index: Number</code>'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>, <code>toggleDetails: Function (row: Object)</code>'
             },
             {
                 name: '<code>header</code>',
@@ -447,6 +468,11 @@ export default [
                 name: '<code>dblclick</code>',
                 description: 'Triggers when a row is double clicked',
                 parameters: '<code>row: Object</code>'
+            },
+            {
+                name: '<code>cellclick</code>',
+                description: 'Triggers when a cell is clicked',
+                parameters: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>rowIndex: Number</code>, <code>columnIndex: Number</code>,'
             },
             {
                 name: '<code>sort</code>',
@@ -521,7 +547,7 @@ export default [
             {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
-                parameters: '<code> row: Object </code>'
+                parameters: '<code> row: Object </code>, <code> event: Event </code>'
             },
             {
                 name: '<code>mouseleave</code>',
@@ -648,6 +674,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>custom-search</code>',
+                description: 'Custom search method, works when column is <code>searchable</code>',
+                type: 'Function (a: Object, input: String)',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>subheading</code>',

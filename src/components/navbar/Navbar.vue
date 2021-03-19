@@ -8,6 +8,7 @@ const BODY_SPACED_FIXED_TOP_CLASS = 'has-spaced-navbar-fixed-top'
 const FIXED_BOTTOM_CLASS = 'is-fixed-bottom'
 const BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom'
 const BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom'
+const BODY_CENTERED_CLASS = 'has-navbar-centered'
 
 const isFilled = (str) => !!str
 
@@ -18,6 +19,11 @@ export default {
     },
     directives: {
         clickOutside
+    },
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
     },
     props: {
         type: [String, Object],
@@ -33,7 +39,11 @@ export default {
             type: Boolean,
             default: false
         },
-        isActive: {
+        active: {
+            type: Boolean,
+            default: false
+        },
+        centered: {
             type: Boolean,
             default: false
         },
@@ -53,7 +63,7 @@ export default {
     },
     data() {
         return {
-            internalIsActive: this.isActive,
+            internalIsActive: this.active,
             _isNavBar: true // Used internally by NavbarItem
         }
     },
@@ -67,6 +77,7 @@ export default {
                 {
                     [FIXED_TOP_CLASS]: this.fixedTop,
                     [FIXED_BOTTOM_CLASS]: this.fixedBottom,
+                    [BODY_CENTERED_CLASS]: this.centered,
                     'is-spaced': this.spaced,
                     'has-shadow': this.shadow,
                     'is-transparent': this.transparent
@@ -75,41 +86,19 @@ export default {
         }
     },
     watch: {
-        isActive: {
-            handler(isActive) {
-                this.internalIsActive = isActive
+        active: {
+            handler(active) {
+                this.internalIsActive = active
             },
             immediate: true
         },
-        fixedTop: {
-            handler(isSet) {
-                this.checkIfFixedPropertiesAreColliding()
-                if (isSet) {
-                    // TODO Apply only one of the classes once PR is merged in Bulma:
-                    // https://github.com/jgthms/bulma/pull/2737
-                    this.setBodyClass(BODY_FIXED_TOP_CLASS)
-                    this.spaced && this.setBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
-                } else {
-                    this.removeBodyClass(BODY_FIXED_TOP_CLASS)
-                    this.removeBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
-                }
-            },
-            immediate: true
+        fixedTop(isSet) {
+            // toggle body class only on update to handle multiple navbar
+            this.setBodyFixedTopClass(isSet)
         },
-        fixedBottom: {
-            handler(isSet) {
-                this.checkIfFixedPropertiesAreColliding()
-                if (isSet) {
-                    // TODO Apply only one of the classes once PR is merged in Bulma:
-                    // https://github.com/jgthms/bulma/pull/2737
-                    this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
-                    this.spaced && this.setBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
-                } else {
-                    this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
-                    this.removeBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
-                }
-            },
-            immediate: true
+        bottomTop(isSet) {
+            // toggle body class only on update to handle multiple navbar
+            this.setBodyFixedBottomClass(isSet)
         }
     },
     methods: {
@@ -118,13 +107,13 @@ export default {
             this.emitUpdateParentEvent()
         },
         closeMenu() {
-            if (this.closeOnClick) {
+            if (this.closeOnClick && this.internalIsActive) {
                 this.internalIsActive = false
                 this.emitUpdateParentEvent()
             }
         },
         emitUpdateParentEvent() {
-            this.$emit('update:isActive', this.internalIsActive)
+            this.$emit('update:active', this.internalIsActive)
         },
         setBodyClass(className) {
             if (typeof window !== 'undefined') {
@@ -210,7 +199,35 @@ export default {
             return createElement('div', {
                 staticClass: `navbar-${positionName}`
             }, this.$slots[positionName])
+        },
+        setBodyFixedTopClass(isSet) {
+            this.checkIfFixedPropertiesAreColliding()
+            if (isSet) {
+                // TODO Apply only one of the classes once PR is merged in Bulma:
+                // https://github.com/jgthms/bulma/pull/2737
+                this.setBodyClass(BODY_FIXED_TOP_CLASS)
+                this.spaced && this.setBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
+            } else {
+                this.removeBodyClass(BODY_FIXED_TOP_CLASS)
+                this.removeBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
+            }
+        },
+        setBodyFixedBottomClass(isSet) {
+            this.checkIfFixedPropertiesAreColliding()
+            if (isSet) {
+                // TODO Apply only one of the classes once PR is merged in Bulma:
+                // https://github.com/jgthms/bulma/pull/2737
+                this.setBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                this.spaced && this.setBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
+            } else {
+                this.removeBodyClass(BODY_FIXED_BOTTOM_CLASS)
+                this.removeBodyClass(BODY_SPACED_FIXED_BOTTOM_CLASS)
+            }
         }
+    },
+    beforeMount() {
+        this.fixedTop && this.setBodyFixedTopClass(true)
+        this.fixedBottom && this.setBodyFixedBottomClass(true)
     },
     beforeDestroy() {
         if (this.fixedTop) {

@@ -1,7 +1,10 @@
 <template>
     <div>
-        <p class="title">Icons</p>
-        <p class="subtitle">Several components uses icons, you might want to add a pack</p>
+        <p :id="slugifyTitle('Icons')" class="title">
+            <router-link :to="`#${slugifyTitle('Icons')}`">#</router-link>
+            Icons
+        </p>
+        <p class="subtitle">Several components use icons, you might want to add a pack</p>
         <CodeView title="Material Design Icons CDN" :code="materialIcons" expanded/>
         <CodeView title="Font Awesome 5 CDN" :code="fontAwesome5" expanded/>
         <div class="content">
@@ -19,12 +22,15 @@
 
         <b-message type="is-warning" size="is-medium">
             For any installation and usage method, you need
-            <strong><a href="https://vuejs.org" target="_blank">Vue.js</a> version 2.5+</strong>.
+            <strong><a href="https://vuejs.org" target="_blank">Vue.js</a> version 2.6+</strong>.
         </b-message>
 
         <div class="media">
             <div class="media-left">
-                <p class="title">1</p>
+                <p :id="slugifyTitle('NPM or Yarn')" class="title">
+                    <router-link :to="`#${slugifyTitle('NPM or Yarn')}`">#</router-link>
+                    1
+                </p>
             </div>
             <div class="media-content">
                 <p class="title">NPM or Yarn <em>(recommended)</em></p>
@@ -37,7 +43,7 @@
                 <div class="title is-4">Usage</div>
                 <b-message type="is-success">
                     <div class="content">
-                        Even though this is gonna import <strong>ALL</strong> components to your application,
+                        Even though this is going to import <strong>ALL</strong> components to your application,
                         Buefy full bundle is optimized and still pretty small:
                         <ul>
                             <li><strong>script</strong> is <strong>48KB</strong> min+gzip</li>
@@ -49,13 +55,16 @@
                 <CodeView title="Individual components as Vue plugins" :code="importingComponentsAsVuePlugins | pre" lang="javascript" expanded/>
                 <b-message type="is-info">
                     To include individual styles, see <router-link to="/documentation/customization">Customization</router-link> section.
-                </b-message> 
+                </b-message>
             </div>
         </div>
 
         <div class="media">
             <div class="media-left">
-                <p class="title">2</p>
+                <p :id="slugifyTitle('Standalone')" class="title">
+                    <router-link :to="`#${slugifyTitle('Standalone')}`">#</router-link>
+                    2
+                </p>
             </div>
             <div class="media-content">
                 <p class="title">Standalone</p>
@@ -80,7 +89,10 @@
 
         <div class="media">
             <div class="media-left">
-                <p class="title">3</p>
+                <p :id="slugifyTitle('Nuxt.js')" class="title">
+                    <router-link :to="`#${slugifyTitle('Nuxt.js')}`">#</router-link>
+                    3
+                </p>
             </div>
             <div class="media-content">
                 <p class="title">Nuxt.js</p>
@@ -169,8 +181,19 @@
                     </\script>
                 </body>
                 </html>`,
-                materialIcons: '<link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">',
+                materialIcons: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">',
                 fontAwesome5: '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'
+            }
+        },
+        methods: {
+            slugifyTitle(title) {
+                if (!title) return ''
+                return title.toLowerCase()
+                    .replace(/\s+/g, '-') // Replace spaces with -
+                    .replace(/[^\w-]+/g, '') // Remove all non-word chars
+                    .replace(/--+/g, '-') // Replace multiple - with single -
+                    .replace(/^-+/, '') // Trim - from start of text
+                    .replace(/-+$/, '') // Trim - from end of text
             }
         }
     }

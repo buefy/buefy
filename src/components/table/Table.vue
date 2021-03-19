@@ -25,8 +25,14 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :rounded="paginationRounded"
+                    :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="top-left"/>
@@ -37,10 +43,7 @@
         <div
             class="table-wrapper"
             :class="tableWrapperClasses"
-            :style="{
-                height: height === undefined ? null :
-                (isNaN(height) ? height : height + 'px')
-            }"
+            :style="tableStyle"
         >
             <table
                 class="table"
@@ -51,7 +54,9 @@
                 <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
-                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'left'">
+                        <th
+                            :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
+                            v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -61,7 +66,7 @@
                         </th>
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'header'"
                             :class="[column.headerClass, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
@@ -126,7 +131,9 @@
                                 </template>
                             </div>
                         </th>
-                        <th class="checkbox-cell" v-if="checkable && checkboxPosition === 'right'">
+                        <th
+                            :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
+                            v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
                                     :value="isAllChecked"
@@ -140,7 +147,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'subheading'"
                             :style="column.style">
                             <div
                                 class="th-wrap"
@@ -169,7 +176,7 @@
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
-                            :key="index"
+                            :key="column.newKey + ':' + index + 'searchable'"
                             :style="column.style"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
@@ -206,8 +213,8 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @mouseenter="$listeners.mouseenter ? $emit('mouseenter', row) : null"
-                            @mouseleave="$listeners.mouseleave ? $emit('mouseleave', row) : null"
+                            @mouseenter="emitEventForRow('mouseenter', $event, row)"
+                            @mouseleave="emitEventForRow('mouseleave', $event, row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
@@ -233,7 +240,7 @@
                             </td>
 
                             <td
-                                class="checkbox-cell"
+                                :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -242,25 +249,26 @@
                                 />
                             </td>
 
-                            <template v-for="(column, index) in visibleColumns">
+                            <template v-for="(column, colindex) in visibleColumns">
 
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.default">
                                     <b-slot-component
-                                        :key="(column.customKey || column.label) + index"
+                                        :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
                                         scoped
                                         name="default"
                                         tag="td"
                                         :class="column.rootClasses"
                                         :data-label="column.label"
-                                        :props="{ row, column, index }"
+                                        :props="{ row, column, index, colindex, toggleDetails }"
+                                        @click.native="$emit('cellclick',row,column,index,colindex)"
                                     />
                                 </template>
 
                             </template>
 
                             <td
-                                class="checkbox-cell"
+                                :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
@@ -270,19 +278,24 @@
                             </td>
                         </tr>
 
-                        <tr
-                            v-if="isActiveDetailRow(row)"
+                        <transition
                             :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
-                            class="detail">
-                            <td :colspan="columnCount">
-                                <div class="detail-container">
-                                    <slot
-                                        name="detail"
-                                        :row="row"
-                                        :index="index"/>
-                                </div>
-                            </td>
-                        </tr>
+                            :name="detailTransition"
+                        >
+                            <tr
+                                v-if="isActiveDetailRow(row)"
+                                class="detail">
+                                <td :colspan="columnCount">
+                                    <div class="detail-container">
+                                        <slot
+                                            name="detail"
+                                            :row="row"
+                                            :index="index"
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                        </transition>
                         <slot
                             v-if="isActiveCustomDetailRow(row)"
                             name="detail"
@@ -328,8 +341,14 @@
                     v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
+                    :rounded="paginationRounded"
+                    :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="bottom-left"/>
@@ -341,13 +360,12 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
-import Pagination from '../pagination/Pagination'
 import Loading from '../loading/Loading'
 import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort'
@@ -360,7 +378,6 @@ export default {
         [Checkbox.name]: Checkbox,
         [Icon.name]: Icon,
         [Input.name]: Input,
-        [Pagination.name]: Pagination,
         [Loading.name]: Loading,
         [SlotComponent.name]: SlotComponent,
         [TableMobileSort.name]: TableMobileSort,
@@ -402,6 +419,10 @@ export default {
                     'right'
                 ].indexOf(value) >= 0
             }
+        },
+        stickyCheckbox: {
+            type: Boolean,
+            default: false
         },
         selected: Object,
         isRowSelectable: {
@@ -471,6 +492,7 @@ export default {
                 ].indexOf(value) >= 0
             }
         },
+        paginationRounded: Boolean,
         backendSorting: Boolean,
         backendFiltering: Boolean,
         rowClass: {
@@ -486,6 +508,10 @@ export default {
             default: () => true
         },
         detailKey: {
+            type: String,
+            default: ''
+        },
+        detailTransition: {
             type: String,
             default: ''
         },
@@ -561,8 +587,12 @@ export default {
                 'has-mobile-cards': this.mobileCards,
                 'has-sticky-header': this.stickyHeader,
                 'is-card-list': this.cardLayout,
-                'table-container': this.isScrollable,
-                'is-relative': this.loading && !this.$slots.loading
+                'table-container': this.isScrollable
+            }
+        },
+        tableStyle() {
+            return {
+                height: toCssWidth(this.height)
             }
         },
 
@@ -645,7 +675,7 @@ export default {
         * Return total column count based if it's checkable or expanded
         */
         columnCount() {
-            let count = this.newColumns.length
+            let count = this.visibleColumns.length
             count += this.checkable ? 1 : 0
             count += (this.detailed && this.showDetailIcon) ? 1 : 0
 
@@ -733,6 +763,10 @@ export default {
 
         currentPage(newVal) {
             this.newCurrentPage = newVal
+        },
+
+        newCurrentPage(newVal) {
+            this.$emit('update:currentPage', newVal)
         },
 
         /**
@@ -935,6 +969,9 @@ export default {
         },
 
         isRowSelected(row, selected) {
+            if (!selected) {
+                return false
+            }
             if (this.customRowKey) {
                 return row[this.customRowKey] === selected[this.customRowKey]
             }
@@ -1092,13 +1129,19 @@ export default {
                     delete this.filters[key]
                     return true
                 }
-                let value = this.getValueByPath(row, key)
-                if (value == null) return false
-                if (Number.isInteger(value)) {
-                    if (value !== Number(this.filters[key])) return false
+                const input = this.filters[key]
+                const column = this.newColumns.filter((c) => c.field === key)[0]
+                if (column && column.customSearch && typeof column.customSearch === 'function') {
+                    return column.customSearch(row, input)
                 } else {
-                    const re = new RegExp(escapeRegExpChars(this.filters[key]), 'i')
-                    if (!re.test(value)) return false
+                    let value = this.getValueByPath(row, key)
+                    if (value == null) return false
+                    if (Number.isInteger(value)) {
+                        if (value !== Number(input)) return false
+                    } else {
+                        const re = new RegExp(escapeRegExpChars(input), 'i')
+                        if (!re.test(value)) return false
+                    }
                 }
             }
             return true
@@ -1240,31 +1283,40 @@ export default {
         * Emits drag start event
         */
         handleDragStart(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragstart', {event, row, index})
         },
         /**
         * Emits drag leave event
         */
         handleDragEnd(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragend', {event, row, index})
         },
         /**
         * Emits drop event
         */
         handleDrop(event, row, index) {
+            if (!this.draggable) return
             this.$emit('drop', {event, row, index})
         },
         /**
         * Emits drag over event
         */
         handleDragOver(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragover', {event, row, index})
         },
         /**
         * Emits drag leave event
         */
         handleDragLeave(event, row, index) {
+            if (!this.draggable) return
             this.$emit('dragleave', {event, row, index})
+        },
+
+        emitEventForRow(eventName, event, row) {
+            return this.$listeners[eventName] ? this.$emit(eventName, row, event) : null
         },
 
         refreshSlots() {

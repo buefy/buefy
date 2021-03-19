@@ -171,11 +171,11 @@ export default {
             return Object.keys(this.breakpoints).sort((a, b) => b - a)
         },
         settings() {
-            let breakpoint = this.breakpointKeys.find((breakpoint) => {
+            let breakpoint = this.breakpointKeys.filter((breakpoint) => {
                 if (this.windowWidth >= breakpoint) {
                     return true
                 }
-            })
+            })[0]
             if (breakpoint) {
                 return {...this.$props, ...this.breakpoints[breakpoint]}
             }
@@ -287,6 +287,9 @@ export default {
                 this.observer.observe(this.$el)
             }
             window.addEventListener('resize', this.resized)
+            document.addEventListener('animationend', this.refresh)
+            document.addEventListener('transitionend', this.refresh)
+            document.addEventListener('transitionstart', this.refresh)
             this.resized()
         }
         if (this.$attrs.config) {
@@ -299,6 +302,9 @@ export default {
                 this.observer.disconnect()
             }
             window.removeEventListener('resize', this.resized)
+            document.removeEventListener('animationend', this.refresh)
+            document.removeEventListener('transitionend', this.refresh)
+            document.removeEventListener('transitionstart', this.refresh)
             this.dragEnd()
         }
     }

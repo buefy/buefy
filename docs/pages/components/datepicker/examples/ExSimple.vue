@@ -1,31 +1,29 @@
 <template>
     <section>
-        <div class="block">
-            <b-field grouped>
-                <b-field>
-                    <div class="control">
-                        <b-switch v-model="showWeekNumber">Show week number</b-switch>
-                    </div>
-                </b-field>
-                <b-field label="Locale">
-                    <b-select v-model="locale">
-                        <option :value="undefined"></option>
-                        <option value="de-DE">de-DE</option>
-                        <option value="en-CA">en-CA</option>
-                        <option value="en-GB">en-GB</option>
-                        <option value="en-US">en-US</option>
-                        <option value="es-ES">es-ES</option>
-                        <option value="es-MX">es-MX</option>
-                        <option value="fr-CA">fr-CA</option>
-                        <option value="fr-FR">fr-FR</option>
-                        <option value="it-IT">it-IT</option>
-                        <option value="ja-JP">ja-JP</option>
-                        <option value="pt-BR">pt-BR</option>
-                        <option value="ru-RU">ru-RU</option>
-                    </b-select>
-                </b-field>
+        <b-field grouped group-multiline>
+            <b-field>
+                <div class="control">
+                    <b-switch v-model="showWeekNumber">Show week number</b-switch>
+                </div>
             </b-field>
-        </div>
+            <b-field label="Locale">
+                <b-select v-model="locale">
+                    <option :value="undefined"></option>
+                    <option value="de-DE">de-DE</option>
+                    <option value="en-CA">en-CA</option>
+                    <option value="en-GB">en-GB</option>
+                    <option value="en-US">en-US</option>
+                    <option value="es-ES">es-ES</option>
+                    <option value="es-MX">es-MX</option>
+                    <option value="fr-CA">fr-CA</option>
+                    <option value="fr-FR">fr-FR</option>
+                    <option value="it-IT">it-IT</option>
+                    <option value="ja-JP">ja-JP</option>
+                    <option value="pt-BR">pt-BR</option>
+                    <option value="ru-RU">ru-RU</option>
+                </b-select>
+            </b-field>
+        </b-field>
         <b-field label="Select a date">
             <b-datepicker
                 v-model="selected"

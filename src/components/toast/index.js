@@ -28,18 +28,18 @@ const ToastProgrammatic = {
             delete params.message
         }
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ToastComponent = vm.extend(Toast)
-        const instance = new ToastComponent({
+        const component = new ToastComponent({
             parent,
             el: document.createElement('div'),
             propsData
         })
         if (slot) {
-            instance.$slots.default = slot
+            component.$slots.default = slot
+            component.$forceUpdate()
         }
-        return instance
+        return component
     }
 }
 

@@ -1,23 +1,23 @@
 <template>
     <section>
         <div class="buttons">
-            <button
-                class="button is-medium is-dark"
-                @click="prompt">
-                Launch prompt (default)
-            </button>
+            <b-button
+                label="Launch prompt (default)"
+                type="is-dark"
+                size="is-medium"
+                @click="prompt" />
 
-            <button
-                class="button is-medium is-dark"
-                @click="promptNumber">
-                Launch prompt (number)
-            </button>
+            <b-button
+                label="Launch prompt (number)"
+                type="is-dark"
+                size="is-medium"
+                @click="promptNumber" />
 
-            <button
-                class="button is-medium is-dark"
-                @click="promptNotClosed">
-                Launch prompt (Not closing default)
-            </button>
+            <b-button
+                label="Launch prompt (Not closing default)"
+                type="is-dark"
+                size="is-medium"
+                @click="promptNotClosed" />
         </div>
     </section>
 </template>

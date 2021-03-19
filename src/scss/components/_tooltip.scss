@@ -1,29 +1,21 @@
 $tooltip-arrow-size: 5px !default;
 $tooltip-arrow-margin: 2px !default;
-
 $tooltip-multiline-sizes: (
     small: 180px,
     medium: 240px,
     large: 300px
 ) !default;
+$tooltip-colors: $colors !default;
 
-@mixin tooltip-arrow($direction, $color) {
+@mixin tooltip-arrow-color($direction, $color) {
     @if ($direction == "is-top") {
-        border-top: $tooltip-arrow-size solid $color;
-        border-right: $tooltip-arrow-size solid transparent;
-        border-left: $tooltip-arrow-size solid transparent;
+        border-top-color: $color;
     } @else if ($direction == "is-bottom") {
-        border-right: $tooltip-arrow-size solid transparent;
-        border-bottom: $tooltip-arrow-size solid $color;
-        border-left: $tooltip-arrow-size solid transparent;
+        border-bottom-color: $color;
     } @else if ($direction == "is-right") {
-        border-top: $tooltip-arrow-size solid transparent;
-        border-right: $tooltip-arrow-size solid $color;
-        border-bottom: $tooltip-arrow-size solid transparent;
+        border-right-color: $color;
     } @else if ($direction == "is-left") {
-        border-top: $tooltip-arrow-size solid transparent;
-        border-bottom: $tooltip-arrow-size solid transparent;
-        border-left: $tooltip-arrow-size solid $color;
+        border-left-color: $color;
     }
 }
 
@@ -63,39 +55,51 @@ $tooltip-multiline-sizes: (
                 bottom: 100%;
                 left: 50%;
                 transform: translateX(-50%);
+                border-right: $tooltip-arrow-size solid transparent;
+                border-bottom: $tooltip-arrow-size solid $primary;
+                border-left: $tooltip-arrow-size solid transparent;
             } @else if ($direction == "is-top") {
                 top: 100%;
                 right: auto;
                 bottom: auto;
                 left: 50%;
                 transform: translateX(-50%);
+                border-top: $tooltip-arrow-size solid $primary;
+                border-right: $tooltip-arrow-size solid transparent;
+                border-left: $tooltip-arrow-size solid transparent;
             } @else if ($direction == "is-left") {
                 top: 50%;
                 right: auto;
                 bottom: auto;
                 left: 100%;
                 transform: translateY(-50%);
+                border-top: $tooltip-arrow-size solid transparent;
+                border-bottom: $tooltip-arrow-size solid transparent;
+                border-left: $tooltip-arrow-size solid $primary;
             } @else if ($direction == "is-right") {
                 top: 50%;
                 right: 100%;
                 bottom: auto;
                 left: auto;
                 transform: translateY(-50%);
+                border-top: $tooltip-arrow-size solid transparent;
+                border-right: $tooltip-arrow-size solid $primary;
+                border-bottom: $tooltip-arrow-size solid transparent;
             }
         }
-        @each $name, $pair in $colors {
+        @each $name, $pair in $tooltip-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
                 .tooltip-content::before {
-                    @include tooltip-arrow($direction, $color)
+                    @include tooltip-arrow-color($direction, $color)
                 }
-            }
-        }
-        &.is-multiline {
-            @each $name, $size in $tooltip-multiline-sizes {
-                &.is-#{$name} {
-                    .tooltip-content {
-                        width: $size;
+                // If light and dark colors are provided
+                @if length($pair) >= 4 {
+                    $color-light: nth($pair, 3);
+                    &.is-light {
+                        .tooltip-content::before {
+                            @include tooltip-arrow-color($direction, $color-light)
+                        }
                     }
                 }
             }
@@ -126,19 +130,30 @@ $tooltip-multiline-sizes: (
         position: absolute;
         content: "";
         pointer-events: none;
-        z-index: 38; 
+        z-index: 38;
     }
     .tooltip-trigger {
         width: 100%;
     }
     // Modifiers
-    @each $name, $pair in $colors {
+    @each $name, $pair in $tooltip-colors {
         $color: nth($pair, 1);
         $color-invert: nth($pair, 2);
         &.is-#{$name} {
             .tooltip-content {
                 background: $color;
                 color: $color-invert;
+            }
+            // If light and dark colors are provided
+            @if length($pair) >= 4 {
+                $color-light: nth($pair, 3);
+                $color-dark: nth($pair, 4);
+                &.is-light {
+                    .tooltip-content {
+                        background: $color-light;
+                        color: $color-dark;
+                    }
+                }
             }
         }
     }
@@ -154,6 +169,13 @@ $tooltip-multiline-sizes: (
             display: flex-block;
             text-align: center;
             white-space: normal;
+        }
+        @each $name, $size in $tooltip-multiline-sizes {
+            &.is-#{$name} {
+                .tooltip-content {
+                    width: $size;
+                }
+            }
         }
     }
     &.is-dashed {

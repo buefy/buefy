@@ -18,7 +18,7 @@
                 >
                     <b-slot-component
                         ref="tabLink"
-                        v-if="childItem.$slots.header"
+                        v-if="childItem.$scopedSlots.header"
                         :component="childItem"
                         name="header"
                         tag="a"
@@ -67,7 +67,18 @@ export default {
     name: 'BTabs',
     mixins: [TabbedMixin('tab')],
     props: {
-        expanded: Boolean,
+        expanded: {
+            type: Boolean,
+            default: () => {
+                return config.defaultTabsExpanded
+            }
+        },
+        type: {
+            type: [String, Object],
+            default: () => {
+                return config.defaultTabsType
+            }
+        },
         animated: {
             type: Boolean,
             default: () => {

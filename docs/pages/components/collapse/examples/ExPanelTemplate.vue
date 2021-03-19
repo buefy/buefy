@@ -2,24 +2,27 @@
     <section>
 
         <div class="block">
-            <button
-                class="button is-medium is-primary"
+            <b-button
+                label="Toggle"
+                type="is-primary"
+                size="is-medium"
                 @click="isOpen = !isOpen"
-                aria-controls="contentIdForA11y2">Toggle</button>
+                aria-controls="contentIdForA11y2" />
         </div>
 
         <b-collapse
             aria-id="contentIdForA11y2"
             class="panel"
             animation="slide"
-            :open.sync="isOpen">
-            <div
-                slot="trigger"
-                class="panel-heading"
-                role="button"
-                aria-controls="contentIdForA11y2">
-                <strong>Title</strong>
-            </div>
+            v-model="isOpen">
+            <template #trigger>
+                <div
+                    class="panel-heading"
+                    role="button"
+                    aria-controls="contentIdForA11y2">
+                    <strong>Title</strong>
+                </div>
+            </template>
             <p class="panel-tabs">
                 <a class="is-active">All</a>
                 <a>Public</a>

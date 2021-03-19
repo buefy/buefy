@@ -30,6 +30,20 @@ export default [
                 default: ''
             },
             {
+                name: '<code>group-field</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as display text of group',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
+                name: '<code>group-options</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as key to get items array of each group, optional',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
                 name: '<code>clear-on-select</code>',
                 description: 'Clear input text on select',
                 type: 'Boolean',
@@ -84,6 +98,13 @@ export default [
                 type: 'String',
                 values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
                 default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>confirm-keys</code>',
+                description: 'Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will select an option when typing (default tab and enter)',
+                type: 'Array',
+                values: '—',
+                default: '<code>["Tab", "Enter"]</code>'
             },
             {
                 name: '<code>clearable</code>',
@@ -161,6 +182,11 @@ export default [
             {
                 name: '<code>footer</code>',
                 description: 'Show a custom footer as last option',
+                props: '—'
+            },
+            {
+                name: '<code>group</code>',
+                description: 'Control how the group header is output',
                 props: '—'
             }
         ],

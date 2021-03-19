@@ -10,14 +10,14 @@ export default [
             },
             {
                 name: '<code>datetime-formatter</code>',
-                description: 'Function to format datetime (<code>Date</code> type) to a string for display in the input',
+                description: 'Function to format datetime (<code>Date</code> type) to a string for displaying in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(time)</code>'
+                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezone: "UTC" }).format(time)</code>'
             },
             {
                 name: '<code>datetime-parser</code>',
-                description: 'Function to parse string to a datetime (<code>Date</code> type) for set a datetime from the input to the component',
+                description: `Function to parse string to a datetime (<code>Date</code> type) for setting the component's datetime from the input`,
                 type: 'Function',
                 values: '—',
                 default: 'Tries to parse the time using the locale specific format. Fallback to <code>HH:mm</code> or <code>HH:mm AM/PM</code>'

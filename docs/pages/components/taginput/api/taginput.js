@@ -85,6 +85,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>aria-close-label</code>',
+                description: 'Accessibility label for the close button',
+                type: 'String',
+                values: '—',
+                default: '-'
+            },
+            {
                 name: '<code>field</code>',
                 description: 'Property of the object (if <code>data</code> is array of objects) to use as display text',
                 type: 'String',
@@ -97,6 +104,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>group-field</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as display text of group',
+                type: 'String',
+                values: '—',
+                default: ''
+            },
+            {
+                name: '<code>group-options</code>',
+                description: 'Property of the object (if <code>data</code> is array of objects) to use as key to get items array of each group, optional',
+                type: 'String',
+                values: '—',
+                default: ''
             },
             {
                 name: '<code>allow-new</code>',
@@ -121,10 +142,10 @@ export default [
             },
             {
                 name: '<code>confirm-keys</code>',
-                description: 'Array of key (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma and enter)',
+                description: 'Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma, tab and enter)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[",", "Enter"]</code>'
+                default: '<code>[",", "Tab", "Enter"]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',

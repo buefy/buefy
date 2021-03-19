@@ -91,4 +91,9 @@ describe('BSliderThumb', () => {
         expect(document.removeEventListener).toHaveBeenCalledWith('touchend', expect.any(Function))
         expect(document.removeEventListener).toHaveBeenCalledWith('contextmenu', expect.any(Function))
     })
+
+    it('passes tooltip-always prop to b-tooltip component', () => {
+        wrapper.setProps({ tooltipAlways: true })
+        expect(wrapper.find('b-tooltip-stub').props().always).toBe(true)
+    })
 })

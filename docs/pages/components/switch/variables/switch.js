@@ -14,5 +14,9 @@ export default [
     {
         name: '<code>$switch-active-background-color</code>',
         default: '<code>$primary</code>'
+    },
+    {
+        name: '<code>$switch-colors</code>',
+        default: '<code>$form-colors</code>'
     }
 ]

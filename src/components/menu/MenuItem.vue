@@ -5,7 +5,9 @@
             v-bind="$attrs"
             :class="{
                 'is-active': newActive,
-                'is-disabled': disabled
+                'is-expanded': newExpanded,
+                'is-disabled': disabled,
+                'icon-text': icon,
             }"
             @click="onClick($event)"
             v-on="$listeners">
@@ -15,7 +17,7 @@
                 :pack="iconPack"
                 :size="size"
             />
-            <span v-if="label">{{ label }}</span>
+            <span v-if="label"> {{ label }} </span>
             <slot
                 v-else
                 name="label"
@@ -44,6 +46,11 @@ export default {
         [Icon.name]: Icon
     },
     inheritAttrs: false,
+    // deprecated, to replace with default 'value' in the next breaking change
+    model: {
+        prop: 'active',
+        event: 'update:active'
+    },
     props: {
         label: String,
         active: Boolean,
@@ -96,7 +103,7 @@ export default {
             const menu = this.getMenu()
             this.reset(this.$parent, menu)
             this.newExpanded = !this.newExpanded
-            this.$emit('update:expanded', this.newActive)
+            this.$emit('update:expanded', this.newExpanded)
             if (menu && menu.activable) {
                 this.newActive = true
                 this.$emit('update:active', this.newActive)

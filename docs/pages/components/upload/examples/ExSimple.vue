@@ -1,16 +1,15 @@
 <template>
-    <b-field class="file">
-        <b-upload v-model="file">
-            <a class="button is-primary">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-            </a>
+    <b-field class="file is-primary" :class="{'has-name': !!file}">
+        <b-upload v-model="file" class="file-label">
+            <span class="file-cta">
+                <b-icon class="file-icon" icon="upload"></b-icon>
+                <span class="file-label">Click to upload</span>
+            </span>
+            <span class="file-name" v-if="file">
+                {{ file.name }}
+            </span>
         </b-upload>
-        <span class="file-name" v-if="file">
-            {{ file.name }}
-        </span>
     </b-field>
-    
 </template>
 
 <script>

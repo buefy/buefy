@@ -82,6 +82,69 @@ describe('BTable', () => {
         expect(cols.at(3).attributes('style')).toBe('width: 100px;')
     })
 
+    describe('Selectable', () => {
+        const data = [
+            { id: 1, name: 'Jesse' },
+            { id: 2, name: 'John' },
+            { id: 3, name: 'Tina' },
+            { id: 4, name: 'Anne' },
+            { id: 5, name: 'Clarence' }
+        ]
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                propsData: {
+                    columns: [
+                        { label: 'ID', field: 'id' },
+                        { label: 'Name', field: 'name' }
+                    ],
+                    data
+                }
+            })
+        })
+
+        it('unselected( no column-row-key )', () => {
+            expect(wrapper.findAll('tbody tr.is-selected')).toHaveLength(0)
+        })
+
+        it('unselected( column-row-key )', () => {
+            wrapper.setProps({
+                customRowKey: 'id'
+            })
+            expect(wrapper.findAll('tbody tr.is-selected')).toHaveLength(0)
+        })
+
+        it('compare by instance itself', () => {
+            wrapper.setProps({
+                selected: data[0]
+            })
+            const rows = wrapper.findAll('tbody tr')
+            expect(rows.at(0).classes()).toContain('is-selected')
+        })
+
+        it('target data and key match', () => {
+            wrapper.setProps({
+                selected: data[1],
+                customRowKey: 'id'
+            })
+            const rows = wrapper.findAll('tbody tr')
+            expect(rows.at(1).classes()).toContain('is-selected')
+        })
+
+        it('clear data', () => {
+            wrapper.setProps({
+                selected: data[0],
+                customRowKey: 'id'
+            })
+            const rows = wrapper.findAll('tbody tr')
+            expect(rows.at(0).classes()).toContain('is-selected')
+
+            wrapper.setProps({
+                selected: undefined
+            })
+            expect(wrapper.findAll('tbody tr.is-selected')).toHaveLength(0)
+        })
+    })
+
     describe('Searchable', () => {
         const data = [
             { id: 1, name: 'Jesse' },

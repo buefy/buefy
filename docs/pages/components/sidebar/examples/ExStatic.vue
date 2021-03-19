@@ -150,4 +150,11 @@ export default {
         }
     }
 }
+.is-mini-expand {
+    .menu-list a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
 </style>

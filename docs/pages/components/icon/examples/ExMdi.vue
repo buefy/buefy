@@ -55,15 +55,14 @@
         </div>
 
         <div class="buttons">
-            <button class="button is-dark">
-                <b-icon icon="check"></b-icon>
-                <span>Finish</span>
-            </button>
-
-            <button class="button is-warning">
-                <b-icon icon="check"></b-icon>
-                <span>Finish</span>
-            </button>
+            <b-button
+                label="Finish"
+                type="is-dark"
+                icon-left="check" />
+            <b-button
+                label="Finish"
+                type="is-warning"
+                icon-left="check" />
         </div>
     </section>
 </template>

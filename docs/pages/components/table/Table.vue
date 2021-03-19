@@ -57,7 +57,7 @@
                 <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.2</span>
             </div>
-            <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
+            <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method by ref or by default slot and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
         </Example>
 
         <Example :component="ExCustomDetailedRow" :code="ExCustomDetailedRowCode" title="Custom Detailed rows">

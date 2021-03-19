@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </template>
-                <template slot="footer">
+                <template #footer>
                     <span v-show="page > totalPages" class="has-text-grey"> Thats it! No more movies found. </span>
                 </template>
             </b-autocomplete>
@@ -75,7 +75,7 @@
                 this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=${name}&page=${this.page}`)
                     .then(({ data }) => {
                         data.results.forEach((item) => this.data.push(item))
-                        
+
                         this.page++
                         this.totalPages = data.total_pages
                     })

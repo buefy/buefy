@@ -26,11 +26,18 @@ export default [
                 default: '<code>undefined</code>: default to browser locale.'
             },
             {
+                name: '<code>increment-minutes</code>',
+                description: 'Unit for increment minutes ',
+                type: 'Number',
+                values: '—',
+                default: '<code>5</code>'
+            },
+            {
                 name: '<code>time-formatter</code>',
                 description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(time)</code>'
+                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timeZone: "UTC" }).format(time)</code>'
             },
             {
                 name: '<code>time-parser</code>',

@@ -28,18 +28,18 @@ const ModalProgrammatic = {
             delete params.content
         }
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ModalComponent = vm.extend(Modal)
-        const instance = new ModalComponent({
+        const component = new ModalComponent({
             parent,
             el: document.createElement('div'),
             propsData
         })
         if (slot) {
-            instance.$slots.default = slot
+            component.$slots.default = slot
+            component.$forceUpdate()
         }
-        return instance
+        return component
     }
 }
 

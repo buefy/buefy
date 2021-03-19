@@ -29,18 +29,18 @@ const SnackbarProgrammatic = {
             delete params.message
         }
         const propsData = merge(defaultParam, params)
-
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const SnackbarComponent = vm.extend(Snackbar)
-        const instance = new SnackbarComponent({
+        const component = new SnackbarComponent({
             parent,
             el: document.createElement('div'),
             propsData
         })
         if (slot) {
-            instance.$slots.default = slot
+            component.$slots.default = slot
+            component.$forceUpdate()
         }
-        return instance
+        return component
     }
 }
 

@@ -9,6 +9,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>lazy</code>',
+                description: 'Makes the binding lazy. Note: <code>v-model.lazy</code> won\'t work',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>type</code>',
                 description: 'Input type, like native',
                 type: 'String',

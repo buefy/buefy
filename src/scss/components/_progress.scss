@@ -1,4 +1,23 @@
-$progress-text-color: $scheme-main !default;
+@mixin progress-size() {
+    &.is-small {
+        + .progress-value, .progress-value {
+            font-size: calc(#{$size-small} / 1.5);
+            line-height: $size-small;
+        }
+    }
+    &.is-medium {
+        + .progress-value, .progress-value {
+            font-size: calc(#{$size-medium} / 1.5);
+            line-height: $size-medium;
+        }
+    }
+    &.is-large {
+        + .progress-value, .progress-value {
+            font-size: calc(#{$size-large} / 1.5);
+            line-height: $size-large;
+        }
+    }
+}
 
 .progress-wrapper {
     position: relative;
@@ -15,45 +34,64 @@ $progress-text-color: $scheme-main !default;
         transform: translateX(-50%);
         font-size: calc(#{$size-normal} / 1.5);
         line-height: $size-normal;
-        font-weight: bold;
-        color: $progress-text-color;
+        font-weight: $weight-bold;
+        color: findColorInvert($progress-bar-background-color);
         white-space: nowrap;
     }
 
-    .progress {
+    .progress, .progress-bar {
         margin-bottom: 0;
 
-        &.is-small {
-            + .progress-value {
-                font-size: calc(#{$size-small} / 1.5);
-                line-height: $size-small;
-            }
-        }
-        &.is-medium {
-            + .progress-value {
-                font-size: calc(#{$size-medium} / 1.5);
-                line-height: $size-medium;
-            }
-        }
-        &.is-large {
-            + .progress-value {
-                font-size: calc(#{$size-large} / 1.5);
-                line-height: $size-large;
-            }
-        }
-
-        // TODO Remove below when the following PR will be merged in Bulma:
-        // https://github.com/jgthms/bulma/pull/2540
-        // From this Bulma Issue:
-        // https://github.com/jgthms/bulma/issues/2539
-        &:indeterminate {
-            &::-ms-fill {
-                animation-name: none
-            }
-        }
+        @include progress-size();
 
         &::-webkit-progress-value {
             transition: width 0.5s ease;
+        }
+
+        &.is-more-than-half {
+            +.progress-value {
+                color: findColorInvert($progress-value-background-color);
+            }
+
+            @each $name, $pair in $progress-colors {
+                $color: nth($pair, 1);
+                $color-invert: nth($pair, 2);
+                &.is-#{$name} {
+                    + .progress-value {
+                        color: $color-invert;
+                    }
+                }
+            }
+        }
+    }
+
+    &.is-not-native {
+        @extend .progress;
+        white-space: nowrap;
+        background-color: $progress-bar-background-color;
+        border-radius: $progress-border-radius;
+
+        .progress-bar {
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+            height: 100%;
+            background-color: $progress-value-background-color;
+
+            .progress-value {
+                color: findColorInvert($progress-value-background-color);
+            }
+
+            @each $name, $pair in $progress-colors {
+                $color: nth($pair, 1);
+                $color-invert: nth($pair, 2);
+                &.is-#{$name} {
+                    background-color: $color;
+                    .progress-value {
+                        color: $color-invert;
+                    }
+                }
+            }
         }
     }
 }

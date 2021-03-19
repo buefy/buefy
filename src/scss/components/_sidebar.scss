@@ -3,14 +3,15 @@ $sidebar-box-shadow: 5px 0px 13px 3px rgba($black, 0.1) !default;
 $sidebar-width: 260px !default;
 $sidebar-mobile-width: 80px !default;
 $sidebar-mobile-breakpoint: $tablet !default;
+$sidebar-colors: $navbar-colors !default;
 
 .b-sidebar {
     .sidebar-content {
         background-color: $background;
         box-shadow: $sidebar-box-shadow;
         width: $sidebar-width;
-        z-index: 41;
-        @each $name, $pair in $colors {
+        z-index: 39;
+        @each $name, $pair in $sidebar-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
                 background-color: $color;
@@ -65,7 +66,7 @@ $sidebar-mobile-breakpoint: $tablet !default;
             flex-direction: column;
             align-content: stretch;
         }
-        @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
+        @media screen and (max-width: $sidebar-mobile-breakpoint - 1px) {
             &.is-mini-mobile {
                 width: $sidebar-mobile-width;
                 &.is-mini-expand:hover {
@@ -92,6 +93,6 @@ $sidebar-mobile-breakpoint: $tablet !default;
         @include overlay;
         background: $sidebar-background;
         position: fixed;
-        z-index: 40;
+        z-index: 38;
     }
 }

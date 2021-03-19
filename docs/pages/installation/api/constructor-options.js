@@ -18,7 +18,7 @@ export default [
                     <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a> component`,
                 type: 'Component',
                 values: 'FontAwesomeIcon component name',
-                default: '<code></code>'
+                default: '—'
             },
             {
                 name: '<code>defaultStatusIcon</code>',
@@ -130,6 +130,13 @@ export default [
                 default: '<code>is-primary</code>'
             },
             {
+                name: '<code>defaultTooltipDelay</code>',
+                description: `Default tooltip delay attribute.`,
+                type: 'Number',
+                values: `—`,
+                default: '—'
+            },
+            {
                 name: '<code>defaultInputAutocomplete</code>',
                 description: `Default input <code>autocomplete</code> attribute.`,
                 type: 'String',
@@ -141,7 +148,7 @@ export default [
                 description: `Default datepicker <code>date-formatter</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timeZone: "UTC" }).format(date)</code>'
             },
             {
                 name: '<code>defaultDateParser</code>',
@@ -316,7 +323,7 @@ export default [
                 description: 'Default config to trap focus inside components (Dialog, Dropdown and Modal).',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>defaultButtonRounded</code>',
@@ -324,6 +331,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultSwitchRounded</code>',
+                description: 'Default config to make all switch rounded.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>defaultCarouselInterval</code>',
@@ -390,7 +404,7 @@ export default [
             },
             {
                 name: '<code>defaultImageRatio</code>',
-                description: `Default datepicker <code>date-formatter</code> attribute`,
+                description: `The space will be reserved. Prevent page jump when images are loading when using <code>responsive</code>.`,
                 type: 'String',
                 values: '<code>1by1</code>, <code>5by4</code>, <code>4by3</code>, <code>3by2</code>, <code>5by3</code>, <code>16by9</code>, <code>2by1</code>, <code>3by1</code>, <code>4by5</code>, <code>3by4</code>, <code>2by3</code>, <code>3by5</code>, <code>9by16</code>, <code>1by2</code> <code>1by3</code> or any string having this format <code>{number}by{number}</code>',
                 default: '—'

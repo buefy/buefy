@@ -40,7 +40,7 @@ export default [
             {
                 name: '<code>content</code>',
                 description: 'HTML content <div class="notification is-danger">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS vulnerabilities</a>. Only use HTML interpolation on trusted content and never on user-provided content.</div>',
-                type: 'String',
+                type: 'String, Array<VNode>',
                 values: '—',
                 default: '—'
             },
@@ -99,7 +99,14 @@ export default [
                 description: `Trap focus inside the modal.`,
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>auto-focus</code>',
+                description: `Automatically focus modal when active.`,
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>custom-class</code>',
@@ -123,6 +130,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>aria-label</code>',
+                description: `Aria label attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-modal</code>',
                 description: `Improve accessiblity when enabled.`,
                 type: 'Boolean',
@@ -134,6 +148,16 @@ export default [
             {
                 name: '<code>close</code>',
                 description: 'Triggers when user closed/canceled or called programmatically from the injected component',
+                parameters: '—'
+            },
+            {
+                name: '<code>after-enter</code>',
+                description: 'Triggers when the modal transition <code>after-enter</code> hook is called.',
+                parameters: '—'
+            },
+            {
+                name: '<code>after-leave</code>',
+                description: 'Triggers when the modal transition <code>after-leave</code> hook is called.',
                 parameters: '—'
             }
         ]

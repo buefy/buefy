@@ -59,6 +59,13 @@ export default [
                 description: 'Show tooltip when thumb is being dragged',
                 type: 'Boolean',
                 values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>indicator</code>',
+                description: 'Show v-model value inside thumb',
+                type: 'Boolean',
+                values: '—',
                 default: '<code>true</code>'
             },
             {
@@ -93,6 +100,23 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>format</code>',
+                description: `Which format should be used to display the value.
+                              The value will be displayed as-is if using <code>raw</code>. The percent using <code>value</code>,
+                              <code>min</code> and <code>max</code> will be calculated and displayed if using <code>percent</code>`,
+                type: 'String',
+                values: '<code>raw</code>, <code>percent</code>',
+                default: '<code>raw</code>'
+            },
+            {
+                name: '<code>locale</code>',
+                description: `Accept a string with a BCP 47 language tag, or an array of such strings.
+                See <a href="https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance" target="_blank">Unicode BCP 47 locale identifier</a>`,
+                type: 'String, Array of String',
+                values: '—',
+                default: '<code>undefined</code>: default to browser locale.'
+            },
+            {
                 name: '<code>aria-label</code>',
                 description: 'Accessibility label for the thumbs',
                 type: 'String, Array',
@@ -102,6 +126,13 @@ export default [
             {
                 name: '<code>bigger-slider-focus</code>',
                 description: 'Increase the clickable area',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>tooltip-always</code>',
+                description: 'Tooltip displays always',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

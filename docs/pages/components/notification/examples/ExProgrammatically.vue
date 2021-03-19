@@ -1,17 +1,20 @@
 <template>
     <section>
         <div class="buttons">
-            <button class="button is-medium" @click="simple">
-                Launch notification (default)
-            </button>
-
-            <button class="button is-medium is-success" @click="success">
-                Launch notification (custom)
-            </button>
-
-            <button class="button is-medium is-danger" @click="danger">
-                Launch notification (custom)
-            </button>
+            <b-button
+                label="Launch notification (default)"
+                size="is-medium"
+                @click="simple" />
+            <b-button
+                label="Launch notification (custom)"
+                type="is-success"
+                size="is-medium"
+                @click="success" />
+            <b-button
+                label="Launch notification (custom)"
+                type="is-danger"
+                size="is-medium"
+                @click="danger" />
         </div>
     </section>
 </template>
@@ -31,7 +34,7 @@
             danger() {
                 const notif = this.$buefy.notification.open({
                     duration: 5000,
-                    message: `Something's not good, also I'm on bottom`,
+                    message: `Something's not good, also I'm on <b>bottom</b>`,
                     position: 'is-bottom-right',
                     type: 'is-danger',
                     hasIcon: true

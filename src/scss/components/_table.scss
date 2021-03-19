@@ -1,8 +1,24 @@
 $table-sticky-header-height: 300px !default;
 
 @mixin table-cards {
+    .table {
+        background-color: transparent;
+    }
     thead {
-        display: none;
+        tr {
+            box-shadow: none;
+            border-width: 0;
+            th {
+                display: none;
+            }
+            .checkbox-cell {
+                display: block;
+                width: 100%;
+                text-align: right;
+                margin-bottom: 1rem;
+                border: 0;
+            }
+        }
     }
     tfoot {
          th {
@@ -28,9 +44,9 @@ $table-sticky-header-height: 300px !default;
         }
         // Disables is-*
         &:not([class*="is-"]) {
-            background: inherit;
+            background: $table-background-color;
             &:hover {
-                background-color: inherit;
+                background-color: $table-background-color;
             }
         }
         &.detail {
@@ -135,6 +151,7 @@ $table-sticky-header-height: 300px !default;
             .sort-icon, .multi-sort-cancel-icon {
                 position: absolute;
                 bottom: 50%;
+                left: 100%;
                 transform: translateY(50%);
             }
             .multi-sort-cancel-icon {
@@ -145,7 +162,7 @@ $table-sticky-header-height: 300px !default;
                 position: sticky;
                 left: 0;
                 z-index: 3 !important;
-                background: $table-background-color;
+                background: $table-head-background-color;
             }
         }
         tr {
@@ -208,6 +225,20 @@ $table-sticky-header-height: 300px !default;
                 background: $table-background-color;
             }
         }
+
+        &.is-striped {
+            tbody {
+                tr:not(.is-selected) {
+                    &:nth-child(even) {
+                        td {
+                            &.is-sticky {
+                                background: $table-striped-row-even-background-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .level:not(.top) {
@@ -215,6 +246,7 @@ $table-sticky-header-height: 300px !default;
     }
 
     .table-wrapper {
+        position: relative;
         &.has-sticky-header {
             height: $table-sticky-header-height;
             overflow-y: auto;

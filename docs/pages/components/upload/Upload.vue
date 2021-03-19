@@ -5,6 +5,8 @@
         <Example :component="ExDragDrop" :code="ExDragDropCode" title="Drag and drop" vertical/>
         
         <Example :component="ExExpanded" :code="ExExpandedCode" title="Expanded" vertical/>
+        
+        <Example :component="ExRounded" :code="ExRoundedCode" title="Rounded" vertical/>
 
         <ApiView :data="api"/>
     </div>
@@ -20,7 +22,10 @@
     import ExDragDropCode from '!!raw-loader!./examples/ExDragDrop'
 
     import ExExpanded from './examples/ExExpanded'
-    import ExExpandedCode from '!!raw-loader!./examples/ExExpanded'
+    import ExExpandedCode from '!!raw-loader!./examples/ExExpanded'    
+    
+    import ExRounded from './examples/ExRounded'
+    import ExRoundedCode from '!!raw-loader!./examples/ExRounded'
 
     export default {
         data() {
@@ -31,7 +36,9 @@
                 ExExpanded,
                 ExSimpleCode,
                 ExDragDropCode,
-                ExExpandedCode
+                ExExpandedCode,
+                ExRounded,
+                ExRoundedCode
             }
         }
     }
