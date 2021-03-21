@@ -41,7 +41,7 @@
                 <a
                     role="button"
                     class="pagination-previous"
-                    :disabled="navigationProps.previous.disabled"
+                    :disabled="navigationProps.previous.disabled ? '' : null"
                     @click.prevent="navigationProps.previous.action"
                     :aria-label="ariaPreviousLabel">
                     <b-icon
@@ -53,7 +53,7 @@
                 <a
                     role="button"
                     class="pagination-next"
-                    :disabled="navigationProps.next.disabled"
+                    :disabled="navigationProps.next.disabled ? '' : null"
                     @click.prevent="navigationProps.next.action"
                     :aria-label="ariaNextLabel">
                     <b-icon

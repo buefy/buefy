@@ -3,7 +3,7 @@
         <div
             class="taginput-container"
             :class="[statusType, size, containerClasses]"
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             @click="hasInput && focus($event)">
             <slot name="selected" :tags="tags">
                 <b-tag

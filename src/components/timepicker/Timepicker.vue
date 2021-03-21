@@ -45,7 +45,7 @@
                             v-for="hour in hours"
                             :value="hour.value"
                             :key="hour.value"
-                            :disabled="isHourDisabled(hour.value)">
+                            :disabled="isHourDisabled(hour.value) ? '' : null">
                             {{ hour.label }}
                         </option>
                     </b-select>
@@ -59,7 +59,7 @@
                             v-for="minute in minutes"
                             :value="minute.value"
                             :key="minute.value"
-                            :disabled="isMinuteDisabled(minute.value)">
+                            :disabled="isMinuteDisabled(minute.value) ? '' : null">
                             {{ minute.label }}
                         </option>
                     </b-select>
@@ -74,7 +74,7 @@
                                 v-for="second in seconds"
                                 :value="second.value"
                                 :key="second.value"
-                                :disabled="isSecondDisabled(second.value)">
+                                :disabled="isSecondDisabled(second.value) ? '' : null">
                                 {{ second.label }}
                             </option>
                         </b-select>

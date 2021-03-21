@@ -35,7 +35,7 @@
             </template>
             <div
                 class="card"
-                :disabled="disabled"
+                :disabled="disabled ? '' : null"
                 custom>
                 <header v-if="inline" class="card-header">
                     <div class="b-clockpicker-header card-header-title">

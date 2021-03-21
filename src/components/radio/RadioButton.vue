@@ -4,7 +4,7 @@
             class="b-radio radio button"
             ref="label"
             :class="labelClass"
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             @click="focus"
             @keydown.prevent.enter="$refs.label.click()">
             <slot/>
@@ -13,7 +13,7 @@
                 type="radio"
                 ref="input"
                 @click.stop
-                :disabled="disabled"
+                :disabled="disabled ? '' : null"
                 :required="required"
                 :name="name"
                 :value="nativeValue"

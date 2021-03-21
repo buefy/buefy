@@ -59,7 +59,7 @@
                                 class="pagination-previous"
                                 role="button"
                                 href="#"
-                                :disabled="disabled"
+                                :disabled="disabled ? '' : null"
                                 :aria-label="ariaPreviousLabel"
                                 @click.prevent="prev"
                                 @keydown.enter.prevent="prev"
@@ -76,7 +76,7 @@
                                 class="pagination-next"
                                 role="button"
                                 href="#"
-                                :disabled="disabled"
+                                :disabled="disabled ? '' : null"
                                 :aria-label="ariaNextLabel"
                                 @click.prevent="next"
                                 @keydown.enter.prevent="next"
@@ -99,7 +99,7 @@
                                             v-for="month in listOfMonths"
                                             :value="month.index"
                                             :key="month.name"
-                                            :disabled="month.disabled">
+                                            :disabled="month.disabled ? '' : null">
                                             {{ month.name }}
                                         </option>
                                     </b-select>

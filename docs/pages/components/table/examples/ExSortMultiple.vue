@@ -5,7 +5,7 @@
         <b-switch v-model="multiColumnSortingEnabled" @input="resetPriority">Sort multiple rows</b-switch>
       </div>
       <div class="control is-flex">
-        <span class="button" :disabled="!multiColumnSortingEnabled" @click="resetPriority">Reset sorting</span>
+        <span class="button" :disabled="multiColumnSortingEnabled ? null : ''" @click="resetPriority">Reset sorting</span>
       </div>
       <div class="control is-flex">
         <b-select v-model="customKey" :disabled="!multiColumnSortingEnabled">

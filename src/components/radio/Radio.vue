@@ -3,7 +3,7 @@
         class="b-radio radio"
         ref="label"
         :class="[size, { 'is-disabled': disabled }]"
-        :disabled="disabled"
+        :disabled="disabled ? '' : null"
         @click="focus"
         @keydown.prevent.enter="$refs.label.click()">
         <input
@@ -11,7 +11,7 @@
             type="radio"
             ref="input"
             @click.stop
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             :required="required"
             :name="name"
             :value="nativeValue">

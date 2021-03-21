@@ -26,7 +26,7 @@
             v-bind="$attrs"
             :multiple="multiple"
             :accept="accept"
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             @change="onFileChange">
     </label>
 </template>

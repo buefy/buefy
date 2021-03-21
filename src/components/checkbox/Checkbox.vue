@@ -3,7 +3,7 @@
         class="b-checkbox checkbox"
         :class="[size, { 'is-disabled': disabled }]"
         ref="label"
-        :disabled="disabled"
+        :disabled="disabled ? '' : null"
         @click="focus"
         @keydown.prevent.enter="$refs.label.click()">
         <input
@@ -12,7 +12,7 @@
             type="checkbox"
             ref="input"
             @click.stop
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             :required="required"
             :name="name"
             :value="nativeValue"

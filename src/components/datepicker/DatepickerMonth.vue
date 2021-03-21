@@ -15,7 +15,7 @@
                         class="datepicker-cell"
                         role="button"
                         href="#"
-                        :disabled="disabled"
+                        :disabled="disabled ? '' : null"
                         @click.prevent="updateSelectedDate(date)"
                         @mouseenter="setRangeHoverEndDate(date)"
                         @keydown.prevent="manageKeydown($event, date)"

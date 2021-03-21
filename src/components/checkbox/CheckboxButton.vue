@@ -7,7 +7,7 @@
                 'is-disabled': disabled,
                 'is-focused': isFocused
             }]"
-            :disabled="disabled"
+            :disabled="disabled ? true : null ? '' : null"
             @click="focus"
             @keydown.prevent.enter="$refs.label.click()">
             <slot/>
@@ -16,7 +16,7 @@
                 type="checkbox"
                 ref="input"
                 @click.stop
-                :disabled="disabled"
+                :disabled="disabled ? '' : null"
                 :required="required"
                 :name="name"
                 :value="nativeValue"

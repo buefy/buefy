@@ -12,7 +12,7 @@
             role="button"
             :aria-label="ariaCloseLabel"
             :tabindex="tabstop ? 0 : false"
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             :class="[size,
                      closeType,
                      {'is-rounded': rounded},
@@ -43,7 +43,7 @@
             :aria-label="ariaCloseLabel"
             class="delete is-small"
             :class="closeType"
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             :tabindex="tabstop ? 0 : false"
             @click="close"
             @keyup.delete.prevent="close"

@@ -3,7 +3,7 @@
         class="switch"
         :class="newClass"
         ref="label"
-        :disabled="disabled"
+        :disabled="disabled ? '' : null"
         @click="focus"
         @keydown.prevent.enter="$refs.label.click()"
         @mousedown="isMouseDown = true"
@@ -15,7 +15,7 @@
             type="checkbox"
             ref="input"
             @click.stop
-            :disabled="disabled"
+            :disabled="disabled ? '' : null"
             :name="name"
             :required="required"
             :value="nativeValue"
