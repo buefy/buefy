@@ -1,3 +1,5 @@
+import { h, ref } from 'vue-demi'
+
 import Toast from './Toast'
 
 import config, { VueInstance } from '../../utils/config'
@@ -54,7 +56,39 @@ use(Plugin)
 
 export default Plugin
 
+/**
+ * <template>
+ *   <b-button @click="Toast.open">click me</button>
+ *   <component :is="Toast">
+ *     Success!
+ *   </component>
+ * </template>
+ * <script>
+ * export default {
+ *   setup() {
+ *     const Toast = useToast({ type: 'is-success' })
+ *
+ *     return { Toast }
+ *   }
+ * }
+ * </script>
+ */
+function useToast(hookProps) {
+    const isOpen = ref(false)
+
+    const UseToast = (props, context) => {
+        if (!isOpen.value) return null
+
+        return h(Toast, merge(hookProps, props), context.slots.default)
+    }
+
+    UseToast.open = () => { isOpen.value = true }
+
+    return UseToast
+}
+
 export {
     ToastProgrammatic,
-    Toast as BToast
+    Toast as BToast,
+    useToast
 }
