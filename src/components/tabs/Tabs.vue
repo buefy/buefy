@@ -27,7 +27,7 @@
                         :aria-controls="`${childItem.value}-content`"
                         :aria-selected="`${childItem.isActive}`"
                         :tabindex="childItem.isActive ? 0 : -1"
-                        @focus="currentFocus = childIdx"
+                        @focus.native="currentFocus = childIdx"
                         @click.native="childClick(childItem)"
                         @keydown="manageTabKeydown($event, childItem)"
                     />
@@ -108,12 +108,19 @@ export default {
                 {
                     [this.position]: this.position && !this.vertical,
                     'is-fullwidth': this.expanded,
-                    'is-toggle-rounded is-toggle': this.type === 'is-toggle-rounded'
+                    'is-toggle': this.type === 'is-toggle-rounded'
                 }
             ]
         }
     },
     methods: {
+        giveFocusToTab(tab) {
+            if (tab.$el && tab.$el.focus) {
+                tab.$el.focus()
+            } else if (tab.focus) {
+                tab.focus()
+            }
+        },
         manageTablistKeydown(event) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
             const { key } = event
@@ -129,10 +136,9 @@ export default {
                         prevIdx !== null &&
                         this.$refs.tabLink &&
                         prevIdx < this.$refs.tabLink.length &&
-                        !this.items[prevIdx].disabled &&
-                        this.$refs.tabLink[prevIdx].focus
+                        !this.items[prevIdx].disabled
                     ) {
-                        this.$refs.tabLink[prevIdx].focus()
+                        this.giveFocusToTab(this.$refs.tabLink[prevIdx])
                     }
                     event.preventDefault()
                     break
@@ -148,10 +154,9 @@ export default {
                         nextIdx !== null &&
                         this.$refs.tabLink &&
                         nextIdx < this.$refs.tabLink.length &&
-                        !this.items[nextIdx].disabled &&
-                        this.$refs.tabLink[nextIdx].focus
+                        !this.items[nextIdx].disabled
                     ) {
-                        this.$refs.tabLink[nextIdx].focus()
+                        this.giveFocusToTab(this.$refs.tabLink[nextIdx])
                     }
                     event.preventDefault()
                     break
