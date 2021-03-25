@@ -63,6 +63,10 @@
                     {{ props.row.gender }}
                 </span>
             </b-table-column>
+            
+            <template #empty>
+                <div class="has-text-centered">No records</div>
+            </template>
 
         </b-table>
     </section>
