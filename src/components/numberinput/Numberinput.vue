@@ -14,6 +14,7 @@
                 class="button"
                 :class="buttonClasses"
                 :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
+                :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
                 @mousedown="onStartLongPress($event, control === 'plus')"
                 @touchstart.prevent="onStartLongPress($event, control === 'plus')"
                 @click="onControlClick($event, control === 'plus')"
@@ -62,6 +63,7 @@
                 class="button"
                 :class="buttonClasses"
                 :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
+                :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
                 @mousedown="onStartLongPress($event, control === 'plus')"
                 @touchstart.prevent="onStartLongPress($event, control === 'plus')"
                 @click="onControlClick($event, control === 'plus')"
@@ -127,7 +129,9 @@ export default {
             default: false
         },
         controlsPosition: String,
-        placeholder: [Number, String]
+        placeholder: [Number, String],
+        ariaMinusLabel: String,
+        ariaPlusLabel: String
     },
     data() {
         return {
