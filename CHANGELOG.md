@@ -44,6 +44,7 @@
 * Fix #3195: Tooltip ``auto-close`` with ``inside`` and ``outside`` (thanks @elC0mpa)
 * Fix #3226: reactive Datepicker dates when using ``multiple`` (thanks @service-paradis)
 * Fix #3235: emit event on Table listeners (thanks @service-paradis)
+* Fis #3247: Remove extraneous a element in tag (thanks @service-paradis)
 
 
 ## 0.9.4
