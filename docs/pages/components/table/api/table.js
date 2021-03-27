@@ -723,6 +723,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>th-attrs</code>',
+                description: 'Adds native attributes to th <code>:th-attrs="(column)" => ({})"</code>',
+                type: 'Function',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>td-attrs</code>',
+                description: 'Adds native attributes to td <code>:td-attrs="(row, column)" => ({})"</code>',
+                type: 'Function',
+                values: '—',
+                default: '-'
             }
         ],
         slots: [

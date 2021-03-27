@@ -26,7 +26,15 @@ export default {
         sticky: Boolean,
         headerSelectable: Boolean,
         headerClass: String,
-        cellClass: String
+        cellClass: String,
+        thAttrs: {
+            type: Function,
+            default: () => ({})
+        },
+        tdAttrs: {
+            type: Function,
+            default: () => ({})
+        }
     },
     data() {
         return {

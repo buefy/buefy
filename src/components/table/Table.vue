@@ -67,6 +67,7 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'header'"
+                            v-bind="column.thAttrs(column)"
                             :class="[column.headerClass, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                                 'is-sortable': column.sortable,
@@ -177,6 +178,7 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'searchable'"
+                            v-bind="column.thAttrs(column)"
                             :style="column.style"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
@@ -255,6 +257,7 @@
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
+                                        v-bind="column.tdAttrs(row, column)"
                                         scoped
                                         name="default"
                                         tag="td"
