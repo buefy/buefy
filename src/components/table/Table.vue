@@ -68,13 +68,10 @@
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'header'"
                             v-bind="column.thAttrs(column)"
-                            :class="[column.headerClass, {
+                            :class="[column.thClasses, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
-                                'is-sortable': column.sortable,
-                                'is-sticky': column.sticky,
-                                'is-unselectable': column.isHeaderUnSelectable
                             }]"
-                            :style="column.style"
+                            :style="column.thStyle"
                             @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
@@ -179,7 +176,7 @@
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'searchable'"
                             v-bind="column.thAttrs(column)"
-                            :style="column.style"
+                            :style="column.thStyle"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
@@ -261,7 +258,8 @@
                                         scoped
                                         name="default"
                                         tag="td"
-                                        :class="column.rootClasses"
+                                        :class="column.getRootClasses(row)"
+                                        :style="column.getRootStyle(row)"
                                         :data-label="column.label"
                                         :props="{ row, column, index, colindex, toggleDetails }"
                                         @click.native="$emit('cellclick',row,column,index,colindex)"
