@@ -31,11 +31,13 @@
         <Example :component="ExVertical" :code="ExVerticalCode" title="Vertical"/>
 
         <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
 <script>
     import api from './api/tabs'
+    import variables from './variables/tabs'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
@@ -68,6 +70,7 @@
         data() {
             return {
                 api,
+                variables,
                 ExSimple,
                 ExDynamic,
                 ExPosition,

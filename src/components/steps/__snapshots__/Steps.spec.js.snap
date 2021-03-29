@@ -25,9 +25,9 @@ exports[`BSteps render correctly 1`] = `
         </ul>
     </nav>
     <section class="step-content">
-        <div class="step-item" style="display: none;"></div>
-        <div class="step-item" style="display: none;"></div>
-        <div class="step-item" style="display: none;"></div>
+        <div class="step-item" id="14-content" tabindex="-1" style="display: none;"></div>
+        <div class="step-item" id="16-content" tabindex="0" style="display: none;"></div>
+        <div class="step-item" id="18-content" tabindex="-1" style="display: none;"></div>
     </section>
     <nav class="step-navigation"><a role="button" class="pagination-previous"><span class="icon" aria-hidden="true"><i class="mdi mdi-chevron-left mdi-24px"></i></span></a> <a role="button" class="pagination-next"><span class="icon" aria-hidden="true"><i class="mdi mdi-chevron-right mdi-24px"></i></span></a></nav>
 </div>

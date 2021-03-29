@@ -9,7 +9,8 @@ export default {
     },
     data() {
         return {
-            elementClass: 'tab-item'
+            elementClass: 'tab-item',
+            elementRole: 'tabpanel'
         }
     }
 }
