@@ -20,7 +20,7 @@
 * Display events on unselectable Datepicker cell (thanks @service-paradis)
 * Add ``aria-minus-label`` and ``aria-plus-label`` functions for ``b-numberinput`` (thanks @service-paradis)
 * Add ``th-attrs`` and ``td-attrs`` functions for ``b-table``
-
+* Improve a11y on tab component (thanks @service-paradis)
 
 ### Fixes
 
