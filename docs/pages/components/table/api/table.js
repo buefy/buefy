@@ -276,6 +276,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>detail-transition</code>',
+                description: 'Transition name to use when toggling row details.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>custom-is-checked</code>',
                 description: 'Custom method to verify if row is checked, works when is <code>checkable</code>. Useful for backend pagination',
                 type: 'Function (a: Object, b: Object)',
@@ -540,7 +547,7 @@ export default [
             {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
-                parameters: '<code> row: Object </code>'
+                parameters: '<code> row: Object </code>, <code> event: Event </code>'
             },
             {
                 name: '<code>mouseleave</code>',
@@ -716,6 +723,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>th-attrs</code>',
+                description: 'Adds native attributes to th <code>:th-attrs="(column)" => ({})"</code>',
+                type: 'Function',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>td-attrs</code>',
+                description: 'Adds native attributes to td <code>:td-attrs="(row, column)" => ({})"</code>',
+                type: 'Function',
+                values: '—',
+                default: '-'
             }
         ],
         slots: [

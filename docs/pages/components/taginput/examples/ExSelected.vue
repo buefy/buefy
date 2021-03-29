@@ -12,10 +12,10 @@
                 <template slot-scope="props">
                     <strong>{{props.option.id}}</strong>: {{props.option.user.first_name}}
                 </template>
-                <template slot="empty">
+                <template #empty>
                     There are no items
                 </template>
-                <template slot="selected" slot-scope="props">
+                <template #selected="props">
                     <b-tag
                         v-for="(tag, index) in props.tags"
                         :key="index"

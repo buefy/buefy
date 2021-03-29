@@ -187,19 +187,20 @@ export default {
     },
     methods: {
         /**
-        * Click listener from DropdownItem.
-        *   1. Set new selected item.
-        *   2. Emit input event to update the user v-model.
-        *   3. Close the dropdown.
-        */
+         * Click listener from DropdownItem.
+         *   1. Set new selected item.
+         *   2. Emit input event to update the user v-model.
+         *   3. Close the dropdown.
+         */
         selectItem(value) {
             if (this.multiple) {
                 if (this.selected) {
-                    const index = this.selected.indexOf(value)
-                    if (index === -1) {
-                        this.selected.push(value)
+                    if (this.selected.indexOf(value) === -1) {
+                        // Add value
+                        this.selected = [...this.selected, value]
                     } else {
-                        this.selected.splice(index, 1)
+                        // Remove value
+                        this.selected = this.selected.filter((val) => val !== value)
                     }
                 } else {
                     this.selected = [value]
@@ -335,6 +336,7 @@ export default {
                     parentNode.classList.forEach((item) => {
                         parent.classList.add(item)
                     })
+                    parentNode.style.zIndex = this.isActive ? '-1' : '0'
                 }
                 const rect = trigger.getBoundingClientRect()
                 let top = rect.top + window.scrollY

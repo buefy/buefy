@@ -1,6 +1,6 @@
 <template>
     <b-navbar>
-        <template slot="brand">
+        <template #brand>
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
                 <img
                     src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
@@ -8,7 +8,7 @@
                 >
             </b-navbar-item>
         </template>
-        <template slot="start">
+        <template #start>
             <b-navbar-item href="#">
                 Home
             </b-navbar-item>
@@ -25,7 +25,7 @@
             </b-navbar-dropdown>
         </template>
 
-        <template slot="end">
+        <template #end>
             <b-navbar-item tag="div">
                 <div class="buttons">
                     <a class="button is-primary">

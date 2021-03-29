@@ -187,7 +187,7 @@ export default {
                     }
                     this.newValue = new Date(val.getTime())
                 } else {
-                    this.newValue = this.adjustValue(this.value)
+                    this.newValue = this.adjustValue(value)
                 }
                 var adjustedValue = this.adjustValue(this.newValue, true) // reverse adjust
                 this.$emit('input', adjustedValue)
@@ -212,7 +212,7 @@ export default {
                 minute: this.localeOptions.minute || 'numeric',
                 second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
                 hour12: !this.isHourFormat24(),
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         isMobileNative() {
@@ -275,10 +275,10 @@ export default {
         }
     },
     watch: {
-        value(val) {
+        value() {
             this.newValue = this.adjustValue(this.value)
         },
-        tzOffset(val) {
+        tzOffset() {
             this.newValue = this.adjustValue(this.value)
         }
     },

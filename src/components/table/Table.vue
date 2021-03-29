@@ -29,6 +29,10 @@
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="top-left"/>
@@ -63,13 +67,11 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'header'"
-                            :class="[column.headerClass, {
+                            v-bind="column.thAttrs(column)"
+                            :class="[column.thClasses, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
-                                'is-sortable': column.sortable,
-                                'is-sticky': column.sticky,
-                                'is-unselectable': column.isHeaderUnSelectable
                             }]"
-                            :style="column.style"
+                            :style="column.thStyle"
                             @click.stop="sort(column, null, $event)">
                             <div
                                 class="th-wrap"
@@ -173,7 +175,8 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'searchable'"
-                            :style="column.style"
+                            v-bind="column.thAttrs(column)"
+                            :style="column.thStyle"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
@@ -209,8 +212,8 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @mouseenter="$listeners.mouseenter ? $emit('mouseenter', row) : null"
-                            @mouseleave="$listeners.mouseleave ? $emit('mouseleave', row) : null"
+                            @mouseenter="emitEventForRow('mouseenter', $event, row)"
+                            @mouseleave="emitEventForRow('mouseleave', $event, row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
                             :draggable="draggable"
                             @dragstart="handleDragStart($event, row, index)"
@@ -251,10 +254,12 @@
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
+                                        v-bind="column.tdAttrs(row, column)"
                                         scoped
                                         name="default"
                                         tag="td"
-                                        :class="column.rootClasses"
+                                        :class="column.getRootClasses(row)"
+                                        :style="column.getRootStyle(row)"
                                         :data-label="column.label"
                                         :props="{ row, column, index, colindex, toggleDetails }"
                                         @click.native="$emit('cellclick',row,column,index,colindex)"
@@ -274,20 +279,24 @@
                             </td>
                         </tr>
 
-                        <tr
-                            v-if="isActiveDetailRow(row)"
+                        <transition
                             :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
-                            class="detail">
-                            <td :colspan="columnCount">
-                                <div class="detail-container">
-                                    <slot
-                                        name="detail"
-                                        :row="row"
-                                        :index="index"
-                                    />
-                                </div>
-                            </td>
-                        </tr>
+                            :name="detailTransition"
+                        >
+                            <tr
+                                v-if="isActiveDetailRow(row)"
+                                class="detail">
+                                <td :colspan="columnCount">
+                                    <div class="detail-container">
+                                        <slot
+                                            name="detail"
+                                            :row="row"
+                                            :index="index"
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                        </transition>
                         <slot
                             v-if="isActiveCustomDetailRow(row)"
                             name="detail"
@@ -337,6 +346,10 @@
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :aria-next-label="ariaNextLabel"
+                    :aria-previous-label="ariaPreviousLabel"
+                    :aria-page-label="ariaPageLabel"
+                    :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
                 >
                     <slot name="bottom-left"/>
@@ -496,6 +509,10 @@ export default {
             default: () => true
         },
         detailKey: {
+            type: String,
+            default: ''
+        },
+        detailTransition: {
             type: String,
             default: ''
         },
@@ -1297,6 +1314,10 @@ export default {
         handleDragLeave(event, row, index) {
             if (!this.draggable) return
             this.$emit('dragleave', {event, row, index})
+        },
+
+        emitEventForRow(eventName, event, row) {
+            return this.$listeners[eventName] ? this.$emit(eventName, row, event) : null
         },
 
         refreshSlots() {

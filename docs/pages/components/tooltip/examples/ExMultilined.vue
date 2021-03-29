@@ -4,18 +4,14 @@
         <b-tooltip
             label="Tooltip multilined, probably because it's too long for a casual tooltip"
             multilined>
-            <button class="button is-dark">
-                Multiline (default)
-            </button>
+            <b-button label="Multiline (default)" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip
             label="It's not brief, but it's also not long"
             size="is-small"
             multilined>
-            <button class="button is-dark">
-                Multiline (small)
-            </button>
+            <b-button label="Multiline (small)" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip
@@ -23,9 +19,7 @@
             position="is-bottom"
             size="is-large"
             multilined>
-            <button class="button is-dark">
-                Multiline (large)
-            </button>
+            <b-button label="Multiline (large)" type="is-dark" />
         </b-tooltip>
     </section>
 </template>

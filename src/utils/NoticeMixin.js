@@ -13,6 +13,10 @@ export default {
             type: Boolean,
             default: undefined
         },
+        indefinite: {
+            type: Boolean,
+            default: false
+        },
         position: {
             type: String,
             default: 'is-top',

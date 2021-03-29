@@ -4,7 +4,7 @@
             :first-day-of-week="1"
             placeholder="Click to select...">
 
-            <template slot="header">
+            <template #header>
                 <b-field>
                     <b-autocomplete
                         open-on-focus

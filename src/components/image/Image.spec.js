@@ -23,6 +23,22 @@ describe('BImage', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
+    it('render placeholder correctly', () => {
+        const baseName = 'my-image-source'
+        const alt = 'Alt text'
+        const placeholder = `${baseName}.png`
+        const src = `${baseName}.webp`
+        const wrapper = shallowMount(BImage, {
+            propsData: {
+                alt,
+                placeholder,
+                src
+            }
+        })
+
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('compute the image src as expected', () => {
         const baseName = 'my-image-source'
         const src = `${baseName}.webp`
@@ -138,5 +154,30 @@ describe('BImage', () => {
         wrapper.destroy()
 
         expect(window.removeEventListener).toBeCalledWith('resize', expect.any(Function))
+    })
+
+    describe('has caption', () => {
+        it('as last element', () => {
+            const wrapper = shallowMount(BImage, {
+                slots: {
+                    caption: ['<div>This is a caption</div>']
+                }
+            })
+
+            expect(wrapper.html()).toMatchSnapshot()
+        })
+
+        it('as first element', () => {
+            const wrapper = shallowMount(BImage, {
+                slots: {
+                    caption: ['<div>This is a caption</div>']
+                },
+                propsData: {
+                    captionFirst: true
+                }
+            })
+
+            expect(wrapper.html()).toMatchSnapshot()
+        })
     })
 })

@@ -27,8 +27,8 @@
                 :type="closeIconType"
                 :pack="closeIconPack"
             />
-            <a/>
-    </a></div>
+        </a>
+    </div>
     <span
         v-else
         class="tag"

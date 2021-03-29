@@ -1,6 +1,6 @@
 <template>
     <b-carousel-list v-model="test" :data="items" :items-to-show="2">
-        <template slot="item" slot-scope="list">
+        <template #item="list">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-5by4">
@@ -12,14 +12,14 @@
                     <div class="content">
                         <p class="title is-6">{{ list.title }}</p>
                         <p class="subtitle is-7">@johnsmith</p>
-                        <div class="field is-grouped" >
+                        <b-field grouped >
                             <p class="control" v-if="list.rating">
                                 <b-rate :value="list.rating" show-score disabled/>
                             </p>
                             <p class="control" style="margin-left: auto">
-                                <button class="button is-small is-danger is-outlined"><b-icon size="is-small" icon="heart"/></button>
+                                <b-button size="is-small" type="is-danger" icon-left="heart" outlined />
                             </p>
-                        </div>
+                        </b-field>
                     </div>
                 </div>
             </div>

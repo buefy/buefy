@@ -7,35 +7,35 @@
         <b-tooltip label="Maybe you like a little animation"
             position="is-bottom"
             :animated="false">
-            <button class="button">No animation</button>
+            <b-button label="No animation" />
         </b-tooltip>
 
         <b-tooltip label="You prefer dark?"
             type="is-dark"
             position="is-bottom">
-            <button class="button">Dark</button>
+            <b-button label="Dark" />
         </b-tooltip>
 
         <b-tooltip label="Or light?"
             type="is-light"
             position="is-bottom">
-            <button class="button">Light</button>
+            <b-button label="Light" />
         </b-tooltip>
 
         <b-tooltip label="I'm never closing" always>
-            <button class="button">Always</button>
+            <b-button label="Always" />
         </b-tooltip>
 
         <b-tooltip label="I'm square"
             position="is-bottom"
             square>
-            <button class="button">Square</button>
+            <b-button label="Square" />
         </b-tooltip>
 
         <b-tooltip label="You love the light variant, dont you?"
             type="is-primary is-light"
             position="is-bottom">
-            <button class="button">Primary light variant</button>
+            <b-button label="Primary light variant" />
         </b-tooltip>
     </section>
 </template>

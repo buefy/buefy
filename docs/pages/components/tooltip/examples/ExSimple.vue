@@ -3,36 +3,26 @@
 
         <b-tooltip label="Tooltip right"
             position="is-right">
-            <button class="button is-dark">
-                Right
-            </button>
+            <b-button label="Right" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip label="Tooltip top">
-            <button class="button is-dark">
-                Top (default)
-            </button>
+            <b-button label="Top (default)" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip label="Tooltip bottom"
             position="is-bottom">
-            <button class="button is-dark">
-                Bottom
-            </button>
+            <b-button label="Bottom" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip label="Tooltip left"
             position="is-left">
-            <button class="button is-dark">
-                Left
-            </button>
+            <b-button label="Left" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip label="delayed by 1000ms"
             :delay="1000">
-            <button class="button is-primary">
-                Delayed
-            </button>
+            <b-button label="Delayed" type="is-dark" />
         </b-tooltip>
     </section>
 </template>

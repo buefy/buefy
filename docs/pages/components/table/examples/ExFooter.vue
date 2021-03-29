@@ -28,12 +28,12 @@
             </b-table-column>
 
 
-            <template slot="footer" v-if="!isCustom">
+            <template #footer v-if="!isCustom">
                 <div class="has-text-right">
                     Footer
                 </div>
             </template>
-            <template slot="footer" v-else>
+            <template #footer v-else>
                 <th class="is-hidden-mobile" style="width:40px">
                     <div class="th-wrap is-numeric"> ID </div>
                 </th>

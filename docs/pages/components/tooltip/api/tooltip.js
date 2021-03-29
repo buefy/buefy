@@ -51,7 +51,7 @@ export default [
                 description: 'Tooltip will have a little fade animation',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>true</code>'
             },
             {
                 name: '<code>square</code>',

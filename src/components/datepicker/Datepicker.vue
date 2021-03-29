@@ -25,6 +25,7 @@
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
+                        :icon-right="iconRight"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -327,12 +328,12 @@ export default {
         editable: Boolean,
         disabled: Boolean,
         horizontalTimePicker: Boolean,
-        unselectableDates: Array,
+        unselectableDates: [Array, Function],
         unselectableDaysOfWeek: {
             type: Array,
             default: () => config.defaultUnselectableDaysOfWeek
         },
-        selectableDates: Array,
+        selectableDates: [Array, Function],
         dateFormatter: {
             type: Function,
             default: (date, vm) => {
@@ -368,6 +369,7 @@ export default {
             default: () => config.defaultDatepickerMobileNative
         },
         position: String,
+        iconRight: String,
         events: Array,
         indicators: {
             type: String,
@@ -446,7 +448,7 @@ export default {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
             this.focusedDate || this.dateCreator()
 
-        if (!this.value && this.maxDate && this.maxDate.getFullYear() < new Date().getFullYear()) {
+        if (!this.value && this.maxDate && this.maxDate.getFullYear() < focusedDate.getFullYear()) {
             focusedDate.setFullYear(this.maxDate.getFullYear())
         }
 
@@ -487,13 +489,13 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
                 month: this.localeOptions.month || '2-digit',
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         newMonthNames() {
@@ -747,10 +749,11 @@ export default {
          */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                if (this.closeOnClick) {
-                    this.$refs.dropdown.isActive = typeof active === 'boolean'
-                        ? active
-                        : !this.$refs.dropdown.isActive
+                const isActive = (typeof active === 'boolean' && active) || !this.$refs.dropdown.isActive
+                if (isActive) {
+                    this.$refs.dropdown.isActive = isActive
+                } else if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = isActive
                 }
             }
         },

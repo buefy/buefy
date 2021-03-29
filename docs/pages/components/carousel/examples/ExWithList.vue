@@ -11,7 +11,7 @@
             </figure>
         </b-carousel-item>
         <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
-        <template slot="list" slot-scope="props">
+        <template #list="props">
             <b-carousel-list
                 v-model="props.active"
                 :data="items"
@@ -19,7 +19,7 @@
                 @switch="props.switch($event, false)"
                 as-indicator />
         </template>
-        <template slot="overlay">
+        <template #overlay>
             <div class="has-text-centered has-text-white">
                 Hello i'am overlay!
             </div>

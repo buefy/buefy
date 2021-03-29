@@ -5,32 +5,34 @@
             v-model="current"
             :per-page="10">
 
-            <b-pagination-button
-                slot-scope="props"
-                :page="props.page"
-                :id="`page${props.page.number}`"
-                tag="router-link"
-                :to="`/documentation/pagination#page${props.page.number}`">
-                {{ convertToRoman(props.page.number) }}
-            </b-pagination-button>
+            <template #default="props">
+                <b-pagination-button
+                    :page="props.page"
+                    :id="`page${props.page.number}`"
+                    tag="router-link"
+                    :to="`/documentation/pagination#page${props.page.number}`">
+                    {{ convertToRoman(props.page.number) }}
+                </b-pagination-button>
+            </template>
 
-            <b-pagination-button
-                slot="previous"
-                slot-scope="props"
-                :page="props.page"
-                tag="router-link"
-                :to="`/documentation/pagination#page${props.page.number}`">
-                Previous
-            </b-pagination-button>
 
-            <b-pagination-button
-                slot="next"
-                slot-scope="props"
-                :page="props.page"
-                tag="router-link"
-                :to="`/documentation/pagination#page${props.page.number}`">
-                Next
-            </b-pagination-button>
+            <template #previous="props">
+                <b-pagination-button
+                    :page="props.page"
+                    tag="router-link"
+                    :to="`/documentation/pagination#page${props.page.number}`">
+                    Previous
+                </b-pagination-button>
+            </template>
+
+            <template #next="props">
+                <b-pagination-button
+                    :page="props.page"
+                    tag="router-link"
+                    :to="`/documentation/pagination#page${props.page.number}`">
+                    Next
+                </b-pagination-button>
+            </template>
 
         </b-pagination>
     </section>

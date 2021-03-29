@@ -1,9 +1,11 @@
 <template>
     <section>
         <b-field>
-            <button class="button is-primary is-medium" @click="openLoading">
-                Launch loading
-            </button>
+            <b-button
+                label="Launch loading"
+                type="is-primary"
+                size="is-medium"
+                @click="openLoading" />
         </b-field>
         <b-field>
             <b-switch v-model="isFullPage">Display loader over full page</b-switch>

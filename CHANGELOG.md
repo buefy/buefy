@@ -1,5 +1,57 @@
 # Buefy Changelog
 
+## 0.9.5
+
+### New features
+
+* Shipped with Bulma 0.9.2
+* Add ``rounded`` prop to Upload (thanks @major-mayer)
+* Add ``icon-right-type`` prop to Input (thanks @Propaganistas)
+* Add ``icon-right`` prop to Datepicker (thanks @darotar)
+* Add ``cancel-text`` prop to Snackbar (thanks @adamgreenhall)
+* Add ``indefinite`` prop to Toast (thanks @service-paradis)
+* Automatically select hovered option on blur for Autocomplete (thanks @fabiofdsantos)
+* Add ``aria-label`` prop to Modal (thanks @crowdcow-shae)
+* Add ``alt`` attribute to placeholder image (thanks @chazmcgarvey )
+* Add ``caption`` slot to Image (thanks @chazmcgarvey )
+* Add ``defaultSwitchRounded`` default configuration option (thanks @service-paradis)
+* Add ``detail-transition`` prop to Table (thanks @service-paradis)
+* Accept Date as values for Select (thanks @service-paradis)
+* Display events on unselectable Datepicker cell (thanks @service-paradis)
+* Add ``aria-minus-label`` and ``aria-plus-label`` functions for ``b-numberinput`` (thanks @service-paradis)
+* Add ``th-attrs`` and ``td-attrs`` functions for ``b-table``
+* Improve a11y on tab component (thanks @service-paradis)
+
+### Fixes
+
+* Fix #2678: tab navigation with ``boxed`` navbar dropdown (thanks @yuwu9145)
+* Fix #2848: incorrect inset shadow for ``b-radio-button`` (thanks @service-paradis)
+* Fix #2879: open DatetimePicker using the enter key (thanks @service-paradis)
+* Fix #2990: table sorting on multiple column (thanks @yuwu9145)
+* Fix #2994: table striped style with sticky columns (thanks @service-paradis)
+* Fix #3011: blur events for ClockPicker (thanks @yuwu9145)
+* Fix #3022: use aria labels on table pagination buttons (thanks @service-paradis)
+* Fix #3028: use aria labels on pagination next/previous buttons (thanks @service-paradis)
+* Fix #3035: autocomplete default content width in modal
+* Fix #3040: fix mutation of value in multiple dropdown (thanks @VictorCazanave)
+* Fix #3056: reset time on carousel when using arrows (thanks @harryJst)
+* Fix #3104: ``defaultDialogConfirmText`` not working
+* Fix #3107: keyboard usage with Datepicker date range (thanks @service-paradis)
+* Fix #3109: handle number values as expected for NumberInput (thanks @yuwu9145)
+* Fix #3113: dropdown with ``append-to-body`` ``z-index`` when inactive (thanks @Dragoncall)
+* Fix #3119: duplicated ``hovered`` event with Autocomplete (thanks @fabiofdsantos)
+* Fix #3124: restore tree shaking functionnality with default config (thanks @MartinodF)
+* Fix #3135: multiple ``fixed`` Navbar on the same page (thanks @fabiofdsantos)
+* Fix #3161: display close button when Modal is displayed at start (thanks @aglio)
+* Fix #3168: wrong DatetimePicker behavior with empty value
+* Fix #3177: navigate to Datepicker footer using Tab (thanks @service-paradis)
+* Fix #3195: Tooltip ``auto-close`` with ``inside`` and ``outside`` (thanks @elC0mpa)
+* Fix #3216: unexpected form submit on enter in Autocomplete
+* Fix #3226: reactive Datepicker dates when using ``multiple`` (thanks @service-paradis)
+* Fix #3235: emit event on Table listeners (thanks @service-paradis)
+* Fix #3247: Remove extraneous a element in tag (thanks @service-paradis)
+
+
 ## 0.9.4
 
 ### New features

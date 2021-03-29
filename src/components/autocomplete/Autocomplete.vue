@@ -323,10 +323,14 @@ export default {
         /**
          * Select first option if "keep-first
          */
-        data(value) {
+        data() {
             // Keep first option always pre-selected
             if (this.keepFirst) {
-                this.selectFirstOption(this.computedData)
+                this.$nextTick(() => {
+                    if (this.isActive) {
+                        this.selectFirstOption(this.computedData)
+                    }
+                })
             }
         }
     },
@@ -378,6 +382,8 @@ export default {
 
         keydown(event) {
             const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
+            // prevent emit submit event
+            if (key === 'Enter') event.preventDefault()
             // Close dropdown on Tab & no hovered
             this.isActive = key !== 'Tab'
             if (this.hovered === null) return
@@ -396,7 +402,13 @@ export default {
          */
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) this.isActive = false
+            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
+                if (this.keepFirst && this.hovered) {
+                    this.setSelected(this.hovered, true)
+                } else {
+                    this.isActive = false
+                }
+            }
         },
 
         /**

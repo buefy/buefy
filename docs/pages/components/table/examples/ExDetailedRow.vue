@@ -5,6 +5,9 @@
             <div class="control">
                 <b-switch v-model="showDetailIcon">Show detail icon</b-switch>
             </div>
+            <div class="control">
+                <b-switch v-model="useTransition">Use transition (fade) when toggling details</b-switch>
+            </div>
         </b-field>
 
         <b-table
@@ -15,6 +18,7 @@
             :opened-detailed="defaultOpenedDetails"
             detailed
             detail-key="id"
+            :detail-transition="transitionName"
             @details-open="(row) => $buefy.toast.open(`Expanded ${row.user.first_name}`)"
             :show-detail-icon="showDetailIcon"
             aria-next-label="Next page"
@@ -56,7 +60,7 @@
                 </span>
             </b-table-column>
 
-            <template slot="detail" slot-scope="props">
+            <template #detail="props">
                 <article class="media">
                     <figure class="media-left">
                         <p class="image is-64x64">
@@ -91,7 +95,15 @@
             return {
                 data,
                 defaultOpenedDetails: [1],
-                showDetailIcon: true
+                showDetailIcon: true,
+                useTransition: false
+            }
+        },
+        computed: {
+            transitionName() {
+                if (this.useTransition) {
+                    return 'fade'
+                }
             }
         }
     }

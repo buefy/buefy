@@ -1,23 +1,23 @@
 <template>
     <section>
-        <div class="field">
+        <b-field>
             <b-switch>Default</b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch v-model="isSwitched">
                 {{ isSwitched }}
             </b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch v-model="isSwitchedCustom"
                 true-value="Yes"
                 false-value="No">
                 {{ isSwitchedCustom }}
             </b-switch>
-        </div>
-        <div class="field">
+        </b-field>
+        <b-field>
             <b-switch disabled>Disabled</b-switch>
-        </div>
+        </b-field>
     </section>
 </template>
 

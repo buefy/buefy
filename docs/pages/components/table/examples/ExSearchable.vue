@@ -18,8 +18,7 @@
                 <b-table-column :key="column.id" v-bind="column">
                     <template
                         v-if="column.searchable && !column.numeric"
-                        slot="searchable"
-                        slot-scope="props">
+                        #searchable="props">
                         <b-input
                             v-model="props.filters[props.column.field]"
                             placeholder="Search..."

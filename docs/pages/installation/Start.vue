@@ -43,7 +43,7 @@
                 <div class="title is-4">Usage</div>
                 <b-message type="is-success">
                     <div class="content">
-                        Even though this is gonna import <strong>ALL</strong> components to your application,
+                        Even though this is going to import <strong>ALL</strong> components to your application,
                         Buefy full bundle is optimized and still pretty small:
                         <ul>
                             <li><strong>script</strong> is <strong>48KB</strong> min+gzip</li>
@@ -181,7 +181,7 @@
                     </\script>
                 </body>
                 </html>`,
-                materialIcons: '<link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">',
+                materialIcons: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">',
                 fontAwesome5: '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'
             }
         },
