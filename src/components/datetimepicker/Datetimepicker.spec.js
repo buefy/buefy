@@ -38,10 +38,9 @@ describe('Datetimepicker', () => {
         expect(wrapper.emitted()['input']).toEqual([[date]])
     })
 
-    it('react accordingly when handling native picker clear', async () => {
+    it('react accordingly when handling native picker clear', () => {
         wrapper.vm.onChangeNativePicker({ target: { value: '' } })
-        await wrapper.vm.$nextTick()
-        expect(wrapper.emitted()['input']).toEqual([[undefined]])
+        expect(wrapper.emitted()['input']).toEqual([[null]])
     })
 
     it('react accordingly when setting minDateTime prop and computedValue', () => {
