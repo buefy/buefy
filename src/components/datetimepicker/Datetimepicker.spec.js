@@ -38,8 +38,9 @@ describe('Datetimepicker', () => {
         expect(wrapper.emitted()['input']).toEqual([[date]])
     })
 
-    it('react accordingly when handling native picker clear', () => {
+    it('react accordingly when handling native picker clear', async () => {
         wrapper.vm.onChangeNativePicker({ target: { value: '' } })
+        await wrapper.vm.$nextTick()
         expect(wrapper.emitted()['input']).toEqual([[undefined]])
     })
 
