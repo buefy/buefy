@@ -73,9 +73,9 @@ export default {
         minDate: Date,
         maxDate: Date,
         disabled: Boolean,
-        unselectableDates: Array,
+        unselectableDates: [Array, Function],
         unselectableDaysOfWeek: Array,
-        selectableDates: Array,
+        selectableDates: [Array, Function],
         events: Array,
         indicators: String,
         dateCreator: Function,
@@ -169,26 +169,38 @@ export default {
             }
 
             if (this.selectableDates) {
-                for (let i = 0; i < this.selectableDates.length; i++) {
-                    const enabledDate = this.selectableDates[i]
-                    if (day.getDate() === enabledDate.getDate() &&
-                        day.getFullYear() === enabledDate.getFullYear() &&
-                        day.getMonth() === enabledDate.getMonth()) {
+                if (typeof this.selectableDates === 'function') {
+                    if (this.selectableDates(day)) {
                         return true
                     } else {
                         validity.push(false)
+                    }
+                } else {
+                    for (let i = 0; i < this.selectableDates.length; i++) {
+                        const enabledDate = this.selectableDates[i]
+                        if (day.getDate() === enabledDate.getDate() &&
+                            day.getFullYear() === enabledDate.getFullYear() &&
+                            day.getMonth() === enabledDate.getMonth()) {
+                            return true
+                        } else {
+                            validity.push(false)
+                        }
                     }
                 }
             }
 
             if (this.unselectableDates) {
-                for (let i = 0; i < this.unselectableDates.length; i++) {
-                    const disabledDate = this.unselectableDates[i]
-                    validity.push(
-                        day.getDate() !== disabledDate.getDate() ||
-                            day.getFullYear() !== disabledDate.getFullYear() ||
-                            day.getMonth() !== disabledDate.getMonth()
-                    )
+                if (typeof this.unselectableDates === 'function') {
+                    validity.push(!this.unselectableDates(day))
+                } else {
+                    for (let i = 0; i < this.unselectableDates.length; i++) {
+                        const disabledDate = this.unselectableDates[i]
+                        validity.push(
+                            day.getDate() !== disabledDate.getDate() ||
+                                day.getFullYear() !== disabledDate.getFullYear() ||
+                                day.getMonth() !== disabledDate.getMonth()
+                        )
+                    }
                 }
             }
 

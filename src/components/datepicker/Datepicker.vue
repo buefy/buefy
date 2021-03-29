@@ -328,12 +328,12 @@ export default {
         editable: Boolean,
         disabled: Boolean,
         horizontalTimePicker: Boolean,
-        unselectableDates: Array,
+        unselectableDates: [Array, Function],
         unselectableDaysOfWeek: {
             type: Array,
             default: () => config.defaultUnselectableDaysOfWeek
         },
-        selectableDates: Array,
+        selectableDates: [Array, Function],
         dateFormatter: {
             type: Function,
             default: (date, vm) => {

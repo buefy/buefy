@@ -122,8 +122,8 @@ export default [
             },
             {
                 name: '<code>unselectable-dates</code>',
-                description: 'Array of unselectable dates',
-                type: 'Array',
+                description: 'Array of unselectable dates, or a function to identify unselectable dates',
+                type: 'Array, Function',
                 values: '—',
                 default: '-'
             },
@@ -136,8 +136,8 @@ export default [
             },
             {
                 name: '<code>selectable-dates</code>',
-                description: 'Array of selectable dates',
-                type: 'Array',
+                description: 'Array of selectable dates, or a function to identify selectable dates',
+                type: 'Array, Function',
                 values: '—',
                 default: '-'
             },
