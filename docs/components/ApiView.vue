@@ -7,8 +7,8 @@
             API
         </h2>
 
-        <template v-for="component in data">
-            <div :key="component.title">
+        <template v-for="component in data" :key="component.title">
+            <div>
                 <h3
                     v-if="component.title"
                     class="subtitle">

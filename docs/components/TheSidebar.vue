@@ -1,11 +1,11 @@
 <template>
     <aside class="sidebar">
         <div class="sidebar-menu">
-            <template v-for="(items, i) in data">
+            <template v-for="(items, i) in data" :key="i">
                 <p class="sidebar-label" :key="items.category">
                     {{ items.category }}
                 </p>
-                <ul :key="i">
+                <ul>
                     <li v-for="item in normalizedData(items.pages)" :key="item.title">
                         <router-link v-if="item.title" :to="item.path">
                             <span class="sidebar-menu-text">{{ item.title }}</span>
