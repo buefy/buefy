@@ -229,7 +229,7 @@ export default {
         this.fixedTop && this.setBodyFixedTopClass(true)
         this.fixedBottom && this.setBodyFixedBottomClass(true)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (this.fixedTop) {
             const className = this.spaced
                 ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS

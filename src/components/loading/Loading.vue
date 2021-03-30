@@ -112,7 +112,7 @@ export default {
     mounted() {
         if (this.programmatic) this.isActive = true
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
         }

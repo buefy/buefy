@@ -19,7 +19,7 @@ export default (parentItemName, flags = 0) => {
                 this.parent._registerItem(this)
             }
         },
-        beforeDestroy() {
+        beforeUnmount() {
             if (this.parent && this.parent._unregisterItem) {
                 this.parent._unregisterItem(this)
             }

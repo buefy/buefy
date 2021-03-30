@@ -36,7 +36,7 @@ export default {
             this.component.$on(this.event, this.refresh)
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (isVueComponent(this.component)) {
             this.component.$off(this.event, this.refresh)
         }
