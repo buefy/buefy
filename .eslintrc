@@ -3,7 +3,8 @@
     "jest": true
   },
   "extends": [
-    "buefy"
+    "buefy",
+    "plugin:vue/vue3-recommended"
   ],
   "rules": {
     "vue/attributes-order": "off",
