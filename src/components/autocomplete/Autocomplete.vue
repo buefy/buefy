@@ -23,8 +23,7 @@
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
             @icon-right-click="rightIconClick"
-            @icon-click="(event) => $emit('icon-click', event)"
-        />
+            @icon-click="(event) => $emit('icon-click', event)" />
 
         <transition name="fade">
             <div
@@ -32,8 +31,7 @@
                 :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
                 :style="style"
                 v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot)"
-                ref="dropdown"
-            >
+                ref="dropdown">
                 <div
                     class="dropdown-content"
                     v-show="isActive"
@@ -60,8 +58,7 @@
                             :key="groupindex + ':' + index"
                             class="dropdown-item"
                             :class="{ 'is-hovered': option === hovered }"
-                            @click="setSelected(option, undefined, $event)"
-                        >
+                            @click="setSelected(option, undefined, $event)">
                             <slot
                                 v-if="hasDefaultSlot"
                                 :option="option"
@@ -213,14 +210,14 @@ export default {
          * Check if exists default slot
          */
         hasDefaultSlot() {
-            return !!this.$scopedSlots.default
+            return !!this.$slots.default
         },
 
         /**
          * Check if exists group slot
          */
         hasGroupSlot() {
-            return !!this.$scopedSlots.group
+            return !!this.$slots.group
         },
 
         /**

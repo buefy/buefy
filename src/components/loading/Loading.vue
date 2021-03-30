@@ -4,7 +4,7 @@
             class="loading-overlay is-active"
             :class="{ 'is-full-page': displayInFullPage }"
             v-if="isActive">
-            <div class="loading-background" @click="cancel"/>
+            <div class="loading-background" @click="cancel" />
             <slot>
                 <div class="loading-icon" />
             </slot>

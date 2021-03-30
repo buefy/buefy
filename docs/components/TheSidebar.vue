@@ -9,8 +9,12 @@
                     <li v-for="item in normalizedData(items.pages)" :key="item.title">
                         <router-link v-if="item.title" :to="item.path">
                             <span class="sidebar-menu-text">{{ item.title }}</span>
-                            <b-tag v-if="item.isNew" type="is-success">New!</b-tag>
-                            <b-tag v-if="item.isUpdated" type="is-info">Updated</b-tag>
+                            <b-tag v-if="item.isNew" type="is-success">
+                                New!
+                            </b-tag>
+                            <b-tag v-if="item.isUpdated" type="is-info">
+                                Updated
+                            </b-tag>
                         </router-link>
 
                         <!-- submenu -->
@@ -22,7 +26,9 @@
                                     :key="subItem.title">
                                     <router-link :to="subItem.path">
                                         <span class="sidebar-menu-text">{{ subItem.title }}</span>
-                                        <b-tag v-if="subItem.isNew" type="is-success">New!</b-tag>
+                                        <b-tag v-if="subItem.isNew" type="is-success">
+                                            New!
+                                        </b-tag>
                                         <b-tag v-if="subItem.isUpdated" type="is-info">
                                             Updated
                                         </b-tag>
@@ -39,7 +45,7 @@
             class="sidebar-btt"
             role="button"
             @click="backToTop">
-            <b-icon icon="arrow-expand-up" size="is-small"/>
+            <b-icon icon="arrow-expand-up" size="is-small" />
             <span>Back to top</span>
         </a>
     </aside>

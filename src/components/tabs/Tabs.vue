@@ -5,8 +5,7 @@
             :class="navClasses"
             role="tablist"
             :aria-orientation="vertical ? 'vertical' : 'horizontal'"
-            @keydown="manageTablistKeydown"
-        >
+            @keydown="manageTablistKeydown">
             <ul>
                 <li
                     v-for="(childItem, childIdx) in items"
@@ -14,8 +13,7 @@
                     v-show="childItem.visible"
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
                                                        'is-disabled': childItem.disabled }]"
-                    role="presentation"
-                >
+                    role="presentation">
                     <b-slot-component
                         ref="tabLink"
                         v-if="childItem.$scopedSlots.header"
@@ -29,8 +27,7 @@
                         :tabindex="childItem.isActive ? 0 : -1"
                         @focus.native="currentFocus = childIdx"
                         @click.native="childClick(childItem)"
-                        @keydown="manageTabKeydown($event, childItem)"
-                    />
+                        @keydown="manageTabKeydown($event, childItem)" />
                     <a
                         ref="tabLink"
                         v-else
@@ -41,20 +38,19 @@
                         :tabindex="childItem.isActive ? 0 : -1"
                         @focus="currentFocus = childIdx"
                         @click="childClick(childItem)"
-                        @keydown="manageTabKeydown($event, childItem)"
-                    >
+                        @keydown="manageTabKeydown($event, childItem)">
                         <b-icon
                             v-if="childItem.icon"
                             :icon="childItem.icon"
                             :pack="childItem.iconPack"
-                            :size="size"/>
+                            :size="size" />
                         <span>{{ childItem.label }}</span>
                     </a>
                 </li>
             </ul>
         </nav>
         <section class="tab-content" :class="{'is-transitioning': isTransitioning}">
-            <slot/>
+            <slot />
         </section>
     </div>
 </template>

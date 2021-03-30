@@ -4,7 +4,7 @@
         :class="{ 'is-tick-hidden': hidden }"
         :style="getTickStyle(position)">
         <span v-if="$slots.default" class="b-slider-tick-label">
-            <slot/>
+            <slot />
         </span>
     </div>
 </template>

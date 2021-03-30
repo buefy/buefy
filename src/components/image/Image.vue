@@ -2,8 +2,7 @@
     <figure
         class="b-image-wrapper"
         :class="figureClasses"
-        :style="figureStyles"
-    >
+        :style="figureStyles">
         <figcaption v-if="isCaptionFirst">
             <slot name="caption" />
         </figcaption>
@@ -18,20 +17,17 @@
                 :sizes="computedSizes"
                 :loading="computedNativeLazy"
                 @load="onLoad"
-                @error="onError"
-            >
+                @error="onError">
         </transition>
         <transition name="fade">
             <slot
                 v-if="isPlaceholderDisplayed"
-                name="placeholder"
-            >
+                name="placeholder">
                 <img
                     :src="computedPlaceholder"
                     :alt="alt"
                     :class="imgClasses"
-                    class="placeholder"
-                >
+                    class="placeholder">
             </slot>
         </transition>
         <figcaption v-if="isCaptionLast">

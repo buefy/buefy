@@ -25,7 +25,7 @@
                     href="https://github.com/buefy/buefy"
                     target="_blank"
                     title="Github">
-                    <b-icon icon="github-circle"/>
+                    <b-icon icon="github-circle" />
                 </a>
 
                 <a
@@ -34,7 +34,7 @@
                     href="https://discordapp.com/invite/ZkdFJMr"
                     target="_blank"
                     title="Discord">
-                    <b-icon icon="discord"/>
+                    <b-icon icon="discord" />
                 </a>
 
                 <a
@@ -43,16 +43,16 @@
                     href="https://twitter.com/walter_tommasi"
                     target="_blank"
                     title="Twitter">
-                    <b-icon icon="twitter"/>
+                    <b-icon icon="twitter" />
                 </a>
 
                 <span
                     class="navbar-burger burger"
                     :class="{ 'is-active': isMenuActive }"
                     @click="isMenuActive = !isMenuActive">
-                    <span/>
-                    <span/>
-                    <span/>
+                    <span />
+                    <span />
+                    <span />
                 </span>
             </div>
 
@@ -78,7 +78,9 @@
                     </router-link>
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <div class="navbar-link">Info</div>
+                        <div class="navbar-link">
+                            Info
+                        </div>
 
                         <div class="navbar-dropdown is-boxed">
                             <strong class="navbar-item is-version">

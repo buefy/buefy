@@ -1,7 +1,9 @@
 <template>
     <section id="api-view" class="api-view">
         <h2 class="title is-4">
-            <router-link to="#api-view">#</router-link>
+            <router-link to="#api-view">
+                #
+            </router-link>
             API
         </h2>
 
@@ -17,32 +19,28 @@
                         <b-table
                             :mobile-cards="false"
                             :data="component.props"
-                            :columns="propsColumns"
-                        />
+                            :columns="propsColumns" />
                     </b-tab-item>
 
                     <b-tab-item v-if="component.slots" label="Slots">
                         <b-table
                             :mobile-cards="false"
                             :data="component.slots"
-                            :columns="slotsColumns"
-                        />
+                            :columns="slotsColumns" />
                     </b-tab-item>
 
                     <b-tab-item v-if="component.events" label="Events">
                         <b-table
                             :mobile-cards="false"
                             :data="component.events"
-                            :columns="eventsColumns"
-                        />
+                            :columns="eventsColumns" />
                     </b-tab-item>
 
                     <b-tab-item v-if="component.methods" label="Methods">
                         <b-table
                             :mobile-cards="false"
                             :data="component.methods"
-                            :columns="methodsColumns"
-                        />
+                            :columns="methodsColumns" />
                     </b-tab-item>
                 </b-tabs>
             </div>

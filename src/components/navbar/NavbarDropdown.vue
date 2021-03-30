@@ -6,8 +6,7 @@
             'is-active': newActive
         }"
         @mouseenter="checkHoverable"
-        v-click-outside="closeMenu"
-    >
+        v-click-outside="closeMenu">
         <a
             class="navbar-link"
             :class="{
@@ -27,8 +26,7 @@
             :class="{
                 'is-right': right,
                 'is-boxed': boxed,
-            }"
-        >
+            }">
             <slot />
         </div>
     </div>

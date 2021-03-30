@@ -7,7 +7,7 @@
             :disabled="disabled"
             @click="focus"
             @keydown.prevent.enter="$refs.label.click()">
-            <slot/>
+            <slot />
             <input
                 v-model="computedValue"
                 type="radio"

@@ -10,7 +10,7 @@
                     :class="[childItem.type || type, childItem.headerClass, {
                         'is-active': childItem.isActive,
                         'is-previous': activeItem.index > childItem.index
-                }]">
+                    }]">
                     <a
                         class="step-link"
                         :class="{'is-clickable': isItemClickable(childItem)}"
@@ -20,7 +20,7 @@
                                 v-if="childItem.icon"
                                 :icon="childItem.icon"
                                 :pack="childItem.iconPack"
-                                :size="size"/>
+                                :size="size" />
                             <span v-else-if="childItem.step">{{ childItem.step }}</span>
                         </div>
                         <div class="step-details">
@@ -31,7 +31,7 @@
             </ul>
         </nav>
         <section class="step-content" :class="{'is-transitioning': isTransitioning}">
-            <slot/>
+            <slot />
         </section>
         <slot
             name="navigation"
@@ -48,7 +48,7 @@
                         :icon="iconPrev"
                         :pack="iconPack"
                         both
-                        aria-hidden="true"/>
+                        aria-hidden="true" />
                 </a>
                 <a
                     role="button"
@@ -60,7 +60,7 @@
                         :icon="iconNext"
                         :pack="iconPack"
                         both
-                        aria-hidden="true"/>
+                        aria-hidden="true" />
                 </a>
             </nav>
         </slot>

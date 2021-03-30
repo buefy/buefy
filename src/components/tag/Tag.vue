@@ -4,7 +4,7 @@
             class="tag"
             :class="[type, size, { 'is-rounded': rounded }]">
             <span :class="{ 'has-ellipsis': ellipsis }">
-                <slot/>
+                <slot />
             </span>
         </span>
         <a
@@ -25,8 +25,7 @@
                 :icon="closeIcon"
                 :size="size"
                 :type="closeIconType"
-                :pack="closeIconPack"
-            />
+                :pack="closeIconPack" />
         </a>
     </div>
     <span
@@ -34,7 +33,7 @@
         class="tag"
         :class="[type, size, { 'is-rounded': rounded }]">
         <span :class="{ 'has-ellipsis': ellipsis }">
-            <slot/>
+            <slot />
         </span>
 
         <a
@@ -46,8 +45,7 @@
             :disabled="disabled"
             :tabindex="tabstop ? 0 : false"
             @click="close"
-            @keyup.delete.prevent="close"
-        />
+            @keyup.delete.prevent="close" />
     </span>
 </template>
 

@@ -30,7 +30,7 @@
                         @keyup.native.enter="toggle(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus"
-                        @blur="checkHtml5Validity()"/>
+                        @blur="checkHtml5Validity()" />
                 </slot>
             </template>
             <div
@@ -56,13 +56,17 @@
                                 :class="{
                                     active: meridienSelected === amString || meridienSelected === AM
                                 }"
-                                @click="onMeridienClick(amString)">{{ amString }}</div>
+                                @click="onMeridienClick(amString)">
+                                {{ amString }}
+                            </div>
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{
                                     active: meridienSelected === pmString || meridienSelected === PM
                                 }"
-                                @click="onMeridienClick(pmString)">{{ pmString }}</div>
+                                @click="onMeridienClick(pmString)">
+                                {{ pmString }}
+                            </div>
                         </div>
                     </div>
                 </header>
@@ -74,7 +78,9 @@
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
-                                @click="isSelectingHour = true">{{ hoursLabel }}</div>
+                                @click="isSelectingHour = true">
+                                {{ hoursLabel }}
+                            </div>
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
@@ -86,13 +92,17 @@
                                 :class="{
                                     active: meridienSelected === amString || meridienSelected === AM
                                 }"
-                                @click="onMeridienClick(amString)">{{ amString }}</div>
+                                @click="onMeridienClick(amString)">
+                                {{ amString }}
+                            </div>
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{
                                     active: meridienSelected === pmString || meridienSelected === PM
                                 }"
-                                @click="onMeridienClick(pmString)">{{ pmString }}</div>
+                                @click="onMeridienClick(pmString)">
+                                {{ pmString }}
+                            </div>
                         </div>
                         <b-clockpicker-face
                             :picker-size="faceSize"
@@ -109,7 +119,7 @@
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
                     class="b-clockpicker-footer card-footer">
-                    <slot/>
+                    <slot />
                 </footer>
             </div>
         </b-dropdown>
@@ -134,7 +144,7 @@
             @keyup.native.enter="toggle(true)"
             @change.native="onChangeNativePicker"
             @focus="handleOnFocus"
-            @blur="onBlur() && checkHtml5Validity()"/>
+            @blur="onBlur() && checkHtml5Validity()" />
     </div>
 </template>
 

@@ -53,8 +53,8 @@ export default {
     render(createElement) {
         const trigger = createElement('div', {
             staticClass: 'collapse-trigger', on: { click: this.toggle }
-        }, this.$scopedSlots.trigger
-            ? [this.$scopedSlots.trigger({ open: this.isOpen })]
+        }, this.$slots.trigger
+            ? [this.$slots.trigger({ open: this.isOpen })]
             : [this.$slots.trigger]
         )
         const content = createElement('transition', { props: { name: this.animation } }, [

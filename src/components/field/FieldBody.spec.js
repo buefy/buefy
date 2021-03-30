@@ -4,7 +4,7 @@ import BField from '@components/field/Field'
 import BInput from '@components/input/Input'
 
 const localVue = createLocalVue()
-localVue.component('b-field', BField)
+localVue.component('BField', BField)
 
 describe('BFieldBody', () => {
     it('is called', () => {

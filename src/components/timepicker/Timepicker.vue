@@ -27,7 +27,7 @@
                         :use-html5-validation="useHtml5Validation"
                         @keyup.native.enter="toggle(true)"
                         @change.native="onChange($event.target.value)"
-                        @focus="handleOnFocus"/>
+                        @focus="handleOnFocus" />
                 </slot>
             </template>
 
@@ -97,7 +97,7 @@
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
                     class="timepicker-footer">
-                    <slot/>
+                    <slot />
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
@@ -124,7 +124,7 @@
             :use-html5-validation="useHtml5Validation"
             @change.native="onChange($event.target.value)"
             @focus="handleOnFocus"
-            @blur="onBlur() && checkHtml5Validity()"/>
+            @blur="onBlur() && checkHtml5Validity()" />
     </div>
 </template>
 

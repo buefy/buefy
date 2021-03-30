@@ -1,8 +1,7 @@
 <template>
     <div
         class="control"
-        :class="rootClasses"
-    >
+        :class="rootClasses">
         <input
             v-if="type !== 'textarea'"
             ref="input"
@@ -29,7 +28,7 @@
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
-            @focus="onFocus"/>
+            @focus="onFocus" />
 
         <b-icon
             v-if="icon"
@@ -38,7 +37,7 @@
             :icon="icon"
             :pack="iconPack"
             :size="iconSize"
-            @click.native="iconClick('icon-click', $event)"/>
+            @click.native="iconClick('icon-click', $event)" />
 
         <b-icon
             v-if="!loading && hasIconRight"
@@ -49,7 +48,7 @@
             :size="iconSize"
             :type="rightIconType"
             both
-            @click.native="rightIconClick"/>
+            @click.native="rightIconClick" />
 
         <small
             v-if="maxlength && hasCounter && type !== 'number'"

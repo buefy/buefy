@@ -13,16 +13,14 @@
             <b-icon
                 :pack="iconPack"
                 :icon="icon"
-                :size="size"
-            />
+                :size="size" />
             <b-icon
                 v-if="checkHalf(item)"
                 class="is-half"
                 :pack="iconPack"
                 :icon="icon"
                 :size="size"
-                :style="halfStyle"
-            />
+                :style="halfStyle" />
         </div>
         <div
             class="rate-text"

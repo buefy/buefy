@@ -17,14 +17,18 @@
                 v-if="cancelText"
                 class="action is-light is-cancel"
                 @click="close">
-                <button class="button">{{ cancelText }}</button>
+                <button class="button">
+                    {{ cancelText }}
+                </button>
             </div>
             <div
                 v-if="actionText"
                 class="action"
                 @click="action"
                 :class="type">
-                <button class="button">{{ actionText }}</button>
+                <button class="button">
+                    {{ actionText }}
+                </button>
             </div>
         </div>
     </transition>

@@ -36,7 +36,7 @@
                 @select="updateSelectedDate"
                 @rangeHoverEndDate="setRangeHoverEndDate"
                 :multiple="multiple"
-                @change-focus="changeFocus"/>
+                @change-focus="changeFocus" />
         </div>
     </section>
 </template>

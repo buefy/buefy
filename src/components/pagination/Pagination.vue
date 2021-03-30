@@ -1,18 +1,18 @@
 <template>
     <nav class="pagination" :class="rootClasses">
         <slot
-            v-if="$scopedSlots.previous"
+            v-if="$slots.previous"
             name="previous"
             :page="getPage(current - 1, {
                 disabled: !hasPrev,
                 class: 'pagination-previous',
                 'aria-label': ariaPreviousLabel
-        })">
+            })">
             <b-icon
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </slot>
         <BPaginationButton
             v-else
@@ -24,21 +24,21 @@
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </BPaginationButton>
         <slot
-            v-if="$scopedSlots.next"
+            v-if="$slots.next"
             name="next"
             :page="getPage(current + 1, {
                 disabled: !hasNext,
                 class: 'pagination-next',
                 'aria-label': ariaNextLabel
-        })">
+            })">
             <b-icon
                 :icon="iconNext"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </slot>
         <BPaginationButton
             v-else
@@ -50,7 +50,7 @@
                 :icon="iconNext"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </BPaginationButton>
 
         <small class="info" v-if="simple">
@@ -65,33 +65,34 @@
             <!--First-->
             <li v-if="hasFirst">
                 <slot
-                    v-if="$scopedSlots.default"
-                    :page="getPage(1)"
-                />
+                    v-if="$slots.default"
+                    :page="getPage(1)" />
                 <BPaginationButton
                     v-else
                     :page="getPage(1)" />
             </li>
-            <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+            <li v-if="hasFirstEllipsis">
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
 
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
                 <slot
-                    v-if="$scopedSlots.default"
-                    :page="page"
-                />
+                    v-if="$slots.default"
+                    :page="page" />
                 <BPaginationButton
                     v-else
                     :page="page" />
             </li>
 
             <!--Last-->
-            <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+            <li v-if="hasLastEllipsis">
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
             <li v-if="hasLast">
                 <slot
-                    v-if="$scopedSlots.default"
-                    :page="getPage(pageCount)"
-                />
+                    v-if="$slots.default"
+                    :page="getPage(pageCount)" />
                 <BPaginationButton
                     v-else
                     :page="getPage(pageCount)" />

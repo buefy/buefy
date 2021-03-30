@@ -1,6 +1,5 @@
 <template>
     <div class="b-table">
-
         <slot />
 
         <b-table-mobile-sort
@@ -15,8 +14,7 @@
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
             @sort="(column, event) => sort(column, null, event)"
-            @removePriority="(column) => removeSortingPriority(column)"
-        />
+            @removePriority="(column) => removeSortingPriority(column)" />
 
         <template
             v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
@@ -28,14 +26,13 @@
                     :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
-                    :current-page.sync="newCurrentPage"
+                    v-model:current-page="newCurrentPage"
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
-                    @page-change="(event) => $emit('page-change', event)"
-                >
-                    <slot name="top-left"/>
+                    @page-change="(event) => $emit('page-change', event)">
+                    <slot name="top-left" />
                 </b-table-pagination>
             </slot>
         </template>
@@ -43,8 +40,7 @@
         <div
             class="table-wrapper"
             :class="tableWrapperClasses"
-            :style="tableStyle"
-        >
+            :style="tableStyle">
             <table
                 class="table"
                 :class="tableClasses"
@@ -53,7 +49,7 @@
                 @keydown.self.prevent.down="pressedArrow(1)">
                 <thead v-if="newColumns.length && showHeader">
                     <tr>
-                        <th v-if="showDetailRowIcon" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px" />
                         <th
                             :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'left'">
@@ -61,7 +57,7 @@
                                 <b-checkbox
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
-                                    @change.native="checkAll"/>
+                                    @change.native="checkAll" />
                             </template>
                         </th>
                         <th
@@ -78,15 +74,14 @@
                                 :class="{
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
-                            }">
+                                }">
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.header">
                                     <b-slot-component
                                         :component="column"
                                         scoped
                                         name="header"
                                         tag="span"
-                                        :props="{ column, index }"
-                                    />
+                                        :props="{ column, index }" />
                                 </template>
                                 <template v-else>
                                     <span class="is-relative">
@@ -96,7 +91,7 @@
                                                 sortMultipleDataComputed &&
                                                 sortMultipleDataComputed.length > 0 &&
                                                 sortMultipleDataComputed.filter(i =>
-                                            i.field === column.field).length > 0">
+                                                    i.field === column.field).length > 0">
                                             <b-icon
                                                 :icon="sortIcon"
                                                 :pack="iconPack"
@@ -104,13 +99,12 @@
                                                 :size="sortIconSize"
                                                 :class="{
                                                     'is-desc': sortMultipleDataComputed.filter(i =>
-                                                i.field === column.field)[0].order === 'desc'}"
-                                            />
+                                                        i.field === column.field)[0].order === 'desc'}" />
                                             {{ findIndexOfSortData(column) }}
                                             <button
                                                 class="delete is-small multi-sort-cancel-icon"
                                                 type="button"
-                                                @click.stop="removeSortingPriority(column)"/>
+                                                @click.stop="removeSortingPriority(column)" />
                                         </template>
 
                                         <b-icon
@@ -123,8 +117,7 @@
                                             :class="{
                                                 'is-desc': !isAsc,
                                                 'is-invisible': currentSortColumn !== column
-                                            }"
-                                        />
+                                            }" />
                                     </span>
                                 </template>
                             </div>
@@ -136,12 +129,12 @@
                                 <b-checkbox
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
-                                    @change.native="checkAll"/>
+                                    @change.native="checkAll" />
                             </template>
                         </th>
                     </tr>
                     <tr v-if="hasCustomSubheadings" class="is-subheading">
-                        <th v-if="showDetailRowIcon" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px" />
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
@@ -152,25 +145,25 @@
                                 :class="{
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
-                            }">
+                                }">
                                 <template
-                                    v-if="column.$scopedSlots && column.$scopedSlots.subheading"
-                                >
+                                    v-if="column.$scopedSlots && column.$scopedSlots.subheading">
                                     <b-slot-component
                                         :component="column"
                                         scoped
                                         name="subheading"
                                         tag="span"
-                                        :props="{ column, index }"
-                                    />
+                                        :props="{ column, index }" />
                                 </template>
-                                <template v-else>{{ column.subheading }}</template>
+                                <template v-else>
+                                    {{ column.subheading }}
+                                </template>
                             </div>
                         </th>
                         <th v-if="checkable && checkboxPosition === 'right'" />
                     </tr>
                     <tr v-if="hasSearchablenewColumns">
-                        <th v-if="showDetailRowIcon" width="40px"/>
+                        <th v-if="showDetailRowIcon" width="40px" />
                         <th v-if="checkable && checkboxPosition === 'left'" />
                         <th
                             v-for="(column, index) in visibleColumns"
@@ -182,14 +175,13 @@
                                 <template v-if="column.searchable">
                                     <template
                                         v-if="column.$scopedSlots
-                                        && column.$scopedSlots.searchable">
+                                            && column.$scopedSlots.searchable">
                                         <b-slot-component
                                             :component="column"
                                             :scoped="true"
                                             name="searchable"
                                             tag="span"
-                                            :props="{ column, filters }"
-                                        />
+                                            :props="{ column, filters }" />
                                     </template>
                                     <b-input
                                         v-else
@@ -221,11 +213,9 @@
                             @drop="handleDrop($event, row, index)"
                             @dragover="handleDragOver($event, row, index)"
                             @dragleave="handleDragLeave($event, row, index)">
-
                             <td
                                 v-if="showDetailRowIcon"
-                                class="chevron-cell"
-                            >
+                                class="chevron-cell">
                                 <a
                                     v-if="hasDetailedVisible(row)"
                                     role="button"
@@ -234,7 +224,7 @@
                                         icon="chevron-right"
                                         :pack="iconPack"
                                         both
-                                        :class="{'is-expanded': isVisibleDetailRow(row)}"/>
+                                        :class="{'is-expanded': isVisibleDetailRow(row)}" />
                                 </a>
                             </td>
 
@@ -244,12 +234,10 @@
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @click.native.prevent.stop="checkRow(row, index, $event)"
-                                />
+                                    @click.native.prevent.stop="checkRow(row, index, $event)" />
                             </td>
 
                             <template v-for="(column, colindex) in visibleColumns">
-
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.default">
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
@@ -262,10 +250,8 @@
                                         :style="column.getRootStyle(row)"
                                         :data-label="column.label"
                                         :props="{ row, column, index, colindex, toggleDetails }"
-                                        @click.native="$emit('cellclick',row,column,index,colindex)"
-                                    />
+                                        @click.native="$emit('cellclick',row,column,index,colindex)" />
                                 </template>
-
                             </template>
 
                             <td
@@ -274,15 +260,13 @@
                                 <b-checkbox
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @click.native.prevent.stop="checkRow(row, index, $event)"
-                                />
+                                    @click.native.prevent.stop="checkRow(row, index, $event)" />
                             </td>
                         </tr>
 
                         <transition
                             :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
-                            :name="detailTransition"
-                        >
+                            :name="detailTransition">
                             <tr
                                 v-if="isActiveDetailRow(row)"
                                 class="detail">
@@ -291,8 +275,7 @@
                                         <slot
                                             name="detail"
                                             :row="row"
-                                            :index="index"
-                                        />
+                                            :index="index" />
                                     </div>
                                 </td>
                             </tr>
@@ -301,25 +284,23 @@
                             v-if="isActiveCustomDetailRow(row)"
                             name="detail"
                             :row="row"
-                            :index="index"
-                        />
+                            :index="index" />
                     </template>
 
                     <tr
                         v-if="!visibleData.length"
                         class="is-empty">
                         <td :colspan="columnCount">
-                            <slot name="empty"/>
+                            <slot name="empty" />
                         </td>
                     </tr>
-
                 </tbody>
 
                 <tfoot v-if="$slots.footer !== undefined">
                     <tr class="table-footer">
-                        <slot name="footer" v-if="hasCustomFooterSlot()"/>
+                        <slot name="footer" v-if="hasCustomFooterSlot()" />
                         <th :colspan="columnCount" v-else>
-                            <slot name="footer"/>
+                            <slot name="footer" />
                         </th>
                     </tr>
                 </tfoot>
@@ -327,16 +308,14 @@
 
             <template v-if="loading">
                 <slot name="loading">
-                    <b-loading :is-full-page="false" :active.sync="loading" />
+                    <b-loading :is-full-page="false" v-model:active="loading" />
                 </slot>
             </template>
-
         </div>
 
         <template
             v-if="(checkable && hasBottomLeftSlot()) ||
-            (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))"
-        >
+                (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))">
             <slot name="pagination">
                 <b-table-pagination
                     v-bind="$attrs"
@@ -345,18 +324,16 @@
                     :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
-                    :current-page.sync="newCurrentPage"
+                    v-model:current-page="newCurrentPage"
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
-                    @page-change="(event) => $emit('page-change', event)"
-                >
-                    <slot name="bottom-left"/>
+                    @page-change="(event) => $emit('page-change', event)">
+                    <slot name="bottom-left" />
                 </b-table-pagination>
             </slot>
         </template>
-
     </div>
 </template>
 
@@ -666,7 +643,7 @@ export default {
         * Check if has any column using subheading.
         */
         hasCustomSubheadings() {
-            if (this.$scopedSlots && this.$scopedSlots.subheading) return true
+            if (this.$slots && this.$slots.subheading) return true
             return this.newColumns.some((column) => {
                 return column.subheading || (column.$scopedSlots && column.$scopedSlots.subheading)
             })

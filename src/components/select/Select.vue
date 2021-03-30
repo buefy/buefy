@@ -23,7 +23,7 @@
                     </option>
                 </template>
 
-                <slot/>
+                <slot />
 
             </select>
         </span>
@@ -33,7 +33,7 @@
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="iconSize"/>
+            :size="iconSize" />
     </div>
 </template>
 

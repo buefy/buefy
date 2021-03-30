@@ -50,8 +50,7 @@
                     :disabled="timepickerDisabled"
                     :focusable="focusable"
                     :mobile-native="isMobileNative"
-                    :locale="locale"
-                />
+                    :locale="locale" />
             </div>
             <div
                 class="level-item has-text-centered"
@@ -80,7 +79,7 @@
         :use-html5-validation="useHtml5Validation"
         @change.native="onChangeNativePicker"
         @focus="onFocus"
-        @blur="onBlur"/>
+        @blur="onBlur" />
 </template>
 
 <script>

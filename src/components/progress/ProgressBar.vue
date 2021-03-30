@@ -6,8 +6,7 @@
         :aria-valuenow="value"
         :aria-valuemax="parent.max"
         aria-valuemin="0"
-        :style="{width: barWidth}"
-    >
+        :style="{width: barWidth}">
         <p
             v-if="newShowValue"
             class="progress-value">

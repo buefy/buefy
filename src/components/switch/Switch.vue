@@ -23,8 +23,8 @@
             :false-value="falseValue">
         <span
             class="check"
-            :class="checkClasses"/>
-        <span class="control-label"><slot/></span>
+            :class="checkClasses" />
+        <span class="control-label"><slot /></span>
     </label>
 </template>
 

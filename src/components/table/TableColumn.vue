@@ -76,7 +76,7 @@ export default {
             }
         },
         hasDefaultSlot() {
-            return !!this.$scopedSlots.default
+            return !!this.$slots.default
         },
         /**
          * Return if column header is un-selectable

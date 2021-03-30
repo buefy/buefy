@@ -1,7 +1,7 @@
 <template>
     <label class="upload control" :class="{'is-expanded' : expanded, 'is-rounded' : rounded}">
         <template v-if="!dragDrop">
-            <slot/>
+            <slot />
         </template>
 
         <div
@@ -17,7 +17,7 @@
             @dragleave.prevent="updateDragDropFocus(false)"
             @dragenter.prevent="updateDragDropFocus(true)"
             @drop.prevent="onFileChange">
-            <slot/>
+            <slot />
         </div>
 
         <input

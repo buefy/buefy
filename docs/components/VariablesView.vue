@@ -1,7 +1,9 @@
 <template>
     <section id="variables-view" class="variables-view">
         <h2 class="title is-4">
-            <router-link to="#variables-view">#</router-link>
+            <router-link to="#variables-view">
+                #
+            </router-link>
             Variables
         </h2>
         <p>You can use these variables to customize this component.</p>
@@ -10,8 +12,7 @@
             <b-table
                 :mobile-cards="false"
                 :data="data"
-                :columns="variablesColumns"
-            />
+                :columns="variablesColumns" />
         </template>
     </section>
 </template>

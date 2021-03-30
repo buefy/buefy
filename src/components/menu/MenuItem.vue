@@ -15,15 +15,13 @@
                 v-if="icon"
                 :icon="icon"
                 :pack="iconPack"
-                :size="size"
-            />
+                :size="size" />
             <span v-if="label"> {{ label }} </span>
             <slot
                 v-else
                 name="label"
                 :expanded="newExpanded"
-                :active="newActive"
-            />
+                :active="newActive" />
         </component>
         <!-- sub menu items -->
         <template v-if="$slots.default">

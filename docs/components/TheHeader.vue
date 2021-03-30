@@ -17,8 +17,8 @@
 
         <div class="columns">
             <div class="column">
-                <h1 class="title" v-html="title"/>
-                <h2 class="subtitle" v-html="subtitle"/>
+                <h1 class="title" v-html="title" />
+                <h2 class="subtitle" v-html="subtitle" />
             </div>
             <div class="column">
                 <carbon-ads />

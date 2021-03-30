@@ -8,8 +8,8 @@
                 v-if="hasLabel"
                 :for="labelFor"
                 :class="customClass"
-                class="label" >
-                <slot v-if="$slots.label" name="label"/>
+                class="label">
+                <slot v-if="$slots.label" name="label" />
                 <template v-else>{{ label }}</template>
             </label>
         </div>
@@ -19,7 +19,7 @@
                 :for="labelFor"
                 :class="customClass"
                 class="label">
-                <slot v-if="$slots.label" name="label"/>
+                <slot v-if="$slots.label" name="label" />
                 <template v-else>{{ label }}</template>
             </label>
         </template>
@@ -27,25 +27,24 @@
             v-if="horizontal"
             :message="newMessage ? formattedMessage : ''"
             :type="newType">
-            <slot/>
+            <slot />
         </b-field-body>
         <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
                 :type="newType"
                 :class="innerFieldClasses">
-                <slot/>
+                <slot />
             </b-field>
         </div>
         <template v-else>
-            <slot/>
+            <slot />
         </template>
         <p
             v-if="hasMessage && !horizontal"
             class="help"
-            :class="newType"
-        >
-            <slot v-if="$slots.message" name="message"/>
+            :class="newType">
+            <slot v-if="$slots.message" name="message" />
             <template v-else>
                 <template v-for="(mess, i) in formattedMessage">
                     {{ mess }}

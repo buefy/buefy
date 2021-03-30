@@ -15,14 +15,12 @@
             'is-hovered': hovered,
             'is-selected': selected
         }]"
-        v-on="$listeners"
-    >
+        v-on="$listeners">
         <b-icon
             v-if="iconLeft"
             :pack="iconPack"
             :icon="iconLeft"
-            :size="iconSize"
-        />
+            :size="iconSize" />
         <span v-if="label">{{ label }}</span>
         <span v-else-if="$slots.default">
             <slot />
@@ -31,8 +29,7 @@
             v-if="iconRight"
             :pack="iconPack"
             :icon="iconRight"
-            :size="iconSize"
-        />
+            :size="iconSize" />
     </component>
 </template>
 

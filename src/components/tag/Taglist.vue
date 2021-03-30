@@ -1,6 +1,6 @@
 <template>
     <div class="tags" :class="{ 'has-addons': attached }">
-        <slot/>
+        <slot />
     </div>
 </template>
 

@@ -18,7 +18,7 @@
             @mouseup="dragEnd"
             @touchstart.stop="dragStart"
             @touchend.stop="dragEnd">
-            <slot/>
+            <slot />
             <div
                 v-if="arrow"
                 class="carousel-arrow"
@@ -54,7 +54,7 @@
             <slot
                 :active="activeChild"
                 :switch="changeActive"
-                name="list"/>
+                name="list" />
         </template>
         <div
             v-if="indicator"
@@ -70,12 +70,12 @@
                 <slot
                     :i="index"
                     name="indicators">
-                    <span class="indicator-style" :class="indicatorStyle"/>
+                    <span class="indicator-style" :class="indicatorStyle" />
                 </slot>
             </a>
         </div>
         <template v-if="overlay">
-            <slot name="overlay"/>
+            <slot name="overlay" />
         </template>
     </div>
 </template>

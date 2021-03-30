@@ -8,14 +8,14 @@
             ref="slider">
             <div
                 class="b-slider-fill"
-                :style="barStyle"/>
+                :style="barStyle" />
             <template v-if="ticks">
                 <b-slider-tick
                     v-for="(val, key) in tickValues"
                     :key="key"
-                    :value="val"/>
+                    :value="val" />
             </template>
-            <slot/>
+            <slot />
             <b-slider-thumb
                 :tooltip-always="tooltipAlways"
                 v-model="value1"

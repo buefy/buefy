@@ -2,14 +2,14 @@
     <span class="icon" :class="[newType, size]">
         <i
             v-if="!useIconComponent"
-            :class="[newPack, newIcon, newCustomSize, customClass]"/>
+            :class="[newPack, newIcon, newCustomSize, customClass]" />
 
         <component
             v-else
             :is="useIconComponent"
             :icon="[newPack, newIcon]"
             :size="newCustomSize"
-            :class="[customClass]"/>
+            :class="[customClass]" />
     </span>
 </template>
 

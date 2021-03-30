@@ -45,7 +45,7 @@
             </b-select>
             <div class="control">
                 <template
-                    v-if="sortMultiple && sortMultipleData.length > 0" >
+                    v-if="sortMultiple && sortMultipleData.length > 0">
                     <button
                         class="button is-primary"
                         @click="sort">
@@ -54,8 +54,7 @@
                             :icon="sortIcon"
                             :pack="iconPack"
                             :size="sortIconSize"
-                            both
-                        />
+                            both />
                     </button>
                     <button
                         class="button is-primary"
@@ -63,8 +62,7 @@
                         <b-icon
                             icon="delete"
                             :size="sortIconSize"
-                            both
-                        />
+                            both />
                     </button>
                 </template>
                 <button
@@ -77,8 +75,7 @@
                         :icon="sortIcon"
                         :pack="iconPack"
                         :size="sortIconSize"
-                        both
-                    />
+                        both />
                 </button>
             </div>
         </div>

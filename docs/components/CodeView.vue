@@ -1,6 +1,8 @@
 <template>
     <div class="codeview">
-        <div v-if="title" class="codeview-title">{{ title }}</div>
+        <div v-if="title" class="codeview-title">
+            {{ title }}
+        </div>
         <figure class="highlight" :class="figureClasses">
             <div class="button-container">
                 <b-button
@@ -23,8 +25,7 @@
                 <b-icon
                     icon="code-tags"
                     size="is-small"
-                    custom-class="mdi-18px"
-                />
+                    custom-class="mdi-18px" />
                 <span>Show code</span>
             </button>
             <button
@@ -34,8 +35,7 @@
                 <b-icon
                     icon="eye-off-outline"
                     size="is-small"
-                    custom-class="mdi-18px"
-                />
+                    custom-class="mdi-18px" />
                 <span>Hide code</span>
             </button>
         </figure>

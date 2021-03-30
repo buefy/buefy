@@ -7,7 +7,7 @@
         @click="selectItem"
         :role="ariaRoleItem"
         :tabindex="isFocusable ? 0 : null">
-        <slot/>
+        <slot />
     </a>
     <div
         v-else
@@ -15,7 +15,7 @@
         @click="selectItem"
         :role="ariaRoleItem"
         :tabindex="isFocusable ? 0 : null">
-        <slot/>
+        <slot />
     </div>
 </template>
 

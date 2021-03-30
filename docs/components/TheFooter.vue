@@ -17,7 +17,7 @@
                                     class="button"
                                     href="https://github.com/buefy/buefy"
                                     target="_blank">
-                                    <b-icon icon="github-circle"/>
+                                    <b-icon icon="github-circle" />
                                     <span>GitHub</span>
                                 </a>
                             </p>
@@ -26,7 +26,7 @@
                                     class="button is-twitter"
                                     href="https://twitter.com/walter_tommasi"
                                     target="_blank">
-                                    <b-icon icon="twitter"/>
+                                    <b-icon icon="twitter" />
                                     <span>Twitter</span>
                                 </a>
                             </p>

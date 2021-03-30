@@ -2,8 +2,7 @@
     <div class="b-sidebar">
         <div
             class="sidebar-background"
-            v-if="overlay && isOpen"
-        />
+            v-if="overlay && isOpen" />
         <transition
             :name="transitionName"
             @before-enter="beforeEnter"

@@ -10,7 +10,7 @@
             type="is-text"
             size="is-small"
             icon-right="open-in-new"
-            native-type="submit"/>
+            native-type="submit" />
 
         <input
             type="hidden"

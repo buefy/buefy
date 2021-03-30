@@ -3,8 +3,7 @@
         :name="animation"
         @after-enter="afterEnter"
         @before-leave="beforeLeave"
-        @after-leave="afterLeave"
-    >
+        @after-leave="afterLeave">
         <div
             v-if="!destroyed"
             v-show="isActive"
@@ -15,7 +14,7 @@
             :role="ariaRole"
             :aria-label="ariaLabel"
             :aria-modal="ariaModal">
-            <div class="modal-background" @click="cancel('outside')"/>
+            <div class="modal-background" @click="cancel('outside')" />
             <div
                 class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
@@ -26,21 +25,20 @@
                     v-on="events"
                     :is="component"
                     :can-cancel="canCancel"
-                    @close="close"
-                />
+                    @close="close" />
                 <template v-else-if="content">
                     <div v-html="content" />
                 </template>
                 <slot
                     v-else
                     :can-cancel="canCancel"
-                    :close="close"/>
+                    :close="close" />
                 <button
                     type="button"
                     v-if="showX"
                     v-show="!animating"
                     class="modal-close is-large"
-                    @click="cancel('x')"/>
+                    @click="cancel('x')" />
             </div>
         </div>
     </transition>

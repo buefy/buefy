@@ -8,14 +8,15 @@
                 <div v-if="$slots.header">
                     <slot name="header" />
                 </div>
-                <p v-else-if="title">{{ title }}</p>
+                <p v-else-if="title">
+                    {{ title }}
+                </p>
                 <button
                     v-if="closable"
                     type="button"
                     class="delete"
                     @click="close"
-                    :aria-label="ariaCloseLabel"
-                />
+                    :aria-label="ariaCloseLabel" />
             </header>
             <section class="message-body" v-if="$slots.default">
                 <div class="media">
@@ -25,10 +26,10 @@
                             :pack="iconPack"
                             :class="type"
                             both
-                            :size="newIconSize"/>
+                            :size="newIconSize" />
                     </div>
                     <div class="media-content">
-                        <slot/>
+                        <slot />
                     </div>
                 </div>
             </section>

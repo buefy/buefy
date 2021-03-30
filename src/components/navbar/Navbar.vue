@@ -180,9 +180,9 @@ export default {
                     }
                 })
 
-                const hasBurgerSlot = !!this.$scopedSlots.burger
+                const hasBurgerSlot = !!this.$slots.burger
                 return hasBurgerSlot
-                    ? this.$scopedSlots.burger({
+                    ? this.$slots.burger({
                         isOpened: this.isOpened,
                         toggleActive: this.toggleActive
                     })

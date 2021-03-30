@@ -19,7 +19,7 @@
             :true-value="trueValue"
             :false-value="falseValue">
         <span class="check" :class="type" />
-        <span class="control-label"><slot/></span>
+        <span class="control-label"><slot /></span>
     </label>
 </template>
 

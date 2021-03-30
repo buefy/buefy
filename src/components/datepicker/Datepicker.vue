@@ -1,8 +1,7 @@
 <template>
     <div
         class="datepicker control"
-        :class="[size, {'is-expanded': expanded}]"
-    >
+        :class="[size, {'is-expanded': expanded}]">
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -69,7 +68,7 @@
                                     :icon="iconPrev"
                                     :pack="iconPack"
                                     both
-                                    type="is-primary is-clickable"/>
+                                    type="is-primary is-clickable" />
                             </a>
                             <a
                                 v-show="!showNext && !disabled"
@@ -86,7 +85,7 @@
                                     :icon="iconNext"
                                     :pack="iconPack"
                                     both
-                                    type="is-primary is-clickable"/>
+                                    type="is-primary is-clickable" />
                             </a>
                             <div class="pagination-list">
                                 <b-field>
@@ -178,7 +177,7 @@
                     v-if="$slots.default !== undefined && $slots.default.length"
                     class="datepicker-footer"
                     :class="{'footer-horizontal-timepicker': horizontalTimePicker}">
-                    <slot/>
+                    <slot />
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
@@ -203,7 +202,7 @@
             :use-html5-validation="false"
             @change.native="onChangeNativePicker"
             @focus="onFocus"
-            @blur="onBlur"/>
+            @blur="onBlur" />
     </div>
 </template>
 

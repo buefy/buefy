@@ -7,10 +7,12 @@
             v-trap-focus="trapFocus"
             :role="ariaRole"
             :aria-modal="ariaModal">
-            <div class="modal-background" @click="cancel('outside')"/>
+            <div class="modal-background" @click="cancel('outside')" />
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
-                    <p class="modal-card-title">{{ title }}</p>
+                    <p class="modal-card-title">
+                        {{ title }}
+                    </p>
                 </header>
 
                 <section
@@ -25,7 +27,7 @@
                                 :pack="iconPack"
                                 :type="type"
                                 :both="!icon"
-                                size="is-large"/>
+                                size="is-large" />
                         </div>
                         <div class="media-content">
                             <p>
@@ -47,7 +49,9 @@
                                         v-bind="inputAttrs"
                                         @keyup.enter="confirm">
                                 </div>
-                                <p class="help is-danger">{{ validationMessage }}</p>
+                                <p class="help is-danger">
+                                    {{ validationMessage }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -58,12 +62,16 @@
                         v-if="showCancel"
                         class="button"
                         ref="cancelButton"
-                        @click="cancel('button')">{{ cancelText }}</button>
+                        @click="cancel('button')">
+                        {{ cancelText }}
+                    </button>
                     <button
                         class="button"
                         :class="type"
                         ref="confirmButton"
-                        @click="confirm">{{ confirmText }}</button>
+                        @click="confirm">
+                        {{ confirmText }}
+                    </button>
                 </footer>
             </div>
         </div>

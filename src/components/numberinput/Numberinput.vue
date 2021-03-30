@@ -7,8 +7,7 @@
             @mouseup="onStopLongPress"
             @mouseleave="onStopLongPress"
             @touchend="onStopLongPress"
-            @touchcancel="onStopLongPress"
-        >
+            @touchcancel="onStopLongPress">
             <button
                 type="button"
                 class="button"
@@ -17,8 +16,7 @@
                 :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
                 @mousedown="onStartLongPress($event, control === 'plus')"
                 @touchstart.prevent="onStartLongPress($event, control === 'plus')"
-                @click="onControlClick($event, control === 'plus')"
-            >
+                @click="onControlClick($event, control === 'plus')">
                 <b-icon
                     both
                     :icon="control"
@@ -46,8 +44,7 @@
             :placeholder="placeholder"
             :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event)"
-        />
+            @blur="$emit('blur', $event)" />
 
         <p
             v-for="control in controlsRight"
@@ -56,8 +53,7 @@
             @mouseup="onStopLongPress"
             @mouseleave="onStopLongPress"
             @touchend="onStopLongPress"
-            @touchcancel="onStopLongPress"
-        >
+            @touchcancel="onStopLongPress">
             <button
                 type="button"
                 class="button"
@@ -66,8 +62,7 @@
                 :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
                 @mousedown="onStartLongPress($event, control === 'plus')"
                 @touchstart.prevent="onStartLongPress($event, control === 'plus')"
-                @click="onControlClick($event, control === 'plus')"
-            >
+                @click="onControlClick($event, control === 'plus')">
                 <b-icon
                     both
                     :icon="control"
