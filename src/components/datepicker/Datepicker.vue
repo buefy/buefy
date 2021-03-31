@@ -749,7 +749,9 @@ export default {
          */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                const isActive = (typeof active === 'boolean' && active) || !this.$refs.dropdown.isActive
+                const isActive = typeof active === 'boolean'
+                    ? active
+                    : !this.$refs.dropdown.isActive
                 if (isActive) {
                     this.$refs.dropdown.isActive = isActive
                 } else if (this.closeOnClick) {
