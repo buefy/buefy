@@ -4,6 +4,10 @@ export default [
         default: '<code>none</code>'
     },
     {
+        name: '<code>$tabs-items-focused-outline</code>',
+        default: '<code>none</code>'
+    },
+    {
         name: '<code>$tabs-link-focus-active-border-bottom-color</code>',
         default: '<code>$tabs-link-active-border-bottom-color</code>'
     },
