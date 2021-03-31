@@ -195,7 +195,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="(row, index) in visibleData">
+                    <template v-for="(row, index) in visibleData" :key="index">
                         <tr
                             :key="customRowKey ? row[customRowKey] : index"
                             :class="[rowClass(row, index), {

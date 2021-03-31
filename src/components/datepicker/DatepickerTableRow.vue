@@ -26,8 +26,8 @@
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, index) in eventsDateMatch(weekDay)"
-                        :key="index" />
+                        v-for="(event, j) in eventsDateMatch(weekDay)"
+                        :key="j" />
                 </div>
             </a>
             <div
@@ -40,8 +40,8 @@
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, index) in eventsDateMatch(weekDay)"
-                        :key="index" />
+                        v-for="(event, j) in eventsDateMatch(weekDay)"
+                        :key="j" />
                 </div>
             </div>
         </template>
