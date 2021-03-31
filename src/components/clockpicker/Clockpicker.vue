@@ -13,7 +13,6 @@
                 <slot name="trigger">
                     <b-input
                         ref="input"
-                        slot="trigger"
                         autocomplete="off"
                         :value="formatValue(computedValue)"
                         :placeholder="placeholder"

@@ -51,8 +51,8 @@ export default {
             default: () => {}
         },
         cancelText: {
-            type: String | null,
-            default: null
+            type: String,
+            default: () => null
         }
     },
     data() {
