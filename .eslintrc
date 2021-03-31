@@ -156,7 +156,13 @@
             "singleline": "never",
             "multiline": "never"
           }
-        ]
+        ],
+        "vue/return-in-computed-property": "off",
+        "vue/no-v-html": "off",
+        // only activate with vue3
+        "vue/no-deprecated-v-on-native-modifier": "off",
+        "vue/no-deprecated-dollar-listeners-api": "off",
+        "vue/require-slots-as-functions": "off"
       }
     }
   ]
