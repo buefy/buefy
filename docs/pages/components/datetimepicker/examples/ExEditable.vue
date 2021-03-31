@@ -47,8 +47,7 @@ export default {
                 day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
-                second: this.enableSeconds ? 'numeric' : undefined,
-                timeZone: 'UTC'
+                second: this.enableSeconds ? 'numeric' : undefined
             })
             return dtf.format(new Date(2020, 11, 11, 13, 14, 15))
         }

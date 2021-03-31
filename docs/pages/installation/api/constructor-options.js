@@ -148,7 +148,7 @@ export default [
                 description: `Default datepicker <code>date-formatter</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timeZone: "UTC" }).format(date)</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale).format(date)</code>'
             },
             {
                 name: '<code>defaultDateParser</code>',
