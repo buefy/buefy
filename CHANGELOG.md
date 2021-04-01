@@ -4,7 +4,7 @@
 
 ### New features
 
-* Shipped with Bulma 0.9.2
+* Shipped with Bulma 0.9.2 ([release note](https://github.com/jgthms/bulma/releases/tag/0.9.2))
 * Add ``rounded`` prop to Upload (thanks @major-mayer)
 * Add ``icon-right-type`` prop to Input (thanks @Propaganistas)
 * Add ``icon-right`` prop to Datepicker (thanks @darotar)
@@ -41,7 +41,7 @@
 * Fix #3113: dropdown with ``append-to-body`` ``z-index`` when inactive (thanks @Dragoncall)
 * Fix #3119: duplicated ``hovered`` event with Autocomplete (thanks @fabiofdsantos)
 * Fix #3124: restore tree shaking functionnality with default config (thanks @MartinodF)
-* Fix #3135: multiple ``fixed`` Navbar on the same page (thanks @fabiofdsantos)
+* Fix #3135: multiple ``fixed`` Navbar on the same page (thanks @WTDuck)
 * Fix #3161: display close button when Modal is displayed at start (thanks @aglio)
 * Fix #3168: wrong DatetimePicker behavior with empty value
 * Fix #3177: navigate to Datepicker footer using Tab (thanks @service-paradis)
