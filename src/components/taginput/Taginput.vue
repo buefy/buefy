@@ -44,7 +44,6 @@
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
                 :keep-open="openOnFocus"
-                :keep-first="!allowNew"
                 :group-field="groupField"
                 :group-options="groupOptions"
                 :use-html5-validation="useHtml5Validation"
