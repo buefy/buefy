@@ -294,13 +294,11 @@ export default {
             }
             return !this.localeOptions.hour12
         },
-        adjustValue(value, reverse = false) {
-            if (!value) return value
-            if (reverse) {
-                return new Date(value.getTime() - this.tzOffset * 60000)
-            } else {
-                return new Date(value.getTime() + this.tzOffset * 60000)
+        adjustValue(value, _reverse = false) {
+            if (value !== null && typeof value !== 'undefined') {
+                return new Date(value.getTime())
             }
+            return value
         },
         defaultDatetimeParser(date) {
             if (typeof this.datetimeParser === 'function') {
