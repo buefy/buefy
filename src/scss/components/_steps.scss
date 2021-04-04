@@ -5,6 +5,7 @@ Wikiki (https://github.com/Wikiki) licensed under
 MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 */
 
+$steps-items-focused-outline: none !default;
 $steps-details-background-color: $body-background-color !default;
 $steps-maker-default-color: $grey-light !default;
 $steps-marker-default-border: .2em solid #fff !default;
@@ -276,6 +277,10 @@ $steps-colors: $colors !default;
             .step-item {
                 flex-shrink: 0;
                 flex-basis: auto;
+
+                &:focus {
+                    outline: $steps-items-focused-outline;
+                }
             }
             &.is-transitioning {
                 overflow: hidden;
