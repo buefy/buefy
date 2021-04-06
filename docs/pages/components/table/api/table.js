@@ -462,7 +462,7 @@ export default [
             {
                 name: '<code>click</code>',
                 description: 'Triggers when a row is clicked',
-                parameters: '<code>row: Object</code>'
+                parameters: '<code>row: Object</code>, <code> event: Event </code>'
             },
             {
                 name: '<code>dblclick</code>',
