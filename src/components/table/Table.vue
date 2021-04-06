@@ -210,7 +210,7 @@
                                 'is-selected': isRowSelected(row, selected),
                                 'is-checked': isRowChecked(row),
                             }]"
-                            @click="selectRow(row)"
+                            @click="selectRow(row,$event)"
                             @dblclick="$emit('dblclick', row)"
                             @mouseenter="emitEventForRow('mouseenter', $event, row)"
                             @mouseleave="emitEventForRow('mouseleave', $event, row)"
@@ -1067,8 +1067,8 @@ export default {
         * Row click listener.
         * Emit all necessary events.
         */
-        selectRow(row, index) {
-            this.$emit('click', row)
+        selectRow(row, event) {
+            this.$emit('click', {row, event})
 
             if (this.selected === row) return
             if (!this.isRowSelectable(row)) return
