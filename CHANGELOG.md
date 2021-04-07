@@ -1,5 +1,14 @@
 # Buefy Changelog
 
+## 0.9.6
+
+### Fixes
+
+* Fix datetimepicker timezone
+* Fix datepicker when append-to-body and auto open when value change (thanks @service-paradis)
+* Fix #3258 remove outline from step-item and tab-item on focus (thanks @service-paradis)
+* Fix #3262 first option selected on taginput when autocomplete (thanks @fabiofdsantos)
+
 ## 0.9.5
 
 ### New features
