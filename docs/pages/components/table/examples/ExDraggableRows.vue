@@ -97,7 +97,7 @@
         columndrop(payload) {
           payload.event.target.closest('th').classList.remove('is-selected')
           const droppedOnColumnIndex = payload.index
-          this.$buefy.toast.open(`Moved ${this.draggingColumn.field} from row ${this.draggingColumnIndex + 1} to ${droppedOnColumnIndex + 1}`)
+          this.$buefy.toast.open(`Moved ${this.draggingColumn.field} from column ${this.draggingColumnIndex + 1} to ${droppedOnColumnIndex + 1}`)
         }
       }
   }
