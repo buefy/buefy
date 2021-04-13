@@ -269,6 +269,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>close-on-click</code>',
+                description: 'Choose whether the Datepicker should close after selecting a date',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>append-to-body</code>',
                 description: 'Append datepicker calendar to body',
                 type: 'Boolean',
