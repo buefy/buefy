@@ -4,12 +4,17 @@
       :data="data"
       :columns="columns"
       draggable
+      draggable-column
       @dragstart="dragstart"
       @drop="drop"
       @dragover="dragover"
-      @dragleave="dragleave">
+      @dragleave="dragleave"
+      @columndragstart="columndragstart"
+      @columndrop="columndrop"
+      @columndragover="columndragover"
+      @columndragleave="columndragleave">
     </b-table>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -49,11 +54,13 @@
                   }
               ],
               draggingRow: null,
-              draggingRowIndex: null
+              draggingRowIndex: null,
+              draggingColumn: null,
+              draggingColumnIndex: null
           }
       },
       methods: {
-        dragstart (payload) {
+        dragstart(payload) {
           this.draggingRow = payload.row
           this.draggingRowIndex = payload.index
           payload.event.dataTransfer.effectAllowed = 'copy'
@@ -71,6 +78,26 @@
           payload.event.target.closest('tr').classList.remove('is-selected')
           const droppedOnRowIndex = payload.index
           this.$buefy.toast.open(`Moved ${this.draggingRow.first_name} from row ${this.draggingRowIndex + 1} to ${droppedOnRowIndex + 1}`)
+        },
+
+        columndragstart(payload) {
+          this.draggingColumn = payload.column
+          this.draggingColumnIndex = payload.index
+          payload.event.dataTransfer.effectAllowed = 'copy'
+        },
+        columndragover(payload) {
+          payload.event.dataTransfer.dropEffect = 'copy'
+          payload.event.target.closest('th').classList.add('is-selected')
+          payload.event.preventDefault()
+        },
+        columndragleave(payload) {
+          payload.event.target.closest('th').classList.remove('is-selected')
+          payload.event.preventDefault()
+        },
+        columndrop(payload) {
+          payload.event.target.closest('th').classList.remove('is-selected')
+          const droppedOnColumnIndex = payload.index
+          this.$buefy.toast.open(`Moved ${this.draggingColumn.field} from column ${this.draggingColumnIndex + 1} to ${droppedOnColumnIndex + 1}`)
         }
       }
   }

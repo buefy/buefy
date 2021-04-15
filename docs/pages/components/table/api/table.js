@@ -332,6 +332,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>draggable-column</code>',
+                description: 'Allows columns to be draggable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>backend-filtering</code>',
                 description: `Columns won't be filtered with Javascript, use with <code>searchable</code> prop to the columns to filter in your backend`,
                 type: 'Boolean',
@@ -543,6 +550,31 @@ export default [
                 name: '<code>dragleave</code>',
                 description: 'Triggers after dragging over a row',
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragstart</code>',
+                description: 'Triggers when starting to drag a column',
+                parameters: '<code> column: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragend</code>',
+                description: 'Triggers when ending to drag a column',
+                parameters: '<code> column: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndrop</code>',
+                description: 'Triggers when dropping on a column',
+                parameters: '<code> column: Object </code>, <code> drop: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragover</code>',
+                description: 'Triggers when dragging over a column',
+                parameters: '<code> column: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragleave</code>',
+                description: 'Triggers after dragging over a column',
+                parameters: '<code> column: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
             },
             {
                 name: '<code>mouseenter</code>',

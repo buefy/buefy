@@ -72,7 +72,13 @@
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                             }]"
                             :style="column.thStyle"
-                            @click.stop="sort(column, null, $event)">
+                            @click.stop="sort(column, null, $event)"
+                            :draggable="canDragColumn"
+                            @dragstart="handleColumnDragStart($event, column, index)"
+                            @dragend="handleColumnDragEnd($event, column, index)"
+                            @drop="handleColumnDrop($event, column, index)"
+                            @dragover="handleColumnDragOver($event, column, index)"
+                            @dragleave="handleColumnDragLeave($event, column, index)">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -215,7 +221,7 @@
                             @mouseenter="emitEventForRow('mouseenter', $event, row)"
                             @mouseleave="emitEventForRow('mouseleave', $event, row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
-                            :draggable="draggable"
+                            :draggable="canDragRow"
                             @dragstart="handleDragStart($event, row, index)"
                             @dragend="handleDragEnd($event, row, index)"
                             @drop="handleDrop($event, row, index)"
@@ -532,6 +538,10 @@ export default {
             type: Boolean,
             default: false
         },
+        draggableColumn: {
+            type: Boolean,
+            default: false
+        },
         scrollable: Boolean,
         ariaNextLabel: String,
         ariaPreviousLabel: String,
@@ -565,7 +575,9 @@ export default {
             filters: {},
             defaultSlots: [],
             firstTimeSort: true, // Used by first time initSort
-            _isTable: true // Used by TableColumn
+            _isTable: true, // Used by TableColumn
+            isDraggingRow: false,
+            isDraggingColumn: false
         }
     },
     computed: {
@@ -728,6 +740,12 @@ export default {
                     vnode.componentInstance.$data &&
                     vnode.componentInstance.$data._isTableColumn)
                 .map((vnode) => vnode.componentInstance)
+        },
+        canDragRow() {
+            return this.draggable && !this.isDraggingColumn
+        },
+        canDragColumn() {
+            return this.draggableColumn && !this.isDraggingRow
         }
     },
     watch: {
@@ -1281,43 +1299,87 @@ export default {
             }
         },
         /**
-        * Emits drag start event
+        * Emits drag start event (row)
         */
         handleDragStart(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
+            this.isDraggingRow = true
             this.$emit('dragstart', {event, row, index})
         },
         /**
-        * Emits drag leave event
+        * Emits drag leave event (row)
         */
         handleDragEnd(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
+            this.isDraggingRow = false
             this.$emit('dragend', {event, row, index})
         },
         /**
-        * Emits drop event
+        * Emits drop event (row)
         */
         handleDrop(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
             this.$emit('drop', {event, row, index})
         },
         /**
-        * Emits drag over event
+        * Emits drag over event (row)
         */
         handleDragOver(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
             this.$emit('dragover', {event, row, index})
         },
         /**
-        * Emits drag leave event
+        * Emits drag leave event (row)
         */
         handleDragLeave(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
             this.$emit('dragleave', {event, row, index})
         },
 
         emitEventForRow(eventName, event, row) {
             return this.$listeners[eventName] ? this.$emit(eventName, row, event) : null
+        },
+
+        /**
+        * Emits drag start event (column)
+        */
+        handleColumnDragStart(event, column, index) {
+            if (!this.canDragColumn) return
+            this.isDraggingColumn = true
+            this.$emit('columndragstart', {event, column, index})
+        },
+
+        /**
+        * Emits drag leave event (column)
+        */
+        handleColumnDragEnd(event, column, index) {
+            if (!this.canDragColumn) return
+            this.isDraggingColumn = false
+            this.$emit('columndragend', {event, column, index})
+        },
+
+        /**
+        * Emits drop event (column)
+        */
+        handleColumnDrop(event, column, index) {
+            if (!this.canDragColumn) return
+            this.$emit('columndrop', {event, column, index})
+        },
+
+        /**
+        * Emits drag over event (column)
+        */
+        handleColumnDragOver(event, column, index) {
+            if (!this.canDragColumn) return
+            this.$emit('columndragover', {event, column, index})
+        },
+
+        /**
+        * Emits drag leave event (column)
+        */
+        handleColumnDragLeave(event, column, index) {
+            if (!this.canDragColumn) return
+            this.$emit('columndragleave', {event, column, index})
         },
 
         refreshSlots() {
