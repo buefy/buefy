@@ -23,12 +23,10 @@
                     v-bind="list"
                     :list="list"
                     name="item">
-                    <figure class="image">
-                        <img
-                            :src="list.image"
-                            :alt="list.alt"
-                            :title="list.title">
-                    </figure>
+                    <b-image
+                        :src="list.image"
+                        v-bind="list"
+                    />
                 </slot>
             </div>
         </div>
