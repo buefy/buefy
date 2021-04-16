@@ -17,7 +17,7 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>appear</code>',
+                name: '<code>animateInitially</code>',
                 description: 'Apply animation on the initial render',
                 type: 'Boolean',
                 values: '—',

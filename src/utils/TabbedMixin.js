@@ -20,10 +20,7 @@ export default (cmp) => ({
             default: true
         },
         animation: String,
-        appear: {
-            type: Boolean,
-            default: undefined
-        },
+        animateInitially: Boolean,
         vertical: {
             type: Boolean,
             default: false
