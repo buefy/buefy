@@ -62,8 +62,10 @@ export default {
             repeat: false,
             items: [
                 {
+                    alt: 'Slide 1',
                     title: 'Slide 1',
-                    image: 'https://picsum.photos/id/0/1230/500'
+                    image: 'https://picsummm.photos/id/0/1230/500',
+                    srcFallback: 'https://picsum.photos/id/0/1230/500'
                 },
                 {
                     title: 'Slide 2',
