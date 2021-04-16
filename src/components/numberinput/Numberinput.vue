@@ -13,11 +13,17 @@
                 type="button"
                 class="button"
                 :class="buttonClasses"
-                :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
+                :disabled="isDisabled(control)"
                 :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
-                @mousedown="onStartLongPress($event, control === 'plus')"
-                @touchstart.prevent="onStartLongPress($event, control === 'plus')"
-                @click="onControlClick($event, control === 'plus')"
+                @mousedown="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @touchstart.prevent="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @click="
+                    !isDisabled(control) && onControlClick($event, control === 'plus')
+                "
             >
                 <b-icon
                     both
@@ -62,11 +68,17 @@
                 type="button"
                 class="button"
                 :class="buttonClasses"
-                :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
+                :disabled="isDisabled(control)"
                 :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
-                @mousedown="onStartLongPress($event, control === 'plus')"
-                @touchstart.prevent="onStartLongPress($event, control === 'plus')"
-                @click="onControlClick($event, control === 'plus')"
+                @mousedown="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @touchstart.prevent="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @click="
+                    !isDisabled(control) && onControlClick($event, control === 'plus')
+                "
             >
                 <b-icon
                     both
@@ -232,6 +244,9 @@ export default {
         }
     },
     methods: {
+        isDisabled(control) {
+            return this.disabled || (control === 'plus' ? this.disabledMax : this.disabledMin)
+        },
         decrement() {
             if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
                 if (this.computedValue === null || typeof this.computedValue === 'undefined') {
