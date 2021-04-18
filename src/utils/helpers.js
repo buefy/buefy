@@ -223,7 +223,6 @@ export function getMonthNames(locale = undefined, format = 'long') {
 /**
  * Return weekday names according to a specified locale
  * @param  {String} locale A bcp47 localerouter. undefined will use the user browser locale
- * @param  {Number} first day of week index
  * @param  {String} format long (ex. Thursday), short (ex. Thu) or narrow (T)
  * @return {Array<String>} An array of weekday names
  */
