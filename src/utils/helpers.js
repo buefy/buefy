@@ -228,11 +228,9 @@ export function getMonthNames(locale = undefined, format = 'long') {
  */
 export function getWeekdayNames(locale = undefined, format = 'narrow') {
     const dates = []
-    const dt = new Date(2000, 0, 1)
-    const dayOfWeek = dt.getDay()
-    dt.setDate(dt.getDate() - dayOfWeek)
     for (let i = 0; i < 7; i++) {
-        dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + i))
+        const dt = new Date(2000, 0, i + 1)
+        dates[dt.getDay()] = dt
     }
     const dtf = new Intl.DateTimeFormat(locale, { weekday: format })
     return dates.map((d) => dtf.format(d))
