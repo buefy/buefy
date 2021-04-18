@@ -234,10 +234,7 @@ export function getWeekdayNames(locale = undefined, format = 'narrow') {
     for (let i = 0; i < 7; i++) {
         dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + i))
     }
-    const dtf = new Intl.DateTimeFormat(locale, {
-        weekday: format,
-        timeZone: 'UTC'
-    })
+    const dtf = new Intl.DateTimeFormat(locale, { weekday: format })
     return dates.map((d) => dtf.format(d))
 }
 
