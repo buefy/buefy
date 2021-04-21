@@ -1,5 +1,19 @@
 # Buefy Changelog
 
+## 0.9.7
+
+### New features
+
+* Add transition appear to tabs/steps (thanks @jermel)
+* Add ``draggable-column`` prop to table  (thanks @T0RAT0RA)
+
+### Fixes
+
+* Resotre tzOffeset on datetimepicker
+* Fix #3224 datepicker on select a date in the next month when multiple (thanks @markokos01)
+* Fix #3278 weekdays off by one day (thanks @waldeck-dev)
+* Fix #3280 controls on number-input when disabled (thanks @service-paradis)
+
 ## 0.9.6
 
 ### Fixes
