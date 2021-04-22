@@ -44,6 +44,7 @@
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
                 :keep-open="openOnFocus"
+                :keep-first="keepFirst"
                 :group-field="groupField"
                 :group-options="groupOptions"
                 :use-html5-validation="useHtml5Validation"
@@ -145,6 +146,7 @@ export default {
         groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
+        keepFirst: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
         closable: {
