@@ -31,14 +31,6 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
   quiet: true
 })
 
-// force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function (compilation) {
-  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    // hotMiddleware.publish({ action: 'reload' })
-    cb()
-  })
-})
-
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
   const options = proxyTable[context]
