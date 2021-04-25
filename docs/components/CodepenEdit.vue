@@ -4,23 +4,27 @@
         method="POST"
         action="https://codepen.io/pen/define/"
         target="_blank"
-        rel="noopener">
+        rel="noopener"
+    >
         <b-button
             label="CodePen"
             type="is-text"
             size="is-small"
             icon-right="open-in-new"
-            native-type="submit"/>
+            native-type="submit"
+        />
 
         <input
             type="hidden"
             name="data"
-            :value="data">
+            :value="data"
+        >
     </form>
 </template>
 
 <script>
-import dataTest from '!!raw-loader!@/data/sample.json'
+// https://github.com/webpack-contrib/raw-loader/issues/91
+import dataTest from '@/data/sample.json.raw!=!raw-loader!@/data/sample.json'
 
 export default {
     props: {
