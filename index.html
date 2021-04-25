@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Buefy is a lightweight library of responsive UI components for Vue.js based on Bulma framework and design.">
 
-    <% for (var chunk of webpack.chunks) {
+    <% for (var chunk of compilation.chunks) {
         for (var file of chunk.files) {
             if (file.match(/\.(js|css)$/)) { %>
-    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
+    <link rel="<%= chunk.canBeInitial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
     <% }}} %>
 
     <link rel="canonical" href="https://buefy.org">
