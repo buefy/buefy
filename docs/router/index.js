@@ -1,10 +1,7 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter } from 'vue-router'
 
 import { afterEachGlobal } from './guards'
 import routes from '@/data/routes'
-
-Vue.use(Router)
 
 function route(path, component) {
     return {
@@ -19,7 +16,7 @@ function route(path, component) {
 const Documentation = () => import('@/templates/Documentation')
 const NotFound = () => import('@/pages/404')
 
-const router = new Router({
+const router = createRouter({
     mode: 'history',
     linkActiveClass: 'is-active',
     base: __dirname,
@@ -94,7 +91,7 @@ const router = new Router({
         {
             path: '*',
             name: 'notfound',
-            meta: routes['notfound'],
+            meta: routes.notfound,
             component: NotFound
         }
     ],
