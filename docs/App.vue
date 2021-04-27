@@ -1,8 +1,10 @@
 <template>
     <div id="app">
+        <!-- TODO: use vue3-progressbar?
         <vue-progress-bar/>
+        -->
 
-        <router-view/>
+        <router-view />
     </div>
 </template>
 
@@ -38,6 +40,8 @@ export default {
         }
     },
     created() {
+        // TODO: use vue3-progressbar?
+        /*
         this.$Progress.start()
         this.$router.beforeEach((to, from, next) => {
             this.$Progress.start()
@@ -45,14 +49,16 @@ export default {
         })
         this.$router.afterEach((to, from) => {
             this.$Progress.finish()
-        })
+        }) */
 
         this.setupClipboardControls()
     },
+    // TODO: use vue3-progressbar?
+    /*
     mounted() {
         this.$Progress.finish()
-    },
-    beforeDestroy() {
+    }, */
+    beforeUnmount() {
         // Destroy clipboard instance if there's any
         this.clipboard && this.clipboard.destroy()
     },
