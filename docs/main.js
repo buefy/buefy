@@ -1,11 +1,13 @@
-import Vue, { createApp } from 'vue'
+import { createApp } from 'vue'
 import App from './App'
 import router from './router'
 
 import Buefy from '../src'
 import Axios from 'axios'
-import VueProgressBar from 'vue-progressbar'
-import VueAnalytics from 'vue-analytics'
+// TODO: use vue3-progressbar?
+// import VueProgressBar from 'vue-progressbar'
+// TODO: use vue-gtag-next?
+// import VueAnalytics from 'vue-analytics'
 import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
 import { createNewEvent } from '../src/utils/helpers'
@@ -39,6 +41,8 @@ vueApp.use(Buefy, {
     // defaultToastDuration: 999999
 })
 
+// TODO: use vue3-progressbar?
+/*
 vueApp.use(VueProgressBar, {
     color: '#7957d5',
     failedColor: '#ff3860',
@@ -46,11 +50,13 @@ vueApp.use(VueProgressBar, {
         speed: '0.2s',
         opacity: '0.1s'
     }
-})
+}) */
+// TODO: use vue-gtag-next?
+/*
 vueApp.use(VueAnalytics, {
     id: 'UA-75199408-3',
     router
-})
+}) */
 vueApp.component('ApiView', ApiView)
 vueApp.component('CodeView', CodeView)
 vueApp.component('VariablesView', VariablesView)
@@ -84,6 +90,7 @@ vueApp.directive('highlight', {
 
 // TODO: Vue.filter is no longer supported!
 // should be implemented as a function.
+/*
 Vue.filter('pre', (text) => {
     if (!text) return
 
@@ -101,8 +108,8 @@ Vue.filter('pre', (text) => {
     newText = newText.join('\r\n')
 
     return newText
-})
+}) */
 
 document.addEventListener('DOMContentLoaded', function () {
-    vueApp.$mount('#app')
+    vueApp.mount('#app')
 })
