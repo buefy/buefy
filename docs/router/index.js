@@ -1,4 +1,4 @@
-import { createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import { afterEachGlobal } from './guards'
 import routes from '@/data/routes'
@@ -17,9 +17,8 @@ const Documentation = () => import('@/templates/Documentation')
 const NotFound = () => import('@/pages/404')
 
 const router = createRouter({
-    mode: 'history',
+    history: createWebHistory(__dirname),
     linkActiveClass: 'is-active',
-    base: __dirname,
     routes: [
         route('/', 'Home'),
         {
@@ -89,7 +88,7 @@ const router = createRouter({
         // { path: '*', redirect: '404' }
         // 404 page
         {
-            path: '*',
+            path: '/:pathMatch(.*)*',
             name: 'notfound',
             meta: routes.notfound,
             component: NotFound
