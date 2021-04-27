@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, { createApp } from 'vue'
 import App from './App'
 import router from './router'
 
@@ -15,21 +15,31 @@ import CodeView from './components/CodeView'
 import VariablesView from './components/VariablesView'
 import Example from './components/Example'
 
-Vue.config.productionTip = false
+// global Vue instance should be replaced with `vueApp`
+const vueApp = createApp({
+    router,
+    components: { App },
+    mounted() {
+        document.dispatchEvent(createNewEvent('render-event'))
+    },
+    template: '<App/>'
+})
+
+vueApp.config.productionTip = false
 
 global.Promise = Bluebird
 
-Vue.prototype.$http = Axios
-Vue.prototype.$eventHub = new Vue()
+vueApp.config.globalProperties.$http = Axios
+vueApp.config.globalProperties.$eventHub = createApp()
 
-Vue.use(Buefy, {
+vueApp.use(Buefy, {
     // defaultModalScroll: 'keep'
     // defaultIconPack: 'fa',
     // defaultSnackbarDuration: 999999,
     // defaultToastDuration: 999999
 })
 
-Vue.use(VueProgressBar, {
+vueApp.use(VueProgressBar, {
     color: '#7957d5',
     failedColor: '#ff3860',
     transition: {
@@ -37,16 +47,16 @@ Vue.use(VueProgressBar, {
         opacity: '0.1s'
     }
 })
-Vue.use(VueAnalytics, {
+vueApp.use(VueAnalytics, {
     id: 'UA-75199408-3',
     router
 })
-Vue.component('ApiView', ApiView)
-Vue.component('CodeView', CodeView)
-Vue.component('VariablesView', VariablesView)
-Vue.component('Example', Example)
+vueApp.component('ApiView', ApiView)
+vueApp.component('CodeView', CodeView)
+vueApp.component('VariablesView', VariablesView)
+vueApp.component('Example', Example)
 
-Vue.directive('highlight', {
+vueApp.directive('highlight', {
     deep: true,
     bind(el, binding) {
         // On first bind, highlight all targets
@@ -72,6 +82,8 @@ Vue.directive('highlight', {
     }
 })
 
+// TODO: Vue.filter is no longer supported!
+// should be implemented as a function.
 Vue.filter('pre', (text) => {
     if (!text) return
 
@@ -91,16 +103,6 @@ Vue.filter('pre', (text) => {
     return newText
 })
 
-/* eslint-disable no-new */
-const root = new Vue({
-    router,
-    components: { App },
-    mounted() {
-        document.dispatchEvent(createNewEvent('render-event'))
-    },
-    template: '<App/>'
-})
-
 document.addEventListener('DOMContentLoaded', function () {
-    root.$mount('#app')
+    vueApp.$mount('#app')
 })
