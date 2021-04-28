@@ -3,13 +3,15 @@
         <div
             v-if="horizontal"
             class="field-label"
-            :class="[customClass, fieldLabelSize]">
+            :class="[customClass, fieldLabelSize]"
+        >
             <label
                 v-if="hasLabel"
                 :for="labelFor"
                 :class="customClass"
-                class="label" >
-                <slot v-if="$slots.label" name="label"/>
+                class="label"
+            >
+                <slot v-if="$slots.label" name="label" />
                 <template v-else>{{ label }}</template>
             </label>
         </div>
@@ -18,27 +20,30 @@
                 v-if="hasLabel"
                 :for="labelFor"
                 :class="customClass"
-                class="label">
-                <slot v-if="$slots.label" name="label"/>
+                class="label"
+            >
+                <slot v-if="$slots.label" name="label" />
                 <template v-else>{{ label }}</template>
             </label>
         </template>
         <b-field-body
             v-if="horizontal"
             :message="newMessage ? formattedMessage : ''"
-            :type="newType">
-            <slot/>
+            :type="newType"
+        >
+            <slot />
         </b-field-body>
         <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
                 :type="newType"
-                :class="innerFieldClasses">
-                <slot/>
+                :class="innerFieldClasses"
+            >
+                <slot />
             </b-field>
         </div>
         <template v-else>
-            <slot/>
+            <slot />
         </template>
         <p
             v-if="hasMessage && !horizontal"
@@ -71,7 +76,7 @@ export default {
     },
     provide() {
         return {
-            'BField': this
+            BField: this
         }
     },
     inject: {
@@ -150,6 +155,7 @@ export default {
                 : 'has-addons-'
 
             if (this.position) return prefix + position[1]
+            return undefined
         },
         /**
         * Formatted message in case it's an array
@@ -162,13 +168,13 @@ export default {
             if (typeof this.newMessage === 'string') {
                 return [this.newMessage]
             }
-            let messages = []
+            const messages = []
             if (Array.isArray(this.newMessage)) {
                 this.newMessage.forEach((message) => {
                     if (typeof message === 'string') {
                         messages.push(message)
                     } else {
-                        for (let key in message) {
+                        for (const key in message) {
                             if (message[key]) {
                                 messages.push(key)
                             }
@@ -176,13 +182,13 @@ export default {
                     }
                 })
             } else {
-                for (let key in this.newMessage) {
+                for (const key in this.newMessage) {
                     if (this.newMessage[key]) {
                         messages.push(key)
                     }
                 }
             }
-            return messages.filter((m) => { if (m) return m })
+            return messages.filter((m) => !!m)
         },
         hasLabel() {
             return this.label || this.$slots.label
@@ -193,7 +199,7 @@ export default {
         },
         numberInputClasses() {
             if (this.$slots.default) {
-                const numberinput = this.$slots.default.filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
+                const numberinput = this.$slots.default().filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
                 if (numberinput) {
                     const classes = ['has-numberinput']
                     const controlsPosition = numberinput.componentOptions.propsData.controlsPosition
@@ -253,7 +259,7 @@ export default {
         hasAddons() {
             let renderedNode = 0
             if (this.$slots.default) {
-                renderedNode = this.$slots.default.reduce((i, node) => node.tag ? i + 1 : i, 0)
+                renderedNode = this.$slots.default().reduce((i, node) => node.tag ? i + 1 : i, 0)
             }
             return (
                 renderedNode > 1 &&
