@@ -19,13 +19,14 @@ import Example from './components/Example'
 
 // global Vue instance should be replaced with `vueApp`
 const vueApp = createApp({
-    router,
     components: { App },
     mounted() {
         document.dispatchEvent(createNewEvent('render-event'))
     },
     template: '<App/>'
 })
+
+vueApp.use(router)
 
 vueApp.config.productionTip = false
 
