@@ -58,7 +58,7 @@ export default {
     },
     mounted() {
         this.$eventHub.on('navigate', this.setMeta)
-        this.setMeta(this.$router.currentRoute.meta)
+        this.setMeta(this.$router.currentRoute.value.meta)
         if (this.$route.hash) {
             this.$nextTick(() => this.scrollTo(this.$route.hash))
         }
