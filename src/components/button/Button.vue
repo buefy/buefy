@@ -15,7 +15,6 @@
             'is-hovered': hovered,
             'is-selected': selected
         }]"
-        v-on="$listeners"
     >
         <b-icon
             v-if="iconLeft"
