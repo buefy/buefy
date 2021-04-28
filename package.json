@@ -146,6 +146,7 @@
     "shelljs": "0.8.4",
     "sinon": "7.5.0",
     "sortablejs": "1.7.0",
+    "tiny-emitter": "^2.1.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
     "vee-validate": "2.1.0-beta.9",
