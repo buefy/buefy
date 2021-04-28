@@ -11,7 +11,7 @@ export default {
     },
     render(createElement) {
         let first = true
-        return createElement('div', { attrs: { 'class': 'field-body' } }, this.$slots.default.map((element) => {
+        return createElement('div', { attrs: { class: 'field-body' } }, this.$slots.default().map((element) => {
             // skip returns and comments
             if (!element.tag) {
                 return element
