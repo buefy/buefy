@@ -25,6 +25,7 @@
 <script>
 // https://github.com/webpack-contrib/raw-loader/issues/91
 import dataTest from '@/data/sample.json.raw!=!raw-loader!@/data/sample.json'
+import { preformat } from '@/utils'
 
 export default {
     props: {
@@ -84,7 +85,7 @@ export default {
                 this.externalStyles.push('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
             }
 
-            return this.$options.filters.pre(`
+            return preformat(`
                     <div id="app" class="container">
                         ${html}
                     </div>
@@ -138,7 +139,7 @@ export default {
                 }
             }
 
-            return this.$options.filters.pre(`
+            return preformat(`
                 ${js || ''}
                 const app = new Vue(${js ? 'example' : ''})
                 app.$mount('#app')
