@@ -35,7 +35,8 @@ exports.cssLoaders = function (options) {
         loader: loader + '-loader',
         options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap,
-          minimize: options.minimize
+          // sass-loader does not like `minimize`
+          ...(loader !== 'sass' ? {minimize: options.minimize} : {})
         })
       })
     }
