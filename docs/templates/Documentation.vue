@@ -1,27 +1,27 @@
 <template>
     <main>
-        <TheNavbar/>
+        <TheNavbar />
 
         <section class="documentation">
-            <div v-if="!meta.hideSidebar" class="sidebar-bg"/>
+            <div v-if="!meta.hideSidebar" class="sidebar-bg" />
 
             <div class="container is-fullhd docs-template-horizontal">
-                <TheSidebar v-if="!meta.hideSidebar" :data="menu"/>
+                <TheSidebar v-if="!meta.hideSidebar" :data="menu" />
                 <div class="docs-main">
                     <div class="docs-main-container">
-                        <TheHeader v-bind="meta"/>
+                        <TheHeader v-bind="meta" />
 
-                        <router-view/>
+                        <router-view />
 
                         <template v-if="meta.githubPath">
-                            <ImproveThis v-bind="meta"/>
+                            <ImproveThis v-bind="meta" />
                         </template>
                     </div>
                 </div>
             </div>
         </section>
 
-        <TheFooter/>
+        <TheFooter />
     </main>
 </template>
 
@@ -57,7 +57,7 @@ export default {
         }
     },
     mounted() {
-        this.$eventHub.$on('navigate', this.setMeta)
+        this.$eventHub.on('navigate', this.setMeta)
         this.setMeta(this.$router.currentRoute.meta)
         if (this.$route.hash) {
             this.$nextTick(() => this.scrollTo(this.$route.hash))

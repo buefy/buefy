@@ -1,22 +1,26 @@
 <template>
     <nav
         class="navbar docs-navbar is-spaced has-shadow"
-        :class="{ 'is-primary is-transparent': light }">
+        :class="{ 'is-primary is-transparent': light }"
+    >
         <div class="container">
             <div class="navbar-brand">
                 <router-link
                     to="/"
                     class="navbar-item"
                     title="Buefy: lightweight UI components for Vue.js based on Bulma"
-                    active-class="">
+                    active-class=""
+                >
                     <img
                         v-if="light"
                         src="../assets/buefy-light.png"
-                        alt="Buefy">
+                        alt="Buefy"
+                    >
                     <img
                         v-else
                         src="../assets/buefy.png"
-                        alt="Buefy">
+                        alt="Buefy"
+                    >
                 </router-link>
 
                 <a
@@ -24,8 +28,9 @@
                     :class="{ 'has-text-dark': !light }"
                     href="https://github.com/buefy/buefy"
                     target="_blank"
-                    title="Github">
-                    <b-icon icon="github-circle"/>
+                    title="Github"
+                >
+                    <b-icon icon="github-circle" />
                 </a>
 
                 <a
@@ -33,8 +38,9 @@
                     :class="{ 'has-text-discord': !light }"
                     href="https://discordapp.com/invite/ZkdFJMr"
                     target="_blank"
-                    title="Discord">
-                    <b-icon icon="discord"/>
+                    title="Discord"
+                >
+                    <b-icon icon="discord" />
                 </a>
 
                 <a
@@ -42,17 +48,19 @@
                     :class="{ 'has-text-twitter': !light }"
                     href="https://twitter.com/walter_tommasi"
                     target="_blank"
-                    title="Twitter">
-                    <b-icon icon="twitter"/>
+                    title="Twitter"
+                >
+                    <b-icon icon="twitter" />
                 </a>
 
                 <span
                     class="navbar-burger burger"
                     :class="{ 'is-active': isMenuActive }"
-                    @click="isMenuActive = !isMenuActive">
-                    <span/>
-                    <span/>
-                    <span/>
+                    @click="isMenuActive = !isMenuActive"
+                >
+                    <span />
+                    <span />
+                    <span />
                 </span>
             </div>
 
@@ -61,7 +69,8 @@
                     <router-link
                         to="/"
                         exact
-                        class="navbar-item">
+                        class="navbar-item"
+                    >
                         Home
                     </router-link>
 
@@ -78,7 +87,9 @@
                     </router-link>
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <div class="navbar-link">Info</div>
+                        <div class="navbar-link">
+                            Info
+                        </div>
 
                         <div class="navbar-dropdown is-boxed">
                             <strong class="navbar-item is-version">
@@ -94,7 +105,8 @@
                             <a
                                 class="navbar-item"
                                 href="https://github.com/buefy/buefy/releases"
-                                target="_blank">
+                                target="_blank"
+                            >
                                 Changelogs
                             </a>
                         </div>
@@ -132,7 +144,7 @@ export default {
         }
     },
     mounted() {
-        this.$eventHub.$on('navigate', this.closeMenu)
+        this.$eventHub.on('navigate', this.closeMenu)
     }
 }
 </script>

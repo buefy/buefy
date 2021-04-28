@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App'
 import router from './router'
+import Emitter from 'tiny-emitter'
 
 import Buefy from '../src'
 import Axios from 'axios'
@@ -33,7 +34,7 @@ vueApp.config.productionTip = false
 global.Promise = Bluebird
 
 vueApp.config.globalProperties.$http = Axios
-vueApp.config.globalProperties.$eventHub = createApp()
+vueApp.config.globalProperties.$eventHub = new Emitter()
 
 vueApp.use(Buefy, {
     // defaultModalScroll: 'keep'
