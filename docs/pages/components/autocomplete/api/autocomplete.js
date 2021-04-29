@@ -150,8 +150,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append autocomplete content to body',
-                type: 'Boolean',
+                description: 'Append autocomplete content to body (prevents event bubbling)',
                 values: '—',
                 default: '<code>false</code>'
             },
