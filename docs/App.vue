@@ -62,10 +62,8 @@ export default {
         // Destroy clipboard instance if there's any
         this.clipboard && this.clipboard.destroy()
     },
-    beforeRouteUpdate(to, from, next) {
+    beforeRouteUpdate(to, from) {
         this.setupClipboardControls()
-
-        next()
     }
 }
 </script>
