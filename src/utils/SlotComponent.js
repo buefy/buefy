@@ -1,3 +1,4 @@
+import { h as createElement } from 'vue'
 import { isVueComponent } from './helpers'
 
 export default {
@@ -36,15 +37,16 @@ export default {
             this.component.$on(this.event, this.refresh)
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (isVueComponent(this.component)) {
             this.component.$off(this.event, this.refresh)
         }
     },
-    render(createElement) {
+    render() {
         if (isVueComponent(this.component)) {
             return createElement(this.tag, {},
-                this.scoped ? this.component.$scopedSlots[this.name](this.props)
+                this.scoped
+                    ? this.component.$scopedSlots[this.name](this.props)
                     : this.component.$slots[this.name])
         }
     }
