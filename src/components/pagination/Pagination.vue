@@ -1,7 +1,7 @@
 <template>
     <nav class="pagination" :class="rootClasses">
         <slot
-            v-if="$scopedSlots.previous"
+            v-if="$slots.previous"
             name="previous"
             :page="
                 getPage(current - 1, {
@@ -15,7 +15,8 @@
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
-                aria-hidden="true" />
+                aria-hidden="true"
+            />
         </slot>
         <BPaginationButton
             v-else
@@ -28,10 +29,11 @@
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
-                aria-hidden="true" />
+                aria-hidden="true"
+            />
         </BPaginationButton>
         <slot
-            v-if="$scopedSlots.next"
+            v-if="$slots.next"
             name="next"
             :page="
                 getPage(current + 1, {
@@ -45,7 +47,8 @@
                 :icon="iconNext"
                 :pack="iconPack"
                 both
-                aria-hidden="true" />
+                aria-hidden="true"
+            />
         </slot>
         <BPaginationButton
             v-else
@@ -58,7 +61,8 @@
                 :icon="iconNext"
                 :pack="iconPack"
                 both
-                aria-hidden="true" />
+                aria-hidden="true"
+            />
         </BPaginationButton>
 
         <div class="control pagination-input">
@@ -82,7 +86,7 @@
         <ul class="pagination-list" v-else>
             <!--First-->
             <li v-if="hasFirst">
-                <slot v-if="$scopedSlots.default" :page="getPage(1)" />
+                <slot v-if="$slots.default" :page="getPage(1)" />
                 <BPaginationButton v-else :page="getPage(1)" />
             </li>
             <li v-if="hasFirstEllipsis">
@@ -91,7 +95,7 @@
 
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
-                <slot v-if="$scopedSlots.default" :page="page" />
+                <slot v-if="$slots.default" :page="page" />
                 <BPaginationButton v-else :page="page" />
             </li>
 
@@ -100,7 +104,7 @@
                 <span class="pagination-ellipsis">&hellip;</span>
             </li>
             <li v-if="hasLast">
-                <slot v-if="$scopedSlots.default" :page="getPage(pageCount)" />
+                <slot v-if="$slots.default" :page="getPage(pageCount)" />
                 <BPaginationButton v-else :page="getPage(pageCount)" />
             </li>
         </ul>
@@ -384,7 +388,7 @@ export default {
         handleOnKeyPress(event) {
             // --- This is required to only allow numeric inputs for the page input - --- //
             // --- size attribute does not work with input type number. --- //
-            let ASCIICode = event.which || event.keyCode
+            const ASCIICode = event.which || event.keyCode
 
             if (ASCIICode >= 48 && ASCIICode <= 57) {
                 return true
@@ -404,7 +408,7 @@ export default {
             }
         },
         handleOnInputValue(event) {
-            let inputValue = +event.target.value
+            const inputValue = +event.target.value
             this.inputValue = inputValue
             if (Number.isInteger(this.inputValue)) {
                 this.handleOnInputDebounce(event)

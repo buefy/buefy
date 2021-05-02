@@ -9,7 +9,8 @@
         v-bind="$attrs"
         @click.prevent="page.click"
         :aria-label="page['aria-label']"
-        :aria-current="page.isCurrent">
+        :aria-current="page.isCurrent"
+    >
         <slot>{{ page.number }}</slot>
     </component>
 </template>
@@ -41,6 +42,7 @@ export default {
             if (this.tag === 'a') {
                 return '#'
             }
+            return undefined
         },
         isDisabled() {
             return this.disabled || this.page.disabled
