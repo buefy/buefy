@@ -1,7 +1,7 @@
 import Icon from '../components/icon/Icon'
 import SlotComponent from '../utils/SlotComponent'
-import { default as ProviderParentMixin, Sorted } from './ProviderParentMixin'
-import {bound} from './helpers'
+import ProviderParentMixin, { Sorted } from './ProviderParentMixin'
+import { bound } from './helpers'
 
 export default (cmp) => ({
     mixins: [ProviderParentMixin(cmp, Sorted)],
@@ -50,8 +50,10 @@ export default (cmp) => ({
     },
     computed: {
         activeItem() {
-            return this.activeId === undefined ? this.items[0]
-                : (this.activeId === null ? null
+            return this.activeId === undefined
+                ? this.items[0]
+                : (this.activeId === null
+                    ? null
                     : this.childItems.find((i) => i.value === this.activeId))
         },
         items() {
@@ -76,7 +78,8 @@ export default (cmp) => ({
          */
         activeId(val, oldValue) {
             const oldTab = oldValue !== undefined && oldValue !== null
-                ? this.childItems.find((i) => i.value === oldValue) : null
+                ? this.childItems.find((i) => i.value === oldValue)
+                : null
 
             if (oldTab && this.activeItem) {
                 oldTab.deactivate(this.activeItem.index)

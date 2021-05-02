@@ -1,4 +1,7 @@
-import {default as InjectedChildMixin, Sorted} from './InjectedChildMixin'
+import { h as createElement } from 'vue'
+
+import InjectedChildMixin, { Sorted } from './InjectedChildMixin'
+import { makeUniqueId } from './make-unique-id'
 
 export default (parentCmp) => ({
     mixins: [InjectedChildMixin(parentCmp, Sorted)],
@@ -12,7 +15,7 @@ export default (parentCmp) => ({
         },
         value: {
             type: String,
-            default() { return this._uid.toString() }
+            default() { return makeUniqueId() }
         },
         headerClass: {
             type: [String, Array, Object],
@@ -50,7 +53,7 @@ export default (parentCmp) => ({
                 : this.parent.vertical ? 'slide-up' : 'slide-prev'
         }
     },
-    render(createElement) {
+    render() {
         // if destroy apply v-if
         if (this.parent.destroyOnHide) {
             if (!this.isActive || !this.visible) {
@@ -58,29 +61,23 @@ export default (parentCmp) => ({
             }
         }
         const vnode = createElement('div', {
-            directives: [{
-                name: 'show',
-                value: this.isActive && this.visible
-            }],
-            attrs: {
-                'class': this.elementClass,
-                'role': this.elementRole,
-                'id': `${this.value}-content`,
-                'aria-labelledby': this.elementRole ? `${this.value}-label` : null,
-                'tabindex': this.isActive ? 0 : -1
-            }
-        }, this.$slots.default)
+            // simulates v-show
+            style: {
+                display: this.isActive && this.visible ? '' : 'none'
+            },
+            class: this.elementClass,
+            role: this.elementRole,
+            id: `${this.value}-content`,
+            'aria-labelledby': this.elementRole ? `${this.value}-label` : null,
+            tabindex: this.isActive ? 0 : -1
+        }, this.$slots.default())
         // check animated prop
         if (this.parent.animated) {
             return createElement('transition', {
-                props: {
-                    'name': this.parent.animation || this.transitionName,
-                    'appear': this.parent.animateInitially === true || undefined
-                },
-                on: {
-                    'before-enter': () => { this.parent.isTransitioning = true },
-                    'after-enter': () => { this.parent.isTransitioning = false }
-                }
+                name: this.parent.animation || this.transitionName,
+                appear: this.parent.animateInitially === true || undefined,
+                onBeforeEnter: () => { this.parent.isTransitioning = true },
+                onAfterEnter: () => { this.parent.isTransitioning = false }
             }, [vnode])
         }
         return vnode
