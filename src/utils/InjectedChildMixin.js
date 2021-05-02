@@ -1,4 +1,4 @@
-import {hasFlag} from './helpers'
+import { hasFlag } from './helpers'
 
 const sorted = 1
 const optional = 2
@@ -8,7 +8,7 @@ export const Optional = optional
 
 export default (parentItemName, flags = 0) => {
     const mixin = {
-        inject: {parent: {from: 'b' + parentItemName, default: false}},
+        inject: { parent: { from: 'b' + parentItemName, default: false } },
         created() {
             if (!this.parent) {
                 if (!hasFlag(flags, optional)) {
@@ -19,7 +19,7 @@ export default (parentItemName, flags = 0) => {
                 this.parent._registerItem(this)
             }
         },
-        beforeDestroy() {
+        beforeUnmount() {
             if (this.parent && this.parent._unregisterItem) {
                 this.parent._unregisterItem(this)
             }

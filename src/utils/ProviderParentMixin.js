@@ -1,4 +1,4 @@
-import {hasFlag} from './helpers'
+import { hasFlag } from './helpers'
 
 const items = 1
 const sorted = 3
@@ -38,11 +38,11 @@ export default (itemName, flags = 0) => {
                  */
                 childItems(items) {
                     if (items.length > 0 && this.$scopedSlots.default) {
-                        let tag = items[0].$vnode.tag
+                        const tag = items[0].$vnode.tag
                         let index = 0
 
                         const deepSearch = (children) => {
-                            for (let child of children) {
+                            for (const child of children) {
                                 if (child.tag === tag) {
                                     // An item with the same tag will for sure be found
                                     const it = items.find((i) => i.$vnode === child)
