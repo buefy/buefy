@@ -125,8 +125,8 @@ export default {
         },
 
         setInvalid() {
-            let type = 'is-danger'
-            let message = this.validationMessage || this.getElement().validationMessage
+            const type = 'is-danger'
+            const message = this.validationMessage || this.getElement().validationMessage
             this.setValidity(type, message)
         },
 

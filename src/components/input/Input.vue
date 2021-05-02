@@ -16,7 +16,8 @@
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
-            @focus="onFocus">
+            @focus="onFocus"
+        >
 
         <textarea
             v-else
@@ -29,7 +30,8 @@
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
-            @focus="onFocus"/>
+            @focus="onFocus"
+        />
 
         <b-icon
             v-if="icon"
@@ -38,7 +40,8 @@
             :icon="icon"
             :pack="iconPack"
             :size="iconSize"
-            @click.native="iconClick('icon-click', $event)"/>
+            @click="iconClick('icon-click', $event)"
+        />
 
         <b-icon
             v-if="!loading && hasIconRight"
@@ -49,12 +52,14 @@
             :size="iconSize"
             :type="rightIconType"
             both
-            @click.native="rightIconClick"/>
+            @click="rightIconClick"
+        />
 
         <small
             v-if="maxlength && hasCounter && type !== 'number'"
             class="help counter"
-            :class="{ 'is-invisible': !isFocused }">
+            :class="{ 'is-invisible': !isFocused }"
+        >
             {{ valueLength }} / {{ maxlength }}
         </small>
     </div>
@@ -182,6 +187,7 @@ export default {
                 case 'is-danger': return 'alert-circle'
                 case 'is-info': return 'information'
                 case 'is-warning': return 'alert'
+                default: return undefined
             }
         },
 

@@ -4,12 +4,13 @@
             <b-select
                 v-model="sortMultipleSelect"
                 expanded
-                v-if="sortMultiple">
+                v-if="sortMultiple"
+            >
                 <option
-                    v-for="(column, index) in columns"
-                    v-if="column.sortable"
+                    v-for="(column, index) in sortableColumns"
                     :key="index"
-                    :value="column">
+                    :value="column"
+                >
                     {{ getLabel(column) }}
                     <template v-if="getSortingObjectOfColumn(column)">
                         <template v-if="columnIsDesc(column)">
@@ -24,31 +25,35 @@
             <b-select
                 v-model="mobileSort"
                 expanded
-                v-else>
+                v-else
+            >
                 <template v-if="placeholder">
                     <option
                         v-show="showPlaceholder"
                         :value="{}"
                         selected
                         disabled
-                        hidden>
+                        hidden
+                    >
                         {{ placeholder }}
                     </option>
                 </template>
                 <option
-                    v-for="(column, index) in columns"
-                    v-if="column.sortable"
+                    v-for="(column, index) in sortableColumns"
                     :key="index"
-                    :value="column">
+                    :value="column"
+                >
                     {{ column.label }}
                 </option>
             </b-select>
             <div class="control">
                 <template
-                    v-if="sortMultiple && sortMultipleData.length > 0" >
+                    v-if="sortMultiple && sortMultipleData.length > 0"
+                >
                     <button
                         class="button is-primary"
-                        @click="sort">
+                        @click="sort"
+                    >
                         <b-icon
                             :class="{ 'is-desc': columnIsDesc(sortMultipleSelect) }"
                             :icon="sortIcon"
@@ -59,7 +64,8 @@
                     </button>
                     <button
                         class="button is-primary"
-                        @click="removePriority">
+                        @click="removePriority"
+                    >
                         <b-icon
                             icon="delete"
                             :size="sortIconSize"
@@ -70,7 +76,8 @@
                 <button
                     v-else-if="!sortMultiple"
                     class="button is-primary"
-                    @click="sort">
+                    @click="sort"
+                >
                     <b-icon
                         v-show="currentSortColumn === mobileSort"
                         :class="{ 'is-desc': !isAsc }"
@@ -130,6 +137,9 @@ export default {
     computed: {
         showPlaceholder() {
             return !this.columns || !this.columns.some((column) => column === this.mobileSort)
+        },
+        sortableColumns() {
+            return this.columns?.filter((column) => column.sortable)
         }
     },
     watch: {
@@ -157,7 +167,7 @@ export default {
             // The sort event is already triggered by the emit
             this.ignoreSort = true
             // Select one of the other options when we reset one
-            let remainingFields = this.sortMultipleData.filter((data) =>
+            const remainingFields = this.sortMultipleData.filter((data) =>
                 data.field !== this.sortMultipleSelect.field)
                 .map((data) => data.field)
             this.sortMultipleSelect = this.columns.filter((column) =>
@@ -168,14 +178,14 @@ export default {
                 i.field === column.field)[0]
         },
         columnIsDesc(column) {
-            let sortingObject = this.getSortingObjectOfColumn(column)
+            const sortingObject = this.getSortingObjectOfColumn(column)
             if (sortingObject) {
                 return !!(sortingObject.order && sortingObject.order === 'desc')
             }
             return true
         },
         getLabel(column) {
-            let sortingObject = this.getSortingObjectOfColumn(column)
+            const sortingObject = this.getSortingObjectOfColumn(column)
             if (sortingObject) {
                 return column.label + '(' + (this.sortMultipleData.indexOf(sortingObject) + 1) + ')'
             }
