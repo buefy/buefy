@@ -1,6 +1,6 @@
 export default {
     props: {
-        value: [String, Number, Boolean, Function, Object, Array],
+        modelValue: [String, Number, Boolean, Function, Object, Array],
         nativeValue: [String, Number, Boolean, Function, Object, Array],
         type: String,
         disabled: Boolean,
@@ -10,7 +10,7 @@ export default {
     },
     data() {
         return {
-            newValue: this.value
+            newValue: this.modelValue
         }
     },
     computed: {
@@ -20,15 +20,21 @@ export default {
             },
             set(value) {
                 this.newValue = value
-                this.$emit('input', value)
+                this.$emit('update:modelValue', value)
             }
+        },
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it.
+            // To remove it, `null` or `undefined` has to be given.
+            // Setting `false` ends up with a grayed out component.
+            return this.disabled || undefined
         }
     },
     watch: {
         /**
         * When v-model change, set internal value.
         */
-        value(value) {
+        modelValue(value) {
             this.newValue = value
         }
     },

@@ -3,10 +3,11 @@
         class="b-checkbox checkbox"
         :class="[size, { 'is-disabled': disabled }]"
         ref="label"
-        :disabled="disabled"
+        :disabled="disabledOrUndefined"
         @click="focus"
         @keydown.prevent.enter="$refs.label.click()"
-        @keydown.prevent.space="$refs.label.click()">
+        @keydown.prevent.space="$refs.label.click()"
+    >
         <!-- Checkbox needs to listen for a space event instead of a just a
              click and enter event so that that using the keyboard spacebar will also
              trigger the checkbox change in the b-table -->
@@ -17,15 +18,16 @@
             ref="input"
             @click.stop
             :autocomplete="autocomplete"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :required="required"
             :name="name"
             :value="nativeValue"
             :true-value="trueValue"
             :false-value="falseValue"
-            :aria-labelledby="ariaLabelledby">
+            :aria-labelledby="ariaLabelledby"
+        >
         <span class="check" :class="type" />
-        <span :id="ariaLabelledby" class="control-label"><slot/></span>
+        <span :id="ariaLabelledby" class="control-label"><slot /></span>
     </label>
 </template>
 
