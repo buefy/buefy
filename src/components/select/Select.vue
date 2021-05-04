@@ -1,7 +1,8 @@
 <template>
     <div
         class="control"
-        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }">
+        :class="{ 'is-expanded': expanded, 'has-icons-left': icon }"
+    >
         <span class="select" :class="spanClasses">
 
             <select
@@ -11,19 +12,21 @@
                 :size="nativeSize"
                 v-bind="$attrs"
                 @blur="$emit('blur', $event) && checkHtml5Validity()"
-                @focus="$emit('focus', $event)">
+                @focus="$emit('focus', $event)"
+            >
 
                 <template v-if="placeholder">
                     <option
                         v-if="computedValue == null"
                         :value="null"
                         disabled
-                        hidden>
+                        hidden
+                    >
                         {{ placeholder }}
                     </option>
                 </template>
 
-                <slot/>
+                <slot />
 
             </select>
         </span>
@@ -33,7 +36,8 @@
             class="is-left"
             :icon="icon"
             :pack="iconPack"
-            :size="iconSize"/>
+            :size="iconSize"
+        />
     </div>
 </template>
 
@@ -49,7 +53,7 @@ export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
-        value: {
+        modelValue: {
             type: [String, Number, Boolean, Object, Array, Function, Date],
             default: null
         },
@@ -59,7 +63,7 @@ export default {
     },
     data() {
         return {
-            selected: this.value,
+            selected: this.modelValue,
             _elementRef: 'select'
         }
     },
@@ -70,7 +74,7 @@ export default {
             },
             set(value) {
                 this.selected = value
-                this.$emit('input', value)
+                this.$emit('update:modelValue', value)
                 !this.isValid && this.checkHtml5Validity()
             }
         },
@@ -90,7 +94,7 @@ export default {
         *   1. Set the selected option.
         *   2. If it's invalid, validate again.
         */
-        value(value) {
+        modelValue(value) {
             this.selected = value
             !this.isValid && this.checkHtml5Validity()
         }
