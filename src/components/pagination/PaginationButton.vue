@@ -3,7 +3,7 @@
         :is="tag"
         role="button"
         :href="href"
-        :disabled="isDisabled"
+        :disabled="disabledOrUndefined"
         class="pagination-link"
         :class="{ 'is-current': page.isCurrent, [page.class]: true }"
         v-bind="$attrs"
@@ -41,11 +41,15 @@ export default {
         href() {
             if (this.tag === 'a') {
                 return '#'
+            } else {
+                return undefined
             }
-            return undefined
         },
         isDisabled() {
             return this.disabled || this.page.disabled
+        },
+        disabledOrUndefined() {
+            return this.isDisabled || undefined
         }
     }
 }
