@@ -95,7 +95,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append dropdown content to body',
+                description: 'Append dropdown content to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

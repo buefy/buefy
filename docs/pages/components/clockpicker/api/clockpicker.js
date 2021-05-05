@@ -160,7 +160,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append clockpicker calendar to body',
+                description: 'Append clockpicker calendar to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
