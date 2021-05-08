@@ -1,3 +1,5 @@
+import { Fragment } from 'vue'
+
 /**
  * +/- function to native math sign
  */
@@ -307,3 +309,7 @@ export const isDefined = (d) => d !== undefined
  * https://github.com/lodash/lodash/blob/master/isNil.js
  */
 export const isNil = (value) => value === null || value === undefined
+
+export function isFragment(vnode) {
+    return vnode.type === Fragment
+}
