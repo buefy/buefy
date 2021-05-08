@@ -2,14 +2,14 @@
     <div class="field table-mobile-sort">
         <div class="field has-addons">
             <b-select
-                v-model="sortMultipleSelect"
+                v-model="sortMultipleSelectIndex"
                 expanded
                 v-if="sortMultiple"
             >
                 <option
                     v-for="(column, index) in sortableColumns"
                     :key="index"
-                    :value="column"
+                    :value="index"
                 >
                     {{ getLabel(column) }}
                     <template v-if="getSortingObjectOfColumn(column)">
@@ -23,7 +23,7 @@
                 </option>
             </b-select>
             <b-select
-                v-model="mobileSort"
+                v-model="mobileSortIndex"
                 expanded
                 v-else
             >
@@ -41,7 +41,7 @@
                 <option
                     v-for="(column, index) in sortableColumns"
                     :key="index"
-                    :value="column"
+                    :value="index"
                 >
                     {{ column.label }}
                 </option>
@@ -125,7 +125,9 @@ export default {
     data() {
         return {
             sortMultipleSelect: '',
+            sortMultipleSelectIndex: -1,
             mobileSort: this.currentSortColumn,
+            mobileSortIndex: this.columns.indexOf(this.currentSortColumn),
             defaultEvent: {
                 shiftKey: true,
                 altKey: true,
@@ -150,13 +152,36 @@ export default {
                 this.$emit('sort', column, this.defaultEvent)
             }
         },
+        sortMultipleSelectIndex(index) {
+            if (index !== -1) {
+                this.sortMultipleSelect = this.columns[index]
+            } else {
+                this.sortMultipleSelect = null
+            }
+        },
         mobileSort(column) {
             if (this.currentSortColumn === column) return
 
             this.$emit('sort', column, this.defaultEvent)
         },
+        mobileSortIndex(index) {
+            if (index !== -1) {
+                this.mobileSort = this.columns[index]
+            } else {
+                this.mobileSort = null
+            }
+        },
         currentSortColumn(column) {
-            this.mobileSort = column
+            this.mobileSortIndex = this.columns.indexOf(column)
+        },
+        columns(newColumns) {
+            if (this.sortMultiple) {
+                this.sortMultipleSelectIndex = newColumns.indexOf(
+                    this.sortMultipleSelect
+                )
+            } else {
+                this.mobileSortIndex = newColumns.indexOf(this.mobileSort)
+            }
         }
     },
     methods: {
@@ -170,8 +195,8 @@ export default {
             const remainingFields = this.sortMultipleData.filter((data) =>
                 data.field !== this.sortMultipleSelect.field)
                 .map((data) => data.field)
-            this.sortMultipleSelect = this.columns.filter((column) =>
-                remainingFields.includes(column.field))[0]
+            this.sortMultipleSelectIndex = this.columns.findIndex((column) =>
+                remainingFields.includes(column.field))
         },
         getSortingObjectOfColumn(column) {
             return this.sortMultipleData.filter((i) =>

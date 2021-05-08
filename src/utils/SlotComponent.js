@@ -43,11 +43,9 @@ export default {
         }
     },
     render() {
-        if (isVueComponent(this.component)) {
-            return createElement(this.tag, {},
-                this.scoped
-                    ? this.component.$scopedSlots[this.name](this.props)
-                    : this.component.$slots[this.name])
-        }
+        return createElement(this.tag, {},
+            this.scoped
+                ? this.component.$slots[this.name](this.props)
+                : this.component.$slots[this.name]())
     }
 }
