@@ -5,10 +5,10 @@
         <b-switch v-model="multiColumnSortingEnabled" @input="resetPriority">Sort multiple rows</b-switch>
       </div>
       <div class="control is-flex">
-        <span class="button" :disabled="!multiColumnSortingEnabled" @click="resetPriority">Reset sorting</span>
+        <span class="button" :disabled="multiColumnSortingDisabledOrUndefined" @click="resetPriority">Reset sorting</span>
       </div>
       <div class="control is-flex">
-        <b-select v-model="customKey" :disabled="!multiColumnSortingEnabled">
+        <b-select v-model="customKey" :disabled="multiColumnSortingDisabledOrUndefined">
           <option :value="null">None</option>
           <option value="shiftKey">Shift</option>
           <option value="altKey">Alt/Option</option>
@@ -62,6 +62,13 @@ const dataSource = [
             multiColumnSortingEnabled: true,
             data: [],
             sortingPriority: []
+          }
+      },
+      computed: {
+          multiColumnSortingDisabledOrUndefined() {
+              // On Vue 3, setting a boolean attribute `false` does not remove
+              // it. `null` or `undefined` has to be given to do so.
+              return !this.multiColumnSortingEnabled || undefined
           }
       },
       methods: {

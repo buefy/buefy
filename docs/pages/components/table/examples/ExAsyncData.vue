@@ -38,7 +38,7 @@
             </b-table-column>
 
             <b-table-column label="Overview" width="500" v-slot="props">
-                {{ props.row.overview | truncate(80) }}
+                {{ truncate(props.row.overview, 80) }}
             </b-table-column>
 
         </b-table>
@@ -123,12 +123,8 @@
                 } else if (number >= 8) {
                     return 'is-success'
                 }
-            }
-        },
-        filters: {
-            /**
-        * Filter to truncate string, accepts a length parameter
-        */
+            },
+            // filter is no longer supported on Vue 3
             truncate(value, length) {
                 return value.length > length
                     ? value.substr(0, length) + '...'

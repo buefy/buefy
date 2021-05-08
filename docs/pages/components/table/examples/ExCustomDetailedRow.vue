@@ -81,7 +81,7 @@
                 </span>
             </b-table-column>
 
-            <template slot="detail" slot-scope="props">
+            <template v-slot:detail="props">
                 <tr v-for="item in props.row.items" :key="item.name">
                     <td v-if="showDetailIcon"></td>
                     <td v-show="columnsVisible['name'].display" >&nbsp;&nbsp;&nbsp;&nbsp;{{ item.name }}</td>

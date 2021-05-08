@@ -27,7 +27,7 @@
                 <b-table
                     :data="data"
                     :columns="columns"
-                    :checked-rows.sync="checkedRows"
+                    v-model:checked-rows="checkedRows"
                     :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
                     checkable
                     :checkbox-position="checkboxPosition"

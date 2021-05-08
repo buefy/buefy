@@ -62,7 +62,7 @@
             :data="data"
             :paginated="isPaginated"
             :per-page="perPage"
-            :current-page.sync="currentPage"
+            v-model:current-page="currentPage"
             :pagination-simple="isPaginationSimple"
             :pagination-position="paginationPosition"
             :default-sort-direction="defaultSortDirection"

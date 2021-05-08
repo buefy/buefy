@@ -28,27 +28,35 @@
             </b-table-column>
 
 
-            <template #footer v-if="!isCustom">
-                <div class="has-text-right">
-                    Footer
-                </div>
-            </template>
-            <template #footer v-else>
-                <th class="is-hidden-mobile" style="width:40px">
-                    <div class="th-wrap is-numeric"> ID </div>
-                </th>
-                <th class="is-hidden-mobile">
-                    <div class="th-wrap"> First Name </div>
-                </th>
-                <th class="is-hidden-mobile">
-                    <div class="th-wrap"> Last Name </div>
-                </th>
-                <th class="is-hidden-mobile">
-                    <div class="th-wrap is-centered"> Date </div>
-                </th>
-                <th class="is-hidden-mobile">
-                    <div class="th-wrap"> Gender </div>
-                </th>
+            <!--
+            If `v-slot` (i.e., #) and `v-if` were in the same template tag,
+            I got a maximum recursion exceeding error. If `v-slot` was inside
+            `v-if`, I got a compilation error.
+            https://github.com/vuejs/vue/issues/9391#issuecomment-459101293
+            -->
+            <template #footer>
+                <template v-if="!isCustom">
+                    <div class="has-text-right">
+                        Footer
+                    </div>
+                </template>
+                <template v-else>
+                    <th class="is-hidden-mobile" style="width:40px">
+                        <div class="th-wrap is-numeric"> ID </div>
+                    </th>
+                    <th class="is-hidden-mobile">
+                        <div class="th-wrap"> First Name </div>
+                    </th>
+                    <th class="is-hidden-mobile">
+                        <div class="th-wrap"> Last Name </div>
+                    </th>
+                    <th class="is-hidden-mobile">
+                        <div class="th-wrap is-centered"> Date </div>
+                    </th>
+                    <th class="is-hidden-mobile">
+                        <div class="th-wrap"> Gender </div>
+                    </th>
+                </template>
             </template>
 
         </b-table>
