@@ -14,7 +14,7 @@
                 <b-table
                     :data="data"
                     :columns="columns"
-                    :selected.sync="selected"
+                    v-model:selected="selected"
                     focusable>
                 </b-table>
             </b-tab-item>
