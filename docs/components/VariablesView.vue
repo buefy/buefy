@@ -8,13 +8,11 @@
         </h2>
         <p>You can use these variables to customize this component.</p>
 
-        <template>
-            <b-table
-                :mobile-cards="false"
-                :data="data"
-                :columns="variablesColumns"
-            />
-        </template>
+        <b-table
+            :mobile-cards="false"
+            :data="data"
+            :columns="variablesColumns"
+        />
     </section>
 </template>
 
