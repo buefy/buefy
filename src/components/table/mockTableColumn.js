@@ -97,7 +97,7 @@ export default function mockTableColumn(table, column) {
         $emit: (...args) => eventEmitter.emit(...args),
         // special fields
         _isVue: true,
-        $scopedSlots: {
+        $slots: {
             default: (props) => {
                 const vnode = createElement('span', {
                     innerHTML: getValueByPath(props.row, column.field)

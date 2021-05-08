@@ -105,13 +105,12 @@ export default {
     },
     created() {
         if (!this.$table) {
-            this.$destroy()
             throw new Error('You should wrap bTableColumn on a bTable')
         }
-        this.$table.refreshSlots()
+        this.$table._registerTableColumn(this)
     },
     beforeUnmount() {
-        this.$table.refreshSlots()
+        this.$table._unregisterTableColumn(this)
     },
     render(createElement) {
         // renderless
