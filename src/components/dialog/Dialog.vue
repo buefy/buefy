@@ -6,26 +6,32 @@
             :class="dialogClass"
             v-trap-focus="trapFocus"
             :role="ariaRole"
-            :aria-modal="ariaModal">
-            <div class="modal-background" @click="cancel('outside')"/>
+            :aria-modal="ariaModal"
+        >
+            <div class="modal-background" @click="cancel('outside')" />
             <div class="modal-card animation-content">
                 <header class="modal-card-head" v-if="title">
-                    <p class="modal-card-title">{{ title }}</p>
+                    <p class="modal-card-title">
+                        {{ title }}
+                    </p>
                 </header>
 
                 <section
                     class="modal-card-body"
-                    :class="{ 'is-titleless': !title, 'is-flex': hasIcon }">
+                    :class="{ 'is-titleless': !title, 'is-flex': hasIcon }"
+                >
                     <div class="media">
                         <div
                             class="media-left"
-                            v-if="hasIcon && (icon || iconByType)">
+                            v-if="hasIcon && (icon || iconByType)"
+                        >
                             <b-icon
                                 :icon="icon ? icon : iconByType"
                                 :pack="iconPack"
                                 :type="type"
                                 :both="!icon"
-                                size="is-large"/>
+                                size="is-large"
+                            />
                         </div>
                         <div class="media-content">
                             <p>
@@ -44,12 +50,15 @@
                                         class="input"
                                         ref="input"
                                         :class="{ 'is-danger': validationMessage }"
-                                        v-bind="inputAttrs"
+                                        v-bind="safeInputAttrs"
                                         @compositionstart="isCompositing = true"
                                         @compositionend="isCompositing = false"
-                                        @keydown.enter="confirm">
+                                        @keydown.enter="confirm"
+                                    >
                                 </div>
-                                <p class="help is-danger">{{ validationMessage }}</p>
+                                <p class="help is-danger">
+                                    {{ validationMessage }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -59,11 +68,17 @@
                     <b-button
                         v-if="showCancel"
                         ref="cancelButton"
-                        @click="cancel('button')">{{ cancelText }}</b-button>
+                        @click="cancel('button')"
+                    >
+                        {{ cancelText }}
+                    </b-button>
                     <b-button
                         :type="type"
                         ref="confirmButton"
-                        @click="confirm">{{ confirmText }}</b-button>
+                        @click="confirm"
+                    >
+                        {{ confirmText }}
+                    </b-button>
                 </footer>
             </div>
         </div>
@@ -120,7 +135,7 @@ export default {
             type: Object,
             default: () => ({})
         },
-        onConfirm: {
+        confirmCallback: {
             type: Function,
             default: () => {}
         },
@@ -168,6 +183,17 @@ export default {
         }
     },
     computed: {
+        // `safeInputAttrs` is a shallow copy of `inputAttrs` except for `value`
+        // `value` should not be specified to `v-bind` of the input element
+        // because it inhibits `v-model` of the input on Vue 3
+        safeInputAttrs() {
+            const attrs = { ...this.inputAttrs }
+            delete attrs.value
+            if (typeof attrs.required === 'undefined') {
+                attrs.required = true
+            }
+            return attrs
+        },
         dialogClass() {
             return [this.size, {
                 'has-custom-container': this.container !== null
@@ -197,7 +223,7 @@ export default {
     methods: {
         /**
         * If it's a prompt Dialog, validate the input.
-        * Call the onConfirm prop (function) and close the Dialog.
+        * Call the confirmCallback prop (function) and close the Dialog.
         */
         confirm() {
             if (this.$refs.input !== undefined) {
@@ -209,7 +235,7 @@ export default {
                 }
             }
             this.$emit('confirm', this.prompt)
-            this.onConfirm(this.prompt, this)
+            this.confirmCallback(this.prompt, this)
             if (this.closeOnConfirm) this.close()
         },
 
@@ -220,7 +246,6 @@ export default {
             this.isActive = false
             // Timeout for the animation complete before destroying
             setTimeout(() => {
-                this.$destroy()
                 removeElement(this.$el)
             }, 150)
         }
@@ -236,10 +261,6 @@ export default {
     },
     mounted() {
         this.isActive = true
-
-        if (typeof this.inputAttrs.required === 'undefined') {
-            this.$set(this.inputAttrs, 'required', true)
-        }
 
         this.$nextTick(() => {
             // Handle which element receives focus

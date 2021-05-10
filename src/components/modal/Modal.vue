@@ -88,7 +88,7 @@ export default {
                 return config.defaultModalCanCancel
             }
         },
-        onCancel: {
+        cancelCallback: {
             type: Function,
             default: () => {}
         },
@@ -219,17 +219,17 @@ export default {
         },
 
         /**
-        * Close the Modal if canCancel and call the onCancel prop (function).
+        * Close the Modal if canCancel and call the cancelCallback prop (function).
         */
         cancel(method) {
             if (this.cancelOptions.indexOf(method) < 0) return
             this.$emit('cancel', arguments)
-            this.onCancel.apply(null, arguments)
+            this.cancelCallback.apply(null, arguments)
             this.close()
         },
 
         /**
-        * Call the onCancel prop (function).
+        * Call the cancelCallback prop (function).
         * Emit events, and destroy modal if it's programmatic.
         */
         close() {
@@ -240,7 +240,6 @@ export default {
             if (this.programmatic) {
                 this.isActive = false
                 setTimeout(() => {
-                    this.$destroy()
                     removeElement(this.$el)
                 }, 150)
             }

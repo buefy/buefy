@@ -1,10 +1,10 @@
+import { createApp, h as createElement } from 'vue'
+
 import Dialog from './Dialog'
 
-import config, { VueInstance } from '../../utils/config'
+import config from '../../utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
-
-let localVueInstance
 
 function open(propsData) {
     let slot
@@ -12,22 +12,55 @@ function open(propsData) {
         slot = propsData.message
         delete propsData.message
     }
-    const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
-    const DialogComponent = vm.extend(Dialog)
-    const component = new DialogComponent({
-        el: document.createElement('div'),
-        propsData
-    })
-    if (slot) {
-        component.$slots.default = slot
-        component.$forceUpdate()
+    function createDialog(onConfirm, onCancel) {
+        const container = document.createElement('div')
+        const vueInstance = createApp({
+            data() {
+                return {
+                    dialogVNode: null
+                }
+            },
+            methods: {
+                close() {
+                    // TODO: too much dependence on Vue's internal structure?
+                    const dialog =
+                        this.dialogVNode?.component?.expose ||
+                        this.dialogVNode?.component?.proxy
+                    dialog?.close()
+                }
+            },
+            render() {
+                this.dialogVNode = createElement(
+                    Dialog,
+                    {
+                        ...propsData,
+                        onConfirm: (...args) => {
+                            if (onConfirm != null) {
+                                onConfirm(...args)
+                            }
+                            vueInstance.unmount()
+                        },
+                        onCancel: (...args) => {
+                            if (onCancel != null) {
+                                onCancel(...args)
+                            }
+                            vueInstance.unmount()
+                        }
+                    },
+                    slot ? { default: () => slot } : undefined
+                )
+                return this.dialogVNode
+            }
+        })
+        return vueInstance.mount(container)
     }
     if (!config.defaultProgrammaticPromise) {
-        return component
+        return createDialog()
     } else {
         return new Promise((resolve) => {
-            component.$on('confirm', (event) => resolve({ result: event || true, dialog: component }))
-            component.$on('cancel', () => resolve({ result: false, dialog: component }))
+            const dialog = createDialog(
+                (event) => resolve({ result: event || true, dialog }),
+                () => resolve({ result: false, dialog }))
         })
     }
 }
@@ -61,7 +94,6 @@ const DialogProgrammatic = {
 
 const Plugin = {
     install(Vue) {
-        localVueInstance = Vue
         registerComponent(Vue, Dialog)
         registerComponentProgrammatic(Vue, 'dialog', DialogProgrammatic)
     }
