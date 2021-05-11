@@ -12,7 +12,7 @@
                 @select="option => selected = option"
                 @infinite-scroll="getMoreAsyncData">
 
-                <template slot-scope="props">
+                <template v-slot="props">
                     <div class="media">
                         <div class="media-left">
                             <img width="32" :src="`https://image.tmdb.org/t/p/w500/${props.option.poster_path}`">
