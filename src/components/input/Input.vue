@@ -101,6 +101,11 @@ export default {
         iconRightClickable: Boolean,
         iconRightType: String
     },
+    emits: [
+        'icon-click',
+        'icon-right-click',
+        'update:modelValue'
+    ],
     data() {
         return {
             newValue: this.modelValue,

@@ -30,6 +30,7 @@ export default {
             }
         }
     },
+    emits: ['blur', 'focus'],
     data() {
         return {
             isValid: true,
