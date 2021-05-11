@@ -79,7 +79,7 @@
                         value: this.name
                     },
                     confirmText: 'Add',
-                    onConfirm: (value) => {
+                    confirmCallback: (value) => {
                         this.data.push(value)
                         this.$refs.autocomplete.setSelected(value)
                     }
