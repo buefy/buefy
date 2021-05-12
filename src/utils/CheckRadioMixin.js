@@ -28,6 +28,11 @@ export default {
             // To remove it, `null` or `undefined` has to be given.
             // Setting `false` ends up with a grayed out component.
             return this.disabled || undefined
+        },
+        requiredOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `null` or `undefined` has to be given to remove it.
+            return this.required || undefined
         }
     },
     watch: {

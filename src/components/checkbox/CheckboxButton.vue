@@ -7,21 +7,23 @@
                 'is-disabled': disabled,
                 'is-focused': isFocused
             }]"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             @click="focus"
-            @keydown.prevent.enter="$refs.label.click()">
-            <slot/>
+            @keydown.prevent.enter="$refs.label.click()"
+        >
+            <slot />
             <input
                 v-model="computedValue"
                 type="checkbox"
                 ref="input"
                 @click.stop
-                :disabled="disabled"
-                :required="required"
+                :disabled="disabledOrUndefined"
+                :required="requiredOrUndefined"
                 :name="name"
                 :value="nativeValue"
                 @focus="isFocused = true"
-                @blur="isFocused = false">
+                @blur="isFocused = false"
+            >
         </label>
     </div>
 </template>
