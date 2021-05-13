@@ -1,11 +1,11 @@
 {
   "name": "buefy",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
-    "Walter Tommasi <tommsi20@gmail.com>"
+    "Marko Vejnovic <marko.vejnovic@hotmail.com>"
   ],
   "license": "MIT",
   "main": "dist/cjs/index.js",
@@ -23,10 +23,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/buefy/buefy.git"
+    "url": "https://github.com/markovejnovic/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/buefy/buefy/issues"
+    "url": "https://github.com/markovejnovic/buefy/issues"
   },
   "vetur": {
     "tags": "dist/vetur/tags.json",
