@@ -20,7 +20,7 @@ const findFocusable = (element, programmatic = false) => {
 
 let onKeyDown
 
-const bind = (el, { value = true }) => {
+const beforeMount = (el, { value = true }) => {
     if (value) {
         let focusable = findFocusable(el)
         let focusableProg = findFocusable(el, true)
@@ -47,13 +47,13 @@ const bind = (el, { value = true }) => {
     }
 }
 
-const unbind = (el) => {
+const unmounted = (el) => {
     el.removeEventListener('keydown', onKeyDown)
 }
 
 const directive = {
-    bind,
-    unbind
+    beforeMount,
+    unmounted
 }
 
 export default directive

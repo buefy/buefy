@@ -4,8 +4,11 @@
             <div
                 v-show="active && (isActive || always)"
                 ref="content"
-                :class="['tooltip-content', contentClass]">
-                <template v-if="label">{{ label }}</template>
+                :class="['tooltip-content', contentClass]"
+            >
+                <template v-if="label">
+                    {{ label }}
+                </template>
                 <template v-else-if="$slots.content">
                     <slot name="content" />
                 </template>
@@ -20,7 +23,8 @@
             @mouseenter="onHover"
             @focus.capture="onFocus"
             @blur.capture="close"
-            @mouseleave="close">
+            @mouseleave="close"
+        >
             <slot ref="slot" />
         </div>
     </div>
@@ -135,7 +139,7 @@ export default {
                 }
                 this.rootClasses.forEach((item) => {
                     if (typeof item === 'object') {
-                        for (let key in item) {
+                        for (const key in item) {
                             if (item[key]) {
                                 tooltipEl.classList.add(key)
                             }
@@ -155,20 +159,20 @@ export default {
                 switch (this.position) {
                     case 'is-top':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
-                        tooltipEl.style.height = `0px`
+                        tooltipEl.style.height = '0px'
                         top -= trigger.clientHeight - quaterHeight
                         break
                     case 'is-bottom':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
-                        tooltipEl.style.height = `0px`
+                        tooltipEl.style.height = '0px'
                         top += quaterHeight
                         break
                     case 'is-left':
-                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.width = '0px'
                         tooltipEl.style.height = `${trigger.clientHeight}px`
                         break
                     case 'is-right':
-                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.width = '0px'
                         tooltipEl.style.height = `${trigger.clientHeight}px`
                         left += trigger.clientWidth
                         break
@@ -178,7 +182,7 @@ export default {
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
-                wrapper.style.width = `0px`
+                wrapper.style.width = '0px'
                 wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
                 this.triggerStyle = {
                     zIndex: this.isActive || this.always ? '100' : undefined
@@ -286,7 +290,7 @@ export default {
             document.addEventListener('keyup', this.keyPress)
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
