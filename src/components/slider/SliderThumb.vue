@@ -2,12 +2,14 @@
     <div
         class="b-slider-thumb-wrapper"
         :class="{ 'is-dragging': dragging, 'has-indicator': indicator}"
-        :style="wrapperStyle">
+        :style="wrapperStyle"
+    >
         <b-tooltip
             :label="formattedValue"
             :type="type"
             :always="dragging || isFocused || tooltipAlways"
-            :active="!disabled && tooltip">
+            :active="!disabled && tooltip"
+        >
             <div
                 class="b-slider-thumb"
                 :tabindex="disabled ? false : 0"
@@ -21,7 +23,8 @@
                 @keydown.down.prevent="onLeftKeyDown"
                 @keydown.up.prevent="onRightKeyDown"
                 @keydown.home.prevent="onHomeKeyDown"
-                @keydown.end.prevent="onEndKeyDown">
+                @keydown.end.prevent="onEndKeyDown"
+            >
                 <span v-if="indicator">{{ formattedValue }}</span>
             </div>
         </b-tooltip>
@@ -39,7 +42,7 @@ export default {
     },
     inheritAttrs: false,
     props: {
-        value: {
+        modelValue: {
             type: Number,
             default: 0
         },
@@ -84,7 +87,7 @@ export default {
             startX: 0,
             startPosition: 0,
             newPosition: null,
-            oldValue: this.value
+            oldValue: this.modelValue
         }
     },
     computed: {
@@ -104,14 +107,14 @@ export default {
             return this.$parent.precision
         },
         currentPosition() {
-            return `${(this.value - this.min) / (this.max - this.min) * 100}%`
+            return `${(this.modelValue - this.min) / (this.max - this.min) * 100}%`
         },
         wrapperStyle() {
             return { left: this.currentPosition }
         },
         formattedValue() {
             if (typeof this.customFormatter !== 'undefined') {
-                return this.customFormatter(this.value)
+                return this.customFormatter(this.modelValue)
             }
 
             if (this.format === 'percent') {
@@ -120,10 +123,10 @@ export default {
                     {
                         style: 'percent'
                     }
-                ).format(((this.value - this.min)) / (this.max - this.min))
+                ).format(((this.modelValue - this.min)) / (this.max - this.min))
             }
 
-            return new Intl.NumberFormat(this.locale).format(this.value)
+            return new Intl.NumberFormat(this.locale).format(this.modelValue)
         }
     },
     methods: {
@@ -146,27 +149,27 @@ export default {
             }
         },
         onLeftKeyDown() {
-            if (this.disabled || this.value === this.min) return
+            if (this.disabled || this.modelValue === this.min) return
             this.newPosition = parseFloat(this.currentPosition) -
                 this.step / (this.max - this.min) * 100
             this.setPosition(this.newPosition)
             this.$parent.emitValue('change')
         },
         onRightKeyDown() {
-            if (this.disabled || this.value === this.max) return
+            if (this.disabled || this.modelValue === this.max) return
             this.newPosition = parseFloat(this.currentPosition) +
                 this.step / (this.max - this.min) * 100
             this.setPosition(this.newPosition)
             this.$parent.emitValue('change')
         },
         onHomeKeyDown() {
-            if (this.disabled || this.value === this.min) return
+            if (this.disabled || this.modelValue === this.min) return
             this.newPosition = 0
             this.setPosition(this.newPosition)
             this.$parent.emitValue('change')
         },
         onEndKeyDown() {
-            if (this.disabled || this.value === this.max) return
+            if (this.disabled || this.modelValue === this.max) return
             this.newPosition = 100
             this.setPosition(this.newPosition)
             this.$parent.emitValue('change')
@@ -194,7 +197,7 @@ export default {
         onDragEnd() {
             this.dragging = false
             this.$emit('dragend')
-            if (this.value !== this.oldValue) {
+            if (this.modelValue !== this.oldValue) {
                 this.$parent.emitValue('change')
             }
             this.setPosition(this.newPosition)
@@ -217,7 +220,7 @@ export default {
             const steps = Math.round(percent / stepLength)
             let value = steps * stepLength / 100 * (this.max - this.min) + this.min
             value = parseFloat(value.toFixed(this.precision))
-            this.$emit('input', value)
+            this.$emit('update:modelValue', value)
             if (!this.dragging && value !== this.oldValue) {
                 this.oldValue = value
             }

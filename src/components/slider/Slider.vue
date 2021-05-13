@@ -2,20 +2,24 @@
     <div
         class="b-slider"
         @click="onSliderClick"
-        :class="[size, type, rootClasses ]">
+        :class="[size, type, rootClasses ]"
+    >
         <div
             class="b-slider-track"
-            ref="slider">
+            ref="slider"
+        >
             <div
                 class="b-slider-fill"
-                :style="barStyle"/>
+                :style="barStyle"
+            />
             <template v-if="ticks">
                 <b-slider-tick
                     v-for="(val, key) in tickValues"
                     :key="key"
-                    :value="val"/>
+                    :value="val"
+                />
             </template>
-            <slot/>
+            <slot />
             <b-slider-thumb
                 :tooltip-always="tooltipAlways"
                 v-model="value1"
@@ -34,7 +38,8 @@
                 :aria-label="Array.isArray(ariaLabel) ? ariaLabel[0] : ariaLabel"
                 :aria-disabled="disabled"
                 @dragstart="onDragStart"
-                @dragend="onDragEnd" />
+                @dragend="onDragEnd"
+            />
             <b-slider-thumb
                 :tooltip-always="tooltipAlways"
                 v-model="value2"
@@ -54,7 +59,8 @@
                 :aria-label="Array.isArray(ariaLabel) ? ariaLabel[1] : ''"
                 :aria-disabled="disabled"
                 @dragstart="onDragStart"
-                @dragend="onDragEnd" />
+                @dragend="onDragEnd"
+            />
         </div>
     </div>
 </template>
@@ -63,7 +69,7 @@
 import SliderThumb from './SliderThumb'
 import SliderTick from './SliderTick'
 import config from '../../utils/config'
-import {bound} from '../../utils/helpers'
+import { bound } from '../../utils/helpers'
 
 export default {
     name: 'BSlider',
@@ -72,7 +78,7 @@ export default {
         [SliderTick.name]: SliderTick
     },
     props: {
-        value: {
+        modelValue: {
             type: [Number, Array],
             default: 0
         },
@@ -184,7 +190,7 @@ export default {
         },
         precision() {
             const precisions = [this.min, this.max, this.step].map((item) => {
-                let decimal = ('' + item).split('.')[1]
+                const decimal = ('' + item).split('.')[1]
                 return decimal ? decimal.length : 0
             })
             return Math.max(...precisions)
@@ -208,7 +214,7 @@ export default {
         /**
         * When v-model is changed set the new active step.
         */
-        value(value) {
+        modelValue(value) {
             this.setValues(value)
         },
         value1() {
@@ -218,10 +224,10 @@ export default {
             this.onInternalValueUpdate()
         },
         min() {
-            this.setValues(this.value)
+            this.setValues(this.modelValue)
         },
         max() {
-            this.setValues(this.value)
+            this.setValues(this.modelValue)
         }
     },
     methods: {
@@ -252,7 +258,7 @@ export default {
                 this.isThumbReversed = this.value1 > this.value2
             }
             if (!this.lazy || !this.dragging) {
-                this.emitValue('input')
+                this.emitValue('update:modelValue')
             }
             if (this.dragging) {
                 this.emitValue('dragging')
@@ -274,10 +280,10 @@ export default {
                 const diffSecond = Math.abs(targetValue - this.value2)
                 if (diffFirst <= diffSecond) {
                     if (diffFirst < this.step / 2) return
-                    this.$refs['button1'].setPosition(percent)
+                    this.$refs.button1.setPosition(percent)
                 } else {
                     if (diffSecond < this.step / 2) return
-                    this.$refs['button2'].setPosition(percent)
+                    this.$refs.button2.setPosition(percent)
                 }
             }
             this.emitValue('change')
@@ -295,7 +301,7 @@ export default {
             this.dragging = false
             this.$emit('dragend')
             if (this.lazy) {
-                this.emitValue('input')
+                this.emitValue('update:modelValue')
             }
         },
         emitValue(type) {
@@ -307,7 +313,7 @@ export default {
     created() {
         this.isThumbReversed = false
         this.isTrackClickDisabled = false
-        this.setValues(this.value)
+        this.setValues(this.modelValue)
     }
 }
 </script>

@@ -14,8 +14,9 @@
             @contextmenu.prevent="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
-            aria-haspopup="true">
-            <slot name="trigger" :active="isActive"/>
+            aria-haspopup="true"
+        >
+            <slot name="trigger" :active="isActive" />
         </div>
 
         <transition :name="animation">
@@ -33,13 +34,15 @@
                 class="dropdown-menu"
                 :style="style"
                 :aria-hidden="!isActive"
-                v-trap-focus="trapFocus">
+                v-trap-focus="trapFocus"
+            >
                 <div
                     class="dropdown-content"
                     :role="ariaRole"
                     :aria-modal="!inline"
-                    :style="contentStyle">
-                    <slot/>
+                    :style="contentStyle"
+                >
+                    <slot />
                 </div>
             </div>
         </transition>
@@ -61,7 +64,7 @@ export default {
     },
     mixins: [ProviderParentMixin('dropdown')],
     props: {
-        value: {
+        modelValue: {
             type: [String, Number, Boolean, Object, Array, Function],
             default: null
         },
@@ -129,7 +132,7 @@ export default {
     },
     data() {
         return {
-            selected: this.value,
+            selected: this.modelValue,
             style: {},
             isActive: false,
             isHoverable: false,
@@ -171,7 +174,7 @@ export default {
         /**
         * When v-model is changed set the new selected item.
         */
-        value(value) {
+        modelValue(value) {
             this.selected = value
         },
 
@@ -233,7 +236,7 @@ export default {
                     this.$emit('change', this.selected)
                 }
             }
-            this.$emit('input', this.selected)
+            this.$emit('update:modelValue', this.selected)
             if (!this.multiple) {
                 this.isActive = !this.closeOnClick
                 if (this.hoverable && this.closeOnClick) {
@@ -337,13 +340,15 @@ export default {
                 dropdownWrapper.classList.forEach((item) => dropdownWrapper.classList.remove(item))
                 dropdownWrapper.classList.add('dropdown')
                 dropdownWrapper.classList.add('dropdown-menu-animation')
+                // TODO: the following test never becomes true on Vue 3.
+                //       I have no idea about the intention of it.
                 if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
                     dropdownWrapper.classList.add(this.$vnode.data.staticClass)
                 }
                 this.rootClasses.forEach((item) => {
                     // skip position prop
                     if (item && typeof item === 'object') {
-                        for (let key in item) {
+                        for (const key in item) {
                             if (item[key]) {
                                 dropdownWrapper.classList.add(key)
                             }
@@ -391,7 +396,7 @@ export default {
             document.addEventListener('keyup', this.keyPress)
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
