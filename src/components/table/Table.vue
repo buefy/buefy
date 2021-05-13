@@ -59,6 +59,7 @@
                             v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
@@ -140,6 +141,7 @@
                             v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
@@ -248,6 +250,7 @@
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
@@ -278,6 +281,7 @@
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
