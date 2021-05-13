@@ -1,5 +1,5 @@
 {
-  "name": "buefy",
+  "name": "@markovejnovic/buefy",
   "version": "0.9.8",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js based on Bulma",
