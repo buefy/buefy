@@ -233,7 +233,7 @@ export default {
             whiteList.push(this.$refs.input.$el.querySelector('input'))
             whiteList.push(this.$refs.dropdown)
             // Add all children from dropdown
-            if (this.$refs.dropdown !== undefined) {
+            if (this.$refs.dropdown != null) {
                 const children = this.$refs.dropdown.querySelectorAll('*')
                 for (const child of children) {
                     whiteList.push(child)
@@ -554,7 +554,7 @@ export default {
                  * this.$refs.dropdown may be undefined
                  * when Autocomplete is conditional rendered
                  */
-                if (this.$refs.dropdown === undefined) return
+                if (this.$refs.dropdown == null) return
 
                 const rect = this.$refs.dropdown.getBoundingClientRect()
 
