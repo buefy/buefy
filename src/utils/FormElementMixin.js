@@ -118,7 +118,7 @@ export default {
 
         getElement() {
             let el = this.$refs[this.$data._elementRef]
-            while ('$refs' in el) {
+            while (el != null && '$refs' in el) {
                 el = el.$refs[el.$data._elementRef]
             }
             return el
@@ -154,7 +154,7 @@ export default {
             if (!this.useHtml5Validation) return
 
             const el = this.getElement()
-            if (el === undefined) return
+            if (el == null) return
 
             if (!el.checkValidity()) {
                 this.setInvalid()
