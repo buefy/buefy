@@ -750,7 +750,7 @@ export default [
                 default: '-'
             },
             {
-                name: '<code>header-selectable</code>',
+                name: '<code>header-sortable</code>',
                 description: 'Whether the header text is selectable, works when column is <code>sortable</code>',
                 type: 'Boolean',
                 values: '—',
