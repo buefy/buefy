@@ -3,20 +3,22 @@
         class="b-radio radio"
         ref="label"
         :class="[size, { 'is-disabled': disabled }]"
-        :disabled="disabled"
+        :disabled="disabledOrUndefined"
         @click="focus"
-        @keydown.prevent.enter="$refs.label.click()">
+        @keydown.prevent.enter="$refs.label.click()"
+    >
         <input
             v-model="computedValue"
             type="radio"
             ref="input"
             @click.stop
-            :disabled="disabled"
-            :required="required"
+            :disabled="disabledOrUndefined"
+            :required="requiredOrUndefined"
             :name="name"
-            :value="nativeValue">
+            :value="nativeValue"
+        >
         <span class="check" :class="type" />
-        <span class="control-label"><slot/></span>
+        <span class="control-label"><slot /></span>
     </label>
 </template>
 
