@@ -3,8 +3,9 @@
         <div
             class="taginput-container"
             :class="[statusType, size, containerClasses]"
-            :disabled="disabled"
-            @click="hasInput && focus($event)">
+            :disabled="disabledOrUndefined"
+            @click="hasInput && focus($event)"
+        >
             <slot name="selected" :tags="tags">
                 <b-tag
                     v-for="(tag, index) in tags"
@@ -15,12 +16,13 @@
                     :rounded="rounded"
                     :attached="attached"
                     :tabstop="false"
-                    :disabled="disabled"
+                    :disabled="disabledOrUndefined"
                     :ellipsis="ellipsis"
                     :closable="closable"
                     :aria-close-label="ariaCloseLabel"
                     :title="ellipsis && getNormalizedTagText(tag)"
-                    @close="removeTag(index, $event)">
+                    @close="removeTag(index, $event)"
+                >
                     <slot name="tag" :tag="tag">
                         {{ getNormalizedTagText(tag) }}
                     </slot>
@@ -39,7 +41,7 @@
                 :maxlength="maxlength"
                 :has-counter="false"
                 :size="size"
-                :disabled="disabled"
+                :disabled="disabledOrUndefined"
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
@@ -54,32 +56,37 @@
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
-                @keydown.native="keydown"
-                @compositionstart.native="isComposing = true"
-                @compositionend.native="isComposing = false"
+                @keydown="keydown"
+                @compositionstart="isComposing = true"
+                @compositionend="isComposing = false"
                 @select="onSelect"
                 @infinite-scroll="emitInfiniteScroll"
-                v-on="listeners">
+            >
                 <template
                     v-if="hasHeaderSlot"
-                    #header>
+                    #header
+                >
                     <slot name="header" />
                 </template>
                 <template
                     v-if="hasDefaultSlot"
-                    #default="props">
+                    #default="props"
+                >
                     <slot
                         :option="props.option"
-                        :index="props.index" />
+                        :index="props.index"
+                    />
                 </template>
                 <template
                     v-if="hasEmptySlot"
-                    #empty>
+                    #empty
+                >
                     <slot name="empty" />
                 </template>
                 <template
                     v-if="hasFooterSlot"
-                    #footer>
+                    #footer
+                >
                     <slot name="footer" />
                 </template>
             </b-autocomplete>
@@ -112,7 +119,7 @@ export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
-        value: {
+        modelValue: {
             type: Array,
             default: () => []
         },
@@ -190,9 +197,18 @@ export default {
         },
         appendToBody: Boolean
     },
+    emits: [
+        'add',
+        'infinite-scroll',
+        'remove',
+        'typing',
+        'update:modelValue'
+    ],
     data() {
         return {
-            tags: Array.isArray(this.value) ? this.value.slice(0) : (this.value || []),
+            tags: Array.isArray(this.modelValue)
+                ? this.modelValue.slice(0)
+                : (this.modelValue || []),
             newTag: '',
             isComposing: false,
             _elementRef: 'autocomplete',
@@ -200,11 +216,6 @@ export default {
         }
     },
     computed: {
-        listeners() {
-            const { input, ...listeners } = this.$listeners
-            return listeners
-        },
-
         rootClasses() {
             return {
                 'is-expanded': this.expanded
@@ -223,7 +234,7 @@ export default {
         },
 
         hasDefaultSlot() {
-            return !!this.$scopedSlots.default
+            return !!this.$slots.default
         },
 
         hasEmptySlot() {
@@ -256,16 +267,24 @@ export default {
         separatorsAsRegExp() {
             const sep = this.onPasteSeparators
 
-            return sep.length ? new RegExp(sep.map((s) => {
-                return s ? s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') : null
-            }).join('|'), 'g') : null
+            return sep.length
+                ? new RegExp(sep.map((s) => {
+                    return s ? s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') : null
+                }).join('|'), 'g')
+                : null
+        },
+
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it.
+            // `null` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
         }
     },
     watch: {
         /**
          * When v-model is changed set internal value.
          */
-        value(value) {
+        modelValue(value) {
             this.tags = Array.isArray(value) ? value.slice(0) : (value || [])
         },
 
@@ -296,7 +315,7 @@ export default {
                         this.tags = [] // replace existing tag if only 1 is allowed
                     }
                     this.tags.push(this.createTag(tagToAdd))
-                    this.$emit('input', this.tags)
+                    this.$emit('update:modelValue', this.tags)
                     this.$emit('add', tagToAdd)
                 }
 
@@ -334,7 +353,7 @@ export default {
 
         removeTag(index, event) {
             const tag = this.tags.splice(index, 1)[0]
-            this.$emit('input', this.tags)
+            this.$emit('update:modelValue', this.tags)
             this.$emit('remove', tag)
             if (event) event.stopPropagation()
             if (this.openOnFocus && this.$refs.autocomplete) {
