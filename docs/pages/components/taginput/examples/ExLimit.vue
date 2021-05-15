@@ -3,14 +3,14 @@
         <b-field label="Limited to 10 characters">
             <b-taginput
                 maxlength="10"
-                :value="['Bulma', 'Vue', 'Buefy']">
+                :modelValue="['Bulma', 'Vue', 'Buefy']">
             </b-taginput>
         </b-field>
 
         <b-field label="Limited to 5 tags">
             <b-taginput
                 maxtags="5"
-                :value="['One', 'Two', 'Three', 'Four']">
+                :modelValue="['One', 'Two', 'Three', 'Four']">
             </b-taginput>
         </b-field>
 
@@ -18,7 +18,7 @@
             <b-taginput
                 maxlength="10"
                 maxtags="5"
-                :value="['Red', 'Green', 'Blue', 'White']">
+                :modelValue="['Red', 'Green', 'Blue', 'White']">
             </b-taginput>
         </b-field>
     </section>
