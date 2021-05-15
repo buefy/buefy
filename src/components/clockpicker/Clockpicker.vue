@@ -4,17 +4,17 @@
             v-if="!isMobile || inline"
             ref="dropdown"
             :position="position"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :inline="inline"
             :mobile-modal="mobileModal"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
-            @active-change="onActiveChange">
+            @active-change="onActiveChange"
+        >
             <template #trigger v-if="!inline">
                 <slot name="trigger">
                     <b-input
                         ref="input"
-                        slot="trigger"
                         autocomplete="off"
                         :value="formatValue(computedValue)"
                         :placeholder="placeholder"
@@ -22,34 +22,38 @@
                         :icon="icon"
                         :icon-pack="iconPack"
                         :loading="loading"
-                        :disabled="disabled"
+                        :disabled="disabledOrUndefined"
                         :readonly="!editable"
                         :rounded="rounded"
                         v-bind="$attrs"
                         :use-html5-validation="useHtml5Validation"
-                        @click.native="onInputClick"
-                        @keyup.native.enter="toggle(true)"
-                        @change.native="onChange($event.target.value)"
+                        @click="onInputClick"
+                        @keyup.enter="toggle(true)"
+                        @change="onChange($event.target.value)"
                         @focus="handleOnFocus"
-                        @blur="checkHtml5Validity()"/>
+                        @blur="checkHtml5Validity()"
+                    />
                 </slot>
             </template>
             <div
                 class="card"
-                :disabled="disabled"
-                custom>
+                :disabled="disabledOrUndefined"
+                custom
+            >
                 <header v-if="inline" class="card-header">
                     <div class="b-clockpicker-header card-header-title">
                         <div class="b-clockpicker-time">
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
-                                @click="isSelectingHour = true">{{ hoursDisplay }}</span>
+                                @click="isSelectingHour = true"
+                            >{{ hoursDisplay }}</span>
                             <span>{{ hourLiteral }}</span>
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
-                                @click="isSelectingHour = false">{{ minutesDisplay }}</span>
+                                @click="isSelectingHour = false"
+                            >{{ minutesDisplay }}</span>
                         </div>
                         <div v-if="!isHourFormat24" class="b-clockpicker-period">
                             <div
@@ -57,29 +61,40 @@
                                 :class="{
                                     active: meridienSelected === amString || meridienSelected === AM
                                 }"
-                                @click="onMeridienClick(amString)">{{ amString }}</div>
+                                @click="onMeridienClick(amString)"
+                            >
+                                {{ amString }}
+                            </div>
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{
                                     active: meridienSelected === pmString || meridienSelected === PM
                                 }"
-                                @click="onMeridienClick(pmString)">{{ pmString }}</div>
+                                @click="onMeridienClick(pmString)"
+                            >
+                                {{ pmString }}
+                            </div>
                         </div>
                     </div>
                 </header>
                 <div class="card-content">
                     <div
                         class="b-clockpicker-body"
-                        :style="{ width: faceSize + 'px', height: faceSize + 'px' }">
+                        :style="{ width: faceSize + 'px', height: faceSize + 'px' }"
+                    >
                         <div v-if="!inline" class="b-clockpicker-time">
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{ active: isSelectingHour }"
-                                @click="isSelectingHour = true">{{ hoursLabel }}</div>
+                                @click="isSelectingHour = true"
+                            >
+                                {{ hoursLabel }}
+                            </div>
                             <span
                                 class="b-clockpicker-btn"
                                 :class="{ active: !isSelectingHour }"
-                                @click="isSelectingHour = false">{{ minutesLabel }}</span>
+                                @click="isSelectingHour = false"
+                            >{{ minutesLabel }}</span>
                         </div>
                         <div v-if="!isHourFormat24 && !inline" class="b-clockpicker-period">
                             <div
@@ -87,13 +102,19 @@
                                 :class="{
                                     active: meridienSelected === amString || meridienSelected === AM
                                 }"
-                                @click="onMeridienClick(amString)">{{ amString }}</div>
+                                @click="onMeridienClick(amString)"
+                            >
+                                {{ amString }}
+                            </div>
                             <div
                                 class="b-clockpicker-btn"
                                 :class="{
                                     active: meridienSelected === pmString || meridienSelected === PM
                                 }"
-                                @click="onMeridienClick(pmString)">{{ pmString }}</div>
+                                @click="onMeridienClick(pmString)"
+                            >
+                                {{ pmString }}
+                            </div>
                         </div>
                         <b-clockpicker-face
                             :picker-size="faceSize"
@@ -104,13 +125,15 @@
                             :double="isSelectingHour && isHourFormat24"
                             :value="isSelectingHour ? hoursSelected : minutesSelected"
                             @input="onClockInput"
-                            @change="onClockChange" />
+                            @change="onClockChange"
+                        />
                     </div>
                 </div>
                 <footer
-                    v-if="$slots.default !== undefined && $slots.default.length"
-                    class="b-clockpicker-footer card-footer">
-                    <slot/>
+                    v-if="$slots.default !== undefined && $slots.default().length"
+                    class="b-clockpicker-footer card-footer"
+                >
+                    <slot />
                 </footer>
             </div>
         </b-dropdown>
@@ -127,15 +150,16 @@
             :loading="loading"
             :max="formatHHMMSS(maxTime)"
             :min="formatHHMMSS(minTime)"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :readonly="false"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
-            @click.native.stop="toggle(true)"
-            @keyup.native.enter="toggle(true)"
-            @change.native="onChangeNativePicker"
+            @click.stop="toggle(true)"
+            @keyup.enter="toggle(true)"
+            @change="onChangeNativePicker"
             @focus="handleOnFocus"
-            @blur="onBlur() && checkHtml5Validity()"/>
+            @blur="onBlur() && checkHtml5Validity()"
+        />
     </div>
 </template>
 
@@ -215,7 +239,9 @@ export default {
         minFaceValue() {
             return this.isSelectingHour &&
                 !this.isHourFormat24 &&
-                this.meridienSelected === this.pmString ? 12 : 0
+                this.meridienSelected === this.pmString
+                ? 12
+                : 0
         },
         maxFaceValue() {
             return this.isSelectingHour

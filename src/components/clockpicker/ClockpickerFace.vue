@@ -6,19 +6,23 @@
         @mousemove="onDragMove"
         @touchstart="onMouseDown"
         @touchend="onMouseUp"
-        @touchmove="onDragMove">
+        @touchmove="onDragMove"
+    >
         <div
             class="b-clockpicker-face-outer-ring"
-            ref="clock">
+            ref="clock"
+        >
             <div
                 class="b-clockpicker-face-hand"
-                :style="handStyle" />
+                :style="handStyle"
+            />
             <span
                 v-for="(num, index) of faceNumbers"
                 :key="index"
                 class="b-clockpicker-face-number"
                 :class="getFaceNumberClasses(num)"
-                :style="{ transform: getNumberTranslate(num.value) }">
+                :style="{ transform: getNumberTranslate(num.value) }"
+            >
                 <span>{{ num.label }}</span>
             </span>
         </div>
@@ -103,9 +107,9 @@ export default {
         handRotateAngle() {
             let currentAngle = this.prevAngle
             while (currentAngle < 0) currentAngle += 360
-            let targetAngle = this.calcHandAngle(this.displayedValue)
-            let degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle)
-            let angle = this.prevAngle + degreesDiff
+            const targetAngle = this.calcHandAngle(this.displayedValue)
+            const degreesDiff = this.shortestDistanceDegrees(currentAngle, targetAngle)
+            const angle = this.prevAngle + degreesDiff
             return angle
         },
         /**
@@ -151,7 +155,7 @@ export default {
         },
         shortestDistanceDegrees(start, stop) {
             const modDiff = (stop - start) % 360
-            let shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180)
+            const shortestDistance = 180 - Math.abs(Math.abs(modDiff) - 180)
             return (modDiff + 360) % 360 < 180 ? shortestDistance * 1 : shortestDistance * -1
         },
         /**
@@ -185,8 +189,8 @@ export default {
         },
         getFaceNumberClasses(num) {
             return {
-                'active': num.value === this.displayedValue,
-                'disabled': this.isDisabled(num.value)
+                active: num.value === this.displayedValue,
+                disabled: this.isDisabled(num.value)
             }
         },
         /**
