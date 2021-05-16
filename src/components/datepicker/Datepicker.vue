@@ -7,20 +7,21 @@
             v-if="!isMobile || inline"
             ref="dropdown"
             :position="position"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :inline="inline"
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
-            @active-change="onActiveChange">
+            @active-change="onActiveChange"
+        >
             <template #trigger v-if="!inline">
                 <slot name="trigger">
                     <b-input
                         ref="input"
                         autocomplete="off"
-                        :value="formattedValue"
+                        :model-value="formattedValue"
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
@@ -29,89 +30,100 @@
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
-                        :disabled="disabled"
+                        :disabled="disabledOrUndefined"
                         :readonly="!editable"
                         v-bind="$attrs"
                         :use-html5-validation="false"
-                        @click.native="onInputClick"
+                        @click="onInputClick"
                         @icon-right-click="$emit('icon-right-click', $event)"
-                        @keyup.native.enter="togglePicker(true)"
-                        @change.native="onChange($event.target.value)"
-                        @focus="handleOnFocus" />
+                        @keyup.enter="togglePicker(true)"
+                        @change="onChange($event.target.value)"
+                        @focus="handleOnFocus"
+                    />
                 </slot>
             </template>
 
             <b-dropdown-item
-                :disabled="disabled"
+                :disabled="disabledOrUndefined"
                 :focusable="focusable"
                 custom
-                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}">
+                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}"
+            >
                 <div>
                     <header class="datepicker-header">
-                        <template v-if="$slots.header !== undefined && $slots.header.length">
+                        <template v-if="$slots.header !== undefined && $slots.header().length">
                             <slot name="header" />
                         </template>
                         <div
                             v-else
                             class="pagination field is-centered"
-                            :class="size">
+                            :class="size"
+                        >
                             <a
                                 v-show="!showPrev && !disabled"
                                 class="pagination-previous"
                                 role="button"
                                 href="#"
-                                :disabled="disabled"
+                                :disabled="disabledOrUndefined"
                                 :aria-label="ariaPreviousLabel"
                                 @click.prevent="prev"
                                 @keydown.enter.prevent="prev"
-                                @keydown.space.prevent="prev">
+                                @keydown.space.prevent="prev"
+                            >
 
                                 <b-icon
                                     :icon="iconPrev"
                                     :pack="iconPack"
                                     both
-                                    type="is-primary is-clickable"/>
+                                    type="is-primary is-clickable"
+                                />
                             </a>
                             <a
                                 v-show="!showNext && !disabled"
                                 class="pagination-next"
                                 role="button"
                                 href="#"
-                                :disabled="disabled"
+                                :disabled="disabledOrUndefined"
                                 :aria-label="ariaNextLabel"
                                 @click.prevent="next"
                                 @keydown.enter.prevent="next"
-                                @keydown.space.prevent="next">
+                                @keydown.space.prevent="next"
+                            >
 
                                 <b-icon
                                     :icon="iconNext"
                                     :pack="iconPack"
                                     both
-                                    type="is-primary is-clickable"/>
+                                    type="is-primary is-clickable"
+                                />
                             </a>
                             <div class="pagination-list">
                                 <b-field>
                                     <b-select
                                         v-if="!isTypeMonth"
                                         v-model="focusedDateData.month"
-                                        :disabled="disabled"
-                                        :size="size">
+                                        :disabled="disabledOrUndefined"
+                                        :size="size"
+                                    >
                                         <option
                                             v-for="month in listOfMonths"
                                             :value="month.index"
                                             :key="month.name"
-                                            :disabled="month.disabled">
+                                            :disabled="month.disabled || undefined"
+                                        >
                                             {{ month.name }}
                                         </option>
                                     </b-select>
                                     <b-select
                                         v-model="focusedDateData.year"
-                                        :disabled="disabled"
-                                        :size="size">
+                                        :disabled="disabledOrUndefined"
+                                        :size="size"
+                                    >
                                         <option
                                             v-for="year in listOfYears"
                                             :value="year"
-                                            :key="year">
+                                            :key="year"
+                                        >
                                             {{ year }}
                                         </option>
                                     </b-select>
@@ -122,7 +134,8 @@
                     <div
                         v-if="!isTypeMonth"
                         class="datepicker-content"
-                        :class="{'content-horizonal-timepicker': horizontalTimePicker}">
+                        :class="{'content-horizonal-timepicker': horizontalTimePicker}"
+                    >
                         <b-datepicker-table
                             v-model="computedValue"
                             :day-names="newDayNames"
@@ -132,7 +145,7 @@
                             :min-date="minDate"
                             :max-date="maxDate"
                             :focused="focusedDateData"
-                            :disabled="disabled"
+                            :disabled="disabledOrUndefined"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
                             :selectable-dates="selectableDates"
@@ -149,7 +162,8 @@
                             @range-start="date => $emit('range-start', date)"
                             @range-end="date => $emit('range-end', date)"
                             @close="togglePicker(false)"
-                            @update:focused="focusedDateData = $event" />
+                            @update:focused="focusedDateData = $event"
+                        />
                     </div>
                     <div v-else>
                         <b-datepicker-month
@@ -158,7 +172,7 @@
                             :min-date="minDate"
                             :max-date="maxDate"
                             :focused="focusedDateData"
-                            :disabled="disabled"
+                            :disabled="disabledOrUndefined"
                             :unselectable-dates="unselectableDates"
                             :unselectable-days-of-week="unselectableDaysOfWeek"
                             :selectable-dates="selectableDates"
@@ -171,15 +185,17 @@
                             @range-end="date => $emit('range-end', date)"
                             @close="togglePicker(false)"
                             @change-focus="changeFocus"
-                            @update:focused="focusedDateData = $event" />
+                            @update:focused="focusedDateData = $event"
+                        />
                     </div>
                 </div>
 
                 <footer
-                    v-if="$slots.default !== undefined && $slots.default.length"
+                    v-if="$slots.default !== undefined && $slots.default().length"
                     class="datepicker-footer"
-                    :class="{'footer-horizontal-timepicker': horizontalTimePicker}">
-                    <slot/>
+                    :class="{'footer-horizontal-timepicker': horizontalTimePicker}"
+                >
+                    <slot />
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
@@ -189,7 +205,7 @@
             ref="input"
             :type="!isTypeMonth ? 'date' : 'month'"
             autocomplete="off"
-            :value="formatNative(computedValue)"
+            :model-value="formatNative(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
@@ -198,13 +214,14 @@
             :loading="loading"
             :max="formatNative(maxDate)"
             :min="formatNative(minDate)"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :readonly="false"
             v-bind="$attrs"
             :use-html5-validation="false"
-            @change.native="onChangeNativePicker"
+            @change="onChangeNativePicker"
             @focus="onFocus"
-            @blur="onBlur"/>
+            @blur="onBlur"
+        />
     </div>
 </template>
 
@@ -290,7 +307,7 @@ export default {
         }
     },
     props: {
-        value: {
+        modelValue: {
             type: [Date, Array]
         },
         dayNames: {
@@ -446,16 +463,28 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
+    emits: [
+        'active-change',
+        'change-month',
+        'change-year',
+        'icon-right-click',
+        'range-end',
+        'range-start',
+        'update:modelValue'
+    ],
     data() {
-        const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
-            this.focusedDate || this.dateCreator()
+        const focusedDate = (Array.isArray(this.modelValue)
+            ? this.modelValue[0]
+            : (this.modelValue)) || this.focusedDate || this.dateCreator()
 
-        if (!this.value && this.maxDate && this.maxDate.getFullYear() < focusedDate.getFullYear()) {
+        if (!this.modelValue &&
+            this.maxDate &&
+            this.maxDate.getFullYear() < focusedDate.getFullYear()) {
             focusedDate.setFullYear(this.maxDate.getFullYear())
         }
 
         return {
-            dateSelected: this.value,
+            dateSelected: this.modelValue,
             focusedDateData: {
                 day: focusedDate.getDate(),
                 month: focusedDate.getMonth(),
@@ -473,7 +502,7 @@ export default {
             set(value) {
                 this.updateInternalState(value)
                 if (!this.multiple) this.togglePicker(false)
-                this.$emit('input', value)
+                this.$emit('update:modelValue', value)
                 if (this.useHtml5Validation) {
                     this.$nextTick(() => {
                         this.checkHtml5Validity()
@@ -582,7 +611,15 @@ export default {
         ariaRole() {
             if (!this.inline) {
                 return 'dialog'
+            } else {
+                return undefined
             }
+        },
+
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `null` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
         }
     },
     watch: {
@@ -591,7 +628,7 @@ export default {
          *   1. Update internal value.
          *   2. If it's invalid, validate again.
          */
-        value(value) {
+        modelValue(value) {
             this.updateInternalState(value)
             if (!this.multiple) this.togglePicker(false)
         },
@@ -685,7 +722,8 @@ export default {
 
         formatNative(value) {
             return this.isTypeMonth
-                ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value)
+                ? this.formatYYYYMM(value)
+                : this.formatYYYYMMDD(value)
         },
 
         /*
@@ -833,7 +871,7 @@ export default {
             document.addEventListener('keyup', this.keyPress)
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
         }

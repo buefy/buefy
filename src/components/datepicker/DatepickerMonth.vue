@@ -14,7 +14,7 @@
                         class="datepicker-cell"
                         role="button"
                         href="#"
-                        :disabled="disabled"
+                        :disabled="disabledOrUndefined"
                         @click.prevent="updateSelectedDate(date)"
                         @mouseenter="setRangeHoverEndDate(date)"
                         @keydown.prevent="manageKeydown($event, date)"
@@ -49,7 +49,7 @@ import { isDefined } from '../../utils/helpers'
 export default {
     name: 'BDatepickerMonth',
     props: {
-        value: {
+        modelValue: {
             type: [Date, Array]
         },
         monthNames: Array,
@@ -66,12 +66,13 @@ export default {
         range: Boolean,
         multiple: Boolean
     },
+    emits: ['change-focus', 'range-end', 'range-start', 'update:modelValue'],
     data() {
         return {
             selectedBeginDate: undefined,
             selectedEndDate: undefined,
             hoveredEndDate: undefined,
-            multipleSelectedDates: this.multiple && this.value ? this.value : []
+            multipleSelectedDates: this.multiple && this.modelValue ? this.modelValue : []
         }
     },
     computed: {
@@ -131,6 +132,12 @@ export default {
                 return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined)
             }
             return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined)
+        },
+
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `null` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
         }
     },
     watch: {
@@ -161,7 +168,7 @@ export default {
             } else {
                 this.multipleSelectedDates.push(date)
             }
-            this.$emit('input', this.multipleSelectedDates)
+            this.$emit('update:modelValue', this.multipleSelectedDates)
         },
 
         selectableDate(day) {
@@ -270,21 +277,21 @@ export default {
             }
 
             return {
-                'is-selected': dateMatch(day, this.value, this.multiple) ||
-                               dateWithin(day, this.value, this.multiple) ||
+                'is-selected': dateMatch(day, this.modelValue, this.multiple) ||
+                               dateWithin(day, this.modelValue, this.multiple) ||
                                dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
                 'is-first-selected':
                     dateMatch(
                         day,
-                        Array.isArray(this.value) && this.value[0],
+                        Array.isArray(this.modelValue) && this.modelValue[0],
                         this.multiple
                     ),
                 'is-within-selected':
-                    dateWithin(day, this.value, this.multiple),
+                    dateWithin(day, this.modelValue, this.multiple),
                 'is-last-selected':
                     dateMatch(
                         day,
-                        Array.isArray(this.value) && this.value[1],
+                        Array.isArray(this.modelValue) && this.modelValue[1],
                         this.multiple
                     ),
                 'is-within-hovered-range':
@@ -362,7 +369,7 @@ export default {
 
             if (!this.multiple) {
                 if (this.selectableDate(day)) {
-                    this.$emit('input', day)
+                    this.$emit('update:modelValue', day)
                 }
             } else {
                 this.selectMultipleDates(day)
@@ -388,7 +395,7 @@ export default {
                     this.selectedEndDate = date
                 }
                 this.$emit('range-end', date)
-                this.$emit('input', [this.selectedBeginDate, this.selectedEndDate])
+                this.$emit('update:modelValue', [this.selectedBeginDate, this.selectedEndDate])
             } else {
                 this.selectedBeginDate = date
                 this.$emit('range-start', date)
