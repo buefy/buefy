@@ -4,7 +4,8 @@
             <div
                 v-for="(day, index) in visibleDayNames"
                 :key="index"
-                class="datepicker-cell">
+                class="datepicker-cell"
+            >
                 <span>{{ day }}</span>
             </div>
         </header>
@@ -12,13 +13,13 @@
             <b-datepicker-table-row
                 v-for="(week, index) in weeksInThisMonth"
                 :key="index"
-                :selected-date="value"
+                :selected-date="modelValue"
                 :day="focused.day"
                 :week="week"
                 :month="focused.month"
                 :min-date="minDate"
                 :max-date="maxDate"
-                :disabled="disabled"
+                :disabled="disabledOrUndefined"
                 :unselectable-dates="unselectableDates"
                 :unselectable-days-of-week="unselectableDaysOfWeek"
                 :selectable-dates="selectableDates"
@@ -36,7 +37,8 @@
                 @select="updateSelectedDate"
                 @rangeHoverEndDate="setRangeHoverEndDate"
                 :multiple="multiple"
-                @change-focus="changeFocus"/>
+                @change-focus="changeFocus"
+            />
         </div>
     </section>
 </template>
@@ -51,7 +53,7 @@ export default {
         [DatepickerTableRow.name]: DatepickerTableRow
     },
     props: {
-        value: {
+        modelValue: {
             type: [Date, Array]
         },
         dayNames: Array,
@@ -75,6 +77,7 @@ export default {
         range: Boolean,
         multiple: Boolean
     },
+    emits: ['range-end', 'range-start', 'update:focused', 'update:modelValue'],
     data() {
         return {
             selectedBeginDate: undefined,
@@ -85,10 +88,10 @@ export default {
     computed: {
         multipleSelectedDates: {
             get() {
-                return this.multiple && this.value ? this.value : []
+                return this.multiple && this.modelValue ? this.modelValue : []
             },
             set(value) {
-                this.$emit('input', value)
+                this.$emit('update:modelValue', value)
             }
         },
         visibleDayNames() {
@@ -118,10 +121,10 @@ export default {
             for (let i = 0; i < this.events.length; i++) {
                 let event = this.events[i]
 
-                if (!event.hasOwnProperty('date')) {
+                if (!Object.prototype.hasOwnProperty.call(event, 'date')) {
                     event = { date: event }
                 }
-                if (!event.hasOwnProperty('type')) {
+                if (!Object.prototype.hasOwnProperty.call(event, 'type')) {
                     event.type = 'is-primary'
                 }
                 if (
@@ -164,6 +167,12 @@ export default {
                 return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined)
             }
             return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined)
+        },
+
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `null` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
         }
     },
     methods: {
@@ -172,7 +181,7 @@ export default {
         */
         updateSelectedDate(date) {
             if (!this.range && !this.multiple) {
-                this.$emit('input', date)
+                this.$emit('update:modelValue', date)
             } else if (this.range) {
                 this.handleSelectRangeDate(date)
             } else if (this.multiple) {
@@ -198,7 +207,7 @@ export default {
                     this.selectedEndDate = date
                 }
                 this.$emit('range-end', date)
-                this.$emit('input', [this.selectedBeginDate, this.selectedEndDate])
+                this.$emit('update:modelValue', [this.selectedBeginDate, this.selectedEndDate])
             } else {
                 this.selectedBeginDate = date
                 this.$emit('range-start', date)
