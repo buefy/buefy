@@ -9,7 +9,8 @@
             :mobile-modal="mobileModal"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
-            @active-change="onActiveChange">
+            @active-change="onActiveChange"
+        >
             <template #trigger v-if="!inline">
                 <slot name="trigger">
                     <b-input
@@ -26,41 +27,47 @@
                         :rounded="rounded"
                         v-bind="$attrs"
                         :use-html5-validation="useHtml5Validation"
-                        @keyup.native.enter="toggle(true)"
-                        @change.native="onChange($event.target.value)"
-                        @focus="handleOnFocus"/>
+                        @keyup.enter="toggle(true)"
+                        @change="onChange($event.target.value)"
+                        @focus="handleOnFocus"
+                    />
                 </slot>
             </template>
 
             <b-dropdown-item
                 :disabled="disabled"
                 :focusable="focusable"
-                custom>
+                custom
+            >
                 <b-field grouped position="is-centered">
                     <b-select
                         v-model="hoursSelected"
-                        @change.native="onHoursChange($event.target.value)"
+                        @change="onHoursChange($event.target.value)"
                         :disabled="disabled"
-                        placeholder="00">
+                        placeholder="00"
+                    >
                         <option
                             v-for="hour in hours"
                             :value="hour.value"
                             :key="hour.value"
-                            :disabled="isHourDisabled(hour.value)">
+                            :disabled="isHourDisabled(hour.value)"
+                        >
                             {{ hour.label }}
                         </option>
                     </b-select>
                     <span class="control is-colon">{{ hourLiteral }}</span>
                     <b-select
                         v-model="minutesSelected"
-                        @change.native="onMinutesChange($event.target.value)"
+                        @change="onMinutesChange($event.target.value)"
                         :disabled="disabled"
-                        placeholder="00">
+                        placeholder="00"
+                    >
                         <option
                             v-for="minute in minutes"
                             :value="minute.value"
                             :key="minute.value"
-                            :disabled="isMinuteDisabled(minute.value)">
+                            :disabled="isMinuteDisabled(minute.value)"
+                        >
                             {{ minute.label }}
                         </option>
                     </b-select>
@@ -68,14 +75,16 @@
                         <span class="control is-colon">{{ minuteLiteral }}</span>
                         <b-select
                             v-model="secondsSelected"
-                            @change.native="onSecondsChange($event.target.value)"
+                            @change="onSecondsChange($event.target.value)"
                             :disabled="disabled"
-                            placeholder="00">
+                            placeholder="00"
+                        >
                             <option
                                 v-for="second in seconds"
                                 :value="second.value"
                                 :key="second.value"
-                                :disabled="isSecondDisabled(second.value)">
+                                :disabled="isSecondDisabled(second.value)"
+                            >
                                 {{ second.label }}
                             </option>
                         </b-select>
@@ -83,13 +92,15 @@
                     </template>
                     <b-select
                         v-model="meridienSelected"
-                        @change.native="onMeridienChange($event.target.value)"
+                        @change="onMeridienChange($event.target.value)"
                         v-if="!isHourFormat24"
-                        :disabled="disabled">
+                        :disabled="disabled"
+                    >
                         <option
                             v-for="meridien in meridiens"
                             :value="meridien"
-                            :key="meridien">
+                            :key="meridien"
+                        >
                             {{ meridien }}
                         </option>
                     </b-select>
@@ -97,8 +108,9 @@
 
                 <footer
                     v-if="$slots.default !== undefined && $slots.default.length"
-                    class="timepicker-footer">
-                    <slot/>
+                    class="timepicker-footer"
+                >
+                    <slot />
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
@@ -122,9 +134,10 @@
             :readonly="false"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
-            @change.native="onChange($event.target.value)"
+            @change="onChange($event.target.value)"
             @focus="handleOnFocus"
-            @blur="onBlur() && checkHtml5Validity()"/>
+            @blur="onBlur() && checkHtml5Validity()"
+        />
     </div>
 </template>
 
@@ -156,7 +169,11 @@ export default {
     },
     computed: {
         nativeStep() {
-            if (this.enableSeconds) return '1'
+            if (this.enableSeconds) {
+                return '1'
+            } else {
+                return undefined
+            }
         }
     }
 }

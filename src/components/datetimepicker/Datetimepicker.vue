@@ -26,7 +26,7 @@
         :placeholder="placeholder"
         :horizontal-time-picker="horizontalTimePicker"
         :range="false"
-        :disabled="disabled"
+        :disabled="disabledOrUndefined"
         :mobile-native="isMobileNative"
         :locale="locale"
         :focusable="focusable"
@@ -36,11 +36,13 @@
         @active-change="onActiveChange"
         @icon-right-click="$emit('icon-right-click')"
         @change-month="$emit('change-month', $event)"
-        @change-year="$emit('change-year', $event)">
+        @change-year="$emit('change-year', $event)"
+    >
         <nav class="level is-mobile">
             <div
                 class="level-item has-text-centered"
-                v-if="$slots.left !== undefined">
+                v-if="$slots.left !== undefined"
+            >
                 <slot name="left" />
             </div>
             <div class="level-item has-text-centered">
@@ -53,7 +55,7 @@
                     :min-time="minTime"
                     :max-time="maxTime"
                     :size="timepickerSize"
-                    :disabled="timepickerDisabled"
+                    :disabled="timepickerDisabled || undefined"
                     :focusable="focusable"
                     :mobile-native="isMobileNative"
                     :locale="locale"
@@ -61,7 +63,8 @@
             </div>
             <div
                 class="level-item has-text-centered"
-                v-if="$slots.right !== undefined">
+                v-if="$slots.right !== undefined"
+            >
                 <slot name="right" />
             </div>
         </nav>
@@ -71,7 +74,7 @@
         ref="input"
         type="datetime-local"
         autocomplete="off"
-        :value="formatNative(computedValue)"
+        :model-value="formatNative(computedValue)"
         :placeholder="placeholder"
         :size="size"
         :icon="icon"
@@ -80,13 +83,14 @@
         :loading="loading"
         :max="formatNative(maxDate)"
         :min="formatNative(minDate)"
-        :disabled="disabled"
+        :disabled="disabledOrUndefined"
         :readonly="false"
         v-bind="$attrs"
         :use-html5-validation="useHtml5Validation"
-        @change.native="onChangeNativePicker"
+        @change="onChangeNativePicker"
         @focus="onFocus"
-        @blur="onBlur"/>
+        @blur="onBlur"
+    />
 </template>
 
 <script>
@@ -108,7 +112,7 @@ export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
-        value: {
+        modelValue: {
             type: Date
         },
         editable: {
@@ -173,9 +177,16 @@ export default {
         },
         appendToBody: Boolean
     },
+    emits: [
+        'active-change',
+        'change-month',
+        'change-year',
+        'icon-right-click',
+        'update:modelValue'
+    ],
     data() {
         return {
-            newValue: this.adjustValue(this.value)
+            newValue: this.adjustValue(this.modelValue)
         }
     },
     computed: {
@@ -211,8 +222,8 @@ export default {
                 } else {
                     this.newValue = this.adjustValue(value)
                 }
-                var adjustedValue = this.adjustValue(this.newValue, true) // reverse adjust
-                this.$emit('input', adjustedValue)
+                const adjustedValue = this.adjustValue(this.newValue, true) // reverse adjust
+                this.$emit('update:modelValue', adjustedValue)
             }
         },
         localeOptions() {
@@ -270,6 +281,7 @@ export default {
                 adjMinDatetime.getDate() === this.newValue.getDate()) {
                 return adjMinDatetime
             }
+            return undefined
         },
         maxTime() {
             if (!this.maxDatetime || (this.newValue === null || typeof this.newValue === 'undefined')) {
@@ -281,26 +293,36 @@ export default {
                 adjMaxDatetime.getDate() === this.newValue.getDate()) {
                 return adjMaxDatetime
             }
+            return undefined
         },
         datepickerSize() {
             return this.datepicker && this.datepicker.size
-                ? this.datepicker.size : this.size
+                ? this.datepicker.size
+                : this.size
         },
         timepickerSize() {
             return this.timepicker && this.timepicker.size
-                ? this.timepicker.size : this.size
+                ? this.timepicker.size
+                : this.size
         },
         timepickerDisabled() {
             return this.timepicker && this.timepicker.disabled
-                ? this.timepicker.disabled : this.disabled
+                ? this.timepicker.disabled
+                : this.disabled
+        },
+
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `null` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
         }
     },
     watch: {
-        value() {
-            this.newValue = this.adjustValue(this.value)
+        modelValue() {
+            this.newValue = this.adjustValue(this.modelValue)
         },
         tzOffset() {
-            this.newValue = this.adjustValue(this.value)
+            this.newValue = this.adjustValue(this.modelValue)
         }
     },
     methods: {
@@ -331,7 +353,7 @@ export default {
                 return config.defaultDatetimeParser(date)
             } else {
                 if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
-                    let dayPeriods = [AM, PM, AM.toLowerCase(), PM.toLowerCase()]
+                    const dayPeriods = [AM, PM, AM.toLowerCase(), PM.toLowerCase()]
                     if (this.$refs.timepicker) {
                         dayPeriods.push(this.$refs.timepicker.amString)
                         dayPeriods.push(this.$refs.timepicker.pmString)
@@ -340,7 +362,7 @@ export default {
                     const formatRegex = parts.map((part, idx) => {
                         if (part.type === 'literal') {
                             if (idx + 1 < parts.length && parts[idx + 1].type === 'hour') {
-                                return `[^\\d]+`
+                                return '[^\\d]+'
                             }
                             return part.value.replace(/ /g, '\\s?')
                         } else if (part.type === 'dayPeriod') {
