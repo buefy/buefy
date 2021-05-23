@@ -8,7 +8,7 @@
             type="is-danger"
             message="This email is invalid">
             <b-input type="email"
-                value="john@"
+                model-value="john@"
                 maxlength="30">
             </b-input>
         </b-field>
@@ -16,12 +16,12 @@
         <b-field label="Username"
             type="is-success"
             message="This username is available">
-            <b-input value="johnsilver" maxlength="30"></b-input>
+            <b-input model-value="johnsilver" maxlength="30"></b-input>
         </b-field>
 
         <b-field label="Password">
             <b-input type="password"
-                value="iwantmytreasure"
+                model-value="iwantmytreasure"
                 password-reveal>
             </b-input>
         </b-field>
