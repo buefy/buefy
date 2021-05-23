@@ -105,6 +105,12 @@ export default {
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
+    inject: {
+        field: {
+            from: 'BField',
+            default: false
+        }
+    },
     props: {
         modelValue: Number,
         min: {
@@ -320,6 +326,16 @@ export default {
             this.timesPressed = 1
             clearTimeout(this._$intervalRef)
             this._$intervalRef = null
+        }
+    },
+    mounted() {
+        // tells the field that it is wrapping a number input
+        // if the field is the direct parent.
+        if (this.field === this.$parent) {
+            this.$parent.wrapNumberinput({
+                controlsPosition: this.controlsPosition,
+                size: this.size
+            })
         }
     }
 }
