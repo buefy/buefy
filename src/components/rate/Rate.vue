@@ -1,7 +1,8 @@
 <template>
     <div
         class="rate"
-        :class="{ 'is-disabled': disabled, 'is-spaced': spaced, 'is-rtl': rtl }">
+        :class="{ 'is-disabled': disabled, 'is-spaced': spaced, 'is-rtl': rtl }"
+    >
         <div
             v-for="(item, index) in max"
             class="rate-item"
@@ -9,7 +10,8 @@
             :key="index"
             @mousemove="previewRate(item, $event)"
             @mouseleave="resetNewValue"
-            @click.prevent="confirmValue(item)">
+            @click.prevent="confirmValue(item)"
+        >
             <b-icon
                 :pack="iconPack"
                 :icon="icon"
@@ -27,7 +29,8 @@
         <div
             class="rate-text"
             :class="size"
-            v-if="showText || showScore || customText">
+            v-if="showText || showScore || customText"
+        >
             <span>{{ showMe }}</span>
             <span v-if="customText && !showText">{{ customText }}</span>
         </div>
@@ -44,7 +47,7 @@ export default {
         [Icon.name]: Icon
     },
     props: {
-        value: {
+        modelValue: {
             type: Number,
             default: 0
         },
@@ -72,9 +75,10 @@ export default {
             }
         }
     },
+    emits: ['change', 'update:modelValue'],
     data() {
         return {
-            newValue: this.value,
+            newValue: this.modelValue,
             hoverValue: 0
         }
     },
@@ -85,11 +89,11 @@ export default {
         showMe() {
             let result = ''
             if (this.showScore) {
-                result = this.disabled ? this.value : this.newValue
+                result = this.disabled ? this.modelValue : this.newValue
                 if (result === 0) {
                     result = ''
                 } else {
-                    result = new Intl.NumberFormat(this.locale).format(this.value)
+                    result = new Intl.NumberFormat(this.locale).format(this.modelValue)
                 }
             } else if (this.showText) {
                 result = this.texts[Math.ceil(this.newValue) - 1]
@@ -97,12 +101,12 @@ export default {
             return result
         },
         valueDecimal() {
-            return this.value * 100 - Math.floor(this.value) * 100
+            return this.modelValue * 100 - Math.floor(this.modelValue) * 100
         }
     },
     watch: {
         // When v-model is changed set the new value.
-        value(value) {
+        modelValue(value) {
             this.newValue = value
         }
     },
@@ -120,11 +124,11 @@ export default {
             if (this.disabled) return
             this.newValue = index
             this.$emit('change', this.newValue)
-            this.$emit('input', this.newValue)
+            this.$emit('update:modelValue', this.newValue)
         },
         checkHalf(index) {
-            let showWhenDisabled = this.disabled && this.valueDecimal > 0 &&
-            index - 1 < this.value && index > this.value
+            const showWhenDisabled = this.disabled && this.valueDecimal > 0 &&
+            index - 1 < this.modelValue && index > this.modelValue
             return showWhenDisabled
         },
         rateClass(index) {
@@ -132,7 +136,7 @@ export default {
             const currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue
             if (index <= currentValue) {
                 output = 'set-on'
-            } else if (this.disabled && (Math.ceil(this.value) === index)) {
+            } else if (this.disabled && (Math.ceil(this.modelValue) === index)) {
                 output = 'set-half'
             }
             return output
