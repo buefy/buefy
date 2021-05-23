@@ -107,6 +107,7 @@ export default {
             newType: this.type,
             newMessage: this.message,
             fieldLabelSize: null,
+            numberInputClasses: [],
             _isField: true // Used internally by Input and Select
         }
     },
@@ -193,24 +194,6 @@ export default {
         hasMessage() {
             return ((!this.parent || !this.parent.hasInnerField) && this.newMessage) ||
                 this.$slots.message
-        },
-        numberInputClasses() {
-            if (this.$slots.default) {
-                const numberinput = this.$slots.default().filter((node) => node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0)[0]
-                if (numberinput) {
-                    const classes = ['has-numberinput']
-                    const controlsPosition = numberinput.componentOptions.propsData.controlsPosition
-                    const size = numberinput.componentOptions.propsData.size
-                    if (controlsPosition) {
-                        classes.push(`has-numberinput-${controlsPosition}`)
-                    }
-                    if (size) {
-                        classes.push(`has-numberinput-${size}`)
-                    }
-                    return classes
-                }
-            }
-            return null
         }
     },
     watch: {
@@ -263,6 +246,17 @@ export default {
                 this.addons &&
                 !this.horizontal
             )
+        },
+        // called by a number input if it is a direct child.
+        wrapNumberinput({ controlsPosition, size }) {
+            const classes = ['has-numberinput']
+            if (controlsPosition) {
+                classes.push(`has-numberinput-${controlsPosition}`)
+            }
+            if (size) {
+                classes.push(`has-numberinput-${size}`)
+            }
+            this.numberInputClasses = classes
         }
     },
     mounted() {
