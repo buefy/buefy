@@ -1,14 +1,14 @@
 <template>
     <section>
         <b-field label="Name">
-            <b-input value="Kevin Garvey"></b-input>
+            <b-input model-value="Kevin Garvey"></b-input>
         </b-field>
 
         <b-field label="Email"
             type="is-danger"
             message="This email is invalid">
             <b-input type="email"
-                value="john@"
+                model-value="john@"
                 maxlength="30">
             </b-input>
         </b-field>
@@ -16,13 +16,13 @@
         <b-field label="Username"
             type="is-success"
             message="This username is available">
-            <b-input value="johnsilver" maxlength="30"></b-input>
+            <b-input model-value="johnsilver" maxlength="30"></b-input>
         </b-field>
 
         <b-field label="Password"
             type="is-warning"
             :message="['Password is too short', 'Password must have at least 8 characters']">
-            <b-input value="123" type="password" maxlength="30"></b-input>
+            <b-input model-value="123" type="password" maxlength="30"></b-input>
         </b-field>
 
         <b-field label="Subject">

@@ -5,7 +5,7 @@
         <b-field label="Username"
             :type="{ 'is-danger': hasError }"
             :message="{ 'Username is not available': hasError }">
-            <b-input value="johnsilver" maxlength="30"></b-input>
+            <b-input model-value="johnsilver" maxlength="30"></b-input>
         </b-field>
 
         <b-field label="Password"
@@ -14,7 +14,7 @@
                 { 'Password is too short': hasError },
                 { 'Password must have at least 8 characters': hasError }
             ]">
-            <b-input value="123" type="password" maxlength="30"></b-input>
+            <b-input model-value="123" type="password" maxlength="30"></b-input>
         </b-field>
     </section>
 </template>
