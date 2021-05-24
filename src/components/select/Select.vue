@@ -61,6 +61,7 @@ export default {
         multiple: Boolean,
         nativeSize: [String, Number]
     },
+    emits: ['blur', 'focus', 'update:modelValue'],
     data() {
         return {
             selected: this.modelValue,
