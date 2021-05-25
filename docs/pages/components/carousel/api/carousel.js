@@ -298,7 +298,7 @@ export default [
                 description: 'count of items to showed per view (support a decimal).',
                 type: 'Number',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>4</code>'
             },
             {
                 name: '<code>items-to-list</code>',
