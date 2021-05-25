@@ -111,7 +111,9 @@ export const isMobile = {
     iOS: function () {
         return (
             typeof window !== 'undefined' &&
-            window.navigator.userAgent.match(/iPhone|iPad|iPod/i)
+            (window.navigator.userAgent.match(/iPhone|iPad|iPod/i) ||
+                (window.navigator.platform === 'MacIntel' &&
+                    window.navigator.maxTouchPoints > 1))
         )
     },
     Opera: function () {
