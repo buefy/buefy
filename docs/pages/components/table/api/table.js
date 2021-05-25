@@ -276,6 +276,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>detail-transition</code>',
+                description: 'Transition name to use when toggling row details.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>custom-is-checked</code>',
                 description: 'Custom method to verify if row is checked, works when is <code>checkable</code>. Useful for backend pagination',
                 type: 'Function (a: Object, b: Object)',
@@ -320,6 +327,13 @@ export default [
             {
                 name: '<code>draggable</code>',
                 description: 'Allows rows to be draggable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>draggable-column</code>',
+                description: 'Allows columns to be draggable',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -538,9 +552,34 @@ export default [
                 parameters: '<code> row: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
             },
             {
+                name: '<code>columndragstart</code>',
+                description: 'Triggers when starting to drag a column',
+                parameters: '<code> column: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragend</code>',
+                description: 'Triggers when ending to drag a column',
+                parameters: '<code> column: Object </code>, <code> dragEvent: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndrop</code>',
+                description: 'Triggers when dropping on a column',
+                parameters: '<code> column: Object </code>, <code> drop: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragover</code>',
+                description: 'Triggers when dragging over a column',
+                parameters: '<code> column: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
+                name: '<code>columndragleave</code>',
+                description: 'Triggers after dragging over a column',
+                parameters: '<code> column: Object </code>, <code> dragover: Event </code>, <code> index: Number </code>'
+            },
+            {
                 name: '<code>mouseenter</code>',
                 description: 'Triggers when mouse enters a row',
-                parameters: '<code> row: Object </code>'
+                parameters: '<code> row: Object </code>, <code> event: Event </code>'
             },
             {
                 name: '<code>mouseleave</code>',
@@ -716,6 +755,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>th-attrs</code>',
+                description: 'Adds native attributes to th <code>:th-attrs="(column)" => ({})"</code>',
+                type: 'Function',
+                values: '—',
+                default: '-'
+            },
+            {
+                name: '<code>td-attrs</code>',
+                description: 'Adds native attributes to td <code>:td-attrs="(row, column)" => ({})"</code>',
+                type: 'Function',
+                values: '—',
+                default: '-'
             }
         ],
         slots: [

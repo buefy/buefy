@@ -260,7 +260,7 @@ export default [
             },
             {
                 name: '<code>data</code>',
-                description: 'Carousel-list data',
+                description: 'Carousel-list data (any <code>b-image</code> prop can be used)',
                 type: 'Array',
                 values: '—',
                 default: '—'

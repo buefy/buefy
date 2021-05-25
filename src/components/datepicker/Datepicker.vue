@@ -328,12 +328,12 @@ export default {
         editable: Boolean,
         disabled: Boolean,
         horizontalTimePicker: Boolean,
-        unselectableDates: Array,
+        unselectableDates: [Array, Function],
         unselectableDaysOfWeek: {
             type: Array,
             default: () => config.defaultUnselectableDaysOfWeek
         },
-        selectableDates: Array,
+        selectableDates: [Array, Function],
         dateFormatter: {
             type: Function,
             default: (date, vm) => {
@@ -734,7 +734,7 @@ export default {
         },
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
-                ? (!value.length ? this.dateCreator() : value[0])
+                ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
                 day: currentDate.getDate(),
@@ -749,10 +749,13 @@ export default {
          */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                if (this.closeOnClick) {
-                    this.$refs.dropdown.isActive = typeof active === 'boolean'
-                        ? active
-                        : !this.$refs.dropdown.isActive
+                const isActive = typeof active === 'boolean'
+                    ? active
+                    : !this.$refs.dropdown.isActive
+                if (isActive) {
+                    this.$refs.dropdown.isActive = isActive
+                } else if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = isActive
                 }
             }
         },

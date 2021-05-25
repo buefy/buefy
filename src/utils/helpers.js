@@ -111,7 +111,9 @@ export const isMobile = {
     iOS: function () {
         return (
             typeof window !== 'undefined' &&
-            window.navigator.userAgent.match(/iPhone|iPad|iPod/i)
+            (window.navigator.userAgent.match(/iPhone|iPad|iPod/i) ||
+                (window.navigator.platform === 'MacIntel' &&
+                    window.navigator.maxTouchPoints > 1))
         )
     },
     Opera: function () {
@@ -223,22 +225,16 @@ export function getMonthNames(locale = undefined, format = 'long') {
 /**
  * Return weekday names according to a specified locale
  * @param  {String} locale A bcp47 localerouter. undefined will use the user browser locale
- * @param  {Number} first day of week index
  * @param  {String} format long (ex. Thursday), short (ex. Thu) or narrow (T)
  * @return {Array<String>} An array of weekday names
  */
 export function getWeekdayNames(locale = undefined, format = 'narrow') {
     const dates = []
-    const dt = new Date(2000, 0, 1)
-    const dayOfWeek = dt.getDay()
-    dt.setDate(dt.getDate() - dayOfWeek)
     for (let i = 0; i < 7; i++) {
-        dates.push(new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + i))
+        const dt = new Date(2000, 0, i + 1)
+        dates[dt.getDay()] = dt
     }
-    const dtf = new Intl.DateTimeFormat(locale, {
-        weekday: format,
-        timeZone: 'UTC'
-    })
+    const dtf = new Intl.DateTimeFormat(locale, { weekday: format })
     return dates.map((d) => dtf.format(d))
 }
 

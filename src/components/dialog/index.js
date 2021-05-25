@@ -52,8 +52,7 @@ const DialogProgrammatic = {
     },
     prompt(params) {
         const defaultParam = {
-            hasInput: true,
-            confirmText: 'Done'
+            hasInput: true
         }
         const propsData = merge(defaultParam, params)
         return open(propsData)

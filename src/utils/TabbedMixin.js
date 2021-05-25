@@ -20,6 +20,7 @@ export default (cmp) => ({
             default: true
         },
         animation: String,
+        animateInitially: Boolean,
         vertical: {
             type: Boolean,
             default: false
@@ -97,6 +98,48 @@ export default (cmp) => ({
         */
         childClick(child) {
             this.activeId = child.value
+        },
+
+        getNextItemIdx(fromIdx, skipDisabled = false) {
+            let nextItemIdx = null
+            let idx = fromIdx + 1
+            for (; idx < this.items.length; idx++) {
+                const item = this.items[idx]
+                if (
+                    item.visible &&
+                    (
+                        !skipDisabled ||
+                        (
+                            skipDisabled &&
+                            !item.disabled
+                        )
+                    )
+                ) {
+                    nextItemIdx = idx
+                    break
+                }
+            }
+            return nextItemIdx
+        },
+        getPrevItemIdx(fromIdx, skipDisabled = false) {
+            let prevItemIdx = null
+            for (let idx = fromIdx - 1; idx >= 0; idx--) {
+                const item = this.items[idx]
+                if (
+                    item.visible &&
+                    (
+                        !skipDisabled ||
+                        (
+                            skipDisabled &&
+                            !item.disabled
+                        )
+                    )
+                ) {
+                    prevItemIdx = idx
+                    break
+                }
+            }
+            return prevItemIdx
         }
     }
 })

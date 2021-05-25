@@ -26,7 +26,15 @@ export default {
         sticky: Boolean,
         headerSelectable: Boolean,
         headerClass: String,
-        cellClass: String
+        cellClass: String,
+        thAttrs: {
+            type: Function,
+            default: () => ({})
+        },
+        tdAttrs: {
+            type: Function,
+            default: () => ({})
+        }
     },
     data() {
         return {
@@ -35,6 +43,26 @@ export default {
         }
     },
     computed: {
+        thClasses() {
+            const attrs = this.thAttrs(this)
+            const classes = [this.headerClass, {
+                'is-sortable': this.sortable,
+                'is-sticky': this.sticky,
+                'is-unselectable': this.isHeaderUnSelectable
+            }]
+            if (attrs && attrs.class) {
+                classes.push(attrs.class)
+            }
+            return classes
+        },
+        thStyle() {
+            const attrs = this.thAttrs(this)
+            const style = [this.style]
+            if (attrs && attrs.style) {
+                style.push(attrs.style)
+            }
+            return style
+        },
         rootClasses() {
             return [this.cellClass, {
                 'has-text-right': this.numeric && !this.centered,
@@ -55,6 +83,24 @@ export default {
          */
         isHeaderUnSelectable() {
             return !this.headerSelectable && this.sortable
+        }
+    },
+    methods: {
+        getRootClasses(row) {
+            const attrs = this.tdAttrs(row, this)
+            const classes = [this.rootClasses]
+            if (attrs && attrs.class) {
+                classes.push(attrs.class)
+            }
+            return classes
+        },
+        getRootStyle(row) {
+            const attrs = this.tdAttrs(row, this)
+            const style = []
+            if (attrs && attrs.style) {
+                style.push(attrs.style)
+            }
+            return style
         }
     },
     created() {

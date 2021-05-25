@@ -122,8 +122,8 @@ export default [
             },
             {
                 name: '<code>unselectable-dates</code>',
-                description: 'Array of unselectable dates',
-                type: 'Array',
+                description: 'Array of unselectable dates, or a function to identify unselectable dates',
+                type: 'Array, Function',
                 values: '—',
                 default: '-'
             },
@@ -136,8 +136,8 @@ export default [
             },
             {
                 name: '<code>selectable-dates</code>',
-                description: 'Array of selectable dates',
-                type: 'Array',
+                description: 'Array of selectable dates, or a function to identify selectable dates',
+                type: 'Array, Function',
                 values: '—',
                 default: '-'
             },
@@ -269,8 +269,15 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>close-on-click</code>',
+                description: 'Choose whether the Datepicker should close after selecting a date',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>append-to-body</code>',
-                description: 'Append datepicker calendar to body',
+                description: 'Append datepicker calendar to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

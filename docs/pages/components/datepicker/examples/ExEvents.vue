@@ -8,6 +8,7 @@
             v-model="date"
             :events="events"
             :indicators="indicators"
+            :unselectable-dates="unselectableDates"
             >
         </b-datepicker>
     </span>
@@ -66,6 +67,9 @@
                         date: new Date(2017, thisMonth, 29),
                         type: 'is-info'
                     }
+                ],
+                unselectableDates: [
+                    new Date(2017, thisMonth, 29)
                 ],
                 bars: false
             }

@@ -59,6 +59,7 @@
                             v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
@@ -67,14 +68,18 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'header'"
-                            :class="[column.headerClass, {
+                            v-bind="column.thAttrs(column)"
+                            :class="[column.thClasses, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
-                                'is-sortable': column.sortable,
-                                'is-sticky': column.sticky,
-                                'is-unselectable': column.isHeaderUnSelectable
                             }]"
-                            :style="column.style"
-                            @click.stop="sort(column, null, $event)">
+                            :style="column.thStyle"
+                            @click.stop="sort(column, null, $event)"
+                            :draggable="canDragColumn"
+                            @dragstart="handleColumnDragStart($event, column, index)"
+                            @dragend="handleColumnDragEnd($event, column, index)"
+                            @drop="handleColumnDrop($event, column, index)"
+                            @dragover="handleColumnDragOver($event, column, index)"
+                            @dragleave="handleColumnDragLeave($event, column, index)">
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -136,6 +141,7 @@
                             v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :value="isAllChecked"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
@@ -177,7 +183,8 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'searchable'"
-                            :style="column.style"
+                            v-bind="column.thAttrs(column)"
+                            :style="column.thStyle"
                             :class="{'is-sticky': column.sticky}">
                             <div class="th-wrap">
                                 <template v-if="column.searchable">
@@ -239,10 +246,10 @@
                             }]"
                             @click="selectRow(row)"
                             @dblclick="$emit('dblclick', row)"
-                            @mouseenter="$listeners.mouseenter ? $emit('mouseenter', row) : null"
-                            @mouseleave="$listeners.mouseleave ? $emit('mouseleave', row) : null"
+                            @mouseenter="emitEventForRow('mouseenter', $event, row)"
+                            @mouseleave="emitEventForRow('mouseleave', $event, row)"
                             @contextmenu="$emit('contextmenu', row, $event)"
-                            :draggable="draggable"
+                            :draggable="canDragRow"
                             @dragstart="handleDragStart($event, row, index)"
                             @dragend="handleDragEnd($event, row, index)"
                             @drop="handleDrop($event, row, index)"
@@ -269,6 +276,7 @@
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
@@ -281,10 +289,12 @@
                                     <b-slot-component
                                         :key="column.newKey + ':' + index + ':' + colindex"
                                         :component="column"
+                                        v-bind="column.tdAttrs(row, column)"
                                         scoped
                                         name="default"
                                         tag="td"
-                                        :class="column.rootClasses"
+                                        :class="column.getRootClasses(row)"
+                                        :style="column.getRootStyle(row)"
                                         :data-label="column.label"
                                         :props="{ row, column, index, colindex, toggleDetails }"
                                         @click.native="$emit('cellclick',row,column,index,colindex)"
@@ -297,6 +307,7 @@
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
+                                    autocomplete="off"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
@@ -304,20 +315,24 @@
                             </td>
                         </tr>
 
-                        <tr
-                            v-if="isActiveDetailRow(row)"
+                        <transition
                             :key="(customRowKey ? row[customRowKey] : index) + 'detail'"
-                            class="detail">
-                            <td :colspan="columnCount">
-                                <div class="detail-container">
-                                    <slot
-                                        name="detail"
-                                        :row="row"
-                                        :index="index"
-                                    />
-                                </div>
-                            </td>
-                        </tr>
+                            :name="detailTransition"
+                        >
+                            <tr
+                                v-if="isActiveDetailRow(row)"
+                                class="detail">
+                                <td :colspan="columnCount">
+                                    <div class="detail-container">
+                                        <slot
+                                            name="detail"
+                                            :row="row"
+                                            :index="index"
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                        </transition>
                         <slot
                             v-if="isActiveCustomDetailRow(row)"
                             name="detail"
@@ -533,6 +548,10 @@ export default {
             type: String,
             default: ''
         },
+        detailTransition: {
+            type: String,
+            default: ''
+        },
         customDetailRow: {
             type: Boolean,
             default: false
@@ -546,6 +565,10 @@ export default {
         mobileSortPlaceholder: String,
         customRowKey: String,
         draggable: {
+            type: Boolean,
+            default: false
+        },
+        draggableColumn: {
             type: Boolean,
             default: false
         },
@@ -587,7 +610,9 @@ export default {
             filters: {},
             defaultSlots: [],
             firstTimeSort: true, // Used by first time initSort
-            _isTable: true // Used by TableColumn
+            _isTable: true, // Used by TableColumn
+            isDraggingRow: false,
+            isDraggingColumn: false
         }
     },
     computed: {
@@ -750,6 +775,12 @@ export default {
                     vnode.componentInstance.$data &&
                     vnode.componentInstance.$data._isTableColumn)
                 .map((vnode) => vnode.componentInstance)
+        },
+        canDragRow() {
+            return this.draggable && !this.isDraggingColumn
+        },
+        canDragColumn() {
+            return this.draggableColumn && !this.isDraggingRow
         }
     },
     watch: {
@@ -1303,39 +1334,87 @@ export default {
             }
         },
         /**
-        * Emits drag start event
+        * Emits drag start event (row)
         */
         handleDragStart(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
+            this.isDraggingRow = true
             this.$emit('dragstart', {event, row, index})
         },
         /**
-        * Emits drag leave event
+        * Emits drag leave event (row)
         */
         handleDragEnd(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
+            this.isDraggingRow = false
             this.$emit('dragend', {event, row, index})
         },
         /**
-        * Emits drop event
+        * Emits drop event (row)
         */
         handleDrop(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
             this.$emit('drop', {event, row, index})
         },
         /**
-        * Emits drag over event
+        * Emits drag over event (row)
         */
         handleDragOver(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
             this.$emit('dragover', {event, row, index})
         },
         /**
-        * Emits drag leave event
+        * Emits drag leave event (row)
         */
         handleDragLeave(event, row, index) {
-            if (!this.draggable) return
+            if (!this.canDragRow) return
             this.$emit('dragleave', {event, row, index})
+        },
+
+        emitEventForRow(eventName, event, row) {
+            return this.$listeners[eventName] ? this.$emit(eventName, row, event) : null
+        },
+
+        /**
+        * Emits drag start event (column)
+        */
+        handleColumnDragStart(event, column, index) {
+            if (!this.canDragColumn) return
+            this.isDraggingColumn = true
+            this.$emit('columndragstart', {event, column, index})
+        },
+
+        /**
+        * Emits drag leave event (column)
+        */
+        handleColumnDragEnd(event, column, index) {
+            if (!this.canDragColumn) return
+            this.isDraggingColumn = false
+            this.$emit('columndragend', {event, column, index})
+        },
+
+        /**
+        * Emits drop event (column)
+        */
+        handleColumnDrop(event, column, index) {
+            if (!this.canDragColumn) return
+            this.$emit('columndrop', {event, column, index})
+        },
+
+        /**
+        * Emits drag over event (column)
+        */
+        handleColumnDragOver(event, column, index) {
+            if (!this.canDragColumn) return
+            this.$emit('columndragover', {event, column, index})
+        },
+
+        /**
+        * Emits drag leave event (column)
+        */
+        handleColumnDragLeave(event, column, index) {
+            if (!this.canDragColumn) return
+            this.$emit('columndragleave', {event, column, index})
         },
 
         refreshSlots() {

@@ -1,5 +1,9 @@
 export default [
     {
+        name: '<code>$steps-items-focused-outline</code>',
+        default: '<code>none</code>'
+    },
+    {
         name: '<code>$steps-details-background-color</code>',
         default: '<code>$body-background-color</code>'
     },

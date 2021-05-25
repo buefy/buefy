@@ -17,6 +17,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>animateInitially</code>',
+                description: 'Apply animation on the initial render',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>undefined</code>'
+            },
+            {
                 name: '<code>animation</code>',
                 description: 'Custom animation (transition name)',
                 type: 'String',

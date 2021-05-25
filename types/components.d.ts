@@ -387,9 +387,44 @@ export declare const ToastProgrammatic: {
 
 export declare type BNotificationConfig = BNoticeConfig & {
     /**
+     * Whether notification is active or not, use the .sync modifier to make it two-way binding
+     */
+    active?: boolean;
+
+    /**
+     * Hide notification after duration only not programmatic
+     */
+    autoClose?: boolean;
+
+    /**
+     * Custom animation (transition name)
+     */
+    animation?: string;
+
+    /**
+     * Label for the close button, to be read by accessibility screenreaders.
+     */
+    ariaCloseLabel?: string;
+
+    /**
+     * Adds an 'X' button that closes the notification
+     */
+    closable?: boolean;
+
+    /**
      * Adds an icon on the left side
      */
     hasIcon?: boolean;
+
+    /**
+     * Icon name to use with has-icon
+     */
+    icon?: string;
+
+    /**
+     * Icon pack to use
+     */
+    iconPack?: string;
 }
 export declare const NotificationProgrammatic: {
     open: (params: BNotificationConfig | string) => BNoticeComponent;

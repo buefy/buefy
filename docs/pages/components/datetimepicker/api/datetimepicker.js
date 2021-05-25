@@ -13,7 +13,7 @@ export default [
                 description: 'Function to format datetime (<code>Date</code> type) to a string for displaying in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezone: "UTC" }).format(time)</code>'
+                default: '<code>(time) => new Intl.DateTimeFormat(locale).format(time)</code>'
             },
             {
                 name: '<code>datetime-parser</code>',
@@ -129,7 +129,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append datetimepicker calendar to body',
+                description: 'Append datetimepicker calendar to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

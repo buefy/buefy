@@ -145,6 +145,13 @@ describe('BDatepickerMonth', () => {
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
         wrapper.setProps({
+            selectableDates: (d) => d.getMonth() === 7
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
+        expect(wrapper.vm.selectableDate(new Date(2019, 6, 7))).toBeFalsy()
+        expect(wrapper.vm.selectableDate(new Date(2019, 8, 7))).toBeFalsy()
+
+        wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,
@@ -155,6 +162,19 @@ describe('BDatepickerMonth', () => {
             unselectableDates: [day]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+
+        wrapper.setProps({
+            unselectableDates: (d) => d.getMonth() === 7
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeFalsy()
+        expect(wrapper.vm.selectableDate(new Date(2019, 6, 7))).toBeTruthy()
+        expect(wrapper.vm.selectableDate(new Date(2019, 8, 7))).toBeTruthy()
+
+        wrapper.setProps({
+            selectableDates: (d) => d.getMonth() === 7,
+            unselectableDates: (d) => true
+        })
+        expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
         wrapper.setProps({
             minDate: null,
