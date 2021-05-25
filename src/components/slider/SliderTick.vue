@@ -36,7 +36,6 @@ export default {
     },
     created() {
         if (!this.$parent.$data._isSlider) {
-            this.$destroy()
             throw new Error('You should wrap bSliderTick on a bSlider')
         }
     }

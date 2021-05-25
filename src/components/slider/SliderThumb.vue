@@ -80,6 +80,7 @@ export default {
             default: false
         }
     },
+    emits: ['dragend', 'dragstart', 'update:modelValue'],
     data() {
         return {
             isFocused: false,
