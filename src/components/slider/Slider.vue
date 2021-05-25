@@ -151,10 +151,17 @@ export default {
             default: false
         }
     },
+    emits: ['change', 'dragend', 'dragging', 'dragstart', 'update:modelValue'],
     data() {
         return {
             value1: null,
             value2: null,
+            // internal is used to update value1 and value2 with a single shot.
+            // internal is also used to stop unnecessary propagation of update.
+            internal: {
+                value1: null,
+                value2: null
+            },
             dragging: false,
             isRange: false,
             _isSlider: true // Used by Thumb and Tick
@@ -217,11 +224,19 @@ export default {
         modelValue(value) {
             this.setValues(value)
         },
-        value1() {
-            this.onInternalValueUpdate()
+        internal({ value1, value2 }) {
+            this.value1 = value1
+            this.value2 = value2
         },
-        value2() {
-            this.onInternalValueUpdate()
+        value1(newValue) {
+            if (this.internal.value1 !== newValue) {
+                this.onInternalValueUpdate()
+            }
+        },
+        value2(newValue) {
+            if (this.internal.value2 !== newValue) {
+                this.onInternalValueUpdate()
+            }
         },
         min() {
             this.setValues(this.modelValue)
@@ -243,14 +258,20 @@ export default {
                 const largeValue = typeof newValue[1] !== 'number' || isNaN(newValue[1])
                     ? this.max
                     : bound(newValue[1], this.min, this.max)
-                this.value1 = this.isThumbReversed ? largeValue : smallValue
-                this.value2 = this.isThumbReversed ? smallValue : largeValue
+                // premature update will be triggered and end up with circular
+                // update, if value1 and value2 are updated one by one
+                this.internal = {
+                    value1: this.isThumbReversed ? largeValue : smallValue,
+                    value2: this.isThumbReversed ? smallValue : largeValue
+                }
             } else {
                 this.isRange = false
-                this.value1 = isNaN(newValue)
-                    ? this.min
-                    : bound(newValue, this.min, this.max)
-                this.value2 = null
+                this.internal = {
+                    value1: isNaN(newValue)
+                        ? this.min
+                        : bound(newValue, this.min, this.max),
+                    value2: null
+                }
             }
         },
         onInternalValueUpdate() {
