@@ -1,30 +1,30 @@
 <template>
     <section>
         <b-field>
-            <b-switch :value="true">
+            <b-switch :model-value="true">
                 Default
             </b-switch>
         </b-field>
         <b-field>
-            <b-switch :value="true"
+            <b-switch :model-value="true"
             type="is-info">
                 Info
             </b-switch>
         </b-field>
         <b-field>
-            <b-switch :value="true"
+            <b-switch :model-value="true"
             type="is-success">
                 Success
             </b-switch>
         </b-field>
         <b-field>
-            <b-switch :value="true"
+            <b-switch :model-value="true"
             type="is-danger">
                 Danger
             </b-switch>
         </b-field>
         <b-field>
-            <b-switch :value="true"
+            <b-switch :model-value="true"
             type="is-warning">
                 Warning
             </b-switch>
