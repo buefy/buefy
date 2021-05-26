@@ -4,7 +4,7 @@
             v-if="!isMobile || inline"
             ref="dropdown"
             :position="position"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :inline="inline"
             :mobile-modal="mobileModal"
             :append-to-body="appendToBody"
@@ -16,14 +16,14 @@
                     <b-input
                         ref="input"
                         autocomplete="off"
-                        :value="formatValue(computedValue)"
+                        :model-value="formatValue(computedValue)"
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
                         :icon-pack="iconPack"
                         :loading="loading"
-                        :disabled="disabled"
-                        :readonly="!editable"
+                        :disabled="disabledOrUndefined"
+                        :readonly="!editable || undefined"
                         :rounded="rounded"
                         v-bind="$attrs"
                         :use-html5-validation="useHtml5Validation"
@@ -35,7 +35,7 @@
             </template>
 
             <b-dropdown-item
-                :disabled="disabled"
+                :disabled="disabledOrUndefined"
                 :focusable="focusable"
                 custom
             >
@@ -43,14 +43,14 @@
                     <b-select
                         v-model="hoursSelected"
                         @change="onHoursChange($event.target.value)"
-                        :disabled="disabled"
+                        :disabled="disabledOrUndefined"
                         placeholder="00"
                     >
                         <option
                             v-for="hour in hours"
                             :value="hour.value"
                             :key="hour.value"
-                            :disabled="isHourDisabled(hour.value)"
+                            :disabled="isHourDisabled(hour.value) || undefined"
                         >
                             {{ hour.label }}
                         </option>
@@ -59,14 +59,14 @@
                     <b-select
                         v-model="minutesSelected"
                         @change="onMinutesChange($event.target.value)"
-                        :disabled="disabled"
+                        :disabled="disabledOrUndefined"
                         placeholder="00"
                     >
                         <option
                             v-for="minute in minutes"
                             :value="minute.value"
                             :key="minute.value"
-                            :disabled="isMinuteDisabled(minute.value)"
+                            :disabled="isMinuteDisabled(minute.value) || undefined"
                         >
                             {{ minute.label }}
                         </option>
@@ -76,14 +76,14 @@
                         <b-select
                             v-model="secondsSelected"
                             @change="onSecondsChange($event.target.value)"
-                            :disabled="disabled"
+                            :disabled="disabledOrUndefined"
                             placeholder="00"
                         >
                             <option
                                 v-for="second in seconds"
                                 :value="second.value"
                                 :key="second.value"
-                                :disabled="isSecondDisabled(second.value)"
+                                :disabled="isSecondDisabled(second.value) || undefined"
                             >
                                 {{ second.label }}
                             </option>
@@ -94,7 +94,7 @@
                         v-model="meridienSelected"
                         @change="onMeridienChange($event.target.value)"
                         v-if="!isHourFormat24"
-                        :disabled="disabled"
+                        :disabled="disabledOrUndefined"
                     >
                         <option
                             v-for="meridien in meridiens"
@@ -107,7 +107,7 @@
                 </b-field>
 
                 <footer
-                    v-if="$slots.default !== undefined && $slots.default.length"
+                    v-if="$slots.default !== undefined"
                     class="timepicker-footer"
                 >
                     <slot />
@@ -121,7 +121,7 @@
             type="time"
             :step="nativeStep"
             autocomplete="off"
-            :value="formatHHMMSS(computedValue)"
+            :model-value="formatHHMMSS(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
@@ -130,7 +130,7 @@
             :loading="loading"
             :max="formatHHMMSS(maxTime)"
             :min="formatHHMMSS(minTime)"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :readonly="false"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
