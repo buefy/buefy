@@ -1,7 +1,11 @@
 <template>
-    <label class="upload control" :class="{'is-expanded' : expanded, 'is-rounded' : rounded}">
+    <label
+        class="upload control"
+        v-bind="classAndStyle"
+        :class="[{'is-expanded' : expanded, 'is-rounded' : rounded}]"
+    >
         <template v-if="!dragDrop">
-            <slot/>
+            <slot />
         </template>
 
         <div
@@ -16,8 +20,9 @@
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
             @dragenter.prevent="updateDragDropFocus(true)"
-            @drop.prevent="onFileChange">
-            <slot/>
+            @drop.prevent="onFileChange"
+        >
+            <slot />
         </div>
 
         <input
@@ -26,8 +31,9 @@
             v-bind="$attrs"
             :multiple="multiple"
             :accept="accept"
-            :disabled="disabled"
-            @change="onFileChange">
+            :disabled="disabledOrUndefined"
+            @change="onFileChange"
+        >
     </label>
 </template>
 
@@ -40,7 +46,7 @@ export default {
     mixins: [FormElementMixin],
     inheritAttrs: false,
     props: {
-        value: {
+        modelValue: {
             type: [Object, Function, File, Array]
         },
         multiple: Boolean,
@@ -64,11 +70,25 @@ export default {
             default: false
         }
     },
+    emits: ['invalid', 'update:modelValue'],
     data() {
         return {
-            newValue: this.value,
+            newValue: this.modelValue,
             dragDropFocus: false,
             _elementRef: 'input'
+        }
+    },
+    computed: {
+        classAndStyle() {
+            return {
+                class: this.$attrs.class,
+                style: this.$attrs.style
+            }
+        },
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `true` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
         }
     },
     watch: {
@@ -78,7 +98,7 @@ export default {
          *   2. Reset internal input file value
          *   3. If it's invalid, validate again.
          */
-        value(value) {
+        modelValue(value) {
             this.newValue = value
             if (!value || (Array.isArray(value) && value.length === 0)) {
                 this.$refs.input.value = null
@@ -130,7 +150,7 @@ export default {
                 }
                 if (!newValues) return
             }
-            this.$emit('input', this.newValue)
+            this.$emit('update:modelValue', this.newValue)
             !this.dragDrop && this.checkHtml5Validity()
         },
 
