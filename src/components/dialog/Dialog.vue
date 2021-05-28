@@ -55,18 +55,16 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button
+                    <b-button
                         v-if="showCancel"
-                        class="button"
                         ref="cancelButton"
-                        :loading="promptStatus === 'loading'"
-                        :disabled="promptStatus === 'disabled'"
-                        @click="cancel('button')">{{ cancelText }}</button>
-                    <button
-                        class="button"
+                        @click="cancel('button')">{{ cancelText }}</b-button>
+                    <b-button
                         :class="type"
                         ref="confirmButton"
-                        @click="confirm">{{ confirmText }}</button>
+                        :loading="promptStatus === 'loading'"
+                        :disabled="promptStatus === 'disabled'"
+                        @click="confirm">{{ confirmText }}</b-button>
                 </footer>
             </div>
         </div>
