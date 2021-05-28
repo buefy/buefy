@@ -40,6 +40,7 @@
                             <div v-if="hasInput" class="field">
                                 <div class="control">
                                     <input
+                                        :disabled="inputDisabled"
                                         v-model="prompt"
                                         class="input"
                                         ref="input"
@@ -58,6 +59,8 @@
                         v-if="showCancel"
                         class="button"
                         ref="cancelButton"
+                        :loading="promptStatus === 'loading'"
+                        :disabled="promptStatus === 'disabled'"
                         @click="cancel('button')">{{ cancelText }}</button>
                     <button
                         class="button"
@@ -142,6 +145,10 @@ export default {
                 return config.defaultTrapFocus
             }
         },
+        initialPromptStatus: {
+            type: String,
+            default: ''
+        },
         ariaRole: {
             type: String,
             validator: (value) => {
@@ -160,6 +167,7 @@ export default {
 
         return {
             prompt,
+            promptStatus: { ...this.initialPromptStatus },
             isActive: false,
             validationMessage: ''
         }
@@ -189,6 +197,14 @@ export default {
         },
         showCancel() {
             return this.cancelOptions.indexOf('button') >= 0
+        },
+
+        /**
+         * Disables the input field if the promptStatus of this component is
+         * either 'loading' or 'disabled'.
+         */
+        inputDisabled() {
+            return this.promptStatus === 'loading' || this.promptStatus === 'disabled'
         }
     },
     methods: {
@@ -219,6 +235,13 @@ export default {
                 this.$destroy()
                 removeElement(this.$el)
             }, 150)
+        },
+
+        /**
+         * Changes the prompt status updating the button and input.
+         */
+        setStatus(newStatus) {
+            this.promptStatus = newStatus
         }
     },
     beforeMount() {
