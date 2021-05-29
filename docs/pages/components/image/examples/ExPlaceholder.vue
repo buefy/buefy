@@ -27,7 +27,10 @@
 </template>
 
 <style scoped>
-/deep/ .b-skeleton {
+/* >>> and /deep/ are deprecated on Vue 3.
+ * https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md
+ */
+::v-deep(.b-skeleton) {
     height: 100%;
     position: absolute;
     top: 0;
