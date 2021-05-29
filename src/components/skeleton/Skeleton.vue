@@ -1,4 +1,6 @@
 <script>
+import { h as createElement } from 'vue'
+
 export default {
     name: 'BSkeleton',
     functional: true,
@@ -35,29 +37,41 @@ export default {
         },
         size: String
     },
-    render(createElement, context) {
-        if (!context.props.active) return
+    render(props) {
+        if (!props.active) return
         const items = []
-        const width = context.props.width
-        const height = context.props.height
-        for (let i = 0; i < context.props.count; i++) {
+        const width = props.width
+        const height = props.height
+        for (let i = 0; i < props.count; i++) {
             items.push(createElement('div', {
-                staticClass: 'b-skeleton-item',
-                class: { 'is-rounded': context.props.rounded },
+                class: [
+                    'b-skeleton-item',
+                    { 'is-rounded': props.rounded }
+                ],
                 key: i,
                 style: {
-                    height: height === undefined ? null
+                    height: height === undefined
+                        ? null
                         : (isNaN(height) ? height : height + 'px'),
-                    width: width === undefined ? null
+                    width: width === undefined
+                        ? null
                         : (isNaN(width) ? width : width + 'px'),
-                    borderRadius: context.props.circle ? '50%' : null
+                    borderRadius: props.circle ? '50%' : null
                 }
             }))
         }
-        return createElement('div', {
-            staticClass: 'b-skeleton',
-            class: [ context.props.size, context.props.position, { 'is-animated': context.props.animated } ]
-        }, items)
+        return createElement(
+            'div',
+            {
+                class: [
+                    'b-skeleton',
+                    props.size,
+                    props.position,
+                    { 'is-animated': props.animated }
+                ]
+            },
+            items
+        )
     }
 }
 </script>
