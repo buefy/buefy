@@ -1,10 +1,9 @@
+import { createApp, h as createElement } from 'vue'
+
 import Loading from './Loading'
 
-import { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
-
-let localVueInstance
 
 const LoadingProgrammatic = {
     open(params) {
@@ -12,19 +11,47 @@ const LoadingProgrammatic = {
             programmatic: true
         }
         const propsData = merge(defaultParam, params)
-
-        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
-        const LoadingComponent = vm.extend(Loading)
-        return new LoadingComponent({
-            el: document.createElement('div'),
-            propsData
+        const container = document.createElement('div')
+        const vueInstance = createApp({
+            data() {
+                return {
+                    loadingVNode: null
+                }
+            },
+            methods: {
+                close() {
+                    // TODO: too much dependence on Vue's internal structure?
+                    const loading =
+                        this.loadingVNode?.component?.expose ||
+                        this.loadingVNode?.component?.proxy
+                    loading?.close()
+                }
+            },
+            render() {
+                this.loadingVNode = createElement(
+                    Loading,
+                    {
+                        ...propsData,
+                        onClose(...args) {
+                            if (propsData.onClose) {
+                                propsData.onClose(...args)
+                            }
+                            // timeout for the animation complete before destroying
+                            setTimeout(() => {
+                                vueInstance.unmount()
+                            }, 150)
+                        }
+                    }
+                )
+                return this.loadingVNode
+            }
         })
+        return vueInstance.mount(container)
     }
 }
 
 const Plugin = {
     install(Vue) {
-        localVueInstance = Vue
         registerComponent(Vue, Loading)
         registerComponentProgrammatic(Vue, 'loading', LoadingProgrammatic)
     }
