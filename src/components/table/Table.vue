@@ -384,7 +384,7 @@
 
             <template v-if="loading">
                 <slot name="loading">
-                    <b-loading :is-full-page="false" :active="loading" />
+                    <b-loading :is-full-page="false" :model-value="loading" />
                 </slot>
             </template>
         </div>
