@@ -10,7 +10,7 @@
                 'icon-text': icon,
             }"
             @click="onClick($event)"
-            v-on="$listeners">
+        >
             <b-icon
                 v-if="icon"
                 :icon="icon"
@@ -39,11 +39,19 @@
 <script>
 import Icon from '../icon/Icon'
 import config from '../../utils/config'
+import MenuItemContainerMixin from './MenuItemContainerMixin'
 
 export default {
     name: 'BMenuItem',
     components: {
         [Icon.name]: Icon
+    },
+    mixins: [MenuItemContainerMixin],
+    inject: {
+        parent: {
+            from: 'BMenuItemContainer',
+            default: null
+        }
     },
     inheritAttrs: false,
     // deprecated, to replace with default 'value' in the next breaking change
@@ -78,6 +86,7 @@ export default {
             default: 'is-small'
         }
     },
+    emits: ['update:active', 'update:expanded'],
     data() {
         return {
             newActive: this.active,
@@ -101,7 +110,7 @@ export default {
         onClick(event) {
             if (this.disabled) return
             const menu = this.getMenu()
-            this.reset(this.$parent, menu)
+            this.reset(this.parent, menu)
             this.newExpanded = this.$props.expanded || !this.newExpanded
             this.$emit('update:expanded', this.newExpanded)
             if (menu && menu.activable) {
@@ -110,8 +119,10 @@ export default {
             }
         },
         reset(parent, menu) {
-            const items = parent.$children.filter((c) => c.name === this.name)
-            items.forEach((item) => {
+            if (parent == null) {
+                return
+            }
+            parent.menuItems.forEach((item) => {
                 if (item !== this) {
                     this.reset(item, menu)
                     if (!parent.$data._isMenu || (parent.$data._isMenu && parent.accordion)) {
@@ -132,6 +143,12 @@ export default {
             }
             return parent
         }
+    },
+    mounted() {
+        this.parent?.appendMenuItem(this)
+    },
+    beforeUnmount() {
+        this.parent?.removeMenuItem(this)
     }
 }
 </script>

@@ -1,41 +1,51 @@
 <script>
-export default {
-    name: 'BMenuList',
-    functional: true,
-    props: {
-        label: String,
-        icon: String,
-        iconPack: String,
-        ariaRole: {
-            type: String,
-            default: ''
+import { h as createElement, resolveComponent } from 'vue'
+
+const BMenuList = (props, context) => {
+    let vlabel = null
+    const slots = context.slots
+    if (props.label || slots.label) {
+        vlabel = createElement(
+            'p',
+            { class: 'menu-label' },
+            props.label
+                ? props.icon
+                    ? [
+                        createElement(resolveComponent('b-icon'), {
+                            icon: props.icon,
+                            pack: props.iconPack,
+                            size: props.size
+                        }),
+                        createElement('span', {}, props.label)
+                    ]
+                    : props.label
+                : slots.label()
+        )
+    }
+    const vnode = createElement(
+        'ul',
+        {
+            class: 'menu-list',
+            role: props.ariaRole === 'menu' ? props.ariaRole : null
         },
-        size: {
-            type: String,
-            default: 'is-small'
-        }
+        slots.default()
+    )
+    return vlabel ? [vlabel, vnode] : vnode
+}
+
+BMenuList.props = {
+    label: String,
+    icon: String,
+    iconPack: String,
+    ariaRole: {
+        type: String,
+        default: ''
     },
-    render(createElement, context) {
-        let vlabel = null
-        const slots = context.slots()
-        if (context.props.label || slots.label) {
-            vlabel = createElement('p', { attrs: { 'class': 'menu-label' } },
-                context.props.label
-                    ? context.props.icon
-                        ? [
-                            createElement('b-icon', {
-                                props: {
-                                    'icon': context.props.icon,
-                                    'pack': context.props.iconPack,
-                                    'size': context.props.size
-                                }
-                            }),
-                            createElement('span', {}, context.props.label)
-                        ] : context.props.label
-                    : slots.label)
-        }
-        const vnode = createElement('ul', { attrs: { 'class': 'menu-list', 'role': context.props.ariaRole === 'menu' ? context.props.ariaRole : null } }, slots.default)
-        return vlabel ? [ vlabel, vnode ] : vnode
+    size: {
+        type: String,
+        default: 'is-small'
     }
 }
+
+export default BMenuList
 </script>
