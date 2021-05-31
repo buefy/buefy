@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import MenuItemContainerMixin from './MenuItemContainerMixin'
+
 export default {
     name: 'BMenu',
+    mixins: [MenuItemContainerMixin],
     props: {
         accordion: {
             type: Boolean,
