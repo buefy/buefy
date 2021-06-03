@@ -4,13 +4,8 @@ export default {
     components: {
         [Icon.name]: Icon
     },
-    // deprecated, to replace with default 'value' in the next breaking change
-    model: {
-        prop: 'active',
-        event: 'update:active'
-    },
     props: {
-        active: {
+        modelValue: {
             type: Boolean,
             default: true
         },
@@ -39,15 +34,16 @@ export default {
             default: false
         }
     },
+    emits: ['click', 'close', 'update:modelValue'],
     data() {
         return {
-            isActive: this.active,
+            isActive: this.modelValue,
             remainingTime: this.duration / 1000, // in seconds
             newIconSize: this.iconSize || this.size || 'is-large'
         }
     },
     watch: {
-        active(value) {
+        modelValue(value) {
             this.isActive = value
         },
         isActive(value) {
@@ -91,7 +87,7 @@ export default {
             this.isActive = false
             this.resetDurationProgress()
             this.$emit('close')
-            this.$emit('update:active', false)
+            this.$emit('update:modelValue', false)
         },
         click() {
             this.$emit('click')

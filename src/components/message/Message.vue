@@ -3,12 +3,15 @@
         <article
             v-show="isActive"
             class="message"
-            :class="[type, size]">
+            :class="[type, size]"
+        >
             <header v-if="$slots.header || title" class="message-header">
                 <div v-if="$slots.header">
                     <slot name="header" />
                 </div>
-                <p v-else-if="title">{{ title }}</p>
+                <p v-else-if="title">
+                    {{ title }}
+                </p>
                 <button
                     v-if="closable"
                     type="button"
@@ -25,10 +28,11 @@
                             :pack="iconPack"
                             :class="type"
                             both
-                            :size="newIconSize"/>
+                            :size="newIconSize"
+                        />
                     </div>
                     <div class="media-content">
-                        <slot/>
+                        <slot />
                     </div>
                 </div>
             </section>
@@ -38,7 +42,8 @@
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
                 :type="type"
-                :rounded="false"/>
+                :rounded="false"
+            />
         </article>
     </transition>
 </template>
