@@ -61,13 +61,8 @@ export default {
     directives: {
         trapFocus
     },
-    // deprecated, to replace with default 'value' in the next breaking change
-    model: {
-        prop: 'active',
-        event: 'update:active'
-    },
     props: {
-        active: Boolean,
+        modelValue: Boolean,
         component: [Object, Function, String],
         content: [String, Array],
         programmatic: Boolean,
@@ -142,15 +137,22 @@ export default {
             default: true
         }
     },
+    emits: [
+        'after-enter',
+        'after-leave',
+        'cancel',
+        'close',
+        'update:modelValue'
+    ],
     data() {
         return {
-            isActive: this.active || false,
+            isActive: this.modelValue || false,
             savedScrollTop: null,
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
                 : this.width,
-            animating: !this.active,
-            destroyed: !this.active
+            animating: !this.modelValue,
+            destroyed: !this.modelValue
         }
     },
     computed: {
@@ -172,7 +174,7 @@ export default {
         }
     },
     watch: {
-        active(value) {
+        modelValue(value) {
             this.isActive = value
         },
         isActive(value) {
@@ -234,7 +236,7 @@ export default {
         */
         close() {
             this.$emit('close')
-            this.$emit('update:active', false)
+            this.$emit('update:modelValue', false)
 
             // Timeout for the animation complete before destroying
             if (this.programmatic) {
@@ -282,14 +284,15 @@ export default {
             document.addEventListener('keyup', this.keyPress)
         }
     },
-    beforeMount() {
-        // Insert the Modal component in body tag
-        // only if it's programmatic
-        this.programmatic && document.body.appendChild(this.$el)
-    },
     mounted() {
-        if (this.programmatic) this.isActive = true
-        else if (this.isActive) this.handleScroll()
+        if (this.programmatic) {
+            // Insert the Modal component in body tag
+            // only if it's programmatic
+            // the following line used be in `beforeMount`
+            // but $el is null at `beforeMount`
+            document.body.appendChild(this.$el)
+            this.isActive = true
+        } else if (this.isActive) this.handleScroll()
     },
     beforeUnmount() {
         if (typeof window !== 'undefined') {
