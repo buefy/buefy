@@ -7,11 +7,12 @@
             @click="isComponentModalActive = true" />
 
         <b-modal
+            ref="modal"
             v-model="isComponentModalActive"
             has-modal-card
             full-screen
             :can-cancel="false">
-            <modal-form v-bind="formProps"></modal-form>
+            <modal-form v-bind="formProps" @close="$refs.modal.close()"></modal-form>
         </b-modal>
     </section>
 </template>
@@ -19,6 +20,7 @@
 <script>
     const ModalForm = {
         props: ['email', 'password'],
+        emits: ['close'],
         template: `
             <div class="modal-card" style="width: auto">
                 <header class="modal-card-head">
@@ -28,7 +30,7 @@
                     <b-field label="Email">
                         <b-input
                             type="email"
-                            :value="email"
+                            :modelValue="email"
                             placeholder="Your email"
                             required>
                         </b-input>
@@ -37,7 +39,7 @@
                     <b-field label="Password">
                         <b-input
                             type="password"
-                            :value="password"
+                            :modelValue="password"
                             password-reveal
                             placeholder="Your password"
                             required>
@@ -49,7 +51,7 @@
                 <footer class="modal-card-foot">
                     <b-button
                         label="Close"
-                        @click="$parent.close()" />
+                        @click="$emit('close')" />
                     <b-button
                         label="Login"
                         type="is-primary" />

@@ -14,7 +14,7 @@
 
         <Example :component="ExProgrammatic" :code="ExProgrammaticCode" title="Programmatic">
             <p>Syntax:</p>
-            <CodeView lang="javascript" :code="programmaticSyntax | pre" expanded/>
+            <CodeView lang="javascript" :code="preformat(programmaticSyntax)" expanded/>
         </Example>
 
         <Example :component="ExFullScreen" :code="ExFullScreenCode" title="Full Screen">
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+    import { preformat as _preformat } from '@/utils'
+
     import api from './api/modal'
     import variables from './variables/modal'
 
@@ -66,6 +68,11 @@
                 // From outside Vue instance
                 import { ModalProgrammatic as Modal } from 'buefy'
                 Modal.open(props)`
+            }
+        },
+        methods: {
+            preformat(text) {
+                return _preformat(text)
             }
         }
     }
