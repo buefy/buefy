@@ -33,7 +33,7 @@ function toggleEventListeners({ eventHandlers } = {}, action = 'add') {
     })
 }
 
-function bind(el, { value }) {
+function beforeMount(el, { value }) {
     const { handler, middleware, events } = processArgs(value)
 
     const instance = {
@@ -49,7 +49,7 @@ function bind(el, { value }) {
     instances.push(instance)
 }
 
-function update(el, { value }) {
+function updated(el, { value }) {
     const { handler, middleware, events } = processArgs(value)
     // `filter` instead of `find` for compat with IE
     const instance = instances.filter((instance) => instance.el === el)[0]
@@ -64,7 +64,7 @@ function update(el, { value }) {
     toggleEventListeners(instance, 'add')
 }
 
-function unbind(el) {
+function unmounted(el) {
     // `filter` instead of `find` for compat with IE
     const instance = instances.filter((instance) => instance.el === el)[0]
 
@@ -72,9 +72,9 @@ function unbind(el) {
 }
 
 const directive = {
-    bind,
-    update,
-    unbind,
+    beforeMount,
+    updated,
+    unmounted,
     instances
 }
 
