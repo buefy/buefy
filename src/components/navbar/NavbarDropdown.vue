@@ -16,13 +16,14 @@
                 'is-active': newActive && collapsible
             }"
             v-bind="$attrs"
-            v-on="$listeners"
             aria-haspopup="true"
             @click.prevent="toggleMenu"
             @keyup.enter="toggleMenu"
             tabindex="0"
         >
-            <template v-if="label">{{ label }}</template>
+            <template v-if="label">
+                {{ label }}
+            </template>
             <slot v-else name="label" />
         </component>
         <div
@@ -64,6 +65,7 @@ export default {
             default: 'a'
         }
     },
+    emits: ['active-change'],
     data() {
         return {
             newActive: this.active,

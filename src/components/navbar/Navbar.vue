@@ -1,4 +1,11 @@
 <script>
+import {
+    h as createElement,
+    resolveComponent,
+    resolveDirective,
+    withDirectives
+} from 'vue'
+
 import NavbarBurger from './NavbarBurger.vue'
 import clickOutside from '../../directives/clickOutside'
 
@@ -20,11 +27,6 @@ export default {
     directives: {
         clickOutside
     },
-    // deprecated, to replace with default 'value' in the next breaking change
-    model: {
-        prop: 'active',
-        event: 'update:active'
-    },
     props: {
         type: [String, Object],
         transparent: {
@@ -39,7 +41,7 @@ export default {
             type: Boolean,
             default: false
         },
-        active: {
+        modelValue: {
             type: Boolean,
             default: false
         },
@@ -61,9 +63,10 @@ export default {
         spaced: Boolean,
         shadow: Boolean
     },
+    emits: ['update:modelValue'],
     data() {
         return {
-            internalIsActive: this.active,
+            internalIsActive: this.modelValue,
             _isNavBar: true // Used internally by NavbarItem
         }
     },
@@ -86,7 +89,7 @@ export default {
         }
     },
     watch: {
-        active: {
+        modelValue: {
             handler(active) {
                 this.internalIsActive = active
             },
@@ -113,7 +116,7 @@ export default {
             }
         },
         emitUpdateParentEvent() {
-            this.$emit('update:active', this.internalIsActive)
+            this.$emit('update:modelValue', this.internalIsActive)
         },
         setBodyClass(className) {
             if (typeof window !== 'undefined') {
@@ -131,78 +134,87 @@ export default {
                 throw new Error('You should choose if the BNavbar is fixed bottom or fixed top, but not both')
             }
         },
-        genNavbar(createElement) {
-            let navBarSlots = [
-                this.genNavbarBrandNode(createElement),
-                this.genNavbarSlotsNode(createElement)
+        genNavbar() {
+            const navBarSlots = [
+                this.genNavbarBrandNode(),
+                this.genNavbarSlotsNode()
             ]
 
             if (!isFilled(this.wrapperClass)) {
-                return this.genNavbarSlots(createElement, navBarSlots)
+                return this.genNavbarSlots(navBarSlots)
             }
 
             // It wraps the slots into a div with the provided wrapperClass prop
-            const navWrapper = createElement('div', {
-                class: this.wrapperClass
-            }, navBarSlots)
+            const navWrapper = createElement(
+                'div',
+                { class: this.wrapperClass },
+                navBarSlots
+            )
 
-            return this.genNavbarSlots(createElement, [navWrapper])
+            return this.genNavbarSlots([navWrapper])
         },
-        genNavbarSlots(createElement, slots) {
-            return createElement('nav', {
-                staticClass: 'navbar',
-                class: this.computedClasses,
-                attrs: {
+        genNavbarSlots(slots) {
+            const vnode = createElement(
+                'nav',
+                {
+                    class: ['navbar', this.computedClasses],
                     role: 'navigation',
                     'aria-label': 'main navigation'
                 },
-                directives: [
-                    {
-                        name: 'click-outside',
-                        value: this.closeMenu
-                    }
-                ]
-            }, slots)
+                slots
+            )
+            return withDirectives(vnode, [
+                [resolveDirective('click-outside'), this.closeMenu]
+            ])
         },
-        genNavbarBrandNode(createElement) {
-            return createElement('div', {
-                class: 'navbar-brand'
-            }, [this.$slots.brand, this.genBurgerNode(createElement)])
+        genNavbarBrandNode() {
+            return createElement(
+                'div',
+                { class: 'navbar-brand' },
+                [this.$slots.brand(), this.genBurgerNode()]
+            )
         },
-        genBurgerNode(createElement) {
+        genBurgerNode() {
             if (this.mobileBurger) {
-                const defaultBurgerNode = createElement('navbar-burger', {
-                    props: {
-                        isOpened: this.isOpened
-                    },
-                    on: {
-                        click: this.toggleActive,
-                        keyup: (event) => {
+                const defaultBurgerNode = createElement(
+                    resolveComponent('navbar-burger'),
+                    {
+                        isOpened: this.isOpened,
+                        onClick: this.toggleActive,
+                        onKeyup: (event) => {
                             if (event.keyCode !== 13) return
                             this.toggleActive()
                         }
                     }
-                })
+                )
 
-                const hasBurgerSlot = !!this.$scopedSlots.burger
+                const hasBurgerSlot = !!this.$slots.burger
                 return hasBurgerSlot
-                    ? this.$scopedSlots.burger({
+                    ? this.$slots.burger({
                         isOpened: this.isOpened,
                         toggleActive: this.toggleActive
                     })
                     : defaultBurgerNode
             }
         },
-        genNavbarSlotsNode(createElement) {
-            return createElement('div', {
-                staticClass: 'navbar-menu',
-                class: { 'is-active': this.isOpened }
-            }, [this.genMenuPosition(createElement, 'start'), this.genMenuPosition(createElement, 'end')])
+        genNavbarSlotsNode() {
+            return createElement(
+                'div',
+                { class: ['navbar-menu', { 'is-active': this.isOpened }] },
+                [
+                    this.genMenuPosition('start'),
+                    this.genMenuPosition('end')
+                ]
+            )
         },
-        genMenuPosition(createElement, positionName) {
-            return createElement('div', {
-                staticClass: `navbar-${positionName}`
-            }, this.$slots[positionName])
+        genMenuPosition(positionName) {
+            return createElement(
+                'div',
+                { class: `navbar-${positionName}` },
+                this.$slots[positionName] != null
+                    ? this.$slots[positionName]()
+                    : []
+            )
         },
         setBodyFixedTopClass(isSet) {
             this.checkIfFixedPropertiesAreColliding()
@@ -233,19 +245,21 @@ export default {
         this.fixedTop && this.setBodyFixedTopClass(true)
         this.fixedBottom && this.setBodyFixedBottomClass(true)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (this.fixedTop) {
             const className = this.spaced
-                ? BODY_SPACED_FIXED_TOP_CLASS : BODY_FIXED_TOP_CLASS
+                ? BODY_SPACED_FIXED_TOP_CLASS
+                : BODY_FIXED_TOP_CLASS
             this.removeBodyClass(className)
         } else if (this.fixedBottom) {
             const className = this.spaced
-                ? BODY_SPACED_FIXED_BOTTOM_CLASS : BODY_FIXED_BOTTOM_CLASS
+                ? BODY_SPACED_FIXED_BOTTOM_CLASS
+                : BODY_FIXED_BOTTOM_CLASS
             this.removeBodyClass(className)
         }
     },
-    render(createElement, fn) {
-        return this.genNavbar(createElement)
+    render() {
+        return this.genNavbar()
     }
 }
 </script>
