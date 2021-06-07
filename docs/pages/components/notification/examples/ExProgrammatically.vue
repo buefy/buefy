@@ -47,10 +47,10 @@
                     message: `Something's not good, also I'm on <b>bottom</b>`,
                     position: 'is-bottom-right',
                     type: 'is-danger',
-                    hasIcon: true
-                })
-                notif.$on('close', () => {
-                    this.$buefy.notification.open('Custom notification closed!')
+                    hasIcon: true,
+                    onClose: () => {
+                        this.$buefy.notification.open('Custom notification closed!')
+                    }
                 })
             },
             pause() {
