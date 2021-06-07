@@ -20,7 +20,8 @@
                         :pack="iconPack"
                         :size="newIconSize"
                         both
-                        aria-hidden/>
+                        aria-hidden
+                    />
                 </div>
                 <div class="media-content">
                     <template v-if="$slots.default">
@@ -36,16 +37,23 @@
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
                 :type="type"
-                :rounded="false"/>
+                :rounded="false"
+            />
         </article>
     </transition>
 </template>
 
 <script>
+import Progress from '../progress/Progress'
 import MessageMixin from '../../utils/MessageMixin.js'
 
 export default {
     name: 'BNotification',
+    components: {
+        // directly registers Progress
+        // in case Notification is programmatically opened
+        [Progress.name]: Progress
+    },
     mixins: [MessageMixin],
     props: {
         position: String,

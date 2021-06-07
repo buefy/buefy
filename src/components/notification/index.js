@@ -1,15 +1,14 @@
+import { createApp, h as createElement } from 'vue'
+
 import Notification from './Notification'
 import NotificationNotice from './NotificationNotice'
 
-import config, { VueInstance } from '../../utils/config'
+import config from '../../utils/config'
 import { merge } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
-let localVueInstance
-
 const NotificationProgrammatic = {
     open(params) {
-        let parent
         if (typeof params === 'string') {
             params = {
                 message: params
@@ -20,37 +19,69 @@ const NotificationProgrammatic = {
             position: config.defaultNotificationPosition || 'is-top-right'
         }
         if (params.parent) {
-            parent = params.parent
             delete params.parent
+        }
+        let onClose
+        if (typeof params.onClose === 'function') {
+            onClose = params.onClose
+            delete params.onClose
         }
         let slot
         if (Array.isArray(params.message)) {
             slot = params.message
             delete params.message
         }
-        // fix animation
-        params.active = false
         const propsData = merge(defaultParam, params)
-        const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
-        const NotificationNoticeComponent = vm.extend(NotificationNotice)
-        const component = new NotificationNoticeComponent({
-            parent,
-            el: document.createElement('div'),
-            propsData
+        const container = document.createElement('div')
+        const vueInstance = createApp({
+            data() {
+                return {
+                    noticeVNode: null
+                }
+            },
+            methods: {
+                close() {
+                    const notice =
+                        this.noticeVNode?.component?.expose ||
+                        this.noticeVNode?.component?.proxy
+                    notice?.close()
+                }
+            },
+            render() {
+                this.noticeVNode = createElement(
+                    NotificationNotice,
+                    {
+                        ...propsData,
+                        onClose: () => {
+                            if (onClose != null) {
+                                onClose()
+                            }
+                            // waits for a while in favor of animation
+                            setTimeout(() => {
+                                vueInstance.unmount()
+                            }, 150)
+                        }
+                    },
+                    slot != null ? { default: () => slot } : undefined
+                )
+                return this.noticeVNode
+            }
         })
-        if (slot) {
-            component.$slots.default = slot
-            component.$forceUpdate()
-        }
-        // fix animation
-        component.$children[0].isActive = true
-        return component
+        // workaround for an error that
+        // $buefy.globalNoticeInterval is not defined
+        vueInstance.use({
+            install: (Vue) => {
+                Vue.config.globalProperties.$buefy = {
+                    globalNoticeInterval: null
+                }
+            }
+        })
+        return vueInstance.mount(container)
     }
 }
 
 const Plugin = {
     install(Vue) {
-        localVueInstance = Vue
         registerComponent(Vue, Notification)
         registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic)
     }
