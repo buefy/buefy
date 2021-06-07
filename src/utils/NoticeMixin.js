@@ -37,6 +37,7 @@ export default {
         },
         container: String
     },
+    emits: ['click', 'close'],
     data() {
         return {
             isActive: false,

@@ -1,7 +1,11 @@
 <template>
     <b-notification
-        v-bind="$options.propsData"
+        v-if="$slots.default != null"
         ref="notification"
+        :position="position"
+        :model-value="isActive"
+        v-bind="$attrs"
+        :duration="duration"
         @click="click"
         @close="close"
         @mouseenter="pause"
@@ -9,16 +13,36 @@
     >
         <slot />
     </b-notification>
+    <b-notification
+        v-else
+        ref="notification"
+        :position="position"
+        :model-value="isActive"
+        v-bind="$attrs"
+        :duration="duration"
+        @click="click"
+        @close="close"
+        @mouseenter="pause"
+        @mouseleave="removePause"
+    />
 </template>
 
 <script>
 import config from '../../utils/config'
-import NoticeMixin from '../../utils/NoticeMixin'
 import { removeElement } from '../../utils/helpers'
+import NoticeMixinSubset from './NoticeMixinSubset'
+import Notification from './Notification'
 
 export default {
     name: 'BNotificationNotice',
-    mixins: [NoticeMixin],
+    components: {
+        [Notification.name]: Notification
+    },
+    mixins: [NoticeMixinSubset],
+    props: {
+        duration: Number
+    },
+    emits: ['close'],
     data() {
         return {
             newDuration: this.duration || config.defaultNotificationDuration
@@ -33,7 +57,6 @@ export default {
 
                 // Timeout for the animation complete before destroying
                 setTimeout(() => {
-                    this.$destroy()
                     removeElement(this.$el)
                 }, 150)
             }
