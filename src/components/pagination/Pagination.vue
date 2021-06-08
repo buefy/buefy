@@ -4,7 +4,7 @@
             v-if="$slots.previous"
             name="previous"
             :page="
-                getPage(current - 1, {
+                getPage(modelValue - 1, {
                     disabled: !hasPrev,
                     class: 'pagination-previous',
                     'aria-label': ariaPreviousLabel,
@@ -22,7 +22,7 @@
             v-else
             class="pagination-previous"
             :disabled="!hasPrev"
-            :page="getPage(current - 1)"
+            :page="getPage(modelValue - 1)"
             :aria-label="ariaPreviousLabel"
         >
             <b-icon
@@ -36,7 +36,7 @@
             v-if="$slots.next"
             name="next"
             :page="
-                getPage(current + 1, {
+                getPage(modelValue + 1, {
                     disabled: !hasNext,
                     class: 'pagination-next',
                     'aria-label': ariaNextLabel,
@@ -54,7 +54,7 @@
             v-else
             class="pagination-next"
             :disabled="!hasNext"
-            :page="getPage(current + 1)"
+            :page="getPage(modelValue + 1)"
             :aria-label="ariaNextLabel"
         >
             <b-icon
@@ -80,7 +80,7 @@
         <small class="info" v-if="simple">
             <template v-if="perPage == 1"> {{ firstItem }} / {{ total }} </template>
             <template v-else>
-                {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
+                {{ firstItem }}-{{ Math.min(modelValue * perPage, total) }} / {{ total }}
             </template>
         </small>
         <ul class="pagination-list" v-else>
@@ -123,18 +123,13 @@ export default {
         [Icon.name]: Icon,
         [PaginationButton.name]: PaginationButton
     },
-    // deprecated, to replace with default 'value' in the next breaking change
-    model: {
-        prop: 'current',
-        event: 'update:current'
-    },
     props: {
         total: [Number, String],
         perPage: {
             type: [Number, String],
             default: 20
         },
-        current: {
+        modelValue: {
             type: [Number, String],
             default: 1
         },
@@ -176,9 +171,10 @@ export default {
     },
     data() {
         return {
-            inputValue: this.current
+            inputValue: this.modelValue
         }
     },
+    emits: ['change', 'update:modelValue'],
     computed: {
         rootClasses() {
             return [
@@ -212,7 +208,7 @@ export default {
         * First item of the page (count).
         */
         firstItem() {
-            const firstItem = this.current * this.perPage - this.perPage + 1
+            const firstItem = this.modelValue * this.perPage - this.perPage + 1
             return firstItem >= 0 ? firstItem : 0
         },
 
@@ -220,42 +216,42 @@ export default {
         * Check if previous button is available.
         */
         hasPrev() {
-            return this.current > 1
+            return this.modelValue > 1
         },
 
         /**
          * Check if first page button should be visible.
         */
         hasFirst() {
-            return this.current >= 2 + this.beforeCurrent
+            return this.modelValue >= 2 + this.beforeCurrent
         },
 
         /**
         * Check if first ellipsis should be visible.
         */
         hasFirstEllipsis() {
-            return this.current >= this.beforeCurrent + 4
+            return this.modelValue >= this.beforeCurrent + 4
         },
 
         /**
         * Check if last page button should be visible.
         */
         hasLast() {
-            return this.current <= this.pageCount - (1 + this.afterCurrent)
+            return this.modelValue <= this.pageCount - (1 + this.afterCurrent)
         },
 
         /**
         * Check if last ellipsis should be visible.
         */
         hasLastEllipsis() {
-            return this.current < this.pageCount - (2 + this.afterCurrent)
+            return this.modelValue < this.pageCount - (2 + this.afterCurrent)
         },
 
         /**
         * Check if next button is available.
         */
         hasNext() {
-            return this.current < this.pageCount
+            return this.modelValue < this.pageCount
         },
 
         /**
@@ -265,11 +261,11 @@ export default {
         pagesInRange() {
             if (this.simple) return
 
-            let left = Math.max(1, this.current - this.beforeCurrent)
+            let left = Math.max(1, this.modelValue - this.beforeCurrent)
             if (left - 1 === 2) {
                 left-- // Do not show the ellipsis if there is only one to hide
             }
-            let right = Math.min(this.current + this.afterCurrent, this.pageCount)
+            let right = Math.min(this.modelValue + this.afterCurrent, this.pageCount)
             if (this.pageCount - right === 2) {
                 right++ // Do not show the ellipsis if there is only one to hide
             }
@@ -286,10 +282,10 @@ export default {
         * If current page is trying to be greater than page count, set to last.
         */
         pageCount(value) {
-            if (this.current > value) this.last()
+            if (this.modelValue > value) this.last()
         },
 
-        current(value) {
+        modelValue(value) {
             this.inputValue = value
         },
 
@@ -308,13 +304,13 @@ export default {
         * Previous button click listener.
         */
         prev(event) {
-            this.changePage(this.current - 1, event)
+            this.changePage(this.modelValue - 1, event)
         },
         /**
          * Next button click listener.
         */
         next(event) {
-            this.changePage(this.current + 1, event)
+            this.changePage(this.modelValue + 1, event)
         },
         /**
          * First button click listener.
@@ -330,9 +326,9 @@ export default {
         },
 
         changePage(num, event) {
-            if (this.current === num || num < 1 || num > this.pageCount) return
+            if (this.modelValue === num || num < 1 || num > this.pageCount) return
 
-            this.$emit('update:current', num)
+            this.$emit('update:modelValue', num)
             this.$emit('change', num)
 
             // Set focus on element to keep tab order
@@ -344,14 +340,14 @@ export default {
         getPage(num, options = {}) {
             return {
                 number: num,
-                isCurrent: this.current === num,
+                isCurrent: this.modelValue === num,
                 click: (event) => this.changePage(num, event),
                 input: (event, inputNum) => this.changePage(+inputNum, event),
                 disabled: options.disabled || false,
                 class: options.class || '',
                 'aria-label':
           options['aria-label'] ||
-          this.getAriaPageLabel(num, this.current === num)
+          this.getAriaPageLabel(num, this.modelValue === num)
             }
         },
 
@@ -414,7 +410,7 @@ export default {
                 this.handleOnInputDebounce(event)
             } else {
                 // --- if NaN, then set inputValue back to current --- //
-                this.inputValue = this.current
+                this.inputValue = this.modelValue
             }
         }
     }
