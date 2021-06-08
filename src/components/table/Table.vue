@@ -136,11 +136,7 @@
                             </div>
                         </th>
                         <th
-<<<<<<< HEAD
-                            :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
-=======
                             :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
->>>>>>> 8349d87be7d258a94275a93bc7dc35c5fec1f7c8
                             v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
                                 <b-checkbox
@@ -250,11 +246,7 @@
                             </td>
 
                             <td
-<<<<<<< HEAD
-                                :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
-=======
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
->>>>>>> 8349d87be7d258a94275a93bc7dc35c5fec1f7c8
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     autocomplete="off"
@@ -285,11 +277,7 @@
                             </template>
 
                             <td
-<<<<<<< HEAD
-                                :class="'checkbox-cell' + ( stickyCheckbox ? ' is-sticky' : '' )"
-=======
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
->>>>>>> 8349d87be7d258a94275a93bc7dc35c5fec1f7c8
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     autocomplete="off"
