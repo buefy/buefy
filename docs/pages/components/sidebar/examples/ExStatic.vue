@@ -8,7 +8,7 @@
                 :reduce="reduce"
                 :delay="expandWithDelay ? 500 : null"
                 type="is-light"
-                open
+                :modelValue="true"
             >
                 <div class="p-1">
                     <div class="block">
