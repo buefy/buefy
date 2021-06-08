@@ -38,7 +38,7 @@ export default {
     },
     computed: {
         sampleFormat() {
-            const dtf = new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+            const dtf = new Intl.DateTimeFormat(this.locale)
             return dtf.format(new Date(2000, 11, 25, 12))
         }
     }

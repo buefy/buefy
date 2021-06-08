@@ -2,28 +2,28 @@
     <b-field grouped group-multiline>
         <b-input></b-input>
         <p class="control">
-            <button class="button">First</button>
+            <b-button label="First" />
         </p>
         <p class="control">
-            <button class="button">Second</button>
+            <b-button label="Second" />
         </p>
         <p class="control">
-            <button class="button">Third</button>
+            <b-button label="Third" />
         </p>
         <p class="control">
-            <button class="button">Fourth</button>
+            <b-button label="Fourth" />
         </p>
         <p class="control">
-            <button class="button">Fifth</button>
+            <b-button label="Fifth" />
         </p>
         <p class="control">
-            <button class="button">Sixth</button>
+            <b-button label="Sixth" />
         </p>
         <p class="control">
-            <button class="button">Seventh</button>
+            <b-button label="Seventh" />
         </p>
         <p class="control">
-            <button class="button">Eighth</button>
+            <b-button label="Eighth" />
         </p>
     </b-field>
 </template>

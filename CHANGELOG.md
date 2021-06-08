@@ -1,5 +1,135 @@
 # Buefy Changelog
 
+## 0.9.7
+
+### New features
+
+* Add transition appear to tabs/steps (thanks @jermel)
+* Add ``draggable-column`` prop to table  (thanks @T0RAT0RA)
+
+### Fixes
+
+* Resotre tzOffeset on datetimepicker
+* Fix #3224 datepicker on select a date in the next month when multiple (thanks @markokos01)
+* Fix #3278 weekdays off by one day (thanks @waldeck-dev)
+* Fix #3280 controls on number-input when disabled (thanks @service-paradis)
+
+## 0.9.6
+
+### Fixes
+
+* Fix datetimepicker timezone
+* Fix datepicker when append-to-body and auto open when value change (thanks @service-paradis)
+* Fix #3258 remove outline from step-item and tab-item on focus (thanks @service-paradis)
+* Fix #3262 first option selected on taginput when autocomplete (thanks @fabiofdsantos)
+
+## 0.9.5
+
+### New features
+
+* Shipped with Bulma 0.9.2 ([release note](https://github.com/jgthms/bulma/releases/tag/0.9.2))
+* Add ``rounded`` prop to Upload (thanks @major-mayer)
+* Add ``icon-right-type`` prop to Input (thanks @Propaganistas)
+* Add ``icon-right`` prop to Datepicker (thanks @darotar)
+* Add ``cancel-text`` prop to Snackbar (thanks @adamgreenhall)
+* Add ``indefinite`` prop to Toast (thanks @service-paradis)
+* Automatically select hovered option on blur for Autocomplete (thanks @fabiofdsantos)
+* Add ``aria-label`` prop to Modal (thanks @crowdcow-shae)
+* Add ``alt`` attribute to placeholder image (thanks @chazmcgarvey )
+* Add ``caption`` slot to Image (thanks @chazmcgarvey )
+* Add ``defaultSwitchRounded`` default configuration option (thanks @service-paradis)
+* Add ``detail-transition`` prop to Table (thanks @service-paradis)
+* Accept Date as values for Select (thanks @service-paradis)
+* Display events on unselectable Datepicker cell (thanks @service-paradis)
+* Add ``aria-minus-label`` and ``aria-plus-label`` functions for ``b-numberinput`` (thanks @service-paradis)
+* Add ``th-attrs`` and ``td-attrs`` functions for ``b-table``
+* Improve a11y on tab component (thanks @service-paradis)
+
+### Fixes
+
+* Fix #2678: tab navigation with ``boxed`` navbar dropdown (thanks @yuwu9145)
+* Fix #2848: incorrect inset shadow for ``b-radio-button`` (thanks @service-paradis)
+* Fix #2879: open DatetimePicker using the enter key (thanks @service-paradis)
+* Fix #2990: table sorting on multiple column (thanks @yuwu9145)
+* Fix #2994: table striped style with sticky columns (thanks @service-paradis)
+* Fix #3011: blur events for ClockPicker (thanks @yuwu9145)
+* Fix #3022: use aria labels on table pagination buttons (thanks @service-paradis)
+* Fix #3028: use aria labels on pagination next/previous buttons (thanks @service-paradis)
+* Fix #3035: autocomplete default content width in modal
+* Fix #3040: fix mutation of value in multiple dropdown (thanks @VictorCazanave)
+* Fix #3056: reset time on carousel when using arrows (thanks @harryJst)
+* Fix #3104: ``defaultDialogConfirmText`` not working
+* Fix #3107: keyboard usage with Datepicker date range (thanks @service-paradis)
+* Fix #3109: handle number values as expected for NumberInput (thanks @yuwu9145)
+* Fix #3113: dropdown with ``append-to-body`` ``z-index`` when inactive (thanks @Dragoncall)
+* Fix #3119: duplicated ``hovered`` event with Autocomplete (thanks @fabiofdsantos)
+* Fix #3124: restore tree shaking functionnality with default config (thanks @MartinodF)
+* Fix #3135: multiple ``fixed`` Navbar on the same page (thanks @WTDuck)
+* Fix #3161: display close button when Modal is displayed at start (thanks @aglio)
+* Fix #3168: wrong DatetimePicker behavior with empty value
+* Fix #3177: navigate to Datepicker footer using Tab (thanks @service-paradis)
+* Fix #3195: Tooltip ``auto-close`` with ``inside`` and ``outside`` (thanks @elC0mpa)
+* Fix #3216: unexpected form submit on enter in Autocomplete
+* Fix #3226: reactive Datepicker dates when using ``multiple`` (thanks @service-paradis)
+* Fix #3235: emit event on Table listeners (thanks @service-paradis)
+* Fix #3247: Remove extraneous a element in tag (thanks @service-paradis)
+
+
+## 0.9.4
+
+### New features
+
+* Shipped with Bulma 0.9.1
+* Add ``is-light`` variant to tooltip (thanks @service-paradis)
+* Add support for multiple progress bars (thanks @service-paradis)
+* Add ``cellclick`` event to b-table (thanks @dauriata)
+* Add ``controls-alignment`` prop to Numberinput (thanks @jonagoldman)
+* Add ``left-label`` prop to switch component (thanks @kaangokdemir)
+* Add ``indicator`` prop to show Slider value inside thumb (thanks @re2005)
+* Add ``autoFocus`` prop to Modal (thanks @mateuswetah)
+* Add ``aria-close-label`` prop to Taginput (thanks @service-paradis)
+* Support ``locale`` in Slider (thanks @service-paradis)
+* Add ``sticky-checkbox`` option to b-table (thanks @Numenorian)
+* Add ``rounded`` prop to table pagination (thanks @nastiaKuzanastasia.kuznetsova)
+* Add ``tooltip-always`` prop for Slider component (thanks @kaangokdemir)
+* Add ``#header`` slot inside of b-message to place a custom header (thanks @m4st3rm4tz3)
+* Add ``week-number-click`` event to Datepicker
+* Add toggleDetails to default Table slot
+* Add ``invalid`` event to Upload (thanks @adamgreenhall)
+* Add ``custom-search`` prop to table column
+
+
+### Fixes
+
+* Fix #2858: Too much events fired by BNavbar component (thanks @service-paradis)
+* Fix problem using ``lazy`` prop for Image component (thanks @service-paradis)
+* Fix #2862: setSelect null when clear button is triggered (thanks @re2005)
+* Fix #2851: table current page update parent value (thanks @re2005)
+* Fix #2865: table visible column count (thanks @service-paradis)
+* Fix #2893: select height in Datepicker when using ``label-position="inside"`` (thanks @service-paradis)
+* Fix #2904: check for null/undefined and not any false for Numberinput (thanks @damian-bal)
+* Use ``$slider-track-background`` for Slider track background (thanks @service-paradis)
+* Fix #2853: Sidebar closes when clicking on dynamically visible elements (thanks @service-paradis)
+* Fix #2916: select inside carousel (thanks @Tofandel)
+* Fix #2683: Datepicker focus when using arrow keys (thanks @service-paradis)
+* Fix Datepicker initial value fullYear when v-model is present (thanks @re2005)
+* Fix #2914: Label overlapping input text (thanks @service-paradis)
+* Fix #2933: sidebar ``can-cancel`` docs
+* Fix #2909: ``rounded prop`` to datetimepicker
+* Fix #2938: border-right missing in timepicker select (thanks @service-paradis)
+* Fix #2949: Do not emit drag/drop events if table is not ``draggable`` (thanks @service-paradis)
+* Fix #2945: Checking if ``minNumber`` is undefined before assigning it in NumberInput (thanks @elC0mpa)
+* Fix dropdown when expanded and ``append-to-body``
+* Fix #2940: trigger tooltip when ``append-to-body``
+* Fix MenuItem expanded prop update (thanks @aquaminer)
+* Fix #2944: header slot on tabs (thanks @yuchaosydney)
+* Fix #2871: Improve tabbing with autocompleted taginputs (thanks @rubjo)
+* Fix #3003: close tooltip when triggers is focus
+* Fix #2918: columns prop when individual import
+* Fix sidebar z-index
+* Fix #2977: disable scroll when sidebar is overlay
+
+
 ## 0.9.3
 
 ### New features
@@ -10,7 +140,7 @@
 * Add ``min-step`` prop to number input (thanks @abroekhof)
 * Add ``lazy`` prop to input (thanks @304NotModified)
 * Add ``centered`` propt to navbar (thanks @holtolee)
-* Add new progress bar text color (thanks @service-paradis) 
+* Add new progress bar text color (thanks @service-paradis)
 
 ### Fixes
 
@@ -27,7 +157,7 @@
 ### New features
 
 * Add ``group-label`` and ``group-options`` prop to autocomplete and taginput
-* Add support to vnode array on programmatic component using ``message`` prop 
+* Add support to vnode array on programmatic component using ``message`` prop
 * Add ``defaultTooltipDelay`` constructor option
 * Add ``contextmenu`` event to tooltip triggers
 * Add ``alt``, ``src-fallback`` and ``error`` prop to image (thanks @service-paradis)
@@ -41,7 +171,7 @@
 * Fix #2774 datepicker weekday names by locale
 * Fix #2778 tooltip using `append-to-body` and `always` (thanks @jacenre)
 * Fix #2783 unclickable content on tooltip
-* Fix #2789 space on menu-item 
+* Fix #2789 space on menu-item
 * Fix #2791 right margin on number input (thanks @user501254)
 * Fix taginput default height in order to be compliant with Bulma 0.8.x breaking changes
 
@@ -108,7 +238,7 @@ To
 * Replace default value of ``defaultDatepickerYearsRange`` constructor option from ``[-100, 3]`` to ``[-100, 10]``
 * Build with ``condense`` option to avoid leading/trailing whitespaces
 * Remove support to ``.sync`` modifier on ``current-page`` prop of table component (you have to use ``page-change`` event)
-* SVG: 
+* SVG:
     * ``$icon-svg-width: auto !default``;
     * ``$icon-svg-height: auto !default``;
 

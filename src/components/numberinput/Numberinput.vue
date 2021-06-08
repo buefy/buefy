@@ -13,10 +13,17 @@
                 type="button"
                 class="button"
                 :class="buttonClasses"
-                :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
-                @mousedown="onStartLongPress($event, control === 'plus')"
-                @touchstart.prevent="onStartLongPress($event, control === 'plus')"
-                @click="onControlClick($event, control === 'plus')"
+                :disabled="isDisabled(control)"
+                :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
+                @mousedown="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @touchstart.prevent="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @click="
+                    !isDisabled(control) && onControlClick($event, control === 'plus')
+                "
             >
                 <b-icon
                     both
@@ -28,7 +35,7 @@
         <b-input
             type="number"
             ref="input"
-            v-model.number="computedValue"
+            v-model="computedValue"
             v-bind="$attrs"
             :step="minStepNumber"
             :max="max"
@@ -61,10 +68,17 @@
                 type="button"
                 class="button"
                 :class="buttonClasses"
-                :disabled="disabled || control === 'plus' ? disabledMax : disabledMin"
-                @mousedown="onStartLongPress($event, control === 'plus')"
-                @touchstart.prevent="onStartLongPress($event, control === 'plus')"
-                @click="onControlClick($event, control === 'plus')"
+                :disabled="isDisabled(control)"
+                :aria-label="control === 'plus' ? ariaPlusLabel : ariaMinusLabel"
+                @mousedown="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @touchstart.prevent="
+                    !isDisabled(control) && onStartLongPress($event, control === 'plus')
+                "
+                @click="
+                    !isDisabled(control) && onControlClick($event, control === 'plus')
+                "
             >
                 <b-icon
                     both
@@ -127,7 +141,9 @@ export default {
             default: false
         },
         controlsPosition: String,
-        placeholder: [Number, String]
+        placeholder: [Number, String],
+        ariaMinusLabel: String,
+        ariaPlusLabel: String
     },
     data() {
         return {
@@ -153,7 +169,9 @@ export default {
                     }
                 }
                 this.newValue = newValue
-                this.$emit('input', newValue)
+                if (!isNaN(newValue) && newValue !== null && newValue !== '-0') {
+                    this.$emit('input', Number(newValue))
+                }
                 !this.isValid && this.$refs.input.checkHtml5Validity()
             }
         },
@@ -226,6 +244,9 @@ export default {
         }
     },
     methods: {
+        isDisabled(control) {
+            return this.disabled || (control === 'plus' ? this.disabledMax : this.disabledMin)
+        },
         decrement() {
             if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
                 if (this.computedValue === null || typeof this.computedValue === 'undefined') {

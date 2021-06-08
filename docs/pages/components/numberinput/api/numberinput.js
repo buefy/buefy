@@ -117,6 +117,20 @@ export default [
                 default: '<code>center</code>'
             },
             {
+                name: '<code>aria-minus-label</code>',
+                description: 'Accessibility label for the minus button.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-plus-label</code>',
+                description: 'Accessibility label for the plus button.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

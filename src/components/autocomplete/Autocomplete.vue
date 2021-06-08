@@ -19,8 +19,7 @@
             @focus="focused"
             @blur="onBlur"
             @keyup.native.esc.prevent="isActive = false"
-            @keydown.native.tab="tabPressed"
-            @keydown.native.enter.prevent="enterPressed"
+            @keydown.native="keydown"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
             @icon-right-click="rightIconClick"
@@ -130,7 +129,11 @@ export default {
         groupOptions: String,
         iconRight: String,
         iconRightClickable: Boolean,
-        appendToBody: Boolean
+        appendToBody: Boolean,
+        confirmKeys: {
+            type: Array,
+            default: () => ['Tab', 'Enter']
+        }
     },
     data() {
         return {
@@ -320,10 +323,14 @@ export default {
         /**
          * Select first option if "keep-first
          */
-        data(value) {
+        data() {
             // Keep first option always pre-selected
             if (this.keepFirst) {
-                this.selectFirstOption(this.computedData)
+                this.$nextTick(() => {
+                    if (this.isActive) {
+                        this.selectFirstOption(this.computedData)
+                    }
+                })
             }
         }
     },
@@ -373,26 +380,21 @@ export default {
             })
         },
 
-        /**
-         * Enter key listener.
-         * Select the hovered option.
-         */
-        enterPressed(event) {
+        keydown(event) {
+            const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
+            // prevent emit submit event
+            if (key === 'Enter') event.preventDefault()
+            // Close dropdown on Tab & no hovered
+            this.isActive = key !== 'Tab'
             if (this.hovered === null) return
-            this.setSelected(this.hovered, !this.keepOpen, event)
-        },
+            if (this.confirmKeys.indexOf(key) >= 0) {
+                // If adding by comma, don't add the comma to the input
+                if (key === ',') event.preventDefault()
 
-        /**
-         * Tab key listener.
-         * Select hovered option if it exists, close dropdown, then allow
-         * native handling to move to next tabbable element.
-         */
-        tabPressed(event) {
-            if (this.hovered === null) {
-                this.isActive = false
-                return
+                // Close dropdown on select by Tab
+                const closeDropdown = !this.keepOpen || key === 'Tab'
+                this.setSelected(this.hovered, closeDropdown, event)
             }
-            this.setSelected(this.hovered, !this.keepOpen, event)
         },
 
         /**
@@ -400,7 +402,13 @@ export default {
          */
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) this.isActive = false
+            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
+                if (this.keepFirst && this.hovered) {
+                    this.setSelected(this.hovered, true)
+                } else {
+                    this.isActive = false
+                }
+            }
         },
 
         /**

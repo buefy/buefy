@@ -100,6 +100,13 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>confirm-keys</code>',
+                description: 'Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will select an option when typing (default tab and enter)',
+                type: 'Array',
+                values: '—',
+                default: '<code>["Tab", "Enter"]</code>'
+            },
+            {
                 name: '<code>clearable</code>',
                 description: 'Add a button to clear the inputed text',
                 type: 'Boolean',
@@ -143,8 +150,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append autocomplete content to body',
-                type: 'Boolean',
+                description: 'Append autocomplete content to body (prevents event bubbling)',
                 values: '—',
                 default: '<code>false</code>'
             },

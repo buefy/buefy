@@ -25,6 +25,7 @@
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
+                        :icon-right="iconRight"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -141,6 +142,7 @@
                             :nearby-month-days="nearbyMonthDays"
                             :nearby-selectable-month-days="nearbySelectableMonthDays"
                             :show-week-number="showWeekNumber"
+                            :week-number-clickable="weekNumberClickable"
                             :range="range"
                             :multiple="multiple"
                             @range-start="date => $emit('range-start', date)"
@@ -281,6 +283,11 @@ export default {
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
+    provide() {
+        return {
+            $datepicker: this
+        }
+    },
     props: {
         value: {
             type: [Date, Array]
@@ -321,12 +328,12 @@ export default {
         editable: Boolean,
         disabled: Boolean,
         horizontalTimePicker: Boolean,
-        unselectableDates: Array,
+        unselectableDates: [Array, Function],
         unselectableDaysOfWeek: {
             type: Array,
             default: () => config.defaultUnselectableDaysOfWeek
         },
-        selectableDates: Array,
+        selectableDates: [Array, Function],
         dateFormatter: {
             type: Function,
             default: (date, vm) => {
@@ -362,6 +369,7 @@ export default {
             default: () => config.defaultDatepickerMobileNative
         },
         position: String,
+        iconRight: String,
         events: Array,
         indicators: {
             type: String,
@@ -400,6 +408,10 @@ export default {
             type: Boolean,
             default: () => config.defaultDatepickerShowWeekNumber
         },
+        weekNumberClickable: {
+            type: Boolean,
+            default: () => config.defaultDatepickerWeekNumberClickable
+        },
         rulesForFirstWeek: {
             type: Number,
             default: () => 4
@@ -436,7 +448,7 @@ export default {
         const focusedDate = (Array.isArray(this.value) ? this.value[0] : (this.value)) ||
             this.focusedDate || this.dateCreator()
 
-        if (!this.value && this.maxDate && this.maxDate.getFullYear() < new Date().getFullYear()) {
+        if (!this.value && this.maxDate && this.maxDate.getFullYear() < focusedDate.getFullYear()) {
             focusedDate.setFullYear(this.maxDate.getFullYear())
         }
 
@@ -477,13 +489,13 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timezome: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
                 month: this.localeOptions.month || '2-digit',
-                timezome: 'UTC'
+                timeZone: 'UTC'
             })
         },
         newMonthNames() {
@@ -722,7 +734,7 @@ export default {
         },
         updateInternalState(value) {
             const currentDate = Array.isArray(value)
-                ? (!value.length ? this.dateCreator() : value[0])
+                ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
             this.focusedDateData = {
                 day: currentDate.getDate(),
@@ -737,10 +749,13 @@ export default {
          */
         togglePicker(active) {
             if (this.$refs.dropdown) {
-                if (this.closeOnClick) {
-                    this.$refs.dropdown.isActive = typeof active === 'boolean'
-                        ? active
-                        : !this.$refs.dropdown.isActive
+                const isActive = typeof active === 'boolean'
+                    ? active
+                    : !this.$refs.dropdown.isActive
+                if (isActive) {
+                    this.$refs.dropdown.isActive = isActive
+                } else if (this.closeOnClick) {
+                    this.$refs.dropdown.isActive = isActive
                 }
             }
         },

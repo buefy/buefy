@@ -4,8 +4,7 @@
             <div
                 v-show="active && (isActive || always)"
                 ref="content"
-                :class="['tooltip-content', contentClass]"
-                :style="style">
+                :class="['tooltip-content', contentClass]">
                 <template v-if="label">{{ label }}</template>
                 <template v-else-if="$slots.content">
                     <slot name="content" />
@@ -15,10 +14,12 @@
         <div
             ref="trigger"
             class="tooltip-trigger"
+            :style="triggerStyle"
             @click="onClick"
             @contextmenu="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
+            @blur.capture="close"
             @mouseleave="close">
             <slot ref="slot" />
         </div>
@@ -87,7 +88,7 @@ export default {
     data() {
         return {
             isActive: false,
-            style: {},
+            triggerStyle: {},
             timer: null,
             _bodyEl: undefined // Used to append to body
         }
@@ -144,6 +145,7 @@ export default {
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
                 wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
+                this.triggerStyle = { zIndex: this.isActive || this.always ? '100' : undefined }
             }
         },
         onClick() {
@@ -189,9 +191,13 @@ export default {
         clickedOutside(event) {
             if (this.isActive) {
                 if (Array.isArray(this.autoClose)) {
-                    if (this.autoClose.indexOf('outside') >= 0) {
-                        if (!this.isInWhiteList(event.target)) this.isActive = false
-                    } else if (this.autoClose.indexOf('inside') >= 0) {
+                    if (this.autoClose.includes('outside')) {
+                        if (!this.isInWhiteList(event.target)) {
+                            this.isActive = false
+                            return
+                        }
+                    }
+                    if (this.autoClose.includes('inside')) {
                         if (this.isInWhiteList(event.target)) this.isActive = false
                     }
                 }

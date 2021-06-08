@@ -60,8 +60,7 @@ export default {
                 hour: 'numeric',
                 minute: 'numeric',
                 second: this.enableSeconds ? 'numeric' : undefined,
-                hour12: this.hourFormat ? this.hourFormat === '12' : undefined,
-                timezome: 'UTC'
+                hour12: this.hourFormat ? this.hourFormat === '12' : undefined
             })
             return dtf.format(new Date(2000, 12, 12, 22, 23, 24))
         }

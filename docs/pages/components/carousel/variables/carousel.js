@@ -30,19 +30,14 @@ export default [
         default: '<code>rgba($scheme-invert, 0.45)</code>'
     },
     {
-        name: '<code>$carousel-indicator-color</code>',
-        description: 'The carousel indicator color',
+        name: '<code>$carousel-indicator-border</code>',
+        description: 'The carousel indicator color border',
         default: '<code>$scheme-main</code>'
     },
     {
-        name: '<code>$carousel-indicator-border</code>',
-        description: 'The carousel indicator color border',
-        default: '<code>$primary</code>'
-    },
-    {
         name: '<code>$carousel-indicator-color</code>',
-        description: 'The carousel indicator background',
-        default: '<code>$white</code>'
+        description: 'The carousel indicator color',
+        default: '<code>$primary</code>'
     },
     {
         name: '<code>$carousel-indicator-spaced</code>',

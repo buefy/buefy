@@ -93,9 +93,14 @@ describe('BSlider', () => {
 
     describe('When biggerSliderFocus is set to true', () => {
         it('renders a component with sliderFocus class', () => {
-            wrapper.setProps({biggerSliderFocus: true})
+            wrapper.setProps({ biggerSliderFocus: true })
             const subject = wrapper.find('.slider-focus')
             expect(subject.exists()).toBeTruthy()
         })
+    })
+
+    it('passes tooltip-always prop to b-slider-thumb component', () => {
+        wrapper.setProps({ tooltipAlways: true })
+        expect(wrapper.find('b-slider-thumb-stub').props().tooltipAlways).toBe(true)
     })
 })

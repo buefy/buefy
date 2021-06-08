@@ -13,7 +13,7 @@ export default [
                 description: 'Function to format date to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timeZone: "UTC" }).format(date)</code>'
             },
             {
                 name: '<code>date-parser</code>',
@@ -122,8 +122,8 @@ export default [
             },
             {
                 name: '<code>unselectable-dates</code>',
-                description: 'Array of unselectable dates',
-                type: 'Array',
+                description: 'Array of unselectable dates, or a function to identify unselectable dates',
+                type: 'Array, Function',
                 values: '—',
                 default: '-'
             },
@@ -136,8 +136,8 @@ export default [
             },
             {
                 name: '<code>selectable-dates</code>',
-                description: 'Array of selectable dates',
-                type: 'Array',
+                description: 'Array of selectable dates, or a function to identify selectable dates',
+                type: 'Array, Function',
                 values: '—',
                 default: '-'
             },
@@ -227,6 +227,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>week-number-clickable</code>',
+                description: 'Enable click on week number',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>rules-for-first-week</code>',
                 description: 'Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other',
                 type: 'Number',
@@ -262,8 +269,15 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>close-on-click</code>',
+                description: 'Choose whether the Datepicker should close after selecting a date',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>append-to-body</code>',
-                description: 'Append datepicker calendar to body',
+                description: 'Append datepicker calendar to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -332,6 +346,11 @@ export default [
                 name: '<code>range-end</code>',
                 description: 'Triggers when user ends selecting a date range (Only when <b>range</b> prop is set)',
                 parameters: '<code>date: Date</code>'
+            },
+            {
+                name: '<code>week-number-click</code>',
+                description: 'Triggers when user click on week number (Only when <b>show-week-number</b> and <b>week-number-clickable</b> props are set)',
+                parameters: '<code>week: Number</code>'
             }
         ],
         methods: [

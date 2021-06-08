@@ -55,7 +55,7 @@ export default [
             },
             {
                 name: '<code>loading</code>',
-                description: 'Add the loading state',
+                description: 'Add the loading state to the drag & drop area',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -77,6 +77,13 @@ export default [
             {
                 name: '<code>expanded</code>',
                 description: 'Upload will be expanded (full-width)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Upload will be rounded',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

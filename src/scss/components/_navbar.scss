@@ -4,9 +4,19 @@
             justify-content: center;
             margin-left: auto;
         }
-    
+
         .navbar-end {
             margin-left: 0;
         }
+    }
+
+    .navbar-dropdown.is-boxed {
+        visibility: hidden;
+        transition-property: opacity, visibility, transform;
+    }
+
+    .navbar-item.has-dropdown.is-active .is-boxed,
+    .navbar-item.has-dropdown.is-hoverable:hover .is-boxed {
+        visibility: visible;
     }
 }

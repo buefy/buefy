@@ -1,12 +1,65 @@
+$tabs-focused-outline: none !default;
+$tabs-items-focused-outline: none !default;
+$tabs-link-focus-active-border-bottom-color: $tabs-link-active-border-bottom-color !default;
+$tabs-link-focus-border-bottom-color: $tabs-link-hover-border-bottom-color !default;
+$tabs-boxed-link-focus-active-background-color: $tabs-boxed-link-active-background-color !default;
+$tabs-boxed-link-focus-background-color: $tabs-boxed-link-hover-background-color !default;
+$tabs-boxed-link-focus-active-border-bottom-color: $tabs-boxed-link-active-border-bottom-color !default;
+$tabs-boxed-link-focus-border-bottom-color: $tabs-boxed-link-hover-border-bottom-color !default;
+$tabs-toggle-link-focus-active-background-color: $tabs-toggle-link-active-background-color !default;
+$tabs-toggle-link-focus-background-color: $tabs-toggle-link-hover-background-color !default;
+$tabs-toggle-link-focus-active-border-color: $tabs-toggle-link-active-border-color !default;
+$tabs-toggle-link-focus-border-color: $tabs-toggle-link-hover-border-color !default;
+
 .b-tabs {
     .tabs {
         margin-bottom: 0;
         flex-shrink: 0;
         li {
+            a:focus {
+                outline: $tabs-focused-outline;
+                border-bottom-color: $tabs-link-focus-active-border-bottom-color;
+            }
+            &:not(.is-active) {
+                a:focus {
+                    border-bottom-color: $tabs-link-focus-border-bottom-color;
+                }
+            }
+
             &.is-disabled {
                 pointer-events: none;
                 cursor: not-allowed;
                 opacity: 0.5;
+            }
+        }
+
+        // Styles
+        &.is-boxed {
+            li {
+                a:focus {
+                    background-color: $tabs-boxed-link-focus-active-background-color;
+                    border-bottom-color: $tabs-boxed-link-focus-active-border-bottom-color;
+                }
+                &:not(.is-active) {
+                    a:focus {
+                        background-color: $tabs-boxed-link-focus-background-color;
+                        border-bottom-color: $tabs-boxed-link-focus-border-bottom-color;
+                    }
+                }
+            }
+        }
+        &.is-toggle {
+            li {
+                a:focus {
+                    background-color: $tabs-toggle-link-focus-active-background-color;
+                    border-color: $tabs-toggle-link-focus-active-border-color;
+                }
+                &:not(.is-active) {
+                    a:focus {
+                        background-color: $tabs-toggle-link-focus-background-color;
+                        border-color: $tabs-toggle-link-focus-border-color;
+                    }
+                }
             }
         }
     }
@@ -19,6 +72,10 @@
         .tab-item {
             flex-shrink: 0;
             flex-basis: auto;
+
+            &:focus {
+                outline: $tabs-items-focused-outline;
+            }
         }
         &.is-transitioning {
             overflow: hidden;

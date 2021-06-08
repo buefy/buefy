@@ -13,6 +13,7 @@
             v-trap-focus="trapFocus"
             tabindex="-1"
             :role="ariaRole"
+            :aria-label="ariaLabel"
             :aria-modal="ariaModal">
             <div class="modal-background" @click="cancel('outside')"/>
             <div
@@ -124,6 +125,12 @@ export default {
             }
         },
         ariaModal: Boolean,
+        ariaLabel: {
+            type: String,
+            validator: (value) => {
+                return Boolean(value)
+            }
+        },
         destroyOnHide: {
             type: Boolean,
             default: true
@@ -136,7 +143,7 @@ export default {
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
                 : this.width,
-            animating: true,
+            animating: !this.active,
             destroyed: !this.active
         }
     },
@@ -149,7 +156,7 @@ export default {
                 : this.canCancel
         },
         showX() {
-            return this.cancelOptions.indexOf('x') >= 0 && !this.hasModalCard
+            return this.cancelOptions.indexOf('x') >= 0
         },
         customStyle() {
             if (!this.fullScreen) {

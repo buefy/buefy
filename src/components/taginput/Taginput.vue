@@ -44,16 +44,19 @@
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
                 :keep-open="openOnFocus"
-                :keep-first="!allowNew"
+                :keep-first="keepFirst"
                 :group-field="groupField"
                 :group-options="groupOptions"
                 :use-html5-validation="useHtml5Validation"
                 :check-infinite-scroll="checkInfiniteScroll"
                 :append-to-body="appendToBody"
+                :confirm-keys="confirmKeys"
                 @typing="onTyping"
                 @focus="onFocus"
                 @blur="customOnBlur"
                 @keydown.native="keydown"
+                @compositionstart.native="isComposing = true"
+                @compositionend.native="isComposing = false"
                 @select="onSelect"
                 @infinite-scroll="emitInfiniteScroll">
                 <template
@@ -143,6 +146,7 @@ export default {
         groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
+        keepFirst: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
         closable: {
@@ -152,7 +156,7 @@ export default {
         ariaCloseLabel: String,
         confirmKeys: {
             type: Array,
-            default: () => [',', 'Enter']
+            default: () => [',', 'Tab', 'Enter']
         },
         removeOnKeys: {
             type: Array,
@@ -185,6 +189,7 @@ export default {
         return {
             tags: Array.isArray(this.value) ? this.value.slice(0) : (this.value || []),
             newTag: '',
+            isComposing: false,
             _elementRef: 'autocomplete',
             _isTaginput: true
         }
@@ -227,7 +232,7 @@ export default {
          * Show the input field if a maxtags hasn't been set or reached.
          */
         hasInput() {
-            return this.maxtags == null || this.tagsLength < this.maxtags
+            return this.maxtags == null || this.maxtags === 1 || this.tagsLength < this.maxtags
         },
 
         tagsLength() {
@@ -277,6 +282,9 @@ export default {
                 // or previously added (if not allowDuplicates).
                 const add = !this.allowDuplicates ? this.tags.indexOf(tagToAdd) === -1 : true
                 if (add && this.beforeAdding(tagToAdd)) {
+                    if (this.maxtags === 1) {
+                        this.tags = [] // replace existing tag if only 1 is allowed
+                    }
                     this.tags.push(this.createTag(tagToAdd))
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
@@ -336,7 +344,9 @@ export default {
             if (this.autocomplete && !this.allowNew) return
 
             if (this.confirmKeys.indexOf(key) >= 0) {
-                event.preventDefault()
+                // Allow Tab to advance to next field regardless
+                if (key !== 'Tab') event.preventDefault()
+                if (key === 'Enter' && this.isComposing) return
                 this.addTag()
             }
         },

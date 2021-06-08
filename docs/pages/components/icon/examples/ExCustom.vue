@@ -74,21 +74,21 @@
             </div>
 
             <div class="buttons">
-                <button class="button is-dark">
-                    <b-icon pack="ionicons" icon="checkmark"></b-icon>
-                    <span>Finish</span>
-                </button>
-                <button class="button is-warning">
-                    <b-icon pack="ionicons" icon="checkmark"></b-icon>
-                    <span>Finish</span>
-                </button>
-                <button class="button is-warning">
-                    <b-icon
-                        pack="ionicons"
-                        icon="refresh">
-                    </b-icon>
-                    <span>Refresh</span>
-                </button>
+                <b-button
+                    label="Finish"
+                    type="is-dark"
+                    icon-pack="ionicons"
+                    icon-left="checkmark" />
+                <b-button
+                    label="Finish"
+                    type="is-warning"
+                    icon-pack="ionicons"
+                    icon-left="checkmark" />
+                <b-button
+                    label="Refresh"
+                    type="is-warning"
+                    icon-pack="ionicons"
+                    icon-left="refresh" />
             </div>
         </div>
 
@@ -166,21 +166,21 @@
             </div>
 
             <div class="buttons">
-                <button class="button is-dark">
-                    <b-icon pack="uil" icon="check"></b-icon>
-                    <span>Finish</span>
-                </button>
-                <button class="button is-warning">
-                    <b-icon pack="uil" icon="check"></b-icon>
-                    <span>Finish</span>
-                </button>
-                <button class="button is-warning">
-                    <b-icon
-                        pack="uil"
-                        icon="refresh">
-                    </b-icon>
-                    <span>Refresh</span>
-                </button>
+                <b-button
+                    label="Finish"
+                    type="is-dark"
+                    icon-pack="uil"
+                    icon-left="check" />
+                <b-button
+                    label="Finish"
+                    type="is-warning"
+                    icon-pack="uil"
+                    icon-left="check" />
+                <b-button
+                    label="Refresh"
+                    type="is-warning"
+                    icon-pack="uil"
+                    icon-left="refresh" />
             </div>
         </div>
 

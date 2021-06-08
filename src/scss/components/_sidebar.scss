@@ -10,7 +10,7 @@ $sidebar-colors: $navbar-colors !default;
         background-color: $background;
         box-shadow: $sidebar-box-shadow;
         width: $sidebar-width;
-        z-index: 41;
+        z-index: 39;
         @each $name, $pair in $sidebar-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
@@ -93,6 +93,6 @@ $sidebar-colors: $navbar-colors !default;
         @include overlay;
         background: $sidebar-background;
         position: fixed;
-        z-index: 40;
+        z-index: 38;
     }
 }

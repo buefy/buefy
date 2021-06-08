@@ -37,7 +37,7 @@ export default [
                 description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
                 values: '—',
-                default: '<code>(time) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(time)</code>'
+                default: '<code>(time) => new Intl.DateTimeFormat(locale).format(time)</code>'
             },
             {
                 name: '<code>time-parser</code>',
@@ -160,7 +160,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append clockpicker calendar to body',
+                description: 'Append clockpicker calendar to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

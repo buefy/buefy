@@ -89,6 +89,13 @@ export default [
                 default: '—'
             }
         ],
+        slots: [
+            {
+                name: '<code>header</code>',
+                description: 'Message custom header',
+                props: '—'
+            }
+        ],
         events: [
             {
                 name: '<code>close</code>',

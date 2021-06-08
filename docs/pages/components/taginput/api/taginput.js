@@ -142,10 +142,10 @@ export default [
             },
             {
                 name: '<code>confirm-keys</code>',
-                description: 'Array of key (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma and enter)',
+                description: 'Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma, tab and enter)',
                 type: 'Array',
                 values: '—',
-                default: '<code>[",", "Enter"]</code>'
+                default: '<code>[",", "Tab", "Enter"]</code>'
             },
             {
                 name: '<code>on-paste-separators</code>',
@@ -191,7 +191,7 @@ export default [
             },
             {
                 name: '<code>append-to-body</code>',
-                description: 'Append autocomplete content to body',
+                description: 'Append autocomplete content to body (prevents event bubbling)',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

@@ -65,7 +65,7 @@ Vue.use(Input)
 ### 3 Include Material Design Icons
 
 ```html
-<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
 ```
 
 If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.org/documentation/customization).
@@ -90,7 +90,7 @@ Please see the [contributing guidelines](./.github/CONTRIBUTING.md)
 
 ## Versioning
 
-While it's still in beta, version will follow **v0.Y.Z**, where:
+Version will follow **v0.Y.Z**, where:
 
 * **Y**: Major (breaking changes)
 * **Z**: Minor or patch
@@ -104,15 +104,6 @@ While it's still in beta, version will follow **v0.Y.Z**, where:
 </table>
 
 Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
-
-## Supporting through Patreon
-
-Buefy is an open source MIT project if you are interested in supporting this project, please consider becoming a patron.
-<p align="center">
-  <a href="https://www.patreon.com/jtommy">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
-  </a>
-</p>
 
 ## Contributors ✨
 

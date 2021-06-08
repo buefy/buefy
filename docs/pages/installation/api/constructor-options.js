@@ -148,7 +148,7 @@ export default [
                 description: `Default datepicker <code>date-formatter</code> attribute`,
                 type: 'Function',
                 values: '—',
-                default: '<code>(date) => new Intl.DateTimeFormat(locale, { timezome: "UTC" }).format(date)</code>'
+                default: '<code>(date) => new Intl.DateTimeFormat(locale).format(date)</code>'
             },
             {
                 name: '<code>defaultDateParser</code>',
@@ -331,6 +331,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>defaultSwitchRounded</code>',
+                description: 'Default config to make all switch rounded.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
             },
             {
                 name: '<code>defaultCarouselInterval</code>',

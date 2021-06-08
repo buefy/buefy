@@ -138,27 +138,6 @@ describe('BDatepickerTableRow', () => {
         expect(wrapper.vm.daysInYear(2021)).toBe(365)
     })
 
-    it('manage inner date functions accordingly', () => {
-        const day = newDate(2019, 7, 28)
-
-        expect(wrapper.vm.firstWeekOffset(
-            2019,
-            wrapper.vm.firstDayOfWeek,
-            wrapper.vm.rulesForFirstWeek
-        )).toBe(-2)
-
-        expect(wrapper.vm.getSetDayOfYear(day)).toBe(240)
-
-        expect(wrapper.vm.weeksInYear(
-            2019,
-            wrapper.vm.firstDayOfWeek,
-            wrapper.vm.rulesForFirstWeek
-        )).toBe(52)
-
-        expect(wrapper.vm.getWeekNumber(day)).toBe(35)
-        expect(wrapper.vm.getWeekNumber(newDate(2019, 11, 31))).toBe(1)
-    })
-
     it('emit chosen date', () => {
         wrapper.vm.selectableDate = jest.fn(() => false)
         wrapper.vm.emitChosenDate(5)
@@ -171,37 +150,15 @@ describe('BDatepickerTableRow', () => {
         expect(wrapper.emitted()['select']).toBeTruthy()
     })
 
-    it('emit focused date', () => {
+    it('emit focused date', async () => {
         const [y, m, d] = [2019, 4, 4]
-        const day = newDate(y, m, d)
+        let day = newDate(y, m, d)
 
         let inc = 1
-        let expected = day
-        expected.setDate(day.getDate() + inc)
         wrapper.vm.changeFocus(day, inc)
+        await wrapper.vm.$nextTick()
         let valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted).toContainEqual(expected)
-
-        inc = -1
-        expected = day
-        expected.setDate(day.getDate() + inc)
-        wrapper.vm.changeFocus(day, inc)
-        valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted).toContainEqual(expected)
-
-        inc = 7
-        expected = day
-        expected.setDate(day.getDate() + inc)
-        wrapper.vm.changeFocus(day, inc)
-        valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted).toContainEqual(expected)
-
-        inc = -7
-        expected = day
-        expected.setDate(day.getDate() + inc)
-        wrapper.vm.changeFocus(day, inc)
-        valueEmitted = wrapper.emitted()['change-focus'][0]
-        expect(valueEmitted).toContainEqual(expected)
+        expect(valueEmitted[0].getDate()).toEqual(d + inc)
     })
 
     it('match event days accordingly', () => {

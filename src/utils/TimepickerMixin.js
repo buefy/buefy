@@ -211,8 +211,7 @@ export default {
                 hour: this.localeOptions.hour || 'numeric',
                 minute: this.localeOptions.minute || 'numeric',
                 second: this.enableSeconds ? this.localeOptions.second || 'numeric' : undefined,
-                hour12: !this.isHourFormat24,
-                timezome: 'UTC'
+                hour12: !this.isHourFormat24
             })
         },
         newHourFormat() {

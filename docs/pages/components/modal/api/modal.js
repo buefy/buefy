@@ -130,6 +130,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>aria-label</code>',
+                description: `Aria label attribute to be passed to modal container for better accessibility.`,
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>aria-modal</code>',
                 description: `Improve accessiblity when enabled.`,
                 type: 'Boolean',

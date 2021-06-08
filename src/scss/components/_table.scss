@@ -225,6 +225,20 @@ $table-sticky-header-height: 300px !default;
                 background: $table-background-color;
             }
         }
+
+        &.is-striped {
+            tbody {
+                tr:not(.is-selected) {
+                    &:nth-child(even) {
+                        td {
+                            &.is-sticky {
+                                background: $table-striped-row-even-background-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .level:not(.top) {

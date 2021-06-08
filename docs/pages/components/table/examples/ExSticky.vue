@@ -23,6 +23,7 @@
             :sticky-header="stickyHeaders"
             checkable
             sticky-checkbox
+            striped
         ></b-table>
     </section>
 </template>

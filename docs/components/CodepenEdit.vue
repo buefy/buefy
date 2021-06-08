@@ -5,10 +5,12 @@
         action="https://codepen.io/pen/define/"
         target="_blank"
         rel="noopener">
-        <button class="button is-text is-small">
-            <span>CodePen</span>
-            <b-icon icon="open-in-new" size="is-small"/>
-        </button>
+        <b-button
+            label="CodePen"
+            type="is-text"
+            size="is-small"
+            icon-right="open-in-new"
+            native-type="submit"/>
 
         <input
             type="hidden"
@@ -34,7 +36,7 @@ export default {
             ],
             externalStyles: [
                 'https://unpkg.com/buefy/dist/buefy.min.css',
-                'https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
+                'https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css'
             ]
         }
     },

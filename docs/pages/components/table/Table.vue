@@ -57,7 +57,7 @@
                 <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.2</span>
             </div>
-            <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
+            <p> You can also toggle row detail programmatically using <code>toggleDetails</code> method by ref or by default slot and <code>:show-detail-icon="false"</code> if you want to hide chevron icon.</p>
         </Example>
 
         <Example :component="ExCustomDetailedRow" :code="ExCustomDetailedRowCode" title="Custom Detailed rows">
@@ -124,10 +124,10 @@
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a>.</small></p>
         </Example>
 
-        <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows">
+        <Example :component="ExDraggableRows" :code="ExDraggableRowsCode" title="Draggable rows/columns">
             <p>
-                Use <code>draggable</code> prop to allow rows to be draggable. Manage dragging using <code>dragstart</code>,
-                <code>dragover</code> and <code>drop</code> events
+                Use <code>draggable</code>/<code>draggable-column</code> prop to allow rows and columns to be draggable. Manage dragging using <code>dragstart</code>/<code>columndragstart</code>,
+                <code>dragover</code>/<code>columndragover</code> and <code>drop</code>/<code>columndrop</code> events
             </p>
         </Example>
 
