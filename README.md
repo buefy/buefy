@@ -17,7 +17,7 @@
 
 * Keep your current Bulma theme / variables easily
 * Supports both [Material Design Icons](https://materialdesignicons.com/) and [FontAwesome](http://fontawesome.io/)
-* Very lightweight with none internal dependencies aside from Vue & Bulma
+* Very lightweight with no internal dependencies aside from Vue & Bulma
 * About 88KB min+gzip (with Bulma included)
 * Semantic code output
 * Follows Bulma design and some of the [Material Design UX](https://material.io/)
