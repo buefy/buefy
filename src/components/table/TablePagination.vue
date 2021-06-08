@@ -12,7 +12,7 @@
                     :per-page="perPage"
                     :simple="paginationSimple"
                     :size="paginationSize"
-                    :current="newCurrentPage"
+                    :model-value="newCurrentPage"
                     :rounded="rounded"
                     @change="pageChanged"
                     :aria-next-label="ariaNextLabel"
@@ -22,7 +22,8 @@
                     :page-input="pageInput"
                     :order="paginationOrder"
                     :page-input-position="pageInputPosition"
-                    :debounce-page-input="debouncePageInput"/>
+                    :debounce-page-input="debouncePageInput"
+                />
             </div>
         </div>
     </div>
@@ -54,6 +55,7 @@ export default {
         pageInputPosition: String,
         debouncePageInput: [Number, String]
     },
+    emits: ['page-change', 'update:currentPage'],
     data() {
         return {
             newCurrentPage: this.currentPage
