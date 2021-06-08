@@ -7,14 +7,16 @@
         <transition
             :name="transitionName"
             @before-enter="beforeEnter"
-            @after-enter="afterEnter">
+            @after-enter="afterEnter"
+        >
             <div
                 v-show="isOpen"
                 ref="sidebarContent"
                 class="sidebar-content"
                 :class="rootClasses"
                 @mouseenter="onHover"
-                @mouseleave="onHoverLeave">
+                @mouseleave="onHoverLeave"
+            >
                 <slot />
             </div>
         </transition>
@@ -27,12 +29,8 @@ import { removeElement, isCustomElement } from '../../utils/helpers'
 
 export default {
     name: 'BSidebar',
-    model: {
-        prop: 'open',
-        event: 'update:open'
-    },
     props: {
-        open: Boolean,
+        modelValue: Boolean,
         type: [String, Object],
         overlay: Boolean,
         position: {
@@ -82,9 +80,10 @@ export default {
             }
         }
     },
+    emits: ['close', 'update:modelValue'],
     data() {
         return {
-            isOpen: this.open,
+            isOpen: this.modelValue,
             isDelayOver: false,
             transitionName: null,
             animating: true,
@@ -129,7 +128,7 @@ export default {
         }
     },
     watch: {
-        open: {
+        modelValue: {
             handler(value) {
                 this.isOpen = value
                 if (this.overlay) {
@@ -168,7 +167,7 @@ export default {
         close() {
             this.isOpen = false
             this.$emit('close')
-            this.$emit('update:open', false)
+            this.$emit('update:modelValue', false)
         },
 
         /**
@@ -203,7 +202,7 @@ export default {
             if (typeof window === 'undefined') return
 
             if (this.scroll === 'clip') {
-                if (this.open) {
+                if (this.modelValue) {
                     document.documentElement.classList.add('is-clipped')
                 } else {
                     document.documentElement.classList.remove('is-clipped')
@@ -215,13 +214,13 @@ export default {
                 ? document.documentElement.scrollTop
                 : this.savedScrollTop
 
-            if (this.open) {
+            if (this.modelValue) {
                 document.body.classList.add('is-noscroll')
             } else {
                 document.body.classList.remove('is-noscroll')
             }
 
-            if (this.open) {
+            if (this.modelValue) {
                 document.body.style.top = `-${this.savedScrollTop}px`
                 return
             }
@@ -261,11 +260,11 @@ export default {
                 document.body.appendChild(this.$el)
             }
         }
-        if (this.overlay && this.open) {
+        if (this.overlay && this.modelValue) {
             this.handleScroll()
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
             document.removeEventListener('click', this.clickedOutside)
