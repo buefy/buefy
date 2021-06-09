@@ -733,13 +733,16 @@ export default {
             }
         },
         updateInternalState(value) {
+            if (this.dateSelected === value) return ''
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            this.focusedDateData = {
-                day: currentDate.getDate(),
-                month: currentDate.getMonth(),
-                year: currentDate.getFullYear()
+            if (Array.isArray(value) && value.length > this.dateSelected.length) {
+                this.focusedDateData = {
+                    day: currentDate.getDate(),
+                    month: currentDate.getMonth(),
+                    year: currentDate.getFullYear()
+                }
             }
             this.dateSelected = value
         },
