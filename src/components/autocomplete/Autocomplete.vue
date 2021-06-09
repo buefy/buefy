@@ -59,6 +59,8 @@
                             v-for="(option, index) in element.items"
                             :key="groupindex + ':' + index"
                             class="dropdown-item"
+                            role="button"
+                            tabindex="0"
                             :class="{ 'is-hovered': option === hovered }"
                             @click="setSelected(option, undefined, $event)"
                         >
