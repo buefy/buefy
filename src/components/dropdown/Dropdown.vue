@@ -7,6 +7,7 @@
         <div
             v-if="!inline"
             role="button"
+            tabindex="0"
             ref="trigger"
             class="dropdown-trigger"
             @click="onClick"
