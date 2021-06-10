@@ -22,6 +22,7 @@
             v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
             <slot name="pagination">
                 <b-table-pagination
+                    v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
                     :rounded="paginationRounded"
@@ -348,6 +349,7 @@
         >
             <slot name="pagination">
                 <b-table-pagination
+                    v-bind="$attrs"
                     :per-page="perPage"
                     :paginated="paginated"
                     :rounded="paginationRounded"
