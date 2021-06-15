@@ -255,6 +255,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>detail-icon</code>',
+                description: 'Icon name',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>opened-detailed</code>',
                 description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop)',
                 type: 'Array',
