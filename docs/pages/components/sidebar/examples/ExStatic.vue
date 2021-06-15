@@ -6,6 +6,7 @@
                 :mobile="mobile"
                 :expand-on-hover="expandOnHover"
                 :reduce="reduce"
+                :delay="expandWithDelay ? 500 : null"
                 type="is-light"
                 open
             >
@@ -46,6 +47,9 @@
                 <b-field>
                     <b-switch v-model="expandOnHover">Expand on hover</b-switch>
                 </b-field>
+                <b-field>
+                    <b-switch v-model="expandWithDelay">Hover with delay</b-switch>
+                </b-field>
                 <b-field label="Mobile Layout">
                     <b-select v-model="mobile">
                         <option :value="null"></option>
@@ -64,6 +68,7 @@ export default {
   data() {
     return {
       expandOnHover: false,
+      expandWithDelay: false,
       mobile: "reduce",
       reduce: false
     };
@@ -93,7 +98,7 @@ export default {
         .sidebar-content {
             &.is-mini-mobile {
                 &:not(.is-mini-expand),
-                &.is-mini-expand:not(:hover) {
+                &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
                     .menu-list {
                         li {
                             a {
@@ -124,7 +129,7 @@ export default {
         .sidebar-content {
             &.is-mini {
                 &:not(.is-mini-expand),
-                &.is-mini-expand:not(:hover) {
+                &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
                     .menu-list {
                         li {
                             a {
