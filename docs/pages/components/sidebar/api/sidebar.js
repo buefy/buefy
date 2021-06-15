@@ -104,6 +104,13 @@ export default [
                 values: '<code>clip</code>, <code>keep</code>',
                 default: '<code>clip</code>'
             },
+            {
+                name: '<code>delay</code>',
+                description: 'Sidebar delay before it open (number in ms)',
+                type: 'Number',
+                values: "—",
+                default: '<code>0</code>'
+            }
       ],
       slots: [
           {

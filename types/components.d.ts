@@ -25,6 +25,7 @@ export declare type BuefyConfig = {
     defaultTooltipType?: ColorModifiers;
     defaultTooltipAnimated?: boolean;
     defaultTooltipDelay?: number;
+    defaultSidebarDelay?: number,
     defaultInputAutocomplete?: string;
     defaultDateFormatter?: Function;
     defaultDateParser?: Function;
