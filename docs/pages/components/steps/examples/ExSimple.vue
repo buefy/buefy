@@ -69,7 +69,7 @@
                 Lorem ipsum dolor sit amet.
             </b-step-item>
 
-            <b-step-item step="2" label="Profile" :clickable="isStepsClickable" :type="{'is-success': isProfileSuccess}">
+            <b-step-item step="2" label="Profile" :clickable="isStepsClickable" :type="profileType">
                 <h1 class="title has-text-centered">Profile</h1>
                 Lorem ipsum dolor sit amet.
             </b-step-item>
@@ -129,6 +129,14 @@
                 nextIcon: 'chevron-right',
                 labelPosition: 'bottom',
                 mobileMode: 'minimalist'
+            }
+        },
+        computed: {
+            profileType() {
+                // I got a maximum recursion exceeded error, if the following
+                // object is directly specified to the `type` prop of the
+                // "Profile" b-step-item.
+                return { 'is-success': this.isProfileSuccess }
             }
         }
     }
