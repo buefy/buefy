@@ -10,17 +10,20 @@
                     :class="[childItem.type || type, childItem.headerClass, {
                         'is-active': childItem.isActive,
                         'is-previous': activeItem.index > childItem.index
-                }]">
+                    }]"
+                >
                     <a
                         class="step-link"
                         :class="{'is-clickable': isItemClickable(childItem)}"
-                        @click="isItemClickable(childItem) && childClick(childItem)">
+                        @click="isItemClickable(childItem) && childClick(childItem)"
+                    >
                         <div class="step-marker">
                             <b-icon
                                 v-if="childItem.icon"
                                 :icon="childItem.icon"
                                 :pack="childItem.iconPack"
-                                :size="size"/>
+                                :size="size"
+                            />
                             <span v-else-if="childItem.step">{{ childItem.step }}</span>
                         </div>
                         <div class="step-details">
@@ -31,36 +34,41 @@
             </ul>
         </nav>
         <section class="step-content" :class="{'is-transitioning': isTransitioning}">
-            <slot/>
+            <slot />
         </section>
         <slot
             name="navigation"
             :previous="navigationProps.previous"
-            :next="navigationProps.next">
+            :next="navigationProps.next"
+        >
             <nav v-if="hasNavigation" class="step-navigation">
                 <a
                     role="button"
                     class="pagination-previous"
-                    :disabled="navigationProps.previous.disabled"
+                    :disabled="navigationProps.previous.disabled || undefined"
                     @click.prevent="navigationProps.previous.action"
-                    :aria-label="ariaPreviousLabel">
+                    :aria-label="ariaPreviousLabel"
+                >
                     <b-icon
                         :icon="iconPrev"
                         :pack="iconPack"
                         both
-                        aria-hidden="true"/>
+                        aria-hidden="true"
+                    />
                 </a>
                 <a
                     role="button"
                     class="pagination-next"
-                    :disabled="navigationProps.next.disabled"
+                    :disabled="navigationProps.next.disabled || undefined"
                     @click.prevent="navigationProps.next.action"
-                    :aria-label="ariaNextLabel">
+                    :aria-label="ariaNextLabel"
+                >
                     <b-icon
                         :icon="iconNext"
                         :pack="iconPack"
                         both
-                        aria-hidden="true"/>
+                        aria-hidden="true"
+                    />
                 </a>
             </nav>
         </slot>
@@ -164,7 +172,7 @@ export default {
          * Retrieves the next visible item index
          */
         nextItemIdx() {
-            let idx = this.activeItem ? this.items.indexOf(this.activeItem) : 0
+            const idx = this.activeItem ? this.items.indexOf(this.activeItem) : 0
             return this.getNextItemIdx(idx)
         },
 
@@ -184,7 +192,7 @@ export default {
         */
         prevItemIdx() {
             if (!this.activeItem) { return null }
-            let idx = this.items.indexOf(this.activeItem)
+            const idx = this.items.indexOf(this.activeItem)
             return this.getPrevItemIdx(idx)
         },
 

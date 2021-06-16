@@ -1,4 +1,4 @@
-import { h as createElement } from 'vue'
+import { h as createElement, Transition, vShow, withDirectives } from 'vue'
 
 import InjectedChildMixin, { Sorted } from './InjectedChildMixin'
 import { makeUniqueId } from './make-unique-id'
@@ -60,25 +60,34 @@ export default (parentCmp) => ({
                 return
             }
         }
-        const vnode = createElement('div', {
-            // simulates v-show
-            style: {
-                display: this.isActive && this.visible ? '' : 'none'
-            },
-            class: this.elementClass,
-            role: this.elementRole,
-            id: `${this.value}-content`,
-            'aria-labelledby': this.elementRole ? `${this.value}-label` : null,
-            tabindex: this.isActive ? 0 : -1
-        }, this.$slots.default())
+        const vnode = withDirectives(
+            createElement(
+                'div',
+                {
+                    class: this.elementClass,
+                    role: this.elementRole,
+                    id: `${this.value}-content`,
+                    'aria-labelledby': this.elementRole
+                        ? `${this.value}-label`
+                        : null,
+                    tabindex: this.isActive ? 0 : -1
+                },
+                this.$slots
+            ),
+            [[vShow, this.isActive && this.visible]]
+        )
         // check animated prop
         if (this.parent.animated) {
-            return createElement('transition', {
-                name: this.parent.animation || this.transitionName,
-                appear: this.parent.animateInitially === true || undefined,
-                onBeforeEnter: () => { this.parent.isTransitioning = true },
-                onAfterEnter: () => { this.parent.isTransitioning = false }
-            }, [vnode])
+            return createElement(
+                Transition,
+                {
+                    name: this.parent.animation || this.transitionName,
+                    appear: this.parent.animateInitially === true || undefined,
+                    onBeforeEnter: () => { this.parent.isTransitioning = true },
+                    onAfterEnter: () => { this.parent.isTransitioning = false }
+                },
+                { default: () => vnode }
+            )
         }
         return vnode
     }

@@ -26,9 +26,27 @@ export default (parentItemName, flags = 0) => {
         }
     }
     if (hasFlag(flags, sorted)) {
+        // a user can explicitly specify the `order` prop to keep the order of
+        // children.
+        // I can no longer rely on automatic indexing of children, because I
+        // could not figure out how to calculate the index of a child in its
+        // parent on Vue 3.
+        // incomplete dynamic indexing is still available if any child is never
+        // unmounted; e.g., not switched with `v-if`
+        mixin.props = {
+            order: {
+                type: Number,
+                required: false
+            }
+        }
         mixin.data = () => {
             return {
-                index: null
+                dynamicIndex: null
+            }
+        }
+        mixin.computed = {
+            index() {
+                return this.order != null ? this.order : this.dynamicIndex
             }
         }
     }
