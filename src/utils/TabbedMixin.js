@@ -10,7 +10,7 @@ export default (cmp) => ({
         [SlotComponent.name]: SlotComponent
     },
     props: {
-        value: {
+        modelValue: {
             type: [String, Number],
             default: undefined
         },
@@ -31,21 +31,22 @@ export default (cmp) => ({
             default: false
         }
     },
+    emits: ['update:modelValue'],
     data() {
         return {
-            activeId: this.value, // Internal state
+            activeId: this.modelValue, // Internal state
             defaultSlots: [],
             contentHeight: 0,
             isTransitioning: false
         }
     },
     mounted() {
-        if (typeof this.value === 'number') {
+        if (typeof this.modelValue === 'number') {
             // Backward compatibility: converts the index value to an id
-            const value = bound(this.value, 0, this.items.length - 1)
+            const value = bound(this.modelValue, 0, this.items.length - 1)
             this.activeId = this.items[value].value
         } else {
-            this.activeId = this.value
+            this.activeId = this.modelValue
         }
     },
     computed: {
@@ -64,7 +65,7 @@ export default (cmp) => ({
         /**
          * When v-model is changed set the new active tab.
          */
-        value(value) {
+        modelValue(value) {
             if (typeof value === 'number') {
                 // Backward compatibility: converts the index value to an id
                 value = bound(value, 0, this.items.length - 1)
@@ -87,11 +88,11 @@ export default (cmp) => ({
             }
 
             val = this.activeItem
-                ? (typeof this.value === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value)
+                ? (typeof this.modelValue === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value)
                 : undefined
 
-            if (val !== this.value) {
-                this.$emit('input', val)
+            if (val !== this.modelValue) {
+                this.$emit('update:modelValue', val)
             }
         }
     },
