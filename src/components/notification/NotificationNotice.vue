@@ -1,6 +1,7 @@
 <template>
     <b-notification
         v-bind="$options.propsData"
+        ref="notification"
         @close="close">
         <slot />
     </b-notification>
@@ -16,6 +17,11 @@ export default {
     data() {
         return {
             newDuration: this.duration || config.defaultNotificationDuration
+        }
+    },
+    methods: {
+        timeoutCallback() {
+            return this.$refs.notification.close()
         }
     }
 }
