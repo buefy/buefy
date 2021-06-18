@@ -206,8 +206,8 @@
                 position: absolute;
                 width: $indicator-size;
                 height: $indicator-size;
-                left: calc(50% - #{$indicator-size} / 2);
-                top: calc(50% - #{$indicator-size} / 2);
+                left: calc(50% - #{$indicator-size} * 0.5);
+                top: calc(50% - #{$indicator-size} * 0.5);
                 user-select: none;
 
                 > span {
@@ -238,7 +238,7 @@
             }
 
             &-hand {
-                height: calc(50% - #{$hand-endpoint-size / 2});
+                height: calc(50% - #{$hand-endpoint-size * 0.5});
                 width: 2px;
                 bottom: 50%;
                 left: calc(50% - 1px);
@@ -259,7 +259,7 @@
                     height: $hand-endpoint-size;
                     content: "";
                     position: absolute;
-                    top: -($hand-endpoint-size) / 2;
+                    top: -($hand-endpoint-size) * 0.5;
                     left: 50%;
                     transform: translate(-50%, -50%);
                 }
