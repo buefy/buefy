@@ -7,7 +7,7 @@ $rate-text-spaced: 0.35rem !default;
     align-items: center;
     display: flex;
     &:not(:last-child) {
-        margin-bottom: ($block-spacing / 2);
+        margin-bottom: ($block-spacing * 0.5);
     }
     &.is-spaced .rate-item:not(:last-child) {
         margin-right: $rate-spaced;
