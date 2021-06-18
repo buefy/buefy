@@ -100,6 +100,10 @@ export default {
             }, 150)
         },
 
+        timeoutCallback() {
+            return this.close()
+        },
+
         showNotice() {
             if (this.shouldQueue()) {
                 // Call recursively if should queue
@@ -110,7 +114,7 @@ export default {
             this.isActive = true
 
             if (!this.indefinite) {
-                this.timer = setTimeout(() => this.close(), this.newDuration)
+                this.timer = setTimeout(() => this.timeoutCallback(), this.newDuration)
             }
         },
 
