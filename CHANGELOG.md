@@ -13,8 +13,8 @@
 
 ### Fixes
 
-* Fix #3329 checkob autocompletion (thanks @markovejnovic)
-* Fix datepicker tab navigation with nearby-selectable-month-days property (thanks @Raljuk)
+* Fix #3329 checkbox autocompletion (thanks @markovejnovic)
+* Fix datepicker tab navigation with `nearby-selectable-month-days` prop (thanks @Raljuk)
 * Fix #3342 iPad detection (thanks @lboecker)
 * Fix #3333 Multiple datepicker stay on month on date removal (thanks @mateusbw)
 
