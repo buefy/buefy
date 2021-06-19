@@ -28,7 +28,7 @@
             confirm() {
                 this.$buefy.dialog.confirm({
                     message: 'Continue on this task?',
-                    onConfirm: () => this.$buefy.toast.open('User confirmed')
+                    confirmCallback: () => this.$buefy.toast.open('User confirmed')
                 })
             },
             confirmCustom() {
@@ -57,7 +57,7 @@
                     cancelText: 'Disagree',
                     confirmText: 'Agree',
                     type: 'is-success',
-                    onConfirm: () => this.$buefy.toast.open('User agreed')
+                    confirmCallback: () => this.$buefy.toast.open('User agreed')
                 })
             },
             confirmCustomDelete() {
@@ -67,7 +67,7 @@
                     confirmText: 'Delete Account',
                     type: 'is-danger',
                     hasIcon: true,
-                    onConfirm: () => this.$buefy.toast.open('Account deleted!')
+                    confirmCallback: () => this.$buefy.toast.open('Account deleted!')
                 })
             }
         }
