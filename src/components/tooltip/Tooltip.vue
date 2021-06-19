@@ -93,6 +93,7 @@ export default {
             default: true
         }
     },
+    emits: ['close', 'open'],
     data() {
         return {
             isActive: false,
