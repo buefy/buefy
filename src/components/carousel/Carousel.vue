@@ -3,13 +3,15 @@
         class="carousel"
         :class="{'is-overlay': overlay}"
         @mouseenter="checkPause"
-        @mouseleave="startTimer">
+        @mouseleave="startTimer"
+    >
         <progress
             v-if="progress"
             class="progress"
             :class="progressType"
             :value="activeChild"
-            :max="childItems.length - 1">
+            :max="childItems.length - 1"
+        >
             {{ childItems.length - 1 }}
         </progress>
         <div
@@ -17,36 +19,42 @@
             @mousedown="dragStart"
             @mouseup="dragEnd"
             @touchstart.stop="dragStart"
-            @touchend.stop="dragEnd">
-            <slot/>
+            @touchend.stop="dragEnd"
+        >
+            <slot />
             <div
                 v-if="arrow"
                 class="carousel-arrow"
-                :class="{'is-hovered': arrowHover}">
+                :class="{'is-hovered': arrowHover}"
+            >
                 <b-icon
                     v-show="hasPrev"
                     class="has-icons-left"
-                    @click.native="prev"
+                    @click="prev"
                     :pack="iconPack"
                     :icon="iconPrev"
                     :size="iconSize"
-                    both />
+                    both
+                />
                 <b-icon
                     v-show="hasNext"
                     class="has-icons-right"
-                    @click.native="next"
+                    @click="next"
                     :pack="iconPack"
                     :icon="iconNext"
                     :size="iconSize"
-                    both />
+                    both
+                />
             </div>
         </div>
         <div
             v-if="autoplay && pauseHover && pauseInfo && isPause"
-            class="carousel-pause">
+            class="carousel-pause"
+        >
             <span
                 class="tag"
-                :class="pauseInfoType">
+                :class="pauseInfoType"
+            >
                 {{ pauseText }}
             </span>
         </div>
@@ -54,28 +62,32 @@
             <slot
                 :active="activeChild"
                 :switch="changeActive"
-                name="list"/>
+                name="list"
+            />
         </template>
         <div
             v-if="indicator"
             class="carousel-indicator"
-            :class="indicatorClasses">
+            :class="indicatorClasses"
+        >
             <a
                 v-for="(item, index) in sortedItems"
                 class="indicator-item"
                 :class="{'is-active': item.isActive}"
                 @mouseover="modeChange('hover', index)"
                 @click="modeChange('click', index)"
-                :key="item._uid">
+                :key="item._uid"
+            >
                 <slot
                     :i="index"
-                    name="indicators">
-                    <span class="indicator-style" :class="indicatorStyle"/>
+                    name="indicators"
+                >
+                    <span class="indicator-style" :class="indicatorStyle" />
                 </slot>
             </a>
         </div>
         <template v-if="overlay">
-            <slot name="overlay"/>
+            <slot name="overlay" />
         </template>
     </div>
 </template>
@@ -84,8 +96,8 @@
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
-import {default as ProviderParentMixin, Sorted} from '../../utils/ProviderParentMixin'
-import {mod, bound} from '../../utils/helpers'
+import ProviderParentMixin, { Sorted } from '../../utils/ProviderParentMixin'
+import { mod, bound } from '../../utils/helpers'
 
 export default {
     name: 'BCarousel',
@@ -94,7 +106,7 @@ export default {
     },
     mixins: [ProviderParentMixin('carousel', Sorted)],
     props: {
-        value: {
+        modelValue: {
             type: Number,
             default: 0
         },
@@ -187,10 +199,11 @@ export default {
         },
         withCarouselList: Boolean
     },
+    emits: ['change', 'click', 'update:modelValue'],
     data() {
         return {
             transition: 'next',
-            activeChild: this.value || 0,
+            activeChild: this.modelValue || 0,
             isPause: false,
             dragX: false,
             timer: null
@@ -221,7 +234,7 @@ export default {
         /**
          * When v-model is changed set the new active item.
          */
-        value(value) {
+        modelValue(value) {
             this.changeActive(value)
         },
         /**
@@ -283,15 +296,16 @@ export default {
 
             direction = direction || (newIndex - this.activeChild)
 
-            newIndex = this.repeat ? mod(newIndex, this.childItems.length)
+            newIndex = this.repeat
+                ? mod(newIndex, this.childItems.length)
                 : bound(newIndex, 0, this.childItems.length - 1)
 
             this.transition = direction > 0 ? 'prev' : 'next'
             // Transition names are reversed from the actual direction for correct effect
 
             this.activeChild = newIndex
-            if (newIndex !== this.value) {
-                this.$emit('input', newIndex)
+            if (newIndex !== this.modelValue) {
+                this.$emit('update:modelValue', newIndex)
             }
             this.restartTimer()
             this.$emit('change', newIndex) // BC
@@ -343,7 +357,7 @@ export default {
     mounted() {
         this.startTimer()
     },
-    beforeDestroy() {
+    beforeUnmount() {
         this.pauseTimer()
     }
 }
