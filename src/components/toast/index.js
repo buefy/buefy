@@ -8,8 +8,6 @@ import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ToastProgrammatic = {
     open(params) {
-        // TODO: should we take care of `parent`?
-        // let parent
         if (typeof params === 'string') {
             params = {
                 message: params
@@ -20,7 +18,6 @@ const ToastProgrammatic = {
             position: config.defaultToastPosition || 'is-top'
         }
         if (params.parent) {
-            // parent = params.parent
             delete params.parent
         }
         let slot
@@ -28,20 +25,8 @@ const ToastProgrammatic = {
             slot = params.message
             delete params.message
         }
-        const propsData = merge(
-            defaultParam,
-            params,
-            {
-                // On Vue 3, $destroy is no longer available.
-                // A toast has to be unmounted manually.
-                onClose: () => {
-                    if (typeof params.onClose === 'function') {
-                        params.onClose()
-                    }
-                    vueInstance.unmount()
-                }
-            }
-        )
+        const propsData = merge(defaultParam, params)
+        const container = document.createElement('div')
         const vueInstance = createApp({
             data() {
                 return {
@@ -52,23 +37,40 @@ const ToastProgrammatic = {
                 close() {
                     // TODO: too much dependence on Vue's internal structure?
                     const toast =
-                      this.toastVNode.component?.expose ||
-                      this.toastVNode.component?.proxy
+                        this.toastVNode.component?.expose ||
+                        this.toastVNode.component?.proxy
                     toast?.close()
                 }
             },
             render() {
                 this.toastVNode = createElement(
                     Toast,
-                    propsData,
-                    slot ? { default: () => slot } : undefined
+                    {
+                        ...propsData,
+                        // On Vue 3, $destroy is no longer available.
+                        // A toast has to be unmounted manually.
+                        onClose: () => {
+                            if (typeof propsData.onClose === 'function') {
+                                propsData.onClose()
+                            }
+                            // timeout for the animation complete
+                            // before unmounting
+                            setTimeout(() => {
+                                vueInstance.unmount()
+                            }, 150)
+                        }
+                    },
+                    slot != null ? { default: () => slot } : undefined
                 )
                 // we are interested in `toastVNode.component` but
-                // at this point `toastVNode.component` is null
+                // at this point `toastVNode.component` should be null
                 return this.toastVNode
             }
         })
-        return vueInstance.mount(document.createElement('div'))
+        // adds $buefy global property
+        // so that $buefy.globalNoticeInterval is available on the new Vue app
+        vueInstance.config.globalProperties.$buefy = {}
+        return vueInstance.mount(container)
     }
 }
 
