@@ -11,7 +11,7 @@
             </p>
         </div>
         <b-collapse 
-            :open="false" 
+            :model-value="false"
             position="is-bottom" 
             aria-id="contentIdForA11y4">
             <template #trigger="props">

@@ -1,7 +1,7 @@
 <template>
     <section>
 
-        <b-collapse :open="false" aria-id="contentIdForA11y1">
+        <b-collapse :model-value="false" aria-id="contentIdForA11y1">
             <template #trigger="props">
                 <b-button
                     label="Click me!"
