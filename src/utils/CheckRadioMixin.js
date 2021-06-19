@@ -8,6 +8,7 @@ export default {
         name: String,
         size: String
     },
+    emits: ['update:modelValue'],
     data() {
         return {
             newValue: this.modelValue
