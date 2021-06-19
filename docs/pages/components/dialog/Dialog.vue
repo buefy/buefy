@@ -8,12 +8,12 @@
 
         <Example title="From outside Vue instance">
             <p>You can use it on Vuex or VueRouter using this syntax:</p>
-            <CodeView lang="javascript" :code="outsideVueInstance | pre" expanded/>
+            <CodeView lang="javascript" :code="preformat(outsideVueInstance)" expanded/>
         </Example>
 
         <Example title="Promise">
             <p>You can set <code>defaultProgrammaticPromise</code> constructor option to get a Promise</p>
-            <CodeView lang="javascript" :code="promise | pre" expanded/>
+            <CodeView lang="javascript" :code="preformat(promise)" expanded/>
         </Example>
 
         <ApiView :data="api"/>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import { preformat } from '@/utils'
     import api from './api/dialog'
 
     import ExAlertDialog from './examples/ExAlertDialog'
@@ -51,6 +52,9 @@
                     closeOnConfirm: false
                 });`
             }
+        },
+        methods: {
+            preformat
         }
     }
 </script>
