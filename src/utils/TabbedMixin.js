@@ -106,20 +106,22 @@ export default (cmp) => ({
 
         getNextItemIdx(fromIdx, skipDisabled = false) {
             let nextItemIdx = null
-            let idx = fromIdx + 1
-            for (; idx < this.items.length; idx++) {
-                const item = this.items[idx]
+            for (let i = 0; i < this.items.length; i++) {
+                const item = this.items[i]
                 if (
-                    item.visible &&
+                    fromIdx < item.index &&
                     (
-                        !skipDisabled ||
+                        item.visible &&
                         (
-                            skipDisabled &&
-                            !item.disabled
+                            !skipDisabled ||
+                            (
+                                skipDisabled &&
+                                !item.disabled
+                            )
                         )
                     )
                 ) {
-                    nextItemIdx = idx
+                    nextItemIdx = item.index
                     break
                 }
             }
@@ -127,19 +129,22 @@ export default (cmp) => ({
         },
         getPrevItemIdx(fromIdx, skipDisabled = false) {
             let prevItemIdx = null
-            for (let idx = fromIdx - 1; idx >= 0; idx--) {
-                const item = this.items[idx]
+            for (let i = this.items.length - 1; i >= 0; i--) {
+                const item = this.items[i]
                 if (
-                    item.visible &&
+                    item.index < fromIdx &&
                     (
-                        !skipDisabled ||
+                        item.visible &&
                         (
-                            skipDisabled &&
-                            !item.disabled
+                            !skipDisabled ||
+                            (
+                                skipDisabled &&
+                                !item.disabled
+                            )
                         )
                     )
                 ) {
-                    prevItemIdx = idx
+                    prevItemIdx = item.index
                     break
                 }
             }
