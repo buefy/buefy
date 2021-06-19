@@ -3,11 +3,13 @@
         class="carousel-list"
         :class="{'has-shadow': scrollIndex > 0}"
         @mousedown.prevent="dragStart"
-        @touchstart="dragStart">
+        @touchstart="dragStart"
+    >
         <div
             class="carousel-slides"
             :class="listClass"
-            :style="'transform:translateX('+translation+'px)'">
+            :style="'transform:translateX('+translation+'px)'"
+        >
             <div
                 v-for="(list, index) in data"
                 class="carousel-slide"
@@ -15,14 +17,16 @@
                 @mouseup="checkAsIndicator(index, $event)"
                 @touchend="checkAsIndicator(index, $event)"
                 :key="index"
-                :style="itemStyle">
+                :style="itemStyle"
+            >
                 <slot
                     :index="index"
                     :active="activeItem"
                     :scroll="scrollIndex"
                     v-bind="list"
                     :list="list"
-                    name="item">
+                    name="item"
+                >
                     <b-image
                         :src="list.image"
                         v-bind="list"
@@ -33,29 +37,32 @@
         <div
             v-if="arrow"
             class="carousel-arrow"
-            :class="{'is-hovered': settings.arrowHover}">
+            :class="{'is-hovered': settings.arrowHover}"
+        >
             <b-icon
                 v-show="hasPrev"
                 class="has-icons-left"
-                @click.native.prevent="prev"
+                @click.prevent="prev"
                 :pack="settings.iconPack"
                 :icon="settings.iconPrev"
                 :size="settings.iconSize"
-                both />
+                both
+            />
             <b-icon
                 v-show="hasNext"
                 class="has-icons-right"
-                @click.native.prevent="next"
+                @click.prevent="next"
                 :pack="settings.iconPack"
                 :icon="settings.iconNext"
                 :size="settings.iconSize"
-                both />
+                both
+            />
         </div>
     </div>
 </template>
 
 <script>
-import {sign, mod, bound} from '../../utils/helpers'
+import { sign, mod, bound } from '../../utils/helpers'
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon.vue'
@@ -171,13 +178,15 @@ export default {
             return Object.keys(this.breakpoints).sort((a, b) => b - a)
         },
         settings() {
-            let breakpoint = this.breakpointKeys.filter((breakpoint) => {
+            const breakpoint = this.breakpointKeys.filter((breakpoint) => {
                 if (this.windowWidth >= breakpoint) {
                     return true
+                } else {
+                    return false
                 }
             })[0]
             if (breakpoint) {
-                return {...this.$props, ...this.breakpoints[breakpoint]}
+                return { ...this.$props, ...this.breakpoints[breakpoint] }
             }
             return this.$props
         },
@@ -257,7 +266,8 @@ export default {
         dragMove(event) {
             if (!this.dragging) return
             const dragEndX = event.touches
-                ? (event.changedTouches[0] || event.touches[0]).clientX : event.clientX
+                ? (event.changedTouches[0] || event.touches[0]).clientX
+                : event.clientX
             this.delta = this.dragX - dragEndX
             if (!event.touches) {
                 event.preventDefault()
@@ -297,7 +307,7 @@ export default {
             throw new Error('The config prop was removed, you need to use v-bind instead')
         }
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             if (window.ResizeObserver) {
                 this.observer.disconnect()

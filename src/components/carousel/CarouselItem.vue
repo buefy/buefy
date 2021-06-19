@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {default as InjectedChildMixin, Sorted} from '../../utils/InjectedChildMixin'
+import InjectedChildMixin, { Sorted } from '../../utils/InjectedChildMixin'
 
 export default {
     name: 'BCarouselItem',
@@ -23,6 +23,8 @@ export default {
                 return 'fade'
             } else if (this.parent.transition) {
                 return 'slide-' + this.parent.transition
+            } else {
+                return undefined
             }
         },
         isActive() {
