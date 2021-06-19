@@ -11,7 +11,7 @@
                 role="tablist"
             >
                 <li
-                    v-for="(childItem, childIdx) in items"
+                    v-for="childItem in items"
                     :key="childItem.value"
                     v-show="childItem.visible"
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
@@ -21,23 +21,23 @@
                     :aria-selected="`${childItem.isActive}`"
                 >
                     <b-slot-component
-                        ref="tabLink"
-                        v-if="childItem.$scopedSlots && childItem.$scopedSlots.header"
+                        :ref="`tabLink${childItem.index}`"
+                        v-if="childItem.$slots.header"
                         :component="childItem"
                         name="header"
                         tag="a"
                         :id="`${childItem.value}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
-                        @focus="currentFocus = childIdx"
+                        @focus="currentFocus = childItem.index"
                         @click="childClick(childItem)"
                         @keydown="manageTabKeydown($event, childItem)"
                     />
                     <a
-                        ref="tabLink"
+                        :ref="`tabLink${childItem.index}`"
                         v-else
                         :id="`${childItem.value}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
-                        @focus="currentFocus = childIdx"
+                        @focus="currentFocus = childItem.index"
                         @click="childClick(childItem)"
                         @keydown="manageTabKeydown($event, childItem)"
                     >
@@ -89,7 +89,7 @@ export default {
     },
     data() {
         return {
-            currentFocus: this.value
+            currentFocus: null
         }
     },
     computed: {
@@ -130,15 +130,15 @@ export default {
                     let prevIdx = this.getPrevItemIdx(this.currentFocus, true)
                     if (prevIdx === null) {
                         // We try to give focus back to the last visible element
-                        prevIdx = this.getPrevItemIdx(this.items.length, true)
+                        prevIdx = this.getPrevItemIdx(Infinity, true)
                     }
+                    const prevItem = this.items.find((i) => i.index === prevIdx)
                     if (
-                        prevIdx !== null &&
-                        this.$refs.tabLink &&
-                        prevIdx < this.$refs.tabLink.length &&
-                        !this.items[prevIdx].disabled
+                        prevItem &&
+                        this.$refs[`tabLink${prevIdx}`] &&
+                        !prevItem.disabled
                     ) {
-                        this.giveFocusToTab(this.$refs.tabLink[prevIdx])
+                        this.giveFocusToTab(this.$refs[`tabLink${prevIdx}`])
                     }
                     event.preventDefault()
                     break
@@ -150,13 +150,13 @@ export default {
                         // We try to give focus back to the first visible element
                         nextIdx = this.getNextItemIdx(-1, true)
                     }
+                    const nextItem = this.items.find((i) => i.index === nextIdx)
                     if (
-                        nextIdx !== null &&
-                        this.$refs.tabLink &&
-                        nextIdx < this.$refs.tabLink.length &&
-                        !this.items[nextIdx].disabled
+                        nextItem &&
+                        this.$refs[`tabLink${nextIdx}`] &&
+                        !nextItem.disabled
                     ) {
-                        this.giveFocusToTab(this.$refs.tabLink[nextIdx])
+                        this.giveFocusToTab(this.$refs[`tabLink${nextIdx}`])
                     }
                     event.preventDefault()
                     break
