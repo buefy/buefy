@@ -10,10 +10,10 @@
             <b-switch v-model="multiline">Multiline</b-switch>
         </div>
         <b-tabs v-model="activeTab" :multiline="multiline">
-            <template v-for="tab in tabs">
+            <template v-for="(tab, index) in tabs" :key="tab.id">
                 <b-tab-item
                     v-if="tab.displayed"
-                    :key="tab.id"
+                    :order="index"
                     :value="tab.id"
                     :label="tab.label">
                     {{ tab.content }}
