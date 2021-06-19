@@ -2,15 +2,17 @@
     <div v-if="attached && closable" class="tags has-addons">
         <span
             class="tag"
-            :class="[type, size, { 'is-rounded': rounded }]">
+            :class="[type, size, { 'is-rounded': rounded }]"
+        >
             <b-icon
                 v-if="icon"
                 :icon="icon"
                 :size="size"
                 :type="iconType"
-                :pack="iconPack" />
+                :pack="iconPack"
+            />
             <span :class="{ 'has-ellipsis': ellipsis }" @click="click">
-                <slot/>
+                <slot />
             </span>
         </span>
         <a
@@ -18,13 +20,14 @@
             role="button"
             :aria-label="ariaCloseLabel"
             :tabindex="tabstop ? 0 : false"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :class="[size,
                      closeType,
                      {'is-rounded': rounded},
                      closeIcon ? 'has-delete-icon' : 'is-delete']"
             @click="close"
-            @keyup.delete.prevent="close">
+            @keyup.delete.prevent="close"
+        >
             <b-icon
                 custom-class=""
                 v-if="closeIcon"
@@ -38,15 +41,17 @@
     <span
         v-else
         class="tag"
-        :class="[type, size, { 'is-rounded': rounded }]">
+        :class="[type, size, { 'is-rounded': rounded }]"
+    >
         <b-icon
             v-if="icon"
             :icon="icon"
             :size="size"
             :type="iconType"
-            :pack="iconPack" />
+            :pack="iconPack"
+        />
         <span :class="{ 'has-ellipsis': ellipsis }" @click="click">
-            <slot/>
+            <slot />
         </span>
 
         <a
@@ -55,7 +60,7 @@
             :aria-label="ariaCloseLabel"
             class="delete is-small"
             :class="closeType"
-            :disabled="disabled"
+            :disabled="disabledOrUndefined"
             :tabindex="tabstop ? 0 : false"
             @click="close"
             @keyup.delete.prevent="close"
@@ -86,6 +91,14 @@ export default {
         closeIcon: String,
         closeIconPack: String,
         closeIconType: String
+    },
+    emits: ['click', 'close'],
+    computed: {
+        // setting a boolean attribute `false` does not remove it on Vue 3.
+        // `null` or `undefined` has to be given to remove it.
+        disabledOrUndefined() {
+            return this.disabled || undefined
+        }
     },
     methods: {
         /**
