@@ -1,13 +1,10 @@
 <script>
+import { h as createElement, Transition, vShow, withDirectives } from 'vue'
+
 export default {
     name: 'BCollapse',
-    // deprecated, to replace with default 'value' in the next breaking change
-    model: {
-        prop: 'open',
-        event: 'update:open'
-    },
     props: {
-        open: {
+        modelValue: {
             type: Boolean,
             default: true
         },
@@ -30,13 +27,14 @@ export default {
             }
         }
     },
+    emits: ['close', 'open', 'update:modelValue'],
     data() {
         return {
-            isOpen: this.open
+            isOpen: this.modelValue
         }
     },
     watch: {
-        open(value) {
+        modelValue(value) {
             this.isOpen = value
         }
     },
@@ -46,29 +44,53 @@ export default {
         */
         toggle() {
             this.isOpen = !this.isOpen
-            this.$emit('update:open', this.isOpen)
+            this.$emit('update:modelValue', this.isOpen)
             this.$emit(this.isOpen ? 'open' : 'close')
         }
     },
-    render(createElement) {
-        const trigger = createElement('div', {
-            staticClass: 'collapse-trigger', on: { click: this.toggle }
-        }, this.$scopedSlots.trigger
-            ? [this.$scopedSlots.trigger({ open: this.isOpen })]
-            : [this.$slots.trigger]
+    render() {
+        const trigger = createElement(
+            'div',
+            {
+                class: 'collapse-trigger',
+                onClick: this.toggle
+            },
+            {
+                default: () => {
+                    return this.$slots.trigger
+                        ? this.$slots.trigger({ open: this.isOpen })
+                        : undefined
+                }
+            }
         )
-        const content = createElement('transition', { props: { name: this.animation } }, [
-            createElement('div', {
-                staticClass: 'collapse-content',
-                attrs: { 'id': this.ariaId },
-                directives: [{
-                    name: 'show',
-                    value: this.isOpen
-                }]
-            }, this.$slots.default)
-        ])
-        return createElement('div', { staticClass: 'collapse' },
-            this.position === 'is-top' ? [trigger, content] : [content, trigger])
+        const content = withDirectives(
+            createElement(
+                Transition,
+                { name: this.animation },
+                [
+                    createElement(
+                        'div',
+                        {
+                            class: 'collapse-content',
+                            id: this.ariaId
+                        },
+                        this.$slots
+                    )
+                ]
+            ),
+            [[vShow, this.isOpen]]
+        )
+        return createElement(
+            'div',
+            { class: 'collapse' },
+            {
+                default: () => {
+                    return this.position === 'is-top'
+                        ? [trigger, content]
+                        : [content, trigger]
+                }
+            }
+        )
     }
 }
 </script>
