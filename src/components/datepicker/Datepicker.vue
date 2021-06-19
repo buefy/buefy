@@ -733,7 +733,7 @@ export default {
             }
         },
         updateInternalState(value) {
-            if (this.dateSelected === value) return ''
+            if (this.dateSelected === value) return
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
