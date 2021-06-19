@@ -172,7 +172,7 @@ export default {
          * Retrieves the next visible item index
          */
         nextItemIdx() {
-            const idx = this.activeItem ? this.items.indexOf(this.activeItem) : 0
+            const idx = this.activeItem ? this.activeItem.index : 0
             return this.getNextItemIdx(idx)
         },
 
@@ -182,7 +182,7 @@ export default {
         nextItem() {
             let nextItem = null
             if (this.nextItemIdx !== null) {
-                nextItem = this.items[this.nextItemIdx]
+                nextItem = this.items.find((i) => i.index === this.nextItemIdx)
             }
             return nextItem
         },
@@ -192,7 +192,7 @@ export default {
         */
         prevItemIdx() {
             if (!this.activeItem) { return null }
-            const idx = this.items.indexOf(this.activeItem)
+            const idx = this.activeItem.index
             return this.getPrevItemIdx(idx)
         },
 
@@ -204,7 +204,7 @@ export default {
 
             let prevItem = null
             if (this.prevItemIdx !== null) {
-                prevItem = this.items[this.prevItemIdx]
+                prevItem = this.items.find((i) => i.index === this.prevItemIdx)
             }
             return prevItem
         },
