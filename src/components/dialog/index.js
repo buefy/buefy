@@ -38,7 +38,6 @@ function open(propsData) {
                             if (onConfirm != null) {
                                 onConfirm(...args)
                             }
-                            vueInstance.unmount()
                         },
                         onCancel: (...args) => {
                             if (onCancel != null) {
