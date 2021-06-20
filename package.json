@@ -93,7 +93,7 @@
     "babel-register": "6.22.0",
     "bulma-css-vars": "^0.8.0",
     "chalk": "4.1.0",
-    "clean-css-cli": "4.3.0",
+    "clean-css-cli": "^5.6.1",
     "cleave.js": "1.0.1",
     "clipboard": "1.7.1",
     "codecov": "3.7.1",
