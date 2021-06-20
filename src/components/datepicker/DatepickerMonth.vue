@@ -25,8 +25,8 @@
                             <div
                                 class="event"
                                 :class="event.type"
-                                v-for="(event, index) in eventsDateMatch(date)"
-                                :key="index"
+                                v-for="(event, evIdx) in eventsDateMatch(date)"
+                                :key="evIdx"
                             />
                         </div>
                     </a>

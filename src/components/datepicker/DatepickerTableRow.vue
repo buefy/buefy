@@ -27,8 +27,8 @@
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, index) in eventsDateMatch(weekDay)"
-                        :key="index"
+                        v-for="(event, evIdx) in eventsDateMatch(weekDay)"
+                        :key="evIdx"
                     />
                 </div>
             </a>
@@ -42,8 +42,8 @@
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, index) in eventsDateMatch(weekDay)"
-                        :key="index"
+                        v-for="(event, evIdx) in eventsDateMatch(weekDay)"
+                        :key="evIdx"
                     />
                 </div>
             </div>
@@ -91,6 +91,7 @@ export default {
         rulesForFirstWeek: Number,
         firstDayOfWeek: Number
     },
+    emits: ['change-focus', 'rangeHoverEndDate', 'select'],
     watch: {
         day(day) {
             const refName = `day-${this.month}-${day}`
