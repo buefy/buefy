@@ -79,7 +79,7 @@ export default {
             type: Array,
             default: () => []
         },
-        value: {
+        modelValue: {
             type: Number,
             default: 0
         },
@@ -130,10 +130,11 @@ export default {
             default: () => ({})
         }
     },
+    emits: ['switch', 'update:modelValue', 'updated:scroll'],
     data() {
         return {
-            activeItem: this.value,
-            scrollIndex: this.asIndicator ? this.scrollValue : this.value,
+            activeItem: this.modelValue,
+            scrollIndex: this.asIndicator ? this.scrollValue : this.modelValue,
             delta: 0,
             dragX: false,
             hold: 0,
@@ -205,7 +206,7 @@ export default {
         /**
          * When v-model is changed set the new active item.
          */
-        value(value) {
+        modelValue(value) {
             this.switchTo(this.asIndicator ? value - (this.itemsToShow - 3) / 2 : value)
             if (this.activeItem !== value) {
                 this.activeItem = bound(value, 0, this.data.length - 1)
@@ -227,8 +228,8 @@ export default {
             }
             newIndex = bound(newIndex, 0, this.total)
             this.scrollIndex = newIndex
-            if (!this.asIndicator && this.value !== newIndex) {
-                this.$emit('input', newIndex)
+            if (!this.asIndicator && this.modelValue !== newIndex) {
+                this.$emit('update:modelValue', newIndex)
             } else if (this.scrollIndex !== newIndex) {
                 this.$emit('updated:scroll', newIndex)
             }
