@@ -134,6 +134,7 @@ export default {
             default: 0
         }
     },
+    emits: ['active-change', 'change', 'update:modelValue'],
     data() {
         return {
             selected: this.modelValue,
