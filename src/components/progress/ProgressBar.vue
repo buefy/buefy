@@ -10,7 +10,8 @@
     >
         <p
             v-if="newShowValue"
-            class="progress-value">
+            class="progress-value"
+        >
             <slot>{{ newValue }}</slot>
         </p>
     </div>

@@ -6,11 +6,17 @@
             class="progress"
             :class="[newType, { 'is-squared': !rounded }]"
             :max="max"
-            :value="value">{{ newValue }}</progress>
+            :value="value"
+        >
+            {{ newValue }}
+        </progress>
         <slot v-else name="bar" />
         <p
             v-if="isNative && showValue"
-            class="progress-value"><slot>{{ newValue }}</slot></p>
+            class="progress-value"
+        >
+            <slot>{{ newValue }}</slot>
+        </p>
     </div>
 </template>
 
