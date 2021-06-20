@@ -122,6 +122,7 @@ export default {
             default: false
         }
     },
+    emits: ['removePriority', 'sort'],
     data() {
         return {
             sortMultipleSelect: '',
