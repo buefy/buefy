@@ -130,6 +130,7 @@ export default {
         appendToBody: Boolean,
         appendToBodyCopyParent: Boolean
     },
+    emits: ['active-change', 'change', 'update:modelValue'],
     data() {
         return {
             selected: this.modelValue,

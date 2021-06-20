@@ -6,16 +6,18 @@
         :class="anchorClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        :tabindex="isFocusable ? 0 : null">
-        <slot/>
+        :tabindex="isFocusable ? 0 : null"
+    >
+        <slot />
     </a>
     <div
         v-else
         :class="itemClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        :tabindex="isFocusable ? 0 : null">
-        <slot/>
+        :tabindex="isFocusable ? 0 : null"
+    >
+        <slot />
     </div>
 </template>
 
@@ -44,6 +46,7 @@ export default {
             default: ''
         }
     },
+    emits: ['click'],
     computed: {
         anchorClasses() {
             return {
