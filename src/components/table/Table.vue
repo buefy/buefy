@@ -14,7 +14,7 @@
             :sort-icon="sortIcon"
             :sort-icon-size="sortIconSize"
             @sort="(column, event) => sort(column, null, event)"
-            @removePriority="(column) => removeSortingPriority(column)"
+            @remove-priority="(column) => removeSortingPriority(column)"
         />
 
         <template
@@ -619,6 +619,35 @@ export default {
         pageInputPosition: String,
         debouncePageInput: [Number, String]
     },
+    emits: [
+        'cellclick',
+        'check',
+        'check-all',
+        'click',
+        'columndragend',
+        'columndragleave',
+        'columndragover',
+        'columndragstart',
+        'columndrop',
+        'contextmenu',
+        'dblclick',
+        'details-close',
+        'details-open',
+        'dragend',
+        'dragleave',
+        'dragover',
+        'dragstart',
+        'drop',
+        'filters-change',
+        'page-change',
+        'select',
+        'sort',
+        'sorting-priority-removed',
+        'update:checkedRows',
+        'update:currentPage',
+        'update:openedDetailed',
+        'update:selected'
+    ],
     data() {
         return {
             sortMultipleDataLocal: [],
@@ -1396,6 +1425,8 @@ export default {
         },
 
         emitEventForRow(eventName, event, row) {
+            // eventName should not be in `emits` because it is never included
+            // in `$attrs` if it is listed in `emits`.
             return this.$attrs[`on${eventName}`] ? this.$emit(eventName, row, event) : null
         },
 
