@@ -35,7 +35,7 @@
                 :range="range"
                 :hovered-date-range="hoveredDateRange"
                 @select="updateSelectedDate"
-                @rangeHoverEndDate="setRangeHoverEndDate"
+                @range-hover-end-date="setRangeHoverEndDate"
                 :multiple="multiple"
                 @change-focus="changeFocus"
             />
