@@ -1,7 +1,7 @@
 import vue from 'rollup-plugin-vue'
-import node from 'rollup-plugin-node-resolve'
-import cjs from 'rollup-plugin-commonjs'
-import babel from 'rollup-plugin-babel'
+import node from '@rollup/plugin-node-resolve'
+import cjs from '@rollup/plugin-commonjs'
+import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 
 import fs from 'fs'
@@ -11,9 +11,10 @@ import pack from './package.json'
 
 const babelConfig = {
     exclude: 'node_modules/**',
-    runtimeHelpers: true,
+    babelHelpers: 'runtime',
     babelrc: false,
-    presets: [['@babel/preset-env', { modules: false }]]
+    presets: [['@babel/preset-env', { modules: false }]],
+    plugins: ['@babel/plugin-transform-runtime']
 }
 
 const bannerTxt = `/*! Buefy v${pack.version} | MIT License | github.com/buefy/buefy */`
@@ -28,9 +29,9 @@ const components = fs
     )
 
 const entries = {
-    'index': './src/index.js',
-    'helpers': './src/utils/helpers.js',
-    'config': './src/utils/ConfigComponent.js',
+    index: './src/index.js',
+    helpers: './src/utils/helpers.js',
+    config: './src/utils/ConfigComponent.js',
     ...components.reduce((obj, name) => {
         obj[name] = (baseFolder + componentsFolder + name)
         return obj
@@ -71,9 +72,9 @@ export default () => {
                     node({
                         extensions: ['.vue', '.js']
                     }),
-                    cjs(),
                     vue(vuePluginConfig),
-                    babel(babelConfig)
+                    babel(babelConfig),
+                    cjs()
                 ]
             }
         ]
@@ -85,7 +86,7 @@ export default () => {
             external: ['vue'],
             output: {
                 format: 'esm',
-                dir: `dist/esm`
+                dir: 'dist/esm'
             },
             plugins: [
                 node({
