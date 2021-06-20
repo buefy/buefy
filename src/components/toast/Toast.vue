@@ -1,7 +1,8 @@
 <template>
     <transition
         :enter-active-class="transition.enter"
-        :leave-active-class="transition.leave">
+        :leave-active-class="transition.leave"
+    >
         <div
             @mouseenter="pause"
             @mouseleave="removePause"
@@ -9,7 +10,8 @@
             class="toast"
             :class="[type, position]"
             :aria-hidden="!isActive"
-            role="alert">
+            role="alert"
+        >
             <template v-if="$slots.default">
                 <slot />
             </template>
