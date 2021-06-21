@@ -89,7 +89,8 @@ export default {
             isDelayOver: false,
             transitionName: null,
             animating: true,
-            savedScrollTop: null
+            savedScrollTop: null,
+            hasLeaved: false
         }
     },
     computed: {
@@ -248,8 +249,11 @@ export default {
         },
         onHover() {
             if (this.delay) {
+                this.hasLeaved = false
                 this.timer = setTimeout(() => {
-                    this.isDelayOver = true
+                    if (!this.hasLeaved) {
+                        this.isDelayOver = true
+                    }
                     this.timer = null
                 }, this.delay)
             } else {
@@ -257,6 +261,8 @@ export default {
             }
         },
         onHoverLeave() {
+            this.hasLeaved = true
+            this.timer = null
             this.isDelayOver = false
         }
     },
