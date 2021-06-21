@@ -1,5 +1,24 @@
 # Buefy Changelog
 
+## 0.9.8
+
+### New features
+
+* Shipped with Bulma 0.9.3 ([release note](https://github.com/jgthms/bulma/releases/tag/0.9.3))
+* Support `keep first` on taginput elements (thanks @fabiofdsantos)
+* Add missing typehints for the notification component (thanks @maartenvanasperen)
+* Improve accessibility to dropdown and autocomplete (thanks @eveenendaal)
+* Add `detail-icon` prop to Table component (thanks @holtolee)
+* Add `delay` prop to Sidebar component (thanks @holtolee)
+
+### Fixes
+
+* Fix #3329 checkbox autocompletion (thanks @markovejnovic)
+* Fix datepicker tab navigation with `nearby-selectable-month-days` prop (thanks @Raljuk)
+* Fix #3342 iPad detection (thanks @lboecker)
+* Fix #3333 multiple datepicker stay on month on date removal (thanks @mateusbw)
+* Fix #3366 notification animation effect on close (thanks @LeoMouyna)
+
 ## 0.9.7
 
 ### New features

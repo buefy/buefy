@@ -239,7 +239,7 @@
                                     role="button"
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
-                                        icon="chevron-right"
+                                        :icon="detailIcon"
                                         :pack="iconPack"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
@@ -491,6 +491,10 @@ export default {
         showDetailIcon: {
             type: Boolean,
             default: true
+        },
+        detailIcon: {
+            type: String,
+            default: 'chevron-right'
         },
         paginationPosition: {
             type: String,

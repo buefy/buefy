@@ -16,7 +16,7 @@ $slider-mark-size: 0.75rem !default;
 $slider-colors: $colors !default;
 
 @mixin slider-size($size) {
-	$track-height: $size / $slider-thumb-to-track-ratio;
+	$track-height: divide($size, $slider-thumb-to-track-ratio);
 	$tick-height: $track-height * $slider-tick-to-track-ratio;
 	$thumb-size: $size;
 
@@ -36,7 +36,7 @@ $slider-colors: $colors !default;
     .b-slider-tick-label {
         font-size: $slider-mark-size;
         position: absolute;
-        top: calc(#{$track-height} / 2 + 2px);
+        top: calc(#{$track-height} * 0.5 + 2px);
         left: 50%;
         transform: translateX(-50%);
     }
