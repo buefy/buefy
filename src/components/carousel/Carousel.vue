@@ -314,8 +314,6 @@ export default {
             this.dragX = event.touches ? event.changedTouches[0].pageX : event.pageX
             if (event.touches) {
                 this.pauseTimer()
-            } else {
-                event.preventDefault()
             }
         },
         dragEnd(event) {
