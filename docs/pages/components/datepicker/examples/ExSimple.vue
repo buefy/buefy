@@ -31,6 +31,9 @@
                 :locale="locale"
                 placeholder="Click to select..."
                 icon="calendar-today"
+                :icon-right="selected ? 'close-circle' : ''"
+                icon-right-clickable
+                @icon-right-click="clearDate"
                 trap-focus>
             </b-datepicker>
         </b-field>
@@ -44,6 +47,11 @@ export default {
             selected: new Date(),
             showWeekNumber: false,
             locale: undefined // Browser locale
+        }
+    },
+    methods: {
+        clearDate () {
+            this.selected = null
         }
     }
 }

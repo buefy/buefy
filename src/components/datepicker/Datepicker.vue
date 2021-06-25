@@ -26,6 +26,7 @@
                         :size="size"
                         :icon="icon"
                         :icon-right="iconRight"
+                        :icon-right-clickable="iconRightClickable"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -34,6 +35,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
+                        @icon-right-click="$emit('icon-right-click')"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />
@@ -370,6 +372,7 @@ export default {
         },
         position: String,
         iconRight: String,
+        iconRightClickable: Boolean,
         events: Array,
         indicators: {
             type: String,

@@ -17,6 +17,8 @@
         :min-date="minDate"
         :max-date="maxDate"
         :icon="icon"
+        :icon-right="iconRight"
+        :icon-right-clickable="iconRightClickable"
         :icon-pack="iconPack"
         :size="datepickerSize"
         :placeholder="placeholder"
@@ -29,6 +31,7 @@
         :append-to-body="appendToBody"
         @focus="onFocus"
         @blur="onBlur"
+        @icon-right-click="$emit('icon-right-click')"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
         <nav class="level is-mobile">
@@ -113,6 +116,8 @@ export default {
         horizontalTimePicker: Boolean,
         disabled: Boolean,
         icon: String,
+        iconRight: String,
+        iconRightClickable: Boolean,
         iconPack: String,
         inline: Boolean,
         openOnFocus: Boolean,

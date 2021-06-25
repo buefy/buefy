@@ -35,9 +35,13 @@
         </b-field>
         <b-field label="Select datetime">
             <b-datetimepicker
+                v-model="selected"
                 rounded
                 placeholder="Click to select..."
                 icon="calendar-today"
+                :icon-right="selected ? 'close-circle' : ''"
+                icon-right-clickable
+                @icon-right-click="clearDateTime"
                 :locale="locale"
                 :datepicker="{ showWeekNumber }"
                 :timepicker="{ enableSeconds, hourFormat }"
@@ -51,10 +55,16 @@
 export default {
     data() {
         return {
+            selected: new Date(),
             showWeekNumber: false,
             enableSeconds: false,
             hourFormat: undefined, // Browser locale
             locale: undefined // Browser locale
+        }
+    },
+    methods: {
+        clearDateTime () {
+            this.selected = null
         }
     }
 }
