@@ -72,6 +72,20 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>icon-right</code>',
+                description: 'Icon name to be added on the right side',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>icon-right-clickable</code>',
+                description: 'Make the right icon clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon-pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',
@@ -163,6 +177,11 @@ export default [
             }
         ],
         events: [
+            {
+                name: '<code>icon-right-click</code>',
+                description: 'Triggers when the right icon is clickable and has been clicked',
+                parameters: '<code>event: $event</code>'
+            },
             {
                 name: '<code>change-month</code>',
                 description: 'Triggers when calendar month is changed',
