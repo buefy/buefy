@@ -145,10 +145,14 @@ export default {
         }
     },
     mounted() {
-        this.parent?.appendMenuItem(this)
+        if (this.parent) {
+            this.parent.appendMenuItem(this)
+        }
     },
     beforeUnmount() {
-        this.parent?.removeMenuItem(this)
+        if (this.parent) {
+            this.parent.removeMenuItem(this)
+        }
     }
 }
 </script>
