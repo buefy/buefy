@@ -45,7 +45,7 @@
                         <b-field label="Email">
                             <b-input
                                 type="email"
-                                :value="email"
+                                :model-value="email"
                                 placeholder="Your email"
                                 required>
                             </b-input>
@@ -54,7 +54,7 @@
                         <b-field label="Password">
                             <b-input
                                 type="password"
-                                :value="password"
+                                :model-value="password"
                                 password-reveal
                                 placeholder="Your password"
                                 required>
