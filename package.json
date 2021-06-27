@@ -50,7 +50,8 @@
     "build:docs": "node build/build.js && copyfiles --flat netlify.toml dist-docs",
     "build": "npm run build:lib && npm run build:docs",
     "cov": "./node_modules/codcov/bin/codcov",
-    "vetur": "node -r esm build/vetur.js"
+    "vetur": "node -r esm build/vetur.js",
+    "prepare": "npm run build:lib"
   },
   "keywords": [
     "bulma",
