@@ -320,3 +320,15 @@ export function isTag(vnode) {
         vnode.type !== Text &&
         vnode.type !== Static
 }
+
+// TODO: too much dependence of Vue's internal structure?
+export function getComponentFromVNode(vnode) {
+    if (!vnode) {
+        return undefined
+    }
+    const { component } = vnode
+    if (!component) {
+        return undefined
+    }
+    return component.expose ? component.expose : component.proxy
+}

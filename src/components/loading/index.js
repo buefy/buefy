@@ -2,7 +2,7 @@ import { createApp, h as createElement } from 'vue'
 
 import Loading from './Loading'
 
-import { merge } from '../../utils/helpers'
+import { merge, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const LoadingProgrammatic = {
@@ -21,10 +21,10 @@ const LoadingProgrammatic = {
             methods: {
                 close() {
                     // TODO: too much dependence on Vue's internal structure?
-                    const loading =
-                        this.loadingVNode?.component?.expose ||
-                        this.loadingVNode?.component?.proxy
-                    loading?.close()
+                    const loading = getComponentFromVNode(this.loadingVNode)
+                    if (loading) {
+                        loading.close()
+                    }
                 }
             },
             render() {

@@ -4,7 +4,7 @@ import Notification from './Notification'
 import NotificationNotice from './NotificationNotice'
 
 import config from '../../utils/config'
-import { merge } from '../../utils/helpers'
+import { merge, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const NotificationProgrammatic = {
@@ -41,10 +41,10 @@ const NotificationProgrammatic = {
             },
             methods: {
                 close() {
-                    const notice =
-                        this.noticeVNode?.component?.expose ||
-                        this.noticeVNode?.component?.proxy
-                    notice?.close()
+                    const notice = getComponentFromVNode(this.noticeVNode)
+                    if (notice) {
+                        notice.close()
+                    }
                 }
             },
             render() {

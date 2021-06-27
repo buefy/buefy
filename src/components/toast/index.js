@@ -3,7 +3,7 @@ import { createApp, h as createElement } from 'vue'
 import Toast from './Toast'
 
 import config from '../../utils/config'
-import { merge } from '../../utils/helpers'
+import { merge, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ToastProgrammatic = {
@@ -35,11 +35,10 @@ const ToastProgrammatic = {
             },
             methods: {
                 close() {
-                    // TODO: too much dependence on Vue's internal structure?
-                    const toast =
-                        this.toastVNode.component?.expose ||
-                        this.toastVNode.component?.proxy
-                    toast?.close()
+                    const toast = getComponentFromVNode(this.toastVNode)
+                    if (toast) {
+                        toast.close()
+                    }
                 }
             },
             render() {

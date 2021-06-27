@@ -142,7 +142,7 @@ export default {
             return !this.columns || !this.columns.some((column) => column === this.mobileSort)
         },
         sortableColumns() {
-            return this.columns?.filter((column) => column.sortable)
+            return this.columns && this.columns.filter((column) => column.sortable)
         }
     },
     watch: {

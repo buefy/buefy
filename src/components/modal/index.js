@@ -2,7 +2,7 @@ import { createApp, h as createElement } from 'vue'
 
 import Modal from './Modal'
 
-import { merge } from '../../utils/helpers'
+import { merge, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 const ModalProgrammatic = {
@@ -42,10 +42,10 @@ const ModalProgrammatic = {
             },
             methods: {
                 close() {
-                    const modal =
-                        this.modalVNode?.component?.expose ||
-                        this.modalVNode?.component?.proxy
-                    modal?.close()
+                    const modal = getComponentFromVNode(this.modalVNode)
+                    if (modal) {
+                        modal.close()
+                    }
                 }
             },
             render() {

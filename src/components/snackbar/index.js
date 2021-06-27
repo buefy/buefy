@@ -3,7 +3,7 @@ import { createApp, h as createElement } from 'vue'
 import Snackbar from './Snackbar'
 
 import config from '../../utils/config'
-import { merge } from '../../utils/helpers'
+import { merge, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
 const SnackbarProgrammatic = {
@@ -37,10 +37,10 @@ const SnackbarProgrammatic = {
             },
             methods: {
                 close() {
-                    const snackbar =
-                        this.snackbarVNode.component?.exposed ||
-                        this.snackbarVNode.component?.proxy
-                    snackbar?.close()
+                    const snackbar = getComponentFromVNode(this.snackbarVNode)
+                    if (snackbar) {
+                        snackbar.close()
+                    }
                 }
             },
             render() {

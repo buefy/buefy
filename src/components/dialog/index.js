@@ -3,7 +3,7 @@ import { createApp, h as createElement } from 'vue'
 import Dialog from './Dialog'
 
 import config from '../../utils/config'
-import { merge } from '../../utils/helpers'
+import { merge, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 function open(propsData) {
@@ -22,11 +22,10 @@ function open(propsData) {
             },
             methods: {
                 close() {
-                    // TODO: too much dependence on Vue's internal structure?
-                    const dialog =
-                        this.dialogVNode?.component?.expose ||
-                        this.dialogVNode?.component?.proxy
-                    dialog?.close()
+                    const dialog = getComponentFromVNode(this.dialogVNode)
+                    if (dialog) {
+                        dialog.close()
+                    }
                 }
             },
             render() {
