@@ -13,6 +13,43 @@
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
+## About this fork
+
+This fork (branch `vue-3`) is a version of Buefy that works with [Vue 3](https://v3.vuejs.org) (not with Vue 2).
+The branch `vue-3` has departed from the then latest commit [#b6233b9c335d99cf688ee2a3b9c61fd26a92a182](https://github.com/buefy/buefy/commit/b6233b9c335d99cf688ee2a3b9c61fd26a92a182) on the `dev` branch.
+
+Please note that this branch was previously based on the version `0.9.21`, though, it has been **completely rebased** from the latest `dev` branch as of Jul 4, 2023.
+
+### Migration goal
+
+The migration goal was to make the documentation page of every component work.
+Some features not used in the documentation pages may not work.
+Please refer to [MIGRATION-NOTE.md](./MIGRATION-NOTE.md) for more details about what challenges I faced.
+
+**Unit tests have not been touched at all**.
+
+**Server-side-rendering has neither been tested**.
+
+### Breaking changes
+
+Because not all of Vue 2 features could be reproduced with Vue 3, there are some breaking changes.
+Please refer to [CHANGELOG.md](./CHANGELOG.md) for more details.
+The biggest breaking change is obviously, **this does not work with Vue 2**.
+
+### How to install
+
+To install this fork, please run the following command,
+
+```sh
+npm install 'https://github.com/kikuomax/buefy.git'
+```
+
+If you need the previous version that is based on Buefy v0.9.21, please run the following command,
+
+```sh
+npm install 'https://github.com/kikuomax/buefy.git#v0.9.21-vue3-1'
+```
+
 ## Features
 
 * Keep your current Bulma theme / variables easily
@@ -31,34 +68,38 @@ Browse [online documentation here](https://buefy.org/).
 
 ## Quick start
 
-You need [Vue.js](https://vuejs.org/) **version 2.6+**. (Vue 3 is [not supported](https://github.com/buefy/buefy/issues/2505#issuecomment-997000720))
+You need [Vue.js](https://vuejs.org/) **version 3.0+**. (Vue 2 is not supported)
 
 ### 1 Install via npm
 
 ```bash
-npm install buefy
+npm install 'https://github.com/kikuomax/buefy.git'
 ```
 
 ### 2 Import and use Buefy
 
 Bundle
 ```javascript
-import Vue from 'vue';
+import { createApp } from 'vue';
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 
-Vue.use(Buefy);
+const app = createApp();
+
+app.use(Buefy);
 
 ```
 or Individual Components
 ```javascript
 
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { Field, Input } from 'buefy'
 import 'buefy/dist/buefy.css'
 
-Vue.use(Field)
-Vue.use(Input)
+const app = createApp();
+
+app.use(Field)
+app.use(Input)
 
 ```
 
