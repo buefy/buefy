@@ -1,7 +1,7 @@
 <template>
     <div class="b-table">
 
-        <slot />
+        <slot/>
 
         <b-table-mobile-sort
             v-if="mobileCards && hasSortablenewColumns"
@@ -151,7 +151,7 @@
                 </tr>
                 <tr v-if="hasCustomSubheadings" class="is-subheading">
                     <th v-if="showDetailRowIcon" width="40px"/>
-                    <th v-if="checkable && checkboxPosition === 'left'" />
+                    <th v-if="checkable && checkboxPosition === 'left'"/>
                     <th
                         v-for="(column, index) in visibleColumns"
                         :key="column.newKey + ':' + index + 'subheading'"
@@ -176,11 +176,11 @@
                             <template v-else>{{ column.subheading }}</template>
                         </div>
                     </th>
-                    <th v-if="checkable && checkboxPosition === 'right'" />
+                    <th v-if="checkable && checkboxPosition === 'right'"/>
                 </tr>
                 <tr v-if="hasSearchablenewColumns">
                     <th v-if="showDetailRowIcon" width="40px"/>
-                    <th v-if="checkable && checkboxPosition === 'left'" />
+                    <th v-if="checkable && checkboxPosition === 'left'"/>
                     <th
                         v-for="(column, index) in visibleColumns"
                         :key="column.newKey + ':' + index + 'searchable'"
@@ -204,11 +204,11 @@
                                     v-else
                                     @[filtersEvent].native="onFiltersEvent"
                                     v-model="filters[column.field]"
-                                    :type="column.numeric ? 'number' : 'text'" />
+                                    :type="column.numeric ? 'number' : 'text'"/>
                             </template>
                         </div>
                     </th>
-                    <th v-if="checkable && checkboxPosition === 'right'" />
+                    <th v-if="checkable && checkboxPosition === 'right'"/>
                 </tr>
                 </thead>
                 <tbody>
@@ -338,7 +338,7 @@
 
             <template v-if="loading">
                 <slot name="loading">
-                    <b-loading :is-full-page="false" :active.sync="loading" />
+                    <b-loading :is-full-page="false" :active.sync="loading"/>
                 </slot>
             </template>
 
@@ -372,9 +372,9 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
+import {getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth} from '../../utils/helpers'
 import debounce from '../../utils/debounce'
-import { VueInstance } from '../../utils/config'
+import {VueInstance} from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
 import Icon from '../icon/Icon'
 import Input from '../input/Input'
@@ -733,7 +733,7 @@ export default {
                 return this.columns.map((column) => {
                     const TableColumnComponent = VueInstance.extend(TableColumn)
                     const component = new TableColumnComponent(
-                        { parent: this, propsData: column }
+                        {parent: this, propsData: column}
                     )
                     component.$scopedSlots = {
                         default: (props) => {
@@ -844,7 +844,7 @@ export default {
     },
     methods: {
         onFiltersEvent(event) {
-            this.$emit(`filters-event-${this.filtersEvent}`, { event, filters: this.filters })
+            this.$emit(`filters-event-${this.filtersEvent}`, {event, filters: this.filters})
         },
         handleFiltersChange(value) {
             if (this.backendFiltering) {
