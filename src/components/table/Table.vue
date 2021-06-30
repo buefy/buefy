@@ -51,6 +51,7 @@
                 :tabindex="!focusable ? false : 0"
                 @keydown.self.prevent.up="pressedArrow(-1)"
                 @keydown.self.prevent.down="pressedArrow(1)">
+                <caption v-show="showCaption" v-if="caption">{{ caption }}</caption>
                 <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
@@ -566,7 +567,12 @@ export default {
             type: Boolean,
             default: true
         },
-        debounceSearch: Number
+        debounceSearch: Number,
+        caption: String,
+        showCaption: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
