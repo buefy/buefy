@@ -3,7 +3,7 @@
         <b-input
             v-model="newValue"
             ref="input"
-            type="text"
+            :type="newType"
             :size="size"
             :loading="loading"
             :rounded="rounded"
@@ -14,11 +14,11 @@
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
             :use-html5-validation="false"
+            :aria-autocomplete="ariaAutocomplete"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
             @blur="onBlur"
-            @keyup.native.esc.prevent="isActive = false"
             @keydown.native="keydown"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
@@ -115,12 +115,14 @@ export default {
             type: String,
             default: 'value'
         },
+        nativeSearch: Boolean,
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
+        selectOnClickOutside: Boolean,
         clearable: Boolean,
         maxHeight: [String, Number],
         dropdownPosition: {
@@ -144,6 +146,8 @@ export default {
             isActive: false,
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
+            ariaAutocomplete: this.keepFirst ? 'both' : 'list',
+            newType: this.nativeSearch ? 'search' : 'text',
             isListInViewportVertically: true,
             hasFocus: false,
             style: {},
@@ -383,18 +387,28 @@ export default {
         },
 
         keydown(event) {
-            const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
+            const { key, which } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
+
+            // Use Keycodes to detect input as it can cause adverse effects
+            // with other Keyboard layouts
+            // see https://css-tricks.com/snippets/javascript/javascript-keycodes/
+            // see also https://unixpapa.com/js/key.html
+            // test keycodes with https://www.w3.org/2002/09/tests/keys.html
+
             // prevent emit submit event
-            if (key === 'Enter') event.preventDefault()
+            if (which === 13) event.preventDefault()
             // Close dropdown on Tab & no hovered
-            this.isActive = key !== 'Tab'
+            if (which === 9 || which === 27) {
+                this.isActive = false
+                event.preventDefault()
+            }
             if (this.hovered === null) return
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // If adding by comma, don't add the comma to the input
                 if (key === ',') event.preventDefault()
 
                 // Close dropdown on select by Tab
-                const closeDropdown = !this.keepOpen || key === 'Tab'
+                const closeDropdown = !this.keepOpen || which === 9
                 this.setSelected(this.hovered, closeDropdown, event)
             }
         },
@@ -405,7 +419,7 @@ export default {
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
-                if (this.keepFirst && this.hovered) {
+                if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
                     this.isActive = false
