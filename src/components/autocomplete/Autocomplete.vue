@@ -396,11 +396,12 @@ export default {
             // test keycodes with https://www.w3.org/2002/09/tests/keys.html
 
             // prevent emit submit event
-            if (which === 13) event.preventDefault()
+            if (which === 13 || key === 'Enter') event.preventDefault()
+
             // Close dropdown on Tab & no hovered
-            if (which === 9 || which === 27) {
-                this.isActive = false
+            if (which === 9 || which === 27 || key === 'Escape' || key === 'Tab') {
                 event.preventDefault()
+                this.isActive = false
             }
             if (this.hovered === null) return
             if (this.confirmKeys.indexOf(key) >= 0) {
