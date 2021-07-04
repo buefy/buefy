@@ -387,19 +387,13 @@ export default {
         },
 
         keydown(event) {
-            const { key, which } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
-
-            // Use Keycodes to detect input as it can cause adverse effects
-            // with other Keyboard layouts
-            // see https://css-tricks.com/snippets/javascript/javascript-keycodes/
-            // see also https://unixpapa.com/js/key.html
-            // test keycodes with https://www.w3.org/2002/09/tests/keys.html
+            const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
 
             // prevent emit submit event
-            if (which === 13 || key === 'Enter') event.preventDefault()
+            if (key === 'Enter') event.preventDefault()
 
             // Close dropdown on Tab & no hovered
-            if (which === 9 || which === 27 || key === 'Escape' || key === 'Tab') {
+            if (key === 'Escape' || key === 'Tab') {
                 event.preventDefault()
                 this.isActive = false
             }
@@ -409,7 +403,7 @@ export default {
                 if (key === ',') event.preventDefault()
 
                 // Close dropdown on select by Tab
-                const closeDropdown = !this.keepOpen || which === 9
+                const closeDropdown = !this.keepOpen || key === 'Tab'
                 this.setSelected(this.hovered, closeDropdown, event)
             }
         },
