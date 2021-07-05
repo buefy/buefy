@@ -1165,7 +1165,7 @@ export default {
                 const input = this.filters[key]
                 const column = this.newColumns.filter((c) => c.field === key)[0]
                 if (column && column.customSearch && typeof column.customSearch === 'function') {
-                    return column.customSearch(row, input)
+                    if (!column.customSearch(row, input)) return false
                 } else {
                     let value = this.getValueByPath(row, key)
                     if (value == null) return false
