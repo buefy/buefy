@@ -156,13 +156,6 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>native-search</code>',
-                description: 'Sets the native HTML input element\'s <code>type</code> to search instead of text',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
-            },
-            {
                 name: '<code>select-on-click-outside</code>',
                 description: 'Trigger the <code>@select</code> event for the first pre-selected option when clicking outside and <code>keep-first</code> is enabled',
                 type: 'Boolean',

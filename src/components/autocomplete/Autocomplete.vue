@@ -3,7 +3,7 @@
         <b-input
             v-model="newValue"
             ref="input"
-            :type="newType"
+            :type="type"
             :size="size"
             :loading="loading"
             :rounded="rounded"
@@ -115,7 +115,6 @@ export default {
             type: String,
             default: 'value'
         },
-        nativeSearch: Boolean,
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
@@ -134,6 +133,10 @@ export default {
         iconRight: String,
         iconRightClickable: Boolean,
         appendToBody: Boolean,
+        type: {
+            type: String,
+            default: 'text'
+        },
         confirmKeys: {
             type: Array,
             default: () => ['Tab', 'Enter']
@@ -147,7 +150,6 @@ export default {
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
             ariaAutocomplete: this.keepFirst ? 'both' : 'list',
-            newType: this.nativeSearch ? 'search' : 'text',
             isListInViewportVertically: true,
             hasFocus: false,
             style: {},
@@ -308,6 +310,12 @@ export default {
             this.$emit('input', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
+
+            // Fixes #3185
+            if (!currentValue) {
+                this.setSelected(null, false)
+            }
+
             if (currentValue && currentValue !== value) {
                 this.setSelected(null, false)
             }
