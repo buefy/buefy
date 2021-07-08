@@ -45,7 +45,9 @@
                                         ref="input"
                                         :class="{ 'is-danger': validationMessage }"
                                         v-bind="inputAttrs"
-                                        @keyup.enter="confirm">
+                                        @compositionstart="isCompositing = true"
+                                        @compositionend="isCompositing = false"
+                                        @keydown.enter="confirm">
                                 </div>
                                 <p class="help is-danger">{{ validationMessage }}</p>
                             </div>
@@ -161,7 +163,8 @@ export default {
         return {
             prompt,
             isActive: false,
-            validationMessage: ''
+            validationMessage: '',
+            isCompositing: false
         }
     },
     computed: {
@@ -198,6 +201,7 @@ export default {
         */
         confirm() {
             if (this.$refs.input !== undefined) {
+                if (this.isCompositing) return
                 if (!this.$refs.input.checkValidity()) {
                     this.validationMessage = this.$refs.input.validationMessage
                     this.$nextTick(() => this.$refs.input.select())
