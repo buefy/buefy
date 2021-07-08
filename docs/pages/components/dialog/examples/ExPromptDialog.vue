@@ -43,8 +43,8 @@ export default {
                     type: 'number',
                     placeholder: 'Type your age',
                     value: '18',
-                    maxlength: 2,
-                    min: 18
+                    min: 18,
+                    max: 99
                 },
                 trapFocus: true,
                 onConfirm: (value) => this.$buefy.toast.open(`Your age is: ${value}`)
