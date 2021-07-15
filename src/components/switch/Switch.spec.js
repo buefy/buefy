@@ -5,7 +5,13 @@ let wrapper
 
 describe('BSwitch', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BSwitch)
+        wrapper = shallowMount(BSwitch, {
+            slots: {
+                default: [
+                    'Control label'
+                ]
+            }
+        })
     })
 
     it('is called', () => {
