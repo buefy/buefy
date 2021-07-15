@@ -24,7 +24,7 @@
         <span
             class="check"
             :class="checkClasses"/>
-        <span class="control-label"><slot/></span>
+        <span v-if="showControlLabel" class="control-label"><slot/></span>
     </label>
 </template>
 
@@ -98,6 +98,9 @@ export default {
                 (this.passiveType && `${this.passiveType}-passive`),
                 this.type
             ]
+        },
+        showControlLabel() {
+            return !!this.$slots.default
         }
     },
     watch: {
