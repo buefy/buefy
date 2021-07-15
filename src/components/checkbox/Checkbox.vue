@@ -18,9 +18,10 @@
             :name="name"
             :value="nativeValue"
             :true-value="trueValue"
-            :false-value="falseValue">
+            :false-value="falseValue"
+            :aria-labelledby="ariaLabelledby">
         <span class="check" :class="type" />
-        <span class="control-label"><slot/></span>
+        <span :id="ariaLabelledby" class="control-label"><slot/></span>
     </label>
 </template>
 
@@ -32,6 +33,7 @@ export default {
     mixins: [CheckRadioMixin],
     props: {
         indeterminate: Boolean,
+        ariaLabelledby: String,
         trueValue: {
             type: [String, Number, Boolean, Function, Object, Array],
             default: true
