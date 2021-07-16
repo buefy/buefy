@@ -25,7 +25,10 @@
         <span
             class="check"
             :class="checkClasses"/>
-        <span :id="ariaLabelledby" class="control-label"><slot/></span>
+        <span
+            v-if="showControlLabel"
+            :id="ariaLabelledby"
+            class="control-label"><slot/></span>
     </label>
 </template>
 
@@ -100,6 +103,9 @@ export default {
                 (this.passiveType && `${this.passiveType}-passive`),
                 this.type
             ]
+        },
+        showControlLabel() {
+            return !!this.$slots.default
         }
     },
     watch: {
