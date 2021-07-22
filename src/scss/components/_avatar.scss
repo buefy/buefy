@@ -1,0 +1,26 @@
+.avatar {
+	// TEMPORARY DURING DEVELOPMENT
+    .avatar-username {
+        background-color: black;
+    }
+    //
+    .username-first-letters {
+        color: white;
+        text-align: center;
+        font-weight: bolder;
+        /* Center the text horizontally and vertically */
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        /* Disable selecting the text */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .rounded {
+        border-radius: 50%;
+    }
+}
