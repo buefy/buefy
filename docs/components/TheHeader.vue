@@ -1,5 +1,10 @@
 <template>
     <header class="docs-header">
+        <b-avatar
+            :rounded="true"
+            username="MouadTaoussi"
+            size="48x48"
+            avatar-color="black" />
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
                 <template v-for="(item, index) in breadcrumb">
