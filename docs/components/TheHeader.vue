@@ -3,7 +3,7 @@
         <b-avatar
             :rounded="true"
             username="MouadTaoussi"
-            size="48x48"
+            size="128x128"
             avatar-color="black" />
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
