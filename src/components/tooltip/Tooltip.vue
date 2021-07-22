@@ -87,7 +87,7 @@ export default {
     },
     data() {
         return {
-            isActive: true,
+            isActive: false,
             triggerStyle: {},
             timer: null,
             _bodyEl: undefined // Used to append to body
