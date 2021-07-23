@@ -2,9 +2,9 @@
     <header class="docs-header">
         <b-avatar
             :rounded="true"
-            username="MouadTaoussi"
-            size="128x128"
-            avatar-color="black" />
+            username="MT你好世界"
+            size="64x64"
+            variant="" />
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
                 <template v-for="(item, index) in breadcrumb">
