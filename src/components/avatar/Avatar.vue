@@ -19,6 +19,7 @@
 
 <script>
 // import config from '../../utils/config'
+// Defaults  size: 48x48, variant: has-background-link rounded: true
 
 export default {
     name: 'BAvatar',
@@ -41,22 +42,20 @@ export default {
     },
     data() {
         return {
-            textSizes: {
+            allowedTextSizes: {
                 // Text sizes are used to be compatible to appropriate avatar size
                 // specified by the user
                 size16: '0.5rem', // 8px
                 size24: '0.625rem', // 10px
                 size32: '0.9375rem', // 15px
-                size48: '1.25rem', // 20px
-                size64: '1.875rem', // 30px
-                size96: '2.5rem', // 40px
+                size48: '1.20rem', // 19.2px
+                size64: '1.525rem', // 24.4px
+                size96: '2.1rem', // 33.6px
                 size128: '2.8125rem' // 45px
             },
             bulmaKnownSizes: ['16x16', '24x24', '32x32', '48x48', '64x64', '96x96', '128x128'],
             bulmaKnownColors: [
-                'has-background-white',
                 'has-background-black',
-                'has-background-light',
                 'has-background-dark',
                 'has-background-primary',
                 'has-background-link',
@@ -87,7 +86,7 @@ export default {
                 return bulmaKnownColor
             } else {
                 // Generate random color if the variant wasn't provided
-                const variant = this.bulmaKnownColors[Math.floor(Math.random() * 10)]
+                const variant = this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || 'has-background-link'
                 return variant
             }
         },
@@ -106,19 +105,19 @@ export default {
             // Set the avatar text size according to avatar size.
             if (!this.src && !!this.username && usernameFirstLetters !== null) {
                 if (bulmaKnownSize === '16x16') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size16
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size16
                 } else if (bulmaKnownSize === '24x24') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size24
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size24
                 } else if (bulmaKnownSize === '32x32') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size32
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size32
                 } else if (bulmaKnownSize === '48x48') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size48
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size48
                 } else if (bulmaKnownSize === '64x64') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size64
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size64
                 } else if (bulmaKnownSize === '96x96') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size96
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size96
                 } else if (bulmaKnownSize === '128x128') {
-                    usernameFirstLetters.style.fontSize = this.textSizes.size128
+                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size128
                 }
                 return `set`
             } else { return `Waiting to inlclude username and exclude src...` }
@@ -127,9 +126,9 @@ export default {
     created() {
     },
     mounted() {
+        this.calculateTextSize()
     },
     beforeDestroy() {
-
     }
 }
 </script>
