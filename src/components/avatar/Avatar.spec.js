@@ -3,14 +3,14 @@ import BAvatar from '@components/avatar/Avatar'
 
 describe('BAvatar', () => {
     it('is called', () => {
-        let wrapper = shallowMount(BAvatar)
+        const wrapper = shallowMount(BAvatar)
 
         expect(wrapper.name()).toBe('BAvatar')
         expect(wrapper.isVueInstance()).toBeTruthy()
     })
 
     it('render correctly', () => {
-        let wrapper = shallowMount(BAvatar)
+        const wrapper = shallowMount(BAvatar)
 
         expect(wrapper.html()).toMatchSnapshot()
     })
@@ -18,7 +18,7 @@ describe('BAvatar', () => {
     it('render image', () => {
         const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
 
-        let wrapper = shallowMount(BAvatar, {
+        const wrapper = shallowMount(BAvatar, {
             propsData: {
                 src
             }
@@ -29,7 +29,8 @@ describe('BAvatar', () => {
 
     it('render text if the is no image', () => {
         const username = 'JD'
-        let wrapper = shallowMount(BAvatar, {
+
+        const wrapper = shallowMount(BAvatar, {
             propsData: {
                 username
             }
@@ -42,7 +43,7 @@ describe('BAvatar', () => {
         const username = 'JD'
         const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
 
-        let wrapper = shallowMount(BAvatar, {
+        const wrapper = shallowMount(BAvatar, {
             propsData: {
                 src,
                 username
@@ -53,21 +54,64 @@ describe('BAvatar', () => {
         expect(wrapper.contains('p')).toBe(false)
     })
 
-    it('compute imageClasses as expected', () => {
-        // let wrapper = shallowMount(BAvatar)
+    it('compute imgClasses as expected', () => {
+        const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
+        const rounded = true
+        const size = '48x48'
+
+        const wrapper = shallowMount(BAvatar, {
+            propsData: {
+                src,
+                rounded,
+                size
+            }
+        })
+
+        const vm = wrapper.vm
+
+        expect(vm.imgClasses).toBe('image rounded is-48x48')
     })
 
-    it('generateBgColorForAvatar correctly', () => {
-        // let wrapper = shallowMount(BAvatar)
-    })
+    // it('generateBgColorForAvatar correctly', () => {
+    //     // let wrapper = shallowMount(BAvatar)
+    // })
 
     it('setText correctly', () => {
-        // let wrapper = shallowMount(BAvatar)
+        const username = 'JD'
+        const completusername = 'Jhonedoe'
+
+        // if provided one or two letters of the username
+        let wrapper = shallowMount(BAvatar, {
+            propsData: {
+                username
+            }
+        })
+
+        let vm = wrapper.vm
+
+        expect(vm.setText).toBe('JD')
+
+        // if complet long username
+        wrapper = shallowMount(BAvatar, {
+            propsData: {
+                username: completusername
+            }
+        })
+
+        vm = wrapper.vm
+
+        expect(vm.setText).toBe('JH')
     })
 
-    it('calculateTextSize correctly', () => {
-        // let wrapper = shallowMount(BAvatar)
-    })
+    // it('calculateTextSize correctly', () => {
+    //     const username = 'JD'
+
+    //     let wrapper = shallowMount(BAvatar, {
+    //         propsData: {
+    //             username
+    //         }
+    //     })
+    // })
 })
 
 // to render image as priority than username /

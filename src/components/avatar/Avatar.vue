@@ -1,6 +1,5 @@
 <template>
     <div class="avatar">
-        <!-- <img class="image rounded" src="http://getdrawings.com/free-icon/male-avatar-icon-52.png"> -->
         <img
             v-if="src"
             :class="'avatar-picture '+ imgClasses"
