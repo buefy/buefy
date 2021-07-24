@@ -1,30 +1,74 @@
-// import { shallowMount } from '@vue/test-utils'
-// import BAvatar from '@components/avatar/Avatar'
+import { shallowMount } from '@vue/test-utils'
+import BAvatar from '@components/avatar/Avatar'
 
-// let wrapper
+describe('BAvatar', () => {
+    it('is called', () => {
+        let wrapper = shallowMount(BAvatar)
 
-// describe('BAvatar', () => {
-//     beforeEach(() => {
-//         wrapper = shallowMount(BAvatar)
-//     })
-//     it('is called', () => {
-//     })
+        expect(wrapper.name()).toBe('BAvatar')
+        expect(wrapper.isVueInstance()).toBeTruthy()
+    })
 
-//     it('render correctly', () => {
-//     })
+    it('render correctly', () => {
+        let wrapper = shallowMount(BAvatar)
 
-//     it('to render image as priority than username', () => {
-//     })
+        expect(wrapper.html()).toMatchSnapshot()
+    })
 
-//     it('compute the image src as expected', () => {
-//     })
+    it('render image', () => {
+        const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
 
-//     it('reset events before destroy', () => {
-//     })
+        let wrapper = shallowMount(BAvatar, {
+            propsData: {
+                src
+            }
+        })
 
-//     it('has caption', () => {
-//     })
-// })
+        expect(wrapper.contains('img')).toBe(true)
+    })
+
+    it('render text if the is no image', () => {
+        const username = 'JD'
+        let wrapper = shallowMount(BAvatar, {
+            propsData: {
+                username
+            }
+        })
+
+        expect(wrapper.contains('p')).toBe(true)
+    })
+
+    it('render image as priority than username if both of them are provided', () => {
+        const username = 'JD'
+        const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
+
+        let wrapper = shallowMount(BAvatar, {
+            propsData: {
+                src,
+                username
+            }
+        })
+
+        expect(wrapper.contains('img')).toBe(true)
+        expect(wrapper.contains('p')).toBe(false)
+    })
+
+    it('compute imageClasses as expected', () => {
+        // let wrapper = shallowMount(BAvatar)
+    })
+
+    it('generateBgColorForAvatar correctly', () => {
+        // let wrapper = shallowMount(BAvatar)
+    })
+
+    it('setText correctly', () => {
+        // let wrapper = shallowMount(BAvatar)
+    })
+
+    it('calculateTextSize correctly', () => {
+        // let wrapper = shallowMount(BAvatar)
+    })
+})
 
 // to render image as priority than username /
 // if no src then render username /
