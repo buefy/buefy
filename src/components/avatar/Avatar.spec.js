@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import BAvatar from '@components/avatar/Avatar'
 
 describe('BAvatar', () => {
@@ -10,9 +10,9 @@ describe('BAvatar', () => {
     })
 
     it('render correctly', () => {
-        const wrapper = shallowMount(BAvatar)
+        const wrapper = mount(BAvatar)
 
-        expect(wrapper.html()).toMatchSnapshot()
+        expect(wrapper.element).toMatchSnapshot()
     })
 
     it('render image', () => {
