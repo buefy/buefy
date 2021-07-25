@@ -53,6 +53,7 @@
             :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)"
+            @input="$emit('input', $event)"
         />
 
         <p
@@ -172,7 +173,9 @@ export default {
                 if (!isNaN(newValue) && newValue !== null && newValue !== '-0') {
                     this.$emit('input', Number(newValue))
                 }
-                !this.isValid && this.$refs.input.checkHtml5Validity()
+                this.$nextTick(() => {
+                    this.$refs.input.checkHtml5Validity()
+                })
             }
         },
         controlsLeft() {
