@@ -72,13 +72,61 @@ describe('BAvatar', () => {
         expect(vm.imgClasses).toBe('image rounded is-48x48')
     })
 
-    // it('generateBgColorForAvatar correctly', () => {
-    //     // let wrapper = shallowMount(BAvatar)
-    // })
+    it('generateBgColorForAvatar correctly', () => {
+        const username = 'JD'
+        const variant = 'has-background-dark'
+        const bulmaKnownColors = [
+            'has-background-black',
+            'has-background-dark',
+            'has-background-primary',
+            'has-background-link',
+            'has-background-info',
+            'has-background-success',
+            'has-background-warning',
+            'has-background-danger'
+        ]
+
+        let wrapper = shallowMount(BAvatar, {
+            propsData: {
+                username,
+                variant
+            }
+        })
+
+        let vm = wrapper.vm
+
+        expect(vm.generateBgColorForAvatar).toBe('has-background-dark')
+
+        // Generate random color if there is no color provided
+        wrapper = shallowMount(BAvatar, {
+            propsData: {
+                username
+            }
+        })
+
+        vm = wrapper.vm
+
+        expect(bulmaKnownColors).toContain(vm.generateBgColorForAvatar)
+
+        // return to default color if provided invalid bulma class
+        const invalidVariant = 'has-background-red'
+
+        wrapper = shallowMount(BAvatar, {
+            propsData: {
+                username,
+                variant: invalidVariant
+            }
+
+        })
+
+        vm = wrapper.vm
+
+        expect(vm.generateBgColorForAvatar).toBe('has-background-primary')
+    })
 
     it('setText correctly', () => {
         const username = 'JD'
-        const completusername = 'Jhonedoe'
+        const longusername = 'Jhonedoe'
 
         // if provided one or two letters of the username
         let wrapper = shallowMount(BAvatar, {
@@ -91,10 +139,10 @@ describe('BAvatar', () => {
 
         expect(vm.setText).toBe('JD')
 
-        // if complet long username
+        // if provided long username
         wrapper = shallowMount(BAvatar, {
             propsData: {
-                username: completusername
+                username: longusername
             }
         })
 
@@ -105,12 +153,21 @@ describe('BAvatar', () => {
 
     // it('calculateTextSize correctly', () => {
     //     const username = 'JD'
+    //     const size = '48x48'
 
     //     let wrapper = shallowMount(BAvatar, {
     //         propsData: {
-    //             username
+    //             username,
+    //             size
     //         }
     //     })
+
+    //     const vm = wrapper.vm
+
+    //     const textSize = vm.calculateTextSize()
+
+    //     expect(textSize).toBe('set')
+    //     // expect(wrapper.find('p')).toBe('set')
     // })
 })
 

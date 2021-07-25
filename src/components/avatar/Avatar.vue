@@ -18,7 +18,7 @@
 
 <script>
 // import config from '../../utils/config'
-// Defaults  size: 48x48, variant: has-background-link rounded: true
+// Defaults  size: 48x48, variant: has-background-primary rounded: true
 
 export default {
     name: 'BAvatar',
@@ -81,11 +81,11 @@ export default {
         generateBgColorForAvatar() {
             if (!this.src && this.username && this.variant) {
                 // check if the size known by bulma
-                const bulmaKnownColor = this.bulmaKnownColors.includes(this.variant) ? this.variant : 'has-background-link'
+                const bulmaKnownColor = this.bulmaKnownColors.includes(this.variant) ? this.variant : 'has-background-primary'
                 return bulmaKnownColor
             } else {
                 // Generate random color if the variant wasn't provided
-                const variant = this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || 'has-background-link'
+                const variant = this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || 'has-background-primary'
                 return variant
             }
         },
@@ -119,7 +119,7 @@ export default {
                     usernameFirstLetters.style.fontSize = this.allowedTextSizes.size128
                 }
                 return `set`
-            } else { return `Waiting to inlclude username and exclude src...` }
+            } else { return `not set` }
         }
     },
     created() {
