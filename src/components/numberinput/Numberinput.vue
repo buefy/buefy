@@ -169,10 +169,14 @@ export default {
                     }
                 }
                 this.newValue = newValue
-                if (!isNaN(newValue) && newValue !== null && newValue !== '-0') {
+                if (newValue === null) {
+                    this.$emit('input', newValue)
+                } else if (!isNaN(newValue) && newValue !== '-0') {
                     this.$emit('input', Number(newValue))
                 }
-                !this.isValid && this.$refs.input.checkHtml5Validity()
+                this.$nextTick(() => {
+                    this.$refs.input.checkHtml5Validity()
+                })
             }
         },
         controlsLeft() {
