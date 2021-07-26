@@ -53,7 +53,6 @@
             :use-html5-validation="useHtml5Validation"
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)"
-            @input="$emit('input', $event)"
         />
 
         <p
@@ -170,7 +169,9 @@ export default {
                     }
                 }
                 this.newValue = newValue
-                if (!isNaN(newValue) && newValue !== null && newValue !== '-0') {
+                if (newValue === null) {
+                    this.$emit('input', newValue)
+                } else if (!isNaN(newValue) && newValue !== '-0') {
                     this.$emit('input', Number(newValue))
                 }
                 this.$nextTick(() => {

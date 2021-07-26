@@ -117,11 +117,6 @@ export default {
             this.checkHtml5Validity()
         },
 
-        onInput($event) {
-            this.$emit('typing', $event)
-            this.checkHtml5Validity()
-        },
-
         getElement() {
             let el = this.$refs[this.$data._elementRef]
             while (isVueComponent(el)) {
