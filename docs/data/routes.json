@@ -425,6 +425,18 @@
             "documentation/pagination"
         ]
     },
+    "documentation/avatar": {
+        "title": "Avatar",
+        "subtitle": "The best way to display a profile image, or display the shortcut of username, just like big apps does!",
+        "path": "/documentation/avatar",
+        "githubPath": "pages/components/avatar/Avatar.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/avatar"
+        ]
+    },
     "documentation/button": {
         "title": "Button",
         "subtitle": "The classic button, in different colors, sizes, and states",

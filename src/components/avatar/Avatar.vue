@@ -17,7 +17,7 @@
 </template>
 
 <script>
-// import config from '../../utils/config'
+import config from '../../utils/config'
 // Defaults  size: 48x48, variant: has-background-primary rounded: true
 
 export default {
@@ -31,16 +31,19 @@ export default {
         },
         rounded: {
             type: Boolean,
-            default: true
+            default: config.defaultAvatarRounded
         },
         size: {
             type: String,
-            default: '48x48'
+            default: config.defaultAvatarSize
         },
         variant: String
     },
     data() {
         return {
+            defaultAvatarSize: config.defaultAvatarSize,
+            defaultVariant: config.defaultAvatarVariant,
+            defaultAvatarRounded: config.defaultAvatarRounded,
             allowedTextSizes: {
                 // Text sizes are used to be compatible to appropriate avatar size
                 // specified by the user
@@ -68,7 +71,8 @@ export default {
     computed: {
         imgClasses() {
             // check if the size known by bulma
-            const bulmaKnownSize = this.bulmaKnownSizes.includes(this.size) ? this.size : '48x48'
+            const bulmaKnownSize =
+              this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
             //
             if (this.rounded && this.size) {
                 this.calculateTextSize()
@@ -81,11 +85,13 @@ export default {
         generateBgColorForAvatar() {
             if (!this.src && this.username && this.variant) {
                 // check if the size known by bulma
-                const bulmaKnownColor = this.bulmaKnownColors.includes(this.variant) ? this.variant : 'has-background-primary'
+                const bulmaKnownColor =
+                  this.bulmaKnownColors.includes(this.variant) ? this.variant : this.defaultVariant
                 return bulmaKnownColor
             } else {
                 // Generate random color if the variant wasn't provided
-                const variant = this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || 'has-background-primary'
+                const variant =
+                  this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || this.defaultVariant
                 return variant
             }
         },
@@ -100,7 +106,8 @@ export default {
     methods: {
         calculateTextSize: function () {
             const usernameFirstLetters = document.querySelector('.username-first-letters')
-            const bulmaKnownSize = this.bulmaKnownSizes.includes(this.size) ? this.size : '48x48'
+            const bulmaKnownSize =
+                this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
             // Set the avatar text size according to avatar size.
             if (!this.src && !!this.username && usernameFirstLetters !== null) {
                 if (bulmaKnownSize === '16x16') {

@@ -1,10 +1,5 @@
 <template>
     <header class="docs-header">
-        <b-avatar
-            :rounded="true"
-            username="MT你好世界"
-            size="128x128"
-            variant="has-background-link" />
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
                 <template v-for="(item, index) in breadcrumb">
