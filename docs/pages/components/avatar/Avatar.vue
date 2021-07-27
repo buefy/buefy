@@ -6,7 +6,7 @@
 
         <Example :component="ExVariants" :code="ExVariantsCode" title="Variants" vertical/>
 
-        <!-- <Example :component="ExSizes" :code="ExSizesCode" title="Icons" vertical/> -->
+        <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
         <!-- <Example :component="ExTags" :code="ExTagsCode" title="Tags" vertical/> -->
 

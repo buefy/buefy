@@ -18,7 +18,7 @@
 
 <script>
 import config from '../../utils/config'
-// Defaults  size: 48x48, variant: has-background-primary rounded: true
+// Defaults  size: 48x48, type: has-background-primary rounded: true
 
 export default {
     name: 'BAvatar',
@@ -37,7 +37,7 @@ export default {
             type: String,
             default: config.defaultAvatarSize
         },
-        variant: String
+        type: String
     },
     data() {
         return {
@@ -83,16 +83,16 @@ export default {
             }
         },
         generateBgColorForAvatar() {
-            if (!this.src && this.username && this.variant) {
+            if (!this.src && this.username && this.type) {
                 // check if the size known by bulma
                 const bulmaKnownColor =
-                  this.bulmaKnownColors.includes(this.variant) ? this.variant : this.defaultVariant
+                  this.bulmaKnownColors.includes(this.type) ? this.type : this.defaultVariant
                 return bulmaKnownColor
             } else {
-                // Generate random color if the variant wasn't provided
-                const variant =
+                // Generate random color if the type wasn't provided
+                const type =
                   this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || this.defaultVariant
-                return variant
+                return type
             }
         },
         setText() {

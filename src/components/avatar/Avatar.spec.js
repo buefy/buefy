@@ -74,7 +74,7 @@ describe('BAvatar', () => {
 
     it('generateBgColorForAvatar correctly', () => {
         const username = 'JD'
-        const variant = 'has-background-dark'
+        const type = 'has-background-dark'
         const bulmaKnownColors = [
             'has-background-black',
             'has-background-dark',
@@ -89,7 +89,7 @@ describe('BAvatar', () => {
         let wrapper = shallowMount(BAvatar, {
             propsData: {
                 username,
-                variant
+                type
             }
         })
 
@@ -114,7 +114,7 @@ describe('BAvatar', () => {
         wrapper = shallowMount(BAvatar, {
             propsData: {
                 username,
-                variant: invalidVariant
+                type: invalidVariant
             }
 
         })

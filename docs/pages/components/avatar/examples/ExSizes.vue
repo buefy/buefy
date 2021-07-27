@@ -6,7 +6,7 @@
             :rounded="user.rounded"
             :username="user.username"
             :size="user.size" 
-            :variant="user.variant" />
+            :type="user.type" />
    </section>
 </template>
 
@@ -21,43 +21,43 @@ export default {
             {
                 rounded: true,
                 username: "Jhonedoe",
-                variant: 'has-background-primary',
+                type: 'has-background-primary',
                 size: '128x128'
             },
             {
                 rounded: true,
                 username: "MT",
-                variant: 'has-background-link',
+                type: 'has-background-link',
                 size: '96x96',
             },
             {
                 rounded: true,
                 username: "AW",
-                variant: 'has-background-info',
+                type: 'has-background-info',
                 size: '64x64'
             },
             {
                 rounded: true,
                 username: "WB",
-                variant: 'has-background-success',
+                type: 'has-background-success',
                 size: '48x48'
             },
             {
                 rounded: true,
                 username: "MS",
-                variant: 'has-background-warning',
-                size: '34x34'
+                type: 'has-background-warning',
+                size: '32x32'
             },
             {
                 rounded: true,
                 username: "JD",
-                variant: 'has-background-danger',
-                size: "24x48"
+                type: 'has-background-danger',
+                size: "24x24"
             },
             {
                 rounded: true,
                 username: "MA",
-                variant: 'has-background-dark',
+                type: 'has-background-dark',
                 size: '16x16'
             }
         ]
@@ -67,9 +67,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-    section {
+    /*section {
         display: grid;
         grid-template-columns: 130px 130px 130px 130px;
         grid-gap: 10px;
-    }
+    }*/
 </style>

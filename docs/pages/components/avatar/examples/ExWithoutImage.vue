@@ -4,7 +4,7 @@
             :rounded="true"
             :username="username"
             size="128x128"
-            :variant="vartiant" />
+            :type="type" />
 	</section>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     return {
       rounded: true,
       username: "MT",
-      variant: 'has-background-link'
+      type: 'has-background-link'
     }
   }
 }

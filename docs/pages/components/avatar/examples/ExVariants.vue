@@ -6,7 +6,7 @@
             :rounded="user.rounded"
             :username="user.username"
             size="48x48"
-            :variant="user.variant" />
+            :type="user.type" />
        
     </section>
 </template>
@@ -22,42 +22,42 @@ export default {
             {
                 rounded: true,
                 username: "Jhonedoe",
-                variant: 'has-background-primary'
+                type: 'has-background-primary'
             },
             {
                 rounded: true,
                 username: "MT",
-                variant: 'has-background-link'
+                type: 'has-background-link'
             },
             {
                 rounded: true,
                 username: "AW",
-                variant: 'has-background-info'
+                type: 'has-background-info'
             },
             {
                 rounded: true,
                 username: "WB",
-                variant: 'has-background-success'
+                type: 'has-background-success'
             },
             {
                 rounded: true,
                 username: "MS",
-                variant: 'has-background-warning'
+                type: 'has-background-warning'
             },
             {
                 rounded: true,
                 username: "JD",
-                variant: 'has-background-danger'
+                type: 'has-background-danger'
             },
             {
                 rounded: true,
                 username: "MA",
-                variant: 'has-background-dark'
+                type: 'has-background-dark'
             },
             {
                 rounded: true,
                 username: "WO",
-                variant: 'has-background-black'
+                type: 'has-background-black'
             }
         ]
     }
