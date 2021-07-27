@@ -1,13 +1,14 @@
 <template>
-    <div>Hello World!!!!!
+    <div>
         <Example :component="ExImage" :code="ExImageCode" title="With Image" vertical/>
 
         <Example :component="ExWithoutImage" :code="ExWithoutImageCode" title="Without Image" vertical/>
-    <!--     <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
+        <Example :component="ExVariants" :code="ExVariantsCode" title="Variants" vertical/>
 
-        <Example :component="ExTags" :code="ExTagsCode" title="Tags" vertical/> -->
+        <!-- <Example :component="ExSizes" :code="ExSizesCode" title="Icons" vertical/> -->
+
+        <!-- <Example :component="ExTags" :code="ExTagsCode" title="Tags" vertical/> -->
 
        <!--  <Example :component="ExRouter" :code="ExRouterCode" title="Router" vertical>
             <div class="tags has-addons">
@@ -27,8 +28,15 @@
 
     import ExImage from './examples/ExImage'
     import ExImageCode from '!!raw-loader!./examples/ExImage'
+
     import ExWithoutImage from './examples/ExWithoutImage'
     import ExWithoutImageCode from '!!raw-loader!./examples/ExWithoutImage'
+
+    import ExVariants from './examples/ExVariants'
+    import ExVariantsCode from '!!raw-loader!./examples/ExVariants'
+
+    import ExSizes from './examples/ExSizes'
+    import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
     export default {
 
@@ -41,7 +49,11 @@
                 ExImage,
                 ExImageCode,
                 ExWithoutImage,
-                ExWithoutImageCode
+                ExWithoutImageCode,
+                ExVariants,
+                ExVariantsCode,
+                ExSizes,
+                ExSizesCode
             }
         }
     }

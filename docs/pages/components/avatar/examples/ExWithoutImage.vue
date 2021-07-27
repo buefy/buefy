@@ -2,9 +2,9 @@
     <section>
 	    <b-avatar
             :rounded="true"
-            username="MT你好世界"
+            :username="username"
             size="128x128"
-            variant="has-background-link" />
+            :variant="vartiant" />
 	</section>
 </template>
 
@@ -15,7 +15,9 @@ export default {
 
   data () {
     return {
-
+      rounded: true,
+      username: "MT",
+      variant: 'has-background-link'
     }
   }
 }
