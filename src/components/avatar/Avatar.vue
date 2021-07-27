@@ -11,7 +11,7 @@
             v-if="!src && !!username"
             :class="'avatar-text '+ imgClasses + ' ' + generateBgColorForAvatar"
         >
-            <p class="username-first-letters">{{ setText }}</p>
+            <p :class="'username-first-letters '+ dynamicClass">{{ setText }}</p>
         </div>
     </div>
 </template>
@@ -44,6 +44,7 @@ export default {
             defaultAvatarSize: config.defaultAvatarSize,
             defaultVariant: config.defaultAvatarVariant,
             defaultAvatarRounded: config.defaultAvatarRounded,
+            dynamicClass: this.username + this.size,
             allowedTextSizes: {
                 // Text sizes are used to be compatible to appropriate avatar size
                 // specified by the user
@@ -105,7 +106,7 @@ export default {
     },
     methods: {
         calculateTextSize: function () {
-            const usernameFirstLetters = document.querySelector('.username-first-letters')
+            const usernameFirstLetters = document.querySelector('.' + this.dynamicClass)
             const bulmaKnownSize =
                 this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
             // Set the avatar text size according to avatar size.

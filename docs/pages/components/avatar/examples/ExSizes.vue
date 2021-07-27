@@ -5,7 +5,8 @@
             :key="user"
             :rounded="user.rounded"
             :username="user.username"
-            :size="user.size" 
+            :size="user.size"
+            :src="user.src" 
             :type="user.type" />
    </section>
 </template>
@@ -26,7 +27,7 @@ export default {
             },
             {
                 rounded: true,
-                username: "MT",
+                username: "AS",
                 type: 'has-background-link',
                 size: '96x96',
             },
@@ -40,7 +41,8 @@ export default {
                 rounded: true,
                 username: "WB",
                 type: 'has-background-success',
-                size: '48x48'
+                size: '48x48',
+                src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shareicon.net%2Fdata%2F2016%2F09%2F01%2F822734_user_512x512.png&f=1&nofb=1'
             },
             {
                 rounded: true,

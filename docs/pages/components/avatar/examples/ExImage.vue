@@ -20,16 +20,14 @@ export default {
             {
                 rounded: true,
                 username: "Jhonedoe",
-                src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatarfiles.alphacoders.com%2F124%2F124872.jpg&f=1&nofb=1'
+                src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shareicon.net%2Fdata%2F2016%2F09%2F01%2F822734_user_512x512.png&f=1&nofb=1'
             },
             {
                 rounded: true,
-                username: "MT",
-                src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatarfiles.alphacoders.com%2F124%2F124872.jpg&f=1&nofb=1'
+                src: 'https://avatarfiles.alphacoders.com/108/thumb-1920-108886.gif'
             },
             {
                 rounded: true,
-                username: "MT",
                 src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatarfiles.alphacoders.com%2F124%2F124872.jpg&f=1&nofb=1'
             },
         ]

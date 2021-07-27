@@ -21,37 +21,37 @@ export default {
         data: [
             {
                 rounded: true,
-                username: "Jhonedoe",
+                username: "Je",
                 type: 'has-background-primary'
             },
             {
                 rounded: true,
-                username: "MT",
+                username: "EB",
                 type: 'has-background-link'
             },
             {
                 rounded: true,
-                username: "AW",
+                username: "AB",
                 type: 'has-background-info'
             },
             {
                 rounded: true,
-                username: "WB",
+                username: "CC",
                 type: 'has-background-success'
             },
             {
                 rounded: true,
-                username: "MS",
+                username: "BA",
                 type: 'has-background-warning'
             },
             {
                 rounded: true,
-                username: "JD",
+                username: "OR",
                 type: 'has-background-danger'
             },
             {
                 rounded: true,
-                username: "MA",
+                username: "WR",
                 type: 'has-background-dark'
             },
             {
