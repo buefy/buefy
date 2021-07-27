@@ -150,31 +150,4 @@ describe('BAvatar', () => {
 
         expect(vm.setText).toBe('JH')
     })
-
-    // it('calculateTextSize correctly', () => {
-    //     const username = 'JD'
-    //     const size = '48x48'
-
-    //     let wrapper = shallowMount(BAvatar, {
-    //         propsData: {
-    //             username,
-    //             size
-    //         }
-    //     })
-
-    //     const vm = wrapper.vm
-
-    //     const textSize = vm.calculateTextSize()
-
-    //     expect(textSize).toBe('set')
-    //     // expect(wrapper.find('p')).toBe('set')
-    // })
 })
-
-// to render image as priority than username /
-// if no src then render username /
-// if no username then render image /
-// if no username and avatar then render random image (if possible)
-// filter size by regex pattern
-// refactor <imgClasses> to work smooth and good
-// if provided the color of the avatar then set it! if not then generate random color each time

@@ -5,8 +5,6 @@
             :class="'avatar-picture '+ imgClasses"
             :src="src"
             :alt="alt">
-
-        <!-- display username's first letters -->
         <div
             v-if="!src && !!username"
             :class="'avatar-text '+ imgClasses + ' ' + generateBgColorForAvatar"
@@ -18,7 +16,6 @@
 
 <script>
 import config from '../../utils/config'
-// Defaults  size: 48x48, type: has-background-primary rounded: true
 
 export default {
     name: 'BAvatar',
@@ -48,13 +45,13 @@ export default {
             allowedTextSizes: {
                 // Text sizes are used to be compatible to appropriate avatar size
                 // specified by the user
-                size16: '0.5rem', // 8px
-                size24: '0.625rem', // 10px
-                size32: '0.9375rem', // 15px
-                size48: '1.20rem', // 19.2px
-                size64: '1.525rem', // 24.4px
-                size96: '2.1rem', // 33.6px
-                size128: '2.8125rem' // 45px
+                size16: '0.5rem',
+                size24: '0.625rem',
+                size32: '0.9375rem',
+                size48: '1.20rem',
+                size64: '1.525rem',
+                size96: '2.1rem',
+                size128: '2.8125rem'
             },
             bulmaKnownSizes: ['16x16', '24x24', '32x32', '48x48', '64x64', '96x96', '128x128'],
             bulmaKnownColors: [
@@ -139,6 +136,3 @@ export default {
     }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

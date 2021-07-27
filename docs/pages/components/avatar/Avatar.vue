@@ -4,21 +4,11 @@
 
         <Example :component="ExWithoutImage" :code="ExWithoutImageCode" title="Without Image" vertical/>
 
-        <Example :component="ExVariants" :code="ExVariantsCode" title="Variants" vertical/>
+        <Example :component="ExVariants" :code="ExVariantsCode" title="Colors" vertical/>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
-        <!-- <Example :component="ExTags" :code="ExTagsCode" title="Tags" vertical/> -->
-
-       <!--  <Example :component="ExRouter" :code="ExRouterCode" title="Router" vertical>
-            <div class="tags has-addons">
-                <span class="tag is-success">Since</span>
-                <span class="tag is-info">0.7.6</span>
-            </div>
-        </Example> -->
-
-       <!--  <ApiView :data="api"/>
-        <VariablesView :data="variables"/> -->
+        <ApiView :data="api"/>
     </div>
 </template>
 
@@ -39,8 +29,6 @@
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
     export default {
-
-        // name: 'Avatar',
 
         data () {
             return {
