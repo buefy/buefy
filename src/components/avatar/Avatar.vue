@@ -41,7 +41,7 @@ export default {
             defaultAvatarSize: config.defaultAvatarSize,
             defaultVariant: config.defaultAvatarVariant,
             defaultAvatarRounded: config.defaultAvatarRounded,
-            dynamicClass: this.username + this.size,
+            dynamicClass: this.username + this.size + Math.ceil(Math.random() * 10),
             allowedTextSizes: {
                 // Text sizes are used to be compatible to appropriate avatar size
                 // specified by the user
