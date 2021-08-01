@@ -6,10 +6,10 @@
             :src="src"
             :alt="alt">
         <div
-            v-if="!src && !!username"
+            v-if="!src && !!label"
             :class="'avatar-text '+ imgClasses + ' ' + generateBgColorForAvatar"
         >
-            <p :class="'username-first-letters '+ dynamicClass">{{ setText }}</p>
+            <p :class="'label-first-letters '+ dynamicClass">{{ setText }}</p>
         </div>
     </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     name: 'BAvatar',
     props: {
         src: String,
-        username: String,
+        label: String,
         alt: {
             type: String,
             default: 'This is avatar for the user'
@@ -41,7 +41,7 @@ export default {
             defaultAvatarSize: config.defaultAvatarSize,
             defaultVariant: config.defaultAvatarVariant,
             defaultAvatarRounded: config.defaultAvatarRounded,
-            dynamicClass: this.username + this.size + Math.ceil(Math.random() * 10),
+            dynamicClass: this.label + this.size + Math.ceil(Math.random() * 10),
             allowedTextSizes: {
                 // Text sizes are used to be compatible to appropriate avatar size
                 // specified by the user
@@ -81,7 +81,7 @@ export default {
             }
         },
         generateBgColorForAvatar() {
-            if (!this.src && this.username && this.type) {
+            if (!this.src && this.label && this.type) {
                 // check if the size known by bulma
                 const bulmaKnownColor =
                   this.bulmaKnownColors.includes(this.type) ? this.type : this.defaultVariant
@@ -94,8 +94,8 @@ export default {
             }
         },
         setText() {
-            if (!this.src && this.username) {
-                return this.username.substr(0, 2).toUpperCase()
+            if (!this.src && this.label) {
+                return this.label.substr(0, 2).toUpperCase()
             } else {
                 return ``
             }
@@ -107,7 +107,7 @@ export default {
             const bulmaKnownSize =
                 this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
             // Set the avatar text size according to avatar size.
-            if (!this.src && !!this.username && usernameFirstLetters !== null) {
+            if (!this.src && !!this.label && usernameFirstLetters !== null) {
                 if (bulmaKnownSize === '16x16') {
                     usernameFirstLetters.style.fontSize = this.allowedTextSizes.size16
                 } else if (bulmaKnownSize === '24x24') {

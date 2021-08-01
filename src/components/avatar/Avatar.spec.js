@@ -28,25 +28,25 @@ describe('BAvatar', () => {
     })
 
     it('render text if the is no image', () => {
-        const username = 'JD'
+        const label = 'JD'
 
         const wrapper = shallowMount(BAvatar, {
             propsData: {
-                username
+                label
             }
         })
 
         expect(wrapper.contains('p')).toBe(true)
     })
 
-    it('render image as priority than username if both of them are provided', () => {
-        const username = 'JD'
+    it('render image as priority than label if both of them are provided', () => {
+        const label = 'JD'
         const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
 
         const wrapper = shallowMount(BAvatar, {
             propsData: {
                 src,
-                username
+                label
             }
         })
 
@@ -73,7 +73,7 @@ describe('BAvatar', () => {
     })
 
     it('generateBgColorForAvatar correctly', () => {
-        const username = 'JD'
+        const label = 'JD'
         const type = 'has-background-dark'
         const bulmaKnownColors = [
             'has-background-black',
@@ -88,7 +88,7 @@ describe('BAvatar', () => {
 
         let wrapper = shallowMount(BAvatar, {
             propsData: {
-                username,
+                label,
                 type
             }
         })
@@ -100,7 +100,7 @@ describe('BAvatar', () => {
         // Generate random color if there is no color provided
         wrapper = shallowMount(BAvatar, {
             propsData: {
-                username
+                label
             }
         })
 
@@ -113,7 +113,7 @@ describe('BAvatar', () => {
 
         wrapper = shallowMount(BAvatar, {
             propsData: {
-                username,
+                label,
                 type: invalidVariant
             }
 
@@ -125,13 +125,13 @@ describe('BAvatar', () => {
     })
 
     it('setText correctly', () => {
-        const username = 'JD'
-        const longusername = 'Jhonedoe'
+        const label = 'JD'
+        const longlabel = 'Jhonedoe'
 
-        // if provided one or two letters of the username
+        // if provided one or two letters of the label
         let wrapper = shallowMount(BAvatar, {
             propsData: {
-                username
+                label
             }
         })
 
@@ -139,10 +139,10 @@ describe('BAvatar', () => {
 
         expect(vm.setText).toBe('JD')
 
-        // if provided long username
+        // if provided long label
         wrapper = shallowMount(BAvatar, {
             propsData: {
-                username: longusername
+                label: longlabel
             }
         })
 

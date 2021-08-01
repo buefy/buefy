@@ -4,7 +4,7 @@
             v-for="user in data"
             :key="user"
             :rounded="user.rounded"
-            :username="user.username"
+            :label="user.label"
             size="48x48"
             :type="user.type" />
        
@@ -21,42 +21,42 @@ export default {
         data: [
             {
                 rounded: true,
-                username: "Je",
+                label: "Je",
                 type: 'has-background-primary'
             },
             {
                 rounded: true,
-                username: "EB",
+                label: "EB",
                 type: 'has-background-link'
             },
             {
                 rounded: true,
-                username: "AB",
+                label: "AB",
                 type: 'has-background-info'
             },
             {
                 rounded: true,
-                username: "CC",
+                label: "CC",
                 type: 'has-background-success'
             },
             {
                 rounded: true,
-                username: "BA",
+                label: "BA",
                 type: 'has-background-warning'
             },
             {
                 rounded: true,
-                username: "OR",
+                label: "OR",
                 type: 'has-background-danger'
             },
             {
                 rounded: true,
-                username: "WR",
+                label: "WR",
                 type: 'has-background-dark'
             },
             {
                 rounded: true,
-                username: "WO",
+                label: "WO",
                 type: 'has-background-black'
             }
         ]

@@ -2,7 +2,7 @@
     <section>
 	    <b-avatar
             :rounded="true"
-            :username="username"
+            :label="label"
             size="128x128"
             :type="type" />
 	</section>
@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       rounded: true,
-      username: "MT",
+      label: "MT",
       type: 'has-background-link'
     }
   }

@@ -19,7 +19,7 @@ export default {
         data: [
             {
                 rounded: true,
-                username: "Jhonedoe",
+                label: "Jhonedoe",
                 src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shareicon.net%2Fdata%2F2016%2F09%2F01%2F822734_user_512x512.png&f=1&nofb=1'
             },
             {

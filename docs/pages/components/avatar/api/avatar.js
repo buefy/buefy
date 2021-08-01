@@ -32,11 +32,11 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>username</code>',
+                name: '<code>label</code>',
                 description: 'Shortcut or full username',
-                type: 'Boolean',
+                type: 'String',
                 values: '—',
-                default: '<code>true</code>'
+                default: '—'
             },
             {
                 name: '<code>alt</code>',
