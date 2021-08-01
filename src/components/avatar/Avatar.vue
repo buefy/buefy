@@ -9,7 +9,7 @@
             v-if="!src && !!label"
             :class="'avatar-text '+ imgClasses + ' ' + generateBgColorForAvatar"
         >
-            <p :class="'label-first-letters '+ dynamicClass">{{ setText }}</p>
+            <p :class="'label '+ dynamicClass">{{ setText }}</p>
         </div>
     </div>
 </template>
