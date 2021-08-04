@@ -48,7 +48,7 @@ export default {
             default: false
         },
         wrapperClass: {
-            type: String
+            type: [String, Array, Object]
         },
         closeOnClick: {
             type: Boolean,
