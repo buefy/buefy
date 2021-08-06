@@ -957,6 +957,7 @@ export default {
         * and not just updating the prop.
         */
         sort(column, updatingData = false, event = null) {
+            if (!column || !column.sortable) return
             if (
                 // if backend sorting is enabled, just emit the sort press like usual
                 // if the correct key combination isnt pressed, sort like usual
@@ -970,8 +971,6 @@ export default {
                     this.sortMultiColumn(column)
                 }
             } else {
-                if (!column || !column.sortable) return
-
                 // sort multiple is enabled but the correct key combination isnt pressed so reset
                 if (this.sortMultiple) {
                     this.sortMultipleDataLocal = []
