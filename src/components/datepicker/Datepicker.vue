@@ -740,7 +740,8 @@ export default {
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            if (Array.isArray(value) && value.length > this.dateSelected.length) {
+            if (Array.isArray(value) &&
+                this.dateSelected && value.length > this.dateSelected.length) {
                 this.focusedDateData = {
                     day: currentDate.getDate(),
                     month: currentDate.getMonth(),

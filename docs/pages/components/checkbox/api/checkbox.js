@@ -74,6 +74,13 @@ export default [
                     <code>is-warning</code>, <code>is-danger</code>,
                     and any other colors you've set in the <code>$colors</code> list on Sass`,
                 default: '—'
+            },
+            {
+                name: '<code>aria-labelledby</code>',
+                description: 'Accessibility label to establish relationship between the checkbox and control label',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         events: [

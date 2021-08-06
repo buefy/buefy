@@ -2,6 +2,7 @@
     <b-notification
         v-bind="$options.propsData"
         ref="notification"
+        @click="click"
         @close="close">
         <slot />
     </b-notification>
