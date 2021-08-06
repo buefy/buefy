@@ -72,7 +72,7 @@ describe('BAvatar', () => {
         expect(vm.imgClasses).toBe('image rounded is-48x48')
     })
 
-    it('generateBgColorForAvatar correctly', () => {
+    it('setColorForAvatar correctly', () => {
         const label = 'JD'
         const type = 'has-background-dark'
         const bulmaKnownColors = [
@@ -95,7 +95,7 @@ describe('BAvatar', () => {
 
         let vm = wrapper.vm
 
-        expect(vm.generateBgColorForAvatar).toBe('has-background-dark')
+        expect(vm.setColorForAvatar).toBe('has-background-dark')
 
         // Generate random color if there is no color provided
         wrapper = shallowMount(BAvatar, {
@@ -106,7 +106,7 @@ describe('BAvatar', () => {
 
         vm = wrapper.vm
 
-        expect(bulmaKnownColors).toContain(vm.generateBgColorForAvatar)
+        expect(bulmaKnownColors).toContain(vm.setColorForAvatar)
 
         // return to default color if provided invalid bulma class
         const invalidVariant = 'has-background-red'
@@ -121,7 +121,7 @@ describe('BAvatar', () => {
 
         vm = wrapper.vm
 
-        expect(vm.generateBgColorForAvatar).toBe('has-background-primary')
+        expect(vm.setColorForAvatar).toBe('has-background-primary')
     })
 
     it('setText correctly', () => {

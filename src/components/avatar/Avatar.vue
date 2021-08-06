@@ -7,7 +7,7 @@
             :alt="alt">
         <div
             v-if="!src && !!label"
-            :class="'avatar-text '+ imgClasses + ' ' + generateBgColorForAvatar"
+            :class="'avatar-text '+ imgClasses + ' ' + setColorForAvatar"
         >
             <p :class="'label '+ dynamicClass">{{ setText }}</p>
         </div>
@@ -73,21 +73,21 @@ export default {
               this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
             //
             if (this.rounded && this.size) {
-                this.calculateTextSize()
+                this.setTextSize()
                 return `image rounded is-${bulmaKnownSize}`
             } else if (!this.rounded) {
-                this.calculateTextSize()
+                this.setTextSize()
                 return `image is-${bulmaKnownSize}`
             }
         },
-        generateBgColorForAvatar() {
+        setColorForAvatar() {
             if (!this.src && this.label && this.type) {
-                // check if the size known by bulma
+                // check if the color known by bulma
                 const bulmaKnownColor =
                   this.bulmaKnownColors.includes(this.type) ? this.type : this.defaultVariant
                 return bulmaKnownColor
             } else {
-                // Generate random color if the type wasn't provided
+                // set random color if the type wasn't provided
                 const type =
                   this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || this.defaultVariant
                 return type
@@ -102,7 +102,7 @@ export default {
         }
     },
     methods: {
-        calculateTextSize: function () {
+        setTextSize: function () {
             const usernameFirstLetters = document.querySelector('.' + this.dynamicClass)
             const bulmaKnownSize =
                 this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
@@ -130,7 +130,7 @@ export default {
     created() {
     },
     mounted() {
-        this.calculateTextSize()
+        this.setTextSize()
     },
     beforeDestroy() {
     }
