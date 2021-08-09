@@ -2,12 +2,12 @@
     <div class="avatar">
         <img
             v-if="src"
-            :class="'avatar-picture '+ imgClasses"
+            :class="'avatar-picture '+ avatarClasses"
             :src="src"
             :alt="alt">
         <div
             v-if="!src && !!label"
-            :class="'avatar-text '+ imgClasses + ' ' + setColorForAvatar"
+            :class="'avatar-text '+ avatarClasses + ' ' + setColorForAvatar"
         >
             <p :class="'label '+ dynamicClass">{{ setText }}</p>
         </div>
@@ -42,18 +42,7 @@ export default {
             defaultVariant: config.defaultAvatarVariant,
             defaultAvatarRounded: config.defaultAvatarRounded,
             dynamicClass: this.label + this.size + Math.ceil(Math.random() * 10),
-            allowedTextSizes: {
-                // Text sizes are used to be compatible to appropriate avatar size
-                // specified by the user
-                size16: '0.5rem',
-                size24: '0.625rem',
-                size32: '0.9375rem',
-                size48: '1.20rem',
-                size64: '1.525rem',
-                size96: '2.1rem',
-                size128: '2.8125rem'
-            },
-            bulmaKnownSizes: ['16x16', '24x24', '32x32', '48x48', '64x64', '96x96', '128x128'],
+            bulmaKnownSizes: ['is-16x16', 'is-24x24', 'is-32x32', 'is-48x48', 'is-64x64', 'is-96x96', 'is-128x128'],
             bulmaKnownColors: [
                 'has-background-black',
                 'has-background-dark',
@@ -67,37 +56,35 @@ export default {
         }
     },
     computed: {
-        imgClasses() {
+        avatarClasses() {
             // check if the size known by bulma
-            const bulmaKnownSize =
+            const avatarSize =
               this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
             //
             if (this.rounded && this.size) {
                 this.setTextSize()
-                return `image rounded is-${bulmaKnownSize}`
+                return `image is-rounded ${avatarSize}`
             } else if (!this.rounded) {
                 this.setTextSize()
-                return `image is-${bulmaKnownSize}`
+                return `image ${avatarSize}`
             }
         },
         setColorForAvatar() {
             if (!this.src && this.label && this.type) {
                 // check if the color known by bulma
-                const bulmaKnownColor =
+                const color =
                   this.bulmaKnownColors.includes(this.type) ? this.type : this.defaultVariant
-                return bulmaKnownColor
+                return color
             } else {
                 // set random color if the type wasn't provided
-                const type =
+                const color =
                   this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || this.defaultVariant
-                return type
+                return color
             }
         },
         setText() {
             if (!this.src && this.label) {
                 return this.label.substr(0, 2).toUpperCase()
-            } else {
-                return ``
             }
         }
     },
@@ -106,25 +93,24 @@ export default {
             const usernameFirstLetters = document.querySelector('.' + this.dynamicClass)
             const bulmaKnownSize =
                 this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
-            // Set the avatar text size according to avatar size.
+            // Set the avatar text size relevant to avatar size.
             if (!this.src && !!this.label && usernameFirstLetters !== null) {
-                if (bulmaKnownSize === '16x16') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size16
-                } else if (bulmaKnownSize === '24x24') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size24
-                } else if (bulmaKnownSize === '32x32') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size32
-                } else if (bulmaKnownSize === '48x48') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size48
-                } else if (bulmaKnownSize === '64x64') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size64
-                } else if (bulmaKnownSize === '96x96') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size96
-                } else if (bulmaKnownSize === '128x128') {
-                    usernameFirstLetters.style.fontSize = this.allowedTextSizes.size128
+                if (bulmaKnownSize === 'is-16x16') {
+                    usernameFirstLetters.classList.add('text-size-16')
+                } else if (bulmaKnownSize === 'is-24x24') {
+                    usernameFirstLetters.classList.add('text-size-24')
+                } else if (bulmaKnownSize === 'is-32x32') {
+                    usernameFirstLetters.classList.add('text-size-32')
+                } else if (bulmaKnownSize === 'is-48x48') {
+                    usernameFirstLetters.classList.add('text-size-48')
+                } else if (bulmaKnownSize === 'is-64x64') {
+                    usernameFirstLetters.classList.add('text-size-64')
+                } else if (bulmaKnownSize === 'is-96x96') {
+                    usernameFirstLetters.classList.add('text-size-96')
+                } else if (bulmaKnownSize === 'is-128x128') {
+                    usernameFirstLetters.classList.add('text-size-128')
                 }
-                return `set`
-            } else { return `not set` }
+            }
         }
     },
     created() {

@@ -1,20 +1,49 @@
 .avatar {
-    .label {
-        color: white;
-        text-align: center;
-        /* Center the text horizontally and vertically */
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        /* Disable selecting the text */
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    .avatar-picture {
+        &.is-rounded {
+            border-radius: 50%;
+        }
     }
-    .rounded {
-        border-radius: 50%;
+    .avatar-text {
+        .label {
+            color: white;
+            text-align: center;
+            /* Center the text horizontally and vertically */
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            /* Disable selecting the text */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            &.text-size-16 {
+                font-size: 0.5rem;
+            }
+            &.text-size-24 {
+                font-size: 0.625rem;
+            }
+            &.text-size-32 {
+                font-size: 0.9375rem;
+            }
+            &.text-size-48 {
+                font-size: 1.20rem;
+            }
+            &.text-size-64 {
+                font-size: 1.525rem;
+            }
+            &.text-size-96 {
+                font-size: 2.1rem;
+            }
+            &.text-size-128 {
+                font-size: 2.8125rem;
+            }
+        }
+        &.is-rounded {
+            border-radius: 50%;
+        }
     }
+
 }

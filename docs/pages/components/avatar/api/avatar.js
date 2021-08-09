@@ -7,15 +7,15 @@ export default [
                 type: 'String',
                 values: `<code>has-background-black</code>, <code>has-background-link</code>,
                     <code>has-background-dark</code>, <code>has-background-primary</code>, <code>has-background-info</code>, <code>has-background-success</code>,
-                    <code>has-background-warning</code>, <code>has-background-danger</code>`,
+                    <code>has-background-warning</code>, <code>has-background-danger</code>, and any other colors you've set in the $colors list on Sass`,
                 default: '<code>has-background-primary</code>'
             },
             {
                 name: '<code>size</code>',
                 description: 'Size of avatar, optional',
                 type: 'String',
-                values: '<code>16x16</code>, <code>24x24</code>, <code>32x32</code>, <code>48x48</code>, <code>64x64</code>, <code>96x96</code>, <code>128x128</code>',
-                default: '<code>48x48</code>'
+                values: '<code>is-16x16</code>, <code>is-24x24</code>, <code>is-32x32</code>, <code>is-48x48</code>, <code>is-64x64</code>, <code>is-96x96</code>, <code>is-128x128</code>',
+                default: '<code>is-48x48</code>'
             },
             {
                 name: '<code>rounded</code>',

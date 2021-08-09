@@ -5,7 +5,7 @@
             :key="user"
             :rounded="user.rounded"
             :label="user.label"
-            size="48x48"
+            size="is-48x48"
             :type="user.type" />
        
     </section>
@@ -51,7 +51,7 @@ export default {
             },
             {
                 rounded: true,
-                label: "WR",
+                label: "WB",
                 type: 'has-background-dark'
             },
             {

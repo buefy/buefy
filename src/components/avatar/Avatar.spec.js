@@ -54,10 +54,10 @@ describe('BAvatar', () => {
         expect(wrapper.contains('p')).toBe(false)
     })
 
-    it('compute imgClasses as expected', () => {
+    it('compute avatarClasses as expected', () => {
         const src = 'http://getdrawings.com/free-icon/male-avatar-icon-52.png'
         const rounded = true
-        const size = '48x48'
+        const size = 'is-48x48'
 
         const wrapper = shallowMount(BAvatar, {
             propsData: {
@@ -69,7 +69,7 @@ describe('BAvatar', () => {
 
         const vm = wrapper.vm
 
-        expect(vm.imgClasses).toBe('image rounded is-48x48')
+        expect(vm.avatarClasses).toBe('image is-rounded is-48x48')
     })
 
     it('setColorForAvatar correctly', () => {

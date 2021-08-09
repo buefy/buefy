@@ -69,7 +69,7 @@ let config = {
     defaultImageResponsive: true,
     defaultImageRatio: null,
     defaultImageSrcsetFormatter: null,
-    defaultAvatarSize: '48x48',
+    defaultAvatarSize: 'is-48x48',
     defaultAvatarVariant: 'has-background-primary',
     defaultAvatarRounded: true,
     customIconPacks: null

@@ -3,7 +3,7 @@
 	    <b-avatar
             :rounded="true"
             :label="label"
-            size="128x128"
+            size="is-128x128"
             :type="type" />
 	</section>
 </template>

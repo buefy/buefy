@@ -23,44 +23,44 @@ export default {
                 rounded: true,
                 label: "Jhonedoe",
                 type: 'has-background-primary',
-                size: '128x128'
+                size: 'is-128x128'
             },
             {
                 rounded: true,
                 label: "AS",
                 type: 'has-background-link',
-                size: '96x96',
+                size: 'is-96x96',
             },
             {
                 rounded: true,
                 label: "AW",
                 type: 'has-background-info',
-                size: '64x64'
+                size: 'is-64x64'
             },
             {
                 rounded: true,
                 label: "WB",
                 type: 'has-background-success',
-                size: '48x48',
+                size: 'is-48x48',
                 src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shareicon.net%2Fdata%2F2016%2F09%2F01%2F822734_user_512x512.png&f=1&nofb=1'
             },
             {
                 rounded: true,
                 label: "MS",
                 type: 'has-background-warning',
-                size: '32x32'
+                size: 'is-32x32'
             },
             {
                 rounded: true,
                 label: "JD",
                 type: 'has-background-danger',
-                size: "24x24"
+                size: "is-24x24"
             },
             {
                 rounded: true,
                 label: "MA",
                 type: 'has-background-dark',
-                size: '16x16'
+                size: 'is-16x16'
             }
         ]
     }

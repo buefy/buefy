@@ -5,7 +5,7 @@
             :key="user"
             :rounded="user.rounded"
             :src="user.src"
-            size="128x128" />
+            size="is-128x128" />
 	</section>
 </template>
 
