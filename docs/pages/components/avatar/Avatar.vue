@@ -1,6 +1,8 @@
 <template>
     <div>
         <Example :component="ExImage" :code="ExImageCode" title="With Image" vertical/>
+        
+        <Example :component="ExNotRounded" :code="ExNotRoundedCode" title="Not rounded" vertical/>
 
         <Example :component="ExWithoutImage" :code="ExWithoutImageCode" title="Without Image" vertical/>
 
@@ -19,6 +21,9 @@
     import ExImage from './examples/ExImage'
     import ExImageCode from '!!raw-loader!./examples/ExImage'
 
+    import ExNotRounded from './examples/ExNotRounded'
+    import ExNotRoundedCode from '!!raw-loader!./examples/ExNotRounded'
+
     import ExWithoutImage from './examples/ExWithoutImage'
     import ExWithoutImageCode from '!!raw-loader!./examples/ExWithoutImage'
 
@@ -36,6 +41,8 @@
                 variables,
                 ExImage,
                 ExImageCode,
+                ExNotRounded,
+                ExNotRoundedCode,
                 ExWithoutImage,
                 ExWithoutImageCode,
                 ExVariants,

@@ -1,26 +1,39 @@
 <template>
     <div class="avatar">
-        <img
+        <section
             v-if="src"
             :class="'avatar-picture '+ avatarClasses"
-            :src="src"
-            :alt="alt">
-        <div
+        >
+            <b-image
+                :src="src"
+                :src-fallback="srcFallback"
+                :webp-fallback="webpFallback"
+                :alt="alt"
+                :rounded="rounded"
+            />
+        </section>
+        <section
             v-if="!src && !!label"
             :class="'avatar-text '+ avatarClasses + ' ' + setColorForAvatar"
         >
             <p :class="'label '+ dynamicClass">{{ setText }}</p>
-        </div>
+        </section>
     </div>
 </template>
 
 <script>
+import BImage from '../image/Image'
 import config from '../../utils/config'
 
 export default {
     name: 'BAvatar',
+    components: {
+        BImage
+    },
     props: {
         src: String,
+        srcFallback: String,
+        webpFallback: String,
         label: String,
         alt: {
             type: String,

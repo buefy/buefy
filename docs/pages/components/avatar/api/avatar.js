@@ -32,8 +32,15 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>label</code>',
-                description: 'Shortcut or full username',
+                name: '<code>src-fallback</code>',
+                description: 'The image url you want to display if the image specified using <code>src</code> fails to load.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>webp-fallback</code>',
+                description: 'Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -44,6 +51,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: 'This is avatar for the user'
+            },
+            {
+                name: '<code>label</code>',
+                description: 'Shortcut or full username',
+                type: 'String',
+                values: '—',
+                default: '—'
             },
         ],
         events: [
