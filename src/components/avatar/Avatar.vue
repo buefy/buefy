@@ -96,29 +96,25 @@ export default {
             // Set the avatar text size relevant to avatar size.
             if (!this.src && !!this.label && usernameFirstLetters !== null) {
                 if (bulmaKnownSize === 'is-16x16') {
-                    usernameFirstLetters.classList.add('text-size-16')
+                    usernameFirstLetters.classList.add('text-size-16x16')
                 } else if (bulmaKnownSize === 'is-24x24') {
-                    usernameFirstLetters.classList.add('text-size-24')
+                    usernameFirstLetters.classList.add('text-size-24x24')
                 } else if (bulmaKnownSize === 'is-32x32') {
-                    usernameFirstLetters.classList.add('text-size-32')
+                    usernameFirstLetters.classList.add('text-size-32x32')
                 } else if (bulmaKnownSize === 'is-48x48') {
-                    usernameFirstLetters.classList.add('text-size-48')
+                    usernameFirstLetters.classList.add('text-size-48x48')
                 } else if (bulmaKnownSize === 'is-64x64') {
-                    usernameFirstLetters.classList.add('text-size-64')
+                    usernameFirstLetters.classList.add('text-size-64x64')
                 } else if (bulmaKnownSize === 'is-96x96') {
-                    usernameFirstLetters.classList.add('text-size-96')
+                    usernameFirstLetters.classList.add('text-size-96x96')
                 } else if (bulmaKnownSize === 'is-128x128') {
-                    usernameFirstLetters.classList.add('text-size-128')
+                    usernameFirstLetters.classList.add('text-size-128x128')
                 }
             }
         }
     },
-    created() {
-    },
     mounted() {
         this.setTextSize()
-    },
-    beforeDestroy() {
     }
 }
 </script>
