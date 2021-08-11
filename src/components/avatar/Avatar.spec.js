@@ -1,5 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import BAvatar from '@components/avatar/Avatar'
+import BImage from '../image/Image'
 
 describe('BAvatar', () => {
     it('is called', () => {
@@ -24,7 +25,7 @@ describe('BAvatar', () => {
             }
         })
 
-        expect(wrapper.contains('img')).toBe(true)
+        expect(wrapper.contains(BImage)).toBe(true)
     })
 
     it('render text if the is no image', () => {
@@ -50,7 +51,7 @@ describe('BAvatar', () => {
             }
         })
 
-        expect(wrapper.contains('img')).toBe(true)
+        expect(wrapper.contains(BImage)).toBe(true)
         expect(wrapper.contains('p')).toBe(false)
     })
 
