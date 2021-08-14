@@ -85,6 +85,9 @@ export default {
             this.$emit('close')
             this.$emit('update:active', false)
         },
+        click() {
+            this.$emit('click')
+        },
         /**
          * Set timer to auto close message
          */

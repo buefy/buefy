@@ -129,6 +129,13 @@ export default [
     title: 'Dropdown',
     props: [
         {
+            name: '<code>tag</code>',
+            description: 'Sets the type of the component that have to render as navbar-item',
+            type: 'String',
+            values: '<code>a</code>, <code>router-link</code>, <code>div</code> and it\'s html attributes like href, to, etc...',
+            default: 'a'
+        },
+        {
             name: '<code>hoverable</code>',
             description: 'Dropdown will be triggered by hover instead of click',
             type: 'Boolean',

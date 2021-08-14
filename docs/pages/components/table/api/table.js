@@ -434,7 +434,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>, <code>toggleDetails: Function (row: Object)</code>'
+                props: '<code>toggleDetails: Function (row: Object)</code>'
             },
             {
                 name: '<code>header</code>',
@@ -782,7 +782,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table column body',
-                props: '-'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>'
             },
             {
                 name: '<code>header</code>',

@@ -103,7 +103,9 @@ export default {
                 this.parentBottom.childElementCount > 0
             )
         },
-
+        click() {
+            this.$emit('click')
+        },
         close() {
             if (!this.isPaused) {
                 clearTimeout(this.timer)

@@ -291,7 +291,8 @@ export default {
                 }
             }
 
-            this.newTag = ''
+            // after autocomplete events
+            requestAnimationFrame(() => (this.newTag = ''))
         },
 
         getNormalizedTagText(tag) {
@@ -313,9 +314,6 @@ export default {
             if (!option) return
 
             this.addTag(option)
-            this.$nextTick(() => {
-                this.newTag = ''
-            })
         },
 
         removeTag(index, event) {

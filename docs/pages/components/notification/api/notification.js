@@ -115,7 +115,12 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when user closes the notification',
                 parameters: '—'
-            }
+            },
+            {
+                name: '<code>click</code>',
+                description: 'Triggers when user clicks the notification',
+                parameters: '—'
+            },
         ]
     }
 ]
