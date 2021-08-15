@@ -3,8 +3,8 @@
         <!-- breadcrumb -->
         <b-breadcrumb
             size="is-medium"
-            align="is-centered"
-            separator="has-arrow-separator"
+            align="is-left"
+            separator="has-dot-separator"
             :items="[
                 {
                     label: 'Home',
