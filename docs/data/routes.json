@@ -425,6 +425,18 @@
             "documentation/pagination"
         ]
     },
+    "documentation/breadcrumb": {
+        "title": "Breadcrumb",
+        "subtitle": "Breadcrumb component for flexible navigation through pages of your website!",
+        "path": "/documentation/breadcrumb",
+        "githubPath": "pages/components/breadcrumb/Breadcrumb.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/breadcrumb"
+        ]
+    },
     "documentation/button": {
         "title": "Button",
         "subtitle": "The classic button, in different colors, sizes, and states",

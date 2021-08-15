@@ -1,5 +1,24 @@
 <template>
     <header class="docs-header">
+        <!-- breadcrumb -->
+        <b-breadcrumb
+            size="is-medium"
+            align="is-centered"
+            separator="has-arrow-separator"
+            :items="[
+                {
+                    label: 'Home',
+                    path: '/',
+                    disabled: true
+                },
+                {
+                    label: 'Docs',
+                    path: '/documentation',
+                    disabled: true
+                }
+            ]"
+        />
+        <!--  -->
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
                 <template v-for="(item, index) in breadcrumb">
