@@ -39,17 +39,14 @@ export default {
                 {
                     label: 'Home',
                     path: '/',
-                    disabled: true
                 },
                 {
                     label: 'Docs',
                     path: '/documentation',
-                    disabled: true
                 },
                 {
                     label: 'Breadcrumb',
                     path: '/documentation/breadcrumb',
-                    disabled: true
                 }
             ]
         }

@@ -6,18 +6,15 @@ describe('BBreadcrumb', () => {
     const items = [
         {
             label: 'Home',
-            path: '/',
-            disabled: true
+            path: '/'
         },
         {
             label: 'Docs',
-            path: '/documentation',
-            disabled: true
+            path: '/documentation'
         },
         {
             label: 'Breadcrumb',
-            path: '/documentation/breadcrumb',
-            disabled: true
+            path: '/documentation/breadcrumb'
         }
     ]
 
