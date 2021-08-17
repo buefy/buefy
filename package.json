@@ -40,7 +40,6 @@
     "lint:staged": "lint-staged",
     "unit": "jest --runInBand",
     "test": "npm run lint && npm run unit",
-    "test:b": "jest src/components/breadcrumb/Breadcrumb.spec.js",
     "test:watch": "npm run unit -- --watchAll",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:js:watch": "rollup -c --watch",
