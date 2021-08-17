@@ -5,11 +5,10 @@
                 <li
                     v-if="item"
                     :key="item"
-                    :class="{ 'is-active': index === items.length - 1, 'disabled': false }">
+                    :class="{ 'is-active': index === items.length - 1 }">
                     <router-link
                         :to="item.path"
-                        tag="a"
-                        aria-current="page">
+                        tag="a">
                         {{ item.label }}
                     </router-link>
                 </li>
