@@ -5,16 +5,15 @@
     	<Example :component="ExSeparators" :code="ExSeparatorsCode" title="Separators"/>
     	
     	<Example :component="ExSizes" :code="ExSizesCode" title="Sizes"/>
-        <p>It works!</p>
 
-      <!--   <ApiView :data="api"/>
-        <VariablesView :data="variables"/> -->
+        <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </section>
 </template>
 
 <script>
-	// import api from './api/breadcrumb'
- //    import variables from './variables/breadcrumb'
+	import api from './api/breadcrumb'
+    import variables from './variables/breadcrumb'
 
 	import ExAlignments from './examples/ExAlignments'
     import ExAlignmentsCode from '!!raw-loader!./examples/ExAlignments'
@@ -31,8 +30,8 @@
     
         data () {
             return {
-            	// api,
-            	// variables,
+            	api,
+            	variables,
             	ExAlignments,
             	ExAlignmentsCode,
             	ExSeparators,

@@ -427,7 +427,7 @@
     },
     "documentation/breadcrumb": {
         "title": "Breadcrumb",
-        "subtitle": "Breadcrumb component for flexible navigation through pages of your website!",
+        "subtitle": "Breadcrumb component for flexible navigation through the pages of your website!",
         "path": "/documentation/breadcrumb",
         "githubPath": "pages/components/breadcrumb/Breadcrumb.vue",
         "menu": "documentation",
