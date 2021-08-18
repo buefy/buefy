@@ -115,18 +115,18 @@ export default {
     methods: {
         setTextSize: function () {
             const label = document.querySelector('.' + this.dynamicClass)
-            const textSize =
+            const avatarSize =
                 this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
 
             // Set the avatar text size relevant to avatar size.
             if (!this.src && !!this.label && label !== null) {
                 /*
-                <textResolution> returns just resolution (eg: 16x16; 48x48; 64x64)
+                <avatarResolution> returns just resolution (eg: 16x16; 48x48; 64x64)
                 instead of full bulma class (eg: is-16x16; is-48x48; is-64x64)
                 */
-                const textResolution = textSize.substr(3)
+                const avatarResolution = avatarSize.substr(3)
 
-                label.classList.add(`text-size-${textResolution}`)
+                label.classList.add(`text-size-${avatarResolution}`)
             }
         }
     },
