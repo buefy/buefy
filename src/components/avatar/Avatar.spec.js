@@ -70,7 +70,7 @@ describe('BAvatar', () => {
 
         const vm = wrapper.vm
 
-        expect(vm.avatarClasses).toBe('image is-rounded is-48x48')
+        expect(vm.avatarClasses).toBe('is-rounded is-48x48')
     })
 
     it('setColorForAvatar correctly', () => {
