@@ -76,10 +76,10 @@ export default {
             //
             if (this.rounded && this.size) {
                 this.setTextSize()
-                return `image is-rounded ${avatarSize}`
+                return `is-rounded ${avatarSize}`
             } else if (!this.rounded) {
                 this.setTextSize()
-                return `image ${avatarSize}`
+                return `${avatarSize}`
             }
         },
         setColorForAvatar() {
@@ -103,26 +103,19 @@ export default {
     },
     methods: {
         setTextSize: function () {
-            const usernameFirstLetters = document.querySelector('.' + this.dynamicClass)
-            const bulmaKnownSize =
+            const label = document.querySelector('.' + this.dynamicClass)
+            const textSize =
                 this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
+
             // Set the avatar text size relevant to avatar size.
-            if (!this.src && !!this.label && usernameFirstLetters !== null) {
-                if (bulmaKnownSize === 'is-16x16') {
-                    usernameFirstLetters.classList.add('text-size-16x16')
-                } else if (bulmaKnownSize === 'is-24x24') {
-                    usernameFirstLetters.classList.add('text-size-24x24')
-                } else if (bulmaKnownSize === 'is-32x32') {
-                    usernameFirstLetters.classList.add('text-size-32x32')
-                } else if (bulmaKnownSize === 'is-48x48') {
-                    usernameFirstLetters.classList.add('text-size-48x48')
-                } else if (bulmaKnownSize === 'is-64x64') {
-                    usernameFirstLetters.classList.add('text-size-64x64')
-                } else if (bulmaKnownSize === 'is-96x96') {
-                    usernameFirstLetters.classList.add('text-size-96x96')
-                } else if (bulmaKnownSize === 'is-128x128') {
-                    usernameFirstLetters.classList.add('text-size-128x128')
-                }
+            if (!this.src && !!this.label && label !== null) {
+                /*
+                <textResolution> returns just resolution (eg: 16x16; 48x48; 64x64)
+                instead of full bulma class (eg: is-16x16; is-48x48; is-64x64)
+                */
+                const textResolution = textSize.substr(3)
+
+                label.classList.add(`text-size-${textResolution}`)
             }
         }
     },
