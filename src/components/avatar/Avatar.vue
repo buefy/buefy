@@ -37,23 +37,34 @@ export default {
         label: String,
         alt: {
             type: String,
-            default: 'This is avatar for the user'
+            default: () => {
+                return 'This is avatar for the user'
+            }
         },
         rounded: {
             type: Boolean,
-            default: config.defaultAvatarRounded
+            default: () => {
+                return config.defaultAvatarRounded
+            }
         },
         size: {
             type: String,
-            default: config.defaultAvatarSize
+            default: () => {
+                return config.defaultAvatarSize
+            }
         },
-        type: String
+        type: {
+            type: String,
+            default: () => {
+                return config.defaultAvatarVariant
+            }
+        }
     },
     data() {
         return {
+            defaultAvatarRounded: config.defaultAvatarRounded,
             defaultAvatarSize: config.defaultAvatarSize,
             defaultVariant: config.defaultAvatarVariant,
-            defaultAvatarRounded: config.defaultAvatarRounded,
             dynamicClass: this.label + this.size + Math.ceil(Math.random() * 10),
             bulmaKnownSizes: ['is-16x16', 'is-24x24', 'is-32x32', 'is-48x48', 'is-64x64', 'is-96x96', 'is-128x128'],
             bulmaKnownColors: [
