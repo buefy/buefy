@@ -343,6 +343,8 @@ export default {
                 this.$nextTick(() => {
                     if (this.isActive) {
                         this.selectFirstOption(this.computedData)
+                    } else {
+                        this.setHovered(null)
                     }
                 })
             }
@@ -380,11 +382,14 @@ export default {
         /**
          * Select first option
          */
-        selectFirstOption(element) {
+        selectFirstOption(computedData) {
             this.$nextTick(() => {
-                if (element.length) {
+                const nonEmptyElements = computedData.filter(
+                    (element) => element.items && element.items.length
+                )
+                if (nonEmptyElements.length) {
                     // If has visible data or open on focus, keep updating the hovered
-                    const option = element[0].items[0]
+                    const option = nonEmptyElements[0].items[0]
                     if (this.openOnFocus || (this.newValue !== '' && this.hovered !== option)) {
                         this.setHovered(option)
                     }
