@@ -1137,13 +1137,14 @@ export default {
         closeDetailRow(obj) {
             const index = this.handleDetailKey(obj)
             const i = this.visibleDetailRows.indexOf(index)
-            this.visibleDetailRows.splice(i, 1)
+            if (i >= 0) {
+                this.visibleDetailRows.splice(i, 1)
+            }
         },
 
         isVisibleDetailRow(obj) {
             const index = this.handleDetailKey(obj)
-            const result = this.visibleDetailRows.indexOf(index) >= 0
-            return result
+            return this.visibleDetailRows.indexOf(index) >= 0
         },
 
         isActiveDetailRow(row) {
