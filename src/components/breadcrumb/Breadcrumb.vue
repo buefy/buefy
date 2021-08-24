@@ -46,36 +46,9 @@ export default {
         }
     },
 
-    data() {
-        return {
-            bulmaKnownAlignments: ['is-left', 'is-centered', 'is-right'],
-            bulmaKnownSeparators: ['has-arrow-separator', 'has-bullet-separator', 'has-dot-separator', 'has-succeeds-separator'],
-            bulmaKnownSizes: ['is-small', 'is-medium', 'is-large']
-        }
-    },
     computed: {
-        computedAlign() {
-            return this.bulmaKnownAlignments.includes(this.align)
-                ? this.align
-                : config.defaultBreadcrumbAlign
-        },
-        computedSeparator() {
-            return this.bulmaKnownSeparators.includes(this.separator)
-                ? this.separator
-                : config.defaultBreadcrumbSeparator
-        },
-        computedSize() {
-            return this.bulmaKnownSizes.includes(this.size)
-                ? this.size
-                : config.defaultBreadcrumbSize
-        },
         breadcrumbClasses() {
-            return {
-                'breadcrumb': true,
-                [this.computedAlign]: true,
-                [this.computedSeparator]: true,
-                [this.computedSize]: true
-            }
+            return ['breadcrumb', this.align, this.separator, this.size]
         }
     }
 }
