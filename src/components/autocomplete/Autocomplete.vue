@@ -3,7 +3,7 @@
         <b-input
             v-model="newValue"
             ref="input"
-            type="text"
+            :type="type"
             :size="size"
             :loading="loading"
             :rounded="rounded"
@@ -14,11 +14,11 @@
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
             :use-html5-validation="false"
+            :aria-autocomplete="ariaAutocomplete"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
             @blur="onBlur"
-            @keyup.native.esc.prevent="isActive = false"
             @keydown.native="keydown"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
@@ -121,6 +121,7 @@ export default {
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
+        selectOnClickOutside: Boolean,
         clearable: Boolean,
         maxHeight: [String, Number],
         dropdownPosition: {
@@ -132,6 +133,10 @@ export default {
         iconRight: String,
         iconRightClickable: Boolean,
         appendToBody: Boolean,
+        type: {
+            type: String,
+            default: 'text'
+        },
         confirmKeys: {
             type: Array,
             default: () => ['Tab', 'Enter']
@@ -144,6 +149,7 @@ export default {
             isActive: false,
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
+            ariaAutocomplete: this.keepFirst ? 'both' : 'list',
             isListInViewportVertically: true,
             hasFocus: false,
             style: {},
@@ -304,6 +310,12 @@ export default {
             this.$emit('input', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
+
+            // Fixes #3185
+            if (!currentValue) {
+                this.setSelected(null, false)
+            }
+
             if (currentValue && currentValue !== value) {
                 this.setSelected(null, false)
             }
@@ -384,10 +396,15 @@ export default {
 
         keydown(event) {
             const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
+
             // prevent emit submit event
             if (key === 'Enter') event.preventDefault()
+
             // Close dropdown on Tab & no hovered
-            this.isActive = key !== 'Tab'
+            if (key === 'Escape' || key === 'Tab') {
+                event.preventDefault()
+                this.isActive = false
+            }
             if (this.hovered === null) return
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // If adding by comma, don't add the comma to the input
@@ -405,7 +422,7 @@ export default {
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
-                if (this.keepFirst && this.hovered) {
+                if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
                     this.isActive = false
