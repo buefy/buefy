@@ -292,7 +292,10 @@ export default {
             }
 
             // after autocomplete events
-            requestAnimationFrame(() => (this.newTag = ''))
+            requestAnimationFrame(() => {
+                this.newTag = ''
+                this.$emit('typing', '')
+            })
         },
 
         getNormalizedTagText(tag) {
