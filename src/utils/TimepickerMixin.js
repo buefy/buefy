@@ -266,7 +266,7 @@ export default {
                     return dayPeriod.value
                 }
             }
-            return this.AM
+            return AM
         },
         pmString() {
             if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
@@ -277,7 +277,7 @@ export default {
                     return dayPeriod.value
                 }
             }
-            return this.PM
+            return PM
         },
         hours() {
             if (!this.incrementHours || this.incrementHours < 1) throw new Error('Hour increment cannot be null or less than 1.')
@@ -289,13 +289,11 @@ export default {
                 if (!this.isHourFormat24) {
                     value = (i + 1)
                     label = value
-                    if (this.meridienSelected === this.amString ||
-                        this.meridienSelected === this.AM) {
+                    if (this.meridienSelected === this.amString) {
                         if (value === 12) {
                             value = 0
                         }
-                    } else if (this.meridienSelected === this.pmString ||
-                        this.meridienSelected === this.PM) {
+                    } else if (this.meridienSelected === this.pmString) {
                         if (value !== 12) {
                             value += 12
                         }
@@ -351,6 +349,12 @@ export default {
                 this.meridienSelected = this.hoursSelected >= 12 ? this.pmString : this.amString
             }
         },
+        locale() {
+            // see updateInternalState default
+            if (!this.value) {
+                this.meridienSelected = this.amString
+            }
+        },
         /**
          * When v-model is changed:
          *   1. Update internal value.
@@ -372,9 +376,9 @@ export default {
                 this.secondsSelected = null
                 this.computedValue = null
             } else if (this.hoursSelected !== null) {
-                if (value === this.pmString || value === PM) {
+                if (value === this.pmString) {
                     this.hoursSelected += 12
-                } else if (value === this.amString || value === AM) {
+                } else if (value === this.amString) {
                     this.hoursSelected -= 12
                 }
             }
