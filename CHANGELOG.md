@@ -1,5 +1,32 @@
 # Buefy Changelog
 
+## 0.9.9
+
+### New features
+
+* Add ``tag`` prop to navbar dropdown (thanks @GMartigny)
+* Add ``select-on-click-outside`` prop to autocomplete (thanks @elisamuelps)
+* Add ``aria-labelledby`` prop to checkbox and switch (thanks @milad-mirkarimi)
+* Add ``icon-right`` and ``icon-right-clickable`` props to datepicker and datetimepicker (thanks @rubjo)
+* Add ``caption`` prop to table (thanks @eveenendaal)
+* Add ``pause-on-hover`` prop to toast (thanks @milad-mirkarimi)
+* Improve number input validation (thanks @fabiofdsantos)
+* Enable click event to notification (thanks @franciscoh017)
+* Show switch control label if slot exists (thanks @cain)
+* Prevent emitting the prompt value when inputted text is compositing (thanks @soudai-s)
+
+### Fixes
+
+* Fix autocomplete using `keep first` (thanks @dauriata)
+* Fix combination of filters with custom searches (AND operator) (thanks @massimozappino)
+* Fix avoid reading undefined range on datepicker (thanks @apauly)
+* Fix sidebar delay on hover leave (thanks @holtolee)
+* Fix #3431 disable sort when column is not sortable (multisort)
+* Fix #3438 reset current tag when duplicated
+* Fix #3442 wrong prop on timepicker
+* Fix #3461 check if a detail row is visible before trying to close it (thanks @GMartigny)
+* Fix #3473 emit typing to force reload items on tagsinput
+
 ## 0.9.8
 
 ### New features
