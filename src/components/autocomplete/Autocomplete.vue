@@ -310,13 +310,9 @@ export default {
             this.$emit('input', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
-
-            // Fixes #3185
-            if (!currentValue) {
-                this.setSelected(null, false)
-            }
-
-            if (currentValue && currentValue !== value) {
+            // empty or different value
+            if ((typeof currentValue === 'undefined' || currentValue === null) ||
+                (currentValue && currentValue !== value)) {
                 this.setSelected(null, false)
             }
             // Close dropdown if input is clear or else open it
