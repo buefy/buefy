@@ -364,7 +364,12 @@ export default {
             this.selected = option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
-                this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
+                if (this.clearOnSelect) {
+                    const input = this.$refs.input.$refs.input
+                    input.value = ''
+                } else {
+                    this.newValue = this.getValue(this.selected)
+                }
                 this.setHovered(null)
             }
             closeDropdown && this.$nextTick(() => {
