@@ -2,7 +2,8 @@
     <div class="avatar">
         <section
             v-if="src"
-            :class="'avatar-picture '+ avatarClasses"
+            class="avatar-picture"
+            :class="avatarClasses"
         >
             <b-image
                 :src="src"
@@ -14,9 +15,15 @@
         </section>
         <section
             v-if="!src && !!label"
-            :class="'avatar-text '+ avatarClasses + ' ' + setColorForAvatar"
+            class="avatar-text"
+            :class="avatarClasses"
         >
-            <p :class="'label '+ dynamicClass">{{ setText }}</p>
+            <p
+                class="label"
+                :class="dynamicClass"
+            >
+                {{ setText }}
+            </p>
         </section>
     </div>
 </template>
@@ -62,48 +69,16 @@ export default {
     },
     data() {
         return {
-            defaultAvatarRounded: config.defaultAvatarRounded,
-            defaultAvatarSize: config.defaultAvatarSize,
-            defaultVariant: config.defaultAvatarVariant,
-            dynamicClass: this.label + this.size + Math.ceil(Math.random() * 10),
-            bulmaKnownSizes: ['is-16x16', 'is-24x24', 'is-32x32', 'is-48x48', 'is-64x64', 'is-96x96', 'is-128x128'],
-            bulmaKnownColors: [
-                'has-background-black',
-                'has-background-dark',
-                'has-background-primary',
-                'has-background-link',
-                'has-background-info',
-                'has-background-success',
-                'has-background-warning',
-                'has-background-danger'
-            ]
+            dynamicClass: this.label + this.size + Math.ceil(Math.random() * 10)
         }
     },
     computed: {
         avatarClasses() {
-            // check if the size known by bulma
-            const avatarSize =
-              this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
-            //
-            if (this.rounded && this.size) {
-                this.setTextSize()
-                return `is-rounded ${avatarSize}`
-            } else if (!this.rounded) {
-                this.setTextSize()
-                return `${avatarSize}`
-            }
-        },
-        setColorForAvatar() {
-            if (!this.src && this.label && this.type) {
-                // check if the color known by bulma
-                const color =
-                  this.bulmaKnownColors.includes(this.type) ? this.type : this.defaultVariant
-                return color
-            } else {
-                // set random color if the type wasn't provided
-                const color =
-                  this.bulmaKnownColors[Math.ceil(Math.random() * 10)] || this.defaultVariant
-                return color
+            this.setTextSize()
+            return {
+                'is-rounded': this.rounded,
+                [this.size]: true,
+                [this.type]: !this.src && this.label
             }
         },
         setText() {
@@ -115,16 +90,13 @@ export default {
     methods: {
         setTextSize: function () {
             const label = document.querySelector('.' + this.dynamicClass)
-            const avatarSize =
-                this.bulmaKnownSizes.includes(this.size) ? this.size : this.defaultAvatarSize
-
             // Set the avatar text size relevant to avatar size.
             if (!this.src && !!this.label && label !== null) {
                 /*
                 <avatarResolution> returns just resolution (eg: 16x16; 48x48; 64x64)
                 instead of full bulma class (eg: is-16x16; is-48x48; is-64x64)
                 */
-                const avatarResolution = avatarSize.substr(3)
+                const avatarResolution = this.size.substr(3)
 
                 label.classList.add(`text-size-${avatarResolution}`)
             }
