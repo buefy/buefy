@@ -3,6 +3,7 @@ import BBreadcrumb from '@components/breadcrumb/Breadcrumb'
 
 describe('BBreadcrumb', () => {
     let wrapper = shallowMount(BBreadcrumb)
+    let tag = 'router-link'
     const items = [
         {
             label: 'Home',
@@ -27,10 +28,33 @@ describe('BBreadcrumb', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
+    it('should be router-link tag, then it should be a tag', () => {
+        wrapper = mount(BBreadcrumb, {
+            propsData: {
+                tag,
+                items
+            }
+        })
+
+        expect(wrapper.contains(tag)).toBeTruthy()
+
+        // a tag
+        tag = 'a'
+
+        wrapper = mount(BBreadcrumb, {
+            propsData: {
+                tag,
+                items
+            }
+        })
+
+        expect(wrapper.contains(tag)).toBeTruthy()
+    })
+
     it('should set align to right', () => {
         wrapper = mount(BBreadcrumb, {
             propsData: {
-                items: items,
+                items,
                 align: 'is-right'
             }
         })
@@ -41,7 +65,7 @@ describe('BBreadcrumb', () => {
     it('should set separator to arrow', () => {
         wrapper = mount(BBreadcrumb, {
             propsData: {
-                items: items,
+                items,
                 separator: 'has-arrow-separator'
             }
         })
@@ -52,7 +76,7 @@ describe('BBreadcrumb', () => {
     it('should set size to large', () => {
         wrapper = mount(BBreadcrumb, {
             propsData: {
-                items: items,
+                items,
                 size: 'is-large'
             }
         })
@@ -63,7 +87,7 @@ describe('BBreadcrumb', () => {
     it('computes breadcrumbClasses correctly', () => {
         wrapper = mount(BBreadcrumb, {
             propsData: {
-                items: items,
+                items,
                 align: 'is-left',
                 separator: 'has-dot-separator',
                 size: 'is-medium'

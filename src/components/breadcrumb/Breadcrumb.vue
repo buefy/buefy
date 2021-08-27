@@ -6,11 +6,13 @@
                     v-if="item"
                     :key="item"
                     :class="{ 'is-active': index === items.length - 1 }">
-                    <a
-                        :href="item.path"
+                    <component
+                        :is="tag"
+                        :href="tag == 'a' ? item.path : undefined"
+                        :to="tag == 'router-link' ? item.path : undefined"
                     >
                         {{ item.label }}
-                    </a>
+                    </component>
                 </li>
             </template>
         </ul>
@@ -21,8 +23,16 @@
 import config from '../../utils/config'
 
 export default {
+
     name: 'BBreadcrumb',
+
     props: {
+        tag: {
+            type: String,
+            default: () => {
+                return config.defaultBreadcrumbTag
+            }
+        },
         items: Array,
         align: {
             type: String,
@@ -43,6 +53,7 @@ export default {
             }
         }
     },
+
     computed: {
         breadcrumbClasses() {
             return ['breadcrumb', this.align, this.separator, this.size]

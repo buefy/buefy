@@ -2,6 +2,13 @@ export default [
     {
         props: [
             {
+                name: '<code>tag</code>',
+                description: 'Sets the type of the component that have to render breadcrumb item.',
+                type: 'String',
+                values: '<code>router-link</code>, <code>a</code>',
+                default: '<code>a</code>'
+            },
+            {
                 name: '<code>items</code>',
                 description: 'Navigation items with <strong>label</strong> and <strong>path</strong> provided.',
                 type: 'Array',

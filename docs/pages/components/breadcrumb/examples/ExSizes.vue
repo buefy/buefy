@@ -2,16 +2,19 @@
 	<section>
         <!-- Left -->
         <b-breadcrumb
+            tag="router-link"
             size="is-small"
             :items="items"
         />
         <!-- Center -->
         <b-breadcrumb
+            tag="router-link"
             size="is-medium"
             :items="items"
         />
         <!-- Right -->
         <b-breadcrumb
+            tag="router-link"
             size="is-large"
             :items="items"
         />

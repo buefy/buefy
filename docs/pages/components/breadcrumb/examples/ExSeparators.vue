@@ -2,26 +2,31 @@
 	<section>
 		<!-- Default -->
         <b-breadcrumb
+            tag="router-link"
             separator=""
             :items="items"
         />
         <!-- Arrow -->
         <b-breadcrumb
+            tag="router-link"
             separator="has-arrow-separator"
             :items="items"
         />
         <!-- Bullet -->
         <b-breadcrumb
+            tag="router-link"
             separator="has-bullet-separator"
             :items="items"
         />
         <!-- Dot -->
         <b-breadcrumb
+            tag="router-link"
             separator="has-dot-separator"
             :items="items"
         />
         <!-- Succeeds -->
         <b-breadcrumb
+            tag="router-link"
             separator="has-succeeds-separator"
             :items="items"
         />

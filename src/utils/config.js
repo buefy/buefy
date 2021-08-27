@@ -69,6 +69,7 @@ let config = {
     defaultImageResponsive: true,
     defaultImageRatio: null,
     defaultImageSrcsetFormatter: null,
+    defaultBreadcrumbTag: 'a',
     defaultBreadcrumbAlign: 'is-left',
     defaultBreadcrumbSeparator: '',
     defaultBreadcrumbSize: 'is-medium',
