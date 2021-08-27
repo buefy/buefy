@@ -310,9 +310,7 @@ export default {
             this.$emit('input', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
-            // empty or different value
-            if ((typeof currentValue === 'undefined' || currentValue === null) ||
-                (currentValue && currentValue !== value)) {
+            if (currentValue && currentValue !== value) {
                 this.setSelected(null, false)
             }
             // Close dropdown if input is clear or else open it
@@ -394,20 +392,16 @@ export default {
 
         keydown(event) {
             const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
-
             // prevent emit submit event
             if (key === 'Enter') event.preventDefault()
-
             // Close dropdown on Tab & no hovered
             if (key === 'Escape' || key === 'Tab') {
-                event.preventDefault()
                 this.isActive = false
             }
             if (this.hovered === null) return
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // If adding by comma, don't add the comma to the input
                 if (key === ',') event.preventDefault()
-
                 // Close dropdown on select by Tab
                 const closeDropdown = !this.keepOpen || key === 'Tab'
                 this.setSelected(this.hovered, closeDropdown, event)
@@ -534,7 +528,7 @@ export default {
             this.hasFocus = false
             this.$emit('blur', event)
         },
-        onInput(event) {
+        onInput() {
             const currentValue = this.getValue(this.selected)
             if (currentValue && currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
