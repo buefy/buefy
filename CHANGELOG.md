@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.9.10
+
+### Fixes
+
+* Fix double ``select`` event when ``clear-on-select``
+* Fix event prevent on "Tab" key of autocomplete
+
 ## 0.9.9
 
 ### New features
