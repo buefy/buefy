@@ -764,6 +764,12 @@ export default {
     },
     watch: {
         /**
+        * When filtered row count changes, notify parent with count
+        */
+        newDataTotal(newTotal) {
+            this.$emit('filtered-rows', newTotal)
+        },
+        /**
         * When data prop change:
         *   1. Update internal value.
         *   2. Filter data if it's not backend-filtered.
