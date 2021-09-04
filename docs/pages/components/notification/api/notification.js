@@ -83,7 +83,7 @@ export default [
             },
             {
                 name: '<code>position</code>',
-                description: 'Which position the notification will appear when programmatically',
+                description: 'Which position the notification will appear when opened programmatically',
                 type: 'String',
                 values: '<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>',
                 default: '<code>is-top-right</code>'
@@ -97,7 +97,14 @@ export default [
             },
             {
                 name: '<code>indefinite</code>',
-                description: 'Show the Notification indefinitely until it is dismissed when programmatically',
+                description: 'Show the Notification indefinitely until it is dismissed when opened programmatically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>pause-on-hover</code>',
+                description: 'Pause and show on hover until hover off when opened programmatically, if indefinite is false.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
