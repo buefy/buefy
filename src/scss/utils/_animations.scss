@@ -174,7 +174,7 @@
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 .slide-enter-to, .slide-leave {
-    max-height: 100px;
+    max-height: 999px;
     overflow: hidden;
 }
 .slide-enter, .slide-leave-to {
