@@ -3,7 +3,7 @@
         <b-input
             v-model="newValue"
             ref="input"
-            type="text"
+            :type="type"
             :size="size"
             :loading="loading"
             :rounded="rounded"
@@ -14,11 +14,11 @@
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
             :use-html5-validation="false"
+            :aria-autocomplete="ariaAutocomplete"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
             @blur="onBlur"
-            @keyup.native.esc.prevent="isActive = false"
             @keydown.native="keydown"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
@@ -121,6 +121,7 @@ export default {
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
+        selectOnClickOutside: Boolean,
         clearable: Boolean,
         maxHeight: [String, Number],
         dropdownPosition: {
@@ -132,6 +133,10 @@ export default {
         iconRight: String,
         iconRightClickable: Boolean,
         appendToBody: Boolean,
+        type: {
+            type: String,
+            default: 'text'
+        },
         confirmKeys: {
             type: Array,
             default: () => ['Tab', 'Enter']
@@ -144,6 +149,7 @@ export default {
             isActive: false,
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
+            ariaAutocomplete: this.keepFirst ? 'both' : 'list',
             isListInViewportVertically: true,
             hasFocus: false,
             style: {},
@@ -331,6 +337,8 @@ export default {
                 this.$nextTick(() => {
                     if (this.isActive) {
                         this.selectFirstOption(this.computedData)
+                    } else {
+                        this.setHovered(null)
                     }
                 })
             }
@@ -356,7 +364,12 @@ export default {
             this.selected = option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
-                this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
+                if (this.clearOnSelect) {
+                    const input = this.$refs.input.$refs.input
+                    input.value = ''
+                } else {
+                    this.newValue = this.getValue(this.selected)
+                }
                 this.setHovered(null)
             }
             closeDropdown && this.$nextTick(() => {
@@ -368,14 +381,14 @@ export default {
         /**
          * Select first option
          */
-        selectFirstOption(element) {
+        selectFirstOption(computedData) {
             this.$nextTick(() => {
-                if (element.length) {
-                    // If has visible data or open on focus, keep updating the hovered
-                    const option = element[0].items[0]
-                    if (this.openOnFocus || (this.newValue !== '' && this.hovered !== option)) {
-                        this.setHovered(option)
-                    }
+                const nonEmptyElements = computedData.filter(
+                    (element) => element.items && element.items.length
+                )
+                if (nonEmptyElements.length) {
+                    const option = nonEmptyElements[0].items[0]
+                    this.setHovered(option)
                 } else {
                     this.setHovered(null)
                 }
@@ -387,12 +400,13 @@ export default {
             // prevent emit submit event
             if (key === 'Enter') event.preventDefault()
             // Close dropdown on Tab & no hovered
-            this.isActive = key !== 'Tab'
+            if (key === 'Escape' || key === 'Tab') {
+                this.isActive = false
+            }
             if (this.hovered === null) return
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // If adding by comma, don't add the comma to the input
                 if (key === ',') event.preventDefault()
-
                 // Close dropdown on select by Tab
                 const closeDropdown = !this.keepOpen || key === 'Tab'
                 this.setSelected(this.hovered, closeDropdown, event)
@@ -405,7 +419,7 @@ export default {
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
-                if (this.keepFirst && this.hovered) {
+                if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
                     this.isActive = false
@@ -504,6 +518,7 @@ export default {
             if (this.openOnFocus) {
                 this.isActive = true
                 if (this.keepFirst) {
+                    // If open on focus, update the hovered
                     this.selectFirstOption(this.computedData)
                 }
             }
@@ -518,7 +533,7 @@ export default {
             this.hasFocus = false
             this.$emit('blur', event)
         },
-        onInput(event) {
+        onInput() {
             const currentValue = this.getValue(this.selected)
             if (currentValue && currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
