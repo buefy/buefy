@@ -29,6 +29,7 @@
         :locale="locale"
         :focusable="focusable"
         :append-to-body="appendToBody"
+        v-bind="$attrs"
         @focus="onFocus"
         @blur="onBlur"
         @icon-right-click="$emit('icon-right-click')"
