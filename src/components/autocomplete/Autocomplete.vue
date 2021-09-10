@@ -38,9 +38,16 @@
                     class="dropdown-content"
                     v-show="isActive"
                     :style="contentStyle">
-                    <div v-if="hasHeaderSlot" class="dropdown-item">
+                    <a
+                        v-if="hasHeaderSlot"
+                        class="dropdown-item"
+                        role="button"
+                        tabindex="0"
+                        :class="{ 'is-hovered': 'header' === hovered }"
+                        @click="setSelected('header', undefined, $event)"
+                    >
                         <slot name="header" />
-                    </div>
+                    </a>
                     <template v-for="(element, groupindex) in computedData">
                         <div
                             v-if="element.group"
@@ -78,9 +85,16 @@
                         class="dropdown-item is-disabled">
                         <slot name="empty" />
                     </div>
-                    <div v-if="hasFooterSlot" class="dropdown-item">
+                    <a
+                        v-if="hasFooterSlot"
+                        class="dropdown-item"
+                        role="button"
+                        tabindex="0"
+                        :class="{ 'is-hovered': 'footer' === hovered }"
+                        @click="setSelected('footer', undefined, $event)"
+                    >
                         <slot name="footer" />
-                    </div>
+                    </a>
                 </div>
             </div>
         </transition>
@@ -360,6 +374,14 @@ export default {
          */
         setSelected(option, closeDropdown = true, event = undefined) {
             if (option === undefined) return
+            if (option === 'header') {
+                this.$emit('select-header')
+                return
+            }
+            if (option === 'footer') {
+                this.$emit('select-footer')
+                return
+            }
 
             this.selected = option
             this.$emit('select', this.selected, event)
@@ -483,6 +505,12 @@ export default {
             if (this.isActive) {
                 const data = this.computedData.map(
                     (d) => d.items).reduce((a, b) => ([...a, ...b]), [])
+                if (this.hasHeaderSlot) {
+                    data.unshift('header')
+                }
+                if (this.hasFooterSlot) {
+                    data.push('footer')
+                }
                 let index = data.indexOf(this.hovered) + sum
                 index = index > data.length - 1 ? data.length - 1 : index
                 index = index < 0 ? 0 : index
