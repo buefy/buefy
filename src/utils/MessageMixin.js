@@ -32,11 +32,11 @@ export default {
         },
         duration: {
             type: Number,
-            default: 5000
+            default: 2000
         },
         progressBar: {
             type: Boolean,
-            default: false
+            default: true
         }
     },
     data() {
@@ -51,10 +51,8 @@ export default {
         },
         isActive(value) {
             if (value) {
-                if (this.progressBar) {
-                    this.setDurationProgress()
-                }
                 this.setAutoClose()
+                this.setDurationProgress()
             } else {
                 if (this.timer) {
                     clearTimeout(this.timer)
@@ -109,13 +107,13 @@ export default {
             }
         },
         setDurationProgress() {
-            if (this.autoClose) {
+            if (this.autoClose && this.progressBar) {
                 /**
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar
                  */
                 this.progress = setInterval(() => {
-                    if (this.remainingTime !== 0) {
+                    if (this.remainingTime !== 0 && this.active) {
                         this.remainingTime -= 1
                     } else {
                         this.remainingTime = this.duration / 1000
