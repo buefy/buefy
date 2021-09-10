@@ -36,7 +36,7 @@ export default {
         },
         progressBar: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     data() {
