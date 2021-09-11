@@ -20,12 +20,12 @@
         <p class="has-text-centered">Some source by <a href="https://picsum.photos/" target="_blank">Picsum</a> and Images from <a href="https://unsplash.com/" target="_blank">Unsplash</a>.</p><br>
 
         <Example title="Custom Indicators" :component="ExCustomIndicator" :code="ExCustomIndicatorCode" paddingless>
-            When images more than 6 add <code>indicator-custom</code><br>
-            If want custom indicator to stay big, use <code>is-medium</code> on <code>indicator-custom-size</code>
+            When there are more than 6 images, add <code>indicator-custom</code><br>
+            If you want custom indicator to stay big, use <code>is-medium</code> on <code>indicator-custom-size</code>
         </Example>
 
         <Example title="Switch like a gallery" :component="ExGallery" :code="ExGalleryCode" paddingless>
-            <p>You may also want to add <code>is-clipped</code> modifier to a containing element (usually <code>html</code>) to stop scroll overflow.</p>
+            <p>You may also want to add the <code>is-clipped</code> modifier to a containing element (usually <code>html</code>) to stop scroll overflow.</p>
         </Example>
 
         <Example title="Carousel List" :component="ExCarouselList" :code="ExCarouselListCode" paddingless>
@@ -38,7 +38,7 @@
 
         <Example title="Custom With Card" :component="ExWithCard" :code="ExWithCardCode" paddingless />
 
-        <Example title="Custom as an indicators" :component="ExWithList" :code="ExWithListCode" paddingless>
+        <Example title="Custom As indicators" :component="ExWithList" :code="ExWithListCode" paddingless>
             <p>With <strong>Breakpoint</strong> and <strong>Switch like a Gallery</strong>.</p>
         </Example>
 
