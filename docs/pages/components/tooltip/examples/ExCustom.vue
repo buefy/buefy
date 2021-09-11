@@ -7,7 +7,10 @@
             </template>
         </b-tooltip>
 
-        <b-tooltip type="is-light" :triggers="['click']" :auto-close="['outside', 'escape']">
+        <b-tooltip 
+            type="is-light"
+            :triggers="['click']"
+            :auto-close="['outside', 'escape']">
             <template v-slot:content>
                 <b-icon icon="heart" type="is-danger"></b-icon>
                 <b-icon icon="thumb-up" type="is-info"></b-icon>

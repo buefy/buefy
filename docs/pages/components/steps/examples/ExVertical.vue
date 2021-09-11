@@ -2,7 +2,10 @@
     <section>
         <b-field grouped group-multiline>
             <div class="control">
-                <b-switch v-model="position" true-value="is-right" false-value="is-left"> Right position </b-switch>
+                <b-switch 
+                    v-model="position" 
+                    true-value="is-right" 
+                    false-value="is-left"> Right position </b-switch>
             </div>
             <b-field label="Size" label-position="on-border">
                 <b-select v-model="size" placeholder="Size">

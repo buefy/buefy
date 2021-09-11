@@ -6,6 +6,8 @@
             v-show="isActive"
             class="snackbar"
             :class="[type,position]"
+            @mouseenter="pause"
+            @mouseleave="removePause"
             :role="actionText ? 'alertdialog' : 'alert'">
             <template v-if="$slots.default">
                 <slot />

@@ -344,6 +344,11 @@ export declare type BNoticeConfig = {
     indefinite?: boolean;
 
     /**
+     * Prevent the notice from hiding while it is being hovered.
+     */
+    pauseOnHover?: boolean;
+
+    /**
     * DOM element it will be created on.
     * Note that this also changes the position of the element from fixed
     * to absolute. Meaning that the container should be fixed.
