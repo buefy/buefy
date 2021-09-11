@@ -1,7 +1,7 @@
 export default [
     {
         name: '<code>$carousel-min-height</code>',
-        description: 'The carousel default height before image loaded',
+        description: 'The carousel default height before image load',
         default: '<code>120px</code>'
     },
     {

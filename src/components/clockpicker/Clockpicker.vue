@@ -202,7 +202,7 @@ export default {
             if (this.isHourFormat24) return this.pad(this.hoursSelected)
 
             let display = this.hoursSelected
-            if (this.meridienSelected === this.pmString || this.meridienSelected === this.PM) {
+            if (this.meridienSelected === this.pmString) {
                 display -= 12
             }
             if (display === 0) display = 12
@@ -214,13 +214,13 @@ export default {
         minFaceValue() {
             return this.isSelectingHour &&
                 !this.isHourFormat24 &&
-            (this.meridienSelected === this.pmString || this.meridienSelected === this.PM) ? 12 : 0
+                this.meridienSelected === this.pmString ? 12 : 0
         },
         maxFaceValue() {
             return this.isSelectingHour
                 ? (
                     !this.isHourFormat24 &&
-                    (this.meridienSelected === this.amString || this.meridienSelected === this.AM)
+                    this.meridienSelected === this.amString
                         ? 11
                         : 23
                 )

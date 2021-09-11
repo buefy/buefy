@@ -2,7 +2,7 @@
 
 exports[`BAutocomplete render correctly 1`] = `
 <div class="autocomplete control">
-    <div class="control is-clearfix"><input type="text" autocomplete="off" class="input">
+    <div class="control is-clearfix"><input type="text" autocomplete="off" aria-autocomplete="list" class="input">
         <!---->
         <!---->
         <!---->
