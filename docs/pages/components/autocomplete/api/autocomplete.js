@@ -232,6 +232,16 @@ export default [
                 name: '<code>infinite-scroll</code>',
                 description: 'Triggers when <code>.dropdown-list</code> has reached scroll end',
                 parameters: '—'
+            },
+            {
+                name: '<code>select-header</code>',
+                description: 'Triggers when the header slot is selected',
+                parameters: '—'
+            },
+            {
+                name: '<code>select-footer</code>',
+                description: 'Triggers when the footer slot is selected',
+                parameters: '—'
             }
         ],
         methods: [

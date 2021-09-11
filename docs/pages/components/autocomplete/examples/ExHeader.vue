@@ -1,15 +1,31 @@
 <template>
     <section>
+        <b-field grouped group-multiline>
+            <div class="control">
+                <b-switch v-model="openOnFocus">
+                    Open dropdown on focus
+                </b-switch>
+            </div>
+            <div class="control">
+                <b-switch v-model="keepFirst">
+                    Keep-first
+                    <small>(will always have first option pre-selected)</small>
+                </b-switch>
+            </div>
+        </b-field>
         <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find or add a Fruit">
             <b-autocomplete
                 v-model="name"
                 ref="autocomplete"
                 :data="filteredDataArray"
+                :keep-first="keepFirst"
+                :open-on-focus="openOnFocus"
                 placeholder="e.g. Orange"
-                @select="option => selected = option">
+                @select="option => selected = option"
+                @select-header="showAddFruit">
                 <template #header>
-                    <a @click="showAddFruit">
+                    <a>
                         <span> Add new... </span>
                     </a>
                 </template>
@@ -33,7 +49,9 @@
                     'Kiwi'
                 ],
                 name: '',
-                selected: null
+                selected: null,
+                keepFirst: false,
+                openOnFocus: false,
             }
         },
         computed: {

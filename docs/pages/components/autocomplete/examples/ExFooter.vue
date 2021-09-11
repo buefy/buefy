@@ -7,9 +7,10 @@
                 ref="autocomplete"
                 :data="filteredDataArray"
                 placeholder="e.g. Orange"
-                @select="option => selected = option">
+                @select="option => selected = option"
+                @select-footer="showAddFruit">
                 <template #footer>
-                    <a @click="showAddFruit">
+                    <a>
                         <span> Add new... </span>
                     </a>
                 </template>
