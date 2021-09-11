@@ -3,7 +3,7 @@
         :enter-active-class="transition.enter"
         :leave-active-class="transition.leave">
         <div
-            @mouseover="pause"
+            @mouseenter="pause"
             @mouseleave="removePause"
             v-show="isActive"
             class="toast"

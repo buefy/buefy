@@ -10,7 +10,10 @@
                 Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.
             </p>
         </div>
-        <b-collapse :open="false" position="is-bottom" aria-id="contentIdForA11y1">
+        <b-collapse 
+            :open="false" 
+            position="is-bottom" 
+            aria-id="contentIdForA11y1">
             <template #trigger="props">
                 <a aria-controls="contentIdForA11y1">
                     <b-icon :icon="!props.open ? 'menu-down' : 'menu-up'"></b-icon>

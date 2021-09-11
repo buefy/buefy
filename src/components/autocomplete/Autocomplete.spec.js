@@ -128,7 +128,7 @@ describe('BAutocomplete', () => {
         wrapper.vm.isActive = true
         expect($dropdown.isVisible()).toBeTruthy()
 
-        $input.trigger('keyup.esc')
+        $input.trigger('keydown', {'key': 'Escape'})
 
         expect($dropdown.isVisible()).toBeFalsy()
 

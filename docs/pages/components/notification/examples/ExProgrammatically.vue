@@ -15,6 +15,11 @@
                 type="is-danger"
                 size="is-medium"
                 @click="danger" />
+            <b-button
+                label="Launch notification (pause on hover)"
+                type="is-link"
+                size="is-medium"
+                @click="pause" />
         </div>
     </section>
 </template>
@@ -42,7 +47,14 @@
                 notif.$on('close', () => {
                     this.$buefy.notification.open('Custom notification closed!')
                 })
-            }
+            },
+            pause() {
+                this.$buefy.notification.open({
+                    message: `I can be paused if you hover over me`,
+                    type: 'is-link',
+                    pauseOnHover: true,
+                })
+            },
         }
     }
 </script>
