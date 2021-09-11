@@ -9,7 +9,10 @@
         </b-field>
 
         <b-field label="Compact, rounded and right aligned controls">
-            <b-numberinput controls-alignment="right" controls-position="compact" controls-rounded></b-numberinput>
+            <b-numberinput 
+                controls-alignment="right"
+                controls-position="compact"
+                controls-rounded></b-numberinput>
         </b-field>
 
         <b-field label="Grouped">

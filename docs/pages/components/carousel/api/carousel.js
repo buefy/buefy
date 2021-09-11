@@ -25,14 +25,14 @@ export default [
             },
             {
                 name: '<code>has-drag</code>',
-                description: 'Toggle touch dragging, when touch not detected. auto switch mouse dragging',
+                description: 'Toggle touch dragging, when touch not detected. Auto switch mouse dragging',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
             {
                 name: '<code>autoplay</code>',
-                description: 'Whether automatically loop the slides',
+                description: 'Whether to automatically loop the slides',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -46,7 +46,7 @@ export default [
             },
             {
                 name: '<code>pause-info</code>',
-                description: 'Show information pause when <code>autoplay</code> and <code>pause-hover</code>',
+                description: 'Show information about pause when <code>autoplay</code> and <code>pause-hover</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -84,7 +84,7 @@ export default [
             },
             {
                 name: '<code>repeat</code>',
-                description: 'Controls whether the carousel loops around at the start and end.',
+                description: 'Controls whether the carousel loops around at the start and end',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -126,28 +126,28 @@ export default [
             },
             {
                 name: '<code>indicator-background</code>',
-                description: 'Added background for indicator',
+                description: 'Adds background to indicator',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>indicator-custom</code>',
-                description: 'use when the image is more than 6 so that the indicator is not too small',
+                description: 'Use when there are more than 6 images so that the indicator is not too small',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>indicator-custom-size</code>',
-                description: 'image size on the indicator when the <code>indicator-custom</code> is used',
+                description: 'Image size of the indicator when the <code>indicator-custom</code> is used',
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>',
                 default: '<code>is-small</code>'
             },
             {
                 name: '<code>indicator-inside</code>',
-                description: 'Display the indicator inside on carousel',
+                description: 'Display the indicator inside the carousel',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -199,7 +199,7 @@ export default [
             },
             {
                 name: '<code>with-carousel-list</code>',
-                description: 'use this when indicator custom with <code>b-carousel-list</code>',
+                description: 'Use when indicator custom with <code>b-carousel-list</code>',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -213,7 +213,7 @@ export default [
             },
             {
                 name: '<code>list</code>',
-                description: 'Custom indicators When <code>with-carousel-list</code>',
+                description: 'Custom indicators when <code>with-carousel-list</code>',
                 props: '<code>active: Number</code>, <code>switch: Number</code>'
             },
             {
@@ -235,7 +235,7 @@ export default [
             },
             {
                 name: '<code>click</code>',
-                description: 'Non native click event, will trigger only when clicking an element that should normally not be clickable/focusable',
+                description: 'Non-native click event, will trigger only when clicking an element that should normally not be clickable/focusable',
             }
         ]
     },
@@ -244,7 +244,7 @@ export default [
         events: [
             {
                 name: '<code>click</code>',
-                description: 'Non native click event, will trigger only on an element that should normally not be clickable/focusable',
+                description: 'Non-native click event, will trigger only on an element that should normally not be clickable/focusable',
             }
         ]
     },
@@ -267,42 +267,42 @@ export default [
             },
             {
                 name: '<code>has-drag</code>',
-                description: 'Toggle touch dragging, when touch not detected. auto switch mouse dragging',
+                description: 'Toggle touch dragging, when touch not detected. Auto switch mouse dragging',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
             },
             {
                 name: '<code>has-grayscale</code>',
-                description: 'Give a effect grayscale on img',
+                description: 'Give a grayscale effect to img',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>has-opacity</code>',
-                description: 'Give a effect opacity on img',
+                description: 'Give an opacity effect to img',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>repeat</code>',
-                description: 'Back to value 0 when item active same with total data',
+                description: 'Returns carousel to start when active item matches length of data',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
             },
             {
                 name: '<code>items-to-show</code>',
-                description: 'count of items to showed per view (support a decimal).',
+                description: 'Count of items to be showed per view (supports a decimal).',
                 type: 'Number',
                 values: '—',
                 default: '<code>4</code>'
             },
             {
                 name: '<code>items-to-list</code>',
-                description: 'count of items to list when use navigation buttons',
+                description: 'Count of items to list when using navigation buttons',
                 type: 'Number',
                 values: '<code>1-5</code>',
                 default: '<code>1</code>'
@@ -316,7 +316,7 @@ export default [
             },
             {
                 name: '<code>refresh</code>',
-                description: 'Refresh for overlay carousel',
+                description: 'Refresh for carousel overlay',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -330,7 +330,7 @@ export default [
             },
             {
                 name: '<code>arrow-hover</code>',
-                description: 'Display Arrow action when hover, but hidden on mobile',
+                description: 'Display <code>arrow</code> action when hovered. Hidden on mobile',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
