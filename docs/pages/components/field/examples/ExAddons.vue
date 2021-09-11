@@ -50,7 +50,10 @@
             <p class="control">
                 <b-button icon-left="format-align-right" />
             </p>
-            <b-input placeholder="Search..." type="search" icon="magnify"></b-input>
+            <b-input 
+                placeholder="Search..." 
+                type="search" 
+                icon="magnify"></b-input>
         </b-field>
 
         <b-field>
