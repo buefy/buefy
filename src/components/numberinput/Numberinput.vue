@@ -3,7 +3,7 @@
         <p
             v-for="control in controlsLeft"
             :key="control"
-            :class="['control', control]"
+            :class="['control']"
             @mouseup="onStopLongPress"
             @mouseleave="onStopLongPress"
             @touchend="onStopLongPress"
@@ -58,7 +58,7 @@
         <p
             v-for="control in controlsRight"
             :key="control"
-            :class="['control', control]"
+            :class="['control']"
             @mouseup="onStopLongPress"
             @mouseleave="onStopLongPress"
             @touchend="onStopLongPress"
