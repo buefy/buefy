@@ -18,7 +18,7 @@
                 @select-footer="showAddFruit"
                 :selectable-footer="selectable">
                 <template #footer>
-                    <a>
+                    <a @click="checkSelectable">
                         <span> Add new... </span>
                     </a>
                 </template>
@@ -71,6 +71,9 @@
                         this.$refs.autocomplete.setSelected(value)
                     }
                 })
+            },
+            checkSelectable(){
+                if (!this.selectable)  this.showAddFruit()
             }
         }
     }
