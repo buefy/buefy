@@ -32,6 +32,11 @@
                     </div>
                 </div>
             </section>
+            <b-progress
+                v-if="autoClose && progressBar"
+                :value="remainingTime - 1"
+                :max="duration / 1000 - 1"
+                :type="type" />
         </article>
     </transition>
 </template>
