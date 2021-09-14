@@ -38,16 +38,16 @@
                     class="dropdown-content"
                     v-show="isActive"
                     :style="contentStyle">
-                    <a
+                    <div
                         v-if="hasHeaderSlot"
-                        class="dropdown-item"
+                        class="dropdown-item dropdown-header"
                         role="button"
                         tabindex="0"
-                        :class="{ 'is-hovered': 'header' === hovered }"
-                        @click="setSelected('header', undefined, $event)"
+                        :class="{ 'is-hovered': headerHovered }"
+                        @click="selectableHeadersetSelected('header', undefined, $event)"
                     >
                         <slot name="header" />
-                    </a>
+                    </div>
                     <template v-for="(element, groupindex) in computedData">
                         <div
                             v-if="element.group"
@@ -85,16 +85,16 @@
                         class="dropdown-item is-disabled">
                         <slot name="empty" />
                     </div>
-                    <a
+                    <div
                         v-if="hasFooterSlot"
-                        class="dropdown-item"
+                        class="dropdown-item dropdown-footer"
                         role="button"
                         tabindex="0"
-                        :class="{ 'is-hovered': 'footer' === hovered }"
+                        :class="{ 'is-hovered': footerHovered }"
                         @click="setSelected('footer', undefined, $event)"
                     >
                         <slot name="footer" />
-                    </a>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -154,12 +154,16 @@ export default {
         confirmKeys: {
             type: Array,
             default: () => ['Tab', 'Enter']
-        }
+        },
+        selectableHeader: Boolean,
+        selectableFooter: Boolean
     },
     data() {
         return {
             selected: null,
             hovered: null,
+            headerHovered: null,
+            footerHovered: null,
             isActive: false,
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
@@ -374,11 +378,11 @@ export default {
          */
         setSelected(option, closeDropdown = true, event = undefined) {
             if (option === undefined) return
-            if (option === 'header') {
+            if (this.selectableHeader && option === 'header') {
                 this.$emit('select-header')
                 return
             }
-            if (option === 'footer') {
+            if (this.selectableFooter && option === 'footer') {
                 this.$emit('select-footer')
                 return
             }
@@ -505,20 +509,44 @@ export default {
             if (this.isActive) {
                 const data = this.computedData.map(
                     (d) => d.items).reduce((a, b) => ([...a, ...b]), [])
-                if (this.hasHeaderSlot) {
-                    data.unshift('header')
+                if (this.hasHeaderSlot && this.selectableHeader) {
+                    data.unshift(undefined)
                 }
-                if (this.hasFooterSlot) {
-                    data.push('footer')
+                if (this.hasFooterSlot && this.selectableFooter) {
+                    data.push(undefined)
                 }
-                let index = data.indexOf(this.hovered) + sum
+
+                let index
+                if (this.headerHovered) {
+                    index = 0 + sum
+                } else if (this.footerHovered) {
+                    index = (data.length - 1) + sum
+                } else {
+                    index = data.indexOf(this.hovered) + sum
+                }
+
                 index = index > data.length - 1 ? data.length - 1 : index
                 index = index < 0 ? 0 : index
 
-                this.setHovered(data[index])
+                this.footerHovered = false
+                this.headerHovered = false
+                this.setHovered(data[index] !== undefined ? data[index] : null)
+                if (this.hasFooterSlot && this.selectableFooter && index === data.length - 1) {
+                    this.footerHovered = true
+                }
+                if (this.hasHeaderSlot && this.selectableHeader && index === 0) {
+                    this.headerHovered = true
+                }
 
                 const list = this.$refs.dropdown.querySelector('.dropdown-content')
-                const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
+                let querySelectorText = 'a.dropdown-item:not(.is-disabled)'
+                if (this.hasHeaderSlot && this.selectableHeader) {
+                    querySelectorText += ',div.dropdown-header'
+                }
+                if (this.hasFooterSlot && this.selectableFooter) {
+                    querySelectorText += ',div.dropdown-footer'
+                }
+                const element = list.querySelectorAll(querySelectorText)[index]
 
                 if (!element) return
 

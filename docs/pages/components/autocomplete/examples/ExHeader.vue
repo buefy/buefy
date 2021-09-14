@@ -12,6 +12,11 @@
                     <small>(will always have first option pre-selected)</small>
                 </b-switch>
             </div>
+            <div class="control">
+                <b-switch v-model="selectable">
+                    Selectable
+                </b-switch>
+            </div>
         </b-field>
         <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find or add a Fruit">
@@ -23,7 +28,8 @@
                 :open-on-focus="openOnFocus"
                 placeholder="e.g. Orange"
                 @select="option => selected = option"
-                @select-header="showAddFruit">
+                @select-header="showAddFruit"
+                :selectable-header="selectable">
                 <template #header>
                     <a>
                         <span> Add new... </span>
@@ -52,6 +58,7 @@
                 selected: null,
                 keepFirst: false,
                 openOnFocus: false,
+                selectable: false
             }
         },
         computed: {

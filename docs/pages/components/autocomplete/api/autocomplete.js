@@ -163,6 +163,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>selectable-header</code>',
+                description: 'Allows the header in the autocomplete to be selectable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>selectable-footer</code>',
+                description: 'Allows the footer in the autocomplete to be selectable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
