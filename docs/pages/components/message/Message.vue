@@ -20,6 +20,10 @@
             <p>Message will be automatically closed after <code>duration</code>.</p>
         </Example>
 
+        <Example :component="ExAutoCloseWithProgressBar" :code="ExAutoCloseWithProgressBarCode" title="Auto Close With Progress Bar" vertical>
+            <p>Message will be automatically closed after <code>duration</code> with a progress bar which indicates the delay passed.</p>
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -50,6 +54,9 @@
     import ExAutoClose from './examples/ExAutoClose'
     import ExAutoCloseCode from '!!raw-loader!./examples/ExAutoClose'
 
+    import ExAutoCloseWithProgressBar from './examples/ExAutoCloseWithProgressBar'
+    import ExAutoCloseWithProgressBarCode from '!!raw-loader!./examples/ExAutoCloseWithProgressBar'
+
     export default {
         data() {
             return {
@@ -62,13 +69,15 @@
                 ExCustomHeader,
                 ExSizes,
                 ExAutoClose,
+                ExAutoCloseWithProgressBar,
                 ExSimpleCode,
                 ExTypesCode,
                 ExIconsCode,
                 ExHeaderlessCode,
                 ExCustomHeaderCode,
                 ExSizesCode,
-                ExAutoCloseCode
+                ExAutoCloseCode,
+                ExAutoCloseWithProgressBarCode
             }
         }
     }

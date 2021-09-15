@@ -38,7 +38,14 @@
                     class="dropdown-content"
                     v-show="isActive"
                     :style="contentStyle">
-                    <div v-if="hasHeaderSlot" class="dropdown-item">
+                    <div
+                        v-if="hasHeaderSlot"
+                        class="dropdown-item dropdown-header"
+                        role="button"
+                        tabindex="0"
+                        :class="{ 'is-hovered': headerHovered }"
+                        @click="(event) => checkIfHeaderOrFooterSelected(event, true)"
+                    >
                         <slot name="header" />
                     </div>
                     <template v-for="(element, groupindex) in computedData">
@@ -78,7 +85,14 @@
                         class="dropdown-item is-disabled">
                         <slot name="empty" />
                     </div>
-                    <div v-if="hasFooterSlot" class="dropdown-item">
+                    <div
+                        v-if="hasFooterSlot"
+                        class="dropdown-item dropdown-footer"
+                        role="button"
+                        tabindex="0"
+                        :class="{ 'is-hovered': footerHovered }"
+                        @click="(event) => checkIfHeaderOrFooterSelected(event, true)"
+                    >
                         <slot name="footer" />
                     </div>
                 </div>
@@ -140,12 +154,16 @@ export default {
         confirmKeys: {
             type: Array,
             default: () => ['Tab', 'Enter']
-        }
+        },
+        selectableHeader: Boolean,
+        selectableFooter: Boolean
     },
     data() {
         return {
             selected: null,
             hovered: null,
+            headerHovered: null,
+            footerHovered: null,
             isActive: false,
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
@@ -360,7 +378,6 @@ export default {
          */
         setSelected(option, closeDropdown = true, event = undefined) {
             if (option === undefined) return
-
             this.selected = option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
@@ -403,13 +420,37 @@ export default {
             if (key === 'Escape' || key === 'Tab') {
                 this.isActive = false
             }
-            if (this.hovered === null) return
+
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // If adding by comma, don't add the comma to the input
                 if (key === ',') event.preventDefault()
                 // Close dropdown on select by Tab
                 const closeDropdown = !this.keepOpen || key === 'Tab'
+                if (this.hovered === null) {
+                    // header and footer uses headerHovered && footerHovered. If header or footer
+                    // was selected then fire event otherwise just return so a value isn't selected
+                    this.checkIfHeaderOrFooterSelected(event, false, closeDropdown)
+                    return
+                }
                 this.setSelected(this.hovered, closeDropdown, event)
+            }
+        },
+
+        /**
+         * Check if header or footer was selected.
+         */
+        checkIfHeaderOrFooterSelected(event, triggeredByclick, closeDropdown = true) {
+            if (this.selectableHeader && (this.headerHovered || triggeredByclick)) {
+                this.$emit('select-header', event)
+                this.headerHovered = false
+                if (triggeredByclick) this.setHovered(null)
+                if (closeDropdown) this.isActive = false
+            }
+            if (this.selectableFooter && (this.footerHovered || triggeredByclick)) {
+                this.$emit('select-footer', event)
+                this.footerHovered = false
+                if (triggeredByclick) this.setHovered(null)
+                if (closeDropdown) this.isActive = false
             }
         },
 
@@ -483,14 +524,44 @@ export default {
             if (this.isActive) {
                 const data = this.computedData.map(
                     (d) => d.items).reduce((a, b) => ([...a, ...b]), [])
-                let index = data.indexOf(this.hovered) + sum
+                if (this.hasHeaderSlot && this.selectableHeader) {
+                    data.unshift(undefined)
+                }
+                if (this.hasFooterSlot && this.selectableFooter) {
+                    data.push(undefined)
+                }
+
+                let index
+                if (this.headerHovered) {
+                    index = 0 + sum
+                } else if (this.footerHovered) {
+                    index = (data.length - 1) + sum
+                } else {
+                    index = data.indexOf(this.hovered) + sum
+                }
+
                 index = index > data.length - 1 ? data.length - 1 : index
                 index = index < 0 ? 0 : index
 
-                this.setHovered(data[index])
+                this.footerHovered = false
+                this.headerHovered = false
+                this.setHovered(data[index] !== undefined ? data[index] : null)
+                if (this.hasFooterSlot && this.selectableFooter && index === data.length - 1) {
+                    this.footerHovered = true
+                }
+                if (this.hasHeaderSlot && this.selectableHeader && index === 0) {
+                    this.headerHovered = true
+                }
 
                 const list = this.$refs.dropdown.querySelector('.dropdown-content')
-                const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
+                let querySelectorText = 'a.dropdown-item:not(.is-disabled)'
+                if (this.hasHeaderSlot && this.selectableHeader) {
+                    querySelectorText += ',div.dropdown-header'
+                }
+                if (this.hasFooterSlot && this.selectableFooter) {
+                    querySelectorText += ',div.dropdown-footer'
+                }
+                const element = list.querySelectorAll(querySelectorText)[index]
 
                 if (!element) return
 
