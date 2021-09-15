@@ -163,6 +163,20 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>selectable-header</code>',
+                description: 'Allows the header in the autocomplete to be selectable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>selectable-footer</code>',
+                description: 'Allows the footer in the autocomplete to be selectable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -232,6 +246,16 @@ export default [
                 name: '<code>infinite-scroll</code>',
                 description: 'Triggers when <code>.dropdown-list</code> has reached scroll end',
                 parameters: '—'
+            },
+            {
+                name: '<code>select-header</code>',
+                description: 'Triggers when the header slot is selected',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>select-footer</code>',
+                description: 'Triggers when the footer slot is selected',
+                parameters: '<code>event: $event</code>'
             }
         ],
         methods: [

@@ -1,5 +1,12 @@
 <template>
     <section>
+        <b-field grouped group-multiline>
+            <div class="control">
+                <b-switch v-model="selectable">
+                    Selectable
+                </b-switch>
+            </div>
+        </b-field>
         <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find or add a Fruit">
             <b-autocomplete
@@ -7,9 +14,11 @@
                 ref="autocomplete"
                 :data="filteredDataArray"
                 placeholder="e.g. Orange"
-                @select="option => selected = option">
+                @select="option => selected = option"
+                @select-footer="showAddFruit"
+                :selectable-footer="selectable">
                 <template #footer>
-                    <a @click="showAddFruit">
+                    <a @click="checkSelectable">
                         <span> Add new... </span>
                     </a>
                 </template>
@@ -33,7 +42,8 @@
                     'Kiwi'
                 ],
                 name: '',
-                selected: null
+                selected: null,
+                selectable: false
             }
         },
         computed: {
@@ -61,6 +71,9 @@
                         this.$refs.autocomplete.setSelected(value)
                     }
                 })
+            },
+            checkSelectable(){
+                if (!this.selectable)  this.showAddFruit()
             }
         }
     }
