@@ -3,8 +3,7 @@ import BBreadcrumb from '@components/breadcrumb/Breadcrumb'
 
 describe('BBreadcrumb', () => {
     let wrapper = shallowMount(BBreadcrumb)
-    let tag = 'router-link'
-   
+
     it('is called', () => {
         expect(wrapper.name()).toBe('BBreadcrumb')
         expect(wrapper.isVueInstance()).toBeTruthy()
