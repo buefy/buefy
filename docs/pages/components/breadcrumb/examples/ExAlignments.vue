@@ -4,20 +4,29 @@
         <b-breadcrumb
             tag="router-link"
             align="is-left"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
         <!-- Center -->
         <b-breadcrumb
             tag="router-link"
             align="is-centered"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
         <!-- Right -->
         <b-breadcrumb
             tag="router-link"
             align="is-right"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
     </section>
 </template>
 
@@ -26,26 +35,5 @@ export default {
 
   name: 'ExAlignments',
 
-    data () {
-        return {
-            items: [
-                {
-                    label: 'Home',
-                    path: '/',
-                },
-                {
-                    label: 'Docs',
-                    path: '/documentation',
-                },
-                {
-                    label: 'Breadcrumb',
-                    path: '/documentation/breadcrumb',
-                }
-            ]
-        }
-    }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

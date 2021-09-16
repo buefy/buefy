@@ -1,20 +1,7 @@
 export default [
     {
+        title : 'Breadcrumb',
         props: [
-            {
-                name: '<code>tag</code>',
-                description: 'Sets the type of the component that have to render breadcrumb item.',
-                type: 'String',
-                values: '<code>router-link</code>, <code>a</code>',
-                default: '<code>a</code>'
-            },
-            {
-                name: '<code>items</code>',
-                description: 'Navigation items with <strong>label</strong> and <strong>path</strong> provided.',
-                type: 'Array',
-                values: '—',
-                default: '—'
-            },
             {
                 name: '<code>align</code>',
                 description: 'Breadcrumb alignment.',
@@ -35,6 +22,39 @@ export default [
                 type: 'String',
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '<code>is-medium</code>'
+            }
+        ]
+    },
+    {
+        title : 'Breadcrumb Item',
+        props: [
+            {
+                name: '<code>tag</code>',
+                description: 'Sets the tag of the component that have to render breadcrumb item.',
+                type: 'String',
+                values: '<code>router-link</code>, <code>a</code>',
+                default: '<code>a</code>'
+            },
+            {
+                name: '<code>href</code>',
+                description: 'path used if set <code><tag/></code> to <code><a/></code>.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>to</code>',
+                description: 'path used if set <code><tag/></code> to <code><router-link/></code>.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+             {
+                name: '<code>active</code>',
+                description: 'is the current breadcrumb is actually the current page.',
+                type: 'Boolean',
+                values: '<code>false</code>, <code>true</code>',
+                default: '<code>false</code>'
             }
         ]
     }

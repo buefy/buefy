@@ -4,32 +4,47 @@
         <b-breadcrumb
             tag="router-link"
             separator=""
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
         <!-- Arrow -->
         <b-breadcrumb
             tag="router-link"
             separator="has-arrow-separator"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
         <!-- Bullet -->
         <b-breadcrumb
             tag="router-link"
             separator="has-bullet-separator"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
         <!-- Dot -->
         <b-breadcrumb
             tag="router-link"
             separator="has-dot-separator"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
         <!-- Succeeds -->
         <b-breadcrumb
             tag="router-link"
             separator="has-succeeds-separator"
-            :items="items"
-        />
+        >
+            <b-breadcrumb-item tag='a' href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' href="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag='a' active href="/documentation/breadcrumb">Breadcrumb</b-breadcrumb-item>
+        </b-breadcrumb>
     </section>
 </template>
 
@@ -38,23 +53,5 @@ export default {
 
   name: 'ExSeparators',
 
-    data () {
-        return {
-            items: [
-                {
-                    label: 'Home',
-                    path: '/',
-                },
-                {
-                    label: 'Docs',
-                    path: '/documentation',
-                },
-                {
-                    label: 'Breadcrumb',
-                    path: '/documentation/breadcrumb',
-                }
-            ]
-        }
-    }
 }
 </script>
