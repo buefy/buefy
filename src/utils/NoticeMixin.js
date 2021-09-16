@@ -17,6 +17,10 @@ export default {
             type: Boolean,
             default: false
         },
+        pauseOnHover: {
+            type: Boolean,
+            default: false
+        },
         position: {
             type: String,
             default: 'is-top',
@@ -36,6 +40,7 @@ export default {
     data() {
         return {
             isActive: false,
+            isPaused: false,
             parentTop: null,
             parentBottom: null,
             newContainer: this.container || config.defaultContainerElement
@@ -75,6 +80,17 @@ export default {
         }
     },
     methods: {
+        pause() {
+            if (this.pauseOnHover && !this.indefinite) {
+                this.isPaused = true
+            }
+        },
+        removePause() {
+            if (this.pauseOnHover && !this.indefinite) {
+                this.isPaused = false
+                this.close()
+            }
+        },
         shouldQueue() {
             const queue = this.queue !== undefined
                 ? this.queue
@@ -87,17 +103,25 @@ export default {
                 this.parentBottom.childElementCount > 0
             )
         },
-
+        click() {
+            this.$emit('click')
+        },
         close() {
-            clearTimeout(this.timer)
-            this.isActive = false
-            this.$emit('close')
+            if (!this.isPaused) {
+                clearTimeout(this.timer)
+                this.isActive = false
+                this.$emit('close')
 
-            // Timeout for the animation complete before destroying
-            setTimeout(() => {
-                this.$destroy()
-                removeElement(this.$el)
-            }, 150)
+                // Timeout for the animation complete before destroying
+                setTimeout(() => {
+                    this.$destroy()
+                    removeElement(this.$el)
+                }, 150)
+            }
+        },
+
+        timeoutCallback() {
+            return this.close()
         },
 
         showNotice() {
@@ -110,7 +134,7 @@ export default {
             this.isActive = true
 
             if (!this.indefinite) {
-                this.timer = setTimeout(() => this.close(), this.newDuration)
+                this.timer = setTimeout(() => this.timeoutCallback(), this.newDuration)
             }
         },
 

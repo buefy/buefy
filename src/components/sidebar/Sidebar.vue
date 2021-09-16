@@ -12,7 +12,9 @@
                 v-show="isOpen"
                 ref="sidebarContent"
                 class="sidebar-content"
-                :class="rootClasses">
+                :class="rootClasses"
+                @mouseenter="onHover"
+                @mouseleave="onHoverLeave">
                 <slot />
             </div>
         </transition>
@@ -54,6 +56,10 @@ export default {
         reduce: Boolean,
         expandOnHover: Boolean,
         expandOnHoverFixed: Boolean,
+        delay: {
+            type: Number,
+            default: () => config.defaultSidebarDelay
+        },
         canCancel: {
             type: [Array, Boolean],
             default: () => ['escape', 'outside']
@@ -80,9 +86,11 @@ export default {
     data() {
         return {
             isOpen: this.open,
+            isDelayOver: false,
             transitionName: null,
             animating: true,
-            savedScrollTop: null
+            savedScrollTop: null,
+            hasLeaved: false
         }
     },
     computed: {
@@ -94,9 +102,10 @@ export default {
                 'is-fullheight': this.fullheight,
                 'is-fullwidth': this.fullwidth,
                 'is-right': this.right,
-                'is-mini': this.reduce,
-                'is-mini-expand': this.expandOnHover,
-                'is-mini-expand-fixed': this.expandOnHover && this.expandOnHoverFixed,
+                'is-mini': this.reduce && !this.isDelayOver,
+                'is-mini-expand': this.expandOnHover || this.isDelayOver,
+                'is-mini-expand-fixed': (this.expandOnHover && this.expandOnHoverFixed) || this.isDelayOver,
+                'is-mini-delayed': this.delay !== null,
                 'is-mini-mobile': this.mobile === 'reduce',
                 'is-hidden-mobile': this.mobile === 'hide',
                 'is-fullwidth-mobile': this.mobile === 'fullwidth'
@@ -237,6 +246,24 @@ export default {
             document.documentElement.scrollTop = this.savedScrollTop
             document.body.style.top = null
             this.savedScrollTop = null
+        },
+        onHover() {
+            if (this.delay) {
+                this.hasLeaved = false
+                this.timer = setTimeout(() => {
+                    if (!this.hasLeaved) {
+                        this.isDelayOver = true
+                    }
+                    this.timer = null
+                }, this.delay)
+            } else {
+                this.isDelayOver = false
+            }
+        },
+        onHoverLeave() {
+            this.hasLeaved = true
+            this.timer = null
+            this.isDelayOver = false
         }
     },
     created() {

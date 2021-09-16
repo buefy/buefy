@@ -79,7 +79,7 @@ $floating-in-height: 3.25em !default;
         .label {
             position: absolute;
             left: 1em;
-            font-size: calc(#{$size-normal} * 3 / 4);
+            font-size: calc(#{$size-normal} * 0.75);
             background-color: transparent;
             z-index: 5;
             white-space: nowrap;
@@ -88,13 +88,13 @@ $floating-in-height: 3.25em !default;
             overflow: hidden;
 
             &.is-small {
-                font-size: calc(#{$size-small} * 3 / 4);
+                font-size: calc(#{$size-small} * 0.75);
             }
             &.is-medium {
-                font-size: calc(#{$size-medium} * 3 / 4);
+                font-size: calc(#{$size-medium} * 0.75);
             }
             &.is-large {
-                font-size: calc(#{$size-large} * 3 / 4);
+                font-size: calc(#{$size-large} * 0.75);
             }
         }
         .taginput .counter {
@@ -155,7 +155,7 @@ $floating-in-height: 3.25em !default;
             + .control {
                 &.datepicker, &.timepicker {
                     .input {
-                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
                         padding-bottom: 1px;
                         height: $floating-in-height;
                     }
@@ -164,7 +164,7 @@ $floating-in-height: 3.25em !default;
                     .input,
                     .textarea,
                     select {
-                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
                         padding-bottom: 1px;
                         height: $floating-in-height;
                     }
@@ -172,7 +172,7 @@ $floating-in-height: 3.25em !default;
                         height: $floating-in-height;
                         &.is-loading {
                             &::after {
-                                margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                                margin-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
                             }
                         }
                         &::after {
@@ -183,7 +183,7 @@ $floating-in-height: 3.25em !default;
                 &.taginput {
                     .taginput-container {
                         // 0.275em - 1px _taginput.scss
-                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2 + (0.275em - 1px));
+                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5 + (0.275em - 1px));
                     }
                 }
                 &:not(.taginput) {
@@ -192,11 +192,11 @@ $floating-in-height: 3.25em !default;
                         height: $floating-in-height;
                     }
                     .is-left.icon {
-                        padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
                     }
                 }
                 &.is-loading::after {
-                    margin-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                    margin-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
                 }
             }
 
@@ -207,7 +207,7 @@ $floating-in-height: 3.25em !default;
                         .input,
                         .textarea,
                         select {
-                            padding-top: calc(#{$floating-in-height} / 2 - (#{$size-large} * 3 / 4) / 2);
+                            padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
                             padding-bottom: 1px;
                         }
                         .input,
@@ -303,7 +303,7 @@ $floating-in-height: 3.25em !default;
     }
     // fix Bulma 0.8.2
     &.is-loading::after {
-        top: calc(50% - (1em / 2));
-        right: calc((2.5em / 2) - .5em);
+        top: calc(50% - (1em * 0.5));
+        right: calc((2.5em * 0.5) - .5em);
     }
 }

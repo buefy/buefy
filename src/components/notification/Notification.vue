@@ -3,7 +3,9 @@
         <article
             v-show="isActive"
             class="notification"
-            :class="[type, position]">
+            :class="[type, position]"
+            @click="click"
+        >
             <button
                 v-if="closable"
                 class="delete"

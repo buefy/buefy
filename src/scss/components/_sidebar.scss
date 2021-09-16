@@ -37,7 +37,7 @@ $sidebar-colors: $navbar-colors !default;
         }
         &.is-mini {
             width: $sidebar-mobile-width;
-            &.is-mini-expand:hover {
+            &.is-mini-expand:hover:not(.is-mini-delayed) {
                 transition: width $speed-slow $easing;
                 &:not(.is-fullwidth) {
                     width: $sidebar-width;

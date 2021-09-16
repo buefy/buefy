@@ -26,6 +26,7 @@
                         :size="size"
                         :icon="icon"
                         :icon-right="iconRight"
+                        :icon-right-clickable="iconRightClickable"
                         :icon-pack="iconPack"
                         :rounded="rounded"
                         :loading="loading"
@@ -34,6 +35,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
+                        @icon-right-click="$emit('icon-right-click')"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />
@@ -370,6 +372,7 @@ export default {
         },
         position: String,
         iconRight: String,
+        iconRightClickable: Boolean,
         events: Array,
         indicators: {
             type: String,
@@ -733,11 +736,12 @@ export default {
             }
         },
         updateInternalState(value) {
-            if (this.dateSelected === value) return ''
+            if (this.dateSelected === value) return
             const currentDate = Array.isArray(value)
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            if (Array.isArray(value) && value.length > this.dateSelected.length) {
+            if (Array.isArray(value) &&
+                this.dateSelected && value.length > this.dateSelected.length) {
                 this.focusedDateData = {
                     day: currentDate.getDate(),
                     month: currentDate.getMonth(),

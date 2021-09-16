@@ -83,6 +83,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>aria-labelledby</code>',
+                description: 'Accessibility label to establish relationship between the switch and control label',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         events: [

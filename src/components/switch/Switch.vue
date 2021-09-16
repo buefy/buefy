@@ -20,11 +20,15 @@
             :required="required"
             :value="nativeValue"
             :true-value="trueValue"
-            :false-value="falseValue">
+            :false-value="falseValue"
+            :aria-labelledby="ariaLabelledby">
         <span
             class="check"
             :class="checkClasses"/>
-        <span class="control-label"><slot/></span>
+        <span
+            v-if="showControlLabel"
+            :id="ariaLabelledby"
+            class="control-label"><slot/></span>
     </label>
 </template>
 
@@ -42,6 +46,7 @@ export default {
         name: String,
         required: Boolean,
         size: String,
+        ariaLabelledby: String,
         trueValue: {
             type: [String, Number, Boolean, Function, Object, Array, Date],
             default: true
@@ -98,6 +103,9 @@ export default {
                 (this.passiveType && `${this.passiveType}-passive`),
                 this.type
             ]
+        },
+        showControlLabel() {
+            return !!this.$slots.default
         }
     },
     watch: {

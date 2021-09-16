@@ -255,6 +255,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>detail-icon</code>',
+                description: 'Icon name',
+                type: 'String',
+                values: '—',
+                default: '<code>chevron-right</code>'
+            },
+            {
                 name: '<code>opened-detailed</code>',
                 description: 'Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop)',
                 type: 'Array',
@@ -427,7 +434,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>, <code>toggleDetails: Function (row: Object)</code>'
+                props: '<code>toggleDetails: Function (row: Object)</code>'
             },
             {
                 name: '<code>header</code>',
@@ -775,7 +782,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table column body',
-                props: '-'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>'
             },
             {
                 name: '<code>header</code>',

@@ -51,6 +51,7 @@
                 :tabindex="!focusable ? false : 0"
                 @keydown.self.prevent.up="pressedArrow(-1)"
                 @keydown.self.prevent.down="pressedArrow(1)">
+                <caption v-show="showCaption" v-if="caption">{{ caption }}</caption>
                 <thead v-if="newColumns.length && showHeader">
                     <tr>
                         <th v-if="showDetailRowIcon" width="40px"/>
@@ -239,7 +240,7 @@
                                     role="button"
                                     @click.stop="toggleDetails(row)">
                                     <b-icon
-                                        icon="chevron-right"
+                                        :icon="detailIcon"
                                         :pack="iconPack"
                                         both
                                         :class="{'is-expanded': isVisibleDetailRow(row)}"/>
@@ -492,6 +493,10 @@ export default {
             type: Boolean,
             default: true
         },
+        detailIcon: {
+            type: String,
+            default: 'chevron-right'
+        },
         paginationPosition: {
             type: String,
             default: 'bottom',
@@ -562,7 +567,12 @@ export default {
             type: Boolean,
             default: true
         },
-        debounceSearch: Number
+        debounceSearch: Number,
+        caption: String,
+        showCaption: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
@@ -947,6 +957,7 @@ export default {
         * and not just updating the prop.
         */
         sort(column, updatingData = false, event = null) {
+            if (!column || !column.sortable) return
             if (
                 // if backend sorting is enabled, just emit the sort press like usual
                 // if the correct key combination isnt pressed, sort like usual
@@ -960,8 +971,6 @@ export default {
                     this.sortMultiColumn(column)
                 }
             } else {
-                if (!column || !column.sortable) return
-
                 // sort multiple is enabled but the correct key combination isnt pressed so reset
                 if (this.sortMultiple) {
                     this.sortMultipleDataLocal = []
@@ -1128,13 +1137,14 @@ export default {
         closeDetailRow(obj) {
             const index = this.handleDetailKey(obj)
             const i = this.visibleDetailRows.indexOf(index)
-            this.visibleDetailRows.splice(i, 1)
+            if (i >= 0) {
+                this.visibleDetailRows.splice(i, 1)
+            }
         },
 
         isVisibleDetailRow(obj) {
             const index = this.handleDetailKey(obj)
-            const result = this.visibleDetailRows.indexOf(index) >= 0
-            return result
+            return this.visibleDetailRows.indexOf(index) >= 0
         },
 
         isActiveDetailRow(row) {
@@ -1155,7 +1165,7 @@ export default {
                 const input = this.filters[key]
                 const column = this.newColumns.filter((c) => c.field === key)[0]
                 if (column && column.customSearch && typeof column.customSearch === 'function') {
-                    return column.customSearch(row, input)
+                    if (!column.customSearch(row, input)) return false
                 } else {
                     let value = this.getValueByPath(row, key)
                     if (value == null) return false

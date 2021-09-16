@@ -71,7 +71,7 @@ $steps-colors: $colors !default;
                     .step-item {
                         &:not(:first-child), &:only-child {
                             &::before, &::after {
-                                left: calc(#{$size} - #{$steps-divider-height / 2});
+                                left: calc(#{$size} - #{$steps-divider-height * 0.5});
                             }
                         }
                     }
@@ -83,7 +83,7 @@ $steps-colors: $colors !default;
                         &:not(:first-child), &:only-child {
                             &::before, &::after {
                                 left: auto;
-                                right: calc(#{$size} - #{$steps-divider-height / 2});
+                                right: calc(#{$size} - #{$steps-divider-height * 0.5});
                             }
                         }
                     }
@@ -98,7 +98,7 @@ $steps-colors: $colors !default;
                         .step-item {
                             &:not(:first-child), &:only-child {
                                 &::before, &::after {
-                                    left: calc(#{$size} - #{$steps-divider-height / 2});
+                                    left: calc(#{$size} - #{$steps-divider-height * 0.5});
                                 }
                             }
                         }
@@ -110,7 +110,7 @@ $steps-colors: $colors !default;
                             &:not(:first-child), &:only-child {
                                 &::before, &::after {
                                     left: auto;
-                                    right: calc(#{$size} - #{$steps-divider-height / 2});
+                                    right: calc(#{$size} - #{$steps-divider-height * 0.5});
                                 }
                             }
                         }
@@ -383,7 +383,7 @@ $steps-colors: $colors !default;
                             height: 100%;
                             width: $steps-divider-height;
                             top: -50%;
-                            left: calc(50% - #{$steps-divider-height / 2});
+                            left: calc(50% - #{$steps-divider-height * 0.5});
                         }
                     }
 

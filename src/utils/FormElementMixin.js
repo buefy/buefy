@@ -114,6 +114,7 @@ export default {
         onFocus($event) {
             this.isFocused = true
             this.$emit('focus', $event)
+            this.checkHtml5Validity()
         },
 
         getElement() {

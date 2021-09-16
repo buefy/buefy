@@ -1,5 +1,58 @@
 # Buefy Changelog
 
+## 0.9.10
+
+### Fixes
+
+* Fix double ``select`` event when ``clear-on-select``
+* Fix event prevent on "Tab" key of autocomplete
+
+## 0.9.9
+
+### New features
+
+* Add ``tag`` prop to navbar dropdown (thanks @GMartigny)
+* Add ``select-on-click-outside`` prop to autocomplete (thanks @elisamuelps)
+* Add ``aria-labelledby`` prop to checkbox and switch (thanks @milad-mirkarimi)
+* Add ``icon-right`` and ``icon-right-clickable`` props to datepicker and datetimepicker (thanks @rubjo)
+* Add ``caption`` prop to table (thanks @eveenendaal)
+* Add ``pause-on-hover`` prop to toast (thanks @milad-mirkarimi)
+* Improve number input validation (thanks @fabiofdsantos)
+* Enable click event to notification (thanks @franciscoh017)
+* Show switch control label if slot exists (thanks @cain)
+* Prevent emitting the prompt value when inputted text is compositing (thanks @soudai-s)
+
+### Fixes
+
+* Fix autocomplete using `keep first` (thanks @dauriata)
+* Fix combination of filters with custom searches (AND operator) (thanks @massimozappino)
+* Fix avoid reading undefined range on datepicker (thanks @apauly)
+* Fix sidebar delay on hover leave (thanks @holtolee)
+* Fix #3431 disable sort when column is not sortable (multisort)
+* Fix #3438 reset current tag when duplicated
+* Fix #3442 wrong prop on timepicker
+* Fix #3461 check if a detail row is visible before trying to close it (thanks @GMartigny)
+* Fix #3473 emit typing to force reload items on tagsinput
+
+## 0.9.8
+
+### New features
+
+* Shipped with Bulma 0.9.3 ([release note](https://github.com/jgthms/bulma/releases/tag/0.9.3))
+* Support `keep first` on taginput elements (thanks @fabiofdsantos)
+* Add missing typehints for the notification component (thanks @maartenvanasperen)
+* Improve accessibility to dropdown and autocomplete (thanks @eveenendaal)
+* Add `detail-icon` prop to Table component (thanks @holtolee)
+* Add `delay` prop to Sidebar component (thanks @holtolee)
+
+### Fixes
+
+* Fix #3329 checkbox autocompletion (thanks @markovejnovic)
+* Fix datepicker tab navigation with `nearby-selectable-month-days` prop (thanks @Raljuk)
+* Fix #3342 iPad detection (thanks @lboecker)
+* Fix #3333 multiple datepicker stay on month on date removal (thanks @mateusbw)
+* Fix #3366 notification animation effect on close (thanks @LeoMouyna)
+
 ## 0.9.7
 
 ### New features

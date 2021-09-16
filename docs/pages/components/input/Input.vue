@@ -2,6 +2,8 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
+        <Example :component="ExHorizontal" :code="ExHorizontalCode" vertical/>
+
         <Example :component="ExTypesStates" :code="ExTypesStatesCode" title="Types and states" vertical/>
 
         <Example :component="ExIcons" :code="ExIconsCode" title="Icons" vertical/>
@@ -38,6 +40,9 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
+    import ExHorizontal from './examples/ExHorizontal'
+    import ExHorizontalCode from '!!raw-loader!./examples/ExHorizontal'
+
     import ExTypesStates from './examples/ExTypesStates'
     import ExTypesStatesCode from '!!raw-loader!./examples/ExTypesStates'
 
@@ -62,12 +67,14 @@
                 api,
                 variables,
                 ExSimple,
+                ExHorizontal,
                 ExTypesStates,
                 ExIcons,
                 ExValidation,
                 ExPassword,
                 ExSizes,
                 ExSimpleCode,
+                ExHorizontalCode,
                 ExTypesStatesCode,
                 ExIconsCode,
                 ExValidationCode,

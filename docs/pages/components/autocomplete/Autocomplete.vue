@@ -23,7 +23,17 @@
             </div>
             <p>You can show options by groups</p>
         </Example>
-
+        
+        <Example :component="ExKeepFirst" :code="ExKeepFirstCode" title="Keep First">
+            <div class="tags has-addons">
+                <span class="tag is-success">Since</span>
+                <span class="tag is-info">0.9.9</span>
+            </div>
+            <p>You can select the first option when pressing enter or tab with <code>keep-first</code>.</p>
+            <p>Additionally, use <code>select-on-click-outside</code> to automatically select the first element when clicking outside of
+                the <code>input</code> element.</p>
+        </Example>
+        
         <Example :component="ExCustomAsync" :code="ExCustomAsyncCode" title="Async with custom template">
             <p>You can have a custom template by adding a scoped slot to it.</p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
@@ -63,6 +73,9 @@
 
     import ExInfiniteScroll from './examples/ExInfiniteScroll'
     import ExInfiniteScrollCode from '!!raw-loader!./examples/ExInfiniteScroll'
+    
+    import ExKeepFirst from './examples/ExKeepFirst'
+    import ExKeepFirstCode from '!!raw-loader!./examples/ExKeepFirst'
 
     export default {
         data() {
@@ -82,7 +95,9 @@
                 ExInfiniteScroll,
                 ExInfiniteScrollCode,
                 ExGroups,
-                ExGroupsCode
+                ExGroupsCode,
+                ExKeepFirst,
+                ExKeepFirstCode
             }
         }
     }

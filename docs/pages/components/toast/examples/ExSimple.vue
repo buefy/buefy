@@ -23,6 +23,11 @@
                 size="is-medium"
                 @click="indefinite" />
             <b-button
+                label="Launch toast (pause on hover)"
+                type="is-link"
+                size="is-medium"
+                @click="pause" />
+            <b-button
                 v-if="indefinteToast"
                 label="close toast (indefinite)"
                 type="is-danger"
@@ -63,6 +68,14 @@
                     indefinite: true,
                     message: `I won't close until you explicitly close me!`,
                     type: 'is-warning'
+                })
+            },
+            pause() {
+                this.$buefy.toast.open({
+                    duration: 5000,
+                    message: `I can be paused if you hover over me`,
+                    type: 'is-link',
+                    pauseOnHover: true
                 })
             },
             closeIndefinite() {

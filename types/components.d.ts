@@ -25,6 +25,7 @@ export declare type BuefyConfig = {
     defaultTooltipType?: ColorModifiers;
     defaultTooltipAnimated?: boolean;
     defaultTooltipDelay?: number;
+    defaultSidebarDelay?: number,
     defaultInputAutocomplete?: string;
     defaultDateFormatter?: Function;
     defaultDateParser?: Function;
@@ -175,11 +176,6 @@ export declare type BDialogConfig = {
     * Improve accessiblity when enabled.
     */
    ariaModal?: boolean;
-
-   /**
-    * CSS classes to be applied on modal
-    */
-   customClass?: string;
 }
 type BPromptDialogConfig = BDialogConfig & {
     /**
@@ -346,6 +342,11 @@ export declare type BNoticeConfig = {
      * Show indefinitely until it is dismissed
      */
     indefinite?: boolean;
+
+    /**
+     * Prevent the notice from hiding while it is being hovered.
+     */
+    pauseOnHover?: boolean;
 
     /**
     * DOM element it will be created on.

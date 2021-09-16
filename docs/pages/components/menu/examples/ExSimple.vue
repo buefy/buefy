@@ -5,7 +5,7 @@
       <b-menu-item icon="settings" :active="isActive" expanded>
         <template #label="props">
           Administrator
-          <b-icon class="is-pulled-right" :icon="props.expanded ? 'menu-down' : 'menu-up'"></b-icon>
+          <b-icon class="is-pulled-right" :icon="props.expanded ? 'menu-up' : 'menu-down'"></b-icon>
         </template>
         <b-menu-item icon="account" label="Users"></b-menu-item>
         <b-menu-item icon="cellphone-link">
