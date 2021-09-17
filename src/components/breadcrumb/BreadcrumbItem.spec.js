@@ -4,7 +4,12 @@ import BBreadcrumbItem from '@components/breadcrumb/BreadcrumbItem.vue'
 describe('BBreadcrumbItem', () => {
     let wrapper
     beforeEach(() => {
-        wrapper = mount(BBreadcrumbItem)
+        wrapper = mount(BBreadcrumbItem, {
+            propsData: {
+                tag: 'router-link',
+                to: '/'
+            }
+        })
     })
 
     it('is called', () => {
@@ -13,5 +18,9 @@ describe('BBreadcrumbItem', () => {
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
+    })
+
+    it('should have a li tag', () => {
+        expect(wrapper.contains('li')).toBeTruthy()
     })
 })

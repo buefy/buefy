@@ -2,7 +2,15 @@ import { shallowMount, mount } from '@vue/test-utils'
 import BBreadcrumb from '@components/breadcrumb/Breadcrumb'
 
 describe('BBreadcrumb', () => {
-    let wrapper = shallowMount(BBreadcrumb)
+    let wrapper
+
+    beforeEach(() => {
+        wrapper = shallowMount(BBreadcrumb, {
+            scopedSlots: {
+                foo: '<p slot-scope="foo">{{foo.index}},{{foo.text}}</p>'
+            }
+        })
+    })
 
     it('is called', () => {
         expect(wrapper.name()).toBe('BBreadcrumb')

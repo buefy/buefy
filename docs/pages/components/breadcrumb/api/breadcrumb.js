@@ -30,24 +30,10 @@ export default [
         props: [
             {
                 name: '<code>tag</code>',
-                description: 'Sets the tag of the component that have to render breadcrumb item.',
+                description: "a, router-link and it's html attributes like href, to, etc...",
                 type: 'String',
                 values: '<code>router-link</code>, <code>a</code>',
                 default: '<code>a</code>'
-            },
-            {
-                name: '<code>href</code>',
-                description: 'path used if set <code><tag/></code> to <code><a/></code>.',
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
-                name: '<code>to</code>',
-                description: 'path used if set <code><tag/></code> to <code><router-link/></code>.',
-                type: 'String',
-                values: '—',
-                default: '—'
             },
              {
                 name: '<code>active</code>',

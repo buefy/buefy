@@ -3,8 +3,8 @@
         :class="{ 'is-active': active }">
         <component
             :is="tag"
-            :href="tag == 'a' ? href : undefined"
-            :to="tag == 'router-link' ? to : undefined"
+            v-bind="$attrs"
+            v-on="$listeners"
         >
             <slot />
         </component>
@@ -13,9 +13,13 @@
 
 <script>
 import config from '../../utils/config'
+
 export default {
 
     name: 'BBreadcrumbItem',
+
+    inheritAttrs: false,
+
     props: {
         tag: {
             type: String,
@@ -23,8 +27,6 @@ export default {
                 return config.defaultBreadcrumbTag
             }
         },
-        href: String,
-        to: String,
         active: Boolean
     }
 }
