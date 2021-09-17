@@ -44,6 +44,7 @@ export default {
     directives: {
         clickOutside
     },
+    inheritAttrs: false,
     props: {
         label: String,
         hoverable: Boolean,
