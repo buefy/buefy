@@ -5,11 +5,7 @@ describe('BBreadcrumb', () => {
     let wrapper
 
     beforeEach(() => {
-        wrapper = shallowMount(BBreadcrumb, {
-            scopedSlots: {
-                foo: '<p slot-scope="foo">{{foo.index}},{{foo.text}}</p>'
-            }
-        })
+        wrapper = shallowMount(BBreadcrumb)
     })
 
     it('is called', () => {
