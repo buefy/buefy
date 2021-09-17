@@ -166,8 +166,11 @@ export default {
             get() {
                 return this.newValue
             },
+
             set(value) {
                 if (value) {
+                    // check invalid date
+                    value = isNaN(value.getTime()) ? this.newValue : value
                     let val = new Date(value.getTime())
                     if (this.newValue) {
                         // restore time part
