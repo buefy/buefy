@@ -166,7 +166,6 @@ export default {
             get() {
                 return this.newValue
             },
-
             set(value) {
                 if (value) {
                     // check invalid date
