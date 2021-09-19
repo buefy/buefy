@@ -72,6 +72,10 @@ let config = {
     defaultAvatarSize: 'is-48x48',
     defaultAvatarVariant: 'has-background-primary',
     defaultAvatarRounded: true,
+    defaultBreadcrumbTag: 'a',
+    defaultBreadcrumbAlign: 'is-left',
+    defaultBreadcrumbSeparator: '',
+    defaultBreadcrumbSize: 'is-medium',
     customIconPacks: null
 }
 

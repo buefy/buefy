@@ -17,7 +17,9 @@
         {
             "category": "UI components",
             "pages": [
+
                 "documentation/avatar",
+                "documentation/breadcrumb",
                 "documentation/button",
                 "documentation/carousel",
                 "documentation/collapse",

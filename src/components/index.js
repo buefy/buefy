@@ -1,5 +1,6 @@
 import Autocomplete from './autocomplete'
 import Avatar from './avatar'
+import Breadcrumb from './breadcrumb'
 import Button from './button'
 import Carousel from './carousel'
 import Checkbox from './checkbox'
@@ -43,6 +44,7 @@ import Upload from './upload'
 export {
     Autocomplete,
     Avatar,
+    Breadcrumb,
     Button,
     Carousel,
     Checkbox,

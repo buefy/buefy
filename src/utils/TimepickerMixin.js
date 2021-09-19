@@ -438,7 +438,8 @@ export default {
                 time.setHours(hours)
                 time.setMinutes(minutes)
                 time.setSeconds(seconds)
-                this.computedValue = new Date(time.getTime())
+
+                if (!isNaN(time.getTime())) this.computedValue = new Date(time.getTime())
             }
         },
 
