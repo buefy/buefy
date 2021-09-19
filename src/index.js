@@ -34,5 +34,7 @@ export { NotificationProgrammatic } from './components/notification'
 export { SnackbarProgrammatic } from './components/snackbar'
 export { ToastProgrammatic } from './components/toast'
 export { default as ConfigProgrammatic } from './utils/ConfigComponent'
+// export mixins
+export { WindowSizeMixin } from './mixins/WindowSizeMixin'
 // export helpers
 export * from './utils/helpers'
