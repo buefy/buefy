@@ -58,7 +58,8 @@
                 @compositionstart.native="isComposing = true"
                 @compositionend.native="isComposing = false"
                 @select="onSelect"
-                @infinite-scroll="emitInfiniteScroll">
+                @infinite-scroll="emitInfiniteScroll"
+                v-on="listeners">
                 <template
                     v-if="hasHeaderSlot"
                     #header>
@@ -195,6 +196,11 @@ export default {
         }
     },
     computed: {
+        listeners() {
+            const { input, ...listeners } = this.$listeners
+            return listeners
+        },
+
         rootClasses() {
             return {
                 'is-expanded': this.expanded
