@@ -160,7 +160,7 @@ export default {
                 return this.newValue
             },
             set(value) {
-                let newValue = value
+                let newValue = Number(value) || null
                 if (value === '' || value === undefined || value === null) {
                     if (this.minNumber !== undefined) {
                         newValue = this.minNumber
