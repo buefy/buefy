@@ -25,7 +25,7 @@
         </template>
         <b-field-body
             v-if="horizontal"
-            :message="newMessage ? formattedMessage : ''"
+            :message="message ? formattedMessage : ''"
             :type="newType">
             <slot/>
         </b-field-body>
@@ -99,7 +99,6 @@ export default {
     data() {
         return {
             newType: this.type,
-            newMessage: this.message,
             fieldLabelSize: null,
             _isField: true // Used internally by Input and Select
         }
@@ -155,12 +154,12 @@ export default {
             if (this.parent && this.parent.hasInnerField) {
                 return '' // Message will be displayed in parent field
             }
-            if (typeof this.newMessage === 'string') {
-                return [this.newMessage]
+            if (typeof this.message === 'string') {
+                return [this.message]
             }
             let messages = []
-            if (Array.isArray(this.newMessage)) {
-                this.newMessage.forEach((message) => {
+            if (Array.isArray(this.message)) {
+                this.message.forEach((message) => {
                     if (typeof message === 'string') {
                         messages.push(message)
                     } else {
@@ -172,8 +171,8 @@ export default {
                     }
                 })
             } else {
-                for (let key in this.newMessage) {
-                    if (this.newMessage[key]) {
+                for (let key in this.message) {
+                    if (this.message[key]) {
                         messages.push(key)
                     }
                 }
@@ -184,7 +183,7 @@ export default {
             return this.label || this.$slots.label
         },
         hasMessage() {
-            return ((!this.parent || !this.parent.hasInnerField) && this.newMessage) ||
+            return ((!this.parent || !this.parent.hasInnerField) && this.message) ||
                 this.$slots.message
         },
         numberInputClasses() {
@@ -218,18 +217,11 @@ export default {
         * Set internal message when prop change.
         */
         message(value) {
-            this.newMessage = value
-        },
-
-        /**
-        * Set parent message if we use Field in Field.
-        */
-        newMessage(value) {
             if (this.parent && this.parent.hasInnerField) {
                 if (!this.parent.type) {
                     this.parent.newType = this.newType
                 }
-                this.parent.newMessage = value
+                this.parent.message = value
             }
         }
     },
