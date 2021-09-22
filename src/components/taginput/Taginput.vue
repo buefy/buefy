@@ -289,13 +289,13 @@ export default {
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
                 }
-            }
 
-            // after autocomplete events
-            requestAnimationFrame(() => {
-                this.newTag = ''
-                this.$emit('typing', '')
-            })
+                // after autocomplete events
+                requestAnimationFrame(() => {
+                    this.newTag = ''
+                    this.$emit('typing', '')
+                })
+            }
         },
 
         getNormalizedTagText(tag) {
@@ -317,6 +317,9 @@ export default {
             if (!option) return
 
             this.addTag(option)
+            this.$nextTick(() => {
+                this.newTag = ''
+            })
         },
 
         removeTag(index, event) {
