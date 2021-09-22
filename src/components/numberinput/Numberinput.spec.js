@@ -91,6 +91,16 @@ describe('BNumberinput', () => {
 
             expect(wrapper.vm.computedValue).toBe(val)
         })
+
+        it('increments/decrements after manually set value on input', async () => {
+            wrapper.setProps({exponential: true, value: 1, step: 1})
+            const BASE_VALUE = Math.floor(Math.random() * 10 + 1)
+            wrapper.find('input').setValue(BASE_VALUE)
+            wrapper.find('.control.plus button').trigger('click')
+            wrapper.find('.control.minus button').trigger('click')
+
+            expect(wrapper.vm.computedValue).toEqual(BASE_VALUE)
+        })
     })
 
     describe('Rendered (shallow)', () => {

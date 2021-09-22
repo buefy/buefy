@@ -69,7 +69,7 @@
                             role="button"
                             tabindex="0"
                             :class="{ 'is-hovered': option === hovered }"
-                            @click="setSelected(option, undefined, $event)"
+                            @click.stop="setSelected(option, !keepOpen, $event)"
                         >
                             <slot
                                 v-if="hasDefaultSlot"

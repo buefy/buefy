@@ -31,6 +31,7 @@
         :append-to-body="appendToBody"
         @focus="onFocus"
         @blur="onBlur"
+        @active-change="onActiveChange"
         @icon-right-click="$emit('icon-right-click')"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
@@ -390,6 +391,12 @@ export default {
             } else {
                 this.computedValue = null
             }
+        },
+        /*
+         * Emit 'active-change' on datepicker active state change
+         */
+        onActiveChange(value) {
+            this.$emit('active-change', value)
         },
         formatNative(value) {
             const date = new Date(value)

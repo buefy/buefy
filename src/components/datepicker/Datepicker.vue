@@ -815,6 +815,10 @@ export default {
             if (!value) {
                 this.onBlur()
             }
+            /*
+             * Emit 'active-change' when on dropdown active state change
+             */
+            this.$emit('active-change', value)
         },
 
         changeFocus(day) {
