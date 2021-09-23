@@ -87,6 +87,12 @@ export default [
                 type: 'Number',
                 values: "—",
                 default: '<code>0</code>'
+            },
+            {
+                name: '<code>append-to-body</code>',
+                description: 'Append tooltip content to body (prevents event bubbling)',
+                values: '—',
+                default: '<code>false</code>'
             }
         ]
     }
