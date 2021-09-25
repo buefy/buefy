@@ -19,6 +19,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>auto-close</code>',
+                description: 'The event(s) that should trigger the tooltip to close',
+                type: 'Boolean, Array',
+                values: `Boolean <code>true</code> or <code>false</code>, or an array containing any of <code>escape</code>, <code>outside</code>, <code>inside</code>`,
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>label</code>',
                 description: 'Tooltip text',
                 type: 'String',
