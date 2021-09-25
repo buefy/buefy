@@ -20,6 +20,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>rounded</code>',
+                description: 'rounded style of the progress bar, optional',
+                type: 'Boolean',
+                values: '<code>false</code>, <code>true</code>',
+                default: 'true'
+            },
+            {
                 name: '<code>value</code>',
                 description: 'The progress value, progress will be indeterminate if undefined.',
                 type: 'Number',
