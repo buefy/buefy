@@ -63,6 +63,10 @@
                 }
             }
         }
+
+        &.is-squared {
+            border-radius: 0;
+        }
     }
 
     &.is-not-native {
@@ -93,5 +97,9 @@
                 }
             }
         }
+    }
+    
+    &.is-squared {
+        border-radius: 0;
     }
 }

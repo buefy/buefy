@@ -1,10 +1,10 @@
 <template>
-    <div class="progress-wrapper" :class="wrapperClasses">
+    <div class="progress-wrapper" :class="[wrapperClasses, { 'is-squared': !rounded }]">
         <progress
             v-if="isNative"
             ref="progress"
             class="progress"
-            :class="newType"
+            :class="[newType, { 'is-squared': !rounded }]"
             :max="max"
             :value="value">{{ newValue }}</progress>
         <slot v-else name="bar" />
@@ -27,6 +27,10 @@ export default {
             default: 'is-darkgrey'
         },
         size: String,
+        rounded: {
+            type: Boolean,
+            default: true
+        },
         value: {
             type: Number,
             default: undefined
