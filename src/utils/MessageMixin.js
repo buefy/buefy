@@ -116,8 +116,13 @@ export default {
                     if (this.remainingTime !== 0 && this.active) {
                         this.remainingTime -= 1
                     } else {
-                        this.remainingTime = this.duration / 1000
-                        clearInterval(this.progress)
+                        /**
+                        * Wait until the component get closed and then reset
+                        **/
+                        window.setTimeout(() => {
+                            this.remainingTime = this.duration / 1000
+                            clearInterval(this.progress)
+                        }, 100)
                     }
                 }, 1000)
             }

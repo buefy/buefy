@@ -5,6 +5,8 @@
         <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
+        
+        <Example :component="ExNotRounded" :code="ExNotRoundedCode" title="Not rounded" vertical/>
 
         <Example :component="ExValues" :code="ExValuesCode" title="Values" vertical/>
 
@@ -35,6 +37,9 @@
     import ExSizes from './examples/ExSizes'
     import ExSizesCode from '!!raw-loader!./examples/ExSizes'
 
+    import ExNotRounded from './examples/ExNotRounded'
+    import ExNotRoundedCode from '!!raw-loader!./examples/ExNotRounded'
+
     import ExValues from './examples/ExValues'
     import ExValuesCode from '!!raw-loader!./examples/ExValues'
 
@@ -52,11 +57,13 @@
                 ExSimple,
                 ExTypes,
                 ExSizes,
+                ExNotRounded,
                 ExValues,
                 ExSlot,
                 ExSimpleCode,
                 ExTypesCode,
                 ExSizesCode,
+                ExNotRoundedCode,
                 ExValuesCode,
                 ExSlotCode,
                 ExBars,
