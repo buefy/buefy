@@ -1,10 +1,10 @@
 <template>
-    <div class="progress-wrapper" :class="[wrapperClasses, { 'is-not-rounded': !rounded }]">
+    <div class="progress-wrapper" :class="[wrapperClasses, { 'is-squared': !rounded }]">
         <progress
             v-if="isNative"
             ref="progress"
             class="progress"
-            :class="[newType, { 'is-not-rounded': !rounded }]"
+            :class="[newType, { 'is-squared': !rounded }]"
             :max="max"
             :value="value">{{ newValue }}</progress>
         <slot v-else name="bar" />

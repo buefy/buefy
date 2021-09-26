@@ -63,12 +63,10 @@
                 }
             }
         }
-        &.is-not-rounded {
-            border-radius: 0!important
+
+        &.is-squared {
+            border-radius: 0;
         }
-    }
-    &.is-not-rounded {
-        border-radius: 0!important
     }
 
     &.is-not-native {
@@ -99,5 +97,9 @@
                 }
             }
         }
+    }
+    
+    &.is-squared {
+        border-radius: 0;
     }
 }
