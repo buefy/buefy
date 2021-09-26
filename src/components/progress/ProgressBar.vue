@@ -1,7 +1,7 @@
 <template>
     <div
         class="progress-bar"
-        :class="[newType, { 'is-not-rounded': !rounded }]"
+        :class="newType"
         role="progressbar"
         :aria-valuenow="value"
         :aria-valuemax="parent.max"
@@ -29,7 +29,7 @@ export default {
         },
         rounded: {
             type: Boolean,
-            default: false
+            default: true
         },
         value: {
             type: Number,
