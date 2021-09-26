@@ -1,5 +1,5 @@
 <template>
-    <div class="progress-wrapper" :class="wrapperClasses">
+    <div class="progress-wrapper" :class="[wrapperClasses, { 'is-not-rounded': !rounded }]">
         <progress
             v-if="isNative"
             ref="progress"

@@ -27,10 +27,6 @@ export default {
             type: [String, Object],
             default: undefined
         },
-        rounded: {
-            type: Boolean,
-            default: true
-        },
         value: {
             type: Number,
             default: undefined

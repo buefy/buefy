@@ -14,7 +14,7 @@
                 <b-progress-bar :value="30" type="is-warning">Wow!</b-progress-bar>
             </template>
         </b-progress>
-        <b-progress size="is-large">
+        <b-progress :rounded="false" size="is-large">
             <template #bar>
                 <b-progress-bar :value="10" show-value></b-progress-bar>
                 <b-progress-bar :value="20" type="is-primary" show-value></b-progress-bar>
