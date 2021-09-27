@@ -12,6 +12,10 @@
             <p>Notification will be automatically closed after <code>duration</code>.</p>
         </Example>
 
+        <Example :component="ExAutoCloseWithProgressBar" :code="ExAutoCloseWithProgressBarCode" title="Auto Close With Progress Bar" vertical>
+            <p>Notification will be automatically closed after <code>duration</code> with a progress bar which indicates the delay passed.</p>
+        </Example>
+
         <Example :component="ExProgrammatically" :code="ExProgrammaticallyCode" title="Programmatically opening">
             <div class="tags has-addons">
                 <span class="tag is-success">Since</span>
@@ -45,6 +49,9 @@
     import ExAutoClose from './examples/ExAutoClose'
     import ExAutoCloseCode from '!!raw-loader!./examples/ExAutoClose'
 
+    import ExAutoCloseWithProgressBar from './examples/ExAutoCloseWithProgressBar'
+    import ExAutoCloseWithProgressBarCode from '!!raw-loader!./examples/ExAutoCloseWithProgressBar'
+
     import ExProgrammatically from './examples/ExProgrammatically'
     import ExProgrammaticallyCode from '!!raw-loader!./examples/ExProgrammatically'
 
@@ -57,12 +64,13 @@
                 ExTypes,
                 ExIcons,
                 ExAutoClose,
+                ExAutoCloseWithProgressBar,
+                ExProgrammatically,
                 ExSimpleCode,
                 ExTypesCode,
                 ExIconsCode,
-                ExAutoClose,
                 ExAutoCloseCode,
-                ExProgrammatically,
+                ExAutoCloseWithProgressBarCode,
                 ExProgrammaticallyCode,
                 outsideVueInstance: `
                     import { NotificationProgrammatic as Notification } from 'buefy'

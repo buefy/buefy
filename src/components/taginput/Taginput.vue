@@ -58,7 +58,8 @@
                 @compositionstart.native="isComposing = true"
                 @compositionend.native="isComposing = false"
                 @select="onSelect"
-                @infinite-scroll="emitInfiniteScroll">
+                @infinite-scroll="emitInfiniteScroll"
+                v-on="listeners">
                 <template
                     v-if="hasHeaderSlot"
                     #header>
@@ -195,6 +196,11 @@ export default {
         }
     },
     computed: {
+        listeners() {
+            const { input, ...listeners } = this.$listeners
+            return listeners
+        },
+
         rootClasses() {
             return {
                 'is-expanded': this.expanded
@@ -289,13 +295,13 @@ export default {
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
                 }
-            }
 
-            // after autocomplete events
-            requestAnimationFrame(() => {
-                this.newTag = ''
-                this.$emit('typing', '')
-            })
+                // after autocomplete events
+                requestAnimationFrame(() => {
+                    this.newTag = ''
+                    this.$emit('typing', '')
+                })
+            }
         },
 
         getNormalizedTagText(tag) {
@@ -317,6 +323,9 @@ export default {
             if (!option) return
 
             this.addTag(option)
+            this.$nextTick(() => {
+                this.newTag = ''
+            })
         },
 
         removeTag(index, event) {

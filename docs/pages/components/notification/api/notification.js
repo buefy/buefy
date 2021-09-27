@@ -40,6 +40,13 @@ export default [
                 default: '<code>2000</code>'
             },
             {
+                name: '<code>progress-bar</code>',
+                description: 'remaining seconds before the alert will close (in seconds)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>animation</code>',
                 description: 'Custom animation (transition name)',
                 type: 'String',
