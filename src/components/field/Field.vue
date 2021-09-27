@@ -33,6 +33,7 @@
             <b-field
                 :addons="false"
                 :type="newType"
+                :message="newMessage ? formattedMessage : ''"
                 :class="innerFieldClasses">
                 <slot/>
             </b-field>
