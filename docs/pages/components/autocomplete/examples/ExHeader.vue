@@ -31,9 +31,7 @@
                 @select-header="showAddFruit"
                 :selectable-header="selectable">
                 <template #header>
-                    <a @click="checkSelectable">
-                        <span> Add new... </span>
-                    </a>
+                    <a><span> Add new... </span></a>
                 </template>
                 <template #empty>No results for {{name}}</template>
             </b-autocomplete>
@@ -86,9 +84,6 @@
                         this.$refs.autocomplete.setSelected(value)
                     }
                 })
-            },
-            checkSelectable(){
-                if (!this.selectable)  this.showAddFruit()
             }
         }
     }
