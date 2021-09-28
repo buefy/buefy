@@ -3,7 +3,12 @@
         <span
             class="tag"
             :class="[type, size, { 'is-rounded': rounded }]">
-            <b-icon v-if="icon" :icon="icon" :size="size" :type="iconType" :pack="iconPack" />
+            <b-icon
+                v-if="icon"
+                :icon="icon"
+                :size="size"
+                :type="iconType"
+                :pack="iconPack" />
             <span :class="{ 'has-ellipsis': ellipsis }" @click="click">
                 <slot/>
             </span>
@@ -34,7 +39,12 @@
         v-else
         class="tag"
         :class="[type, size, { 'is-rounded': rounded }]">
-        <b-icon v-if="icon" :icon="icon" :size="size" :type="iconType" :pack="iconPack" />
+        <b-icon
+            v-if="icon"
+            :icon="icon"
+            :size="size"
+            :type="iconType"
+            :pack="iconPack" />
         <span :class="{ 'has-ellipsis': ellipsis }" @click="click">
             <slot/>
         </span>
@@ -92,9 +102,9 @@ export default {
         */
         click(event) {
             if (this.disabled) return
-            
+
             this.$emit('click', event)
-        },
+        }
     }
 }
 </script>

@@ -94,7 +94,8 @@ export default {
         captionFirst: {
             type: Boolean,
             default: false
-        }
+        },
+        customClass: String
     },
     data() {
         return {
@@ -137,7 +138,8 @@ export default {
         imgClasses() {
             return {
                 'is-rounded': this.rounded,
-                'has-ratio': this.hasRatio
+                'has-ratio': this.hasRatio,
+                [this.customClass]: this.customClass
             }
         },
         srcExt() {
