@@ -44,7 +44,7 @@
                         role="button"
                         tabindex="0"
                         :class="{ 'is-hovered': headerHovered }"
-                        @click="(event) => checkIfHeaderOrFooterSelected(event, true)"
+                        @click="selectHeaderOrFoterByClick($event, 'header')"
                     >
                         <slot name="header" />
                     </div>
@@ -91,7 +91,7 @@
                         role="button"
                         tabindex="0"
                         :class="{ 'is-hovered': footerHovered }"
-                        @click="(event) => checkIfHeaderOrFooterSelected(event, true)"
+                        @click="selectHeaderOrFoterByClick($event, 'footer')"
                     >
                         <slot name="footer" />
                     </div>
@@ -429,27 +429,31 @@ export default {
                 if (this.hovered === null) {
                     // header and footer uses headerHovered && footerHovered. If header or footer
                     // was selected then fire event otherwise just return so a value isn't selected
-                    this.checkIfHeaderOrFooterSelected(event, false, closeDropdown)
+                    this.checkIfHeaderOrFooterSelected(event, null, closeDropdown)
                     return
                 }
                 this.setSelected(this.hovered, closeDropdown, event)
             }
         },
 
+        selectHeaderOrFoterByClick(event, origin) {
+            this.checkIfHeaderOrFooterSelected(event, {origin: origin})
+        },
+
         /**
          * Check if header or footer was selected.
          */
-        checkIfHeaderOrFooterSelected(event, triggeredByclick, closeDropdown = true) {
-            if (this.selectableHeader && (this.headerHovered || triggeredByclick)) {
+        checkIfHeaderOrFooterSelected(event, triggerClick, closeDropdown = true) {
+            if (this.selectableHeader && (this.headerHovered || (triggerClick && triggerClick.origin === 'header'))) {
                 this.$emit('select-header', event)
                 this.headerHovered = false
-                if (triggeredByclick) this.setHovered(null)
+                if (triggerClick) this.setHovered(null)
                 if (closeDropdown) this.isActive = false
             }
-            if (this.selectableFooter && (this.footerHovered || triggeredByclick)) {
+            if (this.selectableFooter && (this.footerHovered || (triggerClick && triggerClick.origin === 'footer'))) {
                 this.$emit('select-footer', event)
                 this.footerHovered = false
-                if (triggeredByclick) this.setHovered(null)
+                if (triggerClick) this.setHovered(null)
                 if (closeDropdown) this.isActive = false
             }
         },
