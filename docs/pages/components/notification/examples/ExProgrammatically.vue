@@ -33,19 +33,14 @@
             success() {
                 this.$buefy.notification.open({
                     message: 'Something happened correctly!',
-                    //
                     duration: 5000,
                     progressBar: true,
-                    //
                     type: 'is-success'
                 })
             },
             danger() {
                 const notif = this.$buefy.notification.open({
                     duration: 5000,
-                    //
-                    progressBar: true,
-                    //
                     message: `Something's not good, also I'm on <b>bottom</b>`,
                     position: 'is-bottom-right',
                     type: 'is-danger',
@@ -58,10 +53,6 @@
             pause() {
                 this.$buefy.notification.open({
                     message: `I can be paused if you hover over me`,
-                    //
-                    duration: 5000,
-                    progressBar: true,
-                    //
                     type: 'is-link',
                     pauseOnHover: true,
                 })
