@@ -48,4 +48,28 @@ describe('NoticeMixin', () => {
         wrapper.vm.close()
         expect(wrapper.vm.isActive).toBeFalsy()
     })
+
+    it('should not insert element when component is destroyed', () => {
+        jest.useFakeTimers()
+        HTMLElement.prototype.insertAdjacentElement = jest.fn()
+        let queueCounter = 0
+
+        const component = {
+            template: '<div class="b-component"></div>'
+        }
+        const wrapper = shallowMount(component, {
+            attachToDocument: true,
+            mixins: [NoticeMixin],
+            methods: {
+                shouldQueue() {
+                    if (queueCounter++ >= 5) wrapper.destroy()
+                    return true
+                }
+            }
+        })
+
+        jest.advanceTimersByTime(1500)
+
+        expect(HTMLElement.prototype.insertAdjacentElement).toHaveBeenCalledTimes(0)
+    })
 })
