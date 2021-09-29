@@ -79,6 +79,31 @@ export default [
                 default: '-'
             },
             {
+                name: "<code>icon</code>",
+                description: "Adds an icon to the left of the tag.",
+                type: "String",
+                values: "—",
+                default: "-",
+            },
+            {
+                name: "<code>icon-pack</code>",
+                description: "Icon pack to use",
+                type: "String",
+                values: "<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fab</code>,  <code>fad</code>, <code>fal</code>",
+                default: "<code>mdi</code>",
+            },
+            {
+                name: "<code>icon-type</code>",
+                description:
+                    "Type (color) of the icon on the left side of tag, optional",
+                type: "String",
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>,
+                    and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: "—",
+            },
+            {
                 name: '<code>close-icon</code>',
                 description: 'Replace times in close button with a customized icon. <code>closable</code> and <code>attached</code> props should be needed.',
                 type: 'String',
@@ -108,7 +133,12 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when close/delete button is clicked or <b>delete</b> key is pressed',
                 parameters: '—'
-            }
+            },
+            {
+                name: "<code>click</code>",
+                description: "Triggers when clicking the content of the tag",
+                parameters: "—",
+            },
         ]
     },
     {

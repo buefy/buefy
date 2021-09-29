@@ -35,7 +35,8 @@
                 v-if="autoClose && progressBar"
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
-                :type="type" />
+                :type="type"
+                :rounded="false"/>
         </article>
     </transition>
 </template>

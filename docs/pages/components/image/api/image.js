@@ -85,6 +85,13 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             },
+            {
+                name: '<code>custom-class</code>',
+                description: 'Add custom css class to the img tag.',
+                type: 'String',
+                values: '—',
+                default: '—'
+            }
         ],
         slots: [
             {
