@@ -125,6 +125,7 @@ export default {
         },
 
         showNotice() {
+            if (this._isDestroyed) return
             if (this.shouldQueue()) {
                 // Call recursively if should queue
                 setTimeout(() => this.showNotice(), 250)
