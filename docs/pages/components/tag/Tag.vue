@@ -1,6 +1,8 @@
 <template>
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
+        
+        <Example :component="ExIcon" :code="ExIconCode" vertical/>
 
         <p class="content">Closable tags have a button that can be focused, it emits a <code>close</code> event when clicked or when <b>delete</b> key is pressed.</p>
         <Example :component="ExClosable" :code="ExClosableCode" title="Closable" vertical/>
@@ -29,6 +31,9 @@
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
 
+    import ExIcon from './examples/ExIcon'
+    import ExIconCode from '!!raw-loader!./examples/ExIcon'
+
     import ExClosable from './examples/ExClosable'
     import ExClosableCode from '!!raw-loader!./examples/ExClosable'
 
@@ -49,12 +54,14 @@
             return {
                 api,
                 ExSimple,
+                ExIcon,
                 ExClosable,
                 ExTaglist,
                 ExTaglistAttached,
                 ExFieldCombine,
                 ExSizes,
                 ExSimpleCode,
+                ExIconCode,
                 ExClosableCode,
                 ExTaglistCode,
                 ExTaglistAttachedCode,
