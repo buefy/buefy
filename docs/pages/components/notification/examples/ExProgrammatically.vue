@@ -20,6 +20,11 @@
                 type="is-link"
                 size="is-medium"
                 @click="pause" />
+            <b-button
+                label="Launch notification (shows remaining time in progress)"
+                type="is-primary"
+                size="is-medium"
+                @click="progress" />
         </div>
     </section>
 </template>
@@ -53,6 +58,14 @@
                     message: `I can be paused if you hover over me`,
                     type: 'is-link',
                     pauseOnHover: true,
+                })
+            },
+            progress() {
+                this.$buefy.notification.open({
+                    message: `I can show you a little progress bar displaying the remaining time!`,
+                    duration: 5000,
+                    progressBar: true,
+                    type: 'is-primary',
                 })
             },
         }

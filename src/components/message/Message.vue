@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <article
-            v-if="isActive"
+            v-show="isActive"
             class="message"
             :class="[type, size]">
             <header v-if="$slots.header || title" class="message-header">
