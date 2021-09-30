@@ -88,6 +88,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
@@ -421,6 +422,10 @@ export default {
         }
     },
     mounted() {
+        console.log({
+            locale: this.locale,
+            localeOptions: this.localeOptions
+        })
         if (!this.isMobile || this.inline) {
             // $refs attached, it's time to refresh datepicker (input)
             if (this.newValue) {
