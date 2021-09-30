@@ -22,7 +22,7 @@
                 @click="pause" />
             <b-button
                 label="Launch notification (shows remaining time in progress)"
-                type="is-warning"
+                type="is-primary"
                 size="is-medium"
                 @click="progress" />
         </div>
@@ -65,7 +65,7 @@
                     message: `I can show you a little progress bar displaying the remaining time!`,
                     duration: 5000,
                     progressBar: true,
-                    type: 'is-warning',
+                    type: 'is-primary',
                 })
             },
         }
