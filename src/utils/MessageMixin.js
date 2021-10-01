@@ -113,7 +113,7 @@ export default {
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar (Remaining Time)
                  */
-                this.progress = setInterval(() => {
+                window.durationProgress = setInterval(() => {
                     if (this.remainingTime !== 0) {
                         this.remainingTime -= 1
                     } else {
@@ -128,7 +128,7 @@ export default {
              **/
             window.setTimeout(() => {
                 this.remainingTime = this.duration / 1000
-                clearInterval(this.progress)
+                clearInterval(window.durationProgress)
             }, 100)
         }
     },
