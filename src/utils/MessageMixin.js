@@ -1,4 +1,5 @@
 import Icon from '../components/icon/Icon'
+import { GlobalStore } from './GlobalStore.js'
 
 export default {
     components: {
@@ -113,7 +114,7 @@ export default {
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar (Remaining Time)
                  */
-                window.durationProgress = setInterval(() => {
+                GlobalStore.durationProgress = setInterval(() => {
                     if (this.remainingTime !== 0) {
                         this.remainingTime -= 1
                     } else {
@@ -126,9 +127,9 @@ export default {
             /**
              * Wait until the component get closed and then reset
              **/
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.remainingTime = this.duration / 1000
-                clearInterval(window.durationProgress)
+                clearInterval(GlobalStore.durationProgress)
             }, 100)
         }
     },
