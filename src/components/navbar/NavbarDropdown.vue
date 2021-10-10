@@ -17,7 +17,6 @@
             }"
             v-bind="$attrs"
             v-on="$listeners"
-            role="menuitem"
             aria-haspopup="true"
             @click.prevent="toggleMenu"
             @keyup.enter="toggleMenu"
