@@ -1,0 +1,105 @@
+.avatar {
+    .avatar-picture {
+        &.is-rounded {
+            border-radius: 50%;
+        }
+        &.is-16x16 {
+            width: 16px;
+            height: 16px;
+        }
+        &.is-24x24 {
+            width:24px;
+            height: 24px;
+        }
+        &.is-32x32 {
+            width: 32px;
+            height: 32px;
+        }
+        &.is-48x48 {
+            width: 48px;
+            height: 48px;
+        }
+        &.is-64x64 {
+            width: 64px;
+            height: 64px;
+        }
+        &.is-96x96 {
+            width: 96px;
+            height: 96px;
+        }
+        &.is-128x128 {
+            width: 128px;
+            height: 128px;
+        }
+    }
+    .avatar-text {
+        .label {
+            color: white;
+            text-align: center;
+            /* Center the text horizontally and vertically */
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            /* Disable selecting the text */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            &.text-size-16x16 {
+                font-size: 0.5rem;
+            }
+            &.text-size-24x24 {
+                font-size: 0.625rem;
+            }
+            &.text-size-32x32 {
+                font-size: 0.9375rem;
+            }
+            &.text-size-48x48 {
+                font-size: 1.20rem;
+            }
+            &.text-size-64x64 {
+                font-size: 1.525rem;
+            }
+            &.text-size-96x96 {
+                font-size: 2.1rem;
+            }
+            &.text-size-128x128 {
+                font-size: 2.8125rem;
+            }
+        }
+        &.is-rounded {
+            border-radius: 50%;
+        }
+        &.is-16x16 {
+            width: 16px;
+            height: 16px;
+        }
+        &.is-24x24 {
+            width: 24px;
+            height: 24px;
+        }
+        &.is-32x32 {
+            width: 32px;
+            height: 32px;
+        }
+        &.is-48x48 {
+            width: 48px;
+            height: 48px;
+        }
+        &.is-64x64 {
+            width: 64px;
+            height: 64px;
+        }
+        &.is-96x96 {
+            width: 96px;
+            height: 96px;
+        }
+        &.is-128x128 {
+            width: 128px;
+            height: 128px;
+        }
+    }
+
+}

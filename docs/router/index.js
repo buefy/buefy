@@ -63,6 +63,7 @@ const router = new Router({
                 route('documentation/upload', 'components/upload/Upload'),
                 route('documentation/table', 'components/table/Table'),
                 route('documentation/pagination', 'components/pagination/Pagination'),
+                route('documentation/avatar', 'components/avatar/Avatar'),
                 route('documentation/breadcrumb', 'components/breadcrumb/Breadcrumb'),
                 route('documentation/button', 'components/button/Button'),
                 route('documentation/numberinput', 'components/numberinput/Numberinput'),
