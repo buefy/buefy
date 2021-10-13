@@ -1,4 +1,5 @@
 import Autocomplete from './autocomplete'
+import Backtotop from './Backtotop'
 import Breadcrumb from './breadcrumb'
 import Button from './button'
 import Carousel from './carousel'
@@ -42,6 +43,7 @@ import Upload from './upload'
 
 export {
     Autocomplete,
+    Backtotop,
     Breadcrumb,
     Button,
     Carousel,

@@ -1,0 +1,38 @@
+.backtotop {
+	transition: all .2s ease-out;
+
+	&.is-top-right {
+		position: absolute;
+		z-index: 999;
+		top: 10px;
+		right:10px;
+		position: fixed;
+	}
+	&.is-top-left {
+		position: absolute;
+		z-index: 999;
+		top: 10px;
+		left:10px;
+		position: fixed;
+	}
+	&.is-bottom-right {
+		position: absolute;
+		z-index: 999;
+		bottom: 10px;
+		right:10px;
+		position: fixed;
+	}
+	&.is-bottom-left {
+		position: absolute;
+		z-index: 999;
+		bottom: 10px;
+		left:10px;
+		position: fixed;
+	}
+	&.is-visible {
+		display: block;
+	}
+	&.is-hidden {
+		display: none;
+	}
+}

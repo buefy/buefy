@@ -1,5 +1,12 @@
 <template>
     <header class="docs-header">
+        <!--  -->
+        <b-backtotop
+            type="is-success"
+            size="is-medium"
+            :duration="1000"
+            :rounded="false"/>
+        <!--  -->
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
                 <template v-for="(item, index) in breadcrumb">
