@@ -425,6 +425,18 @@
             "documentation/pagination"
         ]
     },
+    "documentation/backtotop": {
+        "title": "Backtotop",
+        "subtitle": "backtotop component for going back to top easily!",
+        "path": "/documentation/backtotop",
+        "githubPath": "pages/components/backtotop/Backtotop.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/backtotop"
+        ]
+    },
     "documentation/breadcrumb": {
         "title": "Breadcrumb",
         "subtitle": "Breadcrumb component for flexible navigation through the pages of your website!",

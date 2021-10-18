@@ -1,12 +1,13 @@
 <template>
-    <div class="backtotop is-bottom-right is-visible">
+    <div
+        class="backtotop"
+        :class="[wrapperClasses, { 'is-visible' : isVisible, 'is-hidden' : !isVisible }]"
+    >
         <b-button
             @click="backToTop"
             v-bind="$attrs"
+            icon-left="arrow-up"
         >
-            <b-icon
-                pack="ionicons"
-                icon="arrow-round-up" />
             <slot />
         </b-button>
     </div>
@@ -20,14 +21,7 @@ export default {
     inheritAttrs: false,
 
     props: {
-        position: {
-            type: String,
-            default: ''
-        },
-        fixed: {
-            type: Boolean,
-            default: false
-        },
+        position: String,
         duration: {
             type: Number,
             default: 1000
@@ -36,46 +30,32 @@ export default {
 
     data() {
         return {
-
+            isVisible: !this.position
         }
     },
+
+    computed: {
+        wrapperClasses() {
+            return [
+                this.position
+            ]
+        }
+    },
+
     methods: {
-        backToTop: () => {
-            // // cancel if already on top
-            // if (document.scrollingElement.scrollTop === 0) {
-            //     return
-            // }
-
-            // const totalScrollDistance = document.scrollingElement.scrollTop
-            // let scrollY = totalScrollDistance = null
-            // let oldTimestamp = null
-
-            // function step(newTimestamp) {
-            //     if (oldTimestamp !== null) {
-            //         // if duration is 0 scrollY will be -Infinity
-            //         scrollY -= totalScrollDistance * (newTimestamp - oldTimestamp) / 1000
-            //         if (scrollY <= 0) {
-            //             return document.scrollingElement.scrollTop = 0
-            //         }
-            //         document.scrollingElement.scrollTop = scrollY
-            //      }
-            //     oldTimestamp = newTimestamp
-            //     window.requestAnimationFrame(step)
-            // }
-            // window.requestAnimationFrame(step)
-            // cancel if already on top
+        backToTop() {
             if (document.scrollingElement.scrollTop === 0) {
                 return
             }
-
             const cosParameter = document.scrollingElement.scrollTop / 2
             let scrollCount = 0
             let oldTimestamp = null
+            let duration = this.duration
 
             function step(newTimestamp) {
                 if (oldTimestamp !== null) {
                     // if duration is 0 scrollCount will be Infinity
-                    scrollCount += Math.PI * (newTimestamp - oldTimestamp) / 1000
+                    scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration
                     if (scrollCount >= Math.PI) {
                         const d = document.scrollingElement.scrollTop = 0
                         return d
@@ -90,7 +70,22 @@ export default {
         }
     },
     mounted() {
+        /**
+         *
+         * Show the element when scolls to 500 when user set fixed position:
+         * is-bottom-left; is-bottom-right; is-top-left; is-top-right
+         *
+         **/
         window.addEventListener('scroll', () => {
+            if (this.position) {
+                if (window.window.scrollY <= 500) {
+                    // hide
+                    this.isVisible = false
+                } else if (window.window.scrollY >= 500) {
+                    // show
+                    this.isVisible = true
+                }
+            }
         })
     }
 }
