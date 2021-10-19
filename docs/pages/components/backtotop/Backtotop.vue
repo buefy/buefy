@@ -6,7 +6,7 @@
 
         <Example :component="ExTypes" :code="ExTypesCode" title="Sizes"/>
 
-        <Example :component="ExFixedPosition" :code="ExFixedPositionCode" title="Fixed Positions(Appears when scolls down)"/>
+        <Example :component="ExFixedPosition" :code="ExFixedPositionCode" title="Fixed Positions (Appears when scolls down)"/>
 
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>

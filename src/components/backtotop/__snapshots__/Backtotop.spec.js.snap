@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BBacktotop render correctly 1`] = `
+<div class="backtotop is-bottom-right is-hidden">
+    <b-button icon-left="arrow-up" label="Back To Top" type="is-primary" inverted="true"></b-button>
+</div>
+`;

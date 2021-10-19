@@ -1,5 +1,5 @@
 .backtotop {
-	transition: width 2s linear 1s;
+	transition: all 1s linear 1s!important;
 
 	&.is-top-right {
 		position: absolute;
@@ -31,10 +31,8 @@
 	}
 	&.is-visible {
 		display: block;
-		transition: width 2s linear 1s;
 	}
 	&.is-hidden {
 		display: none;
-		transition: width 2s linear 1s;
 	}
 }
