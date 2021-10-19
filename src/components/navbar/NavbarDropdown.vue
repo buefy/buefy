@@ -17,9 +17,11 @@
             }"
             v-bind="$attrs"
             v-on="$listeners"
-            role="menuitem"
             aria-haspopup="true"
-            @click.prevent="newActive = !newActive">
+            @click.prevent="toggleMenu"
+            @keyup.enter="toggleMenu"
+            tabindex="0"
+        >
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
         </component>
@@ -75,6 +77,9 @@ export default {
         }
     },
     methods: {
+        toggleMenu() {
+            this.newActive = !this.newActive
+        },
         showMenu() {
             this.newActive = true
         },

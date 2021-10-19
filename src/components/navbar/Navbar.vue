@@ -176,7 +176,11 @@ export default {
                         isOpened: this.isOpened
                     },
                     on: {
-                        click: this.toggleActive
+                        click: this.toggleActive,
+                        keyup: (event) => {
+                            if (event.keyCode !== 13) return
+                            this.toggleActive()
+                        }
                     }
                 })
 
