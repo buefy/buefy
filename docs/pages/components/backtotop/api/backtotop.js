@@ -6,7 +6,7 @@ export default [
                 name: '<code>position</code>',
                 description: 'Fixed Position.',
                 type: 'String',
-                values: '<code>is-top-left</code>, <code>is-top-right</code>, <code>is-bottom-left</code>',
+                values: '<code>is-top-left</code>, <code>is-top-right</code>, <code>is-bottom-left</code>, <code>is-bottom-right</code>',
                 default: '_'
             },
             {
