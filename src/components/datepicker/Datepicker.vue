@@ -737,11 +737,12 @@ export default {
         },
         updateInternalState(value) {
             if (this.dateSelected === value) return
-            const currentDate = Array.isArray(value)
+            const isArray = Array.isArray(value)
+            const currentDate = isArray
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            if (Array.isArray(value) &&
-                this.dateSelected && value.length > this.dateSelected.length) {
+            if (!isArray ||
+                (isArray && this.dateSelected && value.length > this.dateSelected.length)) {
                 this.focusedDateData = {
                     day: currentDate.getDate(),
                     month: currentDate.getMonth(),
