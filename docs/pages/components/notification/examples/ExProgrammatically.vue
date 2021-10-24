@@ -66,6 +66,7 @@
                     duration: 5000,
                     progressBar: true,
                     type: 'is-primary',
+                    pauseOnHover: true
                 })
             },
         }

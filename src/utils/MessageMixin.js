@@ -113,7 +113,7 @@ export default {
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar (Remaining Time)
                  */
-                this.progress = setInterval(() => {
+                this.$buefy.globalNoticeInterval = setInterval(() => {
                     if (this.remainingTime !== 0) {
                         this.remainingTime -= 1
                     } else {
@@ -126,9 +126,9 @@ export default {
             /**
              * Wait until the component get closed and then reset
              **/
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.remainingTime = this.duration / 1000
-                clearInterval(this.progress)
+                clearInterval(this.$buefy.globalNoticeInterval)
             }, 100)
         }
     },

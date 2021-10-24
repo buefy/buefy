@@ -83,6 +83,7 @@ export default {
         pause() {
             if (this.pauseOnHover && !this.indefinite) {
                 this.isPaused = true
+                clearInterval(this.$buefy.globalNoticeInterval)
             }
         },
         removePause() {
