@@ -1,5 +1,4 @@
 import Icon from '../components/icon/Icon'
-import { GlobalStore } from './GlobalStore.js'
 
 export default {
     components: {
@@ -114,7 +113,7 @@ export default {
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar (Remaining Time)
                  */
-                GlobalStore.durationProgress = setInterval(() => {
+                this.$buefy.globalNoticeInterval = setInterval(() => {
                     if (this.remainingTime !== 0) {
                         this.remainingTime -= 1
                     } else {
@@ -129,7 +128,7 @@ export default {
              **/
             setTimeout(() => {
                 this.remainingTime = this.duration / 1000
-                clearInterval(GlobalStore.durationProgress)
+                clearInterval(this.$buefy.globalNoticeInterval)
             }, 100)
         }
     },

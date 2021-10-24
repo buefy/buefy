@@ -1,6 +1,5 @@
 import config from './config'
 import { removeElement } from './helpers'
-import { GlobalStore } from './GlobalStore.js'
 
 export default {
     props: {
@@ -84,7 +83,7 @@ export default {
         pause() {
             if (this.pauseOnHover && !this.indefinite) {
                 this.isPaused = true
-                clearInterval(GlobalStore.durationProgress)
+                clearInterval(this.$buefy.globalNoticeInterval)
             }
         },
         removePause() {
