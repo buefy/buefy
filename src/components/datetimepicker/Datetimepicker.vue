@@ -217,7 +217,8 @@ export default {
                 hour: this.localeOptions.hour || 'numeric',
                 minute: this.localeOptions.minute || 'numeric',
                 second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
-                hour12: !this.isHourFormat24()
+                // Fixes 12 hour display github.com/buefy/buefy/issues/3418
+                hourCycle: !this.isHourFormat24 ? 'h12' : 'h23'
             })
         },
         isMobileNative() {
