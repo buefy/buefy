@@ -1,5 +1,28 @@
 # Buefy Changelog
 
+## 0.9.11
+
+### Fixes
+
+* Fix stay open on mouse click when autocomplete is keep-open
+* Fix emitting autocomplete header and footer events (thanks @geeksilva97)
+* Fix loading when using fixed navbar (thanks @geeksilva97)
+* Fix datetimepicker when use granularity (thanks @geeksilva97)
+* Fix numberinput increment bug (thanks @geeksilva97)
+* Fix #3475 attributes duplication on navbar (thanks @GMartigny)
+* Fix #3490 duplicate tags on select with enter and allow-new
+* Fix #3543 focused date when is range
+* Fix #3277 avoid to emit event when ``clear-on-select``
+* Fix #3418 timepicker hour 12 displayed as 0 (thanks @cain)
+
+### New features
+
+* **New component: Breadcrumb**, [see docs](https://buefy.org/documentation/breadcrumb) (thanks @mouadTaoussi)
+* Add progress bar (remaining time to close) to notification (thanks @mouadTaoussi)
+* Add ``selectable-header`` and ``selectable-footer`` props to autocomplete (thanks @JDurman)
+* Add ``close-button-aria-label`` prop to modal (thanks @tcitworld)
+* Add navbar burger and dropdowns to be focusable and keyboard selectable (thanks @tcitworld)
+
 ## 0.9.10
 
 ### Fixes
