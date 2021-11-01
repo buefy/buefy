@@ -56,16 +56,14 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button
+                    <b-button
                         v-if="showCancel"
-                        class="button"
                         ref="cancelButton"
-                        @click="cancel('button')">{{ cancelText }}</button>
-                    <button
-                        class="button"
-                        :class="type"
+                        @click="cancel('button')">{{ cancelText }}</b-button>
+                    <b-button
+                        :type="type"
                         ref="confirmButton"
-                        @click="confirm">{{ confirmText }}</button>
+                        @click="confirm">{{ confirmText }}</b-button>
                 </footer>
             </div>
         </div>
@@ -246,9 +244,9 @@ export default {
             if (this.hasInput) {
                 this.$refs.input.focus()
             } else if (this.focusOn === 'cancel' && this.showCancel) {
-                this.$refs.cancelButton.focus()
+                this.$refs.cancelButton.$el.focus()
             } else {
-                this.$refs.confirmButton.focus()
+                this.$refs.confirmButton.$el.focus()
             }
         })
     }
