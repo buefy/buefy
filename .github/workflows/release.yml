@@ -1,0 +1,31 @@
+name: Create and Publish Release
+on:
+  push:
+    tags: ['v*']
+jobs:
+  build:
+    name: Create Github Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Github Release
+        run: |
+          # remove 'v' from version string
+          VERSION="$(echo ${{ github.ref }} | awk '{print substr($0,2)}')"
+          # get changes for the new version via HEADER 2 markdown entries in changelog
+          CHANGES="$(awk -v v="$VERSION" '/^(#{2}\s)(.*)/{if(p){exit};if($2==v){p=1;next}}p&&NF' CHANGELOG.md)"
+          # create github release via gh cli
+          gh release create ${{ github.ref }} --notes "$CHANGES"
+      - name: Publish to npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          npm ci
+          npm run build:lib
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

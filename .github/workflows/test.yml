@@ -1,0 +1,42 @@
+name: Test
+on:
+  push:
+    branches:
+      - dev
+      - master
+      - next
+  pull_request:
+    branches:
+      - dev
+      - master
+      - next
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14, 16]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: run codecov
+        run: ./node_modules/.bin/codecov
+
+      - name: run unit tests
+        run: npm run unit
