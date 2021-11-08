@@ -175,7 +175,9 @@ export default {
                     this.$emit('input', Number(newValue))
                 }
                 this.$nextTick(() => {
-                    this.$refs.input.checkHtml5Validity()
+                    if (this.$refs.input) {
+                        this.$refs.input.checkHtml5Validity()
+                    }
                 })
             }
         },
