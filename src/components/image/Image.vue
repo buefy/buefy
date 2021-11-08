@@ -136,11 +136,12 @@ export default {
             }
         },
         imgClasses() {
-            return {
-                'is-rounded': this.rounded,
-                'has-ratio': this.hasRatio,
-                [this.customClass]: this.customClass
-            }
+            return [
+                this.customClass, {
+                    'is-rounded': this.rounded,
+                    'has-ratio': this.hasRatio
+                }
+            ]
         },
         srcExt() {
             return this.getExt(this.src)
