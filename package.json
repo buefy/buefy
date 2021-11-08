@@ -38,7 +38,7 @@
     "lint": "eslint --ext .js,.vue src docs",
     "lint:fix": "eslint --ext .js,.vue src docs --fix",
     "lint:staged": "lint-staged",
-    "unit": "jest --runInBand",
+    "unit": "jest --runInBand --u",
     "test": "npm run lint && npm run unit",
     "test:watch": "npm run unit -- --watchAll",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
