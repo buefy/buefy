@@ -32,8 +32,6 @@
         <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
-                :type="newType"
-                :message="newMessage"
                 :class="innerFieldClasses">
                 <slot/>
             </b-field>
@@ -230,7 +228,9 @@ export default {
                 if (!this.parent.type) {
                     this.parent.newType = this.newType
                 }
-                this.parent.newMessage = value
+                if (!this.parent.message) {
+                    this.parent.newMessage = value
+                }
             }
         }
     },
