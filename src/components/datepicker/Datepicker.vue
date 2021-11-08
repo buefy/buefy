@@ -492,13 +492,12 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale)
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
-                month: this.localeOptions.month || '2-digit',
-                timeZone: 'UTC'
+                month: this.localeOptions.month || '2-digit'
             })
         },
         newMonthNames() {

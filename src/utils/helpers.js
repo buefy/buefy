@@ -216,8 +216,7 @@ export function getMonthNames(locale = undefined, format = 'long') {
         dates.push(new Date(2000, i, 15))
     }
     const dtf = new Intl.DateTimeFormat(locale, {
-        month: format,
-        timeZone: 'UTC'
+        month: format
     })
     return dates.map((d) => dtf.format(d))
 }
