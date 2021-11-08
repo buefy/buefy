@@ -1,35 +1,15 @@
 <template>
     <section>
-        <b-field label="Name">
-            <b-input v-model="name"></b-input>
-        </b-field>
-
-        <b-field label="Email"
-            type="is-danger"
-            message="This email is invalid">
-            <b-input type="email"
-                value="john@"
-                maxlength="30">
-            </b-input>
-        </b-field>
-
-        <b-field label="Username"
-            type="is-success"
-            message="This username is available">
-            <b-input value="johnsilver" maxlength="30"></b-input>
-        </b-field>
-
-        <b-field label="Password">
-            <b-input type="password"
-                value="iwantmytreasure"
-                password-reveal>
-            </b-input>
-        </b-field>
-
-        <b-field label="Message">
-            <b-input maxlength="200" type="textarea"></b-input>
-        </b-field>
-    </section>
+    <b-field horizontal custom-class="username-field" expanded label="Username" label-for="identity-username">
+      <b-field expanded>
+        <b-input required aria-required="true" v-model="name" dir="auto" pattern="[a-z0-9_]+" id="identity-username">
+        </b-input>
+        <p class="control">
+          <span class="button is-static">@somewhere</span>
+        </p>
+      </b-field>
+    </b-field>
+  </section>
 </template>
 
 <script>

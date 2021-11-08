@@ -6,16 +6,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide is-active" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/0/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -24,16 +24,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/1/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -42,16 +42,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/2/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -60,16 +60,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/3/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -78,16 +78,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/4/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -96,16 +96,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/5/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -114,16 +114,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/6/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
@@ -132,16 +132,16 @@ exports[`BCarouselList render correctly 1`] = `
         <div class="carousel-slide" style="width: 0px;">
             <b-image-stub src="https://picsum.photos/id/7/1230/500" lazy="true" responsive="true" srcsetformatter="function _default(src, size, vm) {
                     /* istanbul ignore next */cov_13zmb589fa.f[6]++;
-                    cov_13zmb589fa.s[11]++;
+                    cov_13zmb589fa.s[13]++;
 
                     if (typeof _config2.default.defaultImageSrcsetFormatter === 'function') {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][0]++;
-                        cov_13zmb589fa.s[12]++;
+                        cov_13zmb589fa.s[14]++;
 
                         return _config2.default.defaultImageSrcsetFormatter(src, size);
                     } else {
                         /* istanbul ignore next */cov_13zmb589fa.b[2][1]++;
-                        cov_13zmb589fa.s[13]++;
+                        cov_13zmb589fa.s[15]++;
 
                         return vm.formatSrcset(src, size);
                     }
