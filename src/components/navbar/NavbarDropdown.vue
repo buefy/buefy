@@ -74,6 +74,10 @@ export default {
     watch: {
         active(value) {
             this.newActive = value
+        },
+
+        newActive(value) {
+            this.$emit('active-change', value)
         }
     },
     methods: {
