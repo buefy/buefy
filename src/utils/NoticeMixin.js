@@ -9,6 +9,7 @@ export default {
         },
         message: [String, Array],
         duration: Number,
+        // TODO: updare prop to replace
         queue: {
             type: Boolean,
             default: undefined
@@ -92,7 +93,9 @@ export default {
                 this.close()
             }
         },
+        // TODO: change this method name (it might be something like shouldReplace)
         shouldQueue() {
+            console.log('shouldQueue', this.queue)
             const queue = this.queue !== undefined
                 ? this.queue
                 : config.defaultNoticeQueue
@@ -126,11 +129,7 @@ export default {
         },
 
         showNotice() {
-            if (this.shouldQueue()) {
-                // Call recursively if should queue
-                setTimeout(() => this.showNotice(), 250)
-                return
-            }
+            if (this.shouldQueue()) this.correctParent.innerHTML = ''
             this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
 

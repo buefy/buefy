@@ -28,6 +28,7 @@ const ToastProgrammatic = {
             delete params.message
         }
         const propsData = merge(defaultParam, params)
+        propsData.queue = false
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const ToastComponent = vm.extend(Toast)
         const component = new ToastComponent({
