@@ -304,6 +304,11 @@ declare type BModalConfig = {
     ariaModal?: boolean;
 
     /**
+     * Aria label attribute to be passed to the close button for better accessibility.
+     */
+    closeButtonAriaLabel?: string;
+
+    /**
      * CSS classes to be applied on modal
     */
     customClass?: string;
