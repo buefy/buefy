@@ -9,8 +9,7 @@ export default {
         },
         message: [String, Array],
         duration: Number,
-        // TODO: updare prop to replace
-        queue: {
+        replace: {
             type: Boolean,
             default: undefined
         },
@@ -93,14 +92,12 @@ export default {
                 this.close()
             }
         },
-        // TODO: change this method name (it might be something like shouldReplace)
-        shouldQueue() {
-            console.log('shouldQueue', this.queue)
-            const queue = this.queue !== undefined
-                ? this.queue
-                : config.defaultNoticeQueue
+        shouldReplace() {
+            const replace = this.replace !== undefined
+                ? this.replace
+                : config.defaultNoticeReplace
 
-            if (!queue) return false
+            if (!replace) return false
 
             return (
                 this.parentTop.childElementCount > 0 ||
@@ -129,7 +126,7 @@ export default {
         },
 
         showNotice() {
-            if (this.shouldQueue()) this.correctParent.innerHTML = ''
+            if (this.shouldReplace()) this.correctParent.innerHTML = ''
             this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
 
