@@ -126,11 +126,7 @@ export default {
         },
 
         showNotice() {
-            if (this.shouldQueue()) {
-                // Call recursively if should queue
-                setTimeout(() => this.showNotice(), 250)
-                return
-            }
+            if (this.shouldQueue()) this.correctParent.innerHTML = ''
             this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
 
