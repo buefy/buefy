@@ -11,8 +11,7 @@ const ToastProgrammatic = {
         let parent
         if (typeof params === 'string') {
             params = {
-                message: params,
-                replace: false
+                message: params
             }
         }
 
