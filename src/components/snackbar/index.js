@@ -17,7 +17,8 @@ const SnackbarProgrammatic = {
 
         const defaultParam = {
             type: 'is-success',
-            position: config.defaultSnackbarPosition || 'is-bottom-right'
+            position: config.defaultSnackbarPosition || 'is-bottom-right',
+            queue: true
         }
         if (params.parent) {
             parent = params.parent
@@ -29,7 +30,6 @@ const SnackbarProgrammatic = {
             delete params.message
         }
         const propsData = merge(defaultParam, params)
-        propsData.queue = true
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const SnackbarComponent = vm.extend(Snackbar)
         const component = new SnackbarComponent({
