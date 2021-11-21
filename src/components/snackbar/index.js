@@ -29,7 +29,7 @@ const SnackbarProgrammatic = {
             delete params.message
         }
         const propsData = merge(defaultParam, params)
-        propsData.replace = true
+        propsData.queue = true
         const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
         const SnackbarComponent = vm.extend(Snackbar)
         const component = new SnackbarComponent({

@@ -9,7 +9,7 @@ export default {
         },
         message: [String, Array],
         duration: Number,
-        replace: {
+        queue: {
             type: Boolean,
             default: undefined
         },
@@ -92,12 +92,12 @@ export default {
                 this.close()
             }
         },
-        shouldReplace() {
-            const replace = this.replace !== undefined
-                ? this.replace
-                : config.defaultNoticeReplace
+        shouldQueue() {
+            const queue = this.queue !== undefined
+                ? this.queue
+                : config.defaultNoticeQueue
 
-            if (!replace) return false
+            if (!queue) return false
 
             return (
                 this.parentTop.childElementCount > 0 ||
@@ -126,7 +126,7 @@ export default {
         },
 
         showNotice() {
-            if (this.shouldReplace()) this.correctParent.innerHTML = ''
+            if (this.shouldQueue()) this.correctParent.innerHTML = ''
             this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
 
