@@ -1157,11 +1157,7 @@ export default {
 
         isRowFiltered(row) {
             for (const key in this.filters) {
-                // remove key if empty
-                if (!this.filters[key]) {
-                    delete this.filters[key]
-                    return true
-                }
+                if (!this.filters[key]) continue
                 const input = this.filters[key]
                 const column = this.newColumns.filter((c) => c.field === key)[0]
                 if (column && column.customSearch && typeof column.customSearch === 'function') {
