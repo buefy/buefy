@@ -372,7 +372,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -1169,7 +1169,8 @@ export default {
                         if (value !== Number(input)) return false
                     } else {
                         const re = new RegExp(escapeRegExpChars(input), 'i')
-                        if (!re.test(value)) return false
+                        const valueWithoutDiacritics = removeDiacriticsFromString(value)
+                        return re.test(valueWithoutDiacritics) || re.test(value)
                     }
                 }
             }
