@@ -174,6 +174,15 @@ export function escapeRegExpChars(value) {
     // eslint-disable-next-line
     return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }
+/**
+ * Remove accents/diacritics in a string in JavaScript
+ * https://stackoverflow.com/a/37511463
+ */
+export function removeDiacriticsFromString(value) {
+    if (!value) return value
+
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
 
 export function multiColumnSort(inputArray, sortingPriority) {
     // clone it to prevent the any watchers from triggering every sorting iteration
