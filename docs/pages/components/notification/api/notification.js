@@ -2,6 +2,13 @@ export default [
     {
         props: [
             {
+                name: '<code>v-model</code>',
+                description: 'Active state - set on `true` to reopen after close',
+                type: 'Boolean',
+                values: '—',
+                default: 'true'
+            },
+            {
                 name: '<code>type</code>',
                 description: 'Type (color) of the notification, optional',
                 type: 'String',
