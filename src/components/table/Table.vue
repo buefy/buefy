@@ -1170,7 +1170,7 @@ export default {
                     } else {
                         const re = new RegExp(escapeRegExpChars(input), 'i')
                         const valueWithoutDiacritics = removeDiacriticsFromString(value)
-                        if (!re.test(valueWithoutDiacritics) && !re.test(value)) return false
+                        return re.test(valueWithoutDiacritics) || re.test(value)
                     }
                 }
             }
