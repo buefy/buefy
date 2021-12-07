@@ -150,6 +150,32 @@ describe('BDatepickerTableRow', () => {
         expect(wrapper.emitted()['select']).toBeTruthy()
     })
 
+    it('emit clicked week and year', async () => {
+        const wrapper = shallowMount(BDatepickerTableRow, {
+            propsData: {
+                ...Object.assign(propsData, {
+                    showWeekNumber: true,
+                    rulesForFirstWeek: 1,
+                    weekNumberClickable: true
+                })
+            },
+            provide: {
+                $datepicker: {
+                    $emit(event) {
+                        wrapper.vm.$emit(event, arguments[1], arguments[2])
+                    }
+                }
+            }
+        })
+        const weekDate = propsData.week[6]
+        const $weekButton = wrapper.find('.is-week-number')
+        $weekButton.trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted()['week-number-click']).toBeTruthy()
+        expect(wrapper.emitted()['week-number-click'][0].sort()).toEqual([weekDate.getDate(), weekDate.getFullYear()].sort())
+    })
+
     it('emit focused date', async () => {
         const [y, m, d] = [2019, 4, 4]
         let day = newDate(y, m, d)
