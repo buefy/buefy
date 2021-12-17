@@ -298,3 +298,10 @@ export function isCustomElement(vm) {
 }
 
 export const isDefined = (d) => d !== undefined
+
+/**
+ * Checks if a value is null or undefined.
+ * Based on
+ * https://github.com/lodash/lodash/blob/master/isNil.js
+ */
+export const isNil = (value) => value !== null || value !== undefined
