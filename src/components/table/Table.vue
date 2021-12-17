@@ -372,7 +372,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -908,8 +908,10 @@ export default {
                         return isAsc ? newA - newB : newB - newA
                     }
 
-                    if (!newA && newA !== 0) return 1
-                    if (!newB && newB !== 0) return -1
+                    // sort null values to the bottom when in asc order
+                    // and to the top when in desc order
+                    if (!isNil(newB) && isNil(newA)) return isAsc ? 1 : -1
+                    if (!isNil(newA) && isNil(newB)) return isAsc ? -1 : 1
                     if (newA === newB) return 0
 
                     newA = (typeof newA === 'string')
