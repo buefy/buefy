@@ -359,6 +359,16 @@ export default {
                         this.setHovered(null)
                     }
                 })
+            } else {
+                if (this.hovered) {
+                    // reset hovered if list doesn't contain it
+                    const hoveredValue = this.getValue(this.hovered)
+                    const data = this.computedData.map((d) => d.items)
+                        .reduce((a, b) => ([...a, ...b]), [])
+                    if (!data.some((d) => this.getValue(d) === hoveredValue)) {
+                        this.setHovered(null)
+                    }
+                }
             }
         }
     },
