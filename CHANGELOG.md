@@ -1,6 +1,45 @@
 # Buefy Changelog
 
+## 0.9.14
+
+### New features
+
+* Add normalize string for search in tables (thanks @matheushahnn)
+* Add year to ``week-number-click`` event (thanks @geeksilva97)
+* Add ``start`` and ``end`` slot to tabs
+* Add ``active-change`` event to navbar dropdown (thanks @arusahni)
+
+### Fixes
+
+* Fix table sort when null values (thanks @Ryan-Case-SingleStone)
+* Fix queue notification (thanks @geeksilva97)
+* Fix upload validation (thanks @l1bra2013)
+* Fix #3599 table using multiple column filters
+* Fix #3624 reset hovered autocomplete
+
+## 0.9.13
+
+## Fixes
+
+* Fix reset type and message when inner field
+
+## 0.9.12
+
+## Fixes
+
+* Fix #3571 `custom-class` prop to image
+* Fix #3572 datepicker timezone
+* Fix #3577 field loop using message
+
 ## 0.9.11
+
+### New features
+
+* **New component: Breadcrumb**, [see docs](https://buefy.org/documentation/breadcrumb) (thanks @mouadTaoussi)
+* Add progress bar (remaining time to close) to notification (thanks @mouadTaoussi)
+* Add ``selectable-header`` and ``selectable-footer`` props to autocomplete (thanks @JDurman)
+* Add ``close-button-aria-label`` prop to modal (thanks @tcitworld)
+* Add navbar burger and dropdowns to be focusable and keyboard selectable (thanks @tcitworld)
 
 ### Fixes
 
@@ -14,14 +53,6 @@
 * Fix #3543 focused date when is range
 * Fix #3277 avoid to emit event when ``clear-on-select``
 * Fix #3418 timepicker hour 12 displayed as 0 (thanks @cain)
-
-### New features
-
-* **New component: Breadcrumb**, [see docs](https://buefy.org/documentation/breadcrumb) (thanks @mouadTaoussi)
-* Add progress bar (remaining time to close) to notification (thanks @mouadTaoussi)
-* Add ``selectable-header`` and ``selectable-footer`` props to autocomplete (thanks @JDurman)
-* Add ``close-button-aria-label`` prop to modal (thanks @tcitworld)
-* Add navbar burger and dropdowns to be focusable and keyboard selectable (thanks @tcitworld)
 
 ## 0.9.10
 
