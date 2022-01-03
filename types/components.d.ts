@@ -1,5 +1,5 @@
 import _Vue from "vue";
-import {ColorModifiers, GlobalPositions, SizesModifiers} from "./helpers";
+import {ColorModifiers, DaysOfWeek, GlobalPositions, SizesModifiers} from "./helpers";
 
 // Component base definition
 export class BComponent extends _Vue {
@@ -32,7 +32,7 @@ export declare type BuefyConfig = {
     defaultDateCreator?: Function;
     defaultDayNames?: string[];
     defaultMonthNames?: string[];
-    defaultFirstDayOfWeek?: number;
+    defaultFirstDayOfWeek?: DaysOfWeek;
     defaultUnselectableDaysOfWeek?: number[];
     defaultTimeFormatter?: Function;
     defaultTimeParser?: Function;
