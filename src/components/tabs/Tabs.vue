@@ -7,6 +7,7 @@
             :aria-orientation="vertical ? 'vertical' : 'horizontal'"
             @keydown="manageTablistKeydown"
         >
+            <slot name="start" />
             <ul>
                 <li
                     v-for="(childItem, childIdx) in items"
@@ -52,6 +53,7 @@
                     </a>
                 </li>
             </ul>
+            <slot name="end" />
         </nav>
         <section class="tab-content" :class="{'is-transitioning': isTransitioning}">
             <slot/>
