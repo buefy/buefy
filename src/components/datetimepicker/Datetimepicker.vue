@@ -12,6 +12,8 @@
         :editable="editable"
         :expanded="expanded"
         :close-on-click="false"
+        :first-day-of-week="firstDayOfWeek"
+        :rules-for-first-week="rulesForFirstWeek"
         :date-formatter="defaultDatetimeFormatter"
         :date-parser="defaultDatetimeParser"
         :min-date="minDate"
@@ -116,6 +118,20 @@ export default {
         placeholder: String,
         horizontalTimePicker: Boolean,
         disabled: Boolean,
+        firstDayOfWeek: {
+            type: Number,
+            default: () => {
+                if (typeof config.defaultFirstDayOfWeek === 'number') {
+                    return config.defaultFirstDayOfWeek
+                } else {
+                    return 0
+                }
+            }
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        },
         icon: String,
         iconRight: String,
         iconRightClickable: Boolean,
