@@ -304,4 +304,4 @@ export const isDefined = (d) => d !== undefined
  * Based on
  * https://github.com/lodash/lodash/blob/master/isNil.js
  */
-export const isNil = (value) => value !== null || value !== undefined
+export const isNil = (value) => value === null || value === undefined
