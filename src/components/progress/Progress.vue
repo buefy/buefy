@@ -90,7 +90,7 @@ export default {
         wrapperClasses() {
             return {
                 'is-not-native': !this.isNative,
-                [this.size]: !this.isNative
+                [this.size]: typeof this.size === 'string' && !this.isNative
             }
         }
     },

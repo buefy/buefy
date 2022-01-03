@@ -5,7 +5,7 @@
         <Example :component="ExTypes" :code="ExTypesCode" title="Types" vertical/>
 
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
-        
+
         <Example :component="ExNotRounded" :code="ExNotRoundedCode" title="Not rounded" vertical/>
 
         <Example :component="ExValues" :code="ExValuesCode" title="Values" vertical/>
