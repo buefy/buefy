@@ -31,7 +31,7 @@ let config = {
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
-    defaultNoticeQueue: false,
+    defaultNoticeQueue: true,
     defaultInputHasCounter: true,
     defaultTaginputHasCounter: true,
     defaultUseHtml5Validation: true,
