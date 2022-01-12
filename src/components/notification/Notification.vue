@@ -18,8 +18,8 @@
                     <b-icon
                         :icon="computedIcon"
                         :pack="iconPack"
+                        :size="newIconSize"
                         both
-                        size="is-large"
                         aria-hidden/>
                 </div>
                 <div class="media-content">

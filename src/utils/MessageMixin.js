@@ -42,7 +42,8 @@ export default {
     data() {
         return {
             isActive: this.active,
-            remainingTime: this.duration / 1000 // in seconds
+            remainingTime: this.duration / 1000, // in seconds
+            newIconSize: this.iconSize || this.size || 'is-large'
         }
     },
     watch: {

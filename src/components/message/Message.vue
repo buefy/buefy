@@ -50,11 +50,6 @@ export default {
     mixins: [MessageMixin],
     props: {
         ariaCloseLabel: String
-    },
-    data() {
-        return {
-            newIconSize: this.iconSize || this.size || 'is-large'
-        }
     }
 }
 </script>
