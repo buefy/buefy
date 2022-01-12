@@ -82,6 +82,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>icon-size</code>',
+                description: 'Size of the icon, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: 'Depends on <code>size</code> prop'
+            },
+            {
                 name: '<code>aria-close-label</code>',
                 description: 'Label for the close button, to be read by accessibility screenreaders.',
                 type: 'String',
