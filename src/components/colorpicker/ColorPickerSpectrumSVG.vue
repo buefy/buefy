@@ -56,7 +56,9 @@
                     :height="thickness + 4"
                 >
                     <div
+                        ref="hueCursor"
                         class="hue-range-thumb"
+                        :style="`background-color: hsl(${hue}deg, 100%, 50%)`"
                         role="slider"
                         tabindex="0"
                         aria-label="Hue"
@@ -74,6 +76,8 @@
         <g
             class="colorpicker-spectrum-slider-sl"
             :style="`transform: rotate(${hue}deg) translate(50%, 50%)`"
+            role="graphics-datagroup"
+            aria-datascales="lightness, saturation"
         >
             <path
                 :d="trianglePath"
@@ -82,7 +86,31 @@
             <path
                 :d="trianglePath"
                 :fill="`url(#cp-spectrum-gradient-saturation-${id})`"
+                style="mix-blend-mode: overlay;"
+                @click="clickSL"
+                @mousedown="startMouseCapture"
+                @touchstart.prevent="startMouseCapture"
             />
+            <foreignObject
+                :x="((internalRadius - 3) * cos30) * (-lightness + 0.5) * 2 - 6"
+                :y="-internalRadius + (1 - saturation) * (internalRadius - 3) * 1.5 - 3"
+                width="12"
+                height="12"
+            >
+                <div
+                    ref="slCursor"
+                    class="sl-range-thumb"
+                    :style="{
+                        backgroundColor: `hsl(${hue}deg, ${saturation * 100}%, ${lightness * 100}%)`
+                    }"
+                    tabindex="0"
+                    aria-datavalues="50%, 100%"
+                    @click="clickSL"
+                    @keydown="hueKeyPress"
+                    @mousedown="startMouseCapture"
+                    @touchstart.prevent="startMouseCapture"
+                />
+            </foreignObject>
         </g>
     </svg>
 </template>
@@ -109,8 +137,18 @@ export default {
         return {
             id: id++,
             hue: 0,
+            saturation: 1.0,
+            lightness: 0.5,
             captureMouse: false,
-            clientOrigin: [-1, -1]
+            captureType: 'hue',
+            clientOffset: {
+                x: -1,
+                y: -1,
+                width: 0,
+                height: 0
+            },
+            cos30,
+            sin30
         }
     },
     computed: {
@@ -118,17 +156,21 @@ export default {
             const { size } = this
             return `0 0 ${size} ${size}`
         },
+        internalRadius() {
+            return this.size / 2 - this.thickness
+        },
         haloPath() {
             const { size, thickness } = this
-            const radius = size - 4
-            const thicknessRadius = (radius - 2 * thickness) / 2
+            const radius = size / 2 - 2 // 2px padding
+            const thicknessRadius = radius - thickness
             const center = size / 2
-            return `M${center + radius / -2} ${center}a${radius / 2}  ${radius / 2}  0 1 1 ${radius} 0` +
+
+            return `M${center - radius} ${center}a${radius}  ${radius}  0 1 1 ${2 * radius} 0` +
                 `h${-thickness}` +
                 `a${-thicknessRadius}  ${thicknessRadius}  0 1 0 ${-2 * thicknessRadius} 0` +
                 `a${thicknessRadius}  ${thicknessRadius}  0 1 0 ${2 * thicknessRadius} 0` +
                 `h${thickness}` +
-                `a${radius / 2}  ${radius / 2}  0 1 1 ${-radius} 0z`
+                `a${radius}  ${radius}  0 1 1 ${-2 * radius} 0z`
         },
         trianglePath() {
             const { size, thickness } = this
@@ -144,11 +186,11 @@ export default {
         captureMouse(newValue, oldValue) {
             if (oldValue === false && newValue !== false) {
                 const rect = this.$el.getBoundingClientRect()
-                // Caching center position
-                this.clientOrigin = [
-                    rect.x + rect.width / 2,
-                    rect.y + rect.height / 2
-                ]
+                // Caching offset
+                this.clientOffset.x = rect.x + rect.width / 2
+                this.clientOffset.y = rect.y + rect.height / 2
+                this.clientOffset.width = rect.width
+                this.clientOffset.height = rect.height
             }
         }
     },
@@ -194,11 +236,20 @@ export default {
                 event.stopPropagation()
             }
         },
+        slKeyPress(event) {
+            //
+        },
         clickHue(event) {
-            this.hue = (Math.atan2(
-                event.clientY - this.clientOrigin[1],
-                event.clientX - this.clientOrigin[0]
-            ) / Math.PI * 180 + 90) % 360
+            this.startMouseCapture(event)
+            this.trackMouse(event)
+            this.stopMouseCapture(event)
+            this.$refs.hueCursor.focus()
+        },
+        clickSL(event) {
+            this.startMouseCapture(event)
+            this.trackMouse(event)
+            this.stopMouseCapture(event)
+            this.$refs.slCursor.focus()
         },
         trackMouse(event) {
             if (this.captureMouse === false) {
@@ -207,26 +258,63 @@ export default {
             event.preventDefault()
             event.stopPropagation()
 
-            this.hue = (typeof event.touches !== 'undefined' && event.touches.length
-                ? Math.atan2(
-                    event.touches[0].clientY - this.clientOrigin[1],
-                    event.touches[0].clientX - this.clientOrigin[0]
-                ) / Math.PI * 180 + 90
-                : Math.atan2(
-                    event.clientY - this.clientOrigin[1],
-                    event.clientX - this.clientOrigin[0]
-                ) / Math.PI * 180 + 90
-            ) % 360
+            let [mouseX, mouseY] = [0, 0]
+            if (typeof event.touches !== 'undefined' && event.touches.length) {
+                [mouseX, mouseY] = [event.touches[0].clientX, event.touches[0].clientY]
+            } else {
+                [mouseX, mouseY] = [event.clientX, event.clientY]
+            }
+            const angle = Math.atan2(
+                mouseY - this.clientOffset.y,
+                mouseX - this.clientOffset.x
+            )
+
+            if (this.captureType === 'sl') {
+                const d = Math.sqrt(
+                    Math.pow(mouseX - this.clientOffset.x, 2) +
+                    Math.pow(mouseY - this.clientOffset.y, 2)
+                )
+                const ratio = this.size / this.clientOffset.width
+                const dx = d * Math.cos(angle - this.hue / 180 * Math.PI) * ratio
+                const dy = d * Math.sin(angle - this.hue / 180 * Math.PI) * ratio
+                const radius = this.internalRadius
+                const saturation = 1 - (Math.min(
+                    radius * sin30,
+                    Math.max(
+                        -radius,
+                        dy
+                    )
+                ) + radius) / (radius + radius * sin30)
+                const lightness = (Math.min(
+                    (radius * cos30) * (1 - saturation),
+                    Math.max(
+                        (-radius * cos30) * (1 - saturation),
+                        dx
+                    )
+                ) + radius * cos30) / (radius * 2 * cos30)
+
+                this.saturation = Math.round(saturation * 100) / 100
+                this.lightness = 1 - Math.round(lightness * 100) / 100
+            } else {
+                this.hue = Math.round(angle / Math.PI * 180 + 90) % 360
+            }
         },
         startMouseCapture(event) {
             event.preventDefault()
             event.stopPropagation()
+
             this.captureMouse = true
+            if (event.target.closest('.colorpicker-spectrum-slider-sl') !== null) {
+                this.captureType = 'sl'
+            } else {
+                this.captureType = 'hue'
+            }
         },
         stopMouseCapture(event) {
             if (this.captureMouse !== false) {
                 event.preventDefault()
                 event.stopPropagation()
+                this.$refs[this.captureType === 'sl' ? 'slCursor' : 'hueCursor'].focus()
             }
             this.captureMouse = false
         }
