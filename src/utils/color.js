@@ -380,7 +380,7 @@ class Color {
                 : hue < 180
                     ? [0, c, x]
                     : hue < 240
-                        ? [x, 0, c]
+                        ? [0, x, c]
                         : hue < 300
                             ? [x, 0, c]
                             : [c, 0, x]
