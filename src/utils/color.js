@@ -208,7 +208,7 @@ class Color {
         return hue
     }
 
-    get staturation() {
+    get saturation() {
         const [red, green, blue] = Array.from(this.$channels).map((c) => c / 255)
         const [min, max] = [Math.min(red, green, blue), Math.max(red, green, blue)]
         const delta = max - min
@@ -244,7 +244,7 @@ class Color {
             case 'rgba':
                 return `rgba(${this.red},${this.green},${this.blue},${Math.round(this.alpha / 2.55) / 100})`
             case 'hsl':
-                return `hsl(${this.hue}, ${Math.round(this.staturation * 100)}%, ${Math.round(this.lightness * 100)}%)`
+                return `hsl(${this.hue}, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%)`
             default:
                 throw new ColorTypeError()
         }
@@ -361,17 +361,17 @@ class Color {
         return color
     }
 
-    static fromHSL(hue, staturation, lightness, alpha = 1) {
-        if ([hue, staturation, lightness, alpha].some((arg) => Number.isNaN(arg))) {
+    static fromHSL(hue, saturation, lightness, alpha = 1) {
+        if ([hue, saturation, lightness, alpha].some((arg) => Number.isNaN(arg))) {
             throw new Error('Invalid arguments')
         }
         while (hue < 0 && hue !== -Infinity) hue += 360
         hue = hue % 360
-        staturation = Math.max(0, Math.min(1, staturation))
+        saturation = Math.max(0, Math.min(1, saturation))
         lightness = Math.max(0, Math.min(1, lightness))
         alpha = Math.max(0, Math.min(1, alpha))
 
-        const c = (1 - Math.abs(2 * lightness - 1)) * staturation
+        const c = (1 - Math.abs(2 * lightness - 1)) * saturation
         const x = c * (1 - Math.abs(hue / 60 % 2 - 1))
         const m = lightness - c / 2
 

@@ -104,7 +104,7 @@
                         backgroundColor: `hsl(${hue}deg, ${saturation * 100}%, ${lightness * 100}%)`
                     }"
                     tabindex="0"
-                    aria-datavalues="50%, 100%"
+                    :aria-datavalues="`${saturation * 100}%, ${lightness * 100}%`"
                     @click="clickSL"
                     @keydown="hueKeyPress"
                     @mousedown="startMouseCapture"
@@ -116,6 +116,7 @@
 </template>
 
 <script>
+import Color from '../../utils/color'
 const cos30 = 0.86602540378
 const sin30 = 0.5
 
@@ -124,6 +125,15 @@ let id = 0
 export default {
     name: 'BColorpickerSpectrumSVG',
     props: {
+        value: {
+            type: Object,
+            required: true,
+            validator(value) {
+                return typeof value.hue === 'number' &&
+                    typeof value.saturation === 'number' &&
+                    typeof value.lightness === 'number'
+            }
+        },
         size: {
             type: Number,
             default: 200
@@ -142,8 +152,8 @@ export default {
             captureMouse: false,
             captureType: 'hue',
             clientOffset: {
-                x: -1,
-                y: -1,
+                cx: -1,
+                cy: -1,
                 width: 0,
                 height: 0
             },
@@ -187,10 +197,22 @@ export default {
             if (oldValue === false && newValue !== false) {
                 const rect = this.$el.getBoundingClientRect()
                 // Caching offset
-                this.clientOffset.x = rect.x + rect.width / 2
-                this.clientOffset.y = rect.y + rect.height / 2
+                this.clientOffset.cx = rect.x + rect.width / 2
+                this.clientOffset.cy = rect.y + rect.height / 2
                 this.clientOffset.width = rect.width
                 this.clientOffset.height = rect.height
+            }
+        },
+        value(newColor, oldColor) {
+            const { hue, saturation, lightness } = newColor
+            if (!oldColor ||
+                hue !== oldColor.hue ||
+                saturation !== oldColor.saturation ||
+                lightness !== oldColor.lightness
+            ) {
+                this.hue = hue
+                this.saturation = saturation
+                this.lightness = lightness
             }
         }
     },
@@ -265,14 +287,14 @@ export default {
                 [mouseX, mouseY] = [event.clientX, event.clientY]
             }
             const angle = Math.atan2(
-                mouseY - this.clientOffset.y,
-                mouseX - this.clientOffset.x
+                mouseY - this.clientOffset.cy,
+                mouseX - this.clientOffset.cx
             )
 
             if (this.captureType === 'sl') {
                 const d = Math.sqrt(
-                    Math.pow(mouseX - this.clientOffset.x, 2) +
-                    Math.pow(mouseY - this.clientOffset.y, 2)
+                    Math.pow(mouseX - this.clientOffset.cx, 2) +
+                    Math.pow(mouseY - this.clientOffset.cy, 2)
                 )
                 const ratio = this.size / this.clientOffset.width
                 const dx = d * Math.cos(angle - this.hue / 180 * Math.PI) * ratio
@@ -293,11 +315,12 @@ export default {
                     )
                 ) + radius * cos30) / (radius * 2 * cos30)
 
-                this.saturation = Math.round(saturation * 100) / 100
-                this.lightness = 1 - Math.round(lightness * 100) / 100
+                this.saturation = Math.round(saturation * 1000) / 1000
+                this.lightness = 1 - Math.round(lightness * 1000) / 1000
             } else {
                 this.hue = Math.round(angle / Math.PI * 180 + 90) % 360
             }
+            this.emitColor()
         },
         startMouseCapture(event) {
             event.preventDefault()
@@ -317,6 +340,10 @@ export default {
                 this.$refs[this.captureType === 'sl' ? 'slCursor' : 'hueCursor'].focus()
             }
             this.captureMouse = false
+        },
+        emitColor() {
+            const { hue, saturation, lightness } = this
+            this.$emit('input', Color.fromHSL(hue, saturation, lightness))
         }
     },
     mounted() {

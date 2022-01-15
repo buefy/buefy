@@ -38,7 +38,8 @@ svg.colorpicker-spectrum {
         }
     }
 
-    .hue-range-thumb {
+    .hue-range-thumb,
+    .sl-range-thumb {
         background: transparent;
         border-radius: $colorpicker-radius;
         box-shadow:
