@@ -33,43 +33,47 @@
                 <path :d="haloPath" />
             </clipPath>
         </defs>
-        <g>
+        <g class="colorpicker-spectrum-slider-hue">
             <foreignObject
-                :x="size / -2"
-                :y="size / -2"
+                :x="0"
+                :y="0"
                 :width="size"
                 :height="size"
                 :clip-path="`url(#cp-spectrum-clip-${id})`"
             >
                 <div
                     class="colorpicker-spectrum-hue"
-                    @mousedown="captureMouse = 'hue'"
-                    @touchstart="captureMouse = 'hue'"
+                    @click="clickHue"
+                    @mousedown="startMouseCapture"
+                    @touchstart.prevent="startMouseCapture"
                 />
             </foreignObject>
-            <foreignObject
-                x="-4"
-                :y="size / -2"
-                width="8"
-                :height="thickness + 4"
-                :style="`transform: rotate(${hue}deg)`"
-            >
-                <div
-                    class="hue-range-thumb"
-                    role="slider"
-                    tabindex="0"
-                    aria-label="Hue"
-                    aria-valuemin="0"
-                    :aria-valuenow="hue"
-                    aria-valuemax="360"
-                    @keydown="hueKeyPress"
-                    @mousedown="captureMouse = 'hue'"
-                    @touchstart="captureMouse = 'hue'"
-                />
-            </foreignObject>
+            <g :style="`transform: rotate(${hue}deg)`">
+                <foreignObject
+                    :x="size / 2 - 4"
+                    :y="0"
+                    width="8"
+                    :height="thickness + 4"
+                >
+                    <div
+                        class="hue-range-thumb"
+                        role="slider"
+                        tabindex="0"
+                        aria-label="Hue"
+                        aria-valuemin="0"
+                        :aria-valuenow="hue"
+                        aria-valuemax="360"
+                        @click="clickHue"
+                        @keydown="hueKeyPress"
+                        @mousedown="startMouseCapture"
+                        @touchstart.prevent="startMouseCapture"
+                    />
+                </foreignObject>
+            </g>
         </g>
         <g
-            :style="`transform: rotate(${hue}deg)`"
+            class="colorpicker-spectrum-slider-sl"
+            :style="`transform: rotate(${hue}deg) translate(50%, 50%)`"
         >
             <path
                 :d="trianglePath"
@@ -112,13 +116,14 @@ export default {
     computed: {
         viewBox() {
             const { size } = this
-            return `${size / -2} ${size / -2} ${size} ${size}`
+            return `0 0 ${size} ${size}`
         },
         haloPath() {
             const { size, thickness } = this
             const radius = size - 4
             const thicknessRadius = (radius - 2 * thickness) / 2
-            return `M${radius / -2} 0a${radius / 2}  ${radius / 2}  0 1 1 ${radius} 0` +
+            const center = size / 2
+            return `M${center + radius / -2} ${center}a${radius / 2}  ${radius / 2}  0 1 1 ${radius} 0` +
                 `h${-thickness}` +
                 `a${-thicknessRadius}  ${thicknessRadius}  0 1 0 ${-2 * thicknessRadius} 0` +
                 `a${thicknessRadius}  ${thicknessRadius}  0 1 0 ${2 * thicknessRadius} 0` +
@@ -189,6 +194,12 @@ export default {
                 event.stopPropagation()
             }
         },
+        clickHue(event) {
+            this.hue = (Math.atan2(
+                event.clientY - this.clientOrigin[1],
+                event.clientX - this.clientOrigin[0]
+            ) / Math.PI * 180 + 90) % 360
+        },
         trackMouse(event) {
             if (this.captureMouse === false) {
                 return
@@ -196,11 +207,21 @@ export default {
             event.preventDefault()
             event.stopPropagation()
 
-            this.hue =
-                Math.atan2(
+            this.hue = (typeof event.touches !== 'undefined' && event.touches.length
+                ? Math.atan2(
+                    event.touches[0].clientY - this.clientOrigin[1],
+                    event.touches[0].clientX - this.clientOrigin[0]
+                ) / Math.PI * 180 + 90
+                : Math.atan2(
                     event.clientY - this.clientOrigin[1],
                     event.clientX - this.clientOrigin[0]
                 ) / Math.PI * 180 + 90
+            ) % 360
+        },
+        startMouseCapture(event) {
+            event.preventDefault()
+            event.stopPropagation()
+            this.captureMouse = true
         },
         stopMouseCapture(event) {
             if (this.captureMouse !== false) {
@@ -212,7 +233,7 @@ export default {
     },
     mounted() {
         window.addEventListener('mousemove', this.trackMouse)
-        window.addEventListener('touchmove', this.trackMouse)
+        window.addEventListener('touchmove', this.trackMouse, { passive: false })
         window.addEventListener('mouseup', this.stopMouseCapture)
         window.addEventListener('touchend', this.stopMouseCapture)
     },

@@ -27,6 +27,17 @@ svg.colorpicker-spectrum {
             );
     }
 
+    .colorpicker-spectrum-slider {
+        &-hue,
+        &-sl {
+            &,
+            & foreignObject,
+            & g {
+                transform-origin: 50% 50%;
+            }
+        }
+    }
+
     .hue-range-thumb {
         background: transparent;
         border-radius: $colorpicker-radius;
