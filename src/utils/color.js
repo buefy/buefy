@@ -193,19 +193,17 @@ class Color {
         }
 
         if (red === max) {
-            hue = (green - blue) / delta
+            hue = ((green - blue) / delta) % 6
         } else if (green === max) {
-            hue = 2 * (blue - red) / delta
+            hue = (blue - red) / delta + 2
         } else {
-            hue = 4 + (red - green) / delta
+            hue = (red - green) / delta + 4
         }
 
-        hue = (hue * 60) % 360
-        if (hue < 0) {
-            hue += 360
-        }
+        hue *= 60
+        while (hue !== -Infinity && hue < 0) hue += 360
 
-        return hue
+        return hue % 360
     }
 
     get saturation() {
