@@ -573,6 +573,19 @@
             "documentation/image"
         ]
     },
+    "documentation/colorpicker": {
+        "title": "Colorpicker",
+        "subtitle": "An Input that lets a user specify a color",
+        "path": "/documentation/colorpicker",
+        "githubPath": "pages/components/colorpicker/Colorpicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/colorpicker"
+        ],
+        "isUpdated": true
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
