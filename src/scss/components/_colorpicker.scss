@@ -1,0 +1,52 @@
+$colorpicker-radius: $dropdown-content-radius !default;
+$colorpicker-hue-selected-stroke: $primary !default;
+
+.colorpicker {
+    .colorpicker-footer {
+        margin-top: .875rem;
+        padding-top: .875rem;
+        border-top: 1px solid #dbdbdb;
+    }
+}
+
+svg.colorpicker-spectrum {
+    user-select: none;
+
+    .colorpicker-spectrum-hue {
+        width: 100%;
+        height: 100%;
+        background:
+            conic-gradient(
+                #f00,
+                #ff0,
+                #0f0,
+                #0ff,
+                #00f,
+                #f0f,
+                #f00
+            );
+    }
+
+    .hue-range-thumb {
+        background: transparent;
+        border-radius: $colorpicker-radius;
+        box-shadow:
+            inset 0 0 0 1px #fff,
+            0 0 0 1px #dbdbdb;
+        height: calc(100%/1 - .25em/1);
+        width: calc(100%/1 - .25em/1);
+        margin: .125em;
+
+        &:hover {
+            box-shadow:
+                inset 0 0 0 1px #fff,
+                0 0 0 1px #b5b5b5;
+        }
+        &:focus {
+            box-shadow:
+                inset 0 0 0 1px #fff,
+                0 0 0 1px $colorpicker-hue-selected-stroke,
+                0 0 0 .125em rgba($colorpicker-hue-selected-stroke, .25);
+        }
+    }
+}
