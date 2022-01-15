@@ -158,7 +158,8 @@ export default {
                 height: 0
             },
             cos30,
-            sin30
+            sin30,
+            debounce: 0
         }
     },
     computed: {
@@ -210,9 +211,14 @@ export default {
                 saturation !== oldColor.saturation ||
                 lightness !== oldColor.lightness
             ) {
-                this.hue = hue
-                this.saturation = saturation
-                this.lightness = lightness
+                window.clearTimeout(this.debounce)
+                this.debounce = window.setTimeout(() => {
+                    if (!oldColor || Math.max(oldColor.saturation, saturation) < 0.2) {
+                        this.hue = hue
+                    }
+                    this.saturation = saturation
+                    this.lightness = lightness
+                }, 200)
             }
         }
     },
@@ -344,6 +350,7 @@ export default {
         emitColor() {
             const { hue, saturation, lightness } = this
             this.$emit('input', Color.fromHSL(hue, saturation, lightness))
+            window.clearTimeout(this.debounce)
         }
     },
     mounted() {
