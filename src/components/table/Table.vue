@@ -29,6 +29,7 @@
                     :icon-pack="iconPack"
                     :total="newDataTotal"
                     :current-page.sync="newCurrentPage"
+                    :input="paginationInput"
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
                     :aria-page-label="ariaPageLabel"
@@ -356,6 +357,7 @@
                     :rounded="paginationRounded"
                     :icon-pack="iconPack"
                     :total="newDataTotal"
+                    :input="paginationInput"
                     :current-page.sync="newCurrentPage"
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
@@ -509,6 +511,10 @@ export default {
             }
         },
         paginationRounded: Boolean,
+        paginationInput: {
+            type: Boolean,
+            default: false
+        },
         backendSorting: Boolean,
         backendFiltering: Boolean,
         rowClass: {

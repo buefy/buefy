@@ -199,6 +199,13 @@ export default [
                 default: '<code>bottom</code>'
             },
             {
+                name: '<code>pagination-input</code>',
+                description: 'Pagination show page number input (if <code>paginated</code>)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>per-page</code>',
                 description: 'How many rows per page (if <code>paginated</code>)',
                 type: 'Number',

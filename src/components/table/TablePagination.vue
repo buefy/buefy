@@ -14,6 +14,7 @@
                     :size="paginationSize"
                     :current="newCurrentPage"
                     :rounded="rounded"
+                    :input="input"
                     @change="pageChanged"
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
@@ -41,6 +42,7 @@ export default {
         paginationSize: String,
         rounded: Boolean,
         iconPack: String,
+        input: Boolean,
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,

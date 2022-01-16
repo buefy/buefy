@@ -62,6 +62,12 @@
             </template>
         </small>
         <ul class="pagination-list" v-else>
+            <BNumberinput
+                v-if="input"
+                class="pagination-input"
+                placeholder="page"
+                :controls="false"
+                v-model="inputValue"/>
             <!--First-->
             <li v-if="hasFirst">
                 <slot
@@ -103,6 +109,7 @@
 <script>
 import PaginationButton from './PaginationButton'
 import Icon from '../icon/Icon'
+// import NumberInput from '../numberinput/Numberinput'
 import config from '../../utils/config'
 
 export default {
@@ -110,6 +117,7 @@ export default {
     components: {
         [Icon.name]: Icon,
         [PaginationButton.name]: PaginationButton
+        // [NumberInput.name]: NumberInput
     },
     // deprecated, to replace with default 'value' in the next breaking change
     model: {
@@ -154,7 +162,16 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
-        ariaCurrentLabel: String
+        ariaCurrentLabel: String,
+        input: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            inputValue: this.current
+        }
     },
     computed: {
         rootClasses() {
@@ -262,6 +279,9 @@ export default {
         */
         pageCount(value) {
             if (this.current > value) this.last()
+        },
+        inputValue(value) {
+            this.changePage(value)
         }
     },
     methods: {

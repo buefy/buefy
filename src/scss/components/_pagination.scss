@@ -1,4 +1,8 @@
 .pagination {
+    .pagination-input {
+        max-width: 100px;
+        padding-right: 0.25em;
+    }
     .pagination-next,
     .pagination-previous {
         padding-left: $pagination-nav-padding-left;

@@ -51,6 +51,9 @@
             <b-switch v-model="isSimple">Simple</b-switch>
             <b-switch v-model="isRounded">Rounded</b-switch>
         </div>
+        <div class="block">
+            <b-switch v-model="input">Page number input</b-switch>
+        </div>
 
         <hr>
         <b-pagination
@@ -65,6 +68,7 @@
             :per-page="perPage"
             :icon-prev="prevIcon"
             :icon-next="nextIcon"
+            :input="input"
             aria-next-label="Next page"
             aria-previous-label="Previous page"
             aria-page-label="Page"
@@ -87,7 +91,8 @@
                 isSimple: false,
                 isRounded: false,
                 prevIcon: 'chevron-left',
-                nextIcon: 'chevron-right'
+                nextIcon: 'chevron-right',
+                input: false,
             }
         }
     }
