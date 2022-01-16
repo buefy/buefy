@@ -146,9 +146,9 @@ export default {
     data() {
         return {
             id: id++,
-            hue: 0,
-            saturation: 1.0,
-            lightness: 0.5,
+            hue: this.value.hue,
+            saturation: this.value.saturation,
+            lightness: this.value.lightness,
             captureMouse: false,
             captureType: 'hue',
             clientOffset: {
@@ -259,13 +259,6 @@ export default {
             )
         },
         decreaseLightness(value = 0.01) {
-            console.log(
-                0.5 - (1 - this.saturation) * 0.5,
-                '<',
-                this.lightness - value,
-                '<',
-                0.5 + (1 - this.saturation) * 0.5
-            )
             this.lightness = Math.min(
                 0.5 + (1 - this.saturation) * 0.5,
                 Math.max(
@@ -307,6 +300,7 @@ export default {
             if (handled) {
                 event.preventDefault()
                 event.stopPropagation()
+                this.emitColor()
             }
         },
         slKeyPress(event) {
@@ -348,6 +342,7 @@ export default {
             if (handled) {
                 event.preventDefault()
                 event.stopPropagation()
+                this.emitColor()
             }
         },
         clickHue(event) {
@@ -412,7 +407,6 @@ export default {
             this.emitColor()
         },
         startMouseCapture(event) {
-            event.preventDefault()
             event.stopPropagation()
 
             this.captureMouse = true
@@ -441,10 +435,6 @@ export default {
         window.addEventListener('touchmove', this.trackMouse, { passive: false })
         window.addEventListener('mouseup', this.stopMouseCapture)
         window.addEventListener('touchend', this.stopMouseCapture)
-
-        this.hue = this.value.hue
-        this.saturation = this.value.saturation
-        this.lightness = this.value.lightness
     },
     beforeDestroy() {
         window.removeEventListener('mousemove', this.trackMouse)

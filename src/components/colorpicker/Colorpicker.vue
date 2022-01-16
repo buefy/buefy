@@ -19,7 +19,7 @@
             <template #trigger v-if="!inline">
                 <slot name="trigger">
                     <b-button
-                        :style="{ background, color: foreground }"
+                        :style="triggerStyle"
                         :disabled="disabled"
                     >
                         <span class="color-name">{{ colorFormatter(colorSelected) }}</span>
@@ -40,7 +40,10 @@
                         </template>
                     </header>
                     <div class="colorpicker-content">
-                        <b-colorpicker-spectrum-s-v-g v-model="colorSelected"/>
+                        <b-colorpicker-spectrum-s-v-g
+                            :value="colorSelected"
+                            @input="updateColor"
+                        />
                     </div>
                 </div>
                 <footer class="colorpicker-footer">
@@ -69,7 +72,11 @@ import Icon from '../icon/Icon'
 import ColorPickerSpectrumSVG from './ColorPickerSpectrumSVG'
 
 const defaultColorFormatter = (color, vm) => {
-    return color.toString('hex')
+    if (color.alpha < 1) {
+        return color.toString('hexa')
+    } else {
+        return color.toString('hex')
+    }
 }
 
 const defaultColorParser = (color, vm) => {
@@ -96,7 +103,16 @@ export default {
     },
     props: {
         value: {
-            type: [String, Number]
+            type: [String, Object],
+            validator(value) {
+                return typeof value === 'string' ||
+                    (
+                        typeof value === 'object' &&
+                        typeof value.red === 'number' &&
+                        typeof value.green === 'number' &&
+                        typeof value.blue === 'number'
+                    )
+            }
         },
         inline: Boolean,
         disabled: Boolean,
@@ -121,6 +137,10 @@ export default {
                 }
             }
         },
+        alpha: {
+            type: Boolean,
+            default: false
+        },
         position: String,
         mobileModal: {
             type: Boolean,
@@ -138,7 +158,7 @@ export default {
     },
     data() {
         return {
-            colorSelected: new Color(this.value)
+            colorSelected: this.colorParser(this.value)
         }
     },
     computed: {
@@ -147,13 +167,37 @@ export default {
         },
 
         background() {
-            return this.colorSelected.toString('hex')
+            if (this.alpha) {
+                return `linear-gradient(
+                    45deg,
+                    ${this.colorSelected.toString('hex')} 50%,
+                    ${this.colorSelected.toString('hexa')} 50%
+                )`
+            } else {
+                const hex = this.colorSelected.toString('hex')
+                return `linear-gradient(
+                    45deg,
+                    ${hex} 50%,
+                    ${hex} 50%
+                )`
+            }
         },
-        foreground() {
+        triggerStyle() {
             const { red, green, blue } = this.colorSelected
-            return (red * 0.299 + green * 0.587 + blue * 0.114) > 186
-                ? '#000000'
-                : '#FFFFFF'
+            const light = (red * 0.299 + green * 0.587 + blue * 0.114) > 186
+
+            return {
+                backgroundColor: '#ffffff',
+                backgroundImage: `
+                    ${this.background},
+                    linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7),
+                    linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7)
+                `,
+                backgroundSize: '100% 100%, 16px 16px, 16px 16px',
+                backgroundPosition: '0 0, 8px 8px, 0 0',
+                color: light ? '#000000' : '#FFFFFF',
+                textShadow: `0 0 2px ${light ? '#FFFFFF' : '#000000'}`
+            }
         },
 
         isMobile() {
@@ -172,137 +216,15 @@ export default {
         }
     },
     methods: {
-        /*
-         * Parse string into date
-         */
-        onChange(value) {
-            const date = this.dateParser(value, this)
-            if (date && (!isNaN(date) ||
-                (Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1])))) {
-                this.computedValue = date
-            } else {
-                // Force refresh input value when not valid date
-                this.computedValue = null
-                if (this.$refs.input) {
-                    this.$refs.input.newValue = this.computedValue
-                }
-            }
+        updateColor(value) {
+            this.colorSelected = value
+            this.$emit('change', value)
         },
-
         /*
-         * Format date into string
+         * Format color into string
          */
         formatValue(value) {
-            if (Array.isArray(value)) {
-                const isArrayWithValidDates = Array.isArray(value) && value.every((v) => !isNaN(v))
-                return isArrayWithValidDates ? this.dateFormatter([...value], this) : null
-            }
-            return (value && !isNaN(value)) ? this.dateFormatter(value, this) : null
-        },
-
-        /*
-         * Either decrement month by 1 if not January or decrement year by 1
-         * and set month to 11 (December) or decrement year when 'month'
-         */
-        prev() {
-            if (this.disabled) return
-
-            if (this.isTypeMonth) {
-                this.focusedDateData.year -= 1
-            } else {
-                if (this.focusedDateData.month > 0) {
-                    this.focusedDateData.month -= 1
-                } else {
-                    this.focusedDateData.month = 11
-                    this.focusedDateData.year -= 1
-                }
-            }
-        },
-
-        /*
-         * Either increment month by 1 if not December or increment year by 1
-         * and set month to 0 (January) or increment year when 'month'
-         */
-        next() {
-            if (this.disabled) return
-
-            if (this.isTypeMonth) {
-                this.focusedDateData.year += 1
-            } else {
-                if (this.focusedDateData.month < 11) {
-                    this.focusedDateData.month += 1
-                } else {
-                    this.focusedDateData.month = 0
-                    this.focusedDateData.year += 1
-                }
-            }
-        },
-
-        formatNative(value) {
-            return this.isTypeMonth
-                ? this.formatYYYYMM(value) : this.formatYYYYMMDD(value)
-        },
-
-        /*
-         * Format date into string 'YYYY-MM-DD'
-         */
-        formatYYYYMMDD(value) {
-            const date = new Date(value)
-            if (value && !isNaN(date)) {
-                const year = date.getFullYear()
-                const month = date.getMonth() + 1
-                const day = date.getDate()
-                return year + '-' +
-                    ((month < 10 ? '0' : '') + month) + '-' +
-                    ((day < 10 ? '0' : '') + day)
-            }
-            return ''
-        },
-
-        /*
-         * Format date into string 'YYYY-MM'
-         */
-        formatYYYYMM(value) {
-            const date = new Date(value)
-            if (value && !isNaN(date)) {
-                const year = date.getFullYear()
-                const month = date.getMonth() + 1
-                return year + '-' +
-                    ((month < 10 ? '0' : '') + month)
-            }
-            return ''
-        },
-
-        /*
-         * Parse date from string
-         */
-        onChangeNativePicker(event) {
-            const date = event.target.value
-            const s = date ? date.split('-') : []
-            if (s.length === 3) {
-                const year = parseInt(s[0], 10)
-                const month = parseInt(s[1]) - 1
-                const day = parseInt(s[2])
-                this.computedValue = new Date(year, month, day)
-            } else {
-                this.computedValue = null
-            }
-        },
-        updateInternalState(value) {
-            if (this.dateSelected === value) return
-            const isArray = Array.isArray(value)
-            const currentDate = isArray
-                ? (!value.length ? this.dateCreator() : value[value.length - 1])
-                : (!value ? this.dateCreator() : value)
-            if (!isArray ||
-                (isArray && this.dateSelected && value.length > this.dateSelected.length)) {
-                this.focusedDateData = {
-                    day: currentDate.getDate(),
-                    month: currentDate.getMonth(),
-                    year: currentDate.getFullYear()
-                }
-            }
-            this.dateSelected = value
+            return value ? this.colorFormatter(value, this) : null
         },
 
         /*

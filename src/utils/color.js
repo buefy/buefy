@@ -224,7 +224,7 @@ class Color {
     }
 
     clone() {
-        return new Color(Array.from(this.$channels))
+        return Color.fromRGB(...Array.from(this.$channels))
     }
 
     toString(type = 'hex') {
@@ -273,8 +273,8 @@ class Color {
         } else if (typeof args[0] === 'string') {
             let match = null
 
-            if (typeof colorsNammed[args[0]] === 'string') {
-                return Color.parseHex(colorsNammed[args[0]])
+            if (typeof colorsNammed[args[0].toLowerCase()] === 'string') {
+                return Color.parseHex(colorsNammed[args[0].toLowerCase()])
             } else if ((match = args[0].match(/^(#|&h|0x)?(?<hex>(?:[a-f0-9]{3,4}){1,2})$/i)) !== null) {
                 return Color.parseHex(match.groups.hex)
             } else if ((match = args[0].match(/^rgba?\(\s*(?<red>\d+)\s*,\s*(?<green>\d+)\s*,\s*(?<blue>\d+)(\s*,\s*(?<alpha>\d*\.?\d+))?\s*\)$/i)) !== null) {
@@ -313,7 +313,6 @@ class Color {
     }
 
     static parseHex(hex) {
-        console.log('Color.parseHex', hex)
         if (typeof hex !== 'string') {
             throw new Error('Hex expression must be a string')
         }
@@ -335,7 +334,6 @@ class Color {
         if (typeof chans[3] === 'number') {
             chans[3] /= 255
         }
-
         return Color.fromRGB(...chans)
     }
 
@@ -350,14 +348,14 @@ class Color {
     }
 
     static fromRGB(red, green, blue, alpha = 1) {
-        if ([red, green, blue, alpha].some((arg) => Number.isNaN(arg))) {
+        if ([red, green, blue, alpha].some((arg) => Number.isNaN(arg / 1))) {
             throw new Error('Invalid arguments')
         }
         alpha *= 255
 
         const color = new Color()
-        ;[red, green, blue, alpha].forEach((channel, index) => {
-            color[colorChannels[index]] = channel
+        ;[red, green, blue, alpha].forEach((value, index) => {
+            color[colorChannels[index]] = value
         })
 
         return color
