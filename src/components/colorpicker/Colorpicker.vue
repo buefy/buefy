@@ -22,7 +22,7 @@
                         :style="{ background, color: foreground }"
                         :disabled="disabled"
                     >
-                        {{ colorFormatter(colorSelected) }}
+                        <span class="color-name">{{ colorFormatter(colorSelected) }}</span>
                     </b-button>
                 </slot>
             </template>

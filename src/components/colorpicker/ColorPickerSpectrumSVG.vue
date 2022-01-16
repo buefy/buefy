@@ -106,7 +106,7 @@
                     tabindex="0"
                     :aria-datavalues="`${saturation * 100}%, ${lightness * 100}%`"
                     @click="clickSL"
-                    @keydown="hueKeyPress"
+                    @keydown="slKeyPress"
                     @mousedown="startMouseCapture"
                     @touchstart.prevent="startMouseCapture"
                 />
@@ -229,6 +229,51 @@ export default {
         decreaseHue(value = 1) {
             this.hue = (360 + this.hue - value) % 360
         },
+        increaseSaturation(value = 0.01) {
+            this.saturation = Math.min(1, Math.max(0, this.saturation + value))
+            this.lightness = Math.min(
+                0.5 + (1 - this.saturation) * 0.5,
+                Math.max(
+                    0.5 - (1 - this.saturation) * 0.5,
+                    this.lightness
+                )
+            )
+        },
+        decreaseSaturation(value = 0.01) {
+            this.saturation = Math.min(1, Math.max(0, this.saturation - value))
+            this.lightness = Math.min(
+                0.5 + (1 - this.saturation) * 0.5,
+                Math.max(
+                    0.5 - (1 - this.saturation) * 0.5,
+                    this.lightness
+                )
+            )
+        },
+        increaseLightness(value = 0.01) {
+            this.lightness = Math.min(
+                0.5 + (1 - this.saturation) * 0.5,
+                Math.max(
+                    0.5 - (1 - this.saturation) * 0.5,
+                    this.lightness + value
+                )
+            )
+        },
+        decreaseLightness(value = 0.01) {
+            console.log(
+                0.5 - (1 - this.saturation) * 0.5,
+                '<',
+                this.lightness - value,
+                '<',
+                0.5 + (1 - this.saturation) * 0.5
+            )
+            this.lightness = Math.min(
+                0.5 + (1 - this.saturation) * 0.5,
+                Math.max(
+                    0.5 - (1 - this.saturation) * 0.5,
+                    this.lightness - value
+                )
+            )
+        },
         hueKeyPress(event) {
             let handled = false
             switch (event.key) {
@@ -265,7 +310,45 @@ export default {
             }
         },
         slKeyPress(event) {
-            //
+            let handled = false
+            switch (event.key) {
+                case 'ArrowRight':
+                    this.decreaseLightness()
+                    handled = true
+                    break
+                case 'ArrowUp':
+                    this.increaseSaturation()
+                    handled = true
+                    break
+                case 'ArrowLeft':
+                    this.increaseLightness()
+                    handled = true
+                    break
+                case 'ArrowDown':
+                    this.decreaseSaturation()
+                    handled = true
+                    break
+                case 'Home':
+                    this.increaseLightness(1 - this.lightness)
+                    handled = true
+                    break
+                case 'End':
+                    this.decreaseLightness(this.lightness)
+                    handled = true
+                    break
+                case 'PageUp':
+                    this.increaseSaturation(1 - this.saturation)
+                    handled = true
+                    break
+                case 'PageDown':
+                    this.decreaseSaturation(this.saturation)
+                    handled = true
+                    break
+            }
+            if (handled) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
         },
         clickHue(event) {
             this.startMouseCapture(event)
@@ -358,6 +441,10 @@ export default {
         window.addEventListener('touchmove', this.trackMouse, { passive: false })
         window.addEventListener('mouseup', this.stopMouseCapture)
         window.addEventListener('touchend', this.stopMouseCapture)
+
+        this.hue = this.value.hue
+        this.saturation = this.value.saturation
+        this.lightness = this.value.lightness
     },
     beforeDestroy() {
         window.removeEventListener('mousemove', this.trackMouse)

@@ -2,6 +2,10 @@ $colorpicker-radius: $dropdown-content-radius !default;
 $colorpicker-hue-selected-stroke: $primary !default;
 
 .colorpicker {
+    .color-name {
+        font-family: $family-monospace;
+        text-transform: uppercase;
+    }
     .colorpicker-footer {
         margin-top: .875rem;
         padding-top: .875rem;
