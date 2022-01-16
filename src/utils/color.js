@@ -255,7 +255,7 @@ class Color {
     static parse(...args) {
         if (typeof args[0] === 'object') {
             return Color.parseObject(args[0])
-        } else if (args.every((arg) => !Number.isNaN(arg))) {
+        } else if (args.every((arg) => !Number.isNaN(arg / 1))) {
             const color = new Color()
             if (args.length > 3) {
                 color.red = args[0]
@@ -313,6 +313,7 @@ class Color {
     }
 
     static parseHex(hex) {
+        console.log('Color.parseHex', hex)
         if (typeof hex !== 'string') {
             throw new Error('Hex expression must be a string')
         }
@@ -328,11 +329,14 @@ class Color {
             throw new Error('Incorrect Hex expression length')
         }
 
-        return Color.parse(
-            hex.split(/(..)/)
-                .filter((value) => value)
-                .map((value) => Number.parseInt(value, 16))
-        )
+        const chans = hex.split(/(..)/)
+            .filter((value) => value)
+            .map((value) => Number.parseInt(value, 16))
+        if (typeof chans[3] === 'number') {
+            chans[3] /= 255
+        }
+
+        return Color.fromRGB(...chans)
     }
 
     static parseIndex(value, channels = 3) {
