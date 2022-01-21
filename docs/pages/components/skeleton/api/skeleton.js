@@ -9,6 +9,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>custom-class</code>',
+                description: 'CSS classes to be applied on input',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>animated</code>',
                 description: 'Display a loading animation',
                 type: 'Boolean',
@@ -34,14 +41,14 @@ export default [
                 description: 'Custom width',
                 type: 'String, Number',
                 values: '—',
-                default: '<code>-</code>'
+                default: '—'
             },
             {
                 name: '<code>height</code>',
                 description: 'Custom height',
                 type: 'String, Number',
                 values: '—',
-                default: '<code>-</code>'
+                default: '—'
             },
             {
                 name: '<code>circle</code>',
@@ -56,14 +63,14 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>1</code>'
-						},
+            },
             {
                 name: '<code>position</code>',
                 description: 'Position of the skeleton, optional',
                 type: 'String',
                 values: '<code>is-centered</code>, <code>is-right</code>',
                 default: '—'
-						},
+            },
         ]
     }
 ]
