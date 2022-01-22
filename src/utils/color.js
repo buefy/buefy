@@ -238,11 +238,13 @@ class Color {
                     .map((channel) => this[channel].toString(16).padStart(2, '0'))
                     .join('')
             case 'rgb':
-                return `rgb(${this.red},${this.green},${this.blue})`
+                return `rgb(${this.red}, ${this.green}, ${this.blue})`
             case 'rgba':
-                return `rgba(${this.red},${this.green},${this.blue},${Math.round(this.alpha / 2.55) / 100})`
+                return `rgba(${this.red}, ${this.green}, ${this.blue}, ${Math.round(this.alpha / 2.55) / 100})`
             case 'hsl':
-                return `hsl(${this.hue}, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%)`
+                return `hsl(${Math.round(this.hue)}deg, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%)`
+            case 'hsla':
+                return `hsl(${Math.round(this.hue)}deg, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%,  ${Math.round(this.alpha / 2.55) / 100})`
             default:
                 throw new ColorTypeError()
         }
