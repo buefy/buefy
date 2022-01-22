@@ -5,6 +5,8 @@
         <Example :component="ExAlpha" :code="ExAlphaCode" title="Alpha" vertical/>
 
         <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical/>
+
+        <Example :component="ExFormatter" :code="ExFormatterCode" title="Formatter" vertical/>
     </div>
 </template>
 
@@ -21,6 +23,9 @@
     import ExInline from './examples/ExInline'
     import ExInlineCode from '!!raw-loader!./examples/ExInline'
 
+    import ExFormatter from './examples/ExFormatter'
+    import ExFormatterCode from '!!raw-loader!./examples/ExFormatter'
+
     export default {
         data() {
             return {
@@ -32,7 +37,9 @@
                 ExAlpha,
                 ExAlphaCode,
                 ExInline,
-                ExInlineCode
+                ExInlineCode,
+                ExFormatter,
+                ExFormatterCode
             }
         }
     }
