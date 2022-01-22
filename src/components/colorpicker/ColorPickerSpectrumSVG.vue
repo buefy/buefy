@@ -204,18 +204,14 @@ export default {
                 this.clientOffset.height = rect.height
             }
         },
-        value(newColor, oldColor) {
-            const { hue, saturation, lightness } = newColor
-            if (!oldColor ||
-                hue !== oldColor.hue ||
-                saturation !== oldColor.saturation ||
-                lightness !== oldColor.lightness
-            ) {
+        value: {
+            deep: true,
+            handler(newColor, oldColor) {
+                const { hue, saturation, lightness } = newColor
+
                 window.clearTimeout(this.debounce)
                 this.debounce = window.setTimeout(() => {
-                    if (!oldColor || Math.max(oldColor.saturation, saturation) < 0.2) {
-                        this.hue = hue
-                    }
+                    this.hue = hue
                     this.saturation = saturation
                     this.lightness = lightness
                 }, 200)

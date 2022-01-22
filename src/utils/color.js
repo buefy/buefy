@@ -171,8 +171,26 @@ class Color {
                 {
                     get: () => this.$channels[index],
                     set: (byte) => {
-                        if (!Number.isNaN(byte)) {
+                        if (!Number.isNaN(byte / 1)) {
                             this.$channels[index] = Math.min(255, Math.max(0, byte))
+                        }
+                    },
+                    enumerable: true,
+                    configurable: true
+                }
+            )
+        })
+        // Required for observability
+        ;['hue', 'saturation', 'lightness'].forEach((name) => {
+            const capitalizedName = name.replace(/^./, (m) => m.toUpperCase())
+            Object.defineProperty(
+                this,
+                name,
+                {
+                    get: () => this[`get${capitalizedName}`](),
+                    set: (value) => {
+                        if (!Number.isNaN(value / 1)) {
+                            this[`set${capitalizedName}`](value)
                         }
                     },
                     enumerable: true,
@@ -182,7 +200,7 @@ class Color {
         })
     }
 
-    get hue() {
+    getHue() {
         const [red, green, blue] = Array.from(this.$channels).map((c) => c / 255)
         const [min, max] = [Math.min(red, green, blue), Math.max(red, green, blue)]
         const delta = max - min
@@ -206,12 +224,14 @@ class Color {
         return Math.round(hue % 360)
     }
 
-    set hue(value) {
+    setHue(value) {
         const color = Color.fromHSL(value, this.saturation, this.lightness, this.alpha / 255)
-        colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
+        for (let i = 0; i < this.$channels.length; i++) {
+            this.$channels[i] = Number(color.$channels[i])
+        }
     }
 
-    get saturation() {
+    getSaturation() {
         const [red, green, blue] = Array.from(this.$channels).map((c) => c / 255)
         const [min, max] = [Math.min(red, green, blue), Math.max(red, green, blue)]
         const delta = max - min
@@ -221,19 +241,19 @@ class Color {
             : 0
     }
 
-    set saturation(value) {
+    setSaturation(value) {
         const color = Color.fromHSL(this.hue, value, this.lightness, this.alpha / 255)
         colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
 
-    get lightness() {
+    getLightness() {
         const [red, green, blue] = Array.from(this.$channels).map((c) => c / 255)
         const [min, max] = [Math.min(red, green, blue), Math.max(red, green, blue)]
 
         return Math.round((max + min) / 2 * 100) / 100
     }
 
-    set lightness(value) {
+    setLightness(value) {
         const color = Color.fromHSL(this.hue, this.lightness, value, this.alpha / 255)
         colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
