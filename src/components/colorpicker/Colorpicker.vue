@@ -146,7 +146,10 @@ export default {
         },
         inline: Boolean,
         disabled: Boolean,
-        horizontalColorPicker: Boolean,
+        horizontalColorPicker: {
+            type: Boolean,
+            default: false
+        },
         colorFormatter: {
             type: Function,
             default: (color, vm) => {
