@@ -9,9 +9,12 @@ $colorpicker-hue-selected-stroke: $primary !default;
     .colorpicker-footer {
         margin-top: .875rem;
         padding-top: .875rem;
-        border-top: 1px solid #dbdbdb;
+        border: 1px solid #dbdbdb;
+        border-width: 1px 0 0 0;
 
         .colorpicker-fields {
+            margin-bottom: .875rem;
+
             .field {
                 flex-grow: 1;
 
@@ -26,6 +29,7 @@ $colorpicker-hue-selected-stroke: $primary !default;
                         appearance: textfield;
                         flex-grow: 1;
                         width: 0;
+                        min-width: 42px;
                         text-align: right;
 
                         &::-webkit-outer-spin-button,
@@ -41,6 +45,18 @@ $colorpicker-hue-selected-stroke: $primary !default;
     .dropdown.is-expanded .dropdown-menu,
     .dropdown.is-expanded.is-mobile-modal .dropdown-menu {
         width: unset;
+    }
+    .dropdown-horizonal-colorpicker {
+        display: flex;
+        flex-direction: row;
+
+        .colorpicker-footer {
+            border-width: 0 0 0 1px;
+            margin-top: 0;
+            padding-top: 0;
+            margin-left: .875rem;
+            padding-left: .875rem;
+        }
     }
 }
 

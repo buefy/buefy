@@ -51,10 +51,7 @@
                 <footer class="colorpicker-footer">
                     <slot name="footer" :color="colorSelected">
                         <b-field class="colorpicker-fields" grouped>
-                            <b-field
-                                label="R"
-                                horizontal
-                            >
+                            <b-field horizontal label="R">
                                 <b-input
                                     type="number"
                                     v-model.number="colorSelected.red"
