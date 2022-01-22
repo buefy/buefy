@@ -60,7 +60,7 @@ $colorpicker-hue-selected-stroke: $primary !default;
     }
 }
 
-svg.colorpicker-spectrum {
+svg.b-colorpicker-spectrum {
     width: 200px;
     height: 200px;
     user-select: none;
@@ -123,4 +123,15 @@ svg.colorpicker-spectrum {
             cursor: grabbing;
         }
     }
+}
+
+.b-colorpicker-alpha {
+    height: 1em;
+    background-image:
+        linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7),
+        linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7);
+    background-size: 1em 1em;
+    background-position: .5em .5em, 0 0;
+    border-radius: $colorpicker-radius;
+    margin-bottom: .875rem;
 }

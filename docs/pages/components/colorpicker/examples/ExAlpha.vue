@@ -20,11 +20,6 @@ export default {
             alpha: true,
             selected: Color.parse('#48c78eaa')
         }
-    },
-    methods: {
-        clearColor () {
-            this.selected = null
-        }
     }
 }
 </script>

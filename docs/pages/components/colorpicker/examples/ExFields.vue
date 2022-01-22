@@ -95,12 +95,12 @@ import Color from '../../../../../src/utils/color'
 export default {
     data() {
         return {
-            selected: Color.parse('red')
+            selected: Color.parse('cyan')
         }
     },
     methods: {
         clearColor () {
-            this.selected = null
+            this.selected = Color.parse('cyan')
         }
     }
 }

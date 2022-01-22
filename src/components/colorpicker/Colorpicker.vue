@@ -49,6 +49,11 @@
                     </div>
                 </div>
                 <footer class="colorpicker-footer">
+                    <b-colorpicker-alpha
+                        v-if="alpha"
+                        v-model="colorSelected.alpha"
+                        :color="colorSelected"
+                    />
                     <slot name="footer" :color="colorSelected">
                         <b-field class="colorpicker-fields" grouped>
                             <b-field horizontal label="R">
@@ -96,7 +101,8 @@ import Field from '../field/Field'
 import Select from '../select/Select'
 import Icon from '../icon/Icon'
 
-import ColorPickerSpectrumSVG from './ColorPickerSpectrumSVG'
+import ColorpickerSpectrumSVG from './ColorpickerSpectrumSVG'
+import ColorpickerAlpha from './ColorpickerAlpha'
 
 const defaultColorFormatter = (color, vm) => {
     if (color.alpha < 1) {
@@ -113,7 +119,8 @@ const defaultColorParser = (color, vm) => {
 export default {
     name: 'BColorpicker',
     components: {
-        [ColorPickerSpectrumSVG.name]: ColorPickerSpectrumSVG,
+        [ColorpickerSpectrumSVG.name]: ColorpickerSpectrumSVG,
+        [ColorpickerAlpha.name]: ColorpickerAlpha,
         [Input.name]: Input,
         [Field.name]: Field,
         [Select.name]: Select,
@@ -188,15 +195,13 @@ export default {
         appendToBody: Boolean
     },
     data() {
+        const color = this.colorParser(this.value)
+
         return {
-            colorSelected: this.colorParser(this.value)
+            colorSelected: color
         }
     },
     computed: {
-        hue() {
-            return this.colorSelected.hue
-        },
-
         background() {
             if (this.alpha) {
                 return `linear-gradient(
@@ -248,6 +253,7 @@ export default {
     },
     methods: {
         updateColor(value) {
+            value.alpha = this.colorSelected.alpha
             this.colorSelected = value
             this.$emit('change', value)
         },

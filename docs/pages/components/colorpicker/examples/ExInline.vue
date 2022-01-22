@@ -14,11 +14,6 @@ export default {
         return {
             selected: Color.parse('red')
         }
-    },
-    methods: {
-        clearColor () {
-            this.selected = null
-        }
     }
 }
 </script>

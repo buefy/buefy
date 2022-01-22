@@ -1,5 +1,5 @@
 <template>
-    <svg :viewBox="viewBox" class="colorpicker-spectrum">
+    <svg :viewBox="viewBox" class="b-colorpicker-spectrum">
         <defs>
             <linearGradient
                 :id="`cp-spectrum-gradient-ligthness-${id}`"
@@ -206,7 +206,7 @@ export default {
         },
         value: {
             deep: true,
-            handler(newColor, oldColor) {
+            handler(newColor) {
                 const { hue, saturation, lightness } = newColor
 
                 window.clearTimeout(this.debounce)
