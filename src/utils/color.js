@@ -259,7 +259,10 @@ class Color {
     }
 
     clone() {
-        return Color.fromRGB(...Array.from(this.$channels))
+        const color = new Color()
+        colorChannels.forEach((_, i) => (color.$channels[i] = this.$channels[i]))
+
+        return color
     }
 
     toString(type = 'hex') {
