@@ -18,7 +18,7 @@ export default {
     data() {
         return {
             alpha: true,
-            selected: Color.parse('#FF0000')
+            selected: Color.parse('#48c78eaa')
         }
     },
     methods: {
