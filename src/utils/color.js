@@ -203,7 +203,12 @@ class Color {
         hue *= 60
         while (hue !== -Infinity && hue < 0) hue += 360
 
-        return hue % 360
+        return Math.round(hue % 360)
+    }
+
+    set hue(value) {
+        const color = Color.fromHSL(value, this.saturation, this.lightness, this.alpha / 255)
+        colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
 
     get saturation() {
@@ -212,15 +217,25 @@ class Color {
         const delta = max - min
 
         return delta !== 0
-            ? delta / (1 - Math.abs(2 * this.lightness - 1))
+            ? Math.round(delta / (1 - Math.abs(2 * this.lightness - 1)) * 100) / 100
             : 0
+    }
+
+    set saturation(value) {
+        const color = Color.fromHSL(this.hue, value, this.lightness, this.alpha / 255)
+        colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
 
     get lightness() {
         const [red, green, blue] = Array.from(this.$channels).map((c) => c / 255)
         const [min, max] = [Math.min(red, green, blue), Math.max(red, green, blue)]
 
-        return (max + min) / 2
+        return Math.round((max + min) / 2 * 100) / 100
+    }
+
+    set lightness(value) {
+        const color = Color.fromHSL(this.hue, this.lightness, value, this.alpha / 255)
+        colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
 
     clone() {
