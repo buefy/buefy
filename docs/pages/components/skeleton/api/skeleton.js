@@ -9,13 +9,6 @@ export default [
                 default: '<code>true</code>'
             },
             {
-                name: '<code>custom-class</code>',
-                description: 'CSS classes to be applied on input',
-                type: 'String',
-                values: '—',
-                default: '—'
-            },
-            {
                 name: '<code>animated</code>',
                 description: 'Display a loading animation',
                 type: 'Boolean',
@@ -70,7 +63,7 @@ export default [
                 type: 'String',
                 values: '<code>is-centered</code>, <code>is-right</code>',
                 default: '—'
-            },
+            }
         ]
     }
 ]

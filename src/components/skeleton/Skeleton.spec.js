@@ -5,7 +5,11 @@ let wrapper
 
 describe('BSkeleton', () => {
     beforeEach(() => {
-        wrapper = mount(BSkeleton)
+        wrapper = mount(BSkeleton, {
+            attrs: {
+                class: 'custom-class'
+            }
+        })
     })
 
     it('render correctly', () => {

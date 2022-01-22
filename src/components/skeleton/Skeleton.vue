@@ -1,30 +1,11 @@
-<template>
-    <div
-        v-if="active"
-        class="b-skeleton"
-        :class="[ customClass, size, position, { 'is-animated': animated } ]"
-    >
-        <div
-            v-for="index in count"
-            :key="index"
-            class="b-skeleton-item"
-            :class="{ 'is-rounded': rounded }"
-            :style="styles"
-        />
-    </div>
-</template>
-
 <script>
 export default {
     name: 'BSkeleton',
+    functional: true,
     props: {
         active: {
             type: Boolean,
             default: true
-        },
-        customClass: {
-            type: String,
-            default: ''
         },
         animated: {
             type: Boolean,
@@ -49,22 +30,35 @@ export default {
                     '',
                     'is-centered',
                     'is-right'
-                ].includes(value)
+                ].indexOf(value) > -1
             }
         },
         size: String
     },
-    computed: {
-        styles() {
-            const { width, height } = this
-            return {
-                height: height === undefined ? null
-                    : (isNaN(height) ? height : height + 'px'),
-                width: width === undefined ? null
-                    : (isNaN(width) ? width : width + 'px'),
-                borderRadius: this.circle ? '50%' : null
-            }
+    render(createElement, context) {
+        if (!context.props.active) return
+        const items = []
+        const width = context.props.width
+        const height = context.props.height
+        for (let i = 0; i < context.props.count; i++) {
+            items.push(createElement('div', {
+                staticClass: 'b-skeleton-item',
+                class: { 'is-rounded': context.props.rounded },
+                key: i,
+                style: {
+                    height: height === undefined ? null
+                        : (isNaN(height) ? height : height + 'px'),
+                    width: width === undefined ? null
+                        : (isNaN(width) ? width : width + 'px'),
+                    borderRadius: context.props.circle ? '50%' : null
+                }
+            }))
         }
+        return createElement('div', {
+            ...context.data,
+            staticClass: 'b-skeleton',
+            class: [ context.data.attrs.class, context.props.size, context.props.position, { 'is-animated': context.props.animated } ]
+        }, items)
     }
 }
 </script>
