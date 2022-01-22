@@ -10,11 +10,49 @@ $colorpicker-hue-selected-stroke: $primary !default;
         margin-top: .875rem;
         padding-top: .875rem;
         border-top: 1px solid #dbdbdb;
+
+        .colorpicker-fields {
+            .field {
+                flex-grow: 1;
+
+                .field-label {
+                    margin-right: .5rem;
+                }
+                .control {
+                    display: flex;
+                    .input {
+                        -webkit-appearance: none;
+                        -moz-appearance: textfield;
+                        appearance: textfield;
+                        flex-grow: 1;
+                        width: 0;
+                        text-align: right;
+
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .dropdown.is-expanded .dropdown-menu,
+    .dropdown.is-expanded.is-mobile-modal .dropdown-menu {
+        width: unset;
     }
 }
 
 svg.colorpicker-spectrum {
+    width: 200px;
+    height: 200px;
     user-select: none;
+
+    @media (max-width: $tablet) {
+        width: 100%;
+        height: auto;
+    }
 
     .colorpicker-spectrum-hue {
         width: 100%;

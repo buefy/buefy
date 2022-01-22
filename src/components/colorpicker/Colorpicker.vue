@@ -6,6 +6,7 @@
             v-if="!isMobile || inline"
             ref="dropdown"
             :position="position"
+            :expanded="expanded"
             :disabled="disabled"
             :inline="inline"
             :mobile-modal="mobileModal"
@@ -20,6 +21,7 @@
                 <slot name="trigger">
                     <b-button
                         :style="triggerStyle"
+                        :expanded="expanded"
                         :disabled="disabled"
                     >
                         <span class="color-name">{{ colorFormatter(colorSelected) }}</span>
@@ -47,9 +49,37 @@
                     </div>
                 </div>
                 <footer class="colorpicker-footer">
-                    <template v-if="$slots.footer !== undefined && $slots.footer.length">
-                        <slot name="footer" :color="colorSelected"/>
-                    </template>
+                    <slot name="footer" :color="colorSelected">
+                        <b-field class="colorpicker-fields" grouped>
+                            <b-field
+                                label="R"
+                                horizontal
+                            >
+                                <b-input
+                                    type="number"
+                                    v-model.number="colorSelected.red"
+                                    size="is-small"
+                                    aria-label="Red"
+                                />
+                            </b-field>
+                            <b-field horizontal label="G">
+                                <b-input
+                                    type="number"
+                                    v-model.number="colorSelected.green"
+                                    size="is-small"
+                                    aria-label="Green"
+                                />
+                            </b-field>
+                            <b-field horizontal label="B">
+                                <b-input
+                                    type="number"
+                                    v-model.number="colorSelected.blue"
+                                    size="is-small"
+                                    aria-label="Blue"
+                                />
+                            </b-field>
+                        </b-field>
+                    </slot>
                 </footer>
             </b-dropdown-item>
         </b-dropdown>
@@ -141,6 +171,7 @@ export default {
             type: Boolean,
             default: false
         },
+        expanded: Boolean,
         position: String,
         mobileModal: {
             type: Boolean,
@@ -196,7 +227,7 @@ export default {
                 backgroundSize: '100% 100%, 16px 16px, 16px 16px',
                 backgroundPosition: '0 0, 8px 8px, 0 0',
                 color: light ? '#000000' : '#FFFFFF',
-                textShadow: `0 0 2px ${light ? '#FFFFFF' : '#000000'}`
+                textShadow: `0 0 2px ${light ? '#FFFFFFAA' : '#000000AA'}`
             }
         },
 
