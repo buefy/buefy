@@ -584,7 +584,7 @@
             "documentation",
             "documentation/colorpicker"
         ],
-        "isUpdated": true
+        "isNew": true
     },
     "extensions": {
         "title": "Extensions",
