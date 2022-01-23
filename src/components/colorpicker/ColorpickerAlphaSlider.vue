@@ -91,8 +91,47 @@ export default {
         }
     },
     methods: {
+        increaseAlpha(value = 1) {
+            this.percent = Math.max(0, Math.min(100, this.percent + value))
+        },
+        decreaseAlpha(value = 0.01) {
+            this.increaseAlpha(-value)
+        },
         alphaKeyPress(event) {
-            //
+            let handled = false
+            switch (event.key) {
+                case 'ArrowRight':
+                case 'ArrowUp':
+                    this.increaseAlpha()
+                    handled = true
+                    break
+                case 'ArrowLeft':
+                case 'ArrowDown':
+                    this.decreaseAlpha()
+                    handled = true
+                    break
+                case 'Home':
+                    this.decreaseAlpha(this.percent)
+                    handled = true
+                    break
+                case 'End':
+                    this.increaseAlpha(100 - this.percent)
+                    handled = true
+                    break
+                case 'PageUp':
+                    this.increaseAlpha(10 - (this.percent % 10))
+                    handled = true
+                    break
+                case 'PageDown':
+                    this.decreaseAlpha(this.percent % 10)
+                    handled = true
+                    break
+            }
+            if (handled) {
+                event.preventDefault()
+                event.stopPropagation()
+                this.emitAlpha()
+            }
         },
         clickAlpha(event) {
             this.startMouseCapture(event)
