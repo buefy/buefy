@@ -163,7 +163,7 @@ class Color {
             return Color.parse(...args)
         }
 
-        this.$channels = new Uint8Array(4)
+        this.$channels = new Uint8Array(colorChannels.length)
         colorChannels.forEach((channel, index) => {
             Object.defineProperty(
                 this,
