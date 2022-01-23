@@ -6,7 +6,7 @@
             </div>
         </b-field>
         <b-field label="Select a color">
-            <b-colorpicker v-model="selected" :alpha="alpha" />
+            <b-colorpicker v-model="selected" :alpha="alpha" :color-formatter="formatter" />
         </b-field>
     </section>
 </template>
@@ -19,6 +19,11 @@ export default {
         return {
             alpha: true,
             selected: Color.parse('#48c78eaa')
+        }
+    },
+    methods: {
+        formatter (color) {
+            return color.toString(this.alpha ? 'rgba' : 'rgb')
         }
     }
 }

@@ -125,7 +125,7 @@ svg.b-colorpicker-spectrum {
     }
 }
 
-.b-colorpicker-alpha {
+.b-colorpicker-alpha-slider {
     height: 1em;
     background-image:
         linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7),
@@ -133,5 +133,50 @@ svg.b-colorpicker-spectrum {
     background-size: 1em 1em;
     background-position: .5em .5em, 0 0;
     border-radius: $colorpicker-radius;
+    margin-top: .125em;
     margin-bottom: .875rem;
+    position: relative;
+
+    .alpha-range-thumb {
+        width: .4em;
+        height: 1.25em;
+        border-radius: $colorpicker-radius;
+        box-shadow:
+            inset 0 0 0 1px #fff,
+            inset 0 0 0 2px #dbdbdb,
+            0 0 0 1px #dbdbdb;
+        cursor: grab;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+            box-shadow:
+                inset 0 0 0 1px #fff,
+                inset 0 0 0 2px #b5b5b5,
+                0 0 0 1px #b5b5b5;
+        }
+        &:focus {
+            box-shadow:
+                inset 0 0 0 1px #fff,
+                0 0 0 1px $colorpicker-hue-selected-stroke,
+                0 0 0 .125em rgba($colorpicker-hue-selected-stroke, .25);
+        }
+        &:active {
+            cursor: grabbing;
+        }
+
+        & > .b-tooltip {
+            &,
+            &> .tooltip-trigger {
+                position: absolute;
+                display: block;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
 }

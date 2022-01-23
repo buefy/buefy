@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <footer class="colorpicker-footer">
-                    <b-colorpicker-alpha
+                    <b-colorpicker-alpha-slider
                         v-if="alpha"
                         v-model="colorSelected.alpha"
                         :color="colorSelected"
@@ -103,7 +103,7 @@ import Select from '../select/Select'
 import Icon from '../icon/Icon'
 
 import ColorpickerSpectrumSVG from './ColorpickerSpectrumSVG'
-import ColorpickerAlpha from './ColorpickerAlpha'
+import ColorpickerAlphaSlider from './ColorpickerAlphaSlider'
 
 const defaultColorFormatter = (color, vm) => {
     if (color.alpha < 1) {
@@ -121,7 +121,7 @@ export default {
     name: 'BColorpicker',
     components: {
         [ColorpickerSpectrumSVG.name]: ColorpickerSpectrumSVG,
-        [ColorpickerAlpha.name]: ColorpickerAlpha,
+        [ColorpickerAlphaSlider.name]: ColorpickerAlphaSlider,
         [Input.name]: Input,
         [Field.name]: Field,
         [Select.name]: Select,
