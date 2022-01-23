@@ -1,6 +1,7 @@
 <template>
     <div
         class="colorpicker control"
+        :class="[size, {'is-expanded': expanded}]"
     >
         <b-dropdown
             v-if="!isMobile || inline"
