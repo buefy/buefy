@@ -880,7 +880,12 @@ export default {
                 let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
                     return (i.order && i.order === 'desc' ? '-' : '') + i.field
                 })
-                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+
+                if (formattedSortingPriority.length === 0) {
+                    this.resetMultiSorting()
+                } else {
+                    this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+                }
             }
         },
         resetMultiSorting() {
@@ -988,8 +993,8 @@ export default {
                 }
                 if (!this.backendSorting) {
                     this.doSortSingleColumn(column)
+                    this.currentSortColumn = column
                 }
-                this.currentSortColumn = column
             }
         },
 
