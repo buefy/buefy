@@ -52,7 +52,7 @@ export default {
         pageInput: Boolean,
         paginationOrder: String,
         pageInputPosition: String,
-        debouncePageInput: Number
+        debouncePageInput: [Number, String]
     },
     data() {
         return {

@@ -61,15 +61,14 @@
                 aria-hidden="true" />
         </BPaginationButton>
 
-        <b-numberinput
-            v-if="pageInput"
-            class="pagination-input"
-            min="1"
-            :max="pageCount"
-            :value="inputValue"
-            :controls="false"
-            @input.native="onInput"
-        />
+        <div class="control pagination-input">
+            <input
+                v-if="pageInput"
+                class="input"
+                :value="inputValue"
+                @input="handleOnInputValue"
+            >
+        </div>
 
         <small class="info" v-if="simple">
             <template v-if="perPage == 1"> {{ firstItem }} / {{ total }} </template>
@@ -109,15 +108,13 @@
 import PaginationButton from './PaginationButton'
 import Icon from '../icon/Icon'
 import config from '../../utils/config'
-import NumberInput from '../numberinput/Numberinput'
 import debounce from '../../utils/debounce'
 
 export default {
     name: 'BPagination',
     components: {
         [Icon.name]: Icon,
-        [PaginationButton.name]: PaginationButton,
-        [NumberInput.name]: NumberInput
+        [PaginationButton.name]: PaginationButton
     },
     // deprecated, to replace with default 'value' in the next breaking change
     model: {
@@ -168,7 +165,7 @@ export default {
             default: false
         },
         pageInputPosition: String,
-        debouncePageInput: Number
+        debouncePageInput: [Number, String]
     },
     data() {
         return {
@@ -292,7 +289,7 @@ export default {
         debouncePageInput: {
             handler(value) {
                 this.debounceHandlePageInput = debounce(
-                    this.handleInputPageChange,
+                    this.handleOnInputPageChange,
                     value
                 )
             },
@@ -370,17 +367,26 @@ export default {
             return null
         },
 
-        handleInputPageChange(event) {
+        handleOnInputPageChange(event) {
             this.getPage(this.inputValue).input(event, this.inputValue)
         },
 
-        onInput(event) {
-            this.inputValue = +event.target.value
-
+        handleOnInputDebounce(event) {
             if (this.debouncePageInput) {
                 this.debounceHandlePageInput(event)
             } else {
-                this.handleInputPageChange(event)
+                this.handleOnInputPageChange(event)
+            }
+        },
+
+        handleOnInputValue(event) {
+            this.inputValue = +event.target.value
+
+            if (Number.isInteger(this.inputValue)) {
+                this.handleOnInputDebounce(event)
+            } else {
+                // --- if NaN, then set inputValue back to current --- //
+                this.inputValue = this.current
             }
         }
     }

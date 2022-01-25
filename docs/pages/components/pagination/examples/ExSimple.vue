@@ -61,7 +61,7 @@
                 </b-select>
             </b-field>
             <b-field label="Debounce input">
-                <b-input type="number" placeholder="milliseconds" v-model="inputDebounce"></b-input>
+                <b-input type="number" placeholder="milliseconds" v-model="inputDebounce" min="0"></b-input>
             </b-field>
         </b-field>
 

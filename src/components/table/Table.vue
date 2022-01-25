@@ -587,7 +587,7 @@ export default {
         },
         paginationOrder: String,
         pageInputPosition: String,
-        debouncePageInput: Number
+        debouncePageInput: [Number, String]
     },
     data() {
         return {

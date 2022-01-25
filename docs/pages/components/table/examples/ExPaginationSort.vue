@@ -55,7 +55,7 @@
                 <option value="is-input-right">is-input-right</option>
                 <option value="is-input-left">is-input-left</option>
             </b-select>
-             <b-input type="number" placeholder="debounce (milliseconds)" v-model="inputDebounce"></b-input>
+             <b-input type="number" placeholder="debounce (milliseconds)" v-model="inputDebounce" min="0"></b-input>
         </b-field>
 
         <b-table
