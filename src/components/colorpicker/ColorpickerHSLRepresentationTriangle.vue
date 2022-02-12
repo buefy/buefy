@@ -1,8 +1,8 @@
 <template>
-    <svg :viewBox="viewBox" class="b-colorpicker-spectrum">
+    <svg :viewBox="viewBox" class="b-colorpicker-triangle">
         <defs>
             <linearGradient
-                :id="`cp-spectrum-gradient-ligthness-${id}`"
+                :id="`cp-triangle-gradient-ligthness-${id}`"
                 x1="0"
                 y1="0"
                 x2="1"
@@ -12,7 +12,7 @@
                 <stop offset="100%" stop-color="#000"/>
             </linearGradient>
             <linearGradient
-                :id="`cp-spectrum-gradient-saturation-${id}`"
+                :id="`cp-triangle-gradient-saturation-${id}`"
                 x1="0"
                 y1="0"
                 x2="0"
@@ -29,22 +29,22 @@
                     stop-opacity="0"
                 />
             </linearGradient>
-            <clipPath :id="`cp-spectrum-clip-${id}`">
+            <clipPath :id="`cp-triangle-clip-${id}`">
                 <path :d="haloPath" />
             </clipPath>
         </defs>
-        <g class="colorpicker-spectrum-slider-hue">
+        <g class="colorpicker-triangle-slider-hue">
             <foreignObject
                 :x="0"
                 :y="0"
                 :width="size"
                 :height="size"
-                :clip-path="`url(#cp-spectrum-clip-${id})`"
+                :clip-path="`url(#cp-triangle-clip-${id})`"
             >
                 <div
-                    class="colorpicker-spectrum-hue"
+                    class="colorpicker-triangle-hue"
                     @click="clickHue"
-                    @mousedown="startMouseCapture"
+                    @mousedown.prevent="startMouseCapture"
                     @touchstart.prevent="startMouseCapture"
                 />
             </foreignObject>
@@ -67,28 +67,28 @@
                         aria-valuemax="360"
                         @click="clickHue"
                         @keydown="hueKeyPress"
-                        @mousedown="startMouseCapture"
+                        @mousedown.prevent="startMouseCapture"
                         @touchstart.prevent="startMouseCapture"
                     />
                 </foreignObject>
             </g>
         </g>
         <g
-            class="colorpicker-spectrum-slider-sl"
+            class="colorpicker-triangle-slider-sl"
             :style="`transform: rotate(${hue}deg) translate(50%, 50%)`"
             role="graphics-datagroup"
             aria-datascales="lightness, saturation"
         >
             <path
                 :d="trianglePath"
-                :fill="`url(#cp-spectrum-gradient-ligthness-${id})`"
+                :fill="`url(#cp-triangle-gradient-ligthness-${id})`"
             />
             <path
                 :d="trianglePath"
-                :fill="`url(#cp-spectrum-gradient-saturation-${id})`"
+                :fill="`url(#cp-triangle-gradient-saturation-${id})`"
                 style="mix-blend-mode: overlay;"
                 @click="clickSL"
-                @mousedown="startMouseCapture"
+                @mousedown.prevent="startMouseCapture"
                 @touchstart.prevent="startMouseCapture"
             />
             <foreignObject
@@ -107,7 +107,7 @@
                     :aria-datavalues="`${saturation * 100}%, ${lightness * 100}%`"
                     @click="clickSL"
                     @keydown="slKeyPress"
-                    @mousedown="startMouseCapture"
+                    @mousedown.prevent="startMouseCapture"
                     @touchstart.prevent="startMouseCapture"
                 />
             </foreignObject>
@@ -123,7 +123,7 @@ const sin30 = 0.5
 let id = 0
 
 export default {
-    name: 'BColorpickerSpectrumSVG',
+    name: 'BColorpickerHSLRepresentationTriangle',
     props: {
         value: {
             type: Object,
@@ -406,7 +406,7 @@ export default {
             event.stopPropagation()
 
             this.captureMouse = true
-            if (event.target.closest('.colorpicker-spectrum-slider-sl') !== null) {
+            if (event.target.closest('.colorpicker-triangle-slider-sl') !== null) {
                 this.captureType = 'sl'
             } else {
                 this.captureType = 'hue'

@@ -43,7 +43,13 @@
                         </template>
                     </header>
                     <div class="colorpicker-content">
-                        <b-colorpicker-spectrum-s-v-g
+                        <b-colorpicker-h-s-l-representation-square
+                            v-if="representation === 'square'"
+                            :value="colorSelected"
+                            @input="updateColor"
+                        />
+                        <b-colorpicker-h-s-l-representation-triangle
+                            v-else
                             :value="colorSelected"
                             @input="updateColor"
                         />
@@ -102,7 +108,8 @@ import Field from '../field/Field'
 import Select from '../select/Select'
 import Icon from '../icon/Icon'
 
-import ColorpickerSpectrumSVG from './ColorpickerSpectrumSVG'
+import ColorpickerHSLRepresentationTriangle from './ColorpickerHSLRepresentationTriangle'
+import ColorpickerHSLRepresentationSquare from './ColorpickerHSLRepresentationSquare'
 import ColorpickerAlphaSlider from './ColorpickerAlphaSlider'
 
 const defaultColorFormatter = (color, vm) => {
@@ -120,7 +127,8 @@ const defaultColorParser = (color, vm) => {
 export default {
     name: 'BColorpicker',
     components: {
-        [ColorpickerSpectrumSVG.name]: ColorpickerSpectrumSVG,
+        [ColorpickerHSLRepresentationTriangle.name]: ColorpickerHSLRepresentationTriangle,
+        [ColorpickerHSLRepresentationSquare.name]: ColorpickerHSLRepresentationSquare,
         [ColorpickerAlphaSlider.name]: ColorpickerAlphaSlider,
         [Input.name]: Input,
         [Field.name]: Field,
@@ -147,6 +155,13 @@ export default {
                         typeof value.green === 'number' &&
                         typeof value.blue === 'number'
                     )
+            }
+        },
+        representation: {
+            type: String,
+            default: 'triangle',
+            value(value) {
+                return ['triangle', 'square'].some((r) => r === value)
             }
         },
         inline: Boolean,
