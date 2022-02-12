@@ -27,9 +27,13 @@
 
 <script>
 import Color from '../../utils/color'
+import Tooltip from '../tooltip/Tooltip'
 
 export default {
     name: 'BColorpickerAlphaSlider',
+    components: {
+        [Tooltip.name]: Tooltip
+    },
     props: {
         value: {
             type: Number,

@@ -3,7 +3,11 @@ import BColorpickerAlphaSlider from '@components/colorpicker/ColorpickerAlphaSli
 
 describe('BColorpickerAlphaSlider', () => {
     it('render correctly', () => {
-        const wrapper = shallowMount(BColorpickerAlphaSlider)
+        const wrapper = shallowMount(BColorpickerAlphaSlider, {
+            propsData: {
+                value: 100
+            }
+        })
 
         expect(wrapper.html()).toMatchSnapshot()
     })
