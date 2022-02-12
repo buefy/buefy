@@ -315,20 +315,20 @@ class Color {
 
             if (typeof colorsNammed[args[0].toLowerCase()] === 'string') {
                 return Color.parseHex(colorsNammed[args[0].toLowerCase()])
-            } else if ((match = args[0].match(/^(#|&h|0x)?(?<hex>(?:[a-f0-9]{3,4}){1,2})$/i)) !== null) {
-                return Color.parseHex(match.groups.hex)
-            } else if ((match = args[0].match(/^rgba?\(\s*(?<red>\d+)\s*,\s*(?<green>\d+)\s*,\s*(?<blue>\d+)(\s*,\s*(?<alpha>\d*\.?\d+))?\s*\)$/i)) !== null) {
+            } else if ((match = args[0].match(/^(#|&h|0x)?(([a-f0-9]{3,4}){1,2})$/i)) !== null) {
+                return Color.parseHex(match[2])
+            } else if ((match = args[0].match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(\s*,\s*(\d*\.?\d+))?\s*\)$/i)) !== null) {
                 const channels = [
-                    match.groups.red,
-                    match.groups.green,
-                    match.groups.blue,
-                    typeof match.groups.alpha !== 'undefined'
-                        ? match.groups.alpha
+                    match[1],
+                    match[2],
+                    match[3],
+                    typeof match[5] !== 'undefined'
+                        ? match[5]
                         : 1
                 ]
 
                 return Color.fromRGB(...channels.map((value) => Number(value)))
-            } else if ((match = args[0].match(/^(h(?:sl|wb)a?|lab|color|cmyk)\(/i))) {
+            } else if ((match = args[0].match(/^(h(sl|wb)a?|lab|color|cmyk)\(/i))) {
                 throw new Error('Color expression not implemented yet')
             }
         }
