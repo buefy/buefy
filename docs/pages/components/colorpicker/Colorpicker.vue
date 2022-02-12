@@ -4,7 +4,7 @@
 
         <Example :component="ExAlpha" :code="ExAlphaCode" title="Alpha" vertical/>
 
-        <Example :component="ExInline" :code="ExInlineCode" title="Inline" vertical/>
+        <Example :component="ExRepresentation" :code="ExRepresentationCode" title="Representation" vertical/>
 
         <Example :component="ExFields" :code="ExFieldsCode" title="Footer" vertical/>
 
@@ -22,8 +22,8 @@
     import ExAlpha from './examples/ExAlpha'
     import ExAlphaCode from '!!raw-loader!./examples/ExAlpha'
 
-    import ExInline from './examples/ExInline'
-    import ExInlineCode from '!!raw-loader!./examples/ExInline'
+    import ExRepresentation from './examples/ExRepresentation'
+    import ExRepresentationCode from '!!raw-loader!./examples/ExRepresentation'
 
     import ExFormatter from './examples/ExFormatter'
     import ExFormatterCode from '!!raw-loader!./examples/ExFormatter'
@@ -41,8 +41,8 @@
                 ExSimpleCode,
                 ExAlpha,
                 ExAlphaCode,
-                ExInline,
-                ExInlineCode,
+                ExRepresentation,
+                ExRepresentationCode,
                 ExFormatter,
                 ExFormatterCode,
                 ExFields,
