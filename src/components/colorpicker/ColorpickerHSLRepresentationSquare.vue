@@ -130,7 +130,7 @@ export default {
         },
         SLBackground() {
             const { hue } = this
-            return `linear-gradient(90deg, hsl(${hue}deg, 50%, 100%), hsl(${hue}deg, 100%, 50%))`
+            return `linear-gradient(90deg, hsl(${hue}deg, 0%, 50%), hsl(${hue}deg, 100%, 50%))`
         }
     },
     watch: {
