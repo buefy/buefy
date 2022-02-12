@@ -1,17 +1,17 @@
 import { shallowMount } from '@vue/test-utils'
-import BColorPickerHSLRepresentationTriangle from '@components/colorpicker/ColorPickerHSLRepresentationTriangle'
+import BColorpickerHSLRepresentationTriangle from '@components/colorpicker/ColorpickerHSLRepresentationTriangle'
 import Color from '../../utils/color'
 
 let defaultProps
 
-describe('BColorPickerHSLRepresentationTriangle', () => {
+describe('BColorpickerHSLRepresentationTriangle', () => {
     beforeEach(() => {
         defaultProps = () => ({
             value: Color.parse('#123456')
         })
     })
     it('render correctly', () => {
-        const wrapper = shallowMount(BColorPickerHSLRepresentationTriangle, {
+        const wrapper = shallowMount(BColorpickerHSLRepresentationTriangle, {
             propsData: {
                 ...defaultProps()
             }
