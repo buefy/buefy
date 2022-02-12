@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
+import Color from '@utils/color'
 import BColorpickerHSLRepresentationSquare from '@components/colorpicker/ColorpickerHSLRepresentationSquare'
-import Color from '../../utils/color'
 
 let defaultProps
 
