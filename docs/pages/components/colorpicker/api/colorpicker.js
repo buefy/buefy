@@ -9,6 +9,20 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>representation</code>',
+                description: 'Representation of Saturation & Lightness values',
+                type: 'String',
+                values: '<code>triangle</code>, <code>square</code>',
+                default: '<code>"triangle"</code>'
+            },
+            {
+                name: '<code>alpha</code>',
+                description: 'Allow color with transparency',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>color-formatter</code>',
                 description: 'Function to format color to a string for display in the button',
                 type: 'Function',
