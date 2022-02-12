@@ -9,6 +9,9 @@
         <Example :component="ExFields" :code="ExFieldsCode" title="Footer" vertical/>
 
         <Example :component="ExFormatter" :code="ExFormatterCode" title="Formatter" vertical/>
+
+        <ApiView :data="api"/>
+        <VariablesView :data="variables"/>
     </div>
 </template>
 
