@@ -282,7 +282,7 @@ class Color {
             case 'hsl':
                 return `hsl(${Math.round(this.hue)}deg, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%)`
             case 'hsla':
-                return `hsl(${Math.round(this.hue)}deg, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%,  ${Math.round(this.alpha / 2.55) / 100})`
+                return `hsla(${Math.round(this.hue)}deg, ${Math.round(this.saturation * 100)}%, ${Math.round(this.lightness * 100)}%, ${Math.round(this.alpha / 2.55) / 100})`
             default:
                 throw new ColorTypeError()
         }
@@ -318,13 +318,16 @@ class Color {
             } else if ((match = args[0].match(/^(#|&h|0x)?(?<hex>(?:[a-f0-9]{3,4}){1,2})$/i)) !== null) {
                 return Color.parseHex(match.groups.hex)
             } else if ((match = args[0].match(/^rgba?\(\s*(?<red>\d+)\s*,\s*(?<green>\d+)\s*,\s*(?<blue>\d+)(\s*,\s*(?<alpha>\d*\.?\d+))?\s*\)$/i)) !== null) {
-                const channels = [match.groups.red, match.groups.green, match.groups.blue]
+                const channels = [
+                    match.groups.red,
+                    match.groups.green,
+                    match.groups.blue,
+                    typeof match.groups.alpha !== 'undefined'
+                        ? match.groups.alpha
+                        : 1
+                ]
 
-                if (match.groups.alpha) {
-                    channels.push(match.groups.alpha * 255)
-                }
-
-                return Color.parse(channels)
+                return Color.fromRGB(...channels.map((value) => Number(value)))
             } else if ((match = args[0].match(/^(h(?:sl|wb)a?|lab|color|cmyk)\(/i))) {
                 throw new Error('Color expression not implemented yet')
             }
