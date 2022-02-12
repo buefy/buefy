@@ -364,7 +364,7 @@ export default {
                         datetimeGroups.hour < 24 &&
                         datetimeGroups.minute &&
                         datetimeGroups.minute >= 0 &&
-                        datetimeGroups.minute < 59
+                        datetimeGroups.minute <= 59
                     ) {
                         const d = new Date(
                             datetimeGroups.year,

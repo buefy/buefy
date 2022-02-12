@@ -160,7 +160,8 @@ export default {
                 return this.newValue
             },
             set(value) {
-                let newValue = Number(value) || 0
+                // Parses the number, so that "0" => 0, and "invalid" => null
+                let newValue = (Number(value) === 0) ? 0 : (Number(value) || null)
                 if (value === '' || value === undefined || value === null) {
                     if (this.minNumber !== undefined) {
                         newValue = this.minNumber
