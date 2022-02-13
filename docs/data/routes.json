@@ -487,7 +487,7 @@
             "documentation/menu"
         ]
     },
-     "documentation/slider": {
+    "documentation/slider": {
         "title": "Slider",
         "subtitle": "A slider to select a value or range from a given range",
         "path": "/documentation/slider",
@@ -572,6 +572,19 @@
             "documentation",
             "documentation/image"
         ]
+    },
+    "documentation/colorpicker": {
+        "title": "Colorpicker",
+        "subtitle": "An Input that lets a user specify a color",
+        "path": "/documentation/colorpicker",
+        "githubPath": "pages/components/colorpicker/Colorpicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/colorpicker"
+        ],
+        "isNew": true
     },
     "extensions": {
         "title": "Extensions",
