@@ -1,5 +1,21 @@
 # Buefy Changelog
 
+## 0.9.15
+
+### New features
+
+* **New component: Colorpicker**, [see docs](https://buefy.org/documentation/colorpicker) (thanks @Mars073)
+* Add year to ``week-number-click`` event (thanks @geeksilva97)
+* Add ``icon-size`` prop to notification (thanks @matt3188)
+* Allow any keyword as step of numberinput (thanks @OrestHk)
+
+### Fixes
+
+* Fix #3614 display zero in numberinput (thanks @rockandre)
+* Fix #3649 datetimepicker parser when minute is 59
+* Fix #3663 increment/decrement when v-model is null/undefined
+* Fix reset multi-sort table (thanks @nimaebra)
+
 ## 0.9.14
 
 ### New features
