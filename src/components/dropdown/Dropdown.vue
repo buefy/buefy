@@ -179,6 +179,7 @@ export default {
         */
         isActive(value) {
             this.$emit('active-change', value)
+            this.handleScroll()
             if (this.appendToBody) {
                 this.$nextTick(() => {
                     this.updateAppendToBody()
@@ -187,6 +188,18 @@ export default {
         }
     },
     methods: {
+        handleScroll() {
+            if (typeof window === 'undefined') return
+
+            if (this.isMobileModal) {
+                if (this.isActive) {
+                    document.documentElement.classList.add('is-clipped-touch')
+                } else {
+                    document.documentElement.classList.remove('is-clipped-touch')
+                }
+            }
+        },
+
         /**
          * Click listener from DropdownItem.
          *   1. Set new selected item.
