@@ -211,9 +211,15 @@ export default {
             return typeof this.max === 'string' ? parseFloat(this.max) : this.max
         },
         stepNumber() {
+            if (this.newStep === 'any') {
+                return 1
+            }
             return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
         },
         minStepNumber() {
+            if (this.newStep === 'any' && typeof this.newMinStep === 'undefined') {
+                return 'any'
+            }
             const step = typeof this.newMinStep !== 'undefined' ? this.newMinStep : this.newStep
             return typeof step === 'string' ? parseFloat(step) : step
         },
