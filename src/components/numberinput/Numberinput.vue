@@ -262,7 +262,7 @@ export default {
         },
         decrement() {
             if (this.computedValue === null || typeof this.computedValue === 'undefined') {
-                if (this.maxNumber !== null || typeof this.maxNumber !== 'undefined') {
+                if (this.maxNumber !== null && typeof this.maxNumber !== 'undefined') {
                     this.computedValue = this.maxNumber
                     return
                 }
@@ -275,7 +275,7 @@ export default {
         },
         increment() {
             if (this.computedValue === null || typeof this.computedValue === 'undefined') {
-                if (this.minNumber !== null || typeof this.minNumber !== 'undefined') {
+                if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
                     this.computedValue = this.minNumber
                     return
                 }
