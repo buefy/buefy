@@ -66,7 +66,10 @@
                 v-if="pageInput"
                 class="input"
                 :value="inputValue"
-                @input="handleOnInputValue"
+                @input="handleAllowableInputPageRange"
+                @keypress="handleOnKeyPress"
+                :size="pageCount.toString().length"
+                :maxlength="pageCount.toString().length"
             >
         </div>
 
@@ -378,10 +381,31 @@ export default {
                 this.handleOnInputPageChange(event)
             }
         },
+        handleOnKeyPress(event) {
+            // --- This is required to only allow numeric inputs for the page input - --- //
+            // --- size attribute does not work with input type number. --- //
+            let ASCIICode = event.which || event.keyCode
 
+            if (ASCIICode >= 48 && ASCIICode <= 57) {
+                return true
+            } else {
+                return event.preventDefault()
+            }
+        },
+        handleAllowableInputPageRange(event) {
+            if (+event.target.value > 0 && +event.target.value <= this.pageCount) {
+                this.handleOnInputValue(event)
+            } else {
+                // --- It is nessacery to set inputValue to 1 and then to '' so that the DOM- --- //
+                // --- will update the input component even when Backspace is used and then-
+                // --- 0 us entered. --- //
+                this.inputValue = 1
+                this.inputValue = ''
+            }
+        },
         handleOnInputValue(event) {
-            this.inputValue = +event.target.value
-
+            let inputValue = +event.target.value
+            this.inputValue = inputValue
             if (Number.isInteger(this.inputValue)) {
                 this.handleOnInputDebounce(event)
             } else {
