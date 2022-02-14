@@ -185,6 +185,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>pagination-order</code>',
+                description: 'Buttons order, optional',
+                type: 'String',
+                values: '<code>is-centered</code>, <code>is-right</code>',
+                default: '—'
+            },
+            {
                 name: '<code>pagination-size</code>',
                 description: 'Pagination size (if <code>paginated</code>)',
                 type: 'String',
@@ -204,6 +211,27 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>20</code>'
+            },
+            {
+                name: '<code>page-input</code>',
+                description: `Include page number input.`,
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>page-input-position</code>',
+                description: `Page input position.`,
+                type: 'String',
+                values: '<code>is-input-right</code>, <code>is-input-left</code>',
+                default: '—'
+            },
+            {
+                name: '<code>debounce-page-input</code>',
+                description: `Sets the page input debounce time (in milliseconds)`,
+                type: 'Number',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>sort-multiple</code>',

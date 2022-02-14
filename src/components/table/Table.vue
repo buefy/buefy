@@ -34,6 +34,10 @@
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
+                    :page-input="pageInput"
+                    :pagination-order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"
                 >
                     <slot name="top-left"/>
                 </b-table-pagination>
@@ -362,6 +366,10 @@
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
+                    :page-input="pageInput"
+                    :pagination-order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"
                 >
                     <slot name="bottom-left"/>
                 </b-table-pagination>
@@ -572,7 +580,14 @@ export default {
         showCaption: {
             type: Boolean,
             default: true
-        }
+        },
+        pageInput: {
+            type: Boolean,
+            default: false
+        },
+        paginationOrder: String,
+        pageInputPosition: String,
+        debouncePageInput: [Number, String]
     },
     data() {
         return {
