@@ -1,5 +1,5 @@
 <template>
-    <div ref="tooltip" :class="[...rootClasses, 'is-inline']">
+    <div ref="tooltip" :class="rootClasses">
         <transition :name="newAnimation">
             <div
                 v-show="active && (isActive || always)"
