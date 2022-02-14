@@ -198,66 +198,66 @@ export default {
         },
 
         /**
-     * Total page size (count).
-     */
+        * Total page size (count).
+        */
         pageCount() {
             return Math.ceil(this.total / this.perPage)
         },
 
         /**
-     * First item of the page (count).
-     */
+        * First item of the page (count).
+        */
         firstItem() {
             const firstItem = this.current * this.perPage - this.perPage + 1
             return firstItem >= 0 ? firstItem : 0
         },
 
         /**
-     * Check if previous button is available.
-     */
+        * Check if previous button is available.
+        */
         hasPrev() {
             return this.current > 1
         },
 
         /**
-     * Check if first page button should be visible.
-     */
+         * Check if first page button should be visible.
+        */
         hasFirst() {
             return this.current >= 2 + this.beforeCurrent
         },
 
         /**
-     * Check if first ellipsis should be visible.
-     */
+        * Check if first ellipsis should be visible.
+        */
         hasFirstEllipsis() {
             return this.current >= this.beforeCurrent + 4
         },
 
         /**
-     * Check if last page button should be visible.
-     */
+        * Check if last page button should be visible.
+        */
         hasLast() {
             return this.current <= this.pageCount - (1 + this.afterCurrent)
         },
 
         /**
-     * Check if last ellipsis should be visible.
-     */
+        * Check if last ellipsis should be visible.
+        */
         hasLastEllipsis() {
             return this.current < this.pageCount - (2 + this.afterCurrent)
         },
 
         /**
-     * Check if next button is available.
-     */
+        * Check if next button is available.
+        */
         hasNext() {
             return this.current < this.pageCount
         },
 
         /**
-     * Get near pages, 1 before and 1 after the current.
-     * Also add the click event to the array.
-     */
+        * Get near pages, 1 before and 1 after the current.
+        * Also add the click event to the array.
+        */
         pagesInRange() {
             if (this.simple) return
 
@@ -278,9 +278,9 @@ export default {
         }
     },
     watch: {
-    /**
-     * If current page is trying to be greater than page count, set to last.
-     */
+        /**
+        * If current page is trying to be greater than page count, set to last.
+        */
         pageCount(value) {
             if (this.current > value) this.last()
         },
@@ -300,27 +300,27 @@ export default {
         }
     },
     methods: {
-    /**
-     * Previous button click listener.
-     */
+        /**
+        * Previous button click listener.
+        */
         prev(event) {
             this.changePage(this.current - 1, event)
         },
         /**
-     * Next button click listener.
-     */
+         * Next button click listener.
+        */
         next(event) {
             this.changePage(this.current + 1, event)
         },
         /**
-     * First button click listener.
-     */
+         * First button click listener.
+        */
         first(event) {
             this.changePage(1, event)
         },
         /**
-     * Last button click listener.
-     */
+        * Last button click listener.
+        */
         last(event) {
             this.changePage(this.pageCount, event)
         },
@@ -352,8 +352,8 @@ export default {
         },
 
         /**
-     * Get text for aria-label according to page number.
-     */
+        * Get text for aria-label according to page number.
+        */
         getAriaPageLabel(pageNumber, isCurrent) {
             if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
                 return this.ariaPageLabel + ' ' + pageNumber + '.'
