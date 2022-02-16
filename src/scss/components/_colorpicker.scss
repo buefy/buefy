@@ -1,5 +1,3 @@
-@use "sass:math";
-
 $colorpicker-radius: $dropdown-content-radius !default;
 $colorpicker-hue-selected-stroke: $primary !default;
 
@@ -151,7 +149,7 @@ div.b-colorpicker-square {
         left: 0;
 
         .hue-range-thumb {
-            border-radius: math.div($colorpicker-radius, 1.75);
+            border-radius: calc($colorpicker-radius / 1.75);
             position: absolute;
             aspect-ratio: 1 / 1;
             transform: translate(-50%, -50%);
