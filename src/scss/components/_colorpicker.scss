@@ -149,7 +149,7 @@ div.b-colorpicker-square {
         left: 0;
 
         .hue-range-thumb {
-            border-radius: $colorpicker-radius/1.75;
+            border-radius: calc($colorpicker-radius / 1.75);
             position: absolute;
             aspect-ratio: 1 / 1;
             transform: translate(-50%, -50%);
@@ -177,7 +177,7 @@ div.b-colorpicker-square {
     }
     .colorpicker-square-slider-sl {
         background: #fff;
-        border-radius: $colorpicker-radius/2;
+        border-radius: $colorpicker-radius*0.5;
         position: absolute;
         top: 0;
         right: 0;
