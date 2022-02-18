@@ -1,5 +1,16 @@
 # Buefy Changelog
 
+## 0.9.16
+
+### New features
+
+* **Add Font Awesome 6 support** (http://fontawesome.com/)
+
+### Fixes
+
+* Fix #3672 filter table when multiple filters
+* Fix colorpicker sass warnings (thanks @SomethingNew71)
+
 ## 0.9.15
 
 ### New features
