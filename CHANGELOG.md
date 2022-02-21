@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.9.17
+
+### Fixes
+
+* Fix #3676 table sort when backend
+
 ## 0.9.16
 
 ### New features
