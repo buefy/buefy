@@ -1008,8 +1008,8 @@ export default {
                 }
                 if (!this.backendSorting) {
                     this.doSortSingleColumn(column)
-                    this.currentSortColumn = column
                 }
+                this.currentSortColumn = column
             }
         },
 
