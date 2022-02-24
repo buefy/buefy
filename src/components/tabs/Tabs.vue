@@ -3,19 +3,22 @@
         <nav
             class="tabs"
             :class="navClasses"
-            role="tablist"
-            :aria-orientation="vertical ? 'vertical' : 'horizontal'"
             @keydown="manageTablistKeydown"
         >
             <slot name="start" />
-            <ul>
+            <ul
+                :aria-orientation="vertical ? 'vertical' : 'horizontal'"
+                role="tablist"
+            >
                 <li
                     v-for="(childItem, childIdx) in items"
                     :key="childItem.value"
                     v-show="childItem.visible"
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
                                                        'is-disabled': childItem.disabled }]"
-                    role="presentation"
+                    role="tab"
+                    :aria-controls="`${childItem.value}-content`"
+                    :aria-selected="`${childItem.isActive}`"
                 >
                     <b-slot-component
                         ref="tabLink"
@@ -23,10 +26,7 @@
                         :component="childItem"
                         name="header"
                         tag="a"
-                        role="tab"
                         :id="`${childItem.value}-label`"
-                        :aria-controls="`${childItem.value}-content`"
-                        :aria-selected="`${childItem.isActive}`"
                         :tabindex="childItem.isActive ? 0 : -1"
                         @focus.native="currentFocus = childIdx"
                         @click.native="childClick(childItem)"
@@ -35,10 +35,7 @@
                     <a
                         ref="tabLink"
                         v-else
-                        role="tab"
-                        :id="`${childItem.value}-tab`"
-                        :aria-controls="`${childItem.value}-content`"
-                        :aria-selected="`${childItem.isActive}`"
+                        :id="`${childItem.value}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
                         @focus="currentFocus = childIdx"
                         @click="childClick(childItem)"
