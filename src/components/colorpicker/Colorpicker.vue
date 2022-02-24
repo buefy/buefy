@@ -13,7 +13,6 @@
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
-            :aria-modal="!inline"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange"
