@@ -37,6 +37,7 @@
                 <div
                     class="dropdown-content"
                     :role="ariaRole"
+                    :aria-modal="!inline"
                     :style="contentStyle">
                     <slot/>
                 </div>
