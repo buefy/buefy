@@ -211,9 +211,15 @@ export default {
             return typeof this.max === 'string' ? parseFloat(this.max) : this.max
         },
         stepNumber() {
+            if (this.newStep === 'any') {
+                return 1
+            }
             return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
         },
         minStepNumber() {
+            if (this.newStep === 'any' && typeof this.newMinStep === 'undefined') {
+                return 'any'
+            }
             const step = typeof this.newMinStep !== 'undefined' ? this.newMinStep : this.newStep
             return typeof step === 'string' ? parseFloat(step) : step
         },
@@ -255,27 +261,27 @@ export default {
             return this.disabled || (control === 'plus' ? this.disabledMax : this.disabledMin)
         },
         decrement() {
-            if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
-                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
-                    if (this.maxNumber) {
-                        this.computedValue = this.maxNumber
-                        return
-                    }
-                    this.computedValue = 0
+            if (this.computedValue === null || typeof this.computedValue === 'undefined') {
+                if (this.maxNumber !== null && typeof this.maxNumber !== 'undefined') {
+                    this.computedValue = this.maxNumber
+                    return
                 }
+                this.computedValue = 0
+            }
+            if (typeof this.minNumber === 'undefined' || (this.computedValue - this.stepNumber) >= this.minNumber) {
                 const value = this.computedValue - this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
         increment() {
-            if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
-                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
-                    if (this.minNumber) {
-                        this.computedValue = this.minNumber
-                        return
-                    }
-                    this.computedValue = 0
+            if (this.computedValue === null || typeof this.computedValue === 'undefined') {
+                if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
+                    this.computedValue = this.minNumber
+                    return
                 }
+                this.computedValue = 0
+            }
+            if (typeof this.maxNumber === 'undefined' || (this.computedValue + this.stepNumber) <= this.maxNumber) {
                 const value = this.computedValue + this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }

@@ -9,7 +9,8 @@
                 <div
                     class="card-header"
                     role="button"
-                    aria-controls="contentIdForA11y3">
+                    aria-controls="contentIdForA11y3"
+                    :aria-expanded="props.open">
                     <p class="card-header-title">
                         Component
                     </p>

@@ -6,7 +6,6 @@
     >
         <div
             v-if="!inline"
-            role="button"
             :tabindex="disabled ? false : 0"
             ref="trigger"
             class="dropdown-trigger"
@@ -37,6 +36,7 @@
                 <div
                     class="dropdown-content"
                     :role="ariaRole"
+                    :aria-modal="!inline"
                     :style="contentStyle">
                     <slot/>
                 </div>

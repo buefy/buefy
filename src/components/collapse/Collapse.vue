@@ -60,7 +60,7 @@ export default {
         const content = createElement('transition', { props: { name: this.animation } }, [
             createElement('div', {
                 staticClass: 'collapse-content',
-                attrs: { 'id': this.ariaId, 'aria-expanded': this.isOpen },
+                attrs: { 'id': this.ariaId },
                 directives: [{
                     name: 'show',
                     value: this.isOpen

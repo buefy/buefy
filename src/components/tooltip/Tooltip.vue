@@ -1,5 +1,5 @@
 <template>
-    <span ref="tooltip" :class="rootClasses">
+    <div ref="tooltip" :class="rootClasses">
         <transition :name="newAnimation">
             <div
                 v-show="active && (isActive || always)"
@@ -23,7 +23,7 @@
             @mouseleave="close">
             <slot ref="slot" />
         </div>
-    </span>
+    </div>
 </template>
 
 <script>

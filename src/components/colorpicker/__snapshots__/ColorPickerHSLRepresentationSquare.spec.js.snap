@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BColorpickerHSLRepresentationSquare render correctly 1`] = `
+<div class="b-colorpicker-square" style="width: 200px;">
+    <div class="colorpicker-square-slider-hue">
+        <div role="slider" tabindex="0" aria-label="Hue" aria-valuemin="0" aria-valuemax="359" class="hue-range-thumb" style="left: 36.4px; top: 190px; width: 18px;"></div>
+    </div>
+    <div aria-datascales="lightness, saturation" class="colorpicker-square-slider-sl" style="margin: 20px;">
+        <div role="slider" tabindex="0" aria-datavalues="67%, 20%" class="sl-range-thumb" style="left: 67%; top: 80%;"></div>
+    </div>
+</div>
+`;
