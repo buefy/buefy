@@ -1,5 +1,18 @@
 # Buefy Changelog
 
+## 0.9.18
+
+### New features
+
+* Add open and close events to tooltip (thanks @GMartigny)
+* Improve accessibility of dropdown, collapse and tabs (thanks @mateuswetah)
+
+### Fixes
+
+* Fix #2889 tooltip when append-to-body
+* Fix #2998 sidebar close when content is dynamic
+* Fix #3677 emit active-change when hoverable
+
 ## 0.9.17
 
 ### Fixes
