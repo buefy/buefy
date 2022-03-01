@@ -107,7 +107,8 @@ export default {
         }
     },
     watch: {
-        isActive(value) {
+        isActive() {
+            this.$emit(this.isActive ? 'open' : 'close')
             if (this.appendToBody) {
                 this.updateAppendToBody()
             }
