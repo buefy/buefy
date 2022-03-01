@@ -122,7 +122,11 @@ export default {
                 // update wrapper tooltip
                 const tooltipEl = this.$data._bodyEl.children[0]
                 tooltipEl.classList.forEach((item) => tooltipEl.classList.remove(item))
-                if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+                if (
+                    this.$vnode &&
+                    this.$vnode.data &&
+                    this.$vnode.data.staticClass
+                ) {
                     tooltipEl.classList.add(this.$vnode.data.staticClass)
                 }
                 this.rootClasses.forEach((item) => {
@@ -136,17 +140,45 @@ export default {
                         tooltipEl.classList.add(item)
                     }
                 })
-                tooltipEl.style.width = `${trigger.clientWidth}px`
-                tooltipEl.style.height = `${trigger.clientHeight}px`
+
                 const rect = trigger.getBoundingClientRect()
+
                 let top = rect.top + window.scrollY
                 let left = rect.left + window.scrollX
+
+                const quaterHeight = trigger.clientHeight / 2 / 2
+
+                switch (this.position) {
+                    case 'is-top':
+                        tooltipEl.style.width = `${trigger.clientWidth}px`
+                        tooltipEl.style.height = `0px`
+                        top -= trigger.clientHeight - quaterHeight
+                        break
+                    case 'is-bottom':
+                        tooltipEl.style.width = `${trigger.clientWidth}px`
+                        tooltipEl.style.height = `0px`
+                        top += quaterHeight
+                        break
+                    case 'is-left':
+                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.height = `${trigger.clientHeight}px`
+                        break
+                    case 'is-right':
+                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.height = `${trigger.clientHeight}px`
+                        left += trigger.clientWidth
+                        break
+                }
+
                 const wrapper = this.$data._bodyEl
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
+                wrapper.style.width = `0px`
                 wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
-                this.triggerStyle = { zIndex: this.isActive || this.always ? '100' : undefined }
+                this.triggerStyle = {
+                    zIndex: this.isActive || this.always ? '100' : undefined
+                }
             }
         },
         onClick() {
