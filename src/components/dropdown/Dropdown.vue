@@ -3,6 +3,7 @@
         class="dropdown dropdown-menu-animation"
         ref="dropdown"
         :class="rootClasses"
+        @mouseleave="isHoverable = false"
     >
         <div
             v-if="!inline"
@@ -184,6 +185,12 @@ export default {
                 this.$nextTick(() => {
                     this.updateAppendToBody()
                 })
+            }
+        },
+
+        isHoverable(value) {
+            if (this.hoverable) {
+                this.$emit('active-change', value)
             }
         }
     },
