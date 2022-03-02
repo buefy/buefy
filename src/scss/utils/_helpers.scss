@@ -4,9 +4,3 @@
     width: 100%;
     bottom: 0;
 }
-
-html.is-clipped-touch {
-    @include touch {
-        overflow: hidden !important;
-    }
-}
