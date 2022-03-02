@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.9.19
+
+### Fixes
+
+* Fix theme css build
+
 ## 0.9.18
 
 ### New features
