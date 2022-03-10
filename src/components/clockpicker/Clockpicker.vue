@@ -26,7 +26,7 @@
                         :rounded="rounded"
                         v-bind="$attrs"
                         :use-html5-validation="useHtml5Validation"
-                        @click.native.stop="toggle(true)"
+                        @click.native="onInputClick"
                         @keyup.native.enter="toggle(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus"
@@ -252,6 +252,14 @@ export default {
             if (this.meridienSelected !== value) {
                 this.meridienSelected = value
                 this.onMeridienChange(value)
+            }
+        },
+        /*
+         * Avoid dropdown toggle when is already visible
+         */
+        onInputClick(event) {
+            if (this.$refs.dropdown.isActive) {
+                event.stopPropagation()
             }
         }
     }
