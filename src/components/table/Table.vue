@@ -258,11 +258,8 @@
                                     autocomplete="off"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @change.native.prevent.stop="checkRow(row, index, $event)"
+                                    @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
-                                <!-- Checkbox needs to listen for a change event instead of a just a
-                                click event so that that using the keyboard spacebar will also
-                                trigger the checkbox change. -->
                             </td>
 
                             <template v-for="(column, colindex) in visibleColumns">
@@ -292,11 +289,8 @@
                                     autocomplete="off"
                                     :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
-                                    @change.native.prevent.stop="checkRow(row, index, $event)"
+                                    @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
-                                <!-- Checkbox needs to listen for a change event instead of a just a
-                                click event so that that using the keyboard spacebar will also
-                                trigger the checkbox change. -->
                             </td>
                         </tr>
 
