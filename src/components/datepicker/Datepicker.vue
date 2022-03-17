@@ -34,7 +34,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
-                        @icon-right-click="$emit('icon-right-click')"
+                        @icon-right-click="$emit('icon-right-click', $event)"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />
