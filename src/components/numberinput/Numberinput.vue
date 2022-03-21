@@ -270,7 +270,7 @@ export default {
             }
             if (typeof this.minNumber === 'undefined' || (this.computedValue - this.stepNumber) >= this.minNumber) {
                 const value = this.computedValue - this.stepNumber
-                this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
+                this.computedValue = parseFloat(value).toFixed(this.stepDecimals)
             }
         },
         increment() {
@@ -283,7 +283,7 @@ export default {
             }
             if (typeof this.maxNumber === 'undefined' || (this.computedValue + this.stepNumber) <= this.maxNumber) {
                 const value = this.computedValue + this.stepNumber
-                this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
+                this.computedValue = parseFloat(value).toFixed(this.stepDecimals)
             }
         },
         onControlClick(event, inc) {
