@@ -12,6 +12,14 @@
                 <option value="left">Checkbox at left</option>
                 <option value="right">Checkbox at right</option>
             </b-select>
+
+            <b-select v-model="checkboxType">
+                <option value="is-primary">Default</option>
+                <option value="is-info">Info</option>
+                <option value="is-success">Success</option>
+                <option value="is-danger">Danger</option>
+                <option value="is-warning">Warning</option>
+            </b-select>
         </b-field>
 
         <b-tabs>
@@ -22,7 +30,8 @@
                     :checked-rows.sync="checkedRows"
                     :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
                     checkable
-                    :checkbox-position="checkboxPosition">
+                    :checkbox-position="checkboxPosition"
+                    :checkbox-type="checkboxType">
 
                     <template #bottom-left>
                         <b>Total checked</b>: {{ checkedRows.length }}
@@ -51,6 +60,7 @@
             return {
                 data,
                 checkboxPosition: 'left',
+                checkboxType: 'is-primary',
                 checkedRows: [data[1], data[3]],
                 columns: [
                     {
