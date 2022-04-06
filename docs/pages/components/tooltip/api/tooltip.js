@@ -102,6 +102,18 @@ export default [
                 values: '—',
                 default: '<code>false</code>'
             }
+        ],
+        events: [
+            {
+                name: '<code>open</code>',
+                description: 'Triggers when the tooltip is opened',
+                parameters: '—'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Triggers when the tooltip is closed',
+                parameters: '—'
+            },
         ]
     }
 ]

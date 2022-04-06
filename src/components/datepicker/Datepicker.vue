@@ -12,7 +12,6 @@
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
-            :aria-modal="!inline"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
@@ -35,7 +34,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
-                        @icon-right-click="$emit('icon-right-click')"
+                        @icon-right-click="$emit('icon-right-click', $event)"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />

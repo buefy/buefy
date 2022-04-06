@@ -101,6 +101,26 @@ describe('BNumberinput', () => {
 
             expect(wrapper.vm.computedValue).toEqual(BASE_VALUE)
         })
+
+        it('is invalid when step / minStep decimals and value decimals lengths are different', () => {
+            wrapper.setProps({step: 1, value: 1.15})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(false)
+            wrapper.setProps({step: 1.15, value: 1.154})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(false)
+            wrapper.setProps({step: 1.15, value: 1.11541, minStep: 0.0001})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(false)
+        })
+
+        it('is valid when step is "any"', () => {
+            wrapper.setProps({step: 'any', value: 1.15})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+            wrapper.setProps({step: 'any', value: 1.054878})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+            wrapper.setProps({step: 'any', value: 1})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+            wrapper.setProps({step: 'any', value: ''})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+        })
     })
 
     describe('Rendered (shallow)', () => {
@@ -221,6 +241,26 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBe(start - (step * 2))
         })
 
+        it('can increment / decrement with a "any" step', () => {
+            const start = 5
+            const step = 'any'
+            const min = -5
+            wrapper.vm.computedValue = start
+            wrapper.setProps({ step, min })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - 1)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - (1 * 2))
+
+            const decimalStart = 5.15
+            wrapper.vm.computedValue = decimalStart
+            wrapper.setProps({ step, min })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - 1)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - (1 * 2))
+        })
+
         it('can increment / decrement with minStep', () => {
             const start = 5.51
             const step = 0.2
@@ -241,6 +281,28 @@ describe('BNumberinput', () => {
             wrapper.setProps({ minStep: newMinStep })
             wrapper.vm.decrement()
             expect(wrapper.vm.computedValue).toBe(5.3)
+        })
+
+        it('can increment / decrement with minStep and "any" as step', () => {
+            const start = 5.51
+            const step = 'any'
+            const minStep = 0.01
+            const min = -5
+            wrapper.vm.computedValue = start
+            wrapper.setProps({ step, min, minStep })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(4.51)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(3.51)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(4.51)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(5.51)
+
+            const newMinStep = 0.1
+            wrapper.setProps({ minStep: newMinStep })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(4.5)
         })
 
         it('manages empty value', () => {

@@ -133,3 +133,9 @@ $dropdown-disabled-opacity: 0.5 !default;
         }
     }
 }
+
+html.is-clipped-touch {
+    @include touch {
+        overflow: hidden !important;
+    }
+}

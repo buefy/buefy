@@ -166,7 +166,7 @@
                         <!-- Buefy components goes here -->
                     </div>
 
-                    <script src="https://unpkg.com/vue"></\script>
+                    <script src="https://unpkg.com/vue@2"></\script>
                     <!-- Full bundle -->
                     <script src="https://unpkg.com/buefy/dist/buefy.min.js"></\script>
 

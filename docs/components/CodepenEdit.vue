@@ -31,7 +31,7 @@ export default {
         return {
             hasHtml: false,
             externalScripts: [
-                'https://unpkg.com/vue/dist/vue.min.js',
+                'https://unpkg.com/vue@2/dist/vue.min.js',
                 'https://unpkg.com/buefy/dist/buefy.min.js'
             ],
             externalStyles: [

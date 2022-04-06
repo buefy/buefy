@@ -1,3 +1,11 @@
+@mixin paginationPositions($classes...) {
+    @for $i from 0 to length($classes) {
+       #{nth($classes, $i + 1)} {
+            order: $i + 1;
+        }
+    }
+}
+
 .pagination {
     .pagination-next,
     .pagination-previous {
@@ -21,5 +29,35 @@
     .is-current {
         pointer-events: none;
         cursor: not-allowed;
+    }
+}
+
+@include tablet {
+    .pagination.has-input {
+        @include paginationPositions(".pagination-list", ".pagination-input", ".pagination-previous", ".pagination-next");
+        &.is-centered {
+            @include paginationPositions(".pagination-previous", ".pagination-list", ".pagination-input", ".pagination-next");
+            &.is-input-right {
+                @include paginationPositions(".pagination-previous", ".pagination-list", ".pagination-next", ".pagination-input");
+            }
+            &.is-input-left {
+                @include paginationPositions(".pagination-input", ".pagination-previous", ".pagination-list", ".pagination-next");
+            }
+        }
+        &.is-right {
+            @include paginationPositions(".pagination-previous", ".pagination-next", ".pagination-input", ".pagination-list");
+            &.is-input-right {
+                @include paginationPositions(".pagination-previous", ".pagination-next", ".pagination-list", ".pagination-input");
+            }
+            &.is-input-left {
+                @include paginationPositions(".pagination-input", ".pagination-previous", ".pagination-next", ".pagination-list");
+            }
+        }
+        &.is-input-right {
+            @include paginationPositions(".pagination-list", ".pagination-previous", ".pagination-next", ".pagination-input");
+        }
+        &.is-input-left {
+            @include paginationPositions(".pagination-input", ".pagination-list", ".pagination-previous", ".pagination-next");
+        }
     }
 }
