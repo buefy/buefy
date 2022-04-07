@@ -57,7 +57,8 @@
                 <footer class="colorpicker-footer">
                     <b-colorpicker-alpha-slider
                         v-if="alpha"
-                        v-model="colorSelected.alpha"
+                        :value="colorSelected.alpha"
+                        @input="updateAlpha"
                         :color="colorSelected"
                     />
                     <slot name="footer" :color="colorSelected">
@@ -270,7 +271,11 @@ export default {
         updateColor(value) {
             value.alpha = this.colorSelected.alpha
             this.colorSelected = value
-            this.$emit('change', value)
+            this.$emit('input', value)
+        },
+        updateAlpha(alpha) {
+            this.colorSelected.alpha = alpha
+            this.$emit('input', this.colorSelected)
         },
         /*
          * Format color into string
