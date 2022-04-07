@@ -66,6 +66,7 @@
                                 <b-checkbox
                                     autocomplete="off"
                                     :value="isAllChecked"
+                                    :type="checkboxType"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
                             </template>
@@ -148,6 +149,7 @@
                                 <b-checkbox
                                     autocomplete="off"
                                     :value="isAllChecked"
+                                    :type="checkboxType"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
                             </template>
@@ -256,8 +258,9 @@
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     autocomplete="off"
-                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :disabled="!isRowCheckable(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -287,8 +290,9 @@
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     autocomplete="off"
-                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :disabled="!isRowCheckable(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -429,6 +433,10 @@ export default {
         headerCheckable: {
             type: Boolean,
             default: true
+        },
+        checkboxType: {
+            type: String,
+            default: 'is-primary'
         },
         checkboxPosition: {
             type: String,
