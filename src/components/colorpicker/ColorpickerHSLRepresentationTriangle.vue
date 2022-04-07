@@ -211,8 +211,7 @@ export default {
 
                 window.clearTimeout(this.debounce)
                 this.debounce = window.setTimeout(() => {
-                    const d = Math.abs(saturation - this.saturation)
-                    if (d > 0.05) {
+                    if (lightness >= 0.05 && lightness <= 0.95) {
                         this.hue = hue
                     }
                     this.saturation = saturation
