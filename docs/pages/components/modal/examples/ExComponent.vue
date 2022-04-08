@@ -7,7 +7,7 @@
             @click="isComponentModalActive = true" />
 
         <b-modal
-            :active="isComponentModalActive"
+            v-model="isComponentModalActive"
             has-modal-card
             trap-focus
             :destroy-on-hide="false"
