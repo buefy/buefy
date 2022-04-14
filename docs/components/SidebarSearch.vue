@@ -43,7 +43,9 @@
                             v-for="section in sortedResults"
                         >
                             <div :key="section.category">
-                                <h4 class="has-text-primary">{{ section.category }}</h4>
+                                <h4 class="has-text-primary">
+                                    {{ section.category }}
+                                </h4>
 
                                 <div
                                     v-for="result in section.results"
@@ -56,7 +58,7 @@
                                     @mouseenter="select(result.index)"
                                     @click="navigateTo"
                                 >
-                                    <p v-html="highlightTerm(result.title)" class="is-size-6"/>
+                                    <p v-html="highlightTerm(result.title)" class="is-size-6" />
                                     <p class="is-size-7">{{ stripTags(result.subtitle) }}</p>
                                 </div>
                             </div>
@@ -131,17 +133,42 @@ export default {
 
             this.results.forEach((result) => {
                 const category = this.categoryByPage[result.path.replace(/^\//, '')] || 'Others'
+                const score = this.term.trim().toLowerCase() !== result.title.trim().toLowerCase()
+                    ? new RegExp('^' + this.term.trim(), 'i').test(result.title) === false
+                        ? RegExp('\\s+' + this.term.trim(), 'i').test(result.title) === false
+                            ? RegExp(this.term.trim(), 'i').test(result.title) === false
+                                ? 0
+                                : 2
+                            : 3
+                        : 4
+                    : 5
 
                 if (typeof resultsByCategory[category] === 'undefined') {
                     resultsByCategory[category] = {
                         category,
-                        results: []
+                        results: [],
+                        score
+                    }
+                } else {
+                    if (score > resultsByCategory[category].score) {
+                        resultsByCategory[category].score = score
                     }
                 }
-                resultsByCategory[category].results.push({ ...result, index: index++ })
+                resultsByCategory[category].results.push({
+                    ...result,
+                    score,
+                    index: index++
+                })
             })
 
-            return Object.values(resultsByCategory)
+            const sorted = Object.values(resultsByCategory)
+                .sort((a, b) => String(b.score).localeCompare(a.score))
+            sorted.forEach((category) => {
+                category.results = category.results
+                    .sort((a, b) => String(b.score).localeCompare(a.score))
+            })
+
+            return sorted
         }
     },
     methods: {
