@@ -53,6 +53,8 @@
                                         'is-active': result.index === selectedIndex
                                     }"
                                     :aria-selected="result.index === selectedIndex"
+                                    @mouseenter="select(result.index)"
+                                    @click="navigateTo"
                                 >
                                     <p v-html="highlightTerm(result.title)" class="is-size-6"/>
                                     <p class="is-size-7">{{ stripTags(result.subtitle) }}</p>
@@ -154,6 +156,9 @@ export default {
         focus() {
             this.$refs.searchbar.focus()
         },
+        select(index) {
+            this.selectedIndex = Math.max(0, Math.min(index, this.results.length - 1))
+        },
         search(term) {
             this.selectedIndex = 0
             this.term = term
@@ -161,6 +166,10 @@ export default {
                 const regexp = new RegExp(term.replace(/\s+/g, '.*\\s+'), 'i')
                 return regexp.test(route.title) || regexp.test(route.subtitle)
             })
+        },
+        navigateTo() {
+            this.$router.push(this.results[this.selectedIndex].path)
+            this.close()
         },
         shortcutHandler(event) {
             switch (event.key) {
@@ -193,8 +202,7 @@ export default {
                     break
                 case 'Enter':
                     if (this.isActive && this.results.length > 0) {
-                        this.$router.push(this.results[this.selectedIndex].path)
-                        this.close()
+                        this.navigateTo()
                     }
                     break
             }
@@ -247,6 +255,7 @@ export default {
         overflow: hidden auto;
 
         .notification {
+            cursor: pointer;
             margin-bottom: .5rem;
 
             &.is-active {
