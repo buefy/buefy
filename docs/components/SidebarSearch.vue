@@ -74,6 +74,7 @@
 
                                 <div
                                     v-for="result in section.results"
+                                    :ref="`result_${result.index}`"
                                     :key="result.path"
                                     class="notification"
                                     :class="{
@@ -230,6 +231,15 @@ export default {
                 return regexp.test(route.title) || regexp.test(route.subtitle)
             })
         },
+        scrollToSelection() {
+            if (this.$refs[`result_${this.selectedIndex}`]) {
+                this.$refs[`result_${this.selectedIndex}`][0].scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'nearest'
+                })
+            }
+        },
         navigateTo() {
             this.$router.push(this.results[this.selectedIndex].path)
             this.close()
@@ -253,6 +263,7 @@ export default {
                             0,
                             this.selectedIndex - 1
                         )
+                        this.scrollToSelection()
                     }
                     break
                 case 'ArrowDown':
@@ -261,6 +272,19 @@ export default {
                             this.results.length - 1,
                             this.selectedIndex + 1
                         )
+                        this.scrollToSelection()
+                    }
+                    break
+                case 'PageUp':
+                    if (this.isActive) {
+                        this.selectedIndex = 0
+                        this.scrollToSelection()
+                    }
+                    break
+                case 'PageDown':
+                    if (this.isActive) {
+                        this.selectedIndex = Math.max(0, this.results.length - 1)
+                        this.scrollToSelection()
                     }
                     break
                 case 'Enter':
@@ -314,6 +338,7 @@ export default {
         flex-direction: column;
         align-items: stretch;
         max-height: 488px;
+        scroll-behavior: smooth;
         scrollbar-width: thin;
         overflow: hidden auto;
 
