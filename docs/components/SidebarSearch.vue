@@ -3,14 +3,19 @@
         <div
             role="button"
             class="sidebar-search-button"
-            :aria-keyshortcuts="isMacOS ? 'Mta+K' : 'Ctrl+K'"
+            :aria-keyshortcuts="isMacOS ? 'Meta+K' : 'Control+K'"
+            :tabindex="0"
             @click="open"
         >
             <span class="sidebar-menu-text">
-                <b-icon icon="magnify" style="vertical-align: middle;"/>
+                <b-icon
+                    icon="magnify"
+                    aria-hidden="true"
+                    style="vertical-align: middle;"
+                />
                 Search
             </span>
-            <b-tag type="is-primary is-light is-hidden-touch">
+            <b-tag type="is-primary is-light is-hidden-touch" aria-hidden="true">
                 {{ isMacOS ? '⌘' : 'Ctrl' }} K
             </b-tag>
         </div>
@@ -25,9 +30,18 @@
                     <p class="control has-icons-left">
                         <b-input
                             ref="searchbar"
-                            placeholder="Search docs"
                             type="search"
+                            placeholder="Search docs"
+                            aria-label="Search in the documentation"
+                            aria-controls="sidebarSearchResults"
+                            :aria-invalid="isTermEmpty || sortedResults.length > 0 ? null : 'true'"
+                            :aria-errormessage="isTermEmpty || sortedResults.length > 0
+                                ? null
+                                :'sidebarSearchNoresult'
+                            "
                             @input="search"
+                            maxlength="32"
+                            :has-counter="false"
                         />
                         <span class="icon is-left">
                             <i class="fas fa-search" aria-hidden="true" />
@@ -35,28 +49,44 @@
                     </p>
                 </div>
 
-                <div v-if="term.trim() !== ''" class="panel-block sidebar-search-results">
+                <div
+                    v-if="!isTermEmpty"
+                    id="sidebarSearchResults"
+                    class="panel-block sidebar-search-results"
+                    role="region"
+                    aria-labelledby="Search results"
+                    aria-live="polite"
+                >
                     <template
                         v-if="sortedResults.length > 0"
                     >
                         <template
                             v-for="section in sortedResults"
                         >
-                            <div :key="section.category">
+                            <div
+                                :key="section.category"
+                                role="group"
+                                :aria-label="`Results in ${section.category}`"
+                            >
                                 <h4 class="has-text-primary">
                                     {{ section.category }}
                                 </h4>
 
                                 <div
                                     v-for="result in section.results"
+                                    :ref="`result_${result.index}`"
                                     :key="result.path"
                                     class="notification"
                                     :class="{
                                         'is-active': result.index === selectedIndex
                                     }"
-                                    :aria-selected="result.index === selectedIndex"
                                     @mouseenter="select(result.index)"
                                     @click="navigateTo"
+                                    role="option"
+                                    :aria-selected="result.index === selectedIndex"
+                                    :aria-setsize="results.length"
+                                    :aria-posinset="result.index + 1"
+                                    tabindex="-1"
                                 >
                                     <p v-html="highlightTerm(result.title)" class="is-size-6" />
                                     <p class="is-size-7">{{ stripTags(result.subtitle) }}</p>
@@ -65,7 +95,11 @@
                         </template>
                     </template>
 
-                    <p v-else class="is-size-4 has-text-dark sidebar-search-noresult">
+                    <p
+                        v-else
+                        id="sidebarSearchNoresult"
+                        class="is-size-4 has-text-dark sidebar-search-noresult"
+                    >
                         No results for “<strong class="has-text-primary">{{ term }}</strong>„
                     </p>
                 </div>
@@ -127,6 +161,9 @@ export default {
             return Object.values(routes)
                 .filter((route) => route.menu === 'documentation')
         },
+        isTermEmpty() {
+            return /^\s*$/.test(this.term)
+        },
         sortedResults() {
             const resultsByCategory = {}
             let index = 0
@@ -156,8 +193,7 @@ export default {
                 }
                 resultsByCategory[category].results.push({
                     ...result,
-                    score,
-                    index: index++
+                    score
                 })
             })
 
@@ -166,6 +202,7 @@ export default {
             sorted.forEach((category) => {
                 category.results = category.results
                     .sort((a, b) => String(b.score).localeCompare(a.score))
+                    .map((result) => ({ ...result, index: index++ }))
             })
 
             return sorted
@@ -194,9 +231,26 @@ export default {
                 return regexp.test(route.title) || regexp.test(route.subtitle)
             })
         },
+        scrollToSelection() {
+            if (this.$refs[`result_${this.selectedIndex}`]) {
+                this.$refs[`result_${this.selectedIndex}`][0].scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'nearest'
+                })
+            }
+        },
         navigateTo() {
-            this.$router.push(this.results[this.selectedIndex].path)
-            this.close()
+            this.sortedResults.some((category) =>
+                category.results.some((result) => {
+                    if (result.index === this.selectedIndex) {
+                        this.$router.push(result.path)
+                        this.close()
+                        return true
+                    }
+                    return false
+                })
+            )
         },
         shortcutHandler(event) {
             switch (event.key) {
@@ -217,6 +271,7 @@ export default {
                             0,
                             this.selectedIndex - 1
                         )
+                        this.scrollToSelection()
                     }
                     break
                 case 'ArrowDown':
@@ -225,6 +280,19 @@ export default {
                             this.results.length - 1,
                             this.selectedIndex + 1
                         )
+                        this.scrollToSelection()
+                    }
+                    break
+                case 'PageUp':
+                    if (this.isActive) {
+                        this.selectedIndex = 0
+                        this.scrollToSelection()
+                    }
+                    break
+                case 'PageDown':
+                    if (this.isActive) {
+                        this.selectedIndex = Math.max(0, this.results.length - 1)
+                        this.scrollToSelection()
                     }
                     break
                 case 'Enter':
@@ -278,6 +346,7 @@ export default {
         flex-direction: column;
         align-items: stretch;
         max-height: 488px;
+        scroll-behavior: smooth;
         scrollbar-width: thin;
         overflow: hidden auto;
 
@@ -308,6 +377,15 @@ export default {
     &-noresult {
         margin: 8px auto 12px;
         padding: 0 8px;
+
+        strong {
+            display: inline-block;
+            max-width: 340px;
+            white-space: pre;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: bottom;
+        }
     }
     &-shortcuts {
         list-style: none;
