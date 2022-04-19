@@ -775,10 +775,10 @@ export default [
             },
             {
                 name: '<code>header-selectable</code>',
-                description: 'Prevent text selection of header when setting this to <code>false</code>.',
+                description: 'Whether the header text is selectable, works when column is <code>sortable</code>.',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>header-class</code>',
@@ -793,13 +793,6 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '-'
-            },
-            {
-                name: '<code>header-selectable</code>',
-                description: 'Whether the header text is selectable, works when column is <code>sortable</code>',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
             },
             {
                 name: '<code>th-attrs</code>',
