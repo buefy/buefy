@@ -156,8 +156,7 @@ export default {
                 }
                 resultsByCategory[category].results.push({
                     ...result,
-                    score,
-                    index: index++
+                    score
                 })
             })
 
@@ -166,6 +165,7 @@ export default {
             sorted.forEach((category) => {
                 category.results = category.results
                     .sort((a, b) => String(b.score).localeCompare(a.score))
+                    .map((result) => ({ ...result, index: index++ }))
             })
 
             return sorted
