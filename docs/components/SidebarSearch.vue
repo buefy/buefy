@@ -241,15 +241,16 @@ export default {
             }
         },
         navigateTo() {
-            for (const category of this.sortedResults) {
-                for (const result of category.results) {
+            this.sortedResults.some((category) =>
+                category.results.some((result) => {
                     if (result.index === this.selectedIndex) {
                         this.$router.push(result.path)
                         this.close()
-                        return
+                        return true
                     }
-                }
-            }
+                    return false
+                })
+            )
         },
         shortcutHandler(event) {
             switch (event.key) {
