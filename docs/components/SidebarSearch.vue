@@ -28,6 +28,8 @@
                             placeholder="Search docs"
                             type="search"
                             @input="search"
+                            maxlength="32"
+                            :has-counter="false"
                         />
                         <span class="icon is-left">
                             <i class="fas fa-search" aria-hidden="true" />
@@ -308,6 +310,15 @@ export default {
     &-noresult {
         margin: 8px auto 12px;
         padding: 0 8px;
+
+        strong {
+            display: inline-block;
+            max-width: 340px;
+            white-space: pre;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: bottom;
+        }
     }
     &-shortcuts {
         list-style: none;
