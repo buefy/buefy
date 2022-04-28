@@ -110,6 +110,9 @@ export default {
         }
         this.$table.refreshSlots()
     },
+    beforeDestroy() {
+        this.$table.refreshSlots()
+    },
     render(createElement) {
         // renderless
         return null
