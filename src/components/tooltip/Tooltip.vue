@@ -42,9 +42,13 @@ export default {
             default: () => config.defaultTooltipType
         },
         label: String,
-        delay: {
+        openDelay: {
             type: Number,
-            default: () => config.defaultTooltipDelay
+            default: () => config.defaultTooltipOpenDelay
+        },
+        closeDelay: {
+            type: Number,
+            default: () => config.defaultTooltipCloseDelay
         },
         position: {
             type: String,
@@ -203,19 +207,26 @@ export default {
             this.open()
         },
         open() {
-            if (this.delay) {
+            if (this.openDelay) {
                 this.timer = setTimeout(() => {
                     this.isActive = true
                     this.timer = null
-                }, this.delay)
+                }, this.openDelay)
             } else {
                 this.isActive = true
             }
         },
         close() {
             if (typeof this.autoClose === 'boolean') {
-                this.isActive = !this.autoClose
                 if (this.autoClose && this.timer) clearTimeout(this.timer)
+                if (this.closeDelay) {
+                    this.timer = setTimeout(() => {
+                        this.isActive = !this.autoClose
+                        this.timer = null
+                    }, this.closeDelay)
+                } else {
+                    this.isActive = !this.autoClose
+                }
             }
         },
         /**
