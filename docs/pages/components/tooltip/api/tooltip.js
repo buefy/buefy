@@ -96,6 +96,13 @@ export default [
                 default: '<code>0</code>'
             },
             {
+                name: '<code>close-delay</code>',
+                description: 'Tooltip delay before it disappears (number in ms)',
+                type: 'Number',
+                values: "—",
+                default: '<code>0</code>'
+            },
+            {
                 name: '<code>append-to-body</code>',
                 description: 'Append tooltip content to body (prevents event bubbling)',
                 type: 'Boolean',

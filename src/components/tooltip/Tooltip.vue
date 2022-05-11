@@ -46,6 +46,10 @@ export default {
             type: Number,
             default: () => config.defaultTooltipDelay
         },
+        closeDelay: {
+            type: Number,
+            default: () => config.defaultTooltipCloseDelay
+        },
         position: {
             type: String,
             default: 'is-top',
@@ -214,8 +218,15 @@ export default {
         },
         close() {
             if (typeof this.autoClose === 'boolean') {
-                this.isActive = !this.autoClose
                 if (this.autoClose && this.timer) clearTimeout(this.timer)
+                if (this.closeDelay) {
+                    this.timer = setTimeout(() => {
+                        this.isActive = !this.autoClose
+                        this.timer = null
+                    }, this.closeDelay)
+                } else {
+                    this.isActive = !this.autoClose
+                }
             }
         },
         /**
