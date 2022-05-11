@@ -89,7 +89,7 @@ export default [
                 default: '<code>is-medium</code>'
             },
             {
-                name: '<code>open-delay</code>',
+                name: '<code>delay</code>',
                 description: 'Tooltip delay before it appears (number in ms)',
                 type: 'Number',
                 values: "—",

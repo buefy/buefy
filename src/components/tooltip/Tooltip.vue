@@ -42,9 +42,9 @@ export default {
             default: () => config.defaultTooltipType
         },
         label: String,
-        openDelay: {
+        delay: {
             type: Number,
-            default: () => config.defaultTooltipOpenDelay
+            default: () => config.defaultTooltipDelay
         },
         closeDelay: {
             type: Number,
@@ -207,11 +207,11 @@ export default {
             this.open()
         },
         open() {
-            if (this.openDelay) {
+            if (this.delay) {
                 this.timer = setTimeout(() => {
                     this.isActive = true
                     this.timer = null
-                }, this.openDelay)
+                }, this.delay)
             } else {
                 this.isActive = true
             }

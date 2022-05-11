@@ -14,7 +14,7 @@ let config = {
     defaultNotificationDuration: 2000,
     defaultNotificationPosition: null,
     defaultTooltipType: 'is-primary',
-    defaultTooltipOpenDelay: null,
+    defaultTooltipDelay: null,
     defaultTooltipCloseDelay: null,
     defaultSidebarDelay: null,
     defaultInputAutocomplete: 'on',
