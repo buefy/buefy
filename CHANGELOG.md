@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## 0.9.21
+
+## Fixes
+
+* Fix #3734 refresh columns on destroy
+* Fix setting type html attribute on non-button tags (thanks @tcitworld)
+
 ## 0.9.20
 
 ### New features
