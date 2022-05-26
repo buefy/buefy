@@ -203,7 +203,7 @@ export default {
         */
         valueLength() {
             if (typeof this.computedValue === 'string') {
-                return this.computedValue.length
+                return Array.from(this.computedValue).length
             } else if (typeof this.computedValue === 'number') {
                 return this.computedValue.toString().length
             }
