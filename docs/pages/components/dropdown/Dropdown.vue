@@ -31,7 +31,7 @@
                 <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.18</span>
             </div>
-            <p>Add the <code>scrollable</code> prop to make the list scollable.</p>
+            <p>Add the <code>scrollable</code> prop to make the list scrollable.</p>
             <p>When the <code>scrollable</code> prop is set to <code>true</code>, use the <code>max-height</code> prop to define the max height of the list.</p>
         </Example>
 
