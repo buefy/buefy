@@ -142,6 +142,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>close-button-aria-label</code>',
+                description: `Aria label attribute to be passed to the close button for better accessibility.`,
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         events: [

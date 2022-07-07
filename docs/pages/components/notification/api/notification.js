@@ -2,6 +2,13 @@ export default [
     {
         props: [
             {
+                name: '<code>v-model</code>',
+                description: 'Active state - set on `true` to reopen after close',
+                type: 'Boolean',
+                values: '—',
+                default: 'true'
+            },
+            {
                 name: '<code>type</code>',
                 description: 'Type (color) of the notification, optional',
                 type: 'String',
@@ -73,6 +80,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>icon-size</code>',
+                description: 'Size of the icon, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: 'Depends on <code>size</code> prop'
             },
             {
                 name: '<code>aria-close-label</code>',

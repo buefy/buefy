@@ -7,12 +7,13 @@
             @click="isComponentModalActive = true" />
 
         <b-modal
-            :active="isComponentModalActive"
+            v-model="isComponentModalActive"
             has-modal-card
             trap-focus
             :destroy-on-hide="false"
             aria-role="dialog"
             aria-label="Example Modal"
+            close-button-aria-label="Close"
             aria-modal>
             <template #default="props">
                 <modal-form v-bind="formProps" @close="props.close"></modal-form>

@@ -42,7 +42,8 @@ export default {
     data() {
         return {
             isActive: this.active,
-            remainingTime: this.duration / 1000 // in seconds
+            remainingTime: this.duration / 1000, // in seconds
+            newIconSize: this.iconSize || this.size || 'is-large'
         }
     },
     watch: {
@@ -88,6 +89,7 @@ export default {
          */
         close() {
             this.isActive = false
+            this.resetDurationProgress()
             this.$emit('close')
             this.$emit('update:active', false)
         },
@@ -107,25 +109,28 @@ export default {
             }
         },
         setDurationProgress() {
-            if (this.autoClose && this.progressBar) {
+            if (this.progressBar) {
                 /**
                  * Runs every one second to set the duration passed before
-                 * the alert will auto close to show it in the progress bar
+                 * the alert will auto close to show it in the progress bar (Remaining Time)
                  */
-                this.progress = setInterval(() => {
-                    if (this.remainingTime !== 0 && this.active) {
+                this.$buefy.globalNoticeInterval = setInterval(() => {
+                    if (this.remainingTime !== 0) {
                         this.remainingTime -= 1
                     } else {
-                        /**
-                        * Wait until the component get closed and then reset
-                        **/
-                        window.setTimeout(() => {
-                            this.remainingTime = this.duration / 1000
-                            clearInterval(this.progress)
-                        }, 100)
+                        this.resetDurationProgress()
                     }
                 }, 1000)
             }
+        },
+        resetDurationProgress() {
+            /**
+             * Wait until the component get closed and then reset
+             **/
+            setTimeout(() => {
+                this.remainingTime = this.duration / 1000
+                clearInterval(this.$buefy.globalNoticeInterval)
+            }, 100)
         }
     },
     mounted() {

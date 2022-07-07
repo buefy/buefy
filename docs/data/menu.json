@@ -29,6 +29,7 @@
                         "documentation/autocomplete",
                         "documentation/checkbox",
                         "documentation/clockpicker",
+                        "documentation/colorpicker",
                         "documentation/datepicker",
                         "documentation/datetimepicker",
                         "documentation/field",

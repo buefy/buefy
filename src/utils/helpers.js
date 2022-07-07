@@ -174,6 +174,15 @@ export function escapeRegExpChars(value) {
     // eslint-disable-next-line
     return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }
+/**
+ * Remove accents/diacritics in a string in JavaScript
+ * https://stackoverflow.com/a/37511463
+ */
+export function removeDiacriticsFromString(value) {
+    if (!value) return value
+
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
 
 export function multiColumnSort(inputArray, sortingPriority) {
     // clone it to prevent the any watchers from triggering every sorting iteration
@@ -216,8 +225,7 @@ export function getMonthNames(locale = undefined, format = 'long') {
         dates.push(new Date(2000, i, 15))
     }
     const dtf = new Intl.DateTimeFormat(locale, {
-        month: format,
-        timeZone: 'UTC'
+        month: format
     })
     return dates.map((d) => dtf.format(d))
 }
@@ -290,3 +298,10 @@ export function isCustomElement(vm) {
 }
 
 export const isDefined = (d) => d !== undefined
+
+/**
+ * Checks if a value is null or undefined.
+ * Based on
+ * https://github.com/lodash/lodash/blob/master/isNil.js
+ */
+export const isNil = (value) => value === null || value === undefined

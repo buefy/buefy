@@ -148,7 +148,7 @@ describe('BTable', () => {
     describe('Searchable', () => {
         const data = [
             { id: 1, name: 'Jesse' },
-            { id: 2, name: 'John' },
+            { id: 2, name: 'João' },
             { id: 3, name: 'Tina' },
             { id: 4, name: 'Anne' },
             { id: 5, name: 'Clarence' }
@@ -191,7 +191,21 @@ describe('BTable', () => {
             searchInput.vm.$emit('input', 'J')
             bodyRows = wrapper.findAll('tbody tr')
 
-            expect(bodyRows).toHaveLength(2) // Jesse and John
+            expect(bodyRows).toHaveLength(2) // Jesse and João
+        })
+
+        it('displays filtered data when searching by name without accent', () => {
+            searchInput.vm.$emit('input', 'Joao')
+            bodyRows = wrapper.findAll('tbody tr')
+
+            expect(bodyRows).toHaveLength(1) // João
+        })
+
+        it('displays filtered data when searching by name with accent', () => {
+            searchInput.vm.$emit('input', 'João')
+            bodyRows = wrapper.findAll('tbody tr')
+
+            expect(bodyRows).toHaveLength(1) // João
         })
 
         it('displays filtered data when searching and updating data', () => {
@@ -204,7 +218,7 @@ describe('BTable', () => {
             })
             bodyRows = wrapper.findAll('tbody tr')
 
-            expect(bodyRows).toHaveLength(3) // Jesse, John and Justin
+            expect(bodyRows).toHaveLength(3) // Jesse, João and Justin
         })
 
         it('debounce search filtering when debounce-search is defined', () => {

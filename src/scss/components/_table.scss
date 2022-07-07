@@ -123,6 +123,7 @@ $table-sticky-header-height: 300px !default;
                 &.is-numeric {
                     flex-direction: row-reverse;
                     text-align: right;
+                    width: 95%;
                     .icon {
                         margin-left: 0;
                         margin-right: 0.5rem;

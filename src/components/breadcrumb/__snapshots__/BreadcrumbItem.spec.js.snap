@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BBreadcrumbItem render correctly 1`] = `
-<li class="">
-    <router-link to="/"></router-link>
-</li>
-`;
+exports[`BBreadcrumbItem render correctly 1`] = `<li class=""><a></a></li>`;

@@ -189,6 +189,13 @@ export default [
             description: 'Dropdown menu custom label',
             props: '-'
         }
+    ],
+    events: [
+        {
+            name: '<code>active-change</code>',
+            description: 'Triggers when dropdown is activated or deactivated (visibility of list)',
+            parameters: '<code>active: Boolean</code>'
+        }
     ]
   }
 ]

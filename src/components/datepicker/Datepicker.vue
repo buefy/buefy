@@ -12,7 +12,6 @@
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
-            :aria-modal="!inline"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
@@ -35,7 +34,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
-                        @icon-right-click="$emit('icon-right-click')"
+                        @icon-right-click="$emit('icon-right-click', $event)"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />
@@ -492,13 +491,12 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale)
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
-                month: this.localeOptions.month || '2-digit',
-                timeZone: 'UTC'
+                month: this.localeOptions.month || '2-digit'
             })
         },
         newMonthNames() {
@@ -737,11 +735,12 @@ export default {
         },
         updateInternalState(value) {
             if (this.dateSelected === value) return
-            const currentDate = Array.isArray(value)
+            const isArray = Array.isArray(value)
+            const currentDate = isArray
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            if (Array.isArray(value) &&
-                this.dateSelected && value.length > this.dateSelected.length) {
+            if (!isArray ||
+                (isArray && this.dateSelected && value.length > this.dateSelected.length)) {
                 this.focusedDateData = {
                     day: currentDate.getDate(),
                     month: currentDate.getMonth(),

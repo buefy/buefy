@@ -3,60 +3,78 @@
         <slot
             v-if="$scopedSlots.previous"
             name="previous"
-            :page="getPage(current - 1, {
-                disabled: !hasPrev,
-                class: 'pagination-previous',
-                'aria-label': ariaPreviousLabel
-        })">
+            :page="
+                getPage(current - 1, {
+                    disabled: !hasPrev,
+                    class: 'pagination-previous',
+                    'aria-label': ariaPreviousLabel,
+                })
+            "
+        >
             <b-icon
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </slot>
         <BPaginationButton
             v-else
             class="pagination-previous"
             :disabled="!hasPrev"
             :page="getPage(current - 1)"
-            :aria-label="ariaPreviousLabel">
+            :aria-label="ariaPreviousLabel"
+        >
             <b-icon
                 :icon="iconPrev"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </BPaginationButton>
         <slot
             v-if="$scopedSlots.next"
             name="next"
-            :page="getPage(current + 1, {
-                disabled: !hasNext,
-                class: 'pagination-next',
-                'aria-label': ariaNextLabel
-        })">
+            :page="
+                getPage(current + 1, {
+                    disabled: !hasNext,
+                    class: 'pagination-next',
+                    'aria-label': ariaNextLabel,
+                })
+            "
+        >
             <b-icon
                 :icon="iconNext"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </slot>
         <BPaginationButton
             v-else
             class="pagination-next"
             :disabled="!hasNext"
             :page="getPage(current + 1)"
-            :aria-label="ariaNextLabel">
+            :aria-label="ariaNextLabel"
+        >
             <b-icon
                 :icon="iconNext"
                 :pack="iconPack"
                 both
-                aria-hidden="true"/>
+                aria-hidden="true" />
         </BPaginationButton>
 
+        <div class="control pagination-input">
+            <input
+                v-if="pageInput"
+                class="input"
+                :value="inputValue"
+                @input="handleAllowableInputPageRange"
+                @keypress="handleOnKeyPress"
+                :size="pageCount.toString().length"
+                :maxlength="pageCount.toString().length"
+            >
+        </div>
+
         <small class="info" v-if="simple">
-            <template v-if="perPage == 1">
-                {{ firstItem }} / {{ total }}
-            </template>
+            <template v-if="perPage == 1"> {{ firstItem }} / {{ total }} </template>
             <template v-else>
                 {{ firstItem }}-{{ Math.min(current * perPage, total) }} / {{ total }}
             </template>
@@ -64,37 +82,26 @@
         <ul class="pagination-list" v-else>
             <!--First-->
             <li v-if="hasFirst">
-                <slot
-                    v-if="$scopedSlots.default"
-                    :page="getPage(1)"
-                />
-                <BPaginationButton
-                    v-else
-                    :page="getPage(1)" />
+                <slot v-if="$scopedSlots.default" :page="getPage(1)" />
+                <BPaginationButton v-else :page="getPage(1)" />
             </li>
-            <li v-if="hasFirstEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+            <li v-if="hasFirstEllipsis">
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
 
             <!--Pages-->
             <li v-for="page in pagesInRange" :key="page.number">
-                <slot
-                    v-if="$scopedSlots.default"
-                    :page="page"
-                />
-                <BPaginationButton
-                    v-else
-                    :page="page" />
+                <slot v-if="$scopedSlots.default" :page="page" />
+                <BPaginationButton v-else :page="page" />
             </li>
 
             <!--Last-->
-            <li v-if="hasLastEllipsis"><span class="pagination-ellipsis">&hellip;</span></li>
+            <li v-if="hasLastEllipsis">
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
             <li v-if="hasLast">
-                <slot
-                    v-if="$scopedSlots.default"
-                    :page="getPage(pageCount)"
-                />
-                <BPaginationButton
-                    v-else
-                    :page="getPage(pageCount)" />
+                <slot v-if="$scopedSlots.default" :page="getPage(pageCount)" />
+                <BPaginationButton v-else :page="getPage(pageCount)" />
             </li>
         </ul>
     </nav>
@@ -104,6 +111,7 @@
 import PaginationButton from './PaginationButton'
 import Icon from '../icon/Icon'
 import config from '../../utils/config'
+import debounce from '../../utils/debounce'
 
 export default {
     name: 'BPagination',
@@ -154,16 +162,29 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
-        ariaCurrentLabel: String
+        ariaCurrentLabel: String,
+        pageInput: {
+            type: Boolean,
+            default: false
+        },
+        pageInputPosition: String,
+        debouncePageInput: [Number, String]
+    },
+    data() {
+        return {
+            inputValue: this.current
+        }
     },
     computed: {
         rootClasses() {
             return [
                 this.order,
                 this.size,
+                this.pageInputPosition,
                 {
                     'is-simple': this.simple,
-                    'is-rounded': this.rounded
+                    'is-rounded': this.rounded,
+                    'has-input': this.pageInput
                 }
             ]
         },
@@ -199,17 +220,17 @@ export default {
         },
 
         /**
-        * Check if first page button should be visible.
+         * Check if first page button should be visible.
         */
         hasFirst() {
-            return this.current >= (2 + this.beforeCurrent)
+            return this.current >= 2 + this.beforeCurrent
         },
 
         /**
         * Check if first ellipsis should be visible.
         */
         hasFirstEllipsis() {
-            return this.current >= (this.beforeCurrent + 4)
+            return this.current >= this.beforeCurrent + 4
         },
 
         /**
@@ -262,6 +283,20 @@ export default {
         */
         pageCount(value) {
             if (this.current > value) this.last()
+        },
+
+        current(value) {
+            this.inputValue = value
+        },
+
+        debouncePageInput: {
+            handler(value) {
+                this.debounceHandlePageInput = debounce(
+                    this.handleOnInputPageChange,
+                    value
+                )
+            },
+            immediate: true
         }
     },
     methods: {
@@ -272,13 +307,13 @@ export default {
             this.changePage(this.current - 1, event)
         },
         /**
-        * Next button click listener.
+         * Next button click listener.
         */
         next(event) {
             this.changePage(this.current + 1, event)
         },
         /**
-        * First button click listener.
+         * First button click listener.
         */
         first(event) {
             this.changePage(1, event)
@@ -292,6 +327,7 @@ export default {
 
         changePage(num, event) {
             if (this.current === num || num < 1 || num > this.pageCount) return
+
             this.$emit('update:current', num)
             this.$emit('change', num)
 
@@ -306,9 +342,12 @@ export default {
                 number: num,
                 isCurrent: this.current === num,
                 click: (event) => this.changePage(num, event),
+                input: (event, inputNum) => this.changePage(+inputNum, event),
                 disabled: options.disabled || false,
                 class: options.class || '',
-                'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
+                'aria-label':
+          options['aria-label'] ||
+          this.getAriaPageLabel(num, this.current === num)
             }
         },
 
@@ -319,9 +358,60 @@ export default {
             if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
                 return this.ariaPageLabel + ' ' + pageNumber + '.'
             } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
-                return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.'
+                return (
+                    this.ariaCurrentLabel +
+          ', ' +
+          this.ariaPageLabel +
+          ' ' +
+          pageNumber +
+          '.'
+                )
             }
             return null
+        },
+
+        handleOnInputPageChange(event) {
+            this.getPage(this.inputValue).input(event, this.inputValue)
+        },
+
+        handleOnInputDebounce(event) {
+            if (this.debouncePageInput) {
+                this.debounceHandlePageInput(event)
+            } else {
+                this.handleOnInputPageChange(event)
+            }
+        },
+        handleOnKeyPress(event) {
+            // --- This is required to only allow numeric inputs for the page input - --- //
+            // --- size attribute does not work with input type number. --- //
+            let ASCIICode = event.which || event.keyCode
+
+            if (ASCIICode >= 48 && ASCIICode <= 57) {
+                return true
+            } else {
+                return event.preventDefault()
+            }
+        },
+        handleAllowableInputPageRange(event) {
+            if (+event.target.value > 0 && +event.target.value <= this.pageCount) {
+                this.handleOnInputValue(event)
+            } else {
+                // --- It is nessacery to set inputValue to 1 and then to '' so that the DOM- --- //
+                // --- will update the input component even when Backspace is used and then-
+                // --- 0 us entered. --- //
+                this.inputValue = 1
+                this.inputValue = ''
+            }
+        },
+        handleOnInputValue(event) {
+            let inputValue = +event.target.value
+            this.inputValue = inputValue
+            if (Number.isInteger(this.inputValue)) {
+                this.handleOnInputDebounce(event)
+            } else {
+                // --- if NaN, then set inputValue back to current --- //
+                this.inputValue = this.current
+            }
         }
     }
 }

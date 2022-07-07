@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <article
-            v-if="isActive"
+            v-show="isActive"
             class="message"
             :class="[type, size]">
             <header v-if="$slots.header || title" class="message-header">
@@ -37,7 +37,8 @@
                 class="auto-close-progress"
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
-                :type="type" />
+                :type="type"
+                :rounded="false"/>
         </article>
     </transition>
 </template>
@@ -50,11 +51,6 @@ export default {
     mixins: [MessageMixin],
     props: {
         ariaCloseLabel: String
-    },
-    data() {
-        return {
-            newIconSize: this.iconSize || this.size || 'is-large'
-        }
     }
 }
 </script>

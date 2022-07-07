@@ -17,6 +17,8 @@ const Buefy = {
         }
         // Config component
         registerComponentProgrammatic(Vue, 'config', ConfigComponent)
+
+        Vue.prototype.$buefy.globalNoticeInterval = null
     }
 }
 

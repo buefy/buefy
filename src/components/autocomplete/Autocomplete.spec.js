@@ -87,6 +87,76 @@ describe('BAutocomplete', () => {
         expect(wrapper.emitted()['blur']).toBeTruthy()
     })
 
+    it('can emit select-header by keyboard and click', async () => {
+        const VALUE_TYPED = 'test'
+        const wrapper = mount(BAutocomplete, {
+            propsData: {
+                checkInfiniteScroll: true,
+                selectableHeader: true,
+                selectableFooter: true
+            },
+            slots: {
+                header: '<h1>SLOT HEADER</h1>',
+                footer: '<h1>SLOT FOOTER</h1>'
+            },
+            stubs
+        })
+        const $input = wrapper.find('input')
+
+        $input.trigger('focus')
+        $input.setValue(VALUE_TYPED)
+        await wrapper.vm.$nextTick()
+
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
+        await wrapper.vm.$nextTick()
+
+        const $header = wrapper.find('.dropdown-item.dropdown-header')
+        $header.trigger('click')
+        await wrapper.vm.$nextTick()
+
+        const emitted = wrapper.emitted()
+
+        expect(emitted['select-header']).toBeTruthy()
+        expect(emitted['select-header']).toHaveLength(2)
+    })
+
+    it('can emit select-footer by keyboard and click', async () => {
+        const VALUE_TYPED = 'test'
+        const wrapper = mount(BAutocomplete, {
+            propsData: {
+                checkInfiniteScroll: true,
+                selectableHeader: true,
+                selectableFooter: true
+            },
+            slots: {
+                header: '<h1>SLOT HEADER</h1>',
+                footer: '<h1>SLOT FOOTER</h1>'
+            },
+            stubs
+        })
+        const $input = wrapper.find('input')
+
+        $input.trigger('focus')
+        $input.setValue(VALUE_TYPED)
+        await wrapper.vm.$nextTick()
+
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Down'})
+        $input.trigger('keydown', {'key': 'Enter'})
+        $input.trigger('blur')
+        await wrapper.vm.$nextTick()
+
+        const $footer = wrapper.find('.dropdown-item.dropdown-footer')
+        $footer.trigger('click')
+        await wrapper.vm.$nextTick()
+
+        const emitted = wrapper.emitted()
+
+        expect(emitted['select-footer']).toBeTruthy()
+        expect(emitted['select-footer']).toHaveLength(2)
+    })
+
     it('can autocomplete with keydown', async () => {
         const VALUE_TYPED = 'Ang'
         wrapper.setProps({ data: DATA_LIST })

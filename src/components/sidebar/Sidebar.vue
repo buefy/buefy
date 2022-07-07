@@ -27,7 +27,6 @@ import { removeElement, isCustomElement } from '../../utils/helpers'
 
 export default {
     name: 'BSidebar',
-    // deprecated, to replace with default 'value' in the next breaking change
     model: {
         prop: 'open',
         event: 'update:open'
@@ -90,7 +89,8 @@ export default {
             transitionName: null,
             animating: true,
             savedScrollTop: null,
-            hasLeaved: false
+            hasLeaved: false,
+            whiteList: []
         }
     },
     computed: {
@@ -143,23 +143,6 @@ export default {
     },
     methods: {
         /**
-        * White-listed items to not close when clicked.
-        * Add sidebar content and all children.
-        */
-        getWhiteList() {
-            const whiteList = []
-            whiteList.push(this.$refs.sidebarContent)
-            // Add all chidren from dropdown
-            if (this.$refs.sidebarContent !== undefined) {
-                const children = this.$refs.sidebarContent.querySelectorAll('*')
-                for (const child of children) {
-                    whiteList.push(child)
-                }
-            }
-            return whiteList
-        },
-
-        /**
         * Keypress event that is bound to the document.
         */
         keyPress({ key }) {
@@ -195,7 +178,7 @@ export default {
             if (this.isFixed) {
                 if (this.isOpen && !this.animating) {
                     const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-                    if (this.getWhiteList().indexOf(target) < 0) {
+                    if (this.whiteList.indexOf(target) < 0) {
                         this.cancel('outside')
                     }
                 }
@@ -299,6 +282,21 @@ export default {
         }
         if (this.isFixed) {
             removeElement(this.$el)
+        }
+    },
+    beforeUpdate() {
+        /**
+        * White-listed items to not close when clicked.
+        * Add sidebar content and all children.
+        */
+        this.whiteList = []
+        this.whiteList.push(this.$refs.sidebarContent)
+        // Add all chidren from sidebar
+        if (this.$refs.sidebarContent !== undefined) {
+            const children = this.$refs.sidebarContent.querySelectorAll('*')
+            for (const child of children) {
+                this.whiteList.push(child)
+            }
         }
     }
 }

@@ -18,8 +18,8 @@
                     <b-icon
                         :icon="computedIcon"
                         :pack="iconPack"
+                        :size="newIconSize"
                         both
-                        size="is-large"
                         aria-hidden/>
                 </div>
                 <div class="media-content">
@@ -36,7 +36,8 @@
                 class="auto-close-progress"
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
-                :type="type" />
+                :type="type"
+                :rounded="false"/>
         </article>
     </transition>
 </template>

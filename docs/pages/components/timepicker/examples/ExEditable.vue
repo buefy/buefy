@@ -60,7 +60,8 @@ export default {
                 hour: 'numeric',
                 minute: 'numeric',
                 second: this.enableSeconds ? 'numeric' : undefined,
-                hour12: this.hourFormat ? this.hourFormat === '12' : undefined
+                // Fixes 12 hour display github.com/buefy/buefy/issues/3418
+                hourCycle: this.hourFormat === '12' ? 'h12' : 'h23'
             })
             return dtf.format(new Date(2000, 12, 12, 22, 23, 24))
         }

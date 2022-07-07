@@ -17,7 +17,8 @@ const SnackbarProgrammatic = {
 
         const defaultParam = {
             type: 'is-success',
-            position: config.defaultSnackbarPosition || 'is-bottom-right'
+            position: config.defaultSnackbarPosition || 'is-bottom-right',
+            queue: true
         }
         if (params.parent) {
             parent = params.parent

@@ -44,7 +44,13 @@ const getIcons = () => {
         far: faIcons(),
         fad: faIcons(),
         fab: faIcons(),
-        fal: faIcons()
+        fal: faIcons(),
+        'fa-solid': faIcons(),
+        'fa-regular': faIcons(),
+        'fa-light': faIcons(),
+        'fa-thin': faIcons(),
+        'fa-duotone': faIcons(),
+        'fa-brands': faIcons()
     }
 
     if (config && config.customIconPacks) {
