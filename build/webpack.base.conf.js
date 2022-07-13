@@ -25,6 +25,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.cjs.js',
+      'vue-router$': 'vue-router/dist/vue-router.cjs.js',
       '@': resolve('docs'),
       '@components': resolve('src/components'),
       '@utils': resolve('src/utils')
