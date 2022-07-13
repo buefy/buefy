@@ -4,14 +4,14 @@
             class="datepicker-cell is-week-number"
             :class="{'is-clickable': weekNumberClickable }"
             v-if="showWeekNumber"
-            @click.prevent="clickWeekNumber(getWeekNumber(week[6]))">
+            @click.prevent="clickWeekNumber(getWeekNumber(week[6]))"
+        >
             <span>{{ getWeekNumber(week[6]).week }}</span>
         </a>
-        <template v-for="(weekDay, index) in week">
+        <template v-for="(weekDay, index) in week" :key="index">
             <a
                 :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
-                :key="index"
                 :class="classObject(weekDay)"
                 class="datepicker-cell"
                 role="button"
@@ -20,28 +20,31 @@
                 @click.prevent="emitChosenDate(weekDay)"
                 @mouseenter="setRangeHoverEndDate(weekDay)"
                 @keydown="manageKeydown($event, weekDay)"
-                :tabindex="day === weekDay.getDate() && month === weekDay.getMonth() ? null : -1">
+                :tabindex="day === weekDay.getDate() && month === weekDay.getMonth() ? null : -1"
+            >
                 <span>{{ weekDay.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(weekDay)">
                     <div
                         class="event"
                         :class="event.type"
                         v-for="(event, index) in eventsDateMatch(weekDay)"
-                        :key="index"/>
+                        :key="index"
+                    />
                 </div>
             </a>
             <div
                 v-else
-                :key="index"
                 :class="classObject(weekDay)"
-                class="datepicker-cell">
+                class="datepicker-cell"
+            >
                 <span>{{ weekDay.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(weekDay)">
                     <div
                         class="event"
                         :class="event.type"
                         v-for="(event, index) in eventsDateMatch(weekDay)"
-                        :key="index"/>
+                        :key="index"
+                    />
                 </div>
             </div>
         </template>
@@ -141,7 +144,7 @@ export default {
                 resYear = mom.getFullYear()
                 resWeek = week
             }
-            return {week: resWeek, year: resYear}
+            return { week: resWeek, year: resYear }
         },
         clickWeekNumber(weekData) {
             if (this.weekNumberClickable) {

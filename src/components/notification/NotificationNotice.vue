@@ -4,8 +4,9 @@
         ref="notification"
         @click="click"
         @close="close"
-        @mouseenter.native="pause"
-        @mouseleave.native="removePause">
+        @mouseenter="pause"
+        @mouseleave="removePause"
+    >
         <slot />
     </b-notification>
 </template>

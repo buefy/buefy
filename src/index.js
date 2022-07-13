@@ -12,7 +12,7 @@ const Buefy = {
         // Options
         setOptions(merge(config, options, true))
         // Components
-        for (let componentKey in components) {
+        for (const componentKey in components) {
             Vue.use(components[componentKey])
         }
         // Config component

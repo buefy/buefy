@@ -9,8 +9,8 @@
             <b-field label="Max Height">
                 <div class="control">
                     <b-slider v-model="maxHeight" :min="50" :max="250" rounded :disabled="!isScrollable">
-                        <template v-for="val in [100, 150, 200]">
-                            <b-slider-tick :value="val" :key="val">{{ val }}</b-slider-tick>
+                        <template v-for="val in [100, 150, 200]" :key="val">
+                            <b-slider-tick :value="val">{{ val }}</b-slider-tick>
                         </template>
                     </b-slider>
                 </div>

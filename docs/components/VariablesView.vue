@@ -1,7 +1,9 @@
 <template>
     <section id="variables-view" class="variables-view">
         <h2 class="title is-4">
-            <router-link to="#variables-view">#</router-link>
+            <router-link to="#variables-view">
+                #
+            </router-link>
             Variables
         </h2>
         <p>You can use these variables to customize this component.</p>
@@ -23,7 +25,7 @@ export default {
     },
     computed: {
         variablesColumns() {
-            let columns = []
+            const columns = []
             if (this.data.some((d) => d.name !== undefined)) {
                 columns.push({ label: 'Name', field: 'name', renderHtml: true })
             }

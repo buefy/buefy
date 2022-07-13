@@ -3,7 +3,7 @@ import { merge } from '../utils/helpers'
 
 const mdiIcons = {
     sizes: {
-        'default': 'mdi-24px',
+        default: 'mdi-24px',
         'is-small': null,
         'is-medium': 'mdi-36px',
         'is-large': 'mdi-48px'
@@ -15,15 +15,15 @@ const faIcons = () => {
     const faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
     return {
         sizes: {
-            'default': null,
+            default: null,
             'is-small': null,
             'is-medium': faIconPrefix + 'lg',
             'is-large': faIconPrefix + '2x'
         },
         iconPrefix: faIconPrefix,
         internalIcons: {
-            'information': 'info-circle',
-            'alert': 'exclamation-triangle',
+            information: 'info-circle',
+            alert: 'exclamation-triangle',
             'alert-circle': 'exclamation-circle',
             'chevron-right': 'angle-right',
             'chevron-left': 'angle-left',

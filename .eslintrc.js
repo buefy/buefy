@@ -81,6 +81,8 @@ module.exports = {
             svg: 'always',
             math: 'always'
         }],
-        'max-depth': 'off'
+        'max-depth': 'off',
+
+        'vue/multi-word-component-names': ['warn']
     }
 }

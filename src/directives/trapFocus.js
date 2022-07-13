@@ -3,7 +3,7 @@ const findFocusable = (element, programmatic = false) => {
         return null
     }
     if (programmatic) {
-        return element.querySelectorAll(`*[tabindex="-1"]`)
+        return element.querySelectorAll('*[tabindex="-1"]')
     }
     return element.querySelectorAll(`a[href]:not([tabindex="-1"]),
                                      area[href],

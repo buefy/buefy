@@ -14,8 +14,8 @@
         <p>You can also customize the search input using a scoped slot.</p>
         <b-table
             :data="data">
-            <template v-for="column in columns">
-                <b-table-column :key="column.id" v-bind="column">
+            <template v-for="column in columns" :key="column.id">
+                <b-table-column v-bind="column">
                     <template
                         v-if="column.searchable && !column.numeric"
                         #searchable="props">

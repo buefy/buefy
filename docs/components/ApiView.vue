@@ -1,15 +1,18 @@
 <template>
     <section id="api-view" class="api-view">
         <h2 class="title is-4">
-            <router-link to="#api-view">#</router-link>
+            <router-link to="#api-view">
+                #
+            </router-link>
             API
         </h2>
 
-        <template v-for="component in data">
-            <div :key="component.title">
+        <template v-for="component in data" :key="component.title">
+            <div>
                 <h3
                     v-if="component.title"
-                    class="subtitle">
+                    class="subtitle"
+                >
                     {{ component.title }}
                 </h3>
                 <b-tabs>
