@@ -1,6 +1,4 @@
-import Vue from 'vue'
-
-export const afterEachGlobal = (to, from) => {
+export const afterEachGlobal = (vueApp, to, from) => {
     const title = to.meta.path === '/' ? to.meta.title : `${to.meta.title} | Buefy`
     const url = `https://buefy.org${to.meta.path}`
     const description = to.meta.subtitle.replace(/<(.|\n)*?>/g, '')
@@ -23,5 +21,5 @@ export const afterEachGlobal = (to, from) => {
             .setAttribute(item.attr || 'content', item.value)
     })
 
-    Vue.prototype.$eventHub.$emit('navigate', to.meta)
+    vueApp.config.globalProperties.$eventHub.emit('navigate', to.meta)
 }

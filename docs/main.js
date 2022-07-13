@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App'
-import router from './router'
+import { createDocsRouter } from './router'
 import Emitter from 'tiny-emitter'
 
 import Buefy from '../src'
@@ -26,6 +26,8 @@ const vueApp = createApp({
     },
     template: '<App/>'
 })
+
+const router = createDocsRouter(vueApp)
 
 vueApp.use(router)
 
@@ -62,6 +64,7 @@ vueApp.use(VueAnalytics, {
 vueApp.component('ApiView', ApiView)
 vueApp.component('CodeView', CodeView)
 vueApp.component('VariablesView', VariablesView)
+// eslint-disable-next-line vue/multi-word-component-names
 vueApp.component('Example', Example)
 
 vueApp.directive('highlight', {
