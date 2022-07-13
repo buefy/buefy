@@ -2,14 +2,16 @@
     <span class="icon" :class="[newType, size]">
         <i
             v-if="!useIconComponent"
-            :class="[newPack, newIcon, newCustomSize, customClass]"/>
+            :class="[newPack, newIcon, newCustomSize, customClass]"
+        />
 
         <component
             v-else
             :is="useIconComponent"
             :icon="[newPack, newIcon]"
             :size="newCustomSize"
-            :class="[customClass]"/>
+            :class="[customClass]"
+        />
     </span>
 </template>
 
@@ -31,7 +33,7 @@ export default {
     },
     computed: {
         iconConfig() {
-            let allIcons = getIcons()
+            const allIcons = getIcons()
             return allIcons[this.newPack]
         },
         iconPrefix() {
@@ -58,7 +60,7 @@ export default {
             if (typeof this.type === 'string') {
                 splitType = this.type.split('-')
             } else {
-                for (let key in this.type) {
+                for (const key in this.type) {
                     if (this.type[key]) {
                         splitType = key.split('-')
                         break

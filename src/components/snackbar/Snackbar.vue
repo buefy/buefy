@@ -1,14 +1,16 @@
 <template>
     <transition
         :enter-active-class="transition.enter"
-        :leave-active-class="transition.leave">
+        :leave-active-class="transition.leave"
+    >
         <div
             v-show="isActive"
             class="snackbar"
             :class="[type,position]"
             @mouseenter="pause"
             @mouseleave="removePause"
-            :role="actionText ? 'alertdialog' : 'alert'">
+            :role="actionText ? 'alertdialog' : 'alert'"
+        >
             <template v-if="$slots.default">
                 <slot />
             </template>
@@ -18,15 +20,21 @@
             <div
                 v-if="cancelText"
                 class="action is-light is-cancel"
-                @click="close">
-                <button class="button">{{ cancelText }}</button>
+                @click="close"
+            >
+                <button class="button">
+                    {{ cancelText }}
+                </button>
             </div>
             <div
                 v-if="actionText"
                 class="action"
                 @click="action"
-                :class="type">
-                <button class="button">{{ actionText }}</button>
+                :class="type"
+            >
+                <button class="button">
+                    {{ actionText }}
+                </button>
             </div>
         </div>
     </transition>
@@ -49,7 +57,7 @@ export default {
             default: () => {}
         },
         cancelText: {
-            type: String | null,
+            type: String,
             default: null
         }
     },

@@ -2,11 +2,10 @@
     <section class="datepicker-table">
         <div class="datepicker-body" :class="{'has-events':hasEvents}">
             <div class="datepicker-months">
-                <template v-for="(date, index) in monthDates">
+                <template v-for="(date, index) in monthDates" :key="index">
                     <a
                         :ref="`month-${date.getMonth()}`"
                         v-if="selectableDate(date) && !disabled"
-                        :key="index"
                         :class="[
                             classObject(date),
                             {'has-event': eventsDateMatch(date)},
@@ -19,21 +18,23 @@
                         @click.prevent="updateSelectedDate(date)"
                         @mouseenter="setRangeHoverEndDate(date)"
                         @keydown.prevent="manageKeydown($event, date)"
-                        :tabindex="focused.month === date.getMonth() ? null : -1">
+                        :tabindex="focused.month === date.getMonth() ? null : -1"
+                    >
                         {{ monthNames[date.getMonth()] }}
                         <div class="events" v-if="eventsDateMatch(date)">
                             <div
                                 class="event"
                                 :class="event.type"
                                 v-for="(event, index) in eventsDateMatch(date)"
-                                :key="index"/>
+                                :key="index"
+                            />
                         </div>
                     </a>
                     <div
                         v-else
-                        :key="index"
                         :class="classObject(date)"
-                        class="datepicker-cell">
+                        class="datepicker-cell"
+                    >
                         {{ monthNames[date.getMonth()] }}
                     </div>
                 </template>
@@ -89,10 +90,10 @@ export default {
             for (let i = 0; i < this.events.length; i++) {
                 let event = this.events[i]
 
-                if (!event.hasOwnProperty('date')) {
+                if (!Object.prototype.hasOwnProperty.call(event, 'date')) {
                     event = { date: event }
                 }
-                if (!event.hasOwnProperty('type')) {
+                if (!Object.prototype.hasOwnProperty.call(event, 'type')) {
                     event.type = 'is-primary'
                 }
                 if (

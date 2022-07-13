@@ -38,7 +38,7 @@ function bound(val, min, max) {
     return Math.max(min, Math.min(max, val))
 }
 
-export {mod, bound, hasFlag}
+export { mod, bound, hasFlag }
 
 /**
  * Get value of an object property/path even if it's nested
@@ -73,12 +73,14 @@ const mergeFn = (target, source, deep = false) => {
         const isDeep = (prop) =>
             isObject(source[prop]) &&
             target !== null &&
-            target.hasOwnProperty(prop) &&
+            Object.prototype.hasOwnProperty.call(target, prop) &&
             isObject(target[prop])
         const replaced = Object.getOwnPropertyNames(source)
-            .map((prop) => ({ [prop]: isDeep(prop)
-                ? mergeFn(target[prop], source[prop], deep)
-                : source[prop] }))
+            .map((prop) => ({
+                [prop]: isDeep(prop)
+                    ? mergeFn(target[prop], source[prop], deep)
+                    : source[prop]
+            }))
             .reduce((a, b) => ({ ...a, ...b }), {})
 
         return {
@@ -186,7 +188,7 @@ export function removeDiacriticsFromString(value) {
 
 export function multiColumnSort(inputArray, sortingPriority) {
     // clone it to prevent the any watchers from triggering every sorting iteration
-    let array = JSON.parse(JSON.stringify(inputArray))
+    const array = JSON.parse(JSON.stringify(inputArray))
     const fieldSorter = (fields) => (a, b) => fields.map((o) => {
         let dir = 1
         if (o[0] === '-') { dir = -1; o = o.substring(1) }
@@ -199,7 +201,7 @@ export function multiColumnSort(inputArray, sortingPriority) {
 }
 
 export function createNewEvent(eventName) {
-    var event
+    let event
     if (typeof Event === 'function') {
         event = new Event(eventName)
     } else {

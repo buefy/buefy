@@ -6,8 +6,8 @@
 
         <b-field label="Custom tick and label">
             <b-slider size="is-medium" :min="0" :max="10">
-                <template v-for="val in [3, 5, 8]">
-                    <b-slider-tick :value="val" :key="val">{{ val }}</b-slider-tick>
+                <template v-for="val in [3, 5, 8]" :key="val">
+                    <b-slider-tick :value="val">{{ val }}</b-slider-tick>
                 </template>
             </b-slider>
         </b-field>

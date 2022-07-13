@@ -14,12 +14,14 @@
             tabindex="-1"
             :role="ariaRole"
             :aria-label="ariaLabel"
-            :aria-modal="ariaModal">
-            <div class="modal-background" @click="cancel('outside')"/>
+            :aria-modal="ariaModal"
+        >
+            <div class="modal-background" @click="cancel('outside')" />
             <div
                 class="animation-content"
                 :class="{ 'modal-content': !hasModalCard }"
-                :style="customStyle">
+                :style="customStyle"
+            >
                 <component
                     v-if="component"
                     v-bind="props"
@@ -34,14 +36,16 @@
                 <slot
                     v-else
                     :can-cancel="canCancel"
-                    :close="close"/>
+                    :close="close"
+                />
                 <button
                     type="button"
                     v-if="showX"
                     v-show="!animating"
                     class="modal-close is-large"
                     :aria-label="closeButtonAriaLabel"
-                    @click="cancel('x')"/>
+                    @click="cancel('x')"
+                />
             </div>
         </div>
     </transition>
@@ -288,7 +292,7 @@ export default {
         if (this.programmatic) this.isActive = true
         else if (this.isActive) this.handleScroll()
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
             // reset scroll

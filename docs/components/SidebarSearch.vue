@@ -62,9 +62,9 @@
                     >
                         <template
                             v-for="section in sortedResults"
+                            :key="section.category"
                         >
                             <div
-                                :key="section.category"
                                 role="group"
                                 :aria-label="`Results in ${section.category}`"
                             >
@@ -89,7 +89,9 @@
                                     tabindex="-1"
                                 >
                                     <p v-html="highlightTerm(result.title)" class="is-size-6" />
-                                    <p class="is-size-7">{{ stripTags(result.subtitle) }}</p>
+                                    <p class="is-size-7">
+                                        {{ stripTags(result.subtitle) }}
+                                    </p>
                                 </div>
                             </div>
                         </template>
@@ -106,17 +108,25 @@
 
                 <ul class="panel-block sidebar-search-shortcuts is-hidden-touch">
                     <li aria-keyshortcuts="Enter">
-                        <b-tag type="is-primary is-light">Enter</b-tag>
+                        <b-tag type="is-primary is-light">
+                            Enter
+                        </b-tag>
                         &nbsp;to select
                     </li>
                     <li aria-keyshortcuts="ArrowUp ArrowDown">
-                        <b-tag type="is-primary is-light">↓</b-tag>
+                        <b-tag type="is-primary is-light">
+                            ↓
+                        </b-tag>
                         &nbsp;
-                        <b-tag type="is-primary is-light">↑</b-tag>
+                        <b-tag type="is-primary is-light">
+                            ↑
+                        </b-tag>
                         &nbsp;to navigate
                     </li>
                     <li aria-keyshortcuts="Escape">
-                        <b-tag type="is-primary is-light">Esc</b-tag>
+                        <b-tag type="is-primary is-light">
+                            Esc
+                        </b-tag>
                         &nbsp;
                         to close
                     </li>
@@ -144,7 +154,7 @@ export default {
                 }
             })
         }
-        traverseMenu({ category: 'Documentation', pages: menu['documentation'] })
+        traverseMenu({ category: 'Documentation', pages: menu.documentation })
 
         return {
             isActive: false,
@@ -316,7 +326,7 @@ export default {
     mounted() {
         window.addEventListener('keydown', this.shortcutHandler)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('keydown', this.shortcutHandler)
     }
 }

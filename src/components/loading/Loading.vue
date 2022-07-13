@@ -3,8 +3,9 @@
         <div
             class="loading-overlay is-active"
             :class="{ 'is-full-page': displayInFullPage }"
-            v-show="isActive">
-            <div class="loading-background" @click="cancel"/>
+            v-show="isActive"
+        >
+            <div class="loading-background" @click="cancel" />
             <slot>
                 <div class="loading-icon" />
             </slot>
@@ -112,7 +113,7 @@ export default {
     mounted() {
         if (this.programmatic) this.isActive = true
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
         }
