@@ -419,9 +419,6 @@
 </template>
 
 <script>
-import { ref, computed, h as createElement } from 'vue'
-import Emitter from 'tiny-emitter'
-
 import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import Checkbox from '../checkbox/Checkbox.vue'
@@ -432,6 +429,7 @@ import SlotComponent from '../../utils/SlotComponent'
 import TableMobileSort from './TableMobileSort.vue'
 import TableColumn from './TableColumn.vue'
 import TablePagination from './TablePagination.vue'
+import mockTableColumn from './mockTableColumn'
 
 export default {
     name: 'BTable',
@@ -791,118 +789,7 @@ export default {
         newColumns() {
             if (this.columns && this.columns.length) {
                 return this.columns.map((column) => {
-                    const mockTableColumn = (column) => {
-                        const eventEmitter = new Emitter()
-                        const self = {
-                            parent: this,
-                            getRootClasses(row) {
-                                const attrs = this.tdAttrs(row, this)
-                                const classes = [this.rootClasses]
-                                if (attrs && attrs.class) {
-                                    classes.push(attrs.class)
-                                }
-                                return classes
-                            },
-                            getRootStyle(row) {
-                                const attrs = this.tdAttrs(row, this)
-                                const style = []
-                                if (attrs && attrs.style) {
-                                    style.push(attrs.style)
-                                }
-                                return style
-                            },
-                            $on: (...args) => eventEmitter.on(...args),
-                            $once: (...args) => eventEmitter.once(...args),
-                            $off: (...args) => eventEmitter.off(...args),
-                            $emit: (...args) => eventEmitter.emit(...args)
-                        } // other properties are assigned later
-                        const defaultProps = {
-                            label: undefined,
-                            customKey: undefined,
-                            field: undefined,
-                            meta: undefined,
-                            width: undefined,
-                            numeric: undefined,
-                            centered: undefined,
-                            searchable: undefined,
-                            sortable: undefined,
-                            visible: true,
-                            subheading: undefined,
-                            customSort: undefined,
-                            customSearch: undefined,
-                            sticky: undefined,
-                            headerSelectable: undefined,
-                            headerClass: undefined,
-                            thAttrs: () => ({}),
-                            tdAttrs: () => ({})
-                        }
-                        const columnRef = ref({
-                            ...defaultProps,
-                            ...column
-                        })
-                        const computedProps = {
-                            thClasses: computed(() => {
-                                const attrs = self.thAttrs(self)
-                                const classes = [self.headerClass, {
-                                    'is-sortable': self.sortable,
-                                    'is-sticky': self.sticky,
-                                    'is-unselectable': self.isHeaderUnSelectable
-                                }]
-                                if (attrs && attrs.class) {
-                                    classes.push(attrs.class)
-                                }
-                                return classes
-                            }),
-                            thStyle: computed(() => {
-                                const attrs = self.thAttrs(self)
-                                const style = [self.style]
-                                if (attrs && attrs.style) {
-                                    style.push(attrs.style)
-                                }
-                                return style
-                            }),
-                            rootClasses: computed(() => {
-                                return [self.cellClass, {
-                                    'has-text-right': self.numeric && !self.centered,
-                                    'has-text-centered': self.centered,
-                                    'is-sticky': self.sticky
-                                }]
-                            }),
-                            style: computed(() => {
-                                return {
-                                    width: toCssWidth(self.width)
-                                }
-                            }),
-                            hasDefaultSlot: computed(() => {
-                                return !!self.$scopedSlots.default
-                            }),
-                            isHeaderUnSelectable: computed(() => {
-                                return !self.headerSelectable && self.sortable
-                            })
-                        }
-                        for (const key in defaultProps) {
-                            Object.defineProperty(self, key, {
-                                get: () => columnRef.value[key]
-                            })
-                        }
-                        for (const key in computedProps) {
-                            Object.defineProperty(self, key, {
-                                get: () => computedProps[key].value
-                            })
-                        }
-                        self.$scopedSlots = {
-                            default: (props) => {
-                                const vnode = createElement('span', {
-                                    innerHTML: getValueByPath(props.row, column.field)
-                                })
-                                return [vnode]
-                            }
-                        }
-                        self._isVue = true
-                        self.$table = this
-                        return self
-                    }
-                    return mockTableColumn(column)
+                    return mockTableColumn(this, column)
                 })
             }
             return this.defaultSlots
