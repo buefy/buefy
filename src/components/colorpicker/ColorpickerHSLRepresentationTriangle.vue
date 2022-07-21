@@ -8,8 +8,8 @@
                 x2="1"
                 y2="0"
             >
-                <stop offset="0%" stop-color="#fff"/>
-                <stop offset="100%" stop-color="#000"/>
+                <stop offset="0%" stop-color="#fff" />
+                <stop offset="100%" stop-color="#000" />
             </linearGradient>
             <linearGradient
                 :id="`cp-triangle-gradient-saturation-${id}`"
@@ -143,6 +143,7 @@ export default {
             default: 20
         }
     },
+    emits: ['input'],
     data() {
         return {
             id: id++,
@@ -434,7 +435,7 @@ export default {
         window.addEventListener('mouseup', this.stopMouseCapture)
         window.addEventListener('touchend', this.stopMouseCapture)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('mousemove', this.trackMouse)
         window.removeEventListener('touchmove', this.trackMouse)
         window.removeEventListener('mouseup', this.stopMouseCapture)

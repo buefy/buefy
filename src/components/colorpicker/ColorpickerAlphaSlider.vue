@@ -41,6 +41,7 @@ export default {
         },
         color: [String, Object]
     },
+    emits: ['input'],
     data() {
         const color = Color.parse(this.color)
 
@@ -184,7 +185,7 @@ export default {
         window.addEventListener('mouseup', this.stopMouseCapture)
         window.addEventListener('touchend', this.stopMouseCapture)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('mousemove', this.trackMouse)
         window.removeEventListener('touchmove', this.trackMouse)
         window.removeEventListener('mouseup', this.stopMouseCapture)

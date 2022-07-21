@@ -145,7 +145,7 @@ export default {
         }
     },
     props: {
-        value: {
+        modelValue: {
             type: [String, Object],
             validator(value) {
                 return typeof value === 'string' ||
@@ -210,8 +210,9 @@ export default {
         },
         appendToBody: Boolean
     },
+    emits: ['active-change', 'update:modelValue'],
     data() {
-        const color = this.colorParser(this.value)
+        const color = this.colorParser(this.modelValue)
 
         return {
             colorSelected: color
@@ -259,11 +260,13 @@ export default {
         ariaRole() {
             if (!this.inline) {
                 return 'dialog'
+            } else {
+                return undefined
             }
         }
     },
     watch: {
-        value(value) {
+        modelValue(value) {
             this.colorSelected = new Color(value)
         }
     },
@@ -271,11 +274,11 @@ export default {
         updateColor(value) {
             value.alpha = this.colorSelected.alpha
             this.colorSelected = value
-            this.$emit('input', value)
+            this.$emit('update:modelValue', value)
         },
         updateAlpha(alpha) {
             this.colorSelected.alpha = alpha
-            this.$emit('input', this.colorSelected)
+            this.$emit('update:modelValue', this.colorSelected)
         },
         /*
          * Format color into string
