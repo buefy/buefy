@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field label="Select a color">
-            <b-colorpicker :value="selected" inline horizontal-color-picker>
+            <b-colorpicker :model-value="selected" inline horizontal-color-picker>
                 <template #footer="{ color }">
                     <div class="colorpicker-fields">
                         <b-field grouped>
