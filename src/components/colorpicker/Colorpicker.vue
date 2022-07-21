@@ -67,7 +67,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.red"
-                                    @input="updateRGB"
+                                    @update:modelValue="updateRGB"
                                     size="is-small"
                                     aria-label="Red"
                                 />
@@ -76,7 +76,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.green"
-                                    @input="updateRGB"
+                                    @update:modelValue="updateRGB"
                                     size="is-small"
                                     aria-label="Green"
                                 />
@@ -85,7 +85,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.blue"
-                                    @input="updateRGB"
+                                    @update:modelValue="updateRGB"
                                     size="is-small"
                                     aria-label="Blue"
                                 />
@@ -148,7 +148,7 @@ export default {
         }
     },
     props: {
-        value: {
+        modelValue: {
             type: [String, Object],
             validator(value) {
                 return typeof value === 'string' ||
@@ -213,9 +213,10 @@ export default {
         },
         appendToBody: Boolean
     },
+    emits: ['active-change', 'update:modelValue'],
     data() {
         return {
-            color: this.parseColor(this.value)
+            color: this.parseColor(this.modelValue)
         }
     },
     computed: {
@@ -268,11 +269,13 @@ export default {
         ariaRole() {
             if (!this.inline) {
                 return 'dialog'
+            } else {
+                return undefined
             }
         }
     },
     watch: {
-        value(value) {
+        modelValue(value) {
             this.computedValue = new Color(value)
         }
     },
@@ -287,14 +290,14 @@ export default {
         updateColor(value) {
             value.alpha = this.computedValue.alpha
             this.computedValue = value
-            this.$emit('input', value)
+            this.$emit('update:modelValue', value)
         },
         updateAlpha(alpha) {
             this.computedValue.alpha = alpha
-            this.$emit('input', this.computedValue)
+            this.$emit('update:modelValue', this.computedValue)
         },
         updateRGB() {
-            this.$emit('input', this.computedValue)
+            this.$emit('update:modelValue', this.computedValue)
         },
         /*
          * Format color into string

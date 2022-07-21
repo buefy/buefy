@@ -84,6 +84,7 @@ export default {
             default: 20
         }
     },
+    emits: ['input'],
     data() {
         return {
             hue: this.value.hue,
@@ -356,7 +357,7 @@ export default {
         window.addEventListener('mouseup', this.stopMouseCapture)
         window.addEventListener('touchend', this.stopMouseCapture)
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('mousemove', this.trackMouse)
         window.removeEventListener('touchmove', this.trackMouse)
         window.removeEventListener('mouseup', this.stopMouseCapture)
