@@ -45,6 +45,7 @@ export default {
         faceNumbers: Array,
         disabledValues: Function
     },
+    emits: ['change', 'input'],
     data() {
         return {
             isDragging: false,
