@@ -1,10 +1,10 @@
 <template>
     <li
-        :class="{ 'is-active': active }">
+        :class="{ 'is-active': active }"
+    >
         <component
             :is="tag"
             v-bind="$attrs"
-            v-on="$listeners"
         >
             <slot />
         </component>
