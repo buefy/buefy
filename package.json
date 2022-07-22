@@ -2,10 +2,11 @@
   "name": "buefy",
   "version": "0.9.23",
   "homepage": "https://buefy.org",
-  "description": "Lightweight UI components for Vue.js based on Bulma",
+  "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
-    "Walter Tommasi <tommsi20@gmail.com>"
+    "Walter Tommasi <tommsi20@gmail.com>",
+    "Kikuo Emoto <kemoto@codemonger.io>"
   ],
   "license": "MIT",
   "main": "dist/cjs/index.js",
