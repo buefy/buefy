@@ -45,7 +45,7 @@
                 :disabled="disabled"
                 :focusable="focusable"
                 custom
-                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}">
+                :class="{'dropdown-horizontal-timepicker': horizontalTimePicker}">
                 <div>
                     <header class="datepicker-header">
                         <template v-if="$slots.header !== undefined && $slots.header.length">
@@ -122,7 +122,7 @@
                     <div
                         v-if="!isTypeMonth"
                         class="datepicker-content"
-                        :class="{'content-horizonal-timepicker': horizontalTimePicker}">
+                        :class="{'content-horizontal-timepicker': horizontalTimePicker}">
                         <b-datepicker-table
                             v-model="computedValue"
                             :day-names="newDayNames"
