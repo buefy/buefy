@@ -377,13 +377,13 @@ describe('BDatepicker', () => {
             })
         })
 
-        it('renders a component with .dropdown-horizonal-timepicker class', () => {
-            const subject = wrapper.find('.dropdown-horizonal-timepicker')
+        it('renders a component with .dropdown-horizontal-timepicker class', () => {
+            const subject = wrapper.find('.dropdown-horizontal-timepicker')
             expect(subject.exists()).toBeTruthy()
         })
 
-        it('renders a component with .content-horizonal-timepicker class', () => {
-            const subject = wrapper.find('.content-horizonal-timepicker')
+        it('renders a component with .content-horizontal-timepicker class', () => {
+            const subject = wrapper.find('.content-horizontal-timepicker')
             expect(subject.exists()).toBeTruthy()
         })
 

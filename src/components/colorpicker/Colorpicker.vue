@@ -33,7 +33,7 @@
                 :disabled="disabled"
                 :focusable="focusable"
                 custom
-                :class="{'dropdown-horizonal-colorpicker': horizontalColorPicker}"
+                :class="{'dropdown-horizontal-colorpicker': horizontalColorPicker}"
             >
                 <div>
                     <header class="colorpicker-header">
