@@ -217,6 +217,9 @@ export default {
         */
         value(value) {
             this.newValue = value
+        },
+        type(type) {
+            this.newType = type
         }
     },
     methods: {
