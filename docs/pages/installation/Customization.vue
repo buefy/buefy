@@ -20,7 +20,7 @@
                 <b-message type="is-info">
                     <div class="content">
                         <p><b>Tip:</b> You can see <a href="http://bulma.io/documentation/overview/variables/" target="_blank">all of Bulma's variables</a>.</p>
-                        <p>There's also two other variables created by Buefy:</p>
+                        <p>There are also two other variables created by Buefy:</p>
                         <ol>
                             <li><code>$speed-slow: 150ms !default</code></li>
                             <li><code>$speed-slower: 250ms !default</code></li>
