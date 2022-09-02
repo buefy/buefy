@@ -45,7 +45,11 @@
             class="help"
             :class="newType"
         >
-            <slot v-if="$slots.message" name="message"/>
+            <slot
+                v-if="$slots.message"
+                name="message"
+                :messages="formattedMessage"
+            />
             <template v-else>
                 <template v-for="(mess, i) in formattedMessage">
                     {{ mess }}
