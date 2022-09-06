@@ -143,7 +143,11 @@ export default {
         controlsPosition: String,
         placeholder: [Number, String],
         ariaMinusLabel: String,
-        ariaPlusLabel: String
+        ariaPlusLabel: String,
+        disableLongPress: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -301,6 +305,7 @@ export default {
             }, this.exponential ? (250 / (this.exponential * this.timesPressed++)) : 250)
         },
         onStartLongPress(event, inc) {
+            if (this.disableLongPress) return
             if (event.button !== 0 && event.type !== 'touchstart') return
             clearTimeout(this._$intervalRef)
             this.longPressTick(inc)
