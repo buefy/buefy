@@ -92,6 +92,37 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBe(val)
         })
 
+        it('does not increment/decrement on long pressing when feature is disabled', async () => {
+            wrapper.setProps({
+                longPress: false
+            })
+            jest.useFakeTimers()
+            wrapper.vm.computedValue = 0
+
+            // Increment
+            wrapper.find('.control.plus button').trigger('mousedown')
+
+            // await wait(2000)
+            jest.runOnlyPendingTimers()
+            jest.runOnlyPendingTimers()
+            jest.runOnlyPendingTimers()
+
+            wrapper.find('.control.plus').trigger('mouseup')
+            expect(wrapper.vm.computedValue).toBe(0)
+
+            // Decrement
+            wrapper.find('.control.minus button').trigger('mousedown')
+
+            jest.runOnlyPendingTimers()
+            jest.runOnlyPendingTimers()
+
+            wrapper.find('.control.minus button').trigger('mouseup')
+            // Trigger it another time to check for unexpected browser behavior
+            wrapper.find('.control.minus button').trigger('mouseup')
+
+            expect(wrapper.vm.computedValue).toBe(0)
+        })
+
         it('increments/decrements after manually set value on input', async () => {
             wrapper.setProps({exponential: true, value: 1, step: 1})
             const BASE_VALUE = Math.floor(Math.random() * 10 + 1)
