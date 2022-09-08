@@ -131,8 +131,8 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>disable-long-press</code>',
-                description: 'Long press on the plus or minus button will not increment/decrement the input value.',
+                name: '<code>long-press</code>',
+                description: 'Long press on the plus or minus button will increment/decrement the input value.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'

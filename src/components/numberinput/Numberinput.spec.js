@@ -94,7 +94,7 @@ describe('BNumberinput', () => {
 
         it('does not increment/decrement on long pressing when feature is disabled', async () => {
             wrapper.setProps({
-                disableLongPress: true
+                longPress: false
             })
             jest.useFakeTimers()
             wrapper.vm.computedValue = 0
