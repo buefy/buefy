@@ -1,5 +1,21 @@
 # Buefy Changelog
 
+## 0.9.22
+
+### New features
+
+* Shipped with Bulma 0.9.4 ([release note](https://github.com/jgthms/bulma/releases/tag/0.9.4))
+* Add ``messages`` prop to message slot in field (thanks @GMartigny)
+* Add ``long-press`` prop to number input (thanks @SylvainMarty )
+
+## Fixes
+
+* Fix input type not updated when type prop is changed (thanks @GMartigny)
+* Fix horizontal classes typo (thanks @daniil4udo)
+* Fix #3484 table overflow when last column is numeric (thanks @gmercey)
+* Fix #3731 input with emoji don't show the right length (thanks @joaoGabriel55)
+
+
 ## 0.9.21
 
 ## Fixes
