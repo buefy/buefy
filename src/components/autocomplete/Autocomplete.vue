@@ -501,8 +501,9 @@ export default {
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll(list) {
+            const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
             if (list.clientHeight !== list.scrollHeight &&
-                list.scrollTop + list.clientHeight >= list.scrollHeight
+                list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
             ) {
                 this.$emit('infinite-scroll')
             }
