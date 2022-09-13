@@ -14,7 +14,8 @@
             :aria-role="ariaRole"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
-            @active-change="onActiveChange">
+            @active-change="onActiveChange"
+            :trigger-tabindex="-1">
             <template #trigger v-if="!inline">
                 <slot name="trigger">
                     <b-input

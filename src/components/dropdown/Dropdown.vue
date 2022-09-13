@@ -7,7 +7,7 @@
     >
         <div
             v-if="!inline"
-            :tabindex="disabled ? false : 0"
+            :tabindex="disabled ? false : triggerTabindex"
             ref="trigger"
             class="dropdown-trigger"
             @click="onClick"
@@ -125,7 +125,11 @@ export default {
         },
         expanded: Boolean,
         appendToBody: Boolean,
-        appendToBodyCopyParent: Boolean
+        appendToBodyCopyParent: Boolean,
+        triggerTabindex: {
+            type: Number,
+            default: 0
+        }
     },
     data() {
         return {
