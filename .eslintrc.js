@@ -16,7 +16,8 @@ module.exports = {
         'component': 'always'
       },
       'svg': 'always',
-      'math': 'always'
-    }]
+      'math': 'always',
+    }],
+    'max-depth': 'off'
   }
 }

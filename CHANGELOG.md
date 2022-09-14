@@ -1,5 +1,83 @@
 # Buefy Changelog
 
+## 0.9.21
+
+## Fixes
+
+* Fix #3734 refresh columns on destroy
+* Fix setting type html attribute on non-button tags (thanks @tcitworld)
+
+## 0.9.20
+
+### New features
+
+* Add search feature to docs (thanks @Mars073)
+* Add ``checkbox-type`` prop to table (thanks @Mars073)
+
+### Fixes
+
+* Fix #3432 accessibility using keyboard on checkbox into the table (thanks @chadlafontaine)
+* Fix #3705 validation error on focus instead of blur (thanks @lucraraujo)
+* Fix #3707 field inner type
+* Fix issues about colorpicker (thanks @Mars073)
+* Fix expaned on menu item (thanks @adamgreenhall)
+* Fix clockpicker close (thanks @s-nesbigall)
+
+## 0.9.19
+
+### Fixes
+
+* Fix theme css build
+
+## 0.9.18
+
+### New features
+
+* Add open and close events to tooltip (thanks @GMartigny)
+* Improve accessibility of dropdown, collapse and tabs (thanks @mateuswetah)
+
+### Fixes
+
+* Fix #2889 tooltip when append-to-body
+* Fix #2998 sidebar close when content is dynamic
+* Fix #3677 emit active-change when hoverable
+
+## 0.9.17
+
+### Fixes
+
+* Fix #3676 table sort when backend
+
+## 0.9.16
+
+### New features
+
+* **Add Font Awesome 6 support** (http://fontawesome.com/)
+
+### Fixes
+
+* Fix #3672 filter table when multiple filters
+* Fix colorpicker sass warnings (thanks @SomethingNew71)
+
+## 0.9.15
+
+### New features
+
+* **New component: Colorpicker**, [see docs](https://buefy.org/documentation/colorpicker) (thanks @Mars073)
+* Add year to ``week-number-click`` event (thanks @geeksilva97)
+* Add ``icon-size`` prop to notification (thanks @matt3188)
+* Add **page input** to pagination and table (thanks @chadlafontaine)
+* Allow any keyword as step of numberinput (thanks @OrestHk)
+
+### Fixes
+
+* Fix #3614 display zero in numberinput (thanks @rockandre)
+* Fix #3649 datetimepicker parser when minute is 59
+* Fix #3663 increment/decrement when v-model is null/undefined
+* Fix #3664 clip when mobile dropdown is active as modal (thanks @Jimmar)
+* Fix reset multi-sort table (thanks @nimaebra)
+* Fix tooltip span to div, w3 validation (thanks @nimbleStalker)
+
 ## 0.9.14
 
 ### New features

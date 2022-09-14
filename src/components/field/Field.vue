@@ -32,6 +32,7 @@
         <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
+                :type="newType"
                 :class="innerFieldClasses">
                 <slot/>
             </b-field>
@@ -44,7 +45,11 @@
             class="help"
             :class="newType"
         >
-            <slot v-if="$slots.message" name="message"/>
+            <slot
+                v-if="$slots.message"
+                name="message"
+                :messages="formattedMessage"
+            />
             <template v-else>
                 <template v-for="(mess, i) in formattedMessage">
                     {{ mess }}

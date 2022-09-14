@@ -42,6 +42,20 @@
                 <option value="is-medium">Medium sort icon</option>
                 <option value="is-large">Large sort icon</option>
             </b-select>
+            <b-select v-model="paginationOrder">
+                <option value="">default pagination order</option>
+                <option value="is-centered">is-centered pagination order</option>
+                <option value="is-right">is-right pagination order</option>
+            </b-select>
+            <div class="control is-flex">
+                <b-switch v-model="hasInput">Input</b-switch>
+            </div>
+            <b-select v-model="inputPosition">
+                <option value="">default input position</option>
+                <option value="is-input-right">is-input-right</option>
+                <option value="is-input-left">is-input-left</option>
+            </b-select>
+             <b-input type="number" placeholder="debounce (milliseconds)" v-model="inputDebounce" min="0"></b-input>
         </b-field>
 
         <b-table
@@ -59,7 +73,11 @@
             aria-next-label="Next page"
             aria-previous-label="Previous page"
             aria-page-label="Page"
-            aria-current-label="Current page">
+            aria-current-label="Current page"
+            :page-input="hasInput"
+            :pagination-order="paginationOrder"
+            :page-input-position="inputPosition"
+            :debounce-page-input="inputDebounce">
 
             <b-table-column field="id" label="ID" width="40" sortable numeric v-slot="props">
                 {{ props.row.id }}
@@ -107,7 +125,11 @@
                 sortIcon: 'arrow-up',
                 sortIconSize: 'is-small',
                 currentPage: 1,
-                perPage: 5
+                perPage: 5,
+                hasInput: false,
+                paginationOrder: '',
+                inputPosition: '',
+                inputDebounce: ''
             }
         }
     }

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BColorpickerAlphaSlider render correctly 1`] = `
+<div class="b-colorpicker-alpha-slider" style="background-size: 100% 100%, 1em 1em, 1em 1em;">
+    <div role="slider" tabindex="0" aria-label="Tranparency" aria-valuemin="0" aria-valuenow="61" aria-valuemax="100" class="alpha-range-thumb" style="left: 61%;">
+        <b-tooltip-stub active="true" type="is-primary" label="61%" position="is-top" triggers="hover" size="is-medium" animated="true" animation="fade" autoclose="true">
+            &nbsp;
+        </b-tooltip-stub>
+    </div>
+</div>
+`;

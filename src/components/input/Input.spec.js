@@ -54,6 +54,17 @@ describe('BInput', () => {
         expect(counter.text()).toBe('4 / 100')
     })
 
+    it('display correct input value length when value contains some emoji', () => {
+        wrapper.setProps({
+            value: '😀2',
+            maxlength: 5
+        })
+        const counter = wrapper.find('small.counter')
+
+        expect(counter.exists()).toBeTruthy()
+        expect(counter.text()).toBe('2 / 5')
+    })
+
     it('no display counter when hasCounter property set for false', () => {
         wrapper.setProps({ maxlength: 100 })
         expect(wrapper.find('small.counter').exists()).toBeTruthy()

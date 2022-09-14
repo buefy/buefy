@@ -12,7 +12,6 @@
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
-            :aria-modal="!inline"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
@@ -35,7 +34,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
-                        @icon-right-click="$emit('icon-right-click')"
+                        @icon-right-click="$emit('icon-right-click', $event)"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />
@@ -46,7 +45,7 @@
                 :disabled="disabled"
                 :focusable="focusable"
                 custom
-                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}">
+                :class="{'dropdown-horizontal-timepicker': horizontalTimePicker}">
                 <div>
                     <header class="datepicker-header">
                         <template v-if="$slots.header !== undefined && $slots.header.length">
@@ -123,7 +122,7 @@
                     <div
                         v-if="!isTypeMonth"
                         class="datepicker-content"
-                        :class="{'content-horizonal-timepicker': horizontalTimePicker}">
+                        :class="{'content-horizontal-timepicker': horizontalTimePicker}">
                         <b-datepicker-table
                             v-model="computedValue"
                             :day-names="newDayNames"

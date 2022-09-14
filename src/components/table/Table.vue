@@ -34,6 +34,10 @@
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
+                    :page-input="pageInput"
+                    :pagination-order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"
                 >
                     <slot name="top-left"/>
                 </b-table-pagination>
@@ -62,6 +66,7 @@
                                 <b-checkbox
                                     autocomplete="off"
                                     :value="isAllChecked"
+                                    :type="checkboxType"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
                             </template>
@@ -144,6 +149,7 @@
                                 <b-checkbox
                                     autocomplete="off"
                                     :value="isAllChecked"
+                                    :type="checkboxType"
                                     :disabled="isAllUncheckable"
                                     @change.native="checkAll"/>
                             </template>
@@ -252,8 +258,9 @@
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     autocomplete="off"
-                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :disabled="!isRowCheckable(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -283,8 +290,9 @@
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     autocomplete="off"
-                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :disabled="!isRowCheckable(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -362,6 +370,10 @@
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
+                    :page-input="pageInput"
+                    :pagination-order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"
                 >
                     <slot name="bottom-left"/>
                 </b-table-pagination>
@@ -421,6 +433,10 @@ export default {
         headerCheckable: {
             type: Boolean,
             default: true
+        },
+        checkboxType: {
+            type: String,
+            default: 'is-primary'
         },
         checkboxPosition: {
             type: String,
@@ -572,7 +588,14 @@ export default {
         showCaption: {
             type: Boolean,
             default: true
-        }
+        },
+        pageInput: {
+            type: Boolean,
+            default: false
+        },
+        paginationOrder: String,
+        pageInputPosition: String,
+        debouncePageInput: [Number, String]
     },
     data() {
         return {
@@ -880,7 +903,12 @@ export default {
                 let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
                     return (i.order && i.order === 'desc' ? '-' : '') + i.field
                 })
-                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+
+                if (formattedSortingPriority.length === 0) {
+                    this.resetMultiSorting()
+                } else {
+                    this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+                }
             }
         },
         resetMultiSorting() {
@@ -1165,14 +1193,22 @@ export default {
                 if (column && column.customSearch && typeof column.customSearch === 'function') {
                     if (!column.customSearch(row, input)) return false
                 } else {
-                    let value = this.getValueByPath(row, key)
+                    const value = this.getValueByPath(row, key)
                     if (value == null) return false
                     if (Number.isInteger(value)) {
                         if (value !== Number(input)) return false
                     } else {
                         const re = new RegExp(escapeRegExpChars(input), 'i')
-                        const valueWithoutDiacritics = removeDiacriticsFromString(value)
-                        return re.test(valueWithoutDiacritics) || re.test(value)
+                        if (Array.isArray(value)) {
+                            const valid = value.some((val) =>
+                                re.test(removeDiacriticsFromString(val)) || re.test(val)
+                            )
+                            if (!valid) return false
+                        } else {
+                            if (!re.test(removeDiacriticsFromString(value)) && !re.test(value)) {
+                                return false
+                            }
+                        }
                     }
                 }
             }
