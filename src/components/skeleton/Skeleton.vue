@@ -57,7 +57,7 @@ export default {
         return createElement('div', {
             ...context.data,
             staticClass: 'b-skeleton',
-            class: [ context.data.attrs.class, context.props.size, context.props.position, { 'is-animated': context.props.animated } ]
+            class: [ context.data.attrs.staticClass, context.props.size, context.props.position, { 'is-animated': context.props.animated } ]
         }, items)
     }
 }
