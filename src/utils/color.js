@@ -1,6 +1,7 @@
 export const colorChannels = ['red', 'green', 'blue', 'alpha']
 
 export const colorsNammed = {
+    transparent: '#00000000',
     black: '#000000',
     silver: '#c0c0c0',
     gray: '#808080',
@@ -328,12 +329,12 @@ class Color {
                 ]
 
                 return Color.fromRGB(...channels.map((value) => Number(value)))
-            } else if ((match = args[0].match(/^(h(sl|wb)a?|lab|color|cmyk)\(/i))) {
+            } else if ((args[0].match(/^(h(sl|wb)a?|lab|color|cmyk)\(/i))) {
                 throw new Error('Color expression not implemented yet')
             }
         }
 
-        return new Color()
+        throw new Error('Invalid color expression')
     }
 
     static parseObject(object) {
