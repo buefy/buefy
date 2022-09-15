@@ -24,7 +24,7 @@
                         :expanded="expanded"
                         :disabled="disabled"
                     >
-                        <span class="color-name">{{ colorFormatter(innerValue) }}</span>
+                        <span class="color-name">{{ colorFormatter(computedValue) }}</span>
                     </b-button>
                 </slot>
             </template>
@@ -44,12 +44,12 @@
                     <div class="colorpicker-content">
                         <b-colorpicker-h-s-l-representation-square
                             v-if="representation === 'square'"
-                            :value="innerValue"
+                            :value="computedValue"
                             @input="updateColor"
                         />
                         <b-colorpicker-h-s-l-representation-triangle
                             v-else
-                            :value="innerValue"
+                            :value="computedValue"
                             @input="updateColor"
                         />
                     </div>
@@ -57,16 +57,16 @@
                 <footer class="colorpicker-footer">
                     <b-colorpicker-alpha-slider
                         v-if="alpha"
-                        :value="innerValue.alpha"
+                        :value="computedValue.alpha"
                         @input="updateAlpha"
-                        :color="innerValue"
+                        :color="computedValue"
                     />
-                    <slot name="footer" :color="innerValue">
+                    <slot name="footer" :color="computedValue">
                         <b-field class="colorpicker-fields" grouped>
                             <b-field horizontal label="R">
                                 <b-input
                                     type="number"
-                                    v-model.number="innerValue.red"
+                                    v-model.number="computedValue.red"
                                     size="is-small"
                                     aria-label="Red"
                                 />
@@ -74,7 +74,7 @@
                             <b-field horizontal label="G">
                                 <b-input
                                     type="number"
-                                    v-model.number="innerValue.green"
+                                    v-model.number="computedValue.green"
                                     size="is-small"
                                     aria-label="Green"
                                 />
@@ -82,7 +82,7 @@
                             <b-field horizontal label="B">
                                 <b-input
                                     type="number"
-                                    v-model.number="innerValue.blue"
+                                    v-model.number="computedValue.blue"
                                     size="is-small"
                                     aria-label="Blue"
                                 />
@@ -210,19 +210,29 @@ export default {
         },
         appendToBody: Boolean
     },
+    data() {
+        return {
+            color: this.parseColor(this.value)
+        }
+    },
     computed: {
-        innerValue() {
-            return this.colorParser(this.value)
+        computedValue: {
+            set(value) {
+                this.color = this.parseColor(value)
+            },
+            get() {
+                return this.color
+            }
         },
         background() {
             if (this.alpha) {
                 return `linear-gradient(
                     45deg,
-                    ${this.innerValue.toString('hex')} 50%,
-                    ${this.innerValue.toString('hexa')} 50%
+                    ${this.computedValue.toString('hex')} 50%,
+                    ${this.computedValue.toString('hexa')} 50%
                 )`
             } else {
-                const hex = this.innerValue.toString('hex')
+                const hex = this.computedValue.toString('hex')
                 return `linear-gradient(
                     45deg,
                     ${hex} 50%,
@@ -231,7 +241,7 @@ export default {
             }
         },
         triggerStyle() {
-            const { red, green, blue } = this.innerValue
+            const { red, green, blue } = this.computedValue
             const light = (red * 0.299 + green * 0.587 + blue * 0.114) > 186
 
             return {
@@ -260,18 +270,25 @@ export default {
     },
     watch: {
         value(value) {
-            this.innerValue = new Color(value)
+            this.computedValue = new Color(value)
         }
     },
     methods: {
+        parseColor(color) {
+            try {
+                return this.colorParser(color)
+            } catch (e) {
+                return new Color()
+            }
+        },
         updateColor(value) {
-            value.alpha = this.innerValue.alpha
-            this.innerValue = value
+            value.alpha = this.computedValue.alpha
+            this.computedValue = value
             this.$emit('input', value)
         },
         updateAlpha(alpha) {
-            this.innerValue.alpha = alpha
-            this.$emit('input', this.innerValue)
+            this.computedValue.alpha = alpha
+            this.$emit('input', this.computedValue)
         },
         /*
          * Format color into string
