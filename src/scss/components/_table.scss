@@ -93,16 +93,6 @@ $table-sticky-header-height: 300px !default;
 
     .icon {
         transition: transform $speed-slow $easing, opacity $speed $easing;
-        &.is-desc {
-            transform: rotate(180deg);
-        }
-        &.is-expanded {
-            transform: rotate(90deg);
-        }
-    }
-
-    .sort-icon.icon.is-desc {
-        transform: rotate(180deg) translateY(-50%) !important;
     }
 
     .table {
@@ -138,16 +128,20 @@ $table-sticky-header-height: 300px !default;
                 border-color: $grey;
                 font-weight: $weight-bold;
             }
+            &.is-desc {
+                .sort-icon {
+                    transform: rotate(180deg) translateY(-50%);
+                }
+                .multi-sort-icon {
+                    transform: rotate(180deg);
+                }
+            }
             &.is-sortable:hover {
                 border-color: $grey;
             }
             &.is-sortable,
             &.is-sortable .th-wrap {
                 cursor: pointer;
-
-                .is-relative {
-                    position: absolute;
-                }
             }
             .sort-icon, .multi-sort-cancel-icon {
                 position: absolute;
@@ -224,6 +218,11 @@ $table-sticky-header-height: 300px !default;
                 left: 0;
                 z-index: 1;
                 background: $table-background-color;
+            }
+            &.is-expanded {
+                .icon {
+                    transform: rotate(90deg);
+                }
             }
         }
 

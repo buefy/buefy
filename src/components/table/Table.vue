@@ -77,6 +77,9 @@
                             v-bind="column.thAttrs(column)"
                             :class="[column.thClasses, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
+                                'is-desc': sortMultiple && sortMultipleDataComputed.length
+                                    ? (sortMultipleDataComputed.find(i =>
+                                    i.field === column.field) || {}).order === 'desc' : !isAsc
                             }]"
                             :style="column.thStyle"
                             @click.stop="sort(column, null, $event)"
@@ -115,9 +118,7 @@
                                                 :pack="iconPack"
                                                 both
                                                 :size="sortIconSize"
-                                                :class="{
-                                                    'is-desc': sortMultipleDataComputed.filter(i =>
-                                                i.field === column.field)[0].order === 'desc'}"
+                                                class="multi-sort-icon"
                                             />
                                             {{ findIndexOfSortData(column) }}
                                             <button
@@ -134,7 +135,6 @@
                                             :size="sortIconSize"
                                             class="sort-icon"
                                             :class="{
-                                                'is-desc': !isAsc,
                                                 'is-invisible': currentSortColumn !== column
                                             }"
                                         />
@@ -240,6 +240,7 @@
                             <td
                                 v-if="showDetailRowIcon"
                                 class="chevron-cell"
+                                :class="{'is-expanded': isVisibleDetailRow(row)}"
                             >
                                 <a
                                     v-if="hasDetailedVisible(row)"
@@ -248,8 +249,7 @@
                                     <b-icon
                                         :icon="detailIcon"
                                         :pack="iconPack"
-                                        both
-                                        :class="{'is-expanded': isVisibleDetailRow(row)}"/>
+                                        both/>
                                 </a>
                             </td>
 
