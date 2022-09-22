@@ -36,5 +36,6 @@ export { NotificationProgrammatic } from './components/notification'
 export { SnackbarProgrammatic } from './components/snackbar'
 export { ToastProgrammatic } from './components/toast'
 export { default as ConfigProgrammatic } from './utils/ConfigComponent'
+export { default as Color } from './utils/color'
 // export helpers
 export * from './utils/helpers'

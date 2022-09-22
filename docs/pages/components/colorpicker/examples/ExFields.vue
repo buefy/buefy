@@ -42,7 +42,7 @@
                                     type="number"
                                     v-model.number="color.hue"
                                     size="is-small"
-                                    aria-label="Red"
+                                    aria-label="Hue"
                                     min="0"
                                     max="359"
                                     step="1"
@@ -54,7 +54,7 @@
                                     :value="Math.round(color.saturation * 100)"
                                     @input="color.saturation = $event / 100"
                                     size="is-small"
-                                    aria-label="Green"
+                                    aria-label="Saturation"
                                     min="0"
                                     max="100"
                                     step="1"
@@ -66,9 +66,10 @@
                                     :value="Math.round(color.lightness * 100)"
                                     @input="color.lightness = $event / 100"
                                     size="is-small"
-                                    aria-label="Blue"
+                                    aria-label="Lightness"
                                     min="0"
-                                    max="1"
+                                    max="100"
+                                    step="1"
                                 />
                             </b-field>
                         </b-field>

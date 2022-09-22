@@ -7,8 +7,10 @@ describe('Color', () => {
 
         expect(red.$channels).toEqual(new Uint8Array([255, 0, 0, 255]))
         expect(transparentBlue.$channels).toEqual(new Uint8Array([0, 0, 255, 6]))
+        expect(() => Color.parse('#1234567')).toThrow()
+        expect(() => Color.parse('#123456789')).toThrow()
     })
-    it('parse nammed color', () => {
+    it('parse named color', () => {
         const lime = Color.parse('lime')
         const transparent = Color.parse('transparent')
 
