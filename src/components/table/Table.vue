@@ -63,12 +63,18 @@
                             :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
-                                <b-checkbox
-                                    autocomplete="off"
-                                    :value="isAllChecked"
-                                    :type="checkboxType"
-                                    :disabled="isAllUncheckable"
-                                    @change.native="checkAll"/>
+                                <slot
+                                    name="check-all"
+                                    :isAllChecked="isAllChecked"
+                                    :isAllUncheckable="isAllUncheckable"
+                                    :checkAll="checkAll">
+                                    <b-checkbox
+                                        autocomplete="off"
+                                        :value="isAllChecked"
+                                        :type="checkboxType"
+                                        :disabled="isAllUncheckable"
+                                        @change.native="checkAll"/>
+                                </slot>
                             </template>
                         </th>
                         <th
@@ -146,12 +152,18 @@
                             :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
-                                <b-checkbox
-                                    autocomplete="off"
-                                    :value="isAllChecked"
-                                    :type="checkboxType"
-                                    :disabled="isAllUncheckable"
-                                    @change.native="checkAll"/>
+                                <slot
+                                    name="check-all"
+                                    :isAllChecked="isAllChecked"
+                                    :isAllUncheckable="isAllUncheckable"
+                                    :checkAll="checkAll">
+                                    <b-checkbox
+                                        autocomplete="off"
+                                        :value="isAllChecked"
+                                        :type="checkboxType"
+                                        :disabled="isAllUncheckable"
+                                        @change.native="checkAll"/>
+                                </slot>
                             </template>
                         </th>
                     </tr>
