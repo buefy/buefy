@@ -186,6 +186,7 @@ export default {
             }
         },
         onClick() {
+            this.close()
             if (this.triggers.indexOf('click') < 0) return
             // if not active, toggle after clickOutside event
             // this fixes toggling programmatic
