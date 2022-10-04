@@ -16,6 +16,13 @@ export default [
                 default: '<code>undefined</code>: default to browser locale.'
             },
             {
+                name: '<code>increment-hours</code>',
+                description: 'Step hours for select component',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
                 name: '<code>increment-minutes</code>',
                 description: 'Step minutes for select component',
                 type: 'Number',
