@@ -91,7 +91,7 @@ export default [
             {
                 name: '<code>message</code>',
                 description: 'Custom message',
-                props: '-'
+                props: '<code>messages: [string]</code>'
             }
         ]
     }

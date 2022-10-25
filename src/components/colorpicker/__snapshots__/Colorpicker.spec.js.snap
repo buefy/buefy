@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BColorpicker render correctly 1`] = `
+<div class="colorpicker control">
+    <b-dropdown-stub maxheight="200" triggers="click" mobilemodal="true" ariarole="dialog" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
+        <b-dropdown-item-stub custom="true" focusable="true" ariarole="" class="">
+            <div>
+                <header class="colorpicker-header">
+                    <!---->
+                </header>
+                <div class="colorpicker-content">
+                    <b-colorpicker-h-s-l-representation-triangle-stub value="#000000" size="200" thickness="20"></b-colorpicker-h-s-l-representation-triangle-stub>
+                </div>
+            </div>
+            <footer class="colorpicker-footer">
+                <!---->
+                <b-field-stub grouped="true" addons="true" class="colorpicker-fields">
+                    <b-field-stub label="R" horizontal="true" addons="true">
+                        <b-input-stub size="is-small" usehtml5validation="true" statusicon="true" value="0" type="number" hascounter="true" customclass="" aria-label="Red"></b-input-stub>
+                    </b-field-stub>
+                    <b-field-stub label="G" horizontal="true" addons="true">
+                        <b-input-stub size="is-small" usehtml5validation="true" statusicon="true" value="0" type="number" hascounter="true" customclass="" aria-label="Green"></b-input-stub>
+                    </b-field-stub>
+                    <b-field-stub label="B" horizontal="true" addons="true">
+                        <b-input-stub size="is-small" usehtml5validation="true" statusicon="true" value="0" type="number" hascounter="true" customclass="" aria-label="Blue"></b-input-stub>
+                    </b-field-stub>
+                </b-field-stub>
+            </footer>
+        </b-dropdown-item-stub>
+    </b-dropdown-stub>
+</div>
+`;

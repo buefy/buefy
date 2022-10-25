@@ -359,6 +359,16 @@ export default {
                         this.setHovered(null)
                     }
                 })
+            } else {
+                if (this.hovered) {
+                    // reset hovered if list doesn't contain it
+                    const hoveredValue = this.getValue(this.hovered)
+                    const data = this.computedData.map((d) => d.items)
+                        .reduce((a, b) => ([...a, ...b]), [])
+                    if (!data.some((d) => this.getValue(d) === hoveredValue)) {
+                        this.setHovered(null)
+                    }
+                }
             }
         }
     },
@@ -491,8 +501,9 @@ export default {
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll(list) {
+            const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
             if (list.clientHeight !== list.scrollHeight &&
-                list.scrollTop + list.clientHeight >= list.scrollHeight
+                list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
             ) {
                 this.$emit('infinite-scroll')
             }

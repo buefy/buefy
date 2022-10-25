@@ -34,6 +34,7 @@
             </section>
             <b-progress
                 v-if="autoClose && progressBar"
+                class="auto-close-progress"
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
                 :type="type"
@@ -50,11 +51,6 @@ export default {
     mixins: [MessageMixin],
     props: {
         ariaCloseLabel: String
-    },
-    data() {
-        return {
-            newIconSize: this.iconSize || this.size || 'is-large'
-        }
     }
 }
 </script>

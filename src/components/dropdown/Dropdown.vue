@@ -3,11 +3,11 @@
         class="dropdown dropdown-menu-animation"
         ref="dropdown"
         :class="rootClasses"
+        @mouseleave="isHoverable = false"
     >
         <div
             v-if="!inline"
-            role="button"
-            :tabindex="disabled ? false : 0"
+            :tabindex="disabled ? false : triggerTabindex"
             ref="trigger"
             class="dropdown-trigger"
             @click="onClick"
@@ -37,6 +37,7 @@
                 <div
                     class="dropdown-content"
                     :role="ariaRole"
+                    :aria-modal="!inline"
                     :style="contentStyle">
                     <slot/>
                 </div>
@@ -124,7 +125,11 @@ export default {
         },
         expanded: Boolean,
         appendToBody: Boolean,
-        appendToBodyCopyParent: Boolean
+        appendToBodyCopyParent: Boolean,
+        triggerTabindex: {
+            type: Number,
+            default: 0
+        }
     },
     data() {
         return {
@@ -179,14 +184,33 @@ export default {
         */
         isActive(value) {
             this.$emit('active-change', value)
+            this.handleScroll()
             if (this.appendToBody) {
                 this.$nextTick(() => {
                     this.updateAppendToBody()
                 })
             }
+        },
+
+        isHoverable(value) {
+            if (this.hoverable) {
+                this.$emit('active-change', value)
+            }
         }
     },
     methods: {
+        handleScroll() {
+            if (typeof window === 'undefined') return
+
+            if (this.isMobileModal) {
+                if (this.isActive) {
+                    document.documentElement.classList.add('is-clipped-touch')
+                } else {
+                    document.documentElement.classList.remove('is-clipped-touch')
+                }
+            }
+        },
+
         /**
          * Click listener from DropdownItem.
          *   1. Set new selected item.

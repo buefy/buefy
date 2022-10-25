@@ -382,6 +382,13 @@ export default [
                 default: '<code>[a, button, input, router-link, nuxt-link, n-link, RouterLink, NuxtLink, NLink]</code>'
             },
             {
+                name: '<code>defaultBreadcrumbTag</code>',
+                description: 'Default link tags accepted as tag in Breadcrumb component. Can be used when using custom component or other Vue Router plugin like inertia.',
+                type: 'string',
+                values: '—',
+                default: '<code>[a, button, input, router-link, nuxt-link, n-link, RouterLink, NuxtLink, NLink]</code>'
+            },
+            {
                 name: '<code>defaultImageWebpFallback</code>',
                 description: `Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not.`,
                 type: 'String',

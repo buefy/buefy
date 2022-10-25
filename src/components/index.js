@@ -6,6 +6,7 @@ import Carousel from './carousel'
 import Checkbox from './checkbox'
 import Collapse from './collapse'
 import Clockpicker from './clockpicker'
+import Colorpicker from './colorpicker'
 import Datepicker from './datepicker'
 import Datetimepicker from './datetimepicker'
 import Dialog from './dialog'
@@ -50,6 +51,7 @@ export {
     Checkbox,
     Clockpicker,
     Collapse,
+    Colorpicker,
     Datepicker,
     Datetimepicker,
     Dialog,

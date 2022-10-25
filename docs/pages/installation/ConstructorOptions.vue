@@ -22,7 +22,6 @@
                 usageBundle: `
                 Vue.use(Buefy, {
                     defaultIconPack: 'fas',
-                    defaultContainerElement: '#content',
                     // ...
                 })`,
                 usageComponents: `
@@ -32,7 +31,6 @@
                 Vue.use(Input)
                 ConfigProgrammatic.setOptions({
                     defaultIconPack: 'fas',
-                    defaultContainerElement: '#content',
                     // ...
                 })`
             }

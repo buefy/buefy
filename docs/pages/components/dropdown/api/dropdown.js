@@ -114,6 +114,13 @@ export default [
                 values: '—',
                 default: '<code>200px</code>'
             },
+            {
+                name: '<code>trigger-tabindex</code>',
+                description: 'Set the tabindex attribute on the dropdown trigger div (-1 to prevent selection via tab key)',
+                type: 'Number',
+                values: '-',
+                default: '<code>0</code>'
+            }
         ],
         slots: [
             {
@@ -124,7 +131,7 @@ export default [
             {
                 name: '<code>trigger</code>',
                 description: 'Trigger content for the dropdown',
-                props: '—'
+                props: '<code>active: Boolean</code>'
             }
         ],
         events: [

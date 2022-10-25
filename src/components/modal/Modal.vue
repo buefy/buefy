@@ -40,6 +40,7 @@
                     v-if="showX"
                     v-show="!animating"
                     class="modal-close is-large"
+                    :aria-label="closeButtonAriaLabel"
                     @click="cancel('x')"/>
             </div>
         </div>
@@ -131,6 +132,7 @@ export default {
                 return Boolean(value)
             }
         },
+        closeButtonAriaLabel: String,
         destroyOnHide: {
             type: Boolean,
             default: true

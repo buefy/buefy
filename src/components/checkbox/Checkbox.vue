@@ -5,7 +5,11 @@
         ref="label"
         :disabled="disabled"
         @click="focus"
-        @keydown.prevent.enter="$refs.label.click()">
+        @keydown.prevent.enter="$refs.label.click()"
+        @keydown.prevent.space="$refs.label.click()">
+        <!-- Checkbox needs to listen for a space event instead of a just a
+             click and enter event so that that using the keyboard spacebar will also
+             trigger the checkbox change in the b-table -->
         <input
             v-model="computedValue"
             :indeterminate.prop="indeterminate"

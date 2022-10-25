@@ -34,6 +34,10 @@
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
+                    :page-input="pageInput"
+                    :pagination-order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"
                 >
                     <slot name="top-left"/>
                 </b-table-pagination>
@@ -59,11 +63,18 @@
                             :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'left'">
                             <template v-if="headerCheckable">
-                                <b-checkbox
-                                    autocomplete="off"
-                                    :value="isAllChecked"
-                                    :disabled="isAllUncheckable"
-                                    @change.native="checkAll"/>
+                                <slot
+                                    name="check-all"
+                                    :isAllChecked="isAllChecked"
+                                    :isAllUncheckable="isAllUncheckable"
+                                    :checkAll="checkAll">
+                                    <b-checkbox
+                                        autocomplete="off"
+                                        :value="isAllChecked"
+                                        :type="checkboxType"
+                                        :disabled="isAllUncheckable"
+                                        @change.native="checkAll"/>
+                                </slot>
                             </template>
                         </th>
                         <th
@@ -141,11 +152,18 @@
                             :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                             v-if="checkable && checkboxPosition === 'right'">
                             <template v-if="headerCheckable">
-                                <b-checkbox
-                                    autocomplete="off"
-                                    :value="isAllChecked"
-                                    :disabled="isAllUncheckable"
-                                    @change.native="checkAll"/>
+                                <slot
+                                    name="check-all"
+                                    :isAllChecked="isAllChecked"
+                                    :isAllUncheckable="isAllUncheckable"
+                                    :checkAll="checkAll">
+                                    <b-checkbox
+                                        autocomplete="off"
+                                        :value="isAllChecked"
+                                        :type="checkboxType"
+                                        :disabled="isAllUncheckable"
+                                        @change.native="checkAll"/>
+                                </slot>
                             </template>
                         </th>
                     </tr>
@@ -252,8 +270,9 @@
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
                                     autocomplete="off"
-                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :disabled="!isRowCheckable(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -283,8 +302,9 @@
                                 v-if="checkable && checkboxPosition === 'right'">
                                 <b-checkbox
                                     autocomplete="off"
-                                    :disabled="!isRowCheckable(row)"
                                     :value="isRowChecked(row)"
+                                    :type="checkboxType"
+                                    :disabled="!isRowCheckable(row)"
                                     @click.native.prevent.stop="checkRow(row, index, $event)"
                                 />
                             </td>
@@ -362,6 +382,10 @@
                     :aria-page-label="ariaPageLabel"
                     :aria-current-label="ariaCurrentLabel"
                     @page-change="(event) => $emit('page-change', event)"
+                    :page-input="pageInput"
+                    :pagination-order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"
                 >
                     <slot name="bottom-left"/>
                 </b-table-pagination>
@@ -372,7 +396,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox'
@@ -421,6 +445,10 @@ export default {
         headerCheckable: {
             type: Boolean,
             default: true
+        },
+        checkboxType: {
+            type: String,
+            default: 'is-primary'
         },
         checkboxPosition: {
             type: String,
@@ -572,7 +600,14 @@ export default {
         showCaption: {
             type: Boolean,
             default: true
-        }
+        },
+        pageInput: {
+            type: Boolean,
+            default: false
+        },
+        paginationOrder: String,
+        pageInputPosition: String,
+        debouncePageInput: [Number, String]
     },
     data() {
         return {
@@ -880,7 +915,12 @@ export default {
                 let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
                     return (i.order && i.order === 'desc' ? '-' : '') + i.field
                 })
-                this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+
+                if (formattedSortingPriority.length === 0) {
+                    this.resetMultiSorting()
+                } else {
+                    this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+                }
             }
         },
         resetMultiSorting() {
@@ -908,8 +948,10 @@ export default {
                         return isAsc ? newA - newB : newB - newA
                     }
 
-                    if (!newA && newA !== 0) return 1
-                    if (!newB && newB !== 0) return -1
+                    // sort null values to the bottom when in asc order
+                    // and to the top when in desc order
+                    if (!isNil(newB) && isNil(newA)) return isAsc ? 1 : -1
+                    if (!isNil(newA) && isNil(newB)) return isAsc ? -1 : 1
                     if (newA === newB) return 0
 
                     newA = (typeof newA === 'string')
@@ -1157,23 +1199,28 @@ export default {
 
         isRowFiltered(row) {
             for (const key in this.filters) {
-                // remove key if empty
-                if (!this.filters[key]) {
-                    delete this.filters[key]
-                    return true
-                }
+                if (!this.filters[key]) continue
                 const input = this.filters[key]
                 const column = this.newColumns.filter((c) => c.field === key)[0]
                 if (column && column.customSearch && typeof column.customSearch === 'function') {
                     if (!column.customSearch(row, input)) return false
                 } else {
-                    let value = this.getValueByPath(row, key)
+                    const value = this.getValueByPath(row, key)
                     if (value == null) return false
                     if (Number.isInteger(value)) {
                         if (value !== Number(input)) return false
                     } else {
                         const re = new RegExp(escapeRegExpChars(input), 'i')
-                        if (!re.test(value)) return false
+                        if (Array.isArray(value)) {
+                            const valid = value.some((val) =>
+                                re.test(removeDiacriticsFromString(val)) || re.test(val)
+                            )
+                            if (!valid) return false
+                        } else {
+                            if (!re.test(removeDiacriticsFromString(value)) && !re.test(value)) {
+                                return false
+                            }
+                        }
                     }
                 }
             }

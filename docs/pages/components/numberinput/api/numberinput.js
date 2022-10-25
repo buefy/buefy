@@ -131,6 +131,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>long-press</code>',
+                description: 'Long press on the plus or minus button will increment/decrement the input value.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',

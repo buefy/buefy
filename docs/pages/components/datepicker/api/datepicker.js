@@ -332,7 +332,7 @@ export default [
             {
                 name: 'trigger',
                 description: 'Trigger',
-                props: '—'
+                props: '<code>active: Boolean</code>'
             }
         ],
         events: [

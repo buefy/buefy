@@ -33,7 +33,6 @@
             <b-field
                 :addons="false"
                 :type="newType"
-                :message="newMessage ? formattedMessage : ''"
                 :class="innerFieldClasses">
                 <slot/>
             </b-field>
@@ -46,7 +45,11 @@
             class="help"
             :class="newType"
         >
-            <slot v-if="$slots.message" name="message"/>
+            <slot
+                v-if="$slots.message"
+                name="message"
+                :messages="formattedMessage"
+            />
             <template v-else>
                 <template v-for="(mess, i) in formattedMessage">
                     {{ mess }}
@@ -230,7 +233,9 @@ export default {
                 if (!this.parent.type) {
                     this.parent.newType = this.newType
                 }
-                this.parent.newMessage = value
+                if (!this.parent.message) {
+                    this.parent.newMessage = value
+                }
             }
         }
     },
