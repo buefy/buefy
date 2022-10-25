@@ -37,6 +37,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>first-day-of-week</code>',
+                description: 'First day of week to display in table header',
+                type: 'Number',
+                values: '<code>0 - 6 (Sunday is 0, Monday is 1, and so on)</code>',
+                default: '<code>0</code>'
+            },
+            {
                 name: '<code>size</code>',
                 description: 'Vertical size of input and picker, optional',
                 type: 'String',

@@ -20,7 +20,7 @@
                 <b-message type="is-info">
                     <div class="content">
                         <p><b>Tip:</b> You can see <a href="http://bulma.io/documentation/overview/variables/" target="_blank">all of Bulma's variables</a>.</p>
-                        <p>There's also two other variables created by Buefy:</p>
+                        <p>There are also two other variables created by Buefy:</p>
                         <ol>
                             <li><code>$speed-slow: 150ms !default</code></li>
                             <li><code>$speed-slower: 250ms !default</code></li>
@@ -41,7 +41,7 @@
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
                 <b-message type="is-warning">
-                    Please note that <code class="javascript">import 'buefy/dist/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted.
+                    Please note that <code class="javascript">import 'buefy/dist/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted because it is not required when using scss.
                 </b-message>
                 <CodeView :code="importing | pre" lang="javascript" expanded/>
             </div>

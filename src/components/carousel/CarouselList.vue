@@ -59,11 +59,13 @@ import {sign, mod, bound} from '../../utils/helpers'
 import config from '../../utils/config'
 
 import Icon from '../icon/Icon'
+import Image from '../image/Image'
 
 export default {
     name: 'BCarouselList',
     components: {
-        [Icon.name]: Icon
+        [Icon.name]: Icon,
+        [Image.name]: Image
     },
     props: {
         data: {

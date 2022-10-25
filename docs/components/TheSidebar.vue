@@ -1,6 +1,7 @@
 <template>
     <aside class="sidebar">
         <div class="sidebar-menu">
+            <sidebar-search />
             <template v-for="(items, i) in data">
                 <p class="sidebar-label" :key="items.category">
                     {{ items.category }}
@@ -47,8 +48,12 @@
 
 <script>
 import routes from '@/data/routes'
+import SidebarSearch from './SidebarSearch.vue'
 
 export default {
+    components: {
+        SidebarSearch
+    },
     props: {
         data: Array
     },

@@ -6,8 +6,7 @@ describe('BBreadcrumbItem', () => {
     beforeEach(() => {
         wrapper = mount(BBreadcrumbItem, {
             propsData: {
-                tag: 'router-link',
-                to: '/'
+                tag: 'a'
             }
         })
     })

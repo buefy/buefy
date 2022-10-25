@@ -12,6 +12,8 @@
         :editable="editable"
         :expanded="expanded"
         :close-on-click="false"
+        :first-day-of-week="firstDayOfWeek"
+        :rules-for-first-week="rulesForFirstWeek"
         :date-formatter="defaultDatetimeFormatter"
         :date-parser="defaultDatetimeParser"
         :min-date="minDate"
@@ -116,6 +118,20 @@ export default {
         placeholder: String,
         horizontalTimePicker: Boolean,
         disabled: Boolean,
+        firstDayOfWeek: {
+            type: Number,
+            default: () => {
+                if (typeof config.defaultFirstDayOfWeek === 'number') {
+                    return config.defaultFirstDayOfWeek
+                } else {
+                    return 0
+                }
+            }
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        },
         icon: String,
         iconRight: String,
         iconRightClickable: Boolean,
@@ -217,7 +233,7 @@ export default {
                 hour: this.localeOptions.hour || 'numeric',
                 minute: this.localeOptions.minute || 'numeric',
                 second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
-                hour12: !this.isHourFormat24()
+                hourCycle: !this.isHourFormat24() ? 'h12' : 'h23'
             })
         },
         isMobileNative() {
@@ -348,7 +364,7 @@ export default {
                         datetimeGroups.hour < 24 &&
                         datetimeGroups.minute &&
                         datetimeGroups.minute >= 0 &&
-                        datetimeGroups.minute < 59
+                        datetimeGroups.minute <= 59
                     ) {
                         const d = new Date(
                             datetimeGroups.year,

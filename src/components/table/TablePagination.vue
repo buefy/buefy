@@ -18,7 +18,11 @@
                     :aria-next-label="ariaNextLabel"
                     :aria-previous-label="ariaPreviousLabel"
                     :aria-page-label="ariaPageLabel"
-                    :aria-current-label="ariaCurrentLabel" />
+                    :aria-current-label="ariaCurrentLabel"
+                    :page-input="pageInput"
+                    :order="paginationOrder"
+                    :page-input-position="pageInputPosition"
+                    :debounce-page-input="debouncePageInput"/>
             </div>
         </div>
     </div>
@@ -44,7 +48,11 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String,
         ariaPageLabel: String,
-        ariaCurrentLabel: String
+        ariaCurrentLabel: String,
+        pageInput: Boolean,
+        paginationOrder: String,
+        pageInputPosition: String,
+        debouncePageInput: [Number, String]
     },
     data() {
         return {

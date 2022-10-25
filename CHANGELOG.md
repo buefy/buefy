@@ -1,5 +1,153 @@
 # Buefy Changelog
 
+## 0.9.22
+
+### New features
+
+* Shipped with Bulma 0.9.4 ([release note](https://github.com/jgthms/bulma/releases/tag/0.9.4))
+* Add ``messages`` prop to message slot in field (thanks @GMartigny)
+* Add ``long-press`` prop to number input (thanks @SylvainMarty )
+
+## Fixes
+
+* Fix input type not updated when type prop is changed (thanks @GMartigny)
+* Fix horizontal classes typo (thanks @daniil4udo)
+* Fix #3484 table overflow when last column is numeric (thanks @gmercey)
+* Fix #3731 input with emoji don't show the right length (thanks @joaoGabriel55)
+
+
+## 0.9.21
+
+## Fixes
+
+* Fix #3734 refresh columns on destroy
+* Fix setting type html attribute on non-button tags (thanks @tcitworld)
+
+## 0.9.20
+
+### New features
+
+* Add search feature to docs (thanks @Mars073)
+* Add ``checkbox-type`` prop to table (thanks @Mars073)
+
+### Fixes
+
+* Fix #3432 accessibility using keyboard on checkbox into the table (thanks @chadlafontaine)
+* Fix #3705 validation error on focus instead of blur (thanks @lucraraujo)
+* Fix #3707 field inner type
+* Fix issues about colorpicker (thanks @Mars073)
+* Fix expaned on menu item (thanks @adamgreenhall)
+* Fix clockpicker close (thanks @s-nesbigall)
+
+## 0.9.19
+
+### Fixes
+
+* Fix theme css build
+
+## 0.9.18
+
+### New features
+
+* Add open and close events to tooltip (thanks @GMartigny)
+* Improve accessibility of dropdown, collapse and tabs (thanks @mateuswetah)
+
+### Fixes
+
+* Fix #2889 tooltip when append-to-body
+* Fix #2998 sidebar close when content is dynamic
+* Fix #3677 emit active-change when hoverable
+
+## 0.9.17
+
+### Fixes
+
+* Fix #3676 table sort when backend
+
+## 0.9.16
+
+### New features
+
+* **Add Font Awesome 6 support** (http://fontawesome.com/)
+
+### Fixes
+
+* Fix #3672 filter table when multiple filters
+* Fix colorpicker sass warnings (thanks @SomethingNew71)
+
+## 0.9.15
+
+### New features
+
+* **New component: Colorpicker**, [see docs](https://buefy.org/documentation/colorpicker) (thanks @Mars073)
+* Add year to ``week-number-click`` event (thanks @geeksilva97)
+* Add ``icon-size`` prop to notification (thanks @matt3188)
+* Add **page input** to pagination and table (thanks @chadlafontaine)
+* Allow any keyword as step of numberinput (thanks @OrestHk)
+
+### Fixes
+
+* Fix #3614 display zero in numberinput (thanks @rockandre)
+* Fix #3649 datetimepicker parser when minute is 59
+* Fix #3663 increment/decrement when v-model is null/undefined
+* Fix #3664 clip when mobile dropdown is active as modal (thanks @Jimmar)
+* Fix reset multi-sort table (thanks @nimaebra)
+* Fix tooltip span to div, w3 validation (thanks @nimbleStalker)
+
+## 0.9.14
+
+### New features
+
+* Add normalize string for search in tables (thanks @matheushahnn)
+* Add year to ``week-number-click`` event (thanks @geeksilva97)
+* Add ``start`` and ``end`` slot to tabs
+* Add ``active-change`` event to navbar dropdown (thanks @arusahni)
+
+### Fixes
+
+* Fix table sort when null values (thanks @Ryan-Case-SingleStone)
+* Fix queue notification (thanks @geeksilva97)
+* Fix upload validation (thanks @l1bra2013)
+* Fix #3599 table using multiple column filters
+* Fix #3624 reset hovered autocomplete
+
+## 0.9.13
+
+## Fixes
+
+* Fix reset type and message when inner field
+
+## 0.9.12
+
+## Fixes
+
+* Fix #3571 `custom-class` prop to image
+* Fix #3572 datepicker timezone
+* Fix #3577 field loop using message
+
+## 0.9.11
+
+### New features
+
+* **New component: Breadcrumb**, [see docs](https://buefy.org/documentation/breadcrumb) (thanks @mouadTaoussi)
+* Add progress bar (remaining time to close) to notification (thanks @mouadTaoussi)
+* Add ``selectable-header`` and ``selectable-footer`` props to autocomplete (thanks @JDurman)
+* Add ``close-button-aria-label`` prop to modal (thanks @tcitworld)
+* Add navbar burger and dropdowns to be focusable and keyboard selectable (thanks @tcitworld)
+
+### Fixes
+
+* Fix stay open on mouse click when autocomplete is keep-open
+* Fix emitting autocomplete header and footer events (thanks @geeksilva97)
+* Fix loading when using fixed navbar (thanks @geeksilva97)
+* Fix datetimepicker when use granularity (thanks @geeksilva97)
+* Fix numberinput increment bug (thanks @geeksilva97)
+* Fix #3475 attributes duplication on navbar (thanks @GMartigny)
+* Fix #3490 duplicate tags on select with enter and allow-new
+* Fix #3543 focused date when is range
+* Fix #3277 avoid to emit event when ``clear-on-select``
+* Fix #3418 timepicker hour 12 displayed as 0 (thanks @cain)
+
 ## 0.9.10
 
 ### Fixes

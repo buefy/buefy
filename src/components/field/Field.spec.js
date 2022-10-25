@@ -48,13 +48,14 @@ describe('BField', () => {
     })
 
     describe('Passing a message prop', () => {
-        const generateMountOptions = ({message}) => {
+        const generateMountOptions = ({message, slot}) => {
             return {
                 propsData: {message},
                 localVue,
                 slots: {
                     default: [BInput, '<button class="button">Button</button>']
-                }
+                },
+                scopedSlots: slot ? {message: slot} : {}
             }
         }
 
@@ -113,6 +114,14 @@ describe('BField', () => {
             const mountOptions = generateMountOptions({message})
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('p.help').html().split('<br>').length).toEqual(5)
+        })
+
+        it('messages are passed down to the message slot', () => {
+            const message = 'Some string message'
+            const slot = '<template #message="{ messages }">{{ messages }}</template>'
+            const mountOptions = generateMountOptions({message, slot})
+            const wrapper = shallowMount(BField, mountOptions)
+            expect(wrapper.find('p.help').text()).toEqual(message)
         })
     })
 

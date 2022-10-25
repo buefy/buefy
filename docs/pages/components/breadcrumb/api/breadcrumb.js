@@ -11,7 +11,7 @@ export default [
             },
             {
                 name: '<code>separator</code>',
-                description: 'Symbole that separates the bradcrumb items.',
+                description: 'Symbol that separates the breadcrumb items.',
                 type: 'String',
                 values: '<code>has-arrow-separator</code>, <code>has-bullet-separator</code>, <code>has-dot-separator</code>, <code>has-succeeds-separator</code>',
                 default: '—'

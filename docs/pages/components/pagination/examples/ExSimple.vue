@@ -50,7 +50,20 @@
         <div class="block">
             <b-switch v-model="isSimple">Simple</b-switch>
             <b-switch v-model="isRounded">Rounded</b-switch>
+            <b-switch v-model="hasInput">input</b-switch>
         </div>
+        <b-field grouped group-multiline>
+            <b-field label="Input position">
+                <b-select v-model="inputPosition">
+                    <option value="">default</option>
+                    <option value="is-input-right">is-input-right</option>
+                    <option value="is-input-left">is-input-left</option>
+                </b-select>
+            </b-field>
+            <b-field label="Debounce input">
+                <b-input type="number" placeholder="milliseconds" v-model="inputDebounce" min="0"></b-input>
+            </b-field>
+        </b-field>
 
         <hr>
         <b-pagination
@@ -68,7 +81,10 @@
             aria-next-label="Next page"
             aria-previous-label="Previous page"
             aria-page-label="Page"
-            aria-current-label="Current page">
+            aria-current-label="Current page"
+            :page-input="hasInput"
+            :page-input-position="inputPosition"
+            :debounce-page-input="inputDebounce">
         </b-pagination>
     </section>
 </template>
@@ -86,8 +102,11 @@
                 size: '',
                 isSimple: false,
                 isRounded: false,
+                hasInput: false,
                 prevIcon: 'chevron-left',
-                nextIcon: 'chevron-right'
+                nextIcon: 'chevron-right',
+                inputPosition: '',
+                inputDebounce: ''
             }
         }
     }

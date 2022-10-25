@@ -139,7 +139,7 @@ export default {
             return {
                 'is-rounded': this.rounded,
                 'has-ratio': this.hasRatio,
-                [this.customClass]: this.customClass
+                [this.customClass]: !!this.customClass
             }
         },
         srcExt() {
