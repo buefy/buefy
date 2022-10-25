@@ -16,8 +16,8 @@
             append-to-body-copy-parent
             @active-change="onActiveChange"
             :trigger-tabindex="-1">
-            <template #trigger v-if="!inline">
-                <slot name="trigger">
+            <template #trigger="props" v-if="!inline">
+                <slot name="trigger" v-bind="props">
                     <b-input
                         ref="input"
                         autocomplete="off"

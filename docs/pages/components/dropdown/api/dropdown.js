@@ -131,7 +131,7 @@ export default [
             {
                 name: '<code>trigger</code>',
                 description: 'Trigger content for the dropdown',
-                props: '—'
+                props: '<code>active: Boolean</code>'
             }
         ],
         events: [
