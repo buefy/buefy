@@ -70,7 +70,7 @@ describe('BAvatar', () => {
         expect(vm.avatarClasses).toEqual({'is-rounded': true, 'is-48x48': true, 'has-background-primary': false})
     })
 
-    it('setText correctly', () => {
+    it('nameLetters correctly', () => {
         // if provided one or two letters of the label
         let wrapper = shallowMount(BAvatar, {
             propsData: {
@@ -80,7 +80,7 @@ describe('BAvatar', () => {
 
         let vm = wrapper.vm
 
-        expect(vm.setText).toBe('JD')
+        expect(vm.nameLetters).toBe('JD')
 
         // if provided long label
         wrapper = shallowMount(BAvatar, {
@@ -91,6 +91,6 @@ describe('BAvatar', () => {
 
         vm = wrapper.vm
 
-        expect(vm.setText).toBe('JH')
+        expect(vm.nameLetters).toBe('JH')
     })
 })

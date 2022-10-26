@@ -20,9 +20,8 @@
         >
             <p
                 class="label"
-                :class="dynamicClass"
             >
-                {{ setText }}
+                {{ nameLetters }}
             </p>
         </section>
     </div>
@@ -67,43 +66,20 @@ export default {
             }
         }
     },
-    data() {
-        return {
-            dynamicClass: this.label + this.size + Math.ceil(Math.random() * 10)
-        }
-    },
+    data() {},
     computed: {
         avatarClasses() {
-            this.setTextSize()
             return {
                 'is-rounded': this.rounded,
                 [this.size]: true,
                 [this.type]: !this.src && this.label
             }
         },
-        setText() {
+        nameLetters() {
             if (!this.src && this.label) {
                 return this.label.substr(0, 2).toUpperCase()
             }
         }
-    },
-    methods: {
-        setTextSize: function () {
-            const label = document.querySelector('.' + this.dynamicClass)
-            // Set the avatar text size relevant to avatar size.
-            if (!this.src && !!this.label && label !== null) {
-                /*
-                <avatarResolution> returns just resolution (eg: 16x16; 48x48; 64x64)
-                instead of full bulma class (eg: is-16x16; is-48x48; is-64x64)
-                */
-                const avatarResolution = this.size.substr(3)
-
-                label.classList.add(`text-size-${avatarResolution}`)
-            }
-        }
-    },
-    mounted() {
-        this.setTextSize()
     }
 }
 </script>

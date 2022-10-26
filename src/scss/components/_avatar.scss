@@ -7,37 +7,6 @@ $avatar-96x96: 96px;
 $avatar-128x128: 128px;
 
 .avatar {
-    .avatar-picture {
-        
-        // &.is-16x16 {
-        //     width: 16px;
-        //     height: 16px;
-        // }
-        // &.is-24x24 {
-        //     width:24px;
-        //     height: 24px;
-        // }
-        // &.is-32x32 {
-        //     width: 32px;
-        //     height: 32px;
-        // }
-        // &.is-48x48 {
-        //     width: 48px;
-        //     height: 48px;
-        // }
-        // &.is-64x64 {
-        //     width: 64px;
-        //     height: 64px;
-        // }
-        // &.is-96x96 {
-        //     width: 96px;
-        //     height: 96px;
-        // }
-        // &.is-128x128 {
-        //     width: 128px;
-        //     height: 128px;
-        // }
-    }
     .avatar-text {
         .label {
             color: white;
@@ -53,27 +22,6 @@ $avatar-128x128: 128px;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            // &.text-size-16x16 {
-            //     font-size: 0.5rem;
-            // }
-            // &.text-size-24x24 {
-            //     font-size: 0.625rem;
-            // }
-            // &.text-size-32x32 {
-            //     font-size: 0.9375rem;
-            // }
-            // &.text-size-48x48 {
-            //     font-size: 1.20rem;
-            // }
-            // &.text-size-64x64 {
-            //     font-size: 1.525rem;
-            // }
-            // &.text-size-96x96 {
-            //     font-size: 2.1rem;
-            // }
-            // &.text-size-128x128 {
-            //     font-size: 2.8125rem;
-            // }
         }
         
     }
@@ -83,49 +31,49 @@ $avatar-128x128: 128px;
         }
         &.is-16x16 {
             .label {
-                font-size: calc($avatar-16x16 / 2px);
+                font-size: calc(#{$avatar-16x16} / 2);
             }
             width: $avatar-16x16;
             height: $avatar-16x16;
         }
         &.is-24x24 {
             .label {
-                font-size: calc($avatar-24x24 / 2px);
+                font-size: calc(#{$avatar-24x24} / 2);
             }
             width: $avatar-24x24;
             height: $avatar-24x24;
         }
         &.is-32x32 {
             .label {
-                font-size: calc($avatar-32x32 / 2px);
+                font-size: calc(#{$avatar-32x32} / 2);
             }
             width: $avatar-32x32;
             height: $avatar-32x32;
         }
         &.is-48x48 {
             .label {
-                font-size: calc($avatar-48x48 / 2px);
+                font-size: calc(#{$avatar-48x48} / 2);
             }
             width: $avatar-48x48;
             height: $avatar-48x48;
         }
         &.is-64x64 {
             .label {
-                font-size: calc($avatar-64x64 / 2px);
+                font-size: calc(#{$avatar-64x64} / 2);
             }
             width: $avatar-64x64;
             height: $avatar-64x64;
         }
         &.is-96x96 {
             .label {
-                font-size: calc($avatar-96x96 / 2px);
+                font-size: calc(#{$avatar-96x96} / 2);
             }
             width: $avatar-96x96;
             height: $avatar-96x96;
         }
         &.is-128x128 {
             .label {
-                font-size: calc($avatar-128x128 / 2px);
+                font-size: calc(#{$avatar-128x128} / 2);
             }
             width: $avatar-128x128;
             height: $avatar-128x128;
