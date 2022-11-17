@@ -317,6 +317,20 @@ export default {
                 }
             }
         },
+        /**
+         * When checkInfiniteScroll property changes scroll event should be removed or added
+         */
+        checkInfiniteScroll(checkInfiniteScroll) {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content');
+
+            if(checkInfiniteScroll === true) {
+                list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
+
+                return;
+            }
+
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll);
+        },
 
         /**
          * When updating input's value
@@ -501,8 +515,6 @@ export default {
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll(list) {
-            if(this.checkInfiniteScroll === false) return;
-
             const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
             if (list.clientHeight !== list.scrollHeight &&
                 list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
