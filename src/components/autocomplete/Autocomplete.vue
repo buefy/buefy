@@ -317,6 +317,7 @@ export default {
                 }
             }
         },
+
         /**
          * When checkInfiniteScroll property changes scroll event should be removed or added
          */
