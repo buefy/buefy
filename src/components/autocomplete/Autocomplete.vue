@@ -517,8 +517,10 @@ export default {
          * Check if the scroll list inside the dropdown
          * reached it's end.
          */
-        checkIfReachedTheEndOfScroll(list) {
+        checkIfReachedTheEndOfScroll() {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
             const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
+
             if (list.clientHeight !== list.scrollHeight &&
                 list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
             ) {
@@ -703,7 +705,8 @@ export default {
             this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')
         ) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
-            list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
+
+            list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown)
