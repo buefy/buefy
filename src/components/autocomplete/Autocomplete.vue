@@ -322,15 +322,17 @@ export default {
          * When checkInfiniteScroll property changes scroll event should be removed or added
          */
         checkInfiniteScroll(checkInfiniteScroll) {
-            const list = this.$refs.dropdown.querySelector('.dropdown-content');
+            if ((this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) === false) return
 
-            if(checkInfiniteScroll === true) {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+
+            if (checkInfiniteScroll === true) {
                 list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
 
-                return;
+                return
             }
 
-            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll);
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         },
 
         /**
