@@ -7,6 +7,10 @@
         <div class="block">
             <CodeView title="Individual components" :code="usageComponents | pre" lang="javascript" expanded/>
         </div>
+        
+         <div class="block">
+            <CodeView title="CDN bundle" :code="usageCdn | pre" lang="javascript" expanded/>
+         </div>
 
         <ApiView :data="api"/>
     </div>
@@ -32,7 +36,14 @@
                 ConfigProgrammatic.setOptions({
                     defaultIconPack: 'fas',
                     // ...
-                })`
+                })`,
+                usageCdn: `
+                // When using CDN, Buefy automatically attaches itself on Vue
+                Vue.prototype.$buefy.config.setOptions({
+                    defaultIconPack: 'fas',
+                    // ...
+                })
+                `
             }
         }
     }
