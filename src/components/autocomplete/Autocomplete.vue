@@ -319,6 +319,23 @@ export default {
         },
 
         /**
+         * When checkInfiniteScroll property changes scroll event should be removed or added
+         */
+        checkInfiniteScroll(checkInfiniteScroll) {
+            if ((this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) === false) return
+
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+
+            if (checkInfiniteScroll === true) {
+                list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
+
+                return
+            }
+
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
+        },
+
+        /**
          * When updating input's value
          *   1. Emit changes
          *   2. If value isn't the same as selected, set null
@@ -500,7 +517,8 @@ export default {
          * Check if the scroll list inside the dropdown
          * reached it's end.
          */
-        checkIfReachedTheEndOfScroll(list) {
+        checkIfReachedTheEndOfScroll() {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
             const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
             if (list.clientHeight !== list.scrollHeight &&
                 list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
@@ -686,7 +704,7 @@ export default {
             this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')
         ) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
-            list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
+            list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown)
