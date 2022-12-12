@@ -80,10 +80,6 @@ If you want to customize the icons or the theme, refer to the [customization sec
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 ```
 
-## Start On Cloud IDE
-
-[https://github.com/buefy/buefy](https://github.com/buefy/buefy)
-
 ## Browser support
 
 Recent versions of Firefox, Chrome, Edge, Opera and Safari. IE10+ is only partially supported.
