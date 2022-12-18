@@ -83,6 +83,7 @@ const router = new Router({
                 route('extensions/sortablejs', 'extensions/sortablejs/Sortablejs'),
                 route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate'),
                 route('extensions/bulmacssvars', 'extensions/bulmacssvars/BulmaCssVars'),
+                route('extensions/vuebreakpointmixin', 'extensions/vuebreakpointmixin/VueBreakpointMixin'),
                 // Expo
                 route('expo', 'Expo')
             ]

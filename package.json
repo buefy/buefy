@@ -140,6 +140,7 @@
     "vee-validate": "2.1.0-beta.9",
     "vue": "2.6.11",
     "vue-analytics": "4.1.3",
+    "vue-breakpoint-mixin": "^1.2.2",
     "vue-jest": "2.5.0",
     "vue-loader": "15.9.3",
     "vue-progressbar": "0.7.2",
