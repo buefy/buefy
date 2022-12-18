@@ -9,15 +9,25 @@
           </a>
       </div>
 
-      <b-message type="is-info">
-          <p><strong>VueBreakpointMixin is not included in Buefy</strong>, you have to install it:</p>
-          <CodeView code="npm install vue-breakpoint-mixin" expanded/>
-      </b-message>
+      <Example :component="ExVueBreakpointMixin" :code="ExVueBreakpointMixinCode" vertical>
+        <b-message type="is-info">
+            <p><strong>VueBreakpointMixin is not included in Buefy</strong>, you have to install it:</p>
+            <CodeView code="npm install vue-breakpoint-mixin" expanded/>
+        </b-message>
+      </Example>
+
   </div>
 </template>
 
 <script>
+import ExVueBreakpointMixin from './example/ExVueBreakpointMixin'
+import ExVueBreakpointMixinCode from '!!raw-loader!./example/ExVueBreakpointMixin'
+
 export default {
   name: 'VueBreakpointMixin',
+  data: () => ({
+    ExVueBreakpointMixin,
+    ExVueBreakpointMixinCode,
+  }),
 }
 </script>
