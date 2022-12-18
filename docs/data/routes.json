@@ -646,6 +646,19 @@
         ],
         "isNew": true
     },
+    "extensions/vuebreakpointmixin": {
+        "title": "Vue Breakpoint Mixin",
+        "subtitle": "Use to watch the size of the screen based on Bulma breakpoints.",
+        "path": "/extensions/vuebreakpointmixin",
+        "githubPath": "pages/extensions/vuebreakpointmixin/VueBreakpointMixin.vue",
+        "menu": "extensions",
+        "breadcrumb": [
+            "/",
+            "extensions",
+            "extensions/vuebreakpointmixin"
+        ],
+        "isNew": true
+    },
     "expo": {
         "title": "Expo",
         "subtitle": "See how devs are using Buefy to create beautiful websites and apps!",
