@@ -1,6 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import BInput from '@components/input/Input.vue'
-import BIcon from '@components/icon/Icon.vue'
+import BInput from '@components/input/Input'
+import BIcon from '@components/icon/Icon'
 
 let wrapper
 

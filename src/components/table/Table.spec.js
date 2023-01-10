@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import { useFakeTimers } from 'sinon'
-import BInput from '@components/input/Input.vue'
+import BInput from '@components/input/Input'
 import BTable from '@components/table/Table'
 import { setVueInstance } from '../../utils/config'
 

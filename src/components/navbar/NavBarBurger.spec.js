@@ -1,5 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import BNavbarBurger from '@components/navbar/NavbarBurger.vue'
+import BNavbarBurger from '@components/navbar/NavbarBurger'
 
 describe('BNavbarBurger', () => {
     let wrapper

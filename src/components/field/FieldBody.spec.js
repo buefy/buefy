@@ -1,7 +1,7 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
 import BFieldBody from '@components/field/FieldBody'
-import BField from '@components/input/Field.vue'
-import BInput from '@components/input/Input.vue'
+import BField from '@components/input/Field'
+import BInput from '@components/input/Input'
 
 const localVue = createLocalVue()
 localVue.component('b-field', BField)
