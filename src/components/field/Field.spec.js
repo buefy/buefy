@@ -1,5 +1,5 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
-import BField from '@components/input/Field'
+import BField from '@components/field/Field'
 import BFieldBody from '@components/field/FieldBody'
 import BInput from '@components/input/Input'
 
