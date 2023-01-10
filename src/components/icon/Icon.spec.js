@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BIcon from '@components/icon/Icon'
+import BIcon from '@components/icon/Icon.vue'
 
 describe('BIcon', () => {
     it('render correctly', () => {

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BTimepicker from '@components/timepicker/Timepicker'
+import BTimepicker from '@components/timepicker/Timepicker.vue'
 
 let wrapper
 

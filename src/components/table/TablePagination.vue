@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Pagination from '../pagination/Pagination'
+import Pagination from '../pagination/Pagination.vue'
 
 export default {
     name: 'BTablePagination',

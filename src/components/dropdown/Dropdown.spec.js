@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BDropdown from '@components/dropdown/Dropdown'
+import BDropdown from '@components/dropdown/Dropdown.vue'
 
 describe('BDropdown', () => {
     const val1 = 'val1'

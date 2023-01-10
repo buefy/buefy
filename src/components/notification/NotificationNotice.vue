@@ -12,7 +12,7 @@
 
 <script>
 import config from '../../utils/config'
-import NoticeMixin from '../../utils/NoticeMixin.js'
+import NoticeMixin from '../../utils/NoticeMixin'
 import { removeElement } from '../../utils/helpers'
 
 export default {

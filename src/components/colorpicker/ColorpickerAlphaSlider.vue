@@ -27,7 +27,7 @@
 
 <script>
 import Color from '../../utils/color'
-import Tooltip from '../tooltip/Tooltip'
+import Tooltip from '../tooltip/Tooltip.vue'
 
 export default {
     name: 'BColorpickerAlphaSlider',

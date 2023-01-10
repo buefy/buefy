@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import DatepickerTableRow from './DatepickerTableRow'
+import DatepickerTableRow from './DatepickerTableRow.vue'
 import { isDefined } from '../../utils/helpers'
 
 export default {

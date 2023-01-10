@@ -98,8 +98,8 @@
 
 <script>
 import { getValueByPath } from '../../utils/helpers'
-import Tag from '../tag/Tag'
-import Autocomplete from '../autocomplete/Autocomplete'
+import Tag from '../tag/Tag.vue'
+import Autocomplete from '../autocomplete/Autocomplete.vue'
 import config from '../../utils/config'
 import FormElementMixin from '../../utils/FormElementMixin'
 

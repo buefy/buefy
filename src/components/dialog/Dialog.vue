@@ -72,9 +72,9 @@
 
 <script>
 import trapFocus from '../../directives/trapFocus'
-import Icon from '../icon/Icon'
-import Modal from '../modal/Modal'
-import Button from '../button/Button'
+import Icon from '../icon/Icon.vue'
+import Modal from '../modal/Modal.vue'
+import Button from '../button/Button.vue'
 import config from '../../utils/config'
 import { removeElement } from '../../utils/helpers'
 

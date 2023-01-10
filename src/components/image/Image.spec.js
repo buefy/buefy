@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BImage from '@components/image/Image'
+import BImage from '@components/image/Image.vue'
 
 describe('BImage', () => {
     const originalClientWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth')

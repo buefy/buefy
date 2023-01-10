@@ -83,7 +83,7 @@
 <script>
 import config from '../../utils/config'
 
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 import {default as ProviderParentMixin, Sorted} from '../../utils/ProviderParentMixin'
 import {mod, bound} from '../../utils/helpers'
 

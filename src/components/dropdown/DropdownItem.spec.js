@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BDropdownItem from '@components/dropdown/DropdownItem'
+import BDropdownItem from '@components/dropdown/DropdownItem.vue'
 import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 let wrapper

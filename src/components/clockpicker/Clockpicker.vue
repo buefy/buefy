@@ -142,11 +142,11 @@
 import TimepickerMixin from '../../utils/TimepickerMixin'
 import config from '../../utils/config'
 
-import Dropdown from '../dropdown/Dropdown'
-import DropdownItem from '../dropdown/DropdownItem'
-import Input from '../input/Input'
-import Field from '../field/Field'
-import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown.vue'
+import DropdownItem from '../dropdown/DropdownItem.vue'
+import Input from '../input/Input.vue'
+import Field from '../field/Field.vue'
+import Icon from '../icon/Icon.vue'
 
 import ClockpickerFace from './ClockpickerFace'
 

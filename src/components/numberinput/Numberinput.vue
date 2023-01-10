@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
-import Input from '../input/Input'
+import Icon from '../icon/Icon.vue'
+import Input from '../input/Input.vue'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {

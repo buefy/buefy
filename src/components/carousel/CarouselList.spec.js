@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import BCarouselList from '@components/carousel/CarouselList'
-import BIcon from '@components/icon/Icon'
+import BIcon from '@components/icon/Icon.vue'
 
 let wrapper
 const data = [

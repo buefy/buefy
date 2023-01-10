@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BDatepicker from '@components/datepicker/Datepicker'
+import BDatepicker from '@components/datepicker/Datepicker.vue'
 
 import config, {setOptions} from '@utils/config'
 

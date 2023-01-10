@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BSelect from '@components/select/Select'
+import BSelect from '@components/select/Select.vue'
 
 let wrapper
 

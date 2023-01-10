@@ -10,9 +10,7 @@
 import config from '../../utils/config'
 
 export default {
-
     name: 'BBreadcrumb',
-
     props: {
         align: {
             type: String,
