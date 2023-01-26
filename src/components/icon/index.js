@@ -1,4 +1,4 @@
-import Icon from './Icon'
+import Icon from './Icon.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

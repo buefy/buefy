@@ -1,4 +1,4 @@
-import Field from './Field'
+import Field from './Field.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

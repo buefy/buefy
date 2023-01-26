@@ -1,5 +1,5 @@
-import Radio from './Radio'
-import RadioButton from './RadioButton'
+import Radio from './Radio.vue'
+import RadioButton from './RadioButton.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

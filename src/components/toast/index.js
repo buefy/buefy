@@ -1,4 +1,4 @@
-import Toast from './Toast'
+import Toast from './Toast.vue'
 
 import config, { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'

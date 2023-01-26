@@ -1,5 +1,5 @@
-import Tag from './Tag'
-import Taglist from './Taglist'
+import Tag from './Tag.vue'
+import Taglist from './Taglist.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

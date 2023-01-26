@@ -1,4 +1,4 @@
-import Collapse from './Collapse'
+import Collapse from './Collapse.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

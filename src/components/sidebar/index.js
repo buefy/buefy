@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar'
+import Sidebar from './Sidebar.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

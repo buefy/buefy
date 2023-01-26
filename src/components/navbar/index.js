@@ -1,6 +1,6 @@
-import Navbar from './Navbar'
-import NavbarItem from './NavbarItem'
-import NavbarDropdown from './NavbarDropdown'
+import Navbar from './Navbar.vue'
+import NavbarItem from './NavbarItem.vue'
+import NavbarDropdown from './NavbarDropdown.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

@@ -1,4 +1,4 @@
-import Snackbar from './Snackbar'
+import Snackbar from './Snackbar.vue'
 
 import config, { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'
