@@ -33,7 +33,7 @@ export default {
                     maxlength: 10
                 },
                 trapFocus: true,
-                confirmCallback: (value) => this.$buefy.toast.open(`Your name is: ${value}`)
+                onConfirm: (value) => this.$buefy.toast.open(`Your name is: ${value}`)
             })
         },
         promptNumber() {
@@ -47,7 +47,7 @@ export default {
                     max: 99
                 },
                 trapFocus: true,
-                confirmCallback: (value) => this.$buefy.toast.open(`Your age is: ${value}`)
+                onConfirm: (value) => this.$buefy.toast.open(`Your age is: ${value}`)
             })
         },
         promptNotClosed() {
@@ -61,7 +61,7 @@ export default {
                 confirmText: 'Send',
                 trapFocus: true,
                 closeOnConfirm: false,
-                confirmCallback: (value, {close}) => {
+                onConfirm: (value, {close}) => {
                     this.$buefy.toast.open(`Your message is sending...`)
                     setTimeout(() => {
                         this.$buefy.toast.open(`Success message send!`)
