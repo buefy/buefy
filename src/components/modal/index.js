@@ -55,6 +55,14 @@ const ModalProgrammatic = {
                         ...propsData,
                         onClose: () => {
                             vueInstance.unmount()
+                        },
+                        // intentionally overrides propsData.onCancel
+                        // to prevent propsData.onCancel from receiving a "cancel" event
+                        onCancel: () => {},
+                        cancelCallback: (...args) => {
+                            if (propsData.onCancel != null) {
+                                propsData.onCancel(...args)
+                            }
                         }
                     },
                     slot ? { default: () => slot } : undefined
