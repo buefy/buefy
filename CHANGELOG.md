@@ -1,8 +1,17 @@
 # Buefy Changelog
 
+## 0.9.22-vue3-2
+
+TO BE REPLACED.
+
+### Breadking changes
+
+* The `onConfirm`, and `onCancel` props given to functions (`dialog.alert`, `dialog.confirm`, and `dialog.prompt`) that programmatically open a `Dialog` are restored, and these functions now ignore the `confirmCallback`, and `cancelCallback` props. ([#529394d7c77967bc156a386a99a9dda6c78d2780](https://github.com/kikuomax/buefy/commit/529394d7c77967bc156a386a99a9dda6c78d2780))
+* The `onCancel` prop given to `modal.open` is restored, and `modal.open` ignores the `cancelCallback` prop. ([#529394d7c77967bc156a386a99a9dda6c78d2780](https://github.com/kikuomax/buefy/commit/529394d7c77967bc156a386a99a9dda6c78d2780))
+
 ## 0.9.22-vue3-1
 
-To BE RENEWED.
+TO BE REPLACED.
 
 ### Breaking changes
 
