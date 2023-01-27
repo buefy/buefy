@@ -43,7 +43,7 @@
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
-                :keep-open="openOnFocus"
+                :keep-open="keepOpen"
                 :keep-first="keepFirst"
                 :group-field="groupField"
                 :group-options="groupOptions"
@@ -147,6 +147,10 @@ export default {
         groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
+        keepOpen: {
+            type: Boolean,
+            default: true
+        },
         keepFirst: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
