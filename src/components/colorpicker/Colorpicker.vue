@@ -67,6 +67,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.red"
+                                    @input="updateRGB"
                                     size="is-small"
                                     aria-label="Red"
                                 />
@@ -75,6 +76,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.green"
+                                    @input="updateRGB"
                                     size="is-small"
                                     aria-label="Green"
                                 />
@@ -83,6 +85,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.blue"
+                                    @input="updateRGB"
                                     size="is-small"
                                     aria-label="Blue"
                                 />
@@ -288,6 +291,9 @@ export default {
         },
         updateAlpha(alpha) {
             this.computedValue.alpha = alpha
+            this.$emit('input', this.computedValue)
+        },
+        updateRGB() {
             this.$emit('input', this.computedValue)
         },
         /*
