@@ -82,6 +82,9 @@ $radio-colors: $form-colors !default;
                     }
                 }
             }
+            &[disabled] + .check {
+                cursor: not-allowed;
+            }
         }
         .control-label {
             padding-left: $control-padding-horizontal;
