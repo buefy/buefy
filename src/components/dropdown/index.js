@@ -1,5 +1,5 @@
-import Dropdown from './Dropdown'
-import DropdownItem from './DropdownItem'
+import Dropdown from './Dropdown.vue'
+import DropdownItem from './DropdownItem.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

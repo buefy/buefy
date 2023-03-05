@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {

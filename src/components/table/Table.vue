@@ -399,14 +399,14 @@
 import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
-import Checkbox from '../checkbox/Checkbox'
-import Icon from '../icon/Icon'
-import Input from '../input/Input'
-import Loading from '../loading/Loading'
+import Checkbox from '../checkbox/Checkbox.vue'
+import Icon from '../icon/Icon.vue'
+import Input from '../input/Input.vue'
+import Loading from '../loading/Loading.vue'
 import SlotComponent from '../../utils/SlotComponent'
-import TableMobileSort from './TableMobileSort'
-import TableColumn from './TableColumn'
-import TablePagination from './TablePagination'
+import TableMobileSort from './TableMobileSort.vue'
+import TableColumn from './TableColumn.vue'
+import TablePagination from './TablePagination.vue'
 
 export default {
     name: 'BTable',

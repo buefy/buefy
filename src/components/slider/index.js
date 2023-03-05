@@ -1,5 +1,5 @@
-import Slider from './Slider'
-import SliderTick from './SliderTick'
+import Slider from './Slider.vue'
+import SliderTick from './SliderTick.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

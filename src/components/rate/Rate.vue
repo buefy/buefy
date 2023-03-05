@@ -36,7 +36,7 @@
 
 <script>
 import config from '../../utils/config'
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 
 export default {
     name: 'BRate',

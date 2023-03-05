@@ -1,4 +1,4 @@
-import Button from './Button'
+import Button from './Button.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

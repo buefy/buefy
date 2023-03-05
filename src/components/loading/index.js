@@ -1,4 +1,4 @@
-import Loading from './Loading'
+import Loading from './Loading.vue'
 
 import { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'

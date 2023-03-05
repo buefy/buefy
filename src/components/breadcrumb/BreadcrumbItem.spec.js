@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import BBreadcrumbItem from '@components/breadcrumb/BreadcrumbItem.vue'
+import BBreadcrumbItem from '@components/breadcrumb/BreadcrumbItem'
 
 describe('BBreadcrumbItem', () => {
     let wrapper

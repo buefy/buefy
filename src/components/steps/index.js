@@ -1,5 +1,5 @@
-import Steps from './Steps'
-import StepItem from './StepItem'
+import Steps from './Steps.vue'
+import StepItem from './StepItem.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

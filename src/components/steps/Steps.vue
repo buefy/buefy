@@ -68,9 +68,9 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 
-import TabbedMixin from '../../utils/TabbedMixin.js'
+import TabbedMixin from '../../utils/TabbedMixin'
 import config from '../../utils/config'
 
 export default {

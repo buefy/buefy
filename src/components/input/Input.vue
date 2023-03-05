@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 import config from '../../utils/config'
 import FormElementMixin from '../../utils/FormElementMixin'
 

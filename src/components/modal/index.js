@@ -1,4 +1,4 @@
-import Modal from './Modal'
+import Modal from './Modal.vue'
 
 import { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'

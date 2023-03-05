@@ -1,4 +1,4 @@
-import Timepicker from './Timepicker'
+import Timepicker from './Timepicker.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

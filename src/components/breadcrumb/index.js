@@ -1,5 +1,5 @@
-import Breadcrumb from './Breadcrumb'
-import BreadcrumbItem from './BreadcrumbItem'
+import Breadcrumb from './Breadcrumb.vue'
+import BreadcrumbItem from './BreadcrumbItem.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

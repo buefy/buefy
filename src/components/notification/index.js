@@ -1,5 +1,5 @@
-import Notification from './Notification'
-import NotificationNotice from './NotificationNotice'
+import Notification from './Notification.vue'
+import NotificationNotice from './NotificationNotice.vue'
 
 import config, { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'

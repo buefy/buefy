@@ -1,6 +1,6 @@
-import Carousel from './Carousel'
-import CarouselItem from './CarouselItem'
-import CarouselList from './CarouselList'
+import Carousel from './Carousel.vue'
+import CarouselItem from './CarouselItem.vue'
+import CarouselList from './CarouselList.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

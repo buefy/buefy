@@ -1,4 +1,4 @@
-import Icon from '../components/icon/Icon'
+import Icon from '../components/icon/Icon.vue'
 import SlotComponent from '../utils/SlotComponent'
 import { default as ProviderParentMixin, Sorted } from './ProviderParentMixin'
 import {bound} from './helpers'

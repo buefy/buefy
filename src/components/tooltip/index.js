@@ -1,4 +1,4 @@
-import Tooltip from './Tooltip'
+import Tooltip from './Tooltip.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 
