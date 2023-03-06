@@ -1,4 +1,4 @@
-import Input from './Input'
+import Input from './Input.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

@@ -18,7 +18,7 @@
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
-                :class="{ 'modal-content': !hasModalCard }"
+                :class="[{ 'modal-content': !hasModalCard }, customContentClass]"
                 :style="customStyle">
                 <component
                     v-if="component"
@@ -116,6 +116,7 @@ export default {
             }
         },
         customClass: String,
+        customContentClass: [String, Array, Object],
         ariaRole: {
             type: String,
             validator: (value) => {

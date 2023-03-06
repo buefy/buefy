@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BNavbarDropdown from '@components/navbar/NavbarDropdown.vue'
+import BNavbarDropdown from '@components/navbar/NavbarDropdown'
 
 let wrapper
 

@@ -1,5 +1,5 @@
 <script>
-import TabbedChildMixin from '../../utils/TabbedChildMixin.js'
+import TabbedChildMixin from '../../utils/TabbedChildMixin'
 
 export default {
     name: 'BStepItem',

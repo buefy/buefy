@@ -110,7 +110,7 @@ import {
     toCssWidth
 } from '../../utils/helpers'
 import FormElementMixin from '../../utils/FormElementMixin'
-import Input from '../input/Input'
+import Input from '../input/Input.vue'
 
 export default {
     name: 'BAutocomplete',

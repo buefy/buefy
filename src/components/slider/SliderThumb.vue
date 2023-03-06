@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Tooltip from '../tooltip/Tooltip'
+import Tooltip from '../tooltip/Tooltip.vue'
 import config from '../../utils/config'
 
 export default {

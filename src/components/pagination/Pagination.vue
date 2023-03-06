@@ -108,8 +108,8 @@
 </template>
 
 <script>
-import PaginationButton from './PaginationButton'
-import Icon from '../icon/Icon'
+import PaginationButton from './PaginationButton.vue'
+import Icon from '../icon/Icon.vue'
 import config from '../../utils/config'
 import debounce from '../../utils/debounce'
 

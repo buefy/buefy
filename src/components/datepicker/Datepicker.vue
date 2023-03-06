@@ -214,15 +214,15 @@ import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, getMonthNames, getWeekdayNames, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Dropdown from '../dropdown/Dropdown'
-import DropdownItem from '../dropdown/DropdownItem'
-import Input from '../input/Input'
-import Field from '../field/Field'
-import Select from '../select/Select'
-import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown.vue'
+import DropdownItem from '../dropdown/DropdownItem.vue'
+import Input from '../input/Input.vue'
+import Field from '../field/Field.vue'
+import Select from '../select/Select.vue'
+import Icon from '../icon/Icon.vue'
 
-import DatepickerTable from './DatepickerTable'
-import DatepickerMonth from './DatepickerMonth'
+import DatepickerTable from './DatepickerTable.vue'
+import DatepickerMonth from './DatepickerMonth.vue'
 
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]

@@ -1,5 +1,5 @@
-import Progress from './Progress'
-import ProgressBar from './ProgressBar'
+import Progress from './Progress.vue'
+import ProgressBar from './ProgressBar.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

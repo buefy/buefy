@@ -67,6 +67,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.red"
+                                    @input="updateRGB"
                                     size="is-small"
                                     aria-label="Red"
                                 />
@@ -75,6 +76,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.green"
+                                    @input="updateRGB"
                                     size="is-small"
                                     aria-label="Green"
                                 />
@@ -83,6 +85,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.blue"
+                                    @input="updateRGB"
                                     size="is-small"
                                     aria-label="Blue"
                                 />
@@ -101,16 +104,16 @@ import { isMobile } from '../../utils/helpers'
 import config from '../../utils/config'
 import Color from '../../utils/color'
 
-import Dropdown from '../dropdown/Dropdown'
-import DropdownItem from '../dropdown/DropdownItem'
-import Input from '../input/Input'
-import Field from '../field/Field'
-import Select from '../select/Select'
-import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown.vue'
+import DropdownItem from '../dropdown/DropdownItem.vue'
+import Input from '../input/Input.vue'
+import Field from '../field/Field.vue'
+import Select from '../select/Select.vue'
+import Icon from '../icon/Icon.vue'
 
-import ColorpickerHSLRepresentationTriangle from './ColorpickerHSLRepresentationTriangle'
-import ColorpickerHSLRepresentationSquare from './ColorpickerHSLRepresentationSquare'
-import ColorpickerAlphaSlider from './ColorpickerAlphaSlider'
+import ColorpickerHSLRepresentationTriangle from './ColorpickerHSLRepresentationTriangle.vue'
+import ColorpickerHSLRepresentationSquare from './ColorpickerHSLRepresentationSquare.vue'
+import ColorpickerAlphaSlider from './ColorpickerAlphaSlider.vue'
 
 const defaultColorFormatter = (color, vm) => {
     if (color.alpha < 1) {
@@ -288,6 +291,9 @@ export default {
         },
         updateAlpha(alpha) {
             this.computedValue.alpha = alpha
+            this.$emit('input', this.computedValue)
+        },
+        updateRGB() {
             this.$emit('input', this.computedValue)
         },
         /*

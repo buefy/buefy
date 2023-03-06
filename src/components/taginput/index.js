@@ -1,4 +1,4 @@
-import Taginput from './Taginput'
+import Taginput from './Taginput.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

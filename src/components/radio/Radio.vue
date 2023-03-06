@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CheckRadioMixin from '../../utils/CheckRadioMixin.js'
+import CheckRadioMixin from '../../utils/CheckRadioMixin'
 
 export default {
     name: 'BRadio',

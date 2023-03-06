@@ -94,8 +94,8 @@ import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Datepicker from '../datepicker/Datepicker'
-import Timepicker from '../timepicker/Timepicker'
+import Datepicker from '../datepicker/Datepicker.vue'
+import Timepicker from '../timepicker/Timepicker.vue'
 
 const AM = 'AM'
 const PM = 'PM'

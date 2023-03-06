@@ -1,4 +1,4 @@
-import Select from './Select'
+import Select from './Select.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

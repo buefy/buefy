@@ -1,4 +1,4 @@
-import Dialog from './Dialog'
+import Dialog from './Dialog.vue'
 
 import config, { VueInstance } from '../../utils/config'
 import { merge } from '../../utils/helpers'

@@ -60,8 +60,8 @@
 </template>
 
 <script>
-import SliderThumb from './SliderThumb'
-import SliderTick from './SliderTick'
+import SliderThumb from './SliderThumb.vue'
+import SliderTick from './SliderTick.vue'
 import config from '../../utils/config'
 import {bound} from '../../utils/helpers'
 

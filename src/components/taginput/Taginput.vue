@@ -43,7 +43,7 @@
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
-                :keep-open="openOnFocus"
+                :keep-open="keepOpen"
                 :keep-first="keepFirst"
                 :group-field="groupField"
                 :group-options="groupOptions"
@@ -98,8 +98,8 @@
 
 <script>
 import { getValueByPath } from '../../utils/helpers'
-import Tag from '../tag/Tag'
-import Autocomplete from '../autocomplete/Autocomplete'
+import Tag from '../tag/Tag.vue'
+import Autocomplete from '../autocomplete/Autocomplete.vue'
 import config from '../../utils/config'
 import FormElementMixin from '../../utils/FormElementMixin'
 
@@ -147,6 +147,10 @@ export default {
         groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
+        keepOpen: {
+            type: Boolean,
+            default: true
+        },
         keepFirst: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,

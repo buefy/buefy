@@ -62,7 +62,7 @@
 
 <script>
 import config from '../../utils/config'
-import FieldBody from './FieldBody'
+import FieldBody from './FieldBody.vue'
 
 export default {
     name: 'BField',

@@ -58,8 +58,8 @@
 import {sign, mod, bound} from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Icon from '../icon/Icon'
-import Image from '../image/Image'
+import Icon from '../icon/Icon.vue'
+import Image from '../image/Image.vue'
 
 export default {
     name: 'BCarouselList',

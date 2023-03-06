@@ -60,7 +60,7 @@
 
 <script>
 import config from '../../utils/config'
-import TabbedMixin from '../../utils/TabbedMixin.js'
+import TabbedMixin from '../../utils/TabbedMixin'
 
 export default {
     name: 'BTabs',

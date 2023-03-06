@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import MessageMixin from '../../utils/MessageMixin.js'
+import MessageMixin from '../../utils/MessageMixin'
 
 export default {
     name: 'BNotification',

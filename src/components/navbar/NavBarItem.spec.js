@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import BNavbarItem from '@components/navbar/NavbarItem.vue'
+import BNavbarItem from '@components/navbar/NavbarItem'
 import sinon from 'sinon'
 
 let wrapper

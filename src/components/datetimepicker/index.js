@@ -1,4 +1,4 @@
-import Datetimepicker from './Datetimepicker'
+import Datetimepicker from './Datetimepicker.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 
