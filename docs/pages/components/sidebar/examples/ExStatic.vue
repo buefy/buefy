@@ -13,7 +13,7 @@
                 <div class="p-1">
                     <div class="block">
                     <img
-                        src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
+                        src="/static/img/buefy-logo.png"
                         alt="Lightweight UI components for Vue.js based on Bulma"
                     />
                     </div>
