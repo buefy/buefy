@@ -192,6 +192,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>mobile-modal</code>',
+                description: 'Datepicker is shown into a modal on mobile',
+                type: 'Boolean',
+                values: '<code>true</code>, <code>false</code>',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>position</code>',
                 description: 'Optional, position of the datepicker relative to the input',
                 type: 'String',

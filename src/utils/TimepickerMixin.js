@@ -145,6 +145,10 @@ export default {
             type: Boolean,
             default: () => config.defaultTimepickerMobileNative
         },
+        mobileModal: {
+            type: Boolean,
+            default: () => config.defaultTimepickerMobileModal
+        },
         timeCreator: {
             type: Function,
             default: () => {
