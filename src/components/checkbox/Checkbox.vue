@@ -12,7 +12,7 @@
              trigger the checkbox change in the b-table -->
         <input
             v-model="computedValue"
-            :id="innerInputId"
+            :id="inputId"
             :indeterminate.prop="indeterminate"
             type="checkbox"
             ref="input"
@@ -51,7 +51,7 @@ export default {
             type: String,
             default: 'on'
         },
-        innerInputId: {
+        inputId: {
             type: String,
             default: ''
         }

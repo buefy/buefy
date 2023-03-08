@@ -83,7 +83,7 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>inner-input-id</code>',
+                name: '<code>input-id</code>',
                 description: 'String to set the inner input id',
                 type: 'String',
                 values: '—',
