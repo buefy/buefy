@@ -168,8 +168,6 @@ export default {
                 let newValue = (Number(value) === 0) ? 0 : (Number(value) || null)
                 if (value === '' || value === undefined || value === null) {
                     if (this.minNumber !== undefined) {
-                        newValue = this.minNumber
-                    } else {
                         newValue = null
                     }
                 }
@@ -278,6 +276,9 @@ export default {
             }
         },
         increment() {
+            if (this.computedValue < this.minNumber) {
+                this.computedValue = this.minNumber
+            }
             if (this.computedValue === null || typeof this.computedValue === 'undefined') {
                 if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
                     this.computedValue = this.minNumber
