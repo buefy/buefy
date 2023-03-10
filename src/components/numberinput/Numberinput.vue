@@ -276,10 +276,7 @@ export default {
             }
         },
         increment() {
-            if (this.computedValue < this.minNumber) {
-                this.computedValue = this.minNumber
-            }
-            if (this.computedValue === null || typeof this.computedValue === 'undefined') {
+            if (this.computedValue === null || typeof this.computedValue === 'undefined' || this.computedValue < this.minNumber) {
                 if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
                     this.computedValue = this.minNumber
                     return
