@@ -33,16 +33,30 @@ function open(propsData) {
                     Dialog,
                     {
                         ...propsData,
+                        // intentionally overrides propsData.onConfirm
+                        // to prevent propsData.onConfirm from receiving a "confirm" event
                         onConfirm: (...args) => {
                             if (onConfirm != null) {
                                 onConfirm(...args)
                             }
                         },
+                        // intentionally override propsData.onCancel
+                        // to prevent propsData.onCancel from receiving a "cancel" event
                         onCancel: (...args) => {
                             if (onCancel != null) {
                                 onCancel(...args)
                             }
                             vueInstance.unmount()
+                        },
+                        confirmCallback: (...args) => {
+                            if (propsData.onConfirm != null) {
+                                propsData.onConfirm(...args)
+                            }
+                        },
+                        cancelCallback: (...args) => {
+                            if (propsData.onCancel != null) {
+                                propsData.onCancel(...args)
+                            }
                         }
                     },
                     slot ? { default: () => slot } : undefined

@@ -102,7 +102,11 @@ But they are interpreted as event listeners on Vue 3.
 As a workaround, the callback functions are renamed to `confirmCallback`, and `cancelCallback` respectively.
 See [#185e353a154b661ba2fa423e5066a4cea761250a](https://github.com/kikuomax/buefy/commit/185e353a154b661ba2fa423e5066a4cea761250a).
 
-See also [Vue's migration guide](https://v3.vuejs.org/guide/migration/render-function-api.html#_2-x-syntax-3).
+See also [Vue's migration guide](https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#vnode-props-format).
+
+In the version `v0.9.21-vue3-1`, you had to specify `confirmCallback`, and `cancelCallback` properties instead of `onConfirm`, and `onCancel` respectively when you want to programmatically open a `Dialog`.
+However, since the version `v0.9.21-vue3-2`, `onConfirm`, and `onCancel` are back again, and you have to specify `onConfirm`, and `onCancel` to programmatically open a `Dialog`.
+See [#529394d7c77967bc156a386a99a9dda6c78d2780](https://github.com/kikuomax/buefy/commit/529394d7c77967bc156a386a99a9dda6c78d2780).
 
 ## Emitted events
 
