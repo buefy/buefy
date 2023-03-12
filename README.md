@@ -36,7 +36,7 @@ Because not all of Vue 2 features could be reproduced with Vue 3, there are some
 Please refer to [CHANGELOG.md](./CHANGELOG.md) for more details.
 The biggest breaking change is obviously, **this does not work with Vue 2**.
 
-**Properties for programmatically opening a `Dialog` or `Modal` have changed from `v0.9.21-vue3-1` to `v0.9.21-vue-2` (became compatible with the original Buefy).**
+**Properties for programmatically opening a `Dialog` or `Modal` have changed from `v0.9.21-vue3-1` to `v0.9.21-vue3-2` (became compatible with the original Buefy).**
 Please refer to [CHANGELOG.md](./CHANGELOG.md#0921-vue3-2) for more details.
 
 ### How to install
