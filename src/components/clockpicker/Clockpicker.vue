@@ -6,6 +6,7 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
+            :mobile-modal="mobileModal"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
