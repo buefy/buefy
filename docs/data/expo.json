@@ -12,18 +12,6 @@
         "url": "https://discordtemplates.com/"
     },
     {
-        "title": "Crawly",
-        "date": "2020-08-04",
-        "img": "crawly.png",
-        "url": "https://crawly.app/"
-    },
-    {
-        "title": "Yakety",
-        "date": "2020-08-04",
-        "img": "yakety.png",
-        "url": "https://yakety.co.uk/"
-    },
-    {
         "title": "KodaDot",
         "date": "2020-08-04",
         "img": "kodadot.png",
@@ -79,12 +67,6 @@
         "url": "https://portail.edutechno.ca/"
     },
     {
-        "title": "Wotel",
-        "date": "2020-02-06",
-        "img": "wotel.png",
-        "url": "https://wotel.dev/"
-    },
-    {
         "title": "Swap",
         "date": "2020-01-29",
         "img": "swap.png",
@@ -95,12 +77,6 @@
         "date": "2019-11-29",
         "img": "sponsus.png",
         "url": "https://sponsus.org/"
-    },
-    {
-        "title": "Dogs Welcome",
-        "date": "2019-11-05",
-        "img": "dogswelcome.png",
-        "url": "https://dogswelcome.in/"
     },
     {
         "title": "Rate My Meeting",
@@ -188,13 +164,6 @@
         "url": "https://nestandcut.com"
     },
     {
-        "title": "Okuna",
-        "date": "2019-04-24",
-        "img": "openbook.png",
-        "url": "https://www.okuna.io",
-        "featured": true
-    },
-    {
         "title": "Switchblade",
         "date": "2019-04-24",
         "img": "switchblade.png",
@@ -235,7 +204,7 @@
         "title": "Salamander Garten",
         "date": "2019-04-24",
         "img": "salamander-garten.png",
-        "url": "https://voranalyse.salamander-garten.ch"
+        "url": "https://www.salamander-garten.ch"
     },
     {
         "title": "Pumpipumpe Map",
