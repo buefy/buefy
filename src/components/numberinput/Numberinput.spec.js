@@ -343,7 +343,7 @@ describe('BNumberinput', () => {
             const min = 5
             wrapper.setProps({ min })
             wrapper.vm.computedValue = ''
-            expect(wrapper.vm.computedValue).toBe(min)
+            expect(wrapper.vm.computedValue).toBeNull()
         })
 
         it('increments/decrements on click', async () => {
