@@ -108,7 +108,7 @@ describe('BNumberinput', () => {
             jest.runOnlyPendingTimers()
 
             wrapper.find('.control.plus').trigger('mouseup')
-            expect(wrapper.vm.computedValue).toBe(0)
+            expect(wrapper.vm.computedValue).toBe(1)
 
             // Decrement
             wrapper.find('.control.minus button').trigger('mousedown')
