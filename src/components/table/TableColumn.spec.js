@@ -32,7 +32,7 @@ describe('BTableColumn', () => {
                 <BTable :data="tableData" detail-key="id" detailed>
                     <BTableColumn :td-attrs="(td) => ({ id: \`td-\${td.id}\` })" v-slot="props">
                         <div>
-                            {{ props.row.name }} - {{ props.isActiveDetailRow(props.row) ? 'Openned' : 'Closed' }}
+                            {{ props.row.name }} - {{ props.isActiveDetailRow(props.row) ? 'Opened' : 'Closed' }}
                         </div>
                         <BButton @click="props.toggleDetails(props.row)">Toggle details</BButton>
                     </BTableColumn>
@@ -57,22 +57,22 @@ describe('BTableColumn', () => {
         await wrapper.vm.$nextTick()
         // Toggle first row details
         expect(wrapper.find('#td-1').text()).toContain('Closed')
-        expect(wrapper.find('#td-1').text()).not.toContain('Openned')
+        expect(wrapper.find('#td-1').text()).not.toContain('Opened')
         wrapper.find('#td-1 button').trigger('click')
         await wrapper.vm.$nextTick()
         expect(wrapper.find('#td-1').text()).not.toContain('Closed')
-        expect(wrapper.find('#td-1').text()).toContain('Openned')
+        expect(wrapper.find('#td-1').text()).toContain('Opened')
         wrapper.find('#td-1 button').trigger('click')
         await wrapper.vm.$nextTick()
         expect(wrapper.find('#td-1').text()).toContain('Closed')
-        expect(wrapper.find('#td-1').text()).not.toContain('Openned')
+        expect(wrapper.find('#td-1').text()).not.toContain('Opened')
 
         // Toggle second row details
         expect(wrapper.find('#td-2').text()).toContain('Closed')
-        expect(wrapper.find('#td-2').text()).not.toContain('Openned')
+        expect(wrapper.find('#td-2').text()).not.toContain('Opened')
         wrapper.find('#td-2 button').trigger('click')
         await wrapper.vm.$nextTick()
         expect(wrapper.find('#td-2').text()).not.toContain('Closed')
-        expect(wrapper.find('#td-2').text()).toContain('Openned')
+        expect(wrapper.find('#td-2').text()).toContain('Opened')
     })
 })
