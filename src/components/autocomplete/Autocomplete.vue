@@ -316,6 +316,10 @@ export default {
                     }, 100)
                 }
             }
+
+            this.$nextTick(() => {
+                this.$emit('active', active)
+            })
         },
 
         /**
