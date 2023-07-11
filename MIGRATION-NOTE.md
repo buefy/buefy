@@ -50,7 +50,7 @@ See [#017531f4a1d910357c10799621101046f4098b15](https://github.com/buefy/buefy/c
 
 There is no equivalent of [`$destroy`](https://v2.vuejs.org/v2/api/#vm-destroy) in Vue 3.
 This is problematic for Buefy, because a programmatically mounted component has to destroy itself.
-I worked around this problem by moving the responsibility for destruction from a component to a Vue app instance created when the component is programmatically mounted (see the section [Component cannot be newed](#component-cannot-be-newed)).
+I worked around this problem by moving the responsibility for destruction from a component to a Vue app instance created when the component is programmatically mounted (see [Section "No meaning of newing a component"](#no-meaning-of-newing-a-component)).
 
 See also [Vue's migration guide](https://v3-migration.vuejs.org/breaking-changes/#removed-apis).
 
@@ -78,7 +78,7 @@ Here are related commits,
 
 ## Global `h` function
 
-On Vue 3, a [`render`](https://vuejs.org/api/options-rendering.html#render) function no longer takes a "create element" function, aka `h`, but the `h` function is [defined globally](https://v3.vuejs.org/api/global-api.html#h).
+On Vue 3, a [`render`](https://vuejs.org/api/options-rendering.html#render) function no longer takes a "create element" function, aka `h`, but the `h` function is [defined globally](https://vuejs.org/api/render-function.html#h).
 The second argument `props` of the global `h` API has been simplified; e.g., `staticClass` is merged to `class`, `on` is removed.
 
 See also,
