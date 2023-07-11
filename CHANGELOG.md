@@ -1,17 +1,6 @@
 # Buefy Changelog
 
-## 0.9.22-vue3-2
-
-TO BE REPLACED.
-
-### Breadking changes
-
-* The `onConfirm`, and `onCancel` props given to functions (`dialog.alert`, `dialog.confirm`, and `dialog.prompt`) that programmatically open a `Dialog` are restored, and these functions now ignore the `confirmCallback`, and `cancelCallback` props. (#76b7b91d06541a7e09b9122a9f557ab0d1f0f371)
-* The `onCancel` prop given to `modal.open` is restored, and `modal.open` ignores the `cancelCallback` prop. (#76b7b91d06541a7e09b9122a9f557ab0d1f0f371)
-
-## 0.9.22-vue3-1
-
-TO BE REPLACED.
+## buefy-next
 
 ### Breaking changes
 
@@ -52,8 +41,6 @@ TO BE REPLACED.
     * `Notification` (#82136338ca6cdf7be3b4b2d134e457074f5ffcb1)
     * `Snackbar` (#43193759a7d88d2ba04407fb8829f0e9196ddf83)
     * `Toast` (#c8643f56d1ecd775e8746f24d8c0ac81dd1df505)
-* The `onConfirm` prop of `Dialog` is renamed to `confirmCallback` because it conflicts with a listener for `confirm` events. (#a415f3aef052fdc39c5322372ae0f7d8665c6e9f)
-* The `onCancel` prop of `Modal`, and `Dialog` is renamed to `cancelCallback` because it conflicts with a listener for `cancel` events. (#a415f3aef052fdc39c5322372ae0f7d8665c6e9f)
 * Indexing of `StepItem`, and `CarouselItem` is changed.
   Indexes in the default slot are no longer respected.
   They are indexed in the order of creation instead.
