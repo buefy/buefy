@@ -13,22 +13,21 @@
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
-## About this fork
+## About this branch
 
-This fork (branch `vue-3`) is a version of Buefy that works with [Vue 3](https://v3.vuejs.org) (not with Vue 2).
-The branch `vue-3` has departed from the then latest commit [#b6233b9c335d99cf688ee2a3b9c61fd26a92a182](https://github.com/buefy/buefy/commit/b6233b9c335d99cf688ee2a3b9c61fd26a92a182) on the `dev` branch.
+This branch `buefy-next` aims at being Buefy for [Vue 3](https://vuejs.org).
+The branch departed from the latest commit [#b6233b9c335d99cf688ee2a3b9c61fd26a92a182](https://github.com/buefy/buefy/commit/b6233b9c335d99cf688ee2a3b9c61fd26a92a182) on the [`dev`](https://github.com/buefy/buefy/tree/dev) branch as of July 4, 2023.
 
-Please note that this branch was previously based on the version `0.9.21`, though, it has been **completely rebased** from the latest `dev` branch as of Jul 4, 2023.
+### Initial migration goal
 
-### Migration goal
-
-The migration goal was to make the documentation page of every component work.
+The initial migration goal was to make the documentation page of every component work, and it was achieved.
 Some features not used in the documentation pages may not work.
-Please refer to [MIGRATION-NOTE.md](./MIGRATION-NOTE.md) for more details about what challenges I faced.
+Please refer to [MIGRATION-NOTE.md](./MIGRATION-NOTE.md) for more details about what challenges we faced.
 
-**Unit tests have not been touched at all**.
-
-**Server-side-rendering has neither been tested**.
+Due to focusing on the documentation pages:
+- **Unit tests have not been updated at all**.
+- **Extensions have not migrated**.
+- **Server-side-rendering has neither been tested**.
 
 ### Breaking changes
 
@@ -36,21 +35,12 @@ Because not all of Vue 2 features could be reproduced with Vue 3, there are some
 Please refer to [CHANGELOG.md](./CHANGELOG.md) for more details.
 The biggest breaking change is obviously, **this does not work with Vue 2**.
 
-**Properties for programmatically opening a `Dialog` or `Modal` have changed from `v0.9.22-vue3-1` to `v0.9.22-vue3-2` (became compatible with the original Buefy).**
-Please refer to [CHANGELOG.md](./CHANGELOG.md#0921-vue3-2) for more details.
-
 ### How to install
 
 To install this fork, please run the following command,
 
 ```sh
-npm install 'https://github.com/kikuomax/buefy.git#vue-3-dev-latest'
-```
-
-If you need the previous version that is based on Buefy v0.9.21, please run the following command,
-
-```sh
-npm install 'https://github.com/kikuomax/buefy.git#v0.9.21-vue3-2'
+npm install https://github.com/buefy/buefy#buefy-next
 ```
 
 ## Features
@@ -76,7 +66,7 @@ You need [Vue.js](https://vuejs.org/) **version 3.0+**. (Vue 2 is not supported)
 ### 1 Install via npm
 
 ```bash
-npm install 'https://github.com/kikuomax/buefy.git'
+npm install https://github.com/buefy/buefy#buefy-next
 ```
 
 ### 2 Import and use Buefy
