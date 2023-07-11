@@ -6,8 +6,8 @@ TO BE REPLACED.
 
 ### Breadking changes
 
-* The `onConfirm`, and `onCancel` props given to functions (`dialog.alert`, `dialog.confirm`, and `dialog.prompt`) that programmatically open a `Dialog` are restored, and these functions now ignore the `confirmCallback`, and `cancelCallback` props. ([#529394d7c77967bc156a386a99a9dda6c78d2780](https://github.com/kikuomax/buefy/commit/529394d7c77967bc156a386a99a9dda6c78d2780))
-* The `onCancel` prop given to `modal.open` is restored, and `modal.open` ignores the `cancelCallback` prop. ([#529394d7c77967bc156a386a99a9dda6c78d2780](https://github.com/kikuomax/buefy/commit/529394d7c77967bc156a386a99a9dda6c78d2780))
+* The `onConfirm`, and `onCancel` props given to functions (`dialog.alert`, `dialog.confirm`, and `dialog.prompt`) that programmatically open a `Dialog` are restored, and these functions now ignore the `confirmCallback`, and `cancelCallback` props. (#76b7b91d06541a7e09b9122a9f557ab0d1f0f371)
+* The `onCancel` prop given to `modal.open` is restored, and `modal.open` ignores the `cancelCallback` prop. (#76b7b91d06541a7e09b9122a9f557ab0d1f0f371)
 
 ## 0.9.22-vue3-1
 
@@ -16,50 +16,50 @@ TO BE REPLACED.
 ### Breaking changes
 
 * **Vue.js** 3.0+ is now the minimum required version
-* `v-model` binding of the following components conform to Vue 3. See also [MIGRATION-NOTE.md](./MIGRATION-NOTE.md#v-model-binding).
-    * `Autocomplete` ([#8a10d807db2b7cf88a1a926ac6419272b514096c](https://github.com/kikuomax/buefy/commit/8a10d807db2b7cf88a1a926ac6419272b514096c))
-    * `Carousel` ([#d275028b94ca4f6f68a3542e6b00356990b678e8](https://github.com/kikuomax/buefy/commit/d275028b94ca4f6f68a3542e6b00356990b678e8))
-    * `CarouselList` ([#ae6aec461a173da0651f464534a74c936539c9af](https://github.com/kikuomax/buefy/commit/ae6aec461a173da0651f464534a74c936539c9af))
-    * `Checkbox` (`CheckRadioMixin`) ([#7dfb2ac820ce1fef90f8eb8f7d78bb155511f0a4](https://github.com/kikuomax/buefy/commit/7dfb2ac820ce1fef90f8eb8f7d78bb155511f0a4))
-    * `Clockpicker` (`TimepickerMixin`) ([#3a51f8053d99269dc9fbc6c9c259513890f6f21d](https://github.com/kikuomax/buefy/commit/3a51f8053d99269dc9fbc6c9c259513890f6f21d))
-    * `Collapse` used to have a custom binding to `open` ([#e94e408bbb8090a53a02d53498bb0d1a0020c123](https://github.com/kikuomax/buefy/commit/e94e408bbb8090a53a02d53498bb0d1a0020c123))
-    * `Colorpicker` ([#351c3eb32508336778cb12170b6e153166e20798](https://github.com/kikuomax/buefy/commit/351c3eb32508336778cb12170b6e153166e20798))
-    * `Datepicker` ([#65b40320484f5f3ccc1499616794f57221f4d1ff](https://github.com/kikuomax/buefy/commit/65b40320484f5f3ccc1499616794f57221f4d1ff))
-    * `Datetimepicker` ([#cf00794a17a54982c1069687983c7d929cb15eec](https://github.com/kikuomax/buefy/commit/cf00794a17a54982c1069687983c7d929cb15eec))
-    * `Dropdown` ([#baaf22ccc6efaaf78c6c5f53f8679d22ad2a4d75](https://github.com/kikuomax/buefy/commit/baaf22ccc6efaaf78c6c5f53f8679d22ad2a4d75))
-    * `Input` ([#5efb26e6c9e2d7c51254307ed656236f59340b7b](https://github.com/kikuomax/buefy/commit/5efb26e6c9e2d7c51254307ed656236f59340b7b))
-    * `Loading` used to have a custom binding to `active` ([#6244af7c22393507f8cd59fb12c8942e727ef9da](https://github.com/kikuomax/buefy/commit/6244af7c22393507f8cd59fb12c8942e727ef9da))
-    * `Message` (`MessageMixin`) used to have a custom binding to `active` ([#b89211ff55ae6cd46cb1dc06c62682e22799233b](https://github.com/kikuomax/buefy/commit/b89211ff55ae6cd46cb1dc06c62682e22799233b))
-    * `Modal` used to have a custom binding to `active` ([#0461fbb890ea6f2b91c1579bf3ffc03916ed2a4e](https://github.com/kikuomax/buefy/commit/0461fbb890ea6f2b91c1579bf3ffc03916ed2a4e))
-    * `Navbar` used to have a custom binding to `active` ([#95ff83f99a1ad8ba5d0764982ea80182cac77ecc](https://github.com/kikuomax/buefy/commit/95ff83f99a1ad8ba5d0764982ea80182cac77ecc))
-    * `Numberinput` ([#7bf7baf0ba8e5b7f8b60d145d7fe76c27d12b31d](https://github.com/kikuomax/buefy/commit/7bf7baf0ba8e5b7f8b60d145d7fe76c27d12b31d))
-    * `Pagination` used to have a custom binding to `current` ([#b9c38d7951508b7c9a81cc05fc9baad37fb55e86](https://github.com/kikuomax/buefy/commit/b9c38d7951508b7c9a81cc05fc9baad37fb55e86))
-    * `Rate` ([#723f035d4952dceaedf052f2be88ce052530170c](https://github.com/kikuomax/buefy/commit/723f035d4952dceaedf052f2be88ce052530170c))
-    * `Select` ([#2f255e316a5f5614328c74446bc28fe7f2a8148f](https://github.com/kikuomax/buefy/commit/2f255e316a5f5614328c74446bc28fe7f2a8148f))
-    * `Sidebar` used to have a custom binding to `open` ([#924cdd686b9a7df221aaf65e4bba1cd420b902be](https://github.com/kikuomax/buefy/commit/924cdd686b9a7df221aaf65e4bba1cd420b902be))
-    * `Slider` ([#baaf22ccc6efaaf78c6c5f53f8679d22ad2a4d75](https://github.com/kikuomax/buefy/commit/baaf22ccc6efaaf78c6c5f53f8679d22ad2a4d75))
-    * `Steps` (`TabbedMixin`) ([#4e8458de0e826618c71bf38c9cd728dae8eacbe0](https://github.com/kikuomax/buefy/commit/4e8458de0e826618c71bf38c9cd728dae8eacbe0))
-    * `Switch` ([#945ec316cbfa7516832ff6d88b6f09c9f6211595](https://github.com/kikuomax/buefy/commit/945ec316cbfa7516832ff6d88b6f09c9f6211595))
-    * `Tabs` (`TabbedMixin`) ([#4e8458de0e826618c71bf38c9cd728dae8eacbe0](https://github.com/kikuomax/buefy/commit/4e8458de0e826618c71bf38c9cd728dae8eacbe0))
-    * `Taginput` ([#7f9b567ec91cef54f504ee98f99722ca68e317a6](https://github.com/kikuomax/buefy/commit/7f9b567ec91cef54f504ee98f99722ca68e317a6))
-    * `Upload` ([#ef6701828e2d7f52bd2d0dc7c0f1aff57ef1c2d8](https://github.com/kikuomax/buefy/commit/ef6701828e2d7f52bd2d0dc7c0f1aff57ef1c2d8))
+* `v-model` binding of the following components conform to Vue 3; i.e., `value` → `modelValue`, `@input` → `@update:modelValue`. See also [MIGRATION-NOTE.md](./MIGRATION-NOTE.md#v-model-binding).
+    * `Autocomplete` (#8d9e800adb23a01db0dbffcefad48fab794ac690)
+    * `Carousel` (#b2a8d88db86bfc0a75f48624bbd5f96d82f9f559)
+    * `CarouselList` (#16a2e777010db6c714f3694e03682ce7e74d2be8)
+    * `Checkbox` (`CheckRadioMixin`) (#c8aad46a709e7f99bc061ba28f2e650c0be223ca)
+    * `Clockpicker` (`TimepickerMixin`) (#33e4086186446abd6f7ed82fe86b5e029090adb3)
+    * `Collapse` used to have a custom `v-model` binding to `open` which is renamed to `modelValue` (#690d28996dd2eecc1e5059f5ef349351c017f533)
+    * `Colorpicker` (#7011781d25761744468220ae4f63fdba1cb93120)
+    * `Datepicker` (#c99a8dd0d4cdc5ae27f5eb0677d7a4e80c45bc1c)
+    * `Datetimepicker` (#c3b8668d300f4d607b1d03973e72e406914ef404)
+    * `Dropdown` (#a18bf8d12d5245427473ad73d51bc7f72ac13a87)
+    * `Input` (#f4f69bae0eef7a604d67e2be059771e929073919)
+    * `Loading` used to have a custom `v-model` binding to `active` which is renamed to `modelValue` (#bf6e9cd680298b1a8b572bdb1d742f9ac0eca769)
+    * `Message` (`MessageMixin`) used to have a custom `v-model` binding to `active` which is renamed to `modelValue` (#d3ec84f1e5f5abef980d2739fe079f2241a71b77)
+    * `Modal` used to have a custom `v-model` binding to `active` which is renamed to `modelValue` (#8b05481a20ec8bccb03f1c98ad5556442e79258b)
+    * `Navbar` used to have a custom `v-model` binding to `active` which is renamed to `modelValue` (#5bc62ffbeba831f60fe1b755b2e5fe7c5e25d3ed)
+    * `Numberinput` (#768a9573fd1b1eab90b6404ea922374e3bfa327b)
+    * `Pagination` used to have a custom `v-model` binding to `current` which is renamed to `modelValue` (#33aaf4e15270d24116e0c133868992cf6ae2ca99)
+    * `Rate` (#047536cd47d667a51f0d2b02eabf23a128f99c41)
+    * `Select` (#5b103a54c58fe2aad4240e1adfa64dacba35f66b)
+    * `Sidebar` used to have a custom `v-model` binding to `open` which is renamed to `modelValue` (#8b55d7c9d1863b12a2cbc98b0601dc865b56d3e7)
+    * `Slider` (`SliderThumb`) (#a18bf8d12d5245427473ad73d51bc7f72ac13a87)
+    * `Steps` (`TabbedMixin`) (#defe37960d284e6de81d3e273e1a18c33b12e2a5)
+    * `Switch` (#1a878a9f7b9851e610329d1f82208d8103505cb2)
+    * `Tabs` (`TabbedMixin`) (#defe37960d284e6de81d3e273e1a18c33b12e2a5)
+    * `Taginput` (#9e29ecc11439f223a1f8f2d140a495680df14903)
+    * `Upload` (#6f8952ec1389b1f74683f69fb04aac4beae62140)
 * A brand-new Vue app is created to programmatically mount the following components.
-  Plugins including Buefy itself cannot be used in a programmatically mounted component.
+  **Any plugins including Buefy itself cannot be used** in a programmatically mounted component.
   See also [MIGRATION-NOTE.md](./MIGRATION-NOTE.md#component-alone-cannot-mount-itself).
-    * `Dialog` ([#185e353a154b661ba2fa423e5066a4cea761250a](https://github.com/kikuomax/buefy/commit/185e353a154b661ba2fa423e5066a4cea761250a))
-    * `Loading` ([#6244af7c22393507f8cd59fb12c8942e727ef9da](https://github.com/kikuomax/buefy/commit/6244af7c22393507f8cd59fb12c8942e727ef9da))
-    * `Modal` ([#0461fbb890ea6f2b91c1579bf3ffc03916ed2a4e](https://github.com/kikuomax/buefy/commit/0461fbb890ea6f2b91c1579bf3ffc03916ed2a4e))
-    * `Notification` ([#c01b9fb5a42447c417ec6a55b30e674cd5f115d8](https://github.com/kikuomax/buefy/commit/c01b9fb5a42447c417ec6a55b30e674cd5f115d8))
-    * `Snackbar` ([#3adeec926bbd578f2eb6f440971330b13bba696d](https://github.com/kikuomax/buefy/commit/3adeec926bbd578f2eb6f440971330b13bba696d))
-    * `Toast` ([#baa5a37e8dd83724e47d81c1faf43b47d408f4a2](https://github.com/kikuomax/buefy/commit/baa5a37e8dd83724e47d81c1faf43b47d408f4a2))
-* The `onConfirm` prop of `Dialog` is renamed to `confirmCallback` because it conflicts with a listener for `confirm` events. ([#185e353a154b661ba2fa423e5066a4cea761250a](https://github.com/kikuomax/buefy/commit/185e353a154b661ba2fa423e5066a4cea761250a))
-* The `onCancel` prop of `Modal`, and `Dialog` is renamed to `cancelCallback` because it conflicts with a listener for `cancel` events. ([#185e353a154b661ba2fa423e5066a4cea761250a](https://github.com/kikuomax/buefy/commit/185e353a154b661ba2fa423e5066a4cea761250a))
+    * `Dialog` (#a415f3aef052fdc39c5322372ae0f7d8665c6e9f)
+    * `Loading` (#bf6e9cd680298b1a8b572bdb1d742f9ac0eca769)
+    * `Modal` (#8b05481a20ec8bccb03f1c98ad5556442e79258b)
+    * `Notification` (#82136338ca6cdf7be3b4b2d134e457074f5ffcb1)
+    * `Snackbar` (#43193759a7d88d2ba04407fb8829f0e9196ddf83)
+    * `Toast` (#c8643f56d1ecd775e8746f24d8c0ac81dd1df505)
+* The `onConfirm` prop of `Dialog` is renamed to `confirmCallback` because it conflicts with a listener for `confirm` events. (#a415f3aef052fdc39c5322372ae0f7d8665c6e9f)
+* The `onCancel` prop of `Modal`, and `Dialog` is renamed to `cancelCallback` because it conflicts with a listener for `cancel` events. (#a415f3aef052fdc39c5322372ae0f7d8665c6e9f)
 * Indexing of `StepItem`, and `CarouselItem` is changed.
   Indexes in the default slot are no longer respected.
   They are indexed in the order of creation instead.
   You have to specify the `order` prop to keep the ordering of items.
   See also [MIGRATION-NOTE.md](./MIGRATION-NOTE.md#component-cannot-be-obtained-from-a-slot).
-  ([#4e8458de0e826618c71bf38c9cd728dae8eacbe0](https://github.com/kikuomax/buefy/commit/4e8458de0e826618c71bf38c9cd728dae8eacbe0))
+  (#defe37960d284e6de81d3e273e1a18c33b12e2a5)
 
 ### Fixes
 
