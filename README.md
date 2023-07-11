@@ -44,7 +44,7 @@ Please refer to [CHANGELOG.md](./CHANGELOG.md#0921-vue3-2) for more details.
 To install this fork, please run the following command,
 
 ```sh
-npm install 'https://github.com/kikuomax/buefy.git'
+npm install 'https://github.com/kikuomax/buefy.git#vue-3-dev-latest'
 ```
 
 If you need the previous version that is based on Buefy v0.9.21, please run the following command,
