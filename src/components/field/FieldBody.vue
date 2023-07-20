@@ -1,5 +1,5 @@
 <script>
-import { Comment, Fragment, h as createElement, resolveComponent } from 'vue'
+import { Comment, Fragment, Text, h as createElement, resolveComponent } from 'vue'
 
 export default {
     name: 'BFieldBody',
@@ -26,7 +26,7 @@ export default {
                 default: () => {
                     return children.map((element) => {
                         // skip returns(?) and comments
-                        if (element.type === Comment) {
+                        if (element.type === Comment || element.type === Text) {
                             return element
                         }
                         let message
