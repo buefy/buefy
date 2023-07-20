@@ -40,7 +40,7 @@ export default {
                                 type: this.type,
                                 message
                             },
-                            [element]
+                            () => element
                         )
                     })
                 }
