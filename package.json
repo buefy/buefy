@@ -1,13 +1,17 @@
 {
-  "name": "buefy",
-  "version": "0.9.23",
+  "name": "buefy-next",
+  "version": "0.1.0",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
     "Walter Tommasi <tommsi20@gmail.com>",
-    "Kikuo Emoto <kemoto@codemonger.io>"
+    "Kikuo Emoto <kemoto@codemonger.io>",
+    "Wesley Ford <wes@wesdevpro.com>"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/ntohq"
+  },
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
