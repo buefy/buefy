@@ -1,5 +1,5 @@
 {
-  "name": "buefy-next",
+  "name": "@ntohq/buefy-next",
   "version": "0.1.0",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
@@ -10,7 +10,7 @@
     "Wesley Ford <wes@wesdevpro.com>"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/ntohq"
+    "registry": "https://registry.npmjs.org/"
   },
   "license": "MIT",
   "main": "dist/cjs/index.js",
