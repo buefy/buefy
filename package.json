@@ -28,10 +28,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/buefy/buefy.git"
+    "url": "https://github.com/ntohq/buefy-next"
   },
   "bugs": {
-    "url": "https://github.com/buefy/buefy/issues"
+    "url": "https://github.com/ntohq/buefy-next/issues"
   },
   "vetur": {
     "tags": "dist/vetur/tags.json",
