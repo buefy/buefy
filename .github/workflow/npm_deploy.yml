@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Publish buefy-next to NPM
 on:
   push:
     branches:
@@ -15,7 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org/ntohq'
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@ntohq'
       - run: npm ci
       - run: npm publish
         env:
