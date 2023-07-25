@@ -52,7 +52,7 @@
             <table
                 class="table"
                 :class="tableClasses"
-                :tabindex="!focusable ? false : 0"
+                :tabindex="!focusable ? undefined : 0"
                 @keydown.self.prevent.up="pressedArrow(-1)"
                 @keydown.self.prevent.down="pressedArrow(1)"
             >
