@@ -509,6 +509,11 @@ export default [
                 description: 'Custom top-left (opposite side of top pagination)',
                 props: '—'
             },
+            {
+                name: '<code>pagination</code>',
+                description: 'Table custom pagination',
+                props: '—'
+            },
         ],
         events: [
             {
