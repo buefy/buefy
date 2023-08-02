@@ -28,7 +28,7 @@ const BMenuList = (props, context) => {
             class: 'menu-list',
             role: props.ariaRole === 'menu' ? props.ariaRole : null
         },
-        slots.default()
+        typeof slots.default === 'function' ? slots.default() : slots.default
     )
     return vlabel ? [vlabel, vnode] : vnode
 }
