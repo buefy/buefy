@@ -296,12 +296,12 @@ export default {
             if (inc) this.increment()
             else this.decrement()
 
+            if (!this.longPress) return
             this._$intervalRef = setTimeout(() => {
                 this.longPressTick(inc)
             }, this.exponential ? (250 / (this.exponential * this.timesPressed++)) : 250)
         },
         onStartLongPress(event, inc) {
-            if (!this.longPress) return
             if (event.button !== 0 && event.type !== 'touchstart') return
             clearTimeout(this._$intervalRef)
             this.longPressTick(inc)
