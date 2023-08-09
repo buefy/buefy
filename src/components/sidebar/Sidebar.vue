@@ -255,7 +255,9 @@ export default {
          */
         clickedCloseButton() {
             if (this.isFixed) {
-                if (this.isOpen && this.fullwidth) this.cancel('outside')
+                if (this.isOpen && this.fullwidth) {
+                    this.cancel('outside')
+                }
             }
         }
     },
