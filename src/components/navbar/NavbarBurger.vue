@@ -4,7 +4,7 @@
         class="navbar-burger burger"
         :class="{ 'is-active': isOpened }"
         aria-label="menu"
-        :aria-expanded="isOpened"
+        :aria-expanded="isOpened || undefined"
         v-bind="$attrs"
         tabindex="0"
     >
