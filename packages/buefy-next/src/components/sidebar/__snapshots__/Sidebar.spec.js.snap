@@ -5,6 +5,7 @@ exports[`BSidebar open render correctly 1`] = `
   <!--v-if-->
   <transition-stub name="slide-next" appear="false" persisted="true" css="true">
     <div class="sidebar-content is-fixed" style="">
+      <!--v-if-->
       <div class="content"></div>
     </div>
   </transition-stub>
@@ -16,6 +17,7 @@ exports[`BSidebar render correctly 1`] = `
   <!--v-if-->
   <transition-stub name="slide-prev" appear="false" persisted="true" css="true">
     <div class="sidebar-content is-fixed" style="display: none;">
+      <!--v-if-->
       <div class="content"></div>
     </div>
   </transition-stub>

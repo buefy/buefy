@@ -17,6 +17,13 @@
                 @mouseenter="onHover"
                 @mouseleave="onHoverLeave"
             >
+                <button
+                    type="button"
+                    v-if="fullwidth"
+                    @click="clickedCloseButton"
+                    class="modal-close is-large sidebar-close"
+                    aria-label="Close"
+                />
                 <slot />
             </div>
         </transition>
@@ -242,6 +249,16 @@ export default {
             this.hasLeaved = true
             this.timer = null
             this.isDelayOver = false
+        },
+        /**
+         * Close sidebar if close button is clicked.
+         */
+        clickedCloseButton() {
+            if (this.isFixed) {
+                if (this.isOpen && this.fullwidth) {
+                    this.cancel('outside')
+                }
+            }
         }
     },
     created() {
