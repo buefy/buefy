@@ -168,10 +168,13 @@ export default {
             ])
         },
         genNavbarBrandNode() {
+            const children = this.$slots.brand != null
+                ? [this.$slots.brand(), this.genBurgerNode()]
+                : this.genBurgerNode()
             return createElement(
                 'div',
                 { class: 'navbar-brand' },
-                [this.$slots.brand(), this.genBurgerNode()]
+                children
             )
         },
         genBurgerNode() {
