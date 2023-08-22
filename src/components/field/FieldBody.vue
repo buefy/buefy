@@ -3,6 +3,12 @@ import { Comment, Fragment, Text, h as createElement, resolveComponent } from 'v
 
 export default {
     name: 'BFieldBody',
+    inject: {
+        parent: {
+            from: 'BField',
+            default: null
+        }
+    },
     props: {
         message: {
             type: [String, Array]
@@ -37,7 +43,7 @@ export default {
                             first = false
                         }
                         return createElement(
-                            resolveComponent('b-field'),
+                            this.parent ? this.parent.$.type : resolveComponent('b-field'),
                             {
                                 type: this.type,
                                 message
