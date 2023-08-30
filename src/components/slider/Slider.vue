@@ -36,7 +36,7 @@
                 :aria-valuemax="max"
                 aria-orientation="horizontal"
                 :aria-label="Array.isArray(ariaLabel) ? ariaLabel[0] : ariaLabel"
-                :aria-disabled="disabled"
+                :aria-disabled="disabled || undefined"
                 @dragstart="onDragStart"
                 @dragend="onDragEnd"
             />
@@ -57,7 +57,7 @@
                 :aria-valuemax="max"
                 aria-orientation="horizontal"
                 :aria-label="Array.isArray(ariaLabel) ? ariaLabel[1] : ''"
-                :aria-disabled="disabled"
+                :aria-disabled="disabled || undefined"
                 @dragstart="onDragStart"
                 @dragend="onDragEnd"
             />
