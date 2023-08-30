@@ -44,8 +44,10 @@ export default {
     },
     render() {
         return createElement(this.tag, {},
-            this.scoped
-                ? this.component.$slots[this.name](this.props)
-                : this.component.$slots[this.name]())
+            this.component.$slots
+                ? this.scoped
+                    ? this.component.$slots[this.name](this.props)
+                    : this.component.$slots[this.name]()
+                : undefined)
     }
 }
