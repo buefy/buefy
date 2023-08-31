@@ -115,6 +115,14 @@ export default {
     },
     methods: {
         giveFocusToTab(tab) {
+            if (Array.isArray(tab)) {
+                // Vue ≥ v3.0 < v3.2.25, refs in v-for are stored as a single object,
+                // but ≥ v3.2.25, refs in v-for are stored in an array (same as Vue 2)
+                tab = tab[0]
+                if (tab == null) {
+                    return
+                }
+            }
             if (tab.$el && tab.$el.focus) {
                 tab.$el.focus()
             } else if (tab.focus) {
