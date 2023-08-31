@@ -379,7 +379,7 @@ export default {
                 (!this.maxDate || nextDay < this.maxDate) &&
                 !this.selectableDate(nextDay)
             ) {
-                nextDay.setDate(day.getDate() + Math.sign(inc))
+                nextDay.setDate(nextDay.getDate() + Math.sign(inc))
             }
             this.setRangeHoverEndDate(nextDay)
             this.$emit('change-focus', nextDay)
