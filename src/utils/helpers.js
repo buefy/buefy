@@ -165,7 +165,7 @@ export function createAbsoluteElement(el) {
 }
 
 export function isVueComponent(c) {
-    return c && c._isVue
+    return c && c.$ != null && c.$.vnode != null
 }
 
 /**
