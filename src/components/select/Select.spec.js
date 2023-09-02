@@ -9,8 +9,8 @@ describe('BSelect', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BSelect')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BSelect')
     })
 
     it('render correctly', () => {
@@ -18,14 +18,14 @@ describe('BSelect', () => {
     })
 
     it('has a select element', () => {
-        expect(wrapper.contains('select')).toBeTruthy()
+        expect(wrapper.find('select').exists()).toBeTruthy()
     })
 
-    it('emit input event with value when value change', () => {
-        wrapper.setProps({ value: true })
+    it('emit input event with value when value change', async () => {
+        await wrapper.setProps({ modelValue: true })
         expect(wrapper.vm.computedValue).toBeTruthy()
         wrapper.vm.computedValue = false
-        const valueEmitted = wrapper.emitted()['input'][0]
+        const valueEmitted = wrapper.emitted()['update:modelValue'][0]
         expect(valueEmitted).toContainEqual(false)
     })
 })
