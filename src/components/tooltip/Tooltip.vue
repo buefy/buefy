@@ -268,7 +268,7 @@ export default {
         isInWhiteList(el) {
             if (el === this.$refs.content) return true
             // All chidren from content
-            if (this.$refs.content !== undefined) {
+            if (this.$refs.content != null) {
                 const children = this.$refs.content.querySelectorAll('*')
                 for (const child of children) {
                     if (el === child) {
