@@ -7,11 +7,11 @@ describe('FormElementMixin', () => {
     HTMLElement.prototype.insertAdjacentElement = jest.fn()
     beforeEach(() => {
         const component = {
-            template: '<div class="b-component"></div>'
+            template: '<div class="b-component"></div>',
+            mixins: [FormElementMixin]
         }
         wrapper = shallowMount(component, {
-            attachToDocument: true,
-            mixins: [FormElementMixin]
+            attachTo: document.body
         })
     })
 
@@ -23,7 +23,7 @@ describe('FormElementMixin', () => {
         wrapper.vm.onFocus()
         wrapper.vm.$nextTick(() => {
             expect(wrapper.vm.isFocused).toBeTruthy()
-            expect(wrapper.emitted()['focus']).toBeTruthy()
+            expect(wrapper.emitted().focus).toBeTruthy()
             done()
         })
     })
@@ -33,7 +33,7 @@ describe('FormElementMixin', () => {
         wrapper.vm.onBlur()
         wrapper.vm.$nextTick(() => {
             expect(wrapper.vm.isFocused).toBeFalsy()
-            expect(wrapper.emitted()['blur']).toBeTruthy()
+            expect(wrapper.emitted().blur).toBeTruthy()
             expect(wrapper.vm.checkHtml5Validity).toHaveBeenCalled()
             done()
         })
