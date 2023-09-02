@@ -9,7 +9,7 @@
         v-bind="$attrs"
         @click.prevent="page.click"
         :aria-label="page['aria-label']"
-        :aria-current="page.isCurrent"
+        :aria-current="page.isCurrent || undefined"
     >
         <slot>{{ page.number }}</slot>
     </component>
