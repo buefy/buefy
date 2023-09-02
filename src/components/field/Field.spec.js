@@ -1,18 +1,19 @@
-import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import BField from '@components/field/Field'
 import BFieldBody from '@components/field/FieldBody'
 import BInput from '@components/input/Input'
 
-const localVue = createLocalVue()
-localVue.component('b-field', BField)
-localVue.component('b-field-body', BFieldBody)
-localVue.component('b-input', BInput)
+const components = {
+    'b-field': BField,
+    'b-field-body': BFieldBody,
+    'b-input': BInput
+}
 
 describe('BField', () => {
     it('is called', () => {
         const wrapper = shallowMount(BField)
-        expect(wrapper.name()).toBe('BField')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BField')
     })
 
     it('render correctly', () => {
@@ -22,55 +23,61 @@ describe('BField', () => {
 
     it('sets fieldLabelSize to "is-normal" when horizontal==true and input elements are inside', () => {
         const wrapper = mount(BField, {
-            localVue,
-            propsData: { horizontal: true },
-            slots: { default: [BInput] }
+            props: { horizontal: true },
+            slots: { default: [BInput] },
+            global: {
+                components
+            }
         })
 
-        expect(wrapper.vm._data).toEqual(expect.objectContaining({fieldLabelSize: 'is-normal'}))
+        expect(wrapper.vm.$data).toEqual(expect.objectContaining({ fieldLabelSize: 'is-normal' }))
     })
 
-    it('sets input class with type value when prop "type" is changed dynamically', () => {
+    it('sets input class with type value when prop "type" is changed dynamically', async () => {
         const type = 'is-danger'
         const wrapper = mount(BField, {
-            localVue,
-            slots: { default: [BInput] }
+            slots: { default: [BInput] },
+            global: {
+                components
+            }
         })
-        wrapper.setProps({ type })
+        await wrapper.setProps({ type })
         expect(wrapper.find('.input').classes()).toContain(type)
     })
 
     describe('class names for the root div.field', () => {
         it('contains "is-expanded" when prop "expanded" is set', () => {
-            const wrapper = shallowMount(BField, { propsData: { expanded: true } })
+            const wrapper = shallowMount(BField, { props: { expanded: true } })
             expect(wrapper.find('.field').classes()).toContain('is-expanded')
         })
     })
 
     describe('Passing a message prop', () => {
-        const generateMountOptions = ({message, slot}) => {
+        const generateMountOptions = ({ message, slot }) => {
             return {
-                propsData: {message},
-                localVue,
+                props: { message },
                 slots: {
-                    default: [BInput, '<button class="button">Button</button>']
+                    default: [BInput, '<button class="button">Button</button>'],
+                    ...(slot ? { message: slot } : {})
                 },
-                scopedSlots: slot ? {message: slot} : {}
+                global: {
+                    components
+                }
             }
         }
 
         it('adds a help <p> element in the root div.field when "message" prop is passed', () => {
             const message = 'Some string message'
-            const mountOptions = generateMountOptions({message})
+            const mountOptions = generateMountOptions({ message })
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('.field').find('p.help').text()).toEqual(message)
         })
 
-        it('changes the <p> element content in the root div.field when "message" prop is changed dynamically', () => {
+        it('changes the <p> element content in the root div.field when "message" prop is changed dynamically', async () => {
             const message = 'Some string message'
             const mountOptions = generateMountOptions({ message: 'initial message' })
             const wrapper = shallowMount(BField, mountOptions)
-            wrapper.setProps({ message })
+            await wrapper.setProps({ message })
             expect(wrapper.find('.field').find('p.help').text()).toEqual(message)
         })
 
@@ -82,7 +89,7 @@ describe('BField', () => {
                 'Some string message 4',
                 'Some string message 5'
             ]
-            const mountOptions = generateMountOptions({message})
+            const mountOptions = generateMountOptions({ message })
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('p.help').html().split('<br>').length).toEqual(message.length)
         })
@@ -95,7 +102,7 @@ describe('BField', () => {
                 message4: 'Some string message 4',
                 message5: 'Some string message 5'
             }
-            const mountOptions = generateMountOptions({message})
+            const mountOptions = generateMountOptions({ message })
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('p.help').html().split('<br>').length).toEqual(Object.keys(message).length)
         })
@@ -111,15 +118,15 @@ describe('BField', () => {
                 'Some string message 4',
                 'Some string message 5'
             ]
-            const mountOptions = generateMountOptions({message})
+            const mountOptions = generateMountOptions({ message })
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('p.help').html().split('<br>').length).toEqual(5)
         })
 
         it('messages are passed down to the message slot', () => {
             const message = 'Some string message'
-            const slot = '<template #message="{ messages }">{{ messages }}</template>'
-            const mountOptions = generateMountOptions({message, slot})
+            const slot = '<template #message="{ messages }">{{ messages.join("") }}</template>'
+            const mountOptions = generateMountOptions({ message, slot })
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('p.help').text()).toEqual(message)
         })
@@ -127,12 +134,14 @@ describe('BField', () => {
 
     describe('managing groups', () => {
         const mountOptions = {
-            propsData: {
+            props: {
                 grouped: true
             },
-            localVue,
             slots: {
                 default: [BInput, '<button class="button">Button</button>']
+            },
+            global: {
+                components
             }
         }
 
@@ -143,11 +152,11 @@ describe('BField', () => {
         })
 
         it('appends the classname with value of position when "position" prop is passed', () => {
-            const {propsData} = mountOptions
+            const { props } = mountOptions
             const wrapper = mount(BField, {
                 ...mountOptions,
-                propsData: {
-                    ...propsData,
+                props: {
+                    ...props,
                     position: 'is-centered'
                 }
             })
@@ -157,11 +166,11 @@ describe('BField', () => {
         })
 
         it('contains "is-grouped-multiline" when prop "groupMultiline" is set', () => {
-            const {propsData} = mountOptions
+            const { props } = mountOptions
             const wrapper = mount(BField, {
                 ...mountOptions,
-                propsData: {
-                    ...propsData,
+                props: {
+                    ...props,
                     groupMultiline: true
                 }
             })
@@ -170,11 +179,11 @@ describe('BField', () => {
         })
 
         it('adds a label element under the root div.field when "label" prop is passed', () => {
-            const {propsData} = mountOptions
+            const { props } = mountOptions
             const wrapper = shallowMount(BField, {
                 ...mountOptions,
-                propsData: {
-                    ...propsData,
+                props: {
+                    ...props,
                     label: 'Some label'
                 }
             })
@@ -185,13 +194,15 @@ describe('BField', () => {
     describe('Passing true for horizontal prop', () => {
         const generateMountOptions = (props) => {
             return {
-                propsData: {
+                props: {
                     horizontal: true,
                     ...props
                 },
-                localVue,
                 slots: {
                     default: BField
+                },
+                global: {
+                    components
                 }
             }
         }
@@ -210,14 +221,14 @@ describe('BField', () => {
         })
 
         it('adds a label element under .field-label when "label" prop is passed', () => {
-            const mountOptions = generateMountOptions({label: 'Some label'})
+            const mountOptions = generateMountOptions({ label: 'Some label' })
             const wrapper = mount(BField, mountOptions)
             expect(wrapper.find('.field-label').find('label.label').isVisible()).toBe(true)
         })
 
         it('adds a help <p> element in the div.field-body when "message" prop is passed', () => {
             const message = 'Some message'
-            const mountOptions = generateMountOptions({message})
+            const mountOptions = generateMountOptions({ message })
             const wrapper = mount(BField, mountOptions)
             const helpWrapper = wrapper.find('.field').find('.field-body').find('.help')
             expect(helpWrapper.isVisible()).toBe(true)

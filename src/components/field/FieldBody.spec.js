@@ -1,10 +1,7 @@
-import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import BFieldBody from '@components/field/FieldBody'
 import BField from '@components/field/Field'
 import BInput from '@components/input/Input'
-
-const localVue = createLocalVue()
-localVue.component('b-field', BField)
 
 describe('BFieldBody', () => {
     it('is called', () => {
@@ -13,8 +10,8 @@ describe('BFieldBody', () => {
                 default: 'content'
             }
         })
-        expect(wrapper.name()).toBe('BFieldBody')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BFieldBody')
     })
 
     it('render correctly', () => {
@@ -42,9 +39,13 @@ describe('BFieldBody', () => {
                 slots: {
                     default: BInput
                 },
-                localVue
+                global: {
+                    components: {
+                        'b-field': BField
+                    }
+                }
             })
-            expect(wrapper.exists(BField)).toBe(true)
+            expect(wrapper.findComponent(BField).exists()).toBe(true)
         })
 
         it('should pass type prop to the b-field element', () => {
@@ -53,12 +54,16 @@ describe('BFieldBody', () => {
                 slots: {
                     default: BInput
                 },
-                propsData: {
+                props: {
                     type
                 },
-                localVue
+                global: {
+                    components: {
+                        'b-field': BField
+                    }
+                }
             })
-            expect(wrapper.find(BField).find('input').classes()).toContain(type)
+            expect(wrapper.findComponent(BField).find('input').classes()).toContain(type)
         })
 
         it('should render the message when message prop is passed', () => {
@@ -68,14 +73,23 @@ describe('BFieldBody', () => {
                 slots: {
                     default: BInput
                 },
-                propsData: {
+                props: {
                     type,
                     message
                 },
-                localVue
+                global: {
+                    components: {
+                        'b-field': BField
+                    }
+                }
             })
             expect(wrapper.find('p.help').classes()).toContain(type)
             expect(wrapper.find('p.help').text()).toBe(message)
         })
+    })
+
+    it('should be able to be instantiated without the default slot', () => {
+        const wrapper = shallowMount(BFieldBody)
+        expect(wrapper.find('.field-body').exists()).toBe(true)
     })
 })
