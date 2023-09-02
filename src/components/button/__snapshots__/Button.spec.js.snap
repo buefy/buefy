@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BButton render correctly 1`] = `
-<button type="button" class="button">
-    <!---->
-    <!---->
-    <!----></button>
+<button class="button" type="button">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</button>
 `;

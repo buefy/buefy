@@ -1,6 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import BButton from '@components/button/Button'
-import config, {setOptions} from '@utils/config'
+import config, { setOptions } from '@utils/config'
 
 let wrapper
 
@@ -10,8 +10,8 @@ describe('BButton', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BButton')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BButton')
     })
 
     it('render correctly', () => {
@@ -21,8 +21,8 @@ describe('BButton', () => {
     it('emit a click event', () => {
         const click = jest.fn()
         wrapper = shallowMount(BButton, {
-            listeners: {
-                'click': click
+            props: {
+                onClick: click
             }
         })
         wrapper.find('.button').trigger('click')
@@ -31,15 +31,15 @@ describe('BButton', () => {
 
     it('should show icon', () => {
         wrapper = mount(BButton, {
-            propsData: {
+            props: {
                 iconLeft: 'plus'
             }
         })
-        expect(wrapper.contains('.icon')).toBe(true)
+        expect(wrapper.find('.icon').exists()).toBe(true)
     })
 
-    it('should be medium', () => {
-        wrapper.setProps({
+    it('should be medium', async () => {
+        await wrapper.setProps({
             size: 'is-medium'
         })
         expect(wrapper.classes()).toContain('is-medium')
@@ -53,7 +53,7 @@ describe('BButton', () => {
             }
         })
         expect(wrapper.classes()).toContain('is-small')
-        expect(wrapper.contains('.icon')).toBe(true)
+        expect(wrapper.find('.icon').exists()).toBe(true)
     })
 
     it('should be large + icon', () => {
@@ -64,42 +64,42 @@ describe('BButton', () => {
             }
         })
         expect(wrapper.classes()).toContain('is-large')
-        expect(wrapper.contains('.icon')).toBe(true)
+        expect(wrapper.find('.icon').exists()).toBe(true)
     })
 
-    it('should be rounded when default config set to true', () => {
+    it('should be rounded when default config set to true', async () => {
         setOptions(Object.assign(config, {
             defaultButtonRounded: true
         }))
-        wrapper.setProps({
+        await wrapper.setProps({
             rounded: config.defaultButtonRounded
         })
         expect(wrapper.classes()).toContain('is-rounded')
     })
 
-    it('should set tag to "button" if disabled', () => {
-        wrapper.setProps({
+    it('should set tag to "button" if disabled', async () => {
+        await wrapper.setProps({
             tag: 'a'
         })
         expect(wrapper.vm.computedTag).toBe('a')
 
         wrapper = shallowMount(BButton, {
             attrs: {
-                'disabled': true
+                disabled: true
             }
         })
         expect(wrapper.vm.computedTag).toBe('button')
     })
 
-    it('should set type attribute', () => {
-        wrapper.setProps({
+    it('should set type attribute', async () => {
+        await wrapper.setProps({
             nativeType: 'submit'
         })
         expect(wrapper.element.type).toBe('submit')
     })
 
-    it("shouldn't set type attribute unless if the tag is button", () => {
-        wrapper.setProps({
+    it("shouldn't set type attribute unless if the tag is button", async () => {
+        await wrapper.setProps({
             tag: 'a'
         })
         expect(wrapper.element.type).toBeFalsy()
