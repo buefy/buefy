@@ -128,7 +128,7 @@ export default {
             sortMultipleSelect: '',
             sortMultipleSelectIndex: -1,
             mobileSort: this.currentSortColumn,
-            mobileSortIndex: this.columns.indexOf(this.currentSortColumn),
+            mobileSortIndex: this.columns ? this.columns.indexOf(this.currentSortColumn) : -1,
             defaultEvent: {
                 shiftKey: true,
                 altKey: true,
@@ -168,12 +168,14 @@ export default {
         mobileSortIndex(index) {
             if (index !== -1) {
                 this.mobileSort = this.columns[index]
-            } else {
-                this.mobileSort = null
             }
+            // `index` becomes -1 if `currentSortColumn` is not in `columns`
+            // never resets to null but retains `mobileSort` in that case
         },
         currentSortColumn(column) {
-            this.mobileSortIndex = this.columns.indexOf(column)
+            // replaces `mobileSort` whether `column` is in `columns` or not
+            this.mobileSort = column
+            this.mobileSortIndex = this.columns ? this.columns.indexOf(column) : -1
         },
         columns(newColumns) {
             if (this.sortMultiple) {

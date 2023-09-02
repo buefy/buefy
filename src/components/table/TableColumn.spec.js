@@ -17,11 +17,11 @@ const WrapperComp = {
 
 describe('BTableColumn', () => {
     beforeEach(() => {
-        wrapper = mount(WrapperComp, { sync: false }).find({ ref: 'testItem' })
+        wrapper = mount(WrapperComp).findComponent({ ref: 'testItem' })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BTableColumn')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BTableColumn')
     })
 })
