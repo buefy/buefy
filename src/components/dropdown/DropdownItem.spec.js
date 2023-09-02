@@ -1,42 +1,42 @@
 import { shallowMount } from '@vue/test-utils'
 import BDropdownItem from '@components/dropdown/DropdownItem'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 let wrapper
 const dropdownSelected = 'val'
-const BDropdown = {
-    mixins: [ProviderParentMixin('dropdown')],
-    template: '<b-dropdown-stub></b-dropdown-stub>',
-    data() {
-        return {
-            selected: dropdownSelected
-        }
-    }
-}
 
 describe('BDropdownItem', () => {
+    let parent
+
     beforeEach(() => {
+        parent = {
+            selected: dropdownSelected,
+            selectItem: jest.fn()
+        } // mocks injected Dropdown
         wrapper = shallowMount(BDropdownItem, {
-            parentComponent: BDropdown
+            global: {
+                provide: {
+                    bdropdown: parent
+                }
+            }
         })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BDropdownItem')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BDropdownItem')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('returns item classes accordingly', () => {
+    it('returns item classes accordingly', async () => {
         const value = dropdownSelected
         const hasLink = true
         const disabled = false
         const paddingless = true
         const isActive = true
-        wrapper.setProps({
+        await wrapper.setProps({
             value,
             hasLink,
             disabled,
@@ -51,23 +51,21 @@ describe('BDropdownItem', () => {
         })
     })
 
-    it('returns if item is clickable accordingly', () => {
+    it('returns if item is clickable accordingly', async () => {
         expect(wrapper.vm.isClickable).toBeTruthy()
 
-        wrapper.setProps({ separator: true })
+        await wrapper.setProps({ separator: true })
         expect(wrapper.vm.isClickable).toBeFalsy()
     })
 
-    it('react accordingly when the item is selected', () => {
-        wrapper.vm.$parent.selectItem = jest.fn()
-
-        wrapper.setProps({ separator: true })
+    it('react accordingly when the item is selected', async () => {
+        await wrapper.setProps({ separator: true })
         wrapper.vm.selectItem()
-        expect(wrapper.vm.$parent.selectItem).not.toHaveBeenCalled()
+        expect(parent.selectItem).not.toHaveBeenCalled()
 
-        wrapper.setProps({ separator: false })
+        await wrapper.setProps({ separator: false })
         wrapper.vm.selectItem()
-        expect(wrapper.vm.$parent.selectItem).toHaveBeenCalled()
-        expect(wrapper.emitted()['click']).toBeTruthy()
+        expect(parent.selectItem).toHaveBeenCalled()
+        expect(wrapper.emitted().click).toBeTruthy()
     })
 })

@@ -257,7 +257,7 @@ export default {
             if (el === this.$refs.dropdownMenu) return true
             if (el === this.$refs.trigger) return true
             // All chidren from dropdown
-            if (this.$refs.dropdownMenu !== undefined) {
+            if (this.$refs.dropdownMenu != null) {
                 const children = this.$refs.dropdownMenu.querySelectorAll('*')
                 for (const child of children) {
                     if (el === child) {
@@ -266,7 +266,7 @@ export default {
                 }
             }
             // All children from trigger
-            if (this.$refs.trigger !== undefined) {
+            if (this.$refs.trigger != null) {
                 const children = this.$refs.trigger.querySelectorAll('*')
                 for (const child of children) {
                     if (el === child) {
