@@ -14,7 +14,7 @@
             tabindex="-1"
             :role="ariaRole"
             :aria-label="ariaLabel"
-            :aria-modal="ariaModal"
+            :aria-modal="ariaModal || undefined"
         >
             <div class="modal-background" @click="cancel('outside')" />
             <div

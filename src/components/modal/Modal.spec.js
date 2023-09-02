@@ -1,24 +1,29 @@
+import { transformVNodeArgs } from 'vue'
 import { shallowMount } from '@vue/test-utils'
-import BModal from '@components/modal/Modal'
-import config, {setOptions} from '@utils/config'
+import { BModal, ModalProgrammatic } from '@components/modal'
+import config, { setOptions } from '@utils/config'
 
 let wrapper
 
 describe('BModal', () => {
     beforeEach(() => {
         wrapper = shallowMount(BModal, {
-            propsData: {
-                active: true
+            props: {
+                modelValue: true
             },
-            stubs: {
-                transition: false
+            global: {
+                stubs: {
+                    // intentionally stubs transition component
+                    // to avoid potentially flaky snapshots
+                    transition: true
+                }
             }
         })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BModal')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BModal')
     })
 
     it('render correctly', () => {
@@ -47,20 +52,20 @@ describe('BModal', () => {
         expect(wrapper.vm.scroll).toEqual(config.defaultModalScroll)
     })
 
-    it('sets isActive when active prop is changed', () => {
-        wrapper.setProps({active: false})
+    it('sets isActive when active (modelValue) prop is changed', async () => {
+        await wrapper.setProps({ modelValue: false })
         expect(wrapper.vm.isActive).toBeFalsy()
     })
 
-    it('manage cancel options', () => {
-        wrapper.setProps({canCancel: true})
+    it('manage cancel options', async () => {
+        await wrapper.setProps({ canCancel: true })
         expect(wrapper.vm.cancelOptions).toEqual(config.defaultModalCanCancel)
 
-        wrapper.setProps({canCancel: false})
+        await wrapper.setProps({ canCancel: false })
         expect(wrapper.vm.cancelOptions).toEqual([])
 
         const options = ['escape']
-        wrapper.setProps({canCancel: options})
+        await wrapper.setProps({ canCancel: options })
         expect(wrapper.vm.cancelOptions).toEqual(options)
 
         wrapper.vm.close = jest.fn(() => wrapper.vm.close)
@@ -69,31 +74,47 @@ describe('BModal', () => {
         expect(wrapper.vm.close).toHaveBeenCalledTimes(1)
     })
 
-    it('close on escape', () => {
-        wrapper.setProps({canCancel: true})
-        wrapper.setProps({active: true})
+    it('close on escape', async () => {
+        await wrapper.setProps({ canCancel: true })
+        await wrapper.setProps({ modalValue: true })
         wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
-        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        const event = new KeyboardEvent('keyup', { key: 'Escape' })
         wrapper.vm.keyPress({})
         wrapper.vm.keyPress(event)
         expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
     })
 
-    it('emit events on close', () => {
-        jest.useFakeTimers()
-
-        wrapper.vm.$destroy = jest.fn(() => wrapper.vm.$destroy)
+    it('emit events on close but stay active', () => {
         wrapper.vm.close()
-        expect(wrapper.emitted()['close']).toBeTruthy()
-        expect(wrapper.emitted()['update:active']).toBeTruthy()
+        expect(wrapper.emitted().close).toBeTruthy()
+        expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+        expect(wrapper.vm.isActive).toBeTruthy()
+    })
 
-        wrapper.setProps({programmatic: true})
+    it('should be deactivated on close if programmatic', async () => {
+        await wrapper.setProps({ programmatic: true })
         wrapper.vm.close()
         expect(wrapper.vm.isActive).toBeFalsy()
+    })
 
-        expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 150)
-        jest.advanceTimersByTime(150)
-        expect(wrapper.vm.$destroy).toHaveBeenCalled()
+    describe('programmatically opened', () => {
+        beforeEach(() => {
+            // resets stubs introduced by @vue/test-utils
+            // otherwise, every BModal becomes a stub
+            transformVNodeArgs()
+        })
+
+        it('should be able to be manually closed', async () => {
+            const modal = ModalProgrammatic.open({
+                content: 'content'
+            })
+            await modal.$nextTick() // makes sure DOM is updated
+            expect(document.querySelector('.modal')).toBeTruthy()
+            jest.useFakeTimers()
+            modal.close()
+            jest.advanceTimersByTime(150)
+            expect(document.querySelector('.modal')).toBeFalsy()
+        })
     })
 
     it('emit event on transition after-enter hook.', () => {
