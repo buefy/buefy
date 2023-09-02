@@ -29,6 +29,10 @@
         <b-field label="Message">
             <b-input maxlength="200" type="textarea"></b-input>
         </b-field>
+
+        <b-field label="Placeholder and Readonly">
+            <b-input placeholder="Awesome!" :readonly="true"></b-input>
+        </b-field>
     </section>
 </template>
 
