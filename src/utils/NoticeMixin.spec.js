@@ -7,11 +7,11 @@ describe('NoticeMixin', () => {
     HTMLElement.prototype.insertAdjacentElement = jest.fn()
     beforeEach(() => {
         const component = {
-            template: '<div class="b-component"></div>'
+            template: '<div class="b-component"></div>',
+            mixins: [NoticeMixin]
         }
         wrapper = shallowMount(component, {
-            attachToDocument: true,
-            mixins: [NoticeMixin]
+            attachTo: document.body
         })
     })
 
@@ -19,7 +19,7 @@ describe('NoticeMixin', () => {
         expect(wrapper.vm.isActive).toBeTruthy()
     })
 
-    it('returns correct transition depending on position', () => {
+    it('returns correct transition depending on position', async () => {
         const topTransition = {
             enter: 'fadeInDown',
             leave: 'fadeOut'
@@ -36,8 +36,8 @@ describe('NoticeMixin', () => {
             'is-bottom-right': bottomTransition,
             'is-bottom-left': bottomTransition
         }
-        for (let [key, value] of Object.entries(expected)) {
-            wrapper.setProps({position: key})
+        for (const [key, value] of Object.entries(expected)) {
+            await wrapper.setProps({ position: key })
             expect(wrapper.vm.transition).toEqual(value)
         }
 
