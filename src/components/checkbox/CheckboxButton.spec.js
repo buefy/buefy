@@ -9,8 +9,8 @@ describe('BCheckboxButton', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BCheckboxButton')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BCheckboxButton')
     })
 
     it('render correctly', () => {
@@ -18,20 +18,20 @@ describe('BCheckboxButton', () => {
     })
 
     it('has an input checkbox', () => {
-        expect(wrapper.contains('label input[type=checkbox]')).toBeTruthy()
+        expect(wrapper.find('label input[type=checkbox]').exists()).toBeTruthy()
     })
 
-    it('emit input event with value when value change', () => {
-        wrapper.setProps({ value: true })
+    it('emit input event with value when value change', async () => {
+        await wrapper.setProps({ modelValue: true })
         expect(wrapper.vm.computedValue).toBeTruthy()
         wrapper.vm.computedValue = false
-        const valueEmitted = wrapper.emitted()['input'][0]
+        const valueEmitted = wrapper.emitted()['update:modelValue'][0]
         expect(valueEmitted).toContainEqual(false)
     })
 
-    it('manage checked accordingly when value is an array', () => {
+    it('manage checked accordingly when value is an array', async () => {
         wrapper.vm.computedValue = [1, 2, 3]
-        wrapper.setProps({ nativeValue: 1 })
+        await wrapper.setProps({ nativeValue: 1 })
         expect(wrapper.vm.checked).toBeTruthy()
     })
 
