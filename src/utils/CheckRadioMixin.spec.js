@@ -7,17 +7,17 @@ describe('CheckRadioMixin', () => {
     HTMLElement.prototype.insertAdjacentElement = jest.fn()
     beforeEach(() => {
         const component = {
-            template: '<div class="b-component"></div>'
+            template: '<div class="b-component"></div>',
+            mixins: [CheckRadioMixin]
         }
         wrapper = shallowMount(component, {
-            attachToDocument: true,
-            mixins: [CheckRadioMixin]
+            attachTo: document.body
         })
     })
 
-    it('set value prop', () => {
-        wrapper.setProps({
-            value: 'test'
+    it('set value prop', async () => {
+        await wrapper.setProps({
+            modelValue: 'test'
         })
         expect(wrapper.vm.newValue).toEqual('test')
     })
