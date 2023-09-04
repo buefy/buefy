@@ -2,12 +2,12 @@
 
 exports[`BDatepickerTableRow render correctly 1`] = `
 <div class="datepicker-row">
-    <!----> <a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>31</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>1</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>2</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>3</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>4</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>5</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>6</span>
+    <!----> <a id="day-0-31-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>31</span>
+        <!----></a><a id="day-0-1-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>1</span>
+        <!----></a><a id="day-1-2-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>2</span>
+        <!----></a><a id="day-1-3-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>3</span>
+        <!----></a><a id="day-1-4-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>4</span>
+        <!----></a><a id="day-1-5-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>5</span>
+        <!----></a><a id="day-1-6-2018" role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>6</span>
         <!----></a></div>
 `;
