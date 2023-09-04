@@ -9,7 +9,7 @@
         </a>
         <template v-for="(weekDay, index) in week">
             <a
-                :id="`day-${weekDay.getMonth()}-${weekDay.getDate()}-${weekDay.getFullYear()}`"
+                :id="getWeekDayId(weekDay)"
                 :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
@@ -33,7 +33,7 @@
             </a>
             <div
                 v-else
-                :id="`day-${weekDay.getMonth()}-${weekDay.getDate()}-${weekDay.getFullYear()}`"
+                :id="getWeekDayId(weekDay)"
                 :key="index"
                 :class="classObject(weekDay)"
                 class="datepicker-cell">
@@ -103,6 +103,9 @@ export default {
         }
     },
     methods: {
+        getWeekDayId(weekDay) {
+            return `day-${weekDay.getMonth()}-${weekDay.getDate()}-${weekDay.getFullYear()}`
+        },
         firstWeekOffset(year, dow, doy) {
             // first-week day -- which january is always in the first week (4 for iso, 1 for other)
             const fwd = 7 + dow - doy
