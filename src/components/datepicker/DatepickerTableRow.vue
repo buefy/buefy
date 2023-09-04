@@ -9,7 +9,7 @@
         </a>
         <template v-for="(weekDay, index) in week">
             <a
-                :id="getWeekDayId(weekDay)"
+                :id="weekDayId(weekDay)"
                 :ref="`day-${weekDay.getMonth()}-${weekDay.getDate()}`"
                 v-if="selectableDate(weekDay) && !disabled"
                 :key="index"
@@ -33,7 +33,7 @@
             </a>
             <div
                 v-else
-                :id="getWeekDayId(weekDay)"
+                :id="weekDayId(weekDay)"
                 :key="index"
                 :class="classObject(weekDay)"
                 class="datepicker-cell">
@@ -103,7 +103,7 @@ export default {
         }
     },
     methods: {
-        getWeekDayId(weekDay) {
+        weekDayId(weekDay) {
             return `day-${weekDay.getMonth()}-${weekDay.getDate()}-${weekDay.getFullYear()}`
         },
         firstWeekOffset(year, dow, doy) {
