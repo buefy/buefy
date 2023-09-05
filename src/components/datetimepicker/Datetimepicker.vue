@@ -146,7 +146,7 @@ export default {
         },
         minDatetime: Date,
         maxDatetime: Date,
-        nearbyMonthDays :{
+        nearbyMonthDays: {
             type: Boolean,
             default: true
         },
