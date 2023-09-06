@@ -55,19 +55,15 @@ export default {
                 class: 'collapse-trigger',
                 onClick: this.toggle
             },
-            {
-                default: () => {
-                    return this.$slots.trigger
-                        ? this.$slots.trigger({ open: this.isOpen })
-                        : undefined
-                }
-            }
+            this.$slots.trigger
+                ? this.$slots.trigger({ open: this.isOpen })
+                : undefined
         )
         const content = withDirectives(
             createElement(
                 Transition,
                 { name: this.animation },
-                [
+                () => [
                     createElement(
                         'div',
                         {
@@ -83,13 +79,7 @@ export default {
         return createElement(
             'div',
             { class: 'collapse' },
-            {
-                default: () => {
-                    return this.position === 'is-top'
-                        ? [trigger, content]
-                        : [content, trigger]
-                }
-            }
+            this.position === 'is-top' ? [trigger, content] : [content, trigger]
         )
     }
 }
