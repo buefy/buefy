@@ -1,21 +1,21 @@
+import { h } from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import BSlotComponent from '@utils/SlotComponent'
 
 describe('BSlotComponent', () => {
     const MockComponent = {
-        render: (h) => h('div', {}, 'Hello!')
+        render: () => h('div', {}, 'Hello!')
     }
-    const defaultEvent = 'hook:updated'
 
     it('is called', () => {
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: {}
             }
         })
 
-        expect(wrapper.name()).toBe('BSlotComponent')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BSlotComponent')
     })
 
     it('default render', () => {
@@ -26,7 +26,7 @@ describe('BSlotComponent', () => {
             }
         })
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: Component.vm
             }
         })
@@ -43,7 +43,7 @@ describe('BSlotComponent', () => {
         })
         const tag = 'span'
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: Component.vm,
                 tag: tag,
                 name: slotName
@@ -60,11 +60,11 @@ describe('BSlotComponent', () => {
             }
         })
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: Component.vm
             }
         })
-        Component.vm.$emit(defaultEvent, {})
+        Component.vm.$forceUpdate()
         await wrapper.vm.$nextTick()
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
     })
@@ -76,21 +76,45 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const refresh = jest.fn()
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: Component.vm
-            },
-            methods: {
-                refresh
             }
         })
         Component.vm.$forceUpdate()
         await Component.vm.$nextTick()
+        expect(spyOnRefresh).toHaveBeenCalledTimes(1)
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+        spyOnRefresh.mockRestore()
     })
 
-    it('refresh', () => {
+    it('refresh on default event with existing handler', async () => {
+        const MockComponent = {
+            render: () => h('div', {}, 'Hello!'),
+            updated: jest.fn()
+        }
+        const slot = '<span>Content</span>'
+        const Component = shallowMount(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const wrapper = shallowMount(BSlotComponent, {
+            props: {
+                component: Component.vm
+            }
+        })
+        Component.vm.$forceUpdate()
+        await Component.vm.$nextTick()
+        expect(MockComponent.updated).toHaveBeenCalledTimes(1)
+        expect(spyOnRefresh).toHaveBeenCalledTimes(1)
+        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+        spyOnRefresh.mockRestore()
+    })
+
+    it('refresh on custom event', () => {
         const event = 'component-event'
         const slot = '<span>Content</span>'
         const Component = shallowMount(MockComponent, {
@@ -98,39 +122,162 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const refresh = jest.fn()
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: Component.vm,
                 event
-            },
-            methods: {
-                refresh
             }
         })
         Component.vm.$emit(event, {})
-        expect(refresh).toHaveBeenCalledTimes(1)
+        expect(spyOnRefresh).toHaveBeenCalledTimes(1)
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+        spyOnRefresh.mockRestore()
     })
 
-    it('destroy', () => {
+    it('refresh on custom event with existing handler (default case)', () => {
+        const event = 'component-event'
+        const slot = '<span>Content</span>'
+        const existingHandler = jest.fn()
+        const Component = shallowMount(MockComponent, {
+            props: {
+                'onComponent-event': existingHandler
+            },
+            slots: {
+                default: slot
+            }
+        })
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const wrapper = shallowMount(BSlotComponent, {
+            props: {
+                component: Component.vm,
+                event
+            }
+        })
+        Component.vm.$emit(event, {})
+        expect(existingHandler).toHaveBeenCalledTimes(1)
+        expect(spyOnRefresh).toHaveBeenCalledTimes(1)
+        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+        spyOnRefresh.mockRestore()
+    })
+
+    it('refresh on custom event with existing handler (camelized case)', () => {
+        const event = 'component-event'
+        const slot = '<span>Content</span>'
+        const existingHandler = jest.fn()
+        const Component = shallowMount(MockComponent, {
+            props: {
+                onComponentEvent: existingHandler
+            },
+            slots: {
+                default: slot
+            }
+        })
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const wrapper = shallowMount(BSlotComponent, {
+            props: {
+                component: Component.vm,
+                event
+            }
+        })
+        Component.vm.$emit(event, {})
+        expect(existingHandler).toHaveBeenCalledTimes(1)
+        expect(spyOnRefresh).toHaveBeenCalledTimes(1)
+        expect(wrapper.html()).toBe(`<div>${slot}</div>`)
+        spyOnRefresh.mockRestore()
+    })
+
+    it('destroy', async () => {
         const slot = '<span>Content</span>'
         const Component = shallowMount(MockComponent, {
             slots: {
                 default: slot
             }
         })
-        const refresh = jest.fn()
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
-            propsData: {
+            props: {
                 component: Component.vm
-            },
-            methods: {
-                refresh
             }
         })
-        wrapper.destroy()
-        Component.vm.$emit(defaultEvent, {})
-        expect(refresh).toHaveBeenCalledTimes(0)
+        wrapper.unmount()
+        Component.vm.$forceUpdate()
+        await Component.vm.$nextTick()
+        expect(spyOnRefresh).toHaveBeenCalledTimes(0)
+        spyOnRefresh.mockRestore()
+    })
+
+    it('destroy with existing handler', async () => {
+        const MockComponent = {
+            render: () => h('div', {}, 'Hello!'),
+            updated: jest.fn()
+        }
+        const slot = '<span>Content</span>'
+        const Component = shallowMount(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const wrapper = shallowMount(BSlotComponent, {
+            props: {
+                component: Component.vm
+            }
+        })
+        wrapper.unmount()
+        Component.vm.$forceUpdate()
+        await Component.vm.$nextTick()
+        expect(MockComponent.updated).toHaveBeenCalledTimes(1)
+        expect(spyOnRefresh).toHaveBeenCalledTimes(0)
+        spyOnRefresh.mockRestore()
+    })
+
+    it('destroy with custom event', async () => {
+        const event = 'component-event'
+        const slot = '<span>Content</span>'
+        const Component = shallowMount(MockComponent, {
+            slots: {
+                default: slot
+            }
+        })
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const wrapper = shallowMount(BSlotComponent, {
+            props: {
+                component: Component.vm,
+                event
+            }
+        })
+        wrapper.unmount()
+        Component.vm.$emit(event, {})
+        await Component.vm.$nextTick()
+        expect(spyOnRefresh).toHaveBeenCalledTimes(0)
+        spyOnRefresh.mockRestore()
+    })
+
+    it('destroy with custom event and existing handler', async () => {
+        const event = 'component-event'
+        const slot = '<span>Content</span>'
+        const existingHandler = jest.fn()
+        const Component = shallowMount(MockComponent, {
+            props: {
+                'onComponent-event': existingHandler
+            },
+            slots: {
+                default: slot
+            }
+        })
+        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const wrapper = shallowMount(BSlotComponent, {
+            props: {
+                component: Component.vm,
+                event
+            }
+        })
+        wrapper.unmount()
+        Component.vm.$emit(event, {})
+        await Component.vm.$nextTick()
+        expect(existingHandler).toHaveBeenCalledTimes(1)
+        expect(spyOnRefresh).toHaveBeenCalledTimes(0)
+        spyOnRefresh.mockRestore()
     })
 })
