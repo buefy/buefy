@@ -189,6 +189,33 @@ describe('BField', () => {
             })
             expect(wrapper.find('.field').find('label').isVisible()).toBe(true)
         })
+
+        it('should reflect validation status of wrapped input unless type is specified', async () => {
+            const wrapper = mount(BField, mountOptions)
+            const input = wrapper.findComponent(BInput)
+
+            input.vm.setInvalid()
+            await wrapper.vm.$nextTick()
+            await wrapper.vm.$nextTick() // setInvalid takes effect on the first $nextTick
+            expect(wrapper.vm.newType).toBe('is-danger')
+
+            input.vm.setValidity(null, null)
+            await wrapper.vm.$nextTick()
+            await wrapper.vm.$nextTick() // setValidity takes effect on the first $nextTick
+            expect(wrapper.vm.newType).toBeFalsy()
+
+            await wrapper.setProps({ type: 'is-warning' })
+
+            input.vm.setInvalid()
+            await wrapper.vm.$nextTick()
+            await wrapper.vm.$nextTick() // setInvalid takes effect on the first $nextTick
+            expect(wrapper.vm.newType).toBe('is-warning')
+
+            input.vm.setValidity(null, null)
+            await wrapper.vm.$nextTick()
+            await wrapper.vm.$nextTick() // setValidity takes effect on the first $nextTick
+            expect(wrapper.vm.newType).toBe('is-warning')
+        })
     })
 
     describe('Passing true for horizontal prop', () => {

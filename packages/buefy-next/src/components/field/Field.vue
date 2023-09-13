@@ -36,7 +36,7 @@
         <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
-                :type="newType"
+                :type="type"
                 :class="innerFieldClasses"
             >
                 <slot />
