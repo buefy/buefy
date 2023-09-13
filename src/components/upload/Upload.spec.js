@@ -9,8 +9,8 @@ describe('BUpload', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BUpload')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BUpload')
     })
 
     it('render correctly', () => {
