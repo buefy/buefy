@@ -225,9 +225,18 @@ export default {
         /**
         * When v-model is changed:
         *   1. Set internal value.
+        *   2. Validate it if the value came from outside;
+        *      i.e., not equal to computedValue
         */
         modelValue(value) {
+            const fromOutside = this.computedValue != value // eslint-disable-line eqeqeq
             this.newValue = value
+            if (fromOutside) {
+                // validation must wait for DOM updated
+                this.$nextTick(() => {
+                    !this.isValid && this.checkHtml5Validity()
+                })
+            }
         },
         type(type) {
             this.newType = type

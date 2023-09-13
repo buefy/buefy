@@ -203,4 +203,88 @@ describe('BInput', () => {
             done()
         })
     })
+
+    describe('validation', () => {
+        let spyOnCheckHtml5Validity
+
+        beforeEach(() => {
+            spyOnCheckHtml5Validity = jest
+                .spyOn(BInput.mixins[0].methods, 'checkHtml5Validity')
+                .mockImplementation(function () {
+                    this.isValid = false
+                })
+        })
+
+        afterEach(() => {
+            spyOnCheckHtml5Validity.mockReset()
+        })
+
+        it('should validate value when updated by user interaction', async () => {
+            const wrapper = shallowMount(BInput, {
+                data: () => ({ isValid: false })
+            })
+
+            // simulates "input" event
+            wrapper.vm.onInput({ target: { value: 'foo' } })
+            await wrapper.vm.$nextTick()
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
+
+            // simulates "change" event
+            await wrapper.setProps({ lazy: true })
+            wrapper.vm.onChange({ target: { value: 'bar' } })
+            await wrapper.vm.$nextTick()
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(2)
+        })
+
+        it('should validate value when programmatically updated', async () => {
+            const wrapper = shallowMount(BInput, {
+                data: () => ({ isValid: false })
+            })
+            await wrapper.setProps({ modelValue: 'foo' })
+            await wrapper.vm.$nextTick()
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
+        })
+
+        describe('via v-model', () => {
+            let root
+            let wrapper
+
+            beforeEach(async () => {
+                root = mount({
+                    template: '<b-input v-model="value" :lazy="lazy" />',
+                    components: { 'b-input': BInput },
+                    data: () => ({
+                        value: '',
+                        lazy: false
+                    })
+                })
+                wrapper = root.findComponent(BInput)
+                // triggers validation and invalidates
+                wrapper.vm.onBlur({})
+                await wrapper.vm.$nextTick()
+                spyOnCheckHtml5Validity.mockClear()
+            })
+
+            it('should validate value once when updated by user interaction', async () => {
+                // simulates "input" event
+                wrapper.vm.onInput({ target: { value: 'foo' } })
+                await wrapper.vm.$nextTick()
+                expect(root.vm.value).toBe('foo')
+                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
+
+                // simulates "change" event
+                await root.setData({ lazy: true })
+                wrapper.vm.onChange({ target: { value: 'bar' } })
+                await wrapper.vm.$nextTick()
+                expect(root.vm.value).toBe('bar')
+                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(2)
+            })
+
+            it('should validate value once when programmatically updated', async () => {
+                await root.setData({ value: 'foo' })
+                await wrapper.vm.$nextTick()
+                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
+            })
+        })
+    })
 })
