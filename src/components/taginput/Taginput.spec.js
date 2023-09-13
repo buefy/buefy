@@ -5,8 +5,8 @@ import BTag from '@components/tag/Tag'
 describe('BTaginput', () => {
     it('is called', () => {
         const wrapper = shallowMount(BTaginput)
-        expect(wrapper.name()).toBe('BTaginput')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BTaginput')
     })
 
     it('render correctly', () => {
@@ -14,13 +14,13 @@ describe('BTaginput', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('no display counter when hasCounter property set for false', () => {
+    it('no display counter when hasCounter property set for false', async () => {
         const wrapper = shallowMount(BTaginput, {
-            propsData: { maxlength: 100 }
+            props: { maxlength: 100 }
         })
         expect(wrapper.find('small.counter').exists()).toBeTruthy()
 
-        wrapper.setProps({ hasCounter: false })
+        await wrapper.setProps({ hasCounter: false })
         expect(wrapper.find('small.counter').exists()).toBeFalsy()
     })
 
@@ -28,9 +28,9 @@ describe('BTaginput', () => {
         const value = ['Test Value']
         const closeType = 'is-danger'
         const wrapper = shallowMount(BTaginput, {
-            propsData: { value, closeType }
+            props: { modelValue: value, closeType }
         })
-        const Tag = wrapper.find(BTag)
+        const Tag = wrapper.findComponent(BTag)
         expect(Tag.attributes('closetype')).toBe(closeType)
     })
 
@@ -38,28 +38,26 @@ describe('BTaginput', () => {
         let firedHeader = false
         let firedFooter = false
         const wrapper = mount(BTaginput, {
-            propsData: {
+            props: {
                 autocomplete: true,
                 iconRight: 'close-circle',
                 iconRightClickable: true,
                 selectableHeader: true,
                 selectableFooter: true,
-                data: ['Frank', 'Eddy', 'Howard']
+                data: ['Frank', 'Eddy', 'Howard'],
+                onIconRightClick: () => {
+                    wrapper.vm.tags = []
+                },
+                onSelectHeader: () => {
+                    firedHeader = true
+                },
+                onSelectFooter: () => {
+                    firedFooter = true
+                }
             },
             slots: {
                 header: '<h1>SLOT HEADER</h1>',
                 footer: '<h1>SLOT FOOTER</h1>'
-            },
-            listeners: {
-                'icon-right-click': () => {
-                    wrapper.vm.tags = []
-                },
-                'select-header': () => {
-                    firedHeader = true
-                },
-                'select-footer': () => {
-                    firedFooter = true
-                }
             }
         })
 
@@ -72,9 +70,9 @@ describe('BTaginput', () => {
         $input.setValue('Frank')
         await wrapper.vm.$nextTick()
 
-        $input.trigger('keydown', {'key': 'Down'})
-        $input.trigger('keydown', {'key': 'Down'})
-        $input.trigger('keydown', {'key': 'Enter'})
+        $input.trigger('keydown', { key: 'Down' })
+        $input.trigger('keydown', { key: 'Down' })
+        $input.trigger('keydown', { key: 'Enter' })
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.tags).toHaveLength(1)
