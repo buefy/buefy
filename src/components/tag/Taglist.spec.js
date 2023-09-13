@@ -9,8 +9,8 @@ describe('BTaglist', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BTaglist')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BTaglist')
     })
 
     it('render correctly', () => {

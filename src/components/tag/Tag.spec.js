@@ -9,24 +9,22 @@ describe('BTag', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BTag')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BTag')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('emit close event when closing if not disabled', () => {
-        wrapper.setProps({ disabled: false })
+    it('emit close event when closing if not disabled', async () => {
+        await wrapper.setProps({ disabled: false })
 
-        const close = jest.fn()
-        wrapper.vm.$on('close', close)
         wrapper.vm.close()
 
-        wrapper.setProps({ disabled: true })
+        await wrapper.setProps({ disabled: true })
         wrapper.vm.close()
 
-        expect(close).toHaveBeenCalledTimes(1)
+        expect(wrapper.emitted().close).toHaveLength(1)
     })
 })
