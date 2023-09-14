@@ -2,18 +2,22 @@
 
 exports[`BSidebar open render correctly 1`] = `
 <div class="b-sidebar">
-    <!---->
-    <div class="sidebar-content is-fixed" style="" name="slide-next">
-        <div class="content"></div>
+  <!--v-if-->
+  <transition-stub name="slide-next" appear="false" persisted="true" css="true">
+    <div class="sidebar-content is-fixed" style="">
+      <div class="content"></div>
     </div>
+  </transition-stub>
 </div>
 `;
 
 exports[`BSidebar render correctly 1`] = `
 <div class="b-sidebar">
-    <!---->
-    <div class="sidebar-content is-fixed" style="display: none;" name="slide-prev">
-        <div class="content"></div>
+  <!--v-if-->
+  <transition-stub name="slide-prev" appear="false" persisted="true" css="true">
+    <div class="sidebar-content is-fixed" style="display: none;">
+      <div class="content"></div>
     </div>
+  </transition-stub>
 </div>
 `;

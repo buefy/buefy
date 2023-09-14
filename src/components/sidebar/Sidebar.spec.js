@@ -13,8 +13,8 @@ describe('BSidebar', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BSidebar')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BSidebar')
     })
 
     it('render correctly', () => {
@@ -23,47 +23,47 @@ describe('BSidebar', () => {
 
     describe('open', () => {
         beforeEach(() => {
-            wrapper.setProps({open: true})
+            wrapper.setProps({ modelValue: true })
         })
 
         it('is called', () => {
-            expect(wrapper.name()).toBe('BSidebar')
-            expect(wrapper.isVueInstance()).toBeTruthy()
+            expect(wrapper.vm).toBeTruthy()
+            expect(wrapper.vm.$options.name).toBe('BSidebar')
         })
 
         it('render correctly', () => {
             expect(wrapper.html()).toMatchSnapshot()
         })
 
-        it('changes isOpen when open prop is modified', () => {
-            wrapper.setProps({open: false})
+        it('changes isOpen when open prop is modified', async () => {
+            await wrapper.setProps({ modelValue: false })
             expect(wrapper.vm.isOpen).toBeFalsy()
             expect(wrapper.vm.transitionName).toBe('slide-prev')
-            wrapper.setProps({open: true})
+            await wrapper.setProps({ modelValue: true })
             expect(wrapper.vm.isOpen).toBeTruthy()
             expect(wrapper.vm.transitionName).toBe('slide-next')
         })
 
-        it('close on cancel', () => {
-            wrapper.setProps({canCancel: true})
+        it('close on cancel', async () => {
+            await wrapper.setProps({ canCancel: true })
             wrapper.vm.isOpen = true
             wrapper.vm.close = jest.fn(() => wrapper.vm.close)
             wrapper.vm.cancel('outside')
 
-            wrapper.setProps({canCancel: false})
+            await wrapper.setProps({ canCancel: false })
             wrapper.vm.cancel('outside')
 
             expect(wrapper.vm.close).toHaveBeenCalledTimes(1)
         })
 
-        it('close on escape', () => {
-            wrapper.setProps({open: true})
+        it('close on escape', async () => {
+            await wrapper.setProps({ modelValue: true })
             wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
-            const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+            const event = new KeyboardEvent('keyup', { key: 'Escape' })
             wrapper.vm.keyPress({})
             wrapper.vm.keyPress(event)
 
-            wrapper.setProps({position: 'static'})
+            await wrapper.setProps({ position: 'static' })
             wrapper.vm.keyPress(event)
 
             expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
@@ -71,8 +71,8 @@ describe('BSidebar', () => {
 
         it('emit events on close', () => {
             wrapper.vm.close()
-            expect(wrapper.emitted()['close']).toBeTruthy()
-            expect(wrapper.emitted()['update:open']).toBeTruthy()
+            expect(wrapper.emitted().close).toBeTruthy()
+            expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
         })
     })
 
@@ -81,23 +81,23 @@ describe('BSidebar', () => {
         beforeEach(() => {
             component.appendChild = jest.fn()
             wrapper = shallowMount(BSidebar, {
-                propsData: {
+                props: {
                     container: component
                 },
-                attachToDocument: true
+                attachTo: document.body
             })
         })
 
         it('Is called', () => {
-            expect(wrapper.name()).toBe('BSidebar')
-            expect(wrapper.isVueInstance()).toBeTruthy()
+            expect(wrapper.vm).toBeTruthy()
+            expect(wrapper.vm.$options.name).toBe('BSidebar')
         })
     })
 
     it('reset events before destroy', () => {
         document.removeEventListener = jest.fn()
 
-        wrapper.destroy()
+        wrapper.unmount()
 
         expect(document.removeEventListener).toBeCalledWith('click', expect.any(Function))
         expect(document.removeEventListener).toBeCalledWith('keyup', expect.any(Function))
