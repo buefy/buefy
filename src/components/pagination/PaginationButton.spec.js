@@ -2,8 +2,8 @@ import { shallowMount } from '@vue/test-utils'
 import BPaginationButton from '@components/pagination/PaginationButton'
 
 let wrapper
-let page = 5
-let defaultProps = {
+const page = 5
+const defaultProps = {
     page: {
         number: page,
         isCurrent: false,
@@ -17,23 +17,23 @@ let defaultProps = {
 describe('BPagination', () => {
     beforeEach(() => {
         wrapper = shallowMount(BPaginationButton, {
-            propsData: defaultProps
+            props: defaultProps
         })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BPaginationButton')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BPaginationButton')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('returns href as expected', () => {
+    it('returns href as expected', async () => {
         expect(wrapper.vm.href).toBe('#')
 
-        wrapper.setProps({ tag: 'button' })
+        await wrapper.setProps({ tag: 'button' })
         expect(wrapper.vm.href).toBeUndefined()
     })
 })

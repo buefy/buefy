@@ -9,11 +9,19 @@ describe('BPagination', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BPagination')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BPagination')
     })
 
     it('render correctly', () => {
+        wrapper = shallowMount(BPagination, {
+            global: {
+                stubs: {
+                    // to test if <b-icon>s are inserted
+                    'b-pagination-button': false
+                }
+            }
+        })
         expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -21,66 +29,64 @@ describe('BPagination', () => {
         expect(wrapper.vm.firstItem).toEqual(1)
     })
 
-    it('returns firstItem accordingly', () => {
-        wrapper.setProps({current: 0})
+    it('returns firstItem accordingly', async () => {
+        await wrapper.setProps({ modelValue: 0 })
         expect(wrapper.vm.firstItem).toEqual(0)
 
-        wrapper.setProps({current: 5})
-        const expected = wrapper.vm.current * wrapper.vm.perPage - wrapper.vm.perPage + 1
+        await wrapper.setProps({ modelValue: 5 })
+        const expected = wrapper.vm.modelValue * wrapper.vm.perPage - wrapper.vm.perPage + 1
         expect(wrapper.vm.firstItem).toEqual(expected)
     })
 
-    it('should emit change with value of 1 when calling first', () => {
-        wrapper.setProps({current: 1})
+    it('should emit change with value of 1 when calling first', async () => {
+        await wrapper.setProps({ modelValue: 1 })
         wrapper.vm.first()
 
-        wrapper.setProps({current: 5})
+        await wrapper.setProps({ modelValue: 5 })
         wrapper.vm.first()
-        expect(wrapper.emitted()['change'][0]).toContainEqual(1)
-        expect(wrapper.emitted()['update:current'][0]).toContainEqual(1)
+        expect(wrapper.emitted().change[0]).toContainEqual(1)
+        expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual(1)
     })
 
-    it('should emit change with value of pageCount when calling last', (done) => {
+    it('should emit change with value of pageCount when calling last', async () => {
         const event = {
             target: {
                 focus: jest.fn()
             }
         }
 
-        wrapper.setProps({current: 5})
+        await wrapper.setProps({ modelValue: 5 })
         wrapper.vm.last(event)
-        expect(wrapper.emitted()['change'][0]).toContainEqual(wrapper.vm.pageCount)
-        expect(wrapper.emitted()['update:current'][0]).toContainEqual(wrapper.vm.pageCount)
+        expect(wrapper.emitted().change[0]).toContainEqual(wrapper.vm.pageCount)
+        expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual(wrapper.vm.pageCount)
 
-        wrapper.vm.$nextTick(() => {
-            expect(event.target.focus).toHaveBeenCalled()
-            done()
-        })
+        await wrapper.vm.$nextTick()
+        expect(event.target.focus).toHaveBeenCalled()
     })
 
-    it('should emit change when calling prev', () => {
-        wrapper.setProps({current: 5})
+    it('should emit change when calling prev', async () => {
+        await wrapper.setProps({ modelValue: 5 })
         wrapper.vm.prev()
-        expect(wrapper.emitted()['change'][0]).toContainEqual(4)
-        expect(wrapper.emitted()['update:current'][0]).toContainEqual(4)
+        expect(wrapper.emitted().change[0]).toContainEqual(4)
+        expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual(4)
     })
 
-    it('should emit change when calling next', () => {
-        wrapper.setProps({total: 100, current: 2})
+    it('should emit change when calling next', async () => {
+        await wrapper.setProps({ total: 100, modelValue: 2 })
         wrapper.vm.next()
-        expect(wrapper.emitted()['change'][0]).toContainEqual(3)
-        expect(wrapper.emitted()['update:current'][0]).toContainEqual(3)
+        expect(wrapper.emitted().change[0]).toContainEqual(3)
+        expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual(3)
     })
 
-    it('set current to last if page count is smaller than current', () => {
+    it('set current to last if page count is smaller than current', async () => {
         wrapper.vm.last = jest.fn()
-        wrapper.setProps({total: 100, current: 3})
-        wrapper.setProps({total: 40})
+        await wrapper.setProps({ total: 100, modelValue: 3 })
+        await wrapper.setProps({ total: 40 })
         expect(wrapper.vm.last).toHaveBeenCalled()
     })
 
-    it('return no pages in range when simple', () => {
-        wrapper.setProps({simple: true})
+    it('return no pages in range when simple', async () => {
+        await wrapper.setProps({ simple: true })
         expect(wrapper.pagesInRange).toBeUndefined()
     })
 })
