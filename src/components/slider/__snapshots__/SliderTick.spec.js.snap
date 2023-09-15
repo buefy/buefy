@@ -2,6 +2,6 @@
 
 exports[`BSliderTick render correctly 1`] = `
 <div class="b-slider-tick" style="left: 0%;">
-    <!---->
+  <!--v-if-->
 </div>
 `;

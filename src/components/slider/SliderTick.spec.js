@@ -1,9 +1,9 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import BSliderTick from '@components/slider/SliderTick'
 
 let wrapper
 const BSlider = {
-    template: '<b-slider-stub></b-slider-stub>',
+    template: '<div><slot /></div>',
     data() {
         return {
             _isSlider: true
@@ -13,14 +13,16 @@ const BSlider = {
 
 describe('BSliderTick', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BSliderTick, {
-            parentComponent: BSlider
-        })
+        wrapper = mount(BSlider, {
+            slots: {
+                default: BSliderTick
+            }
+        }).findComponent(BSliderTick)
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BSliderTick')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BSliderTick')
     })
 
     it('render correctly', () => {
