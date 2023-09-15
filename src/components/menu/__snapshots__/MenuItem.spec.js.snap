@@ -2,7 +2,8 @@
 
 exports[`BMenuItem render correctly 1`] = `
 <li><a class="">
-        <!----> </a>
-    <!---->
+    <!--v-if-->
+  </a><!-- sub menu items -->
+  <!--v-if-->
 </li>
 `;

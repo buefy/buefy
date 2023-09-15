@@ -2,7 +2,7 @@
 
 exports[`BMenuList render correctly 1`] = `
 <div>
-    <p class="menu-label">Test</p>
-    <ul class="menu-list"></ul>
+  <p class="menu-label">Test</p>
+  <ul class="menu-list"></ul>
 </div>
 `;

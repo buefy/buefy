@@ -9,8 +9,8 @@ describe('BMenu', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BMenu')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BMenu')
     })
 
     it('render correctly', () => {

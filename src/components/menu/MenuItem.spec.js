@@ -9,31 +9,31 @@ describe('BMenuItem', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BMenuItem')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BMenuItem')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('sets newActive when active is changed', () => {
-        wrapper.setProps({active: true})
+    it('sets newActive when active is changed', async () => {
+        await wrapper.setProps({ active: true })
         expect(wrapper.vm.newActive).toBeTruthy()
     })
 
-    it('sets newExpanded when expanded is changed', () => {
-        wrapper.setProps({expanded: true})
+    it('sets newExpanded when expanded is changed', async () => {
+        await wrapper.setProps({ expanded: true })
         expect(wrapper.vm.newExpanded).toBeTruthy()
     })
 
-    it('manage onClick', () => {
+    it('manage onClick', async () => {
         wrapper.vm.reset = jest.fn()
 
-        wrapper.setProps({disabled: true})
+        await wrapper.setProps({ disabled: true })
         wrapper.vm.onClick()
 
-        wrapper.setProps({disabled: false})
+        await wrapper.setProps({ disabled: false })
         wrapper.vm.onClick()
 
         expect(wrapper.vm.reset).toHaveBeenCalledTimes(1)
