@@ -148,7 +148,7 @@ export default {
         maxDatetime: Date,
         nearbyMonthDays: {
             type: Boolean,
-            default: true
+            default: config.defaultDatepickerNearbyMonthDays
         },
         datetimeFormatter: {
             type: Function
