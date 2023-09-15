@@ -1,23 +1,25 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import BProgressBar from '@components/progress/ProgressBar'
 import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 let wrapper
 const BProgress = {
     mixins: [ProviderParentMixin('progress')],
-    template: '<b-progress-stub></b-progress-stub>'
+    template: '<div><slot /></div>'
 }
 
 describe('BProgressBar', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BProgressBar, {
-            parentComponent: BProgress
-        })
+        wrapper = mount(BProgress, {
+            slots: {
+                default: BProgressBar
+            }
+        }).findComponent(BProgressBar)
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BProgressBar')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BProgressBar')
     })
 
     it('render correctly', () => {

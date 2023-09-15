@@ -4,8 +4,8 @@ import BProgress from '@components/progress/Progress'
 describe('BProgress', () => {
     it('is called', () => {
         const wrapper = shallowMount(BProgress)
-        expect(wrapper.name()).toBe('BProgress')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BProgress')
     })
 
     it('render correctly', () => {
@@ -17,9 +17,8 @@ describe('BProgress', () => {
     it('add value attribute when a value is passed', async () => {
         const value = 50
         const wrapper = shallowMount(BProgress)
-        wrapper.setProps({ value })
+        await wrapper.setProps({ value })
 
-        await wrapper.vm.$nextTick()
         expect(wrapper.find('.progress').attributes().value).toEqual(`${value}`)
     })
 
@@ -27,7 +26,7 @@ describe('BProgress', () => {
         it('remove value attribute to the <progress> element', async () => {
             const value = null
             const wrapper = shallowMount(BProgress, {
-                propsData: {value}
+                props: { value }
             })
 
             await wrapper.vm.$nextTick()
@@ -38,7 +37,7 @@ describe('BProgress', () => {
             it('adds a help <p> element in the root div.progress-wrapper when "show-value" prop is true', () => {
                 const value = 50
                 const wrapper = shallowMount(BProgress, {
-                    propsData: {
+                    props: {
                         value,
                         showValue: true
                     }
@@ -51,7 +50,7 @@ describe('BProgress', () => {
                 const max = 100
                 const format = 'percent'
                 const wrapper = shallowMount(BProgress, {
-                    propsData: {
+                    props: {
                         value,
                         max,
                         format,
@@ -68,7 +67,7 @@ describe('BProgress', () => {
                 const value = 50
                 const keepTrailingZeroes = true
                 const wrapper = shallowMount(BProgress, {
-                    propsData: {
+                    props: {
                         value,
                         keepTrailingZeroes,
                         showValue: true
