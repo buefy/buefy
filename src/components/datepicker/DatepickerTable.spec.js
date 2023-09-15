@@ -1,15 +1,13 @@
 import { shallowMount } from '@vue/test-utils'
 import BDatepickerTable from '@components/datepicker/DatepickerTable'
-import config, {setOptions} from '@utils/config'
+import config, { setOptions } from '@utils/config'
 
 let defaultProps
 
 const newDate = (y, m, d) => {
-    const date = new Date(Date.UTC(y, m, d))
-    date.getDate = jest.fn(() => date.getUTCDate())
-    date.getMonth = jest.fn(() => date.getUTCMonth())
-    date.getFullYear = jest.fn(() => date.getUTCFullYear())
-    return date
+    // it used to create a date in UTC. but it is unnecessary,
+    // because DatepickerTable entirely works in the local time zone.
+    return new Date(y, m, d)
 }
 
 describe('BDatepickerTable', () => {
@@ -26,7 +24,7 @@ describe('BDatepickerTable', () => {
         }))
 
         defaultProps = () => ({
-            value: newDate(2018, 6, 21),
+            modelValue: newDate(2018, 6, 21),
             dayNames: config.defaultDayNames,
             monthNames: config.defaultMonthNames,
             focused: {
@@ -41,31 +39,29 @@ describe('BDatepickerTable', () => {
 
     it('is called', () => {
         const wrapper = shallowMount(BDatepickerTable, {
-            stubs: ['b-datepicker-table-row'],
-            propsData: {
+            props: {
                 ...defaultProps()
             }
         })
-        expect(wrapper.name()).toBe('BDatepickerTable')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BDatepickerTable')
     })
 
     it('render correctly', () => {
+        // replaces weeksInThisMonth to suppress locale dependent outputs
+        jest.spyOn(BDatepickerTable.computed, 'weeksInThisMonth').mockReturnValue([])
         const wrapper = shallowMount(BDatepickerTable, {
-            stub: ['b-datepicker-table-row'],
-            propsData: {
+            props: {
                 ...defaultProps()
-            },
-            computed: {
-                weeksInThisMonth: jest.fn(() => [])
             }
         })
         expect(wrapper.html()).toMatchSnapshot()
+        BDatepickerTable.computed.weeksInThisMonth.mockRestore()
     })
 
     it('assign events to weeks even if the event has a time', () => {
         const wrapper = shallowMount(BDatepickerTable, {
-            propsData: {
+            props: {
                 dayNames: config.defaultDayNames,
                 monthNames: config.defaultMonthNames,
                 events: [new Date('July 22, 2018 07:22:13'), new Date('July 23, 2018 00:00:00')],
@@ -89,7 +85,7 @@ describe('BDatepickerTable', () => {
             monthEvent
         ]
         const wrapper = shallowMount(BDatepickerTable, {
-            propsData: {
+            props: {
                 ...defaultProps(),
                 events
             }
@@ -99,59 +95,59 @@ describe('BDatepickerTable', () => {
 
     it('emit input event with selected date as payload when updateSelectedDate is called', () => {
         const wrapper = shallowMount(BDatepickerTable, {
-            propsData: {
+            props: {
                 ...defaultProps()
             }
         })
         const newDate = new Date()
         wrapper.vm.updateSelectedDate(newDate)
-        const valueEmitted = wrapper.emitted()['input'][0]
+        const valueEmitted = wrapper.emitted()['update:modelValue'][0]
         expect(valueEmitted).toContainEqual(newDate)
     })
 
-    it('manage selectable dates as expected', () => {
+    it('manage selectable dates as expected', async () => {
         const day = newDate(2019, 7, 7)
         const wrapper = shallowMount(BDatepickerTable, {
-            propsData: {
+            props: {
                 ...defaultProps()
             }
         })
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: newDate(2019, 7, 17)
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: newDate(2019, 7, 1)
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
-        wrapper.setProps({
+        await wrapper.setProps({
             selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2), day]
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,
             unselectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
-        wrapper.setProps({
+        await wrapper.setProps({
             unselectableDates: [day]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,
@@ -163,7 +159,7 @@ describe('BDatepickerTable', () => {
 
     it('emit focused date', () => {
         const wrapper = shallowMount(BDatepickerTable, {
-            propsData: {
+            props: {
                 ...defaultProps()
             }
         })
@@ -177,7 +173,7 @@ describe('BDatepickerTable', () => {
         }
 
         wrapper.vm.changeFocus(day)
-        let valueEmitted = wrapper.emitted()['update:focused'][0]
+        const valueEmitted = wrapper.emitted()['update:focused'][0]
         expect(valueEmitted).toContainEqual(expected)
     })
 
@@ -188,7 +184,7 @@ describe('BDatepickerTable', () => {
 
         it('should return an empty array when props range is false', () => {
             const wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
+                props: {
                     ...defaultProps(),
                     range: false
                 }
@@ -196,28 +192,28 @@ describe('BDatepickerTable', () => {
             expect(wrapper.vm.hoveredDateRange).toEqual([])
         })
 
-        it('should return an empty array when selectedEndDate exists', () => {
+        it('should return an empty array when selectedEndDate exists', async () => {
             const wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
+                props: {
                     ...defaultProps(),
                     range: true
                 }
             })
-            wrapper.setData({
+            await wrapper.setData({
                 selectedBeginDate,
                 selectedEndDate: threeDaysAfterBeginDate
             })
             expect(wrapper.vm.hoveredDateRange).toEqual([])
         })
 
-        it('should return an array of two dates', () => {
+        it('should return an array of two dates', async () => {
             const wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
+                props: {
                     ...defaultProps(),
                     range: true
                 }
             })
-            wrapper.setData({
+            await wrapper.setData({
                 selectedBeginDate,
                 hoveredEndDate: threeDaysAfterBeginDate
             })
@@ -227,14 +223,14 @@ describe('BDatepickerTable', () => {
             ])
         })
 
-        it('should return the earlier date as the first element', () => {
+        it('should return the earlier date as the first element', async () => {
             const wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
+                props: {
                     ...defaultProps(),
                     range: true
                 }
             })
-            wrapper.setData({
+            await wrapper.setData({
                 selectedBeginDate,
                 hoveredEndDate: threeDaysBeforeBeginDate
             })
@@ -244,14 +240,14 @@ describe('BDatepickerTable', () => {
             ])
         })
 
-        it('should filter only defined values', () => {
+        it('should filter only defined values', async () => {
             const wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
+                props: {
                     ...defaultProps(),
                     range: true
                 }
             })
-            wrapper.setData({
+            await wrapper.setData({
                 selectedBeginDate,
                 hoveredEndDate: undefined
             })
@@ -260,11 +256,11 @@ describe('BDatepickerTable', () => {
             ])
         })
 
-        it('should mange date range update as expected', () => {
+        it('should mange date range update as expected', async () => {
             let begin = newDate(2020, 3, 10)
             let end = newDate(2020, 3, 15)
             const wrapper = shallowMount(BDatepickerTable, {
-                propsData: {
+                props: {
                     ...defaultProps(),
                     range: true
                 }
@@ -277,11 +273,11 @@ describe('BDatepickerTable', () => {
             wrapper.vm.updateSelectedDate(end)
             expect(wrapper.vm.selectedEndDate).toBe(end)
             expect(wrapper.emitted()['range-end'][0]).toContainEqual(end)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([begin, end])
+            expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual([begin, end])
 
             end = begin
             begin = newDate(2020, 3, 5)
-            wrapper.vm.selectedEndDate = undefined
+            await wrapper.setData({ selectedEndDate: undefined })
             wrapper.vm.updateSelectedDate(begin)
             expect(wrapper.vm.selectedEndDate).toBe(end)
             expect(wrapper.vm.selectedBeginDate).toBe(begin)

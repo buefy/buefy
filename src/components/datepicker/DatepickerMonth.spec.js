@@ -1,20 +1,18 @@
 import { shallowMount } from '@vue/test-utils'
 import BDatepickerMonth from '@components/datepicker/DatepickerMonth'
 
-import config, {setOptions} from '@utils/config'
+import config, { setOptions } from '@utils/config'
 
 let wrapper
 
+// it used to create a date in UTC but should use the local timezone,
+// because DatepickerMonth entirely works in the local timezone
 const newDate = (y, m, d) => {
-    const date = new Date(Date.UTC(y, m, d))
-    date.getDate = jest.fn(() => date.getUTCDate())
-    date.getMonth = jest.fn(() => date.getUTCMonth())
-    date.getFullYear = jest.fn(() => date.getUTCFullYear())
-    return date
+    return new Date(y, m, d)
 }
 
-const thisMonth = newDate(2020, 4, 15).getUTCMonth()
-let events = [
+const thisMonth = newDate(2020, 4, 15).getMonth()
+const events = [
     newDate(2018, 10, 10),
     newDate(2019, thisMonth, 2),
     newDate(2019, thisMonth, 6),
@@ -69,7 +67,7 @@ describe('BDatepickerMonth', () => {
         }))
 
         wrapper = shallowMount(BDatepickerMonth, {
-            propsData: {
+            props: {
                 monthNames: config.defaultMonthNames,
                 focused: {
                     month: config.focusedDate.getMonth(),
@@ -83,16 +81,16 @@ describe('BDatepickerMonth', () => {
     const dateCreator = () => newDate()
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BDatepickerMonth')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BDatepickerMonth')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('manage events accordingly', () => {
-        wrapper.setProps({
+    it('manage events accordingly', async () => {
+        await wrapper.setProps({
             events
         })
         expect(wrapper.vm.hasEvents).toBeTruthy()
@@ -103,39 +101,39 @@ describe('BDatepickerMonth', () => {
         wrapper.vm.selectableDate = jest.fn(() => true)
         wrapper.vm.emitChosenDate(5)
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
-        expect(wrapper.emitted()['input']).toBeTruthy()
+        expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
 
-    it('emit input when updateSelectedDate is called with range props false', () => {
-        wrapper.setProps({
+    it('emit input when updateSelectedDate is called with range props false', async () => {
+        await wrapper.setProps({
             range: false
         })
         wrapper.vm.selectableDate = jest.fn(() => true)
         wrapper.vm.updateSelectedDate(5)
-        expect(wrapper.emitted()['input']).toBeTruthy()
+        expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
 
-    it('manage selectable dates as expected', () => {
+    it('manage selectable dates as expected', async () => {
         const day = newDate(2019, 7, 7)
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: newDate(2019, 7, 17)
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: newDate(2019, 7, 1)
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: [newDate(2019, 5, 1), newDate(2019, 5, 2)]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
-        wrapper.setProps({
+        await wrapper.setProps({
             selectableDates: [
                 newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 1),
                 newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 2),
@@ -144,39 +142,39 @@ describe('BDatepickerMonth', () => {
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             selectableDates: (d) => d.getMonth() === 7
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
         expect(wrapper.vm.selectableDate(new Date(2019, 6, 7))).toBeFalsy()
         expect(wrapper.vm.selectableDate(new Date(2019, 8, 7))).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,
             unselectableDates: [newDate(2019, 5, 1), newDate(2019, 5, 2)]
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
-        wrapper.setProps({
+        await wrapper.setProps({
             unselectableDates: [day]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             unselectableDates: (d) => d.getMonth() === 7
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
         expect(wrapper.vm.selectableDate(new Date(2019, 6, 7))).toBeTruthy()
         expect(wrapper.vm.selectableDate(new Date(2019, 8, 7))).toBeTruthy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             selectableDates: (d) => d.getMonth() === 7,
             unselectableDates: (d) => true
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,
@@ -221,25 +219,25 @@ describe('BDatepickerMonth', () => {
 
     describe('Multiple dates', () => {
         beforeEach(() => {
-            wrapper.setProps({multiple: true})
+            wrapper.setProps({ multiple: true })
         })
 
         it('should manage multiple dates update as expected', () => {
-            let date1 = newDate(2020, 3, 10)
-            let date2 = newDate(2020, 3, 15)
-            let date3 = newDate(2020, 3, 20)
+            const date1 = newDate(2020, 3, 10)
+            const date2 = newDate(2020, 3, 15)
+            const date3 = newDate(2020, 3, 20)
 
             wrapper.vm.emitChosenDate(date1)
             expect(wrapper.vm.multipleSelectedDates).toContainEqual(date1)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([date1])
+            expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual([date1])
 
             wrapper.vm.emitChosenDate(date2)
             expect(wrapper.vm.multipleSelectedDates).toContainEqual(date2)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2])
+            expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual([date1, date2])
 
             wrapper.vm.emitChosenDate(date3)
             expect(wrapper.vm.multipleSelectedDates).toContainEqual(date3)
-            expect(wrapper.emitted()['input'][0]).toContainEqual([date1, date2, date3])
+            expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual([date1, date2, date3])
 
             wrapper.vm.emitChosenDate(date1)
             expect(wrapper.vm.multipleSelectedDates).toEqual([date2, date3])
@@ -254,7 +252,7 @@ describe('BDatepickerMonth', () => {
                     month: newDate(2020, 1, 1).getMonth(),
                     year: newDate(2020, 1, 1).getFullYear()
                 },
-                value: [newDate(2020, 1, 1), newDate(2020, 5, 1)]
+                modelValue: [newDate(2020, 1, 1), newDate(2020, 5, 1)]
             })
         })
 

@@ -2,11 +2,11 @@ import { shallowMount } from '@vue/test-utils'
 import BDatepickerTableRow from '@components/datepicker/DatepickerTableRow'
 
 const newDate = (y, m, d) => {
-    const date = new Date(Date.UTC(y, m, d))
-    date.getDate = jest.fn(() => date.getUTCDate())
-    return date
+    // it used to create a date in UTC. but it is unnecessary,
+    // because DatepickerTableRow entirely works in the local time zone
+    return new Date(y, m, d)
 }
-const propsData = {
+const props = {
     firstDayOfWeek: 0,
     week: [
         newDate(2017, 12, 31),
@@ -25,12 +25,12 @@ let wrapper
 
 describe('BDatepickerTableRow', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BDatepickerTableRow, { propsData })
+        wrapper = shallowMount(BDatepickerTableRow, { props })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BDatepickerTableRow')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BDatepickerTableRow')
     })
 
     it('render correctly', () => {
@@ -40,7 +40,7 @@ describe('BDatepickerTableRow', () => {
     describe('classObject', function () {
         beforeEach(() => {
             wrapper.setProps({
-                selectedDate: [propsData.week[1], propsData.week[5]],
+                selectedDate: [props.week[1], props.week[5]],
                 nearbySelectableMonthDays: true
             })
         })
@@ -50,7 +50,7 @@ describe('BDatepickerTableRow', () => {
         })
 
         it('should have is-first-selected class for the first date selected within the range', function () {
-            const {wrappers: [firstSelectedCell]} = wrapper.findAll('.is-selected')
+            const [firstSelectedCell] = wrapper.findAll('.is-selected')
             expect(firstSelectedCell.classes()).toContain('is-first-selected')
         })
 
@@ -61,7 +61,7 @@ describe('BDatepickerTableRow', () => {
 
         it('should have is-last-selected class for the last date selected within the range', function () {
             // wrappers should return 5 elements. Destructure to get the last one
-            const {wrappers: [, , , , lastSelectedCell]} = wrapper.findAll('.is-selected')
+            const [, , , , lastSelectedCell] = wrapper.findAll('.is-selected')
             expect(lastSelectedCell.classes()).toContain('is-last-selected')
         })
 
@@ -72,7 +72,7 @@ describe('BDatepickerTableRow', () => {
         describe('hovered', function () {
             beforeEach(() => {
                 wrapper.setProps({
-                    hoveredDateRange: [propsData.week[1], propsData.week[5]]
+                    hoveredDateRange: [props.week[1], props.week[5]]
                 })
             })
 
@@ -81,7 +81,7 @@ describe('BDatepickerTableRow', () => {
             })
 
             it('should have is-first-hovered class for the first date hovered within the range', function () {
-                const {wrappers: [firstHoveredCell]} = wrapper.findAll('.is-within-hovered-range')
+                const [firstHoveredCell] = wrapper.findAll('.is-within-hovered-range')
                 expect(firstHoveredCell.classes()).toContain('is-first-hovered')
             })
 
@@ -92,7 +92,7 @@ describe('BDatepickerTableRow', () => {
 
             it('should have is-last-hovered class for the last date hovered within the range', function () {
                 // wrappers should return 5 elements. Destructure to get the last one
-                const {wrappers: [, , , , lastHoveredCell]} = wrapper.findAll('.is-within-hovered-range')
+                const [, , , , lastHoveredCell] = wrapper.findAll('.is-within-hovered-range')
                 expect(lastHoveredCell.classes()).toContain('is-last-hovered')
             })
 
@@ -105,7 +105,7 @@ describe('BDatepickerTableRow', () => {
     describe('classObject with multiple dates', function () {
         beforeEach(() => {
             wrapper.setProps({
-                selectedDate: [propsData.week[1], propsData.week[5], propsData.week[3]],
+                selectedDate: [props.week[1], props.week[5], props.week[3]],
                 multiple: true
             })
         })
@@ -115,7 +115,7 @@ describe('BDatepickerTableRow', () => {
         })
 
         it('should not have is-first-selected class for the first date selected within the range', function () {
-            const {wrappers: [firstSelectedCell]} = wrapper.findAll('.is-selected')
+            const [firstSelectedCell] = wrapper.findAll('.is-selected')
             expect(firstSelectedCell.classes()).not.toContain('is-first-selected')
         })
 
@@ -126,7 +126,7 @@ describe('BDatepickerTableRow', () => {
 
         it('should not have is-last-selected class for the last date selected within the range', function () {
             // wrappers should return 3 elements. Destructure to get the last one
-            const {wrappers: [, , lastSelectedCell]} = wrapper.findAll('.is-selected')
+            const [, , lastSelectedCell] = wrapper.findAll('.is-selected')
             expect(lastSelectedCell.classes()).not.toContain('is-last-selected')
         })
     })
@@ -142,35 +142,38 @@ describe('BDatepickerTableRow', () => {
         wrapper.vm.selectableDate = jest.fn(() => false)
         wrapper.vm.emitChosenDate(5)
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
-        expect(wrapper.emitted()['select']).toBeFalsy()
+        expect(wrapper.emitted().select).toBeFalsy()
 
         wrapper.vm.selectableDate = jest.fn(() => true)
         wrapper.vm.emitChosenDate(5)
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
-        expect(wrapper.emitted()['select']).toBeTruthy()
+        expect(wrapper.emitted().select).toBeTruthy()
     })
 
     it('emit clicked week and year', async () => {
         const wrapper = shallowMount(BDatepickerTableRow, {
-            propsData: {
-                ...Object.assign(propsData, {
+            props: {
+                ...Object.assign(props, {
                     showWeekNumber: true,
                     rulesForFirstWeek: 1,
                     weekNumberClickable: true
                 })
             },
-            provide: {
-                $datepicker: {
-                    $emit(event) {
-                        wrapper.vm.$emit(event, arguments[1], arguments[2])
+            global: {
+                provide: {
+                    $datepicker: {
+                        $emit(event) {
+                            // Vue warns because BDatepickerTableRow is not
+                            // supposed to emit "week-number-click"
+                            wrapper.vm.$emit(event, arguments[1], arguments[2])
+                        }
                     }
                 }
             }
         })
-        const weekDate = propsData.week[6]
+        const weekDate = props.week[6]
         const $weekButton = wrapper.find('.is-week-number')
-        $weekButton.trigger('click')
-        await wrapper.vm.$nextTick()
+        await $weekButton.trigger('click')
 
         expect(wrapper.emitted()['week-number-click']).toBeTruthy()
         expect(wrapper.emitted()['week-number-click'][0].sort()).toEqual([weekDate.getDate(), weekDate.getFullYear()].sort())
@@ -178,16 +181,16 @@ describe('BDatepickerTableRow', () => {
 
     it('emit focused date', async () => {
         const [y, m, d] = [2019, 4, 4]
-        let day = newDate(y, m, d)
+        const day = newDate(y, m, d)
 
-        let inc = 1
+        const inc = 1
         wrapper.vm.changeFocus(day, inc)
         await wrapper.vm.$nextTick()
-        let valueEmitted = wrapper.emitted()['change-focus'][0]
+        const valueEmitted = wrapper.emitted()['change-focus'][0]
         expect(valueEmitted[0].getDate()).toEqual(d + inc)
     })
 
-    it('match event days accordingly', () => {
+    it('match event days accordingly', async () => {
         const thisMonth = newDate(2019, 4, 4).getMonth()
         const day = newDate(2019, thisMonth, 6)
         const todayEvent = {
@@ -201,56 +204,56 @@ describe('BDatepickerTableRow', () => {
             },
             todayEvent
         ]
-        wrapper.setProps({ events })
+        await wrapper.setProps({ events })
         expect(wrapper.vm.eventsDateMatch(day)).toEqual([todayEvent])
     })
 
-    it('emit rangeHoverEndDate', () => {
-        wrapper.setProps({ range: true })
+    it('emit rangeHoverEndDate', async () => {
+        await wrapper.setProps({ range: true })
         const thisMonth = new Date().getMonth()
         const day = newDate(2019, thisMonth, 6)
         wrapper.vm.setRangeHoverEndDate(day)
-        expect(wrapper.emitted()['rangeHoverEndDate']).toBeTruthy()
+        expect(wrapper.emitted().rangeHoverEndDate).toBeTruthy()
     })
 
-    it('manage selectable dates as expected', () => {
+    it('manage selectable dates as expected', async () => {
         const day = newDate(2019, 7, 7)
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: newDate(2019, 7, 17)
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: newDate(2019, 7, 1)
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
-        wrapper.setProps({
+        await wrapper.setProps({
             selectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2), day]
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,
             unselectableDates: [newDate(2019, 7, 1), newDate(2019, 7, 2)]
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
-        wrapper.setProps({
+        await wrapper.setProps({
             unselectableDates: [day]
         })
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
 
-        wrapper.setProps({
+        await wrapper.setProps({
             minDate: null,
             maxDate: null,
             selectableDates: null,

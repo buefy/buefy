@@ -16,7 +16,7 @@
                 class="datepicker-cell"
                 role="button"
                 href="#"
-                :disabled="disabled"
+                :disabled="disabled || undefined"
                 @click.prevent="emitChosenDate(weekDay)"
                 @mouseenter="setRangeHoverEndDate(weekDay)"
                 @keydown="manageKeydown($event, weekDay)"

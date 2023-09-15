@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import BDatepicker from '@components/datepicker/Datepicker'
 
-import config, {setOptions} from '@utils/config'
+import config, { setOptions } from '@utils/config'
 
 let wrapper, defaultProps
 
@@ -30,8 +30,10 @@ describe('BDatepicker', () => {
             }))
 
             wrapper = shallowMount(BDatepicker, {
-                stubs: {
-                    transition: false
+                global: {
+                    stubs: {
+                        transition: true
+                    }
                 }
             })
         })
@@ -66,11 +68,13 @@ describe('BDatepicker', () => {
         }
 
         wrapper = shallowMount(BDatepicker, {
-            propsData: {
+            props: {
                 ...defaultProps
             },
-            stubs: {
-                transition: false
+            global: {
+                stubs: {
+                    transition: true
+                }
             }
         })
 
@@ -79,12 +83,28 @@ describe('BDatepicker', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BDatepicker')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BDatepicker')
     })
 
     it('render correctly', () => {
-        wrapper.setProps({dateCreator: () => {}})
+        wrapper = shallowMount(BDatepicker, {
+            props: {
+                ...defaultProps
+            },
+            global: {
+                stubs: {
+                    transition: true,
+                    // reproduces a snapshot closer to the legacy one that
+                    // depends on default slots rendered even if stubbed
+                    bDropdown: false,
+                    bDropdownItem: false,
+                    bField: false,
+                    bSelect: false
+                }
+            }
+        })
+        wrapper.setProps({ dateCreator: () => {} })
         expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -99,7 +119,7 @@ describe('BDatepicker', () => {
         wrapper.vm.computedValue = date
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
-        expect(wrapper.emitted()['input']).toBeTruthy()
+        expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
 
     it('react accordingly when handling native picker', () => {
@@ -107,28 +127,28 @@ describe('BDatepicker', () => {
         wrapper.vm.onChangeNativePicker({ target: { value: '2020-01-01' } })
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
-        expect(wrapper.emitted()['input']).toBeTruthy()
+        expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
 
     it('react accordingly when handling native picker clear', () => {
         wrapper.vm.onChangeNativePicker({ target: { value: '' } })
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(null)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
-        expect(wrapper.emitted()['input']).toEqual([[null]])
+        expect(wrapper.emitted()['update:modelValue']).toEqual([[null]])
     })
 
-    it('react accordingly when changing v-model', () => {
+    it('react accordingly when changing v-model', async () => {
         const date = new Date()
-        wrapper.setProps({
-            value: date
+        await wrapper.setProps({
+            modelValue: date
         })
         expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
         expect(wrapper.vm.togglePicker).toHaveBeenCalled()
     })
 
-    it('set focusedDateData when changing focused date', () => {
+    it('set focusedDateData when changing focused date', async () => {
         const date = newDate(2019, 8, 26)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date
         })
         expect(wrapper.vm.focusedDateData).toEqual({
@@ -138,23 +158,23 @@ describe('BDatepicker', () => {
         })
     })
 
-    it('react accordingly when calling onChange', () => {
+    it('react accordingly when calling onChange', async () => {
         const date = new Date()
-        wrapper.setProps({dateParser: jest.fn()})
+        await wrapper.setProps({ dateParser: jest.fn() })
         wrapper.vm.onChange(date)
         expect(wrapper.vm.dateParser).toHaveBeenCalled()
     })
 
-    it('react accordingly when calling prev', () => {
+    it('react accordingly when calling prev', async () => {
         let date = newDate(2019, 8, 26)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date
         })
         wrapper.vm.prev()
         expect(wrapper.vm.focusedDateData.month).toBe(7)
 
         date = newDate(2019, 0, 26)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date
         })
         wrapper.vm.prev()
@@ -162,7 +182,7 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.month).toBe(11)
 
         date = newDate(2021, 1, 1)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date,
             type: 'month'
         })
@@ -170,7 +190,7 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.year).toBe(2020)
 
         date = newDate(2021, 1, 1)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date,
             type: 'month',
             disabled: true
@@ -179,16 +199,16 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.year).toBe(2021)
     })
 
-    it('react accordingly when calling next', () => {
+    it('react accordingly when calling next', async () => {
         let date = newDate(2019, 8, 26)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date
         })
         wrapper.vm.next()
         expect(wrapper.vm.focusedDateData.month).toBe(9)
 
         date = newDate(2019, 11, 26)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date
         })
         wrapper.vm.next()
@@ -196,7 +216,7 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.month).toBe(0)
 
         date = newDate(2021, 1, 1)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date,
             type: 'month'
         })
@@ -204,7 +224,7 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.year).toBe(2022)
 
         date = newDate(2021, 1, 1)
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: date,
             type: 'month',
             disabled: true
@@ -213,15 +233,15 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.focusedDateData.year).toBe(2021)
     })
 
-    it('handles accordingly the list of months', () => {
-        wrapper.setProps({
+    it('handles accordingly the list of months', async () => {
+        await wrapper.setProps({
             focusedDate: newDate(2021, 10, 16),
             minDate: newDate(2021, 10, 15),
             maxDate: null
         })
         expect(wrapper.vm.listOfMonths.filter((month) => !month.disabled).map((month) => month.name)).toEqual(['November', 'December'])
 
-        wrapper.setProps({
+        await wrapper.setProps({
             focusedDate: newDate(2021, 2, 1),
             minDate: null,
             maxDate: newDate(2021, 2, 15)
@@ -229,8 +249,8 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.listOfMonths.filter((month) => !month.disabled).map((month) => month.name)).toEqual(['January', 'February', 'March'])
     })
 
-    it('handles accordingly the list of years', () => {
-        wrapper.setProps({
+    it('handles accordingly the list of years', async () => {
+        await wrapper.setProps({
             minDate: newDate(2017, 1, 1),
             maxDate: null
         })
@@ -238,14 +258,14 @@ describe('BDatepicker', () => {
         for (let i = 1; i <= 11; i++) y.push(y[i - 1] + 1)
         expect(wrapper.vm.listOfYears).toEqual(y.reverse())
 
-        wrapper.setProps({
+        await wrapper.setProps({
             maxDate: newDate(2020, 1, 1)
         })
         expect(wrapper.vm.listOfYears.sort()).toEqual([2020, 2019, 2018, 2017].sort())
     })
 
-    it('handles accordingly focus', () => {
-        wrapper.setProps({
+    it('handles accordingly focus', async () => {
+        await wrapper.setProps({
             openOnFocus: false
         })
         wrapper.vm.onFocus = jest.fn()
@@ -255,7 +275,7 @@ describe('BDatepicker', () => {
         expect(wrapper.vm.onFocus).toHaveBeenCalled()
         expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(0)
 
-        wrapper.setProps({
+        await wrapper.setProps({
             openOnFocus: true
         })
         wrapper.vm.handleOnFocus()
@@ -264,19 +284,26 @@ describe('BDatepicker', () => {
     })
 
     describe('#dateFormatter', () => {
+        beforeEach(() => {
+            // uses en-US locale to make outputs predictable
+            wrapper.setProps({
+                locale: 'en-US'
+            })
+        })
+
         it('should add one to month since month in dates starts from 0', () => {
             const dateToFormat = new Date(2019, 3, 1)
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-4-1')
+            expect(formattedDate).toEqual('4/1/2019')
         })
 
-        it('should format based on 2-digit numeric locale date with type === month', () => {
-            wrapper.setProps({
+        it('should format based on 2-digit numeric locale date with type === month', async () => {
+            await wrapper.setProps({
                 type: 'month'
             })
-            const dateToFormat = new Date(2019, 3, 1)
+            const dateToFormat = new Date(2019, 3, 15)
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-04')
+            expect(formattedDate).toEqual('4/2019')
         })
 
         it('should format a range of dates passed via array', () => {
@@ -285,7 +312,7 @@ describe('BDatepicker', () => {
                 new Date(2019, 3, 3)
             ]
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-4-1 - 2019-4-3')
+            expect(formattedDate).toEqual('4/1/2019 - 4/3/2019')
         })
 
         describe('multiple', () => {
@@ -305,7 +332,7 @@ describe('BDatepicker', () => {
                     new Date(2019, 3, 3)
                 ]
                 const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-                expect(formattedDate).toEqual('2019-4-1, 2019-4-13, 2019-4-3')
+                expect(formattedDate).toEqual('4/1/2019, 4/13/2019, 4/3/2019')
             })
 
             it('react accordingly when setting computedValue', () => {
@@ -313,13 +340,13 @@ describe('BDatepicker', () => {
                 wrapper.vm.computedValue = date
                 expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
                 expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(0)
-                expect(wrapper.emitted()['input']).toBeTruthy()
+                expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
             })
 
-            it('react accordingly when changing v-model', () => {
+            it('react accordingly when changing v-model', async () => {
                 const date = new Date()
-                wrapper.setProps({
-                    value: date
+                await wrapper.setProps({
+                    modelValue: date
                 })
                 expect(wrapper.vm.updateInternalState).toHaveBeenCalledWith(date)
                 expect(wrapper.vm.togglePicker).toHaveBeenCalledTimes(0)
@@ -328,9 +355,9 @@ describe('BDatepicker', () => {
     })
 
     describe('#formatValue', () => {
-        it('should call dateFormatter, passing the date', () => {
+        it('should call dateFormatter, passing the date', async () => {
             const mockDateFormatter = jest.fn()
-            wrapper.setProps({
+            await wrapper.setProps({
                 dateFormatter: mockDateFormatter,
                 closeOnClick: false
             })
@@ -339,9 +366,9 @@ describe('BDatepicker', () => {
             expect(mockDateFormatter.mock.calls[0][0]).toEqual(date)
         })
 
-        it('should not call dateFormatter when value is undefined or NaN', () => {
+        it('should not call dateFormatter when value is undefined or NaN', async () => {
             const mockDateFormatter = jest.fn()
-            wrapper.setProps({
+            await wrapper.setProps({
                 dateFormatter: mockDateFormatter
             })
             wrapper.vm.formatValue(undefined)
@@ -350,9 +377,9 @@ describe('BDatepicker', () => {
             expect(mockDateFormatter.mock.calls.length).toEqual(0)
         })
 
-        it('should not call dateFormatter when value is an array with undefined or NaN elements', () => {
+        it('should not call dateFormatter when value is an array with undefined or NaN elements', async () => {
             const mockDateFormatter = jest.fn()
-            wrapper.setProps({
+            await wrapper.setProps({
                 dateFormatter: mockDateFormatter
             })
             wrapper.vm.formatValue([new Date(), undefined])
@@ -365,13 +392,18 @@ describe('BDatepicker', () => {
     describe('when horizontalTimePicker is true', () => {
         beforeEach(() => {
             wrapper = shallowMount(BDatepicker, {
-                stubs: {
-                    transition: false
+                global: {
+                    stubs: {
+                        transition: true,
+                        // tests depend on slots under BDropdown
+                        bDropdown: false,
+                        bDropdownItem: false
+                    }
                 },
                 slots: {
                     default: ['<div>Custom footer</div>']
                 },
-                propsData: {
+                props: {
                     horizontalTimePicker: true
                 }
             })

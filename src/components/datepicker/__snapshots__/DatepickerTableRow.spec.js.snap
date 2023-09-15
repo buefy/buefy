@@ -2,12 +2,20 @@
 
 exports[`BDatepickerTableRow render correctly 1`] = `
 <div class="datepicker-row">
-    <!----> <a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>31</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>1</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>2</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>3</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>4</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>5</span>
-        <!----></a><a role="button" href="#" tabindex="-1" class="datepicker-cell is-selectable is-invisible"><span>6</span>
-        <!----></a></div>
+  <!--v-if--><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>31</span>
+    <!--v-if-->
+  </a><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>1</span>
+    <!--v-if-->
+  </a><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>2</span>
+    <!--v-if-->
+  </a><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>3</span>
+    <!--v-if-->
+  </a><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>4</span>
+    <!--v-if-->
+  </a><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>5</span>
+    <!--v-if-->
+  </a><a class="is-selectable is-invisible datepicker-cell" role="button" href="#" tabindex="-1"><span>6</span>
+    <!--v-if-->
+  </a>
+</div>
 `;
