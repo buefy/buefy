@@ -7,17 +7,16 @@ let wrapperParent
 let wrapperCarousel
 
 const WrapperComp = {
-    data() {
-        return {
-            show1: true
-        }
-    },
     template: `
-        <BCarousel ref="carousel">
+        <BCarousel ref="carousel" :animated="animated">
             <BCarouselItem value="item1"/>
             <BCarouselItem ref="testItem" value="item2"/>
             <BCarouselItem value="item3"/>
         </BCarousel>`,
+    props: {
+        // to indirectly change BCarousel's animated prop
+        animated: 'slide'
+    },
     components: {
         BCarousel, BCarouselItem
     }
@@ -25,14 +24,14 @@ const WrapperComp = {
 
 describe('BCarouselItem', () => {
     beforeEach(() => {
-        wrapperParent = mount(WrapperComp, { sync: false })
-        wrapperCarousel = wrapperParent.find({ ref: 'carousel' })
-        wrapper = wrapperParent.find({ ref: 'testItem' })
+        wrapperParent = mount(WrapperComp)
+        wrapperCarousel = wrapperParent.findComponent({ ref: 'carousel' })
+        wrapper = wrapperParent.findComponent({ ref: 'testItem' })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BCarouselItem')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BCarouselItem')
     })
 
     it('render correctly', () => {
@@ -43,14 +42,14 @@ describe('BCarouselItem', () => {
         expect(wrapper.vm.index).toBe(1)
     })
 
-    it('transition correctly', () => {
+    it('transition correctly', async () => {
         wrapperCarousel.vm.changeActive(2)
         expect(wrapper.vm.transition).toBe('slide-prev')
 
         wrapperCarousel.vm.changeActive(0)
         expect(wrapper.vm.transition).toBe('slide-next')
 
-        wrapperCarousel.setProps({ animated: 'fade' })
+        await wrapperParent.setProps({ animated: 'fade' })
         wrapperCarousel.vm.changeActive(0)
         expect(wrapper.vm.transition).toBe('fade')
     })

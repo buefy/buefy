@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
 import BCarouselList from '@components/carousel/CarouselList'
-import BIcon from '@components/icon/Icon'
 
 let wrapper
 const data = [
@@ -41,16 +40,15 @@ const data = [
 describe('BCarouselList', () => {
     beforeEach(() => {
         wrapper = shallowMount(BCarouselList, {
-            Component: BIcon,
-            propsData: {
+            props: {
                 data
             }
         })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BCarouselList')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BCarouselList')
     })
 
     it('render correctly', () => {
@@ -58,7 +56,7 @@ describe('BCarouselList', () => {
     })
 
     it('uses breakpoints', async () => {
-        wrapper.setProps({
+        await wrapper.setProps({
             itemsToShow: 4,
             itemsToList: 1,
             breakpoints: {
@@ -73,8 +71,6 @@ describe('BCarouselList', () => {
                 }
             }
         })
-
-        await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.settings.itemsToShow).toBe(8)
 
@@ -98,9 +94,9 @@ describe('BCarouselList', () => {
     })
 
     it('doesn\'t show empty slots', async () => {
-        wrapper.setProps({
+        await wrapper.setProps({
             itemsToShow: 4,
-            value: 8
+            modelValue: 8
         })
 
         expect(wrapper.vm.scrollIndex).toBe(4)
@@ -108,11 +104,11 @@ describe('BCarouselList', () => {
     })
 
     it('repeats', async () => {
-        wrapper.setProps({
+        await wrapper.setProps({
             itemsToShow: 4,
             itemsToList: 1,
             repeat: true,
-            value: 0
+            modelvalue: 0
         })
 
         expect(wrapper.vm.scrollIndex).toBe(0)
@@ -136,7 +132,7 @@ describe('BCarouselList', () => {
             map[event] = cb
         })
         wrapper.find('.carousel-list').trigger('mousedown')
-        wrapper.destroy()
+        wrapper.unmount()
 
         expect(map.resize).toBe(wrapper.vm.resized)
         expect(map.mousemove).toBe(wrapper.vm.dragMove)
@@ -144,30 +140,30 @@ describe('BCarouselList', () => {
     })
 
     it('drags correctly', async () => {
-        wrapper.setProps({
+        wrapper.vm.$el.getBoundingClientRect = jest.fn(() => ({
+            width: 400
+        }))
+        await wrapper.setData({ windowWidth: 400 })
+        await wrapper.setProps({
             itemsToShow: 4
         })
-        wrapper.setData({delta: 0})
-        wrapper.vm._computedWatchers['itemWidth'].value = 100
+        await wrapper.setData({ delta: 0 })
+        expect(wrapper.vm.itemWidth).toBe(100)
 
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.translation).toBe(-0)
 
-        wrapper.setData({delta: -600})
-        await wrapper.vm.$nextTick()
+        await wrapper.setData({ delta: -600 })
         expect(wrapper.vm.translation).toBe(-0)
 
-        wrapper.setData({delta: 2000})
-        await wrapper.vm.$nextTick()
+        await wrapper.setData({ delta: 2000 })
         expect(wrapper.vm.translation).toBe(-400)
 
-        wrapper.setProps({
-            value: 4
+        await wrapper.setProps({
+            modelValue: 4
         })
         expect(wrapper.vm.translation).toBe(-400)
-        await wrapper.vm.$nextTick()
-        wrapper.setData({delta: -300})
-        await wrapper.vm.$nextTick()
+        await wrapper.setData({ delta: -300 })
         expect(wrapper.vm.translation).toBe(-100)
     })
 })
