@@ -9,8 +9,8 @@ describe('BBreadcrumb', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BBreadcrumb')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BBreadcrumb')
     })
 
     it('render correctly', () => {
@@ -19,7 +19,7 @@ describe('BBreadcrumb', () => {
 
     it('should set align to right', () => {
         wrapper = mount(BBreadcrumb, {
-            propsData: {
+            props: {
                 align: 'is-right'
             }
         })
@@ -29,7 +29,7 @@ describe('BBreadcrumb', () => {
 
     it('should set separator to arrow', () => {
         wrapper = mount(BBreadcrumb, {
-            propsData: {
+            props: {
                 separator: 'has-arrow-separator'
             }
         })
@@ -39,7 +39,7 @@ describe('BBreadcrumb', () => {
 
     it('should set size to large', () => {
         wrapper = mount(BBreadcrumb, {
-            propsData: {
+            props: {
                 size: 'is-large'
             }
         })
@@ -49,7 +49,7 @@ describe('BBreadcrumb', () => {
 
     it('computes breadcrumbClasses correctly', () => {
         wrapper = mount(BBreadcrumb, {
-            propsData: {
+            props: {
                 align: 'is-left',
                 separator: 'has-dot-separator',
                 size: 'is-medium'

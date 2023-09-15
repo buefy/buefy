@@ -5,14 +5,14 @@ describe('BBreadcrumbItem', () => {
     let wrapper
     beforeEach(() => {
         wrapper = mount(BBreadcrumbItem, {
-            propsData: {
+            props: {
                 tag: 'a'
             }
         })
     })
 
     it('is called', () => {
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
     })
 
     it('render correctly', () => {
@@ -20,6 +20,6 @@ describe('BBreadcrumbItem', () => {
     })
 
     it('should have a li tag', () => {
-        expect(wrapper.contains('li')).toBeTruthy()
+        expect(wrapper.find('li').exists()).toBeTruthy()
     })
 })
