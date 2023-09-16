@@ -1,15 +1,12 @@
+import { transformVNodeArgs } from 'vue'
 import { shallowMount } from '@vue/test-utils'
-import BLoading from '@components/loading/Loading'
+import { BLoading, LoadingProgrammatic } from '@components/loading'
 
 let wrapper
 
 describe('BLoading', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BLoading, {
-            stubs: {
-                transition: false
-            }
-        })
+        wrapper = shallowMount(BLoading)
     })
 
     it('is inactive initially', () => {
@@ -18,40 +15,38 @@ describe('BLoading', () => {
 
     describe('active', () => {
         beforeEach(() => {
-            wrapper.setProps({active: true})
+            wrapper.setProps({ modelValue: true })
         })
 
         it('Is called', () => {
-            expect(wrapper.name()).toBe('BLoading')
-            expect(wrapper.isVueInstance()).toBeTruthy()
+            expect(wrapper.vm).toBeTruthy()
+            expect(wrapper.vm.$options.name).toBe('BLoading')
         })
 
         it('render correctly', () => {
             expect(wrapper.html()).toMatchSnapshot()
         })
 
-        it('changes isActive when active prop is modified', () => {
-            wrapper.setProps({active: false})
+        it('changes isActive when active prop is modified', async () => {
+            await wrapper.setProps({ modelValue: false })
             expect(wrapper.vm.isActive).toBeFalsy()
-            wrapper.setProps({active: true})
+            await wrapper.setProps({ modelValue: true })
             expect(wrapper.vm.isActive).toBeTruthy()
         })
 
-        it('close on cancel', (done) => {
-            wrapper.setProps({canCancel: true})
-            wrapper.vm.isActive = true
+        it('close on cancel', async () => {
+            await wrapper.setProps({ canCancel: true })
+            await wrapper.setData({ isActive: true })
             wrapper.vm.close = jest.fn()
             wrapper.vm.cancel()
-            wrapper.vm.$nextTick(() => {
-                expect(wrapper.vm.close).toHaveBeenCalled()
-                done()
-            })
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.close).toHaveBeenCalled()
         })
 
-        it('close on escape', () => {
-            wrapper.vm.isActive = true
+        it('close on escape', async () => {
+            await wrapper.setData({ isActive: true })
             wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
-            const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+            const event = new KeyboardEvent('keyup', { key: 'Escape' })
             wrapper.vm.keyPress({})
             wrapper.vm.keyPress(event)
             expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
@@ -59,68 +54,90 @@ describe('BLoading', () => {
 
         it('emit events on close', () => {
             wrapper.vm.close()
-            expect(wrapper.emitted()['close']).toBeTruthy()
-            expect(wrapper.emitted()['update:active']).toBeTruthy()
+            expect(wrapper.emitted().close).toBeTruthy()
+            expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
         })
     })
 
     describe('programmatic without container', () => {
-        beforeEach(() => {
-            window.document.body.appendChild = jest.fn()
-            wrapper = shallowMount(BLoading, {
-                propsData: {
-                    programmatic: true
-                },
-                stubs: {
-                    transition: false
-                },
-                attachToDocument: true
-            })
+        let loading
+        let onClose
+        let spyOnAppendChild
+
+        beforeEach(async () => {
+            // resets stubs introduced by @vue/test-utils
+            // otherwise, every BLoading becomes a stub
+            transformVNodeArgs()
+
+            onClose = jest.fn()
+            spyOnAppendChild = jest.spyOn(window.document.body, 'appendChild')
+            loading = LoadingProgrammatic.open({ onClose })
+            await loading.$nextTick() // makes sure DOM is updated
+        })
+
+        afterEach(() => {
+            spyOnAppendChild.mockRestore()
+            jest.useFakeTimers()
+            loading.close()
+            // subsequent tests will fail unless we wait for the timeout
+            jest.advanceTimersByTime(150)
         })
 
         it('Is called', () => {
-            expect(wrapper.name()).toBe('BLoading')
-            expect(wrapper.isVueInstance()).toBeTruthy()
-            expect(window.document.body.appendChild).toHaveBeenCalled()
+            expect(spyOnAppendChild).toHaveBeenCalled()
+            expect(window.document.querySelector('.loading-overlay')).toBeTruthy()
         })
 
-        it('manage close', () => {
+        it('Is full page', () => {
+            expect(window.document.querySelector('.is-full-page')).toBeTruthy()
+        })
+
+        it('manage close', async () => {
             jest.useFakeTimers()
 
-            wrapper.vm.$destroy = jest.fn(() => wrapper.vm.$destroy)
-            wrapper.vm.close()
-
-            expect(wrapper.vm.isActive).toBeFalsy()
+            loading.close()
+            expect(onClose).toHaveBeenCalled()
+            expect(window.document.querySelector('.loading-overlay')).toBeTruthy()
             expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 150)
+
             jest.advanceTimersByTime(150)
-            expect(wrapper.vm.$destroy).toHaveBeenCalled()
+            expect(window.document.querySelector('.loading-overlay')).toBeFalsy()
         })
     })
 
-    const component = document.createElement('div')
     describe('programmatic with a container', () => {
-        beforeEach(() => {
-            component.appendChild = jest.fn()
-            wrapper = shallowMount(BLoading, {
-                propsData: {
-                    programmatic: true,
-                    container: component
-                },
-                stubs: {
-                    transition: false
-                },
-                attachToDocument: true
+        let loading
+        let container
+        let spyOnAppendChild
+
+        beforeEach(async () => {
+            // resets stubs introduced by @vue/test-utils
+            // otherwise, every BLoading becomes a stub
+            transformVNodeArgs()
+
+            container = document.createElement('div')
+            spyOnAppendChild = jest.spyOn(container, 'appendChild')
+            loading = LoadingProgrammatic.open({
+                container
             })
+            await loading.$nextTick() // makes sure DOM is updated
+        })
+
+        afterEach(() => {
+            spyOnAppendChild.mockRestore()
+            jest.useFakeTimers()
+            loading.close()
+            // subsequent tests may fail unless we wait for the timeout
+            jest.advanceTimersByTime(150)
         })
 
         it('Is called', () => {
-            expect(wrapper.name()).toBe('BLoading')
-            expect(wrapper.isVueInstance()).toBeTruthy()
-            expect(component.appendChild).toHaveBeenCalled()
+            expect(container.querySelector('.loading-overlay')).toBeTruthy()
+            expect(spyOnAppendChild).toHaveBeenCalled()
         })
 
         it('Is not full page', () => {
-            expect(wrapper.vm.displayInFullPage).toBeFalsy()
+            expect(container.querySelector('.is-full-page')).toBeFalsy()
         })
     })
 })
