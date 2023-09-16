@@ -2,7 +2,9 @@
 
 exports[`BCollapse default render correctly 1`] = `
 <div class="collapse">
-    <div aria-expanded="true"></div>
-    <div id="" class="collapse-content"></div>
+  <div class="collapse-trigger"></div>
+  <transition-stub name="fade" appear="false" persisted="false" css="true">
+    <div class="collapse-content" id=""></div>
+  </transition-stub>
 </div>
 `;

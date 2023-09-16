@@ -10,12 +10,12 @@ describe('BCollapse', () => {
         })
 
         it('is called', () => {
-            expect(wrapper.name()).toBe('BCollapse')
-            expect(wrapper.isVueInstance()).toBeTruthy()
+            expect(wrapper.vm).toBeTruthy()
+            expect(wrapper.vm.$options.name).toBe('BCollapse')
         })
 
         it('default props and vm', () => {
-            expect(wrapper.props().open).toBe(true)
+            expect(wrapper.props().modelValue).toBe(true)
             expect(wrapper.props().animation).toBe('fade')
             expect(wrapper.vm.isOpen).toBe(true)
         })
@@ -27,15 +27,15 @@ describe('BCollapse', () => {
     describe('open prop is false', () => {
         beforeEach(() => {
             wrapper = shallowMount(BCollapse, {
-                propsData: {
-                    open: false,
+                props: {
+                    modelValue: false,
                     position: 'is-bottom'
                 }
             })
         })
 
         it('set default open prop', () => {
-            expect(wrapper.props().open).toBe(false)
+            expect(wrapper.props().modelValue).toBe(false)
             expect(wrapper.vm.isOpen).toBe(false)
         })
 
@@ -47,27 +47,24 @@ describe('BCollapse', () => {
             expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
         })
 
-        it('emit a click event', () => {
+        it('emit a click event', async () => {
             expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
-            const updateOpen = jest.fn()
-            wrapper.vm.$on('update:open', updateOpen)
             wrapper.find('.collapse-trigger').trigger('click')
-            expect(updateOpen).toHaveBeenCalledTimes(1)
-            expect(updateOpen).toHaveBeenCalledWith(true)
+            await wrapper.vm.$nextTick()
+            expect(wrapper.emitted()['update:modelValue']).toEqual([[true]])
             expect(wrapper.vm.isOpen).toBe(true)
             expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
         })
 
-        it('should emit open event', () => {
-            const open = jest.fn()
-            wrapper.vm.$on('open', open)
+        it('should emit open event', async () => {
             wrapper.find('.collapse-trigger').trigger('click')
-            expect(open).toHaveBeenCalledTimes(1)
+            await wrapper.vm.$nextTick()
+            expect(wrapper.emitted().open).toBeTruthy()
         })
 
-        it('update open prop', () => {
+        it('update open prop', async () => {
             expect(wrapper.find('.collapse-content').isVisible()).toBe(false)
-            wrapper.setProps({ open: true })
+            await wrapper.setProps({ modelValue: true })
             expect(wrapper.vm.isOpen).toBe(true)
             expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
         })
@@ -77,16 +74,6 @@ describe('BCollapse', () => {
         const triggerSlot = '<strong> Header </strong>'
         const wrapper = shallowMount(BCollapse, {
             slots: {
-                trigger: triggerSlot
-            }
-        })
-        expect(wrapper.find('.collapse-trigger :first-child').html()).toBe(triggerSlot)
-    })
-
-    it('should have scoped trigger slot', () => {
-        const triggerSlot = '<strong> Header </strong>'
-        const wrapper = shallowMount(BCollapse, {
-            scopedSlots: {
                 trigger: triggerSlot
             }
         })
@@ -103,15 +90,14 @@ describe('BCollapse', () => {
         expect(wrapper.find('.collapse-content :first-child').html()).toBe(slotDefault)
     })
 
-    it('should emit close event', () => {
+    it('should emit close event', async () => {
         wrapper = shallowMount(BCollapse, {
-            propsData: {
-                open: true
+            props: {
+                modelValue: true
             }
         })
-        const close = jest.fn()
-        wrapper.vm.$on('close', close)
         wrapper.find('.collapse-trigger').trigger('click')
-        expect(close).toHaveBeenCalledTimes(1)
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted().close).toBeTruthy()
     })
 })
