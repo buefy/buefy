@@ -1,6 +1,15 @@
 import { shallowMount } from '@vue/test-utils'
 import BImage from '@components/image/Image'
 
+const snapshotOptions = {
+    global: {
+        stubs: {
+            // expands transition
+            transition: false
+        }
+    }
+}
+
 describe('BImage', () => {
     const originalClientWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth')
     const clientWidth = 500
@@ -13,37 +22,42 @@ describe('BImage', () => {
 
     it('is called', () => {
         const wrapper = shallowMount(BImage)
-        expect(wrapper.name()).toBe('BImage')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BImage')
     })
 
-    it('render correctly', () => {
-        const wrapper = shallowMount(BImage)
+    it('render correctly', async () => {
+        const wrapper = shallowMount(BImage, snapshotOptions)
+
+        await wrapper.vm.$nextTick() // waits for DOM updates
 
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('render placeholder correctly', () => {
+    it('render placeholder correctly', async () => {
         const baseName = 'my-image-source'
         const alt = 'Alt text'
         const placeholder = `${baseName}.png`
         const src = `${baseName}.webp`
         const wrapper = shallowMount(BImage, {
-            propsData: {
+            ...snapshotOptions,
+            props: {
                 alt,
                 placeholder,
                 src
             }
         })
 
+        await wrapper.vm.$nextTick() // waits for DOM updates
+
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('compute the image src as expected', () => {
+    it('compute the image src as expected', async () => {
         const baseName = 'my-image-source'
         const src = `${baseName}.webp`
         const wrapper = shallowMount(BImage, {
-            propsData: {
+            props: {
                 src
             }
         })
@@ -52,23 +66,23 @@ describe('BImage', () => {
         expect(vm.computedSrc).toBe(src)
 
         let webpFallback = '.jpg'
-        wrapper.setProps({
+        await wrapper.setProps({
             webpFallback
         })
         expect(vm.computedSrc).toBe(`${baseName}${webpFallback}`)
 
         webpFallback = 'a-complete-image-source.png'
-        wrapper.setProps({
+        await wrapper.setProps({
             webpFallback
         })
         expect(vm.computedSrc).toBe(webpFallback)
     })
 
-    it('compute the placeholder src as expected', () => {
+    it('compute the placeholder src as expected', async () => {
         const baseName = 'my-image-source'
         const placeholder = `${baseName}.webp`
         const wrapper = shallowMount(BImage, {
-            propsData: {
+            props: {
                 placeholder
             }
         })
@@ -76,20 +90,20 @@ describe('BImage', () => {
 
         expect(vm.computedPlaceholder).toBe(placeholder)
 
-        let webpFallback = '.jpg'
-        wrapper.setProps({
+        const webpFallback = '.jpg'
+        await wrapper.setProps({
             webpFallback
         })
         expect(vm.computedPlaceholder).toBe(`${baseName}${webpFallback}`)
     })
 
-    it('compute the srcset as expected', () => {
+    it('compute the srcset as expected', async () => {
         const baseName = 'my-image-source'
         const ext = '.webp'
         const src = `${baseName}${ext}`
         let srcset = `${src} 100w, ${src} 500w`
         const wrapper = shallowMount(BImage, {
-            propsData: {
+            props: {
                 src,
                 srcset
             }
@@ -99,32 +113,32 @@ describe('BImage', () => {
         expect(vm.computedSrcset).toBe(srcset)
         expect(vm.computedSizes).toBe(`${clientWidth}px`)
 
-        let webpFallback = '.jpg'
+        const webpFallback = '.jpg'
         srcset = `${baseName}${webpFallback} 100w, ${baseName}${webpFallback} 500w`
-        wrapper.setProps({
+        await wrapper.setProps({
             webpFallback
         })
         expect(vm.computedSrcset).toBe(srcset)
 
         srcset = `${baseName}-200${webpFallback} 200w,${baseName}-500${webpFallback} 500w`
-        wrapper.setProps({
+        await wrapper.setProps({
             srcset: null,
             srcsetSizes: [200, 500]
         })
         expect(vm.computedSrcset).toBe(srcset)
 
         srcset = `${baseName}${webpFallback}?s=200 200w,${baseName}${webpFallback}?s=500 500w`
-        wrapper.setProps({
+        await wrapper.setProps({
             srcsetFormatter: (src, size) => `${src}?s=${size}`
         })
         expect(vm.computedSrcset).toBe(srcset)
     })
 
-    it('manage ratio as expected', () => {
-        const src = `my-image-source.webp`
+    it('manage ratio as expected', async () => {
+        const src = 'my-image-source.webp'
         let ratio = null
         const wrapper = shallowMount(BImage, {
-            propsData: {
+            props: {
                 src
             }
         })
@@ -133,25 +147,25 @@ describe('BImage', () => {
         expect(vm.imgClasses['has-ratio']).toBeFalsy()
 
         ratio = '16by9'
-        wrapper.setProps({
+        await wrapper.setProps({
             ratio
         })
         expect(vm.imgClasses['has-ratio']).toBeTruthy()
         expect(vm.figureClasses[`is-${ratio}`]).toBeTruthy()
 
         ratio = '16by8'
-        wrapper.setProps({
+        await wrapper.setProps({
             ratio
         })
         expect(vm.imgClasses['has-ratio']).toBeTruthy()
-        expect(vm.figureStyles['paddingTop']).toBe(`${8 / 16 * 100}%`)
+        expect(vm.figureStyles.paddingTop).toBe(`${8 / 16 * 100}%`)
     })
 
     it('adds custom class to image as expected', () => {
-        const src = `my-image-source.webp`
-        let customClass = 'my-custom-class'
+        const src = 'my-image-source.webp'
+        const customClass = 'my-custom-class'
         const wrapper = shallowMount(BImage, {
-            propsData: {
+            props: {
                 src,
                 customClass
             }
@@ -165,31 +179,37 @@ describe('BImage', () => {
         window.removeEventListener = jest.fn()
 
         const wrapper = shallowMount(BImage)
-        wrapper.destroy()
+        wrapper.unmount()
 
         expect(window.removeEventListener).toBeCalledWith('resize', expect.any(Function))
     })
 
     describe('has caption', () => {
-        it('as last element', () => {
+        it('as last element', async () => {
             const wrapper = shallowMount(BImage, {
+                ...snapshotOptions,
                 slots: {
                     caption: ['<div>This is a caption</div>']
                 }
             })
+
+            await wrapper.vm.$nextTick() // waits for DOM updates
 
             expect(wrapper.html()).toMatchSnapshot()
         })
 
-        it('as first element', () => {
+        it('as first element', async () => {
             const wrapper = shallowMount(BImage, {
+                ...snapshotOptions,
                 slots: {
                     caption: ['<div>This is a caption</div>']
                 },
-                propsData: {
+                props: {
                     captionFirst: true
                 }
             })
+
+            await wrapper.vm.$nextTick() // waits for DOM updates
 
             expect(wrapper.html()).toMatchSnapshot()
         })

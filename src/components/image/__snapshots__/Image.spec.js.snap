@@ -2,36 +2,36 @@
 
 exports[`BImage has caption as first element 1`] = `
 <figure class="b-image-wrapper image">
-    <figcaption>
-        <div>This is a caption</div>
-    </figcaption> <img loading="lazy" class="" name="fade" width="500">
-    <!---->
-    <!---->
+  <figcaption>
+    <div>This is a caption</div>
+  </figcaption><img class="" loading="lazy" width="500">
+  <!--v-if-->
+  <!--v-if-->
 </figure>
 `;
 
 exports[`BImage has caption as last element 1`] = `
 <figure class="b-image-wrapper image">
-    <!----> <img loading="lazy" class="" name="fade" width="500">
-    <!---->
-    <figcaption>
-        <div>This is a caption</div>
-    </figcaption>
+  <!--v-if--><img class="" loading="lazy" width="500">
+  <!--v-if-->
+  <figcaption>
+    <div>This is a caption</div>
+  </figcaption>
 </figure>
 `;
 
 exports[`BImage render correctly 1`] = `
 <figure class="b-image-wrapper image">
-    <!----> <img loading="lazy" class="" name="fade" width="500">
-    <!---->
-    <!---->
+  <!--v-if--><img class="" loading="lazy" width="500">
+  <!--v-if-->
+  <!--v-if-->
 </figure>
 `;
 
 exports[`BImage render placeholder correctly 1`] = `
 <figure class="b-image-wrapper image">
-    <!---->
-    <!----> <img src="my-image-source.png" alt="Alt text" class="placeholder" name="fade">
-    <!---->
+  <!--v-if-->
+  <!--v-if--><img src="my-image-source.png" alt="Alt text" class="placeholder">
+  <!--v-if-->
 </figure>
 `;
