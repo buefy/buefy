@@ -7,11 +7,11 @@ describe('MessageMixin', () => {
     HTMLElement.prototype.insertAdjacentElement = jest.fn()
     beforeEach(() => {
         const component = {
-            template: '<div class="b-component"></div>'
+            template: '<div class="b-component"></div>',
+            mixins: [MessageMixin]
         }
         wrapper = shallowMount(component, {
-            attachToDocument: true,
-            mixins: [MessageMixin]
+            attachTo: document.body
         })
     })
 
@@ -19,34 +19,29 @@ describe('MessageMixin', () => {
         expect(wrapper.vm.isActive).toBeTruthy()
     })
 
-    it('should set isActive when active is set', (done) => {
-        wrapper.setProps({active: false})
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.vm.isActive).toBeFalsy()
-            done()
-        })
+    it('should set isActive when active is set', async () => {
+        await wrapper.setProps({ modelValue: false })
+        expect(wrapper.vm.isActive).toBeFalsy()
     })
 
-    it('should return correct icon depending on type', () => {
+    it('should return correct icon depending on type', async () => {
         const expected = {
             'is-info': 'information',
             'is-success': 'check-circle',
             'is-warning': 'alert',
             'is-danger': 'alert-circle',
-            'other': null
+            other: null
         }
-        for (let [key, value] of Object.entries(expected)) {
-            wrapper.setProps({type: key})
+        for (const [key, value] of Object.entries(expected)) {
+            await wrapper.setProps({ type: key })
             expect(wrapper.vm.computedIcon).toEqual(value)
         }
     })
 
-    it('should reset isActive and emit close event on close', (done) => {
+    it('should reset isActive and emit close event on close', async () => {
         wrapper.vm.close()
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.vm.isActive).toBeFalsy()
-            expect(wrapper.emitted()['close']).toBeTruthy()
-            done()
-        })
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.isActive).toBeFalsy()
+        expect(wrapper.emitted().close).toBeTruthy()
     })
 })

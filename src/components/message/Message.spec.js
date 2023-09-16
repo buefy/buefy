@@ -9,8 +9,8 @@ describe('BMessage', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BMessage')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BMessage')
     })
 
     it('render correctly', () => {
