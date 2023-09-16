@@ -1,4 +1,4 @@
-name: Unit Test Before Updating Dev or Production
+name: Unit Test Workflow
 on:
   push:
     branches:
