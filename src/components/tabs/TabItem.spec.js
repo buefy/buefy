@@ -1,4 +1,4 @@
-import {mount} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import BTabs from '@components/tabs/Tabs'
 import BTabItem from '@components/tabs/TabItem'
 
@@ -13,7 +13,7 @@ const WrapperComp = {
     },
     template: `
         <BTabs>
-            <BTabItem v-if="show1" value="tab1"/>
+            <BTabItem v-if="show1" ref="firstItem" value="tab1"/>
             <BTabItem ref="testItem" value="tab2"/>
             <BTabItem value="tab3" :visible="false"/>
         </BTabs>`,
@@ -25,12 +25,12 @@ const WrapperComp = {
 describe('BTabItem', () => {
     beforeEach(() => {
         wrapperParent = mount(WrapperComp)
-        wrapper = wrapperParent.find({ ref: 'testItem' })
+        wrapper = wrapperParent.findComponent({ ref: 'testItem' })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BTabItem')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BTabItem')
         expect(wrapper.vm.value).toBe('tab2')
     })
 
@@ -42,13 +42,20 @@ describe('BTabItem', () => {
         expect(wrapper.vm.index).toBe(1)
     })
 
-    it('will recompute indexes when a sibling gets removed', async () => {
+    it('will retain indexes when a sibling gets removed', async () => {
         expect(wrapper.vm.index).toBe(1)
-        wrapperParent.vm.show1 = false
+        await wrapperParent.setData({ show1: false })
+        expect(wrapper.vm.index).toBe(1)
+    })
 
-        await wrapper.vm.$nextTick()
+    it('should assign new index when tab is added after removal', async () => {
+        const firstItem = wrapperParent.findComponent({ ref: 'firstItem' })
+        expect(firstItem.vm.index).toBe(0)
+        await wrapperParent.setData({ show1: false })
+        await wrapperParent.setData({ show1: true })
 
-        expect(wrapper.vm.index).toBe(0)
+        const firstItem2 = wrapperParent.findComponent({ ref: 'firstItem' })
+        expect(firstItem2.vm.index).toBe(3)
     })
 
     it('transition correctly when activate is called', () => {
@@ -68,53 +75,57 @@ describe('BTabItem', () => {
     })
 
     it('doesn\'t mount when it has no parent', () => {
-        const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
-
         try {
-            wrapper = mount({
-                template: `<BTabItem/>`,
-                components: {
-                    BTabItem
-                },
-                destroyed() {
-                    spy()
-                }
-            })
+            mount(BTabItem)
         } catch (error) {
-            expect(error.message).stringMatching(/You should wrap/)
-        } finally {
-            spy.mockRestore()
+            expect(error.message).toEqual(expect.stringMatching(/You should wrap/))
         }
     })
 
     it('doesn\'t render when parent has destroyOnHide', async () => {
-        wrapper = mount({
-            template: `
-        <BTabs :destroy-on-hide="true">
-            <BTabItem></BTabItem>
-        </BTabs>`,
-            components: {
-                BTabs, BTabItem
+        wrapper = mount(BTabItem, {
+            props: {
+                value: 'tab1'
+            },
+            global: {
+                provide: {
+                    btab: {
+                        // since we cannot override the computed value,
+                        // `activeItem` needs to be identical to the item
+                        // to make the item active
+                        _registerItem(item) {
+                            this.activeItem = item
+                        },
+                        activeItem: null,
+                        destroyOnHide: true
+                    }
+                }
             }
-        }).find(BTabItem)
+        })
 
-        expect(wrapper.html()).not.toBe(undefined)
+        expect(wrapper.vm.isActive).toBeTruthy()
+        expect(wrapper.vm.visible).toBeTruthy()
+        expect(wrapper.html()).not.toBe('')
 
-        wrapper.setProps({visible: false})
+        await wrapper.setProps({ visible: false })
 
-        await wrapper.vm.$nextTick() // Wait until it's rerendered
-
-        expect(wrapper.html()).toBe(undefined)
+        expect(wrapper.html()).toBe('')
     })
 
     it('unregisters when destroyed', async () => {
         const wrapper = mount({
             template: `
-        <BTabs>
+        <BTabs v-model="value">
             <BTabItem ref="item1"/>
             <BTabItem v-if="item2" ref="item2"/>
         </BTabs>`,
             props: {
+                // we cannot directly manipulate BTabs' modelValue unless it is
+                // directly mounted. uses indirect v-model instead
+                value: {
+                    type: Number,
+                    default: 0
+                },
                 item2: {
                     type: Boolean,
                     default: true
@@ -125,19 +136,17 @@ describe('BTabItem', () => {
             }
         })
 
-        expect(wrapper.find({ref: 'item2'})).toBeTruthy()
-        expect(wrapper.find(BTabs).vm.items.length).toBe(2)
+        expect(wrapper.findComponent({ ref: 'item2' })).toBeTruthy()
+        expect(wrapper.findComponent(BTabs).vm.items.length).toBe(2)
 
-        wrapper.setProps({item2: false})
+        await wrapper.setProps({ item2: false })
 
-        expect(wrapper.find(BTabs).vm.items.length).toBe(1)
+        expect(wrapper.findComponent(BTabs).vm.items.length).toBe(1)
 
-        wrapper.setProps({item2: true})
-        wrapper.find(BTabs).setProps({value: 1})
+        await wrapper.setProps({ item2: true })
+        await wrapper.setProps({ value: 1 }) // cannot merge with above
 
-        await wrapper.vm.$nextTick()
-
-        expect(wrapper.find(BTabs).vm.items.length).toBe(2)
-        expect(wrapper.find({ref: 'item2'}).vm.isActive).toBeTruthy()
+        expect(wrapper.findComponent(BTabs).vm.items.length).toBe(2)
+        expect(wrapper.findComponent({ ref: 'item2' }).vm.isActive).toBeTruthy()
     })
 })
