@@ -9,8 +9,8 @@ describe('BRadioButton', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BRadioButton')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BRadioButton')
     })
 
     it('render correctly', () => {
@@ -18,23 +18,21 @@ describe('BRadioButton', () => {
     })
 
     it('has an input radio', () => {
-        expect(wrapper.contains('label input[type=radio]')).toBeTruthy()
+        expect(wrapper.find('label input[type=radio]').exists()).toBeTruthy()
     })
 
-    it('emit input event with value when value change', () => {
-        wrapper.setProps({ value: true })
+    it('emit input event with value when value change', async () => {
+        await wrapper.setProps({ modelValue: true })
         expect(wrapper.vm.computedValue).toBeTruthy()
         wrapper.vm.computedValue = false
-        const valueEmitted = wrapper.emitted()['input'][0]
+        const valueEmitted = wrapper.emitted()['update:modelValue'][0]
         expect(valueEmitted).toContainEqual(false)
     })
 
-    it('method focus() gives focus to the input element', (done) => {
+    it('method focus() gives focus to the input element', async () => {
         wrapper.vm.$refs.input.focus = jest.fn()
         wrapper.vm.focus()
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
-            done()
-        })
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
     })
 })
