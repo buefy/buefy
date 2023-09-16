@@ -12,7 +12,7 @@ describe('BColorpickerHSLRepresentationSquare', () => {
     })
     it('render correctly', () => {
         const wrapper = shallowMount(BColorpickerHSLRepresentationSquare, {
-            propsData: {
+            props: {
                 ...defaultProps()
             }
         })

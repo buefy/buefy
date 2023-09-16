@@ -5,7 +5,7 @@ import BColorpickerAlphaSlider from '@components/colorpicker/ColorpickerAlphaSli
 describe('BColorpickerAlphaSlider', () => {
     it('render correctly', () => {
         const wrapper = shallowMount(BColorpickerAlphaSlider, {
-            propsData: {
+            props: {
                 value: 100,
                 color: Color.parse('#123456')
             }

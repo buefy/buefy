@@ -2,31 +2,75 @@
 
 exports[`BColorpicker render correctly 1`] = `
 <div class="colorpicker control">
-    <b-dropdown-stub maxheight="200" triggers="click" mobilemodal="true" ariarole="dialog" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
-        <b-dropdown-item-stub custom="true" focusable="true" ariarole="" class="">
+  <div class="dropdown dropdown-menu-animation is-mobile-modal">
+    <div tabindex="0" class="dropdown-trigger" aria-haspopup="true">
+      <b-button style="background-color: rgb(255, 255, 255); background-size: 100% 100%, 16px 16px, 16px 16px; color: rgb(255, 255, 255); text-shadow: 0 0 2px #000000AA;" expanded="false" disabled="false"><span class="color-name">#00000000</span></b-button>
+    </div>
+    <transition-stub name="fade" appear="false" persisted="false" css="true">
+      <div class="background" aria-hidden="true" style="display: none;"></div>
+    </transition-stub>
+    <transition-stub name="fade" appear="false" persisted="true" css="true">
+      <div class="dropdown-menu" aria-hidden="true" style="display: none;">
+        <div class="dropdown-content" role="dialog" aria-modal="true">
+          <div class="dropdown-item" tabindex="0">
             <div>
-                <header class="colorpicker-header">
-                    <!---->
-                </header>
-                <div class="colorpicker-content">
-                    <b-colorpicker-h-s-l-representation-triangle-stub value="#000000" size="200" thickness="20"></b-colorpicker-h-s-l-representation-triangle-stub>
-                </div>
+              <header class="colorpicker-header">
+                <!--v-if-->
+              </header>
+              <div class="colorpicker-content">
+                <b-colorpicker-h-s-l-representation-triangle-stub size="200" thickness="20" value="#000000"></b-colorpicker-h-s-l-representation-triangle-stub>
+              </div>
             </div>
             <footer class="colorpicker-footer">
-                <!---->
-                <b-field-stub grouped="true" addons="true" class="colorpicker-fields">
-                    <b-field-stub label="R" horizontal="true" addons="true">
-                        <b-input-stub size="is-small" usehtml5validation="true" statusicon="true" value="0" type="number" hascounter="true" customclass="" aria-label="Red"></b-input-stub>
-                    </b-field-stub>
-                    <b-field-stub label="G" horizontal="true" addons="true">
-                        <b-input-stub size="is-small" usehtml5validation="true" statusicon="true" value="0" type="number" hascounter="true" customclass="" aria-label="Green"></b-input-stub>
-                    </b-field-stub>
-                    <b-field-stub label="B" horizontal="true" addons="true">
-                        <b-input-stub size="is-small" usehtml5validation="true" statusicon="true" value="0" type="number" hascounter="true" customclass="" aria-label="Blue"></b-input-stub>
-                    </b-field-stub>
-                </b-field-stub>
+              <!--v-if-->
+              <div class="field colorpicker-fields">
+                <!--v-if-->
+                <div class="field-body">
+                  <div class="field is-grouped">
+                    <!--v-if-->
+                    <div class="field is-horizontal">
+                      <div class="field-label"><label class="label">R</label></div>
+                      <div class="field-body">
+                        <div class="field">
+                          <!--v-if-->
+                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" modelmodifiers="[object Object]" size="is-small" aria-label="Red"></b-input-stub>
+                          <!--v-if-->
+                        </div>
+                      </div>
+                      <!--v-if-->
+                    </div>
+                    <div class="field is-horizontal">
+                      <div class="field-label"><label class="label">G</label></div>
+                      <div class="field-body">
+                        <div class="field">
+                          <!--v-if-->
+                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" modelmodifiers="[object Object]" size="is-small" aria-label="Green"></b-input-stub>
+                          <!--v-if-->
+                        </div>
+                      </div>
+                      <!--v-if-->
+                    </div>
+                    <div class="field is-horizontal">
+                      <div class="field-label"><label class="label">B</label></div>
+                      <div class="field-body">
+                        <div class="field">
+                          <!--v-if-->
+                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" modelmodifiers="[object Object]" size="is-small" aria-label="Blue"></b-input-stub>
+                          <!--v-if-->
+                        </div>
+                      </div>
+                      <!--v-if-->
+                    </div>
+                    <!--v-if-->
+                  </div>
+                </div>
+                <!--v-if-->
+              </div>
             </footer>
-        </b-dropdown-item-stub>
-    </b-dropdown-stub>
+          </div>
+        </div>
+      </div>
+    </transition-stub>
+  </div>
 </div>
 `;
