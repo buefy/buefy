@@ -8,7 +8,8 @@ describe('BNavbarBurger', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('NavbarBurger')
     })
 
     it('render correctly', () => {
@@ -16,13 +17,12 @@ describe('BNavbarBurger', () => {
     })
 
     it('should be an anchor tag', () => {
-        const anchorTag = wrapper.find('.navbar-burger')
-        expect(anchorTag.is('a')).toBe(true)
+        expect(wrapper.find('a.navbar-burger').exists()).toBeTruthy()
     })
 
-    it('should have the is-active class when the prop isOpened is true', () => {
+    it('should have the is-active class when the prop isOpened is true', async () => {
         const burgerWrapper = mount(BNavbarBurger)
-        burgerWrapper.setProps({ isOpened: true })
+        await burgerWrapper.setProps({ isOpened: true })
         expect(burgerWrapper.classes('is-active')).toBe(true)
     })
 })

@@ -9,19 +9,19 @@ describe('BNavbarDropdown', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BNavbarDropdown')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BNavbarDropdown')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('sets newActive when active prop is changed', () => {
-        wrapper.setProps({active: true})
+    it('sets newActive when active prop is changed', async () => {
+        await wrapper.setProps({ active: true })
         expect(wrapper.vm.newActive).toBeTruthy()
 
-        wrapper.setProps({active: false})
+        await wrapper.setProps({ active: false })
         expect(wrapper.vm.newActive).toBeFalsy()
     })
 

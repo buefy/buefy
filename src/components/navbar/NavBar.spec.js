@@ -8,7 +8,8 @@ describe('BNavbar', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BNavbar')
     })
 
     it('render correctly', () => {
@@ -16,27 +17,27 @@ describe('BNavbar', () => {
     })
 
     it('should have a nav tag', () => {
-        expect(wrapper.contains('nav')).toBeTruthy()
+        expect(wrapper.find('nav').exists()).toBeTruthy()
     })
 
-    it('should emmit the sync event when the burger menu was clicked', () => {
+    it('should emmit the sync event when the burger menu was clicked', async () => {
         const anchorTag = wrapper.find('.navbar-burger')
-        anchorTag.trigger('click')
-        const valueEmitted = wrapper.emitted()['update:active'][0]
+        await anchorTag.trigger('click')
+        const valueEmitted = wrapper.emitted()['update:modelValue'][0]
         expect(valueEmitted).toContainEqual(true)
         expect(wrapper.vm.isOpened).toBe(true)
     })
 
-    it('should have the is-active class when we set the active prop manually', () => {
+    it('should have the is-active class when we set the active prop manually', async () => {
         const navBar = mount(BNavbar)
-        navBar.setProps({ active: true })
+        await navBar.setProps({ modelValue: true })
         const menuContainer = navBar.find('.navbar-menu')
         expect(menuContainer.classes('is-active')).toBe(true)
     })
 
     it('should wrap the slots into a wrapper when we set the wrapperClass prop', () => {
         const navBar = mount(BNavbar, {
-            propsData: {
+            props: {
                 wrapperClass: 'container'
             }
         })
@@ -44,17 +45,17 @@ describe('BNavbar', () => {
         expect(navBar.find('.container').exists()).toBe(true)
     })
 
-    it('manage closing the menu as expected', () => {
+    it('manage closing the menu as expected', async () => {
         wrapper.vm.emitUpdateParentEvent = jest.fn()
 
-        wrapper.setProps({
-            active: true,
+        await wrapper.setProps({
+            modelValue: true,
             closeOnClick: false
         })
         wrapper.vm.closeMenu()
 
-        wrapper.setProps({
-            active: true,
+        await wrapper.setProps({
+            modelValue: true,
             closeOnClick: true
         })
         wrapper.vm.closeMenu()
@@ -66,10 +67,10 @@ describe('BNavbar', () => {
     it('set body classes as expected', async () => {
         wrapper.vm.setBodyClass = jest.fn(() => wrapper.vm.setBodyClass)
 
-        wrapper.setProps({ fixedTop: true })
+        await wrapper.setProps({ fixedTop: true })
         expect(wrapper.vm.setBodyClass).toHaveBeenCalled()
 
-        wrapper.setProps({ fixedTop: false, fixedBottom: true })
+        await wrapper.setProps({ fixedTop: false, fixedBottom: true })
         expect(wrapper.vm.setBodyClass).toHaveBeenCalled()
     })
 })

@@ -1,6 +1,5 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import BNavbarItem from '@components/navbar/NavbarItem'
-import sinon from 'sinon'
 
 let wrapper
 
@@ -23,55 +22,59 @@ describe('BNavbarItem', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BNavbarItem')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BNavbarItem')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('correctly renders the provided tag', () => {
-        wrapper.setProps({tag})
-        expect(wrapper.contains(tag)).toBeTruthy()
+    it('correctly renders the provided tag', async () => {
+        await wrapper.setProps({ tag })
+        expect(wrapper.find(tag).exists()).toBeTruthy()
     })
 
-    it('emit event from tag and out', () => {
-        let testStub = sinon.stub()
+    it('emit event from tag and out', async () => {
+        const testStub = jest.fn()
 
-        let emitWrap = shallowMount(BNavbarItem, {
-            listeners: {
-                test_event: testStub
+        const emitWrap = shallowMount(BNavbarItem, {
+            props: {
+                onTest_event: testStub
             },
             slots: {
                 default: '<div class="test_inner"/>'
             }
         })
 
-        let inner = emitWrap.find('.test_inner')
+        const inner = emitWrap.find('div.test_inner')
+        expect(inner).toBeTruthy()
 
-        expect(inner.name()).toBe('div')
-        inner.trigger('test_event')
-        expect(testStub.called).toBe(true)
+        await inner.trigger('test_event')
+        expect(testStub).toHaveBeenCalled()
     })
 
     it('close on escape', () => {
-        wrapper = shallowMount(BNavbarItem, {
-            parentComponent: stubBNavBar
-        })
+        wrapper = mount(stubBNavBar, {
+            slots: {
+                default: BNavbarItem
+            }
+        }).findComponent(BNavbarItem)
         wrapper.vm.$parent.closeMenu = jest.fn()
-        const event = new KeyboardEvent('keyup', {'key': 'Escape'})
+        const event = new KeyboardEvent('keyup', { key: 'Escape' })
         wrapper.vm.keyPress({})
         wrapper.vm.keyPress(event)
         expect(wrapper.vm.$parent.closeMenu).toHaveBeenCalledTimes(1)
     })
 
     it('manage click as expected', () => {
-        wrapper = shallowMount(BNavbarItem, {
-            parentComponent: stubBNavBar
-        })
+        wrapper = mount(stubBNavBar, {
+            slots: {
+                default: BNavbarItem
+            }
+        }).findComponent(BNavbarItem)
         wrapper.vm.$parent.closeMenu = jest.fn()
-        const event = new KeyboardEvent('click')
+        const event = new MouseEvent('click')
         wrapper.vm.handleClickEvent({
             ...event,
             target: { localName: 'a' }
