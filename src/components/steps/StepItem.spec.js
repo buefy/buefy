@@ -1,15 +1,17 @@
-import {mount} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import BSteps from '@components/steps/Steps'
 import BStepItem from '@components/steps/StepItem'
 
 let wrapper
 
 const WrapperComp = {
+    // values must be specified to make the snapshot reproducible
+    // I took the values from the legacy snapshot.
     template: `
         <BSteps>
-            <BStepItem/>
-            <BStepItem ref="testItem"/>
-            <BStepItem :visible="false"/>
+            <BStepItem value="14" />
+            <BStepItem value="16" ref="testItem"/>
+            <BStepItem value="18" :visible="false"/>
         </BSteps>`,
     components: {
         BSteps, BStepItem
@@ -18,12 +20,12 @@ const WrapperComp = {
 
 describe('BStepItem', () => {
     beforeEach(() => {
-        wrapper = mount(WrapperComp, { sync: false }).find({ ref: 'testItem' })
+        wrapper = mount(WrapperComp).findComponent({ ref: 'testItem' })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BStepItem')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BStepItem')
     })
 
     it('render correctly', () => {
@@ -51,22 +53,6 @@ describe('BStepItem', () => {
     })
 
     it('doesn\'t mount when it has no parent', () => {
-        const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
-
-        try {
-            wrapper = mount({
-                template: `<BStepItem/>`,
-                components: {
-                    BStepItem
-                },
-                destroyed() {
-                    spy()
-                }
-            })
-        } catch (error) {
-            expect(error.message).stringMatching(/You should wrap/)
-        } finally {
-            spy.mockRestore()
-        }
+        expect(() => mount(BStepItem)).toThrow(/You should wrap/)
     })
 })
