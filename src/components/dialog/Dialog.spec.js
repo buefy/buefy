@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import BDialog from '@components/dialog/Dialog'
-import config, {setOptions} from '@utils/config'
+import config, { setOptions } from '@utils/config'
 
 let wrapper
 
@@ -8,21 +8,18 @@ describe('BDialog', () => {
     HTMLElement.prototype.focus = jest.fn()
     beforeEach(() => {
         wrapper = shallowMount(BDialog, {
-            attachToDocument: true
+            attachTo: document.body
         })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BDialog')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BDialog')
     })
 
-    it('gives focus to the input element if it contains one', (done) => {
-        wrapper.setProps({ hasInput: true })
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
-            done()
-        })
+    it('gives focus to the input element if it contains one', async () => {
+        await wrapper.setProps({ hasInput: true })
+        expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
     })
 
     it('manage default config props values', () => {
@@ -45,34 +42,36 @@ describe('BDialog', () => {
         expect(ariaRole.validator && ariaRole.validator('alertdialog')).toBeTruthy()
     })
 
-    it('manage icons', () => {
-        wrapper.setProps({ type: 'is-info' })
+    it('manage icons', async () => {
+        await wrapper.setProps({ type: 'is-info' })
         expect(wrapper.vm.iconByType).toBe('information')
 
-        wrapper.setProps({ type: 'is-success' })
+        await wrapper.setProps({ type: 'is-success' })
         expect(wrapper.vm.iconByType).toBe('check-circle')
 
-        wrapper.setProps({ type: 'is-warning' })
+        await wrapper.setProps({ type: 'is-warning' })
         expect(wrapper.vm.iconByType).toBe('alert')
 
-        wrapper.setProps({ type: 'is-danger' })
+        await wrapper.setProps({ type: 'is-danger' })
         expect(wrapper.vm.iconByType).toBe('alert-circle')
 
-        wrapper.setProps({ type: 'is-primary' })
+        await wrapper.setProps({ type: 'is-primary' })
         expect(wrapper.vm.iconByType).toBeNull()
     })
 
-    it('close on confirm', () => {
-        wrapper.setProps({ onConfirm: jest.fn() })
+    it('close on confirm', async () => {
+        await wrapper.setProps({ confirmCallback: jest.fn() })
         wrapper.vm.confirm()
         expect(wrapper.vm.isActive).toBeFalsy()
-        expect(wrapper.vm.onConfirm).toHaveBeenCalled()
+        expect(wrapper.vm.confirmCallback).toHaveBeenCalled()
+        expect(wrapper.emitted().confirm).toEqual([['']])
     })
 
-    it('closeOnConfirm prop equals false', () => {
-        wrapper.setProps({ onConfirm: jest.fn(), closeOnConfirm: false })
+    it('closeOnConfirm prop equals false', async () => {
+        await wrapper.setProps({ confirmCallback: jest.fn(), closeOnConfirm: false })
         wrapper.vm.confirm()
         expect(wrapper.vm.isActive).toBeTruthy()
-        expect(wrapper.vm.onConfirm).toHaveBeenCalled()
+        expect(wrapper.vm.confirmCallback).toHaveBeenCalled()
+        expect(wrapper.emitted().confirm).toEqual([['']])
     })
 })
