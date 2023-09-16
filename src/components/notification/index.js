@@ -4,10 +4,14 @@ import Notification from './Notification.vue'
 import NotificationNotice from './NotificationNotice.vue'
 
 import config from '../../utils/config'
-import { merge, getComponentFromVNode } from '../../utils/helpers'
+import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
-const NotificationProgrammatic = {
+class NotificationProgrammatic {
+    constructor(app) {
+        this.app = app // may be undefined in the testing environment
+    }
+
     open(params) {
         if (typeof params === 'string') {
             params = {
@@ -33,6 +37,7 @@ const NotificationProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
         const container = document.createElement('div')
+        // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
             data() {
                 return {
@@ -67,15 +72,19 @@ const NotificationProgrammatic = {
                 return this.noticeVNode
             }
         })
-        // workaround for an error that
-        // $buefy.globalNoticeInterval is not defined
-        vueInstance.use({
-            install: (Vue) => {
-                Vue.config.globalProperties.$buefy = {
-                    globalNoticeInterval: null
+        if (this.app) {
+            copyAppContext(this.app, vueInstance)
+        } else {
+            // workaround for an error that
+            // $buefy.globalNoticeInterval is not defined
+            vueInstance.use({
+                install: (Vue) => {
+                    Vue.config.globalProperties.$buefy = {
+                        globalNoticeInterval: null
+                    }
                 }
-            }
-        })
+            })
+        }
         return vueInstance.mount(container)
     }
 }
@@ -83,7 +92,7 @@ const NotificationProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Notification)
-        registerComponentProgrammatic(Vue, 'notification', NotificationProgrammatic)
+        registerComponentProgrammatic(Vue, 'notification', new NotificationProgrammatic(Vue))
     }
 }
 

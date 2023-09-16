@@ -3,10 +3,14 @@ import { createApp, h as createElement } from 'vue'
 import Toast from './Toast.vue'
 
 import config from '../../utils/config'
-import { merge, getComponentFromVNode } from '../../utils/helpers'
+import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
-const ToastProgrammatic = {
+class ToastProgrammatic {
+    constructor(app) {
+        this.app = app // may be undefined in the testing environment
+    }
+
     open(params) {
         if (typeof params === 'string') {
             params = {
@@ -27,6 +31,7 @@ const ToastProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
         const container = document.createElement('div')
+        // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
             data() {
                 return {
@@ -66,16 +71,20 @@ const ToastProgrammatic = {
                 return this.toastVNode
             }
         })
-        // adds $buefy global property
-        // so that $buefy.globalNoticeInterval is available on the new Vue app
-        vueInstance.config.globalProperties.$buefy = {}
+        if (this.app) {
+            copyAppContext(this.app, vueInstance)
+        } else {
+            // adds $buefy global property
+            // so that $buefy.globalNoticeInterval is available on the new Vue app
+            vueInstance.config.globalProperties.$buefy = {}
+        }
         return vueInstance.mount(container)
     }
 }
 
 const Plugin = {
     install(Vue) {
-        registerComponentProgrammatic(Vue, 'toast', ToastProgrammatic)
+        registerComponentProgrammatic(Vue, 'toast', new ToastProgrammatic(Vue))
     }
 }
 

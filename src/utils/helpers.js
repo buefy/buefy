@@ -332,3 +332,28 @@ export function getComponentFromVNode(vnode) {
     }
     return component.expose ? component.expose : component.proxy
 }
+
+// Copies the context from a given app to another app.
+//
+// This function is necessary to programmatically mount a component; e.g.,
+// Modal.
+// Since Vue 3's app can mount only one component, we have to create a new app
+// to mount another new component.
+// If we create a new app with `createApp` API, no context (e.g., installed
+// components, directives) is available on the new app.
+// This function can copy the context from the host app to the new app.
+//
+// Depends on what Vue internally does: https://github.com/vuejs/core/blob/b775b71c788499ec7ee58bc2cf4cd04ed388e072/packages/runtime-core/src/apiCreateApp.ts#L170-L190
+export function copyAppContext(src, dest) {
+    // replacing _context won't work because methods of app bypasses app._context
+    const { _context: srcContext } = src
+    const { _context: destContext } = dest
+    destContext.config = srcContext.config
+    destContext.mixins = srcContext.mixins
+    destContext.components = srcContext.components
+    destContext.directives = srcContext.directives
+    destContext.provdes = srcContext.provides
+    destContext.optionsCache = srcContext.optionsCache
+    destContext.propsCache = srcContext.propsCache
+    destContext.emitsCache = srcContext.emitsCache
+}

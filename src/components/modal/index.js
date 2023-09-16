@@ -2,16 +2,14 @@ import { createApp, h as createElement } from 'vue'
 
 import Modal from './Modal.vue'
 
-import { merge, getComponentFromVNode } from '../../utils/helpers'
+import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
-const ModalProgrammatic = {
-    // component specified to the `component` option cannot resolve components
-    // registered to the caller app, because `open` creates a brand-new app
-    // by the `createApp` API.
-    // so the component specified to the `component` option has to explicitly
-    // reference components that it depends on.
-    // see /docs/pages/components/modal/examples/ExProgrammatic for an example.
+class ModalProgrammatic {
+    constructor(app) {
+        this.app = app // may be undefined in the testing environment
+    }
+
     open(params) {
         if (typeof params === 'string') {
             params = {
@@ -32,8 +30,7 @@ const ModalProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
         const container = document.createElement('div')
-        // I could not figure out how to extend an existing app to create a new
-        // Vue instance on Vue 3.
+        // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
             data() {
                 return {
@@ -70,6 +67,9 @@ const ModalProgrammatic = {
                 return this.modalVNode
             }
         })
+        if (this.app) {
+            copyAppContext(this.app, vueInstance)
+        }
         return vueInstance.mount(container)
     }
 }
@@ -77,7 +77,7 @@ const ModalProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Modal)
-        registerComponentProgrammatic(Vue, 'modal', ModalProgrammatic)
+        registerComponentProgrammatic(Vue, 'modal', new ModalProgrammatic(Vue))
     }
 }
 

@@ -2,16 +2,21 @@ import { createApp, h as createElement } from 'vue'
 
 import Loading from './Loading.vue'
 
-import { merge, getComponentFromVNode } from '../../utils/helpers'
+import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
-const LoadingProgrammatic = {
+class LoadingProgrammatic {
+    constructor(app) {
+        this.app = app // may be undefined in the testing environment
+    }
+
     open(params) {
         const defaultParam = {
             programmatic: true
         }
         const propsData = merge(defaultParam, params)
         const container = document.createElement('div')
+        // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
             data() {
                 return {
@@ -46,6 +51,9 @@ const LoadingProgrammatic = {
                 return this.loadingVNode
             }
         })
+        if (this.app) {
+            copyAppContext(this.app, vueInstance)
+        }
         return vueInstance.mount(container)
     }
 }
@@ -53,7 +61,7 @@ const LoadingProgrammatic = {
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Loading)
-        registerComponentProgrammatic(Vue, 'loading', LoadingProgrammatic)
+        registerComponentProgrammatic(Vue, 'loading', new LoadingProgrammatic(Vue))
     }
 }
 

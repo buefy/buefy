@@ -18,18 +18,7 @@
 <script>
     import { h } from 'vue'
 
-    // `modal.open` can no longer resolve components registered in
-    // the current app because it creates a brand-new app.
-    // so components referenced from the component specified to the `component`
-    // option have to be explicitly registered.
-    import { BButton } from '../../../../../src/components/button'
-    import { BCheckbox } from '../../../../../src/components/checkbox'
-    import { BField } from '../../../../../src/components/field'
-    import { BInput } from '../../../../../src/components/input'
-
     const ModalForm = {
-        // see above
-        components: { BButton, BCheckbox, BField, BInput },
         props: ['email', 'password'],
         template: `
             <form action="">

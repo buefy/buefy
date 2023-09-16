@@ -3,10 +3,14 @@ import { createApp, h as createElement } from 'vue'
 import Snackbar from './Snackbar.vue'
 
 import config from '../../utils/config'
-import { merge, getComponentFromVNode } from '../../utils/helpers'
+import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { use, registerComponentProgrammatic } from '../../utils/plugins'
 
-const SnackbarProgrammatic = {
+class SnackbarProgrammatic {
+    constructor(app) {
+        this.app = app // may be undefined in the testing environment
+    }
+
     open(params) {
         if (typeof params === 'string') {
             params = {
@@ -29,6 +33,7 @@ const SnackbarProgrammatic = {
         }
         const propsData = merge(defaultParam, params)
         const container = document.createElement('div')
+        // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
             data() {
                 return {
@@ -64,16 +69,20 @@ const SnackbarProgrammatic = {
                 return this.snackbarVNode
             }
         })
-        // adds $buefy global property so that
-        // this.$buefy.globalNoticeInterval is available
-        vueInstance.config.globalProperties.$buefy = {}
+        if (this.app) {
+            copyAppContext(this.app, vueInstance)
+        } else {
+            // adds $buefy global property so that
+            // this.$buefy.globalNoticeInterval is available
+            vueInstance.config.globalProperties.$buefy = {}
+        }
         return vueInstance.mount(container)
     }
 }
 
 const Plugin = {
     install(Vue) {
-        registerComponentProgrammatic(Vue, 'snackbar', SnackbarProgrammatic)
+        registerComponentProgrammatic(Vue, 'snackbar', new SnackbarProgrammatic(Vue))
     }
 }
 
