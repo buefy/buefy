@@ -9,7 +9,7 @@ const pickerSize = 500
 describe('BClockpickerFace', () => {
     beforeEach(() => {
         wrapper = shallowMount(BClockpickerFace, {
-            propsData: {
+            props: {
                 pickerSize,
                 min: 0,
                 max: 23
@@ -18,19 +18,19 @@ describe('BClockpickerFace', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BClockpickerFace')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BClockpickerFace')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('returns countPerRing correctly', () => {
+    it('returns countPerRing correctly', async () => {
         const count = wrapper.vm.max - wrapper.vm.min + 1
         expect(wrapper.vm.countPerRing).toEqual(count)
 
-        wrapper.setProps({double: true})
+        await wrapper.setProps({ double: true })
         expect(wrapper.vm.countPerRing).toEqual(count / 2)
     })
 
@@ -53,17 +53,17 @@ describe('BClockpickerFace', () => {
         expect(wrapper.vm.degrees).toEqual(wrapper.vm.degreesPerUnit * Math.PI / 180)
     })
 
-    it('set inputValue when value changed', () => {
-        wrapper.vm.inputValue = 2
-        wrapper.setProps({value: 2})
+    it('set inputValue when value changed', async () => {
+        await wrapper.setData({ inputValue: 2 })
+        await wrapper.setProps({ value: 2 })
         expect(wrapper.vm.inputValue).toEqual(2)
 
-        wrapper.setProps({value: 3})
+        await wrapper.setProps({ value: 3 })
         expect(wrapper.vm.inputValue).toEqual(3)
     })
 
-    it('calls disabledValues function when isDisabled is called', () => {
-        wrapper.setProps({disabledValues: jest.fn()})
+    it('calls disabledValues function when isDisabled is called', async () => {
+        await wrapper.setProps({ disabledValues: jest.fn() })
         wrapper.vm.isDisabled(2)
         expect(wrapper.vm.disabledValues).toHaveBeenCalled()
     })
@@ -84,11 +84,11 @@ describe('BClockpickerFace', () => {
         expect(wrapper.vm.isDragging).toBeFalsy()
     })
 
-    it('manage onDragMove', () => {
+    it('manage onDragMove', async () => {
         const e = {
             preventDefault: jest.fn()
         }
-        wrapper.setData({isDragging: true})
+        await wrapper.setData({ isDragging: true })
         wrapper.vm.update = jest.fn()
         wrapper.vm.onDragMove(e)
         expect(e.preventDefault).toHaveBeenCalled()

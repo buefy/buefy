@@ -6,89 +6,98 @@ let wrapper
 describe('BClockpicker', () => {
     beforeEach(() => {
         wrapper = shallowMount(BClockpicker, {
-            propsData: {
+            props: {
                 locale: 'en-US'
+            },
+            global: {
+                stubs: {
+                    'b-dropdown': false
+                }
             }
         })
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BClockpicker')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BClockpicker')
     })
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('displays hours accordingly', () => {
+    it('displays hours accordingly', async () => {
         expect(wrapper.vm.hoursDisplay).toBe('--')
 
-        wrapper.setProps({hourFormat: '24'})
-        wrapper.vm.hoursSelected = 5
+        await wrapper.setProps({ hourFormat: '24' })
+        await wrapper.setData({ hoursSelected: 5 })
         expect(wrapper.vm.hoursDisplay).toBe('05')
-        wrapper.vm.hoursSelected = 10
+        await wrapper.setData({ hoursSelected: 10 })
         expect(wrapper.vm.hoursDisplay).toBe('10')
-        wrapper.vm.hoursSelected = 15
+        await wrapper.setData({ hoursSelected: 15 })
         expect(wrapper.vm.hoursDisplay).toBe('15')
 
-        wrapper.setProps({hourFormat: '12'})
-        wrapper.vm.meridienSelected = wrapper.vm.AM
-        wrapper.vm.hoursSelected = 5
+        await wrapper.setProps({ hourFormat: '12' })
+        await wrapper.setData({
+            meridienSelected: wrapper.vm.AM,
+            hoursSelected: 5
+        })
         expect(wrapper.vm.hoursDisplay).toBe(5)
-        wrapper.vm.hoursSelected = 10
+        await wrapper.setData({ hoursSelected: 10 })
         expect(wrapper.vm.hoursDisplay).toBe(10)
-        wrapper.vm.meridienSelected = wrapper.vm.PM
-        wrapper.vm.hoursSelected = 12
+        await wrapper.setData({
+            meridienSelected: wrapper.vm.PM,
+            hoursSelected: 12
+        })
         expect(wrapper.vm.hoursDisplay).toBe(12)
-        wrapper.vm.hoursSelected = 15
+        await wrapper.setData({ hoursSelected: 15 })
         expect(wrapper.vm.hoursDisplay).toBe(3)
     })
 
-    it('displays minutes accordingly', () => {
+    it('displays minutes accordingly', async () => {
         expect(wrapper.vm.minutesDisplay).toBe('--')
 
-        wrapper.vm.minutesSelected = 5
+        await wrapper.setData({ minutesSelected: 5 })
         expect(wrapper.vm.minutesDisplay).toBe('05')
 
-        wrapper.vm.minutesSelected = 10
+        await wrapper.setData({ minutesSelected: 10 })
         expect(wrapper.vm.minutesDisplay).toBe('10')
     })
 
-    it('return if face is disabled accordingly', () => {
-        wrapper.vm.isSelectingHour = true
+    it('return if face is disabled accordingly', async () => {
+        await wrapper.setData({ isSelectingHour: true })
         expect(wrapper.vm.faceDisabledValues).toBe(wrapper.vm.isHourDisabled)
 
-        wrapper.vm.isSelectingHour = false
+        await wrapper.setData({ isSelectingHour: false })
         expect(wrapper.vm.faceDisabledValues).toBe(wrapper.vm.isMinuteDisabled)
     })
 
-    it('react accordingly when a value is selected', () => {
+    it('react accordingly when a value is selected', async () => {
         const value = 5
 
-        wrapper.vm.isSelectingHour = true
+        await wrapper.setData({ isSelectingHour: true })
         wrapper.vm.onHoursChange = jest.fn()
         wrapper.vm.onClockInput(value)
         expect(wrapper.vm.hoursSelected).toBe(value)
         expect(wrapper.vm.onHoursChange).toHaveBeenCalledWith(value)
 
-        wrapper.vm.isSelectingHour = false
+        await wrapper.setData({ isSelectingHour: false })
         wrapper.vm.onMinutesChange = jest.fn()
         wrapper.vm.onClockInput(value)
         expect(wrapper.vm.minutesSelected).toBe(value)
         expect(wrapper.vm.onMinutesChange).toHaveBeenCalledWith(value)
     })
 
-    it('react accordingly when changing clock', () => {
-        wrapper.vm.isSelectingHour = false
+    it('react accordingly when changing clock', async () => {
+        await wrapper.setData({ isSelectingHour: false })
         wrapper.vm.onClockChange()
-        wrapper.vm.isSelectingHour = true
+        await wrapper.setData({ isSelectingHour: true })
         wrapper.vm.onClockChange()
         expect(wrapper.vm.isSelectingHour).toBeFalsy()
     })
-    it('react accordingly when changing meridien', () => {
+    it('react accordingly when changing meridien', async () => {
         wrapper.vm.onMeridienChange = jest.fn()
-        wrapper.vm.meridienSelected = wrapper.vm.PM
+        await wrapper.setData({ meridienSelected: wrapper.vm.PM })
         wrapper.vm.onMeridienClick(wrapper.vm.PM)
         wrapper.vm.onMeridienClick(wrapper.vm.AM)
         expect(wrapper.vm.meridienSelected).toBe(wrapper.vm.AM)
