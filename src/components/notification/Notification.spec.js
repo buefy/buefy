@@ -9,8 +9,8 @@ describe('BNotification', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.name()).toBe('BNotification')
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm.$options.name).toBe('BNotification')
     })
 
     it('render correctly', () => {
