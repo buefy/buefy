@@ -71,7 +71,7 @@ describe('BLoading', () => {
 
             onClose = jest.fn()
             spyOnAppendChild = jest.spyOn(window.document.body, 'appendChild')
-            loading = LoadingProgrammatic.open({ onClose })
+            loading = new LoadingProgrammatic().open({ onClose })
             await loading.$nextTick() // makes sure DOM is updated
         })
 
@@ -117,7 +117,7 @@ describe('BLoading', () => {
 
             container = document.createElement('div')
             spyOnAppendChild = jest.spyOn(container, 'appendChild')
-            loading = LoadingProgrammatic.open({
+            loading = new LoadingProgrammatic().open({
                 container
             })
             await loading.$nextTick() // makes sure DOM is updated

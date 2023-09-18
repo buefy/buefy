@@ -44,7 +44,7 @@ describe('BToast', () => {
                 duration: 1000,
                 onClose: jest.fn()
             }
-            ToastProgrammatic.open(params)
+            new ToastProgrammatic().open(params)
             jest.advanceTimersByTime(500)
             expect(params.onClose).not.toHaveBeenCalled()
             jest.advanceTimersByTime(500)
@@ -58,7 +58,7 @@ describe('BToast', () => {
                 indefinite: true,
                 onClose: jest.fn()
             }
-            const toast = ToastProgrammatic.open(params)
+            const toast = new ToastProgrammatic().open(params)
             jest.advanceTimersByTime(10000)
             expect(params.onClose).not.toHaveBeenCalled()
             toast.close()

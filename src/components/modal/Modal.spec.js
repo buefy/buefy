@@ -105,7 +105,7 @@ describe('BModal', () => {
         })
 
         it('should be able to be manually closed', async () => {
-            const modal = ModalProgrammatic.open({
+            const modal = new ModalProgrammatic().open({
                 content: 'content'
             })
             await modal.$nextTick() // makes sure DOM is updated
