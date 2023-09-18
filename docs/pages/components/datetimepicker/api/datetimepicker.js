@@ -44,6 +44,13 @@ export default [
                 default: '<code>0</code>'
             },
             {
+                name: '<code>nearby-month-days</code>',
+                description: 'Show/Hide nearby month days (prev and next month)',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>size</code>',
                 description: 'Vertical size of input and picker, optional',
                 type: 'String',
