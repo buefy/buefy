@@ -18,6 +18,7 @@
         :date-parser="defaultDatetimeParser"
         :min-date="minDate"
         :max-date="maxDate"
+        :nearby-month-days="nearbyMonthDays"
         :icon="icon"
         :icon-right="iconRight"
         :icon-right-clickable="iconRightClickable"
@@ -149,6 +150,10 @@ export default {
         },
         minDatetime: Date,
         maxDatetime: Date,
+        nearbyMonthDays: {
+            type: Boolean,
+            default: config.defaultDatepickerNearbyMonthDays
+        },
         datetimeFormatter: {
             type: Function
         },
