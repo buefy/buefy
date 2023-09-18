@@ -6,6 +6,11 @@ let wrapper
 describe('BTimepicker', () => {
     beforeEach(() => {
         wrapper = shallowMount(BTimepicker, {
+            props: {
+                // fixes the locale, and hour format to avoid flaky tests
+                locale: 'en-US',
+                hourFormat: '24'
+            },
             global: {
                 stubs: {
                     // these components must not be stubs
