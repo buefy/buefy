@@ -18,7 +18,7 @@ describe('BMenuList', () => {
     })
 
     it('is called', () => {
-        expect(wrapper.findAll('.menu-label').at(0).text()).toBe('Test')
+        expect(wrapper.findAll('.menu-label')[0].text()).toBe('Test')
     })
 
     it('render correctly', () => {
@@ -26,6 +26,6 @@ describe('BMenuList', () => {
     })
 
     it('slot label', () => {
-        expect(wrapper.findAll('.menu-label').at(0).text()).toBe('Test')
+        expect(wrapper.findAll('.menu-label')[0].text()).toBe('Test')
     })
 })

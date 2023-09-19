@@ -261,7 +261,7 @@ describe('BDatepickerMonth', () => {
         })
 
         it('should have is-first-selected class for the first date selected within the range', () => {
-            expect(wrapper.findAll('section > div > div > .is-selected').at(0).classes()).toContain('is-first-selected')
+            expect(wrapper.findAll('section > div > div > .is-selected')[0].classes()).toContain('is-first-selected')
         })
 
         it('should have is-within-selected class for the dates selected within the range', () => {
@@ -269,7 +269,7 @@ describe('BDatepickerMonth', () => {
         })
 
         it('should have is-last-selected class for the last date selected within the range', () => {
-            expect(wrapper.findAll('section > div > div > .is-selected').at(4).classes()).toContain('is-last-selected')
+            expect(wrapper.findAll('section > div > div > .is-selected')[4].classes()).toContain('is-last-selected')
         })
 
         describe('hoverd class with range props', () => {
@@ -285,7 +285,7 @@ describe('BDatepickerMonth', () => {
             })
 
             it('should have is-first-hovered class for the first date hovered within the range', () => {
-                expect(wrapper.findAll('section > div > div > .is-first-hovered').at(0).classes()).toContain('is-first-hovered')
+                expect(wrapper.findAll('section > div > div > .is-first-hovered')[0].classes()).toContain('is-first-hovered')
             })
 
             it('should have is-within-hovered class for the dates hovered within the range', () => {
@@ -293,7 +293,7 @@ describe('BDatepickerMonth', () => {
             })
 
             it('should have is-last-hovered class for the last date hovered within the range', () => {
-                expect(wrapper.findAll('section > div > div > .is-within-hovered-range').at(3).classes()).toContain('is-last-hovered')
+                expect(wrapper.findAll('section > div > div > .is-within-hovered-range')[3].classes()).toContain('is-last-hovered')
             })
         })
     })

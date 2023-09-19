@@ -72,10 +72,10 @@ describe('BTable', () => {
         })
 
         expect(cols.length).toBe(4)
-        expect(cols.at(0).attributes('style')).toBe('width: 100px;')
-        expect(cols.at(1).attributes('style')).toBe('width: 50%;')
-        expect(cols.at(2).attributes('style')).toBe('width: 100px;')
-        expect(cols.at(3).attributes('style')).toBe('width: 100px;')
+        expect(cols[0].attributes('style')).toBe('width: 100px;')
+        expect(cols[1].attributes('style')).toBe('width: 50%;')
+        expect(cols[2].attributes('style')).toBe('width: 100px;')
+        expect(cols[3].attributes('style')).toBe('width: 100px;')
     })
 
     describe('Selectable', () => {
@@ -114,7 +114,7 @@ describe('BTable', () => {
                 selected: data[0]
             })
             const rows = wrapper.findAll('tbody tr')
-            expect(rows.at(0).classes()).toContain('is-selected')
+            expect(rows[0].classes()).toContain('is-selected')
         })
 
         it('target data and key match', async () => {
@@ -123,7 +123,7 @@ describe('BTable', () => {
                 customRowKey: 'id'
             })
             const rows = wrapper.findAll('tbody tr')
-            expect(rows.at(1).classes()).toContain('is-selected')
+            expect(rows[1].classes()).toContain('is-selected')
         })
 
         it('clear data', async () => {
@@ -132,7 +132,7 @@ describe('BTable', () => {
                 customRowKey: 'id'
             })
             const rows = wrapper.findAll('tbody tr')
-            expect(rows.at(0).classes()).toContain('is-selected')
+            expect(rows[0].classes()).toContain('is-selected')
 
             await wrapper.setProps({
                 selected: undefined
@@ -173,11 +173,11 @@ describe('BTable', () => {
         })
 
         it('displays filter input only on searchable columns', () => {
-            const filterCells = headRows.at(1).findAll('.th-wrap')
+            const filterCells = headRows[1].findAll('.th-wrap')
 
-            expect(filterCells.at(0).element).toBeEmptyDOMElement() // ID column is not searchable
+            expect(filterCells[0].element).toBeEmptyDOMElement() // ID column is not searchable
             expect(
-                filterCells.at(1).findComponent(BInput).exists()
+                filterCells[1].findComponent(BInput).exists()
             ).toBe(true) // Name column is searchable
         })
 
