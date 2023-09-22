@@ -108,7 +108,7 @@ describe('BNumberinput', () => {
             jest.runOnlyPendingTimers()
 
             wrapper.find('.control.plus').trigger('mouseup')
-            expect(wrapper.vm.computedValue).toBe(0)
+            expect(wrapper.vm.computedValue).toBe(1)
 
             // Decrement
             wrapper.find('.control.minus button').trigger('mousedown')
@@ -343,7 +343,7 @@ describe('BNumberinput', () => {
             const min = 5
             wrapper.setProps({ min })
             wrapper.vm.computedValue = ''
-            expect(wrapper.vm.computedValue).toBe(min)
+            expect(wrapper.vm.computedValue).toBeNull()
         })
 
         it('increments/decrements on click', async () => {

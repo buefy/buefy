@@ -12,6 +12,7 @@
              trigger the checkbox change in the b-table -->
         <input
             v-model="computedValue"
+            :id="inputId"
             :indeterminate.prop="indeterminate"
             type="checkbox"
             ref="input"
@@ -49,6 +50,10 @@ export default {
         autocomplete: {
             type: String,
             default: 'on'
+        },
+        inputId: {
+            type: String,
+            default: ''
         }
     }
 }

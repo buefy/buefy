@@ -4,6 +4,8 @@ $sidebar-width: 260px !default;
 $sidebar-mobile-width: 80px !default;
 $sidebar-mobile-breakpoint: $tablet !default;
 $sidebar-colors: $navbar-colors !default;
+$sidebar-close-button-background: rgba(10,10,10,.3) !default;
+$sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
 
 .b-sidebar {
     .sidebar-content {
@@ -86,6 +88,13 @@ $sidebar-colors: $navbar-colors !default;
             &.is-fullwidth-mobile {
                 width: 100%;
                 max-width: 100%;
+            }
+        }
+        .sidebar-close {
+            background: $sidebar-close-button-background;
+
+            &:hover {
+                background: $sidebar-close-button-dark-background;
             }
         }
     }
