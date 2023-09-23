@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8.9-browsers
+      - image: cimg/node:18.18.0-browsers
 
     working_directory: ~/repo
 
