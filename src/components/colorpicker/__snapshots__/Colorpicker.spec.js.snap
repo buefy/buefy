@@ -2,7 +2,7 @@
 
 exports[`BColorpicker render correctly 1`] = `
 <div class="colorpicker control">
-    <b-dropdown-stub maxheight="200" triggers="click" mobilemodal="true" ariarole="dialog" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true" aria-modal="true">
+    <b-dropdown-stub maxheight="200" triggers="click" mobilemodal="true" ariarole="dialog" animation="fade" trapfocus="true" closeonclick="true" canclose="true" appendtobodycopyparent="true" triggertabindex="0">
         <b-dropdown-item-stub custom="true" focusable="true" ariarole="" class="">
             <div>
                 <header class="colorpicker-header">
