@@ -5,7 +5,13 @@ let wrapper
 
 describe('BTimepicker', () => {
     beforeEach(() => {
-        wrapper = shallowMount(BTimepicker)
+        wrapper = shallowMount(BTimepicker, {
+            propsData: {
+                // fixes the locale, and hour format to make outputs predictable
+                locale: 'en-US',
+                hourFormat: '24'
+            }
+        })
     })
 
     it('is called', () => {

@@ -264,10 +264,17 @@ describe('BDatepicker', () => {
     })
 
     describe('#dateFormatter', () => {
+        beforeEach(() => {
+            // uses en-US locale to make outputs predictable
+            wrapper.setProps({
+                locale: 'en-US'
+            })
+        })
+
         it('should add one to month since month in dates starts from 0', () => {
             const dateToFormat = new Date(2019, 3, 1)
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-4-1')
+            expect(formattedDate).toEqual('4/1/2019')
         })
 
         it('should format based on 2-digit numeric locale date with type === month', () => {
@@ -276,7 +283,7 @@ describe('BDatepicker', () => {
             })
             const dateToFormat = new Date(2019, 3, 1)
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-04')
+            expect(formattedDate).toEqual('4/2019')
         })
 
         it('should format a range of dates passed via array', () => {
@@ -285,7 +292,7 @@ describe('BDatepicker', () => {
                 new Date(2019, 3, 3)
             ]
             const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-            expect(formattedDate).toEqual('2019-4-1 - 2019-4-3')
+            expect(formattedDate).toEqual('4/1/2019 - 4/3/2019')
         })
 
         describe('multiple', () => {
@@ -305,7 +312,7 @@ describe('BDatepicker', () => {
                     new Date(2019, 3, 3)
                 ]
                 const formattedDate = wrapper.vm.dateFormatter(dateToFormat, wrapper.vm)
-                expect(formattedDate).toEqual('2019-4-1, 2019-4-13, 2019-4-3')
+                expect(formattedDate).toEqual('4/1/2019, 4/13/2019, 4/3/2019')
             })
 
             it('react accordingly when setting computedValue', () => {
