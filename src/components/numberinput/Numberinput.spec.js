@@ -170,7 +170,18 @@ describe('BNumberinput', () => {
 
     describe('Rendered (shallow)', () => {
         beforeEach(() => {
-            wrapper = shallowMount(BNumberinput)
+            wrapper = shallowMount(BNumberinput, {
+                stubs: {
+                    // to suppress error messages printed when BNumberinput
+                    // tries to call checkHtml5Validity of the input
+                    'b-input': {
+                        template: '<div></div>',
+                        methods: {
+                            checkHtml5Validity: () => true
+                        }
+                    }
+                }
+            })
         })
 
         it('manage prop types (number / string)', () => {
