@@ -2,18 +2,26 @@
     <section>
         <b-field grouped group-multiline>
             <b-field label="Total">
-                <b-input type="number" v-model="total"></b-input>
+                <b-input type="number" v-model="total"/>
             </b-field>
             <b-field label="Items per page">
-                <b-input type="number" v-model="perPage"></b-input>
+                <b-input type="number" v-model="perPage"/>
             </b-field>
         </b-field>
         <b-field grouped group-multiline>
             <b-field label="Show buttons before current">
-                <b-input type="number" v-model="rangeBefore" min="0"></b-input>
+                <b-input
+                    type="number"
+                    v-model="rangeBefore"
+                    min="0"
+                />
             </b-field>
             <b-field label="Show buttons after current">
-                <b-input type="number" v-model="rangeAfter" min="0"></b-input>
+                <b-input
+                    type="number"
+                    v-model="rangeAfter"
+                    min="0"
+                />
             </b-field>
         </b-field>
         <b-field grouped group-multiline>
@@ -61,7 +69,12 @@
                 </b-select>
             </b-field>
             <b-field label="Debounce input">
-                <b-input type="number" placeholder="milliseconds" v-model="inputDebounce" min="0"></b-input>
+                <b-input
+                    type="number"
+                    placeholder="milliseconds"
+                    v-model="inputDebounce"
+                    min="0"
+                />
             </b-field>
         </b-field>
 
@@ -84,30 +97,30 @@
             aria-current-label="Current page"
             :page-input="hasInput"
             :page-input-position="inputPosition"
-            :debounce-page-input="inputDebounce">
-        </b-pagination>
+            :debounce-page-input="inputDebounce"
+        />
     </section>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                total: 200,
-                current: 10,
-                perPage: 10,
-                rangeBefore: 3,
-                rangeAfter: 1,
-                order: '',
-                size: '',
-                isSimple: false,
-                isRounded: false,
-                hasInput: false,
-                prevIcon: 'chevron-left',
-                nextIcon: 'chevron-right',
-                inputPosition: '',
-                inputDebounce: ''
-            }
+export default {
+    data() {
+        return {
+            total: 200,
+            current: 10,
+            perPage: 10,
+            rangeBefore: 3,
+            rangeAfter: 1,
+            order: '',
+            size: '',
+            isSimple: false,
+            isRounded: false,
+            hasInput: false,
+            prevIcon: 'chevron-left',
+            nextIcon: 'chevron-right',
+            inputPosition: '',
+            inputDebounce: ''
         }
     }
+}
 </script>
