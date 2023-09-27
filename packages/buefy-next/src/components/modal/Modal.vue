@@ -137,6 +137,10 @@ export default {
         destroyOnHide: {
             type: Boolean,
             default: true
+        },
+        renderOnMounted: {
+            type: Boolean,
+            default: false
         }
     },
     emits: [
@@ -154,7 +158,7 @@ export default {
                 ? this.width + 'px'
                 : this.width,
             animating: !this.modelValue,
-            destroyed: !this.modelValue
+            destroyed: !(this.modelValue || this.renderOnMounted)
         }
     },
     computed: {

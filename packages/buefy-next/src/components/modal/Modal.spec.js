@@ -127,4 +127,34 @@ describe('BModal', () => {
         wrapper.vm.afterLeave()
         expect(wrapper.emitted()['after-leave']).toBeTruthy()
     })
+
+    it('should not be rendered on mounted if active and renderOnMounted are false', () => {
+        const wrapper = shallowMount(BModal, {
+            props: {
+                modelValue: false,
+                renderOnMounted: false
+            },
+            global: {
+                stubs: {
+                    transition: false
+                }
+            }
+        })
+        expect(wrapper.find('.modal.is-active').exists()).toBeFalsy()
+    })
+
+    it('should be rendered on mounted if active is false but renderOnMounted is true', () => {
+        const wrapper = shallowMount(BModal, {
+            props: {
+                modelValue: false,
+                renderOnMounted: true
+            },
+            global: {
+                stubs: {
+                    transition: false
+                }
+            }
+        })
+        expect(wrapper.find('.modal.is-active').exists()).toBeTruthy()
+    })
 })
