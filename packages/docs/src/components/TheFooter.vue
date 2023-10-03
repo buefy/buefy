@@ -25,7 +25,7 @@
                             <p class="control">
                                 <a
                                     class="button is-twitter"
-                                    href="https://twitter.com/walter_tommasi"
+                                    href="https://twitter.com/buefycss"
                                     target="_blank"
                                 >
                                     <b-icon icon="twitter" />
