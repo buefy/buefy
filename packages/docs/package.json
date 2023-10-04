@@ -1,0 +1,26 @@
+{
+  "name": "docs",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Wesley Ford <wes@wesdev.pro>",
+  "homepage": "htps://buefy.org",
+  "license": "MIT",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntohq/buefy-next.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/docs.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ntohq/buefy-next/issues"
+  }
+}
