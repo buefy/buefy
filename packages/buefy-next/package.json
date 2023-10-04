@@ -1,0 +1,39 @@
+{
+  "name": "buefy-next",
+  "version": "0.1.2",
+  "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
+  "keywords": [
+    "vuejs",
+    "bulma",
+    "buefy",
+    "nodejs",
+    "components-library",
+    "open-source",
+    "css",
+    "scss",
+    "typescript"
+  ],
+  "author": "Wesley Ford <wes@wesdev.pro>",
+  "homepage": "https://buefy.org",
+  "license": "MIT",
+  "main": "/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntohq/buefy-next.git"
+  },
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "start": "node build/dev-server.js",
+    "test": "node ./__tests__/src.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ntohq/buefy-next/issues"
+  }
+}
