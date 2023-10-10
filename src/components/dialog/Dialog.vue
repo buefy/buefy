@@ -63,6 +63,7 @@
                     <b-button
                         :type="type"
                         ref="confirmButton"
+                        loading="isLoading"
                         @click="confirm">{{ confirmText }}</b-button>
                 </footer>
             </div>
@@ -124,6 +125,7 @@ export default {
             type: Function,
             default: () => {}
         },
+        isLoading: Boolean,
         closeOnConfirm: {
             type: Boolean,
             default: true
