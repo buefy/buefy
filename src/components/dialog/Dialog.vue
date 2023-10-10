@@ -63,7 +63,7 @@
                     <b-button
                         :type="type"
                         ref="confirmButton"
-                        loading="isLoading"
+                        :loading="Loading"
                         @click="confirm">{{ confirmText }}</b-button>
                 </footer>
             </div>
@@ -125,10 +125,6 @@ export default {
             type: Function,
             default: () => {}
         },
-        isLoading: {
-            type: Boolean,
-            default: false
-        },
         closeOnConfirm: {
             type: Boolean,
             default: true
@@ -169,7 +165,8 @@ export default {
             prompt,
             isActive: false,
             validationMessage: '',
-            isCompositing: false
+            isCompositing: false,
+            Loading: false
         }
     },
     computed: {
@@ -228,6 +225,20 @@ export default {
                 this.$destroy()
                 removeElement(this.$el)
             }, 150)
+        },
+
+        /**
+         * start Loading
+         */
+        StartLoading() {
+            this.Loading = true
+        },
+
+        /**
+         * stop Loading
+         */
+        StopLoading() {
+            this.Loading = false
         }
     },
     beforeMount() {
