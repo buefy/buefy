@@ -125,7 +125,10 @@ export default {
             type: Function,
             default: () => {}
         },
-        isLoading: Boolean,
+        isLoading: {
+            type: Boolean,
+            default: false
+        },
         closeOnConfirm: {
             type: Boolean,
             default: true
