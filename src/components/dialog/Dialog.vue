@@ -228,6 +228,13 @@ export default {
                 this.$destroy()
                 removeElement(this.$el)
             }, 150)
+        },
+
+        /**
+        * Close the Dialog.
+        */
+        cancelLoading() {
+            this.isLoading = false
         }
     },
     beforeMount() {
