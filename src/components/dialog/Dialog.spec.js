@@ -71,14 +71,13 @@ describe('BDialog', () => {
 
     it('close on async confirm', async () => {
         wrapper.setProps({
-            onConfirm: jest.fn((confirm, {StartLoading}) => {
-                StartLoading()
+            onConfirm: jest.fn(() => {
+                expect(wrapper.vm.isLoading).toBeTruthy()
                 return new Promise((resolve) => {})
             })
         })
-        expect(wrapper.vm.Loading).toBeFalsy()
+        expect(wrapper.vm.isLoading).toBeFalsy()
         await wrapper.vm.confirm()
-        expect(wrapper.vm.Loading).toBeTruthy()
         expect(wrapper.vm.onConfirm).toHaveBeenCalled()
     })
 

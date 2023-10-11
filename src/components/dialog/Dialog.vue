@@ -59,11 +59,12 @@
                     <b-button
                         v-if="showCancel"
                         ref="cancelButton"
+                        :disabled="isLoading"
                         @click="cancel('button')">{{ cancelText }}</b-button>
                     <b-button
                         :type="type"
                         ref="confirmButton"
-                        :loading="Loading"
+                        :loading="isLoading"
                         @click="confirm">{{ confirmText }}</b-button>
                 </footer>
             </div>
@@ -166,7 +167,7 @@ export default {
             isActive: false,
             validationMessage: '',
             isCompositing: false,
-            Loading: false
+            isLoading: false
         }
     },
     computed: {
@@ -202,6 +203,7 @@ export default {
         * Call the onConfirm prop (function) and close the Dialog.
         */
         confirm() {
+            this.isLoading = true
             if (this.$refs.input !== undefined) {
                 if (this.isCompositing) return
                 if (!this.$refs.input.checkValidity()) {
@@ -220,25 +222,12 @@ export default {
         */
         close() {
             this.isActive = false
+            this.isLoading = false
             // Timeout for the animation complete before destroying
             setTimeout(() => {
                 this.$destroy()
                 removeElement(this.$el)
             }, 150)
-        },
-
-        /**
-         * start Loading
-         */
-        StartLoading() {
-            this.Loading = true
-        },
-
-        /**
-         * stop Loading
-         */
-        StopLoading() {
-            this.Loading = false
         }
     },
     beforeMount() {
