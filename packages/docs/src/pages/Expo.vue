@@ -12,7 +12,7 @@
                     </button>
                     <a
                         class="button is-vuetelemetry"
-                        href="https://vuetelemetry.com/explore?ui.slug=buefy&_sort=lastDetectedAt%3Adesc"
+                        href="https://www.vuetelescope.com/explore?ui.slug=buefy&_sort=lastDetectedAt:desc"
                         target="_blank">
                         <b-icon icon="nuxt"/>
                         <span>Explore VueTelemetry</span>
