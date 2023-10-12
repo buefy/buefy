@@ -71,7 +71,8 @@ describe('BDialog', () => {
 
     it('async confirm and keep Loading state', async () => {
         wrapper.setProps({
-            onConfirm: jest.fn((confirmValue, {cancelLoading}) => {
+            onConfirm: jest.fn((confirmValue, { StartLoading }) => {
+                StartLoading()
                 expect(wrapper.vm.isLoading).toBeTruthy()
                 return new Promise(() => {})
             }),
@@ -85,10 +86,11 @@ describe('BDialog', () => {
 
     it('async confirm and close Loading state', async () => {
         wrapper.setProps({
-            onConfirm: jest.fn((confirmValue, {cancelLoading}) => {
+            onConfirm: jest.fn((confirmValue, { StartLoading, CancelLoading }) => {
+                StartLoading()
                 expect(wrapper.vm.isLoading).toBeTruthy()
                 return new Promise(() => {
-                    cancelLoading()
+                    CancelLoading()
                 })
             }),
             closeOnConfirm: false

@@ -231,9 +231,16 @@ export default {
         },
 
         /**
-        * Close the Loading.
+        * Start the Loading.
         */
-        cancelLoading() {
+        StartLoading() {
+            this.isLoading = true
+        },
+
+        /**
+        * Cancel the Loading.
+        */
+        CancelLoading() {
             this.isLoading = false
         }
     },
