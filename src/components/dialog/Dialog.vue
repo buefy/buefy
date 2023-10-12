@@ -203,7 +203,6 @@ export default {
         * Call the onConfirm prop (function) and close the Dialog.
         */
         confirm() {
-            this.isLoading = true
             if (this.$refs.input !== undefined) {
                 if (this.isCompositing) return
                 if (!this.$refs.input.checkValidity()) {
