@@ -79,7 +79,7 @@ describe('BDialog', () => {
             closeOnConfirm: false
         })
         expect(wrapper.vm.isLoading).toBeFalsy()
-        await wrapper.vm.confirm()
+        wrapper.vm.confirm()
         expect(wrapper.vm.isLoading).toBeTruthy()
         expect(wrapper.vm.onConfirm).toHaveBeenCalled()
     })
@@ -96,7 +96,7 @@ describe('BDialog', () => {
             closeOnConfirm: false
         })
         expect(wrapper.vm.isLoading).toBeFalsy()
-        await wrapper.vm.confirm()
+        wrapper.vm.confirm()
         expect(wrapper.vm.isLoading).toBeFalsy()
         expect(wrapper.vm.onConfirm).toHaveBeenCalled()
     })
