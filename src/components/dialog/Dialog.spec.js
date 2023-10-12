@@ -88,9 +88,7 @@ describe('BDialog', () => {
             onConfirm: jest.fn((confirmValue, { startLoading, cancelLoading }) => {
                 startLoading()
                 expect(wrapper.vm.isLoading).toBeTruthy()
-                return new Promise(() => {
-                    cancelLoading()
-                })
+                cancelLoading()
             }),
             closeOnConfirm: false
         })
