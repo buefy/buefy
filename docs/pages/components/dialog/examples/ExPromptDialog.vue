@@ -73,8 +73,8 @@ export default {
                 confirmText: "Send",
                 trapFocus: true,
                 closeOnConfirm: false,
-                onConfirm: (value, { close, StartLoading }) => {
-                    StartLoading();
+                onConfirm: (value, { close, startLoading }) => {
+                    startLoading();
                     this.$buefy.toast.open(`Your message is sending...`);
                     setTimeout(() => {
                         this.$buefy.toast.open(`Success message send!`);
@@ -94,12 +94,12 @@ export default {
                 confirmText: "Send",
                 trapFocus: true,
                 closeOnConfirm: false,
-                onConfirm: (value, { StartLoading, CancelLoading }) => {
-                    StartLoading();
+                onConfirm: (value, { startLoading, cancelLoading }) => {
+                    startLoading();
                     this.$buefy.toast.open(`Your message is sending...`);
                     setTimeout(() => {
                         this.$buefy.toast.open(`Success message send!`);
-                        CancelLoading();
+                        cancelLoading();
                     }, 2000);
                 }
             });

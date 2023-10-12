@@ -233,14 +233,14 @@ export default {
         /**
         * Start the Loading.
         */
-        StartLoading() {
+        startLoading() {
             this.isLoading = true
         },
 
         /**
         * Cancel the Loading.
         */
-        CancelLoading() {
+        cancelLoading() {
             this.isLoading = false
         }
     },
