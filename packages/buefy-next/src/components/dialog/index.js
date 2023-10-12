@@ -27,6 +27,18 @@ function open(propsData, app) {
                     if (dialog) {
                         dialog.close()
                     }
+                },
+                startLoading() {
+                    const dialog = getComponentFromVNode(this.dialogVNode)
+                    if (dialog) {
+                        dialog.startLoading()
+                    }
+                },
+                cancelLoading() {
+                    const dialog = getComponentFromVNode(this.dialogVNode)
+                    if (dialog) {
+                        dialog.cancelLoading()
+                    }
                 }
             },
             render() {

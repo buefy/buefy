@@ -69,6 +69,7 @@
                     <b-button
                         v-if="showCancel"
                         ref="cancelButton"
+                        :disabled="isLoading"
                         @click="cancel('button')"
                     >
                         {{ cancelText }}
@@ -76,6 +77,7 @@
                     <b-button
                         :type="type"
                         ref="confirmButton"
+                        :loading="isLoading"
                         @click="confirm"
                     >
                         {{ confirmText }}
@@ -181,7 +183,8 @@ export default {
             prompt,
             isActive: false,
             validationMessage: '',
-            isCompositing: false
+            isCompositing: false,
+            isLoading: false
         }
     },
     computed: {
@@ -246,10 +249,25 @@ export default {
         */
         close() {
             this.isActive = false
+            this.isLoading = false
             // Timeout for the animation complete before destroying
             setTimeout(() => {
                 removeElement(this.$el)
             }, 150)
+        },
+
+        /**
+        * Start the Loading.
+        */
+        startLoading() {
+            this.isLoading = true
+        },
+
+        /**
+        * Cancel the Loading.
+        */
+        cancelLoading() {
+            this.isLoading = false
         }
     },
     beforeMount() {

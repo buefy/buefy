@@ -67,6 +67,35 @@ describe('BDialog', () => {
         expect(wrapper.emitted().confirm).toEqual([['']])
     })
 
+    it('async confirm and keep Loading state', async () => {
+        await wrapper.setProps({
+            confirmCallback: jest.fn((confirmValue, { startLoading }) => {
+                startLoading()
+                expect(wrapper.vm.isLoading).toBeTruthy()
+            }),
+            closeOnConfirm: false
+        })
+        expect(wrapper.vm.isLoading).toBeFalsy()
+        wrapper.vm.confirm()
+        expect(wrapper.vm.isLoading).toBeTruthy()
+        expect(wrapper.vm.confirmCallback).toHaveBeenCalled()
+    })
+
+    it('async confirm and close Loading state', async () => {
+        await wrapper.setProps({
+            confirmCallback: jest.fn((confirmValue, { startLoading, cancelLoading }) => {
+                startLoading()
+                expect(wrapper.vm.isLoading).toBeTruthy()
+                cancelLoading()
+            }),
+            closeOnConfirm: false
+        })
+        expect(wrapper.vm.isLoading).toBeFalsy()
+        wrapper.vm.confirm()
+        expect(wrapper.vm.isLoading).toBeFalsy()
+        expect(wrapper.vm.confirmCallback).toHaveBeenCalled()
+    })
+
     it('closeOnConfirm prop equals false', async () => {
         await wrapper.setProps({ confirmCallback: jest.fn(), closeOnConfirm: false })
         wrapper.vm.confirm()
