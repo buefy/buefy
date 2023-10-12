@@ -231,7 +231,7 @@ export default {
         },
 
         /**
-        * Close the Dialog.
+        * Close the Loading.
         */
         cancelLoading() {
             this.isLoading = false
