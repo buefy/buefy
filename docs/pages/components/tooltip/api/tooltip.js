@@ -110,6 +110,13 @@ export default [
                 default: '<code>false</code>'
             }
         ],
+        slots: [
+            {
+                name: 'content',
+                description: 'Tooltip Content (HTML or components)',
+                props: '-'
+            }
+        ],
         events: [
             {
                 name: '<code>open</code>',
