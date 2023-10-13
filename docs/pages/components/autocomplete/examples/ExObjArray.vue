@@ -29,8 +29,7 @@
                 field="user.first_name"
                 @select="option => (selected = option)"
                 :clearable="clearable"
-            >
-            </b-autocomplete>
+            />
         </b-field>
     </section>
 </template>
@@ -51,7 +50,7 @@ export default {
     },
     computed: {
         filteredDataObj() {
-            return this.data.filter(option => {
+            return this.data.filter((option) => {
                 return (
                     option.user.first_name
                         .toString()
