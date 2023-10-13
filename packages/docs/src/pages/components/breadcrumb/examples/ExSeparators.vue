@@ -1,10 +1,16 @@
 <template>
-	<section>
-		<!-- Default -->
+    <section>
+        <!-- Default -->
         <b-breadcrumb>
-            <b-breadcrumb-item tag='router-link' to="/">Home</b-breadcrumb-item>
-            <b-breadcrumb-item tag='router-link' to="/documentation">Docs</b-breadcrumb-item>
-            <b-breadcrumb-item tag='router-link' to="/documentation/breadcrumb" active>Breadcrumb</b-breadcrumb-item>
+            <b-breadcrumb-item tag="router-link" to="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item tag="router-link" to="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item
+                tag="router-link"
+                to="/documentation/breadcrumb"
+                active
+            >
+                Breadcrumb
+            </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Arrow -->
         <b-breadcrumb
@@ -12,7 +18,9 @@
         >
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
-            <b-breadcrumb-item href="/documentation/breadcrumb" active>Breadcrumb</b-breadcrumb-item>
+            <b-breadcrumb-item href="/documentation/breadcrumb" active>
+                Breadcrumb
+            </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Bullet -->
         <b-breadcrumb
@@ -20,7 +28,9 @@
         >
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
-            <b-breadcrumb-item href="/documentation/breadcrumb" active>Breadcrumb</b-breadcrumb-item>
+            <b-breadcrumb-item href="/documentation/breadcrumb" active>
+                Breadcrumb
+            </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Dot -->
         <b-breadcrumb
@@ -28,7 +38,9 @@
         >
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
-            <b-breadcrumb-item href="/documentation/breadcrumb" active>Breadcrumb</b-breadcrumb-item>
+            <b-breadcrumb-item href="/documentation/breadcrumb" active>
+                Breadcrumb
+            </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Succeeds -->
         <b-breadcrumb
@@ -36,7 +48,9 @@
         >
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
-            <b-breadcrumb-item href="/documentation/breadcrumb" active>Breadcrumb</b-breadcrumb-item>
+            <b-breadcrumb-item href="/documentation/breadcrumb" active>
+                Breadcrumb
+            </b-breadcrumb-item>
         </b-breadcrumb>
     </section>
 </template>
@@ -44,7 +58,7 @@
 <script>
 export default {
 
-  name: 'ExSeparators',
+    name: 'ExSeparators'
 
 }
 </script>

@@ -17,7 +17,7 @@
                 placeholder="e.g. Orange"
                 keep-first
                 @select="option => selected = option">
-                <template #empty>No results for {{name}}</template>
+                <template #empty>No results for {{ name }}</template>
             </b-autocomplete>
         </b-field>
     </section>

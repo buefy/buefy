@@ -1,6 +1,6 @@
 export default [
     {
-        title : 'Breadcrumb',
+        title: 'Breadcrumb',
         props: [
             {
                 name: '<code>align</code>',
@@ -26,7 +26,7 @@ export default [
         ]
     },
     {
-        title : 'Breadcrumb Item',
+        title: 'Breadcrumb Item',
         props: [
             {
                 name: '<code>tag</code>',
@@ -35,7 +35,7 @@ export default [
                 values: '<code>router-link</code>, <code>a</code>',
                 default: '<code>a</code>'
             },
-             {
+            {
                 name: '<code>active</code>',
                 description: 'is the current breadcrumb is actually the current page.',
                 type: 'Boolean',
