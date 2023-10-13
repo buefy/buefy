@@ -9,8 +9,7 @@
                 open-on-focus
                 :data="filteredDataObj"
                 @select="option => (selected = option)"
-            >
-            </b-autocomplete>
+            />
         </b-field>
     </section>
 </template>
@@ -37,11 +36,11 @@ export default {
     computed: {
         filteredDataObj() {
             const newData = []
-              this.data.forEach(element => {
-                const items = element.items.filter(item =>
+            this.data.forEach((element) => {
+                const items = element.items.filter((item) =>
                     item.toLowerCase().indexOf(this.name.toLowerCase()) >= 0)
                 if (items.length) {
-                    newData.push({ type: element.type, items})
+                    newData.push({ type: element.type, items })
                 }
             })
             return newData
