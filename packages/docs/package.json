@@ -1,26 +1,39 @@
 {
   "name": "docs",
   "version": "0.0.0",
-  "description": "> TODO: description",
-  "author": "Wesley Ford <wes@wesdev.pro>",
+  "private": true,
+  "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "homepage": "htps://buefy.org",
   "license": "MIT",
-  "main": "main.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ntohq/buefy-next.git"
   },
-  "scripts": {
-    "test": "node ./__tests__/docs.test.js"
-  },
   "bugs": {
     "url": "https://github.com/ntohq/buefy-next/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bulma": "^0.9.4",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@mdi/font": "^7.2.96",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/shared": "^3.3.4",
+    "axios": "^1.5.1",
+    "bluebird": "^3.7.2",
+    "clipboard": "^2.0.11",
+    "highlight.js": "^10.7.3",
+    "lodash": "^4.17.21",
+    "sass": "^1.68.0",
+    "tiny-emitter": "^2.1.0",
+    "vite": "^4.4.5",
+    "vue-router": "^4.2.5"
   }
 }
