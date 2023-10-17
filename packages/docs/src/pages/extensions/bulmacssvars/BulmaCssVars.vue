@@ -13,7 +13,7 @@
             <b-message type="is-info">
                 <p><strong>Bulma-Css-Vars is not included in Buefy</strong>, you have to install it.</p>
                 <p>Also make sure you use Bulma <code>v0.8</code> or higher and <code>sass</code> instead of <code>node-sass</code>:</p>
-                <CodeView :code="npmInstallSnippet | pre" expanded/>
+                <CodeView :code="preformat(npmInstallSnippet)" expanded/>
                 <p>This creates an initial config file <code>bulma-css-vars.config.js</code>, where you can declare the variables you want to modify. Each additional variable will increase the size of your css.</p>
                 <p>Finally, you have to reference the <code>main.scss</code> file in your compilation, preferably in your entry Vue component:</p>
                 <CodeView :code="vueCompSnippet" expanded/>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import { preformat } from '@/utils'
     import ExFormat from './examples/ExFormat'
     import ExFormatCode from './examples/ExFormat.vue?raw'
 
@@ -42,6 +43,9 @@ node ./node_modules/.bin/bulma-css-vars --init`,
                 ExFormat,
                 ExFormatCode
             }
+        },
+        methods: {
+            preformat
         }
     }
 </script>
