@@ -28,12 +28,17 @@
     "@vue/shared": "^3.3.4",
     "axios": "^1.5.1",
     "bluebird": "^3.7.2",
+    "bulma-css-vars": "0.8.0",
+    "cleave.js": "1.0.1",
     "clipboard": "^2.0.11",
     "highlight.js": "^10.7.3",
     "lodash": "^4.17.21",
     "sass": "^1.68.0",
+    "scrollreveal": "3.3.6",
+    "sortablejs": "1.7.0",
     "tiny-emitter": "^2.1.0",
     "vite": "^4.4.5",
+    "vue-breakpoint-mixin": "1.2.2",
     "vue-router": "^4.2.5"
   }
 }
