@@ -16,7 +16,8 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "lerna": "^7.3.0"
+    "lerna": "^7.3.0",
+    "pre-commit": "1.2.2"
   },
   "repository": {
     "type": "git",
