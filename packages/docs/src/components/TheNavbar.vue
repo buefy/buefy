@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import buefyPackage from '../../../package.json'
+import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
 
 export default {
