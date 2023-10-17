@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Color from '../../../../../../src/utils/color'
+import Color from '../../../../../../buefy-next/utils/color'
 
 export default {
     data() {
