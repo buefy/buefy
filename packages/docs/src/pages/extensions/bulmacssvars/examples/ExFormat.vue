@@ -27,9 +27,9 @@
 // You have to install bulma-css-vars to use it:
 // 'npm install bulma-css-vars'
 import { ColorUpdater } from "bulma-css-vars";
-import { bulmaCssVariablesDefs } from "./bulma-generated/bulma-colors";
+import { default as bulmaColors } from "./bulma-generated/bulma-colors";
 
-const updater = new ColorUpdater(bulmaCssVariablesDefs);
+const updater = new ColorUpdater(bulmaColors.bulmaCssVariablesDefs);
 
 export default {
     data() {
