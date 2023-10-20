@@ -35,5 +35,16 @@
   },
   "bugs": {
     "url": "https://github.com/ntohq/buefy-next/issues"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.1.4",
+    "rollup-plugin-vue": "^6.0.0"
   }
 }
