@@ -2,12 +2,12 @@ import vue from 'rollup-plugin-vue'
 import node from '@rollup/plugin-node-resolve'
 import cjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 
-import pack from './package.json'
+import pack from '../../package.json' assert { type: 'json' }
 
 const babelConfig = {
     exclude: 'node_modules/**',
@@ -162,7 +162,7 @@ export default () => {
         config.forEach((c) => {
             c.output.file = c.output.file.replace(/\.js/g, '.min.js')
             c.plugins.push(terser({
-                output: {
+                format: {
                     comments: '/^!/'
                 }
             }))
