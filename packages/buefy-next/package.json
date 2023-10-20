@@ -31,7 +31,9 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "test": "node ./__tests__/src.test.js"
+    "test": "node ./__tests__/src.test.js",
+    "build": "rimraf dist && npm run build:js",
+    "build:js": "rollup -c && rollup -c --environment MINIFY"
   },
   "bugs": {
     "url": "https://github.com/ntohq/buefy-next/issues"
