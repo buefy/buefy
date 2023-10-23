@@ -30,7 +30,7 @@
                     target="_blank"
                     title="Github"
                 >
-                    <b-icon icon="github-circle" />
+                    <b-icon icon="github" />
                 </a>
 
                 <a
