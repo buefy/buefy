@@ -71,8 +71,7 @@ vueApp.component('VariablesView', VariablesView)
 vueApp.component('Example', Example)
 
 vueApp.directive('highlight', {
-    deep: true,
-    bind(el, binding) {
+    beforeMount(el, binding) {
         // On first bind, highlight all targets
         const targets = el.querySelectorAll('code')
         for (const target of targets) {
@@ -81,16 +80,16 @@ vueApp.directive('highlight', {
             if (binding.value) {
                 target.innerHTML = binding.value
             }
-            hljs.highlightBlock(target)
+            hljs.highlightElement(target)
         }
     },
-    componentUpdated(el, binding) {
+    updated(el, binding) {
         // After an update, re-fill the content and then highlight
         const targets = el.querySelectorAll('code')
         for (const target of targets) {
             if (binding.value) {
                 target.innerHTML = binding.value
-                hljs.highlightBlock(target)
+                hljs.highlightElement(target)
             }
         }
     }
