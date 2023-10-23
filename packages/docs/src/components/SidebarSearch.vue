@@ -39,7 +39,7 @@
                                 ? null
                                 :'sidebarSearchNoresult'
                             "
-                            @input="search"
+                            @update:model-value="search"
                             maxlength="32"
                             :has-counter="false"
                         />
