@@ -31,7 +31,7 @@
     "bulma-css-vars": "0.8.0",
     "cleave.js": "1.0.1",
     "clipboard": "^2.0.11",
-    "highlight.js": "^10.7.3",
+    "highlight.js": "^11.9.0",
     "lodash": "^4.17.21",
     "sass": "^1.68.0",
     "scrollreveal": "3.3.6",
