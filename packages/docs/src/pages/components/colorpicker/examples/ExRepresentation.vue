@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Color from '../../../../../../buefy-next/utils/color'
+import Color from '../../../../../../buefy-next/src/utils/color'
 
 export default {
     data() {
