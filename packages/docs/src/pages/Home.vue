@@ -51,7 +51,7 @@
                 <div class="container">
                     <div class="columns">
                         <div class="column has-text-centered features">
-                            <b-icon icon="github-circle" size="is-large"/>
+                            <b-icon icon="github" size="is-large"/>
                             <p class="title is-4"><strong>Free</strong></p>
                             <p class="subtitle">Open source on <strong><a href="https://github.com/buefy/buefy" target="_blank">GitHub</a></strong></p>
                         </div>
