@@ -17,7 +17,7 @@
                                     class="button"
                                     href="https://github.com/buefy/buefy"
                                     target="_blank">
-                                    <b-icon icon="github-circle"/>
+                                    <b-icon icon="github"/>
                                     <span>GitHub</span>
                                 </a>
                             </p>
