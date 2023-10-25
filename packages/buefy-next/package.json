@@ -32,8 +32,9 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "test": "node ./__tests__/src.test.js",
-    "build": "rimraf dist && npm run build:js",
-    "build:js": "rollup -c && rollup -c --environment MINIFY"
+    "build": "rimraf dist && npm run build:js && npm run build:scss",
+    "build:js": "rollup -c && rollup -c --environment MINIFY",
+    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css"
   },
   "bugs": {
     "url": "https://github.com/ntohq/buefy-next/issues"
