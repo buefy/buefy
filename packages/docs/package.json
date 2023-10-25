@@ -18,6 +18,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ntohq/buefy-next": "*",
     "bulma": "^0.9.4",
     "vue": "^3.3.4"
   },
