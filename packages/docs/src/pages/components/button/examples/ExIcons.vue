@@ -2,21 +2,21 @@
     <section>
         <div class="buttons">
             <b-button size="is-small"
-                icon-left="github-circle">
+                icon-left="github">
                 Add
             </b-button>
 
-            <b-button icon-left="github-circle">
+            <b-button icon-left="github">
                 Add
             </b-button>
 
             <b-button size="is-medium"
-                icon-left="github-circle">
+                icon-left="github">
                 Add
             </b-button>
 
             <b-button size="is-large"
-                icon-left="github-circle">
+                icon-left="github">
                 Add
             </b-button>
         </div>
