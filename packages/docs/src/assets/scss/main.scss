@@ -2,7 +2,7 @@
 @import "bulma/sass/utilities/_all";
 
 // Buefy vars
-@import "../../../../buefy-next/src/scss/utils/_all";
+@import "@ntohq/buefy-next/src/scss/utils/_all";
 
 // Docs variables
 @import "_variables";
@@ -25,7 +25,7 @@
 @import "bulma/bulma";
 
 // Buefy
-@import "../../../../buefy-next/src/scss/buefy";
+@import "@ntohq/buefy-next/src/scss/buefy";
 
 // Highlight.js
 @import "highlight.js/styles/base16/atelier-cave-light.css";
