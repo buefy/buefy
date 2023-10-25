@@ -29,7 +29,7 @@
                 :type="type"
                 vertical
                 :expanded="expanded">
-            <b-tab-item label="Pictures" icon="google-photos">
+            <b-tab-item label="Pictures" icon="camera-iris">
                 Lorem ipsum dolor sit amet. <br>
                 Lorem ipsum dolor sit amet. <br>
                 Lorem ipsum dolor sit amet. <br>
@@ -38,7 +38,7 @@
                 Lorem ipsum dolor sit amet.
             </b-tab-item>
 
-            <b-tab-item label="Music" icon="library-music">
+            <b-tab-item label="Music" icon="music-box-multiple">
                 What light is light, if Silvia be not seen? <br>
                 What joy is joy, if Silvia be not by— <br>
                 Unless it be to think that she is by <br>
