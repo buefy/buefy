@@ -1,5 +1,5 @@
 {
-  "name": "buefy-next",
+  "name": "@ntohq/buefy-next",
   "version": "0.1.2",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
@@ -16,17 +16,24 @@
   "author": "Wesley Ford <wes@wesdev.pro>",
   "homepage": "https://buefy.org",
   "license": "MIT",
-  "main": "/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "unpkg": "dist/buefy.min.js",
+  "typings": "src/types/index.d.ts",
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
   "files": [
-    "lib"
+    "dist",
+    "src"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ntohq/buefy-next.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ntohq/buefy-next/issues"
   },
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -35,9 +42,6 @@
     "build": "rimraf dist && npm run build:js && npm run build:scss",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css"
-  },
-  "bugs": {
-    "url": "https://github.com/ntohq/buefy-next/issues"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.23.2",
