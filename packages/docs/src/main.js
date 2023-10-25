@@ -3,7 +3,7 @@ import App from './App.vue'
 import { createDocsRouter } from './router'
 import Emitter from 'tiny-emitter'
 
-import Buefy from '../../buefy-next/src/'
+import { default as Buefy, createNewEvent } from '@ntohq/buefy-next'
 import Axios from 'axios'
 // TODO: use vue3-progressbar?
 // import VueProgressBar from 'vue-progressbar'
@@ -11,7 +11,6 @@ import Axios from 'axios'
 // import VueAnalytics from 'vue-analytics'
 import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
-import { createNewEvent } from '../../buefy-next/src/utils/helpers'
 
 import ApiView from './components/ApiView.vue'
 import CodeView from './components/CodeView.vue'
