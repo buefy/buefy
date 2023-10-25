@@ -45,8 +45,10 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "clean-css-cli": "^5.6.2",
     "rimraf": "^5.0.5",
     "rollup": "^4.1.4",
-    "rollup-plugin-vue": "^6.0.0"
+    "rollup-plugin-vue": "^6.0.0",
+    "sass": "^1.69.4"
   }
 }
