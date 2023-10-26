@@ -7,7 +7,9 @@ import { use, registerComponent } from '../../utils/plugins'
 const Plugin = {
     install(Vue) {
         registerComponent(Vue, Menu)
-        registerComponent(Vue, MenuList)
+        // explicit `name` is needed to avoid name mangling of
+        // Functional Component in production
+        registerComponent(Vue, MenuList, 'BMenuList')
         registerComponent(Vue, MenuItem)
     }
 }
