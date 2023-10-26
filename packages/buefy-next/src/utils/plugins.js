@@ -5,8 +5,10 @@ export const use = (plugin) => {
     }
 }
 
-export const registerComponent = (Vue, component) => {
-    Vue.component(component.name, component)
+// use `name` to register a Functional Component which will become unresolvable
+// in production build due to name mangling.
+export const registerComponent = (Vue, component, name) => {
+    Vue.component(name || component.name, component)
 }
 
 export const registerComponentProgrammatic = (Vue, property, component) => {
