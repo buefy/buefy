@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp netlify.toml dist/",
+    "build": "vite build && copyfiles --flat netlify.toml dist/",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "bulma-css-vars": "0.8.0",
     "cleave.js": "1.0.1",
     "clipboard": "^2.0.11",
+    "copyfiles": "^2.4.1",
     "highlight.js": "^11.9.0",
     "lodash": "^4.17.21",
     "sass": "^1.68.0",
