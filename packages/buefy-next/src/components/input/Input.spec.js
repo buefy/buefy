@@ -86,7 +86,7 @@ describe('BInput', () => {
         expect(target.attributes().type).toBe('password')
     })
 
-    it('toggles the visibility of the password to true when the togglePasswordVisibility method is called', async (done) => {
+    it('toggles the visibility of the password to true when the togglePasswordVisibility method is called', async () => {
         const wrapper = mount(BInput, {
             props: {
                 modelValue: 'foo',
@@ -109,8 +109,6 @@ describe('BInput', () => {
         expect(wrapper.vm.newType).toBe('text')
         expect(wrapper.vm.isPasswordVisible).toBeTruthy()
         expect(wrapper.find('input').attributes().type).toBe('text')
-
-        wrapper.vm.$nextTick(done)
     })
 
     it('render the placeholder and readonly attribute when passed', () => {

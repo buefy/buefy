@@ -238,6 +238,7 @@ describe('BTable', () => {
             await wrapper.vm.$nextTick() // makes sure the DOM is updated
             bodyRows = wrapper.findAll('tbody tr')
             expect(bodyRows).toHaveLength(2) // Filtering after debounce
+            jest.useRealTimers()
         })
     })
 })

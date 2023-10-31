@@ -37,6 +37,10 @@ describe('BToast', () => {
             transformVNodeArgs(undefined)
         })
 
+        afterEach(() => {
+            jest.useRealTimers()
+        })
+
         it('should close after the duration', () => {
             jest.useFakeTimers()
             const params = {

@@ -11,13 +11,13 @@ const snapshotOptions = {
 }
 
 describe('BImage', () => {
-    const originalClientWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth')
+    const originalClientWidth = Object.getOwnPropertyDescriptor(Element.prototype, 'clientWidth')
     const clientWidth = 500
     beforeEach(() => {
-        Object.defineProperty(HTMLElement.prototype, 'clientWidth', { configurable: true, value: clientWidth })
+        Object.defineProperty(Element.prototype, 'clientWidth', { configurable: true, value: clientWidth })
     })
     afterAll(() => {
-        Object.defineProperty(HTMLElement.prototype, 'clientWidth', originalClientWidth)
+        Object.defineProperty(Element.prototype, 'clientWidth', originalClientWidth)
     })
 
     it('is called', () => {

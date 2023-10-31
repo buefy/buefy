@@ -114,6 +114,7 @@ describe('BModal', () => {
             modal.close()
             jest.advanceTimersByTime(150)
             expect(document.querySelector('.modal')).toBeFalsy()
+            jest.useRealTimers()
         })
     })
 

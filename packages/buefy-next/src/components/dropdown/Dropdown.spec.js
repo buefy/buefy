@@ -206,6 +206,7 @@ describe('BDropdown', () => {
         expect(wrapper.vm.isActive).toBeFalsy()
 
         jest.useFakeTimers()
+        jest.spyOn(global, 'setTimeout')
         await wrapper.setData({ isActive: false })
         wrapper.vm.toggle()
         await wrapper.vm.$nextTick()
@@ -213,6 +214,7 @@ describe('BDropdown', () => {
         expect(wrapper.vm.isActive).toBeFalsy()
         jest.advanceTimersByTime(1)
         expect(wrapper.vm.isActive).toBeTruthy()
+        jest.useRealTimers()
     })
 
     it('reset events before destroy', () => {
