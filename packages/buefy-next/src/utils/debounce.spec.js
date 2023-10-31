@@ -1,12 +1,17 @@
 import debounce from './debounce'
 
-let func
-beforeEach(() => {
-    jest.useFakeTimers()
-    func = jest.fn()
-})
-
 describe('debounce', () => {
+    let func
+
+    beforeEach(() => {
+        jest.useFakeTimers()
+        func = jest.fn()
+    })
+
+    afterEach(() => {
+        jest.useRealTimers()
+    })
+
     it('is not called immediately', () => {
         const debouncedFunc = debounce(func, 1000)
         debouncedFunc()

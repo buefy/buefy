@@ -73,6 +73,8 @@ describe('BSlider', () => {
         expect(wrapper.vm.dragging).toBeFalsy()
         expect(wrapper.emitted().dragend).toBeTruthy()
         expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+
+        jest.useRealTimers()
     })
 
     it('manage click correctly', async () => {

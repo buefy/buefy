@@ -9,6 +9,10 @@ describe('BNumberinput', () => {
             wrapper = mount(BNumberinput)
         })
 
+        afterEach(() => {
+            jest.useRealTimers()
+        })
+
         it('is called', () => {
             expect(wrapper.vm).toBeTruthy()
             expect(wrapper.vm.$options.name).toBe('BNumberinput')

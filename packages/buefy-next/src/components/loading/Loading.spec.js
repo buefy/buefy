@@ -81,6 +81,7 @@ describe('BLoading', () => {
             loading.close()
             // subsequent tests will fail unless we wait for the timeout
             jest.advanceTimersByTime(150)
+            jest.useRealTimers()
         })
 
         it('Is called', () => {
@@ -94,6 +95,7 @@ describe('BLoading', () => {
 
         it('manage close', async () => {
             jest.useFakeTimers()
+            jest.spyOn(global, 'setTimeout')
 
             loading.close()
             expect(onClose).toHaveBeenCalled()
@@ -129,6 +131,7 @@ describe('BLoading', () => {
             loading.close()
             // subsequent tests may fail unless we wait for the timeout
             jest.advanceTimersByTime(150)
+            jest.useRealTimers()
         })
 
         it('Is called', () => {
