@@ -31,6 +31,7 @@
                     @close="close"
                 />
                 <template v-else-if="content">
+                    <!-- eslint-disable-next-line vue/no-v-html -->
                     <div v-html="content" />
                 </template>
                 <slot
