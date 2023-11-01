@@ -130,8 +130,8 @@ export default {
                     this.locale,
                     {
                         style: 'percent',
-                        minimumFractionDigits: minimumFractionDigits,
-                        maximumFractionDigits: maximumFractionDigits
+                        minimumFractionDigits,
+                        maximumFractionDigits
                     }
                 ).format(value / this.max)
             }
@@ -139,8 +139,8 @@ export default {
             return new Intl.NumberFormat(
                 this.locale,
                 {
-                    minimumFractionDigits: minimumFractionDigits,
-                    maximumFractionDigits: maximumFractionDigits
+                    minimumFractionDigits,
+                    maximumFractionDigits
                 }
             ).format(value)
         }

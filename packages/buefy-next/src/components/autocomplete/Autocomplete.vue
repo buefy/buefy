@@ -482,7 +482,7 @@ export default {
         },
 
         selectHeaderOrFoterByClick(event, origin) {
-            this.checkIfHeaderOrFooterSelected(event, { origin: origin })
+            this.checkIfHeaderOrFooterSelected(event, { origin })
         },
 
         /**

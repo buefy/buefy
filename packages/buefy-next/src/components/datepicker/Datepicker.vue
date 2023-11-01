@@ -553,8 +553,8 @@ export default {
             }
             return this.newMonthNames.map((name, index) => {
                 return {
-                    name: name,
-                    index: index,
+                    name,
+                    index,
                     disabled: index < minMonth || index > maxMonth
                 }
             })
