@@ -11,8 +11,7 @@ module.exports = {
     ],
     parser: 'vue-eslint-parser',
     parserOptions: {
-        parser: '@babel/eslint-parser',
-        sourceType: 'module'
+        ecmaVersion: 'latest'
     },
     rules: {
     // from eslint-config-buefy {
