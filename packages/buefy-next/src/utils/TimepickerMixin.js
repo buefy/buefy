@@ -307,7 +307,7 @@ export default {
                 }
                 hours.push({
                     label: this.formatNumber(label),
-                    value: value
+                    value
                 })
             }
             return hours

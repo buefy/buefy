@@ -45,7 +45,7 @@ describe('BSlotComponent', () => {
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm,
-                tag: tag,
+                tag,
                 name: slotName
             }
         })
