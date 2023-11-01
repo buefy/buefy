@@ -67,7 +67,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.red"
-                                    @update:modelValue="updateRGB"
+                                    @update:model-value="updateRGB"
                                     size="is-small"
                                     aria-label="Red"
                                 />
@@ -76,7 +76,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.green"
-                                    @update:modelValue="updateRGB"
+                                    @update:model-value="updateRGB"
                                     size="is-small"
                                     aria-label="Green"
                                 />
@@ -85,7 +85,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.blue"
-                                    @update:modelValue="updateRGB"
+                                    @update:model-value="updateRGB"
                                     size="is-small"
                                     aria-label="Blue"
                                 />

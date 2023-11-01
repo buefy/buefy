@@ -16,6 +16,7 @@
                 <slot />
             </template>
             <template v-else>
+                <!-- eslint-disable-next-line vue/no-v-html -->
                 <div v-html="message" />
             </template>
         </div>
