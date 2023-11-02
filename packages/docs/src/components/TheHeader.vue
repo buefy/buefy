@@ -18,7 +18,9 @@
 
         <div class="columns">
             <div class="column">
+                <!-- eslint-disable-next-line vue/no-v-html -->
                 <h1 class="title" v-html="title" />
+                <!-- eslint-disable-next-line vue/no-v-html -->
                 <h2 class="subtitle" v-html="subtitle" />
             </div>
         </div>

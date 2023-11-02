@@ -34,6 +34,8 @@ import ImproveThis from '@/components/ImproveThis'
 import menuData from '@/data/menu'
 
 export default {
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'Documentation',
     components: {
         TheHeader,
         TheNavbar,
