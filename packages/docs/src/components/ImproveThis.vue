@@ -9,7 +9,8 @@
                 <a
                     :href="`https://github.com/buefy/buefy/blob/dev/docs/${githubPath}`"
                     target="_blank"
-                    style="text-decoration: underline">
+                    style="text-decoration: underline"
+                >
                     Improve this page on GitHub
                 </a>
             </p>

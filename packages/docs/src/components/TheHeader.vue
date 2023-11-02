@@ -6,7 +6,8 @@
                     <li
                         v-if="routes[item]"
                         :key="item"
-                        :class="{ 'is-active': index === breadcrumb.length - 1 }">
+                        :class="{ 'is-active': index === breadcrumb.length - 1 }"
+                    >
                         <router-link :to="routes[item].path">
                             {{ routes[item].breadTitle || routes[item].title }}
                         </router-link>
@@ -17,8 +18,8 @@
 
         <div class="columns">
             <div class="column">
-                <h1 class="title" v-html="title"/>
-                <h2 class="subtitle" v-html="subtitle"/>
+                <h1 class="title" v-html="title" />
+                <h2 class="subtitle" v-html="subtitle" />
             </div>
         </div>
     </header>
