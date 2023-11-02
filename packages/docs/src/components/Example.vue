@@ -1,22 +1,25 @@
 <template>
     <section class="example-section">
         <p :id="`${slugifiedTitle}`" class="title is-4">
-            <router-link v-if="title" :to="`#${slugifiedTitle}`">#</router-link>
+            <router-link v-if="title" :to="`#${slugifiedTitle}`">
+                #
+            </router-link>
             {{ title }}
         </p>
         <div class="content">
-            <slot/>
+            <slot />
         </div>
 
         <div
             v-if="code && component"
             class="example"
-            :class="{ 'is-vertical': vertical }">
+            :class="{ 'is-vertical': vertical }"
+        >
             <div class="button-container">
-                <CodepenEdit :code="code" :title="title"/>
+                <CodepenEdit :code="code" :title="title" />
             </div>
             <div class="example-component" :class="{ 'is-paddingless': paddingless }">
-                <component :is="component"/>
+                <component :is="component" />
             </div>
             <CodeView
                 :code="code"

@@ -13,7 +13,7 @@ export function createDocsRouter(vueApp) {
             //
             // due to Vite's limitation on dynamic import:
             // https://vitejs.dev/guide/features.html#dynamic-import
-            component,
+            component
         }
     }
 

@@ -16,8 +16,9 @@
                                 <a
                                     class="button"
                                     href="https://github.com/buefy/buefy"
-                                    target="_blank">
-                                    <b-icon icon="github"/>
+                                    target="_blank"
+                                >
+                                    <b-icon icon="github" />
                                     <span>GitHub</span>
                                 </a>
                             </p>
@@ -25,8 +26,9 @@
                                 <a
                                     class="button is-twitter"
                                     href="https://twitter.com/walter_tommasi"
-                                    target="_blank">
-                                    <b-icon icon="twitter"/>
+                                    target="_blank"
+                                >
+                                    <b-icon icon="twitter" />
                                     <span>Twitter</span>
                                 </a>
                             </p>
@@ -40,25 +42,29 @@
                         <router-link
                             to="/"
                             exact
-                            class="navbar-item has-text-weight-semibold">
+                            class="navbar-item has-text-weight-semibold"
+                        >
                             Home
                         </router-link>
 
                         <router-link
                             to="/documentation"
-                            class="navbar-item has-text-weight-semibold">
+                            class="navbar-item has-text-weight-semibold"
+                        >
                             Documentation
                         </router-link>
 
                         <router-link
                             to="/extensions"
-                            class="navbar-item has-text-weight-semibold">
+                            class="navbar-item has-text-weight-semibold"
+                        >
                             Extensions
                         </router-link>
 
                         <router-link
                             to="/expo"
-                            class="navbar-item has-text-weight-semibold">
+                            class="navbar-item has-text-weight-semibold"
+                        >
                             Expo
                         </router-link>
                     </div>
