@@ -88,6 +88,7 @@
                                     :aria-posinset="result.index + 1"
                                     tabindex="-1"
                                 >
+                                    <!-- eslint-disable-next-line vue/no-v-html -->
                                     <p v-html="highlightTerm(result.title)" class="is-size-6" />
                                     <p class="is-size-7">
                                         {{ stripTags(result.subtitle) }}

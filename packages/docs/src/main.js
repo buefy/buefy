@@ -3,7 +3,7 @@ import App from './App.vue'
 import { createDocsRouter } from './router'
 import Emitter from 'tiny-emitter'
 
-import { default as Buefy, createNewEvent } from '@ntohq/buefy-next'
+import Buefy, { createNewEvent } from '@ntohq/buefy-next'
 import Axios from 'axios'
 // TODO: use vue3-progressbar?
 // import VueProgressBar from 'vue-progressbar'
