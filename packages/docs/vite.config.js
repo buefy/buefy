@@ -87,6 +87,20 @@ export default defineConfig({
         }
       },
     },
+    {
+      // replaces `@ntohq/buefy-next` with the path to the source code
+      // // in development to ease debugging
+      name: 'link-buefy-next-src',
+      apply: 'serve', // development only
+      resolveId: {
+        order: 'pre', // otherwise, IDs become "plugin-vue:export-helper"
+        handler(id) {
+          if (id === '@ntohq/buefy-next') {
+            return path.resolve(__dirname, '../buefy-next/src/index.js')
+          }
+        },
+      },
+    },
   ],
   resolve: {
     alias: {
