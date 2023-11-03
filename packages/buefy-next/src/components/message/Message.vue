@@ -37,7 +37,7 @@
                 </div>
             </section>
             <b-progress
-                v-if="autoClose && progressBar"
+                v-if="progressBar"
                 class="auto-close-progress"
                 :value="remainingTime - 1"
                 :max="duration / 1000 - 1"
