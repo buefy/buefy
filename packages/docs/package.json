@@ -22,13 +22,12 @@
   "dependencies": {
     "@ntohq/buefy-next": "*",
     "bulma": "^0.9.4",
-    "vue": "^3.3.4"
+    "vue": "^3.3.7"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@mdi/font": "^6.9.96",
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vue/shared": "^3.3.4",
     "axios": "^1.5.1",
     "bluebird": "^3.7.2",
     "bulma-css-vars": "0.8.0",
