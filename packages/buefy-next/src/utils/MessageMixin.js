@@ -105,7 +105,7 @@ export default {
             }
         },
         setDurationProgress() {
-            if (this.progressBar) {
+            if (this.progressBar || this.autoClose) {
                 /**
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar (Remaining Time)
