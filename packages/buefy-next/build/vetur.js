@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const buefyDir = path.resolve(__dirname, '../docs/pages/components')
+const buefyDir = path.resolve(__dirname, '../../docs/src/pages/components')
 
 let tags = {}
 let attributes = {}
