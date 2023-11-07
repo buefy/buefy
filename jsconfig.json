@@ -1,6 +1,6 @@
 {
     "include": [
-        "src/**/*",
-        "docs/**/*"
+        "packages/buefy-next/src/**/*",
+        "packages/docs/src/**/*"
     ]
 }
