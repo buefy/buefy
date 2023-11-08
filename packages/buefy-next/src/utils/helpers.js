@@ -352,7 +352,7 @@ export function copyAppContext(src, dest) {
     destContext.mixins = srcContext.mixins
     destContext.components = srcContext.components
     destContext.directives = srcContext.directives
-    destContext.provdes = srcContext.provides
+    destContext.provides = srcContext.provides
     destContext.optionsCache = srcContext.optionsCache
     destContext.propsCache = srcContext.propsCache
     destContext.emitsCache = srcContext.emitsCache
