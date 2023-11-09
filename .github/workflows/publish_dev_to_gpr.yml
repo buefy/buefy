@@ -1,0 +1,43 @@
+name: Publish dev package to GitHub Packages registry (GPR) for evaluation
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get commit SHA
+        run: echo "GITHUB_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Extract information from buefy-next/package.json
+        id: package_info
+        # uses the exact commit to prevent harmful updates
+        uses: jaywcjlove/github-action-package@4c0fcaf1440887bf51b501d7ccadd0a15caa7c81
+        with:
+          path: packages/buefy-next/package.json
+
+      - name: Append GITHUB_SHA to the version in buefy-next/package.json
+        # uses the exact commit to prevent harmful updates
+        uses: jaywcjlove/github-action-package@4c0fcaf1440887bf51b501d7ccadd0a15caa7c81
+        with:
+          path: packages/buefy-next/package.json
+          version: "${{ steps.package_info.outputs.version }}-${{ env.GITHUB_SHA }}"
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - run: npm ci
+
+      - run: npm -w @ntohq/buefy-next run build
+
+      - run: npm -w @ntohq/buefy-next publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
