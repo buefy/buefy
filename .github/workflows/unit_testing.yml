@@ -16,7 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 20.x]
+        # omits 14.x because some of our devDependencies require 16.x or higher
+        node-version: [16.x, 18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
     - uses: actions/checkout@v4
@@ -25,5 +26,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm -w @ntohq/buefy-next ci
+    - run: npm ci
     - run: npm -w @ntohq/buefy-next test
