@@ -1,6 +1,6 @@
 {
   "name": "@ntohq/buefy-next",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
     "vuejs",
