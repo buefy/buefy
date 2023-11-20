@@ -104,4 +104,12 @@ describe('BButton', () => {
         })
         expect(wrapper.element.type).toBeFalsy()
     })
+
+    it('should set type attribute if the tag is input', async () => {
+        await wrapper.setProps({
+            tag: 'input',
+            nativeType: 'submit'
+        })
+        expect(wrapper.element.type).toBe('submit')
+    })
 })
