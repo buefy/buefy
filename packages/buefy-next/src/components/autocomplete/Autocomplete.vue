@@ -681,7 +681,7 @@ export default {
         },
         updateAppendToBody() {
             const dropdownMenu = this.$refs.dropdown
-            const trigger = this.$refs.input.$el
+            const trigger = this.$parent.$data._isTaginput ? this.$parent.$el : this.$refs.input.$el
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
                 const root = this.$data._bodyEl
