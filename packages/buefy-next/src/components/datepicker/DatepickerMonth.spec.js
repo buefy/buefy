@@ -297,4 +297,41 @@ describe('BDatepickerMonth', () => {
             })
         })
     })
+
+    describe('focus', () => {
+        let wrapper
+        const nextMonth = thisMonth + 1
+        let cellToFocus
+
+        beforeEach(() => {
+            wrapper = shallowMount(BDatepickerMonth, {
+                props: {
+                    monthNames: config.defaultMonthNames,
+                    focused: {
+                        month: config.focusedDate.getMonth(),
+                        year: config.focusedDate.getFullYear()
+                    },
+                    dateCreator
+                }
+            })
+            const refName = `month-${nextMonth}`
+            if (Array.isArray(wrapper.vm.$refs[refName])) {
+                cellToFocus = wrapper.vm.$refs[refName][0]
+            } else {
+                cellToFocus = wrapper.vm.$refs[refName]
+            }
+            jest.spyOn(cellToFocus, 'focus')
+        })
+
+        it('changing month should call focus on the corresponding cell', async () => {
+            await wrapper.setProps({
+                focused: {
+                    month: nextMonth,
+                    year: config.focusedDate.getFullYear()
+                }
+            })
+            await wrapper.vm.$nextTick()
+            expect(cellToFocus.focus).toHaveBeenCalled()
+        })
+    })
 })

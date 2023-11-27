@@ -143,13 +143,19 @@ export default {
     watch: {
         focusedMonth(month) {
             const refName = `month-${month}`
-            if (this.$refs[refName] && this.$refs[refName].length > 0) {
-                this.$nextTick(() => {
-                    if (this.$refs[refName][0]) {
-                        this.$refs[refName][0].focus()
-                    }
-                }) // $nextTick needed when year is changed
-            }
+            this.$nextTick(() => {
+                // Vue ≥ v3.0 < v3.2.25, refs in v-for are stored as a single object,
+                // but ≥ v3.2.25, refs in v-for are stored in an array (same as Vue 2)
+                let cell
+                if (Array.isArray(this.$refs[refName])) {
+                    cell = this.$refs[refName][0]
+                } else {
+                    cell = this.$refs[refName]
+                }
+                if (cell) {
+                    cell.focus()
+                }
+            }) // $nextTick needed when year is changed
         }
     },
     methods: {

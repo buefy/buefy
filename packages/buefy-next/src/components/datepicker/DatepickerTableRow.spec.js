@@ -262,4 +262,32 @@ describe('BDatepickerTableRow', () => {
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
     })
+
+    describe('focus', () => {
+        let wrapper
+        let cellToFocus
+
+        beforeEach(() => {
+            wrapper = shallowMount(BDatepickerTableRow, {
+                props: {
+                    ...props,
+                    month: 1,
+                    day: 1
+                }
+            })
+            const refName = 'day-1-2'
+            if (Array.isArray(wrapper.vm.$refs[refName])) {
+                cellToFocus = wrapper.vm.$refs[refName][0]
+            } else {
+                cellToFocus = wrapper.vm.$refs[refName]
+            }
+            jest.spyOn(cellToFocus, 'focus')
+        })
+
+        it('changing day should call focus on the corresponding cell', async () => {
+            await wrapper.setProps({ day: 2 })
+            await wrapper.vm.$nextTick()
+            expect(cellToFocus.focus).toHaveBeenCalled()
+        })
+    })
 })
