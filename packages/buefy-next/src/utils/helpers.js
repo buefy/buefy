@@ -321,7 +321,13 @@ export function isTag(vnode) {
         vnode.type !== Static
 }
 
-// TODO: too much dependence of Vue's internal structure?
+// references
+// - https://github.com/vuejs/core/blob/1c525f75a3d17a6356d5f66765623c0ae7c0ebcc/packages/runtime-core/src/apiCreateApp.ts#L361
+// - https://github.com/vuejs/core/blob/1c525f75a3d17a6356d5f66765623c0ae7c0ebcc/packages/runtime-core/src/component.ts#L1036-L1054
+//
+// we cannot access getExposeProxy since it is not exported from `vue`, though,
+// its purpose seems to be one-time initialization of component.exposeProxy,
+// which should have been done by this function call
 export function getComponentFromVNode(vnode) {
     if (!vnode) {
         return undefined
@@ -330,7 +336,7 @@ export function getComponentFromVNode(vnode) {
     if (!component) {
         return undefined
     }
-    return component.expose ? component.expose : component.proxy
+    return (component.exposed && component.exposeProxy) || component.proxy
 }
 
 // Copies the context from a given app to another app.
