@@ -15,7 +15,10 @@ const WrapperComp = {
         </BCarousel>`,
     props: {
         // to indirectly change BCarousel's animated prop
-        animated: 'slide'
+        animated: {
+            type: String,
+            default: 'slide'
+        }
     },
     components: {
         BCarousel, BCarouselItem
