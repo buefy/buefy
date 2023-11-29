@@ -1,3 +1,5 @@
+import type { App } from 'vue'
+
 import * as components from './components'
 
 import { merge } from './utils/helpers'
@@ -7,7 +9,7 @@ import { registerComponentProgrammatic } from './utils/plugins'
 import ConfigComponent from './utils/ConfigComponent'
 
 const Buefy = {
-    install(Vue, options = {}) {
+    install(Vue: App, options = {}) {
         setVueInstance(Vue)
         // Options
         setOptions(merge(config, options, true))
