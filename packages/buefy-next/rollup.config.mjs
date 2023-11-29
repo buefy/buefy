@@ -1,8 +1,9 @@
-import vue from 'rollup-plugin-vue'
+import esbuild from 'rollup-plugin-esbuild'
 import node from '@rollup/plugin-node-resolve'
 import cjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 import terser from '@rollup/plugin-terser'
+import vue from '@vitejs/plugin-vue'
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -29,7 +30,7 @@ const components = fs
     )
 
 const entries = {
-    index: './src/index.js',
+    index: './src/index.ts',
     helpers: './src/utils/helpers.js',
     config: './src/utils/ConfigComponent.js',
     ...components.reduce((obj, name) => {
@@ -52,6 +53,12 @@ const vuePluginConfig = {
     }
 }
 
+const esbuildConfig = {
+    sourceMap: false,
+    minify: false,
+    target: 'es2015'
+}
+
 export default () => {
     const mapComponent = (name) => {
         return [
@@ -72,8 +79,8 @@ export default () => {
                     node({
                         extensions: ['.vue', '.js']
                     }),
+                    esbuild(esbuildConfig),
                     vue(vuePluginConfig),
-                    babel(babelConfig),
                     cjs()
                 ]
             }
@@ -92,8 +99,8 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },
@@ -109,13 +116,13 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },
         {
-            input: 'src/index.js',
+            input: 'src/index.ts',
             external: ['vue'],
             output: {
                 format: 'umd',
@@ -131,13 +138,13 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },
         {
-            input: 'src/index.js',
+            input: 'src/index.ts',
             external: ['vue'],
             output: {
                 format: 'esm',
@@ -148,8 +155,8 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },

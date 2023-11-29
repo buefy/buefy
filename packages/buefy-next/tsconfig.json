@@ -1,0 +1,10 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["src/**/*", "src/**/*.vue"],
+  "exclude": ["node_modules", "src/scss/*", "src/**/*.spec.*"],
+  "compilerOptions": {
+    "types": ["jsdom"],
+    "allowJs": true,
+    "declaration": false
+  }
+}
