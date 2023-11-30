@@ -40,7 +40,7 @@
     "unit": "jest --runInBand --u",
     "lint": "eslint src --ext .js,.vue",
     "lint:fix": "eslint src --ext .js,.vue --fix",
-    "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",
+    "type-check": "vue-tsc --noEmit -p tsconfig.test.json --composite false",
     "build": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
