@@ -350,6 +350,10 @@ export function getComponentFromVNode(vnode) {
 // This function can copy the context from the host app to the new app.
 //
 // Depends on what Vue internally does: https://github.com/vuejs/core/blob/b775b71c788499ec7ee58bc2cf4cd04ed388e072/packages/runtime-core/src/apiCreateApp.ts#L170-L190
+//
+// This function also should take care of compatiblity with other plugins.
+// We need a generic solution, though, it fixes compatiblity issues of
+// individual plugins for now.
 export function copyAppContext(src, dest) {
     // replacing _context won't work because methods of app bypasses app._context
     const { _context: srcContext } = src
@@ -362,4 +366,8 @@ export function copyAppContext(src, dest) {
     destContext.optionsCache = srcContext.optionsCache
     destContext.propsCache = srcContext.propsCache
     destContext.emitsCache = srcContext.emitsCache
+    // vue-i18n support: https://github.com/ntohq/buefy-next/issues/153
+    if ('__VUE_I18N_SYMBOL__' in src) {
+        dest.__VUE_I18N_SYMBOL__ = src.__VUE_I18N_SYMBOL__
+    }
 }
