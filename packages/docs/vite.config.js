@@ -96,7 +96,7 @@ export default defineConfig({
         order: 'pre', // otherwise, IDs become "plugin-vue:export-helper"
         handler(id) {
           if (id === '@ntohq/buefy-next') {
-            return path.resolve(__dirname, '../buefy-next/src/index.js')
+            return path.resolve(__dirname, '../buefy-next/src/index.ts')
           }
         },
       },
@@ -108,6 +108,6 @@ export default defineConfig({
       'vue': 'vue/dist/vue.esm-bundler.js',
       '@/': `${path.resolve(__dirname, 'src')}/`,
     },
-    extensions: ['.vue', '.js', '.json']
+    extensions: ['.vue', '.js', '.ts', '.json']
   }
 })
