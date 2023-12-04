@@ -19,7 +19,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "unpkg": "dist/buefy.min.js",
-  "typings": "src/types/index.d.ts",
+  "typings": "dist/buefy.d.ts",
   "sideEffects": [
     "*.css",
     "*.scss"
@@ -41,8 +41,9 @@
     "lint": "eslint src --ext .js,.vue",
     "lint:fix": "eslint src --ext .js,.vue --fix",
     "type-check": "vue-tsc --noEmit -p tsconfig.test.json --composite false",
-    "build": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
+    "build": "rimraf dist && npm run build:js && npm run build:scss && npm run build:dts && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
+    "build:dts": "rimraf temp-dts && tsc -p tsconfig.types.json && api-extractor run",
     "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "vetur": "node -r esm build/vetur.js"
   },
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
+    "@microsoft/api-extractor": "^7.38.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
