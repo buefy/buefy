@@ -15,6 +15,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && copyfiles --flat netlify.toml dist/",
+    "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .js,.ts,.vue",
     "lint:fix": "eslint src --ext .js,.ts,.vue --fix",
     "preview": "vite preview"
