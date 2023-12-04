@@ -38,8 +38,8 @@
   "scripts": {
     "test": "npm run lint && npm run unit",
     "unit": "jest --runInBand --u",
-    "lint": "eslint src --ext .js,.vue",
-    "lint:fix": "eslint src --ext .js,.vue --fix",
+    "lint": "eslint src --ext .js,.ts,.vue",
+    "lint:fix": "eslint src --ext .js,.ts,.vue --fix",
     "type-check": "vue-tsc --noEmit -p tsconfig.test.json --composite false",
     "build": "rimraf dist && npm run build:js && npm run build:scss && npm run build:dts && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",

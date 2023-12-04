@@ -1,16 +1,19 @@
 // http://eslint.org/docs/user-guide/configuring
 
 module.exports = {
+    root: true, // this is the root ESLint config file
     env: {
         jest: true,
         browser: true
     },
     extends: [
         'standard',
-        'plugin:vue/vue3-recommended'
+        'plugin:vue/vue3-recommended',
+        'plugin:@typescript-eslint/recommended'
     ],
     parser: 'vue-eslint-parser',
     parserOptions: {
+        parser: '@typescript-eslint/parser',
         ecmaVersion: 'latest'
     },
     rules: {

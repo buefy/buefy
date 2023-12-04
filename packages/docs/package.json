@@ -15,8 +15,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && copyfiles --flat netlify.toml dist/",
-    "lint": "eslint src --ext .js,.vue",
-    "lint:fix": "eslint src --ext .js,.vue --fix",
+    "lint": "eslint src --ext .js,.ts,.vue",
+    "lint:fix": "eslint src --ext .js,.ts,.vue --fix",
     "preview": "vite preview"
   },
   "dependencies": {
