@@ -14,7 +14,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && copyfiles --flat netlify.toml dist/",
+    "build": "run-p type-check build-only && copyfiles --flat netlify.toml dist/",
+    "build-only": "vite build",
     "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .js,.ts,.vue",
     "lint:fix": "eslint src --ext .js,.ts,.vue --fix",
@@ -36,6 +37,7 @@
     "copyfiles": "^2.4.1",
     "highlight.js": "^11.9.0",
     "lodash": "^4.17.21",
+    "npm-run-all2": "^6.1.1",
     "sass": "^1.68.0",
     "scrollreveal": "3.3.6",
     "sortablejs": "1.7.0",
