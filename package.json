@@ -17,11 +17,17 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
+    "@vitejs/plugin-vue": "^4.5.1",
+    "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.52.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.18.1",
     "lint-staged": "^15.0.2",
-    "pre-commit": "1.2.2"
+    "pre-commit": "1.2.2",
+    "sass": "^1.69.5",
+    "vite": "^4.4.12",
+    "vue": "^3.3.10",
+    "vue-tsc": "^1.8.27"
   },
   "repository": {
     "type": "git",

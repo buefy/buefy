@@ -43,7 +43,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.test.json --composite false",
     "build": "rimraf dist && npm run build:js && npm run build:scss && npm run build:dts && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
-    "build:dts": "rimraf temp-dts && tsc -p tsconfig.types.json && api-extractor run",
+    "build:dts": "rimraf temp-dts && vue-tsc -p tsconfig.types.json && api-extractor run",
     "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "vetur": "node -r esm build/vetur.js"
   },
@@ -59,9 +59,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/jest-dom": "^6.1.4",
-    "@vitejs/plugin-vue": "^4.5.0",
     "@vue/test-utils": "^2.4.1",
-    "@vue/tsconfig": "^0.4.0",
     "@vue/vue3-jest": "^29.2.6",
     "babel-jest": "^29.7.0",
     "clean-css-cli": "^5.6.2",
@@ -72,9 +70,6 @@
     "rimraf": "^5.0.5",
     "rollup": "^4.1.4",
     "rollup-plugin-esbuild": "^6.1.0",
-    "sass": "^1.69.4",
-    "vitest": "^0.34.6",
-    "vue": "^3.3.7",
-    "vue-tsc": "^1.8.22"
+    "vitest": "^0.34.6"
   }
 }
