@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { createDocsRouter } from './router'
-import Emitter from 'tiny-emitter'
+import { TinyEmitter } from 'tiny-emitter' // https://github.com/scottcorgan/tiny-emitter/issues/47#issuecomment-1551817340
 
 import Buefy, { createNewEvent } from '@ntohq/buefy-next'
 import Axios from 'axios'
@@ -29,14 +29,20 @@ const router = createDocsRouter(vueApp)
 
 vueApp.use(router)
 
-vueApp.config.productionTip = false
-
 // Webpack inserts `global` but Vite does not
 // https://stackoverflow.com/a/73208485
 window.global ||= window
 
 vueApp.config.globalProperties.$http = Axios
-vueApp.config.globalProperties.$eventHub = new Emitter()
+vueApp.config.globalProperties.$eventHub = new TinyEmitter()
+
+// allows access to `$http` and `$eventHub` in all components
+declare module '@vue/runtime-core' {
+    interface ComponentCustomProperties {
+        $http: typeof Axios
+        $eventHub: TinyEmitter
+    }
+}
 
 vueApp.use(Buefy, {
     // defaultModalScroll: 'keep'
