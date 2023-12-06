@@ -147,30 +147,37 @@ export default {
 
                 const rect = trigger.getBoundingClientRect()
 
-                let top = rect.top + window.scrollY
-                let left = rect.left + window.scrollX
+                const top = rect.top + window.scrollY
+                const left = rect.left + window.scrollX
 
-                const quaterHeight = trigger.clientHeight / 2 / 2
-
+                // `tooltipEl` will be placed relative to `wrapper`
+                // because `wrapper` should create a stacking context
+                // as its z-index is non-auto
+                tooltipEl.style.position = 'absolute'
                 switch (this.position) {
                     case 'is-top':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
-                        tooltipEl.style.height = `0px`
-                        top -= trigger.clientHeight - quaterHeight
+                        tooltipEl.style.height = '0px'
+                        tooltipEl.style.top = '0px'
+                        tooltipEl.style.left = '0px'
                         break
                     case 'is-bottom':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
-                        tooltipEl.style.height = `0px`
-                        top += quaterHeight
+                        tooltipEl.style.height = '0px'
+                        tooltipEl.style.top = `${trigger.clientHeight}px`
+                        tooltipEl.style.left = '0px'
                         break
                     case 'is-left':
-                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.width = '0px'
                         tooltipEl.style.height = `${trigger.clientHeight}px`
+                        tooltipEl.style.top = '0px'
+                        tooltipEl.style.left = '0px'
                         break
                     case 'is-right':
-                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.width = '0px'
                         tooltipEl.style.height = `${trigger.clientHeight}px`
-                        left += trigger.clientWidth
+                        tooltipEl.style.top = '0px'
+                        tooltipEl.style.left = `${trigger.clientWidth}px`
                         break
                 }
 
@@ -178,7 +185,7 @@ export default {
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
-                wrapper.style.width = `0px`
+                wrapper.style.width = '0px'
                 wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
                 this.triggerStyle = {
                     zIndex: this.isActive || this.always ? '100' : undefined
