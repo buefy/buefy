@@ -74,7 +74,7 @@ export default {
     props: {
         attached: Boolean,
         closable: Boolean,
-        type: String,
+        type: [String, Object],
         size: String,
         rounded: Boolean,
         disabled: Boolean,
