@@ -48,7 +48,7 @@
     "build:lib": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js && copyfiles --flat netlify.toml dist-docs",
-    "build": "rimraf dist && npm run build:js && npm run build:scss",
+    "build": "npm run build:lib && npm run build:docs",
     "cov": "./node_modules/codcov/bin/codcov",
     "vetur": "node -r esm build/vetur.js",
     "prepare": "npm run build:lib"
