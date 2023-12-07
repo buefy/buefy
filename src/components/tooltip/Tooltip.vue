@@ -287,6 +287,16 @@ export default {
         if (this.appendToBody && typeof window !== 'undefined') {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
             this.updateAppendToBody()
+            // updates the tooltip position if the tooltip is inside
+            // `.animation-content`
+            const animation = this.$el.closest('.animation-content')
+            if (animation != null) {
+                const listener = () => {
+                    this.updateAppendToBody()
+                    animation.removeEventListener('transitionend', listener)
+                }
+                animation.addEventListener('transitionend', listener)
+            }
             // observes changes in the window size
             this.resizeListener = () => this.updateAppendToBody()
             window.addEventListener('resize', this.resizeListener)
