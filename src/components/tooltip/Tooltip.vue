@@ -94,7 +94,9 @@ export default {
             isActive: false,
             triggerStyle: {},
             timer: null,
-            _bodyEl: undefined // Used to append to body
+            _bodyEl: undefined, // Used to append to body
+            resizeObserver: undefined,
+            resizeListener: undefined
         }
     },
     computed: {
@@ -285,6 +287,14 @@ export default {
         if (this.appendToBody && typeof window !== 'undefined') {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
             this.updateAppendToBody()
+            // observes changes in the window size
+            this.resizeListener = () => this.updateAppendToBody()
+            window.addEventListener('resize', this.resizeListener)
+            // observes changes in the size of the immediate parent
+            this.resizeObserver = new ResizeObserver(this.resizeListener)
+            if (this.$el.parentNode != null && this.$el.parentNode.nodeType === Node.ELEMENT_NODE) {
+                this.resizeObserver.observe(this.$el.parentNode)
+            }
         }
     },
     created() {
@@ -297,6 +307,12 @@ export default {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
+        }
+        if (this.resizeListener != null) {
+            window.removeEventListener('resize', this.resizeListener)
+        }
+        if (this.resizeObserver != null) {
+            this.resizeObserver.disconnect()
         }
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
