@@ -94,7 +94,9 @@ export default {
             isActive: false,
             triggerStyle: {},
             timer: null,
-            _bodyEl: undefined // Used to append to body
+            _bodyEl: undefined, // Used to append to body
+            resizeObserver: undefined,
+            resizeListener: undefined
         }
     },
     computed: {
@@ -147,30 +149,37 @@ export default {
 
                 const rect = trigger.getBoundingClientRect()
 
-                let top = rect.top + window.scrollY
-                let left = rect.left + window.scrollX
+                const top = rect.top + window.scrollY
+                const left = rect.left + window.scrollX
 
-                const quaterHeight = trigger.clientHeight / 2 / 2
-
+                // `tooltipEl` will be placed relative to `wrapper`
+                // because `wrapper` should create a stacking context
+                // as its z-index is non-auto
+                tooltipEl.style.position = 'absolute'
                 switch (this.position) {
                     case 'is-top':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
-                        tooltipEl.style.height = `0px`
-                        top -= trigger.clientHeight - quaterHeight
+                        tooltipEl.style.height = '0px'
+                        tooltipEl.style.top = '0px'
+                        tooltipEl.style.left = '0px'
                         break
                     case 'is-bottom':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
-                        tooltipEl.style.height = `0px`
-                        top += quaterHeight
+                        tooltipEl.style.height = '0px'
+                        tooltipEl.style.top = `${trigger.clientHeight}px`
+                        tooltipEl.style.left = '0px'
                         break
                     case 'is-left':
-                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.width = '0px'
                         tooltipEl.style.height = `${trigger.clientHeight}px`
+                        tooltipEl.style.top = '0px'
+                        tooltipEl.style.left = '0px'
                         break
                     case 'is-right':
-                        tooltipEl.style.width = `0px`
+                        tooltipEl.style.width = '0px'
                         tooltipEl.style.height = `${trigger.clientHeight}px`
-                        left += trigger.clientWidth
+                        tooltipEl.style.top = '0px'
+                        tooltipEl.style.left = `${trigger.clientWidth}px`
                         break
                 }
 
@@ -178,7 +187,7 @@ export default {
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
-                wrapper.style.width = `0px`
+                wrapper.style.width = '0px'
                 wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1'
                 this.triggerStyle = {
                     zIndex: this.isActive || this.always ? '100' : undefined
@@ -278,6 +287,24 @@ export default {
         if (this.appendToBody && typeof window !== 'undefined') {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
             this.updateAppendToBody()
+            // updates the tooltip position if the tooltip is inside
+            // `.animation-content`
+            const animation = this.$el.closest('.animation-content')
+            if (animation != null) {
+                const listener = () => {
+                    this.updateAppendToBody()
+                    animation.removeEventListener('transitionend', listener)
+                }
+                animation.addEventListener('transitionend', listener)
+            }
+            // observes changes in the window size
+            this.resizeListener = () => this.updateAppendToBody()
+            window.addEventListener('resize', this.resizeListener)
+            // observes changes in the size of the immediate parent
+            this.resizeObserver = new ResizeObserver(this.resizeListener)
+            if (this.$el.parentNode != null && this.$el.parentNode.nodeType === Node.ELEMENT_NODE) {
+                this.resizeObserver.observe(this.$el.parentNode)
+            }
         }
     },
     created() {
@@ -290,6 +317,12 @@ export default {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
+        }
+        if (this.resizeListener != null) {
+            window.removeEventListener('resize', this.resizeListener)
+        }
+        if (this.resizeObserver != null) {
+            this.resizeObserver.disconnect()
         }
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
