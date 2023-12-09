@@ -8,6 +8,9 @@ exports[`BPagination render correctly 1`] = `
     <bpaginationbutton-stub page="[object Object]" tag="a" disabled="true" class="pagination-next">
         <b-icon-stub icon="chevron-right" both="true" aria-hidden="true"></b-icon-stub>
     </bpaginationbutton-stub>
+    <div class="control pagination-input">
+        <!---->
+    </div>
     <ul class="pagination-list">
         <!---->
         <!---->

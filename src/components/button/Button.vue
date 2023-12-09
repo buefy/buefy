@@ -3,7 +3,7 @@
         :is="computedTag"
         class="button"
         v-bind="$attrs"
-        :type="computedTag === 'button' ? nativeType : undefined"
+        :type="['button', 'input'].includes(computedTag) ? nativeType : undefined"
         :class="[size, type, {
             'is-rounded': rounded,
             'is-loading': loading,

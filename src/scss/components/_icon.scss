@@ -1,5 +1,5 @@
-$icon-svg-width: auto !default;
-$icon-svg-height: auto !default;
+$icon-svg-width: 100% !default;
+$icon-svg-height: 100% !default;
 
 .icon {
     @include unselectable;

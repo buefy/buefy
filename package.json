@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "0.9.23",
+  "version": "0.9.25",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js based on Bulma",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
@@ -43,14 +43,15 @@
     "test:watch": "npm run unit -- --watchAll",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:js:watch": "rollup -c --watch",
-    "build:scss": "sass src/scss/buefy-build.scss | node ./build/banner.js > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
+    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "build:scss:watch": "sass src/scss/buefy-build.scss --watch",
     "build:lib": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js && copyfiles --flat netlify.toml dist-docs",
     "build": "npm run build:lib && npm run build:docs",
     "cov": "./node_modules/codcov/bin/codcov",
-    "vetur": "node -r esm build/vetur.js"
+    "vetur": "node -r esm build/vetur.js",
+    "prepare": "npm run build:lib"
   },
   "keywords": [
     "bulma",
@@ -84,7 +85,7 @@
     "babel-preset-env": "1.3.2",
     "babel-preset-stage-2": "6.22.0",
     "babel-register": "6.22.0",
-    "bulma-css-vars": "0.4.3",
+    "bulma-css-vars": "^0.8.0",
     "chalk": "4.1.0",
     "clean-css-cli": "4.3.0",
     "cleave.js": "1.0.1",
