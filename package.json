@@ -97,7 +97,7 @@
     "cross-env": "4.0.0",
     "cross-spawn": "5.0.1",
     "css-loader": "0.28.0",
-    "cypress": "12.8.1",
+    "cypress": "13.6.1",
     "eslint": "4.18.2",
     "eslint-config-buefy": "0.0.3",
     "esm": "3.2.25",
