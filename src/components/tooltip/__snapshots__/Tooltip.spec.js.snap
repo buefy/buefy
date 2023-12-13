@@ -2,9 +2,7 @@
 
 exports[`BTooltip render correctly 1`] = `
 <div class="b-tooltip is-primary is-top is-medium">
-    <div class="tooltip-content" style="display: none;" name="fade">
-        <!---->
-    </div>
-    <div class="tooltip-trigger"></div>
+  <div class="tooltip-content" style="display: none;" name="fade"><!----></div>
+  <div class="tooltip-trigger"></div>
 </div>
 `;

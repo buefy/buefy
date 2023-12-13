@@ -2,6 +2,6 @@
 
 exports[`BSkeleton render correctly 1`] = `
 <div class="b-skeleton is-animated">
-    <div class="b-skeleton-item is-rounded"></div>
+  <div class="b-skeleton-item is-rounded"></div>
 </div>
 `;
