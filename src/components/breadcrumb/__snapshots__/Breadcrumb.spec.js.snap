@@ -2,6 +2,6 @@
 
 exports[`BBreadcrumb render correctly 1`] = `
 <nav class="breadcrumb is-left is-medium">
-    <ul></ul>
+  <ul></ul>
 </nav>
 `;

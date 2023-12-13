@@ -2,9 +2,9 @@
 
 exports[`BLoading active render correctly 1`] = `
 <transition-stub name="fade">
-    <div class="loading-overlay is-active is-full-page" style="">
-        <div class="loading-background"></div>
-        <div class="loading-icon"></div>
-    </div>
+  <div class="loading-overlay is-active is-full-page" style="">
+    <div class="loading-background"></div>
+    <div class="loading-icon"></div>
+  </div>
 </transition-stub>
 `;

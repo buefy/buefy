@@ -2,9 +2,6 @@
 
 exports[`BTaginput render correctly 1`] = `
 <div class="taginput control">
-    <div class="taginput-container is-focusable">
-        <b-autocomplete-stub usehtml5validation="true" statusicon="true" value="" data="" field="value" keepopen="true" dropdownposition="auto" type="text" confirmkeys=",,Tab,Enter"></b-autocomplete-stub>
-    </div>
-    <!---->
+  <div class="taginput-container is-focusable"> <b-autocomplete-stub usehtml5validation="true" statusicon="true" value="" data="" field="value" keepopen="true" dropdownposition="auto" type="text" confirmkeys=",,Tab,Enter"></b-autocomplete-stub></div> <!---->
 </div>
 `;
