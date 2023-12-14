@@ -9,7 +9,7 @@
                 <b-pagination-button
                     :page="props.page"
                     :id="`page${props.page.number}`"
-                    tag="router-link"
+                    :tag="props.page.disabled ? 'a' : 'router-link'"
                     :to="`/documentation/pagination#page${props.page.number}`">
                     {{ convertToRoman(props.page.number) }}
                 </b-pagination-button>
@@ -18,7 +18,7 @@
             <template #previous="props">
                 <b-pagination-button
                     :page="props.page"
-                    tag="router-link"
+                    :tag="props.page.disabled ? 'a' : 'router-link'"
                     :to="`/documentation/pagination#page${props.page.number}`">
                     Previous
                 </b-pagination-button>
@@ -27,7 +27,7 @@
             <template #next="props">
                 <b-pagination-button
                     :page="props.page"
-                    tag="router-link"
+                    :tag="props.page.disabled ? 'a' : 'router-link'"
                     :to="`/documentation/pagination#page${props.page.number}`">
                     Next
                 </b-pagination-button>
