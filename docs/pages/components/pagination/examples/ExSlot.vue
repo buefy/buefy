@@ -55,7 +55,10 @@ export default {
             immediate: true,
             handler(newVal, oldVal) {
                 if (newVal.hash) {
-                    this.current = parseInt(newVal.hash.replace(/page/g, ''))
+                    this.current = parseInt(newVal.hash.replace(/#page/g, ''))
+                    if (Number.isNaN(this.current)) {
+                        this.current = 10
+                    }
                 }
             }
         }
