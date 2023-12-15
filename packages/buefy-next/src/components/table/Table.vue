@@ -105,6 +105,7 @@
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
                                 }"
+                                :style="column.thWrapStyle"
                             >
                                 <template v-if="column.$slots.header">
                                     <b-slot-component
@@ -195,6 +196,7 @@
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
                                 }"
+                                :style="column.thWrapStyle"
                             >
                                 <template
                                     v-if="column.$slots.subheading"
@@ -224,7 +226,7 @@
                             :style="column.thStyle"
                             :class="{'is-sticky': column.sticky}"
                         >
-                            <div class="th-wrap">
+                            <div class="th-wrap" :style="column.thWrapStyle">
                                 <template v-if="column.searchable">
                                     <template
                                         v-if="column.$slots.searchable"

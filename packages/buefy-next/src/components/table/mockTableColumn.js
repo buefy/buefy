@@ -56,6 +56,9 @@ export default function mockTableColumn(table, column) {
             }
             return style
         },
+        get thWrapStyle() {
+            return this.style
+        },
         get rootClasses() {
             return [this.cellClass, {
                 'has-text-right': this.numeric && !this.centered,
