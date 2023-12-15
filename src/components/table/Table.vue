@@ -97,7 +97,9 @@
                                 :class="{
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
-                            }">
+                                }"
+                                :style="column.thWrapStyle"
+                            >
                                 <template v-if="column.$scopedSlots && column.$scopedSlots.header">
                                     <b-slot-component
                                         :component="column"
@@ -179,7 +181,9 @@
                                 :class="{
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
-                            }">
+                                }"
+                                :style="column.thWrapStyle"
+                            >
                                 <template
                                     v-if="column.$scopedSlots && column.$scopedSlots.subheading"
                                 >
@@ -205,7 +209,7 @@
                             v-bind="column.thAttrs(column)"
                             :style="column.thStyle"
                             :class="{'is-sticky': column.sticky}">
-                            <div class="th-wrap">
+                            <div class="th-wrap" :style="column.thWrapStyle">
                                 <template v-if="column.searchable">
                                     <template
                                         v-if="column.$scopedSlots

@@ -63,6 +63,9 @@ export default {
             }
             return style
         },
+        thWrapStyle() {
+            return this.style
+        },
         rootClasses() {
             return [this.cellClass, {
                 'has-text-right': this.numeric && !this.centered,
