@@ -40,7 +40,7 @@ The biggest breaking change is obviously, **this does not work with Vue 2**.
 To install this fork, please run the following command,
 
 ```sh
-npm install https://github.com/buefy/buefy#buefy-next
+npm install @ntohq/buefy-next
 ```
 
 ## Features
