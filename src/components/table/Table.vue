@@ -251,7 +251,11 @@
                             @dragend="handleDragEnd($event, row, index)"
                             @drop="handleDrop($event, row, index)"
                             @dragover="handleDragOver($event, row, index)"
-                            @dragleave="handleDragLeave($event, row, index)">
+                            @dragleave="handleDragLeave($event, row, index)"
+                            @touchstart="handleTouchStart($event, row, index)"
+                            @touchmove="handleTouchMove($event, row, index)"
+                            @touchend="handleTouchEnd($event, row, index)"
+                        >
 
                             <td
                                 v-if="showDetailRowIcon"
@@ -630,7 +634,10 @@ export default {
             firstTimeSort: true, // Used by first time initSort
             _isTable: true, // Used by TableColumn
             isDraggingRow: false,
-            isDraggingColumn: false
+            isDraggingColumn: false,
+            // for touch-enabled devices
+            _selectedRow: null,
+            touchDragoverTarget: null
         }
     },
     computed: {
@@ -1147,6 +1154,7 @@ export default {
         selectRow(row, index) {
             this.$emit('click', row)
 
+            this._selectedRow = row // row must be clicked before dragging by touch
             if (this.selected === row) return
             if (!this.isRowSelectable(row)) return
 
@@ -1445,6 +1453,136 @@ export default {
         handleColumnDragLeave(event, column, index) {
             if (!this.canDragColumn) return
             this.$emit('columndragleave', {event, column, index})
+        },
+
+        /**
+        * Emits drag start event (row on touch-enabled devices)
+        */
+        handleTouchStart(event, row, index) {
+            if (!this.canDragRow) return
+            // drag won't start unless the row has been clicked (tapped)
+            // I think trapping touch-scrolling is annoying
+            if (this._selectedRow !== row) return
+            this.isDraggingRow = true
+            const touch = event.touches[0]
+            event.preventDefault()
+            event.target.dispatchEvent(new DragEvent('dragstart', {
+                dataTransfer: new DataTransfer(),
+                bubbles: true,
+                screenX: touch.screenX,
+                screenY: touch.screenY,
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                ctrlKey: event.ctrlKey,
+                shiftKey: event.shiftKey,
+                altKey: event.altKey,
+                metaKey: event.metaKey
+            }))
+        },
+        /**
+        * Emits dragover and dragleave events (row on touch-enabled devices)
+        */
+        handleTouchMove(event, row, index) {
+            if (!this.canDragRow) return
+            if (!this.isDraggingRow) return
+            const touch = event.touches[0]
+            const target = document.elementFromPoint(touch.clientX, touch.clientY)
+            const draggedRect = event.target.getBoundingClientRect()
+            if (target != null) {
+                if (target !== this.touchDragoverTarget) {
+                    if (this.touchDragoverTarget != null) {
+                        const targetRect = this.touchDragoverTarget.getBoundingClientRect()
+                        const offsetX = targetRect.left - draggedRect.left
+                        const offsetY = targetRect.top - draggedRect.top
+                        this.touchDragoverTarget.dispatchEvent(new DragEvent('dragleave', {
+                            dataTransfer: new DataTransfer(),
+                            bubbles: true,
+                            screenX: touch.screenX,
+                            screenY: touch.screenY,
+                            clientX: touch.clientX + offsetX,
+                            clientY: touch.clientY + offsetY,
+                            ctrlKey: event.ctrlKey,
+                            shiftKey: event.shiftKey,
+                            altKey: event.altKey,
+                            metaKey: event.metaKey
+                        }))
+                    }
+                    this.touchDragoverTarget = target
+                    const targetRect = target.getBoundingClientRect()
+                    const offsetX = targetRect.left - draggedRect.left
+                    const offsetY = targetRect.top - draggedRect.top
+                    target.dispatchEvent(new DragEvent('dragover', {
+                        dataTransfer: new DataTransfer(),
+                        bubbles: true,
+                        screenX: touch.screenX,
+                        screenY: touch.screenY,
+                        clientX: touch.clientX + offsetX,
+                        clientY: touch.clientY + offsetY,
+                        ctrlKey: event.ctrlKey,
+                        shiftKey: event.shiftKey,
+                        altKey: event.altKey,
+                        metaKey: event.metaKey
+                    }))
+                }
+            } else if (this.touchDragoverTarget != null) {
+                const targetRect = this.touchDragoverTarget.getBoundingClientRect()
+                const offsetX = targetRect.left - draggedRect.left
+                const offsetY = targetRect.top - draggedRect.top
+                this.touchDragoverTarget.dispatchEvent(new DragEvent('dragleave', {
+                    dataTransfer: new DataTransfer(),
+                    bubbles: true,
+                    screenX: touch.screenX,
+                    screenY: touch.screenY,
+                    clientX: touch.clientX + offsetX,
+                    clientY: touch.clientY + offsetY,
+                    ctrlKey: event.ctrlKey,
+                    shiftKey: event.shiftKey,
+                    altKey: event.altKey,
+                    metaKey: event.metaKey
+                }))
+                this.touchDragoverTarget = null
+            }
+        },
+        /**
+        * Emits drop and dragend events (row on touch-enabled devices)
+        */
+        handleTouchEnd(event, row, index) {
+            if (!this.canDragRow) return
+            if (!this.isDraggingRow) return
+            const touch = event.changedTouches[0]
+            const target = document.elementFromPoint(touch.clientX, touch.clientY)
+            if (target != null) {
+                const draggedRect = event.target.getBoundingClientRect()
+                const targetRect = target.getBoundingClientRect()
+                const offsetX = targetRect.left - draggedRect.left
+                const offsetY = targetRect.top - draggedRect.top
+                target.dispatchEvent(new DragEvent('drop', {
+                    dataTransfer: new DataTransfer(),
+                    bubbles: true,
+                    screenX: touch.screenX,
+                    screenY: touch.screenY,
+                    clientX: touch.clientX + offsetX,
+                    clientY: touch.clientY + offsetY,
+                    ctrlKey: event.ctrlKey,
+                    shiftKey: event.shiftKey,
+                    altKey: event.altKey,
+                    metaKey: event.metaKey
+                }))
+            }
+            event.target.dispatchEvent(new DragEvent('dragend', {
+                dataTransfer: new DataTransfer(),
+                bubbles: true,
+                screenX: touch.screenX,
+                screenY: touch.screenY,
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                ctrlKey: event.ctrlKey,
+                shiftKey: event.shiftKey,
+                altKey: event.altKey,
+                metaKey: event.metaKey
+            }))
+            this.isDraggingRow = false
+            this._selectedRow = null
         },
 
         refreshSlots() {
