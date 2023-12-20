@@ -404,7 +404,7 @@
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil, translateTouchAsDragEvent } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox.vue'
@@ -1464,19 +1464,9 @@ export default {
             // I think trapping touch-scrolling is annoying
             if (this._selectedRow !== row) return
             this.isDraggingRow = true
-            const touch = event.touches[0]
             event.preventDefault()
-            event.target.dispatchEvent(new DragEvent('dragstart', {
-                dataTransfer: new DataTransfer(),
-                bubbles: true,
-                screenX: touch.screenX,
-                screenY: touch.screenY,
-                clientX: touch.clientX,
-                clientY: touch.clientY,
-                ctrlKey: event.ctrlKey,
-                shiftKey: event.shiftKey,
-                altKey: event.altKey,
-                metaKey: event.metaKey
+            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                type: 'dragstart'
             }))
         },
         /**
@@ -1487,59 +1477,31 @@ export default {
             if (!this.isDraggingRow) return
             const touch = event.touches[0]
             const target = document.elementFromPoint(touch.clientX, touch.clientY)
-            const draggedRect = event.target.getBoundingClientRect()
             if (target != null) {
                 if (target !== this.touchDragoverTarget) {
                     if (this.touchDragoverTarget != null) {
-                        const targetRect = this.touchDragoverTarget.getBoundingClientRect()
-                        const offsetX = targetRect.left - draggedRect.left
-                        const offsetY = targetRect.top - draggedRect.top
-                        this.touchDragoverTarget.dispatchEvent(new DragEvent('dragleave', {
-                            dataTransfer: new DataTransfer(),
-                            bubbles: true,
-                            screenX: touch.screenX,
-                            screenY: touch.screenY,
-                            clientX: touch.clientX + offsetX,
-                            clientY: touch.clientY + offsetY,
-                            ctrlKey: event.ctrlKey,
-                            shiftKey: event.shiftKey,
-                            altKey: event.altKey,
-                            metaKey: event.metaKey
-                        }))
+                        this.touchDragoverTarget.dispatchEvent(
+                            translateTouchAsDragEvent(event, {
+                                type: 'dragleave',
+                                target: this.touchDragoverTarget
+                            })
+                        )
                     }
                     this.touchDragoverTarget = target
-                    const targetRect = target.getBoundingClientRect()
-                    const offsetX = targetRect.left - draggedRect.left
-                    const offsetY = targetRect.top - draggedRect.top
-                    target.dispatchEvent(new DragEvent('dragover', {
-                        dataTransfer: new DataTransfer(),
-                        bubbles: true,
-                        screenX: touch.screenX,
-                        screenY: touch.screenY,
-                        clientX: touch.clientX + offsetX,
-                        clientY: touch.clientY + offsetY,
-                        ctrlKey: event.ctrlKey,
-                        shiftKey: event.shiftKey,
-                        altKey: event.altKey,
-                        metaKey: event.metaKey
-                    }))
+                    target.dispatchEvent(
+                        translateTouchAsDragEvent(event, {
+                            type: 'dragover',
+                            target
+                        })
+                    )
                 }
             } else if (this.touchDragoverTarget != null) {
-                const targetRect = this.touchDragoverTarget.getBoundingClientRect()
-                const offsetX = targetRect.left - draggedRect.left
-                const offsetY = targetRect.top - draggedRect.top
-                this.touchDragoverTarget.dispatchEvent(new DragEvent('dragleave', {
-                    dataTransfer: new DataTransfer(),
-                    bubbles: true,
-                    screenX: touch.screenX,
-                    screenY: touch.screenY,
-                    clientX: touch.clientX + offsetX,
-                    clientY: touch.clientY + offsetY,
-                    ctrlKey: event.ctrlKey,
-                    shiftKey: event.shiftKey,
-                    altKey: event.altKey,
-                    metaKey: event.metaKey
-                }))
+                this.touchDragoverTarget.dispatchEvent(
+                    translateTouchAsDragEvent(event, {
+                        type: 'dragleave',
+                        target: this.touchDragoverTarget
+                    })
+                )
                 this.touchDragoverTarget = null
             }
         },
@@ -1552,34 +1514,13 @@ export default {
             const touch = event.changedTouches[0]
             const target = document.elementFromPoint(touch.clientX, touch.clientY)
             if (target != null) {
-                const draggedRect = event.target.getBoundingClientRect()
-                const targetRect = target.getBoundingClientRect()
-                const offsetX = targetRect.left - draggedRect.left
-                const offsetY = targetRect.top - draggedRect.top
-                target.dispatchEvent(new DragEvent('drop', {
-                    dataTransfer: new DataTransfer(),
-                    bubbles: true,
-                    screenX: touch.screenX,
-                    screenY: touch.screenY,
-                    clientX: touch.clientX + offsetX,
-                    clientY: touch.clientY + offsetY,
-                    ctrlKey: event.ctrlKey,
-                    shiftKey: event.shiftKey,
-                    altKey: event.altKey,
-                    metaKey: event.metaKey
+                target.dispatchEvent(translateTouchAsDragEvent(event, {
+                    type: 'drop',
+                    target
                 }))
             }
-            event.target.dispatchEvent(new DragEvent('dragend', {
-                dataTransfer: new DataTransfer(),
-                bubbles: true,
-                screenX: touch.screenX,
-                screenY: touch.screenY,
-                clientX: touch.clientX,
-                clientY: touch.clientY,
-                ctrlKey: event.ctrlKey,
-                shiftKey: event.shiftKey,
-                altKey: event.altKey,
-                metaKey: event.metaKey
+            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                type: 'dragend'
             }))
             this.isDraggingRow = false
             this._selectedRow = null
