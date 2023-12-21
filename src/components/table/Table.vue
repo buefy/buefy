@@ -1468,7 +1468,6 @@ export default {
             // drag won't start unless the row has been clicked (tapped)
             // I think trapping touch-scrolling is annoying
             if (this._selectedRow !== row) return
-            this.isDraggingRow = true
             event.preventDefault()
             event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                 type: 'dragstart'
@@ -1527,7 +1526,6 @@ export default {
             event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                 type: 'dragend'
             }))
-            this.isDraggingRow = false
             this._selectedRow = null
         },
 
@@ -1537,8 +1535,7 @@ export default {
         handleColumnTouchStart(event, column, index) {
             if (!this.canDragColumn) return
             if (this.isDraggingRow) return
-            this.isDraggingColumn = true
-            event.preventDefault()
+            event.preventDefault() // otherwise triggers touch-scrolling
             event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                 type: 'dragstart'
             }))
@@ -1596,7 +1593,6 @@ export default {
             event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                 type: 'dragend'
             }))
-            this.isDraggingColumn = false
         },
 
         refreshSlots() {
