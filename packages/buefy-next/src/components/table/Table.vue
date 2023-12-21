@@ -100,7 +100,7 @@
                             @dragleave="handleColumnDragLeave($event, column, index)"
                         >
                             <div
-                                class="th-wrap"
+                                class="th-wrap is-relative"
                                 :class="{
                                     'is-numeric': column.numeric,
                                     'is-centered': column.centered
@@ -117,15 +117,15 @@
                                     />
                                 </template>
                                 <template v-else>
-                                    <span class="is-relative">
-                                        {{ column.label }}
-                                        <template
-                                            v-if="sortMultiple &&
-                                                sortMultipleDataComputed &&
-                                                sortMultipleDataComputed.length > 0 &&
-                                                sortMultipleDataComputed.filter(i =>
-                                                    i.field === column.field).length > 0"
-                                        >
+                                    {{ column.label }}
+                                    <template
+                                        v-if="sortMultiple &&
+                                            sortMultipleDataComputed &&
+                                            sortMultipleDataComputed.length > 0 &&
+                                            sortMultipleDataComputed.filter(i =>
+                                                i.field === column.field).length > 0"
+                                    >
+                                        <span class="multi-sort-icons">
                                             <b-icon
                                                 :icon="sortIcon"
                                                 :pack="iconPack"
@@ -142,21 +142,21 @@
                                                 type="button"
                                                 @click.stop="removeSortingPriority(column)"
                                             />
-                                        </template>
+                                        </span>
+                                    </template>
 
-                                        <b-icon
-                                            v-else
-                                            :icon="sortIcon"
-                                            :pack="iconPack"
-                                            both
-                                            :size="sortIconSize"
-                                            class="sort-icon"
-                                            :class="{
-                                                'is-desc': !isAsc,
-                                                'is-invisible': currentSortColumn !== column
-                                            }"
-                                        />
-                                    </span>
+                                    <b-icon
+                                        v-else
+                                        :icon="sortIcon"
+                                        :pack="iconPack"
+                                        both
+                                        :size="sortIconSize"
+                                        class="sort-icon"
+                                        :class="{
+                                            'is-desc': !isAsc,
+                                            'is-invisible': currentSortColumn !== column
+                                        }"
+                                    />
                                 </template>
                             </div>
                         </th>
