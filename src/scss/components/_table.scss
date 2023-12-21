@@ -277,3 +277,17 @@ $table-sticky-header-height: 300px !default;
         }
     }
 }
+
+.touch-dragged-cell {
+  position: absolute;
+}
+.touch-dragged-cell,
+.touch-dragged-cell .table {
+  pointer-events: none;
+  background-color: color-mix(in srgb, $table-background-color 10%, transparent);
+}
+.touch-dragged-cell .table {
+  tr, td {
+    background-color: transparent;
+  }
+}

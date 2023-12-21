@@ -404,11 +404,18 @@
             </slot>
         </template>
 
+        <div
+            v-show="mayBeTouchDragging && (isDraggingRow || isDraggingColumn)"
+            ref="draggedCell"
+            class="touch-dragged-cell"
+            v-html="draggedCellContent"
+        />
+
     </div>
 </template>
 
 <script>
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil, translateTouchAsDragEvent } from '../../utils/helpers'
+import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isNil, translateTouchAsDragEvent, createAbsoluteElement, removeElement } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
 import { VueInstance } from '../../utils/config'
 import Checkbox from '../checkbox/Checkbox.vue'
@@ -642,7 +649,9 @@ export default {
             // for touch-enabled devices
             _selectedRow: null,
             mayBeTouchDragging: false,
-            touchDragoverTarget: null
+            touchDragoverTarget: null,
+            _draggedCellEl: undefined,
+            draggedCellContent: ''
         }
     },
     computed: {
@@ -1481,6 +1490,10 @@ export default {
             if (!this.canDragRow) return
             if (!this.mayBeTouchDragging) return
             if (!this.isDraggingRow) {
+                const tr = event.target.closest('tr')
+                this.draggedCellContent = tr
+                    ? `<table class="table"><tr>${tr.innerHTML}</tr></table>`
+                    : event.target.innerHTML
                 event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                     type: 'dragstart'
                 }))
@@ -1514,6 +1527,7 @@ export default {
                 )
                 this.touchDragoverTarget = null
             }
+            this.updateDraggedCell(touch)
         },
         /**
         * Emits drop and dragend events (row on touch-enabled devices)
@@ -1544,6 +1558,7 @@ export default {
             if (!this.canDragColumn) return
             if (this.isDraggingRow) return
             event.preventDefault() // otherwise triggers touch-scrolling
+            this.mayBeTouchDragging = true
         },
         /**
         * Emits dragover and dragleave events (column on touch-enabled devices)
@@ -1552,7 +1567,9 @@ export default {
         */
         handleColumnTouchMove(event, column, index) {
             if (!this.canDragColumn) return
+            if (!this.mayBeTouchDragging) return
             if (!this.isDraggingColumn) {
+                this.draggedCellContent = event.target.innerHTML
                 event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                     type: 'dragstart'
                 }))
@@ -1586,24 +1603,35 @@ export default {
                 )
                 this.touchDragoverTarget = null
             }
+            this.updateDraggedCell(touch)
         },
         /**
         * Emits drop and dragend events (column on touch-enabled devices)
         */
         handleColumnTouchEnd(event, column, index) {
             if (!this.canDragColumn) return
-            if (!this.isDraggingColumn) return
-            const touch = event.changedTouches[0]
-            const target = document.elementFromPoint(touch.clientX, touch.clientY)
-            if (target != null) {
-                target.dispatchEvent(translateTouchAsDragEvent(event, {
-                    type: 'drop',
-                    target
+            if (this.isDraggingColumn) {
+                const touch = event.changedTouches[0]
+                const target = document.elementFromPoint(touch.clientX, touch.clientY)
+                if (target != null) {
+                    target.dispatchEvent(translateTouchAsDragEvent(event, {
+                        type: 'drop',
+                        target
+                    }))
+                }
+                event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                    type: 'dragend'
                 }))
             }
-            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
-                type: 'dragend'
-            }))
+            this.mayBeTouchDragging = false
+        },
+
+        updateDraggedCell({ clientX, clientY }) {
+            const cellRect = this.$refs.draggedCell.getBoundingClientRect()
+            const top = clientY + window.scrollY - cellRect.height / 2
+            const left = clientX + window.scrollX - cellRect.width / 2
+            this.$refs.draggedCell.style.top = `calc(${top}px)`
+            this.$refs.draggedCell.style.left = `calc(${left}px)`
         },
 
         refreshSlots() {
@@ -1614,6 +1642,21 @@ export default {
         this.refreshSlots()
         this.checkPredefinedDetailedRows()
         this.checkSort()
+        // appends `draggedCell` to the body whenever `draggable` or
+        // `draggableColumn` becomes true
+        // starts watching here to make sure the DOM is ready
+        function prepareDraggedCell(isDraggable) {
+            if (isDraggable && this.$data._draggedCellEl == null) {
+                this.$data._draggedCellEl = createAbsoluteElement(this.$refs.draggedCell)
+            }
+        }
+        this.$watch('draggable', prepareDraggedCell, { immediate: true })
+        this.$watch('draggableColumn', prepareDraggedCell, { immediate: true })
+    },
+    beforeDestroy() {
+        if (this.$data._draggedCellEl) {
+            removeElement(this.$data._draggedCellEl)
+        }
     }
 }
 </script>
