@@ -641,6 +641,7 @@ export default {
             isDraggingColumn: false,
             // for touch-enabled devices
             _selectedRow: null,
+            mayBeTouchDragging: false,
             touchDragoverTarget: null
         }
     },
@@ -1460,7 +1461,7 @@ export default {
         },
 
         /**
-        * Emits dragstart event (row on touch-enabled devices)
+        * Starts monitoring drag-by-touch events (row on touch-enabled devices)
         */
         handleTouchStart(event, row, index) {
             if (!this.canDragRow) return
@@ -1469,16 +1470,21 @@ export default {
             // I think trapping touch-scrolling is annoying
             if (this._selectedRow !== row) return
             event.preventDefault()
-            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
-                type: 'dragstart'
-            }))
+            this.mayBeTouchDragging = true
         },
         /**
         * Emits dragover and dragleave events (row on touch-enabled devices)
+        *
+        * Emits also dragstart if this is the first touchmove after touchstart.
         */
         handleTouchMove(event, row, index) {
             if (!this.canDragRow) return
-            if (!this.isDraggingRow) return
+            if (!this.mayBeTouchDragging) return
+            if (!this.isDraggingRow) {
+                event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                    type: 'dragstart'
+                }))
+            }
             const touch = event.touches[0]
             const target = document.elementFromPoint(touch.clientX, touch.clientY)
             if (target != null) {
@@ -1514,38 +1520,43 @@ export default {
         */
         handleTouchEnd(event, row, index) {
             if (!this.canDragRow) return
-            if (!this.isDraggingRow) return
-            const touch = event.changedTouches[0]
-            const target = document.elementFromPoint(touch.clientX, touch.clientY)
-            if (target != null) {
-                target.dispatchEvent(translateTouchAsDragEvent(event, {
-                    type: 'drop',
-                    target
+            if (this.isDraggingRow) {
+                const touch = event.changedTouches[0]
+                const target = document.elementFromPoint(touch.clientX, touch.clientY)
+                if (target != null) {
+                    target.dispatchEvent(translateTouchAsDragEvent(event, {
+                        type: 'drop',
+                        target
+                    }))
+                }
+                event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                    type: 'dragend'
                 }))
+                this._selectedRow = null
             }
-            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
-                type: 'dragend'
-            }))
-            this._selectedRow = null
+            this.mayBeTouchDragging = false
         },
 
         /**
-        * Emits dragstart event (column on touch-enabled devices)
+        * Starts monitoring drag-by-touch events (column on touch-enabled devices)
         */
         handleColumnTouchStart(event, column, index) {
             if (!this.canDragColumn) return
             if (this.isDraggingRow) return
             event.preventDefault() // otherwise triggers touch-scrolling
-            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
-                type: 'dragstart'
-            }))
         },
         /**
         * Emits dragover and dragleave events (column on touch-enabled devices)
+        *
+        * Also emits dragstart if this is the first touchmove after touchstart.
         */
         handleColumnTouchMove(event, column, index) {
             if (!this.canDragColumn) return
-            if (!this.isDraggingColumn) return
+            if (!this.isDraggingColumn) {
+                event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                    type: 'dragstart'
+                }))
+            }
             const touch = event.touches[0]
             const target = document.elementFromPoint(touch.clientX, touch.clientY)
             if (target != null) {
