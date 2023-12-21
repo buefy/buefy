@@ -91,7 +91,11 @@
                             @dragend="handleColumnDragEnd($event, column, index)"
                             @drop="handleColumnDrop($event, column, index)"
                             @dragover="handleColumnDragOver($event, column, index)"
-                            @dragleave="handleColumnDragLeave($event, column, index)">
+                            @dragleave="handleColumnDragLeave($event, column, index)"
+                            @touchstart="handleColumnTouchStart($event, column, index)"
+                            @touchmove="handleColumnTouchMove($event, column, index)"
+                            @touchend="handleColumnTouchEnd($event, column, index)"
+                        >
                             <div
                                 class="th-wrap"
                                 :class="{
@@ -1456,10 +1460,11 @@ export default {
         },
 
         /**
-        * Emits drag start event (row on touch-enabled devices)
+        * Emits dragstart event (row on touch-enabled devices)
         */
         handleTouchStart(event, row, index) {
             if (!this.canDragRow) return
+            if (this.isDraggingColumn) return
             // drag won't start unless the row has been clicked (tapped)
             // I think trapping touch-scrolling is annoying
             if (this._selectedRow !== row) return
@@ -1524,6 +1529,74 @@ export default {
             }))
             this.isDraggingRow = false
             this._selectedRow = null
+        },
+
+        /**
+        * Emits dragstart event (column on touch-enabled devices)
+        */
+        handleColumnTouchStart(event, column, index) {
+            if (!this.canDragColumn) return
+            if (this.isDraggingRow) return
+            this.isDraggingColumn = true
+            event.preventDefault()
+            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                type: 'dragstart'
+            }))
+        },
+        /**
+        * Emits dragover and dragleave events (column on touch-enabled devices)
+        */
+        handleColumnTouchMove(event, column, index) {
+            if (!this.canDragColumn) return
+            if (!this.isDraggingColumn) return
+            const touch = event.touches[0]
+            const target = document.elementFromPoint(touch.clientX, touch.clientY)
+            if (target != null) {
+                if (target !== this.touchDragoverTarget) {
+                    if (this.touchDragoverTarget != null) {
+                        this.touchDragoverTarget.dispatchEvent(
+                            translateTouchAsDragEvent(event, {
+                                type: 'dragleave',
+                                target: this.touchDragoverTarget
+                            })
+                        )
+                    }
+                    this.touchDragoverTarget = target
+                    target.dispatchEvent(
+                        translateTouchAsDragEvent(event, {
+                            type: 'dragover',
+                            target
+                        })
+                    )
+                }
+            } else if (this.touchDragoverTarget != null) {
+                this.touchDragoverTarget.dispatchEvent(
+                    translateTouchAsDragEvent(event, {
+                        type: 'dragleave',
+                        target: this.touchDragoverTarget
+                    })
+                )
+                this.touchDragoverTarget = null
+            }
+        },
+        /**
+        * Emits drop and dragend events (column on touch-enabled devices)
+        */
+        handleColumnTouchEnd(event, column, index) {
+            if (!this.canDragColumn) return
+            if (!this.isDraggingColumn) return
+            const touch = event.changedTouches[0]
+            const target = document.elementFromPoint(touch.clientX, touch.clientY)
+            if (target != null) {
+                target.dispatchEvent(translateTouchAsDragEvent(event, {
+                    type: 'drop',
+                    target
+                }))
+            }
+            event.target.dispatchEvent(translateTouchAsDragEvent(event, {
+                type: 'dragend'
+            }))
+            this.isDraggingColumn = false
         },
 
         refreshSlots() {
