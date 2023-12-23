@@ -408,6 +408,7 @@
             v-show="mayBeTouchDragging && (isDraggingRow || isDraggingColumn)"
             ref="draggedCell"
             class="touch-dragged-cell"
+            :class="touchDraggedCellClasses"
             v-html="draggedCellContent"
         />
 
@@ -680,6 +681,11 @@ export default {
         tableStyle() {
             return {
                 height: toCssWidth(this.height)
+            }
+        },
+        touchDraggedCellClasses() {
+            return {
+                'has-mobile-cards': this.mobileCards
             }
         },
 
@@ -1494,6 +1500,9 @@ export default {
                 this.draggedCellContent = tr
                     ? `<table class="table"><tr>${tr.innerHTML}</tr></table>`
                     : event.target.innerHTML
+                this.$refs.draggedCell.style.width = tr
+                    ? `${tr.offsetWidth}px`
+                    : `${event.target.offsetWidth}px`
                 event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                     type: 'dragstart'
                 }))
@@ -1570,6 +1579,7 @@ export default {
             if (!this.mayBeTouchDragging) return
             if (!this.isDraggingColumn) {
                 this.draggedCellContent = event.target.innerHTML
+                this.$refs.draggedCell.style.width = `${event.target.offsetWidth}px`
                 event.target.dispatchEvent(translateTouchAsDragEvent(event, {
                     type: 'dragstart'
                 }))
