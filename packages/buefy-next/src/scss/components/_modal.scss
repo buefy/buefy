@@ -21,4 +21,17 @@
     .modal-content {
         width: 100%;
     }
+    .modal-close {
+        @include until($modal-breakpoint) {
+            /* keep modal-close visible when the contents fill the screen */
+            background-color: color-mix(in hsl, $modal-background-background-color 10%, transparent);
+            &:hover,
+            :focus {
+                background-color: color-mix(in hsl, $modal-background-background-color 20%, transparent);
+            }
+            &:active {
+                background-color: color-mix(in hsl, $modal-background-background-color 30%, transparent);
+            }
+        }
+    }
 }
