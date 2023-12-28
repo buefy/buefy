@@ -285,3 +285,38 @@ $table-sticky-header-height: 300px !default;
         }
     }
 }
+
+.touch-dragged-cell {
+    position: absolute;
+}
+.touch-dragged-cell,
+.touch-dragged-cell .table {
+    pointer-events: none;
+    background-color: color-mix(in srgb, $table-background-color 10%, transparent);
+}
+.touch-dragged-cell {
+    .table {
+        width: 100%;
+        tr, td {
+            background-color: transparent;
+        }
+    }
+}
+.touch-dragged-cell.has-mobile-cards .table {
+    @include mobile {
+        tr {
+            display: block;
+            td {
+                display: flex;
+                justify-content: space-between;
+                text-align: right;
+                &:before {
+                    content: attr(data-label);
+                    font-weight: $weight-semibold;
+                    padding-right: 0.5em;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
