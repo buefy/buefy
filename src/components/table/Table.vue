@@ -943,14 +943,10 @@ export default {
                 this.sortMultipleDataLocal = this.sortMultipleDataLocal.filter(
                     (priority) => priority.field !== column.field)
 
-                let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
-                    return (i.order && i.order === 'desc' ? '-' : '') + i.field
-                })
-
-                if (formattedSortingPriority.length === 0) {
+                if (this.sortMultipleDataLocal.length === 0) {
                     this.resetMultiSorting()
                 } else {
-                    this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+                    this.newData = multiColumnSort(this.newData, this.sortMultipleDataLocal)
                 }
             }
         },
@@ -1009,19 +1005,18 @@ export default {
                 if (existingPriority) {
                     existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
                 } else {
-                    this.sortMultipleDataLocal.push(
-                        {field: column.field, order: column.isAsc}
-                    )
+                    this.sortMultipleDataLocal.push({
+                        field: column.field,
+                        order: column.isAsc,
+                        customSort: column.customSort
+                    })
                 }
                 this.doSortMultiColumn()
             }
         },
 
         doSortMultiColumn() {
-            let formattedSortingPriority = this.sortMultipleDataLocal.map((i) => {
-                return (i.order && i.order === 'desc' ? '-' : '') + i.field
-            })
-            this.newData = multiColumnSort(this.newData, formattedSortingPriority)
+            this.newData = multiColumnSort(this.newData, this.sortMultipleDataLocal)
         },
 
         /**

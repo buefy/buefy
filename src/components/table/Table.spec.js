@@ -416,4 +416,113 @@ describe('BTable', () => {
             expect(wrapper.vm.visibleData).toEqual(sorted.reverse())
         })
     })
+
+    describe('Multi-sortable with custom sort', () => {
+        let wrapper
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        const data = [
+            { id: 1, day: 'Sun', fee: 15 },
+            { id: 2, day: 'Mon', fee: 12 },
+            { id: 3, day: 'Tue', fee: 12 },
+            { id: 4, day: 'Wed', fee: 12 },
+            { id: 5, day: 'Thu', fee: 12 },
+            { id: 6, day: 'Fri', fee: 12 },
+            { id: 7, day: 'Sat', fee: 15 }
+        ]
+        const dayCustomSort = jest.fn((a, b, isAsc) => {
+            const ord = weekdays.indexOf(a.day) - weekdays.indexOf(b.day)
+            return isAsc ? ord : -ord
+        })
+        const feeCustomSort = jest.fn((a, b, isAsc) => {
+            const ord = a.fee - b.fee
+            return isAsc ? -ord : ord
+        })
+        const columns = [
+            {
+                field: 'id',
+                label: 'ID',
+                numeric: true
+            },
+            {
+                field: 'day',
+                label: 'Day',
+                sortable: true,
+                customSort: dayCustomSort
+            },
+            {
+                field: 'fee',
+                label: 'Fee',
+                sortable: true,
+                customSort: feeCustomSort
+            }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                propsData: {
+                    columns,
+                    data,
+                    sortMultiple: true
+                }
+            })
+        })
+
+        afterEach(() => {
+            dayCustomSort.mockClear()
+            feeCustomSort.mockClear()
+        })
+
+        it('should be able to sort by Fee then Day with custom sort', () => {
+            wrapper.vm.sort(columns[2])
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: undefined, customSort: feeCustomSort },
+                { field: 'day', order: undefined, customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[0], data[6], data[1], data[2], data[3], data[4], data[5]
+            ])
+            expect(feeCustomSort).toHaveBeenCalled()
+            expect(dayCustomSort).toHaveBeenCalled()
+            // toggles fee
+            wrapper.vm.sort(columns[2])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: 'desc', customSort: feeCustomSort },
+                { field: 'day', order: undefined, customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[1], data[2], data[3], data[4], data[5], data[0], data[6]
+            ])
+            // toggles day
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: 'desc', customSort: feeCustomSort },
+                { field: 'day', order: 'desc', customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[5], data[4], data[3], data[2], data[1], data[6], data[0]
+            ])
+        })
+
+        it('should be able to remove column from sort (Fee+Day → Day)', () => {
+            wrapper.vm.sort(columns[2])
+            wrapper.vm.sort(columns[1])
+            wrapper.vm.sort(columns[1]) // day → descending order
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: undefined, customSort: feeCustomSort },
+                { field: 'day', order: 'desc', customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[6], data[0], data[5], data[4], data[3], data[2], data[1]
+            ])
+            // removes fee
+            wrapper.vm.removeSortingPriority(columns[2])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'day', order: 'desc', customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[6], data[5], data[4], data[3], data[2], data[1], data[0]
+            ])
+        })
+    })
 })
