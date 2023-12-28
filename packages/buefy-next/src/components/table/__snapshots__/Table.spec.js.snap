@@ -18,5 +18,6 @@ exports[`BTable render correctly 1`] = `
     <!--v-if-->
   </div>
   <!--v-if-->
+  <div class="touch-dragged-cell has-mobile-cards" style="display: none;"></div>
 </div>
 `;

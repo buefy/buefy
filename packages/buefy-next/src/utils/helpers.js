@@ -371,3 +371,45 @@ export function copyAppContext(src, dest) {
         dest.__VUE_I18N_SYMBOL__ = src.__VUE_I18N_SYMBOL__
     }
 }
+
+/**
+ * Translates a touch event as a drag event.
+ *
+ * `event` must be a touch event.
+ *
+ * `options` must be an object with the following properties:
+ * - `type`: new event type (required). must be one of the following:
+ *     - `"dragstart"`
+ *     - `"dragend"`
+ *     - `"drop"`
+ *     - `"dragover"`
+ *     - `"dragleave"`
+ * - `target`: new target element (optional). `clientX` and `clientY` will be
+ *   translated if `target` is different from `event.target`.
+ *
+ * This function only works with single-touch events for now.
+ */
+export const translateTouchAsDragEvent = (event, options) => {
+    const { type, target } = options
+    let translateX = 0
+    let translateY = 0
+    if (target != null && target !== event.target) {
+        const baseRect = event.target.getBoundingClientRect()
+        const targetRect = target.getBoundingClientRect()
+        translateX = targetRect.left - baseRect.left
+        translateY = targetRect.top - baseRect.top
+    }
+    const touch = event.touches[0] || event.changedTouches[0]
+    return new DragEvent(type, {
+        dataTransfer: new DataTransfer(),
+        bubbles: true,
+        screenX: touch.screenX,
+        screenY: touch.screenY,
+        clientX: touch.clientX + translateX,
+        clientY: touch.clientY + translateY,
+        ctrlKey: event.ctrlKey,
+        shiftKey: event.shiftKey,
+        altKey: event.altKey,
+        metaKey: event.metaKey
+    })
+}

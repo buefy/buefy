@@ -129,6 +129,9 @@
                 Use <code>draggable</code>/<code>draggable-column</code> prop to allow rows and columns to be draggable. Manage dragging using <code>dragstart</code>/<code>columndragstart</code>,
                 <code>dragover</code>/<code>columndragover</code> and <code>drop</code>/<code>columndrop</code> events
             </p>
+            <b-message type="is-info">
+                You have to <strong>double-tap and hold</strong> a row to start dragging the row on touch devices.
+            </b-message>
         </Example>
 
         <ApiView :data="api"/>
