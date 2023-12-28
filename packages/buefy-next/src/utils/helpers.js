@@ -189,14 +189,19 @@ export function removeDiacriticsFromString(value) {
 }
 
 export function multiColumnSort(inputArray, sortingPriority) {
+    // NOTE: this function is intended to be used by BTable
     // clone it to prevent the any watchers from triggering every sorting iteration
     const array = JSON.parse(JSON.stringify(inputArray))
     const fieldSorter = (fields) => (a, b) => fields.map((o) => {
-        let dir = 1
-        if (o[0] === '-') { dir = -1; o = o.substring(1) }
-        const aValue = getValueByPath(a, o)
-        const bValue = getValueByPath(b, o)
-        return aValue > bValue ? dir : aValue < bValue ? -(dir) : 0
+        const { field, order, customSort } = o
+        if (typeof customSort === 'function') {
+            return customSort(a, b, order !== 'desc')
+        } else {
+            const aValue = getValueByPath(a, field)
+            const bValue = getValueByPath(b, field)
+            const ord = aValue > bValue ? 1 : aValue < bValue ? -1 : 0
+            return order === 'desc' ? -ord : ord
+        }
     }).reduce((p, n) => p || n, 0)
 
     return array.sort(fieldSorter(sortingPriority))
