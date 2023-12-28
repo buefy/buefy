@@ -237,4 +237,292 @@ describe('BTable', () => {
             expect(bodyRows).toHaveLength(2) // Filtering after debounce
         })
     })
+
+    describe('Sortable', () => {
+        let wrapper
+        const data = [
+            { id: 1, name: 'Jesse' },
+            { id: 2, name: 'João' },
+            { id: 3, name: 'Tina' },
+            { id: 4, name: 'Anne' },
+            { id: 5, name: 'Clarence' }
+        ]
+        const columns = [
+            {
+                field: 'id',
+                label: 'ID',
+                numeric: true,
+                sortable: true
+            },
+            {
+                field: 'name',
+                label: 'Name',
+                sortable: true
+            }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                propsData: {
+                    columns,
+                    data
+                }
+            })
+        })
+
+        it('should be able to sort by ID', () => {
+            const sorted = [...data]
+            wrapper.vm.sort(columns[0])
+            expect(wrapper.vm.currentSortColumn).toBe(columns[0])
+            expect(wrapper.vm.isAsc).toBe(true)
+            expect(wrapper.vm.visibleData).toEqual(sorted)
+            // toggles
+            wrapper.vm.sort(columns[0])
+            expect(wrapper.vm.isAsc).toBe(false)
+            expect(wrapper.vm.visibleData).toEqual(sorted.reverse())
+        })
+
+        it('should be able to sort by Name', () => {
+            const sorted = [
+                data[3], data[4], data[0], data[1], data[2]
+            ]
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.currentSortColumn).toBe(columns[1])
+            expect(wrapper.vm.isAsc).toBe(true)
+            expect(wrapper.vm.visibleData).toEqual(sorted)
+            // toggles
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.isAsc).toBe(false)
+            expect(wrapper.vm.visibleData).toEqual(sorted.reverse())
+        })
+    })
+
+    describe('Multi-sortable', () => {
+        let wrapper
+        const data = [
+            { id: 1, name: 'Jesse', age: 23 },
+            { id: 2, name: 'João', age: 22 },
+            { id: 3, name: 'Tina', age: 22 },
+            { id: 4, name: 'Anne', age: 23 },
+            { id: 5, name: 'Clarence', age: 22 }
+        ]
+        const columns = [
+            {
+                field: 'id',
+                label: 'ID'
+            },
+            {
+                field: 'name',
+                label: 'Name',
+                sortable: true
+            },
+            {
+                field: 'age',
+                label: 'Age',
+                numeric: true,
+                sortable: true
+            }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                propsData: {
+                    columns,
+                    data,
+                    sortMultiple: true
+                }
+            })
+        })
+
+        it('should be able to sort by Age then Name', () => {
+            wrapper.vm.sort(columns[2])
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'age', order: undefined },
+                { field: 'name', order: undefined }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[4], data[1], data[2], data[3], data[0]
+            ])
+            // toggles age
+            wrapper.vm.sort(columns[2])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'age', order: 'desc' },
+                { field: 'name', order: undefined }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[3], data[0], data[4], data[1], data[2]
+            ])
+            // toggles name
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'age', order: 'desc' },
+                { field: 'name', order: 'desc' }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[0], data[3], data[2], data[1], data[4]
+            ])
+        })
+    })
+
+    describe('Sortable with custom sort', () => {
+        let wrapper
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        const data = weekdays.map((day, i) => ({
+            id: i + 1,
+            day
+        }))
+        const customSort = jest.fn((a, b, isAsc) => {
+            const ord = weekdays.indexOf(a.day) - weekdays.indexOf(b.day)
+            return isAsc ? ord : -ord
+        })
+        const columns = [
+            {
+                field: 'id',
+                label: 'ID',
+                numeric: true
+            },
+            {
+                field: 'day',
+                label: 'Day',
+                sortable: true,
+                customSort
+            }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                propsData: {
+                    columns,
+                    data
+                }
+            })
+        })
+
+        afterEach(() => {
+            customSort.mockClear()
+        })
+
+        it('should be able to sort by Day with custom sort', () => {
+            const sorted = [...data]
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.currentSortColumn).toBe(columns[1])
+            expect(wrapper.vm.isAsc).toBe(true)
+            expect(wrapper.vm.visibleData).toEqual(sorted)
+            expect(customSort).toHaveBeenCalled()
+            // toggles
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.isAsc).toBe(false)
+            expect(wrapper.vm.visibleData).toEqual(sorted.reverse())
+        })
+    })
+
+    describe('Multi-sortable with custom sort', () => {
+        let wrapper
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        const data = [
+            { id: 1, day: 'Sun', fee: 15 },
+            { id: 2, day: 'Mon', fee: 12 },
+            { id: 3, day: 'Tue', fee: 12 },
+            { id: 4, day: 'Wed', fee: 12 },
+            { id: 5, day: 'Thu', fee: 12 },
+            { id: 6, day: 'Fri', fee: 12 },
+            { id: 7, day: 'Sat', fee: 15 }
+        ]
+        const dayCustomSort = jest.fn((a, b, isAsc) => {
+            const ord = weekdays.indexOf(a.day) - weekdays.indexOf(b.day)
+            return isAsc ? ord : -ord
+        })
+        const feeCustomSort = jest.fn((a, b, isAsc) => {
+            const ord = a.fee - b.fee
+            return isAsc ? -ord : ord
+        })
+        const columns = [
+            {
+                field: 'id',
+                label: 'ID',
+                numeric: true
+            },
+            {
+                field: 'day',
+                label: 'Day',
+                sortable: true,
+                customSort: dayCustomSort
+            },
+            {
+                field: 'fee',
+                label: 'Fee',
+                sortable: true,
+                customSort: feeCustomSort
+            }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                propsData: {
+                    columns,
+                    data,
+                    sortMultiple: true
+                }
+            })
+        })
+
+        afterEach(() => {
+            dayCustomSort.mockClear()
+            feeCustomSort.mockClear()
+        })
+
+        it('should be able to sort by Fee then Day with custom sort', () => {
+            wrapper.vm.sort(columns[2])
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: undefined, customSort: feeCustomSort },
+                { field: 'day', order: undefined, customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[0], data[6], data[1], data[2], data[3], data[4], data[5]
+            ])
+            expect(feeCustomSort).toHaveBeenCalled()
+            expect(dayCustomSort).toHaveBeenCalled()
+            // toggles fee
+            wrapper.vm.sort(columns[2])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: 'desc', customSort: feeCustomSort },
+                { field: 'day', order: undefined, customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[1], data[2], data[3], data[4], data[5], data[0], data[6]
+            ])
+            // toggles day
+            wrapper.vm.sort(columns[1])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: 'desc', customSort: feeCustomSort },
+                { field: 'day', order: 'desc', customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[5], data[4], data[3], data[2], data[1], data[6], data[0]
+            ])
+        })
+
+        it('should be able to remove column from sort (Fee+Day → Day)', () => {
+            wrapper.vm.sort(columns[2])
+            wrapper.vm.sort(columns[1])
+            wrapper.vm.sort(columns[1]) // day → descending order
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'fee', order: undefined, customSort: feeCustomSort },
+                { field: 'day', order: 'desc', customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[6], data[0], data[5], data[4], data[3], data[2], data[1]
+            ])
+            // removes fee
+            wrapper.vm.removeSortingPriority(columns[2])
+            expect(wrapper.vm.sortMultipleDataLocal).toEqual([
+                { field: 'day', order: 'desc', customSort: dayCustomSort }
+            ])
+            expect(wrapper.vm.visibleData).toEqual([
+                data[6], data[5], data[4], data[3], data[2], data[1], data[0]
+            ])
+        })
+    })
 })
