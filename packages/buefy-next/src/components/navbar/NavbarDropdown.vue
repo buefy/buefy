@@ -27,20 +27,11 @@
             <slot v-else name="label" />
         </component>
         <div
-            class="navbar-dropdown is-hidden-touch"
+            class="navbar-dropdown"
             :class="{
                 'is-right': right,
                 'is-boxed': boxed,
-            }"
-        >
-            <slot />
-        </div>
-        <div
-            v-show="!collapsible || (collapsible && newActive)"
-            class="navbar-dropdown is-hidden-desktop"
-            :class="{
-                'is-right': right,
-                'is-boxed': boxed,
+                'is-hidden-touch': collapsible && !newActive
             }"
         >
             <slot />
