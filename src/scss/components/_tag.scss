@@ -25,3 +25,12 @@
         }
     }
 }
+
+.tags {
+    &.inline-tags {
+        margin-bottom: 0px;
+        &:not(:last-child) {
+            @include ltr-property("margin", 0.5rem);
+        }
+    }
+}
