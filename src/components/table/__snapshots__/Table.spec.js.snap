@@ -11,5 +11,6 @@ exports[`BTable render correctly 1`] = `
       </tbody> <!---->
     </table> <!---->
   </div> <!---->
+  <div class="touch-dragged-cell has-mobile-cards" style="display: none;"></div>
 </div>
 `;
