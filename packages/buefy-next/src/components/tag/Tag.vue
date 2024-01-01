@@ -1,5 +1,5 @@
 <template>
-    <div v-if="attached && closable" class="tags has-addons">
+    <div v-if="attached && closable" class="tags has-addons inline-tags">
         <span
             class="tag"
             :class="[type, size, { 'is-rounded': rounded }]"
