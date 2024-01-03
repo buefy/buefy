@@ -55,6 +55,81 @@
 * A lot of ESLint errors, and warnings are fixed, as the ESLint rule version has been upgraded.
 * The type of the `cancelText` prop of `Snackbar` is fixed. It used to be `String | null`, and ended up with a type error. It is now `String`.
 
+## 0.9.26
+
+### New features
+
+* Add `render-on-mount` prop to modal
+* Add `startLoading` and `stopLoading` methods to dialog (thanks @zhanghengxin)
+* Add drag-and-drop support to table for mobile devices
+
+### Fixes
+
+* Fix dropdown position when autocompleted and appended to body (thanks @francisfontoura)
+* Fix b-button nativeType for tag 'input' (thanks @mistersaal)
+* Fix #3887 Invalid type error for tags
+* Fix #3872 SVG icons too large in Safari
+* Fix #3753 and #3065 Tooltip Glitchy
+* Fix #3726 Horizontal scrollable table ignores column width
+* Fix #2886 and #3034 sort icons on Table overlapped next columns
+* Fix #2621 Modal: Display close button in mobile version
+* Fix #2681 Table: customSort does not work when sortMultiple is enabled
+* Fix #3939 unnecessary component duplication in navbar-item
+* Fix #3074 Tag with close in tag list produces unwanted offset
+
+## 0.9.25
+
+Include updates on documentation only.
+
+## 0.9.24
+
+### New features
+
+* Add `mobile-modal` prop to clockpicker (thanks @julzELO)
+* Add `input-id` prop to checkbox (thanks @ajomuch92)
+* Add `nearby-month-days` prop to datetimepicker (thanks @gmercey)
+
+### Fixes
+
+* Fix #3826 Disabled radio button has cursor 'pointer' (thanks @amal-qb)
+* Fix #3838 Sidebar image not displaying in the documentation (thanks @amal-qb)
+* Fix #3780 Expired and broken websites in expo page (thanks @amal-qb)
+* Fix #3698 Number input null issue fix (thanks @amal-qb and @navedqb)
+* Fix #3782 Numberinput: fix long-press breaking when disabled (thanks @SylvainMarty)
+* Fix #3802 Full width sidebar doesn't have a close button (thanks @amal-qb)
+* Fix #3876 Datepicker keyboard navigation causes browser hangup
+* Fix #3884 Validation error on Input not reset by programmatically correcting the value
+* Fix #3883 Validation error on Field with multiple child components (addons) persists after value is corrected
+
+## 0.9.23
+
+### Breaking changes
+
+* Drop IE11 support
+
+### New features
+
+* Add `trigger-tabindex` prop to dropdown (thanks @Spacarar)
+* Pass Dropdown active state to DatePicker trigger slot (thanks @GMartigny)
+* Add `custom-content-class` prop to modal (thanks @ajomuch92)
+* Add `keep-open` prop to taginput (thanks @CobraClutch)
+
+### Fixes
+
+* Fix #3786 the calculation of the checkIfReachedTheEndOfScroll when footer is present and using arrow keys to navigate down the list
+* Fix scope message/notification auto-close progress style (thanks @gmercey)
+* Fix #3433 dropdown trigger-tabindex prop (thanks @Spacarar)
+* Fix Use the color-parser props for colorPicker value (thanks @GMartigny)
+* Fix #3708 sidebar closing on dynamic content click (thanks @OrestHk)
+* Fix #3779 Wrap b-table select all button with slot (thanks @Minhyme)
+* Fix #3760 show dropdown content based on breakpoints (thanks @geeksilva97)
+* Fix #3272 set class on tabitem
+* Fix Active/disable infinite scroll (thanks @Sjerd)
+* Fix Update VeeValidate.vue (thanks @scriptburn)
+* Fix #3826 Disabled radio button has cursor 'pointer' (thanks @amal-qb)
+* Fix Fire event when Colorpicker RGB inputs are changed (thanks @RuslanGetmansky)
+* Fix add .vue extension to component imports (thanks @daniil4udo)
+
 ## 0.9.22
 
 ### New features
