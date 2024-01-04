@@ -5,6 +5,10 @@
                 While it appear as a modal for tablet and smartphones,
                 Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
             </p>
+            <b-message type="is-info">
+                Hover is suppressed on a mobile screen that is narrower than <code>$dropdown-mobile-breakpoint</code>.
+                You can disable this behavior by setting <code>mobile-modal</code> to <code>false</code>.
+            </b-message>
         </Example>
 
         <Example :component="ExContentPosition" :code="ExContentPositionCode" title="Content and position" paddingless>
