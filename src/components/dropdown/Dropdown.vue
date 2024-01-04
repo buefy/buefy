@@ -14,6 +14,9 @@
             @contextmenu.prevent="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
+            @touchstart="onTouchStart"
+            @touchmove="onTouchMove"
+            @touchend="onTouchEnd"
             aria-haspopup="true">
             <slot name="trigger" :active="isActive"/>
         </div>
@@ -137,6 +140,8 @@ export default {
             style: {},
             isActive: false,
             isHoverable: false,
+            maybeTap: false,
+            isTouchEnabled: false,
             _bodyEl: undefined // Used to append to body
         }
     },
@@ -148,7 +153,8 @@ export default {
                 'is-inline': this.inline,
                 'is-active': this.isActive || this.inline,
                 'is-mobile-modal': this.isMobileModal,
-                'is-expanded': this.expanded
+                'is-expanded': this.expanded,
+                'is-touch-enabled': this.isTouchEnabled
             }]
         },
         isMobileModal() {
@@ -184,6 +190,9 @@ export default {
         */
         isActive(value) {
             this.$emit('active-change', value)
+            if (!value) {
+                this.isTouchEnabled = false
+            }
             this.handleScroll()
             if (this.appendToBody) {
                 this.$nextTick(() => {
@@ -295,6 +304,8 @@ export default {
         },
 
         onClick() {
+            // hover precedes
+            if (this.triggers.indexOf('hover') !== -1) return
             if (this.triggers.indexOf('click') < 0) return
             this.toggle()
         },
@@ -304,7 +315,29 @@ export default {
         },
         onHover() {
             if (this.triggers.indexOf('hover') < 0) return
+            // touch precedes
+            if (this.isTouchEnabled) return
             this.isHoverable = true
+        },
+        // takes care of touch-enabled devices
+        // - does nothing if hover trigger is disabled
+        // - suppresses hover trigger by setting isTouchEnabled
+        // - handles only a tap; i.e., touchstart on the trigger immediately
+        //   folowed by touchend
+        onTouchStart() {
+            this.maybeTap = true
+        },
+        onTouchMove() {
+            this.maybeTap = false
+        },
+        onTouchEnd(e) {
+            if (this.triggers.indexOf('hover') === -1) return
+            if (!this.maybeTap) return
+            // tap on dropdown contents may happen without preventDefault
+            e.preventDefault()
+            this.maybeTap = false
+            this.isTouchEnabled = true
+            this.toggle()
         },
         onFocus() {
             if (this.triggers.indexOf('focus') < 0) return
