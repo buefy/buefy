@@ -130,6 +130,19 @@ $dropdown-disabled-opacity: 0.5 !default;
                     }
                 }
             }
+            /* cancels hoverable */
+            &.is-hoverable {
+                &:hover {
+                    .dropdown-menu {
+                        display: none;
+                    }
+                }
+                &.is-active {
+                    .dropdown-menu {
+                        display: block;
+                    }
+                }
+            }
         }
     }
 }
