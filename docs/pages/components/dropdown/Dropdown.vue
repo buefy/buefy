@@ -2,13 +2,11 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>
-                While it appear as a modal for tablet and smartphones,
-                Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
+                It appears as a modal for tablets and smartphones, more precisely, when the screen is narrower than <code>$dropdown-mobile-breakpoint</code>.
+                However, Dropdowns with <code>"hover"</code> trigger won't change it's behavior to avoid any mulfunction with hover.
+                <code>"hover"</code> trigger works like <code>"click"</code> trigger on touch devices where hover events do not make sense.
+                <code>"hover"</code> trigger precedes <code>"click"</code> trigger.
             </p>
-            <b-message type="is-info">
-                Hover is suppressed on a mobile screen that is narrower than <code>$dropdown-mobile-breakpoint</code>.
-                You can disable this behavior by setting <code>mobile-modal</code> to <code>false</code>.
-            </b-message>
         </Example>
 
         <Example :component="ExContentPosition" :code="ExContentPositionCode" title="Content and position" paddingless>
