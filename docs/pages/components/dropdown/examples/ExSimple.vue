@@ -16,7 +16,7 @@
         </b-dropdown>
 
         <b-dropdown :triggers="['hover']" aria-role="list">
-            <template #trigger="{ active }">
+            <template #trigger>
                 <b-button
                     label="Hover me!"
                     type="is-info"
