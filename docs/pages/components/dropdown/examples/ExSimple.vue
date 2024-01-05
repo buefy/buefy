@@ -15,12 +15,12 @@
             <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
         </b-dropdown>
 
-        <b-dropdown :triggers="['click', 'hover']" aria-role="list">
+        <b-dropdown :triggers="['hover']" aria-role="list">
             <template #trigger="{ active }">
                 <b-button
                     label="Hover me!"
                     type="is-info"
-                    :icon-right="active ? 'menu-up' : 'menu-down'" />
+                    icon-right="menu-down" />
             </template>
 
 
