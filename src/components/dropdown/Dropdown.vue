@@ -187,11 +187,22 @@ export default {
 
         /**
         * Emit event when isActive value is changed.
+        *
+        * Also resets `isTouchEnabled` when it turns inactive.
         */
         isActive(value) {
             this.$emit('active-change', value)
             if (!value) {
-                this.isTouchEnabled = false
+                // delays to reset the touch enabled flag until the dropdown
+                // menu disappears to avoid glitches
+                // also takes care of chattering, e.g., repeated quick taps,
+                // otherwise the flag may become inconsistent with the actual
+                // state of the dropdown menu
+                setTimeout(() => {
+                    if (!this.isActive) {
+                        this.isTouchEnabled = false
+                    }
+                }, 250)
             }
             this.handleScroll()
             if (this.appendToBody) {

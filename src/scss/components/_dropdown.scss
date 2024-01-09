@@ -42,12 +42,10 @@ $dropdown-disabled-opacity: 0.5 !default;
             display: none;
         }
     }
-    @media (hover: hover) {
-        &.is-hoverable {
-            &:hover {
-                .dropdown-menu {
-                    display: inherit;
-                }
+    &.is-hoverable:not(.is-touch-enabled) {
+        &:hover {
+            .dropdown-menu {
+                display: inherit;
             }
         }
     }
