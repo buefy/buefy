@@ -42,7 +42,7 @@ $dropdown-disabled-opacity: 0.5 !default;
             display: none;
         }
     }
-    &.is-hoverable {
+    &.is-hoverable:not(.is-touch-enabled) {
         &:hover {
             .dropdown-menu {
                 display: inherit;
@@ -110,7 +110,9 @@ $dropdown-disabled-opacity: 0.5 !default;
         }
     }
     @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
-        &.is-mobile-modal {
+        /* prevents modal on hover unless it is on touch devices */
+        &.is-mobile-modal:not(.is-hoverable),
+        &.is-mobile-modal.is-touch-enabled {
             > .dropdown-menu {
                 position: fixed !important;
                 width: calc(100vw - 40px);
