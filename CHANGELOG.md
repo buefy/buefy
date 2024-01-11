@@ -1,6 +1,13 @@
 # Buefy Changelog
 
-## 0.9.26
+## 0.9.28
+
+### Fixes
+
+* Fix #3961 Dropdown with "hover" trigger incorrectly rendered on mobile devices
+* Fix #3963 no dropdown showed up if the data array was empty and only the footer slot was registered (thanks @GMartigny)
+
+## 0.9.27
 
 ### New features
 
@@ -21,6 +28,10 @@
 * Fix #2681 Table: customSort does not work when sortMultiple is enabled
 * Fix #3939 unnecessary component duplication in navbar-item
 * Fix #3074 Tag with close in tag list produces unwanted offset
+
+## 0.9.26
+
+Withdrawn due to missing `dist` folder in the package.
 
 ## 0.9.25
 
