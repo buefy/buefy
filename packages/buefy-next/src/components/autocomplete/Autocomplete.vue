@@ -31,7 +31,7 @@
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
                 :style="style"
-                v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot)"
+                v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot || hasFooterSlot)"
                 ref="dropdown"
             >
                 <div
