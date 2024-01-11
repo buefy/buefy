@@ -16,7 +16,14 @@
                         <pre class="npm home-hero"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
                     </div>
                     <div>
-                        <p><strong>Vue 3</strong> (<b-icon icon="progress-wrench" size="is-small" /> work in progress)</p>
+                        <p>
+                            <strong>Vue 3</strong>
+                            (<a href="https://github.com/ntohq/buefy-next" target="_blank">
+                                <b-icon icon="progress-wrench" size="is-small" />
+                                work in progress
+                                <b-icon icon="github-circle" size="is-small" />
+                            </a>)
+                        </p>
                         <pre class="npm home-hero"><code><span class="is-unselectable">$ </span>npm install @ntohq/buefy-next</code></pre>
                     </div>
 
