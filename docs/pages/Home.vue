@@ -11,7 +11,14 @@
                         <strong>Lightweight</strong> UI components for <strong><a href="https://vuejs.org/" target="_blank">Vue.js</a></strong>
                         based on <strong><a href="http://bulma.io/" target="_blank">Bulma</a></strong>
                     </h2>
-                    <pre class="npm home-hero"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                    <div>
+                        <p><strong>Vue 2</strong></p>
+                        <pre class="npm home-hero"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                    </div>
+                    <div>
+                        <p><strong>Vue 3</strong> (<b-icon icon="progress-wrench" size="is-small" /> work in progress)</p>
+                        <pre class="npm home-hero"><code><span class="is-unselectable">$ </span>npm install @ntohq/buefy-next</code></pre>
+                    </div>
 
                     <div class="github-button home-hero">
                         <iframe
