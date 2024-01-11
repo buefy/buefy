@@ -20,7 +20,7 @@
                             <strong>Vue 3</strong>
                             (<a href="https://github.com/ntohq/buefy-next" target="_blank">
                                 <b-icon icon="progress-wrench" size="is-small" />
-                                work in progress
+                                official fork in development
                                 <b-icon icon="github-circle" size="is-small" />
                             </a>)
                         </p>
