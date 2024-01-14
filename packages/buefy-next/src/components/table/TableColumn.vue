@@ -64,7 +64,14 @@ export default {
             return style
         },
         thWrapStyle() {
-            return this.style
+            const width = toCssWidth(this.width)
+            // interestingly, percentage width on the th element has effect
+            // so we won't apply it to .th-wrap
+            if (width != null && !width.trim().endsWith('%')) {
+                return { width }
+            } else {
+                return {}
+            }
         },
         rootClasses() {
             return [this.cellClass, {
