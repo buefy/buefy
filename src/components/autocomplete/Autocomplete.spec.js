@@ -389,4 +389,20 @@ describe('BAutocomplete', () => {
         expect(document.removeEventListener).toBeCalledWith('click', expect.any(Function))
         expect(window.removeEventListener).toBeCalledWith('resize', expect.any(Function))
     })
+
+    it('emit active with payload true', async () => {
+        wrapper.setProps({
+            data: DATA_LIST,
+            openOnFocus: true,
+            keepFirst: true
+        })
+
+        $input.trigger('focus')
+        await wrapper.vm.$nextTick()
+
+        const { active } = wrapper.emitted()
+
+        expect(active).toBeTruthy()
+        expect(active[0]).toEqual([true])
+    })
 })
