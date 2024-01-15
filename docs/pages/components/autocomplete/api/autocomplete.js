@@ -238,6 +238,11 @@ export default [
                 parameters: '<code>value: String</code>'
             },
             {
+                name: '<code>active</code>',
+                description: 'Triggers when dropdown is active',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
                 name: '<code>[any].native</code>',
                 description: 'Listen to any native event, e.g. <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
