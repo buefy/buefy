@@ -312,6 +312,10 @@ export default {
             clearTimeout(this._$intervalRef)
             this._$intervalRef = null
         }
+    },
+
+    beforeDestroy() {
+        clearTimeout(this._$intervalRef)
     }
 }
 </script>

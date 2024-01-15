@@ -222,6 +222,14 @@ export default {
                 this.oldValue = value
             }
         }
+    },
+
+    beforeDestroy() {
+        document.removeEventListener('mousemove', this.onDragging)
+        document.removeEventListener('touchmove', this.onDragging)
+        document.removeEventListener('mouseup', this.onDragEnd)
+        document.removeEventListener('touchend', this.onDragEnd)
+        document.removeEventListener('contextmenu', this.onDragEnd)
     }
 }
 </script>
