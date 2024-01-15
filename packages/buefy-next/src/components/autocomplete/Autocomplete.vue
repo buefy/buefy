@@ -164,6 +164,7 @@ export default {
         selectableFooter: Boolean
     },
     emits: [
+        'active',
         'blur',
         'focus',
         'icon-click',
@@ -333,6 +334,10 @@ export default {
                     }, 100)
                 }
             }
+
+            this.$nextTick(() => {
+                this.$emit('active', active)
+            })
         },
 
         /**
