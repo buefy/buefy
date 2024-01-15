@@ -324,7 +324,10 @@
                                         :class="column.getRootClasses(row)"
                                         :style="column.getRootStyle(row)"
                                         :data-label="column.label"
-                                        :props="{ row, column, index, colindex, toggleDetails }"
+                                        :props="{
+                                            row, column, index, colindex,
+                                            toggleDetails, isActiveDetailRow
+                                        }"
                                         @click="$emit('cellclick',row,column,index,colindex)"
                                     />
                                 </template>
