@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/buefy-next/tsconfig.types.json"
+    },
+    {
+      "path": "./packages/docs/tsconfig.types.json"
+    }
+  ]
+}

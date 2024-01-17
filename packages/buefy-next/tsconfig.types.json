@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "composite": true,
+    "rootDir": "./src",
+    "noEmit": false,
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,

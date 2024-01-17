@@ -14,9 +14,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only && copyfiles --flat netlify.toml dist/",
+    "build": "run-p build:type-check build-only && copyfiles --flat netlify.toml dist/",
     "build-only": "vite build",
-    "type-check": "tsc --noEmit",
+    "build:type-check": "vue-tsc --noEmit",
+    "type-check": "vue-tsc --noEmit -p tsconfig.types.json",
     "lint": "eslint src --ext .js,.ts,.vue",
     "lint:fix": "eslint src --ext .js,.ts,.vue --fix",
     "preview": "vite preview"

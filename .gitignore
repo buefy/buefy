@@ -11,3 +11,4 @@ debug.log*
 cypress/videos/
 cypress/screenshots/
 .vscode/
+*.tsbuildinfo
