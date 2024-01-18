@@ -13,3 +13,8 @@
         </b-field>
     </section>
 </template>
+
+<script>
+// TODO: remove this empty script section after TypeScript migration completes
+export default {}
+</script>
