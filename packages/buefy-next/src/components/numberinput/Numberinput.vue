@@ -337,6 +337,10 @@ export default {
                 size: this.size
             })
         }
+    },
+
+    beforeUnmount() {
+        clearTimeout(this._$intervalRef)
     }
 }
 </script>

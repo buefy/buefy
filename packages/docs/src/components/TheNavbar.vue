@@ -145,6 +145,10 @@ export default {
     },
     mounted() {
         this.$eventHub.on('navigate', this.closeMenu)
+    },
+
+    beforeUnmount() {
+        this.$eventHub.off('navigate', this.closeMenu)
     }
 }
 </script>

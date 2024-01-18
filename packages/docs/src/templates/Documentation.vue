@@ -64,6 +64,10 @@ export default {
         if (this.$route.hash) {
             this.$nextTick(() => this.scrollTo(this.$route.hash))
         }
+    },
+
+    beforeUnmount() {
+        this.$eventHub.$off('navigate', this.setMeta)
     }
 }
 </script>
