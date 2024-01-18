@@ -41,6 +41,7 @@ import Toast from './toast'
 import Tooltip from './tooltip'
 import Upload from './upload'
 
+// exports plugins of individual components for separate install
 export {
     Autocomplete,
     Breadcrumb,
@@ -85,3 +86,50 @@ export {
     Tooltip,
     Upload
 }
+
+// exports an array of all the component plugins for batch install
+const allComponents = [
+    Autocomplete,
+    Breadcrumb,
+    Button,
+    Carousel,
+    Checkbox,
+    Clockpicker,
+    Collapse,
+    Colorpicker,
+    Datepicker,
+    Datetimepicker,
+    Dialog,
+    Dropdown,
+    Field,
+    Icon,
+    Image,
+    Input,
+    Loading,
+    Menu,
+    Message,
+    Modal,
+    Navbar,
+    Notification,
+    Numberinput,
+    Pagination,
+    Progress,
+    Radio,
+    Rate,
+    Select,
+    Skeleton,
+    Sidebar,
+    Slider,
+    Snackbar,
+    Steps,
+    Switch,
+    Table,
+    Tabs,
+    Tag,
+    Taginput,
+    Timepicker,
+    Toast,
+    Tooltip,
+    Upload
+] as const
+export default allComponents

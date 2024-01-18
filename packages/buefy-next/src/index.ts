@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import * as components from './components'
+import allComponents from './components'
 
 import { merge } from './utils/helpers'
 import config, { setOptions, setVueInstance } from './utils/config'
@@ -14,9 +14,7 @@ const Buefy = {
         // Options
         setOptions(merge(config, options, true))
         // Components
-        for (const componentKey in components) {
-            Vue.use(components[componentKey])
-        }
+        allComponents.forEach((component) => Vue.use(component))
         // Config component
         registerComponentProgrammatic(Vue, 'config', ConfigComponent)
 
