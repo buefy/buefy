@@ -1,14 +1,14 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "extends": "./tsconfig.json",
   "include": ["src/**/*", "src/**/*.vue", "../buefy-next/src/**/*", "../buefy-next/src/**/*.vue"],
   "exclude": ["node_modules", "src/assets/*", "../buefy-next/src/**/*.spec.*"],
   "compilerOptions": {
     "composite": true,
-    "allowJs": true,
     "declaration": true,
     "declarationDir": "temp-dts",
     "paths": {
-      "@ntohq/buefy-next": ["../buefy-next/src"]
+      "@ntohq/buefy-next": ["../buefy-next/src"],
+      "@/*": ["./src/*"]
     }
   }
 }

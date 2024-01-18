@@ -3,6 +3,10 @@
   "include": ["src/**/*", "src/**/*.vue"],
   "exclude": ["node_modules", "src/assets/*"],
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "types": ["jsdom", "vite/client"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
