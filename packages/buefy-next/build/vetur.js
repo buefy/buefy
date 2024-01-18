@@ -12,6 +12,7 @@ fs.readdirSync(buefyDir, { withFileTypes: true })
     ).forEach(dir => {
         const componentName = dir.name
         const componentJsPath = buefyDir + '/' + dir.name + '/api/' + dir.name + '.js'
+        const componentTsPath = buefyDir + '/' + dir.name + '/api/' + dir.name + '.ts'
         console.log('Processing --> ' + componentJsPath)
 
         let mainTag = {
@@ -20,7 +21,13 @@ fs.readdirSync(buefyDir, { withFileTypes: true })
             "subtags": []
         }
 
-        let componentJs = require(componentJsPath).default;
+        let componentJs
+        try {
+            // tries .ts file first
+            componentJs = require(componentTsPath).default;
+        } catch {
+            componentJs = require(componentJsPath).default;
+        }
         console.log(componentJs)
         componentJs.forEach((tag, index) => {
             let htmlName;
