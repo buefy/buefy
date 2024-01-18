@@ -295,6 +295,7 @@ export default {
         if (this.isFixed) {
             removeElement(this.$el)
         }
+        clearTimeout(this.timer)
     }
 }
 </script>

@@ -133,6 +133,10 @@ export default {
     },
     mounted() {
         this.$eventHub.$on('navigate', this.closeMenu)
+    },
+
+    beforeDestroy() {
+        this.$eventHub.$off('navigate', this.closeMenu)
     }
 }
 </script>
