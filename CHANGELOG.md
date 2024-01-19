@@ -13,6 +13,9 @@
 * Fix [#3963](https://github.com/buefy/buefy/issues/3963) No dropdown showed up if the data array was empty and only the footer slot was registered (thanks @GMartigny)
 * Fix [#3971](https://github.com/buefy/buefy/issues/3971) Problems with table headers and dates due to 0.9.25 → 0.9.27 changes
 * Fix [#3971](https://github.com/buefy/buefy/issues/3971) Percentage width on table columns doubly applied
+* Fix [#3991](https://github.com/buefy/buefy/pull/3991) Potential call after unmount in `NumberInput` (thanks @Arooba-git)
+* Fix [#3991](https://github.com/buefy/buefy/pull/3991) Potential call after unmount in `Sidebar` (thanks @Arooba-git)
+* Fix [#3991](https://github.com/buefy/buefy/pull/3991) Potential listener leaks in `SliderThumb` (thanks @Arooba-git)
 
 ## 0.9.27
 
