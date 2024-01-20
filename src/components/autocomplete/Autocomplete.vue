@@ -173,7 +173,8 @@ export default {
             style: {},
             _isAutocomplete: true,
             _elementRef: 'input',
-            _bodyEl: undefined // Used to append to body
+            _bodyEl: undefined, // Used to append to body
+            timeOutID: null
         }
     },
     computed: {
@@ -311,7 +312,7 @@ export default {
                     this.calcDropdownInViewportVertical()
                 } else {
                     // Timeout to wait for the animation to finish before recalculating
-                    setTimeout(() => {
+                    this.timeOutID = setTimeout(() => {
                         this.calcDropdownInViewportVertical()
                     }, 100)
                 }
@@ -729,6 +730,7 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
+        clearTimeout(this.timeOutID)
     }
 }
 </script>

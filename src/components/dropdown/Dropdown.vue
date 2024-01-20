@@ -142,7 +142,9 @@ export default {
             isHoverable: false,
             maybeTap: false,
             isTouchEnabled: false,
-            _bodyEl: undefined // Used to append to body
+            _bodyEl: undefined, // Used to append to body
+            timeOutID: null,
+            timeOutID2: null
         }
     },
     computed: {
@@ -198,7 +200,7 @@ export default {
                 // also takes care of chattering, e.g., repeated quick taps,
                 // otherwise the flag may become inconsistent with the actual
                 // state of the dropdown menu
-                setTimeout(() => {
+                this.timeOutID = setTimeout(() => {
                     if (!this.isActive) {
                         this.isTouchEnabled = false
                     }
@@ -368,7 +370,7 @@ export default {
                     const value = !this.isActive
                     this.isActive = value
                     // Vue 2.6.x ???
-                    setTimeout(() => (this.isActive = value))
+                    this.timeOutID2 = setTimeout(() => (this.isActive = value))
                 })
             } else {
                 this.isActive = !this.isActive
@@ -447,6 +449,8 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
+        clearTimeout(this.timeOutID)
+        clearTimeout(this.timeOutID2)
     }
 }
 </script>

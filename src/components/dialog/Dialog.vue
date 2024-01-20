@@ -167,7 +167,8 @@ export default {
             isActive: false,
             validationMessage: '',
             isCompositing: false,
-            isLoading: false
+            isLoading: false,
+            timeOutID: null
         }
     },
     computed: {
@@ -223,7 +224,7 @@ export default {
             this.isActive = false
             this.isLoading = false
             // Timeout for the animation complete before destroying
-            setTimeout(() => {
+            this.timeOutID = setTimeout(() => {
                 this.$destroy()
                 removeElement(this.$el)
             }, 150)
@@ -269,6 +270,10 @@ export default {
                 this.$refs.confirmButton.$el.focus()
             }
         })
+    },
+
+    beforeDestroy() {
+        clearTimeout(this.timeOutID)
     }
 }
 </script>
