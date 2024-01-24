@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017-2019 Rafael Beraldo
+Copyright (c) 2017-2024 [these people](https://github.com/buefy/buefy/graphs/contributors)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
