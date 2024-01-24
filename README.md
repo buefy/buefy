@@ -137,11 +137,12 @@ Version will follow **v0.Y.Z**, where:
 
 <table>
   <tr>
-    <td align="center"><a href="https://twitter.com/walter_tommasi"><img src="https://avatars0.githubusercontent.com/u/8029488?v=4" width="80px;" alt=""/><br /><sub><b>Walter Tommasi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kikuomax"><img src="https://avatars.githubusercontent.com/u/3257531?v=4" width="80px;" alt=""/><br /><sub><b>Kikuo Emoto</b></sub></a><br /></td>
+    <td align="center"><a href="https://twitter.com/wesdevpro"><img src="https://avatars.githubusercontent.com/u/11604664?v=4" width="80px;" alt=""/><br /><sub><b>Wesley Ford</b></sub></a><br /></td>
   </tr>
 </table>
 
-Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
+Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author, and <a href="https://twitter.com/walter_tommasi">Walter Tommasi</a>, a former core maintainter of Buefy.
 
 ## Contributors ✨
 
