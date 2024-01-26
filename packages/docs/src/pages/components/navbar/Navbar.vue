@@ -11,16 +11,19 @@
 <script>
     import api from './api/navbar'
     import variables from './variables/navbar'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
-    
+
     export default {
         data() {
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple
+                }),
                 ExSimpleCode
             }
         },

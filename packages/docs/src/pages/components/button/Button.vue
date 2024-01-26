@@ -25,6 +25,7 @@
 <script>
     import api from './api/button'
     import variables from './variables/button'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -49,12 +50,14 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExTypesStates,
-                ExIcons,
-                ExSizes,
-                ExTags,
-                ExRouter,
+                ...shallowFields({
+                    ExSimple,
+                    ExTypesStates,
+                    ExIcons,
+                    ExSizes,
+                    ExTags,
+                    ExRouter
+                }),
                 ExSimpleCode,
                 ExTypesStatesCode,
                 ExIconsCode,

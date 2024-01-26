@@ -26,6 +26,7 @@
 <script>
     import api from './api/tooltip'
     import variables from './variables/tooltip'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -47,11 +48,13 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExStyles,
-                ExMultilined,
-                ExToggle,
-                ExCustom,
+                ...shallowFields({
+                    ExSimple,
+                    ExStyles,
+                    ExMultilined,
+                    ExToggle,
+                    ExCustom
+                }),
                 ExSimpleCode,
                 ExStylesCode,
                 ExMultilinedCode,

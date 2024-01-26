@@ -23,7 +23,7 @@
             </div>
             <p>You can show options by groups</p>
         </Example>
-        
+
         <Example :component="ExKeepFirst" :code="ExKeepFirstCode" title="Keep First">
             <div class="tags has-addons">
                 <span class="tag is-success">Since</span>
@@ -33,7 +33,7 @@
             <p>Additionally, use <code>select-on-click-outside</code> to automatically select the first element when clicking outside of
                 the <code>input</code> element.</p>
         </Example>
-        
+
         <Example :component="ExCustomAsync" :code="ExCustomAsyncCode" title="Async with custom template">
             <p>You can have a custom template by adding a scoped slot to it.</p>
             <p><small>API from <a href="https://www.themoviedb.org" target="_blank">TMDb</a></small>.</p>
@@ -52,6 +52,7 @@
 <script>
     import api from './api/autocomplete'
     import variables from './variables/autocomplete'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -73,7 +74,7 @@
 
     import ExInfiniteScroll from './examples/ExInfiniteScroll'
     import ExInfiniteScrollCode from './examples/ExInfiniteScroll.vue?raw'
-    
+
     import ExKeepFirst from './examples/ExKeepFirst'
     import ExKeepFirstCode from './examples/ExKeepFirst.vue?raw'
 
@@ -82,21 +83,23 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExObjArray,
+                    ExHeader,
+                    ExFooter,
+                    ExCustomAsync,
+                    ExInfiniteScroll,
+                    ExGroups,
+                    ExKeepFirst
+                }),
                 ExSimpleCode,
                 ExObjArrayCode,
-                ExObjArray,
-                ExHeader,
                 ExHeaderCode,
-                ExFooter,
                 ExFooterCode,
                 ExCustomAsyncCode,
-                ExCustomAsync,
-                ExInfiniteScroll,
                 ExInfiniteScrollCode,
-                ExGroups,
                 ExGroupsCode,
-                ExKeepFirst,
                 ExKeepFirstCode
             }
         }

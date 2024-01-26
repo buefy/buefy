@@ -49,6 +49,7 @@
 <script>
     import api from './api/image'
     import variables from './variables/image'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -66,15 +67,17 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExWebp,
+                    ExPlaceholder,
+                    ExSrcset,
+                    ExError
+                }),
                 ExSimpleCode,
-                ExWebp,
                 ExWebpCode,
-                ExPlaceholder,
                 ExPlaceholderCode,
-                ExSrcset,
                 ExSrcsetCode,
-                ExError,
                 ExErrorCode
             }
         }

@@ -28,6 +28,7 @@
 
 <script>
     import api from './api/timepicker'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -51,12 +52,14 @@
         data() {
             return {
                 api,
-                ExSimple,
-                ExEditable,
-                ExRange,
-                ExFooter,
-                ExGranularity,
-                ExInline,
+                ...shallowFields({
+                    ExSimple,
+                    ExEditable,
+                    ExRange,
+                    ExFooter,
+                    ExGranularity,
+                    ExInline
+                }),
                 ExSimpleCode,
                 ExEditableCode,
                 ExGranularityCode,

@@ -14,6 +14,7 @@
 <script>
     import api from './api/skeleton'
     import variables from './variables/skeleton'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -29,11 +30,13 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExMediaTemplate,
+                    ExCardTemplate
+                }),
                 ExSimpleCode,
-                ExMediaTemplate,
                 ExMediaTemplateCode,
-                ExCardTemplate,
                 ExCardTemplateCode
             }
         }

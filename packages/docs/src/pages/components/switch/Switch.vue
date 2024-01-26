@@ -16,6 +16,7 @@
 <script>
     import api from './api/switch'
     import variables from './variables/switch'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -34,10 +35,12 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExTypes,
-                ExSizes,
-                ExStyles,
+                ...shallowFields({
+                    ExSimple,
+                    ExTypes,
+                    ExSizes,
+                    ExStyles
+                }),
                 ExSimpleCode,
                 ExTypesCode,
                 ExSizesCode,

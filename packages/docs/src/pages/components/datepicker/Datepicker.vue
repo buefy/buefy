@@ -88,6 +88,7 @@
 <script>
     import api from './api/datepicker'
     import variables from './variables/datepicker'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -133,31 +134,33 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExEditable,
+                    ExRange,
+                    ExFooter,
+                    ExHeader,
+                    ExProgrammatically,
+                    ExTrigger,
+                    ExInline,
+                    ExUnselectable,
+                    ExEvents,
+                    ExMonth,
+                    ExRangeInput,
+                    ExMultipleInput,
+                }),
                 ExSimpleCode,
-                ExEditable,
                 ExEditableCode,
-                ExRange,
                 ExRangeCode,
-                ExFooter,
                 ExFooterCode,
-                ExHeader,
                 ExHeaderCode,
-                ExProgrammatically,
                 ExProgrammaticallyCode,
-                ExTrigger,
                 ExTriggerCode,
-                ExInline,
                 ExInlineCode,
-                ExUnselectable,
                 ExUnselectableCode,
-                ExEvents,
                 ExEventsCode,
-                ExMonth,
                 ExMonthCode,
-                ExRangeInput,
                 ExRangeInputCode,
-                ExMultipleInput,
                 ExMultipleInputCode
             }
         }

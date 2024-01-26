@@ -23,6 +23,7 @@
 <script>
     import { preformat } from '@/utils'
     import api from './api/dialog'
+    import { shallowFields } from '@/utils'
 
     import ExAlertDialog from './examples/ExAlertDialog'
     import ExAlertDialogCode from './examples/ExAlertDialog.vue?raw'
@@ -37,11 +38,13 @@
         data() {
             return {
                 api,
-                ExAlertDialog,
+                ...shallowFields({
+                    ExAlertDialog,
+                    ExConfirmDialog,
+                    ExPromptDialog
+                }),
                 ExAlertDialogCode,
-                ExConfirmDialog,
                 ExConfirmDialogCode,
-                ExPromptDialog,
                 ExPromptDialogCode,
                 outsideVueInstance: `
                 import { DialogProgrammatic as Dialog } from 'buefy'

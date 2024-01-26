@@ -43,6 +43,7 @@
 <script>
     import api from './api/dropdown'
     import variables from './variables/dropdown'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -67,17 +68,19 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExContentPosition,
+                    ExHasLinkDisabled,
+                    ExCustomize,
+                    ExCustomizeMultiple,
+                    ExCustomizeScrollable
+                }),
                 ExSimpleCode,
-                ExContentPosition,
                 ExContentPositionCode,
-                ExHasLinkDisabled,
                 ExHasLinkDisabledCode,
-                ExCustomize,
                 ExCustomizeCode,
-                ExCustomizeMultiple,
                 ExCustomizeMultipleCode,
-                ExCustomizeScrollable,
                 ExCustomizeScrollableCode
             }
         }

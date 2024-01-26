@@ -3,7 +3,7 @@
     	<Example :component="ExAlignments" :code="ExAlignmentsCode" title="Alignments"/>
 
     	<Example :component="ExSeparators" :code="ExSeparatorsCode" title="Separators"/>
-    	
+
     	<Example :component="ExSizes" :code="ExSizesCode" title="Sizes"/>
 
         <ApiView :data="api"/>
@@ -14,6 +14,7 @@
 <script>
 	import api from './api/breadcrumb'
     import variables from './variables/breadcrumb'
+    import { shallowFields } from '@/utils'
 
 	import ExAlignments from './examples/ExAlignments'
     import ExAlignmentsCode from './examples/ExAlignments.vue?raw'
@@ -25,18 +26,20 @@
     import ExSizesCode from './examples/ExSizes.vue?raw'
 
     export default {
-    
+
         name: 'Breadcrumb',
-    
+
         data () {
             return {
             	api,
             	variables,
-            	ExAlignments,
+                ...shallowFields({
+                    ExAlignments,
+                    ExSeparators,
+                    ExSizes
+                }),
             	ExAlignmentsCode,
-            	ExSeparators,
             	ExSeparatorsCode,
-            	ExSizes,
             	ExSizesCode,
             }
         }

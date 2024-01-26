@@ -33,6 +33,7 @@
 <script>
     import api from './api/slider'
     import variables from './variables/slider'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -56,21 +57,23 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExSizes,
+                    ExTypes,
+                    ExCustomize,
+                    ExTick,
+                    ExRange,
+                    ExLazy,
+                    ExIndicator
+                }),
                 ExSimpleCode,
-                ExSizes,
                 ExSizesCode,
-                ExTypes,
                 ExTypesCode,
-                ExCustomize,
                 ExCustomizeCode,
-                ExTick,
                 ExTickCode,
-                ExRange,
                 ExRangeCode,
-                ExLazy,
                 ExLazyCode,
-                ExIndicator,
                 ExIndicatorCode
             }
         }

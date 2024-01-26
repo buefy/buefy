@@ -3,11 +3,11 @@
         <Example :component="ExSimple" :code="ExSimpleCode" vertical/>
 
         <Example :component="ExDragDrop" :code="ExDragDropCode" title="Drag and drop" vertical/>
-        
+
         <Example :component="ExExpanded" :code="ExExpandedCode" title="Expanded" vertical/>
-        
+
         <Example :component="ExRounded" :code="ExRoundedCode" title="Rounded" vertical/>
-        
+
         <Example :component="ExValidation" :code="ExValidationCode" title="Validation" vertical/>
 
         <ApiView :data="api"/>
@@ -16,6 +16,7 @@
 
 <script>
     import api from './api/upload'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -25,7 +26,7 @@
 
     import ExExpanded from './examples/ExExpanded'
     import ExExpandedCode from './examples/ExExpanded.vue?raw'
-    
+
     import ExRounded from './examples/ExRounded'
     import ExRoundedCode from './examples/ExRounded.vue?raw'
 
@@ -37,15 +38,17 @@
         data() {
             return {
                 api,
-                ExSimple,
-                ExDragDrop,
-                ExExpanded,
+                ...shallowFields({
+                    ExSimple,
+                    ExDragDrop,
+                    ExExpanded,
+                    ExRounded,
+                    ExValidation
+                }),
                 ExSimpleCode,
                 ExDragDropCode,
                 ExExpandedCode,
-                ExRounded,
                 ExRoundedCode,
-                ExValidation,
                 ExValidationCode,
             }
         }

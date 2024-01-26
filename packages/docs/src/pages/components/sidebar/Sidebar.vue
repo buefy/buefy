@@ -13,20 +13,23 @@
 <script>
     import api from './api/sidebar'
     import variables from './variables/sidebar'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
     import ExStatic from './examples/ExStatic'
     import ExStaticCode from './examples/ExStatic.vue?raw'
-    
+
     export default {
         data() {
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExStatic
+                }),
                 ExSimpleCode,
-                ExStatic,
                 ExStaticCode
             }
         },

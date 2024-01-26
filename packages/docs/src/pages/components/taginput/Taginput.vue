@@ -52,6 +52,7 @@
 <script>
     import api from './api/taginput'
     import variables from './variables/taginput'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -88,16 +89,18 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExAutocomplete,
-                ExTemplatedAutocomplete,
-                ExSelected,
-                ExLimit,
-                ExState,
-                ExType,
-                ExSize,
-                ExModifier,
-                ExValidation,
+                ...shallowFields({
+                    ExSimple,
+                    ExAutocomplete,
+                    ExTemplatedAutocomplete,
+                    ExSelected,
+                    ExLimit,
+                    ExState,
+                    ExType,
+                    ExSize,
+                    ExModifier,
+                    ExValidation
+                }),
                 ExSimpleCode,
                 ExAutocompleteCode,
                 ExTemplatedAutocompleteCode,

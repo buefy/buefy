@@ -17,7 +17,7 @@
         <Example :component="ExColors" :code="ExColorsCode" title="Colors" vertical>
             <p>
                 Clockpicker supports all <code>is-&lt;color&gt;</code> classes from Bulma, including custom colors added at build time.
-                This can be specified in the <code>class</code> property or in the <code>type</code> property. 
+                This can be specified in the <code>class</code> property or in the <code>type</code> property.
                 Inline display is also availble by specifying the <code>inline</code> prop.
             </p>
         </Example>
@@ -28,6 +28,7 @@
 
 <script>
     import api from './api/clockpicker'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -48,15 +49,17 @@
         data() {
             return {
                 api,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExNonReadonly,
+                    ExRange,
+                    ExFooter,
+                    ExColors
+                }),
                 ExSimpleCode,
-                ExNonReadonly,
                 ExNonReadonlyCode,
-                ExRange,
                 ExRangeCode,
-                ExFooter,
                 ExFooterCode,
-                ExColors,
                 ExColorsCode
             }
         }

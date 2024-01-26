@@ -139,6 +139,7 @@
 <script>
     import api from './api/table'
     import variables from './variables/table'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -196,24 +197,26 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExSandbox,
-                ExSelection,
-                ExCheckable,
-                ExSearchable,
-                ExSortMultiple,
-                ExPaginationSort,
-                ExDetailedRow,
-                ExCustomDetailedRow,
-                ExRowStatus,
-                ExCustomHeaders,
-                ExSubheadings,
-                ExSticky,
-                ExToggleColumns,
-                ExFooter,
-                ExAsyncData,
+                ...shallowFields({
+                    ExSimple,
+                    ExSandbox,
+                    ExSelection,
+                    ExCheckable,
+                    ExSearchable,
+                    ExSortMultiple,
+                    ExPaginationSort,
+                    ExDetailedRow,
+                    ExCustomDetailedRow,
+                    ExRowStatus,
+                    ExCustomHeaders,
+                    ExSubheadings,
+                    ExSticky,
+                    ExToggleColumns,
+                    ExFooter,
+                    ExAsyncData,
+                    ExDraggableRows
+                }),
                 ExSimpleCode,
-                ExDraggableRows,
                 ExSandboxCode,
                 ExSelectionCode,
                 ExCheckableCode,

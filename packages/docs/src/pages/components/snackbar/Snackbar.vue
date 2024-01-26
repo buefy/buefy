@@ -22,6 +22,7 @@
 
     import api from './api/snackbar'
     import variables from './variables/snackbar'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -31,7 +32,9 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple
+                }),
                 ExSimpleCode,
                 outsideVueInstance: `
                 import { SnackbarProgrammatic as Snackbar } from 'buefy'

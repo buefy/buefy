@@ -32,6 +32,7 @@
 <script>
     import api from './api/message'
     import variables from './variables/message'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -62,14 +63,16 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExTypes,
-                ExIcons,
-                ExHeaderless,
-                ExCustomHeader,
-                ExSizes,
-                ExAutoClose,
-                ExAutoCloseWithProgressBar,
+                ...shallowFields({
+                    ExSimple,
+                    ExTypes,
+                    ExIcons,
+                    ExHeaderless,
+                    ExCustomHeader,
+                    ExSizes,
+                    ExAutoClose,
+                    ExAutoCloseWithProgressBar
+                }),
                 ExSimpleCode,
                 ExTypesCode,
                 ExIconsCode,

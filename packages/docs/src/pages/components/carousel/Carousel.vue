@@ -50,6 +50,7 @@
 <script>
     import api from './api/carousel'
     import variables from './variables/carousel'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExFull from './examples/ExFull'
@@ -79,16 +80,18 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExFull,
-                ExArrow,
-                ExIndicator,
-                ExProgress,
-                ExCustomIndicator,
-                ExGallery,
-                ExCarouselList,
-                ExWithCard,
-                ExWithList,
+                ...shallowFields({
+                    ExSimple,
+                    ExFull,
+                    ExArrow,
+                    ExIndicator,
+                    ExProgress,
+                    ExCustomIndicator,
+                    ExGallery,
+                    ExCarouselList,
+                    ExWithCard,
+                    ExWithList
+                }),
                 ExSimpleCode,
                 ExFullCode,
                 ExArrowCode,

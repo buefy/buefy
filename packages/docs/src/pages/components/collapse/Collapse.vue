@@ -16,6 +16,7 @@
 
 <script>
     import api from './api/collapse'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -36,15 +37,17 @@
         data() {
             return {
                 api,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExPanelTemplate,
+                    ExCardTemplate,
+                    ExPosition,
+                    ExAccordion
+                }),
                 ExSimpleCode,
-                ExPanelTemplate,
                 ExPanelTemplateCode,
-                ExCardTemplate,
                 ExCardTemplateCode,
-                ExPosition,
                 ExPositionCode,
-                ExAccordion,
                 ExAccordionCode
             }
         }

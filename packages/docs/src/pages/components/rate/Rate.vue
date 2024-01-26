@@ -12,6 +12,7 @@
 <script>
     import api from './api/rate'
     import variables from './variables/rate'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -24,8 +25,10 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExFull,
+                ...shallowFields({
+                    ExSimple,
+                    ExFull
+                }),
                 ExSimpleCode,
                 ExFullCode
             }

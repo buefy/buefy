@@ -38,6 +38,7 @@
 
     import api from './api/notification'
     import variables from './variables/notification'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -62,12 +63,14 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExTypes,
-                ExIcons,
-                ExAutoClose,
-                ExAutoCloseWithProgressBar,
-                ExProgrammatically,
+                ...shallowFields({
+                    ExSimple,
+                    ExTypes,
+                    ExIcons,
+                    ExAutoClose,
+                    ExAutoCloseWithProgressBar,
+                    ExProgrammatically
+                }),
                 ExSimpleCode,
                 ExTypesCode,
                 ExIconsCode,

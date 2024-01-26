@@ -35,6 +35,7 @@
 
     import api from './api/modal'
     import variables from './variables/modal'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -53,10 +54,12 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExComponent,
-                ExProgrammatic,
-                ExFullScreen,
+                ...shallowFields({
+                    ExSimple,
+                    ExComponent,
+                    ExProgrammatic,
+                    ExFullScreen
+                }),
                 ExSimpleCode,
                 ExComponentCode,
                 ExProgrammaticCode,

@@ -38,6 +38,7 @@
 <script>
     import api from './api/tabs'
     import variables from './variables/tabs'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -71,13 +72,17 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExDynamic,
-                ExPosition,
-                ExIcons,
-                ExSizes,
-                ExTypes,
-                ExExpanded,
+                ...shallowFields({
+                    ExSimple,
+                    ExDynamic,
+                    ExPosition,
+                    ExIcons,
+                    ExSizes,
+                    ExTypes,
+                    ExExpanded,
+                    ExCustomHeaders,
+                    ExVertical
+                }),
                 ExSimpleCode,
                 ExDynamicCode,
                 ExPositionCode,
@@ -85,9 +90,7 @@
                 ExSizesCode,
                 ExTypesCode,
                 ExExpandedCode,
-                ExCustomHeaders,
                 ExCustomHeadersCode,
-                ExVertical,
                 ExVerticalCode
             }
         }

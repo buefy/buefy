@@ -14,6 +14,7 @@
 
 <script>
     import api from './api/select'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -31,10 +32,12 @@
         data() {
             return {
                 api,
-                ExSimple,
-                ExMultiple,
-                ExIcons,
-                ExSizes,
+                ...shallowFields({
+                    ExSimple,
+                    ExMultiple,
+                    ExIcons,
+                    ExSizes
+                }),
                 ExSimpleCode,
                 ExMultipleCode,
                 ExIconsCode,

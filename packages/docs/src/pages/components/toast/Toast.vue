@@ -21,6 +21,7 @@
     import { preformat } from '@/utils'
     import api from './api/toast'
     import variables from './variables/toast'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -30,7 +31,9 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple
+                }),
                 ExSimpleCode,
                 outsideVueInstance: `
                 import { ToastProgrammatic as Toast } from 'buefy'

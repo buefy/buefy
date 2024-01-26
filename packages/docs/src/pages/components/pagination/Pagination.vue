@@ -15,6 +15,7 @@
 <script>
     import api from './api/pagination'
     import variables from './variables/pagination'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -27,9 +28,11 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExSlot
+                }),
                 ExSimpleCode,
-                ExSlot,
                 ExSlotCode
             }
         }

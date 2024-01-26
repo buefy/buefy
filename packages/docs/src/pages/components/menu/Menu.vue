@@ -10,6 +10,7 @@
 <script>
     import api from './api/menu'
     import variables from './variables/menu'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -19,7 +20,9 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple
+                }),
                 ExSimpleCode
             }
         }

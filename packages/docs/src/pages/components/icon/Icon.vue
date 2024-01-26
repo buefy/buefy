@@ -48,6 +48,7 @@
 <script>
     import api from './api/icon'
     import variables from './variables/icon'
+    import { shallowFields } from '@/utils'
 
     import ExMdi from './examples/ExMdi'
     import ExMdiCode from './examples/ExMdi.vue?raw'
@@ -66,13 +67,15 @@
             return {
                 api,
                 variables,
-                ExMdi,
-                ExFa,
-                ExObjectSyntax,
+                ...shallowFields({
+                    ExMdi,
+                    ExFa,
+                    ExObjectSyntax,
+                    ExCustom
+                }),
                 ExMdiCode,
                 ExFaCode,
                 ExObjectSyntaxCode,
-                ExCustom,
                 ExCustomCode,
                 usage: `
                 import { library } from '@fortawesome/fontawesome-svg-core';

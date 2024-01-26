@@ -23,6 +23,7 @@
 <script>
     import api from './api/steps'
     import variables from './variables/steps'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -47,17 +48,19 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExDynamic,
-                ExIcons,
-                ExSizes,
-                ExTypes,
+                ...shallowFields({
+                    ExSimple,
+                    ExDynamic,
+                    ExIcons,
+                    ExSizes,
+                    ExTypes,
+                    ExVertical
+                }),
                 ExSimpleCode,
                 ExDynamicCode,
                 ExIconsCode,
                 ExSizesCode,
                 ExTypesCode,
-                ExVertical,
                 ExVerticalCode
             }
         }

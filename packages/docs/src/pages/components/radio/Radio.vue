@@ -18,6 +18,7 @@
 <script>
     import api from './api/radio'
     import variables from './variables/radio'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -36,10 +37,12 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExSizes,
-                ExTypes,
-                ExRadioButton,
+                ...shallowFields({
+                    ExSimple,
+                    ExSizes,
+                    ExTypes,
+                    ExRadioButton
+                }),
                 ExSimpleCode,
                 ExSizesCode,
                 ExTypesCode,

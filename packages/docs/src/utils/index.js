@@ -1,3 +1,5 @@
+import { shallowRef } from 'vue'
+
 export function preformat(text) {
     if (!text) return
 
@@ -15,4 +17,12 @@ export function preformat(text) {
     newText = newText.join('\r\n')
 
     return newText
+}
+
+export function shallowFields(fields) {
+    for(const key in fields) {
+        fields[key] = shallowRef(fields[key])
+    }
+
+    return fields
 }

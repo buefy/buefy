@@ -18,6 +18,7 @@
 <script>
     import api from './api/colorpicker'
     import variables from './variables/colorpicker'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -39,16 +40,17 @@
             return {
                 api,
                 variables,
-
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExAlpha,
+                    ExRepresentation,
+                    ExFormatter,
+                    ExFields
+                }),
                 ExSimpleCode,
-                ExAlpha,
                 ExAlphaCode,
-                ExRepresentation,
                 ExRepresentationCode,
-                ExFormatter,
                 ExFormatterCode,
-                ExFields,
                 ExFieldsCode
             }
         }

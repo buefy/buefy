@@ -22,7 +22,7 @@
         </Example>
 
         <Example :component="ExLazy" :code="ExLazyCode" title="Lazy" vertical>
-            <p>You could make the binding lazy, comparable with <code>v-model.lazy</code>, see <a href="https://vuejs.org/v2/guide/forms.html#lazy">.lazy modifier</a>. 
+            <p>You could make the binding lazy, comparable with <code>v-model.lazy</code>, see <a href="https://vuejs.org/v2/guide/forms.html#lazy">.lazy modifier</a>.
             As <code>v-model.lazy</code> won't work with custom components like Buefy, you could use this property.</p>
         </Example>
 
@@ -36,6 +36,7 @@
 <script>
     import api from './api/input'
     import variables from './variables/input'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -66,13 +67,16 @@
             return {
                 api,
                 variables,
-                ExSimple,
-                ExHorizontal,
-                ExTypesStates,
-                ExIcons,
-                ExValidation,
-                ExPassword,
-                ExSizes,
+                ...shallowFields({
+                    ExSimple,
+                    ExHorizontal,
+                    ExTypesStates,
+                    ExIcons,
+                    ExValidation,
+                    ExPassword,
+                    ExSizes,
+                    ExLazy
+                }),
                 ExSimpleCode,
                 ExHorizontalCode,
                 ExTypesStatesCode,
@@ -80,7 +84,6 @@
                 ExValidationCode,
                 ExPasswordCode,
                 ExSizesCode,
-                ExLazy,
                 ExLazyCode
             }
         }

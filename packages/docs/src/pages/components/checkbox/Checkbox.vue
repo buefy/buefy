@@ -22,6 +22,7 @@
 <script>
     import api from './api/checkbox'
     import variables from './variables/checkbox'
+    import { shallowFields } from '@/utils'
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -43,15 +44,17 @@
             return {
                 api,
                 variables,
-                ExSimple,
+                ...shallowFields({
+                    ExSimple,
+                    ExArray,
+                    ExSizes,
+                    ExTypes,
+                    ExCheckboxButton
+                }),
                 ExSimpleCode,
-                ExArray,
                 ExArrayCode,
-                ExSizes,
                 ExSizesCode,
-                ExTypes,
                 ExTypesCode,
-                ExCheckboxButton,
                 ExCheckboxButtonCode
             }
         }
