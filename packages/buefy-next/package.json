@@ -36,8 +36,6 @@
     "url": "https://github.com/ntohq/buefy-next/issues"
   },
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
     "test": "npm run lint && npm run unit",
     "unit": "jest --runInBand --u",
     "lint": "eslint src --ext .js,.vue",
