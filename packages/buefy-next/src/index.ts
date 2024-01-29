@@ -1,5 +1,6 @@
 import type { App } from 'vue'
 
+import './utils/vue-augmentation'
 import allComponents from './components'
 
 import { merge } from './utils/helpers'
@@ -18,7 +19,7 @@ const Buefy = {
         // Config component
         registerComponentProgrammatic(Vue, 'config', ConfigComponent)
 
-        Vue.config.globalProperties.$buefy.globalNoticeInterval = null
+        Vue.config.globalProperties.$buefy.globalNoticeInterval = undefined
     }
 }
 
