@@ -12,7 +12,7 @@
             a sophisticated Single-Page Application.
             You can import it completely or single components on a ordinary webpage and use Vue.js as a replacement for jQuery —
             as you can see in this
-            <a href="https://codepen.io/anon/pen/RBWMXE?editors=1010" target="_blank">Codepen</a>
+            <a href="https://codepen.io/kikuomax/pen/mdopZKj" target="_blank">Codepen</a>
             or any other example over the documentation.
         </p>
 
