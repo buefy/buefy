@@ -1,4 +1,11 @@
-import { getValueByPath, indexOf, merge, escapeRegExpChars, removeElement } from './helpers'
+import {
+    escapeRegExpChars,
+    getValueByPath,
+    indexOf,
+    matchWithGroups,
+    merge,
+    removeElement
+} from './helpers'
 
 describe('helpers', () => {
     describe('getValueByPath', () => {
@@ -141,6 +148,38 @@ describe('helpers', () => {
 
             removeElement(elm)
             expect(elm.parentNode.removeChild).toHaveBeenCalled()
+        })
+    })
+
+    describe('matchWithGroups', () => {
+        describe('with pattern = "((?!=<year>)\\d+)/((?!=<month>)\\d+)/((?!=<day>)\\d+)"', () => {
+            const pattern = '((?!=<year>)\\d+)/((?!=<month>)\\d+)/((?!=<day>)\\d+)'
+
+            it('should return {year:"2024",month:"02",day:"14"} for "2024/02/14"', () => {
+                expect(matchWithGroups(pattern, '2024/02/14'))
+                    .toEqual({
+                        year: '2024',
+                        month: '02',
+                        day: '14'
+                    })
+            })
+
+            it('should return {year:null,month:null,day:null} for "2024-02-14"', () => {
+                expect(matchWithGroups(pattern, '2024-02-14'))
+                    .toEqual({
+                        year: null,
+                        month: null,
+                        day: null
+                    })
+            })
+        })
+
+        describe('with pattern = "year=(\\d+)/month=(\\d+)/day=(\\d+)" (invalid pattern)', () => {
+            const pattern = 'year=(\\d+)/month=(\\d+)/day=(\\d+)'
+
+            it('should throw Error for "2024/02/14"', () => {
+                expect(() => matchWithGroups(pattern, '2024/02/14')).toThrow()
+            })
         })
     })
 })
