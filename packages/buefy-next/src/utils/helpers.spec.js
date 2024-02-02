@@ -4,7 +4,8 @@ import {
     indexOf,
     matchWithGroups,
     merge,
-    removeElement
+    removeElement,
+    toCssWidth
 } from './helpers'
 
 describe('helpers', () => {
@@ -148,6 +149,24 @@ describe('helpers', () => {
 
             removeElement(elm)
             expect(elm.parentNode.removeChild).toHaveBeenCalled()
+        })
+    })
+
+    describe('toCssWidth', () => {
+        it('should return "200px" for 200', () => {
+            expect(toCssWidth(200)).toBe('200px')
+        })
+
+        it('should return "1.5em" for "1.5em"', () => {
+            expect(toCssWidth('1.5em')).toBe('1.5em')
+        })
+
+        it('should return "NaN" for NaN', () => {
+            expect(toCssWidth(NaN)).toBe('NaN')
+        })
+
+        it('should return null for undefined', () => {
+            expect(toCssWidth(undefined)).toBeNull()
         })
     })
 
